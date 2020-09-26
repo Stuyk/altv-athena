@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "typeRoots": ["./node_modules/@types", "./node_modules/@altv"],
+        "removeComments": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "ESNext",
+        "outDir": "./resources",
+        "rootDir": "./src"
+    },
+    "include": ["./src/**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],
+    "watchOptions": {
+        "watchFile": "useFsEvents",
+        "watchDirectory": "useFsEvents",
+        "fallbackPolling": "dynamicPriority"
+    }
+}
