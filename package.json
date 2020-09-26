@@ -4,10 +4,9 @@
     "description": "A Typescript Quickstart Repo for alt:V",
     "main": "",
     "scripts": {
-        "watch": "tsc-watch --onSuccess \"node ./postbuild/copyFiles.mjs\"",
-        "build": "npm run clean && tsc && cpy '**/*' '!**/*.ts' resources --cwd=src/",
+        "build": "npm run clean && tsc && npm run copy",
+        "copy": "copyfiles src/**/* --exclude=**/*.ts --up 1 ./resources",
         "clean": "rimraf resources",
-        "copy": "node ./postbuild/copyFiles.mjs",
         "update": "altv-pkg d release"
     },
     "author": "stuyk",
@@ -24,12 +23,11 @@
         "@types/node": "^14.6.1",
         "@types/sjcl": "^1.0.29",
         "altv-pkg": "latest",
-        "cpy": "^8.1.1",
+        "copyfiles": "^2.3.0",
         "fkill": "^7.0.1",
         "gulp": "^4.0.2",
         "gulp-using": "^0.1.1",
         "rimraf": "^3.0.2",
-        "tsc-watch": "^4.2.9",
         "typescript": "^4.0.2"
     },
     "type": "module",
