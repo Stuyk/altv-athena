@@ -1,4 +1,4 @@
-import * as sjcl from 'sjcl';
+import sjcl from 'sjcl';
 
 /**
  * Hash a plain text password with pbkdf2 hash and salt.
@@ -33,9 +33,8 @@ export function testPassword(plainTextPassword: string, pbkdf2Hash: string): boo
  * @returns string
  */
 export function sha256(data: string): string {
-    const hasher: sjcl.SjclHash = new sjcl.hash.sha256();
-    const hashBytes: sjcl.BitArray = hasher.update(data).finalize();
-    return sjcl.codec.hex.fromBits(hashBytes);
+    const hashBits = sjcl.hash.sha256.hash(data);
+    return sjcl.codec.hex.fromBits(hashBits);
 }
 
 /**
@@ -45,10 +44,5 @@ export function sha256(data: string): string {
  * @returns string
  */
 export function sha256Random(data: string): string {
-    const hasher: sjcl.SjclHash = new sjcl.hash.sha256();
-    const hashBytes: sjcl.BitArray = hasher
-        .update(`${data}${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}`)
-        .finalize();
-
-    return sjcl.codec.hex.fromBits(hashBytes);
+    return sha256(`${data} + ${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}`);
 }

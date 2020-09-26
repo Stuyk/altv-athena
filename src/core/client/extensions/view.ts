@@ -31,6 +31,9 @@ export class View extends alt.WebView {
                 // Do nothing for the error. Just cursor things.
             }
         }
+
+        this.view.focus();
+        return instance;
     }
 
     extOn(eventName: string, listener: (...args: any[]) => void) {
@@ -61,5 +64,7 @@ export class View extends alt.WebView {
             const eventData = this.currentEvents[i];
             super.off(eventData.eventName, eventData.callback);
         }
+
+        this.view.unfocus();
     }
 }

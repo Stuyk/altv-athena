@@ -1,9 +1,10 @@
 import * as alt from 'alt-server';
 import axios from 'axios';
-import * as express from 'express';
-import * as cors from 'cors';
+import express from 'express';
+import cors from 'cors';
 import { IPlayer } from '../interface/IPlayer';
 import { IDiscord } from '../interface/IDiscord';
+import { handleLogin } from '../views/login';
 
 const config: IDiscord = { ...process.env } as IDiscord;
 const app = express();
@@ -13,11 +14,12 @@ app.get('/authenticate', handleAuthenticate);
 // app.use('/js', express.static(jsPath));
 
 async function handleAuthenticate(req, res) {
-    const token = req.query.code;
+    const bearerToken = req.query.code;
     const discordToken = req.query.state;
+
     let request;
 
-    if (!token || !discordToken) {
+    if (!bearerToken || !discordToken) {
         res.send(`No token found.`);
         // res.sendFile(path.join(htmlPath, '/error.html'), (err) => {});
         return;
@@ -27,7 +29,7 @@ async function handleAuthenticate(req, res) {
     authParams.append(`client_id`, config.CLIENT_ID);
     authParams.append(`client_secret`, config.CLIENT_SECRET);
     authParams.append(`grant_type`, `authorization_code`);
-    authParams.append(`code`, token);
+    authParams.append(`code`, bearerToken);
     authParams.append(`scope`, `identify`);
     authParams.append(`redirect_uri`, `http://${config.REDIRECT_IP}:7790/authenticate`);
 
@@ -58,7 +60,7 @@ async function handleAuthenticate(req, res) {
     // id, username, avatar, discriminator, public_flags, flags, locale, mfa_enabled
     const player = alt.Player.all.find((player) => {
         const playerExt: IPlayer = player as IPlayer;
-        playerExt.discordToken === discordToken;
+        return playerExt.discordToken === discordToken;
     });
 
     if (!player || !player.valid) {
@@ -67,7 +69,7 @@ async function handleAuthenticate(req, res) {
         return;
     }
 
-    alt.emit('login:Start', player, request.data);
+    handleLogin(player as IPlayer, request.data);
     // res.sendFile(path.join(htmlPath, '/done.html'), (err) => {});
     res.send(`All done. Bye.`);
 }

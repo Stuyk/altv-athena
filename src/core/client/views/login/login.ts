@@ -12,7 +12,7 @@ function handleView(_discordURI) {
 
     if (!view) {
         view = new View(url, true);
-        view.on('load', handleLoad);
+        view.extOn('discord:Load', handleLoad);
     }
 }
 

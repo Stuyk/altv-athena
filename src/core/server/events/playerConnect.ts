@@ -10,6 +10,8 @@ const url = `https://discord.com/api/oauth2/authorize?client_id=${process.env['C
 alt.on('playerConnect', handlePlayerConnect);
 
 function handlePlayerConnect(player: IPlayer) {
+    alt.log(`${player.name} has connected to the server.`);
+
     player.pendingLogin = true;
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
     alt.emitClient(player, 'discord:Auth', `${url}&state=${player.discordToken}`);

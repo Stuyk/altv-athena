@@ -1,9 +1,7 @@
 import * as alt from 'alt-server';
-import { ILogin } from '../../shared/interfaces/register';
-// import * as sm from 'simplymongo';
+import { IDiscordUser } from '../interface/IDiscordUser';
 import { IPlayer } from '../interface/IPlayer';
-
-// const db: sm.Database = sm.getDatabase();
+import * as sm from 'simplymongo';
 
 /**
  * Why Discord Login?
@@ -19,13 +17,23 @@ import { IPlayer } from '../interface/IPlayer';
  * Yea that about sums up why Discord Login (oAuth2) > Everything else atm.
  */
 
-alt.onClient('login:Start', handleRouting);
+const db: sm.Database = sm.getDatabase();
+const loggedInUsers: Array<IDiscordUser['id']> = [];
 
-async function handleRouting(player: IPlayer, loginData: ILogin, isRegistering: boolean) {
+export async function handleLogin(player: IPlayer, data: IDiscordUser) {
     if (!player.pendingLogin) {
         return;
     }
 
-    player.pendingLogin = false;
-    // Do other stuff.
+    delete player.pendingLogin;
+    delete player.discordToken;
+
+    if (loggedInUsers.includes(data.id)) {
+        player.kick(`Already logged in.`);
+        return;
+    }
+
+    player.discord = data;
 }
+
+export async function logoutPlayer(player: IPlayer | alt.Player) {}
