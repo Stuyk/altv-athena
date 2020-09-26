@@ -1,7 +1,7 @@
 export interface IDiscord {
-    CLIENT_ID?: string;
-    CLIENT_SECRET?: string;
-    BOT_SECRET?: string;
-    SERVER_ID?: string;
-    REDIRECT_IP?: string;
+    DISCORD_CLIENT_ID?: string;
+    DISCORD_CLIENT_SECRET?: string;
+    DISCORD_BOT_SECRET?: string;
+    DISCORD_SERVER_ID?: string;
+    DISCORD_REDIRECT_IP?: string;
 }

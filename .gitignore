@@ -10,3 +10,7 @@ data/
 *.log
 cache/
 athena.json
+athena/
+configDiscord
+configLoadOrder
+configMongoDB

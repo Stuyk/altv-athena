@@ -6,6 +6,8 @@ This project solely exists as a new standard for GTA:V Roleplay servers. This fe
 
 Setup instructions may be purchased from Stuyk.
 
+The code will remain open source for the forseeable future but support and how to utilize this project must be purchased.
+
 # Support
 
 [❤️ Become a Sponsor of my Open Source Work](https://github.com/sponsors/Stuyk/)

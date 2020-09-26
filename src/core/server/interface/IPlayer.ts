@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { ICharacter, ICharacterDefaults } from './ICharacter';
 import { IDiscordUser } from './IDiscordUser';
 import { Database, getDatabase } from 'simplymongo';
-import { E_CURRENCY } from '../enums/currency';
+import { CurrencyTypes } from '../enums/currency';
 
 const db: Database = getDatabase();
 
@@ -54,7 +54,7 @@ export class IPlayer extends alt.Player {
      * Add some cash to a player.
      * @param  {number} amount
      */
-    addCurrency(type: E_CURRENCY, amount: number) {
+    addCurrency(type: CurrencyTypes, amount: number) {
         if (amount > Number.MAX_SAFE_INTEGER) {
             amount = Number.MAX_SAFE_INTEGER - 1;
         }
@@ -72,7 +72,7 @@ export class IPlayer extends alt.Player {
      * Remove cash from the player.
      * @param  {number} amount
      */
-    removeCurrency(type: E_CURRENCY, amount: number) {
+    removeCurrency(type: CurrencyTypes, amount: number) {
         if (amount > Number.MAX_SAFE_INTEGER) {
             amount = Number.MAX_SAFE_INTEGER - 1;
         }
@@ -90,7 +90,7 @@ export class IPlayer extends alt.Player {
      * Set a player's cash to an amount.
      * @param  {number} amount
      */
-    setCurrency(type: E_CURRENCY, amount: number) {
+    setCurrency(type: CurrencyTypes, amount: number) {
         if (amount > Number.MAX_SAFE_INTEGER) {
             amount = Number.MAX_SAFE_INTEGER - 1;
         }

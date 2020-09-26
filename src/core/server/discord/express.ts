@@ -3,10 +3,9 @@ import axios from 'axios';
 import express from 'express';
 import cors from 'cors';
 import { IPlayer } from '../interface/IPlayer';
-import { IDiscord } from '../interface/IDiscord';
 import { handleLogin } from '../views/login';
+import { DISCORD_CONFIG } from '../athena/configDiscord';
 
-const config: IDiscord = { ...process.env } as IDiscord;
 const app = express();
 
 app.use(cors());
@@ -26,15 +25,15 @@ async function handleAuthenticate(req, res) {
     }
 
     const authParams = new URLSearchParams();
-    authParams.append(`client_id`, config.CLIENT_ID);
-    authParams.append(`client_secret`, config.CLIENT_SECRET);
+    authParams.append(`client_id`, DISCORD_CONFIG.DISCORD_CLIENT_ID);
+    authParams.append(`client_secret`, DISCORD_CONFIG.DISCORD_CLIENT_SECRET);
     authParams.append(`grant_type`, `authorization_code`);
     authParams.append(`code`, bearerToken);
     authParams.append(`scope`, `identify`);
-    authParams.append(`redirect_uri`, `http://${config.REDIRECT_IP}:7790/authenticate`);
+    authParams.append(`redirect_uri`, `http://${DISCORD_CONFIG.DISCORD_REDIRECT_IP}:7790/authenticate`);
 
     request = await axios.post(`https://discordapp.com/api/oauth2/token`, authParams, {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
 
     if (!request.data || !request.data.access_token) {
@@ -47,8 +46,8 @@ async function handleAuthenticate(req, res) {
     request = await axios.get(`https://discordapp.com/api/users/@me`, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: `${discordData.token_type} ${discordData.access_token}`,
-        },
+            Authorization: `${discordData.token_type} ${discordData.access_token}`
+        }
     });
 
     if (!request.data || !request.data.id || !request.data.username) {

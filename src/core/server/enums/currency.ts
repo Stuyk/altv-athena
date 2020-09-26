@@ -1,4 +1,4 @@
-export enum E_CURRENCY {
+export enum CurrencyTypes {
     BANK = 'bank',
     CASH = 'cash',
     CRYPTO = 'crypto',

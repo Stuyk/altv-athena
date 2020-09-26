@@ -2,10 +2,10 @@ import * as alt from 'alt-server';
 import { IDiscord } from '../interface/IDiscord';
 import { IPlayer } from '../interface/IPlayer';
 import { sha256Random } from '../utility/encryption';
+import { DISCORD_CONFIG } from '../athena/configDiscord';
 
-const config: IDiscord = process.env as IDiscord;
-const redirect = encodeURI(`http://${config.REDIRECT_IP}:7790/authenticate`);
-const url = `https://discord.com/api/oauth2/authorize?client_id=${process.env['CLIENT_ID']}&redirect_uri=${redirect}&prompt=none&response_type=code&scope=identify`;
+const redirect = encodeURI(`http://${DISCORD_CONFIG.DISCORD_REDIRECT_IP}:7790/authenticate`);
+const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CONFIG.DISCORD_CLIENT_ID}&redirect_uri=${redirect}&prompt=none&response_type=code&scope=identify`;
 
 alt.on('playerConnect', handlePlayerConnect);
 
