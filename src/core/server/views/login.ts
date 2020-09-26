@@ -33,7 +33,8 @@ export async function handleLogin(player: IPlayer, data: IDiscordUser) {
         return;
     }
 
+    alt.emitClient(player, 'discord:Close');
     player.discord = data;
 }
 
-export async function logoutPlayer(player: IPlayer | alt.Player) {}
+export async function logoutPlayer(player: IPlayer) {}

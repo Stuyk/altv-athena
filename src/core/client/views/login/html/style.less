@@ -1,0 +1,51 @@
+@import '../../less/variables.less';
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background: url('../../img/bg_1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: @bg-color;
+}
+
+#app {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.discord {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+
+    img {
+        cursor: pointer;
+    }
+
+    p {
+        color: white;
+        font-size: 16px;
+        font-family: 'Inter', 'Arial';
+        text-align: center;
+        user-select: none;
+    }
+
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

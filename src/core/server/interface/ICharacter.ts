@@ -8,7 +8,6 @@ export interface ICharacter {
     pos: Vector3;
     cash: number;
     bank: number;
-    crypto: number;
 }
 
 export const ICharacterDefaults: ICharacter = {
@@ -16,6 +15,5 @@ export const ICharacterDefaults: ICharacter = {
     age: -1,
     pos: new Vector3(0, 0, 0),
     cash: 0,
-    bank: 0,
-    crypto: 0,
+    bank: 0
 };

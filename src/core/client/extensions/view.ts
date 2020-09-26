@@ -39,12 +39,18 @@ export class View extends alt.WebView {
     extOn(eventName: string, listener: (...args: any[]) => void) {
         super.on(eventName, listener);
 
+        alt.log(eventName);
+
         const index = this.currentEvents.findIndex((e) => e.eventName === eventName);
         if (index >= 0) {
             return;
         }
 
         this.currentEvents.push({ eventName, callback: listener });
+    }
+
+    extEmit(eventName: string, ...args: any[]) {
+        super.emit(eventName, ...args);
     }
 
     close() {

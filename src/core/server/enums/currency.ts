@@ -1,5 +1,4 @@
 export enum CurrencyTypes {
     BANK = 'bank',
-    CASH = 'cash',
-    CRYPTO = 'crypto',
+    CASH = 'cash'
 }
