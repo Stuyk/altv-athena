@@ -7,6 +7,7 @@ const app = new Vue({
         return {
             url: null,
             loading: false,
+            done: false,
             updates: 0
         };
     },
@@ -49,18 +50,23 @@ const app = new Vue({
         openURL(url) {
             window.open(url);
         },
+        loadAthena() {
+            window.open(`https://github.com/stuyk/altv-athena`);
+        },
         finishedLoading() {
             this.$nextTick(() => {
                 this.setAsReady();
             });
         },
-        loadAthena() {
-            window.open(`https://github.com/stuyk/altv-athena`);
+        fadeToBlack() {
+            this.done = true;
+            gsap.fromTo('html', { opacity: 1 }, { opacity: 0, duration: 1 });
         }
     },
     mounted() {
         if ('alt' in window) {
             alt.on('discord:OpenURL', this.openURL);
+            alt.on('discord:FadeToBlack', this.fadeToBlack);
         }
 
         this.finishedLoading();

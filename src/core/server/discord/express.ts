@@ -2,9 +2,9 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 import express from 'express';
 import cors from 'cors';
-import { IPlayer } from '../interface/IPlayer';
 import { handleLogin } from '../views/login';
 import { DISCORD_CONFIG } from '../athena/configDiscord';
+import { Player } from 'alt-server';
 
 const app = express();
 
@@ -58,7 +58,7 @@ async function handleAuthenticate(req, res) {
 
     // id, username, avatar, discriminator, public_flags, flags, locale, mfa_enabled
     const player = alt.Player.all.find((player) => {
-        const playerExt: IPlayer = player as IPlayer;
+        const playerExt: Player = player as Player;
         return playerExt.discordToken === discordToken;
     });
 
@@ -68,7 +68,7 @@ async function handleAuthenticate(req, res) {
         return;
     }
 
-    handleLogin(player as IPlayer, request.data);
+    handleLogin(player as Player, request.data);
     // res.sendFile(path.join(htmlPath, '/done.html'), (err) => {});
     res.send(`All done. Bye.`);
 }

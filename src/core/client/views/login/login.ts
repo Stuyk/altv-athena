@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 import { View } from '../../extensions/view';
 
 const url = `http://resource/client/views/login/html/index.html`;
@@ -26,5 +27,9 @@ function handleClose() {
         return;
     }
 
-    view.close();
+    view.emit('discord:FadeToBlack');
+    alt.setTimeout(() => {
+        view.close();
+        native.doScreenFadeIn(1000);
+    }, 1200);
 }

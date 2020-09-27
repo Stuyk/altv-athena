@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { IDiscordUser } from '../interface/IDiscordUser';
-import { IPlayer } from '../interface/IPlayer';
 import * as sm from 'simplymongo';
+import { Player } from 'alt-server';
 
 /**
  * Why Discord Login?
@@ -20,7 +20,7 @@ import * as sm from 'simplymongo';
 const db: sm.Database = sm.getDatabase();
 const loggedInUsers: Array<IDiscordUser['id']> = [];
 
-export async function handleLogin(player: IPlayer, data: IDiscordUser) {
+export async function handleLogin(player: Player, data: IDiscordUser) {
     if (!player.pendingLogin) {
         return;
     }
@@ -33,8 +33,9 @@ export async function handleLogin(player: IPlayer, data: IDiscordUser) {
         return;
     }
 
-    alt.emitClient(player, 'discord:Close');
     player.discord = data;
+    player.safeSetPosition(0, 0, 0);
+    alt.emitClient(player, 'discord:Close');
 }
 
-export async function logoutPlayer(player: IPlayer) {}
+// export async function logoutPlayer(player: IPlayer) {}

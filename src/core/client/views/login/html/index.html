@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="app">
-            <template :key="updates">
+            <template :key="updates" v-if="!done">
                 <div class="discord">
                     <template v-if="!loading">
                         <img src="../../svg/discord.svg" width="200" @mouseover="hoverLogo" @mouseleave="unhoverLogo" @mouseup="beginAuth" />
@@ -18,8 +18,8 @@
                         <p>Tab out and check your browser. <a @mousedown="authAgain">Re-open Window.</a></p>
                     </template>
                 </div>
+                <img class="athena" src="../../svg/athena.svg" width="50" @mousedown="loadAthena" />
             </template>
-            <img class="athena" src="../../svg/athena.svg" width="50" @mousedown="loadAthena" />
             <ul class="circles">
                 <li v-for="index in 10" :key="index"></li>
             </ul>

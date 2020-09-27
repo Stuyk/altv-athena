@@ -14,7 +14,7 @@
         "target": "ESNext",
         "outDir": "./resources",
         "rootDir": "./src",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
     },
     "include": ["./src/**/*.ts"],
     "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],

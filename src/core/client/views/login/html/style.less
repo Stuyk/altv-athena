@@ -7,15 +7,12 @@ body {
     overflow: hidden;
 }
 
-html {
+#app {
+    display: flex;
     background: url('../../img/bg_1.jpg');
     background-size: cover;
     background-attachment: fixed;
-    background-color: @bg-color;
-}
-
-#app {
-    display: flex;
+    background-color: black;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -30,7 +27,7 @@ html {
     position: fixed;
     left: calc(5vw / 2);
     bottom: 5vh;
-    opacity: 0.2;
+    opacity: 0.1;
     transition: 0.5s;
     z-index: 99;
 
@@ -171,7 +168,7 @@ html {
     }
 
     100% {
-        transform: translateY(-1000px) rotate(720deg);
+        transform: translateY(-2000px) rotate(720deg);
         opacity: 0;
         border-radius: 50%;
     }
