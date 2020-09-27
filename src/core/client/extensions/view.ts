@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 
+// Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
 
 export class View extends alt.WebView {
@@ -11,6 +12,11 @@ export class View extends alt.WebView {
         super(url, isOverlay);
     }
 
+    /**
+     * Return a recycleable WebView instance.
+     * @param  {string} url
+     * @param  {boolean} addCursor
+     */
     static getInstance(url: string, addCursor: boolean): View {
         if (!View._instance) {
             View._instance = new View(url);
@@ -22,6 +28,11 @@ export class View extends alt.WebView {
         return View._instance;
     }
 
+    /**
+     * Handle data coming from the WebView.
+     * @param  {string} eventName
+     * @param  {(...args:any[])=>void} listener
+     */
     public on(eventName: string, listener: (...args: any[]) => void) {
         super.on(eventName, listener);
 
@@ -33,10 +44,19 @@ export class View extends alt.WebView {
         this.currentEvents.push({ eventName, callback: listener });
     }
 
+    /**
+     * Send data to the WebView instance.
+     * @param  {string} eventName
+     * @param  {any[]} ...args
+     */
     public emit(eventName: string, ...args: any[]) {
         super.emit(eventName, ...args);
     }
 
+    /**
+     * Show or hide the cursor to the player.
+     * @param  {boolean} state
+     */
     public showCursor(state: boolean) {
         if (state) {
             this.cursorCount += 1;
@@ -54,6 +74,9 @@ export class View extends alt.WebView {
         }
     }
 
+    /**
+     * Closes the WebView and turns off all events.
+     */
     public close() {
         this.url = blankURL;
         this.showCursor(false);
@@ -64,5 +87,7 @@ export class View extends alt.WebView {
             const eventData = this.currentEvents[i];
             super.off(eventData.eventName, eventData.callback);
         }
+
+        this.currentEvents = [];
     }
 }
