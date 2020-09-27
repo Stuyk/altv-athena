@@ -8,21 +8,17 @@ let discordURI: string;
 alt.onServer('discord:Auth', handleView);
 alt.onServer('discord:Close', handleClose);
 
-function handleView(_discordURI) {
-    discordURI = _discordURI;
+function handleView(oAuthUrl) {
+    discordURI = oAuthUrl;
 
     if (!view) {
-        view = new View(url, true);
-        view.extOn('discord:Loaded', handleLoad);
+        view = View.getInstance(url, true);
+        view.on('discord:OpenURL', handleOpenURL);
     }
 }
 
-function handleLoad() {
-    if (!view) {
-        return;
-    }
-
-    view.extEmit('discord:Ready', encodeURI(discordURI));
+function handleOpenURL() {
+    view.emit('discord:OpenURL', discordURI);
 }
 
 function handleClose() {

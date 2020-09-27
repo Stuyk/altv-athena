@@ -1,47 +1,31 @@
 import * as alt from 'alt-client';
 
-const url = `http://resource/client/views/empty/html/index.html`;
-let cursorCount = 0;
-let instance: View;
+const blankURL = `http://resource/client/views/empty/html/index.html`;
 
 export class View extends alt.WebView {
-    private view: alt.WebView;
-    private currentEvents: Array<{ eventName: string; callback: any }> = [];
+    private static _instance: View;
+    private currentEvents: { eventName: string; callback: any }[] = [];
+    private cursorCount: number = 0;
 
-    constructor(url: string, showCursor: boolean) {
-        super(url);
-
-        // Assign Singleton Instance
-        if (!instance) {
-            instance = this;
-        }
-
-        // Create View if Non Existant
-        if (!instance.view) {
-            instance.view = new alt.WebView(url);
-        } else {
-            instance.view.url = url;
-        }
-
-        if (showCursor) {
-            cursorCount += 1;
-            try {
-                alt.showCursor(true);
-            } catch (err) {
-                // Do nothing for the error. Just cursor things.
-            }
-        }
-
-        this.view.focus();
-        return instance;
+    private constructor(url: string, isOverlay: boolean = false) {
+        super(url, isOverlay);
     }
 
-    extOn(eventName: string, listener: (...args: any[]) => void) {
+    static getInstance(url: string, addCursor: boolean): View {
+        if (!View._instance) {
+            View._instance = new View(url);
+        }
+
+        View._instance.url = url;
+        View._instance.showCursor(addCursor);
+        View._instance.focus();
+        return View._instance;
+    }
+
+    public on(eventName: string, listener: (...args: any[]) => void) {
         super.on(eventName, listener);
 
-        alt.log(eventName);
-
-        const index = this.currentEvents.findIndex((e) => e.eventName === eventName);
+        const index: number = this.currentEvents.findIndex((e) => e.eventName === eventName);
         if (index >= 0) {
             return;
         }
@@ -49,28 +33,36 @@ export class View extends alt.WebView {
         this.currentEvents.push({ eventName, callback: listener });
     }
 
-    extEmit(eventName: string, ...args: any[]) {
+    public emit(eventName: string, ...args: any[]) {
         super.emit(eventName, ...args);
     }
 
-    close() {
-        this.view.url = url;
-
-        // Turn off cursor instances to prevent buggy behavior.
-        for (let i = 0; i < cursorCount; i++) {
+    public showCursor(state: boolean) {
+        if (state) {
+            this.cursorCount += 1;
             try {
-                alt.showCursor(false);
-            } catch (err) {
-                // Do nothing for the error. Just cursor things.
+                alt.showCursor(true);
+            } catch (err) {}
+        } else {
+            for (let i = 0; i < this.cursorCount; i++) {
+                try {
+                    alt.showCursor(false);
+                } catch (err) {}
             }
+
+            this.cursorCount = 0;
         }
+    }
+
+    public close() {
+        this.url = blankURL;
+        this.showCursor(false);
+        this.unfocus();
 
         // Turn off currently existing events.
         for (let i = 0; i < this.currentEvents.length; i++) {
             const eventData = this.currentEvents[i];
             super.off(eventData.eventName, eventData.callback);
         }
-
-        this.view.unfocus();
     }
 }
