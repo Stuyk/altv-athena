@@ -1,8 +1,6 @@
 Vue.config.devtools = true;
 Vue.prototype.window = window;
 
-console.log(`Build window lulw`);
-
 const app = new Vue({
     el: '#app',
     data() {
@@ -21,15 +19,15 @@ const app = new Vue({
         setAsReady() {
             this.$nextTick(() => {
                 this.updates += 1;
-                gsap.fromTo('.discord', { scale: 10 }, { duration: 1, rotation: 360, scale: 1 });
-                gsap.fromTo('.discord', { opacity: -1 }, { opacity: 1, duration: 2 });
+                gsap.fromTo('.discord', { scale: 10, rotation: 0 }, { duration: 1, rotation: 360, scale: 1 });
+                gsap.fromTo('.discord', { opacity: -1 }, { opacity: 0.75, duration: 2 });
             });
         },
         hoverLogo() {
-            gsap.fromTo('.discord img', { scale: 1 }, { duration: 0.5, scale: 1.2 });
+            gsap.fromTo('.discord img', { scale: 1, rotation: 0 }, { duration: 0.5, scale: 1.2, opacity: 1 });
         },
         unhoverLogo() {
-            gsap.fromTo('.discord img', { scale: 1.2 }, { duration: 0.5, scale: 1 });
+            gsap.fromTo('.discord img', { scale: 1.2 }, { rotation: 360, duration: 0.5, scale: 1, opacity: 0.75 });
         },
         beginAuth() {
             gsap.fromTo('.discord img', { opacity: 1 }, { opacity: 0, duration: 0.1 });
@@ -55,6 +53,9 @@ const app = new Vue({
             this.$nextTick(() => {
                 this.setAsReady();
             });
+        },
+        loadAthena() {
+            window.open(`https://github.com/stuyk/altv-athena`);
         }
     },
     mounted() {
