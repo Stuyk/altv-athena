@@ -6,7 +6,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 5,
+            selection: 0,
             data: {
                 name: '',
                 sex: 0,
@@ -33,12 +33,28 @@ const app = new Vue({
             },
             navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Name', 'Done'],
             noDiscard: false,
-            noName: false
+            noName: false,
+            validName: false
         };
     },
     computed: {
+        isInactive() {
+            if (this.selection >= this.navOptions.length - 1) {
+                return true;
+            }
+
+            if (this.selection === 5 && !this.noName && !this.validName) {
+                return true;
+            }
+
+            return false;
+        },
         isInactiveNext() {
             if (this.selection >= this.navOptions.length - 1) {
+                return { inactive: true };
+            }
+
+            if (this.selection === 5 && !this.noName && !this.validName) {
                 return { inactive: true };
             }
 
@@ -111,11 +127,16 @@ const app = new Vue({
         },
         resetSelection() {
             this.selection = 0;
+        },
+        updateName(name, isValid) {
+            this.data.name = name;
+            this.validName = isValid;
         }
     },
     mounted() {
         this.$root.$on('updateCharacter', this.updateCharacter);
         this.$root.$on('resetSelection', this.resetSelection);
+        this.$root.$on('updateName', this.updateName);
 
         opacityOverlays.forEach((overlay) => {
             const overlayData = { ...overlay };

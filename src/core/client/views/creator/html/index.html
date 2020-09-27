@@ -12,13 +12,20 @@
             <div class="editor" v-if="show">
                 <div class="navigation">
                     <button @click="goBack" :class="isInactiveBack">Back</button>
-                    <button @click="goNext" :class="isInactiveNext">Next</button>
+
+                    <template v-if="isInactive">
+                        <button :class="isInactiveNext">Next</button>
+                    </template>
+                    <template v-else>
+                        <button @click="goNext" :class="isInactiveNext">Next</button>
+                    </template>
                 </div>
                 <component
                     v-bind:is="getTabComponent"
                     v-bind:data="data"
                     v-bind:nodiscard="noDiscard"
                     v-bind:noname="noName"
+                    v-bind:currentname="data.name"
                 ></component>
             </div>
         </div>

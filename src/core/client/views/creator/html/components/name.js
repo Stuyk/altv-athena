@@ -1,59 +1,35 @@
+const nameRegex = new RegExp('^([A-Z][a-z]+_[A-Z][a-z]+)$');
+
 Vue.component('tab-name', {
-    props: ['data', 'noname'],
+    props: ['data', 'noname', 'currentname'],
+    data() {
+        return {
+            name: '',
+            nameValid: false
+        };
+    },
     computed: {
         isNoName() {
             return this.noname;
+        },
+        isNameValid() {
+            return this.nameValid ? { validName: true } : { invalidName: true };
         }
     },
-    methods: {
-        saveCharacter() {
-            if (this.data.sex === 0) {
-                this.data.facialHair = 29;
-                this.data.facialHairColor1 = 0;
-            }
-
-            if ('alt' in window) {
-                alt.emit('character:Done', this.data);
-            }
-        },
-        discardCharacter() {
-            if ('alt' in window) {
-                alt.emit('character:Cancel');
-            }
-        },
-        importCharacter() {
-            const characterJSON = this.$refs.textarea.value;
-            let character;
-            try {
-                character = JSON.parse(characterJSON);
-            } catch (err) {
-                this.$refs.textarea.value = `INVALID CHARACTER JSON CODE. RESETTING...`;
-
-                if (this.timeout) {
-                    clearTimeout(this.timeout);
-                    this.timeout = null;
-                }
-
-                this.timeout = setTimeout(() => {
-                    this.$refs.textarea.value = JSON.stringify(this.data, null, '\t');
-                }, 2500);
+    watch: {
+        name(newValue) {
+            if (!nameRegex.exec(newValue)) {
+                this.nameValid = false;
+                this.$root.$emit('updateName', newValue, false);
                 return;
             }
 
-            Object.keys(character).forEach((key) => {
-                this.data[key] = character[key];
-            });
-
-            this.$root.$emit('updateCharacter');
-            this.$root.$emit('resetSelection');
-        },
-        copyAll() {
-            this.$refs.textarea.select();
-            document.execCommand('copy');
+            this.nameValid = true;
+            this.$root.$emit('updateName', newValue, true);
         }
     },
     template: `
-        <div class="options" style="min-height: unset">
+        <div class="options">
             <div class="option" v-if="!isNoName">
                 <div class="labelContainer">
                     <div class="label">
@@ -63,7 +39,7 @@ Vue.component('tab-name', {
                         Example: John_Doe
                     </div>
                 </div>
-                <input type="text" placeholder="FirstName_LastName"/>
+                <input type="text" value="currentname" placeholder="First_Last" class="textInput" v-model="name" :class="isNameValid" />
             </div>
             <div class="option" v-else>
                 <div class="labelContainer">
@@ -73,5 +49,8 @@ Vue.component('tab-name', {
                 </div>
             </div>
         </div>
-    `
+    `,
+    mounted() {
+        this.name = this.currentname;
+    }
 });

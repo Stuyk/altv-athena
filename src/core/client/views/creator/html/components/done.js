@@ -1,5 +1,5 @@
 Vue.component('tab-done', {
-    props: ['data', 'nodiscard'],
+    props: ['data', 'nodiscard', 'noname'],
     computed: {
         isNoDiscord() {
             return this.nodiscard;
@@ -13,12 +13,12 @@ Vue.component('tab-done', {
             }
 
             if ('alt' in window) {
-                alt.emit('character:Done', this.data);
+                alt.emit('creator:Done', this.data);
             }
         },
         discardCharacter() {
             if ('alt' in window) {
-                alt.emit('character:Cancel');
+                alt.emit('creator:Cancel');
             }
         }
     },

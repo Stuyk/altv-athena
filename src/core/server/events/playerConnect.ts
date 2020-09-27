@@ -14,6 +14,7 @@ function handlePlayerConnect(player: Player) {
     player.dimension = player.id;
     player.pendingLogin = true;
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
+    player.init();
 
     player.emit('discord:Auth', `${url}&state=${player.discordToken}`);
 }

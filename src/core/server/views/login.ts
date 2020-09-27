@@ -3,6 +3,7 @@ import { IDiscordUser } from '../interface/IDiscordUser';
 import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
 import { IAccount } from '../interface/IAccount';
+import { ICharacter } from '../interface/ICharacter';
 import { goToCharacterSelect } from './characters';
 
 /**
@@ -69,4 +70,12 @@ function handleDisconnect(player: Player, reason: string) {
     }
 
     loggedInUsers.splice(index, 1);
+
+    if (!player.data || !player.data.appearance.name) {
+        return;
+    }
+
+    console.log(`${player.data.appearance.name} has logged out.`);
+    player.data.pos = player.pos;
+    player.saveField('pos', player.data.pos);
 }

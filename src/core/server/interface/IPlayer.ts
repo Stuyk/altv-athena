@@ -3,6 +3,7 @@ import { ICharacter, ICharacterDefaults } from './ICharacter';
 import { IDiscordUser } from './IDiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
+import { IAppearance } from '../../shared/interfaces/IAppearance';
 
 const db: Database = getDatabase();
 
@@ -12,7 +13,10 @@ declare module 'alt-server' {
         pendingLogin?: boolean; // Used when a player is pending login.
         discordToken?: string; // Used to assist with loggin in a player through oAuth2.
         hasModel?: boolean;
+        currentCharacters: Array<ICharacter>;
         pendingCharacterEdit?: boolean;
+        pendingNewCharacter?: boolean;
+        pendingCharacterSelect?: boolean;
 
         // Account Data
         account?: string;
@@ -42,6 +46,13 @@ declare module 'alt-server' {
          * @returns void
          */
         emitMeta(key: string, value: any): void;
+
+        /**
+         * Used to establish and create a new character based on passed Appearance data.
+         * @param  {IAppearance} appearance
+         * @returns void
+         */
+        createNewCharacter(appearance: IAppearance): void;
 
         /**
          * Add currency from this player based on currency type and amount.
@@ -117,8 +128,52 @@ declare module 'alt-server' {
          * @returns void
          */
         savePartial(dataObject: ICharacter): void;
+
+        /**
+         * Used to setup the player with character data.
+         * @param  {ICharacter} characterData
+         * @returns void
+         */
+        selectCharacter(characterData: ICharacter): void;
+
+        /**
+         * Update the appearance of the player based on player.data.
+         * @returns void
+         */
+        updateAppearance(): void;
+
+        /**
+         * Iterates through an Object based on its keys and appends it to player.data.
+         * @param  {{}} dataObject
+         * @returns void
+         */
+        updateDataByKeys(dataObject: {}, targetDataName: string): void;
+
+        /**
+         * Used to update position based on player.data.
+         * @returns void
+         */
+        updatePosition(): void;
     }
 }
+
+alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<IAppearance>) {
+    const newDocument: Partial<ICharacter> = { ...ICharacterDefaults };
+    newDocument.appearance = appearanceData;
+    newDocument.account_id = this.account;
+
+    const document = await db.insertData(newDocument, 'characters', true);
+    this.selectCharacter(document);
+};
+
+alt.Player.prototype.selectCharacter = async function selectCharacter(characterData: Partial<ICharacter>) {
+    this.data = characterData;
+    this.updateAppearance();
+    this.updatePosition();
+
+    // Set to Global Dimension
+    this.dimension = 0;
+};
 
 alt.Player.prototype.emit = function emit(eventName: string, ...args: any[]) {
     alt.emitClient(this, eventName, ...args);
@@ -134,6 +189,16 @@ alt.Player.prototype.saveField = async function saveField(fieldName: string, fie
 
 alt.Player.prototype.savePartial = async function savePartial(dataObject: ICharacter) {
     await db.updatePartialData(this.data._id, { ...dataObject }, 'characters');
+};
+
+alt.Player.prototype.updateDataByKeys = function updateDataByKeys(dataObject: {}, targetDataName: string = '') {
+    Object.keys(dataObject).forEach((key) => {
+        if (targetDataName !== '') {
+            this.data[targetDataName][key] = dataObject[key];
+        } else {
+            this.data[key] = dataObject[key];
+        }
+    });
 };
 
 alt.Player.prototype.init = function init() {
@@ -219,4 +284,20 @@ alt.Player.prototype.safeAddArmour = function safeAddArmour(value: number) {
 
     this.acArmour = this.armour + value;
     this.armour += value;
+};
+
+alt.Player.prototype.updateAppearance = function updateAppearance() {
+    if (this.data.appearance.sex === 0) {
+        this.model = 'mp_f_freemode_01';
+    } else {
+        this.model = 'mp_m_freemode_01';
+    }
+
+    this.setSyncedMeta('Name', this.data.appearance.name);
+    this.emit('creator:Sync', this.data.appearance);
+    this.emitMeta('appearance', this.data.appearance);
+};
+
+alt.Player.prototype.updatePosition = function updatePosition() {
+    this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
 };

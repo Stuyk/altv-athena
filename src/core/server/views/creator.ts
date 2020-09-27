@@ -11,5 +11,22 @@ function handleCreatorDone(player: alt.Player, appearance: IAppearance) {
         return;
     }
 
+    if (player.pendingNewCharacter) {
+        player.pendingNewCharacter = false;
+        player.createNewCharacter(appearance);
+        return;
+    }
+
     player.pendingCharacterEdit = false;
+    player.updateDataByKeys(appearance, 'appearance');
+    player.updateAppearance();
+
+    // Resync Position After Appearance for Interior Bug
+    alt.setTimeout(() => {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        player.safeSetPosition(player.pos.x, player.pos.y, player.pos.z);
+    }, 500);
 }
