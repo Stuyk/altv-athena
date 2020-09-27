@@ -35,7 +35,7 @@
         "axios": "^0.20.0",
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "simplymongo": "^2.0.7",
+        "simplymongo": "^2.0.8",
         "sjcl": "^1.0.8"
     }
 }

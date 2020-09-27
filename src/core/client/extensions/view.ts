@@ -7,6 +7,7 @@ export class View extends alt.WebView {
     private static _instance: View;
     private currentEvents: { eventName: string; callback: any }[] = [];
     private cursorCount: number = 0;
+    private isClosing: boolean = false;
 
     private constructor(url: string, isOverlay: boolean = false) {
         super(url, isOverlay);
@@ -17,9 +18,23 @@ export class View extends alt.WebView {
      * @param  {string} url
      * @param  {boolean} addCursor
      */
-    static getInstance(url: string, addCursor: boolean): View {
+    static async getInstance(url: string, addCursor: boolean): Promise<View> {
         if (!View._instance) {
             View._instance = new View(url);
+        }
+
+        // Wait for View to close.
+        if (View._instance.isClosing) {
+            await new Promise((resolve) => {
+                const tmpInterval = alt.setInterval(() => {
+                    if (View._instance.isClosing) {
+                        return;
+                    }
+
+                    alt.clearInterval(tmpInterval);
+                    resolve();
+                }, 20);
+            });
         }
 
         View._instance.url = url;
@@ -77,7 +92,8 @@ export class View extends alt.WebView {
     /**
      * Closes the WebView and turns off all events.
      */
-    public close() {
+    public close(delay: number = 0) {
+        this.isClosing = true;
         this.url = blankURL;
         this.showCursor(false);
         this.unfocus();
@@ -89,5 +105,8 @@ export class View extends alt.WebView {
         }
 
         this.currentEvents = [];
+        alt.setTimeout(() => {
+            this.isClosing = false;
+        }, delay);
     }
 }

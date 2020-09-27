@@ -9,11 +9,11 @@ let discordURI: string;
 alt.onServer('discord:Auth', handleView);
 alt.onServer('discord:Close', handleClose);
 
-function handleView(oAuthUrl) {
+async function handleView(oAuthUrl) {
     discordURI = oAuthUrl;
 
     if (!view) {
-        view = View.getInstance(url, true);
+        view = await View.getInstance(url, true);
         view.on('discord:OpenURL', handleOpenURL);
     }
 }
@@ -28,8 +28,9 @@ function handleClose() {
     }
 
     view.emit('discord:FadeToBlack');
+    view.close(1200);
+
     alt.setTimeout(() => {
-        view.close();
-        native.doScreenFadeIn(1000);
+        native.doScreenFadeIn(2000);
     }, 1200);
 }

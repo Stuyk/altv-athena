@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 import express from 'express';
 import cors from 'cors';
-import { handleLogin } from '../views/login';
+import { handleLoginRouting } from '../views/login';
 import { DISCORD_CONFIG } from '../athena/configDiscord';
 import { Player } from 'alt-server';
 
@@ -68,7 +68,7 @@ async function handleAuthenticate(req, res) {
         return;
     }
 
-    handleLogin(player as Player, request.data);
+    handleLoginRouting(player as Player, request.data);
     // res.sendFile(path.join(htmlPath, '/done.html'), (err) => {});
     res.send(`All done. Bye.`);
 }

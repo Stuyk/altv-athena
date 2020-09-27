@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Character Editor by Stuyk</title>
+        <link rel="stylesheet/less" type="text/css" href="./style.less" />
+    </head>
+
+    <body>
+        <div id="app">
+            <div class="editor" v-if="show">
+                <div class="navigation">
+                    <button @click="goBack" :class="isInactiveBack">Back</button>
+                    <button @click="goNext" :class="isInactiveNext">Next</button>
+                </div>
+                <component
+                    v-bind:is="getTabComponent"
+                    v-bind:data="data"
+                    v-bind:nodiscard="noDiscard"
+                    v-bind:noname="noName"
+                ></component>
+            </div>
+        </div>
+        <script src="../../vue.min.js"></script>
+        <script src="../../less.min.js"></script>
+        <script src="./utility/hairInfo.js"></script>
+        <script src="./utility/hairOverlays.js"></script>
+        <script src="./utility/structure.js"></script>
+        <script src="./utility/faceNames.js"></script>
+        <script src="./utility/overlays.js"></script>
+        <script src="./utility/presets.js"></script>
+        <script src="./components/done.js" type="text/javascript"></script>
+        <script src="./components/name.js" type="text/javascript"></script>
+        <script src="./components/overlays.js" type="text/javascript"></script>
+        <script src="./components/decor.js" type="text/javascript"></script>
+        <script src="./components/hair.js" type="text/javascript"></script>
+        <script src="./components/structure.js" type="text/javascript"></script>
+        <script src="./components/sex.js" type="text/javascript"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

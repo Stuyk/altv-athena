@@ -2,6 +2,8 @@ import * as alt from 'alt-server';
 import { IDiscordUser } from '../interface/IDiscordUser';
 import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
+import { IAccount } from '../interface/IAccount';
+import { goToCharacterSelect } from './characters';
 
 /**
  * Why Discord Login?
@@ -20,7 +22,9 @@ import { Player } from 'alt-server';
 const db: sm.Database = sm.getDatabase();
 const loggedInUsers: Array<IDiscordUser['id']> = [];
 
-export async function handleLogin(player: Player, data: IDiscordUser) {
+alt.on('playerDisconnect', handleDisconnect);
+
+export async function handleLoginRouting(player: Player, data: IDiscordUser) {
     if (!player.pendingLogin) {
         return;
     }
@@ -33,9 +37,36 @@ export async function handleLogin(player: Player, data: IDiscordUser) {
         return;
     }
 
+    loggedInUsers.push(data.id);
+
     player.discord = data;
-    player.safeSetPosition(0, 0, 0);
-    alt.emitClient(player, 'discord:Close');
+    player.emit('discord:Close');
+
+    let account: Partial<IAccount> | null = await db.fetchData<IAccount>('discord', data.id, 'accounts');
+
+    // Generate New Account for Database
+    if (!account) {
+        const newDocument: Partial<IAccount> = {
+            discord: player.discord.id,
+            ips: [player.ip],
+            hardware: [player.hwidHash, player.hwidExHash],
+            lastLogin: Date.now()
+        };
+
+        account = await db.insertData<Partial<IAccount>>(newDocument, 'accounts', true);
+    }
+
+    // Go to Character Selection
+    player.account = account._id;
+    goToCharacterSelect(player);
 }
 
-// export async function logoutPlayer(player: IPlayer) {}
+function handleDisconnect(player: Player, reason: string) {
+    const index = loggedInUsers.findIndex((id) => id === player.discord.id);
+
+    if (index <= -1) {
+        return;
+    }
+
+    loggedInUsers.splice(index, 1);
+}

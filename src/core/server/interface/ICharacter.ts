@@ -2,7 +2,7 @@ import { Vector3 } from 'alt-server';
 
 export interface ICharacter {
     _id?: string;
-    discord?: string;
+    account_id?: string;
     name: string;
     age: number;
     pos: Vector3;

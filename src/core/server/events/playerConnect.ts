@@ -11,13 +11,9 @@ alt.on('playerConnect', handlePlayerConnect);
 function handlePlayerConnect(player: Player) {
     alt.log(`(${player.id}) ${player.name} has connected to the server.`);
 
-
-    Object.keys(alt.Player.prototype).forEach(key => {
-        console.log(key);
-    });
-
     player.dimension = player.id;
     player.pendingLogin = true;
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
-    alt.emitClient(player, 'discord:Auth', `${url}&state=${player.discordToken}`);
+
+    player.emit('discord:Auth', `${url}&state=${player.discordToken}`);
 }
