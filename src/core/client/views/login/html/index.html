@@ -20,6 +20,9 @@
                 </div>
             </template>
             <img class="athena" src="../../svg/athena.svg" width="50" @mousedown="loadAthena" />
+            <ul class="circles">
+                <li v-for="index in 10" :key="index"></li>
+            </ul>
         </div>
         <script src="../../vue.min.js"></script>
         <script src="../../less.min.js"></script>
