@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ICharacter, ICharacterDefaults } from './ICharacter';
+import { ICharacter, ICharacterDefaults } from '../../shared/interfaces/ICharacter';
 import { IDiscordUser } from './IDiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
@@ -161,18 +161,20 @@ alt.Player.prototype.createNewCharacter = async function createNewCharacter(appe
     const newDocument: Partial<ICharacter> = { ...ICharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.account_id = this.account;
+    newDocument._id = newDocument._id.toString(); // Re-cast id object as string.
 
     const document = await db.insertData(newDocument, 'characters', true);
     this.selectCharacter(document);
 };
 
 alt.Player.prototype.selectCharacter = async function selectCharacter(characterData: Partial<ICharacter>) {
-    this.data = characterData;
-    this.updateAppearance();
-    this.updatePosition();
+    this.data = { ...characterData };
 
-    // Set to Global Dimension
-    this.dimension = 0;
+    this.updatePosition();
+    this.updateAppearance();
+
+    // Delete Current Characters from Memory
+    delete this.currentCharacters;
 };
 
 alt.Player.prototype.emit = function emit(eventName: string, ...args: any[]) {
@@ -294,8 +296,8 @@ alt.Player.prototype.updateAppearance = function updateAppearance() {
     }
 
     this.setSyncedMeta('Name', this.data.appearance.name);
-    this.emit('creator:Sync', this.data.appearance);
     this.emitMeta('appearance', this.data.appearance);
+    this.emit('creator:Sync', this.data.appearance);
 };
 
 alt.Player.prototype.updatePosition = function updatePosition() {

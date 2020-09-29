@@ -1,11 +1,69 @@
 <!DOCTYPE html>
     <head>
-        <title>Discord Login</title>
+        <title>Character Selection</title>
         <link rel="stylesheet/less" type="text/css" href="./style.less" />
     </head>
     <body>
         <div id="app">
-            
+            <div class="panel">
+                <div class="editor">
+                    <div class="navigation">
+                        <button @click="goBack">Back</button>
+                        <button @click="goNext">Next</button>
+                    </div>
+                    <div class="options" v-if="characters[0]">
+                        <div class="option">
+                            <div class="labelCenter">
+                                {{ getName }}
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div class="labelContainer">
+                                <div class="label">
+                                    Age
+                                </div>
+                                <div class="value">
+                                    {{ getAge }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div class="labelContainer">
+                                <div class="label">
+                                    Reward Points
+                                </div>
+                                <div class="value">
+                                    {{ getRewardPoints }} Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div class="labelContainer">
+                                <div class="label">
+                                    Cash
+                                </div>
+                                <div class="value">
+                                    ${{ getCash }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <div class="labelContainer">
+                                <div class="label">
+                                    Bank
+                                </div>
+                                <div class="value">
+                                    ${{ getBank }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selection">
+                        <button @click="newCharacter" class="full" v-if="characters.length <= 2">New Character ({{characters.length}} of 3)</button>
+                        <button @click="selectCharacter" class="full">Select</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="../../vue.min.js"></script>
         <script src="../../less.min.js"></script>

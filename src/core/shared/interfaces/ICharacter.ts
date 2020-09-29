@@ -1,5 +1,5 @@
 import { Vector3 } from 'alt-server';
-import { IAppearance } from '../../shared/interfaces/IAppearance';
+import { IAppearance } from './IAppearance';
 
 export interface ICharacter {
     _id?: string;

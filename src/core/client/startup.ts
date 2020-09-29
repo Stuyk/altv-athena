@@ -10,3 +10,4 @@ import './events/disconnect';
 // Views
 import './views/login/login';
 import './views/creator/creator';
+import './views/characters/characters';

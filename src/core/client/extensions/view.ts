@@ -33,7 +33,7 @@ export class View extends alt.WebView {
 
                     alt.clearInterval(tmpInterval);
                     resolve();
-                }, 20);
+                }, 5);
             });
         }
 

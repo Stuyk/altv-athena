@@ -103,7 +103,7 @@ function doesModelMatch(model) {
     });
 }
 
-async function handleSync(data) {
+export async function handleSync(data) {
     native.clearPedBloodDamage(alt.Player.local.scriptID);
     native.clearPedDecorations(alt.Player.local.scriptID);
     native.setPedHeadBlendData(alt.Player.local.scriptID, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);

@@ -3,7 +3,7 @@ import { IDiscordUser } from '../interface/IDiscordUser';
 import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
 import { IAccount } from '../interface/IAccount';
-import { ICharacter } from '../interface/ICharacter';
+import { ICharacter } from '../../shared/interfaces/ICharacter';
 import { goToCharacterSelect } from './characters';
 
 /**
