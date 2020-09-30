@@ -1,5 +1,5 @@
-import { Config } from './IConfig';
-import { Discord } from './IDiscord';
+import { Config } from './Config';
+import { Discord } from './Discord';
 
 export interface AthenaConfig {
     url: string;
