@@ -1,9 +1,8 @@
 import * as alt from 'alt-server';
-import { IDiscordUser } from '../interface/IDiscordUser';
+import { DiscordUser } from '../interface/DiscordUser';
 import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
-import { IAccount } from '../interface/IAccount';
-import { ICharacter } from '../../shared/interfaces/ICharacter';
+import { Account } from '../interface/Account';
 import { goToCharacterSelect } from './characters';
 
 /**
@@ -21,11 +20,11 @@ import { goToCharacterSelect } from './characters';
  */
 
 const db: sm.Database = sm.getDatabase();
-const loggedInUsers: Array<IDiscordUser['id']> = [];
+const loggedInUsers: Array<DiscordUser['id']> = [];
 
 alt.on('playerDisconnect', handleDisconnect);
 
-export async function handleLoginRouting(player: Player, data: IDiscordUser) {
+export async function handleLoginRouting(player: Player, data: DiscordUser) {
     if (!player.pendingLogin) {
         return;
     }
@@ -43,18 +42,18 @@ export async function handleLoginRouting(player: Player, data: IDiscordUser) {
     player.discord = data;
     player.emit('discord:Close');
 
-    let account: Partial<IAccount> | null = await db.fetchData<IAccount>('discord', data.id, 'accounts');
+    let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
 
     // Generate New Account for Database
     if (!account) {
-        const newDocument: Partial<IAccount> = {
+        const newDocument: Partial<Account> = {
             discord: player.discord.id,
             ips: [player.ip],
             hardware: [player.hwidHash, player.hwidExHash],
             lastLogin: Date.now()
         };
 
-        account = await db.insertData<Partial<IAccount>>(newDocument, 'accounts', true);
+        account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
     }
 
     // Go to Character Selection

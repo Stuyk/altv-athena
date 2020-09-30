@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { ICharacter } from '../../shared/interfaces/ICharacter';
+import { Character } from '../../shared/interfaces/Character';
 import * as sm from 'simplymongo';
 
 const db: sm.Database = sm.getDatabase();
@@ -13,7 +13,7 @@ alt.onClient('characters:New', handleNewCharacter);
  * @param  {Player} player
  */
 export async function goToCharacterSelect(player: Player) {
-    const characters: Array<ICharacter> = await db.fetchAllByField<ICharacter>(
+    const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
         player.account,
         'characters'

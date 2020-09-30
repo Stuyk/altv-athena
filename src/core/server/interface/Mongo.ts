@@ -1,4 +1,4 @@
-export interface IMongo {
+export interface Mongo {
     MONGO_NAME?: string; // Database name
     MONGO_URL?: string; // Database URL
     MONGO_COLLECTIONS?: string[]; // Database Collections

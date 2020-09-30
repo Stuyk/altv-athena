@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { ICharacter, ICharacterDefaults } from '../../shared/interfaces/ICharacter';
-import { IDiscordUser } from './IDiscordUser';
+import { Character, CharacterDefaults } from '../../shared/interfaces/Character';
+import { DiscordUser } from './DiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
-import { IAppearance } from '../../shared/interfaces/IAppearance';
+import { Appearance } from '../../shared/interfaces/Appearance';
 
 const db: Database = getDatabase();
 
@@ -13,7 +13,7 @@ declare module 'alt-server' {
         pendingLogin?: boolean; // Used when a player is pending login.
         discordToken?: string; // Used to assist with loggin in a player through oAuth2.
         hasModel?: boolean;
-        currentCharacters: Array<ICharacter>;
+        currentCharacters: Array<Character>;
         pendingCharacterEdit?: boolean;
         pendingNewCharacter?: boolean;
         pendingCharacterSelect?: boolean;
@@ -22,8 +22,8 @@ declare module 'alt-server' {
         account?: string;
 
         // Player Data
-        discord?: IDiscordUser;
-        data?: ICharacter;
+        discord?: DiscordUser;
+        data?: Character;
 
         // Anti
         acPosition?: alt.Vector3;
@@ -49,10 +49,10 @@ declare module 'alt-server' {
 
         /**
          * Used to establish and create a new character based on passed Appearance data.
-         * @param  {IAppearance} appearance
+         * @param  {Appearance} appearance
          * @returns void
          */
-        createNewCharacter(appearance: IAppearance): void;
+        createNewCharacter(appearance: Appearance): void;
 
         /**
          * Add currency from this player based on currency type and amount.
@@ -86,10 +86,10 @@ declare module 'alt-server' {
 
         /**
          * Bind database character data to this player.
-         * @param  {ICharacter} data
+         * @param  {Character} data
          * @returns void
          */
-        initData(data: ICharacter): void;
+        initData(data: Character): void;
 
         /**
          * Safely set this player's position.
@@ -124,17 +124,17 @@ declare module 'alt-server' {
 
         /**
          * Save multiple fields of data for this
-         * @param  {ICharacter} dataObject
+         * @param  {Character} dataObject
          * @returns void
          */
-        savePartial(dataObject: ICharacter): void;
+        savePartial(dataObject: Character): void;
 
         /**
          * Used to setup the player with character data.
-         * @param  {ICharacter} characterData
+         * @param  {Character} characterData
          * @returns void
          */
-        selectCharacter(characterData: ICharacter): void;
+        selectCharacter(characterData: Character): void;
 
         /**
          * Update the appearance of the player based on player.data.
@@ -157,8 +157,8 @@ declare module 'alt-server' {
     }
 }
 
-alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<IAppearance>) {
-    const newDocument: Partial<ICharacter> = { ...ICharacterDefaults };
+alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<Appearance>) {
+    const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.account_id = this.account;
 
@@ -167,7 +167,7 @@ alt.Player.prototype.createNewCharacter = async function createNewCharacter(appe
     this.selectCharacter(document);
 };
 
-alt.Player.prototype.selectCharacter = async function selectCharacter(characterData: Partial<ICharacter>) {
+alt.Player.prototype.selectCharacter = async function selectCharacter(characterData: Partial<Character>) {
     this.data = { ...characterData };
 
     this.updatePosition();
@@ -189,7 +189,7 @@ alt.Player.prototype.saveField = async function saveField(fieldName: string, fie
     await db.updatePartialData(this.data._id, { [fieldName]: fieldValue }, 'characters');
 };
 
-alt.Player.prototype.savePartial = async function savePartial(dataObject: ICharacter) {
+alt.Player.prototype.savePartial = async function savePartial(dataObject: Character) {
     await db.updatePartialData(this.data._id, { ...dataObject }, 'characters');
 };
 
@@ -204,10 +204,10 @@ alt.Player.prototype.updateDataByKeys = function updateDataByKeys(dataObject: {}
 };
 
 alt.Player.prototype.init = function init() {
-    this.data = Object.assign({}, ICharacterDefaults);
+    this.data = Object.assign({}, CharacterDefaults);
 };
 
-alt.Player.prototype.initData = function initData(data: ICharacter) {
+alt.Player.prototype.initData = function initData(data: Character) {
     Object.keys(data).forEach((key) => {
         this.data[key] = data[key];
     });

@@ -1,4 +1,4 @@
-export interface IAppearance {
+export interface Appearance {
     name: string;
     sex: number;
     faceFather: number;

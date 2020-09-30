@@ -2,14 +2,14 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
-import { IAppearance } from '../../../shared/interfaces/IAppearance';
+import { Appearance } from '../../../shared/interfaces/Appearance';
 
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
 let view: View;
-let oldCharacterData: Partial<IAppearance> | null = {};
-let prevData: Partial<IAppearance> | null = {};
+let oldCharacterData: Partial<Appearance> | null = {};
+let prevData: Partial<Appearance> | null = {};
 let readyInterval: number;
 let noDiscard = true;
 let noName = true;

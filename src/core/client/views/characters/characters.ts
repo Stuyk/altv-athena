@@ -1,18 +1,18 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ICharacter } from '../../../shared/interfaces/ICharacter';
+import { Character } from '../../../shared/interfaces/Character';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
 import { handleSync } from '../creator/creator';
 
 const url = `http://resource/client/views/characters/html/index.html`;
 let view: View;
-let characters: Partial<ICharacter>[];
+let characters: Partial<Character>[];
 
 alt.onServer('characters:Show', handleView);
 alt.onServer('characters:Done', handleClose);
 
-async function handleView(_characters: Partial<ICharacter>[]) {
+async function handleView(_characters: Partial<Character>[]) {
     characters = _characters;
 
     if (!view) {
