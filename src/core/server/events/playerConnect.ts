@@ -11,7 +11,7 @@ alt.on('playerConnect', handlePlayerConnect);
 function handlePlayerConnect(player: Player) {
     alt.log(`(${player.id}) ${player.name} has connected to the server.`);
 
-    player.safeSetPosition(197.8153, -1002.293, -99.65749);
+    player.safeSetPosition(202.10037231445312, -1007.5400390625, -99.00003051757812);
     player.dimension = player.id;
     player.pendingLogin = true;
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));

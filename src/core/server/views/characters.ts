@@ -33,6 +33,7 @@ export async function goToCharacterSelect(player: Player) {
     }
 
     player.currentCharacters = characters;
+    player.safeSetPosition(202.10037231445312, -1007.5400390625, -99.00003051757812);
     player.emit('characters:Show', characters);
 }
 
@@ -69,7 +70,7 @@ export async function handleSelectCharacter(player: Player, id: string) {
  */
 function handleNewCharacter(player: Player) {
     // Prevent more than 3 characters per account.
-    if (player.currentCharacters.length >= 3) {
+    if (player.currentCharacters && player.currentCharacters.length >= 3) {
         return;
     }
 
@@ -84,6 +85,6 @@ function handleNewCharacter(player: Player) {
     player.pendingCharacterSelect = false;
     player.pendingCharacterEdit = true;
     player.pendingNewCharacter = true;
-    player.safeSetPosition(197.8153, -1002.293, -99.65749);
+    player.safeSetPosition(202.10037231445312, -1007.5400390625, -99.00003051757812);
     player.emit('creator:Show', null, true, false); // _oldCharacterData, _noDiscard, _noName
 }

@@ -6,6 +6,7 @@ import './interfaces/IPlayer';
 // Events
 import './events/connectionComplete';
 import './events/disconnect';
+import './events/keyup';
 
 // Views
 import './views/login/login';

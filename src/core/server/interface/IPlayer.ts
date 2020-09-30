@@ -161,9 +161,9 @@ alt.Player.prototype.createNewCharacter = async function createNewCharacter(appe
     const newDocument: Partial<ICharacter> = { ...ICharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.account_id = this.account;
-    newDocument._id = newDocument._id.toString(); // Re-cast id object as string.
 
     const document = await db.insertData(newDocument, 'characters', true);
+    document._id = document._id.toString(); // Re-cast id object as string.
     this.selectCharacter(document);
 };
 
