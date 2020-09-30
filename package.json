@@ -1,8 +1,7 @@
 {
-    "name": "altv-quickstart-ts",
-    "version": "2.1.0",
-    "description": "A Typescript Quickstart Repo for alt:V",
-    "main": "",
+    "name": "altv-athena",
+    "version": "0.0.0",
+    "description": "An Roleplay project for alt:V.",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles src/**/* --exclude=**/*.ts --up 1 ./resources",
