@@ -2,8 +2,7 @@ import * as path from 'path';
 import * as alt from 'alt-server';
 import { MONGO_CONFIG } from '../athena/configMongo';
 import { Database, onReady } from 'simplymongo';
-import { LOAD_ORDER, LOAD_ORDER_HASH } from '../athena/configLoadOrder';
-import { sha256 } from '../utility/encryption';
+import { LOAD_ORDER } from '../athena/configLoadOrder';
 
 function setupDatabase() {
     // Setup Database Connection Callback
@@ -31,13 +30,6 @@ async function handleOnReadyEvent() {
     if (LOAD_ORDER.length <= 0) {
         throw new Error(`You did not specify a load order.`);
     }
-
-    // const loadHash = sha256(JSON.stringify(LOAD_ORDER));
-    // //console.log(loadHash);
-
-    // if (LOAD_ORDER_HASH !== loadHash) {
-    //     throw new Error(`Failed to parse correct load order.`);
-    // }
 
     // Something about requiring a load order hash...
     for (let i = 0; i < LOAD_ORDER.length; i++) {

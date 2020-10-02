@@ -1,3 +1,4 @@
+import * as alt from 'alt-server';
 const mainPath = '../database/index';
 
 const lines: Array<string> = [
@@ -11,7 +12,7 @@ const lines: Array<string> = [
 ];
 
 for (let i = 0; i < lines.length; i++) {
-    console.log(lines[i]);
+    alt.log(lines[i]);
 }
 
 // Load Database and Everything Else

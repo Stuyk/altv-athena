@@ -1,7 +1,7 @@
-import { IMeta } from './IMeta';
+import { Meta } from './Meta';
 
 declare module 'alt-client' {
     export interface Player {
-        meta?: IMeta;
+        meta?: Meta;
     }
 }

@@ -1,13 +1,17 @@
 import * as alt from 'alt-server';
+import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/Appearance';
 
-alt.onClient('creator:Done', handleCreatorDone);
+alt.onClient(View_Events_Creator.Done, handleCreatorDone);
 
+/**
+ * Called when a player pushes up Character Creator data.
+ * @param  {alt.Player} player
+ * @param  {Appearance} appearance
+ */
 function handleCreatorDone(player: alt.Player, appearance: Appearance) {
     if (!player.pendingCharacterEdit) {
-        const log = `Attempted to edit character when no edit was requested.`;
-        alt.log(`${player.name} - ${log}`);
-        player.kick(log);
+        alt.log(`${player.name} | Attempted to edit a character when no edit was requested.`);
         return;
     }
 

@@ -2,11 +2,13 @@ import * as alt from 'alt-server';
 import { Player } from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
 import * as sm from 'simplymongo';
+import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
+import { DEFAULT_CONFIG } from '../athena/main';
 
 const db: sm.Database = sm.getDatabase();
 
-alt.onClient('characters:Select', handleSelectCharacter);
-alt.onClient('characters:New', handleNewCharacter);
+alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
+alt.onClient(View_Events_Characters.New, handleNewCharacter);
 
 /**
  * Called when a player needs to go to character select.
@@ -32,9 +34,11 @@ export async function goToCharacterSelect(player: Player) {
         characters[i]._id = characters[i]._id.toString();
     }
 
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
+
     player.currentCharacters = characters;
-    player.safeSetPosition(202.10037231445312, -1007.5400390625, -99.00003051757812);
-    player.emit('characters:Show', characters);
+    player.safeSetPosition(pos.x, pos.y, pos.z);
+    player.emit(View_Events_Characters.Show, characters);
 }
 
 /**
@@ -53,14 +57,13 @@ export async function handleSelectCharacter(player: Player, id: string) {
     }
 
     if (!player.pendingCharacterSelect) {
-        const log = `Attempted to select character when no select was requested.`;
-        alt.log(`${player.name} - ${log}`);
-        player.kick(log);
+        alt.log(`${player.name} | Attempted to select a character when not asked to select one.`);
         return;
     }
 
     player.pendingCharacterSelect = false;
-    player.emit('characters:Done');
+
+    player.emit(View_Events_Characters.Done);
     player.selectCharacter(player.currentCharacters[index]);
 }
 
@@ -71,20 +74,22 @@ export async function handleSelectCharacter(player: Player, id: string) {
 function handleNewCharacter(player: Player) {
     // Prevent more than 3 characters per account.
     if (player.currentCharacters && player.currentCharacters.length >= 3) {
+        alt.log(`${player.name} | Attempted to create a new character when max characters was exceeded.`);
         return;
     }
 
     if (!player.pendingCharacterSelect) {
-        const log = `Attempted to select character when no select was requested.`;
-        alt.log(`${player.name} - ${log}`);
-        player.kick(log);
+        alt.log(`${player.name} | Attempted to select a character when not asked to select one.`);
         return;
     }
 
-    player.emit('characters:Done');
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
+
     player.pendingCharacterSelect = false;
     player.pendingCharacterEdit = true;
     player.pendingNewCharacter = true;
-    player.safeSetPosition(202.10037231445312, -1007.5400390625, -99.00003051757812);
-    player.emit('creator:Show', null, true, false); // _oldCharacterData, _noDiscard, _noName
+
+    player.safeSetPosition(pos.x, pos.y, pos.z);
+    player.emit(View_Events_Characters.Done);
+    player.emit(View_Events_Creator.Show, null, true, false); // _oldCharacterData, _noDiscard, _noName
 }

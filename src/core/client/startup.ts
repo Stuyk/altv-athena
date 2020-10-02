@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 
 // Interfaces - Always Load First
-import './interfaces/IPlayer';
+import './interfaces/Player';
 
 // Events
 import './events/connectionComplete';

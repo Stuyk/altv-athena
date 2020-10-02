@@ -4,6 +4,7 @@ import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
 import { Account } from '../interface/Account';
 import { goToCharacterSelect } from './characters';
+import { View_Events_Discord } from '../../shared/enums/views';
 
 /**
  * Why Discord Login?
@@ -24,6 +25,11 @@ const loggedInUsers: Array<DiscordUser['id']> = [];
 
 alt.on('playerDisconnect', handleDisconnect);
 
+/**
+ * Called when the express server authenticates a user.
+ * @param  {Player} player
+ * @param  {DiscordUser} data
+ */
 export async function handleLoginRouting(player: Player, data: DiscordUser) {
     if (!player.pendingLogin) {
         return;
@@ -33,6 +39,7 @@ export async function handleLoginRouting(player: Player, data: DiscordUser) {
     delete player.discordToken;
 
     if (loggedInUsers.includes(data.id)) {
+        alt.log(`${player.name} | Attempted to login twice under ${data.username}#${data.discriminator}.`);
         player.kick(`Already logged in.`);
         return;
     }
@@ -40,7 +47,7 @@ export async function handleLoginRouting(player: Player, data: DiscordUser) {
     loggedInUsers.push(data.id);
 
     player.discord = data;
-    player.emit('discord:Close');
+    player.emit(View_Events_Discord.Close);
 
     let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
 
@@ -61,9 +68,16 @@ export async function handleLoginRouting(player: Player, data: DiscordUser) {
     goToCharacterSelect(player);
 }
 
+/**
+ * Called when a player disconnects from the server.
+ * Also saves their data if they're logged in.
+ * @param  {Player} player
+ * @param  {string} reason
+ */
 function handleDisconnect(player: Player, reason: string) {
     const index = loggedInUsers.findIndex((id) => id === player.discord.id);
 
+    // Was never logged in. Do not save data..
     if (index <= -1) {
         return;
     }
@@ -74,7 +88,7 @@ function handleDisconnect(player: Player, reason: string) {
         return;
     }
 
-    console.log(`${player.data.appearance.name} has logged out.`);
+    alt.log(`${player.data.appearance.name} has logged out.`);
     player.data.pos = player.pos;
     player.saveField('pos', player.data.pos);
 }

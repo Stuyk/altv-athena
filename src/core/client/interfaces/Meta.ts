@@ -1,3 +1,3 @@
-export interface IMeta {
+export interface Meta {
     // Add some stuff.
 }
