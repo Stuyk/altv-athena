@@ -2,8 +2,7 @@ import * as path from 'path';
 import * as alt from 'alt-server';
 import { MONGO_CONFIG } from '../athena/configMongo';
 import { Database, onReady } from 'simplymongo';
-import { LOAD_ORDER, LOAD_ORDER_HASH } from '../athena/configLoadOrder';
-import { sha256 } from '../utility/encryption';
+import { LOAD_ORDER } from '../athena/configLoadOrder';
 
 function setupDatabase() {
     // Setup Database Connection Callback

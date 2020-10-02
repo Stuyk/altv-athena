@@ -8,7 +8,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 const db: sm.Database = sm.getDatabase();
 
 alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
-alt.onClient(View_Events_Characters.Done, handleNewCharacter);
+alt.onClient(View_Events_Characters.New, handleNewCharacter);
 
 /**
  * Called when a player needs to go to character select.
