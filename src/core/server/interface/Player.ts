@@ -6,6 +6,7 @@ import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../shared/enums/views';
 import { Events_Meta } from '../../shared/enums/meta';
+import { Events_Misc } from '../../shared/enums/events';
 
 const db: Database = getDatabase();
 
@@ -174,6 +175,10 @@ alt.Player.prototype.selectCharacter = async function selectCharacter(characterD
 
     this.updatePosition();
     this.updateAppearance();
+    this.emit(Events_Misc.StartTicks);
+
+    // Temp Vehicle
+    new alt.Vehicle('Washington', characterData.pos.x, characterData.pos.y, characterData.pos.z, 0, 0, 0);
 
     // Delete Current Characters from Memory
     delete this.currentCharacters;
