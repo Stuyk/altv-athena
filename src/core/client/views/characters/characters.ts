@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { View_Events_Characters } from '../../../shared/enums/views';
 import { Character } from '../../../shared/interfaces/Character';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
@@ -9,8 +10,8 @@ const url = `http://resource/client/views/characters/html/index.html`;
 let view: View;
 let characters: Partial<Character>[];
 
-alt.onServer('characters:Show', handleView);
-alt.onServer('characters:Done', handleClose);
+alt.onServer(View_Events_Characters.Show, handleView);
+alt.onServer(View_Events_Characters.Done, handleDone);
 
 async function handleView(_characters: Partial<Character>[]) {
     characters = _characters;
@@ -30,11 +31,11 @@ async function handleView(_characters: Partial<Character>[]) {
 }
 
 function handleSelect(id) {
-    alt.emitServer('characters:Select', id);
+    alt.emitServer(View_Events_Characters.Select, id);
 }
 
 function handleNew() {
-    alt.emitServer('characters:New');
+    alt.emitServer(View_Events_Characters.New);
 }
 
 function handleLoad() {
@@ -45,7 +46,7 @@ function handleLoad() {
     view.emit('characters:Set', characters);
 }
 
-function handleClose() {
+function handleDone() {
     if (!view) {
         return;
     }

@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
+import { View_Events_Creator } from '../../../shared/enums/views';
 
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
@@ -19,8 +20,8 @@ native.requestModel(mModel);
 alt.loadModel(fModel);
 alt.loadModel(mModel);
 
-alt.onServer('creator:Sync', handleSync);
-alt.onServer('creator:Show', handleView);
+alt.onServer(View_Events_Creator.Sync, handleSync);
+alt.onServer(View_Events_Creator.Show, handleView);
 
 async function handleView(_oldCharacterData = null, _noDiscard = true, _noName = true) {
     oldCharacterData = _oldCharacterData;
@@ -54,12 +55,12 @@ function handleClose() {
 }
 
 function handleDone(newData) {
-    alt.emitServer('creator:Done', newData);
+    alt.emitServer(View_Events_Creator.Done, newData);
     handleClose();
 }
 
 function handleCancel() {
-    alt.emitServer('creator:Done', oldCharacterData);
+    alt.emitServer(View_Events_Creator.Done, oldCharacterData);
     handleClose();
 }
 

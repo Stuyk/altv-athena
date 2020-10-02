@@ -32,13 +32,6 @@ async function handleOnReadyEvent() {
         throw new Error(`You did not specify a load order.`);
     }
 
-    // const loadHash = sha256(JSON.stringify(LOAD_ORDER));
-    // //console.log(loadHash);
-
-    // if (LOAD_ORDER_HASH !== loadHash) {
-    //     throw new Error(`Failed to parse correct load order.`);
-    // }
-
     // Something about requiring a load order hash...
     for (let i = 0; i < LOAD_ORDER.length; i++) {
         const filePath: string = path.join('..', LOAD_ORDER[i]);

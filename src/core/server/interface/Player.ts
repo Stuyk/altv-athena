@@ -4,6 +4,8 @@ import { DiscordUser } from './DiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
+import { View_Events_Creator } from '../../shared/enums/views';
+import { Events_Meta } from '../../shared/enums/meta';
 
 const db: Database = getDatabase();
 
@@ -182,7 +184,7 @@ alt.Player.prototype.emit = function emit(eventName: string, ...args: any[]) {
 };
 
 alt.Player.prototype.emitMeta = function emitMeta(key: string, value: any) {
-    alt.emitClient(this, 'meta:Set', key, value);
+    alt.emitClient(this, Events_Meta.Set, key, value);
 };
 
 alt.Player.prototype.saveField = async function saveField(fieldName: string, fieldValue: any) {
@@ -297,7 +299,7 @@ alt.Player.prototype.updateAppearance = function updateAppearance() {
 
     this.setSyncedMeta('Name', this.data.appearance.name);
     this.emitMeta('appearance', this.data.appearance);
-    this.emit('creator:Sync', this.data.appearance);
+    this.emit(View_Events_Creator.Sync, this.data.appearance);
 };
 
 alt.Player.prototype.updatePosition = function updatePosition() {
