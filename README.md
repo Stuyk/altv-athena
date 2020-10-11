@@ -6,7 +6,7 @@
 
 This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. This features type safety through TypeScript and a solid foundation for what I consider the core of roleplay.
 
-[Join this Discord to get Configuration Files](https://discord.gg/NANErEX)
+[Join this Discord to get Configuration Files](https://discord.gg/jJbQz4d)
 
 # Project Setup
 
