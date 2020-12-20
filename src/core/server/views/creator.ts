@@ -3,6 +3,7 @@ import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/Appearance';
 
 alt.onClient(View_Events_Creator.Done, handleCreatorDone);
+alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);
 
 /**
  * Called when a player pushes up Character Creator data.
@@ -33,4 +34,9 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance) {
 
         player.safeSetPosition(player.pos.x, player.pos.y, player.pos.z);
     }, 500);
+}
+
+function handleAwaitModel(player, characterSex) {
+    player.model = characterSex === 0 ? 'mp_f_freemode_01' : 'mp_m_freemode_01';
+    alt.emitClient(player, View_Events_Creator.AwaitModel);
 }
