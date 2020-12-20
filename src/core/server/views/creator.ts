@@ -38,5 +38,6 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance) {
 
 function handleAwaitModel(player, characterSex) {
     player.model = characterSex === 0 ? 'mp_f_freemode_01' : 'mp_m_freemode_01';
+    player.pos = player.pos;
     alt.emitClient(player, View_Events_Creator.AwaitModel);
 }
