@@ -3,13 +3,14 @@ Vue.prototype.window = window;
 
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify({ theme: {dark: true }}),
     data() {
         return {
             show: false,
-            selection: 0,
+            selection: 3,
             data: {
                 name: '',
-                sex: 0,
+                sex: 1,
                 faceFather: 33,
                 faceMother: 45,
                 skinFather: 45,
@@ -22,7 +23,7 @@ const app = new Vue({
                 hairColor2: 2,
                 hairOverlay: '',
                 facialHair: 29,
-                facialHairColor1: 62,
+                facialHairColor1: 0,
                 facialHairOpacity: 0,
                 eyebrows: 0,
                 eyebrowsOpacity: 1,
@@ -51,21 +52,21 @@ const app = new Vue({
         },
         isInactiveNext() {
             if (this.selection >= this.navOptions.length - 1) {
-                return { inactive: true };
+                return true;
             }
 
             if (this.selection === 5 && !this.noName && !this.validName) {
-                return { inactive: true };
+                return true;
             }
 
-            return { inactive: false };
+            return false;
         },
         isInactiveBack() {
             if (this.selection <= 0) {
-                return { inactive: true };
+                return true;
             }
 
-            return { inactive: false };
+            return false;
         },
         getTabComponent: function () {
             return `tab-${this.navOptions[this.selection].toLowerCase()}`;

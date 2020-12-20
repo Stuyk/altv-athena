@@ -81,130 +81,125 @@ Vue.component('tab-sex', {
         }
     },
     template: `
-        <div class="options">
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Select Sex
-                    </div>
-                    <div class="value">
-                        {{ data.sex === 0 ? 'Female' : 'Male' }}
-                    </div>
-                </div>
-                <div class="split">
-                    <button @click="setParameter('sex', 0)" :class="isActive('sex', 0)">Female</button>
-                    <button @click="setParameter('sex', 1)" :class="isActive('sex', 1)">Male</button>
-                </div>
-                <div class="label" style="margin-top: 6px">
+        <v-container class="containerHelper">
+            <!-- Sexual Orientation -->
+            <div class="d-flex flex-column">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Sexual Orientation
+                </p>
+                <v-btn-toggle v-model="data.sex" class="flex-grow-1">
+                    <v-btn @click="setParameter('sex', 0)" class="flex-grow-1" small>Female</v-btn>
+                    <v-btn @click="setParameter('sex', 1)" class="flex-grow-1" small>Male</v-btn>
+                </v-btn-toggle>
+                <p class="text-sm-left font-weight-bold mb-1 mt-3 orange--text text--accent-1 subtitle-2">
                     Presets
-                </div>
-                <div class="split-auto">
-                    <button v-for="i in 6" :key="i" @click="setParameter('preset', i)">
+                </p>
+                <v-btn-toggle class="flex-grow-1">
+                    <v-btn v-for="i in 6" :key="i" @click="setParameter('preset', i)" class="flex-grow-1" x-small>
                         {{ i }}
-                    </button>
+                    </v-btn>
+                </v-btn-toggle>
+            </div>
+            <!-- Father Face / Skin -->
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Father Face
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <v-btn @click="decrementParameter('faceFather', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-left</v-icon>
+                    </v-btn>
+                    <p class="flex-grow-1 text-sm-center" small> 
+                        {{faceNames[data.faceFather] }}
+                    </p>
+                    <v-btn @click="incrementParameter('faceFather', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-right</v-icon>
+                    </v-btn>
                 </div>
             </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Father Face
-                    </div>
-                    <div class="value">
-                        {{ data.faceFather }} | 45
-                    </div>
-                </div>
-                <div class="controls">
-                    <button class="arrowLeft" @click="decrementParameter('faceFather', 0, 45, 1)">&#8249;</button>
-                    <span> {{faceNames[data.faceFather] }}</span>
-                    <button class="arrowRight" @click="incrementParameter('faceFather', 0, 45, 1)">&#8250;</button>
-                </div>
-            </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Father Skin
-                    </div>
-                    <div class="value">
-                        {{ data.skinFather }} | 45
-                    </div>
-                </div>
-                <div class="controls">
-                    <button class="arrowLeft" @click="decrementParameter('skinFather', 0, 45, 1)">&#8249;</button>
-                    <span> {{faceNames[data.skinFather] }}</span>
-                    <button class="arrowRight" @click="incrementParameter('skinFather', 0, 45, 1)">&#8250;</button>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Father Skin
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <v-btn @click="decrementParameter('skinFather', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-left</v-icon>
+                    </v-btn>
+                    <p class="flex-grow-1 text-sm-center" small> 
+                        {{faceNames[data.skinFather] }}
+                    </p>
+                    <v-btn @click="incrementParameter('skinFather', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-right</v-icon>
+                    </v-btn>
                 </div>
             </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Mother Face
-                    </div>
-                    <div class="value">
-                        {{ data.faceMother }} | 45
-                    </div>
-                </div>
-                <div class="controls">
-                    <button class="arrowLeft" @click="decrementParameter('faceMother', 0, 45, 1)">&#8249;</button>
-                    <span> {{faceNames[data.faceMother] }}</span>
-                    <button class="arrowRight" @click="incrementParameter('faceMother', 0, 45, 1)">&#8250;</button>
-                </div>
-            </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Mother Skin
-                    </div>
-                    <div class="value">
-                        {{ data.skinMother }} | 45
-                    </div>
-                </div>
-                <div class="controls">
-                    <button class="arrowLeft" @click="decrementParameter('skinMother', 0, 45, 1)">&#8249;</button>
-                    <span> {{faceNames[data.skinMother] }}</span>
-                    <button class="arrowRight" @click="incrementParameter('skinMother', 0, 45, 1)">&#8250;</button>
+            <!-- Mother Face / Skin -->
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Mother Face
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <v-btn @click="decrementParameter('faceMother', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-left</v-icon>
+                    </v-btn>
+                    <p class="flex-grow-1 text-sm-center" small> 
+                        {{faceNames[data.faceMother] }}
+                    </p>
+                    <v-btn @click="incrementParameter('faceMother', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-right</v-icon>
+                    </v-btn>
                 </div>
             </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                       Face Mix
-                    </div>
-                    <div class="value">
-                        {{ parseFloat(data.faceMix).toFixed(1) }} | 1.0
-                    </div>
-                </div>
-                <div class="inputHolder">
-                    <input type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
-                </div>
-            </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                       Skin Mix
-                    </div>
-                    <div class="value">
-                        {{ parseFloat(data.skinMix).toFixed(1) }} | 1.0
-                    </div>
-                </div>
-                <div class="inputHolder">
-                    <input type="range" min="0.0" max="1.0" step="0.1" v-model.number="data.skinMix"/>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Mother Skin
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <v-btn @click="decrementParameter('skinMother', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-left</v-icon>
+                    </v-btn>
+                    <p class="flex-grow-1 text-sm-center" small> 
+                        {{faceNames[data.skinMother] }}
+                    </p>
+                    <v-btn @click="incrementParameter('skinMother', 0, 45, 1)" small>
+                        <v-icon x-small>fa-chevron-right</v-icon>
+                    </v-btn>
                 </div>
             </div>
-            <div class="option">
-                <div class="labelContainer">
-                    <div class="label">
-                        Eye Color
-                    </div>
-                    <div class="value">
-                        {{ data.eyes }} | 30
-                    </div>
-                </div>
-                <div class="controls">
-                    <button class="arrowLeft" @click="decrementParameter('eyes', 0, 30, 1)">&#8249;</button>
-                    <span> {{ data.eyes }} </span>
-                    <button class="arrowRight" @click="incrementParameter('eyes', 0, 30, 1)">&#8250;</button>
+            <!-- Face Mix Parameters -->
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Face Mix ({{ parseFloat(data.faceMix).toFixed(1) }})
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <input class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
                 </div>
             </div>
-        </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Skin Mix ({{ parseFloat(data.skinMix).toFixed(1) }})
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <input class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.skinMix"/>
+                </div>
+            </div>
+            <!-- Eyes -->
+            <div class="d-flex flex-column mt-3">
+                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
+                    Eye Color
+                </p>
+                <div class="d-flex flex-row flex-grow-1">
+                    <v-btn @click="decrementParameter('eyes', 0, 30, 1)" small>
+                        <v-icon x-small>fa-chevron-left</v-icon>
+                    </v-btn>
+                    <p class="flex-grow-1 text-sm-center" small> 
+                        {{ data.eyes }}
+                    </p>
+                    <v-btn @click="incrementParameter('eyes', 0, 30, 1)" small>
+                        <v-icon x-small>fa-chevron-right</v-icon>
+                    </v-btn>
+                </div>
+            </div>
+        </v-container>
     `
 });
