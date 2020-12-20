@@ -39,9 +39,8 @@ Vue.component('tab-hair', {
 
             this.$root.$emit('updateCharacter');
         },
-        handleChange(e, parameter, index) {
-            const value = parseFloat(e.target.value);
-            this.data.colorOverlays[index][parameter] = value;
+        handleChange(value, parameter) {
+            this.data.colorOverlays[parameter] = value;
             this.$root.$emit('updateCharacter');
         }
     },
@@ -153,7 +152,7 @@ Vue.component('tab-hair', {
                         Facial Hair Opacity ({{ data.facialHairOpacity }})
                     </p>
                     <div class="d-flex flex-row flex-grow-1">
-                        <input class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="data.facialHairOpacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
+                        <v-slider class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="data.facialHairOpacity" :step="0.1" @input="e => handleChange(e, 'facialHairOpacity')" />
                     </div>
                 </div>
                 <div class="d-flex flex-column">
