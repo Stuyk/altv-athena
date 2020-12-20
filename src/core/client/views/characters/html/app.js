@@ -61,6 +61,7 @@ const app = new Vue({
     },
     methods: {
         handleSet(characters) {
+            this.characterIndex = 0;
             this.characters = characters;
             this.updateAppearance();
         },
