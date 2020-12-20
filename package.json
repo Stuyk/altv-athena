@@ -25,12 +25,11 @@
         "@types/sjcl": "^1.0.29",
         "altv-pkg": "latest",
         "copyfiles": "^2.3.0",
-        "fkill": "^7.0.1",
         "gulp": "^4.0.2",
         "gulp-using": "^0.1.1",
         "rimraf": "^3.0.2",
         "typescript": "^4.0.2",
-        "yargs-parser": ">=13.1.2"
+        "yargs-parser": "^5.0.0"
     },
     "type": "module",
     "dependencies": {
