@@ -82,7 +82,7 @@ function handleReadyDone() {
 }
 
 function doesModelMatch(model) {
-    return new Promise((resolve) => {
+    return new Promise((resolve: Function) => {
         let attempts = 0;
         let interval = alt.setInterval(() => {
             attempts++;
