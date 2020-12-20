@@ -6,8 +6,6 @@
 
 This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. This features type safety through TypeScript and a solid foundation for what I consider the core of roleplay.
 
-[Join this Discord to get Configuration Files](https://discord.gg/NANErEX)
-
 # Project Setup
 
 Setup instructions may be purchased from Stuyk.
@@ -23,3 +21,15 @@ Stuyk will not teach you how to add additional functionality to this gamemode. O
 [⌨️ Learn how to script for alt:V](https://stuyk.github.io/altv-javascript-guide/)
 
 ⭐ This repository if you found it useful!
+
+# Configuration File Names
+
+These are the names of the configuration files. 
+
+What they do has to be interpreted by you to get this to work.
+
+```
+DISCORD_CONFIG, server/athena/configDiscord.ts
+LOAD_ORDER, server/athena/configLoadOrder.ts
+MONGO_CONFIG, server/athena/configMongo.ts
+```
