@@ -8,11 +8,7 @@ This project solely exists as a new standard for GTA:V roleplay servers on the [
 
 # Project Setup
 
-Setup instructions may be purchased from Stuyk.
-
-The code will remain open source for the forseeable future but support and how to utilize this project must be purchased.
-
-Stuyk will not teach you how to add additional functionality to this gamemode. Only how to setup the project and get it running.
+Project setup will only be available through Stuyk when he is ready to let the gamemode recieve basic user testing.
 
 # Support
 
@@ -21,6 +17,20 @@ Stuyk will not teach you how to add additional functionality to this gamemode. O
 [⌨️ Learn how to script for alt:V](https://stuyk.github.io/altv-javascript-guide/)
 
 ⭐ This repository if you found it useful!
+
+# Running the Project
+
+Running on Windows
+
+```sh
+$ npm install && npm run update
+$ npm run windows
+```
+
+```sh
+$ npm install && npm run update
+$ npm run linux
+```
 
 # Configuration File Names
 
