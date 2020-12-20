@@ -43,3 +43,9 @@ DISCORD_CONFIG, server/athena/configDiscord.ts
 LOAD_ORDER, server/athena/configLoadOrder.ts
 MONGO_CONFIG, server/athena/configMongo.ts
 ```
+
+# Screenshots
+
+![](https://i.imgur.com/DdT9Bli.png)
+
+![](https://i.imgur.com/eyNGLz8.png)

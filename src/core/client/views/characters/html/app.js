@@ -37,6 +37,7 @@ const exampleCharacter = {
 
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify(),
     data() {
         return {
             characters: [],
@@ -65,6 +66,9 @@ const app = new Vue({
         getRewardPoints() {
             const char = this.characters[this.index];
             return char.rewardPoints ? 60 / (char.rewardPoints * 5) : 0;
+        },
+        hasCharacters() {
+            return this.characters.length >= 2;
         }
     },
     methods: {
@@ -101,6 +105,13 @@ const app = new Vue({
         newCharacter() {
             if ('alt' in window) {
                 alt.emit('characters:New');
+            }
+        },
+        deleteCharacter() {
+            // Verify with user first.
+
+            if ('alt' in window) {
+                alt.emit('characters:Delete', this.characters[this.index]._id);
             }
         }
     },
