@@ -24,9 +24,8 @@
                             <v-btn @click="goNext" class="ml-2" small :disabled="isInactiveNext" outlined>
                                 <v-icon x-small class="teal--text text--accent-1">fa-arrow-right</v-icon>
                             </v-btn>
-                            
                         </div>
-                        <v-divider></v-divider>
+                        <v-divider class="mb-2"></v-divider>
                         <component
                             v-bind:is="getTabComponent"
                             v-bind:data="data"

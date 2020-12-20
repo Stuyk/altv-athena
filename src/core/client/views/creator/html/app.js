@@ -7,7 +7,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 3,
+            selection: 4,
             data: {
                 name: '',
                 sex: 1,
