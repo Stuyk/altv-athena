@@ -48,4 +48,4 @@ MONGO_CONFIG, server/athena/configMongo.ts
 
 ![](https://i.imgur.com/DdT9Bli.png)
 
-![](https://i.imgur.com/eyNGLz8.png)
+![](https://i.imgur.com/wdn4GLe.png)

@@ -8,3 +8,16 @@
 @contrast: rgb(58, 103, 145);
 @contrast2: rgb(83, 68, 165);
 @error: rgb(202, 61, 61);
+
+body, html, #app {
+    background: transparent !important;
+}
+
+button {
+    cursor: pointer;
+
+    &:active {
+        transform: translateY(-2px) !important;
+        transition: 0.1ms;
+    }
+}

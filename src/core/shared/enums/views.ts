@@ -15,5 +15,6 @@ export enum View_Events_Characters {
     Select = 'characters:Select',
     New = 'characters:New',
     Show = 'characters:Show',
-    Done = 'characters:Done'
+    Done = 'characters:Done',
+    Delete = 'characters:Delete'
 }

@@ -5,8 +5,9 @@ const exampleCharacter = {
     _id: '5f7117a3fd8d0a66b02eb998',
     age: 0,
     pos: { x: -734.5714111328125, y: -264.4747314453125, z: 37.03076171875 },
-    cash: 0,
-    bank: 0,
+    cash: 25,
+    bank: 50,
+    rewardPoints: 0,
     appearance: {
         colorOverlays: [0, 0, 0],
         eyebrows: 0,
@@ -37,36 +38,23 @@ const exampleCharacter = {
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify({ theme: {dark: true }}),
     data() {
         return {
             characters: [],
-            index: 0
+            statNames: [
+                /* Name of the stat, variable name inside character object */
+                { varName: 'Name', varRef: 'name', useAppearance: true },
+                { varName: 'Age', varRef: 'age', suffix: ' Years Old' },
+                { varName: 'Reward Points', varRef: 'rewardPoints', suffix: ' Hours' },
+                { varName: 'Cash', varRef: 'cash', prefix: '$' },
+                { varName: 'Bank', varRef: 'bank', prefix: '$' }
+            ],
+            characterIndex: 0,
+            deleteDialog: false
         };
     },
     computed: {
-        getName() {
-            const char = this.characters[this.index];
-            return char.appearance && char.appearance.name
-                ? char.appearance.name.replace('_', ' ')
-                : 'No Name Specified';
-        },
-        getAge() {
-            const char = this.characters[this.index];
-            return char.age;
-        },
-        getCash() {
-            const char = this.characters[this.index];
-            return char.cash.toLocaleString();
-        },
-        getBank() {
-            const char = this.characters[this.index];
-            return char.bank.toLocaleString();
-        },
-        getRewardPoints() {
-            const char = this.characters[this.index];
-            return char.rewardPoints ? 60 / (char.rewardPoints * 5) : 0;
-        },
         hasCharacters() {
             return this.characters.length >= 2;
         }
@@ -77,29 +65,29 @@ const app = new Vue({
             this.updateAppearance();
         },
         goBack() {
-            this.index -= 1;
-            if (this.index <= -1) {
-                this.index = this.characters.length - 1;
+            this.characterIndex -= 1;
+            if (this.characterIndex <= -1) {
+                this.characterIndex = this.characters.length - 1;
             }
 
             this.updateAppearance();
         },
         goNext() {
-            this.index += 1;
-            if (this.index >= this.characters.length) {
-                this.index = 0;
+            this.characterIndex += 1;
+            if (this.characterIndex >= this.characters.length) {
+                this.characterIndex = 0;
             }
 
             this.updateAppearance();
         },
         updateAppearance() {
             if ('alt' in window) {
-                alt.emit('characters:Update', this.characters[this.index].appearance);
+                alt.emit('characters:Update', this.characters[this.characterIndex].appearance);
             }
         },
         selectCharacter() {
             if ('alt' in window) {
-                alt.emit('characters:Select', this.characters[this.index]._id);
+                alt.emit('characters:Select', this.characters[this.characterIndex]._id);
             }
         },
         newCharacter() {
@@ -108,10 +96,8 @@ const app = new Vue({
             }
         },
         deleteCharacter() {
-            // Verify with user first.
-
             if ('alt' in window) {
-                alt.emit('characters:Delete', this.characters[this.index]._id);
+                alt.emit('characters:Delete', this.characters[this.characterIndex]._id);
             }
         }
     },
@@ -119,7 +105,8 @@ const app = new Vue({
         if ('alt' in window) {
             alt.on('characters:Set', this.handleSet);
         } else {
-            this.characters = [exampleCharacter, exampleCharacter];
+            this.characters = [exampleCharacter, {...exampleCharacter, ...{appearance: { name: 'Jobi_Jobonai' }}}];
+            console.log(this.characters)
         }
     }
 });

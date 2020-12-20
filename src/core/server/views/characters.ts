@@ -9,6 +9,7 @@ const db: sm.Database = sm.getDatabase();
 
 alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
 alt.onClient(View_Events_Characters.New, handleNewCharacter);
+alt.onClient(View_Events_Characters.Delete, handleDelete);
 
 /**
  * Called when a player needs to go to character select.
@@ -65,6 +66,46 @@ export async function handleSelectCharacter(player: Player, id: string) {
 
     player.emit(View_Events_Characters.Done);
     player.selectCharacter(player.currentCharacters[index]);
+}
+
+/**
+ * Called when a player wants to delete one of their characters.
+ * @param {Player} player
+ */
+async function handleDelete(player: Player, id: string) {
+    if (!player.pendingCharacterSelect) {
+        alt.log(`${player.name} | Attempted to delete a character when not asked to delete one.`);
+        return;
+    }
+
+    const character_uid = id;
+    await db.deleteById(character_uid, 'characters'); // Remove Character Here
+
+    // Refetch Characters
+    const characters: Array<Character> = await db.fetchAllByField<Character>(
+        'account_id',
+        player.account,
+        'characters'
+    );
+
+    player.pendingCharacterSelect = true;
+
+    // No Characters Found
+    if (characters.length <= 0) {
+        handleNewCharacter(player);
+        return;
+    }
+
+    // Fixes all character _id to string format.
+    for (let i = 0; i < characters.length; i++) {
+        characters[i]._id = characters[i]._id.toString();
+    }
+
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
+
+    player.currentCharacters = characters;
+    player.safeSetPosition(pos.x, pos.y, pos.z);
+    player.emit(View_Events_Characters.Show, characters);
 }
 
 /**
