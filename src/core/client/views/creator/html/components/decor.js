@@ -5,8 +5,7 @@ Vue.component('tab-decor', {
             this.data[parameter] = value;
             this.$root.$emit('updateCharacter');
         },
-        handleChange(e, parameter, index) {
-            const value = parseFloat(e.target.value);
+        handleChange(value, parameter, index) {
             this.data.colorOverlays[index][parameter] = value;
             this.$root.$emit('updateCharacter');
         },
@@ -37,7 +36,7 @@ Vue.component('tab-decor', {
         }
     },
     template: `
-        <v-container class="containerHelper" v-if="data.opacityOverlays[0]">
+        <v-container class="containerHelper" v-if="data.colorOverlays[0]">
             <div v-for="(name, i) in colorOverlays" :key="i" class="d-flex flex-column mb-5">
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
                     {{ colorOverlays[i].label }}
@@ -57,7 +56,7 @@ Vue.component('tab-decor', {
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ colorOverlays[i].label }} Opacity ({{ parseFloat(data.colorOverlays[i].opacity).toFixed(1) }})
                 </p>
-                <input class="flex-grow-1 mb-5" type="range" :min="0" :max="1" v-model.number="colorOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
+                <v-slider class="flex-grow-1 mr-1" type="range" :min="0" :max="1" v-model.number="data.colorOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)"></v-slider>
                 <!-- Color 1 -->
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ colorOverlays[i].label }} Primary Color
