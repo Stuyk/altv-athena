@@ -6,6 +6,14 @@
 
 This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. This features type safety through TypeScript and a solid foundation for what I consider the core of roleplay.
 
+# Project Features
+
+- Typescript
+- Scaleable Folder Structure
+- Character Editor
+- Character Selection
+- Discord oAuth2 Authentication
+
 # Project Setup
 
 Project setup will only be available through Stuyk when he is ready to let the gamemode recieve basic user testing.
