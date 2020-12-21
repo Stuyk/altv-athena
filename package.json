@@ -1,12 +1,14 @@
 {
     "name": "altv-athena",
     "version": "0.0.0",
-    "description": "An Roleplay project for alt:V.",
+    "description": "A Roleplay project for alt:V.",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles src/**/* --exclude=**/*.ts --up 1 ./resources",
         "clean": "rimraf resources",
-        "update": "altv-pkg d release"
+        "update": "altv-pkg d release",
+        "windows": "npm run build && altv-server.exe",
+        "linux": "npm run build && start.sh"
     },
     "author": "stuyk",
     "license": "ISC",
@@ -23,12 +25,11 @@
         "@types/sjcl": "^1.0.29",
         "altv-pkg": "latest",
         "copyfiles": "^2.3.0",
-        "fkill": "^7.0.1",
         "gulp": "^4.0.2",
         "gulp-using": "^0.1.1",
         "rimraf": "^3.0.2",
         "typescript": "^4.0.2",
-        "yargs-parser": ">=13.1.2"
+        "yargs-parser": "^5.0.0"
     },
     "type": "module",
     "dependencies": {

@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Character Editor by Stuyk</title>
+        <title>Character Selection by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
         <link rel="stylesheet/less" type="text/css" href="./style.less" />
+        <link rel="stylesheet" type="text/css" href="../../fontawesome/css/all.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
-
     <body>
         <div id="app">
-            <div class="editor" v-if="show">
-                <div class="navigation">
-                    <button @click="goBack" :class="isInactiveBack">Back</button>
-
-                    <template v-if="isInactive">
-                        <button :class="isInactiveNext">Next</button>
-                    </template>
-                    <template v-else>
-                        <button @click="goNext" :class="isInactiveNext">Next</button>
-                    </template>
-                </div>
-                <component
-                    v-bind:is="getTabComponent"
-                    v-bind:data="data"
-                    v-bind:nodiscard="noDiscard"
-                    v-bind:noname="noName"
-                    v-bind:currentname="data.name"
-                ></component>
-            </div>
+            <v-app>
+                <v-container class="panel fill-height">
+                    <v-sheet class="editor d-flex flex-column elevation-5 pa-4 rounded-lg" min-width="350px"  min-height="75vh" max-height="75vh" max-width="400px" rounded block>
+                        <div class="d-flex mb-3 flex-row">
+                            <p class="text-sm-left font-weight-bold mb-0 teal--text text--accent-3 subtitle-2 flex-grow-1" block>
+                                <v-icon x-small class="mr-2 teal--text text--accent-3">fa-user</v-icon>
+                                {{ navOptions[selection] }}
+                            </p>
+                            <v-btn @click="goBack" small :disabled="isInactiveBack" outlined>
+                                <v-icon x-small class="teal--text text--accent-1">fa-arrow-left</v-icon>
+                            </v-btn>
+                            <v-btn @click="goNext" class="ml-2" small :disabled="isInactiveNext" outlined>
+                                <v-icon x-small class="teal--text text--accent-1">fa-arrow-right</v-icon>
+                            </v-btn>
+                        </div>
+                        <v-divider class="mb-2"></v-divider>
+                        <component
+                            v-bind:is="getTabComponent"
+                            v-bind:data="data"
+                            v-bind:nodiscard="noDiscard"
+                            v-bind:noname="noName"
+                            v-bind:currentname="data.name"
+                            v-bind:infodata="infoData"
+                            >
+                        </component>
+                    </v-sheet>
+                </v-container>
+            </v-app>
         </div>
-        <script src="../../vue.min.js"></script>
-        <script src="../../less.min.js"></script>
+        <script src="../../js/vue.min.js"></script>
+        <script src="../../js/vuetify.js"></script>
+        <script src="../../js/less.min.js"></script>
         <script src="./utility/hairInfo.js"></script>
         <script src="./utility/hairOverlays.js"></script>
         <script src="./utility/structure.js"></script>
@@ -38,7 +49,7 @@
         <script src="./utility/overlays.js"></script>
         <script src="./utility/presets.js"></script>
         <script src="./components/done.js" type="text/javascript"></script>
-        <script src="./components/name.js" type="text/javascript"></script>
+        <script src="./components/info.js" type="text/javascript"></script>
         <script src="./components/overlays.js" type="text/javascript"></script>
         <script src="./components/decor.js" type="text/javascript"></script>
         <script src="./components/hair.js" type="text/javascript"></script>

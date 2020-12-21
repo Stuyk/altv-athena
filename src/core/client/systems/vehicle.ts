@@ -5,6 +5,9 @@ import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { DoorData } from '../interfaces/Vehicle';
 import { drawText3D } from '../utility/text';
 
+const TOGGLE_LOCK_MESSAGE = `X - Toggle Lock`;
+const TOGGLE_ENTER_MESSAGE = `F - Enter`;
+
 const maxDistance = 5;
 let nextVehicleCheck: number = Date.now();
 let timeBetweenControls: number = Date.now();
@@ -60,13 +63,13 @@ function handleInterval() {
     // Check if the vehicle is locked *server-side*
     const locked: boolean = closestVehicle.getStreamSyncedMeta('locked');
     if (locked) {
-        drawText3D(`~w~[~p~X~w~] Toggle Lock`, closestVehicle.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+        drawText3D(TOGGLE_LOCK_MESSAGE, closestVehicle.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
         return;
     }
 
     // Get the closest Door.
     const closestDoor: DoorData = closestVehicle.getClosestDoor(alt.Player.local.pos);
-    drawText3D(`~w~[~p~F~w~] Enter`, closestDoor.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+    drawText3D(TOGGLE_ENTER_MESSAGE, closestDoor.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
 
     if (!native.isDisabledControlJustReleased(0, 23) || Date.now() < timeBetweenControls) {
         return;

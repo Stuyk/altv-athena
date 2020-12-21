@@ -7,6 +7,7 @@ import { Appearance } from '../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../shared/enums/views';
 import { Events_Meta } from '../../shared/enums/meta';
 import { Events_Misc } from '../../shared/enums/events';
+import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 
 const db: Database = getDatabase();
 
@@ -55,7 +56,7 @@ declare module 'alt-server' {
          * @param  {Appearance} appearance
          * @returns void
          */
-        createNewCharacter(appearance: Appearance): void;
+        createNewCharacter(appearance: Appearance, info: CharacterInfo): void;
 
         /**
          * Add currency from this player based on currency type and amount.
@@ -160,9 +161,10 @@ declare module 'alt-server' {
     }
 }
 
-alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<Appearance>) {
+alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<Appearance>, infoData: Partial<CharacterInfo>) {
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
+    newDocument.info = infoData;
     newDocument.account_id = this.account;
 
     const document = await db.insertData(newDocument, 'characters', true);

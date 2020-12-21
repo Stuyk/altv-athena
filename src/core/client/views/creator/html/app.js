@@ -3,13 +3,14 @@ Vue.prototype.window = window;
 
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify({ theme: {dark: true }}),
     data() {
         return {
             show: false,
             selection: 0,
             data: {
                 name: '',
-                sex: 0,
+                sex: 1,
                 faceFather: 33,
                 faceMother: 45,
                 skinFather: 45,
@@ -22,7 +23,7 @@ const app = new Vue({
                 hairColor2: 2,
                 hairOverlay: '',
                 facialHair: 29,
-                facialHairColor1: 62,
+                facialHairColor1: 0,
                 facialHairOpacity: 0,
                 eyebrows: 0,
                 eyebrowsOpacity: 1,
@@ -31,10 +32,14 @@ const app = new Vue({
                 opacityOverlays: [],
                 colorOverlays: []
             },
-            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Name', 'Done'],
+            infoData: {
+                age: 18,
+                gender: 'none',
+            },
+            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
-            validName: false
+            validInfoData: false
         };
     },
     computed: {
@@ -43,7 +48,7 @@ const app = new Vue({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validName) {
+            if (this.selection === 5 && !this.noName && !this.validInfoData) {
                 return true;
             }
 
@@ -51,21 +56,21 @@ const app = new Vue({
         },
         isInactiveNext() {
             if (this.selection >= this.navOptions.length - 1) {
-                return { inactive: true };
+                return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validName) {
-                return { inactive: true };
+            if (this.selection === 5 && !this.noName && !this.validInfoData) {
+                return true;
             }
 
-            return { inactive: false };
+            return false;
         },
         isInactiveBack() {
             if (this.selection <= 0) {
-                return { inactive: true };
+                return true;
             }
 
-            return { inactive: false };
+            return false;
         },
         getTabComponent: function () {
             return `tab-${this.navOptions[this.selection].toLowerCase()}`;
@@ -128,15 +133,14 @@ const app = new Vue({
         resetSelection() {
             this.selection = 0;
         },
-        updateName(name, isValid) {
-            this.data.name = name;
-            this.validName = isValid;
+        isVerified(isValid) {
+            this.validInfoData = isValid; 
         }
     },
     mounted() {
         this.$root.$on('updateCharacter', this.updateCharacter);
         this.$root.$on('resetSelection', this.resetSelection);
-        this.$root.$on('updateName', this.updateName);
+        this.$root.$on('isVerified', this.isVerified);
 
         opacityOverlays.forEach((overlay) => {
             const overlayData = { ...overlay };

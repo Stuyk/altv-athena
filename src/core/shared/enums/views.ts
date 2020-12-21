@@ -7,12 +7,14 @@ export enum View_Events_Creator {
     Done = 'creator:Done',
     Close = 'creator:Close',
     Show = 'creator:Show',
-    Sync = 'creator:Sync'
+    Sync = 'creator:Sync',
+    AwaitModel = 'creator:AwaitModel'
 }
 
 export enum View_Events_Characters {
     Select = 'characters:Select',
     New = 'characters:New',
     Show = 'characters:Show',
-    Done = 'characters:Done'
+    Done = 'characters:Done',
+    Delete = 'characters:Delete'
 }
