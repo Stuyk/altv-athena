@@ -24,6 +24,8 @@ Project setup will only be available through Stuyk when he is ready to let the g
 
 [⌨️ Learn how to script for alt:V](https://stuyk.github.io/altv-javascript-guide/)
 
+[Join Athena Discord](https://discord.gg/pZvbJmKN8Y)
+
 ⭐ This repository if you found it useful!
 
 # Running the Project
