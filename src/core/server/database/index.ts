@@ -39,11 +39,15 @@ async function handleOnReadyEvent() {
         throw new Error(`You did not specify a load order. 0 elements in athena/configLoadOrder.ts`);
     }
 
-    if (sha256(LOAD_ORDER[0]) !== '03c5d91d5c1a968fbed8b77b142c4dbb9b397eb97fa64cafaa651aa2ad15eeee') {
+    if (sha256(LOAD_ORDER[0]) !== '653116fbecbfdf6c94eca33f68403f864f25bdc61b929631da110884962d6817') {
         throw new Error(`Line 0 in load order is not the correct file name. athena/configLoadOrder.ts`);
     }
 
-    if (sha256(LOAD_ORDER[1]) !== '5e7cf7c1d7723a705e91d48e1e44aacfeb18942d37377006f575f7538cd58c3b') {
+    if (sha256(LOAD_ORDER[1]) !== '6e442997d879b0ec10500edd458c8daea733e0093702806993abb73be3e40729') {
+        throw new Error(`Line 1 in load order is not the correct file name. athena/configLoadOrder.ts`);
+    }
+
+    if (sha256(LOAD_ORDER[2]) !== '5e7cf7c1d7723a705e91d48e1e44aacfeb18942d37377006f575f7538cd58c3b') {
         throw new Error(`Line 1 in load order is not the correct file name. athena/configLoadOrder.ts`);
     }
 

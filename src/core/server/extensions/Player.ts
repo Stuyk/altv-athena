@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Character, CharacterDefaults } from '../../shared/interfaces/Character';
-import { DiscordUser } from './DiscordUser';
+import { DiscordUser } from '../interface/DiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
