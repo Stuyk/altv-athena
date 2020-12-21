@@ -171,17 +171,13 @@ Vue.component('tab-sex', {
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
                     Face Mix ({{ parseFloat(data.faceMix).toFixed(1) }})
                 </p>
-                <div class="d-flex flex-row flex-grow-1">
-                    <input class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
-                </div>
+                <v-slider class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
             </div>
             <div class="d-flex flex-column mt-3">
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
                     Skin Mix ({{ parseFloat(data.skinMix).toFixed(1) }})
                 </p>
-                <div class="d-flex flex-row flex-grow-1">
-                    <input class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.skinMix"/>
-                </div>
+                <v-slider class="flex-grow-1 mb-0" type="range" min="0" max="1" step="0.1" v-model.number="data.skinMix"/>
             </div>
             <!-- Eyes -->
             <div class="d-flex flex-column mt-3">

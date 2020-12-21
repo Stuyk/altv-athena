@@ -56,8 +56,8 @@ function handleClose() {
     view.close();
 }
 
-function handleDone(newData) {
-    alt.emitServer(View_Events_Creator.Done, newData);
+function handleDone(newData, infoData) {
+    alt.emitServer(View_Events_Creator.Done, newData, infoData);
     handleClose();
 }
 

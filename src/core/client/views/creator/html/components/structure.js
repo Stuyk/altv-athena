@@ -18,7 +18,7 @@ Vue.component('tab-structure', {
                     {{ structureLabels[i] }} ({{ parseFloat(data.structure[i].toFixed(1) )}})
                 </p>
                 <div class="d-flex flex-row flex-grow-1">
-                    <input class="flex-grow-1" type="range" min="-1" max="1" step="0.1" v-model.number="data.structure[i]"/>
+                    <v-slider class="flex-grow-1" type="range" min="-1" max="1" step="0.1" v-model.number="data.structure[i]"/>
                 </div>
             </div>
         </v-container>

@@ -3,11 +3,14 @@ Vue.prototype.window = window;
 
 const exampleCharacter = {
     _id: '5f7117a3fd8d0a66b02eb998',
-    age: 0,
     pos: { x: -734.5714111328125, y: -264.4747314453125, z: 37.03076171875 },
     cash: 25,
     bank: 50,
     rewardPoints: 0,
+    info: {
+        age: 18,
+        gender: 'male'
+    },
     appearance: {
         colorOverlays: [0, 0, 0],
         eyebrows: 0,
@@ -45,7 +48,8 @@ const app = new Vue({
             statNames: [
                 /* Name of the stat, variable name inside character object */
                 { varName: 'Name', varRef: 'name', useAppearance: true },
-                { varName: 'Age', varRef: 'age', suffix: ' Years Old' },
+                { varName: 'Age', varRef: 'age', suffix: ' Years Old', useInfo: true },
+                { varName: 'Gender', varRef: 'gender', useInfo: true },
                 { varName: 'Reward Points', varRef: 'rewardPoints', suffix: ' Hours' },
                 { varName: 'Cash', varRef: 'cash', prefix: '$' },
                 { varName: 'Bank', varRef: 'bank', prefix: '$' }

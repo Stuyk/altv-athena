@@ -7,7 +7,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 4,
+            selection: 0,
             data: {
                 name: '',
                 sex: 1,
@@ -32,10 +32,14 @@ const app = new Vue({
                 opacityOverlays: [],
                 colorOverlays: []
             },
-            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Name', 'Done'],
+            infoData: {
+                age: 18,
+                gender: 'none',
+            },
+            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
-            validName: false
+            validInfoData: false
         };
     },
     computed: {
@@ -44,7 +48,7 @@ const app = new Vue({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validName) {
+            if (this.selection === 5 && !this.noName && !this.validInfoData) {
                 return true;
             }
 
@@ -55,7 +59,7 @@ const app = new Vue({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validName) {
+            if (this.selection === 5 && !this.noName && !this.validInfoData) {
                 return true;
             }
 
@@ -129,15 +133,14 @@ const app = new Vue({
         resetSelection() {
             this.selection = 0;
         },
-        updateName(name, isValid) {
-            this.data.name = name;
-            this.validName = isValid;
+        isVerified(isValid) {
+            this.validInfoData = isValid; 
         }
     },
     mounted() {
         this.$root.$on('updateCharacter', this.updateCharacter);
         this.$root.$on('resetSelection', this.resetSelection);
-        this.$root.$on('updateName', this.updateName);
+        this.$root.$on('isVerified', this.isVerified);
 
         opacityOverlays.forEach((overlay) => {
             const overlayData = { ...overlay };

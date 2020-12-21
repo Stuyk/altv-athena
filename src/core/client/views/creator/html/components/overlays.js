@@ -1,8 +1,7 @@
 Vue.component('tab-overlays', {
     props: ['data'],
     methods: {
-        handleChange(e, parameter, index) {
-            const value = parseFloat(e.target.value);
+        handleChange(value, parameter, index) {
             this.data.opacityOverlays[index][parameter] = value;
             this.$root.$emit('updateCharacter');
         },
@@ -53,7 +52,7 @@ Vue.component('tab-overlays', {
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ opacityOverlays[i].label }} Opacity ({{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }})
                 </p>
-                <input class="flex-grow-1 mb-5" type="range" :min="0" :max="1" v-model.number="opacityOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
+                <v-slider class="flex-grow-1 mb-5" type="range" :min="0" :max="1" v-model.number="opacityOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
                 <v-divider></v-divider>
             </div>
         </v-container>
