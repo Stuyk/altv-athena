@@ -23,10 +23,10 @@
                                 <v-list-item-title class="text-left mr-2">
                                     {{ stat.varName }}
                                 </v-list-item-title>
-                                <v-list-item-subtitle class="text-right" v-if="stat.useAppearance">
+                                <v-list-item-subtitle class="text-right" v-if="stat.useAppearance && characters[characterIndex].appearance">
                                     {{ stat.prefix }}{{ characters[characterIndex].appearance[stat.varRef] }}{{ stat.suffix }}
                                 </v-list-item-subtitle>
-                                <v-list-item-subtitle class="text-right" v-else-if="stat.useInfo">
+                                <v-list-item-subtitle class="text-right" v-else-if="stat.useInfo && characters[characterIndex].info">
                                     {{ stat.prefix }}{{ characters[characterIndex].info[stat.varRef] }}{{ stat.suffix }}
                                 </v-list-item-subtitle>
                                 <v-list-item-subtitle class="text-right" v-else>
