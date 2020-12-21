@@ -25,7 +25,7 @@ export class View extends alt.WebView {
 
         // Wait for View to close.
         if (View._instance.isClosing) {
-            await new Promise((resolve) => {
+            await new Promise((resolve: Function) => {
                 const tmpInterval = alt.setInterval(() => {
                     if (View._instance.isClosing) {
                         return;
