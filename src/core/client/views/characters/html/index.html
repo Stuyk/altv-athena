@@ -4,7 +4,7 @@
         <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
         <link rel="stylesheet/less" type="text/css" href="./style.less" />
-        <link rel="stylesheet" type="text/css" href="../../fontawesome/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
@@ -39,7 +39,7 @@
                             <v-tooltip bottom nudge-bottom="56px">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn @click="goBack" class="full flex-grow-1 elevation-0" color="grey lighten-2" outlined text v-bind="attrs" v-on="on" :disabled="!hasCharacters">
-                                        <v-icon small>fa-chevron-left</v-icon>
+                                        <v-icon small>icon-chevron-left</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Previous</span>
@@ -47,7 +47,7 @@
                             <v-tooltip bottom nudge-bottom="56px">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn @click="goNext" class="full flex-grow-1 ml-3 elevation-0" color="grey lighten-2" outlined text v-bind="attrs" v-on="on" :disabled="!hasCharacters">
-                                        <v-icon small>fa-chevron-right</v-icon>
+                                        <v-icon small>icon-chevron-right</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Next</span>
@@ -59,7 +59,7 @@
                             <v-tooltip bottom nudge-bottom="8px" color="blue lighten-2">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn @click="newCharacter" class="full flex-grow-1 mt-3 elevation-0" color="blue ligten-2" outlined text v-bind="attrs" v-on="on">
-                                        <v-icon small>fa-plus</v-icon>
+                                        <v-icon small>icon-plus</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Add New Character</span>
@@ -70,7 +70,7 @@
                                     <v-tooltip bottom nudge-bottom="8px" color="error lighten-2">
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-btn @click="deleteDialog = !deleteDialog" class="full flex-grow-1 mt-3 ml-3 elevation-0" :disabled="characters.length <= 1 ? true : false" color="red lighten-1" outlined text v-bind="attrs" v-on="on">
-                                                <v-icon small>fa-times</v-icon>
+                                                <v-icon small>icon-times</v-icon>
                                             </v-btn>
                                         </template>
                                         <span>Delete Character</span>
@@ -98,7 +98,7 @@
                             <v-tooltip bottom nudge-bottom="8px" color="light-green">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn @click="selectCharacter" class="full flex-grow-1 mt-3 ml-3 elevation-0" color="light-green" outlined text v-bind="attrs" v-on="on">
-                                        <v-icon small>fa-check</v-icon>
+                                        <v-icon small>icon-check</v-icon>
                                     </v-btn>
                                 </template>
                                 <span>Select Character</span>

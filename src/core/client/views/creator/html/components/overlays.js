@@ -52,8 +52,7 @@ Vue.component('tab-overlays', {
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ opacityOverlays[i].label }} Opacity ({{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }})
                 </p>
-                <v-slider class="flex-grow-1 mb-5" type="range" :min="0" :max="1" v-model.number="opacityOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
-                <v-divider></v-divider>
+                <v-slider thumb-label ticks="always" tick-size="4" class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="opacityOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
             </div>
         </v-container>
     `

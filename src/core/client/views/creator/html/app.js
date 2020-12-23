@@ -3,7 +3,12 @@ Vue.prototype.window = window;
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify({ theme: {dark: true }}),
+    vuetify: new Vuetify({ 
+        theme: { dark: true },
+        icons: {
+            iconfont: 'fa',
+        },
+    }),
     data() {
         return {
             show: false,
@@ -37,9 +42,13 @@ const app = new Vue({
                 gender: 'none',
             },
             navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
+            navOptionsIcons: [{ icon: 'icon-orientation' }, { icon: 'icon-cogs' }, { icon: 'icon-hair' }, { icon: 'icon-details1' }, { icon: 'icon-makeup' }, { icon: 'icon-id-card' }, { icon: 'icon-check' }],
+            navOptionsTitles: ['Appearance', 'Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
-            validInfoData: false
+            validInfoData: false,
+            drawer: true,
+            mini: true
         };
     },
     computed: {
@@ -99,19 +108,8 @@ const app = new Vue({
             this.data = oldData;
             this.updateCharacter();
         },
-        goNext() {
-            if (this.selection >= this.navOptions.length - 1) {
-                return;
-            }
-
-            this.selection += 1;
-        },
-        goBack() {
-            if (this.selection <= 0) {
-                return;
-            }
-
-            this.selection -= 1;
+        goNavigate(value) {
+            this.selection = value;
         },
         updateCharacter() {
             const isFemale = this.data.sex === 0;

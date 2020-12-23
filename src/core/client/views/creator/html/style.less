@@ -20,24 +20,32 @@ body {
     align-items: center;
     align-content: center;
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
+    position: relative;
+}
+
+#app {
+    opacity: 1;
+}
+
+.special-box {
+    min-width: 400px;
+    height: 100vh;
 }
 
 .containerHelper {
-    max-height: 700px;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
     width: 8px;
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.85);
     box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(75, 75, 75, 1);
+    background: rgba(100, 100, 100, 1);
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
 }
 

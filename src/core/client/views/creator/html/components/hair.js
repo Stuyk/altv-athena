@@ -152,7 +152,7 @@ Vue.component('tab-hair', {
                         Facial Hair Opacity ({{ data.facialHairOpacity }})
                     </p>
                     <div class="d-flex flex-row flex-grow-1">
-                        <v-slider class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="data.facialHairOpacity" :step="0.1" @input="e => handleChange(e, 'facialHairOpacity')" />
+                        <v-slider thumb-label ticks="always" tick-size="4" class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="data.facialHairOpacity" :step="0.1" @input="e => handleChange(e, 'facialHairOpacity')" />
                     </div>
                 </div>
                 <div class="d-flex flex-column">

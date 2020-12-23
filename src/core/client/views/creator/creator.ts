@@ -83,29 +83,6 @@ function handleReadyDone() {
     view.emit('creator:SetData', oldCharacterData);
 }
 
-function doesModelMatch(model) {
-    return new Promise((resolve: Function) => {
-        let attempts = 0;
-        let interval = alt.setInterval(() => {
-            attempts++;
-
-            if (attempts > 5000) {
-                alt.clearInterval(interval);
-                resolve();
-                return;
-            }
-
-            const pModel = native.getEntityModel(alt.Player.local.scriptID);
-            if (pModel !== model) {
-                return;
-            }
-
-            resolve();
-            alt.clearInterval(interval);
-        }, 25);
-    });
-}
-
 export async function handleSync(data: Partial<Appearance>) {
     tempData = data;
 

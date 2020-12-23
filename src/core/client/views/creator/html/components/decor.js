@@ -56,7 +56,7 @@ Vue.component('tab-decor', {
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ colorOverlays[i].label }} Opacity ({{ parseFloat(data.colorOverlays[i].opacity).toFixed(1) }})
                 </p>
-                <v-slider class="flex-grow-1 mr-1" type="range" :min="0" :max="1" v-model.number="data.colorOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)"></v-slider>
+                <v-slider thumb-label ticks="always" tick-size="4"  class="flex-grow-1 mr-1" type="range" :min="0" :max="1" v-model.number="data.colorOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
                 <!-- Color 1 -->
                 <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
                     {{ colorOverlays[i].label }} Primary Color
