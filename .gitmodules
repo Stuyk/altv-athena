@@ -1,0 +1,3 @@
+[submodule "src/altv-ares"]
+	path = src/altv-ares
+	url = https://github.com/Stuyk/altv-ares

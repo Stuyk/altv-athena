@@ -10,9 +10,9 @@ import './events/disconnect';
 import './events/keyup';
 
 // Systems
+import './systems/login'
 import './systems/vehicle';
 
 // Views
-import './views/login/login';
 import './views/creator/creator';
 import './views/characters/characters';

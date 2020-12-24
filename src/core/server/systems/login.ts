@@ -3,7 +3,7 @@ import { DiscordUser } from '../interface/DiscordUser';
 import * as sm from 'simplymongo';
 import { Player } from 'alt-server';
 import { Account } from '../interface/Account';
-import { goToCharacterSelect } from './characters';
+import { goToCharacterSelect } from '../views/characters';
 import { View_Events_Discord } from '../../shared/enums/views';
 
 /**
@@ -24,6 +24,7 @@ const db: sm.Database = sm.getDatabase();
 const loggedInUsers: Array<DiscordUser['id']> = [];
 
 alt.on('playerDisconnect', handleDisconnect);
+alt.on('Discord:Login', handleLoginRouting);
 
 /**
  * Called when the express server authenticates a user.
@@ -34,6 +35,8 @@ export async function handleLoginRouting(player: Player, data: DiscordUser) {
     if (!player.pendingLogin) {
         return;
     }
+
+    player.emit('Login:FadeScreenIn');
 
     delete player.pendingLogin;
     delete player.discordToken;

@@ -1,5 +1,4 @@
 import sjcl from 'sjcl';
-import encrypter from 'eos-encrypt';
 import ecc from 'elliptic'
 
 const elliptic = new ecc.ec('curve25519');

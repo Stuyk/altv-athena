@@ -47,10 +47,6 @@ async function handleOnReadyEvent() {
         throw new Error(`Line 1 in load order is not the correct file name. athena/configLoadOrder.ts`);
     }
 
-    if (sha256(LOAD_ORDER[2]) !== '5e7cf7c1d7723a705e91d48e1e44aacfeb18942d37377006f575f7538cd58c3b') {
-        throw new Error(`Line 1 in load order is not the correct file name. athena/configLoadOrder.ts`);
-    }
-
     for (let i = 0; i < LOAD_ORDER.length; i++) {
         const filePath: string = path.join('..', LOAD_ORDER[i]);
 
