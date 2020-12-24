@@ -1,4 +1,12 @@
 import sjcl from 'sjcl';
+import encrypter from 'eos-encrypt';
+import ecc from 'elliptic'
+
+const elliptic = new ecc.ec('curve25519');
+
+let privateKey: string;
+let publicKey: string;
+let azurePubKey: string;
 
 /**
  * Hash a plain text password with pbkdf2 hash and salt.
@@ -46,3 +54,81 @@ export function sha256(data: string): string {
 export function sha256Random(data: string): string {
     return sha256(`${data} + ${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}`);
 }
+
+/**
+ * Generate and private and public key.
+ * Stores the data in memory for additional usage.
+ * @export
+ * @return {*}  {string}
+ */
+export function getPublicKey(): string {
+    if (!privateKey) {
+        privateKey = elliptic.genKeyPair().getPrivate().toString(16);
+    }
+
+    if (!publicKey) {
+        publicKey = elliptic.keyFromPrivate(privateKey, 'hex').getPublic().encode('hex', true);
+    }
+
+    return publicKey;
+}
+
+/**
+ * Gets our Private Key.
+ * @return {*}  {string}
+ */
+export function getPrivateKey(): string {
+    if (!privateKey) {
+        privateKey = elliptic.genKeyPair().getPrivate().toString(16);
+    }
+
+    return privateKey;
+}
+
+export function encryptData(jsonData: string): sjcl.SjclCipherEncrypted | null {
+    const sharedSecret = getSharedSecret();
+
+    try {
+        const partialEncryption = sjcl.encrypt(sharedSecret, jsonData, { mode: 'gcm' });
+        const safeEncryption = partialEncryption.replace(/\+/g, '_')
+        return safeEncryption;
+    } catch (err) {
+        return null;
+    }
+}
+
+export function decryptData(jsonData: string): string | null {
+    const sharedSecret = getSharedSecret();
+
+    try {
+        const cleanedEncryption = jsonData.replace(/\_/g, '+');
+        return sjcl.decrypt(sharedSecret, cleanedEncryption, { mode: 'gcm' });
+    } catch (err) {
+        return null;
+    }
+}
+
+export function getSharedSecret(): string | boolean {
+    if (!azurePubKey) {
+        throw new Error(`azurePubKey was not set.`);
+    }
+
+    try {
+        const ecPrivateKey: ecc.KeyPair = elliptic.keyFromPrivate(getPrivateKey(), 'hex');
+        const ecPublicKey: ecc.KeyPair = elliptic.keyFromPublic(azurePubKey, 'hex');
+        const sharedKey = ecPrivateKey.derive(ecPublicKey.getPublic()).toString(16);
+        return sharedKey;
+    } catch (err) {
+      console.error(err);
+      return false
+    }
+}
+
+export function setAzurePublicKey(azurePublicKey: string) {
+    azurePubKey = azurePublicKey;
+}
+
+export function getAzurePublicKey() {
+    return azurePubKey;
+}
+  
