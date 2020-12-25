@@ -35,6 +35,7 @@
         "axios": "^0.20.0",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
         "elliptic": "^6.5.3",
         "express": "^4.17.1",
         "public-ip": "^4.0.3",

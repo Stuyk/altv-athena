@@ -1,11 +1,14 @@
 import sjcl from 'sjcl';
-import ecc from 'elliptic'
+import ecc from 'elliptic';
+import axios from 'axios';
 
 const elliptic = new ecc.ec('curve25519');
 
+let azureEndpoint: string;
 let privateKey: string;
 let publicKey: string;
 let azurePubKey: string;
+let sharedSecret: string;
 
 /**
  * Hash a plain text password with pbkdf2 hash and salt.
@@ -84,20 +87,20 @@ export function getPrivateKey(): string {
     return privateKey;
 }
 
-export function encryptData(jsonData: string): sjcl.SjclCipherEncrypted | null {
-    const sharedSecret = getSharedSecret();
+export async function encryptData(jsonData: string): Promise<any> {
+    const sharedSecret = await getSharedSecret();
 
     try {
         const partialEncryption = sjcl.encrypt(sharedSecret, jsonData, { mode: 'gcm' });
-        const safeEncryption = partialEncryption.replace(/\+/g, '_')
+        const safeEncryption = partialEncryption.replace(/\+/g, '_');
         return safeEncryption;
     } catch (err) {
         return null;
     }
 }
 
-export function decryptData(jsonData: string): string | null {
-    const sharedSecret = getSharedSecret();
+export async function decryptData(jsonData: string): Promise<any> {
+    const sharedSecret = await getSharedSecret();
 
     try {
         const cleanedEncryption = jsonData.replace(/\_/g, '+');
@@ -107,27 +110,53 @@ export function decryptData(jsonData: string): string | null {
     }
 }
 
-export function getSharedSecret(): string | boolean {
+export async function getSharedSecret(): Promise<string | boolean> {
+    if (sharedSecret) {
+        return sharedSecret;
+    }
+
     if (!azurePubKey) {
-        throw new Error(`azurePubKey was not set.`);
+        await getAzurePublicKey();
     }
 
     try {
         const ecPrivateKey: ecc.KeyPair = elliptic.keyFromPrivate(getPrivateKey(), 'hex');
         const ecPublicKey: ecc.KeyPair = elliptic.keyFromPublic(azurePubKey, 'hex');
         const sharedKey = ecPrivateKey.derive(ecPublicKey.getPublic()).toString(16);
-        return sharedKey;
+        sharedSecret = sharedKey;
+        return sharedSecret;
     } catch (err) {
-      console.error(err);
-      return false
+        console.error(err);
+        return false;
     }
 }
 
-export function setAzurePublicKey(azurePublicKey: string) {
-    azurePubKey = azurePublicKey;
+export function setAzureEndpoint(endpoint: string) {
+    azureEndpoint = endpoint;
 }
 
-export function getAzurePublicKey() {
-    return azurePubKey;
+export function getAzureEndpoint(): string {
+    if (!azureEndpoint) {
+        throw new Error(`Failed to load Azure Endpoint.`);
+    }
+
+    return azureEndpoint;
 }
-  
+
+export async function getAzurePublicKey(): Promise<string> {
+    if (azurePubKey) {
+        return azurePubKey;
+    }
+
+    const result = await axios.get(`${azureEndpoint}/v1/get/key`).catch((err) => {
+        return null;
+    });
+
+    if (!result || !result.data || !result.data.key) {
+        return await getAzurePublicKey();
+    }
+
+    azurePubKey = result.data.key;
+
+    return result.data.key;
+}

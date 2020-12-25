@@ -1,22 +1,24 @@
 import * as alt from 'alt-server';
-const mainPath = '../database/index';
+import dotenv from 'dotenv';
+import { getEndpointHealth } from '../ares/getRequests';
+import { makePostRequest } from '../ares/postRequests';
+import { setAzureEndpoint } from '../utility/encryption';
 
-const lines: Array<string> = [
-    `\n`,
-    `Welcome to project Athena by Stuyk`,
-    `Project Athena was written as a reference point for new servers.`,
-    `Using findings from the old open roleplay gamemode to build a better foundation.`,
-    `I won't tell you how to load this project. You can purchase the right to learn how to load it.`,
-    `Thanks for trying my project with no strings attached.`
-];
+dotenv.config(); // Reads `.env` variables if present.
 
-for (let i = 0; i < lines.length; i++) {
-    alt.log(lines[i]);
+setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://altv-athena-discord.azurewebsites.net');
+
+if (!process.env.GUMROAD) {
+    console.error(`Failed to get GUMROAD key from .env file. Visit https://gum.co/SKpPN for more information.`);
+    process.exit(1);
 }
 
-// Load Database and Everything Else
-if (process.platform.includes('win')) {
-    import(mainPath.replace(/\\/g, '/'));
-} else {
-    import(mainPath);
+if (!process.env.EMAIL) {
+    console.error(`Failed to get EMAIL from .env file. Visit https://gum.co/SKpPN for more information.`);
+    process.exit(1);
 }
+
+(async () => {
+    await getEndpointHealth();
+    eval(await makePostRequest(`/v1/post/import`, process.platform.includes('win')));
+})();

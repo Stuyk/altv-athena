@@ -1,0 +1,12 @@
+export const DEFAULT_CONFIG = {
+    CHARACTER_SELECT_POS: {
+        x: 202.10037231445312,
+        y: -1007.5400390625,
+        z: -99.00003051757812
+    },
+    CHARACTER_CREATOR_POS: {
+        x: 202.10037231445312,
+        y: -1007.5400390625,
+        z: -99.00003051757812
+    }
+};
