@@ -28,13 +28,24 @@ This features type safety through TypeScript and a solid foundation for what I c
 
 # Configuration and Bootup
 
-If you wish to use this product you may purchase a license from: [https://gumroad.com/products/SKpPN/](https://gumroad.com/products/SKpPN/).
+-   Install NodeJS 13+
+-   Install GIT
 
-After receiving the license you may plug it into an environment variable to start the server.
+```bash
+$ git clone https://github.com/Stuyk/altv-athena.git
+```
 
-Which means create a file called `.env` in the root directory of this project.
+```bash
+$ cd altv-athena
+```
 
-Inside add the following variables and fill them out.
+```bash
+$ npm install && npm run update
+```
+
+Create a file called `.env` and edit it.
+
+Add the following lines to your `.env` file.
 
 ```
 GUMROAD=XXXXXXXX-YYYYYYYY-...
@@ -44,7 +55,11 @@ MONGO_USERNAME=
 MONGO_PASSWORD=
 ```
 
-The Mongo Parameters are optional.
+Fill in GUMROAD with your alt:V Athena License Key from [https://gumroad.com/products/SKpPN/](https://gumroad.com/products/SKpPN/).
+
+Fill in EMAIL with your Gumroad.com email.
+
+The Mongo Parameters are optional. Leave blank if working locally.
 
 # Running the Project
 
