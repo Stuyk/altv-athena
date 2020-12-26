@@ -47,19 +47,22 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
 
 # Configuration and Bootup
 
--   Install NodeJS 13+
--   Install GIT
+-   [Install NodeJS 13+](https://nodejs.org/en/download/)
+-   [Install GIT](https://git-scm.com/downloads)
+-   [Install MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
+Open a Command Prompt and Run these Commands:
 
 ```bash
-$ git clone https://github.com/Stuyk/altv-athena.git
+git clone https://github.com/Stuyk/altv-athena.git
 ```
 
 ```bash
-$ cd altv-athena
+cd altv-athena
 ```
 
 ```bash
-$ npm install && npm run update
+npm install && npm run update
 ```
 
 Create a file called `.env` and edit it.
