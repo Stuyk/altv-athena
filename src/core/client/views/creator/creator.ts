@@ -18,8 +18,6 @@ let noName = true;
 
 native.requestModel(fModel);
 native.requestModel(mModel);
-alt.loadModel(fModel);
-alt.loadModel(mModel);
 
 alt.onServer(View_Events_Creator.Sync, handleSync);
 alt.onServer(View_Events_Creator.Show, handleView);
@@ -91,7 +89,8 @@ export async function handleSync(data: Partial<Appearance>) {
     native.setPedHeadBlendData(alt.Player.local.scriptID, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
 
     const modelNeeded = data.sex === 0 ? fModel : mModel;
-    if (modelNeeded !== native.getEntityModel(alt.Player.local.scriptID)) { // native.getEntityModel can be replaced with alt.Player.local.model in later updates.
+    if (modelNeeded !== native.getEntityModel(alt.Player.local.scriptID)) {
+        // native.getEntityModel can be replaced with alt.Player.local.model in later updates.
         alt.emitServer(View_Events_Creator.AwaitModel, data.sex);
     } else {
         handleFinishSync();
@@ -123,7 +122,12 @@ async function handleFinishSync() {
     // Overlay Features - NO COLORS
     for (let i = 0; i < tempData.opacityOverlays.length; i++) {
         const overlay = tempData.opacityOverlays[i];
-        native.setPedHeadOverlay(alt.Player.local.scriptID, overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
+        native.setPedHeadOverlay(
+            alt.Player.local.scriptID,
+            overlay.id,
+            overlay.value,
+            parseFloat(overlay.opacity.toString())
+        );
     }
 
     // Hair
@@ -135,7 +139,13 @@ async function handleFinishSync() {
 
     // Facial Hair
     native.setPedHeadOverlay(alt.Player.local.scriptID, 1, tempData.facialHair, tempData.facialHairOpacity);
-    native.setPedHeadOverlayColor(alt.Player.local.scriptID, 1, 1, tempData.facialHairColor1, tempData.facialHairColor1);
+    native.setPedHeadOverlayColor(
+        alt.Player.local.scriptID,
+        1,
+        1,
+        tempData.facialHairColor1,
+        tempData.facialHairColor1
+    );
 
     // Eyebrows
     native.setPedHeadOverlay(alt.Player.local.scriptID, 2, tempData.eyebrows, 1);
@@ -145,7 +155,12 @@ async function handleFinishSync() {
     for (let i = 0; i < tempData.colorOverlays.length; i++) {
         const overlay = tempData.colorOverlays[i];
         const color2 = overlay.color2 ? overlay.color2 : overlay.color1;
-        native.setPedHeadOverlay(alt.Player.local.scriptID, overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
+        native.setPedHeadOverlay(
+            alt.Player.local.scriptID,
+            overlay.id,
+            overlay.value,
+            parseFloat(overlay.opacity.toString())
+        );
         native.setPedHeadOverlayColor(alt.Player.local.scriptID, overlay.id, 1, overlay.color1, color2);
     }
 
