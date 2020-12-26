@@ -12,6 +12,10 @@ alt.on('Discord:Opened', handlePlayerConnect); // End
 async function handlePlayerConnect(player: Player) {
     alt.log(`(${player.id}) ${player.name} has connected to the server.`);
 
+    if (!player) {
+        return;
+    }
+
     const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
 
     player.dimension = player.id;
@@ -21,7 +25,5 @@ async function handlePlayerConnect(player: Player) {
     player.init();
     player.safeSetPosition(pos.x, pos.y, pos.z);
 
-
     player.emit('Login:FadeScreenOut');
 }
-

@@ -175,6 +175,12 @@ I have left some comments in the code block below to help you find where things 
         └───utility
 ```
 
+# Hotkeys
+
+```
+F1 - Print Position, Rotation, and Heading in Console
+```
+
 # Screenshots
 
 ![](https://i.imgur.com/eJnAHWm.png)

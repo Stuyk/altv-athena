@@ -56,7 +56,7 @@ function handleLoad() {
 }
 
 function handleDelete(id) {
-    alt.emitServer(View_Events_Characters.Delete, id)
+    alt.emitServer(View_Events_Characters.Delete, id);
 }
 
 function handleDone() {
