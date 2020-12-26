@@ -161,7 +161,10 @@ declare module 'alt-server' {
     }
 }
 
-alt.Player.prototype.createNewCharacter = async function createNewCharacter(appearanceData: Partial<Appearance>, infoData: Partial<CharacterInfo>) {
+alt.Player.prototype.createNewCharacter = async function createNewCharacter(
+    appearanceData: Partial<Appearance>,
+    infoData: Partial<CharacterInfo>
+) {
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.info = infoData;

@@ -12,7 +12,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 6,
+            selection: 0,
             data: {
                 name: '',
                 sex: 1,

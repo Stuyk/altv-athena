@@ -177,8 +177,6 @@ I have left some comments in the code block below to help you find where things 
 
 # Screenshots
 
-![](https://i.imgur.com/DdT9Bli.png)
+![](https://i.imgur.com/eJnAHWm.png)
 
-![](https://i.imgur.com/HblwUcl.png)
-
-![](https://i.imgur.com/fUZJql1.png)
+![](https://i.imgur.com/4JZhbsW.jpg)
