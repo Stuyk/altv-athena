@@ -3,16 +3,16 @@ Vue.prototype.window = window;
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify({ 
+    vuetify: new Vuetify({
         theme: { dark: true },
         icons: {
-            iconfont: 'fa',
-        },
+            iconfont: 'fa'
+        }
     }),
     data() {
         return {
             show: false,
-            selection: 0,
+            selection: 6,
             data: {
                 name: '',
                 sex: 1,
@@ -39,10 +39,18 @@ const app = new Vue({
             },
             infoData: {
                 age: 18,
-                gender: 'none',
+                gender: 'none'
             },
             navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
-            navOptionsIcons: [{ icon: 'icon-orientation' }, { icon: 'icon-cogs' }, { icon: 'icon-hair' }, { icon: 'icon-details1' }, { icon: 'icon-makeup' }, { icon: 'icon-id-card' }, { icon: 'icon-check' }],
+            navOptionsIcons: [
+                { icon: 'icon-orientation' },
+                { icon: 'icon-cogs' },
+                { icon: 'icon-hair' },
+                { icon: 'icon-details1' },
+                { icon: 'icon-makeup' },
+                { icon: 'icon-id-card' },
+                { icon: 'icon-check' }
+            ],
             navOptionsTitles: ['Appearance', 'Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
@@ -132,7 +140,7 @@ const app = new Vue({
             this.selection = 0;
         },
         isVerified(isValid) {
-            this.validInfoData = isValid; 
+            this.validInfoData = isValid;
         }
     },
     mounted() {

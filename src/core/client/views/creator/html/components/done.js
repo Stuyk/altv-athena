@@ -23,47 +23,48 @@ Vue.component('tab-done', {
         }
     },
     template: `
-        <v-container class="containerHelper">
-            <div class="d-flex flex-column">
-                <p class="text-sm-left flex-grow-1 font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
-                    Does this look correct?
-                </p>
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-content>
-                            Name: {{ data.name }}
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-list-item-content>    
-                            Age: {{ infodata.age }}
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-list-item-content>
-                            Gender: {{ infodata.gender }}
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-list>
-            </div>
-            <v-divider></v-divider>
-            <div class="d-flex flex-row">
-                <v-tooltip bottom nudge-bottom="8px" color="error lighten-2">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn @click="discardCharacter" class="full flex-grow-1 mt-6 elevation-0" color="error lighten-2" outlined text v-bind="attrs" v-on="on">
-                            <v-icon small>fa-times</v-icon>
-                        </v-btn>
-                    </template>
-                    <span>Discard Character</span>
-                </v-tooltip>
-                <v-tooltip bottom nudge-bottom="8px" color="green lighten-2">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn @click="saveCharacter" class="full flex-grow-1 ml-3 mt-6 elevation-0" color="green lighten-2" outlined text v-bind="attrs" v-on="on">
-                            <v-icon small>fa-save</v-icon>
-                        </v-btn>
-                    </template>
-                <span>Save Character</span>
-                </v-tooltip>
+        <v-container class="containerHelper transparent">
+            <div class="d-flex flex-column justify-space-between" block fluid>
+                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3 fill-height" block fluid>
+                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
+                        Does this look correct?
+                    </span>
+                    <v-list class="transparent">
+                        <v-list-item>
+                            <v-list-item-content>
+                                Name: {{ data.name }}
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>    
+                                Age: {{ infodata.age }}
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                Gender: {{ infodata.gender }}
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-card>
+                <div class="d-flex flex-row">
+                    <v-tooltip bottom nudge-bottom="8px" color="error lighten-2">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn @click="discardCharacter" class="error--text flex-grow-1" outlined text v-bind="attrs" v-on="on">
+                                <v-icon small>icon-times</v-icon>
+                            </v-btn>
+                        </template>
+                        <span>Discard Character</span>
+                    </v-tooltip>
+                    <v-tooltip bottom nudge-bottom="8px" color="green lighten-2">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn @click="saveCharacter" class=" ml-3 green--text text--lighten-2 flex-grow-1" outlined text v-bind="attrs" v-on="on">
+                                <v-icon small>icon-save</v-icon>
+                            </v-btn>
+                        </template>
+                    <span>Save Character</span>
+                    </v-tooltip>
+                </div>
             </div>
         </v-container>
     `

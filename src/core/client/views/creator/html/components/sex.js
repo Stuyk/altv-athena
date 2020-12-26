@@ -36,7 +36,7 @@ Vue.component('tab-sex', {
             if (parameter === 'preset') {
                 const index = parseInt(value - 1);
                 const preset = this.data.sex === 0 ? femalePresets[index] : malePresets[index];
-                Object.keys(preset).forEach(key => {
+                Object.keys(preset).forEach((key) => {
                     this.data[key] = preset[key];
                 });
 
@@ -73,10 +73,10 @@ Vue.component('tab-sex', {
         }
     },
     watch: {
-        'data.faceMix': function(newVal, oldVal) {
+        'data.faceMix': function (newVal, oldVal) {
             this.$root.$emit('updateCharacter');
         },
-        'data.skinMix': function(newVal, oldVal) {
+        'data.skinMix': function (newVal, oldVal) {
             this.$root.$emit('updateCharacter');
         }
     },

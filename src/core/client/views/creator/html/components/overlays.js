@@ -17,7 +17,7 @@ Vue.component('tab-overlays', {
             }
 
             this.data.opacityOverlays = currentValues;
-            console.log(this.data.opacityOverlays[index].value)
+            console.log(this.data.opacityOverlays[index].value);
             this.$root.$emit('updateCharacter');
         },
         incrementParameter(index, min, max, incrementValue) {
@@ -33,26 +33,31 @@ Vue.component('tab-overlays', {
         }
     },
     template: `
-        <v-container class="containerHelper" v-if="data.opacityOverlays[0]">
-            <div v-for="(name, i) in opacityOverlays" :key="i" class="d-flex flex-column mb-5">
-                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
-                    {{ opacityOverlays[i].label }}
-                </p>
-                <div class="d-flex flex-row flex-grow-1 mb-3">
-                    <v-btn @click="decrementParameter(i, opacityOverlays[i].min, opacityOverlays[i].max, 1)" small>
-                        <v-icon x-small>fa-chevron-left</v-icon>
-                    </v-btn>
-                    <p class="flex-grow-1 text-sm-center align-self-center mb-0 mt-0" style="font-size: 12px !important;"> 
-                        {{ data.opacityOverlays[i].value !== null ? data.opacityOverlays[i].value : -1 }}
-                    </p>
-                    <v-btn @click="incrementParameter(i, opacityOverlays[i].min, opacityOverlays[i].max, 1)" small>
-                        <v-icon x-small>fa-chevron-right</v-icon>
-                    </v-btn>
-                </div>
-                <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-2 subtitle-2">
-                    {{ opacityOverlays[i].label }} Opacity ({{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }})
-                </p>
-                <v-slider thumb-label ticks="always" tick-size="4" class="flex-grow-1" type="range" :min="0" :max="1" v-model.number="opacityOverlays[i].opacity" :step="0.1" @input="e => handleChange(e, 'opacity', i)" />
+        <v-container class="containerHelper transparent" v-if="data.opacityOverlays[0]">
+            <div class="d-flex flex-column justify-space-between fill-height mb-12" block fluid>
+                <v-card v-for="(name, i) in opacityOverlays" :key="i" class="d-flex flex-column elevation-2 mb-3 pa-3 grey darken-3">
+                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
+                        {{ opacityOverlays[i].label }}
+                    </span>
+                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
+                        <v-btn @click="decrementParameter(i, opacityOverlays[i].min, opacityOverlays[i].max, 1)" class="light-blue--text" outlined small text>
+                            <v-icon small>icon-chevron-left</v-icon>
+                        </v-btn>
+                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
+                            {{ data.opacityOverlays[i].value !== null ? data.opacityOverlays[i].value : -1 }}
+                        </span>
+                        <v-btn @click="incrementParameter(i, opacityOverlays[i].min, opacityOverlays[i].max, 1)"  class="light-blue--text" outlined small text>
+                            <v-icon small>icon-chevron-right</v-icon>
+                        </v-btn>
+                    </div>
+                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1 mt-4" block>
+                        {{ opacityOverlays[i].label }} Opacity
+                    </span>
+                    <div class="d-flex flex-row flex-grow-1">
+                        <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }}</v-chip>
+                        <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.opacityOverlays[i].opacity" @input="e => handleChange(e, 'opacity', i)" />
+                    </div>
+                </v-card>
             </div>
         </v-container>
     `

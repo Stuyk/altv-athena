@@ -66,24 +66,29 @@ Vue.component('tab-info', {
         }
     },
     template: `
-        <v-container class="containerHelper">
-            <p class="text-sm-left font-weight-bold mb-1 orange--text text--accent-1 subtitle-2">
-                Tell Us About Yourself
-            </p>
-            <div class="d-flex flex-row justify-content-space-between">
-                <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                <v-text-field type="text" label="Your Name (Ex. John_Doe)" type="text" value="currentname" v-model="name" />
-            </div>
-            <div class="d-flex flex-row justify-content-space-between">
-                <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                <v-text-field class="flex-grow-1" type="number" label="Your Age" type="text" value="infoData.age" v-model="age" />
-            </div>
-            <div class="d-flex flex-row justify-content-space-between">
-                <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                <v-text-field class="flex-grow-1" type="text" label="Your Gender" type="text" value="infoData.gender" v-model="gender" />
+        <v-container class="containerHelper transparent">
+            <div class="d-flex flex-column justify-space-between fill-height" block fluid>
+                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3 fill-height" block fluid>
+                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
+                        Tell Us About Yourself
+                    </span>
+                    <div class="d-flex flex-row justify-content-space-between">
+                        <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                        <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                        <v-text-field type="text" label="Your Name (Ex. John_Doe)" type="text" value="currentname" v-model="name" />
+                    </div>
+                    <div class="d-flex flex-row justify-content-space-between">
+                        <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                        <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                        <v-text-field class="flex-grow-1" type="number" label="Your Age" type="text" value="infoData.age" v-model="age" />
+                    </div>
+                    <div class="d-flex flex-row justify-content-space-between">
+                        <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                        <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                        <v-text-field class="flex-grow-1" type="text" label="Your Gender" type="text" value="infoData.gender" v-model="gender" />
+                    </div>
+                    <p class="text-caption">Once the information above is filled out you may proceed to the 'done' page.</p>
+                </v-card>
             </div>
         </v-container>
     `,
