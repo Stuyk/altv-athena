@@ -1,6 +1,7 @@
 <p align="center">
     <img src="./assets/athena_lrg.png" width="125" />
 </p>
+<sup>An Paid alt:V Roleplay Framework</sup>
 
 # Project Athena
 
@@ -8,13 +9,31 @@ This project solely exists as a new standard for GTA:V roleplay servers on the [
 
 This features type safety through TypeScript and a solid foundation for what I consider the core of roleplay.
 
+Athena is at the forefront of the alt:V Ares Service and the alt:V Athena Product.
+
+alt:V Athena's source code will always be open but the ability to use it will depend on you.
+
+Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](https://gumroad.com/products/SKpPN/)
+
 # Project Features
 
+-   Fully Open Source
 -   Typescript
 -   Scaleable Folder Structure
 -   Character Editor
 -   Character Selection
--   Discord oAuth2 Authentication
+-   Character Info Support
+-   Character Appearance Synchronization
+-   Easy Discord Login / Authentication (alt:V Ares)
+
+# Project Plans
+
+-   Respawn System
+-   Chat Box \*Optional
+-   alt:V Voice \*Optional
+-   Inventory \*Optional
+-   Economy System \*Optional
+-   Job System \*Optional
 
 # Support
 
