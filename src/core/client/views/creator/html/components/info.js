@@ -9,7 +9,9 @@ Vue.component('tab-info', {
             gender: '',
             nameValid: false,
             ageValid: false,
-            genderValid: false
+            genderValid: false,
+            isNameAvailable: false,
+            firstTime: true
         };
     },
     computed: {
@@ -28,20 +30,38 @@ Vue.component('tab-info', {
             }
 
             this.$root.$emit('isVerified', true);
-        }
-    },
-    watch: {
-        name(newValue) {
+        },
+        nameChanged(newValue) {
+            if (!newValue) {
+                return;
+            }
+
             if (!nameRegex.exec(newValue)) {
                 this.nameValid = false;
-                this.data.name = newValue;
+                this.infodata.name = newValue;
+                return;
+            }
+
+            this.isNameAvailable = null;
+            this.infodata.name = newValue;
+
+            if ('alt' in window) {
+                alt.emit('creator:CheckName', newValue);
+            }
+        },
+        handleNameAvailable(result) {
+            this.isNameAvailable = result;
+
+            if (!this.isNameAvailable) {
+                this.nameValid = false;
                 return;
             }
 
             this.nameValid = true;
-            this.data.name = newValue;
             this.verifyAllCorrect();
-        },
+        }
+    },
+    watch: {
         age(newValue) {
             if (newValue >= 18 && newValue <= 90) {
                 this.ageValid = true;
@@ -65,6 +85,21 @@ Vue.component('tab-info', {
             this.infodata.gender = newValue;
         }
     },
+    emits: {
+        test: ({ what }) => {
+            console.log(what);
+            console.log('k');
+        }
+    },
+    mounted() {
+        this.name = this.infodata.name;
+        this.age = this.infodata.age;
+        this.gender = this.infodata.gender;
+
+        if ('alt' in window) {
+            alt.on('creator:IsNameAvailable', this.handleNameAvailable);
+        }
+    },
     template: `
         <v-container class="containerHelper transparent">
             <div class="d-flex flex-column justify-space-between fill-height" block fluid>
@@ -73,9 +108,15 @@ Vue.component('tab-info', {
                         Tell Us About Yourself
                     </span>
                     <div class="d-flex flex-row justify-content-space-between">
-                        <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                        <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                        <v-text-field type="text" label="Your Name (Ex. John_Doe)" type="text" value="currentname" v-model="name" />
+                        <template v-if="this.isNameAvailable !== null">
+                            <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                            <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                        </template>
+                        <template v-else>
+                            <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
+                            <span class="pr-5"></span>
+                        </template>
+                        <v-text-field type="text" label="Your Name (Ex. John_Doe)" type="text" value="infodata.name" v-model="name" @change="nameChanged" />
                     </div>
                     <div class="d-flex flex-row justify-content-space-between">
                         <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
@@ -91,10 +132,5 @@ Vue.component('tab-info', {
                 </v-card>
             </div>
         </v-container>
-    `,
-    mounted() {
-        this.name = this.currentname;
-        this.age = this.infodata.age;
-        this.gender = this.infodata.gender;
-    }
+    `
 });

@@ -42,6 +42,20 @@ v-card {
     overflow-x: hidden;
 }
 
+.spinner {
+    position: absolute;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 ::-webkit-scrollbar {
     width: 8px;
     background: rgba(20, 20, 20, 0.85);

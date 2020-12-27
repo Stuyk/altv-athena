@@ -9,6 +9,14 @@ let startPosition: alt.Vector3;
 let startCamPosition: alt.Vector3;
 let timeBetweenAnimChecks = Date.now() + 100;
 
+alt.on('connectionComplete', () => {
+    destroyPedEditCamera();
+});
+
+alt.on('disconnect', () => {
+    destroyPedEditCamera();
+});
+
 export function createPedEditCamera() {
     startPosition = { ...alt.Player.local.pos };
     if (!camera) {

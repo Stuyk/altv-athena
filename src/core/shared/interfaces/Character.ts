@@ -6,6 +6,7 @@ export interface Character {
     _id?: string;
     account_id: string;
     pos: Vector3;
+    name: string;
     cash: number;
     bank: number;
     appearance: Partial<Appearance>;

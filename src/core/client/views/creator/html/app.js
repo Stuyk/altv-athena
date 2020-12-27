@@ -14,7 +14,6 @@ const app = new Vue({
             show: false,
             selection: 0,
             data: {
-                name: '',
                 sex: 1,
                 faceMother: 0,
                 faceFather: 0,
@@ -39,7 +38,8 @@ const app = new Vue({
             },
             infoData: {
                 age: 18,
-                gender: 'none'
+                gender: 'none',
+                name: 'John_Dane'
             },
             navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
             navOptionsIcons: [
@@ -56,7 +56,8 @@ const app = new Vue({
             noName: false,
             validInfoData: false,
             drawer: true,
-            mini: true
+            mini: true,
+            totalCharacters: 1
         };
     },
     computed: {
@@ -107,7 +108,9 @@ const app = new Vue({
                 alt.emit('creator:ReadyDone');
             }
         },
-        setData(oldData) {
+        setData(oldData, totalCharacters) {
+            this.totalCharacters = totalCharacters;
+
             if (!oldData) {
                 this.updateCharacter();
                 return;

@@ -76,6 +76,7 @@ EMAIL=xyz@emai...
 MONGO_URL=
 MONGO_USERNAME=
 MONGO_PASSWORD=
+DEV_ID=
 ```
 
 Fill in GUMROAD with your alt:V Athena License Key from [https://gumroad.com/products/SKpPN/](https://gumroad.com/products/SKpPN/).
@@ -83,6 +84,9 @@ Fill in GUMROAD with your alt:V Athena License Key from [https://gumroad.com/pro
 Fill in EMAIL with your Gumroad.com email.
 
 The Mongo Parameters are optional. Leave blank if working locally.
+
+Fill in `DEV_ID` if you are working locally and want to make changes quickly.
+Skips Authentication and logs you into your account.
 
 # Running the Project
 

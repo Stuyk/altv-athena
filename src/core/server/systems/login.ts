@@ -31,26 +31,25 @@ alt.on('Discord:Login', handleLoginRouting);
  * @param  {Player} player
  * @param  {DiscordUser} data
  */
-export async function handleLoginRouting(player: Player, data: DiscordUser) {
-    if (!player.pendingLogin) {
-        return;
-    }
-
-    player.emit('Login:FadeScreenIn');
-
+export async function handleLoginRouting(player: Player, data: Partial<DiscordUser>) {
     delete player.pendingLogin;
     delete player.discordToken;
 
+    if (data.username) {
+        alt.log(`[Athena] (${player.id})${data.username} has authenticated.`);
+    }
+
     if (loggedInUsers.includes(data.id)) {
-        alt.log(`${player.name} | Attempted to login twice under ${data.username}#${data.discriminator}.`);
+        alt.log(`[Athena] ${player.name} | Attempted to login twice under ${data.username}#${data.discriminator}.`);
         player.kick(`Already logged in.`);
         return;
     }
 
     loggedInUsers.push(data.id);
 
-    player.discord = data;
+    player.discord = data as DiscordUser;
     player.emit(View_Events_Discord.Close);
+    player.emit('Login:FadeScreenIn');
 
     let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
 
@@ -87,11 +86,11 @@ function handleDisconnect(player: Player, reason: string) {
 
     loggedInUsers.splice(index, 1);
 
-    if (!player.data || !player.data.appearance.name) {
+    if (!player.data || !player.name) {
         return;
     }
 
-    alt.log(`${player.data.appearance.name} has logged out.`);
+    alt.log(`${player.name} has logged out.`);
     player.data.pos = player.pos;
     player.saveField('pos', player.data.pos);
 }

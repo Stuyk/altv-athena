@@ -28,6 +28,7 @@ declare module 'alt-server' {
         // Player Data
         discord?: DiscordUser;
         data?: Character;
+        info?: CharacterInfo;
 
         // Anti
         acPosition?: alt.Vector3;
@@ -56,7 +57,7 @@ declare module 'alt-server' {
          * @param  {Appearance} appearance
          * @returns void
          */
-        createNewCharacter(appearance: Appearance, info: CharacterInfo): void;
+        createNewCharacter(appearance: Appearance, info: CharacterInfo, name: string): void;
 
         /**
          * Add currency from this player based on currency type and amount.
@@ -163,12 +164,14 @@ declare module 'alt-server' {
 
 alt.Player.prototype.createNewCharacter = async function createNewCharacter(
     appearanceData: Partial<Appearance>,
-    infoData: Partial<CharacterInfo>
+    infoData: Partial<CharacterInfo>,
+    name: string
 ) {
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.info = infoData;
     newDocument.account_id = this.account;
+    newDocument.name = name;
 
     const document = await db.insertData(newDocument, 'characters', true);
     document._id = document._id.toString(); // Re-cast id object as string.
@@ -307,7 +310,7 @@ alt.Player.prototype.updateAppearance = function updateAppearance() {
         this.model = 'mp_m_freemode_01';
     }
 
-    this.setSyncedMeta('Name', this.data.appearance.name);
+    this.setSyncedMeta('Name', this.data.name);
     this.emitMeta('appearance', this.data.appearance);
     this.emit(View_Events_Creator.Sync, this.data.appearance);
 };

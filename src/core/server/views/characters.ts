@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
-import * as sm from 'simplymongo';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { DEFAULT_CONFIG } from '../athena/main';
+import * as sm from 'simplymongo';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -93,6 +93,7 @@ async function handleDelete(player: Player, id: string) {
 
     // No Characters Found
     if (characters.length <= 0) {
+        player.currentCharacters = [];
         handleNewCharacter(player);
         return;
     }
@@ -113,11 +114,16 @@ async function handleDelete(player: Player, id: string) {
  * Called when a player who has characters wants to make a new one.
  * @param  {Player} player
  */
-function handleNewCharacter(player: Player) {
+export function handleNewCharacter(player: Player) {
     // Prevent more than 3 characters per account.
-    if (player.currentCharacters && player.currentCharacters.length >= 3) {
+    if (player.currentCharacters && player.currentCharacters.length >= DEFAULT_CONFIG.PLAYER_MAX_CHARACTER_SLOTS) {
         alt.log(`${player.name} | Attempted to create a new character when max characters was exceeded.`);
         return;
+    }
+
+    let totalCharacters = 0;
+    if (player.currentCharacters) {
+        totalCharacters = player.currentCharacters.length;
     }
 
     if (!player.pendingCharacterSelect) {
@@ -134,5 +140,5 @@ function handleNewCharacter(player: Player) {
     player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT };
     player.safeSetPosition(pos.x, pos.y, pos.z);
     player.emit(View_Events_Characters.Done);
-    player.emit(View_Events_Creator.Show, null, true, false); // _oldCharacterData, _noDiscard, _noName
+    player.emit(View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName
 }

@@ -3,8 +3,7 @@ import * as path from 'path';
 import { Database, onReady } from 'simplymongo';
 import { makePostRequest } from '../ares/postRequests';
 
-alt.log(`[Athena] Booting Up Database Connection`);
-alt.log(path.delimiter);
+alt.log(`[Athena] Booting Up Database Connection${path.delimiter}`);
 
 const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
 

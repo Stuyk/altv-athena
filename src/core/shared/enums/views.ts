@@ -8,7 +8,8 @@ export enum View_Events_Creator {
     Close = 'creator:Close',
     Show = 'creator:Show',
     Sync = 'creator:Sync',
-    AwaitModel = 'creator:AwaitModel'
+    AwaitModel = 'creator:AwaitModel',
+    AwaitName = 'creator:AwaitName'
 }
 
 export enum View_Events_Characters {

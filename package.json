@@ -6,7 +6,7 @@
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles src/**/* --exclude=**/*.ts --up 1 ./resources",
         "clean": "rimraf resources",
-        "update": "altv-pkg d release",
+        "update": "altv-pkg d release && git submodule update --force --init --recursive",
         "windows": "npm run build && altv-server.exe",
         "linux": "npm run build && start.sh"
     },

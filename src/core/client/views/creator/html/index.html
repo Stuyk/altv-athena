@@ -5,7 +5,10 @@
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
         <link rel="stylesheet/less" type="text/css" href="./style.less" />
         <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+        />
     </head>
     <body>
         <div id="app">
@@ -14,28 +17,49 @@
                     <div class="special-bar d-flex flex-column justify-space-between fill-height grey darken-4">
                         <v-navigation-drawer permanent expand-on-hover>
                             <v-list>
-                                <v-list-item right v-for="(option, index) in navOptions" :key="index" link @click="goNavigate(index)" :disabled="!validInfoData && index === navOptions.length - 1">
-                                        <template v-if="index !== navOptions.length - 1"> 
-                                            <v-list-item-icon>
-                                                <v-icon class="light-blue--text text--accent-2">{{ navOptionsIcons[index].icon }}</v-icon>
-                                            </v-list-item-icon>
-                                            <v-list-item-title class="light-blue--text text--accent-1">
-                                                {{ navOptionsTitles[index] }}
-                                            </v-list-item-title>
-                                        </template>
-                                        <template v-else> 
-                                            <v-list-item-icon>
-                                                <v-icon :class="validInfoData ? 'green--text text--accent-2' : ''" :disabled="!validInfoData">{{ navOptionsIcons[index].icon }}</v-icon>
-                                            </v-list-item-icon>
-                                            <v-list-item-title :class="validInfoData ? 'green--text text--accent-2' : ''" :disabled="!validInfoData">
-                                                {{ navOptionsTitles[index] }}
-                                            </v-list-item-title>
-                                        </template>
+                                <v-list-item
+                                    right
+                                    v-for="(option, index) in navOptions"
+                                    :key="index"
+                                    link
+                                    @click="goNavigate(index)"
+                                    :disabled="!validInfoData && index === navOptions.length - 1"
+                                >
+                                    <template v-if="index !== navOptions.length - 1">
+                                        <v-list-item-icon>
+                                            <v-icon class="light-blue--text text--accent-2"
+                                                >{{ navOptionsIcons[index].icon }}</v-icon
+                                            >
+                                        </v-list-item-icon>
+                                        <v-list-item-title class="light-blue--text text--accent-1">
+                                            {{ navOptionsTitles[index] }}
+                                        </v-list-item-title>
+                                    </template>
+                                    <template v-else>
+                                        <v-list-item-icon>
+                                            <v-icon
+                                                :class="validInfoData ? 'green--text text--accent-2' : ''"
+                                                :disabled="!validInfoData"
+                                                >{{ navOptionsIcons[index].icon }}</v-icon
+                                            >
+                                        </v-list-item-icon>
+                                        <v-list-item-title
+                                            :class="validInfoData ? 'green--text text--accent-2' : ''"
+                                            :disabled="!validInfoData"
+                                        >
+                                            {{ navOptionsTitles[index] }}
+                                        </v-list-item-title>
+                                    </template>
                                 </v-list-item>
                             </v-list>
                         </v-navigation-drawer>
                     </div>
-                    <v-sheet class="special-box d-flex flex-row pl-0 pr-0 align-content-center grey darken-4" max-height="100vh" min-height="100vh" max-width="400px">
+                    <v-sheet
+                        class="special-box d-flex flex-row pl-0 pr-0 align-content-center grey darken-4"
+                        max-height="100vh"
+                        min-height="100vh"
+                        max-width="400px"
+                    >
                         <component
                             v-bind:is="getTabComponent"
                             v-bind:data="data"
@@ -43,7 +67,8 @@
                             v-bind:noname="noName"
                             v-bind:currentname="data.name"
                             v-bind:infodata="infoData"
-                            >
+                            v-bind:totalcharacters="totalCharacters"
+                        >
                         </component>
                     </v-sheet>
                 </v-container>

@@ -1,5 +1,5 @@
 Vue.component('tab-done', {
-    props: ['data', 'nodiscard', 'noname', 'infodata'],
+    props: ['data', 'nodiscard', 'noname', 'infodata', 'totalcharacters'],
     computed: {
         isNoDiscord() {
             return this.nodiscard;
@@ -13,7 +13,7 @@ Vue.component('tab-done', {
             }
 
             if ('alt' in window) {
-                alt.emit('creator:Done', this.data, this.infodata);
+                alt.emit('creator:Done', this.data, this.infodata, this.infodata.name);
             }
         },
         discardCharacter() {
@@ -32,7 +32,7 @@ Vue.component('tab-done', {
                     <v-list class="transparent">
                         <v-list-item>
                             <v-list-item-content>
-                                Name: {{ data.name }}
+                                Name: {{ infodata.name }}
                             </v-list-item-content>
                         </v-list-item>
                         <v-list-item>
@@ -48,9 +48,9 @@ Vue.component('tab-done', {
                     </v-list>
                 </v-card>
                 <div class="d-flex flex-row">
-                    <v-tooltip bottom nudge-bottom="8px" color="error lighten-2">
+                    <v-tooltip bottom nudge-bottom="8px" color="error lighten-2" v-if="totalcharacters >= 1">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn @click="discardCharacter" class="error--text flex-grow-1" outlined text v-bind="attrs" v-on="on">
+                            <v-btn @click="discardCharacter" class="error--text flex-grow-1 mr-3" outlined text v-bind="attrs" v-on="on">
                                 <v-icon small>icon-times</v-icon>
                             </v-btn>
                         </template>
@@ -58,7 +58,7 @@ Vue.component('tab-done', {
                     </v-tooltip>
                     <v-tooltip bottom nudge-bottom="8px" color="green lighten-2">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn @click="saveCharacter" class=" ml-3 green--text text--lighten-2 flex-grow-1" outlined text v-bind="attrs" v-on="on">
+                            <v-btn @click="saveCharacter" class="green--text text--lighten-2 flex-grow-1" outlined text v-bind="attrs" v-on="on">
                                 <v-icon small>icon-save</v-icon>
                             </v-btn>
                         </template>

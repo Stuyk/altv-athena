@@ -22,7 +22,7 @@
                                     </v-list-item-icon>
                                     <v-list-item-title class="light-blue--text text--accent-1">
                                         <div class="d-flex flex-row">
-                                            <span :class="characterIndex === index ? 'white--text' : 'light-blue--text'">{{ characters[index].appearance.name }}</span>
+                                            <span :class="characterIndex === index ? 'white--text' : 'light-blue--text'">{{ characters[index].name }}</span>
                                         </div>
                                     </v-list-item-title>
                                 </v-list-item>
@@ -49,10 +49,10 @@
                                         </template>
                                         <v-card v-if="characters[characterIndex]">
                                             <v-card-title class="headline red--text">
-                                                Delete {{ characters[characterIndex].appearance.name }}?
+                                                Delete {{ characters[characterIndex].name }}?
                                             </v-card-title>
                                             <v-card-text class="orange--text">
-                                                Are you sure you want to delete your character {{ characters[characterIndex].appearance.name }}?
+                                                Are you sure you want to delete your character {{ characters[characterIndex].name }}?
                                             </v-card-text>
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>

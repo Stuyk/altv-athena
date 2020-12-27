@@ -48,7 +48,7 @@ const app = new Vue({
             characters: [],
             statNames: [
                 /* Name of the stat, variable name inside character object */
-                { varName: 'Name', varRef: 'name', useAppearance: true },
+                { varName: 'Name', varRef: 'name' },
                 { varName: 'Age', varRef: 'age', suffix: ' Years Old', useInfo: true },
                 { varName: 'Gender', varRef: 'gender', useInfo: true },
                 { varName: 'Reward Points', varRef: 'rewardPoints', suffix: ' Hours' },

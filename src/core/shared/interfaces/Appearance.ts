@@ -1,5 +1,4 @@
 export interface Appearance {
-    name: string;
     sex: number;
     faceFather: number;
     faceMother: number;
@@ -11,7 +10,7 @@ export interface Appearance {
     hair: number;
     hairColor1: number;
     hairColor2: number;
-    hairOverlay: { overlay: string, collection: string };
+    hairOverlay: { overlay: string; collection: string };
     facialHair: number;
     facialHairColor1: number;
     facialHairOpacity: number;

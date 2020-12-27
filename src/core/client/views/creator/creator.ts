@@ -16,6 +16,7 @@ let tempData: Partial<Appearance> | null = {};
 let readyInterval: number;
 let noDiscard = true;
 let noName = true;
+let totalCharacters = 0;
 
 native.requestModel(fModel);
 native.requestModel(mModel);
@@ -23,11 +24,13 @@ native.requestModel(mModel);
 alt.onServer(View_Events_Creator.Sync, handleSync);
 alt.onServer(View_Events_Creator.Show, handleView);
 alt.onServer(View_Events_Creator.AwaitModel, handleFinishSync);
+alt.onServer(View_Events_Creator.AwaitName, handleNameFinish);
 
-async function handleView(_oldCharacterData = null, _noDiscard = true, _noName = true) {
+async function handleView(_oldCharacterData = null, _noDiscard = true, _noName = true, _totalCharacters = 0) {
     oldCharacterData = _oldCharacterData;
     noDiscard = _noDiscard;
     noName = _noName;
+    totalCharacters = _totalCharacters;
 
     if (!view) {
         view = await View.getInstance(url, true);
@@ -35,6 +38,7 @@ async function handleView(_oldCharacterData = null, _noDiscard = true, _noName =
         view.on('creator:Done', handleDone);
         view.on('creator:Cancel', handleCancel);
         view.on('creator:Sync', handleSync);
+        view.on('creator:CheckName', handleCheckName);
     }
 
     createPedEditCamera();
@@ -55,8 +59,8 @@ function handleClose() {
     view.close();
 }
 
-function handleDone(newData, infoData) {
-    alt.emitServer(View_Events_Creator.Done, newData, infoData);
+function handleDone(newData, infoData, name: string) {
+    alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
     handleClose();
 }
 
@@ -79,10 +83,18 @@ function handleReadyDone() {
         readyInterval = null;
     }
 
-    view.emit('creator:SetData', oldCharacterData);
+    view.emit('creator:SetData', oldCharacterData, totalCharacters);
 }
 
-export async function handleSync(data: Partial<Appearance>, shouldTPose: boolean = false) {
+function handleCheckName(name: string): void {
+    alt.emitServer(View_Events_Creator.AwaitName, name);
+}
+
+function handleNameFinish(result: boolean): void {
+    view.emit('creator:IsNameAvailable', result);
+}
+
+export async function handleSync(data: Partial<Appearance>, shouldTPose: boolean = false): Promise<void> {
     tempData = data;
 
     native.clearPedBloodDamage(alt.Player.local.scriptID);
