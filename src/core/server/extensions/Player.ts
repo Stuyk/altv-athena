@@ -186,18 +186,22 @@ alt.Player.prototype.selectCharacter = async function selectCharacter(characterD
     this.emit(Events_Misc.StartTicks);
 
     // Temp Vehicle
-    new alt.Vehicle('Washington', characterData.pos.x, characterData.pos.y, characterData.pos.z, 0, 0, 0);
+    // new alt.Vehicle('Washington', characterData.pos.x, characterData.pos.y, characterData.pos.z, 0, 0, 0);
 
     // Delete Current Characters from Memory
     delete this.currentCharacters;
 };
 
 alt.Player.prototype.emit = function emit(eventName: string, ...args: any[]) {
-    alt.emitClient(this, eventName, ...args);
+    alt.nextTick(() => {
+        alt.emitClient(this, eventName, ...args);
+    });
 };
 
 alt.Player.prototype.emitMeta = function emitMeta(key: string, value: any) {
-    alt.emitClient(this, Events_Meta.Set, key, value);
+    alt.nextTick(() => {
+        alt.emitClient(this, Events_Meta.Set, key, value);
+    });
 };
 
 alt.Player.prototype.saveField = async function saveField(fieldName: string, fieldValue: any) {

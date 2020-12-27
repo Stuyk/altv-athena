@@ -104,9 +104,9 @@ async function handleDelete(player: Player, id: string) {
     }
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
+    player.safeSetPosition(pos.x, pos.y, pos.z);
 
     player.currentCharacters = characters;
-    player.safeSetPosition(pos.x, pos.y, pos.z);
     player.emit(View_Events_Characters.Show, characters);
 }
 

@@ -1,4 +1,5 @@
 import { Vector3 } from 'alt-server';
+import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 
@@ -14,9 +15,9 @@ export interface Character {
 }
 
 export const CharacterDefaults: Partial<Character> = {
-    pos: new Vector3(-725.74, -282.29, 36.98),
-    cash: 0,
-    bank: 0,
+    pos: DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS,
+    cash: DEFAULT_CONFIG.PLAYER_CASH,
+    bank: DEFAULT_CONFIG.PLAYER_BANK,
     appearance: {},
     info: {}
 };
