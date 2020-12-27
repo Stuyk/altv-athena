@@ -4,6 +4,7 @@ import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
+import { AnimationFlags, playAnimation } from '../../systems/animations';
 
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
@@ -81,7 +82,7 @@ function handleReadyDone() {
     view.emit('creator:SetData', oldCharacterData);
 }
 
-export async function handleSync(data: Partial<Appearance>) {
+export async function handleSync(data: Partial<Appearance>, shouldTPose: boolean = false) {
     tempData = data;
 
     native.clearPedBloodDamage(alt.Player.local.scriptID);
@@ -91,13 +92,13 @@ export async function handleSync(data: Partial<Appearance>) {
     const modelNeeded = data.sex === 0 ? fModel : mModel;
     if (modelNeeded !== native.getEntityModel(alt.Player.local.scriptID)) {
         // native.getEntityModel can be replaced with alt.Player.local.model in later updates.
-        alt.emitServer(View_Events_Creator.AwaitModel, data.sex);
+        alt.emitServer(View_Events_Creator.AwaitModel, data.sex, shouldTPose);
     } else {
-        handleFinishSync();
+        handleFinishSync(shouldTPose);
     }
 }
 
-async function handleFinishSync() {
+async function handleFinishSync(shouldTPose: boolean = false) {
     native.setPedHeadBlendData(alt.Player.local.scriptID, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
     native.setPedHeadBlendData(
         alt.Player.local.scriptID,
@@ -179,6 +180,10 @@ async function handleFinishSync() {
         native.setPedComponentVariation(alt.Player.local.scriptID, 6, 34, 0, 0); // shoes
         native.setPedComponentVariation(alt.Player.local.scriptID, 8, 15, 0, 0); // shirt
         native.setPedComponentVariation(alt.Player.local.scriptID, 11, 91, 0, 0); // torso
+    }
+
+    if (shouldTPose) {
+        await playAnimation('nm@hands', 'natural', AnimationFlags.REPEAT | AnimationFlags.STOP_LAST_FRAME);
     }
 
     prevData = tempData;

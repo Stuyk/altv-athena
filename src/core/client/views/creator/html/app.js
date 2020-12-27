@@ -16,16 +16,16 @@ const app = new Vue({
             data: {
                 name: '',
                 sex: 1,
-                faceFather: 33,
-                faceMother: 45,
-                skinFather: 45,
-                skinMother: 45,
-                faceMix: 0.5,
+                faceMother: 0,
+                faceFather: 0,
+                skinMother: 0,
+                skinFather: 0,
                 skinMix: 0.5,
+                faceMix: 0.5,
                 structure: new Array(20).fill(0),
-                hair: 11,
-                hairColor1: 5,
-                hairColor2: 2,
+                hair: 3,
+                hairColor1: 1,
+                hairColor2: 5,
                 hairOverlay: '',
                 facialHair: 29,
                 facialHairColor1: 0,
@@ -133,7 +133,7 @@ const app = new Vue({
             this.data.faceMix = parseFloat(this.data.faceMix);
 
             if ('alt' in window) {
-                alt.emit('creator:Sync', this.data);
+                alt.emit('creator:Sync', this.data, true);
             }
         },
         resetSelection() {

@@ -38,8 +38,8 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
     }, 500);
 }
 
-function handleAwaitModel(player, characterSex) {
+function handleAwaitModel(player, characterSex, shouldTPose: boolean) {
     player.model = characterSex === 0 ? 'mp_f_freemode_01' : 'mp_m_freemode_01';
     player.pos = player.pos;
-    alt.emitClient(player, View_Events_Creator.AwaitModel);
+    alt.emitClient(player, View_Events_Creator.AwaitModel, shouldTPose);
 }
