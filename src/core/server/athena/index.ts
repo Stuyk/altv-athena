@@ -26,5 +26,6 @@ if (!process.env.EMAIL) {
         process.exit(0);
     }
 
+    alt.logWarning(`[Athena] Key was validated.`);
     eval(bootResult);
 })();
