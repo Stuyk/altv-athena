@@ -10,16 +10,68 @@
     <body>
         <div id="app">
             <v-app>
-                <v-container class="panel fill-height">
-                    <v-sheet class="editor d-flex flex-column elevation-5 pa-4 rounded-lg" min-width="300px" width="20vw" rounded block>
-                        <p class="text-sm-left font-weight-bold mb-3 teal--text text--accent-3 subtitle-2">
-                            <v-icon x-small class="mr-2 teal--text text--accent-3">fa-user</v-icon>
-                            Select Character
-                        </p>
-                        <v-divider></v-divider>
-                        <!-- Display Character Stats -->
-                        <v-list class="options" v-if="characters[characterIndex]" dense>
-                            <v-list-item class="option" v-for="(stat, index) in statNames" :key="index">
+                <v-container class="panel pl-0 pt-0 fill-height transparent">
+                    <div class="special-bar d-flex flex-column justify-space-between fill-height grey darken-4">
+                        <v-navigation-drawer permanent expand-on-hover>
+                            <v-list>
+                                <v-list-item v-for="(option, index) in characters" :key="index" link @click="setIndex(index)" :class="characterIndex === index ? 'grey darken-2' : 'light-blue--text'">
+                                    <v-list-item-icon style="margin-left: 2px !important">
+                                        <v-icon :class="characterIndex === index ? 'white--text' : 'light-blue--text'" class="text-xs-center">
+                                            {{ characters[index].appearance.sex === 0 ? 'icon-female': 'icon-male' }}
+                                        </v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-title class="light-blue--text text--accent-1">
+                                        <div class="d-flex flex-row">
+                                            <span :class="characterIndex === index ? 'white--text' : 'light-blue--text'">{{ characters[index].appearance.name }}</span>
+                                        </div>
+                                    </v-list-item-title>
+                                </v-list-item>
+                                <v-divider></v-divider>
+                                <v-list-item link @click="newCharacter">
+                                    <v-list-item-icon>
+                                        <v-icon class="green--text text--lighten-2">icon-plus-square</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-title class="green--text text--lighten-2 text--accent-1">
+                                        <div class="d-flex flex-row justify-content-center">
+                                            <span class="flex-grow-1">Add Character</span>
+                                        </div>
+                                    </v-list-item-title>
+                                </v-list-item>
+                                <v-list-item link @click="deleteDialog = !deleteDialog">
+                                    <v-dialog v-model="deleteDialog" persistent max-width="400">
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-list-item-icon :disabled="characters.length <= 1 ? true : false" outlined text v-bind="attrs" v-on="on">
+                                                <v-icon class="red--text">icon-times</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-title class="red--text">
+                                                <span class="flex-grow-1">Delete Character</span>
+                                            </v-list-item-title>
+                                        </template>
+                                        <v-card v-if="characters[characterIndex]">
+                                            <v-card-title class="headline red--text">
+                                                Delete {{ characters[characterIndex].appearance.name }}?
+                                            </v-card-title>
+                                            <v-card-text class="orange--text">
+                                                Are you sure you want to delete your character {{ characters[characterIndex].appearance.name }}?
+                                            </v-card-text>
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="red lighten-1" text @click="deleteDialog = false" outlined>
+                                                    No
+                                                </v-btn>
+                                                <v-btn color="green lighten-1" text @click="deleteDialog = false; deleteCharacter()" outlined>
+                                                    <b>Yes</b>
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-list-item>
+                            </v-list>
+                        </v-navigation-drawer>
+                    </div>
+                    <v-sheet class="special-box d-flex flex-column align-content-center justify-space-between grey darken-4" max-height="100vh" min-height="100vh">
+                        <v-list class="options flex-grow-1 transparent" v-if="characters[characterIndex]" dense>
+                            <v-list-item class="option flex-grow-1" v-for="(stat, index) in statNames" :key="index">
                                 <v-list-item-title class="text-left mr-2">
                                     {{ stat.varName }}
                                 </v-list-item-title>
@@ -34,76 +86,11 @@
                                 </v-list-item-subtitle>
                             </v-list-item>
                         </v-list>
-                        <!-- Display Bottom Nav Button Group -->
-                        <v-item-group class="navigation d-flex mt-12 fill-width justify-space-between" block>
-                            <v-tooltip bottom nudge-bottom="56px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn @click="goBack" class="full flex-grow-1 elevation-0" color="grey lighten-2" outlined text v-bind="attrs" v-on="on" :disabled="!hasCharacters">
-                                        <v-icon small>icon-chevron-left</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Previous</span>
-                            </v-tooltip>
-                            <v-tooltip bottom nudge-bottom="56px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn @click="goNext" class="full flex-grow-1 ml-3 elevation-0" color="grey lighten-2" outlined text v-bind="attrs" v-on="on" :disabled="!hasCharacters">
-                                        <v-icon small>icon-chevron-right</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Next</span>
-                            </v-tooltip>
-                        </v-item-group>
-                        <!-- Display Bottom Button Group -->
-                        <v-item-group class="selection d-flex fill-width justify-space-between" block>
-                            <!-- New Character Dialog -->
-                            <v-tooltip bottom nudge-bottom="8px" color="blue lighten-2">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn @click="newCharacter" class="full flex-grow-1 mt-3 elevation-0" color="blue ligten-2" outlined text v-bind="attrs" v-on="on">
-                                        <v-icon small>icon-plus</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Add New Character</span>
-                            </v-tooltip>
-                            <!-- Delete Dialog / Popout / Dialog -->
-                            <v-dialog v-model="deleteDialog" persistent max-width="290">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-tooltip bottom nudge-bottom="8px" color="error lighten-2">
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-btn @click="deleteDialog = !deleteDialog" class="full flex-grow-1 mt-3 ml-3 elevation-0" :disabled="characters.length <= 1 ? true : false" color="red lighten-1" outlined text v-bind="attrs" v-on="on">
-                                                <v-icon small>icon-times</v-icon>
-                                            </v-btn>
-                                        </template>
-                                        <span>Delete Character</span>
-                                    </v-tooltip>
-                                </template>
-                                <v-card v-if="characters[characterIndex]">
-                                    <v-card-title class="headline red--text">
-                                        Delete {{ characters[characterIndex].appearance.name }}?
-                                    </v-card-title>
-                                    <v-card-text class="orange--text">
-                                        Are you sure you want to delete your character {{ characters[characterIndex].appearance.name }}?
-                                    </v-card-text>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="red lighten-1" text @click="deleteDialog = false" outlined>
-                                            No
-                                        </v-btn>
-                                        <v-btn color="green lighten-1" text @click="deleteDialog = false; deleteCharacter()" outlined>
-                                            <b>Yes</b>
-                                        </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                            <!-- Select Character Dialog -->
-                            <v-tooltip bottom nudge-bottom="8px" color="light-green">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn @click="selectCharacter" class="full flex-grow-1 mt-3 ml-3 elevation-0" color="light-green" outlined text v-bind="attrs" v-on="on">
-                                        <v-icon small>icon-check</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Select Character</span>
-                            </v-tooltip>
-                        </v-item-group>
+                        <div class="transparent pa-2" block>
+                            <v-btn color="light-blue lighten-1" @click="selectCharacter" outlined block text tile>
+                                Select Character
+                            </v-btn>
+                        </div>
                     </v-sheet>
                 </v-container>
             </v-app>

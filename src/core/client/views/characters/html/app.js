@@ -36,12 +36,13 @@ const exampleCharacter = {
         skinMother: 23
     },
     account_id: '5f70bb5e829f5c3e80aa4192',
-    position: { x: -740.6505737304688, y: -254.8219757080078, z: 37.03076171875 }
+    position: { x: -740.6505737304688, y: -254.8219757080078, z: 37.03076171875 },
+    characterIndex: 0
 };
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify({ theme: {dark: true }}),
+    vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
             characters: [],
@@ -69,20 +70,8 @@ const app = new Vue({
             this.characters = characters;
             this.updateAppearance();
         },
-        goBack() {
-            this.characterIndex -= 1;
-            if (this.characterIndex <= -1) {
-                this.characterIndex = this.characters.length - 1;
-            }
-
-            this.updateAppearance();
-        },
-        goNext() {
-            this.characterIndex += 1;
-            if (this.characterIndex >= this.characters.length) {
-                this.characterIndex = 0;
-            }
-
+        setIndex(value) {
+            this.characterIndex = value;
             this.updateAppearance();
         },
         updateAppearance() {
@@ -110,8 +99,12 @@ const app = new Vue({
         if ('alt' in window) {
             alt.on('characters:Set', this.handleSet);
         } else {
-            this.characters = [exampleCharacter, {...exampleCharacter, ...{appearance: { name: 'Jobi_Jobonai' }}}];
-            console.log(this.characters)
+            this.characters = [
+                exampleCharacter,
+                { ...exampleCharacter, ...{ appearance: { name: 'Jobi_Jobonai', sex: 0 } } }
+            ];
+
+            console.log(this.characters);
         }
     }
 });
