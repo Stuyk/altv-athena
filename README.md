@@ -55,6 +55,7 @@ Open a Command Prompt and Run these Commands:
 
 ```bash
 git clone https://github.com/Stuyk/altv-athena.git
+git submodule update --init --recursive
 ```
 
 ```bash
@@ -187,5 +188,7 @@ F1 - Print Position, Rotation, and Heading in Console
 # Screenshots
 
 ![](https://i.imgur.com/eJnAHWm.png)
+
+![](https://i.imgur.com/v07Er4s.jpg)
 
 ![](https://i.imgur.com/4JZhbsW.jpg)
