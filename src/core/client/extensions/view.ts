@@ -3,6 +3,10 @@ import * as alt from 'alt-client';
 // Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
 
+alt.on('disconnect', async () => {
+    (await View.getInstance('', false)).destroy();
+});
+
 export class View extends alt.WebView {
     private static _instance: View;
     private currentEvents: { eventName: string; callback: any }[] = [];
@@ -36,6 +40,8 @@ export class View extends alt.WebView {
                 }, 5);
             });
         }
+
+        alt.Player.local.isMenuOpen = true;
 
         View._instance.url = url;
         View._instance.showCursor(addCursor);
@@ -97,6 +103,8 @@ export class View extends alt.WebView {
         this.url = blankURL;
         this.showCursor(false);
         this.unfocus();
+
+        alt.Player.local.isMenuOpen = false;
 
         // Turn off currently existing events.
         for (let i = 0; i < this.currentEvents.length; i++) {

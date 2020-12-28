@@ -10,7 +10,8 @@ import './events/disconnect';
 import './events/keyup';
 
 // Systems
-import './systems/login'
+import './systems/login';
+import './systems/nametag';
 import './systems/vehicle';
 
 // Views
