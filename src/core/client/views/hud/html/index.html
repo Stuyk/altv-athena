@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+    <head>
+        <title>Chat by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
+        <link rel="stylesheet/less" type="text/css" href="./style.less" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app">
+            <v-app>
+                <div class="chat d-flex flex-column">
+                    <div class="messages" ref="messages">
+                        <div class="message" v-for="(message, index) in messages" :index="index">
+                            {{ message }}
+                        </div>
+                    </div>
+                    <v-text-field v-if="active" class="chatInput" label="Use '/' to type a command." ref="chatInput" @keyup.enter="handleSend"></v-text-field>
+                    <v-text-field v-else class="chatInput-hidden" ref="chatInput" disabled></v-text-field>
+                </div>
+            </v-app>
+        </div>
+        <script src="../../js/vue.min.js"></script>
+        <script src="../../js/vuetify.js"></script>
+        <script src="../../js/less.min.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

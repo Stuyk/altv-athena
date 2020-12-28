@@ -1,0 +1,74 @@
+@import '../../less/variables.less';
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter';
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat {
+    min-width: 400px;
+    max-width: 400px;
+
+    min-height: 400px;
+    max-height: 400px;
+
+    overflow: auto;
+    margin-left: 12px;
+    margin-top: 12px;
+
+    .messages {
+        direction: rtl;
+        overflow: auto;
+        min-height: 324px;
+
+        .message {
+            color: white;
+            text-shadow: 1px 1px black;
+            direction: ltr;
+            padding-left: 6px;
+        }
+    }
+
+    .chatInput {
+        text-shadow: 1px 1px black;
+
+        #input-2 {
+            text-shadow: 1px 1px black;
+            background: rgba(0, 0, 0, 0.75);
+            padding-left: 3px;
+            margin-top: 6px;
+        }
+    }
+
+    .chatInput-hidden {
+        opacity: 0;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(20, 20, 20, 0.85);
+    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 1);
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer !important;
+}

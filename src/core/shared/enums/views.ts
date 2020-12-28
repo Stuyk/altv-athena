@@ -19,3 +19,8 @@ export enum View_Events_Characters {
     Done = 'characters:Done',
     Delete = 'characters:Delete'
 }
+
+export enum View_Events_Chat {
+    Send = 'chat:Send',
+    Append = 'chat:Append'
+}
