@@ -24,6 +24,9 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
 -   Character Selection
 -   Character Info Support
 -   Character Appearance Synchronization
+-   Name Tags
+    -   Display after 7.5s (Used for Hiding Names Partially)
+    -   Names Hidden in Vehicles
 -   Easy Discord Login / Authentication (alt:V Ares)
 
 # Project Plans
@@ -87,6 +90,36 @@ The Mongo Parameters are optional. Leave blank if working locally.
 
 Fill in `DEV_ID` if you are working locally and want to make changes quickly.
 Skips Authentication and logs you into your account.
+
+# Port Forwarding
+
+You should port forward 7788 and 7790.
+
+This needs to be done in your router and your local installation.
+
+Here's a script for port forwarding on windows. It's a `.bat` script.
+
+```bat
+ECHO OFF
+
+echo Opening 7788 for TCP
+netsh advfirewall firewall add rule name="alt:V-7788-IN-TCP" dir=in action=allow protocol=TCP localport=7788
+netsh advfirewall firewall add rule name="alt:V-7788-OUT-TCP" dir=out action=allow protocol=TCP localport=7788
+
+echo Opening 7788 for UDP
+netsh advfirewall firewall add rule name="alt:V-7788-IN-UDP" dir=in action=allow protocol=UDP localport=7788
+netsh advfirewall firewall add rule name="alt:V-7788-OUT-UDP" dir=out action=allow protocol=UDP localport=7788
+
+echo Opening 7790 for TCP
+netsh advfirewall firewall add rule name="alt:V-7790-IN-TCP" dir=in action=allow protocol=TCP localport=7790
+netsh advfirewall firewall add rule name="alt:V-7790-OUT-TCP" dir=out action=allow protocol=TCP localport=7790
+
+echo Opening 7790 for UDP
+netsh advfirewall firewall add rule name="alt:V-7790-IN-UDP" dir=in action=allow protocol=UDP localport=7790
+netsh advfirewall firewall add rule name="alt:V-7790-OUT-UDP" dir=out action=allow protocol=UDP localport=7790
+
+pause
+```
 
 # Running the Project
 
