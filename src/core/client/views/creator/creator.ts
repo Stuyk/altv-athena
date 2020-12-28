@@ -114,11 +114,11 @@ async function handleFinishSync(shouldTPose: boolean = false) {
     native.setPedHeadBlendData(alt.Player.local.scriptID, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
     native.setPedHeadBlendData(
         alt.Player.local.scriptID,
-        tempData.faceFather,
         tempData.faceMother,
+        tempData.faceFather,
         0,
-        tempData.skinFather,
         tempData.skinMother,
+        tempData.skinFather,
         0,
         parseFloat(tempData.faceMix.toString()),
         parseFloat(tempData.skinMix.toString()),
