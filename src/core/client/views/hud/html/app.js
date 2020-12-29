@@ -6,14 +6,22 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
+            previous: [' ', 'alt:V Athena Chat', 'By Stuyk'],
             messages: [],
             currentMessage: '',
-            active: false
+            active: false,
+            position: 0,
+            timestamp: true
         };
     },
     methods: {
         appendMessage(msg) {
-            this.messages.push(msg);
+            const currentTime = Date.now();
+            const date = new Date(currentTime);
+            this.messages.push({
+                message: msg,
+                time: `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`
+            });
 
             if (this.messages.length >= 50) {
                 this.messages.shift();
@@ -29,29 +37,53 @@ const app = new Vue({
             this.active = true;
         },
         handleEscape() {
-            this.$nextTick(() => {
-                this.$refs.currentMessage = '';
-            });
-
             this.active = false;
+            this.position = 0;
+            this.currentMessage = '';
 
             if ('alt' in window) {
                 alt.emit('chat:Send');
             }
         },
+        prevMessage() {
+            if (this.position + 1 > this.previous.length - 1) {
+                return;
+            }
+
+            this.position += 1;
+            this.currentMessage = this.previous[this.position];
+        },
+        nextMessage() {
+            if (this.position - 1 < 0) {
+                return;
+            }
+
+            this.position -= 1;
+            this.currentMessage = this.previous[this.position];
+        },
         handleSend(e) {
             const message = e.target.value;
             this.active = false;
-
-            // Clear Old Input
-            this.$nextTick(() => {
-                this.currentMessage = '';
-            });
+            this.position = 0;
+            this.currentMessage = '';
 
             // Handle No Message
             if (!message || message === '') {
                 alt.emit('chat:Send');
                 return;
+            }
+
+            if (message === '/timestamp') {
+                this.timestamp = !this.timestamp;
+                alt.emit('chat:Send', message);
+                return;
+            }
+
+            // Appends message to front of array.
+            if (!this.previous.includes(message)) {
+                this.previous = this.previous.filter((x) => x !== '');
+                this.previous.unshift(message);
+                this.previous.unshift('');
             }
 
             // Handle Send Message
@@ -80,7 +112,9 @@ const app = new Vue({
             let count = 0;
             setInterval(() => {
                 count += 1;
-                this.appendMessage(`Message ${count}`);
+                this.appendMessage(
+                    `Message ${count} lore impsum do stuff long words holy moley loook at my nice long sentence.`
+                );
             }, 100);
 
             setTimeout(() => {

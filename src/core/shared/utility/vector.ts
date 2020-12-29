@@ -46,13 +46,28 @@ export function getClosestVectorByPos<T>(pos: Vector3, arrayOfPositions: T[], po
 export function getClosestTypes<T>(
     pos: Vector3,
     elements: Array<{ pos: Vector3; valid: boolean }>,
-    maxDistance: number
+    maxDistance: number,
+    mustHaveProperties: Array<string> = []
 ): Array<T> {
     const newElements = [];
 
     for (let i = 0; i < elements.length; i++) {
         if (!elements[i] || !elements[i].valid) {
             continue;
+        }
+
+        if (mustHaveProperties.length >= 1) {
+            let isValid = true;
+            for (let x = 0; x < mustHaveProperties.length; x++) {
+                if (!elements[i][mustHaveProperties[x]]) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (!isValid) {
+                continue;
+            }
         }
 
         if (distance2d(pos, elements[i].pos) > maxDistance) {

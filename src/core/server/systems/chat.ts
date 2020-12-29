@@ -29,10 +29,11 @@ export async function handleMessage(player: alt.Player, message: string) {
     const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
         player.pos,
         alt.Player.all,
-        DEFAULT_CONFIG.CHAT_DISTANCE
+        DEFAULT_CONFIG.CHAT_DISTANCE,
+        ['discord'] // Used to check if they're logged in.
     );
 
-    emitAll(closestPlayers, View_Events_Chat.Append, `${player.name}: ${message}`);
+    emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${message}`);
 }
 
 export async function handleCommand(player: alt.Player, commandName: string, args: any[]) {}

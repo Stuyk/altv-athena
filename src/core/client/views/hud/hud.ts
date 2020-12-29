@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
+import { disableAllControls } from '../../utility/disableControls';
 
 const url = `http://resource/client/views/hud/html/index.html`;
 let view: alt.WebView;
@@ -24,6 +24,7 @@ async function handleView() {
  * @param {string} message
  */
 function handleNewMessage(message: string) {
+    disableAllControls(false);
     isOpen = false;
 
     // Handles Empty Messages
@@ -40,8 +41,6 @@ function handleNewMessage(message: string) {
  * @return {*}
  */
 function handleAppend(message: string) {
-    alt.log(message);
-
     if (!view) {
         return;
     }
@@ -64,4 +63,5 @@ export function focusChat() {
 
     isOpen = true;
     view.emit('chat:Focus');
+    disableAllControls(true);
 }

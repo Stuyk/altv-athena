@@ -60,6 +60,7 @@ input {
     text-shadow: 1px 1px black;
     direction: ltr;
     padding-left: 6px;
+    margin-bottom: 6px;
 }
 
 ::-webkit-scrollbar {

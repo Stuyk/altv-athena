@@ -12,7 +12,13 @@
                 <div class="chat d-flex flex-column">
                     <div class="messages" ref="messages">
                         <div class="message" v-for="(message, index) in messages" :index="index">
-                            {{ message }}
+                            <template v-if="timestamp">
+                                {{ message.time}} {{ message.message }}
+                            </template>
+                            <template v-else>
+                                {{ message.message }}
+                            </template>
+                            
                         </div>
                     </div>
                     <input
@@ -23,6 +29,8 @@
                         v-model="currentMessage"
                         @keyup.enter="handleSend" 
                         @keyup.escape="handleEscape"
+                        @keyup.up="prevMessage"
+                        @keyup.down="nextMessage"
                         v-focus>
                     </input>
                     <input v-else class="chatInput-hidden" ref="chatInput" disabled></input>
