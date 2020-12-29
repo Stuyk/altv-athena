@@ -28,6 +28,8 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
     -   Display after 7.5s (Used for Hiding Names Partially)
     -   Names Hidden in Vehicles
 -   Easy Discord Login / Authentication (alt:V Ares)
+-   Chat System
+    -   Send Messages to Closest Players
 
 # Project Plans
 
