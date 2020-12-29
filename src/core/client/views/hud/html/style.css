@@ -1,5 +1,3 @@
-@import '../../less/variables.less';
-
 body,
 html {
     padding: 0;
@@ -18,6 +16,10 @@ body {
     position: relative;
 }
 
+.v-application {
+    background: transparent !important;
+}
+
 .chat {
     min-width: 400px;
     max-width: 400px;
@@ -28,34 +30,36 @@ body {
     overflow: auto;
     margin-left: 12px;
     margin-top: 12px;
+}
 
-    .messages {
-        direction: rtl;
-        overflow: auto;
-        min-height: 324px;
+.chat .chatInput-hidden {
+    opacity: 0;
+}
 
-        .message {
-            color: white;
-            text-shadow: 1px 1px black;
-            direction: ltr;
-            padding-left: 6px;
-        }
-    }
+.chat .chatInput {
+    text-shadow: 1px 1px black;
+}
 
-    .chatInput {
-        text-shadow: 1px 1px black;
+input {
+    color: white;
+    text-shadow: 1px 1px black;
+    background: rgba(0, 0, 0, 0.75);
+    margin-top: 6px;
+    padding: 5px;
+    outline: none;
+}
 
-        #input-2 {
-            text-shadow: 1px 1px black;
-            background: rgba(0, 0, 0, 0.75);
-            padding-left: 3px;
-            margin-top: 6px;
-        }
-    }
+.chat .messages {
+    direction: rtl;
+    overflow: auto;
+    min-height: 324px;
+}
 
-    .chatInput-hidden {
-        opacity: 0;
-    }
+.chat .messages .message {
+    color: white;
+    text-shadow: 1px 1px black;
+    direction: ltr;
+    padding-left: 6px;
 }
 
 ::-webkit-scrollbar {

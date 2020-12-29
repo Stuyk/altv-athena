@@ -3,7 +3,7 @@
         <title>Chat by Stuyk</title>
         <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
-        <link rel="stylesheet/less" type="text/css" href="./style.less" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
@@ -15,8 +15,17 @@
                             {{ message }}
                         </div>
                     </div>
-                    <v-text-field v-if="active" class="chatInput" label="Use '/' to type a command." ref="chatInput" @keyup.enter="handleSend"></v-text-field>
-                    <v-text-field v-else class="chatInput-hidden" ref="chatInput" disabled></v-text-field>
+                    <input
+                        v-if="active" 
+                        class="chatInput" 
+                        label="Use '/' to type a command." 
+                        ref="chatInput"
+                        v-model="currentMessage"
+                        @keyup.enter="handleSend" 
+                        @keyup.escape="handleEscape"
+                        v-focus>
+                    </input>
+                    <input v-else class="chatInput-hidden" ref="chatInput" disabled></input>
                 </div>
             </v-app>
         </div>

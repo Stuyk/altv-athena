@@ -7,7 +7,7 @@ const app = new Vue({
     data() {
         return {
             messages: [],
-            input: '',
+            currentMessage: '',
             active: false
         };
     },
@@ -25,24 +25,32 @@ const app = new Vue({
                 });
             }
         },
-        setActive() {
+        focusChat() {
             this.active = true;
-
+        },
+        handleEscape() {
             this.$nextTick(() => {
-                this.$refs.chatInput.focus();
+                this.$refs.currentMessage = '';
             });
+
+            this.active = false;
+
+            if ('alt' in window) {
+                alt.emit('chat:Send');
+            }
         },
         handleSend(e) {
             const message = e.target.value;
+            this.active = false;
 
             // Clear Old Input
             this.$nextTick(() => {
-                this.$refs.chatInput = '';
+                this.currentMessage = '';
             });
 
             // Handle No Message
             if (!message || message === '') {
-                this.active = false;
+                alt.emit('chat:Send');
                 return;
             }
 
@@ -52,9 +60,22 @@ const app = new Vue({
             }
         }
     },
+    directives: {
+        focus: {
+            inserted: (el) => {
+                el.focus();
+            }
+        }
+    },
+    watch: {
+        currentMessage: (newValue) => {
+            this.currentMessage = newValue;
+        }
+    },
     mounted() {
         if ('alt' in window) {
             alt.on('chat:Append', this.appendMessage);
+            alt.on('chat:Focus', this.focusChat);
         } else {
             let count = 0;
             setInterval(() => {
@@ -63,7 +84,7 @@ const app = new Vue({
             }, 100);
 
             setTimeout(() => {
-                this.setActive();
+                this.focusChat();
             }, 500);
         }
     }
