@@ -1,3 +1,5 @@
+import '../systems/chat';
+
 export const DEFAULT_CONFIG = {
     // Character Selection View
     CHARACTER_SELECT_POS: { x: 193.70811462402344, y: -993.3659057617188, z: -99 },
@@ -9,5 +11,8 @@ export const DEFAULT_CONFIG = {
     // New Character Properties
     PLAYER_NEW_SPAWN_POS: { x: -867.1437377929688, y: -172.6201934814453, z: 37.799232482910156 },
     PLAYER_CASH: 100,
-    PLAYER_BANK: 100
+    PLAYER_BANK: 100,
+    // Chat Properties
+    CHAT_ENABLED: true, // Turn off messaging. Chat still works for commands.
+    CHAT_DISTANCE: 35
 };

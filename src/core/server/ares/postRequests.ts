@@ -29,6 +29,11 @@ export async function makePostRequest(url: string, isWindows: boolean = false, d
             process.exit(0);
         }
 
+        if (result.message) {
+            alt.logError(`[Athena] ${result.message}`);
+            process.exit(0);
+        }
+
         return await makePostRequest(url, isWindows, dataObject);
     }
 

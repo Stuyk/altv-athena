@@ -33,3 +33,49 @@ export function getClosestVectorByPos<T>(pos: Vector3, arrayOfPositions: T[], po
 
     return arrayOfPositions[0];
 }
+
+/**
+ * Gets an array of the closest types.
+ * @export
+ * @template T
+ * @param {Vector3} pos
+ * @param {Array<{ pos: Vector3; valid: boolean }>} elements
+ * @param {number} maxDistance
+ * @return {*}  {Array<T>}
+ */
+export function getClosestTypes<T>(
+    pos: Vector3,
+    elements: Array<{ pos: Vector3; valid: boolean }>,
+    maxDistance: number,
+    mustHaveProperties: Array<string> = []
+): Array<T> {
+    const newElements = [];
+
+    for (let i = 0; i < elements.length; i++) {
+        if (!elements[i] || !elements[i].valid) {
+            continue;
+        }
+
+        if (mustHaveProperties.length >= 1) {
+            let isValid = true;
+            for (let x = 0; x < mustHaveProperties.length; x++) {
+                if (!elements[i][mustHaveProperties[x]]) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (!isValid) {
+                continue;
+            }
+        }
+
+        if (distance2d(pos, elements[i].pos) > maxDistance) {
+            continue;
+        }
+
+        newElements.push(elements[i]);
+    }
+
+    return newElements as Array<T>;
+}

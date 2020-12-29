@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <head>
+        <title>Chat by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app">
+            <v-app>
+                <div class="chat d-flex flex-column">
+                    <div class="messages" ref="messages">
+                        <div class="message" v-for="(message, index) in messages" :index="index">
+                            <template v-if="timestamp">
+                                {{ message.time}} {{ message.message }}
+                            </template>
+                            <template v-else>
+                                {{ message.message }}
+                            </template>
+                            
+                        </div>
+                    </div>
+                    <input
+                        v-if="active" 
+                        class="chatInput" 
+                        label="Use '/' to type a command." 
+                        ref="chatInput"
+                        v-model="currentMessage"
+                        @keyup.enter="handleSend" 
+                        @keyup.escape="handleEscape"
+                        @keyup.up="prevMessage"
+                        @keyup.down="nextMessage"
+                        v-focus>
+                    </input>
+                    <input v-else class="chatInput-hidden" ref="chatInput" disabled></input>
+                </div>
+            </v-app>
+        </div>
+        <script src="../../js/vue.min.js"></script>
+        <script src="../../js/vuetify.js"></script>
+        <script src="../../js/less.min.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>
