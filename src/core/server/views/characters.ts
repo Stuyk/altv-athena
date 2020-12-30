@@ -18,7 +18,7 @@ alt.onClient(View_Events_Characters.Delete, handleDelete);
 export async function goToCharacterSelect(player: Player) {
     const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
-        player.account,
+        player.accountData._id,
         'characters'
     );
 
@@ -85,7 +85,7 @@ async function handleDelete(player: Player, id: string) {
     // Refetch Characters
     const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
-        player.account,
+        player.accountData._id,
         'characters'
     );
 

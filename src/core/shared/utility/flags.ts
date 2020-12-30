@@ -11,7 +11,7 @@ export function isFlagEnabled(flags: Flags | number, flagToCheck: Flags | number
     let currentFlags: number = flags as number;
     let currentFlagToCheck: number = flagToCheck as number;
 
-    if ((currentFlags & currentFlagToCheck) === flagToCheck) {
+    if ((currentFlags & currentFlagToCheck) !== 0) {
         return true;
     }
 

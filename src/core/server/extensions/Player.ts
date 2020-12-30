@@ -1,13 +1,30 @@
 import * as alt from 'alt-server';
-import { Character, CharacterDefaults } from '../../shared/interfaces/Character';
+import { Character } from '../../shared/interfaces/Character';
 import { DiscordUser } from '../interface/DiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
-import { View_Events_Chat, View_Events_Creator } from '../../shared/enums/views';
-import { Events_Meta } from '../../shared/enums/meta';
-import { Events_Misc } from '../../shared/enums/events';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
+import { Account } from '../interface/Account';
+
+// Prototypes
+import {
+    createNewCharacterPrototype,
+    selectCharacterPrototype,
+    setAccountDataPrototype,
+    setCharacterDataPrototype,
+    updateAppearancePrototype
+} from './playerPrototypes/character';
+import { emitMetaPrototype, emitPrototype } from './playerPrototypes/emit';
+import { initDataPrototype, initPrototype, updateDataByKeysPrototype } from './playerPrototypes/data';
+import { currencyAddPrototype, currencySetPrototype, currencySubPrototype } from './playerPrototypes/currency';
+import {
+    safeAddArmourPrototype,
+    safeAddHealthPrototype,
+    safeSetPositionPrototype
+} from './playerPrototypes/safeSetters';
+import { saveFieldPrototype, savePartialPrototype } from './playerPrototypes/save';
+import { sendPrototype } from './playerPrototypes/chat';
 
 const db: Database = getDatabase();
 
@@ -22,13 +39,10 @@ declare module 'alt-server' {
         pendingNewCharacter?: boolean;
         pendingCharacterSelect?: boolean;
 
-        // Account Data
-        account?: string;
-
         // Player Data
-        discord?: DiscordUser;
-        data?: Character;
-        info?: CharacterInfo;
+        accountData?: Partial<Account>; // Account Identifiers for Discord
+        discord?: DiscordUser; // Discord Information
+        data?: Partial<Character>; // Currently Selected Character
 
         // Anti
         acPosition?: alt.Vector3;
@@ -149,6 +163,20 @@ declare module 'alt-server' {
         send(message: string): void;
 
         /**
+         * Used to set and initialize default and new values for an account.
+         * @param {Partial<Account>} accountData
+         * @memberof Player
+         */
+        setAccountData(accountData: Partial<Account>): Promise<void>;
+
+        /**
+         * Used to set and initialize default and new values for a character.
+         * @param {Partial<CharacterData>} characterData
+         * @memberof Player
+         */
+        setCharacterData(characterData: Partial<Character>): void;
+
+        /**
          * Update the appearance of the player based on player.data.
          * @returns void
          */
@@ -160,188 +188,45 @@ declare module 'alt-server' {
          * @returns void
          */
         updateDataByKeys(dataObject: {}, targetDataName: string): void;
-
-        /**
-         * Used to update position based on player.data.
-         * @returns void
-         */
-        updatePosition(): void;
     }
 }
 
-alt.Player.prototype.createNewCharacter = async function createNewCharacter(
-    appearanceData: Partial<Appearance>,
-    infoData: Partial<CharacterInfo>,
-    name: string
-) {
-    const newDocument: Partial<Character> = { ...CharacterDefaults };
-    newDocument.appearance = appearanceData;
-    newDocument.info = infoData;
-    newDocument.account_id = this.account;
-    newDocument.name = name;
+/*
+ * Yes this file is a bit insane with the imports.
+ * The prototypes below help extend player functionality.
+ */
 
-    const document = await db.insertData(newDocument, 'characters', true);
-    document._id = document._id.toString(); // Re-cast id object as string.
-    this.selectCharacter(document);
-};
+// Bind Prototypes to Functions
+alt.Player.prototype.createNewCharacter = createNewCharacterPrototype;
 
-alt.Player.prototype.selectCharacter = async function selectCharacter(characterData: Partial<Character>) {
-    this.data = { ...characterData };
+// Emit Extensions
+alt.Player.prototype.emit = emitPrototype;
+alt.Player.prototype.emitMeta = emitMetaPrototype;
 
-    this.updatePosition();
-    this.updateAppearance();
-    this.emit(Events_Misc.StartTicks);
+// Data Prototypes
+alt.Player.prototype.init = initPrototype;
+alt.Player.prototype.initData = initDataPrototype;
+alt.Player.prototype.updateDataByKeys = updateDataByKeysPrototype;
 
-    // Temp Vehicle
-    // new alt.Vehicle('Washington', characterData.pos.x, characterData.pos.y, characterData.pos.z, 0, 0, 0);
+// Currency Prototypes
+alt.Player.prototype.currencyAdd = currencyAddPrototype;
+alt.Player.prototype.currencySub = currencySubPrototype;
+alt.Player.prototype.currencySet = currencySetPrototype;
 
-    // Delete Current Characters from Memory
-    delete this.currentCharacters;
-};
+// Safe Setters / Anticheat Prototypes
+alt.Player.prototype.safeAddArmour = safeAddArmourPrototype;
+alt.Player.prototype.safeAddHealth = safeAddHealthPrototype;
+alt.Player.prototype.safeSetPosition = safeSetPositionPrototype;
 
-alt.Player.prototype.emit = function emit(eventName: string, ...args: any[]) {
-    alt.nextTick(() => {
-        alt.emitClient(this, eventName, ...args);
-    });
-};
+// Database Saving and Handling
+alt.Player.prototype.saveField = saveFieldPrototype;
+alt.Player.prototype.savePartial = savePartialPrototype;
 
-alt.Player.prototype.emitMeta = function emitMeta(key: string, value: any) {
-    alt.nextTick(() => {
-        alt.emitClient(this, Events_Meta.Set, key, value);
-    });
-};
+// Character & Account Related
+alt.Player.prototype.selectCharacter = selectCharacterPrototype;
+alt.Player.prototype.setAccountData = setAccountDataPrototype;
+alt.Player.prototype.setCharacterData = setCharacterDataPrototype;
+alt.Player.prototype.updateAppearance = updateAppearancePrototype;
 
-alt.Player.prototype.saveField = async function saveField(fieldName: string, fieldValue: any) {
-    await db.updatePartialData(this.data._id, { [fieldName]: fieldValue }, 'characters');
-};
-
-alt.Player.prototype.savePartial = async function savePartial(dataObject: Character) {
-    await db.updatePartialData(this.data._id, { ...dataObject }, 'characters');
-};
-
-alt.Player.prototype.updateDataByKeys = function updateDataByKeys(dataObject: {}, targetDataName: string = '') {
-    Object.keys(dataObject).forEach((key) => {
-        if (targetDataName !== '') {
-            this.data[targetDataName][key] = dataObject[key];
-        } else {
-            this.data[key] = dataObject[key];
-        }
-    });
-};
-
-alt.Player.prototype.init = function init() {
-    this.data = Object.assign({}, CharacterDefaults);
-};
-
-alt.Player.prototype.initData = function initData(data: Character) {
-    Object.keys(data).forEach((key) => {
-        this.data[key] = data[key];
-    });
-};
-
-alt.Player.prototype.currencyAdd = function currencyAdd(type: CurrencyTypes, amount: number) {
-    if (amount > Number.MAX_SAFE_INTEGER) {
-        amount = Number.MAX_SAFE_INTEGER - 1;
-    }
-
-    try {
-        this.data[type] += amount;
-        this.saveField(type, this.data[type]);
-        return true;
-    } catch (err) {
-        return false;
-    }
-};
-
-alt.Player.prototype.currencySub = function currencySub(type: CurrencyTypes, amount: number) {
-    if (amount > Number.MAX_SAFE_INTEGER) {
-        amount = Number.MAX_SAFE_INTEGER - 1;
-    }
-
-    try {
-        this.data[type] -= amount;
-        this.saveField(type, this.data[type]);
-        return true;
-    } catch (err) {
-        return false;
-    }
-};
-
-alt.Player.prototype.currencySet = function currencySet(type: CurrencyTypes, amount: number) {
-    if (amount > Number.MAX_SAFE_INTEGER) {
-        amount = Number.MAX_SAFE_INTEGER - 1;
-    }
-
-    try {
-        this.data[type] = amount;
-        this.saveField(type, this.data[type]);
-        return true;
-    } catch (err) {
-        return false;
-    }
-};
-
-alt.Player.prototype.safeSetPosition = function safeSetPosition(x: number, y: number, z: number) {
-    if (!this.hasModel) {
-        this.hasModel = true;
-        this.spawn(x, y, z, 0);
-        this.model = `mp_m_freemode_01`;
-    }
-
-    this.acPosition = { x, y, z };
-    this.pos = { x, y, z };
-};
-
-alt.Player.prototype.safeAddHealth = function safeAddHealth(value: number, exactValue: boolean = false) {
-    if (exactValue) {
-        this.acHealth = value;
-        this.health = value;
-        return;
-    }
-
-    if (this.health + value > 200) {
-        this.acHealth = 200;
-        this.health = 200;
-        return;
-    }
-
-    this.acHealth = this.health + value;
-    this.health += value;
-};
-
-alt.Player.prototype.safeAddArmour = function safeAddArmour(value: number, exactValue: boolean = false) {
-    if (exactValue) {
-        this.acArmour = value;
-        this.armour = value;
-        return;
-    }
-
-    if (this.armour + value > 100) {
-        this.acArmour = 100;
-        this.armour = 100;
-        return;
-    }
-
-    this.acArmour = this.armour + value;
-    this.armour += value;
-};
-
-alt.Player.prototype.send = function send(message: string) {
-    this.emit(View_Events_Chat.Append, message);
-};
-
-alt.Player.prototype.updateAppearance = function updateAppearance() {
-    if (this.data.appearance.sex === 0) {
-        this.model = 'mp_f_freemode_01';
-    } else {
-        this.model = 'mp_m_freemode_01';
-    }
-
-    this.setSyncedMeta('Name', this.data.name);
-    this.emitMeta('appearance', this.data.appearance);
-    this.emit(View_Events_Creator.Sync, this.data.appearance);
-};
-
-alt.Player.prototype.updatePosition = function updatePosition() {
-    this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
-};
+// Chat Related
+alt.Player.prototype.send = sendPrototype;
