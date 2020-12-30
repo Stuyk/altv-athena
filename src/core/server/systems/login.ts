@@ -5,6 +5,7 @@ import { Player } from 'alt-server';
 import { Account } from '../interface/Account';
 import { goToCharacterSelect } from '../views/characters';
 import { View_Events_Discord } from '../../shared/enums/views';
+import { Permissions } from '../../shared/enums/permissions';
 
 /**
  * Why Discord Login?
@@ -59,14 +60,14 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
             discord: player.discord.id,
             ips: [player.ip],
             hardware: [player.hwidHash, player.hwidExHash],
-            lastLogin: Date.now()
+            lastLogin: Date.now(),
+            permissionLevel: Permissions.None
         };
 
         account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
     }
 
-    // Go to Character Selection
-    player.account = account._id;
+    await player.setAccountData(account);
     goToCharacterSelect(player);
 }
 

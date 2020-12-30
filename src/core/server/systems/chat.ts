@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { commandList } from '../../shared/commands/commandList';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { Command } from '../../shared/interfaces/Command';
+import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { emitAll } from '../utility/emitHelper';
@@ -32,6 +33,11 @@ export async function addCommand(name: string, callback: Function) {
 }
 
 export async function handleMessage(player: alt.Player, message: string) {
+    // Prevent Chatting from Non-Logged In User
+    if (!player.discord || !player.data) {
+        return;
+    }
+
     if (message.charAt(0) === '/') {
         message = message.trim().slice(1);
 
@@ -63,6 +69,11 @@ export async function handleCommand(player: alt.Player, commandName: string, ...
     const commandInfo = commands[commandName];
     if (!commandInfo || !commandInfo.func) {
         player.send(`/${commandName} is not a valid command.`);
+        return;
+    }
+
+    if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
+        player.send(`{FF0000} Command is not permitted.`);
         return;
     }
 

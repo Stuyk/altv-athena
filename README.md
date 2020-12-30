@@ -30,15 +30,12 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
 -   Easy Discord Login / Authentication (alt:V Ares)
 -   Chat System
     -   Send Messages to Closest Players
+    -   Create Custom Commands
+    -   Assign Permission Values to Commands
 
-# Project Plans
-
--   Respawn System
--   Chat Box \*Optional
--   alt:V Voice \*Optional
--   Inventory \*Optional
--   Economy System \*Optional
--   Job System \*Optional
+```
+View a full list of planned features in the Discord link below.
+```
 
 # Support
 
@@ -222,6 +219,12 @@ I have left some comments in the code block below to help you find where things 
 
 ```
 F1 - Print Position, Rotation, and Heading in Console
+```
+
+# Core Commands
+
+```
+/timestamp - Will toggle chat timestamps on and off.
 ```
 
 # Screenshots
