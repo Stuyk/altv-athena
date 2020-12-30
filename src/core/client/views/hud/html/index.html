@@ -13,10 +13,10 @@
                     <div class="messages" ref="messages">
                         <div class="message" v-for="(message, index) in messages" :index="index">
                             <template v-if="timestamp">
-                                {{ message.time}} {{ message.message }}
+                                <span>{{ message.time}}</span><span :inner-html.prop="message.message | colorify" />
                             </template>
                             <template v-else>
-                                {{ message.message }}
+                                <span :inner-html.prop="message.message | colorify" />
                             </template>
                             
                         </div>
