@@ -36,7 +36,7 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
     delete player.discordToken;
 
     if (data.username) {
-        alt.log(`[Athena] (${player.id})${data.username} has authenticated.`);
+        alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
     }
 
     if (loggedInUsers.includes(data.id)) {

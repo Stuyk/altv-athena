@@ -4,7 +4,7 @@ import { DiscordUser } from '../interface/DiscordUser';
 import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
-import { View_Events_Creator } from '../../shared/enums/views';
+import { View_Events_Chat, View_Events_Creator } from '../../shared/enums/views';
 import { Events_Meta } from '../../shared/enums/meta';
 import { Events_Misc } from '../../shared/enums/events';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
@@ -110,14 +110,14 @@ declare module 'alt-server' {
          * @param  {number} value
          * @returns void
          */
-        safeAddHealth(value: number): void;
+        safeAddHealth(value: number, exactValue: boolean): void;
 
         /**
          * Safely set this player's armour value.
          * @param  {number} value
          * @returns void
          */
-        safeAddArmour(value: number): void;
+        safeAddArmour(value: number, exactValue: boolean): void;
 
         /**
          * Save specific data for this player. Update `player.data` first.
@@ -140,6 +140,13 @@ declare module 'alt-server' {
          * @returns void
          */
         selectCharacter(characterData: Character): void;
+
+        /**
+         * Append a message to a player's chat box.
+         * @param {string} message
+         * @memberof Player
+         */
+        send(message: string): void;
 
         /**
          * Update the appearance of the player based on player.data.
@@ -285,7 +292,13 @@ alt.Player.prototype.safeSetPosition = function safeSetPosition(x: number, y: nu
     this.pos = { x, y, z };
 };
 
-alt.Player.prototype.safeAddHealth = function safeAddHealth(value: number) {
+alt.Player.prototype.safeAddHealth = function safeAddHealth(value: number, exactValue: boolean = false) {
+    if (exactValue) {
+        this.acHealth = value;
+        this.health = value;
+        return;
+    }
+
     if (this.health + value > 200) {
         this.acHealth = 200;
         this.health = 200;
@@ -296,7 +309,13 @@ alt.Player.prototype.safeAddHealth = function safeAddHealth(value: number) {
     this.health += value;
 };
 
-alt.Player.prototype.safeAddArmour = function safeAddArmour(value: number) {
+alt.Player.prototype.safeAddArmour = function safeAddArmour(value: number, exactValue: boolean = false) {
+    if (exactValue) {
+        this.acArmour = value;
+        this.armour = value;
+        return;
+    }
+
     if (this.armour + value > 100) {
         this.acArmour = 100;
         this.armour = 100;
@@ -305,6 +324,10 @@ alt.Player.prototype.safeAddArmour = function safeAddArmour(value: number) {
 
     this.acArmour = this.armour + value;
     this.armour += value;
+};
+
+alt.Player.prototype.send = function send(message: string) {
+    this.emit(View_Events_Chat.Append, message);
 };
 
 alt.Player.prototype.updateAppearance = function updateAppearance() {
