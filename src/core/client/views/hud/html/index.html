@@ -27,10 +27,12 @@
                         label="Use '/' to type a command." 
                         ref="chatInput"
                         v-model="currentMessage"
+                        :value="currentMessage"
                         @keyup.enter="handleSend" 
                         @keyup.escape="handleEscape"
                         @keyup.up="prevMessage"
                         @keyup.down="nextMessage"
+                        @keyup="handleTyping"
                         v-focus>
                     </input>
                     <input v-else class="chatInput-hidden" ref="chatInput" disabled></input>

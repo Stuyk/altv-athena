@@ -5,4 +5,5 @@ export interface Command {
     description: string;
     permission: Permissions;
     cooldown: number;
+    func?: Function;
 }

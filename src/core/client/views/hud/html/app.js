@@ -1,6 +1,25 @@
 Vue.config.devtools = true;
 Vue.prototype.window = window;
 
+const tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
+const tagOrComment = new RegExp(
+    '<(?:' +
+        // Comment body.
+        '!--(?:(?:-*[^->])*--+|-?)' +
+        // Special "raw text" elements whose content should be elided.
+        '|script\\b' +
+        tagBody +
+        '>[\\s\\S]*?</script\\s*' +
+        '|style\\b' +
+        tagBody +
+        '>[\\s\\S]*?</style\\s*' +
+        // Regular name
+        '|/?[a-z]' +
+        tagBody +
+        ')>',
+    'gi'
+);
+
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
@@ -90,6 +109,9 @@ const app = new Vue({
             if ('alt' in window) {
                 alt.emit('chat:Send', message);
             }
+        },
+        handleTyping(e) {
+            this.currentMessage = this.currentMessage.replace(tagOrComment, '').replace('/</g', '&lt;');
         }
     },
     directives: {

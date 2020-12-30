@@ -78,6 +78,8 @@ function drawNametags() {
             0
         );
 
+        const modifiedName = isChatting ? `(${player.id}) ${name}~r~*` : `(${player.id}) ${name}`;
+
         native.beginTextCommandDisplayText('STRING');
         native.setTextFont(4);
         native.setTextScale(fontSize, fontSize);
@@ -85,7 +87,7 @@ function drawNametags() {
         native.setTextCentre(true);
         native.setTextColour(255, 255, 255, 255);
         native.setTextOutline();
-        native.addTextComponentSubstringPlayerName(isChatting ? `${name}~r~*` : `${name}`);
+        native.addTextComponentSubstringPlayerName(modifiedName);
         native.endTextCommandDisplayText(0, 0, 0);
         native.clearDrawOrigin();
     }
