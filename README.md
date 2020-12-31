@@ -233,8 +233,10 @@ Enter - Send Chat Message
 ```
 /timestamp - Will toggle chat timestamps on and off.
 /help - List commands available to your permission level.
-/me - Describe an action you are performing.
-/do - Describe an object or item around you.
+/me [message] - Describe an action you are performing.
+/do [message] - Describe an object or item around you.
+/low [message] - Say something in a low voice.
+/w [player_id] [message] - Whisper something to a player near you.
 ```
 
 # Screenshots
