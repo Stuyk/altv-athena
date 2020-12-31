@@ -7,9 +7,11 @@ import * as sm from 'simplymongo';
 
 const db: sm.Database = sm.getDatabase();
 
-alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
-alt.onClient(View_Events_Characters.New, handleNewCharacter);
-alt.onClient(View_Events_Characters.Delete, handleDelete);
+export default function () {
+    alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
+    alt.onClient(View_Events_Characters.New, handleNewCharacter);
+    alt.onClient(View_Events_Characters.Delete, handleDelete);
+}
 
 /**
  * Called when a player needs to go to character select.

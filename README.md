@@ -219,12 +219,22 @@ I have left some comments in the code block below to help you find where things 
 
 ```
 F1 - Print Position, Rotation, and Heading in Console
+
+> Chat View
+Up - Last Message
+Down - Next Message
+Right - Autocomplete Command
+Escape - Exit Chat
+Enter - Send Chat Message
 ```
 
 # Core Commands
 
 ```
 /timestamp - Will toggle chat timestamps on and off.
+/help - List commands available to your permission level.
+/me - Describe an action you are performing.
+/do - Describe an object or item around you.
 ```
 
 # Screenshots

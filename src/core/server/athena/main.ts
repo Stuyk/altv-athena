@@ -14,5 +14,10 @@ export const DEFAULT_CONFIG = {
     PLAYER_BANK: 100,
     // Chat Properties
     CHAT_ENABLED: true, // Turn off messaging. Chat still works for commands.
-    CHAT_DISTANCE: 35
+    CHAT_DISTANCE: 35,
+    // Command Properties
+    COMMAND_ME_DISTANCE: 35,
+    COMMAND_DO_DISTANCE: 35,
+    COMMAND_LOW_DISTANCE: 10,
+    COMMAND_WHISPER_DISTANCE: 5
 };

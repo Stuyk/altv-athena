@@ -3,7 +3,7 @@ import { addCommand } from '../systems/chat';
 
 addCommand('sethealth', handleCommand);
 
-function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: number | null = null): void {
+function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
         player.send(`/sethealth <value> <target_id>`);
         return;
@@ -22,7 +22,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
         return;
     }
 
-    const target: alt.Player = [...alt.Player.all].find((x) => x.id === targetPlayerID);
+    const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
         player.send(`That Player ID does not exist.`);
         return;

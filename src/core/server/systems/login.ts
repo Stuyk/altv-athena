@@ -7,6 +7,11 @@ import { goToCharacterSelect } from '../views/characters';
 import { View_Events_Discord } from '../../shared/enums/views';
 import { Permissions } from '../../shared/enums/permissions';
 
+export default function () {
+    alt.on('playerDisconnect', handleDisconnect);
+    alt.on('Discord:Login', handleLoginRouting);
+}
+
 /**
  * Why Discord Login?
  * 1. It doesn't cost you a dime to verify a user.
@@ -23,9 +28,6 @@ import { Permissions } from '../../shared/enums/permissions';
 
 const db: sm.Database = sm.getDatabase();
 const loggedInUsers: Array<DiscordUser['id']> = [];
-
-alt.on('playerDisconnect', handleDisconnect);
-alt.on('Discord:Login', handleLoginRouting);
 
 /**
  * Called when the express server authenticates a user.

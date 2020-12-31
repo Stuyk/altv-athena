@@ -18,26 +18,44 @@ import { Command } from '../interfaces/Command';
 export const commandList: Array<Command> = [
     {
         name: 'me',
-        description: '/me <describe what you are doing>',
+        description: '/me [describe what you are doing] - Roleplay an action',
+        cooldown: 0,
+        permission: Permissions.None
+    },
+    {
+        name: 'do',
+        description: '/do [describe an object] - Describe something',
+        cooldown: 0,
+        permission: Permissions.None
+    },
+    {
+        name: 'low',
+        description: '/low [quietly speak something]',
+        cooldown: 0,
+        permission: Permissions.None
+    },
+    {
+        name: 'w',
+        description: '/w [player_id] [message] - Whisper',
         cooldown: 0,
         permission: Permissions.None
     },
     // Admin+
     {
         name: 'sethealth',
-        description: '/sethealth <101 - 200> <player_id>',
+        description: '/sethealth [99 - 200] [player_id]* - Set health for self or others',
         cooldown: 0,
         permission: Permissions.Admin | Permissions.Moderator
     },
     {
         name: 'setarmour',
-        description: '/setarmour <0 - 100> <player_id>',
+        description: '/setarmour [0 - 100] [player_id]* - Set armour for self or others',
         cooldown: 0,
         permission: Permissions.Admin | Permissions.Moderator
     },
     {
         name: 'revive',
-        description: '/revive <player_id>',
+        description: '/revive [player_id]* - Revive self or others',
         cooldown: 0,
         permission: Permissions.Admin | Permissions.Moderator
     }

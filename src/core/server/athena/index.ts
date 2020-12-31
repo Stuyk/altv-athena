@@ -27,5 +27,5 @@ if (!process.env.EMAIL) {
     }
 
     alt.logWarning(`[Athena] Key was validated.`);
-    eval(bootResult);
+    await eval(bootResult);
 })();

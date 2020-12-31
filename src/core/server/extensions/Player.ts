@@ -191,42 +191,39 @@ declare module 'alt-server' {
     }
 }
 
-/*
- * Yes this file is a bit insane with the imports.
- * The prototypes below help extend player functionality.
- */
+export default function () {
+    // Bind Prototypes to Functions
+    alt.Player.prototype.createNewCharacter = createNewCharacterPrototype;
 
-// Bind Prototypes to Functions
-alt.Player.prototype.createNewCharacter = createNewCharacterPrototype;
+    // Emit Extensions
+    alt.Player.prototype.emit = emitPrototype;
+    alt.Player.prototype.emitMeta = emitMetaPrototype;
 
-// Emit Extensions
-alt.Player.prototype.emit = emitPrototype;
-alt.Player.prototype.emitMeta = emitMetaPrototype;
+    // Data Prototypes
+    alt.Player.prototype.init = initPrototype;
+    alt.Player.prototype.initData = initDataPrototype;
+    alt.Player.prototype.updateDataByKeys = updateDataByKeysPrototype;
 
-// Data Prototypes
-alt.Player.prototype.init = initPrototype;
-alt.Player.prototype.initData = initDataPrototype;
-alt.Player.prototype.updateDataByKeys = updateDataByKeysPrototype;
+    // Currency Prototypes
+    alt.Player.prototype.currencyAdd = currencyAddPrototype;
+    alt.Player.prototype.currencySub = currencySubPrototype;
+    alt.Player.prototype.currencySet = currencySetPrototype;
 
-// Currency Prototypes
-alt.Player.prototype.currencyAdd = currencyAddPrototype;
-alt.Player.prototype.currencySub = currencySubPrototype;
-alt.Player.prototype.currencySet = currencySetPrototype;
+    // Safe Setters / Anticheat Prototypes
+    alt.Player.prototype.safeAddArmour = safeAddArmourPrototype;
+    alt.Player.prototype.safeAddHealth = safeAddHealthPrototype;
+    alt.Player.prototype.safeSetPosition = safeSetPositionPrototype;
 
-// Safe Setters / Anticheat Prototypes
-alt.Player.prototype.safeAddArmour = safeAddArmourPrototype;
-alt.Player.prototype.safeAddHealth = safeAddHealthPrototype;
-alt.Player.prototype.safeSetPosition = safeSetPositionPrototype;
+    // Database Saving and Handling
+    alt.Player.prototype.saveField = saveFieldPrototype;
+    alt.Player.prototype.savePartial = savePartialPrototype;
 
-// Database Saving and Handling
-alt.Player.prototype.saveField = saveFieldPrototype;
-alt.Player.prototype.savePartial = savePartialPrototype;
+    // Character & Account Related
+    alt.Player.prototype.selectCharacter = selectCharacterPrototype;
+    alt.Player.prototype.setAccountData = setAccountDataPrototype;
+    alt.Player.prototype.setCharacterData = setCharacterDataPrototype;
+    alt.Player.prototype.updateAppearance = updateAppearancePrototype;
 
-// Character & Account Related
-alt.Player.prototype.selectCharacter = selectCharacterPrototype;
-alt.Player.prototype.setAccountData = setAccountDataPrototype;
-alt.Player.prototype.setCharacterData = setCharacterDataPrototype;
-alt.Player.prototype.updateAppearance = updateAppearancePrototype;
-
-// Chat Related
-alt.Player.prototype.send = sendPrototype;
+    // Chat Related
+    alt.Player.prototype.send = sendPrototype;
+}

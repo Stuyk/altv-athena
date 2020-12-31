@@ -4,7 +4,9 @@ import { Player } from 'alt-server';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { handleLoginRouting } from '../systems/login';
 
-alt.on('Discord:Opened', handlePlayerConnect); // End
+export default function () {
+    alt.on('Discord:Opened', handlePlayerConnect);
+}
 
 /**
  * Called when a player connects to the server.

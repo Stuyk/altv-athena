@@ -3,15 +3,15 @@ import { addCommand } from '../systems/chat';
 
 addCommand('revive', handleCommand);
 
-function handleCommand(player: alt.Player, targetPlayerID: number | null = null): void {
+function handleCommand(player: alt.Player, targetPlayerID: string | null = null): void {
     if (targetPlayerID === null) {
         finishRevive(player);
         return;
     }
 
-    const target: alt.Player = [...alt.Player.all].find((x) => x.id === targetPlayerID);
+    const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`That Player ID does not exist.`);
+        player.send(`That player does not exist.`);
         return;
     }
 
