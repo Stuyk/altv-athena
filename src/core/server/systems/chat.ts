@@ -8,7 +8,9 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { emitAll } from '../utility/emitHelper';
 
 alt.onClient(View_Events_Chat.Send, handleMessage);
+
 const commands: { [key: string]: Command } = {};
+const maxMessageLength: number = 128;
 
 for (let i = 0; i < commandList.length; i++) {
     commands[commandList[i].name] = commandList[i];
@@ -28,6 +30,11 @@ export async function addCommand(name: string, callback: Function) {
         return;
     }
 
+    if (commands[name] == undefined) {
+        alt.logError(`[Athena] Failed to register command ${name}. Command was likely not added to 'commandList.ts'`);
+        return;
+    }
+
     commands[name].func = callback;
     alt.log(`[Athena] Registered Command: ${name}`);
 }
@@ -35,6 +42,10 @@ export async function addCommand(name: string, callback: Function) {
 export async function handleMessage(player: alt.Player, message: string) {
     // Prevent Chatting from Non-Logged In User
     if (!player.discord || !player.data) {
+        return;
+    }
+
+    if (message.length >= maxMessageLength) {
         return;
     }
 
@@ -72,9 +83,11 @@ export async function handleCommand(player: alt.Player, commandName: string, ...
         return;
     }
 
-    if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
-        player.send(`{FF0000} Command is not permitted.`);
-        return;
+    if (commandInfo.permission !== 0) {
+        if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
+            player.send(`{FF0000} Command is not permitted.`);
+            return;
+        }
     }
 
     commandInfo.func(player, ...args);

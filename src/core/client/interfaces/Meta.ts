@@ -1,3 +1,3 @@
 export interface Meta {
-    // Add some stuff.
+    permissionLevel: number;
 }

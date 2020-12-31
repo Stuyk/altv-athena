@@ -17,6 +17,13 @@ import { Command } from '../interfaces/Command';
 
 export const commandList: Array<Command> = [
     {
+        name: 'me',
+        description: '/me <describe what you are doing>',
+        cooldown: 0,
+        permission: Permissions.None
+    },
+    // Admin+
+    {
         name: 'sethealth',
         description: '/sethealth <101 - 200> <player_id>',
         cooldown: 0,

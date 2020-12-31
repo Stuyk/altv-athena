@@ -2,7 +2,7 @@ import { Meta } from './Meta';
 
 declare module 'alt-client' {
     export interface Player {
-        meta?: Meta;
+        meta: Partial<Meta>;
         isMenuOpen: boolean;
         inVisionTime: number | null;
     }

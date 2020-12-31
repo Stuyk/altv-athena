@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { commandList } from '../../../shared/commands/commandList';
 import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { disableAllControls } from '../../utility/disableControls';
@@ -14,6 +15,7 @@ async function handleView() {
     if (!view) {
         view = new alt.WebView(url, false);
         view.on('chat:Send', handleNewMessage);
+        view.on('chat:Inject', handleInject);
     }
 
     view.unfocus();
@@ -46,6 +48,14 @@ function handleAppend(message: string) {
     }
 
     view.emit('chat:Append', message);
+}
+
+function handleInject() {
+    const myCommands = commandList.filter(
+        (cmd) => cmd.permission === 0 || (alt.Player.local.meta.permissionLevel & cmd.permission) !== 0
+    );
+
+    view.emit('chat:Inject', myCommands);
 }
 
 export function focusChat() {

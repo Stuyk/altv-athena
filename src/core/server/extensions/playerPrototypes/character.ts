@@ -40,6 +40,7 @@ export async function setAccountDataPrototype(accountData: Partial<Account>): Pr
         accountData.permissionLevel = Permissions.None;
     }
 
+    this.emitMeta('permissionLevel', accountData.permissionLevel);
     this.accountData = accountData;
 }
 

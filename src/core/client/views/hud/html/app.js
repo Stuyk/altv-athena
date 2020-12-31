@@ -27,10 +27,15 @@ const app = new Vue({
         return {
             previous: [' ', 'alt:V Athena Chat', 'By Stuyk'],
             messages: [],
+            commands: [
+                { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
+                { name: 'help', description: '/help - List available commands.' }
+            ],
             currentMessage: '',
             active: false,
             position: 0,
-            timestamp: true
+            timestamp: false,
+            matchedCommand: null
         };
     },
     methods: {
@@ -94,7 +99,16 @@ const app = new Vue({
 
             if (message === '/timestamp') {
                 this.timestamp = !this.timestamp;
-                alt.emit('chat:Send', message);
+                alt.emit('chat:Send');
+                this.appendMessage(`You have toggled timestamps.`);
+                return;
+            }
+
+            if (message === '/help' || message === '/commands') {
+                alt.emit('chat:Send');
+                for (let i = 0; i < this.commands.length; i++) {
+                    this.appendMessage(`${this.commands[i].description}`);
+                }
                 return;
             }
 
@@ -112,6 +126,42 @@ const app = new Vue({
         },
         handleTyping(e) {
             this.currentMessage = this.currentMessage.replace(tagOrComment, '').replace('/</g', '&lt;');
+
+            console.log(this.currentMessage);
+
+            if (this.currentMessage === '' || this.currentMessage.length <= 2) {
+                this.matchedCommand = null;
+                return;
+            }
+
+            const index = this.commands.findIndex(
+                (x) => x && x.description && x.description.includes(this.currentMessage)
+            );
+
+            if (index <= -1) {
+                this.matchedCommand = null;
+                return;
+            }
+
+            if (this.matchedCommand !== null && this.currentMessage.replace('/', '') === this.commands[index].name) {
+                this.matchedCommand = `/${this.commands[index].name}`;
+                return;
+            }
+
+            this.matchedName = this.commands[index].name;
+            this.matchedCommand = this.commands[index].description;
+        },
+        useCommand() {
+            if (this.matchedCommand && this.matchedName) {
+                this.currentMessage = `/${this.matchedName}`;
+            }
+        },
+        inject(commands) {
+            if (!Array.isArray(commands)) {
+                return;
+            }
+
+            this.commands = this.commands.concat(commands);
         }
     },
     directives: {
@@ -171,6 +221,8 @@ const app = new Vue({
         if ('alt' in window) {
             alt.on('chat:Append', this.appendMessage);
             alt.on('chat:Focus', this.focusChat);
+            alt.on('chat:Inject', this.inject);
+            alt.emit('chat:Inject');
         } else {
             let count = 0;
             setInterval(() => {
