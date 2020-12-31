@@ -60,3 +60,20 @@ export const commandList: Array<Command> = [
         permission: Permissions.Admin | Permissions.Moderator
     }
 ];
+
+/**
+ * Returns a description of the command.
+ * Mostly used for constructing commands in 'server/commands/...'
+ * @export
+ * @param {string} commandName
+ * @return {*}  {string}
+ */
+export function getDescription(commandName: string): string {
+    const index = commandList.findIndex((x) => x.name === commandName);
+
+    if (index <= -1) {
+        return `${commandName} does not have a description.`;
+    }
+
+    return commandList[index].description;
+}

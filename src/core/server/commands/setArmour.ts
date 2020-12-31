@@ -1,11 +1,12 @@
 import * as alt from 'alt-server';
+import { getDescription } from '../../shared/commands/commandList';
 import { addCommand } from '../systems/chat';
 
 addCommand('setarmour', handleCommand);
 
 function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
-        player.send(`/setarmour <value> <target_id>`);
+        player.send(getDescription('setarmour'));
         return;
     }
 

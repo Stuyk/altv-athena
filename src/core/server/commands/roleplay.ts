@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { getDescription } from '../../shared/commands/commandList';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { distance2d, getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -16,6 +17,7 @@ addCommand('w', handleCommandWhisper);
 
 function handleCommandMe(player: alt.Player, ...args): void {
     if (args.length <= 0) {
+        player.send(getDescription('me'));
         return;
     }
 
@@ -29,6 +31,7 @@ function handleCommandMe(player: alt.Player, ...args): void {
 
 function handleCommandDo(player: alt.Player, ...args): void {
     if (args.length <= 0) {
+        player.send(getDescription('do'));
         return;
     }
 
@@ -42,6 +45,7 @@ function handleCommandDo(player: alt.Player, ...args): void {
 
 function handleCommandLow(player: alt.Player, ...args): void {
     if (args.length <= 0) {
+        player.send(getDescription('low'));
         return;
     }
 
@@ -62,12 +66,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     if (typeof id !== 'string') {
-        player.send(`/whisper [player_id] [message]`);
+        player.send(getDescription('w'));
         return;
     }
 
     if (id === null) {
-        player.send(`/whisper [player_id] [message]`);
+        player.send(getDescription('w'));
         return;
     }
 
@@ -75,12 +79,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     const target = players.find((target) => target && id === target.id.toString());
 
     if (!target || !target.valid) {
-        player.send(`Player was not found.`);
+        player.send(`Could not find the target player.`);
         return;
     }
 
     if (distance2d(target.pos, player.pos) > DEFAULT_CONFIG.COMMAND_WHISPER_DISTANCE) {
-        player.send(`Player is too far from you.`);
+        player.send(`Player is too far away.`);
         return;
     }
 

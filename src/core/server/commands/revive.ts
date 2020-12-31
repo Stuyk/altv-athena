@@ -11,7 +11,7 @@ function handleCommand(player: alt.Player, targetPlayerID: string | null = null)
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`That player does not exist.`);
+        player.send(`Could not find the target player.`);
         return;
     }
 

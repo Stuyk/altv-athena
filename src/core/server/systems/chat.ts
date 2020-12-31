@@ -22,6 +22,13 @@ for (let i = 0; i < commandList.length; i++) {
     }
 }
 
+/**
+ * Used to add a command to the command runtime.
+ * @export
+ * @param {string} name
+ * @param {Function} callback
+ * @return {*}
+ */
 export async function addCommand(name: string, callback: Function) {
     if (!commands[name] && commands.func) {
         alt.logError(
@@ -39,7 +46,14 @@ export async function addCommand(name: string, callback: Function) {
     alt.log(`[Athena] Registered Command: ${name}`);
 }
 
-export async function handleMessage(player: alt.Player, message: string) {
+/**
+ * Handles incoming messages from player input.
+ * @export
+ * @param {alt.Player} player
+ * @param {string} message
+ * @return {Promise<void>}
+ */
+export async function handleMessage(player: alt.Player, message: string): Promise<void> {
     // Prevent Chatting from Non-Logged In User
     if (!player.discord || !player.data) {
         return;
@@ -76,7 +90,15 @@ export async function handleMessage(player: alt.Player, message: string) {
     emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${message}`);
 }
 
-export async function handleCommand(player: alt.Player, commandName: string, ...args: any[]) {
+/**
+ * Handles command routing and execution from player messages.
+ * @export
+ * @param {alt.Player} player
+ * @param {string} commandName
+ * @param {...any[]} args
+ * @return {Promise<void>}
+ */
+export async function handleCommand(player: alt.Player, commandName: string, ...args: any[]): Promise<void> {
     const commandInfo = commands[commandName];
     if (!commandInfo || !commandInfo.func) {
         player.send(`/${commandName} is not a valid command.`);

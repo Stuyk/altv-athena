@@ -1,11 +1,12 @@
 import * as alt from 'alt-server';
+import { getDescription } from '../../shared/commands/commandList';
 import { addCommand } from '../systems/chat';
 
 addCommand('sethealth', handleCommand);
 
 function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
-        player.send(`/sethealth <value> <target_id>`);
+        player.send(getDescription('sethealth'));
         return;
     }
 
@@ -24,7 +25,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`That Player ID does not exist.`);
+        player.send(`Could not find the target player.`);
         return;
     }
 
