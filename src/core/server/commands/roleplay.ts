@@ -89,5 +89,6 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     const fullMessage = args.join(' ');
+    player.send(`${wc}You whisper: '${fullMessage}' to ${target.data.name}`);
     target.send(`${wc}${player.data.name} whispers: ${fullMessage}`);
 }

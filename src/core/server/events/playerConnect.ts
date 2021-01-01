@@ -15,6 +15,10 @@ export default function () {
  * @param  {alt.Player} player
  */
 async function handlePlayerConnect(player: alt.Player) {
+    if (!(player instanceof alt.Player)) {
+        return;
+    }
+
     if (!player) {
         alt.log(`Bad player reconnect. Reconnect again.`);
         return;

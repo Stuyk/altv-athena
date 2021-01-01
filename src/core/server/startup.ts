@@ -12,6 +12,10 @@ function handleEntryToggle() {
 }
 
 function handleEarlyConnect(player: alt.Player) {
+    if (!(player instanceof alt.Player)) {
+        return;
+    }
+
     if (!player) {
         return;
     }

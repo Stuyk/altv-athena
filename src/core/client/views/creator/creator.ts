@@ -207,12 +207,11 @@ async function handleFinishSync(shouldTPose: boolean = false) {
         await playAnimation('nm@hands', 'natural', AnimationFlags.REPEAT | AnimationFlags.STOP_LAST_FRAME);
     }
 
-    native.setEntityCoords(
+    native.setEntityCoordsNoOffset(
         alt.Player.local.scriptID,
         alt.Player.local.pos.x,
         alt.Player.local.pos.y,
         alt.Player.local.pos.z,
-        false,
         false,
         false,
         false
