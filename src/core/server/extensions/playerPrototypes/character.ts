@@ -18,7 +18,7 @@ export async function createNewCharacterPrototype(
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.info = infoData;
-    newDocument.account_id = this.accountData.id;
+    newDocument.account_id = this.accountData._id;
     newDocument.name = name;
 
     const document = await db.insertData(newDocument, 'characters', true);

@@ -69,6 +69,7 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
     }
 
     await player.setAccountData(account);
+
     goToCharacterSelect(player);
 }
 
