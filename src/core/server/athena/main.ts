@@ -17,8 +17,9 @@ export const DEFAULT_CONFIG = {
     COMMAND_ME_DISTANCE: 35,
     COMMAND_DO_DISTANCE: 35,
     COMMAND_LOW_DISTANCE: 10,
-    COMMAND_WHISPER_DISTANCE: 5
+    COMMAND_WHISPER_DISTANCE: 5,
+    // World Time
+    BOOTUP_HOUR: 9,
+    BOOTUP_MINUTE: 0,
+    MINUTES_PER_MINUTE: 5
 };
-
-import '../systems/chat';
-import '../systems/world';

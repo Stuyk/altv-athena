@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { sha256Random } from '../utility/encryption';
-import { Player } from 'alt-server';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { handleLoginRouting } from '../systems/login';
 import { Events_Misc } from '../../shared/enums/events';
@@ -13,9 +12,9 @@ export default function () {
 
 /**
  * Called when a player connects to the server.
- * @param  {Player} player
+ * @param  {alt.Player} player
  */
-async function handlePlayerConnect(player: Player) {
+async function handlePlayerConnect(player: alt.Player) {
     if (!player) {
         alt.log(`Bad player reconnect. Reconnect again.`);
         return;

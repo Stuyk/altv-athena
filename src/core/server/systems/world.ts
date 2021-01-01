@@ -1,19 +1,16 @@
 import * as alt from 'alt-server';
 import { System_Events_World } from '../../shared/enums/system';
+import { DEFAULT_CONFIG } from '../athena/main';
 
 alt.setInterval(handleWorldTime, 60000);
 
-const BOOTUP_HOUR = 9;
-const BOOTUP_MINUTE = 0;
-const MINUTES_PER_MINUTE = 5;
-
 const GlobalTime = {
-    hour: BOOTUP_HOUR,
-    minute: BOOTUP_MINUTE
+    hour: DEFAULT_CONFIG.BOOTUP_HOUR,
+    minute: DEFAULT_CONFIG.BOOTUP_MINUTE
 };
 
 function handleWorldTime() {
-    GlobalTime.minute += MINUTES_PER_MINUTE;
+    GlobalTime.minute += DEFAULT_CONFIG.MINUTES_PER_MINUTE;
     if (GlobalTime.minute >= 60) {
         GlobalTime.minute = 0;
         GlobalTime.hour += 1;

@@ -32,6 +32,12 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
     -   Send Messages to Closest Players
     -   Create Custom Commands
     -   Assign Permission Values to Commands
+-   Permission System
+    -   A basic permission system for running commands.
+    -   Allows commands to be restricted to specific groups.
+-   World
+    -   Synchronized World Time
+    -   Adjustable Configuration
 
 ```
 View a full list of planned features in the Discord link below.
