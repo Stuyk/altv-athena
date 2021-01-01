@@ -27,7 +27,6 @@ export default function () {
  */
 
 const db: sm.Database = sm.getDatabase();
-const loggedInUsers: Array<DiscordUser['id']> = [];
 
 /**
  * Called when the express server authenticates a user.
@@ -42,13 +41,13 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
         alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
     }
 
-    if (loggedInUsers.includes(data.id)) {
-        alt.log(`[Athena] ${player.name} | Attempted to login twice under ${data.username}#${data.discriminator}.`);
-        player.kick(`Already logged in.`);
+    const currentPlayers = [...alt.Player.all];
+    const index = currentPlayers.findIndex((p) => p.discord && p.discord.id === data.id && p.id !== player.id);
+
+    if (index >= 1) {
+        player.kick('That ID is already logged in.');
         return;
     }
-
-    loggedInUsers.push(data.id);
 
     player.discord = data as DiscordUser;
     player.emit(View_Events_Discord.Close);
@@ -80,16 +79,8 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
  * @param  {string} reason
  */
 function handleDisconnect(player: Player, reason: string) {
-    const index = loggedInUsers.findIndex((id) => id === player.discord.id);
-
     // Was never logged in. Do not save data..
-    if (index <= -1) {
-        return;
-    }
-
-    loggedInUsers.splice(index, 1);
-
-    if (!player.data || !player.name) {
+    if (!player.data || !player.name || player.pendingCharacterSelect || player.pendingCharacterEdit) {
         return;
     }
 
