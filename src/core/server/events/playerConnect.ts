@@ -22,7 +22,7 @@ async function handlePlayerConnect(player: Player) {
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
 
-    player.dimension = player.id;
+    player.dimension = player.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
 
     player.init();

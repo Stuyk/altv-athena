@@ -36,7 +36,6 @@ async function handleView(_characters: Partial<Character>[]) {
     createPedEditCamera();
     setFov(50);
     setZPos(0.6);
-    native.freezeEntityPosition(alt.Player.local.scriptID, true);
 }
 
 function handleSelect(id) {
@@ -65,7 +64,6 @@ function handleDone() {
         return;
     }
 
-    native.freezeEntityPosition(alt.Player.local.scriptID, false);
     destroyPedEditCamera();
     view.close();
     open = false;

@@ -18,14 +18,14 @@ alt.on('disconnect', () => {
 });
 
 export function createPedEditCamera() {
-    startPosition = { ...alt.Player.local.pos };
+    startPosition = { ...alt.Player.local.pos } as alt.Vector3;
     if (!camera) {
-        const forwardVector: alt.Vector3 = native.getEntityForwardVector(alt.Player.local.scriptID);
+        const forwardVector: alt.Vector3 = native.getEntityForwardVector(alt.Player.local.scriptID) as alt.Vector3;
         const forwardCameraPosition: alt.Vector3 = {
             x: startPosition.x + forwardVector.x * 1.2,
             y: startPosition.y + forwardVector.y * 1.2,
             z: startPosition.z + zpos
-        };
+        } as alt.Vector3;
 
         fov = 90;
         startCamPosition = forwardCameraPosition;

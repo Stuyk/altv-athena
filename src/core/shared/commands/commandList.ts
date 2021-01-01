@@ -58,6 +58,12 @@ export const commandList: Array<Command> = [
         description: '/revive [player_id]* - Revive self or others',
         cooldown: 0,
         permission: Permissions.Admin | Permissions.Moderator
+    },
+    {
+        name: 'noclip',
+        description: '/noclip -  Toggles noclip mode.',
+        cooldown: 0,
+        permission: Permissions.Admin
     }
 ];
 

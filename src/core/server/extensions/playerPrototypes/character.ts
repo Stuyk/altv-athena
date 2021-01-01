@@ -1,3 +1,4 @@
+import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
 import { Events_Misc } from '../../../shared/enums/events';
 import { Appearance } from '../../../shared/interfaces/Appearance';
@@ -17,7 +18,7 @@ export async function createNewCharacterPrototype(
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearanceData;
     newDocument.info = infoData;
-    newDocument.account_id = this.account;
+    newDocument.account_id = this.accountData.id;
     newDocument.name = name;
 
     const document = await db.insertData(newDocument, 'characters', true);
@@ -27,9 +28,15 @@ export async function createNewCharacterPrototype(
 
 export async function selectCharacterPrototype(characterData: Partial<Character>): Promise<void> {
     await this.setCharacterData({ ...characterData });
-    this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
     this.updateAppearance();
     this.emit(Events_Misc.StartTicks);
+
+    // Set player dimension to zero.
+    this.dimension = 0;
+
+    alt.setTimeout(() => {
+        this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
+    }, 1000);
 
     // Delete unused data from the Player.
     delete this.currentCharacters;

@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { distance2d } from '../../shared/utility/vector';
 
-const drawDistance = 100;
+const drawDistance = 50;
 let interval;
 
 alt.onServer(Events_Misc.StartTicks, handleStart);
@@ -35,6 +35,10 @@ function drawNametags() {
         }
 
         let name = player.getSyncedMeta('Name');
+        if (!name || name === null || name === undefined) {
+            continue;
+        }
+
         name = name.replace('_', ' ');
 
         if (!name) {

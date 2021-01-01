@@ -14,6 +14,7 @@ import './events/keyup';
 import './systems/login';
 import './systems/meta';
 import './systems/nametag';
+import './systems/noclip';
 import './systems/vehicle';
 
 // Views

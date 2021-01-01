@@ -36,7 +36,7 @@ alt.Vehicle.prototype.getClosestDoor = function getClosestDoor(position: alt.Vec
     for (let i = 0; i < closestDoorBones.length; i++) {
         const boneIndex = native.getEntityBoneIndexByName(this.scriptID, closestDoorBones[i].name);
         const worldPos = native.getWorldPositionOfEntityBone(this.scriptID, boneIndex);
-        positions.push({ index: i, pos: worldPos });
+        positions.push({ index: i, pos: worldPos as alt.Vector3 });
     }
 
     const closestPos = getClosestVectorByPos<{ index: number; pos: alt.Vector3 }>(position, positions);

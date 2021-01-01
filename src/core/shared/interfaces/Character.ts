@@ -15,7 +15,7 @@ export interface Character {
 }
 
 export const CharacterDefaults: Partial<Character> = {
-    pos: DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS,
+    pos: DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS as Vector3,
     cash: DEFAULT_CONFIG.PLAYER_CASH,
     bank: DEFAULT_CONFIG.PLAYER_BANK,
     appearance: {},

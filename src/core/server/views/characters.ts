@@ -40,7 +40,7 @@ export async function goToCharacterSelect(player: Player) {
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
     player.currentCharacters = characters;
-    player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT };
+    player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
     player.safeSetPosition(pos.x, pos.y, pos.z);
     player.emit(View_Events_Characters.Show, characters);
 }
@@ -139,7 +139,7 @@ export function handleNewCharacter(player: Player) {
     player.pendingCharacterEdit = true;
     player.pendingNewCharacter = true;
 
-    player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT };
+    player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
     player.safeSetPosition(pos.x, pos.y, pos.z);
     player.emit(View_Events_Characters.Done);
     player.emit(View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName

@@ -8,7 +8,7 @@ import * as native from 'natives';
  * @param  {number} scale
  * @param  {alt.RGBA} color
  */
-export function drawText2D(text: string, pos: alt.Vector2, scale: number, color: alt.RGBA) {
+export function drawText2D(text: string, pos: alt.IVector2, scale: number, color: alt.RGBA) {
     if (scale > 2) {
         scale = 2;
     }
