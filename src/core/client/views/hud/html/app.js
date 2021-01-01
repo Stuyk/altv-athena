@@ -35,7 +35,8 @@ const app = new Vue({
             active: false,
             position: 0,
             timestamp: false,
-            matchedCommand: null
+            matchedCommand: null,
+            show: false
         };
     },
     methods: {
@@ -49,6 +50,10 @@ const app = new Vue({
 
             if (this.messages.length >= 50) {
                 this.messages.shift();
+            }
+
+            if (!this.show) {
+                return;
             }
 
             if (!this.active) {
@@ -93,21 +98,29 @@ const app = new Vue({
 
             // Handle No Message
             if (!message || message === '') {
-                alt.emit('chat:Send');
+                if ('alt' in window) {
+                    alt.emit('chat:Send');
+                }
                 return;
             }
 
             if (message === '/timestamp') {
                 this.timestamp = !this.timestamp;
-                alt.emit('chat:Send');
                 this.appendMessage(`You have toggled timestamps.`);
+
+                if ('alt' in window) {
+                    alt.emit('chat:Send');
+                }
                 return;
             }
 
             if (message === '/help' || message === '/commands') {
-                alt.emit('chat:Send');
                 for (let i = 0; i < this.commands.length; i++) {
                     this.appendMessage(`${this.commands[i].description}`);
+                }
+
+                if ('alt' in window) {
+                    alt.emit('chat:Send');
                 }
                 return;
             }
@@ -126,8 +139,6 @@ const app = new Vue({
         },
         handleTyping(e) {
             this.currentMessage = this.currentMessage.replace(tagOrComment, '').replace('/</g', '&lt;');
-
-            console.log(this.currentMessage);
 
             if (this.currentMessage === '' || this.currentMessage.length <= 2) {
                 this.matchedCommand = null;
@@ -234,7 +245,11 @@ const app = new Vue({
 
             setTimeout(() => {
                 this.focusChat();
-            }, 500);
+            }, 1000);
         }
+
+        this.$nextTick(() => {
+            this.show = true;
+        });
     }
 });

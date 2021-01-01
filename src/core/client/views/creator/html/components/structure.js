@@ -1,5 +1,10 @@
 Vue.component('tab-structure', {
     props: ['data'],
+    data() {
+        return {
+            structureLabels: [...structureLabels]
+        };
+    },
     methods: {
         setParameter(parameter, value) {
             this.data[parameter] = value;

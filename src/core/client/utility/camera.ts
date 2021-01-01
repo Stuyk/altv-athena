@@ -8,6 +8,7 @@ let fov = 90;
 let startPosition: alt.Vector3;
 let startCamPosition: alt.Vector3;
 let timeBetweenAnimChecks = Date.now() + 100;
+let controlStatus = false;
 
 alt.on('connectionComplete', () => {
     destroyPedEditCamera();
@@ -70,6 +71,10 @@ export function destroyPedEditCamera() {
     startCamPosition = null;
 }
 
+export function setShouldDisableControls(status: boolean): void {
+    controlStatus = status;
+}
+
 function handleControls() {
     native.hideHudAndRadarThisFrame();
     native.disableAllControlActions(0);
@@ -83,6 +88,10 @@ function handleControls() {
     native.disableControlAction(0, 33, true); // s
     native.disableControlAction(0, 34, true); // a
     native.disableControlAction(0, 35, true); // d
+
+    if (controlStatus) {
+        return;
+    }
 
     const [_, width] = native.getActiveScreenResolution(0, 0);
     const cursor = alt.getCursorPos();

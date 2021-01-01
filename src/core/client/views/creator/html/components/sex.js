@@ -1,5 +1,10 @@
 Vue.component('tab-sex', {
     props: ['data'],
+    data() {
+        return {
+            faceNames: [...faceNames]
+        };
+    },
     methods: {
         isActive(parameter, value) {
             if (this.data[parameter] === value) {

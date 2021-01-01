@@ -11,6 +11,7 @@ const exampleCharacter = {
         age: 18,
         gender: 'male'
     },
+    name: 'Kodi_Fanooli',
     appearance: {
         colorOverlays: [0, 0, 0],
         eyebrows: 0,
@@ -28,7 +29,6 @@ const exampleCharacter = {
         hairColor2: 8,
         hairOverlay: { collection: 'mpbiker_overlays', overlay: 'MP_Biker_Hair_002_M' },
         structure: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        name: 'Jane_Dane',
         opacityOverlays: [0, 0, 0, 0, 0, 0],
         sex: 1,
         skinFather: 16,
@@ -101,7 +101,7 @@ const app = new Vue({
         } else {
             this.characters = [
                 exampleCharacter,
-                { ...exampleCharacter, ...{ appearance: { name: 'Jobi_Jobonai', sex: 0 } } }
+                { ...exampleCharacter, ...{ appearance: { sex: 0 }, name: 'Jobi_Jobonai' } }
             ];
 
             console.log(this.characters);

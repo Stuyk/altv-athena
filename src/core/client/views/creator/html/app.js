@@ -121,6 +121,11 @@ const app = new Vue({
         },
         goNavigate(value) {
             this.selection = value;
+
+            // Info
+            if ('alt' in window) {
+                alt.emit('creator:DisableControls', this.selection === 5 ? true : false);
+            }
         },
         updateCharacter() {
             const isFemale = this.data.sex === 0;
@@ -151,7 +156,7 @@ const app = new Vue({
         this.$root.$on('resetSelection', this.resetSelection);
         this.$root.$on('isVerified', this.isVerified);
 
-        opacityOverlays.forEach((overlay) => {
+        overlaysTemplateList.forEach((overlay) => {
             const overlayData = { ...overlay };
             overlayData.value = 0;
             delete overlayData.key;

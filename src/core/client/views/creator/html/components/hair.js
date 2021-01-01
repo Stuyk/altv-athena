@@ -1,5 +1,13 @@
 Vue.component('tab-hair', {
     props: ['data'],
+    data() {
+        return {
+            maleHair: [...maleHair],
+            femaleHair: [...femaleHair],
+            hairColors: [...hairColors],
+            facialHair: [...facialHair]
+        };
+    },
     methods: {
         getHairCount() {
             if (this.data.sex === 0) {

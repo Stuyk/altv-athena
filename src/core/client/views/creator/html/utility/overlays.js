@@ -1,4 +1,4 @@
-const opacityOverlays = [
+const overlaysTemplateList = [
     {
         label: 'Blemish',
         min: 0,

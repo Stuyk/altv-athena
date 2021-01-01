@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
-        <div id="app">
+        <div id="app" v-if="show">
             <v-app>
                 <div class="chat flexible">
                     <div class="messages" ref="messages">
@@ -28,7 +28,6 @@
                             label="Use '/' to type a command." 
                             ref="chatInput"
                             v-model="currentMessage"
-                            :value="currentMessage"
                             @keyup.enter="handleSend" 
                             @keyup.escape="handleEscape"
                             @keyup.up="prevMessage"
@@ -40,7 +39,7 @@
                         </input>
                     </div>
                     <div class="outerInput" v-else>
-                        <input v-else class="chatInput-hidden" ref="chatInput" disabled></input>
+                        <input class="chatInput-hidden" ref="chatInput" disabled></input>
                     </div>
                 </div>
             </v-app>

@@ -1,7 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { View } from '../../extensions/view';
-import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
+import {
+    createPedEditCamera,
+    destroyPedEditCamera,
+    setShouldDisableControls,
+    setFov,
+    setZPos
+} from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
 import { AnimationFlags, playAnimation } from '../../systems/animations';
@@ -39,6 +45,7 @@ async function handleView(_oldCharacterData = null, _noDiscard = true, _noName =
         view.on('creator:Cancel', handleCancel);
         view.on('creator:Sync', handleSync);
         view.on('creator:CheckName', handleCheckName);
+        view.on('creator:DisableControls', handleDisableControls);
     }
 
     createPedEditCamera();
@@ -90,6 +97,10 @@ function handleCheckName(name: string): void {
 
 function handleNameFinish(result: boolean): void {
     view.emit('creator:IsNameAvailable', result);
+}
+
+function handleDisableControls(shouldDisableControls: boolean): void {
+    setShouldDisableControls(shouldDisableControls);
 }
 
 export async function handleSync(data: Partial<Appearance>, shouldTPose: boolean = false): Promise<void> {

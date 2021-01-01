@@ -116,17 +116,17 @@ Vue.component('tab-info', {
                             <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
                             <span class="pr-5"></span>
                         </template>
-                        <v-text-field type="text" label="Your Name (Ex. John_Doe)" type="text" value="infodata.name" v-model="name" @change="nameChanged" />
+                        <v-text-field type="text" label="Your Name (Ex. John_Doe)" value="infodata.name" v-model="name" @change="nameChanged" />
                     </div>
                     <div class="d-flex flex-row justify-content-space-between">
                         <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
                         <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                        <v-text-field class="flex-grow-1" type="number" label="Your Age" type="text" value="infoData.age" v-model="age" />
+                        <v-text-field class="flex-grow-1" type="number" label="Your Age" value="infoData.age" v-model="age" />
                     </div>
                     <div class="d-flex flex-row justify-content-space-between">
                         <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
                         <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                        <v-text-field class="flex-grow-1" type="text" label="Your Gender" type="text" value="infoData.gender" v-model="gender" />
+                        <v-text-field class="flex-grow-1" type="text" label="Your Gender" value="infoData.gender" v-model="gender" />
                     </div>
                     <p class="text-caption">Once the information above is filled out you may proceed to the 'done' page.</p>
                 </v-card>

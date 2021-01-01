@@ -1,5 +1,10 @@
 Vue.component('tab-decor', {
     props: ['data'],
+    data() {
+        return {
+            colorOverlays: [...colorOverlays]
+        };
+    },
     methods: {
         setParameter(parameter, value) {
             this.data[parameter] = value;
