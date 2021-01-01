@@ -1,3 +1,4 @@
 export enum Events_Misc {
-    StartTicks = 'ticks:Start'
+    StartTicks = 'ticks:Start',
+    EnableEntry = 'entry:Enable'
 }

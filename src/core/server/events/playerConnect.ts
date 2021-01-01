@@ -3,9 +3,12 @@ import { sha256Random } from '../utility/encryption';
 import { Player } from 'alt-server';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { handleLoginRouting } from '../systems/login';
+import { Events_Misc } from '../../shared/enums/events';
+import { updatePlayerTime } from '../systems/world';
 
 export default function () {
     alt.on('Discord:Opened', handlePlayerConnect);
+    alt.emit(Events_Misc.EnableEntry);
 }
 
 /**
@@ -28,6 +31,8 @@ async function handlePlayerConnect(player: Player) {
     player.init();
     player.safeSetPosition(pos.x, pos.y, pos.z);
     player.emit('Login:FadeScreenOut');
+
+    updatePlayerTime(player);
 
     if (process.env.DEV_ID) {
         alt.emitClient(player, `Discord:Close`);

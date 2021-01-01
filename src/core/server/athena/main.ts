@@ -1,5 +1,3 @@
-import '../systems/chat';
-
 export const DEFAULT_CONFIG = {
     // Character Selection View
     CHARACTER_SELECT_POS: { x: -504.07794189453125, y: -736.385009765625, z: 32.67851257324219 },
@@ -21,3 +19,6 @@ export const DEFAULT_CONFIG = {
     COMMAND_LOW_DISTANCE: 10,
     COMMAND_WHISPER_DISTANCE: 5
 };
+
+import '../systems/chat';
+import '../systems/world';

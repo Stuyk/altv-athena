@@ -57,6 +57,7 @@ Open a Command Prompt and Run these Commands:
 
 ```bash
 git clone https://github.com/Stuyk/altv-athena.git
+cd altv-athena
 git submodule update --init --recursive
 ```
 

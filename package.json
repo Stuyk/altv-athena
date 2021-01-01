@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Roleplay project for alt:V.",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",

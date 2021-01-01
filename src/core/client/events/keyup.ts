@@ -34,4 +34,6 @@ function handleDebugMessages() {
     alt.log(`HEADING:`);
     const heading = native.getEntityHeading(alt.Player.local.scriptID);
     alt.log(heading);
+
+    alt.emit('debug:Time');
 }
