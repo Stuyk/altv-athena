@@ -4,5 +4,6 @@ export enum System_Events_NoClip {
 }
 
 export enum System_Events_World {
-    UpdateTime = 'time:Update'
+    UpdateTime = 'time:Update',
+    UpdateWeather = 'weather:Update'
 }

@@ -42,6 +42,12 @@ export const commandList: Array<Command> = [
     },
     // Admin+
     {
+        name: 'getvehicle',
+        description: '/getvehicle [name] - Spawn an admin vehicle',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
+    {
         name: 'sethealth',
         description: '/sethealth [99 - 200] [player_id]* - Set health for self or others',
         cooldown: 0,
@@ -62,6 +68,12 @@ export const commandList: Array<Command> = [
     {
         name: 'noclip',
         description: '/noclip -  Toggles noclip mode.',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
+    {
+        name: 'updateweather',
+        description: '/updateweather - Forcefully updates your weather based on region.',
         cooldown: 0,
         permission: Permissions.Admin
     }

@@ -37,6 +37,8 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
     -   Allows commands to be restricted to specific groups.
 -   World
     -   Synchronized World Time
+    -   Synchronized Weather Patterns
+    -   Different Weather Based on Region
     -   Adjustable Configuration
 
 ```

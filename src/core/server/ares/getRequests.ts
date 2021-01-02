@@ -15,3 +15,15 @@ export async function getEndpointHealth(): Promise<boolean> {
     alt.log(`[Athena] Connected to Ares Successfully`);
     return true;
 }
+
+export async function getVersionIdentifier(): Promise<string | null> {
+    const result = await axios.get(`${getAzureEndpoint()}/v1/get/version`).catch((err) => {
+        return null;
+    });
+
+    if (!result || !result.data) {
+        return null;
+    }
+
+    return result.data;
+}

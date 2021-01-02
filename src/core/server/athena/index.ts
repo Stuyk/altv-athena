@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import dotenv from 'dotenv';
-import { getEndpointHealth } from '../ares/getRequests';
+import { getEndpointHealth, getVersionIdentifier } from '../ares/getRequests';
 import { makePostRequest } from '../ares/postRequests';
 import { setAzureEndpoint } from '../utility/encryption';
 
@@ -20,6 +20,19 @@ if (!process.env.EMAIL) {
 
 (async () => {
     await getEndpointHealth();
+
+    const version = await getVersionIdentifier();
+
+    if (!version) {
+        return null;
+    }
+
+    if (version !== process.env.ATHENA_VERSION) {
+        alt.logWarning(`--- Version Warning ---`);
+        alt.logWarning(`[Athena] Your server may be out of date. Please update your server.`);
+        alt.logWarning(`[Athena] Please pull down the latest changes from the official repository.`);
+    }
+
     const bootResult = await makePostRequest(`/v1/post/import`, process.platform.includes('win'));
     if (!bootResult) {
         alt.logError(`[Athena] Invalid Key. Shutting down.`);

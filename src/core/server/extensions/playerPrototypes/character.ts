@@ -36,7 +36,8 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 
     alt.setTimeout(() => {
         this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
-    }, 1000);
+        alt.emit('weather:Update', this);
+    }, 500);
 
     // Delete unused data from the Player.
     delete this.currentCharacters;

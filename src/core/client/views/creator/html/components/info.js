@@ -85,12 +85,6 @@ Vue.component('tab-info', {
             this.infodata.gender = newValue;
         }
     },
-    emits: {
-        test: ({ what }) => {
-            console.log(what);
-            console.log('k');
-        }
-    },
     mounted() {
         this.name = this.infodata.name;
         this.age = this.infodata.age;

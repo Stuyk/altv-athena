@@ -3,7 +3,7 @@ import { sha256Random } from '../utility/encryption';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { handleLoginRouting } from '../systems/login';
 import { Events_Misc } from '../../shared/enums/events';
-import { updatePlayerTime } from '../systems/world';
+import { updatePlayerTime, updatePlayerWeather } from '../systems/world';
 
 export default function () {
     alt.on('Discord:Opened', handlePlayerConnect);
@@ -36,6 +36,7 @@ async function handlePlayerConnect(player: alt.Player) {
     player.emit('Login:FadeScreenOut');
 
     updatePlayerTime(player);
+    updatePlayerWeather(player);
 
     if (process.env.DEV_ID) {
         alt.emitClient(player, `Discord:Close`);

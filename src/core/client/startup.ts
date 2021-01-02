@@ -15,7 +15,7 @@ import './systems/login';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
-import './systems/vehicle';
+// import './systems/vehicle';
 import './systems/world';
 
 // Views
