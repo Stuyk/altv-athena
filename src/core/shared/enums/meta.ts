@@ -1,3 +1,4 @@
 export enum Events_Meta {
-    Set = 'meta:Set'
+    Set = 'meta:Set',
+    Changed = 'meta:Changed'
 }

@@ -49,6 +49,10 @@ declare module 'alt-server' {
         acHealth?: number;
         acArmour?: number;
 
+        // Status Effects
+        nextDeathSpawn: number;
+        nextPingTime: number;
+
         // Functions
 
         /**

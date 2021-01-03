@@ -199,8 +199,8 @@ function handleCamera() {
         maxSpeed += 0.1;
         maxSpeed = parseFloat(maxSpeed.toFixed(2));
 
-        if (maxSpeed >= 2.0) {
-            maxSpeed = 2.0;
+        if (maxSpeed >= 5.0) {
+            maxSpeed = 5.0;
         }
 
         addTemporaryText(`speed`, `Speed: ${maxSpeed}`, 0.95, 0.05, 0.4, 255, 255, 255, 255, 2000);
@@ -231,12 +231,14 @@ function handleCamera() {
         speed = 0;
     } else {
         if (speed < maxSpeed) {
-            speed += 0.02 * (speed + 0.01);
+            //speed += 0.02 * (speed + 0.01);
+            speed = maxSpeed;
         }
     }
 
     if (speed > maxSpeed) {
-        speed -= 0.02 * (speed + 0.01);
+        //speed -= 0.02 * (speed + 0.01);
+        speed = maxSpeed;
     }
 
     // Calculations

@@ -10,6 +10,9 @@ export interface Character {
     name: string;
     cash: number;
     bank: number;
+    health: number;
+    armour: number;
+    isDead: boolean;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
 }

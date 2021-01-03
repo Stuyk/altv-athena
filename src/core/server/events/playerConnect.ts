@@ -4,6 +4,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { handleLoginRouting } from '../systems/login';
 import { Events_Misc } from '../../shared/enums/events';
 import { updatePlayerTime, updatePlayerWeather } from '../systems/world';
+import './playerDeath';
 
 export default function () {
     alt.on('Discord:Opened', handlePlayerConnect);

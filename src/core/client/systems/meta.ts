@@ -8,5 +8,6 @@ function handleSetMeta(key, value) {
         alt.Player.local.meta = {};
     }
 
+    alt.emit(Events_Meta.Changed, key, value, alt.Player.local.meta[key]);
     alt.Player.local.meta[key] = value;
 }

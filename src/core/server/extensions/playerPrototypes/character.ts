@@ -54,6 +54,13 @@ export async function setAccountDataPrototype(accountData: Partial<Account>): Pr
 
 export function setCharacterDataPrototype(characterData: Partial<Character>): void {
     this.data = characterData;
+
+    if (this.data.isDead) {
+        this.nextDeathSpawn = Date.now() + 30000;
+        this.emitMeta('isDead', true);
+    } else {
+        this.emitMeta('isDead', false);
+    }
 }
 
 export function updateAppearancePrototype(): void {

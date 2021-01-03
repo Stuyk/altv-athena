@@ -11,10 +11,12 @@ import './events/disconnect';
 import './events/keyup';
 
 // Systems
+import './systems/death';
 import './systems/login';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
+import './systems/tick';
 // import './systems/vehicle';
 import './systems/world';
 
