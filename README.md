@@ -28,10 +28,18 @@ Configuration files may be purchased at [https://gumroad.com/products/SKpPN/](ht
     -   Display after 7.5s (Used for Hiding Names Partially)
     -   Names Hidden in Vehicles
 -   Easy Discord Login / Authentication (alt:V Ares)
+-   Admin System
+    -   Utilizes the Permission System
+    -   Various Admin Commands
+    -   NoClip Command
 -   Chat System
     -   Send Messages to Closest Players
     -   Create Custom Commands
     -   Assign Permission Values to Commands
+-   Voice System
+    -   Uses Built in alt:V Voice
+    -   Spatial, and Distance Built-in
+    -   Can be toggled off for the classic SAMP experience
 -   Permission System
     -   A basic permission system for running commands.
     -   Allows commands to be restricted to specific groups.
@@ -230,11 +238,17 @@ I have left some comments in the code block below to help you find where things 
 F1 - Print Position, Rotation, and Heading in Console
 
 > Chat View
-Up - Last Message
-Down - Next Message
-Right - Autocomplete Command
-Escape - Exit Chat
-Enter - Send Chat Message
+-   Up - Last Message
+-   Down - Next Message
+-   Right - Autocomplete Command
+-   Escape - Exit Chat
+-   Enter - Send Chat Message
+-   T - Toggle Chat Box
+
+> No Clip
+-   Scroll Up - Slow Down
+-   Scroll Down - Speed Up
+-   WASD - Move Camera
 ```
 
 # Core Commands
@@ -246,6 +260,16 @@ Enter - Send Chat Message
 /do [message] - Describe an object or item around you.
 /low [message] - Say something in a low voice.
 /w [player_id] [message] - Whisper something to a player near you.
+```
+
+# Admin Commands
+
+```
+/noclip - Sets self in no collision mode.
+/revive [id]* - Revive another player or self.
+/sethealth [amount] [id]* - Set health for another player or self.
+/setarmour [amount] [id]* - Set armour for another player or self.
+/updateweather - Updates your weather sync in the region immediately.
 ```
 
 # Screenshots
