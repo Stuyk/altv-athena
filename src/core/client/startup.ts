@@ -19,6 +19,7 @@ import './systems/noclip';
 import './systems/tick';
 // import './systems/vehicle';
 import './systems/world';
+import './systems/voice';
 
 // Views
 import './views/creator/creator';

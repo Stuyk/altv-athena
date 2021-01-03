@@ -3,7 +3,7 @@ import { System_Events_World } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 
 alt.setInterval(handleWorldTime, 60000);
-alt.on('weather:Update', updatePlayerWeather);
+alt.on(System_Events_World.UpdateWeather, updatePlayerWeather);
 
 const WorldDivision = 6;
 const GlobalTime = {

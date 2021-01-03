@@ -80,6 +80,11 @@ export async function handleMessage(player: alt.Player, message: string): Promis
         return;
     }
 
+    if (player.data.isDead) {
+        player.send(`You cannot send messages when you are dead.`);
+        return;
+    }
+
     const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
         player.pos,
         alt.Player.all,

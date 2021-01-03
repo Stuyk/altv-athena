@@ -1,4 +1,7 @@
 export const DEFAULT_CONFIG = {
+    // Use Voice
+    VOICE_ON: true,
+    VOICE_MAX_DISTANCE: 35,
     // Character Selection View
     CHARACTER_SELECT_POS: { x: -504.07794189453125, y: -736.385009765625, z: 32.67851257324219 },
     CHARACTER_SELECT_ROT: { x: 0, y: 0, z: -3.117319107055664 },

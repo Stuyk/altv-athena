@@ -7,6 +7,7 @@ import { goToCharacterSelect } from '../views/characters';
 import { View_Events_Discord } from '../../shared/enums/views';
 import { Permissions } from '../../shared/enums/permissions';
 import './tick';
+import './voice';
 
 export default function () {
     alt.on('playerDisconnect', handleDisconnect);

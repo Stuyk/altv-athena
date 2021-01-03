@@ -7,3 +7,8 @@ export enum System_Events_World {
     UpdateTime = 'time:Update',
     UpdateWeather = 'weather:Update'
 }
+
+export enum System_Events_Voice {
+    AddToVoice = 'voice:Add',
+    JoinedVoice = 'voice:Joined'
+}

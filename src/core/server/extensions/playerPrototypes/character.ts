@@ -7,6 +7,7 @@ import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 import { Account } from '../../interface/Account';
 import { Permissions } from '../../../shared/enums/permissions';
 import { View_Events_Creator } from '../../../shared/enums/views';
+import { System_Events_Voice, System_Events_World } from '../../../shared/enums/system';
 
 const db: Database = getDatabase();
 
@@ -36,7 +37,8 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 
     alt.setTimeout(() => {
         this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
-        alt.emit('weather:Update', this);
+        alt.emit(System_Events_Voice.AddToVoice, this);
+        alt.emit(System_Events_World.UpdateWeather, this);
     }, 500);
 
     // Delete unused data from the Player.
