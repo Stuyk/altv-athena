@@ -20,6 +20,9 @@ function handleCommand(player: alt.Player, targetPlayerID: string | null = null)
 
 function finishRevive(target: alt.Player) {
     target.spawn(target.pos.x, target.pos.y, target.pos.z, 0);
+    target.data.isDead = false;
+    target.saveField('isDead', false);
+    target.nextDeathSpawn = null;
     target.safeAddHealth(200, true);
     target.safeAddArmour(0, true);
 }
