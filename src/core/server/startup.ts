@@ -12,15 +12,15 @@ function handleEntryToggle() {
 }
 
 function handleEarlyConnect(player: alt.Player) {
-    if (!(player instanceof alt.Player)) {
+    if (!(player instanceof alt.Player) || !player || !player.valid) {
         return;
     }
 
-    if (!player) {
-        return;
+    try {
+        player.kick('Connected too early. Sever still warming up.');
+    } catch (err) {
+        alt.log(`[Athena] A reconnection event happened too early. Try again.`);
     }
-
-    player.kick('Connected too early. Sever still warming up.');
 }
 
 try {

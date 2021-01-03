@@ -87,7 +87,12 @@ function handleDisconnect(player: Player, reason: string) {
         return;
     }
 
-    alt.log(`${player.name} has logged out.`);
-    player.data.pos = player.pos;
-    player.saveField('pos', player.data.pos);
+    try {
+        alt.log(`${player.name} has logged out.`);
+        player.data.pos = player.pos;
+        player.saveField('pos', player.data.pos);
+    } catch (err) {
+        alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
+        alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);
+    }
 }

@@ -16,7 +16,11 @@ function handleDisconnect(player: alt.Player) {
         return;
     }
 
-    mainChannel.removePlayer(player);
+    try {
+        mainChannel.removePlayer(player);
+    } catch (err) {
+        alt.log(`[Athena] Could not remove null player from voice. Likely due to reconnect.`);
+    }
 }
 
 export function addToGlobalVoice(player: alt.Player) {
