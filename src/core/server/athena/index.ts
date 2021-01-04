@@ -6,7 +6,7 @@ import { setAzureEndpoint } from '../utility/encryption';
 
 dotenv.config(); // Reads `.env` variables if present.
 
-setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://altv-athena-discord.azurewebsites.net');
+setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://ares.stuyk.com');
 
 if (!process.env.GUMROAD) {
     alt.logError(`[Athena] Failed to get GUMROAD key from .env file. Visit https://gum.co/SKpPN for more information.`);
