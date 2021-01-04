@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
 import { DiscordUser } from '../interface/DiscordUser';
-import { Database, getDatabase } from 'simplymongo';
 import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
@@ -25,8 +24,6 @@ import {
 } from './playerPrototypes/safeSetters';
 import { saveFieldPrototype, savePartialPrototype } from './playerPrototypes/save';
 import { sendPrototype } from './playerPrototypes/chat';
-
-const db: Database = getDatabase();
 
 declare module 'alt-server' {
     export interface Player {

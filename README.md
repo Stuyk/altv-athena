@@ -65,29 +65,109 @@ View a full list of planned features in the Discord link below.
 
 # Configuration and Bootup
 
+-   [alt:V Athena Subscription License](https://gumroad.com/products/SKpPN/)
 -   [Install NodeJS 13+](https://nodejs.org/en/download/)
 -   [Install GIT](https://git-scm.com/downloads)
 -   [Install MongoDB Community Server](https://www.mongodb.com/try/download/community)
+-   [Install MongoDB on Linux](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
-Open a Command Prompt and Run these Commands:
+## External MongoDB Server
+
+If you are unable to setup a MongoDB server with your host.
+
+You can use an external database service such as [DigitalOcean](https://m.do.co/c/0a2a8f925176).
+
+```
+Create an Account -> Create (Top) -> Droplet
+
+Marketplace -> Type MongoDB -> Select MongoDB on Ubuntu
+
+Select Basic
+
+Configure the Rest
+
+Follow Steps Below for the Rest
+```
+
+## Installing Dependencies for this Framework
+
+Open a Terminal, Command Prompt, or Powershell Instance
 
 ```bash
 git clone https://github.com/Stuyk/altv-athena.git
-cd altv-athena
-git submodule update --init --recursive
 ```
 
 ```bash
 cd altv-athena
+```
+
+```bash
+git submodule update --init --recursive --force --remote
 ```
 
 ```bash
 npm install && npm run update
 ```
 
+## Creating the .env File
+
+This is known as your environment file. It has a list of arugments you need to feed to your server on bootup.
+
 Create a file called `.env` and edit it.
 
-Add the following lines to your `.env` file.
+Add the following lines to your `.env` file depending on what you need.
+
+### GUMROAD
+
+This argument is for your Gumroad Product License. It lets you boot the script.
+
+```
+GUMROAD=XXXXXXXX-YYYYYYYY-...
+```
+
+### EMAIL
+
+This argument is for your Gumroad Email. The Email you used when you bought a license.
+
+```
+EMAIL=xyz@email.com
+```
+
+### MONGO_URL\*
+
+This argument is if you went with a remote MongoDB Server.
+
+```
+MONGO_URL=mongodb://localhost:27017
+```
+
+### MONGO_USERNAME\*
+
+This argument is if your database has a username anbd password. Highly recommended if you have remote access.
+
+```
+MONGO_USERNAME=myUsername
+```
+
+### MONGO_PASSWORD\*
+
+This argument is if your databae has a username and password. Highly recommended if you have remote access.
+
+```
+MONGO_PASSWORD=coolPassword
+```
+
+### DEV_ID
+
+This argument is for using a single Discord ID for all connections. This is for development mode by yourself.
+
+It generally bypasses the Discord Authorization and makes logins quicker.
+
+```
+DEV_ID=111222MyDiscordID3452
+```
+
+### Your .env File Should Look Like
 
 ```
 GUMROAD=XXXXXXXX-YYYYYYYY-...
