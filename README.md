@@ -119,7 +119,7 @@ Add the following lines to your `.env` file depending on what you need.
 
 ### GUMROAD
 
-This argument is for your Gumroad Product License. It lets you boot the script.
+This argument is for your [alt:V Athena Subscription License](https://gumroad.com/products/SKpPN/). It lets you boot the script.
 
 ```
 GUMROAD=XXXXXXXX-YYYYYYYY-...
@@ -177,15 +177,6 @@ MONGO_USERNAME=
 MONGO_PASSWORD=
 DEV_ID=
 ```
-
-Fill in GUMROAD with your alt:V Athena License Key from [https://gumroad.com/products/SKpPN/](https://gumroad.com/products/SKpPN/).
-
-Fill in EMAIL with your Gumroad.com email.
-
-The Mongo Parameters are optional. Leave blank if working locally.
-
-Fill in `DEV_ID` if you are working locally and want to make changes quickly.
-Skips Authentication and logs you into your account.
 
 # Port Forwarding
 
