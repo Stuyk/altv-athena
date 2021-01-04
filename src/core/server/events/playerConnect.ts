@@ -15,7 +15,7 @@ export default function () {
  * Called when a player connects to the server.
  * @param  {alt.Player} player
  */
-async function handlePlayerConnect(player: alt.Player) {
+async function handlePlayerConnect(player: alt.Player): Promise<void> {
     if (!(player instanceof alt.Player)) {
         return;
     }

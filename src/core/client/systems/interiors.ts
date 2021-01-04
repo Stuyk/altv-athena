@@ -121,11 +121,15 @@ alt.requestIpl('redCarpet');
 alt.requestIpl('triathlon2_VBprops');
 alt.requestIpl('jetstenativeurnel');
 alt.requestIpl('Jetsteal_ipl_grp1');
+
+// Hospital Pillbox Interiors
 alt.requestIpl('v_hospital');
 alt.removeIpl('RC12B_Default');
 alt.removeIpl('RC12B_Fixed');
 alt.requestIpl('RC12B_Destroyed');
 alt.requestIpl('RC12B_HospitalInterior');
+
+// Canyon
 alt.requestIpl('canyonriver01');
 alt.requestIpl('canyonriver01_lod');
 alt.requestIpl('cs3_05_water_grp1');

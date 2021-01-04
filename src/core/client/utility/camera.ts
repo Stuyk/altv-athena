@@ -18,7 +18,12 @@ alt.on('disconnect', () => {
     destroyPedEditCamera();
 });
 
-export function createPedEditCamera() {
+/**
+ * Creates a pedestrian camera in front of the player.
+ * Can be controlled with WASD and Mouse Controls.
+ * @export
+ */
+export function createPedEditCamera(): void {
     startPosition = { ...alt.Player.local.pos } as alt.Vector3;
     if (!camera) {
         const forwardVector: alt.Vector3 = native.getEntityForwardVector(alt.Player.local.scriptID) as alt.Vector3;
@@ -52,6 +57,10 @@ export function createPedEditCamera() {
     cameraControlsInterval = alt.setInterval(handleControls, 0);
 }
 
+/**
+ * Destroys out current local pedestrian camera.
+ * @export
+ */
 export function destroyPedEditCamera() {
     if (cameraControlsInterval !== undefined || cameraControlsInterval !== null) {
         alt.clearInterval(cameraControlsInterval);
@@ -71,6 +80,11 @@ export function destroyPedEditCamera() {
     startCamPosition = null;
 }
 
+/**
+ * Temporarily disables camera controls.
+ * @export
+ * @param {boolean} status
+ */
 export function setShouldDisableControls(status: boolean): void {
     controlStatus = status;
 }
@@ -194,6 +208,11 @@ function handleControls() {
     }
 }
 
+/**
+ * Set the camera field of view.
+ * @export
+ * @param {*} value
+ */
 export function setFov(value) {
     fov = value;
 
@@ -202,6 +221,12 @@ export function setFov(value) {
     native.renderScriptCams(true, false, 0, true, false, false);
 }
 
+/**
+ * Set the camera position's z add-on value.
+ * So it's camera.position.z + z
+ * @export
+ * @param {*} value
+ */
 export function setZPos(value) {
     zpos = value;
 

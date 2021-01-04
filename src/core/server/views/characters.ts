@@ -18,7 +18,7 @@ export default function () {
  * Called when a player needs to go to character select.
  * @param  {Player} player
  */
-export async function goToCharacterSelect(player: Player) {
+export async function goToCharacterSelect(player: Player): Promise<void> {
     const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
         player.accountData._id,
@@ -51,7 +51,7 @@ export async function goToCharacterSelect(player: Player) {
  * @param  {Player} player
  * @param  {string} id
  */
-export async function handleSelectCharacter(player: Player, id: string) {
+export async function handleSelectCharacter(player: Player, id: string): Promise<void> {
     if (!id) {
         return;
     }
@@ -76,7 +76,7 @@ export async function handleSelectCharacter(player: Player, id: string) {
  * Called when a player wants to delete one of their characters.
  * @param {Player} player
  */
-async function handleDelete(player: Player, id: string) {
+async function handleDelete(player: Player, id: string): Promise<void> {
     if (!player.pendingCharacterSelect) {
         alt.log(`${player.name} | Attempted to delete a character when not asked to delete one.`);
         return;
@@ -117,7 +117,7 @@ async function handleDelete(player: Player, id: string) {
  * Called when a player who has characters wants to make a new one.
  * @param  {Player} player
  */
-export function handleNewCharacter(player: Player) {
+export function handleNewCharacter(player: Player): void {
     // Prevent more than 3 characters per account.
     if (player.currentCharacters && player.currentCharacters.length >= DEFAULT_CONFIG.PLAYER_MAX_CHARACTER_SLOTS) {
         alt.log(`${player.name} | Attempted to create a new character when max characters was exceeded.`);

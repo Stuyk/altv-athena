@@ -2,6 +2,13 @@ import * as alt from 'alt-server';
 
 alt.on('playerDeath', handleDeath);
 
+/**
+ * Respawn and Death Logic.
+ * Automatically places the player into a dead state if they are not in one.
+ * @param {alt.Player} player
+ * @param {alt.Player} killer
+ * @param {*} weaponHash
+ */
 function handleDeath(player: alt.Player, killer: alt.Player, weaponHash: any): void {
     player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
 

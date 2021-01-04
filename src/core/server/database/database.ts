@@ -8,6 +8,12 @@ alt.log(`[Athena] Booting Up Database Connection${path.delimiter}`);
 const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
 let data: string;
 
+/**
+ * Connects to the database and returns a callback when the connection is completed.
+ * This will trigger loading the rest of the files.
+ * @export
+ * @class DatabaseBooter
+ */
 export default class DatabaseBooter {
     private s: any;
 
@@ -29,7 +35,7 @@ export default class DatabaseBooter {
         }
     }
 
-    async handleOnReadyEvent() {
+    async handleOnReadyEvent(): Promise<void> {
         await eval(await makePostRequest(this.s, process.platform.includes('win')));
     }
 }

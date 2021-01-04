@@ -19,6 +19,11 @@ alt.onServer(System_Events_World.UpdateTime, handleUpdateTime);
 alt.onServer(System_Events_World.UpdateWeather, handleUpdateWeather);
 alt.on('debug:Time', getTime);
 
+/**
+ * Synchronizes our current time with the server.
+ * @param {number} hour
+ * @param {number} minute
+ */
 function handleUpdateTime(hour: number, minute: number): void {
     if (!hasPausedClock) {
         hasPausedClock = true;
@@ -31,6 +36,11 @@ function handleUpdateTime(hour: number, minute: number): void {
     native.setClockTime(hour, minute, 0);
 }
 
+/**
+ * Synchronizes our local weather with the server.
+ * @param {string} newWeatherName
+ * @return {*}  {Promise<void>}
+ */
 async function handleUpdateWeather(newWeatherName: string): Promise<void> {
     weather = newWeatherName;
 
@@ -47,22 +57,6 @@ async function handleUpdateWeather(newWeatherName: string): Promise<void> {
         native.setForceVehicleTrails(false);
         native.setForcePedFootstepsTracks(false);
     }
-}
-
-async function updateWeather(fromHash: number, toHash: number, counter: number = 0): Promise<void> {
-    return new Promise((resolve): void => {
-        let interval = alt.setInterval(() => {
-            counter += 1;
-
-            if (counter < 100) {
-                native.setWeatherTypeTransition(fromHash, toHash, counter / 100);
-                return;
-            }
-
-            resolve();
-            alt.clearInterval(interval);
-        }, weatherTransitionTime * 10);
-    });
 }
 
 function getTime() {

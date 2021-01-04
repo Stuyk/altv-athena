@@ -11,7 +11,12 @@ function handleEntryToggle() {
     alt.log(`[Athena] Server Warmup Complete. Now taking connections.`);
 }
 
-function handleEarlyConnect(player: alt.Player) {
+/**
+ * Prevent early connections until server is warmed up.
+ * @param {alt.Player} player
+ * @return {*}  {void}
+ */
+function handleEarlyConnect(player: alt.Player): void {
     if (!(player instanceof alt.Player) || !player || !player.valid) {
         return;
     }

@@ -37,7 +37,7 @@ export function drawText3D(text: string, pos: alt.Vector3, scale: number, color:
         scale = 2;
     }
 
-    native.setDrawOrigin(pos.x, pos.y, pos.z, 0);
+    native.setDrawOrigin(pos.x, pos.y, pos.z, 0); // Used to stabalize text, sprites, etc. in a 3D Space.
     native.beginTextCommandDisplayText('STRING');
     native.addTextComponentSubstringPlayerName(text);
     native.setTextFont(4);

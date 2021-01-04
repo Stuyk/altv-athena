@@ -46,7 +46,7 @@ const minMaxGroups = generateMinMaxs(WorldDivision);
  *
  */
 
-function handleWorldTime() {
+function handleWorldTime(): void {
     GlobalTime.minute += DEFAULT_CONFIG.MINUTES_PER_MINUTE;
     if (GlobalTime.minute >= 60) {
         GlobalTime.minute = 0;

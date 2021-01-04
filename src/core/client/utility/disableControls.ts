@@ -3,6 +3,12 @@ import * as native from 'natives';
 
 let everyTick: number;
 
+/**
+ * Completely disabled all local player controls.
+ * @export
+ * @param {boolean} value
+ * @return {*}
+ */
 export function disableAllControls(value: boolean) {
     if (everyTick) {
         alt.clearEveryTick(everyTick);

@@ -9,6 +9,9 @@ function startTick() {
     alt.setInterval(handlePing, pingEvery);
 }
 
+/**
+ * Pings the server every 5 minutes.
+ */
 function handlePing() {
     alt.emitServer(Events_Misc.Ping);
 }

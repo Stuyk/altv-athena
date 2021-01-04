@@ -3,6 +3,14 @@ import axios from 'axios';
 import { decryptData, getAzureEndpoint, getSharedSecret } from '../utility/encryption'; // Should be able to safely import this.
 import { generatePosterFormat } from './shared';
 
+/**
+ * Used to make an encrytped REST 'POST' Request to the Ares Service.
+ * @export
+ * @param {string} url
+ * @param {boolean} [isWindows=false]
+ * @param {any} [dataObject={}]
+ * @return {Promise<string>}  {Promise<string>}
+ */
 export async function makePostRequest(url: string, isWindows: boolean = false, dataObject: any = {}): Promise<string> {
     const sharedSecret = await getSharedSecret();
 

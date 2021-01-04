@@ -11,6 +11,11 @@ if (DEFAULT_CONFIG.VOICE_ON) {
     mainChannel = new alt.VoiceChannel(true, 25);
 }
 
+/**
+ * If global voice is it will remove a player from the ranged voice chat.
+ * @param {alt.Player} player
+ * @return {*}
+ */
 function handleDisconnect(player: alt.Player) {
     if (!DEFAULT_CONFIG.VOICE_ON || !player || !player.valid) {
         return;
@@ -23,6 +28,12 @@ function handleDisconnect(player: alt.Player) {
     }
 }
 
+/**
+ * Adds a player to the range based voice chat.
+ * @export
+ * @param {alt.Player} player
+ * @return {*}
+ */
 export function addToGlobalVoice(player: alt.Player) {
     if (mainChannel.isPlayerInChannel(player)) {
         return;

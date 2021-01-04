@@ -3,14 +3,21 @@ import * as native from 'natives';
 import { Events_Meta } from '../../shared/enums/meta';
 import { drawText2D } from '../utility/text';
 
-alt.on(Events_Meta.Changed, handleStreamedMetaChange);
+alt.on(Events_Meta.Changed, handleSingleMetaChange);
 
 const timeBetweenDeath = 30000;
 
 let interval: number;
 let deathTime: number;
 
-function handleStreamedMetaChange(key: string, newValue: any, oldValue: any): void {
+/**
+ * Called when local player meta has changed for self.
+ * @param {string} key
+ * @param {*} newValue
+ * @param {*} oldValue
+ * @return {*}  {void}
+ */
+function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void {
     if (key !== 'isDead') {
         return;
     }
@@ -32,6 +39,9 @@ function handleStreamedMetaChange(key: string, newValue: any, oldValue: any): vo
     interval = null;
 }
 
+/**
+ * Draws text and sets into ragdoll mode.
+ */
 function handleDeathMovement() {
     if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
         native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);

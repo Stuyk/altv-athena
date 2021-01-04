@@ -7,7 +7,15 @@ const timeBetweenPings = 4750;
 
 alt.onClient(Events_Misc.Ping, handlePing);
 
-function handlePing(player: alt.Player) {
+/**
+ * This is a tick event that is sent up from the player.
+ * This tick event is then used to process specific player events.
+ * This varies from player revival, coordinate processing, etc.
+ * Helps push the load onto the server, rather than the player.
+ * @param {alt.Player} player
+ * @return {*}
+ */
+function handlePing(player: alt.Player): void {
     if (!player.nextPingTime) {
         player.nextPingTime = Date.now() + timeBetweenPings;
         return;

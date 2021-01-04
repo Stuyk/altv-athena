@@ -35,7 +35,7 @@ const db: sm.Database = sm.getDatabase();
  * @param  {Player} player
  * @param  {DiscordUser} data
  */
-export async function handleLoginRouting(player: Player, data: Partial<DiscordUser>) {
+export async function handleLoginRouting(player: Player, data: Partial<DiscordUser>): Promise<void> {
     delete player.pendingLogin;
     delete player.discordToken;
 
@@ -81,7 +81,7 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
  * @param  {Player} player
  * @param  {string} reason
  */
-function handleDisconnect(player: Player, reason: string) {
+function handleDisconnect(player: Player, reason: string): void {
     // Was never logged in. Do not save data..
     if (!player.data || !player.name || player.pendingCharacterSelect || player.pendingCharacterEdit) {
         return;

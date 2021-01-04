@@ -87,6 +87,12 @@ export function getPrivateKey(): string {
     return privateKey;
 }
 
+/**
+ * Encrypts a string with our shared key.
+ * @export
+ * @param {string} jsonData
+ * @return {*}  {Promise<any>}
+ */
 export async function encryptData(jsonData: string): Promise<any> {
     const sharedSecret = await getSharedSecret();
 
@@ -99,6 +105,12 @@ export async function encryptData(jsonData: string): Promise<any> {
     }
 }
 
+/**
+ * Decrypts a string with our shared key.
+ * @export
+ * @param {string} jsonData
+ * @return {*}  {Promise<any>}
+ */
 export async function decryptData(jsonData: string): Promise<any> {
     const sharedSecret = await getSharedSecret();
 
@@ -110,6 +122,11 @@ export async function decryptData(jsonData: string): Promise<any> {
     }
 }
 
+/**
+ * Generates a shared key from our private key and the ares service public key.
+ * @export
+ * @return {*}  {(Promise<string | boolean>)}
+ */
 export async function getSharedSecret(): Promise<string | boolean> {
     if (sharedSecret) {
         return sharedSecret;
@@ -131,10 +148,20 @@ export async function getSharedSecret(): Promise<string | boolean> {
     }
 }
 
+/**
+ * Set the endpoint for contacting the ares service.
+ * @export
+ * @param {string} endpoint
+ */
 export function setAzureEndpoint(endpoint: string) {
     azureEndpoint = endpoint;
 }
 
+/**
+ * Gets the endpoint for the ares service.
+ * @export
+ * @return {*}  {string}
+ */
 export function getAzureEndpoint(): string {
     if (!azureEndpoint) {
         throw new Error(`Failed to load Azure Endpoint.`);
@@ -143,6 +170,11 @@ export function getAzureEndpoint(): string {
     return azureEndpoint;
 }
 
+/**
+ * Retrieves the ares service public key.
+ * @export
+ * @return {*}  {Promise<string>}
+ */
 export async function getAzurePublicKey(): Promise<string> {
     if (azurePubKey) {
         return azurePubKey;
