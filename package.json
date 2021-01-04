@@ -8,7 +8,7 @@
         "clean": "rimraf resources",
         "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
-        "linux": "npm run build && start.sh"
+        "linux": "npm run build && ./start.sh"
     },
     "author": "stuyk",
     "license": "ISC",
