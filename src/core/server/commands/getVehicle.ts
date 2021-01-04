@@ -10,6 +10,11 @@ function handleCommand(player: alt.Player, name: string): void {
         return;
     }
 
+    if (player.data.isDead) {
+        player.send(`Unable to spawn vehicles while dead.`);
+        return;
+    }
+
     try {
         const veh = new alt.Vehicle(name, player.pos.x, player.pos.y, player.pos.z, 0, 0, 0);
     } catch (err) {

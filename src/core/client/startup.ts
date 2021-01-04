@@ -12,6 +12,7 @@ import './events/keyup';
 
 // Systems
 import './systems/death';
+import './systems/interiors';
 import './systems/login';
 import './systems/meta';
 import './systems/nametag';
