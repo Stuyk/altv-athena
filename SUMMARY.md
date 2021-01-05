@@ -4,8 +4,8 @@
 
 ## Setup Instructions <a id="setup-instructions-1"></a>
 
-* [Before Setup](setup-instructions-1/before-setup.md)
-* [Installing Athena](setup-instructions-1/installing-athena.md)
+* [Before Setup](setup-instructions-1/documentation-before-setup.md)
+* [Installing Athena](setup-instructions-1/documentation-installing-athena.md)
 
 ## Documentation
 

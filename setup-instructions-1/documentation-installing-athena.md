@@ -6,18 +6,18 @@ description: >-
 
 # Installing Athena
 
-Ensure that you have followed and completed the ['Before Setup'](before-setup.md) instructions page. The prerequisites inside of that page are deeply important to making alt:V Athena function out of the box.
+Ensure that you have followed and completed the ['Before Setup'](documentation-before-setup.md) instructions page. The prerequisites inside of that page are deeply important to making alt:V Athena function out of the box.
 
 If you have **NOT DONE** this please select your operating system:
 
-* [Windows](before-setup.md#windows-10-windows-server)
-* [Linux](before-setup.md#linux-ubuntu-18-04)
+* [Windows](documentation-before-setup.md#windows-10-windows-server)
+* [Linux](documentation-before-setup.md#linux-ubuntu-18-04)
 
 ### Beginning the alt:V Athena Installation
 
 Thanks to the wonders of Node, and GIT. Installing Athena is incredibly easy and the instructions are mostly the same across all operating systems.
 
-You are going to need to open a terminal, command line, or powershell. If you are on Linux make sure you have [SSH Access](before-setup.md#linux-ubuntu-18-04) and have gained root access to your server.
+You are going to need to open a terminal, command line, or powershell. If you are on Linux make sure you have [SSH Access](documentation-before-setup.md#linux-ubuntu-18-04) and have gained root access to your server.
 
 ### Cloning the Repository
 
