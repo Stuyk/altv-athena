@@ -307,6 +307,7 @@ I have left some comments in the code block below to help you find where things 
 
 ```
 F1 - Print Position, Rotation, and Heading in Console
+F2 - Player List / Leaderboard
 
 > Chat View
 -   Up - Last Message
