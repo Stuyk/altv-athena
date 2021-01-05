@@ -14,7 +14,7 @@ The main configuration can be found in `src/core/server/athena/main.ts`
 
 **Contains the following options... \(January 5, 2021\)**
 
-```text
+```ts
 export const DEFAULT_CONFIG = {
     // Use Voice
     VOICE_ON: true,
@@ -68,4 +68,3 @@ The shared configuration can be found in `src/core/shared/configurations/shared.
 The **shared configuration** should always be edited first if the **main configuration** references it.
 
 Shared means that the configuration also affects client-side.
-
