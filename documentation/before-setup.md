@@ -1,7 +1,7 @@
 ---
 description: >-
-  Here is a list of things you will need to install on Windows or Linux
-  depending on your setup.
+    Here is a list of things you will need to install on Windows or Linux
+    depending on your setup.
 ---
 
 # Before Setup
@@ -10,9 +10,9 @@ description: >-
 
 Who you should **NOT USE** for hosting Athena:
 
-* Zap
-* Iceline
-* **ANY Pay Per Player Slot Provider**
+-   Zap
+-   Iceline
+-   **ANY Pay Per Player Slot Provider**
 
 **Why?** These server providers do not give you direct access to the server in most cases. Athena requires additional setup through a terminal but also to install MongoDB to store data. Meaning that if you choose these hosting providers for your server. **You are solely responsible for figuring out how to set them up**.
 
@@ -38,8 +38,8 @@ You need to download and install these programs and binaries from the links belo
 
 You will need to open the following ports in your **Windows Firewall** and **Router**.
 
-* 7790
-* 7788
+-   7790
+-   7788
 
 Here's a `.bat` script that will open both ports in your **Windows Firewall.**
 
@@ -73,11 +73,11 @@ The recommended distro for alt:V is Ubuntu 18.04. You are going to need to perfo
 
 What that means for you as an end-user is using one of the following services:
 
-* [Search for a Server](https://www.serverhunter.com/?search=III-WKN-HCH)
-* [Digital Ocean](https://m.do.co/c/0a2a8f925176)
-* [Vultr](https://www.vultr.com/?ref=8765742)
-* [Linode](https://www.linode.com/?r=c47f0e725298f2f75972a9750cedb2e0decc3046)
-* [OVH Game Servers](https://us.ovhcloud.com/bare-metal/game/prices/)
+-   [Search for a Server](https://www.serverhunter.com/?search=III-WKN-HCH)
+-   [Digital Ocean](https://m.do.co/c/0a2a8f925176)
+-   [Vultr](https://www.vultr.com/?ref=8765742)
+-   [Linode](https://www.linode.com/?r=c47f0e725298f2f75972a9750cedb2e0decc3046)
+-   [OVH Game Servers](https://us.ovhcloud.com/bare-metal/game/prices/)
 
 [If you are not sure how to use SSH click this link](https://www.youtube.com/watch?v=pWDHUlvcAsg) and learn how to use SSH.
 
@@ -87,35 +87,46 @@ What that means for you as an end-user is using one of the following services:
 
 This is just a general server recommendation for Linux Servers. If you can afford a OVH Game Server and have the player base for it; it is highly recommended for their anti-ddos services.
 
-* 2 Cores
-* 3+ GHz Processor
-* 4 - 32GB of RAM
-* Unmetered Incoming Bandwidth
-* Unmetered Outgoing Bandwidth
-* SSD 100GB~
-* Anti-DDoS Service
-  * Kids be toxic.
+-   2 Cores
+-   3+ GHz Processor
+-   4 - 32GB of RAM
+-   Unmetered Incoming Bandwidth
+-   Unmetered Outgoing Bandwidth
+-   SSD 100GB~
+-   Anti-DDoS Service
 
 #### Port Forwarding
 
 ```text
-sudo ufw allow 7780
+sudo ufw allow 7788
 sudo ufw allow 7790
 ```
 
 Special Note: Your server host may have an additional firewall option in their control panel. Ensure you open your ports through there as well. OVH is known to have this feature.
+
+### Install libatomic1
+
+This is used by alt:V
+
+```
+sudo apt-get install libatomic1
+```
 
 ### Install GIT
 
 Run the following commands to install GIT on Ubuntu 18.04
 
 ```text
-sudo apt install git-all
+sudo apt install git
 ```
 
 ### Install NodeJS
 
 Run the following commands to install NodeJS on Ubuntu 18.04
+
+```text
+sudo apt install curl
+```
 
 ```text
 curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
@@ -126,7 +137,7 @@ bash install_nvm.sh
 ```
 
 ```text
-source ~/.bash_profile
+source ~/.bashrc
 ```
 
 ```text
@@ -178,4 +189,3 @@ sudo systemctl daemon-reload
 ```text
 sudo systemctl status mongod
 ```
-
