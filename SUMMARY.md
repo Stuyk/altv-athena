@@ -2,13 +2,10 @@
 
 * [Introduction](README.md)
 
-## Setup Instructions <a id="setup-instructions-1"></a>
-
-* [Before Setup](setup-instructions-1/documentation-before-setup.md)
-* [Installing Athena](setup-instructions-1/documentation-installing-athena.md)
-
 ## Documentation
 
+* [Before Setup](documentation/documentation-before-setup.md)
+* [Installing Athena](documentation/documentation-installing-athena.md)
 * [File Structure](documentation/documentation-file-structure.md)
 * [Configuration](documentation/documentation-configuration.md)
 
