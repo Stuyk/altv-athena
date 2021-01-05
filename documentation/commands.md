@@ -4,6 +4,8 @@ description: Built-in commands for general usage.
 
 # Commands
 
+Commands that are built-in to the current Framework.
+
 # Core
 
 ```

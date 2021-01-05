@@ -4,8 +4,8 @@ description: All of the current hotkeys available.
 
 # Hotkeys
 
-F1 - Print Position, Rotation, and Heading in Console
-F2 - Player List / Leaderboard
+-   F1 - Print Position, Rotation, and Heading in Console
+-   F2 - Player List / Leaderboard
 
 ### Chat View
 
