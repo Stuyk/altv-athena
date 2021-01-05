@@ -4,7 +4,7 @@ description: There are two types of configuration files.
 
 # Configuration
 
-There is only so many configuration options that can be exported and tweaked. However, there is a consistent effort to try and allow as much customization as possible through a single configuration file. 
+There is only so many configuration options that can be exported and tweaked. However, there is a consistent effort to try and allow as much customization as possible through a single configuration file.
 
 The rest of the customization should be done by[ mirroring the repository](https://medium.com/cloud-native-the-gathering/how-to-mirror-copy-an-entire-existing-git-repository-into-a-new-one-3bb8faefad9e) and making code changes yourself.
 
@@ -69,4 +69,3 @@ The shared configuration can be found in `src/core/shared/configurations/shared.
 The **shared configuration** should always be edited first if the **main configuration** references it.
 
 Shared means that the configuration also affects client-side.
-

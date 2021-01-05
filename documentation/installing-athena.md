@@ -1,7 +1,7 @@
 ---
 description: >-
-  This setup covers exactly how to run Athena after going through the Before
-  Setup page.
+    This setup covers exactly how to run Athena after going through the Before
+    Setup page.
 ---
 
 # Installing Athena
@@ -10,8 +10,8 @@ Ensure that you have followed and completed the ['Before Setup'](documentation-b
 
 If you have **NOT DONE** this please select your operating system:
 
-* [Windows](documentation-before-setup.md#windows-10-windows-server)
-* [Linux](documentation-before-setup.md#linux-ubuntu-18-04)
+-   [Windows](documentation-before-setup.md#windows-10-windows-server)
+-   [Linux](documentation-before-setup.md#linux-ubuntu-18-04)
 
 ### Beginning the alt:V Athena Installation
 
@@ -89,7 +89,7 @@ This argument is for your Gumroad Email. The Email you used when you bought a li
 EMAIL=xyz@email.com
 ```
 
-#### MONGO\_URL\*
+#### MONGO_URL\*
 
 This argument is if you went with a remote MongoDB Server.
 
@@ -97,7 +97,7 @@ This argument is if you went with a remote MongoDB Server.
 MONGO_URL=mongodb://localhost:27017
 ```
 
-#### MONGO\_USERNAME\*
+#### MONGO_USERNAME\*
 
 This argument is if your database has a username anbd password. Highly recommended if you have remote access.
 
@@ -105,7 +105,7 @@ This argument is if your database has a username anbd password. Highly recommend
 MONGO_USERNAME=myUsername
 ```
 
-#### MONGO\_PASSWORD\*
+#### MONGO_PASSWORD\*
 
 This argument is if your databae has a username and password. Highly recommended if you have remote access.
 
@@ -113,7 +113,7 @@ This argument is if your databae has a username and password. Highly recommended
 MONGO_PASSWORD=coolPassword
 ```
 
-#### DEV\_ID
+#### DEV_ID
 
 This argument is for using a single Discord ID for all connections. This is for development mode by yourself.
 
@@ -153,6 +153,3 @@ npm run linux
 ```text
 npm run windows
 ```
-
-
-
