@@ -16,6 +16,7 @@ async function handleView() {
         view = new alt.WebView(url, false);
         view.on('chat:Send', handleNewMessage);
         view.on('chat:Inject', handleInject);
+        view.on('mouse:Focus', handleFocus);
     }
 
     view.unfocus();
@@ -25,7 +26,7 @@ async function handleView() {
  * Sends a chat message up from the WebView to the server chat.ts file.
  * @param {string} message
  */
-function handleNewMessage(message: string) {
+function handleNewMessage(message: string): void {
     disableAllControls(false);
     isOpen = false;
 
@@ -42,7 +43,7 @@ function handleNewMessage(message: string) {
  * @param {string} message
  * @return {*}
  */
-function handleAppend(message: string) {
+function handleAppend(message: string): void {
     if (!view) {
         return;
     }
@@ -58,7 +59,27 @@ function handleInject() {
     view.emit('chat:Inject', myCommands);
 }
 
-export function focusChat() {
+function handleFocus(shouldFocus: boolean): void {
+    try {
+        alt.showCursor(shouldFocus);
+    } catch (err) {
+        return;
+    }
+
+    if (shouldFocus) {
+        view.focus();
+        return;
+    }
+
+    view.unfocus();
+}
+
+/**
+ * Called from the keyup binds.
+ * @export
+ * @return {*}  {void}
+ */
+export function focusChat(): void {
     if (!view) {
         return;
     }
@@ -74,4 +95,22 @@ export function focusChat() {
     isOpen = true;
     view.emit('chat:Focus');
     disableAllControls(true);
+}
+
+export function focusLeaderBoard(): void {
+    if (!view) {
+        return;
+    }
+
+    if (alt.Player.local.isMenuOpen) {
+        return;
+    }
+
+    const validPlayers = [...alt.Player.all]
+        .filter((p) => p.getSyncedMeta('Ping'))
+        .map((p) => {
+            return { id: p.id, name: p.getSyncedMeta('Name'), ping: p.getSyncedMeta('Ping') };
+        });
+
+    view.emit('leaderboard:Toggle', validPlayers);
 }

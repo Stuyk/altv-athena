@@ -26,6 +26,7 @@ function handlePing(player: alt.Player): void {
     }
 
     player.nextPingTime = Date.now() + timeBetweenPings;
+    player.setSyncedMeta('Ping', player.ping);
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
         player.data.isDead = false;

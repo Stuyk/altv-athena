@@ -4,11 +4,12 @@
         <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
         <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
         <div id="app" v-if="show">
-            <v-app>
+            <v-app v-if="!leaderboard">
                 <div class="chat flexible">
                     <div class="messages" ref="messages">
                         <div class="message" v-for="(message, index) in messages" :index="index">
@@ -42,6 +43,24 @@
                         <input class="chatInput-hidden" ref="chatInput" disabled></input>
                     </div>
                 </div>
+            </v-app>
+            <v-app v-else>
+                <v-list class="leaderboard elevation-8 pa-5" dense>
+                    <v-subheader class="d-flex flex-row justify-space-around">
+                        <span>ID</span>
+                        <span>Player Name(s)</span>
+                        <span>Ping</span>
+                    </v-subheader>
+                    <v-list-item-group class="group">
+                        <v-list-item v-for="(player, index) in players" :key="index">
+                            <div class="d-flex flex-row justify-space-around flex-grow-1">
+                                <span>{{ player.id }}</span>
+                                <span>{{ player.name }}</span>
+                                <span><v-icon>icon-wifi</v-icon> {{ player.ping }}ms</span>
+                            </div>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
             </v-app>
         </div>
         <script src="../../js/vue.min.js"></script>

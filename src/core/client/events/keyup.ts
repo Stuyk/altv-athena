@@ -1,10 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
-import { focusChat } from '../views/hud/hud';
+import { focusChat, focusLeaderBoard } from '../views/hud/hud';
 
 const keyupBinds = {
     112: handleDebugMessages, // F1
+    113: focusLeaderBoard, // F2
     84: focusChat // T
 };
 

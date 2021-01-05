@@ -25,6 +25,8 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
+            leaderboard: false,
+            players: [],
             previous: [' ', 'alt:V Athena Chat', 'By Stuyk'],
             messages: [],
             commands: [
@@ -58,6 +60,10 @@ const app = new Vue({
 
             if (!this.active) {
                 this.$nextTick(() => {
+                    if (!this.$refs || !this.$refs.messages) {
+                        return;
+                    }
+
                     this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
                 });
             }
@@ -173,6 +179,14 @@ const app = new Vue({
             }
 
             this.commands = this.commands.concat(commands);
+        },
+        toggleLeaderboard(validPlayers) {
+            this.players = validPlayers;
+            this.leaderboard = !this.leaderboard;
+
+            if ('alt' in window) {
+                alt.emit('mouse:Focus', this.leaderboard);
+            }
         }
     },
     directives: {
@@ -233,6 +247,8 @@ const app = new Vue({
             alt.on('chat:Append', this.appendMessage);
             alt.on('chat:Focus', this.focusChat);
             alt.on('chat:Inject', this.inject);
+            alt.on('leaderboard:Toggle', this.toggleLeaderboard);
+
             alt.emit('chat:Inject');
         } else {
             let count = 0;
@@ -246,6 +262,15 @@ const app = new Vue({
             setTimeout(() => {
                 this.focusChat();
             }, 1000);
+
+            this.players = [
+                { name: 'Johnny_Joe', ping: 25, id: 0 },
+                { name: 'Jobi_Jobanni', ping: 60, id: 1 }
+            ];
+
+            for (let i = 0; i < 5; i++) {
+                this.players = [...this.players, ...this.players];
+            }
         }
 
         this.$nextTick(() => {

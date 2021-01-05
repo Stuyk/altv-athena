@@ -18,6 +18,9 @@ body {
 
 .v-application {
     background: transparent !important;
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 .chat {
@@ -97,6 +100,21 @@ input {
     direction: ltr;
     padding-left: 6px;
     margin-bottom: 6px;
+}
+
+.leaderboard {
+    display: fixed;
+    margin: 10vh auto;
+    flex-grow: 1;
+    max-height: calc(100% - 5vh);
+    min-width: 40vw;
+    max-width: 60vw;
+    overflow: hidden;
+}
+
+.v-list-item-group {
+    overflow: auto;
+    max-height: inherit;
 }
 
 ::-webkit-scrollbar {
