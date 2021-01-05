@@ -2,6 +2,8 @@
 
 -   [Introduction](README.md)
 -   [Feature Status](documentation/feature-status.md)
+-   [Changelog](documentation/changelog.md)
+-   [FAQ](documentation/faq.md)
 
 ## Documentation
 
@@ -11,7 +13,6 @@
 -   [Configuration](documentation/configuration.md)
 -   [Commands](documentation/commands.md)
 -   [Hotkeys](documentation/hotkeys.md)
--   [Changelog](documentation/changelog.md)
 
 ## External Links
 
