@@ -1,23 +1,23 @@
 ---
 description: >-
-    This setup covers exactly how to run Athena after going through the Before
-    Setup page.
+  This setup covers exactly how to run Athena after going through the Before
+  Setup page.
 ---
 
 # Installing Athena
 
-Ensure that you have followed and completed the ['Before Setup'](documentation-before-setup.md) instructions page. The prerequisites inside of that page are deeply important to making alt:V Athena function out of the box.
+Ensure that you have followed and completed the ['Before Setup'](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md) instructions page. The prerequisites inside of that page are deeply important to making alt:V Athena function out of the box.
 
 If you have **NOT DONE** this please select your operating system:
 
--   [Windows](documentation-before-setup.md#windows-10-windows-server)
--   [Linux](documentation-before-setup.md#linux-ubuntu-18-04)
+* [Windows](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#windows-10-windows-server)
+* [Linux](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#linux-ubuntu-18-04)
 
 ### Beginning the alt:V Athena Installation
 
 Thanks to the wonders of Node, and GIT. Installing Athena is incredibly easy and the instructions are mostly the same across all operating systems.
 
-You are going to need to open a terminal, command line, or powershell. If you are on Linux make sure you have [SSH Access](documentation-before-setup.md#linux-ubuntu-18-04) and have gained root access to your server.
+You are going to need to open a terminal, command line, or powershell. If you are on Linux make sure you have [SSH Access](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#linux-ubuntu-18-04) and have gained root access to your server.
 
 ### Cloning the Repository
 
@@ -89,7 +89,7 @@ This argument is for your Gumroad Email. The Email you used when you bought a li
 EMAIL=xyz@email.com
 ```
 
-#### MONGO_URL\*
+#### MONGO\_URL\*
 
 This argument is if you went with a remote MongoDB Server.
 
@@ -97,7 +97,7 @@ This argument is if you went with a remote MongoDB Server.
 MONGO_URL=mongodb://localhost:27017
 ```
 
-#### MONGO_USERNAME\*
+#### MONGO\_USERNAME\*
 
 This argument is if your database has a username anbd password. Highly recommended if you have remote access.
 
@@ -105,7 +105,7 @@ This argument is if your database has a username anbd password. Highly recommend
 MONGO_USERNAME=myUsername
 ```
 
-#### MONGO_PASSWORD\*
+#### MONGO\_PASSWORD\*
 
 This argument is if your databae has a username and password. Highly recommended if you have remote access.
 
@@ -113,7 +113,7 @@ This argument is if your databae has a username and password. Highly recommended
 MONGO_PASSWORD=coolPassword
 ```
 
-#### DEV_ID
+#### DEV\_ID
 
 This argument is for using a single Discord ID for all connections. This is for development mode by yourself.
 
@@ -153,3 +153,4 @@ npm run linux
 ```text
 npm run windows
 ```
+

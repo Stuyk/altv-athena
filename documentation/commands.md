@@ -4,11 +4,13 @@ description: Built-in commands for general usage.
 
 # Commands
 
+## Commands
+
 Commands that are built-in to the current Framework.
 
-# Core
+## Core
 
-```
+```text
 /timestamp - Will toggle chat timestamps on and off.
 /help - List commands available to your permission level.
 /me [message] - Describe an action you are performing.
@@ -17,12 +19,13 @@ Commands that are built-in to the current Framework.
 /w [player_id] [message] - Whisper something to a player near you.
 ```
 
-# Administrative
+## Administrative
 
-```
+```text
 /noclip - Sets self in no collision mode.
 /revive [id]* - Revive another player or self.
 /sethealth [amount] [id]* - Set health for another player or self.
 /setarmour [amount] [id]* - Set armour for another player or self.
 /updateweather - Updates your weather sync in the region immediately.
 ```
+

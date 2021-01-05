@@ -8,7 +8,7 @@ There is only so many configuration options that can be exported and tweaked. Ho
 
 The rest of the customization should be done by[ mirroring the repository](https://medium.com/cloud-native-the-gathering/how-to-mirror-copy-an-entire-existing-git-repository-into-a-new-one-3bb8faefad9e) and making code changes yourself.
 
-### Where is the Main Configuration?
+## Where is the Main Configuration?
 
 The main configuration can be found in `src/core/server/athena/main.ts`
 
@@ -59,13 +59,13 @@ export const DEFAULT_CONFIG = {
         { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 }
     ]
 };
-
 ```
 
-### Where is the Shared Configuration?
+## Where is the Shared Configuration?
 
 The shared configuration can be found in `src/core/shared/configurations/shared.ts`
 
 The **shared configuration** should always be edited first if the **main configuration** references it.
 
 Shared means that the configuration also affects client-side.
+
