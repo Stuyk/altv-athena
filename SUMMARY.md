@@ -9,8 +9,8 @@
 
 ## Documentation
 
-* [File Structure](documentation/file-structure.md)
-* [Configuration](documentation/untitled.md)
+* [File Structure](documentation/documentation-file-structure.md)
+* [Configuration](documentation/documentation-configuration.md)
 
 ## External Links
 
