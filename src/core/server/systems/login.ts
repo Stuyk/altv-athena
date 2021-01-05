@@ -53,7 +53,6 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
 
     player.discord = data as DiscordUser;
     player.emit(View_Events_Discord.Close);
-    player.emit('Login:FadeScreenIn');
 
     let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
 
@@ -89,8 +88,7 @@ function handleDisconnect(player: Player, reason: string): void {
 
     try {
         alt.log(`${player.name} has logged out.`);
-        player.data.pos = player.pos;
-        player.saveField('pos', player.data.pos);
+        player.saveOnTick();
     } catch (err) {
         alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
         alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);

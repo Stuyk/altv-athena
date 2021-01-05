@@ -3,7 +3,7 @@ import { Events_Misc } from '../../shared/enums/events';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 
-const timeBetweenPings = 4750;
+const timeBetweenPings = 4950;
 
 alt.onClient(Events_Misc.Ping, handlePing);
 
@@ -16,42 +16,15 @@ alt.onClient(Events_Misc.Ping, handlePing);
  * @return {*}
  */
 function handlePing(player: alt.Player): void {
-    if (!player.nextPingTime) {
-        player.nextPingTime = Date.now() + timeBetweenPings;
-        return;
-    }
-
-    if (Date.now() < player.nextPingTime) {
+    if (player.nextPingTime && Date.now() < player.nextPingTime) {
         return;
     }
 
     player.nextPingTime = Date.now() + timeBetweenPings;
-    player.setSyncedMeta('Ping', player.ping);
-    player.setSyncedMeta('Position', player.pos);
+    player.updateSyncedMetaStates();
+    player.saveOnTick();
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
-        player.data.isDead = false;
-        player.nextDeathSpawn = null;
-        player.emitMeta('isDead', false);
-        player.saveField('isDead', false);
-        player.removeAllWeapons();
-
-        const hospitals = [...DEFAULT_CONFIG.VALID_HOSPITALS];
-        let index = 0;
-        let lastDistance = distance2d(player.pos, hospitals[0]);
-
-        for (let i = 1; i < hospitals.length; i++) {
-            const distanceCalc = distance2d(player.pos, hospitals[i]);
-            if (distanceCalc > lastDistance) {
-                continue;
-            }
-
-            lastDistance = distanceCalc;
-            index = i;
-        }
-
-        const nearestHopsital = hospitals[index];
-        player.safeSetPosition(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
-        player.spawn(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z, 0);
+        player.handleDeathRespawn();
     }
 }

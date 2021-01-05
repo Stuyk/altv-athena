@@ -6,24 +6,15 @@ import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { Account } from '../interface/Account';
 
-// Prototypes
-import {
-    createNewCharacterPrototype,
-    selectCharacterPrototype,
-    setAccountDataPrototype,
-    setCharacterDataPrototype,
-    updateAppearancePrototype
-} from './playerPrototypes/character';
-import { emitMetaPrototype, emitPrototype } from './playerPrototypes/emit';
-import { initDataPrototype, initPrototype, updateDataByKeysPrototype } from './playerPrototypes/data';
-import { currencyAddPrototype, currencySetPrototype, currencySubPrototype } from './playerPrototypes/currency';
-import {
-    safeAddArmourPrototype,
-    safeAddHealthPrototype,
-    safeSetPositionPrototype
-} from './playerPrototypes/safeSetters';
-import { saveFieldPrototype, savePartialPrototype } from './playerPrototypes/save';
-import { sendPrototype } from './playerPrototypes/chat';
+import * as character from './playerPrototypes/character';
+import * as emit from './playerPrototypes/emit';
+import * as data from './playerPrototypes/data';
+import * as death from './playerPrototypes/death';
+import * as currency from './playerPrototypes/currency';
+import * as safeSetters from './playerPrototypes/safeSetters';
+import * as save from './playerPrototypes/save';
+import * as chat from './playerPrototypes/chat';
+import * as update from './playerPrototypes/update';
 
 declare module 'alt-server' {
     export interface Player {
@@ -99,6 +90,12 @@ declare module 'alt-server' {
         currencySub(type: CurrencyTypes, amount: number): boolean;
 
         /**
+         * Handles properly respawning a player a hospital.
+         * @memberof Player
+         */
+        handleDeathRespawn(): void;
+
+        /**
          * Initialize default values for player.data
          * @returns void
          */
@@ -150,6 +147,12 @@ declare module 'alt-server' {
         savePartial(dataObject: Character): void;
 
         /**
+         * Saves player location, health, armour, etc.
+         * @memberof Player
+         */
+        saveOnTick(): void;
+
+        /**
          * Used to setup the player with character data.
          * @param  {Character} characterData
          * @returns void
@@ -189,42 +192,54 @@ declare module 'alt-server' {
          * @returns void
          */
         updateDataByKeys(dataObject: {}, targetDataName: string): void;
+
+        /**
+         * Used to update shared player data.
+         * Called from the tick system on the server-side.
+         * @memberof Player
+         */
+        updateSyncedMetaStates(): void;
     }
 }
 
 export default function () {
-    // Bind Prototypes to Functions
-    alt.Player.prototype.createNewCharacter = createNewCharacterPrototype;
-
     // Emit Extensions
-    alt.Player.prototype.emit = emitPrototype;
-    alt.Player.prototype.emitMeta = emitMetaPrototype;
+    alt.Player.prototype.emit = emit.emitPrototype;
+    alt.Player.prototype.emitMeta = emit.emitMetaPrototype;
 
     // Data Prototypes
-    alt.Player.prototype.init = initPrototype;
-    alt.Player.prototype.initData = initDataPrototype;
-    alt.Player.prototype.updateDataByKeys = updateDataByKeysPrototype;
+    alt.Player.prototype.init = data.initPrototype;
+    alt.Player.prototype.initData = data.initDataPrototype;
+    alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
 
     // Currency Prototypes
-    alt.Player.prototype.currencyAdd = currencyAddPrototype;
-    alt.Player.prototype.currencySub = currencySubPrototype;
-    alt.Player.prototype.currencySet = currencySetPrototype;
+    alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
+    alt.Player.prototype.currencySub = currency.currencySubPrototype;
+    alt.Player.prototype.currencySet = currency.currencySetPrototype;
+
+    // Handlers - Handles specific event related tasks. Like respawn.
+    alt.Player.prototype.handleDeathRespawn = death.handleDeathRespawnPrototype;
 
     // Safe Setters / Anticheat Prototypes
-    alt.Player.prototype.safeAddArmour = safeAddArmourPrototype;
-    alt.Player.prototype.safeAddHealth = safeAddHealthPrototype;
-    alt.Player.prototype.safeSetPosition = safeSetPositionPrototype;
+    alt.Player.prototype.safeAddArmour = safeSetters.safeAddArmourPrototype;
+    alt.Player.prototype.safeAddHealth = safeSetters.safeAddHealthPrototype;
+    alt.Player.prototype.safeSetPosition = safeSetters.safeSetPositionPrototype;
 
     // Database Saving and Handling
-    alt.Player.prototype.saveField = saveFieldPrototype;
-    alt.Player.prototype.savePartial = savePartialPrototype;
+    alt.Player.prototype.saveField = save.saveFieldPrototype;
+    alt.Player.prototype.saveOnTick = save.saveOnTickPrototype;
+    alt.Player.prototype.savePartial = save.savePartialPrototype;
 
     // Character & Account Related
-    alt.Player.prototype.selectCharacter = selectCharacterPrototype;
-    alt.Player.prototype.setAccountData = setAccountDataPrototype;
-    alt.Player.prototype.setCharacterData = setCharacterDataPrototype;
-    alt.Player.prototype.updateAppearance = updateAppearancePrototype;
+    alt.Player.prototype.createNewCharacter = character.createNewCharacterPrototype;
+    alt.Player.prototype.selectCharacter = character.selectCharacterPrototype;
+    alt.Player.prototype.setAccountData = character.setAccountDataPrototype;
+    alt.Player.prototype.setCharacterData = character.setCharacterDataPrototype;
+    alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
 
     // Chat Related
-    alt.Player.prototype.send = sendPrototype;
+    alt.Player.prototype.send = chat.sendPrototype;
+
+    // Update Related
+    alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;
 }

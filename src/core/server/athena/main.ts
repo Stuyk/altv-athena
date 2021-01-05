@@ -1,3 +1,5 @@
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
+
 export const DEFAULT_CONFIG = {
     // Use Voice
     VOICE_ON: true,
@@ -16,11 +18,19 @@ export const DEFAULT_CONFIG = {
     // Chat Properties
     CHAT_ENABLED: true, // Turn off messaging. Chat still works for commands.
     CHAT_DISTANCE: 35,
+    // Death / Respawn Properties
+    RESPAWN_TIME: SHARED_CONFIG.RESPAWN_TIME, // 30s in Milliseconds
+    RESPAWN_LOSE_WEAPONS: true, // Removes player weapons on death.
+    RESPAWN_HEALTH: 200, // Health is 100 - 200. 99 is dead.
+    RESPAWN_ARMOUR: 0, // Lose weapons when you respawn
     // Command Properties
     COMMAND_ME_DISTANCE: 35,
     COMMAND_DO_DISTANCE: 35,
     COMMAND_LOW_DISTANCE: 10,
     COMMAND_WHISPER_DISTANCE: 5,
+    CHAT_ROLEPLAY_COLOR: `{C39ADD}`, // Roleplay Color
+    CHAT_ROLEPLAY_LOW_COLOR: `{d3d3d3}`, // Low Color
+    CHAT_ROLEPLAY_WHISPER_COLOR: `{e6e6ce}`, // Whisper Color
     // World Time
     BOOTUP_HOUR: 9,
     BOOTUP_MINUTE: 0,

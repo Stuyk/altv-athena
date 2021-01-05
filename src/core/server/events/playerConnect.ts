@@ -34,7 +34,6 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
 
     player.init();
     player.safeSetPosition(pos.x, pos.y, pos.z);
-    player.emit('Login:FadeScreenOut');
 
     updatePlayerTime(player);
     updatePlayerWeather(player);

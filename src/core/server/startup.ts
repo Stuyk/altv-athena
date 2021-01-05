@@ -22,7 +22,7 @@ function handleEarlyConnect(player: alt.Player): void {
     }
 
     try {
-        player.kick('Connected too early. Sever still warming up.');
+        player.kick('Connected too early. Server still warming up.');
     } catch (err) {
         alt.log(`[Athena] A reconnection event happened too early. Try again.`);
     }

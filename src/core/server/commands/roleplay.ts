@@ -6,10 +6,6 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { addCommand } from '../systems/chat';
 import { emitAll } from '../utility/emitHelper';
 
-const rpc = `{C39ADD}`; // Roleplay Color
-const lowc = `{d3d3d3}`; // Low Color
-const wc = `{e6e6ce}`; // Whisper Color
-
 addCommand('me', handleCommandMe);
 addCommand('do', handleCommandDo);
 addCommand('low', handleCommandLow);
@@ -26,7 +22,11 @@ function handleCommandMe(player: alt.Player, ...args): void {
         'discord'
     ]);
 
-    emitAll(closestPlayers, View_Events_Chat.Append, `${rpc}${player.data.name} ${fullMessage}`);
+    emitAll(
+        closestPlayers,
+        View_Events_Chat.Append,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_COLOR}${player.data.name} ${fullMessage}`
+    );
 }
 
 function handleCommandDo(player: alt.Player, ...args): void {
@@ -40,7 +40,11 @@ function handleCommandDo(player: alt.Player, ...args): void {
         'discord'
     ]);
 
-    emitAll(closestPlayers, View_Events_Chat.Append, `${rpc}* ${fullMessage} ((${player.data.name}))`);
+    emitAll(
+        closestPlayers,
+        View_Events_Chat.Append,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_COLOR}* ${fullMessage} ((${player.data.name}))`
+    );
 }
 
 function handleCommandLow(player: alt.Player, ...args): void {
@@ -57,7 +61,11 @@ function handleCommandLow(player: alt.Player, ...args): void {
         ['discord']
     );
 
-    emitAll(closestPlayers, View_Events_Chat.Append, `${lowc}${player.data.name} ${fullMessage}`);
+    emitAll(
+        closestPlayers,
+        View_Events_Chat.Append,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_LOW_COLOR}${player.data.name} ${fullMessage}`
+    );
 }
 
 function handleCommandWhisper(player: alt.Player, id: string, ...args) {
@@ -89,6 +97,6 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     const fullMessage = args.join(' ');
-    player.send(`${wc}You whisper: '${fullMessage}' to ${target.data.name}`);
-    target.send(`${wc}${player.data.name} whispers: ${fullMessage}`);
+    player.send(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`);
+    target.send(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`);
 }

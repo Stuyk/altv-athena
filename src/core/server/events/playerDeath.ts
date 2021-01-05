@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { DEFAULT_CONFIG } from '../athena/main';
 
 alt.on('playerDeath', handleDeath);
 
@@ -16,12 +17,10 @@ function handleDeath(player: alt.Player, killer: alt.Player, weaponHash: any): v
         player.data.isDead = true;
         player.emitMeta('isDead', true);
         player.saveField('isDead', true);
-        player.send(`You have died. Pending respawn.`);
-
         alt.log(`(${player.id}) ${player.data.name} has died.`);
     }
 
     if (!player.nextDeathSpawn) {
-        player.nextDeathSpawn = Date.now() + 30000;
+        player.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
     }
 }

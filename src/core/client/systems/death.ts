@@ -1,11 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { Events_Meta } from '../../shared/enums/meta';
 import { drawText2D } from '../utility/text';
 
 alt.on(Events_Meta.Changed, handleSingleMetaChange);
-
-const timeBetweenDeath = 30000;
 
 let interval: number;
 let deathTime: number;
@@ -25,7 +24,7 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
     if (newValue) {
         if (!interval) {
             interval = alt.setInterval(handleDeathMovement, 0);
-            deathTime = Date.now() + timeBetweenDeath;
+            deathTime = Date.now() + SHARED_CONFIG.RESPAWN_TIME;
         }
         return;
     }

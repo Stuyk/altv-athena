@@ -10,11 +10,15 @@ addCommand('noclip', handleCommand);
 function handleCommand(player: alt.Player): void {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping');
 
-    if (!isNoClipping) {
+    if (!isNoClipping && !player.data.isDead) {
         player.setSyncedMeta('NoClipping', true);
         player.send(`No Clip: ON`);
         player.visible = false;
         return;
+    }
+
+    if (player.data.isDead) {
+        player.send(`You cannot use No Clip while you are dead.`);
     }
 
     player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
