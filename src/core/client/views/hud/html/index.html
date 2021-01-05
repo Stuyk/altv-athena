@@ -46,18 +46,22 @@
             </v-app>
             <v-app v-else>
                 <v-list class="leaderboard elevation-8 pa-5" dense>
-                    <v-subheader class="d-flex flex-row justify-space-around">
-                        <span>ID</span>
-                        <span>Player Name(s)</span>
-                        <span>Ping</span>
+                    <v-subheader>
+                        <v-row class="flex-grow-1">
+                            <v-col><span class="text-left">ID</span></v-col>
+                            <v-col><span class="text-left">Player Name(s)</span></v-col>
+                            <v-col><span class="text-left">Distance</span></v-col>
+                            <v-col><span class="text-left">Ping</span></v-col>
+                        </v-row>
                     </v-subheader>
                     <v-list-item-group class="group">
                         <v-list-item v-for="(player, index) in players" :key="index">
-                            <div class="d-flex flex-row justify-space-around flex-grow-1">
-                                <span>{{ player.id }}</span>
-                                <span>{{ player.name }}</span>
-                                <span><v-icon>icon-wifi</v-icon> {{ player.ping }}ms</span>
-                            </div>
+                            <v-row class="flex-grow-1">
+                                <v-col><span class="flex-grow-1 text-left">{{ player.id }}</span></v-col>
+                                <v-col><span class="flex-grow-1 text-left">{{ player.name }}</span></v-col>
+                                <v-col><span class="flex-grow-1 text-left">{{ player.distance.toFixed(2) }}</span></v-col>
+                                <v-col><span class="flex-grow-1 text-left"><v-icon>icon-wifi</v-icon> {{ player.ping }}ms</span></v-col>
+                            </v-row>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>

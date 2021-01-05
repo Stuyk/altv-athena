@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import { commandList } from '../../../shared/commands/commandList';
 import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
+import { distance2d } from '../../../shared/utility/vector';
 import { disableAllControls } from '../../utility/disableControls';
 
 const url = `http://resource/client/views/hud/html/index.html`;
@@ -109,8 +110,14 @@ export function focusLeaderBoard(): void {
     const validPlayers = [...alt.Player.all]
         .filter((p) => p.getSyncedMeta('Ping'))
         .map((p) => {
-            return { id: p.id, name: p.getSyncedMeta('Name'), ping: p.getSyncedMeta('Ping') };
-        });
+            return {
+                id: p.id,
+                name: p.getSyncedMeta('Name'),
+                ping: p.getSyncedMeta('Ping'),
+                distance: distance2d(alt.Player.local.pos, p.getSyncedMeta('Position'))
+            };
+        })
+        .sort((a, b) => a.distance - b.distance);
 
     view.emit('leaderboard:Toggle', validPlayers);
 }

@@ -264,8 +264,8 @@ const app = new Vue({
             }, 1000);
 
             this.players = [
-                { name: 'Johnny_Joe', ping: 25, id: 0 },
-                { name: 'Jobi_Jobanni', ping: 60, id: 1 }
+                { name: 'Johnny_Joe', ping: 25, id: 0, distance: 25 },
+                { name: 'Jobi_Jobanni', ping: 60, id: 1, distance: 30 }
             ];
 
             for (let i = 0; i < 5; i++) {
