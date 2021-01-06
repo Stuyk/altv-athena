@@ -9,6 +9,7 @@
 
 -   [Before Setup](documentation/before-setup.md)
 -   [Installing Athena](documentation/installing-athena.md)
+-   [Installing Athena Advanced](documentation/installing-athena-advanced.md)
 -   [File Structure](documentation/file-structure.md)
 -   [Configuration](documentation/configuration.md)
 -   [Commands](documentation/commands.md)
