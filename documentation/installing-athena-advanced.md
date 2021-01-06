@@ -66,12 +66,24 @@ git remote set-url --push upstream DISABLE
 
 ## Fetching and Updating from Athena
 
-Instead of being an absolute scrub and merging files in one at at ime, you're going to be using git to pull down changes. Which does things AUTOMATICALLY.
+Instead of being an absolute scrub and merging files in one at at ime, you're going to be using git to pull down changes. Which does things mostly automatically.
+
+Here are some notes before you perform these actions **(SUPER IMPORTANT)**:
+
+-   Close All Open Files
+-   Push All Current Change to Private Repository
+-   Run the two commands below.
 
 ```sh
 git fetch upstream
-git rebase upstream/master
+git pull upstream master
 ```
+
+### Merge Conflicts?!
+
+Don't worry I made a simple video to help explain merge conflicts. Check out this video:
+
+[![Resolving Merge Conflicts](https://img.youtube.com/vi/sc_vo30hu_M/0.jpg)](https://www.youtube.com/watch?v=sc_vo30hu_M)
 
 ## Pushing Changes to Private Repository
 
@@ -80,5 +92,7 @@ If you make changes in your private clone. You can now simply push to the privat
 Here's how you can push changes.
 
 ```sh
-Pending Code
+git add .
+git commit -m "What did I commit to the repo"
+git push origin master
 ```
