@@ -8,11 +8,9 @@ import { Character } from '../../shared/interfaces/Character';
 
 const db: sm.Database = sm.getDatabase();
 
-export default function () {
-    alt.onClient(View_Events_Creator.Done, handleCreatorDone);
-    alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);
-    alt.onClient(View_Events_Creator.AwaitName, handleAwaitNameValid);
-}
+alt.onClient(View_Events_Creator.Done, handleCreatorDone);
+alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);
+alt.onClient(View_Events_Creator.AwaitName, handleAwaitNameValid);
 
 /**
  * Called when a player pushes up Character Creator data.

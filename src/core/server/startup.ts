@@ -31,17 +31,22 @@ async function loadFiles(): Promise<boolean> {
         return true;
     }
 
-    const imported = await fns.ii().catch((err) => {
-        return null;
-    });
+    const imported = await fns
+        .ii()
+        .catch((err) => {
+            return null;
+        })
+        .then((module) => {
+            if (module.load) {
+                module.load();
+            }
+
+            return true;
+        });
 
     if (!imported) {
         alt.logError(`[Athena] Failed to load.`);
         return false;
-    }
-
-    if (imported.default) {
-        imported.default();
     }
 
     return await loadFiles();

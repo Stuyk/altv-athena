@@ -202,44 +202,42 @@ declare module 'alt-server' {
     }
 }
 
-export default function () {
-    // Emit Extensions
-    alt.Player.prototype.emit = emit.emitPrototype;
-    alt.Player.prototype.emitMeta = emit.emitMetaPrototype;
+// Emit Extensions
+alt.Player.prototype.emit = emit.emitPrototype;
+alt.Player.prototype.emitMeta = emit.emitMetaPrototype;
 
-    // Data Prototypes
-    alt.Player.prototype.init = data.initPrototype;
-    alt.Player.prototype.initData = data.initDataPrototype;
-    alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
+// Data Prototypes
+alt.Player.prototype.init = data.initPrototype;
+alt.Player.prototype.initData = data.initDataPrototype;
+alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
 
-    // Currency Prototypes
-    alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
-    alt.Player.prototype.currencySub = currency.currencySubPrototype;
-    alt.Player.prototype.currencySet = currency.currencySetPrototype;
+// Currency Prototypes
+alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
+alt.Player.prototype.currencySub = currency.currencySubPrototype;
+alt.Player.prototype.currencySet = currency.currencySetPrototype;
 
-    // Handlers - Handles specific event related tasks. Like respawn.
-    alt.Player.prototype.handleDeathRespawn = death.handleDeathRespawnPrototype;
+// Handlers - Handles specific event related tasks. Like respawn.
+alt.Player.prototype.handleDeathRespawn = death.handleDeathRespawnPrototype;
 
-    // Safe Setters / Anticheat Prototypes
-    alt.Player.prototype.safeAddArmour = safeSetters.safeAddArmourPrototype;
-    alt.Player.prototype.safeAddHealth = safeSetters.safeAddHealthPrototype;
-    alt.Player.prototype.safeSetPosition = safeSetters.safeSetPositionPrototype;
+// Safe Setters / Anticheat Prototypes
+alt.Player.prototype.safeAddArmour = safeSetters.safeAddArmourPrototype;
+alt.Player.prototype.safeAddHealth = safeSetters.safeAddHealthPrototype;
+alt.Player.prototype.safeSetPosition = safeSetters.safeSetPositionPrototype;
 
-    // Database Saving and Handling
-    alt.Player.prototype.saveField = save.saveFieldPrototype;
-    alt.Player.prototype.saveOnTick = save.saveOnTickPrototype;
-    alt.Player.prototype.savePartial = save.savePartialPrototype;
+// Database Saving and Handling
+alt.Player.prototype.saveField = save.saveFieldPrototype;
+alt.Player.prototype.saveOnTick = save.saveOnTickPrototype;
+alt.Player.prototype.savePartial = save.savePartialPrototype;
 
-    // Character & Account Related
-    alt.Player.prototype.createNewCharacter = character.createNewCharacterPrototype;
-    alt.Player.prototype.selectCharacter = character.selectCharacterPrototype;
-    alt.Player.prototype.setAccountData = character.setAccountDataPrototype;
-    alt.Player.prototype.setCharacterData = character.setCharacterDataPrototype;
-    alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
+// Character & Account Related
+alt.Player.prototype.createNewCharacter = character.createNewCharacterPrototype;
+alt.Player.prototype.selectCharacter = character.selectCharacterPrototype;
+alt.Player.prototype.setAccountData = character.setAccountDataPrototype;
+alt.Player.prototype.setCharacterData = character.setCharacterDataPrototype;
+alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
 
-    // Chat Related
-    alt.Player.prototype.send = chat.sendPrototype;
+// Chat Related
+alt.Player.prototype.send = chat.sendPrototype;
 
-    // Update Related
-    alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;
-}
+// Update Related
+alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;

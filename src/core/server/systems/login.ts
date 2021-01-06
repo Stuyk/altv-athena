@@ -9,10 +9,8 @@ import { Permissions } from '../../shared/enums/permissions';
 import './tick';
 import './voice';
 
-export default function () {
-    alt.on('playerDisconnect', handleDisconnect);
-    alt.on('Discord:Login', handleLoginRouting);
-}
+alt.on('playerDisconnect', handleDisconnect);
+alt.on('Discord:Login', handleLoginRouting);
 
 /**
  * Why Discord Login?

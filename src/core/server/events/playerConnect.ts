@@ -6,10 +6,7 @@ import { Events_Misc } from '../../shared/enums/events';
 import { updatePlayerTime, updatePlayerWeather } from '../systems/world';
 import './playerDeath';
 
-export default function () {
-    alt.on('Discord:Opened', handlePlayerConnect);
-    alt.emit(Events_Misc.EnableEntry);
-}
+alt.on('Discord:Opened', handlePlayerConnect);
 
 /**
  * Called when a player connects to the server.
@@ -43,3 +40,5 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
         handleLoginRouting(player, { id: process.env.DEV_ID });
     }
 }
+
+alt.emit(Events_Misc.EnableEntry);

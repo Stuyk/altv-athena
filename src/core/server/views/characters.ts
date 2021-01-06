@@ -4,15 +4,12 @@ import { Character } from '../../shared/interfaces/Character';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { DEFAULT_CONFIG } from '../athena/main';
 import * as sm from 'simplymongo';
-import { updatePlayerWeather } from '../systems/world';
 
 const db: sm.Database = sm.getDatabase();
 
-export default function () {
-    alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
-    alt.onClient(View_Events_Characters.New, handleNewCharacter);
-    alt.onClient(View_Events_Characters.Delete, handleDelete);
-}
+alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
+alt.onClient(View_Events_Characters.New, handleNewCharacter);
+alt.onClient(View_Events_Characters.Delete, handleDelete);
 
 /**
  * Called when a player needs to go to character select.
