@@ -1,7 +1,7 @@
 {
     "name": "altv-athena",
     "version": "1.0.8",
-    "description": "A roleplay project for alt:V.",
+    "description": "a roleplay framework for alt:V",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles \"src/**/*\" --exclude=**/*.ts --up 1 ./resources",
