@@ -1,7 +1,7 @@
 ---
 description: >-
-  alt:V Athena is a subscription-based Roleplay Framework with core Roleplay
-  Features.
+    alt:V Athena is a subscription-based Roleplay Framework with core Roleplay
+    Features.
 ---
 
 # Introduction
@@ -14,41 +14,42 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 
 ## Feature List
 
-* Fully Open Source
-* Typescript
-* Scaleable Folder Structure
-* Character Editor
-* Character Selection
-* Character Info Support
-* Character Appearance Synchronization
-* Name Tags
-  * Display after 7.5s \(Used for Hiding Names Partially\)
-  * Names Hidden in Vehicles
-* Easy Discord Login / Authentication \(alt:V Ares\)
-* Admin System
-  * Utilizes the Permission System
-  * Various Admin Commands
-  * NoClip Command
-* Chat System
-  * Send Messages to Closest Players
-  * Create Custom Commands
-  * Assign Permission Values to Commands
-* Voice System
-  * Uses built-in Voice by alt:V
-  * Spatial, and Distance Built-in
-  * Can be toggled off for the classic SAMP experience
-* Permission System
-  * A basic permission system for running commands.
-  * Allows commands to be restricted to specific groups.
-* World
-  * Synchronized World Time
-  * Synchronized Weather Patterns
-  * Different Weather Based on Region
-  * Adjustable Configuration
+-   Fully Open Source
+-   Typescript
+-   Scaleable Folder Structure
+-   Character Editor
+-   Character Selection
+-   Character Info Support
+-   Character Appearance Synchronization
+-   Name Tags
+    -   Display after 7.5s \(Used for Hiding Names Partially\)
+    -   Names Hidden in Vehicles
+-   Easy Discord Login / Authentication \(alt:V Ares\)
+-   Admin System
+    -   Utilizes the Permission System
+    -   Various Admin Commands
+    -   NoClip Command
+-   Chat System
+    -   Send Messages to Closest Players
+    -   Create Custom Commands
+    -   Assign Permission Values to Commands
+-   Voice System
+    -   Uses built-in Voice by alt:V
+    -   Spatial, and Distance Built-in
+    -   Can be toggled off for the classic SAMP experience
+-   Permission System
+    -   A basic permission system for running commands.
+    -   Allows commands to be restricted to specific groups.
+-   World
+    -   Synchronized World Time
+    -   Synchronized Weather Patterns
+    -   Different Weather Based on Region
+    -   Adjustable Configuration
 
 ```text
 New Features Always in Discord
 ```
 
+## Running this Project
 
-
+Please see [the before setup page](documentation/before-setup.md) for setup instructions.

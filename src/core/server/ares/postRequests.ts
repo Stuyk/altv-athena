@@ -24,7 +24,8 @@ export async function makePostRequest(url: string, isWindows: boolean = false, d
 
     const result = await axios
         .post(`${getAzureEndpoint()}${url}`, responseParms, {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            responseType: 'arraybuffer'
         })
         .catch((err) => {
             alt.log(err);
@@ -45,7 +46,10 @@ export async function makePostRequest(url: string, isWindows: boolean = false, d
         return await makePostRequest(url, isWindows, dataObject);
     }
 
-    alt.log(`[Athena] Your Gumroad API Key was validated. Booting script.`);
-    const endResult = await decryptData(result.data);
-    return endResult;
+    const decrypted = await decryptData(result.data);
+    if (!decrypted) {
+        return result.data;
+    }
+
+    return decrypted;
 }

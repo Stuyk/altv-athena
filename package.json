@@ -1,14 +1,18 @@
 {
     "name": "altv-athena",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "A roleplay project for alt:V.",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles \"src/**/*\" --exclude=**/*.ts --up 1 ./resources",
-        "clean": "rimraf resources",
+        "clean": "rimraf resources/**/*.js resources/**/*.wasm",
         "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
-        "linux": "npm run build && ./start.sh"
+        "linux": "npm run build && ./start.sh",
+        "watch-windows": "tsc-watch --onSuccess \"npm run watch-handle-windows\"",
+        "watch-linux": "tsc-watch --onSuccess \"npm run watch-handle-linux\"",
+        "watch-handle-windows": "npm run copy && altv-server.exe",
+        "watch-handle-linux": "npm run copy && ./start.sh"
     },
     "author": "stuyk",
     "devDependencies": {
@@ -22,9 +26,11 @@
         "altv-pkg": "latest",
         "copyfiles": "^2.3.0",
         "rimraf": "^3.0.2",
+        "tsc-watch": "^4.2.9",
         "typescript": "^4.0.2"
     },
     "dependencies": {
+        "@assemblyscript/loader": "^0.17.13",
         "axios": "^0.21.1",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",

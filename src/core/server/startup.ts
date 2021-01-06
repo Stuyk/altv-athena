@@ -1,10 +1,92 @@
 import * as alt from 'alt-server';
-import { Events_Misc } from '../shared/enums/events';
-import './athena/index';
+import path from 'path';
 import fs from 'fs';
+import env from 'dotenv';
+import { Events_Misc } from '../shared/enums/events';
+import { InjectedFunctions, InjectedStarter, loadWASM } from './utility/wasmLoader';
+import { setAzureEndpoint } from './utility/encryption';
+import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
+
+env.config();
+
+setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://ares.stuyk.com');
+
+const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
+const collections = ['accounts', 'characters', 'vehicles'];
+const fPath = `${path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm')}`;
+const buffer = fs.readFileSync(fPath);
+
+let fns: InjectedFunctions;
 
 alt.on('playerConnect', handleEarlyConnect);
 alt.on(Events_Misc.EnableEntry, handleEntryToggle);
+
+if (!process.env.GUMROAD || !process.env.EMAIL) {
+    alt.logWarning(`[Athena] Failed to get GUMROAD/EMAIL from .env file. Visit https://gum.co/SKpPN to buy one.`);
+    process.exit(1);
+}
+
+async function loadFiles(): Promise<boolean> {
+    if (fns.idl()) {
+        return true;
+    }
+
+    const imported = await fns.ii().catch((err) => {
+        return null;
+    });
+
+    if (!imported) {
+        alt.logError(`[Athena] Failed to load.`);
+        return false;
+    }
+
+    if (imported.default) {
+        imported.default();
+    }
+
+    return await loadFiles();
+}
+
+async function handleFiles() {
+    const result = await loadFiles();
+    if (!result) {
+        alt.logError('[Athena] Failed to load files.');
+        process.exit(1);
+    }
+
+    alt.log('[Athena] Warmup Complete. Finishing loading.');
+}
+
+async function runBooter() {
+    await getEndpointHealth(); // Verify Endpoint is Up
+    const version = await getVersionIdentifier();
+
+    if (!version) {
+        alt.logError('[Ares] Unable to get version. Try rebooting.');
+        process.exit(1);
+    }
+
+    alt.log(`[Athena] Version: ${process.env.ATHENA_VERSION}`);
+    if (version !== process.env.ATHENA_VERSION) {
+        alt.logWarning(`--- Version Warning ---`);
+        alt.log(`[Athena] Your server may be out of date. Please update your server.`);
+        alt.log(`[Athena] Please pull down the latest changes from the official repository.`);
+        alt.log(`[Athena] Try running: 'git pull origin master'`);
+    }
+
+    const starterFns = await loadWASM<InjectedStarter>('starter', buffer);
+    const aresBuffer = await starterFns.start().catch((err) => {
+        return null;
+    });
+
+    if (!aresBuffer) {
+        alt.logError('[Ares] Unable to boot. Potentially bad license.');
+        process.exit(1);
+    }
+
+    fns = await loadWASM<InjectedFunctions>('ares', aresBuffer);
+    fns.bd(mongoURL, collections, handleFiles);
+}
 
 function handleEntryToggle() {
     alt.off('playerConnect', handleEarlyConnect);
@@ -22,7 +104,7 @@ function handleEarlyConnect(player: alt.Player): void {
     }
 
     try {
-        player.kick('Connected too early. Server still warming up.');
+        player.kick('[Athena] Connected too early. Server still warming up.');
     } catch (err) {
         alt.log(`[Athena] A reconnection event happened too early. Try again.`);
     }
@@ -32,8 +114,8 @@ try {
     const result = fs.readFileSync('package.json').toString();
     const data = JSON.parse(result);
     process.env.ATHENA_VERSION = data.version;
-
-    alt.logWarning(`[Athena] Your Server Version is: ${process.env.ATHENA_VERSION}`);
+    runBooter();
 } catch (err) {
     alt.logWarning(`[Athena] Could not fetch version from package.json. Is there a package.json?`);
+    process.exit(1);
 }
