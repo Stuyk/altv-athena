@@ -6,7 +6,7 @@ description: General file structure information and layout.
 
 This is going to give you a very brief overview of everything inside of each alt:V Athena folder. It will not teach you to code but it will definitely teach you where to find things and tweak files.
 
-## File Structure \(January 5, 2021\)
+## File Structure \(January 6, 2021\)
 
 ```text
 └───core
@@ -57,9 +57,7 @@ This is going to give you a very brief overview of everything inside of each alt
     │   # Defines logic that you run as a server owner.
     │   ├───athena
     │   │   # Where all of your configuration dreams come true.
-    │   ├───database
-    │   │   # Handles load order and database initialization with simplymongo.
-    │   │   # SPECIFY ADDITIONAL FILES TO LOAD HERE IF NECESSARY.
+    |   |   # Also import any additional files here.
     │   ├───enums
     │   │   # Helps define lists for different functionality.
     │   ├───events
@@ -82,4 +80,3 @@ This is going to give you a very brief overview of everything inside of each alt
         ├───interfaces
         └───utility
 ```
-

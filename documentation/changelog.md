@@ -4,6 +4,15 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.0.8 - January 6, 2021
+
+```diff
++ Added new development scripts for quick-reboot
++ Added new ares backend service support
++ Added simplified database loader
++ Other backend changes and configurations
+```
+
 ## 1.0.6 - January 4-5, 2021
 
 ```diff
