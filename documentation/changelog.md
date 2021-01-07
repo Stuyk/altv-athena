@@ -11,6 +11,9 @@ description: List of all the changes and current versions.
 + Added new ares backend service support
 + Added simplified database loader
 + Other backend changes and configurations
++ Smooth Login Transitions
++ Smoother Leaderboards
++ Hide Scrollbar on View Instance Creation
 ```
 
 ## 1.0.6 - January 4-5, 2021

@@ -248,7 +248,6 @@ const app = new Vue({
             alt.on('chat:Focus', this.focusChat);
             alt.on('chat:Inject', this.inject);
             alt.on('leaderboard:Toggle', this.toggleLeaderboard);
-
             alt.emit('chat:Inject');
         } else {
             let count = 0;

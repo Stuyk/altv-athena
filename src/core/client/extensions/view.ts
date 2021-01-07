@@ -7,6 +7,10 @@ alt.on('disconnect', async () => {
     (await View.getInstance('', false)).destroy();
 });
 
+alt.on('connectionComplete', async () => {
+    const view = await View.getInstance(blankURL, false, true);
+});
+
 export class View extends alt.WebView {
     private static _instance: View;
     private currentEvents: { eventName: string; callback: any }[] = [];
@@ -15,6 +19,7 @@ export class View extends alt.WebView {
 
     private constructor(url: string, isOverlay: boolean = false) {
         super(url, isOverlay);
+        this.isVisible = false;
     }
 
     /**
@@ -22,10 +27,16 @@ export class View extends alt.WebView {
      * @param  {string} url
      * @param  {boolean} addCursor
      */
-    static async getInstance(url: string, addCursor: boolean): Promise<View> {
+    static async getInstance(url: string, addCursor: boolean, isInit: boolean = false): Promise<View> {
         if (!View._instance) {
             View._instance = new View(url);
+
+            if (isInit) {
+                return View._instance;
+            }
         }
+
+        View._instance.isVisible = false;
 
         // Wait for View to close.
         if (View._instance.isClosing) {
@@ -42,7 +53,6 @@ export class View extends alt.WebView {
         }
 
         alt.Player.local.isMenuOpen = true;
-        View._instance.isVisible = false;
         View._instance.url = url;
         View._instance.showCursor(addCursor);
         View._instance.focus();

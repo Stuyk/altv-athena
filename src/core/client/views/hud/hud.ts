@@ -15,6 +15,7 @@ alt.onServer(View_Events_Chat.Append, handleAppend);
 async function handleView() {
     if (!view) {
         view = new alt.WebView(url, false);
+        view.isVisible = false;
         view.on('chat:Send', handleNewMessage);
         view.on('chat:Inject', handleInject);
         view.on('mouse:Focus', handleFocus);
@@ -58,6 +59,7 @@ function handleInject() {
     );
 
     view.emit('chat:Inject', myCommands);
+    view.isVisible = true;
 }
 
 function handleFocus(shouldFocus: boolean): void {
