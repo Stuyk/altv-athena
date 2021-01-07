@@ -16,6 +16,8 @@ function handleStart() {
  * Toggled on through an interval.
  */
 function drawNametags() {
+    native.drawRect(0, 0, 0, 0, 0, 0, 0, 0, false); // Used to fix a draw error.
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }
