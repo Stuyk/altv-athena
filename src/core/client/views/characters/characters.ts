@@ -39,6 +39,7 @@ async function handleView(_characters: Partial<Character>[]) {
 }
 
 function handleSelect(id) {
+    native.doScreenFadeOut(100);
     alt.emitServer(View_Events_Characters.Select, id);
 }
 

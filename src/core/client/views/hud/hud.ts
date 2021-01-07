@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 import { commandList } from '../../../shared/commands/commandList';
 import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
@@ -57,6 +58,10 @@ function handleInject() {
     const myCommands = commandList.filter(
         (cmd) => cmd.permission === 0 || (alt.Player.local.meta.permissionLevel & cmd.permission) !== 0
     );
+
+    if (native.isScreenFadedOut()) {
+        native.doScreenFadeIn(2000);
+    }
 
     view.emit('chat:Inject', myCommands);
     view.isVisible = true;

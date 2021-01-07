@@ -59,6 +59,7 @@ function handleClose() {
         return;
     }
 
+    native.doScreenFadeOut(100);
     oldCharacterData = null;
     destroyPedEditCamera();
     view.close();
