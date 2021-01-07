@@ -38,15 +38,13 @@ async function handleView(_oldCharacterData = null, _noDiscard = true, _noName =
     noName = _noName;
     totalCharacters = _totalCharacters;
 
-    if (!view) {
-        view = await View.getInstance(url, true);
-        view.on('creator:ReadyDone', handleReadyDone);
-        view.on('creator:Done', handleDone);
-        view.on('creator:Cancel', handleCancel);
-        view.on('creator:Sync', handleSync);
-        view.on('creator:CheckName', handleCheckName);
-        view.on('creator:DisableControls', handleDisableControls);
-    }
+    view = await View.getInstance(url, true);
+    view.on('creator:ReadyDone', handleReadyDone);
+    view.on('creator:Done', handleDone);
+    view.on('creator:Cancel', handleCancel);
+    view.on('creator:Sync', handleSync);
+    view.on('creator:CheckName', handleCheckName);
+    view.on('creator:DisableControls', handleDisableControls);
 
     createPedEditCamera();
     setFov(50);
@@ -65,14 +63,14 @@ function handleClose() {
     view.close();
 }
 
-function handleDone(newData, infoData, name: string) {
+async function handleDone(newData, infoData, name: string) {
+    await handleClose();
     alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
-    handleClose();
 }
 
-function handleCancel() {
-    alt.emitServer(View_Events_Creator.Done, oldCharacterData);
+async function handleCancel() {
     handleClose();
+    alt.emitServer(View_Events_Creator.Done, oldCharacterData);
 }
 
 function waitForReady() {

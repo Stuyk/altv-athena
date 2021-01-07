@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
-import { handleNewCharacter } from './characters';
+import { goToCharacterSelect, handleNewCharacter } from './characters';
 import * as sm from 'simplymongo';
 import { Character } from '../../shared/interfaces/Character';
 
@@ -24,6 +24,14 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
     }
 
     if (!info) {
+        player.pendingNewCharacter = false;
+        player.pendingCharacterEdit = false;
+
+        if (player.currentCharacters && player.currentCharacters.length >= 1) {
+            goToCharacterSelect(player);
+            return;
+        }
+
         alt.log(`${player.name} | Has zero characters. Sending to character editor.`);
         player.pendingNewCharacter = false;
         player.pendingCharacterEdit = false;

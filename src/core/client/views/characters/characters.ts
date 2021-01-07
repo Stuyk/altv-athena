@@ -17,14 +17,12 @@ alt.onServer(View_Events_Characters.Done, handleDone);
 async function handleView(_characters: Partial<Character>[]) {
     characters = _characters;
 
-    if (!view) {
-        view = await View.getInstance(url, true);
-        view.on('load', handleLoad);
-        view.on('characters:Select', handleSelect);
-        view.on('characters:New', handleNew);
-        view.on('characters:Update', handleSync); // Calls `creator.ts`
-        view.on('characters:Delete', handleDelete);
-    }
+    view = await View.getInstance(url, true);
+    view.on('load', handleLoad);
+    view.on('characters:Select', handleSelect);
+    view.on('characters:New', handleNew);
+    view.on('characters:Update', handleSync); // Calls `creator.ts`
+    view.on('characters:Delete', handleDelete);
 
     // Handle Duplicate View Instance Creations
     if (open) {

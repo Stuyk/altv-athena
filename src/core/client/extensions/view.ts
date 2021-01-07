@@ -126,6 +126,10 @@ export class View extends alt.WebView {
         // Turn off currently existing events.
         for (let i = 0; i < this.currentEvents.length; i++) {
             const eventData = this.currentEvents[i];
+            if (eventData.eventName === 'ready') {
+                continue;
+            }
+
             super.off(eventData.eventName, eventData.callback);
         }
 

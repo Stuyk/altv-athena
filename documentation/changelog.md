@@ -15,6 +15,7 @@ description: List of all the changes and current versions.
 + Smoother Leaderboards
 + Hide Scrollbar on View Instance Creation
 + Hide Screen Until Spawn
++ Fix Discard Character in Creation Screen
 ```
 
 ## 1.0.6 - January 4-5, 2021
