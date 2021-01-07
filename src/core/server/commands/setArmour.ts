@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { getDescription } from '../../shared/commands/commandList';
+import { CommandsLocale } from '../../shared/locale/commands';
 import { addCommand } from '../systems/chat';
 
 addCommand('setarmour', handleCommand);
@@ -25,7 +26,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`That Player ID does not exist.`);
+        player.send(CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
@@ -34,5 +35,5 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
 function finishSetArmour(target: alt.Player, value: number) {
     target.safeAddArmour(value, true);
-    target.send(`Your Armour was set to: ${value}`);
+    target.send(`${CommandsLocale.ARMOUR_SET_TO}${value}`);
 }

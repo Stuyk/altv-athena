@@ -1,16 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { AnimationFlags } from '../../shared/enums/animation';
+import { System_Events_Animation } from '../../shared/enums/system';
+
+alt.onServer(System_Events_Animation.PlayAnimation, playAnimation);
 
 const MaxLoadAttempts = 250;
-
-export enum AnimationFlags {
-    NORMAL = 0,
-    REPEAT = 1,
-    STOP_LAST_FRAME = 2,
-    UPPERBODY_ONLY = 16,
-    ENABLE_PLAYER_CONTROL = 32,
-    CANCELABLE = 120
-}
 
 /**
  * Attempts to load an animation dictionary multiple times before returning false.
@@ -48,7 +43,8 @@ async function loadAnimation(dict: string, count: number = 0): Promise<boolean> 
 export async function playAnimation(
     dict: string,
     name: string,
-    flags: AnimationFlags = AnimationFlags.CANCELABLE
+    flags: AnimationFlags = AnimationFlags.CANCELABLE,
+    duration: number = -1
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {
@@ -64,5 +60,5 @@ export async function playAnimation(
         return;
     }
 
-    native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, -1, flags, 0, false, false, false);
+    native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
 }

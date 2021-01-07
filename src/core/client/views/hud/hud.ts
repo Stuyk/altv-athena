@@ -5,6 +5,7 @@ import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { distance2d } from '../../../shared/utility/vector';
 import { disableAllControls } from '../../utility/disableControls';
+import { switchInPlayer } from '../../utility/switch';
 
 const url = `http://resource/client/views/hud/html/index.html`;
 let view: alt.WebView;
@@ -54,14 +55,18 @@ function handleAppend(message: string): void {
     view.emit('chat:Append', message);
 }
 
-function handleInject() {
+async function handleInject() {
     const myCommands = commandList.filter(
         (cmd) => cmd.permission === 0 || (alt.Player.local.meta.permissionLevel & cmd.permission) !== 0
     );
 
-    if (native.isScreenFadedOut()) {
-        native.doScreenFadeIn(2000);
-    }
+    alt.setTimeout(() => {
+        if (native.isScreenFadedOut()) {
+            native.doScreenFadeIn(2000);
+        }
+    }, 1000);
+
+    await switchInPlayer(1500);
 
     view.emit('chat:Inject', myCommands);
     view.isVisible = true;

@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { getDescription } from '../../shared/commands/commandList';
+import { CommandsLocale } from '../../shared/locale/commands';
 import { addCommand } from '../systems/chat';
 
 addCommand('sethealth', handleCommand);
@@ -25,7 +26,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`Could not find the target player.`);
+        player.send(CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
@@ -34,5 +35,5 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
 function finishSetArmour(target: alt.Player, value: number) {
     target.safeAddHealth(value, true);
-    target.send(`Your Health was set to: ${value}`);
+    target.send(`${CommandsLocale.HEALTH_SET_TO}${value}`);
 }

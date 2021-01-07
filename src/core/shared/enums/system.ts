@@ -12,3 +12,7 @@ export enum System_Events_Voice {
     AddToVoice = 'voice:Add',
     JoinedVoice = 'voice:Joined'
 }
+
+export enum System_Events_Animation {
+    PlayAnimation = 'animation:Play'
+}

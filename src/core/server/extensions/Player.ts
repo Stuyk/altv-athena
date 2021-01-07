@@ -5,6 +5,7 @@ import { CurrencyTypes } from '../enums/currency';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { Account } from '../interface/Account';
+import { AnimationFlags } from '../../shared/enums/animation';
 
 import * as character from './playerPrototypes/character';
 import * as emit from './playerPrototypes/emit';
@@ -15,6 +16,7 @@ import * as safeSetters from './playerPrototypes/safeSetters';
 import * as save from './playerPrototypes/save';
 import * as chat from './playerPrototypes/chat';
 import * as update from './playerPrototypes/update';
+import * as play from './playerPrototypes/play';
 
 declare module 'alt-server' {
     export interface Player {
@@ -111,6 +113,15 @@ declare module 'alt-server' {
          * @returns void
          */
         initData(data: Character): void;
+
+        /**
+         * Play an animation if the player is not dead.
+         * @param {string} dictionary
+         * @param {string} name
+         * @param {AnimationFlags} flags Bitwise flags for animation playback.
+         * @memberof Player
+         */
+        playAnimation(dictionary: string, name: string, flags: AnimationFlags, duration: number): void;
 
         /**
          * Safely set this player's position.
@@ -242,6 +253,9 @@ alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
 
 // Chat Related
 alt.Player.prototype.send = chat.sendPrototype;
+
+// Aesthetic Related
+alt.Player.prototype.playAnimation = play.playAnimationPrototype;
 
 // Update Related
 alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;

@@ -4,6 +4,13 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.0.8 - January 7, 2021
+
+```diff
++ Add Login Camera
++ Add player.playAnimation for server-side.
+```
+
 ## 1.0.8 - January 6, 2021
 
 ```diff

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { addCommand } from '../systems/chat';
 import { System_Events_NoClip } from '../../shared/enums/system';
+import { CommandsLocale } from '../../shared/locale/commands';
 
 alt.onClient(System_Events_NoClip.Reset, handleReset);
 alt.onClient(System_Events_NoClip.Update, handleCamUpdate);
@@ -12,18 +13,18 @@ function handleCommand(player: alt.Player): void {
 
     if (!isNoClipping && !player.data.isDead) {
         player.setSyncedMeta('NoClipping', true);
-        player.send(`No Clip: ON`);
+        player.send(`No Clip: ${CommandsLocale.ON}`);
         player.visible = false;
         return;
     }
 
     if (player.data.isDead) {
-        player.send(`You cannot use No Clip while you are dead.`);
+        player.send(CommandsLocale.CANNOT_WHILE_DEAD);
     }
 
     player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
     player.setSyncedMeta('NoClipping', false);
-    player.send(`No Clip: OFF`);
+    player.send(`No Clip:  ${CommandsLocale.OFF}`);
     player.visible = true;
 }
 

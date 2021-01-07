@@ -10,7 +10,8 @@ import {
 } from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
-import { AnimationFlags, playAnimation } from '../../systems/animations';
+import { playAnimation } from '../../systems/animations';
+import { AnimationFlags } from '../../../shared/enums/animation';
 
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
@@ -213,10 +214,6 @@ async function handleFinishSync(shouldTPose: boolean = false) {
         native.setPedComponentVariation(alt.Player.local.scriptID, 11, 91, 0, 0); // torso
     }
 
-    if (shouldTPose) {
-        await playAnimation('nm@hands', 'natural', AnimationFlags.REPEAT | AnimationFlags.STOP_LAST_FRAME);
-    }
-
     if (native.isScreenFadedOut()) {
         native.doScreenFadeIn(500);
     }
@@ -230,6 +227,10 @@ async function handleFinishSync(shouldTPose: boolean = false) {
         false,
         false
     );
+
+    if (shouldTPose) {
+        await playAnimation('nm@hands', 'natural', AnimationFlags.REPEAT | AnimationFlags.STOP_LAST_FRAME);
+    }
 
     prevData = tempData;
 }

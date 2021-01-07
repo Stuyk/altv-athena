@@ -1,23 +1,24 @@
 import * as alt from 'alt-server';
+import { CommandsLocale } from '../../shared/locale/commands';
 import { addCommand } from '../systems/chat';
 
 addCommand('revive', handleCommand);
 
 function handleCommand(player: alt.Player, targetPlayerID: string | null = null): void {
     if (targetPlayerID === null) {
-        player.send(`You are not dead. Cannot revive.`);
+        player.send(CommandsLocale.CANNOT_WHILE_DEAD);
         finishRevive(player);
         return;
     }
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(`Could not find the target player.`);
+        player.send(CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
     if (!target.data.isDead) {
-        player.send(`${target.id} is not dead.`);
+        player.send(CommandsLocale.PLAYER_IS_NOT_DEAD);
         return;
     }
 
