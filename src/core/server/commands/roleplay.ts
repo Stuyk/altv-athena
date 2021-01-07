@@ -5,6 +5,7 @@ import { distance2d, getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { addCommand } from '../systems/chat';
 import { emitAll } from '../utility/emitHelper';
+import { getPlayersByGridSpace } from '../utility/filters';
 
 addCommand('me', handleCommandMe);
 addCommand('do', handleCommandDo);
@@ -18,9 +19,7 @@ function handleCommandMe(player: alt.Player, ...args): void {
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getClosestTypes<alt.Player>(player.pos, alt.Player.all, DEFAULT_CONFIG.COMMAND_ME_DISTANCE, [
-        'discord'
-    ]);
+    const closestPlayers = getPlayersByGridSpace(player, DEFAULT_CONFIG.COMMAND_ME_DISTANCE);
 
     emitAll(
         closestPlayers,
@@ -36,9 +35,7 @@ function handleCommandDo(player: alt.Player, ...args): void {
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getClosestTypes<alt.Player>(player.pos, alt.Player.all, DEFAULT_CONFIG.COMMAND_DO_DISTANCE, [
-        'discord'
-    ]);
+    const closestPlayers = getPlayersByGridSpace(player, DEFAULT_CONFIG.COMMAND_DO_DISTANCE);
 
     emitAll(
         closestPlayers,
@@ -54,12 +51,7 @@ function handleCommandLow(player: alt.Player, ...args): void {
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getClosestTypes<alt.Player>(
-        player.pos,
-        alt.Player.all,
-        DEFAULT_CONFIG.COMMAND_LOW_DISTANCE,
-        ['discord']
-    );
+    const closestPlayers = getPlayersByGridSpace(player, DEFAULT_CONFIG.COMMAND_LOW_DISTANCE);
 
     emitAll(
         closestPlayers,

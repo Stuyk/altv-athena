@@ -42,5 +42,18 @@ export const DEFAULT_CONFIG = {
         { x: 297.4647521972656, y: -584.7089233398438, z: 44.292724609375 },
         { x: -677.0172119140625, y: 311.7821350097656, z: 83.601806640625 },
         { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 }
+    ],
+    WEATHER_ROTATION: [
+        'EXTRASUNNY',
+        'EXTRASUNNY',
+        'CLEAR',
+        'CLOUDS',
+        'OVERCAST',
+        'RAIN',
+        'THUNDER',
+        'RAIN',
+        'FOGGY',
+        'OVERCAST',
+        'CLEARING'
     ]
 };

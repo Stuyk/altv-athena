@@ -41,6 +41,10 @@ declare module 'alt-server' {
         nextDeathSpawn: number;
         nextPingTime: number;
 
+        // World Data
+        gridSpace: number;
+        currentWeather: string;
+
         // Functions
 
         /**

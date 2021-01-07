@@ -16,6 +16,12 @@ description: List of all the changes and current versions.
 + Hide Scrollbar on View Instance Creation
 + Hide Screen Until Spawn
 + Fix Discard Character in Creation Screen
++ New Utility Functions
++ Filter Players by Permission
++ Filter Players by GridSpace
++ Move Weather and Time to Tick Event for Players
++ Change Roleplay Commands Filter Function
++ Add Get Position In Front for Player
 ```
 
 ## 1.0.6 - January 4-5, 2021

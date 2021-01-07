@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { Events_Misc } from '../../shared/enums/events';
-import { distance2d } from '../../shared/utility/vector';
-import { DEFAULT_CONFIG } from '../athena/main';
+import { updatePlayerTime, updatePlayerWeather } from './world';
 
 const timeBetweenPings = 4950;
 
@@ -23,6 +22,9 @@ function handlePing(player: alt.Player): void {
     player.nextPingTime = Date.now() + timeBetweenPings;
     player.updateSyncedMetaStates();
     player.saveOnTick();
+
+    updatePlayerTime(player);
+    updatePlayerWeather(player);
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
         player.handleDeathRespawn();

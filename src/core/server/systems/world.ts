@@ -11,20 +11,6 @@ const GlobalTime = {
     minute: DEFAULT_CONFIG.BOOTUP_MINUTE
 };
 
-const weatherRotation = [
-    'EXTRASUNNY',
-    'EXTRASUNNY',
-    'CLEAR',
-    'CLOUDS',
-    'OVERCAST',
-    'RAIN',
-    'THUNDER',
-    'RAIN',
-    'FOGGY',
-    'OVERCAST',
-    'CLEARING'
-];
-
 // 12,000 Total Units
 const maxY = 8000;
 const minY = -4000;
@@ -52,23 +38,12 @@ function handleWorldTime(): void {
         GlobalTime.minute = 0;
         GlobalTime.hour += 1;
 
-        const endElement = weatherRotation.pop();
-        weatherRotation.unshift(endElement);
+        const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
+        DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
     }
 
     if (GlobalTime.hour >= 24) {
         GlobalTime.hour = 0;
-    }
-
-    const currentPlayers = [...alt.Player.all];
-    for (let i = 0; i < currentPlayers.length; i++) {
-        const target = currentPlayers[i];
-        if (!target || !target.valid) {
-            continue;
-        }
-
-        updatePlayerTime(target);
-        updatePlayerWeather(target);
     }
 }
 
@@ -109,11 +84,18 @@ export function updatePlayerTime(player: alt.Player): void {
  * @return {*}  {void}
  */
 export function updatePlayerWeather(player: alt.Player): void {
-    const worldIndex = minMaxGroups.findIndex((x) => player.pos && player.pos.y > x.minY && player.pos.y < x.maxY);
-    if (worldIndex <= -1) {
-        player.emit(System_Events_World.UpdateWeather, weatherRotation[0]);
+    const gridSpace = minMaxGroups.findIndex(
+        (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY
+    );
+
+    if (gridSpace <= -1) {
+        player.emit(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[0]);
+        player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[0];
+        player.gridSpace = 0;
         return;
     }
 
-    player.emit(System_Events_World.UpdateWeather, weatherRotation[worldIndex]);
+    player.emit(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace]);
+    player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace];
+    player.gridSpace = gridSpace;
 }
