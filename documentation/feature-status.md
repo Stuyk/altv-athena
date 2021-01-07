@@ -23,16 +23,16 @@ N/A - Feature planned but not started.
 Use the marking system above to determine what is complete and what is not.
 
 ```
-MS - Authentication
+F - Authentication
 S - Character Editor
-S - Character Selection
-S - Character Position Saving
+F - Character Selection
+F - Character Position Saving
 S - Nametags
 MS - Chat
-S - Chat Commands
-S - Chat Colors
-S - Chat Permissions
-MS - Roleplay Commands
+F - Chat Command Infrastructure
+F - Chat Colors
+F - Chat Permissions
+S - Roleplay Commands
 S - Chat Command Hints
 S - Time Sync
 S - Weather Sync
