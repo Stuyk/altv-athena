@@ -98,6 +98,7 @@ const app = new Vue({
     mounted() {
         if ('alt' in window) {
             alt.on('characters:Set', this.handleSet);
+            alt.emit('ready');
         } else {
             this.characters = [
                 exampleCharacter,

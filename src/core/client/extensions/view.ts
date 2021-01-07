@@ -42,10 +42,16 @@ export class View extends alt.WebView {
         }
 
         alt.Player.local.isMenuOpen = true;
-
+        View._instance.isVisible = false;
         View._instance.url = url;
         View._instance.showCursor(addCursor);
         View._instance.focus();
+
+        // Used to hide the view until it's ready.
+        View._instance.on('ready', () => {
+            View._instance.isVisible = true;
+        });
+
         return View._instance;
     }
 
@@ -103,6 +109,7 @@ export class View extends alt.WebView {
         this.url = blankURL;
         this.showCursor(false);
         this.unfocus();
+        this.isVisible = false;
 
         alt.Player.local.isMenuOpen = false;
 

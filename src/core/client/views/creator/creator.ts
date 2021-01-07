@@ -218,6 +218,10 @@ async function handleFinishSync(shouldTPose: boolean = false) {
         await playAnimation('nm@hands', 'natural', AnimationFlags.REPEAT | AnimationFlags.STOP_LAST_FRAME);
     }
 
+    if (native.isScreenFadedOut()) {
+        native.doScreenFadeIn(500);
+    }
+
     native.setEntityCoordsNoOffset(
         alt.Player.local.scriptID,
         alt.Player.local.pos.x,
@@ -227,5 +231,6 @@ async function handleFinishSync(shouldTPose: boolean = false) {
         false,
         false
     );
+
     prevData = tempData;
 }

@@ -60,10 +60,7 @@ function handleAwaitModel(player: alt.Player, characterSex: number, shouldTPose:
 }
 
 async function handleAwaitNameValid(player: alt.Player, name: string): Promise<void> {
-    console.log(`Started name lookup...`);
     const result = await db.fetchData<Character>('name', name, 'characters');
-    console.log(result);
-    console.log(`Finished name lookup...`);
 
     if (!result) {
         alt.emitClient(player, View_Events_Creator.AwaitName, true); // Yes the name is available.

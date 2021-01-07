@@ -184,9 +184,12 @@ const app = new Vue({
             if ('alt' in window) {
                 alt.on('creator:Ready', this.setReady);
                 alt.on('creator:SetData', this.setData);
+                alt.emit('ready');
             } else {
                 this.show = true;
             }
         });
+
+        console.log(`Loaded Character Creator`);
     }
 });
