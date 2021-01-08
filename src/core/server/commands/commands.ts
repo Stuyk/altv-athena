@@ -1,3 +1,4 @@
+import './adminChat';
 import './getVehicle';
 import './noclip';
 import './revive';

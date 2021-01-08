@@ -9,6 +9,12 @@ description: List of all the changes and current versions.
 ```diff
 + Add Login Camera
 + Add player.playAnimation for server-side.
++ Added 'Left Alt' for interactions. (Not Ready)
++ Adjusted NoClip Structure
++ Added Admin Chat Command
++ Added Moderator Chat Command
++ Added OOC Chat Command
++ Added Broadcast Command
 ```
 
 ## 1.0.8 - January 6, 2021

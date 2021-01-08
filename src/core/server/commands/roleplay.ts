@@ -8,10 +8,27 @@ import { addCommand } from '../systems/chat';
 import { emitAll } from '../utility/emitHelper';
 import { getPlayersByGridSpace } from '../utility/filters';
 
+addCommand('b', handleCommandOOC);
 addCommand('me', handleCommandMe);
 addCommand('do', handleCommandDo);
 addCommand('low', handleCommandLow);
 addCommand('w', handleCommandWhisper);
+
+function handleCommandOOC(player: alt.Player, ...args): void {
+    if (args.length <= 0) {
+        player.send(getDescription('b'));
+        return;
+    }
+
+    const fullMessage = args.join(' ');
+    const closestPlayers = getPlayersByGridSpace(player, DEFAULT_CONFIG.COMMAND_OOC_DISTANCE);
+
+    emitAll(
+        closestPlayers,
+        View_Events_Chat.Append,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_OOC_COLOR}${player.data.name}: (( ${fullMessage} ))`
+    );
+}
 
 function handleCommandMe(player: alt.Player, ...args): void {
     if (args.length <= 0) {

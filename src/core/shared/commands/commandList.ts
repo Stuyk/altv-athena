@@ -17,6 +17,12 @@ import { Command } from '../interfaces/Command';
 
 export const commandList: Array<Command> = [
     {
+        name: 'b',
+        description: '/b [message] - Speak out of character',
+        cooldown: 0,
+        permission: Permissions.None
+    },
+    {
         name: 'me',
         description: '/me [describe what you are doing] - Roleplay an action',
         cooldown: 0,
@@ -40,7 +46,25 @@ export const commandList: Array<Command> = [
         cooldown: 0,
         permission: Permissions.None
     },
-    // Admin+
+    // Admin, Moderator
+    {
+        name: 'ac',
+        description: '/ac [message] - Speak to other Admins',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
+    {
+        name: 'mc',
+        description: '/mc [message] - Speak to other Moderators & Admins',
+        cooldown: 0,
+        permission: Permissions.Admin | Permissions.Moderator
+    },
+    {
+        name: 'broadcast',
+        description: '/broadcast [message] - Announce server-wide.',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
     {
         name: 'getvehicle',
         description: '/getvehicle [name] - Spawn an admin vehicle',
