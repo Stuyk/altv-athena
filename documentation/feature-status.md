@@ -39,7 +39,7 @@ S - Weather Sync
 S - Port Freecam for Chat Permissions
 MS - Character Respawn
 S - Voice Chat
-N/A - Locale System
+US - Locale System
 S - Leader Board / Player List
 N/A - Vehicle System
 N/A - Vehicle Ownership

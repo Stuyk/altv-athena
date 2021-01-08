@@ -1,8 +1,9 @@
 import alt from 'alt-client';
+import { Vector3 } from 'alt-client';
 import * as native from 'natives';
 import { System_Events_NoClip } from '../../shared/enums/system';
-
-const temporaryText = [];
+import { getCrossProduct, getNormalizedVector, rotationToDirection } from '../utility/math';
+import { addTemporaryText } from '../utility/text';
 
 const disabledControls = [
     30, // A & D
@@ -41,7 +42,6 @@ const disabledControls = [
 const timeBetweenPlayerUpdates = 250;
 
 let nextUpdate = Date.now() + 50;
-let showHud = true;
 let maxSpeed = 0.5;
 let speed = 0;
 let zSpeedUp = 0;
@@ -49,44 +49,11 @@ let zSpeedDown = 0;
 let interval;
 let cam;
 
-function getCrossProduct(v1, v2) {
-    return {
-        x: v1.y * v2.z - v1.z * v2.y,
-        y: v1.z * v2.x - v1.x * v2.z,
-        z: v1.x * v2.y - v1.y * v2.x
-    };
-}
-
-function getNormalizedVector(vector) {
-    const mag = Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
-    return {
-        x: vector.x / mag,
-        y: vector.y / mag,
-        z: vector.z / mag
-    };
-}
-
-function degToRad(degrees) {
-    return (degrees * Math.PI) / 180;
-}
-
-function rotationToDirection(rotation) {
-    const z = degToRad(rotation.z);
-    const x = degToRad(rotation.x);
-    const num = Math.abs(Math.cos(x));
-
-    return {
-        x: -Math.sin(z) * num,
-        y: Math.cos(z) * num,
-        z: Math.sin(x)
-    };
-}
-
-function getCameraRotation(cam) {
+function getCameraRotation(cam: number): native.Vector3 {
     return { ...native.getCamRot(cam, 2) };
 }
 
-function getCameraPosition(cam) {
+function getCameraPosition(cam: number): native.Vector3 {
     return { ...native.getCamCoord(cam) };
 }
 
@@ -131,12 +98,6 @@ function handleCamera() {
         return;
     }
 
-    handleDrawTemporaryText();
-
-    if (!showHud) {
-        native.hideHudAndRadarThisFrame();
-    }
-
     if (!cam) {
         native.destroyAllCams(true);
 
@@ -165,12 +126,6 @@ function handleCamera() {
 
     native.disableFirstPersonCamThisFrame();
     native.blockWeaponWheelThisFrame();
-
-    // 42 - D Pad Up || ]
-    if (native.isDisabledControlJustReleased(0, 42)) {
-        showHud = !showHud;
-        addTemporaryText(`hudStatus`, `Show HUD: ${showHud}`, 0.95, 0.1, 0.4, 255, 255, 255, 255, 2000);
-    }
 
     // 38 - E
     if (native.isDisabledControlPressed(0, 38)) {
@@ -242,7 +197,7 @@ function handleCamera() {
     }
 
     // Calculations
-    const upVector = { x: 0, y: 0, z: 1 };
+    const upVector = new alt.Vector3(0, 0, 1);
     const pos = getCameraPosition(cam);
     const rot = getCameraRotation(cam);
     const rr = rotationToDirection(rot);
@@ -272,47 +227,5 @@ function handleCamera() {
     if (Date.now() > nextUpdate) {
         nextUpdate = Date.now() + timeBetweenPlayerUpdates;
         alt.emitServer(System_Events_NoClip.Update, newPos);
-    }
-}
-
-export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
-    const index = temporaryText.findIndex((data) => data.identifier === identifier);
-
-    if (index !== -1) {
-        try {
-            alt.clearTimeout(temporaryText[index].timeout);
-        } catch (err) {}
-        temporaryText.splice(index, 1);
-    }
-
-    const timeout = alt.setTimeout(() => {
-        removeText(identifier);
-    }, ms);
-
-    temporaryText.push({ identifier, msg, x, y, scale, r, g, b, a, timeout });
-}
-
-function removeText(identifier) {
-    const index = temporaryText.findIndex((data) => data.identifier === identifier);
-    if (index <= -1) {
-        return;
-    }
-
-    temporaryText.splice(index, 1);
-}
-
-function handleDrawTemporaryText() {
-    for (let i = 0; i < temporaryText.length; i++) {
-        const data = temporaryText[i];
-        native.beginTextCommandDisplayText('STRING');
-        native.addTextComponentSubstringPlayerName(data.msg);
-        native.setTextFont(4);
-        native.setTextScale(1, data.scale);
-        native.setTextWrap(0.0, 1.0);
-        native.setTextCentre(true);
-        native.setTextColour(data.r, data.g, data.b, data.a);
-        native.setTextJustification(0);
-        native.setTextOutline();
-        native.endTextCommandDisplayText(data.x, data.y, 0);
     }
 }

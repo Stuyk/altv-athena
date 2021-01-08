@@ -1,6 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
+const temporaryText = [];
+let tempInterval;
+
 /**
  * Draw text on your screen in a 2D position wtih an every tick.
  * @param  {string} text
@@ -49,4 +52,71 @@ export function drawText3D(text: string, pos: alt.Vector3, scale: number, color:
     native.setTextDropShadow();
     native.endTextCommandDisplayText(0, 0, 0);
     native.clearDrawOrigin();
+}
+
+/**
+ * Adds text temporarily on the screen.
+ * @export
+ * @param {*} identifier
+ * @param {*} msg
+ * @param {*} x
+ * @param {*} y
+ * @param {*} scale
+ * @param {*} r
+ * @param {*} g
+ * @param {*} b
+ * @param {*} a
+ * @param {*} ms
+ */
+export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
+    const index = temporaryText.findIndex((data) => data.identifier === identifier);
+
+    if (index !== -1) {
+        try {
+            alt.clearTimeout(temporaryText[index].timeout);
+        } catch (err) {}
+        temporaryText.splice(index, 1);
+    }
+
+    const timeout = alt.setTimeout(() => {
+        removeText(identifier);
+    }, ms);
+
+    temporaryText.push({ identifier, msg, x, y, scale, r, g, b, a, timeout });
+
+    if (tempInterval) {
+        alt.clearInterval(tempInterval);
+        tempInterval = null;
+    }
+
+    tempInterval = alt.setInterval(handleDrawTemporaryText, 0);
+}
+
+/**
+ * Stop drawing temporary text based on the name.
+ * @param {*} identifier
+ * @return {*}
+ */
+function removeText(identifier: string): void {
+    const index = temporaryText.findIndex((data) => data.identifier === identifier);
+    if (index <= -1) {
+        return;
+    }
+
+    temporaryText.splice(index, 1);
+
+    if (temporaryText.length <= 0) {
+        alt.clearInterval(tempInterval);
+        tempInterval = null;
+    }
+}
+
+/**
+ * Used in a setInterval,0 to draw text in the temporaryText array.
+ */
+function handleDrawTemporaryText(): void {
+    for (let i = 0; i < temporaryText.length; i++) {
+        const data = temporaryText[i];
+        drawText2D(data.msg, { x: data.x, y: data.y }, data.scale, new alt.RGBA(data.r, data.g, data.b, data.a));
+    }
 }

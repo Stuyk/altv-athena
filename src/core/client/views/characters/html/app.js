@@ -104,8 +104,6 @@ const app = new Vue({
                 exampleCharacter,
                 { ...exampleCharacter, ...{ appearance: { sex: 0 }, name: 'Jobi_Jobonai' } }
             ];
-
-            console.log(this.characters);
         }
     }
 });

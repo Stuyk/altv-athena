@@ -5,6 +5,7 @@ import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { distance2d } from '../../../shared/utility/vector';
 import { disableAllControls } from '../../utility/disableControls';
+import { sleep } from '../../utility/sleep';
 import { switchInPlayer } from '../../utility/switch';
 
 const url = `http://resource/client/views/hud/html/index.html`;
@@ -21,6 +22,12 @@ async function handleView() {
         view.on('chat:Send', handleNewMessage);
         view.on('chat:Inject', handleInject);
         view.on('mouse:Focus', handleFocus);
+
+        alt.setTimeout(() => {
+            if (native.isScreenFadedOut()) {
+                native.doScreenFadeIn(2000);
+            }
+        }, 1000);
     }
 
     view.unfocus();
@@ -60,13 +67,8 @@ async function handleInject() {
         (cmd) => cmd.permission === 0 || (alt.Player.local.meta.permissionLevel & cmd.permission) !== 0
     );
 
-    alt.setTimeout(() => {
-        if (native.isScreenFadedOut()) {
-            native.doScreenFadeIn(2000);
-        }
-    }, 1000);
-
     await switchInPlayer(1500);
+    await sleep(1500);
 
     view.emit('chat:Inject', myCommands);
     view.isVisible = true;
