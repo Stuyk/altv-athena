@@ -99,7 +99,7 @@ declare module 'alt-server' {
          * Handles properly respawning a player a hospital.
          * @memberof Player
          */
-        handleDeathRespawn(): void;
+        handleDeathRespawn(position: alt.Vector3 | null): void;
 
         /**
          * Initialize default values for player.data

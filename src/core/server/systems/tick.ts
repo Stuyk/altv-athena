@@ -27,6 +27,6 @@ function handlePing(player: alt.Player): void {
     updatePlayerWeather(player);
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
-        player.handleDeathRespawn();
+        player.handleDeathRespawn(null); // Uses null to find a hospital.
     }
 }

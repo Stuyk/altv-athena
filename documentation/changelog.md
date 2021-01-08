@@ -4,6 +4,12 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.0.8 - January 8, 2021
+
+```diff
++ Fixed Revive Command for Respawning
+```
+
 ## 1.0.8 - January 7, 2021
 
 ```diff
