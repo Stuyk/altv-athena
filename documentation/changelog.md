@@ -8,6 +8,7 @@ description: List of all the changes and current versions.
 
 ```diff
 + Fixed Revive Command for Respawning
++ Added Fast Login
 ```
 
 ## 1.0.8 - January 7, 2021
