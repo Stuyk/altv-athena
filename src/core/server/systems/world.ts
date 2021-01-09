@@ -92,10 +92,12 @@ export function updatePlayerWeather(player: alt.Player): void {
         player.emit(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[0]);
         player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[0];
         player.gridSpace = 0;
+        player.emitMeta('gridSpace', gridSpace);
         return;
     }
 
     player.emit(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace]);
     player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace];
     player.gridSpace = gridSpace;
+    player.emitMeta('gridSpace', gridSpace);
 }
