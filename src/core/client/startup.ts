@@ -16,6 +16,7 @@ import './systems/interiors';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
+import './systems/quickToken';
 import './systems/tick';
 // import './systems/vehicle';
 import './systems/world';

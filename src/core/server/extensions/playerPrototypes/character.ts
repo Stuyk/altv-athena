@@ -8,6 +8,8 @@ import { Account } from '../../interface/Account';
 import { Permissions } from '../../../shared/enums/permissions';
 import { View_Events_Creator } from '../../../shared/enums/views';
 import { System_Events_Voice, System_Events_World } from '../../../shared/enums/system';
+import { Permission } from 'alt-client';
+import { getUniquePlayerHash } from '../../utility/encryption';
 
 const db: Database = getDatabase();
 
@@ -48,6 +50,22 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 export async function setAccountDataPrototype(accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
+        db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, 'accounts');
+    }
+
+    if (!accountData.quickToken) {
+        const qt: string = getUniquePlayerHash(this, this.discord.id);
+
+        db.updatePartialData(
+            accountData._id,
+            {
+                quickToken: qt,
+                quickTokenExpiration: Date.now() + 60000 * 60 * 48 // 48 Hours
+            },
+            'accounts'
+        );
+
+        this.emit(Events_Misc.DiscordTokenUpdate, this.discord.id);
     }
 
     this.emitMeta('permissionLevel', accountData.permissionLevel);

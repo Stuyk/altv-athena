@@ -12,4 +12,6 @@ export interface Account {
     hardware: Array<string>;
     lastLogin: number;
     permissionLevel: Permissions;
+    quickToken: string;
+    quickTokenExpiration: number;
 }

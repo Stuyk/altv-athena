@@ -28,6 +28,7 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
 
     player.dimension = player.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
     player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
+    player.pendingLogin = true;
 
     player.init();
     player.safeSetPosition(pos.x, pos.y, pos.z);

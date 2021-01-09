@@ -8,7 +8,10 @@ import { View_Events_Discord } from '../../shared/enums/views';
 import { Permissions } from '../../shared/enums/permissions';
 import './tick';
 import './voice';
+import { Events_Misc } from '../../shared/enums/events';
+import { getUniquePlayerHash } from '../utility/encryption';
 
+alt.onClient(Events_Misc.DiscordToken, handleDiscordToken);
 alt.on('playerDisconnect', handleDisconnect);
 alt.on('Discord:Login', handleLoginRouting);
 
@@ -33,7 +36,11 @@ const db: sm.Database = sm.getDatabase();
  * @param  {Player} player
  * @param  {DiscordUser} data
  */
-export async function handleLoginRouting(player: Player, data: Partial<DiscordUser>): Promise<void> {
+export async function handleLoginRouting(
+    player: Player,
+    data: Partial<DiscordUser>,
+    accountData: Partial<Account> | null = null
+): Promise<void> {
     delete player.pendingLogin;
     delete player.discordToken;
 
@@ -52,22 +59,26 @@ export async function handleLoginRouting(player: Player, data: Partial<DiscordUs
     player.discord = data as DiscordUser;
     player.emit(View_Events_Discord.Close);
 
-    let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
+    // Used for DiscordToken skirt.
+    if (!accountData) {
+        // Generate New Account for Database
+        let account: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
+        if (!account) {
+            const newDocument: Partial<Account> = {
+                discord: player.discord.id,
+                ips: [player.ip],
+                hardware: [player.hwidHash, player.hwidExHash],
+                lastLogin: Date.now(),
+                permissionLevel: Permissions.None
+            };
 
-    // Generate New Account for Database
-    if (!account) {
-        const newDocument: Partial<Account> = {
-            discord: player.discord.id,
-            ips: [player.ip],
-            hardware: [player.hwidHash, player.hwidExHash],
-            lastLogin: Date.now(),
-            permissionLevel: Permissions.None
-        };
+            account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
+        }
 
-        account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
+        await player.setAccountData(account);
+    } else {
+        await player.setAccountData(accountData);
     }
-
-    await player.setAccountData(account);
 
     goToCharacterSelect(player);
 }
@@ -91,4 +102,30 @@ function handleDisconnect(player: Player, reason: string): void {
         alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
         alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);
     }
+}
+
+/**
+ * Used to skirt the Discord Authentication process after logging in once.
+ * @param {alt.Player} player
+ * @param {QuickToken} quickToken
+ */
+async function handleDiscordToken(player: alt.Player, discord: string): Promise<void> {
+    if (!discord) {
+        return;
+    }
+
+    // Just enough unique data.
+    const hashToken: string = getUniquePlayerHash(player, discord);
+    const account: Partial<Account> | null = await db.fetchData<Account>('quickToken', hashToken, 'accounts');
+
+    if (!account) {
+        return;
+    }
+
+    if (!account.quickTokenExpiration || Date.now() > account.quickTokenExpiration) {
+        db.updatePartialData(account._id, { quickToken: null, quickTokenExpiration: null }, 'accounts');
+        return;
+    }
+
+    handleLoginRouting(player, { id: discord }, account);
 }

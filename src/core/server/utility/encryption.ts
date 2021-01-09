@@ -1,3 +1,4 @@
+import * as alt from 'alt-server';
 import sjcl from 'sjcl';
 import ecc from 'elliptic';
 import axios from 'axios';
@@ -191,4 +192,16 @@ export async function getAzurePublicKey(): Promise<string> {
     azurePubKey = result.data.key;
 
     return result.data.key;
+}
+
+/**
+ * Uses a combination of player data to construct a hash.
+ * Keep note that hwid, hwidEx, and social are spoofable.
+ * @export
+ * @param {alt.Player} player
+ * @param {string} discord
+ * @return {*}  {string}
+ */
+export function getUniquePlayerHash(player: alt.Player, discord: string): string {
+    return sha256(sha256(`${player.hwidHash}${player.hwidExHash}${player.ip}${discord}${player.socialId}`));
 }

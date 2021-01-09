@@ -1,6 +1,5 @@
 export enum View_Events_Discord {
-    Auth = 'discord:Auth',
-    Close = 'discord:Close'
+    Close = 'Discord:Close'
 }
 
 export enum View_Events_Creator {
