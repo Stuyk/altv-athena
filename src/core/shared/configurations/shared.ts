@@ -1,3 +1,3 @@
 export const SHARED_CONFIG = {
-    RESPAWN_TIME: 10000
+    RESPAWN_TIME: 25000
 };

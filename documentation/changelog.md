@@ -8,6 +8,9 @@ description: List of all the changes and current versions.
 
 ```diff
 + Fixed Revive Command for Respawning
++ Fixed Health not being set on login
++ Fixed Armour not being set on login
++ Fixed Death not being casted on login when dead
 + Added Fast Login
 ```
 

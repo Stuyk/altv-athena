@@ -39,6 +39,15 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 
     alt.setTimeout(() => {
         this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
+        this.safeAddHealth(this.data.health, true);
+        this.safeAddArmour(this.data.armour, true);
+
+        // Resets their death status and logs them in as dead.
+        if (this.data.isDead) {
+            this.data.isDead = false;
+            this.setHealth = 0;
+        }
+
         alt.emit(System_Events_Voice.AddToVoice, this);
         alt.emit(System_Events_World.UpdateWeather, this);
     }, 500);
@@ -53,7 +62,7 @@ export async function setAccountDataPrototype(accountData: Partial<Account>): Pr
         db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, 'accounts');
     }
 
-    if (!accountData.quickToken) {
+    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration) {
         const qt: string = getUniquePlayerHash(this, this.discord.id);
 
         db.updatePartialData(

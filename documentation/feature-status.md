@@ -26,7 +26,9 @@ Use the marking system above to determine what is complete and what is not.
 F - Authentication
 S - Character Editor
 F - Character Selection
-F - Character Position Saving
+F - Character Position Saving / Restore
+S - Character Health Saving / Restore
+S - Character Armour Saving / Restore
 S - Nametags
 MS - Chat
 F - Chat Command Infrastructure
@@ -37,7 +39,7 @@ S - Chat Command Hints
 S - Time Sync
 S - Weather Sync
 S - Port Freecam for Chat Permissions
-MS - Character Respawn
+S - Character Respawn
 S - Voice Chat
 US - Locale System
 S - Leader Board / Player List
