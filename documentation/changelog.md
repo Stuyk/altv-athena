@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.0.8 - January 8, 2021
+## 1.0.8 - January 6-8, 2021
 
 ```diff
 + Fixed Revive Command for Respawning
@@ -12,24 +12,6 @@ description: List of all the changes and current versions.
 + Fixed Armour not being set on login
 + Fixed Death not being casted on login when dead
 + Added Fast Login
-```
-
-## 1.0.8 - January 7, 2021
-
-```diff
-+ Add Login Camera
-+ Add player.playAnimation for server-side.
-+ Added 'Left Alt' for interactions. (Not Ready)
-+ Adjusted NoClip Structure
-+ Added Admin Chat Command
-+ Added Moderator Chat Command
-+ Added OOC Chat Command
-+ Added Broadcast Command
-```
-
-## 1.0.8 - January 6, 2021
-
-```diff
 + Added new development scripts for quick-reboot
 + Added new ares backend service support
 + Added simplified database loader
