@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 
 // Interfaces - Always Load First
-import './interfaces/meta';
-import './interfaces/Player';
-import './interfaces/Vehicle';
+import './extensions/Meta';
+import './extensions/Player';
+import './extensions/Vehicle';
 
 // Events
 import './events/connectionComplete';

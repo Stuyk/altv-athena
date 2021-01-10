@@ -3,5 +3,6 @@ export enum Events_Misc {
     EnableEntry = 'entry:Enable',
     Ping = 'ping:Tick',
     DiscordToken = 'Discord:ID',
-    DiscordTokenUpdate = 'Discord:Token:Update'
+    DiscordTokenUpdate = 'Discord:Token:Update',
+    FetchQT = 'fetch:QT'
 }

@@ -148,12 +148,12 @@ export class Blip extends alt.PointBlip {
 export class StreamBlip {
     private blip: Blip;
     private category: string;
-    private pos: alt.Vector3;
     private sprite: number;
     private color: number;
     private shortRange: boolean;
     private name: string;
     private maxDistance: number | null;
+    public pos: alt.Vector3;
 
     constructor(
         pos: alt.Vector3,
@@ -180,8 +180,13 @@ export class StreamBlip {
         this.safeCreate();
     }
 
-    isInRange(): boolean {
-        return distance2d(alt.Player.local.pos, this.pos) < this.maxDistance;
+    isInRange(): number | null {
+        const range = distance2d(alt.Player.local.pos, this.pos);
+        if (range > this.maxDistance) {
+            return null;
+        }
+
+        return range;
     }
 
     safeCreate(): void {

@@ -36,6 +36,7 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 
     // Set player dimension to zero.
     this.dimension = 0;
+    this.freeze(true);
 
     alt.setTimeout(() => {
         this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);

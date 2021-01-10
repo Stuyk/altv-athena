@@ -24,22 +24,29 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
 
     alt.log(`(${player.id}) ${player.name} has connected to the server.`);
 
-    const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
+    alt.setTimeout(() => {
+        if (!player || !player.valid) {
+            return;
+        }
 
-    player.dimension = player.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
-    player.discordToken = sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
-    player.pendingLogin = true;
+        const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
 
-    player.init();
-    player.safeSetPosition(pos.x, pos.y, pos.z);
+        player.dimension = player.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
+        player.pendingLogin = true;
 
-    updatePlayerTime(player);
-    updatePlayerWeather(player);
+        player.init();
+        player.safeSetPosition(pos.x, pos.y, pos.z);
 
-    if (process.env.DEV_ID) {
-        alt.emitClient(player, `Discord:Close`);
-        handleLoginRouting(player, { id: process.env.DEV_ID });
-    }
+        updatePlayerTime(player);
+        updatePlayerWeather(player);
+
+        if (process.env.DEV_ID) {
+            alt.emitClient(player, `Discord:Close`);
+            handleLoginRouting(player, { id: process.env.DEV_ID });
+        }
+
+        alt.emitClient(player, Events_Misc.FetchQT);
+    }, 500);
 }
 
 alt.emit(Events_Misc.EnableEntry);

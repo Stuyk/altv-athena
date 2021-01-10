@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import gridData from '../../shared/information/gridData';
 import { System_Events_World } from '../../shared/enums/system';
 import { Blip, StreamBlip } from '../extensions/blip';
+import { distance2d } from '../../shared/utility/vector';
 
 const MAX_BLIP_STREAM_DISTANCE = 750;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {
@@ -66,14 +67,30 @@ async function handleStreamChanges(): Promise<void> {
     categoriesWithDistance.forEach(updateCategory);
 }
 
+/**
+ * Updates the blips that are closest to you.
+ * @param {string} category atm, vending, etc.
+ */
 function updateCategory(category: string): void {
     const blips = streamBlips[category];
+    let lastRange: number = distance2d(alt.Player.local.pos, streamBlips[category][0].pos);
+
     for (let i = 0; i < blips.length; i++) {
         const blip = blips[i];
-        if (blip.isInRange()) {
-            blip.safeCreate();
-        } else {
+        const range: null | number = blip.isInRange();
+
+        if (range === null) {
             blip.safeDestroy();
+            continue;
         }
+
+        if (range < lastRange) {
+            alt.Player.local.closestInteraction = { type: category, position: blips[i].pos };
+            lastRange = range;
+
+            alt.log(JSON.stringify(alt.Player.local.closestInteraction));
+        }
+
+        blip.safeCreate();
     }
 }

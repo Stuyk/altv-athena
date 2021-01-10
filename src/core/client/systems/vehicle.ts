@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
-import { DoorData } from '../interfaces/Vehicle';
+import { DoorData } from '../extensions/Vehicle';
 import { drawText3D } from '../utility/text';
 
 const TOGGLE_LOCK_MESSAGE = `X - Toggle Lock`;

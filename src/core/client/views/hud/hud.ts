@@ -5,6 +5,7 @@ import { Events_Misc } from '../../../shared/enums/events';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { distance2d } from '../../../shared/utility/vector';
 import { disableAllControls } from '../../utility/disableControls';
+import { handleFreezePlayer } from '../../utility/freeze';
 import { sleep } from '../../utility/sleep';
 import { switchInPlayer } from '../../utility/switch';
 
@@ -69,6 +70,7 @@ async function handleInject() {
 
     await switchInPlayer(1500);
     await sleep(1500);
+    handleFreezePlayer(false);
 
     view.emit('chat:Inject', myCommands);
     view.isVisible = true;

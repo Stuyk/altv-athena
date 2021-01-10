@@ -17,6 +17,7 @@ import * as save from './playerPrototypes/save';
 import * as chat from './playerPrototypes/chat';
 import * as update from './playerPrototypes/update';
 import * as play from './playerPrototypes/play';
+import * as utility from './playerPrototypes/utility';
 
 declare module 'alt-server' {
     export interface Player {
@@ -94,6 +95,13 @@ declare module 'alt-server' {
          * @returns boolean
          */
         currencySub(type: CurrencyTypes, amount: number): boolean;
+
+        /**
+         * Freeze or unfreeze a player.
+         * @param {boolean} value
+         * @memberof Player
+         */
+        freeze(value: boolean): void;
 
         /**
          * Handles properly respawning a player a hospital.
@@ -230,6 +238,9 @@ alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
 alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
 alt.Player.prototype.currencySub = currency.currencySubPrototype;
 alt.Player.prototype.currencySet = currency.currencySetPrototype;
+
+// Utility
+alt.Player.prototype.freeze = utility.freezePrototype;
 
 // Handlers - Handles specific event related tasks. Like respawn.
 alt.Player.prototype.handleDeathRespawn = death.handleDeathRespawnPrototype;
