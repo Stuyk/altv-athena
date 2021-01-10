@@ -77,6 +77,10 @@ async function handleInject() {
 }
 
 function handleFocus(shouldFocus: boolean): void {
+    if (alt.isConsoleOpen()) {
+        return;
+    }
+
     try {
         alt.showCursor(shouldFocus);
     } catch (err) {
@@ -97,6 +101,10 @@ function handleFocus(shouldFocus: boolean): void {
  * @return {*}  {void}
  */
 export function focusChat(): void {
+    if (alt.isConsoleOpen()) {
+        return;
+    }
+
     if (!view) {
         return;
     }

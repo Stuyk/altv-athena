@@ -4,6 +4,16 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.0.9 - January 10, 2021
+
+```diff
++ Potentially fixed buggy auth startup. No more under map bug.
++ Delayed quick token fetch for more consistent reconnect behavior.
++ Added Blip Interaction Handler
++ Added Closest Object for Grid System
++ Added Text to Interaction Handler
+```
+
 ## 1.0.8 - January 6-8, 2021
 
 ```diff
