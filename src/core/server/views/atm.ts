@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { System_Interaction } from '../../shared/enums/system';
 import { CurrencyTypes } from '../enums/currency';
+import './interaction';
 
 const ActionHandlers = {
     deposit: handleDeposit,

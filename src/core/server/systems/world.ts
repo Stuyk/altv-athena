@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { System_Events_World } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
-import './interaction';
 
 alt.setInterval(handleWorldTime, 60000);
 alt.on(System_Events_World.UpdateWeather, updatePlayerWeather);

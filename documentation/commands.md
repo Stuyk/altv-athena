@@ -23,6 +23,7 @@ Commands that are built-in to the current Framework.
 ## Administrative
 
 ```text
+/addcash [amount] [id]* - Add cash to self or another player.
 /ac [message] - Speak to other admins.
 /mc [message] - Speak to moderators and admins.
 /broadcast [message] - Say something server-wide. No distance restriction.
