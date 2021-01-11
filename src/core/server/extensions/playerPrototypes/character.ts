@@ -42,6 +42,7 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
         this.safeSetPosition(this.data.pos.x, this.data.pos.y, this.data.pos.z);
         this.safeAddHealth(this.data.health, true);
         this.safeAddArmour(this.data.armour, true);
+        this.currencyUpdate();
 
         // Resets their death status and logs them in as dead.
         if (this.data.isDead) {

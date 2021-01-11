@@ -1,4 +1,5 @@
 export enum Player_Status {
     ToggleDeath = 'death:Toggle',
-    SetFreeze = 'freeze:Set'
+    SetFreeze = 'freeze:Set',
+    Interact = 'player:Interact'
 }

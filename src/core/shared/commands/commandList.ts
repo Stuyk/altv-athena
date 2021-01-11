@@ -66,6 +66,12 @@ export const commandList: Array<Command> = [
         permission: Permissions.Admin
     },
     {
+        name: 'setcash',
+        description: '/setcash [amount] [id]* - Add cash',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
+    {
         name: 'getvehicle',
         description: '/getvehicle [name] - Spawn an admin vehicle',
         cooldown: 0,

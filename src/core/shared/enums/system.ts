@@ -16,3 +16,12 @@ export enum System_Events_Voice {
 export enum System_Events_Animation {
     PlayAnimation = 'animation:Play'
 }
+
+export enum System_Events_Sound {
+    PlaySoundFrontend = 'sound:Frontend'
+}
+
+export enum System_Interaction {
+    ATM = 'atm:Open',
+    ACTION = 'atm:Action'
+}

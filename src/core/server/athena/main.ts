@@ -33,6 +33,8 @@ export const DEFAULT_CONFIG = {
     CHAT_ROLEPLAY_COLOR: `{C39ADD}`, // Roleplay Color
     CHAT_ROLEPLAY_LOW_COLOR: `{d3d3d3}`, // Low Color
     CHAT_ROLEPLAY_WHISPER_COLOR: `{e6e6ce}`, // Whisper Color
+    // Interaction Properties
+    MAX_INTERACTION_DISTANCE: 3, // The maximum distance the player can stand away from a interaction object.
     // World Time
     BOOTUP_HOUR: 9,
     BOOTUP_MINUTE: 0,

@@ -8,6 +8,7 @@ alt.onServer(Events_Misc.FetchQT, handleFetchQT);
 async function handleConnectionComplete() {
     native.startAudioScene(`CHARACTER_CHANGE_IN_SKY_SCENE`);
     native.doScreenFadeOut(0);
+    native.triggerScreenblurFadeOut(0);
 }
 
 function handleFetchQT() {

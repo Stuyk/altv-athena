@@ -12,6 +12,11 @@ description: List of all the changes and current versions.
 + Added Blip Interaction Handler
 + Added Closest Object for Grid System
 + Added Text to Interaction Handler
++ Play Sound Frontend for Player
++ Freeze Player from Server Side
++ Added Screen Blur to Re-Usable View Instances
++ Added ATM Interface
++ Added ATM Functionality
 ```
 
 ## 1.0.8 - January 6-8, 2021

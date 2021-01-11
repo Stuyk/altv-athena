@@ -20,11 +20,13 @@ import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
 import './systems/quickToken';
+import './systems/sound';
 import './systems/tick';
 // import './systems/vehicle';
 import './systems/world';
 import './systems/voice';
 
 // Views
+import './views/atm/atm';
 import './views/creator/creator';
 import './views/characters/characters';

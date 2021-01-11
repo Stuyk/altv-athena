@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { Player_Status } from '../../shared/enums/player';
 import { distance2d } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { drawText2D, drawText3D } from '../utility/text';
@@ -9,6 +10,11 @@ const MAX_CHECKPOINT_DRAW = 50;
 
 let tick: number;
 let isOn: boolean = false;
+let pressedKey = false;
+
+export function triggerInteraction(): void {
+    pressedKey = true;
+}
 
 export function toggleInteractionMode(): void {
     if (tick) {
@@ -51,6 +57,11 @@ function handleInteractionMode() {
             z: alt.Player.local.closestInteraction.position.z + 1
         } as alt.Vector3;
 
-        drawText3D(`[E] - Use`, objectHeightPosition, 0.4, new alt.RGBA(255, 255, 255, 200));
+        drawText3D(`[${String.fromCharCode(69)}] - Use`, objectHeightPosition, 0.4, new alt.RGBA(255, 255, 255, 200));
+
+        if (pressedKey) {
+            pressedKey = false;
+            alt.emitServer(Player_Status.Interact, alt.Player.local.closestInteraction.type);
+        }
     }
 }

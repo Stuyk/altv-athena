@@ -87,8 +87,6 @@ function updateCategory(category: string): void {
         if (range < lastRange) {
             alt.Player.local.closestInteraction = { type: category, position: blips[i].pos };
             lastRange = range;
-
-            alt.log(JSON.stringify(alt.Player.local.closestInteraction));
         }
 
         blip.safeCreate();

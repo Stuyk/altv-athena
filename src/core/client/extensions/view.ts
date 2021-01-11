@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 
 // Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
@@ -27,7 +28,12 @@ export class View extends alt.WebView {
      * @param  {string} url
      * @param  {boolean} addCursor
      */
-    static async getInstance(url: string, addCursor: boolean, isInit: boolean = false): Promise<View> {
+    static async getInstance(
+        url: string,
+        addCursor: boolean,
+        isInit: boolean = false,
+        blurBackground: boolean = false
+    ): Promise<View> {
         if (!View._instance) {
             View._instance = new View(url);
 
@@ -50,6 +56,11 @@ export class View extends alt.WebView {
                     resolve();
                 }, 5);
             });
+        }
+
+        if (blurBackground) {
+            native.triggerScreenblurFadeIn(100);
+            native.displayRadar(false);
         }
 
         alt.Player.local.isMenuOpen = true;
@@ -122,6 +133,8 @@ export class View extends alt.WebView {
         this.isVisible = false;
 
         alt.Player.local.isMenuOpen = false;
+        native.triggerScreenblurFadeOut(100);
+        native.displayRadar(true);
 
         // Turn off currently existing events.
         for (let i = 0; i < this.currentEvents.length; i++) {

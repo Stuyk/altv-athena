@@ -18,6 +18,7 @@ import * as chat from './playerPrototypes/chat';
 import * as update from './playerPrototypes/update';
 import * as play from './playerPrototypes/play';
 import * as utility from './playerPrototypes/utility';
+import * as sound from './playerPrototypes/sound';
 
 declare module 'alt-server' {
     export interface Player {
@@ -97,6 +98,12 @@ declare module 'alt-server' {
         currencySub(type: CurrencyTypes, amount: number): boolean;
 
         /**
+         * Forces a currency update for meta data on client-side.
+         * @memberof Player
+         */
+        currencyUpdate(): void;
+
+        /**
          * Freeze or unfreeze a player.
          * @param {boolean} value
          * @memberof Player
@@ -130,6 +137,15 @@ declare module 'alt-server' {
          * @memberof Player
          */
         playAnimation(dictionary: string, name: string, flags: AnimationFlags, duration: number): void;
+
+        /**
+         * Play a sound from the user's frontend.
+         * https://altv.stuyk.com/en/tables/frontend_sounds.html
+         * @param {string} audioName
+         * @param {string} ref
+         * @memberof Player
+         */
+        playFrontendSound(audioName: string, ref: string): void;
 
         /**
          * Safely set this player's position.
@@ -238,6 +254,7 @@ alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
 alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
 alt.Player.prototype.currencySub = currency.currencySubPrototype;
 alt.Player.prototype.currencySet = currency.currencySetPrototype;
+alt.Player.prototype.currencyUpdate = currency.currencyUpdatePrototype;
 
 // Utility
 alt.Player.prototype.freeze = utility.freezePrototype;
@@ -267,6 +284,7 @@ alt.Player.prototype.send = chat.sendPrototype;
 
 // Aesthetic Related
 alt.Player.prototype.playAnimation = play.playAnimationPrototype;
+alt.Player.prototype.playFrontendSound = sound.playFrontendSoundPrototype;
 
 // Update Related
 alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;
