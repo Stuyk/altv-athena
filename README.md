@@ -1,7 +1,6 @@
 ---
 description: >-
-    alt:V Athena is a subscription-based Roleplay Framework with core Roleplay
-    Features.
+    A subscription based GTA:V Roleplay Framework for alt:V.
 ---
 
 # Introduction
@@ -60,6 +59,26 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 ```text
 New Features Always in Discord
 ```
+
+## Screenshots
+
+![](https://thumbs.gfycat.com/DeadlyVibrantDiplodocus-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/ElegantJubilantAmericanbulldog-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/LeftGivingBluewhale-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/BaggyExemplaryFoxterrier-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/RewardingCluelessIrrawaddydolphin-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/BothEquatorialAustraliancattledog-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/CarefulDiscreteKittiwake-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/TerrificNiftyCat-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/PoliteGreenArgali-size_restricted.gif)
 
 ## Running this Project
 
