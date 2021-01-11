@@ -19,11 +19,16 @@ body {
     animation: fadein 2s;
 }
 
-.v-application {
+.v-application .v-application--wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
     background: transparent !important;
     width: 100vw;
-    max-width: 100vw;
-    max-height: 100vh;
+    height: 100vh;
 }
 
 @keyframes fadein {
@@ -36,13 +41,9 @@ body {
 }
 
 .atm {
-    display: fixed;
-    margin: 35vh auto;
-    flex-grow: 1;
-    min-width: 60vw;
-    max-width: 60vw;
     animation: fadein 0.2s;
     user-select: none;
+    min-width: 800px;
 }
 
 .atm-loading {
