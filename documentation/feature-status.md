@@ -43,9 +43,10 @@ S - Character Respawn
 S - Voice Chat
 US - Locale System
 S - Leader Board / Player List
+S - Interaction by Object
+S - Bank
 N/A - Vehicle System
 N/A - Vehicle Ownership
-N/A - Bank
 N/A - Job Framework
 N/A - Clothing System
 ```
