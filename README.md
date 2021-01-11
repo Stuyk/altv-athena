@@ -45,6 +45,17 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Synchronized Weather Patterns
     -   Different Weather Based on Region
     -   Adjustable Configuration
+    -   Performance Grid for Object Interactions / Finding
+-   Interaction System
+    -   Parse Objects by Grid
+    -   ATM Object Interaction
+-   Blip System
+    -   Create Blips
+    -   Stream Blips by Distance
+    -   Append and Delete Blips by Category
+-   Currency System
+    -   Deposit and Withdraw Cash from your bank
+    -   Transfer Bank Money to Other Players
 
 ```text
 New Features Always in Discord
