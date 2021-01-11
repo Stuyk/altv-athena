@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Events_Misc } from '../../shared/enums/events';
 import { updatePlayerTime, updatePlayerWeather } from './world';
+import './interaction';
 
 const timeBetweenPings = 4950;
 
