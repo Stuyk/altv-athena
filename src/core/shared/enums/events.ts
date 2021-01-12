@@ -4,5 +4,6 @@ export enum Events_Misc {
     Ping = 'ping:Tick',
     DiscordToken = 'Discord:ID',
     DiscordTokenUpdate = 'Discord:Token:Update',
+    DiscordTokenNone = 'Discord:Token:None',
     FetchQT = 'fetch:QT'
 }

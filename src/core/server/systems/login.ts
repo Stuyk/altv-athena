@@ -11,6 +11,7 @@ import './voice';
 import { Events_Misc } from '../../shared/enums/events';
 import { getUniquePlayerHash } from '../utility/encryption';
 
+alt.onClient(Events_Misc.DiscordTokenNone, handleDiscordTokenNone);
 alt.onClient(Events_Misc.DiscordToken, handleDiscordToken);
 alt.on('playerDisconnect', handleDisconnect);
 alt.on('Discord:Login', handleLoginRouting);
@@ -128,4 +129,8 @@ async function handleDiscordToken(player: alt.Player, discord: string): Promise<
     }
 
     handleLoginRouting(player, { id: discord }, account);
+}
+
+function handleDiscordTokenNone(player: alt.Player) {
+    player.needsQT = true;
 }

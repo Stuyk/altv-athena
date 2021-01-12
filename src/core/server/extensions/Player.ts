@@ -25,6 +25,7 @@ declare module 'alt-server' {
         // First Join Data
         pendingLogin?: boolean; // Used when a player is pending login.
         discordToken?: string; // Used to assist with loggin in a player through oAuth2.
+        needsQT?: boolean;
         hasModel?: boolean;
         currentCharacters: Array<Character>;
         pendingCharacterEdit?: boolean;

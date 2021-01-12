@@ -16,6 +16,7 @@ function handleFetchQT() {
     const qt = instance.get('qt');
 
     if (!qt) {
+        alt.emitServer(Events_Misc.DiscordTokenNone);
         return;
     }
 

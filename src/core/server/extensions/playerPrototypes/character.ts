@@ -59,13 +59,15 @@ export async function selectCharacterPrototype(characterData: Partial<Character>
 }
 
 export async function setAccountDataPrototype(accountData: Partial<Account>): Promise<void> {
+    const p: alt.Player = this as alt.Player;
+
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
         db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, 'accounts');
     }
 
-    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration) {
-        const qt: string = getUniquePlayerHash(this, this.discord.id);
+    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
+        const qt: string = getUniquePlayerHash(p, p.discord.id);
 
         db.updatePartialData(
             accountData._id,
@@ -76,11 +78,11 @@ export async function setAccountDataPrototype(accountData: Partial<Account>): Pr
             'accounts'
         );
 
-        this.emit(Events_Misc.DiscordTokenUpdate, this.discord.id);
+        p.emit(Events_Misc.DiscordTokenUpdate, p.discord.id);
     }
 
-    this.emitMeta('permissionLevel', accountData.permissionLevel);
-    this.accountData = accountData;
+    p.emitMeta('permissionLevel', accountData.permissionLevel);
+    p.accountData = accountData;
 }
 
 export function setCharacterDataPrototype(characterData: Partial<Character>): void {
