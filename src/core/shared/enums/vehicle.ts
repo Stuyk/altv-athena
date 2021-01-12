@@ -39,7 +39,8 @@ export enum Vehicle_Door_List {
 
 export const Vehicle_Events = {
     SET_INTO: 'Vehicle-Set-Into',
-    SET_LOCK: 'Vehicle-Set-Lock'
+    SET_LOCK: 'Vehicle-Set-Lock',
+    SET_DOOR: 'Vehicle-Set-Door'
 };
 
 export const Vehicle_State = {

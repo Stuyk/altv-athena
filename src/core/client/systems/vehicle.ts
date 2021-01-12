@@ -84,10 +84,85 @@ function handleOutOfVehicle(): void {
         return;
     }
 
+    // Check the lockstate and draw information to a key holder or owner.
     const lock: Vehicle_Lock_State = closestVehicle.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
+    const keys = closestVehicle.getStreamSyncedMeta(Vehicle_State.KEYS);
+    let owner = closestVehicle.getStreamSyncedMeta(Vehicle_State.OWNER);
+
+    if (Array.isArray(keys) && keys.includes(alt.Player.local.id.toString())) {
+        owner = alt.Player.local.id;
+    }
+
+    if (owner && owner.toString() === alt.Player.local.id.toString()) {
+        let lockName = Vehicle_Lock_State[lock];
+
+        if (lock === null || lock === undefined) {
+            lockName = 'LOCKED';
+        }
+
+        drawText3D(
+            `[~y~${String.fromCharCode(88)}~w~] - Cycle Locks~n~${lockName.replace('_', ' ')}`,
+            closestVehicle.pos,
+            0.3,
+            new alt.RGBA(255, 255, 255, 255)
+        );
+    }
+
     if (inLockedState(lock)) {
-        drawText3D(`${Vehicle_Lock_State[lock]}`, closestVehicle.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
         return;
+    }
+
+    // Get the closest Door.
+    const vehClass = native.getVehicleClass(closestVehicle.scriptID);
+    const isBike = vehClass === 8 || vehClass === 13 ? true : false;
+
+    let closestDoor: DoorData;
+    if (!isBike) {
+        closestDoor = closestVehicle.getClosestDoor(alt.Player.local.pos);
+    }
+
+    if (isBike) {
+        drawText3D(
+            `[~y~${String.fromCharCode(70)}~w~] - Enter`,
+            closestVehicle.pos,
+            0.3,
+            new alt.RGBA(255, 255, 255, 255)
+        );
+
+        if (!pressedVehicleFunction) {
+            return;
+        }
+
+        pressedVehicleFunction = false;
+
+        const isDriverFree = native.isVehicleSeatFree(closestVehicle.scriptID, -1, false);
+        if (isDriverFree) {
+            native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, -1, 2, 1, 0);
+            return;
+        }
+
+        const isPassengerFree = native.isVehicleSeatFree(closestVehicle.scriptID, 0, false);
+        if (isPassengerFree) {
+            native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, 0, 2, 1, 0);
+            return;
+        }
+        return;
+    }
+
+    if (closestDoor.isDoor) {
+        drawText3D(
+            `[~y~${String.fromCharCode(70)}~w~] - Toggle`,
+            closestDoor.pos,
+            0.3,
+            new alt.RGBA(255, 255, 255, 255)
+        );
+    } else {
+        drawText3D(
+            `[~y~${String.fromCharCode(70)}~w~] - Enter`,
+            closestDoor.pos,
+            0.3,
+            new alt.RGBA(255, 255, 255, 255)
+        );
     }
 
     if (!pressedVehicleFunction) {
@@ -96,43 +171,12 @@ function handleOutOfVehicle(): void {
 
     pressedVehicleFunction = false;
 
-    // // Get the closest Door.
-    // const vehClass = native.getVehicleClass(closestVehicle.scriptID);
-    // const isBike = vehClass === 8 || vehClass === 13 ? true : false;
+    if (closestDoor.isDoor) {
+        alt.emitServer(Vehicle_Events.SET_DOOR, closestVehicle, closestDoor.seat);
+        return;
+    }
 
-    // let closestDoor: DoorData;
-    // if (!isBike) {
-    //     closestDoor = closestVehicle.getClosestDoor(alt.Player.local.pos);
-    // }
-
-    // if (!native.isDisabledControlJustReleased(0, 23) || Date.now() < timeBetweenControls) {
-    //     return;
-    // }
-
-    // timeBetweenControls = Date.now() + TIME_BETWEEN_CONTROL_PRESS;
-
-    // if (isBike) {
-    //     const isDriverFree = native.isVehicleSeatFree(closestVehicle.scriptID, -1, false);
-    //     if (isDriverFree) {
-    //         native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, -1, 2, 1, 0);
-    //         return;
-    //     }
-
-    //     const isPassengerFree = native.isVehicleSeatFree(closestVehicle.scriptID, 0, false);
-    //     if (isPassengerFree) {
-    //         native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, 0, 2, 1, 0);
-    //         return;
-    //     }
-    //     return;
-    // }
-
-    // if (closestDoor.isDoor) {
-    //     closestVehicle.toggleDoor(closestDoor.seat);
-    //     return;
-    // }
-
-    // native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, closestDoor.seat, 2, 1, 0);
-    native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, -1, 2, 1, 0);
+    native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, closestDoor.seat, 2, 1, 0);
 }
 
 function handleInterval() {
@@ -204,6 +248,7 @@ async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value:
         if (inLockedState(parseInt(value))) {
             vehicle.playCarAlarmHorn(1, 50);
             vehicle.flashLights(1, 50);
+            vehicle.closeAllDoors();
             native.playVehicleDoorCloseSound(vehicle.scriptID, 0);
             return;
         }

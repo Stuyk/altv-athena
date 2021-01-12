@@ -21,6 +21,8 @@ function handleCommand(player: alt.Player, name: string): void {
 
     try {
         const veh = new alt.Vehicle(name, forwardPosition.x, forwardPosition.y, forwardPosition.z, 0, 0, 0);
+        veh.setOwner(player);
+        veh.setIntoVehicle(player, -1);
     } catch (err) {
         player.send(CommandsLocale.VEHICLE_MODEL_NOT_VALID);
     }

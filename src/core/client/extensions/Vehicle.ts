@@ -61,8 +61,13 @@ alt.Vehicle.prototype.closeAllDoors = function closeAllDoors(): void {
     }
 
     for (let doorIndex in Vehicle_Door_List) {
-        native.setVehicleDoorShut(v.scriptID, parseInt(doorIndex), true);
         v.doorStates[doorIndex] = false;
+
+        if (!native.isVehicleDoorFullyOpen(v.scriptID, parseInt(doorIndex))) {
+            continue;
+        }
+
+        native.setVehicleDoorShut(v.scriptID, parseInt(doorIndex), false);
     }
 };
 
@@ -105,11 +110,12 @@ alt.Vehicle.prototype.playCarAlarmHorn = async function playCarAlarmHorn(
 };
 
 alt.Vehicle.prototype.getClosestDoor = function getClosestDoor(position: alt.Vector3): DoorData {
+    const v: alt.Vehicle = this as alt.Vehicle;
     const positions: { index: number; pos: alt.Vector3 }[] = [];
 
     for (let i = 0; i < closestDoorBones.length; i++) {
-        const boneIndex = native.getEntityBoneIndexByName(this.scriptID, closestDoorBones[i].name);
-        const worldPos = native.getWorldPositionOfEntityBone(this.scriptID, boneIndex);
+        const boneIndex = native.getEntityBoneIndexByName(v.scriptID, closestDoorBones[i].name);
+        const worldPos = native.getWorldPositionOfEntityBone(v.scriptID, boneIndex);
         positions.push({ index: i, pos: worldPos as alt.Vector3 });
     }
 
@@ -121,15 +127,17 @@ alt.Vehicle.prototype.getClosestDoor = function getClosestDoor(position: alt.Vec
 };
 
 alt.Vehicle.prototype.toggleDoor = function toggleDoor(door: Vehicle_Door_List) {
-    if (!this.doorStates) {
-        this.doorStates = {};
+    const v: alt.Vehicle = this as alt.Vehicle;
+    if (!v.doorStates) {
+        v.doorStates = {};
     }
 
-    this.doorStates[door] = !this.doorStates[door] ? true : false;
+    v.doorStates[door] = !v.doorStates[door] ? true : false;
 
-    if (!this.doorStates[door]) {
-        native.setVehicleDoorShut(this.scriptID, door, true);
-    } else {
-        native.setVehicleDoorOpen(this.scriptID, door, false, true);
+    if (!v.doorStates[door]) {
+        native.setVehicleDoorShut(v.scriptID, door, false);
+        return;
     }
+
+    native.setVehicleDoorOpen(v.scriptID, door, false, false);
 };
