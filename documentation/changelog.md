@@ -4,6 +4,14 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.1.0 - January 12, 2021
+
+```diff
++ Added Base Vehicle System / Controls
++ Fixed QT Bug when No User Local Storage for QT
++ Updated Ares for Portless Discord Authentication
+```
+
 ## 1.0.9 - January 10, 2021
 
 ```diff
