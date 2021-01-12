@@ -39,6 +39,7 @@ async function handleView() {
  * @param {string} message
  */
 function handleNewMessage(message: string): void {
+    alt.toggleGameControls(true);
     disableAllControls(false);
     isOpen = false;
 
@@ -119,6 +120,7 @@ export function focusChat(): void {
 
     isOpen = true;
     view.emit('chat:Focus');
+    alt.toggleGameControls(false);
     disableAllControls(true);
 }
 

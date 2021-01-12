@@ -78,17 +78,17 @@
                     </v-card-actions>
                 </v-card>
                 <v-card class="atm-loading grey darken-4 pa-8" v-else>
-                    <div class="overline mb-4">
-                        A T H E N A - P r o c e s s i n g . . .
+                    <div class="overline">
+                        A T H E N A
                     </div>
                     <v-card-text>
                         <center>
-                            <div class="lds-ring pt-6" block><div></div><div></div><div></div><div></div></div>
-                            <br />
+                            <div class="lds-grid mt-8"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                            <p>Processing...</p>
                         </center>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn @click="exit" class="mt-4" class="error--text text--lighten-2 flex-grow-1 block" color="error lighten-2" outlined text>
+                        <v-btn @click="exit" class="error--text text--lighten-2" color="error lighten-2" outlined text>
                             <v-icon small>icon-exit</v-icon>
                         </v-btn>
                     </v-card-actions>

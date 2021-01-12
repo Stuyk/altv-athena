@@ -3,11 +3,14 @@ import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { toggleInteractionMode, triggerInteraction } from '../systems/interaction';
 import { focusChat, focusLeaderBoard } from '../views/hud/hud';
+import { triggerVehicleFunction, triggerVehicleLock } from '../systems/vehicle';
 
 const DELAY_BETWEEN_PRESSES = 500;
 const keyupBinds = {
     112: handleDebugMessages, // F1
     113: focusLeaderBoard, // F2
+    88: triggerVehicleLock, // X
+    70: triggerVehicleFunction, // F
     84: focusChat, // T
     69: triggerInteraction, // E
     18: toggleInteractionMode // alt

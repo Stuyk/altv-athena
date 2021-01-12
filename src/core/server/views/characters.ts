@@ -53,7 +53,13 @@ export async function handleSelectCharacter(player: Player, id: string): Promise
         return;
     }
 
-    const index = player.currentCharacters.findIndex((x) => x._id.toString() === id);
+    if (!player.currentCharacters) {
+        alt.logWarning(`[Athena] Failed to get characters for a player. Sending them to character select again.`);
+        goToCharacterSelect(player);
+        return;
+    }
+
+    const index = player.currentCharacters.findIndex((x) => `${x._id}` === `${id}`);
     if (index <= -1) {
         return;
     }

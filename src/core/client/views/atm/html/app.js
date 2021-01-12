@@ -90,8 +90,11 @@ const app = new Vue({
         updateBalances(bank, cash) {
             this.bank = bank;
             this.cash = cash;
-            this.isValid = false;
-            this.processing = false;
+
+            setTimeout(() => {
+                this.isValid = false;
+                this.processing = false;
+            }, 1000);
         },
         exit() {
             if ('alt' in window) {
