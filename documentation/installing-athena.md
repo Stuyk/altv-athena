@@ -89,6 +89,14 @@ This argument is for your Gumroad Email. The Email you used when you bought a li
 EMAIL=xyz@email.com
 ```
 
+#### PORTLESS\*
+
+This argument is if you **DID NOT OPEN PORT 7790**. Do not put this if you did.
+
+```text
+PORTLESS=true
+```
+
 #### MONGO_URL\*
 
 This argument is if you went with a remote MongoDB Server.
@@ -125,11 +133,14 @@ DEV_ID=111222MyDiscordID3452
 
 **Results May Vary**
 
-You should end up with something similar to this:
+You should end up with something similar to this.
+
+_Do not put parameters if they are empty. You may not get the desired effect you want._
 
 ```text
 GUMROAD=XXXXXXXX-YYYYYYYY-...
 EMAIL=xyz@emai...
+PORTLESS=false
 MONGO_URL=
 MONGO_USERNAME=
 MONGO_PASSWORD=

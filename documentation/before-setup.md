@@ -36,6 +36,10 @@ You need to download and install these programs and binaries from the links belo
 
 #### Port Forwarding
 
+At the very least you will need to open port 7788 for your main server.
+
+Port 7790 is completely optional but will require additional setup. Meaning you need to add `PORTLESS=true` to your `.env` file when you setup Athena.
+
 You will need to open the following ports in your **Windows Firewall** and **Router**.
 
 -   7790
