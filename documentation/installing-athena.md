@@ -121,16 +121,6 @@ This argument is if your databae has a username and password. Highly recommended
 MONGO_PASSWORD=coolPassword
 ```
 
-#### DEV_ID
-
-This argument is for using a single Discord ID for all connections. This is for development mode by yourself.
-
-It generally bypasses the Discord Authorization and makes logins quicker.
-
-```text
-DEV_ID=111222MyDiscordID3452
-```
-
 **Results May Vary**
 
 You should end up with something similar to this.
@@ -144,7 +134,6 @@ PORTLESS=false
 MONGO_URL=
 MONGO_USERNAME=
 MONGO_PASSWORD=
-DEV_ID=
 ```
 
 That's it! You're ready to begin using your server.

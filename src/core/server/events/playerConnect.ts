@@ -40,11 +40,6 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
         updatePlayerTime(player);
         updatePlayerWeather(player);
 
-        if (process.env.DEV_ID) {
-            alt.emitClient(player, `Discord:Close`);
-            handleLoginRouting(player, { id: process.env.DEV_ID });
-        }
-
         alt.emitClient(player, Events_Misc.FetchQT);
     }, 500);
 }
