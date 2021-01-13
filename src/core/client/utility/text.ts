@@ -28,6 +28,17 @@ export function drawText2D(text: string, pos: alt.IVector2, scale: number, color
     native.endTextCommandDisplayText(pos.x, pos.y, 0);
 }
 
+export function drawRectangle(pos: alt.IVector3, width: alt.IVector2, color: alt.RGBA) {
+    const [isOnScreen, x, y] = native.getScreenCoordFromWorldCoord(pos.x, pos.y, pos.z, 0, 0);
+    if (!isOnScreen) {
+        return;
+    }
+
+    native.setDrawOrigin(pos.x, pos.y, pos.z, 0);
+    native.drawRect(0, 0, width.x, width.y, color.r, color.g, color.b, color.a, false);
+    native.clearDrawOrigin();
+}
+
 /**
  * Draw stable text in a 3D position with an every tick.
  * @param  {string} text

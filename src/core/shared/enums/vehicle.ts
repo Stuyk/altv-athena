@@ -40,7 +40,8 @@ export enum Vehicle_Door_List {
 export const Vehicle_Events = {
     SET_INTO: 'Vehicle-Set-Into',
     SET_LOCK: 'Vehicle-Set-Lock',
-    SET_DOOR: 'Vehicle-Set-Door'
+    SET_DOOR: 'Vehicle-Set-Door',
+    SET_ENGINE: 'Vehicle-Set-Engine'
 };
 
 export const Vehicle_State = {
@@ -52,7 +53,8 @@ export const Vehicle_State = {
     DOOR_TRUNK: `Door-${Vehicle_Door_List.TRUNK}`,
     LOCK_STATE: `Door-Locks`,
     KEYS: `Vehicle-Keys`,
-    OWNER: 'Vehicle-Owner'
+    OWNER: 'Vehicle-Owner',
+    ENGINE: 'Vehicle-Engine'
 };
 
 /**

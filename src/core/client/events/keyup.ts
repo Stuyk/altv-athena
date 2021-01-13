@@ -3,25 +3,48 @@ import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { toggleInteractionMode, triggerInteraction } from '../systems/interaction';
 import { focusChat, focusLeaderBoard } from '../views/hud/hud';
-import { triggerVehicleFunction, triggerVehicleLock } from '../systems/vehicle';
+import { triggerVehicleFunction, triggerVehicleFunctionAlt, triggerVehicleLock } from '../systems/vehicle';
 
 const DELAY_BETWEEN_PRESSES = 500;
 const keyupBinds = {
-    112: handleDebugMessages, // F1
-    113: focusLeaderBoard, // F2
-    88: triggerVehicleLock, // X
-    70: triggerVehicleFunction, // F
-    84: focusChat, // T
-    69: triggerInteraction, // E
-    18: toggleInteractionMode // alt
+    112: { singlePress: handleDebugMessages }, // F1
+    113: { singlePress: focusLeaderBoard }, // F2
+    88: { singlePress: triggerVehicleLock }, // X
+    70: { singlePress: triggerVehicleFunction, longPress: triggerVehicleFunctionAlt }, // F
+    84: { singlePress: focusChat }, // T
+    69: { singlePress: triggerInteraction }, // E
+    18: { singlePress: toggleInteractionMode } // alt
 };
 
+let keyPressTimes = {};
 let nextKeyPress = Date.now() + DELAY_BETWEEN_PRESSES;
 
 alt.onServer(Events_Misc.StartTicks, handleStart);
 
 function handleStart() {
     alt.on('keyup', handleKeyUp);
+    alt.on('keydown', handleKeyDown);
+}
+
+function handleKeyDown(key: number) {
+    keyPressTimes[key] = Date.now();
+
+    if (!keyupBinds[key]) {
+        return;
+    }
+
+    if (!keyupBinds[key].longPress) {
+        return;
+    }
+
+    alt.setTimeout(() => {
+        if (!keyPressTimes[key]) {
+            return;
+        }
+
+        keyPressTimes[key] = null;
+        keyupBinds[key].longPress();
+    }, 1000);
 }
 
 function handleKeyUp(key: number) {
@@ -35,7 +58,20 @@ function handleKeyUp(key: number) {
 
     nextKeyPress = Date.now() + DELAY_BETWEEN_PRESSES;
 
-    keyupBinds[key]();
+    if (keyPressTimes[key] === null) {
+        return;
+    }
+
+    // Long Press
+    if (keyPressTimes[key] && keyPressTimes[key] + 1000 < Date.now() && keyupBinds[key].longPress) {
+        keyPressTimes[key] = null;
+        keyupBinds[key].longPress();
+        return;
+    }
+
+    keyPressTimes[key] = null;
+    // Single Press
+    keyupBinds[key].singlePress();
 }
 
 function handleDebugMessages() {

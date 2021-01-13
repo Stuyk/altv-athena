@@ -16,6 +16,7 @@ import {
 declare module 'alt-server' {
     export interface Vehicle {
         athenaLockState: Vehicle_Lock_State;
+        engineStatus: boolean;
         keys: Array<string>;
         owner: number;
 
@@ -93,6 +94,13 @@ declare module 'alt-server' {
          * @memberof Vehicle
          */
         setOwner(player: alt.Player): void;
+
+        /**
+         * Toggle the engine on or off.
+         * @param {alt.Player} player
+         * @memberof Vehicle
+         */
+        setEngine(player: alt.Player): void;
     }
 }
 
@@ -173,12 +181,13 @@ alt.Vehicle.prototype.setDoorOpen = function setDoorOpen(
         return;
     }
 
-    const doorName = Vehicle_Door_List[index]; // Get the name of the door. ie. Driver, Passenger, etc.
+    // alt.log(`${doorName}: ${oppositeValue}`);
+    const doorName = `DOOR_${Vehicle_Door_List[index]}`;
     if (!doorName) {
         return;
     }
 
-    const stateName = Vehicle_State[`DOOR-${doorName}`];
+    const stateName = Vehicle_State[`${doorName}`];
     v.setStreamSyncedMeta(stateName, state);
 };
 
@@ -210,13 +219,13 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player): Vehicl
     }
 
     if (!v.athenaLockState) {
-        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
+        v.athenaLockState = Vehicle_Lock_State.LOCKED;
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
         return v.athenaLockState;
     }
 
     if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
-        v.athenaLockState = Vehicle_Lock_State.NO_LOCK;
+        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
     } else {
         v.athenaLockState += 1;
@@ -230,4 +239,15 @@ alt.Vehicle.prototype.setOwner = function setOwner(player: alt.Player): void {
     const v: alt.Vehicle = this as alt.Vehicle;
     v.owner = player.id;
     v.setStreamSyncedMeta(Vehicle_State.OWNER, v.owner);
+    v.cycleLock(player);
+};
+
+alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    if (!v.isOwner(player) && !v.hasKeys(player)) {
+        return;
+    }
+
+    v.engineStatus = !v.engineStatus ? true : false;
+    v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
 };

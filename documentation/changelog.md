@@ -10,6 +10,10 @@ description: List of all the changes and current versions.
 + Added Base Vehicle System / Controls
 + Fixed QT Bug when No User Local Storage for QT
 + Updated Ares for Portless Discord Authentication
++ Add Long Press for Keybinds
++ Add Toggle Door with Long Press 'F'
++ Add Toggle Engine with Long Press 'F' in Vehicle
++ Add Cycle Lock 'X' in Vehicle
 ```
 
 ## 1.0.9 - January 10, 2021

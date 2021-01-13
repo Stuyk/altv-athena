@@ -3,6 +3,16 @@ import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } 
 
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
 alt.onClient(Vehicle_Events.SET_DOOR, handleSetDoor);
+alt.onClient(Vehicle_Events.SET_ENGINE, handleSetEngine);
+
+function handleSetEngine(player: alt.Player): void {
+    if (!player || !player.valid || !player.vehicle) {
+        return;
+    }
+
+    const vehicle: alt.Vehicle = player.vehicle;
+    vehicle.setEngine(player);
+}
 
 function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
     if (!player || !player.valid) {
@@ -14,10 +24,10 @@ function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
     }
 
     const lockState = vehicle.cycleLock(player);
-    player.send(`Vehicle Lock Set To: ${Vehicle_Lock_State[lockState]}`);
+    player.send(`Lock Status: ${Vehicle_Lock_State[lockState]}`);
 }
 
-function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorState: Vehicle_Door_List): void {
+function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorIndex: Vehicle_Door_List): void {
     if (!player || !player.valid) {
         return;
     }
@@ -26,9 +36,7 @@ function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorState: Vehi
         return;
     }
 
-    const oppositeValue = !vehicle.getStreamSyncedMeta(Vehicle_State[`Door_${Vehicle_Door_List[doorState]}`])
-        ? true
-        : false;
-
-    vehicle.setDoorOpen(player, doorState, oppositeValue);
+    const doorName = `DOOR_${Vehicle_Door_List[doorIndex]}`;
+    const oppositeValue = !vehicle.getStreamSyncedMeta(Vehicle_State[doorName]) ? true : false;
+    vehicle.setDoorOpen(player, doorIndex, oppositeValue);
 }

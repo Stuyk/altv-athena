@@ -6,10 +6,10 @@ import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { sleep } from '../utility/sleep';
 
 const closestDoorBones = [
-    { name: 'seat_dside_f', seat: -1, isDoor: false },
-    { name: 'seat_pside_f', seat: 0, isDoor: false },
-    { name: 'seat_dside_r', seat: 1, isDoor: false },
-    { name: 'seat_pside_r', seat: 2, isDoor: false },
+    { name: 'handle_dside_f', seat: -1, isDoor: false },
+    { name: 'handle_pside_f', seat: 0, isDoor: false },
+    { name: 'handle_dside_r', seat: 1, isDoor: false },
+    { name: 'handle_pside_r', seat: 2, isDoor: false },
     { name: 'bonnet', seat: 4, isDoor: true },
     { name: 'exhaust', seat: 5, isDoor: true }
 ];
@@ -23,10 +23,34 @@ export interface DoorData {
 declare module 'alt-client' {
     export interface Vehicle {
         doorStates: { [doorNumber: number]: boolean };
+        owner: string | number;
+        engineStatus: boolean;
 
         getClosestDoor(position: alt.Vector3): DoorData;
 
-        toggleDoor(door: number);
+        /**
+         * Check if a door is open.
+         * @param {Vehicle_Door_List} door
+         * @return {*}  {boolean}
+         * @memberof Vehicle
+         */
+        isDoorOpen(door: Vehicle_Door_List): boolean;
+
+        /**
+         * Set the door state. True is open.
+         * @param {Vehicle_Door_List} door
+         * @param {boolean} value
+         * @memberof Vehicle
+         */
+        setDoorState(door: Vehicle_Door_List, value: boolean): void;
+
+        /**
+         * Toggle a local vehicle's door state.
+         * Does not sync up with server.
+         * @param {number} door
+         * @memberof Vehicle
+         */
+        toggleDoor(door: Vehicle_Door_List): void;
 
         /**
          * Force all doors to be closed.
@@ -51,6 +75,20 @@ declare module 'alt-client' {
          * @memberof Vehicle
          */
         playCarAlarmHorn(numberOfTimes: number, lengthOfHorn: number): Promise<void>;
+
+        /**
+         * Set the owner of this vehicle locally.
+         * @param {*} id
+         * @memberof Vehicle
+         */
+        setOwner(id: any): void;
+
+        /**
+         * Set the engine status of the vehicle.
+         * @param {boolean} value
+         * @memberof Vehicle
+         */
+        setEngine(value: boolean): void;
     }
 }
 
@@ -126,7 +164,35 @@ alt.Vehicle.prototype.getClosestDoor = function getClosestDoor(position: alt.Vec
     return { pos: closestPos.pos, seat: seat, isDoor: isDoor };
 };
 
-alt.Vehicle.prototype.toggleDoor = function toggleDoor(door: Vehicle_Door_List) {
+alt.Vehicle.prototype.isDoorOpen = function isDoorOpen(door: Vehicle_Door_List): boolean {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    if (!v.doorStates) {
+        return false;
+    }
+
+    if (!v.doorStates[door]) {
+        return false;
+    }
+
+    return v.doorStates[door];
+};
+
+alt.Vehicle.prototype.setDoorState = function setDoorState(door: Vehicle_Door_List, value: boolean): void {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    if (!v.doorStates) {
+        v.doorStates = {};
+    }
+
+    v.doorStates[door] = value;
+    if (!v.doorStates[door]) {
+        native.setVehicleDoorShut(v.scriptID, door, false);
+        return;
+    }
+
+    native.setVehicleDoorOpen(v.scriptID, door, false, false);
+};
+
+alt.Vehicle.prototype.toggleDoor = function toggleDoor(door: Vehicle_Door_List): void {
     const v: alt.Vehicle = this as alt.Vehicle;
     if (!v.doorStates) {
         v.doorStates = {};
@@ -140,4 +206,15 @@ alt.Vehicle.prototype.toggleDoor = function toggleDoor(door: Vehicle_Door_List) 
     }
 
     native.setVehicleDoorOpen(v.scriptID, door, false, false);
+};
+
+alt.Vehicle.prototype.setOwner = function setOwner(id: string | number): void {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    v.owner = id;
+};
+
+alt.Vehicle.prototype.setEngine = function setEngine(value: boolean): void {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    v.engineStatus = value;
+    native.setVehicleEngineOn(v.scriptID, value, false, false);
 };
