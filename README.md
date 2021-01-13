@@ -55,6 +55,11 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 -   Currency System
     -   Deposit and Withdraw Cash from your bank
     -   Transfer Bank Money to Other Players
+-   Vehicle System
+    -   Control Vehicle Door States
+    -   Control Vehicle Door Locks
+    -   Handle Vehicle Ownership
+    -   Handle Vehicle Keys
 
 ```text
 New Features Always in Discord
@@ -79,6 +84,8 @@ New Features Always in Discord
 ![](https://thumbs.gfycat.com/TerrificNiftyCat-size_restricted.gif)
 
 ![](https://thumbs.gfycat.com/PoliteGreenArgali-size_restricted.gif)
+
+![](https://thumbs.gfycat.com/ThoroughWarlikeKillifish-size_restricted.gif)
 
 ## Running this Project
 

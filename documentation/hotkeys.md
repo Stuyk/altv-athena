@@ -9,6 +9,11 @@ description: All of the current hotkeys available.
 -   Left Alt - Toggle Interaction Mode
 -   E - Use Object / Interaction
 
+## Vehicle
+
+-   F - Hold for main action
+-   F-Hold - Hold for alternative action
+
 ## Chat View
 
 -   Up - Last Message

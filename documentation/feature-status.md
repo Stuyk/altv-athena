@@ -45,7 +45,7 @@ US - Locale System
 S - Leader Board / Player List
 S - Interaction by Object
 S - Bank
-N/A - Vehicle System
+US - Vehicle System
 N/A - Vehicle Ownership
 N/A - Job Framework
 N/A - Clothing System
