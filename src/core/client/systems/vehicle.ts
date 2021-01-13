@@ -256,6 +256,13 @@ function handleInterval() {
         return;
     }
 
+    if (alt.Player.local.meta.isDead) {
+        pressedLockKey = false;
+        pressedVehicleFunction = false;
+        pressedVehicleFunctionAlt = false;
+        return;
+    }
+
     // Disable Default Controls
     native.disableControlAction(0, 23, true); // F
     native.disableControlAction(0, 75, true); // F
