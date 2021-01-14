@@ -248,8 +248,6 @@ alt.Vehicle.prototype.handleSyncIn = function handleSyncIn(): void {
     native.setVehicleEngineOn(v.scriptID, v.engineStatus, false, false);
 
     Object.keys(v.doorStates).forEach((doorNumber) => {
-        alt.log(`${doorNumber}: ${v.doorStates[doorNumber]}`);
-
         if (v.doorStates[doorNumber]) {
             native.setVehicleDoorOpen(v.scriptID, parseInt(doorNumber), false, true);
         } else {
