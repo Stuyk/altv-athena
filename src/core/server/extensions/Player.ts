@@ -150,6 +150,14 @@ declare module 'alt-server' {
         playFrontendSound(audioName: string, ref: string): void;
 
         /**
+         * Play a custom sound inside the `hud` folder.
+         * @param {string} audioName
+         * @param { alt.Entity} target The source to play the sound. Player, vehicle, etc.
+         * @memberof Player
+         */
+        playCustomSound3D(audioName: string, target: alt.Entity): void;
+
+        /**
          * Safely set this player's position.
          * @param  {number} x
          * @param  {number} y
@@ -297,6 +305,7 @@ alt.Player.prototype.showNotification = notification.showNotification;
 // Aesthetic Related
 alt.Player.prototype.playAnimation = play.playAnimationPrototype;
 alt.Player.prototype.playFrontendSound = sound.playFrontendSoundPrototype;
+alt.Player.prototype.playCustomSound3D = sound.playCustomSound3DPrototype;
 
 // Update Related
 alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;

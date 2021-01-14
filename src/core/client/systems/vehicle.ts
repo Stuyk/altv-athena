@@ -326,18 +326,16 @@ async function handleSetInto(vehicle: alt.Vehicle, seat: Vehicle_Seat_List) {
 
 async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value: any): Promise<void> {
     // Handles Vehicle Horns / Flashing etc.
-    if (key === Vehicle_State.LOCK_STATE) {
-        if (inLockedState(parseInt(value))) {
-            vehicle.playCarAlarmHorn(1, 50);
-            vehicle.flashLights(1, 50);
-            vehicle.closeAllDoors();
-            return;
-        }
+    // if (key === Vehicle_State.LOCK_STATE) {
+    //     if (inLockedState(parseInt(value))) {
+    //         vehicle.closeAllDoors();
+    //         return;
+    //     }
 
-        vehicle.playCarAlarmHorn(2, 50);
-        vehicle.flashLights(2, 50);
-        return;
-    }
+    //     vehicle.playCarAlarmHorn(2, 50);
+    //     vehicle.flashLights(2, 50);
+    //     return;
+    // }
 
     // Handles Vehicle Door States
     // Yes I know I can make an algorithm for this.

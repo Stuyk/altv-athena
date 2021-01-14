@@ -13,6 +13,7 @@ const url = `http://resource/client/views/hud/html/index.html`;
 let view: alt.WebView;
 let isOpen: boolean = false;
 
+alt.on('hud:PlayAudio3D', handle3DAudio);
 alt.onServer(Events_Misc.StartTicks, handleView);
 alt.onServer(View_Events_Chat.Append, handleAppend);
 
@@ -94,6 +95,14 @@ function handleFocus(shouldFocus: boolean): void {
     }
 
     view.unfocus();
+}
+
+function handle3DAudio(soundName: string, pan: number, volume: number): void {
+    if (!view) {
+        return;
+    }
+
+    view.emit('hud:Audio3D', soundName, pan, volume);
 }
 
 /**

@@ -18,7 +18,8 @@ export enum System_Events_Animation {
 }
 
 export enum System_Events_Sound {
-    PlaySoundFrontend = 'sound:Frontend'
+    PlaySoundFrontend = 'sound:Frontend',
+    PlaySound3D = 'sound:3D'
 }
 
 export enum System_Interaction {

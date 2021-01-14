@@ -221,15 +221,19 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player): Vehicl
     if (!v.athenaLockState) {
         v.athenaLockState = Vehicle_Lock_State.LOCKED;
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
-        return v.athenaLockState;
-    }
-
-    if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
+    } else if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
         v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
     } else {
         v.athenaLockState += 1;
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+    }
+
+    // Automatically Close All Doors in Locked State
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
+        for (let i = 0; i < 6; i++) {
+            v.setDoorOpen(player, i, false);
+        }
     }
 
     return v.athenaLockState;
@@ -250,4 +254,5 @@ alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {
 
     v.engineStatus = !v.engineStatus ? true : false;
     v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
+    player.showNotification(`Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
 };

@@ -18,6 +18,11 @@ description: List of all the changes and current versions.
 + Made Hood and Bonnet Hold to Open Keys
 + Made Single 'F' Press when exiting vehicle not turn off the car.
 + Add Basic GTA:V Notification Support
++ Added Keyfob Animation Outside Vehicle
++ Close all doors on 'locked' state.
++ Add Custom 3D Sound Support
++ Add Lock / Unlock Sounds for Vehicle
++ KeyFob Animation Only Plays for Locked / Unlock State
 ```
 
 ## 1.0.9 - January 10, 2021
