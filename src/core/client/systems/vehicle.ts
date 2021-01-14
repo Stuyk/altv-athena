@@ -12,15 +12,13 @@ import {
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { DoorData } from '../extensions/Vehicle';
 import { sleep } from '../utility/sleep';
-import { drawText2D, drawText3D } from '../utility/text';
+import { imDrawText3D } from '../utility/text';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
-alt.onServer(Events_Misc.StartTicks, startTick);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
 
 const TIME_BETWEEN_CONTROL_PRESS = 250;
-const TIME_BETWEEN_CHECKS = 1500;
-const TOGGLE_LOCK_MESSAGE = `X - Toggle Lock`;
+const TIME_BETWEEN_CHECKS = 1000;
 const MAX_VEHICLE_DISTANCE = 10;
 
 let nextVehicleCheck: number = Date.now();
@@ -32,19 +30,27 @@ let pressedVehicleFunction = false;
 let pressedVehicleFunctionAlt = false;
 
 export function triggerVehicleLock(): void {
+    if (!alt.Player.local.isInteractionOn || alt.Player.local.isChatOpen) {
+        return;
+    }
+
     pressedLockKey = true;
 }
 
 export function triggerVehicleFunction(): void {
+    if (!alt.Player.local.isInteractionOn || alt.Player.local.isChatOpen) {
+        return;
+    }
+
     pressedVehicleFunction = true;
 }
 
 export function triggerVehicleFunctionAlt(): void {
-    pressedVehicleFunctionAlt = true;
-}
+    if (!alt.Player.local.isInteractionOn || alt.Player.local.isChatOpen) {
+        return;
+    }
 
-function startTick() {
-    interval = alt.setInterval(handleInterval, 0);
+    pressedVehicleFunctionAlt = true;
 }
 
 function updateClosestVehicles(): void {
@@ -86,7 +92,7 @@ async function handleInVehicle(): Promise<void> {
 
     if (native.getPedInVehicleSeat(alt.Player.local.vehicle.scriptID, -1, 0) === alt.Player.local.scriptID) {
         if (!alt.Player.local.vehicle.engineStatus) {
-            drawText3D(
+            imDrawText3D(
                 `[~y~${String.fromCharCode(70)}-Hold~w~] - Engine`,
                 alt.Player.local.pos,
                 0.3,
@@ -144,7 +150,7 @@ async function handleOutOfVehicle(): Promise<void> {
             z: closestVehicle.pos.z + 1
         } as alt.Vector3;
 
-        drawText3D(
+        imDrawText3D(
             `[~y~${keyName}~w~]~n~${lockName.replace('_', ' ')}`,
             modifiedPos,
             0.3,
@@ -166,7 +172,7 @@ async function handleOutOfVehicle(): Promise<void> {
     }
 
     if (isBike) {
-        drawText3D(
+        imDrawText3D(
             `[~y~${String.fromCharCode(70)}~w~] - Enter`,
             closestVehicle.pos,
             0.3,
@@ -199,14 +205,14 @@ async function handleOutOfVehicle(): Promise<void> {
     }
 
     if (closestDoor.isDoor) {
-        drawText3D(
+        imDrawText3D(
             `[~y~${String.fromCharCode(70)}-Hold~w~] - Toggle Door`,
             closestDoor.pos,
             0.3,
             new alt.RGBA(255, 255, 255, 255)
         );
     } else {
-        drawText3D(
+        imDrawText3D(
             `[~y~${String.fromCharCode(70)}~w~] - Enter~n~[~y~Hold~w~] Toggle Door`,
             closestDoor.pos,
             0.3,
@@ -255,32 +261,7 @@ async function handleOutOfVehicle(): Promise<void> {
     }
 }
 
-function handleInterval() {
-    if (alt.Player.local.isMenuOpen) {
-        pressedLockKey = false;
-        pressedVehicleFunction = false;
-        pressedVehicleFunctionAlt = false;
-        return;
-    }
-
-    if (alt.Player.local.meta.isDead) {
-        pressedLockKey = false;
-        pressedVehicleFunction = false;
-        pressedVehicleFunctionAlt = false;
-        return;
-    }
-
-    // Disable Default Controls
-    native.disableControlAction(0, 23, true); // F
-    native.disableControlAction(0, 75, true); // F
-    native.disableControlAction(0, 104, true); // H
-
-    // Disable default vehicle behavior.
-    if (native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID)) {
-        native.clearPedTasks(alt.Player.local.scriptID);
-        native.clearPedSecondaryTask(alt.Player.local.scriptID);
-    }
-
+export function handleVehicleSystemTick() {
     // Update closest vehicles. Then check if list is empty.
     updateClosestVehicles();
 

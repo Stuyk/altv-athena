@@ -8,10 +8,10 @@ import { sleep } from '../utility/sleep';
 alt.on('gameEntityCreate', handleEntityCreation);
 
 const closestDoorBones = [
-    { name: 'handle_dside_f', seat: -1, isDoor: false },
-    { name: 'handle_pside_f', seat: 0, isDoor: false },
-    { name: 'handle_dside_r', seat: 1, isDoor: false },
-    { name: 'handle_pside_r', seat: 2, isDoor: false },
+    { name: 'seat_dside_f', seat: -1, isDoor: false },
+    { name: 'seat_pside_f', seat: 0, isDoor: false },
+    { name: 'seat_dside_r', seat: 1, isDoor: false },
+    { name: 'seat_pside_r', seat: 2, isDoor: false },
     { name: 'bonnet', seat: 4, isDoor: true },
     { name: 'exhaust', seat: 5, isDoor: true }
 ];

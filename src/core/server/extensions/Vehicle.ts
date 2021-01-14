@@ -19,6 +19,15 @@ declare module 'alt-server' {
         engineStatus: boolean;
         keys: Array<string>;
         owner: number;
+        fuel: number;
+
+        /**
+         * Set the lock state of the vehicle.
+         * @param {alt.Player} player Player trying to set lock.
+         * @param {boolean} bypass Should bypass the ownership check for cycling the lock?
+         * @memberof Vehicle
+         */
+        cycleLock(player: alt.Player, bypass: boolean): Vehicle_Lock_State;
 
         /**
          * Eject a player from the vehicle.
@@ -26,6 +35,13 @@ declare module 'alt-server' {
          * @memberof Vehicle
          */
         ejectFromVehicle(player: alt.Player): void;
+
+        /**
+         * Get the current lock state.
+         * @return {boolean}  {boolean}
+         * @memberof Vehicle
+         */
+        getLockState(): Vehicle_Lock_State;
 
         /**
          * Give keys to another player.
@@ -50,18 +66,18 @@ declare module 'alt-server' {
         isOwner(player: alt.Player): boolean;
 
         /**
-         * Get the current lock state.
-         * @return {boolean}  {boolean}
-         * @memberof Vehicle
-         */
-        getLockState(): Vehicle_Lock_State;
-
-        /**
          * Remove keys from a player.
          * @param {alt.Player} player
          * @memberof Vehicle
          */
         removeKeys(player: alt.Player): boolean;
+
+        /**
+         * Properly Repair Vehicle
+         * @returns {alt.Vehicle} New vehicle spawned.
+         * @memberof Vehicle
+         */
+        repairVehicle(): alt.Vehicle;
 
         /**
          * Toggle whether a door is open or not.
@@ -82,18 +98,11 @@ declare module 'alt-server' {
         setIntoVehicle(player: alt.Player, seat: Vehicle_Seat_List): void;
 
         /**
-         * Set the lock state of the vehicle.
-         * @param {alt.Player} player Player trying to set lock.
-         * @memberof Vehicle
-         */
-        cycleLock(player: alt.Player): Vehicle_Lock_State;
-
-        /**
          * Set the owner of this vehicle.
          * @param {alt.Player} player
          * @memberof Vehicle
          */
-        setOwner(player: alt.Player): void;
+        setOwner(player: alt.Player | number): void;
 
         /**
          * Toggle the engine on or off.
@@ -104,6 +113,36 @@ declare module 'alt-server' {
     }
 }
 
+alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass: boolean = false): Vehicle_Lock_State {
+    const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!bypass) {
+        if (!v.isOwner(player) && !v.hasKeys(player)) {
+            return v.athenaLockState;
+        }
+    }
+
+    if (!v.athenaLockState) {
+        v.athenaLockState = Vehicle_Lock_State.LOCKED;
+        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+    } else if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
+        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
+        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+    } else {
+        v.athenaLockState += 1;
+        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+    }
+
+    // Automatically Close All Doors in Locked State
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
+        for (let i = 0; i < 6; i++) {
+            v.setDoorOpen(player, i, false);
+        }
+    }
+
+    return v.athenaLockState;
+};
+
 alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.Player): void {
     const v: alt.Vehicle = this as alt.Vehicle;
     if (!player.vehicle || player.vehicle !== v) {
@@ -111,6 +150,15 @@ alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.P
     }
 
     player.safeSetPosition(player.pos.x, player.pos.y, player.pos.z);
+};
+
+alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    if (v.athenaLockState === null || v.athenaLockState === undefined) {
+        return Vehicle_Lock_State.LOCKED;
+    }
+
+    return v.athenaLockState;
 };
 
 alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean {
@@ -123,15 +171,6 @@ alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean 
     v.setStreamSyncedMeta(Vehicle_State.KEYS, v.keys);
     this.keys.push(target.data._id.toString());
     return true;
-};
-
-alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State {
-    const v: alt.Vehicle = this as alt.Vehicle;
-    if (v.athenaLockState === null || v.athenaLockState === undefined) {
-        return Vehicle_Lock_State.LOCKED;
-    }
-
-    return v.athenaLockState;
 };
 
 alt.Vehicle.prototype.hasKeys = function hasKeys(target: alt.Player): boolean {
@@ -169,6 +208,24 @@ alt.Vehicle.prototype.removeKeys = function removeKeys(target: alt.Player): bool
     v.setStreamSyncedMeta(Vehicle_State.KEYS, v.keys);
     v.keys.splice(index, 1);
     return true;
+};
+
+alt.Vehicle.prototype.repairVehicle = function repairVehicle(): alt.Vehicle {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    const model = v.model;
+    const pos = { ...v.pos };
+    const rot = { ...v.rot };
+    const owner = v.owner;
+
+    // Destroy the old vehicle.
+    try {
+        v.destroy();
+    } catch (err) {}
+
+    // Respawn the vehicle in the same position.
+    const newVehicle: alt.Vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+    newVehicle.setOwner(owner);
+    return newVehicle;
 };
 
 alt.Vehicle.prototype.setDoorOpen = function setDoorOpen(
@@ -211,39 +268,21 @@ alt.Vehicle.prototype.setIntoVehicle = function setIntoVehicle(player: alt.Playe
     });
 };
 
-alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player): Vehicle_Lock_State {
+alt.Vehicle.prototype.setOwner = function setOwner(player: alt.Player | number): void {
     const v: alt.Vehicle = this as alt.Vehicle;
-
-    if (!v.isOwner(player) && !v.hasKeys(player)) {
-        return v.athenaLockState;
-    }
-
-    if (!v.athenaLockState) {
-        v.athenaLockState = Vehicle_Lock_State.LOCKED;
-        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
-    } else if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
-        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
-        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+    if (player instanceof alt.Player) {
+        v.owner = player.id;
     } else {
-        v.athenaLockState += 1;
-        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+        v.owner = player;
     }
 
-    // Automatically Close All Doors in Locked State
-    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
-        for (let i = 0; i < 6; i++) {
-            v.setDoorOpen(player, i, false);
-        }
-    }
-
-    return v.athenaLockState;
-};
-
-alt.Vehicle.prototype.setOwner = function setOwner(player: alt.Player): void {
-    const v: alt.Vehicle = this as alt.Vehicle;
-    v.owner = player.id;
     v.setStreamSyncedMeta(Vehicle_State.OWNER, v.owner);
-    v.cycleLock(player);
+
+    if (player instanceof alt.Player) {
+        v.cycleLock(player, false);
+    } else {
+        v.cycleLock(null, true);
+    }
 };
 
 alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {

@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
-import { toggleInteractionMode, triggerInteraction } from '../systems/interaction';
+import { toggleInteractionMode, toggleInteractionText, triggerInteraction } from '../systems/interaction';
 import { focusChat, focusLeaderBoard } from '../views/hud/hud';
 import { triggerVehicleFunction, triggerVehicleFunctionAlt, triggerVehicleLock } from '../systems/vehicle';
 
@@ -13,7 +13,7 @@ const keyupBinds = {
     70: { singlePress: triggerVehicleFunction, longPress: triggerVehicleFunctionAlt }, // F
     84: { singlePress: focusChat }, // T
     69: { singlePress: triggerInteraction }, // E
-    18: { singlePress: toggleInteractionMode } // alt
+    18: { singlePress: toggleInteractionMode, longPress: toggleInteractionText } // Left ALT
 };
 
 let keyPressTimes = {};

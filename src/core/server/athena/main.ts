@@ -59,5 +59,7 @@ export const DEFAULT_CONFIG = {
         'FOGGY',
         'OVERCAST',
         'CLEARING'
-    ]
+    ],
+    // Vehicle Properties
+    MAXIMUM_FUEL: 100
 };

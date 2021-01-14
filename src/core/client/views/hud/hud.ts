@@ -43,6 +43,7 @@ function handleNewMessage(message: string): void {
     alt.toggleGameControls(true);
     disableAllControls(false);
     isOpen = false;
+    alt.Player.local.isChatOpen = false;
 
     // Handles Empty Messages
     if (!message) {
@@ -129,6 +130,7 @@ export function focusChat(): void {
 
     isOpen = true;
     view.emit('chat:Focus');
+    alt.Player.local.isChatOpen = true;
     alt.toggleGameControls(false);
     disableAllControls(true);
 }
