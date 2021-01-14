@@ -39,11 +39,7 @@ function handleAction(player: alt.Player, type: string, amount: string | number,
 }
 
 function handleDeposit(player: alt.Player, amount: number): boolean {
-    if (player.data.cash < amount) {
-        return false;
-    }
-
-    if (player.data.cash <= 0) {
+    if (player.data.cash <= amount) {
         return false;
     }
 
@@ -55,10 +51,6 @@ function handleDeposit(player: alt.Player, amount: number): boolean {
 
 function handleWithdraw(player: alt.Player, amount: number): boolean {
     if (player.data.bank < amount) {
-        return false;
-    }
-
-    if (player.data.cash <= 0) {
         return false;
     }
 
