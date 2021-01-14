@@ -17,12 +17,12 @@ const app = new Vue({
             depositRules: [
                 (v) => !!v || 'This field is required',
                 (v) => v > 0 || 'Value must be greater than zero.',
-                (v) => v < this.cash || 'Amount must not be greater than your cash on hand.'
+                (v) => v <= this.cash || 'Amount must not be greater than your cash on hand.'
             ],
             withdrawRules: [
                 (v) => !!v || 'This field is required',
                 (v) => v > 0 || 'Value must be greater than zero.',
-                (v) => v < this.bank || 'Amount must not be greater than your bank account.'
+                (v) => v <= this.bank || 'Amount must not be greater than your bank account.'
             ],
             wireTransferRules: [
                 (v) => !!v || 'This field is required',
@@ -64,21 +64,20 @@ const app = new Vue({
             this.type = name;
         },
         transact() {
+            if (!this.isValid) return;
             let amount = 0;
-            if (this.type === 'deposit') {
-                amount = this.depositAmount;
-            }
+            switch (this.type) {
+                case 'deposit':
+                    amount = this.depositAmount;
+                    break;
 
-            if (this.type === 'withdraw') {
-                amount = this.withdrawAmount;
-            }
+                case 'withdraw':
+                    amount = this.withdrawAmount;
+                    break;
 
-            if (this.type === 'transfer') {
-                amount = this.wireTransferAmount;
-            }
-
-            if (!this.isValid) {
-                return;
+                case 'transfer':
+                    amount = this.wireTransferAmount;
+                    break;
             }
 
             this.processing = true;
