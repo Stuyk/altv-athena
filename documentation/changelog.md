@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.1.0 - January 12, 2021
+## 1.1.0 - January 12-13, 2021
 
 ```diff
 + Added Base Vehicle System / Controls
@@ -14,6 +14,10 @@ description: List of all the changes and current versions.
 + Add Toggle Door with Long Press 'F'
 + Add Toggle Engine with Long Press 'F' in Vehicle
 + Add Cycle Lock 'X' in Vehicle
++ Delayed QT by 250ms to Fix Non-Sending Bug
++ Made Hood and Bonnet Hold to Open Keys
++ Made Single 'F' Press when exiting vehicle not turn off the car.
++ Add Basic GTA:V Notification Support
 ```
 
 ## 1.0.9 - January 10, 2021

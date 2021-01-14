@@ -56,7 +56,7 @@ function updateClosestVehicles(): void {
     }
 }
 
-function handleInVehicle(): void {
+async function handleInVehicle(): Promise<void> {
     if (pressedLockKey && Date.now() > timeBetweenControls) {
         handleLock(alt.Player.local.vehicle);
         return;
@@ -72,7 +72,11 @@ function handleInVehicle(): void {
         }
 
         timeBetweenControls = Date.now() + TIME_BETWEEN_CONTROL_PRESS;
+        const currentVehicle = alt.Player.local.vehicle.scriptID;
         native.taskLeaveAnyVehicle(alt.Player.local.scriptID, 0, 0);
+
+        await sleep(500);
+        native.setVehicleEngineOn(currentVehicle, true, true, false);
         return;
     }
 
@@ -192,7 +196,7 @@ async function handleOutOfVehicle(): Promise<void> {
 
     if (closestDoor.isDoor) {
         drawText3D(
-            `[~y~${String.fromCharCode(70)}~w~] - Toggle`,
+            `[~y~${String.fromCharCode(70)}-Hold~w~] - Toggle Door`,
             closestDoor.pos,
             0.3,
             new alt.RGBA(255, 255, 255, 255)
@@ -216,7 +220,6 @@ async function handleOutOfVehicle(): Promise<void> {
         timeBetweenControls = Date.now() + TIME_BETWEEN_CONTROL_PRESS;
 
         if (closestDoor.isDoor) {
-            alt.emitServer(Vehicle_Events.SET_DOOR, closestVehicle, closestDoor.seat);
             return;
         }
 
@@ -328,13 +331,11 @@ async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value:
             vehicle.playCarAlarmHorn(1, 50);
             vehicle.flashLights(1, 50);
             vehicle.closeAllDoors();
-            native.playVehicleDoorCloseSound(vehicle.scriptID, 0);
             return;
         }
 
         vehicle.playCarAlarmHorn(2, 50);
         vehicle.flashLights(2, 50);
-        native.playVehicleDoorOpenSound(vehicle.scriptID, 0);
         return;
     }
 

@@ -19,6 +19,7 @@ import * as update from './playerPrototypes/update';
 import * as play from './playerPrototypes/play';
 import * as utility from './playerPrototypes/utility';
 import * as sound from './playerPrototypes/sound';
+import * as notification from './playerPrototypes/notification';
 
 declare module 'alt-server' {
     export interface Player {
@@ -221,6 +222,13 @@ declare module 'alt-server' {
         setCharacterData(characterData: Partial<Character>): void;
 
         /**
+         * Send a traditional GTA:V notification to the player.
+         * @param {string} message
+         * @memberof Player
+         */
+        showNotification(message: string): void;
+
+        /**
          * Update the appearance of the player based on player.data.
          * @returns void
          */
@@ -282,6 +290,9 @@ alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
 
 // Chat Related
 alt.Player.prototype.send = chat.sendPrototype;
+
+// Notification Related
+alt.Player.prototype.showNotification = notification.showNotification;
 
 // Aesthetic Related
 alt.Player.prototype.playAnimation = play.playAnimationPrototype;

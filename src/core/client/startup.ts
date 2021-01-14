@@ -26,6 +26,9 @@ import './systems/vehicle';
 import './systems/voice';
 import './systems/world';
 
+// Utility
+import './utility/notification';
+
 // Views
 import './views/atm/atm';
 import './views/creator/creator';

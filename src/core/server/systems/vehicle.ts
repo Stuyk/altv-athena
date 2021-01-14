@@ -24,7 +24,7 @@ function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
     }
 
     const lockState = vehicle.cycleLock(player);
-    player.send(`Lock Status: ${Vehicle_Lock_State[lockState]}`);
+    player.showNotification(`Vehicle Lock Set to ~y~${Vehicle_Lock_State[lockState].replace('_', ' ')}`);
 }
 
 function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorIndex: Vehicle_Door_List): void {

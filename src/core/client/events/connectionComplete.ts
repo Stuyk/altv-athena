@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
+import { sleep } from '../utility/sleep';
 
 alt.on('connectionComplete', handleConnectionComplete);
 alt.onServer(Events_Misc.FetchQT, handleFetchQT);
@@ -11,7 +12,7 @@ async function handleConnectionComplete() {
     native.triggerScreenblurFadeOut(0);
 }
 
-function handleFetchQT() {
+async function handleFetchQT() {
     const instance = alt.LocalStorage.get();
     const qt = instance.get('qt');
 
@@ -19,6 +20,8 @@ function handleFetchQT() {
         alt.emitServer(Events_Misc.DiscordTokenNone);
         return;
     }
+
+    await sleep(250);
 
     alt.emitServer(Events_Misc.DiscordToken, qt);
 }

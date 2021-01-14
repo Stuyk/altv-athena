@@ -25,3 +25,7 @@ export enum System_Interaction {
     ATM = 'atm:Open',
     ACTION = 'atm:Action'
 }
+
+export enum System_Events_Notification {
+    ShowNotification = 'notification:Show'
+}
