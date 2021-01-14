@@ -3,14 +3,23 @@
         <title>Chat by Stuyk</title>
         <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
-        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet/less" type="text/css" href="./style.less" />
         <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
-        <div id="app" v-if="show">
+        <div id="app" v-if="show" v-cloak>
             <v-app v-if="!leaderboard">
-                <div class="chat flexible">
+                <div class="chat">
+                    <div :class="helpText === null ? { 'help-row-wrapper-null': true } : { 'help-row-wrapper' : true }">
+                        <div class="help-row" v-if="helpText && helpText.key">
+                            <div class="keypress">{{ String.fromCharCode(helpText.key) }}</div>
+                            <div class="descriptors">
+                                <div class="message" v-if="helpText.shortPress">Press - {{ helpText.shortPress }}</div>
+                                <div class="message" v-if="helpText.longPress">Hold - {{ helpText.longPress }}</div>
+                            </div> 
+                        </div>
+                    </div>  
                     <div class="messages" ref="messages">
                         <div class="message" v-for="(message, index) in messages" :index="index">
                             <template v-if="timestamp">

@@ -31,14 +31,17 @@ const app = new Vue({
             messages: [],
             commands: [
                 { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
-                { name: 'help', description: '/help - List available commands.' }
+                { name: 'help', description: '/help - List all available commands for your permission level.' }
             ],
             currentMessage: '',
             active: false,
             position: 0,
             timestamp: false,
             matchedCommand: null,
-            show: false
+            show: false,
+            // Help Text
+            helpText: null,
+            helpTimeout: null
         };
     },
     methods: {
@@ -49,6 +52,11 @@ const app = new Vue({
                 message: msg,
                 time: `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`
             });
+
+            // Log Messages to Console
+            if ('alt' in window) {
+                console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${msg}`);
+            }
 
             if (this.messages.length >= 50) {
                 this.messages.shift();
@@ -67,6 +75,13 @@ const app = new Vue({
                     this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
                 });
             }
+        },
+        trimDescription(description) {
+            if (description.length <= 55) {
+                return description;
+            }
+
+            return `${description.substr(0, 55)}...`;
         },
         focusChat() {
             this.active = true;
@@ -166,7 +181,7 @@ const app = new Vue({
             }
 
             this.matchedName = this.commands[index].name;
-            this.matchedCommand = this.commands[index].description;
+            this.matchedCommand = this.trimDescription(this.commands[index].description);
         },
         useCommand() {
             if (this.matchedCommand && this.matchedName) {
@@ -212,6 +227,22 @@ const app = new Vue({
                     audio.pause();
                 }, duration);
             }
+        },
+        setHelpText(key, shortPress, longPress = null) {
+            if (!key && this.helpText) {
+                this.helpText = null;
+                return;
+            }
+
+            if (this.helpTimeout) {
+                clearTimeout(this.helpTimeout);
+            }
+
+            this.helpText = { key, shortPress, longPress };
+            this.helpTimeout = setTimeout(this.manageHelpTimeout, 1000);
+        },
+        manageHelpTimeout() {
+            this.helpText = null;
         }
     },
     directives: {
@@ -274,13 +305,14 @@ const app = new Vue({
             alt.on('chat:Inject', this.inject);
             alt.on('leaderboard:Toggle', this.toggleLeaderboard);
             alt.on('hud:Audio3D', this.audio3D);
+            alt.on('hud:HelpText', this.setHelpText);
             alt.emit('chat:Inject');
         } else {
             let count = 0;
             setInterval(() => {
                 count += 1;
                 this.appendMessage(
-                    `{FF0000} Message ${count} lore impsum do {00FF00}stuff long words holy moley {0000FF}loook at my nice long sentence.`
+                    `Message ${count} lore impsum do stuff long words holy moley loook at my nice long sentence.`
                 );
             }, 100);
 
@@ -296,6 +328,11 @@ const app = new Vue({
             for (let i = 0; i < 5; i++) {
                 this.players = [...this.players, ...this.players];
             }
+
+            this.setHelpText(69, 'Short press description go brrr');
+            setInterval(() => {
+                this.setHelpText(69, 'Short press description go brrr', 'Long press description go brrr');
+            }, 3000);
         }
 
         this.$nextTick(() => {

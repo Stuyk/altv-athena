@@ -158,3 +158,23 @@ export function focusLeaderBoard(): void {
 
     view.emit('leaderboard:Toggle', validPlayers);
 }
+
+/**
+ * Displays text in the upper-left corner of the screen.
+ * @export
+ * @param {(number | null)} key Set to null if you want to clear help text.
+ * @param {(string | null)} shortPressDescription
+ * @param {(string | null)} longPressDescription
+ * @return {*}  {void}
+ */
+export function updateHelpText(
+    key: number | null,
+    shortPressDescription: string | null,
+    longPressDescription: string | null
+): void {
+    if (!view) {
+        return;
+    }
+
+    view.emit('hud:HelpText', key, shortPressDescription, longPressDescription);
+}

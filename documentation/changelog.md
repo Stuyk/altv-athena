@@ -26,6 +26,8 @@ description: List of all the changes and current versions.
 + Added Stream In Support for Custom Vehicle Handler
 + Moved Vehicle Interaction to Interaction System
 + Added Long Press 'alt' to hide Interaction Text
++ Added isChatOpen
++ Added isInteractionTextOff
 ```
 
 ## 1.0.9 - January 10, 2021

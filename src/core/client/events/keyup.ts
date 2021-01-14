@@ -2,18 +2,38 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { toggleInteractionMode, toggleInteractionText, triggerInteraction } from '../systems/interaction';
+import { VehicleController } from '../systems/vehicle';
 import { focusChat, focusLeaderBoard } from '../views/hud/hud';
-import { triggerVehicleFunction, triggerVehicleFunctionAlt, triggerVehicleLock } from '../systems/vehicle';
 
+export const KEY_BINDS = {
+    DEBUG_KEY: 112, // F1
+    LEADERBOARD: 113, // F12
+    CHAT: 84, // T
+    VEHICLE_FUNCS: 70, // F
+    VEHICLE_LOCK: 88, // X
+    INTERACT: 69, // E
+    INTERACTION_MODE: 18 // Left Alt
+};
+
+const DELAY_BETWEEN_LONG_PRESSES = 800;
 const DELAY_BETWEEN_PRESSES = 500;
-const keyupBinds = {
-    112: { singlePress: handleDebugMessages }, // F1
-    113: { singlePress: focusLeaderBoard }, // F2
-    88: { singlePress: triggerVehicleLock }, // X
-    70: { singlePress: triggerVehicleFunction, longPress: triggerVehicleFunctionAlt }, // F
-    84: { singlePress: focusChat }, // T
-    69: { singlePress: triggerInteraction }, // E
-    18: { singlePress: toggleInteractionMode, longPress: toggleInteractionText } // Left ALT
+const KEY_UP_BINDS = {
+    // F1
+    [KEY_BINDS.DEBUG_KEY]: { singlePress: handleDebugMessages },
+    // F2
+    [KEY_BINDS.LEADERBOARD]: { singlePress: focusLeaderBoard },
+    // X
+    [KEY_BINDS.VEHICLE_LOCK]: {
+        singlePress: () => VehicleController.triggerVehicleFunction('pressedLockKey')
+    },
+    // F
+    [KEY_BINDS.VEHICLE_FUNCS]: {
+        singlePress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunction'),
+        longPress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
+    },
+    [KEY_BINDS.CHAT]: { singlePress: focusChat }, // T
+    [KEY_BINDS.INTERACT]: { singlePress: triggerInteraction }, // E
+    [KEY_BINDS.INTERACTION_MODE]: { singlePress: toggleInteractionMode, longPress: toggleInteractionText } // Left ALT
 };
 
 let keyPressTimes = {};
@@ -29,11 +49,11 @@ function handleStart() {
 function handleKeyDown(key: number) {
     keyPressTimes[key] = Date.now();
 
-    if (!keyupBinds[key]) {
+    if (!KEY_UP_BINDS[key]) {
         return;
     }
 
-    if (!keyupBinds[key].longPress) {
+    if (!KEY_UP_BINDS[key].longPress) {
         return;
     }
 
@@ -43,12 +63,12 @@ function handleKeyDown(key: number) {
         }
 
         keyPressTimes[key] = null;
-        keyupBinds[key].longPress();
-    }, 1000);
+        KEY_UP_BINDS[key].longPress();
+    }, DELAY_BETWEEN_LONG_PRESSES);
 }
 
 function handleKeyUp(key: number) {
-    if (!keyupBinds[key]) {
+    if (!KEY_UP_BINDS[key]) {
         return;
     }
 
@@ -63,15 +83,19 @@ function handleKeyUp(key: number) {
     }
 
     // Long Press
-    if (keyPressTimes[key] && keyPressTimes[key] + 1000 < Date.now() && keyupBinds[key].longPress) {
+    if (
+        keyPressTimes[key] &&
+        keyPressTimes[key] + DELAY_BETWEEN_LONG_PRESSES < Date.now() &&
+        KEY_UP_BINDS[key].longPress
+    ) {
         keyPressTimes[key] = null;
-        keyupBinds[key].longPress();
+        KEY_UP_BINDS[key].longPress();
         return;
     }
 
     keyPressTimes[key] = null;
     // Single Press
-    keyupBinds[key].singlePress();
+    KEY_UP_BINDS[key].singlePress();
 }
 
 function handleDebugMessages() {

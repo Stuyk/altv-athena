@@ -91,4 +91,8 @@ function updateCategory(category: string): void {
 
         blip.safeCreate();
     }
+
+    if (lastRange > 8) {
+        alt.Player.local.closestInteraction = null;
+    }
 }

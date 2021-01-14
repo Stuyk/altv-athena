@@ -8,12 +8,12 @@ import { sleep } from '../utility/sleep';
 alt.on('gameEntityCreate', handleEntityCreation);
 
 const closestDoorBones = [
-    { name: 'seat_dside_f', seat: -1, isDoor: false },
-    { name: 'seat_pside_f', seat: 0, isDoor: false },
-    { name: 'seat_dside_r', seat: 1, isDoor: false },
-    { name: 'seat_pside_r', seat: 2, isDoor: false },
+    { name: 'handle_dside_f', seat: -1, isDoor: false },
+    { name: 'handle_pside_f', seat: 0, isDoor: false },
+    { name: 'handle_dside_r', seat: 1, isDoor: false },
+    { name: 'handle_pside_r', seat: 2, isDoor: false },
     { name: 'bonnet', seat: 4, isDoor: true },
-    { name: 'exhaust', seat: 5, isDoor: true }
+    { name: 'boot', seat: 5, isDoor: true }
 ];
 
 export interface DoorData {
@@ -49,6 +49,12 @@ declare module 'alt-client' {
          * @memberof Vehicle
          */
         isDoorOpen(door: Vehicle_Door_List): boolean;
+
+        /**
+         * Check if this person is the vehicle owner.
+         * @memberof Vehicle
+         */
+        isOwner(): boolean;
 
         /**
          * Set the door state. True is open.
@@ -189,6 +195,11 @@ alt.Vehicle.prototype.isDoorOpen = function isDoorOpen(door: Vehicle_Door_List):
     }
 
     return v.doorStates[door];
+};
+
+alt.Vehicle.prototype.isOwner = function isOwner(): boolean {
+    const v: alt.Vehicle = this as alt.Vehicle;
+    return v.owner === alt.Player.local.id.toString();
 };
 
 alt.Vehicle.prototype.setDoorState = function setDoorState(door: Vehicle_Door_List, value: boolean): void {
