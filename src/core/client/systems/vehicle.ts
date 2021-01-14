@@ -75,6 +75,10 @@ async function handleInVehicle(): Promise<void> {
         const currentVehicle = alt.Player.local.vehicle.scriptID;
         native.taskLeaveAnyVehicle(alt.Player.local.scriptID, 0, 0);
 
+        if (!alt.Player.local.vehicle.engineStatus) {
+            return;
+        }
+
         await sleep(500);
         native.setVehicleEngineOn(currentVehicle, true, true, false);
         return;

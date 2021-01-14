@@ -1,9 +1,11 @@
 import * as alt from 'alt-client';
 import { Vector3 } from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List } from '../../shared/enums/vehicle';
+import { Vehicle_Door_List, Vehicle_State } from '../../shared/enums/vehicle';
 import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { sleep } from '../utility/sleep';
+
+alt.on('gameEntityCreate', handleEntityCreation);
 
 const closestDoorBones = [
     { name: 'handle_dside_f', seat: -1, isDoor: false },
@@ -26,6 +28,18 @@ declare module 'alt-client' {
         owner: string | number;
         engineStatus: boolean;
 
+        /**
+         * Resyncs the vehicle after leaving stream distance.
+         * @memberof Vehicle
+         */
+        handleSyncIn(): void;
+
+        /**
+         * Return the closest door to a position.
+         * @param {alt.Vector3} position
+         * @return {*}  {DoorData}
+         * @memberof Vehicle
+         */
         getClosestDoor(position: alt.Vector3): DoorData;
 
         /**
@@ -218,3 +232,38 @@ alt.Vehicle.prototype.setEngine = function setEngine(value: boolean): void {
     v.engineStatus = value;
     native.setVehicleEngineOn(v.scriptID, value, false, false);
 };
+
+alt.Vehicle.prototype.handleSyncIn = function handleSyncIn(): void {
+    const v: alt.Vehicle = this as alt.Vehicle;
+
+    // Synchronize All States for Local Data
+    v.engineStatus = v.getStreamSyncedMeta(Vehicle_State.ENGINE);
+    v.doorStates[0] = v.getStreamSyncedMeta(Vehicle_State.DOOR_DRIVER);
+    v.doorStates[1] = v.getStreamSyncedMeta(Vehicle_State.DOOR_PASSENGER);
+    v.doorStates[2] = v.getStreamSyncedMeta(Vehicle_State.DOOR_DRIVER_REAR);
+    v.doorStates[3] = v.getStreamSyncedMeta(Vehicle_State.DOOR_PASSENGER_REAR);
+    v.doorStates[4] = v.getStreamSyncedMeta(Vehicle_State.DOOR_HOOD);
+    v.doorStates[5] = v.getStreamSyncedMeta(Vehicle_State.DOOR_TRUNK);
+
+    native.setVehicleEngineOn(v.scriptID, v.engineStatus, false, false);
+
+    Object.keys(v.doorStates).forEach((doorNumber) => {
+        alt.log(`${doorNumber}: ${v.doorStates[doorNumber]}`);
+
+        if (v.doorStates[doorNumber]) {
+            native.setVehicleDoorOpen(v.scriptID, parseInt(doorNumber), false, true);
+        } else {
+            native.setVehicleDoorShut(v.scriptID, parseInt(doorNumber), true);
+        }
+    });
+};
+
+function handleEntityCreation(entity: alt.Entity): void {
+    if (!(entity instanceof alt.Vehicle)) {
+        return;
+    }
+
+    alt.setTimeout(() => {
+        entity.handleSyncIn();
+    }, 500);
+}
