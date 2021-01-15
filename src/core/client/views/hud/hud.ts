@@ -178,3 +178,11 @@ export function updateHelpText(
 
     view.emit('hud:HelpText', key, shortPressDescription, longPressDescription);
 }
+
+export function setHelpState(value: boolean): void {
+    if (!view) {
+        return;
+    }
+
+    view.emit('hud:HelpState', value);
+}

@@ -20,6 +20,14 @@ const tagOrComment = new RegExp(
     'gi'
 );
 
+async function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+}
+
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
@@ -41,8 +49,22 @@ const app = new Vue({
             show: false,
             // Help Text
             helpText: null,
-            helpTimeout: null
+            helpTimeout: null,
+            helpState: false
         };
+    },
+    computed: {
+        getHelpTextClasses() {
+            const data = {};
+
+            if (this.helpText === null) {
+                data['help-row-wrapper-null'] = true;
+            } else {
+                data['help-row-wrapper'] = true;
+            }
+
+            return data;
+        }
     },
     methods: {
         appendMessage(msg) {
@@ -236,13 +258,20 @@ const app = new Vue({
 
             if (this.helpTimeout) {
                 clearTimeout(this.helpTimeout);
+                this.helpTimeout = null;
             }
 
-            this.helpText = { key, shortPress, longPress };
-            this.helpTimeout = setTimeout(this.manageHelpTimeout, 1000);
+            this.helpTimeout = setTimeout(this.manageHelpTimeout, 5000);
+
+            if (!this.helpText || this.helpText.shortPress !== shortPress || this.helpText.longPress !== longPress) {
+                this.helpText = { key, shortPress, longPress };
+            }
         },
         manageHelpTimeout() {
             this.helpText = null;
+        },
+        setHelpState(value) {
+            this.helpState = value;
         }
     },
     directives: {
@@ -306,6 +335,7 @@ const app = new Vue({
             alt.on('leaderboard:Toggle', this.toggleLeaderboard);
             alt.on('hud:Audio3D', this.audio3D);
             alt.on('hud:HelpText', this.setHelpText);
+            alt.on('hud:HelpState', this.setHelpState);
             alt.emit('chat:Inject');
         } else {
             let count = 0;
@@ -330,9 +360,23 @@ const app = new Vue({
             }
 
             this.setHelpText(69, 'Short press description go brrr');
-            setInterval(() => {
+
+            (async () => {
+                console.log('add');
+                this.setHelpState(true);
+                await sleep(1500);
+                console.log('remove');
+                this.setHelpState(false);
+            })();
+
+            setInterval(async () => {
                 this.setHelpText(69, 'Short press description go brrr', 'Long press description go brrr');
-            }, 3000);
+
+                await sleep(1000);
+                this.setHelpState(true);
+                await sleep(1000);
+                this.setHelpState(false);
+            }, 7000);
         }
 
         this.$nextTick(() => {

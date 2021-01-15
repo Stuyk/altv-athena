@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
 import { toggleInteractionMode, toggleInteractionText, triggerInteraction } from '../systems/interaction';
 import { VehicleController } from '../systems/vehicle';
-import { focusChat, focusLeaderBoard } from '../views/hud/hud';
+import { focusChat, focusLeaderBoard, setHelpState } from '../views/hud/hud';
 
 export const KEY_BINDS = {
     DEBUG_KEY: 112, // F1
@@ -57,11 +57,13 @@ function handleKeyDown(key: number) {
         return;
     }
 
+    setHelpState(true);
     alt.setTimeout(() => {
         if (!keyPressTimes[key]) {
             return;
         }
 
+        setHelpState(false);
         keyPressTimes[key] = null;
         KEY_UP_BINDS[key].longPress();
     }, DELAY_BETWEEN_LONG_PRESSES);
@@ -71,6 +73,8 @@ function handleKeyUp(key: number) {
     if (!KEY_UP_BINDS[key]) {
         return;
     }
+
+    setHelpState(false);
 
     if (Date.now() < nextKeyPress) {
         return;
