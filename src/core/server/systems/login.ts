@@ -74,6 +74,8 @@ export async function handleLoginRouting(
             };
 
             accountData = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
+        } else {
+            accountData = account;
         }
     }
 

@@ -7,6 +7,14 @@ import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 const db: Database = getDatabase();
 
 export interface NewDataPrototype {
+    /**
+     * Creates a new character and binds it to their account.
+     * @param {Partial<Appearance>} appearance
+     * @param {Partial<CharacterInfo>} info
+     * @param {string} name
+     * @return {*}  {Promise<void>}
+     * @memberof NewDataPrototype
+     */
     character(appearance: Partial<Appearance>, info: Partial<CharacterInfo>, name: string): Promise<void>;
 }
 

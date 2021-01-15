@@ -3,8 +3,22 @@ import { View_Events_Creator } from '../../../shared/enums/views';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 
 export interface SyncPrototype {
+    /**
+     * Synchronize currency data like bank, cash, etc.
+     * @memberof SyncPrototype
+     */
     currencyData(): void;
+
+    /**
+     * Synchronize player appearance.
+     * @memberof SyncPrototype
+     */
     appearance(): void;
+
+    /**
+     * Synchronize player data like ping, position, etc.
+     * @memberof SyncPrototype
+     */
     syncedMeta(): void;
 }
 

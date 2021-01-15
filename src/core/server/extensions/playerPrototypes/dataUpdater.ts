@@ -2,7 +2,19 @@ import * as alt from 'alt-server';
 import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
 
 export interface DataUpdaterPrototype {
+    /**
+     * Used to give default values to this player on connect.
+     * @param {(Character | null)} data
+     * @memberof DataUpdaterPrototype
+     */
     init(data: Character | null);
+
+    /**
+     * Update this player's data property with bulk data.
+     * @param {{ [key: string]: any }} dataObject
+     * @param {string} targetDataName
+     * @memberof DataUpdaterPrototype
+     */
     updateByKeys(dataObject: { [key: string]: any }, targetDataName: string);
 }
 

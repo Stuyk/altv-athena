@@ -3,8 +3,29 @@ import * as alt from 'alt-server';
 const interfaceName = 'safe';
 
 export interface SafePrototype {
+    /**
+     * Safely set a player's position.
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z
+     * @memberof SafePrototype
+     */
     setPosition(x: number, y: number, z: number): void;
+
+    /**
+     * Safely add health to this player.
+     * @param {number} value 99-200
+     * @param {boolean} exactValue
+     * @memberof SafePrototype
+     */
     addHealth(value: number, exactValue: boolean): void;
+
+    /**
+     * Safely add armour to this player.
+     * @param {number} value 1-100
+     * @param {boolean} exactValue
+     * @memberof SafePrototype
+     */
     addArmour(value: number, exactValue: boolean): void;
 }
 

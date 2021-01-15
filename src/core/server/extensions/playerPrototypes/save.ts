@@ -5,8 +5,30 @@ import { Character } from '../../../shared/interfaces/Character';
 const db: Database = getDatabase();
 
 export interface SavePrototype {
+    /**
+     * Save a specific field for the current character of this player.
+     * player.data.cash = 25;
+     * player.save().field('cash', player.data.cash);
+     * @param {string} fieldName
+     * @param {*} fieldValue
+     * @return {*}  {Promise<void>}
+     * @memberof SavePrototype
+     */
     field(fieldName: string, fieldValue: any): Promise<void>;
+
+    /**
+     * Update a partial object of data for the current character of this player.
+     * @param {Partial<Character>} dataObject
+     * @return {*}  {Promise<void>}
+     * @memberof SavePrototype
+     */
     partial(dataObject: Partial<Character>): Promise<void>;
+
+    /**
+     * Call to manually save character data like position, health, etc.
+     * @return {*}  {Promise<void>}
+     * @memberof SavePrototype
+     */
     onTick(): Promise<void>;
 }
 

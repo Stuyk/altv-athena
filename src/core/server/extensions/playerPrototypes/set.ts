@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { Character } from '../../../shared/interfaces/Character';
 import { Account } from '../../interface/Account';
 import { Permissions } from '../../../shared/enums/permissions';
 import { getUniquePlayerHash } from '../../utility/encryption';
@@ -12,37 +11,35 @@ import { distance2d } from '../../../shared/utility/vector';
 const db: Database = getDatabase();
 
 export interface SetPrototype {
-    character(characterData: Partial<Character>): void;
+    /**
+     * Set the account data for this player after they login.
+     * @param {Partial<Account>} accountData
+     * @return {*}  {Promise<void>}
+     * @memberof SetPrototype
+     */
     account(accountData: Partial<Account>): Promise<void>;
+
+    /**
+     * Set if this player should be frozen.
+     * @param {boolean} value
+     * @memberof SetPrototype
+     */
     frozen(value: boolean): void;
+
+    /**
+     * Set this player as respawned.
+     * @param {(alt.Vector3 | null)} position Use null to find closest hospital.
+     * @memberof SetPrototype
+     */
     respawned(position: alt.Vector3 | null): void;
 }
 
 export function bind(): SetPrototype {
     const _this = this;
-    _this.character = character;
     _this.account = account;
     _this.frozen = frozen;
     _this.respawned = respawned;
     return _this;
-}
-
-/**
- * Set the current character data for this player.
- * @param {Partial<Character>} characterData
- * @memberof SetPrototype
- */
-function character(characterData: Partial<Character>): void {
-    const p: alt.Player = (this as unknown) as alt.Player;
-
-    p.data = characterData;
-
-    if (p.data.isDead) {
-        p.nextDeathSpawn = Date.now() + 30000;
-        p.emit().meta('isDead', true);
-    } else {
-        p.emit().meta('isDead', false);
-    }
 }
 
 /**

@@ -5,12 +5,60 @@ import { System_Events_Animation, System_Events_Notification, System_Events_Soun
 import { View_Events_Chat } from '../../../shared/enums/views';
 
 export interface EmitPrototype {
+    /**
+     * Make this player play an animation.
+     * @param {string} dictionary
+     * @param {string} name
+     * @param {AnimationFlags} flags Use a Bitwise Flag to Combine
+     * @param {number} duration
+     * @memberof EmitPrototype
+     */
     animation(dictionary: string, name: string, flags: AnimationFlags, duration: number): void;
+
+    /**
+     * Emit Data to this player only.
+     * @param {string} key
+     * @param {*} value
+     * @memberof EmitPrototype
+     */
     meta(key: string, value: any): void;
+
+    /**
+     * Send an event to this player.
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @memberof EmitPrototype
+     */
     event(eventName: string, ...args: any[]): void;
+
+    /**
+     * Send a message to this player's chatbox.
+     * @param {string} message
+     * @memberof EmitPrototype
+     */
     message(message: string): void;
+
+    /**
+     * Send a native GTA:V notification to this player.
+     * @param {string} message
+     * @memberof EmitPrototype
+     */
     notification(message: string): void;
+
+    /**
+     * Play a custom sound in a 3D space for this player.
+     * @param {string} audioName
+     * @param {alt.Entity} target A vehicle, player, etc.
+     * @memberof EmitPrototype
+     */
     sound3D(audioName: string, target: alt.Entity): void;
+
+    /**
+     * Play a native frontend sound for this player.
+     * @param {string} audioName
+     * @param {string} ref
+     * @memberof EmitPrototype
+     */
     soundFrontend(audioName: string, ref: string): void;
 }
 

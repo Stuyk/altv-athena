@@ -2,8 +2,31 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 
 export interface CurrencyPrototype {
+    /**
+     * Add a currency type to this player.
+     * @param {CurrencyTypes} type
+     * @param {number} amount
+     * @return {*}  {boolean}
+     * @memberof CurrencyPrototype
+     */
     add(type: CurrencyTypes, amount: number): boolean;
+
+    /**
+     * Subtract a currency type from this player.
+     * @param {CurrencyTypes} type
+     * @param {number} amount
+     * @return {*}  {boolean}
+     * @memberof CurrencyPrototype
+     */
     sub(type: CurrencyTypes, amount: number): boolean;
+
+    /**
+     * Set this player's currency type to a specific value.
+     * @param {CurrencyTypes} type
+     * @param {number} amount
+     * @return {*}  {boolean}
+     * @memberof CurrencyPrototype
+     */
     setCurrency(type: CurrencyTypes, amount: number): boolean;
 }
 

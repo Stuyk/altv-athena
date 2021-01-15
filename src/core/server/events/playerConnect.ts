@@ -34,8 +34,7 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
         player.dimension = player.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
         player.pendingLogin = true;
 
-        console.log(player.safe);
-        // player.dataUpdater.init();
+        player.dataUpdater().init(null);
         player.safe().setPosition(pos.x, pos.y, pos.z);
 
         updatePlayerTime(player);

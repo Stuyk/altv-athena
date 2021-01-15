@@ -4,6 +4,12 @@ import { Events_Misc } from '../../../shared/enums/events';
 import { System_Events_Voice, System_Events_World } from '../../../shared/enums/system';
 
 export interface SelectPrototype {
+    /**
+     * Select a character based on the character data provided.
+     * @param {Partial<Character>} characterData
+     * @return {*}  {Promise<void>}
+     * @memberof SelectPrototype
+     */
     character(characterData: Partial<Character>): Promise<void>;
 }
 
@@ -16,7 +22,7 @@ export function bind(): SelectPrototype {
 async function character(characterData: Partial<Character>): Promise<void> {
     const p: alt.Player = (this as unknown) as alt.Player;
 
-    await p.set().character({ ...characterData });
+    p.data = { ...characterData };
     p.sync().appearance();
     p.emit().event(Events_Misc.StartTicks);
 
@@ -32,8 +38,13 @@ async function character(characterData: Partial<Character>): Promise<void> {
 
         // Resets their death status and logs them in as dead.
         if (p.data.isDead) {
+            p.nextDeathSpawn = Date.now() + 30000;
             p.data.isDead = false;
             p.safe().addHealth(0, true);
+            p.emit().meta('isDead', true);
+        } else {
+            p.data.isDead = false;
+            p.emit().meta('isDead', false);
         }
 
         alt.emit(System_Events_Voice.AddToVoice, p);
