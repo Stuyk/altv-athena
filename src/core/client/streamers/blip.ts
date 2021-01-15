@@ -6,10 +6,11 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 const MAX_BLIP_STREAM_DISTANCE = 750;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {
-    atm: []
+    atm: [],
+    gas: []
 };
 
-let categoriesWithDistance = ['atm'];
+let categoriesWithDistance = ['atm', 'gas'];
 let hasPopulatedOnce = false;
 let lastGridSpace: number | null;
 
@@ -42,7 +43,9 @@ async function handleStreamChanges(): Promise<void> {
 
     if (lastGridSpace !== gridSpace && hasPopulatedOnce) {
         await Blip.clearEntireCategory('atm');
+        await Blip.clearEntireCategory('gas');
         streamBlips['atm'] = [];
+        streamBlips['gas'] = [];
     }
 
     // Create All New Blip Instances Here
@@ -57,6 +60,19 @@ async function handleStreamChanges(): Promise<void> {
 
         const newStreamBlip = new StreamBlip(pos, 108, 2, 'ATM', 'atm', MAX_BLIP_STREAM_DISTANCE, true);
         streamBlips.atm.push(newStreamBlip);
+    }
+
+    const gasStations = gridData[gridSpace].objects.gas;
+    for (let i = 0; i < gasStations.length; i++) {
+        const gas = gasStations[i];
+        const pos = {
+            x: gas.Position.X,
+            y: gas.Position.Y,
+            z: gas.Position.Z
+        } as alt.Vector3;
+
+        const newStreamBlip = new StreamBlip(pos, 361, 6, 'Gas Station', 'gas', MAX_BLIP_STREAM_DISTANCE, true);
+        streamBlips.gas.push(newStreamBlip);
     }
 
     if (!hasPopulatedOnce) {

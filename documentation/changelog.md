@@ -40,6 +40,7 @@ description: List of all the changes and current versions.
 + Refactored Player Prototypes (This one was rough)
 + Refactored World Time / Weather
 + Refactored Event Organization
++ Add Gas Station Blips
 ```
 
 ## 1.0.9 - January 10, 2021
