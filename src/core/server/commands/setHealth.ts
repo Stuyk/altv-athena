@@ -7,7 +7,7 @@ addCommand('sethealth', handleCommand);
 
 function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
-        player.send(getDescription('sethealth'));
+        player.emit().message(getDescription('sethealth'));
         return;
     }
 
@@ -26,7 +26,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.send(CommandsLocale.CANNOT_FIND_PLAYER);
+        player.emit().message(CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
@@ -34,6 +34,6 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 }
 
 function finishSetArmour(target: alt.Player, value: number) {
-    target.safeAddHealth(value, true);
-    target.send(`${CommandsLocale.HEALTH_SET_TO}${value}`);
+    target.safe().addHealth(value, true);
+    target.emit().message(`${CommandsLocale.HEALTH_SET_TO}${value}`);
 }

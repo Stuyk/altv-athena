@@ -22,13 +22,13 @@ function handlePing(player: alt.Player): void {
     }
 
     player.nextPingTime = Date.now() + timeBetweenPings;
-    player.updateSyncedMetaStates();
-    player.saveOnTick();
+    player.sync().syncedMeta();
+    player.save().onTick();
 
     updatePlayerTime(player);
     updatePlayerWeather(player);
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
-        player.handleDeathRespawn(null); // Uses null to find a hospital.
+        player.set().respawned(null); // Uses null to find a hospital.
     }
 }

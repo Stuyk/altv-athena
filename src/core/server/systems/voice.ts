@@ -39,7 +39,7 @@ export function addToGlobalVoice(player: alt.Player) {
         return;
     }
 
-    player.send(`[Athena] You have joined the global voice server.`);
-    player.emit(System_Events_Voice.JoinedVoice);
+    player.emit().message(`[Athena] You have joined the global voice server.`);
+    player.emit().event(System_Events_Voice.JoinedVoice);
     mainChannel.addPlayer(player);
 }

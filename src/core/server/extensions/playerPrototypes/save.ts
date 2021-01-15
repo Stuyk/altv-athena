@@ -1,24 +1,43 @@
+import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
 import { Character } from '../../../shared/interfaces/Character';
 
 const db: Database = getDatabase();
 
-export async function saveFieldPrototype(fieldName: string, fieldValue: any): Promise<void> {
-    await db.updatePartialData(this.data._id, { [fieldName]: fieldValue }, 'characters');
+export interface SavePrototype {
+    field(fieldName: string, fieldValue: any): Promise<void>;
+    partial(dataObject: Partial<Character>): Promise<void>;
+    onTick(): Promise<void>;
 }
 
-export async function savePartialPrototype(dataObject: Partial<Character>): Promise<void> {
-    await db.updatePartialData(this.data._id, { ...dataObject }, 'characters');
+export function bind(): SavePrototype {
+    const _this = this;
+    _this.field = field;
+    _this.partial = partial;
+    _this.onTick = onTick;
+    return _this;
 }
 
-export async function saveOnTickPrototype(): Promise<void> {
+async function field(fieldName: string, fieldValue: any): Promise<void> {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, 'characters');
+}
+
+async function partial(dataObject: Partial<Character>): Promise<void> {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    await db.updatePartialData(p.data._id, { ...dataObject }, 'characters');
+}
+
+async function onTick(): Promise<void> {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
     // Update Server Data First
-    this.data.pos = this.pos;
-    this.data.health = this.health;
-    this.data.armour = this.armour;
+    p.data.pos = p.pos;
+    p.data.health = p.health;
+    p.data.armour = p.armour;
 
     // Update Database
-    this.saveField('pos', this.data.pos);
-    this.saveField('health', this.data.health);
-    this.saveField('armour', this.data.armour);
+    p.save().field('pos', p.data.pos);
+    p.save().field('health', p.data.health);
+    p.save().field('armour', p.data.armour);
 }

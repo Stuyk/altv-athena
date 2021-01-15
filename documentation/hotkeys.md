@@ -7,7 +7,6 @@ description: All of the current hotkeys available.
 -   F1 - Print Position, Rotation, and Heading in Console
 -   F2 - Player List / Leaderboard
 -   Left Alt - Toggle Interaction Mode
--   Left Alt Hold - Toggle Interaction Text
 -   E - Use Object / Interaction
 
 ## Vehicle

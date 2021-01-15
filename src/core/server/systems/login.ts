@@ -58,7 +58,7 @@ export async function handleLoginRouting(
     }
 
     player.discord = data as DiscordUser;
-    player.emit(View_Events_Discord.Close);
+    player.emit().event(View_Events_Discord.Close);
 
     // Used for DiscordToken skirt.
     if (!accountData) {
@@ -73,14 +73,11 @@ export async function handleLoginRouting(
                 permissionLevel: Permissions.None
             };
 
-            account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
+            accountData = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
         }
-
-        await player.setAccountData(account);
-    } else {
-        await player.setAccountData(accountData);
     }
 
+    await player.set().account(accountData);
     goToCharacterSelect(player);
 }
 
@@ -98,7 +95,7 @@ function handleDisconnect(player: Player, reason: string): void {
 
     try {
         alt.log(`${player.name} has logged out.`);
-        player.saveOnTick();
+        player.save().onTick();
     } catch (err) {
         alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
         alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);

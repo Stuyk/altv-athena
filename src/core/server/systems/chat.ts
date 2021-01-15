@@ -81,7 +81,7 @@ export async function handleMessage(player: alt.Player, message: string): Promis
     }
 
     if (player.data.isDead) {
-        player.send(`You cannot send messages when you are dead.`);
+        player.emit().message(`You cannot send messages when you are dead.`);
         return;
     }
 
@@ -106,13 +106,13 @@ export async function handleMessage(player: alt.Player, message: string): Promis
 export async function handleCommand(player: alt.Player, commandName: string, ...args: any[]): Promise<void> {
     const commandInfo = commands[commandName];
     if (!commandInfo || !commandInfo.func) {
-        player.send(`/${commandName} is not a valid command.`);
+        player.emit().message(`/${commandName} is not a valid command.`);
         return;
     }
 
     if (commandInfo.permission !== 0) {
         if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
-            player.send(`{FF0000} Command is not permitted.`);
+            player.emit().message(`{FF0000} Command is not permitted.`);
             return;
         }
     }

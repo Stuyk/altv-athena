@@ -13,18 +13,18 @@ function handleCommand(player: alt.Player): void {
 
     if (!isNoClipping && !player.data.isDead) {
         player.setSyncedMeta('NoClipping', true);
-        player.send(`No Clip: ${CommandsLocale.ON}`);
+        player.emit().message(`No Clip: ${CommandsLocale.ON}`);
         player.visible = false;
         return;
     }
 
     if (player.data.isDead) {
-        player.send(CommandsLocale.CANNOT_WHILE_DEAD);
+        player.emit().message(CommandsLocale.CANNOT_WHILE_DEAD);
     }
 
     player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
     player.setSyncedMeta('NoClipping', false);
-    player.send(`No Clip:  ${CommandsLocale.OFF}`);
+    player.emit().message(`No Clip:  ${CommandsLocale.OFF}`);
     player.visible = true;
 }
 

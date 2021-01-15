@@ -1,25 +1,17 @@
 import * as alt from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
 import { DiscordUser } from '../interface/DiscordUser';
-import { CurrencyTypes } from '../enums/currency';
-import { Appearance } from '../../shared/interfaces/Appearance';
-import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { Account } from '../interface/Account';
-import { AnimationFlags } from '../../shared/enums/animation';
 
-import * as character from './playerPrototypes/character';
-import * as emit from './playerPrototypes/emit';
-import * as data from './playerPrototypes/data';
-import * as death from './playerPrototypes/death';
 import * as currency from './playerPrototypes/currency';
-import * as safeSetters from './playerPrototypes/safeSetters';
+import * as dataUpdater from './playerPrototypes/dataUpdater';
+import * as emit from './playerPrototypes/emit';
+import * as newProto from './playerPrototypes/new';
+import * as safe from './playerPrototypes/safe';
 import * as save from './playerPrototypes/save';
-import * as chat from './playerPrototypes/chat';
-import * as update from './playerPrototypes/update';
-import * as play from './playerPrototypes/play';
-import * as utility from './playerPrototypes/utility';
-import * as sound from './playerPrototypes/sound';
-import * as notification from './playerPrototypes/notification';
+import * as select from './playerPrototypes/select';
+import * as set from './playerPrototypes/set';
+import * as sync from './playerPrototypes/sync';
 
 declare module 'alt-server' {
     export interface Player {
@@ -51,261 +43,121 @@ declare module 'alt-server' {
         gridSpace: number;
         currentWeather: string;
 
-        // Functions
-
         /**
-         * emits data to the player's client-side.
-         * @param  {string} eventName
-         * @param  {any[]} ...args
-         */
-        emit(eventName: string, ...args: any[]);
-
-        /**
-         * emits meta to the players client-side. Accessible through 'alt.Player.local.meta'
-         * @param  {string} key
-         * @param  {any} value
-         * @returns void
-         */
-        emitMeta(key: string, value: any): void;
-
-        /**
-         * Used to establish and create a new character based on passed Appearance data.
-         * @param  {Appearance} appearance
-         * @returns void
-         */
-        createNewCharacter(appearance: Appearance, info: CharacterInfo, name: string): void;
-
-        /**
-         * Add currency from this player based on currency type and amount.
-         * @param  {CurrencyTypes} type
-         * @param  {number} amount
-         * @returns boolean
-         */
-        currencyAdd(type: CurrencyTypes, amount: number): boolean;
-
-        /**
-         * Set a currency type for this player to a specific value.
-         * @param  {CurrencyTypes} type
-         * @param  {number} amount
-         * @returns boolean
-         */
-        currencySet(type: CurrencyTypes, amount: number): boolean;
-
-        /**
-         * Remove currecny from this player based on currency type and amount.
-         * @param  {CurrencyTypes} type
-         * @param  {number} amount
-         * @returns boolean
-         */
-        currencySub(type: CurrencyTypes, amount: number): boolean;
-
-        /**
-         * Forces a currency update for meta data on client-side.
+         * Currency related functions.
+         * @type {currency.CurrencyPrototype}
          * @memberof Player
          */
-        currencyUpdate(): void;
+        currency(): currency.CurrencyPrototype;
 
         /**
-         * Freeze or unfreeze a player.
-         * @param {boolean} value
+         * Used to update bulk player data.
+         * Or initialize existing or current data.
+         * @type {dataUpdater.DataUpdaterPrototype}
          * @memberof Player
          */
-        freeze(value: boolean): void;
+        dataUpdater(): dataUpdater.DataUpdaterPrototype;
 
         /**
-         * Handles properly respawning a player a hospital.
+         * Interact directly with the client.
+         * Animations, Sound, Events, Meta Data
+         * @type {emit.EmitPrototype}
          * @memberof Player
          */
-        handleDeathRespawn(position: alt.Vector3 | null): void;
+        emit(): emit.EmitPrototype;
 
         /**
-         * Initialize default values for player.data
-         * @returns void
-         */
-        init(): void;
-
-        /**
-         * Bind database character data to this player.
-         * @param  {Character} data
-         * @returns void
-         */
-        initData(data: Character): void;
-
-        /**
-         * Play an animation if the player is not dead.
-         * @param {string} dictionary
-         * @param {string} name
-         * @param {AnimationFlags} flags Bitwise flags for animation playback.
+         * New Character, Vehicle, etc. for this player.
+         * @type {newProto.NewDataPrototype}
          * @memberof Player
          */
-        playAnimation(dictionary: string, name: string, flags: AnimationFlags, duration: number): void;
+        newData(): newProto.NewDataPrototype;
 
         /**
-         * Play a sound from the user's frontend.
-         * https://altv.stuyk.com/en/tables/frontend_sounds.html
-         * @param {string} audioName
-         * @param {string} ref
+         * Used for future anti-cheat capabilities.
+         * @type {safe.ISafePrototype}
          * @memberof Player
          */
-        playFrontendSound(audioName: string, ref: string): void;
+        safe(): safe.SafePrototype;
 
         /**
-         * Play a custom sound inside the `hud` folder.
-         * @param {string} audioName
-         * @param { alt.Entity} target The source to play the sound. Player, vehicle, etc.
+         * Save Data to the Database
+         * @type {save.SavePrototype}
          * @memberof Player
          */
-        playCustomSound3D(audioName: string, target: alt.Entity): void;
+        save(): save.SavePrototype;
 
         /**
-         * Safely set this player's position.
-         * @param  {number} x
-         * @param  {number} y
-         * @param  {number} z
-         * @returns void
-         */
-        safeSetPosition(x: number, y: number, z: number): void;
-
-        /**
-         * Safelty set this player's health value.
-         * @param  {number} value
-         * @returns void
-         */
-        safeAddHealth(value: number, exactValue: boolean): void;
-
-        /**
-         * Safely set this player's armour value.
-         * @param  {number} value
-         * @returns void
-         */
-        safeAddArmour(value: number, exactValue: boolean): void;
-
-        /**
-         * Save specific data for this player. Update `player.data` first.
-         * @param  {string} fieldName
-         * @param  {any} fieldValue
-         * @returns void
-         */
-        saveField(fieldName: string, fieldValue: any): void;
-
-        /**
-         * Save multiple fields of data for this
-         * @param  {Character} dataObject
-         * @returns void
-         */
-        savePartial(dataObject: Character): void;
-
-        /**
-         * Saves player location, health, armour, etc.
+         * Select Character, Vehicle, etc.
+         * @type {select.SelectPrototype}
          * @memberof Player
          */
-        saveOnTick(): void;
+        select(): select.SelectPrototype;
 
         /**
-         * Used to setup the player with character data.
-         * @param  {Character} characterData
-         * @returns void
-         */
-        selectCharacter(characterData: Character): void;
-
-        /**
-         * Append a message to a player's chat box.
-         * @param {string} message
+         * Set various properties.
+         * Frozen,
+         * @type {set.SetPrototype}
          * @memberof Player
          */
-        send(message: string): void;
+        set(): set.SetPrototype;
 
         /**
-         * Used to set and initialize default and new values for an account.
-         * @param {Partial<Account>} accountData
+         * Synchronize state for the local player.
+         * Appearance, data, bank, etc.
+         * @type {sync.SyncPrototype}
          * @memberof Player
          */
-        setAccountData(accountData: Partial<Account>): Promise<void>;
+        sync(): sync.SyncPrototype;
 
-        /**
-         * Used to set and initialize default and new values for a character.
-         * @param {Partial<CharacterData>} characterData
-         * @memberof Player
-         */
-        setCharacterData(characterData: Partial<Character>): void;
-
-        /**
-         * Send a traditional GTA:V notification to the player.
-         * @param {string} message
-         * @memberof Player
-         */
-        showNotification(message: string): void;
-
-        /**
-         * Update the appearance of the player based on player.data.
-         * @returns void
-         */
-        updateAppearance(): void;
-
-        /**
-         * Iterates through an Object based on its keys and appends it to player.data.
-         * @param  {{}} dataObject
-         * @returns void
-         */
-        updateDataByKeys(dataObject: {}, targetDataName: string): void;
-
-        /**
-         * Used to update shared player data.
-         * Called from the tick system on the server-side.
-         * @memberof Player
-         */
-        updateSyncedMetaStates(): void;
+        invoke<T>(...args): any;
     }
 }
 
-// Emit Extensions
-alt.Player.prototype.emit = emit.emitPrototype;
-alt.Player.prototype.emitMeta = emit.emitMetaPrototype;
+alt.Player.prototype.currency = currency.bind;
+alt.Player.prototype.dataUpdater = dataUpdater.bind;
+alt.Player.prototype.emit = emit.bind;
+alt.Player.prototype.newData = newProto.bind;
+alt.Player.prototype.safe = safe.bind;
+alt.Player.prototype.save = save.bind;
+alt.Player.prototype.select = select.bind;
+alt.Player.prototype.set = set.bind;
+alt.Player.prototype.sync = sync.bind;
 
-// Data Prototypes
-alt.Player.prototype.init = data.initPrototype;
-alt.Player.prototype.initData = data.initDataPrototype;
-alt.Player.prototype.updateDataByKeys = data.updateDataByKeysPrototype;
+// alt.Player.prototype.safe = function () {
+//     const _this = this;
+//     _this.addArmour = safe.addArmour;
+//     _this.addHealth = safe.addHealth;
+//     _this.setPosition = safe.setPosition;
+//     return _this;
+// } as any;
 
-// Currency Prototypes
-alt.Player.prototype.currencyAdd = currency.currencyAddPrototype;
-alt.Player.prototype.currencySub = currency.currencySubPrototype;
-alt.Player.prototype.currencySet = currency.currencySetPrototype;
-alt.Player.prototype.currencyUpdate = currency.currencyUpdatePrototype;
+// Object.assign(alt.Player.prototype.safe, {});
+// Object.assign(alt.Player.prototype.safe.addArmour, safe.addArmour);
+// Object.assign(alt.Player.prototype.safe.addArmour, safe.addArmour);
+// Object.assign(alt.Player.prototype.safe.addArmour, safe.addArmour);
 
-// Utility
-alt.Player.prototype.freeze = utility.freezePrototype;
+// alt.Player.prototype.safe.addArmour = safe.addArmour;
+// alt.Player.prototype.safe.addHealth = safe.addHealth;
+// alt.Player.prototype.safe.setPosition = safe.setPosition;
 
-// Handlers - Handles specific event related tasks. Like respawn.
-alt.Player.prototype.handleDeathRespawn = death.handleDeathRespawnPrototype;
+// .addArmour = safe.default.addArmour;
+// alt.Player.prototype.safe.addHealth = safe.default.addHealth;
+// alt.Player.prototype.safe.setPosition = safe.default.setPosition;
 
-// Safe Setters / Anticheat Prototypes
-alt.Player.prototype.safeAddArmour = safeSetters.safeAddArmourPrototype;
-alt.Player.prototype.safeAddHealth = safeSetters.safeAddHealthPrototype;
-alt.Player.prototype.safeSetPosition = safeSetters.safeSetPositionPrototype;
+// alt.Player.prototype.safe = {
+//     addArmour: safe.SafePrototype.addArmour,
+//     addHealth: safe.SafePrototype.addHealth,
+//     setPosition: safe.SafePrototype.setPosition
+// } as safe.ISafePrototype;
 
-// Database Saving and Handling
-alt.Player.prototype.saveField = save.saveFieldPrototype;
-alt.Player.prototype.saveOnTick = save.saveOnTickPrototype;
-alt.Player.prototype.savePartial = save.savePartialPrototype;
+// // Emit Extensions
+// alt.Player.prototype.currency = CurrencyPrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.dataUpdater = DataUpdaterPrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.emit = EmitPrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.new = NewPrototype.getInstance(alt.Player.prototype);
 
-// Character & Account Related
-alt.Player.prototype.createNewCharacter = character.createNewCharacterPrototype;
-alt.Player.prototype.selectCharacter = character.selectCharacterPrototype;
-alt.Player.prototype.setAccountData = character.setAccountDataPrototype;
-alt.Player.prototype.setCharacterData = character.setCharacterDataPrototype;
-alt.Player.prototype.updateAppearance = character.updateAppearancePrototype;
-
-// Chat Related
-alt.Player.prototype.send = chat.sendPrototype;
-
-// Notification Related
-alt.Player.prototype.showNotification = notification.showNotification;
-
-// Aesthetic Related
-alt.Player.prototype.playAnimation = play.playAnimationPrototype;
-alt.Player.prototype.playFrontendSound = sound.playFrontendSoundPrototype;
-alt.Player.prototype.playCustomSound3D = sound.playCustomSound3DPrototype;
-
-// Update Related
-alt.Player.prototype.updateSyncedMetaStates = update.updateSyncedMetaStatesPrototype;
+// alt.Player.prototype.save = SavePrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.select = SelectPrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.set = SetPrototype.getInstance(alt.Player.prototype);
+// alt.Player.prototype.sync = SyncPrototype.getInstance(alt.Player.prototype);

@@ -149,7 +149,7 @@ alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.P
         return;
     }
 
-    player.safeSetPosition(player.pos.x, player.pos.y, player.pos.z);
+    player.safe().setPosition(player.pos.x, player.pos.y, player.pos.z);
 };
 
 alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State {
@@ -264,7 +264,7 @@ alt.Vehicle.prototype.setIntoVehicle = function setIntoVehicle(player: alt.Playe
             return;
         }
 
-        player.emit(Vehicle_Events.SET_INTO, v, seat);
+        player.emit().event(Vehicle_Events.SET_INTO, v, seat);
     });
 };
 
@@ -293,5 +293,5 @@ alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {
 
     v.engineStatus = !v.engineStatus ? true : false;
     v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
-    player.showNotification(`Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
+    player.emit().notification(`Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
 };

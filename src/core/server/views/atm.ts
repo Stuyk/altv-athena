@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { System_Interaction } from '../../shared/enums/system';
-import { CurrencyTypes } from '../enums/currency';
+import { CurrencyTypes } from '../../shared/enums/currency';
 
 const ActionHandlers = {
     deposit: handleDeposit,
@@ -12,29 +12,29 @@ alt.onClient(System_Interaction.ACTION, handleAction);
 
 function handleAction(player: alt.Player, type: string, amount: string | number, id: null | number): void {
     if (isNaN(amount as number)) {
-        player.currencyUpdate();
+        player.sync().currencyData();
         return;
     }
 
     amount = parseInt(amount as string);
 
     if (!amount || amount <= 0) {
-        player.currencyUpdate();
+        player.sync().currencyData();
         return;
     }
 
     if (!ActionHandlers[type]) {
-        player.currencyUpdate();
+        player.sync().currencyData();
         return;
     }
 
     const result = ActionHandlers[type](player, amount, id);
-    player.currencyUpdate();
+    player.sync().currencyData();
 
     if (!result) {
-        player.playFrontendSound('Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        player.emit().soundFrontend('Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     } else {
-        player.playFrontendSound('Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        player.emit().soundFrontend('Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 }
 
@@ -43,8 +43,8 @@ function handleDeposit(player: alt.Player, amount: number): boolean {
         return false;
     }
 
-    player.currencySub(CurrencyTypes.CASH, amount);
-    player.currencyAdd(CurrencyTypes.BANK, amount);
+    player.currency().sub(CurrencyTypes.CASH, amount);
+    player.currency().add(CurrencyTypes.BANK, amount);
 
     return true;
 }
@@ -54,8 +54,8 @@ function handleWithdraw(player: alt.Player, amount: number): boolean {
         return false;
     }
 
-    player.currencyAdd(CurrencyTypes.CASH, amount);
-    player.currencySub(CurrencyTypes.BANK, amount);
+    player.currency().add(CurrencyTypes.CASH, amount);
+    player.currency().sub(CurrencyTypes.BANK, amount);
 
     return true;
 }
@@ -70,10 +70,10 @@ function handleTransfer(player: alt.Player, amount: number, id: string | number)
         return false;
     }
 
-    player.currencySub(CurrencyTypes.BANK, amount);
-    target.currencyAdd(CurrencyTypes.BANK, amount);
+    player.currency().sub(CurrencyTypes.BANK, amount);
+    target.currency().add(CurrencyTypes.BANK, amount);
 
-    target.send(`You received: ${amount} from ${player.data.name}.`);
+    target.emit().message(`You received: ${amount} from ${player.data.name}.`);
 
     return true;
 }

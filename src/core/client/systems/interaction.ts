@@ -22,11 +22,6 @@ export class InteractionController {
         InteractionController.pressedKey = true;
     }
 
-    static toggleInteractionText(): void {
-        alt.Player.local.isInteractionTextOff = !alt.Player.local.isInteractionTextOff ? true : false;
-        showNotification(`Interaction Text ~y~${alt.Player.local.isInteractionTextOff ? 'Off' : 'On'}`);
-    }
-
     static toggleInteractionMode(): void {
         if (InteractionController.tick) {
             alt.clearInterval(InteractionController.tick);
@@ -56,29 +51,34 @@ export class InteractionController {
             return;
         }
 
+        // Non-Interaction Based Items
+        // Vehicles and such...
         if (!alt.Player.local.closestInteraction) {
             VehicleController.runVehicleControllerTick();
-        } else {
-            if (InteractionController.nextKeyPress > Date.now()) {
-                return;
-            }
+            return;
+        }
 
-            const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
-            if (dist > MAX_CHECKPOINT_DRAW) {
-                return;
-            }
+        // All Interaction Based Items
+        // ATMs, Fuel Pumps, etc.
+        if (InteractionController.nextKeyPress > Date.now()) {
+            return;
+        }
 
-            const intPos = alt.Player.local.closestInteraction.position;
-            drawMarker(28, intPos, new alt.Vector3(0.1, 0.1, 0.1), new alt.RGBA(255, 255, 255, 200));
+        const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
+        if (dist > MAX_CHECKPOINT_DRAW) {
+            return;
+        }
 
-            if (dist < MAX_INTERACTION_DRAW) {
-                HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+        const intPos = alt.Player.local.closestInteraction.position;
+        drawMarker(28, intPos, new alt.Vector3(0.1, 0.1, 0.1), new alt.RGBA(255, 255, 255, 200));
 
-                if (InteractionController.pressedKey) {
-                    InteractionController.pressedKey = false;
-                    InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-                    alt.emitServer(Player_Status.Interact, alt.Player.local.closestInteraction.type);
-                }
+        if (dist < MAX_INTERACTION_DRAW) {
+            HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+
+            if (InteractionController.pressedKey) {
+                InteractionController.pressedKey = false;
+                InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+                alt.emitServer(Player_Status.Interact, alt.Player.local.closestInteraction.type);
             }
         }
     }

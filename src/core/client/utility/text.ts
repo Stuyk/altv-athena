@@ -40,25 +40,6 @@ export function drawRectangle(pos: alt.IVector3, width: alt.IVector2, color: alt
 }
 
 /**
- * Hides or shows text having to do with interaction mode.
- * Can be turned off with a long l-alt press.
- * Do not use this drawText if you plan on having persistent showing text.
- * @export
- * @param {string} text
- * @param {alt.Vector3} pos
- * @param {number} scale
- * @param {alt.RGBA} color
- * @return {*}
- */
-export function imDrawText3D(text: string, pos: alt.Vector3, scale: number, color: alt.RGBA) {
-    if (alt.Player.local.isInteractionTextOff) {
-        return;
-    }
-
-    drawText3D(text, pos, scale, color);
-}
-
-/**
  * Draw stable text in a 3D position with an every tick.
  * @param  {string} text
  * @param  {alt.Vector3} pos

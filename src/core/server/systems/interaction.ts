@@ -40,13 +40,13 @@ function handleInteraction(player: alt.Player, type: string): void {
     }
 
     if (distance2d(player.pos, closestPosition.pos) > DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
-        player.send(InteractionLocale.TOO_FAR_AWAY);
+        player.emit().message(InteractionLocale.TOO_FAR_AWAY);
         return;
     }
 
     const interaction = InteractionTypes[type];
     if (!interaction) {
-        player.send(InteractionLocale.DOES_NOT_EXIST);
+        player.emit().message(InteractionLocale.DOES_NOT_EXIST);
         return;
     }
 
@@ -57,5 +57,5 @@ function handleInteraction(player: alt.Player, type: string): void {
     }
 
     // Goes Client Side
-    player.emit(interaction.eventName, closestPosition);
+    player.emit().event(interaction.eventName, closestPosition);
 }

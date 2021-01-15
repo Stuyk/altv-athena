@@ -12,7 +12,7 @@ addCommand('mc', handleModeratorChat);
 
 function handleAdminChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('ac'));
+        player.emit().message(getDescription('ac'));
         return;
     }
 
@@ -22,7 +22,7 @@ function handleAdminChat(player: alt.Player, ...args): void {
 
 function handleModeratorChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('mc'));
+        player.emit().message(getDescription('mc'));
         return;
     }
 
@@ -32,7 +32,7 @@ function handleModeratorChat(player: alt.Player, ...args): void {
 
 function handleBroadcast(player: alt.Player, ...args) {
     if (args.length <= 0) {
-        player.send(getDescription('broadcast'));
+        player.emit().message(getDescription('broadcast'));
         return;
     }
 

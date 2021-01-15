@@ -15,8 +15,8 @@ function handleDeath(player: alt.Player, killer: alt.Player, weaponHash: any): v
 
     if (!player.data.isDead) {
         player.data.isDead = true;
-        player.emitMeta('isDead', true);
-        player.saveField('isDead', true);
+        player.emit().meta('isDead', true);
+        player.save().field('isDead', true);
         alt.log(`(${player.id}) ${player.data.name} has died.`);
     }
 

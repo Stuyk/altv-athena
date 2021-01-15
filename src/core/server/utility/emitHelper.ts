@@ -15,6 +15,6 @@ export function emitAll(players: Array<alt.Player>, eventName: string, ...args: 
             continue;
         }
 
-        player.emit(eventName, ...args);
+        player.emit().event(eventName, ...args);
     }
 }

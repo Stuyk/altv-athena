@@ -40,8 +40,7 @@ const KEY_UP_BINDS = {
         singlePress: InteractionController.triggerInteraction
     },
     [KEY_BINDS.INTERACTION_MODE]: {
-        singlePress: InteractionController.toggleInteractionMode,
-        longPress: InteractionController.toggleInteractionText
+        singlePress: InteractionController.toggleInteractionMode
     }
 };
 

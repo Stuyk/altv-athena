@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.1.0 - January 12-13, 2021
+## 1.1.0 - January 12-14, 2021
 
 ```diff
 + Added Base Vehicle System / Controls
@@ -28,6 +28,15 @@ description: List of all the changes and current versions.
 + Added Long Press 'alt' to hide Interaction Text
 + Added isChatOpen
 + Added isInteractionTextOff
++ Refactored Keyup on Client Side
++ Refactored Vehicle System
++ Refactored Interaction System
++ Split HUD into Individual Control Systems
++ Interaction Controller much easier to understand now.
+- Removed ImDrawText
+- Removed Toggling Interaction Text
++ Replaced Interaction Text with Help Text
++ Added Long Press Animation to Help Text
 ```
 
 ## 1.0.9 - January 10, 2021

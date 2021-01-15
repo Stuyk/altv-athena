@@ -16,7 +16,7 @@ addCommand('w', handleCommandWhisper);
 
 function handleCommandOOC(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('b'));
+        player.emit().message(getDescription('b'));
         return;
     }
 
@@ -32,7 +32,7 @@ function handleCommandOOC(player: alt.Player, ...args): void {
 
 function handleCommandMe(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('me'));
+        player.emit().message(getDescription('me'));
         return;
     }
 
@@ -48,7 +48,7 @@ function handleCommandMe(player: alt.Player, ...args): void {
 
 function handleCommandDo(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('do'));
+        player.emit().message(getDescription('do'));
         return;
     }
 
@@ -64,7 +64,7 @@ function handleCommandDo(player: alt.Player, ...args): void {
 
 function handleCommandLow(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.send(getDescription('low'));
+        player.emit().message(getDescription('low'));
         return;
     }
 
@@ -84,12 +84,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     if (typeof id !== 'string') {
-        player.send(getDescription('w'));
+        player.emit().message(getDescription('w'));
         return;
     }
 
     if (id === null) {
-        player.send(getDescription('w'));
+        player.emit().message(getDescription('w'));
         return;
     }
 
@@ -97,16 +97,19 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     const target = players.find((target) => target && id === target.id.toString());
 
     if (!target || !target.valid) {
-        player.send(CommandsLocale.CANNOT_FIND_PLAYER);
+        player.emit().message(CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
     if (distance2d(target.pos, player.pos) > DEFAULT_CONFIG.COMMAND_WHISPER_DISTANCE) {
-        player.send(CommandsLocale.PLAYER_IS_TOO_FAR);
+        player.emit().message(CommandsLocale.PLAYER_IS_TOO_FAR);
         return;
     }
 
     const fullMessage = args.join(' ');
-    player.send(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`);
-    target.send(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`);
+    player
+        .emit()
+        .message(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`);
+
+    target.emit().message(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`);
 }
