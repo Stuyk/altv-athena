@@ -66,6 +66,16 @@
                                         </v-card>
                                     </v-dialog>
                                 </v-list-item>
+                                <v-list-item link @click="selectCharacter">
+                                    <v-list-item-icon>
+                                        <v-icon class="light-blue--text text--lighten-2">icon-checkmark</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-title class="light-blue--text text--lighten-2 text--accent-1">
+                                        <div class="d-flex flex-row justify-content-center">
+                                            <span class="flex-grow-1">Select Character</span>
+                                        </div>
+                                    </v-list-item-title>
+                                </v-list-item>
                             </v-list>
                         </v-navigation-drawer>
                     </div>
@@ -86,11 +96,6 @@
                                 </v-list-item-subtitle>
                             </v-list-item>
                         </v-list>
-                        <div class="transparent pa-2" block>
-                            <v-btn color="light-blue lighten-1" @click="selectCharacter" outlined block text tile>
-                                Select Character
-                            </v-btn>
-                        </div>
                     </v-sheet>
                 </v-container>
             </v-app>

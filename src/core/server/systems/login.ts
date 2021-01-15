@@ -79,10 +79,12 @@ export class LoginController {
         const account: Partial<Account> | null = await db.fetchData<Account>('quickToken', hashToken, 'accounts');
 
         if (!account) {
+            player.needsQT = true;
             return;
         }
 
         if (!account.quickTokenExpiration || Date.now() > account.quickTokenExpiration) {
+            player.needsQT = true;
             db.updatePartialData(account._id, { quickToken: null, quickTokenExpiration: null }, 'accounts');
             return;
         }

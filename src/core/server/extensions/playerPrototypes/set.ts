@@ -83,7 +83,7 @@ async function account(accountData: Partial<Account>): Promise<void> {
             'accounts'
         );
 
-        p.emit().meta(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
+        p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
     }
 
     p.emit().meta('permissionLevel', accountData.permissionLevel);
@@ -119,10 +119,10 @@ async function firstConnect(): Promise<void> {
     p.pendingLogin = true;
 
     p.dataUpdater().init(null);
-    p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
     p.safe().setPosition(pos.x, pos.y, pos.z);
     p.sync().time();
     p.sync().weather();
+    p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
 }
 
 /**
