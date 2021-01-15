@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Events_Misc } from '../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { sleep } from '../utility/sleep';
 
 alt.on('connectionComplete', handleConnectionComplete);
-alt.onServer(Events_Misc.FetchQT, handleFetchQT);
+alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_FETCH, handleFetchQT);
 
 async function handleConnectionComplete() {
     native.startAudioScene(`CHARACTER_CHANGE_IN_SKY_SCENE`);
@@ -17,11 +17,11 @@ async function handleFetchQT() {
     const qt = instance.get('qt');
 
     if (!qt) {
-        alt.emitServer(Events_Misc.DiscordTokenNone);
+        alt.emitServer(SYSTEM_EVENTS.QUICK_TOKEN_NONE);
         return;
     }
 
     await sleep(250);
 
-    alt.emitServer(Events_Misc.DiscordToken, qt);
+    alt.emitServer(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, qt);
 }

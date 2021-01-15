@@ -1,12 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Events_Misc } from '../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
+import { drawText2D } from '../utility/text';
 
 const drawDistance = 50;
 let interval;
 
-alt.onServer(Events_Misc.StartTicks, handleStart);
+alt.onServer(SYSTEM_EVENTS.TICKS_START, handleStart);
 
 function handleStart() {
     interval = alt.setInterval(drawNametags, 0);
@@ -20,6 +21,10 @@ function drawNametags() {
 
     if (alt.Player.local.isMenuOpen) {
         return;
+    }
+
+    if (alt.Player.local.isTalking) {
+        drawText2D('Microphone On', { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 
     for (let i = 0, n = alt.Player.all.length; i < n; i++) {

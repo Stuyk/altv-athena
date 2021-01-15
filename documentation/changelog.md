@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.1.0 - January 12-14, 2021
+## 1.1.0 - January 12-15, 2021
 
 ```diff
 + Added Base Vehicle System / Controls
@@ -37,6 +37,9 @@ description: List of all the changes and current versions.
 - Removed Toggling Interaction Text
 + Replaced Interaction Text with Help Text
 + Added Long Press Animation to Help Text
++ Refactored Player Prototypes (This one was rough)
++ Refactored World Time / Weather
++ Refactored Event Organization
 ```
 
 ## 1.0.9 - January 10, 2021

@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import { addCommand } from '../systems/chat';
-import { System_Events_NoClip } from '../../shared/enums/system';
 import { CommandsLocale } from '../../shared/locale/commands';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-alt.onClient(System_Events_NoClip.Reset, handleReset);
-alt.onClient(System_Events_NoClip.Update, handleCamUpdate);
+alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);
+alt.onClient(SYSTEM_EVENTS.NOCLIP_UPDATE, handleCamUpdate);
 
 addCommand('noclip', handleCommand);
 

@@ -1,12 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { commandList } from '../../../shared/commands/commandList';
-import { Events_Misc } from '../../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { sleep } from '../../utility/sleep';
-import { switchInPlayer } from '../../utility/switch';
 import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/helpController';
@@ -18,7 +17,7 @@ export class BaseHUD {
     static isOpen: boolean = false;
     static view: alt.WebView;
 
-    static handleView() {
+    static createView() {
         if (!BaseHUD.view) {
             BaseHUD.view = new alt.WebView(url, false);
             BaseHUD.view.isVisible = false;
@@ -86,4 +85,4 @@ export class BaseHUD {
     }
 }
 
-alt.onServer(Events_Misc.StartTicks, BaseHUD.handleView);
+alt.onServer(SYSTEM_EVENTS.TICKS_START, BaseHUD.createView);

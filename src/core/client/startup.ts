@@ -24,7 +24,6 @@ import './systems/quickToken';
 import './systems/sound';
 import './systems/tick';
 import './systems/vehicle';
-import './systems/voice';
 import './systems/world';
 
 // Utility

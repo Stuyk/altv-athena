@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { System_Interaction } from '../../shared/enums/system';
 import { CurrencyTypes } from '../../shared/enums/currency';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 const ActionHandlers = {
     deposit: handleDeposit,
@@ -8,7 +8,7 @@ const ActionHandlers = {
     transfer: handleTransfer
 };
 
-alt.onClient(System_Interaction.ACTION, handleAction);
+alt.onClient(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, handleAction);
 
 function handleAction(player: alt.Player, type: string, amount: string | number, id: null | number): void {
     if (isNaN(amount as number)) {

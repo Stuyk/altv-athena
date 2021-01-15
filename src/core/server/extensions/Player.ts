@@ -95,8 +95,7 @@ declare module 'alt-server' {
         select(): select.SelectPrototype;
 
         /**
-         * Set various properties.
-         * Frozen,
+         * Set specific data on this player.
          * @type {set.SetPrototype}
          * @memberof Player
          */

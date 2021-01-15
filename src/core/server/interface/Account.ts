@@ -1,4 +1,4 @@
-import { Permissions } from '../../shared/enums/permissions';
+import { Permissions } from '../../shared/flags/permissions';
 
 /**
  * Used to store Discord Information, IPs, and User Data

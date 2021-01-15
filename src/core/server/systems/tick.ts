@@ -1,12 +1,11 @@
 import * as alt from 'alt-server';
-import { Events_Misc } from '../../shared/enums/events';
-import { updatePlayerTime, updatePlayerWeather } from './world';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import './interaction';
 import './vehicle';
 
 const timeBetweenPings = 4950;
 
-alt.onClient(Events_Misc.Ping, handlePing);
+alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, handlePing);
 
 /**
  * This is a tick event that is sent up from the player.
@@ -22,13 +21,13 @@ function handlePing(player: alt.Player): void {
     }
 
     player.nextPingTime = Date.now() + timeBetweenPings;
-    player.sync().syncedMeta();
+
     player.save().onTick();
+    player.sync().syncedMeta();
+    player.sync().time();
+    player.sync().weather();
 
-    updatePlayerTime(player);
-    updatePlayerWeather(player);
-
-    if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn) {
+    if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn - 1000) {
         player.set().respawned(null); // Uses null to find a hospital.
     }
 }

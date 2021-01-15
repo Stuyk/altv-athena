@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { Events_Meta } from '../../shared/enums/meta';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-alt.onServer(Events_Meta.Set, handleSetMeta);
+alt.onServer(SYSTEM_EVENTS.META_SET, handleSetMeta);
 
 /**
  * Sets meta on our local player without sharing it with anyone.
@@ -14,6 +14,6 @@ function handleSetMeta(key, value) {
         alt.Player.local.meta = {};
     }
 
-    alt.emit(Events_Meta.Changed, key, value, alt.Player.local.meta[key]);
+    alt.emit(SYSTEM_EVENTS.META_CHANGED, key, value, alt.Player.local.meta[key]);
     alt.Player.local.meta[key] = value;
 }

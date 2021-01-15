@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Events_Misc } from '../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-alt.onServer(Events_Misc.StartTicks, handleStart);
+alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
 
 let interval;
 
-function handleStart() {
+function toggleOn() {
     interval = alt.setInterval(disableDefaultBehavior, 0);
 }
 

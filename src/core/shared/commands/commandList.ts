@@ -1,4 +1,4 @@
-import { Permissions } from '../enums/permissions';
+import { Permissions } from '../flags/permissions';
 import { Command } from '../interfaces/Command';
 
 /*

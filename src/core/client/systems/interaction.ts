@@ -1,10 +1,8 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
-import { Player_Status } from '../../shared/enums/player';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
-import { showNotification } from '../utility/notification';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { VehicleController } from './vehicle';
 
@@ -70,7 +68,8 @@ export class InteractionController {
         }
 
         const intPos = alt.Player.local.closestInteraction.position;
-        drawMarker(28, intPos, new alt.Vector3(0.1, 0.1, 0.1), new alt.RGBA(255, 255, 255, 200));
+        const zPosition = new alt.Vector3(intPos.x, intPos.y, intPos.z + 1);
+        drawMarker(28, zPosition, new alt.Vector3(0.1, 0.1, 0.1), new alt.RGBA(255, 255, 255, 200));
 
         if (dist < MAX_INTERACTION_DRAW) {
             HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
@@ -78,7 +77,7 @@ export class InteractionController {
             if (InteractionController.pressedKey) {
                 InteractionController.pressedKey = false;
                 InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-                alt.emitServer(Player_Status.Interact, alt.Player.local.closestInteraction.type);
+                alt.emitServer(SYSTEM_EVENTS.INTERACTION, alt.Player.local.closestInteraction.type);
             }
         }
     }

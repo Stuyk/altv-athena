@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import gridData from '../../shared/information/gridData';
-import { System_Events_World } from '../../shared/enums/system';
 import { Blip, StreamBlip } from '../extensions/blip';
 import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 const MAX_BLIP_STREAM_DISTANCE = 750;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {
@@ -14,7 +14,7 @@ let hasPopulatedOnce = false;
 let lastGridSpace: number | null;
 
 // We use the weather updater because it's a consistent event.
-alt.onServer(System_Events_World.UpdateWeather, handleStreamChanges);
+alt.onServer(SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, handleStreamChanges);
 
 /**
  * Happens around every ~5 seconds.

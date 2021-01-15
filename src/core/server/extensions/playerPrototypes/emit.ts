@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
-import { AnimationFlags } from '../../../shared/enums/animation';
-import { Events_Meta } from '../../../shared/enums/meta';
-import { System_Events_Animation, System_Events_Notification, System_Events_Sound } from '../../../shared/enums/system';
+import { AnimationFlags } from '../../../shared/flags/animation';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 
 export interface EmitPrototype {
@@ -91,7 +90,7 @@ function animation(dictionary: string, name: string, flags: AnimationFlags, dura
         return;
     }
 
-    p.emit().event(System_Events_Animation.PlayAnimation, dictionary, name, flags, duration);
+    p.emit().event(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
 }
 
 /**
@@ -104,7 +103,7 @@ function meta(key: string, value: any): void {
     const p: alt.Player = (this as unknown) as alt.Player;
 
     alt.nextTick(() => {
-        alt.emitClient(p, Events_Meta.Set, key, value);
+        alt.emitClient(p, SYSTEM_EVENTS.META_SET, key, value);
     });
 }
 
@@ -139,7 +138,7 @@ function message(message: string): void {
  */
 function notification(message: string): void {
     const p: alt.Player = (this as unknown) as alt.Player;
-    p.emit().event(System_Events_Notification.ShowNotification, message);
+    p.emit().event(SYSTEM_EVENTS.PLAYER_EMIT_NOTIFICATION, message);
 }
 
 /**
@@ -150,7 +149,7 @@ function notification(message: string): void {
  */
 function sound3D(audioName: string, target: alt.Entity): void {
     const p: alt.Player = (this as unknown) as alt.Player;
-    p.emit().event(System_Events_Sound.PlaySound3D, target, audioName);
+    p.emit().event(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName);
 }
 
 /**
@@ -161,5 +160,5 @@ function sound3D(audioName: string, target: alt.Entity): void {
  */
 function soundFrontend(audioName: string, ref: string): void {
     const p: alt.Player = (this as unknown) as alt.Player;
-    p.emit().event(System_Events_Sound.PlaySoundFrontend, audioName, ref);
+    p.emit().event(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, audioName, ref);
 }

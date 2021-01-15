@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { System_Events_Voice } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 
 let mainChannel: alt.VoiceChannel;
 
 if (DEFAULT_CONFIG.VOICE_ON) {
     alt.on('playerDisconnect', handleDisconnect);
-    alt.on(System_Events_Voice.AddToVoice, addToGlobalVoice);
+    alt.on(SYSTEM_EVENTS.VOICE_ADD, addToGlobalVoice);
 
     mainChannel = new alt.VoiceChannel(true, 25);
 }
@@ -40,6 +40,6 @@ export function addToGlobalVoice(player: alt.Player) {
     }
 
     player.emit().message(`[Athena] You have joined the global voice server.`);
-    player.emit().event(System_Events_Voice.JoinedVoice);
+    player.emit().event(SYSTEM_EVENTS.VOICE_JOINED);
     mainChannel.addPlayer(player);
 }

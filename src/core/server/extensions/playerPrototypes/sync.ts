@@ -1,6 +1,8 @@
 import * as alt from 'alt-server';
 import { View_Events_Creator } from '../../../shared/enums/views';
 import { CurrencyTypes } from '../../../shared/enums/currency';
+import { World } from '../../systems/world';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 
 export interface SyncPrototype {
     /**
@@ -20,6 +22,18 @@ export interface SyncPrototype {
      * @memberof SyncPrototype
      */
     syncedMeta(): void;
+
+    /**
+     * Update the player's time to match server time.
+     * @memberof SyncPrototype
+     */
+    time(): void;
+
+    /**
+     * Update the player's weather to match server weather based on grid space.
+     * @memberof SyncPrototype
+     */
+    weather(): void;
 }
 
 export function bind() {
@@ -27,6 +41,8 @@ export function bind() {
     _this.currencyData = currencyData;
     _this.appearance = appearance;
     _this.syncedMeta = syncedMeta;
+    _this.time = time;
+    _this.weather = weather;
     return _this;
 }
 
@@ -72,4 +88,17 @@ function syncedMeta(): void {
 
     p.setSyncedMeta('Ping', p.ping);
     p.setSyncedMeta('Position', p.pos);
+}
+
+function time(): void {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    p.emit().event(SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.hour, World.minute);
+}
+
+function weather(): void {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    p.gridSpace = World.getGridSpace(p);
+    p.currentWeather = World.getWeatherByGrid(p.gridSpace);
+    p.emit().meta('gridSpace', p.gridSpace);
+    p.emit().event(SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, p.currentWeather);
 }

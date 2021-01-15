@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/Character';
-import { Events_Misc } from '../../../shared/enums/events';
-import { System_Events_Voice, System_Events_World } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 
 export interface SelectPrototype {
     /**
@@ -24,7 +23,7 @@ async function character(characterData: Partial<Character>): Promise<void> {
 
     p.data = { ...characterData };
     p.sync().appearance();
-    p.emit().event(Events_Misc.StartTicks);
+    p.emit().event(SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.
     p.dimension = 0;
@@ -35,6 +34,8 @@ async function character(characterData: Partial<Character>): Promise<void> {
         p.safe().addHealth(p.data.health, true);
         p.safe().addArmour(p.data.armour, true);
         p.sync().currencyData();
+        p.sync().weather();
+        p.sync().time();
 
         // Resets their death status and logs them in as dead.
         if (p.data.isDead) {
@@ -47,8 +48,7 @@ async function character(characterData: Partial<Character>): Promise<void> {
             p.emit().meta('isDead', false);
         }
 
-        alt.emit(System_Events_Voice.AddToVoice, p);
-        alt.emit(System_Events_World.UpdateWeather, p);
+        alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 
     // Delete unused data from the Player.

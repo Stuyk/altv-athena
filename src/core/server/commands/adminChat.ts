@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { addCommand } from '../systems/chat';
 import { getDescription } from '../../shared/commands/commandList';
 import { getPlayersByPermissionLevel } from '../utility/filters';
-import { Permissions } from '../../shared/enums/permissions';
+import { Permissions } from '../../shared/flags/permissions';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
 

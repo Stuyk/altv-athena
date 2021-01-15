@@ -2,10 +2,10 @@ import * as alt from 'alt-server';
 import path from 'path';
 import fs from 'fs';
 import env from 'dotenv';
-import { Events_Misc } from '../shared/enums/events';
 import { InjectedFunctions, InjectedStarter, loadWASM } from './utility/wasmLoader';
 import { setAzureEndpoint } from './utility/encryption';
 import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
+import { SYSTEM_EVENTS } from '../shared/enums/system';
 
 env.config();
 
@@ -19,7 +19,7 @@ const buffer = fs.readFileSync(fPath);
 let fns: InjectedFunctions;
 
 alt.on('playerConnect', handleEarlyConnect);
-alt.on(Events_Misc.EnableEntry, handleEntryToggle);
+alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, handleEntryToggle);
 
 if (!process.env.GUMROAD || !process.env.EMAIL) {
     alt.logWarning(`[Athena] Failed to get GUMROAD/EMAIL from .env file. Visit https://gum.co/SKpPN to buy one.`);

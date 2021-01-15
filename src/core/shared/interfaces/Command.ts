@@ -1,4 +1,4 @@
-import { Permissions } from '../enums/permissions';
+import { Permissions } from '../flags/permissions';
 
 export interface Command {
     name: string;

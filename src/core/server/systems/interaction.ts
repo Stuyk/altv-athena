@@ -1,18 +1,17 @@
 import * as alt from 'alt-server';
 import gridInfo from '../../shared/information/gridData';
-import { Player_Status } from '../../shared/enums/player';
 import { DurtyDumpInterface } from '../interface/DurtyDump';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionLocale } from '../../shared/locale/interaction';
-import { System_Interaction } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import '../views/atm';
 
 const InteractionTypes: { [key: string]: { eventName: string; isServer: boolean } } = {
-    atm: { eventName: System_Interaction.ATM, isServer: false }
+    atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false }
 };
 
-alt.onClient(Player_Status.Interact, handleInteraction);
+alt.onClient(SYSTEM_EVENTS.INTERACTION, handleInteraction);
 
 /**
  * Handles when a player presses the interact key.

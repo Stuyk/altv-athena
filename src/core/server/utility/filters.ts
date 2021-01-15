@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/enums/permissions';
+import { Permissions } from '../../shared/flags/permissions';
 import { distance } from '../../shared/utility/vector';
 
 /**

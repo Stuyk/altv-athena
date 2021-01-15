@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Events_Meta } from '../../../shared/enums/meta';
-import { System_Interaction } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
 import { View } from '../../extensions/view';
 
@@ -9,8 +8,8 @@ const url = `http://resource/client/views/atm/html/index.html`;
 let view: View;
 let isOpen = false;
 
-alt.onServer(System_Interaction.ATM, handleView);
-alt.on(Events_Meta.Changed, handleChange);
+alt.onServer(SYSTEM_EVENTS.INTERACTION_ATM, handleView);
+alt.on(SYSTEM_EVENTS.META_CHANGED, handleChange);
 
 async function handleView(_characters: Partial<Character>[]) {
     view = await View.getInstance(url, true, false, true);
@@ -22,7 +21,7 @@ async function handleView(_characters: Partial<Character>[]) {
 }
 
 function handleAction(type, amount, id = null) {
-    alt.emitServer(System_Interaction.ACTION, type, amount, id);
+    alt.emitServer(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, type, amount, id);
 }
 
 function handleClose() {

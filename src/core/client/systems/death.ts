@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { Events_Meta } from '../../shared/enums/meta';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { drawText2D } from '../utility/text';
 
-alt.on(Events_Meta.Changed, handleSingleMetaChange);
+alt.on(SYSTEM_EVENTS.META_CHANGED, handleSingleMetaChange);
 
 let interval: number;
 let deathTime: number;

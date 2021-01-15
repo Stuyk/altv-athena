@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { Events_Misc } from '../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-alt.onServer(Events_Misc.DiscordTokenUpdate, handleUpdateToken);
+alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, handleUpdateToken);
 
 function handleUpdateToken(hash: string) {
     const instance = alt.LocalStorage.get();

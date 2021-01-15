@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { System_Events_Sound } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
 
-alt.onServer(System_Events_Sound.PlaySoundFrontend, handleFrontendSound);
-alt.onServer(System_Events_Sound.PlaySound3D, handlePlayAudio3D);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 
 function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);

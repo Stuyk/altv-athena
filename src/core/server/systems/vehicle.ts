@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { AnimationFlags } from '../../shared/enums/animation';
+import { AnimationFlags } from '../../shared/flags/animation';
 import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
 

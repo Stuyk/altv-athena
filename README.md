@@ -87,6 +87,8 @@ New Features Always in Discord
 
 ![](https://thumbs.gfycat.com/ThoroughWarlikeKillifish-size_restricted.gif)
 
+![](https://thumbs.gfycat.com/ComplicatedUniformBetafish-size_restricted.gif)
+
 ## Running this Project
 
 Please see [the before setup page](documentation/before-setup.md) for setup instructions.

@@ -1,12 +1,11 @@
 import * as alt from 'alt-server';
 import { Account } from '../../interface/Account';
-import { Permissions } from '../../../shared/enums/permissions';
+import { Permissions } from '../../../shared/flags/permissions';
 import { getUniquePlayerHash } from '../../utility/encryption';
 import { Database, getDatabase } from 'simplymongo';
-import { Events_Misc } from '../../../shared/enums/events';
-import { Player_Status } from '../../../shared/enums/player';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { distance2d } from '../../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 
 const db: Database = getDatabase();
 
@@ -18,6 +17,20 @@ export interface SetPrototype {
      * @memberof SetPrototype
      */
     account(accountData: Partial<Account>): Promise<void>;
+
+    /**
+     *
+     * @param {alt.Player} killer
+     * @param {*} weaponHash
+     * @memberof SetPrototype
+     */
+    dead(killer?: alt.Player, weaponHash?: any): void;
+
+    /**
+     * Called when a player does their first connection to the server.
+     * @memberof SetPrototype
+     */
+    firstConnect(): void;
 
     /**
      * Set if this player should be frozen.
@@ -37,6 +50,8 @@ export interface SetPrototype {
 export function bind(): SetPrototype {
     const _this = this;
     _this.account = account;
+    _this.dead = dead;
+    _this.firstConnect = firstConnect;
     _this.frozen = frozen;
     _this.respawned = respawned;
     return _this;
@@ -68,11 +83,46 @@ async function account(accountData: Partial<Account>): Promise<void> {
             'accounts'
         );
 
-        p.emit().meta(Events_Misc.DiscordTokenUpdate, p.discord.id);
+        p.emit().meta(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
     }
 
     p.emit().meta('permissionLevel', accountData.permissionLevel);
     p.accountData = accountData;
+}
+
+function dead(killer: alt.Player = null, weaponHash: any = null): void {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    p.spawn(p.pos.x, p.pos.y, p.pos.z, 0);
+
+    if (!p.data.isDead) {
+        p.data.isDead = true;
+        p.emit().meta('isDead', true);
+        p.save().field('isDead', true);
+        alt.log(`(${p.id}) ${p.data.name} has died.`);
+    }
+
+    if (!p.nextDeathSpawn) {
+        p.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
+    }
+}
+
+async function firstConnect(): Promise<void> {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
+    if (!p || !p.valid) {
+        return;
+    }
+
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
+
+    p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
+    p.pendingLogin = true;
+
+    p.dataUpdater().init(null);
+    p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
+    p.safe().setPosition(pos.x, pos.y, pos.z);
+    p.sync().time();
+    p.sync().weather();
 }
 
 /**
@@ -82,7 +132,7 @@ async function account(accountData: Partial<Account>): Promise<void> {
  */
 function frozen(value: boolean): void {
     const p: alt.Player = (this as unknown) as alt.Player;
-    p.emit().event(Player_Status.SetFreeze, value);
+    p.emit().event(SYSTEM_EVENTS.PLAYER_SET_FREEZE, value);
 }
 
 /**

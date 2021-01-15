@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { View_Events_Chat } from '../../../../shared/enums/views';
 import { disableAllControls } from '../../../utility/disableControls';
 import { BaseHUD } from '../hud';

@@ -1,20 +1,5 @@
 import * as alt from 'alt-server';
-import { System_Events_World } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
-
-alt.setInterval(handleWorldTime, 60000);
-alt.on(System_Events_World.UpdateWeather, updatePlayerWeather);
-
-const WorldDivision = 6;
-const GlobalTime = {
-    hour: DEFAULT_CONFIG.BOOTUP_HOUR,
-    minute: DEFAULT_CONFIG.BOOTUP_MINUTE
-};
-
-// 12,000 Total Units
-const maxY = 8000;
-const minY = -4000;
-const minMaxGroups = generateMinMaxs(WorldDivision);
 
 /* -- Top of Map --
  * 0 - Weather at Index 0
@@ -32,72 +17,65 @@ const minMaxGroups = generateMinMaxs(WorldDivision);
  *
  */
 
-function handleWorldTime(): void {
-    GlobalTime.minute += DEFAULT_CONFIG.MINUTES_PER_MINUTE;
-    if (GlobalTime.minute >= 60) {
-        GlobalTime.minute = 0;
-        GlobalTime.hour += 1;
+// Best kept at 6 unless you know what you're doing.
+const worldDivision = 6;
+const maxY = 8000;
+const minY = -4000;
 
-        const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
-        DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+export class World {
+    static minMaxGroups: Array<{ minY: number; maxY: number }>;
+    static hour: number = DEFAULT_CONFIG.BOOTUP_HOUR;
+    static minute: number = DEFAULT_CONFIG.BOOTUP_MINUTE;
+
+    /**
+     * Generates a reference grid for weather and objects.
+     * @static
+     * @param {number} division
+     * @memberof World
+     */
+    static generateGrid(division: number): void {
+        let groups: Array<{ minY: number; maxY: number }> = [];
+        let total = maxY + Math.abs(minY);
+
+        for (let i = 0; i < division; i++) {
+            const result = {
+                maxY: maxY - (total / division) * i,
+                minY: maxY - 2000 - (total / division) * i
+            };
+
+            groups.push(result);
+        }
+
+        World.minMaxGroups = groups;
     }
 
-    if (GlobalTime.hour >= 24) {
-        GlobalTime.hour = 0;
+    static updateWorldTime(): void {
+        World.minute += DEFAULT_CONFIG.MINUTES_PER_MINUTE;
+        if (World.minute >= 60) {
+            World.minute = 0;
+            World.hour += 1;
+
+            const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
+            DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+        }
+
+        if (World.hour >= 24) {
+            World.hour = 0;
+        }
+    }
+
+    static getGridSpace(player: alt.Player): number {
+        const gridSpace = World.minMaxGroups.findIndex(
+            (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY
+        );
+
+        return gridSpace === -1 ? 0 : gridSpace;
+    }
+
+    static getWeatherByGrid(gridIndex: number): string {
+        return DEFAULT_CONFIG.WEATHER_ROTATION[gridIndex];
     }
 }
 
-/**
- * Divides the world horizontally.
- * @param {number} division
- * @return {Array<{ minY: number; maxY: number }>}  {Array<{ minY: number; maxY: number }>}
- */
-function generateMinMaxs(division: number): Array<{ minY: number; maxY: number }> {
-    let groups = [];
-    let total = maxY + Math.abs(minY);
-
-    for (let i = 0; i < division; i++) {
-        const result = {
-            maxY: maxY - (total / division) * i,
-            minY: maxY - 2000 - (total / division) * i
-        };
-
-        groups.push(result);
-    }
-
-    return groups;
-}
-
-/**
- * Updates the player time to match server time.
- * @export
- * @param {alt.Player} player
- */
-export function updatePlayerTime(player: alt.Player): void {
-    alt.emitClient(player, System_Events_World.UpdateTime, GlobalTime.hour, GlobalTime.minute);
-}
-
-/**
- * Updates player weather based on current area.
- * @export
- * @param {alt.Player} player
- * @return {*}  {void}
- */
-export function updatePlayerWeather(player: alt.Player): void {
-    const gridSpace = minMaxGroups.findIndex(
-        (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY
-    );
-
-    if (gridSpace <= -1) {
-        player.emit().event(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[0]);
-        player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[0];
-        player.gridSpace = 0;
-        player.emit().meta('gridSpace', gridSpace);
-        return;
-    }
-
-    player.emit().event(System_Events_World.UpdateWeather, DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace]);
-    player.currentWeather = DEFAULT_CONFIG.WEATHER_ROTATION[gridSpace];
-    player.gridSpace = gridSpace;
-    player.emit().meta('gridSpace', gridSpace);
-}
+alt.setInterval(World.updateWorldTime, 60000);
+World.generateGrid(worldDivision);

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Events_Misc } from '../../shared/enums/events';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { InteractionController } from '../systems/interaction';
 import { VehicleController } from '../systems/vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
@@ -47,9 +47,9 @@ const KEY_UP_BINDS = {
 let keyPressTimes = {};
 let nextKeyPress = Date.now() + DELAY_BETWEEN_PRESSES;
 
-alt.onServer(Events_Misc.StartTicks, handleStart);
+alt.onServer(SYSTEM_EVENTS.TICKS_START, startKeyListeners);
 
-function handleStart() {
+function startKeyListeners() {
     alt.on('keyup', handleKeyUp);
     alt.on('keydown', handleKeyDown);
 }
