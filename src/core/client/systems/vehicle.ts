@@ -16,11 +16,15 @@ import { HelpController } from '../views/hud/controllers/helpController';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
+alt.on('vehicle:Created', handleVehicleCreated);
 
 const TIME_BETWEEN_CONTROL_PRESS = 250;
 const TIME_BETWEEN_STATE_UPDATES = 5000;
 const TIME_BETWEEN_CHECKS = 1000;
 const MAX_VEHICLE_DISTANCE = 8;
+
+let waitingForVehicle: alt.Vehicle | null = null;
+let waitingForSeat: number | null;
 
 export class VehicleController {
     // The different states for this controller
@@ -297,30 +301,23 @@ export class VehicleController {
     }
 }
 
-async function hasVehicleLoaded(vehicle: alt.Vehicle, count: number = 0): Promise<boolean> {
-    count += 1;
-    if (count >= 25) {
-        return false;
-    }
-
-    if (!vehicle) {
-        return false;
-    }
-
-    if (!vehicle.valid) {
-        return await hasVehicleLoaded(vehicle, count);
-    }
-
-    return true;
+async function handleSetInto(vehicle: alt.Vehicle, seat: Vehicle_Seat_List) {
+    waitingForVehicle = vehicle;
+    waitingForSeat = seat;
 }
 
-async function handleSetInto(vehicle: alt.Vehicle, seat: Vehicle_Seat_List) {
-    const isLoaded = hasVehicleLoaded(vehicle);
-    if (!isLoaded) {
+function handleVehicleCreated(vehicle: alt.Vehicle): void {
+    if (vehicle !== waitingForVehicle) {
         return;
     }
 
-    native.setPedIntoVehicle(alt.Player.local.scriptID, vehicle.scriptID, seat);
+    native.setPedConfigFlag(alt.Player.local.scriptID, 35, false);
+    native.setPedConfigFlag(alt.Player.local.scriptID, 104, true);
+    native.setPedConfigFlag(alt.Player.local.scriptID, 429, true);
+    native.setPedIntoVehicle(alt.Player.local.scriptID, waitingForVehicle.scriptID, waitingForSeat);
+
+    waitingForSeat = null;
+    waitingForVehicle = null;
 }
 
 async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value: any): Promise<void> {

@@ -274,5 +274,7 @@ function handleEntityCreation(entity: alt.Entity): void {
 
     alt.setTimeout(() => {
         entity.handleSyncIn();
+
+        alt.emit('vehicle:Created', entity);
     }, 500);
 }

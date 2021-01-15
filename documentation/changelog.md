@@ -41,6 +41,8 @@ description: List of all the changes and current versions.
 + Refactored World Time / Weather
 + Refactored Event Organization
 + Add Gas Station Blips
++ Fix Set Into Vehicle
++ Fix QT Bugs
 ```
 
 ## 1.0.9 - January 10, 2021

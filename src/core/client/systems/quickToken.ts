@@ -12,12 +12,8 @@ function handleUpdateToken(hash: string) {
 }
 
 async function handleFetchQT() {
-    alt.log('fetching qt');
-
     const instance = alt.LocalStorage.get();
     const qt = instance.get('qt');
-
-    alt.log(qt);
 
     if (!qt) {
         alt.emitServer(SYSTEM_EVENTS.QUICK_TOKEN_NONE);
