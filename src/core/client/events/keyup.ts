@@ -1,9 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Events_Misc } from '../../shared/enums/events';
-import { toggleInteractionMode, toggleInteractionText, triggerInteraction } from '../systems/interaction';
+import { InteractionController } from '../systems/interaction';
 import { VehicleController } from '../systems/vehicle';
-import { focusChat, focusLeaderBoard, setHelpState } from '../views/hud/hud';
+import { ChatController } from '../views/hud/controllers/chatController';
+import { HelpController } from '../views/hud/controllers/helpController';
+import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
 
 export const KEY_BINDS = {
     DEBUG_KEY: 112, // F1
@@ -18,22 +20,29 @@ export const KEY_BINDS = {
 const DELAY_BETWEEN_LONG_PRESSES = 800;
 const DELAY_BETWEEN_PRESSES = 500;
 const KEY_UP_BINDS = {
-    // F1
-    [KEY_BINDS.DEBUG_KEY]: { singlePress: handleDebugMessages },
-    // F2
-    [KEY_BINDS.LEADERBOARD]: { singlePress: focusLeaderBoard },
-    // X
+    [KEY_BINDS.DEBUG_KEY]: {
+        singlePress: handleDebugMessages
+    },
+    [KEY_BINDS.LEADERBOARD]: {
+        singlePress: LeaderboardController.focusLeaderBoard
+    },
     [KEY_BINDS.VEHICLE_LOCK]: {
         singlePress: () => VehicleController.triggerVehicleFunction('pressedLockKey')
     },
-    // F
     [KEY_BINDS.VEHICLE_FUNCS]: {
         singlePress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunction'),
         longPress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
     },
-    [KEY_BINDS.CHAT]: { singlePress: focusChat }, // T
-    [KEY_BINDS.INTERACT]: { singlePress: triggerInteraction }, // E
-    [KEY_BINDS.INTERACTION_MODE]: { singlePress: toggleInteractionMode, longPress: toggleInteractionText } // Left ALT
+    [KEY_BINDS.CHAT]: {
+        singlePress: ChatController.focusChat
+    },
+    [KEY_BINDS.INTERACT]: {
+        singlePress: InteractionController.triggerInteraction
+    },
+    [KEY_BINDS.INTERACTION_MODE]: {
+        singlePress: InteractionController.toggleInteractionMode,
+        longPress: InteractionController.toggleInteractionText
+    }
 };
 
 let keyPressTimes = {};
@@ -47,6 +56,10 @@ function handleStart() {
 }
 
 function handleKeyDown(key: number) {
+    if (alt.Player.local.isMenuOpen) {
+        return;
+    }
+
     keyPressTimes[key] = Date.now();
 
     if (!KEY_UP_BINDS[key]) {
@@ -57,13 +70,13 @@ function handleKeyDown(key: number) {
         return;
     }
 
-    setHelpState(true);
+    HelpController.setHelpState(true);
     alt.setTimeout(() => {
         if (!keyPressTimes[key]) {
             return;
         }
 
-        setHelpState(false);
+        HelpController.setHelpState(false);
         keyPressTimes[key] = null;
         KEY_UP_BINDS[key].longPress();
     }, DELAY_BETWEEN_LONG_PRESSES);
@@ -74,7 +87,11 @@ function handleKeyUp(key: number) {
         return;
     }
 
-    setHelpState(false);
+    HelpController.setHelpState(false);
+
+    if (alt.Player.local.isMenuOpen) {
+        return;
+    }
 
     if (Date.now() < nextKeyPress) {
         return;

@@ -261,7 +261,7 @@ const app = new Vue({
                 this.helpTimeout = null;
             }
 
-            this.helpTimeout = setTimeout(this.manageHelpTimeout, 5000);
+            this.helpTimeout = setTimeout(this.manageHelpTimeout, 1000);
 
             if (!this.helpText || this.helpText.shortPress !== shortPress || this.helpText.longPress !== longPress) {
                 this.helpText = { key, shortPress, longPress };

@@ -36,7 +36,7 @@ async function handleView(_characters: Partial<Character>[]) {
     setZPos(0.6);
 }
 
-function handleSelect(id) {
+async function handleSelect(id) {
     native.doScreenFadeOut(100);
     alt.emitServer(View_Events_Characters.Select, id);
 }
@@ -64,6 +64,7 @@ function handleDone() {
     }
 
     destroyPedEditCamera();
+    native.switchInPlayer(1500);
     view.close();
     open = false;
 }

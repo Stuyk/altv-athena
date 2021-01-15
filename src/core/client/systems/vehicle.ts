@@ -12,7 +12,7 @@ import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { sleep } from '../utility/sleep';
-import { updateHelpText } from '../views/hud/hud';
+import { HelpController } from '../views/hud/controllers/helpController';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -161,9 +161,9 @@ export class VehicleController {
             const vehicleName = vehClass === 8 || vehClass === 13 ? 'Bike' : 'Vehicle';
 
             if (!alt.Player.local.vehicle.engineStatus) {
-                updateHelpText(70, `Exit ${vehicleName}`, `Turn on Engine`);
+                HelpController.updateHelpText(70, `Exit ${vehicleName}`, `Turn on Engine`);
             } else {
-                updateHelpText(70, `Exit ${vehicleName}`, `Turn off Engine`);
+                HelpController.updateHelpText(70, `Exit ${vehicleName}`, `Turn off Engine`);
             }
         }
     }
@@ -204,7 +204,7 @@ export class VehicleController {
 
             const increasedZ = new alt.Vector3(closestVehicle.pos.x, closestVehicle.pos.y, closestVehicle.pos.z + 1);
             drawMarker(0, increasedZ, new alt.Vector3(0.075, 0.075, 0.075), new alt.RGBA(255, 255, 255, 200));
-            updateHelpText(KEY_BINDS.VEHICLE_LOCK, `Cycle Lock (${lockName.replace('_', ' ')})`, null);
+            HelpController.updateHelpText(KEY_BINDS.VEHICLE_LOCK, `Cycle Lock (${lockName.replace('_', ' ')})`, null);
             return;
         }
 
@@ -219,7 +219,7 @@ export class VehicleController {
 
         // Get onto the bike based on seat availability
         if (isBike) {
-            updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Get on Bike`, null);
+            HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Get on Bike`, null);
 
             if (!this.pressedVehicleFunction) {
                 return;
@@ -251,9 +251,9 @@ export class VehicleController {
         drawMarker(28, closestDoor.pos, new alt.Vector3(0.075, 0.075, 0.075), new alt.RGBA(255, 255, 255, 200));
 
         if (closestDoor.isDoor) {
-            updateHelpText(70, null, `Toggle Door`);
+            HelpController.updateHelpText(70, null, `Toggle Door`);
         } else {
-            updateHelpText(70, `Enter Vehicle`, `Toggle Door`);
+            HelpController.updateHelpText(70, `Enter Vehicle`, `Toggle Door`);
         }
 
         // Short Press F
