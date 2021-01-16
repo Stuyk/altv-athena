@@ -33,3 +33,4 @@ import './utility/notification';
 import './views/atm/atm';
 import './views/creator/creator';
 import './views/characters/characters';
+import './views/inventory/inventory';

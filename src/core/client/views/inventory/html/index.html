@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+    <head>
+        <title>Character Selection by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
+        <link rel="stylesheet/less" type="text/css" href="./style.less" />
+        <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app">
+            <v-app v-cloak>
+                <div class="main-container">
+                    <div class="player grey darken-4 rounded elevation-6">
+                        <div class="overline text-center">
+                            P l a y e r
+                        </div>
+                    </div>
+                    <div class="split-view">
+                        <div class="inventory grey darken-4 rounded elevation-6" :class="ground.length <= 0 ? { 'expand': true }: {}">
+                            <div class="header">
+                                <div class="overline text-center">
+                                    {{ pageMeta[pageIndex].name }}
+                                </div>
+                                <v-text-field class="pl-4 pr-4" placeholder="Find item..."></v-text-field>
+                            </div>
+                            <div class="inventory-list fill-height" :class="ground.length <= 0 ? { 'expand-list': true }: {}">
+                                <v-list-item 
+                                    class="rounded item grey darken-3 mb-3 ml-3 mr-3" 
+                                    v-for="(item, index) in inventory[pageIndex]"
+                                    :id="index"
+                                    :value="index"
+                                    :key="index" 
+                                    v-on:mousedown="selectItem($event, index)" 
+                                >
+                                    <v-list-item-avatar class="no-pointer">
+                                        <v-icon>icon-checkmark</v-icon>
+                                    </v-list-item-avatar>
+                                    <v-list-item-content class="no-pointer">
+                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                                        <v-list-item-subtitle>{{ item.quantity }} | {{ item.description }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </div>
+                        </div>
+                        <div class="ground grey darken-4 rounded pt-2 elevation-6 fill-height" v-if="ground.length >= 1">
+                            <div class="header">
+                                <div class="overline text-center" block>
+                                    G r o u n d
+                                </div>
+                            </div>
+                            <div class="pickup-zone flex-grow-1" block>
+                                <div class="item grey darken-3 rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                                <div class="item rounded">Test</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navigation pt-12">
+                        <v-tooltip right class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                                <button id="tab-0" class="blue darken-2 elevation-4" :class="isPageIndex(0)" v-bind="attrs" v-on="on" @click="setIndex(0)">
+                                    <v-icon large>icon-box</v-icon>
+                                </button>
+                            </template>
+                            <span>Tab #1</span>
+                        </v-tooltip>
+                        <v-tooltip right  class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                            <button id="tab-1" class="light-blue darken-1 elevation-4" :class="isPageIndex(1)" v-bind="attrs" v-on="on" @click="setIndex(1)">
+                                <v-icon >icon-box</v-icon>
+                            </button>
+                            </template>
+                            <span>Tab #2</span>
+                        </v-tooltip>
+                        <v-tooltip right class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                                <button id="tab-2" class="light-blue elevation-4" :class="isPageIndex(2)" v-bind="attrs" v-on="on" @click="setIndex(2)">
+                                    <v-icon small>icon-box</v-icon>
+                                </button>
+                            </template>
+                            <span>Tab #3</span>
+                        </v-tooltip>
+                        <v-tooltip right class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                                <button class="light-blue lighten-1 elevation-4" :class="isPageIndex(3)" v-bind="attrs" v-on="on" @click="setIndex(3)">
+                                    <v-icon>icon-fastfood</v-icon>
+                                </button>
+                            </template>
+                            <span>Food</span>
+                        </v-tooltip>
+                        <v-tooltip right class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                                <button class="light-blue lighten-2 elevation-4" :class="isPageIndex(4)" v-bind="attrs" v-on="on" @click="setIndex(4)">
+                                    <v-icon>icon-key</v-icon>
+                                </button>
+                            </template>
+                            <span>Keys</span>
+                        </v-tooltip>
+                        <v-tooltip right class="no-pointer">
+                            <template v-slot:activator="{ on, attrs }">
+                                <button class="teal lighten-1 elevation-4" :class="isPageIndex(5)" v-bind="attrs" v-on="on" @click="setIndex(5)">
+                                    <v-icon>icon-settings</v-icon>
+                                </button>
+                            </template>
+                            <span>Settings</span>
+                        </v-tooltip>
+                    </div>
+                </div>
+
+
+<!-- 
+                    <v-card class="panel grey darken-4 pt-2 pl-2">
+                        <div class="overline text-center">
+                            Inventory
+                        </div>
+                        <v-container class="fill-height">
+                            <v-card-text class="d-flex flex-column inventory-list fill-height overflow-auto">
+                                <v-list-item class="rounded" v-for="(item, index) in inventory" :key="index" link>
+                                    <v-list-item-avatar>
+                                        <v-icon>icon-checkmark</v-icon>
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                                        <v-list-item-subtitle>{{ item.quantity }} | {{ item.description }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-card-text>
+                        </v-container>
+                    </v-card>
+                    <v-card class="panel grey darken-4 pt-2">
+                        <div class="overline text-center">
+                            Ground
+                        </div>
+                    </v-card> -->
+                </div>
+            </v-app>
+        </div>
+        <script src="../../js/vue.min.js"></script>
+        <script src="../../js/vuetify.js"></script>
+        <script src="../../js/less.min.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>
