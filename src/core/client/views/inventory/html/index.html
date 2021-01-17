@@ -64,82 +64,10 @@
                         </div>
                     </div>
                     <div class="navigation pt-12">
-                        <v-tooltip right class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                                <button id="tab-0" class="blue darken-2 elevation-4" :class="isPageIndex(0)" v-bind="attrs" v-on="on" @click="setIndex(0)">
-                                    <v-icon large>icon-box</v-icon>
-                                </button>
-                            </template>
-                            <span>Tab #1</span>
-                        </v-tooltip>
-                        <v-tooltip right  class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                            <button id="tab-1" class="light-blue darken-1 elevation-4" :class="isPageIndex(1)" v-bind="attrs" v-on="on" @click="setIndex(1)">
-                                <v-icon >icon-box</v-icon>
-                            </button>
-                            </template>
-                            <span>Tab #2</span>
-                        </v-tooltip>
-                        <v-tooltip right class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                                <button id="tab-2" class="light-blue elevation-4" :class="isPageIndex(2)" v-bind="attrs" v-on="on" @click="setIndex(2)">
-                                    <v-icon small>icon-box</v-icon>
-                                </button>
-                            </template>
-                            <span>Tab #3</span>
-                        </v-tooltip>
-                        <v-tooltip right class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                                <button class="light-blue lighten-1 elevation-4" :class="isPageIndex(3)" v-bind="attrs" v-on="on" @click="setIndex(3)">
-                                    <v-icon>icon-fastfood</v-icon>
-                                </button>
-                            </template>
-                            <span>Food</span>
-                        </v-tooltip>
-                        <v-tooltip right class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                                <button class="light-blue lighten-2 elevation-4" :class="isPageIndex(4)" v-bind="attrs" v-on="on" @click="setIndex(4)">
-                                    <v-icon>icon-key</v-icon>
-                                </button>
-                            </template>
-                            <span>Keys</span>
-                        </v-tooltip>
-                        <v-tooltip right class="no-pointer">
-                            <template v-slot:activator="{ on, attrs }">
-                                <button class="teal lighten-1 elevation-4" :class="isPageIndex(5)" v-bind="attrs" v-on="on" @click="setIndex(5)">
-                                    <v-icon>icon-settings</v-icon>
-                                </button>
-                            </template>
-                            <span>Settings</span>
-                        </v-tooltip>
+                        <button v-for="index in 6" :key="index - 1" :id="index <= 3 ? `tab-${index - 1}` : ``" :class="isActiveTab(index -1)" :class="isPageIndex(index - 1)" @click="setIndex(index - 1)">
+                            <v-icon>{{ pageIcons[index - 1] }}</v-icon>
+                        </button>
                     </div>
-                </div>
-
-
-<!-- 
-                    <v-card class="panel grey darken-4 pt-2 pl-2">
-                        <div class="overline text-center">
-                            Inventory
-                        </div>
-                        <v-container class="fill-height">
-                            <v-card-text class="d-flex flex-column inventory-list fill-height overflow-auto">
-                                <v-list-item class="rounded" v-for="(item, index) in inventory" :key="index" link>
-                                    <v-list-item-avatar>
-                                        <v-icon>icon-checkmark</v-icon>
-                                    </v-list-item-avatar>
-                                    <v-list-item-content>
-                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                        <v-list-item-subtitle>{{ item.quantity }} | {{ item.description }}</v-list-item-subtitle>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-card-text>
-                        </v-container>
-                    </v-card>
-                    <v-card class="panel grey darken-4 pt-2">
-                        <div class="overline text-center">
-                            Ground
-                        </div>
-                    </v-card> -->
                 </div>
             </v-app>
         </div>

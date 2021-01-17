@@ -16,7 +16,26 @@ body {
     width: 100vw;
     overflow: hidden;
     position: relative;
-    animation: fadein 2s;
+}
+
+.no-animation {
+    transition: none !important;
+    animation: none !important;
+}
+
+.item-clone {
+    position: fixed !important;
+    display: flex !important;
+    pointer-events: none !important;
+    border-radius: 4px !important;
+    background-color: #424242 !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    min-width: calc(35vw - 24px) !important;
+    max-width: calc(35vw - 24px) !important;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 0px 5px 2px black;
 }
 
 .v-application .v-application--wrap {
@@ -51,6 +70,7 @@ body {
         max-width: 35vw;
         min-height: 95vh;
         max-height: 95vh;
+        border: 2px solid red !important;
     }
 
     .split-view {

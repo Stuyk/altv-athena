@@ -8,8 +8,13 @@ const app = new Vue({
         return {
             x: 0,
             y: 0,
-            itemIndex: null,
-            lastHoverID: null,
+            dragAndDrop: {
+                shiftX: null,
+                shiftY: null,
+                clonedElement: null,
+                itemIndex: null,
+                selectedElement: null
+            },
             pageIndex: 0,
             pageMeta: [
                 { name: 'INVENTORY TAB #1' },
@@ -19,6 +24,7 @@ const app = new Vue({
                 { name: 'KEYS' },
                 { name: 'SETTINGS' }
             ],
+            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-fastfood', 'icon-key', 'icon-settings'],
             inventory: [[], [], [], [], [], []],
             ground: []
         };
@@ -34,29 +40,49 @@ const app = new Vue({
         setIndex(value) {
             this.pageIndex = value;
         },
-        isPageIndex(index) {
-            return this.pageIndex === index ? { 'light-green': true } : {};
+        isActiveTab(index) {
+            return this.pageIndex === index
+                ? { 'light-blue': true, 'elevation-12': true }
+                : { grey: true, 'elevation-12': true, 'darken-3': true };
         },
         selectItem(e, index) {
+            // Calculate Element Size
             const element = document.getElementById(index);
-            element.style.position = 'fixed';
-            element.style.left = `calc(${e.clientX}px)`;
-            element.style.top = `${e.clientY}px`;
-            element.style.zIndex = 99;
+            this.dragAndDrop.shiftX = e.clientX - element.getBoundingClientRect().left;
+            this.dragAndDrop.shiftY = e.clientY - element.getBoundingClientRect().top;
+            this.dragAndDrop.selectedElement = { style: element.style, classList: element.classList.toString() };
+            this.dragAndDrop.itemIndex = index;
+
+            // Append Cloned Element to Page and Modify Style
+            const clonedElement = element.cloneNode(true);
+            clonedElement.id = `cloned-${element.id}`;
+            document.body.append(clonedElement);
+            this.clonedElement = document.getElementById(`cloned-${element.id}`);
+            this.clonedElement.classList.add('item-clone');
+            this.clonedElement.classList.add('no-animation');
+            this.clonedElement.style.left = `${e.clientX - 25}px`;
+            this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
+
+            // Modify Current Element
             element.style.pointerEvents = 'none';
-            element.classList.add('elevation-12');
-            element.classList.add('vip');
+            element.style.setProperty('border', '2px dashed rgba(255, 255, 255, 0.5)', 'important');
+            element.classList.add('grey', 'darken-4');
+            element.classList.remove('grey', 'darken-3');
 
-            this.itemIndex = index;
-
-            document.addEventListener('mousemove', this.updatePosition);
+            // Toggle Event Listeners
             document.addEventListener('mouseup', this.dropItem);
             document.addEventListener('mouseover', this.mouseOver);
+            document.addEventListener('mousemove', this.updatePosition); // This calls UpdatePosition
+        },
+        updatePosition(e) {
+            this.clonedElement.style.left = `${e.clientX + 25}px`;
+            this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
         },
         mouseOver(e) {
             if (this.lastHoverID) {
                 const element = document.getElementById(this.lastHoverID);
-                element.style.removeProperty('transform');
+                element.style.removeProperty('border');
+                element.style.removeProperty('box-shadow');
                 this.lastHoverID = null;
             }
 
@@ -66,14 +92,10 @@ const app = new Vue({
 
             if (this.lastHoverID !== e.target.id) {
                 const element = document.getElementById(e.target.id);
-                element.style.transform = 'scale(0.95, 0.95)';
+                element.style.setProperty('border', '2px solid white', 'important');
+                element.style.setProperty('box-shadow', 'inset 0px 0px 5px 0px white', 'important');
                 this.lastHoverID = e.target.id;
             }
-        },
-        updatePosition(e) {
-            const element = document.getElementById(this.itemIndex);
-            element.style.left = `calc(${e.clientX}px)`;
-            element.style.top = `${e.clientY}px`;
         },
         dropItem(e) {
             document.removeEventListener('mouseover', this.mouseOver);
@@ -82,20 +104,19 @@ const app = new Vue({
 
             if (this.lastHoverID) {
                 const element = document.getElementById(this.lastHoverID);
-                element.style.removeProperty('transform');
+                element.style.removeProperty('border');
+                element.style.removeProperty('box-shadow');
                 this.lastHoverID = null;
             }
 
-            const element = document.getElementById(this.itemIndex);
-            element.style.position = 'relative';
-            element.style.pointerEvents = 'all';
-            element.style.removeProperty('left');
-            element.style.removeProperty('top');
-            element.style.removeProperty('left');
-            element.classList.remove('vip');
-            element.classList.remove('elevation-12');
+            this.clonedElement.remove();
 
-            this.itemIndex = null;
+            const element = document.getElementById(this.dragAndDrop.itemIndex);
+            element.style = this.dragAndDrop.selectedElement.style;
+            element.style.pointerEvents = 'all';
+            element.classList.remove(...element.classList);
+            element.classList.add(...this.dragAndDrop.selectedElement.classList.split(' '));
+
             this.x = 0;
             this.y = 0;
 
@@ -129,8 +150,6 @@ const app = new Vue({
                 }
             });
         }
-
-        console.log(this);
 
         this.updateItems([items, [], [], [], [], [], []]);
     }
