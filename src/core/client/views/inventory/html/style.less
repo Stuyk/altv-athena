@@ -106,8 +106,8 @@ body {
     .player {
         position: relative;
         margin: 20px;
-        min-width: 35vw;
-        max-width: 35vw;
+        min-width: 30vw;
+        max-width: 30vw;
         min-height: 95vh;
         max-height: 95vh;
 
@@ -139,8 +139,8 @@ body {
     .split-view {
         display: flex;
         flex-grow: 1;
-        min-width: 35vw;
-        max-width: 35vw;
+        min-width: 30vw;
+        max-width: 30vw;
         flex-direction: column;
         overflow: hidden;
         min-height: 95vh;
@@ -153,25 +153,20 @@ body {
 
         .inventory {
             overflow: hidden;
-            min-height: 65vh;
-            max-height: 65vh;
+            min-height: 70vh;
+            max-height: 70vh;
             user-select: none;
 
-            .header {
-                min-height: 3vh;
-                max-height: 3vh;
-            }
-
             .expand-list {
-                min-height: 92vh !important;
-                max-height: 92vh !important;
+                min-height: 95vh !important;
+                max-height: 95vh !important;
             }
 
             .inventory-list {
                 display: grid;
                 overflow-y: scroll;
-                min-height: 61vh;
-                max-height: 61vh;
+                min-height: 70vh;
+                max-height: 70vh;
                 box-sizing: border-box;
                 direction: rtl;
                 grid-template-columns: repeat(4, minmax(6vw, 1fr));
@@ -197,8 +192,12 @@ body {
                     cursor: pointer;
                     border: 2px solid transparent;
                     box-sizing: border-box !important;
-                    overflow: visible;
+                    overflow: hidden;
                     height: 100%;
+
+                    &:last-child {
+                        margin-bottom: 100px !important;
+                    }
 
                     &:hover {
                         background: rgba(255, 255, 255, 0.3) !important;
@@ -240,13 +239,8 @@ body {
 
         .ground {
             margin-top: 2vh;
-            min-height: 28vh;
-            max-height: 28vh;
-
-            .header {
-                min-height: 2vh;
-                max-height: 2vh;
-            }
+            min-height: 25vh;
+            max-height: 25vh;
 
             .pickup-zone {
                 display: grid;
@@ -254,8 +248,8 @@ body {
                 grid-gap: 12px;
                 min-height: 23vh;
                 max-height: 23vh;
-                padding: 1vh 1vw;
-                margin-top: 2vh;
+                padding: 1vh 1vw !important;
+                box-sizing: border-box !important;
                 user-select: none;
 
                 .item {

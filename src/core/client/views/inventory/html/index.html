@@ -50,10 +50,11 @@
                                         </div>
                                     </template>
                                 </div>
+                                <div class="mt-1" style="max-height: 0.1vh;" block></div>
                             </div>
                         </div>
-                        <div class="ground grey darken-4 rounded pt-2 elevation-6 fill-height" v-if="ground.length >= 1">
-                            <div class="pickup-zone flex-grow-1" block>
+                        <div class="ground grey darken-4 rounded elevation-6 fill-height" v-if="ground.length >= 1">
+                            <div class="pickup-zone" block>
                                 <div 
                                 class="item rounded grey darken-3 rounded" 
                                 v-for="(item, index) in ground" 

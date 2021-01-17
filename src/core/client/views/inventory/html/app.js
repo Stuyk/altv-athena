@@ -179,9 +179,7 @@ const app = new Vue({
     },
     mounted() {
         if ('alt' in window) {
-            alt.on('inventory:UpdateItems', this.updateItems);
             alt.emit('ready');
-            return;
         }
 
         // Debug / Development Mode
