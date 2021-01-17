@@ -1,5 +1,9 @@
 @import '../../less/variables.less';
 
+@item-dimensions: 75px;
+@item-icon-dimensions: 32px;
+@item-grid-gap: 9px;
+
 body,
 html {
     padding: 0;
@@ -29,11 +33,10 @@ body {
     pointer-events: none !important;
     border-radius: 4px !important;
     background-color: #424242 !important;
-    margin-left: 12px !important;
-    margin-right: 12px !important;
-    min-width: calc((35vw - 24px) / 4.5) !important;
-    max-width: calc((35vw - 24px) / 4.5) !important;
-    min-height: calc((35vh) / 3.5) !important;
+    min-width: @item-dimensions;
+    max-width: @item-dimensions;
+    min-height: @item-dimensions;
+    max-height: @item-dimensions;
     box-shadow: 0px 0px 5px 2px black;
     left: 0;
     right: 0;
@@ -42,45 +45,17 @@ body {
     border: 2px solid transparent;
     box-sizing: border-box !important;
     overflow: visible;
+    z-index: 99;
 
     &:hover {
         background: rgba(255, 255, 255, 0.3) !important;
-    }
-
-    .weight {
-        position: absolute;
-        top: 0.075vh;
-        right: 0.075vw;
-        text-shadow: 1px 1px black;
-        font-size: 1vw;
-        color: white;
-    }
-
-    .quantity {
-        position: absolute;
-        bottom: 0.075vh;
-        right: 0.09vw;
-        text-shadow: 1px 1px black;
-        font-size: 1vw;
-        color: white;
-    }
-
-    .icon {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        font-family: 'Inter';
-
-        i {
-            font-size: calc(21vw / 6);
-        }
     }
 }
 
 .v-application .v-application--wrap {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     justify-items: center;
     align-items: center;
     align-content: center;
@@ -97,41 +72,125 @@ body {
 .main-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    max-height: 100vh !important;
-    max-width: 100vw !important;
     position: relative;
 
     .player {
         position: relative;
-        margin: 20px;
-        min-width: 30vw;
-        max-width: 30vw;
-        min-height: 95vh;
         max-height: 95vh;
+        margin-right: @item-grid-gap * 2;
+        overflow: hidden;
+
+        .toolbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            box-sizing: border-box;
+            user-select: none;
+            padding: @item-grid-gap;
+            margin-bottom: @item-grid-gap * 2;
+            border-radius: 5px;
+
+            .item {
+                position: relative;
+                cursor: pointer;
+                border: 2px solid transparent;
+                box-sizing: border-box !important;
+                overflow: hidden;
+                height: @item-dimensions;
+                width: @item-dimensions;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.3) !important;
+                }
+            }
+
+            .is-null-item {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                justify-items: center;
+                align-items: center;
+                cursor: pointer;
+                border: 2px solid transparent !important;
+                box-sizing: border-box !important;
+                overflow: hidden;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3) !important;
+                border: 2px solid rgba(0, 0, 0, 0.5) !important;
+                cursor: auto !important;
+                height: @item-dimensions;
+                width: @item-dimensions;
+            }
+        }
+
+        .equipment {
+            display: grid;
+            box-sizing: border-box;
+            direction: ltr;
+            grid-template-columns: repeat(4, @item-dimensions);
+            grid-auto-rows: @item-dimensions;
+            grid-gap: @item-grid-gap;
+            height: calc(@item-dimensions * 3 + @item-grid-gap * 4);
+            padding-left: @item-grid-gap;
+            padding-right: @item-grid-gap;
+            padding-top: @item-grid-gap;
+            user-select: none;
+            border-radius: 5px;
+
+            .item {
+                position: relative;
+                cursor: pointer;
+                border: 2px solid transparent;
+                box-sizing: border-box !important;
+                overflow: hidden;
+                height: @item-dimensions;
+                width: @item-dimensions;
+
+                span {
+                    text-align: center;
+                }
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.3) !important;
+                }
+            }
+
+            .is-null-item {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                justify-items: center;
+                align-items: center;
+                cursor: pointer;
+                border: 2px solid transparent !important;
+                box-sizing: border-box !important;
+                overflow: hidden;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3) !important;
+                border: 2px solid rgba(0, 0, 0, 0.5) !important;
+                cursor: auto !important;
+                height: @item-dimensions;
+                width: @item-dimensions;
+            }
+        }
 
         .item-info {
             position: absolute;
-            bottom: 0;
-            min-height: 45vh;
-            max-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            margin-top: @item-grid-gap * 2;
             box-sizing: border-box;
             width: 100%;
-            padding: 1vh 1vw;
+            border-radius: 5px;
+            padding: @item-grid-gap;
+            user-select: none;
 
-            .item-container {
+            .chips {
                 display: flex;
-                flex-direction: column;
-                min-height: 43vh;
-                max-height: 43vh;
-                border-radius: 4px;
-                border: 2px solid rgba(255, 255, 255, 0.2) !important;
-                justify-content: flex-start;
-                justify-items: center;
-                align-content: center;
-                align-items: center;
-                padding: 2vh 2vw;
+                justify-content: space-between;
+                flex-wrap: wrap;
             }
         }
     }
@@ -139,52 +198,39 @@ body {
     .split-view {
         display: flex;
         flex-grow: 1;
-        min-width: 30vw;
-        max-width: 30vw;
+        min-width: calc(@item-dimensions * 4 + @item-grid-gap * 5);
+        max-width: calc(@item-dimensions * 4 + @item-grid-gap * 5);
         flex-direction: column;
         overflow: hidden;
-        min-height: 95vh;
         max-height: 95vh;
-
-        .expand {
-            min-height: 95vh !important;
-            max-height: 95vh !important;
-        }
+        z-index: 50;
 
         .inventory {
             overflow: hidden;
-            min-height: 70vh;
-            max-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-content: flex-start;
+            justify-items: flex-start;
+            align-items: flex-start;
+            height: calc(@item-dimensions * 7 + @item-grid-gap * 8);
             user-select: none;
-
-            .expand-list {
-                min-height: 95vh !important;
-                max-height: 95vh !important;
-            }
+            z-index: 50 !important;
 
             .inventory-list {
                 display: grid;
-                overflow-y: scroll;
-                min-height: 70vh;
-                max-height: 70vh;
                 box-sizing: border-box;
                 direction: rtl;
-                grid-template-columns: repeat(4, minmax(6vw, 1fr));
-                grid-auto-rows: calc(25vh / 2.5);
-                grid-gap: 12px;
+                grid-template-columns: repeat(4, @item-dimensions);
+                grid-auto-rows: @item-dimensions;
+                grid-gap: @item-grid-gap;
+                height: calc(@item-dimensions * 7 + @item-grid-gap * 8);
                 user-select: none;
-                padding: 1vh 1vw;
-
-                .is-null-item {
-                    background-color: rgba(0, 0, 0, 0.4) !important;
-                    border-color: rgba(0, 0, 0, 0.4) !important;
-                    cursor: auto !important;
-
-                    &:hover {
-                        background: transparent !important;
-                        background-color: transparent !important;
-                    }
-                }
+                width: 100%;
+                height: 100%;
+                padding-right: @item-grid-gap;
+                padding-top: @item-grid-gap;
+                padding-bottom: @item-grid-gap;
+                overflow-y: scroll;
 
                 .item {
                     position: relative;
@@ -202,33 +248,19 @@ body {
                     &:hover {
                         background: rgba(255, 255, 255, 0.3) !important;
                     }
+                }
 
-                    .weight {
-                        position: absolute;
-                        top: 0.075vh;
-                        right: 0.075vw;
-                        text-shadow: 1px 1px black;
-                        font-size: 1vw;
-                    }
-
-                    .quantity {
-                        position: absolute;
-                        bottom: 0.075vh;
-                        right: 0.09vw;
-                        text-shadow: 1px 1px black;
-                        font-size: 1vw;
-                    }
-
-                    .icon {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        font-family: 'Inter';
-
-                        i {
-                            font-size: calc(21vw / 6);
-                        }
-                    }
+                .is-null-item {
+                    position: relative;
+                    direction: ltr;
+                    cursor: pointer;
+                    border: 2px solid transparent !important;
+                    box-sizing: border-box !important;
+                    overflow: hidden;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.3) !important;
+                    border: 2px solid rgba(0, 0, 0, 0.5) !important;
+                    cursor: auto !important;
                 }
 
                 .vip {
@@ -238,70 +270,46 @@ body {
         }
 
         .ground {
+            display: flex;
+            flex-direction: column;
             margin-top: 2vh;
-            min-height: 25vh;
-            max-height: 25vh;
+            min-height: calc(@item-dimensions * 2 + @item-grid-gap * 3);
+            overflow: hidden;
 
             .pickup-zone {
                 display: grid;
-                grid-template-columns: repeat(4, minmax(6vw, 1fr));
-                grid-gap: 12px;
-                min-height: 23vh;
-                max-height: 23vh;
-                padding: 1vh 1vw !important;
-                box-sizing: border-box !important;
+                overflow-y: scroll;
+                min-height: calc(@item-dimensions * 2 + @item-grid-gap * 3);
+                box-sizing: border-box;
+                direction: rtl;
+                grid-template-columns: repeat(4, @item-dimensions);
+                grid-auto-rows: @item-dimensions;
+                grid-gap: @item-grid-gap;
                 user-select: none;
+                width: 100%;
+                padding-right: @item-grid-gap;
+                padding-top: @item-grid-gap;
 
                 .item {
                     position: relative;
-                    min-height: calc((23vh - 12px) / 2.2);
-                    max-height: calc((23vh - 12px) / 2.2);
+                    min-height: @item-dimensions;
+                    max-height: @item-dimensions;
                     background: black;
-                    height: auto;
                     border: 2px solid transparent !important;
                     cursor: pointer;
 
                     &:hover {
                         background: rgba(255, 255, 255, 0.3) !important;
                     }
-
-                    .weight {
-                        position: absolute;
-                        top: 0.075vh;
-                        right: 0.075vw;
-                        text-shadow: 1px 1px black;
-                        font-size: 1vw;
-                    }
-
-                    .quantity {
-                        position: absolute;
-                        bottom: 0.075vh;
-                        right: 0.09vw;
-                        text-shadow: 1px 1px black;
-                        font-size: 1vw;
-                    }
-
-                    .icon {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        font-family: 'Inter';
-
-                        i {
-                            font-size: calc(21vw / 6);
-                        }
-                    }
                 }
 
                 .is-null-item {
-                    background-color: rgba(0, 0, 0, 0.4) !important;
-                    border-color: rgba(0, 0, 0, 0.4) !important;
-                    cursor: auto !important;
-
-                    &:hover {
-                        background: unset !important;
-                        background-color: unset !important;
-                    }
+                    position: relative;
+                    min-height: @item-dimensions;
+                    max-height: @item-dimensions;
+                    background-color: rgba(0, 0, 0, 0.3) !important;
+                    border: 2px solid rgba(0, 0, 0, 0.5) !important;
+                    cursor: auto;
                 }
             }
         }
@@ -309,27 +317,81 @@ body {
 
     .navigation {
         max-width: 6vw;
-        min-height: 95vh;
-        max-height: 95vh;
         position: absolute;
-        right: -6vw;
+        right: 0 - @item-dimensions / 1.25;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        z-index: 45;
 
-        button {
-            min-width: 5vw;
-            max-width: 5vw;
-            min-height: 5vh;
-            max-height: 5vh;
-            z-index: 1;
+        .tab {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: @item-dimensions / 1.25;
+            height: @item-dimensions / 1.25;
+            z-index: 1 !important;
             outline: none;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            cursor: pointer;
+
+            .tooltip {
+                display: none;
+                position: absolute;
+            }
 
             &:hover {
                 background: rgba(85, 85, 85, 1) !important;
+
+                .tooltip {
+                    display: flex;
+                    align-content: flex-start;
+                    position: absolute;
+                    right: 0 - @item-dimensions * 3.05;
+                    min-width: @item-dimensions * 3;
+                    text-shadow: 1px 1px black;
+                    text-align: left !important;
+                }
             }
 
             i {
                 pointer-events: none;
             }
         }
+    }
+}
+
+.item .weight {
+    position: absolute;
+    text-shadow: 1px 1px black;
+    font-size: 10px;
+    color: white;
+    right: 0;
+    bottom: 0;
+}
+
+.item .quantity {
+    position: absolute;
+    text-shadow: 1px 1px black;
+    font-size: 10px;
+    color: white;
+    top: 0;
+    left: 0;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter';
+
+    img {
+        min-width: @item-dimensions / 1.75;
+        max-width: @item-dimensions / 1.75;
     }
 }
 

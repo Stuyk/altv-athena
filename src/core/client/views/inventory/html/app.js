@@ -17,17 +17,13 @@ const app = new Vue({
                 selectedElement: null
             },
             pageIndex: 0,
-            pageMeta: [
-                { name: 'INVENTORY TAB #1' },
-                { name: 'INVENTORY TAB #2' },
-                { name: 'INVENTORY TAB #3' },
-                { name: 'FOOD & DRINK' },
-                { name: 'KEYS' },
-                { name: 'SETTINGS' }
-            ],
-            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-fastfood', 'icon-key', 'icon-settings'],
+            pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Food & Drink', 'Keys'],
+            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-fastfood', 'icon-key'],
+            equipmentMeta: ['Hat', 'Mask', 'Shirt', 'Pants', 'Feet', 'Glasses', 'Ears', 'Bag', 'Armour'],
             inventory: [[], [], [], [], [], []],
-            ground: []
+            ground: [],
+            equipment: [],
+            toolbar: []
         };
     },
     methods: {
@@ -38,7 +34,7 @@ const app = new Vue({
         updateItems(itemTabs) {
             this.inventory = new Array(6).fill([]);
             itemTabs.forEach((items, index) => {
-                this.inventory[index] = new Array(32).fill(null);
+                this.inventory[index] = new Array(28).fill(null);
 
                 items.forEach((item) => {
                     this.inventory[index][item.slot] = item;
@@ -51,13 +47,25 @@ const app = new Vue({
                 this.ground[index] = item;
             });
         },
+        updateEquipment(equipmentItems) {
+            this.equipment = new Array(9).fill(null);
+            equipmentItems.forEach((item, index) => {
+                this.equipment[index] = item;
+            });
+        },
+        updateToolbar(toolbarItems) {
+            this.toolbar = new Array(4).fill(null);
+            toolbarItems.forEach((item, index) => {
+                this.toolbar[index] = item;
+            });
+        },
         setIndex(value) {
             this.pageIndex = value;
         },
         isActiveTab(index) {
             return this.pageIndex === index
-                ? { 'light-blue': true, 'elevation-12': true }
-                : { grey: true, 'elevation-12': true, 'darken-4': true };
+                ? { 'light-blue': true, tab: true, 'mb-1': true, 'elevation-6': true }
+                : { grey: true, 'darken-4': true, tab: true, 'mb-1': true, 'elevation-6': true };
         },
         getInventoryClass(isNull) {
             const classList = {};
@@ -174,59 +182,130 @@ const app = new Vue({
                 return this.ground[parseInt(this.itemInfo.replace('g-', ''))];
             }
 
+            if (this.itemInfo.includes('t-')) {
+                return this.toolbar[parseInt(this.itemInfo.replace('t-', ''))];
+            }
+
+            if (this.itemInfo.includes('e-')) {
+                return this.equipment[parseInt(this.itemInfo.replace('e-', ''))];
+            }
+
             return this.inventory[this.pageIndex][parseInt(this.itemInfo.replace('i-', ''))];
+        },
+        getItemProperties() {
+            if (this.itemInfo.includes('g-')) {
+                const target = this.ground[parseInt(this.itemInfo.replace('g-', ''))];
+
+                if (!target || !target.data) {
+                    return null;
+                }
+
+                return Object.keys(target.data).map((key) => {
+                    return { key, value: target.data[key] };
+                });
+            }
+
+            if (this.itemInfo.includes('t-')) {
+                const target = this.toolbar[parseInt(this.itemInfo.replace('g-', ''))];
+
+                if (!target || !target.data) {
+                    return null;
+                }
+
+                return Object.keys(target.data).map((key) => {
+                    return { key, value: target.data[key] };
+                });
+            }
+
+            if (this.itemInfo.includes('e-')) {
+                const target = this.equipment[parseInt(this.itemInfo.replace('e-', ''))];
+
+                if (!target || !target.data) {
+                    return null;
+                }
+
+                return Object.keys(target.data).map((key) => {
+                    return { key, value: target.data[key] };
+                });
+            }
+
+            const target = this.inventory[this.pageIndex][parseInt(this.itemInfo.replace('i-', ''))];
+
+            if (!target || !target.data) {
+                return null;
+            }
+
+            return Object.keys(target.data).map((key) => {
+                return { key, value: target.data[key] };
+            });
         }
     },
     mounted() {
         if ('alt' in window) {
             alt.emit('ready');
-        }
+        } else {
+            // Debug / Development Mode
+            const items = [];
+            for (let i = 0; i < 5; i++) {
+                items.push({
+                    name: `An Item ${i}`,
+                    uuid: `some_hash_thing_${i}`,
+                    slot: i,
+                    description: `words`,
+                    icon: 'crate',
+                    quantity: Math.floor(Math.random() * 10),
+                    weight: Math.floor(Math.random() * 5),
+                    data: {
+                        water: 100
+                    }
+                });
+            }
 
-        // Debug / Development Mode
-        const items = [];
-        for (let i = 0; i < 5; i++) {
             items.push({
-                name: `An Item ${i}`,
-                uuid: `some_hash_thing_${i}`,
-                slot: i,
-                description: `words`,
-                icon: 'icon-sticky-note',
+                name: `Sack`,
+                uuid: `some_hash_thing_27`,
+                slot: 27,
+                description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
+                icon: 'sack',
                 quantity: Math.floor(Math.random() * 10),
                 weight: Math.floor(Math.random() * 5),
                 data: {
                     water: 100
                 }
             });
-        }
 
-        items.push({
-            name: `An Item 27`,
-            uuid: `some_hash_thing_27`,
-            slot: 27,
-            description: `words`,
-            icon: 'icon-sticky-note',
-            quantity: Math.floor(Math.random() * 10),
-            weight: Math.floor(Math.random() * 5),
-            data: {
-                water: 100
-            }
-        });
-
-        const ground = [
-            {
-                name: `Ground Item`,
-                uuid: `some_hash_thing_ground`,
-                description: `Nice long description about this item that tells you some cool things.`,
-                icon: 'icon-cog',
-                quantity: Math.floor(Math.random() * 10),
-                weight: Math.floor(Math.random() * 5),
-                data: {
-                    water: 100
+            const ground = [
+                {
+                    name: `Gun`,
+                    uuid: `some_hash_thing_ground`,
+                    description: `Forbidden pez dispenser go brrr.`,
+                    icon: 'gun',
+                    quantity: 1,
+                    weight: 2,
+                    data: {
+                        bang: true,
+                        ammo: 25,
+                        'gluten-free': true,
+                        owner: 'some_guy_off_main',
+                        condition: 50,
+                        rarity: `A+`
+                    }
                 }
-            }
-        ];
+            ];
 
-        this.updateGround(ground);
-        this.updateItems([items, [], [], [], [], [], []]);
+            this.updateToolbar([]);
+            this.updateGround(ground);
+            this.updateItems([items, [], [], [], [], [], []]);
+            this.updateEquipment([
+                {
+                    name: `Hat`,
+                    uuid: `some_hash_thing_ground`,
+                    description: `What a cozy hat! Wow. Much cozy. Many comforts.`,
+                    icon: 'hat',
+                    quantity: Math.floor(Math.random() * 10),
+                    weight: Math.floor(Math.random() * 5)
+                }
+            ]);
+        }
     }
 });
