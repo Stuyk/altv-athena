@@ -6,11 +6,13 @@ import { VehicleController } from '../systems/vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
+import { InventoryController } from '../views/inventory/inventory';
 
 export const KEY_BINDS = {
     DEBUG_KEY: 112, // F1
     LEADERBOARD: 113, // F12
     CHAT: 84, // T
+    INVENTORY: 73, // I
     VEHICLE_FUNCS: 70, // F
     VEHICLE_LOCK: 88, // X
     INTERACT: 69, // E
@@ -25,6 +27,9 @@ const KEY_UP_BINDS = {
     },
     [KEY_BINDS.LEADERBOARD]: {
         singlePress: LeaderboardController.focusLeaderBoard
+    },
+    [KEY_BINDS.INVENTORY]: {
+        singlePress: () => InventoryController.handleView()
     },
     [KEY_BINDS.VEHICLE_LOCK]: {
         singlePress: () => VehicleController.triggerVehicleFunction('pressedLockKey')

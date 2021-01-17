@@ -31,11 +31,50 @@ body {
     background-color: #424242 !important;
     margin-left: 12px !important;
     margin-right: 12px !important;
-    min-width: calc(35vw - 24px) !important;
-    max-width: calc(35vw - 24px) !important;
+    min-width: calc((35vw - 24px) / 4.5) !important;
+    max-width: calc((35vw - 24px) / 4.5) !important;
+    min-height: calc((35vh) / 3.5) !important;
+    box-shadow: 0px 0px 5px 2px black;
     left: 0;
     right: 0;
-    box-shadow: 0px 0px 5px 2px black;
+    direction: ltr;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-sizing: border-box !important;
+    overflow: visible;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .weight {
+        position: absolute;
+        top: 0.075vh;
+        right: 0.075vw;
+        text-shadow: 1px 1px black;
+        font-size: 1vw;
+        color: white;
+    }
+
+    .quantity {
+        position: absolute;
+        bottom: 0.075vh;
+        right: 0.09vw;
+        text-shadow: 1px 1px black;
+        font-size: 1vw;
+        color: white;
+    }
+
+    .icon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-family: 'Inter';
+
+        i {
+            font-size: calc(21vw / 6);
+        }
+    }
 }
 
 .v-application .v-application--wrap {
@@ -65,12 +104,36 @@ body {
     position: relative;
 
     .player {
+        position: relative;
         margin: 20px;
         min-width: 35vw;
         max-width: 35vw;
         min-height: 95vh;
         max-height: 95vh;
-        border: 2px solid red !important;
+
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            min-height: 45vh;
+            max-height: 45vh;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 1vh 1vw;
+
+            .item-container {
+                display: flex;
+                flex-direction: column;
+                min-height: 43vh;
+                max-height: 43vh;
+                border-radius: 4px;
+                border: 2px solid rgba(255, 255, 255, 0.2) !important;
+                justify-content: flex-start;
+                justify-items: center;
+                align-content: center;
+                align-items: center;
+                padding: 2vh 2vw;
+            }
+        }
     }
 
     .split-view {
@@ -95,20 +158,79 @@ body {
             user-select: none;
 
             .header {
-                min-height: 10vh;
-                max-height: 10vh;
+                min-height: 3vh;
+                max-height: 3vh;
             }
 
             .expand-list {
-                min-height: 85vh !important;
-                max-height: 85vh !important;
+                min-height: 92vh !important;
+                max-height: 92vh !important;
             }
 
             .inventory-list {
+                display: grid;
                 overflow-y: scroll;
-                min-height: 55vh;
-                max-height: 55vh;
+                min-height: 61vh;
+                max-height: 61vh;
                 box-sizing: border-box;
+                direction: rtl;
+                grid-template-columns: repeat(4, minmax(6vw, 1fr));
+                grid-auto-rows: calc(25vh / 2.5);
+                grid-gap: 12px;
+                user-select: none;
+                padding: 1vh 1vw;
+
+                .is-null-item {
+                    background-color: rgba(0, 0, 0, 0.4) !important;
+                    border-color: rgba(0, 0, 0, 0.4) !important;
+                    cursor: auto !important;
+
+                    &:hover {
+                        background: transparent !important;
+                        background-color: transparent !important;
+                    }
+                }
+
+                .item {
+                    position: relative;
+                    direction: ltr;
+                    cursor: pointer;
+                    border: 2px solid transparent;
+                    box-sizing: border-box !important;
+                    overflow: visible;
+                    height: 100%;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.3) !important;
+                    }
+
+                    .weight {
+                        position: absolute;
+                        top: 0.075vh;
+                        right: 0.075vw;
+                        text-shadow: 1px 1px black;
+                        font-size: 1vw;
+                    }
+
+                    .quantity {
+                        position: absolute;
+                        bottom: 0.075vh;
+                        right: 0.09vw;
+                        text-shadow: 1px 1px black;
+                        font-size: 1vw;
+                    }
+
+                    .icon {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        font-family: 'Inter';
+
+                        i {
+                            font-size: calc(21vw / 6);
+                        }
+                    }
+                }
 
                 .vip {
                     z-index: 99;
@@ -117,27 +239,75 @@ body {
         }
 
         .ground {
-            margin-top: 3vh;
-            min-height: 27vh;
-            max-height: 27vh;
+            margin-top: 2vh;
+            min-height: 28vh;
+            max-height: 28vh;
 
             .header {
-                min-height: 5vh;
-                max-height: 5vh;
+                min-height: 2vh;
+                max-height: 2vh;
             }
 
             .pickup-zone {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(6vw, 1fr));
+                grid-template-columns: repeat(4, minmax(6vw, 1fr));
                 grid-gap: 12px;
-                min-height: 21vh;
-                max-height: 21vh;
+                min-height: 23vh;
+                max-height: 23vh;
                 padding: 1vh 1vw;
-                width: 600px;
+                margin-top: 2vh;
                 user-select: none;
 
                 .item {
+                    position: relative;
+                    min-height: calc((23vh - 12px) / 2.2);
+                    max-height: calc((23vh - 12px) / 2.2);
                     background: black;
+                    height: auto;
+                    border: 2px solid transparent !important;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.3) !important;
+                    }
+
+                    .weight {
+                        position: absolute;
+                        top: 0.075vh;
+                        right: 0.075vw;
+                        text-shadow: 1px 1px black;
+                        font-size: 1vw;
+                    }
+
+                    .quantity {
+                        position: absolute;
+                        bottom: 0.075vh;
+                        right: 0.09vw;
+                        text-shadow: 1px 1px black;
+                        font-size: 1vw;
+                    }
+
+                    .icon {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        font-family: 'Inter';
+
+                        i {
+                            font-size: calc(21vw / 6);
+                        }
+                    }
+                }
+
+                .is-null-item {
+                    background-color: rgba(0, 0, 0, 0.4) !important;
+                    border-color: rgba(0, 0, 0, 0.4) !important;
+                    cursor: auto !important;
+
+                    &:hover {
+                        background: unset !important;
+                        background-color: unset !important;
+                    }
                 }
             }
         }
@@ -157,6 +327,10 @@ body {
             max-height: 5vh;
             z-index: 1;
             outline: none;
+
+            &:hover {
+                background: rgba(85, 85, 85, 1) !important;
+            }
 
             i {
                 pointer-events: none;

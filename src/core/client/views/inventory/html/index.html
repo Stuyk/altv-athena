@@ -12,58 +12,73 @@
             <v-app v-cloak>
                 <div class="main-container">
                     <div class="player grey darken-4 rounded elevation-6">
-                        <div class="overline text-center">
-                            P l a y e r
-                        </div>
+                        <template v-if="itemInfo">
+                            <div class="item-info">
+                                <div class="item-container grey darken-3 elevation-6">
+                                    <span class="name text-h6 light-blue--text text--lighten-3">
+                                        {{ getItemInfo.name }}
+                                    </span>
+                                    <span class="name text-subtitle-2 light-blue--text text--lighten-4">
+                                        {{ getItemInfo.description }}
+                                    </span>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                     <div class="split-view">
                         <div class="inventory grey darken-4 rounded elevation-6" :class="ground.length <= 0 ? { 'expand': true }: {}">
-                            <div class="header">
-                                <div class="overline text-center">
-                                    {{ pageMeta[pageIndex].name }}
-                                </div>
-                                <v-text-field class="pl-4 pr-4" placeholder="Find item..."></v-text-field>
-                            </div>
-                            <div class="inventory-list fill-height" :class="ground.length <= 0 ? { 'expand-list': true }: {}">
-                                <v-list-item 
-                                    class="rounded item grey darken-3 mb-3 ml-3 mr-3" 
+                            <div class="inventory-list fill-height" :class="getInventoryClass()">
+                                <div 
+                                    class="rounded item grey darken-3" 
                                     v-for="(item, index) in inventory[pageIndex]"
-                                    :id="index"
-                                    :value="index"
+                                    :id="`i-${index}`"
                                     :key="index" 
-                                    v-on:mousedown="selectItem($event, index)" 
+                                    :class="!item ? { 'is-null-item': true } : {}"
+                                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
                                 >
-                                    <v-list-item-avatar class="no-pointer">
-                                        <v-icon>icon-checkmark</v-icon>
-                                    </v-list-item-avatar>
-                                    <v-list-item-content class="no-pointer">
-                                        <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                        <v-list-item-subtitle>{{ item.quantity }} | {{ item.description }}</v-list-item-subtitle>
-                                    </v-list-item-content>
-                                </v-list-item>
+                                    <template v-if="item">
+                                        <div class="icon no-pointer">
+                                            <v-icon>{{ item.icon }}</v-icon>
+                                        </div>
+                                        <div class="stats no-pointer">
+                                            <div class="quantity">
+                                                {{ item.quantity }}x
+                                            </div>
+                                            <div class="weight">
+                                                {{ item.weight }} lb
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                         <div class="ground grey darken-4 rounded pt-2 elevation-6 fill-height" v-if="ground.length >= 1">
-                            <div class="header">
-                                <div class="overline text-center" block>
-                                    G r o u n d
-                                </div>
-                            </div>
                             <div class="pickup-zone flex-grow-1" block>
-                                <div class="item grey darken-3 rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
-                                <div class="item rounded">Test</div>
+                                <div 
+                                class="item rounded grey darken-3 rounded" 
+                                v-for="(item, index) in ground" 
+                                :class="!item ? { 'is-null-item': true } : {}" 
+                                :id="`g-${index}`" 
+                                v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
+                                >
+                                    <template v-if="item">
+                                        <div class="icon no-pointer">
+                                            <v-icon>{{ item.icon }}</v-icon>
+                                        </div>
+                                        <div class="stats no-pointer">
+                                            <div class="quantity">
+                                                {{ item.quantity }}x
+                                            </div>
+                                            <div class="weight">
+                                                {{ item.weight }} lb
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="navigation pt-12">
+                    <div class="navigation pt-6">
                         <button v-for="index in 6" :key="index - 1" :id="index <= 3 ? `tab-${index - 1}` : ``" :class="isActiveTab(index -1)" :class="isPageIndex(index - 1)" @click="setIndex(index - 1)">
                             <v-icon>{{ pageIcons[index - 1] }}</v-icon>
                         </button>
