@@ -18,7 +18,7 @@ export class InventoryController {
         }
 
         view = await View.getInstance(url, true, false, true);
-        view.on('inventory:Update', InventoryController.updateInventory);
+        view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Process', InventoryController.handleProcess);
         view.on('inventory:Close', InventoryController.handleClose);
         alt.toggleGameControls(false);
@@ -29,17 +29,38 @@ export class InventoryController {
         alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, pageIndex);
     }
 
+    static updateEverything(): void {
+        if (!view) {
+            return;
+        }
+
+        Object.keys(keyFunctions).forEach((key) => {
+            keyFunctions[key]();
+        });
+    }
+
     static updateInventory(): void {
         if (!view) {
             return;
         }
 
-        view.emit(
-            'inventory:Process',
-            alt.Player.local.meta.inventory,
-            alt.Player.local.meta.equipment,
-            alt.Player.local.meta.toolbar
-        );
+        view.emit('inventory:Inventory', alt.Player.local.meta.inventory);
+    }
+
+    static updateEquipment(): void {
+        if (!view) {
+            return;
+        }
+
+        view.emit('inventory:Equipment', alt.Player.local.meta.equipment);
+    }
+
+    static updateToolbar(): void {
+        if (!view) {
+            return;
+        }
+
+        view.emit('inventory:Toolbar', alt.Player.local.meta.toolbar);
     }
 
     static handleClose(): void {
@@ -59,8 +80,18 @@ export class InventoryController {
             return;
         }
 
-        InventoryController.updateInventory();
+        if (!keyFunctions[key]) {
+            return;
+        }
+
+        keyFunctions[key]();
     }
 }
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
+
+const keyFunctions = {
+    inventory: InventoryController.updateInventory,
+    toolbar: InventoryController.updateToolbar,
+    equipment: InventoryController.updateEquipment
+};

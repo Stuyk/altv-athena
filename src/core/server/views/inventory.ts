@@ -5,6 +5,13 @@ import { Item } from '../../shared/interfaces/Item';
 
 alt.onClient(View_Events_Inventory.Process, handleProcess);
 
+const DataNames: Array<{ abbrv: string; name: string }> = [
+    { abbrv: 'i-', name: 'inventory' },
+    { abbrv: 'g-', name: 'ground' },
+    { abbrv: 't-', name: 'toolbar' },
+    { abbrv: 'e-', name: 'equipment' }
+];
+
 // Need to process the current slot against the dropped slot.
 // If the current slot is the same as drop. Do nothing. *
 // If the current slot is in the same category as the drop. Update.
@@ -19,105 +26,106 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         return;
     }
 
-    console.log(`-- Debug`);
-    console.log(selectedSlot);
-    console.log(endSlot);
-    console.log(pageIndex);
+    if (selectedSlot === endSlot) {
+        player.sync().inventory();
+        return;
+    }
+
+    // The data locations on `player.data` we are using.
+    const selectData = DataNames.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
+    const endData = DataNames.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
+
+    const selectSlotIndex = stripCategory(selectedSlot);
+    const endSlotIndex = stripCategory(endSlot);
+
+    // Remove From Slots
+    const selectItems: Array<Item> = removeFromSlot(
+        player,
+        selectData.name,
+        selectSlotIndex,
+        selectData.name === 'inventory' ? pageIndex : null
+    );
+
+    if (selectItems.length <= 0) {
+        player.sync().inventory();
+        return;
+    }
+
+    console.log(endData);
+
+    const endItems: Array<Item> = removeFromSlot(
+        player,
+        endData.name,
+        endSlotIndex,
+        endData.name === 'inventory' ? pageIndex : null
+    );
+
+    const selectItem = selectItems[0];
+    const endItem = endItems[0];
+
+    if (endItems.length <= 0) {
+        console.log('placing');
+        addToSlot(player, selectItem, endData.name, endSlotIndex, endData.name === 'inventory' ? pageIndex : null);
+    } else {
+        console.log('swapping');
+        addToSlot(player, selectItem, endData.name, endSlotIndex, selectData.name === 'inventory' ? pageIndex : null);
+        addToSlot(player, endItem, selectData.name, selectSlotIndex, endData.name === 'inventory' ? pageIndex : null);
+    }
+
+    if (selectData.name !== endData.name) {
+        // Uses different name variables
+        player.save().field(selectData.name, player.data[selectData.name]);
+        player.save().field(endData.name, player.data[endData.name]);
+    } else {
+        // Uses same name variable
+        player.save().field(selectData.name, player.data[selectData.name]);
+    }
+
+    console.log(player.data.inventory[0]);
+    alt.log(`Should have moved: ${selectedSlot} to ${endSlot}`);
+    player.sync().inventory();
 }
 
-//     if (selectedSlot === endSlot) {
-//         player.sync().inventory();
-//         return;
-//     }
+function addToSlot(
+    player: alt.Player,
+    existingItem: Item,
+    dataName: string,
+    slot: number,
+    pageIndex: number = null
+): boolean {
+    if (!player.data[dataName]) {
+        alt.log(`${dataName} does not exist for inventory data.`);
+        return false;
+    }
 
-//     // Handle ground drops first here.
+    existingItem.slot = slot;
 
-//     const selectedItem = getItem(player, selectedSlot, pageIndex);
-//     const endItem = getItem(player, endSlot, pageIndex);
+    if (pageIndex !== null) {
+        player.data[dataName][pageIndex].push(existingItem);
+        console.log(player.data[dataName][pageIndex]);
+        return true;
+    }
 
-//     console.log(selectedItem);
-//     console.log(endItem);
+    player.data[dataName].push(existingItem);
+    console.log(player.data[dataName]);
+    return true;
+}
 
-//     if (!selectedItem || !endItem) {
-//         player.sync().inventory();
-//         return;
-//     }
+function removeFromSlot(player: alt.Player, dataName: string, index: number, pageIndex: number = null): Array<Item> {
+    if (!player.data[dataName]) {
+        alt.log(`${dataName} does not exist for inventory data.`);
+        return [];
+    }
 
-//     if (!selectedItem.item) {
-//         player.sync().inventory();
-//         return;
-//     }
+    if (pageIndex !== null) {
+        const itemIndex = player.data[dataName][pageIndex].findIndex((x: Item) => x.slot === index);
+        return player.data[dataName][pageIndex].splice(itemIndex, 1);
+    }
 
-//     // Handle Same Category Moves
-//     if (selectedItem.dataName === endItem.dataName) {
-//         // Update 'i-' against a null item.
-//         if (selectedItem.usesPageIndex && !endItem.item) {
-//             p
-//             player.data[selectedItem.dataName][pageIndex][selectedItem.index].slot = endItem.index;
-//         } else {
-//             player.data[selectedItem.dataName][selectedItem.index].slot = endItem.index;
-//         }
+    const itemIndex = player.data[dataName].findIndex((x: Item) => x.slot === index);
+    return player.data[dataName].splice(itemIndex, 1);
+}
 
-//         player.save().field(selectedItem.dataName, player.data[selectedItem.dataName]);
-//         player.sync().inventory();
-
-//         console.log(player.data.inventory);
-//         return;
-//     }
-
-//     console.log(selectedSlot);
-//     console.log(endSlot);
-// }
-
-// /**
-//  * Fetches item information, index, and what data slot it belongs to.
-//  * @param {alt.Player} player
-//  * @param {string} value
-//  * @param {number} pageIndex
-//  * @return {*}  {({ dataName: string; index: number; item: Partial<Item> | null })}
-//  */
-// function getItem(
-//     player: alt.Player,
-//     value: string,
-//     pageIndex: number
-// ): { dataName: string; index: number; item: Partial<Item> | null; usesPageIndex: boolean } {
-//     const slot = stripCategory(value);
-
-//     if (value.includes('i-')) {
-//         const index = player.data.inventory[pageIndex].findIndex((item) => item.slot === slot);
-//         if (index <= -1) {
-//             return { dataName: 'inventory', index: slot, item: null, usesPageIndex: true };
-//         }
-
-//         return {
-//             dataName: 'inventory',
-//             index: slot,
-//             item: player.data.inventory[pageIndex][slot],
-//             usesPageIndex: true
-//         };
-//     }
-
-//     if (value.includes('e-')) {
-//         const item = player.data.equipment[slot];
-//         if (!item) {
-//             return { dataName: 'equipment', index: slot, item: null, usesPageIndex: false };
-//         }
-
-//         return { dataName: 'equipment', index: slot, item, usesPageIndex: false };
-//     }
-
-//     if (value.includes('t-')) {
-//         const item = player.data.equipment[slot];
-//         if (!item) {
-//             return { dataName: 'toolbar', index: slot, item: null, usesPageIndex: false };
-//         }
-
-//         return { dataName: 'toolbar', index: slot, item, usesPageIndex: false };
-//     }
-
-//     return null;
-// }
-
-// function stripCategory(value: string): number {
-//     return parseInt(value.replace(/.-/gm, ''));
-// }
+function stripCategory(value: string): number {
+    return parseInt(value.replace(/.-/gm, ''));
+}

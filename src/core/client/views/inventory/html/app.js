@@ -31,30 +31,46 @@ const app = new Vue({
          * List of items to append to the inventory data.
          * @param {Array<Object>} items
          */
-        updateItems(itemTabs) {
+        updateInventory(inventoryItems) {
             this.inventory = new Array(6).fill(new Array(28).fill(null));
-            itemTabs.forEach((items, index) => {
+            inventoryItems.forEach((items, index) => {
                 items.forEach((item) => {
+                    if (!item) {
+                        return;
+                    }
+
                     this.inventory[index][item.slot] = item;
                 });
             });
         },
         updateGround(groundItems) {
             this.ground = new Array(8).fill(null);
-            groundItems.forEach((item, index) => {
-                this.ground[index] = item;
+            groundItems.forEach((item) => {
+                if (!item) {
+                    return;
+                }
+
+                this.ground[item.slot] = item;
             });
         },
         updateEquipment(equipmentItems) {
             this.equipment = new Array(9).fill(null);
-            equipmentItems.forEach((item, index) => {
-                this.equipment[index] = item;
+            equipmentItems.forEach((item) => {
+                if (!item) {
+                    return;
+                }
+
+                this.equipment[item.slot] = item;
             });
         },
         updateToolbar(toolbarItems) {
             this.toolbar = new Array(4).fill(null);
-            toolbarItems.forEach((item, index) => {
-                this.toolbar[index] = item;
+            toolbarItems.forEach((item) => {
+                if (!item) {
+                    return;
+                }
+
+                this.toolbar[item.slot] = item;
             });
         },
         setIndex(value) {
@@ -89,6 +105,12 @@ const app = new Vue({
             this.itemInfo = null;
         },
         selectItem(e, index) {
+            console.log('cleek');
+
+            if (this.dragging) {
+                return;
+            }
+
             this.dragging = true;
 
             // Calculate Element Size
@@ -131,8 +153,6 @@ const app = new Vue({
                 this.lastHoverID = null;
             }
 
-            this.dragging = false;
-
             if (!e || !e.target || !e.target.id || e.target.id === '') {
                 return;
             }
@@ -144,6 +164,8 @@ const app = new Vue({
             }
         },
         dropItem(e) {
+            this.dragging = false;
+
             document.removeEventListener('mouseover', this.mouseOver);
             document.removeEventListener('mouseup', this.dropItem);
             document.removeEventListener('mousemove', this.updatePosition);
@@ -157,11 +179,11 @@ const app = new Vue({
 
             this.clonedElement.remove();
 
-            const element = document.getElementById(this.dragAndDrop.itemIndex);
-            element.style = this.dragAndDrop.selectedElement.style;
-            element.style.pointerEvents = 'all';
-            element.classList.remove(...element.classList);
-            element.classList.add(...this.dragAndDrop.selectedElement.classList.split(' '));
+            const selectElement = document.getElementById(this.dragAndDrop.itemIndex);
+            selectElement.style = this.dragAndDrop.selectedElement.style;
+            selectElement.style.pointerEvents = 'all';
+            selectElement.classList.remove(...selectElement.classList);
+            selectElement.classList.add(...this.dragAndDrop.selectedElement.classList.split(' '));
 
             this.x = 0;
             this.y = 0;
@@ -180,6 +202,83 @@ const app = new Vue({
             if ('alt' in window) {
                 alt.emit('inventory:Process', selectedSlot, endSlot, this.pageIndex);
             }
+
+            this.updateLocalData(selectedSlot, endSlot);
+        },
+        updateLocalData(selectedSlot, endSlot) {
+            const selectIndex = this.stripCategory(selectedSlot);
+            const endIndex = this.stripCategory(endSlot);
+
+            const selectName = this.getDataName(selectedSlot);
+            const endName = this.getDataName(endSlot);
+
+            const selectItems = [...this[selectName]];
+            const endItems = [...this[endName]];
+
+            const selectItem = this.removeLocalItem(selectIndex, selectName === 'inventory', selectItems);
+            const endItem = this.removeLocalItem(endIndex, endName === 'inventory', endItems);
+
+            if (endItem) {
+                endItem.slot = selectIndex;
+            }
+
+            selectItem.slot = endIndex;
+
+            this.replaceLocalData(endIndex, selectItem, endName === 'inventory', endItems);
+            this.replaceLocalData(selectIndex, endItem, selectName === 'inventory', selectItems);
+
+            const selectFunctionUpdater = `update${this.capitalizeFirst(selectName)}`;
+            const endFunctionUpdater = `update${this.capitalizeFirst(endName)}`;
+
+            console.log(selectItems);
+            console.log(endItems);
+
+            this[selectFunctionUpdater](selectItems);
+            this[endFunctionUpdater](endItems);
+        },
+        capitalizeFirst(value) {
+            return value.charAt(0).toUpperCase() + value.slice(1);
+        },
+        getDataName(prefix) {
+            if (prefix.includes('tab-')) {
+                return 'tab';
+            }
+
+            if (prefix.includes('i-')) {
+                return 'inventory';
+            }
+
+            if (prefix.includes('g-')) {
+                return 'ground';
+            }
+
+            if (prefix.includes('e-')) {
+                return 'equipment';
+            }
+
+            return 'toolbar';
+        },
+        removeLocalItem(index, isInventory = false, localArray) {
+            if (isInventory) {
+                const itemClone = localArray[this.pageIndex][index];
+                localArray[this.pageIndex][index] = null;
+                return itemClone;
+            }
+
+            const itemClone = localArray[index];
+            localArray[index] = null;
+            return itemClone;
+        },
+        replaceLocalData(index, replacementItem, isInventory = false, localArray) {
+            if (isInventory) {
+                localArray[this.pageIndex][index] = replacementItem;
+                return;
+            }
+
+            localArray[index] = replacementItem;
+        },
+        stripCategory(value) {
+            return parseInt(value.replace(/.-/gm, ''));
         },
         handleClose(keyPress) {
             if (keyPress.key !== 'Escape') {
@@ -193,11 +292,6 @@ const app = new Vue({
                     alt.emit('inventory:Close');
                 }
             }, 50);
-        },
-        handleProcess(inventory, equipment, toolbar) {
-            this.updateItems(inventory);
-            this.updateEquipment(equipment);
-            this.updateToolbar(toolbar);
         }
     },
     computed: {
@@ -274,7 +368,9 @@ const app = new Vue({
         this.toolbar = new Array(4).fill(null);
 
         if ('alt' in window) {
-            alt.on('inventory:Process', this.handleProcess);
+            alt.on('inventory:Toolbar', this.updateToolbar);
+            alt.on('inventory:Inventory', this.updateInventory);
+            alt.on('inventory:Equipment', this.updateEquipment);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {
@@ -329,7 +425,7 @@ const app = new Vue({
 
             this.updateToolbar([]);
             this.updateGround(ground);
-            this.updateItems([items, [], [], [], [], [], []]);
+            this.updateInventory([items, [], [], [], [], [], []]);
             this.updateEquipment([
                 {
                     name: `Hat`,
