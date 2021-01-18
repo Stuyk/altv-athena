@@ -2,6 +2,7 @@ import { Vector3 } from 'alt-server';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
+import { Item } from './Item';
 
 export interface Character {
     _id?: string;
@@ -15,6 +16,9 @@ export interface Character {
     isDead: boolean;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
+    inventory: Array<Array<Partial<Item>>>;
+    equipment: Array<Partial<Item>>;
+    toolbar: Array<Partial<Item>>;
 }
 
 export const CharacterDefaults: Partial<Character> = {

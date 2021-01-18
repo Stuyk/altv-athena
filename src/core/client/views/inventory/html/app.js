@@ -32,10 +32,8 @@ const app = new Vue({
          * @param {Array<Object>} items
          */
         updateItems(itemTabs) {
-            this.inventory = new Array(6).fill([]);
+            this.inventory = new Array(6).fill(new Array(28).fill(null));
             itemTabs.forEach((items, index) => {
-                this.inventory[index] = new Array(28).fill(null);
-
                 items.forEach((item) => {
                     this.inventory[index][item.slot] = item;
                 });
@@ -172,8 +170,34 @@ const app = new Vue({
                 return;
             }
 
-            const id = e.target.id;
-            console.log(id);
+            const selectedSlot = this.dragAndDrop.itemIndex;
+            const endSlot = e.target.id;
+
+            if (selectedSlot === endSlot) {
+                return;
+            }
+
+            if ('alt' in window) {
+                alt.emit('inventory:Process', selectedSlot, endSlot, this.pageIndex);
+            }
+        },
+        handleClose(keyPress) {
+            if (keyPress.key !== 'Escape') {
+                return;
+            }
+
+            document.removeEventListener('keyup', this.handleClose);
+
+            setTimeout(() => {
+                if ('alt' in window) {
+                    alt.emit('inventory:Close');
+                }
+            }, 50);
+        },
+        handleProcess(inventory, equipment, toolbar) {
+            this.updateItems(inventory);
+            this.updateEquipment(equipment);
+            this.updateToolbar(toolbar);
         }
     },
     computed: {
@@ -241,7 +265,17 @@ const app = new Vue({
         }
     },
     mounted() {
+        document.addEventListener('keyup', this.handleClose);
+
+        // Used to populate data on entry.
+        this.inventory = new Array(6).fill(new Array(28).fill(null));
+        this.ground = new Array(8).fill(null);
+        this.equipment = new Array(9).fill(null);
+        this.toolbar = new Array(4).fill(null);
+
         if ('alt' in window) {
+            alt.on('inventory:Process', this.handleProcess);
+            alt.emit('inventory:Update');
             alt.emit('ready');
         } else {
             // Debug / Development Mode

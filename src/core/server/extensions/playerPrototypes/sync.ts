@@ -18,6 +18,12 @@ export interface SyncPrototype {
     appearance(): void;
 
     /**
+     * Synchronize the player inventory, equipment, toolbar, etc.
+     * @memberof SyncPrototype
+     */
+    inventory(): void;
+
+    /**
      * Synchronize player data like ping, position, etc.
      * @memberof SyncPrototype
      */
@@ -40,6 +46,7 @@ export function bind() {
     const _this = this;
     _this.currencyData = currencyData;
     _this.appearance = appearance;
+    _this.inventory = inventory;
     _this.syncedMeta = syncedMeta;
     _this.time = time;
     _this.weather = weather;
@@ -76,6 +83,26 @@ function appearance(): void {
     p.setSyncedMeta('Name', p.data.name);
     p.emit().meta('appearance', p.data.appearance);
     p.emit().event(View_Events_Creator.Sync, p.data.appearance);
+}
+
+function inventory(): void {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
+    if (!p.data.inventory) {
+        p.data.inventory = new Array(6).fill(new Array());
+    }
+
+    if (!p.data.toolbar) {
+        p.data.toolbar = [];
+    }
+
+    if (!p.data.equipment) {
+        p.data.equipment = [];
+    }
+
+    p.emit().meta('inventory', p.data.inventory);
+    p.emit().meta('equipment', p.data.equipment);
+    p.emit().meta('toolbar', p.data.toolbar);
 }
 
 /**

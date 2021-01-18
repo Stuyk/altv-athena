@@ -54,6 +54,12 @@ export const commandList: Array<Command> = [
         permission: Permissions.Admin
     },
     {
+        name: 'dummyitem',
+        description: '/dummyitem - Adds a garbage debug item',
+        cooldown: 0,
+        permission: Permissions.Admin
+    },
+    {
         name: 'mc',
         description: '/mc [message] - Speak to other Moderators & Admins',
         cooldown: 0,

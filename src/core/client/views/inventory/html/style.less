@@ -219,7 +219,6 @@ body {
             .inventory-list {
                 display: grid;
                 box-sizing: border-box;
-                direction: rtl;
                 grid-template-columns: repeat(4, @item-dimensions);
                 grid-auto-rows: @item-dimensions;
                 grid-gap: @item-grid-gap;
@@ -227,14 +226,13 @@ body {
                 user-select: none;
                 width: 100%;
                 height: 100%;
-                padding-right: @item-grid-gap;
+                padding-left: @item-grid-gap;
                 padding-top: @item-grid-gap;
                 padding-bottom: @item-grid-gap;
                 overflow-y: scroll;
 
                 .item {
                     position: relative;
-                    direction: ltr;
                     cursor: pointer;
                     border: 2px solid transparent;
                     box-sizing: border-box !important;
@@ -318,7 +316,7 @@ body {
     .navigation {
         max-width: 6vw;
         position: absolute;
-        right: 0 - @item-dimensions / 1.25;
+        right: calc(-@item-dimensions + @item-grid-gap * 2);
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         z-index: 45;

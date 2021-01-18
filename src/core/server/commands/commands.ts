@@ -7,3 +7,4 @@ import './roleplay';
 import './setArmour';
 import './setHealth';
 import './updateweather';
+import './item';

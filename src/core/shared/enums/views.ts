@@ -11,6 +11,10 @@ export enum View_Events_Creator {
     AwaitName = 'creator:AwaitName'
 }
 
+export enum View_Events_Inventory {
+    Process = 'inventory:Process'
+}
+
 export enum View_Events_Characters {
     Select = 'characters:Select',
     New = 'characters:New',

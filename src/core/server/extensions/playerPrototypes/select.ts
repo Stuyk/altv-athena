@@ -36,6 +36,7 @@ async function character(characterData: Partial<Character>): Promise<void> {
         p.sync().currencyData();
         p.sync().weather();
         p.sync().time();
+        p.sync().inventory();
 
         // Resets their death status and logs them in as dead.
         if (p.data.isDead) {
