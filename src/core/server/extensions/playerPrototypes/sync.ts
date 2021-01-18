@@ -89,7 +89,10 @@ function inventory(): void {
     const p: alt.Player = (this as unknown) as alt.Player;
 
     if (!p.data.inventory) {
-        p.data.inventory = new Array(6).fill(new Array());
+        p.data.inventory = new Array(6);
+        for (let i = 0; i < p.data.inventory.length; i++) {
+            p.data.inventory[i] = [];
+        }
     }
 
     if (!p.data.toolbar) {

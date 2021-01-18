@@ -32,39 +32,53 @@ const app = new Vue({
          * @param {Array<Object>} items
          */
         updateInventory(inventoryItems) {
-            this.inventory = new Array(6).fill(new Array(28).fill(null));
-            inventoryItems.forEach((items, index) => {
-                items.forEach((item) => {
-                    if (!item) {
-                        return;
+            const newInventory = new Array(6);
+            for (let i = 0; i < newInventory.length; i++) {
+                newInventory[i] = new Array(28).fill(null);
+            }
+
+            // inventoryItems is an array of arrays.
+            // The first array is the pageIndex or tab.
+            for (let i = 0; i < inventoryItems.length; i++) {
+                const tabIndex = i;
+                for (let x = 0; x < inventoryItems[tabIndex].length; x++) {
+                    if (!inventoryItems[tabIndex][x]) {
+                        continue;
                     }
 
-                    this.inventory[index][item.slot] = item;
-                });
-            });
+                    const slot = inventoryItems[tabIndex][x].slot;
+                    newInventory[tabIndex][slot] = inventoryItems[tabIndex][x];
+                }
+            }
+
+            this.inventory = newInventory;
         },
         updateGround(groundItems) {
-            this.ground = new Array(8).fill(null);
+            const newGround = new Array(8).fill(null);
             groundItems.forEach((item) => {
                 if (!item) {
                     return;
                 }
 
-                this.ground[item.slot] = item;
+                newGround[item.slot] = item;
             });
+
+            this.ground = newGround;
         },
         updateEquipment(equipmentItems) {
-            this.equipment = new Array(9).fill(null);
+            const newEquipment = new Array(9).fill(null);
             equipmentItems.forEach((item) => {
                 if (!item) {
                     return;
                 }
 
-                this.equipment[item.slot] = item;
+                newEquipment[item.slot] = item;
             });
+
+            this.equipment = newEquipment;
         },
         updateToolbar(toolbarItems) {
-            this.toolbar = new Array(4).fill(null);
+            const newToolbar = new Array(4).fill(null);
             toolbarItems.forEach((item) => {
                 if (!item) {
                     return;
@@ -72,6 +86,8 @@ const app = new Vue({
 
                 this.toolbar[item.slot] = item;
             });
+
+            this.toolbar = newToolbar;
         },
         setIndex(value) {
             this.pageIndex = value;
@@ -81,7 +97,7 @@ const app = new Vue({
                 ? { 'light-blue': true, tab: true, 'mb-1': true, 'elevation-6': true }
                 : { grey: true, 'darken-4': true, tab: true, 'mb-1': true, 'elevation-6': true };
         },
-        getInventoryClass(isNull) {
+        getInventoryClass() {
             const classList = {};
 
             if (this.ground.length <= 0) {
@@ -105,8 +121,6 @@ const app = new Vue({
             this.itemInfo = null;
         },
         selectItem(e, index) {
-            console.log('cleek');
-
             if (this.dragging) {
                 return;
             }
@@ -163,7 +177,7 @@ const app = new Vue({
                 this.lastHoverID = e.target.id;
             }
         },
-        dropItem(e) {
+        async dropItem(e) {
             this.dragging = false;
 
             document.removeEventListener('mouseover', this.mouseOver);
@@ -199,11 +213,11 @@ const app = new Vue({
                 return;
             }
 
+            await this.updateLocalData(selectedSlot, endSlot);
+
             if ('alt' in window) {
                 alt.emit('inventory:Process', selectedSlot, endSlot, this.pageIndex);
             }
-
-            this.updateLocalData(selectedSlot, endSlot);
         },
         updateLocalData(selectedSlot, endSlot) {
             const selectIndex = this.stripCategory(selectedSlot);
@@ -229,9 +243,6 @@ const app = new Vue({
 
             const selectFunctionUpdater = `update${this.capitalizeFirst(selectName)}`;
             const endFunctionUpdater = `update${this.capitalizeFirst(endName)}`;
-
-            console.log(selectItems);
-            console.log(endItems);
 
             this[selectFunctionUpdater](selectItems);
             this[endFunctionUpdater](endItems);
@@ -295,6 +306,9 @@ const app = new Vue({
         }
     },
     computed: {
+        getInventory() {
+            return this.inventory[this.pageIndex];
+        },
         getItemInfo() {
             if (this.itemInfo.includes('g-')) {
                 return this.ground[parseInt(this.itemInfo.replace('g-', ''))];
@@ -391,18 +405,20 @@ const app = new Vue({
                 });
             }
 
-            items.push({
-                name: `Sack`,
-                uuid: `some_hash_thing_27`,
-                slot: 27,
-                description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
-                icon: 'sack',
-                quantity: Math.floor(Math.random() * 10),
-                weight: Math.floor(Math.random() * 5),
-                data: {
-                    water: 100
+            const slot2 = [
+                {
+                    name: `Sack`,
+                    uuid: `some_hash_thing_27`,
+                    slot: 27,
+                    description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
+                    icon: 'sack',
+                    quantity: Math.floor(Math.random() * 10),
+                    weight: Math.floor(Math.random() * 5),
+                    data: {
+                        water: 100
+                    }
                 }
-            });
+            ];
 
             const ground = [
                 {
@@ -425,7 +441,7 @@ const app = new Vue({
 
             this.updateToolbar([]);
             this.updateGround(ground);
-            this.updateInventory([items, [], [], [], [], [], []]);
+            this.updateInventory([items, slot2, [], [], [], [], []]);
             this.updateEquipment([
                 {
                     name: `Hat`,

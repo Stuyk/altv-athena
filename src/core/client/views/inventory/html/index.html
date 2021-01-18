@@ -100,7 +100,7 @@
                             <div class="inventory-list" :class="getInventoryClass()">
                                 <div 
                                     class="rounded grey darken-3" 
-                                    v-for="(item, index) in inventory[pageIndex]"
+                                    v-for="(item, index) in getInventory"
                                     :id="`i-${index}`"
                                     :key="index" 
                                     :class="!item ? { 'is-null-item': true } : { 'item': true }"
