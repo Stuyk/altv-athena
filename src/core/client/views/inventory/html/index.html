@@ -34,7 +34,7 @@
                                     </div>
                                 </template>
                                 <template v-else>
-                                    <div class="grey--text text--darken-2">
+                                    <div class="grey--text text--darken-2 no-pointer">
                                         {{ index + 1 }}
                                     </div>
                                 </template>
@@ -62,7 +62,9 @@
                                     </div>
                                 </template>
                                 <template v-else>
-                                    <div class="grey--text text--darken-2">{{ equipmentMeta[index] }}</div>
+                                    <div class="grey--text text--darken-2 no-pointer">
+                                        {{ equipmentMeta[index] }}
+                                    </div>
                                 </template>
                             </div>
                         </div>

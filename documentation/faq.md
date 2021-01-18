@@ -4,6 +4,22 @@ description: Frequently asked questions.
 
 # FAQ
 
+## Do I actually need to buy a license?
+
+If you respect the development that I'm doing and the open source nature of the project then yes. This costs me a lot of my personal time to create an environment that new developers and experienced developers will both understand with a little bit of time. I've written a lot of open source alt:V resources and this builds on experience you may not get otherwise.
+
+## Why should I buy this framework?
+
+If you're looking for a framework where you get the basics and you get to build off the rest then this is it. It will give you everything that you will need to spin up your very own Roleplay Server without breaking the bank to hire other Developers. You get my experience, and intellectual knowledge crafted into a neat package for your consumption. You get the right to modify, and use this framework by simply supporting the core development work needed to create a stable experience.
+
+## Do you provide custom support / scripts?
+
+I provide basic support for getting it running. However, I don't have enough time in my day to contribute to your project. The goals of Athena are solely my own and the features in which I target are dependent on what is needed before I can deploy another feature.
+
+## Will all features be free?
+
+The core features, items, etc. will always come with Athena. However, the data to construct complex jobs in the eventual Job Framework will likely become addons that you can get for your server. Feel free to write your own jobs though. 👍
+
 ## May I share my license?
 
 In the future licenses will be checked for multiple users and be restricted to around 2-3 IPs using it at once time. I feel it's fair that each license should belong to one individual or a small team.
