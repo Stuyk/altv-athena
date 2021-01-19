@@ -40,8 +40,6 @@ export class VehicleController {
     static nextControlPress: number = Date.now();
     static nextVehicleStateUpdate: number = Date.now() + TIME_BETWEEN_STATE_UPDATES;
 
-    constructor() {}
-
     /**
      * This controls what keys were pressed and what boolean to change for a key press.
      * Called from the events/keyup.ts file.
@@ -50,6 +48,10 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static triggerVehicleFunction(booleanName: string): void {
+        if (!alt.Player.local.isInteractionOn) {
+            return;
+        }
+
         this[booleanName] = true;
     }
 

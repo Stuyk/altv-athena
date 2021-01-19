@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
@@ -14,6 +15,7 @@ export class InteractionController {
     static tick: number;
     static isOn: boolean = false;
     static pressedKey: boolean = false;
+    static isAlwaysOn: boolean = false;
     static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 
     static triggerInteraction(): void {
@@ -21,6 +23,11 @@ export class InteractionController {
     }
 
     static toggleInteractionMode(): void {
+        // Prevents clearing the interaction and is forced into being on all of the time.
+        if (InteractionController.isAlwaysOn) {
+            return;
+        }
+
         if (InteractionController.tick) {
             alt.clearInterval(InteractionController.tick);
             InteractionController.tick = null;
@@ -33,6 +40,7 @@ export class InteractionController {
         }
 
         alt.Player.local.isInteractionOn = true;
+        InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
     }
 
@@ -81,4 +89,8 @@ export class InteractionController {
             }
         }
     }
+}
+
+if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
+    InteractionController.toggleInteractionMode();
 }

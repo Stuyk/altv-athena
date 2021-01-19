@@ -53,7 +53,7 @@ export class BaseHUD {
         alt.emitServer(View_Events_Chat.Send, message);
     }
 
-    static async populateCommands(commandList: Array<Partial<Command>>) {
+    static populateCommands(commandList: Array<Partial<Command>>): void {
         handleFreezePlayer(false);
 
         alt.log(`[Athena] Registered Commands: ${commandList.length}`);

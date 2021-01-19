@@ -15,6 +15,7 @@ description: List of all the changes and current versions.
 + ChatController now used by all commands for description population
 + ChatController now supports command aliases
 + Added vehicle.setLock to Vehicle Prototypes
++ Added INTERACTION_ALWAYS_ON which keeps interaction mode running 24/7 for SHARED_CONFIG
 ```
 
 ## 1.1.0 - January 12-15, 2021
