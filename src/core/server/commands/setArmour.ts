@@ -1,13 +1,18 @@
 import * as alt from 'alt-server';
-import { getDescription } from '../../shared/commands/commandList';
+import { Permissions } from '../../shared/flags/permissions';
 import { CommandsLocale } from '../../shared/locale/commands';
-import { addCommand } from '../systems/chat';
+import ChatController from '../systems/chat';
 
-addCommand('setarmour', handleCommand);
+ChatController.addCommand(
+    'setarmour',
+    '/setarmour [0 - 100] [player_id]* - Set armour for self or others',
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
-        player.emit().message(getDescription('setarmour'));
+        player.emit().message(ChatController.getDescription('setarmour'));
         return;
     }
 

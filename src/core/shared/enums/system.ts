@@ -1,6 +1,10 @@
 export enum SYSTEM_EVENTS {
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     //
+    INTERACTION = 'player:Interact',
+    INTERACTION_ATM = 'atm:Open',
+    INTERACTION_ATM_ACTION = 'atm:Action',
+    //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',
     //
@@ -17,9 +21,7 @@ export enum SYSTEM_EVENTS {
     //
     PLAYER_TICK = 'player:Tick',
     //
-    INTERACTION = 'player:Interact',
-    INTERACTION_ATM = 'atm:Open',
-    INTERACTION_ATM_ACTION = 'atm:Action',
+    POPULATE_COMMANDS = 'commands:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',

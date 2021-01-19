@@ -4,6 +4,19 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.2.0 - January 16-x, 2021
+
+```diff
++ Inventory Design
++ Inventory Item Swapping Architecture
++ Inventory Events
++ Changed Command Handler and Command Propogation
++ Changed Chat to a ChatController Class
++ ChatController now used by all commands for description population
++ ChatController now supports command aliases
++ Added vehicle.setLock to Vehicle Prototypes
+```
+
 ## 1.1.0 - January 12-15, 2021
 
 ```diff

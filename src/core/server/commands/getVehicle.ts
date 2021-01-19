@@ -1,14 +1,15 @@
 import * as alt from 'alt-server';
-import { addCommand } from '../systems/chat';
-import { getDescription } from '../../shared/commands/commandList';
+import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
 import { CommandsLocale } from '../../shared/locale/commands';
+import { Permissions } from '../../shared/flags/permissions';
 
-addCommand('getvehicle', handleCommand);
+ChatController.addCommand('vehicle', '/vehicle [name] - Spawn an admin vehicle', Permissions.Admin, handleCommand);
+ChatController.addAliases('vehicle', ['getvehicle', 'addvehicle']);
 
 function handleCommand(player: alt.Player, name: string): void {
     if (!name) {
-        player.emit().message(getDescription('getvehicle'));
+        player.emit().message(ChatController.getDescription('vehicle'));
         return;
     }
 

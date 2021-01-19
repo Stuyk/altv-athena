@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { sleep } from '../../client/utility/sleep';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { Item } from '../../shared/interfaces/Item';
 

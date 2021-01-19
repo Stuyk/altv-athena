@@ -98,6 +98,14 @@ declare module 'alt-server' {
         setIntoVehicle(player: alt.Player, seat: Vehicle_Seat_List): void;
 
         /**
+         * Set the lock state for this vehicle.
+         * @param {alt.Player} player
+         * @param {Vehicle_Lock_State} lockState
+         * @memberof Vehicle
+         */
+        setLock(player: alt.Player, lockState: Vehicle_Lock_State): boolean;
+
+        /**
          * Set the owner of this vehicle.
          * @param {alt.Player} player
          * @memberof Vehicle
@@ -141,6 +149,26 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass:
     }
 
     return v.athenaLockState;
+};
+
+alt.Vehicle.prototype.setLock = function setLock(player: alt.Player, lockState: Vehicle_Lock_State): boolean {
+    const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.isOwner(player) && !v.hasKeys(player)) {
+        return false;
+    }
+
+    v.athenaLockState = lockState;
+    v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+
+    // Automatically Close All Doors in Locked State
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
+        for (let i = 0; i < 6; i++) {
+            v.setDoorOpen(player, i, false);
+        }
+    }
+
+    return true;
 };
 
 alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.Player): void {

@@ -1,8 +1,9 @@
 import * as alt from 'alt-server';
+import { Permissions } from '../../shared/flags/permissions';
 import { CommandsLocale } from '../../shared/locale/commands';
-import { addCommand } from '../systems/chat';
+import ChatController from '../systems/chat';
 
-addCommand('revive', handleCommand);
+ChatController.addCommand('revive', '/revive [player_id]* - Revive self or others', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player, targetPlayerID: string | null = null): void {
     if (targetPlayerID === null) {

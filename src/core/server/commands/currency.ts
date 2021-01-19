@@ -1,9 +1,10 @@
 import * as alt from 'alt-server';
 import { CommandsLocale } from '../../shared/locale/commands';
 import { CurrencyTypes } from '../../shared/enums/currency';
-import { addCommand } from '../systems/chat';
+import ChatController from '../systems/chat';
+import { Permissions } from '../../shared/flags/permissions';
 
-addCommand('setcash', handleCommand);
+ChatController.addCommand('setcash', '/setcash [amount] [id]* - Add cash', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player, amount: string, id: string | null = null): void {
     if (id === null) {

@@ -1,18 +1,27 @@
 import * as alt from 'alt-server';
-import { addCommand } from '../systems/chat';
-import { getDescription } from '../../shared/commands/commandList';
+import ChatController from '../systems/chat';
 import { getPlayersByPermissionLevel } from '../utility/filters';
 import { Permissions } from '../../shared/flags/permissions';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
 
-addCommand('broadcast', handleBroadcast);
-addCommand('ac', handleAdminChat);
-addCommand('mc', handleModeratorChat);
+ChatController.addCommand(
+    'broadcast',
+    '/broadcast [message] - Announce server-wide',
+    Permissions.Admin,
+    handleBroadcast
+);
+ChatController.addCommand('ac', '/ac [message] - Speak to other Admins', Permissions.Admin, handleAdminChat);
+ChatController.addCommand(
+    'mc',
+    '/mc [message] - Speak to other Admins and Moderators',
+    Permissions.Moderator | Permissions.Admin,
+    handleModeratorChat
+);
 
 function handleAdminChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('ac'));
+        player.emit().message(ChatController.getDescription('ac'));
         return;
     }
 
@@ -22,7 +31,7 @@ function handleAdminChat(player: alt.Player, ...args): void {
 
 function handleModeratorChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('mc'));
+        player.emit().message(ChatController.getDescription('mc'));
         return;
     }
 
@@ -32,7 +41,7 @@ function handleModeratorChat(player: alt.Player, ...args): void {
 
 function handleBroadcast(player: alt.Player, ...args) {
     if (args.length <= 0) {
-        player.emit().message(getDescription('broadcast'));
+        player.emit().message(ChatController.getDescription('broadcast'));
         return;
     }
 

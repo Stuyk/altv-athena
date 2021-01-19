@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/Character';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import ChatController from '../../systems/chat';
 
 export interface SelectPrototype {
     /**
@@ -49,6 +50,8 @@ async function character(characterData: Partial<Character>): Promise<void> {
             p.emit().meta('isDead', false);
         }
 
+        // Command Propagation
+        ChatController.populateCommands(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 

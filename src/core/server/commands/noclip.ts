@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
-import { addCommand } from '../systems/chat';
+import ChatController from '../systems/chat';
 import { CommandsLocale } from '../../shared/locale/commands';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Permissions } from '../../shared/flags/permissions';
 
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);
 alt.onClient(SYSTEM_EVENTS.NOCLIP_UPDATE, handleCamUpdate);
 
-addCommand('noclip', handleCommand);
+ChatController.addCommand('noclip', '/noclip -  Toggles noclip mode.', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping');

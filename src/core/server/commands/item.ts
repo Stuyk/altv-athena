@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
-import { addCommand } from '../systems/chat';
-import { getDescription } from '../../shared/commands/commandList';
-import { getVectorInFrontOfPlayer } from '../utility/vector';
+import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
+import { Permissions } from '../../shared/flags/permissions';
 
 const itemRef: Item = {
     name: `Gun`,
@@ -22,7 +21,7 @@ const itemRef: Item = {
     }
 };
 
-addCommand('dummyitem', handleCommand);
+ChatController.addCommand('dummyitem', '/dummyitem - Get a dummy item for debug', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
     const itemClone = { ...itemRef };
