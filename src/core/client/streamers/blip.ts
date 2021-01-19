@@ -3,8 +3,9 @@ import gridData from '../../shared/information/gridData';
 import { Blip, StreamBlip } from '../extensions/blip';
 import { distance2d } from '../../shared/utility/vector';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
-const MAX_BLIP_STREAM_DISTANCE = 750;
+const MAX_BLIP_STREAM_DISTANCE = SHARED_CONFIG.MAX_BLIP_STREAM_DISTANCE;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {
     atm: [],
     gas: []
@@ -42,37 +43,35 @@ async function handleStreamChanges(): Promise<void> {
     }
 
     if (lastGridSpace !== gridSpace && hasPopulatedOnce) {
-        await Blip.clearEntireCategory('atm');
-        await Blip.clearEntireCategory('gas');
-        streamBlips['atm'] = [];
-        streamBlips['gas'] = [];
+        for (let i = 0; i < categoriesWithDistance.length; i++) {
+            await Blip.clearEntireCategory(categoriesWithDistance[i]);
+            streamBlips[categoriesWithDistance[i]] = [];
+        }
     }
 
-    // Create All New Blip Instances Here
-    const atms = gridData[gridSpace].objects.atm;
-    for (let i = 0; i < atms.length; i++) {
-        const atm = atms[i];
-        const pos = {
-            x: atm.Position.X,
-            y: atm.Position.Y,
-            z: atm.Position.Z
-        } as alt.Vector3;
+    for (let i = 0; i < categoriesWithDistance.length; i++) {
+        const categoryName = categoriesWithDistance[i];
+        const category = gridData[gridSpace].objects[categoryName]; // Get Array of Data
+        for (let x = 0; x < category.length; x++) {
+            const data = category[x];
+            const pos = {
+                x: data.Position.X,
+                y: data.Position.Y,
+                z: data.Position.Z
+            } as alt.Vector3;
 
-        const newStreamBlip = new StreamBlip(pos, 108, 2, 'ATM', 'atm', MAX_BLIP_STREAM_DISTANCE, true);
-        streamBlips.atm.push(newStreamBlip);
-    }
+            const newStreamBlip = new StreamBlip(
+                pos,
+                108,
+                2,
+                categoryName.toUpperCase(),
+                categoryName.toLocaleLowerCase(),
+                MAX_BLIP_STREAM_DISTANCE,
+                true
+            );
 
-    const gasStations = gridData[gridSpace].objects.gas;
-    for (let i = 0; i < gasStations.length; i++) {
-        const gas = gasStations[i];
-        const pos = {
-            x: gas.Position.X,
-            y: gas.Position.Y,
-            z: gas.Position.Z
-        } as alt.Vector3;
-
-        const newStreamBlip = new StreamBlip(pos, 361, 6, 'Gas Station', 'gas', MAX_BLIP_STREAM_DISTANCE, true);
-        streamBlips.gas.push(newStreamBlip);
+            streamBlips[categoryName].push(newStreamBlip);
+        }
     }
 
     if (!hasPopulatedOnce) {
@@ -108,7 +107,7 @@ function updateCategory(category: string): void {
         blip.safeCreate();
     }
 
-    if (lastRange > 8) {
+    if (lastRange > SHARED_CONFIG.MAX_INTERACTION_RANGE) {
         alt.Player.local.closestInteraction = null;
     }
 }

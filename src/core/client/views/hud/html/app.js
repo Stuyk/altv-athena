@@ -336,7 +336,6 @@ const app = new Vue({
             alt.on('hud:Audio3D', this.audio3D);
             alt.on('hud:HelpText', this.setHelpText);
             alt.on('hud:HelpState', this.setHelpState);
-            alt.emit('chat:Inject');
         } else {
             let count = 0;
             setInterval(() => {

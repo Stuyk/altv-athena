@@ -46,14 +46,17 @@ export class InteractionController {
 
     static handleInteractionMode() {
         if (alt.Player.local.isMenuOpen) {
+            this.pressedKey = false;
             return;
         }
 
         if (alt.Player.local.isChatOpen) {
+            this.pressedKey = false;
             return;
         }
 
         if (alt.Player.local.meta.isDead) {
+            this.pressedKey = false;
             return;
         }
 

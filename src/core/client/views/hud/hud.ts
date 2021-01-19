@@ -22,7 +22,6 @@ export class BaseHUD {
             BaseHUD.view = new alt.WebView(url, false);
             BaseHUD.view.isVisible = false;
             BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
-            BaseHUD.view.on('chat:Inject', BaseHUD.populateCommands);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
 
             alt.setTimeout(() => {
