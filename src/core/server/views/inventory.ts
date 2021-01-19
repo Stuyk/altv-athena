@@ -31,12 +31,21 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         return;
     }
 
+    console.log(selectedSlot);
+    console.log(endSlot);
+
     // The data locations on `player.data` we are using.
     const selectData = DataNames.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
     const endData = DataNames.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
 
+    console.log(selectData);
+    console.log(endData);
+
     const selectSlotIndex = stripCategory(selectedSlot);
     const endSlotIndex = stripCategory(endSlot);
+
+    console.log(selectSlotIndex);
+    console.log(endSlotIndex);
 
     // Remove From Slots
     const selectItems: Array<Item> = removeFromSlot(
@@ -46,12 +55,12 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         selectData.name === 'inventory' ? pageIndex : null
     );
 
+    console.log(selectItems);
+
     if (selectItems.length <= 0) {
         player.sync().inventory();
         return;
     }
-
-    console.log(endData);
 
     const endItems: Array<Item> = removeFromSlot(
         player,
@@ -59,6 +68,8 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         endSlotIndex,
         endData.name === 'inventory' ? pageIndex : null
     );
+
+    console.log(endItems);
 
     const selectItem = selectItems[0];
     const endItem = endItems[0];
@@ -78,10 +89,8 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         player.save().field(endData.name, player.data[endData.name]);
     } else {
         // Uses same name variable
-        player.save().field(selectData.name, player.data[selectData.name]);
+        player.save().field(endData.name, player.data[endData.name]);
     }
-
-    console.log(player.data.inventory[0]);
     alt.log(`Should have moved: ${selectedSlot} to ${endSlot}`);
     player.sync().inventory();
 }
@@ -98,27 +107,27 @@ function addToSlot(
         return false;
     }
 
+    console.log(`${dataName}, ${slot}, ${pageIndex}`);
+
     existingItem.slot = slot;
 
     if (pageIndex !== null) {
         player.data[dataName][pageIndex].push(existingItem);
-        console.log(player.data[dataName][pageIndex]);
         return true;
     }
 
     player.data[dataName].push(existingItem);
-    console.log(player.data[dataName]);
     return true;
 }
 
 function removeFromSlot(player: alt.Player, dataName: string, index: number, pageIndex: number = null): Array<Item> {
-    if (!player.data[dataName]) {
-        alt.log(`${dataName} does not exist for inventory data.`);
-        return [];
-    }
-
     if (pageIndex !== null) {
+        console.log('reading inventory data');
         const itemIndex = player.data[dataName][pageIndex].findIndex((x: Item) => x.slot === index);
+        if (itemIndex <= -1) {
+            return [];
+        }
+
         return player.data[dataName][pageIndex].splice(itemIndex, 1);
     }
 

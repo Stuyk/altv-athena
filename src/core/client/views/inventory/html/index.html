@@ -19,7 +19,7 @@
                                 :id="`t-${index}`" 
                                 :class="!item ? { 'is-null-item': true } : { 'item': true }"
                                 v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
-                                :id="`t-${index}`">
+                                >
                                 <template v-if="item">
                                     <div class="icon no-pointer">
                                         <img :src="`../icons/${item.icon}.svg`"></img>

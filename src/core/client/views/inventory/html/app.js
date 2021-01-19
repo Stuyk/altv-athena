@@ -79,12 +79,13 @@ const app = new Vue({
         },
         updateToolbar(toolbarItems) {
             const newToolbar = new Array(4).fill(null);
+
             toolbarItems.forEach((item) => {
                 if (!item) {
                     return;
                 }
 
-                this.toolbar[item.slot] = item;
+                newToolbar[item.slot] = item;
             });
 
             this.toolbar = newToolbar;
