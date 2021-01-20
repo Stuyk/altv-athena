@@ -191,6 +191,11 @@ alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State
 
 alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x) => x === target.data._id.toString());
     if (index !== -1) {
         return true;
@@ -203,6 +208,11 @@ alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean 
 
 alt.Vehicle.prototype.hasKeys = function hasKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x: string) => x === target.data._id.toString());
     if (index <= -1) {
         return false;
@@ -228,6 +238,11 @@ alt.Vehicle.prototype.isOwner = function isOwner(target: alt.Player): boolean {
 
 alt.Vehicle.prototype.removeKeys = function removeKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x) => x === target.data._id.toString());
     if (index <= -1) {
         return true;

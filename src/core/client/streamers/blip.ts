@@ -32,12 +32,11 @@ async function handleStreamChanges(): Promise<void> {
         return;
     }
 
-    if (!lastGridSpace) {
+    if (lastGridSpace === null || lastGridSpace === undefined) {
         lastGridSpace = gridSpace;
     }
 
     if (lastGridSpace === gridSpace && hasPopulatedOnce) {
-        lastGridSpace = gridSpace;
         categoriesWithDistance.forEach(updateCategory);
         return;
     }
@@ -88,26 +87,38 @@ async function handleStreamChanges(): Promise<void> {
  */
 function updateCategory(category: string): void {
     const blips = streamBlips[category];
-    let lastRange: number = distance2d(alt.Player.local.pos, streamBlips[category][0].pos);
+    let lastRange: number = alt.Player.local.closestInteraction
+        ? distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position)
+        : MAX_BLIP_STREAM_DISTANCE;
+
+    let closestBlip: { type: string; position: alt.Vector3 };
 
     for (let i = 0; i < blips.length; i++) {
         const blip = blips[i];
-        const range: null | number = blip.isInRange();
+        const range = distance2d(alt.Player.local.pos, blip.pos);
 
-        if (range === null) {
+        if (range > MAX_BLIP_STREAM_DISTANCE) {
+            alt.log(range);
             blip.safeDestroy();
             continue;
         }
 
         if (range < lastRange) {
-            alt.Player.local.closestInteraction = { type: category, position: blips[i].pos };
+            closestBlip = { type: category, position: blip.pos };
             lastRange = range;
         }
 
         blip.safeCreate();
     }
 
+    if (!closestBlip) {
+        return;
+    }
+
     if (lastRange > SHARED_CONFIG.MAX_INTERACTION_RANGE) {
         alt.Player.local.closestInteraction = null;
+        return;
     }
+
+    alt.Player.local.closestInteraction = closestBlip;
 }

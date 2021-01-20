@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { drawLine } from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
@@ -7,8 +8,8 @@ import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { VehicleController } from './vehicle';
 
-const MAX_INTERACTION_DRAW = 3; // Draws the key to press near the object.
-const MAX_CHECKPOINT_DRAW = 4;
+const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
+const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 1000;
 
 export class InteractionController {

@@ -32,6 +32,7 @@ function handleInteraction(player: alt.Player, type: string): void {
     const allObjectPositions: Array<{ pos: alt.Vector3 }> = categoryObjects.map((d) => {
         return { pos: new alt.Vector3(d.Position.X, d.Position.Y, d.Position.Z) };
     });
+
     const closestPosition = getClosestVectorByPos(player.pos, allObjectPositions);
 
     if (!closestPosition) {

@@ -51,3 +51,7 @@ Turn down your MSAA in your graphics settings. It apparently happens depending o
 ## What server hosts do your recommend for deployment?
 
 OVH (Game Servers Only), Linode, Avoro, AWS. I do not recommend a server host that cannot provide you a linux shell you can connect to and customize for your server's deployment and get the right database software installed. Look for a dedicated server or a vps that isn't just over FTP. You should be uploading your gamemode to a private repository and pulling it down on your server.
+
+## Black Screen after Authorization?
+
+This means that you either don't have ports setup or the user who is trying to connect does not have UPNP/NAT Enabled which allows for traffic from alt:V to communicate with them. Please ensure that they setup their own router to allow this.
