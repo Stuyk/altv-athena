@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { InventoryType } from '../../shared/enums/inventoryTypes';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { Item } from '../../shared/interfaces/Item';
 
@@ -30,21 +31,12 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         return;
     }
 
-    console.log(selectedSlot);
-    console.log(endSlot);
-
     // The data locations on `player.data` we are using.
     const selectData = DataNames.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
     const endData = DataNames.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
 
-    console.log(selectData);
-    console.log(endData);
-
     const selectSlotIndex = stripCategory(selectedSlot);
     const endSlotIndex = stripCategory(endSlot);
-
-    console.log(selectSlotIndex);
-    console.log(endSlotIndex);
 
     // Remove From Slots
     const selectItems: Array<Item> = removeFromSlot(
@@ -54,9 +46,7 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         selectData.name === 'inventory' ? pageIndex : null
     );
 
-    console.log(selectItems);
-
-    if (selectItems.length <= 0) {
+    if (selectItems.length <= 0 || selectItems[0] === null) {
         player.sync().inventory();
         return;
     }
@@ -68,16 +58,12 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
         endData.name === 'inventory' ? pageIndex : null
     );
 
-    console.log(endItems);
-
     const selectItem = selectItems[0];
     const endItem = endItems[0];
 
     if (endItems.length <= 0) {
-        console.log('placing');
         addToSlot(player, selectItem, endData.name, endSlotIndex, endData.name === 'inventory' ? pageIndex : null);
     } else {
-        console.log('swapping');
         addToSlot(player, selectItem, endData.name, endSlotIndex, selectData.name === 'inventory' ? pageIndex : null);
         addToSlot(player, endItem, selectData.name, selectSlotIndex, endData.name === 'inventory' ? pageIndex : null);
     }
@@ -94,44 +80,56 @@ function handleProcess(player: alt.Player, selectedSlot: string, endSlot: string
     player.sync().inventory();
 }
 
+/**
+ * Adds an item to a slot.
+ * @param {alt.Player} player
+ * @param {Item} existingItem
+ * @param {InventoryType} dataName
+ * @param {number} slot
+ * @param {number} pageIndex
+ * @return {*}  {boolean}
+ */
 function addToSlot(
     player: alt.Player,
     existingItem: Item,
-    dataName: string,
+    type: InventoryType | string,
     slot: number,
-    pageIndex: number = null
+    pageIndex: number
 ): boolean {
-    if (!player.data[dataName]) {
-        alt.log(`${dataName} does not exist for inventory data.`);
+    if (!player.data[type]) {
+        alt.log(`${type} does not exist for inventory data.`);
         return false;
     }
-
-    console.log(`${dataName}, ${slot}, ${pageIndex}`);
 
     existingItem.slot = slot;
 
     if (pageIndex !== null) {
-        player.data[dataName][pageIndex].push(existingItem);
+        player.data[type][pageIndex].push(existingItem);
         return true;
     }
 
-    player.data[dataName].push(existingItem);
+    player.data[type].push(existingItem);
     return true;
 }
 
-function removeFromSlot(player: alt.Player, dataName: string, index: number, pageIndex: number = null): Array<Item> {
+function removeFromSlot(
+    player: alt.Player,
+    type: InventoryType | string,
+    index: number,
+    pageIndex: number = null
+): Array<Item> {
     if (pageIndex !== null) {
         console.log('reading inventory data');
-        const itemIndex = player.data[dataName][pageIndex].findIndex((x: Item) => x.slot === index);
+        const itemIndex = player.data[type][pageIndex].findIndex((x: Item) => x.slot === index);
         if (itemIndex <= -1) {
             return [];
         }
 
-        return player.data[dataName][pageIndex].splice(itemIndex, 1);
+        return player.data[type][pageIndex].splice(itemIndex, 1);
     }
 
-    const itemIndex = player.data[dataName].findIndex((x: Item) => x.slot === index);
-    return player.data[dataName].splice(itemIndex, 1);
+    const itemIndex = player.data[type].findIndex((x: Item) => x.slot === index);
+    return player.data[type].splice(itemIndex, 1);
 }
 
 function stripCategory(value: string): number {

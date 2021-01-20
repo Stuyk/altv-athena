@@ -6,6 +6,7 @@ import { Account } from '../interface/Account';
 import * as currency from './playerPrototypes/currency';
 import * as dataUpdater from './playerPrototypes/dataUpdater';
 import * as emit from './playerPrototypes/emit';
+import * as inventory from './playerPrototypes/inventory';
 import * as newProto from './playerPrototypes/new';
 import * as safe from './playerPrototypes/safe';
 import * as save from './playerPrototypes/save';
@@ -67,6 +68,13 @@ declare module 'alt-server' {
         emit(): emit.EmitPrototype;
 
         /**
+         * Handles all inventory related functionality.
+         * @return {*}  {inventory.InventoryPrototype}
+         * @memberof Player
+         */
+        inventory(): inventory.InventoryPrototype;
+
+        /**
          * New Character, Vehicle, etc. for this player.
          * @type {newProto.NewDataPrototype}
          * @memberof Player
@@ -116,6 +124,7 @@ declare module 'alt-server' {
 alt.Player.prototype.currency = currency.bind;
 alt.Player.prototype.dataUpdater = dataUpdater.bind;
 alt.Player.prototype.emit = emit.bind;
+alt.Player.prototype.inventory = inventory.bind;
 alt.Player.prototype.newData = newProto.bind;
 alt.Player.prototype.safe = safe.bind;
 alt.Player.prototype.save = save.bind;
