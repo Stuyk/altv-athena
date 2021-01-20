@@ -89,7 +89,18 @@ async function runBooter() {
         process.exit(1);
     }
 
-    fns = await loadWASM<InjectedFunctions>('ares', aresBuffer);
+    fns = await loadWASM<InjectedFunctions>('ares', aresBuffer).catch((err) => {
+        try {
+            const data = JSON.parse(aresBuffer);
+            alt.logError(`Status: ${data.status} | Error: ${data.message}`);
+        } catch (err) {}
+        return null;
+    });
+
+    if (!fns) {
+        return;
+    }
+
     fns.bd(mongoURL, collections, handleFiles);
 }
 

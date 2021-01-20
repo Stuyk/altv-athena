@@ -13,6 +13,7 @@ import * as save from './playerPrototypes/save';
 import * as select from './playerPrototypes/select';
 import * as set from './playerPrototypes/set';
 import * as sync from './playerPrototypes/sync';
+import * as utility from './playerPrototypes/utility';
 
 declare module 'alt-server' {
     export interface Player {
@@ -117,7 +118,12 @@ declare module 'alt-server' {
          */
         sync(): sync.SyncPrototype;
 
-        invoke<T>(...args): any;
+        /**
+         * Useful functions for determining what is near, far, etc.
+         * @return {*}  {utility.UtilityPrototype}
+         * @memberof Player
+         */
+        utility(): utility.UtilityPrototype;
     }
 }
 
@@ -131,3 +137,4 @@ alt.Player.prototype.save = save.bind;
 alt.Player.prototype.select = select.bind;
 alt.Player.prototype.set = set.bind;
 alt.Player.prototype.sync = sync.bind;
+alt.Player.prototype.utility = utility.bind;

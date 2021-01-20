@@ -6,9 +6,9 @@ alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, handleUpdateToken);
 alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_FETCH, handleFetchQT);
 
 function handleUpdateToken(hash: string) {
-    const instance = alt.LocalStorage.get();
-    instance.set('qt', hash);
-    instance.save();
+    //const instance = alt.LocalStorage.get();
+    //instance.set('qt', hash);
+    //instance.save();
 }
 
 async function handleFetchQT() {
