@@ -22,6 +22,10 @@ export class LoginController {
             alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
         }
 
+        if (account && account.discord) {
+            alt.log(`[Athena] (${player.id}) Discord ${account.discord} has logged in with a Quick Token `);
+        }
+
         const currentPlayers = [...alt.Player.all];
         const index = currentPlayers.findIndex((p) => p.discord && p.discord.id === data.id && p.id !== player.id);
 
@@ -56,14 +60,16 @@ export class LoginController {
         goToCharacterSelect(player);
     }
 
-    static async tryDisconnect(player: alt.Player, reason: string): Promise<void> {
-        if (!player.data || !player.name || player.pendingCharacterSelect || player.pendingCharacterEdit) {
+    static tryDisconnect(player: alt.Player, reason: string): void {
+        if (!player || !player.valid || !player.data) {
             return;
         }
 
+        const playerRef = { ...player };
+
         try {
-            alt.log(`${player.name} has logged out.`);
-            playerFuncs.save.onTick(player);
+            alt.log(`${playerRef.name} has logged out.`);
+            playerFuncs.save.onTick(playerRef as alt.Player);
         } catch (err) {
             alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
             alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/Character';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { DEFAULT_CONFIG } from '../../athena/main';
 import ChatController from '../../systems/chat';
 import sync from './sync';
 import setter from './setter';
@@ -23,7 +24,16 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
     setter.frozen(p, true);
 
     alt.setTimeout(() => {
-        safe.setPosition(p, p.data.pos.x, p.data.pos.y, p.data.pos.z);
+        if (p.data.pos) {
+            safe.setPosition(p, p.data.pos.x, p.data.pos.y, p.data.pos.z);
+        } else {
+            safe.setPosition(
+                p,
+                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
+                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
+                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
+            );
+        }
 
         // Check if health exists.
         if (p.data.health) {

@@ -8,7 +8,7 @@ description: List of all the changes and current versions.
 
 ```diff
 + Inventory Design
-+ Inventory Item Swapping Architecture
++ Inventory Item Movement Architecture
 + Inventory Events
 + Changed Command Handler and Command Propogation
 + Changed Chat to a ChatController Class
@@ -16,6 +16,7 @@ description: List of all the changes and current versions.
 + ChatController now supports command aliases
 + Added vehicle.setLock to Vehicle Prototypes
 + Added INTERACTION_ALWAYS_ON which keeps interaction mode running 24/7 for SHARED_CONFIG
++ Reverted All Player Prototypes (Events not always working)
 + Decoupled Prototype Logic (Prototypes were overwhelmed and too much data).
 + Created playerFuncs export in place of Prototypes
 + Finished Inventory Controller Core Functionality
