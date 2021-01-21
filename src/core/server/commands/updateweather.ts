@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
+import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
@@ -10,5 +11,5 @@ ChatController.addCommand(
 );
 
 function handleCommand(player: alt.Player): void {
-    player.sync().weather();
+    playerFuncs.sync.weather(player);
 }

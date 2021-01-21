@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { AnimationFlags } from '../../shared/flags/animation';
 import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
+import { playerFuncs } from '../extensions/Player';
 
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
 alt.onClient(Vehicle_Events.SET_DOOR, handleSetDoor);
@@ -27,27 +28,26 @@ function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
 
     const lockState = vehicle.cycleLock(player, false);
 
-    player.emit().notification(`Vehicle Lock Set to ~y~${Vehicle_Lock_State[lockState].replace('_', ' ')}`);
+    playerFuncs.emit.notification(player, `Vehicle Lock Set to ~y~${Vehicle_Lock_State[lockState].replace('_', ' ')}`);
 
     if (lockState !== Vehicle_Lock_State.LOCKED && lockState !== Vehicle_Lock_State.UNLOCKED) {
         return;
     }
 
     if (!player.vehicle) {
-        player
-            .emit()
-            .animation(
-                `anim@mp_player_intmenu@key_fob@`,
-                'fob_click_fp',
-                AnimationFlags.UPPERBODY_ONLY | AnimationFlags.ENABLE_PLAYER_CONTROL,
-                -1
-            );
+        playerFuncs.emit.animation(
+            player,
+            `anim@mp_player_intmenu@key_fob@`,
+            'fob_click_fp',
+            AnimationFlags.UPPERBODY_ONLY | AnimationFlags.ENABLE_PLAYER_CONTROL,
+            -1
+        );
     }
 
     const soundName = lockState === Vehicle_Lock_State.UNLOCKED ? 'car_unlock' : 'car_lock';
     const playersNearPlayer = getPlayersByGridSpace(player, 8);
     playersNearPlayer.forEach((target) => {
-        target.emit().sound3D(soundName, vehicle);
+        playerFuncs.emit.sound3D(target, soundName, vehicle);
     });
 }
 

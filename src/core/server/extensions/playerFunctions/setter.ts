@@ -6,56 +6,13 @@ import { Database, getDatabase } from 'simplymongo';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { distance2d } from '../../../shared/utility/vector';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import emit from './emit';
+import save from './save';
+import dataUpdater from './dataUpdater';
+import safe from './safe';
+import sync from './sync';
 
 const db: Database = getDatabase();
-
-export interface SetPrototype {
-    /**
-     * Set the account data for this player after they login.
-     * @param {Partial<Account>} accountData
-     * @return {*}  {Promise<void>}
-     * @memberof SetPrototype
-     */
-    account(accountData: Partial<Account>): Promise<void>;
-
-    /**
-     *
-     * @param {alt.Player} killer
-     * @param {*} weaponHash
-     * @memberof SetPrototype
-     */
-    dead(killer?: alt.Player, weaponHash?: any): void;
-
-    /**
-     * Called when a player does their first connection to the server.
-     * @memberof SetPrototype
-     */
-    firstConnect(): void;
-
-    /**
-     * Set if this player should be frozen.
-     * @param {boolean} value
-     * @memberof SetPrototype
-     */
-    frozen(value: boolean): void;
-
-    /**
-     * Set this player as respawned.
-     * @param {(alt.Vector3 | null)} position Use null to find closest hospital.
-     * @memberof SetPrototype
-     */
-    respawned(position: alt.Vector3 | null): void;
-}
-
-export function bind(): SetPrototype {
-    const _this = this;
-    _this.account = account;
-    _this.dead = dead;
-    _this.firstConnect = firstConnect;
-    _this.frozen = frozen;
-    _this.respawned = respawned;
-    return _this;
-}
 
 /**
  * Set the current account data for this player.
@@ -63,9 +20,7 @@ export function bind(): SetPrototype {
  * @return {*}  {Promise<void>}
  * @memberof SetPrototype
  */
-async function account(accountData: Partial<Account>): Promise<void> {
-    const p: alt.Player = (this as unknown) as alt.Player;
-
+async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
         db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, 'accounts');
@@ -83,21 +38,26 @@ async function account(accountData: Partial<Account>): Promise<void> {
             'accounts'
         );
 
-        p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
+        alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
     }
 
-    p.emit().meta('permissionLevel', accountData.permissionLevel);
+    emit.meta(p, 'permissionLevel', accountData.permissionLevel);
     p.accountData = accountData;
 }
 
-function dead(killer: alt.Player = null, weaponHash: any = null): void {
-    const p: alt.Player = (this as unknown) as alt.Player;
+/**
+ *
+ * @param {alt.Player} killer
+ * @param {*} weaponHash
+ * @memberof SetPrototype
+ */
+function dead(p: alt.Player, killer: alt.Player = null, weaponHash: any = null): void {
     p.spawn(p.pos.x, p.pos.y, p.pos.z, 0);
 
     if (!p.data.isDead) {
         p.data.isDead = true;
-        p.emit().meta('isDead', true);
-        p.save().field('isDead', true);
+        emit.meta(p, 'isDead', true);
+        save.field(p, 'isDead', true);
         alt.log(`(${p.id}) ${p.data.name} has died.`);
     }
 
@@ -106,9 +66,11 @@ function dead(killer: alt.Player = null, weaponHash: any = null): void {
     }
 }
 
-async function firstConnect(): Promise<void> {
-    const p: alt.Player = (this as unknown) as alt.Player;
-
+/**
+ * Called when a player does their first connection to the server.
+ * @memberof SetPrototype
+ */
+async function firstConnect(p: alt.Player): Promise<void> {
     if (!p || !p.valid) {
         return;
     }
@@ -118,36 +80,31 @@ async function firstConnect(): Promise<void> {
     p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
     p.pendingLogin = true;
 
-    p.dataUpdater().init(null);
-    p.safe().setPosition(pos.x, pos.y, pos.z);
-    p.sync().time();
-    p.sync().weather();
-    p.emit().event(SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
+    dataUpdater.init(p, null);
+    safe.setPosition(p, pos.x, pos.y, pos.z);
+    sync.time(p);
+    sync.weather(p);
+    alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
 }
-
 /**
- * Set this player as frozen or unfrozen.
+ * Set if this player should be frozen.
  * @param {boolean} value
  * @memberof SetPrototype
  */
-function frozen(value: boolean): void {
-    const p: alt.Player = (this as unknown) as alt.Player;
-    p.emit().event(SYSTEM_EVENTS.PLAYER_SET_FREEZE, value);
+function frozen(p: alt.Player, value: boolean): void {
+    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_SET_FREEZE, value);
 }
 
 /**
  * Set this player as respawned.
- * Add a position if you want to override hospital spawn.
- * @param {alt.Vector3} [position=null]
+ * @param {(alt.Vector3 | null)} position Use null to find closest hospital.
  * @memberof SetPrototype
  */
-function respawned(position: alt.Vector3 = null): void {
-    const p: alt.Player = (this as unknown) as alt.Player;
-
+function respawned(p: alt.Player, position: alt.Vector3 = null): void {
     p.nextDeathSpawn = null;
     p.data.isDead = false;
-    p.emit().meta('isDead', false);
-    p.save().field('isDead', false);
+    emit.meta(p, 'isDead', false);
+    save.field(p, 'isDead', false);
 
     if (DEFAULT_CONFIG.RESPAWN_LOSE_WEAPONS) {
         p.removeAllWeapons();
@@ -172,8 +129,16 @@ function respawned(position: alt.Vector3 = null): void {
         nearestHopsital = hospitals[index] as alt.Vector3;
     }
 
-    p.safe().setPosition(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
+    safe.setPosition(p, nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
     p.spawn(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z, 0);
-    p.safe().addHealth(DEFAULT_CONFIG.RESPAWN_HEALTH, true);
-    p.safe().addArmour(DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
+    safe.addHealth(p, DEFAULT_CONFIG.RESPAWN_HEALTH, true);
+    safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
 }
+
+export default {
+    account,
+    dead,
+    firstConnect,
+    frozen,
+    respawned
+};

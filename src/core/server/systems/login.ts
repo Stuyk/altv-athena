@@ -9,6 +9,7 @@ import * as sm from 'simplymongo';
 import './tick';
 import './voice';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -30,7 +31,7 @@ export class LoginController {
         }
 
         player.discord = data as DiscordUser;
-        player.emit().event(View_Events_Discord.Close);
+        alt.emitClient(player, View_Events_Discord.Close);
 
         // Used for DiscordToken skirt.
         if (!account) {
@@ -51,7 +52,7 @@ export class LoginController {
             }
         }
 
-        await player.set().account(account);
+        await playerFuncs.set.account(player, account);
         goToCharacterSelect(player);
     }
 
@@ -62,7 +63,7 @@ export class LoginController {
 
         try {
             alt.log(`${player.name} has logged out.`);
-            player.save().onTick();
+            playerFuncs.save.onTick(player);
         } catch (err) {
             alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
             alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);

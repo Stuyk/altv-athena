@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 import './interaction';
 import './vehicle';
-import '../views/inventory';
 
 const timeBetweenPings = 4950;
 
@@ -23,12 +23,13 @@ function handlePing(player: alt.Player): void {
 
     player.nextPingTime = Date.now() + timeBetweenPings;
 
-    player.save().onTick();
-    player.sync().syncedMeta();
-    player.sync().time();
-    player.sync().weather();
+    playerFuncs.save.onTick(player);
+
+    playerFuncs.sync.syncedMeta(player);
+    playerFuncs.sync.time(player);
+    playerFuncs.sync.weather(player);
 
     if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn - 1000) {
-        player.set().respawned(null); // Uses null to find a hospital.
+        playerFuncs.set.respawned(player, null); // Uses null to find a hospital.
     }
 }

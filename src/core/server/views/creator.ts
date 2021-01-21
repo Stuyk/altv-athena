@@ -5,6 +5,7 @@ import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { goToCharacterSelect, handleNewCharacter } from './characters';
 import * as sm from 'simplymongo';
 import { Character } from '../../shared/interfaces/Character';
+import { playerFuncs } from '../extensions/Player';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -42,14 +43,14 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
 
     if (player.pendingNewCharacter) {
         player.pendingNewCharacter = false;
-        player.newData().character(appearance, info, name);
+        playerFuncs.createNew.character(appearance, info, name);
         return;
     }
 
     player.pendingCharacterEdit = false;
-    player.dataUpdater().updateByKeys(appearance, 'appearance');
-    player.dataUpdater().updateByKeys(info, 'info');
-    player.sync().appearance();
+    playerFuncs.dataUpdater.updateByKeys(player, appearance, 'appearance');
+    playerFuncs.dataUpdater.updateByKeys(player, info, 'info');
+    playerFuncs.sync.appearance(player);
 
     // Resync Position After Appearance for Interior Bug
     alt.setTimeout(() => {
@@ -57,7 +58,7 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
             return;
         }
 
-        player.safe().setPosition(player.pos.x, player.pos.y, player.pos.z);
+        playerFuncs.safe.setPosition(player, player.pos.x, player.pos.y, player.pos.z);
     }, 500);
 }
 

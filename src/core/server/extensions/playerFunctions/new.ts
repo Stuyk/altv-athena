@@ -3,26 +3,9 @@ import { Character, CharacterDefaults } from '../../../shared/interfaces/Charact
 import { Database, getDatabase } from 'simplymongo';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
+import select from './select';
 
 const db: Database = getDatabase();
-
-export interface NewDataPrototype {
-    /**
-     * Creates a new character and binds it to their account.
-     * @param {Partial<Appearance>} appearance
-     * @param {Partial<CharacterInfo>} info
-     * @param {string} name
-     * @return {*}  {Promise<void>}
-     * @memberof NewDataPrototype
-     */
-    character(appearance: Partial<Appearance>, info: Partial<CharacterInfo>, name: string): Promise<void>;
-}
-
-export function bind(): NewDataPrototype {
-    const _this = this;
-    _this.character = character;
-    return _this;
-}
 
 /**
  * Create a new character with appearance data and info for this player.
@@ -42,5 +25,9 @@ async function character(appearance: Partial<Appearance>, info: Partial<Characte
 
     const document = await db.insertData(newDocument, 'characters', true);
     document._id = document._id.toString(); // Re-cast id object as string.
-    p.select().character(document);
+    select.character(p, document);
 }
+
+export default {
+    character
+};

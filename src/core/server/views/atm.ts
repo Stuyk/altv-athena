@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 
 const ActionHandlers = {
     deposit: handleDeposit,
@@ -12,39 +13,39 @@ alt.onClient(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, handleAction);
 
 function handleAction(player: alt.Player, type: string, amount: string | number, id: null | number): void {
     if (isNaN(amount as number)) {
-        player.sync().currencyData();
+        playerFuncs.sync.currencyData(player);
         return;
     }
 
     amount = parseInt(amount as string);
 
     if (!amount || amount <= 0) {
-        player.sync().currencyData();
+        playerFuncs.sync.currencyData(player);
         return;
     }
 
     if (!ActionHandlers[type]) {
-        player.sync().currencyData();
+        playerFuncs.sync.currencyData(player);
         return;
     }
 
     const result = ActionHandlers[type](player, amount, id);
-    player.sync().currencyData();
+    playerFuncs.sync.currencyData(player);
 
     if (!result) {
-        player.emit().soundFrontend('Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     } else {
-        player.emit().soundFrontend('Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 }
 
 function handleDeposit(player: alt.Player, amount: number): boolean {
-    if (player.data.cash <= amount) {
+    if (player.data.cash < amount) {
         return false;
     }
 
-    player.currency().sub(CurrencyTypes.CASH, amount);
-    player.currency().add(CurrencyTypes.BANK, amount);
+    playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount);
+    playerFuncs.currency.add(player, CurrencyTypes.BANK, amount);
 
     return true;
 }
@@ -54,8 +55,8 @@ function handleWithdraw(player: alt.Player, amount: number): boolean {
         return false;
     }
 
-    player.currency().add(CurrencyTypes.CASH, amount);
-    player.currency().sub(CurrencyTypes.BANK, amount);
+    playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
+    playerFuncs.currency.add(player, CurrencyTypes.CASH, amount);
 
     return true;
 }
@@ -70,10 +71,14 @@ function handleTransfer(player: alt.Player, amount: number, id: string | number)
         return false;
     }
 
-    player.currency().sub(CurrencyTypes.BANK, amount);
-    target.currency().add(CurrencyTypes.BANK, amount);
+    if (amount > player.data.bank) {
+        return false;
+    }
 
-    target.emit().message(`You received: ${amount} from ${player.data.name}.`);
+    playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
+    playerFuncs.currency.add(target, CurrencyTypes.BANK, amount);
+
+    playerFuncs.emit.message(target, `You received: ${amount} from ${player.data.name}.`);
 
     return true;
 }

@@ -3,6 +3,7 @@ import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
 import { Permissions } from '../../shared/flags/permissions';
 import { ItemType } from '../../shared/enums/itemType';
+import { playerFuncs } from '../extensions/Player';
 
 const itemRef: Item = {
     name: `Gun`,
@@ -29,6 +30,6 @@ function handleCommand(player: alt.Player): void {
     const itemClone = { ...itemRef };
     itemClone.slot = 0;
     player.data.inventory[0].push(itemClone);
-    player.save().field('inventory', player.data.inventory);
-    player.sync().inventory();
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
 }

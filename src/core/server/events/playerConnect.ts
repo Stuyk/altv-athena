@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 import './playerDeath';
 
 alt.on('Discord:Opened', handlePlayerConnect);
@@ -19,7 +20,7 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
             return;
         }
 
-        player.set().firstConnect();
+        playerFuncs.set.firstConnect(player);
     }, 1000);
 }
 

@@ -4,6 +4,7 @@ import { getPlayersByPermissionLevel } from '../utility/filters';
 import { Permissions } from '../../shared/flags/permissions';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
+import { playerFuncs } from '../extensions/Player';
 
 ChatController.addCommand(
     'broadcast',
@@ -21,7 +22,7 @@ ChatController.addCommand(
 
 function handleAdminChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(ChatController.getDescription('ac'));
+        playerFuncs.emit.message(player, ChatController.getDescription('ac'));
         return;
     }
 
@@ -31,7 +32,7 @@ function handleAdminChat(player: alt.Player, ...args): void {
 
 function handleModeratorChat(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(ChatController.getDescription('mc'));
+        playerFuncs.emit.message(player, ChatController.getDescription('mc'));
         return;
     }
 
@@ -41,7 +42,7 @@ function handleModeratorChat(player: alt.Player, ...args): void {
 
 function handleBroadcast(player: alt.Player, ...args) {
     if (args.length <= 0) {
-        player.emit().message(ChatController.getDescription('broadcast'));
+        playerFuncs.emit.message(player, ChatController.getDescription('broadcast'));
         return;
     }
 

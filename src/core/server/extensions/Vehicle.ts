@@ -7,6 +7,7 @@ import {
     Vehicle_Seat_List,
     Vehicle_State
 } from '../../shared/enums/vehicle';
+import { playerFuncs } from './Player';
 
 /**
  * Overwrites the default functionality of vehicles.
@@ -177,7 +178,7 @@ alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.P
         return;
     }
 
-    player.safe().setPosition(player.pos.x, player.pos.y, player.pos.z);
+    playerFuncs.safe.setPosition(player, player.pos.x, player.pos.y, player.pos.z);
 };
 
 alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State {
@@ -307,7 +308,7 @@ alt.Vehicle.prototype.setIntoVehicle = function setIntoVehicle(player: alt.Playe
             return;
         }
 
-        player.emit().event(Vehicle_Events.SET_INTO, v, seat);
+        alt.emitClient(player, Vehicle_Events.SET_INTO, v, seat);
     });
 };
 
@@ -336,5 +337,5 @@ alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {
 
     v.engineStatus = !v.engineStatus ? true : false;
     v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
-    player.emit().notification(`Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
+    playerFuncs.emit.notification(player, `Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
 };

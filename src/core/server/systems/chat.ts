@@ -7,6 +7,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { emitAll } from '../utility/emitHelper';
 import { Permissions } from '../../shared/flags/permissions';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 
 const maxMessageLength: number = 128;
 
@@ -92,7 +93,7 @@ export default class ChatController {
         }
 
         if (player.data.isDead) {
-            player.emit().message(`You cannot send messages when you are dead.`);
+            playerFuncs.emit.message(player, `You cannot send messages when you are dead.`);
             return;
         }
 
@@ -117,13 +118,13 @@ export default class ChatController {
     static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
         const commandInfo = ChatController.commands[commandName];
         if (!commandInfo || !commandInfo.func) {
-            player.emit().message(`/${commandName} is not a valid command.`);
+            playerFuncs.emit.message(player, `/${commandName} is not a valid command.`);
             return;
         }
 
         if (commandInfo.permission !== 0) {
             if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
-                player.emit().message(`{FF0000} Command is not permitted.`);
+                playerFuncs.emit.message(player, `{FF0000} Command is not permitted.`);
                 return;
             }
         }
@@ -151,7 +152,7 @@ export default class ChatController {
             });
         });
 
-        player.emit().event(SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
     }
 }
 

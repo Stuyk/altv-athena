@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { Item } from '../../shared/interfaces/Item';
+import { playerFuncs } from '../extensions/Player';
 
 function stripCategory(value: string): number {
     return parseInt(value.replace(/.-/gm, ''));
@@ -36,23 +37,18 @@ export class InventoryController {
         }
 
         if (selectedSlot === endSlot) {
-            player.sync().inventory();
+            playerFuncs.sync.inventory(player);
             return;
         }
 
         // The data locations on `player.data` we are using.
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
         const endData = DataHelpers.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
-
-        console.log(selectData);
-        console.log(endData);
-
         const endSlotIndex = stripCategory(endSlot);
 
         // Check if the end slot is available.
         if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
-            alt.log('That slot is not available');
-            player.sync().inventory();
+            playerFuncs.sync.inventory(player);
             return;
         }
 
@@ -60,77 +56,31 @@ export class InventoryController {
         const itemClone = selectData.getItem(player, selectSlotIndex, tab);
 
         if (!itemClone) {
-            alt.log('That item does not exist');
-            player.sync().inventory();
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        // Check Equipment Validity
+        if (endData.name === 'equipment' && !playerFuncs.inventory.isEquipmentSlotValid(itemClone.slot, endSlotIndex)) {
+            playerFuncs.sync.inventory(player);
             return;
         }
 
         const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
         if (!didRemoveItem) {
-            alt.log('Could not remove item');
-            player.sync().inventory();
+            playerFuncs.sync.inventory(player);
             return;
         }
 
         const didAddItem = endData.addItem(player, itemClone, endSlotIndex, tab);
         if (!didAddItem) {
-            alt.log('Could not add item');
-            player.sync().inventory();
+            playerFuncs.sync.inventory(player);
             return;
         }
 
-        player.save().field(selectData.name, player.data[selectData.name]);
-        player.save().field(endData.name, player.data[endData.name]);
-        player.sync().inventory();
-        console.log('success?');
-    }
-
-    static isInventorySlotNull(player: alt.Player, slot: number, tab: number): boolean {
-        return player.inventory().isInventorySlotFree(tab, slot);
-    }
-
-    static isEquipmentSlotNull(player: alt.Player, slot: number): boolean {
-        return player.inventory().isEquipmentSlotFree(slot);
-    }
-
-    static isToolbarSlotNull(player: alt.Player, slot: number): boolean {
-        return player.inventory().isToolbarSlotFree(slot);
-    }
-
-    static getEquipmentItem(player: alt.Player, slot: number): Item | null {
-        return player.inventory().getEquipmentItem(slot);
-    }
-
-    static getInventoryItem(player: alt.Player, slot: number, tab: number): Item | null {
-        return player.inventory().getInventoryItem(tab, slot);
-    }
-
-    static getToolbarItem(player: alt.Player, slot: number): Item | null {
-        return player.inventory().getToolbarItem(slot);
-    }
-
-    static removeInventoryItem(player: alt.Player, slot: number, tab: number): boolean {
-        return player.inventory().inventoryRemove(tab, slot);
-    }
-
-    static removeToolbarItem(player: alt.Player, slot: number): boolean {
-        return player.inventory().toolbarRemove(slot);
-    }
-
-    static removeEquipmentItem(player: alt.Player, slot: number): boolean {
-        return player.inventory().equipmentRemove(slot);
-    }
-
-    static addInventoryItem(player: alt.Player, item: Item, slot: number, tab: number): boolean {
-        return player.inventory().inventoryAdd(item, slot, tab);
-    }
-
-    static addEquipmentItem(player: alt.Player, item: Item, slot: number): boolean {
-        return player.inventory().equipmentSet(item, slot);
-    }
-
-    static addToolbarItem(player: alt.Player, item: Item, slot: number): boolean {
-        return player.inventory().toolbarSet(item, slot);
+        playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
+        playerFuncs.save.field(player, endData.name, player.data[endData.name]);
+        playerFuncs.sync.inventory(player);
     }
 }
 
@@ -145,26 +95,26 @@ const DataHelpers: Array<{
     {
         abbrv: 'i-',
         name: 'inventory',
-        emptyCheck: InventoryController.isInventorySlotNull,
-        getItem: InventoryController.getInventoryItem,
-        removeItem: InventoryController.removeInventoryItem,
-        addItem: InventoryController.addInventoryItem
+        emptyCheck: playerFuncs.inventory.isInventorySlotFree,
+        getItem: playerFuncs.inventory.getInventoryItem,
+        removeItem: playerFuncs.inventory.inventoryRemove,
+        addItem: playerFuncs.inventory.inventoryAdd
     },
     {
         abbrv: 't-',
         name: 'toolbar',
-        emptyCheck: InventoryController.isToolbarSlotNull,
-        getItem: InventoryController.getToolbarItem,
-        removeItem: InventoryController.removeToolbarItem,
-        addItem: InventoryController.addToolbarItem
+        emptyCheck: playerFuncs.inventory.isToolbarSlotFree,
+        getItem: playerFuncs.inventory.getToolbarItem,
+        removeItem: playerFuncs.inventory.toolbarRemove,
+        addItem: playerFuncs.inventory.toolbarAdd
     },
     {
         abbrv: 'e-',
         name: 'equipment',
-        emptyCheck: InventoryController.isEquipmentSlotNull,
-        getItem: InventoryController.getEquipmentItem,
-        removeItem: InventoryController.removeEquipmentItem,
-        addItem: InventoryController.addEquipmentItem
+        emptyCheck: playerFuncs.inventory.isEquipmentSlotFree,
+        getItem: playerFuncs.inventory.getEquipmentItem,
+        removeItem: playerFuncs.inventory.equipmentRemove,
+        addItem: playerFuncs.inventory.equipmentAdd
     },
     { abbrv: 'g-', name: 'ground', emptyCheck: null, getItem: null, removeItem: null, addItem: null }
 ];
