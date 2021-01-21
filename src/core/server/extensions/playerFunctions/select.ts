@@ -24,8 +24,21 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
 
     alt.setTimeout(() => {
         safe.setPosition(p, p.data.pos.x, p.data.pos.y, p.data.pos.z);
-        safe.addHealth(p, p.data.health, true);
-        safe.addArmour(p, p.data.armour, true);
+
+        // Check if health exists.
+        if (p.data.health) {
+            safe.addHealth(p, p.data.health, true);
+        } else {
+            safe.addHealth(p, 200, true);
+        }
+
+        // Check if armour exists.
+        if (p.data.armour) {
+            safe.addArmour(p, p.data.armour, true);
+        } else {
+            safe.addArmour(p, 0, true);
+        }
+
         sync.currencyData(p);
         sync.weather(p);
         sync.time(p);

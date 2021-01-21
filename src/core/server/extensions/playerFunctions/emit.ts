@@ -58,6 +58,16 @@ function notification(p: alt.Player, message: string): void {
 }
 
 /**
+ * Play a sound without any positional data.
+ * @param {alt.Player} p
+ * @param {string} audioName
+ * @param {number} [volume=0.35]
+ */
+function sound2D(p: alt.Player, audioName: string, volume: number = 0.35) {
+    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume);
+}
+
+/**
  * Play a sound from at a target's location for this player.
  * @param {string} audioName
  * @param {alt.Entity} target
@@ -82,6 +92,7 @@ export default {
     meta,
     message,
     notification,
+    sound2D,
     sound3D,
     soundFrontend
 };

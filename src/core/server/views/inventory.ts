@@ -1,7 +1,19 @@
 import * as alt from 'alt-server';
+import { InventoryType } from '../../shared/enums/inventoryTypes';
+import { ItemType } from '../../shared/enums/itemType';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { Item } from '../../shared/interfaces/Item';
+import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
+
+interface CategoryData {
+    abbrv: string;
+    name: string;
+    emptyCheck?: Function;
+    getItem?: Function;
+    removeItem?: Function;
+    addItem?: Function;
+}
 
 function stripCategory(value: string): number {
     return parseInt(value.replace(/.-/gm, ''));
@@ -60,8 +72,7 @@ export class InventoryController {
             return;
         }
 
-        // Check Equipment Validity
-        if (endData.name === 'equipment' && !playerFuncs.inventory.isEquipmentSlotValid(itemClone.slot, endSlotIndex)) {
+        if (!InventoryController.allItemRulesValid(itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -81,17 +92,50 @@ export class InventoryController {
         playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
         playerFuncs.save.field(player, endData.name, player.data[endData.name]);
         playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+    }
+
+    /**
+     * Checks rules for all items being moved in inventory.
+     * @static
+     * @param {Item} item
+     * @param {CategoryData} endSlot
+     * @param {number} endSlotIndex
+     * @return {*}  {boolean}
+     * @memberof InventoryController
+     */
+    static allItemRulesValid(item: Item, endSlot: CategoryData, endSlotIndex: number): boolean {
+        if (!item.behavior) {
+            return true;
+        }
+
+        // If the item cannot be dropped.
+        if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
+            return false;
+        }
+
+        // If the item is being dragged into equipment and is not equipment.
+        if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+            return false;
+        }
+
+        // If the item is not marked as a tool but is being dragged into a toolbar.
+        if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
+            return false;
+        }
+
+        // Check if this is the correct inventory slot for an equipment item.
+        if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+            if (!playerFuncs.inventory.isEquipmentSlotValid(item, endSlotIndex)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 
-const DataHelpers: Array<{
-    abbrv: string;
-    name: string;
-    emptyCheck: Function;
-    getItem: Function;
-    removeItem: Function;
-    addItem: Function;
-}> = [
+const DataHelpers: Array<CategoryData> = [
     {
         abbrv: 'i-',
         name: 'inventory',

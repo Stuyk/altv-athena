@@ -458,6 +458,6 @@ export default {
     toolbarRemove
 };
 
-import('../../views/inventory').then((res) => {
-    console.log(res);
+import('../../views/inventory').catch((err) => {
+    throw err;
 });
