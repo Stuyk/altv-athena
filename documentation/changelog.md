@@ -22,6 +22,8 @@ description: List of all the changes and current versions.
 + Finished Inventory Controller Core Functionality
 + Added 2D Sound to Emit
 + Changed Item Swap Rule to Null Slots Only
++ Fixed First Spawn Bug
++ Fixed Login Details for Quick Token
 ```
 
 ## 1.1.0 - January 12-15, 2021
