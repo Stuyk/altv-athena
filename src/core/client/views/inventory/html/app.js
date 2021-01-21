@@ -210,6 +210,12 @@ const app = new Vue({
             const selectedSlot = this.dragAndDrop.itemIndex;
             const endSlot = e.target.id;
 
+            const endElement = document.getElementById(endSlot);
+
+            if (!endElement.classList.contains('is-null-item')) {
+                return;
+            }
+
             if (selectedSlot === endSlot) {
                 return;
             }

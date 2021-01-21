@@ -5,6 +5,35 @@ import { Item } from '../../../shared/interfaces/Item';
 
 export interface InventoryPrototype {
     /**
+     * Add an item to this player's inventory.
+     * If the tab & slot are not empty it will return false.
+     * @param {Item} item
+     * @param {number} tab
+     * @param {number} slot
+     * @return {*}  {boolean}
+     * @memberof InventoryPrototype
+     */
+    inventoryAdd(item: Item, tab: number, slot: number): boolean;
+
+    /**
+     * Remove an item from this player's inventory.
+     * Returns if the item is successfully removed from the slot.
+     * @param {number} tab
+     * @param {number} slot
+     * @return {*}  {boolean}
+     * @memberof InventoryPrototype
+     */
+    inventoryRemove(tab: number, slot: number): boolean;
+
+    /**
+     * Check if an equipment slot is free.
+     * @param {EquipmentType} slot
+     * @return {*}  {boolean}
+     * @memberof InventoryPrototype
+     */
+    isEquipmentSlotFree(slot: EquipmentType): boolean;
+
+    /**
      * Checks if an item is in the equipment data section.
      * Returns the index in the array of where this item is.
      * @param {Partial<Item>} item
@@ -24,24 +53,30 @@ export interface InventoryPrototype {
      */
     isInInventory(item: Partial<Item>): { tab: number; index: number } | null;
 
-    inventoryAdd(item: Item, tab: number, slot: number): boolean;
-
-    inventoryRemove(tab: number, slot: number): boolean;
+    /**
+     * Checks if an item is in the toolbar data section.
+     * Returns the index of the toolbar if it's present.
+     * Returns null if the slot is empty.
+     * @param {Partial<Item>} item
+     * @return {*}  {({ index: number } | null)}
+     * @memberof InventoryPrototype
+     */
+    isInToolbar(item: Partial<Item>): { index: number } | null;
 
     /**
-     * Check if an equipment slot is free.
-     * @param {EquipmentType} slot
+     * Check if a slot in the toolbar is free.
+     * @param {number} slot
      * @return {*}  {boolean}
      * @memberof InventoryPrototype
      */
-    isEquipmentSlotFree(slot: EquipmentType): boolean;
+    isToolbarSlotFree(slot: number): boolean;
 
     /**
      * Return the tab index and the slot to use for the item.
      * @return {*}  {({ tab: number; index: number } | null)}
      * @memberof InventoryPrototype
      */
-    getFreeSlot(): { tab: number; slot: number } | null;
+    getFreeInventorySlot(): { tab: number; slot: number } | null;
 
     /**
      * Remove an item from equipment base don slot.
@@ -59,22 +94,49 @@ export interface InventoryPrototype {
      * @memberof InventoryPrototype
      */
     equipmentSet(item: Item, slot: EquipmentType): boolean;
+
+    /**
+     * Removes an item from this player's toolbar.
+     * @param {number} slot
+     * @return {*}  {boolean}
+     * @memberof InventoryPrototype
+     */
+    toolbarRemove(slot: number): boolean;
+
+    /**
+     * Sets an item into the toolbar section of this player.
+     * Returns true if it was successfully set.
+     * @param {Item} item
+     * @param {number} slot
+     * @return {*}  {boolean}
+     * @memberof InventoryPrototype
+     */
+    toolbarSet(item: Item, slot: number): boolean;
 }
 
 export function bind(): InventoryPrototype {
     const _this = this;
-    _this.isInEquipment = isInEquipment;
-    _this.isInInventory = isInInventory;
-    _this.getFreeSlot = getFreeSlot;
+    // Inventory
+    _this.getFreeInventorySlot = getFreeInventorySlot;
     _this.inventoryAdd = inventoryAdd;
     _this.inventoryRemove = inventoryRemove;
+    _this.isInInventory = isInInventory;
+
+    // Equipment
     _this.isEquipmentSlotFree = isEquipmentSlotFree;
+    _this.isInEquipment = isInEquipment;
     _this.equipmentRemove = equipmentRemove;
     _this.equipmentSet = equipmentSet;
+
+    // Toolbar
+    _this.isInToolbar = isInToolbar;
+    _this.isToolbarSlotFree = isToolbarSlotFree;
+    _this.toolbarRemove = toolbarRemove;
+    _this.toolbarSet = toolbarSet;
     return _this;
 }
 
-function getFreeSlot(): { tab: number; slot: number } | null {
+function getFreeInventorySlot(): { tab: number; slot: number } | null {
     const p: alt.Player = (this as unknown) as alt.Player;
 
     for (let i = 0; i < p.data.inventory.length; i++) {
@@ -99,7 +161,7 @@ function getFreeSlot(): { tab: number; slot: number } | null {
     return null;
 }
 
-function isInInventory(item: Partial<Item>): { tab?: number; slot: number } | null {
+function isInInventory(item: Partial<Item>): { tab: number; index: number } | null {
     const p: alt.Player = (this as unknown) as alt.Player;
 
     for (let t = 0; t < p.data.inventory.length; t++) {
@@ -117,14 +179,14 @@ function isInInventory(item: Partial<Item>): { tab?: number; slot: number } | nu
                 continue;
             }
 
-            return { slot: inventoryItem.slot };
+            return { tab: t, index: i };
         }
     }
 
     return null;
 }
 
-function isInEquipment(item: Partial<Item>): { slot: number } | null {
+function isInEquipment(item: Partial<Item>): { index: number } | null {
     const p: alt.Player = (this as unknown) as alt.Player;
 
     if (!item) {
@@ -145,7 +207,7 @@ function isInEquipment(item: Partial<Item>): { slot: number } | null {
             continue;
         }
 
-        return { slot: equipmentItem.slot };
+        return { index: i };
     }
 
     return null;
@@ -186,8 +248,6 @@ function inventoryAdd(item: Item, tab: number, slot: number): boolean {
     p.save().field(InventoryType.INVENTORY, p.data.inventory);
     return true;
 }
-
-// function inventorySubQuantity(tab: number, slot: number): boolean {}
 
 function inventoryRemove(tab: number, slot: number): boolean {
     const p: alt.Player = (this as unknown) as alt.Player;
@@ -243,4 +303,69 @@ function equipmentSet(item: Item, slot: EquipmentType): boolean {
     p.data.equipment.push(item);
     p.save().field(InventoryType.EQUIPMENT, p.data.equipment);
     return true;
+}
+
+function isToolbarSlotFree(slot: number): boolean {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
+    if (p.data.toolbar.length >= 4) {
+        return false;
+    }
+
+    return p.data.toolbar.findIndex((item) => item.slot === slot) === -1 ? true : false;
+}
+
+function toolbarSet(item: Item, slot: number): boolean {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
+    if (!p.inventory().isToolbarSlotFree(slot)) {
+        return false;
+    }
+
+    // Update slot to match where it needs to go.
+    if (item.slot !== slot) {
+        item.slot = slot;
+    }
+
+    p.data.equipment.push(item);
+    p.save().field(InventoryType.EQUIPMENT, p.data.equipment);
+    return true;
+}
+
+function toolbarRemove(slot: number): boolean {
+    const p: alt.Player = (this as unknown) as alt.Player;
+    const index = p.data.toolbar.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    p.data.toolbar.splice(index, 1);
+    return true;
+}
+
+function isInToolbar(item: Partial<Item>): { index: number } | null {
+    const p: alt.Player = (this as unknown) as alt.Player;
+
+    if (!item) {
+        throw new Error(`[Athena] Specified item is null for isInToolbar`);
+    }
+
+    for (let i = 0; i < p.data.toolbar.length; i++) {
+        const toolbarItem = p.data.toolbar[i];
+
+        if (!toolbarItem) {
+            continue;
+        }
+
+        const objectKeys = Object.keys(item);
+        const keyIndex = objectKeys.findIndex((key) => item[key] === toolbarItem[key]);
+
+        if (keyIndex <= -1) {
+            continue;
+        }
+
+        return { index: i };
+    }
+
+    return null;
 }
