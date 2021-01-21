@@ -109,22 +109,22 @@ export class InventoryController {
             return true;
         }
 
-        // If the item cannot be dropped.
+        // Not droppable but trying to drop on ground.
         if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
             return false;
         }
 
-        // If the item is being dragged into equipment and is not equipment.
+        // Not equipment but going into equipment.
         if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
             return false;
         }
 
-        // If the item is not marked as a tool but is being dragged into a toolbar.
+        // Not a toolbar item but going into toolbar.
         if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
             return false;
         }
 
-        // Check if this is the correct inventory slot for an equipment item.
+        // Is equipment and is going into an equipment slot.
         if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
             if (!playerFuncs.inventory.isEquipmentSlotValid(item, endSlotIndex)) {
                 return false;

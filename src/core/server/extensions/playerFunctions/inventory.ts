@@ -173,7 +173,7 @@ function isInEquipment(p: alt.Player, item: Partial<Item>): { index: number } | 
  * @memberof InventoryPrototype
  */
 function isEquipmentSlotFree(p: alt.Player, slot: EquipmentType): boolean {
-    if (slot >= 4) {
+    if (slot >= 9) {
         return false;
     }
 
