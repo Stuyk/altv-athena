@@ -98,7 +98,6 @@ function updateCategory(category: string): void {
         const range = distance2d(alt.Player.local.pos, blip.pos);
 
         if (range > MAX_BLIP_STREAM_DISTANCE) {
-            alt.log(range);
             blip.safeDestroy();
             continue;
         }
