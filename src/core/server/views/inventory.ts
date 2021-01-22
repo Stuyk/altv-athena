@@ -169,6 +169,7 @@ export class InventoryController {
         });
 
         this.updateDroppedItemsAroundPlayer(player, true);
+        playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
     }
 
     static getDroppedItemsByGridSpace(gridSpace: number): Array<DroppedItem> {
@@ -281,6 +282,7 @@ export class InventoryController {
         playerFuncs.save.field(player, endData.name, player.data[endData.name]);
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
         this.updateDroppedItemsAroundPlayer(player, true);
     }
 }

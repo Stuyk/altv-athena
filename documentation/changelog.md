@@ -24,6 +24,9 @@ description: List of all the changes and current versions.
 + Changed Item Swap Rule to Null Slots Only
 + Fixed First Spawn Bug
 + Fixed Login Details for Quick Token
++ Items Droppable on Ground
++ Items Pickupable from Ground
++ Item Drop Markers
 ```
 
 ## 1.1.0 - January 12-15, 2021
