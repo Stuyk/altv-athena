@@ -131,6 +131,7 @@
                                 v-for="(item, index) in ground" 
                                 :class="!item ? { 'is-null-item': true } : { 'item': true }" 
                                 :id="`g-${index}`"
+                                :data-hash="item ? `${item.hash}` : ''"
                                 v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
                                 >
                                     <template v-if="item">

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { distance, distance2d } from '../../../shared/utility/vector';
+import { distance, distance2d, getClosestTypes } from '../../../shared/utility/vector';
 import { getClosestEntity, getForwardVector } from '../../utility/vector';
 
 /**
@@ -53,7 +53,18 @@ function getPlayerInFrontOf(p: alt.Player, distance: number): alt.Player | null 
     return getClosestEntity<alt.Player>(p.pos, p.rot, [...alt.Player.all], distance);
 }
 
+/**
+ * Gets the closest players in reference to the passed player.
+ * @param {alt.Player} p
+ * @param {number} distance
+ * @return {*}  {Array<alt.Player>}
+ */
+function getClosestPlayers(p: alt.Player, distance: number): Array<alt.Player> {
+    return getClosestTypes<alt.Player>(p.pos, alt.Player.all, distance, ['data', 'discord', 'accountData']);
+}
+
 export default {
+    getClosestPlayers,
     getDistanceTo2D,
     getDistanceTo3D,
     getPlayerInFrontOf,

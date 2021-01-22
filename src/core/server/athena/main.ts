@@ -39,6 +39,8 @@ export const DEFAULT_CONFIG = {
     BOOTUP_HOUR: 9,
     BOOTUP_MINUTE: 0,
     MINUTES_PER_MINUTE: 5,
+    // Inventory Properites
+    TIME_BETWEEN_INVENTORY_UPDATES: 10000,
     // World Properties
     VALID_HOSPITALS: [
         { x: -248.01309204101562, y: 6332.01513671875, z: 33.0750732421875 },

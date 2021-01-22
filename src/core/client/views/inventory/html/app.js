@@ -90,6 +90,28 @@ const app = new Vue({
 
             this.toolbar = newToolbar;
         },
+        updateGround(groundItems) {
+            const newGround = new Array(8).fill(null);
+
+            if (groundItems.length <= 0) {
+                this.ground = newGround;
+                return;
+            }
+
+            groundItems.forEach((groundItem, index) => {
+                if (index >= newGround.length) {
+                    return;
+                }
+
+                if (!groundItem) {
+                    return;
+                }
+
+                newGround[index] = groundItem.item;
+            });
+
+            this.ground = newGround;
+        },
         setIndex(value) {
             this.pageIndex = value;
         },
@@ -220,11 +242,13 @@ const app = new Vue({
                 return;
             }
 
-            await this.updateLocalData(selectedSlot, endSlot);
+            const hash = selectElement.dataset.hash ? `${selectElement.dataset.hash}` : null;
 
             if ('alt' in window) {
-                alt.emit('inventory:Process', selectedSlot, endSlot, this.pageIndex);
+                alt.emit('inventory:Process', { selectedSlot, endSlot, tab: this.pageIndex, hash });
             }
+
+            await this.updateLocalData(selectedSlot, endSlot);
         },
         updateLocalData(selectedSlot, endSlot) {
             const selectIndex = this.stripCategory(selectedSlot);
@@ -392,6 +416,7 @@ const app = new Vue({
             alt.on('inventory:Toolbar', this.updateToolbar);
             alt.on('inventory:Inventory', this.updateInventory);
             alt.on('inventory:Equipment', this.updateEquipment);
+            alt.on('inventory:Ground', this.updateGround);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {
@@ -429,19 +454,23 @@ const app = new Vue({
 
             const ground = [
                 {
-                    name: `Gun`,
-                    uuid: `some_hash_thing_ground`,
-                    description: `Forbidden pez dispenser go brrr.`,
-                    icon: 'gun',
-                    quantity: 1,
-                    weight: 2,
-                    data: {
-                        bang: true,
-                        ammo: 25,
-                        'gluten-free': true,
-                        owner: 'some_guy_off_main',
-                        condition: 50,
-                        rarity: `A+`
+                    position: { x: 0, y: 0, z: 0 },
+                    item: {
+                        name: `Gun`,
+                        uuid: `some_hash_thing_ground`,
+                        description: `Forbidden pez dispenser go brrr.`,
+                        icon: 'gun',
+                        quantity: 1,
+                        weight: 2,
+                        hash: '490218490129012',
+                        data: {
+                            bang: true,
+                            ammo: 25,
+                            'gluten-free': true,
+                            owner: 'some_guy_off_main',
+                            condition: 50,
+                            rarity: `A+`
+                        }
                     }
                 }
             ];

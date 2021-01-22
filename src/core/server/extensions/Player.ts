@@ -39,6 +39,7 @@ declare module 'alt-server' {
         // Status Effects
         nextDeathSpawn: number;
         nextPingTime: number;
+        nextItemSync: number;
 
         // World Data
         gridSpace: number;

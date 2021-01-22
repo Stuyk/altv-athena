@@ -1,10 +1,13 @@
 import * as alt from 'alt-server';
 import { InventoryType } from '../../shared/enums/inventoryTypes';
 import { ItemType } from '../../shared/enums/itemType';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Inventory } from '../../shared/enums/views';
-import { Item } from '../../shared/interfaces/Item';
+import { DroppedItem, Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
+import { sha256Random } from '../utility/encryption';
 
 interface CategoryData {
     abbrv: string;
@@ -41,9 +44,15 @@ function stripCategory(value: string): number {
  */
 
 export class InventoryController {
-    static groundItems = [];
+    static groundItems: Array<DroppedItem> = [];
 
-    static processItemMovement(player: alt.Player, selectedSlot: string, endSlot: string, tab: number): void {
+    static processItemMovement(
+        player: alt.Player,
+        selectedSlot: string,
+        endSlot: string,
+        tab: number,
+        hash: string | null
+    ): void {
         if (!player || !player.valid) {
             return;
         }
@@ -54,13 +63,26 @@ export class InventoryController {
         }
 
         // The data locations on `player.data` we are using.
-        const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
         const endData = DataHelpers.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
         const endSlotIndex = stripCategory(endSlot);
+
+        // Handle Drop Ground
+        if (endData.name === InventoryType.GROUND) {
+            InventoryController.handleDropGround(player, selectedSlot, tab);
+            return;
+        }
 
         // Check if the end slot is available.
         if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
             playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
+
+        // Pickup Item from Ground
+        if (selectData.name === InventoryType.GROUND) {
+            InventoryController.handlePickupGround(player, endData, endSlotIndex, hash, tab);
             return;
         }
 
@@ -93,6 +115,83 @@ export class InventoryController {
         playerFuncs.save.field(player, endData.name, player.data[endData.name]);
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+    }
+
+    /**
+     * Propogates the item to appear on the ground.
+     * @static
+     * @param {string} selectedSlot
+     * @param {number} tab
+     * @memberof InventoryController
+     */
+    static handleDropGround(player: alt.Player, selectedSlot: string, tab: number) {
+        const selectSlotIndex = stripCategory(selectedSlot);
+        const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
+
+        if (selectData.name === InventoryType.GROUND) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const itemClone = selectData.getItem(player, selectSlotIndex, tab);
+
+        if (player.vehicle) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!itemClone) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!isFlagEnabled(itemClone.behavior, ItemType.CAN_DROP)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
+        if (!didRemoveItem) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
+
+        itemClone.hash = sha256Random(JSON.stringify(itemClone));
+        InventoryController.groundItems.push({
+            gridSpace: player.gridSpace,
+            item: itemClone,
+            position: playerFuncs.utility.getPositionFrontOf(player, 1),
+            dimension: player.dimension
+        });
+
+        alt.log('forcing drop');
+        this.updateDroppedItemsAroundPlayer(player, true);
+    }
+
+    static getDroppedItemsByGridSpace(gridSpace: number): Array<DroppedItem> {
+        return InventoryController.groundItems.filter((item) => item.gridSpace === gridSpace);
+    }
+
+    static updateDroppedItemsAroundPlayer(player: alt.Player, updateOtherPlayers: boolean): void {
+        let players = [player];
+
+        if (updateOtherPlayers) {
+            players = playerFuncs.utility.getClosestPlayers(player, 50);
+        }
+
+        const items = InventoryController.getDroppedItemsByGridSpace(player.gridSpace);
+        for (let i = 0; i < players.length; i++) {
+            const target = players[i];
+            if (!target || !target.valid) {
+                continue;
+            }
+
+            alt.emitClient(target, SYSTEM_EVENTS.POPULATE_ITEMS, items);
+        }
     }
 
     /**
@@ -132,6 +231,52 @@ export class InventoryController {
         }
 
         return true;
+    }
+
+    static handlePickupGround(
+        player: alt.Player,
+        endData: CategoryData,
+        endSlotIndex: number,
+        hash: string | null,
+        tab: number
+    ) {
+        if (!hash) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const index = InventoryController.groundItems.findIndex((gItem) => gItem.item.hash === hash);
+        if (index <= -1) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const droppedItem: DroppedItem = { ...InventoryController.groundItems[index] };
+        if (distance2d(player.pos, droppedItem.position) >= 10) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!InventoryController.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const removedItems = InventoryController.groundItems.splice(index, 1);
+        if (removedItems.length <= 0) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex, tab);
+        if (!didAddItem) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        playerFuncs.save.field(player, endData.name, player.data[endData.name]);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 }
 

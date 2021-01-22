@@ -10,6 +10,14 @@ export interface Item {
     weight: number;
     slot: number;
     behavior: ItemType;
+    hash?: string;
     equipment?: EquipmentType;
     data: { [key: string]: any };
+}
+
+export interface DroppedItem {
+    item: Item;
+    position: { x: number; y: number; z: number };
+    gridSpace: number;
+    dimension: number;
 }

@@ -3,11 +3,14 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Inventory } from '../../../shared/enums/views';
 import { Character } from '../../../shared/interfaces/Character';
+import { DroppedItem } from '../../../shared/interfaces/Item';
+import { distance, distance2d } from '../../../shared/utility/vector';
 import { View } from '../../extensions/view';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const url = `http://resource/client/views/inventory/html/index.html`;
 let view: View;
+let lastDroppedItems: Array<DroppedItem> = [];
 
 export class InventoryController {
     static isOpen = false;
@@ -25,8 +28,8 @@ export class InventoryController {
         InventoryController.isOpen = true;
     }
 
-    static handleProcess(selectedSlot: string, endSlot: string, pageIndex: number): void {
-        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, pageIndex);
+    static handleProcess({ selectedSlot, endSlot, tab, hash }): void {
+        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, tab, hash);
     }
 
     static updateEverything(): void {
@@ -37,6 +40,8 @@ export class InventoryController {
         Object.keys(keyFunctions).forEach((key) => {
             keyFunctions[key]();
         });
+
+        InventoryController.processClosestGroundItems();
     }
 
     static updateInventory(): void {
@@ -86,9 +91,32 @@ export class InventoryController {
 
         keyFunctions[key]();
     }
+
+    static updateGroundItems(items: Array<DroppedItem>) {
+        lastDroppedItems = items;
+
+        if (!view) {
+            return;
+        }
+
+        if (!InventoryController.isOpen) {
+            return;
+        }
+
+        InventoryController.processClosestGroundItems();
+    }
+
+    static processClosestGroundItems() {
+        const itemsNearPlayer = lastDroppedItems.filter(
+            (item) => distance2d(item.position, alt.Player.local.pos) <= 10
+        );
+
+        view.emit('inventory:Ground', itemsNearPlayer);
+    }
 }
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
+alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
 
 const keyFunctions = {
     inventory: InventoryController.updateInventory,

@@ -23,6 +23,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_TICK = 'player:Tick',
     //
     POPULATE_COMMANDS = 'commands:Populate',
+    POPULATE_ITEMS = 'items:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
