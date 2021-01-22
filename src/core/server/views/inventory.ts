@@ -168,7 +168,6 @@ export class InventoryController {
             dimension: player.dimension
         });
 
-        alt.log('forcing drop');
         this.updateDroppedItemsAroundPlayer(player, true);
     }
 
@@ -240,6 +239,11 @@ export class InventoryController {
         hash: string | null,
         tab: number
     ) {
+        if (player.vehicle) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
         if (!hash) {
             playerFuncs.sync.inventory(player);
             return;
@@ -277,6 +281,7 @@ export class InventoryController {
         playerFuncs.save.field(player, endData.name, player.data[endData.name]);
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        this.updateDroppedItemsAroundPlayer(player, true);
     }
 }
 
