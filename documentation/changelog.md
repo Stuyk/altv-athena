@@ -29,6 +29,10 @@ description: List of all the changes and current versions.
 + Item Drop Markers
 + Added Item Drop Animation
 + Added Item Pickup Animation
++ Improved Vehicle Control Information
++ Close Doors Automatically When Entering Vehicle
++ Help Message when Exiting Vehicle is Possible
++ Blips are Correct Color / Sprite for Rendering
 ```
 
 ## 1.1.0 - January 12-15, 2021

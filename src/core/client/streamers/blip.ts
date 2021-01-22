@@ -68,8 +68,8 @@ async function handleStreamChanges(): Promise<void> {
 
             const newStreamBlip = new StreamBlip(
                 pos,
-                108,
-                2,
+                categoryData.sprite,
+                categoryData.color,
                 categoryData.name.toUpperCase(),
                 categoryData.name.toLocaleLowerCase(),
                 MAX_BLIP_STREAM_DISTANCE,
