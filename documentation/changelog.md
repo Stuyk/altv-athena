@@ -27,6 +27,8 @@ description: List of all the changes and current versions.
 + Items Droppable on Ground
 + Items Pickupable from Ground
 + Item Drop Markers
++ Added Item Drop Animation
++ Added Item Pickup Animation
 ```
 
 ## 1.1.0 - January 12-15, 2021

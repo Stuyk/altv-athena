@@ -113,7 +113,7 @@ export class InventoryController {
             return;
         }
 
-        InventoryController.processClosestGroundItems();
+        alt.setTimeout(InventoryController.processClosestGroundItems, 0);
     }
 
     static processClosestGroundItems() {

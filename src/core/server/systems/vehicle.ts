@@ -4,9 +4,15 @@ import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } 
 import { getPlayersByGridSpace } from '../utility/filters';
 import { playerFuncs } from '../extensions/Player';
 
+alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
 alt.onClient(Vehicle_Events.SET_DOOR, handleSetDoor);
 alt.onClient(Vehicle_Events.SET_ENGINE, handleSetEngine);
+
+function handleEnterVehicle(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
+    const actualSeat = seat - 1;
+    vehicle.setDoorOpen(player, actualSeat, false);
+}
 
 function handleSetEngine(player: alt.Player): void {
     if (!player || !player.valid || !player.vehicle) {

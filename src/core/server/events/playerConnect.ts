@@ -10,18 +10,14 @@ alt.on('Discord:Opened', handlePlayerConnect);
  * @param  {alt.Player} player
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
-    if (!player || !player.valid) {
-        return;
-    }
-
-    alt.log(`(${player.id}) ${player.name} has connected to the server.`);
     alt.setTimeout(() => {
         if (!player || !player.valid) {
             return;
         }
 
+        alt.log(`(${player.id}) ${player.name} has connected to the server.`);
         playerFuncs.set.firstConnect(player);
-    }, 1000);
+    }, 0);
 }
 
 alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);

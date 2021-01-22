@@ -11,7 +11,11 @@ const streamBlips: { [key: string]: Array<StreamBlip> } = {
     gas: []
 };
 
-let categoriesWithDistance = ['atm', 'gas'];
+const categoriesWithDistance = [
+    { name: 'atm', displayName: 'ATM', sprite: 207, color: 2 },
+    { name: 'gas', displayName: 'Gas Station', sprite: 361, color: 1 }
+];
+
 let hasPopulatedOnce = false;
 let lastGridSpace: number | null;
 
@@ -37,20 +41,23 @@ async function handleStreamChanges(): Promise<void> {
     }
 
     if (lastGridSpace === gridSpace && hasPopulatedOnce) {
-        categoriesWithDistance.forEach(updateCategory);
+        for (let i = 0; i < categoriesWithDistance.length; i++) {
+            const category = categoriesWithDistance[i];
+            alt.setTimeout(() => updateCategory(category.name), 0);
+        }
         return;
     }
 
     if (lastGridSpace !== gridSpace && hasPopulatedOnce) {
         for (let i = 0; i < categoriesWithDistance.length; i++) {
-            await Blip.clearEntireCategory(categoriesWithDistance[i]);
-            streamBlips[categoriesWithDistance[i]] = [];
+            await Blip.clearEntireCategory(categoriesWithDistance[i].name);
+            streamBlips[categoriesWithDistance[i].name] = [];
         }
     }
 
     for (let i = 0; i < categoriesWithDistance.length; i++) {
-        const categoryName = categoriesWithDistance[i];
-        const category = gridData[gridSpace].objects[categoryName]; // Get Array of Data
+        const categoryData = categoriesWithDistance[i];
+        const category = gridData[gridSpace].objects[categoryData.name]; // Get Array of Data
         for (let x = 0; x < category.length; x++) {
             const data = category[x];
             const pos = {
@@ -63,13 +70,13 @@ async function handleStreamChanges(): Promise<void> {
                 pos,
                 108,
                 2,
-                categoryName.toUpperCase(),
-                categoryName.toLocaleLowerCase(),
+                categoryData.name.toUpperCase(),
+                categoryData.name.toLocaleLowerCase(),
                 MAX_BLIP_STREAM_DISTANCE,
                 true
             );
 
-            streamBlips[categoryName].push(newStreamBlip);
+            streamBlips[categoryData.name].push(newStreamBlip);
         }
     }
 
@@ -78,7 +85,11 @@ async function handleStreamChanges(): Promise<void> {
     }
 
     lastGridSpace = gridSpace;
-    categoriesWithDistance.forEach(updateCategory);
+
+    for (let i = 0; i < categoriesWithDistance.length; i++) {
+        const category = categoriesWithDistance[i];
+        alt.setTimeout(() => updateCategory(category.name), 0);
+    }
 }
 
 /**

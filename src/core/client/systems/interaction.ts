@@ -5,6 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
+import { drawText2D } from '../utility/text';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { VehicleController } from './vehicle';
 
@@ -60,6 +61,8 @@ export class InteractionController {
             InteractionController.pressedKey = false;
             return;
         }
+
+        drawText2D('Interaction Mode is On', { x: 0.5, y: 0.98 }, 0.3, new alt.RGBA(255, 255, 255, 255));
 
         // Non-Interaction Based Items
         // Vehicles and such...
