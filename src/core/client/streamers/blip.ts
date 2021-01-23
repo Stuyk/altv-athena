@@ -11,10 +11,20 @@ const streamBlips: { [key: string]: Array<StreamBlip> } = {
     gas: []
 };
 
+const generatedBlipList = [];
 const categoriesWithDistance = [
     { name: 'atm', displayName: 'ATM', sprite: 207, color: 2 },
     { name: 'gas', displayName: 'Gas Station', sprite: 361, color: 1 }
 ];
+
+// Filters and Reconstructs Grid List
+for (let i = 0; i < gridData.length; i++) {
+    const grid = { ...gridData[i] };
+    Object.keys(grid.objects).forEach((key) => {
+        grid.objects[key] = grid.objects[key].filter((data) => data.isBlip);
+    });
+    generatedBlipList.push(grid);
+}
 
 let hasPopulatedOnce = false;
 let lastGridSpace: number | null;
@@ -57,7 +67,7 @@ async function handleStreamChanges(): Promise<void> {
 
     for (let i = 0; i < categoriesWithDistance.length; i++) {
         const categoryData = categoriesWithDistance[i];
-        const category = gridData[gridSpace].objects[categoryData.name]; // Get Array of Data
+        const category = generatedBlipList[gridSpace].objects[categoryData.name]; // Get Array of Data
         for (let x = 0; x < category.length; x++) {
             const data = category[x];
             if (!data.isBlip) {
