@@ -4,6 +4,14 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.3.0 - January 23-x, 2021
+
+```diff
++ Toolbar Support for Weapons
++ Keybinds 1-4 Now Support Weapon Swapping
++ Weapon Swap Sounds
+```
+
 ## 1.2.0 - January 16-22, 2021
 
 ```diff

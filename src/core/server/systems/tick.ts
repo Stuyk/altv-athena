@@ -5,6 +5,7 @@ import { playerFuncs } from '../extensions/Player';
 import { InventoryController } from '../views/inventory';
 import './interaction';
 import './vehicle';
+import './toolbar';
 
 const timeBetweenPings = 4950;
 

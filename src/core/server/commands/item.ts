@@ -6,8 +6,8 @@ import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
 import { EquipmentType } from '../../shared/enums/equipment';
 
-const gunItem: Item = {
-    name: `Gun`,
+const pistolItem: Item = {
+    name: `Pistol`,
     uuid: `some_hash_thing_ground`,
     description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
     icon: 'gun',
@@ -16,7 +16,7 @@ const gunItem: Item = {
     weight: 2,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
     data: {
-        bang: true
+        hash: 0x1b06d571
     }
 };
 
@@ -49,16 +49,33 @@ const boxItem: Item = {
     }
 };
 
+const smgItem: Item = {
+    name: `Micro SMG`,
+    uuid: `some_hash_thing_ground`,
+    description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
+    icon: 'gun',
+    slot: 4,
+    quantity: 1,
+    weight: 2,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
+    data: {
+        hash: 0x13532244
+    }
+};
+
 ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
-    let itemClone = { ...gunItem };
+    let itemClone = { ...pistolItem };
     player.data.inventory[0].push(itemClone);
 
     itemClone = { ...equipmentItem };
     player.data.inventory[0].push(itemClone);
 
     itemClone = { ...boxItem };
+    player.data.inventory[0].push(itemClone);
+
+    itemClone = { ...smgItem };
     player.data.inventory[0].push(itemClone);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
