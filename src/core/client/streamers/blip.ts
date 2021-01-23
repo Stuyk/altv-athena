@@ -60,12 +60,11 @@ async function handleStreamChanges(): Promise<void> {
         const category = gridData[gridSpace].objects[categoryData.name]; // Get Array of Data
         for (let x = 0; x < category.length; x++) {
             const data = category[x];
-            const pos = {
-                x: data.Position.X,
-                y: data.Position.Y,
-                z: data.Position.Z
-            } as alt.Vector3;
+            if (!data.isBlip) {
+                continue;
+            }
 
+            const pos = data.position;
             const newStreamBlip = new StreamBlip(
                 pos,
                 categoryData.sprite,

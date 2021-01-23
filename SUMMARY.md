@@ -18,6 +18,7 @@
 ## Basic Scripting
 
 -   [Adding Commands](documentation/scripting/adding-commands.md)
+-   [Adding Mods](documentation/scripting/adding-mods.md)
 
 ## External Links
 
