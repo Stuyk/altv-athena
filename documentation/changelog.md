@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.2.0 - January 16-x, 2021
+## 1.2.0 - January 16-22, 2021
 
 ```diff
 + Inventory Design
