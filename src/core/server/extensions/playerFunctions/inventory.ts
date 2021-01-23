@@ -8,12 +8,16 @@ import { Item } from '../../../shared/interfaces/Item';
  * @return {*}  {({ tab: number; index: number } | null)}
  * @memberof InventoryPrototype
  */
-function getFreeInventorySlot(p: alt.Player): { tab: number; slot: number } | null {
+function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: number; slot: number } | null {
     for (let i = 0; i < p.data.inventory.length; i++) {
+        if (tabNumber !== null && i !== tabNumber) {
+            continue;
+        }
+
         const tab = p.data.inventory[i];
 
         // Go to next tab if inventory is full.
-        if (tab.length >= 28) {
+        if (tab.length >= 7) {
             continue;
         }
 

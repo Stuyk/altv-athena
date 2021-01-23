@@ -19,7 +19,7 @@ interface CategoryData {
 }
 
 function stripCategory(value: string): number {
-    return parseInt(value.replace(/.-/gm, ''));
+    return parseInt(value.replace(/.*-/gm, ''));
 }
 
 /**
@@ -94,6 +94,19 @@ export class InventoryController {
             return;
         }
 
+        if (endData.name === InventoryType.TAB) {
+            InventoryController.handleMoveTabs(
+                player,
+                itemClone,
+                selectSlotIndex,
+                tab,
+                endSlotIndex,
+                selectData.name,
+                endData.name
+            );
+            return;
+        }
+
         if (!InventoryController.allItemRulesValid(itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
@@ -113,6 +126,45 @@ export class InventoryController {
 
         playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
         playerFuncs.save.field(player, endData.name, player.data[endData.name]);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+    }
+
+    /**
+     * Move an item to a different tab.
+     * We know the item exists when this function is called.
+     * @static
+     * @param {alt.Player} player
+     * @param {Item} item
+     * @memberof InventoryController
+     */
+    static handleMoveTabs(
+        player: alt.Player,
+        item: Item,
+        selectSlotIndex: number,
+        tab: number,
+        tabToMoveTo: number,
+        selectName: string,
+        endName: string
+    ) {
+        const freeSlot = playerFuncs.inventory.getFreeInventorySlot(player, tabToMoveTo);
+        if (!freeSlot) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!playerFuncs.inventory.inventoryRemove(player, selectSlotIndex, tab)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!playerFuncs.inventory.inventoryAdd(player, item, freeSlot.slot, freeSlot.tab)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        playerFuncs.save.field(player, selectName, player.data[selectName]);
+        playerFuncs.save.field(player, endName, player.data[endName]);
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
@@ -312,7 +364,15 @@ const DataHelpers: Array<CategoryData> = [
         removeItem: playerFuncs.inventory.equipmentRemove,
         addItem: playerFuncs.inventory.equipmentAdd
     },
-    { abbrv: 'g-', name: 'ground', emptyCheck: null, getItem: null, removeItem: null, addItem: null }
+    { abbrv: 'g-', name: 'ground', emptyCheck: null, getItem: null, removeItem: null, addItem: null },
+    {
+        abbrv: 'tab-',
+        name: 'tab',
+        emptyCheck: null,
+        getItem: null,
+        removeItem: null,
+        addItem: null
+    }
 ];
 
 alt.onClient(View_Events_Inventory.Process, InventoryController.processItemMovement);

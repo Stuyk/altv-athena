@@ -17,8 +17,8 @@ const app = new Vue({
                 selectedElement: null
             },
             pageIndex: 0,
-            pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Food & Drink', 'Keys'],
-            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-fastfood', 'icon-key'],
+            pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5'],
+            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-box', 'icon-box'],
             equipmentMeta: ['Hat', 'Mask', 'Shirt', 'Pants', 'Feet', 'Glasses', 'Ears', 'Bag', 'Armour'],
             inventory: [[], [], [], [], [], []],
             ground: [],
@@ -233,9 +233,11 @@ const app = new Vue({
             const endSlot = e.target.id;
 
             const endElement = document.getElementById(endSlot);
-
-            if (!endElement.classList.contains('is-null-item')) {
-                return;
+            const isTab = endElement.id.includes('tab');
+            if (!isTab) {
+                if (!endElement.classList.contains('is-null-item')) {
+                    return;
+                }
             }
 
             if (selectedSlot === endSlot) {
@@ -248,7 +250,9 @@ const app = new Vue({
                 alt.emit('inventory:Process', { selectedSlot, endSlot, tab: this.pageIndex, hash });
             }
 
-            await this.updateLocalData(selectedSlot, endSlot);
+            if (!isTab) {
+                await this.updateLocalData(selectedSlot, endSlot);
+            }
         },
         updateLocalData(selectedSlot, endSlot) {
             const selectIndex = this.stripCategory(selectedSlot);

@@ -151,7 +151,7 @@
                             </div>
                         </div>
                         <div class="navigation mt-1">
-                            <div v-for="index in 5" :key="index - 1" :id="index <= 3 ? `tab-${index - 1}` : ``" :class="isActiveTab(index -1)" :class="isPageIndex(index - 1)" @click="setIndex(index - 1)">
+                            <div v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" :class="isActiveTab(index -1)" :class="isPageIndex(index - 1)" @click="setIndex(index - 1)">
                                 <v-icon>{{ pageIcons[index - 1] }}</v-icon>
                                 <div class="tooltip">
                                     {{ pageMeta[index - 1] }}

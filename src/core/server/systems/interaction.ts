@@ -46,7 +46,7 @@ export class InteractionController {
             });
         });
 
-        console.log(`[Athena] Generated ${count} interaction points.`);
+        alt.log(`[Athena] Generated ${count} Interaction Points`);
     }
 
     /**

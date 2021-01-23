@@ -38,6 +38,8 @@ description: List of all the changes and current versions.
 + Interactions are now ColShapes
 + Interactions only toggled when entering ColShapes
 + Interactions now have a large green cylinder to help notify you it's interactable.
++ Added Inventory Tab Item Movement
++ Fixed Regex for Inventory Info
 ```
 
 ## 1.1.0 - January 12-15, 2021
