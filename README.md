@@ -20,6 +20,11 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 -   Character Selection
 -   Character Info Support
 -   Character Appearance Synchronization
+-   Player
+    -   Health Synchronization
+    -   Armour Synchronization
+    -   Play 3D Custom Sounds (Short)
+    -   Play 2D Custom Sounds (Short)
 -   Name Tags
     -   Display after 7.5s \(Used for Hiding Names Partially\)
     -   Names Hidden in Vehicles
@@ -47,47 +52,33 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Performance Grid for Object Interactions / Finding
 -   Interaction System
     -   Parse Objects by Grid
+    -   Colshape System to Represent Interaction Points
     -   ATM Object Interaction
 -   Blip System
     -   Create Blips
     -   Stream Blips by Distance
     -   Append and Delete Blips by Category
+    -   Automatically Generate Blips for Useable Objects (Atms, Fuel, etc.)
 -   Currency System
-    -   Deposit and Withdraw Cash from your bank
+    -   Deposit and Withdraw Cash from your Bank
     -   Transfer Bank Money to Other Players
 -   Vehicle System
     -   Control Vehicle Door States
     -   Control Vehicle Door Locks
     -   Handle Vehicle Ownership
     -   Handle Vehicle Keys
+    -   Handle Vehicle Synchronization Pop-in
+-   Inventory System
+    -   Drop Items
+    -   Pickup Items
+    -   Move Items
+    -   Multiple Slots for Items
+    -   Inventory Item Restriction Flags
+    -   Animations for Picking Up / Dropping
 
 ```text
 New Features Always in Discord
 ```
-
-## Screenshots
-
-![](https://thumbs.gfycat.com/DeadlyVibrantDiplodocus-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/ElegantJubilantAmericanbulldog-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/LeftGivingBluewhale-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/BaggyExemplaryFoxterrier-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/RewardingCluelessIrrawaddydolphin-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/BothEquatorialAustraliancattledog-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/CarefulDiscreteKittiwake-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/TerrificNiftyCat-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/PoliteGreenArgali-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/ThoroughWarlikeKillifish-size_restricted.gif)
-
-![](https://thumbs.gfycat.com/ComplicatedUniformBetafish-size_restricted.gif)
 
 ## Running this Project
 

@@ -8,6 +8,7 @@ description: All of the current hotkeys available.
 -   F2 - Player List / Leaderboard
 -   Left Alt - Toggle Interaction Mode
 -   E - Use Object / Interaction
+-   I - Inventory
 
 ## Vehicle
 

@@ -15,8 +15,12 @@ const db: Database = getDatabase();
  * @return {*}  {Promise<void>}
  * @memberof NewPrototype
  */
-async function character(appearance: Partial<Appearance>, info: Partial<CharacterInfo>, name: string): Promise<void> {
-    const p: alt.Player = (this as unknown) as alt.Player;
+async function character(
+    p: alt.Player,
+    appearance: Partial<Appearance>,
+    info: Partial<CharacterInfo>,
+    name: string
+): Promise<void> {
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearance;
     newDocument.info = info;

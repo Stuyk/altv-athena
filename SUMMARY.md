@@ -2,6 +2,7 @@
 
 -   [Introduction](README.md)
 -   [Feature Status](documentation/feature-status.md)
+-   [Showcase](documentation/showcase.md)
 -   [Changelog](documentation/changelog.md)
 -   [FAQ](documentation/faq.md)
 

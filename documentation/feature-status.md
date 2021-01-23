@@ -27,25 +27,26 @@ F - Authentication
 S - Character Editor
 F - Character Selection
 F - Character Position Saving / Restore
-S - Character Health Saving / Restore
-S - Character Armour Saving / Restore
-S - Nametags
-MS - Chat
+F - Character Health Saving / Restore
+F - Character Armour Saving / Restore
+F - Nametags
+F - Chat
 F - Chat Command Infrastructure
 F - Chat Colors
 F - Chat Permissions
-S - Roleplay Commands
-S - Chat Command Hints
-S - Time Sync
-S - Weather Sync
-S - Port Freecam for Chat Permissions
-S - Character Respawn
+F - Roleplay Commands
+F - Chat Command Hints
+F - Time Sync
+F - Weather Sync
+F - Port Freecam for Chat Permissions
+F - Character Respawn
 S - Voice Chat
 US - Locale System
-S - Leader Board / Player List
-S - Interaction by Object
-S - Bank
-US - Vehicle System
+F - Leader Board / Player List
+F - Interaction by Object
+F - Bank
+S - Vehicle System
+US - Inventory System
 N/A - Vehicle Ownership
 N/A - Job Framework
 N/A - Clothing System
