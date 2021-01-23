@@ -4,6 +4,7 @@ import { Character } from '../../shared/interfaces/Character';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { DEFAULT_CONFIG } from '../athena/main';
 import * as sm from 'simplymongo';
+import { playerFuncs } from '../extensions/Player';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -39,8 +40,8 @@ export async function goToCharacterSelect(player: Player): Promise<void> {
 
     player.currentCharacters = characters;
     player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
-    player.safe().setPosition(pos.x, pos.y, pos.z);
-    player.emit().event(View_Events_Characters.Show, characters);
+    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+    alt.emitClient(player, View_Events_Characters.Show, characters);
 }
 
 /**
@@ -71,8 +72,8 @@ export async function handleSelectCharacter(player: Player, id: string): Promise
 
     player.pendingCharacterSelect = false;
 
-    player.emit().event(View_Events_Characters.Done);
-    player.select().character(player.currentCharacters[index]);
+    alt.emitClient(player, View_Events_Characters.Done);
+    playerFuncs.select.character(player, player.currentCharacters[index]);
 }
 
 /**
@@ -110,10 +111,10 @@ async function handleDelete(player: Player, id: string): Promise<void> {
     }
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
-    player.safe().setPosition(pos.x, pos.y, pos.z);
+    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
 
     player.currentCharacters = characters;
-    player.emit().event(View_Events_Characters.Show, characters);
+    alt.emitClient(player, View_Events_Characters.Show, characters);
 }
 
 /**
@@ -144,7 +145,7 @@ export function handleNewCharacter(player: Player): void {
     player.pendingNewCharacter = true;
 
     player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
-    player.safe().setPosition(pos.x, pos.y, pos.z);
-    player.emit().event(View_Events_Characters.Done);
-    player.emit().event(View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName
+    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+    alt.emitClient(player, View_Events_Characters.Done);
+    alt.emitClient(player, View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName
 }

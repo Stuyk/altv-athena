@@ -1,6 +1,10 @@
 export enum SYSTEM_EVENTS {
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     //
+    INTERACTION = 'player:Interact',
+    INTERACTION_ATM = 'atm:Open',
+    INTERACTION_ATM_ACTION = 'atm:Action',
+    //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',
     //
@@ -8,18 +12,19 @@ export enum SYSTEM_EVENTS {
     NOCLIP_RESET = 'noclip:Reset',
     //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
+    PLAYER_EMIT_SOUND_2D = 'sound:2D',
     PLAYER_EMIT_SOUND_3D = 'sound:3D',
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',
     //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',
+    PLAYER_SET_INTERACTION = 'interaction:Set',
     //
     PLAYER_TICK = 'player:Tick',
     //
-    INTERACTION = 'player:Interact',
-    INTERACTION_ATM = 'atm:Open',
-    INTERACTION_ATM_ACTION = 'atm:Action',
+    POPULATE_COMMANDS = 'commands:Populate',
+    POPULATE_ITEMS = 'items:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',

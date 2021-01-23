@@ -1,30 +1,32 @@
 import * as alt from 'alt-server';
-import { addCommand } from '../systems/chat';
+import ChatController from '../systems/chat';
 import { CommandsLocale } from '../../shared/locale/commands';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Permissions } from '../../shared/flags/permissions';
+import { playerFuncs } from '../extensions/Player';
 
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);
 alt.onClient(SYSTEM_EVENTS.NOCLIP_UPDATE, handleCamUpdate);
 
-addCommand('noclip', handleCommand);
+ChatController.addCommand('noclip', '/noclip -  Toggles noclip mode.', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping');
 
     if (!isNoClipping && !player.data.isDead) {
         player.setSyncedMeta('NoClipping', true);
-        player.emit().message(`No Clip: ${CommandsLocale.ON}`);
+        playerFuncs.emit.message(player, `No Clip: ${CommandsLocale.ON}`);
         player.visible = false;
         return;
     }
 
     if (player.data.isDead) {
-        player.emit().message(CommandsLocale.CANNOT_WHILE_DEAD);
+        playerFuncs.emit.message(player, CommandsLocale.CANNOT_WHILE_DEAD);
     }
 
     player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
     player.setSyncedMeta('NoClipping', false);
-    player.emit().message(`No Clip:  ${CommandsLocale.OFF}`);
+    playerFuncs.emit.message(player, `No Clip:  ${CommandsLocale.OFF}`);
     player.visible = true;
 }
 

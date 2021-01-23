@@ -11,36 +11,35 @@ import {
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
-import { sleep } from '../utility/sleep';
 import { HelpController } from '../views/hud/controllers/helpController';
+import vehicleFuncs from '../extensions/Vehicle';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
 alt.on('vehicle:Created', handleVehicleCreated);
 
 const TIME_BETWEEN_CONTROL_PRESS = 250;
-const TIME_BETWEEN_STATE_UPDATES = 5000;
-const TIME_BETWEEN_CHECKS = 1000;
+const TIME_BETWEEN_STATE_UPDATES = 2500;
 const MAX_VEHICLE_DISTANCE = 8;
 
 let waitingForVehicle: alt.Vehicle | null = null;
 let waitingForSeat: number | null;
 
 export class VehicleController {
+    static processingVehicles = false;
+
     // The different states for this controller
     static pressedLockKey: false;
     static pressedVehicleFunction: false;
     static pressedVehicleFunctionAlt: false;
 
     // Data we look at
-    static vehicles: alt.Vehicle[];
+    static vehicles: alt.Vehicle[] = [];
 
     // Cooldown Helpers
     static nextVehicleCheck: number = Date.now();
     static nextControlPress: number = Date.now();
     static nextVehicleStateUpdate: number = Date.now() + TIME_BETWEEN_STATE_UPDATES;
-
-    constructor() {}
 
     /**
      * This controls what keys were pressed and what boolean to change for a key press.
@@ -50,6 +49,10 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static triggerVehicleFunction(booleanName: string): void {
+        if (!alt.Player.local.isInteractionOn) {
+            return;
+        }
+
         this[booleanName] = true;
     }
 
@@ -59,13 +62,34 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static turnOffAllVehicleFunctions(): void {
-        this.pressedLockKey = false;
-        this.pressedVehicleFunction = false;
-        this.pressedVehicleFunctionAlt = false;
+        VehicleController.pressedLockKey = false;
+        VehicleController.pressedVehicleFunction = false;
+        VehicleController.pressedVehicleFunctionAlt = false;
     }
 
     static updateNextKeyPress(): void {
-        this.nextControlPress = Date.now() + TIME_BETWEEN_CONTROL_PRESS;
+        VehicleController.nextControlPress = Date.now() + TIME_BETWEEN_CONTROL_PRESS;
+    }
+
+    static async updateClosestVehicles() {
+        if (!VehicleController.processingVehicles) {
+            return;
+        }
+
+        const processedVehicles = [];
+        const vehicles = [...alt.Vehicle.all];
+
+        for (let i = 0; i < vehicles.length; i++) {
+            const vehicle = vehicles[i];
+            if (distance(alt.Player.local.pos, vehicle.pos) > MAX_VEHICLE_DISTANCE) {
+                continue;
+            }
+
+            processedVehicles.push(vehicle);
+        }
+
+        VehicleController.vehicles = processedVehicles;
+        VehicleController.processingVehicles = false;
     }
 
     /**
@@ -75,36 +99,35 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static runVehicleControllerTick(): void {
-        if (Date.now() > this.nextVehicleCheck) {
-            this.nextVehicleCheck = Date.now() + TIME_BETWEEN_CHECKS;
-            this.vehicles = [...alt.Vehicle.all].filter((vehicle) => {
-                return distance(alt.Player.local.pos, vehicle.pos) <= MAX_VEHICLE_DISTANCE;
-            });
-        }
-
-        if (this.vehicles.length <= 0) {
-            this.turnOffAllVehicleFunctions();
-            return;
+        if (!VehicleController.processingVehicles) {
+            VehicleController.processingVehicles = true;
+            alt.setTimeout(VehicleController.updateClosestVehicles, 0);
         }
 
         if (alt.Player.local.vehicle) {
-            this.handleInVehicle();
+            VehicleController.handleInVehicle();
             return;
         }
 
-        this.handleOutOfVehicle();
+        if (VehicleController.vehicles.length <= 0) {
+            VehicleController.turnOffAllVehicleFunctions();
+            return;
+        }
+
+        VehicleController.handleOutOfVehicle();
     }
 
     static handleLockPress(closeVehicle: alt.Vehicle): void {
-        alt.log('pressed lock key');
-        this.turnOffAllVehicleFunctions();
-        this.updateNextKeyPress();
+        VehicleController.turnOffAllVehicleFunctions();
+        VehicleController.updateNextKeyPress();
         alt.emitServer(Vehicle_Events.SET_LOCK, closeVehicle);
     }
 
     static updateVehicleState(closestVehicle: alt.Vehicle): void {
-        this.nextVehicleStateUpdate = Date.now() + TIME_BETWEEN_STATE_UPDATES;
-        closestVehicle.handleSyncIn();
+        VehicleController.nextVehicleStateUpdate = Date.now() + TIME_BETWEEN_STATE_UPDATES;
+        alt.setTimeout(() => {
+            vehicleFuncs.sync.update(closestVehicle);
+        }, 0);
     }
 
     /**
@@ -114,20 +137,23 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static async handleInVehicle(): Promise<void> {
-        if (Date.now() > this.nextVehicleStateUpdate) {
-            this.updateVehicleState(alt.Player.local.vehicle);
+        if (Date.now() > VehicleController.nextVehicleStateUpdate) {
+            VehicleController.updateVehicleState(alt.Player.local.vehicle);
         }
 
         // Toggling the Lock / Short Press X
-        if (this.pressedLockKey && Date.now() > this.nextControlPress) {
-            this.handleLockPress(alt.Player.local.vehicle);
+        if (VehicleController.pressedLockKey && Date.now() > VehicleController.nextControlPress) {
+            VehicleController.handleLockPress(alt.Player.local.vehicle);
             return;
         }
 
+        const isDriver =
+            native.getPedInVehicleSeat(alt.Player.local.vehicle.scriptID, -1, 0) === alt.Player.local.scriptID;
+
         // Leaving the Vehicle / Short Press / Leave Engine Running
-        if (this.pressedVehicleFunction && Date.now() > this.nextControlPress) {
-            this.turnOffAllVehicleFunctions();
-            this.updateNextKeyPress();
+        if (VehicleController.pressedVehicleFunction && Date.now() > VehicleController.nextControlPress) {
+            VehicleController.turnOffAllVehicleFunctions();
+            VehicleController.updateNextKeyPress();
 
             // Prevent a player from leaving the vehicle if in kidnap mode.
             const lock: Vehicle_Lock_State = alt.Player.local.vehicle.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
@@ -144,30 +170,36 @@ export class VehicleController {
             }
 
             // Toggle engine back on if it's turned off.
-            await sleep(500);
-            native.setVehicleEngineOn(currentVehicle, true, true, false);
+            alt.setTimeout(() => {
+                native.setVehicleEngineOn(currentVehicle, true, true, false);
+            }, 500);
             return;
         }
 
+        const canExit = vehicleFuncs.get.canExit(alt.Player.local.vehicle);
+
         // Check if the local player is a driver.
-        if (native.getPedInVehicleSeat(alt.Player.local.vehicle.scriptID, -1, 0) !== alt.Player.local.scriptID) {
+        if (!isDriver) {
+            if (canExit) {
+                alt.log('should be able to exit');
+                HelpController.updateHelpText(70, `Exit Vehicle`, '');
+            }
             return;
         }
 
         // Toggle Engine Status with Long Press
-        if (this.pressedVehicleFunctionAlt && Date.now() > this.nextControlPress) {
-            this.turnOffAllVehicleFunctions();
-            this.updateNextKeyPress();
+        if (VehicleController.pressedVehicleFunctionAlt && Date.now() > VehicleController.nextControlPress) {
+            VehicleController.turnOffAllVehicleFunctions();
+            VehicleController.updateNextKeyPress();
             alt.emitServer(Vehicle_Events.SET_ENGINE);
-            return;
         } else {
             const vehClass = native.getVehicleClass(alt.Player.local.vehicle.scriptID);
             const vehicleName = vehClass === 8 || vehClass === 13 ? 'Bike' : 'Vehicle';
 
             if (!alt.Player.local.vehicle.engineStatus) {
-                HelpController.updateHelpText(70, `Exit ${vehicleName}`, `Turn on Engine`);
+                HelpController.updateHelpText(70, canExit ? `Exit ${vehicleName}` : '', `Turn on Engine`);
             } else {
-                HelpController.updateHelpText(70, `Exit ${vehicleName}`, `Turn off Engine`);
+                HelpController.updateHelpText(70, canExit ? `Exit ${vehicleName}` : '', `Turn off Engine`);
             }
         }
     }
@@ -179,24 +211,27 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static async handleOutOfVehicle(): Promise<void> {
-        const closestVehicle: alt.Vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, this.vehicles);
+        const closestVehicle: alt.Vehicle = getClosestVectorByPos<alt.Vehicle>(
+            alt.Player.local.pos,
+            VehicleController.vehicles
+        );
         if (!closestVehicle) {
             return;
         }
 
-        if (Date.now() > this.nextVehicleStateUpdate) {
-            this.updateVehicleState(closestVehicle);
+        if (Date.now() > VehicleController.nextVehicleStateUpdate) {
+            VehicleController.updateVehicleState(closestVehicle);
         }
 
-        if (this.pressedLockKey && Date.now() > this.nextControlPress) {
-            this.handleLockPress(closestVehicle);
+        if (VehicleController.pressedLockKey && Date.now() > VehicleController.nextControlPress) {
+            VehicleController.handleLockPress(closestVehicle);
             return;
         }
 
         // Update Help Text based on if the vehicle is locked.
         const lock: Vehicle_Lock_State = closestVehicle.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
         if (inLockedState(lock)) {
-            if (!closestVehicle.isOwner()) {
+            if (!vehicleFuncs.get.owner(closestVehicle)) {
                 return;
             }
 
@@ -213,7 +248,7 @@ export class VehicleController {
         }
 
         // Wait for next control press to be ready.
-        if (Date.now() < this.nextControlPress) {
+        if (Date.now() < VehicleController.nextControlPress) {
             return;
         }
 
@@ -225,12 +260,12 @@ export class VehicleController {
         if (isBike) {
             HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Get on Bike`, null);
 
-            if (!this.pressedVehicleFunction) {
+            if (!VehicleController.pressedVehicleFunction) {
                 return;
             }
 
-            this.turnOffAllVehicleFunctions();
-            this.updateNextKeyPress();
+            VehicleController.turnOffAllVehicleFunctions();
+            VehicleController.updateNextKeyPress();
 
             native.setPedConfigFlag(alt.Player.local.scriptID, 35, false);
             native.setPedConfigFlag(alt.Player.local.scriptID, 104, true);
@@ -251,7 +286,7 @@ export class VehicleController {
             return;
         }
 
-        const closestDoor = closestVehicle.getClosestDoor(alt.Player.local.pos);
+        const closestDoor = vehicleFuncs.get.closestDoor(closestVehicle, alt.Player.local.pos);
         drawMarker(28, closestDoor.pos, new alt.Vector3(0.075, 0.075, 0.075), new alt.RGBA(255, 255, 255, 200));
 
         if (closestDoor.isDoor) {
@@ -261,9 +296,9 @@ export class VehicleController {
         }
 
         // Short Press F
-        if (this.pressedVehicleFunction) {
-            this.turnOffAllVehicleFunctions();
-            this.updateNextKeyPress();
+        if (VehicleController.pressedVehicleFunction) {
+            VehicleController.turnOffAllVehicleFunctions();
+            VehicleController.updateNextKeyPress();
 
             if (closestDoor.isDoor) {
                 return;
@@ -284,9 +319,9 @@ export class VehicleController {
         }
 
         // Long Press F
-        if (this.pressedVehicleFunctionAlt) {
-            this.turnOffAllVehicleFunctions();
-            this.updateNextKeyPress();
+        if (VehicleController.pressedVehicleFunctionAlt) {
+            VehicleController.turnOffAllVehicleFunctions();
+            VehicleController.updateNextKeyPress();
 
             let actualSeat = closestDoor.seat;
 
@@ -321,59 +356,49 @@ function handleVehicleCreated(vehicle: alt.Vehicle): void {
 }
 
 async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value: any): Promise<void> {
-    // Handles Vehicle Horns / Flashing etc.
-    // if (key === Vehicle_State.LOCK_STATE) {
-    //     if (inLockedState(parseInt(value))) {
-    //         vehicle.closeAllDoors();
-    //         return;
-    //     }
-
-    //     vehicle.playCarAlarmHorn(2, 50);
-    //     vehicle.flashLights(2, 50);
-    //     return;
-    // }
-
-    // Handles Vehicle Door States
-    // Yes I know I can make an algorithm for this.
-    // However, nobody can actually read that so here's a bunch of iffffsssss.
     if (key === Vehicle_State.DOOR_DRIVER) {
-        vehicle.setDoorState(Vehicle_Door_List.DRIVER, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.DRIVER, value);
         return;
     }
 
     if (key === Vehicle_State.DOOR_DRIVER_REAR) {
-        vehicle.setDoorState(Vehicle_Door_List.DRIVER_REAR, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.DRIVER_REAR, value);
         return;
     }
 
     if (key === Vehicle_State.DOOR_PASSENGER) {
-        vehicle.setDoorState(Vehicle_Door_List.PASSENGER, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.PASSENGER, value);
         return;
     }
 
     if (key === Vehicle_State.DOOR_PASSENGER_REAR) {
-        vehicle.setDoorState(Vehicle_Door_List.PASSENGER_REAR, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.PASSENGER_REAR, value);
         return;
     }
 
     if (key === Vehicle_State.DOOR_HOOD) {
-        vehicle.setDoorState(Vehicle_Door_List.HOOD, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.HOOD, value);
         return;
     }
 
     if (key === Vehicle_State.DOOR_TRUNK) {
-        vehicle.setDoorState(Vehicle_Door_List.TRUNK, value);
+        vehicleFuncs.set.doorState(vehicle, Vehicle_Door_List.TRUNK, value);
+        return;
+    }
+
+    if (key === Vehicle_State.LOCK_STATE) {
+        vehicleFuncs.set.lockStatus(vehicle, value);
         return;
     }
 
     // Set Owner
     if (key === Vehicle_State.OWNER) {
-        vehicle.setOwner(value.toString());
+        vehicleFuncs.set.owner(vehicle, value.toString());
         return;
     }
 
     if (key === Vehicle_State.ENGINE) {
-        vehicle.setEngine(value);
+        vehicleFuncs.set.engine(vehicle, value);
         return;
     }
 }

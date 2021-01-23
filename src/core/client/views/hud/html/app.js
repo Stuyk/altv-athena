@@ -210,7 +210,7 @@ const app = new Vue({
                 this.currentMessage = `/${this.matchedName}`;
             }
         },
-        inject(commands) {
+        populateCommands(commands) {
             if (!Array.isArray(commands)) {
                 return;
             }
@@ -331,12 +331,11 @@ const app = new Vue({
         if ('alt' in window) {
             alt.on('chat:Append', this.appendMessage);
             alt.on('chat:Focus', this.focusChat);
-            alt.on('chat:Inject', this.inject);
+            alt.on('chat:PopulateCommands', this.populateCommands);
             alt.on('leaderboard:Toggle', this.toggleLeaderboard);
             alt.on('hud:Audio3D', this.audio3D);
             alt.on('hud:HelpText', this.setHelpText);
             alt.on('hud:HelpState', this.setHelpState);
-            alt.emit('chat:Inject');
         } else {
             let count = 0;
             setInterval(() => {

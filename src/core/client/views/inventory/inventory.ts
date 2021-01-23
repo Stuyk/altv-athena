@@ -2,15 +2,19 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Inventory } from '../../../shared/enums/views';
-import { Character } from '../../../shared/interfaces/Character';
+import { DroppedItem } from '../../../shared/interfaces/Item';
+import { distance2d } from '../../../shared/utility/vector';
 import { View } from '../../extensions/view';
+import { drawMarker } from '../../utility/marker';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const url = `http://resource/client/views/inventory/html/index.html`;
 let view: View;
+let lastDroppedItems: Array<DroppedItem> = [];
 
 export class InventoryController {
     static isOpen = false;
+    static drawInterval: number = null;
 
     static async handleView() {
         if (alt.Player.local.isChatOpen) {
@@ -25,8 +29,8 @@ export class InventoryController {
         InventoryController.isOpen = true;
     }
 
-    static handleProcess(selectedSlot: string, endSlot: string, pageIndex: number): void {
-        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, pageIndex);
+    static handleProcess({ selectedSlot, endSlot, tab, hash }): void {
+        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, tab, hash);
     }
 
     static updateEverything(): void {
@@ -37,6 +41,8 @@ export class InventoryController {
         Object.keys(keyFunctions).forEach((key) => {
             keyFunctions[key]();
         });
+
+        InventoryController.processClosestGroundItems();
     }
 
     static updateInventory(): void {
@@ -86,9 +92,61 @@ export class InventoryController {
 
         keyFunctions[key]();
     }
+
+    static updateGroundItems(items: Array<DroppedItem>) {
+        lastDroppedItems = items;
+
+        if (InventoryController.drawInterval) {
+            alt.clearInterval(InventoryController.drawInterval);
+            InventoryController.drawInterval = null;
+        }
+
+        if (lastDroppedItems.length >= 1) {
+            InventoryController.drawInterval = alt.setInterval(InventoryController.drawItemMarkers, 0);
+        }
+
+        if (!view) {
+            return;
+        }
+
+        if (!InventoryController.isOpen) {
+            return;
+        }
+
+        alt.setTimeout(InventoryController.processClosestGroundItems, 0);
+    }
+
+    static processClosestGroundItems() {
+        let itemsNearPlayer = lastDroppedItems.filter((item) => distance2d(item.position, alt.Player.local.pos) <= 10);
+
+        if (alt.Player.local.vehicle) {
+            itemsNearPlayer = [];
+        }
+
+        view.emit('inventory:Ground', itemsNearPlayer);
+    }
+
+    static drawItemMarkers() {
+        for (let i = 0; i < lastDroppedItems.length; i++) {
+            const groundItem = lastDroppedItems[i];
+            const newPosition = {
+                x: groundItem.position.x,
+                y: groundItem.position.y,
+                z: groundItem.position.z - 0.98
+            };
+
+            drawMarker(
+                28,
+                newPosition as alt.Vector3,
+                new alt.Vector3(0.25, 0.25, 0.25),
+                new alt.RGBA(0, 181, 204, 200)
+            );
+        }
+    }
 }
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
+alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
 
 const keyFunctions = {
     inventory: InventoryController.updateInventory,

@@ -38,10 +38,52 @@ function generateMinMaxs(division = 6) {
     return groups;
 }
 
+function distance2d(vector1, vector2) {
+    if (vector1 === undefined || vector2 === undefined) {
+        throw new Error('AddVector => vector1 or vector2 is undefined');
+    }
+
+    return Math.sqrt(Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2));
+}
+
 function sortListIntoGroups(name, items) {
+    // Transform all properties to lowercase
     for (let i = 0; i < items.length; i++) {
-        const pos = items[i].Position;
-        const index = currentGroups.findIndex((group) => pos.Y >= group.minY && pos.Y <= group.maxY);
+        const itemData = Object.fromEntries(Object.entries(items[i]).map(([k, v]) => [k.toLowerCase(), v]));
+
+        if (itemData.position) {
+            itemData.position = Object.fromEntries(
+                Object.entries(itemData.position).map(([k, v]) => [k.toLowerCase(), v])
+            );
+        }
+
+        if (itemData.rotation) {
+            itemData.rotation = Object.fromEntries(
+                Object.entries(itemData.rotation).map(([k, v]) => [k.toLowerCase(), v])
+            );
+        }
+
+        items[i] = itemData;
+    }
+
+    items = items.filter((item) => !item.name.includes('air'));
+
+    // Set item as blip.
+    // If the item is too close to anything else. Turn it into a blip.
+    for (let i = 0; i < items.length; i++) {
+        const closestItems = items.filter((item) => distance2d(item.position, items[i].position) <= 25);
+        const hasBlip = closestItems.find((x) => x.isBlip);
+
+        if (hasBlip) {
+            continue;
+        }
+
+        closestItems[0].isBlip = true;
+    }
+
+    for (let i = 0; i < items.length; i++) {
+        const pos = items[i].position;
+        const index = currentGroups.findIndex((group) => pos.y >= group.minY && pos.y <= group.maxY);
 
         if (index <= -1) {
             continue;

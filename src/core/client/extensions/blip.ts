@@ -180,15 +180,6 @@ export class StreamBlip {
         this.safeCreate();
     }
 
-    isInRange(): number | null {
-        const range = distance2d(alt.Player.local.pos, this.pos);
-        if (range > this.maxDistance) {
-            return null;
-        }
-
-        return range;
-    }
-
     safeCreate(): void {
         if (this.blip) {
             return;

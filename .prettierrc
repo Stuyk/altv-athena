@@ -4,5 +4,13 @@
     "singleQuote": true,
     "semi": true,
     "arrowParens": "always",
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "overrides": [
+        {
+            "files": "*.ts",
+            "options": {
+                "parser": "typescript"
+            }
+        }
+    ]
 }

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { playerFuncs } from '../extensions/Player';
 
 let mainChannel: alt.VoiceChannel;
 
@@ -39,7 +40,7 @@ export function addToGlobalVoice(player: alt.Player) {
         return;
     }
 
-    player.emit().message(`[Athena] You have joined the global voice server.`);
-    player.emit().event(SYSTEM_EVENTS.VOICE_JOINED);
+    playerFuncs.emit.message(player, `[Athena] You have joined the global voice server.`);
+    alt.emitClient(player, SYSTEM_EVENTS.VOICE_JOINED);
     mainChannel.addPlayer(player);
 }

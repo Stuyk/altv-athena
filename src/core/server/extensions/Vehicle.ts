@@ -7,6 +7,7 @@ import {
     Vehicle_Seat_List,
     Vehicle_State
 } from '../../shared/enums/vehicle';
+import { playerFuncs } from './Player';
 
 /**
  * Overwrites the default functionality of vehicles.
@@ -98,6 +99,14 @@ declare module 'alt-server' {
         setIntoVehicle(player: alt.Player, seat: Vehicle_Seat_List): void;
 
         /**
+         * Set the lock state for this vehicle.
+         * @param {alt.Player} player
+         * @param {Vehicle_Lock_State} lockState
+         * @memberof Vehicle
+         */
+        setLock(player: alt.Player, lockState: Vehicle_Lock_State): boolean;
+
+        /**
          * Set the owner of this vehicle.
          * @param {alt.Player} player
          * @memberof Vehicle
@@ -143,13 +152,33 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass:
     return v.athenaLockState;
 };
 
+alt.Vehicle.prototype.setLock = function setLock(player: alt.Player, lockState: Vehicle_Lock_State): boolean {
+    const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.isOwner(player) && !v.hasKeys(player)) {
+        return false;
+    }
+
+    v.athenaLockState = lockState;
+    v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+
+    // Automatically Close All Doors in Locked State
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
+        for (let i = 0; i < 6; i++) {
+            v.setDoorOpen(player, i, false);
+        }
+    }
+
+    return true;
+};
+
 alt.Vehicle.prototype.ejectFromVehicle = function ejectFromVehicle(player: alt.Player): void {
     const v: alt.Vehicle = this as alt.Vehicle;
     if (!player.vehicle || player.vehicle !== v) {
         return;
     }
 
-    player.safe().setPosition(player.pos.x, player.pos.y, player.pos.z);
+    playerFuncs.safe.setPosition(player, player.pos.x, player.pos.y, player.pos.z);
 };
 
 alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State {
@@ -163,6 +192,11 @@ alt.Vehicle.prototype.getLockState = function getLockState(): Vehicle_Lock_State
 
 alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x) => x === target.data._id.toString());
     if (index !== -1) {
         return true;
@@ -175,6 +209,11 @@ alt.Vehicle.prototype.giveKeys = function giveKeys(target: alt.Player): boolean 
 
 alt.Vehicle.prototype.hasKeys = function hasKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x: string) => x === target.data._id.toString());
     if (index <= -1) {
         return false;
@@ -200,6 +239,11 @@ alt.Vehicle.prototype.isOwner = function isOwner(target: alt.Player): boolean {
 
 alt.Vehicle.prototype.removeKeys = function removeKeys(target: alt.Player): boolean {
     const v: alt.Vehicle = this as alt.Vehicle;
+
+    if (!v.keys) {
+        v.keys = [];
+    }
+
     const index = v.keys.findIndex((x) => x === target.data._id.toString());
     if (index <= -1) {
         return true;
@@ -264,7 +308,7 @@ alt.Vehicle.prototype.setIntoVehicle = function setIntoVehicle(player: alt.Playe
             return;
         }
 
-        player.emit().event(Vehicle_Events.SET_INTO, v, seat);
+        alt.emitClient(player, Vehicle_Events.SET_INTO, v, seat);
     });
 };
 
@@ -293,5 +337,5 @@ alt.Vehicle.prototype.setEngine = function setEngine(player: alt.Player): void {
 
     v.engineStatus = !v.engineStatus ? true : false;
     v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
-    player.emit().notification(`Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
+    playerFuncs.emit.notification(player, `Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
 };

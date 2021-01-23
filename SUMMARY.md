@@ -15,6 +15,11 @@
 -   [Commands](documentation/commands.md)
 -   [Hotkeys](documentation/hotkeys.md)
 
+## Basic Scripting
+
+-   [Adding Commands](documentation/scripting/adding-commands.md)
+-   [Adding Mods](documentation/scripting/adding-mods.md)
+
 ## External Links
 
 -   [alt:V Official](https://altv.mp/)

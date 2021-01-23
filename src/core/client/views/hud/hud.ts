@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { commandList } from '../../../shared/commands/commandList';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
+import { Command } from '../../../shared/interfaces/Command';
 import { disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { sleep } from '../../utility/sleep';
@@ -22,7 +22,6 @@ export class BaseHUD {
             BaseHUD.view = new alt.WebView(url, false);
             BaseHUD.view.isVisible = false;
             BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
-            BaseHUD.view.on('chat:Inject', BaseHUD.handleInject);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
 
             alt.setTimeout(() => {
@@ -53,15 +52,11 @@ export class BaseHUD {
         alt.emitServer(View_Events_Chat.Send, message);
     }
 
-    private static async handleInject() {
-        const myCommands = commandList.filter(
-            (cmd) => cmd.permission === 0 || (alt.Player.local.meta.permissionLevel & cmd.permission) !== 0
-        );
-
-        await sleep(1500);
+    static populateCommands(commandList: Array<Partial<Command>>): void {
         handleFreezePlayer(false);
 
-        BaseHUD.view.emit('chat:Inject', myCommands);
+        alt.log(`[Athena] Registered Commands: ${commandList.length}`);
+        BaseHUD.view.emit('chat:PopulateCommands', commandList);
         BaseHUD.view.isVisible = true;
     }
 
@@ -86,3 +81,4 @@ export class BaseHUD {
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, BaseHUD.createView);
+alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, BaseHUD.populateCommands);

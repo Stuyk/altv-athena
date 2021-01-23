@@ -1,22 +1,38 @@
 import * as alt from 'alt-server';
-import { getDescription } from '../../shared/commands/commandList';
 import { View_Events_Chat } from '../../shared/enums/views';
+import { Permissions } from '../../shared/flags/permissions';
 import { CommandsLocale } from '../../shared/locale/commands';
-import { distance2d, getClosestTypes } from '../../shared/utility/vector';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { addCommand } from '../systems/chat';
+import { playerFuncs } from '../extensions/Player';
+import ChatController from '../systems/chat';
 import { emitAll } from '../utility/emitHelper';
 import { getPlayersByGridSpace } from '../utility/filters';
 
-addCommand('b', handleCommandOOC);
-addCommand('me', handleCommandMe);
-addCommand('do', handleCommandDo);
-addCommand('low', handleCommandLow);
-addCommand('w', handleCommandWhisper);
+// Talk out of Character
+ChatController.addCommand('b', '/b [message] - Speak out of character', Permissions.None, handleCommandOOC);
+
+// Perform an Action
+ChatController.addCommand(
+    'me',
+    '/me [describe what you are doing] - Roleplay an action',
+    Permissions.None,
+    handleCommandMe
+);
+
+// Describe an Action
+ChatController.addCommand('do', '/do [describe an object] - Describe something', Permissions.None, handleCommandDo);
+
+// Speak Low
+ChatController.addCommand('low', '/low [quietly speak something]', Permissions.None, handleCommandLow);
+
+// Whisper
+ChatController.addCommand('w', '/w [player_id] [message] - Whisper', Permissions.None, handleCommandWhisper);
+ChatController.addAliases('w', ['whisper']);
 
 function handleCommandOOC(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('b'));
+        playerFuncs.emit.message(player, ChatController.getDescription('b'));
         return;
     }
 
@@ -32,7 +48,7 @@ function handleCommandOOC(player: alt.Player, ...args): void {
 
 function handleCommandMe(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('me'));
+        playerFuncs.emit.message(player, ChatController.getDescription('me'));
         return;
     }
 
@@ -48,7 +64,7 @@ function handleCommandMe(player: alt.Player, ...args): void {
 
 function handleCommandDo(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('do'));
+        playerFuncs.emit.message(player, ChatController.getDescription('do'));
         return;
     }
 
@@ -64,7 +80,7 @@ function handleCommandDo(player: alt.Player, ...args): void {
 
 function handleCommandLow(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        player.emit().message(getDescription('low'));
+        playerFuncs.emit.message(player, ChatController.getDescription('low'));
         return;
     }
 
@@ -84,12 +100,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     if (typeof id !== 'string') {
-        player.emit().message(getDescription('w'));
+        playerFuncs.emit.message(player, ChatController.getDescription('w'));
         return;
     }
 
     if (id === null) {
-        player.emit().message(getDescription('w'));
+        playerFuncs.emit.message(player, ChatController.getDescription('w'));
         return;
     }
 
@@ -97,19 +113,23 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     const target = players.find((target) => target && id === target.id.toString());
 
     if (!target || !target.valid) {
-        player.emit().message(CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
     if (distance2d(target.pos, player.pos) > DEFAULT_CONFIG.COMMAND_WHISPER_DISTANCE) {
-        player.emit().message(CommandsLocale.PLAYER_IS_TOO_FAR);
+        playerFuncs.emit.message(player, CommandsLocale.PLAYER_IS_TOO_FAR);
         return;
     }
 
     const fullMessage = args.join(' ');
-    player
-        .emit()
-        .message(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`);
+    playerFuncs.emit.message(
+        player,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`
+    );
 
-    target.emit().message(`${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`);
+    playerFuncs.emit.message(
+        target,
+        `${DEFAULT_CONFIG.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`
+    );
 }

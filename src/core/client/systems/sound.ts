@@ -5,6 +5,7 @@ import { distance } from '../../shared/utility/vector';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
 
 function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);
@@ -51,4 +52,8 @@ function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
     }
 
     alt.emit('hud:PlayAudio3D', soundName, pan, volume);
+}
+
+function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
+    alt.emit('hud:PlayAudio3D', soundName, 0, volume);
 }

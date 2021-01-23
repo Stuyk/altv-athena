@@ -9,6 +9,7 @@ import * as sm from 'simplymongo';
 import './tick';
 import './voice';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerFuncs } from '../extensions/Player';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -21,6 +22,10 @@ export class LoginController {
             alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
         }
 
+        if (account && account.discord) {
+            alt.log(`[Athena] (${player.id}) Discord ${account.discord} has logged in with a Quick Token `);
+        }
+
         const currentPlayers = [...alt.Player.all];
         const index = currentPlayers.findIndex((p) => p.discord && p.discord.id === data.id && p.id !== player.id);
 
@@ -30,7 +35,7 @@ export class LoginController {
         }
 
         player.discord = data as DiscordUser;
-        player.emit().event(View_Events_Discord.Close);
+        alt.emitClient(player, View_Events_Discord.Close);
 
         // Used for DiscordToken skirt.
         if (!account) {
@@ -51,18 +56,20 @@ export class LoginController {
             }
         }
 
-        await player.set().account(account);
+        await playerFuncs.set.account(player, account);
         goToCharacterSelect(player);
     }
 
-    static async tryDisconnect(player: alt.Player, reason: string): Promise<void> {
-        if (!player.data || !player.name || player.pendingCharacterSelect || player.pendingCharacterEdit) {
+    static tryDisconnect(player: alt.Player, reason: string): void {
+        if (!player || !player.valid || !player.data) {
             return;
         }
 
+        const playerRef = { ...player };
+
         try {
-            alt.log(`${player.name} has logged out.`);
-            player.save().onTick();
+            alt.log(`${playerRef.name} has logged out.`);
+            playerFuncs.save.onTick(playerRef as alt.Player);
         } catch (err) {
             alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
             alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);

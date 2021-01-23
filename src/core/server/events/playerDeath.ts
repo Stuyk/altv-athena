@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { playerFuncs } from '../extensions/Player';
 
 alt.on('playerDeath', handleDeath);
 
@@ -7,5 +8,5 @@ function handleDeath(player: alt.Player, killer: alt.Player, weaponHash: any): v
         return;
     }
 
-    player.set().dead(killer, weaponHash);
+    playerFuncs.set.dead(player, killer, weaponHash);
 }

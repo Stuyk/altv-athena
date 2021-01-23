@@ -1,4 +1,6 @@
 import * as alt from 'alt-server';
+import { Vector3 } from 'alt-server';
+import { distance2d } from '../../shared/utility/vector';
 
 /**
  * SERVER ONLY
@@ -42,4 +44,57 @@ export function isBetweenVectors(pos, vector1, vector2): boolean {
     const validX = pos.x > vector1.x && pos.x < vector2.x;
     const validY = pos.y > vector1.y && pos.y < vector2.y;
     return validX && validY ? true : false;
+}
+
+/**
+ * Get the closest server entity type. Server only.
+ * @template T
+ * @param {Vector3} playerPosition
+ * @param {Vector3} rot
+ * @param {Array<{ pos: Vector3; valid?: boolean }>} entities
+ * @param {number} distance
+ * @return {*}  {(T | null)}
+ */
+export function getClosestEntity<T>(
+    playerPosition: Vector3,
+    rot: Vector3,
+    entities: Array<{ pos: Vector3; valid?: boolean }>,
+    distance: number
+): T | null {
+    const fwdVector = getForwardVector(rot);
+    const position = {
+        x: playerPosition.x + fwdVector.x * distance,
+        y: playerPosition.y + fwdVector.y * distance,
+        z: playerPosition.z
+    };
+
+    let lastRange = distance;
+    let closestEntity;
+
+    for (let i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+
+        if (!entity || (entity.hasOwnProperty('valid') && !entity.valid)) {
+            continue;
+        }
+
+        if (!entity.hasOwnProperty('pos')) {
+            continue;
+        }
+
+        const dist = distance2d(position, entity.pos);
+
+        if (dist > distance) {
+            continue;
+        }
+
+        if (dist > lastRange) {
+            continue;
+        }
+
+        closestEntity = entity;
+        lastRange = dist;
+    }
+
+    return closestEntity;
 }

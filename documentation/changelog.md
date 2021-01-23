@@ -4,6 +4,44 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.2.0 - January 16-22, 2021
+
+```diff
++ Inventory Design
++ Inventory Item Movement Architecture
++ Inventory Events
++ Changed Command Handler and Command Propogation
++ Changed Chat to a ChatController Class
++ ChatController now used by all commands for description population
++ ChatController now supports command aliases
++ Added vehicle.setLock to Vehicle Prototypes
++ Added INTERACTION_ALWAYS_ON which keeps interaction mode running 24/7 for SHARED_CONFIG
++ Reverted All Player Prototypes (Events not always working)
++ Decoupled Prototype Logic (Prototypes were overwhelmed and too much data).
++ Created playerFuncs export in place of Prototypes
++ Finished Inventory Controller Core Functionality
++ Added 2D Sound to Emit
++ Changed Item Swap Rule to Null Slots Only
++ Fixed First Spawn Bug
++ Fixed Login Details for Quick Token
++ Items Droppable on Ground
++ Items Pickupable from Ground
++ Item Drop Markers
++ Added Item Drop Animation
++ Added Item Pickup Animation
++ Improved Vehicle Control Information
++ Close Doors Automatically When Entering Vehicle
++ Help Message when Exiting Vehicle is Possible
++ Blips are Correct Color / Sprite for Rendering
++ Blips are now pre-processed based on .isBlip
++ Removed showing blips that are too close to each other
++ Interactions are now ColShapes
++ Interactions only toggled when entering ColShapes
++ Interactions now have a large green cylinder to help notify you it's interactable.
++ Added Inventory Tab Item Movement
++ Fixed Regex for Inventory Info
+```
+
 ## 1.1.0 - January 12-15, 2021
 
 ```diff

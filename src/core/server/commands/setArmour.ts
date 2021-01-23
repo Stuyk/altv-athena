@@ -1,13 +1,19 @@
 import * as alt from 'alt-server';
-import { getDescription } from '../../shared/commands/commandList';
+import { Permissions } from '../../shared/flags/permissions';
 import { CommandsLocale } from '../../shared/locale/commands';
-import { addCommand } from '../systems/chat';
+import { playerFuncs } from '../extensions/Player';
+import ChatController from '../systems/chat';
 
-addCommand('setarmour', handleCommand);
+ChatController.addCommand(
+    'setarmour',
+    '/setarmour [0 - 100] [player_id]* - Set armour for self or others',
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
     if (isNaN(value)) {
-        player.emit().message(getDescription('setarmour'));
+        playerFuncs.emit.message(player, ChatController.getDescription('setarmour'));
         return;
     }
 
@@ -26,7 +32,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        player.emit().message(CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
         return;
     }
 
@@ -34,6 +40,6 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 }
 
 function finishSetArmour(target: alt.Player, value: number) {
-    target.safe().addArmour(value, true);
-    target.emit().message(`${CommandsLocale.ARMOUR_SET_TO}${value}`);
+    playerFuncs.safe.addArmour(target, value, true);
+    playerFuncs.emit.message(target, `${CommandsLocale.ARMOUR_SET_TO}${value}`);
 }
