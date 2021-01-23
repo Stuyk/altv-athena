@@ -19,6 +19,7 @@ export enum SYSTEM_EVENTS {
     //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',
+    PLAYER_SET_INTERACTION = 'interaction:Set',
     //
     PLAYER_TICK = 'player:Tick',
     //

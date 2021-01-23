@@ -107,12 +107,6 @@ async function handleStreamChanges(): Promise<void> {
  */
 function updateCategory(category: string): void {
     const blips = streamBlips[category];
-    let lastRange: number = alt.Player.local.closestInteraction
-        ? distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position)
-        : MAX_BLIP_STREAM_DISTANCE;
-
-    let closestBlip: { type: string; position: alt.Vector3 };
-
     for (let i = 0; i < blips.length; i++) {
         const blip = blips[i];
         const range = distance2d(alt.Player.local.pos, blip.pos);
@@ -122,22 +116,6 @@ function updateCategory(category: string): void {
             continue;
         }
 
-        if (range < lastRange) {
-            closestBlip = { type: category, position: blip.pos };
-            lastRange = range;
-        }
-
         blip.safeCreate();
     }
-
-    if (!closestBlip) {
-        return;
-    }
-
-    if (lastRange > SHARED_CONFIG.MAX_INTERACTION_RANGE) {
-        alt.Player.local.closestInteraction = null;
-        return;
-    }
-
-    alt.Player.local.closestInteraction = closestBlip;
 }

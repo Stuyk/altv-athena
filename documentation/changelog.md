@@ -33,6 +33,11 @@ description: List of all the changes and current versions.
 + Close Doors Automatically When Entering Vehicle
 + Help Message when Exiting Vehicle is Possible
 + Blips are Correct Color / Sprite for Rendering
++ Blips are now pre-processed based on .isBlip
++ Removed showing blips that are too close to each other
++ Interactions are now ColShapes
++ Interactions only toggled when entering ColShapes
++ Interactions now have a large green cylinder to help notify you it's interactable.
 ```
 
 ## 1.1.0 - January 12-15, 2021

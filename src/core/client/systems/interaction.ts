@@ -46,6 +46,22 @@ export class InteractionController {
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
     }
 
+    /**
+     * Set when a player enters a ColShape Interaction from Server Side
+     * @static
+     * @param {(string | null)} type
+     * @param {alt.Vector3} position
+     * @memberof InteractionController
+     */
+    static setInteractionInfo(type: string | null, position: alt.Vector3) {
+        if (type === null) {
+            alt.Player.local.closestInteraction = null;
+            return;
+        }
+
+        alt.Player.local.closestInteraction = { type, position };
+    }
+
     static handleInteractionMode() {
         if (alt.Player.local.isMenuOpen) {
             InteractionController.pressedKey = false;
@@ -82,9 +98,12 @@ export class InteractionController {
             return;
         }
 
-        const intPos = alt.Player.local.closestInteraction.position;
-        const zPosition = new alt.Vector3(intPos.x, intPos.y, intPos.z + 1);
-        drawMarker(28, zPosition, new alt.Vector3(0.1, 0.1, 0.1), new alt.RGBA(255, 255, 255, 200));
+        drawMarker(
+            1,
+            alt.Player.local.closestInteraction.position,
+            new alt.Vector3(0.05, 0.05, 8),
+            new alt.RGBA(0, 255, 0, 100)
+        );
 
         if (dist < MAX_INTERACTION_DRAW) {
             HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
@@ -101,3 +120,5 @@ export class InteractionController {
 if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
     InteractionController.toggleInteractionMode();
 }
+
+alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
