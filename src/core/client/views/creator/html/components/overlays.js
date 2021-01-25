@@ -42,18 +42,34 @@ Vue.component('tab-overlays', {
     template: `
         <v-container class="containerHelper transparent" v-if="data.opacityOverlays[0]">
             <div class="d-flex flex-column justify-space-between fill-height mb-12" block fluid>
-                <v-card v-for="(name, i) in overlayTemplate" :key="i" class="d-flex flex-column elevation-2 mb-3 pa-3 grey darken-3">
+                <v-card
+                    v-for="(name, i) in overlayTemplate"
+                    :key="i"
+                    class="d-flex flex-column elevation-2 mb-3 pa-3 grey darken-3"
+                >
                     <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
                         {{ overlayTemplate[i].label }}
                     </span>
                     <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)" class="light-blue--text" outlined small text>
+                        <v-btn
+                            @click="decrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
+                            class="light-blue--text"
+                            outlined
+                            small
+                            text
+                        >
                             <v-icon small>icon-chevron-left</v-icon>
                         </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
+                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small>
                             {{ data.opacityOverlays[i].value !== null ? data.opacityOverlays[i].value : -1 }}
                         </span>
-                        <v-btn @click="incrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"  class="light-blue--text" outlined small text>
+                        <v-btn
+                            @click="incrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
+                            class="light-blue--text"
+                            outlined
+                            small
+                            text
+                        >
                             <v-icon small>icon-chevron-right</v-icon>
                         </v-btn>
                     </div>
@@ -61,8 +77,23 @@ Vue.component('tab-overlays', {
                         {{ overlayTemplate[i].label }} Opacity
                     </span>
                     <div class="d-flex flex-row flex-grow-1">
-                        <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }}</v-chip>
-                        <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.opacityOverlays[i].opacity" @input="e => handleChange(e, 'opacity', i)" />
+                        <v-chip class="light-blue--text mr-3" label outlined
+                            >{{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }}</v-chip
+                        >
+                        <v-slider
+                            thumb-label
+                            dense
+                            hide-details
+                            ticks="always"
+                            tick-size="4"
+                            class="flex-grow-1"
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.1"
+                            v-model.number="data.opacityOverlays[i].opacity"
+                            @input="e => handleChange(e, 'opacity', i)"
+                        />
                     </div>
                 </v-card>
             </div>
