@@ -10,6 +10,9 @@ description: List of all the changes and current versions.
 + Toolbar Support for Weapons
 + Keybinds 1-4 Now Support Weapon Swapping
 + Weapon Swap Sounds
++ Weapon List Creation
++ Weapon List Creation Descriptions, Info, Generic Stats (Incorrect Probably)
++ Weapon Command
 ```
 
 ## 1.2.0 - January 16-22, 2021

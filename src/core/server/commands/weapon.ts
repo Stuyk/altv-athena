@@ -42,7 +42,7 @@ function handleCommand(player: alt.Player, weaponName: string): void {
     newItem.name = weapon.name;
     newItem.description = weapon.desc;
     newItem.uuid = sha256Random(JSON.stringify(newItem));
-    newItem.icon = 'gun';
+    newItem.icon = weaponName.toLowerCase();
     newItem.slot = inv.slot;
     newItem.data.hash = weapon.hash;
 
