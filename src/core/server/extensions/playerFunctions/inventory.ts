@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
 import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { Item } from '../../../shared/interfaces/Item';
+import { deepCloneObject } from '../../../shared/utility/deepCopy';
 
 /**
  * Return the tab index and the slot to use for the item.
@@ -57,7 +58,7 @@ function getInventoryItem(p: alt.Player, slot: number, tab: number): Item | null
         return null;
     }
 
-    return { ...p.data.inventory[tab][index] } as Item;
+    return deepCloneObject<Item>(p.data.inventory[tab][index]);
 }
 
 /**
@@ -76,7 +77,7 @@ function getEquipmentItem(p: alt.Player, slot: number): Item | null {
         return null;
     }
 
-    return { ...p.data.equipment[index] } as Item;
+    return deepCloneObject<Item>(p.data.equipment[index]);
 }
 
 /**
@@ -95,7 +96,7 @@ function getToolbarItem(p: alt.Player, slot: number): Item | null {
         return null;
     }
 
-    return { ...p.data.toolbar[index] } as Item;
+    return deepCloneObject<Item>(p.data.toolbar[index]);
 }
 
 /**
@@ -244,7 +245,8 @@ function inventoryAdd(p: alt.Player, item: Item, slot: number, tab: number): boo
         item.slot = slot;
     }
 
-    p.data.inventory[tab].push(item);
+    const safeItemCopy = deepCloneObject(item);
+    p.data.inventory[tab].push(safeItemCopy);
     return true;
 }
 
@@ -337,7 +339,8 @@ function equipmentAdd(p: alt.Player, item: Item, slot: EquipmentType): boolean {
         item.slot = slot;
     }
 
-    p.data.equipment.push(item);
+    const safeItemCopy = deepCloneObject(item);
+    p.data.equipment.push(safeItemCopy);
     return true;
 }
 
@@ -381,7 +384,8 @@ function toolbarAdd(p: alt.Player, item: Item, slot: number): boolean {
         item.slot = slot;
     }
 
-    p.data.toolbar.push(item);
+    const safeItemCopy = deepCloneObject(item);
+    p.data.toolbar.push(safeItemCopy);
     return true;
 }
 
