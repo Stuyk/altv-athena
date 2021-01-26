@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.3.0 - January 23-x, 2021
+## 1.3.0 - January 23-26, 2021
 
 ```diff
 + Toolbar Support for Weapons
@@ -17,6 +17,7 @@ description: List of all the changes and current versions.
 + Fix Item Shallow Copy (Why does shallow copy even exist? Dumb af.)
 + Fix small bug with item props in toolbar
 + Avoid shallow with spread operators.
++ Add some new documentation
 ```
 
 ## 1.2.0 - January 16-22, 2021
