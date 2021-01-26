@@ -373,7 +373,7 @@ const app = new Vue({
             }
 
             if (this.itemInfo.includes('t-')) {
-                const target = this.toolbar[parseInt(this.itemInfo.replace('g-', ''))];
+                const target = this.toolbar[parseInt(this.itemInfo.replace('t-', ''))];
 
                 if (!target || !target.data) {
                     return null;
@@ -479,7 +479,20 @@ const app = new Vue({
                 }
             ];
 
-            this.updateToolbar([]);
+            this.updateToolbar([
+                {
+                    name: `Hat`,
+                    uuid: `some_hash_thing_ground`,
+                    description: `What a cozy hat! Wow. Much cozy. Many comforts.`,
+                    icon: 'hat',
+                    slot: 0,
+                    quantity: Math.floor(Math.random() * 10),
+                    weight: Math.floor(Math.random() * 5),
+                    data: {
+                        hat: true
+                    }
+                }
+            ]);
             this.updateGround(ground);
             this.updateInventory([items, slot2, [], [], [], [], []]);
             this.updateEquipment([

@@ -5,6 +5,7 @@ import { Permissions } from '../../shared/flags/permissions';
 import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
 import { EquipmentType } from '../../shared/enums/equipment';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 const pistolItem: Item = {
     name: `Pistol`,
@@ -66,17 +67,22 @@ const smgItem: Item = {
 ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
-    let itemClone = { ...pistolItem };
-    player.data.inventory[0].push(itemClone);
+    let itemClone = deepCloneObject<Item>(pistolItem);
+    let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 
-    itemClone = { ...equipmentItem };
-    player.data.inventory[0].push(itemClone);
+    itemClone = deepCloneObject<Item>(equipmentItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 
-    itemClone = { ...boxItem };
-    player.data.inventory[0].push(itemClone);
+    itemClone = deepCloneObject<Item>(boxItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 
-    itemClone = { ...smgItem };
-    player.data.inventory[0].push(itemClone);
+    itemClone = deepCloneObject<Item>(smgItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
 }

@@ -13,6 +13,10 @@ description: List of all the changes and current versions.
 + Weapon List Creation
 + Weapon List Creation Descriptions, Info, Generic Stats (Incorrect Probably)
 + Weapon Command
++ Introduce Deep Copy for Objects
++ Fix Item Shallow Copy (Why does shallow copy even exist? Dumb af.)
++ Fix small bug with item props in toolbar
++ Avoid shallow with spread operators.
 ```
 
 ## 1.2.0 - January 16-22, 2021

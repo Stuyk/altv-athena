@@ -14,6 +14,10 @@ const db: Database = getDatabase();
  * @memberof SavePrototype
  */
 async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Promise<void> {
+    if (process.env.TEST) {
+        return;
+    }
+
     await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, 'characters');
 }
 
@@ -24,6 +28,10 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
  * @memberof SavePrototype
  */
 async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<void> {
+    if (process.env.TEST) {
+        return;
+    }
+
     await db.updatePartialData(p.data._id, { ...dataObject }, 'characters');
 }
 

@@ -6,6 +6,7 @@ import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
 
@@ -37,7 +38,7 @@ function handleCommand(player: alt.Player, weaponName: string): void {
         return;
     }
 
-    const newItem = Object.assign({}, itemRef);
+    const newItem = deepCloneObject<Item>(itemRef);
     newItem.name = weaponName.toUpperCase();
     newItem.name = weapon.name;
     newItem.description = weapon.desc;
