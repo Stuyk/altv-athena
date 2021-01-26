@@ -10,6 +10,7 @@ export enum SYSTEM_EVENTS {
     //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
+
     //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
@@ -22,6 +23,9 @@ export enum SYSTEM_EVENTS {
     PLAYER_SET_INTERACTION = 'interaction:Set',
     //
     PLAYER_TICK = 'player:Tick',
+    //
+    PLAYER_TOOLBAR_SET = 'player:Toolbar',
+    PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',

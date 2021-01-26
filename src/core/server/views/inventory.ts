@@ -65,6 +65,11 @@ export class InventoryController {
         // The data locations on `player.data` we are using.
         const endData = DataHelpers.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
         const endSlotIndex = stripCategory(endSlot);
+        const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
+
+        if (selectData.name === InventoryType.TOOLBAR && endData.name !== InventoryType.TOOLBAR) {
+            player.removeAllWeapons();
+        }
 
         // Handle Drop Ground
         if (endData.name === InventoryType.GROUND) {
@@ -78,8 +83,6 @@ export class InventoryController {
             return;
         }
 
-        const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
-
         // Pickup Item from Ground
         if (selectData.name === InventoryType.GROUND) {
             InventoryController.handlePickupGround(player, endData, endSlotIndex, hash, tab);
@@ -87,7 +90,7 @@ export class InventoryController {
         }
 
         const selectSlotIndex = stripCategory(selectedSlot);
-        const itemClone = selectData.getItem(player, selectSlotIndex, tab);
+        const itemClone: Item = selectData.getItem(player, selectSlotIndex, tab);
 
         if (!itemClone) {
             playerFuncs.sync.inventory(player);

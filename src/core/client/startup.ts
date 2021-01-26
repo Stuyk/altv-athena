@@ -23,6 +23,7 @@ import './systems/noclip';
 import './systems/quickToken';
 import './systems/sound';
 import './systems/tick';
+import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
 

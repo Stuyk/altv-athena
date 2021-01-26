@@ -182,7 +182,7 @@ export class VehicleController {
         if (!isDriver) {
             if (canExit) {
                 alt.log('should be able to exit');
-                HelpController.updateHelpText(70, `Exit Vehicle`, '');
+                HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Exit Vehicle`, '');
             }
             return;
         }
@@ -197,9 +197,17 @@ export class VehicleController {
             const vehicleName = vehClass === 8 || vehClass === 13 ? 'Bike' : 'Vehicle';
 
             if (!alt.Player.local.vehicle.engineStatus) {
-                HelpController.updateHelpText(70, canExit ? `Exit ${vehicleName}` : '', `Turn on Engine`);
+                HelpController.updateHelpText(
+                    KEY_BINDS.VEHICLE_FUNCS,
+                    canExit ? `Exit ${vehicleName}` : '',
+                    `Turn on Engine`
+                );
             } else {
-                HelpController.updateHelpText(70, canExit ? `Exit ${vehicleName}` : '', `Turn off Engine`);
+                HelpController.updateHelpText(
+                    KEY_BINDS.VEHICLE_FUNCS,
+                    canExit ? `Exit ${vehicleName}` : '',
+                    `Turn off Engine`
+                );
             }
         }
     }
@@ -290,9 +298,9 @@ export class VehicleController {
         drawMarker(28, closestDoor.pos, new alt.Vector3(0.075, 0.075, 0.075), new alt.RGBA(255, 255, 255, 200));
 
         if (closestDoor.isDoor) {
-            HelpController.updateHelpText(70, null, `Toggle Door`);
+            HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, null, `Toggle Door`);
         } else {
-            HelpController.updateHelpText(70, `Enter Vehicle`, `Toggle Door`);
+            HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Enter Vehicle`, `Toggle Door`);
         }
 
         // Short Press F

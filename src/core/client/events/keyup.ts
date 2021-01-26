@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { InteractionController } from '../systems/interaction';
+import { ToolbarController } from '../systems/toolbar';
 import { VehicleController } from '../systems/vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { HelpController } from '../views/hud/controllers/helpController';
@@ -9,14 +10,27 @@ import { LeaderboardController } from '../views/hud/controllers/leaderBoardContr
 import { InventoryController } from '../views/inventory/inventory';
 
 export const KEY_BINDS = {
-    DEBUG_KEY: 112, // F1
-    LEADERBOARD: 113, // F12
-    CHAT: 84, // T
-    INVENTORY: 73, // I
-    VEHICLE_FUNCS: 70, // F
-    VEHICLE_LOCK: 88, // X
-    INTERACT: 69, // E
-    INTERACTION_MODE: 18 // Left Alt
+    // Left Alt
+    INTERACTION_MODE: 18,
+    // 1 - 4
+    TOOLBAR_ONE: 49,
+    TOOLBAR_TWO: 50,
+    TOOLBAR_THREE: 51,
+    TOOLBAR_FOUR: 52,
+    // E
+    INTERACT: 69,
+    // F
+    VEHICLE_FUNCS: 70,
+    // I
+    INVENTORY: 73,
+    // T
+    CHAT: 84,
+    // X
+    VEHICLE_LOCK: 88,
+    // F1
+    DEBUG_KEY: 112,
+    // F2
+    LEADERBOARD: 113
 };
 
 const DELAY_BETWEEN_LONG_PRESSES = 800;
@@ -29,14 +43,14 @@ const KEY_UP_BINDS = {
         singlePress: LeaderboardController.focusLeaderBoard
     },
     [KEY_BINDS.INVENTORY]: {
-        singlePress: () => InventoryController.handleView()
+        singlePress: (...args: any[]) => InventoryController.handleView()
     },
     [KEY_BINDS.VEHICLE_LOCK]: {
-        singlePress: () => VehicleController.triggerVehicleFunction('pressedLockKey')
+        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedLockKey')
     },
     [KEY_BINDS.VEHICLE_FUNCS]: {
-        singlePress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunction'),
-        longPress: () => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
+        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunction'),
+        longPress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
     },
     [KEY_BINDS.CHAT]: {
         singlePress: ChatController.focusChat
@@ -46,6 +60,18 @@ const KEY_UP_BINDS = {
     },
     [KEY_BINDS.INTERACTION_MODE]: {
         singlePress: InteractionController.toggleInteractionMode
+    },
+    [KEY_BINDS.TOOLBAR_ONE]: {
+        singlePress: ToolbarController.handleToolbarSwitch
+    },
+    [KEY_BINDS.TOOLBAR_TWO]: {
+        singlePress: ToolbarController.handleToolbarSwitch
+    },
+    [KEY_BINDS.TOOLBAR_THREE]: {
+        singlePress: ToolbarController.handleToolbarSwitch
+    },
+    [KEY_BINDS.TOOLBAR_FOUR]: {
+        singlePress: ToolbarController.handleToolbarSwitch
     }
 };
 
@@ -82,7 +108,7 @@ function handleKeyDown(key: number) {
 
         HelpController.setHelpState(false);
         keyPressTimes[key] = null;
-        KEY_UP_BINDS[key].longPress();
+        KEY_UP_BINDS[key].longPress(key);
     }, DELAY_BETWEEN_LONG_PRESSES);
 }
 
@@ -114,13 +140,13 @@ function handleKeyUp(key: number) {
         KEY_UP_BINDS[key].longPress
     ) {
         keyPressTimes[key] = null;
-        KEY_UP_BINDS[key].longPress();
+        KEY_UP_BINDS[key].longPress(key);
         return;
     }
 
     keyPressTimes[key] = null;
     // Single Press
-    KEY_UP_BINDS[key].singlePress();
+    KEY_UP_BINDS[key].singlePress(key);
 }
 
 function handleDebugMessages() {

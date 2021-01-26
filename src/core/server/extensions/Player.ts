@@ -41,6 +41,9 @@ declare module 'alt-server' {
         nextPingTime: number;
         nextItemSync: number;
 
+        // Toolbar Information
+        lastToolbarData: { equipped: boolean; slot: number };
+
         // World Data
         gridSpace: number;
         currentWeather: string;

@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import { drawLine } from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
