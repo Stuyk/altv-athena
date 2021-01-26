@@ -1042,28 +1042,282 @@ const WeaponList: { [key: string]: Weapon } = {
         },
         overall: 44
     },
-    raycarbine: 0x476bf155,
-    rayminigun: 0xb62d1f67,
-    raypistol: 0xaf3696a1,
-    revolver: 0xc1b3c3d1,
-    revolvermk2: 0xcb96392f,
-    rpg: 0xb1ca77b1,
-    sawnoffshotgun: 0x7846a318,
-    smg: 0x2be6766b,
-    smgmk2: 0x78a97cd0,
-    smokegrenade: 0xfdbc8a50,
-    sniperrifle: 0x5fc3c11,
-    snowball: 0x787f0bb,
-    snspistol: 0xbfd21232,
-    snspistolmk2: 0x88374054,
-    specialcarbine: 0xc0a3098d,
-    specialcarbinemk2: 0x969c3d67,
-    stickybomb: 0x2c3731d9,
-    stonehatchet: 0x3813fc08,
-    stungun: 0x3656c8c1,
-    switchblade: 0xdfe37640,
-    unarmed: 0xa2719263,
-    vintagepistol: 0x83839c4
+    raycarbine: {
+        hash: 0x476bf155,
+        name: 'Unholy Hellbringer',
+        desc: `Republican Space Ranger Special. If you want to turn a little green man into little green goo, this is the only American way to do it.`,
+        type: `Machine Gun`,
+        price: 449000,
+        clip: 9999,
+        stats: {
+            damage: 55,
+            rate: 65,
+            accuracy: 45,
+            range: 60
+        },
+        overall: 59
+    },
+    rayminigun: {
+        hash: 0xb62d1f67,
+        name: 'Widowmaker',
+        desc: `A futuristic Minigun. Republican Space Ranger Special. GO AHEAD, SAY I'M COMPENSATING FOR SOMETHING. I DARE YOU.`,
+        type: `Heavy Weapon`,
+        price: 449000,
+        clip: 9999,
+        stats: {
+            damage: 30,
+            rate: 100,
+            accuracy: 40,
+            range: 55
+        },
+        overall: 63
+    },
+    raypistol: {
+        hash: 0xaf3696a1,
+        name: `Up-n-Atomizer`,
+        desc: `A futuristic alien pistol, also known as Raygun. Republican Space Ranger Special, fresh from the galactic war on socialism: no ammo, no mag, just one brutal energy pulse after another.`,
+        type: `Handgun`,
+        price: 399000,
+        clip: 9999,
+        stats: {
+            damage: 80,
+            rate: 10,
+            accuracy: 10,
+            range: 50
+        },
+        overall: 32
+    },
+    revolver: {
+        hash: 0xc1b3c3d1,
+        name: 'Heavy Revolver',
+        desc: `A handgun with enough stopping power to drop a crazed rhino, and heavy enough to beat it to death if you're out of ammo.`,
+        type: `Handgun`,
+        price: 5900,
+        clip: 6,
+        stats: {
+            damage: 70,
+            rate: 20,
+            accuracy: 65,
+            range: 35
+        },
+        overall: 39.2
+    },
+    revolvermk2: {
+        hash: 0xcb96392f,
+        name: 'Heavy Revolver MK II',
+        desc: `A handgun with enough stopping power to drop a crazed rhino, and heavy enough to beat it to death if you're out of ammo.`,
+        type: `Handgun`,
+        price: 99000,
+        clip: 6,
+        stats: {
+            damage: 75,
+            rate: 30,
+            accuracy: 65,
+            range: 35
+        },
+        overall: 42.2
+    },
+    rpg: {
+        hash: 0xb1ca77b1,
+        name: 'RPG',
+        desc: `A portable, shoulder-launched, anti-tank weapon that fires explosive warheads. Very effective for taking down vehicles or large groups of assailants.`,
+        type: `Heavy Weapon`,
+        price: 26250,
+        clip: 1,
+        stats: {
+            damage: 100,
+            rate: 5,
+            accuracy: 10,
+            range: 70
+        },
+        overall: 39
+    },
+    sawnoffshotgun: {
+        hash: 0x7846a318,
+        name: 'Sawed-Off Shotgun',
+        desc: `This single-barrel, sawed-off shotgun compensates for its low range and ammo capacity with devastating efficiency in close combat.`,
+        type: `Shotgun`,
+        price: 30000,
+        clip: 8,
+        stats: {
+            damage: 96,
+            rate: 20,
+            accuracy: 20,
+            range: 15
+        },
+        overall: 32.2
+    },
+    smg: {
+        hash: 0x2be6766b,
+        name: `SMG`,
+        desc: `This is known as a good all-around submachine gun. Lightweight with an accurate sight and 30-round magazine capacity.`,
+        type: `Machine Gun`,
+        price: 7500,
+        clip: 30,
+        stats: {
+            damage: 22,
+            rate: 55,
+            accuracy: 40,
+            range: 35
+        },
+        overall: 38.4
+    },
+    smgmk2: {
+        hash: 0x78a97cd0,
+        name: `SMG MK II`,
+        desc: `Lightweight, compact, with a rate of fire to die very messily for: turn any confined space into a kill box at the click of a well-oiled trigger.`,
+        type: `Machine Gun`,
+        price: 85500,
+        clip: 30,
+        stats: {
+            damage: 22,
+            rate: 55,
+            accuracy: 40,
+            range: 35
+        },
+        overall: 38.4
+    },
+    smokegrenade: { hash: 0xfdbc8a50, name: 'Smoke Grenade', desc: `Smoookiinnnn...`, type: `Thrown`, price: 800 },
+    sniperrifle: {
+        hash: 0x5fc3c11,
+        name: `Sniper Rifle`,
+        desc: `Standard sniper rifle. Ideal for situations that require accuracy at long range. Limitations include slow reload speed and very low rate of fire.`,
+        type: `Sniper Rifle`,
+        price: 20000,
+        clip: 10,
+        stats: {
+            damage: 96,
+            rate: 25,
+            accuracy: 70,
+            range: 95
+        },
+        overall: 59.2
+    },
+    snowball: {
+        hash: 0x787f0bb,
+        name: 'Snowball',
+        desc: `Be on the lookout and ready to round up your Crew for a friendly snowball fight, but be forewarned, those icy little suckers can pack a wallop`,
+        type: `Thrown`,
+        price: 5,
+        clip: 9,
+        stats: {
+            damage: 1,
+            rate: 10,
+            accuracy: 10,
+            range: 0
+        },
+        overall: 5.25
+    },
+    snspistol: {
+        hash: 0xbfd21232,
+        name: `SNS Pistol`,
+        desc: `Like condoms or hairspray, this fits in your pocket for a night on the town. The price of a bottle at a club, it's half as accurate as a champagne cork, and twice as deadly.`,
+        type: `Handgun`,
+        price: 2750,
+        clip: 6,
+        stats: {
+            damage: 30,
+            rate: 40,
+            accuracy: 40,
+            range: 20
+        },
+        overall: 26.6
+    },
+    snspistolmk2: {
+        hash: 0x88374054,
+        name: `SNS Pistol MK II`,
+        desc: `The ultimate purse-filler: if you want to make Saturday Night really special, this is your ticket.`,
+        type: `Handgun`,
+        price: 79575,
+        clip: 6,
+        stats: {
+            damage: 30,
+            rate: 40,
+            accuracy: 40,
+            range: 20
+        },
+        overall: 26.6
+    },
+    specialcarbine: {
+        hash: 0xc0a3098d,
+        name: `Special Carbine`,
+        desc: `Combining accuracy, maneuverability, firepower and low recoil, this is an extremely versatile assault rifle for any combat situation.`,
+        type: `Assault Rifle`,
+        price: 14750,
+        clip: 30,
+        stats: {
+            damage: 34,
+            rate: 65,
+            accuracy: 55,
+            range: 40
+        },
+        overall: 46.8
+    },
+    specialcarbinemk2: {
+        hash: 0x969c3d67,
+        name: `Special Carbine MK II`,
+        desc: `The jack of all trades just got a serious upgrade: bow to the master.`,
+        type: `Assault Rifle`,
+        price: 135000,
+        clip: 30,
+        stats: {
+            damage: 34,
+            rate: 65,
+            accuracy: 55,
+            range: 40
+        },
+        overall: 46.8
+    },
+    stickybomb: {
+        hash: 0x2c3731d9,
+        name: `Sticky Bomb`,
+        desc: `A plastic explosive charge fitted with a remote detonator. Can be thrown and then detonated or attached to a vehicle then detonated.`,
+        type: `Thrown`,
+        price: 60000,
+        clip: 25,
+        stats: { damage: 95, rate: 10, accuracy: 30, range: 10 },
+        overall: 36.25
+    },
+    stonehatchet: {
+        hash: 0x3813fc08,
+        name: 'Stone Hatchet',
+        desc: `Stone cold killer.`,
+        type: `Melee`,
+        price: 25000,
+        stats: { damage: 30, rate: 15, range: 0 },
+        overall: 15
+    },
+    stungun: {
+        hash: 0x3656c8c1,
+        name: 'Stun Gun',
+        desc: `Fires a projectile that administers a voltage capable of temporarily stunning an assailant. Takes approximately 4 seconds to recharge after firing.`,
+        type: `Handgun`,
+        price: 100,
+        stats: { damage: 1, rate: 10, accuracy: 40, range: 5 },
+        overall: 31.2
+    },
+    switchblade: {
+        hash: 0xdfe37640,
+        name: `Switch Blade`,
+        desc: `From your pocket to hilt-deep in the other guy's ribs in under a second: folding knives will never go out of style.`,
+        type: `Melee`,
+        price: 1950,
+        stats: { damage: 15, rate: 20, range: 0 },
+        overall: 11.67
+    },
+    unarmed: {
+        hash: 0xa2719263,
+        name: 'unarmed'
+    },
+    vintagepistol: {
+        hash: 0x83839c4,
+        name: `Vintage Pistol`,
+        desc: `What you really need is a more recognisable gun. Stand out from the crowd at an armed robbery with this engraved pistol.`,
+        type: `Handgun`,
+        price: 3450,
+        stats: { damage: 35, rate: 40, accuracy: 40, range: 25 },
+        overall: 29.2
+    }
 };
 
 /**
@@ -1072,6 +1326,6 @@ const WeaponList: { [key: string]: Weapon } = {
  * @param {string} name
  * @return {*}  {(number | null)}
  */
-export function getWeaponByName(name: string): number | null {
+export function getWeaponByName(name: string): Weapon | null {
     return WeaponList[name];
 }

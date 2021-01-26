@@ -4,11 +4,10 @@ import { Item } from '../../shared/interfaces/Item';
 import { Permissions } from '../../shared/flags/permissions';
 import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
-import { EquipmentType } from '../../shared/enums/equipment';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
 
-ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
+ChatController.addCommand('weapon [name]', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
 
 const itemRef: Item = {
     name: `Micro SMG`,
@@ -32,17 +31,26 @@ function handleCommand(player: alt.Player, weaponName: string): void {
         return;
     }
 
-    const itemHash = getWeaponByName(weaponName);
-    if (!itemHash) {
+    const weapon = getWeaponByName(weaponName);
+    if (!weapon) {
         playerFuncs.emit.message(player, `Weapon does not exist.`);
         return;
     }
 
     const newItem = Object.assign({}, itemRef);
     newItem.name = weaponName.toUpperCase();
-    newItem.data.hash = itemHash;
+    newItem.name = weapon.name;
+    newItem.description = weapon.desc;
     newItem.uuid = sha256Random(JSON.stringify(newItem));
     newItem.icon = 'gun';
+    newItem.slot = slot;
+    newItem.data.hash = weapon.hash;
+
+    if (weapon.stats && Object.keys(weapon.stats).length >= 1) {
+        Object.keys(weapon.stats).forEach((key) => {
+            newItem.data[key] = weapon.stats[key];
+        });
+    }
 
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
