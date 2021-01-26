@@ -793,7 +793,7 @@ const WeaponList: { [key: string]: Weapon } = {
     },
     minigun: {
         hash: 0x42bf8a85,
-        name: 'Mini SMG',
+        name: 'Minigun',
         desc: `A devastating 6-barrel machine gun that features Gatling-style rotating barrels. Very high rate of fire (2000 to 6000 rounds per minute).`,
         type: `Heavy Weapon`,
         price: 470000,

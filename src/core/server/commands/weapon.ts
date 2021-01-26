@@ -7,7 +7,7 @@ import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
 
-ChatController.addCommand('weapon [name]', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
+ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
 
 const itemRef: Item = {
     name: `Micro SMG`,
@@ -24,9 +24,9 @@ const itemRef: Item = {
 };
 
 function handleCommand(player: alt.Player, weaponName: string): void {
-    const { tab, slot } = playerFuncs.inventory.getFreeInventorySlot(player, 0);
+    const inv = playerFuncs.inventory.getFreeInventorySlot(player);
 
-    if (tab === null || slot === null) {
+    if (inv === null || inv.tab === null || inv.slot === null) {
         playerFuncs.emit.message(player, `No room in first inventory tab.`);
         return;
     }
@@ -43,7 +43,7 @@ function handleCommand(player: alt.Player, weaponName: string): void {
     newItem.description = weapon.desc;
     newItem.uuid = sha256Random(JSON.stringify(newItem));
     newItem.icon = 'gun';
-    newItem.slot = slot;
+    newItem.slot = inv.slot;
     newItem.data.hash = weapon.hash;
 
     if (weapon.stats && Object.keys(weapon.stats).length >= 1) {
@@ -52,6 +52,8 @@ function handleCommand(player: alt.Player, weaponName: string): void {
         });
     }
 
+    playerFuncs.inventory.inventoryAdd(player, newItem, inv.slot, inv.tab);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
+    playerFuncs.emit.message(player, `Added weapon: ${weapon.name}`);
 }

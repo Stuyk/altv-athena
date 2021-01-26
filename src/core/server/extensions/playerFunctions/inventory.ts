@@ -17,7 +17,7 @@ function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: n
         const tab = p.data.inventory[i];
 
         // Go to next tab if inventory is full.
-        if (tab.length >= 7) {
+        if (tab.length >= 27) {
             continue;
         }
 
