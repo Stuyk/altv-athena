@@ -13,6 +13,7 @@ description: List of all the changes and current versions.
 + Fixed small bug with startup logging.
 + Add Basic Unit Tests
 + Add Effect Based Items
++ Fixed bug when pressing 1-4 on keyboard while typing it would pull items.
 ```
 
 ## 1.3.0 - January 23-26, 2021
