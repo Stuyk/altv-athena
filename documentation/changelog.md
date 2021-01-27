@@ -16,6 +16,8 @@ description: List of all the changes and current versions.
 + Fixed bug when pressing 1-4 on keyboard while typing it would pull items.
 + Added /getitem Command
 + Force Reload on Weapon Switch
++ Added Forced Camera Shake on Aim
++ Added Shared Config for Camera Shake on Aim
 ```
 
 ## 1.3.0 - January 23-26, 2021
