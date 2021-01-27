@@ -11,7 +11,7 @@ const pistolItem: Item = {
     name: `Pistol`,
     uuid: `some_hash_thing_ground`,
     description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
-    icon: 'gun',
+    icon: 'pistol',
     slot: 0,
     quantity: 1,
     weight: 2,
@@ -54,13 +54,29 @@ const smgItem: Item = {
     name: `Micro SMG`,
     uuid: `some_hash_thing_ground`,
     description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
-    icon: 'gun',
+    icon: 'smg',
     slot: 4,
     quantity: 1,
     weight: 2,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
     data: {
         hash: 0x13532244
+    }
+};
+
+const burgerItem: Item = {
+    name: `Burger`,
+    uuid: `food_1`,
+    description: `Debug: Should be able to call an event with this`,
+    icon: 'burger',
+    slot: 5,
+    quantity: 5,
+    weight: 1,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMEABLE,
+    data: {
+        event: 'effect:Heal',
+        heal: 25,
+        sound: 'item_eat'
     }
 };
 
@@ -80,6 +96,10 @@ function handleCommand(player: alt.Player): void {
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 
     itemClone = deepCloneObject<Item>(smgItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+
+    itemClone = deepCloneObject<Item>(burgerItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 

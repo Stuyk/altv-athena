@@ -62,6 +62,24 @@ function getInventoryItem(p: alt.Player, slot: number, tab: number): Item | null
 }
 
 /**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * @param {alt.Player} p
+ * @param {Item} item
+ * @param {number} tab
+ * @return {*}  {boolean}
+ */
+function replaceInventoryItem(p: alt.Player, item: Item, tab: number): boolean {
+    const itemIndex = p.data.inventory[tab].findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    p.data.inventory[tab][itemIndex] = item;
+    return true;
+}
+
+/**
  * Get an equipment item based on slot.
  * @param {number} slot
  * @return {*}  {(Item | null)}
@@ -462,6 +480,7 @@ export default {
     isInToolbar,
     isInventorySlotFree,
     isToolbarSlotFree,
+    replaceInventoryItem,
     toolbarAdd,
     toolbarRemove
 };

@@ -12,6 +12,7 @@ description: List of all the changes and current versions.
 + The 'extra' folder will allow you to import additional files that utilize core exports.
 + Fixed small bug with startup logging.
 + Add Basic Unit Tests
++ Add Effect Based Items
 ```
 
 ## 1.3.0 - January 23-26, 2021
