@@ -88,7 +88,7 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Equipment Slots
     -   Toolbar Slots
     -   Custom Item Effects
-    -   Consumeable Items
+    -   CONSUMABLE Items
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar

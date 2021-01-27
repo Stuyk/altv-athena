@@ -7,5 +7,5 @@ export enum ItemType {
     IS_TOOLBAR = 16,
     IS_WEAPON = 32,
     DESTROY_ON_DROP = 64,
-    CONSUMEABLE = 128
+    CONSUMABLE = 128
 }

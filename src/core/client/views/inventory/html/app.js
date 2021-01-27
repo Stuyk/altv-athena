@@ -381,7 +381,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'Consumeable', value: true };
+                        return { key: 'CONSUMABLE', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -397,7 +397,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'Consumeable', value: true };
+                        return { key: 'CONSUMABLE', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -413,7 +413,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'Consumeable', value: true };
+                        return { key: 'CONSUMABLE', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -428,7 +428,7 @@ const app = new Vue({
 
             return Object.keys(target.data).map((key) => {
                 if (key === 'event') {
-                    return { key: 'Consumeable', value: true };
+                    return { key: 'CONSUMABLE', value: true };
                 }
 
                 return { key, value: target.data[key] };

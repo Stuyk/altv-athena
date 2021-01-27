@@ -361,7 +361,7 @@ export class InventoryController {
             return;
         }
 
-        if (!isFlagEnabled(item.behavior, ItemType.CONSUMEABLE)) {
+        if (!isFlagEnabled(item.behavior, ItemType.CONSUMABLE)) {
             playerFuncs.sync.inventory(player);
             return;
         }

@@ -6,6 +6,7 @@ import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
 import { EquipmentType } from '../../shared/enums/equipment';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { ItemRegistry } from '../../shared/items/itemRegistry';
 
 const pistolItem: Item = {
     name: `Pistol`,
@@ -72,7 +73,7 @@ const burgerItem: Item = {
     slot: 5,
     quantity: 5,
     weight: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMEABLE,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
     data: {
         event: 'effect:Heal',
         heal: 25,
@@ -88,13 +89,14 @@ const teleporterItem: Item = {
     slot: 5,
     quantity: 1,
     weight: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMEABLE,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
     data: {
         event: 'effect:Teleport'
     }
 };
 
 ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
+ChatController.addCommand('getitem', '/getitem [item_name] - Get item by name', Permissions.Admin, handleGetItem);
 ChatController.addCommand(
     'getteleporter',
     '/getteleporter - Adds item for current position.',
@@ -135,7 +137,22 @@ function handleTeleporter(player: alt.Player) {
     itemClone.data.z = player.pos.z;
 
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
+}
+
+function handleGetItem(player: alt.Player, name: string) {
+    const item = ItemRegistry.find((item) => item.name.toLowerCase().includes(name.toLowerCase()));
+
+    if (!item) {
+        playerFuncs.emit.message(player, `That item does not exist.`);
+        return;
+    }
+
+    const itemClone = deepCloneObject<Item>(item);
+    let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
+    playerFuncs.emit.message(player, `${item.name} was added to your inventory.`);
 }
