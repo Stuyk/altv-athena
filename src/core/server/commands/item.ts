@@ -80,7 +80,27 @@ const burgerItem: Item = {
     }
 };
 
+const teleporterItem: Item = {
+    name: `Teleporter`,
+    uuid: `teleporter`,
+    description: `Debug: Should be able to call an event with this`,
+    icon: 'teleporter',
+    slot: 5,
+    quantity: 1,
+    weight: 1,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMEABLE,
+    data: {
+        event: 'effect:Teleport'
+    }
+};
+
 ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'getteleporter',
+    '/getteleporter - Adds item for current position.',
+    Permissions.Admin,
+    handleTeleporter
+);
 
 function handleCommand(player: alt.Player): void {
     let itemClone = deepCloneObject<Item>(pistolItem);
@@ -101,6 +121,19 @@ function handleCommand(player: alt.Player): void {
 
     itemClone = deepCloneObject<Item>(burgerItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
+}
+
+function handleTeleporter(player: alt.Player) {
+    let itemClone = deepCloneObject<Item>(teleporterItem);
+    let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    itemClone.data.x = player.pos.x;
+    itemClone.data.y = player.pos.y;
+    itemClone.data.z = player.pos.z;
+
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
 
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
