@@ -4,6 +4,16 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.4.0 - January 27-x, 2021
+
+```diff
++ Upgraded to simplymongo 2.1.1 (Fixes Error in Console)
++ Added 'extra' folder for extending core without bugging out.
++ The 'extra' folder will allow you to import additional files that utilize core exports.
++ Fixed small bug with startup logging.
++ Add Basic Unit Tests
+```
+
 ## 1.3.0 - January 23-26, 2021
 
 ```diff

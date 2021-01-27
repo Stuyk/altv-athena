@@ -17,4 +17,19 @@ export default class Logger {
     static info(message: string): void {
         alt.log(`${chalk.blueBright('[Athena]')} ${chalk.blueBright(message)}`);
     }
+
+    static clearLastLine() {
+        process.stdout.moveCursor(0, -1);
+        process.stdout.clearLine(1);
+    }
+
+    static passed(message: string): void {
+        Logger.clearLastLine();
+        alt.log(`${chalk.greenBright(`    ✔️  ${message}`)}`);
+    }
+
+    static failed(message: string): void {
+        Logger.clearLastLine();
+        alt.log(`${chalk.redBright(`    ❌  ${message}`)}`);
+    }
 }

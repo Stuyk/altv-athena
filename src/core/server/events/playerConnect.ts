@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 import './playerDeath';
 
@@ -19,5 +18,3 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
         playerFuncs.set.firstConnect(player);
     }, 0);
 }
-
-alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
