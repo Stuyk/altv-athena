@@ -15,6 +15,7 @@ description: List of all the changes and current versions.
 + Add Effect Based Items
 + Fixed bug when pressing 1-4 on keyboard while typing it would pull items.
 + Added /getitem Command
++ Force Reload on Weapon Switch
 ```
 
 ## 1.3.0 - January 23-26, 2021

@@ -18,6 +18,8 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',
     //
+    PLAYER_RELOAD = 'player:ForceReload',
+    //
     PLAYER_SET_FREEZE = 'freeze:Set',
     PLAYER_SET_DEATH = 'death:Toggle',
     PLAYER_SET_INTERACTION = 'interaction:Set',

@@ -45,6 +45,7 @@ export class ToolbarController {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
@@ -52,6 +53,7 @@ export class ToolbarController {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
@@ -59,6 +61,7 @@ export class ToolbarController {
             player.giveWeapon(item.data.hash, 9999, true);
             player.lastToolbarData.equipped = true;
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 

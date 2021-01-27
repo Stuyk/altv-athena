@@ -30,6 +30,7 @@ import './systems/torso';
 
 // Utility
 import './utility/notification';
+import './utility/reload';
 import './utility/screenshot';
 
 // Views
