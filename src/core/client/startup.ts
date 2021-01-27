@@ -29,6 +29,7 @@ import './systems/world';
 
 // Utility
 import './utility/notification';
+import './utility/screenshot';
 
 // Views
 import './views/atm/atm';

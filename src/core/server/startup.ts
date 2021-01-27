@@ -6,6 +6,7 @@ import { InjectedFunctions, InjectedStarter, loadWASM } from './utility/wasmLoad
 import { setAzureEndpoint } from './utility/encryption';
 import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
+import logger from './utility/athenaLogger';
 
 env.config();
 
@@ -21,9 +22,16 @@ let fns: InjectedFunctions;
 alt.on('playerConnect', handleEarlyConnect);
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, handleEntryToggle);
 
-if (!process.env.GUMROAD || !process.env.EMAIL) {
-    alt.logWarning(`[Athena] Failed to get GUMROAD/EMAIL from .env file. Visit https://gum.co/SKpPN to buy one.`);
-    process.exit(1);
+if (!process.env.GUMROAD) {
+    logger.error('Failed to retrieve GUMROAD from your .env file.');
+    logger.log(`Visit: https://athena.stuyk.com/documentation/installing-athena`);
+    process.exit(0);
+}
+
+if (!process.env.EMAIL) {
+    logger.error('Failed to retrieve EMAIL from your .env file.');
+    logger.log(`Visit: https://athena.stuyk.com/documentation/installing-athena`);
+    process.exit(0);
 }
 
 async function loadFiles(): Promise<boolean> {
@@ -45,7 +53,7 @@ async function loadFiles(): Promise<boolean> {
         });
 
     if (!imported) {
-        alt.logError(`[Athena] Failed to load.`);
+        logger.error(`Failed to load.`);
         return false;
     }
 
@@ -55,11 +63,12 @@ async function loadFiles(): Promise<boolean> {
 async function handleFiles() {
     const result = await loadFiles();
     if (!result) {
-        alt.logError('[Athena] Failed to load files.');
-        process.exit(1);
+        logger.error(`Failed to load files.`);
+        process.exit(0);
     }
 
-    alt.log('[Athena] Warmup Complete. Finishing loading.');
+    import('./utility/console');
+    logger.info(`Warmup completed. Finishing loading...`);
 }
 
 async function runBooter() {
@@ -67,16 +76,16 @@ async function runBooter() {
     const version = await getVersionIdentifier();
 
     if (!version) {
-        alt.logError('[Ares] Unable to get version. Try rebooting.');
-        process.exit(1);
+        logger.error(`Unable to verify the version of Athena. Try rebooting.`);
+        process.exit(0);
     }
 
     alt.log(`[Athena] Version: ${process.env.ATHENA_VERSION}`);
     if (version !== process.env.ATHENA_VERSION) {
-        alt.logWarning(`--- Version Warning ---`);
-        alt.log(`[Athena] Your server may be out of date. Please update your server.`);
-        alt.log(`[Athena] Please pull down the latest changes from the official repository.`);
-        alt.log(`[Athena] Try running: 'git pull origin master'`);
+        logger.warning(`--- Version Warning ---`);
+        logger.warning(`Your server may be out of date. Please update your server.`);
+        logger.warning(`Please pull down the latest changes from the official repository.`);
+        logger.warning(`Try merging from the master branch or from the upstream branch of your choice.`);
     }
 
     const starterFns = await loadWASM<InjectedStarter>('starter', buffer);
@@ -85,8 +94,8 @@ async function runBooter() {
     });
 
     if (!aresBuffer) {
-        alt.logError('[Ares] Unable to boot. Potentially bad license.');
-        process.exit(1);
+        logger.error(`Unable to boot. Potentially invalid license.`);
+        process.exit(0);
     }
 
     fns = await loadWASM<InjectedFunctions>('ares', aresBuffer).catch((err) => {
@@ -106,7 +115,7 @@ async function runBooter() {
 
 function handleEntryToggle() {
     alt.off('playerConnect', handleEarlyConnect);
-    alt.log(`[Athena] Server Warmup Complete. Now taking connections.`);
+    logger.info(`[Athena] Server Warmup Complete. Now accepting connections.`);
 }
 
 /**
@@ -132,6 +141,6 @@ try {
     process.env.ATHENA_VERSION = data.version;
     runBooter();
 } catch (err) {
-    alt.logWarning(`[Athena] Could not fetch version from package.json. Is there a package.json?`);
-    process.exit(1);
+    logger.error(`[Athena] Could not fetch version from package.json. Is there a package.json?`);
+    process.exit(0);
 }

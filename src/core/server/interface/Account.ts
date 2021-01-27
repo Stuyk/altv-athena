@@ -14,4 +14,6 @@ export interface Account {
     permissionLevel: Permissions;
     quickToken: string;
     quickTokenExpiration: number;
+    banned: boolean;
+    reason: string;
 }

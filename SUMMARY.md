@@ -13,6 +13,7 @@
 -   [Installing Athena Advanced](documentation/installing-athena-advanced.md)
 -   [File Structure](documentation/file-structure.md)
 -   [Configuration](documentation/configuration.md)
+-   [Console](documentation/console.md)
 -   [Commands](documentation/commands.md)
 -   [Hotkeys](documentation/hotkeys.md)
 

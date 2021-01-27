@@ -20,6 +20,14 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 -   Character Selection
 -   Character Info Support
 -   Character Appearance Synchronization
+-   Console Commands
+    -   Ban
+    -   Unban
+    -   Kick
+    -   KickAll
+    -   SetAdmin
+    -   Dox
+    -   Screenshot
 -   Player
     -   Health Synchronization
     -   Armour Synchronization
@@ -75,6 +83,12 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Multiple Slots for Items
     -   Inventory Item Restriction Flags
     -   Animations for Picking Up / Dropping
+    -   All Weapon Icons
+    -   Equipment Slots
+    -   Toolbar Slots
+-   Toolbar System
+    -   Equip an item in a Toolbar Equippable Item
+    -   Press 1-4 to swap items in toolbar
 
 ```text
 New Features Always in Discord

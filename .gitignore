@@ -15,3 +15,4 @@ configLoadOrder
 configMongoDB
 .env
 crashdumps
+./screenshots/*

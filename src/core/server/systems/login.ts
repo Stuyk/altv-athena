@@ -56,6 +56,11 @@ export class LoginController {
             }
         }
 
+        if (account.banned) {
+            player.kick(account.reason);
+            return;
+        }
+
         await playerFuncs.set.account(player, account);
         goToCharacterSelect(player);
     }
