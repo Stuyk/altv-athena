@@ -7,7 +7,7 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
 
-function handleFrontendSound(audioName: string, ref: string): void {
+export function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);
 }
 

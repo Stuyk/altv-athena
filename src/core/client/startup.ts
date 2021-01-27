@@ -26,6 +26,7 @@ import './systems/tick';
 import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
+import './systems/torso';
 
 // Utility
 import './utility/notification';
