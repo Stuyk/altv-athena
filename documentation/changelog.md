@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.4.0 - January 27-x, 2021
+## 1.4.0 - January 27, 2021
 
 ```diff
 + Upgraded to simplymongo 2.1.1 (Fixes Error in Console)
