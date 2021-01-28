@@ -6,7 +6,7 @@ export const SHARED_CONFIG = {
     // PLAYERS
     FORCE_SCREEN_SHAKE: true, // Used to shake the player's screen. Makes most aimbots a hell of a lot worse.
     // Inventory
-    MAX_PICKUP_RANGE: 4,
+    MAX_PICKUP_RANGE: 2,
     // Interaction
     INTERACTION_ALWAYS_ON: false, // Determines whether or not a player needs to hit `alt` to turn on interaction.
     MAX_INTERACTION_RANGE: 8

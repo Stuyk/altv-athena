@@ -117,10 +117,8 @@ export class InventoryController {
             return;
         }
 
-        if (
-            isFlagEnabled(itemClone.behavior, ItemType.IS_EQUIPMENT) &&
-            itemClone.data.sex !== player.data.appearance.sex
-        ) {
+        const isEquipmentItem = isFlagEnabled(itemClone.behavior, ItemType.IS_EQUIPMENT);
+        if (isEquipmentItem && itemClone.data.sex !== player.data.appearance.sex) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -318,29 +316,42 @@ export class InventoryController {
         const index = InventoryController.groundItems.findIndex((gItem) => gItem.item.hash === hash);
         if (index <= -1) {
             playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const droppedItem: DroppedItem = { ...InventoryController.groundItems[index] };
         if (distance2d(player.pos, droppedItem.position) >= 10) {
             playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         if (!InventoryController.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
+            return;
+        }
+
+        const isEquipmentItem = isFlagEnabled(droppedItem.item.behavior, ItemType.IS_EQUIPMENT);
+        const isGoingToEquipment = endData.name === InventoryType.EQUIPMENT;
+        if (isEquipmentItem && isGoingToEquipment && droppedItem.item.data.sex !== player.data.appearance.sex) {
+            playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const removedItems = InventoryController.groundItems.splice(index, 1);
         if (removedItems.length <= 0) {
             playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex, tab);
         if (!didAddItem) {
             playerFuncs.sync.inventory(player);
+            this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
