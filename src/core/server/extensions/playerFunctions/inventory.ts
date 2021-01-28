@@ -428,6 +428,24 @@ function toolbarRemove(p: alt.Player, slot: number): boolean {
 }
 
 /**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * @param {alt.Player} p
+ * @param {Item} item
+ * @param {number} tab
+ * @return {*}  {boolean}
+ */
+function replaceToolbarItem(p: alt.Player, item: Item): boolean {
+    const itemIndex = p.data.toolbar.findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    p.data.toolbar[itemIndex] = item;
+    return true;
+}
+
+/**
  * Checks if an item is in the toolbar data section.
  * Returns the index of the toolbar if it's present.
  * Returns null if the slot is empty.
@@ -481,6 +499,7 @@ export default {
     isInventorySlotFree,
     isToolbarSlotFree,
     replaceInventoryItem,
+    replaceToolbarItem,
     toolbarAdd,
     toolbarRemove
 };

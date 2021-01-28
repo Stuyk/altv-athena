@@ -9,7 +9,7 @@ export const ItemRegistry: Array<Item> = [
         slot: 0,
         quantity: 1,
         weight: 1,
-        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
             event: 'effect:Heal',
             heal: 5,
@@ -23,7 +23,7 @@ export const ItemRegistry: Array<Item> = [
         slot: 0,
         quantity: 5,
         weight: 2,
-        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
             event: 'effect:Heal',
             heal: 3,

@@ -18,6 +18,7 @@ description: List of all the changes and current versions.
 + Force Reload on Weapon Switch
 + Added Forced Camera Shake on Aim
 + Added Shared Config for Camera Shake on Aim
++ Added Support for Consumables on the Toolbar
 ```
 
 ## 1.3.0 - January 23-26, 2021
