@@ -1,3 +1,4 @@
+import { Appearance } from '../../shared/interfaces/Appearance';
 import { Item } from '../../shared/interfaces/Item';
 
 export interface Meta {
@@ -8,6 +9,9 @@ export interface Meta {
     // Currency
     bank: number;
     cash: number;
+
+    // Player Info
+    appearance: Appearance;
 
     // Inventory
     inventory: Array<Array<Partial<Item>>>;

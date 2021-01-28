@@ -10,6 +10,7 @@ const app = new Vue({
             // Component Data corresponds with their slot order.
             // So the first element is the first slot of the equipment.
             componentIndex: 0,
+            cost: 0,
             shirtNames: ['Top', 'Undershirt', 'Torso'],
             components: [
                 {
@@ -172,6 +173,25 @@ const app = new Vue({
         },
         handlePropagation(arrayOfComponentData) {
             this.components = arrayOfComponentData;
+        },
+        exit() {
+            if ('alt' in window) {
+                alt.emit('clothing:Exit');
+            } else {
+                console.log('bai');
+            }
+        },
+        purchaseComponent() {
+            const componentData = JSON.parse(JSON.stringify(this.components[this.componentIndex]));
+            delete componentData.maxDrawables;
+            delete componentData.maxTextures;
+            delete componentData.name;
+
+            if ('alt' in window) {
+                alt.emit('clothing:Purchase', this.componentIndex, componentData);
+            } else {
+                console.log(componentData);
+            }
         }
     },
     mounted() {

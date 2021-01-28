@@ -117,6 +117,14 @@ export class InventoryController {
             return;
         }
 
+        if (
+            isFlagEnabled(itemClone.behavior, ItemType.IS_EQUIPMENT) &&
+            itemClone.data.sex !== player.data.appearance.sex
+        ) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
         const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
         if (!didRemoveItem) {
             playerFuncs.sync.inventory(player);

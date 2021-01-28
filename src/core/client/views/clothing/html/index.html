@@ -86,20 +86,20 @@
                         <v-divider></v-divider>
                         <div class="footer contentWrapper pt-3">
                             <div class="group pb-3">
-                                <v-chip class="light-blue--text mr-3" label outlined>Total Cost</v-chip>
+                                <v-chip class="light-blue--text mr-3" label outlined>Item Cost</v-chip>
                                 <div class="subtitle-2 cash flex-grow-1">
-                                    $0
+                                    ${{ cost }}
                                 </div>
                             </div>
                             <div class="group pb-3">
                                 <v-divider></v-divider>
                             </div>
                             <div class="group">
-                                <v-btn class="red--text text--lighten-1 flex-grow-1" outlined text>
-                                    <v-icon small>icon-exit</v-icon>
+                                <v-btn class="red--text text--lighten-1 flex-grow-1" outlined text @click="exit">
+                                    <v-icon small>icon-exit</v-icon>&nbsp;&nbsp;Exit
                                 </v-btn>
-                                <v-btn class="light-green--text flex-grow-1 ml-3" outlined text>
-                                    <v-icon small>icon-checkmark</v-icon>
+                                <v-btn class="light-green--text flex-grow-1 ml-3" outlined text @click="purchaseComponent">
+                                    <v-icon small>icon-checkmark</v-icon>&nbsp;&nbsp;Buy
                                 </v-btn>
                             </div>
                         </div>
