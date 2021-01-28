@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
-    <body>
+    <body oncontextmenu="return false;">
         <div id="app">
             <v-app v-cloak>
                 <div class="main-container">
@@ -111,6 +111,9 @@
                                     <template v-if="item">
                                         <div class="icon no-pointer">
                                             <img :src="`../icons/${item.icon}.png`"></img>
+                                        </div>
+                                        <div class="consume no-pointer" v-if="item && item.data && item.data.event">
+                                            <v-icon small>icon-arrow-down</v-icon>
                                         </div>
                                         <div class="stats no-pointer">
                                             <div class="quantity">

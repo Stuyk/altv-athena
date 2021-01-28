@@ -12,7 +12,15 @@ export enum View_Events_Creator {
 }
 
 export enum View_Events_Inventory {
-    Process = 'inventory:Process'
+    Process = 'inventory:Process',
+    Use = 'inventory:Use'
+}
+
+export enum View_Events_Clothing {
+    Open = 'clothing:Open',
+    Sync = 'clothing:Sync',
+    Purchase = 'clothing:Purchase',
+    Exit = 'clothing:Exit'
 }
 
 export enum View_Events_Characters {

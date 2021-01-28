@@ -75,3 +75,7 @@ if (!didRemoveItem) {
 
 alt.log(`The item was removed!`);
 ```
+
+## Item Effects
+
+If you wish to use item effects when you consume an item it's quite simple.

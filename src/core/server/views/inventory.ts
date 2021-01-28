@@ -8,6 +8,8 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
+import '../effects/heal';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 interface CategoryData {
     abbrv: string;
@@ -111,6 +113,14 @@ export class InventoryController {
         }
 
         if (!InventoryController.allItemRulesValid(itemClone, endData, endSlotIndex)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (
+            isFlagEnabled(itemClone.behavior, ItemType.IS_EQUIPMENT) &&
+            itemClone.data.sex !== player.data.appearance.sex
+        ) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -340,6 +350,46 @@ export class InventoryController {
         playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
         this.updateDroppedItemsAroundPlayer(player, true);
     }
+
+    static processUse(player: alt.Player, selectedSlot: string, tab: number) {
+        if (!selectedSlot || tab === undefined || tab === null) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const slot = stripCategory(selectedSlot);
+        if (isNaN(slot)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const item = playerFuncs.inventory.getInventoryItem(player, slot, tab);
+        if (!item) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!isFlagEnabled(item.behavior, ItemType.CONSUMABLE)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        item.quantity -= 1;
+
+        if (item.quantity <= 0) {
+            playerFuncs.inventory.inventoryRemove(player, slot, tab);
+        } else {
+            playerFuncs.inventory.replaceInventoryItem(player, item, tab);
+        }
+
+        if (item.data && item.data.event) {
+            alt.emit(item.data.event, player, item, slot, tab);
+        }
+
+        playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
+    }
 }
 
 const DataHelpers: Array<CategoryData> = [
@@ -378,4 +428,5 @@ const DataHelpers: Array<CategoryData> = [
     }
 ];
 
+alt.onClient(View_Events_Inventory.Use, InventoryController.processUse);
 alt.onClient(View_Events_Inventory.Process, InventoryController.processItemMovement);

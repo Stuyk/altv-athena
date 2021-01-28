@@ -1,16 +1,19 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText2D } from '../utility/text';
 
 const drawDistance = 50;
 let interval;
+let shouldScreenShake = false;
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleStart);
 
 function handleStart() {
     interval = alt.setInterval(drawNametags, 0);
+    shouldScreenShake = SHARED_CONFIG.FORCE_SCREEN_SHAKE;
 }
 
 /**
@@ -25,6 +28,18 @@ function drawNametags() {
 
     if (alt.Player.local.isTalking) {
         drawText2D('Microphone On', { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 255));
+    }
+
+    if (shouldScreenShake) {
+        if (alt.Player.local.isAiming) {
+            if (!native.isGameplayCamShaking()) {
+                native.shakeGameplayCam('HAND_SHAKE', 3);
+            }
+        } else {
+            if (native.isGameplayCamShaking()) {
+                native.stopGameplayCamShaking(true);
+            }
+        }
     }
 
     for (let i = 0, n = alt.Player.all.length; i < n; i++) {

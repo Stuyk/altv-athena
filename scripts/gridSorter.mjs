@@ -13,6 +13,25 @@ const dataGroups = [
     {
         name: 'vending',
         url: `https://raw.githubusercontent.com/DurtyFree/gta-v-data-dumps/master/objectslocations/worldVendingMachines.json`
+    },
+    {
+        name: 'clothing',
+        items: [
+            { x: 72.3, y: -1399.1, z: 28.4 },
+            { x: -703.8, y: -152.3, z: 36.4 },
+            { x: -167.9, y: -299.0, z: 38.7 },
+            { x: 428.7, y: -800.1, z: 28.5 },
+            { x: -829.4, y: -1073.7, z: 10.3 },
+            { x: -1447.8, y: -242.5, z: 48.8 },
+            { x: 11.6, y: 6514.2, z: 30.9 },
+            { x: 123.6, y: -219.4, z: 53.6 },
+            { x: 1696.3, y: 4829.3, z: 41.1 },
+            { x: 618.1, y: 2759.6, z: 41.1 },
+            { x: 1190.6, y: 2713.4, z: 37.2 },
+            { x: -1193.4, y: -772.3, z: 16.3 },
+            { x: -3172.5, y: 1048.1, z: 19.9 },
+            { x: -1108.4, y: 2708.9, z: 18.1 }
+        ]
     }
 ];
 
@@ -63,10 +82,17 @@ function sortListIntoGroups(name, items) {
             );
         }
 
+        if (itemData.x && itemData.y && itemData.z) {
+            itemData.position = { x: itemData.x, y: itemData.y, z: itemData.z };
+            delete itemData.x;
+            delete itemData.y;
+            delete itemData.z;
+        }
+
         items[i] = itemData;
     }
 
-    items = items.filter((item) => !item.name.includes('air'));
+    items = items.filter((item) => !item.name || !item.name.includes('air'));
 
     // Set item as blip.
     // If the item is too close to anything else. Turn it into a blip.
@@ -100,6 +126,11 @@ function sortListIntoGroups(name, items) {
 (async () => {
     console.log(`Beginning Parser. Please wait...`);
     for (let i = 0; i < dataGroups.length; i++) {
+        if (dataGroups[i].items) {
+            await sortListIntoGroups(dataGroups[i].name, dataGroups[i].items);
+            continue;
+        }
+
         const name = dataGroups[i].name;
         const url = dataGroups[i].url;
         const result = await axios.get(url).catch((err) => {

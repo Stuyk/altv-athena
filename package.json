@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "a roleplay framework for alt:V",
     "scripts": {
         "build": "npm run clean && tsc && npm run copy",
@@ -37,7 +37,7 @@
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "elliptic": "^6.5.3",
-        "simplymongo": "^2.0.8",
+        "simplymongo": "^2.1.1",
         "sjcl": "^1.0.8"
     },
     "type": "module"

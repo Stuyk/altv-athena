@@ -68,7 +68,9 @@ async function handleFiles() {
     }
 
     import('./utility/console');
-    logger.info(`Warmup completed. Finishing loading...`);
+    import('../extra/imports').then((res) => {
+        res.default();
+    });
 }
 
 async function runBooter() {
@@ -80,7 +82,7 @@ async function runBooter() {
         process.exit(0);
     }
 
-    alt.log(`[Athena] Version: ${process.env.ATHENA_VERSION}`);
+    logger.info(`Version: ${process.env.ATHENA_VERSION}`);
     if (version !== process.env.ATHENA_VERSION) {
         logger.warning(`--- Version Warning ---`);
         logger.warning(`Your server may be out of date. Please update your server.`);
@@ -115,7 +117,7 @@ async function runBooter() {
 
 function handleEntryToggle() {
     alt.off('playerConnect', handleEarlyConnect);
-    logger.info(`[Athena] Server Warmup Complete. Now accepting connections.`);
+    logger.info(`Server Warmup Complete. Now accepting connections.`);
 }
 
 /**

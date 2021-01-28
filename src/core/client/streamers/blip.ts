@@ -8,13 +8,15 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 const MAX_BLIP_STREAM_DISTANCE = SHARED_CONFIG.MAX_BLIP_STREAM_DISTANCE;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {
     atm: [],
-    gas: []
+    gas: [],
+    clothing: []
 };
 
 const generatedBlipList = [];
 const categoriesWithDistance = [
     { name: 'atm', displayName: 'ATM', sprite: 207, color: 2 },
-    { name: 'gas', displayName: 'Gas Station', sprite: 361, color: 1 }
+    { name: 'gas', displayName: 'Gas Station', sprite: 361, color: 1 },
+    { name: 'clothing', displayName: 'Clothing Store', sprite: 73, color: 24 }
 ];
 
 // Filters and Reconstructs Grid List

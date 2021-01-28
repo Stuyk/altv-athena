@@ -4,6 +4,31 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.4.0 - January 27, 2021
+
+```diff
++ Upgraded to simplymongo 2.1.1 (Fixes Error in Console)
++ Added 'extra' folder for extending core without bugging out.
++ The 'extra' folder will allow you to import additional files that utilize core exports.
++ Fixed small bug with startup logging.
++ Add Basic Unit Tests
++ Add Effect Based Items
++ Fixed bug when pressing 1-4 on keyboard while typing it would pull items.
++ Added /getitem Command
++ Force Reload on Weapon Switch
++ Added Forced Camera Shake on Aim
++ Added Shared Config for Camera Shake on Aim
++ Added Support for Consumables on the Toolbar
++ Added Watches & Bracelets to Inventory
++ Added Clothing Shop Interface
++ Added Clothing Synchronization
++ Added Clothing Item Generator
++ Added Item Name Field
++ Added Item Description Field
++ Added Clothing Shop Blips
++ Added Clothing Shop Noises
+```
+
 ## 1.3.0 - January 23-26, 2021
 
 ```diff

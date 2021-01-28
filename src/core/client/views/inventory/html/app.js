@@ -19,7 +19,19 @@ const app = new Vue({
             pageIndex: 0,
             pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5'],
             pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-box', 'icon-box'],
-            equipmentMeta: ['Hat', 'Mask', 'Shirt', 'Pants', 'Feet', 'Glasses', 'Ears', 'Bag', 'Armour'],
+            equipmentMeta: [
+                'Hat',
+                'Mask',
+                'Shirt',
+                'Pants',
+                'Feet',
+                'Glasses',
+                'Ears',
+                'Bag',
+                'Armour',
+                'Watches',
+                'Bracelets'
+            ],
             inventory: [[], [], [], [], [], []],
             ground: [],
             equipment: [],
@@ -66,7 +78,7 @@ const app = new Vue({
             this.ground = newGround;
         },
         updateEquipment(equipmentItems) {
-            const newEquipment = new Array(9).fill(null);
+            const newEquipment = new Array(11).fill(null);
             equipmentItems.forEach((item) => {
                 if (!item) {
                     return;
@@ -145,6 +157,18 @@ const app = new Vue({
         },
         selectItem(e, index) {
             if (this.dragging) {
+                return;
+            }
+
+            // Right-Click
+            if (e.button === 2) {
+                if (!e.target.id || e.target.id === '') {
+                    return;
+                }
+
+                if ('alt' in window) {
+                    alt.emit('inventory:Use', e.target.id, this.pageIndex);
+                }
                 return;
             }
 
@@ -368,6 +392,10 @@ const app = new Vue({
                 }
 
                 return Object.keys(target.data).map((key) => {
+                    if (key === 'event') {
+                        return { key: 'CONSUMABLE', value: true };
+                    }
+
                     return { key, value: target.data[key] };
                 });
             }
@@ -380,6 +408,10 @@ const app = new Vue({
                 }
 
                 return Object.keys(target.data).map((key) => {
+                    if (key === 'event') {
+                        return { key: 'CONSUMABLE', value: true };
+                    }
+
                     return { key, value: target.data[key] };
                 });
             }
@@ -392,6 +424,10 @@ const app = new Vue({
                 }
 
                 return Object.keys(target.data).map((key) => {
+                    if (key === 'event') {
+                        return { key: 'CONSUMABLE', value: true };
+                    }
+
                     return { key, value: target.data[key] };
                 });
             }
@@ -403,6 +439,10 @@ const app = new Vue({
             }
 
             return Object.keys(target.data).map((key) => {
+                if (key === 'event') {
+                    return { key: 'CONSUMABLE', value: true };
+                }
+
                 return { key, value: target.data[key] };
             });
         }
@@ -413,7 +453,7 @@ const app = new Vue({
         // Used to populate data on entry.
         this.inventory = new Array(6).fill(new Array(28).fill(null));
         this.ground = new Array(8).fill(null);
-        this.equipment = new Array(9).fill(null);
+        this.equipment = new Array(11).fill(null);
         this.toolbar = new Array(4).fill(null);
 
         if ('alt' in window) {
@@ -451,7 +491,8 @@ const app = new Vue({
                     quantity: Math.floor(Math.random() * 10),
                     weight: Math.floor(Math.random() * 5),
                     data: {
-                        water: 100
+                        water: 100,
+                        event: 'test'
                     }
                 }
             ];
@@ -503,7 +544,10 @@ const app = new Vue({
                     icon: 'hat',
                     slot: 0,
                     quantity: Math.floor(Math.random() * 10),
-                    weight: Math.floor(Math.random() * 5)
+                    weight: Math.floor(Math.random() * 5),
+                    data: {
+                        event: 'test'
+                    }
                 }
             ]);
         }

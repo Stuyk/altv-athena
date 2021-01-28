@@ -3,7 +3,7 @@ import { ItemType } from '../enums/itemType';
 
 export interface Item {
     name: string;
-    uuid: string;
+    uuid?: string;
     description: string;
     icon: string;
     quantity: number;

@@ -6,6 +6,7 @@ import { InteractionLocale } from '../../shared/locale/interaction';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 import '../views/atm';
+import { View_Events_Clothing } from '../../shared/enums/views';
 
 interface InteractionHelper {
     [key: string]: Array<alt.Colshape>;
@@ -14,7 +15,8 @@ interface InteractionHelper {
 export class InteractionController {
     static Interactions: InteractionHelper = {};
     static InteractionTypes: { [key: string]: { eventName: string; isServer: boolean } } = {
-        atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false }
+        atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false },
+        clothing: { eventName: View_Events_Clothing.Open, isServer: false }
     };
 
     /**

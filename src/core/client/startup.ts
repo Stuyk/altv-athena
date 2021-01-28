@@ -30,10 +30,12 @@ import './systems/torso';
 
 // Utility
 import './utility/notification';
+import './utility/reload';
 import './utility/screenshot';
 
 // Views
 import './views/atm/atm';
 import './views/creator/creator';
 import './views/characters/characters';
+import './views/clothing/clothing';
 import './views/inventory/inventory';

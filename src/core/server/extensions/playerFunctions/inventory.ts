@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
-import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { Item } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 
@@ -62,13 +61,31 @@ function getInventoryItem(p: alt.Player, slot: number, tab: number): Item | null
 }
 
 /**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * @param {alt.Player} p
+ * @param {Item} item
+ * @param {number} tab
+ * @return {*}  {boolean}
+ */
+function replaceInventoryItem(p: alt.Player, item: Item, tab: number): boolean {
+    const itemIndex = p.data.inventory[tab].findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    p.data.inventory[tab][itemIndex] = item;
+    return true;
+}
+
+/**
  * Get an equipment item based on slot.
  * @param {number} slot
  * @return {*}  {(Item | null)}
  * @memberof InventoryPrototype
  */
 function getEquipmentItem(p: alt.Player, slot: number): Item | null {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return null;
     }
 
@@ -178,7 +195,7 @@ function isInEquipment(p: alt.Player, item: Partial<Item>): { index: number } | 
  * @memberof InventoryPrototype
  */
 function isEquipmentSlotFree(p: alt.Player, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -288,7 +305,7 @@ function inventoryRemove(p: alt.Player, slot: number, tab: number): boolean {
  * @memberof InventoryPrototype
  */
 function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -302,7 +319,7 @@ function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
 }
 
 function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -321,7 +338,7 @@ function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
  * @memberof InventoryPrototype
  */
 function equipmentAdd(p: alt.Player, item: Item, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -410,6 +427,24 @@ function toolbarRemove(p: alt.Player, slot: number): boolean {
 }
 
 /**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * @param {alt.Player} p
+ * @param {Item} item
+ * @param {number} tab
+ * @return {*}  {boolean}
+ */
+function replaceToolbarItem(p: alt.Player, item: Item): boolean {
+    const itemIndex = p.data.toolbar.findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    p.data.toolbar[itemIndex] = item;
+    return true;
+}
+
+/**
  * Checks if an item is in the toolbar data section.
  * Returns the index of the toolbar if it's present.
  * Returns null if the slot is empty.
@@ -462,6 +497,8 @@ export default {
     isInToolbar,
     isInventorySlotFree,
     isToolbarSlotFree,
+    replaceInventoryItem,
+    replaceToolbarItem,
     toolbarAdd,
     toolbarRemove
 };

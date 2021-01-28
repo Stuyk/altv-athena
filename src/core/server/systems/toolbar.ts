@@ -28,6 +28,12 @@ export class ToolbarController {
             return;
         }
 
+        // Handle Consume Item from Toolbar
+        if (isFlagEnabled(item.behavior, ItemType.CONSUMABLE)) {
+            ToolbarController.handleToolbarUse(player, item);
+            return;
+        }
+
         // Handle other item switch types
         // No idea what this will be yet.
     }
@@ -45,6 +51,7 @@ export class ToolbarController {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
@@ -52,6 +59,7 @@ export class ToolbarController {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
@@ -59,11 +67,30 @@ export class ToolbarController {
             player.giveWeapon(item.data.hash, 9999, true);
             player.lastToolbarData.equipped = true;
             playerFuncs.emit.sound3D(player, 'item_equip', player);
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
         player.lastToolbarData.equipped = false;
         playerFuncs.emit.sound3D(player, 'item_remove', player);
+    }
+
+    static handleToolbarUse(player: alt.Player, item: Item) {
+        item.quantity -= 1;
+
+        if (item.quantity <= 0) {
+            playerFuncs.inventory.toolbarRemove(player, item.slot);
+        } else {
+            playerFuncs.inventory.replaceToolbarItem(player, item);
+        }
+
+        if (item.data && item.data.event) {
+            alt.emit(item.data.event, player, item);
+        }
+
+        playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
     }
 }
 

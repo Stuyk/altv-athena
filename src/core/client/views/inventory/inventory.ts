@@ -23,6 +23,7 @@ export class InventoryController {
 
         view = await View.getInstance(url, true, false, true);
         view.on('inventory:Update', InventoryController.updateEverything);
+        view.on('inventory:Use', InventoryController.handleUse);
         view.on('inventory:Process', InventoryController.handleProcess);
         view.on('inventory:Close', InventoryController.handleClose);
         alt.toggleGameControls(false);
@@ -67,6 +68,10 @@ export class InventoryController {
         }
 
         view.emit('inventory:Toolbar', alt.Player.local.meta.toolbar);
+    }
+
+    static handleUse(selectedSlot: string, tab: number): void {
+        alt.emitServer(View_Events_Inventory.Use, selectedSlot, tab);
     }
 
     static handleClose(): void {

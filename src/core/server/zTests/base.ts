@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import logger from '../utility/athenaLogger';
 
 export async function executeTest<T>(description: string, callback: Function, ...args: any[]): Promise<T> {
     alt.log(`[Test] ${description}`);
@@ -6,7 +7,8 @@ export async function executeTest<T>(description: string, callback: Function, ..
     try {
         return callback(...args);
     } catch (err) {
-        alt.log(`[TEST FAILED] ${description}`);
+        logger.failed(description);
+        alt.setTimeout(() => process.exit(1), 100);
         throw err;
     }
 }
