@@ -43,16 +43,24 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
 
     // Default Components
     if (alt.Player.local.meta.appearance.sex === 0) {
+        native.setPedComponentVariation(alt.Player.local.scriptID, 1, 0, 0, 0); // mask
         native.setPedComponentVariation(alt.Player.local.scriptID, 3, 15, 0, 0); // arms
         native.setPedComponentVariation(alt.Player.local.scriptID, 4, 14, 0, 0); // pants
+        native.setPedComponentVariation(alt.Player.local.scriptID, 5, 0, 0, 0); // bag
         native.setPedComponentVariation(alt.Player.local.scriptID, 6, 35, 0, 0); // shoes
-        native.setPedComponentVariation(alt.Player.local.scriptID, 8, 15, 0, 0); // shirt
+        native.setPedComponentVariation(alt.Player.local.scriptID, 7, 0, 0, 0); // accessories
+        native.setPedComponentVariation(alt.Player.local.scriptID, 8, 15, 0, 0); // undershirt
+        native.setPedComponentVariation(alt.Player.local.scriptID, 9, 0, 0, 0); // body armour
         native.setPedComponentVariation(alt.Player.local.scriptID, 11, 15, 0, 0); // torso
     } else {
+        native.setPedComponentVariation(alt.Player.local.scriptID, 1, 0, 0, 0); // mask
         native.setPedComponentVariation(alt.Player.local.scriptID, 3, 15, 0, 0); // arms
+        native.setPedComponentVariation(alt.Player.local.scriptID, 5, 0, 0, 0); // bag
         native.setPedComponentVariation(alt.Player.local.scriptID, 4, 14, 0, 0); // pants
         native.setPedComponentVariation(alt.Player.local.scriptID, 6, 34, 0, 0); // shoes
-        native.setPedComponentVariation(alt.Player.local.scriptID, 8, 15, 0, 0); // shirt
+        native.setPedComponentVariation(alt.Player.local.scriptID, 7, 0, 0, 0); // accessories
+        native.setPedComponentVariation(alt.Player.local.scriptID, 8, 15, 0, 0); // undershirt
+        native.setPedComponentVariation(alt.Player.local.scriptID, 9, 0, 0, 0); // body armour
         native.setPedComponentVariation(alt.Player.local.scriptID, 11, 91, 0, 0); // torso
     }
 
