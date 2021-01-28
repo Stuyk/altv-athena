@@ -23,6 +23,10 @@ description: List of all the changes and current versions.
 + Added Clothing Shop Interface
 + Added Clothing Synchronization
 + Added Clothing Item Generator
++ Added Item Name Field
++ Added Item Description Field
++ Added Clothing Shop Blips
++ Added Clothing Shop Noises
 ```
 
 ## 1.3.0 - January 23-26, 2021

@@ -15,7 +15,7 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 
 -   Fully Open Source
 -   Typescript
--   Scaleable Folder Structure
+-   Scalable Folder Structure
 -   Basic Unit Test Support
 -   Character Editor
 -   Character Selection
@@ -89,6 +89,20 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Toolbar Slots
     -   Custom Item Effects
     -   CONSUMABLE Items
+-   Clothing System
+    -   Clothing Selection
+    -   Tops
+    -   Hats
+    -   Bags
+    -   Bottoms
+    -   Shoes
+    -   Accessories
+    -   Bracelets
+    -   Watches
+    -   Masks
+    -   Name Individual Items
+    -   Describe Individual Items
+    -   Separate Item Equips
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar

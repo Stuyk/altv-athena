@@ -45,7 +45,7 @@ function handlePurchase(
     newItem.slot = equipmentSlot;
     newItem.icon = icons[equipmentSlot];
     newItem.quantity = 1;
-    newItem.weight = Math.floor(Math.random() * 10) + 1;
+    newItem.weight = parseFloat((Math.random() * 1).toFixed(2));
     newItem.equipment = equipmentSlot;
 
     let didGetAdded = false;
@@ -55,20 +55,21 @@ function handlePurchase(
     } else {
         const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
         if (!openSlot) {
-            // Error Sound
+            playerFuncs.emit.sound2D(player, 'item_error');
             return;
         }
 
+        playerFuncs.emit.message(player, `An item you purchased is in your inventory.`);
         didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot, openSlot.tab);
     }
 
     if (!didGetAdded) {
-        // Error Sound
+        playerFuncs.emit.sound2D(player, 'item_error');
         return;
     }
 
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.save.field(player, 'equipment', player.data.equipment);
     playerFuncs.sync.inventory(player);
-    // Cha-Ching
+    playerFuncs.emit.sound2D(player, 'item_purchase');
 }

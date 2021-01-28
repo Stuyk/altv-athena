@@ -48,7 +48,7 @@ F - Bank
 S - Vehicle System
 US - Inventory System
 S - Console Commands
+S - Clothing System
 N/A - Vehicle Ownership
 N/A - Job Framework
-N/A - Clothing System
 ```

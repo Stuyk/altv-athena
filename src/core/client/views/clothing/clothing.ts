@@ -18,13 +18,7 @@ let view: View;
 let open = false;
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleMetaChanged);
-alt.on('consoleCommand', (name) => {
-    if (name !== 'clothes') {
-        return;
-    }
-
-    handleView();
-});
+alt.onServer(View_Events_Clothing.Open, handleView);
 
 async function handleView() {
     view = await View.getInstance(url, true);
