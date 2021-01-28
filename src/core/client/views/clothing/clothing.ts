@@ -5,7 +5,13 @@ import { View_Events_Clothing } from '../../../shared/enums/views';
 import { ClothingComponent } from '../../../shared/interfaces/Clothing';
 import { Item } from '../../../shared/interfaces/Item';
 import { View } from '../../extensions/view';
-import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
+import {
+    createPedEditCamera,
+    destroyPedEditCamera,
+    setFov,
+    setShouldDisableControls,
+    setZPos
+} from '../../utility/camera';
 
 const url = `http://resource/client/views/clothing/html/index.html`;
 let view: View;
@@ -26,6 +32,7 @@ async function handleView() {
     view.on('clothing:Purchase', handlePurchase);
     view.on('clothing:Populate', handlePopulateData);
     view.on('clothing:Exit', handleExit);
+    view.on('clothing:DisableControls', handleControls);
     open = true;
     createPedEditCamera();
     setFov(50);
@@ -62,6 +69,10 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
     handleUpdate(clothingComponents, true);
 }
 
+function handleControls(value: boolean) {
+    setShouldDisableControls(value);
+}
+
 function handleExit() {
     destroyPedEditCamera();
     alt.emitServer(View_Events_Clothing.Exit);
@@ -69,8 +80,8 @@ function handleExit() {
     open = false;
 }
 
-function handlePurchase(index: number, component: ClothingComponent) {
-    alt.emitServer(View_Events_Clothing.Purchase, index, component);
+function handlePurchase(index: number, component: ClothingComponent, name: string, desc: string) {
+    alt.emitServer(View_Events_Clothing.Purchase, index, component, name, desc);
 }
 
 export function handlePopulateData(components: Array<ClothingComponent>) {

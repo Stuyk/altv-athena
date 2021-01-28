@@ -30,8 +30,16 @@ function handleExit(player: alt.Player) {
     playerFuncs.sync.inventory(player);
 }
 
-function handlePurchase(player: alt.Player, equipmentSlot: number, component: ClothingComponent) {
+function handlePurchase(
+    player: alt.Player,
+    equipmentSlot: number,
+    component: ClothingComponent,
+    name: string,
+    desc: string
+) {
     const newItem = deepCloneObject<Item>(wearableRef);
+    newItem.name = name;
+    newItem.description = desc;
     newItem.data = { ...component };
     newItem.data.sex = player.data.appearance.sex;
     newItem.slot = equipmentSlot;

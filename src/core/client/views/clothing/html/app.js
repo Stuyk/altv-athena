@@ -222,9 +222,19 @@ const app = new Vue({
             delete componentData.name;
 
             if ('alt' in window) {
-                alt.emit('clothing:Purchase', this.componentIndex, componentData);
+                alt.emit('clothing:Purchase', this.componentIndex, componentData, this.name, this.desc);
             } else {
                 console.log(componentData);
+            }
+        },
+        handleFocus() {
+            if ('alt' in window) {
+                alt.emit('clothing:DisableControls', true);
+            }
+        },
+        handleBlur() {
+            if ('alt' in window) {
+                alt.emit('clothing:DisableControls', false);
             }
         }
     },
