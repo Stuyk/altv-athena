@@ -37,4 +37,5 @@ import './utility/screenshot';
 import './views/atm/atm';
 import './views/creator/creator';
 import './views/characters/characters';
+import './views/clothing/clothing';
 import './views/inventory/inventory';
