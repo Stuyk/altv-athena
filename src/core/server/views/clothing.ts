@@ -13,7 +13,7 @@ alt.onClient(View_Events_Clothing.Exit, handleExit);
 alt.onClient(View_Events_Clothing.Purchase, handlePurchase);
 
 // Do not change order
-const icons = ['hat', 'mask', 'shirt', 'bottoms', 'shoes', 'glasses', 'ear', 'backpack', 'armour'];
+const icons = ['hat', 'mask', 'shirt', 'bottoms', 'shoes', 'glasses', 'ear', 'backpack', 'armour', 'watch', 'bracelet'];
 
 const wearableRef: Item = {
     name: `Item`,

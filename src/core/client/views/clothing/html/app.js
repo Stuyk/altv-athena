@@ -1,6 +1,9 @@
 Vue.config.devtools = true;
 Vue.prototype.window = window;
 
+const plainText = new RegExp(/^[a-zA-Z 0-9]{6,32}$/);
+const plainTextDesc = new RegExp(/^[a-zA-Z 0-9]{6,64}$/);
+
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
@@ -9,6 +12,8 @@ const app = new Vue({
             // Super Important Component Data
             // Component Data corresponds with their slot order.
             // So the first element is the first slot of the equipment.
+            name: '',
+            desc: '',
             componentIndex: 0,
             cost: 0,
             shirtNames: ['Top', 'Undershirt', 'Torso'],
@@ -94,8 +99,37 @@ const app = new Vue({
                     maxDrawables: [0],
                     maxTextures: [0],
                     isProp: false
+                },
+                {
+                    name: 'Watch',
+                    ids: [6],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                },
+                {
+                    name: 'Bracelets',
+                    ids: [7],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
                 }
-            ]
+            ],
+            rules: [
+                (v) => !!v || 'This field is required',
+                (v) => (v && v !== '') || 'This field is required',
+                (v) => (v && plainText.test(v)) || 'No special characters. Greater than 5. Less than 16.'
+            ],
+            rulesDesc: [
+                (v) => !!v || 'This field is required',
+                (v) => (v && v !== '') || 'This field is required',
+                (v) => (v && plainTextDesc.test(v)) || 'No special characters. Greater than 5. Less than 16.'
+            ],
+            allPassing: false
         };
     },
     methods: {
@@ -192,6 +226,28 @@ const app = new Vue({
             } else {
                 console.log(componentData);
             }
+        }
+    },
+    watch: {
+        name(value) {
+            this.name = value;
+
+            if (plainText.test(this.name) && plainTextDesc.test(this.desc)) {
+                this.allPassing = true;
+                return;
+            }
+
+            this.allPassing = false;
+        },
+        desc(value) {
+            this.desc = value;
+
+            if (plainText.test(this.name) && plainTextDesc.test(this.desc)) {
+                this.allPassing = true;
+                return;
+            }
+
+            this.allPassing = false;
         }
     },
     mounted() {

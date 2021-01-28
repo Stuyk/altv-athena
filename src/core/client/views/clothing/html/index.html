@@ -53,7 +53,7 @@
                             </template>
                             <template v-else>
                                 <div class="groupWrapper mb-3" v-for="(drawable, index) in components[componentIndex].drawables" :key="index">
-                                    <div class="subtitle-1 mb-3">
+                                    <div class="caption mb-3">
                                         {{ shirtNames[index] }}
                                     </div>
                                     <div class="group mb-3">
@@ -94,13 +94,44 @@
                             <div class="group pb-3">
                                 <v-divider></v-divider>
                             </div>
+                            <div class="group flex-grow-1" block></div>
+                            <div class="group pb-3">
+                                <v-text-field
+                                    label="Item Name"
+                                    :rules="rules"
+                                    v-model="name"
+                                    hide-details="auto"
+                                    outlined
+                                    dense
+                                    ></v-text-field>
+                            </div>
+                            <div class="group pb-3">
+                                <v-text-field
+                                    label="Item Description"
+                                    :rules="rulesDesc"
+                                    v-model="desc"
+                                    hide-details="auto"
+                                    outlined
+                                    dense
+                                    ></v-text-field>
+                            </div>
+                            <div class="group pb-3">
+                                <v-divider></v-divider>
+                            </div>
                             <div class="group">
                                 <v-btn class="red--text text--lighten-1 flex-grow-1" outlined text @click="exit">
                                     <v-icon small>icon-exit</v-icon>&nbsp;&nbsp;Exit
                                 </v-btn>
-                                <v-btn class="light-green--text flex-grow-1 ml-3" outlined text @click="purchaseComponent">
-                                    <v-icon small>icon-checkmark</v-icon>&nbsp;&nbsp;Buy
-                                </v-btn>
+                                <template v-if="allPassing">
+                                    <v-btn class="light-green--text flex-grow-1 ml-3" outlined text @click="purchaseComponent">
+                                        <v-icon small>icon-checkmark</v-icon>&nbsp;&nbsp;Buy
+                                    </v-btn>
+                                </template>
+                                <template v-else>
+                                    <v-btn class="light-grey--text flex-grow-1 ml-3" outlined text disabled>
+                                        <v-icon small>icon-checkmark</v-icon>&nbsp;&nbsp;Buy
+                                    </v-btn>
+                                </template>
                             </div>
                         </div>
                     </div>

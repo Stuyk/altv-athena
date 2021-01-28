@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
-import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { Item } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 
@@ -86,7 +85,7 @@ function replaceInventoryItem(p: alt.Player, item: Item, tab: number): boolean {
  * @memberof InventoryPrototype
  */
 function getEquipmentItem(p: alt.Player, slot: number): Item | null {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return null;
     }
 
@@ -196,7 +195,7 @@ function isInEquipment(p: alt.Player, item: Partial<Item>): { index: number } | 
  * @memberof InventoryPrototype
  */
 function isEquipmentSlotFree(p: alt.Player, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -306,7 +305,7 @@ function inventoryRemove(p: alt.Player, slot: number, tab: number): boolean {
  * @memberof InventoryPrototype
  */
 function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -320,7 +319,7 @@ function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
 }
 
 function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 
@@ -339,7 +338,7 @@ function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
  * @memberof InventoryPrototype
  */
 function equipmentAdd(p: alt.Player, item: Item, slot: EquipmentType): boolean {
-    if (slot >= 9) {
+    if (slot >= 11) {
         return false;
     }
 

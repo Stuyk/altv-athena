@@ -37,7 +37,7 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
         return;
     }
 
-    const clothingComponents = new Array(9).fill(null);
+    const clothingComponents = new Array(11).fill(null);
     native.clearAllPedProps(alt.Player.local.scriptID);
 
     // Default Components
@@ -59,7 +59,7 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
         clothingComponents[items[i].slot] = items[i].data;
     }
 
-    handleUpdate(clothingComponents);
+    handleUpdate(clothingComponents, true);
 }
 
 function handleExit() {
@@ -76,6 +76,9 @@ function handlePurchase(index: number, component: ClothingComponent) {
 export function handlePopulateData(components: Array<ClothingComponent>) {
     for (let i = 0; i < components.length; i++) {
         const component = components[i];
+        if (!component) {
+            continue;
+        }
 
         for (let index = 0; index < component.drawables.length; index++) {
             const id = component.ids[index];
@@ -121,10 +124,10 @@ export function handlePopulateData(components: Array<ClothingComponent>) {
     view.emit('clothing:Propagate', components);
 }
 
-export function handleUpdate(components: Array<ClothingComponent>) {
+export function handleUpdate(components: Array<ClothingComponent>, justSync = false) {
     for (let i = 0; i < components.length; i++) {
         const component = components[i];
-        if (component === null) {
+        if (!component) {
             continue;
         }
 
@@ -144,6 +147,10 @@ export function handleUpdate(components: Array<ClothingComponent>) {
                 native.setPedComponentVariation(alt.Player.local.scriptID, id, value, texture, 0);
             }
         }
+    }
+
+    if (justSync) {
+        return;
     }
 
     if (!open) {
