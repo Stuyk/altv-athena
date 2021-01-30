@@ -7,15 +7,21 @@ import { setAzureEndpoint } from './utility/encryption';
 import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import logger from './utility/athenaLogger';
+import { Collections } from './interface/DatabaseCollections';
 
 env.config();
 
 setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://ares.stuyk.com');
 
 const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
-const collections = ['accounts', 'characters', 'vehicles'];
 const fPath = `${path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm')}`;
 const buffer = fs.readFileSync(fPath);
+const collections = [
+    //
+    Collections.Accounts,
+    Collections.Characters,
+    Collections.Options
+];
 
 let fns: InjectedFunctions;
 
@@ -68,6 +74,15 @@ async function handleFiles() {
     }
 
     import('./utility/console');
+
+    import('./systems/options').then((res) => {
+        res.default();
+    });
+
+    import('./systems/discord').then((res) => {
+        res.default();
+    });
+
     import('../extra/imports').then((res) => {
         res.default();
     });
