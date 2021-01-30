@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
-import { CommandsLocale } from '../../shared/locale/commands';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { OptionsController } from '../systems/options';
