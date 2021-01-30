@@ -4,6 +4,16 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.5.0 - January 28-x, 2021
+
+```diff
++ Fix Bug with Inventory Equipment Restrictions
++ Added Whitelist
++ Added Whitelist for Discord Bot
++ Added Bot Instructions to Documentation
++ Added Whitelist Commands for Console and In-Game
+```
+
 ## 1.4.0 - January 27, 2021
 
 ```diff
