@@ -75,6 +75,11 @@ async function firstConnect(p: alt.Player): Promise<void> {
         return;
     }
 
+    if (process.env.ATHENA_READY === 'false') {
+        p.kick('Still warming up...');
+        return;
+    }
+
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
     p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.

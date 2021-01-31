@@ -80,15 +80,8 @@ export class LoginController {
             return;
         }
 
-        const playerRef = { ...player };
-
-        try {
-            alt.log(`${playerRef.name} has logged out.`);
-            playerFuncs.save.onTick(playerRef as alt.Player);
-        } catch (err) {
-            alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
-            alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);
-        }
+        alt.log(`${player.data.name} has logged out.`);
+        playerFuncs.save.onTick(player);
     }
 
     static async tryDiscordQuickToken(player: alt.Player, discord: string): Promise<void> {
