@@ -2,7 +2,8 @@ Vue.component('tab-sex', {
     props: ['data'],
     data() {
         return {
-            faceNames: [...faceNames]
+            faceNames: [...faceNames],
+            preset: 1
         };
     },
     methods: {
@@ -39,6 +40,7 @@ Vue.component('tab-sex', {
             }
 
             if (parameter === 'preset') {
+                this.preset = value;
                 const index = parseInt(value - 1);
                 const preset = this.data.sex === 0 ? femalePresets[index] : malePresets[index];
                 Object.keys(preset).forEach((key) => {
@@ -75,6 +77,9 @@ Vue.component('tab-sex', {
             }
 
             this.$root.$emit('updateCharacter');
+        },
+        isHighlighted(arg1, arg2) {
+            return arg1 === arg2 ? { 'light-blue--text': true, 'text--lighten-2': true } : { 'grey--text': true };
         }
     },
     watch: {
@@ -86,124 +91,132 @@ Vue.component('tab-sex', {
         }
     },
     template: `
-        <v-container class="containerHelper transparent">
-            <!-- Sexual Orientation -->
-            <div class="d-flex flex-column justify-space-between fill-height" block fluid>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3" block fluid>
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
-                        Sexual Orientation
-                    </span>
-                    <v-btn-toggle v-model="data.sex" class="flex-grow-1" color="light-blue" text block>
-                        <v-btn @click="setParameter('sex', 0)" class="flex-grow-1" small>Female</v-btn>
-                        <v-btn @click="setParameter('sex', 1)" class="flex-grow-1" small>Male</v-btn>
-                    </v-btn-toggle>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                        Preset Faces
-                    </span>
-                    <v-btn-toggle class="flex-grow-1" color="light-blue" text>
-                        <v-btn v-for="i in 6" :key="i" @click="setParameter('preset', i)" class="flex-grow-1" small>
-                            {{ i }}
-                        </v-btn>
-                    </v-btn-toggle>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                        Father Face
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter('faceFather', 0, 45, 1)" class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
-                            {{faceNames[data.faceFather] }}
-                        </span>
-                        <v-btn @click="incrementParameter('faceFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
-                    </div>
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mt-4 mb-1">
-                        Skin
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter('skinFather', 0, 45, 1)" class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
-                            {{faceNames[data.skinFather] }}
-                        </span>
-                        <v-btn @click="incrementParameter('skinFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
-                    </div>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                        Mother Face
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter('faceMother', 0, 45, 1)" class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
-                            {{faceNames[data.faceMother] }}
-                        </span>
-                        <v-btn @click="incrementParameter('faceMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
-                    </div>
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mt-4 mb-1">
-                        Skin
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter('skinMother', 0, 45, 1)" class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
-                            {{faceNames[data.skinMother] }}
-                        </span>
-                        <v-btn @click="incrementParameter('skinMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
-                    </div>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                        Face Blend
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1">
-                        <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.faceMix).toFixed(1) }}</v-chip>
-                        <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
-                    </div>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                        Skin Blend
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1">
-                        <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.skinMix).toFixed(1) }}</v-chip>
-                        <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.skinMix"/>
-                    </div>
-                </v-card>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3">
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1">
-                       Eye Color
-                    </span>
-                    <div class="d-flex flex-row flex-grow-1 align-content-center justify-content-center">
-                        <v-btn @click="decrementParameter('eyes', 0, 45, 1)" class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <span class="flex-grow-1 text-md-body-1 text-center pt-1" small> 
-                            {{ data.eyes }}
-                        </span>
-                        <v-btn @click="incrementParameter('eyes', 0, 45, 1)"  class="light-blue--text" outlined small text>
-                            <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
-                    </div>
-                </v-card>
+        <div class="contentWrapper">
+            <div class="group mt-3">
+                <v-btn v-for="i in 6" :key="i" @click="setParameter('preset', i)" class="flex-grow-1 ml-1 mr-1" :class="isHighlighted(preset, i)" outlined text small>
+                    {{ i }}
+                </v-btn>
+            </div>
+            <div class="group mt-3">
+                <v-btn @click="setParameter('sex', 0)" class="flex-grow-1 mr-3" :class="isHighlighted(data.sex, 0)" outlined text small>Female</v-btn>
+                <v-btn @click="setParameter('sex', 1)" class="flex-grow-1" :class="isHighlighted(data.sex, 1)" outlined text small>Male</v-btn>
+            </div>
+            <div class="group mt-3">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Father Face
+                </div>
+            </div>
+            <div class="group">
+                <v-btn @click="decrementParameter('faceFather', 0, 45, 1)" class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-left</v-icon>
+                </v-btn>
+                <span class="flex-grow-1 overline text-center pt-1" small> 
+                    {{faceNames[data.faceFather] }}
+                </span>
+                <v-btn @click="incrementParameter('faceFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-right</v-icon>
+                </v-btn>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Father Skin
+                </div>
+            </div>
+            <div class="group">
+                <v-btn @click="decrementParameter('skinFather', 0, 45, 1)" class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-left</v-icon>
+                </v-btn>
+                <span class="flex-grow-1 overline text-center pt-1" small> 
+                    {{faceNames[data.skinFather] }}
+                </span>
+                <v-btn @click="incrementParameter('skinFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-right</v-icon>
+                </v-btn>
+            </div>
+            <div class="group pt-2">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Mother Face
+                </div>
+            </div>
+            <div class="group">
+                <v-btn @click="decrementParameter('faceMother', 0, 45, 1)" class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-left</v-icon>
+                </v-btn>
+                <span class="flex-grow-1 overline text-center pt-1" small> 
+                    {{faceNames[data.faceMother] }}
+                </span>
+                <v-btn @click="incrementParameter('faceMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-right</v-icon>
+                </v-btn>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Mother Skin
+                </div>
+            </div>
+            <div class="group">
+                <v-btn @click="decrementParameter('skinMother', 0, 45, 1)" class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-left</v-icon>
+                </v-btn>
+                <span class="flex-grow-1 overline text-center pt-1" small> 
+                    {{faceNames[data.skinMother] }}
+                </span>
+                <v-btn @click="incrementParameter('skinMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-right</v-icon>
+                </v-btn>
+            </div>
+            <div class="group pt-2">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Face Blend
+                </div>
+            </div>
+            <div class="group">
+                <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.faceMix).toFixed(1) }}</v-chip>
+                <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.faceMix"/>
+            </div>
+            <div class="group pt-2">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Skin Blend
+                </div>
+            </div>
+            <div class="group">
+                <v-chip class="light-blue--text mr-3" label outlined>{{ parseFloat(data.skinMix).toFixed(1) }}</v-chip>
+                <v-slider thumb-label dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.skinMix"/>
+            </div>
+            <div class="group pt-2">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    Eye Colour
+                </div>
+            </div>
+            <div class="group">
+                <v-btn @click="decrementParameter('eyes', 0, 45, 1)" class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-left</v-icon>
+                </v-btn>
+                <span class="flex-grow-1 overline text-center pt-1" small> 
+                    {{ data.eyes }}
+                </span>
+                <v-btn @click="incrementParameter('eyes', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                    <v-icon small>icon-chevron-right</v-icon>
+                </v-btn>
+            </div>
+            <div class="group pt-2">
+                <v-divider></v-divider>
             </div>
         </div>
-        </v-container>
     `
 });

@@ -148,7 +148,7 @@ export function handleNewCharacter(player: Player): void {
     player.pendingCharacterEdit = true;
     player.pendingNewCharacter = true;
 
-    player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
+    player.rot = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_ROT } as alt.Vector3;
     playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
     alt.emitClient(player, View_Events_Characters.Done);
 

@@ -37,9 +37,9 @@ const app = new Vue({
                 colorOverlays: []
             },
             infoData: {
-                age: 18,
+                age: new Date().toISOString().substr(0, 10),
                 gender: 'none',
-                name: 'John_Dane'
+                name: ''
             },
             navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
             navOptionsIcons: [
@@ -95,6 +95,22 @@ const app = new Vue({
         }
     },
     methods: {
+        incrementIndex() {
+            if (this.selection + 1 >= this.navOptions.length) {
+                this.selection = this.navOptions.length - 1;
+                return;
+            }
+
+            this.selection += 1;
+        },
+        decrementIndex() {
+            if (this.selection - 1 <= -1) {
+                this.selection = 0;
+                return;
+            }
+
+            this.selection -= 1;
+        },
         setReady(noDiscard = true, noName = true) {
             if (this.show) {
                 return;

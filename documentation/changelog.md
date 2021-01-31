@@ -14,6 +14,13 @@ description: List of all the changes and current versions.
 + Added Whitelist Commands for Console and In-Game
 + Revamped Character Select
 + Added Clothing Sync to Character Select
++ Fix Rotation Bug for Characeter Creator
++ Better Page Scaling for Smaller Screens
++ Updated Interface for Character Select
++ Changed Character Select Location
++ Updated Interface for Character Creator
++ Updated Interface for Clothing
++ Removed Unncessary CSS Duplicate Code
 ```
 
 ## 1.4.0 - January 27, 2021
