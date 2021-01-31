@@ -41,15 +41,29 @@ body {
 }
 
 .atm {
+    position: absolute;
+    left: 2vw;
     animation: fadein 0.2s;
     user-select: none;
-    min-width: 800px;
+    min-width: 550px;
+    max-width: 550px;
+    transform: perspective(1000px) rotateY(5deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    opacity: 0.95;
 }
 
 .atm-loading {
-    min-width: 800px;
+    position: absolute;
+    left: 2vw;
+    min-width: 550px;
+    max-width: 550px;
     animation: fadein 0.75s;
     user-select: none;
+    transform: perspective(1000px) rotateY(5deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    opacity: 0.95;
 }
 
 ::-webkit-scrollbar {
