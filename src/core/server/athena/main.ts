@@ -5,7 +5,7 @@ export const DEFAULT_CONFIG = {
     WHITELIST: false,
     USE_DISCORD_BOT: false,
     // Use Voice
-    VOICE_ON: true,
+    VOICE_ON: SHARED_CONFIG.VOICE_ON,
     VOICE_MAX_DISTANCE: 35,
     // Character Selection View
     CHARACTER_SELECT_POS: { x: 36.19486618041992, y: 859.3850708007812, z: 197.71343994140625 },
