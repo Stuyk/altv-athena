@@ -79,3 +79,39 @@ alt.log(`The item was removed!`);
 ## Item Effects
 
 If you wish to use item effects when you consume an item it's quite simple.
+
+You will need to add a `event` to the `data` section of your item.
+
+When the item is consumed it will reduce the quantity by `1` and then call that event over `alt.emit`.
+
+It can then be recieved with `alt.on`.
+
+### Item Example
+
+```ts
+const teleporterItem: Item = {
+    name: `Teleporter`,
+    uuid: `teleporter`,
+    description: `Debug: Should be able to call an event with this`,
+    icon: 'teleporter',
+    slot: 5,
+    quantity: 1,
+    weight: 1,
+    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+    data: {
+        event: 'effect:Teleport'
+    }
+};
+```
+
+### Item Effect Receive
+
+```ts
+import * as alt from 'alt-server';
+import { playerFuncs } from '../../server/extensions/Player';
+import { Item } from '../../shared/interfaces/Item';
+
+alt.on('effect:Teleport', (player: alt.Player, item: Item) => {
+    playerFuncs.emit.message(player, `You consumed ${item.name}`);
+});
+```

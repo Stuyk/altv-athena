@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import AdminController from '../systems/admin';
 import { Account } from '../interface/Account';
+import { OptionsController } from '../systems/options';
 
 const db: Database = getDatabase();
 
@@ -19,7 +20,9 @@ const command = {
     '/screenshot': handleScreenshot,
     '/ban': handleBan,
     '/unban': handleUnban,
-    '/dox': handleDox
+    '/dox': handleDox,
+    '/addwhitelist': handleAddWhitelist,
+    '/removewhitelist': handleRemoveWhitelist
 };
 
 /**
@@ -177,6 +180,36 @@ function handleDox(cmdName: string, id: string) {
     Object.keys(player.accountData).forEach((key) => {
         console.log(`${key}: ${JSON.stringify(player.accountData[key])}`);
     });
+}
+
+async function handleAddWhitelist(cmdName: string, id: string) {
+    if (id === undefined) {
+        Logger.error(`/addwhitelist <discord_id>>`);
+        return;
+    }
+
+    const wasAdded = OptionsController.addToWhitelist(id);
+    if (!wasAdded) {
+        Logger.error(`Could not add: ${id} to the whitelist.`);
+        return;
+    }
+
+    Logger.log(`${id} was added to the list.`);
+}
+
+async function handleRemoveWhitelist(cmdName: string, id: string) {
+    if (id === undefined) {
+        Logger.error(`/removewhitelist <discord_id>>`);
+        return;
+    }
+
+    const wasRemoved = OptionsController.removeFromWhitelist(id);
+    if (!wasRemoved) {
+        Logger.log(`${id} does not exist in the list or was already removed.`);
+        return;
+    }
+
+    Logger.log(`${id} was removed from the list.`);
 }
 
 async function handleSaveScreenshot(player: alt.Player, base64Image: string) {

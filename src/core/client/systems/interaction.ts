@@ -77,7 +77,9 @@ export class InteractionController {
             return;
         }
 
-        drawText2D('Interaction Mode is On', { x: 0.5, y: 0.98 }, 0.3, new alt.RGBA(255, 255, 255, 255));
+        if (!SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
+            drawText2D('Interaction Mode is On', { x: 0.5, y: 0.95 }, 0.3, new alt.RGBA(255, 255, 255, 255));
+        }
 
         // Non-Interaction Based Items
         // Vehicles and such...
@@ -116,8 +118,9 @@ export class InteractionController {
     }
 }
 
-if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
-    InteractionController.toggleInteractionMode();
-}
-
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
+alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
+    if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
+        InteractionController.toggleInteractionMode();
+    }
+});

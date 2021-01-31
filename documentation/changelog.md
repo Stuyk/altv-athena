@@ -4,6 +4,29 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.5.0 - January 28-31, 2021
+
+```diff
++ Fix Bug with Inventory Equipment Restrictions
++ Added Whitelist
++ Added Whitelist for Discord Bot
++ Added Bot Instructions to Documentation
++ Added Whitelist Commands for Console and In-Game
++ Revamped Character Select
++ Added Clothing Sync to Character Select
++ Fix Rotation Bug for Characeter Creator
++ Better Page Scaling for Smaller Screens
++ Updated Interface for Character Select
++ Changed Character Select Location
++ Updated Interface for Character Creator
++ Updated Interface for Clothing
++ Removed Unncessary CSS Duplicate Code
++ Fix Bug with Interaction Mode Always On
++ Adjust ATM View Position
++ Fix Bug with Help Text Progress for Long Press
++ Fix CSS Bug for Inventory
+```
+
 ## 1.4.0 - January 27, 2021
 
 ```diff

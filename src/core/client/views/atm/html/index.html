@@ -36,7 +36,7 @@
                                 </template>
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
-                                <v-text-field :rules="withdrawRules" prepend-icon="icon-plus" class="flex-grow-1" type="number" label="Withdraw Amount" v-model="withdrawAmount" />
+                                <v-text-field :rules="withdrawRules" class="flex-grow-1" type="number" label="Withdraw Amount" v-model="withdrawAmount" outlined />
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel class="grey darken-3" @click="setType('deposit')">
@@ -93,6 +93,7 @@
                         </v-btn>
                     </v-card-actions>
                 </v-card>
+                <div class="athena"></div>
             </v-app>
         </div>
         <script src="../../js/vue.min.js"></script>

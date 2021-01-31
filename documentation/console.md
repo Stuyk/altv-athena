@@ -26,6 +26,46 @@ Used to set a discord user as admin.
 
 ![](https://i.imgur.com/rw2u1Xq.png)
 
+## addwhitelist
+
+Used to add a Discord ID to the whitelist.
+
+**Usage**
+
+```sh
+/addwhitelist <discord_id>
+```
+
+**Example**
+
+```sh
+/addwhitelist 202685967935471617
+```
+
+**Response**
+
+![](https://i.imgur.com/cpWxlKw.png)
+
+## removewhitelist
+
+Used to remove a Discord ID from the whitelist.
+
+**Usage**
+
+```sh
+/removewhitelist <discord_id>
+```
+
+**Example**
+
+```sh
+/removewhitelist 202685967935471617
+```
+
+**Response**
+
+![](https://i.imgur.com/6Lyf7Sj.png)
+
 ## ban
 
 Used to ban a player by discord id
@@ -43,6 +83,7 @@ Used to ban a player by discord id
 ```
 
 **Response**
+
 ![](https://i.imgur.com/cG78QHW.png)
 
 ## unban

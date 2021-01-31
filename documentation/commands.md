@@ -27,9 +27,15 @@ Commands that are built-in to the current Framework.
 /ac [message] - Speak to other admins.
 /mc [message] - Speak to moderators and admins.
 /broadcast [message] - Say something server-wide. No distance restriction.
+
 /noclip - Sets self in no collision mode.
+
 /revive [id]* - Revive another player or self.
 /sethealth [amount] [id]* - Set health for another player or self.
 /setarmour [amount] [id]* - Set armour for another player or self.
+
 /updateweather - Updates your weather sync in the region immediately.
+
+/addwhitelist [discord] - Adds a user to the whitelist if it's turned on.
+/removewhitelist [discord] - Adds a user to the whitelist if it's turned on.
 ```

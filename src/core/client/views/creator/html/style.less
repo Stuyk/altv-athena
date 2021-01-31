@@ -25,31 +25,8 @@ body {
     animation: fadein 2s;
 }
 
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 #app {
     opacity: 1;
-}
-
-v-card {
-    min-height: 85px;
-}
-
-.special-box {
-    min-width: 400px;
-    height: 100vh;
-}
-
-.containerHelper {
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .spinner {
@@ -64,19 +41,4 @@ v-card {
     100% {
         transform: rotate(360deg);
     }
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-    background: rgba(20, 20, 20, 0.85);
-    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.25);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(100, 100, 100, 1);
-    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    cursor: pointer !important;
 }

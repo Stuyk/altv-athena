@@ -26,8 +26,8 @@ function drawNametags() {
         return;
     }
 
-    if (alt.Player.local.isTalking) {
-        drawText2D('Microphone On', { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 255));
+    if (SHARED_CONFIG.VOICE_ON && alt.Player.local.isTalking) {
+        drawText2D('Microphone On', { x: 0.5, y: 0.05 }, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 
     if (shouldScreenShake) {

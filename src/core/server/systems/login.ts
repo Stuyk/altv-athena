@@ -10,6 +10,8 @@ import './tick';
 import './voice';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
+import { DEFAULT_CONFIG } from '../athena/main';
+import { OptionsController } from './options';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -17,6 +19,14 @@ export class LoginController {
     static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
         delete player.pendingLogin;
         delete player.discordToken;
+
+        // Whitelist Handling
+        if (DEFAULT_CONFIG.WHITELIST) {
+            if (!OptionsController.isWhitelisted(data.id)) {
+                player.kick(`You are not currently whitelisted.`);
+                return;
+            }
+        }
 
         if (data.username) {
             alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
@@ -70,15 +80,8 @@ export class LoginController {
             return;
         }
 
-        const playerRef = { ...player };
-
-        try {
-            alt.log(`${playerRef.name} has logged out.`);
-            playerFuncs.save.onTick(playerRef as alt.Player);
-        } catch (err) {
-            alt.log(`[Athena] Attempted to log player out. Player data was not found.`);
-            alt.log(`[Athena] If you are seeing this message on all disconnects something went wrong above.`);
-        }
+        alt.log(`${player.data.name} has logged out.`);
+        playerFuncs.save.onTick(player);
     }
 
     static async tryDiscordQuickToken(player: alt.Player, discord: string): Promise<void> {

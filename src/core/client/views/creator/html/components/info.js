@@ -4,14 +4,20 @@ Vue.component('tab-info', {
     props: ['data', 'infodata'],
     data() {
         return {
-            name: '',
-            age: 0,
-            gender: '',
+            first: '',
+            last: '',
+            age: new Date().toISOString().substr(0, 10),
+            gender: null,
             nameValid: false,
             ageValid: false,
             genderValid: false,
             isNameAvailable: false,
-            firstTime: true
+            firstTime: true,
+            nameRules: [
+                (v) => !!v || 'This field is required',
+                (v) => (v && v !== '') || 'This field is required',
+                (v) => (v && nameRegex.test(v)) || 'No special characters. Greater than 5. Less than 16.'
+            ]
         };
     },
     computed: {
@@ -31,7 +37,14 @@ Vue.component('tab-info', {
 
             this.$root.$emit('isVerified', true);
         },
+        disableControls() {
+            if ('alt' in window) {
+                alt.emit('creator:DisableControls', true);
+            }
+        },
         nameChanged(newValue) {
+            newValue = newValue.target.value;
+
             if (!newValue) {
                 return;
             }
@@ -47,6 +60,7 @@ Vue.component('tab-info', {
 
             if ('alt' in window) {
                 alt.emit('creator:CheckName', newValue);
+                alt.emit('creator:DisableControls', false);
             }
         },
         handleNameAvailable(result) {
@@ -63,15 +77,21 @@ Vue.component('tab-info', {
     },
     watch: {
         age(newValue) {
-            if (newValue >= 18 && newValue <= 90) {
-                this.ageValid = true;
-                this.infodata.age = parseInt(newValue).toFixed(0);
+            const currentYear = new Date(Date.now()).getFullYear();
+            const date = new Date(newValue);
+            const age = currentYear - date.getFullYear();
+
+            if (age < 18) {
+                this.ageValid = false;
+                this.infodata.age = new Date().toISOString().substr(0, 10);
                 this.verifyAllCorrect();
                 return;
             }
 
-            this.ageValid = false;
-            this.infodata.age = 18;
+            this.ageValid = true;
+            this.infodata.age = newValue;
+            this.verifyAllCorrect();
+            return;
         },
         gender(newValue) {
             if (newValue.length >= 4 && newValue.toLowerCase() !== 'none') {
@@ -95,40 +115,85 @@ Vue.component('tab-info', {
         }
     },
     template: `
+        <div class="contentWrapper">
+            <div class="group pt-3 pb-3">
+                <div class="subtitle light-blue--text text-left">
+                    We need some more information before we let you make your character. 
+                    <br />
+                    <br />
+                    Please fill out the forms below.
+                </div>
+            </div>
+            <div class="group pb-3">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    What is your character's name?
+                </div>
+            </div>
+            <div class="group pt-3">
+                <template v-if="this.isNameAvailable !== null">
+                    <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                    <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                </template>
+                <template v-else>
+                    <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
+                    <span class="pr-5"></span>
+                </template>
+                <v-text-field
+                    label="First Name & Last Name (ex. John_Doe)"
+                    placeholder="John_Doe"
+                    :rules="nameRules"
+                    v-model="first"
+                    hide-details="auto"
+                    outlined
+                    dense
+                    @focus="disableControls"
+                    @blur="nameChanged"
+                >
+                </v-text-field>
+            </div>
+            <div class="group pt-3 pb-3">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                    When is your character's Birthday?
+                </div>
+            </div>
+            <div class="group pt-3">
+                <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                <v-date-picker
+                    v-model="age"
+                    full-width
+                >
+                </v-date-picker>
+            </div>
+            <div class="group pb-3 pt-6">
+                <v-divider></v-divider>
+            </div>
+            <div class="group">
+                <div class="overline pa-0 ma-0 grey--text">
+                   What is your character's Gender?
+                </div>
+            </div>
+            <div class="group">
+                <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
+                <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                <v-radio-group v-model="gender" class="flex-grow-1" mandatory>
+                    <v-radio label="Female" value="female" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
+                    <v-radio label="Male" value="male" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
+                    <v-radio label="Other" value="other" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
+                </v-radio-group>
+            </div>
+            <div class="group pb-3">
+                <v-divider></v-divider>
+            </div>
+        </div>
         <v-container class="containerHelper transparent">
             <div class="d-flex flex-column justify-space-between fill-height" block fluid>
-                <v-card class="d-flex flex-column elevation-2 mb-2 pa-3 grey darken-3 fill-height" block fluid>
-                    <span class="text-md-body-1 light-blue--text text--lighten-3 mb-1" block>
-                        Tell Us About Yourself
-                    </span>
-                    <div class="d-flex flex-row justify-content-space-between">
-                        <template v-if="this.isNameAvailable !== null">
-                            <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                            <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                        </template>
-                        <template v-else>
-                            <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
-                            <span class="pr-5"></span>
-                        </template>
-                        <v-text-field
-                            type="text"
-                            label="Your Name (Ex. John_Doe)"
-                            value="infodata.name"
-                            v-model="name"
-                            @change="nameChanged"
-                        />
-                    </div>
-                    <div class="d-flex flex-row justify-content-space-between">
-                        <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                        <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
-                        <v-text-field
-                            class="flex-grow-1"
-                            type="number"
-                            label="Your Age"
-                            value="infoData.age"
-                            v-model="age"
-                        />
-                    </div>
                     <div class="d-flex flex-row justify-content-space-between">
                         <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
                         <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>

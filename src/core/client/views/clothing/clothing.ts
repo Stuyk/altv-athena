@@ -38,8 +38,18 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
         return;
     }
 
+    handleEquipment(items);
+}
+
+export function handleEquipment(items: Array<Item>) {
     const clothingComponents = new Array(11).fill(null);
     native.clearAllPedProps(alt.Player.local.scriptID);
+
+    if (items && Array.isArray(items)) {
+        for (let i = 0; i < items.length; i++) {
+            clothingComponents[items[i].slot] = items[i].data;
+        }
+    }
 
     // Default Components
     if (alt.Player.local.meta.appearance.sex === 0) {
@@ -64,8 +74,8 @@ function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void
         native.setPedComponentVariation(alt.Player.local.scriptID, 11, 91, 0, 0); // torso
     }
 
-    for (let i = 0; i < items.length; i++) {
-        clothingComponents[items[i].slot] = items[i].data;
+    if (!items || !Array.isArray(items)) {
+        return;
     }
 
     handleUpdate(clothingComponents, true);

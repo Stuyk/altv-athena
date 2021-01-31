@@ -9,3 +9,4 @@ import './setArmour';
 import './setHealth';
 import './updateweather';
 import './weapon';
+import './whitelist';

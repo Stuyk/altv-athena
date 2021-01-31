@@ -18,7 +18,9 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
         return;
     }
 
-    await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, 'characters');
+    alt.setTimeout(async () => {
+        await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, 'characters');
+    }, 0);
 }
 
 /**
@@ -32,7 +34,9 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
         return;
     }
 
-    await db.updatePartialData(p.data._id, { ...dataObject }, 'characters');
+    alt.setTimeout(async () => {
+        await db.updatePartialData(p.data._id, { ...dataObject }, 'characters');
+    }, 0);
 }
 
 /**

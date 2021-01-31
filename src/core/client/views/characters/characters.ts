@@ -4,6 +4,7 @@ import { View_Events_Characters } from '../../../shared/enums/views';
 import { Character } from '../../../shared/interfaces/Character';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
+import { handleEquipment } from '../clothing/clothing';
 import { handleSync } from '../creator/creator';
 
 const url = `http://resource/client/views/characters/html/index.html`;
@@ -22,6 +23,7 @@ async function handleView(_characters: Partial<Character>[]) {
     view.on('characters:Select', handleSelect);
     view.on('characters:New', handleNew);
     view.on('characters:Update', handleSync); // Calls `creator.ts`
+    view.on('characters:Equipment', handleEquipment);
     view.on('characters:Delete', handleDelete);
 
     // Handle Duplicate View Instance Creations
@@ -32,8 +34,8 @@ async function handleView(_characters: Partial<Character>[]) {
 
     open = true;
     createPedEditCamera();
-    setFov(50);
-    setZPos(0.6);
+    setFov(60);
+    setZPos(0.5);
 }
 
 async function handleSelect(id) {

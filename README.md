@@ -21,6 +21,9 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 -   Character Selection
 -   Character Info Support
 -   Character Appearance Synchronization
+-   Whitelist
+    -   Discord Role / Bot Integration
+    -   Console Commands
 -   Console Commands
     -   Ban
     -   Unban
@@ -29,6 +32,8 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   SetAdmin
     -   Dox
     -   Screenshot
+    -   Add to Whitelist
+    -   Remove from Whitelist
 -   Player
     -   Health Synchronization
     -   Armour Synchronization
@@ -108,10 +113,6 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Press 1-4 to swap items in toolbar
 -   Extendable Core Resource
     -   Extend the core resource by writing your own code in the 'extra' folder.
-
-```text
-New Features Always in Discord
-```
 
 ## Running this Project
 

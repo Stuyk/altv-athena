@@ -1,4 +1,4 @@
 export interface CharacterInfo {
     gender: string;
-    age: number;
+    age: any;
 }

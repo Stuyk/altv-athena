@@ -16,6 +16,7 @@
 -   [Console](documentation/console.md)
 -   [Commands](documentation/commands.md)
 -   [Hotkeys](documentation/hotkeys.md)
+-   [Discord Whitelist](documentation/whitelist.md)
 
 ## Basic Scripting
 
