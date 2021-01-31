@@ -42,7 +42,10 @@ export async function goToCharacterSelect(player: Player): Promise<void> {
     player.currentCharacters = characters;
     player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
     playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
-    alt.emitClient(player, View_Events_Characters.Show, characters);
+
+    alt.setTimeout(() => {
+        alt.emitClient(player, View_Events_Characters.Show, characters);
+    }, 1000);
 }
 
 /**
@@ -148,5 +151,8 @@ export function handleNewCharacter(player: Player): void {
     player.rot = { ...DEFAULT_CONFIG.CHARACTER_SELECT_ROT } as alt.Vector3;
     playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
     alt.emitClient(player, View_Events_Characters.Done);
-    alt.emitClient(player, View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName
+
+    alt.setTimeout(() => {
+        alt.emitClient(player, View_Events_Creator.Show, null, true, false, totalCharacters); // _oldCharacterData, _noDiscard, _noName
+    }, 1000);
 }

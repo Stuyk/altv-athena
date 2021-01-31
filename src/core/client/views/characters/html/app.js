@@ -11,7 +11,7 @@ const exampleCharacter = {
         age: 18,
         gender: 'male'
     },
-    name: 'Kodi_Fanooli',
+    name: 'Arachnid_Monolith_Name_Face',
     appearance: {
         colorOverlays: [0, 0, 0],
         eyebrows: 0,
@@ -70,13 +70,27 @@ const app = new Vue({
             this.characters = characters;
             this.updateAppearance();
         },
-        setIndex(value) {
-            this.characterIndex = value;
+        incrementIndex() {
+            this.characterIndex += 1;
+            if (this.characterIndex > this.characters.length - 1) {
+                this.characterIndex = 0;
+            }
+            this.updateAppearance();
+        },
+        decrementIndex() {
+            this.characterIndex -= 1;
+            if (this.characterIndex <= -1) {
+                this.characterIndex = this.characters.length - 1;
+            }
             this.updateAppearance();
         },
         updateAppearance() {
             if ('alt' in window) {
                 alt.emit('characters:Update', this.characters[this.characterIndex].appearance);
+
+                setTimeout(() => {
+                    alt.emit('characters:Equipment', this.characters[this.characterIndex].equipment);
+                }, 500);
             }
         },
         selectCharacter() {

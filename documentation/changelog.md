@@ -12,6 +12,8 @@ description: List of all the changes and current versions.
 + Added Whitelist for Discord Bot
 + Added Bot Instructions to Documentation
 + Added Whitelist Commands for Console and In-Game
++ Revamped Character Select
++ Added Clothing Sync to Character Select
 ```
 
 ## 1.4.0 - January 27, 2021

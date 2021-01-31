@@ -51,8 +51,6 @@ export class DiscordController {
 }
 
 export default function loader() {
-    console.log('feature not ready');
-
     if (DEFAULT_CONFIG.USE_DISCORD_BOT) {
         if (!process.env.DISCORD_BOT) {
             Logger.error(

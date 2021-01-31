@@ -75,7 +75,7 @@ async function firstConnect(p: alt.Player): Promise<void> {
         return;
     }
 
-    const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
     p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
     p.pendingLogin = true;

@@ -112,6 +112,7 @@ function handleDisableControls(shouldDisableControls: boolean): void {
  */
 export async function handleSync(data: Partial<Appearance>, shouldTPose: boolean = false): Promise<void> {
     tempData = data;
+    alt.Player.local.meta.appearance = data as Appearance;
 
     native.clearPedBloodDamage(alt.Player.local.scriptID);
     native.clearPedDecorations(alt.Player.local.scriptID);
