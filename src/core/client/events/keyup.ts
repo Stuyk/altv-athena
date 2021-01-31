@@ -133,20 +133,20 @@ function handleKeyUp(key: number) {
         return;
     }
 
+    keyPressTimes[key] = null;
+
     // Long Press
-    if (
-        keyPressTimes[key] &&
-        keyPressTimes[key] + DELAY_BETWEEN_LONG_PRESSES < Date.now() &&
-        KEY_UP_BINDS[key].longPress
-    ) {
-        keyPressTimes[key] = null;
+    const isLongPressReady = keyPressTimes[key] + DELAY_BETWEEN_LONG_PRESSES < Date.now();
+    if (keyPressTimes[key] && isLongPressReady && KEY_UP_BINDS[key].longPress) {
         KEY_UP_BINDS[key].longPress(key);
-        return;
     }
 
-    keyPressTimes[key] = null;
     // Single Press
-    KEY_UP_BINDS[key].singlePress(key);
+    if (KEY_UP_BINDS[key] && KEY_UP_BINDS[key].singlePress) {
+        KEY_UP_BINDS[key].singlePress(key);
+    } else {
+        console.log(`Tried to press: ${key} but it was not ready.`);
+    }
 }
 
 function handleDebugMessages() {
