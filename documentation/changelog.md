@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.5.0 - January 28-x, 2021
+## 1.5.0 - January 28-31, 2021
 
 ```diff
 + Fix Bug with Inventory Equipment Restrictions
@@ -24,6 +24,7 @@ description: List of all the changes and current versions.
 + Fix Bug with Interaction Mode Always On
 + Adjust ATM View Position
 + Fix Bug with Help Text Progress for Long Press
++ Fix CSS Bug for Inventory
 ```
 
 ## 1.4.0 - January 27, 2021
