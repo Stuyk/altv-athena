@@ -361,10 +361,8 @@ const app = new Vue({
             this.setHelpText(69, 'Short press description go brrr');
 
             (async () => {
-                console.log('add');
                 this.setHelpState(true);
                 await sleep(1500);
-                console.log('remove');
                 this.setHelpState(false);
             })();
 

@@ -11,7 +11,9 @@
         <div id="app" v-if="show" v-cloak>
             <v-app v-if="!leaderboard">
                 <div class="chat">
-                    <div :class="!helpState ? {'help-fill-bye': true } : { 'help-fill': true }"></div>
+                    <template v-if="helpText && helpText.longPress && helpText.longPress !== '' && helpText.longPress !== null">
+                        <div :class="!helpState ? {'help-fill-bye': true } : { 'help-fill': true }"></div>
+                    </template>
                     <div :class="getHelpTextClasses">
                         <div class="help-row" v-if="helpText && helpText.key">
                             <div class="keypress">{{ String.fromCharCode(helpText.key) }}</div>

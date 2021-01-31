@@ -144,8 +144,6 @@ function handleKeyUp(key: number) {
     // Single Press
     if (KEY_UP_BINDS[key] && KEY_UP_BINDS[key].singlePress) {
         KEY_UP_BINDS[key].singlePress(key);
-    } else {
-        console.log(`Tried to press: ${key} but it was not ready.`);
     }
 }
 

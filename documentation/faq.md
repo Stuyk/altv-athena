@@ -22,7 +22,15 @@ The core features, items, etc. will always come with Athena. However, the data t
 
 ## May I share my license?
 
-In the future licenses will be checked for multiple users and be restricted to around 2-3 IPs using it at once time. I feel it's fair that each license should belong to one individual or a small team.
+Licenses are currently limited to 5 IP(s) at any given time. If the number of IP(s) is exceeded you will have to wait until Ares is rebooted to get a reset on usage.
+
+## Theoretical Player Limitations?
+
+The Athena framework has not been tested with high player counts yet. However, compared to the old code of O:RP and the steps I've taken to ensure that client's get the best performance they can. I do believe Athena is capable of handling at least 400 players at a time. However, this will be dependent on what else is added into Athena.
+
+## Cannot Interact with Anything
+
+Make sure you press 'left alt' before you do anything. This turn son a bunch of loops to help with interacting and figuring out what the player needs to do. This is purposely left off to ensure client's get the highest performacne while playing with the Athena Framework.
 
 ## How long until 'x' feature?
 
