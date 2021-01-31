@@ -21,6 +21,8 @@ description: List of all the changes and current versions.
 + Updated Interface for Character Creator
 + Updated Interface for Clothing
 + Removed Unncessary CSS Duplicate Code
++ Fix Bug with Interaction Mode Always On
++ Adjust ATM View Position
 ```
 
 ## 1.4.0 - January 27, 2021

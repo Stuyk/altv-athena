@@ -32,8 +32,6 @@ export class OptionsController {
         if (DEFAULT_CONFIG.WHITELIST) {
             Logger.info(`Whitelisted Users: ${OptionsController.data.whitelist.length}`);
         }
-
-        console.log(OptionsController.data);
     }
 
     /**

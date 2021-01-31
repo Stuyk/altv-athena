@@ -29,23 +29,27 @@ export class DiscordController {
     }
 
     static userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
-        const userFullName = `${newUser.user.username}#${newUser.user.discriminator}`;
-        const currentMember = DiscordController.guild.members.cache.get(newUser.user.id);
-        const hasRole = currentMember.roles.cache.find((role) => role.id === process.env.WHITELIST_ROLE);
+        try {
+            const userFullName = `${newUser.user.username}#${newUser.user.discriminator}`;
+            const currentMember = DiscordController.guild.members.cache.get(newUser.user.id);
+            const hasRole = currentMember.roles.cache.find((role) => role.id === process.env.WHITELIST_ROLE);
 
-        if (!hasRole) {
-            const didRemove = OptionsController.removeFromWhitelist(currentMember.user.id);
+            if (!hasRole) {
+                const didRemove = OptionsController.removeFromWhitelist(currentMember.user.id);
 
-            if (didRemove) {
-                Logger.log(`${userFullName} was removed from the whitelist.`);
+                if (didRemove) {
+                    Logger.log(`${userFullName} was removed from the whitelist.`);
+                }
+
+                return;
             }
 
-            return;
-        }
-
-        const didAdd = OptionsController.addToWhitelist(currentMember.user.id);
-        if (didAdd) {
-            Logger.log(`${userFullName} was added to the whitelist.`);
+            const didAdd = OptionsController.addToWhitelist(currentMember.user.id);
+            if (didAdd) {
+                Logger.log(`${userFullName} was added to the whitelist.`);
+            }
+        } catch (err) {
+            Logger.warning(`Could not whitelist a Discord User. Turn on integrations and wait a few hours.`);
         }
     }
 }
