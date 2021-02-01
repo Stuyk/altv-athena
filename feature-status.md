@@ -22,7 +22,7 @@ N/A - Feature planned but not started.
 
 Use the marking system above to determine what is complete and what is not.
 
-```
+```text
 F - Authentication
 S - Character Editor
 F - Character Selection
@@ -52,3 +52,4 @@ S - Clothing System
 N/A - Vehicle Ownership
 N/A - Job Framework
 ```
+

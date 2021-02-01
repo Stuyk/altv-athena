@@ -39,3 +39,4 @@ Commands that are built-in to the current Framework.
 /addwhitelist [discord] - Adds a user to the whitelist if it's turned on.
 /removewhitelist [discord] - Adds a user to the whitelist if it's turned on.
 ```
+

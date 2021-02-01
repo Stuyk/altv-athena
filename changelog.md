@@ -201,8 +201,6 @@ description: List of all the changes and current versions.
 + Added Lose Weapons on Respawn Config
 ```
 
----
-
 ## 1.0.5 - January 2 - 3, 2021
 
 ```diff
@@ -212,8 +210,6 @@ description: List of all the changes and current versions.
 + Fixed Linux Deployment for CopyFiles
 + Added Try/Catch to Disconnect Events
 ```
-
----
 
 ## 1.0.1-4 - Janauary 1, 2021
 
@@ -239,8 +235,6 @@ description: List of all the changes and current versions.
 + Version Comparison for Athena and Ares
 ```
 
----
-
 ## 0.0.0 - December 30, 2020
 
 ```diff
@@ -252,8 +246,6 @@ description: List of all the changes and current versions.
 - Removed Unncessary Variables on Player
 ```
 
----
-
 ## 0.0.0 - December 29, 2020
 
 ```diff
@@ -264,8 +256,6 @@ description: List of all the changes and current versions.
 + Added Input Sanitization for HTML
 + Added `player.id` to Nearby Player Names
 ```
-
----
 
 ## 0.0.0 - December 28, 2020
 
@@ -293,8 +283,6 @@ description: List of all the changes and current versions.
 + Added Nametags
 ```
 
----
-
 ## 0.0.0 - December 26, 2020
 
 ```diff
@@ -305,8 +293,6 @@ description: List of all the changes and current versions.
 + Released License Keys for Athena
 + Launched Gumroad Product
 ```
-
----
 
 ## 0.0.0 - December 24, 2020
 
@@ -319,8 +305,6 @@ description: List of all the changes and current versions.
 + Login Dependent on Ares Discord Submodule
 + Partial Changes to Character Edit Screen
 ```
-
----
 
 ## 0.0.0 - December 21, 2020
 
@@ -336,15 +320,11 @@ description: List of all the changes and current versions.
 + Updated README.md with Folder Information
 ```
 
----
-
 ## 0.0.0 - October - December, 2020
 
 ```diff
 - Realized I was burnt out.
 ```
-
----
 
 ## 0.0.0 - August - October 2020
 
@@ -359,3 +339,4 @@ description: List of all the changes and current versions.
 + Initial Vehicle System
 + Defined Interfaces for Future Usage
 ```
+

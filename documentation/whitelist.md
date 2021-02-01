@@ -2,11 +2,9 @@
 description: Whitelisting users through Discord.
 ---
 
-# Whitelist
+# Discord Whitelist
 
 **An important note before doing this...** it may take upwards of 24 hours for Discord to recognize your Presence Intent and Server Members Intent toggles. This is normal. Please be patient if your Whitelist doesn't immediately start working. This is completely out of our control.
-
----
 
 This covers the simplest way to to setup a whitelist service for your server. This is done through using the built-in Discord Bot that comes with this server framework.
 
@@ -62,7 +60,8 @@ These two settings need to be set to true:
 
 ## Add Two Options to .env
 
-```
+```text
 DISCORD_BOT=NzU5MjM4...
 WHITELIST_ROLE=80486922...
 ```
+
