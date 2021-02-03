@@ -34,6 +34,41 @@ export class BaseHUD {
         BaseHUD.view.unfocus();
     }
 
+    static enterVehicle() {
+        BaseHUD.view.emit('hud:SetVehicle', true);
+    }
+
+    static exitVehicle() {
+        BaseHUD.view.emit('hud:SetVehicle', false);
+    }
+
+    static updateSpeed(speed: string) {
+        BaseHUD.view.emit('hud:Speed', speed);
+
+        if (alt.Player.local.vehicle) {
+            BaseHUD.view.emit('hud:SetLock', alt.Player.local.vehicle.lockStatus);
+            BaseHUD.view.emit('hud:SetEngine', alt.Player.local.vehicle.engineStatus);
+        }
+    }
+
+    static populateCommands(commandList: Array<Partial<Command>>): void {
+        handleFreezePlayer(false);
+
+        alt.log(`[Athena] Registered Commands: ${commandList.length}`);
+        BaseHUD.view.emit('chat:PopulateCommands', commandList);
+        BaseHUD.view.isVisible = true;
+    }
+
+    static processMetaChange(key: string, value: any, oldValue: any) {
+        if (key === 'food') {
+            BaseHUD.view.emit('hud:SetFood', value);
+        }
+
+        if (key === 'water') {
+            BaseHUD.view.emit('hud:SetWater', value);
+        }
+    }
+
     /**
      * Sends a chat message up from the WebView to the server chat.ts file.
      * @param {string} message
@@ -50,14 +85,6 @@ export class BaseHUD {
         }
 
         alt.emitServer(View_Events_Chat.Send, message);
-    }
-
-    static populateCommands(commandList: Array<Partial<Command>>): void {
-        handleFreezePlayer(false);
-
-        alt.log(`[Athena] Registered Commands: ${commandList.length}`);
-        BaseHUD.view.emit('chat:PopulateCommands', commandList);
-        BaseHUD.view.isVisible = true;
     }
 
     private static handleFocus(shouldFocus: boolean): void {
@@ -80,5 +107,8 @@ export class BaseHUD {
     }
 }
 
+alt.on('enteredVehicle', BaseHUD.enterVehicle);
+alt.on('leftVehicle', BaseHUD.exitVehicle);
+alt.on(SYSTEM_EVENTS.META_CHANGED, BaseHUD.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, BaseHUD.createView);
 alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, BaseHUD.populateCommands);

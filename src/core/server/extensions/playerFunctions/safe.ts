@@ -30,9 +30,9 @@ function addHealth(p: alt.Player, value: number, exactValue: boolean = false) {
         return;
     }
 
-    if (p.health + value > 200) {
-        p.acHealth = 200;
-        p.health = 200;
+    if (p.health + value > 199) {
+        p.acHealth = 199;
+        p.health = 199;
         return;
     }
 

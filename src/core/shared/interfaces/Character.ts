@@ -13,6 +13,8 @@ export interface Character {
     bank: number;
     health: number;
     armour: number;
+    food: number;
+    water: number;
     isDead: boolean;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
@@ -26,5 +28,10 @@ export const CharacterDefaults: Partial<Character> = {
     cash: DEFAULT_CONFIG.PLAYER_CASH,
     bank: DEFAULT_CONFIG.PLAYER_BANK,
     appearance: {},
-    info: {}
+    info: {},
+    food: 100,
+    water: 100,
+    isDead: false,
+    health: 199,
+    armour: 0
 };

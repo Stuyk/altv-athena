@@ -131,19 +131,26 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass:
         }
     }
 
-    if (!v.athenaLockState) {
+    // Always start in locked mode
+    if (v.athenaLockState === null || v.athenaLockState === undefined) {
         v.athenaLockState = Vehicle_Lock_State.LOCKED;
+        for (let i = 0; i < 6; i++) {
+            v.setDoorOpen(player, i, false);
+        }
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
-    } else if (v.athenaLockState + 1 >= Vehicle_Lock_States.length) {
-        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
-        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
-    } else {
-        v.athenaLockState += 1;
-        v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+        return v.athenaLockState;
     }
 
+    let index = Vehicle_Lock_States.findIndex((x) => x === v.athenaLockState);
+    if (index + 1 === Vehicle_Lock_States.length) {
+        index = -1;
+    }
+
+    v.athenaLockState = Vehicle_Lock_States[index + 1];
+    v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
+
     // Automatically Close All Doors in Locked State
-    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED || v.athenaLockState === Vehicle_Lock_State.KIDNAP_MODE) {
         for (let i = 0; i < 6; i++) {
             v.setDoorOpen(player, i, false);
         }

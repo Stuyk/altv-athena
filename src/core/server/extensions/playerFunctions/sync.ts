@@ -4,6 +4,8 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
+import save from './save';
+import { DEFAULT_CONFIG } from '../../athena/main';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -81,11 +83,55 @@ function weather(p: alt.Player): void {
     alt.emitClient(p, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, p.currentWeather);
 }
 
+function food(p: alt.Player): void {
+    if (p.data.isDead && p.data.food <= 0) {
+        p.data.food = 100;
+        emit.meta(p, 'food', p.data.food);
+        return;
+    }
+
+    if (p.data.food === undefined || p.data.food === null) {
+        p.data.food = 100;
+    }
+
+    p.data.food -= DEFAULT_CONFIG.FOOD_REMOVAL_RATE;
+
+    if (p.data.food <= 0) {
+        p.data.food = 0;
+    }
+
+    emit.meta(p, 'food', p.data.food);
+    save.field(p, 'food', p.data.food);
+}
+
+function water(p: alt.Player): void {
+    if (p.data.isDead && p.data.water <= 0) {
+        p.data.water = 100;
+        emit.meta(p, 'water', p.data.water);
+        return;
+    }
+
+    if (p.data.water === undefined || p.data.water === null) {
+        p.data.water = 100;
+    }
+
+    p.data.water -= DEFAULT_CONFIG.WATER_REMOVAL_RATE;
+
+    if (p.data.water <= 0) {
+        p.data.water = 0;
+    }
+
+    emit.meta(p, 'water', p.data.water);
+    save.field(p, 'water', p.data.water);
+}
+
 export default {
     appearance,
     currencyData,
+    food,
     inventory,
     syncedMeta,
     time,
+    water,
     weather
 };

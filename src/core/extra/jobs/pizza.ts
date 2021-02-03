@@ -1,0 +1,49 @@
+import * as alt from 'alt-server';
+import ChatController from '../../server/systems/chat';
+import { Job } from '../../server/systems/job';
+import { Permissions } from '../../shared/flags/permissions';
+import JobEnums, { Objective } from '../../shared/interfaces/Job';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
+
+const objectives: Array<Objective> = [
+    {
+        criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
+        type: JobEnums.ObjectiveType.WAYPOINT,
+        pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 },
+        marker: {
+            pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 - 1 },
+            color: { r: 255, g: 255, b: 255, a: 100 }
+        },
+        range: 2
+    },
+    {
+        criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
+        type: JobEnums.ObjectiveType.WAYPOINT,
+        pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 },
+        marker: {
+            pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 - 1 },
+            color: { r: 255, g: 255, b: 255, a: 100 }
+        },
+        range: 2
+    },
+    {
+        criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
+        type: JobEnums.ObjectiveType.WAYPOINT,
+        pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 },
+        marker: {
+            pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 - 1 },
+            color: { r: 255, g: 255, b: 255, a: 100 }
+        },
+        range: 2
+    }
+];
+
+alt.on('job:Pizza', (player: alt.Player) => {
+    const jobInstance = new Job();
+    jobInstance.loadObjectives(deepCloneObject(objectives));
+    jobInstance.addPlayer(player);
+});
+
+ChatController.addCommand('pizza', '/pizza', Permissions.Admin, (player: alt.Player) => {
+    alt.emit('job:Pizza', player);
+});

@@ -7,7 +7,13 @@ description: List of all the changes and current versions.
 ## 1.6.0 - February 1, 2021
 
 ```diff
-+ To be determined...
++ Initial Job Framework
++ Food System
++ Water System
++ Vehicle Engine Status Indicator
++ Vehicle Lock Status Indidcator
++ Seatbelt Placeholder
++ Fuel Placeholder
 ```
 
 ## 1.5.0 - January 28-31, 2021

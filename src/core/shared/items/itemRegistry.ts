@@ -31,3 +31,14 @@ export const ItemRegistry: Array<Item> = [
         }
     }
 ];
+
+/**
+ * Used to add items to the server-side item registry.
+ * Has no purpose on client-side and items that are pushed late are inaccessible on client-side.
+ * If you wish to access items on client-side you will need to add them to the ItemRegistry array.
+ * @export
+ * @param {Item} item
+ */
+export function appendToItemRegistry(item: Item) {
+    ItemRegistry.push(item);
+}

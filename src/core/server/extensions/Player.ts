@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
-import { DiscordUser } from '../interface/DiscordUser';
 import { Account } from '../interface/Account';
-
+import { DiscordUser } from '../interface/DiscordUser';
 import currency from './playerFunctions/currency';
 import dataUpdater from './playerFunctions/dataUpdater';
 import emit from './playerFunctions/emit';
@@ -40,6 +39,7 @@ declare module 'alt-server' {
         nextDeathSpawn: number;
         nextPingTime: number;
         nextItemSync: number;
+        nextFoodSync: number;
 
         // Toolbar Information
         lastToolbarData: { equipped: boolean; slot: number };

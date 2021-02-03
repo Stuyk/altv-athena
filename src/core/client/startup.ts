@@ -17,6 +17,7 @@ import './streamers/blip';
 import './systems/death';
 import './systems/disable';
 import './systems/interiors';
+import './systems/job';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';

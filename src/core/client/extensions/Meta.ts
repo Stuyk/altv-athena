@@ -10,6 +10,10 @@ export interface Meta {
     bank: number;
     cash: number;
 
+    // Food & Water
+    food: number;
+    water: number;
+
     // Player Info
     appearance: Appearance;
 

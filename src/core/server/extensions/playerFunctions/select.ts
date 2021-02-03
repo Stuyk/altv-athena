@@ -49,11 +49,6 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             safe.addArmour(p, 0, true);
         }
 
-        sync.currencyData(p);
-        sync.weather(p);
-        sync.time(p);
-        sync.inventory(p);
-
         // Resets their death status and logs them in as dead.
         if (p.data.isDead) {
             p.nextDeathSpawn = Date.now() + 30000;
@@ -64,6 +59,13 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             p.data.isDead = false;
             emit.meta(p, 'isDead', false);
         }
+
+        sync.currencyData(p);
+        sync.weather(p);
+        sync.time(p);
+        sync.inventory(p);
+        sync.water(p);
+        sync.food(p);
 
         // Command Propagation
         ChatController.populateCommands(p);

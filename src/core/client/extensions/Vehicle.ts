@@ -22,6 +22,7 @@ declare module 'alt-client' {
         owner: string | number;
         engineStatus: boolean;
         lockStatus: number | Vehicle_Lock_State;
+        fuel: number;
     }
 }
 

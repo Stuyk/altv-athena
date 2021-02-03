@@ -14,10 +14,8 @@ export enum Vehicle_Lock_State {
 }
 
 export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [
-    Vehicle_Lock_State.NO_LOCK,
     Vehicle_Lock_State.UNLOCKED,
     Vehicle_Lock_State.LOCKED,
-    Vehicle_Lock_State.LOCKOUT_PLAYER,
     Vehicle_Lock_State.KIDNAP_MODE
 ];
 
@@ -54,7 +52,8 @@ export const Vehicle_State = {
     LOCK_STATE: `Door-Locks`,
     KEYS: `Vehicle-Keys`,
     OWNER: 'Vehicle-Owner',
-    ENGINE: 'Vehicle-Engine'
+    ENGINE: 'Vehicle-Engine',
+    FUEL: 'Vehicle-Fuel'
 };
 
 /**

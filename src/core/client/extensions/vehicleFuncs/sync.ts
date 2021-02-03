@@ -17,6 +17,7 @@ function update(v: alt.Vehicle): void {
     v.doorStates[4] = v.getStreamSyncedMeta(Vehicle_State.DOOR_HOOD);
     v.doorStates[5] = v.getStreamSyncedMeta(Vehicle_State.DOOR_TRUNK);
     v.lockStatus = v.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
+    v.fuel = v.getStreamSyncedMeta(Vehicle_State.FUEL);
 
     native.setVehicleEngineOn(v.scriptID, v.engineStatus, false, false);
 
