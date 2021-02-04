@@ -10,6 +10,7 @@ Commands that are built-in to the current Framework. They also have permissions 
 
 ```text
 /ac [message] - Speak to other Admins
+/acceptdeath - Respawn after death
 /addwhitelist [discord_id]
 /b [message] - Speak out of character
 /broadcast [message] - Announce server-wide
@@ -24,15 +25,11 @@ Commands that are built-in to the current Framework. They also have permissions 
 /removewhitelist [discord_id]
 /revive [player_id]* - Revive self or others
 /seatbelt - Put on a seatbelt or helmet
-/seatbelt - Put on a seatbelt or helmet
 /setarmour [0 - 100] [player_id]* - Set armour for self or others
 /setcash [amount] [id]* - Add cash
 /sethealth [99 - 200] [player_id]* - Set health for self or others
 /updateweather - Forcefully updates your weather based on region.
 /vehicle [name] - Spawn an admin vehicle
-/vehicle [name] - Spawn an admin vehicle
-/vehicle [name] - Spawn an admin vehicle
-/w [player_id] [message] - Whisper
 /w [player_id] [message] - Whisper
 /weapon [name] - Get weapon by name.
 ```

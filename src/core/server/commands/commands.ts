@@ -1,5 +1,6 @@
 import './adminChat';
 import './currency';
+import './death';
 import './getVehicle';
 import './item';
 import './noclip';

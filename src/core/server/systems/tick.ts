@@ -42,11 +42,6 @@ function handlePing(player: alt.Player): void {
         InventoryController.updateDroppedItemsAroundPlayer(player, false);
     }
 
-    // Respawns the Player
-    if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn - 1000) {
-        playerFuncs.set.respawned(player, null); // Uses null to find a hospital.
-    }
-
     // Updates Food & Water
     if (!player.nextFoodSync || Date.now() > player.nextFoodSync) {
         player.nextFoodSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_FOOD_UPDATES;

@@ -55,6 +55,6 @@ function handleDeathMovement() {
             new alt.RGBA(255, 255, 255, 255)
         );
     } else {
-        drawText2D(`Now Respawning...`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255));
+        drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255));
     }
 }
