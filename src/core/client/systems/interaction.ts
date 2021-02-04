@@ -6,6 +6,7 @@ import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { drawText2D } from '../utility/text';
 import { HelpController } from '../views/hud/controllers/helpController';
+import { BaseHUD } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
 
 const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
@@ -26,6 +27,7 @@ export class InteractionController {
     static toggleInteractionMode(): void {
         // Prevents clearing the interaction and is forced into being on all of the time.
         if (InteractionController.isAlwaysOn) {
+            BaseHUD.updateInteract(true);
             return;
         }
 
@@ -37,9 +39,11 @@ export class InteractionController {
         InteractionController.isOn = !InteractionController.isOn;
         if (!InteractionController.isOn) {
             alt.Player.local.isInteractionOn = false;
+            BaseHUD.updateInteract(false);
             return;
         }
 
+        BaseHUD.updateInteract(true);
         alt.Player.local.isInteractionOn = true;
         InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
@@ -75,10 +79,6 @@ export class InteractionController {
         if (alt.Player.local.meta.isDead) {
             InteractionController.pressedKey = false;
             return;
-        }
-
-        if (!SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
-            drawText2D('Interaction Mode is On', { x: 0.5, y: 0.95 }, 0.3, new alt.RGBA(255, 255, 255, 255));
         }
 
         // Non-Interaction Based Items

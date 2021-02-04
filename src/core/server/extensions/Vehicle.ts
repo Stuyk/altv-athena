@@ -122,6 +122,10 @@ declare module 'alt-server' {
     }
 }
 
+export default function onLoad() {
+    //
+}
+
 alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass: boolean = false): Vehicle_Lock_State {
     const v: alt.Vehicle = this as alt.Vehicle;
 

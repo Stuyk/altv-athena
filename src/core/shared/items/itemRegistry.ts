@@ -1,5 +1,6 @@
 import { ItemType } from '../enums/itemType';
 import { Item } from '../interfaces/Item';
+import { deepCloneObject } from '../utility/deepCopy';
 
 export const ItemRegistry: Array<Item> = [
     {
@@ -41,4 +42,19 @@ export const ItemRegistry: Array<Item> = [
  */
 export function appendToItemRegistry(item: Item) {
     ItemRegistry.push(item);
+}
+
+/**
+ * Returns a deep cloned item from the registry.
+ * @export
+ * @param {string} name
+ * @return {*}  {(Item | null)}
+ */
+export function getFromRegistry(name: string): Item | null {
+    const index = ItemRegistry.findIndex((itemRef) => itemRef.name.toLowerCase().includes(name));
+    if (index <= -1) {
+        return null;
+    }
+
+    return deepCloneObject<Item>(ItemRegistry[index]);
 }

@@ -11,16 +11,26 @@ const status = Vue.component('status', {
             inVehicle: false,
             seatbelt: false,
             engineState: false,
+            interact: false,
+            lights: false,
             lockState: 1,
             lockIcons: ['n/a', 'icon-unlocked', 'icon-lock', 'n/a', 'icon-blocked'],
-            lockColor: ['n/a', 'grey darken-4', 'red darken-1', 'n/a', 'orange'],
+            lockColor: ['n/a', 'grey darken-4', 'red lighten-2', 'n/a', 'orange'],
             engineColor: {
                 false: 'grey darken-4',
-                true: 'green darken-1'
+                true: 'grey'
             },
             seatbeltColor: {
                 false: 'grey darken-4',
-                true: 'green darken-1'
+                true: 'grey'
+            },
+            interactColor: {
+                false: 'grey darken-4',
+                true: 'grey'
+            },
+            lightsColor: {
+                false: 'grey darken-4',
+                true: 'grey'
             }
         };
     },
@@ -56,6 +66,12 @@ const status = Vue.component('status', {
         setSeatbelt(value) {
             this.seatbelt = value;
         },
+        setInteract(value) {
+            this.interact = value;
+        },
+        setLights(value) {
+            this.lights = value;
+        },
         getTotalHeight(name) {
             return `height: ${this[name]}% !important;`;
         }
@@ -70,6 +86,8 @@ const status = Vue.component('status', {
             alt.on('hud:SetLock', this.setLock);
             alt.on('hud:SetEngine', this.setEngine);
             alt.on('hud:Seatbelt', this.setSeatbelt);
+            alt.on('hud:SetInteract', this.setInteract);
+            alt.on('hud:SetLights', this.setLights);
         }
     },
     unmounted() {
@@ -82,17 +100,23 @@ const status = Vue.component('status', {
             alt.off('hud:SetLock', this.setLock);
             alt.off('hud:SetEngine', this.setEngine);
             alt.off('hud:Seatbelt', this.setSeatbelt);
+            alt.off('hud:SetInteract', this.setInteract);
+            alt.off('hud:SetLights', this.setLights);
         }
     },
     template: `
         <div class="statusWrapper pa-3">
+            <div class="interact rounder mb-3">
+                <v-icon small class="icon">{{ interact ? 'icon-eye' : 'icon-eye-slash' }}</v-icon>
+                <div class="status-overlay" :class="interactColor[interact]" :style="getTotalHeight('lock')"></div>
+            </div>
             <div class="water rounder mb-3">
                 <v-icon small class="icon">icon-droplet</v-icon>
-                <div class="status-overlay light-blue lighten-1" :style="getTotalHeight('water')"></div>
+                <div class="status-overlay light-blue lighten-2" :style="getTotalHeight('water')"></div>
             </div>
             <div class="food rounder" :class="inVehicle ? { 'mb-3': true } : {}">
                 <v-icon small class="icon">icon-fastfood</v-icon>
-                <div class="status-overlay orange darken-1" :style="getTotalHeight('food')"></div>
+                <div class="status-overlay orange lighten-2" :style="getTotalHeight('food')"></div>
             </div>
             <template v-if="inVehicle">
                 <div class="fuel rounder mb-3">
@@ -107,9 +131,13 @@ const status = Vue.component('status', {
                     <v-icon class="icon" small>icon-engine-fill</v-icon>
                     <div class="status-overlay" :class="engineColor[engineState]" :style="getTotalHeight('lock')"></div>
                 </div>
-                <div class="seatbelt rounder">
+                <div class="seatbelt rounder mb-3">
                     <v-icon class="icon" small>icon-seatbelt-fill</v-icon>
                     <div class="status-overlay" :class="seatbeltColor[seatbelt]" :style="getTotalHeight('lock')"></div>
+                </div>
+                <div class="headlight rounder">
+                    <v-icon class="icon" small>icon-headlight-fill</v-icon>
+                    <div class="status-overlay" :class="lightsColor[lights]" :style="getTotalHeight('lock')"></div>
                 </div>
                 <div class="speed">{{ speed }}</div>
             </template>

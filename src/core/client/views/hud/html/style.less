@@ -297,6 +297,8 @@ input {
     right: 25px;
     bottom: 100px;
     background: rgba(25, 25, 25, 0.75);
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     user-select: none;
 
@@ -324,8 +326,10 @@ input {
         font-family: 'Arial';
         font-size: 14px;
         font-weight: 600;
-        text-shadow: 1px 1px black;
+        text-shadow: -1px 0px 1px black, 1px 0px 1px black, 0px 1px 1px black, 0px -1px 1px black;
         overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
         background: rgba(25, 25, 25, 1);
 
         .icon {

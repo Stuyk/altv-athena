@@ -45,12 +45,19 @@ export class BaseHUD {
         BaseHUD.view.emit('hud:Seatbelt', value);
     }
 
+    static updateInteract(value: boolean) {
+        BaseHUD.view.emit('hud:SetInteract', value);
+    }
+
     static updateSpeed(speed: string) {
         BaseHUD.view.emit('hud:Speed', speed);
 
         if (alt.Player.local.vehicle) {
             BaseHUD.view.emit('hud:SetLock', alt.Player.local.vehicle.lockStatus);
             BaseHUD.view.emit('hud:SetEngine', alt.Player.local.vehicle.engineStatus);
+
+            const [lightsOn, highBeams] = native.getVehicleLightsState(alt.Player.local.vehicle.scriptID, false, false);
+            BaseHUD.view.emit('hud:SetLights', lightsOn);
         }
     }
 
