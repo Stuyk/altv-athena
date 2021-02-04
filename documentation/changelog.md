@@ -14,6 +14,9 @@ description: List of all the changes and current versions.
 + Vehicle Lock Status Indidcator
 + Seatbelt Placeholder
 + Fuel Placeholder
++ Cancel Vehicle Enter Controls
++ Add Additional Interaction Key Press Cancels
++ Fix Vehicle Door Synchronization
 ```
 
 ## 1.5.0 - January 28-31, 2021

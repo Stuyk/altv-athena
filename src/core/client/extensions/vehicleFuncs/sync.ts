@@ -22,10 +22,16 @@ function update(v: alt.Vehicle): void {
     native.setVehicleEngineOn(v.scriptID, v.engineStatus, false, false);
 
     Object.keys(v.doorStates).forEach((doorNumber) => {
+        const angle = native.getVehicleDoorAngleRatio(v.scriptID, parseInt(doorNumber));
+
         if (v.doorStates[doorNumber]) {
-            native.setVehicleDoorOpen(v.scriptID, parseInt(doorNumber), false, true);
+            if (angle <= 0.3) {
+                native.setVehicleDoorOpen(v.scriptID, parseInt(doorNumber), false, false);
+            }
         } else {
-            native.setVehicleDoorShut(v.scriptID, parseInt(doorNumber), true);
+            if (angle >= 0.1) {
+                native.setVehicleDoorShut(v.scriptID, parseInt(doorNumber), false);
+            }
         }
     });
 }

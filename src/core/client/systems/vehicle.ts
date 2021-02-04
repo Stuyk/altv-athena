@@ -114,6 +114,23 @@ export class VehicleController {
             return;
         }
 
+        if (native.getVehiclePedIsEntering(alt.Player.local.scriptID) !== 0) {
+            // back
+            if (native.isControlJustPressed(0, 33)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+
+            // left
+            if (native.isControlJustPressed(0, 34)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+
+            // right
+            if (native.isControlJustPressed(0, 35)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+        }
+
         VehicleController.handleOutOfVehicle();
     }
 
@@ -155,9 +172,8 @@ export class VehicleController {
             VehicleController.turnOffAllVehicleFunctions();
             VehicleController.updateNextKeyPress();
 
-            // Prevent a player from leaving the vehicle if in kidnap mode.
             const lock: Vehicle_Lock_State = alt.Player.local.vehicle.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
-            if (Vehicle_Lock_State.KIDNAP_MODE === lock) {
+            if (Vehicle_Lock_State.LOCKED === lock) {
                 return;
             }
 

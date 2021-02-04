@@ -13,11 +13,7 @@ export enum Vehicle_Lock_State {
     KIDNAP_MODE = 4
 }
 
-export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [
-    Vehicle_Lock_State.UNLOCKED,
-    Vehicle_Lock_State.LOCKED,
-    Vehicle_Lock_State.KIDNAP_MODE
-];
+export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [Vehicle_Lock_State.UNLOCKED, Vehicle_Lock_State.LOCKED];
 
 export enum Vehicle_Seat_List {
     DRIVER = -1,

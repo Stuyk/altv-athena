@@ -85,17 +85,20 @@ export class InteractionController {
         // Vehicles and such...
         if (!alt.Player.local.closestInteraction) {
             VehicleController.runVehicleControllerTick();
+            InteractionController.pressedKey = false;
             return;
         }
 
         // All Interaction Based Items
         // ATMs, Fuel Pumps, etc.
         if (InteractionController.nextKeyPress > Date.now()) {
+            InteractionController.pressedKey = false;
             return;
         }
 
         const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
         if (dist > MAX_CHECKPOINT_DRAW) {
+            InteractionController.pressedKey = false;
             return;
         }
 

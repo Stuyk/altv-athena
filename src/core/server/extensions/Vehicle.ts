@@ -131,12 +131,13 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass:
         }
     }
 
-    // Always start in locked mode
     if (v.athenaLockState === null || v.athenaLockState === undefined) {
         v.athenaLockState = Vehicle_Lock_State.LOCKED;
+
         for (let i = 0; i < 6; i++) {
             v.setDoorOpen(player, i, false);
         }
+
         v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
         return v.athenaLockState;
     }
@@ -150,7 +151,7 @@ alt.Vehicle.prototype.cycleLock = function cycleLock(player: alt.Player, bypass:
     v.setStreamSyncedMeta(Vehicle_State.LOCK_STATE, v.athenaLockState);
 
     // Automatically Close All Doors in Locked State
-    if (v.athenaLockState === Vehicle_Lock_State.LOCKED || v.athenaLockState === Vehicle_Lock_State.KIDNAP_MODE) {
+    if (v.athenaLockState === Vehicle_Lock_State.LOCKED) {
         for (let i = 0; i < 6; i++) {
             v.setDoorOpen(player, i, false);
         }

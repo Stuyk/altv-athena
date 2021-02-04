@@ -33,6 +33,7 @@ export default async function runTests() {
 
     await testEmpty();
     await testInventoryInsertion();
+    await testIfInInventory();
     await testRemoveFromInventory();
     await testAddToToolbar();
     await removeItemFromToolbar();
@@ -60,6 +61,21 @@ async function testInventoryInsertion() {
     assert(result, true, `Could not insert item into inventory.`);
     assert(player.data.inventory[0].length, 1, `One item was not inserted into inventory.`);
     assert(player.data.inventory[0][0].data.test, 'test', `Data in item was not maintained in insertion.`);
+
+    logger.passed(testName);
+}
+
+async function testIfInInventory() {
+    const testName = `Check if in inventory`;
+    let result = await executeTest<{ tab: number; index: number } | null>(
+        testName,
+        playerFuncs.inventory.isInInventory,
+        player,
+        { name: smgItem.name }
+    );
+
+    assert(result.tab, 0, `Item was not in the inventory.`);
+    assert(result.index, 0, `Item was not in the inventory.`);
 
     logger.passed(testName);
 }
