@@ -42,6 +42,10 @@ export class BaseHUD {
         BaseHUD.view.emit('hud:SetVehicle', false);
     }
 
+    static updateSeatbelt(value: boolean) {
+        BaseHUD.view.emit('hud:Seatbelt', value);
+    }
+
     static updateSpeed(speed: string) {
         BaseHUD.view.emit('hud:Speed', speed);
 

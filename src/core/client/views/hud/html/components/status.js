@@ -42,12 +42,19 @@ const status = Vue.component('status', {
         },
         setVehicle(value) {
             this.inVehicle = value;
+
+            if (!value) {
+                this.seatbelt = false;
+            }
         },
         setLock(value) {
             this.lockState = value;
         },
         setEngine(value) {
             this.engineState = value;
+        },
+        setSeatbelt(value) {
+            this.seatbelt = value;
         },
         getTotalHeight(name) {
             return `height: ${this[name]}% !important;`;
@@ -62,6 +69,7 @@ const status = Vue.component('status', {
             alt.on('hud:Speed', this.setSpeed);
             alt.on('hud:SetLock', this.setLock);
             alt.on('hud:SetEngine', this.setEngine);
+            alt.on('hud:Seatbelt', this.setSeatbelt);
         }
     },
     unmounted() {
@@ -71,6 +79,9 @@ const status = Vue.component('status', {
             alt.off('hud:SetFuel', this.setFuel);
             alt.off('hud:SetVehicle', this.setVehicle);
             alt.off('hud:Speed', this.setSpeed);
+            alt.off('hud:SetLock', this.setLock);
+            alt.off('hud:SetEngine', this.setEngine);
+            alt.off('hud:Seatbelt', this.setSeatbelt);
         }
     },
     template: `

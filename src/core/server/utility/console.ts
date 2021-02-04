@@ -22,7 +22,8 @@ const command = {
     '/unban': handleUnban,
     '/dox': handleDox,
     '/addwhitelist': handleAddWhitelist,
-    '/removewhitelist': handleRemoveWhitelist
+    '/removewhitelist': handleRemoveWhitelist,
+    '/commands': ChatController.printAllCommands
 };
 
 /**

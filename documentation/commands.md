@@ -6,36 +6,33 @@ description: Built-in commands for general usage.
 
 ## Commands
 
-Commands that are built-in to the current Framework.
-
-## Core
+Commands that are built-in to the current Framework. They also have permissions and are restricted to certain users.
 
 ```text
-/timestamp - Will toggle chat timestamps on and off.
-/help - List commands available to your permission level.
-/b [message] - Speak out of character.
-/me [message] - Describe an action you are performing.
-/do [message] - Describe an object or item around you.
-/low [message] - Say something in a low voice.
-/w [player_id] [message] - Whisper something to a player near you.
-```
-
-## Administrative
-
-```text
-/addcash [amount] [id]* - Add cash to self or another player.
-/ac [message] - Speak to other admins.
-/mc [message] - Speak to moderators and admins.
-/broadcast [message] - Say something server-wide. No distance restriction.
-
-/noclip - Sets self in no collision mode.
-
-/revive [id]* - Revive another player or self.
-/sethealth [amount] [id]* - Set health for another player or self.
-/setarmour [amount] [id]* - Set armour for another player or self.
-
-/updateweather - Updates your weather sync in the region immediately.
-
-/addwhitelist [discord] - Adds a user to the whitelist if it's turned on.
-/removewhitelist [discord] - Adds a user to the whitelist if it's turned on.
+/ac [message] - Speak to other Admins
+/addwhitelist [discord_id]
+/b [message] - Speak out of character
+/broadcast [message] - Announce server-wide
+/do [describe an object] - Describe something
+/dummyitem - Get some dummy debug items
+/getitem [item_name] - Get item by name
+/getteleporter - Adds item for current position.
+/low [quietly speak something]
+/mc [message] - Speak to other Admins and Moderators
+/me [describe what you are doing] - Roleplay an action
+/noclip -  Toggles noclip mode.
+/removewhitelist [discord_id]
+/revive [player_id]* - Revive self or others
+/seatbelt - Put on a seatbelt or helmet
+/seatbelt - Put on a seatbelt or helmet
+/setarmour [0 - 100] [player_id]* - Set armour for self or others
+/setcash [amount] [id]* - Add cash
+/sethealth [99 - 200] [player_id]* - Set health for self or others
+/updateweather - Forcefully updates your weather based on region.
+/vehicle [name] - Spawn an admin vehicle
+/vehicle [name] - Spawn an admin vehicle
+/vehicle [name] - Spawn an admin vehicle
+/w [player_id] [message] - Whisper
+/w [player_id] [message] - Whisper
+/weapon [name] - Get weapon by name.
 ```

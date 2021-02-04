@@ -35,7 +35,8 @@ export const Vehicle_Events = {
     SET_INTO: 'Vehicle-Set-Into',
     SET_LOCK: 'Vehicle-Set-Lock',
     SET_DOOR: 'Vehicle-Set-Door',
-    SET_ENGINE: 'Vehicle-Set-Engine'
+    SET_ENGINE: 'Vehicle-Set-Engine',
+    SET_SEATBELT: 'Vehicle-Seatbelt'
 };
 
 export const Vehicle_State = {

@@ -5,6 +5,7 @@ import './item';
 import './noclip';
 import './revive';
 import './roleplay';
+import './seatbelt';
 import './setArmour';
 import './setHealth';
 import './updateweather';
