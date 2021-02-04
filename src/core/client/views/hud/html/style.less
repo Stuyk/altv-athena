@@ -35,6 +35,7 @@ body {
     overflow: hidden;
     margin-left: 12px;
     margin-top: 12px;
+    position: relative;
 
     .chatInput-hidden {
         opacity: 0;
@@ -49,57 +50,20 @@ body {
         border-radius: 3px;
     }
 
-    .help-fill {
-        position: absolute;
-        min-height: 58px;
-        min-width: 400px;
-        max-height: 58px;
-        animation: fadebgin 0.8s ease-out !important;
-        box-shadow: inset 0px 0px 400px 0.01px rgba(255, 255, 255, 0.5);
-        z-index: 3;
-        border-radius: 5px;
-    }
-
-    .help-fill-bye {
-        position: absolute;
-        min-height: 58px;
-        min-width: 400px;
-        max-height: 58px;
-        box-shadow: inset 0px 0px 0 0.01px rgba(255, 255, 255, 0.5);
-        animation: fadebgout 0.2s ease-out !important;
-        z-index: 3;
-        border-radius: 5px;
-    }
-
     .help-row-wrapper-null {
-        min-height: 58px;
-        min-width: 200px;
-        max-height: 58px;
-        display: flex;
-        flex-direction: row;
-        box-sizing: border-box;
-        background: rgba(0, 0, 0, 0.75);
-        margin-bottom: 1.5vh;
-        padding: 5px;
-        justify-content: left;
-        align-content: center;
-        opacity: 0;
-        align-items: center;
-        animation: fadeout 0.5s;
-        z-index: 2;
-        border-radius: 5px;
+        animation: fadeout 0.5s !important;
     }
 
     .help-row-wrapper {
+        position: relative;
         min-height: 58px;
-        min-width: 200px;
+        min-width: 400px;
+        max-width: 400px;
         max-height: 58px;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-        background: rgba(0, 0, 0, 0.75);
         margin-bottom: 1.5vh;
-        padding: 5px;
         justify-content: left;
         align-content: center;
         align-items: center;
@@ -108,6 +72,7 @@ body {
         border-radius: 5px;
 
         .help-row {
+            position: relative;
             display: flex;
             flex-direction: row;
             align-content: center;
@@ -118,43 +83,66 @@ body {
             user-select: none;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
             height: 58px;
 
             .descriptors {
+                position: relative;
                 display: flex;
                 flex-direction: column;
+                background: rgba(0, 0, 0, 0.75);
+                width: 100%;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
 
                 .message {
                     font-size: 13px;
-                    margin-left: 12px;
+                    margin-left: 6px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     font-family: 'Arial';
                     font-size: 12px;
                     font-weight: 600;
+                    padding: 1px;
                 }
             }
 
             .keypress {
+                position: relative;
                 display: flex;
-                height: 35px;
-                width: 35px;
-                margin-left: 6px;
+                min-height: 50px;
+                min-width: 50px;
                 justify-items: center;
                 justify-content: center;
                 align-content: center;
                 align-items: center;
-                background: rgba(255, 255, 255, 0.8);
+                background: rgba(220, 220, 220, 1);
                 box-sizing: border-box;
                 border-radius: 5px;
                 color: rgba(0, 0, 0, 0.65);
                 font-size: 24px;
                 border: 2px solid rgba(0, 0, 0, 0.45);
                 box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
-                font-family: 'Arial';
-                font-size: 18px;
-                font-weight: 600;
+                overflow: hidden;
+
+                .key {
+                    position: absolute;
+                    z-index: 99;
+                    font-family: 'Arial';
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: rgba(0, 0, 0, 0.65);
+                }
+
+                .keypress-fill-in {
+                    display: block;
+                    position: absolute;
+                    border-radius: 2px;
+                    width: 50px;
+                    height: 50px;
+                    animation: fillup 1s;
+                }
             }
         }
     }
@@ -177,6 +165,39 @@ body {
             font-size: 14px;
             font-weight: 600;
         }
+    }
+}
+
+@keyframes fillup {
+    0% {
+        bottom: 0px;
+        height: 0px;
+        width: 50px;
+        background: rgba(176, 233, 255, 0);
+    }
+    80% {
+        bottom: 0px;
+        height: 50px;
+        width: 50px;
+        background: rgb(255, 165, 47);
+    }
+    100% {
+        bottom: 0px;
+        width: 0px;
+        background: rgba(176, 233, 255, 0);
+    }
+}
+
+@keyframes fillout {
+    100% {
+        bottom: 0px;
+        height: 50px;
+        background: rgba(176, 233, 255, 1);
+    }
+    0% {
+        bottom: 0px;
+        height: 0px;
+        background: rgba(176, 233, 255, 0);
     }
 }
 

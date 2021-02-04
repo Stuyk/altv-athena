@@ -36,7 +36,7 @@ const help = Vue.component('help', {
             const data = {};
 
             if (this.helpText === null) {
-                data['help-row-wrapper-null'] = true;
+                data['help-row-wrapper'] = true;
             } else {
                 data['help-row-wrapper'] = true;
             }
@@ -60,10 +60,14 @@ const help = Vue.component('help', {
             setInterval(async () => {
                 this.setHelpText(69, 'Short press description go brrr', 'Long press description go brrr');
                 await sleep(250);
+                this.setHelpText(69, 'Short press description go brrr', 'Long press description go brrr');
+                await sleep(250);
                 this.setHelpState(true);
+                await sleep(500);
+                this.setHelpText(69, 'Short press description go brrr', 'Long press description go brrr');
                 await sleep(1000);
                 this.setHelpState(false);
-            }, 5000);
+            }, 3000);
         }
     },
     unmounted() {
@@ -74,12 +78,14 @@ const help = Vue.component('help', {
     },
     template: `
         <div class="helpWrapper">
-            <template v-if="helpText && helpText.longPress && helpText.longPress !== '' && helpText.longPress !== null">
-                <div :class="!helpState ? {'help-fill-bye': true } : { 'help-fill': true }"></div>
-            </template>
             <div :class="getHelpTextClasses">
                 <div class="help-row" v-if="helpText && helpText.key">
-                    <div class="keypress">{{ String.fromCharCode(helpText.key) }}</div>
+                    <div class="keypress">
+                        <div class="key">{{ String.fromCharCode(helpText.key) }}</div>
+                        <template v-if="helpState && helpText && helpText.longPress && helpText.longPress !== '' && helpText.longPress !== null">
+                            <div v-if="helpState" class="keypress-fill-in"></div>
+                        </template>
+                    </div>
                     <div class="descriptors">
                         <div class="message" v-if="helpText.shortPress">Press - {{ helpText.shortPress }}</div>
                         <div class="message" v-if="helpText.longPress">Hold - {{ helpText.longPress }}</div>

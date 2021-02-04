@@ -20,6 +20,7 @@ description: List of all the changes and current versions.
 + Added /seatbelt, /sb
 + Removed Automatic Respawn
 + Added /acceptdeath
++ Improve Key Press Animation
 ```
 
 ## 1.5.0 - January 28-31, 2021

@@ -5,7 +5,6 @@ import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
 import { disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
-import { sleep } from '../../utility/sleep';
 import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/helpController';
