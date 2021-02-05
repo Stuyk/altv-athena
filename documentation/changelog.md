@@ -26,6 +26,7 @@ description: List of all the changes and current versions.
 + Added Description to Job Framework
 + Added Objective Text to HUD
 + VehicleFuncs now available on server-side
++ Renamed 'extras' to 'plugins'
 ```
 
 ## 1.5.0 - January 28-31, 2021

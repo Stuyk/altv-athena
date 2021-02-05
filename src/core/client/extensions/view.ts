@@ -3,6 +3,10 @@ import * as native from 'natives';
 
 // Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
+let _currentEvents: { eventName: string; callback: any }[] = [];
+let _cursorCount: number = 0;
+let _isClosing: boolean = false;
+let _instance: View;
 
 alt.on('disconnect', async () => {
     (await View.getInstance('', false)).destroy();
@@ -13,11 +17,6 @@ alt.on('connectionComplete', async () => {
 });
 
 export class View extends alt.WebView {
-    private static _instance: View;
-    private currentEvents: { eventName: string; callback: any }[] = [];
-    private cursorCount: number = 0;
-    private isClosing: boolean = false;
-
     private constructor(url: string, isOverlay: boolean = false) {
         super(url, isOverlay);
         this.isVisible = false;
@@ -34,21 +33,21 @@ export class View extends alt.WebView {
         isInit: boolean = false,
         blurBackground: boolean = false
     ): Promise<View> {
-        if (!View._instance) {
-            View._instance = new View(url);
+        if (!_instance) {
+            _instance = new View(url);
 
             if (isInit) {
-                return View._instance;
+                return _instance;
             }
         }
 
-        View._instance.isVisible = false;
+        _instance.isVisible = false;
 
         // Wait for View to close.
-        if (View._instance.isClosing) {
+        if (_isClosing) {
             await new Promise((resolve: Function) => {
                 const tmpInterval = alt.setInterval(() => {
-                    if (View._instance.isClosing) {
+                    if (_isClosing) {
                         return;
                     }
 
@@ -64,16 +63,16 @@ export class View extends alt.WebView {
         }
 
         alt.Player.local.isMenuOpen = true;
-        View._instance.url = url;
-        View._instance.showCursor(addCursor);
-        View._instance.focus();
+        _instance.url = url;
+        _instance.showCursor(addCursor);
+        _instance.focus();
 
         // Used to hide the view until it's ready.
-        View._instance.on('ready', () => {
-            View._instance.isVisible = true;
+        _instance.on('ready', () => {
+            _instance.isVisible = true;
         });
 
-        return View._instance;
+        return _instance;
     }
 
     /**
@@ -84,12 +83,12 @@ export class View extends alt.WebView {
     public on(eventName: string, listener: (...args: any[]) => void) {
         super.on(eventName, listener);
 
-        const index: number = this.currentEvents.findIndex((e) => e.eventName === eventName);
+        const index: number = _currentEvents.findIndex((e) => e.eventName === eventName);
         if (index >= 0) {
             return;
         }
 
-        this.currentEvents.push({ eventName, callback: listener });
+        _currentEvents.push({ eventName, callback: listener });
     }
 
     /**
@@ -107,18 +106,18 @@ export class View extends alt.WebView {
      */
     public showCursor(state: boolean) {
         if (state) {
-            this.cursorCount += 1;
+            _cursorCount += 1;
             try {
                 alt.showCursor(true);
             } catch (err) {}
         } else {
-            for (let i = 0; i < this.cursorCount; i++) {
+            for (let i = 0; i < _cursorCount; i++) {
                 try {
                     alt.showCursor(false);
                 } catch (err) {}
             }
 
-            this.cursorCount = 0;
+            _cursorCount = 0;
         }
     }
 
@@ -126,7 +125,7 @@ export class View extends alt.WebView {
      * Closes the WebView and turns off all events.
      */
     public close(delay: number = 0) {
-        this.isClosing = true;
+        _isClosing = true;
         this.url = blankURL;
         this.showCursor(false);
         this.unfocus();
@@ -137,8 +136,8 @@ export class View extends alt.WebView {
         native.displayRadar(true);
 
         // Turn off currently existing events.
-        for (let i = 0; i < this.currentEvents.length; i++) {
-            const eventData = this.currentEvents[i];
+        for (let i = 0; i < _currentEvents.length; i++) {
+            const eventData = _currentEvents[i];
             if (eventData.eventName === 'ready') {
                 continue;
             }
@@ -146,9 +145,9 @@ export class View extends alt.WebView {
             super.off(eventData.eventName, eventData.callback);
         }
 
-        this.currentEvents = [];
+        _currentEvents = [];
         alt.setTimeout(() => {
-            this.isClosing = false;
+            _isClosing = false;
         }, delay);
     }
 }

@@ -7,7 +7,7 @@ description: >-
 
 ## Summary
 
-This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. This features type safety through TypeScript and a solid foundation for what I consider the core of roleplay.
+This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
 
 Configuration files may be purchased from [Gumroad](https://gumroad.com/products/SKpPN).
 

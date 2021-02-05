@@ -88,7 +88,7 @@ async function handleFiles() {
         res.default();
     });
 
-    import('../extra/imports').then((res) => {
+    import('../plugins/imports').then((res) => {
         res.default();
     });
 }

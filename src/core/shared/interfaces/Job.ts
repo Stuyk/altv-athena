@@ -1,4 +1,5 @@
 import { Blip } from './Blip';
+import { EventCall } from './EventCall';
 import { Marker } from './Marker';
 import { TextLabel } from './TextLabel';
 import { Vector3 } from './Vector';
@@ -31,6 +32,8 @@ export interface Objective {
     marker?: Marker;
     textLabel?: TextLabel;
     blip?: Blip;
+    animation?: Animation;
+    eventCall?: EventCall;
 }
 
 export default {

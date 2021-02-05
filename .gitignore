@@ -16,3 +16,4 @@ configMongoDB
 .env
 crashdumps
 ./screenshots/*
+cdn_upload

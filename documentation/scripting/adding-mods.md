@@ -3,6 +3,16 @@ description: >-
     Learn where to place mods for your server.
 ---
 
+# Load Order
+
+**This is very, very, very, very, very important.** You absolutely must put altv-ares and altv-athena last in your `server.cfg`.
+
+Example:
+
+```
+resources: ["my-building-mod", "altv-ares","core"],
+```
+
 # Where to Place Mods
 
 Mods are a bit tricky with alt:V but the alt:V Discord should always be your #1 place to ask for modding support and ask general questions. In those regards Athena copies all files from the `./src` directory into the `./resources` directory.
