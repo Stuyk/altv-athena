@@ -25,7 +25,12 @@ export class DiscordController {
             return;
         }
 
-        DiscordController.guild = DiscordController.client.guilds.cache.get('790039623648542760');
+        if (!process.env.DISCORD_CHANNEL_ID) {
+            Logger.warning(`DISCORD_CHANNEL_ID is not defined. You will not be able to use messaging services.`);
+            return;
+        }
+
+        DiscordController.guild = DiscordController.client.guilds.cache.get(process.env.DISCORD_CHANNEL_ID);
     }
 
     static userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
