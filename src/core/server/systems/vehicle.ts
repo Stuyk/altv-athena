@@ -3,6 +3,7 @@ import { AnimationFlags } from '../../shared/flags/animation';
 import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
 import { playerFuncs } from '../extensions/Player';
+import { vehicleFuncs } from '../extensions/Vehicle';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
@@ -11,7 +12,7 @@ alt.onClient(Vehicle_Events.SET_ENGINE, handleSetEngine);
 
 function handleEnterVehicle(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
     const actualSeat = seat - 1;
-    vehicle.setDoorOpen(player, actualSeat, false);
+    vehicleFuncs.setter.doorOpen(vehicle, player, actualSeat, false);
 }
 
 function handleSetEngine(player: alt.Player): void {
@@ -20,7 +21,7 @@ function handleSetEngine(player: alt.Player): void {
     }
 
     const vehicle: alt.Vehicle = player.vehicle;
-    vehicle.setEngine(player);
+    vehicleFuncs.toggle.engine(vehicle, player);
 }
 
 function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
@@ -32,7 +33,7 @@ function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
         return;
     }
 
-    const lockState = vehicle.cycleLock(player, false);
+    const lockState = vehicleFuncs.toggle.lock(vehicle, player, false);
 
     playerFuncs.emit.notification(player, `Vehicle Lock Set to ~y~${Vehicle_Lock_State[lockState].replace('_', ' ')}`);
 
@@ -68,5 +69,5 @@ function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorIndex: Vehi
 
     const doorName = `DOOR_${Vehicle_Door_List[doorIndex]}`;
     const oppositeValue = !vehicle.getStreamSyncedMeta(Vehicle_State[doorName]) ? true : false;
-    vehicle.setDoorOpen(player, doorIndex, oppositeValue);
+    vehicleFuncs.setter.doorOpen(vehicle, player, doorIndex, oppositeValue);
 }

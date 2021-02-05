@@ -10,16 +10,32 @@ class ObjectiveController {
     static objective: Objective | null;
     static interval: number;
     static cooldown: number;
+    static blip: alt.Blip;
 
     static handleSync(data: Objective | null) {
         if (ObjectiveController.interval) {
             alt.clearInterval(ObjectiveController.interval);
         }
 
+        if (ObjectiveController.blip && ObjectiveController.blip.destroy) {
+            try {
+                ObjectiveController.blip.destroy();
+            } catch (err) {}
+        }
+
         if (!data) {
             ObjectiveController.objective = null;
             BaseHUD.updateObjective(null);
             return;
+        }
+
+        if (data.blip) {
+            ObjectiveController.blip = new alt.PointBlip(data.blip.pos.x, data.blip.pos.y, data.blip.pos.z);
+            ObjectiveController.blip.sprite = data.blip.sprite;
+            ObjectiveController.blip.color = data.blip.color;
+            ObjectiveController.blip.shortRange = data.blip.shortRange;
+            ObjectiveController.blip.name = data.blip.text;
+            ObjectiveController.blip.size = data.blip.scale;
         }
 
         BaseHUD.updateObjective(data.description);

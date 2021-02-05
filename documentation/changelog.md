@@ -18,9 +18,13 @@ description: List of all the changes and current versions.
 + Add Additional Interaction Key Press Cancels
 + Fix Vehicle Door Synchronization
 + Added /seatbelt, /sb
++ Added Seatbelt Functionality
 + Removed Automatic Respawn
 + Added /acceptdeath
 + Improve Key Press Animation
++ Added Textlabel to Job Framework
++ Added Description to Job Framework
++ Added Objective Text to HUD
 ```
 
 ## 1.5.0 - January 28-31, 2021
