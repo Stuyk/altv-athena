@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.6.0 - February 1, 2021
+## 1.6.0 - February 1-x, 2021
 
 ```diff
 + Initial Job Framework
@@ -25,6 +25,7 @@ description: List of all the changes and current versions.
 + Added Textlabel to Job Framework
 + Added Description to Job Framework
 + Added Objective Text to HUD
++ VehicleFuncs now available on server-side
 ```
 
 ## 1.5.0 - January 28-31, 2021

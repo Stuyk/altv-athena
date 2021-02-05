@@ -52,6 +52,29 @@ export class DiscordController {
             Logger.warning(`Could not whitelist a Discord User. Turn on integrations and wait a few hours.`);
         }
     }
+
+    /**
+     * Send a message to a Discord Channel.
+     * @static
+     * @param {string} channel_id
+     * @param {string} message
+     * @return {*}
+     * @memberof DiscordController
+     */
+    static sendToChannel(channel_id: string, message: string) {
+        if (!DiscordController.guild) {
+            Logger.error(`You do not currently have a Discord Bot Setup for sending messages.`);
+            return;
+        }
+
+        const channel = DiscordController.guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
+        if (!channel) {
+            Logger.error(`Channel does not exist.`);
+            return;
+        }
+
+        channel.send(message);
+    }
 }
 
 export default function loader() {
