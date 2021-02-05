@@ -35,6 +35,7 @@ export interface Objective {
     type: ObjectiveType;
     pos: Vector3;
     range: number;
+    description: string;
     // Optional Parameters
     captureProgress?: number;
     captureMaximum?: number;

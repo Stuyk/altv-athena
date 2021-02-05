@@ -6,7 +6,7 @@ import { ItemType } from '../../shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
 import { EquipmentType } from '../../shared/enums/equipment';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { ItemRegistry } from '../../shared/items/itemRegistry';
+import { getFromRegistry, ItemRegistry } from '../../shared/items/itemRegistry';
 
 const pistolItem: Item = {
     name: `Pistol`,
@@ -142,7 +142,7 @@ function handleTeleporter(player: alt.Player) {
 }
 
 function handleGetItem(player: alt.Player, name: string) {
-    const item = ItemRegistry.find((item) => item.name.toLowerCase().includes(name.toLowerCase()));
+    const item = getFromRegistry(name);
 
     if (!item) {
         playerFuncs.emit.message(player, `That item does not exist.`);

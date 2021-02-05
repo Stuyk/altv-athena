@@ -57,8 +57,12 @@ export class BaseHUD {
             BaseHUD.view.emit('hud:SetEngine', alt.Player.local.vehicle.engineStatus);
 
             const [lightsOn, highBeams] = native.getVehicleLightsState(alt.Player.local.vehicle.scriptID, false, false);
-            BaseHUD.view.emit('hud:SetLights', lightsOn);
+            BaseHUD.view.emit('hud:SetLights', highBeams);
         }
+    }
+
+    static updateObjective(value: string | null) {
+        BaseHUD.view.emit('hud:SetObjective', value);
     }
 
     static populateCommands(commandList: Array<Partial<Command>>): void {

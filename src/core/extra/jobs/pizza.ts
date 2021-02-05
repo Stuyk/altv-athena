@@ -9,6 +9,7 @@ const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
         type: JobEnums.ObjectiveType.WAYPOINT,
+        description: 'Walk to the marker',
         pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 },
         marker: {
             pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 - 1 },
@@ -19,6 +20,7 @@ const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
         type: JobEnums.ObjectiveType.WAYPOINT,
+        description: 'Walk to the next marker',
         pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 },
         marker: {
             pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 - 1 },
@@ -29,10 +31,15 @@ const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
         type: JobEnums.ObjectiveType.WAYPOINT,
+        description: 'Walk to the last marker',
         pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 },
         marker: {
             pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 - 1 },
             color: { r: 255, g: 255, b: 255, a: 100 }
+        },
+        textLabel: {
+            pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 + 1 },
+            data: `The last object!~n~~r~NICE!`
         },
         range: 2
     }

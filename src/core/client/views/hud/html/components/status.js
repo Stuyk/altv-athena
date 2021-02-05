@@ -31,7 +31,8 @@ const status = Vue.component('status', {
             lightsColor: {
                 false: 'grey darken-4',
                 true: 'grey'
-            }
+            },
+            objective: null
         };
     },
     methods: {
@@ -72,6 +73,9 @@ const status = Vue.component('status', {
         setLights(value) {
             this.lights = value;
         },
+        setObjective(value) {
+            this.objective = value;
+        },
         getTotalHeight(name) {
             return `height: ${this[name]}% !important;`;
         }
@@ -88,6 +92,9 @@ const status = Vue.component('status', {
             alt.on('hud:Seatbelt', this.setSeatbelt);
             alt.on('hud:SetInteract', this.setInteract);
             alt.on('hud:SetLights', this.setLights);
+            alt.on('hud:SetObjective', this.setObjective);
+        } else {
+            this.objective = 'hello this is an objective text';
         }
     },
     unmounted() {
@@ -102,10 +109,14 @@ const status = Vue.component('status', {
             alt.off('hud:Seatbelt', this.setSeatbelt);
             alt.off('hud:SetInteract', this.setInteract);
             alt.off('hud:SetLights', this.setLights);
+            alt.off('hud:SetObjective', this.setObjective);
         }
     },
     template: `
         <div class="statusWrapper pa-3">
+            <div class="objective" v-if="objective">
+                {{ objective }}
+            </div>
             <div class="interact rounder mb-3">
                 <v-icon small class="icon">{{ interact ? 'icon-eye' : 'icon-eye-slash' }}</v-icon>
                 <div class="status-overlay" :class="interactColor[interact]" :style="getTotalHeight('lock')"></div>

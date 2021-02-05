@@ -142,8 +142,9 @@ export class Job {
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_WEAPON)) {
-            // Sweep the player's entire inventory to check for a weapon.
-            // What a pain. I'll do it later.
+            if (playerFuncs.inventory.hasWeapon(this.player)) {
+                return false;
+            }
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_DYING)) {
