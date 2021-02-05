@@ -5,7 +5,7 @@ description: >-
 
 # Load Order
 
-**This is very, very, very, very, very important.** You absolutely must put altv-ares and altv-athena last in your `server.cfg`.
+**This is very, very, very, very, very important.** You absolutely must put altv-ares and core last in your `server.cfg`.
 
 Example:
 
