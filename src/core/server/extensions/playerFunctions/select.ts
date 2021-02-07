@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
-import { Character } from '../../../shared/interfaces/Character';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import ChatController from '../../systems/chat';
-import sync from './sync';
-import setter from './setter';
-import safe from './safe';
+import { InteractionController } from '../../systems/interaction';
 import emit from './emit';
+import safe from './safe';
+import setter from './setter';
+import sync from './sync';
 
 /**
  * Select a character based on the character data provided.
@@ -67,8 +68,9 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
         sync.water(p);
         sync.food(p);
 
-        // Command Propagation
+        // Propagation
         ChatController.populateCommands(p);
+        InteractionController.populateCustomInteractions(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 

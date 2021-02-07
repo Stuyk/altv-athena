@@ -6,4 +6,5 @@ export interface Particle {
     name: string;
     duration: number;
     scale: number;
+    delay?: number;
 }

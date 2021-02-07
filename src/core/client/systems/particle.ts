@@ -2,6 +2,7 @@ import alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Particle } from '../../shared/interfaces/Particle';
+import { sleep } from '../utility/sleep';
 
 alt.onServer(SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, handlePlayParticle);
 
@@ -40,6 +41,10 @@ export async function handlePlayParticle(data: Particle): Promise<void> {
 
     if (!isReady) {
         return;
+    }
+
+    if (data.delay && data.delay >= 1) {
+        await sleep(data.delay);
     }
 
     const endTime = Date.now() + data.duration;

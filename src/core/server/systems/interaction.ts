@@ -1,16 +1,20 @@
 import * as alt from 'alt-server';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { View_Events_Clothing } from '../../shared/enums/views';
 import gridData from '../../shared/information/gridData';
+import { Blip } from '../../shared/interfaces/Blip';
+import { Interaction } from '../../shared/interfaces/Interaction';
+import { InteractionLocale } from '../../shared/locale/interaction';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { InteractionLocale } from '../../shared/locale/interaction';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 import '../views/atm';
-import { View_Events_Clothing } from '../../shared/enums/views';
 
 interface InteractionHelper {
     [key: string]: Array<alt.Colshape>;
 }
+
+let customInteractions: Array<Interaction> = [];
 
 export class InteractionController {
     static Interactions: InteractionHelper = {};
@@ -49,6 +53,37 @@ export class InteractionController {
         });
 
         alt.log(`[Athena] Generated ${count} Interaction Points`);
+    }
+
+    /**
+     * Used to add an interaction
+     * @static
+     * @param {string} identifier MUST BE UNIQUE
+     * @param {alt.Vector3} position
+     * @param {number} range
+     * @param {string} activationText What this interaction tells you it will do
+     * @param {Blip} blip The blip that goes along with this interaction
+     * @memberof InteractionController
+     */
+    static addInteraction(
+        identifier: string,
+        position: alt.Vector3,
+        range: number,
+        activationText: string,
+        blip: Blip
+    ) {
+        const newPos = new alt.Vector3(position.x, position.y, position.z - 1);
+        const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, range, 2.5);
+        shape.playersOnly = true;
+        shape['isInteraction'] = true;
+        shape['interactionType'] = identifier;
+
+        if (!InteractionController.Interactions[identifier]) {
+            InteractionController.Interactions[identifier] = [];
+        }
+
+        customInteractions.push({ identifier, blip, text: activationText });
+        InteractionController.Interactions[identifier].push(shape);
     }
 
     /**
@@ -137,6 +172,16 @@ export class InteractionController {
 
         // Goes Client Side
         alt.emitClient(player, interaction.eventName, closestInteraction.pos);
+    }
+
+    /**
+     * Sends custom interactions to client after connecting.
+     * @static
+     * @param {alt.Player} player
+     * @memberof InteractionController
+     */
+    static populateCustomInteractions(player: alt.Player) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_INTERACTIONS, customInteractions);
     }
 }
 

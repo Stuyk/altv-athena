@@ -30,6 +30,7 @@ export enum SYSTEM_EVENTS {
     //
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',
+    POPULATE_INTERACTIONS = 'interactions:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',

@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
-import { drawText2D } from '../utility/text';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { BaseHUD } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
@@ -14,6 +14,7 @@ const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 1000;
 
 export class InteractionController {
+    static customInteractions: Array<Interaction> = [];
     static tick: number;
     static isOn: boolean = false;
     static pressedKey: boolean = false;
@@ -110,7 +111,12 @@ export class InteractionController {
         );
 
         if (dist < MAX_INTERACTION_DRAW) {
-            HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+            const interaction = InteractionController.getCustomInteraction(alt.Player.local.closestInteraction.type);
+            if (!interaction) {
+                HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+            } else {
+                HelpController.updateHelpText(KEY_BINDS.INTERACT, interaction.text, null);
+            }
 
             if (InteractionController.pressedKey) {
                 InteractionController.pressedKey = false;
@@ -119,8 +125,30 @@ export class InteractionController {
             }
         }
     }
+
+    static getCustomInteraction(type: string): Interaction | null {
+        const index = InteractionController.customInteractions.findIndex((interaction) => interaction.text === type);
+        return InteractionController.customInteractions[index];
+    }
+
+    static addInteractions(customInteractions: Array<Interaction>): void {
+        InteractionController.customInteractions = customInteractions;
+
+        for (let i = 0; i < customInteractions.length; i++) {
+            const interaction = customInteractions[i];
+            if (interaction.blip) {
+                let blip = new alt.PointBlip(interaction.blip.pos.x, interaction.blip.pos.y, interaction.blip.pos.z);
+                blip.sprite = interaction.blip.sprite;
+                blip.color = interaction.blip.color;
+                blip.shortRange = interaction.blip.shortRange;
+                blip.name = interaction.blip.text;
+                blip.size = interaction.blip.scale;
+            }
+        }
+    }
 }
 
+alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
     if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
