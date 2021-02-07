@@ -3,6 +3,7 @@ import { EventCall } from './EventCall';
 import { Marker } from './Marker';
 import { TextLabel } from './TextLabel';
 import { Vector3 } from './Vector';
+import { Animation } from './Animation';
 
 enum ObjectiveCriteria {
     NO_VEHICLE = 1,
@@ -17,7 +18,8 @@ enum ObjectiveType {
 
 enum ObjectiveEvents {
     JOB_SYNC = 'job:Sync',
-    JOB_VERIFY = 'job:Verify'
+    JOB_VERIFY = 'job:Verify',
+    JOB_UPDATE = 'job:Update'
 }
 
 export interface Objective {
@@ -29,6 +31,7 @@ export interface Objective {
     // Optional Parameters
     captureProgress?: number;
     captureMaximum?: number;
+    nextCaptureTime?: number;
     marker?: Marker;
     textLabel?: TextLabel;
     blip?: Blip;

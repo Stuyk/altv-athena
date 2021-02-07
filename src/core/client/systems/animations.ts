@@ -29,6 +29,7 @@ async function loadAnimation(dict: string, count: number = 0): Promise<boolean> 
         return await loadAnimation(dict, count);
     }
 
+    alt.log(`Played animation: ${dict} // ${count}`);
     return true;
 }
 
@@ -51,8 +52,7 @@ export async function playAnimation(
         return;
     }
 
-    if (alt.Player.local.getSyncedMeta('DEAD')) {
-        alt.log(`Player is dead. Could not play animation.`);
+    if (alt.Player.local.meta.isDead) {
         return;
     }
 
@@ -60,6 +60,6 @@ export async function playAnimation(
         return;
     }
 
+    alt.log(`played the stupid fucking animation`);
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
-    native.removeAnimDict(dict);
 }

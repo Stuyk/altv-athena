@@ -3,7 +3,7 @@ import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
-import { drawText3D } from '../utility/text';
+import { drawText2D, drawText3D } from '../utility/text';
 import { BaseHUD } from '../views/hud/hud';
 
 class ObjectiveController {
@@ -11,6 +11,10 @@ class ObjectiveController {
     static interval: number;
     static cooldown: number;
     static blip: alt.Blip;
+
+    static updateObjective(data: Objective | null) {
+        ObjectiveController.objective = data;
+    }
 
     static handleSync(data: Objective | null) {
         if (ObjectiveController.interval) {
@@ -106,6 +110,16 @@ class ObjectiveController {
             );
         }
 
+        if (ObjectiveController.objective.captureProgress >= 1 && dist <= ObjectiveController.objective.range * 10) {
+            const progressText = `${ObjectiveController.objective.captureProgress}/${ObjectiveController.objective.captureMaximum}`;
+            drawText3D(
+                progressText,
+                ObjectiveController.objective.pos as alt.Vector3,
+                0.4,
+                new alt.RGBA(255, 255, 255, 255)
+            );
+        }
+
         if (ObjectiveController.cooldown && Date.now() < ObjectiveController.cooldown) {
             return;
         }
@@ -125,3 +139,4 @@ class ObjectiveController {
 }
 
 alt.onServer(JobEnums.ObjectiveEvents.JOB_SYNC, ObjectiveController.handleSync);
+alt.onServer(JobEnums.ObjectiveEvents.JOB_UPDATE, ObjectiveController.updateObjective);

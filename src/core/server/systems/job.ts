@@ -78,7 +78,26 @@ export class Job {
             return false;
         }
 
-        playerFuncs.emit.message(this.player, `Finished an objective...`);
+        // Plays an animation when the objective is complete.
+        if (objective.animation) {
+            playerFuncs.emit.animation(
+                this.player,
+                objective.animation.dict,
+                objective.animation.name,
+                objective.animation.flags,
+                objective.animation.duration
+            );
+        }
+
+        // Calls an event on server-side or client-side after objective is complete.
+        if (objective.eventCall) {
+            if (objective.eventCall.isServer) {
+                alt.emit(objective.eventCall.eventName, this.player);
+            } else {
+                alt.emitClient(this.player, objective.eventCall.eventName);
+            }
+        }
+
         this.goToNextObjective();
         return true;
     }
@@ -116,10 +135,20 @@ export class Job {
                 objective.captureProgress = 0;
             }
 
+            if (objective.nextCaptureTime && Date.now() < objective.nextCaptureTime) {
+                return false;
+            }
+
+            if (!objective.nextCaptureTime || Date.now() > objective.nextCaptureTime) {
+                objective.nextCaptureTime = Date.now() + 1000;
+            }
+
             objective.captureProgress += 1;
 
             if (objective.captureProgress >= objective.captureMaximum) {
                 return true;
+            } else {
+                alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_UPDATE, objective);
             }
         }
 

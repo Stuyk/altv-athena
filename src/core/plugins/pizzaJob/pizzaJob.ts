@@ -1,6 +1,8 @@
 import * as alt from 'alt-server';
+import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
 import { Job } from '../../server/systems/job';
+import { AnimationFlags } from '../../shared/flags/animation';
 import { Permissions } from '../../shared/flags/permissions';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
@@ -8,7 +10,7 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
-        type: JobEnums.ObjectiveType.WAYPOINT,
+        type: JobEnums.ObjectiveType.CAPTURE_POINT,
         description: 'Walk to the marker',
         pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 },
         marker: {
@@ -28,7 +30,7 @@ const objectives: Array<Objective> = [
     },
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
-        type: JobEnums.ObjectiveType.WAYPOINT,
+        type: JobEnums.ObjectiveType.CAPTURE_POINT,
         description: 'Walk to the next marker',
         pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 },
         marker: {
@@ -71,6 +73,10 @@ const objectives: Array<Objective> = [
         range: 2
     }
 ];
+
+alt.on('hello:World', (player: alt.Player) => {
+    playerFuncs.emit.message(player, 'Fuck you.');
+});
 
 alt.on('job:Pizza', (player: alt.Player) => {
     const jobInstance = new Job();
