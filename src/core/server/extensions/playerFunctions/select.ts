@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
+import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { InteractionController } from '../../systems/interaction';
 import emit from './emit';
@@ -71,6 +72,7 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
         // Propagation
         ChatController.populateCommands(p);
         InteractionController.populateCustomInteractions(p);
+        BlipController.populateGlobalBlips(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 

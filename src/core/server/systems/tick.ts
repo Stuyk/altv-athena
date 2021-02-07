@@ -3,6 +3,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { InventoryController } from '../views/inventory';
+import './blip';
 import './interaction';
 import './vehicle';
 import './toolbar';

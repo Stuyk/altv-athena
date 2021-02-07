@@ -28,6 +28,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_TOOLBAR_SET = 'player:Toolbar',
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
+    POPULATE_BLIPS = 'blips:Populate',
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',
     POPULATE_INTERACTIONS = 'interactions:Populate',

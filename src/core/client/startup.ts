@@ -15,6 +15,7 @@ import './streamers/blip';
 
 // Systems
 import './systems/animations';
+import './systems/blip';
 import './systems/death';
 import './systems/disable';
 import './systems/interiors';
