@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
+import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
 import { AnimationFlags } from '../../shared/flags/animation';
 import { Permissions } from '../../shared/flags/permissions';
@@ -95,16 +96,24 @@ const objectives: Array<Objective> = [
     }
 ];
 
-alt.on('hello:World', (player: alt.Player) => {
-    playerFuncs.emit.message(player, 'Fuck you.');
-});
+InteractionController.addInteraction(
+    'pizzajob1',
+    { x: -247.4142303466797, y: -701.3204345703125, z: 33.55748748779297 } as alt.Vector3,
+    3,
+    'Start the pizza job',
+    {
+        sprite: 84,
+        text: 'Pizza Jerb',
+        pos: { x: -247.25341796875, y: -700.78076171875, z: 33.55743408203125 },
+        shortRange: true,
+        color: 5,
+        scale: 0.2
+    },
+    true
+);
 
-alt.on('job:Pizza', (player: alt.Player) => {
+alt.on('pizzajob1', (player: alt.Player, position: alt.Vector3) => {
     const jobInstance = new Job();
     jobInstance.loadObjectives(deepCloneObject(objectives));
     jobInstance.addPlayer(player);
-});
-
-ChatController.addCommand('pizza', '/pizza', Permissions.Admin, (player: alt.Player) => {
-    alt.emit('job:Pizza', player);
 });

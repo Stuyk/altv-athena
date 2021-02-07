@@ -58,32 +58,38 @@ export class InteractionController {
     /**
      * Used to add an interaction
      * @static
-     * @param {string} identifier MUST BE UNIQUE
+     * @param {string} identifierAndEventName Must be unique. This is your event name.
      * @param {alt.Vector3} position
      * @param {number} range
      * @param {string} activationText What this interaction tells you it will do
      * @param {Blip} blip The blip that goes along with this interaction
+     * @param {boolean} isServerEvent Is this a server event or a client event?
      * @memberof InteractionController
      */
     static addInteraction(
-        identifier: string,
+        identifierAndEventName: string,
         position: alt.Vector3,
         range: number,
         activationText: string,
-        blip: Blip
+        blip: Blip,
+        isServerEvent: boolean
     ) {
         const newPos = new alt.Vector3(position.x, position.y, position.z - 1);
         const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, range, 2.5);
         shape.playersOnly = true;
         shape['isInteraction'] = true;
-        shape['interactionType'] = identifier;
+        shape['interactionType'] = identifierAndEventName;
 
-        if (!InteractionController.Interactions[identifier]) {
-            InteractionController.Interactions[identifier] = [];
+        if (!InteractionController.Interactions[identifierAndEventName]) {
+            InteractionController.Interactions[identifierAndEventName] = [];
         }
 
-        customInteractions.push({ identifier, blip, text: activationText });
-        InteractionController.Interactions[identifier].push(shape);
+        customInteractions.push({ identifier: identifierAndEventName, blip, text: activationText });
+        InteractionController.Interactions[identifierAndEventName].push(shape);
+        InteractionController.InteractionTypes[identifierAndEventName] = {
+            eventName: identifierAndEventName,
+            isServer: isServerEvent
+        };
     }
 
     /**

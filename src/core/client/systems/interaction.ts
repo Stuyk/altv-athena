@@ -127,7 +127,10 @@ export class InteractionController {
     }
 
     static getCustomInteraction(type: string): Interaction | null {
-        const index = InteractionController.customInteractions.findIndex((interaction) => interaction.text === type);
+        const index = InteractionController.customInteractions.findIndex(
+            (interaction) => interaction.identifier === type
+        );
+
         return InteractionController.customInteractions[index];
     }
 

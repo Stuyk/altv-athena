@@ -34,6 +34,9 @@ description: List of all the changes and current versions.
 + Fix a bug where items were not consumed from toolbar on relog (saving issue)
 + Added Synced Particle Effects
 + Added Particle to Job Framework
++ Added Custom Interaction Text
++ Added Custom Interaction Blips
++ Added Custom Interaction Functionality
 ```
 
 ## 1.5.0 - January 28-31, 2021
