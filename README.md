@@ -34,6 +34,9 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Screenshot
     -   Add to Whitelist
     -   Remove from Whitelist
+-   Food & Water System
+    -   Customizable Food / Water
+    -   Restore Food / Water with Items
 -   Player
     -   Health Synchronization
     -   Armour Synchronization
@@ -65,23 +68,29 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
     -   Adjustable Configuration
     -   Performance Grid for Object Interactions / Finding
 -   Interaction System
-    -   Parse Objects by Grid
+    -   Parse Objects by Section
+    -   Add Custom Interactions Easily
     -   Colshape System to Represent Interaction Points
     -   ATM Object Interaction
 -   Blip System
-    -   Create Blips
-    -   Stream Blips by Distance
-    -   Append and Delete Blips by Category
+    -   Global Blip Controller
+    -   Repeat Blips are Streamed
     -   Automatically Generate Blips for Useable Objects (Atms, Fuel, etc.)
+-   Section System
+    -   World split into Sections
+    -   Split Sections Help with Performance
+    -   Lookup Closest Players by Section / Slice
 -   Currency System
-    -   Deposit and Withdraw Cash from your Bank
-    -   Transfer Bank Money to Other Players
+    -   Deposit Currency
+    -   Withdraw Currency
+    -   Transfer Bank Currency
 -   Vehicle System
     -   Control Vehicle Door States
     -   Control Vehicle Door Locks
     -   Handle Vehicle Ownership
     -   Handle Vehicle Keys
     -   Handle Vehicle Synchronization Pop-in
+    -   Seatbelt / Handle Window Fly-through
 -   Inventory System
     -   Drop Items
     -   Pickup Items
@@ -111,8 +120,18 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar
+-   Custom Job Framework
+    -   Easy to Use Job Language / Creation
+    -   Play Animations
+    -   Play Particles
+    -   Play Sounds
+    -   Add Blips
+    -   Add Markers
+    -   Custom Waypoint Types... Go To, Capture, etc.
+    -   Custom Criteria: No Vehicle, No Weapon, etc.
+    -   Call Events on Objective Completions
 -   Extendable Core Resource
-    -   Extend the core resource by writing your own code in the 'extra' folder.
+    -   Extend the core resource by writing your own code in the 'plugins' folder.
 
 ## Running this Project
 

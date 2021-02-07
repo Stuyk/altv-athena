@@ -38,7 +38,7 @@ description: List of all the changes and current versions.
 + Added Custom Interaction Blips
 + Added Custom Interaction Functionality
 + Added Blip Controller
-+ Added Global Blip Propogation
++ Added Global Blip Propagation
 ```
 
 ## 1.5.0 - January 28-31, 2021
