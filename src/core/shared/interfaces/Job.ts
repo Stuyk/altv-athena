@@ -3,7 +3,7 @@ import { EventCall } from './EventCall';
 import { Marker } from './Marker';
 import { TextLabel } from './TextLabel';
 import { Vector3 } from './Vector';
-import { Animation } from './Animation';
+import { JobAnimation } from './Animation';
 import { Particle } from './Particle';
 
 enum ObjectiveCriteria {
@@ -36,7 +36,7 @@ export interface Objective {
     marker?: Marker;
     textLabel?: TextLabel;
     blip?: Blip;
-    animation?: Animation;
+    animation?: JobAnimation;
     eventCall?: EventCall;
     particle?: Particle;
 }

@@ -39,6 +39,8 @@ description: List of all the changes and current versions.
 + Added Custom Interaction Functionality
 + Added Blip Controller
 + Added Global Blip Propagation
++ Added Toggle for Job Animations at Beginning or End
++ Added Rotation to Animations for Jobs
 ```
 
 ## 1.5.0 - January 28-31, 2021

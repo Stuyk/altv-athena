@@ -78,24 +78,14 @@ export class Job {
             return false;
         }
 
-        // Plays an animation when the objective is complete.
-        if (objective.animation) {
-            playerFuncs.emit.animation(
-                this.player,
-                objective.animation.dict,
-                objective.animation.name,
-                objective.animation.flags,
-                objective.animation.duration
-            );
+        // Triggers an Animation at Objective End
+        if (objective.animation && !objective.animation.atObjectiveStart) {
+            this.tryAnimation();
         }
 
         // Calls an event on server-side or client-side after objective is complete.
-        if (objective.eventCall) {
-            if (objective.eventCall.isServer) {
-                alt.emit(objective.eventCall.eventName, this.player);
-            } else {
-                alt.emitClient(this.player, objective.eventCall.eventName);
-            }
+        if (objective.eventCall && !objective.eventCall.callAtStart) {
+            this.tryEventCall();
         }
 
         if (objective.particle) {
@@ -207,13 +197,67 @@ export class Job {
         this.syncObjective();
     }
 
+    private tryEventCall() {
+        const objective = this.getCurrentObjective();
+
+        if (objective.eventCall.isServer) {
+            alt.emit(objective.eventCall.eventName, this.player);
+        } else {
+            alt.emitClient(this.player, objective.eventCall.eventName);
+        }
+    }
+
+    /**
+     * Tries to play an animation if it is present
+     * @private
+     * @return {*}
+     * @memberof Job
+     */
+    private tryAnimation() {
+        const objective = this.getCurrentObjective();
+        if (!objective.animation) {
+            return;
+        }
+
+        let delay = 0;
+        if (objective.animation.delay) {
+            delay = objective.animation.delay;
+        }
+
+        setTimeout(() => {
+            if (objective.animation.rotation) {
+                this.player.rot = objective.animation.rotation;
+            }
+
+            alt.nextTick(() => {
+                playerFuncs.emit.animation(
+                    this.player,
+                    objective.animation.dict,
+                    objective.animation.name,
+                    objective.animation.flags,
+                    objective.animation.duration
+                );
+            });
+        }, delay);
+    }
+
     /**
      * Emits data down to the player to start handling job information.
      * @private
      * @memberof Job
      */
     private syncObjective() {
-        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, this.getCurrentObjective());
+        const objective = this.getCurrentObjective();
+
+        if (objective.animation && objective.animation.atObjectiveStart) {
+            this.tryAnimation();
+        }
+
+        if (objective.eventCall && objective.eventCall.callAtStart) {
+            this.tryEventCall();
+        }
+
+        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, objective);
     }
 
     /**

@@ -34,6 +34,14 @@ const objectives: Array<Objective> = [
             duration: 5000,
             scale: 5
         },
+        animation: {
+            dict: 'anim@mp_player_intcelebrationfemale@air_guitar',
+            name: 'air_guitar',
+            duration: 2000,
+            flags: AnimationFlags.NORMAL,
+            atObjectiveStart: true,
+            rotation: { x: 0, y: 0, z: 1.879676103591919 } as alt.Vector3
+        },
         range: 2
     },
     {
