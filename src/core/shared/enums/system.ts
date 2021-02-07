@@ -10,7 +10,6 @@ export enum SYSTEM_EVENTS {
     //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
-
     //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
@@ -36,6 +35,8 @@ export enum SYSTEM_EVENTS {
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
     QUICK_TOKEN_NONE = 'quicktoken:None',
     QUICK_TOKEN_UPDATE = 'quicktoken:Update',
+    //
+    PLAY_PARTICLE_EFFECT = 'ptfx:Play',
     //
     TICKS_START = 'ticks:Start',
     //

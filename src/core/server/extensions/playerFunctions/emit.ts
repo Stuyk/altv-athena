@@ -2,6 +2,8 @@ import * as alt from 'alt-server';
 import { AnimationFlags } from '../../../shared/flags/animation';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
+import { Particle } from '../../../shared/interfaces/Particle';
+import utility from './utility';
 
 /**
  * Play an animation on this player.
@@ -58,6 +60,24 @@ function notification(p: alt.Player, message: string): void {
 }
 
 /**
+ * Play a particle effect at a specific coordinate.
+ * @param {Particle} particle
+ * @param {boolean} [emitToNearbyPlayers=false]
+ */
+function particle(p: alt.Player, particle: Particle, emitToNearbyPlayers = false): void {
+    if (!emitToNearbyPlayers) {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
+        return;
+    }
+
+    const nearbyPlayers = utility.getClosestPlayers(p, 10);
+    for (let i = 0; i < nearbyPlayers.length; i++) {
+        const player = nearbyPlayers[i];
+        alt.emitClient(player, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
+    }
+}
+
+/**
  * Play a sound without any positional data.
  * @param {alt.Player} p
  * @param {string} audioName
@@ -92,6 +112,7 @@ export default {
     meta,
     message,
     notification,
+    particle,
     sound2D,
     sound3D,
     soundFrontend

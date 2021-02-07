@@ -22,6 +22,7 @@ import './systems/job';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
+import './systems/particle';
 import './systems/quickToken';
 import './systems/sound';
 import './systems/tick';

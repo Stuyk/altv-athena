@@ -10,7 +10,7 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
-        type: JobEnums.ObjectiveType.CAPTURE_POINT,
+        type: JobEnums.ObjectiveType.WAYPOINT,
         description: 'Walk to the marker',
         pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 },
         marker: {
@@ -26,11 +26,18 @@ const objectives: Array<Objective> = [
             text: 'Objective Point',
             scale: 0.1
         },
+        particle: {
+            pos: { x: -241.42921447753906, y: -713.875244140625, z: 33.49561309814453 },
+            dict: 'core',
+            name: 'blood_chopper',
+            duration: 5000,
+            scale: 5
+        },
         range: 2
     },
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
-        type: JobEnums.ObjectiveType.CAPTURE_POINT,
+        type: JobEnums.ObjectiveType.WAYPOINT,
         description: 'Walk to the next marker',
         pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 },
         marker: {
@@ -45,6 +52,13 @@ const objectives: Array<Objective> = [
             color: 26,
             text: 'Objective Point',
             scale: 0.1
+        },
+        particle: {
+            pos: { x: -240.16085815429688, y: -724.7368774414062, z: 33.50142288208008 },
+            dict: 'core',
+            name: 'exp_grd_plane_sp',
+            duration: 5000,
+            scale: 5
         },
         range: 2
     },
@@ -69,6 +83,13 @@ const objectives: Array<Objective> = [
             color: 26,
             text: 'Objective Point',
             scale: 0.1
+        },
+        particle: {
+            pos: { x: -231.2491912841797, y: -718.907958984375, z: 33.50018310546875 },
+            dict: 'core',
+            name: 'ent_dst_wood_splinter',
+            duration: 5000,
+            scale: 5
         },
         range: 2
     }

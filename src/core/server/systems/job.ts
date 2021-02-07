@@ -98,6 +98,10 @@ export class Job {
             }
         }
 
+        if (objective.particle) {
+            playerFuncs.emit.particle(this.player, objective.particle, true);
+        }
+
         this.goToNextObjective();
         return true;
     }

@@ -4,6 +4,7 @@ import { Marker } from './Marker';
 import { TextLabel } from './TextLabel';
 import { Vector3 } from './Vector';
 import { Animation } from './Animation';
+import { Particle } from './Particle';
 
 enum ObjectiveCriteria {
     NO_VEHICLE = 1,
@@ -37,6 +38,7 @@ export interface Objective {
     blip?: Blip;
     animation?: Animation;
     eventCall?: EventCall;
+    particle?: Particle;
 }
 
 export default {

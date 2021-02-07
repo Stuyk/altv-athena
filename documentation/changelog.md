@@ -31,6 +31,9 @@ description: List of all the changes and current versions.
 + Added Animations to Jobs
 + Added Event Calls to Jobs
 + Added Capture Point Objective Type
++ Fix a bug where items were not consumed from toolbar on relog (saving issue)
++ Added Synced Particle Effects
++ Added Particle to Job Framework
 ```
 
 ## 1.5.0 - January 28-31, 2021
