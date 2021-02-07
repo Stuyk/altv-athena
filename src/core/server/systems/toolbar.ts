@@ -88,8 +88,8 @@ export class ToolbarController {
             alt.emit(item.data.event, player, item);
         }
 
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
+        playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
         playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
     }
 }
