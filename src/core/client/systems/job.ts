@@ -35,11 +35,17 @@ class ObjectiveController {
 
         if (data.blip) {
             ObjectiveController.blip = new alt.PointBlip(data.blip.pos.x, data.blip.pos.y, data.blip.pos.z);
+            ObjectiveController.blip.scale = data.blip.scale;
+
+            // Beta Feature? Not implemented yet.
+            if (ObjectiveController.blip.hasOwnProperty('size')) {
+                ObjectiveController.blip.size = data.blip.scale;
+            }
+
             ObjectiveController.blip.sprite = data.blip.sprite;
             ObjectiveController.blip.color = data.blip.color;
             ObjectiveController.blip.shortRange = data.blip.shortRange;
             ObjectiveController.blip.name = data.blip.text;
-            ObjectiveController.blip.size = data.blip.scale;
         }
 
         BaseHUD.updateObjective(data.description);
@@ -94,7 +100,7 @@ class ObjectiveController {
 
         if (ObjectiveController.objective.marker && dist <= ObjectiveController.objective.range * 25) {
             drawMarker(
-                1,
+                ObjectiveController.objective.type,
                 ObjectiveController.objective.marker.pos as alt.Vector3,
                 ObjectiveController.getVector3Range(),
                 ObjectiveController.objective.marker.color

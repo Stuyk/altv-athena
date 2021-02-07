@@ -160,5 +160,11 @@ function handleDebugMessages() {
     const heading = native.getEntityHeading(alt.Player.local.scriptID);
     alt.log(heading);
 
+    if (alt.Player.local.isAiming) {
+        alt.log(`AIM POSITION:`);
+        const aimPos = alt.Player.local.aimPos;
+        alt.log(JSON.stringify(aimPos));
+    }
+
     alt.emit('debug:Time');
 }

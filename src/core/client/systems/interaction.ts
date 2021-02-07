@@ -141,11 +141,17 @@ export class InteractionController {
             const interaction = customInteractions[i];
             if (interaction.blip) {
                 let blip = new alt.PointBlip(interaction.blip.pos.x, interaction.blip.pos.y, interaction.blip.pos.z);
+                blip.scale = interaction.blip.scale;
+
+                // Beta Feature? Not implemented yet.
+                if (blip.hasOwnProperty('size')) {
+                    blip.size = interaction.blip.scale;
+                }
+
                 blip.sprite = interaction.blip.sprite;
                 blip.color = interaction.blip.color;
                 blip.shortRange = interaction.blip.shortRange;
                 blip.name = interaction.blip.text;
-                blip.size = interaction.blip.scale;
             }
         }
     }
