@@ -14,23 +14,25 @@ const MaxLoadAttempts = 250;
  * @return {Promise<boolean>}  {Promise<boolean>}
  */
 async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
-    if (native.hasAnimDictLoaded(dict)) {
-        return true;
-    }
+    return new Promise((resolve: Function): void => {
+        const interval = alt.setInterval(() => {
+            count += 1;
 
-    native.requestAnimDict(dict);
+            if (native.hasAnimDictLoaded(dict)) {
+                alt.clearInterval(interval);
+                resolve(true);
+                return;
+            }
 
-    if (!native.hasAnimDictLoaded(dict)) {
-        count += 1;
-        if (count >= MaxLoadAttempts) {
-            return false;
-        }
+            if (count >= 25) {
+                alt.clearInterval(interval);
+                resolve(false);
+                return;
+            }
 
-        return await loadAnimation(dict, count);
-    }
-
-    alt.log(`Played animation: ${dict} // ${count}`);
-    return true;
+            native.requestAnimDict(dict);
+        }, 250);
+    });
 }
 
 /**
