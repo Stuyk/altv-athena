@@ -10,11 +10,11 @@ If you respect the development that I'm doing and the open source nature of the 
 
 ## Why should I buy this framework?
 
-If you're looking for a framework where you get the basics and you get to build off the rest then this is it. It will give you everything that you will need to spin up your very own Roleplay Server without breaking the bank to hire other Developers. You get my experience, and intellectual knowledge crafted into a neat package for your consumption. You get the right to modify, and use this framework by simply supporting the core development work needed to create a stable experience.
+You will be able to startup a Roleplay server almost out of the gate by the time the core features of this project are completed. It's written in a way that makes it extendable and can tap into the various utilities that are built into this script. You get my experience, and intellectual knowledge crafted into a neat package for your consumption. You get the right to modify, and use this framework by simply supporting the core development work needed to create a stable experience.
 
 ## Do you provide custom support / scripts?
 
-I provide basic support for getting it running. However, I don't have enough time in my day to contribute to your project. The goals of Athena are solely my own and the features in which I target are dependent on what is needed before I can deploy another feature.
+I provide basic support for getting it running. However, I will not be providing support for writing most scripts. Users may tap into the shared knowledge in the Athena Discord to get some guidance on how to create or construct new scripts.
 
 ## Will all features be free?
 
@@ -26,7 +26,7 @@ Licenses are currently limited to 5 IP(s) at any given time. If the number of IP
 
 ## Theoretical Player Limitations?
 
-The Athena framework has not been tested with high player counts yet. However, compared to the old code of O:RP and the steps I've taken to ensure that client's get the best performance they can. I do believe Athena is capable of handling at least 400 players at a time. However, this will be dependent on what else is added into Athena.
+The Athena framework has not been tested with high player counts yet. However, compared to the old code of O:RP and the steps I've taken to ensure that client's get the best performance they can. I do believe Athena is capable of handling at least 500 players at a time. However, this will only apply to the vanilla version of Athena which means not using any additional mods.
 
 ## Cannot Interact with Anything
 

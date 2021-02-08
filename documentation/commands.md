@@ -10,14 +10,14 @@ Commands that are built-in to the current Framework. They also have permissions 
 
 ```text
 /ac [message] - Speak to other Admins
-/acceptdeath - Respawn after death
+/acceptdeath - Will respawn you if you are fully dead.
 /addwhitelist [discord_id]
+/audiostream [youtube_id]
 /b [message] - Speak out of character
 /broadcast [message] - Announce server-wide
 /do [describe an object] - Describe something
 /dummyitem - Get some dummy debug items
 /getitem [item_name] - Get item by name
-/getteleporter - Adds item for current position.
 /low [quietly speak something]
 /mc [message] - Speak to other Admins and Moderators
 /me [describe what you are doing] - Roleplay an action
@@ -28,8 +28,10 @@ Commands that are built-in to the current Framework. They also have permissions 
 /setarmour [0 - 100] [player_id]* - Set armour for self or others
 /setcash [amount] [id]* - Add cash
 /sethealth [99 - 200] [player_id]* - Set health for self or others
+/teleporter - Adds item for current position.
 /updateweather - Forcefully updates your weather based on region.
 /vehicle [name] - Spawn an admin vehicle
+/w [player_id] [message] - Whisper
 /w [player_id] [message] - Whisper
 /weapon [name] - Get weapon by name.
 ```
