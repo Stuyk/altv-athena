@@ -9,6 +9,8 @@ async function sleep(ms) {
     });
 }
 
+const audioStreams = [];
+
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
@@ -17,6 +19,11 @@ const app = new Vue({
         return {
             show: false,
             leaderboard: false,
+            youtubeInfo: {
+                identifier: null,
+                volume: 0
+            },
+            player: null,
             players: []
         };
     },
@@ -53,12 +60,56 @@ const app = new Vue({
                     audio.pause();
                 }, duration);
             }
+        },
+        audioStream(identifier, volume, startSeconds = 0) {
+            if (!('YT' in window)) {
+                return;
+            }
+
+            if (this.youtubeInfo.identifier === identifier) {
+                if (this.player.getPlayerState() === 2) {
+                    this.player.playVideo();
+                    this.player.seekTo(startSeconds, true);
+                }
+
+                this.player.setVolume(volume);
+                return;
+            }
+
+            if (!this.player) {
+                this.player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: `${identifier}`,
+                    startSeconds: startSeconds,
+                    events: {
+                        onReady: (e) => {
+                            this.player.loadVideoById(identifier, startSeconds, 'large');
+                            this.player.playVideo();
+                        }
+                    }
+                });
+            } else {
+                this.player.loadVideoById(identifier, startSeconds, 'large');
+                this.player.playVideo();
+            }
+
+            this.youtubeInfo.identifier = identifier;
+        },
+        pauseStream() {
+            if (!this.player) {
+                return;
+            }
+
+            this.player.pauseVideo();
         }
     },
     mounted() {
         if ('alt' in window) {
             alt.on('leaderboard:Toggle', this.toggleLeaderboard);
             alt.on('hud:Audio3D', this.audio3D);
+            alt.on('hud:AudioStream', this.audioStream);
+            alt.on('hud:PauseStream', this.pauseStream);
         } else {
             this.players = [
                 { name: 'Johnny_Joe', ping: 25, id: 0, distance: 25 },
@@ -68,6 +119,10 @@ const app = new Vue({
             for (let i = 0; i < 5; i++) {
                 this.players = [...this.players, ...this.players];
             }
+
+            setTimeout(() => {
+                this.audioStream(`KrUak31dVqc`, 25, 25);
+            }, 1000);
         }
 
         this.$nextTick(() => {

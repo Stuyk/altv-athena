@@ -4,6 +4,7 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Particle } from '../../../shared/interfaces/Particle';
 import utility from './utility';
+import { AudioStream } from '../../../shared/interfaces/Audio';
 
 /**
  * Play an animation on this player.
@@ -27,6 +28,14 @@ function animation(
     }
 
     alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
+}
+
+/**
+ * Play a YouTube Audio Stream in a Given Radius
+ * @param {AudioStream} stream
+ */
+function audioStream(stream: AudioStream) {
+    alt.emitClient(null, SYSTEM_EVENTS.PLAYER_EMIT_AUDIO_STREAM, stream);
 }
 
 /**
@@ -109,6 +118,7 @@ function soundFrontend(p: alt.Player, audioName: string, ref: string): void {
 
 export default {
     animation,
+    audioStream,
     meta,
     message,
     notification,

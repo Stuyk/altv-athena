@@ -41,6 +41,9 @@ description: List of all the changes and current versions.
 + Added Global Blip Propagation
 + Added Toggle for Job Animations at Beginning or End
 + Added Rotation to Animations for Jobs
++ Added Demo Heist
++ Fixed Marker Type Bug for Jobs
++ Added YouTube Audio Streaming Service with Distance
 ```
 
 ## 1.5.0 - January 28-31, 2021

@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
+        <div id="player" style="opacity: 0; position: fixed; right: 5000px;"></div>
         <div id="app" v-if="show" v-cloak>
             <v-app>
                 <template v-if="!leaderboard">
@@ -19,6 +20,7 @@
                 </template>
             </v-app>
         </div>
+        <script src="https://www.youtube.com/player_api" type="text/javascript"></script>
         <script src="../../js/vue.min.js"></script>
         <script src="../../js/vuetify.js"></script>
         <script src="../../js/less.min.js"></script>

@@ -83,6 +83,14 @@ export class BaseHUD {
         }
     }
 
+    static pauseStreamPlayer() {
+        BaseHUD.view.emit('hud:PauseStream');
+    }
+
+    static adjustStreamPlayer(identifier: string, volume: number, startTime: number) {
+        BaseHUD.view.emit('hud:AudioStream', identifier, volume, startTime);
+    }
+
     /**
      * Sends a chat message up from the WebView to the server chat.ts file.
      * @param {string} message

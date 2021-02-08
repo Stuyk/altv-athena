@@ -10,6 +10,8 @@ export const SHARED_CONFIG = {
     // Interaction
     INTERACTION_ALWAYS_ON: false, // Determines whether or not a player needs to hit `alt` to turn on interaction.
     MAX_INTERACTION_RANGE: 8,
+    // Audio
+    MAX_AUDIO_STREAM_DISTANCE: 50, // DO NOT GO HIGHER THAN 100
     // Voice
     VOICE_ON: false
 };
