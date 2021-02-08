@@ -15,7 +15,7 @@ const objectives: Array<Objective> = [
         pos: { x: -634.3856201171875, y: -239.7871551513672, z: 38.048484802246094 },
         marker: {
             pos: { x: -634.3856201171875, y: -239.7871551513672, z: 38.048484802246094 } as alt.Vector3,
-            type: 0,
+            type: 1,
             color: new alt.RGBA(0, 255, 0, 100)
         },
         textLabel: {
@@ -68,6 +68,10 @@ const objectives: Array<Objective> = [
             duration: 500,
             pos: { x: -626.2422485351562, y: -238.98475646972656, z: 39.24375534057617 - 0.8 },
             scale: 1
+        },
+        eventCall: {
+            eventName: 'siren:Heist:Start',
+            isServer: true
         }
     },
     {
@@ -245,6 +249,14 @@ const objectives: Array<Objective> = [
         }
     }
 ];
+
+alt.on('siren:Heist:Start', () => {
+    playerFuncs.emit.audioStream({
+        streamName: 'ofj55zWGuD8',
+        duration: 60000,
+        position: { x: -622.1144409179688, y: -231.02552795410156, z: 38.05705642700195 }
+    });
+});
 
 alt.on('started:Heist', (player: alt.Player, pos: alt.Vector3) => {
     playerFuncs.emit.notification(player, `You have started the heist.`);
