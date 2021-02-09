@@ -30,6 +30,23 @@ export const ItemRegistry: Array<Item> = [
             heal: 3,
             sound: 'item_eat'
         }
+    },
+    {
+        name: `Repair Kit`,
+        description: `A toolkit to repair a vehicle.`,
+        icon: 'toolbox',
+        slot: 0,
+        quantity: 1,
+        weight: 2,
+        behavior:
+            ItemType.CAN_DROP |
+            ItemType.CAN_TRADE |
+            ItemType.IS_TOOLBAR |
+            ItemType.CONSUMABLE |
+            ItemType.SKIP_CONSUMABLE,
+        data: {
+            event: 'effect:Vehicle:Repair'
+        }
     }
 ];
 

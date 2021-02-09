@@ -45,6 +45,7 @@ description: List of all the changes and current versions.
 + Fixed Marker Type Bug for Jobs
 + Added YouTube Audio Streaming Service with Distance
 + Added Burgular Alarm to Heist Job
++ Repair Kit Basic for Vehicle
 ```
 
 ## 1.5.0 - January 28-31, 2021

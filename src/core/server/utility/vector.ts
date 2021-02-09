@@ -68,26 +68,17 @@ export function getClosestEntity<T>(
         z: playerPosition.z
     };
 
-    let lastRange = distance;
+    let lastRange = 25;
     let closestEntity;
 
     for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
 
-        if (!entity || (entity.hasOwnProperty('valid') && !entity.valid)) {
-            continue;
-        }
-
-        if (!entity.hasOwnProperty('pos')) {
+        if (!entity || !entity.valid) {
             continue;
         }
 
         const dist = distance2d(position, entity.pos);
-
-        if (dist > distance) {
-            continue;
-        }
-
         if (dist > lastRange) {
             continue;
         }

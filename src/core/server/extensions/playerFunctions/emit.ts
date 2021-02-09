@@ -60,6 +60,16 @@ function message(p: alt.Player, message: string): void {
 }
 
 /**
+ * Force a player to move to a specific position.
+ * Regardless of their controls.
+ * @param {alt.Player} p
+ * @param {alt.Vector3} pos
+ */
+function moveTo(p: alt.Player, pos: alt.Vector3) {
+    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_TASK_MOVE, pos);
+}
+
+/**
  * Send a notification to this player.
  * @param {string} message
  * @memberof EmitPrototype
@@ -121,6 +131,7 @@ export default {
     audioStream,
     meta,
     message,
+    moveTo,
     notification,
     particle,
     sound2D,

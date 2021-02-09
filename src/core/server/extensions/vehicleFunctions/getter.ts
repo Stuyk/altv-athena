@@ -9,14 +9,20 @@ function lockState(v: alt.Vehicle): Vehicle_Lock_State {
     return v.athenaLockState;
 }
 
-function isOwner(v: alt.Vehicle, target: alt.Player): boolean {
+function isOwner(v: alt.Vehicle, target: alt.Player | number): boolean {
     // If the vehicle has a null owner. There is no owner.
     if (!v.owner) {
         return true;
     }
 
-    if (v.owner !== target.id) {
-        return false;
+    if (target instanceof alt.Player) {
+        if (v.owner !== target.id) {
+            return false;
+        }
+    } else {
+        if (v.owner !== target) {
+            return false;
+        }
     }
 
     return true;

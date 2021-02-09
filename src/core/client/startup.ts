@@ -26,6 +26,7 @@ import './systems/noclip';
 import './systems/particle';
 import './systems/quickToken';
 import './systems/sound';
+import './systems/tasks';
 import './systems/tick';
 import './systems/toolbar';
 import './systems/vehicle';
