@@ -37,7 +37,7 @@ const app = new Vue({
             }
         },
         audio3D(soundName, pan, volume, duration = -1) {
-            const audio = new Audio(`./sounds/${soundName}.mp3`);
+            const audio = new Audio(`./sounds/${soundName}.ogg`);
             const ambientContext = new AudioContext();
             const source = ambientContext.createMediaElementSource(audio);
             const ambientPan = ambientContext.createStereoPanner();

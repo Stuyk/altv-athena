@@ -22,6 +22,8 @@
 -   [Adding Commands](documentation/scripting/adding-commands.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
 -   [Adding Items](documentation/scripting/adding-items.md)
+-   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
+-   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 
 ## External Links
 
