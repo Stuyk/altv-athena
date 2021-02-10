@@ -4,6 +4,8 @@ import { ItemType } from '../../../shared/enums/itemType';
 import { Item } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
+import save from './save';
+import sync from './sync';
 
 /**
  * Return the tab index and the slot to use for the item.
@@ -559,9 +561,58 @@ function isInToolbar(p: alt.Player, item: Partial<Item>): { index: number } | nu
     return null;
 }
 
+/**
+ * Removes an item from the player.
+ * Returns true if the item was removed successfully.
+ * Automatically saves inventory or toolbar on removal.
+ * @param {alt.Player} player
+ * @param {string} itemName This is CaSeSeNsItIvE
+ * @return {*}  {boolean}
+ */
+function findAndRemove(player: alt.Player, itemName: string): boolean {
+    // Check Toolbar First
+    const toolbarItem = isInToolbar(player, { name: itemName });
+    if (toolbarItem) {
+        const item = player.data.toolbar[toolbarItem.index];
+        if (!item) {
+            return false;
+        }
+
+        const removedFromToolbar = toolbarRemove(player, item.slot);
+        if (!removedFromToolbar) {
+            return false;
+        }
+
+        save.field(player, 'toolbar', player.data.toolbar);
+        sync.inventory(player);
+        return true;
+    }
+
+    // Check Inventory Last
+    const inventoryItem = isInInventory(player, { name: itemName });
+    if (!inventoryItem) {
+        return false;
+    }
+
+    const item = player.data.inventory[inventoryItem.tab][inventoryItem.index];
+    if (!item) {
+        return false;
+    }
+
+    const removedFromInventory = inventoryRemove(player, item.slot, inventoryItem.tab);
+    if (!removedFromInventory) {
+        return false;
+    }
+
+    save.field(player, 'inventory', player.data.inventory);
+    sync.inventory(player);
+    return true;
+}
+
 export default {
     equipmentAdd,
     equipmentRemove,
+    findAndRemove,
     getEquipmentItem,
     getFreeInventorySlot,
     getInventoryItem,

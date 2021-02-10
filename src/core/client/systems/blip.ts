@@ -14,7 +14,13 @@ function handleAddBlips(blips: Array<Blip>) {
         blip.color = blipData.color;
         blip.shortRange = blipData.shortRange;
         blip.name = blipData.text;
-        blip.size = blipData.scale;
+
+        if (blip.hasOwnProperty('size')) {
+            blip.size = { x: blipData.scale, y: blipData.scale } as alt.Vector2;
+        } else {
+            blip.scale = blipData.scale;
+        }
+
         addedBlips.push(blip);
     }
 }
