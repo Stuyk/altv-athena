@@ -145,7 +145,7 @@ export class InteractionController {
 
                 // Beta Feature? Not implemented yet.
                 if (blip.hasOwnProperty('size')) {
-                    blip.size = interaction.blip.scale;
+                    blip.size = { x: interaction.blip.scale, y: interaction.blip.scale } as alt.Vector2;
                 }
 
                 blip.sprite = interaction.blip.sprite;

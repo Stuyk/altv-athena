@@ -2,8 +2,6 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-const weatherTransitionTime = 35;
-
 // Weather
 let previousWeather: string = 'OVERCAST';
 let weather: string;

@@ -13,8 +13,6 @@ import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { drawText2D } from '../utility/text';
 import { BaseHUD } from '../views/hud/hud';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);

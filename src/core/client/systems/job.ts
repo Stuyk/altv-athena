@@ -39,7 +39,7 @@ class ObjectiveController {
 
             // Beta Feature? Not implemented yet.
             if (ObjectiveController.blip.hasOwnProperty('size')) {
-                ObjectiveController.blip.size = data.blip.scale;
+                ObjectiveController.blip.size = { x: data.blip.scale, y: data.blip.scale } as alt.Vector2;
             }
 
             ObjectiveController.blip.sprite = data.blip.sprite;

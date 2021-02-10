@@ -17,9 +17,9 @@
     },
     "author": "stuyk",
     "devDependencies": {
-        "@altv/types-client": "^1.4.6",
+        "@altv/types-client": "^1.5.2",
         "@altv/types-natives": "^1.1.0",
-        "@altv/types-server": "^1.6.5",
+        "@altv/types-server": "^1.7.2",
         "@altv/types-webview": "^1.0.2",
         "@types/axios": "^0.14.0",
         "@types/express": "^4.17.8",
