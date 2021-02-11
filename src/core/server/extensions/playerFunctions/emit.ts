@@ -1,10 +1,11 @@
 import * as alt from 'alt-server';
-import { AnimationFlags } from '../../../shared/flags/animation';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
-import { Particle } from '../../../shared/interfaces/Particle';
-import utility from './utility';
+import { AnimationFlags } from '../../../shared/flags/animation';
 import { AudioStream } from '../../../shared/interfaces/Audio';
+import { Particle } from '../../../shared/interfaces/Particle';
+import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
+import utility from './utility';
 
 /**
  * Play an animation on this player.
@@ -57,16 +58,6 @@ function meta(p: alt.Player, key: string, value: any): void {
  */
 function message(p: alt.Player, message: string): void {
     alt.emitClient(p, View_Events_Chat.Append, message);
-}
-
-/**
- * Force a player to move to a specific position.
- * Regardless of their controls.
- * @param {alt.Player} p
- * @param {alt.Vector3} pos
- */
-function moveTo(p: alt.Player, pos: alt.Vector3) {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_TASK_MOVE, pos);
 }
 
 /**
@@ -126,15 +117,23 @@ function soundFrontend(p: alt.Player, audioName: string, ref: string): void {
     alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, audioName, ref);
 }
 
+/**
+ * Force the player to perform an uncancellable task timeline.
+ * @param {Array<Task | TaskCallback>} tasks
+ */
+function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
+}
+
 export default {
     animation,
     audioStream,
     meta,
     message,
-    moveTo,
     notification,
     particle,
     sound2D,
     sound3D,
-    soundFrontend
+    soundFrontend,
+    taskTimeline
 };
