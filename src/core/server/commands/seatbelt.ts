@@ -16,6 +16,7 @@ function handleCommand(player: alt.Player): void {
         return;
     }
 
+    playerFuncs.emit.sound2D(player, 'seatbelt_on', 0.75);
     playerFuncs.emit.notification(player, `You put on your seatbelt.`);
     alt.emitClient(player, Vehicle_Events.SET_SEATBELT);
 }

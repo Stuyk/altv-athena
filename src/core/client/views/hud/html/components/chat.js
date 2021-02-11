@@ -18,7 +18,7 @@ const tagOrComment = new RegExp(
 );
 
 const messages = [];
-const commands = [
+let commands = [
     { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
     { name: 'help', description: '/help - List all available commands for your permission level.' }
 ];
@@ -181,12 +181,13 @@ const chat = Vue.component('chat', {
                 this.currentMessage = `/${this.matchedName}`;
             }
         },
-        populateCommands(commands) {
-            if (!Array.isArray(commands)) {
+        populateCommands(serverCommands) {
+            if (!Array.isArray(serverCommands)) {
                 return;
             }
 
-            commands = commands.concat(commands);
+            commands = commands.concat(serverCommands);
+            this.updateCount += 1;
         }
     },
     directives: {
