@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.6.0 - February 1-x, 2021
+## 1.6.0 - February 1-10, 2021
 
 ```diff
 + Initial Job Framework
