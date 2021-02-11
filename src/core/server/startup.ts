@@ -8,6 +8,7 @@ import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import logger from './utility/athenaLogger';
 import { Collections } from './interface/DatabaseCollections';
+import isFunction from '../shared/utility/classCheck';
 
 env.config();
 
@@ -51,8 +52,12 @@ async function loadFiles(): Promise<boolean> {
             return null;
         })
         .then((module) => {
-            if (module.load) {
-                module.load();
+            if (module.default && isFunction(module.default)) {
+                module.default();
+            }
+
+            if (module.load && isFunction(module.load)) {
+                module.default();
             }
 
             return true;
@@ -83,7 +88,7 @@ async function handleFiles() {
         res.default();
     });
 
-    import('../extra/imports').then((res) => {
+    import('../plugins/imports').then((res) => {
         res.default();
     });
 }

@@ -13,13 +13,7 @@ export enum Vehicle_Lock_State {
     KIDNAP_MODE = 4
 }
 
-export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [
-    Vehicle_Lock_State.NO_LOCK,
-    Vehicle_Lock_State.UNLOCKED,
-    Vehicle_Lock_State.LOCKED,
-    Vehicle_Lock_State.LOCKOUT_PLAYER,
-    Vehicle_Lock_State.KIDNAP_MODE
-];
+export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [Vehicle_Lock_State.UNLOCKED, Vehicle_Lock_State.LOCKED];
 
 export enum Vehicle_Seat_List {
     DRIVER = -1,
@@ -41,7 +35,8 @@ export const Vehicle_Events = {
     SET_INTO: 'Vehicle-Set-Into',
     SET_LOCK: 'Vehicle-Set-Lock',
     SET_DOOR: 'Vehicle-Set-Door',
-    SET_ENGINE: 'Vehicle-Set-Engine'
+    SET_ENGINE: 'Vehicle-Set-Engine',
+    SET_SEATBELT: 'Vehicle-Seatbelt'
 };
 
 export const Vehicle_State = {
@@ -54,7 +49,8 @@ export const Vehicle_State = {
     LOCK_STATE: `Door-Locks`,
     KEYS: `Vehicle-Keys`,
     OWNER: 'Vehicle-Owner',
-    ENGINE: 'Vehicle-Engine'
+    ENGINE: 'Vehicle-Engine',
+    FUEL: 'Vehicle-Fuel'
 };
 
 /**

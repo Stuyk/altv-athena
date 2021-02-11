@@ -143,8 +143,12 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
 
     safe.setPosition(p, nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
     p.spawn(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z, 0);
-    safe.addHealth(p, DEFAULT_CONFIG.RESPAWN_HEALTH, true);
-    safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
+
+    alt.nextTick(() => {
+        p.clearBloodDamage();
+        safe.addHealth(p, DEFAULT_CONFIG.RESPAWN_HEALTH, true);
+        safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
+    });
 }
 
 export default {

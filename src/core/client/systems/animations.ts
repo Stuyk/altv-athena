@@ -14,22 +14,25 @@ const MaxLoadAttempts = 250;
  * @return {Promise<boolean>}  {Promise<boolean>}
  */
 async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
-    if (native.hasAnimDictLoaded(dict)) {
-        return true;
-    }
+    return new Promise((resolve: Function): void => {
+        const interval = alt.setInterval(() => {
+            count += 1;
 
-    native.requestAnimDict(dict);
+            if (native.hasAnimDictLoaded(dict)) {
+                alt.clearInterval(interval);
+                resolve(true);
+                return;
+            }
 
-    if (!native.hasAnimDictLoaded(dict)) {
-        count += 1;
-        if (count >= MaxLoadAttempts) {
-            return false;
-        }
+            if (count >= 25) {
+                alt.clearInterval(interval);
+                resolve(false);
+                return;
+            }
 
-        return await loadAnimation(dict, count);
-    }
-
-    return true;
+            native.requestAnimDict(dict);
+        }, 250);
+    });
 }
 
 /**
@@ -51,8 +54,7 @@ export async function playAnimation(
         return;
     }
 
-    if (alt.Player.local.getSyncedMeta('DEAD')) {
-        alt.log(`Player is dead. Could not play animation.`);
+    if (alt.Player.local.meta.isDead) {
         return;
     }
 
@@ -60,6 +62,6 @@ export async function playAnimation(
         return;
     }
 
+    alt.log(`played the stupid fucking animation`);
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
-    native.removeAnimDict(dict);
 }

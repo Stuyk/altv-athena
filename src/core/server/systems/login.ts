@@ -1,17 +1,18 @@
 import * as alt from 'alt-server';
-import { DiscordUser } from '../interface/DiscordUser';
-import { Account } from '../interface/Account';
-import { goToCharacterSelect } from '../views/characters';
+import * as sm from 'simplymongo';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
 import { Permissions } from '../../shared/flags/permissions';
+import { DEFAULT_CONFIG } from '../athena/main';
+import { playerFuncs } from '../extensions/Player';
+import { Account } from '../interface/Account';
+import { DiscordUser } from '../interface/DiscordUser';
 import { getUniquePlayerHash } from '../utility/encryption';
-import * as sm from 'simplymongo';
+import { goToCharacterSelect } from '../views/characters';
+import { OptionsController } from './options';
 import './tick';
 import './voice';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { playerFuncs } from '../extensions/Player';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { OptionsController } from './options';
+import './job';
 
 const db: sm.Database = sm.getDatabase();
 

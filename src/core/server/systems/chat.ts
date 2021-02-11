@@ -154,6 +154,13 @@ export default class ChatController {
 
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
     }
+
+    static printAllCommands() {
+        Object.keys(ChatController.commands).forEach((key) => {
+            const cmdData = ChatController.commands[key];
+            console.log(`${cmdData.description}`);
+        });
+    }
 }
 
 // Has to be loaded last.

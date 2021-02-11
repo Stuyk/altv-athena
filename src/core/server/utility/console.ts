@@ -3,8 +3,7 @@ import { Database, getDatabase } from 'simplymongo';
 import ChatController from '../systems/chat';
 import Logger from './athenaLogger';
 import fs from 'fs';
-import path from 'path';
-import AdminController from '../systems/admin';
+import { AdminController } from '../systems/admin';
 import { Account } from '../interface/Account';
 import { OptionsController } from '../systems/options';
 
@@ -22,7 +21,8 @@ const command = {
     '/unban': handleUnban,
     '/dox': handleDox,
     '/addwhitelist': handleAddWhitelist,
-    '/removewhitelist': handleRemoveWhitelist
+    '/removewhitelist': handleRemoveWhitelist,
+    '/commands': ChatController.printAllCommands
 };
 
 /**

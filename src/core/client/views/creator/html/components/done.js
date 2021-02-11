@@ -53,7 +53,7 @@ Vue.component('tab-done', {
                             v-bind="attrs"
                             v-on="on"
                         >
-                            <v-icon small>icon-times</v-icon>
+                            <v-icon small>icon-times-circle</v-icon>
                         </v-btn>
                     </template>
                     <span>Discard Character</span>

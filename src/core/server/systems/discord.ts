@@ -25,7 +25,12 @@ export class DiscordController {
             return;
         }
 
-        DiscordController.guild = DiscordController.client.guilds.cache.get('790039623648542760');
+        if (!process.env.DISCORD_SERVER_ID) {
+            Logger.warning(`DISCORD_SERVER_ID is not defined. You will not be able to use messaging services.`);
+            return;
+        }
+
+        DiscordController.guild = DiscordController.client.guilds.cache.get(process.env.DISCORD_SERVER_ID);
     }
 
     static userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
@@ -51,6 +56,29 @@ export class DiscordController {
         } catch (err) {
             Logger.warning(`Could not whitelist a Discord User. Turn on integrations and wait a few hours.`);
         }
+    }
+
+    /**
+     * Send a message to a Discord Channel.
+     * @static
+     * @param {string} channel_id
+     * @param {string} message
+     * @return {*}
+     * @memberof DiscordController
+     */
+    static sendToChannel(channel_id: string, message: string) {
+        if (!DiscordController.guild) {
+            Logger.error(`You do not currently have a Discord Bot Setup for sending messages.`);
+            return;
+        }
+
+        const channel = DiscordController.guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
+        if (!channel) {
+            Logger.error(`Channel does not exist.`);
+            return;
+        }
+
+        channel.send(message);
     }
 }
 

@@ -170,7 +170,7 @@ const app = new Vue({
             if (dataName === 'drawables') {
                 const maxValue = newComponents[this.componentIndex].maxDrawables[index];
                 if (newComponents[this.componentIndex].drawables[index] < -1) {
-                    newComponents[this.componentIndex].drawables[index] = maxValue - 1;
+                    newComponents[this.componentIndex].drawables[index] = maxValue;
                 }
             }
 

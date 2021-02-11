@@ -7,15 +7,15 @@ import * as alt from 'alt-server';
  * @param {number} z
  * @memberof SafePrototype
  */
-function setPosition(p: alt.Player, x: number, y: number, z: number): void {
-    if (!p.hasModel) {
-        p.hasModel = true;
-        p.spawn(x, y, z, 0);
-        p.model = `mp_m_freemode_01`;
+function setPosition(player: alt.Player, x: number, y: number, z: number): void {
+    if (!player.hasModel) {
+        player.hasModel = true;
+        player.spawn(x, y, z, 0);
+        player.model = `mp_m_freemode_01`;
     }
 
-    p.acPosition = new alt.Vector3(x, y, z);
-    p.pos = new alt.Vector3(x, y, z);
+    player.acPosition = new alt.Vector3(x, y, z);
+    player.pos = new alt.Vector3(x, y, z);
 }
 /**
  * Safely add health to this player.
@@ -30,9 +30,9 @@ function addHealth(p: alt.Player, value: number, exactValue: boolean = false) {
         return;
     }
 
-    if (p.health + value > 200) {
-        p.acHealth = 200;
-        p.health = 200;
+    if (p.health + value > 199) {
+        p.acHealth = 199;
+        p.health = 199;
         return;
     }
 

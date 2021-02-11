@@ -13,6 +13,7 @@ import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
+import { BaseHUD } from '../views/hud/hud';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -40,6 +41,20 @@ export class VehicleController {
     static nextVehicleCheck: number = Date.now();
     static nextControlPress: number = Date.now();
     static nextVehicleStateUpdate: number = Date.now() + TIME_BETWEEN_STATE_UPDATES;
+
+    static putOnSeatbelt() {
+        native.setPedConfigFlag(alt.Player.local.scriptID, 35, false); // Helmet
+        native.setPedConfigFlag(alt.Player.local.scriptID, 32, false); // Can no longer fly out of windshield.
+
+        const vehClass = native.getVehicleClass(alt.Player.local.vehicle.scriptID);
+        const isBike = vehClass === 8 || vehClass === 13 ? true : false;
+
+        if (isBike && !native.isPedWearingHelmet(alt.Player.local.scriptID)) {
+            native.setPedConfigFlag(alt.Player.local.scriptID, 35, true);
+        }
+
+        BaseHUD.updateSeatbelt(true);
+    }
 
     /**
      * This controls what keys were pressed and what boolean to change for a key press.
@@ -114,6 +129,23 @@ export class VehicleController {
             return;
         }
 
+        if (native.getVehiclePedIsEntering(alt.Player.local.scriptID) !== 0) {
+            // back
+            if (native.isControlJustPressed(0, 33)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+
+            // left
+            if (native.isControlJustPressed(0, 34)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+
+            // right
+            if (native.isControlJustPressed(0, 35)) {
+                native.clearPedTasks(alt.Player.local.scriptID);
+            }
+        }
+
         VehicleController.handleOutOfVehicle();
     }
 
@@ -155,9 +187,8 @@ export class VehicleController {
             VehicleController.turnOffAllVehicleFunctions();
             VehicleController.updateNextKeyPress();
 
-            // Prevent a player from leaving the vehicle if in kidnap mode.
             const lock: Vehicle_Lock_State = alt.Player.local.vehicle.getStreamSyncedMeta(Vehicle_State.LOCK_STATE);
-            if (Vehicle_Lock_State.KIDNAP_MODE === lock) {
+            if (Vehicle_Lock_State.LOCKED === lock) {
                 return;
             }
 
@@ -181,7 +212,6 @@ export class VehicleController {
         // Check if the local player is a driver.
         if (!isDriver) {
             if (canExit) {
-                alt.log('should be able to exit');
                 HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Exit Vehicle`, '');
             }
             return;
@@ -275,6 +305,7 @@ export class VehicleController {
             VehicleController.turnOffAllVehicleFunctions();
             VehicleController.updateNextKeyPress();
 
+            native.setPedConfigFlag(alt.Player.local.scriptID, 32, true);
             native.setPedConfigFlag(alt.Player.local.scriptID, 35, false);
             native.setPedConfigFlag(alt.Player.local.scriptID, 104, true);
             native.setPedConfigFlag(alt.Player.local.scriptID, 429, true);
@@ -312,6 +343,7 @@ export class VehicleController {
                 return;
             }
 
+            native.setPedConfigFlag(alt.Player.local.scriptID, 32, true);
             native.setPedConfigFlag(alt.Player.local.scriptID, 429, true);
             native.setPedConfigFlag(alt.Player.local.scriptID, 104, true);
             native.taskEnterVehicle(
@@ -410,3 +442,5 @@ async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value:
         return;
     }
 }
+
+alt.onServer(Vehicle_Events.SET_SEATBELT, VehicleController.putOnSeatbelt);

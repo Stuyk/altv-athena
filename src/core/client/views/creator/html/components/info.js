@@ -135,7 +135,7 @@ Vue.component('tab-info', {
             <div class="group pt-3">
                 <template v-if="this.isNameAvailable !== null">
                     <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                    <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                    <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
                 </template>
                 <template v-else>
                     <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
@@ -164,7 +164,7 @@ Vue.component('tab-info', {
             </div>
             <div class="group pt-3">
                 <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
                 <v-date-picker
                     v-model="age"
                     full-width
@@ -181,7 +181,7 @@ Vue.component('tab-info', {
             </div>
             <div class="group">
                 <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
                 <v-radio-group v-model="gender" class="flex-grow-1" mandatory>
                     <v-radio label="Female" value="female" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
                     <v-radio label="Male" value="male" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
@@ -196,7 +196,7 @@ Vue.component('tab-info', {
             <div class="d-flex flex-column justify-space-between fill-height" block fluid>
                     <div class="d-flex flex-row justify-content-space-between">
                         <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                        <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times</v-icon>
+                        <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
                         <v-text-field
                             class="flex-grow-1"
                             type="text"

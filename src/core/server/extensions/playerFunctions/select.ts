@@ -1,12 +1,14 @@
 import * as alt from 'alt-server';
-import { Character } from '../../../shared/interfaces/Character';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
+import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
-import sync from './sync';
-import setter from './setter';
-import safe from './safe';
+import { InteractionController } from '../../systems/interaction';
 import emit from './emit';
+import safe from './safe';
+import setter from './setter';
+import sync from './sync';
 
 /**
  * Select a character based on the character data provided.
@@ -49,11 +51,6 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             safe.addArmour(p, 0, true);
         }
 
-        sync.currencyData(p);
-        sync.weather(p);
-        sync.time(p);
-        sync.inventory(p);
-
         // Resets their death status and logs them in as dead.
         if (p.data.isDead) {
             p.nextDeathSpawn = Date.now() + 30000;
@@ -65,8 +62,17 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             emit.meta(p, 'isDead', false);
         }
 
-        // Command Propagation
+        sync.currencyData(p);
+        sync.weather(p);
+        sync.time(p);
+        sync.inventory(p);
+        sync.water(p);
+        sync.food(p);
+
+        // Propagation
         ChatController.populateCommands(p);
+        InteractionController.populateCustomInteractions(p);
+        BlipController.populateGlobalBlips(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 

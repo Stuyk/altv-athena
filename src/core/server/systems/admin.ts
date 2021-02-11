@@ -5,7 +5,7 @@ import Logger from '../utility/athenaLogger';
 
 const db: Database = getDatabase();
 
-export default class AdminController {
+export class AdminController {
     static async banPlayer(player: alt.Player, reason: string): Promise<boolean> {
         if (!player.accountData) {
             return false;

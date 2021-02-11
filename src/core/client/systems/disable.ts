@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
@@ -14,6 +15,13 @@ function disableDefaultBehavior(): void {
     // Disable default weapon switch
     for (let i = 157; i < 164; i++) {
         native.disableControlAction(0, i, true);
+    }
+
+    if (
+        alt.Player.local.meta.food <= SHARED_CONFIG.FOOD_FATIGUE ||
+        alt.Player.local.meta.water <= SHARED_CONFIG.WATER_FATIGUE
+    ) {
+        native.disableControlAction(0, 21, true);
     }
 
     // Disable Weapon Wheel

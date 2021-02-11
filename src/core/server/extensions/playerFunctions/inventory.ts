@@ -1,7 +1,11 @@
 import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
+import { ItemType } from '../../../shared/enums/itemType';
 import { Item } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import save from './save';
+import sync from './sync';
 
 /**
  * Return the tab index and the slot to use for the item.
@@ -30,6 +34,82 @@ function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: n
 
             return { tab: i, slot: x };
         }
+    }
+
+    return null;
+}
+
+/**
+ * If the player has an item type anywhere in their inventory.
+ * @param {Partial<Item>} item
+ */
+function hasItem(player: alt.Player, item: Partial<Item>): boolean {
+    let hasInInventory = isInInventory(player, item);
+    if (hasInInventory) {
+        return true;
+    }
+
+    let hasInToolbar = isInToolbar(player, item);
+    if (hasInInventory) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Check if a player has a weapon.
+ * @param {alt.Player} player
+ */
+function hasWeapon(player: alt.Player): Item | null {
+    for (let t = 0; t < player.data.inventory.length; t++) {
+        const tab = player.data.inventory[t];
+
+        if (tab.length <= 0) {
+            continue;
+        }
+
+        for (let i = 0; i < tab.length; i++) {
+            const inventoryItem = tab[i];
+            if (!inventoryItem) {
+                continue;
+            }
+
+            if (!inventoryItem.data) {
+                continue;
+            }
+
+            if (!inventoryItem.data.hash) {
+                continue;
+            }
+
+            if (!isFlagEnabled(inventoryItem.behavior, ItemType.IS_WEAPON)) {
+                continue;
+            }
+
+            return inventoryItem as Item;
+        }
+    }
+
+    for (let i = 0; i < player.data.toolbar.length; i++) {
+        const item = player.data.toolbar[i];
+        if (!item) {
+            continue;
+        }
+
+        if (!item.data) {
+            continue;
+        }
+
+        if (!item.data.hash) {
+            continue;
+        }
+
+        if (!isFlagEnabled(item.behavior, ItemType.IS_WEAPON)) {
+            continue;
+        }
+
+        return item as Item;
     }
 
     return null;
@@ -481,13 +561,64 @@ function isInToolbar(p: alt.Player, item: Partial<Item>): { index: number } | nu
     return null;
 }
 
+/**
+ * Removes an item from the player.
+ * Returns true if the item was removed successfully.
+ * Automatically saves inventory or toolbar on removal.
+ * @param {alt.Player} player
+ * @param {string} itemName This is CaSeSeNsItIvE
+ * @return {*}  {boolean}
+ */
+function findAndRemove(player: alt.Player, itemName: string): boolean {
+    // Check Toolbar First
+    const toolbarItem = isInToolbar(player, { name: itemName });
+    if (toolbarItem) {
+        const item = player.data.toolbar[toolbarItem.index];
+        if (!item) {
+            return false;
+        }
+
+        const removedFromToolbar = toolbarRemove(player, item.slot);
+        if (!removedFromToolbar) {
+            return false;
+        }
+
+        save.field(player, 'toolbar', player.data.toolbar);
+        sync.inventory(player);
+        return true;
+    }
+
+    // Check Inventory Last
+    const inventoryItem = isInInventory(player, { name: itemName });
+    if (!inventoryItem) {
+        return false;
+    }
+
+    const item = player.data.inventory[inventoryItem.tab][inventoryItem.index];
+    if (!item) {
+        return false;
+    }
+
+    const removedFromInventory = inventoryRemove(player, item.slot, inventoryItem.tab);
+    if (!removedFromInventory) {
+        return false;
+    }
+
+    save.field(player, 'inventory', player.data.inventory);
+    sync.inventory(player);
+    return true;
+}
+
 export default {
     equipmentAdd,
     equipmentRemove,
+    findAndRemove,
     getEquipmentItem,
     getFreeInventorySlot,
     getInventoryItem,
     getToolbarItem,
+    hasItem,
+    hasWeapon,
     inventoryAdd,
     inventoryRemove,
     isEquipmentSlotValid,

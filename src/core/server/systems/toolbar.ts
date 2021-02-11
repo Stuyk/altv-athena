@@ -76,21 +76,23 @@ export class ToolbarController {
     }
 
     static handleToolbarUse(player: alt.Player, item: Item) {
-        item.quantity -= 1;
+        if (!isFlagEnabled(item.behavior, ItemType.SKIP_CONSUMABLE)) {
+            item.quantity -= 1;
 
-        if (item.quantity <= 0) {
-            playerFuncs.inventory.toolbarRemove(player, item.slot);
-        } else {
-            playerFuncs.inventory.replaceToolbarItem(player, item);
+            if (item.quantity <= 0) {
+                playerFuncs.inventory.toolbarRemove(player, item.slot);
+            } else {
+                playerFuncs.inventory.replaceToolbarItem(player, item);
+            }
+
+            playerFuncs.sync.inventory(player);
+            playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
         }
 
         if (item.data && item.data.event) {
             alt.emit(item.data.event, player, item);
+            playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
-
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
     }
 }
 

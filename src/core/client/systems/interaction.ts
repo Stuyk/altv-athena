@@ -1,11 +1,12 @@
 import * as alt from 'alt-client';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
-import { drawText2D } from '../utility/text';
 import { HelpController } from '../views/hud/controllers/helpController';
+import { BaseHUD } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
 
 const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
@@ -13,6 +14,7 @@ const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 1000;
 
 export class InteractionController {
+    static customInteractions: Array<Interaction> = [];
     static tick: number;
     static isOn: boolean = false;
     static pressedKey: boolean = false;
@@ -26,6 +28,7 @@ export class InteractionController {
     static toggleInteractionMode(): void {
         // Prevents clearing the interaction and is forced into being on all of the time.
         if (InteractionController.isAlwaysOn) {
+            BaseHUD.updateInteract(true);
             return;
         }
 
@@ -37,9 +40,11 @@ export class InteractionController {
         InteractionController.isOn = !InteractionController.isOn;
         if (!InteractionController.isOn) {
             alt.Player.local.isInteractionOn = false;
+            BaseHUD.updateInteract(false);
             return;
         }
 
+        BaseHUD.updateInteract(true);
         alt.Player.local.isInteractionOn = true;
         InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
@@ -77,25 +82,24 @@ export class InteractionController {
             return;
         }
 
-        if (!SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
-            drawText2D('Interaction Mode is On', { x: 0.5, y: 0.95 }, 0.3, new alt.RGBA(255, 255, 255, 255));
-        }
-
         // Non-Interaction Based Items
         // Vehicles and such...
         if (!alt.Player.local.closestInteraction) {
             VehicleController.runVehicleControllerTick();
+            InteractionController.pressedKey = false;
             return;
         }
 
         // All Interaction Based Items
         // ATMs, Fuel Pumps, etc.
         if (InteractionController.nextKeyPress > Date.now()) {
+            InteractionController.pressedKey = false;
             return;
         }
 
         const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
         if (dist > MAX_CHECKPOINT_DRAW) {
+            InteractionController.pressedKey = false;
             return;
         }
 
@@ -107,7 +111,12 @@ export class InteractionController {
         );
 
         if (dist < MAX_INTERACTION_DRAW) {
-            HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+            const interaction = InteractionController.getCustomInteraction(alt.Player.local.closestInteraction.type);
+            if (!interaction) {
+                HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
+            } else {
+                HelpController.updateHelpText(KEY_BINDS.INTERACT, interaction.text, null);
+            }
 
             if (InteractionController.pressedKey) {
                 InteractionController.pressedKey = false;
@@ -116,8 +125,39 @@ export class InteractionController {
             }
         }
     }
+
+    static getCustomInteraction(type: string): Interaction | null {
+        const index = InteractionController.customInteractions.findIndex(
+            (interaction) => interaction.identifier === type
+        );
+
+        return InteractionController.customInteractions[index];
+    }
+
+    static addInteractions(customInteractions: Array<Interaction>): void {
+        InteractionController.customInteractions = customInteractions;
+
+        for (let i = 0; i < customInteractions.length; i++) {
+            const interaction = customInteractions[i];
+            if (interaction.blip) {
+                let blip = new alt.PointBlip(interaction.blip.pos.x, interaction.blip.pos.y, interaction.blip.pos.z);
+                blip.scale = interaction.blip.scale;
+
+                // Beta Feature? Not implemented yet.
+                if (blip.hasOwnProperty('size')) {
+                    blip.size = { x: interaction.blip.scale, y: interaction.blip.scale } as alt.Vector2;
+                }
+
+                blip.sprite = interaction.blip.sprite;
+                blip.color = interaction.blip.color;
+                blip.shortRange = interaction.blip.shortRange;
+                blip.name = interaction.blip.text;
+            }
+        }
+    }
 }
 
+alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
     if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {

@@ -36,7 +36,7 @@ export const DEFAULT_CONFIG = {
     // Death / Respawn Properties
     RESPAWN_TIME: SHARED_CONFIG.RESPAWN_TIME, // 30s in Milliseconds
     RESPAWN_LOSE_WEAPONS: true, // Removes player weapons on death.
-    RESPAWN_HEALTH: 200, // Health is 100 - 200. 99 is dead.
+    RESPAWN_HEALTH: 199, // Health is 100 - 200. 99 is dead.
     RESPAWN_ARMOUR: 0, // Lose weapons when you respawn
     // Command Properties
     COMMAND_ME_DISTANCE: 35,

@@ -3,6 +3,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { InventoryController } from '../views/inventory';
+import './blip';
 import './interaction';
 import './vehicle';
 import './toolbar';
@@ -42,8 +43,10 @@ function handlePing(player: alt.Player): void {
         InventoryController.updateDroppedItemsAroundPlayer(player, false);
     }
 
-    // Respawns the Player
-    if (player.nextDeathSpawn && Date.now() > player.nextDeathSpawn - 1000) {
-        playerFuncs.set.respawned(player, null); // Uses null to find a hospital.
+    // Updates Food & Water
+    if (!player.nextFoodSync || Date.now() > player.nextFoodSync) {
+        player.nextFoodSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_FOOD_UPDATES;
+        playerFuncs.sync.food(player);
+        playerFuncs.sync.water(player);
     }
 }

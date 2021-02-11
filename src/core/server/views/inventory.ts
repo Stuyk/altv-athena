@@ -8,8 +8,9 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
-import '../effects/heal';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import '../effects/heal';
+import '../effects/vehicleRepair';
 
 interface CategoryData {
     abbrv: string;
@@ -385,21 +386,23 @@ export class InventoryController {
             return;
         }
 
-        item.quantity -= 1;
+        if (!isFlagEnabled(item.behavior, ItemType.SKIP_CONSUMABLE)) {
+            item.quantity -= 1;
 
-        if (item.quantity <= 0) {
-            playerFuncs.inventory.inventoryRemove(player, slot, tab);
-        } else {
-            playerFuncs.inventory.replaceInventoryItem(player, item, tab);
+            if (item.quantity <= 0) {
+                playerFuncs.inventory.inventoryRemove(player, slot, tab);
+            } else {
+                playerFuncs.inventory.replaceInventoryItem(player, item, tab);
+            }
+
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
+            playerFuncs.sync.inventory(player);
         }
 
         if (item.data && item.data.event) {
             alt.emit(item.data.event, player, item, slot, tab);
+            playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
-
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
     }
 }
 
