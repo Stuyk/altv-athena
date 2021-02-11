@@ -9,7 +9,8 @@ import { Particle } from './Particle';
 enum ObjectiveCriteria {
     NO_VEHICLE = 1,
     NO_WEAPON = 2,
-    NO_DYING = 4
+    NO_DYING = 4,
+    IN_VEHICLE = 8
 }
 
 enum ObjectiveType {

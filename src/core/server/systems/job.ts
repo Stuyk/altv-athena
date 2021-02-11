@@ -177,6 +177,12 @@ export class Job {
             }
         }
 
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.IN_VEHICLE)) {
+            if (this.player && !this.player.vehicle) {
+                return false;
+            }
+        }
+
         return true;
     }
 
