@@ -84,6 +84,12 @@ class ObjectiveController {
             }
         }
 
+        if (isFlagEnabled(ObjectiveController.objective.criteria, JobEnums.ObjectiveCriteria.IN_VEHICLE)) {
+            if (!alt.Player.local.vehicle) {
+                return false;
+            }
+        }
+
         return true;
     }
 
