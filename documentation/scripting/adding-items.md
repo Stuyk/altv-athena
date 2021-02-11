@@ -1,13 +1,12 @@
 ---
-description: >-
-    Learn how to add items to your game mode.
+description: Learn how to add items to your game mode.
 ---
 
 # Adding Items
 
 Items come in a variety of flavors but their general creation follows a specific template.
 
-```ts
+```typescript
 const refItem: Item = {
     name: `Micro SMG`,
     uuid: `some_hash_thing`,
@@ -25,13 +24,13 @@ const refItem: Item = {
 
 Now when you create templates for items and want to use a reference item like the one above. You must perform a deep copy of that item reference.
 
-```ts
+```typescript
 const newItem: Item = deepCloneObject<Item>(refItem);
 ```
 
 After making the deepl clone of your object you can modify it.
 
-```ts
+```typescript
 newItem.name = `Super Cool Item`;
 newItem.icon = 'crate';
 ```
@@ -42,7 +41,7 @@ More often than not the one location you will be putting new items in the player
 
 Here's the basic gist of it.
 
-```ts
+```typescript
 const slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
 playerFuncs.inventory.inventoryAdd(player, newItem, slotInfo.slot, slotInfo.tab);
 
@@ -54,7 +53,7 @@ playerFuncs.save.field(player, 'inventory', player.data.inventory);
 
 If you need to remove a player's item you can run the following functions to check if it is removed.
 
-```ts
+```typescript
 const slotInfo: { slot: number; tab: number } | null = playerFuncs.inventory.isInInventory({ name: 'Micro SMG' });
 if (!slotInfo) {
     playerFuncs.emit.message(player, `Item was not found!`);
@@ -88,7 +87,7 @@ It can then be recieved with `alt.on`.
 
 ### Item Example
 
-```ts
+```typescript
 const teleporterItem: Item = {
     name: `Teleporter`,
     uuid: `teleporter`,
@@ -106,7 +105,7 @@ const teleporterItem: Item = {
 
 ### Item Effect Receive
 
-```ts
+```typescript
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import { Item } from '../../shared/interfaces/Item';
@@ -115,3 +114,4 @@ alt.on('effect:Teleport', (player: alt.Player, item: Item) => {
     playerFuncs.emit.message(player, `You consumed ${item.name}`);
 });
 ```
+

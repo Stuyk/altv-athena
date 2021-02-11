@@ -35,3 +35,4 @@ Commands that are built-in to the current Framework. They also have permissions 
 /w [player_id] [message] - Whisper
 /weapon [name] - Get weapon by name.
 ```
+

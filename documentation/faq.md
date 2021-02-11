@@ -22,7 +22,7 @@ The core features, items, etc. will always come with Athena. However, the data t
 
 ## May I share my license?
 
-Licenses are currently limited to 5 IP(s) at any given time. If the number of IP(s) is exceeded you will have to wait until Ares is rebooted to get a reset on usage.
+Licenses are currently limited to 5 IP\(s\) at any given time. If the number of IP\(s\) is exceeded you will have to wait until Ares is rebooted to get a reset on usage.
 
 ## Theoretical Player Limitations?
 
@@ -46,9 +46,9 @@ Check your `package.json` and check under `version`.
 
 ## Failed to contact server to post login details?
 
-Usually means port 7790 is closed. Make sure to open it on your router and in your windows > firewall. Use https://www.yougetsignal.com/tools/open-ports/ to verify your port(s) are open while the serving is running.
+Usually means port 7790 is closed. Make sure to open it on your router and in your windows &gt; firewall. Use [https://www.yougetsignal.com/tools/open-ports/](https://www.yougetsignal.com/tools/open-ports/) to verify your port\(s\) are open while the serving is running.
 
-## Failed to find access_token
+## Failed to find access\_token
 
 Ares may have run into an issue when trying to assign a Token to a user who was attempting to login. This is a pretty rare occurrence. Have the user try logging in again.
 
@@ -58,8 +58,9 @@ Turn down your MSAA in your graphics settings. It apparently happens depending o
 
 ## What server hosts do your recommend for deployment?
 
-OVH (Game Servers Only), Linode, Avoro, AWS. I do not recommend a server host that cannot provide you a linux shell you can connect to and customize for your server's deployment and get the right database software installed. Look for a dedicated server or a vps that isn't just over FTP. You should be uploading your gamemode to a private repository and pulling it down on your server.
+OVH \(Game Servers Only\), Linode, Avoro, AWS. I do not recommend a server host that cannot provide you a linux shell you can connect to and customize for your server's deployment and get the right database software installed. Look for a dedicated server or a vps that isn't just over FTP. You should be uploading your gamemode to a private repository and pulling it down on your server.
 
 ## Black Screen after Authorization?
 
 This means that you either don't have ports setup or the user who is trying to connect does not have UPNP/NAT Enabled which allows for traffic from alt:V to communicate with them. Please ensure that they setup their own router to allow this.
+

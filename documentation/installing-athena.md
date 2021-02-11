@@ -1,7 +1,7 @@
 ---
 description: >-
-    This setup covers exactly how to run Athena after going through the Before
-    Setup page.
+  This setup covers exactly how to run Athena after going through the Before
+  Setup page.
 ---
 
 # Installing Athena
@@ -10,8 +10,8 @@ Ensure that you have followed and completed the ['Before Setup'](https://github.
 
 If you have **NOT DONE** this please select your operating system:
 
--   [Windows](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#windows-10-windows-server)
--   [Linux](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#linux-ubuntu-18-04)
+* [Windows](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#windows-10-windows-server)
+* [Linux](https://github.com/Stuyk/altv-athena/tree/30bd7878ca990db194ff2779bd43eb597b3e006a/documentation/documentation-before-setup.md#linux-ubuntu-18-04)
 
 ### Beginning the alt:V Athena Installation
 
@@ -89,7 +89,7 @@ This argument is for your Gumroad Email. The Email you used when you bought a li
 EMAIL=xyz@email.com
 ```
 
-#### MONGO_URL\*
+#### MONGO\_URL\*
 
 This argument is if you went with a remote MongoDB Server.
 
@@ -97,7 +97,7 @@ This argument is if you went with a remote MongoDB Server.
 MONGO_URL=mongodb://localhost:27017
 ```
 
-#### MONGO_USERNAME\*
+#### MONGO\_USERNAME\*
 
 This argument is if your database has a username anbd password. Highly recommended if you have remote access.
 
@@ -105,7 +105,7 @@ This argument is if your database has a username anbd password. Highly recommend
 MONGO_USERNAME=myUsername
 ```
 
-#### MONGO_PASSWORD\*
+#### MONGO\_PASSWORD\*
 
 This argument is if your databae has a username and password. Highly recommended if you have remote access.
 
@@ -164,3 +164,4 @@ npm run watch-windows
 ```text
 npm run watch-linux
 ```
+

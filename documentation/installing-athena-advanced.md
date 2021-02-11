@@ -1,30 +1,28 @@
 ---
-description: >-
-    This will tell you how to setup a private mirror of Athena.
+description: This will tell you how to setup a private mirror of Athena.
 ---
 
-# Setting Up a Private Mirror Repository
+# Installing Athena Advanced
 
 ## Why?
 
 Let's talk about why someone would want a setup like this.
 
--   You are adding your own code base.
--   You want to stay up to date with the main Athena repository.
--   You want to build on top of Athena.
--   You want to be able to merge in new code.
--   You want to be able to handle merge conflicts from the new code.
+* You are adding your own code base.
+* You want to stay up to date with the main Athena repository.
+* You want to build on top of Athena.
+* You want to be able to merge in new code.
+* You want to be able to handle merge conflicts from the new code.
 
 ## Setup
 
 Create a bare clone of the Athena Repository
 
-```sh
+```bash
 git clone https://github.com/Stuyk/altv-athena --bare altv-athena-bare
 ```
 
-Create a new private repistory on github.
-Let's call it altv-athena-private
+Create a new private repistory on github. Let's call it altv-athena-private
 
 ![](https://i.imgur.com/y1Lxqwn.png)
 
@@ -34,32 +32,32 @@ Copy your URL from github.
 
 Move into the bare directory from your command line tool of choice
 
-```sh
+```bash
 cd altv-athena-bare
 ```
 
 Mirror the bare repository to your private mirror.
 
-```sh
+```bash
 git push --mirror <your_github_url_here>
 ```
 
 Delete the bare repository.
 
-```sh
+```bash
 cd ..
 rmdir altv-athena-bare
 ```
 
 Clone the repository down from github.
 
-```sh
+```bash
 git clone <your_github_url_here>
 ```
 
 Add the upstream of the original athena repository.
 
-```sh
+```bash
 git remote add upstream git@github.com:Stuyk/altv-athena.git
 git remote set-url --push upstream DISABLE
 ```
@@ -68,13 +66,13 @@ git remote set-url --push upstream DISABLE
 
 Instead of being an absolute scrub and merging files in one at at ime, you're going to be using git to pull down changes. Which does things mostly automatically.
 
-Here are some notes before you perform these actions **(SUPER IMPORTANT)**:
+Here are some notes before you perform these actions **\(SUPER IMPORTANT\)**:
 
--   Close All Open Files
--   Push All Current Change to Private Repository
--   Run the two commands below.
+* Close All Open Files
+* Push All Current Change to Private Repository
+* Run the two commands below.
 
-```sh
+```bash
 git fetch upstream
 git pull upstream master
 ```
@@ -91,8 +89,9 @@ If you make changes in your private clone. You can now simply push to the privat
 
 Here's how you can push changes.
 
-```sh
+```bash
 git add .
 git commit -m "What did I commit to the repo"
 git push origin master
 ```
+

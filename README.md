@@ -1,6 +1,5 @@
 ---
-description: >-
-    A subscription based GTA:V Roleplay Framework for alt:V.
+description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
 ---
 
 # Introduction
@@ -10,6 +9,10 @@ description: >-
 This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
 
 Configuration files may be purchased from [Gumroad](https://gumroad.com/products/SKpPN).
+
+## Demo Server
+
+We have a small demo server available for you to test the framework with Administrative capabilities. You can check that out using the alt:V client at [https://altstats.net/server/346](https://altstats.net/server/346)
 
 ## Feature List
 

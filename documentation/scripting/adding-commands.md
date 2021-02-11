@@ -1,6 +1,5 @@
 ---
-description: >-
-    Learn how to add commands to your game mode.
+description: Learn how to add commands to your game mode.
 ---
 
 # Adding Commands
@@ -17,7 +16,7 @@ Create a file and call it anything you want. We're going to call this one `myCom
 
 Open the file and add these two imports at the very top.
 
-```ts
+```typescript
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Permissions } from '../../shared/flags/permissions';
@@ -31,7 +30,7 @@ Inside of an development program such as Visual Studio Code it will give you aut
 
 You're going to write the basis for your first command.
 
-```ts
+```typescript
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Permissions } from '../../shared/flags/permissions';
@@ -47,7 +46,7 @@ Once our file has some basic command functionality written we can then import it
 
 Which can be done by adding:
 
-```ts
+```typescript
 import './myCommand';
 ```
 
@@ -60,3 +59,4 @@ It's quite simple.
 It's highly recommended that you check out the other commands in the folder to see how they function.
 
 There are great examples of processing messages, numbers, ids, etc. that will help you understand the rest.
+
