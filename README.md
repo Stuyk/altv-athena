@@ -12,7 +12,7 @@ Configuration files may be purchased from [Gumroad](https://gumroad.com/products
 
 ## Demo Server
 
-We have a small demo server available for you to test the framework with Administrative capabilities. You can check that out using the alt:V client at [https://altstats.net/server/346](https://altstats.net/server/346)
+We have a small demo server available for you to test the framework with Administrative capabilities. You can check that out using the alt:V client at [https://altstats.net/server/504](https://altstats.net/server/504)
 
 ## Feature List
 
