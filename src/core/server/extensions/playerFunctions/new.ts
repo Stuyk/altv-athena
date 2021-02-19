@@ -4,6 +4,7 @@ import { Database, getDatabase } from 'simplymongo';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 import select from './select';
+import { Vehicle } from '../../../shared/interfaces/Vehicle';
 
 const db: Database = getDatabase();
 
@@ -32,6 +33,15 @@ async function character(
     select.character(p, document);
 }
 
+/**
+ * Adds a vehicle to a player's vehicle list.
+ * @param {alt.Player} p
+ * @param {Vehicle} v
+ * @param {alt.Vector3} position
+ */
+async function vehicle(p: alt.Player, v: Vehicle, position: alt.Vector3) {}
+
 export default {
-    character
+    character,
+    vehicle
 };

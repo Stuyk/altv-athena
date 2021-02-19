@@ -3,10 +3,11 @@ import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 import { Item } from './Item';
+import { Vehicle } from './Vehicle';
 
 export interface Character {
-    _id?: string;
-    account_id: string;
+    _id?: any;
+    account_id: any;
     pos: Vector3;
     name: string;
     cash: number;
@@ -21,6 +22,7 @@ export interface Character {
     inventory: Array<Array<Partial<Item>>>;
     equipment: Array<Partial<Item>>;
     toolbar: Array<Partial<Item>>;
+    vehicles: Array<Partial<Vehicle>>;
 }
 
 export const CharacterDefaults: Partial<Character> = {
@@ -33,5 +35,6 @@ export const CharacterDefaults: Partial<Character> = {
     water: 100,
     isDead: false,
     health: 199,
-    armour: 0
+    armour: 0,
+    vehicles: []
 };

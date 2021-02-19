@@ -2,7 +2,7 @@ import './adminChat';
 import './audioStream';
 import './currency';
 import './death';
-import './getVehicle';
+import './debugVehicle';
 import './item';
 import './noclip';
 import './removebreaditem';

@@ -31,6 +31,15 @@ export enum Vehicle_Door_List {
     TRUNK = 5
 }
 
+export enum Vehicle_Behavior {
+    CONSUMES_FUEL = 1,
+    UNLIMITED_FUEL = 2,
+    NEED_KEY_TO_START = 4,
+    NO_KEY_TO_START = 8,
+    NO_KEY_TO_LOCK = 16,
+    NO_SAVE = 32
+}
+
 export const Vehicle_Events = {
     SET_INTO: 'Vehicle-Set-Into',
     SET_LOCK: 'Vehicle-Set-Lock',

@@ -4,6 +4,19 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.7.0 - February 18-x, 2021
+
+```diff
++ Added Fuel Pumps
++ Added Vehicle Fuel System
++ Added Vehicle Ownership Adding to Players
++ Added Vehicle Ownership Removal from Players
++ Added Owned Vehicle Spawning
++ Added Vehicle Behavior Helpers
++ Added Vehicle Saving / Synchronization
++ Limited Spawned Vehicles at Once to 1
+```
+
 ## 1.6.0 - February 1-10, 2021
 
 ```diff
@@ -390,4 +403,3 @@ description: List of all the changes and current versions.
 + Initial Vehicle System
 + Defined Interfaces for Future Usage
 ```
-

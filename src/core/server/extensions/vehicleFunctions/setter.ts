@@ -1,13 +1,17 @@
 import * as alt from 'alt-server';
 import getter from './getter';
-import { Vehicle_Door_List, Vehicle_Lock_State, Vehicle_State } from '../../../shared/enums/vehicle';
-import { playerFuncs } from '../Player';
+import { Vehicle_Behavior, Vehicle_Door_List, Vehicle_Lock_State, Vehicle_State } from '../../../shared/enums/vehicle';
 import keys from './keys';
 import toggle from './toggle';
+import { DEFAULT_CONFIG } from '../../athena/main';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import { vehicleFuncs } from '../Vehicle';
 
 function lock(v: alt.Vehicle, player: alt.Player, lockState: Vehicle_Lock_State): boolean {
-    if (!getter.isOwner(v, player) && !keys.has(v, player)) {
-        return false;
+    if (!isFlagEnabled(v.behavior, Vehicle_Behavior.NO_KEY_TO_LOCK)) {
+        if (!getter.isOwner(v, player) && !keys.has(v, player)) {
+            return false;
+        }
     }
 
     v.athenaLockState = lockState;
@@ -30,7 +34,7 @@ function doorOpen(
     state: boolean,
     bypass: boolean = false
 ): void {
-    if (!bypass) {
+    if (!isFlagEnabled(v.bodyHealth, Vehicle_Behavior.NO_KEY_TO_LOCK) && !bypass) {
         if (!getter.isOwner(v, player) && !keys.has(v, player) && getter.lockState(v) !== Vehicle_Lock_State.UNLOCKED) {
             return;
         }
@@ -46,24 +50,47 @@ function doorOpen(
     v.setStreamSyncedMeta(stateName, state);
 }
 
-function owner(v: alt.Vehicle, player: alt.Player | number): void {
-    if (player instanceof alt.Player) {
-        v.owner = player.id;
-    } else {
-        v.owner = player;
+function updateFuel(v: alt.Vehicle) {
+    if (isFlagEnabled(v.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
+        v.fuel = 100;
+        v.setSyncedMeta(Vehicle_State.FUEL, v.fuel);
+        return;
     }
 
-    v.setStreamSyncedMeta(Vehicle_State.OWNER, v.owner);
-
-    if (player instanceof alt.Player) {
-        toggle.lock(v, player, false);
+    if (!isNaN(v.data.fuel)) {
+        v.fuel = v.data.fuel;
     } else {
-        toggle.lock(v, null, true);
+        v.fuel = 100;
+        v.data.fuel = 100;
+    }
+
+    v.fuel -= DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
+    if (v.fuel < 0) {
+        v.fuel = 0;
+
+        if (v.engineStatus) {
+            toggle.engine(v, null, true);
+        }
+    }
+
+    v.setStreamSyncedMeta(Vehicle_State.FUEL, v.fuel);
+
+    const owner = alt.Player.all.find((p) => p.valid && p.id === v.player_id);
+    if (!owner) {
+        try {
+            v.destroy();
+        } catch (err) {}
+        return;
+    }
+
+    if (!v.nextSave || Date.now() > v.nextSave) {
+        vehicleFuncs.save.data(owner, v);
+        v.nextSave = Date.now() + Math.floor(Math.random() * 30000) + 10000;
     }
 }
 
 export default {
     lock,
-    owner,
-    doorOpen
+    doorOpen,
+    updateFuel
 };

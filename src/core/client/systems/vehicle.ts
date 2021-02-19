@@ -433,12 +433,17 @@ async function handleVehicleDataChange(vehicle: alt.Vehicle, key: string, value:
 
     // Set Owner
     if (key === Vehicle_State.OWNER) {
-        vehicleFuncs.set.owner(vehicle, value.toString());
+        vehicleFuncs.set.owner(vehicle, value);
         return;
     }
 
     if (key === Vehicle_State.ENGINE) {
         vehicleFuncs.set.engine(vehicle, value);
+        return;
+    }
+
+    if (key === Vehicle_State.FUEL) {
+        vehicleFuncs.set.fuel(vehicle, value);
         return;
     }
 }

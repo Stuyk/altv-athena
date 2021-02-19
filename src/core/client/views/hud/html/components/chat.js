@@ -298,6 +298,8 @@ const chat = Vue.component('chat', {
         }
     },
     unmounted() {
+        alt.log('unmounted functions');
+
         if ('alt' in window) {
             alt.off('chat:Append', this.appendMessage);
             alt.off('chat:Focus', this.focusChat);

@@ -1,13 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vehicle_Door_List, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
+import { BaseHUD } from '../../views/hud/hud';
 
 /**
  * Set the owner of this vehicle locally.
  * @param {*} id
  * @memberof Vehicle
  */
-function owner(v: alt.Vehicle, id: string | number): void {
+function owner(v: alt.Vehicle, id: number): void {
     v.owner = id;
 }
 
@@ -19,6 +20,10 @@ function owner(v: alt.Vehicle, id: string | number): void {
 function engine(v: alt.Vehicle, value: boolean): void {
     v.engineStatus = value;
     native.setVehicleEngineOn(v.scriptID, value, false, false);
+
+    if (alt.Player.local.vehicle === v) {
+        BaseHUD.updateFuel(v.fuel);
+    }
 }
 
 /**
@@ -65,10 +70,19 @@ function lockStatus(v: alt.Vehicle, status: Vehicle_Lock_State | number) {
     v.lockStatus = status;
 }
 
+function fuel(v: alt.Vehicle, value: number) {
+    v.fuel = value;
+
+    if (alt.Player.local.vehicle.id === v.id) {
+        BaseHUD.updateFuel(value);
+    }
+}
+
 export default {
     allDoorsClosed,
     doorState,
     engine,
+    fuel,
     owner,
     lockStatus
 };

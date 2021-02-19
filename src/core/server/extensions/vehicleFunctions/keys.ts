@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Vehicle_Lock_State, Vehicle_Lock_States, Vehicle_State } from '../../../shared/enums/vehicle';
+import { Vehicle_State } from '../../../shared/enums/vehicle';
 
 function give(v: alt.Vehicle, target: alt.Player): boolean {
     if (!v.keys) {

@@ -4,6 +4,7 @@ import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } 
 import { getPlayersByGridSpace } from '../utility/filters';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
+import './fuel';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
@@ -13,6 +14,7 @@ alt.onClient(Vehicle_Events.SET_ENGINE, handleSetEngine);
 function handleEnterVehicle(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
     const actualSeat = seat - 1;
     vehicleFuncs.setter.doorOpen(vehicle, player, actualSeat, false);
+    player.lastEnteredVehicleID = vehicle.id;
 }
 
 function handleSetEngine(player: alt.Player): void {

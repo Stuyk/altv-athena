@@ -16,5 +16,8 @@ export const SHARED_CONFIG = {
     // Audio
     MAX_AUDIO_STREAM_DISTANCE: 50, // DO NOT GO HIGHER THAN 100
     // Voice
-    VOICE_ON: false
+    VOICE_ON: false,
+    // Vehicle
+    FUEL_TIME: 15000,
+    FUEL_PRICE: 2
 };

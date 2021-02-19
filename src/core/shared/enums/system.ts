@@ -4,6 +4,7 @@ export enum SYSTEM_EVENTS {
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',
     INTERACTION_ATM_ACTION = 'atm:Action',
+    INTERACTION_FUEL = 'fuel:Action',
     //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',

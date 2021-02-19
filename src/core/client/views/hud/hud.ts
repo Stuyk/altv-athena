@@ -45,6 +45,10 @@ export class BaseHUD {
         BaseHUD.view.emit('hud:Seatbelt', value);
     }
 
+    static updateFuel(value: number) {
+        BaseHUD.view.emit('hud:SetFuel', value);
+    }
+
     static updateInteract(value: boolean) {
         BaseHUD.view.emit('hud:SetInteract', value);
     }
