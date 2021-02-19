@@ -297,13 +297,13 @@ const chat = Vue.component('chat', {
             }, 1000);
         }
     },
-    unmounted() {
-        alt.log('unmounted functions');
-
-        if ('alt' in window) {
-            alt.off('chat:Append', this.appendMessage);
-            alt.off('chat:Focus', this.focusChat);
-            alt.off('chat:PopulateCommands', this.populateCommands);
+    beforeDestroy() {
+        if (!('alt' in window)) {
+            return;
         }
+
+        alt.off('chat:Append', this.appendMessage);
+        alt.off('chat:Focus', this.focusChat);
+        alt.off('chat:PopulateCommands', this.populateCommands);
     }
 });

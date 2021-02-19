@@ -97,20 +97,22 @@ const status = Vue.component('status', {
             this.objective = 'hello this is an objective text';
         }
     },
-    unmounted() {
-        if ('alt' in window) {
-            alt.off('hud:SetFood', this.setFood);
-            alt.off('hud:SetWater', this.setWater);
-            alt.off('hud:SetFuel', this.setFuel);
-            alt.off('hud:SetVehicle', this.setVehicle);
-            alt.off('hud:Speed', this.setSpeed);
-            alt.off('hud:SetLock', this.setLock);
-            alt.off('hud:SetEngine', this.setEngine);
-            alt.off('hud:Seatbelt', this.setSeatbelt);
-            alt.off('hud:SetInteract', this.setInteract);
-            alt.off('hud:SetLights', this.setLights);
-            alt.off('hud:SetObjective', this.setObjective);
+    beforeDestroy() {
+        if (!('alt' in window)) {
+            return;
         }
+
+        alt.off('hud:SetFood', this.setFood);
+        alt.off('hud:SetWater', this.setWater);
+        alt.off('hud:SetFuel', this.setFuel);
+        alt.off('hud:SetVehicle', this.setVehicle);
+        alt.off('hud:Speed', this.setSpeed);
+        alt.off('hud:SetLock', this.setLock);
+        alt.off('hud:SetEngine', this.setEngine);
+        alt.off('hud:Seatbelt', this.setSeatbelt);
+        alt.off('hud:SetInteract', this.setInteract);
+        alt.off('hud:SetLights', this.setLights);
+        alt.off('hud:SetObjective', this.setObjective);
     },
     template: `
         <div class="statusWrapper pa-3">
