@@ -6,7 +6,7 @@
         "build": "npm run clean && tsc && npm run copy",
         "copy": "copyfiles \"src/**/*\" --exclude=**/*.ts --up 1 ./resources",
         "clean": "rimraf resources/**/*.js resources/**/*.wasm",
-        "update": "npm run kill && altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
+        "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
         "linux": "npm run build && ./start.sh",
         "watch-windows": "tsc-watch --onSuccess \"npm run watch-handle-windows\"",
