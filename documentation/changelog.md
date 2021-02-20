@@ -15,6 +15,8 @@ description: List of all the changes and current versions.
 + Added Vehicle Behavior Helpers
 + Added Vehicle Saving / Synchronization
 + Limited Spawned Vehicles at Once to 1
++ Fixed Vehicle Fuel Calculations
++ Fixed Vehicle Consuming Fuel without Engine On
 ```
 
 ## 1.6.0 - February 1-10, 2021

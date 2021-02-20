@@ -12,9 +12,10 @@ alt.on(SYSTEM_EVENTS.INTERACTION_FUEL, handleFuel);
 
 // player.id to retrieve
 const maximumFuel = 100;
-const fuelTimes: { [key: number]: FuelStatus } = {};
+const fuelTimes: FuelStatus[] = [];
 
 interface FuelStatus {
+    id: number;
     vehicle: alt.Vehicle;
     endTime: number;
     maxCost: number;
@@ -33,15 +34,22 @@ function handleFuel(player: alt.Player, pos: alt.IVector3) {
         return;
     }
 
-    if (fuelTimes[player.id]) {
-        handleFinishFuel(player, fuelTimes[player.id]);
-        delete fuelTimes[player.id];
+    const index = fuelTimes.findIndex((fuelStatus) => fuelStatus.id === player.id);
+
+    if (index !== -1) {
+        handleFinishFuel(player, fuelTimes[index]);
+        fuelTimes.splice(index, 1);
         return;
     }
 
     const lastVehicle = alt.Vehicle.all.find((v) => v.id === player.lastEnteredVehicleID);
     if (!lastVehicle) {
         playerFuncs.emit.notification(player, `~r~Could not find a close enough vehicle.`);
+        return;
+    }
+
+    if (lastVehicle.fuel >= 95) {
+        playerFuncs.emit.notification(player, `~r~Already close to maximum capacity.`);
         return;
     }
 
@@ -52,6 +60,11 @@ function handleFuel(player: alt.Player, pos: alt.IVector3) {
 
     if (isFlagEnabled(lastVehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
         playerFuncs.emit.notification(player, `~r~Vehicle does not need fuel.`);
+        return;
+    }
+
+    if (player.data.cash <= 0) {
+        playerFuncs.emit.notification(player, `~r~No cash on hand.`);
         return;
     }
 
@@ -77,22 +90,19 @@ function handleFuel(player: alt.Player, pos: alt.IVector3) {
         `You will pay $${maximumCost} for ${missingFuel} to top off. Press again to cancel.`
     );
 
-    fuelTimes[player.id] = {
-        endTime: maximumTime,
+    fuelTimes.push({
+        id: player.id,
+        endTime: Date.now() + maximumTime,
         difFuel: missingFuel,
         maxCost: maximumCost,
         vehicle: lastVehicle,
         timeout: alt.setTimeout(() => {
             handleFinishFuel(player, fuelTimes[player.id]);
         }, maximumTime)
-    };
+    });
 }
 
 function handleFinishFuel(player: alt.Player, fuelStatus: FuelStatus) {
-    if (!fuelTimes[player.id]) {
-        return;
-    }
-
     alt.clearTimeout(fuelStatus.timeout);
     if (player.data.cash < fuelStatus.maxCost) {
         playerFuncs.emit.notification(player, `~r~You were unable to purchase fuel.`);
@@ -109,9 +119,14 @@ function handleFinishFuel(player: alt.Player, fuelStatus: FuelStatus) {
     }
 
     const timeRemaining = fuelStatus.endTime - Date.now();
-    const pctFuelTaken = (timeRemaining / SHARED_CONFIG.FUEL_TIME) * 100;
+    const pctFuelTaken = timeRemaining / SHARED_CONFIG.FUEL_TIME;
     const totalFuel = pctFuelTaken * fuelStatus.difFuel;
     const totalCost = totalFuel * SHARED_CONFIG.FUEL_PRICE;
+
+    if (totalCost <= 0) {
+        playerFuncs.emit.notification(player, `~r~Something went wrong.`);
+        return;
+    }
 
     playerFuncs.currency.sub(player, CurrencyTypes.CASH, totalCost);
     fuelStatus.vehicle.fuel += totalFuel;

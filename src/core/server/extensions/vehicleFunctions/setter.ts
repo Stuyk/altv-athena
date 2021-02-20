@@ -57,6 +57,11 @@ function updateFuel(v: alt.Vehicle) {
         return;
     }
 
+    if (!v.engineStatus) {
+        v.setSyncedMeta(Vehicle_State.FUEL, v.fuel);
+        return;
+    }
+
     if (!isNaN(v.data.fuel)) {
         v.fuel = v.data.fuel;
     } else {
