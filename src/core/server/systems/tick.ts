@@ -58,7 +58,7 @@ function handlePing(player: alt.Player): void {
         }
 
         if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {
-            player.vehicle.nextSave = Date.now() + Math.floor(Math.random() * 30000) + 10000;
+            player.vehicle.nextSave = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_SAVES;
             const owner = alt.Player.all.find((p) => p.id === player.vehicle.player_id);
             if (owner) {
                 vehicleFuncs.save.data(player, player.vehicle);
