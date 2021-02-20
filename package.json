@@ -8,12 +8,11 @@
         "clean": "rimraf resources/**/*.js resources/**/*.wasm",
         "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
-        "linux": "npm run build &&  ./start.sh",
+        "linux": "npm run build && ./start.sh",
         "watch-windows": "tsc-watch --onSuccess \"npm run watch-handle-windows\"",
         "watch-linux": "tsc-watch --onSuccess \"npm run watch-handle-linux\"",
         "watch-handle-windows": "npm run copy && altv-server.exe",
-        "watch-handle-linux": "npm run copy && ./start.sh",
-        "kill": "kill-port 7788"
+        "watch-handle-linux": "npm run copy && ./start.sh"
     },
     "author": "stuyk",
     "devDependencies": {
