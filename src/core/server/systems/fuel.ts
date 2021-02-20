@@ -114,7 +114,10 @@ function handleFinishFuel(player: alt.Player, fuelStatus: FuelStatus) {
         fuelStatus.vehicle.fuel = 100;
         fuelStatus.vehicle.data.fuel = 100;
         fuelStatus.vehicle.setStreamSyncedMeta(Vehicle_State.FUEL, fuelStatus.vehicle.fuel);
-        playerFuncs.emit.notification(player, `You paid ~r~$${fuelStatus.maxCost}~w~ for ${fuelStatus.difFuel} Units`);
+        playerFuncs.emit.notification(
+            player,
+            `You paid ~r~$${fuelStatus.maxCost.toFixed(2)}~w~ for ${fuelStatus.difFuel.toFixed(2)} Units`
+        );
         return;
     }
 
@@ -141,5 +144,5 @@ function handleFinishFuel(player: alt.Player, fuelStatus: FuelStatus) {
     }
 
     fuelStatus.vehicle.setStreamSyncedMeta(Vehicle_State.FUEL, fuelStatus.vehicle.fuel);
-    playerFuncs.emit.notification(player, `You paid $${totalCost} for ${totalFuel}`);
+    playerFuncs.emit.notification(player, `You paid $${totalCost.toFixed(2)} for ${totalFuel.toFixed(2)}`);
 }

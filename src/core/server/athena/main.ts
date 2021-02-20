@@ -71,5 +71,5 @@ export const DEFAULT_CONFIG = {
     ],
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
-    FUEL_LOSS_PER_PLAYER_TICK: 25 // Happens every 10s
+    FUEL_LOSS_PER_PLAYER_TICK: 0.1 // Happens every 10s
 };
