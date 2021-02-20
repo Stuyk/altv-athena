@@ -53,7 +53,7 @@ function handleFuel(player: alt.Player, pos: alt.IVector3) {
         return;
     }
 
-    if (distance2d(lastVehicle.pos, pos) > 3) {
+    if (distance2d(lastVehicle.pos, pos) > 5) {
         playerFuncs.emit.notification(player, `~r~Vehicle is too far away from pump.`);
         return;
     }
