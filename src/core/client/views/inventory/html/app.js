@@ -67,12 +67,22 @@ const app = new Vue({
         },
         updateGround(groundItems) {
             const newGround = new Array(8).fill(null);
-            groundItems.forEach((item) => {
-                if (!item) {
+
+            if (groundItems.length <= 0) {
+                this.ground = newGround;
+                return;
+            }
+
+            groundItems.forEach((groundItem, index) => {
+                if (index >= newGround.length) {
                     return;
                 }
 
-                newGround[item.slot] = item;
+                if (!groundItem) {
+                    return;
+                }
+
+                newGround[index] = groundItem.item;
             });
 
             this.ground = newGround;
@@ -101,28 +111,6 @@ const app = new Vue({
             });
 
             this.toolbar = newToolbar;
-        },
-        updateGround(groundItems) {
-            const newGround = new Array(8).fill(null);
-
-            if (groundItems.length <= 0) {
-                this.ground = newGround;
-                return;
-            }
-
-            groundItems.forEach((groundItem, index) => {
-                if (index >= newGround.length) {
-                    return;
-                }
-
-                if (!groundItem) {
-                    return;
-                }
-
-                newGround[index] = groundItem.item;
-            });
-
-            this.ground = newGround;
         },
         setIndex(value) {
             this.pageIndex = value;
