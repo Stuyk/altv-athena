@@ -4,20 +4,72 @@ import { TextLabel } from '../../shared/interfaces/TextLabel';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText3D } from '../utility/text';
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, handleAddTextLabels);
-
 let addedLabels: Array<TextLabel> = [];
 let interval;
+let isRemoving = false;
 
-function handleAddTextLabels(textlabels: Array<TextLabel>) {
-    addedLabels = addedLabels.concat(textlabels);
+export class TextlabelController {
+    /**
+     * Add a single text label.
+     * @static
+     * @param {TextLabel} label
+     * @memberof MarkerController
+     */
+    static append(label: TextLabel) {
+        if (!label.uid) {
+            alt.logError(`(${JSON.stringify(label.data)}) Label is missing uid.`);
+            return;
+        }
 
-    if (!interval) {
-        interval = alt.setInterval(handleDrawMarkers, 0);
+        addedLabels.push(label);
+
+        if (!interval) {
+            interval = alt.setInterval(handleDrawTextlabels, 0);
+        }
+    }
+
+    /**
+     * Used to populate server-side markers.
+     * @static
+     * @param {Array<Marker>} markers
+     * @memberof MarkerController
+     */
+    static populate(markers: Array<TextLabel>) {
+        addedLabels = addedLabels.concat(markers);
+
+        if (!interval) {
+            interval = alt.setInterval(handleDrawTextlabels, 0);
+        }
+    }
+
+    /**
+     * Remove a marker from being drawn.
+     * @static
+     * @param {string} uid
+     * @return {*}
+     * @memberof MarkerController
+     */
+    static remove(uid: string) {
+        isRemoving = true;
+
+        const index = addedLabels.findIndex((marker) => marker.uid === uid);
+        if (index <= -1) {
+            isRemoving = false;
+            return;
+        }
+
+        const label = addedLabels[index];
+        if (!label) {
+            isRemoving = false;
+            return;
+        }
+
+        addedLabels.splice(index, 1);
+        isRemoving = false;
     }
 }
 
-function handleDrawMarkers() {
+function handleDrawTextlabels() {
     if (alt.Player.local.isMenuOpen) {
         return;
     }
@@ -39,3 +91,7 @@ function handleDrawMarkers() {
         drawText3D(label.data, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 }
+
+alt.onServer(SYSTEM_EVENTS.APPEND_TEXTLABELS, TextlabelController.append);
+alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, TextlabelController.populate);
+alt.onServer(SYSTEM_EVENTS.REMOVE_TEXTLABEL, TextlabelController.remove);

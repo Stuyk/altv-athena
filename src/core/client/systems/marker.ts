@@ -4,20 +4,76 @@ import { Marker } from '../../shared/interfaces/Marker';
 import { distance2d } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, handleAddMarkers);
-
 let addedMarkers: Array<Marker> = [];
+let isRemoving = false;
 let interval;
 
-function handleAddMarkers(markers: Array<Marker>) {
-    addedMarkers = addedMarkers.concat(markers);
+export class MarkerController {
+    /**
+     * Add a single marker.
+     * @static
+     * @param {Marker} marker
+     * @memberof MarkerController
+     */
+    static append(marker: Marker) {
+        if (!marker.uid) {
+            alt.logError(`(${JSON.stringify(marker.pos)}) Marker is missing uid.`);
+            return;
+        }
 
-    if (!interval) {
-        interval = alt.setInterval(handleDrawMarkers, 0);
+        addedMarkers.push(marker);
+
+        if (!interval) {
+            interval = alt.setInterval(handleDrawMarkers, 0);
+        }
+    }
+
+    /**
+     * Used to populate server-side markers.
+     * @static
+     * @param {Array<Marker>} markers
+     * @memberof MarkerController
+     */
+    static populate(markers: Array<Marker>) {
+        addedMarkers = addedMarkers.concat(markers);
+
+        if (!interval) {
+            interval = alt.setInterval(handleDrawMarkers, 0);
+        }
+    }
+
+    /**
+     * Remove a marker from being drawn.
+     * @static
+     * @param {string} uid
+     * @return {*}
+     * @memberof MarkerController
+     */
+    static remove(uid: string) {
+        isRemoving = true;
+
+        const index = addedMarkers.findIndex((marker) => marker.uid === uid);
+        if (index <= -1) {
+            isRemoving = false;
+            return;
+        }
+
+        const marker = addedMarkers[index];
+        if (!marker) {
+            isRemoving = false;
+            return;
+        }
+
+        addedMarkers.splice(index, 1);
+        isRemoving = false;
     }
 }
 
 function handleDrawMarkers() {
+    if (isRemoving) {
+        return;
+    }
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }
@@ -43,3 +99,7 @@ function handleDrawMarkers() {
         drawMarker(marker.type, marker.pos, marker.scale, marker.color);
     }
 }
+
+alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, MarkerController.populate);
+alt.onServer(SYSTEM_EVENTS.APPEND_MARKER, MarkerController.append);
+alt.onServer(SYSTEM_EVENTS.REMOVE_MARKER, MarkerController.remove);

@@ -6,4 +6,5 @@ export interface Marker {
     color: { r: number; g: number; b: number; a: number };
     scale?: Vector3;
     maxDistance?: number;
+    uid?: string;
 }
