@@ -23,6 +23,7 @@ description: List of all the changes and current versions.
 + Added Client Plugins Folder with Basic Example
 + Added Documentation for Client Plugins
 + Added Custom Job Preview Panel
++ Added /quitjob
 ```
 
 ## 1.6.0 - February 1-10, 2021

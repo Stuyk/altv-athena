@@ -4,6 +4,7 @@ import './currency';
 import './death';
 import './debugVehicle';
 import './item';
+import './job';
 import './noclip';
 import './removebreaditem';
 import './revive';

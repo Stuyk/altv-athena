@@ -99,7 +99,10 @@ export class Job {
     }
 
     quit(reason: string) {
-        // Needs to wipe current player job data.
+        if (JobInstances[this.player.data.name]) {
+            delete JobInstances[this.player.data.name];
+        }
+
         playerFuncs.emit.message(this.player, reason);
     }
 
@@ -294,4 +297,14 @@ function handleVerify(player: alt.Player) {
 
 function handleJobAction(player: alt.Player, triggerName: string) {
     alt.emit(triggerName, player);
+}
+
+/**
+ * Get the player's current Job Instance.
+ * @export
+ * @param {alt.Player} player
+ * @return {Job | null}  {(Job | null)}
+ */
+export function getPlayerJob(player: alt.Player): Job | null {
+    return JobInstances[player.data.name];
 }
