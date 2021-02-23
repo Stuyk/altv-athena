@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vehicle_Door_List, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
-import { BaseHUD } from '../../views/hud/hud';
+import { BaseHUD, HudEventNames } from '../../views/hud/hud';
 
 /**
  * Set the owner of this vehicle locally.
@@ -22,7 +22,7 @@ function engine(v: alt.Vehicle, value: boolean): void {
     native.setVehicleEngineOn(v.scriptID, value, false, false);
 
     if (alt.Player.local.vehicle === v) {
-        BaseHUD.updateFuel(v.fuel);
+        BaseHUD.setHudStatus(HudEventNames.Fuel, v.fuel);
     }
 }
 
@@ -74,7 +74,7 @@ function fuel(v: alt.Vehicle, value: number) {
     v.fuel = value;
 
     if (alt.Player.local.vehicle.id === v.id) {
-        BaseHUD.updateFuel(value);
+        BaseHUD.setHudStatus(HudEventNames.Fuel, value);
     }
 }
 

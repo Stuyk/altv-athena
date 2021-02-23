@@ -13,6 +13,7 @@ import {
     setZPos
 } from '../../utility/camera';
 
+// const url = `http://127.0.0.1:5500/src/core/client/views/clothing/html/index.html`;
 const url = `http://resource/client/views/clothing/html/index.html`;
 let view: View;
 let open = false;
@@ -139,8 +140,8 @@ export function handlePopulateData(components: Array<ClothingComponent>) {
                 }
             }
 
-            component.maxDrawables[index] = totalDrawables;
-            component.maxTextures[index] = totalTextures;
+            component.maxDrawables[index] = totalDrawables - 1;
+            component.maxTextures[index] = totalTextures - 1;
         }
     }
 

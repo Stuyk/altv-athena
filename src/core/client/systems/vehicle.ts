@@ -13,7 +13,7 @@ import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
-import { BaseHUD } from '../views/hud/hud';
+import { BaseHUD, HudEventNames } from '../views/hud/hud';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -53,7 +53,7 @@ export class VehicleController {
             native.setPedConfigFlag(alt.Player.local.scriptID, 35, true);
         }
 
-        BaseHUD.updateSeatbelt(true);
+        BaseHUD.setHudStatus(HudEventNames.Seatbelt, true);
     }
 
     /**

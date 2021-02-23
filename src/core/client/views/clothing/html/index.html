@@ -27,25 +27,25 @@
                         <div class="contentWrapper pt-3 pb-3">
                             <template v-if="components[componentIndex].drawables.length <= 1">
                                 <div class="group mb-3">
-                                    <v-chip class="light-blue--text mr-3" label outlined>{{ components[componentIndex].drawables[0] }}/{{ components[componentIndex].maxDrawables[0] }}</v-chip>
-                                    <div class="subtitle-2 flex-grow-1">
+                                    <div class="caption flex-grow-1">
                                         Drawable
                                     </div>
                                     <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(0, 'drawables')">
                                         <v-icon small>icon-chevron-left</v-icon>
                                     </v-btn>
+                                    <v-chip class="overline white--text mr-3 center" style="max-width: 100px; min-width: 100px;" outlined label>{{ components[componentIndex].drawables[0] }}/{{ components[componentIndex].maxDrawables[0] }}</v-chip>
                                     <v-btn class="light-blue--text" outlined text small @click="incrementComponent(0, 'drawables')">
                                         <v-icon small>icon-chevron-right</v-icon>
                                     </v-btn>
                                 </div>
                                 <div class="group">
-                                    <v-chip class="light-blue--text mr-3" label outlined>{{ components[componentIndex].textures[0] }}/{{ components[componentIndex].maxTextures[0] }}</v-chip>
-                                    <div class="subtitle-2 flex-grow-1">
+                                    <div class="caption flex-grow-1 pr-6 pl-6">
                                         Texture
                                     </div>
                                     <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(0, 'textures')">
                                         <v-icon small>icon-chevron-left</v-icon>
                                     </v-btn>
+                                    <v-chip class="overline white--text mr-3 flex-grow-1 center" style="max-width: 100px; min-width: 100px;" outlined label>{{ components[componentIndex].textures[0] }}/{{ components[componentIndex].maxTextures[0] }}</v-chip>
                                     <v-btn class="light-blue--text" outlined text small @click="incrementComponent(0, 'textures')">
                                         <v-icon small>icon-chevron-right</v-icon>
                                     </v-btn>
@@ -53,29 +53,29 @@
                             </template>
                             <template v-else>
                                 <div class="groupWrapper mb-3" v-for="(drawable, index) in components[componentIndex].drawables" :key="index">
-                                    <div class="caption mb-3">
+                                    <div class="overline mb-3">
                                         {{ shirtNames[index] }}
                                     </div>
                                     <div class="group mb-3">
-                                        <v-chip class="light-blue--text mr-3" label outlined>{{ components[componentIndex].drawables[index] }}/{{ components[componentIndex].maxDrawables[index] }}</v-chip>
-                                        <div class="subtitle-2 flex-grow-1">
+                                        <div class="caption flex-grow-1 mr-3">
                                             Drawable
                                         </div>
                                         <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(index, 'drawables')">
                                             <v-icon small>icon-chevron-left</v-icon>
                                         </v-btn>
+                                        <v-chip class="light-white--text mr-3 flex-grow-1 center" style="max-width: 100px; min-width: 100px;" label outlined>{{ components[componentIndex].drawables[index] }}/{{ components[componentIndex].maxDrawables[index] }}</v-chip>
                                         <v-btn class="light-blue--text" outlined text small @click="incrementComponent(index, 'drawables')">
                                             <v-icon small>icon-chevron-right</v-icon>
                                         </v-btn>
                                     </div>
                                     <div class="group">
-                                        <v-chip class="light-blue--text mr-3" label outlined>{{ components[componentIndex].textures[index] }}/{{ components[componentIndex].maxTextures[index] }}</v-chip>
-                                        <div class="subtitle-2 flex-grow-1">
+                                        <div class="caption flex-grow-1 mr-3">
                                             Texture
                                         </div>
                                         <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(index, 'textures')">
                                             <v-icon small>icon-chevron-left</v-icon>
                                         </v-btn>
+                                        <v-chip class="white--text mr-3 center" style="max-width: 100px; min-width: 100px;" label outlined>{{ components[componentIndex].textures[index] }}/{{ components[componentIndex].maxTextures[index] }}</v-chip>
                                         <v-btn class="light-blue--text" outlined text small @click="incrementComponent(index, 'textures')">
                                             <v-icon small>icon-chevron-right</v-icon>
                                         </v-btn>
