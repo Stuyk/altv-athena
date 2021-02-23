@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
@@ -6,6 +7,7 @@ import { playerFuncs } from '../extensions/Player';
 
 const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
+alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
 
 export type PlayerDataName = string;
 
@@ -288,4 +290,8 @@ function handleVerify(player: alt.Player) {
     alt.setTimeout(() => {
         instance.checkObjective();
     }, 0);
+}
+
+function handleJobAction(player: alt.Player, triggerName: string) {
+    alt.emit(triggerName, player);
 }

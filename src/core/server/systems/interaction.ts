@@ -82,7 +82,7 @@ export class InteractionController {
      */
     static addInteraction(
         identifierAndEventName: string,
-        position: alt.Vector3,
+        position: alt.IVector3,
         range: number,
         activationText: string,
         blip: Blip,

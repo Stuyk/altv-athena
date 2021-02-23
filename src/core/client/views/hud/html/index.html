@@ -11,12 +11,13 @@
         <div id="player" style="opacity: 0; position: fixed; right: 5000px;"></div>
         <div id="app" v-if="show" v-cloak>
             <v-app>
+                <template v-if="leaderboard">
+                    <leaderboard v-if="leaderboard" v-bind:players="players"></leaderboard>
+                </template>
+
                 <template v-if="!leaderboard">
                     <chat></chat>
                     <status></status>
-                </template>
-                <template v-else>
-                    <leaderboard v-if="leaderboard" v-bind:players="players"></leaderboard>
                 </template>
             </v-app>
         </div>
