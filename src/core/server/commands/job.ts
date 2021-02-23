@@ -18,5 +18,5 @@ function handleCommand(player: alt.Player): void {
         return;
     }
 
-    job.quit('You have the job at hand.');
+    job.quit('You have quit the job at hand.');
 }
