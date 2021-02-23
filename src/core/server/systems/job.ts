@@ -103,6 +103,7 @@ export class Job {
             delete JobInstances[this.player.data.name];
         }
 
+        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
         playerFuncs.emit.message(this.player, reason);
     }
 
