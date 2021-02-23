@@ -10,7 +10,10 @@ import './controllers/chatController';
 import './controllers/helpController';
 import './controllers/leaderBoardController';
 
+// const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
 const url = `http://resource/client/views/hud/html/index.html`;
+
+let commandList: Array<any> = [];
 
 export enum HudEventNames {
     SetVehicle = 'hud:SetVehicle',
@@ -36,6 +39,7 @@ export class BaseHUD {
             BaseHUD.view.isVisible = false;
             BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
+            BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {
@@ -58,15 +62,26 @@ export class BaseHUD {
             BaseHUD.view.emit(HudEventNames.Lock, alt.Player.local.vehicle.lockStatus);
             BaseHUD.view.emit(HudEventNames.Engine, alt.Player.local.vehicle.engineStatus);
 
-            const [lightsOn, highBeams] = native.getVehicleLightsState(alt.Player.local.vehicle.scriptID, false, false);
-            BaseHUD.view.emit(HudEventNames.Lights, lightsOn);
+            native.getVehicleLightsState;
+
+            const [_, lightsOn, highBeams] = native.getVehicleLightsState(
+                alt.Player.local.vehicle.scriptID,
+                false,
+                false
+            );
+
+            BaseHUD.view.emit(HudEventNames.Lights, lightsOn || highBeams ? true : false);
         }
     }
 
-    static populateCommands(commandList: Array<Partial<Command>>): void {
+    static populateCommands(_commandList: Array<Partial<Command>>): void {
+        commandList = _commandList;
         handleFreezePlayer(false);
-
+        BaseHUD.updateCommands();
         alt.log(`[Athena] Registered Commands: ${commandList.length}`);
+    }
+
+    static updateCommands() {
         BaseHUD.view.emit('chat:PopulateCommands', commandList);
         BaseHUD.view.isVisible = true;
     }

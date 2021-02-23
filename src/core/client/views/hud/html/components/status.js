@@ -3,7 +3,7 @@ const status = Vue.component('status', {
         return {
             // On Foot
             food: 100,
-            water: 50,
+            water: 100,
             // Vehicle
             fuel: 25,
             lock: 100,

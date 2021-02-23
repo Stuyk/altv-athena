@@ -75,6 +75,10 @@ const chat = Vue.component('chat', {
         },
         focusChat() {
             this.chatActive = true;
+
+            if ('alt' in window) {
+                alt.emit('commands:Update');
+            }
         },
         handleEscape() {
             this.chatActive = false;
