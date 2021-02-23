@@ -125,6 +125,15 @@ function water(p: alt.Player): void {
     save.field(p, 'water', p.data.water);
 }
 
+function vehicles(p: alt.Player): void {
+    if (!p.data.vehicles) {
+        emit.meta(p, 'vehicles', []);
+        return;
+    }
+
+    emit.meta(p, 'vehicles', p.data.vehicles);
+}
+
 export default {
     appearance,
     currencyData,
@@ -132,6 +141,7 @@ export default {
     inventory,
     syncedMeta,
     time,
+    vehicles,
     water,
     weather
 };

@@ -27,6 +27,11 @@ description: List of all the changes and current versions.
 + Added PgUp & PgDn for Chat
 + Fixed Clothing Menu Drawables / Textures Overflow
 + Fixed Design Choices for Clothing Menu
++ Fixed Command Helper Issues
++ Small HUD Tweaks
++ Vehicle Spawn Interface
++ Vehicles Meta for Vehicle Spawn Interface
++ Vehicle Ownership for Spawned Vehicles
 ```
 
 ## 1.6.0 - February 1-10, 2021

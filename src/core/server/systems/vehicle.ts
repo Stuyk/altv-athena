@@ -1,15 +1,19 @@
 import * as alt from 'alt-server';
-import { AnimationFlags } from '../../shared/flags/animation';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
-import { getPlayersByGridSpace } from '../utility/filters';
+import { AnimationFlags } from '../../shared/flags/animation';
+import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
+import { getPlayersByGridSpace } from '../utility/filters';
 import './fuel';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
 alt.onClient(Vehicle_Events.SET_DOOR, handleSetDoor);
 alt.onClient(Vehicle_Events.SET_ENGINE, handleSetEngine);
+alt.onClient(SYSTEM_EVENTS.VEHICLES_VIEW_SPAWN, handleSpawn);
+alt.onClient(SYSTEM_EVENTS.VEHICLES_VIEW_DESPAWN, handleDespawn);
 
 function handleEnterVehicle(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
     const actualSeat = seat - 1;
@@ -72,4 +76,42 @@ function handleSetDoor(player: alt.Player, vehicle: alt.Vehicle, doorIndex: Vehi
     const doorName = `DOOR_${Vehicle_Door_List[doorIndex]}`;
     const oppositeValue = !vehicle.getStreamSyncedMeta(Vehicle_State[doorName]) ? true : false;
     vehicleFuncs.setter.doorOpen(vehicle, player, doorIndex, oppositeValue);
+}
+
+function handleSpawn(player: alt.Player, index: number) {
+    if (!player.data.vehicles) {
+        return;
+    }
+
+    if (index <= -1) {
+        return;
+    }
+
+    if (index >= player.data.vehicles.length) {
+        return;
+    }
+
+    const vehicleData = player.data.vehicles[index];
+    if (!vehicleData) {
+        return;
+    }
+
+    vehicleFuncs.new.spawn(player, vehicleData as Vehicle);
+}
+
+function handleDespawn(player: alt.Player) {
+    if (!player.data.vehicles) {
+        return;
+    }
+
+    if (player.lastVehicleID === null || player.lastVehicleID === undefined) {
+        return;
+    }
+
+    const vehicle = alt.Vehicle.all.find((veh) => veh && veh.id === player.lastVehicleID);
+    if (!vehicle) {
+        return;
+    }
+
+    vehicleFuncs.new.despawn(vehicle.id, player);
 }

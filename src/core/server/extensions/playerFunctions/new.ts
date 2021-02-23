@@ -33,15 +33,6 @@ async function character(
     select.character(p, document);
 }
 
-/**
- * Adds a vehicle to a player's vehicle list.
- * @param {alt.Player} p
- * @param {Vehicle} v
- * @param {alt.Vector3} position
- */
-async function vehicle(p: alt.Player, v: Vehicle, position: alt.Vector3) {}
-
 export default {
-    character,
-    vehicle
+    character
 };

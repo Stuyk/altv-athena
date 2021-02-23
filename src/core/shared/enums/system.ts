@@ -50,6 +50,9 @@ export enum SYSTEM_EVENTS {
     //
     TICKS_START = 'ticks:Start',
     //
+    VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',
+    VEHICLES_VIEW_DESPAWN = 'vehicles:Despawn',
+    //
     WORLD_UPDATE_TIME = 'time:Update',
     WORLD_UPDATE_WEATHER = 'weather:Update',
     //

@@ -63,12 +63,14 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             emit.meta(p, 'isDead', false);
         }
 
+        // Synchronization
         sync.currencyData(p);
         sync.weather(p);
         sync.time(p);
         sync.inventory(p);
         sync.water(p);
         sync.food(p);
+        sync.vehicles(p);
 
         // Propagation
         ChatController.populateCommands(p);

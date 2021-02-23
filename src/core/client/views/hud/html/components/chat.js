@@ -17,7 +17,8 @@ const tagOrComment = new RegExp(
     'gi'
 );
 
-const messages = [];
+const messages = ['Use {00FFFF}LEFT ALT + TAB {FFFFFF}to turn on Interaction', 'Use I for Inventory'];
+
 let commands = [
     { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
     { name: 'help', description: '/help - List all available commands for your permission level.' }
@@ -129,10 +130,24 @@ const chat = Vue.component('chat', {
                 return;
             }
 
-            if (message === '/help' || message === '/commands') {
+            if (message === '/commands' || message === '/cmds') {
                 for (let i = 0; i < commands.length; i++) {
                     this.appendMessage(`${commands[i].description}`);
                 }
+
+                if ('alt' in window) {
+                    alt.emit('chat:Send');
+                }
+                return;
+            }
+
+            if (message === '/help') {
+                this.appendMessage(`{00FFFF}[ alt ]{FFFFFF} - Toggle Interaction Mode`);
+                this.appendMessage(`{00FFFF}[ e ]{FFFFFF} - Interact`);
+                this.appendMessage(`{00FFFF}[ i ]{FFFFFF} - Inventory`);
+                this.appendMessage(`{00FFFF}[ f ]{FFFFFF} - (Vehicle) Enter / Exit / Start / Stop / Toggle Door`);
+                this.appendMessage(`{00FFFF}[ x ]{FFFFFF} - (Vehicle) Unlock / Lock `);
+                this.appendMessage(`{00FFFF}[ f2 ]{FFFFFF} - Leaderboard`);
 
                 if ('alt' in window) {
                     alt.emit('chat:Send');

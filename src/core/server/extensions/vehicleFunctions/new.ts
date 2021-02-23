@@ -28,6 +28,7 @@ function add(player: alt.Player, data: Partial<Vehicle>): alt.Vehicle {
     }
 
     playerFuncs.save.field(player, 'vehicles', player.data.vehicles);
+    playerFuncs.sync.vehicles(player);
     return spawn(player, data as Vehicle);
 }
 
@@ -49,6 +50,7 @@ function remove(player: alt.Player, uid: string): boolean {
 
     player.data.vehicles.splice(index, 1);
     playerFuncs.save.field(player, 'vehicles', player.data.vehicles);
+    playerFuncs.sync.vehicles(player);
     return true;
 }
 

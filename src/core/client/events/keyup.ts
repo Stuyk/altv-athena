@@ -8,6 +8,7 @@ import { ChatController } from '../views/hud/controllers/chatController';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
 import { InventoryController } from '../views/inventory/inventory';
+import { VehiclesController } from '../views/vehicles/vehicles';
 
 export const KEY_BINDS = {
     // Left Alt
@@ -23,6 +24,8 @@ export const KEY_BINDS = {
     VEHICLE_FUNCS: 70,
     // I
     INVENTORY: 73,
+    // O
+    VEHICLES: 79,
     // T
     CHAT: 84,
     // X
@@ -43,7 +46,10 @@ const KEY_UP_BINDS = {
         singlePress: LeaderboardController.focusLeaderBoard
     },
     [KEY_BINDS.INVENTORY]: {
-        singlePress: (...args: any[]) => InventoryController.handleView()
+        singlePress: InventoryController.handleView
+    },
+    [KEY_BINDS.VEHICLES]: {
+        singlePress: VehiclesController.handleView
     },
     [KEY_BINDS.VEHICLE_LOCK]: {
         singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedLockKey')
