@@ -56,7 +56,12 @@ export class BaseHUD {
     }
 
     static updateSpeed(speed: string) {
+        if (!alt.Player.local.vehicle) {
+            return;
+        }
+
         BaseHUD.view.emit(HudEventNames.Speed, speed);
+        BaseHUD.view.emit(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
 
         if (alt.Player.local.vehicle) {
             BaseHUD.view.emit(HudEventNames.Lock, alt.Player.local.vehicle.lockStatus);
