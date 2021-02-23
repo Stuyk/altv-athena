@@ -22,6 +22,10 @@ export class InventoryController {
             return;
         }
 
+        if (alt.Player.local.meta.isDead) {
+            return;
+        }
+
         view = await View.getInstance(url, true, false, true);
         view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Use', InventoryController.handleUse);

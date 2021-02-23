@@ -6,6 +6,7 @@ import {
     Vehicle_State
 } from '../../../shared/enums/vehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { playerFuncs } from '../Player';
 import getter from './getter';
 import keys from './keys';
@@ -44,6 +45,7 @@ function lock(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): Vehi
         }
     }
 
+    alt.emit(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, v);
     return v.athenaLockState;
 }
 
@@ -67,6 +69,8 @@ function engine(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): vo
     if (player) {
         playerFuncs.emit.notification(player, `Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
     }
+
+    alt.emit(ATHENA_EVENTS_VEHICLE.ENGINE_STATE_CHANGE, v);
 }
 
 export default {

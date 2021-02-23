@@ -11,6 +11,14 @@ let isOpen = false;
 
 export class VehiclesController {
     static async handleView() {
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.meta.isDead) {
+            return;
+        }
+
         vehicles = alt.Player.local.meta.vehicles ? alt.Player.local.meta.vehicles : [];
         view = await View.getInstance(url, true, false, true);
         view.on('vehicles:Spawn', VehiclesController.spawn);

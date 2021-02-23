@@ -34,6 +34,9 @@ description: List of all the changes and current versions.
 + Vehicle Ownership for Spawned Vehicles
 + Vehicles Now Save Positions
 + Fixed Headlights Status for HUD
++ Prevent Opening Vehicle Menu while Chat is Open
++ Prevent Opening Inventory while Dead
++ Added Unique Athena Events for Vehicles, Players
 ```
 
 ## 1.6.0 - February 1-10, 2021

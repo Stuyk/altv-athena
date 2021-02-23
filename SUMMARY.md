@@ -25,6 +25,7 @@
 -   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
+-   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 
 ## External Links
 

@@ -11,6 +11,7 @@ import save from './save';
 import dataUpdater from './dataUpdater';
 import safe from './safe';
 import sync from './sync';
+import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
 
 const db: Database = getDatabase();
 
@@ -64,6 +65,8 @@ function dead(p: alt.Player, killer: alt.Player = null, weaponHash: any = null):
     if (!p.nextDeathSpawn) {
         p.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
     }
+
+    alt.emit(ATHENA_EVENTS_PLAYER.DIED, p);
 }
 
 /**
@@ -149,6 +152,8 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
         safe.addHealth(p, DEFAULT_CONFIG.RESPAWN_HEALTH, true);
         safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
     });
+
+    alt.emit(ATHENA_EVENTS_PLAYER.SPAWNED, p);
 }
 
 export default {

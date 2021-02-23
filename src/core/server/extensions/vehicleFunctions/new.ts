@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Vehicle_Behavior, Vehicle_State } from '../../../shared/enums/vehicle';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { sha256Random } from '../../utility/encryption';
 import { playerFuncs } from '../Player';
 
@@ -66,6 +67,7 @@ function despawn(id: number, player: alt.Player = null): boolean {
     }
 
     if (vehicle.valid && vehicle.destroy) {
+        alt.emit(ATHENA_EVENTS_VEHICLE.DESPAWNED, vehicle);
         vehicle.destroy();
     }
 
@@ -137,6 +139,7 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
 
     // Synchronize Ownership
     vehicle.setStreamSyncedMeta(Vehicle_State.OWNER, vehicle.player_id);
+    alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
     return vehicle;
 }
 

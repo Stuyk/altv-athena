@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import logger from '../server/utility/athenaLogger';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 
-const filePaths = ['./teleportEffect/teleporter', './heist/heist'];
+const filePaths = ['./teleportEffect/teleporter', './heist/heist', './deathLog/deathLog'];
 
 export default async function loadImports() {
     logger.info(`Loading extras folder...`);
