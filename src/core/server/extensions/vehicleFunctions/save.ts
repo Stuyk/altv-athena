@@ -3,6 +3,7 @@ import { Database, getDatabase } from 'simplymongo';
 import { Vehicle_Behavior } from '../../../shared/enums/vehicle';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
+import { playerFuncs } from '../Player';
 
 const db: Database = getDatabase();
 
@@ -13,7 +14,7 @@ const db: Database = getDatabase();
  * @return {*}  {Promise<void>}
  * @memberof SavePrototype
  */
-async function data(player: alt.Player, vehicle: alt.Vehicle): Promise<void> {
+async function data(owner: alt.Player, vehicle: alt.Vehicle): Promise<void> {
     if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_SAVE)) {
         return;
     }
@@ -26,15 +27,22 @@ async function data(player: alt.Player, vehicle: alt.Vehicle): Promise<void> {
         return;
     }
 
-    const vehicleData = player.data.vehicles.find((v) => v.uid === vehicle.data.uid);
-    if (!vehicleData) {
+    const index = owner.data.vehicles.findIndex((v) => v.uid === vehicle.data.uid);
+    if (index <= -1) {
         vehicle.destroy();
         return;
     }
 
-    vehicle.data.position = vehicle.pos;
-    vehicle.data.rotation = vehicle.rot;
-    vehicle.data.fuel = vehicle.fuel;
+    if (!owner.data.vehicles[index]) {
+        vehicle.destroy();
+        return;
+    }
+
+    owner.data.vehicles[index].position = vehicle.pos;
+    owner.data.vehicles[index].rotation = vehicle.rot;
+    owner.data.vehicles[index].fuel = vehicle.fuel;
+    playerFuncs.save.field(owner, 'vehicles', owner.data.vehicles);
+    playerFuncs.sync.vehicles(owner);
 }
 
 export default {

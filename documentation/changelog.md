@@ -32,6 +32,7 @@ description: List of all the changes and current versions.
 + Vehicle Spawn Interface
 + Vehicles Meta for Vehicle Spawn Interface
 + Vehicle Ownership for Spawned Vehicles
++ Vehicles Now Save Positions
 ```
 
 ## 1.6.0 - February 1-10, 2021
