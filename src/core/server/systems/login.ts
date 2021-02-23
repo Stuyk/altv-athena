@@ -13,6 +13,8 @@ import { OptionsController } from './options';
 import './tick';
 import './voice';
 import './job';
+import './marker';
+import './textlabel';
 import { vehicleFuncs } from '../extensions/Vehicle';
 
 const db: sm.Database = sm.getDatabase();

@@ -18,6 +18,7 @@
 
 ## Basic Scripting
 
+-   [Adding Custom Features](documentation/scripting/adding-features.md)
 -   [Adding Commands](documentation/scripting/adding-commands.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
 -   [Adding Items](documentation/scripting/adding-items.md)

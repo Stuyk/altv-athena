@@ -46,7 +46,7 @@ export function drawRectangle(pos: alt.IVector3, width: alt.IVector2, color: alt
  * @param  {number} scale
  * @param  {alt.RGBA} color
  */
-export function drawText3D(text: string, pos: alt.Vector3, scale: number, color: alt.RGBA) {
+export function drawText3D(text: string, pos: alt.IVector3, scale: number, color: alt.RGBA) {
     if (scale > 2) {
         scale = 2;
     }

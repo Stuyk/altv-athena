@@ -33,9 +33,11 @@ export enum SYSTEM_EVENTS {
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
     POPULATE_BLIPS = 'blips:Populate',
+    POPULATE_MARKERS = 'markers:Populate',
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',
     POPULATE_INTERACTIONS = 'interactions:Populate',
+    POPULATE_TEXTLABELS = 'POPULATE_TEXTLABELS',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',

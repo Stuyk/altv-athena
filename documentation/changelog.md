@@ -18,6 +18,10 @@ description: List of all the changes and current versions.
 + Fixed Vehicle Fuel Calculations
 + Fixed Vehicle Consuming Fuel without Engine On
 + Fixed Duplicate Ground Code for Items
++ Added Global Text Label Controller
++ Added Global Marker Controller
++ Added Client Plugins Folder with Basic Example
++ Added Documentation for Client Plugins
 ```
 
 ## 1.6.0 - February 1-10, 2021

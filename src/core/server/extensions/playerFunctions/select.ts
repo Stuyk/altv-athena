@@ -5,6 +5,7 @@ import { DEFAULT_CONFIG } from '../../athena/main';
 import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { InteractionController } from '../../systems/interaction';
+import { MarkerController } from '../../systems/marker';
 import emit from './emit';
 import safe from './safe';
 import setter from './setter';
@@ -73,6 +74,7 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
         ChatController.populateCommands(p);
         InteractionController.populateCustomInteractions(p);
         BlipController.populateGlobalBlips(p);
+        MarkerController.populateGlobalMarkers(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
     }, 500);
 
