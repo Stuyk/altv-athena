@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
+import { TextLabelController } from '../../server/systems/textlabel';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AnimationFlags } from '../../shared/flags/animation';
@@ -274,6 +275,7 @@ alt.on('heist:Completed', (player: alt.Player, pos: alt.Vector3) => {
 });
 
 // Interactions for this Heist
+TextLabelController.add({ data: 'Jewelry Store Heist', pos: startPosition, maxDistance: 10 });
 InteractionController.addInteraction(
     'heistjewelrystore',
     startPosition,

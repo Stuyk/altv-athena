@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { Vehicle_Events, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { playerFuncs } from '../Player';
 
 function eject(v: alt.Vehicle, player: alt.Player): void {
@@ -12,6 +13,7 @@ function eject(v: alt.Vehicle, player: alt.Player): void {
 
 function repair(v: alt.Vehicle): void {
     v.repair();
+    alt.emit(ATHENA_EVENTS_VEHICLE.REPAIRED, v);
 }
 
 function warpInto(v: alt.Vehicle, player: alt.Player, seat: Vehicle_Seat_List): void {

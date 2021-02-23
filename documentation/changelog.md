@@ -37,6 +37,7 @@ description: List of all the changes and current versions.
 + Prevent Opening Vehicle Menu while Chat is Open
 + Prevent Opening Inventory while Dead
 + Added Unique Athena Events for Vehicles, Players
++ Fixed Global Text Labels
 ```
 
 ## 1.6.0 - February 1-10, 2021

@@ -11,6 +11,7 @@ import emit from './emit';
 import safe from './safe';
 import setter from './setter';
 import sync from './sync';
+import { TextLabelController } from '../../systems/textlabel';
 
 /**
  * Select a character based on the character data provided.
@@ -78,6 +79,7 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
         InteractionController.populateCustomInteractions(p);
         BlipController.populateGlobalBlips(p);
         MarkerController.populateGlobalMarkers(p);
+        TextLabelController.populateGlobalLabels(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, p);
     }, 500);

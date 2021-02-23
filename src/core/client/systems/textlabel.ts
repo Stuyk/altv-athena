@@ -4,7 +4,7 @@ import { TextLabel } from '../../shared/interfaces/TextLabel';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText3D } from '../utility/text';
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, handleAddTextLabels);
+alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, handleAddTextLabels);
 
 let addedLabels: Array<TextLabel> = [];
 let interval;

@@ -7,7 +7,8 @@ export enum ATHENA_EVENTS_VEHICLE {
     DESPAWNED = 'athena:VehicleDespawned',
     ENGINE_STATE_CHANGE = 'athena:VehicleEngineState',
     LOCK_STATE_CHANGE = 'athena:VehicleLockState',
-    SPAWNED = 'athena:VehicleSpawned'
+    SPAWNED = 'athena:VehicleSpawned',
+    REPAIRED = 'athena:VehicleRepaired'
 }
 
 /**

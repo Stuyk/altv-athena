@@ -5,11 +5,11 @@ import { TextLabel } from '../../shared/interfaces/TextLabel';
 const globalTextLabels: Array<TextLabel> = [];
 
 export class TextLabelController {
-    static add(marker: TextLabel) {
-        globalTextLabels.push(marker);
+    static add(label: TextLabel) {
+        globalTextLabels.push(label);
     }
 
-    static populateGlobalMarkers(player: alt.Player) {
+    static populateGlobalLabels(player: alt.Player) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, globalTextLabels);
     }
 }
