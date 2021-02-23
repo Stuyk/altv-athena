@@ -6,7 +6,7 @@ import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
-import { BaseHUD } from '../views/hud/hud';
+import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
 
 const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
@@ -28,7 +28,7 @@ export class InteractionController {
     static toggleInteractionMode(): void {
         // Prevents clearing the interaction and is forced into being on all of the time.
         if (InteractionController.isAlwaysOn) {
-            BaseHUD.updateInteract(true);
+            BaseHUD.setHudStatus(HudEventNames.Interact, true);
             return;
         }
 
@@ -40,11 +40,11 @@ export class InteractionController {
         InteractionController.isOn = !InteractionController.isOn;
         if (!InteractionController.isOn) {
             alt.Player.local.isInteractionOn = false;
-            BaseHUD.updateInteract(false);
+            BaseHUD.setHudStatus(HudEventNames.Interact, false);
             return;
         }
 
-        BaseHUD.updateInteract(true);
+        BaseHUD.setHudStatus(HudEventNames.Interact, true);
         alt.Player.local.isInteractionOn = true;
         InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);

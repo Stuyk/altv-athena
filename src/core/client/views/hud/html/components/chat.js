@@ -188,6 +188,25 @@ const chat = Vue.component('chat', {
 
             commands = commands.concat(serverCommands);
             this.updateCount += 1;
+        },
+        handleKeybinds(e) {
+            // PageUp
+            if (e.keyCode === 33) {
+                this.$refs.messages.scrollTop -= 300;
+
+                if (this.$refs.messages.scrollTop < 0) {
+                    this.$refs.messages.scrollTop = 0;
+                }
+            }
+
+            // PageDown
+            if (e.keyCode === 34) {
+                this.$refs.messages.scrollTop += 300;
+
+                if (this.$refs.messages.scrollTop > this.$refs.messages.scrollHeight) {
+                    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
+                }
+            }
         }
     },
     directives: {
@@ -285,19 +304,27 @@ const chat = Vue.component('chat', {
             alt.on('chat:PopulateCommands', this.populateCommands);
         } else {
             let count = 0;
-            setInterval(() => {
+            let interval = setInterval(() => {
                 count += 1;
                 this.appendMessage(
                     `Message ${count} lore impsum do stuff long words and this is me screaming internally.`
                 );
+
+                if (count >= 100) {
+                    clearInterval(interval);
+                }
             }, 100);
 
             setTimeout(() => {
                 this.focusChat();
             }, 1000);
         }
+
+        window.addEventListener('keyup', this.handleKeybinds);
     },
     beforeDestroy() {
+        window.removeEventListener('keyup', this.handleKeybinds);
+
         if (!('alt' in window)) {
             return;
         }

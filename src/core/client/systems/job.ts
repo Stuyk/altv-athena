@@ -4,7 +4,7 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { drawText2D, drawText3D } from '../utility/text';
-import { BaseHUD } from '../views/hud/hud';
+import { BaseHUD, HudEventNames } from '../views/hud/hud';
 
 class ObjectiveController {
     static objective: Objective | null;
@@ -29,7 +29,7 @@ class ObjectiveController {
 
         if (!data) {
             ObjectiveController.objective = null;
-            BaseHUD.updateObjective(null);
+            BaseHUD.setHudStatus(HudEventNames.Objective, null);
             return;
         }
 
@@ -48,7 +48,7 @@ class ObjectiveController {
             ObjectiveController.blip.name = data.blip.text;
         }
 
-        BaseHUD.updateObjective(data.description);
+        BaseHUD.setHudStatus(HudEventNames.Objective, data.description);
         ObjectiveController.objective = data;
         ObjectiveController.interval = alt.setInterval(ObjectiveController.verifyObjective, 0);
     }

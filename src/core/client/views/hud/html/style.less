@@ -149,10 +149,15 @@ body {
 
     .messages {
         direction: rtl;
-        overflow: auto;
+        overflow-y: scroll;
         min-height: 35vh;
         max-height: 35vh;
         user-select: none;
+
+        &::-webkit-scrollbar {
+            width: 0; /* Remove scrollbar space */
+            background: transparent; /* Optional: just make scrollbar invisible */
+        }
 
         .message {
             color: white;
