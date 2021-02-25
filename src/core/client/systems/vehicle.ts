@@ -202,7 +202,9 @@ export class VehicleController {
 
             // Toggle engine back on if it's turned off.
             alt.setTimeout(() => {
-                native.setVehicleEngineOn(currentVehicle, true, true, false);
+                if (isDriver) {
+                    native.setVehicleEngineOn(currentVehicle, true, true, false);
+                }
             }, 500);
             return;
         }
@@ -214,6 +216,10 @@ export class VehicleController {
             if (canExit) {
                 HelpController.updateHelpText(KEY_BINDS.VEHICLE_FUNCS, `Exit Vehicle`, '');
             }
+            return;
+        }
+
+        if (!isDriver) {
             return;
         }
 
