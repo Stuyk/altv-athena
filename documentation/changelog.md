@@ -41,6 +41,8 @@ description: List of all the changes and current versions.
 + Added Append & Remove to Textlabels
 + Added Append & Remove to Markers
 + Added Append & Remove to Blips
++ Patch Chat Bug for Overflow
++ Patch Chat Scroll Bug
 ```
 
 ## 1.6.0 - February 1-10, 2021

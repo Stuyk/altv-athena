@@ -207,6 +207,13 @@ const chat = Vue.component('chat', {
 
             commands = commands.concat(serverCommands);
             this.updateCount += 1;
+
+            this.$nextTick(() => {
+                if (!this.$refs || !this.$refs.messages) {
+                    return;
+                }
+                this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
+            });
         },
         handleKeybinds(e) {
             // PageUp

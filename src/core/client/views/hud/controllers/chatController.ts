@@ -35,7 +35,7 @@ export class ChatController {
      * @return {*}  {void}
      * @memberof HUDController
      */
-    static handleAppend(message: string): void {
+    static appendMessage(message: string): void {
         if (!BaseHUD.view) {
             return;
         }
@@ -44,4 +44,4 @@ export class ChatController {
     }
 }
 
-alt.onServer(View_Events_Chat.Append, ChatController.handleAppend);
+alt.onServer(View_Events_Chat.Append, ChatController.appendMessage);
