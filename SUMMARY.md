@@ -26,6 +26,7 @@
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
 -   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
+-   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
 
 ## External Links
 
