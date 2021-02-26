@@ -5,6 +5,7 @@ import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
 import { disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
+import { ActionsController } from './controllers/actionsController';
 import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/helpController';
@@ -40,6 +41,9 @@ export class BaseHUD {
             BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
             BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
+            BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
+            BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
+            BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {

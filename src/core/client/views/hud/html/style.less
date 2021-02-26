@@ -175,6 +175,41 @@ body {
     }
 }
 
+.actionsWrapper {
+    position: fixed;
+    bottom: 15vh;
+    min-width: 100vw;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .actionMenu {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        max-width: 600px;
+        background: rgba(25, 25, 25, 0.75);
+        box-sizing: border-box;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        user-select: none;
+
+        .action {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .active {
+            background: rgba(25, 25, 25, 0.25);
+            border-radius: 5px;
+        }
+    }
+}
+
 @keyframes fillup {
     0% {
         bottom: 0px;

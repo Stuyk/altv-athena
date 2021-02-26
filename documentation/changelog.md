@@ -43,6 +43,9 @@ description: List of all the changes and current versions.
 + Added Append & Remove to Blips
 + Patch Chat Bug for Overflow
 + Patch Chat Scroll Bug
++ Added Action Menu
++ Added Action Menu Handler Server-side
++ Added Example of using Action Menu
 ```
 
 ## 1.6.0 - February 1-10, 2021

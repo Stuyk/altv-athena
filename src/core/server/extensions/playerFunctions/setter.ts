@@ -12,6 +12,7 @@ import dataUpdater from './dataUpdater';
 import safe from './safe';
 import sync from './sync';
 import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { ActionMenu } from '../../../shared/interfaces/Actions';
 
 const db: Database = getDatabase();
 
@@ -44,6 +45,10 @@ async function account(p: alt.Player, accountData: Partial<Account>): Promise<vo
 
     emit.meta(p, 'permissionLevel', accountData.permissionLevel);
     p.accountData = accountData;
+}
+
+function actionMenu(player: alt.Player, actionMenu: ActionMenu<any>) {
+    alt.emitClient(player, SYSTEM_EVENTS.SET_ACTION_MENU, actionMenu);
 }
 
 /**
@@ -158,6 +163,7 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
 
 export default {
     account,
+    actionMenu,
     dead,
     firstConnect,
     frozen,

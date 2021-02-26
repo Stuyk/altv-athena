@@ -38,6 +38,8 @@ export enum SYSTEM_EVENTS {
     PLAYER_TOOLBAR_SET = 'player:Toolbar',
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
+    PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    //
     POPULATE_BLIPS = 'blips:Populate',
     POPULATE_MARKERS = 'markers:Populate',
     POPULATE_COMMANDS = 'commands:Populate',
@@ -54,7 +56,7 @@ export enum SYSTEM_EVENTS {
     REMOVE_BLIP = 'remove:Blip',
     REMOVE_TEXTLABEL = 'remove:Textlabel',
     //
-    PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    SET_ACTION_MENU = 'actions:Set',
     //
     TICKS_START = 'ticks:Start',
     //
