@@ -6,12 +6,18 @@ description: Learn how to use an Action Menu.
 
 Actions menu's are a custom menu that makes various event calls either on server-side or client-side.
 
+![](https://i.imgur.com/XKdwj0i.png)
+
 ## Benefits
 
 -   Easily Customizable
 -   Infinitely Scaleable
 -   Used Server or Client Side
 -   Can be Dynamically Created
+-   1 - 9 Hotkeys
+-   Arrow Key Usage
+-   Enter Keypress
+-   Backspace Keypress
 
 ## Usage
 
