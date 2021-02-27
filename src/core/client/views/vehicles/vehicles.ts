@@ -17,6 +17,10 @@ export class VehiclesController {
             return;
         }
 
+        if (alt.Player.local.isActionMenuOpen) {
+            return;
+        }
+
         if (alt.Player.local.meta.isDead) {
             return;
         }

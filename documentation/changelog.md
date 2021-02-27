@@ -46,6 +46,11 @@ description: List of all the changes and current versions.
 + Added Action Menu
 + Added Action Menu Handler Server-side
 + Added Example of using Action Menu
++ Rewrote Vehicle Usage to use Action Menu
++ Rewrote Vehicle Client-Side Events
++ Fixed Lock Status Bug for Vehicle
++ Added 'F' & 'G' keys to Enter / Exit Vehicles
++ Removed Old Vehicle Code
 ```
 
 ## 1.6.0 - February 1-10, 2021

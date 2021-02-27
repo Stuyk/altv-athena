@@ -42,6 +42,7 @@ export class BaseHUD {
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
             BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
             BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
+            BaseHUD.view.on('actions:Close', ActionsController.closed);
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
 
@@ -121,7 +122,11 @@ export class BaseHUD {
         alt.toggleGameControls(true);
         disableAllControls(false);
         BaseHUD.isOpen = false;
-        alt.Player.local.isChatOpen = false;
+
+        // Add a small delay to allow keybinds to go off.
+        alt.setTimeout(() => {
+            alt.Player.local.isChatOpen = false;
+        }, 150);
 
         // Handles Empty Messages
         if (!message) {

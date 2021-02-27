@@ -13,7 +13,7 @@ export class ActionsController {
      * @return {*}
      * @memberof ActionController
      */
-    static set(actionMenu: ActionMenu<any> | null) {
+    static set(actionMenu: ActionMenu<any | Action<any> | ActionMenu<any>> | null) {
         if (!actionMenu) {
             BaseHUD.view.emit('actions:Set', null);
             return;
@@ -27,7 +27,15 @@ export class ActionsController {
             return;
         }
 
-        alt.Player.local.isMenuOpen = true;
+        if (alt.Player.local.isMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isActionMenuOpen) {
+            return;
+        }
+
+        alt.Player.local.isActionMenuOpen = true;
         BaseHUD.view.emit('actions:Set', actionMenu);
     }
 
@@ -55,7 +63,7 @@ export class ActionsController {
      * @memberof ActionController
      */
     static closed() {
-        alt.Player.local.isMenuOpen = false;
+        alt.Player.local.isActionMenuOpen = false;
     }
 
     /**

@@ -79,6 +79,12 @@ We have a small demo server available for you to test the framework with Adminis
     -   Global Blip Controller
     -   Repeat Blips are Streamed
     -   Automatically Generate Blips for Useable Objects (Atms, Fuel, etc.)
+-   Marker System
+    -   Global Marker Controller
+    -   Easily add and remove global markers
+-   Text Label System
+    -   Global Text Label Controller
+    -   Easily add and remove text labels
 -   Section System
     -   World split into Sections
     -   Split Sections Help with Performance
@@ -94,6 +100,7 @@ We have a small demo server available for you to test the framework with Adminis
     -   Handle Vehicle Keys
     -   Handle Vehicle Synchronization Pop-in
     -   Seatbelt / Handle Window Fly-through
+    -   Personal Vehicle Spawner Menu
 -   Inventory System
     -   Drop Items
     -   Pickup Items
@@ -133,6 +140,11 @@ We have a small demo server available for you to test the framework with Adminis
     -   Custom Waypoint Types... Go To, Capture, etc.
     -   Custom Criteria: No Vehicle, No Weapon, etc.
     -   Call Events on Objective Completions
+    -   Job Menu
+-   Action Menus
+    -   Ifinitely scaling menus.
+    -   A menu system that calls other events easily.
+    -   Easily construct custom menus in minutes to define functionality.
 -   Extendable Core Resource
     -   Extend the core resource by writing your own code in the 'plugins' folder.
 

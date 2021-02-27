@@ -20,7 +20,7 @@ function lock(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): Vehi
     }
 
     if (v.athenaLockState === null || v.athenaLockState === undefined) {
-        v.athenaLockState = Vehicle_Lock_State.LOCKED;
+        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
 
         for (let i = 0; i < 6; i++) {
             setter.doorOpen(v, player, i, false);

@@ -70,7 +70,15 @@ const actions = Vue.component('actions', {
             if (keyCode === 37 || keyCode === 8) {
                 if (this.history.length <= 0) {
                     this.setActions(null);
+
+                    if ('alt' in window) {
+                        alt.emit('actions:Close');
+                    }
                     return;
+                }
+
+                if ('alt' in window) {
+                    alt.emit('actions:Navigate');
                 }
 
                 this.actions = this.history.pop();
@@ -122,13 +130,17 @@ const actions = Vue.component('actions', {
             delete actions[verticalSelection].menuName;
 
             if (selection && selection.eventName) {
-                if ('alt' in window) {
-                    alt.emit('actions:Trigger', selection);
-                } else {
-                    console.log(selection);
-                }
-
+                this.selection = verticalSelection;
                 this.setActions(null);
+
+                setTimeout(() => {
+                    if ('alt' in window) {
+                        alt.emit('actions:Trigger', selection);
+                    } else {
+                        console.log(selection);
+                    }
+                }, 200);
+
                 return;
             }
 

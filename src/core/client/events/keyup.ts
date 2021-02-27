@@ -21,7 +21,8 @@ export const KEY_BINDS = {
     // E
     INTERACT: 69,
     // F
-    VEHICLE_FUNCS: 70,
+    VEHICLE_FUNCS: 70, // Driver
+    VEHICLE_FUNCS_ALT: 71, // Passenger
     // I
     INVENTORY: 73,
     // O
@@ -55,8 +56,10 @@ const KEY_UP_BINDS = {
         singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedLockKey')
     },
     [KEY_BINDS.VEHICLE_FUNCS]: {
-        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunction'),
-        longPress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
+        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunction')
+    },
+    [KEY_BINDS.VEHICLE_FUNCS_ALT]: {
+        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunctionAlt')
     },
     [KEY_BINDS.CHAT]: {
         singlePress: ChatController.focusChat
@@ -102,7 +105,7 @@ function handleKeyDown(key: number) {
         return;
     }
 
-    if (!KEY_UP_BINDS[key].longPress) {
+    if (!KEY_UP_BINDS[key]['longpress']) {
         return;
     }
 
@@ -114,7 +117,10 @@ function handleKeyDown(key: number) {
 
         HelpController.setHelpState(false);
         keyPressTimes[key] = null;
-        KEY_UP_BINDS[key].longPress(key);
+
+        if (KEY_UP_BINDS[key]['longpress']) {
+            KEY_UP_BINDS[key]['longpress'](key);
+        }
     }, DELAY_BETWEEN_LONG_PRESSES);
 }
 
@@ -143,8 +149,8 @@ function handleKeyUp(key: number) {
 
     // Long Press
     const isLongPressReady = keyPressTimes[key] + DELAY_BETWEEN_LONG_PRESSES < Date.now();
-    if (keyPressTimes[key] && isLongPressReady && KEY_UP_BINDS[key].longPress) {
-        KEY_UP_BINDS[key].longPress(key);
+    if (keyPressTimes[key] && isLongPressReady && KEY_UP_BINDS[key]['longpress']) {
+        KEY_UP_BINDS[key]['longpress'](key);
     }
 
     // Single Press
