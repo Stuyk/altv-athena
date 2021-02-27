@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
+import { Vehicle_Door_List, Vehicle_Lock_State } from 'core/shared/enums/vehicle';
 import { BaseHUD, HudEventNames } from '../../views/hud/hud';
 
 /**

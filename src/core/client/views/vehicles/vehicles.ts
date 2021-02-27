@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Vehicle } from '../../../shared/interfaces/Vehicle';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
 import { View } from '../../extensions/view';
 import { ChatController } from '../hud/controllers/chatController';
 

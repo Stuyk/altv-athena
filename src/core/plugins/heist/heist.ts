@@ -3,12 +3,12 @@ import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
 import { TextLabelController } from '../../server/systems/textlabel';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { AnimationFlags } from '../../shared/flags/animation';
-import JobEnums, { Objective } from '../../shared/interfaces/Job';
-import { JobTrigger } from '../../shared/interfaces/JobTrigger';
-import { distance2d } from '../../shared/utility/vector';
+import { CurrencyTypes } from 'core/shared/enums/currency';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { AnimationFlags } from 'core/shared/flags/animation';
+import JobEnums, { Objective } from 'core/shared/interfaces/Job';
+import { JobTrigger } from 'core/shared/interfaces/JobTrigger';
+import { distance2d } from 'core/shared/utility/vector';
 
 const startPosition = { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 };
 const objectives: Array<Objective> = [

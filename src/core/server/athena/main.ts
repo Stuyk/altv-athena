@@ -1,4 +1,4 @@
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
 
 export const DEFAULT_CONFIG = {
     // Whitelisting

@@ -23,11 +23,11 @@ export class AdminController {
             return false;
         }
 
-        if (!account.hasOwnProperty('discord')) {
+        if (!Object.prototype.hasOwnProperty.call(account, 'discord')) {
             return false;
         }
 
-        await db.updatePartialData(account._id.toString(), { banned: false, reason: null }, 'accounts');
+        db.updatePartialData(account._id.toString(), { banned: false, reason: null }, 'accounts');
         Logger.info(`(${discord}) Has been unbanned from the server.`);
         return true;
     }

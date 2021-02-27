@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_Lock_State } from '../../shared/enums/vehicle';
+import { Vehicle_Behavior, Vehicle_Lock_State } from 'core/shared/enums/vehicle';
 import getter from './vehicleFunctions/getter';
 import keys from './vehicleFunctions/keys';
 import newRef from './vehicleFunctions/new';
@@ -7,7 +7,7 @@ import save from './vehicleFunctions/save';
 import setter from './vehicleFunctions/setter';
 import toggle from './vehicleFunctions/toggle';
 import utility from './vehicleFunctions/utility';
-import * as IVeh from '../../shared/interfaces/Vehicle';
+import * as IVeh from 'core/shared/interfaces/Vehicle';
 
 /**
  * Overwrites the default functionality of vehicles.

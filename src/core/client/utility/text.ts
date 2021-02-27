@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 
 const temporaryText = [];
-let tempInterval;
+let tempInterval: number;
 
 /**
  * Draw text on your screen in a 2D position wtih an every tick.
@@ -79,7 +79,18 @@ export function drawText3D(text: string, pos: alt.IVector3, scale: number, color
  * @param {*} a
  * @param {*} ms
  */
-export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
+export function addTemporaryText(
+    identifier: string,
+    msg: string,
+    x: number,
+    y: number,
+    scale: number,
+    r: number,
+    g: number,
+    b: number,
+    a: number,
+    ms: number
+) {
     const index = temporaryText.findIndex((data) => data.identifier === identifier);
 
     if (index !== -1) {

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from 'core/shared/enums/vehicle';
+import { AnimationFlags } from 'core/shared/flags/animation';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';

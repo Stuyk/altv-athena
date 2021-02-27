@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat } from '../../../shared/enums/views';
-import { Command } from '../../../shared/interfaces/Command';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Chat } from 'core/shared/enums/views';
+import { Command } from 'core/shared/interfaces/Command';
 import { disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { ItemType } from '../../shared/enums/itemType';
-import { Item } from '../../shared/interfaces/Item';
+import { ItemType } from 'core/shared/enums/itemType';
+import { Item } from 'core/shared/interfaces/Item';
 import { playerFuncs } from '../extensions/Player';
 import { assert, executeTest } from './base';
 import logger from '../utility/athenaLogger';

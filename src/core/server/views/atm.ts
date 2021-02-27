@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { CurrencyTypes } from 'core/shared/enums/currency';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 
 const ActionHandlers = {

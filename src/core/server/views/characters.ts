@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { Character } from '../../shared/interfaces/Character';
-import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
+import { Character } from 'core/shared/interfaces/Character';
+import { View_Events_Characters, View_Events_Creator } from 'core/shared/enums/views';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import * as sm from 'simplymongo';

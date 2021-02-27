@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { Vehicle_Door_List } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { Item } from '../../shared/interfaces/Item';
-import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
+import { Vehicle_Door_List } from 'core/shared/enums/vehicle';
+import { AnimationFlags } from 'core/shared/flags/animation';
+import { Item } from 'core/shared/interfaces/Item';
+import { Task, TaskCallback } from 'core/shared/interfaces/TaskTimeline';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getForwardVector } from '../utility/vector';

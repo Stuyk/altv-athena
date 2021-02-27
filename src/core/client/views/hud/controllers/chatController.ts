@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { View_Events_Chat } from '../../../../shared/enums/views';
-import { disableAllControls } from '../../../utility/disableControls';
+import { View_Events_Chat } from 'core/shared/enums/views';
+import { disableAllControls } from 'core/client/utility/disableControls';
 import { BaseHUD } from '../hud';
 
 export class ChatController {

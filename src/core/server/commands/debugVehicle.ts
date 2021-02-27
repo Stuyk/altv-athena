@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
-import { CommandsLocale } from '../../shared/locale/commands';
-import { Permissions } from '../../shared/flags/permissions';
+import { CommandsLocale } from 'core/shared/locale/commands';
+import { Permissions } from 'core/shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
 
 ChatController.addCommand('vehicle', '/vehicle [model] - Spawn an admin vehicle', Permissions.Admin, handleTemp);
 ChatController.addCommand(

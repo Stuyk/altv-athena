@@ -5,10 +5,10 @@ import env from 'dotenv';
 import { InjectedFunctions, InjectedStarter, loadWASM } from './utility/wasmLoader';
 import { setAzureEndpoint } from './utility/encryption';
 import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
-import { SYSTEM_EVENTS } from '../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import logger from './utility/athenaLogger';
 import { Collections } from './interface/DatabaseCollections';
-import isFunction from '../shared/utility/classCheck';
+import isFunction from 'core/shared/utility/classCheck';
 
 env.config();
 

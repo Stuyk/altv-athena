@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Character } from '../../../shared/interfaces/Character';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Character } from 'core/shared/interfaces/Character';
 import { View } from '../../extensions/view';
 
 const url = `http://resource/client/views/atm/html/index.html`;

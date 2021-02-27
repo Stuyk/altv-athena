@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_RELOAD, handleReload);
 

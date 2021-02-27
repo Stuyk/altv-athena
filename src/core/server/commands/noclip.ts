@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { CommandsLocale } from '../../shared/locale/commands';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Permissions } from '../../shared/flags/permissions';
+import { CommandsLocale } from 'core/shared/locale/commands';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Permissions } from 'core/shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);

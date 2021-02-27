@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { InteractionController } from '../systems/interaction';
 import { ToolbarController } from '../systems/toolbar';
 import { VehicleController } from '../systems/vehicle';

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
+import { Character, CharacterDefaults } from 'core/shared/interfaces/Character';
 
 /**
  * Used to initialize player.data with all data from a Character object.

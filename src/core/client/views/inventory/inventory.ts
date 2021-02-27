@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Inventory } from '../../../shared/enums/views';
-import { DroppedItem } from '../../../shared/interfaces/Item';
-import { distance2d } from '../../../shared/utility/vector';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Inventory } from 'core/shared/enums/views';
+import { DroppedItem } from 'core/shared/interfaces/Item';
+import { distance2d } from 'core/shared/utility/vector';
 import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
 

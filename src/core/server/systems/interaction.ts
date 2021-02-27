@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Clothing } from '../../shared/enums/views';
-import gridData from '../../shared/information/gridData';
-import { Blip } from '../../shared/interfaces/Blip';
-import { Interaction } from '../../shared/interfaces/Interaction';
-import { InteractionLocale } from '../../shared/locale/interaction';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Clothing } from 'core/shared/enums/views';
+import gridData from 'core/shared/information/gridData';
+import { Blip } from 'core/shared/interfaces/Blip';
+import { Interaction } from 'core/shared/interfaces/Interaction';
+import { InteractionLocale } from 'core/shared/locale/interaction';
+import { distance2d } from 'core/shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import '../views/atm';
@@ -114,8 +114,8 @@ export class InteractionController {
      * @return {*}
      * @memberof InteractionController
      */
-    static handleEnterInteraction(colshape: alt.Colshape, player: alt.Entity) {
-        if (!colshape.hasOwnProperty('isInteraction')) {
+    static handleEnterInteraction(colshape: alt.Colshape, player: alt.Entity): any {
+        if (!Object.prototype.hasOwnProperty.call(colshape, 'isInteraction')) {
             return;
         }
 
@@ -139,7 +139,7 @@ export class InteractionController {
      * @memberof InteractionController
      */
     static handleLeaveInteraction(colshape: alt.Colshape, player: alt.Entity) {
-        if (!colshape.hasOwnProperty('isInteraction')) {
+        if (!Object.prototype.hasOwnProperty.call(colshape, 'isInteraction')) {
             return;
         }
 

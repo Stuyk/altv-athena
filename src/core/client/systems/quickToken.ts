@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { sleep } from '../utility/sleep';
 
 alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, handleUpdateToken);

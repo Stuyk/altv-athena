@@ -1,6 +1,6 @@
-import { Appearance } from '../../shared/interfaces/Appearance';
-import { Item } from '../../shared/interfaces/Item';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { Appearance } from 'core/shared/interfaces/Appearance';
+import { Item } from 'core/shared/interfaces/Item';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
 
 export interface Meta {
     permissionLevel: number; // Used to determine the player's current permissionLevel as a player..

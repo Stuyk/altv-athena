@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Clothing } from '../../../shared/enums/views';
-import { ClothingComponent } from '../../../shared/interfaces/Clothing';
-import { Item } from '../../../shared/interfaces/Item';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Clothing } from 'core/shared/enums/views';
+import { ClothingComponent } from 'core/shared/interfaces/Clothing';
+import { Item } from 'core/shared/interfaces/Item';
 import { View } from '../../extensions/view';
 import {
     createPedEditCamera,

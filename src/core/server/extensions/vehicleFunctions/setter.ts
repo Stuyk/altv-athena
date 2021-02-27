@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import getter from './getter';
-import { Vehicle_Behavior, Vehicle_Door_List, Vehicle_Lock_State, Vehicle_State } from '../../../shared/enums/vehicle';
+import { Vehicle_Behavior, Vehicle_Door_List, Vehicle_Lock_State, Vehicle_State } from 'core/shared/enums/vehicle';
 import keys from './keys';
 import toggle from './toggle';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { isFlagEnabled } from '../../../shared/utility/flags';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 import { vehicleFuncs } from '../Vehicle';
 
 function lock(v: alt.Vehicle, player: alt.Player, lockState: Vehicle_Lock_State): boolean {

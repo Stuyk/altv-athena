@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { Permissions } from '../../shared/flags/permissions';
-import { Action } from '../../shared/interfaces/Actions';
-import { Animation } from '../../shared/interfaces/Animation';
+import { AnimationFlags } from 'core/shared/flags/animation';
+import { Permissions } from 'core/shared/flags/permissions';
+import { Action } from 'core/shared/interfaces/Actions';
+import { Animation } from 'core/shared/interfaces/Animation';
 
 ChatController.addCommand('actionmenu', '/actionmenu - Opens test action menu', Permissions.Admin, handleCommand);
 

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { View_Events_Chat } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
-import { CommandsLocale } from '../../shared/locale/commands';
-import { distance2d } from '../../shared/utility/vector';
+import { View_Events_Chat } from 'core/shared/enums/views';
+import { Permissions } from 'core/shared/flags/permissions';
+import { CommandsLocale } from 'core/shared/locale/commands';
+import { distance2d } from 'core/shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/Marker';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Marker } from 'core/shared/interfaces/Marker';
 import Logger from '../utility/athenaLogger';
 
 const globalMarkers: Array<Marker> = [];

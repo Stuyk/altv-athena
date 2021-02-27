@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { distance, distance2d, getClosestTypes } from '../../../shared/utility/vector';
+import { distance, distance2d, getClosestTypes } from 'core/shared/utility/vector';
 import { getClosestEntity, getForwardVector } from '../../utility/vector';
 
 /**

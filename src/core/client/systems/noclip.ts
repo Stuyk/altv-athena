@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { getCrossProduct, getNormalizedVector, rotationToDirection } from '../utility/math';
 import { addTemporaryText } from '../utility/text';
 

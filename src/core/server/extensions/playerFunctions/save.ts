@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
-import { Character } from '../../../shared/interfaces/Character';
+import { Character } from 'core/shared/interfaces/Character';
 
 const db: Database = getDatabase();
 

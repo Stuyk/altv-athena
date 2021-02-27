@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { View_Events_Creator } from '../../../shared/enums/views';
-import { CurrencyTypes } from '../../../shared/enums/currency';
+import { View_Events_Creator } from 'core/shared/enums/views';
+import { CurrencyTypes } from 'core/shared/enums/currency';
 import { World } from '../../systems/world';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import emit from './emit';
 import save from './save';
 import { DEFAULT_CONFIG } from '../../athena/main';

@@ -13,10 +13,10 @@
         "module": "ESNext",
         "target": "ESNext",
         "outDir": "./resources",
-        "rootDir": "./src",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "baseUrl": "./src/"
     },
-    "include": ["./src/**/*.ts"],
     "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],
     "watchOptions": {
         "watchFile": "useFsEvents",

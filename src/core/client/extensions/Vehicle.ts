@@ -6,7 +6,7 @@ import setter from './vehicleFuncs/setter';
 import play from './vehicleFuncs/play';
 import sync from './vehicleFuncs/sync';
 import toggle from './vehicleFuncs/toggle';
-import { Vehicle_Lock_State } from '../../shared/enums/vehicle';
+import { Vehicle_Lock_State } from 'core/shared/enums/vehicle';
 
 alt.on('gameEntityCreate', handleEntityCreation);
 

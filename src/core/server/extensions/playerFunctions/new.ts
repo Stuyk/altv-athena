@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
+import { Character, CharacterDefaults } from 'core/shared/interfaces/Character';
 import { Database, getDatabase } from 'simplymongo';
-import { Appearance } from '../../../shared/interfaces/Appearance';
-import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
+import { Appearance } from 'core/shared/interfaces/Appearance';
+import { CharacterInfo } from 'core/shared/interfaces/CharacterInfo';
 import select from './select';
-import { Vehicle } from '../../../shared/interfaces/Vehicle';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
 
 const db: Database = getDatabase();
 

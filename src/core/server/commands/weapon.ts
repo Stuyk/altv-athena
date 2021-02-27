@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Item } from '../../shared/interfaces/Item';
-import { Permissions } from '../../shared/flags/permissions';
-import { ItemType } from '../../shared/enums/itemType';
+import { Item } from 'core/shared/interfaces/Item';
+import { Permissions } from 'core/shared/flags/permissions';
+import { ItemType } from 'core/shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
-import { getWeaponByName } from '../../shared/information/weaponList';
+import { getWeaponByName } from 'core/shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { deepCloneObject } from 'core/shared/utility/deepCopy';
 
 ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
 

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import * as sm from 'simplymongo';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Discord } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Discord } from 'core/shared/enums/views';
+import { Permissions } from 'core/shared/flags/permissions';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Account } from '../interface/Account';

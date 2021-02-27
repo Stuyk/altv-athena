@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import JobEnums, { Objective } from '../../shared/interfaces/Job';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import JobEnums, { Objective } from 'core/shared/interfaces/Job';
+import { isFlagEnabled } from 'core/shared/utility/flags';
+import { distance } from 'core/shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 
 const JobInstances: { [key: string]: Job } = {};

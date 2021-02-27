@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
-import { Action, ActionMenu } from '../../../../shared/interfaces/Actions';
-import { handleFrontendSound } from '../../../systems/sound';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Action, ActionMenu } from 'core/shared/interfaces/Actions';
+import { handleFrontendSound } from 'core/client/systems/sound';
 import { BaseHUD } from '../hud';
 
 export class ActionsController {

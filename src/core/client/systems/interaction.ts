@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ActionMenu, Action } from '../../shared/interfaces/Actions';
-import { Interaction } from '../../shared/interfaces/Interaction';
-import { distance2d } from '../../shared/utility/vector';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { ActionMenu, Action } from 'core/shared/interfaces/Actions';
+import { Interaction } from 'core/shared/interfaces/Interaction';
+import { distance2d } from 'core/shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { ActionsController } from '../views/hud/controllers/actionsController';
@@ -160,7 +160,7 @@ export class InteractionController {
                 blip.scale = interaction.blip.scale;
 
                 // Beta Feature? Not implemented yet.
-                if (blip.hasOwnProperty('size')) {
+                if (Object.prototype.hasOwnProperty.call(blip, 'size')) {
                     blip.size = { x: interaction.blip.scale, y: interaction.blip.scale } as alt.Vector2;
                 }
 

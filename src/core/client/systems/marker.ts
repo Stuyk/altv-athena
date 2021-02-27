@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/Marker';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Marker } from 'core/shared/interfaces/Marker';
+import { distance2d } from 'core/shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 
 let addedMarkers: Array<Marker> = [];

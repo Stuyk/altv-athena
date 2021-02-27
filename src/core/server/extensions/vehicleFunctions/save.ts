@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
-import { Vehicle_Behavior } from '../../../shared/enums/vehicle';
-import { Vehicle } from '../../../shared/interfaces/Vehicle';
-import { isFlagEnabled } from '../../../shared/utility/flags';
+import { Vehicle_Behavior } from 'core/shared/enums/vehicle';
+import { Vehicle } from 'core/shared/interfaces/Vehicle';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 import { playerFuncs } from '../Player';
 
 const db: Database = getDatabase();

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
-import { distance } from '../../shared/utility/vector';
+import { Permissions } from 'core/shared/flags/permissions';
+import { distance } from 'core/shared/utility/vector';
 
 /**
  * Returns an array of players filtered by permission level.

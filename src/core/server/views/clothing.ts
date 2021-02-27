@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { View_Events_Clothing } from '../../shared/enums/views';
+import { View_Events_Clothing } from 'core/shared/enums/views';
 import * as sm from 'simplymongo';
 import { playerFuncs } from '../extensions/Player';
-import { ClothingComponent } from '../../shared/interfaces/Clothing';
-import { Item } from '../../shared/interfaces/Item';
-import { ItemType } from '../../shared/enums/itemType';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { ClothingComponent } from 'core/shared/interfaces/Clothing';
+import { Item } from 'core/shared/interfaces/Item';
+import { ItemType } from 'core/shared/enums/itemType';
+import { deepCloneObject } from 'core/shared/utility/deepCopy';
 
 const db: sm.Database = sm.getDatabase();
 

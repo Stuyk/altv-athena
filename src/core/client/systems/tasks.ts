@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Task, TaskCallback } from 'core/shared/interfaces/TaskTimeline';
 import { sleep } from '../utility/sleep';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, handleTasks);
@@ -33,7 +33,7 @@ async function playNextTimeline() {
         return;
     }
 
-    if (task.hasOwnProperty('callbackName')) {
+    if (!Object.prototype.hasOwnProperty.call(task, 'callbackName')) {
         task = task as TaskCallback;
         alt.emitServer(task.callbackName);
         return;

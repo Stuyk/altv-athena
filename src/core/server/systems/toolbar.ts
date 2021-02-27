@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { ItemType } from '../../shared/enums/itemType';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Item } from '../../shared/interfaces/Item';
-import { ToolbarLocale } from '../../shared/locale/toolbar';
-import { isFlagEnabled } from '../../shared/utility/flags';
+import { ItemType } from 'core/shared/enums/itemType';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Item } from 'core/shared/interfaces/Item';
+import { ToolbarLocale } from 'core/shared/locale/toolbar';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 
 export class ToolbarController {

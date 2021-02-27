@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Vector3 } from 'alt-server';
-import { distance2d } from '../../shared/utility/vector';
+import { distance2d } from 'core/shared/utility/vector';
 
 /**
  * SERVER ONLY

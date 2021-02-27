@@ -1,5 +1,5 @@
 import { ObjectId } from 'bson';
-import { Permissions } from '../../shared/flags/permissions';
+import { Permissions } from 'core/shared/flags/permissions';
 
 /**
  * Used to store Discord Information, IPs, and User Data

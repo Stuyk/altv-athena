@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { EquipmentType } from '../../../shared/enums/equipment';
-import { ItemType } from '../../../shared/enums/itemType';
-import { Item } from '../../../shared/interfaces/Item';
-import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { isFlagEnabled } from '../../../shared/utility/flags';
+import { EquipmentType } from 'core/shared/enums/equipment';
+import { ItemType } from 'core/shared/enums/itemType';
+import { Item } from 'core/shared/interfaces/Item';
+import { deepCloneObject } from 'core/shared/utility/deepCopy';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 import save from './save';
 import sync from './sync';
 

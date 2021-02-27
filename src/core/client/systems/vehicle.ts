@@ -7,14 +7,14 @@ import {
     inLockedState,
     Vehicle_Seat_List,
     Vehicle_Door_List
-} from '../../shared/enums/vehicle';
-import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
+} from 'core/shared/enums/vehicle';
+import { distance, getClosestVectorByPos } from 'core/shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
 import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
-import { ActionMenu, Action } from '../../shared/interfaces/Actions';
+import { ActionMenu, Action } from 'core/shared/interfaces/Actions';
 import { CLIENT_VEHICLE_EVENTS } from '../enums/Vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 

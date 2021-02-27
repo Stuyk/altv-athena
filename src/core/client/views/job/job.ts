@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { JobTrigger } from '../../../shared/interfaces/JobTrigger';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { JobTrigger } from 'core/shared/interfaces/JobTrigger';
 import { View } from '../../extensions/view';
 
 const url = `http://resource/client/views/job/html/index.html`;

@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { InventoryType } from '../../shared/enums/inventoryTypes';
-import { ItemType } from '../../shared/enums/itemType';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Inventory } from '../../shared/enums/views';
-import { DroppedItem, Item } from '../../shared/interfaces/Item';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
+import { InventoryType } from 'core/shared/enums/inventoryTypes';
+import { ItemType } from 'core/shared/enums/itemType';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Inventory } from 'core/shared/enums/views';
+import { DroppedItem, Item } from 'core/shared/interfaces/Item';
+import { isFlagEnabled } from 'core/shared/utility/flags';
+import { distance2d } from 'core/shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
 import '../effects/heal';

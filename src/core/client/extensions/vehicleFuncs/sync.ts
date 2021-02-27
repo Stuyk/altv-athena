@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_State } from '../../../shared/enums/vehicle';
+import { Vehicle_State } from 'core/shared/enums/vehicle';
 
 function update(v: alt.Vehicle): void {
     // Synchronize All States for Local Data

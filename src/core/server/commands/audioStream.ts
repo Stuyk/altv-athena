@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Permissions } from '../../shared/flags/permissions';
+import { Permissions } from 'core/shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
-import { AudioStream } from '../../shared/interfaces/Audio';
+import { AudioStream } from 'core/shared/interfaces/Audio';
 
 ChatController.addCommand('audiostream', '/audiostream [youtube_id]', Permissions.Admin, handleCommand);
 

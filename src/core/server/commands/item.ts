@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Item } from '../../shared/interfaces/Item';
-import { Permissions } from '../../shared/flags/permissions';
-import { ItemType } from '../../shared/enums/itemType';
+import { Item } from 'core/shared/interfaces/Item';
+import { Permissions } from 'core/shared/flags/permissions';
+import { ItemType } from 'core/shared/enums/itemType';
 import { playerFuncs } from '../extensions/Player';
-import { EquipmentType } from '../../shared/enums/equipment';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { getFromRegistry, ItemRegistry } from '../../shared/items/itemRegistry';
+import { EquipmentType } from 'core/shared/enums/equipment';
+import { deepCloneObject } from 'core/shared/utility/deepCopy';
+import { getFromRegistry, ItemRegistry } from 'core/shared/items/itemRegistry';
 
 const pistolItem: Item = {
     name: `Pistol`,

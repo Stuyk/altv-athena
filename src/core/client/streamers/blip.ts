@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import gridData from '../../shared/information/gridData';
+import gridData from 'core/shared/information/gridData';
 import { Blip, StreamBlip } from '../extensions/blip';
-import { distance2d } from '../../shared/utility/vector';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
+import { distance2d } from 'core/shared/utility/vector';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
 
 const MAX_BLIP_STREAM_DISTANCE = SHARED_CONFIG.MAX_BLIP_STREAM_DISTANCE;
 const streamBlips: { [key: string]: Array<StreamBlip> } = {

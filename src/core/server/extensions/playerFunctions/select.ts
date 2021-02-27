@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Character } from '../../../shared/interfaces/Character';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Character } from 'core/shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';

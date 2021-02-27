@@ -116,7 +116,7 @@ export async function decryptData(jsonData: string): Promise<any> {
     const sharedSecret = await getSharedSecret();
 
     try {
-        const cleanedEncryption = jsonData.replace(/\_/g, '+');
+        const cleanedEncryption = jsonData.replace(/_/g, '+');
         return sjcl.decrypt(sharedSecret, cleanedEncryption, { mode: 'gcm' });
     } catch (err) {
         return null;

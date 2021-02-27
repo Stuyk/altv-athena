@@ -17,3 +17,4 @@ configMongoDB
 crashdumps
 ./screenshots/*
 cdn_upload
+.eslintcache

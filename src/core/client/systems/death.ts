@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { drawText2D } from '../utility/text';
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleSingleMetaChange);

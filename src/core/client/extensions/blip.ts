@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { distance2d } from '../../shared/utility/vector';
+import { distance2d } from 'core/shared/utility/vector';
 
 const blips: { [key: string]: Array<Blip> } = {};
 
@@ -22,7 +22,7 @@ export class Blip extends alt.PointBlip {
      * @param {boolean} [shortRange=true] Should this display all of the time on the minimap?
      * @memberof Blip
      */
-    constructor(pos: alt.Vector3, sprite: number, color: number, name: string, shortRange = true) {
+    constructor(pos: alt.Vector3, sprite: number, color: number, name: string, shortRange: boolean = true) {
         super(pos.x, pos.y, pos.z);
         this.sprite = sprite;
         this.color = color;

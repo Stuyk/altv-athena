@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat } from '../../../shared/enums/views';
-import { AnimationFlags } from '../../../shared/flags/animation';
-import { AudioStream } from '../../../shared/interfaces/Audio';
-import { Particle } from '../../../shared/interfaces/Particle';
-import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { View_Events_Chat } from 'core/shared/enums/views';
+import { AnimationFlags } from 'core/shared/flags/animation';
+import { AudioStream } from 'core/shared/interfaces/Audio';
+import { Particle } from 'core/shared/interfaces/Particle';
+import { Task, TaskCallback } from 'core/shared/interfaces/TaskTimeline';
 import utility from './utility';
 
 /**

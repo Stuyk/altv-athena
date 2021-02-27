@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/TextLabel';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { TextLabel } from 'core/shared/interfaces/TextLabel';
 import Logger from '../utility/athenaLogger';
 
 const globalTextLabels: Array<TextLabel> = [];

@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior, Vehicle_State } from '../../shared/enums/vehicle';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
+import { SHARED_CONFIG } from 'core/shared/configurations/shared';
+import { CurrencyTypes } from 'core/shared/enums/currency';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Vehicle_Behavior, Vehicle_State } from 'core/shared/enums/vehicle';
+import { isFlagEnabled } from 'core/shared/utility/flags';
+import { distance2d } from 'core/shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { getClosestEntity } from '../utility/vector';
 

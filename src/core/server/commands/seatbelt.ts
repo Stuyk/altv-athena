@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { Vehicle_Events } from '../../shared/enums/vehicle';
-import { Permissions } from '../../shared/flags/permissions';
+import { Vehicle_Events } from 'core/shared/enums/vehicle';
+import { Permissions } from 'core/shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 

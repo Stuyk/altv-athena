@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 
 // This will only turn on your plugin when they've fully logged in.
 alt.onServer(SYSTEM_EVENTS.TICKS_START, whatToDoAfterLogin);

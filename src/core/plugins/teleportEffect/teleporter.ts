@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
-import { ItemType } from '../../shared/enums/itemType';
-import { Permissions } from '../../shared/flags/permissions';
-import { Item } from '../../shared/interfaces/Item';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { ItemType } from 'core/shared/enums/itemType';
+import { Permissions } from 'core/shared/flags/permissions';
+import { Item } from 'core/shared/interfaces/Item';
+import { deepCloneObject } from 'core/shared/utility/deepCopy';
 
 const teleporterDesc = '/teleporter - Adds item for current position.';
 const teleporterItem: Item = {

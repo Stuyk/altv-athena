@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { CommandsLocale } from '../../shared/locale/commands';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { Permissions } from '../../shared/flags/permissions';
+import { CommandsLocale } from 'core/shared/locale/commands';
+import { CurrencyTypes } from 'core/shared/enums/currency';
+import { Permissions } from 'core/shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 
 ChatController.addCommand('setcash', '/setcash [amount] [id]* - Add cash', Permissions.Admin, handleCommand);

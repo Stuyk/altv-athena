@@ -1,11 +1,6 @@
 import * as alt from 'alt-server';
-import {
-    Vehicle_Behavior,
-    Vehicle_Lock_State,
-    Vehicle_Lock_States,
-    Vehicle_State
-} from '../../../shared/enums/vehicle';
-import { isFlagEnabled } from '../../../shared/utility/flags';
+import { Vehicle_Behavior, Vehicle_Lock_State, Vehicle_Lock_States, Vehicle_State } from 'core/shared/enums/vehicle';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { playerFuncs } from '../Player';
 import getter from './getter';

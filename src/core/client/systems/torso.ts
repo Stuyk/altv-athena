@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { drawText2D } from '../utility/text';
 import { handleFrontendSound } from './sound';
-import femaleTorsos from '../../shared/information/femaleTorso';
+import femaleTorsos from 'core/shared/information/femaleTorso';
 
 const torsoData = {};
 let torso = 0;

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/Blip';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Blip } from 'core/shared/interfaces/Blip';
 import Logger from '../utility/athenaLogger';
 
 const globalBlips: Array<Blip> = [];

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/Blip';
+import { SYSTEM_EVENTS } from 'core/shared/enums/system';
+import { Blip } from 'core/shared/interfaces/Blip';
 
 const addedBlips: Array<any> = [];
 
@@ -15,7 +15,7 @@ function create(blipData: Blip): alt.PointBlip {
         blip['uid'] = blipData.uid;
     }
 
-    if (blip.hasOwnProperty('size')) {
+    if (Object.prototype.hasOwnProperty.call(blip, 'size')) {
         blip.size = { x: blipData.scale, y: blipData.scale } as alt.Vector2;
     } else {
         blip.scale = blipData.scale;

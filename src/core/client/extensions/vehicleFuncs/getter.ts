@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
-import { getClosestVectorByPos } from '../../../shared/utility/vector';
+import { Vehicle_Door_List, Vehicle_Lock_State } from 'core/shared/enums/vehicle';
+import { getClosestVectorByPos } from 'core/shared/utility/vector';
 import { DoorData } from '../Vehicle';
 
 const closestDoorBones = [

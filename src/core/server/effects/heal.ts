@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Item } from '../../shared/interfaces/Item';
+import { Item } from 'core/shared/interfaces/Item';
 import { playerFuncs } from '../extensions/Player';
 
 alt.on('effect:Heal', handleItemEvent);

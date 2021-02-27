@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
-import { isFlagEnabled } from '../../../shared/utility/flags';
+import { Vehicle_Behavior, Vehicle_Lock_State } from 'core/shared/enums/vehicle';
+import { isFlagEnabled } from 'core/shared/utility/flags';
 
 function lockState(v: alt.Vehicle): Vehicle_Lock_State {
     if (v.athenaLockState === null || v.athenaLockState === undefined) {

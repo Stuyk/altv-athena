@@ -24,7 +24,55 @@ let commands = [
     { name: 'help', description: '/help - List all available commands for your permission level.' }
 ];
 
-const chat = Vue.component('chat', {
+const chat = Vue.component('Chat', {
+    directives: {
+        focus: {
+            inserted: (el) => {
+                el.focus();
+            }
+        }
+    },
+    filters: {
+        colorify(text) {
+            let matches = [];
+            let m = null;
+            let curPos = 0;
+
+            if (!text) {
+                return;
+            }
+
+            do {
+                m = /\{[A-Fa-f0-9]{3}\}|\{[A-Fa-f0-9]{6}\}/g.exec(text.substr(curPos));
+
+                if (!m) {
+                    break;
+                }
+
+                matches.push({
+                    found: m[0],
+                    index: m['index'] + curPos
+                });
+
+                curPos = curPos + m['index'] + m[0].length;
+            } while (m != null);
+
+            if (matches.length > 0) {
+                text += '</font>';
+
+                for (let i = matches.length - 1; i >= 0; --i) {
+                    let color = matches[i].found.substring(1, matches[i].found.length - 1);
+                    let insertHtml = `${i !== 0 ? '</font>' : ''}<font color="#${color}">`;
+                    text = `${text.slice(0, matches[i].index)}${insertHtml}${text.slice(
+                        matches[i].index + matches[i].found.length,
+                        text.length
+                    )}`;
+                }
+            }
+
+            return text;
+        }
+    },
     data() {
         return {
             previous: [' ', 'alt:V Athena Chat', 'By Stuyk'],
@@ -36,6 +84,47 @@ const chat = Vue.component('chat', {
             show: false,
             updateCount: 0
         };
+    },
+    watch: {
+        currentMessage: (newValue) => {
+            this.currentMessage = newValue;
+        }
+    },
+    mounted() {
+        if ('alt' in window) {
+            alt.on('chat:Append', this.appendMessage);
+            alt.on('chat:Focus', this.focusChat);
+            alt.on('chat:PopulateCommands', this.populateCommands);
+        } else {
+            let count = 0;
+            let interval = setInterval(() => {
+                count += 1;
+                this.appendMessage(
+                    `Message ${count} lore impsum do stuff long words and this is me screaming internally.`
+                );
+
+                if (count >= 100) {
+                    clearInterval(interval);
+                }
+            }, 100);
+
+            setTimeout(() => {
+                this.focusChat();
+            }, 1000);
+        }
+
+        window.addEventListener('keyup', this.handleKeybinds);
+    },
+    beforeDestroy() {
+        window.removeEventListener('keyup', this.handleKeybinds);
+
+        if (!('alt' in window)) {
+            return;
+        }
+
+        alt.off('chat:Append', this.appendMessage);
+        alt.off('chat:Focus', this.focusChat);
+        alt.off('chat:PopulateCommands', this.populateCommands);
     },
     methods: {
         appendMessage(msg) {
@@ -248,59 +337,6 @@ const chat = Vue.component('chat', {
             }
         }
     },
-    directives: {
-        focus: {
-            inserted: (el) => {
-                el.focus();
-            }
-        }
-    },
-    watch: {
-        currentMessage: (newValue) => {
-            this.currentMessage = newValue;
-        }
-    },
-    filters: {
-        colorify(text) {
-            let matches = [];
-            let m = null;
-            let curPos = 0;
-
-            if (!text) {
-                return;
-            }
-
-            do {
-                m = /\{[A-Fa-f0-9]{3}\}|\{[A-Fa-f0-9]{6}\}/g.exec(text.substr(curPos));
-
-                if (!m) {
-                    break;
-                }
-
-                matches.push({
-                    found: m[0],
-                    index: m['index'] + curPos
-                });
-
-                curPos = curPos + m['index'] + m[0].length;
-            } while (m != null);
-
-            if (matches.length > 0) {
-                text += '</font>';
-
-                for (let i = matches.length - 1; i >= 0; --i) {
-                    let color = matches[i].found.substring(1, matches[i].found.length - 1);
-                    let insertHtml = `${i !== 0 ? '</font>' : ''}<font color="#${color}">`;
-                    text = `${text.slice(0, matches[i].index)}${insertHtml}${text.slice(
-                        matches[i].index + matches[i].found.length,
-                        text.length
-                    )}`;
-                }
-            }
-
-            return text;
-        }
-    },
     template: `
             <div class="chat">
                 <help></help>
@@ -335,41 +371,5 @@ const chat = Vue.component('chat', {
                     <input class="chatInput-hidden" ref="chatInput" disabled></input>
                 </div>
             </div>
-        `,
-    mounted() {
-        if ('alt' in window) {
-            alt.on('chat:Append', this.appendMessage);
-            alt.on('chat:Focus', this.focusChat);
-            alt.on('chat:PopulateCommands', this.populateCommands);
-        } else {
-            let count = 0;
-            let interval = setInterval(() => {
-                count += 1;
-                this.appendMessage(
-                    `Message ${count} lore impsum do stuff long words and this is me screaming internally.`
-                );
-
-                if (count >= 100) {
-                    clearInterval(interval);
-                }
-            }, 100);
-
-            setTimeout(() => {
-                this.focusChat();
-            }, 1000);
-        }
-
-        window.addEventListener('keyup', this.handleKeybinds);
-    },
-    beforeDestroy() {
-        window.removeEventListener('keyup', this.handleKeybinds);
-
-        if (!('alt' in window)) {
-            return;
-        }
-
-        alt.off('chat:Append', this.appendMessage);
-        alt.off('chat:Focus', this.focusChat);
-        alt.off('chat:PopulateCommands', this.populateCommands);
-    }
+        `
 });

@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import JobEnums, { Objective } from '../../shared/interfaces/Job';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
+import JobEnums, { Objective } from 'core/shared/interfaces/Job';
+import { isFlagEnabled } from 'core/shared/utility/flags';
+import { distance } from 'core/shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { drawText2D, drawText3D } from '../utility/text';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
@@ -38,7 +38,7 @@ class ObjectiveController {
             ObjectiveController.blip.scale = data.blip.scale;
 
             // Beta Feature? Not implemented yet.
-            if (ObjectiveController.blip.hasOwnProperty('size')) {
+            if (Object.prototype.hasOwnProperty.call(ObjectiveController.blip, 'size')) {
                 ObjectiveController.blip.size = { x: data.blip.scale, y: data.blip.scale } as alt.Vector2;
             }
 

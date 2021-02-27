@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View_Events_Characters } from '../../../shared/enums/views';
-import { Character } from '../../../shared/interfaces/Character';
+import { View_Events_Characters } from 'core/shared/enums/views';
+import { Character } from 'core/shared/interfaces/Character';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
 import { handleEquipment } from '../clothing/clothing';
