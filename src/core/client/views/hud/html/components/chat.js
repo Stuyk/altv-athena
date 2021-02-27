@@ -109,10 +109,7 @@ const chat = Vue.component('chat', {
             }
         },
         addZero(i) {
-            if (i < 10) {
-              i = "0" + i;
-            }
-            return i;
+            return i.padStart(2, "0")
         },
         handleSend(e) {
             const message = e.target.value;
