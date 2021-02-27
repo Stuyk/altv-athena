@@ -43,7 +43,7 @@ const chat = Vue.component('chat', {
             const date = new Date(currentTime);
             messages.push({
                 message: msg,
-                time: `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`
+                time: `[${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}:${this.addZero(date.getSeconds())}]`
             });
 
             // Log Messages to Console
@@ -106,6 +106,16 @@ const chat = Vue.component('chat', {
             this.position -= 1;
             this.currentMessage = this.previous[this.position];
         },
+        appendPrevious(message) {
+            if (!this.previous.includes(message)) {
+                this.previous = this.previous.filter((x) => x !== '');
+                this.previous.unshift(message);
+                this.previous.unshift('');
+            }
+        },
+        addZero(i) {
+            return i.padStart(2, "0")
+        },
         handleSend(e) {
             const message = e.target.value;
             this.chatActive = false;
@@ -123,7 +133,8 @@ const chat = Vue.component('chat', {
             if (message === '/timestamp') {
                 this.timestamp = !this.timestamp;
                 this.appendMessage(`You have toggled timestamps.`);
-
+                this.appendPrevious(message)
+                
                 if ('alt' in window) {
                     alt.emit('chat:Send');
                 }
@@ -134,7 +145,8 @@ const chat = Vue.component('chat', {
                 for (let i = 0; i < commands.length; i++) {
                     this.appendMessage(`${commands[i].description}`);
                 }
-
+                this.appendPrevious(message)
+                
                 if ('alt' in window) {
                     alt.emit('chat:Send');
                 }
@@ -156,11 +168,7 @@ const chat = Vue.component('chat', {
             }
 
             // Appends message to front of array.
-            if (!this.previous.includes(message)) {
-                this.previous = this.previous.filter((x) => x !== '');
-                this.previous.unshift(message);
-                this.previous.unshift('');
-            }
+            this.appendPrevious(message)
 
             // Handle Send Message
             if ('alt' in window) {

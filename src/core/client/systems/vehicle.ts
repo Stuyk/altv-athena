@@ -70,6 +70,9 @@ export class VehicleController {
         if (!alt.Player.local.isInteractionOn) {
             return;
         }
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
 
         this[booleanName] = true;
     }
