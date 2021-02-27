@@ -22,12 +22,14 @@ import './systems/interiors';
 import './systems/job';
 import './systems/meta';
 import './systems/nametag';
+import './systems/marker';
 import './systems/noclip';
 import './systems/particle';
 import './systems/quickToken';
 import './systems/sound';
 import './systems/tasks';
 import './systems/tick';
+import './systems/textlabel';
 import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
@@ -44,3 +46,8 @@ import './views/creator/creator';
 import './views/characters/characters';
 import './views/clothing/clothing';
 import './views/inventory/inventory';
+import './views/job/job';
+import './views/vehicles/vehicles';
+
+// Client Plugins
+import '../client-plugins/imports';

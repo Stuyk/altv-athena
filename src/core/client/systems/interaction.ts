@@ -1,17 +1,21 @@
 import * as alt from 'alt-client';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ActionMenu, Action } from '../../shared/interfaces/Actions';
 import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
 import { KEY_BINDS } from '../events/keyup';
 import { drawMarker } from '../utility/marker';
+import { ActionsController } from '../views/hud/controllers/actionsController';
 import { HelpController } from '../views/hud/controllers/helpController';
-import { BaseHUD } from '../views/hud/hud';
+import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
 
 const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
 const MAX_CHECKPOINT_DRAW = 8;
-const TIME_BETWEEN_CHECKS = 1000;
+const TIME_BETWEEN_CHECKS = 500;
+let NEXT_MENU_UPDATE = Date.now() + 2000;
+let dynamicActionMenu: ActionMenu<any> = {};
 
 export class InteractionController {
     static customInteractions: Array<Interaction> = [];
@@ -28,7 +32,7 @@ export class InteractionController {
     static toggleInteractionMode(): void {
         // Prevents clearing the interaction and is forced into being on all of the time.
         if (InteractionController.isAlwaysOn) {
-            BaseHUD.updateInteract(true);
+            BaseHUD.setHudStatus(HudEventNames.Interact, true);
             return;
         }
 
@@ -40,11 +44,11 @@ export class InteractionController {
         InteractionController.isOn = !InteractionController.isOn;
         if (!InteractionController.isOn) {
             alt.Player.local.isInteractionOn = false;
-            BaseHUD.updateInteract(false);
+            BaseHUD.setHudStatus(HudEventNames.Interact, false);
             return;
         }
 
-        BaseHUD.updateInteract(true);
+        BaseHUD.setHudStatus(HudEventNames.Interact, true);
         alt.Player.local.isInteractionOn = true;
         InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
         InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
@@ -69,61 +73,73 @@ export class InteractionController {
     static handleInteractionMode() {
         if (alt.Player.local.isMenuOpen) {
             InteractionController.pressedKey = false;
+            dynamicActionMenu = {};
             return;
         }
 
         if (alt.Player.local.isChatOpen) {
             InteractionController.pressedKey = false;
+            dynamicActionMenu = {};
             return;
         }
 
         if (alt.Player.local.meta.isDead) {
             InteractionController.pressedKey = false;
+            dynamicActionMenu = {};
             return;
         }
 
-        // Non-Interaction Based Items
-        // Vehicles and such...
-        if (!alt.Player.local.closestInteraction) {
-            VehicleController.runVehicleControllerTick();
-            InteractionController.pressedKey = false;
-            return;
+        VehicleController.runVehicleControllerTick();
+
+        // Populates the Menu
+        if (Date.now() > NEXT_MENU_UPDATE) {
+            NEXT_MENU_UPDATE = Date.now() + 1000;
+            dynamicActionMenu = {};
+
+            // Populate Vehicle Options
+            const vehicleMenus = VehicleController.getVehicleOptions();
+            if (Object.keys(vehicleMenus).length >= 1) {
+                dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
+            }
         }
 
-        // All Interaction Based Items
-        // ATMs, Fuel Pumps, etc.
+        // Populates Interaction Menu
+        if (alt.Player.local.closestInteraction) {
+            const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
+            if (dist < MAX_CHECKPOINT_DRAW) {
+                const interaction = InteractionController.getCustomInteraction(
+                    alt.Player.local.closestInteraction.type
+                );
+                dynamicActionMenu[interaction ? interaction.text : 'Interact with Object'] = {
+                    eventName: SYSTEM_EVENTS.INTERACTION,
+                    isServer: true,
+                    data: alt.Player.local.closestInteraction.type
+                };
+            }
+        }
+
+        // Timeout for Key Presses
         if (InteractionController.nextKeyPress > Date.now()) {
             InteractionController.pressedKey = false;
             return;
         }
 
-        const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
-        if (dist > MAX_CHECKPOINT_DRAW) {
-            InteractionController.pressedKey = false;
+        // Check that the Dynamic Menu has Items
+        if (Object.keys(dynamicActionMenu).length <= 0) {
             return;
         }
 
-        drawMarker(
-            1,
-            alt.Player.local.closestInteraction.position,
-            new alt.Vector3(0.05, 0.05, 8),
-            new alt.RGBA(0, 255, 0, 100)
-        );
+        // Show this when interactions available is populated.
+        HelpController.updateHelpText(KEY_BINDS.INTERACT, `View Options`, null);
 
-        if (dist < MAX_INTERACTION_DRAW) {
-            const interaction = InteractionController.getCustomInteraction(alt.Player.local.closestInteraction.type);
-            if (!interaction) {
-                HelpController.updateHelpText(KEY_BINDS.INTERACT, `Interact with Object`, null);
-            } else {
-                HelpController.updateHelpText(KEY_BINDS.INTERACT, interaction.text, null);
-            }
-
-            if (InteractionController.pressedKey) {
-                InteractionController.pressedKey = false;
-                InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-                alt.emitServer(SYSTEM_EVENTS.INTERACTION, alt.Player.local.closestInteraction.type);
-            }
+        // Open the Dynamic Menu
+        if (InteractionController.pressedKey) {
+            InteractionController.pressedKey = false;
+            InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+            ActionsController.set(dynamicActionMenu);
         }
+
+        return;
     }
 
     static getCustomInteraction(type: string): Interaction | null {

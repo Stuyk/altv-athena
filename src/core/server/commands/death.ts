@@ -10,6 +10,8 @@ ChatController.addCommand(
     handleCommand
 );
 
+ChatController.addAliases('acceptdeath', ['respawn']);
+
 function handleCommand(player: alt.Player): void {
     if (!player || !player.valid) {
         return;

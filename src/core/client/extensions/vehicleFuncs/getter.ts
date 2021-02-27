@@ -65,7 +65,7 @@ function canExit(v: alt.Vehicle) {
  * @memberof Vehicle
  */
 function owner(v: alt.Vehicle): boolean {
-    return v.owner === alt.Player.local.id.toString();
+    return v.owner === alt.Player.local.id;
 }
 
 export default {

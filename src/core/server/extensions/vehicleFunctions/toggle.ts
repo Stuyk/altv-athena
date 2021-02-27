@@ -1,5 +1,12 @@
 import * as alt from 'alt-server';
-import { Vehicle_Lock_State, Vehicle_Lock_States, Vehicle_State } from '../../../shared/enums/vehicle';
+import {
+    Vehicle_Behavior,
+    Vehicle_Lock_State,
+    Vehicle_Lock_States,
+    Vehicle_State
+} from '../../../shared/enums/vehicle';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { playerFuncs } from '../Player';
 import getter from './getter';
 import keys from './keys';
@@ -13,7 +20,7 @@ function lock(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): Vehi
     }
 
     if (v.athenaLockState === null || v.athenaLockState === undefined) {
-        v.athenaLockState = Vehicle_Lock_State.LOCKED;
+        v.athenaLockState = Vehicle_Lock_State.UNLOCKED;
 
         for (let i = 0; i < 6; i++) {
             setter.doorOpen(v, player, i, false);
@@ -38,17 +45,32 @@ function lock(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): Vehi
         }
     }
 
+    alt.emit(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, v);
     return v.athenaLockState;
 }
 
-function engine(v: alt.Vehicle, player: alt.Player): void {
-    if (!getter.isOwner(v, player) && !keys.has(v, player)) {
+function engine(v: alt.Vehicle, player: alt.Player, bypass: boolean = false): void {
+    if (isFlagEnabled(v.behavior, Vehicle_Behavior.NEED_KEY_TO_START) && !bypass) {
+        if (!getter.isOwner(v, player) && !keys.has(v, player)) {
+            return;
+        }
+    }
+
+    if (!getter.hasFuel(v)) {
+        v.engineStatus = false;
+        v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
+        playerFuncs.emit.notification(player, `~r~No Fuel`);
         return;
     }
 
-    v.engineStatus = !v.engineStatus ? true : false;
+    v.engineStatus = !v.engineStatus;
     v.setStreamSyncedMeta(Vehicle_State.ENGINE, v.engineStatus);
-    playerFuncs.emit.notification(player, `Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
+
+    if (player) {
+        playerFuncs.emit.notification(player, `Engine ~y~${v.engineStatus ? 'On' : 'Off'}`);
+    }
+
+    alt.emit(ATHENA_EVENTS_VEHICLE.ENGINE_STATE_CHANGE, v);
 }
 
 export default {

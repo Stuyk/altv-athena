@@ -4,6 +4,7 @@ import { Database, getDatabase } from 'simplymongo';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 import select from './select';
+import { Vehicle } from '../../../shared/interfaces/Vehicle';
 
 const db: Database = getDatabase();
 

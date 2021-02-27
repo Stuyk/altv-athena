@@ -2,10 +2,15 @@ import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
+import { TextLabelController } from '../../server/systems/textlabel';
 import { CurrencyTypes } from '../../shared/enums/currency';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AnimationFlags } from '../../shared/flags/animation';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
+import { JobTrigger } from '../../shared/interfaces/JobTrigger';
+import { distance2d } from '../../shared/utility/vector';
 
+const startPosition = { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 };
 const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
@@ -269,19 +274,15 @@ alt.on('heist:Completed', (player: alt.Player, pos: alt.Vector3) => {
     playerFuncs.currency.add(player, CurrencyTypes.CASH, reward);
 });
 
-alt.on('heistjewelrystore', (player: alt.Player) => {
-    const job = new Job();
-    job.loadObjectives(objectives);
-    job.addPlayer(player);
-});
-
+// Interactions for this Heist
+TextLabelController.add({ data: 'Jewelry Store Heist', pos: startPosition, maxDistance: 10 });
 InteractionController.addInteraction(
     'heistjewelrystore',
-    { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 } as alt.Vector3,
+    startPosition,
     3,
     'Start Jewelry Store Heist',
     {
-        pos: { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 } as alt.Vector3,
+        pos: startPosition,
         sprite: 112,
         color: 7,
         shortRange: false,
@@ -290,3 +291,25 @@ InteractionController.addInteraction(
     },
     true
 );
+
+alt.on('heistjewelrystore', (player: alt.Player) => {
+    const trigger: JobTrigger = {
+        header: 'Rob the Jewelry Store',
+        event: 'heist:Start',
+        image: 'https://i.imgur.com/Gi887Wk.png',
+        summary: `It's time to put up or shutup. Grab your gun and a group of friends because you're about to rob the jewelry store.`
+    };
+
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
+});
+
+alt.on('heist:Start', (player: alt.Player) => {
+    if (distance2d(player.pos, startPosition) > 5) {
+        playerFuncs.emit.notification(player, `~r~Too far away...`);
+        return;
+    }
+
+    const job = new Job();
+    job.loadObjectives(objectives);
+    job.addPlayer(player);
+});

@@ -149,10 +149,15 @@ body {
 
     .messages {
         direction: rtl;
-        overflow: auto;
+        overflow-y: scroll;
         min-height: 35vh;
         max-height: 35vh;
         user-select: none;
+
+        &::-webkit-scrollbar {
+            width: 0; /* Remove scrollbar space */
+            background: transparent; /* Optional: just make scrollbar invisible */
+        }
 
         .message {
             color: white;
@@ -164,6 +169,43 @@ body {
             font-family: 'Arial';
             font-size: 14px;
             font-weight: 600;
+            overflow-wrap: break-word;
+            overflow: visible;
+        }
+    }
+}
+
+.actionsWrapper {
+    position: fixed;
+    bottom: 15vh;
+    min-width: 100vw;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .actionMenu {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        max-width: 600px;
+        background: rgba(25, 25, 25, 0.75);
+        box-sizing: border-box;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        user-select: none;
+
+        .action {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .active {
+            background: rgba(25, 25, 25, 0.25);
+            border-radius: 5px;
         }
     }
 }

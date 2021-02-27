@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
@@ -6,6 +7,7 @@ import { playerFuncs } from '../extensions/Player';
 
 const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
+alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
 
 export type PlayerDataName = string;
 
@@ -97,7 +99,11 @@ export class Job {
     }
 
     quit(reason: string) {
-        // Needs to wipe current player job data.
+        if (JobInstances[this.player.data.name]) {
+            delete JobInstances[this.player.data.name];
+        }
+
+        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
         playerFuncs.emit.message(this.player, reason);
     }
 
@@ -288,4 +294,18 @@ function handleVerify(player: alt.Player) {
     alt.setTimeout(() => {
         instance.checkObjective();
     }, 0);
+}
+
+function handleJobAction(player: alt.Player, triggerName: string) {
+    alt.emit(triggerName, player);
+}
+
+/**
+ * Get the player's current Job Instance.
+ * @export
+ * @param {alt.Player} player
+ * @return {Job | null}  {(Job | null)}
+ */
+export function getPlayerJob(player: alt.Player): Job | null {
+    return JobInstances[player.data.name];
 }

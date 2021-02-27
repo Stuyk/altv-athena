@@ -17,7 +17,8 @@ const tagOrComment = new RegExp(
     'gi'
 );
 
-const messages = [];
+const messages = ['Use {00FFFF}LEFT ALT + TAB {FFFFFF}to turn on Interaction', 'Use I for Inventory'];
+
 let commands = [
     { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
     { name: 'help', description: '/help - List all available commands for your permission level.' }
@@ -42,7 +43,9 @@ const chat = Vue.component('chat', {
             const date = new Date(currentTime);
             messages.push({
                 message: msg,
-                time: `[${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}:${this.addZero(date.getSeconds())}]`
+                time: `[${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}:${this.addZero(
+                    date.getSeconds()
+                )}]`
             });
 
             // Log Messages to Console
@@ -75,6 +78,10 @@ const chat = Vue.component('chat', {
         },
         focusChat() {
             this.chatActive = true;
+
+            if ('alt' in window) {
+                alt.emit('commands:Update');
+            }
         },
         handleEscape() {
             this.chatActive = false;
@@ -109,7 +116,10 @@ const chat = Vue.component('chat', {
             }
         },
         addZero(i) {
-            return i.padStart(2, "0")
+            if (i < 10) {
+                i = '0' + i;
+            }
+            return i;
         },
         handleSend(e) {
             const message = e.target.value;
@@ -128,20 +138,34 @@ const chat = Vue.component('chat', {
             if (message === '/timestamp') {
                 this.timestamp = !this.timestamp;
                 this.appendMessage(`You have toggled timestamps.`);
-                this.appendPrevious(message)
-                
+                this.appendPrevious(message);
+
                 if ('alt' in window) {
                     alt.emit('chat:Send');
                 }
                 return;
             }
 
-            if (message === '/help' || message === '/commands') {
+            if (message === '/commands' || message === '/cmds') {
                 for (let i = 0; i < commands.length; i++) {
                     this.appendMessage(`${commands[i].description}`);
                 }
-                this.appendPrevious(message)
-                
+                this.appendPrevious(message);
+
+                if ('alt' in window) {
+                    alt.emit('chat:Send');
+                }
+                return;
+            }
+
+            if (message === '/help') {
+                this.appendMessage(`{00FFFF}[ alt ]{FFFFFF} - Toggle Interaction Mode`);
+                this.appendMessage(`{00FFFF}[ e ]{FFFFFF} - Interact`);
+                this.appendMessage(`{00FFFF}[ i ]{FFFFFF} - Inventory`);
+                this.appendMessage(`{00FFFF}[ f ]{FFFFFF} - (Vehicle) Enter / Exit / Start / Stop / Toggle Door`);
+                this.appendMessage(`{00FFFF}[ x ]{FFFFFF} - (Vehicle) Unlock / Lock `);
+                this.appendMessage(`{00FFFF}[ f2 ]{FFFFFF} - Leaderboard`);
+
                 if ('alt' in window) {
                     alt.emit('chat:Send');
                 }
@@ -149,7 +173,7 @@ const chat = Vue.component('chat', {
             }
 
             // Appends message to front of array.
-            this.appendPrevious(message)
+            this.appendPrevious(message);
 
             // Handle Send Message
             if ('alt' in window) {
@@ -196,6 +220,32 @@ const chat = Vue.component('chat', {
 
             commands = commands.concat(serverCommands);
             this.updateCount += 1;
+
+            this.$nextTick(() => {
+                if (!this.$refs || !this.$refs.messages) {
+                    return;
+                }
+                this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
+            });
+        },
+        handleKeybinds(e) {
+            // PageUp
+            if (e.keyCode === 33) {
+                this.$refs.messages.scrollTop -= 300;
+
+                if (this.$refs.messages.scrollTop < 0) {
+                    this.$refs.messages.scrollTop = 0;
+                }
+            }
+
+            // PageDown
+            if (e.keyCode === 34) {
+                this.$refs.messages.scrollTop += 300;
+
+                if (this.$refs.messages.scrollTop > this.$refs.messages.scrollHeight) {
+                    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
+                }
+            }
         }
     },
     directives: {
@@ -293,23 +343,33 @@ const chat = Vue.component('chat', {
             alt.on('chat:PopulateCommands', this.populateCommands);
         } else {
             let count = 0;
-            setInterval(() => {
+            let interval = setInterval(() => {
                 count += 1;
                 this.appendMessage(
                     `Message ${count} lore impsum do stuff long words and this is me screaming internally.`
                 );
+
+                if (count >= 100) {
+                    clearInterval(interval);
+                }
             }, 100);
 
             setTimeout(() => {
                 this.focusChat();
             }, 1000);
         }
+
+        window.addEventListener('keyup', this.handleKeybinds);
     },
-    unmounted() {
-        if ('alt' in window) {
-            alt.off('chat:Append', this.appendMessage);
-            alt.off('chat:Focus', this.focusChat);
-            alt.off('chat:PopulateCommands', this.populateCommands);
+    beforeDestroy() {
+        window.removeEventListener('keyup', this.handleKeybinds);
+
+        if (!('alt' in window)) {
+            return;
         }
+
+        alt.off('chat:Append', this.appendMessage);
+        alt.off('chat:Focus', this.focusChat);
+        alt.off('chat:PopulateCommands', this.populateCommands);
     }
 });

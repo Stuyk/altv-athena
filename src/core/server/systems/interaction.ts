@@ -14,12 +14,19 @@ interface InteractionHelper {
     [key: string]: Array<alt.Colshape>;
 }
 
+interface InteractionDefault {
+    eventName: string;
+    isServer: boolean;
+    maxRadius?: number;
+}
+
 let customInteractions: Array<Interaction> = [];
 
 export class InteractionController {
     static Interactions: InteractionHelper = {};
-    static InteractionTypes: { [key: string]: { eventName: string; isServer: boolean } } = {
+    static InteractionTypes: { [key: string]: InteractionDefault } = {
         atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false },
+        gas: { eventName: SYSTEM_EVENTS.INTERACTION_FUEL, isServer: true, maxRadius: 1 },
         clothing: { eventName: View_Events_Clothing.Open, isServer: false }
     };
 
@@ -34,10 +41,17 @@ export class InteractionController {
         gridData.forEach((grid) => {
             Object.keys(grid.objects).forEach((key) => {
                 const category = key;
+                const interaction = InteractionController.InteractionTypes[category];
+
+                let defaultRadius = 2.5;
+                if (interaction && interaction.maxRadius) {
+                    defaultRadius = interaction.maxRadius;
+                }
+
                 const infoData: Array<{ position: alt.Vector3 }> = grid.objects[key];
                 infoData.forEach((info) => {
                     const newPos = new alt.Vector3(info.position.x, info.position.y, info.position.z - 1);
-                    const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, 3, 2.5);
+                    const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, defaultRadius, 2.5);
                     shape.playersOnly = true;
                     shape['isInteraction'] = true;
                     shape['interactionType'] = category;
@@ -68,7 +82,7 @@ export class InteractionController {
      */
     static addInteraction(
         identifierAndEventName: string,
-        position: alt.Vector3,
+        position: alt.IVector3,
         range: number,
         activationText: string,
         blip: Blip,

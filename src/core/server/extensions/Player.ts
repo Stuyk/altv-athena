@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';
-import { sha256 } from '../utility/encryption';
 import currency from './playerFunctions/currency';
 import dataUpdater from './playerFunctions/dataUpdater';
 import emit from './playerFunctions/emit';
@@ -49,8 +48,9 @@ declare module 'alt-server' {
         gridSpace: number;
         currentWeather: string;
 
-        // ext
-        ext: string;
+        // Vehicle Info
+        lastEnteredVehicleID: number;
+        lastVehicleID: number;
     }
 }
 

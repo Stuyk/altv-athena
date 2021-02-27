@@ -1,7 +1,6 @@
 # Table of contents
 
 -   [Introduction](README.md)
--   [Feature Status](documentation/feature-status.md)
 -   [Showcase](documentation/showcase.md)
 -   [Changelog](documentation/changelog.md)
 -   [FAQ](documentation/faq.md)
@@ -19,12 +18,15 @@
 
 ## Basic Scripting
 
+-   [Adding Custom Features](documentation/scripting/adding-features.md)
 -   [Adding Commands](documentation/scripting/adding-commands.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
 -   [Adding Items](documentation/scripting/adding-items.md)
 -   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
+-   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
+-   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
 
 ## External Links
 

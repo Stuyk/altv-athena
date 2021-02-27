@@ -13,6 +13,9 @@ import { OptionsController } from './options';
 import './tick';
 import './voice';
 import './job';
+import './marker';
+import './textlabel';
+import { vehicleFuncs } from '../extensions/Vehicle';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -79,6 +82,10 @@ export class LoginController {
     static tryDisconnect(player: alt.Player, reason: string): void {
         if (!player || !player.valid || !player.data) {
             return;
+        }
+
+        if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
+            vehicleFuncs.new.despawn(player.lastVehicleID);
         }
 
         alt.log(`${player.data.name} has logged out.`);

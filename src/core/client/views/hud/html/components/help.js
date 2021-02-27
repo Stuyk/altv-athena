@@ -70,11 +70,13 @@ const help = Vue.component('help', {
             }, 3000);
         }
     },
-    unmounted() {
-        if ('alt' in window) {
-            alt.off('hud:HelpText', this.setHelpText);
-            alt.off('hud:HelpState', this.setHelpState);
+    beforeDestroy() {
+        if (!('alt' in window)) {
+            return;
         }
+
+        alt.off('hud:HelpText', this.setHelpText);
+        alt.off('hud:HelpState', this.setHelpState);
     },
     template: `
         <div class="helpWrapper">

@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson';
 import { Permissions } from '../../shared/flags/permissions';
 
 /**
@@ -6,7 +7,7 @@ import { Permissions } from '../../shared/flags/permissions';
  * @interface Account
  */
 export interface Account {
-    _id: string;
+    _id: any;
     discord: string;
     ips: Array<string>;
     hardware: Array<string>;

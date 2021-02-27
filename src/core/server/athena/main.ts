@@ -70,5 +70,7 @@ export const DEFAULT_CONFIG = {
         'CLEARING'
     ],
     // Vehicle Properties
-    MAXIMUM_FUEL: 100
+    TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
+    TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
+    FUEL_LOSS_PER_PLAYER_TICK: 0.1 // Happens every 10s
 };

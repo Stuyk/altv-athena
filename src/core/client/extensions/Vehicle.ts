@@ -19,7 +19,7 @@ export interface DoorData {
 declare module 'alt-client' {
     export interface Vehicle {
         doorStates: { [doorNumber: number]: boolean };
-        owner: string | number;
+        owner: number;
         engineStatus: boolean;
         lockStatus: number | Vehicle_Lock_State;
         fuel: number;

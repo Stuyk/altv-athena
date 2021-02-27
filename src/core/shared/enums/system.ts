@@ -1,9 +1,16 @@
 export enum SYSTEM_EVENTS {
+    APPEND_BLIP = 'append:Blip',
+    APPEND_MARKER = 'append:Marker',
+    APPEND_TEXTLABELS = 'append:TextLabel',
+    //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',
     INTERACTION_ATM_ACTION = 'atm:Action',
+    INTERACTION_FUEL = 'fuel:Action',
+    INTERACTION_JOB = 'job:Interaction',
+    INTERACTION_JOB_ACTION = 'job:Action',
     //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',
@@ -31,19 +38,30 @@ export enum SYSTEM_EVENTS {
     PLAYER_TOOLBAR_SET = 'player:Toolbar',
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
+    PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    //
     POPULATE_BLIPS = 'blips:Populate',
+    POPULATE_MARKERS = 'markers:Populate',
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',
     POPULATE_INTERACTIONS = 'interactions:Populate',
+    POPULATE_TEXTLABELS = 'POPULATE_TEXTLABELS',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
     QUICK_TOKEN_NONE = 'quicktoken:None',
     QUICK_TOKEN_UPDATE = 'quicktoken:Update',
     //
-    PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    REMOVE_MARKER = 'remove:Marker',
+    REMOVE_BLIP = 'remove:Blip',
+    REMOVE_TEXTLABEL = 'remove:Textlabel',
+    //
+    SET_ACTION_MENU = 'actions:Set',
     //
     TICKS_START = 'ticks:Start',
+    //
+    VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',
+    VEHICLES_VIEW_DESPAWN = 'vehicles:Despawn',
     //
     WORLD_UPDATE_TIME = 'time:Update',
     WORLD_UPDATE_WEATHER = 'weather:Update',

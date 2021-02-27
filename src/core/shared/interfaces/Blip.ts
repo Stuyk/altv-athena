@@ -8,4 +8,5 @@ export interface Blip {
     text: string;
     scale: number;
     identifier?: string;
+    uid?: string;
 }

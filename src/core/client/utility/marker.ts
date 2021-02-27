@@ -6,11 +6,11 @@ const zeroVector = { x: 0, y: 0, z: 0 };
 /**
  * Draw a marker in an every tick.
  * @param  {number} type
- * @param  {alt.Vector3} pos
- * @param  {alt.Vector3} scale
+ * @param  {alt.IVector3} pos
+ * @param  {alt.IVector3} scale
  * @param  {alt.RGBA} color
  */
-export function drawMarker(type: number, pos: alt.Vector3, scale: alt.Vector3, color: alt.RGBA) {
+export function drawMarker(type: number, pos: alt.IVector3, scale: alt.IVector3, color: alt.RGBA) {
     native.drawMarker(
         type,
         pos.x,

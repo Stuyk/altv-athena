@@ -4,6 +4,55 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.7.0 - February 18-26, 2021
+
+```diff
++ Added Fuel Pumps
++ Added Vehicle Fuel System
++ Added Vehicle Ownership Adding to Players
++ Added Vehicle Ownership Removal from Players
++ Added Owned Vehicle Spawning
++ Added Vehicle Behavior Helpers
++ Added Vehicle Saving / Synchronization
++ Limited Spawned Vehicles at Once to 1
++ Fixed Vehicle Fuel Calculations
++ Fixed Vehicle Consuming Fuel without Engine On
++ Fixed Duplicate Ground Code for Items
++ Added Global Text Label Controller
++ Added Global Marker Controller
++ Added Client Plugins Folder with Basic Example
++ Added Documentation for Client Plugins
++ Added Custom Job Preview Panel
++ Added /quitjob
++ Added PgUp & PgDn for Chat
++ Fixed Clothing Menu Drawables / Textures Overflow
++ Fixed Design Choices for Clothing Menu
++ Fixed Command Helper Issues
++ Small HUD Tweaks
++ Vehicle Spawn Interface
++ Vehicles Meta for Vehicle Spawn Interface
++ Vehicle Ownership for Spawned Vehicles
++ Vehicles Now Save Positions
++ Fixed Headlights Status for HUD
++ Prevent Opening Vehicle Menu while Chat is Open
++ Prevent Opening Inventory while Dead
++ Added Unique Athena Events for Vehicles, Players
++ Fixed Global Text Labels
++ Added Append & Remove to Textlabels
++ Added Append & Remove to Markers
++ Added Append & Remove to Blips
++ Patch Chat Bug for Overflow
++ Patch Chat Scroll Bug
++ Added Action Menu
++ Added Action Menu Handler Server-side
++ Added Example of using Action Menu
++ Rewrote Vehicle Usage to use Action Menu
++ Rewrote Vehicle Client-Side Events
++ Fixed Lock Status Bug for Vehicle
++ Added 'F' & 'G' keys to Enter / Exit Vehicles
++ Removed Old Vehicle Code
+```
+
 ## 1.6.0 - February 1-10, 2021
 
 ```diff
@@ -390,4 +439,3 @@ description: List of all the changes and current versions.
 + Initial Vehicle System
 + Defined Interfaces for Future Usage
 ```
-

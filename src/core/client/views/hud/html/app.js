@@ -14,7 +14,7 @@ const audioStreams = [];
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
-    components: [leaderboard, chat, help, status],
+    components: [actions, leaderboard, chat, help, status],
     data() {
         return {
             show: false,
@@ -121,7 +121,7 @@ const app = new Vue({
             }
 
             setTimeout(() => {
-                this.audioStream(`KrUak31dVqc`, 25, 25);
+                // this.audioStream(`KrUak31dVqc`, 25, 25);
             }, 1000);
         }
 

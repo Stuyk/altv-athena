@@ -8,9 +8,9 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
 import '../effects/heal';
 import '../effects/vehicleRepair';
+import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
 
 interface CategoryData {
     abbrv: string;
@@ -234,6 +234,7 @@ export class InventoryController {
 
         this.updateDroppedItemsAroundPlayer(player, true);
         playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
+        alt.emit(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
     }
 
     static getDroppedItemsByGridSpace(gridSpace: number): Array<DroppedItem> {

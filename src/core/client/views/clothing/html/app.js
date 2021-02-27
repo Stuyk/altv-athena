@@ -14,7 +14,7 @@ const app = new Vue({
             // So the first element is the first slot of the equipment.
             name: '',
             desc: '',
-            componentIndex: 0,
+            componentIndex: 2,
             cost: 0,
             shirtNames: ['Top', 'Undershirt', 'Torso'],
             components: [
@@ -176,7 +176,7 @@ const app = new Vue({
 
             if (dataName === 'textures') {
                 const maxValue = newComponents[this.componentIndex].maxTextures[index];
-                if (newComponents[this.componentIndex].textures[index] < -1) {
+                if (newComponents[this.componentIndex].textures[index] <= -1) {
                     newComponents[this.componentIndex].textures[index] = maxValue;
                 }
             }

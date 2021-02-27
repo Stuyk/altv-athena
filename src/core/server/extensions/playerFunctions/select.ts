@@ -1,14 +1,17 @@
 import * as alt from 'alt-server';
+import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { InteractionController } from '../../systems/interaction';
+import { MarkerController } from '../../systems/marker';
 import emit from './emit';
 import safe from './safe';
 import setter from './setter';
 import sync from './sync';
+import { TextLabelController } from '../../systems/textlabel';
 
 /**
  * Select a character based on the character data provided.
@@ -62,18 +65,23 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
             emit.meta(p, 'isDead', false);
         }
 
+        // Synchronization
         sync.currencyData(p);
         sync.weather(p);
         sync.time(p);
         sync.inventory(p);
         sync.water(p);
         sync.food(p);
+        sync.vehicles(p);
 
         // Propagation
         ChatController.populateCommands(p);
         InteractionController.populateCustomInteractions(p);
         BlipController.populateGlobalBlips(p);
+        MarkerController.populateGlobalMarkers(p);
+        TextLabelController.populateGlobalLabels(p);
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
+        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, p);
     }, 500);
 
     // Delete unused data from the Player.

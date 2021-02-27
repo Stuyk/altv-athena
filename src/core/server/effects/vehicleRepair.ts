@@ -20,6 +20,11 @@ function handleRepair(player: alt.Player) {
         return;
     }
 
+    if (player.vehicle) {
+        playerFuncs.emit.message(player, `You must exit the vehicle first.`);
+        return;
+    }
+
     const removedKit = playerFuncs.inventory.findAndRemove(player, 'Repair Kit');
     if (!removedKit) {
         playerFuncs.emit.message(player, `You do not have a repair kit.`);
