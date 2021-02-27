@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { Account } from '../../interface/Account';
+import { Account } from 'core/server/interface/Account';
 import { Permissions } from 'core/shared/flags/permissions';
-import { getUniquePlayerHash } from '../../utility/encryption';
+import { getUniquePlayerHash } from 'core/server/utility/encryption';
 import { Database, getDatabase } from 'simplymongo';
-import { DEFAULT_CONFIG } from '../../athena/main';
+import { DEFAULT_CONFIG } from 'core/server/athena/main';
 import { distance2d } from 'core/shared/utility/vector';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import emit from './emit';
@@ -11,7 +11,7 @@ import save from './save';
 import dataUpdater from './dataUpdater';
 import safe from './safe';
 import sync from './sync';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { ATHENA_EVENTS_PLAYER } from 'core/server/enums/athena';
 import { ActionMenu } from 'core/shared/interfaces/Actions';
 
 const db: Database = getDatabase();

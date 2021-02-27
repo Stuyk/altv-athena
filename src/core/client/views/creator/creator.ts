@@ -1,16 +1,16 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View } from '../../extensions/view';
+import { View } from 'core/client/extensions/view';
 import {
     createPedEditCamera,
     destroyPedEditCamera,
     setShouldDisableControls,
     setFov,
     setZPos
-} from '../../utility/camera';
+} from 'core/client/utility/camera';
 import { Appearance } from 'core/shared/interfaces/Appearance';
 import { View_Events_Creator } from 'core/shared/enums/views';
-import { playAnimation } from '../../systems/animations';
+import { playAnimation } from 'core/client/systems/animations';
 import { AnimationFlags } from 'core/shared/flags/animation';
 
 const url = `http://resource/client/views/creator/html/index.html`;

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../server/extensions/Player';
-import { InteractionController } from '../../server/systems/interaction';
-import { Job } from '../../server/systems/job';
-import { TextLabelController } from '../../server/systems/textlabel';
+import { playerFuncs } from 'core/server/extensions/Player';
+import { InteractionController } from 'core/server/systems/interaction';
+import { Job } from 'core/server/systems/job';
+import { TextLabelController } from 'core/server/systems/textlabel';
 import { CurrencyTypes } from 'core/shared/enums/currency';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { AnimationFlags } from 'core/shared/flags/animation';

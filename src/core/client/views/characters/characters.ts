@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { View_Events_Characters } from 'core/shared/enums/views';
 import { Character } from 'core/shared/interfaces/Character';
-import { View } from '../../extensions/view';
-import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
+import { View } from 'core/client/extensions/view';
+import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from 'core/client/utility/camera';
 import { handleEquipment } from '../clothing/clothing';
 import { handleSync } from '../creator/creator';
 

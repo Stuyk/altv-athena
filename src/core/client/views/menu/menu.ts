@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { Character } from 'core/shared/interfaces/Character';
-import { View } from '../../extensions/view';
+import { View } from 'core/client/extensions/view';
 
 const url = `http://resource/client/views/job/html/index.html`;
 let view: View;

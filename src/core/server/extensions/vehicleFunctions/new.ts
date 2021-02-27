@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { Vehicle_Behavior, Vehicle_State } from 'core/shared/enums/vehicle';
 import { Vehicle } from 'core/shared/interfaces/Vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
-import { sha256Random } from '../../utility/encryption';
+import { ATHENA_EVENTS_VEHICLE } from 'core/server/enums/athena';
+import { sha256Random } from 'core/server/utility/encryption';
 import { playerFuncs } from '../Player';
 
 const ownershipBehavior = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;

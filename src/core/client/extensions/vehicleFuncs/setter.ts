@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vehicle_Door_List, Vehicle_Lock_State } from 'core/shared/enums/vehicle';
-import { BaseHUD, HudEventNames } from '../../views/hud/hud';
+import { BaseHUD, HudEventNames } from 'core/client/views/hud/hud';
 
 /**
  * Set the owner of this vehicle locally.

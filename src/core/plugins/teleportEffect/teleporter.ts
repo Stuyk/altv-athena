@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../server/extensions/Player';
-import ChatController from '../../server/systems/chat';
+import { playerFuncs } from 'core/server/extensions/Player';
+import ChatController from 'core/server/systems/chat';
 import { ItemType } from 'core/shared/enums/itemType';
 import { Permissions } from 'core/shared/flags/permissions';
 import { Item } from 'core/shared/interfaces/Item';

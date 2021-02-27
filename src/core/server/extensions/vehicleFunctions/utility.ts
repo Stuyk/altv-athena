@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Vehicle_Events, Vehicle_Seat_List } from 'core/shared/enums/vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
+import { ATHENA_EVENTS_VEHICLE } from 'core/server/enums/athena';
 import { playerFuncs } from '../Player';
 
 function eject(v: alt.Vehicle, player: alt.Player): void {

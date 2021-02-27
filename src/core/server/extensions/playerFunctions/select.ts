@@ -1,17 +1,17 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { ATHENA_EVENTS_PLAYER } from 'core/server/enums/athena';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { Character } from 'core/shared/interfaces/Character';
-import { DEFAULT_CONFIG } from '../../athena/main';
-import { BlipController } from '../../systems/blip';
-import ChatController from '../../systems/chat';
-import { InteractionController } from '../../systems/interaction';
-import { MarkerController } from '../../systems/marker';
+import { DEFAULT_CONFIG } from 'core/server/athena/main';
+import { BlipController } from 'core/server/systems/blip';
+import ChatController from 'core/server/systems/chat';
+import { InteractionController } from 'core/server/systems/interaction';
+import { MarkerController } from 'core/server/systems/marker';
 import emit from './emit';
 import safe from './safe';
 import setter from './setter';
 import sync from './sync';
-import { TextLabelController } from '../../systems/textlabel';
+import { TextLabelController } from 'core/server/systems/textlabel';
 
 /**
  * Select a character based on the character data provided.

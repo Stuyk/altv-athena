@@ -4,14 +4,14 @@ import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { View_Events_Clothing } from 'core/shared/enums/views';
 import { ClothingComponent } from 'core/shared/interfaces/Clothing';
 import { Item } from 'core/shared/interfaces/Item';
-import { View } from '../../extensions/view';
+import { View } from 'core/client/extensions/view';
 import {
     createPedEditCamera,
     destroyPedEditCamera,
     setFov,
     setShouldDisableControls,
     setZPos
-} from '../../utility/camera';
+} from 'core/client/utility/camera';
 
 // const url = `http://127.0.0.1:5500/src/core/client/views/clothing/html/index.html`;
 const url = `http://resource/client/views/clothing/html/index.html`;

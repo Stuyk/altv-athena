@@ -1,5 +1,5 @@
 import { Vector3 } from 'alt-server';
-import { DEFAULT_CONFIG } from '../../server/athena/main';
+import { DEFAULT_CONFIG } from 'core/server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 import { Item } from './Item';

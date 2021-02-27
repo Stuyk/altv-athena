@@ -5,8 +5,8 @@ import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { View_Events_Inventory } from 'core/shared/enums/views';
 import { DroppedItem } from 'core/shared/interfaces/Item';
 import { distance2d } from 'core/shared/utility/vector';
-import { View } from '../../extensions/view';
-import { drawMarker } from '../../utility/marker';
+import { View } from 'core/client/extensions/view';
+import { drawMarker } from 'core/client/utility/marker';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const url = `http://resource/client/views/inventory/html/index.html`;

@@ -3,7 +3,7 @@ import getter from './getter';
 import { Vehicle_Behavior, Vehicle_Door_List, Vehicle_Lock_State, Vehicle_State } from 'core/shared/enums/vehicle';
 import keys from './keys';
 import toggle from './toggle';
-import { DEFAULT_CONFIG } from '../../athena/main';
+import { DEFAULT_CONFIG } from 'core/server/athena/main';
 import { isFlagEnabled } from 'core/shared/utility/flags';
 import { vehicleFuncs } from '../Vehicle';
 

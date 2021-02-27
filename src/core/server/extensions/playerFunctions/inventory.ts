@@ -634,12 +634,12 @@ export default {
     toolbarRemove
 };
 
-import('../../views/inventory').catch((err) => {
+import('core/server/views/inventory').catch((err) => {
     throw err;
 });
 
 if (process.env.TEST) {
-    import('../../zTests/inventory')
+    import('core/server/zTests/inventory')
         .catch((err) => {
             throw err;
         })

@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import { Vehicle } from 'core/shared/interfaces/Vehicle';
-import { View } from '../../extensions/view';
+import { View } from 'core/client/extensions/view';
 import { ChatController } from '../hud/controllers/chatController';
 
 // const url = `http://127.0.0.1:5500/src/core/client/views/vehicles/html/index.html`;

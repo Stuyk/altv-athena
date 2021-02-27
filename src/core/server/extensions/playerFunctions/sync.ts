@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 import { View_Events_Creator } from 'core/shared/enums/views';
 import { CurrencyTypes } from 'core/shared/enums/currency';
-import { World } from '../../systems/world';
+import { World } from 'core/server/systems/world';
 import { SYSTEM_EVENTS } from 'core/shared/enums/system';
 import emit from './emit';
 import save from './save';
-import { DEFAULT_CONFIG } from '../../athena/main';
+import { DEFAULT_CONFIG } from 'core/server/athena/main';
 
 /**
  * Synchronize currency data like bank, cash, etc.
