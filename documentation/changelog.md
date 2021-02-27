@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.7.0 - February 18-x, 2021
+## 1.7.0 - February 18-26, 2021
 
 ```diff
 + Added Fuel Pumps
