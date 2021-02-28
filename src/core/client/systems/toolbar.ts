@@ -11,6 +11,10 @@ export class ToolbarController {
             return;
         }
 
+        if (alt.Player.local.isActionMenuOpen) {
+            return;
+        }
+
         const slot: number = parseInt(String.fromCharCode(key)) - 1;
         const item = alt.Player.local.meta.toolbar.find((item) => item.slot === slot);
 

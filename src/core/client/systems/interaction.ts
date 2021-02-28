@@ -15,7 +15,7 @@ const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
 const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 500;
 let NEXT_MENU_UPDATE = Date.now() + 2000;
-let dynamicActionMenu: ActionMenu<any> = {};
+let dynamicActionMenu: ActionMenu = {};
 
 export class InteractionController {
     static customInteractions: Array<Interaction> = [];

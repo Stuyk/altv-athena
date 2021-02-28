@@ -128,8 +128,8 @@ export class VehicleController {
         return getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, VehicleController.vehicles);
     }
 
-    static getMaximums(baseEnum: any, maxValue: number, eventName: string): ActionMenu<any> {
-        const actions: ActionMenu<any> = {};
+    static getMaximums(baseEnum: any, maxValue: number, eventName: string): ActionMenu {
+        const actions: ActionMenu = {};
         let count = 0;
 
         Object.keys(baseEnum).forEach((key) => {
@@ -155,7 +155,7 @@ export class VehicleController {
         return actions;
     }
 
-    static getVehicleOptions(): ActionMenu<any> {
+    static getVehicleOptions(): ActionMenu {
         const closestVehicle = VehicleController.getClosestVehicle();
         if (!closestVehicle || !closestVehicle.model) {
             return {};
