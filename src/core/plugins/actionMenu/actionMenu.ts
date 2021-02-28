@@ -9,7 +9,7 @@ import { Animation } from '../../shared/interfaces/Animation';
 ChatController.addCommand('actionmenu', '/actionmenu - Opens test action menu', Permissions.Admin, handleCommand);
 
 function handleCommand(player: alt.Player): void {
-    const facePalm: Action<Animation> = {
+    const facePalm: Action = {
         eventName: 'animation:Action:Server',
         isServer: true,
         data: {
@@ -20,7 +20,7 @@ function handleCommand(player: alt.Player): void {
         }
     };
 
-    const gangSign: Action<Animation> = {
+    const gangSign: Action = {
         eventName: 'animation:Action:Server',
         isServer: true,
         data: {

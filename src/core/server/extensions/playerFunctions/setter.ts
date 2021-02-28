@@ -47,7 +47,7 @@ async function account(p: alt.Player, accountData: Partial<Account>): Promise<vo
     p.accountData = accountData;
 }
 
-function actionMenu(player: alt.Player, actionMenu: ActionMenu<any>) {
+function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
     alt.emitClient(player, SYSTEM_EVENTS.SET_ACTION_MENU, actionMenu);
 }
 
