@@ -13,7 +13,7 @@ export class ActionsController {
      * @return {*}
      * @memberof ActionController
      */
-    static set(actionMenu: ActionMenu<any | Action<any> | ActionMenu<any>> | null) {
+    static set(actionMenu: ActionMenu) {
         if (!actionMenu) {
             BaseHUD.view.emit('actions:Set', null);
             return;
@@ -73,7 +73,7 @@ export class ActionsController {
      * @return {*}
      * @memberof ActionsController
      */
-    static trigger(action: Action<any>) {
+    static trigger(action: Action) {
         ActionsController.closed();
         handleFrontendSound('SELECT', 'HUD_FREEMODE_SOUNDSET');
 

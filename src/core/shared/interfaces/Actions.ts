@@ -1,4 +1,4 @@
-export interface Action<T> {
+export interface Action {
     /**
      * Name of the event to call.
      * @type {string}
@@ -18,15 +18,15 @@ export interface Action<T> {
      * @type {*}
      * @memberof Action
      */
-    data?: T;
+    data?: any;
 }
 
 /**
  * An infinitely scaling menu.
- * Holds up to 9 options at a time.
+ * Holds up to 9 options at a time
  * @export
  * @interface ActionMenu
  */
-export interface ActionMenu<T> {
-    [key: string]: Action<T> | ActionMenu<T>;
+export interface ActionMenu {
+    [key: string]: Action | ActionMenu;
 }

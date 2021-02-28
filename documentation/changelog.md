@@ -10,6 +10,13 @@ description: List of all the changes and current versions.
 + Nothing Here Yet
 ```
 
+## 1.7.1 - February 27, 2021
+
+```diff
++ Fix Chat / Action Menu Bugs
++ Prevent Toolbar Actions while using Action Menu
+```
+
 ## 1.7.0 - February 18-26, 2021
 
 ```diff
