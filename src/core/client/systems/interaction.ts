@@ -26,6 +26,10 @@ export class InteractionController {
     static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 
     static triggerInteraction(): void {
+        if (!alt.Player.local.isInteractionOn) {
+            return;
+        }
+
         InteractionController.pressedKey = true;
     }
 

@@ -12,6 +12,9 @@ description: List of all the changes and current versions.
 + Added Separate Folder for 'addon-resources' for adding mods, etc.
 + Updated Installing Mods Page
 + Removed Unnecessary Dependencies
++ Added 'Y' to toggle Engine
++ Added 'X' to toggle Lock
++ Vehicle Controls Feel More Responsive
 ```
 
 ## 1.7.1 - February 27, 2021

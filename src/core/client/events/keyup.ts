@@ -31,6 +31,8 @@ export const KEY_BINDS = {
     CHAT: 84,
     // X
     VEHICLE_LOCK: 88,
+    // Y
+    VEHICLE_ENGINE: 89,
     // F1
     DEBUG_KEY: 112,
     // F2
@@ -53,7 +55,10 @@ const KEY_UP_BINDS = {
         singlePress: VehiclesController.handleView
     },
     [KEY_BINDS.VEHICLE_LOCK]: {
-        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedLockKey')
+        singlePress: VehicleController.handleToggleLock
+    },
+    [KEY_BINDS.VEHICLE_ENGINE]: {
+        singlePress: VehicleController.handleToggleEngine
     },
     [KEY_BINDS.VEHICLE_FUNCS]: {
         singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunction')
