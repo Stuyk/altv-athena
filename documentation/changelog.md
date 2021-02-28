@@ -7,7 +7,11 @@ description: List of all the changes and current versions.
 ## 1.8.0 - February 28-x, 2021
 
 ```diff
-+ Nothing Here Yet
++ Increase Compilation Times
++ Rewrote Build Pipeline Into File
++ Added Separate Folder for 'addon-resources' for adding mods, etc.
++ Updated Installing Mods Page
++ Removed Unnecessary Dependencies
 ```
 
 ## 1.7.1 - February 27, 2021
