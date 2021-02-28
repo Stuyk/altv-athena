@@ -4,6 +4,12 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.0 - February 28-x, 2021
+
+```diff
++ Nothing Here Yet
+```
+
 ## 1.7.0 - February 18-26, 2021
 
 ```diff
