@@ -126,14 +126,13 @@ export class BaseHUD {
         // Add a small delay to allow keybinds to go off.
         alt.setTimeout(() => {
             alt.Player.local.isChatOpen = false;
-        }, 150);
 
-        // Handles Empty Messages
-        if (!message) {
-            return;
-        }
+            if (!message) {
+                return;
+            }
 
-        alt.emitServer(View_Events_Chat.Send, message);
+            alt.emitServer(View_Events_Chat.Send, message);
+        }, 100);
     }
 
     private static handleFocus(shouldFocus: boolean): void {
