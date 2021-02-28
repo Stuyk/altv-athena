@@ -45,5 +45,13 @@
         "simplymongo": "^2.1.1",
         "sjcl": "^1.0.8"
     },
-    "type": "module"
+    "type": "module",
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 120,
+        "singleQuote": true,
+        "semi": true,
+        "arrowParens": "always",
+        "trailingComma": "none"
+    }
 }
