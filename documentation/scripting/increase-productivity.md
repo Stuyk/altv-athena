@@ -19,3 +19,19 @@ Prettier will automatically format your code.
 alt:V IDE will provide useful information about various alt:V methods, data, etc.
 
 Live Server will let you preview HTML pages in your browser.
+
+# Run TS-Watcher Scripts
+
+If you're developing and need quick restarts for new features. When a Typescript file is saved with the commands below running, it will automatically restart and build the changes in 1/4 of the time compared to the regular build process.
+
+**Windows**
+
+```
+npm run watch-windows
+```
+
+**Linux**
+
+```
+npm run watch-linux
+```

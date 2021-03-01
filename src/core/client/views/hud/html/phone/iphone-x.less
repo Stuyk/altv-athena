@@ -1,0 +1,208 @@
+.iphone-x-active {
+    transform: translateY(-780px);
+    animation: moveup 0.5s !important;
+    background: url('https://www.designbolts.com/wp-content/uploads/2018/05/Beautiful-Nature-Apple-iPhone-X-Wallpaper-1.jpg') !important;
+    background-size: contain !important;
+}
+
+.iphone-x {
+    position: fixed;
+    margin: 40px auto;
+    width: 360px;
+    height: 780px;
+    bottom: -780px;
+    right: 175px;
+    background: black;
+    border-radius: 40px;
+    box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919, 0px 0px 0px 20px #111;
+    user-select: none;
+    animation: movedown 0.5s;
+
+    .notch {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-top-right-radius: 40px;
+        border-top-left-radius: 40px;
+        font-family: 'Inter';
+        font-weight: 800;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+
+        .icons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    .screen {
+        display: flex;
+        min-width: 360px;
+        min-height: 780px - 40px;
+        font-family: 'Inter';
+        position: relative;
+
+        .phone-dots {
+            position: absolute;
+            display: flex;
+            justify-content: space-evenly;
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 2px;
+            width: 100%;
+
+            .inactive {
+                color: rgba(255, 255, 255, 0.5);
+                transform: scale(0.75);
+            }
+        }
+
+        .swipe-left {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            height: 100%;
+            min-width: 30px;
+            left: 0px;
+            top: 0px;
+            cursor: pointer;
+            animation: fadeNav 1s;
+            border-bottom-left-radius: 40px !important;
+
+            i {
+                opacity: 0.5;
+            }
+
+            &:hover {
+                i {
+                    opacity: 1;
+                }
+            }
+
+            &:active {
+                background: rgba(0, 0, 0, 0.2);
+                transition: 0.01s;
+            }
+        }
+
+        .swipe-right {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            min-width: 30px;
+            min-height: 780px;
+            max-height: 780px;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+            animation: fadeNav 1s;
+            border-bottom-right-radius: 40px;
+
+            i {
+                opacity: 0.5;
+            }
+
+            &:hover {
+                i {
+                    opacity: 1;
+                }
+            }
+
+            &:active {
+                background: rgba(0, 0, 0, 0.2);
+                transition: 0.01s;
+            }
+        }
+
+        .main {
+            min-height: 780px - 40px;
+            max-height: 780px - 40px;
+            min-width: 360px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(6, 0.8fr);
+            row-gap: 30px;
+            column-gap: 30px;
+            padding: 30px;
+
+            .phone-icon {
+                display: flex;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 6px;
+                transition: 0.5s;
+                cursor: pointer;
+
+                i {
+                    opacity: 0.75;
+                    pointer-events: none;
+                }
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.8);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                    transition: 0.01s;
+                }
+            }
+        }
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    // home button indicator
+    &:after {
+        bottom: 7px;
+        width: 140px;
+        height: 4px;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+    }
+
+    // frontal camera/speaker frame
+    &:before {
+        top: 0px;
+        width: 56%;
+        height: 30px;
+        background-color: #1f1f1f;
+        border-radius: 0px 0px 40px 40px;
+    }
+}
+
+@keyframes fadeNav {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes moveup {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-780px);
+    }
+}
+
+@keyframes movedown {
+    from {
+        transform: translateY(-780px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}

@@ -7,6 +7,7 @@ import { VehicleController } from '../systems/vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
+import { PhoneController } from '../views/hud/controllers/phoneController';
 import { InventoryController } from '../views/inventory/inventory';
 import { VehiclesController } from '../views/vehicles/vehicles';
 
@@ -36,7 +37,9 @@ export const KEY_BINDS = {
     // F1
     DEBUG_KEY: 112,
     // F2
-    LEADERBOARD: 113
+    LEADERBOARD: 113,
+    // . or >
+    PHONE: 190
 };
 
 const DELAY_BETWEEN_LONG_PRESSES = 800;
@@ -86,6 +89,9 @@ const KEY_UP_BINDS = {
     },
     [KEY_BINDS.TOOLBAR_FOUR]: {
         singlePress: ToolbarController.handleToolbarSwitch
+    },
+    [KEY_BINDS.PHONE]: {
+        singlePress: PhoneController.togglePhone
     }
 };
 

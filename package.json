@@ -2,6 +2,8 @@
     "name": "altv-athena",
     "version": "1.8.0",
     "description": "a roleplay framework for alt:V",
+    "author": "stuyk",
+    "type": "module",
     "scripts": {
         "build": "node ./utility/copy-helper/copy-helper.mjs",
         "build-watching": "node ./utility/copy-helper/copy-helper.mjs -- WATCHING",
@@ -13,7 +15,6 @@
         "watch-handle-windows": "npm run build-watching && altv-server.exe",
         "watch-handle-linux": "npm run build-watching && ./start.sh"
     },
-    "author": "stuyk",
     "devDependencies": {
         "@altv/types-client": "^1.5.2",
         "@altv/types-natives": "^1.1.0",
@@ -45,7 +46,6 @@
         "simplymongo": "^2.1.1",
         "sjcl": "^1.0.8"
     },
-    "type": "module",
     "prettier": {
         "tabWidth": 4,
         "printWidth": 120,

@@ -41,6 +41,10 @@ const actions = Vue.component('actions', {
             return actions;
         },
         getActions() {
+            if (!this.actions) {
+                return;
+            }
+
             const actions = Object.keys(this.actions).map((name) => {
                 if (this.actions[name].eventName) {
                     return { menuName: name, ...this.actions[name] };
@@ -94,7 +98,13 @@ const actions = Vue.component('actions', {
 
                 this.selection -= 1;
                 if (this.selection <= -1) {
-                    this.selection = this.getActions().length - 1;
+                    const actions = this.getActions();
+
+                    if (!actions) {
+                        return;
+                    }
+
+                    this.selection = actions.length - 1;
                 }
                 return;
             }
@@ -125,9 +135,17 @@ const actions = Vue.component('actions', {
             // Also handles 0 - 9 key press.
             const verticalSelection = keyValue === null ? this.selection : keyValue;
             const actions = this.getActions();
+            if (!actions) {
+                return;
+            }
+
             const selection = actions[verticalSelection];
 
-            delete actions[verticalSelection].menuName;
+            try {
+                delete actions[verticalSelection].menuName;
+            } catch (err) {
+                // Ignore
+            }
 
             if (selection && selection.eventName) {
                 this.selection = verticalSelection;
@@ -230,7 +248,7 @@ const actions = Vue.component('actions', {
     },
     template: `
         <div class="actionsWrapper">
-            <div class="actionMenu pa-3" v-if="getActions().length >= 1">
+            <div class="actionMenu pa-3" v-if="getActions() && getActions().length >= 1">
                 <div class="action pt-2 pb-2 pl-4 pr-4" v-for="(action, index) in getActions()" :key="index" :class="selection === index ? { 'active': true } : {}">
                     <template v-if="selection === index">
                         <span class="light-blue--text text--lighten-2 overline">

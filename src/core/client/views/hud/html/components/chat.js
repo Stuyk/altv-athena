@@ -317,7 +317,7 @@ const chat = Vue.component('chat', {
                 <div class="outerInput" v-if="chatActive">
                     <div class="mockInput">{{ matchedCommand !== null ? matchedCommand : '' }}</div>
                     <input
-                        class="chatInput" 
+                        class="mainChatInput" 
                         label="Use '/' to type a command." 
                         ref="chatInput"
                         v-model="currentMessage"

@@ -10,6 +10,7 @@ description: All of the current hotkeys available.
 -   E - Open Action Menu
 -   I - Inventory
 -   O - Personal Vehicles
+-   . or > - Phone
 
 ## Vehicle
 

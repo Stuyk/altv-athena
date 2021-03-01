@@ -10,6 +10,7 @@ import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/helpController';
 import './controllers/leaderBoardController';
+import { PhoneController } from './controllers/phoneController';
 
 // const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
 const url = `http://resource/client/views/hud/html/index.html`;
@@ -45,6 +46,7 @@ export class BaseHUD {
             BaseHUD.view.on('actions:Close', ActionsController.closed);
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
+            BaseHUD.view.on('phone:Animate', PhoneController.animate);
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {
@@ -148,9 +150,11 @@ export class BaseHUD {
 
         if (shouldFocus) {
             BaseHUD.view.focus();
+            alt.toggleGameControls(false);
             return;
         }
 
+        alt.toggleGameControls(true);
         BaseHUD.view.unfocus();
     }
 }
