@@ -21,12 +21,12 @@ function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: n
         const tab = p.data.inventory[i];
 
         // Go to next tab if inventory is full.
-        if (tab.length >= 27) {
+        if (tab.length >= 28) {
             continue;
         }
 
         // x is the free slot to assign the item
-        for (let x = 0; x < 27; x++) {
+        for (let x = 0; x < 28; x++) {
             const itemIndex = tab.findIndex((item) => item.slot === x);
             if (itemIndex >= 0) {
                 continue;
