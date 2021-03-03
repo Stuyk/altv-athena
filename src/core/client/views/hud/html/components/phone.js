@@ -5,14 +5,14 @@ const phone = Vue.component('phone', {
             isActive: false,
             page: 0,
             maxPages: 3,
-            pageComponent: null, // 'app-bank'
+            pageComponent: 'app-bank', // 'app-bank'
             time: {
                 hour: 23,
                 minute: 59
             },
             data: {
-                bank: 0,
-                cash: 0
+                bank: 2500,
+                cash: 5000
             }
         };
     },
@@ -81,7 +81,7 @@ const phone = Vue.component('phone', {
         } else {
             setTimeout(() => {
                 this.toggle();
-            }, 2000);
+            }, 500);
         }
     },
     beforeDestroy() {

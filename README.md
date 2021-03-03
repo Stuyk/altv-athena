@@ -130,6 +130,9 @@ We have a small demo server available for you to test the framework with Adminis
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar
+-   Phone System
+    -   A built in phone.
+    -   Phone can handle custom applications.
 -   Custom Job Framework
     -   Easy to Use Job Language / Creation
     -   Play Animations
