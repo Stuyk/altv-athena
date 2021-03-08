@@ -2,6 +2,9 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import save from './save';
 import emit from './emit';
+import { AresFunctions, WASM } from '../../utility/wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 /**
  * Add currency type to the player.
@@ -16,7 +19,15 @@ function add(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 
     try {
-        p.data[type] += amount;
+        const originalValue = p.data[type];
+        p.data[type] = parseFloat(wasm.AthenaMath.add(p.data[type], amount).toFixed(2));
+
+        // Verify that the value was updated.
+        if (wasm.AthenaMath.isGreater(originalValue, p.data[type])) {
+            p.data[type] = originalValue;
+            return false;
+        }
+
         emit.meta(p, type, p.data[type]);
         save.field(p, type, p.data[type]);
         return true;
@@ -38,7 +49,15 @@ function sub(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 
     try {
-        p.data[type] -= amount;
+        const originalValue = p.data[type];
+        p.data[type] = parseFloat(wasm.AthenaMath.sub(p.data[type], amount).toFixed(2));
+
+        // Verify that the value was updated.
+        if (!wasm.AthenaMath.isLesser(p.data[type], originalValue)) {
+            p.data[type] = originalValue;
+            return false;
+        }
+
         emit.meta(p, type, p.data[type]);
         save.field(p, type, p.data[type]);
         return true;

@@ -1,6 +1,4 @@
 import * as alt from 'alt-server';
-import { Vector3 } from 'alt-server';
-import { distance2d as d2d } from '../../shared/utility/vector';
 import { WASM, AresFunctions } from './wasmLoader';
 
 const wasm = WASM.getFunctions<AresFunctions>('ares');
@@ -45,8 +43,8 @@ export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
 export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): alt.Vector3 {
     const forwardVector = getForwardVector(player.rot);
     const posFront = {
-        x: player.pos.x + forwardVector.x * distance,
-        y: player.pos.y + forwardVector.y * distance,
+        x: wasm.AthenaMath.add(player.pos.x, wasm.AthenaMath.multiply(forwardVector.x, distance)),
+        y: wasm.AthenaMath.add(player.pos.y, wasm.AthenaMath.multiply(forwardVector.y, distance)),
         z: player.pos.z
     };
 
@@ -69,22 +67,22 @@ export function isBetweenVectors(pos, vector1, vector2): boolean {
 /**
  * Get the closest server entity type. Server only.
  * @template T
- * @param {Vector3} playerPosition
- * @param {Vector3} rot
- * @param {Array<{ pos: Vector3; valid?: boolean }>} entities
+ * @param {alt.Vector3} playerPosition
+ * @param {alt.Vector3} rot
+ * @param {Array<{ pos: alt.Vector3; valid?: boolean }>} entities
  * @param {number} distance
  * @return {*}  {(T | null)}
  */
 export function getClosestEntity<T>(
-    playerPosition: Vector3,
-    rot: Vector3,
-    entities: Array<{ pos: Vector3; valid?: boolean }>,
+    playerPosition: alt.Vector3,
+    rot: alt.Vector3,
+    entities: Array<{ pos: alt.Vector3; valid?: boolean }>,
     distance: number
 ): T | null {
     const fwdVector = getForwardVector(rot);
     const position = {
-        x: playerPosition.x + fwdVector.x * distance,
-        y: playerPosition.y + fwdVector.y * distance,
+        x: wasm.AthenaMath.add(playerPosition.x, wasm.AthenaMath.multiply(fwdVector.x, distance)),
+        y: wasm.AthenaMath.add(playerPosition.y, wasm.AthenaMath.multiply(fwdVector.y, distance)),
         z: playerPosition.z
     };
 

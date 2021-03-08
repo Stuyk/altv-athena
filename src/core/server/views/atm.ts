@@ -17,7 +17,7 @@ function handleAction(player: alt.Player, type: string, amount: string | number,
         return;
     }
 
-    amount = parseInt(amount as string);
+    amount = parseFloat(amount as string);
 
     if (!amount || amount <= 0) {
         playerFuncs.sync.currencyData(player);
