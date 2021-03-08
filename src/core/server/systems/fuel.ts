@@ -4,9 +4,8 @@ import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vehicle_Behavior, Vehicle_State } from '../../shared/enums/vehicle';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
-import { getClosestEntity } from '../utility/vector';
+import { distance2d } from '../utility/vector';
 
 alt.on(SYSTEM_EVENTS.INTERACTION_FUEL, handleFuel);
 

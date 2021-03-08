@@ -1,9 +1,25 @@
 import * as alt from 'alt-server';
 import { Vector3 } from 'alt-server';
-import { distance2d } from '../../shared/utility/vector';
+import { distance2d as d2d } from '../../shared/utility/vector';
 import { WASM, AresFunctions } from './wasmLoader';
 
 const wasm = WASM.getFunctions<AresFunctions>('ares');
+
+export function distance(vector1: alt.IVector3, vector2: alt.IVector3) {
+    if (vector1 === undefined || vector2 === undefined) {
+        throw new Error('AddVector => vector1 or vector2 is undefined');
+    }
+
+    return wasm.AthenaMath.distance3d(vector1.x, vector1.y, vector1.z, vector2.x, vector2.y, vector2.z);
+}
+
+export function distance2d(vector1: alt.IVector3, vector2: alt.IVector3) {
+    if (vector1 === undefined || vector2 === undefined) {
+        throw new Error('AddVector => vector1 or vector2 is undefined');
+    }
+
+    return wasm.AthenaMath.distance2d(vector1.x, vector1.y, vector2.x, vector2.y);
+}
 
 /**
  * SERVER ONLY

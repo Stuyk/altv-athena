@@ -16,6 +16,8 @@ export interface AresFunctions {
         fwdX(x: number, z: number): number;
         fwdY(x: number, z: number): number;
         fwdZ(x: number): number;
+        distance2d(x1: number, y1: number, x2: number, y2: number): number;
+        distance3d(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): number;
     };
 }
 

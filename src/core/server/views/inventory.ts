@@ -5,12 +5,12 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { DroppedItem, Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
 import '../effects/heal';
 import '../effects/vehicleRepair';
 import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
+import { distance2d } from '../utility/vector';
 
 interface CategoryData {
     abbrv: string;
