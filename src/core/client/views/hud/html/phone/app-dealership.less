@@ -1,10 +1,12 @@
-.app-bank {
+.app-dealership {
     display: flex;
     flex-grow: 1;
     box-sizing: border-box;
     animation: fadeapp 0.5s;
     min-height: 680px;
     max-height: 680px;
+    min-width: 360px;
+    max-width: 360px;
     width: 100%;
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 40px;
@@ -15,6 +17,8 @@
         flex-grow: 1;
         font-family: 'Inter' !important;
         overflow: hidden;
+        min-width: 360px;
+        max-width: 360px;
 
         .header {
             display: flex;
@@ -31,7 +35,12 @@
 
         .main-screen {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            justify-items: flex-start;
+            align-items: flex-start;
+            align-content: flex-start;
             min-width: 360px;
             max-width: 360px;
             min-height: 680px - 35px;
@@ -42,6 +51,17 @@
             box-sizing: border-box;
             border-bottom-left-radius: 40px !important;
 
+            .img-wrapper {
+            }
+
+            .clickable {
+                cursor: pointer;
+            }
+
+            .disabled {
+                filter: grayscale(1);
+            }
+
             .split {
                 display: flex;
                 flex-grow: 1;
@@ -50,6 +70,16 @@
             }
         }
     }
+}
+
+.repeating-gradient {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 0, 0, 0.5),
+        rgba(255, 0, 0, 0.5) 5px,
+        rgba(0, 0, 255, 0.5) 5px,
+        rgba(0, 0, 255, 0.5) 10px
+    );
 }
 
 @keyframes fadeapp {

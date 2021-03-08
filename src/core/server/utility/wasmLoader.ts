@@ -1,66 +1,104 @@
 import alt from 'alt-server';
 import loader from '@assemblyscript/loader';
-import path from 'path';
-import { Database, onReady } from 'simplymongo';
-import { makePostRequest } from '../ares/postRequests';
 
-const injections = {};
+const AresFunctionsName = 'ares;';
+const injections: any = {};
+const helpers: Assembly = {};
+let memory: any = [];
 
-export interface InjectedFunctions {
-    idl(): boolean;
-    ii(): Promise<any>;
-    bd(url: string, collections: Array<string>, callback: Function): boolean;
+export interface AresFunctions {
+    isDoneLoading(): boolean;
+    getName(): number;
+    getFinishName(): number;
+    getLoadName(): number;
+    getDatabaseName(): number;
+    AthenaMath: {
+        fwdX(x: number, z: number): number;
+        fwdY(x: number, z: number): number;
+        fwdZ(x: number): number;
+    };
+}
+
+interface Assembly {
+    __getString?(value: number): string;
 }
 
 export interface InjectedStarter {
-    start(): Promise<any>;
+    deploy: () => void;
+    getEvent: () => string;
+    getName: () => string;
 }
 
-export function getInjections<T>(name: string): T {
-    return injections[name] as T;
+function convert(v1: any, v2: any) {
+    let data = helpers.__getString(v1);
+
+    if (process.platform.includes('win')) {
+        data = data.replace(/\\/g, '/');
+    }
+
+    alt.emit(helpers.__getString(v2), data);
 }
 
-export async function loadWASM<T>(name: string, buffer: Buffer = null): Promise<T | null> {
-    if (!buffer) {
+export class WASM {
+    static imports = {
+        'ex.emit': alt.emit,
+        'ex.virtualImport': convert
+    };
+
+    static getInjections<T>(name: string): T {
         return injections[name] as T;
     }
 
-    const { exports }: any | null = await loader.instantiate(buffer).catch((err) => {
-        console.error(err);
-        return null;
-    });
-
-    if (!exports) {
-        return null;
+    static getHelpers(): Assembly {
+        return helpers;
     }
 
-    const functions: { [key: string]: Function } = { ...exports } as { [key: string]: Function };
-    const getString = exports.__getString;
+    static getFunctions<T>(name: string = AresFunctionsName): T {
+        return injections[name] as T;
+    }
 
-    if (functions.idl) {
-        injections[name] = {
-            idl() {
-                return functions.idl();
-            },
-            ii() {
-                const fn = new Function('d', getString(functions.ii()));
-                return fn({ path, process });
-            },
-            bd(mongoURL: string, mongoCollections: Array<string>, callback: Function) {
-                const fn = new Function('d', getString(functions.bd()));
-                return fn({ alt, callback, onReady, mongoURL, mongoCollections, Database, env: process.env });
+    static checkMemory(value: number) {
+        console.log(memory[value]);
+    }
+
+    static async load<T>(buffer: Buffer = null): Promise<T | null> {
+        const { exports }: any | null = await loader
+            .instantiate(buffer, {
+                index: WASM.imports
+            })
+            .catch((err) => {
+                console.error(err);
+                return null;
+            });
+
+        if (!exports) {
+            return null;
+        }
+
+        const functions: { [key: string]: any } = { ...exports } as { [key: string]: Function };
+        const name = exports.__getString(functions.getName());
+        Object.keys(functions).forEach((key) => {
+            if (!functions[key]) {
+                return;
             }
-        };
-    }
 
-    if (functions.start) {
-        injections[name] = {
-            start() {
-                const fn = new Function('d', getString(functions.start()));
-                return fn({ alt, isWindows: process.platform.includes('win'), makePostRequest });
+            if (key.includes('_')) {
+                helpers[key] = functions[key];
+                return;
             }
-        };
-    }
 
-    return injections[name] as T;
+            if (key === 'memory') {
+                memory = new Uint8Array(functions[key].memory);
+                return;
+            }
+
+            if (!injections[name]) {
+                injections[name] = {};
+            }
+
+            injections[name][key] = functions[key];
+        });
+
+        return injections[name] as T;
+    }
 }

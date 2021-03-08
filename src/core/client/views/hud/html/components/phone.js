@@ -1,18 +1,19 @@
 const phone = Vue.component('phone', {
-    components: [appBank],
+    components: [appBank, appDealership, appVehicles],
     data() {
         return {
             isActive: false,
             page: 0,
             maxPages: 3,
-            pageComponent: 'app-bank', // 'app-bank'
+            pageComponent: 'app-dealership', // 'app-bank'
             time: {
                 hour: 23,
                 minute: 59
             },
             data: {
-                bank: 2500,
-                cash: 5000
+                bank: 0,
+                cash: 0,
+                vehicles: []
             }
         };
     },
@@ -79,6 +80,42 @@ const phone = Vue.component('phone', {
             alt.on('phone:SetData', this.setData);
             alt.on('phone:Toggle', this.toggle);
         } else {
+            this.data.vehicles = [
+                {
+                    fuel: 100,
+                    model: 'rocoto',
+                    uid: 'a68888e32a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1f34462c'
+                },
+                {
+                    fuel: 50,
+                    model: 'infernus',
+                    uid: 'a6c32a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1fdsfsdf'
+                },
+                {
+                    fuel: 25,
+                    model: 'akuma',
+                    uid: 'a6ff332a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1fdsfsdf'
+                },
+                {
+                    fuel: 100,
+                    model: 'washington',
+                    uid: 'a68888e32a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1f34462c'
+                },
+                {
+                    fuel: 50,
+                    model: 'buffalo',
+                    uid: 'a6c32a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1fdsfsdf'
+                },
+                {
+                    fuel: 25,
+                    model: 'gauntlet',
+                    uid: 'a6ff332a152dcf66c1e3bcdfe8062fa143027744529fd0a6cd63053afa1fdsfsdf'
+                }
+            ];
+
+            this.data.bank = 2500;
+            this.data.cash = 500;
+
             setTimeout(() => {
                 this.toggle();
             }, 500);
@@ -132,14 +169,20 @@ const phone = Vue.component('phone', {
                             <div class="phone-icon elevation-2" id="app-phone" @click="selectApp">
                                 <v-icon x-large>icon-phone</v-icon>
                             </div>
-                            <div class="phone-icon elevation-2">
+                            <div class="phone-icon elevation-2" id="app-messaging" @click="selectApp">
                                 <v-icon x-large>icon-message</v-icon>
                             </div>
-                            <div class="phone-icon elevation-2" id="app-bank" @click="selectApp">
-                                <v-icon x-large>icon-dollar</v-icon>
+                            <div class="phone-icon elevation-2" id="app-vehicles" @click="selectApp">
+                                <v-icon x-large>icon-key</v-icon>
                             </div>
-                            <div class="phone-icon elevation-2">
-                                <v-icon x-large>icon-two_wheeler</v-icon>
+                            <div class="phone-icon elevation-2" id="app-bank" @click="selectApp">
+                                <v-icon x-large>icon-bank</v-icon>
+                            </div>
+                            <div class="phone-icon elevation-2" id="app-dealership" @click="selectApp">
+                                <v-icon x-large>icon-automobile</v-icon>
+                            </div>
+                            <div class="phone-icon elevation-2" id="app-homes">
+                                <v-icon x-large>icon-home</v-icon>
                             </div>
                         </div>
                         <div class="main" v-if="page === 2">

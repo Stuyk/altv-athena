@@ -1,6 +1,9 @@
 import * as alt from 'alt-server';
 import { Vector3 } from 'alt-server';
 import { distance2d } from '../../shared/utility/vector';
+import { WASM, AresFunctions } from './wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 /**
  * SERVER ONLY
@@ -8,10 +11,11 @@ import { distance2d } from '../../shared/utility/vector';
  * @param {alt.Vector3} rot
  */
 export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
-    const z = rot.z;
-    const x = rot.x;
-    const num = Math.abs(Math.cos(x));
-    return new alt.Vector3(-Math.sin(z) * num, Math.cos(z) * num, Math.sin(x));
+    return {
+        x: wasm.AthenaMath.fwdX(rot.x, rot.z),
+        y: wasm.AthenaMath.fwdY(rot.x, rot.z),
+        z: wasm.AthenaMath.fwdZ(rot.x)
+    } as alt.Vector3;
 }
 
 /**
