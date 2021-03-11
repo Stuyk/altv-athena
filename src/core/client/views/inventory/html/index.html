@@ -13,6 +13,7 @@
                 <div class="main-container">
                     <div class="player rounded">
                         <div class="toolbar grey darken-4 elevation-6">
+                            <div class="descriptor text-overline">Toolbar</div>
                             <div 
                                 class="rounded grey darken-2" 
                                 v-for="(item, index) in toolbar"
@@ -41,6 +42,7 @@
                             </div>
                         </div>
                         <div class="equipment grey darken-4 elevation-6">
+                            <div class="descriptor text-overline">Equipment</div>
                             <div
                                 class="rounded grey darken-2"
                                 v-for="(item, index) in equipment"
@@ -100,6 +102,7 @@
                     <div class="split-view">
                         <div class="inventory grey darken-4 rounded elevation-6" :class="ground.length <= 0 ? { 'expand': true }: {}">
                             <div class="inventory-list" :class="getInventoryClass()">
+                                <div class="descriptor text-overline">Inventory</div>
                                 <div 
                                     class="rounded grey darken-3" 
                                     v-for="(item, index) in getInventory"
@@ -129,6 +132,7 @@
                         </div>
                         <div class="ground grey darken-4 rounded elevation-6" v-if="ground.length >= 1">
                             <div class="pickup-zone" block>
+                                <div class="descriptor text-overline">Ground</div>
                                 <div 
                                 class="rounded grey darken-3 rounded"
                                 v-for="(item, index) in ground" 

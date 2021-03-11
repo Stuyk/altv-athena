@@ -176,7 +176,7 @@ const app = new Vue({
             this.clonedElement = document.getElementById(`cloned-${element.id}`);
             this.clonedElement.classList.add('item-clone');
             this.clonedElement.classList.add('no-animation');
-            this.clonedElement.style.left = `${e.clientX + 25}px`;
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
             this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
 
             // Modify Current Element
@@ -192,7 +192,7 @@ const app = new Vue({
             document.addEventListener('mousemove', this.updatePosition); // This calls UpdatePosition
         },
         updatePosition(e) {
-            this.clonedElement.style.left = `${e.clientX + 25}px`;
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
             this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
         },
         mouseOver(e) {

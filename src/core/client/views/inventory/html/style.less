@@ -74,11 +74,17 @@ body {
     flex-direction: row;
     position: relative;
 
+    .descriptor {
+        position: absolute;
+        text-shadow: 1px 1px black !important;
+        transform: translateY(-33px);
+        font-size: 10px !important;
+    }
+
     .player {
         position: relative;
         max-height: 95vh;
         margin-right: @item-grid-gap * 2;
-        overflow: hidden;
 
         .toolbar {
             display: flex;
@@ -89,6 +95,7 @@ body {
             padding: @item-grid-gap;
             margin-bottom: @item-grid-gap * 2;
             border-radius: 5px;
+            position: relative;
 
             .item {
                 position: relative;
@@ -275,13 +282,13 @@ body {
                 overflow-y: scroll;
                 min-height: calc(@item-dimensions * 2 + @item-grid-gap * 3);
                 box-sizing: border-box;
-                direction: rtl;
+                direction: ltr;
                 grid-template-columns: repeat(4, @item-dimensions);
                 grid-auto-rows: @item-dimensions;
                 grid-gap: @item-grid-gap;
                 user-select: none;
                 width: 100%;
-                padding-right: @item-grid-gap;
+                padding-left: @item-grid-gap;
                 padding-top: @item-grid-gap;
 
                 .item {
