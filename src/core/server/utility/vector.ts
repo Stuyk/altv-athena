@@ -59,8 +59,8 @@ export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): 
  * @returns {boolean}
  */
 export function isBetweenVectors(pos, vector1, vector2): boolean {
-    const validX = pos.x > vector1.x && pos.x < vector2.x;
-    const validY = pos.y > vector1.y && pos.y < vector2.y;
+    const validX = wasm.AthenaMath.isGreater(pos.x, vector1.x) && wasm.AthenaMath.isLesser(pos.x, vector2.x);
+    const validY = wasm.AthenaMath.isGreater(pos.y, vector1.y) && wasm.AthenaMath.isLesser(pos.y, vector2.y);
     return validX && validY ? true : false;
 }
 
@@ -97,7 +97,7 @@ export function getClosestEntity<T>(
         }
 
         const dist = distance2d(position, entity.pos);
-        if (dist > lastRange) {
+        if (wasm.AthenaMath.isGreater(dist, lastRange)) {
             continue;
         }
 
