@@ -1,4 +1,4 @@
-const VehicleImage = Vue.component('vehicle-image', {
+const VehicleImagePreview = Vue.component('vehicle-image-preview', {
     props: ['vehicle', 'data'],
     methods: {
         getVehicleImage(model) {
@@ -13,10 +13,10 @@ const VehicleImage = Vue.component('vehicle-image', {
     },
     template: `
         <template>
-            <div v-if="vehicle.price < data.bank">
+            <div v-if="vehicle.price < data.bank + data.cash">
                 <img width="144px" height="144px"
                     :src="getVehicleImage(vehicle.name)"
-                    class="ma-1 rounded-lg elevation-6"
+                    class="ma-1 rounded-lg elevation-6 preview-img"
                     :class="getVehicleClasses(vehicle.price)"
                     @click="select(vehicle)"
                 >
@@ -26,7 +26,7 @@ const VehicleImage = Vue.component('vehicle-image', {
             <div v-else>
                 <img width="144px" height="144px"
                     :src="getVehicleImage(vehicle.name)"
-                    class="ma-1 rounded-lg elevation-6"
+                    class="ma-1 rounded-lg elevation-6 preview-img"
                     :class="getVehicleClasses(vehicle.price)"
                 >
                 </img>
@@ -94,33 +94,69 @@ const VehicleSearch = Vue.component('vehicle-search', {
 });
 
 const appDealership = Vue.component('app-dealership', {
-    components: ['vehicle-image', 'vehicle-search'],
+    components: ['vehicle-image', 'vehicle-image-preview', 'vehicle-search'],
     props: ['data'],
     data() {
         return {
-            vehicles: [...VehicleData]
+            vehicles: [...VehicleData],
+            vehicle: null // { display: 'Dinghy', name: 'dinghy', type: 'boat', class: 'boat', sell: true, price: 12000 }
         };
     },
     methods: {
         selectModel(vehicle) {
-            console.log(vehicle);
+            this.vehicle = vehicle;
         },
         updateVehicles(vehicles) {
             this.vehicles = vehicles;
+        },
+        getVehicleImage(model) {
+            return `../../images/vehicles/${model}.png`;
+        },
+        purchase(model) {
+            console.log(model);
+        },
+        back() {
+            this.vehicle = null;
         }
     },
     template: `
         <div class="app-dealership">
             <div class="app-wrapper">
                 <div class="header pt-2 pb-2">
-                    <div class="subtitle-2">Dealership</div>
+                    <template v-if="!vehicle">
+                        <div class="overline">Browse Vehicles</div>
+                    </template>
+                    <template v-else>
+                        <div class="overline">{{ vehicle.display }}</div>
+                    </template>
                 </div>
                 <div class="main-screen pa-2">
-                    <vehicle-search v-bind:data="data" @search-vehicles="updateVehicles" />
-                    <template v-for="(vehicle, index) in vehicles">
-                        <template v-if="vehicle.sell">
-                            <vehicle-image v-bind:vehicle="vehicle" v-bind:data="data" @select-vehicle="selectModel" />
+                    <template v-if="!vehicle">
+                        <vehicle-search v-bind:data="data" @search-vehicles="updateVehicles" />
+                        <template v-for="(vehicle, index) in vehicles">
+                            <template v-if="vehicle.sell">
+                                <div class="image-placeholder">
+                                    <vehicle-image-preview v-bind:vehicle="vehicle" v-bind:data="data" @select-vehicle="selectModel" />
+                                    <div class="vehicle-model">{{ vehicle.display }}</div>
+                                </div>
+                            </template>
                         </template>
+                    </template>
+                    <template v-else>
+                        <v-btn class="grey darken-4 ma-1 rounded-lg grey--text text--lighten-1 overline flex-grow-1" outlined @click="back">
+                            <v-icon>icon-chevron-left</v-icon> Back
+                        </v-btn>
+                        <v-card class="flex-grow-1 ma-1 rounded-lg">
+                            <img :src="getVehicleImage(vehicle.name)" width="100%"></img>
+                            <v-card-text class="d-flex flex-column font-weight-black text-center">
+                                <v-chip class="overline orange accent-4 full-width" label>\${{ vehicle.price }}</v-chip>
+                                <v-chip class="overline mt-4" label>Class: {{ vehicle.class }}</v-chip>
+                                <v-chip class="overline mt-4" label>Model: {{ vehicle.display }}</v-chip>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-btn class="green--text text--lighten-1 overline flex-grow-1" @click="purchase(vehicle.name)" outlined>Purchase</v-btn>
+                            </v-card-actions>
+                        </v-card>
                     </template>
                 </div>
             </div>

@@ -5,7 +5,7 @@ const phone = Vue.component('phone', {
             isActive: false,
             page: 0,
             maxPages: 3,
-            pageComponent: 'app-dealership', // 'app-bank'
+            pageComponent: null, // 'app-bank'
             time: {
                 hour: 23,
                 minute: 59
@@ -53,7 +53,6 @@ const phone = Vue.component('phone', {
                 return;
             }
 
-            alt.emit('phone:Animate', this.isActive);
             alt.emit('mouse:Focus', this.isActive);
         }
     },
@@ -113,7 +112,7 @@ const phone = Vue.component('phone', {
                 }
             ];
 
-            this.data.bank = 2500;
+            this.data.bank = 25000;
             this.data.cash = 500;
 
             setTimeout(() => {

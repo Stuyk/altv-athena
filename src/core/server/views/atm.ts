@@ -1,15 +1,28 @@
 import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../shared/enums/currency';
+import { PhoneEvents } from '../../shared/enums/phoneEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 
 const ActionHandlers = {
     deposit: handleDeposit,
     withdraw: handleWithdraw,
-    transfer: handleTransfer
+    transfer: handleTransfer,
+    transferCash: handleTransferCash
 };
 
 alt.onClient(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, handleAction);
+alt.onClient(PhoneEvents.ATM_TRANSFER.name, handlePhoneRoute);
+
+function handlePhoneRoute(player: alt.Player, type: string, amount: string | number, id: null | number) {
+    if (type === 'bank') {
+        type = 'transfer';
+    } else {
+        type = 'transferCash';
+    }
+
+    handleAction(player, type, amount, id);
+}
 
 function handleAction(player: alt.Player, type: string, amount: string | number, id: null | number): void {
     if (isNaN(amount as number)) {
@@ -77,8 +90,26 @@ function handleTransfer(player: alt.Player, amount: number, id: string | number)
 
     playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
     playerFuncs.currency.add(target, CurrencyTypes.BANK, amount);
-
     playerFuncs.emit.message(target, `You received: ${amount} from ${player.data.name}.`);
+    return true;
+}
 
+function handleTransferCash(player: alt.Player, amount: number, id: string | number): boolean {
+    const target: alt.Player = [...alt.Player.all].find((x) => `${x.id}` === `${id}`);
+    if (!target) {
+        return false;
+    }
+
+    if (target === player) {
+        return false;
+    }
+
+    if (amount > player.data.cash) {
+        return false;
+    }
+
+    playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount);
+    playerFuncs.currency.add(target, CurrencyTypes.CASH, amount);
+    playerFuncs.emit.message(target, `You received: ${amount} from ${player.data.name}.`);
     return true;
 }

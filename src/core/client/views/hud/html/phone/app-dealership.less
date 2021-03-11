@@ -34,6 +34,7 @@
         }
 
         .main-screen {
+            position: relative;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -51,7 +52,30 @@
             box-sizing: border-box;
             border-bottom-left-radius: 40px !important;
 
-            .img-wrapper {
+            .image-placeholder {
+                position: relative;
+
+                .preview-img {
+                    object-fit: cover;
+                    width: 144px;
+                    height: 144px;
+                }
+
+                .vehicle-model {
+                    position: absolute;
+                    z-index: 99;
+                    bottom: 15px;
+                    font-weight: 800;
+                    text-align: center;
+                    font-size: 12px;
+                    width: 100%;
+                }
+            }
+
+            .preview-lg {
+                object-fit: contain;
+                width: 100%;
+                height: auto;
             }
 
             .clickable {

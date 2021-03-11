@@ -72,6 +72,7 @@
             cursor: pointer;
             animation: fadeNav 1s;
             border-bottom-left-radius: 40px !important;
+            z-index: 128;
 
             i {
                 opacity: 0.5;
@@ -196,5 +197,19 @@
     }
     to {
         transform: translateY(0px);
+    }
+}
+
+.spinner {
+    position: absolute;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

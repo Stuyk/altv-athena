@@ -15,6 +15,9 @@ description: List of all the changes and current versions.
 + Added 'Y' to toggle Engine
 + Added 'X' to toggle Lock
 + Vehicle Controls Feel More Responsive
++ Added Various WASM Functions to Server
++ Made General Improvements to App Functionality
++ Began Work for Hooking In Phone Applications
 ```
 
 ## 1.7.1 - February 27, 2021

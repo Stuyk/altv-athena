@@ -16,6 +16,7 @@ import { PhoneController } from './controllers/phoneController';
 const url = `http://resource/client/views/hud/html/index.html`;
 
 let commandList: Array<any> = [];
+let interval: number;
 
 export enum HudEventNames {
     SetVehicle = 'hud:SetVehicle',
@@ -46,7 +47,8 @@ export class BaseHUD {
             BaseHUD.view.on('actions:Close', ActionsController.closed);
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
-            BaseHUD.view.on('phone:Animate', PhoneController.animate);
+            BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
+            BaseHUD.view.on('phone:ATM:Populate', PhoneController.updateCurrency);
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {
@@ -150,11 +152,33 @@ export class BaseHUD {
 
         if (shouldFocus) {
             BaseHUD.view.focus();
-            alt.toggleGameControls(false);
+            interval = alt.setInterval(() => {
+                native.disableControlAction(0, 1, true);
+                native.disableControlAction(0, 2, true);
+                native.disableControlAction(0, 3, true);
+                native.disableControlAction(0, 4, true);
+                native.disableControlAction(0, 5, true);
+                native.disableControlAction(0, 6, true);
+                native.disableControlAction(0, 24, true);
+                native.disableControlAction(0, 25, true);
+                native.disableControlAction(0, 68, true);
+                native.disableControlAction(0, 69, true);
+                native.disableControlAction(0, 70, true);
+                native.disableControlAction(0, 91, true);
+                native.disableControlAction(0, 92, true);
+                native.disableControlAction(0, 114, true);
+                native.disableControlAction(0, 142, true);
+            }, 0);
+
+            alt.Player.local.isPhoneOpen = true;
             return;
         }
 
-        alt.toggleGameControls(true);
+        if (interval) {
+            alt.clearInterval(interval);
+        }
+
+        alt.Player.local.isPhoneOpen = false;
         BaseHUD.view.unfocus();
     }
 }

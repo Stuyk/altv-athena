@@ -7,6 +7,7 @@ import { DroppedItem } from '../../../shared/interfaces/Item';
 import { distance2d } from '../../../shared/utility/vector';
 import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
+import { isAnyMenuOpen } from '../../utility/menus';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const url = `http://resource/client/views/inventory/html/index.html`;
@@ -18,15 +19,11 @@ export class InventoryController {
     static drawInterval: number = null;
 
     static async handleView() {
-        if (alt.Player.local.isChatOpen) {
+        if (isAnyMenuOpen()) {
             return;
         }
 
-        if (alt.Player.local.isActionMenuOpen) {
-            return;
-        }
-
-        if (alt.Player.local.meta.isDead) {
+        if (alt.Player.local.isPhoneOpen) {
             return;
         }
 
