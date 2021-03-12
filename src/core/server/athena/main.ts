@@ -72,5 +72,30 @@ export const DEFAULT_CONFIG = {
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
-    FUEL_LOSS_PER_PLAYER_TICK: 0.1 // Happens every 10s
+    FUEL_LOSS_PER_PLAYER_TICK: 0.1, // Happens every 10s
+    VEHICLE_DEALERSHIP_SPAWNS: {
+        boat: { x: 0, y: 0, z: 0 },
+        speedboat: { x: 0, y: 0, z: 0 },
+        commercial: { x: 0, y: 0, z: 0 },
+        compact: { x: 0, y: 0, z: 0 },
+        coupe: { x: 0, y: 0, z: 0 },
+        cycle: { x: 0, y: 0, z: 0 },
+        emergency: { x: 0, y: 0, z: 0 },
+        industrial: { x: 0, y: 0, z: 0 },
+        military: { x: 0, y: 0, z: 0 },
+        motorcycle: { x: 0, y: 0, z: 0 },
+        muscle: { x: 0, y: 0, z: 0 },
+        offroad: { x: 0, y: 0, z: 0 },
+        aircraft: { x: 0, y: 0, z: 0 },
+        suv: { x: 0, y: 0, z: 0 },
+        sedan: { x: 0, y: 0, z: 0 },
+        service: { x: 0, y: 0, z: 0 },
+        sport: { x: 0, y: 0, z: 0 },
+        sportclassic: { x: 0, y: 0, z: 0 },
+        super: { x: 0, y: 0, z: 0 },
+        trailer: { x: 0, y: 0, z: 0 },
+        train: { x: 0, y: 0, z: 0 },
+        utility: { x: 0, y: 0, z: 0 },
+        van: { x: 0, y: 0, z: 0 }
+    }
 };

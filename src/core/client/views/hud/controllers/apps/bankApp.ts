@@ -8,9 +8,12 @@ alt.on(SYSTEM_EVENTS.META_CHANGED, handleChange);
 export class BankAppController {
     static init() {
         // No Initialization Needed at This Time
+        BaseHUD.view.on('phone:ATM:Populate', BankAppController.updateCurrency);
     }
 
     static updateCurrency() {
+        alt.log('called?');
+
         BaseHUD.view.emit('phone:SetData', 'cash', alt.Player.local.meta.cash);
         BaseHUD.view.emit('phone:SetData', 'bank', alt.Player.local.meta.bank);
         BaseHUD.view.emit(PhoneEvents.ATM_PROCESS.name);

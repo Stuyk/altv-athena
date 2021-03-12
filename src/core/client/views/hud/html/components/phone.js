@@ -6,11 +6,9 @@ const phone = Vue.component('phone', {
             page: 0,
             maxPages: 3,
             pageComponent: null, // 'app-bank'
-            time: {
-                hour: 23,
-                minute: 59
-            },
             data: {
+                hour: 23,
+                minute: 59,
                 bank: 0,
                 cash: 0,
                 vehicles: []
@@ -44,7 +42,9 @@ const phone = Vue.component('phone', {
             this.pageComponent = appComponent;
         },
         setData(fieldName, fieldValue) {
-            this.data[fieldName] = fieldValue;
+            const data = { ...this.data };
+            data[fieldName] = fieldValue;
+            this.data = data;
         },
         toggle() {
             this.isActive = !this.isActive ? true : false;
@@ -59,8 +59,8 @@ const phone = Vue.component('phone', {
     computed: {
         getTime() {
             let timeData = {
-                hour: this.time.hour,
-                minute: this.time.minute
+                hour: this.data.hour,
+                minute: this.data.minute
             };
 
             if (timeData.hour < 10) {
@@ -78,6 +78,10 @@ const phone = Vue.component('phone', {
         if ('alt' in window) {
             alt.on('phone:SetData', this.setData);
             alt.on('phone:Toggle', this.toggle);
+
+            setTimeout(() => {
+                alt.emit('phone:ATM:Populate');
+            }, 5000);
         } else {
             this.data.vehicles = [
                 {
@@ -132,7 +136,9 @@ const phone = Vue.component('phone', {
         <div class="phoneWrapper">
             <div class="iphone-x" v-if="!isActive">
                 <div class="notch">
-                    <div class="white--text text--subtitle-2 pt-2">{{ getTime }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="spacer"></div>
+                    <div class="white--text overline pt-2">{{ getTime }}</div>
                     <div class="spacer"></div>
                     <div class="icons">
                         <v-icon small>icon-signal_cellular_alt</v-icon>
@@ -142,7 +148,9 @@ const phone = Vue.component('phone', {
             </div>
             <div class="iphone-x iphone-x-active" v-if="isActive">
                 <div class="notch">
-                    <div class="white--text text--subtitle-2 pt-2">{{ getTime }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="spacer"></div>
+                    <div class="white--text overline pt-1">{{ getTime }}</div>
                     <div class="spacer"></div>
                     <div class="icons">
                         <v-icon small>icon-signal_cellular_alt</v-icon>

@@ -88,8 +88,34 @@ function set(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 }
 
+function subAllCurrencies(p: alt.Player, amount: number): boolean {
+    if (p.data.cash + p.data.bank < amount) {
+        return false;
+    }
+
+    let amountLeft = amount;
+
+    if (wasm.AthenaMath.sub(p.data.cash, amountLeft) <= -1) {
+        amountLeft = wasm.AthenaMath.sub(amountLeft, p.data.cash);
+        p.data.cash = 0;
+    } else {
+        p.data.cash = wasm.AthenaMath.sub(p.data.cash, amountLeft);
+    }
+
+    if (amountLeft >= 1) {
+        p.data.bank = wasm.AthenaMath.sub(p.data.bank, amountLeft);
+    }
+
+    save.field(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
+    save.field(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
+    emit.meta(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
+    emit.meta(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
+    return true;
+}
+
 export default {
     set,
     sub,
-    add
+    add,
+    subAllCurrencies
 };

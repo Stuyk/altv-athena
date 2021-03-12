@@ -36,7 +36,7 @@ const VehicleImagePreview = Vue.component('vehicle-image-preview', {
 });
 
 const VehicleSearch = Vue.component('vehicle-search', {
-    props: ['data'],
+    props: ['data', 'vehicles'],
     data() {
         return {
             searchTerm: ''
@@ -47,12 +47,12 @@ const VehicleSearch = Vue.component('vehicle-search', {
             searchTerm = searchTerm.toLowerCase();
 
             if (searchTerm === '' || !searchTerm) {
-                this.$emit('search-vehicles', VehicleData);
+                this.$emit('search-vehicles', null);
                 return;
             }
 
             // Filter by search term.
-            const newList = VehicleData.filter((data) => {
+            const newList = this.vehicles.filter((data) => {
                 if (data.class.includes(searchTerm) && data.sell) {
                     return true;
                 }
@@ -98,7 +98,8 @@ const appDealership = Vue.component('app-dealership', {
     props: ['data'],
     data() {
         return {
-            vehicles: [...VehicleData],
+            vehiclesOriginal: null,
+            vehicles: [],
             vehicle: null // { display: 'Dinghy', name: 'dinghy', type: 'boat', class: 'boat', sell: true, price: 12000 }
         };
     },
@@ -107,17 +108,50 @@ const appDealership = Vue.component('app-dealership', {
             this.vehicle = vehicle;
         },
         updateVehicles(vehicles) {
+            if (!vehicles) {
+                if (!this.vehiclesOriginal) {
+                    return;
+                }
+
+                this.vehicles = this.vehiclesOriginal;
+                return;
+            }
+
             this.vehicles = vehicles;
+
+            if (this.vehiclesOriginal) {
+                return;
+            }
+
+            this.vehiclesOriginal = vehicles;
         },
         getVehicleImage(model) {
             return `../../images/vehicles/${model}.png`;
         },
         purchase(model) {
-            console.log(model);
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('phone:Event', 'phone:Dealership:Buy', model);
         },
         back() {
             this.vehicle = null;
         }
+    },
+    mounted() {
+        if ('alt' in window) {
+            alt.on('phone:Dealership:Vehicles', this.updateVehicles);
+            alt.emit('phone:Dealership:Populate');
+            alt.emit('phone:ATM:Populate');
+        }
+    },
+    beforeDestroy() {
+        if (!('alt' in window)) {
+            return;
+        }
+
+        alt.off('phone:Dealership:Vehicles', this.updateVehicles);
     },
     template: `
         <div class="app-dealership">
@@ -132,7 +166,7 @@ const appDealership = Vue.component('app-dealership', {
                 </div>
                 <div class="main-screen pa-2">
                     <template v-if="!vehicle">
-                        <vehicle-search v-bind:data="data" @search-vehicles="updateVehicles" />
+                        <vehicle-search v-bind:data="data" v-bind:vehicles="vehicles" @search-vehicles="updateVehicles" />
                         <template v-for="(vehicle, index) in vehicles">
                             <template v-if="vehicle.sell">
                                 <div class="image-placeholder">

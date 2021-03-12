@@ -1,4 +1,6 @@
-const VehicleData = [
+// This is shared between client and server.
+// However, prices are pulled from server-side on purchase.
+export const VehicleData = [
     {
         display: 'Dinghy',
         name: 'dinghy',

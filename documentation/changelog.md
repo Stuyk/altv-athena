@@ -21,6 +21,9 @@ description: List of all the changes and current versions.
 + Added Descriptors to Inventory
 + Added Hookin for Vehicle Spawner
 - Removed old Personal Vehicle Spawner
++ Add Subtract from all currencies function
++ Vehicles now added to player from dealership
++ Added spawn points for vehicle dealerships after buying
 ```
 
 ## 1.7.1 - February 27, 2021

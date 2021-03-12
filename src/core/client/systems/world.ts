@@ -1,6 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { PhoneController } from '../views/hud/controllers/phoneController';
+import { BaseHUD } from '../views/hud/hud';
 
 // Weather
 let previousWeather: string = 'OVERCAST';
@@ -31,6 +33,7 @@ function handleUpdateTime(hour: number, minute: number): void {
     currentTime.hour = hour;
     currentTime.minute = minute;
 
+    PhoneController.updateTime(currentTime.hour, currentTime.minute);
     native.setClockTime(hour, minute, 0);
 }
 
