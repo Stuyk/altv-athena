@@ -18,6 +18,9 @@ description: List of all the changes and current versions.
 + Added Various WASM Functions to Server
 + Made General Improvements to App Functionality
 + Began Work for Hooking In Phone Applications
++ Added Descriptors to Inventory
++ Added Hookin for Vehicle Spawner
+- Removed old Personal Vehicle Spawner
 ```
 
 ## 1.7.1 - February 27, 2021

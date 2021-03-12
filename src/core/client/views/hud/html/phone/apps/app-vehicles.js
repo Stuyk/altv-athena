@@ -6,10 +6,34 @@ const appVehicles = Vue.component('app-vehicles', {
         };
     },
     methods: {
-        locate() {},
-        spawn() {},
+        despawn() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            view.on('phone:Vehicles:Despawn', VehicleAppController.despawn);
+        },
+        locate(index) {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('phone:Vehicles:Locate', index);
+        },
+        spawn(index) {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('phone:Vehicles:Spawn', index);
+        },
         getVehicleImage(model) {
             return `../../images/vehicles/${model}.png`;
+        }
+    },
+    mounted() {
+        if ('alt' in window) {
+            alt.emit('phone:Vehicles:Populate');
         }
     },
     template: `
@@ -32,10 +56,10 @@ const appVehicles = Vue.component('app-vehicles', {
                             <v-chip class="overline white--text" disabled label>Plate: {{ vehicle.uid.substring(0, 8) }}</v-chip>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn @click="locate(vehicle)" class="font-weight-black flex-grow-1 pink--text text--lighten-2" outlined>
+                            <v-btn @click="locate(index)" class="font-weight-black flex-grow-1 pink--text text--lighten-2" outlined>
                                 Locate
                             </v-btn>
-                            <v-btn @click="spawn(vehicle)" class="font-weight-black flex-grow-1 green--text text--lighten-2" outlined>
+                            <v-btn @click="spawn(index)" class="font-weight-black flex-grow-1 green--text text--lighten-2" outlined>
                                 Spawn
                             </v-btn>
                         </v-card-actions>

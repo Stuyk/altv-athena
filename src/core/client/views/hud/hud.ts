@@ -48,7 +48,8 @@ export class BaseHUD {
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
             BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
-            BaseHUD.view.on('phone:ATM:Populate', PhoneController.updateCurrency);
+
+            PhoneController.initializeApps();
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {

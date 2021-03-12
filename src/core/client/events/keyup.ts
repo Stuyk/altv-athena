@@ -9,7 +9,6 @@ import { HelpController } from '../views/hud/controllers/helpController';
 import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
 import { PhoneController } from '../views/hud/controllers/phoneController';
 import { InventoryController } from '../views/inventory/inventory';
-import { VehiclesController } from '../views/vehicles/vehicles';
 
 export const KEY_BINDS = {
     // Left Alt
@@ -26,8 +25,6 @@ export const KEY_BINDS = {
     VEHICLE_FUNCS_ALT: 71, // Passenger
     // I
     INVENTORY: 73,
-    // O
-    VEHICLES: 79,
     // T
     CHAT: 84,
     // X
@@ -53,9 +50,6 @@ const KEY_UP_BINDS = {
     },
     [KEY_BINDS.INVENTORY]: {
         singlePress: InventoryController.handleView
-    },
-    [KEY_BINDS.VEHICLES]: {
-        singlePress: VehiclesController.handleView
     },
     [KEY_BINDS.VEHICLE_LOCK]: {
         singlePress: VehicleController.handleToggleLock

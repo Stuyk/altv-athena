@@ -59,6 +59,7 @@ function handleAdd(player: alt.Player, model: string): void {
         vehicleFuncs.new.add(player, { fuel: 100, model, position: veh.pos, rotation: veh.rot });
         veh.destroy();
     } catch (err) {
+        console.log(err);
         playerFuncs.emit.message(player, CommandsLocale.VEHICLE_MODEL_NOT_VALID);
         return;
     }

@@ -1,13 +1,17 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { BaseHUD } from '../hud';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
-import { PhoneEventList, PhoneEvents } from '../../../../shared/enums/phoneEvents';
+import { PhoneEventList } from '../../../../shared/enums/phoneEvents';
 import { isAnyMenuOpen } from '../../../utility/menus';
-
-alt.on(SYSTEM_EVENTS.META_CHANGED, handleChange);
+import { VehicleAppController } from './apps/vehicleApp';
+import { BankAppController } from './apps/bankApp';
 
 export class PhoneController {
+    static initializeApps() {
+        // Initialize Apps
+        VehicleAppController.init();
+        BankAppController.init();
+    }
+
     static togglePhone() {
         if (isAnyMenuOpen()) {
             return;
@@ -40,22 +44,4 @@ export class PhoneController {
 
         alt.emit(event.name, ...args);
     }
-
-    static updateCurrency() {
-        BaseHUD.view.emit('phone:SetData', 'cash', alt.Player.local.meta.cash);
-        BaseHUD.view.emit('phone:SetData', 'bank', alt.Player.local.meta.bank);
-        BaseHUD.view.emit(PhoneEvents.ATM_PROCESS.name);
-    }
-}
-
-function handleChange(key: string, newValue: any, oldValue: any) {
-    if (key !== 'bank' && key !== 'cash') {
-        return;
-    }
-
-    if (!BaseHUD.view) {
-        return;
-    }
-
-    PhoneController.updateCurrency();
 }
