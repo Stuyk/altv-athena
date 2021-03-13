@@ -5,7 +5,7 @@ const VehicleImagePreview = Vue.component('vehicle-image-preview', {
             return `../../images/vehicles/${model}.png`;
         },
         getVehicleClasses(price) {
-            return price > this.data.bank ? { disabled: true } : { clickable: true };
+            return price > this.data.bank + this.data.cash ? { disabled: true } : { clickable: true };
         },
         select(vehicle) {
             this.$emit('select-vehicle', vehicle);
@@ -98,6 +98,7 @@ const appDealership = Vue.component('app-dealership', {
     props: ['data'],
     data() {
         return {
+            color: '#00FF00',
             vehiclesOriginal: null,
             vehicles: [],
             vehicle: null // { display: 'Dinghy', name: 'dinghy', type: 'boat', class: 'boat', sell: true, price: 12000 }
@@ -129,6 +130,8 @@ const appDealership = Vue.component('app-dealership', {
             return `../../images/vehicles/${model}.png`;
         },
         purchase(model) {
+            console.log(this.color);
+
             if (!('alt' in window)) {
                 return;
             }
@@ -144,6 +147,33 @@ const appDealership = Vue.component('app-dealership', {
             alt.on('phone:Dealership:Vehicles', this.updateVehicles);
             alt.emit('phone:Dealership:Populate');
             alt.emit('phone:ATM:Populate');
+        } else {
+            this.updateVehicles([
+                {
+                    display: 'Dinghy',
+                    name: 'dinghy',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
+                },
+                {
+                    display: 'Dinghy 2',
+                    name: 'dinghy2',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
+                },
+                {
+                    display: 'Dinghy 3',
+                    name: 'dinghy3',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
+                }
+            ]);
         }
     },
     beforeDestroy() {
@@ -172,6 +202,7 @@ const appDealership = Vue.component('app-dealership', {
                                 <div class="image-placeholder">
                                     <vehicle-image-preview v-bind:vehicle="vehicle" v-bind:data="data" @select-vehicle="selectModel" />
                                     <div class="vehicle-model">{{ vehicle.display }}</div>
+                                    <div class="vehicle-price">\${{ vehicle.price }}</div>
                                 </div>
                             </template>
                         </template>
@@ -187,6 +218,11 @@ const appDealership = Vue.component('app-dealership', {
                                 <v-chip class="overline mt-4" label>Class: {{ vehicle.class }}</v-chip>
                                 <v-chip class="overline mt-4" label>Model: {{ vehicle.display }}</v-chip>
                             </v-card-text>
+                            <v-color-picker
+                                v-model="color"
+                                class="ma-2"
+                                hide-canvas
+                            ></v-color-picker>
                             <v-card-actions>
                                 <v-btn class="green--text text--lighten-1 overline flex-grow-1" @click="purchase(vehicle.name)" outlined>Purchase</v-btn>
                             </v-card-actions>

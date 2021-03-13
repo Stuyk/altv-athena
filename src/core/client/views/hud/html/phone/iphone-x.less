@@ -129,6 +129,7 @@
             row-gap: 30px;
             column-gap: 30px;
             padding: 30px;
+            position: relative;
 
             .phone-icon {
                 display: flex;
@@ -137,6 +138,29 @@
                 border-radius: 6px;
                 transition: 0.5s;
                 cursor: pointer;
+                position: relative;
+                font-family: monospace;
+
+                &:hover {
+                    i {
+                        opacity: 1;
+                    }
+
+                    .text-icon {
+                        color: rgba(255, 255, 255, 1);
+                    }
+                }
+
+                .text-icon {
+                    position: absolute;
+                    width: 100%;
+                    font-size: 12px !important;
+                    text-align: center;
+                    bottom: 0px;
+                    transform: translateY(23px);
+                    text-shadow: 2px 2px 5px black;
+                    color: rgba(255, 255, 255, 0.8);
+                }
 
                 i {
                     opacity: 0.75;

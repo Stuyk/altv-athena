@@ -64,7 +64,17 @@
                 .vehicle-model {
                     position: absolute;
                     z-index: 99;
-                    bottom: 15px;
+                    bottom: 24px;
+                    font-weight: 800;
+                    text-align: center;
+                    font-size: 12px;
+                    width: 100%;
+                }
+
+                .vehicle-price {
+                    position: absolute;
+                    z-index: 99;
+                    top: 12px;
                     font-weight: 800;
                     text-align: center;
                     font-size: 12px;
@@ -80,6 +90,8 @@
 
             .clickable {
                 cursor: pointer;
+                box-sizing: border-box;
+                border: 2px solid rgba(0, 255, 0, 0.2);
             }
 
             .disabled {

@@ -12,8 +12,6 @@ export class BankAppController {
     }
 
     static updateCurrency() {
-        alt.log('called?');
-
         BaseHUD.view.emit('phone:SetData', 'cash', alt.Player.local.meta.cash);
         BaseHUD.view.emit('phone:SetData', 'bank', alt.Player.local.meta.bank);
         BaseHUD.view.emit(PhoneEvents.ATM_PROCESS.name);

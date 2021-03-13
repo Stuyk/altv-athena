@@ -100,6 +100,7 @@ function subAllCurrencies(p: alt.Player, amount: number): boolean {
         p.data.cash = 0;
     } else {
         p.data.cash = wasm.AthenaMath.sub(p.data.cash, amountLeft);
+        amountLeft = 0;
     }
 
     if (amountLeft >= 1) {

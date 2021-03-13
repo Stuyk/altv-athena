@@ -138,7 +138,7 @@ const phone = Vue.component('phone', {
                 <div class="notch">
                     <div class="white--text overline pt-1">\${{ data.cash }}</div>
                     <div class="spacer"></div>
-                    <div class="white--text overline pt-2">{{ getTime }}</div>
+                    <div class="white--text overline pt-1">{{ getTime }}</div>
                     <div class="spacer"></div>
                     <div class="icons">
                         <v-icon small>icon-signal_cellular_alt</v-icon>
@@ -174,33 +174,40 @@ const phone = Vue.component('phone', {
                         </div>
                         <div class="main" v-if="page === 0">
                             <div class="phone-icon elevation-2" id="app-phone" @click="selectApp">
+                                <div class="text-icon font-weight-black">Phone</div>
                                 <v-icon x-large>icon-phone</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-messaging" @click="selectApp">
+                                <div class="text-icon font-weight-black">Messages</div>
                                 <v-icon x-large>icon-message</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-vehicles" @click="selectApp">
+                                <div class="text-icon font-weight-black">Vehicles</div>
                                 <v-icon x-large>icon-key</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-bank" @click="selectApp">
+                            <div class="text-icon font-weight-black">Bank</div>
                                 <v-icon x-large>icon-bank</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-dealership" @click="selectApp">
+                                <div class="text-icon font-weight-black">Dealership</div>
                                 <v-icon x-large>icon-automobile</v-icon>
                             </div>
+                            <!--
                             <div class="phone-icon elevation-2" id="app-homes">
+                                <div class="text-icon font-weight-black">Home</div>
                                 <v-icon x-large>icon-home</v-icon>
+                            </div>
+                            -->
+                        </div>
+                        <div class="main" v-if="page === 1">
+                            <div class="phone-icon elevation-2">
+                                <div class="text-icon font-weight-black">Settings</div>
+                                <v-icon x-large>icon-settings</v-icon>
                             </div>
                         </div>
                         <div class="main" v-if="page === 2">
-                            <div class="phone-icon elevation-2">
-                                <v-icon x-large>icon-settings</v-icon>
-                            </div>
-                        </div>
-                        <div class="main" v-if="page === 3">
-                            <div class="phone-icon elevation-2">
-                                <v-icon x-large>icon-settings</v-icon>
-                            </div>
+                            <!-- Maybe your app can go here ;) -->
                         </div>
                         <div class="swipe-right" @click="navigatePage(1);">
                             <v-icon>icon-chevron-right</v-icon>
