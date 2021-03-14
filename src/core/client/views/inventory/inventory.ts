@@ -8,10 +8,16 @@ import { distance2d } from '../../../shared/utility/vector';
 import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
 import { isAnyMenuOpen } from '../../utility/menus';
+import { sleep } from '../../utility/sleep';
+import { waitFor } from '../../utility/wait';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
-const url = `http://resource/client/views/inventory/html/index.html`;
+const url = `http://127.0.0.1:5500/src/core/client/views/inventory/html/index.html`;
+// const url = `http://resource/client/views/inventory/html/index.html`;
+let ped = null;
 let view: View;
+let camera;
+let equipmentSize;
 let lastDroppedItems: Array<DroppedItem> = [];
 
 export class InventoryController {
@@ -27,7 +33,7 @@ export class InventoryController {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
+        view = await View.getInstance(url, true, false, false);
         view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Use', InventoryController.handleUse);
         view.on('inventory:Process', InventoryController.handleProcess);
@@ -40,7 +46,7 @@ export class InventoryController {
         alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, tab, hash);
     }
 
-    static updateEverything(): void {
+    static async updateEverything(): Promise<void> {
         if (!view) {
             return;
         }
@@ -50,6 +56,12 @@ export class InventoryController {
         });
 
         InventoryController.processClosestGroundItems();
+        InventoryController.updatePlayerModelPreview();
+    }
+
+    static async updatePlayerModelPreview() {
+        const screenshot = await InventoryController.takePedScreenshot();
+        view.emit('inventory:Screenshot', screenshot);
     }
 
     static updateInventory(): void {
@@ -60,9 +72,22 @@ export class InventoryController {
         view.emit('inventory:Inventory', alt.Player.local.meta.inventory);
     }
 
-    static updateEquipment(): void {
+    static async updateEquipment(): Promise<void> {
         if (!view) {
             return;
+        }
+
+        if (equipmentSize === undefined || equipmentSize === null) {
+            equipmentSize = alt.Player.local.meta.equipment.length;
+            InventoryController.updatePlayerModelPreview();
+        } else {
+            if (
+                equipmentSize < alt.Player.local.meta.equipment.length ||
+                equipmentSize > alt.Player.local.meta.equipment.length
+            ) {
+                InventoryController.updatePlayerModelPreview();
+                equipmentSize = alt.Player.local.meta.equipment.length;
+            }
         }
 
         view.emit('inventory:Equipment', alt.Player.local.meta.equipment);
@@ -83,6 +108,9 @@ export class InventoryController {
     static handleClose(): void {
         InventoryController.isOpen = false;
         alt.toggleGameControls(true);
+        native.renderScriptCams(false, false, 255, true, false, 0);
+        native.setCamActive(camera, false);
+        native.destroyAllCams(true);
 
         if (!view) {
             return;
@@ -155,6 +183,49 @@ export class InventoryController {
                 new alt.RGBA(0, 181, 204, 200)
             );
         }
+    }
+
+    static async takePedScreenshot(): Promise<string> {
+        if (alt.Player.local.vehicle) {
+            return null;
+        }
+
+        const fwd = native.getEntityForwardVector(alt.Player.local.scriptID);
+        const pos = alt.Player.local.pos;
+        const fwdPos = {
+            x: pos.x + fwd.x * 2,
+            y: pos.y + fwd.y * 2,
+            z: pos.z + fwd.z
+        };
+
+        const fov = 90;
+        camera = native.createCamWithParams(
+            'DEFAULT_SCRIPTED_CAMERA',
+            fwdPos.x,
+            fwdPos.y,
+            fwdPos.z,
+            0,
+            0,
+            0,
+            fov,
+            true,
+            0
+        );
+
+        native.pointCamAtEntity(camera, alt.Player.local.scriptID, 0, 0, 0, false);
+        native.setCamActive(camera, true);
+        native.renderScriptCams(true, false, 0, true, false, false);
+
+        await waitFor(native.isCamRendering, camera);
+
+        const screenshot = await alt.takeScreenshotGameOnly();
+
+        await waitFor(native.isCamRendering, camera);
+
+        native.renderScriptCams(false, false, 255, true, false, 0);
+        native.setCamActive(camera, false);
+        native.destroyAllCams(true);
+        return screenshot;
     }
 }
 

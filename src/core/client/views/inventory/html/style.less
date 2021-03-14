@@ -409,6 +409,22 @@ body {
     }
 }
 
+.preview {
+    position: fixed;
+    overflow: hidden;
+    max-width: 15vw;
+    max-height: 75vh;
+    border: 5px solid black;
+    object-fit: cover;
+    object-position: -50% 0 !important;
+    border-radius: 5px;
+
+    img {
+        margin-left: -42vw;
+        margin-top: -15vh;
+    }
+}
+
 @keyframes fadein {
     from {
         opacity: 0;

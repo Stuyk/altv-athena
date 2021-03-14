@@ -35,7 +35,8 @@ const app = new Vue({
             inventory: [[], [], [], [], [], []],
             ground: [],
             equipment: [],
-            toolbar: []
+            toolbar: [],
+            model: null
         };
     },
     methods: {
@@ -350,6 +351,9 @@ const app = new Vue({
                     alt.emit('inventory:Close');
                 }
             }, 50);
+        },
+        setModel(model) {
+            this.model = model;
         }
     },
     computed: {
@@ -449,6 +453,7 @@ const app = new Vue({
             alt.on('inventory:Inventory', this.updateInventory);
             alt.on('inventory:Equipment', this.updateEquipment);
             alt.on('inventory:Ground', this.updateGround);
+            alt.on('inventory:Screenshot', this.setModel);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {

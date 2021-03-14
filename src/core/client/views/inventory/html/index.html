@@ -166,6 +166,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="previewBox"  v-if="model !== null">
+                        <div class="preview">
+                            <img :src="'data:image/png;base64,' + model"></img>
+                        </div>
+                    </div>
                 </div>
                 <div class="athena"></div>
             </v-app>
