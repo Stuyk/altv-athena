@@ -17,8 +17,6 @@ const app = new Vue({
                 selectedElement: null
             },
             pageIndex: 0,
-            pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5'],
-            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-box', 'icon-box'],
             equipmentMeta: [
                 'Hat',
                 'Mask',
@@ -36,7 +34,7 @@ const app = new Vue({
             ground: [],
             equipment: [],
             toolbar: [],
-            model: null
+            disablePreview: false
         };
     },
     methods: {
@@ -117,9 +115,7 @@ const app = new Vue({
             this.pageIndex = value;
         },
         isActiveTab(index) {
-            return this.pageIndex === index
-                ? { 'light-blue': true, tab: true, 'mb-1': true, 'elevation-6': true }
-                : { grey: true, 'darken-4': true, tab: true, 'mb-1': true, 'elevation-6': true };
+            return this.pageIndex === index;
         },
         getInventoryClass() {
             const classList = {};
@@ -352,8 +348,8 @@ const app = new Vue({
                 }
             }, 50);
         },
-        setModel(model) {
-            this.model = model;
+        setPreviewDisabled(isDisabled) {
+            this.disablePreview = isDisabled;
         }
     },
     computed: {
@@ -385,7 +381,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -401,7 +397,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -417,7 +413,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -432,7 +428,7 @@ const app = new Vue({
 
             return Object.keys(target.data).map((key) => {
                 if (key === 'event') {
-                    return { key: 'CONSUMABLE', value: true };
+                    return { key: 'consumeable', value: true };
                 }
 
                 return { key, value: target.data[key] };
@@ -453,7 +449,7 @@ const app = new Vue({
             alt.on('inventory:Inventory', this.updateInventory);
             alt.on('inventory:Equipment', this.updateEquipment);
             alt.on('inventory:Ground', this.updateGround);
-            alt.on('inventory:Screenshot', this.setModel);
+            alt.on('inventory:DisablePreview', this.setPreviewDisabled);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {

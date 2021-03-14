@@ -9,16 +9,17 @@ import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
 import { isAnyMenuOpen } from '../../utility/menus';
 import { sleep } from '../../utility/sleep';
-import { waitFor } from '../../utility/wait';
+import { waitFor, waitForFalse } from '../../utility/wait';
+import { BaseHUD } from '../hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
-const url = `http://127.0.0.1:5500/src/core/client/views/inventory/html/index.html`;
-// const url = `http://resource/client/views/inventory/html/index.html`;
-let ped = null;
+// const url = `http://127.0.0.1:5500/src/core/client/views/inventory/html/index.html`;
+const url = `http://resource/client/views/inventory/html/index.html`;
 let view: View;
+let interval;
 let camera;
-let equipmentSize;
 let lastDroppedItems: Array<DroppedItem> = [];
+let noPedPreview = false;
 
 export class InventoryController {
     static isOpen = false;
@@ -33,6 +34,7 @@ export class InventoryController {
             return;
         }
 
+        noPedPreview = false;
         view = await View.getInstance(url, true, false, false);
         view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Use', InventoryController.handleUse);
@@ -40,6 +42,8 @@ export class InventoryController {
         view.on('inventory:Close', InventoryController.handleClose);
         alt.toggleGameControls(false);
         InventoryController.isOpen = true;
+
+        BaseHUD.setHudVisibility(false);
     }
 
     static handleProcess({ selectedSlot, endSlot, tab, hash }): void {
@@ -56,12 +60,9 @@ export class InventoryController {
         });
 
         InventoryController.processClosestGroundItems();
-        InventoryController.updatePlayerModelPreview();
-    }
 
-    static async updatePlayerModelPreview() {
-        const screenshot = await InventoryController.takePedScreenshot();
-        view.emit('inventory:Screenshot', screenshot);
+        const didRenderCamera = await InventoryController.showPreview();
+        view.emit('inventory:DisablePreview', !didRenderCamera ? true : false);
     }
 
     static updateInventory(): void {
@@ -75,19 +76,6 @@ export class InventoryController {
     static async updateEquipment(): Promise<void> {
         if (!view) {
             return;
-        }
-
-        if (equipmentSize === undefined || equipmentSize === null) {
-            equipmentSize = alt.Player.local.meta.equipment.length;
-            InventoryController.updatePlayerModelPreview();
-        } else {
-            if (
-                equipmentSize < alt.Player.local.meta.equipment.length ||
-                equipmentSize > alt.Player.local.meta.equipment.length
-            ) {
-                InventoryController.updatePlayerModelPreview();
-                equipmentSize = alt.Player.local.meta.equipment.length;
-            }
         }
 
         view.emit('inventory:Equipment', alt.Player.local.meta.equipment);
@@ -107,10 +95,13 @@ export class InventoryController {
 
     static handleClose(): void {
         InventoryController.isOpen = false;
+        native.clearFocus();
         alt.toggleGameControls(true);
         native.renderScriptCams(false, false, 255, true, false, 0);
         native.setCamActive(camera, false);
         native.destroyAllCams(true);
+        native.setEntityVisible(alt.Player.local.scriptID, true, false);
+        BaseHUD.setHudVisibility(true);
 
         if (!view) {
             return;
@@ -185,20 +176,22 @@ export class InventoryController {
         }
     }
 
-    static async takePedScreenshot(): Promise<string> {
+    static async showPreview(): Promise<boolean> {
         if (alt.Player.local.vehicle) {
-            return null;
+            return false;
         }
 
+        await waitForFalse(native.isPedWalking, alt.Player.local.scriptID);
+
+        const fov = 80;
         const fwd = native.getEntityForwardVector(alt.Player.local.scriptID);
-        const pos = alt.Player.local.pos;
+        const pos = { ...alt.Player.local.pos };
         const fwdPos = {
-            x: pos.x + fwd.x * 2,
-            y: pos.y + fwd.y * 2,
-            z: pos.z + fwd.z
+            x: pos.x + fwd.x * 1.75,
+            y: pos.y + fwd.y * 1.75,
+            z: pos.z + 0.2
         };
 
-        const fov = 90;
         camera = native.createCamWithParams(
             'DEFAULT_SCRIPTED_CAMERA',
             fwdPos.x,
@@ -215,17 +208,7 @@ export class InventoryController {
         native.pointCamAtEntity(camera, alt.Player.local.scriptID, 0, 0, 0, false);
         native.setCamActive(camera, true);
         native.renderScriptCams(true, false, 0, true, false, false);
-
-        await waitFor(native.isCamRendering, camera);
-
-        const screenshot = await alt.takeScreenshotGameOnly();
-
-        await waitFor(native.isCamRendering, camera);
-
-        native.renderScriptCams(false, false, 255, true, false, 0);
-        native.setCamActive(camera, false);
-        native.destroyAllCams(true);
-        return screenshot;
+        return true;
     }
 }
 

@@ -10,8 +10,6 @@ import {
 } from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
-import { playAnimation } from '../../systems/animations';
-import { AnimationFlags } from '../../../shared/flags/animation';
 
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');

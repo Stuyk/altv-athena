@@ -119,6 +119,18 @@ export class BaseHUD {
         BaseHUD.view.emit('hud:AudioStream', identifier, volume, startTime);
     }
 
+    static setHudVisibility(value: boolean) {
+        if (!value) {
+            BaseHUD.view.isVisible = false;
+            native.displayRadar(false);
+            return;
+        }
+
+        BaseHUD.view.isVisible = true;
+        native.displayRadar(true);
+        return;
+    }
+
     /**
      * Sends a chat message up from the WebView to the server chat.ts file.
      * @param {string} message
