@@ -2,10 +2,10 @@ const phone = Vue.component('phone', {
     components: [appBank, appDealership, appVehicles],
     data() {
         return {
-            isActive: false,
+            isActive: true,
             page: 0,
             maxPages: 3,
-            pageComponent: null, // 'app-bank'
+            pageComponent: appDealership, // 'app-bank'
             data: {
                 hour: 23,
                 minute: 59,
@@ -16,21 +16,8 @@ const phone = Vue.component('phone', {
         };
     },
     methods: {
-        navigatePage(amount) {
-            if (this.pageComponent) {
-                this.pageComponent = null;
-                return;
-            }
-
-            this.page += amount;
-
-            if (this.page < 0) {
-                this.page = this.maxPages - 1;
-            }
-
-            if (this.page >= this.maxPages) {
-                this.page = 0;
-            }
+        navigatePage(pageNumber) {
+            this.page = pageNumber;
         },
         selectApp(e) {
             const appComponent = e.target.id;
@@ -120,7 +107,7 @@ const phone = Vue.component('phone', {
             this.data.cash = 500;
 
             setTimeout(() => {
-                this.toggle();
+                //this.toggle();
             }, 500);
         }
     },
@@ -137,9 +124,7 @@ const phone = Vue.component('phone', {
             <div class="iphone-x" v-if="!isActive">
                 <div class="notch">
                     <div class="white--text overline pt-1">\${{ data.cash }}</div>
-                    <div class="spacer"></div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="spacer"></div>
                     <div class="icons">
                         <v-icon small>icon-signal_cellular_alt</v-icon>
                         <v-icon small>icon-battery_full</v-icon>
@@ -149,26 +134,21 @@ const phone = Vue.component('phone', {
             <div class="iphone-x iphone-x-active" v-if="isActive">
                 <div class="notch">
                     <div class="white--text overline pt-1">\${{ data.cash }}</div>
-                    <div class="spacer"></div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="spacer"></div>
                     <div class="icons">
                         <v-icon small>icon-signal_cellular_alt</v-icon>
                         <v-icon small>icon-battery_full</v-icon>
                     </div>
                 </div>
                 <div class="screen">
-                    <div class="swipe-left" @click="navigatePage(-1);">
-                        <v-icon>icon-chevron-left</v-icon>
-                    </div>
                     <template v-if="!pageComponent">
                         <div class="phone-dots">
                             <div class="phone-dot" v-for="(value, index) in maxPages" :key="index">
-                                <div class="text--subtitle-2" v-if="page === index">
-                                    &squf;
+                                <div v-if="page === index">
+                                    <v-icon @click="navigatePage(index)" x-small>icon-circle1</v-icon>
                                 </div>
-                                <div class="text--subtitle-2 inactive" v-else>
-                                    &squf;
+                                <div class="inactive" v-else>
+                                    <v-icon @click="navigatePage(index)" x-small>icon-circle</v-icon>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +166,7 @@ const phone = Vue.component('phone', {
                                 <v-icon x-large>icon-key</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-bank" @click="selectApp">
-                            <div class="text-icon font-weight-black">Bank</div>
+                                <div class="text-icon font-weight-black">Bank</div>
                                 <v-icon x-large>icon-bank</v-icon>
                             </div>
                             <div class="phone-icon elevation-2" id="app-dealership" @click="selectApp">
@@ -209,16 +189,21 @@ const phone = Vue.component('phone', {
                         <div class="main" v-if="page === 2">
                             <!-- Maybe your app can go here ;) -->
                         </div>
-                        <div class="swipe-right" @click="navigatePage(1);">
-                            <v-icon>icon-chevron-right</v-icon>
-                        </div>
                     </template>
                     <template v-else>
-                        <component 
-                            v-bind:is="pageComponent" 
-                            v-bind:data="data"
-                        />
+                        <component v-bind:is="pageComponent" v-bind:data="data" />
                     </template>
+                    <div class="bottom-bar">
+                        <div class="flex-grow-1 text-center clickable" @click="pageComponent = null">
+                            <v-icon small>icon-chevron-left</v-icon>
+                        </div>
+                        <div class="flex-grow-1 text-center clickable" @click="pageComponent = null; page = 0;">
+                            <v-icon x-small>icon-square-o</v-icon>
+                        </div>
+                        <div class="flex-grow-1 text-center transparent">
+                            <v-icon class="transparent" style="opacity: 0;">icon-square-o</v-icon>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

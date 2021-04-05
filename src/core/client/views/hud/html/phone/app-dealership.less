@@ -1,24 +1,13 @@
 .app-dealership {
     display: flex;
-    flex-grow: 1;
     box-sizing: border-box;
     animation: fadeapp 0.5s;
-    min-height: 680px;
-    max-height: 680px;
-    min-width: 360px;
-    max-width: 360px;
     width: 100%;
-    border-bottom-right-radius: 40px;
-    border-bottom-left-radius: 40px;
 
     .app-wrapper {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
-        font-family: 'Inter' !important;
         overflow: hidden;
-        min-width: 360px;
-        max-width: 360px;
 
         .header {
             display: flex;
@@ -42,22 +31,15 @@
             justify-items: flex-start;
             align-items: flex-start;
             align-content: flex-start;
-            min-width: 360px;
-            max-width: 360px;
-            min-height: 680px - 35px;
-            max-height: 680px - 35px;
-            border-bottom-right-radius: 40px;
-            overflow-y: scroll;
-            border-left: 30px solid rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
             box-sizing: border-box;
-            border-bottom-left-radius: 40px !important;
 
             .image-placeholder {
                 position: relative;
 
                 .preview-img {
                     object-fit: cover;
-                    width: 144px;
+                    width: calc(100% / 2.5);
                     height: 144px;
                 }
 

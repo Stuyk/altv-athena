@@ -68,8 +68,8 @@ const appBank = Vue.component('app-bank', {
     template: `
         <div class="app-bank">
             <div class="app-wrapper">
-                <div class="header pt-2 pb-2">
-                    <div class="subtitle-2">A&nbsp;&nbsp;T&nbsp;&nbsp;H&nbsp;&nbsp;E&nbsp;&nbsp;N&nbsp;&nbsp;A</div>
+                <div class="header">
+                    <div class="subtitle-2">Bank of Los Santos</div>
                 </div>
                 <div class="main-screen pa-2">
                     <template v-if="!processing">

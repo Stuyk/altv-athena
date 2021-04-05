@@ -1,35 +1,43 @@
+@max-phone-height: 65vh;
+@max-phone-width: 35vh;
+
 .iphone-x-active {
-    transform: translateY(-720px);
-    animation: moveup 0.5s !important;
+    transform: translateY(calc(100vh - @max-phone-height)) !important;
+    min-width: @max-phone-width;
+    max-width: @max-phone-width;
+    min-height: @max-phone-height;
+    max-height: @max-phone-height;
+    // animation: moveup 0.5s !important;
     background: url('https://www.designbolts.com/wp-content/uploads/2018/05/Beautiful-Nature-Apple-iPhone-X-Wallpaper-1.jpg') !important;
     background-size: cover !important;
 }
 
 .iphone-x {
     position: fixed;
-    margin: 40px auto;
-    width: 360px;
-    height: 720px;
-    bottom: -720px;
-    right: 175px;
+    min-width: @max-phone-width;
+    max-width: @max-phone-width;
+    min-height: @max-phone-height;
+    max-height: @max-phone-height;
+    top: 0;
+    right: 24vh;
     background: black;
-    border-radius: 40px;
-    box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919, 0px 0px 0px 20px #111;
+    box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.2), 0px 0px 0px 10px rgba(25, 25, 25, 1),
+        0px 0px 0px 15px rgb(50, 50, 50), 0px 0px 15px 14px black;
     user-select: none;
-    animation: movedown 0.5s;
+    transform: translateY(95vh);
+    border-radius: 5px;
+    // animation: movedown 0.5s;
 
     .notch {
         display: flex;
-        width: 100%;
-        height: 40px;
-        padding-left: 25px;
-        padding-right: 25px;
-        border-top-right-radius: 40px;
-        border-top-left-radius: 40px;
-        font-family: 'Inter';
+        justify-content: space-between;
+        min-width: @max-phone-width;
+        max-width: @max-phone-width;
+        height: 5vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
         font-weight: 800;
         background: rgba(0, 0, 0, 0.5);
-        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
 
         .icons {
             display: flex;
@@ -40,19 +48,45 @@
 
     .screen {
         display: flex;
-        min-width: 360px;
-        max-width: 360px;
-        min-height: 780px - 40px;
-        font-family: 'Inter';
+        justify-content: space-between;
+        flex-direction: column;
+        min-width: @max-phone-width;
+        max-width: @max-phone-width;
+        font-family: monospace;
         position: relative;
+        overflow: hidden;
+        min-height: calc(@max-phone-height - 5vh);
+        max-height: calc(@max-phone-height - 5vh);
+
+        .bottom-bar {
+            background: black;
+            display: flex;
+            justify-content: space-around;
+            justify-items: center;
+            align-items: center;
+            align-content: center;
+            min-height: 5vh;
+            max-height: 5vh;
+
+            .clickable {
+                padding: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                }
+
+                &:active {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
 
         .phone-dots {
             position: absolute;
             display: flex;
             justify-content: space-evenly;
-            padding-left: 100px;
-            padding-right: 100px;
-            padding-top: 2px;
+            padding-top: 0.5vh;
             width: 100%;
 
             .inactive {
@@ -61,82 +95,28 @@
             }
         }
 
-        .swipe-left {
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            height: 100%;
-            min-width: 30px;
-            left: 0px;
-            top: 0px;
-            cursor: pointer;
-            animation: fadeNav 1s;
-            border-bottom-left-radius: 40px !important;
-            z-index: 128;
-
-            i {
-                opacity: 0.5;
-            }
-
-            &:hover {
-                i {
-                    opacity: 1;
-                }
-            }
-
-            &:active {
-                background: rgba(0, 0, 0, 0.2);
-                transition: 0.01s;
-            }
-        }
-
-        .swipe-right {
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            min-width: 30px;
-            min-height: 780px;
-            max-height: 780px;
-            right: 0px;
-            top: 0px;
-            cursor: pointer;
-            animation: fadeNav 1s;
-            border-bottom-right-radius: 40px;
-
-            i {
-                opacity: 0.5;
-            }
-
-            &:hover {
-                i {
-                    opacity: 1;
-                }
-            }
-
-            &:active {
-                background: rgba(0, 0, 0, 0.2);
-                transition: 0.01s;
-            }
-        }
-
         .main {
-            min-height: 780px - 40px;
-            max-height: 780px - 40px;
-            min-width: 360px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(6, 0.8fr);
-            row-gap: 30px;
-            column-gap: 30px;
-            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            box-sizing: border-box;
+            min-width: @max-phone-width;
+            max-width: @max-phone-width;
             position: relative;
+            padding: 3vh;
+            margin-top: 3vh;
 
             .phone-icon {
                 display: flex;
                 justify-content: center;
                 background: rgba(0, 0, 0, 0.5);
-                border-radius: 6px;
-                transition: 0.5s;
+                border-radius: 3px;
+                min-width: 35vh / 4;
+                max-width: 35vh / 4;
+                min-height: 35vh / 4;
+                max-height: 35vh / 4;
+                margin-bottom: 6vh;
+                transition: 0.2s;
                 cursor: pointer;
                 position: relative;
                 font-family: monospace;
@@ -158,8 +138,8 @@
                     text-align: center;
                     bottom: 0px;
                     transform: translateY(23px);
-                    text-shadow: 2px 2px 5px black;
-                    color: rgba(255, 255, 255, 0.8);
+                    text-shadow: 0px 0px 3px black;
+                    color: rgba(255, 255, 255, 1);
                 }
 
                 i {
@@ -177,14 +157,6 @@
                 }
             }
         }
-    }
-
-    &:before,
-    &:after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 

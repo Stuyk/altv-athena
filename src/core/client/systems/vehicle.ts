@@ -243,7 +243,7 @@ export class VehicleController {
         // In Vehicle Actions
         if (alt.Player.local.vehicle) {
             const id = alt.Player.local.scriptID;
-            const isDriver = native.getPedInVehicleSeat(closestVehicle.scriptID, -1, 0) === id;
+            const isDriver = native.getPedInVehicleSeat(closestVehicle.scriptID, -1, false) === id;
 
             // Toggle the engine.
             if (isDriver) {
@@ -336,7 +336,7 @@ export class VehicleController {
 
         if (alt.Player.local.vehicle) {
             const id = alt.Player.local.scriptID;
-            const isDriver = native.getPedInVehicleSeat(closestVehicle.scriptID, -1, 0) === id;
+            const isDriver = native.getPedInVehicleSeat(closestVehicle.scriptID, -1, false) === id;
 
             native.taskLeaveAnyVehicle(alt.Player.local.scriptID, 0, 0);
 

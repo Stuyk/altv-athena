@@ -12,8 +12,8 @@ import './controllers/helpController';
 import './controllers/leaderBoardController';
 import { PhoneController } from './controllers/phoneController';
 
-// const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
-const url = `http://resource/client/views/hud/html/index.html`;
+const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
+// const url = `http://resource/client/views/hud/html/index.html`;
 
 let commandList: Array<any> = [];
 let interval: number;
