@@ -1,5 +1,6 @@
 @max-phone-height: 65vh;
 @max-phone-width: 35vh;
+@max-screen-height: calc(@max-phone-height - 13vh);
 
 .iphone-x-active {
     transform: translateY(calc(100vh - @max-phone-height)) !important;
@@ -102,24 +103,40 @@
             box-sizing: border-box;
             min-width: @max-phone-width;
             max-width: @max-phone-width;
+            min-height: calc(@max-phone-height - 10vh);
+            max-height: calc(@max-phone-height - 10vh);
+            overflow: hidden;
             position: relative;
-            padding: 3vh;
-            margin-top: 3vh;
+
+            .home {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+                grid-gap: 0.5vh;
+                min-height: calc(@max-phone-height - 10vh);
+                max-height: calc(@max-phone-height - 10vh);
+                justify-content: center;
+                justify-items: center;
+                align-content: center;
+                align-items: center;
+                padding: 0.5vh !important;
+                box-sizing: border-box;
+                margin-top: 3.5vh;
+            }
 
             .phone-icon {
                 display: flex;
                 justify-content: center;
                 background: rgba(0, 0, 0, 0.5);
                 border-radius: 3px;
-                min-width: 35vh / 4;
-                max-width: 35vh / 4;
-                min-height: 35vh / 4;
-                max-height: 35vh / 4;
-                margin-bottom: 6vh;
+                min-width: calc(35vh / 3 - 0.7vh);
+                max-width: calc(35vh / 3 - 0.7vh);
+                height: 80%;
                 transition: 0.2s;
                 cursor: pointer;
                 position: relative;
                 font-family: monospace;
+                box-sizing: border-box;
 
                 &:hover {
                     i {
@@ -138,8 +155,9 @@
                     text-align: center;
                     bottom: 0px;
                     transform: translateY(23px);
-                    text-shadow: 0px 0px 3px black;
-                    color: rgba(255, 255, 255, 1);
+                    text-shadow: 1px 1px 2px black;
+                    color: rgba(255, 255, 255, 0.8);
+                    letter-spacing: 0.1em;
                 }
 
                 i {

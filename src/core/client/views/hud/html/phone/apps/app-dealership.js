@@ -172,6 +172,30 @@ const appDealership = Vue.component('app-dealership', {
                     class: 'boat',
                     sell: true,
                     price: 12000
+                },
+                {
+                    display: 'Dinghy',
+                    name: 'dinghy',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
+                },
+                {
+                    display: 'Dinghy 2',
+                    name: 'dinghy2',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
+                },
+                {
+                    display: 'Dinghy 3',
+                    name: 'dinghy3',
+                    type: 'boat',
+                    class: 'boat',
+                    sell: true,
+                    price: 12000
                 }
             ]);
         }

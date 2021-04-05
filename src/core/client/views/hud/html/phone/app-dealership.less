@@ -1,3 +1,5 @@
+@import 'iphone-x.less';
+
 .app-dealership {
     display: flex;
     box-sizing: border-box;
@@ -8,6 +10,7 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        width: 100%;
 
         .header {
             display: flex;
@@ -16,31 +19,28 @@
             justify-items: center;
             align-content: center;
             align-items: center;
-            width: 100%;
+            flex-grow: 1;
             min-height: 35px;
             max-height: 35px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .main-screen {
-            position: relative;
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            justify-items: flex-start;
-            align-items: flex-start;
-            align-content: flex-start;
+            flex-direction: column;
             overflow-y: auto;
             box-sizing: border-box;
+            min-height: @max-screen-height;
+            max-height: @max-screen-height;
 
             .image-placeholder {
                 position: relative;
+                width: calc(100% - 8px);
 
                 .preview-img {
                     object-fit: cover;
-                    width: calc(100% / 2.5);
-                    height: 144px;
+                    flex-grow: 1;
+                    width: 100%;
                 }
 
                 .vehicle-model {
