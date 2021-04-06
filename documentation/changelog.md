@@ -25,6 +25,10 @@ description: List of all the changes and current versions.
 + Vehicles now added to player from dealership
 + Added spawn points for vehicle dealerships after buying
 + Added New Inventory Interface with Player Preview
++ Added Vehicle Colours to Dealership App
++ Rescaled Entire Phone Interface
++ Changed Phone Interface Colors
++ Scaled All Phone Apps
 ```
 
 ## 1.7.1 - February 27, 2021

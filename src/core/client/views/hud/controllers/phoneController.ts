@@ -41,11 +41,6 @@ export class PhoneController {
      * @memberof PhoneController
      */
     static routeFromPhone(name: string, ...args: any[]) {
-        alt.log(name);
-        alt.log(args);
-
-        alt.log(JSON.stringify(PhoneEventList));
-
         const event = PhoneEventList.find((event) => event.name.toLowerCase().includes(name.toLowerCase()));
 
         if (!event) {

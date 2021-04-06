@@ -130,13 +130,36 @@ const appDealership = Vue.component('app-dealership', {
             return `../../images/vehicles/${model}.png`;
         },
         purchase(model) {
-            console.log(this.color);
+            let color = this.asRGB(this.color);
+
+            if (!color) {
+                color = {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                    a: 255
+                };
+            }
+
+            if (!color.a) {
+                color.a = 255;
+            }
 
             if (!('alt' in window)) {
                 return;
             }
 
-            alt.emit('phone:Event', 'phone:Dealership:Buy', model);
+            alt.emit('phone:Event', 'phone:Dealership:Buy', model, color);
+        },
+        asRGB(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result
+                ? {
+                      r: parseInt(result[1], 16),
+                      g: parseInt(result[2], 16),
+                      b: parseInt(result[3], 16)
+                  }
+                : null;
         },
         back() {
             this.vehicle = null;

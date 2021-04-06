@@ -134,6 +134,20 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
     vehicle.player_id = player.id;
     vehicle.behavior = ownershipBehavior;
 
+    let color;
+
+    if (!data.color) {
+        color = new alt.RGBA(255, 255, 255, 255);
+    } else {
+        color = new alt.RGBA(data.color.r, data.color.g, data.color.b, 255);
+    }
+
+    // Primary
+    vehicle.customPrimaryColor = color;
+
+    // Secondary
+    vehicle.customSecondaryColor = color;
+
     // Process mods, plates, etc.
     vehicle.numberPlateText = vehicle.data.uid.substring(0, 8);
 

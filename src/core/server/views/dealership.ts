@@ -7,7 +7,7 @@ import { vehicleFuncs } from '../extensions/Vehicle';
 
 alt.onClient(PhoneEvents.DEALERSHIP_BUY.name, handlePurchase);
 
-function handlePurchase(player: alt.Player, model: string) {
+function handlePurchase(player: alt.Player, model: string, color: alt.RGBA) {
     if (!player || !player.valid) {
         return;
     }
@@ -40,7 +40,8 @@ function handlePurchase(player: alt.Player, model: string) {
         model: vehicleData.name,
         fuel: 100,
         position: DEFAULT_CONFIG.VEHICLE_DEALERSHIP_SPAWNS[vehicleData.class],
-        rotation: { x: 0, y: 0, z: 0 }
+        rotation: { x: 0, y: 0, z: 0 },
+        color
     });
 
     playerFuncs.emit.message(
