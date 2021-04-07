@@ -6,5 +6,11 @@ export interface Vehicle {
     position: Vector3;
     rotation: Vector3;
     fuel?: number;
+    color?: {
+        r: number;
+        g: number;
+        b: number;
+        a: number;
+    };
     // mods...
 }

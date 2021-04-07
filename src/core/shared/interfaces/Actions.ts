@@ -23,7 +23,7 @@ export interface Action {
 
 /**
  * An infinitely scaling menu.
- * Holds up to 9 options at a time.
+ * Holds up to 9 options at a time
  * @export
  * @interface ActionMenu
  */

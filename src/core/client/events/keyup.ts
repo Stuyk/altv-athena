@@ -7,8 +7,8 @@ import { VehicleController } from '../systems/vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { HelpController } from '../views/hud/controllers/helpController';
 import { LeaderboardController } from '../views/hud/controllers/leaderBoardController';
+import { PhoneController } from '../views/hud/controllers/phoneController';
 import { InventoryController } from '../views/inventory/inventory';
-import { VehiclesController } from '../views/vehicles/vehicles';
 
 export const KEY_BINDS = {
     // Left Alt
@@ -25,16 +25,18 @@ export const KEY_BINDS = {
     VEHICLE_FUNCS_ALT: 71, // Passenger
     // I
     INVENTORY: 73,
-    // O
-    VEHICLES: 79,
     // T
     CHAT: 84,
     // X
     VEHICLE_LOCK: 88,
+    // Y
+    VEHICLE_ENGINE: 89,
     // F1
     DEBUG_KEY: 112,
     // F2
-    LEADERBOARD: 113
+    LEADERBOARD: 113,
+    // . or >
+    PHONE: 190
 };
 
 const DELAY_BETWEEN_LONG_PRESSES = 800;
@@ -49,11 +51,11 @@ const KEY_UP_BINDS = {
     [KEY_BINDS.INVENTORY]: {
         singlePress: InventoryController.handleView
     },
-    [KEY_BINDS.VEHICLES]: {
-        singlePress: VehiclesController.handleView
-    },
     [KEY_BINDS.VEHICLE_LOCK]: {
-        singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedLockKey')
+        singlePress: VehicleController.handleToggleLock
+    },
+    [KEY_BINDS.VEHICLE_ENGINE]: {
+        singlePress: VehicleController.handleToggleEngine
     },
     [KEY_BINDS.VEHICLE_FUNCS]: {
         singlePress: (...args: any[]) => VehicleController.triggerVehicleFunction('pressedVehicleFunction')
@@ -81,6 +83,9 @@ const KEY_UP_BINDS = {
     },
     [KEY_BINDS.TOOLBAR_FOUR]: {
         singlePress: ToolbarController.handleToolbarSwitch
+    },
+    [KEY_BINDS.PHONE]: {
+        singlePress: PhoneController.togglePhone
     }
 };
 

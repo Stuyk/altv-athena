@@ -12,6 +12,8 @@ function toggleOn() {
 }
 
 function disableDefaultBehavior(): void {
+    native.drawRect(0, 0, 0, 0, 0, 0, 0, 0, false);
+
     // Disable default weapon switch
     for (let i = 157; i < 164; i++) {
         native.disableControlAction(0, i, true);

@@ -16,7 +16,7 @@
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true
     },
-    "include": ["./src/**/*.ts"],
+    "include": ["./src/**/*.ts", "src/core/shared/enums/phoneEvents.ts.js"],
     "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],
     "watchOptions": {
         "watchFile": "useFsEvents",

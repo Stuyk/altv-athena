@@ -6,7 +6,9 @@ import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getForwardVector } from '../utility/vector';
+import { AresFunctions, WASM } from '../utility/wasmLoader';
 
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
 
 alt.onClient('task:Vehicle:Repair:Timeline', handleRepairTimeline);
@@ -33,8 +35,8 @@ function handleRepair(player: alt.Player) {
 
     const fwdVector = getForwardVector(closestVehicle.rot);
     const fwdPosition = {
-        x: closestVehicle.pos.x + fwdVector.x * 2,
-        y: closestVehicle.pos.y + fwdVector.y * 2,
+        x: wasm.AthenaMath.add(closestVehicle.pos.x, wasm.AthenaMath.multiply(fwdVector.x, 2)),
+        y: wasm.AthenaMath.add(closestVehicle.pos.y, wasm.AthenaMath.multiply(fwdVector.y, 2)),
         z: closestVehicle.pos.z
     };
 

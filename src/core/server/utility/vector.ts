@@ -1,6 +1,23 @@
 import * as alt from 'alt-server';
-import { Vector3 } from 'alt-server';
-import { distance2d } from '../../shared/utility/vector';
+import { WASM, AresFunctions } from './wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
+
+export function distance(vector1: alt.IVector3, vector2: alt.IVector3) {
+    if (vector1 === undefined || vector2 === undefined) {
+        throw new Error('AddVector => vector1 or vector2 is undefined');
+    }
+
+    return wasm.AthenaMath.distance3d(vector1.x, vector1.y, vector1.z, vector2.x, vector2.y, vector2.z);
+}
+
+export function distance2d(vector1: alt.IVector3, vector2: alt.IVector3) {
+    if (vector1 === undefined || vector2 === undefined) {
+        throw new Error('AddVector => vector1 or vector2 is undefined');
+    }
+
+    return wasm.AthenaMath.distance2d(vector1.x, vector1.y, vector2.x, vector2.y);
+}
 
 /**
  * SERVER ONLY
@@ -8,10 +25,11 @@ import { distance2d } from '../../shared/utility/vector';
  * @param {alt.Vector3} rot
  */
 export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
-    const z = rot.z;
-    const x = rot.x;
-    const num = Math.abs(Math.cos(x));
-    return new alt.Vector3(-Math.sin(z) * num, Math.cos(z) * num, Math.sin(x));
+    return {
+        x: wasm.AthenaMath.fwdX(rot.x, rot.z),
+        y: wasm.AthenaMath.fwdY(rot.x, rot.z),
+        z: wasm.AthenaMath.fwdZ(rot.x)
+    } as alt.Vector3;
 }
 
 /**
@@ -25,8 +43,8 @@ export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
 export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): alt.Vector3 {
     const forwardVector = getForwardVector(player.rot);
     const posFront = {
-        x: player.pos.x + forwardVector.x * distance,
-        y: player.pos.y + forwardVector.y * distance,
+        x: wasm.AthenaMath.add(player.pos.x, wasm.AthenaMath.multiply(forwardVector.x, distance)),
+        y: wasm.AthenaMath.add(player.pos.y, wasm.AthenaMath.multiply(forwardVector.y, distance)),
         z: player.pos.z
     };
 
@@ -41,30 +59,30 @@ export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): 
  * @returns {boolean}
  */
 export function isBetweenVectors(pos, vector1, vector2): boolean {
-    const validX = pos.x > vector1.x && pos.x < vector2.x;
-    const validY = pos.y > vector1.y && pos.y < vector2.y;
+    const validX = wasm.AthenaMath.isGreater(pos.x, vector1.x) && wasm.AthenaMath.isLesser(pos.x, vector2.x);
+    const validY = wasm.AthenaMath.isGreater(pos.y, vector1.y) && wasm.AthenaMath.isLesser(pos.y, vector2.y);
     return validX && validY ? true : false;
 }
 
 /**
  * Get the closest server entity type. Server only.
  * @template T
- * @param {Vector3} playerPosition
- * @param {Vector3} rot
- * @param {Array<{ pos: Vector3; valid?: boolean }>} entities
+ * @param {alt.Vector3} playerPosition
+ * @param {alt.Vector3} rot
+ * @param {Array<{ pos: alt.Vector3; valid?: boolean }>} entities
  * @param {number} distance
  * @return {*}  {(T | null)}
  */
 export function getClosestEntity<T>(
-    playerPosition: Vector3,
-    rot: Vector3,
-    entities: Array<{ pos: Vector3; valid?: boolean }>,
+    playerPosition: alt.Vector3,
+    rot: alt.Vector3,
+    entities: Array<{ pos: alt.Vector3; valid?: boolean }>,
     distance: number
 ): T | null {
     const fwdVector = getForwardVector(rot);
     const position = {
-        x: playerPosition.x + fwdVector.x * distance,
-        y: playerPosition.y + fwdVector.y * distance,
+        x: wasm.AthenaMath.add(playerPosition.x, wasm.AthenaMath.multiply(fwdVector.x, distance)),
+        y: wasm.AthenaMath.add(playerPosition.y, wasm.AthenaMath.multiply(fwdVector.y, distance)),
         z: playerPosition.z
     };
 
@@ -79,7 +97,7 @@ export function getClosestEntity<T>(
         }
 
         const dist = distance2d(position, entity.pos);
-        if (dist > lastRange) {
+        if (wasm.AthenaMath.isGreater(dist, lastRange)) {
             continue;
         }
 

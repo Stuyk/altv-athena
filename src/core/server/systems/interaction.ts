@@ -5,9 +5,9 @@ import gridData from '../../shared/information/gridData';
 import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../../shared/interfaces/Interaction';
 import { InteractionLocale } from '../../shared/locale/interaction';
-import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
+import { distance2d } from '../utility/vector';
 import '../views/atm';
 
 interface InteractionHelper {

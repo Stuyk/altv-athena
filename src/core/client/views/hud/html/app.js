@@ -14,7 +14,7 @@ const audioStreams = [];
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
-    components: [actions, leaderboard, chat, help, status],
+    components: [actions, leaderboard, chat, help, phone, status],
     data() {
         return {
             show: false,

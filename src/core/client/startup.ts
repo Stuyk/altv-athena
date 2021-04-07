@@ -47,7 +47,6 @@ import './views/characters/characters';
 import './views/clothing/clothing';
 import './views/inventory/inventory';
 import './views/job/job';
-import './views/vehicles/vehicles';
 
 // Client Plugins
 import '../client-plugins/imports';

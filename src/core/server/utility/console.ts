@@ -143,7 +143,7 @@ function handleKick(cmdName: string, discordNameIDCatchAll: string, ...args: any
         return;
     }
 
-    player.kick();
+    player.kick(reason);
     Logger.info(`${discordNameIDCatchAll} has been kicked from the server.`);
 }
 

@@ -1,0 +1,110 @@
+@import 'iphone-x.less';
+
+.app-dealership {
+    display: flex;
+    box-sizing: border-box;
+    animation: fadeapp 0.5s;
+    width: 100%;
+
+    .app-wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 100%;
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            justify-items: center;
+            align-content: center;
+            align-items: center;
+            flex-grow: 1;
+            min-height: 35px;
+            max-height: 35px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .main-screen {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-sizing: border-box;
+            min-height: @max-screen-height;
+            max-height: @max-screen-height;
+
+            .image-placeholder {
+                position: relative;
+                width: calc(100% - 8px);
+
+                .preview-img {
+                    object-fit: cover;
+                    flex-grow: 1;
+                    width: 100%;
+                }
+
+                .vehicle-model {
+                    position: absolute;
+                    z-index: 99;
+                    bottom: 24px;
+                    font-weight: 800;
+                    text-align: center;
+                    font-size: 12px;
+                    width: 100%;
+                }
+
+                .vehicle-price {
+                    position: absolute;
+                    z-index: 99;
+                    top: 12px;
+                    font-weight: 800;
+                    text-align: center;
+                    font-size: 12px;
+                    width: 100%;
+                }
+            }
+
+            .preview-lg {
+                object-fit: contain;
+                width: 100%;
+                height: auto;
+            }
+
+            .clickable {
+                cursor: pointer;
+                box-sizing: border-box;
+                border: 2px solid rgba(0, 255, 0, 0.2);
+            }
+
+            .disabled {
+                filter: grayscale(1);
+            }
+
+            .split {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+.repeating-gradient {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 0, 0, 0.5),
+        rgba(255, 0, 0, 0.5) 5px,
+        rgba(0, 0, 255, 0.5) 5px,
+        rgba(0, 0, 255, 0.5) 10px
+    );
+}
+
+@keyframes fadeapp {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

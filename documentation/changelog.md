@@ -4,6 +4,33 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.0 - February 28-x, 2021
+
+```diff
++ Increase Compilation Times
++ Rewrote Build Pipeline Into File
++ Added Separate Folder for 'addon-resources' for adding mods, etc.
++ Updated Installing Mods Page
++ Removed Unnecessary Dependencies
++ Added 'Y' to toggle Engine
++ Added 'X' to toggle Lock
++ Vehicle Controls Feel More Responsive
++ Added Various WASM Functions to Server
++ Made General Improvements to App Functionality
++ Began Work for Hooking In Phone Applications
++ Added Descriptors to Inventory
++ Added Hookin for Vehicle Spawner
+- Removed old Personal Vehicle Spawner
++ Add Subtract from all currencies function
++ Vehicles now added to player from dealership
++ Added spawn points for vehicle dealerships after buying
++ Added New Inventory Interface with Player Preview
++ Added Vehicle Colours to Dealership App
++ Rescaled Entire Phone Interface
++ Changed Phone Interface Colors
++ Scaled All Phone Apps
+```
+
 ## 1.7.1 - February 27, 2021
 
 ```diff

@@ -17,8 +17,6 @@ const app = new Vue({
                 selectedElement: null
             },
             pageIndex: 0,
-            pageMeta: ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4', 'Tab 5'],
-            pageIcons: ['icon-box', 'icon-box', 'icon-box', 'icon-box', 'icon-box'],
             equipmentMeta: [
                 'Hat',
                 'Mask',
@@ -35,7 +33,8 @@ const app = new Vue({
             inventory: [[], [], [], [], [], []],
             ground: [],
             equipment: [],
-            toolbar: []
+            toolbar: [],
+            disablePreview: false
         };
     },
     methods: {
@@ -116,9 +115,7 @@ const app = new Vue({
             this.pageIndex = value;
         },
         isActiveTab(index) {
-            return this.pageIndex === index
-                ? { 'light-blue': true, tab: true, 'mb-1': true, 'elevation-6': true }
-                : { grey: true, 'darken-4': true, tab: true, 'mb-1': true, 'elevation-6': true };
+            return this.pageIndex === index;
         },
         getInventoryClass() {
             const classList = {};
@@ -176,7 +173,7 @@ const app = new Vue({
             this.clonedElement = document.getElementById(`cloned-${element.id}`);
             this.clonedElement.classList.add('item-clone');
             this.clonedElement.classList.add('no-animation');
-            this.clonedElement.style.left = `${e.clientX + 25}px`;
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
             this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
 
             // Modify Current Element
@@ -192,7 +189,7 @@ const app = new Vue({
             document.addEventListener('mousemove', this.updatePosition); // This calls UpdatePosition
         },
         updatePosition(e) {
-            this.clonedElement.style.left = `${e.clientX + 25}px`;
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
             this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
         },
         mouseOver(e) {
@@ -350,6 +347,9 @@ const app = new Vue({
                     alt.emit('inventory:Close');
                 }
             }, 50);
+        },
+        setPreviewDisabled(isDisabled) {
+            this.disablePreview = isDisabled;
         }
     },
     computed: {
@@ -381,7 +381,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -397,7 +397,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -413,7 +413,7 @@ const app = new Vue({
 
                 return Object.keys(target.data).map((key) => {
                     if (key === 'event') {
-                        return { key: 'CONSUMABLE', value: true };
+                        return { key: 'consumeable', value: true };
                     }
 
                     return { key, value: target.data[key] };
@@ -428,7 +428,7 @@ const app = new Vue({
 
             return Object.keys(target.data).map((key) => {
                 if (key === 'event') {
-                    return { key: 'CONSUMABLE', value: true };
+                    return { key: 'consumeable', value: true };
                 }
 
                 return { key, value: target.data[key] };
@@ -449,6 +449,7 @@ const app = new Vue({
             alt.on('inventory:Inventory', this.updateInventory);
             alt.on('inventory:Equipment', this.updateEquipment);
             alt.on('inventory:Ground', this.updateGround);
+            alt.on('inventory:DisablePreview', this.setPreviewDisabled);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {

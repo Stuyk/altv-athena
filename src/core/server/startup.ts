@@ -1,14 +1,16 @@
 import * as alt from 'alt-server';
-import path from 'path';
-import fs from 'fs';
 import env from 'dotenv';
-import { InjectedFunctions, InjectedStarter, loadWASM } from './utility/wasmLoader';
-import { setAzureEndpoint } from './utility/encryption';
-import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
+import fs from 'fs';
+import path from 'path';
+import { Database, onReady } from 'simplymongo';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
-import logger from './utility/athenaLogger';
-import { Collections } from './interface/DatabaseCollections';
 import isFunction from '../shared/utility/classCheck';
+import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
+import { PostController } from './ares/postRequests';
+import { Collections } from './interface/DatabaseCollections';
+import { default as logger, default as Logger } from './utility/athenaLogger';
+import { setAzureEndpoint } from './utility/encryption';
+import { AresFunctions, InjectedStarter, WASM } from './utility/wasmLoader';
 
 env.config();
 
@@ -16,15 +18,12 @@ setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://ares.stu
 
 const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
 const fPath = `${path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm')}`;
-const buffer = fs.readFileSync(fPath);
 const collections = [
     //
     Collections.Accounts,
     Collections.Characters,
     Collections.Options
 ];
-
-let fns: InjectedFunctions;
 
 alt.on('playerConnect', handleEarlyConnect);
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, handleEntryToggle);
@@ -41,43 +40,24 @@ if (!process.env.EMAIL) {
     process.exit(0);
 }
 
-async function loadFiles(): Promise<boolean> {
-    if (fns.idl()) {
-        return true;
+async function handleLoad(value: string) {
+    const module = await import(value).catch((err) => {
+        console.error(err);
+        return null;
+    });
+
+    if (module && module.default && isFunction(module.default)) {
+        module.default();
     }
 
-    const imported = await fns
-        .ii()
-        .catch((err) => {
-            return null;
-        })
-        .then((module) => {
-            if (module.default && isFunction(module.default)) {
-                module.default();
-            }
-
-            if (module.load && isFunction(module.load)) {
-                module.default();
-            }
-
-            return true;
-        });
-
-    if (!imported) {
-        logger.error(`Failed to load.`);
-        return false;
+    if (module && module.load && isFunction(module.load)) {
+        module.load();
     }
 
-    return await loadFiles();
+    WASM.getFunctions<AresFunctions>('ares').isDoneLoading();
 }
 
-async function handleFiles() {
-    const result = await loadFiles();
-    if (!result) {
-        logger.error(`Failed to load files.`);
-        process.exit(0);
-    }
-
+function handleFinish() {
     import('./utility/console');
 
     import('./systems/options').then((res) => {
@@ -110,29 +90,52 @@ async function runBooter() {
         logger.warning(`Try merging from the master branch or from the upstream branch of your choice.`);
     }
 
-    const starterFns = await loadWASM<InjectedStarter>('starter', buffer);
-    const aresBuffer = await starterFns.start().catch((err) => {
-        return null;
-    });
+    const buffer: any = fs.readFileSync(fPath);
+    const starterFns = await WASM.load<InjectedStarter>(buffer);
+    alt.once(starterFns.getEvent(), handleEvent);
+    starterFns.deploy();
+}
 
-    if (!aresBuffer) {
+async function handleEvent(value: number) {
+    const buffer: Buffer = await PostController.postAsync(WASM.getHelpers().__getString(value));
+
+    if (!buffer) {
         logger.error(`Unable to boot. Potentially invalid license.`);
         process.exit(0);
     }
 
-    fns = await loadWASM<InjectedFunctions>('ares', aresBuffer).catch((err) => {
+    await WASM.load<AresFunctions>(buffer).catch((err) => {
         try {
-            const data = JSON.parse(aresBuffer);
-            alt.logError(`Status: ${data.status} | Error: ${data.message}`);
+            const data = JSON.parse(buffer.toString());
+            logger.error(`Status: ${data.status} | Error: ${data.message}`);
         } catch (err) {}
         return null;
     });
 
-    if (!fns) {
-        return;
+    const ext = WASM.getFunctions<AresFunctions>('ares');
+
+    if (!ext.isDoneLoading) {
+        Logger.error(`Failed to properly load Athena binaries.`);
+        process.exit(0);
     }
 
-    fns.bd(mongoURL, collections, handleFiles);
+    onReady(() => {
+        alt.on(WASM.getHelpers().__getString(ext.getLoadName()), handleLoad);
+        alt.once(`${ext.getFinishName()}`, handleFinish);
+        ext.isDoneLoading();
+    });
+
+    if (process.env.MONGO_USERNAME && process.env.MONGO_PASSWORD) {
+        new Database(
+            mongoURL,
+            WASM.getHelpers().__getString(ext.getDatabaseName()),
+            collections,
+            process.env.MONGO_USERNAME,
+            process.env.MONGO_PASSWORD
+        );
+    } else {
+        new Database(mongoURL, WASM.getHelpers().__getString(ext.getDatabaseName()), collections);
+    }
 }
 
 function handleEntryToggle() {

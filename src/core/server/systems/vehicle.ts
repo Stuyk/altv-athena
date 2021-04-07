@@ -7,6 +7,7 @@ import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
 import './fuel';
+import '../views/dealership';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);

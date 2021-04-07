@@ -1,4 +1,7 @@
 import * as alt from 'alt-server';
+import { AresFunctions, WASM } from '../../utility/wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 /**
  * Safely set a player's position.
@@ -30,14 +33,14 @@ function addHealth(p: alt.Player, value: number, exactValue: boolean = false) {
         return;
     }
 
-    if (p.health + value > 199) {
+    if (wasm.AthenaMath.add(p.health, value) > 199) {
         p.acHealth = 199;
         p.health = 199;
         return;
     }
 
-    p.acHealth = p.health + value;
-    p.health += value;
+    p.acHealth = wasm.AthenaMath.add(p.health, value);
+    p.health = p.acHealth;
 }
 
 /**
@@ -53,14 +56,14 @@ function addArmour(p: alt.Player, value: number, exactValue: boolean = false): v
         return;
     }
 
-    if (p.armour + value > 100) {
+    if (wasm.AthenaMath.add(p.armour, value) > 100) {
         p.acArmour = 100;
         p.armour = 100;
         return;
     }
 
-    p.acArmour = p.armour + value;
-    p.armour += value;
+    p.acArmour = wasm.AthenaMath.add(p.armour, value);
+    p.armour = p.acArmour;
 }
 
 export default {

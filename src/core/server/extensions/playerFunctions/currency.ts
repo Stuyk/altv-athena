@@ -2,6 +2,9 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import save from './save';
 import emit from './emit';
+import { AresFunctions, WASM } from '../../utility/wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 /**
  * Add currency type to the player.
@@ -16,7 +19,15 @@ function add(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 
     try {
-        p.data[type] += amount;
+        const originalValue = p.data[type];
+        p.data[type] = parseFloat(wasm.AthenaMath.add(p.data[type], amount).toFixed(2));
+
+        // Verify that the value was updated.
+        if (wasm.AthenaMath.isGreater(originalValue, p.data[type])) {
+            p.data[type] = originalValue;
+            return false;
+        }
+
         emit.meta(p, type, p.data[type]);
         save.field(p, type, p.data[type]);
         return true;
@@ -38,7 +49,15 @@ function sub(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 
     try {
-        p.data[type] -= amount;
+        const originalValue = p.data[type];
+        p.data[type] = parseFloat(wasm.AthenaMath.sub(p.data[type], amount).toFixed(2));
+
+        // Verify that the value was updated.
+        if (!wasm.AthenaMath.isLesser(p.data[type], originalValue)) {
+            p.data[type] = originalValue;
+            return false;
+        }
+
         emit.meta(p, type, p.data[type]);
         save.field(p, type, p.data[type]);
         return true;
@@ -69,8 +88,35 @@ function set(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
     }
 }
 
+function subAllCurrencies(p: alt.Player, amount: number): boolean {
+    if (p.data.cash + p.data.bank < amount) {
+        return false;
+    }
+
+    let amountLeft = amount;
+
+    if (wasm.AthenaMath.sub(p.data.cash, amountLeft) <= -1) {
+        amountLeft = wasm.AthenaMath.sub(amountLeft, p.data.cash);
+        p.data.cash = 0;
+    } else {
+        p.data.cash = wasm.AthenaMath.sub(p.data.cash, amountLeft);
+        amountLeft = 0;
+    }
+
+    if (amountLeft >= 1) {
+        p.data.bank = wasm.AthenaMath.sub(p.data.bank, amountLeft);
+    }
+
+    save.field(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
+    save.field(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
+    emit.meta(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
+    emit.meta(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
+    return true;
+}
+
 export default {
     set,
     sub,
-    add
+    add,
+    subAllCurrencies
 };

@@ -11,159 +11,154 @@
         <div id="app">
             <v-app v-cloak>
                 <div class="main-container">
-                    <div class="player rounded">
-                        <div class="toolbar grey darken-4 elevation-6">
-                            <div 
-                                class="rounded grey darken-2" 
-                                v-for="(item, index) in toolbar"
-                                :id="`t-${index}`" 
-                                :class="!item ? { 'is-null-item': true } : { 'item': true }"
-                                v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
-                                >
-                                <template v-if="item">
-                                    <div class="icon no-pointer">
-                                        <img :src="`../icons/${item.icon}.png`"></img>
+                    <div class="vertical">
+                        <div class="horizontal">
+                            <div class="vertical slight-transparent" style="min-width: 21vw; border-right: 15px solid rgba(255, 255, 255, 0.1);">
+                                <div class="equipment"> <!-- Column 1 -->
+                                    <div
+                                        v-for="(item, index) in equipment"
+                                        :id="`e-${index}`" 
+                                        :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                        :key="index"
+                                        v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }">
+                                        <template v-if="item">
+                                            <div class="icon no-pointer">
+                                                <img :src="`../icons/${item.icon}.png`"></img>
+                                            </div>
+                                            <div class="stats no-pointer">
+                                                <div class="quantity">
+                                                    {{ item.quantity }}x
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="grey--text text--lighten-1 no-pointer descriptor-text">
+                                                {{ equipmentMeta[index] }}
+                                            </div>
+                                        </template>
                                     </div>
-                                    <div class="stats no-pointer">
-                                        <div class="quantity">
-                                            {{ item.quantity }}x
-                                        </div>
-                                        <div class="weight">
-                                            {{ item.weight }} lb
-                                        </div>
-                                    </div>
-                                </template>
-                                <template v-else>
-                                    <div class="grey--text text--darken-2 no-pointer">
-                                        {{ index + 1 }}
-                                    </div>
-                                </template>
+                                </div> <!-- End Column 1 -->
                             </div>
-                        </div>
-                        <div class="equipment grey darken-4 elevation-6">
-                            <div
-                                class="rounded grey darken-2"
-                                v-for="(item, index) in equipment"
-                                :id="`e-${index}`" 
-                                :class="!item ? { 'is-null-item': true } : { 'item': true }"
-                                :key="index"
-                                v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }">
-                                <template v-if="item">
-                                    <div class="icon no-pointer">
-                                        <img :src="`../icons/${item.icon}.png`"></img>
-                                    </div>
-                                    <div class="stats no-pointer">
-                                        <div class="quantity">
-                                            {{ item.quantity }}x
+                            <div class="previewBox"> <!-- Column 2 -->
+                                <template v-if="itemInfo && getItemInfo">
+                                    <div class="item-info slight-transparent">
+                                        <div class="name text-h5 font-weight-bold light-blue--text text--lighten-3">
+                                            {{ getItemInfo.name }}
                                         </div>
-                                        <div class="weight">
-                                            {{ item.weight }} lb
+                                        <v-divider class="mb-2"></v-divider>
+                                        <div class="quantity text-caption">
+                                            <v-chip label color="grey darken-3" small>Quantity: {{ getItemInfo.quantity }}x</v-chip>
                                         </div>
+                                        <v-divider class="mt-2 mb-2"></v-divider>
+                                        <div class="description text-subtitle-2 grey--text text--lighten-2">
+                                            {{ getItemInfo.description }}
+                                        </div>
+                                        <template v-if="getItemInfo.data">
+                                            <v-divider class="mt-2 mb-2"></v-divider>
+                                            <div class="name text-sm font-weight-bold light-blue--text text--lighten-4">
+                                                Data
+                                            </div>
+                                            <v-divider class="mt-2 mb-2"></v-divider>
+                                            <div class="key-group" v-for="(prop, index) in getItemProperties" :key="index" color="blue-grey darken-3" small dense>
+                                                <div class="key">{{ prop.key }}</div>
+                                                <div class="prop">{{ prop.value }}</div>
+                                            </div>
+                                        </template>
                                     </div>
                                 </template>
-                                <template v-else>
-                                    <div class="grey--text text--darken-2 no-pointer">
-                                        {{ equipmentMeta[index] }}
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-
-                        <template v-if="itemInfo && getItemInfo">
-                            <div class="item-info grey darken-4">
-                                <div class="name text-h5 font-weight-bold light-blue--text text--lighten-3">
-                                    {{ getItemInfo.name }}
-                                </div>
-                                <v-divider class="mb-2"></v-divider>
-                                <div class="quantity text-caption">
-                                    <v-chip label color="grey darken-3" small>Quantity: {{ getItemInfo.quantity }}x</v-chip>
-                                </div>
-                                <v-divider class="mt-2 mb-2"></v-divider>
-                                <div class="description text-subtitle-2 grey--text text--lighten-2">
-                                    {{ getItemInfo.description }}
-                                </div>
-                                <template v-if="getItemInfo.data">
-                                    <v-divider class="mt-2 mb-2"></v-divider>
-                                    <div class="name text-sm font-weight-bold light-blue--text text--lighten-4">
-                                        Data
-                                    </div>
-                                    <v-divider class="mt-2 mb-2"></v-divider>
-                                        <div class="chips">
-                                            <v-chip v-for="(prop, index) in getItemProperties" :key="index" class="mb-2 mr-2 ml-2 flex-grow-1 text-uppercase" label color="blue-grey darken-3" small>
-                                                {{ prop.key }}: {{ prop.value }}
-                                            </v-chip>
-                                        </div>
-                                </template>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="split-view">
-                        <div class="inventory grey darken-4 rounded elevation-6" :class="ground.length <= 0 ? { 'expand': true }: {}">
-                            <div class="inventory-list" :class="getInventoryClass()">
-                                <div 
-                                    class="rounded grey darken-3" 
-                                    v-for="(item, index) in getInventory"
-                                    :id="`i-${index}`"
-                                    :key="index" 
-                                    :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                <div class="ground-items" v-if="!disablePreview">
+                                    <div 
+                                    class="rounded grey darken-3 rounded"
+                                    v-for="(item, index) in ground" 
+                                    :class="!item ? { 'is-null-item': true } : { 'item': true }" 
+                                    :id="`g-${index}`"
+                                    :data-hash="item ? `${item.hash}` : ''"
                                     v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
-                                >
-                                    <template v-if="item">
-                                        <div class="icon no-pointer">
-                                            <img :src="`../icons/${item.icon}.png`"></img>
-                                        </div>
-                                        <div class="consume no-pointer" v-if="item && item.data && item.data.event">
-                                            <v-icon small>icon-arrow-down</v-icon>
-                                        </div>
-                                        <div class="stats no-pointer">
-                                            <div class="quantity">
-                                                {{ item.quantity }}x
+                                    >
+                                        <template v-if="item">
+                                            <div class="icon no-pointer">
+                                                <img :src="`../icons/${item.icon}.png`"></img>
                                             </div>
-                                            <div class="weight">
-                                                {{ item.weight }} lb
+                                            <div class="stats no-pointer">
+                                                <div class="quantity">
+                                                    {{ item.quantity }}x
+                                                </div>
                                             </div>
-                                        </div>
-                                    </template>
+                                        </template>
+                                        <template v-else>
+                                            <div class="grey--text text--lighten-1 no-pointer descriptor-text">
+                                                
+                                            </div>
+                                        </template>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="ground grey darken-4 rounded elevation-6" v-if="ground.length >= 1">
-                            <div class="pickup-zone" block>
-                                <div 
-                                class="rounded grey darken-3 rounded"
-                                v-for="(item, index) in ground" 
-                                :class="!item ? { 'is-null-item': true } : { 'item': true }" 
-                                :id="`g-${index}`"
-                                :data-hash="item ? `${item.hash}` : ''"
-                                v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
-                                >
-                                    <template v-if="item">
-                                        <div class="icon no-pointer">
-                                            <img :src="`../icons/${item.icon}.png`"></img>
-                                        </div>
-                                        <div class="stats no-pointer">
-                                            <div class="quantity">
-                                                {{ item.quantity }}x
+                            </div>  <!-- End Column 2 -->
+                            <div class="vertical slight-transparent" style="border-left: 15px solid rgba(255, 255, 255, 0.1);"> <!-- Split Inventory Vertical View -->
+                                <div class="toolbar">
+                                    <div 
+                                        v-for="(item, index) in toolbar"
+                                        :id="`t-${index}`" 
+                                        :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                        v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                                        >
+                                        <template v-if="item">
+                                            <div class="icon no-pointer">
+                                                <img :src="`../icons/${item.icon}.png`"></img>
                                             </div>
-                                            <div class="weight">
-                                                {{ item.weight }} lb
+                                            <div class="stats no-pointer">
+                                                <div class="quantity">
+                                                    {{ item.quantity }}x
+                                                </div>
                                             </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="grey--text text--darken-2 no-pointer">
+                                                {{ index + 1 }}
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="inventory" :class="ground.length <= 0 ? { 'expand': true }: {}">
+                                    <div class="inventory-list" :class="getInventoryClass()">
+                                        <div 
+                                            v-for="(item, index) in getInventory"
+                                            :id="`i-${index}`"
+                                            :key="index" 
+                                            :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                            v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                                        >
+                                            <template v-if="item">
+                                                <div class="icon no-pointer">
+                                                    <img :src="`../icons/${item.icon}.png`"></img>
+                                                </div>
+                                                <div class="consume no-pointer" v-if="item && item.data && item.data.event">
+                                                    <v-icon color="light-blue accent-3" small>icon-arrow-down</v-icon>
+                                                </div>
+                                                <div class="stats no-pointer">
+                                                    <div class="quantity">
+                                                        {{ item.quantity }}x
+                                                    </div>
+                                                </div>
+                                            </template>
                                         </div>
-                                    </template>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="navigation mt-1">
-                            <div v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" :class="isActiveTab(index -1)" :class="isPageIndex(index - 1)" @click="setIndex(index - 1)">
-                                <v-icon>{{ pageIcons[index - 1] }}</v-icon>
-                                <div class="tooltip">
-                                    {{ pageMeta[index - 1] }}
+                                <div class="navigation">
+                                    <div class="tab" v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" @click="setIndex(index - 1)">
+                                        <template v-if="isActiveTab(index -1)">
+                                            <v-icon x-small>icon-circle1</v-icon>
+                                        </template>
+                                        <template v-else>
+                                            <v-icon small>icon-circle</v-icon>
+                                        </template>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div><!-- End Split Inventory Vertical View -->
+                            <div class="empty-space-right"></div>
+                        </div> <!-- End Horizontal Bar-->
                     </div>
                 </div>
-                <div class="athena"></div>
+                <div class="athena-mod"></div>
             </v-app>
         </div>
         <script src="../../js/vue.min.js"></script>
