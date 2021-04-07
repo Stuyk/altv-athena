@@ -159,8 +159,6 @@ export class InteractionController {
      * @memberof InteractionController
      */
     static handleInteraction(player: alt.Player, type: string) {
-        type = type.toLowerCase();
-
         if (!InteractionController.Interactions[type]) {
             return;
         }
