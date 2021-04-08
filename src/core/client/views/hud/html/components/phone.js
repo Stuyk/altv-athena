@@ -123,22 +123,14 @@ const phone = Vue.component('phone', {
         <div class="phoneWrapper">
             <div class="iphone-x" v-if="!isActive">
                 <div class="notch">
-                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash.toFixed(2) }}</div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="icons">
-                        <v-icon small>icon-signal_cellular_alt</v-icon>
-                        <v-icon small>icon-battery_full</v-icon>
-                    </div>
                 </div>
             </div>
             <div class="iphone-x iphone-x-active" v-if="isActive">
                 <div class="notch">
-                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash.toFixed(2) }}</div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="icons">
-                        <v-icon small>icon-signal_cellular_alt</v-icon>
-                        <v-icon small>icon-battery_full</v-icon>
-                    </div>
                 </div>
                 <div class="screen">
                     <div class="main">
