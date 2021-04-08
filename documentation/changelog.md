@@ -4,6 +4,15 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.1 - April 8, 2021
+
+```diff
++ Scaled Down Phone Slightly
++ Fixed Bad Alignment on Phone Icons
++ Added Timeout to Finish Authorization Button (3 Seconds)
++ Fixed Fuel Cash Decimal Overflow
+```
+
 ## 1.8.0 - February 28-x, 2021
 
 ```diff

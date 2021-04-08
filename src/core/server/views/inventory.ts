@@ -364,6 +364,15 @@ export class InventoryController {
         this.updateDroppedItemsAroundPlayer(player, true);
     }
 
+    /**
+     * Called when a player right-clicks an item.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} selectedSlot
+     * @param {number} tab
+     * @return {*}
+     * @memberof InventoryController
+     */
     static processUse(player: alt.Player, selectedSlot: string, tab: number) {
         if (!selectedSlot || tab === undefined || tab === null) {
             playerFuncs.sync.inventory(player);

@@ -86,7 +86,7 @@ function handleFuel(player: alt.Player, pos: alt.IVector3) {
     const maximumTime = (SHARED_CONFIG.FUEL_TIME / 100) * missingFuelPct;
     playerFuncs.emit.notification(
         player,
-        `You will pay $${maximumCost} for ${missingFuel} to top off. Press again to cancel.`
+        `You will pay $${maximumCost.toFixed(2)} for ${missingFuel.toFixed(2)} to top off. Press again to cancel.`
     );
 
     fuelTimes.push({
