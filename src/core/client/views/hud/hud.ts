@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
-import { disableAllControls } from '../../utility/disableControls';
+import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
 import './controllers/audioController';
@@ -184,6 +184,7 @@ export class BaseHUD {
             }, 0);
 
             alt.Player.local.isPhoneOpen = true;
+            disableAllAttacks(true);
             return;
         }
 
@@ -193,6 +194,7 @@ export class BaseHUD {
 
         alt.Player.local.isPhoneOpen = false;
         BaseHUD.view.unfocus();
+        disableAllAttacks(false);
     }
 }
 

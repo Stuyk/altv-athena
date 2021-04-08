@@ -11,6 +11,7 @@ description: List of all the changes and current versions.
 + Fixed Bad Alignment on Phone Icons
 + Added Timeout to Finish Authorization Button (3 Seconds)
 + Fixed Fuel Cash Decimal Overflow
++ Disable Attacks while Phone is in Use
 ```
 
 ## 1.8.0 - February 28-x, 2021
