@@ -14,7 +14,6 @@ const teleporterItem: Item = {
     icon: 'teleporter',
     slot: 5,
     quantity: 1,
-    weight: 1,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
     data: {
         event: 'effect:Teleport'

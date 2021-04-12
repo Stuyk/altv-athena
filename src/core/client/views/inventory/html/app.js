@@ -152,7 +152,7 @@ const app = new Vue({
                 }
 
                 if ('alt' in window) {
-                    alt.emit('inventory:Use', e.target.id, this.pageIndex);
+                    alt.emit('inventory:Use', e.target.id, e.target.hash, this.pageIndex);
                 }
                 return;
             }
@@ -243,20 +243,26 @@ const app = new Vue({
 
             const endElement = document.getElementById(endSlot);
             const isTab = endElement.id.includes('tab');
-            if (!isTab) {
-                if (!endElement.classList.contains('is-null-item')) {
-                    return;
-                }
+
+            const isGroundItem = this.dragAndDrop.itemIndex.includes('g-');
+            const isNullEndSlot = endElement.classList.contains('is-null-item');
+            const isInventoryEndSlot = !endElement.id.includes('i-');
+
+            // Check to make sure ground items are only being moved into the inventory slots.
+            if (!isTab && isGroundItem && !isNullEndSlot && !isInventoryEndSlot) {
+                return;
             }
 
+            // Check if the selected slot isn't the same as the end slot.
             if (selectedSlot === endSlot) {
                 return;
             }
 
             const hash = selectElement.dataset.hash ? `${selectElement.dataset.hash}` : null;
+            const page = this.pageIndex;
 
             if ('alt' in window) {
-                alt.emit('inventory:Process', { selectedSlot, endSlot, tab: this.pageIndex, hash });
+                alt.emit('inventory:Process', selectedSlot, endSlot, page, hash);
             }
 
             if (!isTab) {
@@ -463,7 +469,6 @@ const app = new Vue({
                     description: `words`,
                     icon: 'crate',
                     quantity: Math.floor(Math.random() * 10),
-                    weight: Math.floor(Math.random() * 5),
                     data: {
                         water: 100
                     }
@@ -478,7 +483,6 @@ const app = new Vue({
                     description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
                     icon: 'sack',
                     quantity: Math.floor(Math.random() * 10),
-                    weight: Math.floor(Math.random() * 5),
                     data: {
                         water: 100,
                         event: 'test'
@@ -495,7 +499,6 @@ const app = new Vue({
                         description: `Forbidden pez dispenser go brrr.`,
                         icon: 'pipebomb',
                         quantity: 1,
-                        weight: 2,
                         hash: '490218490129012',
                         data: {
                             bang: true,

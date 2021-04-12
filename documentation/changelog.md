@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.8.1 - April 8, 2021
+## 1.8.1 - April 8-x, 2021
 
 ```diff
 + Scaled Down Phone Slightly
@@ -13,6 +13,10 @@ description: List of all the changes and current versions.
 + Fixed Fuel Cash Decimal Overflow
 + Disable Attacks while Phone is in Use
 + Disable Toolbar while Phone is in Use
++ Added Item Stacking
++ Added Item Swapping
++ Fixed Toolbar Error (Leonard Report)
++ Optimized Inventory to try not create too much new code for stacking / swapping.
 ```
 
 ## 1.8.0 - February 28-x, 2021

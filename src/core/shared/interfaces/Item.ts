@@ -7,9 +7,8 @@ export interface Item {
     description: string;
     icon: string;
     quantity: number;
-    weight: number;
-    slot: number;
     behavior: ItemType;
+    slot?: number;
     hash?: string;
     equipment?: EquipmentType;
     data: { [key: string]: any };

@@ -21,7 +21,6 @@ const wearableRef: Item = {
     icon: 'crate',
     slot: 0,
     quantity: 1,
-    weight: 1,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_EQUIPMENT,
     data: {}
 };
@@ -45,7 +44,6 @@ function handlePurchase(
     newItem.slot = equipmentSlot;
     newItem.icon = icons[equipmentSlot];
     newItem.quantity = 1;
-    newItem.weight = parseFloat((Math.random() * 1).toFixed(2));
     newItem.equipment = equipmentSlot;
 
     let didGetAdded = false;

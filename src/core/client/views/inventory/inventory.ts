@@ -46,8 +46,9 @@ export class InventoryController {
         BaseHUD.setHudVisibility(false);
     }
 
-    static handleProcess({ selectedSlot, endSlot, tab, hash }): void {
-        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, tab, hash);
+    static handleProcess(selectedSlot, endSlot, page, hash): void {
+        alt.log(selectedSlot, endSlot, page, hash);
+        alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, page, hash);
     }
 
     static async updateEverything(): Promise<void> {

@@ -11,19 +11,8 @@ import '../effects/heal';
 import '../effects/vehicleRepair';
 import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
 import { distance2d } from '../utility/vector';
-
-interface CategoryData {
-    abbrv: string;
-    name: string;
-    emptyCheck?: Function;
-    getItem?: Function;
-    removeItem?: Function;
-    addItem?: Function;
-}
-
-function stripCategory(value: string): number {
-    return parseInt(value.replace(/.*-/gm, ''));
-}
+import { stripCategory } from '../utility/category';
+import { CategoryData } from '../interface/CategoryData';
 
 /**
  * Let's talk about Inventory Logic! Woo!
@@ -80,15 +69,15 @@ export class InventoryController {
             return;
         }
 
-        // Check if the end slot is available.
-        if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
-            playerFuncs.sync.inventory(player);
-            return;
-        }
-
         // Pickup Item from Ground
         if (selectData.name === InventoryType.GROUND) {
             InventoryController.handlePickupGround(player, endData, endSlotIndex, hash, tab);
+            return;
+        }
+
+        // Check if this is a swap or stack.
+        if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
+            playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot, tab);
             return;
         }
 
@@ -113,7 +102,7 @@ export class InventoryController {
             return;
         }
 
-        if (!InventoryController.allItemRulesValid(itemClone, endData, endSlotIndex)) {
+        if (!playerFuncs.inventory.allItemRulesValid(itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -159,6 +148,7 @@ export class InventoryController {
         selectName: string,
         endName: string
     ) {
+        // Find a similar item if it exists and stack it if it does exist.
         const freeSlot = playerFuncs.inventory.getFreeInventorySlot(player, tabToMoveTo);
         if (!freeSlot) {
             playerFuncs.sync.inventory(player);
@@ -197,7 +187,7 @@ export class InventoryController {
             return;
         }
 
-        const itemClone = selectData.getItem(player, selectSlotIndex, tab);
+        const itemClone: Item = selectData.getItem(player, selectSlotIndex, tab);
 
         if (player.vehicle) {
             playerFuncs.sync.inventory(player);
@@ -223,6 +213,13 @@ export class InventoryController {
         playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
+
+        // Destroys an item when it is dropped on the ground if the behavior calls for it.
+        if (isFlagEnabled(itemClone.behavior, ItemType.DESTROY_ON_DROP)) {
+            playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
+            playerFuncs.emit.message(player, `${itemClone.name} was destroyed on drop.`);
+            return;
+        }
 
         itemClone.hash = sha256Random(JSON.stringify(itemClone));
         InventoryController.groundItems.push({
@@ -259,45 +256,6 @@ export class InventoryController {
         }
     }
 
-    /**
-     * Checks rules for all items being moved in inventory.
-     * @static
-     * @param {Item} item
-     * @param {CategoryData} endSlot
-     * @param {number} endSlotIndex
-     * @return {*}  {boolean}
-     * @memberof InventoryController
-     */
-    static allItemRulesValid(item: Item, endSlot: CategoryData, endSlotIndex: number): boolean {
-        if (!item.behavior) {
-            return true;
-        }
-
-        // Not droppable but trying to drop on ground.
-        if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
-            return false;
-        }
-
-        // Not equipment but going into equipment.
-        if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
-            return false;
-        }
-
-        // Not a toolbar item but going into toolbar.
-        if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
-            return false;
-        }
-
-        // Is equipment and is going into an equipment slot.
-        if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
-            if (!playerFuncs.inventory.isEquipmentSlotValid(item, endSlotIndex)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     static handlePickupGround(
         player: alt.Player,
         endData: CategoryData,
@@ -306,6 +264,11 @@ export class InventoryController {
         tab: number
     ) {
         if (player.vehicle) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!endData.emptyCheck(player, endSlotIndex, tab)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -329,7 +292,7 @@ export class InventoryController {
             return;
         }
 
-        if (!InventoryController.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
+        if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
             return;

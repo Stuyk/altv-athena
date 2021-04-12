@@ -9,8 +9,8 @@ export const ItemRegistry: Array<Item> = [
         icon: 'burger',
         slot: 0,
         quantity: 1,
-        weight: 1,
-        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
+        behavior:
+            ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CAN_STACK | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
             event: 'effect:Heal',
             heal: 5,
@@ -23,8 +23,8 @@ export const ItemRegistry: Array<Item> = [
         icon: 'bread',
         slot: 0,
         quantity: 5,
-        weight: 2,
-        behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
+        behavior:
+            ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CAN_STACK | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
             event: 'effect:Heal',
             heal: 3,
@@ -37,7 +37,6 @@ export const ItemRegistry: Array<Item> = [
         icon: 'toolbox',
         slot: 0,
         quantity: 1,
-        weight: 2,
         behavior:
             ItemType.CAN_DROP |
             ItemType.CAN_TRADE |

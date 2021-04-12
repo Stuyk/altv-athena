@@ -14,7 +14,6 @@ const refItem: Item = {
     icon: 'gun',
     slot: 4,
     quantity: 1,
-    weight: 2,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
     data: {
         hash: 0x13532244 // Used as the weapon hash for giving the player a weapon
@@ -95,7 +94,6 @@ const teleporterItem: Item = {
     icon: 'teleporter',
     slot: 5,
     quantity: 1,
-    weight: 1,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
     data: {
         event: 'effect:Teleport'
@@ -114,4 +112,3 @@ alt.on('effect:Teleport', (player: alt.Player, item: Item) => {
     playerFuncs.emit.message(player, `You consumed ${item.name}`);
 });
 ```
-

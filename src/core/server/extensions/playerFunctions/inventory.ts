@@ -1,9 +1,13 @@
 import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
+import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { ItemType } from '../../../shared/enums/itemType';
 import { Item } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
+import { CategoryData } from '../../interface/CategoryData';
+import { stripCategory } from '../../utility/category';
+import emit from './emit';
 import save from './save';
 import sync from './sync';
 
@@ -50,7 +54,7 @@ function hasItem(player: alt.Player, item: Partial<Item>): boolean {
     }
 
     let hasInToolbar = isInToolbar(player, item);
-    if (hasInInventory) {
+    if (hasInToolbar) {
         return true;
     }
 
@@ -398,12 +402,22 @@ function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
     return true;
 }
 
+/**
+ * Checks if the equipment slot the item is going to is correct.
+ * @param {Item} item
+ * @param {EquipmentType} slot Is the 'item.slot' the item will go to.
+ * @return {*}
+ */
 function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
     if (slot >= 11) {
         return false;
     }
 
-    if (item.equipment === null || item.equipment !== slot) {
+    if (item.equipment === null || !item.equipment === undefined) {
+        return false;
+    }
+
+    if (item.equipment !== slot) {
         return false;
     }
 
@@ -609,7 +623,247 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
     return true;
 }
 
+function findItemBySlot(
+    player: alt.Player,
+    selectedSlot: string,
+    tab: number | null
+): { item: Item; index: number } | null {
+    // Inventory
+    if (selectedSlot.includes('i')) {
+        const item = getInventoryItem(player, stripCategory(selectedSlot), tab);
+        if (!item) {
+            return null;
+        }
+
+        return {
+            item: deepCloneObject(item),
+            index: player.data.inventory[tab].findIndex((i) => i.slot === item.slot)
+        };
+    }
+
+    // Equipment
+    if (selectedSlot.includes('e')) {
+        const item = getEquipmentItem(player, stripCategory(selectedSlot));
+        if (!item) {
+            return null;
+        }
+
+        return { item: deepCloneObject(item), index: player.data.equipment.findIndex((i) => i.slot === item.slot) };
+    }
+
+    // Toolbar
+    if (selectedSlot.includes('t')) {
+        const item = getToolbarItem(player, stripCategory(selectedSlot));
+        if (!item) {
+            return null;
+        }
+
+        return { item: deepCloneObject(item), index: player.data.toolbar.findIndex((i) => i.slot === item.slot) };
+    }
+
+    return null;
+}
+
+function getSlotType(slot: string): string {
+    if (slot.includes('i')) {
+        return 'inventory';
+    }
+
+    if (slot.includes('tab')) {
+        return 'tab';
+    }
+
+    if (slot.includes('t')) {
+        return 'toolbar';
+    }
+
+    if (slot.includes('g')) {
+        return 'ground';
+    }
+
+    if (slot.includes('e')) {
+        return 'equipment';
+    }
+
+    return null;
+}
+
+function saveFields(player: alt.Player, fields: string[]): void {
+    for (let i = 0; i < fields.length; i++) {
+        save.field(player, fields[i], player.data[fields[i]]);
+    }
+
+    sync.inventory(player);
+}
+
+/**
+ * Stacks or swaps items based on type, stackability, etc.
+ * @param {alt.Player} player
+ * @param {string} selectedSlot
+ * @param {string} endSlot
+ * @param {(number | null)} tab
+ * @return {*}
+ */
+function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: string, tab: number | null) {
+    const fieldsToSave = [];
+    const selectItem = findItemBySlot(player, selectedSlot, tab);
+    const endItem = findItemBySlot(player, endSlot, tab);
+
+    if (!endItem || !selectItem) {
+        console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} at ${tab} (may be null)`);
+        sync.inventory(player);
+        return;
+    }
+
+    // Retain the last slots of these items.
+    const newSelectSlot = endItem.item.slot;
+    const newEndSlot = selectItem.item.slot;
+
+    // Retain the index positions of the items.
+    const selectIndex = selectItem.index;
+    const endIndex = endItem.index;
+
+    // Get Slot Names & Verify Valid Slots
+    const selectedSlotName = getSlotType(selectedSlot);
+    const endSlotName = getSlotType(endSlot);
+
+    fieldsToSave.push(selectedSlotName);
+    fieldsToSave.push(endSlotName);
+
+    if (fieldsToSave.includes(null)) {
+        sync.inventory(player);
+        return;
+    }
+
+    const isSelectInventory = selectedSlotName.includes('inventory');
+    const isEndInventory = endSlotName.includes('inventory');
+
+    const isSelectEquipment = isFlagEnabled(selectItem.item.behavior, ItemType.IS_EQUIPMENT);
+    const isEndEquipment = isFlagEnabled(endItem.item.behavior, ItemType.IS_EQUIPMENT);
+
+    // Check if equipment types are compatible...
+    if (isSelectEquipment || isEndEquipment) {
+        if (endItem.item.equipment !== selectItem.item.equipment) {
+            sync.inventory(player);
+            return;
+        }
+    }
+
+    const selectedArray: Array<Item> = isSelectInventory
+        ? player.data[selectedSlotName][tab]
+        : player.data[selectedSlotName];
+    let endArray;
+
+    if (selectedSlotName === endSlotName) {
+        endArray = selectedArray;
+    } else {
+        endArray = isEndInventory ? player.data[endSlotName][tab] : player.data[endSlotName];
+    }
+
+    // Do Not Stack. Swap Instead.
+    if (selectItem.item.name !== endItem.item.name) {
+        // Need to verify that each slot follows the rules for the slot it is going into.
+        if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
+            sync.inventory(player);
+            return;
+        }
+
+        if (!allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
+            sync.inventory(player);
+            return;
+        }
+
+        // Swap the items between the two data sets.
+        selectedArray[selectIndex] = endItem.item;
+        selectedArray[selectIndex].slot = newEndSlot;
+
+        endArray[endIndex] = selectItem.item;
+        endArray[endIndex].slot = newSelectSlot;
+    } else {
+        // Handle Stacking
+        const isSelectStackable = isFlagEnabled(selectItem.item.behavior, ItemType.CAN_STACK);
+        const isEndStackable = isFlagEnabled(endItem.item.behavior, ItemType.CAN_STACK);
+
+        // Handle Stacking
+        if (!isSelectStackable || !isEndStackable) {
+            sync.inventory(player);
+            return;
+        }
+
+        // Add Selected Item to the Dropped on Item
+        endArray[endIndex].quantity += selectItem.item.quantity;
+        selectedArray.splice(selectIndex, 1);
+    }
+
+    // Determine which slot we are saving and if they are the same slot or not.
+    // Assign the data to the player. Not turning back here.
+    if (selectedSlotName !== endSlotName) {
+        if (isSelectInventory) {
+            player.data[selectedSlotName][tab] = selectedArray;
+        } else {
+            player.data[selectedSlotName] = selectedArray;
+        }
+
+        if (isEndInventory) {
+            player.data[endSlotName][tab] = endArray;
+        } else {
+            player.data[endSlotName] = endArray;
+        }
+    } else {
+        if (isSelectInventory) {
+            player.data[selectedSlotName][tab] = selectedArray;
+        } else {
+            player.data[selectedSlotName] = selectedArray;
+        }
+
+        fieldsToSave.pop();
+        emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+    }
+
+    saveFields(player, fieldsToSave);
+    sync.inventory(player);
+}
+
+/**
+ * Checks rules for all items being moved in inventory.
+ * @static
+ * @param {Item} item
+ * @param {CategoryData} endSlot
+ * @param {number} endSlotIndex
+ * @return {*}  {boolean}
+ */
+function allItemRulesValid(item: Item, endSlot: CategoryData, endSlotIndex: number): boolean {
+    if (!item.behavior) {
+        return true;
+    }
+
+    // Not droppable but trying to drop on ground.
+    if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
+        return false;
+    }
+
+    // Not equipment but going into equipment.
+    if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+        return false;
+    }
+
+    // Not a toolbar item but going into toolbar.
+    if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
+        return false;
+    }
+
+    // Is equipment and is going into an equipment slot.
+    if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+        if (!isEquipmentSlotValid(item, endSlotIndex)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export default {
+    allItemRulesValid,
     equipmentAdd,
     equipmentRemove,
     findAndRemove,
@@ -617,6 +871,7 @@ export default {
     getFreeInventorySlot,
     getInventoryItem,
     getToolbarItem,
+    handleSwapOrStack,
     hasItem,
     hasWeapon,
     inventoryAdd,

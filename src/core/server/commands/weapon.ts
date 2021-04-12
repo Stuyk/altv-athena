@@ -17,7 +17,6 @@ const itemRef: Item = {
     icon: 'gun',
     slot: 4,
     quantity: 1,
-    weight: 2,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
     data: {
         hash: 0x13532244
