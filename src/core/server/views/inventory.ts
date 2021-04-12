@@ -37,7 +37,30 @@ import { CategoryData } from '../interface/CategoryData';
 
 export class InventoryController {
     static groundItems: Array<DroppedItem> = [];
+    static customItemRules: Array<Function> = [];
 
+    /**
+     * Item swap / equip / etc. rules that apply to an item swap, equip, etc.
+     * These are ran for all items, equips, etc.
+     * @static
+     * @param {Function} someFunction
+     * @memberof InventoryController
+     */
+    static addItemRuleCheck(someFunction: Function) {
+        InventoryController.customItemRules.push(someFunction);
+    }
+
+    /**
+     * Used when a player is moving one item from one space to another, equipping, etc.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} selectedSlot
+     * @param {string} endSlot
+     * @param {number} tab
+     * @param {(string | null)} hash
+     * @return {*}  {void}
+     * @memberof InventoryController
+     */
     static processItemMovement(
         player: alt.Player,
         selectedSlot: string,
@@ -77,7 +100,13 @@ export class InventoryController {
 
         // Check if this is a swap or stack.
         if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
-            playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot, tab);
+            playerFuncs.inventory.handleSwapOrStack(
+                player,
+                selectedSlot,
+                endSlot,
+                tab,
+                InventoryController.customItemRules
+            );
             return;
         }
 
@@ -102,7 +131,16 @@ export class InventoryController {
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(itemClone, endData, endSlotIndex)) {
+        if (
+            !playerFuncs.inventory.allItemRulesValid(
+                player,
+                itemClone,
+                endData,
+                endSlotIndex,
+                InventoryController.customItemRules,
+                tab
+            )
+        ) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -204,6 +242,20 @@ export class InventoryController {
             return;
         }
 
+        if (
+            !playerFuncs.inventory.allItemRulesValid(
+                player,
+                itemClone,
+                { name: 'ground' },
+                null,
+                InventoryController.customItemRules,
+                tab
+            )
+        ) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
         const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
         if (!didRemoveItem) {
             playerFuncs.sync.inventory(player);
@@ -292,7 +344,16 @@ export class InventoryController {
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
+        if (
+            !playerFuncs.inventory.allItemRulesValid(
+                player,
+                droppedItem.item,
+                endData,
+                endSlotIndex,
+                InventoryController.customItemRules,
+                tab
+            )
+        ) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
             return;

@@ -413,7 +413,7 @@ function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
         return false;
     }
 
-    if (item.equipment === null || !item.equipment === undefined) {
+    if (item.equipment === null || item.equipment === undefined) {
         return false;
     }
 
@@ -704,7 +704,13 @@ function saveFields(player: alt.Player, fields: string[]): void {
  * @param {(number | null)} tab
  * @return {*}
  */
-function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: string, tab: number | null) {
+function handleSwapOrStack(
+    player: alt.Player,
+    selectedSlot: string,
+    endSlot: string,
+    tab: number | null,
+    customItemRules: Array<Function>
+) {
     const fieldsToSave = [];
     const selectItem = findItemBySlot(player, selectedSlot, tab);
     const endItem = findItemBySlot(player, endSlot, tab);
@@ -763,12 +769,12 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     // Do Not Stack. Swap Instead.
     if (selectItem.item.name !== endItem.item.name) {
         // Need to verify that each slot follows the rules for the slot it is going into.
-        if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
+        if (!allItemRulesValid(player, selectItem.item, { name: endSlotName }, newEndSlot, customItemRules, tab)) {
             sync.inventory(player);
             return;
         }
 
-        if (!allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
+        if (!allItemRulesValid(player, endItem.item, { name: selectedSlotName }, newSelectSlot, customItemRules, tab)) {
             sync.inventory(player);
             return;
         }
@@ -832,30 +838,47 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
  * @param {number} endSlotIndex
  * @return {*}  {boolean}
  */
-function allItemRulesValid(item: Item, endSlot: CategoryData, endSlotIndex: number): boolean {
+function allItemRulesValid(
+    player: alt.Player,
+    item: Item,
+    endSlot: CategoryData,
+    endSlotIndex: number | null,
+    customItemRules: Array<Function>,
+    tab: number | null
+): boolean {
     if (!item.behavior) {
         return true;
     }
 
-    // Not droppable but trying to drop on ground.
-    if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
-        return false;
-    }
-
-    // Not equipment but going into equipment.
-    if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
-        return false;
-    }
-
-    // Not a toolbar item but going into toolbar.
-    if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
-        return false;
-    }
-
-    // Is equipment and is going into an equipment slot.
-    if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
-        if (!isEquipmentSlotValid(item, endSlotIndex)) {
+    if (endSlot) {
+        // Not droppable but trying to drop on ground.
+        if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
             return false;
+        }
+
+        // Not equipment but going into equipment.
+        if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+            return false;
+        }
+
+        // Not a toolbar item but going into toolbar.
+        if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
+            return false;
+        }
+
+        // Is equipment and is going into an equipment slot.
+        if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+            if (!isEquipmentSlotValid(item, endSlotIndex)) {
+                return false;
+            }
+        }
+    }
+
+    if (customItemRules.length >= 1) {
+        for (let i = 0; i < customItemRules.length; i++) {
+            if (!customItemRules[i](player, item, endSlot ? endSlot.name : null, endSlotIndex, tab)) {
+                return false;
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 import { ItemType } from '../../shared/enums/itemType';
 import { Item } from '../../shared/interfaces/Item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { sha256Random } from '../utility/encryption';
 
 export class ItemFactory {
     /**
@@ -39,8 +38,6 @@ export class ItemFactory {
             slot
         };
 
-        item.hash = sha256Random(JSON.stringify(item));
-
         if (item.quantity <= -1) {
             item.quantity = 1;
         }
@@ -57,9 +54,6 @@ export class ItemFactory {
      */
     static clone(item: Item): Item {
         const newItem: Item = deepCloneObject(item);
-
-        newItem.hash = sha256Random(JSON.stringify(item));
-
         return newItem;
     }
 }

@@ -8,7 +8,8 @@ const filePaths = [
     './heist/heist',
     './deathLog/deathLog',
     './actionMenu/actionMenu',
-    './interactionExample/index'
+    './interactionExample/index',
+    './noMiniGun/index'
     // YOUR IMPORTS -- BELOW HERE
 ];
 

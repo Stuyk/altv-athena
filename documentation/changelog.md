@@ -17,6 +17,7 @@ description: List of all the changes and current versions.
 + Added Item Swapping
 + Fixed Toolbar Error (Leonard Report)
 + Optimized Inventory to try not create too much new code for stacking / swapping.
++ Added New Inventory Rules System (Custom Plugin Rules)
 ```
 
 ## 1.8.0 - February 28-x, 2021
