@@ -116,6 +116,8 @@ We have a small demo server available for you to test the framework with Adminis
     -   Custom Item Rules for Swapping, Equipping, Dropping, etc.
     -   Item Swap
     -   Item Stack
+    -   Item Equip / Unequip
+    -   Item Splitting
 -   Clothing System
     -   Clothing Selection
     -   Tops
