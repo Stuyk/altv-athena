@@ -34,7 +34,9 @@ const app = new Vue({
             ground: [],
             equipment: [],
             toolbar: [],
-            disablePreview: false
+            disablePreview: false,
+            split: null,
+            splitAmount: 1
         };
     },
     methods: {
@@ -140,6 +142,31 @@ const app = new Vue({
         setItemInfo() {
             this.itemInfo = null;
         },
+        splitStack(amount) {
+            if (!amount) {
+                this.split = null;
+                return;
+            }
+
+            if (isNaN(amount)) {
+                return;
+            }
+
+            if (amount <= 0) {
+                return;
+            }
+
+            if (amount > this.split.item.quantity) {
+                return;
+            }
+
+            if ('alt' in window) {
+                alt.emit('inventory:Split', this.split.slot, this.split.tab, this.splitAmount);
+            }
+
+            this.splitAmount = 1;
+            this.split = null;
+        },
         selectItem(e, index) {
             if (this.dragging) {
                 return;
@@ -151,12 +178,54 @@ const app = new Vue({
                     return;
                 }
 
-                if ('alt' in window) {
-                    alt.emit('inventory:Use', e.target.id, e.target.hash, this.pageIndex);
+                if (e.shiftKey) {
+                    const actualSlot = this.stripCategory(e.target.id);
+                    let element;
+
+                    if (e.target.id.includes('i-')) {
+                        element = this.inventory[this.pageIndex].find((i) => i && i.slot === actualSlot);
+                    } else {
+                        if (e.target.id.includes('e-')) {
+                            element = this.equipment.find((i) => i && i.slot === actualSlot);
+                        }
+
+                        if (e.target.id.includes('t-')) {
+                            element = this.toolbar.find((i) => i && i.slot === actualSlot);
+                        }
+                    }
+
+                    if (!element) {
+                        return;
+                    }
+
+                    // Check if there is more than 1 in the stack.
+                    if (!element.quantity || element.quantity <= 1) {
+                        return;
+                    }
+
+                    // 2 is the flag for stackable items
+                    if (!this.isFlagEnabled(element.behavior, 2)) {
+                        return;
+                    }
+
+                    this.split = {
+                        slot: e.target.id,
+                        tab: this.pageIndex,
+                        item: element
+                    };
+
+                    this.splitAmount = Math.floor(element.quantity / 2);
+                    return;
                 }
+
+                if ('alt' in window) {
+                    alt.emit('inventory:Use', e.target.id, this.pageIndex);
+                }
+
                 return;
             }
 
+            // Start Dragging Process
             this.dragging = true;
 
             // Calculate Element Size
@@ -356,6 +425,16 @@ const app = new Vue({
         },
         setPreviewDisabled(isDisabled) {
             this.disablePreview = isDisabled;
+        },
+        isFlagEnabled(flags, flagToCheck) {
+            let currentFlags = flags;
+            let currentFlagToCheck = flagToCheck;
+
+            if ((currentFlags & currentFlagToCheck) !== 0) {
+                return true;
+            }
+
+            return false;
         }
     },
     computed: {
@@ -475,6 +554,20 @@ const app = new Vue({
                 });
             }
 
+            items.push({
+                name: `Sack`,
+                uuid: `some_hash_thing_27`,
+                slot: 27,
+                description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
+                icon: 'sack',
+                behavior: 2,
+                quantity: Math.floor(Math.random() * 10) + 5,
+                data: {
+                    water: 100,
+                    event: 'test'
+                }
+            });
+
             const slot2 = [
                 {
                     name: `Sack`,
@@ -482,7 +575,8 @@ const app = new Vue({
                     slot: 27,
                     description: `It's a sack and it doesn't do much other than sack around. What a lazy sack.`,
                     icon: 'sack',
-                    quantity: Math.floor(Math.random() * 10),
+                    behavior: 2,
+                    quantity: Math.floor(Math.random() * 10) + 5,
                     data: {
                         water: 100,
                         event: 'test'

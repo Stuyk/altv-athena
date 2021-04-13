@@ -40,6 +40,7 @@ export class InventoryController {
         view.on('inventory:Use', InventoryController.handleUse);
         view.on('inventory:Process', InventoryController.handleProcess);
         view.on('inventory:Close', InventoryController.handleClose);
+        view.on('inventory:Split', InventoryController.handleSplit);
         alt.toggleGameControls(false);
         InventoryController.isOpen = true;
 
@@ -92,6 +93,10 @@ export class InventoryController {
 
     static handleUse(selectedSlot: string, tab: number): void {
         alt.emitServer(View_Events_Inventory.Use, selectedSlot, tab);
+    }
+
+    static handleSplit(selectedSlot: string, tab: number, amount: number): void {
+        alt.emitServer(View_Events_Inventory.Split, selectedSlot, tab, amount);
     }
 
     static handleClose(): void {

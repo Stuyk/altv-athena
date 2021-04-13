@@ -981,6 +981,7 @@ export default {
     getEquipmentItem,
     getFreeInventorySlot,
     getInventoryItem,
+    getSlotType,
     getToolbarItem,
     handleSwapOrStack,
     hasItem,

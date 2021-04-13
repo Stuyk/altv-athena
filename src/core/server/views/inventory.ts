@@ -13,6 +13,7 @@ import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
 import { distance2d } from '../utility/vector';
 import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/CategoryData';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 /**
  * Let's talk about Inventory Logic! Woo!
@@ -392,8 +393,8 @@ export class InventoryController {
      * Called when a player right-clicks an item.
      * @static
      * @param {alt.Player} player
-     * @param {string} selectedSlot
-     * @param {number} tab
+     * @param {string} selectedSlot // i-0
+     * @param {number} tab // 0-3
      * @return {*}
      * @memberof InventoryController
      */
@@ -409,8 +410,65 @@ export class InventoryController {
             return;
         }
 
-        const item = playerFuncs.inventory.getInventoryItem(player, slot, tab);
-        if (!item) {
+        const slotType = playerFuncs.inventory.getSlotType(selectedSlot);
+        const originalItem = slotType.includes('inventory')
+            ? player.data[slotType][tab].find((i) => i && i.slot === slot)
+            : player.data[slotType].find((i) => i && i.slot === slot);
+
+        if (!originalItem) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const item = deepCloneObject(originalItem) as Item;
+        if (item.equipment !== undefined && item.equipment !== null) {
+            if (selectedSlot.includes('t-')) {
+                playerFuncs.sync.inventory(player);
+                return;
+            }
+
+            if (selectedSlot.includes('e-')) {
+                // Unequip
+                const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+                if (!openSlot) {
+                    playerFuncs.sync.inventory(player);
+                    return;
+                }
+
+                if (!playerFuncs.inventory.equipmentRemove(player, item.equipment)) {
+                    playerFuncs.sync.inventory(player);
+                    return;
+                }
+
+                playerFuncs.inventory.inventoryAdd(player, item, openSlot.slot, openSlot.tab);
+            } else {
+                // Equip
+                // Remove item from inventory.
+                if (!playerFuncs.inventory.inventoryRemove(player, item.slot, tab)) {
+                    playerFuncs.sync.inventory(player);
+                    return;
+                }
+
+                let removedItem: Item;
+
+                // Check if the equipment slot is taken
+                const targetSlotIndex = player.data.equipment.findIndex((i) => i && i.equipment === item.equipment);
+                if (targetSlotIndex >= 0) {
+                    removedItem = deepCloneObject(player.data.equipment[targetSlotIndex]);
+                    if (!playerFuncs.inventory.equipmentRemove(player, item.equipment)) {
+                        playerFuncs.sync.inventory(player);
+                        return;
+                    }
+
+                    // Add old item to inventory from equipment
+                    playerFuncs.inventory.inventoryAdd(player, removedItem, item.slot, tab);
+                }
+
+                playerFuncs.inventory.equipmentAdd(player, item, item.equipment);
+            }
+
+            playerFuncs.save.field(player, 'equipment', player.data.equipment);
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -437,6 +495,50 @@ export class InventoryController {
             alt.emit(item.data.event, player, item, slot, tab);
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
+    }
+
+    static processSplit(player: alt.Player, selectedSlot: string, tab: number, amount: number) {
+        if (isNaN(amount)) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (amount <= 0) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        if (!selectedSlot.includes('i-')) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const currentSlotValue = stripCategory(selectedSlot);
+        const index = player.data.inventory[tab].findIndex((i) => i && i.slot === currentSlotValue);
+
+        if (index <= -1) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const inventorySlot = playerFuncs.inventory.getFreeInventorySlot(player);
+        if (!inventorySlot) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const clonedItem = deepCloneObject(player.data.inventory[tab][index]) as Item;
+        if (clonedItem.quantity < amount) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        player.data.inventory[tab][index].quantity -= amount;
+        clonedItem.quantity = amount;
+        playerFuncs.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot, inventorySlot.tab);
+
+        playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        playerFuncs.sync.inventory(player);
     }
 }
 
@@ -478,3 +580,4 @@ const DataHelpers: Array<CategoryData> = [
 
 alt.onClient(View_Events_Inventory.Use, InventoryController.processUse);
 alt.onClient(View_Events_Inventory.Process, InventoryController.processItemMovement);
+alt.onClient(View_Events_Inventory.Split, InventoryController.processSplit);

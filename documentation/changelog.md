@@ -23,6 +23,9 @@ description: List of all the changes and current versions.
 + Added Function removeAllWeapons
 + Added Function getAllItems (Returns a special list of all items a player has)
 + Added /removeallweapons for testing above functions
++ Added Ability to Equip / Unequip Items with Right-Click
++ Added Ability to Use Items with Right-Click
++ Added Ability to Split Stacks with Shift + Right-Click
 ```
 
 ## 1.8.0 - February 28-x, 2021
