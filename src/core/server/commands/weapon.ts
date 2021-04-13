@@ -9,6 +9,12 @@ import { sha256Random } from '../utility/encryption';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'removeallweapons',
+    '/removeallweapons - Remove all weapons.',
+    Permissions.Admin,
+    handleRemoveWeapons
+);
 
 const itemRef: Item = {
     name: `Micro SMG`,
@@ -56,4 +62,9 @@ function handleCommand(player: alt.Player, weaponName: string): void {
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
     playerFuncs.emit.message(player, `Added weapon: ${weapon.name}`);
+}
+
+function handleRemoveWeapons(player: alt.Player): void {
+    const weps = playerFuncs.inventory.removeAllWeapons(player);
+    playerFuncs.emit.message(player, `Removed: ${weps.length} weapons`);
 }

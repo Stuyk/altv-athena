@@ -19,6 +19,10 @@ description: List of all the changes and current versions.
 + Optimized Inventory to try not create too much new code for stacking / swapping.
 + Added New Inventory Rules System (Custom Plugin Rules)
 + Added Function to Get All Items in as Single Array
++ Added Function getAllWeapons
++ Added Function removeAllWeapons
++ Added Function getAllItems (Returns a special list of all items a player has)
++ Added /removeallweapons for testing above functions
 ```
 
 ## 1.8.0 - February 28-x, 2021

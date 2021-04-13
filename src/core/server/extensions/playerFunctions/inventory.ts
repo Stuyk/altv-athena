@@ -909,14 +909,13 @@ function getAllItems(player: alt.Player): Array<ItemSpecial> {
         items.push(item);
     }
 
-    items = items.concat(player.data.toolbar);
-
     player.data.inventory.forEach((tab, index) => {
         tab.forEach((originalItem, originalItemIndex) => {
             const item = deepCloneObject(originalItem) as ItemSpecial;
             item.dataIndex = originalItemIndex;
             item.dataName = 'inventory';
             item.isInventory = true;
+            item.dataTab = index;
             items.push(item);
         });
     });
@@ -936,6 +935,13 @@ function getAllWeapons(player: alt.Player): Array<Item> {
     return weapons;
 }
 
+/**
+ * Removes all weapons from the player's inventory.
+ * Returns the list of removed weapons.
+ *
+ * @param {alt.Player} player
+ * @return {*}  {Array<Item>}
+ */
 function removeAllWeapons(player: alt.Player): Array<Item> {
     const weapons = getAllItems(player).filter((item) => {
         return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
@@ -949,7 +955,7 @@ function removeAllWeapons(player: alt.Player): Array<Item> {
 
     // Work Backwards in Array
     // This prevents removing the wrong items.
-    for (let i = weapons.length; i > 0; i--) {
+    for (let i = weapons.length - 1; i >= 0; i--) {
         if (weapons[i].isInventory) {
             removedWeapons.push(player.data[weapons[i].dataName][weapons[i].dataTab].splice(weapons[i].dataIndex, 1));
             continue;
@@ -958,6 +964,10 @@ function removeAllWeapons(player: alt.Player): Array<Item> {
         removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
     }
 
+    save.field(player, 'inventory', player.data.inventory);
+    save.field(player, 'toolbar', player.data.toolbar);
+    sync.inventory(player);
+    player.removeAllWeapons();
     return removedWeapons;
 }
 
