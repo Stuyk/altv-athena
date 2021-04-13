@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { EquipmentType } from '../../../shared/enums/equipment';
 import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { ItemType } from '../../../shared/enums/itemType';
-import { Item } from '../../../shared/interfaces/Item';
+import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/CategoryData';
@@ -885,11 +885,89 @@ function allItemRulesValid(
     return true;
 }
 
+/**
+ * Returns an array of all items in inventory, equipment, etc. as a single list.
+ * @param {alt.Player} player
+ * @return {*}  {Array<Item>}
+ */
+function getAllItems(player: alt.Player): Array<ItemSpecial> {
+    let items = [];
+
+    for (let i = 0; i < player.data.equipment.length; i++) {
+        const item = deepCloneObject(player.data.equipment[i]) as ItemSpecial;
+        item.dataIndex = i;
+        item.dataName = 'equipment';
+        item.isEquipment = true;
+        items.push(item);
+    }
+
+    for (let i = 0; i < player.data.toolbar.length; i++) {
+        const item = deepCloneObject(player.data.toolbar[i]) as ItemSpecial;
+        item.dataIndex = i;
+        item.dataName = 'toolbar';
+        item.isToolbar = true;
+        items.push(item);
+    }
+
+    items = items.concat(player.data.toolbar);
+
+    player.data.inventory.forEach((tab, index) => {
+        tab.forEach((originalItem, originalItemIndex) => {
+            const item = deepCloneObject(originalItem) as ItemSpecial;
+            item.dataIndex = originalItemIndex;
+            item.dataName = 'inventory';
+            item.isInventory = true;
+            items.push(item);
+        });
+    });
+
+    return items;
+}
+
+function getAllWeapons(player: alt.Player): Array<Item> {
+    const weapons = getAllItems(player).filter((item) => {
+        return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
+    });
+
+    if (weapons.length <= 0) {
+        return [];
+    }
+
+    return weapons;
+}
+
+function removeAllWeapons(player: alt.Player): Array<Item> {
+    const weapons = getAllItems(player).filter((item) => {
+        return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
+    });
+
+    if (weapons.length <= 0) {
+        return [];
+    }
+
+    const removedWeapons = [];
+
+    // Work Backwards in Array
+    // This prevents removing the wrong items.
+    for (let i = weapons.length; i > 0; i--) {
+        if (weapons[i].isInventory) {
+            removedWeapons.push(player.data[weapons[i].dataName][weapons[i].dataTab].splice(weapons[i].dataIndex, 1));
+            continue;
+        }
+
+        removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
+    }
+
+    return removedWeapons;
+}
+
 export default {
     allItemRulesValid,
     equipmentAdd,
     equipmentRemove,
     findAndRemove,
+    getAllItems,
+    getAllWeapons,
     getEquipmentItem,
     getFreeInventorySlot,
     getInventoryItem,
@@ -906,6 +984,7 @@ export default {
     isInToolbar,
     isInventorySlotFree,
     isToolbarSlotFree,
+    removeAllWeapons,
     replaceInventoryItem,
     replaceToolbarItem,
     toolbarAdd,

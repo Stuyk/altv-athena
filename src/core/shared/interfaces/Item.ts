@@ -14,6 +14,15 @@ export interface Item {
     data: { [key: string]: any };
 }
 
+export interface ItemSpecial extends Item {
+    dataName: string;
+    dataIndex: number;
+    dataTab?: number;
+    isInventory: boolean;
+    isEquipment: boolean;
+    isToolbar: boolean;
+}
+
 export interface DroppedItem {
     item: Item;
     position: { x: number; y: number; z: number };
