@@ -2,7 +2,6 @@ import rimraf from 'rimraf';
 import path from 'path';
 import fs from 'fs-extra';
 import glob from 'glob';
-import ora from 'ora';
 import { exec } from 'promisify-child-process';
 
 // Path is where package.json is.
@@ -15,17 +14,13 @@ let copiedFiles = 0;
 
 async function buildPipeline() {
     console.log(`[Athena] Starting Compilation`);
-    const spinner = ora(`Starting Compilation...`).start();
 
     if (!process.argv.includes('WATCHING')) {
         // Remove old resource files.
         if (fs.existsSync(ResourcesPath)) {
-            spinner.text = `Removing Resources Folder`;
             await new Promise((resolve) => {
                 rimraf(ResourcesPath, (err) => {
                     if (err) {
-                        spinner.fail();
-                        spinner.stop();
                         console.log(err);
                         return;
                     }
@@ -33,15 +28,10 @@ async function buildPipeline() {
                     resolve();
                 });
             });
-
-            spinner.text = `Removed Resources Folder`;
         }
 
-        // Handle Typescript Compilation
-        spinner.text = `Building Files...`;
+        console.log(`[Athena] Compiling Typescript`);
         const { stdout, stderr } = await exec('tsc', { cwd: MainPath }).catch((err) => {
-            spinner.fail();
-            spinner.stop();
             console.log('\r\n');
             console.log('-----[ READ THIS CAREFULLY ]-------');
             console.log(`Failed to build correctly!`);
@@ -50,7 +40,7 @@ async function buildPipeline() {
             console.log(`or powershell for more information...\r\n`);
             console.log(`Command: npx tsc`);
             console.log('-----------------------------------\r\n');
-            process.exit();
+            console.error(err.stderr);
         });
 
         if (stderr) {
@@ -67,7 +57,7 @@ async function buildPipeline() {
     }
 
     // Handle Source Copy
-    spinner.text = `Copying Non-Addon Resources`;
+    console.log(`[Athena] Copy Compiled Content`);
     for (let i = 0; i < SourceFiles.length; i++) {
         const oldPath = SourceFiles[i];
         const newPath = SourceFiles[i].replace('src', 'resources');
@@ -82,11 +72,8 @@ async function buildPipeline() {
     }
 
     // Copy Addon-Resources
-    spinner.text = `Copying Addon-Resources`;
+    console.log(`[Athena] Copying Addon Resources`);
     fs.copySync(path.join(MainPath, 'addon-resources'), path.join(MainPath, 'resources'), { recursive: true });
-    spinner.clear();
-    spinner.stop();
-
     console.log(`[Athena] Copied ${copiedFiles} Extra Files for Athena`);
     console.log(`[Athena] Build Time: ${Date.now() - StartTime}ms`);
 }
