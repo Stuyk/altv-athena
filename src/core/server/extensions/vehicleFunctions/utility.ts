@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
-import { Vehicle_Events, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
+import { Vehicle_Door_List, Vehicle_Events, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { playerFuncs } from '../Player';
+import setter from './setter';
 
 function eject(v: alt.Vehicle, player: alt.Player): void {
     if (!player.vehicle || player.vehicle !== v) {
@@ -13,6 +14,7 @@ function eject(v: alt.Vehicle, player: alt.Player): void {
 
 function repair(v: alt.Vehicle): void {
     v.repair();
+    setter.doorOpen(v, null, Vehicle_Door_List.HOOD, false, true);
     alt.emit(ATHENA_EVENTS_VEHICLE.REPAIRED, v);
 }
 

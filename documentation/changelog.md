@@ -30,6 +30,7 @@ description: List of all the changes and current versions.
 + Fixed Vehicle Controls Being used while Phone in Use
 + Fixed Leaderboard Bugging Out when Accessed From Phone
 + Fixed Weapons Not Being Removed on Death
++ Fixed Vehicle Bonnet (Hood) stuck open after Repair
 ```
 
 ## 1.8.0 - February 28-x, 2021
