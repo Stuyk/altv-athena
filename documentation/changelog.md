@@ -33,6 +33,8 @@ description: List of all the changes and current versions.
 + Fixed Vehicle Bonnet (Hood) stuck open after Repair
 + Fixed Vehicle Search Bug for Dealership App
 + Weapons only removed when a player is sent to the Hospital
++ Added New Locale System
++ New Locale System Supports Multiple Languages (Only English thus far)
 ```
 
 ## 1.8.0 - February 28-x, 2021
