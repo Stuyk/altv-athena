@@ -4,14 +4,10 @@ import {
     Vehicle_Events,
     Vehicle_Lock_State,
     Vehicle_State,
-    inLockedState,
     Vehicle_Seat_List,
     Vehicle_Door_List
 } from '../../shared/enums/vehicle';
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
-import { KEY_BINDS } from '../events/keyup';
-import { drawMarker } from '../utility/marker';
-import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { ActionMenu, Action } from '../../shared/interfaces/Actions';
@@ -363,6 +359,14 @@ export class VehicleController {
     }
 
     static handleToggleLock() {
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         const vehicle = VehicleController.getClosestVehicle();
         if (!vehicle) {
             return;
@@ -372,6 +376,14 @@ export class VehicleController {
     }
 
     static handleToggleEngine() {
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         const vehicle = VehicleController.getClosestVehicle();
         if (!vehicle) {
             return;
