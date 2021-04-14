@@ -40,7 +40,7 @@ const phone = Vue.component('phone', {
                 return;
             }
 
-            alt.emit('mouse:Focus', this.isActive);
+            alt.emit('mouse:Focus', this.isActive, 'isPhoneOpen');
         }
     },
     computed: {

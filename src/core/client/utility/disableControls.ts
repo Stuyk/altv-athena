@@ -29,7 +29,6 @@ export function disableAllAttacks(value: boolean) {
     }
 
     if (value) {
-        alt.log('disabled attacks');
         everyTickAttacks = alt.setInterval(handleDisablingAttacks, 0);
         return;
     }

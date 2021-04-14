@@ -28,6 +28,7 @@ description: List of all the changes and current versions.
 + Added Ability to Split Stacks with Shift + Right-Click
 + Fixed Chat Opening while Phone in Use
 + Fixed Vehicle Controls Being used while Phone in Use
++ Fixed Leaderboard Bugging Out when Accessed From Phone
 ```
 
 ## 1.8.0 - February 28-x, 2021

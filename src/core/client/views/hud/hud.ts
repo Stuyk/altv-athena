@@ -152,7 +152,7 @@ export class BaseHUD {
         }, 100);
     }
 
-    private static handleFocus(shouldFocus: boolean): void {
+    private static handleFocus(shouldFocus: boolean, focusName: string): void {
         if (alt.isConsoleOpen()) {
             return;
         }
@@ -183,7 +183,7 @@ export class BaseHUD {
                 native.disableControlAction(0, 142, true);
             }, 0);
 
-            alt.Player.local.isPhoneOpen = true;
+            alt.Player.local[focusName] = true;
             disableAllAttacks(true);
             return;
         }
@@ -192,7 +192,7 @@ export class BaseHUD {
             alt.clearInterval(interval);
         }
 
-        alt.Player.local.isPhoneOpen = false;
+        alt.Player.local[focusName] = false;
         BaseHUD.view.unfocus();
         disableAllAttacks(false);
     }

@@ -12,6 +12,7 @@ declare module 'alt-client' {
         isChatOpen: boolean;
         isActionMenuOpen: boolean;
         isPhoneOpen: boolean;
+        isLeaderboardOpen: boolean;
 
         // The time that a player is seen by our local player.
         // Used to reveal nametags.
