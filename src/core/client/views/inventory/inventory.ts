@@ -48,7 +48,6 @@ export class InventoryController {
     }
 
     static handleProcess(selectedSlot, endSlot, page, hash): void {
-        alt.log(selectedSlot, endSlot, page, hash);
         alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, page, hash);
     }
 

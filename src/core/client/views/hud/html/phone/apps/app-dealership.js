@@ -39,7 +39,8 @@ const VehicleSearch = Vue.component('vehicle-search', {
     props: ['data', 'vehicles'],
     data() {
         return {
-            searchTerm: ''
+            searchTerm: '',
+            newLength: 0
         };
     },
     methods: {
@@ -53,19 +54,23 @@ const VehicleSearch = Vue.component('vehicle-search', {
 
             // Filter by search term.
             const newList = this.vehicles.filter((data) => {
-                if (data.class.includes(searchTerm) && data.sell) {
+                if (!data.sell) {
+                    return false;
+                }
+
+                if (data.class.includes(searchTerm)) {
                     return true;
                 }
 
-                if (data.name.includes(searchTerm) && data.sell) {
+                if (data.name.includes(searchTerm)) {
                     return true;
                 }
 
-                if (data.type.includes(searchTerm) && data.sell) {
+                if (data.type.includes(searchTerm)) {
                     return true;
                 }
 
-                if (data.display.includes(searchTerm) && data.sell) {
+                if (data.display.toLowerCase().includes(searchTerm)) {
                     return true;
                 }
 
@@ -77,7 +82,14 @@ const VehicleSearch = Vue.component('vehicle-search', {
     },
     watch: {
         searchTerm(value) {
-            this.filterVehicles(value);
+            if (value.length < this.newLength) {
+                this.$emit('search-vehicles', null);
+            }
+
+            this.$nextTick(() => {
+                this.newLength = value.length;
+                this.filterVehicles(value);
+            });
         }
     },
     template: `
@@ -101,7 +113,8 @@ const appDealership = Vue.component('app-dealership', {
             color: '#00FF00',
             vehiclesOriginal: null,
             vehicles: [],
-            vehicle: null // { display: 'Dinghy', name: 'dinghy', type: 'boat', class: 'boat', sell: true, price: 12000 }
+            vehicle: null, // { display: 'Dinghy', name: 'dinghy', type: 'boat', class: 'boat', sell: true, price: 12000 }
+            update: 0
         };
     },
     methods: {
@@ -115,6 +128,7 @@ const appDealership = Vue.component('app-dealership', {
                 }
 
                 this.vehicles = this.vehiclesOriginal;
+                this.update += 1;
                 return;
             }
 

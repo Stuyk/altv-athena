@@ -31,6 +31,7 @@ description: List of all the changes and current versions.
 + Fixed Leaderboard Bugging Out when Accessed From Phone
 + Fixed Weapons Not Being Removed on Death
 + Fixed Vehicle Bonnet (Hood) stuck open after Repair
++ Fixed Vehicle Search Bug for Dealership App
 ```
 
 ## 1.8.0 - February 28-x, 2021
