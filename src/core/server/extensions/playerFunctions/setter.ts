@@ -13,6 +13,7 @@ import safe from './safe';
 import sync from './sync';
 import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
+import { playerFuncs } from '../Player';
 
 const db: Database = getDatabase();
 
@@ -127,7 +128,7 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
     save.field(p, 'isDead', false);
 
     if (DEFAULT_CONFIG.RESPAWN_LOSE_WEAPONS) {
-        p.removeAllWeapons();
+        playerFuncs.inventory.removeAllWeapons(p);
     }
 
     let nearestHopsital = position;
