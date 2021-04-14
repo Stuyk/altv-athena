@@ -39,12 +39,30 @@ async function buildPipeline() {
 
         // Handle Typescript Compilation
         spinner.text = `Building Files...`;
-        const { stdout, stderr } = await exec('tsc', { cwd: MainPath });
-        if (stderr) {
+        const { stdout, stderr } = await exec('tsc', { cwd: MainPath }).catch((err) => {
             spinner.fail();
             spinner.stop();
-            console.warn(`[Athena] Did Not Compile Correctly`);
-            throw stderr;
+            console.log('\r\n');
+            console.log('-----[ READ THIS CAREFULLY ]-------');
+            console.log(`Failed to build correctly!`);
+            console.log(`This means that a file, code, or data is incorrectly formatted.`);
+            console.log(`Run the following command in terminal, command line,`);
+            console.log(`or powershell for more information...\r\n`);
+            console.log(`Command: tsc`);
+            console.log('-----------------------------------\r\n');
+            process.exit();
+        });
+
+        if (stderr) {
+            console.log('\r\n');
+            console.log('-----[ READ THIS CAREFULLY ]-------');
+            console.log(`Failed to build correctly!`);
+            console.log(`This means that a file, code, or data is incorrectly formatted.`);
+            console.log(`Run the following command in terminal, command line,`);
+            console.log(`or powershell for more information...\r\n`);
+            console.log(`Command: tsc`);
+            console.log('-----------------------------------\r\n');
+            process.exit();
         }
     }
 
