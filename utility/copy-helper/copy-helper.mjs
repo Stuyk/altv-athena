@@ -31,29 +31,21 @@ async function buildPipeline() {
         }
 
         console.log(`[Athena] Compiling Typescript`);
-        const { stdout, stderr } = await exec('tsc', { cwd: MainPath }).catch((err) => {
-            console.log('\r\n');
-            console.log('-----[ READ THIS CAREFULLY ]-------');
-            console.log(`Failed to build correctly!`);
-            console.log(`This means that a file, code, or data is incorrectly formatted.`);
-            console.log(`Run the following command in terminal, command line,`);
-            console.log(`or powershell for more information...\r\n`);
-            console.log(`Command: npx tsc`);
-            console.log('-----------------------------------\r\n');
-            console.error(err.stderr);
+        await exec('tsc', { cwd: MainPath }).catch((err) => {
+            if (err.stdout) {
+                console.log('\r\n');
+                console.log('-----[ READ THIS CAREFULLY ]-------');
+                console.log(`Failed to build correctly!`);
+                console.log(`This means that a file, code, or data is incorrectly formatted.`);
+                console.log(`Run the following command in terminal, command line,`);
+                console.log(`or powershell for more information...\r\n`);
+                console.log(`Command: npx tsc`);
+                console.log('-----------------------------------\r\n');
+                console.log(`Errors in Code Found:`);
+                console.error(err.stdout);
+                process.exit();
+            }
         });
-
-        if (stderr) {
-            console.log('\r\n');
-            console.log('-----[ READ THIS CAREFULLY ]-------');
-            console.log(`Failed to build correctly!`);
-            console.log(`This means that a file, code, or data is incorrectly formatted.`);
-            console.log(`Run the following command in terminal, command line,`);
-            console.log(`or powershell for more information...\r\n`);
-            console.log(`Command: npx tsc`);
-            console.log('-----------------------------------\r\n');
-            process.exit();
-        }
     }
 
     // Handle Source Copy
@@ -76,6 +68,7 @@ async function buildPipeline() {
     fs.copySync(path.join(MainPath, 'addon-resources'), path.join(MainPath, 'resources'), { recursive: true });
     console.log(`[Athena] Copied ${copiedFiles} Extra Files for Athena`);
     console.log(`[Athena] Build Time: ${Date.now() - StartTime}ms`);
+    console.log(`[Athena] Attempting to Boot Server...`);
 }
 
 buildPipeline();

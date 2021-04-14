@@ -36,6 +36,8 @@ description: List of all the changes and current versions.
 + Added New Locale System
 + New Locale System Supports Multiple Languages (Only English thus far)
 + Added Locale for All Commands
++ Errors Now Print to Console while Building Typescript
++ Pinned Versions for Types for alt:V
 ```
 
 ## 1.8.0 - February 28-x, 2021
