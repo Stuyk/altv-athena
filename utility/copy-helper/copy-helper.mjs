@@ -48,7 +48,7 @@ async function buildPipeline() {
             console.log(`This means that a file, code, or data is incorrectly formatted.`);
             console.log(`Run the following command in terminal, command line,`);
             console.log(`or powershell for more information...\r\n`);
-            console.log(`Command: tsc`);
+            console.log(`Command: npx tsc`);
             console.log('-----------------------------------\r\n');
             process.exit();
         });
@@ -60,7 +60,7 @@ async function buildPipeline() {
             console.log(`This means that a file, code, or data is incorrectly formatted.`);
             console.log(`Run the following command in terminal, command line,`);
             console.log(`or powershell for more information...\r\n`);
-            console.log(`Command: tsc`);
+            console.log(`Command: npx tsc`);
             console.log('-----------------------------------\r\n');
             process.exit();
         }
