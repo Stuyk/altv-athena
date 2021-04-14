@@ -32,6 +32,7 @@ description: List of all the changes and current versions.
 + Fixed Weapons Not Being Removed on Death
 + Fixed Vehicle Bonnet (Hood) stuck open after Repair
 + Fixed Vehicle Search Bug for Dealership App
++ Weapons only removed when a player is sent to the Hospital
 ```
 
 ## 1.8.0 - February 28-x, 2021
