@@ -11,25 +11,43 @@ import { getPlayersByGridSpace } from '../utility/filters';
 import { distance2d } from '../utility/vector';
 
 // Talk out of Character
-ChatController.addCommand('b', '/b [message] - Speak out of character', Permissions.None, handleCommandOOC);
-
-// Perform an Action
+ChatController.addCommand('b', LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/b'), Permissions.None, handleCommandOOC);
 ChatController.addCommand(
-    'me',
-    '/me [describe what you are doing] - Roleplay an action',
+    'ooc',
+    LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/ooc'),
     Permissions.None,
-    handleCommandMe
+    handleCommandOOC
 );
 
+// Perform an Action
+ChatController.addCommand('me', LocaleController.get(LOCALE_KEYS.COMMAND_ME, '/me'), Permissions.None, handleCommandMe);
+
 // Describe an Action
-ChatController.addCommand('do', '/do [describe an object] - Describe something', Permissions.None, handleCommandDo);
+ChatController.addCommand('do', LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'), Permissions.None, handleCommandDo);
 
 // Speak Low
-ChatController.addCommand('low', '/low [quietly speak something]', Permissions.None, handleCommandLow);
+ChatController.addCommand(
+    'low',
+    LocaleController.get(LOCALE_KEYS.COMMAND_LOW, '/low'),
+    Permissions.None,
+    handleCommandLow
+);
 
 // Whisper
-ChatController.addCommand('w', '/w [player_id] [message] - Whisper', Permissions.None, handleCommandWhisper);
-ChatController.addAliases('w', ['whisper']);
+ChatController.addCommand(
+    'w',
+    LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/w'),
+    Permissions.None,
+    handleCommandWhisper
+);
+
+// alias
+ChatController.addCommand(
+    'whisper',
+    LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/whisper'),
+    Permissions.None,
+    handleCommandWhisper
+);
 
 function handleCommandOOC(player: alt.Player, ...args): void {
     if (args.length <= 0) {

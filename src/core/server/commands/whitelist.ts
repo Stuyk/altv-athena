@@ -1,19 +1,21 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { OptionsController } from '../systems/options';
 
 ChatController.addCommand(
     'addwhitelist',
-    '/addwhitelist [discord_id]',
+    LocaleController.get(LOCALE_KEYS.COMMAND_ADD_WHITELIST, '/addwhitelist'),
     Permissions.Admin | Permissions.Moderator,
     handleCommandAdd
 );
 
 ChatController.addCommand(
     'removewhitelist',
-    '/removewhitelist [discord_id]',
+    LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_WHITELIST, '/removewhitelist'),
     Permissions.Admin | Permissions.Moderator,
     handleCommandRemove
 );

@@ -2,7 +2,7 @@ const phone = Vue.component('phone', {
     components: [appBank, appDealership, appVehicles],
     data() {
         return {
-            isActive: true,
+            isActive: false,
             page: 0,
             maxPages: 3,
             pageComponent: null, // 'app-bank'

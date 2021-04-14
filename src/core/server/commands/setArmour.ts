@@ -7,7 +7,7 @@ import ChatController from '../systems/chat';
 
 ChatController.addCommand(
     'setarmour',
-    '/setarmour [0 - 100] [player_id]* - Set armour for self or others',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SET_ARMOUR, '/setarmour'),
     Permissions.Admin,
     handleCommand
 );

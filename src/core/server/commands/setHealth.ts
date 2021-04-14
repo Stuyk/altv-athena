@@ -8,7 +8,7 @@ import ChatController from '../systems/chat';
 
 ChatController.addCommand(
     'sethealth',
-    '/sethealth [99 - 200] [player_id]* - Set health for self or others',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SET_HEALTH, '/sethealth'),
     Permissions.Admin,
     handleCommand
 );

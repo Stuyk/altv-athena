@@ -5,8 +5,15 @@ import { AnimationFlags } from '../../shared/flags/animation';
 import { Permissions } from '../../shared/flags/permissions';
 import { Action } from '../../shared/interfaces/Actions';
 import { Animation } from '../../shared/interfaces/Animation';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 
-ChatController.addCommand('actionmenu', '/actionmenu - Opens test action menu', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'actionmenu',
+    LocaleController.get(LOCALE_KEYS.COMMAND_ACTION_MENU, '/actionmenu'),
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player): void {
     const facePalm: Action = {

@@ -7,11 +7,19 @@ import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
-ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'weapon',
+    LocaleController.get(LOCALE_KEYS.COMMAND_WEAPON, '/weapon'),
+    Permissions.Admin,
+    handleCommand
+);
+
 ChatController.addCommand(
     'removeallweapons',
-    '/removeallweapons - Remove all weapons.',
+    LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_ALL_WEAPONS, '/removeallweapons'),
     Permissions.Admin,
     handleRemoveWeapons
 );

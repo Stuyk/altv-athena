@@ -7,6 +7,8 @@ import { playerFuncs } from '../extensions/Player';
 import { EquipmentType } from '../../shared/enums/equipment';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { getFromRegistry, ItemRegistry } from '../../shared/items/itemRegistry';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 const pistolItem: Item = {
     name: `Pistol`,
@@ -71,27 +73,46 @@ const burgerItem: Item = {
     }
 };
 
-ChatController.addCommand('dummyitem', '/dummyitem - Get some dummy debug items', Permissions.Admin, handleCommand);
-ChatController.addCommand('getitem', '/getitem [item_name] - Get item by name', Permissions.Admin, handleGetItem);
+ChatController.addCommand(
+    'dummyitem',
+    LocaleController.get(LOCALE_KEYS.COMMAND_DUMMY_ITEM, '/dummyitem'),
+    Permissions.Admin,
+    handleCommand
+);
+
+ChatController.addCommand(
+    'getitem',
+    LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/getitem'),
+    Permissions.Admin,
+    handleGetItem
+);
+
+// alias
+ChatController.addCommand(
+    'spawnitem',
+    LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/spawnitem'),
+    Permissions.Admin,
+    handleGetItem
+);
 
 function handleCommand(player: alt.Player): void {
-    // let itemClone = deepCloneObject<Item>(pistolItem);
-    // let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    // playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-    // itemClone = deepCloneObject<Item>(equipmentItem);
-    // slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    // playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-    // itemClone = deepCloneObject<Item>(boxItem);
-    // slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    // playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-    // itemClone = deepCloneObject<Item>(smgItem);
-    // slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    // playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-    // itemClone = deepCloneObject<Item>(burgerItem);
-    // slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    // playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
-    // playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    // playerFuncs.sync.inventory(player);
+    let itemClone = deepCloneObject<Item>(pistolItem);
+    let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    itemClone = deepCloneObject<Item>(equipmentItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    itemClone = deepCloneObject<Item>(boxItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    itemClone = deepCloneObject<Item>(smgItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    itemClone = deepCloneObject<Item>(burgerItem);
+    slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
 }
 
 function handleGetItem(player: alt.Player, name: string) {

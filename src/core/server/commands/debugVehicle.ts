@@ -9,16 +9,23 @@ import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
-ChatController.addCommand('vehicle', '/vehicle [model] - Spawn an admin vehicle', Permissions.Admin, handleTemp);
+ChatController.addCommand(
+    'vehicle',
+    LocaleController.get(LOCALE_KEYS.COMMAND_VEHICLE, '/vehicle'),
+    Permissions.Admin,
+    handleTemp
+);
+
 ChatController.addCommand(
     'addvehicle',
-    '/addvehicle [model] - Spawn and add a vehicle to your player',
+    LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE, '/addvehicle'),
     Permissions.Admin,
     handleAdd
 );
+
 ChatController.addCommand(
     'spawnvehicle',
-    '/spawnvehicle [index] - Spawn vehicle from personal collection.',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SPAWN_VEHICLE, '/spawnvehicle'),
     Permissions.None,
     handleGet
 );

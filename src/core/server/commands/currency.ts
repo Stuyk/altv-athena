@@ -7,7 +7,12 @@ import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
-ChatController.addCommand('setcash', '/setcash [amount] [id]* - Add cash', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'setcash',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SET_CASH, '/setcash'),
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player, amount: string, id: string | null = null): void {
     if (id === null) {

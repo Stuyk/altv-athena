@@ -10,7 +10,12 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);
 alt.onClient(SYSTEM_EVENTS.NOCLIP_UPDATE, handleCamUpdate);
 
-ChatController.addCommand('noclip', '/noclip -  Toggles noclip mode.', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'noclip',
+    LocaleController.get(LOCALE_KEYS.COMMAND_NO_CLIP, '/noclip'),
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player): void {
     const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping');

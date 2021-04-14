@@ -2,11 +2,15 @@ import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
-ChatController.addCommand('revive', '/revive [player_id]* - Revive self or others', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'revive',
+    LocaleController.get(LOCALE_KEYS.COMMAND_REVIVE, '/revive'),
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player, targetPlayerID: string | null = null): void {
     if (targetPlayerID === null) {
