@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { Permissions } from '../../shared/flags/permissions';
-import { CommandsLocale } from '../../shared/locale/commands';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
@@ -113,12 +114,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     const target = players.find((target) => target && id === target.id.toString());
 
     if (!target || !target.valid) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;
     }
 
     if (distance2d(target.pos, player.pos) > DEFAULT_CONFIG.COMMAND_WHISPER_DISTANCE) {
-        playerFuncs.emit.message(player, CommandsLocale.PLAYER_IS_TOO_FAR);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_TOO_FAR));
         return;
     }
 

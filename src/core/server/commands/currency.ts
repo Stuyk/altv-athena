@@ -1,9 +1,11 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { CommandsLocale } from '../../shared/locale/commands';
+
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { Permissions } from '../../shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 ChatController.addCommand('setcash', '/setcash [amount] [id]* - Add cash', Permissions.Admin, handleCommand);
 
@@ -15,7 +17,7 @@ function handleCommand(player: alt.Player, amount: string, id: string | null = n
 
     const target: alt.Player = [...alt.Player.all].find((x) => `${x.id}` === `${id}`);
     if (!target) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;
     }
 

@@ -1,6 +1,8 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
-import { CommandsLocale } from '../../shared/locale/commands';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
+
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
@@ -32,7 +34,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;
     }
 
@@ -41,5 +43,5 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
 function finishSetArmour(target: alt.Player, value: number) {
     playerFuncs.safe.addHealth(target, value, true);
-    playerFuncs.emit.message(target, `${CommandsLocale.HEALTH_SET_TO}${value}`);
+    playerFuncs.emit.message(target, LocaleController.get(LOCALE_KEYS.PLAYER_HEALTH_SET_TO, value));
 }

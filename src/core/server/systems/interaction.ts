@@ -4,7 +4,8 @@ import { View_Events_Clothing } from '../../shared/enums/views';
 import gridData from '../../shared/information/gridData';
 import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../../shared/interfaces/Interaction';
-import { InteractionLocale } from '../../shared/locale/interaction';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { distance2d } from '../utility/vector';
@@ -172,13 +173,13 @@ export class InteractionController {
         });
 
         if (!closestInteraction) {
-            playerFuncs.emit.message(player, InteractionLocale.TOO_FAR_AWAY);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY));
             return;
         }
 
         const interaction = InteractionController.InteractionTypes[type];
         if (!interaction) {
-            playerFuncs.emit.message(player, InteractionLocale.DOES_NOT_EXIST);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT));
             return;
         }
 

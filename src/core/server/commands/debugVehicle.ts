@@ -1,11 +1,13 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
-import { CommandsLocale } from '../../shared/locale/commands';
+
 import { Permissions } from '../../shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 ChatController.addCommand('vehicle', '/vehicle [model] - Spawn an admin vehicle', Permissions.Admin, handleTemp);
 ChatController.addCommand(
@@ -28,7 +30,7 @@ function handleTemp(player: alt.Player, model: string): void {
     }
 
     if (player.data.isDead) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_WHILE_DEAD);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
         return;
     }
 
@@ -37,7 +39,7 @@ function handleTemp(player: alt.Player, model: string): void {
     try {
         vehicleFuncs.new.tempVehicle(player, model, fwd, new alt.Vector3(0, 0, 0));
     } catch (err) {
-        playerFuncs.emit.message(player, CommandsLocale.VEHICLE_MODEL_NOT_VALID);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INVALID_VEHICLE_MODEL));
     }
 }
 
@@ -48,7 +50,7 @@ function handleAdd(player: alt.Player, model: string): void {
     }
 
     if (player.data.isDead) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_WHILE_DEAD);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
         return;
     }
 
@@ -60,7 +62,7 @@ function handleAdd(player: alt.Player, model: string): void {
         veh.destroy();
     } catch (err) {
         console.log(err);
-        playerFuncs.emit.message(player, CommandsLocale.VEHICLE_MODEL_NOT_VALID);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INVALID_VEHICLE_MODEL));
         return;
     }
 }
