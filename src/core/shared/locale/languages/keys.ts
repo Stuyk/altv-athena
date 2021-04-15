@@ -34,16 +34,29 @@ export const LOCALE_KEYS = {
     // Cannot
     CANNOT_FIND_PLAYER: `cannot-find-player`,
     CANNOT_PERFORM_WHILE_DEAD: `cannot-perform-while-dead`,
+    CANNOT_FIND_PERSONAL_VEHICLES: `cannot-find-personal-vehicles`,
+    CANNOT_FIND_THAT_PERSONAL_VEHICLE: `cannot-find-that-personal-vehicle`,
+    // Discord
+    DISCORD_ID_NOT_LONG_ENOUGH: `discord-id-not-long-enough`,
+    DISCORD_ALREADY_WHITELISTED: `discord-already-whitelisted`,
+    DISCORD_NOT_WHITELISTED: `discord-not-whitelisted`,
+    DISCORD_ADDED_WHITELIST: `discord-added-whitelist`,
+    DISCORD_REMOVED_WHITELIST: `discord-removed-whitelist`,
     // Invalid
     INVALID_VEHICLE_MODEL: `invalid-vehicle-model`,
     // Interact
     INTERACTION_TOO_FAR_AWAY: `interact-too-far-away`,
     INTERACTION_INVALID_OBJECT: 'interaction-invalid-object',
     // Inventory
+    ITEM_DOES_NOT_EXIST: `item-does-not-exist`,
     ITEM_NOT_EQUIPPED: 'no-item-in-equipment-slot',
+    ITEM_WAS_ADDED_INVENTORY: `item-was-added-inventory`,
+    ITEM_WAS_ADDED_EQUIPMENT: `item-was-added-equipment`,
+    ITEM_WAS_ADDED_TOOLBAR: `item-was-added-toolbar`,
     // Label
-    LABEL_ON: `on-label`,
-    LABEL_OFF: `off-label`,
+    LABEL_ON: `label-on`,
+    LABEL_OFF: `label-off`,
+    LABEL_BROADCAST: 'label-broadcast',
     // Player
     PLAYER_ARMOUR_SET_TO: `player-armour-set-to`,
     PLAYER_HEALTH_SET_TO: `player-health-set-to`,
@@ -52,6 +65,10 @@ export const LOCALE_KEYS = {
     PLAYER_IS_NOT_DEAD: `player-is-not-dead`,
     PLAYER_SEATBELT_ON: `player-seatbelt-on`,
     PLAYER_SEATBELT_OFF: `player-seatbelt-off`,
+    // Job
+    JOB_ALREADY_WORKING: `job-already-working`,
+    JOB_NOT_WORKING: `job-not-working`,
+    JOB_QUIT: `job-quit`,
     // Weapon
     WEAPON_NO_HASH: 'weapon-no-hash'
 };

@@ -54,5 +54,9 @@ function handleBroadcast(player: alt.Player, ...args) {
         return;
     }
 
-    emitAll(alt.Player.all, View_Events_Chat.Append, `[Broadcast] ${player.data.name}: ${args.join(' ')}`);
+    emitAll(
+        alt.Player.all,
+        View_Events_Chat.Append,
+        `[${LocaleController.get(LOCALE_KEYS.COMMAND_BROADCAST)}] ${player.data.name}: ${args.join(' ')}`
+    );
 }

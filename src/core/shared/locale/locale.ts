@@ -43,7 +43,8 @@ export class LocaleController {
      */
     static get(key: string, ...args: any[]): string {
         if (!locales[defaultLanguage][key]) {
-            throw new Error(`Translation for ${key} was not found`);
+            console.log(`Translation for ${key} was not found`);
+            return key;
         }
 
         let message = locales[defaultLanguage][key];

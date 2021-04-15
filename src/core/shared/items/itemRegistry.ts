@@ -1,6 +1,7 @@
 import { ItemType } from '../enums/itemType';
 import { Item } from '../interfaces/Item';
 import { deepCloneObject } from '../utility/deepCopy';
+import EFFECTS from '../enums/effects';
 
 export const ItemRegistry: Array<Item> = [
     {
@@ -12,8 +13,8 @@ export const ItemRegistry: Array<Item> = [
         behavior:
             ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CAN_STACK | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
-            event: 'effect:Heal',
-            heal: 5,
+            event: EFFECTS.EFFECT_FOOD,
+            amount: 5,
             sound: 'item_eat'
         }
     },
@@ -26,8 +27,8 @@ export const ItemRegistry: Array<Item> = [
         behavior:
             ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CAN_STACK | ItemType.IS_TOOLBAR | ItemType.CONSUMABLE,
         data: {
-            event: 'effect:Heal',
-            heal: 3,
+            event: EFFECTS.EFFECT_FOOD,
+            amount: 3,
             sound: 'item_eat'
         }
     },

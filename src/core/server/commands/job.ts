@@ -21,9 +21,9 @@ function handleCommand(player: alt.Player): void {
     const job = getPlayerJob(player);
 
     if (!job) {
-        playerFuncs.emit.notification(player, `You are not currently working a job.`);
+        playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.JOB_NOT_WORKING));
         return;
     }
 
-    job.quit('You have quit the job at hand.');
+    job.quit(LocaleController.get(LOCALE_KEYS.JOB_QUIT));
 }

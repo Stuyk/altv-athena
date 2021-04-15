@@ -119,7 +119,7 @@ function handleGetItem(player: alt.Player, name: string) {
     const item = getFromRegistry(name);
 
     if (!item) {
-        playerFuncs.emit.message(player, `That item does not exist.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, name));
         return;
     }
 
@@ -128,5 +128,5 @@ function handleGetItem(player: alt.Player, name: string) {
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
-    playerFuncs.emit.message(player, `${item.name} was added to your inventory.`);
+    playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY, item.name));
 }

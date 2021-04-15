@@ -83,12 +83,12 @@ function handleGet(player: alt.Player, index: string) {
     }
 
     if (!player.data.vehicles) {
-        playerFuncs.emit.message(player, `No personal vehicles available.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES));
         return;
     }
 
     if (!player.data.vehicles[i]) {
-        playerFuncs.emit.message(player, `Not a personal vehicle.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_THAT_PERSONAL_VEHICLE));
         return;
     }
 

@@ -38,6 +38,12 @@ description: List of all the changes and current versions.
 + Added Locale for All Commands
 + Errors Now Print to Console while Building Typescript
 + Pinned Versions for Types for alt:V
++ Fixed Food Items to Refill Food
++ Added Food Effect
++ Added Water Effect
++ Added Item Effects Enum
++ Added Load Effects File
++ Locale now returns the key if missing instead of nothing
 ```
 
 ## 1.8.0 - February 28-x, 2021

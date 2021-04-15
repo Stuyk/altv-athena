@@ -27,17 +27,17 @@ async function handleCommandAdd(player: alt.Player, discord: string): Promise<vo
     }
 
     if (discord.length <= 17) {
-        playerFuncs.emit.message(player, `Discord IDs are at least 18 characters long.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH));
         return;
     }
 
     const didAdd = OptionsController.addToWhitelist(discord);
     if (!didAdd) {
-        playerFuncs.emit.message(player, `This user may already be whitelisted.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ALREADY_WHITELISTED, discord));
         return;
     }
 
-    playerFuncs.emit.message(player, `${discord} added to the whitelist.`);
+    playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ADDED_WHITELIST, discord));
 }
 
 async function handleCommandRemove(player: alt.Player, discord: string): Promise<void> {
@@ -47,15 +47,15 @@ async function handleCommandRemove(player: alt.Player, discord: string): Promise
     }
 
     if (discord.length <= 17) {
-        playerFuncs.emit.message(player, `Discord IDs are at least 18 characters long.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH));
         return;
     }
 
     const didRemove = OptionsController.removeFromWhitelist(discord);
     if (!didRemove) {
-        playerFuncs.emit.message(player, `This user did not exist in the whitelist.`);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_NOT_WHITELISTED, discord));
         return;
     }
 
-    playerFuncs.emit.message(player, `${discord} removed from the whitelist.`);
+    playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_REMOVED_WHITELIST, discord));
 }

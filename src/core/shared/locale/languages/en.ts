@@ -42,6 +42,14 @@ export default {
     // Cannot
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
     [LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD]: `Cannot perform this command while you are dead.`,
+    [LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES]: `Cannot find any personal vehicles.`,
+    [LOCALE_KEYS.CANNOT_FIND_THAT_PERSONAL_VEHICLE]: 'Cannot locate that personal vehicle.',
+    // Discord
+    [LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH]: `Discord ID must be at least 18 characters long.`,
+    [LOCALE_KEYS.DISCORD_ALREADY_WHITELISTED]: `_%_ is already whitelisted.`,
+    [LOCALE_KEYS.DISCORD_NOT_WHITELISTED]: `_%_ is not whitelisted.`,
+    [LOCALE_KEYS.DISCORD_ADDED_WHITELIST]: `_%_ was added to the whitelist.`,
+    [LOCALE_KEYS.DISCORD_REMOVED_WHITELIST]: `_%_ was removed from the whitelist.`,
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction
@@ -49,9 +57,18 @@ export default {
     [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
     // Item
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
+    [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
+    [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
+    [LOCALE_KEYS.ITEM_WAS_ADDED_EQUIPMENT]: `_%_ was added to your equipment.`,
+    [LOCALE_KEYS.ITEM_WAS_ADDED_TOOLBAR]: `_%_ was added to your toolbar.`,
+    // Job
+    [LOCALE_KEYS.JOB_ALREADY_WORKING]: `You are already working on a job.`,
+    [LOCALE_KEYS.JOB_NOT_WORKING]: `You are not currently working.`,
+    [LOCALE_KEYS.JOB_QUIT]: `You have quit your current job.`,
     // Labels
     [LOCALE_KEYS.LABEL_ON]: `ON`,
     [LOCALE_KEYS.LABEL_OFF]: `OFF`,
+    [LOCALE_KEYS.LABEL_BROADCAST]: `Broadcast`,
     // Player
     [LOCALE_KEYS.PLAYER_IS_TOO_FAR]: `That player is too far away.`,
     [LOCALE_KEYS.PLAYER_IS_TOO_CLOSE]: `That player is too close.`,
