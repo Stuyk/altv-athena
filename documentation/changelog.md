@@ -63,6 +63,7 @@ description: List of all the changes and current versions.
 + Added Locales for Clothing Server Side
 + Added Locales for ATM Server Side
 + Added Named Interactions for Client Side
++ Added Lock / Unlock Icons to Vehicles
 ```
 
 ## 1.8.0 - February 28-x, 2021

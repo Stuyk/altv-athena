@@ -13,6 +13,7 @@ import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { ActionMenu, Action } from '../../shared/interfaces/Actions';
 import { CLIENT_VEHICLE_EVENTS } from '../enums/Vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
+import { drawTexture, loadTexture } from '../utility/texture';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -305,6 +306,20 @@ export class VehicleController {
         }
 
         const exceededNextControlCheck = Date.now() > VehicleController.nextControlPress;
+
+        // Draw Vehicle Lock
+        if (!alt.Player.local.vehicle) {
+            if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
+                loadTexture('mpsafecracking');
+            }
+
+            const newPosition = closestVehicle.pos.add(0, 0, 1);
+            if (closestVehicle.lockStatus === Vehicle_Lock_State.LOCKED || !closestVehicle.lockStatus) {
+                drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+            } else {
+                drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+            }
+        }
 
         // F - Enter / Exit Vehicle
         if (VehicleController.pressedVehicleFunction && exceededNextControlCheck) {
