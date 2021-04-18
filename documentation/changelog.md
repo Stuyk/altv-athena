@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.8.1 - April 8-x, 2021
+## 1.8.1 - April 8-18, 2021
 
 ```diff
 + Scaled Down Phone Slightly
