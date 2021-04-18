@@ -4,7 +4,6 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
-import save from './save';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { playerFuncs } from '../Player';
 
@@ -65,6 +64,7 @@ function syncedMeta(p: alt.Player): void {
     p.setSyncedMeta('Ping', p.ping);
     p.setSyncedMeta('Position', p.pos);
 }
+
 /**
  * Update the player's time to match server time.
  * @memberof SyncPrototype

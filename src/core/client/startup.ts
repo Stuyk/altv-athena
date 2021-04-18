@@ -10,9 +10,6 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 
-// Streamers
-import './streamers/blip';
-
 // Systems
 import './systems/animations';
 import './systems/blip';

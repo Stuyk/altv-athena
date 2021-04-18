@@ -95,11 +95,11 @@ function adjustAttribute(player: alt.Player, value: number, attributeName: strin
 
     player.data[attributeName] += value;
 
-    if (player.data[attributeName] <= 0) {
+    if (wasm.AthenaMath.isLesser(player.data[attributeName], 0)) {
         player.data[attributeName] = 0;
     }
 
-    if (player.data[attributeName] >= 100) {
+    if (wasm.AthenaMath.isGreater(player.data[attributeName], 100)) {
         player.data[attributeName] = 100;
     }
 
