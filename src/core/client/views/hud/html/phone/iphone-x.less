@@ -66,7 +66,10 @@
 
         .bottom-bar {
             background: black;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            flex-grow: 1;
+            width: 100%;
             justify-content: space-around;
             justify-items: center;
             align-items: center;
@@ -86,18 +89,50 @@
                     background: rgba(255, 255, 255, 0.1);
                 }
             }
+
+            button {
+                padding: 0 !important;
+                margin: 0 !important;
+                border: 0 !important;
+                min-height: 5vh;
+                max-height: 5vh;
+                border-radius: 0 !important;
+                background: transparent !important;
+                width: 100%;
+
+                i {
+                    font-size: 14px !important;
+                }
+            }
         }
 
         .phone-dots {
             position: absolute;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
+            justify-items: center;
+            align-items: center;
+            align-content: center;
+            bottom: 1.5vh;
             padding-top: 0.5vh;
             width: 100%;
+
+            .v-icon {
+                font-size: 12px !important;
+            }
 
             .inactive {
                 color: rgba(255, 255, 255, 0.5);
                 transform: scale(0.75);
+            }
+
+            button {
+                padding: 0 !important;
+                margin: 0 !important;
+                border: 0 !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                width: 100%;
             }
         }
 
@@ -127,7 +162,6 @@
                 align-items: center;
                 padding: 2vh !important;
                 box-sizing: border-box;
-                margin-top: 3.5vh;
             }
 
             .phone-icon {

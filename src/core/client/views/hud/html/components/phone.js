@@ -135,16 +135,6 @@ const phone = Vue.component('phone', {
                 <div class="screen">
                     <div class="main">
                         <template v-if="!pageComponent">
-                                <div class="phone-dots">
-                                    <div class="phone-dot" v-for="(value, index) in maxPages" :key="index">
-                                        <div v-if="page === index">
-                                            <v-icon @click="navigatePage(index)" x-small>icon-circle1</v-icon>
-                                        </div>
-                                        <div class="inactive" v-else>
-                                            <v-icon @click="navigatePage(index)" x-small>icon-circle</v-icon>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="home" v-if="page === 0">
                                     <div class="phone-icon green darken-2" id="app-phone" @click="selectApp">
                                         <div class="text-icon font-weight-black">Phone</div>
@@ -182,23 +172,32 @@ const phone = Vue.component('phone', {
                                 <div class="home" v-if="page === 2">
                                     <!-- Maybe your app can go here ;) -->
                                 </div>
+
+                                <div class="phone-dots">
+                                    <div class="phone-dot" v-for="(value, index) in maxPages" :key="index">
+                                        <div v-if="page === index">
+                                            <v-icon @click="navigatePage(index)" x-small>icon-circle1</v-icon>
+                                        </div>
+                                        <div class="inactive" v-else>
+                                            <v-icon @click="navigatePage(index)" x-small>icon-circle</v-icon>
+                                        </div>
+                                    </div>
+                                </div>
                         </template>
                         <template v-else>
                             <component v-bind:is="pageComponent" v-bind:data="data" />
                         </template>
                     </div>
                     <div class="bottom-bar">
-                        <v-btn-toggle tile group dense class="flex-grow-1">
-                            <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
-                                <v-icon small>icon-chevron-left</v-icon>
-                            </v-btn>
-                            <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
-                                <v-icon x-small>icon-square-o</v-icon>
-                            </v-btn>
-                            <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">
-                                <v-icon class="transparent" style="opacity: 0;">icon-square-o</v-icon>
-                            </v-btn>
-                        </v-btn-toggle>
+                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
+                            <v-icon small>icon-chevron-left</v-icon>
+                        </v-btn>
+                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
+                            <v-icon x-small>icon-square-o</v-icon>
+                        </v-btn>
+                        <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">
+                            <v-icon class="transparent" style="opacity: 0;">icon-circle</v-icon>
+                        </v-btn>
                     </div>
                 </div>
             </div>

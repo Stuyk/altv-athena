@@ -36,7 +36,7 @@ const help = Vue.component('help', {
             const data = {};
 
             if (this.helpText === null) {
-                data['help-row-wrapper'] = true;
+                data['help-row-wrapper-null'] = true;
             } else {
                 data['help-row-wrapper'] = true;
             }
