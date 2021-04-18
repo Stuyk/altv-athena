@@ -10,9 +10,6 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 
-// Streamers
-import './streamers/blip';
-
 // Systems
 import './systems/animations';
 import './systems/blip';
@@ -25,6 +22,7 @@ import './systems/nametag';
 import './systems/marker';
 import './systems/noclip';
 import './systems/particle';
+import './systems/progressBar';
 import './systems/quickToken';
 import './systems/sound';
 import './systems/tasks';

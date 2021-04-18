@@ -7,12 +7,20 @@ export interface Item {
     description: string;
     icon: string;
     quantity: number;
-    weight: number;
-    slot: number;
     behavior: ItemType;
+    slot?: number;
     hash?: string;
     equipment?: EquipmentType;
     data: { [key: string]: any };
+}
+
+export interface ItemSpecial extends Item {
+    dataName: string;
+    dataIndex: number;
+    dataTab?: number;
+    isInventory: boolean;
+    isEquipment: boolean;
+    isToolbar: boolean;
 }
 
 export interface DroppedItem {

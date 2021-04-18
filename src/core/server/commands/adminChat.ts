@@ -5,17 +5,25 @@ import { Permissions } from '../../shared/flags/permissions';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { playerFuncs } from '../extensions/Player';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 ChatController.addCommand(
     'broadcast',
-    '/broadcast [message] - Announce server-wide',
+    LocaleController.get(LOCALE_KEYS.COMMAND_BROADCAST, '/broadcast'),
     Permissions.Admin,
     handleBroadcast
 );
-ChatController.addCommand('ac', '/ac [message] - Speak to other Admins', Permissions.Admin, handleAdminChat);
+ChatController.addCommand(
+    'ac',
+    LocaleController.get(LOCALE_KEYS.COMMAND_ADMIN_CHAT, '/ac'),
+    Permissions.Admin,
+    handleAdminChat
+);
+
 ChatController.addCommand(
     'mc',
-    '/mc [message] - Speak to other Admins and Moderators',
+    LocaleController.get(LOCALE_KEYS.COMMAND_MOD_CHAT, '/mc'),
     Permissions.Moderator | Permissions.Admin,
     handleModeratorChat
 );
@@ -46,5 +54,9 @@ function handleBroadcast(player: alt.Player, ...args) {
         return;
     }
 
-    emitAll(alt.Player.all, View_Events_Chat.Append, `[Broadcast] ${player.data.name}: ${args.join(' ')}`);
+    emitAll(
+        alt.Player.all,
+        View_Events_Chat.Append,
+        `[${LocaleController.get(LOCALE_KEYS.COMMAND_BROADCAST)}] ${player.data.name}: ${args.join(' ')}`
+    );
 }

@@ -113,6 +113,11 @@ We have a small demo server available for you to test the framework with Adminis
     -   Toolbar Slots
     -   Custom Item Effects
     -   CONSUMABLE Items
+    -   Custom Item Rules for Swapping, Equipping, Dropping, etc.
+    -   Item Swap
+    -   Item Stack
+    -   Item Equip / Unequip
+    -   Item Splitting
 -   Clothing System
     -   Clothing Selection
     -   Tops

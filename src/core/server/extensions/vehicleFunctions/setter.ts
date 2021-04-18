@@ -6,6 +6,9 @@ import toggle from './toggle';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { vehicleFuncs } from '../Vehicle';
+import { AresFunctions, WASM } from '../../utility/wasmLoader';
+
+const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 function lock(v: alt.Vehicle, player: alt.Player, lockState: Vehicle_Lock_State): boolean {
     if (!isFlagEnabled(v.behavior, Vehicle_Behavior.NO_KEY_TO_LOCK)) {
@@ -69,7 +72,8 @@ function updateFuel(v: alt.Vehicle) {
         v.data.fuel = 100;
     }
 
-    v.fuel -= DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
+    v.fuel = wasm.AthenaMath.sub(v.fuel, DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK);
+
     if (v.fuel < 0) {
         v.fuel = 0;
 
@@ -78,7 +82,8 @@ function updateFuel(v: alt.Vehicle) {
         }
     }
 
-    v.setStreamSyncedMeta(Vehicle_State.FUEL, v.fuel);
+    v.data.fuel = v.fuel;
+    v.setStreamSyncedMeta(Vehicle_State.FUEL, v.data.fuel);
 
     const owner = alt.Player.all.find((p) => p.valid && p.id === v.player_id);
     if (!owner) {

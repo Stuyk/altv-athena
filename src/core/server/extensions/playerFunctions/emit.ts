@@ -4,6 +4,7 @@ import { View_Events_Chat } from '../../../shared/enums/views';
 import { AnimationFlags } from '../../../shared/flags/animation';
 import { AudioStream } from '../../../shared/interfaces/Audio';
 import { Particle } from '../../../shared/interfaces/Particle';
+import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
 import utility from './utility';
 
@@ -88,6 +89,24 @@ function particle(p: alt.Player, particle: Particle, emitToNearbyPlayers = false
 }
 
 /**
+ * Create a progress bar that eventually ends itself.
+ * @param {alt.Player} player
+ * @param {ProgressBar} progressbar
+ */
+function createProgressBar(player: alt.Player, progressbar: ProgressBar) {
+    alt.emitClient(player, SYSTEM_EVENTS.PROGRESSBAR_CREATE, progressbar);
+}
+
+/**
+ * Remove a progress bar based on its unique identifier.
+ * @param {alt.Player} player
+ * @param {string} uid
+ */
+function removeProgressBar(player: alt.Player, uid: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.PROGRESSBAR_REMOVE, uid);
+}
+
+/**
  * Play a sound without any positional data.
  * @param {alt.Player} p
  * @param {string} audioName
@@ -128,10 +147,12 @@ function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
 export default {
     animation,
     audioStream,
+    createProgressBar,
     meta,
     message,
     notification,
     particle,
+    removeProgressBar,
     sound2D,
     sound3D,
     soundFrontend,

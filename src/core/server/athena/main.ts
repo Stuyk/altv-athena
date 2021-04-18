@@ -2,7 +2,7 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
 export const DEFAULT_CONFIG = {
     // Whitelisting
-    WHITELIST: false,
+    WHITELIST: true,
     USE_DISCORD_BOT: false,
     // Use Voice
     VOICE_ON: SHARED_CONFIG.VOICE_ON,
@@ -72,7 +72,7 @@ export const DEFAULT_CONFIG = {
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
-    FUEL_LOSS_PER_PLAYER_TICK: 0.1, // Happens every 10s
+    FUEL_LOSS_PER_PLAYER_TICK: 0.15, // Happens every 10s
     VEHICLE_DEALERSHIP_SPAWNS: {
         boat: { x: -877.3353271484375, y: -1357.1688232421875, z: 4.00537109375 },
         speedboat: { x: -877.3353271484375, y: -1357.1688232421875, z: 4.00537109375 },

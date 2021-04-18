@@ -2,6 +2,8 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { PhoneEvents } from '../../shared/enums/phoneEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 
 const ActionHandlers = {
@@ -90,7 +92,8 @@ function handleTransfer(player: alt.Player, amount: number, id: string | number)
 
     playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
     playerFuncs.currency.add(target, CurrencyTypes.BANK, amount);
-    playerFuncs.emit.message(target, `You received: ${amount} from ${player.data.name}.`);
+    const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
+    playerFuncs.emit.message(target, msg);
     return true;
 }
 
@@ -110,6 +113,8 @@ function handleTransferCash(player: alt.Player, amount: number, id: string | num
 
     playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount);
     playerFuncs.currency.add(target, CurrencyTypes.CASH, amount);
-    playerFuncs.emit.message(target, `You received: ${amount} from ${player.data.name}.`);
+
+    const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
+    playerFuncs.emit.message(target, msg);
     return true;
 }

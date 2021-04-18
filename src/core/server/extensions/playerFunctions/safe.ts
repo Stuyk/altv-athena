@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import { AresFunctions, WASM } from '../../utility/wasmLoader';
+import emit from './emit';
+import save from './save';
 
 const wasm = WASM.getFunctions<AresFunctions>('ares');
 
@@ -66,8 +68,49 @@ function addArmour(p: alt.Player, value: number, exactValue: boolean = false): v
     p.armour = p.acArmour;
 }
 
+/**
+ * Add or Remove food from the player.
+ * Use a negative number to remove food from the player.
+ * @param {alt.Player} player
+ * @param {number} value
+ */
+function addFood(player: alt.Player, value: number) {
+    adjustAttribute(player, value, 'food');
+}
+
+/**
+ * Add or Remove water from the player.
+ * Use a negative number to remove water from the player.
+ * @param {alt.Player} player
+ * @param {number} value
+ */
+function addWater(player: alt.Player, value: number) {
+    adjustAttribute(player, value, 'water');
+}
+
+function adjustAttribute(player: alt.Player, value: number, attributeName: string) {
+    if (player.data[attributeName] === undefined || player.data[attributeName] === null) {
+        player.data[attributeName] = 100;
+    }
+
+    player.data[attributeName] += value;
+
+    if (wasm.AthenaMath.isLesser(player.data[attributeName], 0)) {
+        player.data[attributeName] = 0;
+    }
+
+    if (wasm.AthenaMath.isGreater(player.data[attributeName], 100)) {
+        player.data[attributeName] = 100;
+    }
+
+    emit.meta(player, attributeName, player.data[attributeName]);
+    save.field(player, attributeName, player.data[attributeName]);
+}
+
 export default {
+    addFood,
     addArmour,
     addHealth,
+    addWater,
     setPosition
 };

@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
-import { CommandsLocale } from '../../shared/locale/commands';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
     'setarmour',
-    '/setarmour [0 - 100] [player_id]* - Set armour for self or others',
+    LocaleController.get(LOCALE_KEYS.COMMAND_SET_ARMOUR, '/setarmour'),
     Permissions.Admin,
     handleCommand
 );
@@ -32,7 +33,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
     if (!target) {
-        playerFuncs.emit.message(player, CommandsLocale.CANNOT_FIND_PLAYER);
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;
     }
 
@@ -41,5 +42,5 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
 
 function finishSetArmour(target: alt.Player, value: number) {
     playerFuncs.safe.addArmour(target, value, true);
-    playerFuncs.emit.message(target, `${CommandsLocale.ARMOUR_SET_TO}${value}`);
+    playerFuncs.emit.message(target, LocaleController.get(LOCALE_KEYS.PLAYER_ARMOUR_SET_TO, value));
 }

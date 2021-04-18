@@ -52,6 +52,16 @@ body {
 
     .help-row-wrapper-null {
         animation: fadeout 0.5s !important;
+        background: none !important;
+        min-height: 58px;
+        max-height: 58px;
+        padding: 8px;
+        box-sizing: border-box;
+        box-sizing: border-box;
+        min-width: 400px;
+        max-width: 400px;
+        display: block;
+        margin-bottom: 1.5vh;
     }
 
     .help-row-wrapper {
@@ -63,13 +73,16 @@ body {
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-        margin-bottom: 1.5vh;
         justify-content: left;
         align-content: center;
         align-items: center;
         animation: fadein 0.2s;
         z-index: 2;
         border-radius: 5px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 1.5vh;
 
         .help-row {
             position: relative;
@@ -84,13 +97,11 @@ body {
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
-            height: 58px;
 
             .descriptors {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                background: rgba(0, 0, 0, 0.75);
                 width: 100%;
                 border-top-right-radius: 3px;
                 border-bottom-right-radius: 3px;
@@ -111,8 +122,8 @@ body {
             .keypress {
                 position: relative;
                 display: flex;
-                min-height: 50px;
-                min-width: 50px;
+                min-height: 45px;
+                min-width: 45px;
                 justify-items: center;
                 justify-content: center;
                 align-content: center;
@@ -379,7 +390,7 @@ body {
         display: flex;
         min-width: 35px;
         min-height: 35px;
-        border-radius: 50%;
+        border-radius: 12px;
         justify-content: center;
         align-items: center;
         font-family: 'Arial';

@@ -11,6 +11,36 @@
         <div id="app">
             <v-app v-cloak>
                 <div class="main-container">
+                    <div class="splitter" v-if="split">
+                        <div class="split">
+                            <h3>Splitting - {{ split.item.name }}</h3>
+                            <v-divider></v-divider>
+                            <div class="split-horizontal mt-5">
+                                <h4 class="mr-5">{{ splitAmount }}</h4>
+                                <v-slider
+                                    thumb-label
+                                    dense
+                                    hide-details
+                                    ticks="always"
+                                    tick-size="4"
+                                    name="splitter"
+                                    class="flex-grow-1"
+                                    type="range"
+                                    min="1"
+                                    :max="split.item.quantity"
+                                    step="1"
+                                    v-model.number="splitAmount"
+                                    @input="this.update += 1"
+                                ></v-slider>
+                                <h4 class="ml-5">x{{ split.item.quantity }}</h4>
+                            </div>
+                            <span class="text-subtitle-2">Drag to split into another stack.</span>
+                            <div class="split-horizontal mt-5">
+                                <v-btn class="red lighten-1" @click="splitStack(null)">Cancel</v-btn>
+                                <v-btn class="green darken-3" @click="splitStack(splitAmount)">Split</v-btn>
+                            </div>
+                        </div>
+                    </div>
                     <div class="vertical">
                         <div class="horizontal">
                             <div class="vertical slight-transparent" style="min-width: 21vw; border-right: 15px solid rgba(255, 255, 255, 0.1);">

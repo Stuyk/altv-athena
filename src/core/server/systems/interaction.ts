@@ -4,7 +4,8 @@ import { View_Events_Clothing } from '../../shared/enums/views';
 import gridData from '../../shared/information/gridData';
 import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../../shared/interfaces/Interaction';
-import { InteractionLocale } from '../../shared/locale/interaction';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { distance2d } from '../utility/vector';
@@ -18,6 +19,7 @@ interface InteractionDefault {
     eventName: string;
     isServer: boolean;
     maxRadius?: number;
+    text?: string;
 }
 
 let customInteractions: Array<Interaction> = [];
@@ -25,9 +27,22 @@ let customInteractions: Array<Interaction> = [];
 export class InteractionController {
     static Interactions: InteractionHelper = {};
     static InteractionTypes: { [key: string]: InteractionDefault } = {
-        atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false },
-        gas: { eventName: SYSTEM_EVENTS.INTERACTION_FUEL, isServer: true, maxRadius: 1 },
-        clothing: { eventName: View_Events_Clothing.Open, isServer: false }
+        atm: {
+            eventName: SYSTEM_EVENTS.INTERACTION_ATM,
+            isServer: false,
+            text: LocaleController.get(LOCALE_KEYS.USE_ATM)
+        },
+        gas: {
+            eventName: SYSTEM_EVENTS.INTERACTION_FUEL,
+            isServer: true,
+            maxRadius: 3,
+            text: LocaleController.get(LOCALE_KEYS.USE_FUEL_PUMP)
+        },
+        clothing: {
+            eventName: View_Events_Clothing.Open,
+            isServer: false,
+            text: LocaleController.get(LOCALE_KEYS.USE_CLOTHING_STORE)
+        }
     };
 
     /**
@@ -43,6 +58,10 @@ export class InteractionController {
                 const category = key;
                 const interaction = InteractionController.InteractionTypes[category];
 
+                if (!interaction) {
+                    return;
+                }
+
                 let defaultRadius = 2.5;
                 if (interaction && interaction.maxRadius) {
                     defaultRadius = interaction.maxRadius;
@@ -55,6 +74,7 @@ export class InteractionController {
                     shape.playersOnly = true;
                     shape['isInteraction'] = true;
                     shape['interactionType'] = category;
+                    shape['text'] = interaction.text;
 
                     if (!InteractionController.Interactions[category]) {
                         InteractionController.Interactions[category] = [];
@@ -93,6 +113,7 @@ export class InteractionController {
         shape.playersOnly = true;
         shape['isInteraction'] = true;
         shape['interactionType'] = identifierAndEventName;
+        shape['text'] = activationText;
 
         if (!InteractionController.Interactions[identifierAndEventName]) {
             InteractionController.Interactions[identifierAndEventName] = [];
@@ -123,11 +144,14 @@ export class InteractionController {
             return;
         }
 
+        const text = colshape['text'] ? colshape['text'] : LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT);
+
         alt.emitClient(
             player,
             SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
             colshape['interactionType'],
-            new alt.Vector3(colshape.pos.x, colshape.pos.y, colshape.pos.z)
+            new alt.Vector3(colshape.pos.x, colshape.pos.y, colshape.pos.z),
+            text
         );
     }
 
@@ -159,8 +183,6 @@ export class InteractionController {
      * @memberof InteractionController
      */
     static handleInteraction(player: alt.Player, type: string) {
-        type = type.toLowerCase();
-
         if (!InteractionController.Interactions[type]) {
             return;
         }
@@ -174,13 +196,13 @@ export class InteractionController {
         });
 
         if (!closestInteraction) {
-            playerFuncs.emit.message(player, InteractionLocale.TOO_FAR_AWAY);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY));
             return;
         }
 
         const interaction = InteractionController.InteractionTypes[type];
         if (!interaction) {
-            playerFuncs.emit.message(player, InteractionLocale.DOES_NOT_EXIST);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT));
             return;
         }
 

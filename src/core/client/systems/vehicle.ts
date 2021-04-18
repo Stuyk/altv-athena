@@ -4,19 +4,16 @@ import {
     Vehicle_Events,
     Vehicle_Lock_State,
     Vehicle_State,
-    inLockedState,
     Vehicle_Seat_List,
     Vehicle_Door_List
 } from '../../shared/enums/vehicle';
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
-import { KEY_BINDS } from '../events/keyup';
-import { drawMarker } from '../utility/marker';
-import { HelpController } from '../views/hud/controllers/helpController';
 import vehicleFuncs from '../extensions/Vehicle';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { ActionMenu, Action } from '../../shared/interfaces/Actions';
 import { CLIENT_VEHICLE_EVENTS } from '../enums/Vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
+import { drawTexture, loadTexture } from '../utility/texture';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -310,6 +307,20 @@ export class VehicleController {
 
         const exceededNextControlCheck = Date.now() > VehicleController.nextControlPress;
 
+        // Draw Vehicle Lock
+        if (!alt.Player.local.vehicle) {
+            if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
+                loadTexture('mpsafecracking');
+            }
+
+            const newPosition = closestVehicle.pos.add(0, 0, 1);
+            if (closestVehicle.lockStatus === Vehicle_Lock_State.LOCKED || !closestVehicle.lockStatus) {
+                drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+            } else {
+                drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+            }
+        }
+
         // F - Enter / Exit Vehicle
         if (VehicleController.pressedVehicleFunction && exceededNextControlCheck) {
             VehicleController.pressedVehicleFunction = false;
@@ -363,6 +374,14 @@ export class VehicleController {
     }
 
     static handleToggleLock() {
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         const vehicle = VehicleController.getClosestVehicle();
         if (!vehicle) {
             return;
@@ -372,6 +391,14 @@ export class VehicleController {
     }
 
     static handleToggleEngine() {
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         const vehicle = VehicleController.getClosestVehicle();
         if (!vehicle) {
             return;

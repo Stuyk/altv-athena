@@ -8,7 +8,21 @@ export class LeaderboardController {
             return;
         }
 
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         if (alt.Player.local.isMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isLeaderboardOpen) {
+            BaseHUD.view.emit('leaderboard:Toggle', [], false);
+            alt.Player.local.isLeaderboardOpen = false;
             return;
         }
 
@@ -24,6 +38,7 @@ export class LeaderboardController {
             })
             .sort((a, b) => a.distance - b.distance);
 
-        BaseHUD.view.emit('leaderboard:Toggle', validPlayers);
+        alt.Player.local.isLeaderboardOpen = true;
+        BaseHUD.view.emit('leaderboard:Toggle', validPlayers, true);
     }
 }

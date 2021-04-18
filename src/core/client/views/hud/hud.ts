@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
-import { disableAllControls } from '../../utility/disableControls';
+import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
 import './controllers/audioController';
@@ -152,7 +152,7 @@ export class BaseHUD {
         }, 100);
     }
 
-    private static handleFocus(shouldFocus: boolean): void {
+    private static handleFocus(shouldFocus: boolean, focusName: string): void {
         if (alt.isConsoleOpen()) {
             return;
         }
@@ -183,7 +183,8 @@ export class BaseHUD {
                 native.disableControlAction(0, 142, true);
             }, 0);
 
-            alt.Player.local.isPhoneOpen = true;
+            alt.Player.local[focusName] = true;
+            disableAllAttacks(true);
             return;
         }
 
@@ -191,8 +192,9 @@ export class BaseHUD {
             alt.clearInterval(interval);
         }
 
-        alt.Player.local.isPhoneOpen = false;
+        alt.Player.local[focusName] = false;
         BaseHUD.view.unfocus();
+        disableAllAttacks(false);
     }
 }
 

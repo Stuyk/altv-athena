@@ -2,7 +2,7 @@ const phone = Vue.component('phone', {
     components: [appBank, appDealership, appVehicles],
     data() {
         return {
-            isActive: true,
+            isActive: false,
             page: 0,
             maxPages: 3,
             pageComponent: null, // 'app-bank'
@@ -40,7 +40,7 @@ const phone = Vue.component('phone', {
                 return;
             }
 
-            alt.emit('mouse:Focus', this.isActive);
+            alt.emit('mouse:Focus', this.isActive, 'isPhoneOpen');
         }
     },
     computed: {
@@ -123,26 +123,56 @@ const phone = Vue.component('phone', {
         <div class="phoneWrapper">
             <div class="iphone-x" v-if="!isActive">
                 <div class="notch">
-                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash.toFixed(2) }}</div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="icons">
-                        <v-icon small>icon-signal_cellular_alt</v-icon>
-                        <v-icon small>icon-battery_full</v-icon>
-                    </div>
                 </div>
             </div>
             <div class="iphone-x iphone-x-active" v-if="isActive">
                 <div class="notch">
-                    <div class="white--text overline pt-1">\${{ data.cash }}</div>
+                    <div class="white--text overline pt-1">\${{ data.cash.toFixed(2) }}</div>
                     <div class="white--text overline pt-1">{{ getTime }}</div>
-                    <div class="icons">
-                        <v-icon small>icon-signal_cellular_alt</v-icon>
-                        <v-icon small>icon-battery_full</v-icon>
-                    </div>
                 </div>
                 <div class="screen">
                     <div class="main">
                         <template v-if="!pageComponent">
+                                <div class="home" v-if="page === 0">
+                                    <div class="phone-icon green darken-2" id="app-phone" @click="selectApp">
+                                        <div class="text-icon font-weight-black">Phone</div>
+                                        <v-icon x-large>icon-phone</v-icon>
+                                    </div>
+                                    <div class="phone-icon blue lighten-2" id="app-messaging" @click="selectApp">
+                                        <div class="text-icon font-weight-black">Messages</div>
+                                        <v-icon x-large>icon-message</v-icon>
+                                    </div>
+                                    <div class="phone-icon orange" id="app-vehicles" @click="selectApp">
+                                        <div class="text-icon font-weight-black">Vehicles</div>
+                                        <v-icon x-large>icon-key</v-icon>
+                                    </div>
+                                    <div class="phone-icon blue-grey darken-1" id="app-bank" @click="selectApp">
+                                        <div class="text-icon font-weight-black">Bank</div>
+                                        <v-icon x-large>icon-bank</v-icon>
+                                    </div>
+                                    <div class="phone-icon orange darken-4" id="app-dealership" @click="selectApp">
+                                        <div class="text-icon font-weight-black">Dealership</div>
+                                        <v-icon x-large>icon-automobile</v-icon>
+                                    </div>
+                                    <!--
+                                    <div class="phone-icon" id="app-homes">
+                                        <div class="text-icon font-weight-black">Home</div>
+                                        <v-icon x-large>icon-home</v-icon>
+                                    </div>
+                                    -->
+                                </div>
+                                <div class="home" v-if="page === 1">
+                                    <div class="phone-icon">
+                                        <div class="text-icon font-weight-black">Settings</div>
+                                        <v-icon x-large>icon-settings</v-icon>
+                                    </div>
+                                </div>
+                                <div class="home" v-if="page === 2">
+                                    <!-- Maybe your app can go here ;) -->
+                                </div>
+
                                 <div class="phone-dots">
                                     <div class="phone-dot" v-for="(value, index) in maxPages" :key="index">
                                         <div v-if="page === index">
@@ -153,60 +183,21 @@ const phone = Vue.component('phone', {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="home" v-if="page === 0">
-                                    <div class="phone-icon elevation-2 green darken-2" id="app-phone" @click="selectApp">
-                                        <div class="text-icon font-weight-black">Phone</div>
-                                        <v-icon x-large>icon-phone</v-icon>
-                                    </div>
-                                    <div class="phone-icon elevation-2 blue lighten-2" id="app-messaging" @click="selectApp">
-                                        <div class="text-icon font-weight-black">Messages</div>
-                                        <v-icon x-large>icon-message</v-icon>
-                                    </div>
-                                    <div class="phone-icon elevation-2 orange" id="app-vehicles" @click="selectApp">
-                                        <div class="text-icon font-weight-black">Vehicles</div>
-                                        <v-icon x-large>icon-key</v-icon>
-                                    </div>
-                                    <div class="phone-icon elevation-2 blue-grey darken-1" id="app-bank" @click="selectApp">
-                                        <div class="text-icon font-weight-black">Bank</div>
-                                        <v-icon x-large>icon-bank</v-icon>
-                                    </div>
-                                    <div class="phone-icon elevation-2 orange darken-4" id="app-dealership" @click="selectApp">
-                                        <div class="text-icon font-weight-black">Dealership</div>
-                                        <v-icon x-large>icon-automobile</v-icon>
-                                    </div>
-                                    <!--
-                                    <div class="phone-icon elevation-2" id="app-homes">
-                                        <div class="text-icon font-weight-black">Home</div>
-                                        <v-icon x-large>icon-home</v-icon>
-                                    </div>
-                                    -->
-                                </div>
-                                <div class="home" v-if="page === 1">
-                                    <div class="phone-icon elevation-2">
-                                        <div class="text-icon font-weight-black">Settings</div>
-                                        <v-icon x-large>icon-settings</v-icon>
-                                    </div>
-                                </div>
-                                <div class="home" v-if="page === 2">
-                                    <!-- Maybe your app can go here ;) -->
-                                </div>
                         </template>
                         <template v-else>
                             <component v-bind:is="pageComponent" v-bind:data="data" />
                         </template>
                     </div>
                     <div class="bottom-bar">
-                        <v-btn-toggle tile group dense class="flex-grow-1">
-                            <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
-                                <v-icon small>icon-chevron-left</v-icon>
-                            </v-btn>
-                            <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
-                                <v-icon x-small>icon-square-o</v-icon>
-                            </v-btn>
-                            <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">
-                                <v-icon class="transparent" style="opacity: 0;">icon-square-o</v-icon>
-                            </v-btn>
-                        </v-btn-toggle>
+                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
+                            <v-icon small>icon-chevron-left</v-icon>
+                        </v-btn>
+                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
+                            <v-icon x-small>icon-square-o</v-icon>
+                        </v-btn>
+                        <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">
+                            <v-icon class="transparent" style="opacity: 0;">icon-circle</v-icon>
+                        </v-btn>
                     </div>
                 </div>
             </div>

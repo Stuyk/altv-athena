@@ -17,5 +17,9 @@ export function isAnyMenuOpen(): boolean {
         return true;
     }
 
+    if (alt.Player.local.isLeaderboardOpen) {
+        return true;
+    }
+
     return false;
 }

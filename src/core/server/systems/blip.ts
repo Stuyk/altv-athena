@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Blip } from '../../shared/interfaces/Blip';
+import { DEFAULT_CONFIG } from '../athena/main';
 import Logger from '../utility/athenaLogger';
+import { sha256Random } from '../utility/encryption';
 
 const globalBlips: Array<Blip> = [];
 
@@ -56,3 +58,16 @@ export class BlipController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
     }
 }
+
+DEFAULT_CONFIG.VALID_HOSPITALS.forEach((position) => {
+    const hash = sha256Random(JSON.stringify(position));
+    BlipController.append({
+        text: 'Hospital',
+        color: 6,
+        sprite: 153,
+        scale: 1,
+        shortRange: true,
+        pos: position,
+        uid: hash
+    });
+});

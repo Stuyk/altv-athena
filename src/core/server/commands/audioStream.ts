@@ -3,8 +3,15 @@ import ChatController from '../systems/chat';
 import { Permissions } from '../../shared/flags/permissions';
 import { playerFuncs } from '../extensions/Player';
 import { AudioStream } from '../../shared/interfaces/Audio';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
-ChatController.addCommand('audiostream', '/audiostream [youtube_id]', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'audiostream',
+    LocaleController.get(LOCALE_KEYS.COMMAND_AUDIOSTREAM, '/audiostream'),
+    Permissions.Admin,
+    handleCommand
+);
 
 function handleCommand(player: alt.Player, identifier: string): void {
     if (!identifier) {

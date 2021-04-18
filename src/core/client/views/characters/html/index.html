@@ -34,13 +34,13 @@
                                 {{ stat.varName }}
                             </v-list-item-title>
                             <v-list-item-subtitle class="subtitle-2 text-right" v-if="stat.useAppearance && characters[characterIndex].appearance">
-                                {{ stat.prefix }}{{ characters[characterIndex].appearance[stat.varRef] }}{{ stat.suffix }}
+                                {{ stat.prefix }}{{ characters[characterIndex].appearance[stat.varRef] }}{{ pruneDecimals(stat.suffix) }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle class="subtitle-2 text-right" v-else-if="stat.useInfo && characters[characterIndex].info">
-                                {{ stat.prefix }}{{ characters[characterIndex].info[stat.varRef] }}{{ stat.suffix }}
+                                {{ stat.prefix }}{{ characters[characterIndex].info[stat.varRef] }}{{  pruneDecimals(stat.suffix) }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle class="subtitle-2 text-right" v-else>
-                                {{ stat.prefix }}{{ characters[characterIndex][stat.varRef] }}{{ stat.suffix }}
+                                {{ stat.prefix }}{{ characters[characterIndex][stat.varRef] }}{{  pruneDecimals(stat.suffix) }}
                             </v-list-item-subtitle>
                         </v-list-item>
                     </div>

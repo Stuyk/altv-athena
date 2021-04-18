@@ -59,7 +59,7 @@ const appVehicles = Vue.component('app-vehicles', {
                                             Fuel
                                         </td>
                                         <td>
-                                            {{ vehicle.fuel }}
+                                            {{ vehicle.fuel.toFixed(2) }}
                                         </td>
                                     </tr>
                                     <tr>

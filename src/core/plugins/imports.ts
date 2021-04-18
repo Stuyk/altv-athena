@@ -7,7 +7,9 @@ const filePaths = [
     './teleportEffect/teleporter',
     './heist/heist',
     './deathLog/deathLog',
-    './actionMenu/actionMenu'
+    './actionMenu/actionMenu',
+    './interactionExample/index',
+    './noMiniGun/index'
     // YOUR IMPORTS -- BELOW HERE
 ];
 

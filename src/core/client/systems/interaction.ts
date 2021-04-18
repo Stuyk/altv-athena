@@ -65,13 +65,13 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static setInteractionInfo(type: string | null, position: alt.Vector3) {
+    static setInteractionInfo(type: string | null, position: alt.Vector3, text: string) {
         if (type === null) {
             alt.Player.local.closestInteraction = null;
             return;
         }
 
-        alt.Player.local.closestInteraction = { type, position };
+        alt.Player.local.closestInteraction = { type, position, text };
     }
 
     static handleInteractionMode() {
@@ -111,10 +111,7 @@ export class InteractionController {
         if (alt.Player.local.closestInteraction) {
             const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
             if (dist < MAX_CHECKPOINT_DRAW) {
-                const interaction = InteractionController.getCustomInteraction(
-                    alt.Player.local.closestInteraction.type
-                );
-                dynamicActionMenu[interaction ? interaction.text : 'Interact with Object'] = {
+                dynamicActionMenu[alt.Player.local.closestInteraction.text] = {
                     eventName: SYSTEM_EVENTS.INTERACTION,
                     isServer: true,
                     data: alt.Player.local.closestInteraction.type
@@ -144,14 +141,6 @@ export class InteractionController {
         }
 
         return;
-    }
-
-    static getCustomInteraction(type: string): Interaction | null {
-        const index = InteractionController.customInteractions.findIndex(
-            (interaction) => interaction.identifier === type
-        );
-
-        return InteractionController.customInteractions[index];
     }
 
     static addInteractions(customInteractions: Array<Interaction>): void {

@@ -104,6 +104,38 @@ body {
     width: 100vw;
     // left: 7vw;
 
+    .splitter {
+        display: flex;
+        position: fixed;
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 98;
+
+        .split {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+            min-width: 30vw;
+            max-width: 30vw;
+            height: auto;
+
+            .split-horizontal {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-content: center;
+                align-items: center;
+                justify-items: center;
+            }
+        }
+    }
+
     .key-group {
         display: flex;
         justify-content: space-between;

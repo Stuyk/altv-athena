@@ -13,7 +13,8 @@ export enum View_Events_Creator {
 
 export enum View_Events_Inventory {
     Process = 'inventory:Process',
-    Use = 'inventory:Use'
+    Use = 'inventory:Use',
+    Split = 'inventory:Split'
 }
 
 export enum View_Events_Clothing {

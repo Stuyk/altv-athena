@@ -25,6 +25,10 @@ export class ChatController {
             return;
         }
 
+        if (alt.Player.local.isPhoneOpen) {
+            return;
+        }
+
         BaseHUD.isOpen = true;
         BaseHUD.view.emit('chat:Focus');
         alt.Player.local.isChatOpen = true;

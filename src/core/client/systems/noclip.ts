@@ -48,11 +48,11 @@ let zSpeedDown = 0;
 let interval;
 let cam;
 
-function getCameraRotation(cam: number): native.Vector3 {
+function getCameraRotation(cam: number): alt.IVector3 {
     return { ...native.getCamRot(cam, 2) };
 }
 
-function getCameraPosition(cam: number): native.Vector3 {
+function getCameraPosition(cam: number): alt.IVector3 {
     return { ...native.getCamCoord(cam) };
 }
 

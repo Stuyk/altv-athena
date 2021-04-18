@@ -4,6 +4,68 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.1 - April 8-18, 2021
+
+```diff
++ Scaled Down Phone Slightly
++ Fixed Bad Alignment on Phone Icons
++ Added Timeout to Finish Authorization Button (3 Seconds)
++ Fixed Fuel Cash Decimal Overflow
++ Disable Attacks while Phone is in Use
++ Disable Toolbar while Phone is in Use
++ Added Item Stacking
++ Added Item Swapping
++ Fixed Toolbar Error (Leonard Report)
++ Optimized Inventory to try not create too much new code for stacking / swapping.
++ Added New Inventory Rules System (Custom Plugin Rules)
++ Added Function to Get All Items in as Single Array
++ Added Function getAllWeapons
++ Added Function removeAllWeapons
++ Added Function getAllItems (Returns a special list of all items a player has)
++ Added /removeallweapons for testing above functions
++ Added Ability to Equip / Unequip Items with Right-Click
++ Added Ability to Use Items with Right-Click
++ Added Ability to Split Stacks with Shift + Right-Click
++ Fixed Chat Opening while Phone in Use
++ Fixed Vehicle Controls Being used while Phone in Use
++ Fixed Leaderboard Bugging Out when Accessed From Phone
++ Fixed Weapons Not Being Removed on Death
++ Fixed Vehicle Bonnet (Hood) stuck open after Repair
++ Fixed Vehicle Search Bug for Dealership App
++ Weapons only removed when a player is sent to the Hospital
++ Added New Locale System
++ New Locale System Supports Multiple Languages (Only English thus far)
++ Added Locale for All Commands
++ Errors Now Print to Console while Building Typescript
++ Pinned Versions for Types for alt:V
++ Fixed Food Items to Refill Food
++ Added Food Effect
++ Added Water Effect
++ Added Item Effects Enum
++ Added Load Effects File
++ Locale now returns the key if missing instead of nothing
++ Fixed Decimal Placement for Characters Screen
++ Fixed Decimal Placement for Vehicle Screen
++ Removed Blip Streamer
++ Moved Relevant Blips to Minimap
++ Added Hospitals to Minimap
++ Added Static Background to Phone
++ Fix Fuel Consumption Timeout
++ Fix Fuel Not Being Consumed While Driving
++ Fixed Unable to Fuel at 95% Fuel. Can Fuel at 99 or Lower.
++ Fixed Setting Fuel if just Left Vehicle
++ Added Locales for Fuel
++ Fixed Vehicle Fuel Not Saving after Pump
++ Added Progress Bar Handler
++ Added Progress Bar for Fuel Pumps
++ Increased Radius for Fuel Pumps
++ Added Locales for Vehicle Status Server Side
++ Added Locales for Clothing Server Side
++ Added Locales for ATM Server Side
++ Added Named Interactions for Client Side
++ Added Lock / Unlock Icons to Vehicles
+```
+
 ## 1.8.0 - February 28-x, 2021
 
 ```diff

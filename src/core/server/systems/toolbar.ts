@@ -2,7 +2,8 @@ import * as alt from 'alt-server';
 import { ItemType } from '../../shared/enums/itemType';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/Item';
-import { ToolbarLocale } from '../../shared/locale/toolbar';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 
@@ -14,7 +15,7 @@ export class ToolbarController {
 
         const item = playerFuncs.inventory.getToolbarItem(player, slot);
         if (!item) {
-            playerFuncs.emit.message(player, ToolbarLocale.DOES_NOT_EXIST);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_NOT_EQUIPPED));
             return;
         }
 
@@ -42,7 +43,7 @@ export class ToolbarController {
         player.removeAllWeapons();
 
         if (!item.data.hash) {
-            playerFuncs.emit.message(player, ToolbarLocale.NO_WEAPON_HASH);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.WEAPON_NO_HASH));
             return;
         }
 

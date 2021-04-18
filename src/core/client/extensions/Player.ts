@@ -12,6 +12,7 @@ declare module 'alt-client' {
         isChatOpen: boolean;
         isActionMenuOpen: boolean;
         isPhoneOpen: boolean;
+        isLeaderboardOpen: boolean;
 
         // The time that a player is seen by our local player.
         // Used to reveal nametags.
@@ -21,6 +22,6 @@ declare module 'alt-client' {
         isInteractionOn: boolean;
 
         // Used for ATMs, Vending Machines, etc.
-        closestInteraction: { type: string; position: alt.Vector3 };
+        closestInteraction: { type: string; position: alt.Vector3; text: string };
     }
 }

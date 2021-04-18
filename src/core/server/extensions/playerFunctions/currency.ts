@@ -13,23 +13,23 @@ const wasm = WASM.getFunctions<AresFunctions>('ares');
  * @return {boolean} Success?
  * @memberof CurrencyPrototype
  */
-function add(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
-    if (amount > Number.MAX_SAFE_INTEGER) {
+function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (wasm.AthenaMath.isGreater(amount, Number.MAX_SAFE_INTEGER)) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }
 
     try {
-        const originalValue = p.data[type];
-        p.data[type] = parseFloat(wasm.AthenaMath.add(p.data[type], amount).toFixed(2));
+        const originalValue = player.data[type];
+        player.data[type] = parseFloat(wasm.AthenaMath.add(player.data[type], amount).toFixed(2));
 
         // Verify that the value was updated.
-        if (wasm.AthenaMath.isGreater(originalValue, p.data[type])) {
-            p.data[type] = originalValue;
+        if (wasm.AthenaMath.isGreater(originalValue, player.data[type])) {
+            player.data[type] = originalValue;
             return false;
         }
 
-        emit.meta(p, type, p.data[type]);
-        save.field(p, type, p.data[type]);
+        emit.meta(player, type, player.data[type]);
+        save.field(player, type, player.data[type]);
         return true;
     } catch (err) {
         return false;
@@ -43,23 +43,23 @@ function add(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
  * @return {boolean} Success?
  * @memberof CurrencyPrototype
  */
-function sub(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
-    if (amount > Number.MAX_SAFE_INTEGER) {
+function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (wasm.AthenaMath.isGreater(amount, Number.MAX_SAFE_INTEGER)) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }
 
     try {
-        const originalValue = p.data[type];
-        p.data[type] = parseFloat(wasm.AthenaMath.sub(p.data[type], amount).toFixed(2));
+        const originalValue = player.data[type];
+        player.data[type] = parseFloat(wasm.AthenaMath.sub(player.data[type], amount).toFixed(2));
 
         // Verify that the value was updated.
-        if (!wasm.AthenaMath.isLesser(p.data[type], originalValue)) {
-            p.data[type] = originalValue;
+        if (!wasm.AthenaMath.isLesser(player.data[type], originalValue)) {
+            player.data[type] = originalValue;
             return false;
         }
 
-        emit.meta(p, type, p.data[type]);
-        save.field(p, type, p.data[type]);
+        emit.meta(player, type, player.data[type]);
+        save.field(player, type, player.data[type]);
         return true;
     } catch (err) {
         return false;
@@ -73,44 +73,44 @@ function sub(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
  * @return {*}  {boolean}
  * @memberof CurrencyPrototype
  */
-function set(p: alt.Player, type: CurrencyTypes, amount: number): boolean {
-    if (amount > Number.MAX_SAFE_INTEGER) {
+function set(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (wasm.AthenaMath.isGreater(amount, Number.MAX_SAFE_INTEGER)) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }
 
     try {
-        p.data[type] = amount;
-        emit.meta(p, type, p.data[type]);
-        save.field(p, type, p.data[type]);
+        player.data[type] = amount;
+        emit.meta(player, type, player.data[type]);
+        save.field(player, type, player.data[type]);
         return true;
     } catch (err) {
         return false;
     }
 }
 
-function subAllCurrencies(p: alt.Player, amount: number): boolean {
-    if (p.data.cash + p.data.bank < amount) {
+function subAllCurrencies(player: alt.Player, amount: number): boolean {
+    if (wasm.AthenaMath.add(player.data.cash, player.data.bank) < amount) {
         return false;
     }
 
     let amountLeft = amount;
 
-    if (wasm.AthenaMath.sub(p.data.cash, amountLeft) <= -1) {
-        amountLeft = wasm.AthenaMath.sub(amountLeft, p.data.cash);
-        p.data.cash = 0;
+    if (wasm.AthenaMath.sub(player.data.cash, amountLeft) <= -1) {
+        amountLeft = wasm.AthenaMath.sub(amountLeft, player.data.cash);
+        player.data.cash = 0;
     } else {
-        p.data.cash = wasm.AthenaMath.sub(p.data.cash, amountLeft);
+        player.data.cash = wasm.AthenaMath.sub(player.data.cash, amountLeft);
         amountLeft = 0;
     }
 
     if (amountLeft >= 1) {
-        p.data.bank = wasm.AthenaMath.sub(p.data.bank, amountLeft);
+        player.data.bank = wasm.AthenaMath.sub(player.data.bank, amountLeft);
     }
 
-    save.field(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
-    save.field(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
-    emit.meta(p, CurrencyTypes.BANK, p.data[CurrencyTypes.BANK]);
-    emit.meta(p, CurrencyTypes.CASH, p.data[CurrencyTypes.CASH]);
+    save.field(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
+    save.field(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
+    emit.meta(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
+    emit.meta(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
     return true;
 }
 

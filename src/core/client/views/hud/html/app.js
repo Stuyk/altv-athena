@@ -28,12 +28,12 @@ const app = new Vue({
         };
     },
     methods: {
-        toggleLeaderboard(validPlayers) {
+        toggleLeaderboard(validPlayers, shouldOpenLeaderboard) {
             this.players = validPlayers;
-            this.leaderboard = !this.leaderboard;
+            this.leaderboard = shouldOpenLeaderboard;
 
             if ('alt' in window) {
-                alt.emit('mouse:Focus', this.leaderboard);
+                alt.emit('mouse:Focus', this.leaderboard, 'isLeaderboardOpen');
             }
         },
         audio3D(soundName, pan, volume, duration = -1) {

@@ -65,6 +65,13 @@ const app = new Vue({
         }
     },
     methods: {
+        pruneDecimals(value) {
+            if (isNaN(value)) {
+                return value;
+            }
+
+            return value.toFixed(2);
+        },
         handleSet(characters) {
             this.characterIndex = 0;
             this.characters = characters;

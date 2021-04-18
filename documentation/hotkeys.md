@@ -19,6 +19,12 @@ description: All of the current hotkeys available.
 -   X - Toggle Lock
 -   Y - Toggle Engine
 
+## Inventory View
+
+-   Left Click - Drag Items
+-   Right Click - Equip / Use Item
+-   Shift + Right Click - Split Item Stack
+
 ## Chat View
 
 -   Up - Last Message

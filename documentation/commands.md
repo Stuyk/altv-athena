@@ -9,30 +9,41 @@ description: Built-in commands for general usage.
 Commands that are built-in to the current Framework. They also have permissions and are restricted to certain users.
 
 ```text
-/ac [message] - Speak to other Admins
-/acceptdeath - Will respawn you if you are fully dead.
-/addwhitelist [discord_id]
-/audiostream [youtube_id]
+/ac [message] - Speak to other admins
+/acceptdeath - Respawn at hospital after death
+/actionmenu - Create a test action menu
+/addvehicle [model] - Add a vehicle to your player
+/addwhitelist [discord] - Whitelist a player by Discord ID
+/audiostream [youtube] - Create a Test Audio Stream
 /b [message] - Speak out of character
-/broadcast [message] - Announce server-wide
-/do [describe an object] - Describe something
-/dummyitem - Get some dummy debug items
-/getitem [item_name] - Get item by name
-/low [quietly speak something]
-/mc [message] - Speak to other Admins and Moderators
-/me [describe what you are doing] - Roleplay an action
-/noclip -  Toggles noclip mode.
-/removewhitelist [discord_id]
+/broadcast [message] - Announce message server wide
+/do [message] - Describe an object, sound, etc.
+/dummyitem - Get some debug items
+/getitem [item-name] - Get an item by name
+/low [message] - Speak quietly
+/mc [message] - Speak to Admins & Mods
+/me [message] - Describe a roleplay action
+/noclip - Toggle No Clip Mode
+/ooc [message] - Speak out of character
+/quitjob - Quit a Job
+/removeallweapons - Remove all weapons
+/removewhitelist [discord] - Remove Discord ID from whitelist
+/respawn - Respawn at hospital after death
 /revive [player_id]* - Revive self or others
+/sb - Put on a seatbelt or helmet
 /seatbelt - Put on a seatbelt or helmet
-/setarmour [0 - 100] [player_id]* - Set armour for self or others
-/setcash [amount] [id]* - Add cash
-/sethealth [99 - 200] [player_id]* - Set health for self or others
-/teleporter - Adds item for current position.
-/updateweather - Forcefully updates your weather based on region.
-/vehicle [name] - Spawn an admin vehicle
-/w [player_id] [message] - Whisper
-/w [player_id] [message] - Whisper
-/weapon [name] - Get weapon by name.
+/setarmour [0-100][player_id]* - Set armour for self or others
+/setcash [value] - Set your cash on hand
+/setfood [0-100] - Set your hunger level
+/sethealth [99-199][player_id]* - Set health for self or others
+/setwater [0-100] - Set your thirst level
+/setweater - Forces synchronization of weather
+/spawnitem [item-name] - Get an item by name
+/spawnvehicle [model] - Spawn an admin vehicle
+/teleporter - Teleport back to current location with an item
+/timestamp - Toggle Timestamps for Chat
+/vehicle [model] - Spawn an admin vehicle
+/w [player_id][message] - Privately whisper to a nearby player
+/weapon [name] - Get a weapon by name
+/whisper [player_id][message] - Privately whisper to a nearby player
 ```
-

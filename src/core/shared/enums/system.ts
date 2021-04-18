@@ -39,6 +39,9 @@ export enum SYSTEM_EVENTS {
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
     PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    // Progress Bar
+    PROGRESSBAR_CREATE = 'progressbar:Create',
+    PROGRESSBAR_REMOVE = 'progressbar:Remove',
     //
     POPULATE_BLIPS = 'blips:Populate',
     POPULATE_MARKERS = 'markers:Populate',

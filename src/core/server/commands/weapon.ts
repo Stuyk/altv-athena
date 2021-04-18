@@ -7,8 +7,22 @@ import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
-ChatController.addCommand('weapon', '/weapon [name] - Get weapon by name.', Permissions.Admin, handleCommand);
+ChatController.addCommand(
+    'weapon',
+    LocaleController.get(LOCALE_KEYS.COMMAND_WEAPON, '/weapon'),
+    Permissions.Admin,
+    handleCommand
+);
+
+ChatController.addCommand(
+    'removeallweapons',
+    LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_ALL_WEAPONS, '/removeallweapons'),
+    Permissions.Admin,
+    handleRemoveWeapons
+);
 
 const itemRef: Item = {
     name: `Micro SMG`,
@@ -17,7 +31,6 @@ const itemRef: Item = {
     icon: 'gun',
     slot: 4,
     quantity: 1,
-    weight: 2,
     behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
     data: {
         hash: 0x13532244
@@ -57,4 +70,9 @@ function handleCommand(player: alt.Player, weaponName: string): void {
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
     playerFuncs.emit.message(player, `Added weapon: ${weapon.name}`);
+}
+
+function handleRemoveWeapons(player: alt.Player): void {
+    const weps = playerFuncs.inventory.removeAllWeapons(player);
+    playerFuncs.emit.message(player, `Removed: ${weps.length} weapons`);
 }
