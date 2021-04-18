@@ -73,6 +73,10 @@ function lockStatus(v: alt.Vehicle, status: Vehicle_Lock_State | number) {
 function fuel(v: alt.Vehicle, value: number) {
     v.fuel = value;
 
+    if (!alt.Player.local.vehicle) {
+        return;
+    }
+
     if (alt.Player.local.vehicle.id === v.id) {
         BaseHUD.setHudStatus(HudEventNames.Fuel, value);
     }

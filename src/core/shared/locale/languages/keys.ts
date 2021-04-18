@@ -42,6 +42,16 @@ export const LOCALE_KEYS = {
     DISCORD_NOT_WHITELISTED: `discord-not-whitelisted`,
     DISCORD_ADDED_WHITELIST: `discord-added-whitelist`,
     DISCORD_REMOVED_WHITELIST: `discord-removed-whitelist`,
+    // Fuel
+    FUEL_EXIT_VEHICLE_FIRST: `fuel-must-exit-vehicle-first`,
+    FUEL_UPDATE_VEHICLE_FIRST: `fuel-must-enter-exit-vehicle-first`,
+    FUEL_VEHICLE_NOT_CLOSE: `fuel-vehicle-not-close`,
+    FUEL_ALREADY_FULL: `fuel-already-full`,
+    FUEL_TOO_FAR_FROM_PUMP: `fuel-too-far-from-pump`,
+    FUEL_HAS_UNLIMITED: `fuel-has-unlimited`,
+    FUEL_CANNOT_AFFORD: `fuel-cannot-afford`,
+    FUEL_PAYMENT: `fuel-payment`,
+    FUEL_PAID: `fuel-paid`,
     // Invalid
     INVALID_VEHICLE_MODEL: `invalid-vehicle-model`,
     // Interact

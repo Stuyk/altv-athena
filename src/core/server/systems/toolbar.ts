@@ -4,7 +4,6 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { ToolbarLocale } from '../../shared/locale/toolbar';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 

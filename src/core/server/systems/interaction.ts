@@ -27,7 +27,7 @@ export class InteractionController {
     static Interactions: InteractionHelper = {};
     static InteractionTypes: { [key: string]: InteractionDefault } = {
         atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false },
-        gas: { eventName: SYSTEM_EVENTS.INTERACTION_FUEL, isServer: true, maxRadius: 1 },
+        gas: { eventName: SYSTEM_EVENTS.INTERACTION_FUEL, isServer: true, maxRadius: 3 },
         clothing: { eventName: View_Events_Clothing.Open, isServer: false }
     };
 

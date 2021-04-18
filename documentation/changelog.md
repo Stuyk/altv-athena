@@ -50,6 +50,15 @@ description: List of all the changes and current versions.
 + Moved Relevant Blips to Minimap
 + Added Hospitals to Minimap
 + Added Static Background to Phone
++ Fix Fuel Consumption Timeout
++ Fix Fuel Not Being Consumed While Driving
++ Fixed Unable to Fuel at 95% Fuel. Can Fuel at 99 or Lower.
++ Fixed Setting Fuel if just Left Vehicle
++ Added Locales for Fuel
++ Fixed Vehicle Fuel Not Saving after Pump
++ Added Progress Bar Handler
++ Added Progress Bar for Fuel Pumps
++ Increased Radius for Fuel Pumps
 ```
 
 ## 1.8.0 - February 28-x, 2021

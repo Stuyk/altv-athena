@@ -50,6 +50,16 @@ export default {
     [LOCALE_KEYS.DISCORD_NOT_WHITELISTED]: `_%_ is not whitelisted.`,
     [LOCALE_KEYS.DISCORD_ADDED_WHITELIST]: `_%_ was added to the whitelist.`,
     [LOCALE_KEYS.DISCORD_REMOVED_WHITELIST]: `_%_ was removed from the whitelist.`,
+    // FUEL
+    [LOCALE_KEYS.FUEL_EXIT_VEHICLE_FIRST]: `You must exit your vehicle before fueling.`,
+    [LOCALE_KEYS.FUEL_UPDATE_VEHICLE_FIRST]: `You must enter and exit a vehicle first to fuel.`,
+    [LOCALE_KEYS.FUEL_VEHICLE_NOT_CLOSE]: `Vehicle is not close enough to fuel.`,
+    [LOCALE_KEYS.FUEL_ALREADY_FULL]: `Vehicle already has enough fuel.`,
+    [LOCALE_KEYS.FUEL_TOO_FAR_FROM_PUMP]: `Pump is too far from vehicle.`,
+    [LOCALE_KEYS.FUEL_HAS_UNLIMITED]: `Vehicle has unlimited fuel. No refuel necessary.`,
+    [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
+    [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
+    [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction
