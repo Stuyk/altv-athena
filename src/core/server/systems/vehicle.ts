@@ -8,6 +8,8 @@ import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
 import './fuel';
 import '../views/dealership';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);
@@ -42,7 +44,10 @@ function handleCycleLock(player: alt.Player, vehicle: alt.Vehicle): void {
 
     const lockState = vehicleFuncs.toggle.lock(vehicle, player, false);
 
-    playerFuncs.emit.notification(player, `Vehicle Lock Set to ~y~${Vehicle_Lock_State[lockState].replace('_', ' ')}`);
+    playerFuncs.emit.notification(
+        player,
+        LocaleController.get(LOCALE_KEYS.VEHICLE_LOCK_SET_TO, Vehicle_Lock_State[lockState].replace('_', ' '))
+    );
 
     if (lockState !== Vehicle_Lock_State.LOCKED && lockState !== Vehicle_Lock_State.UNLOCKED) {
         return;

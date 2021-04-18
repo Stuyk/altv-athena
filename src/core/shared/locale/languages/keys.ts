@@ -36,6 +36,8 @@ export const LOCALE_KEYS = {
     CANNOT_PERFORM_WHILE_DEAD: `cannot-perform-while-dead`,
     CANNOT_FIND_PERSONAL_VEHICLES: `cannot-find-personal-vehicles`,
     CANNOT_FIND_THAT_PERSONAL_VEHICLE: `cannot-find-that-personal-vehicle`,
+    // Clothing
+    CLOTHING_ITEM_IN_INVENTORY: `clothing-item-in-inventory`,
     // Discord
     DISCORD_ID_NOT_LONG_ENOUGH: `discord-id-not-long-enough`,
     DISCORD_ALREADY_WHITELISTED: `discord-already-whitelisted`,
@@ -67,6 +69,7 @@ export const LOCALE_KEYS = {
     LABEL_ON: `label-on`,
     LABEL_OFF: `label-off`,
     LABEL_BROADCAST: 'label-broadcast',
+    LABEL_ENGINE: `label-engine`,
     // Player
     PLAYER_ARMOUR_SET_TO: `player-armour-set-to`,
     PLAYER_HEALTH_SET_TO: `player-health-set-to`,
@@ -75,10 +78,14 @@ export const LOCALE_KEYS = {
     PLAYER_IS_NOT_DEAD: `player-is-not-dead`,
     PLAYER_SEATBELT_ON: `player-seatbelt-on`,
     PLAYER_SEATBELT_OFF: `player-seatbelt-off`,
+    PLAYER_RECEIVED_BLANK: `player-received-blank`,
     // Job
     JOB_ALREADY_WORKING: `job-already-working`,
     JOB_NOT_WORKING: `job-not-working`,
     JOB_QUIT: `job-quit`,
     // Weapon
-    WEAPON_NO_HASH: 'weapon-no-hash'
+    WEAPON_NO_HASH: 'weapon-no-hash',
+    // Vehicle
+    VEHICLE_NO_FUEL: `vehicle-no-fuel`,
+    VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`
 };

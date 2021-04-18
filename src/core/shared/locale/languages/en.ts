@@ -44,6 +44,8 @@ export default {
     [LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD]: `Cannot perform this command while you are dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES]: `Cannot find any personal vehicles.`,
     [LOCALE_KEYS.CANNOT_FIND_THAT_PERSONAL_VEHICLE]: 'Cannot locate that personal vehicle.',
+    // Clothing
+    [LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY]: `A clothing item was sent to your inventory.`,
     // Discord
     [LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH]: `Discord ID must be at least 18 characters long.`,
     [LOCALE_KEYS.DISCORD_ALREADY_WHITELISTED]: `_%_ is already whitelisted.`,
@@ -79,6 +81,7 @@ export default {
     [LOCALE_KEYS.LABEL_ON]: `ON`,
     [LOCALE_KEYS.LABEL_OFF]: `OFF`,
     [LOCALE_KEYS.LABEL_BROADCAST]: `Broadcast`,
+    [LOCALE_KEYS.LABEL_ENGINE]: `Engine`,
     // Player
     [LOCALE_KEYS.PLAYER_IS_TOO_FAR]: `That player is too far away.`,
     [LOCALE_KEYS.PLAYER_IS_TOO_CLOSE]: `That player is too close.`,
@@ -87,6 +90,10 @@ export default {
     [LOCALE_KEYS.PLAYER_HEALTH_SET_TO]: `Your health was set to: _%_`,
     [LOCALE_KEYS.PLAYER_SEATBELT_ON]: `You put on your seatbelt.`,
     [LOCALE_KEYS.PLAYER_SEATBELT_OFF]: `You take off your seatbelt.`,
+    [LOCALE_KEYS.PLAYER_RECEIVED_BLANK]: `You received _%_ from _%_`,
     // Weapon
-    [LOCALE_KEYS.WEAPON_NO_HASH]: `Weapon does not have a hash.`
+    [LOCALE_KEYS.WEAPON_NO_HASH]: `Weapon does not have a hash.`,
+    // Vehicle
+    [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
+    [LOCALE_KEYS.VEHICLE_LOCK_SET_TO]: `Vehicle lock has been set to: _%_`
 };

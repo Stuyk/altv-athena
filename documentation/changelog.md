@@ -59,6 +59,9 @@ description: List of all the changes and current versions.
 + Added Progress Bar Handler
 + Added Progress Bar for Fuel Pumps
 + Increased Radius for Fuel Pumps
++ Added Locales for Vehicle Status Server Side
++ Added Locales for Clothing Server Side
++ Added Locales for ATM Server Side
 ```
 
 ## 1.8.0 - February 28-x, 2021
