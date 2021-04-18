@@ -49,6 +49,7 @@ description: List of all the changes and current versions.
 + Removed Blip Streamer
 + Moved Relevant Blips to Minimap
 + Added Hospitals to Minimap
++ Added Static Background to Phone
 ```
 
 ## 1.8.0 - February 28-x, 2021

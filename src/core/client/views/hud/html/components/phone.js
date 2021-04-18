@@ -146,35 +146,35 @@ const phone = Vue.component('phone', {
                                     </div>
                                 </div>
                                 <div class="home" v-if="page === 0">
-                                    <div class="phone-icon elevation-2 green darken-2" id="app-phone" @click="selectApp">
+                                    <div class="phone-icon green darken-2" id="app-phone" @click="selectApp">
                                         <div class="text-icon font-weight-black">Phone</div>
                                         <v-icon x-large>icon-phone</v-icon>
                                     </div>
-                                    <div class="phone-icon elevation-2 blue lighten-2" id="app-messaging" @click="selectApp">
+                                    <div class="phone-icon blue lighten-2" id="app-messaging" @click="selectApp">
                                         <div class="text-icon font-weight-black">Messages</div>
                                         <v-icon x-large>icon-message</v-icon>
                                     </div>
-                                    <div class="phone-icon elevation-2 orange" id="app-vehicles" @click="selectApp">
+                                    <div class="phone-icon orange" id="app-vehicles" @click="selectApp">
                                         <div class="text-icon font-weight-black">Vehicles</div>
                                         <v-icon x-large>icon-key</v-icon>
                                     </div>
-                                    <div class="phone-icon elevation-2 blue-grey darken-1" id="app-bank" @click="selectApp">
+                                    <div class="phone-icon blue-grey darken-1" id="app-bank" @click="selectApp">
                                         <div class="text-icon font-weight-black">Bank</div>
                                         <v-icon x-large>icon-bank</v-icon>
                                     </div>
-                                    <div class="phone-icon elevation-2 orange darken-4" id="app-dealership" @click="selectApp">
+                                    <div class="phone-icon orange darken-4" id="app-dealership" @click="selectApp">
                                         <div class="text-icon font-weight-black">Dealership</div>
                                         <v-icon x-large>icon-automobile</v-icon>
                                     </div>
                                     <!--
-                                    <div class="phone-icon elevation-2" id="app-homes">
+                                    <div class="phone-icon" id="app-homes">
                                         <div class="text-icon font-weight-black">Home</div>
                                         <v-icon x-large>icon-home</v-icon>
                                     </div>
                                     -->
                                 </div>
                                 <div class="home" v-if="page === 1">
-                                    <div class="phone-icon elevation-2">
+                                    <div class="phone-icon">
                                         <div class="text-icon font-weight-black">Settings</div>
                                         <v-icon x-large>icon-settings</v-icon>
                                     </div>
