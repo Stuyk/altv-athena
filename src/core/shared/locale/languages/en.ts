@@ -67,6 +67,7 @@ export default {
     // Interaction
     [LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY]: `You are too far away to interact. Move closer.`,
     [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
+    [LOCALE_KEYS.INTERACTION_INTERACT_WITH_OBJECT]: `Interact with Object`,
     // Item
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
@@ -91,6 +92,11 @@ export default {
     [LOCALE_KEYS.PLAYER_SEATBELT_ON]: `You put on your seatbelt.`,
     [LOCALE_KEYS.PLAYER_SEATBELT_OFF]: `You take off your seatbelt.`,
     [LOCALE_KEYS.PLAYER_RECEIVED_BLANK]: `You received _%_ from _%_`,
+    // Use
+    [LOCALE_KEYS.USE_FUEL_PUMP]: 'Use Fuel Pump',
+    [LOCALE_KEYS.USE_ATM]: 'Use ATM',
+    [LOCALE_KEYS.USE_VENDING_MACHINE]: 'Use Vending Machine',
+    [LOCALE_KEYS.USE_CLOTHING_STORE]: 'Browse Clothing',
     // Weapon
     [LOCALE_KEYS.WEAPON_NO_HASH]: `Weapon does not have a hash.`,
     // Vehicle

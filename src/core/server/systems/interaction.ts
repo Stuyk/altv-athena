@@ -19,6 +19,7 @@ interface InteractionDefault {
     eventName: string;
     isServer: boolean;
     maxRadius?: number;
+    text?: string;
 }
 
 let customInteractions: Array<Interaction> = [];
@@ -26,9 +27,22 @@ let customInteractions: Array<Interaction> = [];
 export class InteractionController {
     static Interactions: InteractionHelper = {};
     static InteractionTypes: { [key: string]: InteractionDefault } = {
-        atm: { eventName: SYSTEM_EVENTS.INTERACTION_ATM, isServer: false },
-        gas: { eventName: SYSTEM_EVENTS.INTERACTION_FUEL, isServer: true, maxRadius: 3 },
-        clothing: { eventName: View_Events_Clothing.Open, isServer: false }
+        atm: {
+            eventName: SYSTEM_EVENTS.INTERACTION_ATM,
+            isServer: false,
+            text: LocaleController.get(LOCALE_KEYS.USE_ATM)
+        },
+        gas: {
+            eventName: SYSTEM_EVENTS.INTERACTION_FUEL,
+            isServer: true,
+            maxRadius: 3,
+            text: LocaleController.get(LOCALE_KEYS.USE_FUEL_PUMP)
+        },
+        clothing: {
+            eventName: View_Events_Clothing.Open,
+            isServer: false,
+            text: LocaleController.get(LOCALE_KEYS.USE_CLOTHING_STORE)
+        }
     };
 
     /**
@@ -44,6 +58,10 @@ export class InteractionController {
                 const category = key;
                 const interaction = InteractionController.InteractionTypes[category];
 
+                if (!interaction) {
+                    return;
+                }
+
                 let defaultRadius = 2.5;
                 if (interaction && interaction.maxRadius) {
                     defaultRadius = interaction.maxRadius;
@@ -56,6 +74,7 @@ export class InteractionController {
                     shape.playersOnly = true;
                     shape['isInteraction'] = true;
                     shape['interactionType'] = category;
+                    shape['text'] = interaction.text;
 
                     if (!InteractionController.Interactions[category]) {
                         InteractionController.Interactions[category] = [];
@@ -94,6 +113,7 @@ export class InteractionController {
         shape.playersOnly = true;
         shape['isInteraction'] = true;
         shape['interactionType'] = identifierAndEventName;
+        shape['text'] = activationText;
 
         if (!InteractionController.Interactions[identifierAndEventName]) {
             InteractionController.Interactions[identifierAndEventName] = [];
@@ -124,11 +144,14 @@ export class InteractionController {
             return;
         }
 
+        const text = colshape['text'] ? colshape['text'] : LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT);
+
         alt.emitClient(
             player,
             SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
             colshape['interactionType'],
-            new alt.Vector3(colshape.pos.x, colshape.pos.y, colshape.pos.z)
+            new alt.Vector3(colshape.pos.x, colshape.pos.y, colshape.pos.z),
+            text
         );
     }
 

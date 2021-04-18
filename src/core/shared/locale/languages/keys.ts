@@ -59,6 +59,7 @@ export const LOCALE_KEYS = {
     // Interact
     INTERACTION_TOO_FAR_AWAY: `interact-too-far-away`,
     INTERACTION_INVALID_OBJECT: 'interaction-invalid-object',
+    INTERACTION_INTERACT_WITH_OBJECT: 'interaction-with-object',
     // Inventory
     ITEM_DOES_NOT_EXIST: `item-does-not-exist`,
     ITEM_NOT_EQUIPPED: 'no-item-in-equipment-slot',
@@ -83,6 +84,11 @@ export const LOCALE_KEYS = {
     JOB_ALREADY_WORKING: `job-already-working`,
     JOB_NOT_WORKING: `job-not-working`,
     JOB_QUIT: `job-quit`,
+    // Use
+    USE_FUEL_PUMP: 'use-fuel-pump',
+    USE_ATM: 'use-atm',
+    USE_VENDING_MACHINE: 'use-vending-machine',
+    USE_CLOTHING_STORE: `use-clothing-store`,
     // Weapon
     WEAPON_NO_HASH: 'weapon-no-hash',
     // Vehicle

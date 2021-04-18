@@ -22,6 +22,6 @@ declare module 'alt-client' {
         isInteractionOn: boolean;
 
         // Used for ATMs, Vending Machines, etc.
-        closestInteraction: { type: string; position: alt.Vector3 };
+        closestInteraction: { type: string; position: alt.Vector3; text: string };
     }
 }
