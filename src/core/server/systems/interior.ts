@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interior } from '../../shared/interfaces/Interior';
 import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
@@ -12,15 +13,33 @@ interface InteriorInfo {
     isInside: boolean;
 }
 
+class ColshapeInterior extends alt.ColshapeSphere {
+    interior: Interior;
+    isInterior: boolean;
+    isInteraction: boolean;
+    interactionType: string;
+
+    constructor(interior: Interior, isInterior: boolean, dimension: number) {
+        const pos = isInterior ? interior.inside : interior.outside;
+        super(pos.x, pos.y, pos.z, 3);
+        this.isInterior = isInterior;
+        this.interior = interior;
+        this.dimension = dimension;
+        this.isInteraction = true;
+        this.interactionType = 'interior';
+    }
+}
+
 const MAXIMUM_EXTERIOR_DISTANCE = 5;
 const MAXIMUM_INTERIOR_DISTANCE = 10;
 const db: Database = getDatabase();
 const interiors: Array<Interior> = [];
+const colshapes: Array<ColshapeInterior> = [];
 let dimension = 0;
 
 export class InteriorController {
     /**
-     *
+     * Load all interiors from Database.
      * @static
      * @memberof InteriorController
      */
@@ -46,8 +65,11 @@ export class InteriorController {
         dimension += 1; // Increment Dimension
         interior.dimension = dimension; // Assign Dimension to Interior
 
-        // Populate ColShapes?
-        // Add Dimension to ColShape?
+        const interiorShape = new ColshapeInterior(interior, true, dimension);
+        const exteriorShape = new ColshapeInterior(interior, false, dimension);
+
+        colshapes.push(interiorShape);
+        colshapes.push(exteriorShape);
     }
 
     /**
@@ -96,6 +118,14 @@ export class InteriorController {
 
         if (!interior.furniture) {
             interior.furniture = [];
+        }
+
+        if (!interior.vehicles) {
+            interior.vehicles = [];
+        }
+
+        if (!interior.storage) {
+            interior.storage = [];
         }
 
         return await db.insertData<Interior>(interior, Collections.Interiors, true);
@@ -231,4 +261,81 @@ export class InteriorController {
 
         return { interior, isInside };
     }
+
+    /**
+     * Magically switches locations and knows exactly where to put you.
+     * @static
+     * @param {alt.Player} player
+     * @param {Interior} interior
+     * @return {*}  {boolean}
+     * @memberof InteriorController
+     */
+    static switchLocation(player: alt.Player, interior: Interior): boolean {
+        // Allows the player to exit the interior they are currently in.
+        if (player.data.interior === interior._id.toString()) {
+            playerFuncs.safe.setPosition(player, interior.outside.x, interior.outside.y, interior.outside.z);
+            player.data.interior = null;
+            player.data.pos = interior.outside;
+
+            // Used to determine if this exit actually is linked to the outside world.
+            if (interior.isActuallyOutside) {
+                player.data.exterior = null;
+
+                playerFuncs.save.partial(player, {
+                    interior: player.data.interior,
+                    pos: player.data.pos,
+                    exterior: player.data.exterior
+                });
+            } else {
+                playerFuncs.save.partial(player, {
+                    interior: player.data.interior,
+                    pos: player.data.pos
+                });
+            }
+
+            return true;
+        }
+
+        // Do not allow interior changing if the next door is locked.
+        if (interior.lockStatus) {
+            playerFuncs.emit.notification(player, `~r~Locked`);
+            return false;
+        }
+
+        // Allows for multiple stacked interiors.
+        if (player.data.interior) {
+            playerFuncs.safe.setPosition(player, interior.inside.x, interior.inside.y, interior.inside.z);
+            player.data.interior = interior._id.toString();
+            player.data.pos = interior.inside;
+            playerFuncs.save.partial(player, {
+                interior: player.data.interior,
+                pos: player.data.pos
+            });
+            return true;
+        }
+
+        // Allows the player to enter an interior from the outside.
+        playerFuncs.safe.setPosition(player, interior.inside.x, interior.inside.y, interior.inside.z);
+        player.data.exterior = interior.outside;
+        player.data.interior = interior._id.toString();
+        player.data.pos = interior.outside as alt.Vector3;
+        playerFuncs.save.partial(player, {
+            interior: player.data.interior,
+            pos: player.data.pos,
+            exterior: player.data.exterior
+        });
+        return true;
+    }
+
+    static trySwitch(player: alt.Player, pos: alt.IVector3) {
+        const interior = InteriorController.findClosestInterior(player);
+        if (!interior) {
+            console.log('not close enough to interior');
+            return;
+        }
+
+        InteriorController.switchLocation(player, interior.interior);
+    }
 }
+
+alt.on(SYSTEM_EVENTS.INTERIOR_SWITCH, InteriorController.trySwitch);

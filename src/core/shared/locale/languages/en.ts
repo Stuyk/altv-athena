@@ -62,6 +62,8 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
+    // House
+    [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction

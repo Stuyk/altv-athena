@@ -42,6 +42,11 @@ export class InteractionController {
             eventName: View_Events_Clothing.Open,
             isServer: false,
             text: LocaleController.get(LOCALE_KEYS.USE_CLOTHING_STORE)
+        },
+        interior: {
+            eventName: SYSTEM_EVENTS.INTERIOR_SWITCH,
+            isServer: true,
+            text: LocaleController.get(LOCALE_KEYS.INTERIOR_INTERACT)
         }
     };
 

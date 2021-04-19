@@ -54,6 +54,8 @@ export const LOCALE_KEYS = {
     FUEL_CANNOT_AFFORD: `fuel-cannot-afford`,
     FUEL_PAYMENT: `fuel-payment`,
     FUEL_PAID: `fuel-paid`,
+    // Interior
+    INTERIOR_INTERACT: 'interior-interact',
     // Invalid
     INVALID_VEHICLE_MODEL: `invalid-vehicle-model`,
     // Interact
