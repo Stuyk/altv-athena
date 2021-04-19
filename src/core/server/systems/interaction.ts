@@ -133,6 +133,27 @@ export class InteractionController {
     }
 
     /**
+     * Forces any ColShape to push events.
+     * @static
+     * @param {string} identifier
+     * @param {string} eventName
+     * @param {boolean} isServer
+     * @param {alt.Colshape} shape
+     * @memberof InteractionController
+     */
+    static sideLoadInteraction(identifier: string, eventName: string, isServer: boolean, shape: alt.Colshape) {
+        if (!InteractionController.Interactions[identifier]) {
+            InteractionController.Interactions[identifier] = [];
+        }
+
+        InteractionController.Interactions[identifier].push(shape);
+        InteractionController.InteractionTypes[identifier] = {
+            eventName: eventName,
+            isServer: isServer
+        };
+    }
+
+    /**
      * Triggers when a player enters an interaction point.
      * @static
      * @param {alt.Colshape} colshape

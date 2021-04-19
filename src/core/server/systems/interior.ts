@@ -2,11 +2,14 @@ import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interior } from '../../shared/interfaces/Interior';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { distance2d } from '../utility/vector';
+import { InteractionController } from './interaction';
 
 interface InteriorInfo {
     interior: Interior;
@@ -18,15 +21,24 @@ class ColshapeInterior extends alt.ColshapeSphere {
     isInterior: boolean;
     isInteraction: boolean;
     interactionType: string;
+    text: string;
 
     constructor(interior: Interior, isInterior: boolean, dimension: number) {
         const pos = isInterior ? interior.inside : interior.outside;
         super(pos.x, pos.y, pos.z, 3);
         this.isInterior = isInterior;
         this.interior = interior;
-        this.dimension = dimension;
         this.isInteraction = true;
         this.interactionType = 'interior';
+        this.text = LocaleController.get(LOCALE_KEYS.INTERIOR_INTERACT);
+
+        if (interior.isActuallyOutside) {
+            this.dimension = 0;
+        } else {
+            this.dimension = dimension;
+        }
+
+        InteractionController.sideLoadInteraction(this.interactionType, SYSTEM_EVENTS.INTERIOR_SWITCH, true, this);
     }
 }
 
@@ -44,11 +56,11 @@ export class InteriorController {
      * @memberof InteriorController
      */
     static async load() {
-        const interiors = await db.fetchAllData<Interior>(Collections.Interiors);
+        const savedInteriors = await db.fetchAllData<Interior>(Collections.Interiors);
         let count = 0;
 
-        for (let i = 0; i < interiors.length; i++) {
-            InteriorController.populate(interiors[i]);
+        for (let i = 0; i < savedInteriors.length; i++) {
+            InteriorController.populate(savedInteriors[i]);
             count += 1;
         }
 
@@ -70,6 +82,7 @@ export class InteriorController {
 
         colshapes.push(interiorShape);
         colshapes.push(exteriorShape);
+        interiors.push(interior);
     }
 
     /**
@@ -101,7 +114,7 @@ export class InteriorController {
         }
 
         if (!interior.lockStatus) {
-            interior.lockStatus = true;
+            interior.lockStatus = false;
         }
 
         if (!interior.friends) {
@@ -327,10 +340,17 @@ export class InteriorController {
         return true;
     }
 
+    /**
+     * Used as the main event entry point when creating an interior.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.IVector3} pos
+     * @return {*}
+     * @memberof InteriorController
+     */
     static trySwitch(player: alt.Player, pos: alt.IVector3) {
         const interior = InteriorController.findClosestInterior(player);
         if (!interior) {
-            console.log('not close enough to interior');
             return;
         }
 
@@ -339,3 +359,4 @@ export class InteriorController {
 }
 
 alt.on(SYSTEM_EVENTS.INTERIOR_SWITCH, InteriorController.trySwitch);
+InteriorController.load();
