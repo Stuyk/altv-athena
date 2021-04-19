@@ -6,6 +6,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import * as sm from 'simplymongo';
 import './clothing';
+import { Collections } from '../interface/DatabaseCollections';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -21,7 +22,7 @@ export async function goToCharacterSelect(player: Player): Promise<void> {
     const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
         player.accountData._id,
-        'characters'
+        Collections.Characters
     );
 
     player.pendingCharacterSelect = true;
@@ -91,13 +92,13 @@ async function handleDelete(player: Player, id: string): Promise<void> {
     }
 
     const character_uid = id;
-    await db.deleteById(character_uid, 'characters'); // Remove Character Here
+    await db.deleteById(character_uid, Collections.Characters); // Remove Character Here
 
     // Refetch Characters
     const characters: Array<Character> = await db.fetchAllByField<Character>(
         'account_id',
         player.accountData._id,
-        'characters'
+        Collections.Characters
     );
 
     player.pendingCharacterSelect = true;

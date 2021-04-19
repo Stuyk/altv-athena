@@ -14,6 +14,7 @@ import sync from './sync';
 import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
 import { playerFuncs } from '../Player';
+import { Collections } from '../../interface/DatabaseCollections';
 
 const db: Database = getDatabase();
 
@@ -26,7 +27,7 @@ const db: Database = getDatabase();
 async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
-        db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, 'accounts');
+        db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
     }
 
     if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
@@ -38,7 +39,7 @@ async function account(p: alt.Player, accountData: Partial<Account>): Promise<vo
                 quickToken: qt,
                 quickTokenExpiration: Date.now() + 60000 * 60 * 48 // 48 Hours
             },
-            'accounts'
+            Collections.Accounts
         );
 
         alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);

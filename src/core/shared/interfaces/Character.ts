@@ -17,6 +17,7 @@ export interface Character {
     food: number;
     water: number;
     isDead: boolean;
+    interior: string | null;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
     inventory: Array<Array<Partial<Item>>>;

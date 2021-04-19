@@ -6,6 +6,7 @@ import fs from 'fs';
 import { AdminController } from '../systems/admin';
 import { Account } from '../interface/Account';
 import { OptionsController } from '../systems/options';
+import { Collections } from '../interface/DatabaseCollections';
 
 const db: Database = getDatabase();
 
@@ -65,13 +66,13 @@ async function handleBan(cmdName: string, discord_or_id: string, ...args: any[])
         return false;
     });
 
-    const account = await db.fetchData<Account>('discord', discord_or_id, 'accounts');
+    const account = await db.fetchData<Account>('discord', discord_or_id, Collections.Accounts);
     if (!account) {
         Logger.error(`Could not find that id or discord id.`);
         return;
     }
 
-    await db.updatePartialData(account._id.toString(), { banned: true, reason }, 'accounts');
+    await db.updatePartialData(account._id.toString(), { banned: true, reason }, Collections.Accounts);
     Logger.info(`Successfully banned ${discord_or_id}`);
     player.kick(reason);
 }
@@ -225,5 +226,5 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
         return;
     }
 
-    await db.updatePartialData(p.accountData._id, { [fieldName]: fieldValue }, 'accounts');
+    await db.updatePartialData(p.accountData._id, { [fieldName]: fieldValue }, Collections.Accounts);
 }

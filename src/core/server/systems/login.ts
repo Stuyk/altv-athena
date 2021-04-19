@@ -16,6 +16,7 @@ import './job';
 import './marker';
 import './textlabel';
 import { vehicleFuncs } from '../extensions/Vehicle';
+import { Collections } from '../interface/DatabaseCollections';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -54,7 +55,11 @@ export class LoginController {
         // Used for DiscordToken skirt.
         if (!account) {
             // Generate New Account for Database
-            let accountData: Partial<Account> | null = await db.fetchData<Account>('discord', data.id, 'accounts');
+            let accountData: Partial<Account> | null = await db.fetchData<Account>(
+                'discord',
+                data.id,
+                Collections.Accounts
+            );
             if (!accountData) {
                 const newDocument: Partial<Account> = {
                     discord: player.discord.id,
@@ -64,7 +69,7 @@ export class LoginController {
                     permissionLevel: Permissions.None
                 };
 
-                account = await db.insertData<Partial<Account>>(newDocument, 'accounts', true);
+                account = await db.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
             } else {
                 account = accountData;
             }
@@ -99,7 +104,11 @@ export class LoginController {
 
         // Just enough unique data.
         const hashToken: string = getUniquePlayerHash(player, discord);
-        const account: Partial<Account> | null = await db.fetchData<Account>('quickToken', hashToken, 'accounts');
+        const account: Partial<Account> | null = await db.fetchData<Account>(
+            'quickToken',
+            hashToken,
+            Collections.Accounts
+        );
 
         if (!account) {
             player.needsQT = true;
@@ -108,7 +117,7 @@ export class LoginController {
 
         if (!account.quickTokenExpiration || Date.now() > account.quickTokenExpiration) {
             player.needsQT = true;
-            db.updatePartialData(account._id, { quickToken: null, quickTokenExpiration: null }, 'accounts');
+            db.updatePartialData(account._id, { quickToken: null, quickTokenExpiration: null }, Collections.Accounts);
             return;
         }
 
