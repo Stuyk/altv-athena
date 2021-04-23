@@ -7,6 +7,7 @@
     "scripts": {
         "build": "node ./utility/copy-helper/copy-helper.mjs",
         "build-watching": "node ./utility/copy-helper/copy-helper.mjs -- WATCHING",
+        "clean": "node ./utility/cleaner/cleaner.mjs",
         "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
         "linux": "npm run build && ./start.sh",
