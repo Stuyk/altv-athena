@@ -16,3 +16,4 @@ configMongoDB
 crashdumps
 ./screenshots/*
 cdn_upload
+tsconfig.tsbuildinfo
