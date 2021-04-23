@@ -12,12 +12,10 @@
         "experimentalDecorators": true,
         "module": "ESNext",
         "target": "ESNext",
-        "outDir": "./resources",
+        "outDir": "./athena-cache",
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
-        "composite": true,
-        "skipDefaultLibCheck": true,
-        "incremental": true
+        "composite": true
     },
     "include": ["./src/**/*.ts"],
     "watchOptions": {

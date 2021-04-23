@@ -72,6 +72,20 @@ async function buildPipeline() {
     if (compilationPromise) {
         await compilationPromise;
     }
+
+    const CompiledFiles = new glob.GlobSync('./athena-cache/**/*.!(ts)').found;
+    for (let i = 0; i < CompiledFiles.length; i++) {
+        const oldPath = CompiledFiles[i];
+        const newPath = CompiledFiles[i].replace('athena-cache', 'resources');
+        const dirName = path.dirname(newPath).normalize();
+
+        if (!fs.existsSync(dirName)) {
+            fs.mkdirSync(dirName, { recursive: true });
+        }
+
+        fs.copyFileSync(oldPath, newPath);
+        copiedFiles += 1;
+    }
    
     console.log(`[Athena] Build Time: ${Date.now() - StartTime}ms`);
     console.log(`[Athena] Attempting to Boot Server...`);
