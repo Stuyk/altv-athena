@@ -4,6 +4,14 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.2 - April 19-x, 2021
+
+```diff
++ Added Interior Architecture
++ Added Basic Interior Commands for Admins
++ Added /coords command for Admins
+```
+
 ## 1.8.1 - April 8-18, 2021
 
 ```diff

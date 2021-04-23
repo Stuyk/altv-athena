@@ -14,10 +14,11 @@
         "target": "ESNext",
         "outDir": "./resources",
         "rootDir": "./src",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "composite": true,
+        "skipDefaultLibCheck": true
     },
-    "include": ["./src/**/*.ts", "src/core/shared/enums/phoneEvents.ts.js"],
-    "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],
+    "include": ["./src/**/*.ts"],
     "watchOptions": {
         "watchFile": "useFsEvents",
         "watchDirectory": "useFsEvents",
