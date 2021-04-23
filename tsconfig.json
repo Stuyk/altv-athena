@@ -16,7 +16,8 @@
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
         "composite": true,
-        "skipDefaultLibCheck": true
+        "skipDefaultLibCheck": true,
+        "incremental": true
     },
     "include": ["./src/**/*.ts"],
     "watchOptions": {
