@@ -15,13 +15,13 @@
                         <div class="title">Select Character</div>
                     </div>
                     <div class="titleWrapper mb-3">
-                        <v-btn class="orange--text" outlined text small @click="decrementIndex">
+                        <v-btn class="orange--text" outlined text small v-on:click.native="decrementIndex">
                             <v-icon small>icon-chevron-left</v-icon>
                         </v-btn>
                         <div class="subtitle-2 nowrap pr-5 pl-5">
                             {{ characters[characterIndex].name.replace(/_/gm, ' ') }} 
                         </div>
-                        <v-btn class="orange--text" outlined text small @click="incrementIndex">
+                        <v-btn class="orange--text" outlined text small v-on:click.native="incrementIndex">
                             <v-icon small>icon-chevron-right</v-icon>
                         </v-btn>
                     </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="group">
                             <template v-if="characters.length >= 2">
-                                <v-btn class="red--text text--lighten-1 flex-grow-1 fill-width" outlined text @click="deleteDialog = !deleteDialog">
+                                <v-btn class="red--text text--lighten-1 flex-grow-1 fill-width" outlined text v-on:click.native="deleteDialog = !deleteDialog">
                                     <v-icon x-small>icon-times-circle</v-icon>
                                 </v-btn>
                             </template>
@@ -60,10 +60,10 @@
                                     <v-icon x-small>icon-times-circle</v-icon>
                                 </v-btn>
                             </template>
-                            <v-btn class="light-green--text flex-grow-1 ml-2 mr-2" outlined text @click="newCharacter">
+                            <v-btn class="light-green--text flex-grow-1 ml-2 mr-2" outlined text v-on:click.native="newCharacter">
                                 <v-icon small>icon-plus</v-icon>
                             </v-btn>
-                            <v-btn class="light-blue--text flex-grow-1" outlined text @click="selectCharacter">
+                            <v-btn class="light-blue--text flex-grow-1" outlined text v-on:click.native="selectCharacter">
                                 <v-icon small>icon-chevron-right</v-icon>
                             </v-btn>
                         </div>
@@ -79,10 +79,10 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="red lighten-1" text @click="deleteDialog = false" outlined>
+                            <v-btn color="red lighten-1" text v-on:click.native="deleteDialog = false" outlined>
                                 No
                             </v-btn>
-                            <v-btn color="green lighten-1" text @click="deleteDialog = false; deleteCharacter()" outlined>
+                            <v-btn color="green lighten-1" text v-on:click.native="deleteDialog = false; deleteCharacter()" outlined>
                                 <b>Yes</b>
                             </v-btn>
                         </v-card-actions>

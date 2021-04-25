@@ -10,6 +10,9 @@ description: List of all the changes and current versions.
 + Added Interior Architecture
 + Added Basic Interior Commands for Admins
 + Added /coords command for Admins
++ Increased Build Times
++ Added Refresh / Auto Join for Scripting
++ Added Blip Route for Vehicles in Job Framework
 ```
 
 ## 1.8.1 - April 8-18, 2021

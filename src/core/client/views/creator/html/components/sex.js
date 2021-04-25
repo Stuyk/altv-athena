@@ -93,13 +93,13 @@ Vue.component('tab-sex', {
     template: `
         <div class="contentWrapper">
             <div class="group mt-3">
-                <v-btn v-for="i in 6" :key="i" @click="setParameter('preset', i)" class="flex-grow-1 ml-1 mr-1" :class="isHighlighted(preset, i)" outlined text small>
+                <v-btn v-for="i in 6" :key="i" v-on:click.native="setParameter('preset', i)" class="flex-grow-1 ml-1 mr-1" :class="isHighlighted(preset, i)" outlined text small>
                     {{ i }}
                 </v-btn>
             </div>
             <div class="group mt-3">
-                <v-btn @click="setParameter('sex', 0)" class="flex-grow-1 mr-3" :class="isHighlighted(data.sex, 0)" outlined text small>Female</v-btn>
-                <v-btn @click="setParameter('sex', 1)" class="flex-grow-1" :class="isHighlighted(data.sex, 1)" outlined text small>Male</v-btn>
+                <v-btn v-on:click.native="setParameter('sex', 0)" class="flex-grow-1 mr-3" :class="isHighlighted(data.sex, 0)" outlined text small>Female</v-btn>
+                <v-btn v-on:click.native="setParameter('sex', 1)" class="flex-grow-1" :class="isHighlighted(data.sex, 1)" outlined text small>Male</v-btn>
             </div>
             <div class="group mt-3">
                 <v-divider></v-divider>
@@ -110,13 +110,13 @@ Vue.component('tab-sex', {
                 </div>
             </div>
             <div class="group">
-                <v-btn @click="decrementParameter('faceFather', 0, 45, 1)" class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="decrementParameter('faceFather', 0, 45, 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
                 </v-btn>
                 <span class="flex-grow-1 overline text-center pt-1" small> 
                     {{faceNames[data.faceFather] }}
                 </span>
-                <v-btn @click="incrementParameter('faceFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="incrementParameter('faceFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
                 </v-btn>
             </div>
@@ -126,13 +126,13 @@ Vue.component('tab-sex', {
                 </div>
             </div>
             <div class="group">
-                <v-btn @click="decrementParameter('skinFather', 0, 45, 1)" class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="decrementParameter('skinFather', 0, 45, 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
                 </v-btn>
                 <span class="flex-grow-1 overline text-center pt-1" small> 
                     {{faceNames[data.skinFather] }}
                 </span>
-                <v-btn @click="incrementParameter('skinFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="incrementParameter('skinFather', 0, 45, 1)"  class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
                 </v-btn>
             </div>
@@ -145,13 +145,13 @@ Vue.component('tab-sex', {
                 </div>
             </div>
             <div class="group">
-                <v-btn @click="decrementParameter('faceMother', 0, 45, 1)" class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="decrementParameter('faceMother', 0, 45, 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
                 </v-btn>
                 <span class="flex-grow-1 overline text-center pt-1" small> 
                     {{faceNames[data.faceMother] }}
                 </span>
-                <v-btn @click="incrementParameter('faceMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="incrementParameter('faceMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
                 </v-btn>
             </div>
@@ -161,13 +161,13 @@ Vue.component('tab-sex', {
                 </div>
             </div>
             <div class="group">
-                <v-btn @click="decrementParameter('skinMother', 0, 45, 1)" class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="decrementParameter('skinMother', 0, 45, 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
                 </v-btn>
                 <span class="flex-grow-1 overline text-center pt-1" small> 
                     {{faceNames[data.skinMother] }}
                 </span>
-                <v-btn @click="incrementParameter('skinMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="incrementParameter('skinMother', 0, 45, 1)"  class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
                 </v-btn>
             </div>
@@ -204,13 +204,13 @@ Vue.component('tab-sex', {
                 </div>
             </div>
             <div class="group">
-                <v-btn @click="decrementParameter('eyes', 0, 45, 1)" class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="decrementParameter('eyes', 0, 45, 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
                 </v-btn>
                 <span class="flex-grow-1 overline text-center pt-1" small> 
                     {{ data.eyes }}
                 </span>
-                <v-btn @click="incrementParameter('eyes', 0, 45, 1)"  class="light-blue--text" outlined small text>
+                <v-btn v-on:click.native="incrementParameter('eyes', 0, 45, 1)"  class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
                 </v-btn>
             </div>

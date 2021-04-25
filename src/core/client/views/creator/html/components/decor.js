@@ -50,7 +50,7 @@ Vue.component('tab-decor', {
                 </div>
                 <div class="group">
                     <v-btn
-                        @click="decrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
+                        v-on:click.native="decrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
@@ -62,7 +62,7 @@ Vue.component('tab-decor', {
                         {{ data.colorOverlays[i].value !== null ? data.colorOverlays[i].value : 0 }}
                     </span>
                     <v-btn
-                        @click="incrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
+                        v-on:click.native="incrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
@@ -103,7 +103,7 @@ Vue.component('tab-decor', {
                 </div>
                 <div class="group">
                     <v-btn
-                        @click="decrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                        v-on:click.native="decrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
@@ -115,7 +115,7 @@ Vue.component('tab-decor', {
                         {{ data.colorOverlays[i].color1 !== null ? data.colorOverlays[i].color1 : 0 }}
                     </span>
                     <v-btn
-                        @click="incrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                        v-on:click.native="incrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
@@ -132,7 +132,7 @@ Vue.component('tab-decor', {
                     </div>
                     <div class="group">
                         <v-btn
-                            @click="decrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                            v-on:click.native="decrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
                             class="light-blue--text"
                             outlined
                             small
@@ -144,7 +144,7 @@ Vue.component('tab-decor', {
                             {{ data.colorOverlays[i].color2 !== null ? data.colorOverlays[i].color2 : 0 }}
                         </span>
                         <v-btn
-                            @click="incrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                            v-on:click.native="incrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
                             class="light-blue--text"
                             outlined
                             small

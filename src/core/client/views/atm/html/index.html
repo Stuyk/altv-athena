@@ -26,7 +26,7 @@
                     </v-list-item-title>
                     <v-card-text>
                     <v-expansion-panels>
-                        <v-expansion-panel class="grey darken-3" @click="setType('withdraw')">
+                        <v-expansion-panel class="grey darken-3" v-on:click.native="setType('withdraw')">
                             <v-expansion-panel-header>
                                 Withdraw Cash
                                 <template v-slot:actions>
@@ -39,7 +39,7 @@
                                 <v-text-field :rules="withdrawRules" class="flex-grow-1" type="number" label="Withdraw Amount" v-model="withdrawAmount" outlined />
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="grey darken-3" @click="setType('deposit')">
+                        <v-expansion-panel class="grey darken-3" v-on:click.native="setType('deposit')">
                             <v-expansion-panel-header>
                                 Deposit Cash
                                 <template v-slot:actions>
@@ -52,7 +52,7 @@
                                 <v-text-field :rules="depositRules" prepend-icon="icon-minus" class="flex-grow-1" type="number" label="Deposit Amount" v-model="depositAmount" />
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="grey darken-3" @click="setType('transfer')">
+                        <v-expansion-panel class="grey darken-3" v-on:click.native="setType('transfer')">
                             <v-expansion-panel-header>
                                 Wire Transfer
                                 <template v-slot:actions>
@@ -69,10 +69,10 @@
                     </v-expansion-panels>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn @click="exit" class="mt-4" class="error--text text--lighten-2 flex-grow-1 block" color="error lighten-2" outlined text>
+                        <v-btn v-on:click.native="exit" class="mt-4" class="error--text text--lighten-2 flex-grow-1 block" color="error lighten-2" outlined text>
                             <v-icon small>icon-exit</v-icon>
                         </v-btn>
-                        <v-btn @click="transact" :disabled="isValid === false" class="mt-4" class="green--text text--lighten-2 flex-grow-1 block" color="green lighten-2" outlined text>
+                        <v-btn v-on:click.native="transact" :disabled="isValid === false" class="mt-4" class="green--text text--lighten-2 flex-grow-1 block" color="green lighten-2" outlined text>
                             <v-icon small>icon-check</v-icon>
                         </v-btn>
                     </v-card-actions>
@@ -88,7 +88,7 @@
                         </center>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn @click="exit" class="error--text text--lighten-2" color="error lighten-2" outlined text>
+                        <v-btn v-on:click.native="exit" class="error--text text--lighten-2" color="error lighten-2" outlined text>
                             <v-icon small>icon-exit</v-icon>
                         </v-btn>
                     </v-card-actions>

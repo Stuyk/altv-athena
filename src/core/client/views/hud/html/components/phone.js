@@ -136,23 +136,23 @@ const phone = Vue.component('phone', {
                     <div class="main">
                         <template v-if="!pageComponent">
                                 <div class="home" v-if="page === 0">
-                                    <div class="phone-icon green darken-2" id="app-phone" @click="selectApp">
+                                    <div class="phone-icon green darken-2" id="app-phone" v-on:click.native="selectApp">
                                         <div class="text-icon font-weight-black">Phone</div>
                                         <v-icon x-large>icon-phone</v-icon>
                                     </div>
-                                    <div class="phone-icon blue lighten-2" id="app-messaging" @click="selectApp">
+                                    <div class="phone-icon blue lighten-2" id="app-messaging" v-on:click.native="selectApp">
                                         <div class="text-icon font-weight-black">Messages</div>
                                         <v-icon x-large>icon-message</v-icon>
                                     </div>
-                                    <div class="phone-icon orange" id="app-vehicles" @click="selectApp">
+                                    <div class="phone-icon orange" id="app-vehicles" v-on:click.native="selectApp">
                                         <div class="text-icon font-weight-black">Vehicles</div>
                                         <v-icon x-large>icon-key</v-icon>
                                     </div>
-                                    <div class="phone-icon blue-grey darken-1" id="app-bank" @click="selectApp">
+                                    <div class="phone-icon blue-grey darken-1" id="app-bank" v-on:click.native="selectApp">
                                         <div class="text-icon font-weight-black">Bank</div>
                                         <v-icon x-large>icon-bank</v-icon>
                                     </div>
-                                    <div class="phone-icon orange darken-4" id="app-dealership" @click="selectApp">
+                                    <div class="phone-icon orange darken-4" id="app-dealership" v-on:click.native="selectApp">
                                         <div class="text-icon font-weight-black">Dealership</div>
                                         <v-icon x-large>icon-automobile</v-icon>
                                     </div>
@@ -176,10 +176,10 @@ const phone = Vue.component('phone', {
                                 <div class="phone-dots">
                                     <div class="phone-dot" v-for="(value, index) in maxPages" :key="index">
                                         <div v-if="page === index">
-                                            <v-icon @click="navigatePage(index)" x-small>icon-circle1</v-icon>
+                                            <v-icon v-on:click.native="navigatePage(index)" x-small>icon-circle1</v-icon>
                                         </div>
                                         <div class="inactive" v-else>
-                                            <v-icon @click="navigatePage(index)" x-small>icon-circle</v-icon>
+                                            <v-icon v-on:click.native="navigatePage(index)" x-small>icon-circle</v-icon>
                                         </div>
                                     </div>
                                 </div>
@@ -189,10 +189,10 @@ const phone = Vue.component('phone', {
                         </template>
                     </div>
                     <div class="bottom-bar">
-                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
+                        <v-btn class="flex-grow-1 clickable" v-on:click.native="pageComponent = null">
                             <v-icon small>icon-chevron-left</v-icon>
                         </v-btn>
-                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
+                        <v-btn class="flex-grow-1 clickable" v-on:click.native="pageComponent = null; page = 0;">
                             <v-icon x-small>icon-square-o</v-icon>
                         </v-btn>
                         <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">

@@ -81,7 +81,7 @@ const appBank = Vue.component('app-bank', {
                                 <v-card-subtitle class="font-weight-black"> Bank Balance </v-card-subtitle>
                                 <v-card-actions>
                                     <v-btn
-                                        @click="showBankTransfer = true; showCashTransfer = false;"
+                                        v-on:click.native="showBankTransfer = true; showCashTransfer = false;"
                                         class="font-weight-black flex-grow-1 light-blue--text text--lighten-2"
                                         outlined
                                     >
@@ -117,7 +117,7 @@ const appBank = Vue.component('app-bank', {
                                 </v-form>
                                 <v-card-actions>
                                     <v-btn
-                                        @click="showBankTransfer = false"
+                                        v-on:click.native="showBankTransfer = false"
                                         class="font-weight-black flex-grow-1 orange--text text--lighten-2"
                                         outlined
                                     >
@@ -127,7 +127,7 @@ const appBank = Vue.component('app-bank', {
                                         class="font-weight-black flex-grow-1 green--text text--lighten-2"
                                         outlined
                                         v-if="validateForm()"
-                                        @click="transfer"
+                                        v-on:click.native="transfer"
                                     >
                                         Accept
                                     </v-btn>
@@ -142,7 +142,7 @@ const appBank = Vue.component('app-bank', {
                                 <v-card-subtitle class="font-weight-black"> Cash Balance </v-card-subtitle>
                                 <v-card-actions>
                                     <v-btn
-                                        @click="showCashTransfer = true; showBankTransfer = false;"
+                                        v-on:click.native="showCashTransfer = true; showBankTransfer = false;"
                                         class="font-weight-black flex-grow-1 light-blue--text text--lighten-2"
                                         outlined
                                     >
@@ -178,7 +178,7 @@ const appBank = Vue.component('app-bank', {
                                 </v-form>
                                 <v-card-actions>
                                     <v-btn
-                                        @click="showCashTransfer = false"
+                                        v-on:click.native="showCashTransfer = false"
                                         class="font-weight-black flex-grow-1 orange--text text--lighten-2"
                                         outlined
                                     >
@@ -188,7 +188,7 @@ const appBank = Vue.component('app-bank', {
                                         class="font-weight-black flex-grow-1 green--text text--lighten-2"
                                         outlined
                                         v-if="validateForm()"
-                                        @click="transfer"
+                                        v-on:click.native="transfer"
                                     >
                                         Accept
                                     </v-btn>

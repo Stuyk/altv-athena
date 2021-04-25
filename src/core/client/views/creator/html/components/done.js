@@ -46,7 +46,7 @@ Vue.component('tab-done', {
                 <v-tooltip bottom nudge-bottom="8px" color="error lighten-2" v-if="totalcharacters >= 1">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                            @click="discardCharacter"
+                            v-on:click.native="discardCharacter"
                             class="error--text flex-grow-1 mr-3"
                             outlined
                             text
@@ -61,7 +61,7 @@ Vue.component('tab-done', {
                 <v-tooltip bottom nudge-bottom="8px" color="green lighten-2">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                            @click="saveCharacter"
+                            v-on:click.native="saveCharacter"
                             class="green--text text--lighten-2 flex-grow-1"
                             outlined
                             text

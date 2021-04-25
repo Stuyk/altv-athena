@@ -13,13 +13,13 @@
                 <div class="center">
                     <div class="panel pa-3 grey darken-4 transparent elevation-6 rounded">
                         <div class="titleWrapper mb-3">
-                            <v-btn class="orange--text" outlined text small @click="decrementIndex">
+                            <v-btn class="orange--text" outlined text small v-on:click.native="decrementIndex">
                                 <v-icon small>icon-chevron-left</v-icon>
                             </v-btn>
                             <div class="subtitle-2">
                                 {{ components[componentIndex].name }}
                             </div>
-                            <v-btn class="orange--text" outlined text small @click="incrementIndex">
+                            <v-btn class="orange--text" outlined text small v-on:click.native="incrementIndex">
                                 <v-icon small>icon-chevron-right</v-icon>
                             </v-btn>
                         </div>
@@ -30,11 +30,11 @@
                                     <div class="caption flex-grow-1">
                                         Drawable
                                     </div>
-                                    <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(0, 'drawables')">
+                                    <v-btn class="light-blue--text mr-3" outlined text small v-on:click.native="decrementComponent(0, 'drawables')">
                                         <v-icon small>icon-chevron-left</v-icon>
                                     </v-btn>
                                     <v-chip class="overline white--text mr-3 center" style="max-width: 100px; min-width: 100px;" outlined label>{{ components[componentIndex].drawables[0] }}/{{ components[componentIndex].maxDrawables[0] }}</v-chip>
-                                    <v-btn class="light-blue--text" outlined text small @click="incrementComponent(0, 'drawables')">
+                                    <v-btn class="light-blue--text" outlined text small v-on:click.native="incrementComponent(0, 'drawables')">
                                         <v-icon small>icon-chevron-right</v-icon>
                                     </v-btn>
                                 </div>
@@ -42,11 +42,11 @@
                                     <div class="caption flex-grow-1 pr-6 pl-6">
                                         Texture
                                     </div>
-                                    <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(0, 'textures')">
+                                    <v-btn class="light-blue--text mr-3" outlined text small v-on:click.native="decrementComponent(0, 'textures')">
                                         <v-icon small>icon-chevron-left</v-icon>
                                     </v-btn>
                                     <v-chip class="overline white--text mr-3 flex-grow-1 center" style="max-width: 100px; min-width: 100px;" outlined label>{{ components[componentIndex].textures[0] }}/{{ components[componentIndex].maxTextures[0] }}</v-chip>
-                                    <v-btn class="light-blue--text" outlined text small @click="incrementComponent(0, 'textures')">
+                                    <v-btn class="light-blue--text" outlined text small v-on:click.native="incrementComponent(0, 'textures')">
                                         <v-icon small>icon-chevron-right</v-icon>
                                     </v-btn>
                                 </div>
@@ -60,11 +60,11 @@
                                         <div class="caption flex-grow-1 mr-3">
                                             Drawable
                                         </div>
-                                        <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(index, 'drawables')">
+                                        <v-btn class="light-blue--text mr-3" outlined text small v-on:click.native="decrementComponent(index, 'drawables')">
                                             <v-icon small>icon-chevron-left</v-icon>
                                         </v-btn>
                                         <v-chip class="light-white--text mr-3 flex-grow-1 center" style="max-width: 100px; min-width: 100px;" label outlined>{{ components[componentIndex].drawables[index] }}/{{ components[componentIndex].maxDrawables[index] }}</v-chip>
-                                        <v-btn class="light-blue--text" outlined text small @click="incrementComponent(index, 'drawables')">
+                                        <v-btn class="light-blue--text" outlined text small v-on:click.native="incrementComponent(index, 'drawables')">
                                             <v-icon small>icon-chevron-right</v-icon>
                                         </v-btn>
                                     </div>
@@ -72,11 +72,11 @@
                                         <div class="caption flex-grow-1 mr-3">
                                             Texture
                                         </div>
-                                        <v-btn class="light-blue--text mr-3" outlined text small @click="decrementComponent(index, 'textures')">
+                                        <v-btn class="light-blue--text mr-3" outlined text small v-on:click.native="decrementComponent(index, 'textures')">
                                             <v-icon small>icon-chevron-left</v-icon>
                                         </v-btn>
                                         <v-chip class="white--text mr-3 center" style="max-width: 100px; min-width: 100px;" label outlined>{{ components[componentIndex].textures[index] }}/{{ components[componentIndex].maxTextures[index] }}</v-chip>
-                                        <v-btn class="light-blue--text" outlined text small @click="incrementComponent(index, 'textures')">
+                                        <v-btn class="light-blue--text" outlined text small v-on:click.native="incrementComponent(index, 'textures')">
                                             <v-icon small>icon-chevron-right</v-icon>
                                         </v-btn>
                                     </div>
@@ -123,11 +123,11 @@
                                 <v-divider></v-divider>
                             </div>
                             <div class="group">
-                                <v-btn class="red--text text--lighten-1 flex-grow-1" outlined text @click="exit">
+                                <v-btn class="red--text text--lighten-1 flex-grow-1" outlined text v-on:click.native="exit">
                                     <v-icon small>icon-exit</v-icon>&nbsp;&nbsp;Exit
                                 </v-btn>
                                 <template v-if="allPassing">
-                                    <v-btn class="light-green--text flex-grow-1 ml-3" outlined text @click="purchaseComponent">
+                                    <v-btn class="light-green--text flex-grow-1 ml-3" outlined text v-on:click.native="purchaseComponent">
                                         <v-icon small>icon-checkmark</v-icon>&nbsp;&nbsp;Buy
                                     </v-btn>
                                 </template>

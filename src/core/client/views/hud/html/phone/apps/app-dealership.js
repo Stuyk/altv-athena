@@ -18,7 +18,7 @@ const VehicleImagePreview = Vue.component('vehicle-image-preview', {
                     :src="getVehicleImage(vehicle.name)"
                     class="ma-1 rounded-lg elevation-6 preview-img"
                     :class="getVehicleClasses(vehicle.price)"
-                    @click="select(vehicle)"
+                    v-on:click.native="select(vehicle)"
                 >
 
                 </img>
@@ -269,7 +269,7 @@ const appDealership = Vue.component('app-dealership', {
                         </template>
                     </template>
                     <template v-else>
-                        <v-btn class="grey darken-4 ma-1 rounded-lg grey--text text--lighten-1 overline flex-grow-1" outlined @click="back">
+                        <v-btn class="grey darken-4 ma-1 rounded-lg grey--text text--lighten-1 overline flex-grow-1" outlined v-on:click.native="back">
                             <v-icon>icon-chevron-left</v-icon> Back
                         </v-btn>
                         <v-card class="flex-grow-1 ma-1 rounded-lg">
@@ -285,7 +285,7 @@ const appDealership = Vue.component('app-dealership', {
                                 hide-canvas
                             ></v-color-picker>
                             <v-card-actions>
-                                <v-btn class="green--text text--lighten-1 overline flex-grow-1" @click="purchase(vehicle.name)" outlined>Purchase</v-btn>
+                                <v-btn class="green--text text--lighten-1 overline flex-grow-1" v-on:click.native="purchase(vehicle.name)" outlined>Purchase</v-btn>
                             </v-card-actions>
                         </v-card>
                     </template>

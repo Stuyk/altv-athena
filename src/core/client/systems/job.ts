@@ -46,6 +46,7 @@ class ObjectiveController {
             ObjectiveController.blip.color = data.blip.color;
             ObjectiveController.blip.shortRange = data.blip.shortRange;
             ObjectiveController.blip.name = data.blip.text;
+            ObjectiveController.blip.route = true;
         }
 
         BaseHUD.setHudStatus(HudEventNames.Objective, data.description);

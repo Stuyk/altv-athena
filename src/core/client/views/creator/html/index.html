@@ -16,7 +16,7 @@
                 <div class="center">
                     <div class="panel pa-3 grey darken-4 transparent elevation-6 rounded">
                         <div class="titleWrapper mb-3" style="min-height: 40px">
-                            <v-btn class="orange--text" outlined text small @click="decrementIndex">
+                            <v-btn class="orange--text" outlined text small v-on:click.native="decrementIndex">
                                 <v-icon small>icon-chevron-left</v-icon>
                             </v-btn>
                             <div class="subtitle-2">{{ navOptionsTitles[selection] }}</div>
@@ -26,7 +26,7 @@
                                     outlined
                                     text
                                     small
-                                    @click="incrementIndex"
+                                    v-on:click.native="incrementIndex"
                                     v-if="validInfoData"
                                 >
                                     <v-icon small>icon-chevron-right</v-icon>
@@ -36,7 +36,7 @@
                                 </v-btn>
                             </template>
                             <template v-else>
-                                <v-btn class="orange--text" outlined text small @click="incrementIndex">
+                                <v-btn class="orange--text" outlined text small v-on:click.native="incrementIndex">
                                     <v-icon small>icon-chevron-right</v-icon>
                                 </v-btn>
                             </template>
