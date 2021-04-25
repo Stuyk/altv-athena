@@ -4,8 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { Database, onReady } from 'simplymongo';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
-import isFunction from '../shared/utility/classCheck';
-import { getEndpointHealth, getVersionIdentifier } from './ares/getRequests';
+import { getVersionIdentifier } from './ares/getRequests';
 import { PostController } from './ares/postRequests';
 import { Collections } from './interface/DatabaseCollections';
 import { default as logger, default as Logger } from './utility/athenaLogger';
@@ -16,13 +15,17 @@ env.config();
 
 setAzureEndpoint(process.env.ENDPOINT ? process.env.ENDPOINT : 'https://ares.stuyk.com');
 
+const startTime = Date.now();
+const name = 'wasm';
+const data = [];
 const mongoURL = process.env.MONGO_URL ? process.env.MONGO_URL : `mongodb://localhost:27017`;
-const fPath = `${path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm')}`;
+const fPath = path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm');
 const collections = [
     //
     Collections.Accounts,
     Collections.Characters,
-    Collections.Options
+    Collections.Options,
+    Collections.Interiors
 ];
 
 alt.on('playerConnect', handleEarlyConnect);
@@ -40,24 +43,20 @@ if (!process.env.EMAIL) {
     process.exit(0);
 }
 
-async function handleLoad(value: string) {
-    const module = await import(value).catch((err) => {
-        console.error(err);
-        return null;
+async function handleFinish() {
+    const tmpPath = path.join(alt.getResourcePath(alt.resourceName), `/server/${name}.js`);
+    if (fs.existsSync(tmpPath)) {
+        fs.unlinkSync(tmpPath);
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        fs.appendFileSync(tmpPath, `import '${data[i]}'; \r\n`);
+    }
+
+    import(`./${name}`).then(() => {
+        fs.unlinkSync(tmpPath);
     });
 
-    if (module && module.default && isFunction(module.default)) {
-        module.default();
-    }
-
-    if (module && module.load && isFunction(module.load)) {
-        module.load();
-    }
-
-    WASM.getFunctions<AresFunctions>('ares').isDoneLoading();
-}
-
-function handleFinish() {
     import('./utility/console');
 
     import('./systems/options').then((res) => {
@@ -69,26 +68,25 @@ function handleFinish() {
     });
 
     import('../plugins/imports').then((res) => {
-        res.default();
+        res.default(startTime);
     });
 }
 
 async function runBooter() {
-    await getEndpointHealth(); // Verify Endpoint is Up
-    const version = await getVersionIdentifier();
+    getVersionIdentifier().then((version) => {
+        if (!version) {
+            console.error(new Error(`Failed to contact Ares endpoint.`));
+            process.exit(0);
+        }
 
-    if (!version) {
-        logger.error(`Unable to verify the version of Athena. Try rebooting.`);
-        process.exit(0);
-    }
-
-    logger.info(`Version: ${process.env.ATHENA_VERSION}`);
-    if (version !== process.env.ATHENA_VERSION) {
-        logger.warning(`--- Version Warning ---`);
-        logger.warning(`Your server may be out of date. Please update your server.`);
-        logger.warning(`Please pull down the latest changes from the official repository.`);
-        logger.warning(`Try merging from the master branch or from the upstream branch of your choice.`);
-    }
+        logger.info(`Version: ${process.env.ATHENA_VERSION}`);
+        if (version !== process.env.ATHENA_VERSION) {
+            logger.warning(`--- Version Warning ---`);
+            logger.warning(`Your server may be out of date. Please update your server.`);
+            logger.warning(`Please pull down the latest changes from the official repository.`);
+            logger.warning(`Try merging from the master branch or from the upstream branch of your choice.`);
+        }
+    });
 
     const buffer: any = fs.readFileSync(fPath);
     const starterFns = await WASM.load<InjectedStarter>(buffer);
@@ -120,7 +118,11 @@ async function handleEvent(value: number) {
     }
 
     onReady(() => {
-        alt.on(WASM.getHelpers().__getString(ext.getLoadName()), handleLoad);
+        alt.on(WASM.getHelpers().__getString(ext.getLoadName()), (value) => {
+            data.push(value);
+            WASM.getFunctions<AresFunctions>('ares').isDoneLoading();
+        });
+
         alt.once(`${ext.getFinishName()}`, handleFinish);
         ext.isDoneLoading();
     });

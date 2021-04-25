@@ -6,15 +6,16 @@
     "type": "module",
     "scripts": {
         "build": "node ./utility/copy-helper/copy-helper.mjs",
-        "build-watching": "node ./utility/copy-helper/copy-helper.mjs -- WATCHING",
+        "core-reload": "node ./utility/manager/manager.mjs",
         "clean": "node ./utility/cleaner/cleaner.mjs",
         "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
         "windows": "npm run build && altv-server.exe",
         "linux": "npm run build && ./start.sh",
+        "build-watching": "node ./utility/copy-helper/copy-helper.mjs -- WATCHING",
         "watch-windows": "tsc-watch --onSuccess \"npm run watch-handle-windows\"",
         "watch-linux": "tsc-watch --onSuccess \"npm run watch-handle-linux\"",
-        "watch-handle-windows": "npm run build-watching && altv-server.exe",
-        "watch-handle-linux": "npm run build-watching && ./start.sh"
+        "watch-handle-windows": "npm run build-watching && npm run core-reload",
+        "watch-handle-linux": "npm run build-watching && npm run core-reload"
     },
     "devDependencies": {
         "@altv/types-client": "^1.5.5",
@@ -44,6 +45,7 @@
         "discord.js": "^12.5.1",
         "dotenv": "^8.2.0",
         "elliptic": "^6.5.4",
+        "express": "^4.17.1",
         "simplymongo": "^2.1.1",
         "sjcl": "^1.0.8"
     },

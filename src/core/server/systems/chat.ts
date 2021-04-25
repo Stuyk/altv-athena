@@ -8,8 +8,12 @@ import { emitAll } from '../utility/emitHelper';
 import { Permissions } from '../../shared/flags/permissions';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
+import Logger from '../utility/athenaLogger';
 
 const maxMessageLength: number = 128;
+const printCommands = false;
+let commandCount = 0;
+let commandInterval;
 
 export default class ChatController {
     static commands: { [key: string]: Command } = {};
@@ -25,12 +29,25 @@ export default class ChatController {
      * @memberof ChatController
      */
     static addCommand(name: string, description: string, permissions: Permissions, callback: Function): void {
+        if (commandInterval) {
+            alt.clearTimeout(commandInterval);
+        }
+
+        commandInterval = alt.setTimeout(() => {
+            Logger.info(`Total Commands: ${commandCount}`);
+        }, 1500);
+
         if (ChatController.commands[name]) {
             alt.logError(`[Athena] Command: ${name} was already registered.`);
             return;
         }
 
-        alt.log(`[Athena] Registered Command ${name}`);
+        commandCount += 1;
+
+        if (printCommands) {
+            alt.log(`[Athena] Registered Command ${name}`);
+        }
+
         ChatController.commands[name] = {
             name,
             description,

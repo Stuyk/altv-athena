@@ -3,7 +3,7 @@ import logger from '../server/utility/athenaLogger';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 
 const filePaths = [
-    // GAMEMODE IMPORTS
+    // GAMEMODE IMPORTS -- Remove what you don't want.
     './teleportEffect/teleporter',
     './heist/heist',
     './deathLog/deathLog',
@@ -13,7 +13,15 @@ const filePaths = [
     // YOUR IMPORTS -- BELOW HERE
 ];
 
-export default async function loadImports() {
+/**
+ * But Stuyk, why don't you just make a recursive file reader?
+ * Because load order is important.
+ * If you have a plugin that needs to be loaded before any other plugin...
+ * then you need a way to specify the priority of that file.
+ * That's why it's built in this way.
+ * @param startTime
+ */
+export default async function loadImports(startTime: number) {
     logger.info(`Loading extras folder...`);
     let extraResourcesCount = 0;
     for (let i = 0; i < filePaths.length; i++) {
@@ -36,5 +44,6 @@ export default async function loadImports() {
     }
 
     logger.info(`Extra Resources Loaded: ${extraResourcesCount}`);
+    logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
 }

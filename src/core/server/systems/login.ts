@@ -33,6 +33,8 @@ export class LoginController {
             }
         }
 
+        player.setMeta('Athena:Discord:Info', data);
+
         if (data.username) {
             alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
         }

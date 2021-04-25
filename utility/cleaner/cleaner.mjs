@@ -1,8 +1,6 @@
 import rimraf from 'rimraf';
 import path from 'path';
 import fs from 'fs-extra';
-import glob from 'glob';
-import { exec } from 'promisify-child-process';
 
 const MainPath = process.cwd();
 

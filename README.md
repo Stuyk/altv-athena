@@ -6,11 +6,19 @@ description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
 
 ## Summary
 
-This project solely exists as a new standard for GTA:V roleplay servers on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
+This project solely exists as a new standard for GTA 5 roleplay scripts on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script for GTA 5 has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
+
+You will have to do some general script writing and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
+
+This is a framework and not a out-of-the-box full-featured script. This framework aims to provide the bare minimum necessary to help you get your server running at a much faster rate.
+
+## Where to Purchase?
 
 Configuration files may be purchased from [Gumroad](https://gumroad.com/products/SKpPN).
 
-## Demo Server
+_No there is not a lifetime package for Athena._
+
+## Demo Server?
 
 We have a small demo server available for you to test the framework with Administrative capabilities. You can check that out using the alt:V client at [https://altstats.net/server/504](https://altstats.net/server/504)
 
@@ -138,6 +146,9 @@ We have a small demo server available for you to test the framework with Adminis
 -   Phone System
     -   A built in phone.
     -   Phone can handle custom applications.
+    -   Dealership App in Phone
+    -   Bank App in Phone
+    -   Vehicle Summoner in Phone
 -   Custom Job Framework
     -   Easy to Use Job Language / Creation
     -   Play Animations
