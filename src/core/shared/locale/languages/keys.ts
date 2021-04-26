@@ -100,5 +100,9 @@ export const LOCALE_KEYS = {
     WEAPON_NO_HASH: 'weapon-no-hash',
     // Vehicle
     VEHICLE_NO_FUEL: `vehicle-no-fuel`,
-    VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`
+    VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`,
+    // =====================
+    // WebView Locales
+    // =====================
+    WEBVIEW_ATM: 'webview-atm'
 };

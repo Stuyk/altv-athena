@@ -65,6 +65,9 @@ const app = new Vue({
         setProcessing() {
             this.processing = true;
             this.update += 1;
+        },
+        setLocales(localeObject) {
+            this.locales = localeObject;
         }
     },
     computed: {
@@ -80,6 +83,7 @@ const app = new Vue({
 
         if ('alt' in window) {
             alt.on('atm:Update', this.updateBalances);
+            alt.on('atm:SetLocale', this.setLocales);
             alt.emit('atm:Ready');
             alt.emit('ready');
         } else {

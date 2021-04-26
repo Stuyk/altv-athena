@@ -14,6 +14,8 @@ description: List of all the changes and current versions.
 + Added Refresh / Auto Join for Scripting
 + Added Blip Route for Vehicles in Job Framework
 + Added Stack Inventory Function
++ Updated ATM Interface
++ Added Locale Support for ATM WebView
 ```
 
 ## 1.8.1 - April 8-18, 2021

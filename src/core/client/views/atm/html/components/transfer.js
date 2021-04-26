@@ -54,7 +54,7 @@ const TransferComponent = Vue.component('transfer', {
         }
     },
     mounted() {
-        this.withdrawRules = [
+        this.wireTransferRules = [
             (v) => !!v || this.locales.FIELD_IS_REQUIRED,
             (v) => v > 0 || this.locales.GREATER_THAN_ZERO,
             (v) => v <= this.bank || this.locales.LESS_THAN_BANK
@@ -73,7 +73,7 @@ const TransferComponent = Vue.component('transfer', {
                 </div>
 
                 <div class="split" v-if="!processing">
-                    <v-text-field :rules="withdrawRules" :placeholder="locales.LABEL_BANK_TO_TRANSFER" class="mb-4 flex-grow-1" type="number" v-model="wireTransferAmount" />
+                    <v-text-field :rules="wireTransferRules" :placeholder="locales.LABEL_BANK_TO_TRANSFER" class="mb-4 flex-grow-1" type="number" v-model="wireTransferAmount" />
                     <button @click="setMax" class="ml-4">max</button>
                 </div>
                 

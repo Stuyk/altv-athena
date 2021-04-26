@@ -54,4 +54,20 @@ export class LocaleController {
 
         return message;
     }
+
+    /**
+     * Returns an object of strings with labels for WebViews.
+     * @static
+     * @param {string} key
+     * @return {*}  {Object}
+     * @memberof LocaleController
+     */
+    static getWebviewLocale(key: string): Object {
+        if (!locales[defaultLanguage][key]) {
+            console.log(`Translation for ${key} was not found`);
+            return {};
+        }
+
+        return locales[defaultLanguage][key];
+    }
 }
