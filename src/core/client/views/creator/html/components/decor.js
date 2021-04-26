@@ -49,27 +49,27 @@ Vue.component('tab-decor', {
                     </div>
                 </div>
                 <div class="group">
-                    <v-btn
-                        v-on:click.native="decrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
+                    <button
+                        @click="decrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
+                    </button>
                     <span class="flex-grow-1 text-md-body-1 text-center pt-1" small v-if="data.colorOverlays[i]">
                         {{ data.colorOverlays[i].value !== null ? data.colorOverlays[i].value : 0 }}
                     </span>
-                    <v-btn
-                        v-on:click.native="incrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
+                    <button
+                        @click="incrementParameter(i, 'value', colorOverlays[i].min, colorOverlays[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
+                    </button>
                 </div>
                 <div class="group">
                     <div class="overline pa-0 ma-0 grey--text">
@@ -102,27 +102,27 @@ Vue.component('tab-decor', {
                     </div>
                 </div>
                 <div class="group">
-                    <v-btn
-                        v-on:click.native="decrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                    <button
+                        @click="decrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
+                    </button>
                     <span class="flex-grow-1 text-md-body-1 text-center pt-1" small v-if="data.colorOverlays[i]">
                         {{ data.colorOverlays[i].color1 !== null ? data.colorOverlays[i].color1 : 0 }}
                     </span>
-                    <v-btn
-                        v-on:click.native="incrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                    <button
+                        @click="incrementParameter(i, 'color1', colorOverlays[i].min, getOverlayColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
+                    </button>
                 </div>
                 <template v-if="colorOverlays[i].color2 !== undefined">
                     <div class="group">
@@ -131,27 +131,27 @@ Vue.component('tab-decor', {
                         </div>
                     </div>
                     <div class="group">
-                        <v-btn
-                            v-on:click.native="decrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                        <button
+                            @click="decrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
                             class="light-blue--text"
                             outlined
                             small
                             text
                         >
                             <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
+                        </button>
                         <span class="flex-grow-1 text-md-body-1 text-center pt-1" small v-if="data.colorOverlays[i]">
                             {{ data.colorOverlays[i].color2 !== null ? data.colorOverlays[i].color2 : 0 }}
                         </span>
-                        <v-btn
-                            v-on:click.native="incrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
+                        <button
+                            @click="incrementParameter(i, 'color2', colorOverlays[i].min, getOverlayColorCount(), 1)"
                             class="light-blue--text"
                             outlined
                             small
                             text
                         >
                             <v-icon small>icon-chevron-right</v-icon>
-                        </v-btn>
+                        </button>
                     </div>
                 </template>
                 <div class="group pt-3 pb-3">

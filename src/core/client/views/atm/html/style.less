@@ -42,15 +42,124 @@ body {
 
 .atm {
     position: absolute;
-    left: 2vw;
+    display: flex;
+    flex-direction: column;
     animation: fadein 0.2s;
     user-select: none;
-    min-width: 550px;
-    max-width: 550px;
-    transform: perspective(1000px) rotateY(5deg);
-    transform-style: preserve-3d;
+    min-width: 400px;
+    width: 100%;
+    max-width: 35vw;
     backface-visibility: hidden;
-    opacity: 0.95;
+
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .split {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .center-header {
+        width: 100%;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .balancer {
+        flex-grow: 1;
+        width: 100% !important;
+        background-color: #388e3c !important;
+        text-align: center;
+        position: relative;
+        overflow: hidden !important;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        box-sizing: border-box;
+        border: 2px solid #2c2c2c;
+
+        .bar {
+            position: absolute;
+            height: 50px !important;
+            top: 0px;
+            right: -5px;
+            transform: skew(-15deg);
+        }
+
+        .text {
+            position: relative;
+            z-index: 99;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .button-group {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    button {
+        padding-left: 5px;
+        font-size: 16px;
+        padding: 1vh 0vw;
+        font-variant: small-caps;
+        transition: 0.1s;
+        opacity: 0.75;
+        overflow: hidden;
+
+        &:hover {
+            // background: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        &:active {
+            color: white !important;
+            transform: unset !important;
+            background: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .disabled-button {
+        opacity: 0.75 !important;
+
+        &:hover {
+            opacity: 0.75 !important;
+        }
+
+        &:active {
+            color: unset !important;
+            transform: unset !important;
+            background: unset !important;
+        }
+    }
+
+    .active {
+        background: rgba(0, 0, 0, 0.3) !important;
+        opacity: 1 !important;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .outline-round {
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 }
 
 .atm-loading {

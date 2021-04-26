@@ -13,6 +13,7 @@ description: List of all the changes and current versions.
 + Increased Build Times
 + Added Refresh / Auto Join for Scripting
 + Added Blip Route for Vehicles in Job Framework
++ Added Stack Inventory Function
 ```
 
 ## 1.8.1 - April 8-18, 2021

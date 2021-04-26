@@ -18,12 +18,12 @@
                     <v-card-text>
                         <p v-html="getSummary"></p>
                         <v-card-actions>
-                            <v-btn v-on:click.native="exit" class="error--text text--lighten-2 flex-grow-1 block" color="error lighten-2" outlined text>
+                            <button @click="exit" class="error--text text--lighten-2 flex-grow-1 block" color="error lighten-2" outlined text>
                                 <v-icon small>icon-exit</v-icon>
-                            </v-btn>
-                            <v-btn v-on:click.native="select" class="green--text text--lighten-2 flex-grow-1 block" color="green lighten-2" outlined text>
+                            </button>
+                            <button @click="select" class="green--text text--lighten-2 flex-grow-1 block" color="green lighten-2" outlined text>
                                 <v-icon small>icon-check</v-icon>
-                            </v-btn>
+                            </button>
                         </v-card-actions>
                     </v-card-text>
                 </v-card>

@@ -16,29 +16,29 @@
                 <div class="center">
                     <div class="panel pa-3 grey darken-4 transparent elevation-6 rounded">
                         <div class="titleWrapper mb-3" style="min-height: 40px">
-                            <v-btn class="orange--text" outlined text small v-on:click.native="decrementIndex">
+                            <button class="orange--text" outlined text small @click="decrementIndex">
                                 <v-icon small>icon-chevron-left</v-icon>
-                            </v-btn>
+                            </button>
                             <div class="subtitle-2">{{ navOptionsTitles[selection] }}</div>
                             <template v-if="selection === 5">
-                                <v-btn
+                                <button
                                     class="orange--text"
                                     outlined
                                     text
                                     small
-                                    v-on:click.native="incrementIndex"
+                                    @click="incrementIndex"
                                     v-if="validInfoData"
                                 >
                                     <v-icon small>icon-chevron-right</v-icon>
-                                </v-btn>
-                                <v-btn class="grey--text" disabled outlined text small v-if="!validInfoData">
+                                </button>
+                                <button class="grey--text" disabled outlined text small v-if="!validInfoData">
                                     <v-icon small>icon-chevron-right</v-icon>
-                                </v-btn>
+                                </button>
                             </template>
                             <template v-else>
-                                <v-btn class="orange--text" outlined text small v-on:click.native="incrementIndex">
+                                <button class="orange--text" outlined text small @click="incrementIndex">
                                     <v-icon small>icon-chevron-right</v-icon>
-                                </v-btn>
+                                </button>
                             </template>
                         </div>
                         <v-divider></v-divider>

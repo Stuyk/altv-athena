@@ -74,12 +74,12 @@ const appVehicles = Vue.component('app-vehicles', {
                             </v-simple-table>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn v-on:click.native="locate(index)" class="font-weight-black flex-grow-1 pink--text text--lighten-2" outlined>
+                            <button @click="locate(index)" class="font-weight-black flex-grow-1 pink--text text--lighten-2" outlined>
                                 Locate
-                            </v-btn>
-                            <v-btn v-on:click.native="spawn(index)" class="font-weight-black flex-grow-1 green--text text--lighten-2" outlined>
+                            </button>
+                            <button @click="spawn(index)" class="font-weight-black flex-grow-1 green--text text--lighten-2" outlined>
                                 Spawn
-                            </v-btn>
+                            </button>
                         </v-card-actions>
                     </v-card>
                 </div>

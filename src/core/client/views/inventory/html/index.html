@@ -36,8 +36,8 @@
                             </div>
                             <span class="text-subtitle-2">Drag to split into another stack.</span>
                             <div class="split-horizontal mt-5">
-                                <v-btn class="red lighten-1" v-on:click.native="splitStack(null)">Cancel</v-btn>
-                                <v-btn class="green darken-3" v-on:click.native="splitStack(splitAmount)">Split</v-btn>
+                                <button class="red lighten-1" @click="splitStack(null)">Cancel</button>
+                                <button class="green darken-3" @click="splitStack(splitAmount)">Split</button>
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="navigation">
-                                    <div class="tab" v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" v-on:click.native="setIndex(index - 1)">
+                                    <div class="tab" v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" @click="setIndex(index - 1)">
                                         <template v-if="isActiveTab(index -1)">
                                             <v-icon x-small>icon-circle1</v-icon>
                                         </template>

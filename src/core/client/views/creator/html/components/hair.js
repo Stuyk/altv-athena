@@ -60,15 +60,15 @@ Vue.component('tab-hair', {
                 </div>
             </div>
             <div class="group">
-                <v-btn v-on:click.native="decrementParameter('hair', 0, getHairCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="decrementParameter('hair', 0, getHairCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
-                </v-btn>
+                </button>
                 <span class="flex-grow-1 subtitle-2 text-center" small>
                     {{ data.sex === 0 ? femaleHair[data.hair] : maleHair[data.hair] }}
                 </span>
-                <v-btn v-on:click.native="incrementParameter('hair', 0, getHairCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="incrementParameter('hair', 0, getHairCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
-                </v-btn>
+                </button>
             </div>
             <div class="group">
                 <div class="overline pa-0 ma-0 grey--text">
@@ -76,15 +76,15 @@ Vue.component('tab-hair', {
                 </div>
             </div>
             <div class="group">
-                <v-btn v-on:click.native="decrementParameter('hairColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="decrementParameter('hairColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
-                </v-btn>
+                </button>
                 <span class="flex-grow-1 overline text-center pt-1" small>
                     {{ hairColors[data.hairColor1] }}
                 </span>
-                <v-btn v-on:click.native="incrementParameter('hairColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="incrementParameter('hairColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
-                </v-btn>
+                </button>
             </div>
             <div class="group">
                 <div class="overline pa-0 ma-0 grey--text">
@@ -92,15 +92,15 @@ Vue.component('tab-hair', {
                 </div>
             </div>
             <div class="group">
-                <v-btn v-on:click.native="decrementParameter('hairColor2', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="decrementParameter('hairColor2', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
-                </v-btn>
+                </button>
                 <span class="flex-grow-1 overline text-center pt-1" small>
                     {{ hairColors[data.hairColor2] }}
                 </span>
-                <v-btn v-on:click.native="incrementParameter('hairColor2', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="incrementParameter('hairColor2', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
-                </v-btn>
+                </button>
             </div>
             <div class="group pt-2">
                 <v-divider></v-divider>
@@ -111,13 +111,13 @@ Vue.component('tab-hair', {
                 </div>
             </div>
             <div class="group">
-                <v-btn v-on:click.native="decrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="decrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
-                </v-btn>
+                </button>
                 <span class="flex-grow-1 overline text-center pt-1" small> {{ eyebrowNames[data.eyebrows] }} </span>
-                <v-btn v-on:click.native="incrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="incrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
-                </v-btn>
+                </button>
             </div>
             <div class="group">
                 <div class="overline pa-0 ma-0 grey--text">
@@ -125,15 +125,15 @@ Vue.component('tab-hair', {
                 </div>
             </div>
             <div class="group">
-                <v-btn v-on:click.native="decrementParameter('eyebrowsColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="decrementParameter('eyebrowsColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-left</v-icon>
-                </v-btn>
+                </button>
                 <span class="flex-grow-1 overline text-center pt-1" small>
                     {{ hairColors[data.eyebrowsColor1] }}
                 </span>
-                <v-btn v-on:click.native="incrementParameter('eyebrowsColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
+                <button @click="incrementParameter('eyebrowsColor1', 0, getColorCount(), 1)" class="light-blue--text" outlined small text>
                     <v-icon small>icon-chevron-right</v-icon>
-                </v-btn>
+                </button>
             </div>
             <div class="group pt-2">
                 <v-divider></v-divider>
@@ -145,21 +145,21 @@ Vue.component('tab-hair', {
                     </div>
                 </div>
                 <div class="group">
-                    <v-btn v-on:click.native="decrementParameter('facialHair', 0, getFacialCount(), 1)" class="light-blue--text" outlined small text>
+                    <button @click="decrementParameter('facialHair', 0, getFacialCount(), 1)" class="light-blue--text" outlined small text>
                         <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
+                    </button>
                     <span class="flex-grow-1 overline text-center pt-1" small>
                         {{ facialHair[data.facialHair] }}
                     </span>
-                    <v-btn
-                        v-on:click.native="incrementParameter('facialHair', 0, getFacialCount(), 1)"
+                    <button
+                        @click="incrementParameter('facialHair', 0, getFacialCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
+                    </button>
                 </div>
                 <div class="group">
                     <div class="overline pa-0 ma-0 grey--text">
@@ -191,27 +191,27 @@ Vue.component('tab-hair', {
                     </div>
                 </div>
                 <div class="group">
-                    <v-btn
-                        v-on:click.native="decrementParameter('facialHairColor1', 0, getColorCount(), 1)"
+                    <button
+                        @click="decrementParameter('facialHairColor1', 0, getColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
+                    </button>
                     <span class="flex-grow-1 overline text-center pt-1" small>
                         {{ hairColors[data.facialHairColor1] }}
                     </span>
-                    <v-btn
-                        v-on:click.native="incrementParameter('facialHairColor1', 0, getColorCount(), 1)"
+                    <button
+                        @click="incrementParameter('facialHairColor1', 0, getColorCount(), 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
+                    </button>
                 </div>
                 <div class="group pt-2">
                     <v-divider></v-divider>

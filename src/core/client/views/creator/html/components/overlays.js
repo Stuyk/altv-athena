@@ -48,27 +48,27 @@ Vue.component('tab-overlays', {
                     </div>
                 </div>
                 <div class="group">
-                    <v-btn
-                        v-on:click.native="decrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
+                    <button
+                        @click="decrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
+                    </button>
                     <span class="flex-grow-1 text-md-body-1 text-center pt-1" small>
                         {{ data.opacityOverlays[i].value !== null ? data.opacityOverlays[i].value : -1 }}
                     </span>
-                    <v-btn
-                        v-on:click.native="incrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
+                    <button
+                        @click="incrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
                         class="light-blue--text"
                         outlined
                         small
                         text
                     >
                         <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
+                    </button>
                 </div>
                 <div class="group">
                     <div class="overline pa-0 ma-0 grey--text">

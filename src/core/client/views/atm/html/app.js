@@ -8,87 +8,47 @@ const app = new Vue({
         return {
             cash: 0,
             bank: 0,
-            withdrawAmount: 0,
-            depositAmount: 0,
-            type: null,
-            wireTransferAmount: 0,
-            wireTransferID: 0,
-            idRules: [(v) => !!v || 'This field is required', (v) => v >= 0 || 'ID must be positive'],
-            depositRules: [
-                (v) => !!v || 'This field is required',
-                (v) => v > 0 || 'Value must be greater than zero.',
-                (v) => v <= this.cash || 'Amount must not be greater than your cash on hand.'
-            ],
-            withdrawRules: [
-                (v) => !!v || 'This field is required',
-                (v) => v > 0 || 'Value must be greater than zero.',
-                (v) => v <= this.bank || 'Amount must not be greater than your bank account.'
-            ],
-            wireTransferRules: [
-                (v) => !!v || 'This field is required',
-                (v) => v > 0 || 'Value must be greater than zero.',
-                (v) => v < this.bank || 'Amount must not be greater than your bank account.'
-            ],
-            isValid: false,
-            processing: true
+            locales: {
+                LABEL_ATM: 'ATM',
+                LABEL_CASH: 'Cash',
+                LABEL_BANK: 'Bank',
+                LABEL_DEPOSIT: 'Deposit',
+                LABEL_WITHDRAW: 'Withdraw',
+                LABEL_TRANSFER: 'Transfer',
+                LABEL_CASH_TO_DEPOSIT: 'Cash to Deposit',
+                LABEL_CASH_TO_WITHDRAW: 'Cash to Withdraw',
+                LABEL_BANK_TO_TRANSFER: 'Bank amount to transfer',
+                LABEL_USER_ID: `User ID to transfer to`,
+                FIELD_IS_REQUIRED: `Field is required`,
+                GREATER_THAN_ZERO: `Value must be greater than zero`,
+                LESS_THAN_CASH: `Value must be less than cash`,
+                LESS_THAN_BANK: `Value must be less than bank`,
+                USER_ID_POSITIVE: `User ID must be positive`
+            },
+            components: [ DepositComponent, WithdrawComponent, TransferComponent ],
+            processing: true,
+            balancerPercentage: 50,
+            setting: 0,
+            update: 0
         };
     },
-    watch: {
-        withdrawAmount(newValue) {
-            if (newValue <= 0 || newValue > this.bank) {
-                this.isValid = false;
-                return;
-            }
-
-            this.isValid = true;
-        },
-        depositAmount(newValue) {
-            if (newValue <= 0 || newValue > this.cash) {
-                this.isValid = false;
-                return;
-            }
-
-            this.isValid = true;
-        },
-        wireTransferAmount(newValue) {
-            if (newValue <= 0 || newValue > this.bank) {
-                this.isValid = false;
-                return;
-            }
-
-            this.isValid = true;
-        }
-    },
     methods: {
-        setType(name) {
-            this.type = name;
+        selectSetting(value) {
+            this.setting = value;
         },
-        transact() {
-            if (!this.isValid) return;
-            let amount = 0;
-            switch (this.type) {
-                case 'deposit':
-                    amount = this.depositAmount;
-                    break;
-
-                case 'withdraw':
-                    amount = this.withdrawAmount;
-                    break;
-
-                case 'transfer':
-                    amount = this.wireTransferAmount;
-                    break;
+        isSetting(value) {
+            if (value === this.setting) {
+                return { 'active' : true };
             }
 
-            this.processing = true;
-
-            if ('alt' in window) {
-                alt.emit('atm:Action', this.type, amount, this.wireTransferID);
-            }
+            return {};
         },
         updateBalances(bank, cash) {
             this.bank = bank;
             this.cash = cash;
+
+            const total = this.bank + this.cash;
+            this.balancerPercentage = this.bank / total * 100;
 
             setTimeout(() => {
                 this.isValid = false;
@@ -98,10 +58,26 @@ const app = new Vue({
         exit() {
             if ('alt' in window) {
                 alt.emit('atm:Close');
+            } else {
+                console.log('Exit button go brr');
             }
+        },
+        setProcessing() {
+            this.processing = true;
+            this.update += 1;
+        }
+    },
+    computed: {
+        getBalancerBackground() {
+            return { width: `${this.balancerPercentage}%` };
+        },
+        getComponent() {
+            return this.components[this.setting];
         }
     },
     mounted() {
+        this.$on('set-processing', this.setProcessing);
+
         if ('alt' in window) {
             alt.on('atm:Update', this.updateBalances);
             alt.emit('atm:Ready');

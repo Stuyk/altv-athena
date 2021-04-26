@@ -45,8 +45,8 @@ Vue.component('tab-done', {
             <div class="group">
                 <v-tooltip bottom nudge-bottom="8px" color="error lighten-2" v-if="totalcharacters >= 1">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            v-on:click.native="discardCharacter"
+                        <button
+                            @click="discardCharacter"
                             class="error--text flex-grow-1 mr-3"
                             outlined
                             text
@@ -54,14 +54,14 @@ Vue.component('tab-done', {
                             v-on="on"
                         >
                             <v-icon small>icon-times-circle</v-icon>
-                        </v-btn>
+                        </button>
                     </template>
                     <span>Discard Character</span>
                 </v-tooltip>
                 <v-tooltip bottom nudge-bottom="8px" color="green lighten-2">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            v-on:click.native="saveCharacter"
+                        <button
+                            @click="saveCharacter"
                             class="green--text text--lighten-2 flex-grow-1"
                             outlined
                             text
@@ -69,7 +69,7 @@ Vue.component('tab-done', {
                             v-on="on"
                         >
                             <v-icon small>icon-save</v-icon>
-                        </v-btn>
+                        </button>
                     </template>
                     <span>Save Character</span>
                 </v-tooltip>
