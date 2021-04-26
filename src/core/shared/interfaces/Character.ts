@@ -17,6 +17,7 @@ export interface Character {
     food: number;
     water: number;
     isDead: boolean;
+    hours: number;
     interior: string | null;
     exterior: Partial<Vector3>;
     appearance: Partial<Appearance>;
@@ -38,5 +39,6 @@ export const CharacterDefaults: Partial<Character> = {
     isDead: false,
     health: 199,
     armour: 0,
+    hours: 0,
     vehicles: []
 };

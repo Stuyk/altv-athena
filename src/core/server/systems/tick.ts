@@ -47,6 +47,11 @@ function handlePing(player: alt.Player): void {
         playerFuncs.sync.water(player);
     }
 
+    if (!player.nextPlayTime || Date.now() > player.nextPlayTime) {
+        player.nextPlayTime = Date.now() + 60000;
+        playerFuncs.sync.playTime(player);
+    }
+
     if (player.vehicle) {
         if (!player.vehicle.nextUpdate || Date.now() > player.vehicle.nextUpdate) {
             player.vehicle.nextUpdate = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_UPDATES;

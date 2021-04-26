@@ -46,15 +46,22 @@ const app = new Vue({
     data() {
         return {
             characters: [],
-            statNames: [
-                /* Name of the stat, variable name inside character object */
-                { varName: 'Name', varRef: 'name' },
-                { varName: 'Age', varRef: 'age', suffix: ' Years Old', useInfo: true },
-                { varName: 'Gender', varRef: 'gender', useInfo: true },
-                { varName: 'Reward Points', varRef: 'rewardPoints', suffix: ' Hours' },
-                { varName: 'Cash', varRef: 'cash', prefix: '$' },
-                { varName: 'Bank', varRef: 'bank', prefix: '$' }
-            ],
+            locales: {
+                LABEL_DELETE: 'Delete',
+                LABEL_NEW: 'New',
+                LABEL_SELECT: 'Select',
+                LABEL_YES: 'Yes',
+                LABEL_NO: 'No',
+                LABEL_CONFIRM_DELETE: 'Are you sure you want to delete your character',
+                LABEL_NAME: 'Name',
+                LABEL_AGE: 'Age',
+                LABEL_GENDER: 'Gender',
+                LABEL_HOURS: 'Hours',
+                LABEL_CASH: 'Cash',
+                LABEL_BANK: 'Bank'
+
+            },
+            statNames: [],
             characterIndex: 0,
             deleteDialog: false
         };
@@ -68,6 +75,10 @@ const app = new Vue({
         pruneDecimals(value) {
             if (isNaN(value)) {
                 return value;
+            }
+
+            if (value === null || value === undefined) {
+                return 0;
             }
 
             return value.toFixed(2);
@@ -110,15 +121,23 @@ const app = new Vue({
                 alt.emit('characters:New');
             }
         },
+        showDeleteInterface() {
+            this.deleteDialog = true;
+        },
         deleteCharacter() {
             if ('alt' in window) {
                 alt.emit('characters:Delete', this.characters[this.characterIndex]._id);
             }
+        },
+        setLocales(localeObject) {
+            this.locales = localeObject;
         }
     },
     mounted() {
         if ('alt' in window) {
+            alt.on('characters:SetLocale', this.setLocales);
             alt.on('characters:Set', this.handleSet);
+            alt.emit('characters:Ready');
             alt.emit('ready');
         } else {
             this.characters = [
@@ -126,5 +145,15 @@ const app = new Vue({
                 { ...exampleCharacter, ...{ appearance: { sex: 0 }, name: 'Jobi_Jobonai' } }
             ];
         }
+
+        this.statNames = [
+            /* Name of the stat, variable name inside character object */
+            { varName: this.locales.LABEL_NAME, varRef: 'name' },
+            { varName: this.locales.LABEL_AGE, varRef: 'age', useInfo: true },
+            { varName: this.locales.LABEL_GENDER, varRef: 'gender', useInfo: true },
+            { varName: this.locales.LABEL_HOURS, varRef: 'hours'},
+            { varName: this.locales.LABEL_CASH, varRef: 'cash', prefix: '$' },
+            { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' }
+        ]
     }
 });

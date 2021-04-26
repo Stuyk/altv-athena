@@ -16,6 +16,10 @@ description: List of all the changes and current versions.
 + Added Stack Inventory Function
 + Updated ATM Interface
 + Added Locale Support for ATM WebView
++ Added Hours Play Statistic
++ Added Hours to Character Selection Screen
++ Updated Characters Interface
++ Added Locale Support for Characters WebView
 ```
 
 ## 1.8.1 - April 8-18, 2021

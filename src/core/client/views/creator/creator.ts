@@ -11,6 +11,7 @@ import {
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
 
+// const url = `http://127.0.0.1:5555/src/core/client/views/creator/html/index.html`;
 const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);

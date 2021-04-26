@@ -20,7 +20,6 @@ body {
     align-items: center;
     align-content: center;
     width: 100vw;
-    overflow: hidden;
     position: relative;
     animation: fadein 2s;
 }
@@ -32,6 +31,20 @@ body {
 .spinner {
     position: absolute;
     animation: spin 1s linear infinite;
+}
+
+.panel {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    left: 3vh;
+    top: 3vh;
+    min-width: 300px;
+    width: 100%;
+    max-width: 35vh;
+    min-height: calc(94vh);
+    max-height: calc(94vh);
+    overflow-y: scroll;
 }
 
 @keyframes spin {

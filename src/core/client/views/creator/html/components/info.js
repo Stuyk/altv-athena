@@ -42,27 +42,6 @@ Vue.component('tab-info', {
                 alt.emit('creator:DisableControls', true);
             }
         },
-        nameChanged(newValue) {
-            newValue = newValue.target.value;
-
-            if (!newValue) {
-                return;
-            }
-
-            if (!nameRegex.exec(newValue)) {
-                this.nameValid = false;
-                this.infodata.name = newValue;
-                return;
-            }
-
-            this.isNameAvailable = null;
-            this.infodata.name = newValue;
-
-            if ('alt' in window) {
-                alt.emit('creator:CheckName', newValue);
-                alt.emit('creator:DisableControls', false);
-            }
-        },
         handleNameAvailable(result) {
             this.isNameAvailable = result;
 
@@ -103,6 +82,25 @@ Vue.component('tab-info', {
 
             this.genderValid = false;
             this.infodata.gender = newValue;
+        },
+        first(newValue) {
+            if (!newValue.includes('_')) {
+                return;
+            }
+
+            if (!nameRegex.exec(newValue)) {
+                this.nameValid = false;
+                this.infodata.name = newValue;
+                return;
+            }
+
+            this.isNameAvailable = null;
+            this.infodata.name = newValue;
+
+            if ('alt' in window) {
+                alt.emit('creator:CheckName', newValue);
+                alt.emit('creator:DisableControls', false);
+            }
         }
     },
     mounted() {
@@ -150,7 +148,6 @@ Vue.component('tab-info', {
                     outlined
                     dense
                     @focus="disableControls"
-                    @blur="nameChanged"
                 >
                 </v-text-field>
             </div>
