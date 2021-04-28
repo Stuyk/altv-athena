@@ -12,7 +12,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 0,
+            selection: 2,
             data: {
                 sex: 1,
                 faceMother: 0,
@@ -41,7 +41,7 @@ const app = new Vue({
                 gender: 'none',
                 name: ''
             },
-            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
+            navOptions: [AppearanceComponent, StructureComponent, HairComponent, 'Overlays', 'Decor', 'Info', 'Done'],
             navOptionsIcons: [
                 { icon: 'icon-orientation' },
                 { icon: 'icon-cogs' },
@@ -51,13 +51,13 @@ const app = new Vue({
                 { icon: 'icon-id-card' },
                 { icon: 'icon-check' }
             ],
-            navOptionsTitles: ['Appearance', 'Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
             validInfoData: false,
             drawer: true,
             mini: true,
-            totalCharacters: 1
+            totalCharacters: 1,
+            locales: DefaultLocales
         };
     },
     computed: {
@@ -89,9 +89,6 @@ const app = new Vue({
             }
 
             return false;
-        },
-        getTabComponent: function () {
-            return `tab-${this.navOptions[this.selection].toLowerCase()}`;
         }
     },
     methods: {
@@ -102,6 +99,7 @@ const app = new Vue({
             }
 
             this.selection += 1;
+            alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
             if (this.selection - 1 <= -1) {
@@ -110,6 +108,7 @@ const app = new Vue({
             }
 
             this.selection -= 1;
+            alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setReady(noDiscard = true, noName = true) {
             if (this.show) {
@@ -135,14 +134,6 @@ const app = new Vue({
             this.data = oldData;
             this.updateCharacter();
         },
-        goNavigate(value) {
-            this.selection = value;
-
-            // Info
-            if ('alt' in window) {
-                alt.emit('creator:DisableControls', this.selection === 5 ? true : false);
-            }
-        },
         updateCharacter() {
             const isFemale = this.data.sex === 0;
             this.data.hairOverlay = isFemale ? femaleHairOverlays[this.data.hair] : maleHairOverlays[this.data.hair];
@@ -157,7 +148,8 @@ const app = new Vue({
             this.data.faceMix = parseFloat(this.data.faceMix);
 
             if ('alt' in window) {
-                alt.emit('creator:Sync', this.data, true);
+                alt.emit('creator:Sync', this.data);
+                alt.emit('creator:PlaySound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
             }
         },
         resetSelection() {

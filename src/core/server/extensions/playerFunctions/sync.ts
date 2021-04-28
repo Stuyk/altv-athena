@@ -90,7 +90,7 @@ function playTime(p: alt.Player): void {
         p.data.hours = 0;
     }
 
-    p.data.hours += 0.01;
+    p.data.hours += 0.0166666666666667;
     save.field(p, 'hours', p.data.hours);
 }
 

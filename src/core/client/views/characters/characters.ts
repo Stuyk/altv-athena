@@ -9,8 +9,8 @@ import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../.
 import { handleEquipment } from '../clothing/clothing';
 import { handleSync } from '../creator/creator';
 
-//const url = `http://resource/client/views/characters/html/index.html`;
-const url = `http://127.0.0.1:5555/src/core/client/views/characters/html/index.html`;
+const url = `http://resource/client/views/characters/html/index.html`;
+// const url = `http://127.0.0.1:5555/src/core/client/views/characters/html/index.html`;
 let view: View;
 let characters: Partial<Character>[];
 let open = false;

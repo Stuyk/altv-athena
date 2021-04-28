@@ -104,6 +104,16 @@ button {
     }
 }
 
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    background: rgba(0, 0, 0, 0.3) !important;
+    opacity: 1 !important;
+}
+
 .selection {
     position: fixed;
     display: flex;
@@ -112,11 +122,6 @@ button {
     max-height: 75px;
     min-width: 75vh !important;
     bottom: 3vh;
-
-    .stack {
-        display: flex;
-        flex-direction: column;
-    }
 
     .disabled-button {
         opacity: 0.75 !important;
