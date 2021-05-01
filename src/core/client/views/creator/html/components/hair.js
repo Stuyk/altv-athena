@@ -1,30 +1,34 @@
-const HairComponent = Vue.component('tab-hair', {
+const HairComponent = Vue.component('hair', {
     props: ['data', 'locales'],
     data() {
         return {
             modules: {
-                hairstyle: true,
+                hairstyle: false,
                 eyebrows: false,
                 facial: false
             }
         };
     },
     methods: {
+        handleChange(value, parameter) {
+            this.data[parameter] = value;
+            this.$root.$emit('updateCharacter');
+        },
         getHairCount() {
             if (this.data.sex === 0) {
-                return this.locales.hair.feminine.length - 2;
+                return this.locales.hairComponent.feminine.length - 2;
             }
 
-            return this.locales.hair.masculine.length - 2;
+            return this.locales.hairComponent.masculine.length - 2;
         },
         getColourCount() {
             return this.locales.color.hair.length - 1;
         },
         getFacialCount() {
-            return this.locales.hair.facial.length - 1;
+            return this.locales.hairComponent.facial.length - 1;
         },
         getEyebrowsCount() {
-            return this.locales.hair.eyebrows.length - 1;
+            return this.locales.hairComponent.eyebrows.length - 1;
         },
         setParameter(parameter, value) {
             this.data[parameter] = value;
@@ -55,41 +59,16 @@ const HairComponent = Vue.component('tab-hair', {
         toggleModule(moduleName) {
             this.modules[moduleName] = !this.modules[moduleName];
 
-            if ('alt' in window) {
-                alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         getLocale(name) {
-            console.log(JSON.stringify(this.locales.hairComponent));
             return this.locales.hairComponent[name]
                 ? this.locales.hairComponent[name]
                 : `COULD NOT FIND LOCALE FOR hairComponent.${name}`;
-        }
-    },
-    watch: {
-        'data.hair': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.hairColor1': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.hairColor2': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.eyebrows': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.eyebrowsColor1': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.facialHair': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.facialHairOpacity': function () {
-            this.$root.$emit('updateCharacter');
-        },
-        'data.facialHairColor1': function () {
-            this.$root.$emit('updateCharacter');
         }
     },
     template: `
@@ -111,7 +90,7 @@ const HairComponent = Vue.component('tab-hair', {
                                 <v-icon class="blue--text">icon-chevron-left</v-icon>
                             </button>
                             <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ data.sex === 0 ? locales.hair.feminine[data.hair] : locales.hair.masculine[data.hair] }}
+                                {{ data.sex === 0 ? locales.hairComponent.feminine[data.hair] : locales.hairComponent.masculine[data.hair] }}
                             </span>
                             <button @click="incrementParameter('hair', 0, getHairCount(), 1)" class="outline-transparent pl-4 pr-4">
                                 <v-icon class="blue--text">icon-chevron-right</v-icon>
@@ -119,7 +98,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getHairCount()" step="1" v-model.number="data.hair"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getHairCount()" step="1" v-model.number="data.hair" @input="e => handleChange(e, 'hair')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_COLOUR') }}</div>
@@ -136,7 +115,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor1"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor1" @input="e => handleChange(e, 'hairColor1')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_HIGHLIGHTS') }}</div>
@@ -153,7 +132,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor2 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor2"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor2" @input="e => handleChange(e, 'hairColor2')"/>
                         </div>
                     </div>
                 </template>
@@ -174,7 +153,7 @@ const HairComponent = Vue.component('tab-hair', {
                                 <v-icon class="blue--text">icon-chevron-left</v-icon>
                             </button>
                             <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.hair.eyebrows[data.eyebrows] }}
+                                {{ locales.hairComponent.eyebrows[data.eyebrows] }}
                             </span>
                             <button @click="incrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="outline-transparent pl-4 pr-4">
                                 <v-icon class="blue--text">icon-chevron-right</v-icon>
@@ -182,7 +161,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrows }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getEyebrowsCount()" step="1" v-model.number="data.eyebrows"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getEyebrowsCount()" step="1" v-model.number="data.eyebrows" @input="e => handleChange(e, 'eyebrows')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_EYEBROWS_COLOUR') }}</div>
@@ -199,7 +178,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrowsColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.eyebrowsColor1"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.eyebrowsColor1" @input="e => handleChange(e, 'eyebrowsColor1')"/>
                         </div>
                     </div>
                 </template>
@@ -226,7 +205,7 @@ const HairComponent = Vue.component('tab-hair', {
                                 <v-icon class="blue--text">icon-chevron-left</v-icon>
                             </button>
                             <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.hair.facial[data.facialHair] }}
+                                {{ locales.hairComponent.facial[data.facialHair] }}
                             </span>
                             <button @click="incrementParameter('facialHair', 0, getFacialCount(), 1)" class="outline-transparent pl-4 pr-4">
                                 <v-icon class="blue--text">icon-chevron-right</v-icon>
@@ -234,7 +213,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getFacialCount()" step="1" v-model.number="data.facialHair"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getFacialCount()" step="1" v-model.number="data.facialHair" @input="e => handleChange(e, 'facialHair')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_FACIAL_HAIR_COLOUR') }}</div>
@@ -251,7 +230,7 @@ const HairComponent = Vue.component('tab-hair', {
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.facialHairColor1"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.facialHairColor1" @input="e => handleChange(e, 'facialHairColor1')"/>
                         </div>
                     </div>
                 </template>

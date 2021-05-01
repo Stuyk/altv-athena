@@ -1,23 +1,27 @@
 const nameRegex = new RegExp('^([A-Z][a-z]+_[A-Z][a-z]+)$');
 
-Vue.component('tab-info', {
-    props: ['data', 'infodata'],
+const InfoComponent = Vue.component('tab-info', {
+    props: ['data', 'infodata', 'locales'],
     data() {
         return {
-            first: '',
-            last: '',
-            age: new Date().toISOString().substr(0, 10),
+            characterName: '',
+            day: 0,
+            month: 0,
+            year: 1990,
             gender: null,
             nameValid: false,
-            ageValid: false,
+            dayValid: false,
+            monthValid: false,
+            yearValid: false,
             genderValid: false,
-            isNameAvailable: false,
+            isNameAvailable: true,
             firstTime: true,
-            nameRules: [
-                (v) => !!v || 'This field is required',
-                (v) => (v && v !== '') || 'This field is required',
-                (v) => (v && nameRegex.test(v)) || 'No special characters. Greater than 5. Less than 16.'
-            ]
+            nameRules: [],
+            dayRules: [],
+            monthRules: [],
+            yearRules: [],
+            minYear: 1940,
+            minAge: 18
         };
     },
     computed: {
@@ -30,17 +34,106 @@ Vue.component('tab-info', {
     },
     methods: {
         verifyAllCorrect() {
-            if (!this.nameValid || !this.ageValid || !this.genderValid) {
+            if (this.dayValid && this.monthValid && this.yearValid) {
+                this.infodata.age = new Date(this.year, this.month, this.day);
+            }
+
+            if (!this.nameValid || !this.dayValid || !this.monthValid || !this.yearValid || !this.genderValid) {
                 this.$root.$emit('isVerified', false);
                 return;
             }
 
             this.$root.$emit('isVerified', true);
         },
-        disableControls() {
-            if ('alt' in window) {
-                alt.emit('creator:DisableControls', true);
+        verifyYear(newValue) {
+            const maxYear = new Date(Date.now()).getFullYear() - this.minAge;
+            if (newValue < this.minYear) {
+                this.yearValid = false;
+                this.verifyAllCorrect();
+                return;
             }
+
+            if (newValue >= maxYear) {
+                this.yearValid = false;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            this.yearValid = true;
+            this.verifyAllCorrect();
+        },
+        verifyDay(newValue) {
+            if (newValue <= 0 || newValue >= 32) {
+                this.dayValid = false;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            this.dayValid = true;
+            this.verifyAllCorrect();
+        },
+        verifyMonth(newValue) {
+            if (newValue <= 0 || newValue >= 13) {
+                this.monthValid = false;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            this.monthValid = true;
+            this.verifyAllCorrect();
+        },
+        verifyName(newValue) {
+            if (!newValue || newValue === '') {
+                this.isNameAvailable = true;
+                this.nameValid = false;
+                this.infodata.name = newValue;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            if (!newValue.includes('_')) {
+                this.isNameAvailable = true;
+                this.nameValid = false;
+                this.infodata.name = newValue;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            if (!nameRegex.exec(newValue)) {
+                this.isNameAvailable = true;
+                this.nameValid = false;
+                this.infodata.name = newValue;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            this.isNameAvailable = null;
+            this.infodata.name = newValue;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('creator:CheckName', newValue);
+            alt.emit('creator:DisableControls', false);
+        },
+        verifyGender(newValue) {
+            if (newValue && newValue !== '' && newValue.length >= 4 && newValue.toLowerCase() !== 'none') {
+                this.genderValid = true;
+                this.infodata.gender = newValue;
+                this.verifyAllCorrect();
+                return;
+            }
+
+            this.genderValid = false;
+            this.infodata.gender = newValue;
+        },
+        disableControls() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('creator:DisableControls', true);
         },
         handleNameAvailable(result) {
             this.isNameAvailable = result;
@@ -55,158 +148,180 @@ Vue.component('tab-info', {
         }
     },
     watch: {
-        age(newValue) {
-            const currentYear = new Date(Date.now()).getFullYear();
-            const date = new Date(newValue);
-            const age = currentYear - date.getFullYear();
-
-            if (age < 18) {
-                this.ageValid = false;
-                this.infodata.age = new Date().toISOString().substr(0, 10);
-                this.verifyAllCorrect();
-                return;
-            }
-
-            this.ageValid = true;
-            this.infodata.age = newValue;
-            this.verifyAllCorrect();
-            return;
+        day(newValue) {
+            this.verifyDay(newValue);
+        },
+        month(newValue) {
+            this.verifyMonth(newValue);
+        },
+        year(newValue) {
+            this.verifyYear(newValue);
         },
         gender(newValue) {
-            if (newValue.length >= 4 && newValue.toLowerCase() !== 'none') {
-                this.genderValid = true;
-                this.infodata.gender = newValue;
-                this.verifyAllCorrect();
-                return;
-            }
-
-            this.genderValid = false;
-            this.infodata.gender = newValue;
+            this.verifyGender(newValue);
         },
-        first(newValue) {
-            if (!newValue.includes('_')) {
-                return;
-            }
-
-            if (!nameRegex.exec(newValue)) {
-                this.nameValid = false;
-                this.infodata.name = newValue;
-                return;
-            }
-
-            this.isNameAvailable = null;
-            this.infodata.name = newValue;
-
-            if ('alt' in window) {
-                alt.emit('creator:CheckName', newValue);
-                alt.emit('creator:DisableControls', false);
-            }
+        characterName(newValue) {
+            this.verifyName(newValue);
         }
     },
     mounted() {
-        this.name = this.infodata.name;
-        this.age = this.infodata.age;
+        // Populate Rules
+        this.nameRules = [
+            (v) => !!v || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v !== ``) || this.locales.LABEL_FIELD_REQUIRED,
+            (v) =>
+                (v && v.length <= 16) ||
+                `${this.locales.LABEL_NAME} ${this.locales.LABEL_CANNOT_EXCEED} 16 ${this.locales.LABEL_CHARACTER}`,
+            (v) =>
+                (v && v.length >= 5) ||
+                `${this.locales.LABEL_NAME} ${this.locales.LABEL_CANNOT_BE_LESS} 5 ${this.locales.LABEL_CHARACTER}`,
+            (v) => (v && nameRegex.test(v)) || this.locales.LABEL_NO_SPECIAL
+        ];
+
+        this.dayRules = [
+            (v) => !!v || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v !== ``) || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v >= 1) || `${this.locales.LABEL_DAY} ${this.locales.LABEL_CANNOT_BE_LESS} 1`,
+            (v) => (v && v <= 31) || `${this.locales.LABEL_DAY} ${this.locales.LABEL_CANNOT_EXCEED} 31`
+        ];
+
+        this.monthRules = [
+            (v) => !!v || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v !== ``) || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v >= 1) || `${this.locales.LABEL_MONTH} ${this.locales.LABEL_CANNOT_BE_LESS} 1`,
+            (v) => (v && v <= 12) || `${this.locales.LABEL_MONTH} ${this.locales.LABEL_CANNOT_EXCEED} 12`
+        ];
+
+        const maxYear = new Date(Date.now()).getFullYear() - this.minAge;
+
+        this.yearRules = [
+            (v) => !!v || this.locales.LABEL_FIELD_REQUIRED,
+            (v) => (v && v !== ``) || this.locales.LABEL_FIELD_REQUIRED,
+            (v) =>
+                (v && v >= 1940) || `${this.locales.LABEL_YEAR} ${this.locales.LABEL_CANNOT_BE_LESS} ${this.minYear}`,
+            (v) => (v && v < maxYear) || `${this.locales.LABEL_YEAR} ${this.locales.LABEL_CANNOT_EXCEED}  ${maxYear}`
+        ];
+
+        const date = new Date(this.infodata.age);
+        this.characterName = this.infodata.name;
+        this.day = date.getDay();
+        this.month = date.getMonth();
+        this.year = date.getFullYear();
         this.gender = this.infodata.gender;
 
-        if ('alt' in window) {
-            alt.on('creator:IsNameAvailable', this.handleNameAvailable);
+        this.verifyName(this.characterName);
+        this.verifyDay(this.day);
+        this.verifyMonth(this.month);
+        this.verifyYear(this.year);
+
+        if (!(`alt` in window)) {
+            return;
         }
+
+        alt.on('creator:IsNameAvailable', this.handleNameAvailable);
     },
     template: `
-        <div class="contentWrapper">
-            <div class="group pt-3 pb-3">
-                <div class="subtitle light-blue--text text-left">
-                    We need some more information before we let you make your character. 
-                    <br />
-                    <br />
-                    Please fill out the forms below.
-                </div>
-            </div>
-            <div class="group pb-3">
-                <v-divider></v-divider>
-            </div>
-            <div class="group">
-                <div class="overline pa-0 ma-0 grey--text">
-                    What is your character's name?
-                </div>
-            </div>
-            <div class="group pt-3">
-                <template v-if="this.isNameAvailable !== null">
-                    <v-icon v-if="nameValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                    <v-icon v-if="!nameValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
-                </template>
-                <template v-else>
-                    <v-icon small class="spinner yellow--text text--lighten-2">icon-spinner</v-icon>
-                    <span class="pr-5"></span>
-                </template>
-                <v-text-field
-                    label="First Name & Last Name (ex. John_Doe)"
-                    placeholder="John_Doe"
-                    :rules="nameRules"
-                    v-model="first"
-                    hide-details="auto"
-                    outlined
-                    dense
-                    @focus="disableControls"
-                >
-                </v-text-field>
-            </div>
-            <div class="group pt-3 pb-3">
-                <v-divider></v-divider>
-            </div>
-            <div class="group">
-                <div class="overline pa-0 ma-0 grey--text">
-                    When is your character's Birthday?
-                </div>
-            </div>
-            <div class="group pt-3">
-                <v-icon v-if="ageValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!ageValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
-                <v-date-picker
-                    v-model="age"
-                    full-width
-                >
-                </v-date-picker>
-            </div>
-            <div class="group pb-3 pt-6">
-                <v-divider></v-divider>
-            </div>
-            <div class="group">
-                <div class="overline pa-0 ma-0 grey--text">
-                   What is your character's Gender?
-                </div>
-            </div>
-            <div class="group">
-                <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
-                <v-radio-group v-model="gender" class="flex-grow-1" mandatory>
-                    <v-radio label="Female" value="female" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
-                    <v-radio label="Male" value="male" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
-                    <v-radio label="Other" value="other" off-icon="icon-circle-o" on-icon="icon-circle2"></v-radio>
-                </v-radio-group>
-            </div>
-            <div class="group pb-3">
-                <v-divider></v-divider>
-            </div>
-        </div>
-        <v-container class="containerHelper transparent">
-            <div class="d-flex flex-column justify-space-between fill-height" block fluid>
-                    <div class="d-flex flex-row justify-content-space-between">
-                        <v-icon v-if="genderValid" small class="pr-5 green--text text--lighten-2">icon-check</v-icon>
-                        <v-icon v-if="!genderValid" small class="pr-5 error--text text--lighten-2">icon-times-circle</v-icon>
-                        <v-text-field
-                            class="flex-grow-1"
-                            type="text"
-                            label="Your Gender"
-                            value="infoData.gender"
-                            v-model="gender"
+        <template>
+            <div class="wrapper flex-grow-1">
+                <div class="stack mb-3">
+                    <div class="overline blue-grey--text">{{ locales.LABEL_NAME }}</div>
+                    <div class="subtitle-2 grey--text">{{ locales.characterName }}</div>
+                    <div class="subtitle-2 red--text mb-2" v-if="isNameAvailable === false">
+                        Name Not Available
+                    </div>
+                    <div class="split">
+                        <template v-if="isNameAvailable !== null">
+                            <template v-if="nameValid">
+                                <v-icon class="green--text mr-3 pb-1">icon-checkmark</v-icon>
+                            </template>
+                            <template v-else>
+                                <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <v-icon class="spinner blue--text text--lighten-2">icon-spinner</v-icon>
+                            <span class="mr-3"></span>
+                        </template>
+                        <v-text-field 
+                            :label="locales.LABEL_NAME"
+                            :rules="nameRules" 
+                            type="name" 
+                            placeholder="John_Doe" 
+                            v-model="characterName"
+                            @focus="disableControls"
                         />
                     </div>
-                    <p class="text-caption">
-                        Once the information above is filled out you may proceed to the 'done' page.
-                    </p>
-                </v-card>
+                </div>
+
+                <div class="stack mb-3">
+                    <div class="overline blue-grey--text">{{ locales.LABEL_BIRTHDAY }}</div>
+                    <div class="subtitle-2 grey--text mb-2">{{ locales.characterBirth }}</div>
+                    <div class="stack">
+                        <div class="split mb-4">
+                            <template v-if="dayValid">
+                                <v-icon class="green--text mr-3 pb-1">icon-checkmark</v-icon>
+                            </template>
+                            <template v-else>
+                                <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
+                            </template>
+                            <v-text-field
+                                :label="locales.LABEL_DAY"
+                                :rules="dayRules"
+                                v-model="day" 
+                                autocomplete="off"
+                                type="number"
+                            />
+                        </div>
+
+                        <div class="split mb-4">
+                            <template v-if="monthValid">
+                                <v-icon class="green--text mr-3 pb-1">icon-checkmark</v-icon>
+                            </template>
+                            <template v-else>
+                                <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
+                            </template>
+                            <v-text-field
+                                :label="locales.LABEL_MONTH"
+                                :rules="monthRules"
+                                v-model="month" 
+                                autocomplete="off"
+                                type="number"
+                                dense
+                            />
+                        </div>
+
+                        <div class="split mb-4">
+                            <template v-if="yearValid">
+                                <v-icon class="green--text mr-3 pb-1">icon-checkmark</v-icon>
+                            </template>
+                            <template v-else>
+                                <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
+                            </template>
+                            <v-text-field
+                                :label="locales.LABEL_YEAR"
+                                :rules="yearRules"
+                                v-model="year" 
+                                autocomplete="off"
+                                type="number"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stack">
+                    <div class="overline blue-grey--text">{{ locales.LABEL_GENDER }}</div>
+                    <div class="subtitle-2 grey--text mb-2">{{ locales.characterGender }}</div>
+                    <div class="split">
+                        <template v-if="genderValid">
+                            <v-icon class="green--text mr-3 pb-1">icon-checkmark</v-icon>
+                        </template>
+                        <template v-else>
+                            <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
+                        </template>
+                        <v-text-field type="text" placeholder="Male, Female, Other..." v-model="gender" />
+                    </div>
+                </div>
             </div>
-        </v-container>
+        </template>
     `
 });

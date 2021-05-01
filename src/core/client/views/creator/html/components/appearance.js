@@ -3,7 +3,7 @@ const AppearanceComponent = Vue.component('appearance', {
     data() {
         return {
             modules: {
-                frame: true,
+                frame: false,
                 presets: false,
                 father: false,
                 mother: false,
@@ -18,9 +18,11 @@ const AppearanceComponent = Vue.component('appearance', {
         toggleModule(moduleName) {
             this.modules[moduleName] = !this.modules[moduleName];
 
-            if ('alt' in window) {
-                alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         isActive(parameter, value) {
             if (this.data[parameter] === value) {
@@ -293,19 +295,19 @@ const AppearanceComponent = Vue.component('appearance', {
                 <div class="subtitle-2 grey--text mb-2">{{ getLocale('DESC_EYECOLOUR') }}</div>
                     <div class="button-group pa-2" v-if="modules.eyeColour">
                         <div class="split">
-                            <button @click="decrementParameter('eyes', 0, 45, 1)" class="outline-transparent pl-4 pr-4">
+                            <button @click="decrementParameter('eyes', 0, locales.color.eyes.length - 1, 1)" class="outline-transparent pl-4 pr-4">
                                 <v-icon class="blue--text">icon-chevron-left</v-icon>
                             </button>
                             <span class="overline flex-grow-1 text-center grey--text"> 
-                                {{ data.eyes }}
+                                {{ locales.color.eyes[data.eyes] }}
                             </span>
-                            <button @click="incrementParameter('eyes', 0, 45, 1)" class="outline-transparent pl-4 pr-4">
+                            <button @click="incrementParameter('eyes', 0, locales.color.eyes.length - 1, 1)" class="outline-transparent pl-4 pr-4">
                                 <v-icon class="blue--text">icon-chevron-right</v-icon>
                             </button>
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyes }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" max="45" step="1" v-model.number="data.eyes"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="locales.color.eyes.length - 1" step="1" v-model.number="data.eyes"/>
                         </div>
                     </div>
                     

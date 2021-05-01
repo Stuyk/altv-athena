@@ -12,14 +12,18 @@ Vue.component('tab-done', {
                 this.data.facialHairColor1 = 0;
             }
 
-            if ('alt' in window) {
-                alt.emit('creator:Done', this.data, this.infodata, this.infodata.name);
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:Done', this.data, this.infodata, this.infodata.name);
         },
         discardCharacter() {
-            if ('alt' in window) {
-                alt.emit('creator:Cancel');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:Cancel');
         }
     },
     template: `

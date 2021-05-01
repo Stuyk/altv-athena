@@ -46,12 +46,16 @@ body {
 
 .content {
     display: block;
-    overflow-y: auto;
+    overflow-y: scroll;
+    direction: rtl;
+    flex-grow: 1;
 }
 
 .wrapper {
     display: flex;
     flex-direction: column;
+    direction: ltr;
+    height: 100%;
 }
 
 .content-no-scroll {
@@ -87,6 +91,31 @@ body {
     flex-grow: 1;
     width: 100%;
     height: 100%;
+}
+
+input {
+    width: 100%;
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 5px;
+    margin: 6px 0px;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.v-input input {
+    border: 2px solid transparent !important;
+
+    &:active {
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    }
+
+    &:focus,
+    &:focus-within {
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+        caret-color: white !important;
+    }
 }
 
 .button-group {

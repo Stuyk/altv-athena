@@ -12,7 +12,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 2,
+            selection: 5,
             data: {
                 sex: 1,
                 faceMother: 0,
@@ -37,25 +37,22 @@ const app = new Vue({
                 colorOverlays: []
             },
             infoData: {
-                age: new Date().toISOString().substr(0, 10),
-                gender: 'none',
+                age: new Date(1990, 1, 1),
+                gender: null,
                 name: ''
             },
-            navOptions: [AppearanceComponent, StructureComponent, HairComponent, 'Overlays', 'Decor', 'Info', 'Done'],
-            navOptionsIcons: [
-                { icon: 'icon-orientation' },
-                { icon: 'icon-cogs' },
-                { icon: 'icon-hair' },
-                { icon: 'icon-details1' },
-                { icon: 'icon-makeup' },
-                { icon: 'icon-id-card' },
-                { icon: 'icon-check' }
+            navOptions: [
+                AppearanceComponent,
+                StructureComponent,
+                HairComponent,
+                OverlaysComponent,
+                MakeupComponent,
+                InfoComponent,
+                'Done'
             ],
             noDiscard: false,
             noName: false,
             validInfoData: false,
-            drawer: true,
-            mini: true,
             totalCharacters: 1,
             locales: DefaultLocales
         };
@@ -99,6 +96,11 @@ const app = new Vue({
             }
 
             this.selection += 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
             alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
@@ -108,6 +110,11 @@ const app = new Vue({
             }
 
             this.selection -= 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
             alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setReady(noDiscard = true, noName = true) {
@@ -119,9 +126,11 @@ const app = new Vue({
             this.noName = noName;
             this.show = true;
 
-            if ('alt' in window) {
-                alt.emit('creator:ReadyDone');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:ReadyDone');
         },
         setData(oldData, totalCharacters) {
             this.totalCharacters = totalCharacters;
@@ -147,10 +156,12 @@ const app = new Vue({
             this.data.skinMix = parseFloat(this.data.skinMix);
             this.data.faceMix = parseFloat(this.data.faceMix);
 
-            if ('alt' in window) {
-                alt.emit('creator:Sync', this.data);
-                alt.emit('creator:PlaySound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:Sync', this.data);
+            alt.emit('creator:PlaySound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         resetSelection() {
             this.selection = 0;
@@ -164,7 +175,7 @@ const app = new Vue({
         this.$root.$on('resetSelection', this.resetSelection);
         this.$root.$on('isVerified', this.isVerified);
 
-        overlaysTemplateList.forEach((overlay) => {
+        OverlaysList.forEach((overlay) => {
             const overlayData = { ...overlay };
             overlayData.value = 0;
             delete overlayData.key;
@@ -176,7 +187,7 @@ const app = new Vue({
             this.data.opacityOverlays.push(overlayData);
         });
 
-        colorOverlays.forEach((overlay) => {
+        MakeupList.forEach((overlay) => {
             const overlayData = { ...overlay };
             overlayData.value = 0;
             delete overlayData.key;

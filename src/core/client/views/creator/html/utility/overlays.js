@@ -1,6 +1,5 @@
-const overlaysTemplateList = [
+const OverlaysList = [
     {
-        label: 'Blemish',
         min: 0,
         max: 23,
         increment: 1,
@@ -8,7 +7,6 @@ const overlaysTemplateList = [
         opacity: 0
     },
     {
-        label: 'Age',
         min: 0,
         max: 14,
         increment: 1,
@@ -16,7 +14,6 @@ const overlaysTemplateList = [
         opacity: 0
     },
     {
-        label: 'Complexion',
         min: 0,
         max: 11,
         increment: 1,
@@ -24,7 +21,6 @@ const overlaysTemplateList = [
         opacity: 0
     },
     {
-        label: 'Sun Damage',
         min: 0,
         max: 10,
         increment: 1,
@@ -32,7 +28,6 @@ const overlaysTemplateList = [
         opacity: 0
     },
     {
-        label: 'Freckles',
         min: 0,
         max: 17,
         increment: 1,
@@ -40,7 +35,6 @@ const overlaysTemplateList = [
         opacity: 0
     },
     {
-        label: 'Body Blemish',
         min: 0,
         max: 11,
         increment: 1,
@@ -49,9 +43,8 @@ const overlaysTemplateList = [
     }
 ];
 
-const colorOverlays = [
+const MakeupList = [
     {
-        label: 'Makeup',
         min: 0,
         max: 74,
         increment: 1,
@@ -61,7 +54,6 @@ const colorOverlays = [
         color2: 0
     },
     {
-        label: 'Blush',
         min: 0,
         max: 6,
         increment: 1,
@@ -70,7 +62,6 @@ const colorOverlays = [
         color1: 0
     },
     {
-        label: 'Lipstick',
         min: 0,
         max: 9,
         increment: 1,
