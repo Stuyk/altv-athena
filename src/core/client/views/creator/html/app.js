@@ -12,7 +12,7 @@ const app = new Vue({
     data() {
         return {
             show: false,
-            selection: 5,
+            selection: 0,
             data: {
                 sex: 1,
                 faceMother: 0,
@@ -47,12 +47,10 @@ const app = new Vue({
                 HairComponent,
                 OverlaysComponent,
                 MakeupComponent,
-                InfoComponent,
-                'Done'
+                InfoComponent
             ],
             noDiscard: false,
             noName: false,
-            validInfoData: false,
             totalCharacters: 1,
             locales: DefaultLocales
         };
@@ -101,7 +99,7 @@ const app = new Vue({
                 return;
             }
 
-            alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
             if (this.selection - 1 <= -1) {
@@ -115,7 +113,7 @@ const app = new Vue({
                 return;
             }
 
-            alt.emit('creator:PlaySound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setReady(noDiscard = true, noName = true) {
             if (this.show) {
@@ -161,19 +159,18 @@ const app = new Vue({
             }
 
             alt.emit('creator:Sync', this.data);
-            alt.emit('creator:PlaySound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         resetSelection() {
             this.selection = 0;
         },
-        isVerified(isValid) {
-            this.validInfoData = isValid;
+        setLocales(localeObject) {
+            this.locales = localeObject;
         }
     },
     mounted() {
         this.$root.$on('updateCharacter', this.updateCharacter);
         this.$root.$on('resetSelection', this.resetSelection);
-        this.$root.$on('isVerified', this.isVerified);
 
         OverlaysList.forEach((overlay) => {
             const overlayData = { ...overlay };
@@ -203,12 +200,11 @@ const app = new Vue({
             if ('alt' in window) {
                 alt.on('creator:Ready', this.setReady);
                 alt.on('creator:SetData', this.setData);
+                alt.on('creator:SetLocales', this.setLocales);
                 alt.emit('ready');
             } else {
                 this.show = true;
             }
         });
-
-        console.log(`Loaded Character Creator`);
     }
 });

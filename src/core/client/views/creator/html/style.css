@@ -1,4 +1,4 @@
-@import '../../less/variables.less';
+@import '../../css/common.css';
 
 *,
 *:focus {
@@ -106,16 +106,16 @@ input {
 
 .v-input input {
     border: 2px solid transparent !important;
+}
 
-    &:active {
-        border: 2px solid rgba(255, 255, 255, 0.4) !important;
-    }
+.v-input input:active {
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+}
 
-    &:focus,
-    &:focus-within {
-        border: 2px solid rgba(255, 255, 255, 0.4) !important;
-        caret-color: white !important;
-    }
+.v-input input:focus,
+.v-input input:focus-within {
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    caret-color: white !important;
 }
 
 .button-group {
@@ -143,18 +143,17 @@ button {
     opacity: 0.75;
     overflow: hidden;
     outline: hidden !important;
+}
 
-    &:hover {
-        // background: rgba(255, 255, 255, 0.1);
-        opacity: 1;
-    }
+button:hover {
+    opacity: 1;
+}
 
-    &:active {
-        color: white !important;
-        transform: unset !important;
-        background: rgba(0, 0, 0, 0.3);
-        outline: none !important;
-    }
+button:active {
+    color: white !important;
+    transform: unset !important;
+    background: rgba(0, 0, 0, 0.3);
+    outline: none !important;
 }
 
 .stack {

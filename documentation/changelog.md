@@ -20,6 +20,10 @@ description: List of all the changes and current versions.
 + Added Hours to Character Selection Screen
 + Updated Characters Interface
 + Added Locale Support for Characters WebView
++ Updated Character Creator Interface (Big Change)
++ Added Locale Support for Creator Interface (Big Change)
++ Removed LESS library from some Interfaces
++ Added Frontend Sounds to Various Interfaces
 ```
 
 ## 1.8.1 - April 8-18, 2021

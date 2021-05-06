@@ -1,4 +1,4 @@
-@import '../../less/variables.less';
+@import '../../css/common.css';
 
 body,
 html {
@@ -42,10 +42,10 @@ body {
     flex-direction: row;
     justify-content: center;
     bottom: calc(6vh + 75px);
+}
 
-    button {
-        height: 100%;
-    }
+.options button {
+    height: 100%;
 }
 
 .stats {
@@ -90,18 +90,17 @@ button {
     opacity: 0.75;
     overflow: hidden;
     outline: hidden !important;
+}
 
-    &:hover {
-        // background: rgba(255, 255, 255, 0.1);
-        opacity: 1;
-    }
+button:hover {
+    opacity: 1;
+}
 
-    &:active {
-        color: white !important;
-        transform: unset !important;
-        background: rgba(0, 0, 0, 0.3);
-        outline: none !important;
-    }
+button:active {
+    color: white !important;
+    transform: unset !important;
+    background: rgba(0, 0, 0, 0.3);
+    outline: none !important;
 }
 
 .stack {
@@ -116,26 +115,26 @@ button {
 
 .selection {
     position: fixed;
-    display: flex;
+    display: block;
     flex-direction: row;
-    min-height: 75px;
-    max-height: 75px;
+    height: auto;
     min-width: 75vh !important;
     bottom: 3vh;
+}
 
-    .disabled-button {
-        opacity: 0.75 !important;
+.selection .disabled-button {
+    opacity: 0.75 !important;
+}
 
-        &:hover {
-            opacity: 0.75 !important;
-        }
+.selection .disabled-button:hover {
+    opacity: 0.75 !important;
+}
 
-        &:active {
-            color: unset !important;
-            transform: unset !important;
-            background: unset !important;
-        }
-    }
+.selection .disabled-button:active {
+    color: unset !important;
+    transform: unset !important;
+    background: unset !important;
+    user-select: none;
 }
 
 * {

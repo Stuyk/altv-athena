@@ -21,7 +21,9 @@ const InfoComponent = Vue.component('tab-info', {
             monthRules: [],
             yearRules: [],
             minYear: 1940,
-            minAge: 18
+            minAge: 18,
+            isVerified: false,
+            processing: false
         };
     },
     computed: {
@@ -34,16 +36,14 @@ const InfoComponent = Vue.component('tab-info', {
     },
     methods: {
         verifyAllCorrect() {
-            if (this.dayValid && this.monthValid && this.yearValid) {
-                this.infodata.age = new Date(this.year, this.month, this.day);
-            }
+            this.infodata.age = new Date(this.year, this.month, this.day);
 
             if (!this.nameValid || !this.dayValid || !this.monthValid || !this.yearValid || !this.genderValid) {
-                this.$root.$emit('isVerified', false);
+                this.isVerified = false;
                 return;
             }
 
-            this.$root.$emit('isVerified', true);
+            this.isVerified = true;
         },
         verifyYear(newValue) {
             const maxYear = new Date(Date.now()).getFullYear() - this.minAge;
@@ -145,6 +145,20 @@ const InfoComponent = Vue.component('tab-info', {
 
             this.nameValid = true;
             this.verifyAllCorrect();
+        },
+        save() {
+            this.processing = true;
+
+            if (this.data.sex === 0) {
+                this.data.facialHair = 29;
+                this.data.facialHairColor1 = 0;
+            }
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('creator:Done', this.data, this.infodata, this.infodata.name);
         }
     },
     watch: {
@@ -227,7 +241,7 @@ const InfoComponent = Vue.component('tab-info', {
                     <div class="overline blue-grey--text">{{ locales.LABEL_NAME }}</div>
                     <div class="subtitle-2 grey--text">{{ locales.characterName }}</div>
                     <div class="subtitle-2 red--text mb-2" v-if="isNameAvailable === false">
-                        Name Not Available
+                        {{ locales.LABEL_NAME_NOT_AVAILABLE }}
                     </div>
                     <div class="split">
                         <template v-if="isNameAvailable !== null">
@@ -318,8 +332,26 @@ const InfoComponent = Vue.component('tab-info', {
                         <template v-else>
                             <v-icon class="red--text mr-3 pb-1">icon-error</v-icon>
                         </template>
-                        <v-text-field type="text" placeholder="Male, Female, Other..." v-model="gender" />
+                        <v-text-field type="text" :placeholder="locales.LABEL_CHARACTER_GENDER" v-model="gender" />
                     </div>
+                </div>
+
+                <div class="stack" v-if="isVerified">
+                    <div class="overline green--text">{{ locales.LABEL_VERIFIED }}</div>
+                    <div class="button-group flex-grow-1">
+                    <template v-if="!processing">
+                        <button style="width: 100%" @click="save">
+                            <span class="overline green--text">{{ locales.LABEL_SAVE }}</span>
+                        </button>
+                    </template>
+                    <template v-else>
+                        <button style="width: 100%">
+                            <v-progress-circular
+                                indeterminate
+                                color="green"
+                            ></v-progress-circular>
+                        </button>
+                    </template>
                 </div>
             </div>
         </template>

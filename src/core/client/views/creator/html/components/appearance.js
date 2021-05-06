@@ -22,7 +22,7 @@ const AppearanceComponent = Vue.component('appearance', {
                 return;
             }
 
-            alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         isActive(parameter, value) {
             if (this.data[parameter] === value) {

@@ -49,7 +49,7 @@ const OverlaysComponent = Vue.component('overlays', {
                 return;
             }
 
-            alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         getLocale(id) {
             return this.locales.overlaysComponent.ids[id]

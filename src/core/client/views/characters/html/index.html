@@ -3,7 +3,7 @@
         <title>Character Selection by Stuyk</title>
         <link rel="stylesheet" type="text/css" href="../../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../../css/vuetify.min.css" />
-        <link rel="stylesheet/less" type="text/css" href="./style.less" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
         <link rel="stylesheet" type="text/css" href="../../icomoon/style.css" />
         <meta name="viewport" content="charset=UTF-8, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
@@ -70,10 +70,10 @@
                         <v-card-actions>
                             <div class="button-group">
                                 <div class="split pl-6 pr-6">
-                                    <button class="overline pl-6 pr-6" @click="deleteDialog = false" outlined>
+                                    <button class="overline pl-6 pr-6" @click="hideDeleteInterface" outlined>
                                         <span class="green--text">No</span>
                                     </button>
-                                    <button class="overline pl-6 pr-6" @click="deleteDialog = false; deleteCharacter()" outlined>
+                                    <button class="overline pl-6 pr-6" @click="deleteCharacter" outlined>
                                         <span class="red--text">Yes</span>
                                     </button>
                                 </div>
@@ -86,7 +86,6 @@
         </div>
         <script src="../../js/vue.min.js"></script>
         <script src="../../js/vuetify.js"></script>
-        <script src="../../js/less.min.js"></script>
         <script src="./app.js" type="text/javascript"></script>
     </body>
 </html>

@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-@bg-color: #0d2236;
-@darker: rgba(20, 20, 20, 1);
-@medium: rgba(100, 100, 100, 1);
-@light: rgba(215, 215, 215, 1);
-@lighter: rgba(250, 250, 250, 1);
-@contrast: rgb(58, 103, 145);
-@contrast2: rgb(83, 68, 165);
-@error: rgb(202, 61, 61);
-
 body,
 html,
 #app {
@@ -17,16 +8,13 @@ html,
 
 button {
     cursor: pointer;
-
-    &:active {
-        transform: translateY(-2px) !important;
-        transition: 0.1ms;
-    }
 }
 
-// You can remove this if you want.
-// That's up to you as the buyer.
-// If you didn't buy the license then fuck you.
+button:active {
+    transform: translateY(-2px) !important;
+    transition: 0.1ms;
+}
+
 .athena {
     position: fixed;
     display: block;
@@ -37,7 +25,7 @@ button {
     min-height: 50px;
     max-height: 50px;
     z-index: 99;
-    background: url('../../svg/athena.svg');
+    background: url('../svg/athena.svg');
     background-size: cover;
     opacity: 0.2;
 }
@@ -61,7 +49,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(100, 100, 100, 1);
+    background: #646464;
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
 }
 

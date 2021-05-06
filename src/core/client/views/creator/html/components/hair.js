@@ -63,7 +63,7 @@ const HairComponent = Vue.component('hair', {
                 return;
             }
 
-            alt.emit('creator:PlaySound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         getLocale(name) {
             return this.locales.hairComponent[name]

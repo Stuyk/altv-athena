@@ -25,7 +25,7 @@ const app = new Vue({
                 LESS_THAN_BANK: `Value must be less than bank`,
                 USER_ID_POSITIVE: `User ID must be positive`
             },
-            components: [ DepositComponent, WithdrawComponent, TransferComponent ],
+            components: [DepositComponent, WithdrawComponent, TransferComponent],
             processing: true,
             balancerPercentage: 50,
             setting: 0,
@@ -35,10 +35,16 @@ const app = new Vue({
     methods: {
         selectSetting(value) {
             this.setting = value;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         isSetting(value) {
             if (value === this.setting) {
-                return { 'active' : true };
+                return { active: true };
             }
 
             return {};
@@ -48,7 +54,7 @@ const app = new Vue({
             this.cash = cash;
 
             const total = this.bank + this.cash;
-            this.balancerPercentage = this.bank / total * 100;
+            this.balancerPercentage = (this.bank / total) * 100;
 
             setTimeout(() => {
                 this.isValid = false;
@@ -65,6 +71,12 @@ const app = new Vue({
         setProcessing() {
             this.processing = true;
             this.update += 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setLocales(localeObject) {
             this.locales = localeObject;

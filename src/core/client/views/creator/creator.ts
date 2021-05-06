@@ -10,10 +10,11 @@ import {
 } from '../../utility/camera';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../../shared/enums/views';
-import { handleFrontendSound } from '../../systems/sound';
+import { LocaleController } from '../../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 
-const url = `http://127.0.0.1:5555/src/core/client/views/creator/html/index.html`;
-// const url = `http://resource/client/views/creator/html/index.html`;
+// const url = `http://127.0.0.1:5555/src/core/client/views/creator/html/index.html`;
+const url = `http://resource/client/views/creator/html/index.html`;
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
 let view: View;
@@ -46,16 +47,11 @@ async function handleView(_oldCharacterData = null, _noDiscard = true, _noName =
     view.on('creator:Sync', handleSync);
     view.on('creator:CheckName', handleCheckName);
     view.on('creator:DisableControls', handleDisableControls);
-    view.on('creator:PlaySound', handleSound);
 
     createPedEditCamera({ x: 0.18, y: -0.5, z: 0 });
     setFov(50);
     setZPos(0.6);
     readyInterval = alt.setInterval(waitForReady, 100);
-}
-
-function handleSound(audioName: string, audioRef: string) {
-    handleFrontendSound(audioName, audioRef);
 }
 
 function handleClose() {
@@ -85,6 +81,7 @@ function waitForReady() {
     }
 
     view.emit('creator:Ready', noDiscard, noName);
+    view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
 }
 
 function handleReadyDone() {
