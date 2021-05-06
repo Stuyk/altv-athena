@@ -81,7 +81,6 @@ function waitForReady() {
     }
 
     view.emit('creator:Ready', noDiscard, noName);
-    view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
 }
 
 function handleReadyDone() {
@@ -91,6 +90,7 @@ function handleReadyDone() {
     }
 
     view.emit('creator:SetData', oldCharacterData, totalCharacters);
+    view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
 }
 
 function handleCheckName(name: string): void {

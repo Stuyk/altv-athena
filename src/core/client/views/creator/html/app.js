@@ -196,15 +196,17 @@ const app = new Vue({
             this.data.colorOverlays.push(overlayData);
         });
 
+        if (!('alt' in window)) {
+            this.show = true;
+            return;
+        }
+
+        alt.on('creator:Ready', this.setReady);
+        alt.on('creator:SetData', this.setData);
+        alt.on('creator:SetLocales', this.setLocales);
+
         this.$nextTick(() => {
-            if ('alt' in window) {
-                alt.on('creator:Ready', this.setReady);
-                alt.on('creator:SetData', this.setData);
-                alt.on('creator:SetLocales', this.setLocales);
-                alt.emit('ready');
-            } else {
-                this.show = true;
-            }
+            alt.emit('ready');
         });
     }
 });
