@@ -24,6 +24,8 @@ description: List of all the changes and current versions.
 + Added Locale Support for Creator Interface (Big Change)
 + Removed LESS library from some Interfaces
 + Added Frontend Sounds to Various Interfaces
++ Added Locales for Job Panel
++ Updated Job Panel Design Slightly
 ```
 
 ## 1.8.1 - April 8-18, 2021

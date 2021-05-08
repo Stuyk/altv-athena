@@ -16,7 +16,7 @@ body {
     width: 100vw;
     overflow: hidden;
     position: relative;
-    animation: fadein 2s;
+    animation: fadein ease 0.75s;
 }
 
 .v-application .v-application--wrap {
@@ -33,10 +33,10 @@ body {
 
 @keyframes fadein {
     from {
-        opacity: 0;
+        transform: translateY(100vh);
     }
     to {
-        opacity: 1;
+        transform: unset;
     }
 }
 
@@ -50,6 +50,7 @@ body {
     width: 100%;
     max-width: 35vw;
     backface-visibility: hidden;
+    overflow: hidden;
 }
 
 .atm .toolbar {

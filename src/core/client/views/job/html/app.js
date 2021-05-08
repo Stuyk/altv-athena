@@ -11,7 +11,11 @@ const app = new Vue({
             summary: `This is a basic summary example.
                 You use can this to set new lines. Also write really awesome text.
 
-                <p style="color: yellow">Start work today!</p>`
+                <p style="color: yellow">Start work today!</p>`,
+            locales: {
+                LABEL_DECLINE: 'Decline',
+                LABEL_ACCEPT: 'Accept'
+            }
         };
     },
     computed: {
@@ -26,20 +30,34 @@ const app = new Vue({
             this.summary = jobData.summary;
         },
         select() {
-            if ('alt' in window) {
-                alt.emit('job:Select');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('job:Select');
         },
         exit() {
-            if ('alt' in window) {
-                alt.emit('job:Exit');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('job:Exit');
+        },
+        setLocales(locale) {
+            this.locales = locale;
         }
     },
     mounted() {
-        if ('alt' in window) {
-            alt.emit('ready');
-            alt.on('job:Data', this.setData);
+        if (!('alt' in window)) {
+            return;
         }
+
+        alt.on('job:SetLocales', this.setLocales);
+        alt.on('job:Data', this.setData);
+        alt.emit('ready');
+        alt.emit('play:Sound', 'ATM_WINDOW', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        alt.emit('job:Ready');
     }
 });

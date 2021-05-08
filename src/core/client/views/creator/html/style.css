@@ -21,7 +21,7 @@ body {
     align-content: center;
     width: 100vw;
     position: relative;
-    animation: fadein 2s;
+    animation: fadein ease 0.75s;
 }
 
 #app {
@@ -172,5 +172,14 @@ button:active {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes fadein {
+    from {
+        transform: translateX(-100vw);
+    }
+    to {
+        transform: unset;
     }
 }

@@ -106,5 +106,6 @@ export const LOCALE_KEYS = {
     // =====================
     WEBVIEW_ATM: 'webview-atm',
     WEBVIEW_CHARACTERS: 'webview-characters',
-    WEBVIEW_CREATOR: 'webview-creator'
+    WEBVIEW_CREATOR: 'webview-creator',
+    WEBVIEW_JOB: 'webview-job'
 };

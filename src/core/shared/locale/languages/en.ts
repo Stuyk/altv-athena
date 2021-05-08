@@ -857,5 +857,9 @@ export default {
                 'Zombie'
             ]
         }
+    },
+    [LOCALE_KEYS.WEBVIEW_JOB]: {
+        LABEL_DECLINE: 'Decline',
+        LABEL_ACCEPT: 'Accept'
     }
 };

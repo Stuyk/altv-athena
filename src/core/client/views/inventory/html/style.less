@@ -1,4 +1,4 @@
-@import '../../less/variables.less';
+@import '../../css/common.css';
 
 @item-dimensions: (100vh / 12vh); // 10 / 720 for vh
 @item-icon-dimensions: 32px;
@@ -93,6 +93,18 @@ body {
     }
 }
 
+.slideinleft {
+    animation: slideinleft ease 0.75s;
+}
+
+.slideinright {
+    animation: slideinright ease 0.75s;
+}
+
+.fadein {
+    animation: fadein ease 0.75s;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -176,7 +188,7 @@ body {
             align-items: flex-end;
             min-width: calc(@item-dimensions * 4 + 0.5vh * 5);
             min-height: 100vh;
-            max-width: calc(@item-dimensions * 4 + 0.5vh * 5);
+            max-width: calc(@item-dimensions * 8 + 0.5vh * 5);
             max-height: 100vh;
             box-sizing: border-box;
             overflow: hidden;
@@ -240,6 +252,7 @@ body {
             user-select: none;
             flex-grow: 1;
             margin-top: calc(@item-dimensions / 1.5);
+            animation: slideinleft ease 0.75s;
 
             .section-title-eq {
                 position: absolute;
@@ -504,6 +517,24 @@ body {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes slideinleft {
+    from {
+        transform: translateX(-100vw);
+    }
+    to {
+        transform: unset;
+    }
+}
+
+@keyframes slideinright {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: unset;
     }
 }
 

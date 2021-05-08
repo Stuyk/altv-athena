@@ -43,7 +43,7 @@
                     </div>
                     <div class="vertical">
                         <div class="horizontal">
-                            <div class="vertical slight-transparent" style="min-width: 21vw; border-right: 15px solid rgba(255, 255, 255, 0.1);">
+                            <div class="vertical slight-transparent slideinleft" style="min-width: 21vw; border-right: 15px solid rgba(255, 255, 255, 0.1);">
                                 <div class="equipment"> <!-- Column 1 -->
                                     <div
                                         v-for="(item, index) in equipment"
@@ -69,7 +69,7 @@
                                     </div>
                                 </div> <!-- End Column 1 -->
                             </div>
-                            <div class="previewBox"> <!-- Column 2 -->
+                            <div class="previewBox fadein"> <!-- Column 2 -->
                                 <template v-if="itemInfo && getItemInfo">
                                     <div class="item-info slight-transparent">
                                         <div class="name text-h5 font-weight-bold light-blue--text text--lighten-3">
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>  <!-- End Column 2 -->
-                            <div class="vertical slight-transparent" style="border-left: 15px solid rgba(255, 255, 255, 0.1);"> <!-- Split Inventory Vertical View -->
+                            <div class="vertical slight-transparent slideinright" style="border-left: 15px solid rgba(255, 255, 255, 0.1);"> <!-- Split Inventory Vertical View -->
                                 <div class="toolbar">
                                     <div 
                                         v-for="(item, index) in toolbar"
