@@ -26,6 +26,10 @@ description: List of all the changes and current versions.
 + Added Frontend Sounds to Various Interfaces
 + Added Locales for Job Panel
 + Updated Job Panel Design Slightly
++ Updated Inventory Design
++ Added Locales for Inventory
++ Added Right-Click Pickup for Ground Items
++ Added Fancy Animations for Inventory
 ```
 
 ## 1.8.1 - April 8-18, 2021

@@ -861,5 +861,22 @@ export default {
     [LOCALE_KEYS.WEBVIEW_JOB]: {
         LABEL_DECLINE: 'Decline',
         LABEL_ACCEPT: 'Accept'
+    },
+    [LOCALE_KEYS.WEBVIEW_INVENTORY]: {
+        ITEM_SLOTS: [
+            'Hat',
+            'Mask',
+            'Shirt',
+            'Pants',
+            'Feet',
+            'Glasses',
+            'Ears',
+            'Bag',
+            'Armour',
+            'Watches',
+            'Bracelets'
+        ],
+        LABEL_SPLIT: 'split',
+        LABEL_CANCEL: 'cancel'
     }
 };
