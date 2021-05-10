@@ -30,6 +30,9 @@ description: List of all the changes and current versions.
 + Added Locales for Inventory
 + Added Right-Click Pickup for Ground Items
 + Added Fancy Animations for Inventory
++ Updated Clothing Design
++ Added Locales for Clothing Interface
++ Improved Clothing Interface Responsiveness
 ```
 
 ## 1.8.1 - April 8-18, 2021
