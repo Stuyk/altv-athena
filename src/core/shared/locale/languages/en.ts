@@ -878,5 +878,23 @@ export default {
         ],
         LABEL_SPLIT: 'split',
         LABEL_CANCEL: 'cancel'
+    },
+    [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
+        LABEL_HAT: 'Hat',
+        LABEL_SHIRT: 'Shirt',
+        LABEL_MASK: 'Mask',
+        LABEL_BOTTOMS: 'Bottoms dsdfsd',
+        LABEL_SHOES: 'Shoes',
+        LABEL_GLASSES: 'Glasses',
+        LABEL_EARRINGS: 'Earrings / Ear Pieces',
+        LABEL_BAG: 'Bags / Backpacks',
+        LABEL_ARMOUR: 'Armour',
+        LABEL_WATCH: 'Wrist Watch',
+        LABEL_BRACELET: 'Wrist Bracelet',
+        LABEL_TOP: 'Shirt Top',
+        LABEL_UNDERSHIRT: 'Undershirt',
+        LABEL_TORSO: 'Arms / Torso / Gloves',
+        LABEL_BUY: 'purchase dis shit',
+        LABEL_EXIT: 'exit'
     }
 };

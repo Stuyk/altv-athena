@@ -170,6 +170,18 @@ const app = new Vue({
         },
         setLocales(localeObject) {
             this.locales = localeObject;
+            this.updateLocales(true);
+        },
+        updateLocales(skipDefault = false) {
+            this.statNames = [
+                /* Name of the stat, variable name inside character object */
+                { varName: this.locales.LABEL_NAME, varRef: 'name' },
+                { varName: this.locales.LABEL_AGE, varRef: 'age', useInfo: true },
+                { varName: this.locales.LABEL_GENDER, varRef: 'gender', useInfo: true },
+                { varName: this.locales.LABEL_HOURS, varRef: 'hours' },
+                { varName: this.locales.LABEL_CASH, varRef: 'cash', prefix: '$' },
+                { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' }
+            ];
         }
     },
     mounted() {
@@ -185,14 +197,6 @@ const app = new Vue({
             ];
         }
 
-        this.statNames = [
-            /* Name of the stat, variable name inside character object */
-            { varName: this.locales.LABEL_NAME, varRef: 'name' },
-            { varName: this.locales.LABEL_AGE, varRef: 'age', useInfo: true },
-            { varName: this.locales.LABEL_GENDER, varRef: 'gender', useInfo: true },
-            { varName: this.locales.LABEL_HOURS, varRef: 'hours' },
-            { varName: this.locales.LABEL_CASH, varRef: 'cash', prefix: '$' },
-            { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' }
-        ];
+        this.updateLocales();
     }
 });

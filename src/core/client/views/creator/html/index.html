@@ -13,50 +13,50 @@
     <body>
         <div id="app">
             <v-app v-cloak>
-                    <div class="panel grey darken-4 elevation-12">
-                        <div class="toolbar pl-2 pr-2 pt-1 pb-1">
-                            <span class="overline overline-center grey--text lighten-1--text font-weight-bold">
-                                {{ locales.titles[selection] }}
-                            </span>
-                        </div>
-                        <div class="content-no-scroll pa-3">
-                            <div class="button-group">
-                                <div class="split">
-                                    <template v-if="selection !== 0">
-                                        <button class="flex-grow-1" @click="decrementIndex">
-                                            <div class="split">
-                                                <v-icon class="pl-4 orange--text">icon-chevron-left</v-icon>
-                                                <span class="overline pr-12 orange--text">{{ locales.LABEL_PREV }}</span>
-                                            </div>
-                                        </button>
-                                    </template>
-                                    <template v-if="selection < this.navOptions.length - 1">
-                                        <button class="flex-grow-1" @click="incrementIndex">
-                                            <div class="split">
-                                                <span class="overline pl-12 blue--text">{{ locales.LABEL_NEXT }}</span>
-                                                <v-icon class="pr-4 blue--text">icon-chevron-right</v-icon>
-                                            </div>
-                                        </button>
+                <div class="panel grey darken-4 elevation-12">
+                    <div class="toolbar pl-2 pr-2 pt-1 pb-1">
+                        <span class="overline overline-center grey--text lighten-1--text font-weight-bold">
+                            {{ locales.titles[selection] }}
+                        </span>
+                    </div>
+                    <div class="content-no-scroll pa-3">
+                        <div class="button-group">
+                            <div class="split">
+                                <template v-if="selection !== 0">
+                                    <button class="flex-grow-1" @click="decrementIndex">
+                                        <div class="split">
+                                            <v-icon class="pl-4 orange--text">icon-chevron-left</v-icon>
+                                            <span class="overline pr-12 orange--text">{{ locales.LABEL_PREV }}</span>
+                                        </div>
+                                    </button>
                                 </template>
-                                </div>
+                                <template v-if="selection < this.navOptions.length - 1">
+                                    <button class="flex-grow-1" @click="incrementIndex">
+                                        <div class="split">
+                                            <span class="overline pl-12 blue--text">{{ locales.LABEL_NEXT }}</span>
+                                            <v-icon class="pr-4 blue--text">icon-chevron-right</v-icon>
+                                        </div>
+                                    </button>
+                            </template>
                             </div>
                         </div>
-                        <div class="content pa-3">
-                            <component
-                                v-bind:is="navOptions[selection]"
-                                v-bind:data="data"
-                                v-bind:nodiscard="noDiscard"
-                                v-bind:noname="noName"
-                                v-bind:currentname="data.name"
-                                v-bind:infodata="infoData"
-                                v-bind:totalcharacters="totalCharacters"
-                                v-bind:locales="locales"
-                            >
-                            </component>
-                        </div>
-                        
                     </div>
-                    <div class="athena"></div>
+                    <div class="content pa-3">
+                        <component
+                            v-bind:is="navOptions[selection]"
+                            v-bind:data="data"
+                            v-bind:nodiscard="noDiscard"
+                            v-bind:noname="noName"
+                            v-bind:currentname="data.name"
+                            v-bind:infodata="infoData"
+                            v-bind:totalcharacters="totalCharacters"
+                            v-bind:locales="locales"
+                        >
+                        </component>
+                    </div>
+                    
+                </div>
+                <div class="athena"></div>
             </v-app>
         </div>
         <script src="../../js/vue.min.js"></script>

@@ -429,7 +429,7 @@ const app = new Vue({
             return parseInt(value.replace(/.-/gm, ''));
         },
         handleClose(keyPress) {
-            if (keyPress.key !== 'Escape') {
+            if (keyPress.keyCode !== 27) {
                 return;
             }
 
