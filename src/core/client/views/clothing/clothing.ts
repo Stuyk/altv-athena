@@ -14,6 +14,7 @@ import {
     setShouldDisableControls,
     setZPos
 } from '../../utility/camera';
+import { BaseHUD } from '../hud/hud';
 
 // const url = `http://127.0.0.1:5555/src/core/client/views/clothing/html/index.html`;
 const url = `http://resource/client/views/clothing/html/index.html`;
@@ -32,6 +33,7 @@ async function handleView() {
     view.on('clothing:DisableControls', handleControls);
     view.on('clothing:Ready', handleReady);
     open = true;
+    BaseHUD.setHudVisibility(false);
     createPedEditCamera({ x: 0.15, y: -0.5, z: 0 });
     setFov(70);
     setZPos(0.6);
@@ -102,6 +104,7 @@ function handleExit() {
     alt.emitServer(View_Events_Clothing.Exit);
     view.close();
     open = false;
+    BaseHUD.setHudVisibility(true);
 }
 
 function handlePurchase(index: number, component: ClothingComponent, name: string, desc: string) {

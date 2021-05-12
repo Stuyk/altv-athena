@@ -33,6 +33,7 @@ description: List of all the changes and current versions.
 + Updated Clothing Design
 + Added Locales for Clothing Interface
 + Improved Clothing Interface Responsiveness
++ Hide HUD when in Clothing Menu
 ```
 
 ## 1.8.1 - April 8-18, 2021

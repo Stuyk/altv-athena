@@ -6,6 +6,17 @@ description: General console commands for outside management.
 
 Mostly admin commands and general management of your players and server.
 
+- [Console](#console)
+  - [setadmin](#setadmin)
+  - [addwhitelist](#addwhitelist)
+  - [removewhitelist](#removewhitelist)
+  - [ban](#ban)
+  - [unban](#unban)
+  - [dox](#dox)
+  - [kick](#kick)
+  - [kickall](#kickall)
+  - [screenshot](#screenshot)
+
 ## setadmin
 
 Used to set a discord user as admin.

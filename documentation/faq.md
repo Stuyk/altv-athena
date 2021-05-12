@@ -6,6 +6,7 @@ description: Frequently asked questions.
 
 - [FAQ](#faq)
   - [Do I actually need to buy a license?](#do-i-actually-need-to-buy-a-license)
+  - [How do I purchase a license?](#how-do-i-purchase-a-license)
   - [Is there a lifetime package?](#is-there-a-lifetime-package)
   - [Why should I buy this framework?](#why-should-i-buy-this-framework)
   - [Do you have a Roadmap?](#do-you-have-a-roadmap)
@@ -39,6 +40,10 @@ description: Frequently asked questions.
 ## Do I actually need to buy a license?
 
 If you respect the development that I'm doing and the open source nature of the project then yes. This costs me a lot of my personal time to create an environment that new developers and experienced developers will both understand with a little bit of time. I've written a lot of open source alt:V resources and this builds on experience you may not get otherwise.
+
+## How do I purchase a license?
+
+You may obtain a license from [https://gum.co/SKpPN](https://gum.co/SKpPN). The process is entirely automated. Please review the documentation and installation instructions for booting up the gamemode after purchase.
 
 ## Is there a lifetime package?
 
