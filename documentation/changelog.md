@@ -38,6 +38,7 @@ description: List of all the changes and current versions.
 + Removed need for altv-ares submodule
 + Added New Login Screen
 + Added Locales to Login Screen
++ Added Sounds to Login Screen
 ```
 
 ## 1.8.1 - April 8-18, 2021

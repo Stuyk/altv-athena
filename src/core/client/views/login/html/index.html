@@ -19,7 +19,7 @@
                             <div class="center">
                                 <img class="discord mb-2 slideindown" src="./assets/discord.svg" />
                             </div>
-                            <button class="overline blue mb-4 slideinright" @mouseup="beginAuth">{{ locales.LABEL_LOGIN_WITH_DISCORD }}</button>
+                            <button @mouseover="hover" class="overline blue mb-4 slideinright" @mouseup="beginAuth">{{ locales.LABEL_LOGIN_WITH_DISCORD }}</button>
                             <p class="mt-6 slideinup" v-if="!errorMessage">
                             {{ locales.LABEL_OPEN_PAGE }}
                             </p>
@@ -35,8 +35,8 @@
                                 {{ locales.LABEL_TAB_OUT }}
                             </p>
                             <template v-if="readyToFinish">
-                                <button class="overline blue mb-4 slideinright" @click="finishAuth">{{ locales.LABEL_FINISH_LOGIN }}</button>
-                                <button class="overline orange mb-4 slideinleft" @click="authAgain">{{ locales.LABEL_OPEN_WINDOW }}</button>
+                                <button @mouseover="hover" class="overline blue mb-4 slideinright" @click="finishAuth">{{ locales.LABEL_FINISH_LOGIN }}</button>
+                                <button @mouseover="hover" class="overline orange mb-4 slideinleft" @click="authAgain">{{ locales.LABEL_OPEN_WINDOW }}</button>
                             </template>
                         </div>
                     </template>

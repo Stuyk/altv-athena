@@ -3,7 +3,8 @@ import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { View } from '../../extensions/view';
 
-const url = `http://resource/client/views/login/html/index.html`;
+const url = `http://127.0.0.1:5555/src/core/client/views/login/html/index.html`;
+// const url = `http://resource/client/views/login/html/index.html`;
 let view: View;
 let discordURI;
 

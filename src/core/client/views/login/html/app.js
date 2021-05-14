@@ -54,6 +54,7 @@ const app = new Vue({
             this.updates += 1;
 
             if ('alt' in window) {
+                alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                 alt.emit('discord:FinishAuth');
             } else {
                 setTimeout(() => {
@@ -68,7 +69,13 @@ const app = new Vue({
             this.waitingForAuth = true;
 
             if ('alt' in window) {
+                alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                 alt.emit('discord:OpenURL');
+            }
+        },
+        hover() {
+            if ('alt' in window) {
+                alt.emit('play:Sound', 'NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
             }
         },
         openURL(url) {
