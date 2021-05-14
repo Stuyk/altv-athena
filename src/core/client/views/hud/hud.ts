@@ -64,10 +64,28 @@ export class BaseHUD {
     }
 
     static setHudStatus(name: HudEventNames, value: any) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         BaseHUD.view.emit(name, value);
+
+        if (name !== HudEventNames.SetVehicle) {
+            return;
+        }
+
+        if (!value) {
+            return;
+        }
+
+        BaseHUD.setHudStatus(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
     }
 
     static updateSpeed(speed: string) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (!alt.Player.local.vehicle) {
             return;
         }
@@ -99,11 +117,19 @@ export class BaseHUD {
     }
 
     static updateCommands() {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         BaseHUD.view.emit('chat:PopulateCommands', commandList);
         BaseHUD.view.isVisible = true;
     }
 
     static processMetaChange(key: string, value: any, oldValue: any) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (key === 'food') {
             BaseHUD.view.emit(HudEventNames.Food, value);
         }

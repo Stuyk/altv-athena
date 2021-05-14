@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.8.2 - April 19-x, 2021
+## 1.8.2 - April 19 - May 14, 2021
 
 ```diff
 + Added Interior Architecture
@@ -44,6 +44,7 @@ description: List of all the changes and current versions.
 + Interactions Always On
 + Moved Help Text to be Object Orientated
 + Added other help text options.
++ Added Locales for Interactions.
 ```
 
 ## 1.8.1 - April 8-18, 2021

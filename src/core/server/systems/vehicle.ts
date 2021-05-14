@@ -22,6 +22,17 @@ function handleEnterVehicle(player: alt.Player, vehicle: alt.Vehicle, seat: numb
     const actualSeat = seat - 1;
     vehicleFuncs.setter.doorOpen(vehicle, player, actualSeat, false);
     player.lastEnteredVehicleID = vehicle.id;
+
+    if (!vehicle) {
+        return;
+    }
+
+    if (!vehicle.behavior) {
+        vehicle.destroy();
+        return;
+    }
+
+    vehicleFuncs.setter.updateFuel(vehicle);
 }
 
 function handleSetEngine(player: alt.Player): void {

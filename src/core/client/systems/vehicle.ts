@@ -10,12 +10,13 @@ import {
 import { distance, distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import vehicleFuncs from '../extensions/Vehicle';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
-import { ActionMenu, Action } from '../../shared/interfaces/Actions';
+import { ActionMenu } from '../../shared/interfaces/Actions';
 import { CLIENT_VEHICLE_EVENTS } from '../enums/Vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { drawTexture, loadTexture } from '../utility/texture';
-import { HelpController } from '../views/hud/controllers/helpController';
 import { KEY_BINDS } from '../events/keyup';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -184,8 +185,12 @@ export class VehicleController {
                 return actions;
             }
 
-            const short = `[${String.fromCharCode(KEY_BINDS.INTERACT)}] Interact with Vehicle`;
-            const long = `[${String.fromCharCode(KEY_BINDS.VEHICLE_LOCK)}] Toggle Lock`;
+            const short = `[${String.fromCharCode(KEY_BINDS.INTERACT)}] ${LocaleController.get(
+                LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE
+            )}`;
+            const long = `[${String.fromCharCode(KEY_BINDS.VEHICLE_LOCK)}] ${LocaleController.get(
+                LOCALE_KEYS.VEHICLE_TOGGLE_LOCK
+            )}`;
             alt.Player.local.otherInteraction = {
                 position: closestVehicle.pos,
                 short,
@@ -360,7 +365,7 @@ export class VehicleController {
     static enterExitVehicle(closestVehicle: alt.Vehicle, startingAt: number) {
         const isLocked = closestVehicle.lockStatus === Vehicle_Lock_State.LOCKED || !closestVehicle.lockStatus;
         if (isLocked) {
-            ChatController.appendMessage(`The closest vehicle is locked.`);
+            ChatController.appendMessage(LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK));
             return;
         }
 

@@ -67,6 +67,7 @@ export const LOCALE_KEYS = {
     INTERACTION_TOO_FAR_AWAY: `interact-too-far-away`,
     INTERACTION_INVALID_OBJECT: 'interaction-invalid-object',
     INTERACTION_INTERACT_WITH_OBJECT: 'interaction-with-object',
+    INTERACTION_INTERACT_VEHICLE: 'interaction-interact-vehicle',
     // Inventory
     ITEM_DOES_NOT_EXIST: `item-does-not-exist`,
     ITEM_NOT_EQUIPPED: 'no-item-in-equipment-slot',
@@ -101,6 +102,8 @@ export const LOCALE_KEYS = {
     // Vehicle
     VEHICLE_NO_FUEL: `vehicle-no-fuel`,
     VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`,
+    VEHICLE_TOGGLE_LOCK: `vehicle-toggle-lock`,
+    VEHICLE_IS_LOCKED: `vehicle-is-locked`,
     // =====================
     // WebView Locales
     // =====================

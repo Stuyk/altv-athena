@@ -75,6 +75,7 @@ export default {
     [LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY]: `You are too far away to interact. Move closer.`,
     [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
     [LOCALE_KEYS.INTERACTION_INTERACT_WITH_OBJECT]: `Interact with Object`,
+    [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
     // Item
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
@@ -109,6 +110,8 @@ export default {
     // Vehicle
     [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
     [LOCALE_KEYS.VEHICLE_LOCK_SET_TO]: `Vehicle lock has been set to: _%_`,
+    [LOCALE_KEYS.VEHICLE_TOGGLE_LOCK]: `Toggle Lock`,
+    [LOCALE_KEYS.VEHICLE_IS_LOCKED]: `Closest vehicle is locked.`,
     // ============================
     // WebView Locales Start Here
     // ============================
