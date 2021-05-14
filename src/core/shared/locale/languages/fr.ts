@@ -891,7 +891,7 @@ export default {
         LABEL_TOP: 'Shirt Top',
         LABEL_UNDERSHIRT: 'Undershirt',
         LABEL_TORSO: 'Arms / Torso / Gloves',
-        LABEL_BUY: 'purchase dis shit',
+        LABEL_BUY: 'purchase',
         LABEL_EXIT: 'exit'
     },
     [LOCALE_KEYS.WEBVIEW_LOGIN]: {
