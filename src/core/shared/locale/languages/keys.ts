@@ -109,5 +109,6 @@ export const LOCALE_KEYS = {
     WEBVIEW_CREATOR: 'webview-creator',
     WEBVIEW_JOB: 'webview-job',
     WEBVIEW_INVENTORY: 'webview-inventory',
-    WEBVIEW_CLOTHING: 'webview-clothing'
+    WEBVIEW_CLOTHING: 'webview-clothing',
+    WEBVIEW_LOGIN: 'webview-login'
 };

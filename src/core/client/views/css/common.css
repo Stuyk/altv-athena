@@ -70,3 +70,12 @@ button:active {
         opacity: 1;
     }
 }
+
+.overline{
+    font-size:.75rem!important;
+    font-weight:500;
+    letter-spacing:.1666666667em!important;
+    line-height:2rem;
+    text-transform:uppercase;
+    font-family:Roboto,sans-serif!important
+}

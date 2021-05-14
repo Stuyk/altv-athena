@@ -893,5 +893,14 @@ export default {
         LABEL_TORSO: 'Arms / Torso / Gloves',
         LABEL_BUY: 'purchase dis shit',
         LABEL_EXIT: 'exit'
+    },
+    [LOCALE_KEYS.WEBVIEW_LOGIN]: {
+        LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
+        LABEL_LOGIN_WITH_DISCORD: `Login with Discord`,
+        LABEL_TRY_AGAIN: `Try again...`,
+        LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
+        window again.`,
+        LABEL_FINISH_LOGIN: `Finish Login`,
+        LABEL_OPEN_WINDOW: `Open Login Window Again`
     }
 };

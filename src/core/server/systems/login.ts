@@ -10,13 +10,14 @@ import { DiscordUser } from '../interface/DiscordUser';
 import { getUniquePlayerHash } from '../utility/encryption';
 import { goToCharacterSelect } from '../views/characters';
 import { OptionsController } from './options';
+import { vehicleFuncs } from '../extensions/Vehicle';
+import { Collections } from '../interface/DatabaseCollections';
+import '../views/login';
 import './tick';
 import './voice';
 import './job';
 import './marker';
 import './textlabel';
-import { vehicleFuncs } from '../extensions/Vehicle';
-import { Collections } from '../interface/DatabaseCollections';
 
 const db: sm.Database = sm.getDatabase();
 

@@ -120,6 +120,10 @@ export class BaseHUD {
     }
 
     static setHudVisibility(value: boolean) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (!value) {
             BaseHUD.view.isVisible = false;
             native.displayRadar(false);
