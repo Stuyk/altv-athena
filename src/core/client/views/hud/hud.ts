@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
+import { handleFrontendSound } from '../../systems/sound';
 import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
@@ -48,6 +49,7 @@ export class BaseHUD {
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
             BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
+            BaseHUD.view.on('play:Sound', handleFrontendSound);
 
             PhoneController.initializeApps();
 

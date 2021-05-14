@@ -7,13 +7,15 @@ import {
     Vehicle_Seat_List,
     Vehicle_Door_List
 } from '../../shared/enums/vehicle';
-import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
+import { distance, distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import vehicleFuncs from '../extensions/Vehicle';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { ActionMenu, Action } from '../../shared/interfaces/Actions';
 import { CLIENT_VEHICLE_EVENTS } from '../enums/Vehicle';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { drawTexture, loadTexture } from '../utility/texture';
+import { HelpController } from '../views/hud/controllers/helpController';
+import { KEY_BINDS } from '../events/keyup';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -25,6 +27,10 @@ const MAX_VEHICLE_DISTANCE = 8;
 
 let waitingForVehicle: alt.Vehicle | null = null;
 let waitingForSeat: number | null;
+
+if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
+    loadTexture('mpsafecracking');
+}
 
 export class VehicleController {
     static processingVehicles = false;
@@ -64,9 +70,6 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static triggerVehicleFunction(booleanName: string): void {
-        if (!alt.Player.local.isInteractionOn) {
-            return;
-        }
         if (alt.Player.local.isChatOpen) {
             return;
         }
@@ -158,6 +161,10 @@ export class VehicleController {
             return {};
         }
 
+        if (distance2d(closestVehicle.pos, alt.Player.local.pos) > MAX_VEHICLE_DISTANCE) {
+            return {};
+        }
+
         const vehicleModel = native.getDisplayNameFromVehicleModel(closestVehicle.model);
         const actions = {
             [vehicleModel]: {}
@@ -176,6 +183,14 @@ export class VehicleController {
             if (!closestVehicle) {
                 return actions;
             }
+
+            const short = `[${String.fromCharCode(KEY_BINDS.INTERACT)}] Interact with Vehicle`;
+            const long = `[${String.fromCharCode(KEY_BINDS.VEHICLE_LOCK)}] Toggle Lock`;
+            alt.Player.local.otherInteraction = {
+                position: closestVehicle.pos,
+                short,
+                long
+            };
 
             // Return Current Actions if Vehicle is Locked
             if (closestVehicle.lockStatus === Vehicle_Lock_State.LOCKED || !closestVehicle.lockStatus) {
@@ -303,6 +318,10 @@ export class VehicleController {
 
         if (Date.now() > VehicleController.nextVehicleStateUpdate) {
             VehicleController.updateVehicleState(closestVehicle);
+        }
+
+        if (distance2d(closestVehicle.pos, alt.Player.local.pos) > MAX_VEHICLE_DISTANCE) {
+            return;
         }
 
         const exceededNextControlCheck = Date.now() > VehicleController.nextControlPress;

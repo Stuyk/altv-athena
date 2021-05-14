@@ -18,10 +18,8 @@ declare module 'alt-client' {
         // Used to reveal nametags.
         inVisionTime: number | null;
 
-        // Interaction Mode Settings
-        isInteractionOn: boolean;
-
         // Used for ATMs, Vending Machines, etc.
         closestInteraction: { type: string; position: alt.Vector3; text: string };
+        otherInteraction: { position: alt.Vector3; short: string; long: string };
     }
 }

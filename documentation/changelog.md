@@ -39,6 +39,11 @@ description: List of all the changes and current versions.
 + Added New Login Screen
 + Added Locales to Login Screen
 + Added Sounds to Login Screen
++ Removed Help Menu in Top Left
++ Removed Interaction Toggle
++ Interactions Always On
++ Moved Help Text to be Object Orientated
++ Added other help text options.
 ```
 
 ## 1.8.1 - April 8-18, 2021

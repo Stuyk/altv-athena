@@ -71,7 +71,6 @@ export class View extends alt.WebView {
         // Used to hide the view until it's ready.
         _instance.on('play:Sound', handleFrontendSound);
         _instance.on('ready', () => {
-            alt.log('called ready');
             _instance.isVisible = true;
         });
 
