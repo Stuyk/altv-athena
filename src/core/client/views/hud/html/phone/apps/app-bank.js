@@ -80,13 +80,13 @@ const appBank = Vue.component('app-bank', {
                                 </v-card-title>
                                 <v-card-subtitle class="font-weight-black"> Bank Balance </v-card-subtitle>
                                 <v-card-actions>
-                                    <v-btn
+                                    <button
                                         @click="showBankTransfer = true; showCashTransfer = false;"
                                         class="font-weight-black flex-grow-1 light-blue--text text--lighten-2"
                                         outlined
                                     >
                                         Transfer
-                                    </v-btn>
+                                    </button>
                                 </v-card-actions>
                             </template>
                             <template v-else>
@@ -116,21 +116,21 @@ const appBank = Vue.component('app-bank', {
                                     <v-divider></v-divider>
                                 </v-form>
                                 <v-card-actions>
-                                    <v-btn
+                                    <button
                                         @click="showBankTransfer = false"
                                         class="font-weight-black flex-grow-1 orange--text text--lighten-2"
                                         outlined
                                     >
                                         Back
-                                    </v-btn>
-                                    <v-btn
+                                    </button>
+                                    <button
                                         class="font-weight-black flex-grow-1 green--text text--lighten-2"
                                         outlined
                                         v-if="validateForm()"
                                         @click="transfer"
                                     >
                                         Accept
-                                    </v-btn>
+                                    </button>
                                 </v-card-actions>
                             </template>
                         </v-card>
@@ -141,13 +141,13 @@ const appBank = Vue.component('app-bank', {
                                 </v-card-title>
                                 <v-card-subtitle class="font-weight-black"> Cash Balance </v-card-subtitle>
                                 <v-card-actions>
-                                    <v-btn
+                                    <button
                                         @click="showCashTransfer = true; showBankTransfer = false;"
                                         class="font-weight-black flex-grow-1 light-blue--text text--lighten-2"
                                         outlined
                                     >
                                         Transfer
-                                    </v-btn>
+                                    </button>
                                 </v-card-actions>
                             </template>
                             <template v-else>
@@ -177,21 +177,21 @@ const appBank = Vue.component('app-bank', {
                                     <v-divider></v-divider>
                                 </v-form>
                                 <v-card-actions>
-                                    <v-btn
+                                    <button
                                         @click="showCashTransfer = false"
                                         class="font-weight-black flex-grow-1 orange--text text--lighten-2"
                                         outlined
                                     >
                                         Back
-                                    </v-btn>
-                                    <v-btn
+                                    </button>
+                                    <button
                                         class="font-weight-black flex-grow-1 green--text text--lighten-2"
                                         outlined
                                         v-if="validateForm()"
                                         @click="transfer"
                                     >
                                         Accept
-                                    </v-btn>
+                                    </button>
                                 </v-card-actions>
                             </template>
                         </v-card>

@@ -309,6 +309,22 @@ export class InventoryController {
         }
     }
 
+    static handleProcessPickup(player: alt.Player, hash: string) {
+        const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+        if (!openSlot) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        const endData = DataHelpers.find((dataInfo) => 'i-'.includes(dataInfo.abbrv));
+        if (!endData) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
+        InventoryController.handlePickupGround(player, endData, openSlot.slot, hash, openSlot.tab);
+    }
+
     static handlePickupGround(
         player: alt.Player,
         endData: CategoryData,
@@ -533,6 +549,11 @@ export class InventoryController {
             return;
         }
 
+        if (amount >= clonedItem.quantity) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
         player.data.inventory[tab][index].quantity -= amount;
         clonedItem.quantity = amount;
         playerFuncs.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot, inventorySlot.tab);
@@ -581,3 +602,4 @@ const DataHelpers: Array<CategoryData> = [
 alt.onClient(View_Events_Inventory.Use, InventoryController.processUse);
 alt.onClient(View_Events_Inventory.Process, InventoryController.processItemMovement);
 alt.onClient(View_Events_Inventory.Split, InventoryController.processSplit);
+alt.onClient(View_Events_Inventory.Pickup, InventoryController.handleProcessPickup);

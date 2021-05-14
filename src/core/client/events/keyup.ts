@@ -69,9 +69,6 @@ const KEY_UP_BINDS = {
     [KEY_BINDS.INTERACT]: {
         singlePress: InteractionController.triggerInteraction
     },
-    [KEY_BINDS.INTERACTION_MODE]: {
-        singlePress: InteractionController.toggleInteractionMode
-    },
     [KEY_BINDS.TOOLBAR_ONE]: {
         singlePress: ToolbarController.handleToolbarSwitch
     },
@@ -114,13 +111,11 @@ function handleKeyDown(key: number) {
         return;
     }
 
-    HelpController.setHelpState(true);
     alt.setTimeout(() => {
         if (!keyPressTimes[key]) {
             return;
         }
 
-        HelpController.setHelpState(false);
         keyPressTimes[key] = null;
 
         if (KEY_UP_BINDS[key]['longpress']) {
@@ -133,8 +128,6 @@ function handleKeyUp(key: number) {
     if (!KEY_UP_BINDS[key]) {
         return;
     }
-
-    HelpController.setHelpState(false);
 
     if (alt.Player.local.isMenuOpen) {
         return;

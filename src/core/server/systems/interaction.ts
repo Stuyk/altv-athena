@@ -42,6 +42,11 @@ export class InteractionController {
             eventName: View_Events_Clothing.Open,
             isServer: false,
             text: LocaleController.get(LOCALE_KEYS.USE_CLOTHING_STORE)
+        },
+        interior: {
+            eventName: SYSTEM_EVENTS.INTERIOR_SWITCH,
+            isServer: true,
+            text: LocaleController.get(LOCALE_KEYS.INTERIOR_INTERACT)
         }
     };
 
@@ -124,6 +129,27 @@ export class InteractionController {
         InteractionController.InteractionTypes[identifierAndEventName] = {
             eventName: identifierAndEventName,
             isServer: isServerEvent
+        };
+    }
+
+    /**
+     * Forces any ColShape to push events.
+     * @static
+     * @param {string} identifier
+     * @param {string} eventName
+     * @param {boolean} isServer
+     * @param {alt.Colshape} shape
+     * @memberof InteractionController
+     */
+    static sideLoadInteraction(identifier: string, eventName: string, isServer: boolean, shape: alt.Colshape) {
+        if (!InteractionController.Interactions[identifier]) {
+            InteractionController.Interactions[identifier] = [];
+        }
+
+        InteractionController.Interactions[identifier].push(shape);
+        InteractionController.InteractionTypes[identifier] = {
+            eventName: eventName,
+            isServer: isServer
         };
     }
 

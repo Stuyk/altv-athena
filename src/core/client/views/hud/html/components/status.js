@@ -119,10 +119,6 @@ const status = Vue.component('status', {
             <div class="objective" v-if="objective">
                 {{ objective }}
             </div>
-            <div class="interact rounder mb-3">
-                <v-icon small class="icon">{{ interact ? 'icon-eye' : 'icon-eye-slash' }}</v-icon>
-                <div class="status-overlay" :class="interactColor[interact]" :style="getTotalHeight('lock')"></div>
-            </div>
             <div class="water rounder mb-3">
                 <v-icon small class="icon">icon-droplet</v-icon>
                 <div class="status-overlay light-blue lighten-2" :style="getTotalHeight('water')"></div>

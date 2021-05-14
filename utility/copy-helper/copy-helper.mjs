@@ -11,6 +11,7 @@ const MainPath = process.cwd();
 const ResourcesPath = path.join(MainPath, 'resources');
 const SourceFiles = new glob.GlobSync('./src/**/*.!(ts)').found;
 let copiedFiles = 0;
+let compilationPromise;
 
 async function buildPipeline() {
     console.log(`[Athena] Starting Compilation`);
@@ -31,7 +32,7 @@ async function buildPipeline() {
         }
 
         console.log(`[Athena] Compiling Typescript`);
-        await exec('tsc', { cwd: MainPath }).catch((err) => {
+        compilationPromise = exec('tsc', { cwd: MainPath }).catch((err) => {
             if (err.stdout) {
                 console.log('\r\n');
                 console.log('-----[ READ THIS CAREFULLY ]-------');
@@ -67,6 +68,25 @@ async function buildPipeline() {
     console.log(`[Athena] Copying Addon Resources`);
     fs.copySync(path.join(MainPath, 'addon-resources'), path.join(MainPath, 'resources'), { recursive: true });
     console.log(`[Athena] Copied ${copiedFiles} Extra Files for Athena`);
+
+    if (compilationPromise) {
+        await compilationPromise;
+    }
+
+    const CompiledFiles = new glob.GlobSync('./athena-cache/**/*.!(ts)').found;
+    for (let i = 0; i < CompiledFiles.length; i++) {
+        const oldPath = CompiledFiles[i];
+        const newPath = CompiledFiles[i].replace('athena-cache', 'resources');
+        const dirName = path.dirname(newPath).normalize();
+
+        if (!fs.existsSync(dirName)) {
+            fs.mkdirSync(dirName, { recursive: true });
+        }
+
+        fs.copyFileSync(oldPath, newPath);
+        copiedFiles += 1;
+    }
+   
     console.log(`[Athena] Build Time: ${Date.now() - StartTime}ms`);
     console.log(`[Athena] Attempting to Boot Server...`);
 }

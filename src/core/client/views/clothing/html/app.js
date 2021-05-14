@@ -1,8 +1,8 @@
 Vue.config.devtools = true;
 Vue.prototype.window = window;
 
-const plainText = new RegExp(/^[a-zA-Z 0-9]{6,32}$/);
-const plainTextDesc = new RegExp(/^[a-zA-Z 0-9]{6,64}$/);
+const plainText = new RegExp(/^[a-zA-Z 0-9]{3,32}$/);
+const plainTextDesc = new RegExp(/^[a-zA-Z 0-9]{3,64}$/);
 
 const app = new Vue({
     el: '#app',
@@ -14,122 +14,15 @@ const app = new Vue({
             // So the first element is the first slot of the equipment.
             name: '',
             desc: '',
-            componentIndex: 2,
+            componentIndex: 0,
             cost: 0,
-            shirtNames: ['Top', 'Undershirt', 'Torso'],
-            components: [
-                {
-                    name: 'Hat',
-                    ids: [0],
-                    drawables: [-1],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: true
-                },
-                {
-                    name: 'Mask',
-                    ids: [1],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: false
-                },
-                {
-                    name: 'Shirt',
-                    ids: [11, 8, 3],
-                    drawables: [0, 0, 0],
-                    textures: [0, 0, 0],
-                    maxValues: [0, 0, 0],
-                    maxDrawables: [0, 0, 0],
-                    maxTextures: [0, 0, 0],
-                    isProp: false
-                },
-                {
-                    name: 'Bottoms',
-                    ids: [4],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: false
-                },
-                {
-                    name: 'Feet',
-                    ids: [6],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: false
-                },
-                {
-                    name: 'Glasses',
-                    ids: [1],
-                    drawables: [-1],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: true
-                },
-                {
-                    name: 'Ears',
-                    ids: [2],
-                    drawables: [-1],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: true
-                },
-                {
-                    name: 'Bag',
-                    ids: [5],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: false
-                },
-                {
-                    name: 'Armour',
-                    ids: [9],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: false
-                },
-                {
-                    name: 'Watch',
-                    ids: [6],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: true
-                },
-                {
-                    name: 'Bracelets',
-                    ids: [7],
-                    drawables: [0],
-                    textures: [0],
-                    maxDrawables: [0],
-                    maxTextures: [0],
-                    isProp: true
-                }
-            ],
-            rules: [
-                (v) => !!v || 'This field is required',
-                (v) => (v && v !== '') || 'This field is required',
-                (v) => (v && plainText.test(v)) || 'No special characters. Greater than 5. Less than 16.'
-            ],
-            rulesDesc: [
-                (v) => !!v || 'This field is required',
-                (v) => (v && v !== '') || 'This field is required',
-                (v) => (v && plainTextDesc.test(v)) || 'No special characters. Greater than 5. Less than 16.'
-            ],
-            allPassing: false
+            inputSelected: false,
+            shirtNames: [],
+            components: [],
+            allPassing: false,
+            nameValid: false,
+            descValid: false,
+            locales: DefaultLocale
         };
     },
     methods: {
@@ -145,7 +38,7 @@ const app = new Vue({
             if (dataName === 'drawables') {
                 const maxValue = newComponents[this.componentIndex].maxDrawables[index];
                 if (newComponents[this.componentIndex].drawables[index] > maxValue) {
-                    newComponents[this.componentIndex].drawables[index] = -1;
+                    newComponents[this.componentIndex].drawables[index] = 0;
                 }
             }
 
@@ -154,6 +47,10 @@ const app = new Vue({
                 if (newComponents[this.componentIndex].textures[index] > maxValue) {
                     newComponents[this.componentIndex].textures[index] = 0;
                 }
+            }
+
+            if ('alt' in window) {
+                alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
             }
 
             this.components = newComponents;
@@ -169,7 +66,7 @@ const app = new Vue({
 
             if (dataName === 'drawables') {
                 const maxValue = newComponents[this.componentIndex].maxDrawables[index];
-                if (newComponents[this.componentIndex].drawables[index] < -1) {
+                if (newComponents[this.componentIndex].drawables[index] < 0) {
                     newComponents[this.componentIndex].drawables[index] = maxValue;
                 }
             }
@@ -181,13 +78,20 @@ const app = new Vue({
                 }
             }
 
+            if ('alt' in window) {
+                alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            }
+
             this.components = newComponents;
             this.updatePlayerComponents();
         },
         updatePlayerComponents() {
-            if ('alt' in window) {
-                alt.emit('clothing:Update', this.components);
+            if (!('alt' in window)) {
+                return;
             }
+
+            this.handleBlur();
+            alt.emit('clothing:Update', this.components);
         },
         incrementIndex() {
             if (this.componentIndex + 1 >= this.components.length) {
@@ -196,6 +100,13 @@ const app = new Vue({
             }
 
             this.componentIndex += 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            this.handleBlur();
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
             if (this.componentIndex - 1 <= -1) {
@@ -204,16 +115,31 @@ const app = new Vue({
             }
 
             this.componentIndex -= 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            this.handleBlur();
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         handlePropagation(arrayOfComponentData) {
             this.components = arrayOfComponentData;
         },
-        exit() {
-            if ('alt' in window) {
-                alt.emit('clothing:Exit');
-            } else {
-                console.log('bai');
+        handleClose(ev) {
+            if (ev.keyCode !== 27) {
+                return;
             }
+
+            document.removeEventListener('keyup', this.handleClose);
+            this.exit();
+        },
+        exit() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('clothing:Exit');
         },
         purchaseComponent() {
             const componentData = JSON.parse(JSON.stringify(this.components[this.componentIndex]));
@@ -221,28 +147,170 @@ const app = new Vue({
             delete componentData.maxTextures;
             delete componentData.name;
 
-            if ('alt' in window) {
-                alt.emit('clothing:Purchase', this.componentIndex, componentData, this.name, this.desc);
-            } else {
-                console.log(componentData);
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('clothing:Purchase', this.componentIndex, componentData, this.name, this.desc);
         },
         handleFocus() {
-            if ('alt' in window) {
-                alt.emit('clothing:DisableControls', true);
+            this.inputSelected = true;
+
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('clothing:DisableControls', true);
         },
         handleBlur() {
-            if ('alt' in window) {
-                alt.emit('clothing:DisableControls', false);
+            this.inputSelected = false;
+
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('clothing:DisableControls', false);
+        },
+        toggleLock() {
+            this.inputSelected = !this.inputSelected;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('clothing:DisableControls', this.inputSelected);
+        },
+        setLocales(localeObject) {
+            this.locales = localeObject;
+            this.updateLocales(true);
+        },
+        updateLocales(skipDefault = false) {
+            if (!skipDefault) {
+                this.locales = DefaultLocale;
+            }
+
+            this.shirtNames = [this.locales.LABEL_TOP, this.locales.LABEL_UNDERSHIRT, this.locales.LABEL_TORSO];
+            this.components = [
+                {
+                    name: this.locales.LABEL_HAT,
+                    ids: [0],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                },
+                {
+                    name: this.locales.LABEL_MASK,
+                    ids: [1],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_SHIRT,
+                    ids: [11, 8, 3],
+                    drawables: [0, 0, 0],
+                    textures: [0, 0, 0],
+                    maxValues: [0, 0, 0],
+                    maxDrawables: [0, 0, 0],
+                    maxTextures: [0, 0, 0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_BOTTOMS,
+                    ids: [4],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_SHOES,
+                    ids: [6],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_GLASSES,
+                    ids: [1],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                },
+                {
+                    name: this.locales.LABEL_EARRINGS,
+                    ids: [2],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                },
+                {
+                    name: this.locales.LABEL_BAG,
+                    ids: [5],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_ARMOUR,
+                    ids: [9],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: false
+                },
+                {
+                    name: this.locales.LABEL_WATCH,
+                    ids: [6],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                },
+                {
+                    name: this.locales.LABEL_BRACELET,
+                    ids: [7],
+                    drawables: [0],
+                    textures: [0],
+                    maxDrawables: [0],
+                    maxTextures: [0],
+                    isProp: true
+                }
+            ];
         }
     },
     watch: {
         name(value) {
+            this.allPassing = false;
+            this.nameValid = false;
+            this.descValid = false;
             this.name = value;
 
-            if (plainText.test(this.name) && plainTextDesc.test(this.desc)) {
+            if (plainText.test(this.name)) {
+                this.nameValid = true;
+            }
+
+            if (plainTextDesc.test(this.desc)) {
+                this.descValid = true;
+            }
+
+            if (this.nameValid && this.descValid) {
                 this.allPassing = true;
                 return;
             }
@@ -250,9 +318,20 @@ const app = new Vue({
             this.allPassing = false;
         },
         desc(value) {
+            this.allPassing = false;
+            this.nameValid = false;
+            this.descValid = false;
             this.desc = value;
 
-            if (plainText.test(this.name) && plainTextDesc.test(this.desc)) {
+            if (plainText.test(this.name)) {
+                this.nameValid = true;
+            }
+
+            if (plainTextDesc.test(this.desc)) {
+                this.descValid = true;
+            }
+
+            if (this.nameValid && this.descValid) {
                 this.allPassing = true;
                 return;
             }
@@ -261,10 +340,16 @@ const app = new Vue({
         }
     },
     mounted() {
+        this.updateLocales();
+
         if ('alt' in window) {
+            alt.on('clothing:SetLocales', this.setLocales);
             alt.on('clothing:Propagate', this.handlePropagation);
             alt.emit('ready');
             alt.emit('clothing:Populate', this.components);
+            alt.emit('clothing:Ready');
         }
+
+        document.addEventListener('keyup', this.handleClose);
     }
 });

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Database, getDatabase } from 'simplymongo';
 import { Character } from '../../../shared/interfaces/Character';
+import { Collections } from '../../interface/DatabaseCollections';
 
 const db: Database = getDatabase();
 
@@ -19,7 +20,7 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
     }
 
     alt.setTimeout(async () => {
-        await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, 'characters');
+        await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, Collections.Characters);
     }, 0);
 }
 
@@ -35,7 +36,7 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
     }
 
     alt.setTimeout(async () => {
-        await db.updatePartialData(p.data._id, { ...dataObject }, 'characters');
+        await db.updatePartialData(p.data._id, { ...dataObject }, Collections.Characters);
     }, 0);
 }
 

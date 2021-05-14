@@ -6,6 +6,21 @@ description: >-
 
 # Before Setup
 
+- [Before Setup](#before-setup)
+  - [Before Buying a Server](#before-buying-a-server)
+  - [Obtain a License Key](#obtain-a-license-key)
+  - [Windows 10 / Windows Server](#windows-10--windows-server)
+      - [Port Forwarding](#port-forwarding)
+  - [Linux Ubuntu 18.04](#linux-ubuntu-1804)
+      - [General Server Recommendation for Starting Out](#general-server-recommendation-for-starting-out)
+      - [Port Forwarding](#port-forwarding-1)
+    - [Install libatomic1](#install-libatomic1)
+    - [Install GIT](#install-git)
+    - [Install NodeJS](#install-nodejs)
+    - [Install MongoDB](#install-mongodb)
+      - [Running MongoDB](#running-mongodb)
+      - [Checking Status of MongoDB](#checking-status-of-mongodb)
+
 ## Before Buying a Server
 
 Who you should **NOT USE** for hosting Athena:

@@ -4,6 +4,8 @@ export enum SYSTEM_EVENTS {
     APPEND_TEXTLABELS = 'append:TextLabel',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
+    // Interior
+    INTERIOR_SWITCH = 'interior:Switch',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',

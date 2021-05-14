@@ -32,6 +32,10 @@ function drawNametags() {
     if (alt.Player.local.vehicle && shouldUpdateSpeed) {
         shouldUpdateSpeed = false;
         alt.setTimeout(() => {
+            if (!alt.Player.local.vehicle) {
+                return;
+            }
+
             const isMetric = native.getProfileSetting(227);
             const currentSpeed = native.getEntitySpeed(alt.Player.local.vehicle.scriptID);
             const speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);

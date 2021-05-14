@@ -189,15 +189,15 @@ const phone = Vue.component('phone', {
                         </template>
                     </div>
                     <div class="bottom-bar">
-                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null">
+                        <button class="flex-grow-1 clickable" @click="pageComponent = null">
                             <v-icon small>icon-chevron-left</v-icon>
-                        </v-btn>
-                        <v-btn class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
+                        </button>
+                        <button class="flex-grow-1 clickable" @click="pageComponent = null; page = 0;">
                             <v-icon x-small>icon-square-o</v-icon>
-                        </v-btn>
-                        <v-btn class="flex-grow-1" disabled style="opacity: 0; !improtant">
+                        </button>
+                        <button class="flex-grow-1" disabled style="opacity: 0; !improtant">
                             <v-icon class="transparent" style="opacity: 0;">icon-circle</v-icon>
-                        </v-btn>
+                        </button>
                     </div>
                 </div>
             </div>

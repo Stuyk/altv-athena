@@ -6,6 +6,7 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { playerFuncs } from '../Player';
+import save from './save';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -84,6 +85,15 @@ function weather(p: alt.Player): void {
     alt.emitClient(p, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, p.currentWeather);
 }
 
+function playTime(p: alt.Player): void {
+    if (!p.data.hours) {
+        p.data.hours = 0;
+    }
+
+    p.data.hours += 0.0166666666666667;
+    save.field(p, 'hours', p.data.hours);
+}
+
 function food(p: alt.Player): void {
     if (p.data.isDead && p.data.food <= 0) {
         p.data.food = 100;
@@ -118,6 +128,7 @@ export default {
     currencyData,
     food,
     inventory,
+    playTime,
     syncedMeta,
     time,
     vehicles,

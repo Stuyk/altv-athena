@@ -303,8 +303,7 @@ const chat = Vue.component('chat', {
     },
     template: `
             <div class="chat">
-                <help></help>
-                <div class="messages" ref="messages" :key="updateCount">
+                <div class="messages mt-12" ref="messages" :key="updateCount">
                     <div class="message" v-for="(message, index) in messages" :key="index">
                         <template v-if="timestamp">
                             <span>{{ message.time}}</span> <span :inner-html.prop="message.message | colorify" />

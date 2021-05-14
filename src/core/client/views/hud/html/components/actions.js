@@ -82,6 +82,7 @@ const actions = Vue.component('actions', {
                 }
 
                 if ('alt' in window) {
+                    alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                     alt.emit('actions:Navigate');
                 }
 
@@ -93,6 +94,7 @@ const actions = Vue.component('actions', {
             // UP
             if (keyCode === 38) {
                 if ('alt' in window) {
+                    alt.emit('play:Sound', 'NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                     alt.emit('actions:Navigate');
                 }
 
@@ -118,6 +120,7 @@ const actions = Vue.component('actions', {
             // Down
             if (keyCode === 40) {
                 if ('alt' in window) {
+                    alt.emit('play:Sound', 'NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                     alt.emit('actions:Navigate');
                 }
 
@@ -133,7 +136,7 @@ const actions = Vue.component('actions', {
             // It takes the previous menu and adds pushes it to the back of the array.
             // When you press left it goes through menu history until none are left.
             // Also handles 0 - 9 key press.
-            const verticalSelection = keyValue === null ? this.selection : keyValue;
+            let verticalSelection = keyValue === null ? this.selection : keyValue;
             const actions = this.getActions();
             if (!actions) {
                 return;
@@ -148,11 +151,11 @@ const actions = Vue.component('actions', {
             }
 
             if (selection && selection.eventName) {
-                this.selection = verticalSelection;
                 this.setActions(null);
 
                 setTimeout(() => {
                     if ('alt' in window) {
+                        alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                         alt.emit('actions:Trigger', selection);
                     } else {
                         console.log(selection);
@@ -163,6 +166,7 @@ const actions = Vue.component('actions', {
             }
 
             if ('alt' in window) {
+                alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                 alt.emit('actions:LeftRight');
             }
 
@@ -171,6 +175,10 @@ const actions = Vue.component('actions', {
                 this.historySelections.push(verticalSelection);
                 this.actions = actions[verticalSelection];
                 this.selection = 0;
+                return;
+            }
+
+            if (!actions[verticalSelection]) {
                 return;
             }
 

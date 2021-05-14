@@ -82,7 +82,7 @@ function handleTransfer(player: alt.Player, amount: number, id: string | number)
         return false;
     }
 
-    if (target === player) {
+    if (target.id === player.id) {
         return false;
     }
 
@@ -103,7 +103,7 @@ function handleTransferCash(player: alt.Player, amount: number, id: string | num
         return false;
     }
 
-    if (target === player) {
+    if (target.id === player.id) {
         return false;
     }
 

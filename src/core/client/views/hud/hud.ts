@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
+import { handleFrontendSound } from '../../systems/sound';
 import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
@@ -48,6 +49,7 @@ export class BaseHUD {
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
             BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
+            BaseHUD.view.on('play:Sound', handleFrontendSound);
 
             PhoneController.initializeApps();
 
@@ -62,10 +64,28 @@ export class BaseHUD {
     }
 
     static setHudStatus(name: HudEventNames, value: any) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         BaseHUD.view.emit(name, value);
+
+        if (name !== HudEventNames.SetVehicle) {
+            return;
+        }
+
+        if (!value) {
+            return;
+        }
+
+        BaseHUD.setHudStatus(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
     }
 
     static updateSpeed(speed: string) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (!alt.Player.local.vehicle) {
             return;
         }
@@ -97,11 +117,19 @@ export class BaseHUD {
     }
 
     static updateCommands() {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         BaseHUD.view.emit('chat:PopulateCommands', commandList);
         BaseHUD.view.isVisible = true;
     }
 
     static processMetaChange(key: string, value: any, oldValue: any) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (key === 'food') {
             BaseHUD.view.emit(HudEventNames.Food, value);
         }
@@ -120,6 +148,10 @@ export class BaseHUD {
     }
 
     static setHudVisibility(value: boolean) {
+        if (!BaseHUD.view) {
+            return;
+        }
+
         if (!value) {
             BaseHUD.view.isVisible = false;
             native.displayRadar(false);

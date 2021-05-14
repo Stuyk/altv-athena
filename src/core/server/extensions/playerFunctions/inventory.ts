@@ -923,6 +923,30 @@ function getAllItems(player: alt.Player): Array<ItemSpecial> {
     return items;
 }
 
+/**
+ * Stack an item in the player's inventory.
+ * @param {alt.Player} player
+ * @param {Item} item
+ * @return {*}  {boolean}
+ */
+function stackInventoryItem(player: alt.Player, item: Item): boolean {
+    const existingItem = isInInventory(player, item);
+
+    if (!existingItem) {
+        return false;
+    }
+
+    player.data.inventory[existingItem.tab][existingItem.index].quantity += item.quantity;
+    save.field(player, 'inventory', player.data.inventory);
+    sync.inventory(player);
+    return true;
+}
+
+/**
+ * Get a list of all weapons the player has on them.
+ * @param {alt.Player} player
+ * @return {*}  {Array<Item>}
+ */
 function getAllWeapons(player: alt.Player): Array<Item> {
     const weapons = getAllItems(player).filter((item) => {
         return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
@@ -998,6 +1022,7 @@ export default {
     removeAllWeapons,
     replaceInventoryItem,
     replaceToolbarItem,
+    stackInventoryItem,
     toolbarAdd,
     toolbarRemove
 };

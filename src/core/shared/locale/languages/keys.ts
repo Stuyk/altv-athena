@@ -8,9 +8,14 @@ export const LOCALE_KEYS = {
     COMMAND_AUDIOSTREAM: `command-audiostream`,
     COMMAND_OOC: `command-ooc`,
     COMMAND_BROADCAST: `command-broadcast`,
+    COMMAND_COORDS: `command-coords`,
     COMMAND_DO: `command-do`,
     COMMAND_DUMMY_ITEM: `command-dummy-items`,
     COMMAND_GET_ITEM: `command-get-item`,
+    COMMAND_INTERIOR_CREATE: `command-interior-create`,
+    COMMAND_INTERIOR_INSIDE: `command-interior-inside`,
+    COMMAND_INTERIOR_OUTSIDE: `command-interior-outside`,
+    COMMAND_INTERIOR_DONE: `command-interior-done`,
     COMMAND_LOW: `command-low`,
     COMMAND_MOD_CHAT: `command-mod-chat`,
     COMMAND_ME: `command-me`,
@@ -54,12 +59,15 @@ export const LOCALE_KEYS = {
     FUEL_CANNOT_AFFORD: `fuel-cannot-afford`,
     FUEL_PAYMENT: `fuel-payment`,
     FUEL_PAID: `fuel-paid`,
+    // Interior
+    INTERIOR_INTERACT: 'interior-interact',
     // Invalid
     INVALID_VEHICLE_MODEL: `invalid-vehicle-model`,
     // Interact
     INTERACTION_TOO_FAR_AWAY: `interact-too-far-away`,
     INTERACTION_INVALID_OBJECT: 'interaction-invalid-object',
     INTERACTION_INTERACT_WITH_OBJECT: 'interaction-with-object',
+    INTERACTION_INTERACT_VEHICLE: 'interaction-interact-vehicle',
     // Inventory
     ITEM_DOES_NOT_EXIST: `item-does-not-exist`,
     ITEM_NOT_EQUIPPED: 'no-item-in-equipment-slot',
@@ -93,5 +101,17 @@ export const LOCALE_KEYS = {
     WEAPON_NO_HASH: 'weapon-no-hash',
     // Vehicle
     VEHICLE_NO_FUEL: `vehicle-no-fuel`,
-    VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`
+    VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`,
+    VEHICLE_TOGGLE_LOCK: `vehicle-toggle-lock`,
+    VEHICLE_IS_LOCKED: `vehicle-is-locked`,
+    // =====================
+    // WebView Locales
+    // =====================
+    WEBVIEW_ATM: 'webview-atm',
+    WEBVIEW_CHARACTERS: 'webview-characters',
+    WEBVIEW_CREATOR: 'webview-creator',
+    WEBVIEW_JOB: 'webview-job',
+    WEBVIEW_INVENTORY: 'webview-inventory',
+    WEBVIEW_CLOTHING: 'webview-clothing',
+    WEBVIEW_LOGIN: 'webview-login'
 };

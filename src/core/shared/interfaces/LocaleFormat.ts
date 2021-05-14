@@ -1,5 +1,5 @@
 export interface LocaleFormat {
     [key: string]: {
-        [key: string]: string;
+        [key: string]: any;
     };
 }

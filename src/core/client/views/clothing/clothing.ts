@@ -4,6 +4,8 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Clothing } from '../../../shared/enums/views';
 import { ClothingComponent } from '../../../shared/interfaces/Clothing';
 import { Item } from '../../../shared/interfaces/Item';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../shared/locale/locale';
 import { View } from '../../extensions/view';
 import {
     createPedEditCamera,
@@ -12,8 +14,9 @@ import {
     setShouldDisableControls,
     setZPos
 } from '../../utility/camera';
+import { BaseHUD } from '../hud/hud';
 
-// const url = `http://127.0.0.1:5500/src/core/client/views/clothing/html/index.html`;
+// const url = `http://127.0.0.1:5555/src/core/client/views/clothing/html/index.html`;
 const url = `http://resource/client/views/clothing/html/index.html`;
 let view: View;
 let open = false;
@@ -28,10 +31,20 @@ async function handleView() {
     view.on('clothing:Populate', handlePopulateData);
     view.on('clothing:Exit', handleExit);
     view.on('clothing:DisableControls', handleControls);
+    view.on('clothing:Ready', handleReady);
     open = true;
-    createPedEditCamera();
-    setFov(50);
+    BaseHUD.setHudVisibility(false);
+    createPedEditCamera({ x: 0.15, y: -0.5, z: 0 });
+    setFov(70);
     setZPos(0.6);
+}
+
+function handleReady() {
+    if (!view) {
+        return;
+    }
+
+    view.emit('clothing:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CLOTHING));
 }
 
 function handleMetaChanged(key: string, items: Array<Item>, oldValue: any): void {
@@ -91,6 +104,7 @@ function handleExit() {
     alt.emitServer(View_Events_Clothing.Exit);
     view.close();
     open = false;
+    BaseHUD.setHudVisibility(true);
 }
 
 function handlePurchase(index: number, component: ClothingComponent, name: string, desc: string) {

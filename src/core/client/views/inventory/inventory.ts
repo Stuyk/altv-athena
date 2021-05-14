@@ -4,16 +4,17 @@ import { SHARED_CONFIG } from '../../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Inventory } from '../../../shared/enums/views';
 import { DroppedItem } from '../../../shared/interfaces/Item';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../shared/locale/locale';
 import { distance2d } from '../../../shared/utility/vector';
 import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
 import { isAnyMenuOpen } from '../../utility/menus';
-import { sleep } from '../../utility/sleep';
-import { waitFor, waitForFalse } from '../../utility/wait';
+import { waitForFalse } from '../../utility/wait';
 import { BaseHUD } from '../hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
-// const url = `http://127.0.0.1:5500/src/core/client/views/inventory/html/index.html`;
+// const url = `http://127.0.0.1:5555/src/core/client/views/inventory/html/index.html`;
 const url = `http://resource/client/views/inventory/html/index.html`;
 let view: View;
 let interval;
@@ -41,6 +42,7 @@ export class InventoryController {
         view.on('inventory:Process', InventoryController.handleProcess);
         view.on('inventory:Close', InventoryController.handleClose);
         view.on('inventory:Split', InventoryController.handleSplit);
+        view.on('inventory:Pickup', InventoryController.handlePickup);
         alt.toggleGameControls(false);
         InventoryController.isOpen = true;
 
@@ -49,6 +51,10 @@ export class InventoryController {
 
     static handleProcess(selectedSlot, endSlot, page, hash): void {
         alt.emitServer(View_Events_Inventory.Process, selectedSlot, endSlot, page, hash);
+    }
+
+    static handlePickup(hash: string) {
+        alt.emitServer(View_Events_Inventory.Pickup, hash);
     }
 
     static async updateEverything(): Promise<void> {
@@ -61,9 +67,9 @@ export class InventoryController {
         });
 
         InventoryController.processClosestGroundItems();
-
         const didRenderCamera = await InventoryController.showPreview();
         view.emit('inventory:DisablePreview', !didRenderCamera ? true : false);
+        view.emit('inventory:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
     }
 
     static updateInventory(): void {

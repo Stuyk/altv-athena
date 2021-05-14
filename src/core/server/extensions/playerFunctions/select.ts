@@ -12,6 +12,7 @@ import safe from './safe';
 import setter from './setter';
 import sync from './sync';
 import { TextLabelController } from '../../systems/textlabel';
+import save from './save';
 
 /**
  * Select a character based on the character data provided.
@@ -38,6 +39,13 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
             );
+        }
+
+        // Save immediately after using exterior login.
+        if (p.data.exterior) {
+            safe.setPosition(p, p.data.exterior.x, p.data.exterior.y, p.data.exterior.z);
+            p.data.exterior = null;
+            save.field(p, 'exterior', p.data.exterior);
         }
 
         // Check if health exists.

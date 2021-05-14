@@ -37,27 +37,22 @@ const app = new Vue({
                 colorOverlays: []
             },
             infoData: {
-                age: new Date().toISOString().substr(0, 10),
-                gender: 'none',
+                age: new Date(1990, 1, 1),
+                gender: null,
                 name: ''
             },
-            navOptions: ['Sex', 'Structure', 'Hair', 'Overlays', 'Decor', 'Info', 'Done'],
-            navOptionsIcons: [
-                { icon: 'icon-orientation' },
-                { icon: 'icon-cogs' },
-                { icon: 'icon-hair' },
-                { icon: 'icon-details1' },
-                { icon: 'icon-makeup' },
-                { icon: 'icon-id-card' },
-                { icon: 'icon-check' }
+            navOptions: [
+                AppearanceComponent,
+                StructureComponent,
+                HairComponent,
+                OverlaysComponent,
+                MakeupComponent,
+                InfoComponent
             ],
-            navOptionsTitles: ['Appearance', 'Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
             noDiscard: false,
             noName: false,
-            validInfoData: false,
-            drawer: true,
-            mini: true,
-            totalCharacters: 1
+            totalCharacters: 1,
+            locales: DefaultLocales
         };
     },
     computed: {
@@ -89,9 +84,6 @@ const app = new Vue({
             }
 
             return false;
-        },
-        getTabComponent: function () {
-            return `tab-${this.navOptions[this.selection].toLowerCase()}`;
         }
     },
     methods: {
@@ -102,6 +94,12 @@ const app = new Vue({
             }
 
             this.selection += 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
             if (this.selection - 1 <= -1) {
@@ -110,6 +108,12 @@ const app = new Vue({
             }
 
             this.selection -= 1;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setReady(noDiscard = true, noName = true) {
             if (this.show) {
@@ -120,9 +124,11 @@ const app = new Vue({
             this.noName = noName;
             this.show = true;
 
-            if ('alt' in window) {
-                alt.emit('creator:ReadyDone');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:ReadyDone');
         },
         setData(oldData, totalCharacters) {
             this.totalCharacters = totalCharacters;
@@ -134,14 +140,6 @@ const app = new Vue({
 
             this.data = oldData;
             this.updateCharacter();
-        },
-        goNavigate(value) {
-            this.selection = value;
-
-            // Info
-            if ('alt' in window) {
-                alt.emit('creator:DisableControls', this.selection === 5 ? true : false);
-            }
         },
         updateCharacter() {
             const isFemale = this.data.sex === 0;
@@ -156,23 +154,25 @@ const app = new Vue({
             this.data.skinMix = parseFloat(this.data.skinMix);
             this.data.faceMix = parseFloat(this.data.faceMix);
 
-            if ('alt' in window) {
-                alt.emit('creator:Sync', this.data, true);
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('creator:Sync', this.data);
+            alt.emit('play:Sound', 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         resetSelection() {
             this.selection = 0;
         },
-        isVerified(isValid) {
-            this.validInfoData = isValid;
+        setLocales(localeObject) {
+            this.locales = localeObject;
         }
     },
     mounted() {
         this.$root.$on('updateCharacter', this.updateCharacter);
         this.$root.$on('resetSelection', this.resetSelection);
-        this.$root.$on('isVerified', this.isVerified);
 
-        overlaysTemplateList.forEach((overlay) => {
+        OverlaysList.forEach((overlay) => {
             const overlayData = { ...overlay };
             overlayData.value = 0;
             delete overlayData.key;
@@ -184,7 +184,7 @@ const app = new Vue({
             this.data.opacityOverlays.push(overlayData);
         });
 
-        colorOverlays.forEach((overlay) => {
+        MakeupList.forEach((overlay) => {
             const overlayData = { ...overlay };
             overlayData.value = 0;
             delete overlayData.key;
@@ -196,16 +196,17 @@ const app = new Vue({
             this.data.colorOverlays.push(overlayData);
         });
 
-        this.$nextTick(() => {
-            if ('alt' in window) {
-                alt.on('creator:Ready', this.setReady);
-                alt.on('creator:SetData', this.setData);
-                alt.emit('ready');
-            } else {
-                this.show = true;
-            }
-        });
+        if (!('alt' in window)) {
+            this.show = true;
+            return;
+        }
 
-        console.log(`Loaded Character Creator`);
+        alt.on('creator:Ready', this.setReady);
+        alt.on('creator:SetData', this.setData);
+        alt.on('creator:SetLocales', this.setLocales);
+
+        this.$nextTick(() => {
+            alt.emit('ready');
+        });
     }
 });

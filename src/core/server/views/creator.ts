@@ -6,6 +6,7 @@ import { goToCharacterSelect, handleNewCharacter } from './characters';
 import * as sm from 'simplymongo';
 import { Character } from '../../shared/interfaces/Character';
 import { playerFuncs } from '../extensions/Player';
+import { Collections } from '../interface/DatabaseCollections';
 
 const db: sm.Database = sm.getDatabase();
 
@@ -69,7 +70,7 @@ function handleAwaitModel(player: alt.Player, characterSex: number, shouldTPose:
 }
 
 async function handleAwaitNameValid(player: alt.Player, name: string): Promise<void> {
-    const result = await db.fetchData<Character>('name', name, 'characters');
+    const result = await db.fetchData<Character>('name', name, Collections.Characters);
 
     if (!result) {
         alt.emitClient(player, View_Events_Creator.AwaitName, true); // Yes the name is available.

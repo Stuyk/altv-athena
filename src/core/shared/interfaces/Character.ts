@@ -8,7 +8,7 @@ import { Vehicle } from './Vehicle';
 export interface Character {
     _id?: any;
     account_id: any;
-    pos: Vector3;
+    pos: Partial<Vector3>;
     name: string;
     cash: number;
     bank: number;
@@ -17,6 +17,9 @@ export interface Character {
     food: number;
     water: number;
     isDead: boolean;
+    hours: number;
+    interior: string | null;
+    exterior: Partial<Vector3>;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
     inventory: Array<Array<Partial<Item>>>;
@@ -36,5 +39,6 @@ export const CharacterDefaults: Partial<Character> = {
     isDead: false,
     health: 199,
     armour: 0,
+    hours: 0,
     vehicles: []
 };

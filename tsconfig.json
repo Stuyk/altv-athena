@@ -12,12 +12,12 @@
         "experimentalDecorators": true,
         "module": "ESNext",
         "target": "ESNext",
-        "outDir": "./resources",
+        "outDir": "./athena-cache",
         "rootDir": "./src",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "composite": true
     },
-    "include": ["./src/**/*.ts", "src/core/shared/enums/phoneEvents.ts.js"],
-    "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"],
+    "include": ["./src/**/*.ts"],
     "watchOptions": {
         "watchFile": "useFsEvents",
         "watchDirectory": "useFsEvents",

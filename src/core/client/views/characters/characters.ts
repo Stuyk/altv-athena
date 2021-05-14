@@ -2,12 +2,15 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { View_Events_Characters } from '../../../shared/enums/views';
 import { Character } from '../../../shared/interfaces/Character';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../shared/locale/locale';
 import { View } from '../../extensions/view';
 import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../../utility/camera';
 import { handleEquipment } from '../clothing/clothing';
 import { handleSync } from '../creator/creator';
 
 const url = `http://resource/client/views/characters/html/index.html`;
+// const url = `http://127.0.0.1:5555/src/core/client/views/characters/html/index.html`;
 let view: View;
 let characters: Partial<Character>[];
 let open = false;
@@ -25,6 +28,7 @@ async function handleView(_characters: Partial<Character>[]) {
     view.on('characters:Update', handleSync); // Calls `creator.ts`
     view.on('characters:Equipment', handleEquipment);
     view.on('characters:Delete', handleDelete);
+    view.on('characters:Ready', handleReady);
 
     // Handle Duplicate View Instance Creations
     if (open) {
@@ -34,8 +38,12 @@ async function handleView(_characters: Partial<Character>[]) {
 
     open = true;
     createPedEditCamera();
-    setFov(60);
-    setZPos(0.5);
+    setFov(80);
+    setZPos(0.2);
+}
+
+function handleReady() {
+    view.emit('characters:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CHARACTERS));
 }
 
 async function handleSelect(id) {

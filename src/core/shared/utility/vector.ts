@@ -47,7 +47,8 @@ export function getClosestTypes<T>(
     pos: Vector3,
     elements: Array<{ pos: Vector3; valid: boolean }>,
     maxDistance: number,
-    mustHaveProperties: Array<string> = []
+    mustHaveProperties: Array<string> = [],
+    positionName: string = 'pos'
 ): Array<T> {
     const newElements = [];
 
@@ -70,7 +71,7 @@ export function getClosestTypes<T>(
             }
         }
 
-        if (distance2d(pos, elements[i].pos) > maxDistance) {
+        if (distance2d(pos, elements[i][positionName]) > maxDistance) {
             continue;
         }
 

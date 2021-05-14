@@ -2,7 +2,7 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
 export const DEFAULT_CONFIG = {
     // Whitelisting
-    WHITELIST: true,
+    WHITELIST: false,
     USE_DISCORD_BOT: false,
     // Use Voice
     VOICE_ON: SHARED_CONFIG.VOICE_ON,

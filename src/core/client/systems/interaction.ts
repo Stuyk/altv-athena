@@ -15,47 +15,17 @@ const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
 const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 500;
 let NEXT_MENU_UPDATE = Date.now() + 2000;
+let NEXT_HELP_CLEAR = Date.now() + 5000;
 let dynamicActionMenu: ActionMenu = {};
 
 export class InteractionController {
     static customInteractions: Array<Interaction> = [];
     static tick: number;
-    static isOn: boolean = false;
     static pressedKey: boolean = false;
-    static isAlwaysOn: boolean = false;
     static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 
     static triggerInteraction(): void {
-        if (!alt.Player.local.isInteractionOn) {
-            return;
-        }
-
         InteractionController.pressedKey = true;
-    }
-
-    static toggleInteractionMode(): void {
-        // Prevents clearing the interaction and is forced into being on all of the time.
-        if (InteractionController.isAlwaysOn) {
-            BaseHUD.setHudStatus(HudEventNames.Interact, true);
-            return;
-        }
-
-        if (InteractionController.tick) {
-            alt.clearInterval(InteractionController.tick);
-            InteractionController.tick = null;
-        }
-
-        InteractionController.isOn = !InteractionController.isOn;
-        if (!InteractionController.isOn) {
-            alt.Player.local.isInteractionOn = false;
-            BaseHUD.setHudStatus(HudEventNames.Interact, false);
-            return;
-        }
-
-        BaseHUD.setHudStatus(HudEventNames.Interact, true);
-        alt.Player.local.isInteractionOn = true;
-        InteractionController.isAlwaysOn = SHARED_CONFIG.INTERACTION_ALWAYS_ON;
-        InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
     }
 
     /**
@@ -95,6 +65,12 @@ export class InteractionController {
 
         VehicleController.runVehicleControllerTick();
 
+        if (Date.now() > NEXT_HELP_CLEAR) {
+            NEXT_HELP_CLEAR = Date.now() + 5000;
+            delete alt.Player.local.otherInteraction;
+            HelpController.updateHelpText(null, null, null, null);
+        }
+
         // Populates the Menu
         if (Date.now() > NEXT_MENU_UPDATE) {
             NEXT_MENU_UPDATE = Date.now() + 1000;
@@ -130,8 +106,22 @@ export class InteractionController {
             return;
         }
 
-        // Show this when interactions available is populated.
-        HelpController.updateHelpText(KEY_BINDS.INTERACT, `View Options`, null);
+        if (alt.Player.local.closestInteraction && alt.Player.local.closestInteraction.position) {
+            // Show this when interactions available is populated.
+            HelpController.updateHelpText(
+                alt.Player.local.closestInteraction.position,
+                KEY_BINDS.INTERACT,
+                alt.Player.local.closestInteraction.text,
+                null
+            );
+        } else if (alt.Player.local.otherInteraction) {
+            HelpController.updateHelpText(
+                alt.Player.local.otherInteraction.position,
+                null,
+                alt.Player.local.otherInteraction.short,
+                alt.Player.local.otherInteraction.long
+            );
+        }
 
         // Open the Dynamic Menu
         if (InteractionController.pressedKey) {
@@ -169,7 +159,5 @@ export class InteractionController {
 alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
-    if (SHARED_CONFIG.INTERACTION_ALWAYS_ON) {
-        InteractionController.toggleInteractionMode();
-    }
+    InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
 });

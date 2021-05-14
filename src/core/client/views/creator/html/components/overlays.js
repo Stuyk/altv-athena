@@ -1,14 +1,18 @@
-Vue.component('tab-overlays', {
-    props: ['data'],
+const OverlaysComponent = Vue.component('overlays', {
+    props: ['data', 'locales'],
     data() {
         return {
-            overlayTemplate: [...overlaysTemplateList]
+            modules: {
+                0: false,
+                3: false,
+                6: false,
+                7: false,
+                9: false,
+                11: false
+            }
         };
     },
     methods: {
-        test() {
-            console.log(this);
-        },
         handleChange(value, parameter, index) {
             this.data.opacityOverlays[index][parameter] = value;
             this.$root.$emit('updateCharacter');
@@ -37,67 +41,61 @@ Vue.component('tab-overlays', {
 
             this.data.opacityOverlays = currentValues;
             this.$root.$emit('updateCharacter');
+        },
+        toggleModule(moduleName) {
+            this.modules[moduleName] = !this.modules[moduleName];
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        getLocale(id) {
+            return this.locales.overlaysComponent.ids[id]
+                ? this.locales.overlaysComponent.ids[id]
+                : `COULD NOT FIND LOCALE FOR overlaysComponent.${id}`;
         }
     },
     template: `
-        <div class="contentWrapper" v-if="overlayTemplate">
-            <template class="groupWrapper" v-for="(name, i) in overlayTemplate" :key="i">
-                 <div class="group">
-                    <div class="overline pa-0 ma-0 grey--text">
-                        {{ overlayTemplate[i].label }}
-                    </div>
-                </div>
-                <div class="group">
-                    <v-btn
-                        @click="decrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
-                        class="light-blue--text"
-                        outlined
-                        small
-                        text
-                    >
-                        <v-icon small>icon-chevron-left</v-icon>
-                    </v-btn>
-                    <span class="flex-grow-1 text-md-body-1 text-center pt-1" small>
-                        {{ data.opacityOverlays[i].value !== null ? data.opacityOverlays[i].value : -1 }}
-                    </span>
-                    <v-btn
-                        @click="incrementParameter(i, overlayTemplate[i].min, overlayTemplate[i].max, 1)"
-                        class="light-blue--text"
-                        outlined
-                        small
-                        text
-                    >
-                        <v-icon small>icon-chevron-right</v-icon>
-                    </v-btn>
-                </div>
-                <div class="group">
-                    <div class="overline pa-0 ma-0 grey--text">
-                        {{ overlayTemplate[i].label }} Opacity
-                    </div>
-                </div>
-                <div class="group">
-                    <v-chip class="light-blue--text mr-3" label outlined>
-                    {{ parseFloat(data.opacityOverlays[i].opacity).toFixed(1) }}
-                    </v-chip>
-                    <v-slider
-                        thumb-label
-                        dense
-                        hide-details
-                        ticks="always"
-                        tick-size="4"
-                        class="flex-grow-1"
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.1"
-                        v-model.number="data.opacityOverlays[i].opacity"
-                        @input="e => handleChange(e, 'opacity', i)"
-                    />
-                </div>
-                <div class="group pt-3 pb-3">
-                    <v-divider></v-divider>
-                </div>
-            </template>
-        </div>
+        <template>
+            <div class="wrapper flex-grow-1">
+                <template v-for="(option, i) in OverlaysList" :key="i">
+                    <button @click="toggleModule(option.id)" class="mt-2 split-close">
+                        <v-icon class="blue--text" small>{{ modules[option.id] ? 'icon-minus' : 'icon-plus' }}</v-icon>
+                        <div class="overline blue--text">
+                            &nbsp;{{ getLocale(option.id).name }}
+                        </div>
+                    </button>
+                    <template v-if="modules[option.id]">
+                        <div class="subtitle-2 grey--text mb-2">{{ getLocale(option.id).description }}</div>
+                        <div class="button-group pa-2">
+                            <div class="overline blue-grey--text">{{ locales.overlaysComponent.LABEL_STYLE }}</div>
+                            <div class="split flex-grow-1">
+                                <button @click="decrementParameter(i, option.min, option.max, 1)" class="outline-transparent pl-4 pr-4">
+                                    <v-icon class="blue--text">icon-chevron-left</v-icon>
+                                </button>
+                                <span class="flex-grow-1 text-center grey--text caption"> 
+                                    {{ getLocale(option.id).labels ? getLocale(option.id).labels[data.opacityOverlays[i].value] : data.opacityOverlays[i].value }}
+                                </span>
+                                <button @click="incrementParameter(i, option.min, option.max, 1)" class="outline-transparent pl-4 pr-4">
+                                    <v-icon class="blue--text">icon-chevron-right</v-icon>
+                                </button>
+                            </div>
+                            <div class="split mt-4 mb-4">
+                                <v-chip class="light-blue--text mr-3" label outlined>{{ data.opacityOverlays[i].value }}</v-chip>
+                                <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" :min="option.min" :max="option.max" step="1" v-model.number="data.opacityOverlays[i].value" @input="e => handleChange(e, 'value', i)"/>
+                            </div>
+
+                            <div class="overline blue-grey--text">{{ locales.overlaysComponent.LABEL_OPACITY }}</div>
+                            <div class="split mt-4 mb-4">
+                                <v-chip class="light-blue--text mr-3" label outlined>{{ data.opacityOverlays[i].opacity }}</v-chip>
+                                <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" :min="0" :max="1" step="0.1" v-model.number="data.opacityOverlays[i].opacity" @input="e => handleChange(e, 'opacity', i)"/>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </template>
     `
 });

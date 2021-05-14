@@ -3,9 +3,8 @@
 ## Info
 
 -   [Introduction](README.md)
--   [Showcase](documentation/showcase.md)
--   [Changelog](documentation/changelog.md)
 -   [FAQ](documentation/faq.md)
+-   [Changelog](documentation/changelog.md)
 
 ## Links
 
@@ -15,10 +14,8 @@
 
 ## Installation
 
--   [Instructions](documentation/before-setup.md)
+-   [Before Installing Athena](documentation/before-setup.md)
 -   [Installing Athena](documentation/installing-athena.md)
--   [Installing Athena Advanced](documentation/installing-athena-advanced.md)
--   [Installing Discord Whitelist](documentation/whitelist.md)
 
 ## Configuration
 
@@ -29,13 +26,14 @@
 
 ## Basic Scripting
 
--   [Scripting Setup / Tools](documentation/scripting/increase-productivity.md)
--   [Adding Custom Features](documentation/scripting/adding-features.md)
--   [Adding Commands](documentation/scripting/adding-commands.md)
--   [Adding Mods](documentation/scripting/adding-mods.md)
--   [Adding Items](documentation/scripting/adding-items.md)
--   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
--   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
--   [Adding Jobs](documentation/scripting/adding-jobs.md)
--   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 -   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
+-   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
+-   [Adding Commands](documentation/scripting/adding-commands.md)
+-   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
+-   [Adding Custom Features](documentation/scripting/adding-features.md)
+-   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
+-   [Adding Items](documentation/scripting/adding-items.md)
+-   [Adding Jobs](documentation/scripting/adding-jobs.md)
+-   [Adding Locale / Translations](documentation/scripting/adding-locale.md)
+-   [Adding Mods](documentation/scripting/adding-mods.md)
+-   [Adding Whitelist](documentation/scripting/adding-whitelist.md)

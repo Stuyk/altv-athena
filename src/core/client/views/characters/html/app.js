@@ -46,15 +46,21 @@ const app = new Vue({
     data() {
         return {
             characters: [],
-            statNames: [
-                /* Name of the stat, variable name inside character object */
-                { varName: 'Name', varRef: 'name' },
-                { varName: 'Age', varRef: 'age', suffix: ' Years Old', useInfo: true },
-                { varName: 'Gender', varRef: 'gender', useInfo: true },
-                { varName: 'Reward Points', varRef: 'rewardPoints', suffix: ' Hours' },
-                { varName: 'Cash', varRef: 'cash', prefix: '$' },
-                { varName: 'Bank', varRef: 'bank', prefix: '$' }
-            ],
+            locales: {
+                LABEL_DELETE: 'Delete',
+                LABEL_NEW: 'New',
+                LABEL_SELECT: 'Select',
+                LABEL_YES: 'Yes',
+                LABEL_NO: 'No',
+                LABEL_CONFIRM_DELETE: 'Are you sure you want to delete your character',
+                LABEL_NAME: 'Name',
+                LABEL_AGE: 'Age',
+                LABEL_GENDER: 'Gender',
+                LABEL_HOURS: 'Hours',
+                LABEL_CASH: 'Cash',
+                LABEL_BANK: 'Bank'
+            },
+            statNames: [],
             characterIndex: 0,
             deleteDialog: false
         };
@@ -70,6 +76,10 @@ const app = new Vue({
                 return value;
             }
 
+            if (value === null || value === undefined) {
+                return 0;
+            }
+
             return value.toFixed(2);
         },
         handleSet(characters) {
@@ -83,6 +93,12 @@ const app = new Vue({
                 this.characterIndex = 0;
             }
             this.updateAppearance();
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         decrementIndex() {
             this.characterIndex -= 1;
@@ -90,35 +106,89 @@ const app = new Vue({
                 this.characterIndex = this.characters.length - 1;
             }
             this.updateAppearance();
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'NAV_LEFT_RIGHT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         updateAppearance() {
-            if ('alt' in window) {
-                alt.emit('characters:Update', this.characters[this.characterIndex].appearance);
-
-                setTimeout(() => {
-                    alt.emit('characters:Equipment', this.characters[this.characterIndex].equipment);
-                }, 500);
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('characters:Update', this.characters[this.characterIndex].appearance);
+
+            setTimeout(() => {
+                alt.emit('characters:Equipment', this.characters[this.characterIndex].equipment);
+            }, 500);
         },
         selectCharacter() {
-            if ('alt' in window) {
-                alt.emit('characters:Select', this.characters[this.characterIndex]._id);
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+            alt.emit('characters:Select', this.characters[this.characterIndex]._id);
         },
         newCharacter() {
-            if ('alt' in window) {
-                alt.emit('characters:New');
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('characters:New');
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        showDeleteInterface() {
+            this.deleteDialog = true;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        hideDeleteInterface() {
+            this.deleteDialog = false;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         deleteCharacter() {
-            if ('alt' in window) {
-                alt.emit('characters:Delete', this.characters[this.characterIndex]._id);
+            this.deleteDialog = false;
+
+            if (!('alt' in window)) {
+                return;
             }
+
+            alt.emit('characters:Delete', this.characters[this.characterIndex]._id);
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        setLocales(localeObject) {
+            this.locales = localeObject;
+            this.updateLocales(true);
+        },
+        updateLocales(skipDefault = false) {
+            this.statNames = [
+                /* Name of the stat, variable name inside character object */
+                { varName: this.locales.LABEL_NAME, varRef: 'name' },
+                { varName: this.locales.LABEL_AGE, varRef: 'age', useInfo: true },
+                { varName: this.locales.LABEL_GENDER, varRef: 'gender', useInfo: true },
+                { varName: this.locales.LABEL_HOURS, varRef: 'hours' },
+                { varName: this.locales.LABEL_CASH, varRef: 'cash', prefix: '$' },
+                { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' }
+            ];
         }
     },
     mounted() {
         if ('alt' in window) {
+            alt.on('characters:SetLocale', this.setLocales);
             alt.on('characters:Set', this.handleSet);
+            alt.emit('characters:Ready');
             alt.emit('ready');
         } else {
             this.characters = [
@@ -126,5 +196,7 @@ const app = new Vue({
                 { ...exampleCharacter, ...{ appearance: { sex: 0 }, name: 'Jobi_Jobonai' } }
             ];
         }
+
+        this.updateLocales();
     }
 });

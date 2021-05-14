@@ -1,6 +1,8 @@
 import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { JobTrigger } from '../../../shared/interfaces/JobTrigger';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../shared/locale/locale';
 import { View } from '../../extensions/view';
 
 const url = `http://resource/client/views/job/html/index.html`;
@@ -42,4 +44,5 @@ function handleReady() {
     }
 
     view.emit('job:Data', trigger);
+    view.emit('job:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
 }

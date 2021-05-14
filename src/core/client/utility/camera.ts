@@ -23,8 +23,17 @@ alt.on('disconnect', () => {
  * Can be controlled with WASD and Mouse Controls.
  * @export
  */
-export function createPedEditCamera(): void {
+export function createPedEditCamera(offset: alt.IVector3 = null): void {
     startPosition = { ...alt.Player.local.pos } as alt.Vector3;
+    if (offset) {
+        startPosition = native.getOffsetFromEntityInWorldCoords(
+            alt.Player.local.scriptID,
+            offset.x,
+            offset.y,
+            offset.z
+        );
+    }
+
     if (!camera) {
         const forwardVector: alt.Vector3 = native.getEntityForwardVector(alt.Player.local.scriptID) as alt.Vector3;
         const forwardCameraPosition: alt.Vector3 = {

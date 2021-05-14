@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { handleFrontendSound } from '../systems/sound';
 
 // Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
@@ -68,6 +69,7 @@ export class View extends alt.WebView {
         _instance.focus();
 
         // Used to hide the view until it's ready.
+        _instance.on('play:Sound', handleFrontendSound);
         _instance.on('ready', () => {
             _instance.isVisible = true;
         });
@@ -138,10 +140,6 @@ export class View extends alt.WebView {
         // Turn off currently existing events.
         for (let i = 0; i < _currentEvents.length; i++) {
             const eventData = _currentEvents[i];
-            if (eventData.eventName === 'ready') {
-                continue;
-            }
-
             super.off(eventData.eventName, eventData.callback);
         }
 

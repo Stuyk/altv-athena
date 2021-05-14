@@ -5,6 +5,7 @@ import { Appearance } from '../../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 import select from './select';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
+import { Collections } from '../../interface/DatabaseCollections';
 
 const db: Database = getDatabase();
 
@@ -28,7 +29,7 @@ async function character(
     newDocument.account_id = p.accountData._id;
     newDocument.name = name;
 
-    const document = await db.insertData(newDocument, 'characters', true);
+    const document = await db.insertData(newDocument, Collections.Characters, true);
     document._id = document._id.toString(); // Re-cast id object as string.
     select.character(p, document);
 }

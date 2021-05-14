@@ -4,6 +4,49 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.2 - April 19 - May 14, 2021
+
+```diff
++ Added Interior Architecture
++ Added Basic Interior Commands for Admins
++ Added /coords command for Admins
++ Increased Build Times
++ Added Refresh / Auto Join for Scripting
++ Added Blip Route for Vehicles in Job Framework
++ Added Stack Inventory Function
++ Updated ATM Interface
++ Added Locale Support for ATM WebView
++ Added Hours Play Statistic
++ Added Hours to Character Selection Screen
++ Updated Characters Interface
++ Added Locale Support for Characters WebView
++ Updated Character Creator Interface (Big Change)
++ Added Locale Support for Creator Interface (Big Change)
++ Removed LESS library from some Interfaces
++ Added Frontend Sounds to Various Interfaces
++ Added Locales for Job Panel
++ Updated Job Panel Design Slightly
++ Updated Inventory Design
++ Added Locales for Inventory
++ Added Right-Click Pickup for Ground Items
++ Added Fancy Animations for Inventory
++ Updated Clothing Design
++ Added Locales for Clothing Interface
++ Improved Clothing Interface Responsiveness
++ Hide HUD when in Clothing Menu
++ Added Partial French Translation
++ Removed need for altv-ares submodule
++ Added New Login Screen
++ Added Locales to Login Screen
++ Added Sounds to Login Screen
++ Removed Help Menu in Top Left
++ Removed Interaction Toggle
++ Interactions Always On
++ Moved Help Text to be Object Orientated
++ Added other help text options.
++ Added Locales for Interactions.
+```
+
 ## 1.8.1 - April 8-18, 2021
 
 ```diff

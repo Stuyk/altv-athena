@@ -40,6 +40,7 @@ declare module 'alt-server' {
         nextPingTime: number;
         nextItemSync: number;
         nextFoodSync: number;
+        nextPlayTime: number;
 
         // Toolbar Information
         lastToolbarData: { equipped: boolean; slot: number };

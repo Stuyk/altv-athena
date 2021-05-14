@@ -17,26 +17,14 @@ const app = new Vue({
                 selectedElement: null
             },
             pageIndex: 0,
-            equipmentMeta: [
-                'Hat',
-                'Mask',
-                'Shirt',
-                'Pants',
-                'Feet',
-                'Glasses',
-                'Ears',
-                'Bag',
-                'Armour',
-                'Watches',
-                'Bracelets'
-            ],
             inventory: [[], [], [], [], [], []],
             ground: [],
             equipment: [],
             toolbar: [],
             disablePreview: false,
             split: null,
-            splitAmount: 1
+            splitAmount: 1,
+            locales: DefaultLocales
         };
     },
     methods: {
@@ -142,6 +130,15 @@ const app = new Vue({
         setItemInfo() {
             this.itemInfo = null;
         },
+        cancelSplitStack() {
+            this.split = null;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
         splitStack(amount) {
             if (!amount) {
                 this.split = null;
@@ -161,6 +158,7 @@ const app = new Vue({
             }
 
             if ('alt' in window) {
+                alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
                 alt.emit('inventory:Split', this.split.slot, this.split.tab, this.splitAmount);
             }
 
@@ -218,10 +216,18 @@ const app = new Vue({
                     return;
                 }
 
-                if ('alt' in window) {
-                    alt.emit('inventory:Use', e.target.id, this.pageIndex);
+                if (!('alt' in window)) {
+                    return;
                 }
 
+                alt.emit('play:Sound', 'YES', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+
+                if (e.target.id.includes('g-')) {
+                    alt.emit('inventory:Pickup', e.target.dataset.hash);
+                    return;
+                }
+
+                alt.emit('inventory:Use', e.target.id, this.pageIndex);
                 return;
             }
 
@@ -230,6 +236,12 @@ const app = new Vue({
 
             // Calculate Element Size
             const element = document.getElementById(e.target.id);
+
+            if (!element) {
+                this.dragging = false;
+                return;
+            }
+
             this.dragAndDrop.shiftX = e.clientX - element.getBoundingClientRect().left;
             this.dragAndDrop.shiftY = e.clientY - element.getBoundingClientRect().top;
             this.dragAndDrop.selectedElement = { style: element.style, classList: element.classList.toString() };
@@ -256,6 +268,12 @@ const app = new Vue({
             document.addEventListener('mouseup', this.dropItem);
             document.addEventListener('mouseover', this.mouseOver);
             document.addEventListener('mousemove', this.updatePosition); // This calls UpdatePosition
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         updatePosition(e) {
             this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
@@ -411,7 +429,7 @@ const app = new Vue({
             return parseInt(value.replace(/.-/gm, ''));
         },
         handleClose(keyPress) {
-            if (keyPress.key !== 'Escape') {
+            if (keyPress.keyCode !== 27) {
                 return;
             }
 
@@ -435,6 +453,9 @@ const app = new Vue({
             }
 
             return false;
+        },
+        setLocales(locales) {
+            this.locales = locales;
         }
     },
     computed: {
@@ -535,6 +556,7 @@ const app = new Vue({
             alt.on('inventory:Equipment', this.updateEquipment);
             alt.on('inventory:Ground', this.updateGround);
             alt.on('inventory:DisablePreview', this.setPreviewDisabled);
+            alt.on('inventory:SetLocales', this.setLocales);
             alt.emit('inventory:Update');
             alt.emit('ready');
         } else {
