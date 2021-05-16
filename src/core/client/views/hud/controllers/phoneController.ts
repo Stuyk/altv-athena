@@ -1,12 +1,32 @@
 import * as alt from 'alt-client';
 import { BaseHUD } from '../hud';
-import { PhoneEventList, PhoneEvents } from '../../../../shared/enums/phoneEvents';
+import { PhoneEventList } from '../../../../shared/enums/phoneEvents';
 import { isAnyMenuOpen } from '../../../utility/menus';
 import { VehicleAppController } from './apps/vehicleApp';
 import { BankAppController } from './apps/bankApp';
 import { DealershipAppController } from './apps/dealershipApp';
+import { KeybindController } from '../../../events/keyup';
+import { KEY_BINDS } from '../../../../shared/enums/keybinds';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 
 export class PhoneController {
+    /**
+     * Register the keybind to toggle the phone.
+     * @static
+     * @memberof PhoneController
+     */
+    static registerKeybind() {
+        KeybindController.registerKeybind({
+            key: KEY_BINDS.PHONE,
+            singlePress: PhoneController.togglePhone
+        });
+    }
+
+    /**
+     * Initialized additional applications in the phone interface.
+     * @static
+     * @memberof PhoneController
+     */
     static initializeApps() {
         // Initialize Apps
         VehicleAppController.init();
@@ -56,3 +76,5 @@ export class PhoneController {
         alt.emit(event.name, ...args);
     }
 }
+
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, PhoneController.registerKeybind);

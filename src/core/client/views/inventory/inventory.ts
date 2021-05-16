@@ -1,12 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../../shared/configurations/shared';
+import { KEY_BINDS } from '../../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Inventory } from '../../../shared/enums/views';
 import { DroppedItem } from '../../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { distance2d } from '../../../shared/utility/vector';
+import { KeybindController } from '../../events/keyup';
 import { View } from '../../extensions/view';
 import { drawMarker } from '../../utility/marker';
 import { isAnyMenuOpen } from '../../utility/menus';
@@ -14,18 +16,31 @@ import { waitForFalse } from '../../utility/wait';
 import { BaseHUD } from '../hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
-// const url = `http://127.0.0.1:5555/src/core/client/views/inventory/html/index.html`;
 const url = `http://resource/client/views/inventory/html/index.html`;
 let view: View;
-let interval;
 let camera;
 let lastDroppedItems: Array<DroppedItem> = [];
-let noPedPreview = false;
+let isOpen = false;
+let drawInterval: number = null;
 
 export class InventoryController {
-    static isOpen = false;
-    static drawInterval: number = null;
+    /**
+     * Register the keybind to the Keybind Controller.
+     * Triggers opening the inventory when pressed.
+     * @static
+     * @memberof InventoryController
+     */
+    static registerKeybinds() {
+        KeybindController.registerKeybind({ key: KEY_BINDS.INVENTORY, singlePress: InventoryController.handleView });
+    }
 
+    /**
+     * Used to open the Inventory.
+     * Checks if any other menus are open.
+     * @static
+     * @return {*}
+     * @memberof InventoryController
+     */
     static async handleView() {
         if (isAnyMenuOpen()) {
             return;
@@ -35,7 +50,6 @@ export class InventoryController {
             return;
         }
 
-        noPedPreview = false;
         view = await View.getInstance(url, true, false, false);
         view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Use', InventoryController.handleUse);
@@ -44,8 +58,7 @@ export class InventoryController {
         view.on('inventory:Split', InventoryController.handleSplit);
         view.on('inventory:Pickup', InventoryController.handlePickup);
         alt.toggleGameControls(false);
-        InventoryController.isOpen = true;
-
+        isOpen = true;
         BaseHUD.setHudVisibility(false);
     }
 
@@ -105,7 +118,7 @@ export class InventoryController {
     }
 
     static handleClose(): void {
-        InventoryController.isOpen = false;
+        isOpen = false;
         native.clearFocus();
         alt.toggleGameControls(true);
         native.renderScriptCams(false, false, 255, true, false, 0);
@@ -137,20 +150,20 @@ export class InventoryController {
     static updateGroundItems(items: Array<DroppedItem>) {
         lastDroppedItems = items;
 
-        if (InventoryController.drawInterval) {
-            alt.clearInterval(InventoryController.drawInterval);
-            InventoryController.drawInterval = null;
+        if (drawInterval) {
+            alt.clearInterval(drawInterval);
+            drawInterval = null;
         }
 
         if (lastDroppedItems.length >= 1) {
-            InventoryController.drawInterval = alt.setInterval(InventoryController.drawItemMarkers, 0);
+            drawInterval = alt.setInterval(InventoryController.drawItemMarkers, 0);
         }
 
         if (!view) {
             return;
         }
 
-        if (!InventoryController.isOpen) {
+        if (!isOpen) {
             return;
         }
 
@@ -225,6 +238,7 @@ export class InventoryController {
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.registerKeybinds);
 
 const keyFunctions = {
     inventory: InventoryController.updateInventory,

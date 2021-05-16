@@ -1,9 +1,24 @@
 import * as alt from 'alt-client';
+import { KEY_BINDS } from '../../../../shared/enums/keybinds';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { View_Events_Chat } from '../../../../shared/enums/views';
+import { KeybindController } from '../../../events/keyup';
 import { disableAllControls } from '../../../utility/disableControls';
 import { BaseHUD } from '../hud';
 
 export class ChatController {
+    /**
+     * Register the keybind to toggle the leaderboard.
+     * @static
+     * @memberof ChatController
+     */
+    static registerKeybind() {
+        KeybindController.registerKeybind({
+            key: KEY_BINDS.CHAT,
+            singlePress: ChatController.focusChat
+        });
+    }
+
     static focusChat(): void {
         if (alt.isConsoleOpen()) {
             return;
@@ -53,3 +68,4 @@ export class ChatController {
 }
 
 alt.onServer(View_Events_Chat.Append, ChatController.appendMessage);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatController.registerKeybind);

@@ -1,8 +1,29 @@
 import * as alt from 'alt-client';
+import { KEY_BINDS } from '../../../../shared/enums/keybinds';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { distance2d } from '../../../../shared/utility/vector';
+import { KeybindController } from '../../../events/keyup';
 import { BaseHUD } from '../hud';
 
 export class LeaderboardController {
+    /**
+     * Register the keybind to toggle the leaderboard.
+     * @static
+     * @memberof LeaderboardController
+     */
+    static registerKeybind() {
+        KeybindController.registerKeybind({
+            key: KEY_BINDS.LEADERBOARD,
+            singlePress: LeaderboardController.focusLeaderBoard
+        });
+    }
+
+    /**
+     * Change the state of the leaderboard from visible / invisible.
+     * @static
+     * @return {*}  {void}
+     * @memberof LeaderboardController
+     */
     static focusLeaderBoard(): void {
         if (!BaseHUD.view) {
             return;
@@ -42,3 +63,5 @@ export class LeaderboardController {
         BaseHUD.view.emit('leaderboard:Toggle', validPlayers, true);
     }
 }
+
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, LeaderboardController.registerKeybind);

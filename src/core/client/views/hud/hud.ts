@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { Command } from '../../../shared/interfaces/Command';
@@ -7,11 +8,13 @@ import { handleFrontendSound } from '../../systems/sound';
 import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
+import { PhoneController } from './controllers/phoneController';
+
+import './controllers/actionsController';
 import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/helpController';
 import './controllers/leaderBoardController';
-import { PhoneController } from './controllers/phoneController';
 
 // const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
 const url = `http://resource/client/views/hud/html/index.html`;

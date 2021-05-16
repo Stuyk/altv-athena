@@ -1,17 +1,15 @@
 import * as alt from 'alt-client';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
+
+import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ActionMenu, Action } from '../../shared/interfaces/Actions';
+import { ActionMenu } from '../../shared/interfaces/Actions';
 import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
-import { KEY_BINDS } from '../events/keyup';
-import { drawMarker } from '../utility/marker';
+import { KeybindController } from '../events/keyup';
 import { ActionsController } from '../views/hud/controllers/actionsController';
 import { HelpController } from '../views/hud/controllers/helpController';
-import { BaseHUD, HudEventNames } from '../views/hud/hud';
 import { VehicleController } from './vehicle';
 
-const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
 const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 500;
 let NEXT_MENU_UPDATE = Date.now() + 2000;
@@ -24,6 +22,23 @@ export class InteractionController {
     static pressedKey: boolean = false;
     static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 
+    /**
+     * Register default keybind for interactions.
+     * @static
+     * @memberof InteractionController
+     */
+    static registerKeybinds() {
+        KeybindController.registerKeybind({
+            key: KEY_BINDS.INTERACT,
+            singlePress: InteractionController.triggerInteraction
+        });
+    }
+
+    /**
+     * Called when the keybind is pressed.
+     * @static
+     * @memberof InteractionController
+     */
     static triggerInteraction(): void {
         InteractionController.pressedKey = true;
     }
@@ -158,6 +173,7 @@ export class InteractionController {
 
 alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
-alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, () => {
     InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
+    InteractionController.registerKeybinds();
 });

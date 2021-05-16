@@ -4,6 +4,13 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 1.8.3 - May 16 - x, 2021
+```diff
++ New Keybind Interface for Custom Keybinds
++ Added Register Keybind
++ Applied Existing Keybinds to Register Keybind
+```
+
 ## 1.8.2 - April 19 - May 14, 2021
 
 ```diff
