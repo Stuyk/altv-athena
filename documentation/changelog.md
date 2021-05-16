@@ -11,6 +11,8 @@ description: List of all the changes and current versions.
 + Applied Existing Keybinds to Register Keybind
 + Added ScreenText Class
 + Added New Help Text Interface
++ Fix Slide Up Animation for ATM
++ Hide Help Text in Menus
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

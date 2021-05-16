@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 
 import { Help } from '../../shared/interfaces/Help';
+import { isAnyMenuOpen } from '../utility/menus';
 import { ScreenText } from '../utility/screenText';
 
 let currentHelp: Help = null;
@@ -49,6 +50,10 @@ export class HelpController {
         }
 
         if (alt.Player.local.vehicle) {
+            return;
+        }
+
+        if (isAnyMenuOpen()) {
             return;
         }
 
