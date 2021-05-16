@@ -14,6 +14,11 @@ button {
 button:active {
     transform: translateY(-2px) !important;
     transition: 0.1ms;
+    outline: none !important;
+}
+
+button:focus {
+    outline: none !important;
 }
 
 .athena {
@@ -71,11 +76,11 @@ button:active {
     }
 }
 
-.overline{
-    font-size:.75rem!important;
-    font-weight:500;
-    letter-spacing:.1666666667em!important;
-    line-height:2rem;
-    text-transform:uppercase;
-    font-family:Roboto,sans-serif!important
+.overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    line-height: 2rem;
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif !important;
 }

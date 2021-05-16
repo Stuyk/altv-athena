@@ -80,6 +80,13 @@ const app = new Vue({
         },
         setLocales(localeObject) {
             this.locales = localeObject;
+        },
+        handlePress(e) {
+            if (e.keyCode !== 27) {
+                return;
+            }
+
+            this.exit();
         }
     },
     computed: {
@@ -92,6 +99,7 @@ const app = new Vue({
     },
     mounted() {
         this.$on('set-processing', this.setProcessing);
+        document.addEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
             alt.on('atm:Update', this.updateBalances);
