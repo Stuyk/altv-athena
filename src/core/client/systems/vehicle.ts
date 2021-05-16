@@ -1,6 +1,15 @@
+import * as alt from 'alt-client';
+import * as native from 'natives';
+
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_Seat_List, Vehicle_State } from '../../shared/enums/vehicle';
+import {
+    Vehicle_Door_List,
+    Vehicle_Events,
+    Vehicle_Lock_State,
+    Vehicle_Seat_List,
+    Vehicle_State
+} from '../../shared/enums/vehicle';
 import { ActionMenu } from '../../shared/interfaces/Actions';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -11,8 +20,6 @@ import vehicleFuncs from '../extensions/Vehicle';
 import { drawTexture, loadTexture } from '../utility/texture';
 import { ChatController } from '../views/hud/controllers/chatController';
 import { BaseHUD, HudEventNames } from '../views/hud/hud';
-import * as alt from 'alt-client';
-import * as native from 'natives';
 
 alt.onServer(Vehicle_Events.SET_INTO, handleSetInto);
 alt.on('streamSyncedMetaChange', handleVehicleDataChange);
@@ -210,12 +217,14 @@ export class VehicleController {
                 return actions;
             }
 
-            const short = `[${String.fromCharCode(KEY_BINDS.INTERACT)}] ${LocaleController.get(
+            const short = `~b~${String.fromCharCode(KEY_BINDS.INTERACT)} - ${LocaleController.get(
                 LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE
             )}`;
-            const long = `[${String.fromCharCode(KEY_BINDS.VEHICLE_LOCK)}] ${LocaleController.get(
+
+            const long = `~b~${String.fromCharCode(KEY_BINDS.VEHICLE_LOCK)} - ${LocaleController.get(
                 LOCALE_KEYS.VEHICLE_TOGGLE_LOCK
             )}`;
+
             alt.Player.local.otherInteraction = {
                 position: closestVehicle.pos,
                 short,

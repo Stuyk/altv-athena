@@ -13,7 +13,6 @@ import { PhoneController } from './controllers/phoneController';
 import './controllers/actionsController';
 import './controllers/audioController';
 import './controllers/chatController';
-import './controllers/helpController';
 import './controllers/leaderBoardController';
 
 // const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;

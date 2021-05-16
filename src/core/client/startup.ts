@@ -16,6 +16,7 @@ import './systems/blip';
 import './systems/death';
 import './systems/debug';
 import './systems/disable';
+import './systems/help';
 import './systems/interaction';
 import './systems/interiors';
 import './systems/job';

@@ -5,6 +5,8 @@ import { Character } from '../../../shared/interfaces/Character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { View } from '../../extensions/view';
+import { isAnyMenuOpen } from '../../utility/menus';
+import { BaseHUD } from '../hud/hud';
 
 const url = `http://resource/client/views/atm/html/index.html`;
 let view: View;
@@ -18,11 +20,16 @@ async function handleView(_characters: Partial<Character>[]) {
         return;
     }
 
+    if (isAnyMenuOpen()) {
+        return;
+    }
+
     view = await View.getInstance(url, true, false, true);
     view.on('atm:Ready', handleReady);
     view.on('atm:Close', handleClose);
     view.on('atm:Action', handleAction);
     alt.toggleGameControls(false);
+    BaseHUD.setHudVisibility(false);
     isOpen = true;
 }
 
@@ -33,6 +40,7 @@ function handleAction(type, amount, id = null) {
 function handleClose() {
     isOpen = false;
     alt.toggleGameControls(true);
+    BaseHUD.setHudVisibility(true);
 
     if (!view) {
         return;

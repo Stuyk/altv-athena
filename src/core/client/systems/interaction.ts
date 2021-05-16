@@ -7,9 +7,10 @@ import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { ActionsController } from '../views/hud/controllers/actionsController';
-import { HelpController } from '../views/hud/controllers/helpController';
+import { HelpController } from './help';
 import { VehicleController } from './vehicle';
 
+const MAX_INTERACTION_DIST = 5;
 const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 500;
 let NEXT_MENU_UPDATE = Date.now() + 2000;
@@ -80,11 +81,11 @@ export class InteractionController {
 
         VehicleController.runVehicleControllerTick();
 
-        if (Date.now() > NEXT_HELP_CLEAR) {
-            NEXT_HELP_CLEAR = Date.now() + 5000;
-            delete alt.Player.local.otherInteraction;
-            HelpController.updateHelpText(null, null, null, null);
-        }
+        // if (Date.now() > NEXT_HELP_CLEAR) {
+        //     NEXT_HELP_CLEAR = Date.now() + 5000;
+        //     delete alt.Player.local.otherInteraction;
+        //     HelpController.updateHelpText(null);
+        // }
 
         // Populates the Menu
         if (Date.now() > NEXT_MENU_UPDATE) {
@@ -123,19 +124,25 @@ export class InteractionController {
 
         if (alt.Player.local.closestInteraction && alt.Player.local.closestInteraction.position) {
             // Show this when interactions available is populated.
-            HelpController.updateHelpText(
-                alt.Player.local.closestInteraction.position,
-                KEY_BINDS.INTERACT,
-                alt.Player.local.closestInteraction.text,
-                null
-            );
+            HelpController.updateHelpText({
+                position: alt.Player.local.pos,
+                key: KEY_BINDS.INTERACT,
+                shortDesc: alt.Player.local.closestInteraction.text
+            });
         } else if (alt.Player.local.otherInteraction) {
-            HelpController.updateHelpText(
-                alt.Player.local.otherInteraction.position,
-                null,
-                alt.Player.local.otherInteraction.short,
-                alt.Player.local.otherInteraction.long
-            );
+            const dist = distance2d(alt.Player.local.pos, alt.Player.local.otherInteraction.position);
+            if (dist <= MAX_INTERACTION_DIST) {
+                HelpController.updateHelpText({
+                    position: alt.Player.local.pos,
+                    key: null,
+                    shortDesc: alt.Player.local.otherInteraction.short,
+                    longDesc: alt.Player.local.otherInteraction.long
+                });
+            } else {
+                HelpController.updateHelpText(null);
+            }
+        } else {
+            HelpController.updateHelpText(null);
         }
 
         // Open the Dynamic Menu

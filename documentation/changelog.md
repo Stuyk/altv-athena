@@ -9,6 +9,8 @@ description: List of all the changes and current versions.
 + New Keybind Interface for Custom Keybinds
 + Added Register Keybind
 + Applied Existing Keybinds to Register Keybind
++ Added ScreenText Class
++ Added New Help Text Interface
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

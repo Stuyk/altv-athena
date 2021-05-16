@@ -21,7 +21,6 @@ export function drawText2D(text: string, pos: alt.IVector2, scale: number, color
     native.setTextFont(4);
     native.setTextScale(1, scale);
     native.setTextWrap(0.0, 1.0);
-    native.setTextCentre(true);
     native.setTextColour(color.r, color.g, color.b, color.a);
     native.setTextOutline();
     native.setTextDropShadow();
@@ -37,6 +36,10 @@ export function drawRectangle(pos: alt.IVector3, width: alt.IVector2, color: alt
     native.setDrawOrigin(pos.x, pos.y, pos.z, 0);
     native.drawRect(0, 0, width.x, width.y, color.r, color.g, color.b, color.a, false);
     native.clearDrawOrigin();
+}
+
+export function drawRectangle2D(pos: alt.IVector2, size: alt.IVector2, color: alt.RGBA) {
+    native.drawRect(pos.x, pos.y, size.x, size.y, color.r, color.g, color.b, color.a, false);
 }
 
 /**
@@ -57,7 +60,6 @@ export function drawText3D(text: string, pos: alt.IVector3, scale: number, color
     native.setTextFont(4);
     native.setTextScale(1, scale);
     native.setTextWrap(0.0, 1.0);
-    native.setTextCentre(true);
     native.setTextColour(color.r, color.g, color.b, color.a);
     native.setTextOutline();
     native.setTextDropShadow();
