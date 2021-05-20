@@ -24,7 +24,7 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
   - [Merge Conflicts?!](#merge-conflicts)
   - [Pushing Changes to Private Repository](#pushing-changes-to-private-repository)
 
-## Setup
+## Setup Private Repo
 
 Create a bare clone of the Athena Repository
 
@@ -59,6 +59,13 @@ cd ..
 rmdir altv-athena-bare
 ```
 
+## Set Private Repo Main Branch to Master
+
+![](https://i.imgur.com/FXae1k2.png)
+
+![](https://i.imgur.com/czfpchr.png)
+
+## Download from Private Repo
 Clone the repository down from github.
 
 ```bash
