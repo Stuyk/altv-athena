@@ -15,6 +15,8 @@ description: List of all the changes and current versions.
 + Hide Help Text in Menus
 + Fixed Outline Color for Buttons
 + Added 'Escape' to leave ATM menu.
++ Built New Interaction Interface
++ Made Interactions Much Simpler
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

@@ -2,9 +2,11 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { PhoneEvents } from '../../shared/enums/phoneEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import atms from '../../shared/information/atms';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
+import { InteractionController } from '../systems/interaction';
 
 const ActionHandlers = {
     deposit: handleDeposit,
@@ -13,6 +15,7 @@ const ActionHandlers = {
     transferCash: handleTransferCash
 };
 
+alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, init);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, handleAction);
 alt.onClient(PhoneEvents.ATM_TRANSFER.name, handlePhoneRoute);
 
@@ -117,4 +120,20 @@ function handleTransferCash(player: alt.Player, amount: number, id: string | num
     const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
     playerFuncs.emit.message(target, msg);
     return true;
+}
+
+function init() {
+    for (let i = 0; i < atms.length; i++) {
+        const position = atms[i];
+
+        InteractionController.add({
+            shortDesc: LocaleController.get(LOCALE_KEYS.USE_ATM),
+            event: {
+                eventName: 'atm:Open',
+                isServer: false
+            },
+            position,
+            type: 'atm'
+        });
+    }
 }

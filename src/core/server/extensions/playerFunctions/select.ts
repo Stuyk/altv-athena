@@ -84,7 +84,6 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
 
         // Propagation
         ChatController.populateCommands(p);
-        InteractionController.populateCustomInteractions(p);
         BlipController.populateGlobalBlips(p);
         MarkerController.populateGlobalMarkers(p);
         TextLabelController.populateGlobalLabels(p);

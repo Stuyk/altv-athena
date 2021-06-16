@@ -5,7 +5,7 @@ import { SYSTEM_EVENTS } from '../shared/enums/system';
 const filePaths = [
     // GAMEMODE IMPORTS -- Remove what you don't want.
     './teleportEffect/teleporter',
-    './heist/heist',
+    './heistExample/index',
     './deathLog/deathLog',
     './actionMenu/actionMenu',
     './interactionExample/index',

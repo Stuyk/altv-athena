@@ -4,6 +4,8 @@ import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ActionMenu } from '../../shared/interfaces/Actions';
 import { Interaction } from '../../shared/interfaces/Interaction';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { ActionsController } from '../views/hud/controllers/actionsController';
@@ -14,14 +16,24 @@ const MAX_INTERACTION_DIST = 5;
 const MAX_CHECKPOINT_DRAW = 8;
 const TIME_BETWEEN_CHECKS = 500;
 let NEXT_MENU_UPDATE = Date.now() + 2000;
-let NEXT_HELP_CLEAR = Date.now() + 5000;
 let dynamicActionMenu: ActionMenu = {};
+let tick;
+let pressedKey = false;
+let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 
 export class InteractionController {
-    static customInteractions: Array<Interaction> = [];
-    static tick: number;
-    static pressedKey: boolean = false;
-    static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+    /**
+     * Initialize the Interaction Controller
+     * @static
+     * @memberof InteractionController
+     */
+    static init() {
+        if (!tick) {
+            tick = alt.setInterval(InteractionController.tick, 0);
+        }
+
+        InteractionController.registerKeybinds();
+    }
 
     /**
      * Register default keybind for interactions.
@@ -31,17 +43,10 @@ export class InteractionController {
     static registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.INTERACT,
-            singlePress: InteractionController.triggerInteraction
+            singlePress: () => {
+                pressedKey = true;
+            }
         });
-    }
-
-    /**
-     * Called when the keybind is pressed.
-     * @static
-     * @memberof InteractionController
-     */
-    static triggerInteraction(): void {
-        InteractionController.pressedKey = true;
     }
 
     /**
@@ -51,136 +56,138 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static setInteractionInfo(type: string | null, position: alt.Vector3, text: string) {
-        if (type === null) {
+    static set(interaction: Interaction) {
+        if (interaction === null) {
             alt.Player.local.closestInteraction = null;
             return;
         }
 
-        alt.Player.local.closestInteraction = { type, position, text };
+        alt.Player.local.closestInteraction = interaction;
     }
 
-    static handleInteractionMode() {
+    static tick() {
         if (alt.Player.local.isMenuOpen) {
-            InteractionController.pressedKey = false;
+            pressedKey = false;
             dynamicActionMenu = {};
             return;
         }
 
         if (alt.Player.local.isChatOpen) {
-            InteractionController.pressedKey = false;
+            pressedKey = false;
             dynamicActionMenu = {};
             return;
         }
 
         if (alt.Player.local.meta.isDead) {
-            InteractionController.pressedKey = false;
+            pressedKey = false;
             dynamicActionMenu = {};
             return;
         }
 
         VehicleController.runVehicleControllerTick();
 
-        // if (Date.now() > NEXT_HELP_CLEAR) {
-        //     NEXT_HELP_CLEAR = Date.now() + 5000;
-        //     delete alt.Player.local.otherInteraction;
-        //     HelpController.updateHelpText(null);
-        // }
-
+        let hasVehicle = false;
         // Populates the Menu
         if (Date.now() > NEXT_MENU_UPDATE) {
             NEXT_MENU_UPDATE = Date.now() + 1000;
             dynamicActionMenu = {};
 
-            // Populate Vehicle Options
-            const vehicleMenus = VehicleController.getVehicleOptions();
-            if (Object.keys(vehicleMenus).length >= 1) {
-                dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
+            const closestVehicle = VehicleController.getClosestVehicle();
+            if (closestVehicle) {
+                const dist = distance2d(alt.Player.local.pos, closestVehicle.pos);
+                if (dist <= MAX_INTERACTION_DIST) {
+                    hasVehicle = true;
+
+                    const vehicleMenus = VehicleController.getVehicleOptions();
+                    if (Object.keys(vehicleMenus).length >= 1) {
+                        dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
+                    }
+                }
             }
         }
 
         // Populates Interaction Menu
-        if (alt.Player.local.closestInteraction) {
-            const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
-            if (dist < MAX_CHECKPOINT_DRAW) {
-                dynamicActionMenu[alt.Player.local.closestInteraction.text] = {
-                    eventName: SYSTEM_EVENTS.INTERACTION,
-                    isServer: true,
-                    data: alt.Player.local.closestInteraction.type
-                };
-            }
-        }
+        // if (alt.Player.local.closestInteraction) {
+        //     const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
+        //     if (dist < MAX_CHECKPOINT_DRAW) {
+        //         dynamicActionMenu[alt.Player.local.closestInteraction.shortDesc] = {
+        //             eventName: SYSTEM_EVENTS.INTERACTION,
+        //             isServer: true,
+        //             data: alt.Player.local.closestInteraction.type
+        //         };
+        //     }
+        // }
 
         // Timeout for Key Presses
-        if (InteractionController.nextKeyPress > Date.now()) {
-            InteractionController.pressedKey = false;
+        if (nextKeyPress > Date.now()) {
+            pressedKey = false;
             return;
         }
+
+        const dynamicMenuLength = Object.keys(dynamicActionMenu).length;
 
         // Check that the Dynamic Menu has Items
-        if (Object.keys(dynamicActionMenu).length <= 0) {
+        if (dynamicMenuLength <= 0) {
             return;
         }
 
-        if (alt.Player.local.closestInteraction && alt.Player.local.closestInteraction.position) {
-            // Show this when interactions available is populated.
-            HelpController.updateHelpText({
-                position: alt.Player.local.pos,
-                key: KEY_BINDS.INTERACT,
-                shortDesc: alt.Player.local.closestInteraction.text
-            });
-        } else if (alt.Player.local.otherInteraction) {
-            const dist = distance2d(alt.Player.local.pos, alt.Player.local.otherInteraction.position);
-            if (dist <= MAX_INTERACTION_DIST) {
-                HelpController.updateHelpText({
-                    position: alt.Player.local.pos,
-                    key: null,
-                    shortDesc: alt.Player.local.otherInteraction.short,
-                    longDesc: alt.Player.local.otherInteraction.long
-                });
-            } else {
-                HelpController.updateHelpText(null);
-            }
-        } else {
-            HelpController.updateHelpText(null);
+        // Multiple Views
+        // if (dynamicMenuLength >= 2) {
+        //     HelpController.append({
+        //         position: alt.Player.local.pos,
+        //         key: KEY_BINDS.INTERACT,
+        //         desc: LocaleController.get(LOCALE_KEYS.INTERACTION_VIEW_OPTIONS)
+        //     });
+        // } else if (alt.Player.local.closestInteraction && alt.Player.local.closestInteraction.position) {
+        //     HelpController.append({
+        //         position: alt.Player.local.closestInteraction.position,
+        //         key: KEY_BINDS.INTERACT,
+        //         desc: alt.Player.local.closestInteraction.shortDesc
+        //     });
+        // } else if (alt.Player.local.otherInteraction) {
+        //     const dist = distance2d(alt.Player.local.pos, alt.Player.local.otherInteraction.position);
+        //     if (dist <= MAX_INTERACTION_DIST) {
+        //         HelpController.append({
+        //             position: alt.Player.local.closestInteraction.position,
+        //             key: KEY_BINDS.INTERACT,
+        //             desc: alt.Player.local.closestInteraction.shortDesc
+        //         });
+
+        //         HelpController.updateHelpText({
+        //             position: alt.Player.local.pos,
+        //             key: null,
+        //             shortDesc: alt.Player.local.otherInteraction.short,
+        //             longDesc: alt.Player.local.otherInteraction.long
+        //         });
+        //     } else {
+        //         HelpController.updateHelpText(null);
+        //     }
+        // } else {
+        //     HelpController.updateHelpText(null);
+        // }
+
+        // Called when the palyer pressed the interaction key.
+        if (!pressedKey) {
+            return;
         }
 
-        // Open the Dynamic Menu
-        if (InteractionController.pressedKey) {
-            InteractionController.pressedKey = false;
-            InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+        pressedKey = false;
+        nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+
+        if (dynamicMenuLength <= 1 && hasVehicle) {
             ActionsController.set(dynamicActionMenu);
+            return;
         }
 
+        if (dynamicMenuLength <= 1 && alt.Player.local.closestInteraction) {
+            alt.emitServer(SYSTEM_EVENTS.INTERACTION, alt.Player.local.closestInteraction.type);
+            return;
+        }
+
+        ActionsController.set(dynamicActionMenu);
         return;
-    }
-
-    static addInteractions(customInteractions: Array<Interaction>): void {
-        InteractionController.customInteractions = customInteractions;
-
-        for (let i = 0; i < customInteractions.length; i++) {
-            const interaction = customInteractions[i];
-            if (interaction.blip) {
-                let blip = new alt.PointBlip(interaction.blip.pos.x, interaction.blip.pos.y, interaction.blip.pos.z);
-                blip.scale = interaction.blip.scale;
-
-                // Beta Feature? Not implemented yet.
-                if (blip.hasOwnProperty('size')) {
-                    blip.size = { x: interaction.blip.scale, y: interaction.blip.scale } as alt.Vector2;
-                }
-
-                blip.sprite = interaction.blip.sprite;
-                blip.color = interaction.blip.color;
-                blip.shortRange = interaction.blip.shortRange;
-                blip.name = interaction.blip.text;
-            }
-        }
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
-alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, () => {
-    InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
-    InteractionController.registerKeybinds();
-});
+alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.set);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InteractionController.init);

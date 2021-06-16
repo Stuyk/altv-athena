@@ -5,51 +5,25 @@ import { Help } from '../../shared/interfaces/Help';
 import { isAnyMenuOpen } from '../utility/menus';
 import { ScreenText } from '../utility/screenText';
 
-let currentHelp: Help = null;
+const TIME_BETWEEN_HELP_CLEARS = 3500;
+const helpList: Array<Help> = [];
+
 let helpShown: boolean = false;
 let interval: number;
 
 export class HelpController {
-    /**
-     * Used to display text and information temporarily in a specific location.
-     * Call continuously with a range check.
-     *
-     * @static
-     * @param {alt.Vector3} position
-     * @param {(number | null)} key
-     * @param {(string | null)} shortDesc
-     * @param {(string | null)} longDesc
-     * @memberof HelpController
-     */
-    static updateHelpText(helpData: Help): void {
-        if (!interval) {
-            interval = alt.setInterval(HelpController.drawHelp, 0);
+    static append(data: Help) {
+        if (helpList.find((x) => x.key === data.key)) {
+            return;
         }
 
-        currentHelp = helpData;
-        helpShown = true;
-
-        if (currentHelp && currentHelp.position) {
-            currentHelp.position = new alt.Vector3(
-                currentHelp.position.x,
-                currentHelp.position.y,
-                alt.Player.local.pos.z
-            );
-        } else {
-            currentHelp = null;
-        }
+        data.expiration = Date.now() + TIME_BETWEEN_HELP_CLEARS;
+        data.position = new alt.Vector3(data.position.x, data.position.y, alt.Player.local.pos.z);
+        helpList.push(data);
     }
 
     static drawHelp() {
-        if (!currentHelp || !currentHelp.position) {
-            return;
-        }
-
-        if (!currentHelp.shortDesc && !currentHelp.longDesc) {
-            return;
-        }
-
-        if (alt.Player.local.vehicle) {
+        if (helpList.length <= 0) {
             return;
         }
 
@@ -57,32 +31,36 @@ export class HelpController {
             return;
         }
 
-        const [onScreen, x, y] = native.getScreenCoordFromWorldCoord(
-            currentHelp.position.x,
-            currentHelp.position.y,
-            alt.Player.local.pos.z,
-            0,
-            0
-        );
+        for (let i = helpList.length - 1; i >= 0; i--) {
+            const currentHelp = helpList[i];
 
-        if (!onScreen) {
-            return;
+            if (Date.now() > currentHelp.expiration) {
+                helpList.splice(i, 1);
+                continue;
+            }
+
+            const [onScreen, x, y] = native.getScreenCoordFromWorldCoord(
+                currentHelp.position.x,
+                currentHelp.position.y,
+                alt.Player.local.pos.z,
+                0,
+                0
+            );
+
+            if (!onScreen) {
+                continue;
+            }
+
+            HelpController.drawKey(currentHelp.key, x, y, i);
+            HelpController.drawShortPress(x, y, currentHelp.desc, i);
         }
-
-        HelpController.drawKey(x, y);
-        HelpController.drawShortPress(x, y);
-        HelpController.drawLongPress(x, y);
     }
 
-    static drawKey(x: number, y: number) {
-        if (!currentHelp.key) {
-            return;
-        }
-
+    static drawKey(key: number, x: number, y: number, offset: number) {
         ScreenText.drawTextWithBackground(
-            `~b~${String.fromCharCode(currentHelp.key).toUpperCase()}`,
+            `~b~${String.fromCharCode(key).toUpperCase()}`,
             x,
-            y,
+            y + offset * 0.01,
             0.5,
             4,
             new alt.RGBA(0, 0, 0, 200),
@@ -98,15 +76,11 @@ export class HelpController {
         );
     }
 
-    static drawShortPress(x: number, y: number) {
-        if (!currentHelp.shortDesc) {
-            return;
-        }
-
+    static drawShortPress(x: number, y: number, description: string, offset: number) {
         ScreenText.drawTextWithBackground(
-            currentHelp.shortDesc,
-            x + 0.04,
-            y,
+            description,
+            x + 0.03,
+            y + offset * 0.01,
             0.5,
             4,
             new alt.RGBA(0, 0, 0, 200),
@@ -115,36 +89,6 @@ export class HelpController {
                 paddingBottom: 0.02,
                 paddingTop: 0.02,
                 paddingRight: 0.1,
-                paddingLeft: 0.01,
-                offsetX: -0.05,
-                offsetY: -0.02
-            }
-        );
-    }
-
-    static drawLongPress(x: number, y: number) {
-        if (!currentHelp.longDesc) {
-            return;
-        }
-
-        let xPosition = x;
-
-        if (!currentHelp.key) {
-            xPosition = x + 0.04;
-        }
-
-        ScreenText.drawTextWithBackground(
-            currentHelp.longDesc,
-            xPosition,
-            y + 0.075,
-            0.5,
-            4,
-            new alt.RGBA(0, 0, 0, 200),
-            new alt.RGBA(255, 255, 255, 255),
-            {
-                paddingBottom: 0.02,
-                paddingTop: 0.02,
-                paddingRight: 0.05,
                 paddingLeft: 0.01,
                 offsetX: -0.05,
                 offsetY: -0.02

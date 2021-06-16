@@ -277,21 +277,21 @@ alt.on('heist:Completed', (player: alt.Player, pos: alt.Vector3) => {
 
 // Interactions for this Heist
 TextLabelController.add({ data: 'Jewelry Store Heist', pos: startPosition, maxDistance: 10 });
-InteractionController.addInteraction(
-    'heistjewelrystore',
-    startPosition,
-    3,
-    'Browse Heist',
-    {
-        pos: startPosition,
+
+InteractionController.add({
+    event: { eventName: `heistjewelrystore`, isServer: true },
+    type: 'heistjewelrystore',
+    position: startPosition,
+    shortDesc: 'Browse Heist',
+    blip: {
         sprite: 112,
         color: 7,
-        shortRange: false,
-        text: `Jewelry Store Heist`,
+        shortRange: true,
+        text: 'Heist',
+        pos: startPosition,
         scale: 1
-    },
-    true
-);
+    }
+});
 
 alt.on('heistjewelrystore', (player: alt.Player) => {
     const trigger: JobTrigger = {

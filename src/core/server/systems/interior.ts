@@ -38,7 +38,8 @@ class ColshapeInterior extends alt.ColshapeSphere {
             this.dimension = dimension;
         }
 
-        InteractionController.sideLoadInteraction(this.interactionType, SYSTEM_EVENTS.INTERIOR_SWITCH, true, this);
+        console.log('FIX SIDE LOADING BLIPS');
+        // InteractionController.sideLoadInteraction(this.interactionType, SYSTEM_EVENTS.INTERIOR_SWITCH, true, this);
     }
 }
 

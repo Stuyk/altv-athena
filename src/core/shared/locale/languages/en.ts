@@ -76,6 +76,7 @@ export default {
     [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
     [LOCALE_KEYS.INTERACTION_INTERACT_WITH_OBJECT]: `Interact with Object`,
     [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
+    [LOCALE_KEYS.INTERACTION_VIEW_OPTIONS]: `View Options`,
     // Item
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,

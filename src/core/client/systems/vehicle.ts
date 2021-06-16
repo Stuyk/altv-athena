@@ -324,7 +324,7 @@ export class VehicleController {
      * @return {*}
      * @memberof VehicleController
      */
-    static runVehicleControllerTick(): void {
+    static async runVehicleControllerTick(): Promise<void> {
         if (!processingVehicles) {
             processingVehicles = true;
             alt.setTimeout(VehicleController.updateClosestVehicles, 0);
@@ -368,7 +368,7 @@ export class VehicleController {
         // Draw Vehicle Lock
         if (!alt.Player.local.vehicle) {
             if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
-                loadTexture('mpsafecracking');
+                await loadTexture('mpsafecracking');
             }
 
             const newPosition = closestVehicle.pos.add(0, 0, 1);

@@ -1,168 +1,78 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Clothing } from '../../shared/enums/views';
-import gridData from '../../shared/information/gridData';
-import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../../shared/interfaces/Interaction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { InteractionShape } from '../extensions/Colshape';
 import { playerFuncs } from '../extensions/Player';
-import { distance2d } from '../utility/vector';
+import { sha256Random } from '../utility/encryption';
 import '../views/atm';
 
-interface InteractionHelper {
-    [key: string]: Array<alt.Colshape>;
-}
-
-interface InteractionDefault {
-    eventName: string;
-    isServer: boolean;
-    maxRadius?: number;
-    text?: string;
-}
-
-let customInteractions: Array<Interaction> = [];
+const interactions: { [key: string]: Array<InteractionShape> } = {};
+const safeInteractions: Array<Interaction> = [];
 
 export class InteractionController {
-    static Interactions: InteractionHelper = {};
-    static InteractionTypes: { [key: string]: InteractionDefault } = {
-        atm: {
-            eventName: SYSTEM_EVENTS.INTERACTION_ATM,
-            isServer: false,
-            text: LocaleController.get(LOCALE_KEYS.USE_ATM)
-        },
-        gas: {
-            eventName: SYSTEM_EVENTS.INTERACTION_FUEL,
-            isServer: true,
-            maxRadius: 3,
-            text: LocaleController.get(LOCALE_KEYS.USE_FUEL_PUMP)
-        },
-        clothing: {
-            eventName: View_Events_Clothing.Open,
-            isServer: false,
-            text: LocaleController.get(LOCALE_KEYS.USE_CLOTHING_STORE)
-        },
-        interior: {
-            eventName: SYSTEM_EVENTS.INTERIOR_SWITCH,
-            isServer: true,
-            text: LocaleController.get(LOCALE_KEYS.INTERIOR_INTERACT)
-        }
-    };
-
     /**
-     * Generates interaction points based on prop data.
+     * Register an interaction.
      * @static
+     * @param {Interaction} interaction
      * @memberof InteractionController
+     * @returns {string} uid
      */
-    static generateInteractions() {
-        let count = 0;
+    static add(interaction: Interaction): InteractionShape {
+        const uid = sha256Random(JSON.stringify(interaction));
+        interaction.identifier = uid;
 
-        gridData.forEach((grid) => {
-            Object.keys(grid.objects).forEach((key) => {
-                const category = key;
-                const interaction = InteractionController.InteractionTypes[category];
+        if (!interactions[interaction.type]) {
+            interactions[interaction.type] = [];
+        }
 
-                if (!interaction) {
-                    return;
-                }
+        const shape = new InteractionShape(interaction.position, 2.5, 3);
+        shape.setInteraction(interaction);
+        interactions[interaction.type].push(shape);
 
-                let defaultRadius = 2.5;
-                if (interaction && interaction.maxRadius) {
-                    defaultRadius = interaction.maxRadius;
-                }
-
-                const infoData: Array<{ position: alt.Vector3 }> = grid.objects[key];
-                infoData.forEach((info) => {
-                    const newPos = new alt.Vector3(info.position.x, info.position.y, info.position.z - 1);
-                    const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, defaultRadius, 2.5);
-                    shape.playersOnly = true;
-                    shape['isInteraction'] = true;
-                    shape['interactionType'] = category;
-                    shape['text'] = interaction.text;
-
-                    if (!InteractionController.Interactions[category]) {
-                        InteractionController.Interactions[category] = [];
-                    }
-
-                    count += 1;
-                    InteractionController.Interactions[category].push(shape);
-                });
-            });
-        });
-
-        alt.log(`[Athena] Generated ${count} Interaction Points`);
+        safeInteractions.push(shape.getInteraction());
+        return shape;
     }
 
     /**
-     * Used to add an interaction
+     * Remove an interaction by type and uid.
      * @static
-     * @param {string} identifierAndEventName Must be unique. This is your event name.
-     * @param {alt.Vector3} position
-     * @param {number} range
-     * @param {string} activationText What this interaction tells you it will do
-     * @param {Blip} blip The blip that goes along with this interaction
-     * @param {boolean} isServerEvent Is this a server event or a client event?
+     * @param {string} type
+     * @param {string} uid
      * @memberof InteractionController
      */
-    static addInteraction(
-        identifierAndEventName: string,
-        position: alt.IVector3,
-        range: number,
-        activationText: string,
-        blip: Blip,
-        isServerEvent: boolean
-    ) {
-        const newPos = new alt.Vector3(position.x, position.y, position.z - 1);
-        const shape = new alt.ColshapeCylinder(newPos.x, newPos.y, newPos.z, range, 2.5);
-        shape.playersOnly = true;
-        shape['isInteraction'] = true;
-        shape['interactionType'] = identifierAndEventName;
-        shape['text'] = activationText;
-
-        if (!InteractionController.Interactions[identifierAndEventName]) {
-            InteractionController.Interactions[identifierAndEventName] = [];
+    static remove(type: string, uid: string): boolean {
+        if (!interactions[type]) {
+            return false;
         }
 
-        customInteractions.push({ identifier: identifierAndEventName, blip, text: activationText });
-        InteractionController.Interactions[identifierAndEventName].push(shape);
-        InteractionController.InteractionTypes[identifierAndEventName] = {
-            eventName: identifierAndEventName,
-            isServer: isServerEvent
-        };
+        let index = interactions[type].findIndex((i) => i.getIdentifier() === uid);
+        if (index <= -1) {
+            return false;
+        }
+
+        try {
+            interactions[type][index].destroy();
+        } catch (err) {
+            throw new Error(`Failed to destroy an Interaction Colshape`);
+        }
+
+        interactions[type].splice(index, 1);
+        return true;
     }
 
     /**
-     * Forces any ColShape to push events.
+     * Called when a player enters the InteractionShape
      * @static
-     * @param {string} identifier
-     * @param {string} eventName
-     * @param {boolean} isServer
-     * @param {alt.Colshape} shape
-     * @memberof InteractionController
-     */
-    static sideLoadInteraction(identifier: string, eventName: string, isServer: boolean, shape: alt.Colshape) {
-        if (!InteractionController.Interactions[identifier]) {
-            InteractionController.Interactions[identifier] = [];
-        }
-
-        InteractionController.Interactions[identifier].push(shape);
-        InteractionController.InteractionTypes[identifier] = {
-            eventName: eventName,
-            isServer: isServer
-        };
-    }
-
-    /**
-     * Triggers when a player enters an interaction point.
-     * @static
-     * @param {alt.Colshape} colshape
+     * @param {InteractionShape} colshape
      * @param {alt.Entity} player
      * @return {*}
      * @memberof InteractionController
      */
-    static handleEnterInteraction(colshape: alt.Colshape, player: alt.Entity) {
-        if (!colshape.hasOwnProperty('isInteraction')) {
+    static enter(colshape: InteractionShape, player: alt.Player) {
+        if (!colshape.isInteraction) {
             return;
         }
 
@@ -170,26 +80,19 @@ export class InteractionController {
             return;
         }
 
-        const text = colshape['text'] ? colshape['text'] : LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT);
-
-        alt.emitClient(
-            player,
-            SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
-            colshape['interactionType'],
-            new alt.Vector3(colshape.pos.x, colshape.pos.y, colshape.pos.z),
-            text
-        );
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, colshape.getInteraction());
     }
 
     /**
-     * Triggers when a player leaves an interaction point.
+     * Called when a player leaves an InteractionShape.
      * @static
-     * @param {alt.Colshape} colshape
-     * @param {alt.Entity} player
+     * @param {InteractionShape} colshape
+     * @param {alt.Player} player
+     * @return {*}
      * @memberof InteractionController
      */
-    static handleLeaveInteraction(colshape: alt.Colshape, player: alt.Entity) {
-        if (!colshape.hasOwnProperty('isInteraction')) {
+    static leave(colshape: InteractionShape, player: alt.Player) {
+        if (!colshape.isInteraction) {
             return;
         }
 
@@ -208,53 +111,36 @@ export class InteractionController {
      * @return {*}
      * @memberof InteractionController
      */
-    static handleInteraction(player: alt.Player, type: string) {
-        if (!InteractionController.Interactions[type]) {
+    static trigger(player: alt.Player, type: string) {
+        if (!interactions[type]) {
             return;
         }
 
-        const closestInteraction = InteractionController.Interactions[type].find((interaction) => {
-            if (distance2d(interaction.pos, player.pos) <= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
-                return true;
-            }
-
-            return false;
+        const closestShape = interactions[type].find((interaction) => {
+            return interaction.getDistance(player) <= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE;
         });
 
-        if (!closestInteraction) {
+        if (!closestShape) {
             playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY));
             return;
         }
 
-        const interaction = InteractionController.InteractionTypes[type];
-        if (!interaction) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_INVALID_OBJECT));
+        const interaction = closestShape.getInteraction();
+        if (!interaction || !interaction.event) {
             return;
         }
 
         // Goes Server Side
-        if (interaction.isServer) {
-            alt.emit(interaction.eventName, player, closestInteraction.pos);
+        if (interaction.event.isServer) {
+            alt.emit(interaction.event.eventName, player, closestShape.pos);
             return;
         }
 
         // Goes Client Side
-        alt.emitClient(player, interaction.eventName, closestInteraction.pos);
-    }
-
-    /**
-     * Sends custom interactions to client after connecting.
-     * @static
-     * @param {alt.Player} player
-     * @memberof InteractionController
-     */
-    static populateCustomInteractions(player: alt.Player) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_INTERACTIONS, customInteractions);
+        alt.emitClient(player, interaction.event.eventName, closestShape.pos);
     }
 }
 
-alt.on('entityLeaveColshape', InteractionController.handleLeaveInteraction);
-alt.on('entityEnterColshape', InteractionController.handleEnterInteraction);
-alt.onClient(SYSTEM_EVENTS.INTERACTION, InteractionController.handleInteraction);
-
-InteractionController.generateInteractions();
+alt.on('entityLeaveColshape', InteractionController.leave);
+alt.on('entityEnterColshape', InteractionController.enter);
+alt.onClient(SYSTEM_EVENTS.INTERACTION, InteractionController.trigger);

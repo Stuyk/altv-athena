@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { Interaction } from '../../shared/interfaces/Interaction';
 import { Item } from '../../shared/interfaces/Item';
 import { Meta } from './Meta';
 
@@ -19,7 +20,7 @@ declare module 'alt-client' {
         inVisionTime: number | null;
 
         // Used for ATMs, Vending Machines, etc.
-        closestInteraction: { type: string; position: alt.Vector3; text: string };
+        closestInteraction: Interaction;
         otherInteraction: { position: alt.Vector3; short: string; long: string };
     }
 }
