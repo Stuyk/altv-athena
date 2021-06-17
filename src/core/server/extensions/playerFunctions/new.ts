@@ -1,13 +1,10 @@
 import * as alt from 'alt-server';
 import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
-import { Database, getDatabase } from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
 import select from './select';
-import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { Collections } from '../../interface/DatabaseCollections';
-
-const db: Database = getDatabase();
 
 /**
  * Create a new character with appearance data and info for this player.
@@ -29,7 +26,7 @@ async function character(
     newDocument.account_id = p.accountData._id;
     newDocument.name = name;
 
-    const document = await db.insertData(newDocument, Collections.Characters, true);
+    const document = await Database.insertData(newDocument, Collections.Characters, true);
     document._id = document._id.toString(); // Re-cast id object as string.
     select.character(p, document);
 }

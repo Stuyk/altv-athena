@@ -1,5 +1,9 @@
 import { Poster, PosterFormat } from '../interface/Poster';
-import { encryptData, getPublicKey } from '../utility/encryption';
+import Ares from '../utility/ares';
+import dotenv from 'dotenv';
+import { IConfig } from '../interface/IConfig';
+
+const config: IConfig = dotenv.config().parsed as IConfig;
 
 /**
  * Generates a PosterFormat Type for making a Post Request.
@@ -9,14 +13,14 @@ import { encryptData, getPublicKey } from '../utility/encryption';
  */
 export async function generatePosterFormat(data: any): Promise<PosterFormat> {
     const posterData: Poster = {
-        gumroad_key: process.env.GUMROAD,
-        email: process.env.EMAIL,
+        gumroad_key: config.GUMROAD,
+        email: config.EMAIL,
         data
     };
 
-    const encryption = await encryptData(JSON.stringify(posterData));
+    const encryption = await Ares.encrypt(JSON.stringify(posterData));
     const posterFormat: PosterFormat = {
-        public_key: getPublicKey(),
+        public_key: Ares.getPublicKey(),
         encryption
     };
 

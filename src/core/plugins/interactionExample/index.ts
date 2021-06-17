@@ -9,7 +9,7 @@ function GenerateInteractions() {
         event: { eventName: `interaction:DoSomething`, isServer: true },
         type: 'interaction:DoSomething',
         position: { x: 402.397308, y: -1029.67, z: 29.34688 },
-        shortDesc: 'Browse Heist',
+        description: 'Browse Heist',
         blip: {
             sprite: 112,
             color: 7,

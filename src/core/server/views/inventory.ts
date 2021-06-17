@@ -10,10 +10,10 @@ import { sha256Random } from '../utility/encryption';
 import '../effects/heal';
 import '../effects/vehicleRepair';
 import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
-import { distance2d } from '../utility/vector';
 import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/CategoryData';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { distance2d } from '../../shared/utility/vector';
 
 /**
  * Let's talk about Inventory Logic! Woo!

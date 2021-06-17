@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import axios from 'axios';
-import { decryptData, getAzureEndpoint, getSharedSecret } from '../utility/encryption'; // Should be able to safely import this.
-import { WASM } from '../utility/wasmLoader';
+import Ares from '../utility/ares';
 import { generatePosterFormat } from './shared';
 
 export class PostController {
@@ -10,7 +9,7 @@ export class PostController {
     }
 
     static async getSecret(): Promise<string | boolean> {
-        const sharedSecret = await getSharedSecret();
+        const sharedSecret = await Ares.getSharedSecret();
 
         if (!sharedSecret) {
             throw new Error(`Could not get shared secret from Ares. Try rebooting.`);
@@ -27,8 +26,10 @@ export class PostController {
     }
 
     static async emitPost(route: string, params: URLSearchParams): Promise<any> {
+        const endpoint = await Ares.getAresEndpoint();
+
         return await axios
-            .post(`${getAzureEndpoint()}${route}`, params, {
+            .post(`${endpoint}${route}`, params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 responseType: 'arraybuffer'
             })
@@ -57,10 +58,6 @@ export class PostController {
     }
 
     static async postAsync<T>(route: string, data: any = {}): Promise<T> {
-        if (typeof route === 'number') {
-            route = WASM.getHelpers().__getString(route);
-        }
-
         await PostController.getSecret();
 
         const params = await PostController.getPostFormat(data);
@@ -70,7 +67,7 @@ export class PostController {
             return null;
         }
 
-        const decrypted = await decryptData(response.data);
+        const decrypted = await Ares.decrypt(response.data);
 
         if (!decrypted) {
             return response.data;

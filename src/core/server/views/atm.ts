@@ -126,14 +126,15 @@ function init() {
     for (let i = 0; i < atms.length; i++) {
         const position = atms[i];
 
-        InteractionController.add({
-            shortDesc: LocaleController.get(LOCALE_KEYS.USE_ATM),
-            event: {
-                eventName: 'atm:Open',
-                isServer: false
-            },
-            position,
-            type: 'atm'
-        });
+        // FIXME
+        // InteractionController.add({
+        //     shortDesc: LocaleController.get(LOCALE_KEYS.USE_ATM),
+        //     event: {
+        //         eventName: 'atm:Open',
+        //         isServer: false
+        //     },
+        //     position,
+        //     type: 'atm'
+        // });
     }
 }

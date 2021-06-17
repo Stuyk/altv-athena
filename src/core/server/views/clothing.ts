@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { View_Events_Clothing } from '../../shared/enums/views';
-import * as sm from 'simplymongo';
 import { playerFuncs } from '../extensions/Player';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
 import { Item } from '../../shared/interfaces/Item';
@@ -8,8 +7,6 @@ import { ItemType } from '../../shared/enums/itemType';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-
-const db: sm.Database = sm.getDatabase();
 
 alt.onClient(View_Events_Clothing.Exit, handleExit);
 alt.onClient(View_Events_Clothing.Purchase, handlePurchase);

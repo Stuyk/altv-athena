@@ -1,22 +1,20 @@
 import * as alt from 'alt-server';
-import { Account } from '../../interface/Account';
-import { Permissions } from '../../../shared/flags/permissions';
-import { getUniquePlayerHash } from '../../utility/encryption';
-import { Database, getDatabase } from 'simplymongo';
-import { DEFAULT_CONFIG } from '../../athena/main';
-import { distance2d } from '../../../shared/utility/vector';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import emit from './emit';
-import save from './save';
-import dataUpdater from './dataUpdater';
-import safe from './safe';
-import sync from './sync';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { Permissions } from '../../../shared/flags/permissions';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
-import { playerFuncs } from '../Player';
+import { distance2d } from '../../../shared/utility/vector';
+import { DEFAULT_CONFIG } from '../../athena/main';
+import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
-
-const db: Database = getDatabase();
+import Ares from '../../utility/ares';
+import { playerFuncs } from '../Player';
+import dataUpdater from './dataUpdater';
+import emit from './emit';
+import safe from './safe';
+import save from './save';
+import sync from './sync';
+import Database from '@stuyk/ezmongodb';
 
 /**
  * Set the current account data for this player.
@@ -27,13 +25,13 @@ const db: Database = getDatabase();
 async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
-        db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
+        Database.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
     }
 
     if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
-        const qt: string = getUniquePlayerHash(p, p.discord.id);
+        const qt: string = Ares.getUniquePlayerHash(p, p.discord.id);
 
-        db.updatePartialData(
+        Database.updatePartialData(
             accountData._id,
             {
                 quickToken: qt,

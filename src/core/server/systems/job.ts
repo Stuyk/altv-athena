@@ -2,8 +2,8 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
-import { distance } from '../utility/vector';
 
 const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);

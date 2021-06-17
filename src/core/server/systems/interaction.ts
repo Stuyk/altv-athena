@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/Interaction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -7,6 +8,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionShape } from '../extensions/Colshape';
 import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
+
 import '../views/atm';
 
 const interactions: { [key: string]: Array<InteractionShape> } = {};

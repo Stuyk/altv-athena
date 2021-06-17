@@ -3,12 +3,10 @@ import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { goToCharacterSelect, handleNewCharacter } from './characters';
-import * as sm from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import { Character } from '../../shared/interfaces/Character';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
-
-const db: sm.Database = sm.getDatabase();
 
 alt.onClient(View_Events_Creator.Done, handleCreatorDone);
 alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);
@@ -70,7 +68,7 @@ function handleAwaitModel(player: alt.Player, characterSex: number, shouldTPose:
 }
 
 async function handleAwaitNameValid(player: alt.Player, name: string): Promise<void> {
-    const result = await db.fetchData<Character>('name', name, Collections.Characters);
+    const result = await Database.fetchData<Character>('name', name, Collections.Characters);
 
     if (!result) {
         alt.emitClient(player, View_Events_Creator.AwaitName, true); // Yes the name is available.

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Database, getDatabase } from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import ChatController from '../systems/chat';
 import Logger from './athenaLogger';
 import fs from 'fs';
@@ -7,8 +7,6 @@ import { AdminController } from '../systems/admin';
 import { Account } from '../interface/Account';
 import { OptionsController } from '../systems/options';
 import { Collections } from '../interface/DatabaseCollections';
-
-const db: Database = getDatabase();
 
 alt.onClient('/screenshot', handleSaveScreenshot);
 alt.on('consoleCommand', handleConsoleMessage);
@@ -66,13 +64,13 @@ async function handleBan(cmdName: string, discord_or_id: string, ...args: any[])
         return false;
     });
 
-    const account = await db.fetchData<Account>('discord', discord_or_id, Collections.Accounts);
+    const account = await Database.fetchData<Account>('discord', discord_or_id, Collections.Accounts);
     if (!account) {
         Logger.error(`Could not find that id or discord id.`);
         return;
     }
 
-    await db.updatePartialData(account._id.toString(), { banned: true, reason }, Collections.Accounts);
+    await Database.updatePartialData(account._id.toString(), { banned: true, reason }, Collections.Accounts);
     Logger.info(`Successfully banned ${discord_or_id}`);
     player.kick(reason);
 }
@@ -226,5 +224,5 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
         return;
     }
 
-    await db.updatePartialData(p.accountData._id, { [fieldName]: fieldValue }, Collections.Accounts);
+    await Database.updatePartialData(p.accountData._id, { [fieldName]: fieldValue }, Collections.Accounts);
 }

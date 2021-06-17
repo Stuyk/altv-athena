@@ -1030,11 +1030,3 @@ export default {
 import('../../views/inventory').catch((err) => {
     throw err;
 });
-
-if (process.env.TEST) {
-    import('../../zTests/inventory')
-        .catch((err) => {
-            throw err;
-        })
-        .then((res) => res.default());
-}
