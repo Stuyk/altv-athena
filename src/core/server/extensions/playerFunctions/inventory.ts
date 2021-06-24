@@ -1026,7 +1026,3 @@ export default {
     toolbarAdd,
     toolbarRemove
 };
-
-import('../../views/inventory').catch((err) => {
-    throw err;
-});

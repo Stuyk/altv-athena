@@ -4,6 +4,8 @@ export enum SYSTEM_EVENTS {
     APPEND_TEXTLABELS = 'append:TextLabel',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
+    // Commands
+    COMMANDS_LOADED = 'commands:Loaded',
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
     //

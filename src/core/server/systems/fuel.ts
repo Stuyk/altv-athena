@@ -7,9 +7,9 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
-import { distance2d } from '../utility/vector';
 
 alt.on(SYSTEM_EVENTS.INTERACTION_FUEL, handleFuel);
 

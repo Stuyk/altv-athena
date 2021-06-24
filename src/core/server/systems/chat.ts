@@ -180,12 +180,6 @@ export default class ChatController {
     }
 }
 
-// Has to be loaded last.
-import('../commands/commands')
-    .catch((err) => {
-        console.error(err);
-        console.error(
-            `[Athena] Failed to load a command file. Please fix the error and commands will work normally again.`
-        );
-    })
-    .then(() => alt.onClient(View_Events_Chat.Send, ChatController.handleMessage));
+alt.on(SYSTEM_EVENTS.COMMANDS_LOADED, () => {
+    alt.onClient(View_Events_Chat.Send, ChatController.handleMessage);
+});

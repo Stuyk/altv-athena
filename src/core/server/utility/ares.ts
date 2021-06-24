@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
-import sjcl from 'sjcl';
 import axios from 'axios';
 import ecc from 'elliptic';
+import sjcl from 'sjcl';
+
 import { sha256 } from './encryption';
 
 const elliptic = new ecc.ec('curve25519');
@@ -94,13 +95,12 @@ export default class Ares {
             return sharedSecret;
         }
 
-        if (!aresPublicKey) {
-            await Ares.getAresPublicKey();
-        }
+        const privateKey = await Ares.getPrivateKey();
+        const publicKey = await Ares.getAresPublicKey();
 
         try {
-            const ecPrivateKey: ecc.KeyPair = elliptic.keyFromPrivate(Ares.getPrivateKey(), 'hex');
-            const ecPublicKey: ecc.KeyPair = elliptic.keyFromPublic(Ares.getAresPublicKey(), 'hex');
+            const ecPrivateKey: ecc.KeyPair = elliptic.keyFromPrivate(privateKey, 'hex');
+            const ecPublicKey: ecc.KeyPair = elliptic.keyFromPublic(publicKey, 'hex');
             const sharedKey = ecPrivateKey.derive(ecPublicKey.getPublic()).toString(16);
             sharedSecret = sharedKey;
             return sharedSecret;
@@ -153,9 +153,8 @@ export default class Ares {
             return await Ares.getAresPublicKey();
         }
 
-        aresEndpoint = result.data.key;
-
-        return result.data.key;
+        aresPublicKey = result.data.key;
+        return aresPublicKey;
     }
 
     /**

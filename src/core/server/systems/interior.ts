@@ -1,14 +1,14 @@
+import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { Database, getDatabase } from 'simplymongo';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interior } from '../../shared/interfaces/Interior';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { getClosestVectorByPos } from '../../shared/utility/vector';
+import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
-import { distance2d } from '../utility/vector';
 import { InteractionController } from './interaction';
 
 interface InteriorInfo {
@@ -45,7 +45,6 @@ class ColshapeInterior extends alt.ColshapeSphere {
 
 const MAXIMUM_EXTERIOR_DISTANCE = 5;
 const MAXIMUM_INTERIOR_DISTANCE = 10;
-const db: Database = getDatabase();
 const interiors: Array<Interior> = [];
 const colshapes: Array<ColshapeInterior> = [];
 let dimension = 0;
@@ -57,7 +56,7 @@ export class InteriorController {
      * @memberof InteriorController
      */
     static async load() {
-        const savedInteriors = await db.fetchAllData<Interior>(Collections.Interiors);
+        const savedInteriors = await Database.fetchAllData<Interior>(Collections.Interiors);
         let count = 0;
 
         for (let i = 0; i < savedInteriors.length; i++) {
@@ -142,7 +141,7 @@ export class InteriorController {
             interior.storage = [];
         }
 
-        return await db.insertData<Interior>(interior, Collections.Interiors, true);
+        return await Database.insertData<Interior>(interior, Collections.Interiors, true);
     }
 
     /**
@@ -175,7 +174,7 @@ export class InteriorController {
             }
         }
 
-        return await db.deleteById(interiorID, Collections.Interiors);
+        return await Database.deleteById(interiorID, Collections.Interiors);
     }
 
     /**

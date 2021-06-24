@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+
 import { DEFAULT_CONFIG } from '../athena/main';
 import Logger from '../utility/athenaLogger';
 import { OptionsController } from './options';
@@ -82,15 +83,10 @@ export class DiscordController {
     }
 }
 
-export default function loader() {
-    if (DEFAULT_CONFIG.USE_DISCORD_BOT) {
-        if (!process.env.DISCORD_BOT) {
-            Logger.error(
-                `.env is missing DISCORD_BOT secret for logging in. Don't forget to add WHITELIST_ROLE as well.`
-            );
-            return;
-        }
-
+if (DEFAULT_CONFIG.USE_DISCORD_BOT) {
+    if (!process.env.DISCORD_BOT) {
+        Logger.error(`.env is missing DISCORD_BOT secret for logging in. Don't forget to add WHITELIST_ROLE as well.`);
+    } else {
         DiscordController.populateEndpoints();
     }
 }

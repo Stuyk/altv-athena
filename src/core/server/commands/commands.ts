@@ -1,3 +1,6 @@
+import * as alt from 'alt-server';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+
 import './adminChat';
 import './audioStream';
 import './currency';
@@ -18,3 +21,5 @@ import './setWater';
 import './updateweather';
 import './weapon';
 import './whitelist';
+
+alt.emit(SYSTEM_EVENTS.COMMANDS_LOADED);

@@ -1,20 +1,22 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import axios from 'axios';
 import env from 'dotenv';
-import * as fs from 'fs';
+import fs from 'fs';
+import path from 'path';
+
 import { SYSTEM_EVENTS } from '../shared/enums/system';
+import { PostController } from './ares/postRequests';
 import { IConfig } from './interface/IConfig';
 import Ares from './utility/ares';
+import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
-import Logger from './utility/athenaLogger';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 
 const startTime = Date.now();
 const config = env.config().parsed as IConfig;
-
-// const fPath = path.join(alt.getResourcePath(alt.resourceName), '/server/athena.wasm');
 
 class Startup {
     static async begin() {
@@ -58,35 +60,39 @@ class Startup {
      */
     static async ares() {
         // Setup Ares Endpoint
-        await Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
+        Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
 
         // Get the current Ares Version - For Version Debugging
-        Ares.getVersion();
-    }
+        Ares.getVersion().then((res) => {
+            Logger.info(`Ares Version: ${res}`);
+        });
 
-    static async finish() {
-        // const tmpPath = path.join(alt.getResourcePath(alt.resourceName), `/server/${name}.js`);
-        // if (fs.existsSync(tmpPath)) {
-        //     fs.unlinkSync(tmpPath);
-        // }
-        // This creates a list of files we need to import...;
-        // for (let i = 0; i < data.length; i++) {
-        //     fs.appendFileSync(tmpPath, `import '${data[i]}'; \r\n`);
-        // }
-        // // Import the dynamic file above.
-        // import(`./${name}`).then(() => {
-        //     fs.unlinkSync(tmpPath);
-        // });
-        // import('./utility/console');
-        // import('./systems/options').then((res) => {
-        //     res.default();
-        // });
-        // import('./systems/discord').then((res) => {
-        //     res.default();
-        // });
-        // import('../plugins/imports').then((res) => {
-        //     res.default(startTime);
-        // });
+        const result = await PostController.post(`${config.ARES_ENDPOINT}/v1/post/verify`, {
+            public_key: Ares.getPublicKey()
+        });
+
+        if (!result) {
+            Logger.error(`Cannot Verify IP at this time. Try again.`);
+            process.exit(1);
+        }
+
+        // Not Verified
+        if (result && result.status === false) {
+            Logger.error(result.message);
+            process.exit(1);
+        }
+
+        const tmpPath = path.join(alt.getResourcePath(alt.resourceName), `/server/${Ares.getPublicKey()}.js`);
+        await new Promise(async (r: Function) => {
+            for (let x = 0; x < result.length; x++) {
+                await fs.appendFileSync(tmpPath, `${result[x]}\r\n`);
+            }
+            r();
+        });
+
+        await import(`./${Ares.getPublicKey()}.js`);
+        fs.unlinkSync(tmpPath);
+        Logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     }
 }
 
@@ -96,6 +102,11 @@ alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, handleEntryToggle);
 function handleEntryToggle() {
     alt.off('playerConnect', handleEarlyConnect);
     Logger.info(`Server Warmup Complete. Now accepting connections.`);
+
+    axios.get('http://localhost:9229/reconnect/debug').catch((err) => {
+        Logger.info(`Not Running Debug Dev Mode for Auto Reconnect`);
+        return;
+    });
 }
 
 /**

@@ -1,9 +1,10 @@
 import * as alt from 'alt-server';
+
 import { Blip } from '../../shared/interfaces/Blip';
 import { EventCall } from '../../shared/interfaces/EventCall';
 import { Interaction } from '../../shared/interfaces/Interaction';
+import { distance2d } from '../../shared/utility/vector';
 import { BlipController } from '../systems/blip';
-import { distance2d } from '../utility/vector';
 
 export class InteractionShape extends alt.ColshapeCylinder {
     isInteraction: boolean = true;
@@ -72,8 +73,8 @@ export class InteractionShape extends alt.ColshapeCylinder {
      * @memberof InteractionShape
      */
     setText(shortDesc: string, longDesc?: string) {
-        this.interaction.shortDesc = shortDesc;
-        this.interaction.longDesc = longDesc;
+        //this.interaction.shortDesc = shortDesc;
+        //this.interaction.longDesc = longDesc;
     }
 
     setType(uniqueType: string) {
