@@ -14,6 +14,7 @@ import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
+const DEFAULT_SERVER_CFG = fs.readFileSync('server.cfg').toString();
 
 const startTime = Date.now();
 const config = env.config().parsed as IConfig;
@@ -94,36 +95,34 @@ class Startup {
         fs.unlinkSync(tmpPath);
         Logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     }
-}
 
-alt.on('playerConnect', handleEarlyConnect);
-alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, handleEntryToggle);
+    static async toggleEntry() {
+        alt.off('playerConnect', Startup.handleEarlyConnect);
+        Logger.info(`Server Warmup Complete. Now accepting connections.`);
 
-function handleEntryToggle() {
-    alt.off('playerConnect', handleEarlyConnect);
-    Logger.info(`Server Warmup Complete. Now accepting connections.`);
-
-    axios.get('http://localhost:9229/reconnect/debug').catch((err) => {
-        Logger.info(`Not Running Debug Dev Mode for Auto Reconnect`);
-        return;
-    });
-}
-
-/**
- * Prevent early connections until server is warmed up.
- * @param {alt.Player} player
- * @return {*}  {void}
- */
-function handleEarlyConnect(player: alt.Player): void {
-    if (!(player instanceof alt.Player) || !player || !player.valid) {
-        return;
+        if (DEFAULT_SERVER_CFG.includes('debug: true') && PostController.isWindows()) {
+            Logger.info('Triggering Reconnection');
+            await axios.get('http://localhost:9229/reconnect/debug').catch(() => {
+                Logger.warning(`Not Running Debug Dev Mode for Auto Reconnect`);
+                return false;
+            });
+        }
     }
 
-    try {
-        player.kick('[Athena] Connected too early. Server still warming up.');
-    } catch (err) {
-        alt.log(`[Athena] A reconnection event happened too early. Try again.`);
+    static handleEarlyConnect(player: alt.Player) {
+        if (!(player instanceof alt.Player) || !player || !player.valid) {
+            return;
+        }
+
+        try {
+            player.kick('[Athena] Connected too early. Server still warming up.');
+        } catch (err) {
+            alt.log(`[Athena] A reconnection event happened too early. Try again.`);
+        }
     }
 }
+
+alt.on('playerConnect', Startup.handleEarlyConnect);
+alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, Startup.toggleEntry);
 
 Startup.begin();

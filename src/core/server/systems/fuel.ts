@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';

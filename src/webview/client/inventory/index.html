@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+    <head>
+        <title>Inventory by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/vuetify.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="../icomoon/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body oncontextmenu="return false;">
+        <div id="app">
+            <v-app v-cloak>
+                <div class="panel transparent">
+                    <div class="split">
+                        <div class="equipmentWrapper">
+                            <div class="equipment fill-height">
+                                <div
+                                    v-for="(item, index) in equipment"
+                                    :id="`e-${index}`" 
+                                    :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                    :key="index"
+                                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }">
+                                    <template v-if="item">
+                                        <div class="icon no-pointer">
+                                            <img :src="`${url}/icons/${item.icon}.png`"></img>
+                                        </div>
+                                        <div class="stats no-pointer">
+                                            <div class="quantity">
+                                                {{ item.quantity }}x
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="grey--text text-caption no-pointer descriptor">
+                                            {{ locales.ITEM_SLOTS[index] }}
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                            <template v-if="itemInfo && getItemInfo">
+                                <div class="item-info">
+                                    <div class="name light-blue--text text--lighten-3">
+                                        {{ getItemInfo.name }}
+                                    </div>
+                                    <div class="quantity text-caption">
+                                        <v-chip label color="grey darken-3" small>Quantity: {{ getItemInfo.quantity }}x</v-chip>
+                                    </div>
+                                    <div class="description text-subtitle-2 grey--text text--lighten-2">
+                                        {{ getItemInfo.description }}
+                                    </div>
+                                    <template v-if="getItemInfo.data">
+                                        <div class="name text-sm font-weight-bold light-blue--text text--lighten-4">
+                                            Data
+                                        </div>
+                                        <div class="key-group" v-for="(prop, index) in getItemProperties" :key="index" color="blue-grey darken-3" small dense>
+                                            <div class="split">
+                                                <span class="overline">{{ prop.key }}</span>
+                                                <span class="overline">{{ prop.value }}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                            <div class="ground mt-2" v-if="!disablePreview">
+                                <div 
+                                class="rounded rounded"
+                                v-for="(item, index) in ground" 
+                                :class="!item ? { 'is-null-item': true } : { 'item': true }" 
+                                :id="`g-${index}`"
+                                :data-hash="item ? `${item.hash}` : ''"
+                                v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }" 
+                                >
+                                    <template v-if="item">
+                                        <div class="icon no-pointer">
+                                            <img :src="`${url}/icons/${item.icon}.png`"></img>
+                                        </div>
+                                        <div class="stats no-pointer">
+                                            <div class="quantity">
+                                                {{ item.quantity }}x
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="text--darken-2 no-pointer descriptor">
+                                            <v-icon class="grey--text text--darken-2" small>icon-arrow-down</v-icon>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview">
+                            <!-- Purposely Left Empty -->
+                        </div>
+                        <div class="inventoryWrapper">
+                            <div class="toolbar">
+                                <div 
+                                    v-for="(item, index) in toolbar"
+                                    :id="`t-${index}`" 
+                                    :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                                    >
+                                    <template v-if="item">
+                                        <div class="icon no-pointer">
+                                            <img :src="`${url}/icons/${item.icon}.png`"></img>
+                                        </div>
+                                        <div class="stats no-pointer">
+                                            <div class="quantity">
+                                                {{ item.quantity }}x
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="grey--text text--darken-2 no-pointer descriptor">
+                                            {{ index + 1 }}
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="navigation">
+                                <div class="tab" v-for="index in 5" :key="index - 1" :id="`tab-${index - 1}`" @click="setIndex(index - 1)">
+                                    <template v-if="isActiveTab(index -1)">
+                                        <v-icon x-small>icon-circle1</v-icon>
+                                    </template>
+                                    <template v-else>
+                                        <v-icon small>icon-circle</v-icon>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="inventory fill-height">
+                                <div 
+                                    v-for="(item, index) in getInventory"
+                                    :id="`i-${index}`"
+                                    :key="index" 
+                                    :class="!item ? { 'is-null-item': true } : { 'item': true }"
+                                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                                >
+                                    <template v-if="item">
+                                        <div class="icon">
+                                            <img :src="`${url}/icons/${item.icon}.png`"></img>
+                                        </div>
+                                        <div class="consume" v-if="item && item.data && item.data.event">
+                                            <v-icon color="light-blue accent-3" small>icon-arrow-down</v-icon>
+                                        </div>
+                                        <div class="quantity">
+                                            {{ item.quantity }}x
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="splitter" v-if="split">
+                        <div class="stack">
+                            <div class="split">
+                                <h3>Splitting - {{ split.item.name }}</h3>
+                            </div>
+                            <div class="split mt-2">
+                                <div class="mr-5 overline">{{ splitAmount }}</div>
+                                <v-slider
+                                    thumb-label
+                                    dense
+                                    hide-details
+                                    ticks="always"
+                                    tick-size="4"
+                                    name="splitter"
+                                    class="flex-grow-1"
+                                    type="range"
+                                    min="1"
+                                    :max="split.item.quantity - 1"
+                                    step="1"
+                                    v-model.number="splitAmount"
+                                    @input="this.update += 1"
+                                ></v-slider>
+                                <div class="ml-5 overline">x{{ split.item.quantity - 1 }}</div>
+                            </div>
+                            <div class="split mt-2">
+                                <span class="text-subtitle-2">Drag to split into another stack.</span>
+                            </div>
+                            <div class="split mt-2">
+                                <button class="button outline-round" @click="cancelSplitStack">
+                                    <span class="overline red--text pl-4 pr-4">{{ locales.LABEL_CANCEL }}</span>
+                                </button>
+                                <button class="button outline-round ml-2" @click="splitStack(splitAmount)">
+                                    <span class="overline green--text pl-4 pr-4">{{ locales.LABEL_SPLIT }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </v-app>
+        </div>
+        <script src="defaultLocales.js"></script>
+        <script src="../js/vue.min.js"></script>
+        <script src="../js/vuetify.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

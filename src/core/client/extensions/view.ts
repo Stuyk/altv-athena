@@ -1,5 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { handleFrontendSound } from '../systems/sound';
 
 // Must be a blank index page.
@@ -8,6 +10,7 @@ let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
 let _isClosing: boolean = false;
 let _instance: View;
+let _serverURL: string;
 
 alt.on('disconnect', async () => {
     (await View.getInstance('', false)).destroy();
@@ -15,6 +18,10 @@ alt.on('disconnect', async () => {
 
 alt.on('connectionComplete', async () => {
     const view = await View.getInstance(blankURL, false, true);
+});
+
+alt.onServer(SYSTEM_EVENTS.SET_VIEW_URL, (url: string) => {
+    _serverURL = url;
 });
 
 export class View extends alt.WebView {
@@ -70,8 +77,15 @@ export class View extends alt.WebView {
 
         // Used to hide the view until it's ready.
         _instance.on('play:Sound', handleFrontendSound);
+
+        // Custom Event for WebView Visibility
         _instance.on('ready', () => {
             _instance.isVisible = true;
+        });
+
+        // Custom WebView URL for data feeds.
+        _instance.on('url', () => {
+            _instance.emit('url', _serverURL);
         });
 
         return _instance;

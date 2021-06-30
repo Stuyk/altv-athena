@@ -8,9 +8,11 @@
         "clean": "rimraf ./resources",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
         "update": "altv-pkg d release",
-        "windows": "npm run build && altv-server.exe",
-        "linux": "npm run build && ./start.sh",
-        "dev": "altv-reconnect --debug | nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe - --debug\""
+        "windows": "npm run build && npm run webserver && altv-server.exe",
+        "linux": "npm run build && npm run webserver && ./start.sh",
+        "webserver": "node ./utility/webserver/index.mjs",
+        "reconnect-server": "altv-reconnect",
+        "dev": "npm run reconnect-server | npm run webserver | nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\""
     },
     "devDependencies": {
         "@altv/types-client": "^1.6.1",
@@ -25,6 +27,7 @@
         "@types/glob": "^7.1.3",
         "@types/mongodb": "^3.6.8",
         "@types/node": "^14.6.1",
+        "@types/ps-node": "^0.1.0",
         "altv-pkg": "^1.1.0",
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
@@ -46,6 +49,7 @@
         "elliptic": "^6.5.4",
         "express": "^4.17.1",
         "node-fetch": "^2.6.1",
+        "ps-node": "^0.1.6",
         "sjcl": "^1.0.8"
     },
     "prettier": {

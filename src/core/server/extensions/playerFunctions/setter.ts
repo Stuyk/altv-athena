@@ -15,6 +15,10 @@ import safe from './safe';
 import save from './save';
 import sync from './sync';
 import Database from '@stuyk/ezmongodb';
+import dotenv from 'dotenv';
+import { IConfig } from '../../interface/IConfig';
+
+const config: IConfig = dotenv.config().parsed as IConfig;
 
 /**
  * Set the current account data for this player.
@@ -87,6 +91,9 @@ async function firstConnect(p: alt.Player): Promise<void> {
         p.kick('Still warming up...');
         return;
     }
+
+    // Used to set the custom View instance with a Web Server URL.
+    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, config.WEBSERVER_IP)
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 

@@ -1,12 +1,13 @@
-import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import ChatController from '../systems/chat';
-import Logger from './athenaLogger';
+import * as alt from 'alt-server';
 import fs from 'fs';
-import { AdminController } from '../systems/admin';
+
 import { Account } from '../interface/Account';
-import { OptionsController } from '../systems/options';
 import { Collections } from '../interface/DatabaseCollections';
+import { AdminController } from '../systems/admin';
+import ChatController from '../systems/chat';
+import { OptionsController } from '../systems/options';
+import Logger from './athenaLogger';
 
 alt.onClient('/screenshot', handleSaveScreenshot);
 alt.on('consoleCommand', handleConsoleMessage);

@@ -1,15 +1,17 @@
 import * as alt from 'alt-server';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vehicle_Door_List, Vehicle_Events, Vehicle_Lock_State, Vehicle_State } from '../../shared/enums/vehicle';
 import { AnimationFlags } from '../../shared/flags/animation';
 import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
-import './fuel';
+
 import '../views/dealership';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import './fuel';
 
 alt.on('playerEnteredVehicle', handleEnterVehicle);
 alt.onClient(Vehicle_Events.SET_LOCK, handleCycleLock);

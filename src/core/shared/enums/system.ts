@@ -64,6 +64,7 @@ export enum SYSTEM_EVENTS {
     REMOVE_TEXTLABEL = 'remove:Textlabel',
     //
     SET_ACTION_MENU = 'actions:Set',
+    SET_VIEW_URL = 'actions:SetViewURL',
     //
     TICKS_START = 'ticks:Start',
     //

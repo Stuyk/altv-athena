@@ -15,11 +15,15 @@ import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/leaderBoardController';
 
-// const url = `http://127.0.0.1:5500/src/core/client/views/hud/html/index.html`;
-const url = `http://resource/client/views/hud/html/index.html`;
+const url = `http://assets/webview/client/hud/index.html`;
 
 let commandList: Array<any> = [];
 let interval: number;
+let _serverURL;
+
+alt.onServer(SYSTEM_EVENTS.SET_VIEW_URL, (ip: string) => {
+    _serverURL = ip;
+});
 
 export enum HudEventNames {
     SetVehicle = 'hud:SetVehicle',
@@ -43,6 +47,7 @@ export class BaseHUD {
         if (!BaseHUD.view) {
             BaseHUD.view = new alt.WebView(url, false);
             BaseHUD.view.isVisible = false;
+            BaseHUD.view.on('url', BaseHUD.handleURL);
             BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
             BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
@@ -52,7 +57,6 @@ export class BaseHUD {
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
             BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
             BaseHUD.view.on('play:Sound', handleFrontendSound);
-
             PhoneController.initializeApps();
 
             alt.setTimeout(() => {
@@ -63,6 +67,10 @@ export class BaseHUD {
         }
 
         BaseHUD.view.unfocus();
+    }
+
+    static handleURL() {
+        BaseHUD.view.emit('url', _serverURL);
     }
 
     static setHudStatus(name: HudEventNames, value: any) {

@@ -3,15 +3,9 @@ import logger from './athenaLogger';
 
 export default {
     validate: (config: IConfig): boolean => {
-        if (!config.GUMROAD) {
-            logger.error('Failed to retrieve GUMROAD from your .env file.');
-            logger.log(`Visit: https://athena.stuyk.com/documentation/installing-athena`);
-            process.exit(0);
-        }
-
-        if (!config.EMAIL) {
-            logger.error('Failed to retrieve EMAIL from your .env file.');
-            logger.log(`Visit: https://athena.stuyk.com/documentation/installing-athena`);
+        if (!config.WEBSERVER_IP) {
+            logger.warning(`Please add the field 'IP' to your .env file.`);
+            logger.warning(`===> Your IP is your actual server IP. This is used for routing traffic.`);
             process.exit(0);
         }
 

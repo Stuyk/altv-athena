@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <head>
+        <title>Login by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/particles.css" />
+        <link rel="stylesheet" type="text/css" href="../icomoon/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app" >
+            <v-app v-cloak>
+                <div v-for="i in 100" class="circle-container">
+                    <div class="circle"></div>
+                </div>
+                <div class="container">
+                    <template v-if="!waitingForAuth">
+                        <div class="placeholder">
+                            <div class="center">
+                                <img class="discord mb-2 slideindown" src="./assets/discord.svg" />
+                            </div>
+                            <button @mouseover="hover" class="overline blue mb-4 slideinright" @mouseup="beginAuth">{{ locales.LABEL_LOGIN_WITH_DISCORD }}</button>
+                            <p class="mt-6 slideinup" v-if="!errorMessage">
+                            {{ locales.LABEL_OPEN_PAGE }}
+                            </p>
+                            <p class="mt-6 light-blue--text text-h6 font-weight-black text-center" v-else>
+                                {{ errorMessage }} <br />
+                                {{ locales.LABEL_TRY_AGAIN }}
+                            </p>
+                        </div>
+                    </template>
+                    <template v-if="waitingForAuth">
+                        <div class="placeholder">
+                            <p class="mb-4 slideindown">
+                                {{ locales.LABEL_TAB_OUT }}
+                            </p>
+                            <template v-if="readyToFinish">
+                                <button @mouseover="hover" class="overline blue mb-4 slideinright" @click="finishAuth">{{ locales.LABEL_FINISH_LOGIN }}</button>
+                                <button @mouseover="hover" class="overline orange mb-4 slideinleft" @click="authAgain">{{ locales.LABEL_OPEN_WINDOW }}</button>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                
+            </v-app>
+        </div>
+        <script src="../js/vue.min.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

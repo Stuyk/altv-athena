@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { EquipmentType } from '../../../shared/enums/equipment';
 import { InventoryType } from '../../../shared/enums/inventoryTypes';
 import { ItemType } from '../../../shared/enums/itemType';
