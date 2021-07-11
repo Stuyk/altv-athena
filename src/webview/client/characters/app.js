@@ -38,6 +38,7 @@ const exampleCharacter = {
     account_id: '5f70bb5e829f5c3e80aa4192',
     position: { x: -740.6505737304688, y: -254.8219757080078, z: 37.03076171875 },
     characterIndex: 0,
+    hours: 40.55555555
 };
 
 const app = new Vue({
@@ -195,7 +196,7 @@ const app = new Vue({
             alt.on('url', this.setURL);
             alt.emit('characters:Ready');
             alt.emit('ready');
-            alt.emit('url')
+            alt.emit('url');
         } else {
             this.characters = [
                 exampleCharacter,

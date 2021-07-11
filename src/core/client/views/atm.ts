@@ -16,10 +16,6 @@ alt.onServer(SYSTEM_EVENTS.INTERACTION_ATM, handleView);
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleChange);
 
 async function handleView(_characters: Partial<Character>[]) {
-    if (alt.Player.local.isPhoneOpen) {
-        return;
-    }
-
     if (isAnyMenuOpen()) {
         return;
     }

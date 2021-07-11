@@ -76,6 +76,9 @@ description: List of all the changes and current versions.
 + Moved Help Text to be Object Orientated
 + Added other help text options.
 + Added Locales for Interactions.
++ Removed Broken YouTube Audio Stream(s)
++ Prune Decimals for Character Selection
++ Added Server Time for World Time
 ```
 
 ## 1.8.1 - April 8-18, 2021

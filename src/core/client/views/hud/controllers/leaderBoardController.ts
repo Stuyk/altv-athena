@@ -33,10 +33,6 @@ export class LeaderboardController {
             return;
         }
 
-        if (alt.Player.local.isPhoneOpen) {
-            return;
-        }
-
         if (alt.Player.local.isMenuOpen) {
             return;
         }

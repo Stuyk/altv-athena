@@ -46,10 +46,6 @@ export class InventoryController {
             return;
         }
 
-        if (alt.Player.local.isPhoneOpen) {
-            return;
-        }
-
         view = await View.getInstance(url, true, false, false);
         view.on('inventory:Update', InventoryController.updateEverything);
         view.on('inventory:Use', InventoryController.handleUse);

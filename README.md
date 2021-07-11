@@ -159,7 +159,7 @@ We have a small demo server available for you to test the framework with Adminis
     -   Call Events on Objective Completions
     -   Job Menu
 -   Action Menus
-    -   Ifinitely scaling menus.
+    -   Infinitely scaling menus
     -   A menu system that calls other events easily.
     -   Easily construct custom menus in minutes to define functionality.
 -   Extendable Core Resource

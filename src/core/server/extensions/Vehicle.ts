@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import * as IVeh from '../../shared/interfaces/Vehicle';
 import getter from './vehicleFunctions/getter';
 import keys from './vehicleFunctions/keys';
 import newRef from './vehicleFunctions/new';
 import save from './vehicleFunctions/save';
 import setter from './vehicleFunctions/setter';
 import utility from './vehicleFunctions/utility';
-import * as IVeh from '../../shared/interfaces/Vehicle';
 
 /**
  * Overwrites the default functionality of vehicles.

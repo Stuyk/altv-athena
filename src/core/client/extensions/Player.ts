@@ -1,7 +1,4 @@
 import * as alt from 'alt-client';
-
-import { Interaction } from '../../server/interface/Interaction';
-import { Item } from '../../shared/interfaces/Item';
 import { Meta } from './Meta';
 
 declare module 'alt-client' {
@@ -13,7 +10,6 @@ declare module 'alt-client' {
         isMenuOpen: boolean;
         isChatOpen: boolean;
         isActionMenuOpen: boolean;
-        isPhoneOpen: boolean;
         isLeaderboardOpen: boolean;
 
         // The time that a player is seen by our local player.

@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-
 import { distance2d } from '../../shared/utility/vector';
 import { Interaction } from '../interface/Interaction';
 

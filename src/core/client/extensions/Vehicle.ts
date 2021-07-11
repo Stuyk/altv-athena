@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import { Vector3 } from 'alt-client';
 
-import getter from './vehicleFuncs/getter';
 import setter from './vehicleFuncs/setter';
 import play from './vehicleFuncs/play';
 import sync from './vehicleFuncs/sync';
@@ -46,7 +45,6 @@ function handleEntityCreation(entity: alt.Entity): void {
 }
 
 export default {
-    get: getter,
     set: setter,
     play,
     sync,

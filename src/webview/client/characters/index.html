@@ -49,13 +49,13 @@
                             {{ stat.varName }}...
                         </div>
                         <div class="overline text-right" v-if="stat.useAppearance && characters[characterIndex].appearance">
-                            {{ stat.prefix }}{{ characters[characterIndex].appearance[stat.varRef] }}{{ pruneDecimals(stat.suffix) }}
+                            {{ stat.prefix }}{{ pruneDecimals(characters[characterIndex].appearance[stat.varRef]) }}{{ pruneDecimals(stat.suffix) }}
                         </div>
                         <div class="overline text-right" v-else-if="stat.useInfo && characters[characterIndex].info">
-                            {{ stat.prefix }}{{ characters[characterIndex].info[stat.varRef] }}{{  pruneDecimals(stat.suffix) }}
+                            {{ stat.prefix }}{{ pruneDecimals(characters[characterIndex].info[stat.varRef]) }}{{  pruneDecimals(stat.suffix) }}
                         </div>
                         <div class="overline text-right" v-else>
-                            {{ stat.prefix }}{{ characters[characterIndex][stat.varRef] }}{{  pruneDecimals(stat.suffix) }}
+                            {{ stat.prefix }}{{ pruneDecimals(characters[characterIndex][stat.varRef]) }}{{  pruneDecimals(stat.suffix) }}
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-
 import { Character } from '../../shared/interfaces/Character';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';

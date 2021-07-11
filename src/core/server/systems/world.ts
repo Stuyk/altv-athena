@@ -96,3 +96,4 @@ export class World {
 
 alt.setInterval(World.updateWorldTime, 60000);
 World.generateGrid(worldDivision);
+World.updateWorldTime();

@@ -40,15 +40,24 @@ export class ChatController {
             return;
         }
 
-        if (alt.Player.local.isPhoneOpen) {
-            return;
-        }
-
         BaseHUD.isOpen = true;
         BaseHUD.view.emit('chat:Focus');
         alt.Player.local.isChatOpen = true;
         alt.toggleGameControls(false);
         disableAllControls(true);
+    }
+
+    static async isViewReady() {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!BaseHUD.view && !BaseHUD.view.valid) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+            }, 500);
+        });
     }
 
     /**
@@ -58,11 +67,8 @@ export class ChatController {
      * @return {*}  {void}
      * @memberof HUDController
      */
-    static appendMessage(message: string): void {
-        if (!BaseHUD.view) {
-            return;
-        }
-
+    static async appendMessage(message: string): Promise<void> {
+        await ChatController.isViewReady();
         BaseHUD.view.emit('chat:Append', message);
     }
 }
