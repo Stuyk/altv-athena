@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+
 import { Interaction } from '../../server/interface/Interaction';
 import { Item } from '../../shared/interfaces/Item';
 import { Meta } from './Meta';

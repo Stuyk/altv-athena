@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
+
 import { Character } from '../../shared/interfaces/Character';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';
+import { InteractionShape } from './Colshape';
 import currency from './playerFunctions/currency';
 import dataUpdater from './playerFunctions/dataUpdater';
 import emit from './playerFunctions/emit';
@@ -13,7 +15,6 @@ import select from './playerFunctions/select';
 import set from './playerFunctions/setter';
 import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
-import { InteractionShape } from './Colshape';
 
 declare module 'alt-server' {
     export interface Player {

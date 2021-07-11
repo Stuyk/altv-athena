@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { Vehicle_Door_List } from '../../shared/enums/vehicle';
 import { AnimationFlags } from '../../shared/flags/animation';
 import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';

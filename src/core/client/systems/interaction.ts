@@ -44,6 +44,9 @@ export class InteractionController {
                 pressedKey = true;
             }
         });
+
+        loadTexture('mpsafecracking');
+        loadTexture('mpmissmarkers128');
     }
 
     /**
@@ -107,6 +110,10 @@ export class InteractionController {
         // Display Help Text
         if (description && position) {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
+
+            loadTexture('mpmissmarkers128').then(() => {
+                drawTexture('mpmissmarkers128', 'corona_marker', position, 0.3);
+            });
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
@@ -116,7 +123,7 @@ export class InteractionController {
             const vehicleDistance = distance2d(alt.Player.local.pos, vehicle.pos);
             if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
                 if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
-                    loadTexture('mpsafecracking').then();
+                    loadTexture('mpsafecracking');
                 }
 
                 loadTexture('mpsafecracking').then(() => {

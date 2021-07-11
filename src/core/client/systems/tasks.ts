@@ -63,7 +63,6 @@ class TaskHelper {
             native[nativeName](alt.Player.local.scriptID, vehicle.scriptID, ...taskParams);
         } else if (vehicle && vehicle_only) {
             // Vehicle task without player
-            alt.log('vehicle no player');
             native[nativeName](vehicle.scriptID, ...taskParams);
         }
 

@@ -5,9 +5,7 @@ import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { PedConfigFlag } from '../../shared/flags/pedflags';
-import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { drawTexture, loadTexture } from '../utility/texture';
 
 export class VehicleController {
     /**
@@ -30,8 +28,6 @@ export class VehicleController {
             key: KEY_BINDS.VEHICLE_LOCK,
             singlePress: VehicleController.emitLock
         });
-
-        loadTexture('mpsafecracking');
     }
 
     /**
