@@ -80,8 +80,6 @@ function handleRepairTimeline(player: alt.Player) {
         12000
     );
 
-    vehicleFuncs.setter.doorOpen(closestVehicle, player, Vehicle_Door_List.HOOD, true, true);
-
     alt.setTimeout(() => {
         vehicleFuncs.utility.repair(closestVehicle);
     }, 12000);

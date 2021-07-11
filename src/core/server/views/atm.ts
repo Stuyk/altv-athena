@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { PhoneEvents } from '../../shared/enums/phoneEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
@@ -126,15 +127,13 @@ function init() {
     for (let i = 0; i < atms.length; i++) {
         const position = atms[i];
 
-        // FIXME
-        // InteractionController.add({
-        //     shortDesc: LocaleController.get(LOCALE_KEYS.USE_ATM),
-        //     event: {
-        //         eventName: 'atm:Open',
-        //         isServer: false
-        //     },
-        //     position,
-        //     type: 'atm'
-        // });
+        InteractionController.add({
+            position,
+            description: 'Open the ATM',
+            type: 'atm',
+            callback: (player: alt.Player) => {
+                alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_ATM);
+            }
+        });
     }
 }

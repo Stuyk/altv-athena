@@ -104,10 +104,15 @@ export class BaseHUD {
         BaseHUD.view.emit(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
 
         if (alt.Player.local.vehicle) {
-            BaseHUD.view.emit(HudEventNames.Lock, alt.Player.local.vehicle.lockStatus);
-            BaseHUD.view.emit(HudEventNames.Engine, alt.Player.local.vehicle.engineStatus);
+            BaseHUD.view.emit(
+                HudEventNames.Lock,
+                native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2
+            );
 
-            native.getVehicleLightsState;
+            BaseHUD.view.emit(
+                HudEventNames.Engine,
+                native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID)
+            );
 
             const [_, lightsOn, highBeams] = native.getVehicleLightsState(
                 alt.Player.local.vehicle.scriptID,

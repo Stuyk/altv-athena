@@ -1,4 +1,6 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 const KEY_UP_BINDS: Keybinds = {};
@@ -48,8 +50,6 @@ export class KeybindController {
         if (!KEY_UP_BINDS[key]) {
             return;
         }
-
-        alt.log(key);
 
         // Athena Menus
         if (alt.Player.local.isMenuOpen) {

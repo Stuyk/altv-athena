@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 
 import Ares from '../utility/ares';
-import { generatePosterFormat } from './shared';
 
 export class PostController {
     static isWindows(): boolean {
@@ -17,13 +16,6 @@ export class PostController {
         }
 
         return sharedSecret;
-    }
-
-    static async getPostFormat(data: any): Promise<URLSearchParams> {
-        const responseParms = new URLSearchParams();
-        const postData = await generatePosterFormat({ isWindows: PostController.isWindows, ...data });
-        responseParms.append('data', JSON.stringify(postData));
-        return responseParms;
     }
 
     static validateResponse(response: any): boolean {

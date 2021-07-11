@@ -1,10 +1,7 @@
 import * as alt from 'alt-server';
 
-import { Blip } from '../../shared/interfaces/Blip';
-import { EventCall } from '../../shared/interfaces/EventCall';
-import { Interaction } from '../../shared/interfaces/Interaction';
 import { distance2d } from '../../shared/utility/vector';
-import { BlipController } from '../systems/blip';
+import { Interaction } from '../interface/Interaction';
 
 export class InteractionShape extends alt.ColshapeCylinder {
     isInteraction: boolean = true;
@@ -24,7 +21,6 @@ export class InteractionShape extends alt.ColshapeCylinder {
      */
     setInteraction(interaction: Interaction) {
         this.interaction = interaction;
-        this.populateBlip(interaction.blip);
     }
 
     /**
@@ -34,27 +30,6 @@ export class InteractionShape extends alt.ColshapeCylinder {
      */
     getInteraction(): Interaction {
         return this.interaction;
-    }
-
-    /**
-     * Apply the blip for this interaction.
-     * @param {Blip} blip
-     * @memberof InteractionShape
-     */
-    setBlip(blip: Blip) {
-        const oldBlip = this.interaction.blip ? { ...this.interaction.blip } : null;
-        this.interaction.blip = blip;
-        this.populateBlip(oldBlip);
-    }
-
-    /**
-     * Add a callback event based on alt events when
-     * a player interacts with this event.
-     * @param {EventCall} event
-     * @memberof InteractionShape
-     */
-    setEvent(event: EventCall) {
-        this.interaction.event = event;
     }
 
     /**
@@ -97,13 +72,5 @@ export class InteractionShape extends alt.ColshapeCylinder {
      */
     getDistance(entity: { pos: alt.IVector3 }): number {
         return distance2d(entity.pos, this.interaction.position);
-    }
-
-    private populateBlip(oldBlip: Blip) {
-        if (oldBlip && oldBlip.uid) {
-            BlipController.remove(oldBlip.uid);
-        }
-
-        BlipController.add(this.interaction.blip);
     }
 }

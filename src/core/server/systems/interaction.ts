@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Interaction } from '../../shared/interfaces/Interaction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionShape } from '../extensions/Colshape';
 import { playerFuncs } from '../extensions/Player';
+import { Interaction } from '../interface/Interaction';
 import { sha256Random } from '../utility/encryption';
 
 import '../views/atm';
@@ -82,7 +83,11 @@ export class InteractionController {
             return;
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, colshape.getInteraction());
+        // When entering set the help text.
+        // Don't pass the interaction. Just the description from it.
+        player.currentInteraction = colshape;
+        const interaction = player.currentInteraction.getInteraction();
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description);
     }
 
     /**
@@ -102,7 +107,10 @@ export class InteractionController {
             return;
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null);
+        // When leaving remove the help text.
+        // Don't pass the interaction.
+        player.currentInteraction = null;
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
     }
 
     /**
@@ -113,33 +121,23 @@ export class InteractionController {
      * @return {*}
      * @memberof InteractionController
      */
-    static trigger(player: alt.Player, type: string) {
-        if (!interactions[type]) {
+    static trigger(player: alt.Player) {
+        if (!player.currentInteraction) {
             return;
         }
 
-        const closestShape = interactions[type].find((interaction) => {
-            return interaction.getDistance(player) <= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE;
-        });
-
-        if (!closestShape) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY));
+        const dist = distance2d(player.pos, player.currentInteraction.pos);
+        if (dist >= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
+            playerFuncs.emit.notification(player, `~r~Too far away to interact.`);
             return;
         }
 
-        const interaction = closestShape.getInteraction();
-        if (!interaction || !interaction.event) {
+        const interaction = player.currentInteraction.getInteraction();
+        if (!interaction || !interaction.callback) {
             return;
         }
 
-        // Goes Server Side
-        if (interaction.event.isServer) {
-            alt.emit(interaction.event.eventName, player, closestShape.pos);
-            return;
-        }
-
-        // Goes Client Side
-        alt.emitClient(player, interaction.event.eventName, closestShape.pos);
+        interaction.callback(player);
     }
 }
 

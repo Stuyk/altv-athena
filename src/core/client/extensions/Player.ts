@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { Interaction } from '../../shared/interfaces/Interaction';
+import { Interaction } from '../../server/interface/Interaction';
 import { Item } from '../../shared/interfaces/Item';
 import { Meta } from './Meta';
 
@@ -18,9 +18,5 @@ declare module 'alt-client' {
         // The time that a player is seen by our local player.
         // Used to reveal nametags.
         inVisionTime: number | null;
-
-        // Used for ATMs, Vending Machines, etc.
-        closestInteraction: Interaction;
-        otherInteraction: { position: alt.Vector3; short: string; long: string };
     }
 }

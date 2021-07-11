@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
@@ -279,21 +280,12 @@ alt.on('heist:Completed', (player: alt.Player, pos: alt.Vector3) => {
 TextLabelController.add({ data: 'Jewelry Store Heist', pos: startPosition, maxDistance: 10 });
 
 InteractionController.add({
-    event: { eventName: `heistjewelrystore`, isServer: true },
+    callback: handleStartJob,
     type: 'heistjewelrystore',
-    position: startPosition,
-    shortDesc: 'Browse Heist',
-    blip: {
-        sprite: 112,
-        color: 7,
-        shortRange: true,
-        text: 'Heist',
-        pos: startPosition,
-        scale: 1
-    }
+    position: startPosition
 });
 
-alt.on('heistjewelrystore', (player: alt.Player) => {
+function handleStartJob(player: alt.Player) {
     const trigger: JobTrigger = {
         header: 'Rob the Jewelry Store',
         event: 'heist:Start',
@@ -302,7 +294,7 @@ alt.on('heistjewelrystore', (player: alt.Player) => {
     };
 
     alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
-});
+}
 
 alt.on('heist:Start', (player: alt.Player) => {
     if (distance2d(player.pos, startPosition) > 5) {

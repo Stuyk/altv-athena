@@ -6,6 +6,7 @@ import { AnimationFlags } from '../../shared/flags/animation';
 import { PedConfigFlag } from '../../shared/flags/pedflags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Task } from '../../shared/interfaces/TaskTimeline';
+import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
@@ -394,6 +395,8 @@ export class VehicleFunctions {
                 ? VEHICLE_LOCK_STATE.UNLOCKED
                 : VEHICLE_LOCK_STATE.LOCKED;
 
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
+
         if (!player.vehicle) {
             playerFuncs.emit.animation(
                 player,
@@ -420,40 +423,40 @@ alt.on('playerEnteringVehicle', VehicleFunctions.entering);
 alt.on('playerEnteredVehicle', VehicleFunctions.enter);
 alt.on('playerLeftVehicle', VehicleFunctions.leave);
 
-// function handleSpawn(player: alt.Player, index: number) {
-//     if (!player.data.vehicles) {
-//         return;
-//     }
+function handleSpawn(player: alt.Player, index: number) {
+    if (!player.data.vehicles) {
+        return;
+    }
 
-//     if (index <= -1) {
-//         return;
-//     }
+    if (index <= -1) {
+        return;
+    }
 
-//     if (index >= player.data.vehicles.length) {
-//         return;
-//     }
+    if (index >= player.data.vehicles.length) {
+        return;
+    }
 
-//     const vehicleData = player.data.vehicles[index];
-//     if (!vehicleData) {
-//         return;
-//     }
+    const vehicleData = player.data.vehicles[index];
+    if (!vehicleData) {
+        return;
+    }
 
-//     vehicleFuncs.new.spawn(player, vehicleData as Vehicle);
-// }
+    vehicleFuncs.new.spawn(player, vehicleData as Vehicle);
+}
 
-// function handleDespawn(player: alt.Player) {
-//     if (!player.data.vehicles) {
-//         return;
-//     }
+function handleDespawn(player: alt.Player) {
+    if (!player.data.vehicles) {
+        return;
+    }
 
-//     if (player.lastVehicleID === null || player.lastVehicleID === undefined) {
-//         return;
-//     }
+    if (player.lastVehicleID === null || player.lastVehicleID === undefined) {
+        return;
+    }
 
-//     const vehicle = alt.Vehicle.all.find((veh) => veh && veh.id === player.lastVehicleID);
-//     if (!vehicle) {
-//         return;
-//     }
+    const vehicle = alt.Vehicle.all.find((veh) => veh && veh.id === player.lastVehicleID);
+    if (!vehicle) {
+        return;
+    }
 
-//     vehicleFuncs.new.despawn(vehicle.id, player);
-// }
+    vehicleFuncs.new.despawn(vehicle.id, player);
+}

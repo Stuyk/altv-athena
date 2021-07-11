@@ -13,6 +13,7 @@ import select from './playerFunctions/select';
 import set from './playerFunctions/setter';
 import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
+import { InteractionShape } from './Colshape';
 
 declare module 'alt-server' {
     export interface Player {
@@ -52,6 +53,9 @@ declare module 'alt-server' {
         // Vehicle Info
         lastEnteredVehicleID: number;
         lastVehicleID: number;
+
+        // Interaction
+        currentInteraction: InteractionShape | null;
     }
 }
 
