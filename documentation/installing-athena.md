@@ -10,11 +10,15 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
 
 - [Installing Athena Advanced](#installing-athena-advanced)
   - [Table of Contents](#table-of-contents)
-  - [Setup](#setup)
+  - [Setup Private Repo](#setup-private-repo)
+  - [Set Private Repo Main Branch to Master](#set-private-repo-main-branch-to-master)
+  - [Download from Private Repo](#download-from-private-repo)
     - [Updating Submodules](#updating-submodules)
     - [Installing Dependencies](#installing-dependencies)
     - [Installing Server Files](#installing-server-files)
-    - [Installing License Key](#installing-license-key)
+    - [Using License Key](#using-license-key)
+    - [Important Configuration](#important-configuration)
+  - [Port Forwarding](#port-forwarding)
   - [Running the Server](#running-the-server)
     - [Running Production on Windows](#running-production-on-windows)
     - [Running Production on Linux](#running-production-on-linux)
@@ -103,76 +107,68 @@ From this point forward you can simply run this `npm` command to update dependen
 npm run update
 ```
 
-### Installing License Key
+### Using License Key
 
-The license key is unique to your Gumroad Transaction. The license key will allow you to properly boot the alt:V Athena Server. This can be installed by using Environment Variables or a simple `.env` file will do.
+The license key is unique to your Gumroad Transaction. The license key should be kept a secret.
+
+The [Official alt:V Athena Discord](https://discord.gg/pZvbJmKN8Y) will allow you to manage your license key and IP(s) which can use it through the Athena Key Manager Bot.
+
+Please make sure to join and and `!help` to get information about the bot.
+
+You should either `bind` or `refresh` your email and key to keep it active. The backend service will check the validity of the key.
+
+```
+!bind <gumroad_email> <key>
+!refresh <gumroad_email> <key>
+```
+
+After binding the license you can append your IP to your license or any of your developer(s).
+
+```
+!append <key> <ip>
+```
+
+### Important Configuration
 
 **Creating the .env File**
 
 In the same directory as your `package.json` file. Create a file called `.env` and open it up in whatever text editor you like to use. Add the following lines to your `.env` file depending on what you need.
 
-**I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.**
+This file should not have **ANY EXTENSION** make sure it doesn't say it's a text document. You have to modify the extension of the file to make this work. Pick up a program like VSCode to do this. I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.
 
-**GUMROAD**
+**Bare Minimum Configuration**
 
-This argument is for your [alt:V Athena Subscription License](https://gumroad.com/products/SKpPN/). It lets you boot the script.
+* WEBSERVER_IP
 
-```text
-GUMROAD=XXXXXXXX-YYYYYYYY-...
+**Configuration Options**
+
+```sh    
+# Optional Discord Bot Integration
+DISCORD_BOT=<DISCORD_BOT_KEY>
+
+# Optional Discord Whitelist Role ID
+WHITELIST_ROLE=<SOME_ID>
+
+# A connection string for MongoDB. If using localhost don't bother.
+MONGO_URL=<MONGODB_CONNECTION_STRING>
+
+# List of Collections to Generate Besides the Default(s)
+# Collections are also known as tables.
+MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
+
+# You must specify your server's IP Address here.
+WEBSERVER_IP=<YOUR_SERVER_IP>
 ```
 
-**EMAIL**
+## Port Forwarding
 
-This argument is for your Gumroad Email. The Email you used when you bought a license.
+You will need to port forward for the following ports on TCP & UDP.
 
-```text
-EMAIL=xyz@email.com
+**DO NOT SKIP THIS. NOBODY CAN JOIN WITHOUT IT.**
+
 ```
-
-**MONGO\_URL\***
-
-This argument is if you went with a remote MongoDB Server.
-
-_Optional. Not required to add._
-
-```text
-MONGO_URL=mongodb://localhost:27017
-```
-
-
-
-**MONGO\_USERNAME\***
-
-This argument is if your database has a username anbd password. Highly recommended if you have remote access.
-
-_Optional. Not required to add._
-
-```text
-MONGO_USERNAME=myUsername
-```
-
-**MONGO\_PASSWORD\***
-
-This argument is if your databae has a username and password. Highly recommended if you have remote access.
-
-_Optional. Not required to add._
-
-```text
-MONGO_PASSWORD=coolPassword
-```
-
-**Results May Vary**
-
-You should end up with something similar to this.
-
-_Do not put parameters if they are empty. You may not get the desired effect you want._
-
-```text
-GUMROAD=XXXXXXXX-YYYYYYYY-...
-EMAIL=xyz@emai...
-MONGO_URL=
-MONGO_USERNAME=
-MONGO_PASSWORD=
+7788
+9111
 ```
 
 ## Running the Server
