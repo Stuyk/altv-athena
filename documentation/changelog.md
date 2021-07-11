@@ -22,6 +22,8 @@ description: List of all the changes and current versions.
 + Replaced SimplyMongo with EzMongoDB
 + Rebuilt Vehicle Handler
 + Simplify Interaction(s) through Server-Side Routing Only
++ Changed Vehicle Controls to 'F' Only
++ Vehicle controls will always find first available seat.
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

@@ -114,7 +114,9 @@ export default {
     [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
     [LOCALE_KEYS.VEHICLE_LOCK_SET_TO]: `Vehicle lock has been set to: _%_`,
     [LOCALE_KEYS.VEHICLE_TOGGLE_LOCK]: `Toggle Lock`,
+    [LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE]: `Toggle Engine`,
     [LOCALE_KEYS.VEHICLE_IS_LOCKED]: `Closest vehicle is locked.`,
+    [LOCALE_KEYS.VEHICLE_ENTER_VEHICLE]: `Get Into / Exit Vehicle`,
     // ============================
     // WebView Locales Start Here
     // ============================

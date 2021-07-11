@@ -1,9 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
+import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
+import { drawTexture, loadTexture } from '../utility/texture';
 import { VehicleController } from './vehicle';
 
 const TIME_BETWEEN_CHECKS = 500;
@@ -75,20 +80,11 @@ export class InteractionController {
             return;
         }
 
-        // Display Help Text
-        if (description && position) {
-            native.beginTextCommandDisplayHelp('THREESTRINGS');
-            native.addTextComponentSubstringPlayerName(
-                `~y~' ${String.fromCharCode(KEY_BINDS.INTERACT).toUpperCase()} ' ~w~${description}`
-            );
-            native.endTextCommandDisplayHelp(0, false, true, 0);
-        }
+        InteractionController.drawInteractText();
 
         if (!pressedKey) {
             return;
         }
-
-        VehicleController.runVehicleControllerTick();
 
         // Timeout for Key Presses
         if (nextKeyPress > Date.now()) {
@@ -99,6 +95,70 @@ export class InteractionController {
         nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
         pressedKey = false;
         alt.emitServer(SYSTEM_EVENTS.INTERACTION);
+    }
+
+    static appendText(originalText: string, key: number, description: string): string {
+        return originalText + `~y~' ${String.fromCharCode(key).toUpperCase()} ' ~w~${description} ~n~`;
+    }
+
+    static drawInteractText() {
+        let interactText = '';
+
+        // Display Help Text
+        if (description && position) {
+            interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
+        }
+
+        const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
+
+        if (!alt.Player.local.vehicle && vehicle) {
+            const isVehicleLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
+            const vehicleDistance = distance2d(alt.Player.local.pos, vehicle.pos);
+            if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
+                if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
+                    loadTexture('mpsafecracking').then();
+                }
+
+                loadTexture('mpsafecracking').then(() => {
+                    const newPosition = vehicle.pos.add(0, 0, 1);
+
+                    if (isVehicleLocked) {
+                        drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+                    } else {
+                        drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+                    }
+                });
+
+                if (!isVehicleLocked) {
+                    // Press 'F' to enter vehicle
+                    const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
+                    interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_FUNCS, enterText);
+                }
+
+                // Press 'X' to lock vehicle
+                const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
+                interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_LOCK, lockText);
+            }
+        } else if (alt.Player.local.vehicle) {
+            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+
+            if (!engineOn) {
+                // Press 'Y' to toggle engine
+                const engineText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE);
+                interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_ENGINE, engineText);
+            }
+        }
+
+        // Replace the last ~n~ in the interaction text.
+        interactText = interactText.replace(/~n~$/, '');
+        if (interactText === '') {
+            return;
+        }
+
+        // Draw the Help Text (Top Left)
+        native.beginTextCommandDisplayHelp('THREESTRINGS');
+        native.addTextComponentSubstringPlayerName(interactText);
+        native.endTextCommandDisplayHelp(0, false, false, 0);
     }
 }
 

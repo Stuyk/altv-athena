@@ -107,6 +107,8 @@ export const LOCALE_KEYS = {
     VEHICLE_LOCK_SET_TO: `vehicle-lock-set-to`,
     VEHICLE_TOGGLE_LOCK: `vehicle-toggle-lock`,
     VEHICLE_IS_LOCKED: `vehicle-is-locked`,
+    VEHICLE_ENTER_VEHICLE: 'vehicle-enter-vehicle',
+    VEHICLE_TOGGLE_ENGINE: 'vehicle-toggle-engine',
     // =====================
     // WebView Locales
     // =====================
