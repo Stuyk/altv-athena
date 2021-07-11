@@ -7,7 +7,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Dinghy 2',
@@ -15,7 +16,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: false,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Dinghy 3',
@@ -23,7 +25,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: false,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Dinghy 4',
@@ -31,7 +34,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: false,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Marquis',
@@ -39,7 +43,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 120000
+        price: 120000,
+        seats: 2
     },
     {
         display: 'Seashark',
@@ -47,7 +52,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 8000
+        price: 8000,
+        seats: 2
     },
     {
         display: 'Seashark 2',
@@ -55,7 +61,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 8000
+        price: 8000,
+        seats: 2
     },
     {
         display: 'Seashark 3',
@@ -63,7 +70,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 8000
+        price: 8000,
+        seats: 2
     },
     {
         display: 'Squalo',
@@ -71,7 +79,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 65000
+        price: 65000,
+        seats: 2
     },
     {
         display: 'Suntrap',
@@ -79,7 +88,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 55000
+        price: 55000,
+        seats: 2
     },
     {
         display: 'Tropic',
@@ -87,7 +97,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 50000
+        price: 50000,
+        seats: 2
     },
     {
         display: 'Tropic 2',
@@ -95,7 +106,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'boat',
         sell: true,
-        price: 50000
+        price: 50000,
+        seats: 2
     },
     {
         display: 'Speeder',
@@ -103,7 +115,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'speedboat',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Speeder 2',
@@ -111,7 +124,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'speedboat',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Toro',
@@ -119,7 +133,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'speedboat',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Toro 2',
@@ -127,7 +142,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'speedboat',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Jetmax',
@@ -135,7 +151,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'speedboat',
         sell: true,
-        price: 95000
+        price: 95000,
+        seats: 2
     },
     {
         display: 'Benson',
@@ -143,7 +160,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Biff',
@@ -151,7 +169,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cerberus',
@@ -159,7 +178,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cerberus 2',
@@ -167,7 +187,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cerberus 3',
@@ -175,7 +196,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Hauler',
@@ -183,7 +205,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Hauler 2',
@@ -191,7 +214,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mule',
@@ -199,7 +223,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mule 2',
@@ -207,7 +232,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mule 3',
@@ -215,7 +241,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mule 4',
@@ -223,7 +250,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Packer',
@@ -231,7 +259,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: true,
-        price: 135000
+        price: 135000,
+        seats: 2
     },
     {
         display: 'Phantom',
@@ -239,7 +268,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: true,
-        price: 150000
+        price: 150000,
+        seats: 2
     },
     {
         display: 'Phantom 2',
@@ -247,7 +277,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Phantom 3',
@@ -255,7 +286,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Pounder',
@@ -263,7 +295,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Pounder 2',
@@ -271,7 +304,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Stockade',
@@ -279,7 +313,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Stockade 3',
@@ -287,7 +322,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Terabyte',
@@ -295,7 +331,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'commercial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 4
     },
     {
         display: 'Blista',
@@ -303,7 +340,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 12500
+        price: 12500,
+        seats: 2
     },
     {
         display: 'Brioso',
@@ -311,7 +349,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 11000
+        price: 11000,
+        seats: 2
     },
     {
         display: 'Dilettante',
@@ -319,7 +358,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 8000
+        price: 8000,
+        seats: 2
     },
     {
         display: 'Issi 2',
@@ -327,7 +367,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 16000
+        price: 16000,
+        seats: 2
     },
     {
         display: 'Issi 3',
@@ -335,7 +376,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Issi 4',
@@ -343,7 +385,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Issi 5',
@@ -351,7 +394,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Panto',
@@ -359,7 +403,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 8000
+        price: 8000,
+        seats: 2
     },
     {
         display: 'Prairie',
@@ -367,7 +412,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Rhapsody',
@@ -375,7 +421,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'compact',
         sell: true,
-        price: 16500
+        price: 16500,
+        seats: 2
     },
     {
         display: 'Cog Cabrio',
@@ -383,7 +430,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Exemplar',
@@ -391,7 +439,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 34000
+        price: 34000,
+        seats: 2
     },
     {
         display: 'F620',
@@ -399,7 +448,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 38000
+        price: 38000,
+        seats: 2
     },
     {
         display: 'Felon',
@@ -407,7 +457,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 36000
+        price: 36000,
+        seats: 2
     },
     {
         display: 'Felon 2',
@@ -415,7 +466,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Jackal',
@@ -423,7 +475,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Oracle',
@@ -431,7 +484,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 44000
+        price: 44000,
+        seats: 2
     },
     {
         display: 'Oracle 2',
@@ -439,7 +493,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Sentinel',
@@ -447,7 +502,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 45000
+        price: 45000,
+        seats: 2
     },
     {
         display: 'Sentinel 2',
@@ -455,7 +511,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Windsor',
@@ -463,7 +520,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 52000
+        price: 52000,
+        seats: 2
     },
     {
         display: 'Windsor 2',
@@ -471,7 +529,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 58000
+        price: 58000,
+        seats: 2
     },
     {
         display: 'Zion',
@@ -479,7 +538,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 33000
+        price: 33000,
+        seats: 2
     },
     {
         display: 'Zion 2',
@@ -487,7 +547,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'coupe',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'BMX',
@@ -495,7 +556,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 250
+        price: 250,
+        seats: 2
     },
     {
         display: 'Cruiser',
@@ -503,7 +565,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 150
+        price: 150,
+        seats: 2
     },
     {
         display: 'Fixter',
@@ -511,7 +574,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 350
+        price: 350,
+        seats: 2
     },
     {
         display: 'Scorcher',
@@ -519,7 +583,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 75
+        price: 75,
+        seats: 2
     },
     {
         display: 'Tribike',
@@ -527,7 +592,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 450
+        price: 450,
+        seats: 2
     },
     {
         display: 'Tribike 2',
@@ -535,7 +601,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 500
+        price: 500,
+        seats: 2
     },
     {
         display: 'Tribike 3',
@@ -543,7 +610,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'cycle',
         sell: true,
-        price: 550
+        price: 550,
+        seats: 2
     },
     {
         display: 'Dilettante 2',
@@ -551,7 +619,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Ambulance',
@@ -559,7 +628,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'FBI',
@@ -567,7 +637,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'FBI 2',
@@ -575,7 +646,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Firetruck',
@@ -583,7 +655,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Life Guard',
@@ -591,7 +664,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Prisoner Bus',
@@ -599,7 +673,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police',
@@ -607,7 +682,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police 2',
@@ -615,7 +691,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police 3',
@@ -623,7 +700,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police 4',
@@ -631,7 +709,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police Bike',
@@ -639,7 +718,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police Maverick',
@@ -647,7 +727,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Police Old 1',
@@ -655,7 +736,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Police Old 2',
@@ -663,7 +745,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Police Van',
@@ -671,7 +754,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Police Ranger',
@@ -679,7 +763,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 9
     },
     {
         display: 'Police Predator',
@@ -687,7 +772,8 @@ export const VehicleData = [
         type: 'boat',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Riot',
@@ -695,7 +781,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 9
     },
     {
         display: 'Riot 2',
@@ -703,7 +790,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 7
     },
     {
         display: 'Sheriff',
@@ -711,7 +799,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Sheriff 2',
@@ -719,7 +808,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'emergency',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 9
     },
     {
         display: 'Bulldozer',
@@ -727,7 +817,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cutter',
@@ -735,7 +826,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dump',
@@ -743,7 +835,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Flatbed',
@@ -751,7 +844,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: true,
-        price: 125000
+        price: 125000,
+        seats: 3
     },
     {
         display: 'Guardian',
@@ -759,7 +853,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 7
     },
     {
         display: 'Handler',
@@ -767,7 +862,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mixer',
@@ -775,7 +871,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mixer 2',
@@ -783,7 +880,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rubble',
@@ -791,7 +889,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tip Truck',
@@ -799,7 +898,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tip Truck 2',
@@ -807,7 +907,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'industrial',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Akula',
@@ -815,7 +916,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Annihilator',
@@ -823,7 +925,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Buzzard',
@@ -831,7 +934,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Buzzard 2',
@@ -839,7 +943,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cargobob',
@@ -847,7 +952,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cargobob 2',
@@ -855,7 +961,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cargobob 3',
@@ -863,7 +970,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cargobob 4',
@@ -871,7 +979,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Frogger',
@@ -879,7 +988,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Frogger 2',
@@ -887,7 +997,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Hunter',
@@ -895,7 +1006,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Valkyrie',
@@ -903,7 +1015,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Valkyrie 2',
@@ -911,7 +1024,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Skylift',
@@ -919,7 +1033,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Savage',
@@ -927,7 +1042,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'APC',
@@ -935,7 +1051,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Barracks',
@@ -943,7 +1060,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Barracks 2',
@@ -951,7 +1069,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Barracks 3',
@@ -959,7 +1078,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Barrage',
@@ -967,7 +1087,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Chernobog',
@@ -975,7 +1096,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Crusader',
@@ -983,7 +1105,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Halftrack',
@@ -991,7 +1114,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Khanjali',
@@ -999,7 +1123,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rhino',
@@ -1007,7 +1132,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Scarab',
@@ -1015,7 +1141,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Scarab 2',
@@ -1023,7 +1150,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Scarab 3',
@@ -1031,7 +1159,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Thruster',
@@ -1039,7 +1168,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer Small 2',
@@ -1047,7 +1177,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Insurgent',
@@ -1055,7 +1186,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Insurgent 2',
@@ -1063,7 +1195,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Insurgent 3',
@@ -1071,7 +1204,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Menacer',
@@ -1079,7 +1213,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Nightshark',
@@ -1087,7 +1222,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Technical',
@@ -1095,7 +1231,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Technical 2',
@@ -1103,7 +1240,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Technical 3',
@@ -1111,7 +1249,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bombushka',
@@ -1119,7 +1258,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Besra',
@@ -1127,7 +1267,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cargo Plane',
@@ -1135,7 +1276,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cuban 800',
@@ -1143,7 +1285,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cuban 800',
@@ -1151,7 +1294,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Hydra',
@@ -1159,7 +1303,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Jet',
@@ -1167,7 +1312,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Lazer',
@@ -1175,7 +1321,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mogul',
@@ -1183,7 +1330,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Molotok',
@@ -1191,7 +1339,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Nokota',
@@ -1199,7 +1348,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Pyro',
@@ -1207,7 +1357,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rogue',
@@ -1215,7 +1366,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Starling',
@@ -1223,7 +1375,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Strikeforce',
@@ -1231,7 +1384,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Titan',
@@ -1239,7 +1393,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tula',
@@ -1247,7 +1402,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Volatol',
@@ -1255,7 +1411,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'military',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Akuma',
@@ -1263,7 +1420,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 31000
+        price: 31000,
+        seats: 2
     },
     {
         display: 'Avarus',
@@ -1271,7 +1429,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Bagger',
@@ -1279,7 +1438,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 19500
+        price: 19500,
+        seats: 2
     },
     {
         display: 'Bati',
@@ -1287,7 +1447,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Bati 2',
@@ -1295,7 +1456,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'BF400',
@@ -1303,7 +1465,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Carbon RS',
@@ -1311,7 +1474,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Chimera',
@@ -1319,7 +1483,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Cliffhanger',
@@ -1327,7 +1492,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Daemon',
@@ -1335,7 +1501,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Daemon 2',
@@ -1343,7 +1510,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 3
     },
     {
         display: 'Defiler',
@@ -1351,7 +1519,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Deathbike',
@@ -1359,7 +1528,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Deathbike 2',
@@ -1367,7 +1537,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Deathbike 3',
@@ -1375,7 +1546,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Diablous',
@@ -1383,7 +1555,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 23000
+        price: 23000,
+        seats: 2
     },
     {
         display: 'Diablous 2',
@@ -1391,7 +1564,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Double',
@@ -1399,7 +1573,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 38000
+        price: 38000,
+        seats: 2
     },
     {
         display: 'Enduro',
@@ -1407,7 +1582,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 21000
+        price: 21000,
+        seats: 2
     },
     {
         display: 'Esskey',
@@ -1415,7 +1591,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Faggio',
@@ -1423,7 +1600,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 100
+        price: 100,
+        seats: 2
     },
     {
         display: 'Faggio 2',
@@ -1431,7 +1609,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 5000
+        price: 5000,
+        seats: 2
     },
     {
         display: 'Faggio 3',
@@ -1439,7 +1618,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 8500
+        price: 8500,
+        seats: 2
     },
     {
         display: 'FCR',
@@ -1447,7 +1627,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'FCR 2',
@@ -1455,7 +1636,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 14000
+        price: 14000,
+        seats: 2
     },
     {
         display: 'Gargoyle',
@@ -1463,7 +1645,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Hakuchou',
@@ -1471,7 +1654,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 65000
+        price: 65000,
+        seats: 2
     },
     {
         display: 'Hakuchou 2',
@@ -1479,7 +1663,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 65800
+        price: 65800,
+        seats: 2
     },
     {
         display: 'Hexer',
@@ -1487,7 +1672,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'innovation',
@@ -1495,7 +1681,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Lectro',
@@ -1503,7 +1690,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 55000
+        price: 55000,
+        seats: 2
     },
     {
         display: 'Manchez',
@@ -1511,7 +1699,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Nemesis',
@@ -1519,7 +1708,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Nightblade',
@@ -1527,7 +1717,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 33000
+        price: 33000,
+        seats: 2
     },
     {
         display: 'Oppressor',
@@ -1535,7 +1726,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Oppressor 2',
@@ -1543,7 +1735,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'PCJ',
@@ -1551,7 +1744,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Ratbike',
@@ -1559,7 +1753,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18900
+        price: 18900,
+        seats: 2
     },
     {
         display: 'Ruffian',
@@ -1567,7 +1762,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 44000
+        price: 44000,
+        seats: 2
     },
     {
         display: 'R Rocket',
@@ -1575,7 +1771,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 75000
+        price: 75000,
+        seats: 2
     },
     {
         display: 'Sanchez',
@@ -1583,7 +1780,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 12000
+        price: 12000,
+        seats: 2
     },
     {
         display: 'Sanchez 2',
@@ -1591,7 +1789,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 12500
+        price: 12500,
+        seats: 2
     },
     {
         display: 'Sanctus',
@@ -1599,7 +1798,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Shotaro',
@@ -1607,7 +1807,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: false,
-        price: 150000
+        price: 150000,
+        seats: 2
     },
     {
         display: 'Sovereign',
@@ -1615,7 +1816,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Thrust',
@@ -1623,7 +1825,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 37000
+        price: 37000,
+        seats: 2
     },
     {
         display: 'Vader',
@@ -1631,7 +1834,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 38500
+        price: 38500,
+        seats: 2
     },
     {
         display: 'Vindicator',
@@ -1639,7 +1843,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 38600
+        price: 38600,
+        seats: 2
     },
     {
         display: 'Vortex',
@@ -1647,7 +1852,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 41000
+        price: 41000,
+        seats: 2
     },
     {
         display: 'Wolfsbane',
@@ -1655,7 +1861,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 43000
+        price: 43000,
+        seats: 2
     },
     {
         display: 'Zombie A',
@@ -1663,7 +1870,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 13000
+        price: 13000,
+        seats: 2
     },
     {
         display: 'Zombie B',
@@ -1671,7 +1879,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'motorcycle',
         sell: true,
-        price: 13500
+        price: 13500,
+        seats: 2
     },
     {
         display: 'Blade',
@@ -1679,7 +1888,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Buccaneer',
@@ -1687,7 +1897,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Buccaneer 2',
@@ -1695,7 +1906,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Chino',
@@ -1703,7 +1915,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Chino 2',
@@ -1711,7 +1924,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Clique',
@@ -1719,7 +1933,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Coquette 3',
@@ -1727,7 +1942,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Deviant',
@@ -1735,7 +1951,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 33000
+        price: 33000,
+        seats: 2
     },
     {
         display: 'Dominator',
@@ -1743,7 +1960,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 68000
+        price: 68000,
+        seats: 2
     },
     {
         display: 'Dominator 2',
@@ -1751,7 +1969,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dominator 3',
@@ -1759,7 +1978,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dominator 4',
@@ -1767,7 +1987,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dominator 5',
@@ -1775,7 +1996,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 4
     },
     {
         display: 'Dominator 6',
@@ -1783,7 +2005,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dukes',
@@ -1791,7 +2014,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Dukes 2',
@@ -1799,7 +2023,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Faction',
@@ -1807,7 +2032,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Faction 2',
@@ -1815,7 +2041,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Faction 3',
@@ -1823,7 +2050,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Gauntlet',
@@ -1831,7 +2059,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 60000
+        price: 60000,
+        seats: 2
     },
     {
         display: 'Gauntlet 2',
@@ -1839,7 +2068,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Gauntlet 3',
@@ -1847,7 +2077,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Gauntlet 4',
@@ -1855,7 +2086,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Hermes',
@@ -1863,7 +2095,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 15000
+        price: 15000,
+        seats: 2
     },
     {
         display: 'Hotknife',
@@ -1871,7 +2104,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Impaler',
@@ -1879,7 +2113,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Impaler 2',
@@ -1887,7 +2122,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Impaler 3',
@@ -1895,7 +2131,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Impaler 4',
@@ -1903,7 +2140,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Imperator',
@@ -1911,7 +2149,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 29000
+        price: 29000,
+        seats: 2
     },
     {
         display: 'Imperator 2',
@@ -1919,7 +2158,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Imperator 3',
@@ -1927,7 +2167,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Lurcher',
@@ -1935,7 +2176,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 38000
+        price: 38000,
+        seats: 2
     },
     {
         display: 'Moonbeam',
@@ -1943,7 +2185,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Moonbeam 2',
@@ -1951,7 +2194,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 45000
+        price: 45000,
+        seats: 2
     },
     {
         display: 'Nightshade',
@@ -1959,7 +2203,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Peyote 2',
@@ -1967,7 +2212,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 45000
+        price: 45000,
+        seats: 2
     },
     {
         display: 'Phoenix',
@@ -1975,7 +2221,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Picador',
@@ -1983,7 +2230,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 23500
+        price: 23500,
+        seats: 2
     },
     {
         display: 'Ratloader',
@@ -1991,7 +2239,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Ratloader 2',
@@ -1999,7 +2248,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Ruiner',
@@ -2007,7 +2257,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 16000
+        price: 16000,
+        seats: 2
     },
     {
         display: 'Ruiner 2',
@@ -2015,7 +2266,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Ruiner 3',
@@ -2023,7 +2275,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Sabre GT',
@@ -2031,7 +2284,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Sabre GT 2',
@@ -2039,7 +2293,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 31500
+        price: 31500,
+        seats: 2
     },
     {
         display: 'Slamvan',
@@ -2047,7 +2302,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 23500
+        price: 23500,
+        seats: 2
     },
     {
         display: 'Slamvan 2',
@@ -2055,7 +2311,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 23500
+        price: 23500,
+        seats: 2
     },
     {
         display: 'Slamvan 3',
@@ -2063,7 +2320,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Slamvan 4',
@@ -2071,7 +2329,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Slamvan 5',
@@ -2079,7 +2338,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Slamvan 6',
@@ -2087,7 +2347,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Stalion',
@@ -2095,7 +2356,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 21000
+        price: 21000,
+        seats: 2
     },
     {
         display: 'Stallion 2',
@@ -2103,7 +2365,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 4
     },
     {
         display: 'Tampa',
@@ -2111,7 +2374,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 23500
+        price: 23500,
+        seats: 2
     },
     {
         display: 'Tampa 3',
@@ -2119,7 +2383,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 4
     },
     {
         display: 'Tulip',
@@ -2127,7 +2392,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Vamos',
@@ -2135,7 +2401,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 19500
+        price: 19500,
+        seats: 2
     },
     {
         display: 'Vigero',
@@ -2143,7 +2410,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Virgo',
@@ -2151,7 +2419,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Virgo 2',
@@ -2159,7 +2428,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Virgo 3',
@@ -2167,7 +2437,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Voodoo',
@@ -2175,7 +2446,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Voodoo2',
@@ -2183,7 +2455,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 2500
+        price: 2500,
+        seats: 2
     },
     {
         display: 'Yosemite',
@@ -2191,7 +2464,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'muscle',
         sell: true,
-        price: 13500
+        price: 13500,
+        seats: 2
     },
     {
         display: 'BF Injection',
@@ -2199,7 +2473,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 15600
+        price: 15600,
+        seats: 2
     },
     {
         display: 'Bifta',
@@ -2207,7 +2482,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 13000
+        price: 13000,
+        seats: 2
     },
     {
         display: 'Blazer',
@@ -2215,7 +2491,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 14500
+        price: 14500,
+        seats: 2
     },
     {
         display: 'Blazer 2',
@@ -2223,7 +2500,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 16000
+        price: 16000,
+        seats: 2
     },
     {
         display: 'Blazer 3',
@@ -2231,7 +2509,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Blazer 4',
@@ -2239,7 +2518,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Blazer5',
@@ -2247,7 +2527,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bodhi 2',
@@ -2255,7 +2536,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 17500
+        price: 17500,
+        seats: 2
     },
     {
         display: 'Brawler',
@@ -2263,7 +2545,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 95000
+        price: 95000,
+        seats: 2
     },
     {
         display: 'Bruiser',
@@ -2271,7 +2554,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bruiser 2',
@@ -2279,7 +2563,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bruiser 3',
@@ -2287,7 +2572,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 4
     },
     {
         display: 'Caracara 2',
@@ -2295,7 +2581,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 55000
+        price: 55000,
+        seats: 2
     },
     {
         display: 'DLoader',
@@ -2303,7 +2590,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 13500
+        price: 13500,
+        seats: 2
     },
     {
         display: 'Dubsta3',
@@ -2311,7 +2599,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dune',
@@ -2319,7 +2608,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dune 2',
@@ -2327,7 +2617,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dune 3',
@@ -2335,7 +2626,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dune 4',
@@ -2343,7 +2635,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dune 5',
@@ -2351,7 +2644,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Free Crawler',
@@ -2359,7 +2653,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 122000
+        price: 122000,
+        seats: 2
     },
     {
         display: 'Hellion',
@@ -2367,7 +2662,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 125000
+        price: 125000,
+        seats: 2
     },
     {
         display: 'Kalahari',
@@ -2375,7 +2671,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Marshall',
@@ -2383,7 +2680,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mesa3',
@@ -2391,7 +2689,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 145000
+        price: 145000,
+        seats: 2
     },
     {
         display: 'Monster',
@@ -2399,7 +2698,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Monster 3',
@@ -2407,7 +2707,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Monster 4',
@@ -2415,7 +2716,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Monster 5',
@@ -2423,7 +2725,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rancher XL',
@@ -2431,7 +2734,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Rancher XL 2',
@@ -2439,7 +2743,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rebel',
@@ -2447,7 +2752,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 18000
+        price: 18000,
+        seats: 2
     },
     {
         display: 'Rebel 2',
@@ -2455,7 +2761,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Riata',
@@ -2463,7 +2770,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 28500
+        price: 28500,
+        seats: 2
     },
     {
         display: 'Sand King',
@@ -2471,7 +2779,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 44000
+        price: 44000,
+        seats: 2
     },
     {
         display: 'Sand King 2',
@@ -2479,7 +2788,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: true,
-        price: 55000
+        price: 55000,
+        seats: 2
     },
     {
         display: 'Trophy Truck',
@@ -2487,7 +2797,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trophy Truck 2',
@@ -2495,7 +2806,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'offroad',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Havok',
@@ -2503,7 +2815,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 225000
+        price: 225000,
+        seats: 2
     },
     {
         display: 'Maverick',
@@ -2511,7 +2824,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Sea Sparrow',
@@ -2519,7 +2833,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 250000
+        price: 250000,
+        seats: 2
     },
     {
         display: 'Super Volito',
@@ -2527,7 +2842,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 225000
+        price: 225000,
+        seats: 2
     },
     {
         display: 'Super Volito',
@@ -2535,7 +2851,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Swift',
@@ -2543,7 +2860,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Swift 2',
@@ -2551,7 +2869,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 750000
+        price: 750000,
+        seats: 2
     },
     {
         display: 'Volatus',
@@ -2559,7 +2878,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 900000
+        price: 900000,
+        seats: 2
     },
     {
         display: 'Alphaz1',
@@ -2567,7 +2887,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 300000
+        price: 300000,
+        seats: 2
     },
     {
         display: 'Avenger',
@@ -2575,7 +2896,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Blimp',
@@ -2583,7 +2905,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Blimp 2',
@@ -2591,7 +2914,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Blimp 3',
@@ -2599,7 +2923,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dodo',
@@ -2607,7 +2932,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 250000
+        price: 250000,
+        seats: 2
     },
     {
         display: 'Duster',
@@ -2615,7 +2941,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 175000
+        price: 175000,
+        seats: 2
     },
     {
         display: 'Luxor',
@@ -2623,7 +2950,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 800000
+        price: 800000,
+        seats: 2
     },
     {
         display: 'Luxor 2',
@@ -2631,7 +2959,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 1500000
+        price: 1500000,
+        seats: 2
     },
     {
         display: 'Mammatus',
@@ -2639,7 +2968,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 385000
+        price: 385000,
+        seats: 2
     },
     {
         display: 'Microlight',
@@ -2647,7 +2977,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 150000
+        price: 150000,
+        seats: 2
     },
     {
         display: 'Miljet',
@@ -2655,7 +2986,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 850000
+        price: 850000,
+        seats: 2
     },
     {
         display: 'Nimbus',
@@ -2663,7 +2995,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 925000
+        price: 925000,
+        seats: 2
     },
     {
         display: 'Seabreeze',
@@ -2671,7 +3004,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 225000
+        price: 225000,
+        seats: 2
     },
     {
         display: 'Shamal',
@@ -2679,7 +3013,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 900000
+        price: 900000,
+        seats: 2
     },
     {
         display: 'Velum',
@@ -2687,7 +3022,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 325000
+        price: 325000,
+        seats: 2
     },
     {
         display: 'Velum2',
@@ -2695,7 +3031,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Vestra',
@@ -2703,7 +3040,8 @@ export const VehicleData = [
         type: 'aircraft',
         class: 'aircraft',
         sell: true,
-        price: 325000
+        price: 325000,
+        seats: 2
     },
     {
         display: 'Baller',
@@ -2711,7 +3049,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 62000
+        price: 62000,
+        seats: 2
     },
     {
         display: 'Baller 2',
@@ -2719,7 +3058,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 65000
+        price: 65000,
+        seats: 2
     },
     {
         display: 'Baller 3',
@@ -2727,7 +3067,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Baller 4',
@@ -2735,7 +3076,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Baller 5',
@@ -2743,7 +3085,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Baller 6',
@@ -2751,7 +3094,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'BJXL',
@@ -2759,7 +3103,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 75000
+        price: 75000,
+        seats: 2
     },
     {
         display: 'Cavalcade',
@@ -2767,7 +3112,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 72000
+        price: 72000,
+        seats: 2
     },
     {
         display: 'Cavalcade 2',
@@ -2775,7 +3121,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 82000
+        price: 82000,
+        seats: 2
     },
     {
         display: 'Contender',
@@ -2783,7 +3130,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 65800
+        price: 65800,
+        seats: 2
     },
     {
         display: 'Dubsta',
@@ -2791,7 +3139,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 120000
+        price: 120000,
+        seats: 2
     },
     {
         display: 'Dubsta 2',
@@ -2799,7 +3148,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'FQ2',
@@ -2807,7 +3157,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 70000
+        price: 70000,
+        seats: 2
     },
     {
         display: 'Granger',
@@ -2815,7 +3166,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 63000
+        price: 63000,
+        seats: 2
     },
     {
         display: 'Gresley',
@@ -2823,7 +3175,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 61000
+        price: 61000,
+        seats: 2
     },
     {
         display: 'Habanero',
@@ -2831,7 +3184,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 72000
+        price: 72000,
+        seats: 2
     },
     {
         display: 'Huntley',
@@ -2839,7 +3193,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 88000
+        price: 88000,
+        seats: 2
     },
     {
         display: 'Landstalker',
@@ -2847,7 +3202,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 58000
+        price: 58000,
+        seats: 2
     },
     {
         display: 'Mesa',
@@ -2855,7 +3211,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 59000
+        price: 59000,
+        seats: 2
     },
     {
         display: 'Mesa 2',
@@ -2863,7 +3220,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Novak',
@@ -2871,7 +3229,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 92000
+        price: 92000,
+        seats: 2
     },
     {
         display: 'Patriot',
@@ -2879,7 +3238,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'Patriot 2',
@@ -2887,7 +3247,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Radi',
@@ -2895,7 +3256,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 78000
+        price: 78000,
+        seats: 2
     },
     {
         display: 'Rocoto',
@@ -2903,7 +3265,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 68000
+        price: 68000,
+        seats: 2
     },
     {
         display: 'Seminole',
@@ -2911,7 +3274,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 61000
+        price: 61000,
+        seats: 2
     },
     {
         display: 'Serrano',
@@ -2919,7 +3283,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 63000
+        price: 63000,
+        seats: 2
     },
     {
         display: 'Toros',
@@ -2927,7 +3292,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 85000
+        price: 85000,
+        seats: 2
     },
     {
         display: 'XLS',
@@ -2935,7 +3301,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: true,
-        price: 73000
+        price: 73000,
+        seats: 2
     },
     {
         display: 'XLS2',
@@ -2943,7 +3310,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'suv',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'ASEA',
@@ -2951,7 +3319,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 23000
+        price: 23000,
+        seats: 2
     },
     {
         display: 'Asea 2',
@@ -2959,7 +3328,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Asterope',
@@ -2967,7 +3337,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 26000
+        price: 26000,
+        seats: 2
     },
     {
         display: 'COG 55',
@@ -2975,7 +3346,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 34000
+        price: 34000,
+        seats: 2
     },
     {
         display: 'COG 552',
@@ -2983,7 +3355,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cognoscenti',
@@ -2991,7 +3364,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Cognoscenti 2',
@@ -2999,7 +3373,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Emperor',
@@ -3007,7 +3382,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 22000
+        price: 22000,
+        seats: 2
     },
     {
         display: 'Emperor 2',
@@ -3015,7 +3391,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 22550
+        price: 22550,
+        seats: 2
     },
     {
         display: 'Emperor 3',
@@ -3023,7 +3400,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Fugitive',
@@ -3031,7 +3409,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 34000
+        price: 34000,
+        seats: 2
     },
     {
         display: 'Glendale',
@@ -3039,7 +3418,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 18500
+        price: 18500,
+        seats: 2
     },
     {
         display: 'Ingot',
@@ -3047,7 +3427,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 17000
+        price: 17000,
+        seats: 2
     },
     {
         display: 'Intruder',
@@ -3055,7 +3436,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 21000
+        price: 21000,
+        seats: 2
     },
     {
         display: 'Limo2',
@@ -3063,7 +3445,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Premier',
@@ -3071,7 +3454,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 23000
+        price: 23000,
+        seats: 2
     },
     {
         display: 'Primo',
@@ -3079,7 +3463,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 15000
+        price: 15000,
+        seats: 2
     },
     {
         display: 'Primo 2',
@@ -3087,7 +3472,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 23000
+        price: 23000,
+        seats: 2
     },
     {
         display: 'Regina',
@@ -3095,7 +3481,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Romero',
@@ -3103,7 +3490,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 42000
+        price: 42000,
+        seats: 2
     },
     {
         display: 'Schafter 2',
@@ -3111,7 +3499,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 45000
+        price: 45000,
+        seats: 2
     },
     {
         display: 'Schafter 5',
@@ -3119,7 +3508,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Schafter 6',
@@ -3127,7 +3517,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Stafford',
@@ -3135,7 +3526,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 58000
+        price: 58000,
+        seats: 2
     },
     {
         display: 'Stanier',
@@ -3143,7 +3535,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 23500
+        price: 23500,
+        seats: 2
     },
     {
         display: 'Stratum',
@@ -3151,7 +3544,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 19500
+        price: 19500,
+        seats: 2
     },
     {
         display: 'Stretch',
@@ -3159,7 +3553,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 45000
+        price: 45000,
+        seats: 2
     },
     {
         display: 'Super D',
@@ -3167,7 +3562,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 65000
+        price: 65000,
+        seats: 2
     },
     {
         display: 'Surge',
@@ -3175,7 +3571,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Tail Gater',
@@ -3183,7 +3580,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 36000
+        price: 36000,
+        seats: 2
     },
     {
         display: 'Warrener',
@@ -3191,7 +3589,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 26000
+        price: 26000,
+        seats: 2
     },
     {
         display: 'Washington',
@@ -3199,7 +3598,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sedan',
         sell: true,
-        price: 25000
+        price: 25000,
+        seats: 2
     },
     {
         display: 'Airbus',
@@ -3207,7 +3607,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Brickade',
@@ -3215,7 +3616,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bus',
@@ -3223,7 +3625,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Coach',
@@ -3231,7 +3634,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'PBUS2',
@@ -3239,7 +3643,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rallytruck',
@@ -3247,7 +3652,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rentalbus',
@@ -3255,7 +3661,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Taxi',
@@ -3263,7 +3670,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tourbus',
@@ -3271,7 +3679,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trash',
@@ -3279,7 +3688,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trash 2',
@@ -3287,7 +3697,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Wastelander',
@@ -3295,7 +3706,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'service',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Alpha',
@@ -3303,7 +3715,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Banshee',
@@ -3311,7 +3724,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Bestia GTS',
@@ -3319,7 +3733,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Blista 2',
@@ -3327,7 +3742,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 375000
+        price: 375000,
+        seats: 2
     },
     {
         display: 'Blista 3',
@@ -3335,7 +3751,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Buffalo',
@@ -3343,7 +3760,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 475000
+        price: 475000,
+        seats: 2
     },
     {
         display: 'Buffalo 2',
@@ -3351,7 +3769,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 475000
+        price: 475000,
+        seats: 2
     },
     {
         display: 'Buffalo 3',
@@ -3359,7 +3778,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Carbonizzare',
@@ -3367,7 +3787,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 375000
+        price: 375000,
+        seats: 2
     },
     {
         display: 'Comet 2',
@@ -3375,7 +3796,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Comet 3',
@@ -3383,7 +3805,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Comet 4',
@@ -3391,7 +3814,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Coquette',
@@ -3399,7 +3823,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 385000
+        price: 385000,
+        seats: 2
     },
     {
         display: 'Drafter',
@@ -3407,7 +3832,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 350000
+        price: 350000,
+        seats: 2
     },
     {
         display: 'Deveste',
@@ -3415,7 +3841,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Elegy',
@@ -3423,7 +3850,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 375000
+        price: 375000,
+        seats: 2
     },
     {
         display: 'Elegy 2',
@@ -3431,7 +3859,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Feltzer 2',
@@ -3439,7 +3868,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Furore GT',
@@ -3447,7 +3877,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 375000
+        price: 375000,
+        seats: 2
     },
     {
         display: 'Fusilade',
@@ -3455,7 +3886,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 425000
+        price: 425000,
+        seats: 2
     },
     {
         display: 'Futo',
@@ -3463,7 +3895,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 350000
+        price: 350000,
+        seats: 2
     },
     {
         display: 'Hotring',
@@ -3471,7 +3904,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 550000
+        price: 550000,
+        seats: 2
     },
     {
         display: 'Issi 7',
@@ -3479,7 +3913,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 475000
+        price: 475000,
+        seats: 2
     },
     {
         display: 'Infernus 2',
@@ -3487,7 +3922,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 525000
+        price: 525000,
+        seats: 2
     },
     {
         display: 'Itali GTO',
@@ -3495,7 +3931,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 480000
+        price: 480000,
+        seats: 2
     },
     {
         display: 'Jugular',
@@ -3503,7 +3940,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 440000
+        price: 440000,
+        seats: 2
     },
     {
         display: 'Jester',
@@ -3511,7 +3949,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 435000
+        price: 435000,
+        seats: 2
     },
     {
         display: 'Jester 2',
@@ -3519,7 +3958,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Khamelion',
@@ -3527,7 +3967,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Kuruma',
@@ -3535,7 +3976,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Kuruma 2',
@@ -3543,7 +3985,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Locust',
@@ -3551,7 +3994,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 550000
+        price: 550000,
+        seats: 2
     },
     {
         display: 'Lynx',
@@ -3559,7 +4003,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Massacro',
@@ -3567,7 +4012,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Massacro 2',
@@ -3575,7 +4021,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Neo',
@@ -3583,7 +4030,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 500000
+        price: 500000,
+        seats: 2
     },
     {
         display: 'Neon',
@@ -3591,7 +4039,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 525000
+        price: 525000,
+        seats: 2
     },
     {
         display: 'NineF',
@@ -3599,7 +4048,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 535000
+        price: 535000,
+        seats: 2
     },
     {
         display: 'NineF2',
@@ -3607,7 +4057,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Omnis',
@@ -3615,7 +4066,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 435000
+        price: 435000,
+        seats: 2
     },
     {
         display: 'Paragon',
@@ -3623,7 +4075,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Paragon 2',
@@ -3631,7 +4084,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Pariah',
@@ -3639,7 +4093,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Penumbra',
@@ -3647,7 +4102,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 425000
+        price: 425000,
+        seats: 2
     },
     {
         display: 'Raiden',
@@ -3655,7 +4111,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 450000
+        price: 450000,
+        seats: 2
     },
     {
         display: 'Rapid GT',
@@ -3663,7 +4120,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Rapid GT 2',
@@ -3671,7 +4129,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Raptor',
@@ -3679,7 +4138,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 350000
+        price: 350000,
+        seats: 2
     },
     {
         display: 'Revolter',
@@ -3687,7 +4147,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 350000
+        price: 350000,
+        seats: 2
     },
     {
         display: 'Ruston',
@@ -3695,7 +4156,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Schafter 3',
@@ -3703,7 +4165,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Schafter 4',
@@ -3711,7 +4174,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Schafter 5',
@@ -3719,7 +4183,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Schafter 6',
@@ -3727,7 +4192,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Schlagen',
@@ -3735,7 +4201,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Schwarzer',
@@ -3743,7 +4210,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 400000
+        price: 400000,
+        seats: 2
     },
     {
         display: 'Sentinel 3',
@@ -3751,7 +4219,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 445000
+        price: 445000,
+        seats: 2
     },
     {
         display: 'Seven 70',
@@ -3759,7 +4228,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 525000
+        price: 525000,
+        seats: 2
     },
     {
         display: 'Specter',
@@ -3767,7 +4237,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 525000
+        price: 525000,
+        seats: 2
     },
     {
         display: 'Specter 2',
@@ -3775,7 +4246,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Streiter',
@@ -3783,7 +4255,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 550000
+        price: 550000,
+        seats: 2
     },
     {
         display: 'Sultan',
@@ -3791,7 +4264,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Surano',
@@ -3799,7 +4273,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Tampa 2',
@@ -3807,7 +4282,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Tropos',
@@ -3815,7 +4291,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 675000
+        price: 675000,
+        seats: 2
     },
     {
         display: 'Verlierer2',
@@ -3823,7 +4300,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: true,
-        price: 700000
+        price: 700000,
+        seats: 2
     },
     {
         display: 'ZR 380',
@@ -3831,7 +4309,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'ZR 3802',
@@ -3839,7 +4318,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'ZR 380 Fucking Ugly',
@@ -3847,7 +4327,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sport',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Ardent',
@@ -3855,7 +4336,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'BType',
@@ -3863,7 +4345,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 300000
+        price: 300000,
+        seats: 2
     },
     {
         display: 'BType2',
@@ -3871,7 +4354,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 300000
+        price: 300000,
+        seats: 2
     },
     {
         display: 'BType3',
@@ -3879,7 +4363,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 300000
+        price: 300000,
+        seats: 2
     },
     {
         display: 'Casco',
@@ -3887,7 +4372,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 625000
+        price: 625000,
+        seats: 2
     },
     {
         display: 'Cheetah 2',
@@ -3895,7 +4381,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Coquette 2',
@@ -3903,7 +4390,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 675000
+        price: 675000,
+        seats: 2
     },
     {
         display: 'Deluxo',
@@ -3911,7 +4399,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Dynasty',
@@ -3919,7 +4408,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 625000
+        price: 625000,
+        seats: 2
     },
     {
         display: 'Feltzer 3',
@@ -3927,7 +4417,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'GT500',
@@ -3935,7 +4426,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 635000
+        price: 635000,
+        seats: 2
     },
     {
         display: 'JB700',
@@ -3943,7 +4435,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mamba',
@@ -3951,7 +4444,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 645000
+        price: 645000,
+        seats: 2
     },
     {
         display: 'Manana',
@@ -3959,7 +4453,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Monroe',
@@ -3967,7 +4462,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Nebula',
@@ -3975,7 +4471,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 625000
+        price: 625000,
+        seats: 2
     },
     {
         display: 'Peyote',
@@ -3983,7 +4480,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Pigalle',
@@ -3991,7 +4489,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 615000
+        price: 615000,
+        seats: 2
     },
     {
         display: 'Rapid GT 3',
@@ -3999,7 +4498,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 615000
+        price: 615000,
+        seats: 2
     },
     {
         display: 'Retinue',
@@ -4007,7 +4507,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Savestra',
@@ -4015,7 +4516,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Stinger',
@@ -4023,7 +4525,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 575000
+        price: 575000,
+        seats: 2
     },
     {
         display: 'Stinger GT',
@@ -4031,7 +4534,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Stromberg',
@@ -4039,7 +4543,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 625000
+        price: 625000,
+        seats: 2
     },
     {
         display: 'Swinger',
@@ -4047,7 +4552,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 650000
+        price: 650000,
+        seats: 2
     },
     {
         display: 'Torero',
@@ -4055,7 +4561,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 700000
+        price: 700000,
+        seats: 2
     },
     {
         display: 'Tornado',
@@ -4063,7 +4570,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 23000
+        price: 23000,
+        seats: 2
     },
     {
         display: 'Turismo 2',
@@ -4071,7 +4579,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 720000
+        price: 720000,
+        seats: 2
     },
     {
         display: 'Viseris',
@@ -4079,7 +4588,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 720000
+        price: 720000,
+        seats: 2
     },
     {
         display: 'Z Type',
@@ -4087,7 +4597,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 750000
+        price: 750000,
+        seats: 2
     },
     {
         display: 'Zion 3',
@@ -4095,7 +4606,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 700000
+        price: 700000,
+        seats: 2
     },
     {
         display: 'Cheburek',
@@ -4103,7 +4615,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'sportclassic',
         sell: true,
-        price: 600000
+        price: 600000,
+        seats: 2
     },
     {
         display: 'Adder',
@@ -4111,7 +4624,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1500000
+        price: 1500000,
+        seats: 2
     },
     {
         display: 'Formula',
@@ -4119,7 +4633,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Autarch',
@@ -4127,7 +4642,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1250000
+        price: 1250000,
+        seats: 2
     },
     {
         display: 'Banshee2',
@@ -4135,7 +4651,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1250000
+        price: 1250000,
+        seats: 2
     },
     {
         display: 'Bullet',
@@ -4143,7 +4660,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1300000
+        price: 1300000,
+        seats: 2
     },
     {
         display: 'Cheetah',
@@ -4151,7 +4669,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1350000
+        price: 1350000,
+        seats: 2
     },
     {
         display: 'Cyclone',
@@ -4159,7 +4678,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 1350000
+        price: 1350000,
+        seats: 2
     },
     {
         display: 'Entity XF',
@@ -4167,7 +4687,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2000000
+        price: 2000000,
+        seats: 2
     },
     {
         display: 'Emerus',
@@ -4175,7 +4696,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'FMJ',
@@ -4183,7 +4705,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'GP1',
@@ -4191,7 +4714,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Infernus',
@@ -4199,7 +4723,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Itali GTB',
@@ -4207,7 +4732,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Itali GTB2',
@@ -4215,7 +4741,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Krieger',
@@ -4223,7 +4750,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'le7b',
@@ -4231,7 +4759,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'nero',
@@ -4239,7 +4768,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Nero 2',
@@ -4247,7 +4777,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Osiris',
@@ -4255,7 +4786,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Penetrator',
@@ -4263,7 +4795,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'PFister 811',
@@ -4271,7 +4804,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Prototipo',
@@ -4279,7 +4813,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Reaper',
@@ -4287,7 +4822,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'S80',
@@ -4295,7 +4831,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'SC1',
@@ -4303,7 +4840,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Scram Jet',
@@ -4311,7 +4849,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Sheava',
@@ -4319,7 +4858,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Sultan RS',
@@ -4327,7 +4867,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'T20',
@@ -4335,7 +4876,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Tempesta',
@@ -4343,7 +4885,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Tezeract',
@@ -4351,7 +4894,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Thrax',
@@ -4359,7 +4903,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Turismo R',
@@ -4367,7 +4912,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Tyrus',
@@ -4375,7 +4921,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Vacca',
@@ -4383,7 +4930,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Vagner',
@@ -4391,7 +4939,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Vigilante',
@@ -4399,7 +4948,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Visi One',
@@ -4407,7 +4957,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Voltic',
@@ -4415,7 +4966,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Voltic 2',
@@ -4423,7 +4975,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'XA 21',
@@ -4431,7 +4984,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Zentorno',
@@ -4439,7 +4993,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Zorrusso',
@@ -4447,7 +5002,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'super',
         sell: true,
-        price: 2500000
+        price: 2500000,
+        seats: 2
     },
     {
         display: 'Army Tanker',
@@ -4455,7 +5011,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Army Trailer',
@@ -4463,7 +5020,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bale Trailer',
@@ -4471,7 +5029,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Boat Trailer',
@@ -4479,7 +5038,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Cable Car',
@@ -4487,7 +5047,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Dock Trailer',
@@ -4495,7 +5056,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Grain Trailer',
@@ -4503,7 +5065,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Prop Trailer',
@@ -4511,7 +5074,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Rake Trailer',
@@ -4519,7 +5083,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'TR2',
@@ -4527,7 +5092,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'TR3',
@@ -4535,7 +5101,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'TR4',
@@ -4543,7 +5110,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'TRFlat',
@@ -4551,7 +5119,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'TV Trailer',
@@ -4559,7 +5128,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tanker',
@@ -4567,7 +5137,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tanker2',
@@ -4575,7 +5146,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer Logs',
@@ -4583,7 +5155,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer Small',
@@ -4591,7 +5164,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer S',
@@ -4599,7 +5173,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer S2',
@@ -4607,7 +5182,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Trailer S3',
@@ -4615,7 +5191,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'trailer',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Freight',
@@ -4623,7 +5200,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Freightcar',
@@ -4631,7 +5209,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Freightcont1',
@@ -4639,7 +5218,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Freightcont2',
@@ -4647,7 +5227,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Freightgrain',
@@ -4655,7 +5236,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tankercar',
@@ -4663,7 +5245,8 @@ export const VehicleData = [
         type: 'train',
         class: 'train',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Air Tug',
@@ -4671,7 +5254,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Caddy',
@@ -4679,7 +5263,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: true,
-        price: 24000
+        price: 24000,
+        seats: 2
     },
     {
         display: 'Caddy 2',
@@ -4687,7 +5272,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Caddy 3',
@@ -4695,7 +5281,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Docktug',
@@ -4703,7 +5290,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Forklift',
@@ -4711,7 +5299,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Mower',
@@ -4719,7 +5308,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Ripley',
@@ -4727,7 +5317,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Sadler',
@@ -4735,7 +5326,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Sadler 2',
@@ -4743,7 +5335,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Scrap',
@@ -4751,7 +5344,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tow Truck',
@@ -4759,7 +5353,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tow Truck 2',
@@ -4767,7 +5362,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tractor',
@@ -4775,7 +5371,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tractor 2',
@@ -4783,7 +5380,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Tractor3',
@@ -4791,7 +5389,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Utillitruck',
@@ -4799,7 +5398,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Utillitruck2',
@@ -4807,7 +5407,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Utillitruck3',
@@ -4815,7 +5416,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'utility',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Bison',
@@ -4823,7 +5425,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Bison 2',
@@ -4831,7 +5434,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Bison 3',
@@ -4839,7 +5443,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Bobcat XL',
@@ -4847,7 +5452,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Boxville',
@@ -4855,7 +5461,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 35000
+        price: 35000,
+        seats: 2
     },
     {
         display: 'Boxville 2',
@@ -4863,7 +5470,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Boxville 3',
@@ -4871,7 +5479,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Boxville 4',
@@ -4879,7 +5488,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Boxville 5',
@@ -4887,7 +5497,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Burrito',
@@ -4895,7 +5506,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Burrito 2',
@@ -4903,7 +5515,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Burrito3',
@@ -4911,7 +5524,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Burrito4',
@@ -4919,7 +5533,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 32000
+        price: 32000,
+        seats: 2
     },
     {
         display: 'Burrito5',
@@ -4927,7 +5542,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Camper',
@@ -4935,7 +5551,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Gang Burrito',
@@ -4943,7 +5560,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Gang Burrito 2',
@@ -4951,7 +5569,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Journey',
@@ -4959,7 +5578,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Minivan',
@@ -4967,7 +5587,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Minivan 2',
@@ -4975,7 +5596,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Paradise',
@@ -4983,7 +5605,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Pony',
@@ -4991,7 +5614,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Pony 2',
@@ -4999,7 +5623,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 5
     },
     {
         display: 'Rumpo',
@@ -5007,7 +5632,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Rumpo 2',
@@ -5015,7 +5641,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Rumpo 3',
@@ -5023,7 +5650,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Speedo',
@@ -5031,7 +5659,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Speedo 2',
@@ -5039,7 +5668,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Surfer',
@@ -5047,7 +5677,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Surfer 2',
@@ -5055,7 +5686,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     },
     {
         display: 'Taco',
@@ -5063,7 +5695,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Youga',
@@ -5071,7 +5704,8 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: true,
-        price: 28000
+        price: 28000,
+        seats: 2
     },
     {
         display: 'Youga 2',
@@ -5079,6 +5713,7 @@ export const VehicleData = [
         type: 'vehicle',
         class: 'van',
         sell: false,
-        price: 999999999
+        price: 999999999,
+        seats: 2
     }
 ];

@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_State } from '../../../shared/enums/vehicle';
+
+import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../../shared/enums/vehicle';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { sha256Random } from '../../utility/encryption';
@@ -91,7 +92,8 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
     vehicle.player_id = player.id;
     vehicle.behavior = tmpBehavior;
     vehicle.numberPlateText = 'TEMP';
-    vehicle.setStreamSyncedMeta(Vehicle_State.OWNER, vehicle.player_id);
+    vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+    vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
     return vehicle;
 }
 
@@ -133,6 +135,7 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
     vehicle.fuel = data.fuel;
     vehicle.player_id = player.id;
     vehicle.behavior = ownershipBehavior;
+    vehicle.passengers = [];
 
     let color;
 
@@ -150,9 +153,11 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
 
     // Process mods, plates, etc.
     vehicle.numberPlateText = vehicle.data.uid.substring(0, 8);
+    vehicle.manualEngineControl = true;
+    vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
 
     // Synchronize Ownership
-    vehicle.setStreamSyncedMeta(Vehicle_State.OWNER, vehicle.player_id);
+    vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
     alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
     return vehicle;
 }

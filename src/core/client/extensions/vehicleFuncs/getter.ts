@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
+import { Vehicle_Door_List } from '../../../shared/enums/vehicle';
 import { getClosestVectorByPos } from '../../../shared/utility/vector';
 import { DoorData } from '../Vehicle';
 
@@ -52,14 +52,6 @@ function doorOpen(v: alt.Vehicle, door: Vehicle_Door_List): boolean {
     return v.doorStates[door];
 }
 
-function canExit(v: alt.Vehicle) {
-    if (v.lockStatus === Vehicle_Lock_State.UNLOCKED || v.lockStatus === Vehicle_Lock_State.NO_LOCK) {
-        return true;
-    }
-
-    return false;
-}
-
 /**
  * Check if this person is the vehicle owner.
  * @memberof Vehicle
@@ -71,6 +63,5 @@ function owner(v: alt.Vehicle): boolean {
 export default {
     closestDoor,
     doorOpen,
-    owner,
-    canExit
+    owner
 };

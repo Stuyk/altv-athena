@@ -49,6 +49,8 @@ export class KeybindController {
             return;
         }
 
+        alt.log(key);
+
         // Athena Menus
         if (alt.Player.local.isMenuOpen) {
             return;

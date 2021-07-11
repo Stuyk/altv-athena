@@ -1,14 +1,6 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_Lock_State } from '../../../shared/enums/vehicle';
+import { Vehicle_Behavior } from '../../../shared/enums/vehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
-
-function lockState(v: alt.Vehicle): Vehicle_Lock_State {
-    if (v.athenaLockState === null || v.athenaLockState === undefined) {
-        return Vehicle_Lock_State.LOCKED;
-    }
-
-    return v.athenaLockState;
-}
 
 function hasFuel(v: alt.Vehicle): boolean {
     if (isFlagEnabled(v.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
@@ -35,4 +27,4 @@ function isOwner(v: alt.Vehicle, target: alt.Player): boolean {
     return true;
 }
 
-export default { isOwner, lockState, hasFuel };
+export default { isOwner, hasFuel };

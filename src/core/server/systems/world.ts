@@ -67,7 +67,7 @@ export class World {
     static getGridSpace(player: alt.Player): number {
         const gridSpace = World.minMaxGroups.findIndex(
             (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY
-        );
+        );                       
 
         return gridSpace === -1 ? 0 : gridSpace;
     }

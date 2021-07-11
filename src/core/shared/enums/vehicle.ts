@@ -5,15 +5,13 @@
  * @export
  * @enum {number}
  */
-export enum Vehicle_Lock_State {
-    NO_LOCK = 0,
-    UNLOCKED = 1,
-    LOCKED = 2,
-    LOCKOUT_PLAYER = 3,
-    KIDNAP_MODE = 4
-}
-
-export const Vehicle_Lock_States: Array<Vehicle_Lock_State> = [Vehicle_Lock_State.UNLOCKED, Vehicle_Lock_State.LOCKED];
+export const VEHICLE_LOCK_STATE = {
+    NO_LOCK: 0,
+    UNLOCKED: 1,
+    LOCKED: 2,
+    LOCKOUT_PLAYER: 3,
+    KIDNAP_MODE: 4
+};
 
 export enum Vehicle_Seat_List {
     DRIVER = -1,
@@ -40,7 +38,9 @@ export enum Vehicle_Behavior {
     NO_SAVE = 32
 }
 
-export const Vehicle_Events = {
+export const VEHICLE_EVENTS = {
+    ACTION: 'Vehicle-Action',
+    INVOKE: 'Vehicle-Invoke',
     SET_INTO: 'Vehicle-Set-Into',
     SET_LOCK: 'Vehicle-Set-Lock',
     SET_DOOR: 'Vehicle-Set-Door',
@@ -48,34 +48,19 @@ export const Vehicle_Events = {
     SET_SEATBELT: 'Vehicle-Seatbelt'
 };
 
-export const Vehicle_State = {
+export const VEHICLE_DOOR_STATE = {
     DOOR_DRIVER: `Door-${Vehicle_Door_List.DRIVER}`,
     DOOR_PASSENGER: `Door-${Vehicle_Door_List.PASSENGER}`,
     DOOR_DRIVER_REAR: `Door-${Vehicle_Door_List.DRIVER_REAR}`,
     DOOR_PASSENGER_REAR: `Door-${Vehicle_Door_List.PASSENGER_REAR}`,
     DOOR_HOOD: `Door-${Vehicle_Door_List.HOOD}`,
-    DOOR_TRUNK: `Door-${Vehicle_Door_List.TRUNK}`,
-    LOCK_STATE: `Door-Locks`,
+    DOOR_TRUNK: `Door-${Vehicle_Door_List.TRUNK}`
+};
+
+export const VEHICLE_STATE = {
+    LOCK: `Vehicle-Lock`,
     KEYS: `Vehicle-Keys`,
     OWNER: 'Vehicle-Owner',
     ENGINE: 'Vehicle-Engine',
     FUEL: 'Vehicle-Fuel'
 };
-
-/**
- * Determine if the Vehicle_Lock_State type is a locking type.
- * @export
- * @param {Vehicle_Lock_State} state
- * @return {*}  {boolean}
- */
-export function inLockedState(state: Vehicle_Lock_State): boolean {
-    if (state === null || state === undefined) {
-        return true;
-    }
-
-    if (state === Vehicle_Lock_State.LOCKED || state === Vehicle_Lock_State.LOCKOUT_PLAYER) {
-        return true;
-    }
-
-    return false;
-}

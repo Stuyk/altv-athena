@@ -40,6 +40,8 @@ export default {
     [LOCALE_KEYS.COMMAND_SET_WATER]: `_%_ [0-100] - Set your thirst level`,
     [LOCALE_KEYS.COMMAND_SPAWN_VEHICLE]: `_%_ [index] - Spawn personal vehicle by index`,
     [LOCALE_KEYS.COMMAND_TELEPORTER]: `_%_ - Teleport back to current location with an item`,
+    [LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK]: `_%_ - Toggle the vehicle lock`,
+    [LOCALE_KEYS.COMMAND_TOGGLE_ENGINE]: `_%_ - Toggle the vehicle engine`,
     [LOCALE_KEYS.COMMAND_UPDATE_WEATHER]: `_%_ - Forces synchronization of weather`,
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
     [LOCALE_KEYS.COMMAND_WHISPER]: `_%_ [player_id][message] - Privately whisper to a nearby player`,

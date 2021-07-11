@@ -92,18 +92,18 @@ export class InteractionController {
             NEXT_MENU_UPDATE = Date.now() + 1000;
             dynamicActionMenu = {};
 
-            const closestVehicle = VehicleController.getClosestVehicle();
-            if (closestVehicle) {
-                const dist = distance2d(alt.Player.local.pos, closestVehicle.pos);
-                if (dist <= MAX_INTERACTION_DIST) {
-                    hasVehicle = true;
+            // const closestVehicle = VehicleController.getClosestVehicle();
+            // if (closestVehicle) {
+            //     const dist = distance2d(alt.Player.local.pos, closestVehicle.pos);
+            //     if (dist <= MAX_INTERACTION_DIST) {
+            //         hasVehicle = true;
 
-                    const vehicleMenus = VehicleController.getVehicleOptions();
-                    if (Object.keys(vehicleMenus).length >= 1) {
-                        dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
-                    }
-                }
-            }
+            //         const vehicleMenus = VehicleController.getVehicleOptions();
+            //         if (Object.keys(vehicleMenus).length >= 1) {
+            //             dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
+            //         }
+            //     }
+            // }
         }
 
         // Populates Interaction Menu

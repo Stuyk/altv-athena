@@ -8,6 +8,11 @@ export function loadTexture(dictionary: string) {
     return new Promise((resolve: Function) => {
         let attempts = 0;
 
+        if (native.hasStreamedTextureDictLoaded(dictionary)) {
+            resolve();
+            return;
+        }
+
         const interval = alt.setInterval(() => {
             native.requestStreamedTextureDict(dictionary, false);
             if (attempts > MAX_ATTEMPTS) {

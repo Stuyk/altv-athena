@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior, Vehicle_State } from '../../shared/enums/vehicle';
+import { Vehicle_Behavior, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
@@ -176,7 +176,7 @@ function handleFinishFuel(player: alt.Player, fuelStatus: FuelStatus) {
 
     vehicleFuncs.setter.updateFuel(fuelStatus.vehicle);
     fuelStatus.vehicle.fuel = fuelStatus.vehicle.data.fuel;
-    fuelStatus.vehicle.setStreamSyncedMeta(Vehicle_State.FUEL, fuelStatus.vehicle.data.fuel);
+    fuelStatus.vehicle.setStreamSyncedMeta(VEHICLE_STATE.FUEL, fuelStatus.vehicle.data.fuel);
 
     const owner = alt.Player.all.find((p) => p.valid && p.id === fuelStatus.vehicle.player_id);
     if (owner) {

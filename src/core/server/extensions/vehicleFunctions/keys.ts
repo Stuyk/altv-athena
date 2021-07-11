@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Vehicle_State } from '../../../shared/enums/vehicle';
+import { VEHICLE_STATE } from '../../../shared/enums/vehicle';
 
 function give(v: alt.Vehicle, target: alt.Player): boolean {
     if (!v.keys) {
@@ -11,7 +11,7 @@ function give(v: alt.Vehicle, target: alt.Player): boolean {
         return true;
     }
 
-    v.setStreamSyncedMeta(Vehicle_State.KEYS, v.keys);
+    v.setStreamSyncedMeta(VEHICLE_STATE.KEYS, v.keys);
     this.keys.push(target.data._id.toString());
     return true;
 }
@@ -39,7 +39,7 @@ function remove(v: alt.Vehicle, target: alt.Player): boolean {
         return true;
     }
 
-    v.setStreamSyncedMeta(Vehicle_State.KEYS, v.keys);
+    v.setStreamSyncedMeta(VEHICLE_STATE.KEYS, v.keys);
     v.keys.splice(index, 1);
     return true;
 }

@@ -6,9 +6,9 @@ import setter from './vehicleFuncs/setter';
 import play from './vehicleFuncs/play';
 import sync from './vehicleFuncs/sync';
 import toggle from './vehicleFuncs/toggle';
-import { Vehicle_Lock_State } from '../../shared/enums/vehicle';
 
 alt.on('gameEntityCreate', handleEntityCreation);
+alt.on('streamSyncedMetaChange', handleSyncedMetaChange);
 
 export interface DoorData {
     pos: Vector3;
@@ -20,10 +20,18 @@ declare module 'alt-client' {
     export interface Vehicle {
         doorStates: { [doorNumber: number]: boolean };
         owner: number;
-        engineStatus: boolean;
-        lockStatus: number | Vehicle_Lock_State;
         fuel: number;
     }
+}
+
+function handleSyncedMetaChange(entity: alt.Entity, key: string, value: any, oldValue: any): void {
+    if (!(entity instanceof alt.Vehicle)) {
+        return;
+    }
+
+    alt.setTimeout(() => {
+        sync.update(entity);
+    }, 250);
 }
 
 function handleEntityCreation(entity: alt.Entity): void {
