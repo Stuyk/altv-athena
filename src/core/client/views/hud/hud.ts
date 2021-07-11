@@ -8,7 +8,6 @@ import { handleFrontendSound } from '../../systems/sound';
 import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';
 import { handleFreezePlayer } from '../../utility/freeze';
 import { ActionsController } from './controllers/actionsController';
-import { PhoneController } from './controllers/phoneController';
 
 import './controllers/actionsController';
 import './controllers/audioController';
@@ -55,9 +54,7 @@ export class BaseHUD {
             BaseHUD.view.on('actions:Close', ActionsController.closed);
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
             BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
-            BaseHUD.view.on('phone:Event', PhoneController.routeFromPhone);
             BaseHUD.view.on('play:Sound', handleFrontendSound);
-            PhoneController.initializeApps();
 
             alt.setTimeout(() => {
                 if (native.isScreenFadedOut()) {
@@ -152,14 +149,6 @@ export class BaseHUD {
         if (key === 'water') {
             BaseHUD.view.emit(HudEventNames.Water, value);
         }
-    }
-
-    static pauseStreamPlayer() {
-        BaseHUD.view.emit('hud:PauseStream');
-    }
-
-    static adjustStreamPlayer(identifier: string, volume: number, startTime: number) {
-        BaseHUD.view.emit('hud:AudioStream', identifier, volume, startTime);
     }
 
     static setHudVisibility(value: boolean) {

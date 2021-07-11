@@ -13,17 +13,12 @@ export default {
     [LOCALE_KEYS.COMMAND_ACTION_MENU]: `_%_ - Create a test action menu`,
     [LOCALE_KEYS.COMMAND_ADD_VEHICLE]: `_%_ [model] - Add a vehicle to your player`,
     [LOCALE_KEYS.COMMAND_ADD_WHITELIST]: `_%_ [discord] - Whitelist a player by Discord ID`,
-    [LOCALE_KEYS.COMMAND_AUDIOSTREAM]: `_%_ [youtube] - Create a Test Audio Stream`,
     [LOCALE_KEYS.COMMAND_OOC]: `_%_ [message] - Speak out of character`,
     [LOCALE_KEYS.COMMAND_BROADCAST]: `_%_ [message] - Announce message server wide`,
     [LOCALE_KEYS.COMMAND_COORDS]: `_%_ [x] [y] [z] - Teleport to some coordinates`,
     [LOCALE_KEYS.COMMAND_DO]: `_%_ [message] - Describe an object, sound, etc.`,
     [LOCALE_KEYS.COMMAND_DUMMY_ITEM]: `_%_ - Get some debug items`,
     [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] - Get an item by name`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_CREATE]: `_%_ [name] - Initialize creation of an interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_INSIDE]: `_%_ - Set inside pos for initialized interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_OUTSIDE]: `_%_ - Set outside pos for initialized interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_DONE]: `_%_ - Finish interior creation.`,
     [LOCALE_KEYS.COMMAND_LOW]: `_%_ [message] - Speak quietly`,
     [LOCALE_KEYS.COMMAND_MOD_CHAT]: `_%_ [message] - Speak to Admins & Mods`,
     [LOCALE_KEYS.COMMAND_ME]: `_%_ [message] - Describe a roleplay action`,
@@ -117,6 +112,8 @@ export default {
     [LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE]: `Toggle Engine`,
     [LOCALE_KEYS.VEHICLE_IS_LOCKED]: `Closest vehicle is locked.`,
     [LOCALE_KEYS.VEHICLE_ENTER_VEHICLE]: `Get Into / Exit Vehicle`,
+    // World
+    [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================
     // WebView Locales Start Here
     // ============================

@@ -9,8 +9,6 @@ description: All of the current hotkeys available.
 -   Left Alt - Toggle Interaction Mode
 -   E - Open Action Menu
 -   I - Inventory
--   O - Personal Vehicles
--   . or > - Phone
 
 ## Vehicle
 

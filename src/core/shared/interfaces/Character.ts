@@ -4,6 +4,7 @@ import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 import { Item } from './Item';
 import { Vehicle } from './Vehicle';
+import { CharacterPermissions } from '../flags/permissions';
 
 export interface Character {
     _id?: any;
@@ -19,6 +20,7 @@ export interface Character {
     isDead: boolean;
     hours: number;
     interior: string | null;
+    characterPermission?: CharacterPermissions | null;
     exterior: Partial<Vector3>;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;

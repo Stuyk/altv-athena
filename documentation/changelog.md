@@ -22,8 +22,17 @@ description: List of all the changes and current versions.
 + Replaced SimplyMongo with EzMongoDB
 + Rebuilt Vehicle Handler
 + Simplify Interaction(s) through Server-Side Routing Only
-+ Changed Vehicle Controls to 'F' Only
-+ Vehicle controls will always find first available seat.
++ Interactions now use Callback Functions
++ Changed Entering Vehicle to 'F' Only
++ Entering Vehicle Always Finds First Seat
++ Removed Bad Phone
++ Removed All Phone Integrations
++ Removed Broken Audio Stream System
++ Removed Broken Interior System
++ Added Character Permission System
++ Character Permissions are Linked to Individual Characters
++ Character Permissions work with Commands
++ New Command Type: CharacterCommand
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

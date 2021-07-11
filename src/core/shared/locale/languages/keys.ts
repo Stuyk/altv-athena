@@ -5,17 +5,12 @@ export const LOCALE_KEYS = {
     COMMAND_ACTION_MENU: `command-action-menu`,
     COMMAND_ADD_VEHICLE: `command-add-vehicle`,
     COMMAND_ADD_WHITELIST: `command-add-whitelist`,
-    COMMAND_AUDIOSTREAM: `command-audiostream`,
     COMMAND_OOC: `command-ooc`,
     COMMAND_BROADCAST: `command-broadcast`,
     COMMAND_COORDS: `command-coords`,
     COMMAND_DO: `command-do`,
     COMMAND_DUMMY_ITEM: `command-dummy-items`,
     COMMAND_GET_ITEM: `command-get-item`,
-    COMMAND_INTERIOR_CREATE: `command-interior-create`,
-    COMMAND_INTERIOR_INSIDE: `command-interior-inside`,
-    COMMAND_INTERIOR_OUTSIDE: `command-interior-outside`,
-    COMMAND_INTERIOR_DONE: `command-interior-done`,
     COMMAND_LOW: `command-low`,
     COMMAND_MOD_CHAT: `command-mod-chat`,
     COMMAND_ME: `command-me`,
@@ -109,6 +104,8 @@ export const LOCALE_KEYS = {
     VEHICLE_IS_LOCKED: `vehicle-is-locked`,
     VEHICLE_ENTER_VEHICLE: 'vehicle-enter-vehicle',
     VEHICLE_TOGGLE_ENGINE: 'vehicle-toggle-engine',
+    // World
+    WORLD_TIME_IS: `world-time-is`,
     // =====================
     // WebView Locales
     // =====================

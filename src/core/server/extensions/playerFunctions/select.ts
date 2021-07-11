@@ -5,7 +5,6 @@ import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
-import { InteractionController } from '../../systems/interaction';
 import { MarkerController } from '../../systems/marker';
 import emit from './emit';
 import safe from './safe';
@@ -13,6 +12,9 @@ import setter from './setter';
 import sync from './sync';
 import { TextLabelController } from '../../systems/textlabel';
 import save from './save';
+import { LocaleController } from '../../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { World } from '../../systems/world';
 
 /**
  * Select a character based on the character data provided.
@@ -20,21 +22,21 @@ import save from './save';
  * @return {*}  {Promise<void>}
  * @memberof SelectPrototype
  */
-async function selectCharacter(p: alt.Player, characterData: Partial<Character>): Promise<void> {
-    p.data = { ...characterData };
-    sync.appearance(p);
-    alt.emitClient(p, SYSTEM_EVENTS.TICKS_START);
+async function selectCharacter(player: alt.Player, characterData: Partial<Character>): Promise<void> {
+    player.data = { ...characterData };
+    sync.appearance(player);
+    alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.
-    p.dimension = 0;
-    setter.frozen(p, true);
+    player.dimension = 0;
+    setter.frozen(player, true);
 
     alt.setTimeout(() => {
-        if (p.data.pos) {
-            safe.setPosition(p, p.data.pos.x, p.data.pos.y, p.data.pos.z);
+        if (player.data.pos) {
+            safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
         } else {
             safe.setPosition(
-                p,
+                player,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
@@ -42,57 +44,60 @@ async function selectCharacter(p: alt.Player, characterData: Partial<Character>)
         }
 
         // Save immediately after using exterior login.
-        if (p.data.exterior) {
-            safe.setPosition(p, p.data.exterior.x, p.data.exterior.y, p.data.exterior.z);
-            p.data.exterior = null;
-            save.field(p, 'exterior', p.data.exterior);
+        if (player.data.exterior) {
+            safe.setPosition(player, player.data.exterior.x, player.data.exterior.y, player.data.exterior.z);
+            player.data.exterior = null;
+            save.field(player, 'exterior', player.data.exterior);
         }
 
         // Check if health exists.
-        if (p.data.health) {
-            safe.addHealth(p, p.data.health, true);
+        if (player.data.health) {
+            safe.addHealth(player, player.data.health, true);
         } else {
-            safe.addHealth(p, 200, true);
+            safe.addHealth(player, 200, true);
         }
 
         // Check if armour exists.
-        if (p.data.armour) {
-            safe.addArmour(p, p.data.armour, true);
+        if (player.data.armour) {
+            safe.addArmour(player, player.data.armour, true);
         } else {
-            safe.addArmour(p, 0, true);
+            safe.addArmour(player, 0, true);
         }
 
         // Resets their death status and logs them in as dead.
-        if (p.data.isDead) {
-            p.nextDeathSpawn = Date.now() + 30000;
-            p.data.isDead = false;
-            safe.addHealth(p, 0, true);
-            emit.meta(p, 'isDead', true);
+        if (player.data.isDead) {
+            player.nextDeathSpawn = Date.now() + 30000;
+            player.data.isDead = false;
+            safe.addHealth(player, 0, true);
+            emit.meta(player, 'isDead', true);
         } else {
-            p.data.isDead = false;
-            emit.meta(p, 'isDead', false);
+            player.data.isDead = false;
+            emit.meta(player, 'isDead', false);
         }
 
         // Synchronization
-        sync.currencyData(p);
-        sync.weather(p);
-        sync.time(p);
-        sync.inventory(p);
-        sync.water(p);
-        sync.food(p);
-        sync.vehicles(p);
+        sync.currencyData(player);
+        sync.weather(player);
+        sync.time(player);
+        sync.inventory(player);
+        sync.water(player);
+        sync.food(player);
+        sync.vehicles(player);
+
+        // Information
+        emit.message(player, `${LocaleController.get(LOCALE_KEYS.WORLD_TIME_IS, World.hour, World.minute)}`);
 
         // Propagation
-        ChatController.populateCommands(p);
-        BlipController.populateGlobalBlips(p);
-        MarkerController.populateGlobalMarkers(p);
-        TextLabelController.populateGlobalLabels(p);
-        alt.emit(SYSTEM_EVENTS.VOICE_ADD, p);
-        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, p);
+        ChatController.populateCommands(player);
+        BlipController.populateGlobalBlips(player);
+        MarkerController.populateGlobalMarkers(player);
+        TextLabelController.populateGlobalLabels(player);
+        alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
+        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 
     // Delete unused data from the Player.
-    delete p.currentCharacters;
+    delete player.currentCharacters;
 }
 
 export default {

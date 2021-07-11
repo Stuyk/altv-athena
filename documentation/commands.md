@@ -6,7 +6,7 @@ description: Built-in commands for general usage.
 
 ## Commands
 
-Commands that are built-in to the current Framework. They also have permissions and are restricted to certain users.
+Commands that are built-in to the current Framework. They also have permissions and are restricted to certain admin groups.
 
 ```text
 /ac [message] - Speak to other admins
@@ -14,7 +14,6 @@ Commands that are built-in to the current Framework. They also have permissions 
 /actionmenu - Create a test action menu
 /addvehicle [model] - Add a vehicle to your player
 /addwhitelist [discord] - Whitelist a player by Discord ID
-/audiostream [youtube] - Create a Test Audio Stream
 /b [message] - Speak out of character
 /broadcast [message] - Announce message server wide
 /do [message] - Describe an object, sound, etc.

@@ -256,15 +256,6 @@ const objectives: Array<Objective> = [
     }
 ];
 
-alt.on('siren:Heist:Start', () => {
-    // Audio Stream is a bit buggy. Leaving off for now.
-    // playerFuncs.emit.audioStream({
-    //     streamName: 'ofj55zWGuD8',
-    //     duration: 60000,
-    //     position: { x: -622.1144409179688, y: -231.02552795410156, z: 38.05705642700195 }
-    // });
-});
-
 alt.on('started:Heist', (player: alt.Player, pos: alt.Vector3) => {
     playerFuncs.emit.notification(player, `You have started the heist.`);
 });

@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
+import { Permissions, CharacterPermissions } from '../../shared/flags/permissions';
 import { Command } from '../../shared/interfaces/Command';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
@@ -54,6 +54,48 @@ export default class ChatController {
             description,
             func: callback,
             permission: permissions
+        };
+    }
+
+    /**
+     * A command that requires character permission to run it.
+     * @static
+     * @param {string} name
+     * @param {string} description
+     * @param {CharacterPermissions} characterPermissions
+     * @param {Function} callback
+     * @memberof ChatController
+     */
+    static addCharacterCommand(
+        name: string,
+        description: string,
+        characterPermissions: CharacterPermissions,
+        callback: Function
+    ): void {
+        if (commandInterval) {
+            alt.clearTimeout(commandInterval);
+        }
+
+        commandInterval = alt.setTimeout(() => {
+            Logger.info(`Total Commands: ${commandCount}`);
+        }, 1500);
+
+        if (ChatController.commands[name]) {
+            alt.logError(`[Athena] Command: ${name} was already registered.`);
+            return;
+        }
+
+        commandCount += 1;
+
+        if (printCommands) {
+            alt.log(`[Athena] Registered Command ${name}`);
+        }
+
+        ChatController.commands[name] = {
+            name,
+            description,
+            func: callback,
+            characterPermissions
         };
     }
 
@@ -140,9 +182,28 @@ export default class ChatController {
             return;
         }
 
-        if (commandInfo.permission !== 0) {
-            if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
-                playerFuncs.emit.message(player, `{FF0000} Command is not permitted.`);
+        if (commandInfo.permission) {
+            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
+
+            if (!isAdminPermissionValid) {
+                playerFuncs.emit.message(player, `{FF0000} Command is restricted from usage.`);
+                return;
+            }
+        }
+
+        if (commandInfo.characterPermissions) {
+            if (!player.data.characterPermission) {
+                playerFuncs.emit.message(player, `{FF0000} Command is not permitted to your character.`);
+                return;
+            }
+
+            const isCharacterPermValid = isFlagEnabled(
+                player.data.characterPermission,
+                commandInfo.characterPermissions
+            );
+
+            if (!isCharacterPermValid) {
+                playerFuncs.emit.message(player, `{FF0000} Command is not permitted to your character.`);
                 return;
             }
         }
@@ -150,24 +211,70 @@ export default class ChatController {
         commandInfo.func(player, ...args);
     }
 
+    /**
+     * Gets the description of a command based on its name.
+     * Always append '/' when using this function.
+     * Example: '/engine'
+     * @static
+     * @param {string} commandName
+     * @return {string}
+     * @memberof ChatController
+     */
     static getDescription(commandName: string): string {
         return ChatController.commands[commandName].description;
     }
 
+    /**
+     * Pushes all the commands down to the client with their descriptions.
+     * @static
+     * @param {alt.Player} player
+     * @memberof ChatController
+     */
     static populateCommands(player: alt.Player): void {
         const commandList: Array<Command> = [];
 
         Object.keys(ChatController.commands).forEach((key) => {
             const commandInfo = ChatController.commands[key];
-            if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
+
+            // Check Admin Permission Commands
+            if (commandInfo.permission) {
+                const isAdminPermissionValid = isFlagEnabled(
+                    player.accountData.permissionLevel,
+                    commandInfo.permission
+                );
+                if (!isAdminPermissionValid) {
+                    return;
+                }
+
+                commandList.push({
+                    name: commandInfo.name,
+                    description: commandInfo.description,
+                    permission: commandInfo.permission
+                });
                 return;
             }
 
-            commandList.push({
-                name: commandInfo.name,
-                description: commandInfo.description,
-                permission: commandInfo.permission
-            });
+            // Check Character Permission Commands
+            if (commandInfo.characterPermissions) {
+                if (!player.data.characterPermission) {
+                    return;
+                }
+
+                const isCharacterPermValid = isFlagEnabled(
+                    player.data.characterPermission,
+                    commandInfo.characterPermissions
+                );
+                if (!isCharacterPermValid) {
+                    return;
+                }
+
+                commandList.push({
+                    name: commandInfo.name,
+                    description: commandInfo.description,
+                    characterPermissions: commandInfo.characterPermissions
+                });
+                return;
+            }
         });
 
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);

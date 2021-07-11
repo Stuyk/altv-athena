@@ -90,6 +90,10 @@ export class LoginController {
             return;
         }
 
+        if (!player.data.name) {
+            return;
+        }
+
         if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
             vehicleFuncs.new.despawn(player.lastVehicleID);
         }

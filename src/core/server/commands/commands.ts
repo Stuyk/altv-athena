@@ -3,11 +3,9 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 import './adminChat';
-import './audioStream';
 import './currency';
 import './death';
 import './debugVehicle';
-import './interior';
 import './item';
 import './job';
 import './noclip';

@@ -50,6 +50,23 @@ export class World {
     }
 
     static updateWorldTime(): void {
+        if (DEFAULT_CONFIG.USE_SERVER_TIME) {
+            // Uses local time of where the server is located.
+            // Change the time of the server to change this.
+            const time = new Date(Date.now());
+            World.minute = time.getMinutes();
+            World.hour = time.getHours();
+
+            // Updates Weather Every 30 Minutes
+            if (World.minute !== 30 && World.minute !== 0) {
+                return;
+            }
+
+            const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
+            DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+            return;
+        }
+
         World.minute += DEFAULT_CONFIG.MINUTES_PER_MINUTE;
         if (World.minute >= 60) {
             World.minute = 0;
@@ -67,7 +84,7 @@ export class World {
     static getGridSpace(player: alt.Player): number {
         const gridSpace = World.minMaxGroups.findIndex(
             (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY
-        );                       
+        );
 
         return gridSpace === -1 ? 0 : gridSpace;
     }

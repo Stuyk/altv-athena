@@ -32,7 +32,6 @@ import './systems/tasks';
 import './systems/textlabel';
 import './systems/tick';
 import './systems/toolbar';
-import './systems/torso';
 import './systems/vehicle';
 import './systems/world';
 // Utility

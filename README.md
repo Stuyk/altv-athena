@@ -8,9 +8,13 @@ description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
 
 This project solely exists as a new standard for GTA 5 roleplay scripts on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script for GTA 5 has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
 
-You will have to do some general script writing and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
+**You will have to do some general programming** and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
 
 This is a framework and not a out-of-the-box full-featured script. This framework aims to provide the bare minimum necessary to help you get your server running at a much faster rate.
+
+## Is this for non-programmers?
+
+No, this framework is meant to get people who have fiddled with programming languages off the ground and give them features that are already completed. This makes it much easier to start a Roleplay server, but adding the additional code necessary to make a full-featured server is a bit more difficult.
 
 ## Where to Purchase?
 
@@ -143,12 +147,6 @@ We have a small demo server available for you to test the framework with Adminis
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar
--   Phone System
-    -   A built in phone.
-    -   Phone can handle custom applications.
-    -   Dealership App in Phone
-    -   Bank App in Phone
-    -   Vehicle Summoner in Phone
 -   Custom Job Framework
     -   Easy to Use Job Language / Creation
     -   Play Animations

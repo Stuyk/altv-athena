@@ -9,7 +9,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { drawTexture, loadTexture } from '../utility/texture';
-import { VehicleController } from './vehicle';
 
 const TIME_BETWEEN_CHECKS = 500;
 let tick;
