@@ -69,6 +69,9 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
+    // Garage
+    [LOCALE_KEYS.GARAGE_BLIP_NAME]: `Garage`,
+    [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
     // House
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
     // Invalid

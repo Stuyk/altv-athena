@@ -46,6 +46,9 @@ description: List of all the changes and current versions.
 + Added Initial Garage Implementation
 + Added Garage Interface
 + Added Garage Vehicle Type Filtering
++ Added Garage Parking Spot Shuffler
++ Added Markers to Garage Positions
++ Added Separate Files for Garage Parking Spots
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

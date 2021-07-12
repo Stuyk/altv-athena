@@ -13,6 +13,7 @@ import { VehicleData } from '../../shared/information/vehicles';
 import { isVehicleType } from '../../shared/flags/vehicleType';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { MarkerController } from '../systems/marker';
 
 const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
@@ -28,10 +29,11 @@ class GarageFunctions {
 
         for (let i = 0; i < garages.length; i++) {
             const garage = garages[i];
+            const properTypeName = garage.type.charAt(0).toUpperCase() + garage.type.slice(1);
 
             InteractionController.add({
                 position: garage.position,
-                description: 'Browse Player Owned Vehicles',
+                description: LocaleController.get(LOCALE_KEYS.GARAGE_DESCRIPTION, properTypeName),
                 type: 'garage',
                 data: [i], // Shop Index
                 callback: GarageFunctions.open
@@ -43,7 +45,15 @@ class GarageFunctions {
                 sprite: 50,
                 scale: 1,
                 shortRange: true,
-                text: 'Vehicle Garage'
+                text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME)
+            });
+
+            MarkerController.add({
+                pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
+                color: new alt.RGBA(0, 150, 0, 100),
+                type: 1,
+                maxDistance: 10,
+                scale: { x: 2, y: 2, z: 3 }
             });
         }
     }
@@ -107,28 +117,32 @@ class GarageFunctions {
     }
 
     static findOpenSpot(parkingSpots: Array<PositionAndRotation>): PositionAndRotation {
-        for (let i = 0; i < parkingSpots.length; i++) {
-            const hash = sha256(JSON.stringify(parkingSpots[i]));
+        const spots = [...parkingSpots].sort(function () {
+            return 0.5 - Math.random();
+        });
+
+        for (let i = 0; i < spots.length; i++) {
+            const hash = sha256(JSON.stringify(spots[i]));
 
             // Parking spot is unused.
             if (!LastParkedCarSpawn[hash]) {
-                return parkingSpots[i];
+                return spots[i];
             }
 
             // Vehicle is no longer valid.
             if (LastParkedCarSpawn[hash] && !LastParkedCarSpawn[hash].valid) {
-                return parkingSpots[i];
+                return spots[i];
             }
 
             const vehicle = LastParkedCarSpawn[hash];
-            const dist = distance2d(vehicle.pos, parkingSpots[i].position);
+            const dist = distance2d(vehicle.pos, spots[i].position);
 
             // Parking Spot Open! Assumed...
             if (dist >= 5) {
                 continue;
             }
 
-            return parkingSpots[i];
+            return spots[i];
         }
 
         return null;

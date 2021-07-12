@@ -61,6 +61,9 @@ export const LOCALE_KEYS = {
     FUEL_CANNOT_AFFORD: `fuel-cannot-afford`,
     FUEL_PAYMENT: `fuel-payment`,
     FUEL_PAID: `fuel-paid`,
+    // Garage
+    GARAGE_BLIP_NAME: `garage-name`,
+    GARAGE_DESCRIPTION: `garage-description`,
     // Interior
     INTERIOR_INTERACT: 'interior-interact',
     // Invalid
