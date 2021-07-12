@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../../shared/enums/vehicle';
+import { Vector3 } from '../../../shared/interfaces/Vector';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { sha256Random } from '../../utility/encryption';
@@ -102,7 +103,7 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
  * @param {alt.Player} player
  * @param {Vehicle} data
  */
-function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
+function spawn(player: alt.Player, data: Vehicle, position: Vector3 = null, rotation: Vector3 = null): alt.Vehicle {
     // Destroy previous vehicle
     if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
         const vehicle = alt.Vehicle.all.find((v) => v.id.toString() === player.lastVehicleID.toString());
@@ -111,6 +112,12 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
                 vehicle.destroy();
             } catch (err) {}
         }
+    }
+
+    // Override if Present
+    if (position && rotation) {
+        data.position = position;
+        data.rotation = rotation;
     }
 
     // Create the new vehicle.

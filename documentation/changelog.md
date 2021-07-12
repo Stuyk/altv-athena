@@ -43,6 +43,7 @@ description: List of all the changes and current versions.
 + Moving Images Resulted in Faster Boot Times
 + Require Port 9111 for WebServer
 + Added Missing Locales for Chat Responses
++ Added Initial Garage Implementation
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

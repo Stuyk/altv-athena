@@ -137,7 +137,7 @@ export class InteractionController {
             return;
         }
 
-        interaction.callback(player);
+        interaction.callback(player, ...interaction.data);
     }
 }
 

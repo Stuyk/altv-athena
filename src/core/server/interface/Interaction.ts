@@ -6,4 +6,5 @@ export interface Interaction {
     identifier?: string;
     type?: string;
     callback?: Function;
+    data?: Array<any>;
 }
