@@ -37,3 +37,9 @@ export enum View_Events_Chat {
     Send = 'chat:Send',
     Append = 'chat:Append'
 }
+
+export enum View_Events_Garage {
+    Open = 'garage:Open',
+    Spawn = 'garage:Spawn',
+    Despawn = 'garage:Despawn'
+}

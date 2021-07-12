@@ -43,6 +43,7 @@ import './views/atm';
 import './views/characters';
 import './views/clothing';
 import './views/creator';
+import './views/garage';
 import './views/inventory';
 import './views/job';
 import './views/login';
