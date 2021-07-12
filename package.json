@@ -8,11 +8,12 @@
         "clean": "rimraf ./resources",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
         "update": "altv-pkg d release",
-        "windows": "npm run build && npm run webserver && altv-server.exe",
-        "linux": "npm run build && npm run webserver && ./start.sh",
+        "windows": "npm run build && altv-server.exe & npm run webserver",
+        "linux": "npm run build && ./start.sh & npm run webserver",
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
-        "dev": "npm run reconnect-server | npm run webserver | nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\""
+        "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
+        "dev": "npm run reconnect-server | npm run webserver | npm run windev"
     },
     "devDependencies": {
         "@altv/types-client": "^1.6.1",

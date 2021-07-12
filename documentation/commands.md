@@ -16,8 +16,10 @@ Commands that are built-in to the current Framework. They also have permissions 
 /addwhitelist [discord] - Whitelist a player by Discord ID
 /b [message] - Speak out of character
 /broadcast [message] - Announce message server wide
+/coords [x] [y] [z] - Teleport to some coordinates
 /do [message] - Describe an object, sound, etc.
 /dummyitem - Get some debug items
+/engine - Toggle the vehicle engine
 /getitem [item-name] - Get an item by name
 /low [message] - Speak quietly
 /mc [message] - Speak to Admins & Mods
@@ -40,8 +42,9 @@ Commands that are built-in to the current Framework. They also have permissions 
 /spawnitem [item-name] - Get an item by name
 /spawnvehicle [model] - Spawn an admin vehicle
 /teleporter - Teleport back to current location with an item
-/timestamp - Toggle Timestamps for Chat
+/togdoor - [0-5] - Toggle a vehicle door
 /vehicle [model] - Spawn an admin vehicle
+/vehlock - Toggle the vehicle lock
 /w [player_id][message] - Privately whisper to a nearby player
 /weapon [name] - Get a weapon by name
 /whisper [player_id][message] - Privately whisper to a nearby player

@@ -33,7 +33,7 @@ ChatController.addCommand(
 
 ChatController.addCommand(
     'togdoor',
-    LocaleController.get('toggle a door', '/togdoor'),
+    LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR, '/togdoor'),
     Permissions.None,
     (player: alt.Player, door: string) => {
         if (!player || !player.valid) {

@@ -27,12 +27,21 @@ description: List of all the changes and current versions.
 + Entering Vehicle Always Finds First Seat
 + Removed Bad Phone
 + Removed All Phone Integrations
-+ Removed Broken Audio Stream System
 + Removed Broken Interior System
 + Added Character Permission System
 + Character Permissions are Linked to Individual Characters
 + Character Permissions work with Commands
 + New Command Type: CharacterCommand
++ Removed Broken YouTube Audio Stream(s)
++ Prune Decimals for Character Selection
++ Added Server Time for World Time
++ Added WebServer for Faster Development Times
++ Removed Interfaces from Core Resource
++ Interfaces Moved to WebView Resource
++ Images Removed from Core
++ Moved All Images, SVGs, and Audio to utility/webserver
++ Moving Images Resulted in Faster Boot Times
++ Require Port 9111 for WebServer
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021
@@ -76,9 +85,6 @@ description: List of all the changes and current versions.
 + Moved Help Text to be Object Orientated
 + Added other help text options.
 + Added Locales for Interactions.
-+ Removed Broken YouTube Audio Stream(s)
-+ Prune Decimals for Character Selection
-+ Added Server Time for World Time
 ```
 
 ## 1.8.1 - April 8-18, 2021

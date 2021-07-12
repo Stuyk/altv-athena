@@ -3,14 +3,13 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { AnimationFlags } from '../../shared/flags/animation';
-import { PedConfigFlag } from '../../shared/flags/pedflags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Task } from '../../shared/interfaces/TaskTimeline';
 import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
-import { getClosestEntity, getForwardVector } from '../utility/vector';
+import { getClosestEntity } from '../utility/vector';
 
 import '../views/dealership';
 import './fuel';
@@ -276,6 +275,13 @@ export class VehicleFunctions {
         VehicleFunctions.prunePassengers(vehicle);
     }
 
+    /**
+     * Called when a player hits the toggle engine key.
+     * @static
+     * @param {alt.Player} player
+     * @return {*}
+     * @memberof VehicleFunctions
+     */
     static toggleEngine(player: alt.Player) {
         if (!player || !player.vehicle || !player.vehicle.driver) {
             return;
