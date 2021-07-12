@@ -41,5 +41,6 @@ export enum View_Events_Chat {
 export enum View_Events_Garage {
     Open = 'garage:Open',
     Spawn = 'garage:Spawn',
-    Despawn = 'garage:Despawn'
+    Despawn = 'garage:Despawn',
+    Close = 'garage:Close'
 }

@@ -32,7 +32,7 @@
                                              <!-- Vehicle Preview -->
                                             <div class="preview-icon">
                                                 <v-icon small class="green--text mr-2">icon-camera</v-icon>
-                                                {{ vehicle.model }}
+                                                {{ vehicle.model }} (UID: {{ vehicle.uid.substring(0, 8) }})
                                             </div>
                                             <div class="preview">
                                                 <img :src="`${url}/vehicles/${vehicle.model}.png`"></img>
@@ -42,19 +42,16 @@
 
                                         <!-- Vehicle Fuel -->
                                         <div class="overline">
-                                            {{ locales.LABEL_FUEL }} {{ vehicle.fuel }}
+                                            {{ locales.LABEL_FUEL }}: {{ vehicle.fuel }}
                                         </div>
-                                    </div>
-                                    <div class="text-caption mb-4">
-                                        UID: {{ vehicle.uid.substring(0, 8) }}
                                     </div>
                                     <!-- Vehicle Controls -->
                                     <div class="split">
                                         <button @click="spawn(index)" class="green--text flex-grow-1 outline-round mr-2">
-                                            spawn
+                                            {{ locales.LABEL_SPAWN }}
                                         </button>
                                         <button @click="despawn(index)" class="orange--text flex-grow-1 outline-round ml-2">
-                                            despawn
+                                            {{ locales.LABEL_DESPAWN }}
                                         </button>
                                     </div>
                                 </div>

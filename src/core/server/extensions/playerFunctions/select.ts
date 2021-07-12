@@ -85,7 +85,9 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         sync.vehicles(player);
 
         // Information
-        emit.message(player, `${LocaleController.get(LOCALE_KEYS.WORLD_TIME_IS, World.hour, World.minute)}`);
+        const hour = `${World.hour}`.length <= 1 ? `0${World.hour}` : `${World.hour}`;
+        const minute = `${World.minute}`.length <= 1 ? `0${World.minute}` : `${World.minute}`;
+        emit.message(player, `${LocaleController.get(LOCALE_KEYS.WORLD_TIME_IS, hour, minute)}`);
 
         // Propagation
         ChatController.populateCommands(player);

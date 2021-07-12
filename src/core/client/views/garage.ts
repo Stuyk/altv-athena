@@ -49,7 +49,7 @@ class GarageView {
     }
 
     static ready() {
-        view.emit('garage:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_ATM));
+        view.emit('garage:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_GARAGE));
         view.emit('garage:SetVehicles', vehicles);
     }
 
@@ -63,3 +63,4 @@ class GarageView {
 }
 
 alt.onServer(View_Events_Garage.Open, GarageView.show);
+alt.onServer(View_Events_Garage.Close, GarageView.close);

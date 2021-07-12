@@ -109,6 +109,10 @@ export const LOCALE_KEYS = {
     VEHICLE_IS_LOCKED: `vehicle-is-locked`,
     VEHICLE_ENTER_VEHICLE: 'vehicle-enter-vehicle',
     VEHICLE_TOGGLE_ENGINE: 'vehicle-toggle-engine',
+    VEHICLE_TOO_FAR: `vehicle-too-far`,
+    VEHICLE_NO_VEHICLES_IN_GARAGE: `vehicle-none-in-garage`,
+    VEHICLE_NO_PARKING_SPOTS: `vehicle-no-parking-spots`,
+    VEHICLE_ALREADY_SPAWNED: `vehicle-already-spawned`,
     // World
     WORLD_TIME_IS: `world-time-is`,
     // =====================
@@ -120,5 +124,6 @@ export const LOCALE_KEYS = {
     WEBVIEW_JOB: 'webview-job',
     WEBVIEW_INVENTORY: 'webview-inventory',
     WEBVIEW_CLOTHING: 'webview-clothing',
-    WEBVIEW_LOGIN: 'webview-login'
+    WEBVIEW_LOGIN: 'webview-login',
+    WEBVIEW_GARAGE: 'webview-garage'
 };

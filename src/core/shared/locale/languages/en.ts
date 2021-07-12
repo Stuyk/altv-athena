@@ -117,6 +117,10 @@ export default {
     [LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE]: `Toggle Engine`,
     [LOCALE_KEYS.VEHICLE_IS_LOCKED]: `Closest vehicle is locked.`,
     [LOCALE_KEYS.VEHICLE_ENTER_VEHICLE]: `Get Into / Exit Vehicle`,
+    [LOCALE_KEYS.VEHICLE_TOO_FAR]: `Vehicle is too far away.`,
+    [LOCALE_KEYS.VEHICLE_NO_VEHICLES_IN_GARAGE]: `There are no vehicles in this garage.`,
+    [LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS]: `There are no parking spots at this garage.`,
+    [LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED]: `That vehicle is already spawned.`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================
@@ -915,5 +919,14 @@ export default {
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
         LABEL_OPEN_WINDOW: `Open Login Window Again`
+    },
+    [LOCALE_KEYS.WEBVIEW_GARAGE]: {
+        LABEL_GARAGE: 'Garage',
+        LABEL_DESC: 'Spawn your vehicles through this terminal.',
+        LABEL_MODEL: 'Model',
+        LABEL_FUEL: 'Fuel',
+        LABEL_CONTROLS: 'Controls',
+        LABEL_SPAWN: 'spawn',
+        LABEL_DESPAWN: 'despawn'
     }
 };
