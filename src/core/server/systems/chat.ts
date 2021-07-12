@@ -4,6 +4,8 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { Permissions, CharacterPermissions } from '../../shared/flags/permissions';
 import { Command } from '../../shared/interfaces/Command';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -153,7 +155,7 @@ export default class ChatController {
         }
 
         if (player.data.isDead) {
-            playerFuncs.emit.message(player, `You cannot send messages when you are dead.`);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
             return;
         }
 
@@ -178,7 +180,10 @@ export default class ChatController {
     static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
         const commandInfo = ChatController.commands[commandName];
         if (!commandInfo || !commandInfo.func) {
-            playerFuncs.emit.message(player, `/${commandName} is not a valid command.`);
+            playerFuncs.emit.message(
+                player,
+                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`
+            );
             return;
         }
 
@@ -186,14 +191,20 @@ export default class ChatController {
             const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
 
             if (!isAdminPermissionValid) {
-                playerFuncs.emit.message(player, `{FF0000} Command is restricted from usage.`);
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`
+                );
                 return;
             }
         }
 
         if (commandInfo.characterPermissions) {
             if (!player.data.characterPermission) {
-                playerFuncs.emit.message(player, `{FF0000} Command is not permitted to your character.`);
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                );
                 return;
             }
 
@@ -203,7 +214,10 @@ export default class ChatController {
             );
 
             if (!isCharacterPermValid) {
-                playerFuncs.emit.message(player, `{FF0000} Command is not permitted to your character.`);
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                );
                 return;
             }
         }

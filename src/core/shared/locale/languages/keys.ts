@@ -34,7 +34,11 @@ export const LOCALE_KEYS = {
     COMMAND_VEHICLE: `command-spawn-vehicle`,
     COMMAND_WHISPER: `command-whisper`,
     COMMAND_WEAPON: `command-weapon`,
+    COMMAND_NOT_PERMITTED_CHARACTER: `command-not-permitted-character`,
+    COMMAND_NOT_PERMITTED_ADMIN: `command-not-permitted-account`,
+    COMMAND_NOT_VALID: `command-not-valid`,
     // Cannot
+    CANNOT_CHAT_WHILE_DEAD: `cannot-chat-while-dead`,
     CANNOT_FIND_PLAYER: `cannot-find-player`,
     CANNOT_PERFORM_WHILE_DEAD: `cannot-perform-while-dead`,
     CANNOT_FIND_PERSONAL_VEHICLES: `cannot-find-personal-vehicles`,

@@ -42,6 +42,7 @@ description: List of all the changes and current versions.
 + Moved All Images, SVGs, and Audio to utility/webserver
 + Moving Images Resulted in Faster Boot Times
 + Require Port 9111 for WebServer
++ Added Missing Locales for Chat Responses
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

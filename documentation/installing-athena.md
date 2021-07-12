@@ -23,7 +23,6 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
     - [Running Production on Windows](#running-production-on-windows)
     - [Running Production on Linux](#running-production-on-linux)
     - [Running in Debug / Auto Refresh Mode](#running-in-debug--auto-refresh-mode)
-    - [Cleaning Files, Cache, etc.](#cleaning-files-cache-etc)
 - [Updating and Storing Changes](#updating-and-storing-changes)
   - [Merge Conflicts?!](#merge-conflicts)
   - [Pushing Changes to Private Repository](#pushing-changes-to-private-repository)
@@ -191,32 +190,15 @@ npm run linux
 
 ### Running in Debug / Auto Refresh Mode
 
-You need to open two terminals. I recommend doing this inside of VSCode as you'll see compilation of your project as well as keeping the server running which will automatically refresh for updates.
+You need to run one simple command. This will start your server, webserver, and an auto-reconnection client.
 
-
-**First Terminal**
-
-```
-npm run windows
-```
-
-**Second Terminal**
+Only works on Windows.
 
 ```
-npm run watch-windows
+npm run dev
 ```
 
 _Replace windows with linux if you are using linux._
-
-### Cleaning Files, Cache, etc.
-
-If you run into issues during your runtime you can always run the cleaning process which will rebuild cache for faster build times. It is only recommended to clean if you are updating.
-
-You **will not** lose any major files upon running this process.
-
-```
-npm run clean
-```
 
 # Updating and Storing Changes
 

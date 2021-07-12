@@ -42,7 +42,11 @@ export default {
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
     [LOCALE_KEYS.COMMAND_WHISPER]: `_%_ [player_id][message] - Privately whisper to a nearby player`,
     [LOCALE_KEYS.COMMAND_WEAPON]: `_%_ [name] - Get a weapon by name`,
+    [LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER]: `Command is not permitted for your character.`,
+    [LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN]: `Command is not permitted for your account.`,
+    [LOCALE_KEYS.COMMAND_NOT_VALID]: `_%_ is not a valid command.`,
     // Cannot
+    [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
     [LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD]: `Cannot perform this command while you are dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES]: `Cannot find any personal vehicles.`,
