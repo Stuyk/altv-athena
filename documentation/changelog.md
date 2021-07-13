@@ -49,6 +49,8 @@ description: List of all the changes and current versions.
 + Added Garage Parking Spot Shuffler
 + Added Markers to Garage Positions
 + Added Separate Files for Garage Parking Spots
++ Increased Max Spawned Vehicles to 3 by Default
++ Added Configuration for Max Spawned Vehicles
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

@@ -81,6 +81,7 @@ export const DEFAULT_CONFIG = {
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
     FUEL_LOSS_PER_PLAYER_TICK: 0.15, // Happens every 10s
+    MAX_VEHICLE_SPAWNS: 3, // Players can have 3 vehicles spawned at one time.
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
     VEHICLE_GARAGES: [

@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import { Vehicle_Door_List, VEHICLE_EVENTS, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
+import Logger from '../../utility/athenaLogger';
 import { playerFuncs } from '../Player';
 import setter from './setter';
 
@@ -37,8 +38,25 @@ function warpInto(v: alt.Vehicle, player: alt.Player, seat: Vehicle_Seat_List): 
     });
 }
 
+function despawnAll(id: number) {
+    const vehicles = [...alt.Vehicle.all].filter((veh) => veh && veh.valid && veh.player_id === id);
+    if (vehicles.length <= 0) {
+        return;
+    }
+
+    Logger.info(`Player ${id} logged out. Despawning ${vehicles.length} vehicles.`);
+    for (let i = 0; i < vehicles.length; i++) {
+        try {
+            vehicles[i].destroy();
+        } catch (err) {
+            continue;
+        }
+    }
+}
+
 export default {
     eject,
     repair,
-    warpInto
+    warpInto,
+    despawnAll
 };

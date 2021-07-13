@@ -54,6 +54,13 @@ declare module 'alt-server' {
         lastEnteredVehicleID: number;
         lastVehicleID: number;
 
+        /**
+         * The total number of vehicles the player has spawned.
+         * @type {number}
+         * @memberof Player
+         */
+        vehiclesSpawned: number;
+
         // Interaction
         currentInteraction: InteractionShape | null;
     }

@@ -6,6 +6,9 @@ import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
 import { sha256Random } from '../../utility/encryption';
 import { playerFuncs } from '../Player';
+import { DEFAULT_CONFIG } from '../../athena/main';
+import { LocaleController } from '../../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 
 const ownershipBehavior = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
 const tmpBehavior =
@@ -77,6 +80,7 @@ function despawn(id: number, player: alt.Player = null): boolean {
         player.lastVehicleID = null;
     }
 
+    player.vehiclesSpawned -= 1;
     return true;
 }
 
@@ -104,14 +108,18 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
  * @param {Vehicle} data
  */
 function spawn(player: alt.Player, data: Vehicle, position: Vector3 = null, rotation: Vector3 = null): alt.Vehicle {
-    // Destroy previous vehicle
-    if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
-        const vehicle = alt.Vehicle.all.find((v) => v.id.toString() === player.lastVehicleID.toString());
-        if (vehicle && vehicle.valid && vehicle.destroy) {
-            try {
-                vehicle.destroy();
-            } catch (err) {}
-        }
+    if (player.vehiclesSpawned >= DEFAULT_CONFIG.MAX_VEHICLE_SPAWNS) {
+        playerFuncs.emit.notification(
+            player,
+            LocaleController.get(LOCALE_KEYS.VEHICLE_COUNT_EXCEEDED, DEFAULT_CONFIG.MAX_VEHICLE_SPAWNS)
+        );
+        return null;
+    }
+
+    if (!player.vehiclesSpawned) {
+        player.vehiclesSpawned = 1;
+    } else {
+        player.vehiclesSpawned += 1;
     }
 
     // Override if Present

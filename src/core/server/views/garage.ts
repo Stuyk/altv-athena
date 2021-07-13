@@ -185,7 +185,14 @@ class GarageFunctions {
 
         // Create and store the vehicle on the hashed vehicle parking spot.
         const hash = sha256(JSON.stringify(openSpot));
-        LastParkedCarSpawn[hash] = vehicleFuncs.new.spawn(player, data, openSpot.position, openSpot.rotation);
+        const newVehicle = vehicleFuncs.new.spawn(player, data, openSpot.position, openSpot.rotation);
+
+        if (!newVehicle) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        LastParkedCarSpawn[hash] = newVehicle;
         playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         alt.emitClient(player, View_Events_Garage.Close);
     }

@@ -95,7 +95,7 @@ export class LoginController {
         }
 
         if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
-            vehicleFuncs.new.despawn(player.lastVehicleID);
+            vehicleFuncs.utility.despawnAll(player.id);
         }
 
         alt.log(`${player.data.name} has logged out.`);

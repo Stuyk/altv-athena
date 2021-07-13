@@ -116,6 +116,7 @@ export const LOCALE_KEYS = {
     VEHICLE_NO_VEHICLES_IN_GARAGE: `vehicle-none-in-garage`,
     VEHICLE_NO_PARKING_SPOTS: `vehicle-no-parking-spots`,
     VEHICLE_ALREADY_SPAWNED: `vehicle-already-spawned`,
+    VEHICLE_COUNT_EXCEEDED: `vehicle-count-exceeded`,
     // World
     WORLD_TIME_IS: `world-time-is`,
     // =====================
