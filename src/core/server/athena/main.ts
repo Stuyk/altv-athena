@@ -1,11 +1,23 @@
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { VEHICLE_TYPE } from '../../shared/flags/vehicleType';
+import BanhamCanyon from './parking/BanhamCanyon';
+
+// All Parking Garages
 import DelPerroBeach from './parking/DelPerroBeach';
 import DowntownVinewoodLower from './parking/DowntownVinewoodLower';
 import DowntownVinewoodUpper from './parking/DowntownVinewoodUpper';
+import GrandSenoraDesert from './parking/GrandSenoraDesert';
+import GrapeSeed from './parking/GrapeSeed';
 import LaPuertaDocks from './parking/LaPuertaDocks';
 import LaPuertaVehicle from './parking/LaPuertaVehicle';
 import LegionSquare from './parking/LegionSquare';
+import LosSantosInternational from './parking/LosSantosInternational';
+import LosSantosInternationalAir from './parking/LosSantosInternationalAir';
+import PaletoBay from './parking/PaletoBay';
+import PaletoForest from './parking/PaletoForest';
+import Rancho from './parking/Rancho';
+import RockfordHills from './parking/RockfordHills';
+import SandyShores from './parking/SandyShores';
+import TongvaHills from './parking/TongvaHills';
 
 export const DEFAULT_CONFIG = {
     // Whitelisting
@@ -90,6 +102,17 @@ export const DEFAULT_CONFIG = {
         LaPuertaDocks,
         LaPuertaVehicle,
         DelPerroBeach,
-        LegionSquare
+        LegionSquare,
+        RockfordHills,
+        LosSantosInternational,
+        LosSantosInternationalAir,
+        Rancho,
+        BanhamCanyon,
+        GrandSenoraDesert,
+        TongvaHills,
+        SandyShores,
+        GrapeSeed,
+        PaletoForest,
+        PaletoBay
     ]
 };
