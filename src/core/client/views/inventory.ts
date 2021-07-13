@@ -10,6 +10,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
+import ViewModel from '../models/ViewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { waitForFalse } from '../utility/wait';
@@ -20,10 +21,9 @@ const url = `http://assets/webview/client/inventory/index.html`;
 let view: View;
 let camera;
 let lastDroppedItems: Array<DroppedItem> = [];
-let isOpen = false;
 let drawInterval: number = null;
 
-export class InventoryController {
+export class InventoryController implements ViewModel {
     /**
      * Register the keybind to the Keybind Controller.
      * Triggers opening the inventory when pressed.
@@ -31,7 +31,7 @@ export class InventoryController {
      * @memberof InventoryController
      */
     static registerKeybinds() {
-        KeybindController.registerKeybind({ key: KEY_BINDS.INVENTORY, singlePress: InventoryController.handleView });
+        KeybindController.registerKeybind({ key: KEY_BINDS.INVENTORY, singlePress: InventoryController.open });
     }
 
     /**
@@ -41,20 +41,19 @@ export class InventoryController {
      * @return {*}
      * @memberof InventoryController
      */
-    static async handleView() {
+    static async open() {
         if (isAnyMenuOpen()) {
             return;
         }
 
         view = await View.getInstance(url, true, false, false);
-        view.on('inventory:Update', InventoryController.updateEverything);
+        view.on('inventory:Update', InventoryController.ready);
         view.on('inventory:Use', InventoryController.handleUse);
         view.on('inventory:Process', InventoryController.handleProcess);
-        view.on('inventory:Close', InventoryController.handleClose);
+        view.on('inventory:Close', InventoryController.close);
         view.on('inventory:Split', InventoryController.handleSplit);
         view.on('inventory:Pickup', InventoryController.handlePickup);
         alt.toggleGameControls(false);
-        isOpen = true;
         BaseHUD.setHudVisibility(false);
     }
 
@@ -66,7 +65,7 @@ export class InventoryController {
         alt.emitServer(View_Events_Inventory.Pickup, hash);
     }
 
-    static async updateEverything(): Promise<void> {
+    static async ready(): Promise<void> {
         if (!view) {
             return;
         }
@@ -113,8 +112,7 @@ export class InventoryController {
         alt.emitServer(View_Events_Inventory.Split, selectedSlot, tab, amount);
     }
 
-    static handleClose(): void {
-        isOpen = false;
+    static close(): void {
         native.clearFocus();
         alt.toggleGameControls(true);
         native.renderScriptCams(false, false, 255, true, false, 0);
@@ -128,6 +126,7 @@ export class InventoryController {
         }
 
         view.close();
+        view = null;
     }
 
     static processMetaChange(key: string, value: any, oldValue: any): void {
@@ -156,10 +155,6 @@ export class InventoryController {
         }
 
         if (!view) {
-            return;
-        }
-
-        if (!isOpen) {
             return;
         }
 

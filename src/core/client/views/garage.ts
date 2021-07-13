@@ -4,15 +4,15 @@ import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { View } from '../extensions/view';
+import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 
 const url = `http://assets/webview/client/garage/index.html`;
 let view: View;
-let isOpen = false;
 let vehicles: Partial<Vehicle>[];
 
-class GarageView {
+class GarageView implements ViewModel {
     /**
      * Displays the Garage WebView to the client if available.
      * @static
@@ -33,11 +33,9 @@ class GarageView {
         view.on('garage:Despawn', GarageView.despawn);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
-        isOpen = true;
     }
 
     static close() {
-        isOpen = false;
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
@@ -46,6 +44,7 @@ class GarageView {
         }
 
         view.close();
+        view = null;
     }
 
     static ready() {

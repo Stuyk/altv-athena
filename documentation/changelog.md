@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 1.8.3
+## 2.0.0
 ```diff
 + New Keybind Interface for Custom Keybinds
 + Added Register Keybind

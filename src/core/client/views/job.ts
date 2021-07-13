@@ -4,45 +4,51 @@ import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { View } from '../extensions/view';
+import ViewModel from '../models/ViewModel';
+import { isAnyMenuOpen } from '../utility/menus';
 
 const url = `http://assets/webview/client/job/index.html`;
 let trigger: JobTrigger;
 let view: View;
-let isOpen = false;
 
-alt.onServer(SYSTEM_EVENTS.INTERACTION_JOB, handleView);
+class JobView implements ViewModel {
+    static async open(_trigger: JobTrigger) {
+        if (isAnyMenuOpen()) {
+            return;
+        }
 
-async function handleView(_trigger: JobTrigger) {
-    trigger = _trigger;
-    view = await View.getInstance(url, true, false, true);
-    view.on('job:Select', handleAction);
-    view.on('job:Exit', handleClose);
-    view.on('ready', handleReady);
-    alt.toggleGameControls(false);
-    isOpen = true;
-}
-
-function handleAction() {
-    alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
-    handleClose();
-}
-
-function handleClose() {
-    isOpen = false;
-    alt.toggleGameControls(true);
-
-    if (!view) {
-        return;
+        trigger = _trigger;
+        view = await View.getInstance(url, true, false, true);
+        view.on('job:Select', JobView.select);
+        view.on('job:Exit', JobView.close);
+        view.on('ready', JobView.ready);
+        alt.toggleGameControls(false);
     }
 
-    view.close();
-}
-
-function handleReady() {
-    if (!view) {
-        return;
+    static select() {
+        alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
+        JobView.close();
     }
 
-    view.emit('job:Data', trigger);
-    view.emit('job:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
+    static close() {
+        alt.toggleGameControls(true);
+
+        if (!view) {
+            return;
+        }
+
+        view.close();
+        view = null;
+    }
+
+    static ready() {
+        if (!view) {
+            return;
+        }
+
+        view.emit('job:Data', trigger);
+        view.emit('job:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
+    }
 }
+
+alt.onServer(SYSTEM_EVENTS.INTERACTION_JOB, JobView.open);
