@@ -10,6 +10,7 @@ import { AnimationFlags } from '../../shared/flags/animation';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { distance2d } from '../../shared/utility/vector';
+import { BlipController } from '../../client/systems/blip';
 
 const startPosition = { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 };
 const objectives: Array<Objective> = [

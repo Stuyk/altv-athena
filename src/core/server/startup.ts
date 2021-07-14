@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import axios from 'axios';
 import env from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -12,10 +11,9 @@ import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
+import { ReconnectHelper } from './utility/reconnect';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
-const DEFAULT_SERVER_CFG = fs.readFileSync('server.cfg').toString();
-
 const startTime = Date.now();
 const config = env.config().parsed as IConfig;
 
@@ -99,14 +97,7 @@ class Startup {
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
         Logger.info(`Server Warmup Complete. Now accepting connections.`);
-
-        if (DEFAULT_SERVER_CFG.includes('debug: true') && PostController.isWindows()) {
-            Logger.info('Triggering Reconnection');
-            await axios.get('http://localhost:9229/reconnect').catch(() => {
-                Logger.warning(`Not Running Debug Dev Mode for Auto Reconnect`);
-                return false;
-            });
-        }
+        ReconnectHelper.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

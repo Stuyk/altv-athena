@@ -3,8 +3,6 @@ import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 
-alt.on('interaction:DoSomething', doSomeInteracting);
-
 function GenerateInteractions() {
     InteractionController.add({
         type: 'interaction:DoSomething',
