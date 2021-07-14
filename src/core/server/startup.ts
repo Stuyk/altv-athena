@@ -102,7 +102,7 @@ class Startup {
 
         if (DEFAULT_SERVER_CFG.includes('debug: true') && PostController.isWindows()) {
             Logger.info('Triggering Reconnection');
-            await axios.get('http://localhost:9229/reconnect/debug').catch(() => {
+            await axios.get('http://localhost:9229/reconnect').catch(() => {
                 Logger.warning(`Not Running Debug Dev Mode for Auto Reconnect`);
                 return false;
             });
