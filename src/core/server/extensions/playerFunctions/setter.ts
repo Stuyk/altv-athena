@@ -4,7 +4,7 @@ import { Permissions } from '../../../shared/flags/permissions';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { ATHENA_EVENTS_PLAYER } from '../../enums/athenaEvents';
 import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
 import Ares from '../../utility/ares';
@@ -93,7 +93,7 @@ async function firstConnect(p: alt.Player): Promise<void> {
     }
 
     // Used to set the custom View instance with a Web Server URL.
-    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, config.WEBSERVER_IP)
+    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, config.WEBSERVER_IP);
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 

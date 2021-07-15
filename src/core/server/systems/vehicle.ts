@@ -5,7 +5,6 @@ import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE }
 import { AnimationFlags } from '../../shared/flags/animation';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Task } from '../../shared/interfaces/TaskTimeline';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { getPlayersByGridSpace } from '../utility/filters';
@@ -14,8 +13,6 @@ import { getClosestEntity } from '../utility/vector';
 import '../views/garage';
 import '../views/dealership';
 import './fuel';
-
-const TIME_BETWEEN_ACTIONS = 500;
 
 /**
  * Vehicle Functionality Writeup for Server / Client

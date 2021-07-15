@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
 
-import { Vehicle_Door_List, VEHICLE_EVENTS, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
+import { VEHICLE_EVENTS, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athenaEvents';
 import Logger from '../../utility/athenaLogger';
 import { playerFuncs } from '../Player';
-import setter from './setter';
 
 function eject(v: alt.Vehicle, player: alt.Player): void {
     if (!player.vehicle || player.vehicle !== v) {

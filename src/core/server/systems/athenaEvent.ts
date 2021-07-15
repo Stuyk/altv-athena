@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER, ATHENA_EVENTS_VEHICLE } from '../enums/athena';
+import { ATHENA_EVENTS_PLAYER, ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
 
 const events: { [key: string]: Array<any> } = {};
 
