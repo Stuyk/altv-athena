@@ -13,6 +13,7 @@ import { getClosestEntity } from '../utility/vector';
 import '../views/garage';
 import '../views/dealership';
 import './fuel';
+import { ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -311,6 +312,11 @@ export class VehicleFunctions {
         });
 
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, player.vehicle, true);
+
+        // Custom Engine Event
+        alt.nextTick(() => {
+            alt.emit(ATHENA_EVENTS_VEHICLE.ENGINE_STATE_CHANGE, player.vehicle);
+        });
     }
 
     /**
@@ -415,6 +421,11 @@ export class VehicleFunctions {
         const playersNearPlayer = getPlayersByGridSpace(player, 8);
         playersNearPlayer.forEach((target) => {
             playerFuncs.emit.sound3D(target, soundName, vehicle);
+        });
+
+        // Custom Lock Event
+        alt.nextTick(() => {
+            alt.emit(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, player.vehicle);
         });
     }
 }
