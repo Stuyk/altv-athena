@@ -33,6 +33,7 @@ export const LOCALE_KEYS = {
     COMMAND_UPDATE_WEATHER: `command-update-weather`,
     COMMAND_VEHICLE: `command-spawn-vehicle`,
     COMMAND_WHISPER: `command-whisper`,
+    COMMAND_WANTED: `command-wanted`,
     COMMAND_WEAPON: `command-weapon`,
     COMMAND_NOT_PERMITTED_CHARACTER: `command-not-permitted-character`,
     COMMAND_NOT_PERMITTED_ADMIN: `command-not-permitted-account`,

@@ -17,6 +17,7 @@ import sync from './sync';
 import Database from '@stuyk/ezmongodb';
 import dotenv from 'dotenv';
 import { IConfig } from '../../interface/IConfig';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 
 const config: IConfig = dotenv.config().parsed as IConfig;
 
@@ -168,11 +169,23 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
     alt.emit(ATHENA_EVENTS_PLAYER.SPAWNED, p);
 }
 
+function wantedLevel(player: alt.Player, stars: number) {
+    if (stars >= 6) {
+        stars = 5;
+    }
+
+    player.wanted = stars;
+    player.data.wanted = stars;
+    playerFuncs.save.field(player, 'wanted', player.data.wanted);
+    player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
+}
+
 export default {
     account,
     actionMenu,
     dead,
     firstConnect,
     frozen,
-    respawned
+    respawned,
+    wantedLevel
 };

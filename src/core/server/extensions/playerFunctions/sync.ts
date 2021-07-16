@@ -7,53 +7,54 @@ import emit from './emit';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { playerFuncs } from '../Player';
 import save from './save';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 
 /**
  * Synchronize currency data like bank, cash, etc.
  * @memberof SyncPrototype
  */
-function currencyData(p: alt.Player): void {
+function currencyData(player: alt.Player): void {
     const keys: (keyof typeof CurrencyTypes)[] = <(keyof typeof CurrencyTypes)[]>Object.keys(CurrencyTypes);
     for (const key of keys) {
         const currencyName: string = CurrencyTypes[key];
-        emit.meta(p, currencyName, p.data[currencyName]);
+        emit.meta(player, currencyName, player.data[currencyName]);
     }
 }
 /**
  * Synchronize player appearance.
  * @memberof SyncPrototype
  */
-function appearance(p: alt.Player): void {
-    if (p.data.appearance.sex === 0) {
-        p.model = 'mp_f_freemode_01';
+function appearance(player: alt.Player): void {
+    if (player.data.appearance.sex === 0) {
+        player.model = 'mp_f_freemode_01';
     } else {
-        p.model = 'mp_m_freemode_01';
+        player.model = 'mp_m_freemode_01';
     }
 
-    p.setSyncedMeta('Name', p.data.name);
-    emit.meta(p, 'appearance', p.data.appearance);
-    alt.emitClient(p, View_Events_Creator.Sync, p.data.appearance);
+    player.setSyncedMeta('Name', player.data.name);
+    emit.meta(player, 'appearance', player.data.appearance);
+    alt.emitClient(player, View_Events_Creator.Sync, player.data.appearance);
 }
 
-function inventory(p: alt.Player): void {
-    if (!p.data.inventory) {
-        p.data.inventory = new Array(6);
-        for (let i = 0; i < p.data.inventory.length; i++) {
-            p.data.inventory[i] = [];
+function inventory(player: alt.Player): void {
+    if (!player.data.inventory) {
+        player.data.inventory = new Array(6);
+        for (let i = 0; i < player.data.inventory.length; i++) {
+            player.data.inventory[i] = [];
         }
     }
 
-    if (!p.data.toolbar) {
-        p.data.toolbar = [];
+    if (!player.data.toolbar) {
+        player.data.toolbar = [];
     }
 
-    if (!p.data.equipment) {
-        p.data.equipment = [];
+    if (!player.data.equipment) {
+        player.data.equipment = [];
     }
 
-    emit.meta(p, 'inventory', p.data.inventory);
-    emit.meta(p, 'equipment', p.data.equipment);
-    emit.meta(p, 'toolbar', p.data.toolbar);
+    emit.meta(player, 'inventory', player.data.inventory);
+    emit.meta(player, 'equipment', player.data.equipment);
+    emit.meta(player, 'toolbar', player.data.toolbar);
 }
 
 /**
@@ -61,66 +62,67 @@ function inventory(p: alt.Player): void {
  * Basically updates data that may not be fully accessible everywhere.
  * @memberof SyncPrototype
  */
-function syncedMeta(p: alt.Player): void {
-    p.setSyncedMeta('Ping', p.ping);
-    p.setSyncedMeta('Position', p.pos);
+function syncedMeta(player: alt.Player): void {
+    player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+    player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
+    player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, player.wanted);
 }
 
 /**
  * Update the player's time to match server time.
  * @memberof SyncPrototype
  */
-function time(p: alt.Player): void {
-    alt.emitClient(p, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.hour, World.minute);
+function time(player: alt.Player): void {
+    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.hour, World.minute);
 }
 
 /**
  * Update the player's weather to match server weather based on grid space.
  * @memberof SyncPrototype
  */
-function weather(p: alt.Player): void {
-    p.gridSpace = World.getGridSpace(p);
-    p.currentWeather = World.getWeatherByGrid(p.gridSpace);
-    emit.meta(p, 'gridSpace', p.gridSpace);
-    alt.emitClient(p, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, p.currentWeather);
+function weather(player: alt.Player): void {
+    player.gridSpace = World.getGridSpace(player);
+    player.currentWeather = World.getWeatherByGrid(player.gridSpace);
+    emit.meta(player, 'gridSpace', player.gridSpace);
+    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, player.currentWeather);
 }
 
-function playTime(p: alt.Player): void {
-    if (!p.data.hours) {
-        p.data.hours = 0;
+function playTime(player: alt.Player): void {
+    if (!player.data.hours) {
+        player.data.hours = 0;
     }
 
-    p.data.hours += 0.0166666666666667;
-    save.field(p, 'hours', p.data.hours);
+    player.data.hours += 0.0166666666666667;
+    save.field(player, 'hours', player.data.hours);
 }
 
-function food(p: alt.Player): void {
-    if (p.data.isDead && p.data.food <= 0) {
-        p.data.food = 100;
-        emit.meta(p, 'food', p.data.food);
+function food(player: alt.Player): void {
+    if (player.data.isDead && player.data.food <= 0) {
+        player.data.food = 100;
+        emit.meta(player, 'food', player.data.food);
         return;
     }
 
-    playerFuncs.safe.addFood(p, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
+    playerFuncs.safe.addFood(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
 }
 
-function water(p: alt.Player): void {
-    if (p.data.isDead && p.data.water <= 0) {
-        p.data.water = 100;
-        emit.meta(p, 'water', p.data.water);
+function water(player: alt.Player): void {
+    if (player.data.isDead && player.data.water <= 0) {
+        player.data.water = 100;
+        emit.meta(player, 'water', player.data.water);
         return;
     }
 
-    playerFuncs.safe.addWater(p, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
+    playerFuncs.safe.addWater(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
 }
 
-function vehicles(p: alt.Player): void {
-    if (!p.data.vehicles) {
-        emit.meta(p, 'vehicles', []);
+function vehicles(player: alt.Player): void {
+    if (!player.data.vehicles) {
+        emit.meta(player, 'vehicles', []);
         return;
     }
 
-    emit.meta(p, 'vehicles', p.data.vehicles);
+    emit.meta(player, 'vehicles', player.data.vehicles);
 }
 
 export default {

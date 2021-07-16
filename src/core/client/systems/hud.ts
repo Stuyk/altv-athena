@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -7,6 +8,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import IHud from '../interface/IHud';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
+import { drawTexture2D, loadTexture } from '../utility/texture';
 import { World } from './world';
 
 let interval;
@@ -123,7 +125,7 @@ let hudElements: Array<IHud> = [
     {
         // Objective
         position: {
-            x: 0,
+            x: 0.5,
             y: 0.9
         },
         padding: 0,
@@ -132,6 +134,40 @@ let hudElements: Array<IHud> = [
         color: new alt.RGBA(255, 255, 255, 225),
         callback: () => {
             return objective ? objective : '';
+        }
+    },
+    {
+        // Wanted Stars
+        position: {
+            x: 0.54,
+            y: 0.08
+        },
+        padding: 0,
+        align: 0,
+        scale: 0.75,
+        color: new alt.RGBA(255, 255, 255, 225),
+        callback: (pos: { x: number; y: number }, scale: number) => {
+            loadTexture('mpleaderboard').then(() => {
+                const value = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL);
+                const stars = value !== null ? value : 0;
+
+                for (let i = 0; i < 5; i++) {
+                    const newPos = {
+                        x: pos.x - 0.02 * i,
+                        y: pos.y
+                    };
+
+                    // 5 - 1 = 4
+                    if (i + 1 >= 6 - stars) {
+                        drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 255);
+                        continue;
+                    }
+
+                    drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 100);
+                }
+            });
+
+            return null;
         }
     }
 ];
@@ -191,6 +227,10 @@ export class HudSystem {
             }
 
             const value = hudElements[i].callback(element.position, element.scale);
+            if (!value) {
+                continue;
+            }
+
             drawText2D(value, element.position, element.scale, element.color, element.align, element.padding);
         }
     }

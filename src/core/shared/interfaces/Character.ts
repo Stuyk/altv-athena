@@ -20,6 +20,7 @@ export interface Character {
     isDead: boolean;
     hours: number;
     interior: string | null;
+    wanted: number;
     characterPermission?: CharacterPermissions | null;
     exterior: Partial<Vector3>;
     appearance: Partial<Appearance>;
@@ -42,5 +43,6 @@ export const CharacterDefaults: Partial<Character> = {
     health: 199,
     armour: 0,
     hours: 0,
+    wanted: 0,
     vehicles: []
 };

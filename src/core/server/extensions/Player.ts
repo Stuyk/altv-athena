@@ -43,6 +43,9 @@ declare module 'alt-server' {
         nextFoodSync: number;
         nextPlayTime: number;
 
+        // Wanted Level
+        wanted: number;
+
         // Toolbar Information
         lastToolbarData: { equipped: boolean; slot: number };
 

@@ -20,6 +20,7 @@ import './setHealth';
 import './setWater';
 import './updateweather';
 import './vehicle';
+import './wanted';
 import './weapon';
 import './whitelist';
 
