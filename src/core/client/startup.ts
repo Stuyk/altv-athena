@@ -10,6 +10,9 @@ import './events/keyup';
 import './extensions/Meta';
 import './extensions/Player';
 import './extensions/Vehicle';
+// Menus
+import './menus/animation';
+
 // Systems
 import './systems/animations';
 import './systems/blip';
@@ -40,6 +43,7 @@ import './utility/getters';
 import './utility/notification';
 import './utility/reload';
 import './utility/screenshot';
+import './utility/wheelMenu';
 // Views
 import './views/atm';
 import './views/characters';

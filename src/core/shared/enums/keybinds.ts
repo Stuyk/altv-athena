@@ -20,6 +20,8 @@ export const KEY_BINDS = {
     VEHICLE_FUNCS_ALT: 71, // Passenger
     // I
     INVENTORY: 73,
+    // J
+    ANIMATION: 74,
     // T
     CHAT: 84,
     // X

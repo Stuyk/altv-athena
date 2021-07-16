@@ -6,6 +6,7 @@ import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import IHud from '../interface/IHud';
+import { getPointsInCircle } from '../utility/math';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
 import { drawTexture2D, loadTexture } from '../utility/texture';
@@ -26,7 +27,9 @@ let hudElements: Array<IHud> = [
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: () => {
-            return alt.Player.local.meta.cash ? `Cash ~g~$${alt.Player.local.meta.cash.toFixed(2)}` : `Cash ~g~$0`;
+            const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
+            const fixedValue = parseFloat(value.toFixed(2));
+            return `Cash ~g~$${fixedValue.toLocaleString()}`;
         }
     },
     {
@@ -40,7 +43,9 @@ let hudElements: Array<IHud> = [
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: () => {
-            return alt.Player.local.meta.bank ? `Bank ~g~$${alt.Player.local.meta.bank.toFixed(2)}` : `Bank ~g~$0`;
+            const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
+            const fixedValue = parseFloat(value.toFixed(2));
+            return `Bank ~g~$${fixedValue.toLocaleString()}`;
         }
     },
     {
