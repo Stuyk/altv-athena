@@ -17,7 +17,7 @@ export const KEY_BINDS = {
     INTERACT: 69,
     // F
     VEHICLE_FUNCS: 70, // Driver
-    VEHICLE_FUNCS_ALT: 71, // Passenger
+    VEHICLE_OPTIONS: 85, // Vehicle Options
     // I
     INVENTORY: 73,
     // J

@@ -4,6 +4,7 @@ import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 import { playAnimation } from '../systems/animations';
+import { isAnyMenuOpen } from '../utility/menus';
 import { WheelMenu } from '../utility/wheelMenu';
 import commonAnims from './animationMenus/commonAnims';
 import danceAnims from './animationMenus/danceAnims';
@@ -23,6 +24,10 @@ function callback(dict: string, name: string, flags: number) {
 
 function handleAnimationMenu() {
     if (alt.Player.local.vehicle) {
+        return;
+    }
+
+    if (isAnyMenuOpen()) {
         return;
     }
 

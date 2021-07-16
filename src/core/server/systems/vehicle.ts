@@ -14,6 +14,7 @@ import '../views/garage';
 import '../views/dealership';
 import './fuel';
 import { ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -428,8 +429,37 @@ export class VehicleFunctions {
             alt.emit(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, player.vehicle);
         });
     }
+
+    static startPush(player: alt.Player): boolean {
+        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+
+        if (!vehicle || !vehicle.valid) {
+            return false;
+        }
+
+        if (vehicle.driver) {
+            return false;
+        }
+
+        vehicle.setNetOwner(player);
+        player.setSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE, vehicle);
+        return true;
+    }
+
+    static stopPush(player: alt.Player) {
+        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        vehicle.resetNetOwner();
+        player.deleteSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE);
+    }
 }
 
+alt.onClient(VEHICLE_EVENTS.PUSH, VehicleFunctions.startPush);
+alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleFunctions.stopPush);
 alt.onClient(VEHICLE_EVENTS.ACTION, VehicleFunctions.handleAction);
 alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleFunctions.toggleLock);
 alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleFunctions.toggleEngine);

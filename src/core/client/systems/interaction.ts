@@ -120,6 +120,17 @@ export class InteractionController {
         if (!alt.Player.local.vehicle && vehicle) {
             const isVehicleLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
             const vehicleDistance = distance2d(alt.Player.local.pos, vehicle.pos);
+
+            // Get Forward Vehicle Position
+            const vehicleFwd = native.getEntityForwardVector(vehicle.scriptID);
+            const backPosition = {
+                x: vehicle.pos.x - vehicleFwd.x * 2,
+                y: vehicle.pos.y - vehicleFwd.y * 2,
+                z: vehicle.pos.z
+            };
+
+            const isInBack = distance2d(alt.Player.local.pos, backPosition) <= 2;
+
             if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
                 if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
                     loadTexture('mpsafecracking');
@@ -139,6 +150,16 @@ export class InteractionController {
                     // Press 'F' to enter vehicle
                     const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
                     interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_FUNCS, enterText);
+                }
+
+                if (!isVehicleLocked && isInBack) {
+                    // Press 'U' for Options
+                    const optionsText = 'Options';
+                    interactText = InteractionController.appendText(
+                        interactText,
+                        KEY_BINDS.VEHICLE_OPTIONS,
+                        optionsText
+                    );
                 }
 
                 // Press 'X' to lock vehicle

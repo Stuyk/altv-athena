@@ -69,6 +69,8 @@ description: List of all the changes and current versions.
 + Added Dynamic Wheel Menu
 + Added Animation through Wheel Menu
 + Added New Keybind for Animations 'J'
++ Added New Keybind for Vehicle Options 'U'
++ Added Ability to Push Vehicle Synchronized
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021
