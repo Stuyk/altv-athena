@@ -7,13 +7,13 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-
-alt.onClient(View_Events_Clothing.Exit, handleExit);
-alt.onClient(View_Events_Clothing.Purchase, handlePurchase);
+import clothingStores from '../../shared/information/clothingStores';
+import { BlipController } from '../systems/blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { InteractionController } from '../systems/interaction';
 
 // Do not change order
 const icons = ['hat', 'mask', 'shirt', 'bottoms', 'shoes', 'glasses', 'ear', 'backpack', 'armour', 'watch', 'bracelet'];
-
 const wearableRef: Item = {
     name: `Item`,
     description: `An Item`,
@@ -24,49 +24,81 @@ const wearableRef: Item = {
     data: {}
 };
 
-function handleExit(player: alt.Player) {
-    playerFuncs.sync.inventory(player);
-}
+class ClothingFunctions {
+    static init() {
+        for (let i = 0; i < clothingStores.length; i++) {
+            const position = clothingStores[i];
+            const uid = `clothing-store-${i}`;
 
-function handlePurchase(
-    player: alt.Player,
-    equipmentSlot: number,
-    component: ClothingComponent,
-    name: string,
-    desc: string
-) {
-    const newItem = deepCloneObject<Item>(wearableRef);
-    newItem.name = name;
-    newItem.description = desc;
-    newItem.data = { ...component };
-    newItem.data.sex = player.data.appearance.sex;
-    newItem.slot = equipmentSlot;
-    newItem.icon = icons[equipmentSlot];
-    newItem.quantity = 1;
-    newItem.equipment = equipmentSlot;
+            BlipController.add({
+                text: 'Clothing Store',
+                color: 11,
+                sprite: 73,
+                scale: 1,
+                shortRange: true,
+                pos: position,
+                uid
+            });
 
-    let didGetAdded = false;
+            InteractionController.add({
+                position,
+                description: 'Browse Clothing Store',
+                type: 'clothing-store',
+                callback: (player: alt.Player) => {
+                    alt.emitClient(player, View_Events_Clothing.Open);
+                }
+            });
+        }
+    }
 
-    if (playerFuncs.inventory.isEquipmentSlotFree(player, equipmentSlot)) {
-        didGetAdded = playerFuncs.inventory.equipmentAdd(player, newItem, equipmentSlot);
-    } else {
-        const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
-        if (!openSlot) {
+    static exit(player: alt.Player) {
+        playerFuncs.sync.inventory(player);
+    }
+
+    static purchase(
+        player: alt.Player,
+        equipmentSlot: number,
+        component: ClothingComponent,
+        name: string,
+        desc: string
+    ) {
+        const newItem = deepCloneObject<Item>(wearableRef);
+        newItem.name = name;
+        newItem.description = desc;
+        newItem.data = { ...component };
+        newItem.data.sex = player.data.appearance.sex;
+        newItem.slot = equipmentSlot;
+        newItem.icon = icons[equipmentSlot];
+        newItem.quantity = 1;
+        newItem.equipment = equipmentSlot;
+
+        let didGetAdded = false;
+
+        if (playerFuncs.inventory.isEquipmentSlotFree(player, equipmentSlot)) {
+            didGetAdded = playerFuncs.inventory.equipmentAdd(player, newItem, equipmentSlot);
+        } else {
+            const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+            if (!openSlot) {
+                playerFuncs.emit.sound2D(player, 'item_error');
+                return;
+            }
+
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
+            didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot, openSlot.tab);
+        }
+
+        if (!didGetAdded) {
             playerFuncs.emit.sound2D(player, 'item_error');
             return;
         }
 
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
-        didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot, openSlot.tab);
+        playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        playerFuncs.save.field(player, 'equipment', player.data.equipment);
+        playerFuncs.sync.inventory(player);
+        playerFuncs.emit.sound2D(player, 'item_purchase');
     }
-
-    if (!didGetAdded) {
-        playerFuncs.emit.sound2D(player, 'item_error');
-        return;
-    }
-
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.save.field(player, 'equipment', player.data.equipment);
-    playerFuncs.sync.inventory(player);
-    playerFuncs.emit.sound2D(player, 'item_purchase');
 }
+
+alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, ClothingFunctions.init);
+alt.onClient(View_Events_Clothing.Exit, ClothingFunctions.exit);
+alt.onClient(View_Events_Clothing.Purchase, ClothingFunctions.purchase);

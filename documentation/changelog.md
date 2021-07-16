@@ -60,6 +60,10 @@ description: List of all the changes and current versions.
 + Added Time to HUD
 + Added Wanted Level(s)
 + Update Interface Names
++ Repair Broken Clothing Stores
++ Repair Broken Fuel Pumps
++ Remove Vending Machine Blips
++ Move Blip Lists Server Side
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

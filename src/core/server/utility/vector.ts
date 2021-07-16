@@ -1,17 +1,18 @@
 import * as alt from 'alt-server';
+import { Vector3 } from '../../shared/interfaces/Vector';
 import { distance2d } from '../../shared/utility/vector';
 
 /**
  * SERVER ONLY
  * Gets the direction the player is facing.
- * @param {alt.Vector3} rot
+ * @param {Vector3} rot
  */
-export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
+export function getForwardVector(rot: Vector3): Vector3 {
     return {
         x: fwdX(rot.x, rot.z),
         y: fwdY(rot.x, rot.z),
         z: fwdZ(rot.x)
-    } as alt.Vector3;
+    } as Vector3;
 }
 
 /**
@@ -20,9 +21,9 @@ export function getForwardVector(rot: alt.Vector3): alt.Vector3 {
  * @export
  * @param {alt.Player} player
  * @param {number} distance
- * @return {*}  {alt.Vector3}
+ * @return {*}  {Vector3}
  */
-export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): alt.Vector3 {
+export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): Vector3 {
     const forwardVector = getForwardVector(player.rot);
     const posFront = {
         x: player.pos.x + forwardVector.x * distance,
@@ -35,9 +36,9 @@ export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): 
 
 /**
  * Determine if a vector is between vectors.
- * @param {alt.Vector3} pos
- * @param {alt.Vector3} vector1
- * @param {alt.Vector3} vector2
+ * @param {Vector3} pos
+ * @param {Vector3} vector1
+ * @param {Vector3} vector2
  * @returns {boolean}
  */
 export function isBetweenVectors(pos, vector1, vector2): boolean {
@@ -49,24 +50,35 @@ export function isBetweenVectors(pos, vector1, vector2): boolean {
 /**
  * Get the closest server entity type. Server only.
  * @template T
- * @param {alt.Vector3} playerPosition
- * @param {alt.Vector3} rot
- * @param {Array<{ pos: alt.Vector3; valid?: boolean }>} entities
+ * @param {Vector3} playerPosition
+ * @param {Vector3} rot player rotation
+ * @param {Array<{ pos: Vector3; valid?: boolean }>} entities
  * @param {number} distance
  * @return {*}  {(T | null)}
  */
 export function getClosestEntity<T>(
-    playerPosition: alt.Vector3,
-    rot: alt.Vector3,
-    entities: Array<{ pos: alt.Vector3; valid?: boolean }>,
-    distance: number
+    playerPosition: Vector3,
+    rot: Vector3,
+    entities: Array<{ pos: Vector3; valid?: boolean }>,
+    distance: number,
+    checkBackwards: boolean = false
 ): T | null {
     const fwdVector = getForwardVector(rot);
-    const position = {
-        x: playerPosition.x + fwdVector.x * distance,
-        y: playerPosition.y + fwdVector.y * distance,
-        z: playerPosition.z
-    };
+    let position;
+
+    if (!checkBackwards) {
+        position = {
+            x: playerPosition.x + fwdVector.x * distance,
+            y: playerPosition.y + fwdVector.y * distance,
+            z: playerPosition.z
+        };
+    } else {
+        position = {
+            x: playerPosition.x - fwdVector.x * distance,
+            y: playerPosition.y - fwdVector.y * distance,
+            z: playerPosition.z
+        };
+    }
 
     let lastRange = 25;
     let closestEntity;

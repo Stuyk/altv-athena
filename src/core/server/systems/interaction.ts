@@ -1,8 +1,6 @@
 import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionShape } from '../extensions/Colshape';
@@ -137,7 +135,12 @@ export class InteractionController {
             return;
         }
 
-        interaction.callback(player, ...interaction.data);
+        if (interaction.data) {
+            interaction.callback(player, ...interaction.data);
+            return;
+        }
+
+        interaction.callback(player);
     }
 }
 
