@@ -109,6 +109,9 @@ description: List of all the changes and current versions.
 + Moved Help Text to be Object Orientated
 + Added other help text options.
 + Added Locales for Interactions.
++ Added Dynamic Wheel Menu
++ Added Animation through Wheel Menu
++ Added New Keybind for Animations 'J'
 ```
 
 ## 1.8.1 - April 8-18, 2021
