@@ -64,6 +64,8 @@ description: List of all the changes and current versions.
 + Repair Broken Fuel Pumps
 + Remove Vending Machine Blips
 + Move Blip Lists Server Side
++ Added /tpwp - Teleport to a Waypoint
++ Better Handling
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

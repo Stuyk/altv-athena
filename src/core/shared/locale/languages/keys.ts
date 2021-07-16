@@ -27,6 +27,7 @@ export const LOCALE_KEYS = {
     COMMAND_SET_WATER: `command-set-water`,
     COMMAND_SPAWN_VEHICLE: `command-spawn-vehicle`,
     COMMAND_TELEPORTER: `command-get-teleporter`,
+    COMMAND_TELEPORT_WAYPOINT: `command-teleport-waypoint`,
     COMMAND_TOGGLE_ENGINE: `command-toggle-engine`,
     COMMAND_TOGGLE_VEH_LOCK: `command-toggle-lock`,
     COMMAND_TOGGLE_VEH_DOOR: `command-toggle-door`,

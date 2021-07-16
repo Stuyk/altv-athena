@@ -6,6 +6,8 @@ export enum SYSTEM_EVENTS {
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
+    // GET
+    GET_WAYPOINT = `getter:Waypoint`,
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
     //
