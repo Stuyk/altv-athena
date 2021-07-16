@@ -1,4 +1,4 @@
-export enum EquipmentType {
+export enum EQUIPMENT_TYPE {
     HAT = 0,
     MASK = 1,
     SHIRT = 2,

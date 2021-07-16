@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 
 import { CurrencyTypes } from '../../shared/enums/currency';
-import { PhoneEvents } from '../../shared/enums/phoneEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import atms from '../../shared/information/atms';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -18,17 +17,6 @@ const ActionHandlers = {
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, init);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, handleAction);
-alt.onClient(PhoneEvents.ATM_TRANSFER.name, handlePhoneRoute);
-
-function handlePhoneRoute(player: alt.Player, type: string, amount: string | number, id: null | number) {
-    if (type === 'bank') {
-        type = 'transfer';
-    } else {
-        type = 'transferCash';
-    }
-
-    handleAction(player, type, amount, id);
-}
 
 function handleAction(player: alt.Player, type: string, amount: string | number, id: null | number): void {
     if (isNaN(amount as number)) {

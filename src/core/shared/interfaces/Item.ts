@@ -1,5 +1,5 @@
-import { EquipmentType } from '../enums/equipment';
-import { ItemType } from '../enums/itemType';
+import { EQUIPMENT_TYPE } from '../enums/equipmentTypes';
+import { ITEM_TYPE } from '../enums/itemTypes';
 
 export interface Item {
     name: string;
@@ -7,10 +7,10 @@ export interface Item {
     description: string;
     icon: string;
     quantity: number;
-    behavior: ItemType;
+    behavior: ITEM_TYPE;
     slot?: number;
     hash?: string;
-    equipment?: EquipmentType;
+    equipment?: EQUIPMENT_TYPE;
     data: { [key: string]: any };
 }
 

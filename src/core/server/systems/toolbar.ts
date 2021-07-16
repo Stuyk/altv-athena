@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -19,18 +19,18 @@ export class ToolbarController {
             return;
         }
 
-        if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR)) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_TOOLBAR)) {
             return;
         }
 
         // Handle Weapon Switch
-        if (isFlagEnabled(item.behavior, ItemType.IS_WEAPON)) {
+        if (isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON)) {
             ToolbarController.handleWeaponEquip(player, item);
             return;
         }
 
         // Handle Consume Item from Toolbar
-        if (isFlagEnabled(item.behavior, ItemType.CONSUMABLE)) {
+        if (isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
             ToolbarController.handleToolbarUse(player, item);
             return;
         }
@@ -77,7 +77,7 @@ export class ToolbarController {
     }
 
     static handleToolbarUse(player: alt.Player, item: Item) {
-        if (!isFlagEnabled(item.behavior, ItemType.SKIP_CONSUMABLE)) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {

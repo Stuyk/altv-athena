@@ -3,7 +3,7 @@ import { View_Events_Clothing } from '../../shared/enums/views';
 import { playerFuncs } from '../extensions/Player';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
 import { Item } from '../../shared/interfaces/Item';
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -20,7 +20,7 @@ const wearableRef: Item = {
     icon: 'crate',
     slot: 0,
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_EQUIPMENT,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_EQUIPMENT,
     data: {}
 };
 

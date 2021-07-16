@@ -59,6 +59,7 @@ description: List of all the changes and current versions.
 + Added Lock State for HUD
 + Added Time to HUD
 + Added Wanted Level(s)
++ Update Interface Names
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

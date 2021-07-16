@@ -2,9 +2,9 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
 import { Permissions } from '../../shared/flags/permissions';
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
-import { EquipmentType } from '../../shared/enums/equipment';
+import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentTypes';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { getFromRegistry, ItemRegistry } from '../../shared/items/itemRegistry';
 import { LocaleController } from '../../shared/locale/locale';
@@ -16,7 +16,7 @@ const pistolItem: Item = {
     description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
     icon: 'pistol',
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
         hash: 0x1b06d571
     }
@@ -28,8 +28,8 @@ const equipmentItem: Item = {
     description: `Debug: Can go into the bag section. Cannot go into toolbar.`,
     icon: 'backpack',
     quantity: 1,
-    equipment: EquipmentType.BAG,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_EQUIPMENT,
+    equipment: EQUIPMENT_TYPE.BAG,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_EQUIPMENT,
     data: {
         drawable: 0
     }
@@ -41,7 +41,7 @@ const boxItem: Item = {
     description: `Debug: Inventory only.`,
     icon: 'crate',
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE,
     data: {
         drawable: 0
     }
@@ -53,7 +53,7 @@ const smgItem: Item = {
     description: `Debug: Should be able to go to toolbar. Cannot go to equipment. Is a weapon.`,
     icon: 'smg',
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
         hash: 0x13532244
     }
@@ -65,7 +65,7 @@ const burgerItem: Item = {
     description: `Debug: Should be able to call an event with this`,
     icon: 'burger',
     quantity: 5,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.CONSUMABLE,
     data: {
         event: 'effect:Heal',
         heal: 25,

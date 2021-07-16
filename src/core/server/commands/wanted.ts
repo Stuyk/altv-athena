@@ -17,8 +17,6 @@ function handleCommand(player: alt.Player, id: any = null, stars: any): void {
         id = player.id;
     }
 
-    alt.log(stars);
-
     if (stars === null) {
         stars = 0;
     } else {

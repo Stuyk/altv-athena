@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 
-import { EquipmentType } from '../../../shared/enums/equipment';
-import { InventoryType } from '../../../shared/enums/inventoryTypes';
-import { ItemType } from '../../../shared/enums/itemType';
+import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentTypes';
+import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
+import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
 import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
@@ -88,7 +88,7 @@ function hasWeapon(player: alt.Player): Item | null {
                 continue;
             }
 
-            if (!isFlagEnabled(inventoryItem.behavior, ItemType.IS_WEAPON)) {
+            if (!isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.IS_WEAPON)) {
                 continue;
             }
 
@@ -110,7 +110,7 @@ function hasWeapon(player: alt.Player): Item | null {
             continue;
         }
 
-        if (!isFlagEnabled(item.behavior, ItemType.IS_WEAPON)) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON)) {
             continue;
         }
 
@@ -205,7 +205,7 @@ function getToolbarItem(p: alt.Player, slot: number): Item | null {
  * Checks if an item is in the inventory data section.
  * Returns the tab in the inventory where it is.
  * Returns the index in the array of where this item is.
- * @param {InventoryType} type
+ * @param {INVENTORY_TYPE} type
  * @param {string} uuid
  * @return {boolean}  {Promise<void>}
  * @memberof InventoryPrototype
@@ -275,11 +275,11 @@ function isInEquipment(p: alt.Player, item: Partial<Item>): { index: number } | 
 
 /**
  * Check if an equipment slot is free.
- * @param {EquipmentType} slot
+ * @param {EQUIPMENT_TYPE} slot
  * @return {*}  {boolean}
  * @memberof InventoryPrototype
  */
-function isEquipmentSlotFree(p: alt.Player, slot: EquipmentType): boolean {
+function isEquipmentSlotFree(p: alt.Player, slot: EQUIPMENT_TYPE): boolean {
     if (slot >= 11) {
         return false;
     }
@@ -385,11 +385,11 @@ function inventoryRemove(p: alt.Player, slot: number, tab: number): boolean {
 
 /**
  * Remove an item from equipment base don slot.
- * @param {EquipmentType} slot
+ * @param {EQUIPMENT_TYPE} slot
  * @return {*}  {boolean}
  * @memberof InventoryPrototype
  */
-function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
+function equipmentRemove(p: alt.Player, slot: EQUIPMENT_TYPE): boolean {
     if (slot >= 11) {
         return false;
     }
@@ -406,10 +406,10 @@ function equipmentRemove(p: alt.Player, slot: EquipmentType): boolean {
 /**
  * Checks if the equipment slot the item is going to is correct.
  * @param {Item} item
- * @param {EquipmentType} slot Is the 'item.slot' the item will go to.
+ * @param {EQUIPMENT_TYPE} slot Is the 'item.slot' the item will go to.
  * @return {*}
  */
-function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
+function isEquipmentSlotValid(item: Item, slot: EQUIPMENT_TYPE) {
     if (slot >= 11) {
         return false;
     }
@@ -432,7 +432,7 @@ function isEquipmentSlotValid(item: Item, slot: EquipmentType) {
  * @return {*}  {boolean}
  * @memberof InventoryPrototype
  */
-function equipmentAdd(p: alt.Player, item: Item, slot: EquipmentType): boolean {
+function equipmentAdd(p: alt.Player, item: Item, slot: EQUIPMENT_TYPE): boolean {
     if (slot >= 11) {
         return false;
     }
@@ -745,8 +745,8 @@ function handleSwapOrStack(
     const isSelectInventory = selectedSlotName.includes('inventory');
     const isEndInventory = endSlotName.includes('inventory');
 
-    const isSelectEquipment = isFlagEnabled(selectItem.item.behavior, ItemType.IS_EQUIPMENT);
-    const isEndEquipment = isFlagEnabled(endItem.item.behavior, ItemType.IS_EQUIPMENT);
+    const isSelectEquipment = isFlagEnabled(selectItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
+    const isEndEquipment = isFlagEnabled(endItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
 
     // Check if equipment types are compatible...
     if (isSelectEquipment || isEndEquipment) {
@@ -788,8 +788,8 @@ function handleSwapOrStack(
         endArray[endIndex].slot = newSelectSlot;
     } else {
         // Handle Stacking
-        const isSelectStackable = isFlagEnabled(selectItem.item.behavior, ItemType.CAN_STACK);
-        const isEndStackable = isFlagEnabled(endItem.item.behavior, ItemType.CAN_STACK);
+        const isSelectStackable = isFlagEnabled(selectItem.item.behavior, ITEM_TYPE.CAN_STACK);
+        const isEndStackable = isFlagEnabled(endItem.item.behavior, ITEM_TYPE.CAN_STACK);
 
         // Handle Stacking
         if (!isSelectStackable || !isEndStackable) {
@@ -853,22 +853,22 @@ function allItemRulesValid(
 
     if (endSlot) {
         // Not droppable but trying to drop on ground.
-        if (!isFlagEnabled(item.behavior, ItemType.CAN_DROP) && endSlot.name === InventoryType.GROUND) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.CAN_DROP) && endSlot.name === INVENTORY_TYPE.GROUND) {
             return false;
         }
 
         // Not equipment but going into equipment.
-        if (!isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_EQUIPMENT) && endSlot.name === INVENTORY_TYPE.EQUIPMENT) {
             return false;
         }
 
         // Not a toolbar item but going into toolbar.
-        if (!isFlagEnabled(item.behavior, ItemType.IS_TOOLBAR) && endSlot.name === InventoryType.TOOLBAR) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_TOOLBAR) && endSlot.name === INVENTORY_TYPE.TOOLBAR) {
             return false;
         }
 
         // Is equipment and is going into an equipment slot.
-        if (isFlagEnabled(item.behavior, ItemType.IS_EQUIPMENT) && endSlot.name === InventoryType.EQUIPMENT) {
+        if (isFlagEnabled(item.behavior, ITEM_TYPE.IS_EQUIPMENT) && endSlot.name === INVENTORY_TYPE.EQUIPMENT) {
             if (!isEquipmentSlotValid(item, endSlotIndex)) {
                 return false;
             }
@@ -950,7 +950,7 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
  */
 function getAllWeapons(player: alt.Player): Array<Item> {
     const weapons = getAllItems(player).filter((item) => {
-        return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
+        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
     });
 
     if (weapons.length <= 0) {
@@ -969,7 +969,7 @@ function getAllWeapons(player: alt.Player): Array<Item> {
  */
 function removeAllWeapons(player: alt.Player): Array<Item> {
     const weapons = getAllItems(player).filter((item) => {
-        return isFlagEnabled(item.behavior, ItemType.IS_WEAPON);
+        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
     });
 
     if (weapons.length <= 0) {

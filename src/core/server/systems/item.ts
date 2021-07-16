@@ -1,4 +1,4 @@
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Item } from '../../shared/interfaces/Item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 
@@ -10,7 +10,7 @@ export class ItemFactory {
      * @param {string} description The description of this item.
      * @param {string} icon The corresponding item icon for this item.
      * @param {number} quantity The number or amount of stacked items in this item.
-     * @param {ItemType} behavior General item behavior of this item.
+     * @param {ITEM_TYPE} behavior General item behavior of this item.
      * @param {{ [key: string]: any }} data
      * @return {*}  {Item}
      * @memberof ItemFactory
@@ -20,7 +20,7 @@ export class ItemFactory {
         description: string,
         icon: string,
         quantity: number,
-        behavior: ItemType,
+        behavior: ITEM_TYPE,
         data: { [key: string]: any },
         slot: number
     ): Item | null {

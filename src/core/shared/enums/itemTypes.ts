@@ -1,4 +1,4 @@
-export enum ItemType {
+export enum ITEM_TYPE {
     NONE = 0,
     CAN_DROP = 1, // Not Implemented
     CAN_STACK = 2, // No Longer Relevant

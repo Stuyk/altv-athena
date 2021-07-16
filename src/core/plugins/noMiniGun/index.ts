@@ -2,7 +2,7 @@ import { InventoryController } from '../../server/views/inventory';
 import { Item } from '../../shared/interfaces/Item';
 import * as alt from 'alt-server';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Permissions } from '../../shared/flags/permissions';
 
 InventoryController.addItemRuleCheck(handleNoMinigun);
@@ -15,7 +15,7 @@ function handleNoMinigun(
     endSlotIndex: number | null,
     tab: number | null
 ) {
-    if (!isFlagEnabled(item.behavior, ItemType.IS_WEAPON)) {
+    if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON)) {
         return true;
     }
 
@@ -38,7 +38,7 @@ function handleNoMinigunDrop(
     endSlotIndex: number | null,
     tab: number | null
 ) {
-    if (!isFlagEnabled(item.behavior, ItemType.IS_WEAPON)) {
+    if (!isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON)) {
         return true;
     }
 
