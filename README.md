@@ -49,18 +49,17 @@ We have a small demo server available for you to test the framework with Adminis
     -   Screenshot
     -   Add to Whitelist
     -   Remove from Whitelist
--   Food & Water System
-    -   Customizable Food / Water
-    -   Restore Food / Water with Items
 -   Player
     -   Health Synchronization
     -   Armour Synchronization
     -   Play 3D Custom Sounds (Short)
     -   Play 2D Custom Sounds (Short)
+    -   Food Stat
+    -   Water Stat
 -   Name Tags
     -   Display after 7.5s \(Used for Hiding Names Partially\)
     -   Names Hidden in Vehicles
--   Easy Discord Login / Authentication \(alt:V Ares\)
+-   Discord Based Authentication / Login
 -   Admin System
     -   Utilizes the Permission System
     -   Various Admin Commands
@@ -97,22 +96,17 @@ We have a small demo server available for you to test the framework with Adminis
 -   Text Label System
     -   Global Text Label Controller
     -   Easily add and remove text labels
--   Section System
-    -   World split into Sections
-    -   Split Sections Help with Performance
-    -   Lookup Closest Players by Section / Slice
 -   Currency System
     -   Deposit Currency
     -   Withdraw Currency
     -   Transfer Bank Currency
 -   Vehicle System
-    -   Control Vehicle Door States
     -   Control Vehicle Door Locks
     -   Handle Vehicle Ownership
-    -   Handle Vehicle Keys
     -   Handle Vehicle Synchronization Pop-in
     -   Seatbelt / Handle Window Fly-through
-    -   Personal Vehicle Spawner Menu
+    -   Control Vehicle Door States
+    -   Fuel
 -   Inventory System
     -   Drop Items
     -   Pickup Items
@@ -144,6 +138,14 @@ We have a small demo server available for you to test the framework with Adminis
     -   Name Individual Items
     -   Describe Individual Items
     -   Separate Item Equips
+- Garage System
+    - 17 Garages Across the Map
+    - Store Vehicles
+    - Spawn Vehicles
+- Expandable HUD System
+    - Easily create a dynamic HUD
+    - Add New HUD Elements
+    - Remove HUD Elements
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar

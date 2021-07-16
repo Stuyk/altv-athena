@@ -2,6 +2,13 @@ import * as alt from 'alt-client';
 
 export default interface IHUD {
     /**
+     * A unique identifier to add / remove a HUD element.
+     * @type {string}
+     * @memberof IHUD
+     */
+    identifier: string;
+
+    /**
      * The Relative Percentage Position on Screen
      * 0.1 - 1
      * @type {{

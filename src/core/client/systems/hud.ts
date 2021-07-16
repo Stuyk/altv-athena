@@ -13,9 +13,10 @@ import { World } from './world';
 
 let interval;
 let objective: string;
+let isUpdating: boolean = false;
 let hudElements: Array<IHud> = [
     {
-        // Cash
+        identifier: 'hud-cash',
         position: {
             x: 0.98,
             y: 0.02
@@ -29,7 +30,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Bank
+        identifier: 'hud-bank',
         position: {
             x: 0.98,
             y: 0.07
@@ -43,7 +44,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Food
+        identifier: 'hud-food',
         position: {
             x: 0.98,
             y: 0.12
@@ -57,7 +58,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Water
+        identifier: 'hud-water',
         position: {
             x: 0.98,
             y: 0.17
@@ -71,7 +72,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Speedometer, Fuel, Lock Status, Seatbelt
+        identifier: 'hud-vehicle',
         position: {
             x: 0.5,
             y: 0.95
@@ -109,7 +110,7 @@ let hudElements: Array<IHud> = [
         isVehicle: true
     },
     {
-        // World Time
+        identifier: 'hud-time',
         position: {
             x: 0.5,
             y: 0.02
@@ -123,7 +124,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Objective
+        identifier: 'hud-objective',
         position: {
             x: 0.5,
             y: 0.9
@@ -137,7 +138,7 @@ let hudElements: Array<IHud> = [
         }
     },
     {
-        // Wanted Stars
+        identifier: 'hud-wanted',
         position: {
             x: 0.54,
             y: 0.08
@@ -157,7 +158,6 @@ let hudElements: Array<IHud> = [
                         y: pos.y
                     };
 
-                    // 5 - 1 = 4
                     if (i + 1 >= 6 - stars) {
                         drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 255);
                         continue;
@@ -203,8 +203,29 @@ export class HudSystem {
      * @param {IHud} element
      * @memberof HudSystem
      */
-    static appendToHud(element: IHud) {
+    static add(element: IHud) {
         hudElements.push(element);
+    }
+
+    /**
+     * Remove a HUD element from being rendered.
+     * Returns true or false if the element was removed successfully.
+     * @static
+     * @param {string} identifier
+     * @memberof HudSystem
+     */
+    static remove(identifier: string): boolean {
+        isUpdating = true;
+
+        const index = hudElements.findIndex((x) => x.identifier === identifier);
+        if (index <= -1) {
+            isUpdating = false;
+            return false;
+        }
+
+        hudElements.splice(index, 1);
+        isUpdating = false;
+        return true;
     }
 
     /**
@@ -215,6 +236,10 @@ export class HudSystem {
      */
     private static render() {
         if (isAnyMenuOpen(true)) {
+            return;
+        }
+
+        if (isUpdating) {
             return;
         }
 
