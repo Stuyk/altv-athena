@@ -10,8 +10,16 @@ let tempInterval;
  * @param  {alt.Vector2} pos
  * @param  {number} scale
  * @param  {alt.RGBA} color
+ * @param  {number | null} alignment 0 Center, 1 Left, 2 Right
  */
-export function drawText2D(text: string, pos: alt.IVector2, scale: number, color: alt.RGBA) {
+export function drawText2D(
+    text: string,
+    pos: alt.IVector2,
+    scale: number,
+    color: alt.RGBA,
+    alignment: number = null,
+    padding: number = 0
+) {
     if (scale > 2) {
         scale = 2;
     }
@@ -20,10 +28,14 @@ export function drawText2D(text: string, pos: alt.IVector2, scale: number, color
     native.addTextComponentSubstringPlayerName(text);
     native.setTextFont(4);
     native.setTextScale(1, scale);
-    native.setTextWrap(0.0, 1.0);
     native.setTextColour(color.r, color.g, color.b, color.a);
     native.setTextOutline();
     native.setTextDropShadow();
+    if (alignment !== null) {
+        native.setTextWrap(padding, 1 - padding);
+        native.setTextJustification(alignment);
+    }
+
     native.endTextCommandDisplayText(pos.x, pos.y, 0);
 }
 

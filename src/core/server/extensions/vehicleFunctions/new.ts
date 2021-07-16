@@ -9,6 +9,7 @@ import { playerFuncs } from '../Player';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { vehicleFuncs } from '../Vehicle';
 
 const ownershipBehavior = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
 const tmpBehavior =
@@ -170,6 +171,7 @@ function spawn(player: alt.Player, data: Vehicle, position: Vector3 = null, rota
     vehicle.numberPlateText = vehicle.data.uid.substring(0, 8);
     vehicle.manualEngineControl = true;
     vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+    vehicleFuncs.setter.updateFuel(vehicle);
 
     // Synchronize Ownership
     vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);

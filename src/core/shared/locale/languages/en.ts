@@ -125,6 +125,9 @@ export default {
     [LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS]: `There are no parking spots at this garage.`,
     [LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED]: `That vehicle is already spawned.`,
     [LOCALE_KEYS.VEHICLE_COUNT_EXCEEDED]: `You may only have _%_ vehicles spawned at a time. You have exceeded the vehicle spawn count.`,
+    [LOCALE_KEYS.VEHICLE_LOCKED]: `Locked`,
+    [LOCALE_KEYS.VEHICLE_UNLOCKED]: `Unlocked`,
+    [LOCALE_KEYS.VEHICLE_FUEL]: `Fuel`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================

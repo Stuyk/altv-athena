@@ -62,5 +62,6 @@ export const VEHICLE_STATE = {
     KEYS: `Vehicle-Keys`,
     OWNER: 'Vehicle-Owner',
     ENGINE: 'Vehicle-Engine',
-    FUEL: 'Vehicle-Fuel'
+    FUEL: 'Vehicle-Fuel',
+    POSITION: 'Vehicle-Position'
 };

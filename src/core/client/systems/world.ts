@@ -1,63 +1,76 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { BaseHUD } from '../views/hud/hud';
 
-// Weather
-let previousWeather: string = 'OVERCAST';
-let weather: string;
+export class World {
+    static hasPausedClock = false;
+    static previousWeather = 'Overcast';
+    static weather: string;
+    static hour: number = 0;
+    static minute: number = 0;
 
-// Time
-let hasPausedClock = false;
-let currentTime = {
-    hour: 0,
-    minute: 0
-};
-
-alt.onServer(SYSTEM_EVENTS.WORLD_UPDATE_TIME, handleUpdateTime);
-alt.onServer(SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, handleUpdateWeather);
-alt.on('debug:Time', getTime);
-
-/**
- * Synchronizes our current time with the server.
- * @param {number} hour
- * @param {number} minute
- */
-function handleUpdateTime(hour: number, minute: number): void {
-    if (!hasPausedClock) {
-        hasPausedClock = true;
-        native.pauseClock(true);
-    }
-
-    currentTime.hour = hour;
-    currentTime.minute = minute;
-
-    native.setClockTime(hour, minute, 0);
-}
-
-/**
- * Synchronizes our local weather with the server.
- * @param {string} newWeatherName
- * @return {*}  {Promise<void>}
- */
-async function handleUpdateWeather(newWeatherName: string): Promise<void> {
-    weather = newWeatherName;
-
-    if (weather !== previousWeather) {
-        native.setWeatherTypeOvertimePersist(weather, 30);
-        previousWeather = weather;
-
-        if (weather === 'XMAS') {
-            native.setForceVehicleTrails(true);
-            native.setForcePedFootstepsTracks(true);
-            return;
+    static normalizeHour(value: number) {
+        if (value >= 13) {
+            return value - 12;
         }
 
-        native.setForceVehicleTrails(false);
-        native.setForcePedFootstepsTracks(false);
+        return value;
+    }
+
+    static normalizeValue(value: number) {
+        if (value <= 9) {
+            return `0${value}`;
+        }
+
+        return `${value}`;
+    }
+
+    static getTimeAsString(): string {
+        const timeOfDay = World.hour >= 12 ? 'PM' : 'AM';
+        const hour = World.normalizeValue(World.normalizeHour(World.hour));
+        const minute = World.normalizeValue(World.minute);
+
+        return `${hour}:${minute} ${timeOfDay}`;
+    }
+
+    static getTimeAsNumber(): { hour: number; minute: number } {
+        return { hour: World.hour, minute: World.minute };
+    }
+
+    static updateTime(hour: number, minute: number) {
+        if (!World.hasPausedClock) {
+            World.hasPausedClock = true;
+            native.pauseClock(true);
+        }
+
+        World.hour = hour;
+        World.minute = minute;
+        native.setClockTime(hour, minute, 0);
+    }
+
+    static updateWeather(name: string) {
+        World.weather = name;
+
+        if (World.weather !== World.previousWeather) {
+            native.setWeatherTypeOvertimePersist(World.weather, 30);
+            World.previousWeather = World.weather;
+
+            if (World.weather === 'XMAS') {
+                native.setForceVehicleTrails(true);
+                native.setForcePedFootstepsTracks(true);
+                return;
+            }
+
+            native.setForceVehicleTrails(false);
+            native.setForcePedFootstepsTracks(false);
+        }
     }
 }
 
 function getTime() {
-    alt.log(`Time: ${currentTime.hour}:${currentTime.minute}:00`);
+    alt.log(`Time: ${World.hour}:${World.minute}:00`);
 }
+
+alt.onServer(SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.updateTime);
+alt.onServer(SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, World.updateWeather);
+alt.on('debug:Time', getTime);

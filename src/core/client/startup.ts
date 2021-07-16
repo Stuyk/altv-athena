@@ -23,6 +23,7 @@ import './systems/job';
 import './systems/marker';
 import './systems/meta';
 import './systems/nametag';
+import './systems/hud';
 import './systems/noclip';
 import './systems/particle';
 import './systems/progressBar';

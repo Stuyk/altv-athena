@@ -51,6 +51,13 @@ description: List of all the changes and current versions.
 + Added Separate Files for Garage Parking Spots
 + Increased Max Spawned Vehicles to 3 by Default
 + Added Configuration for Max Spawned Vehicles
++ Removed WebView HUD
++ Added Dynamic HUD for Natives
++ Fixed Fuel Synced Meta
++ Added Position for Synced Meta for Vehicles
++ Fixed Entering / Exiting Vehicle while Typing
++ Added Lock State for HUD
++ Added Time to HUD
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

@@ -24,20 +24,6 @@ alt.onServer(SYSTEM_EVENTS.SET_VIEW_URL, (ip: string) => {
     _serverURL = ip;
 });
 
-export enum HudEventNames {
-    SetVehicle = 'hud:SetVehicle',
-    Seatbelt = 'hud:Seatbelt',
-    Fuel = 'hud:SetFuel',
-    Interact = 'hud:SetInteract',
-    Food = 'hud:SetFood',
-    Water = 'hud:SetWater',
-    Speed = 'hud:Speed',
-    Lock = 'hud:SetLock',
-    Engine = 'hud:SetEngine',
-    Lights = 'hud:SetLights',
-    Objective = 'hud:SetObjective'
-}
-
 export class BaseHUD {
     static isOpen: boolean = false;
     static view: alt.WebView;
@@ -70,57 +56,6 @@ export class BaseHUD {
         BaseHUD.view.emit('url', _serverURL);
     }
 
-    static setHudStatus(name: HudEventNames, value: any) {
-        if (!BaseHUD.view) {
-            return;
-        }
-
-        BaseHUD.view.emit(name, value);
-
-        if (name !== HudEventNames.SetVehicle) {
-            return;
-        }
-
-        if (!value) {
-            return;
-        }
-
-        BaseHUD.setHudStatus(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
-    }
-
-    static updateSpeed(speed: string) {
-        if (!BaseHUD.view) {
-            return;
-        }
-
-        if (!alt.Player.local.vehicle) {
-            return;
-        }
-
-        BaseHUD.view.emit(HudEventNames.Speed, speed);
-        BaseHUD.view.emit(HudEventNames.Fuel, alt.Player.local.vehicle.fuel);
-
-        if (alt.Player.local.vehicle) {
-            BaseHUD.view.emit(
-                HudEventNames.Lock,
-                native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2
-            );
-
-            BaseHUD.view.emit(
-                HudEventNames.Engine,
-                native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID)
-            );
-
-            const [_, lightsOn, highBeams] = native.getVehicleLightsState(
-                alt.Player.local.vehicle.scriptID,
-                false,
-                false
-            );
-
-            BaseHUD.view.emit(HudEventNames.Lights, lightsOn || highBeams ? true : false);
-        }
-    }
-
     static populateCommands(_commandList: Array<Partial<Command>>): void {
         commandList = _commandList;
         handleFreezePlayer(false);
@@ -135,20 +70,6 @@ export class BaseHUD {
 
         BaseHUD.view.emit('chat:PopulateCommands', commandList);
         BaseHUD.view.isVisible = true;
-    }
-
-    static processMetaChange(key: string, value: any, oldValue: any) {
-        if (!BaseHUD.view) {
-            return;
-        }
-
-        if (key === 'food') {
-            BaseHUD.view.emit(HudEventNames.Food, value);
-        }
-
-        if (key === 'water') {
-            BaseHUD.view.emit(HudEventNames.Water, value);
-        }
     }
 
     static setHudVisibility(value: boolean) {
@@ -234,8 +155,5 @@ export class BaseHUD {
     }
 }
 
-alt.on('enteredVehicle', () => BaseHUD.setHudStatus(HudEventNames.SetVehicle, true));
-alt.on('leftVehicle', () => BaseHUD.setHudStatus(HudEventNames.SetVehicle, false));
-alt.on(SYSTEM_EVENTS.META_CHANGED, BaseHUD.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, BaseHUD.createView);
 alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, BaseHUD.populateCommands);

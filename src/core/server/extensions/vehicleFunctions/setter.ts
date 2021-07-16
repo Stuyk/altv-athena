@@ -4,52 +4,51 @@ import { Vehicle_Behavior, VEHICLE_STATE } from '../../../shared/enums/vehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { vehicleFuncs } from '../Vehicle';
-import getter from './getter';
-import keys from './keys';
 
-function updateFuel(v: alt.Vehicle) {
-    if (isFlagEnabled(v.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
-        v.fuel = 100;
-        v.setSyncedMeta(VEHICLE_STATE.FUEL, v.fuel);
+function updateFuel(vehicle: alt.Vehicle) {
+    if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
+        vehicle.fuel = 100;
+        vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.fuel);
         return;
     }
 
-    if (!v.engineOn) {
-        v.setSyncedMeta(VEHICLE_STATE.FUEL, v.fuel);
+    if (!vehicle.engineOn) {
+        vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.fuel);
         return;
     }
 
-    if (!isNaN(v.data.fuel)) {
-        v.fuel = v.data.fuel;
+    if (!isNaN(vehicle.data.fuel)) {
+        vehicle.fuel = vehicle.data.fuel;
     } else {
-        v.fuel = 100;
-        v.data.fuel = 100;
+        vehicle.fuel = 100;
+        vehicle.data.fuel = 100;
     }
 
-    v.fuel = v.fuel - DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
+    vehicle.fuel = vehicle.fuel - DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
 
-    if (v.fuel < 0) {
-        v.fuel = 0;
+    if (vehicle.fuel < 0) {
+        vehicle.fuel = 0;
 
-        if (v.engineOn) {
-            v.engineOn = false;
+        if (vehicle.engineOn) {
+            vehicle.engineOn = false;
         }
     }
 
-    v.data.fuel = v.fuel;
-    v.setStreamSyncedMeta(VEHICLE_STATE.FUEL, v.data.fuel);
+    vehicle.data.fuel = vehicle.fuel;
+    vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
+    vehicle.setSyncedMeta(VEHICLE_STATE.POSITION, vehicle.pos);
 
-    const owner = alt.Player.all.find((p) => p.valid && p.id === v.player_id);
+    const owner = alt.Player.all.find((p) => p.valid && p.id === vehicle.player_id);
     if (!owner) {
         try {
-            v.destroy();
+            vehicle.destroy();
         } catch (err) {}
         return;
     }
 
-    if (!v.nextSave || Date.now() > v.nextSave) {
-        vehicleFuncs.save.data(owner, v);
-        v.nextSave = Date.now() + Math.floor(Math.random() * 30000) + 10000;
+    if (!vehicle.nextSave || Date.now() > vehicle.nextSave) {
+        vehicleFuncs.save.data(owner, vehicle);
+        vehicle.nextSave = Date.now() + Math.floor(Math.random() * 30000) + 10000;
     }
 }
 

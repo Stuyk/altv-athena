@@ -6,6 +6,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { PedConfigFlag } from '../../shared/flags/pedflags';
 import { KeybindController } from '../events/keyup';
+import { isAnyMenuOpen } from '../utility/menus';
 
 export class VehicleController {
     /**
@@ -36,6 +37,10 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static emitAction() {
+        if (isAnyMenuOpen()) {
+            return;
+        }
+
         alt.emitServer(VEHICLE_EVENTS.ACTION);
     }
 
@@ -45,6 +50,10 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static emitEngine() {
+        if (isAnyMenuOpen()) {
+            return;
+        }
+
         if (!alt.Player.local.vehicle) {
             return;
         }
@@ -58,6 +67,10 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static emitLock() {
+        if (isAnyMenuOpen()) {
+            return;
+        }
+
         alt.emitServer(VEHICLE_EVENTS.SET_LOCK);
     }
 
