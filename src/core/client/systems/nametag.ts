@@ -4,7 +4,6 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText2D } from '../utility/text';
-import { BaseHUD } from '../views/hud/hud';
 
 const drawDistance = 50;
 let interval;

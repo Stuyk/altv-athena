@@ -42,6 +42,7 @@ export class ChatController {
 
         BaseHUD.isOpen = true;
         BaseHUD.view.emit('chat:Focus');
+        BaseHUD.view.focus();
         alt.Player.local.isChatOpen = true;
         alt.toggleGameControls(false);
         disableAllControls(true);

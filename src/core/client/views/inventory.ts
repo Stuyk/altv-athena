@@ -222,7 +222,7 @@ export class InventoryController implements ViewModel {
 
         native.pointCamAtEntity(camera, alt.Player.local.scriptID, 0, 0, 0, false);
         native.setCamActive(camera, true);
-        native.renderScriptCams(true, false, 0, true, false, false);
+        native.renderScriptCams(true, false, 0, true, false, 0);
         return true;
     }
 }

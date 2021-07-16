@@ -246,6 +246,15 @@ const chat = Vue.component('chat', {
                     this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
                 }
             }
+
+            // Escape for chat
+            if (e.keyCode === 27) {
+                if (!this.chatActive) {
+                    return;
+                }
+
+                this.handleEscape();
+            }
         }
     },
     directives: {

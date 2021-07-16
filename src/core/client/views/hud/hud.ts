@@ -106,7 +106,7 @@ export class BaseHUD {
             }
 
             alt.emitServer(View_Events_Chat.Send, message);
-        }, 100);
+        }, 25);
     }
 
     private static handleFocus(shouldFocus: boolean, focusName: string): void {
