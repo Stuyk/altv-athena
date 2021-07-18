@@ -66,7 +66,8 @@ class Startup {
             Logger.info(`Ares Version: ${res}`);
         });
 
-        const result = await PostController.post(`${config.ARES_ENDPOINT}/v1/post/verify`, {
+        const endpoint = await Ares.getAresEndpoint();
+        const result = await PostController.post(`${endpoint}/v1/post/verify`, {
             public_key: Ares.getPublicKey()
         });
 
