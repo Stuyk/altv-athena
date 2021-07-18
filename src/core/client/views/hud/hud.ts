@@ -13,6 +13,7 @@ import './controllers/actionsController';
 import './controllers/audioController';
 import './controllers/chatController';
 import './controllers/leaderBoardController';
+import { ChatController } from './controllers/chatController';
 
 const url = `http://assets/webview/client/hud/index.html`;
 
@@ -33,7 +34,7 @@ export class BaseHUD {
             BaseHUD.view = new alt.WebView(url, false);
             BaseHUD.view.isVisible = false;
             BaseHUD.view.on('url', BaseHUD.handleURL);
-            BaseHUD.view.on('chat:Send', BaseHUD.handleNewMessage);
+            BaseHUD.view.on('chat:Send', ChatController.send);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
             BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
             BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
@@ -86,27 +87,6 @@ export class BaseHUD {
         BaseHUD.view.isVisible = true;
         native.displayRadar(true);
         return;
-    }
-
-    /**
-     * Sends a chat message up from the WebView to the server chat.ts file.
-     * @param {string} message
-     */
-    private static handleNewMessage(message: string): void {
-        alt.toggleGameControls(true);
-        disableAllControls(false);
-        BaseHUD.isOpen = false;
-
-        // Add a small delay to allow keybinds to go off.
-        alt.setTimeout(() => {
-            alt.Player.local.isChatOpen = false;
-
-            if (!message) {
-                return;
-            }
-
-            alt.emitServer(View_Events_Chat.Send, message);
-        }, 25);
     }
 
     private static handleFocus(shouldFocus: boolean, focusName: string): void {

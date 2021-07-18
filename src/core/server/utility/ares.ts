@@ -184,6 +184,6 @@ export default class Ares {
      * @memberof Ares
      */
     static getUniquePlayerHash(player: alt.Player, discord: string): string {
-        return sha256(sha256(`${player.hwidHash}${player.hwidExHash}${player.ip}${discord}${player.socialId}`));
+        return sha256(sha256(`${player.hwidHash}${player.hwidExHash}${player.ip}${discord}${player.socialID}`));
     }
 }

@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
+
 import { CurrencyTypes } from '../../../shared/enums/currency';
-import save from './save';
 import emit from './emit';
+import save from './save';
 
 /**
  * Add currency type to the player.
@@ -50,7 +51,7 @@ function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
         player.data[type] = parseFloat((player.data[type] - amount).toFixed(2));
 
         // Verify that the value was updated.
-        if (player.data[type] < originalValue) {
+        if (originalValue > player.data[type]) {
             player.data[type] = originalValue;
             return false;
         }

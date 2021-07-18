@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { Permissions, CharacterPermissions } from '../../shared/flags/permissions';
+import { CharacterPermissions, Permissions } from '../../shared/flags/permissions';
 import { Command } from '../../shared/interfaces/Command';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
