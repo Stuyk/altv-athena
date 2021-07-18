@@ -50,6 +50,10 @@ export class ChatController {
     }
 
     static async isViewReady() {
+        if (BaseHUD.view && BaseHUD.view.valid) {
+            return;
+        }
+
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (!BaseHUD.view && !BaseHUD.view.valid) {
@@ -58,7 +62,7 @@ export class ChatController {
 
                 alt.clearInterval(interval);
                 resolve();
-            }, 500);
+            }, 5);
         });
     }
 
