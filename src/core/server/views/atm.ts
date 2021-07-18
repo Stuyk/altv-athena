@@ -68,8 +68,13 @@ class AtmFunctions {
             return false;
         }
 
-        playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount);
-        playerFuncs.currency.add(player, CurrencyTypes.BANK, amount);
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount)) {
+            return false;
+        }
+
+        if (!playerFuncs.currency.add(player, CurrencyTypes.BANK, amount)) {
+            return false;
+        }
 
         return true;
     }
@@ -79,8 +84,13 @@ class AtmFunctions {
             return false;
         }
 
-        playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
-        playerFuncs.currency.add(player, CurrencyTypes.CASH, amount);
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            return false;
+        }
+
+        if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
+            return false;
+        }
 
         return true;
     }
@@ -99,8 +109,14 @@ class AtmFunctions {
             return false;
         }
 
-        playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount);
-        playerFuncs.currency.add(target, CurrencyTypes.BANK, amount);
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            return false;
+        }
+
+        if (!playerFuncs.currency.add(target, CurrencyTypes.BANK, amount)) {
+            return false;
+        }
+
         const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
         playerFuncs.emit.message(target, msg);
         return true;
@@ -120,8 +136,13 @@ class AtmFunctions {
             return false;
         }
 
-        playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount);
-        playerFuncs.currency.add(target, CurrencyTypes.CASH, amount);
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount)) {
+            return false;
+        }
+
+        if (!playerFuncs.currency.add(target, CurrencyTypes.CASH, amount)) {
+            return false;
+        }
 
         const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
         playerFuncs.emit.message(target, msg);

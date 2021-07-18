@@ -51,7 +51,7 @@ function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
         player.data[type] = parseFloat((player.data[type] - amount).toFixed(2));
 
         // Verify that the value was updated.
-        if (originalValue > player.data[type]) {
+        if (originalValue < player.data[type]) {
             player.data[type] = originalValue;
             return false;
         }

@@ -74,6 +74,7 @@ description: List of all the changes and current versions.
 + Fix Broken Natives
 + Fix Chat Escape Bug
 + Fix Chat Focus Problems
++ Fix Chat Delay Issues
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021
