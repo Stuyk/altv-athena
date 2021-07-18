@@ -1,7 +1,11 @@
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import BanhamCanyon from './parking/BanhamCanyon';
+
+// All Vehicle Dealerships
+import PDMCoupe from './dealerships/PDMCoupe';
+import PDMSport from './dealerships/PDMSport';
 
 // All Parking Garages
+import BanhamCanyon from './parking/BanhamCanyon';
 import DelPerroBeach from './parking/DelPerroBeach';
 import DowntownVinewoodLower from './parking/DowntownVinewoodLower';
 import DowntownVinewoodUpper from './parking/DowntownVinewoodUpper';
@@ -114,5 +118,10 @@ export const DEFAULT_CONFIG = {
         GrapeSeed,
         PaletoForest,
         PaletoBay
+    ],
+    VEHICLE_DEALERSHIPS: [
+        //
+        PDMCoupe,
+        PDMSport
     ]
 };

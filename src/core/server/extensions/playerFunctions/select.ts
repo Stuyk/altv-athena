@@ -15,6 +15,7 @@ import save from './save';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { World } from '../../systems/world';
+import { HologramController } from '../../systems/hologram';
 
 /**
  * Select a character based on the character data provided.
@@ -94,7 +95,12 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         BlipController.populateGlobalBlips(player);
         MarkerController.populateGlobalMarkers(player);
         TextLabelController.populateGlobalLabels(player);
+        HologramController.populateHolograms(player);
+
+        // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
+
+        // Finish Selection
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 

@@ -8,6 +8,8 @@ export enum SYSTEM_EVENTS {
     COMMANDS_LOADED = 'commands:Loaded',
     // GET
     GET_WAYPOINT = `getter:Waypoint`,
+    // Holograms
+    HOLOGRAM_APPEND = 'hologram:Append',
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
     //

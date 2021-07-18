@@ -906,7 +906,7 @@ export default {
         LABEL_HAT: 'Hat',
         LABEL_SHIRT: 'Shirt',
         LABEL_MASK: 'Mask',
-        LABEL_BOTTOMS: 'Bottoms dsdfsd',
+        LABEL_BOTTOMS: 'Bottoms',
         LABEL_SHOES: 'Shoes',
         LABEL_GLASSES: 'Glasses',
         LABEL_EARRINGS: 'Earrings / Ear Pieces',

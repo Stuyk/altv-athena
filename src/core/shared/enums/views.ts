@@ -44,3 +44,7 @@ export enum View_Events_Garage {
     Despawn = 'garage:Despawn',
     Close = 'garage:Close'
 }
+
+export enum View_Events_Dealership {
+    Open = 'dealership:Open'
+}

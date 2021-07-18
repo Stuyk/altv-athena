@@ -111,6 +111,10 @@ export class InteractionController {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
 
             loadTexture('mpmissmarkers128').then(() => {
+                if (!position) {
+                    return;
+                }
+
                 drawTexture('mpmissmarkers128', 'corona_marker', position, 0.3);
             });
         }

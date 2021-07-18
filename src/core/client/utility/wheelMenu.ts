@@ -6,6 +6,7 @@ import { getPointsInCircle } from './math';
 import { drawText2D } from './text';
 import { Vector2 } from '../../shared/interfaces/vector';
 import { handleFrontendSound } from '../systems/sound';
+import { getScaledCursorPosition } from './mouse';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -102,16 +103,10 @@ export class WheelMenu {
         native.disableControlAction(0, 12, true);
         native.disableControlAction(0, 13, true);
         native.disableControlAction(0, 24, true);
-        native.disableControlAction(0, 69, true);
         native.disableControlAction(0, 200, true);
         native.disableControlAction(0, 257, true);
 
-        const cursor = alt.getCursorPos();
-        const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
-        const actualCursor = {
-            x: cursor.x / _x,
-            y: cursor.y / _y
-        };
+        const actualCursor = getScaledCursorPosition();
 
         let smallestDistance = 0.05;
         let index = -1;

@@ -29,7 +29,11 @@ export class InteractionController {
             interactions[interaction.type] = [];
         }
 
-        const shape = new InteractionShape(interaction.position, 2.5, 3);
+        if (!interaction.range) {
+            interaction.range = 2.5;
+        }
+
+        const shape = new InteractionShape(interaction.position, interaction.range, 3);
         shape.setInteraction(interaction);
         interactions[interaction.type].push(shape);
 
