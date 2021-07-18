@@ -3,6 +3,8 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 // All Vehicle Dealerships
 import PDMCoupe from './dealerships/PDMCoupe';
 import PDMSport from './dealerships/PDMSport';
+import PDMSuper from './dealerships/PDMSuper';
+import PDMSuv from './dealerships/PDMSuv';
 
 // All Parking Garages
 import BanhamCanyon from './parking/BanhamCanyon';
@@ -122,6 +124,8 @@ export const DEFAULT_CONFIG = {
     VEHICLE_DEALERSHIPS: [
         //
         PDMCoupe,
-        PDMSport
+        PDMSport,
+        PDMSuv,
+        PDMSuper
     ]
 };

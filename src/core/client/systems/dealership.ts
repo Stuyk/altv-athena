@@ -6,7 +6,7 @@ import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadModel } from '../utility/model';
 import { HologramSystem } from '../../client/systems/hologram';
-import { drawText2D, drawText3D } from '../utility/text';
+import { drawText2D } from '../utility/text';
 import { distance2d } from '../../shared/utility/vector';
 import { getScaledCursorPosition } from '../utility/mouse';
 import { handleFrontendSound } from './sound';
@@ -14,7 +14,8 @@ import { handleFrontendSound } from './sound';
 const HOVER_DISTANCE = 0.05;
 const MAX_DISTANCE_BEFORE_EXIT = 5;
 const LABEL = { x: 0.5, y: 0.85 };
-const SELECT = { x: 0.5, y: 0.9 };
+const PURCHASE = { x: 0.5, y: 0.92 };
+const PRICE = { x: 0.5, y: 0.78 };
 const LEFT_ARROW = { x: 0.4, y: 0.85 };
 const RIGHT_ARROW = { x: 0.6, y: 0.85 };
 
@@ -109,6 +110,11 @@ class DealershipView {
         }
     }
 
+    static purchase() {
+        alt.emitServer(View_Events_Dealership.Purchase, vehicles[index].name);
+        DealershipView.close();
+    }
+
     static render() {
         if (isAnyMenuOpen()) {
             return;
@@ -124,10 +130,12 @@ class DealershipView {
         const cursor = getScaledCursorPosition();
         const leftArrowDist = distance2d(LEFT_ARROW, cursor);
         const rightArrowDist = distance2d(RIGHT_ARROW, cursor);
+        const selectDist = distance2d(PURCHASE, cursor);
 
         // Disable Left-Click While Browsing
         native.disableControlAction(0, 24, true);
         native.setMouseCursorActiveThisFrame();
+        native.setMouseCursorSprite(1);
 
         // Disable Camera Rotation
         if (cursor.y >= 0.6) {
@@ -149,10 +157,12 @@ class DealershipView {
         }
 
         // Display Name
-        drawText2D(vehicles[index].display, LABEL, 1, new alt.RGBA(255, 255, 255, 255), 0);
+        drawText2D(`~g~$${vehicles[index].price}`, PRICE, 0.8, new alt.RGBA(255, 255, 255, 255), 0);
+        drawText2D(vehicles[index].display, LABEL, 0.8, new alt.RGBA(255, 255, 255, 255), 0);
 
         // Show Arrow Navigation Elements
         if (leftArrowDist <= HOVER_DISTANCE) {
+            native.setMouseCursorSprite(5);
             drawText2D('<', LEFT_ARROW, 1, new alt.RGBA(255, 165, 0, 255), 0);
 
             if (native.isDisabledControlJustReleased(0, 24) && Date.now() > nextClick) {
@@ -163,6 +173,7 @@ class DealershipView {
         }
 
         if (rightArrowDist <= HOVER_DISTANCE) {
+            native.setMouseCursorSprite(5);
             drawText2D('>', RIGHT_ARROW, 1, new alt.RGBA(255, 165, 0, 255), 0);
 
             if (native.isDisabledControlJustReleased(0, 24) && Date.now() > nextClick) {
@@ -170,6 +181,17 @@ class DealershipView {
             }
         } else {
             drawText2D('>', RIGHT_ARROW, 1, new alt.RGBA(255, 255, 255, 255), 0);
+        }
+
+        if (selectDist <= HOVER_DISTANCE) {
+            native.setMouseCursorSprite(5);
+            drawText2D('Purchase', PURCHASE, 1, new alt.RGBA(255, 165, 0, 255), 0);
+
+            if (native.isDisabledControlJustReleased(0, 24) && Date.now() > nextClick) {
+                DealershipView.purchase();
+            }
+        } else {
+            drawText2D('Purchase', PURCHASE, 1, new alt.RGBA(255, 255, 255, 255), 0);
         }
     }
 }

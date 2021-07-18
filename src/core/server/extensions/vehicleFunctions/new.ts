@@ -24,7 +24,7 @@ const tmpBehavior =
  * @param {Partial<Vehicle>} data
  * @return {*}  {alt.Vehicle}
  */
-function add(player: alt.Player, data: Partial<Vehicle>): alt.Vehicle {
+function add(player: alt.Player, data: Partial<Vehicle>, shouldSpawn: boolean = true): alt.Vehicle | null {
     data.uid = sha256Random(JSON.stringify(player.data));
 
     // Add or append vehicle to player.data
@@ -36,6 +36,11 @@ function add(player: alt.Player, data: Partial<Vehicle>): alt.Vehicle {
 
     playerFuncs.save.field(player, 'vehicles', player.data.vehicles);
     playerFuncs.sync.vehicles(player);
+
+    if (!shouldSpawn) {
+        return null;
+    }
+
     return spawn(player, data as Vehicle);
 }
 

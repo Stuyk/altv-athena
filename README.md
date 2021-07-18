@@ -8,6 +8,19 @@ description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
 
 This project solely exists as a new standard for GTA 5 roleplay scripts on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script for GTA 5 has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
 
+**BEFORE YOU CONSIDER THIS FRAMEWORK**
+
+* You need to know how to use command line.
+* You need to know Typescript / Javascript.
+* You need to be self-starting and self-learning.
+* You need to understand how to run commands in consoles.
+* You need to not ask the Developer(s) for support on how to run the clearly stated instructions in the Documentation.
+
+**Documentation**
+
+https://athena.stuyk.com/
+
+
 **You will have to do some general programming** and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
 
 This is a framework and not a out-of-the-box full-featured script. This framework aims to provide the bare minimum necessary to help you get your server running at a much faster rate.
@@ -164,6 +177,12 @@ We have a small demo server available for you to test the framework with Adminis
     -   Infinitely scaling menus
     -   A menu system that calls other events easily.
     -   Easily construct custom menus in minutes to define functionality.
+-   Wheel Menu
+    -   Dynamic Wheel Menus
+-   Dealership
+    -   Basic Dealership with Customizable Locations
+    -   Purchase Vehicles
+    -   Spawn Vehicles from Garage After Purchase
 -   Extendable Core Resource
     -   Extend the core resource by writing your own code in the 'plugins' folder.
 

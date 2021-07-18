@@ -18,7 +18,9 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
     - [Installing Server Files](#installing-server-files)
     - [Using License Key](#using-license-key)
     - [Important Configuration](#important-configuration)
+  - [Obtaining your Own IP](#obtaining-your-own-ip)
   - [Port Forwarding](#port-forwarding)
+  - [Checking Ports](#checking-ports)
   - [Running the Server](#running-the-server)
     - [Running Production on Windows](#running-production-on-windows)
     - [Running Production on Linux](#running-production-on-linux)
@@ -114,10 +116,9 @@ The [Official alt:V Athena Discord](https://discord.gg/pZvbJmKN8Y) will allow yo
 
 Please make sure to join and and `!help` to get information about the bot.
 
-You should either `bind` or `refresh` your email and key to keep it active. The backend service will check the validity of the key.
+You should either `refresh` your email and key to keep it active. The backend service will check the validity of the key.
 
 ```
-!bind <gumroad_email> <key>
 !refresh <gumroad_email> <key>
 ```
 
@@ -159,6 +160,22 @@ MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
 WEBSERVER_IP=<YOUR_SERVER_IP>
 ```
 
+## Obtaining your Own IP
+
+**Windows**
+
+Just google what is my IP.
+
+https://www.google.com/search?q=what+is+my+ip
+
+**Linux**
+
+Run the following in your terminal.
+
+```sh
+curl ipinfo.io/ip
+```
+
 ## Port Forwarding
 
 You will need to port forward for the following ports on TCP & UDP.
@@ -169,6 +186,12 @@ You will need to port forward for the following ports on TCP & UDP.
 7788
 9111
 ```
+
+## Checking Ports
+
+Append your IP into this website with both ports while your **server is running** to verify that the ports are open.
+
+https://www.yougetsignal.com/tools/open-ports/
 
 ## Running the Server
 

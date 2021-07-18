@@ -62,7 +62,6 @@ export class HologramSystem {
             return;
         }
 
-        alt.log(`Toggling Visibility for: ${identifier} with ${value}`);
         holograms[index].isHidden = value;
     }
 

@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "1.8.3",
+    "version": "2.0.0",
     "description": "a roleplay framework for alt:V",
     "author": "stuyk",
     "type": "module",
@@ -13,7 +13,7 @@
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
         "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
-        "dev": "npm run reconnect-server | npm run webserver | npm run windev"
+        "dev": "npm-run-all --parallel reconnect-server webserver windev"
     },
     "devDependencies": {
         "@altv/types-client": "^1.7.6",
@@ -33,6 +33,7 @@
         "fs-extra": "^9.1.0",
         "glob": "^7.1.6",
         "nodemon": "^2.0.7",
+        "npm-run-all": "^4.1.5",
         "promisify-child-process": "^4.1.1",
         "rimraf": "^3.0.2",
         "typescript": "latest"

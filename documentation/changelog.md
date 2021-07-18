@@ -75,6 +75,10 @@ description: List of all the changes and current versions.
 + Fix Chat Escape Bug
 + Fix Chat Focus Problems
 + Fix Chat Delay Issues
++ Add Physical Dealership Location
++ Add Holograms System
++ Add Dealership Interface
++ Added Purchasing Vehicles from Dynamic Dealerships
 ```
 
 ## 1.8.2 - April 19 - May 14, 2021

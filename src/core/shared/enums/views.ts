@@ -46,5 +46,6 @@ export enum View_Events_Garage {
 }
 
 export enum View_Events_Dealership {
-    Open = 'dealership:Open'
+    Open = 'dealership:Open',
+    Purchase = 'dealership:Purchase'
 }
