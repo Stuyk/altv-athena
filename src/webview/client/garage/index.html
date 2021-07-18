@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <head>
+        <title>Garage by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/vuetify.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="../icomoon/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app" >
+            <v-app v-cloak>
+                    <div class="frame grey elevation-6 rounded-sm darken-4">
+                        <div class="toolbar pl-4 pr-4">
+                            <div class="overline">
+                                {{ locales.LABEL_GARAGE }}
+                            </div>
+                            <button @click="exit" class="exit" outlined text>
+                                <v-icon color="error">icon-times-circle</v-icon>
+                            </button>
+                        </div>
+                        
+                        <div class="inner">
+                            <div class="text--subtitle-2 text-center mt-4">
+                                {{ locales.LABEL_DESC }}
+                            </div>
+                            <div class="scroll pa-6">               
+                                <div v-for="(vehicle, index) in vehicles" :key="index" class="mb-4 element">
+                                    <div class="split">
+                                        <!-- Vehicle Model Name -->
+                                        <div class="overline">
+                                             <!-- Vehicle Preview -->
+                                            <div class="preview-icon">
+                                                <v-icon small class="green--text mr-2">icon-camera</v-icon>
+                                                {{ vehicle.model }} (UID: {{ vehicle.uid.substring(0, 8) }})
+                                            </div>
+                                            <div class="preview">
+                                                <img :src="`${url}/vehicles/${vehicle.model}.png`"></img>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <!-- Vehicle Fuel -->
+                                        <div class="overline">
+                                            {{ locales.LABEL_FUEL }}: {{ vehicle.fuel.toFixed(2) }}
+                                        </div>
+                                    </div>
+                                    <!-- Vehicle Controls -->
+                                    <div class="split">
+                                        <button @click="spawn(index)" class="green--text flex-grow-1 outline-round mr-2">
+                                            {{ locales.LABEL_SPAWN }}
+                                        </button>
+                                        <button @click="despawn(index)" class="orange--text flex-grow-1 outline-round ml-2">
+                                            {{ locales.LABEL_DESPAWN }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="athena"></div>
+            </v-app>
+        </div>
+        <script src="../js/vue.min.js"></script>
+        <script src="../js/vuetify.js"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

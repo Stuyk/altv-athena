@@ -5,6 +5,7 @@ export interface Vehicle {
     model: string;
     position: Vector3;
     rotation: Vector3;
+    garageIndex?: number;
     fuel?: number;
     color?: {
         r: number;

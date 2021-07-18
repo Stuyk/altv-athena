@@ -1,11 +1,10 @@
-import { Database, getDatabase } from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { Collections } from '../interface/DatabaseCollections';
 import { defaultOptions, DiscordID, Options } from '../interface/Options';
 import Logger from '../utility/athenaLogger';
 
 export class OptionsController {
-    static db: Database = getDatabase();
     static data: Options = {};
 
     /**
@@ -14,7 +13,7 @@ export class OptionsController {
      * @memberof OptionsController
      */
     static async propagateOptions() {
-        const databaseData = await OptionsController.db.fetchAllData<Options>(Collections.Options);
+        const databaseData = await Database.fetchAllData<Options>(Collections.Options);
         const currentOptions = !databaseData[0] ? defaultOptions : databaseData[0];
 
         Object.keys(currentOptions).forEach((key) => {
@@ -22,11 +21,7 @@ export class OptionsController {
         });
 
         if (!databaseData[0]) {
-            OptionsController.data = await OptionsController.db.insertData(
-                OptionsController.data,
-                Collections.Options,
-                true
-            );
+            OptionsController.data = await Database.insertData(OptionsController.data, Collections.Options, true);
         }
 
         if (DEFAULT_CONFIG.WHITELIST) {
@@ -48,7 +43,7 @@ export class OptionsController {
         }
 
         OptionsController.data.whitelist.push(id);
-        OptionsController.db.updatePartialData(
+        Database.updatePartialData(
             OptionsController.data._id,
             { whitelist: OptionsController.data.whitelist },
             Collections.Options
@@ -89,7 +84,7 @@ export class OptionsController {
         }
 
         OptionsController.data.whitelist.splice(index, 1);
-        OptionsController.db.updatePartialData(
+        Database.updatePartialData(
             OptionsController.data._id,
             { whitelist: OptionsController.data.whitelist },
             Collections.Options

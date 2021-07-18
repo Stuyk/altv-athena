@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../server/enums/athena';
+import { ATHENA_EVENTS_PLAYER } from '../../server/enums/athenaEvents';
 import { EventController } from '../../server/systems/athenaEvent';
 
 EventController.onPlayer(ATHENA_EVENTS_PLAYER.DIED, (player: alt.Player) => {

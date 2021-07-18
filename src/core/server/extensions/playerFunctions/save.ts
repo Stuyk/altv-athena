@@ -1,9 +1,7 @@
 import * as alt from 'alt-server';
-import { Database, getDatabase } from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import { Character } from '../../../shared/interfaces/Character';
 import { Collections } from '../../interface/DatabaseCollections';
-
-const db: Database = getDatabase();
 
 /**
  * Save a specific field for the current character of this player.
@@ -20,7 +18,7 @@ async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Pro
     }
 
     alt.setTimeout(async () => {
-        await db.updatePartialData(p.data._id, { [fieldName]: fieldValue }, Collections.Characters);
+        await Database.updatePartialData(p.data._id, { [fieldName]: fieldValue }, Collections.Characters);
     }, 0);
 }
 
@@ -36,7 +34,7 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
     }
 
     alt.setTimeout(async () => {
-        await db.updatePartialData(p.data._id, { ...dataObject }, Collections.Characters);
+        await Database.updatePartialData(p.data._id, { ...dataObject }, Collections.Characters);
     }, 0);
 }
 

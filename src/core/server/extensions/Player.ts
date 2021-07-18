@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { Character } from '../../shared/interfaces/Character';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';
+import { InteractionShape } from './Colshape';
 import currency from './playerFunctions/currency';
 import dataUpdater from './playerFunctions/dataUpdater';
 import emit from './playerFunctions/emit';
@@ -42,6 +43,9 @@ declare module 'alt-server' {
         nextFoodSync: number;
         nextPlayTime: number;
 
+        // Wanted Level
+        wanted: number;
+
         // Toolbar Information
         lastToolbarData: { equipped: boolean; slot: number };
 
@@ -52,6 +56,16 @@ declare module 'alt-server' {
         // Vehicle Info
         lastEnteredVehicleID: number;
         lastVehicleID: number;
+
+        /**
+         * The total number of vehicles the player has spawned.
+         * @type {number}
+         * @memberof Player
+         */
+        vehiclesSpawned: number;
+
+        // Interaction
+        currentInteraction: InteractionShape | null;
     }
 }
 

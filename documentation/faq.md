@@ -5,6 +5,7 @@ description: Frequently asked questions.
 # FAQ
 
 - [FAQ](#faq)
+  - [Should I use this without knowing programming?](#should-i-use-this-without-knowing-programming)
   - [Do I actually need to buy a license?](#do-i-actually-need-to-buy-a-license)
   - [How do I purchase a license?](#how-do-i-purchase-a-license)
   - [Is there a lifetime package?](#is-there-a-lifetime-package)
@@ -18,7 +19,6 @@ description: Frequently asked questions.
   - [Can I use MySQL?](#can-i-use-mysql)
   - [How do I use a CDN?](#how-do-i-use-a-cdn)
   - [Downloads are super slow?](#downloads-are-super-slow)
-  - [The Price is High!?](#the-price-is-high)
   - [Do you provide custom support / scripts?](#do-you-provide-custom-support--scripts)
   - [Will all features be free?](#will-all-features-be-free)
   - [May I share my license?](#may-i-share-my-license)
@@ -35,7 +35,11 @@ description: Frequently asked questions.
   - [What about mods?](#what-about-mods)
   - [What is Ares?](#what-is-ares)
   - [Do I have to use Discord?](#do-i-have-to-use-discord)
+  - [Images are Broken in-game](#images-are-broken-in-game)
 
+## Should I use this without knowing programming?
+
+That is your own decision to make. However, having actual programming knowledge will make using this framework infinitely easier to understand and build off of. **IF YOU CAN'T USE COMMAND LINE TERMINALS THIS IS NOT FOR YOU.**
 
 ## Do I actually need to buy a license?
 
@@ -111,10 +115,6 @@ Side note: It's a lot easier than it seems. Tried it myself without any issues.
 If you are running a production server without a CDN it is highly recommended that you get a CDN as soon as possible to split the load between downloading server files and playing on the server.
 
 https://wiki.altv.mp/wiki/Tutorial:Setup_CDN
-
-## The Price is High!?
-
-Unfortunately in order for me to make this a sustainable SaaS service the price of the gamemode was increased to its current price to make this project worth the time. If you are unable to afford this price specifically please send a direct message to Stuyk for a coupon code.
 
 ## Do you provide custom support / scripts?
 
@@ -192,3 +192,7 @@ Ares is the backend service and Discord Authorization handler. Ares provides a s
 ## Do I have to use Discord?
 
 If you wish to use a whitelist and some other features then the answer is yes. However, you may remove the Discord based login and you will have to make a large amount of changes to unhook the Discord Authentication service.
+
+## Images are Broken in-game
+
+You need to port forward 9111 to enable the web server for your server.

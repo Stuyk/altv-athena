@@ -10,6 +10,7 @@ description: >-
   - [Before Buying a Server](#before-buying-a-server)
   - [Obtain a License Key](#obtain-a-license-key)
   - [Windows 10 / Windows Server](#windows-10--windows-server)
+  - [Make Sure MongoDB is Running as a Service](#make-sure-mongodb-is-running-as-a-service)
       - [Port Forwarding](#port-forwarding)
   - [Linux Ubuntu 18.04](#linux-ubuntu-1804)
       - [General Server Recommendation for Starting Out](#general-server-recommendation-for-starting-out)
@@ -49,6 +50,13 @@ You need to download and install these programs and binaries from the links belo
 
 [Download and install MongoDB Server](https://www.mongodb.com/try/download/community)
 
+_When Installing MongoDB Keep Everything Default_
+
+## Make Sure MongoDB is Running as a Service
+
+![](https://i.imgur.com/2Osus8S.png)
+
+
 #### Port Forwarding
 
 At the very least you will need to open port 7788 for your main server.
@@ -56,6 +64,7 @@ At the very least you will need to open port 7788 for your main server.
 You will need to open the following ports in your **Windows Firewall** and **Router**.
 
 * 7788
+* 9111
 
 Here's a `.bat` script that will open both ports in your **Windows Firewall.**
 
@@ -66,9 +75,17 @@ echo Opening 7788 for TCP
 netsh advfirewall firewall add rule name="alt:V-7788-IN-TCP" dir=in action=allow protocol=TCP localport=7788
 netsh advfirewall firewall add rule name="alt:V-7788-OUT-TCP" dir=out action=allow protocol=TCP localport=7788
 
+echo Opening 9111 for TCP
+netsh advfirewall firewall add rule name="alt:V-9111-IN-TCP" dir=in action=allow protocol=TCP localport=9111
+netsh advfirewall firewall add rule name="alt:V-9111-OUT-TCP" dir=out action=allow protocol=TCP localport=9111
+
 echo Opening 7788 for UDP
 netsh advfirewall firewall add rule name="alt:V-7788-IN-UDP" dir=in action=allow protocol=UDP localport=7788
 netsh advfirewall firewall add rule name="alt:V-7788-OUT-UDP" dir=out action=allow protocol=UDP localport=7788
+
+echo Opening 9111 for UDP
+netsh advfirewall firewall add rule name="alt:V-9111-IN-UDP" dir=in action=allow protocol=UDP localport=9111
+netsh advfirewall firewall add rule name="alt:V-9111-OUT-UDP" dir=out action=allow protocol=UDP localport=9111
 
 pause
 ```
@@ -107,6 +124,7 @@ This is just a general server recommendation for Linux Servers. If you can affor
 
 ```text
 sudo ufw allow 7788
+sudo ufw allow 9111
 ```
 
 Special Note: Your server host may have an additional firewall option in their control panel. Ensure you open your ports through there as well. OVH is known to have this feature.

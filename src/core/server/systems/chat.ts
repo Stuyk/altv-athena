@@ -1,14 +1,17 @@
 import * as alt from 'alt-server';
+
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
+import { CharacterPermissions, Permissions } from '../../shared/flags/permissions';
 import { Command } from '../../shared/interfaces/Command';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { emitAll } from '../utility/emitHelper';
-import { Permissions } from '../../shared/flags/permissions';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { playerFuncs } from '../extensions/Player';
 import Logger from '../utility/athenaLogger';
+import { emitAll } from '../utility/emitHelper';
 
 const maxMessageLength: number = 128;
 const printCommands = false;
@@ -53,6 +56,48 @@ export default class ChatController {
             description,
             func: callback,
             permission: permissions
+        };
+    }
+
+    /**
+     * A command that requires character permission to run it.
+     * @static
+     * @param {string} name
+     * @param {string} description
+     * @param {CharacterPermissions} characterPermissions
+     * @param {Function} callback
+     * @memberof ChatController
+     */
+    static addCharacterCommand(
+        name: string,
+        description: string,
+        characterPermissions: CharacterPermissions,
+        callback: Function
+    ): void {
+        if (commandInterval) {
+            alt.clearTimeout(commandInterval);
+        }
+
+        commandInterval = alt.setTimeout(() => {
+            Logger.info(`Total Commands: ${commandCount}`);
+        }, 1500);
+
+        if (ChatController.commands[name]) {
+            alt.logError(`[Athena] Command: ${name} was already registered.`);
+            return;
+        }
+
+        commandCount += 1;
+
+        if (printCommands) {
+            alt.log(`[Athena] Registered Command ${name}`);
+        }
+
+        ChatController.commands[name] = {
+            name,
+            description,
+            func: callback,
+            characterPermissions
         };
     }
 
@@ -110,7 +155,7 @@ export default class ChatController {
         }
 
         if (player.data.isDead) {
-            playerFuncs.emit.message(player, `You cannot send messages when you are dead.`);
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
             return;
         }
 
@@ -135,13 +180,44 @@ export default class ChatController {
     static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
         const commandInfo = ChatController.commands[commandName];
         if (!commandInfo || !commandInfo.func) {
-            playerFuncs.emit.message(player, `/${commandName} is not a valid command.`);
+            playerFuncs.emit.message(
+                player,
+                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`
+            );
             return;
         }
 
-        if (commandInfo.permission !== 0) {
-            if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
-                playerFuncs.emit.message(player, `{FF0000} Command is not permitted.`);
+        if (commandInfo.permission) {
+            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
+
+            if (!isAdminPermissionValid) {
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`
+                );
+                return;
+            }
+        }
+
+        if (commandInfo.characterPermissions) {
+            if (!player.data.characterPermission) {
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                );
+                return;
+            }
+
+            const isCharacterPermValid = isFlagEnabled(
+                player.data.characterPermission,
+                commandInfo.characterPermissions
+            );
+
+            if (!isCharacterPermValid) {
+                playerFuncs.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                );
                 return;
             }
         }
@@ -149,24 +225,70 @@ export default class ChatController {
         commandInfo.func(player, ...args);
     }
 
+    /**
+     * Gets the description of a command based on its name.
+     * Always append '/' when using this function.
+     * Example: '/engine'
+     * @static
+     * @param {string} commandName
+     * @return {string}
+     * @memberof ChatController
+     */
     static getDescription(commandName: string): string {
         return ChatController.commands[commandName].description;
     }
 
+    /**
+     * Pushes all the commands down to the client with their descriptions.
+     * @static
+     * @param {alt.Player} player
+     * @memberof ChatController
+     */
     static populateCommands(player: alt.Player): void {
         const commandList: Array<Command> = [];
 
         Object.keys(ChatController.commands).forEach((key) => {
             const commandInfo = ChatController.commands[key];
-            if (!isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission)) {
+
+            // Check Admin Permission Commands
+            if (commandInfo.permission) {
+                const isAdminPermissionValid = isFlagEnabled(
+                    player.accountData.permissionLevel,
+                    commandInfo.permission
+                );
+                if (!isAdminPermissionValid) {
+                    return;
+                }
+
+                commandList.push({
+                    name: commandInfo.name,
+                    description: commandInfo.description,
+                    permission: commandInfo.permission
+                });
                 return;
             }
 
-            commandList.push({
-                name: commandInfo.name,
-                description: commandInfo.description,
-                permission: commandInfo.permission
-            });
+            // Check Character Permission Commands
+            if (commandInfo.characterPermissions) {
+                if (!player.data.characterPermission) {
+                    return;
+                }
+
+                const isCharacterPermValid = isFlagEnabled(
+                    player.data.characterPermission,
+                    commandInfo.characterPermissions
+                );
+                if (!isCharacterPermValid) {
+                    return;
+                }
+
+                commandList.push({
+                    name: commandInfo.name,
+                    description: commandInfo.description,
+                    characterPermissions: commandInfo.characterPermissions
+                });
+                return;
+            }
         });
 
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
@@ -180,12 +302,6 @@ export default class ChatController {
     }
 }
 
-// Has to be loaded last.
-import('../commands/commands')
-    .catch((err) => {
-        console.error(err);
-        console.error(
-            `[Athena] Failed to load a command file. Please fix the error and commands will work normally again.`
-        );
-    })
-    .then(() => alt.onClient(View_Events_Chat.Send, ChatController.handleMessage));
+alt.on(SYSTEM_EVENTS.COMMANDS_LOADED, () => {
+    alt.onClient(View_Events_Chat.Send, ChatController.handleMessage);
+});

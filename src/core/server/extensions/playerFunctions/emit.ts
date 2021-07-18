@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
 import { AnimationFlags } from '../../../shared/flags/animation';
-import { AudioStream } from '../../../shared/interfaces/Audio';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
@@ -18,26 +17,18 @@ import utility from './utility';
  * @memberof EmitPrototype
  */
 function animation(
-    p: alt.Player,
+    player: alt.Player,
     dictionary: string,
     name: string,
     flags: AnimationFlags,
     duration: number = -1
 ): void {
-    if (p.data.isDead) {
+    if (player.data.isDead) {
         alt.logWarning(`[Athena] Cannot play ${dictionary}@${name} while player is dead.`);
         return;
     }
 
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
-}
-
-/**
- * Play a YouTube Audio Stream in a Given Radius
- * @param {AudioStream} stream
- */
-function audioStream(stream: AudioStream) {
-    alt.emitClient(null, SYSTEM_EVENTS.PLAYER_EMIT_AUDIO_STREAM, stream);
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
 }
 
 /**
@@ -46,9 +37,9 @@ function audioStream(stream: AudioStream) {
  * @param {*} value
  * @memberof EmitPrototype
  */
-function meta(p: alt.Player, key: string, value: any): void {
+function meta(player: alt.Player, key: string, value: any): void {
     alt.nextTick(() => {
-        alt.emitClient(p, SYSTEM_EVENTS.META_SET, key, value);
+        alt.emitClient(player, SYSTEM_EVENTS.META_SET, key, value);
     });
 }
 
@@ -57,8 +48,8 @@ function meta(p: alt.Player, key: string, value: any): void {
  * @param {string} message
  * @memberof EmitPrototype
  */
-function message(p: alt.Player, message: string): void {
-    alt.emitClient(p, View_Events_Chat.Append, message);
+function message(player: alt.Player, message: string): void {
+    alt.emitClient(player, View_Events_Chat.Append, message);
 }
 
 /**
@@ -66,8 +57,8 @@ function message(p: alt.Player, message: string): void {
  * @param {string} message
  * @memberof EmitPrototype
  */
-function notification(p: alt.Player, message: string): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_NOTIFICATION, message);
+function notification(player: alt.Player, message: string): void {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_NOTIFICATION, message);
 }
 
 /**
@@ -75,13 +66,13 @@ function notification(p: alt.Player, message: string): void {
  * @param {Particle} particle
  * @param {boolean} [emitToNearbyPlayers=false]
  */
-function particle(p: alt.Player, particle: Particle, emitToNearbyPlayers = false): void {
+function particle(player: alt.Player, particle: Particle, emitToNearbyPlayers = false): void {
     if (!emitToNearbyPlayers) {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
+        alt.emitClient(player, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
         return;
     }
 
-    const nearbyPlayers = utility.getClosestPlayers(p, 10);
+    const nearbyPlayers = utility.getClosestPlayers(player, 10);
     for (let i = 0; i < nearbyPlayers.length; i++) {
         const player = nearbyPlayers[i];
         alt.emitClient(player, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
@@ -146,7 +137,6 @@ function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
 
 export default {
     animation,
-    audioStream,
     createProgressBar,
     meta,
     message,

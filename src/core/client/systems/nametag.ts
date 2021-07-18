@@ -4,12 +4,10 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText2D } from '../utility/text';
-import { BaseHUD } from '../views/hud/hud';
 
 const drawDistance = 50;
 let interval;
 let shouldScreenShake = false;
-let shouldUpdateSpeed = true;
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleStart);
 
@@ -26,22 +24,6 @@ function drawNametags() {
 
     if (alt.Player.local.isMenuOpen) {
         return;
-    }
-
-    // Updates HUD with Speed Data
-    if (alt.Player.local.vehicle && shouldUpdateSpeed) {
-        shouldUpdateSpeed = false;
-        alt.setTimeout(() => {
-            if (!alt.Player.local.vehicle) {
-                return;
-            }
-
-            const isMetric = native.getProfileSetting(227);
-            const currentSpeed = native.getEntitySpeed(alt.Player.local.vehicle.scriptID);
-            const speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);
-            const newSpeed = `${speedCalc} ${isMetric ? 'KM/H' : 'MP/H'}`;
-            BaseHUD.updateSpeed(newSpeed);
-        }, 0);
     }
 
     if (SHARED_CONFIG.VOICE_ON && alt.Player.local.isTalking) {
@@ -135,6 +117,4 @@ function drawNametags() {
         native.endTextCommandDisplayText(0, 0, 0);
         native.clearDrawOrigin();
     }
-
-    shouldUpdateSpeed = true;
 }

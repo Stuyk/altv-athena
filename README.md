@@ -8,9 +8,26 @@ description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
 
 This project solely exists as a new standard for GTA 5 roleplay scripts on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script for GTA 5 has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
 
-You will have to do some general script writing and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
+**BEFORE YOU CONSIDER THIS FRAMEWORK**
+
+* You need to know how to use command line.
+* You need to know Typescript / Javascript.
+* You need to be self-starting and self-learning.
+* You need to understand how to run commands in consoles.
+* You need to not ask the Developer(s) for support on how to run the clearly stated instructions in the Documentation.
+
+**Documentation**
+
+https://athena.stuyk.com/
+
+
+**You will have to do some general programming** and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
 
 This is a framework and not a out-of-the-box full-featured script. This framework aims to provide the bare minimum necessary to help you get your server running at a much faster rate.
+
+## Is this for non-programmers?
+
+No, this framework is meant to get people who have fiddled with programming languages off the ground and give them features that are already completed. This makes it much easier to start a Roleplay server, but adding the additional code necessary to make a full-featured server is a bit more difficult.
 
 ## Where to Purchase?
 
@@ -45,18 +62,17 @@ We have a small demo server available for you to test the framework with Adminis
     -   Screenshot
     -   Add to Whitelist
     -   Remove from Whitelist
--   Food & Water System
-    -   Customizable Food / Water
-    -   Restore Food / Water with Items
 -   Player
     -   Health Synchronization
     -   Armour Synchronization
     -   Play 3D Custom Sounds (Short)
     -   Play 2D Custom Sounds (Short)
+    -   Food Stat
+    -   Water Stat
 -   Name Tags
     -   Display after 7.5s \(Used for Hiding Names Partially\)
     -   Names Hidden in Vehicles
--   Easy Discord Login / Authentication \(alt:V Ares\)
+-   Discord Based Authentication / Login
 -   Admin System
     -   Utilizes the Permission System
     -   Various Admin Commands
@@ -93,22 +109,17 @@ We have a small demo server available for you to test the framework with Adminis
 -   Text Label System
     -   Global Text Label Controller
     -   Easily add and remove text labels
--   Section System
-    -   World split into Sections
-    -   Split Sections Help with Performance
-    -   Lookup Closest Players by Section / Slice
 -   Currency System
     -   Deposit Currency
     -   Withdraw Currency
     -   Transfer Bank Currency
 -   Vehicle System
-    -   Control Vehicle Door States
     -   Control Vehicle Door Locks
     -   Handle Vehicle Ownership
-    -   Handle Vehicle Keys
     -   Handle Vehicle Synchronization Pop-in
     -   Seatbelt / Handle Window Fly-through
-    -   Personal Vehicle Spawner Menu
+    -   Control Vehicle Door States
+    -   Fuel
 -   Inventory System
     -   Drop Items
     -   Pickup Items
@@ -140,15 +151,17 @@ We have a small demo server available for you to test the framework with Adminis
     -   Name Individual Items
     -   Describe Individual Items
     -   Separate Item Equips
+- Garage System
+    - 17 Garages Across the Map
+    - Store Vehicles
+    - Spawn Vehicles
+- Expandable HUD System
+    - Easily create a dynamic HUD
+    - Add New HUD Elements
+    - Remove HUD Elements
 -   Toolbar System
     -   Equip an item in a Toolbar Equippable Item
     -   Press 1-4 to swap items in toolbar
--   Phone System
-    -   A built in phone.
-    -   Phone can handle custom applications.
-    -   Dealership App in Phone
-    -   Bank App in Phone
-    -   Vehicle Summoner in Phone
 -   Custom Job Framework
     -   Easy to Use Job Language / Creation
     -   Play Animations
@@ -161,9 +174,15 @@ We have a small demo server available for you to test the framework with Adminis
     -   Call Events on Objective Completions
     -   Job Menu
 -   Action Menus
-    -   Ifinitely scaling menus.
+    -   Infinitely scaling menus
     -   A menu system that calls other events easily.
     -   Easily construct custom menus in minutes to define functionality.
+-   Wheel Menu
+    -   Dynamic Wheel Menus
+-   Dealership
+    -   Basic Dealership with Customizable Locations
+    -   Purchase Vehicles
+    -   Spawn Vehicles from Garage After Purchase
 -   Extendable Core Resource
     -   Extend the core resource by writing your own code in the 'plugins' folder.
 

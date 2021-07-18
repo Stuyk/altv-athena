@@ -7,5 +7,4 @@ export interface Vector3 {
 export interface Vector2 {
     x: number;
     y: number;
-    z: number;
 }

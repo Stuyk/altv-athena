@@ -1,0 +1,142 @@
+@import '../css/common.css';
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter';
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    animation: fadein 2s;
+}
+
+.v-application .v-application--wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background: transparent !important;
+    width: 100vw;
+    height: 100vh;
+}
+
+.v-application .grey.darken-4 {
+    border: 5px solid rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.options {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    bottom: calc(6vh + 75px);
+}
+
+.options button {
+    height: 100%;
+}
+
+.stats {
+    position: fixed;
+    left: 3vh;
+    top: 3vh;
+    min-width: 270px;
+    max-width: 270px;
+    overflow: hidden;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+    justify-items: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.button-group {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.outline-round {
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+button {
+    padding-left: 5px;
+    font-size: 16px;
+    padding: 1vh 0vw;
+    font-variant: small-caps;
+    transition: 0.1s;
+    opacity: 0.75;
+    overflow: hidden;
+    outline: hidden !important;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+button:active {
+    color: white !important;
+    transform: unset !important;
+    background: rgba(0, 0, 0, 0.3);
+    outline: none !important;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    background: rgba(0, 0, 0, 0.3) !important;
+    opacity: 1 !important;
+}
+
+.selection {
+    position: fixed;
+    display: block;
+    flex-direction: row;
+    height: auto;
+    min-width: 75vh !important;
+    bottom: 3vh;
+}
+
+.selection .disabled-button {
+    opacity: 0.75 !important;
+}
+
+.selection .disabled-button:hover {
+    opacity: 0.75 !important;
+}
+
+.selection .disabled-button:active {
+    color: unset !important;
+    transform: unset !important;
+    background: unset !important;
+    user-select: none;
+}
+
+* {
+    user-select: none;
+}

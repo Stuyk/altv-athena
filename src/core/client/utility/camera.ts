@@ -60,7 +60,7 @@ export function createPedEditCamera(offset: alt.IVector3 = null): void {
 
         native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z);
         native.setCamActive(camera, true);
-        native.renderScriptCams(true, false, 0, true, false, false);
+        native.renderScriptCams(true, false, 0, true, false, 0);
     }
 
     cameraControlsInterval = alt.setInterval(handleControls, 0);
@@ -81,7 +81,7 @@ export function destroyPedEditCamera() {
     }
 
     native.destroyAllCams(true);
-    native.renderScriptCams(false, false, 0, false, false, false);
+    native.renderScriptCams(false, false, 0, false, false, 0);
 
     zpos = 0;
     fov = 90;
@@ -132,7 +132,7 @@ function handleControls() {
 
             native.setCamFov(camera, fov);
             native.setCamActive(camera, true);
-            native.renderScriptCams(true, false, 0, true, false, false);
+            native.renderScriptCams(true, false, 0, true, false, 0);
         }
     }
 
@@ -147,7 +147,7 @@ function handleControls() {
 
             native.setCamFov(camera, fov);
             native.setCamActive(camera, true);
-            native.renderScriptCams(true, false, 0, true, false, false);
+            native.renderScriptCams(true, false, 0, true, false, 0);
         }
     }
 
@@ -161,7 +161,7 @@ function handleControls() {
         native.setCamCoord(camera, startCamPosition.x, startCamPosition.y, startCamPosition.z + zpos);
         native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z + zpos);
         native.setCamActive(camera, true);
-        native.renderScriptCams(true, false, 0, true, false, false);
+        native.renderScriptCams(true, false, 0, true, false, 0);
     }
 
     if (native.isDisabledControlPressed(0, 33)) {
@@ -174,7 +174,7 @@ function handleControls() {
         native.setCamCoord(camera, startCamPosition.x, startCamPosition.y, startCamPosition.z + zpos);
         native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z + zpos);
         native.setCamActive(camera, true);
-        native.renderScriptCams(true, false, 0, true, false, false);
+        native.renderScriptCams(true, false, 0, true, false, 0);
     }
 
     // rmb
@@ -227,7 +227,7 @@ export function setFov(value) {
 
     native.setCamFov(camera, fov);
     native.setCamActive(camera, true);
-    native.renderScriptCams(true, false, 0, true, false, false);
+    native.renderScriptCams(true, false, 0, true, false, 0);
 }
 
 /**
@@ -242,5 +242,5 @@ export function setZPos(value) {
     native.setCamCoord(camera, startCamPosition.x, startCamPosition.y, startCamPosition.z + zpos);
     native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z + zpos);
     native.setCamActive(camera, true);
-    native.renderScriptCams(true, false, 0, true, false, false);
+    native.renderScriptCams(true, false, 0, true, false, 0);
 }

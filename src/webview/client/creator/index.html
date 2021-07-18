@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Character Creator by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../css/vuetify.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="../icomoon/style.css" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+        />
+    </head>
+    <body>
+        <div id="app">
+            <v-app v-cloak>
+                <div class="panel grey darken-4 elevation-12">
+                    <div class="toolbar pl-2 pr-2 pt-1 pb-1">
+                        <span class="overline overline-center grey--text lighten-1--text font-weight-bold">
+                            {{ locales.titles[selection] }}
+                        </span>
+                    </div>
+                    <div class="content-no-scroll pa-3">
+                        <div class="button-group">
+                            <div class="split">
+                                <template v-if="selection !== 0">
+                                    <button class="flex-grow-1" @click="decrementIndex">
+                                        <div class="split">
+                                            <v-icon class="pl-4 orange--text">icon-chevron-left</v-icon>
+                                            <span class="overline pr-12 orange--text">{{ locales.LABEL_PREV }}</span>
+                                        </div>
+                                    </button>
+                                </template>
+                                <template v-if="selection < this.navOptions.length - 1">
+                                    <button class="flex-grow-1" @click="incrementIndex">
+                                        <div class="split">
+                                            <span class="overline pl-12 blue--text">{{ locales.LABEL_NEXT }}</span>
+                                            <v-icon class="pr-4 blue--text">icon-chevron-right</v-icon>
+                                        </div>
+                                    </button>
+                            </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content pa-3">
+                        <component
+                            v-bind:is="navOptions[selection]"
+                            v-bind:data="data"
+                            v-bind:nodiscard="noDiscard"
+                            v-bind:noname="noName"
+                            v-bind:currentname="data.name"
+                            v-bind:infodata="infoData"
+                            v-bind:totalcharacters="totalCharacters"
+                            v-bind:locales="locales"
+                        >
+                        </component>
+                    </div>
+                    
+                </div>
+                <div class="athena"></div>
+            </v-app>
+        </div>
+        <script src="../js/vue.min.js"></script>
+        <script src="../js/vuetify.js"></script>
+        <script src="./utility/defaultLocales.js"></script>
+        <script src="./utility/hairOverlays.js"></script>
+        <script src="./utility/overlays.js"></script>
+        <script src="./utility/presets.js"></script>
+        <script src="./components/info.js" type="text/javascript"></script>
+        <script src="./components/overlays.js" type="text/javascript"></script>
+        <script src="./components/makeup.js" type="text/javascript"></script>
+        <script src="./components/hair.js" type="text/javascript"></script>
+        <script src="./components/structure.js" type="text/javascript"></script>
+        <script src="./components/appearance.js" type="text/javascript"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>

@@ -1,8 +1,9 @@
-import { Permissions } from '../flags/permissions';
+import { Permissions, CharacterPermissions } from '../flags/permissions';
 
 export interface Command {
     name: string;
     description: string;
-    permission: Permissions;
+    permission?: Permissions;
+    characterPermissions?: CharacterPermissions;
     func?: Function;
 }

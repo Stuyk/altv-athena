@@ -1,51 +1,67 @@
 import * as alt from 'alt-server';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
+import { CharacterPermissions, Permissions } from '../../shared/flags/permissions';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { emitAll } from '../utility/emitHelper';
 import { getPlayersByGridSpace } from '../utility/filters';
-import { distance2d } from '../utility/vector';
 
 // Talk out of Character
-ChatController.addCommand('b', LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/b'), Permissions.None, handleCommandOOC);
-ChatController.addCommand(
+ChatController.addCharacterCommand(
+    'b',
+    LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/b'),
+    CharacterPermissions.None,
+    handleCommandOOC
+);
+
+ChatController.addCharacterCommand(
     'ooc',
     LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/ooc'),
-    Permissions.None,
+    CharacterPermissions.None,
     handleCommandOOC
 );
 
 // Perform an Action
-ChatController.addCommand('me', LocaleController.get(LOCALE_KEYS.COMMAND_ME, '/me'), Permissions.None, handleCommandMe);
+ChatController.addCharacterCommand(
+    'me',
+    LocaleController.get(LOCALE_KEYS.COMMAND_ME, '/me'),
+    CharacterPermissions.None,
+    handleCommandMe
+);
 
 // Describe an Action
-ChatController.addCommand('do', LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'), Permissions.None, handleCommandDo);
+ChatController.addCharacterCommand(
+    'do',
+    LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'),
+    CharacterPermissions.None,
+    handleCommandDo
+);
 
 // Speak Low
-ChatController.addCommand(
+ChatController.addCharacterCommand(
     'low',
     LocaleController.get(LOCALE_KEYS.COMMAND_LOW, '/low'),
-    Permissions.None,
+    CharacterPermissions.None,
     handleCommandLow
 );
 
 // Whisper
-ChatController.addCommand(
+ChatController.addCharacterCommand(
     'w',
     LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/w'),
-    Permissions.None,
+    CharacterPermissions.None,
     handleCommandWhisper
 );
 
 // alias
-ChatController.addCommand(
+ChatController.addCharacterCommand(
     'whisper',
     LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/whisper'),
-    Permissions.None,
+    CharacterPermissions.None,
     handleCommandWhisper
 );
 

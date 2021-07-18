@@ -1,9 +1,15 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_State } from '../../../shared/enums/vehicle';
+
+import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../../shared/enums/vehicle';
+import { Vector3 } from '../../../shared/interfaces/Vector';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athena';
+import { ATHENA_EVENTS_VEHICLE } from '../../enums/athenaEvents';
 import { sha256Random } from '../../utility/encryption';
 import { playerFuncs } from '../Player';
+import { DEFAULT_CONFIG } from '../../athena/main';
+import { LocaleController } from '../../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { vehicleFuncs } from '../Vehicle';
 
 const ownershipBehavior = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
 const tmpBehavior =
@@ -18,7 +24,7 @@ const tmpBehavior =
  * @param {Partial<Vehicle>} data
  * @return {*}  {alt.Vehicle}
  */
-function add(player: alt.Player, data: Partial<Vehicle>): alt.Vehicle {
+function add(player: alt.Player, data: Partial<Vehicle>, shouldSpawn: boolean = true): alt.Vehicle | null {
     data.uid = sha256Random(JSON.stringify(player.data));
 
     // Add or append vehicle to player.data
@@ -30,6 +36,11 @@ function add(player: alt.Player, data: Partial<Vehicle>): alt.Vehicle {
 
     playerFuncs.save.field(player, 'vehicles', player.data.vehicles);
     playerFuncs.sync.vehicles(player);
+
+    if (!shouldSpawn) {
+        return null;
+    }
+
     return spawn(player, data as Vehicle);
 }
 
@@ -75,6 +86,7 @@ function despawn(id: number, player: alt.Player = null): boolean {
         player.lastVehicleID = null;
     }
 
+    player.vehiclesSpawned -= 1;
     return true;
 }
 
@@ -91,7 +103,8 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
     vehicle.player_id = player.id;
     vehicle.behavior = tmpBehavior;
     vehicle.numberPlateText = 'TEMP';
-    vehicle.setStreamSyncedMeta(Vehicle_State.OWNER, vehicle.player_id);
+    vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+    vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
     return vehicle;
 }
 
@@ -100,15 +113,25 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
  * @param {alt.Player} player
  * @param {Vehicle} data
  */
-function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
-    // Destroy previous vehicle
-    if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
-        const vehicle = alt.Vehicle.all.find((v) => v.id.toString() === player.lastVehicleID.toString());
-        if (vehicle && vehicle.valid && vehicle.destroy) {
-            try {
-                vehicle.destroy();
-            } catch (err) {}
-        }
+function spawn(player: alt.Player, data: Vehicle, position: Vector3 = null, rotation: Vector3 = null): alt.Vehicle {
+    if (player.vehiclesSpawned >= DEFAULT_CONFIG.MAX_VEHICLE_SPAWNS) {
+        playerFuncs.emit.notification(
+            player,
+            LocaleController.get(LOCALE_KEYS.VEHICLE_COUNT_EXCEEDED, DEFAULT_CONFIG.MAX_VEHICLE_SPAWNS)
+        );
+        return null;
+    }
+
+    if (!player.vehiclesSpawned) {
+        player.vehiclesSpawned = 1;
+    } else {
+        player.vehiclesSpawned += 1;
+    }
+
+    // Override if Present
+    if (position && rotation) {
+        data.position = position;
+        data.rotation = rotation;
     }
 
     // Create the new vehicle.
@@ -133,6 +156,7 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
     vehicle.fuel = data.fuel;
     vehicle.player_id = player.id;
     vehicle.behavior = ownershipBehavior;
+    vehicle.passengers = [];
 
     let color;
 
@@ -150,9 +174,12 @@ function spawn(player: alt.Player, data: Vehicle): alt.Vehicle {
 
     // Process mods, plates, etc.
     vehicle.numberPlateText = vehicle.data.uid.substring(0, 8);
+    vehicle.manualEngineControl = true;
+    vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+    vehicleFuncs.setter.updateFuel(vehicle);
 
     // Synchronize Ownership
-    vehicle.setStreamSyncedMeta(Vehicle_State.OWNER, vehicle.player_id);
+    vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
     alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
     return vehicle;
 }

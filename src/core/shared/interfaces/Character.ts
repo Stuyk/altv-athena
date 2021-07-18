@@ -4,6 +4,7 @@ import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 import { Item } from './Item';
 import { Vehicle } from './Vehicle';
+import { CharacterPermissions } from '../flags/permissions';
 
 export interface Character {
     _id?: any;
@@ -19,6 +20,8 @@ export interface Character {
     isDead: boolean;
     hours: number;
     interior: string | null;
+    wanted: number;
+    characterPermission?: CharacterPermissions | null;
     exterior: Partial<Vector3>;
     appearance: Partial<Appearance>;
     info: Partial<CharacterInfo>;
@@ -40,5 +43,6 @@ export const CharacterDefaults: Partial<Character> = {
     health: 199,
     armour: 0,
     hours: 0,
+    wanted: 0,
     vehicles: []
 };

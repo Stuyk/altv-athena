@@ -13,17 +13,12 @@ export default {
     [LOCALE_KEYS.COMMAND_ACTION_MENU]: `_%_ - Create a test action menu`,
     [LOCALE_KEYS.COMMAND_ADD_VEHICLE]: `_%_ [model] - Add a vehicle to your player`,
     [LOCALE_KEYS.COMMAND_ADD_WHITELIST]: `_%_ [discord] - Whitelist a player by Discord ID`,
-    [LOCALE_KEYS.COMMAND_AUDIOSTREAM]: `_%_ [youtube] - Create a Test Audio Stream`,
     [LOCALE_KEYS.COMMAND_OOC]: `_%_ [message] - Speak out of character`,
     [LOCALE_KEYS.COMMAND_BROADCAST]: `_%_ [message] - Announce message server wide`,
     [LOCALE_KEYS.COMMAND_COORDS]: `_%_ [x] [y] [z] - Teleport to some coordinates`,
     [LOCALE_KEYS.COMMAND_DO]: `_%_ [message] - Describe an object, sound, etc.`,
     [LOCALE_KEYS.COMMAND_DUMMY_ITEM]: `_%_ - Get some debug items`,
     [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] - Get an item by name`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_CREATE]: `_%_ [name] - Initialize creation of an interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_INSIDE]: `_%_ - Set inside pos for initialized interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_OUTSIDE]: `_%_ - Set outside pos for initialized interior.`,
-    [LOCALE_KEYS.COMMAND_INTERIOR_DONE]: `_%_ - Finish interior creation.`,
     [LOCALE_KEYS.COMMAND_LOW]: `_%_ [message] - Speak quietly`,
     [LOCALE_KEYS.COMMAND_MOD_CHAT]: `_%_ [message] - Speak to Admins & Mods`,
     [LOCALE_KEYS.COMMAND_ME]: `_%_ [message] - Describe a roleplay action`,
@@ -40,11 +35,20 @@ export default {
     [LOCALE_KEYS.COMMAND_SET_WATER]: `_%_ [0-100] - Set your thirst level`,
     [LOCALE_KEYS.COMMAND_SPAWN_VEHICLE]: `_%_ [index] - Spawn personal vehicle by index`,
     [LOCALE_KEYS.COMMAND_TELEPORTER]: `_%_ - Teleport back to current location with an item`,
+    [LOCALE_KEYS.COMMAND_TELEPORT_WAYPOINT]: `- Teleport to a waypoint. Create Waypoint First`,
+    [LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK]: `_%_ - Toggle the vehicle lock`,
+    [LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR]: `_%_ - [0-5] - Toggle a vehicle door`,
+    [LOCALE_KEYS.COMMAND_TOGGLE_ENGINE]: `_%_ - Toggle the vehicle engine`,
     [LOCALE_KEYS.COMMAND_UPDATE_WEATHER]: `_%_ - Forces synchronization of weather`,
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
+    [LOCALE_KEYS.COMMAND_WANTED]: `_%_ [player_id] [stars] - Set player wanted level`,
     [LOCALE_KEYS.COMMAND_WHISPER]: `_%_ [player_id][message] - Privately whisper to a nearby player`,
     [LOCALE_KEYS.COMMAND_WEAPON]: `_%_ [name] - Get a weapon by name`,
+    [LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER]: `Command is not permitted for your character.`,
+    [LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN]: `Command is not permitted for your account.`,
+    [LOCALE_KEYS.COMMAND_NOT_VALID]: `_%_ is not a valid command.`,
     // Cannot
+    [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
     [LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD]: `Cannot perform this command while you are dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES]: `Cannot find any personal vehicles.`,
@@ -67,6 +71,9 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
+    // Garage
+    [LOCALE_KEYS.GARAGE_BLIP_NAME]: `Garage`,
+    [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
     // House
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
     // Invalid
@@ -76,6 +83,7 @@ export default {
     [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
     [LOCALE_KEYS.INTERACTION_INTERACT_WITH_OBJECT]: `Interact with Object`,
     [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
+    [LOCALE_KEYS.INTERACTION_VIEW_OPTIONS]: `View Options`,
     // Item
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
@@ -111,7 +119,19 @@ export default {
     [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
     [LOCALE_KEYS.VEHICLE_LOCK_SET_TO]: `Vehicle lock has been set to: _%_`,
     [LOCALE_KEYS.VEHICLE_TOGGLE_LOCK]: `Toggle Lock`,
+    [LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE]: `Toggle Engine`,
     [LOCALE_KEYS.VEHICLE_IS_LOCKED]: `Closest vehicle is locked.`,
+    [LOCALE_KEYS.VEHICLE_ENTER_VEHICLE]: `Get Into / Exit Vehicle`,
+    [LOCALE_KEYS.VEHICLE_TOO_FAR]: `Vehicle is too far away.`,
+    [LOCALE_KEYS.VEHICLE_NO_VEHICLES_IN_GARAGE]: `There are no vehicles in this garage.`,
+    [LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS]: `There are no parking spots at this garage.`,
+    [LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED]: `That vehicle is already spawned.`,
+    [LOCALE_KEYS.VEHICLE_COUNT_EXCEEDED]: `You may only have _%_ vehicles spawned at a time. You have exceeded the vehicle spawn count.`,
+    [LOCALE_KEYS.VEHICLE_LOCKED]: `Locked`,
+    [LOCALE_KEYS.VEHICLE_UNLOCKED]: `Unlocked`,
+    [LOCALE_KEYS.VEHICLE_FUEL]: `Fuel`,
+    // World
+    [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================
     // WebView Locales Start Here
     // ============================
@@ -886,7 +906,7 @@ export default {
         LABEL_HAT: 'Hat',
         LABEL_SHIRT: 'Shirt',
         LABEL_MASK: 'Mask',
-        LABEL_BOTTOMS: 'Bottoms dsdfsd',
+        LABEL_BOTTOMS: 'Bottoms',
         LABEL_SHOES: 'Shoes',
         LABEL_GLASSES: 'Glasses',
         LABEL_EARRINGS: 'Earrings / Ear Pieces',
@@ -908,5 +928,14 @@ export default {
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
         LABEL_OPEN_WINDOW: `Open Login Window Again`
+    },
+    [LOCALE_KEYS.WEBVIEW_GARAGE]: {
+        LABEL_GARAGE: 'Garage',
+        LABEL_DESC: 'Spawn your vehicles through this terminal.',
+        LABEL_MODEL: 'Model',
+        LABEL_FUEL: 'Fuel',
+        LABEL_CONTROLS: 'Controls',
+        LABEL_SPAWN: 'spawn',
+        LABEL_DESPAWN: 'despawn'
     }
 };

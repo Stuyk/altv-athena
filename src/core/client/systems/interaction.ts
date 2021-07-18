@@ -1,31 +1,51 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ActionMenu, Action } from '../../shared/interfaces/Actions';
-import { Interaction } from '../../shared/interfaces/Interaction';
-import { distance2d } from '../../shared/utility/vector';
-import { KEY_BINDS } from '../events/keyup';
-import { drawMarker } from '../utility/marker';
-import { ActionsController } from '../views/hud/controllers/actionsController';
-import { HelpController } from '../views/hud/controllers/helpController';
-import { BaseHUD, HudEventNames } from '../views/hud/hud';
-import { VehicleController } from './vehicle';
 
-const MAX_INTERACTION_DRAW = 4; // Draws the key to press near the object.
-const MAX_CHECKPOINT_DRAW = 8;
+import { KEY_BINDS } from '../../shared/enums/keybinds';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
+import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
+import { KeybindController } from '../events/keyup';
+import { drawTexture, loadTexture } from '../utility/texture';
+
 const TIME_BETWEEN_CHECKS = 500;
-let NEXT_MENU_UPDATE = Date.now() + 2000;
-let NEXT_HELP_CLEAR = Date.now() + 5000;
-let dynamicActionMenu: ActionMenu = {};
+let tick;
+let pressedKey = false;
+let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+let description: string;
+let position: alt.Vector3;
 
 export class InteractionController {
-    static customInteractions: Array<Interaction> = [];
-    static tick: number;
-    static pressedKey: boolean = false;
-    static nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+    /**
+     * Initialize the Interaction Controller
+     * @static
+     * @memberof InteractionController
+     */
+    static init() {
+        if (!tick) {
+            tick = alt.setInterval(InteractionController.tick, 0);
+        }
 
-    static triggerInteraction(): void {
-        InteractionController.pressedKey = true;
+        InteractionController.registerKeybinds();
+    }
+
+    /**
+     * Register default keybind for interactions.
+     * @static
+     * @memberof InteractionController
+     */
+    static registerKeybinds() {
+        KeybindController.registerKeybind({
+            key: KEY_BINDS.INTERACT,
+            singlePress: () => {
+                pressedKey = true;
+            }
+        });
+
+        loadTexture('mpsafecracking');
+        loadTexture('mpmissmarkers128');
     }
 
     /**
@@ -35,129 +55,143 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static setInteractionInfo(type: string | null, position: alt.Vector3, text: string) {
-        if (type === null) {
-            alt.Player.local.closestInteraction = null;
+    static set(_position: alt.Vector3, _description: string) {
+        if (!_position || !_description) {
+            position = null;
+            description = null;
             return;
         }
 
-        alt.Player.local.closestInteraction = { type, position, text };
+        position = _position;
+        description = _description;
     }
 
-    static handleInteractionMode() {
+    static tick() {
         if (alt.Player.local.isMenuOpen) {
-            InteractionController.pressedKey = false;
-            dynamicActionMenu = {};
+            pressedKey = false;
             return;
         }
 
         if (alt.Player.local.isChatOpen) {
-            InteractionController.pressedKey = false;
-            dynamicActionMenu = {};
+            pressedKey = false;
             return;
         }
 
         if (alt.Player.local.meta.isDead) {
-            InteractionController.pressedKey = false;
-            dynamicActionMenu = {};
+            pressedKey = false;
             return;
         }
 
-        VehicleController.runVehicleControllerTick();
+        InteractionController.drawInteractText();
 
-        if (Date.now() > NEXT_HELP_CLEAR) {
-            NEXT_HELP_CLEAR = Date.now() + 5000;
-            delete alt.Player.local.otherInteraction;
-            HelpController.updateHelpText(null, null, null, null);
-        }
-
-        // Populates the Menu
-        if (Date.now() > NEXT_MENU_UPDATE) {
-            NEXT_MENU_UPDATE = Date.now() + 1000;
-            dynamicActionMenu = {};
-
-            // Populate Vehicle Options
-            const vehicleMenus = VehicleController.getVehicleOptions();
-            if (Object.keys(vehicleMenus).length >= 1) {
-                dynamicActionMenu = { ...dynamicActionMenu, ...vehicleMenus };
-            }
-        }
-
-        // Populates Interaction Menu
-        if (alt.Player.local.closestInteraction) {
-            const dist = distance2d(alt.Player.local.pos, alt.Player.local.closestInteraction.position);
-            if (dist < MAX_CHECKPOINT_DRAW) {
-                dynamicActionMenu[alt.Player.local.closestInteraction.text] = {
-                    eventName: SYSTEM_EVENTS.INTERACTION,
-                    isServer: true,
-                    data: alt.Player.local.closestInteraction.type
-                };
-            }
+        if (!pressedKey) {
+            return;
         }
 
         // Timeout for Key Presses
-        if (InteractionController.nextKeyPress > Date.now()) {
-            InteractionController.pressedKey = false;
+        if (nextKeyPress > Date.now()) {
+            pressedKey = false;
             return;
         }
 
-        // Check that the Dynamic Menu has Items
-        if (Object.keys(dynamicActionMenu).length <= 0) {
-            return;
-        }
-
-        if (alt.Player.local.closestInteraction && alt.Player.local.closestInteraction.position) {
-            // Show this when interactions available is populated.
-            HelpController.updateHelpText(
-                alt.Player.local.closestInteraction.position,
-                KEY_BINDS.INTERACT,
-                alt.Player.local.closestInteraction.text,
-                null
-            );
-        } else if (alt.Player.local.otherInteraction) {
-            HelpController.updateHelpText(
-                alt.Player.local.otherInteraction.position,
-                null,
-                alt.Player.local.otherInteraction.short,
-                alt.Player.local.otherInteraction.long
-            );
-        }
-
-        // Open the Dynamic Menu
-        if (InteractionController.pressedKey) {
-            InteractionController.pressedKey = false;
-            InteractionController.nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-            ActionsController.set(dynamicActionMenu);
-        }
-
-        return;
+        nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+        pressedKey = false;
+        alt.emitServer(SYSTEM_EVENTS.INTERACTION);
     }
 
-    static addInteractions(customInteractions: Array<Interaction>): void {
-        InteractionController.customInteractions = customInteractions;
+    static appendText(originalText: string, key: number, description: string): string {
+        return originalText + `~y~' ${String.fromCharCode(key).toUpperCase()} ' ~w~${description} ~n~`;
+    }
 
-        for (let i = 0; i < customInteractions.length; i++) {
-            const interaction = customInteractions[i];
-            if (interaction.blip) {
-                let blip = new alt.PointBlip(interaction.blip.pos.x, interaction.blip.pos.y, interaction.blip.pos.z);
-                blip.scale = interaction.blip.scale;
+    static drawInteractText() {
+        let interactText = '';
 
-                // Beta Feature? Not implemented yet.
-                if (blip.hasOwnProperty('size')) {
-                    blip.size = { x: interaction.blip.scale, y: interaction.blip.scale } as alt.Vector2;
+        // Display Help Text
+        if (description && position) {
+            interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
+
+            loadTexture('mpmissmarkers128').then(() => {
+                if (!position) {
+                    return;
                 }
 
-                blip.sprite = interaction.blip.sprite;
-                blip.color = interaction.blip.color;
-                blip.shortRange = interaction.blip.shortRange;
-                blip.name = interaction.blip.text;
+                drawTexture('mpmissmarkers128', 'corona_marker', position, 0.3);
+            });
+        }
+
+        const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
+
+        if (!alt.Player.local.vehicle && vehicle) {
+            const isVehicleLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
+            const vehicleDistance = distance2d(alt.Player.local.pos, vehicle.pos);
+
+            // Get Forward Vehicle Position
+            const vehicleFwd = native.getEntityForwardVector(vehicle.scriptID);
+            const backPosition = {
+                x: vehicle.pos.x - vehicleFwd.x * 2,
+                y: vehicle.pos.y - vehicleFwd.y * 2,
+                z: vehicle.pos.z
+            };
+
+            const isInBack = distance2d(alt.Player.local.pos, backPosition) <= 2;
+
+            if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
+                if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
+                    loadTexture('mpsafecracking');
+                }
+
+                loadTexture('mpsafecracking').then(() => {
+                    const newPosition = vehicle.pos.add(0, 0, 1);
+
+                    if (isVehicleLocked) {
+                        drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+                    } else {
+                        drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+                    }
+                });
+
+                if (!isVehicleLocked) {
+                    // Press 'F' to enter vehicle
+                    const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
+                    interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_FUNCS, enterText);
+                }
+
+                if (!isVehicleLocked && isInBack) {
+                    // Press 'U' for Options
+                    const optionsText = 'Options';
+                    interactText = InteractionController.appendText(
+                        interactText,
+                        KEY_BINDS.VEHICLE_OPTIONS,
+                        optionsText
+                    );
+                }
+
+                // Press 'X' to lock vehicle
+                const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
+                interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_LOCK, lockText);
+            }
+        } else if (alt.Player.local.vehicle) {
+            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+
+            if (!engineOn) {
+                // Press 'Y' to toggle engine
+                const engineText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE);
+                interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_ENGINE, engineText);
             }
         }
+
+        // Replace the last ~n~ in the interaction text.
+        interactText = interactText.replace(/~n~$/, '');
+        if (interactText === '') {
+            return;
+        }
+
+        // Draw the Help Text (Top Left)
+        native.beginTextCommandDisplayHelp('THREESTRINGS');
+        native.addTextComponentSubstringPlayerName(interactText);
+        native.endTextCommandDisplayHelp(0, false, false, 0);
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_INTERACTIONS, InteractionController.addInteractions);
-alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.setInteractionInfo);
-alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
-    InteractionController.tick = alt.setInterval(InteractionController.handleInteractionMode, 0);
-});
+alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.set);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InteractionController.init);

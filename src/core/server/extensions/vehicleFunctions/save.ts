@@ -1,11 +1,8 @@
 import * as alt from 'alt-server';
-import { Database, getDatabase } from 'simplymongo';
+
 import { Vehicle_Behavior } from '../../../shared/enums/vehicle';
-import { Vehicle } from '../../../shared/interfaces/Vehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { playerFuncs } from '../Player';
-
-const db: Database = getDatabase();
 
 /**
  * Save vehicle data that is currently stored on the vehicle.

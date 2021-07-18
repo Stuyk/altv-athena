@@ -4,11 +4,9 @@ import { Character } from '../../shared/interfaces/Character';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
-import * as sm from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import './clothing';
 import { Collections } from '../interface/DatabaseCollections';
-
-const db: sm.Database = sm.getDatabase();
 
 alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
 alt.onClient(View_Events_Characters.New, handleNewCharacter);
@@ -19,7 +17,7 @@ alt.onClient(View_Events_Characters.Delete, handleDelete);
  * @param  {Player} player
  */
 export async function goToCharacterSelect(player: Player): Promise<void> {
-    const characters: Array<Character> = await db.fetchAllByField<Character>(
+    const characters: Array<Character> = await Database.fetchAllByField<Character>(
         'account_id',
         player.accountData._id,
         Collections.Characters
@@ -92,10 +90,10 @@ async function handleDelete(player: Player, id: string): Promise<void> {
     }
 
     const character_uid = id;
-    await db.deleteById(character_uid, Collections.Characters); // Remove Character Here
+    await Database.deleteById(character_uid, Collections.Characters); // Remove Character Here
 
     // Refetch Characters
-    const characters: Array<Character> = await db.fetchAllByField<Character>(
+    const characters: Array<Character> = await Database.fetchAllByField<Character>(
         'account_id',
         player.accountData._id,
         Collections.Characters

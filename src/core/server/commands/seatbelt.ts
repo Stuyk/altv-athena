@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
-import { Vehicle_Events } from '../../shared/enums/vehicle';
+
+import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { Permissions } from '../../shared/flags/permissions';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -31,5 +32,5 @@ function handleCommand(player: alt.Player): void {
 
     playerFuncs.emit.sound2D(player, 'seatbelt_on', 0.75);
     playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON));
-    alt.emitClient(player, Vehicle_Events.SET_SEATBELT);
+    alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT);
 }

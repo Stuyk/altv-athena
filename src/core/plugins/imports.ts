@@ -1,11 +1,12 @@
 import * as alt from 'alt-server';
+
 import logger from '../server/utility/athenaLogger';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 
 const filePaths = [
     // GAMEMODE IMPORTS -- Remove what you don't want.
     './teleportEffect/teleporter',
-    './heist/heist',
+    './heistExample/index',
     './deathLog/deathLog',
     './actionMenu/actionMenu',
     './interactionExample/index',
@@ -21,7 +22,7 @@ const filePaths = [
  * That's why it's built in this way.
  * @param startTime
  */
-export default async function loadImports(startTime: number) {
+export default async function loadImports() {
     logger.info(`Loading extras folder...`);
     let extraResourcesCount = 0;
     for (let i = 0; i < filePaths.length; i++) {
@@ -44,6 +45,7 @@ export default async function loadImports(startTime: number) {
     }
 
     logger.info(`Extra Resources Loaded: ${extraResourcesCount}`);
-    logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
 }
+
+loadImports();

@@ -4,6 +4,83 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.0
+```diff
++ New Keybind Interface for Custom Keybinds
++ Added Register Keybind
++ Applied Existing Keybinds to Register Keybind
++ Added ScreenText Class
++ Added New Help Text Interface
++ Fix Slide Up Animation for ATM
++ Hide Help Text in Menus
++ Fixed Outline Color for Buttons
++ Added 'Escape' to leave ATM menu.
++ Built New Interaction Interface
++ Made Interactions Much Simpler
++ Increased Build Times
++ Using SWC to transpile Typescript Faster
++ Replaced SimplyMongo with EzMongoDB
++ Rebuilt Vehicle Handler
++ Simplify Interaction(s) through Server-Side Routing Only
++ Interactions now use Callback Functions
++ Changed Entering Vehicle to 'F' Only
++ Entering Vehicle Always Finds First Seat
++ Removed Bad Phone
++ Removed All Phone Integrations
++ Removed Broken Interior System
++ Added Character Permission System
++ Character Permissions are Linked to Individual Characters
++ Character Permissions work with Commands
++ New Command Type: CharacterCommand
++ Removed Broken YouTube Audio Stream(s)
++ Prune Decimals for Character Selection
++ Added Server Time for World Time
++ Added WebServer for Faster Development Times
++ Removed Interfaces from Core Resource
++ Interfaces Moved to WebView Resource
++ Images Removed from Core
++ Moved All Images, SVGs, and Audio to utility/webserver
++ Moving Images Resulted in Faster Boot Times
++ Require Port 9111 for WebServer
++ Added Missing Locales for Chat Responses
++ Added Initial Garage Implementation
++ Added Garage Interface
++ Added Garage Vehicle Type Filtering
++ Added Garage Parking Spot Shuffler
++ Added Markers to Garage Positions
++ Added Separate Files for Garage Parking Spots
++ Increased Max Spawned Vehicles to 3 by Default
++ Added Configuration for Max Spawned Vehicles
++ Removed WebView HUD
++ Added Dynamic HUD for Natives
++ Fixed Fuel Synced Meta
++ Added Position for Synced Meta for Vehicles
++ Fixed Entering / Exiting Vehicle while Typing
++ Added Lock State for HUD
++ Added Time to HUD
++ Added Wanted Level(s)
++ Update Interface Names
++ Repair Broken Clothing Stores
++ Repair Broken Fuel Pumps
++ Remove Vending Machine Blips
++ Move Blip Lists Server Side
++ Added /tpwp - Teleport to a Waypoint
++ Better Handling
++ Added Dynamic Wheel Menu
++ Added Animation through Wheel Menu
++ Added New Keybind for Animations 'J'
++ Added New Keybind for Vehicle Options 'U'
++ Added Ability to Push Vehicle Synchronized
++ Fix Broken Natives
++ Fix Chat Escape Bug
++ Fix Chat Focus Problems
++ Fix Chat Delay Issues
++ Add Physical Dealership Location
++ Add Holograms System
++ Add Dealership Interface
++ Added Purchasing Vehicles from Dynamic Dealerships
+```
+
 ## 1.8.2 - April 19 - May 14, 2021
 
 ```diff

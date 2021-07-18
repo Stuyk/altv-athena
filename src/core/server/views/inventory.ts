@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { InventoryType } from '../../shared/enums/inventoryTypes';
-import { ItemType } from '../../shared/enums/itemType';
+import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { DroppedItem, Item } from '../../shared/interfaces/Item';
@@ -9,11 +9,11 @@ import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
 import '../effects/heal';
 import '../effects/vehicleRepair';
-import { ATHENA_EVENTS_PLAYER } from '../enums/athena';
-import { distance2d } from '../utility/vector';
+import { ATHENA_EVENTS_PLAYER } from '../enums/athenaEvents';
 import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/CategoryData';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { distance2d } from '../../shared/utility/vector';
 
 /**
  * Let's talk about Inventory Logic! Woo!
@@ -83,18 +83,18 @@ export class InventoryController {
         const endSlotIndex = stripCategory(endSlot);
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
 
-        if (selectData.name === InventoryType.TOOLBAR && endData.name !== InventoryType.TOOLBAR) {
+        if (selectData.name === INVENTORY_TYPE.TOOLBAR && endData.name !== INVENTORY_TYPE.TOOLBAR) {
             player.removeAllWeapons();
         }
 
         // Handle Drop Ground
-        if (endData.name === InventoryType.GROUND) {
+        if (endData.name === INVENTORY_TYPE.GROUND) {
             InventoryController.handleDropGround(player, selectedSlot, tab);
             return;
         }
 
         // Pickup Item from Ground
-        if (selectData.name === InventoryType.GROUND) {
+        if (selectData.name === INVENTORY_TYPE.GROUND) {
             InventoryController.handlePickupGround(player, endData, endSlotIndex, hash, tab);
             return;
         }
@@ -119,7 +119,7 @@ export class InventoryController {
             return;
         }
 
-        if (endData.name === InventoryType.TAB) {
+        if (endData.name === INVENTORY_TYPE.TAB) {
             InventoryController.handleMoveTabs(
                 player,
                 itemClone,
@@ -146,7 +146,7 @@ export class InventoryController {
             return;
         }
 
-        const isEquipmentItem = isFlagEnabled(itemClone.behavior, ItemType.IS_EQUIPMENT);
+        const isEquipmentItem = isFlagEnabled(itemClone.behavior, ITEM_TYPE.IS_EQUIPMENT);
         if (isEquipmentItem && itemClone.data.sex !== player.data.appearance.sex) {
             playerFuncs.sync.inventory(player);
             return;
@@ -221,7 +221,7 @@ export class InventoryController {
         const selectSlotIndex = stripCategory(selectedSlot);
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
 
-        if (selectData.name === InventoryType.GROUND) {
+        if (selectData.name === INVENTORY_TYPE.GROUND) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -238,7 +238,7 @@ export class InventoryController {
             return;
         }
 
-        if (!isFlagEnabled(itemClone.behavior, ItemType.CAN_DROP)) {
+        if (!isFlagEnabled(itemClone.behavior, ITEM_TYPE.CAN_DROP)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -268,7 +268,7 @@ export class InventoryController {
         playerFuncs.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
 
         // Destroys an item when it is dropped on the ground if the behavior calls for it.
-        if (isFlagEnabled(itemClone.behavior, ItemType.DESTROY_ON_DROP)) {
+        if (isFlagEnabled(itemClone.behavior, ITEM_TYPE.DESTROY_ON_DROP)) {
             playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
             playerFuncs.emit.message(player, `${itemClone.name} was destroyed on drop.`);
             return;
@@ -376,8 +376,8 @@ export class InventoryController {
             return;
         }
 
-        const isEquipmentItem = isFlagEnabled(droppedItem.item.behavior, ItemType.IS_EQUIPMENT);
-        const isGoingToEquipment = endData.name === InventoryType.EQUIPMENT;
+        const isEquipmentItem = isFlagEnabled(droppedItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
+        const isGoingToEquipment = endData.name === INVENTORY_TYPE.EQUIPMENT;
         if (isEquipmentItem && isGoingToEquipment && droppedItem.item.data.sex !== player.data.appearance.sex) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
@@ -489,12 +489,12 @@ export class InventoryController {
             return;
         }
 
-        if (!isFlagEnabled(item.behavior, ItemType.CONSUMABLE)) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        if (!isFlagEnabled(item.behavior, ItemType.SKIP_CONSUMABLE)) {
+        if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {

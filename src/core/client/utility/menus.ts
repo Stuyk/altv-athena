@@ -1,8 +1,10 @@
 import * as alt from 'alt-client';
 
-export function isAnyMenuOpen(): boolean {
-    if (alt.Player.local.isChatOpen) {
-        return true;
+export function isAnyMenuOpen(excludeChat = false): boolean {
+    if (!excludeChat) {
+        if (alt.Player.local.isChatOpen) {
+            return true;
+        }
     }
 
     if (alt.Player.local.isActionMenuOpen) {

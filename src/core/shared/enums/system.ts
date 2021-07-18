@@ -4,6 +4,12 @@ export enum SYSTEM_EVENTS {
     APPEND_TEXTLABELS = 'append:TextLabel',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
+    // Commands
+    COMMANDS_LOADED = 'commands:Loaded',
+    // GET
+    GET_WAYPOINT = `getter:Waypoint`,
+    // Holograms
+    HOLOGRAM_APPEND = 'hologram:Append',
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
     //
@@ -62,6 +68,7 @@ export enum SYSTEM_EVENTS {
     REMOVE_TEXTLABEL = 'remove:Textlabel',
     //
     SET_ACTION_MENU = 'actions:Set',
+    SET_VIEW_URL = 'actions:SetViewURL',
     //
     TICKS_START = 'ticks:Start',
     //

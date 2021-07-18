@@ -3,8 +3,8 @@ import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
-import { drawText2D, drawText3D } from '../utility/text';
-import { BaseHUD, HudEventNames } from '../views/hud/hud';
+import { drawText3D } from '../utility/text';
+import { HudSystem } from './hud';
 
 class ObjectiveController {
     static objective: Objective | null;
@@ -29,7 +29,7 @@ class ObjectiveController {
 
         if (!data) {
             ObjectiveController.objective = null;
-            BaseHUD.setHudStatus(HudEventNames.Objective, null);
+            HudSystem.setObjective(null);
             return;
         }
 
@@ -49,7 +49,7 @@ class ObjectiveController {
             ObjectiveController.blip.route = true;
         }
 
-        BaseHUD.setHudStatus(HudEventNames.Objective, data.description);
+        HudSystem.setObjective(data.description);
         ObjectiveController.objective = data;
         ObjectiveController.interval = alt.setInterval(ObjectiveController.verifyObjective, 0);
     }

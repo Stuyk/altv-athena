@@ -1,5 +1,30 @@
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
+// All Vehicle Dealerships
+import PDMCoupe from './dealerships/PDMCoupe';
+import PDMSport from './dealerships/PDMSport';
+import PDMSuper from './dealerships/PDMSuper';
+import PDMSuv from './dealerships/PDMSuv';
+
+// All Parking Garages
+import BanhamCanyon from './parking/BanhamCanyon';
+import DelPerroBeach from './parking/DelPerroBeach';
+import DowntownVinewoodLower from './parking/DowntownVinewoodLower';
+import DowntownVinewoodUpper from './parking/DowntownVinewoodUpper';
+import GrandSenoraDesert from './parking/GrandSenoraDesert';
+import GrapeSeed from './parking/GrapeSeed';
+import LaPuertaDocks from './parking/LaPuertaDocks';
+import LaPuertaVehicle from './parking/LaPuertaVehicle';
+import LegionSquare from './parking/LegionSquare';
+import LosSantosInternational from './parking/LosSantosInternational';
+import LosSantosInternationalAir from './parking/LosSantosInternationalAir';
+import PaletoBay from './parking/PaletoBay';
+import PaletoForest from './parking/PaletoForest';
+import Rancho from './parking/Rancho';
+import RockfordHills from './parking/RockfordHills';
+import SandyShores from './parking/SandyShores';
+import TongvaHills from './parking/TongvaHills';
+
 export const DEFAULT_CONFIG = {
     // Whitelisting
     WHITELIST: false,
@@ -42,6 +67,7 @@ export const DEFAULT_CONFIG = {
     BOOTUP_HOUR: 9,
     BOOTUP_MINUTE: 0,
     MINUTES_PER_MINUTE: 5,
+    USE_SERVER_TIME: true, // Overwrites the server time to use the current time of the computer it is running on.
     // Inventory Properites
     TIME_BETWEEN_INVENTORY_UPDATES: 10000,
     // Food Properties
@@ -73,29 +99,33 @@ export const DEFAULT_CONFIG = {
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
     FUEL_LOSS_PER_PLAYER_TICK: 0.15, // Happens every 10s
-    VEHICLE_DEALERSHIP_SPAWNS: {
-        boat: { x: -877.3353271484375, y: -1357.1688232421875, z: 4.00537109375 },
-        speedboat: { x: -877.3353271484375, y: -1357.1688232421875, z: 4.00537109375 },
-        commercial: { x: 1270.839599609375, y: -3211.898193359375, z: 5.9010396003723145 },
-        compact: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        coupe: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        cycle: { x: -1105.5673828125, y: -1688.4227294921875, z: 4.3033366203308105 },
-        emergency: { x: 419.75384521484375, y: -1024.2294921875, z: 29.041784286499023 },
-        industrial: { x: 1270.839599609375, y: -3211.898193359375, z: 5.9010396003723145 },
-        military: { x: -2246.874755859375, y: 3245.732177734375, z: 32.81018829345703 },
-        motorcycle: { x: 1770.909912109375, y: 3341.8837890625, z: 41.18528366088867 },
-        muscle: { x: -230.79527282714844, y: -1388.4603271484375, z: 31.258228302001953 },
-        offroad: { x: 1981.775146484375, y: 3776.6796875, z: 32.18091583251953 },
-        aircraft: { x: -1052.5650634765625, y: -2964.5654296875, z: 18.8182373046875 },
-        suv: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        sedan: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        service: { x: 419.75384521484375, y: -1024.2294921875, z: 29.041784286499023 },
-        sport: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        sportclassic: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        super: { x: -11.356627464294434, y: -1085.3214111328125, z: 26.691791534423828 },
-        trailer: { x: 1270.839599609375, y: -3211.898193359375, z: 5.9010396003723145 },
-        train: { x: 0, y: 0, z: 0 },
-        utility: { x: 1270.839599609375, y: -3211.898193359375, z: 5.9010396003723145 },
-        van: { x: -230.79527282714844, y: -1388.4603271484375, z: 31.258228302001953 }
-    }
+    MAX_VEHICLE_SPAWNS: 3, // Players can have 3 vehicles spawned at one time.
+    // Vehicle Garage List, Includes Parking Spots with Rotations
+    // Order of the array matters. Don't forget that.
+    VEHICLE_GARAGES: [
+        DowntownVinewoodUpper,
+        DowntownVinewoodLower,
+        LaPuertaDocks,
+        LaPuertaVehicle,
+        DelPerroBeach,
+        LegionSquare,
+        RockfordHills,
+        LosSantosInternational,
+        LosSantosInternationalAir,
+        Rancho,
+        BanhamCanyon,
+        GrandSenoraDesert,
+        TongvaHills,
+        SandyShores,
+        GrapeSeed,
+        PaletoForest,
+        PaletoBay
+    ],
+    VEHICLE_DEALERSHIPS: [
+        //
+        PDMCoupe,
+        PDMSport,
+        PDMSuv,
+        PDMSuper
+    ]
 };

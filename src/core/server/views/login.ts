@@ -1,16 +1,18 @@
 import * as alt from 'alt-server';
 import dotenv from 'dotenv';
 import axios, { AxiosRequestConfig } from 'axios';
-import { decryptData, encryptData, getPublicKey, sha256Random } from '../utility/encryption';
+import { sha256Random } from '../utility/encryption';
+import { IConfig } from '../interface/IConfig';
+import Ares from '../utility/ares';
 
-dotenv.config();
+const config: IConfig = dotenv.config().parsed as IConfig;
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
 // These connect to a backend that helps users login with Discord oAuth2.
-const azureURL = process.env.ENDPOINT ? process.env.ENDPOINT : `https://ares.stuyk.com`;
-const azureRedirect = encodeURI(`${azureURL}/v1/request/key`);
-const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${azureRedirect}&prompt=none&response_type=code&scope=identify`;
+const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuyk.com`;
+const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
+const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify`;
 
 alt.onClient('discord:Begin', handlePlayerConnect);
 alt.onClient('discord:FinishAuth', handleFinishAuth);
@@ -44,8 +46,8 @@ async function handlePlayerConnect(player) {
     };
 
     // Setup Parseable Format for Azure
-    const public_key = await getPublicKey();
-    const encryptedData = await encryptData(JSON.stringify(encryptionFormatObject));
+    const public_key = await Ares.getPublicKey();
+    const encryptedData = await Ares.encrypt(JSON.stringify(encryptionFormatObject));
     const senderFormat = {
         public_key,
         data: encryptedData
@@ -66,7 +68,7 @@ async function handlePlayerConnect(player) {
 export async function fetchAzureKey() {
     let azurePubKey;
 
-    const result = await axios.get(`${azureURL}/v1/get/key`).catch(() => {
+    const result = await axios.get(`${aresURL}/v1/get/key`).catch(() => {
         return null;
     });
 
@@ -87,8 +89,8 @@ export function getDiscordOAuth2URL() {
     return url;
 }
 
-export function getAzureURL() {
-    return azureURL;
+export function getAresURL() {
+    return aresURL;
 }
 
 async function handleFinishAuth(player) {
@@ -97,8 +99,8 @@ async function handleFinishAuth(player) {
         return;
     }
 
-    const public_key = await getPublicKey();
-    const azureURL = await getAzureURL();
+    const public_key = await Ares.getPublicKey();
+    const azureURL = await getAresURL();
 
     const options: AxiosRequestConfig = {
         method: 'POST',
@@ -121,7 +123,7 @@ async function handleFinishAuth(player) {
         return;
     }
 
-    const data = await decryptData(JSON.stringify(result.data)).catch((err) => {
+    const data = await Ares.decrypt(JSON.stringify(result.data)).catch((err) => {
         alt.emitClient(player, 'Discord:Fail', 'Could not decrypt data from Authorization service.');
         return null;
     });

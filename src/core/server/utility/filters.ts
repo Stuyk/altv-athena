@@ -1,9 +1,6 @@
 import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
 import { distance } from '../../shared/utility/vector';
-import { AresFunctions, WASM } from './wasmLoader';
-
-const wasm = WASM.getFunctions<AresFunctions>('ares');
 
 /**
  * Returns an array of players filtered by permission level.
@@ -59,7 +56,7 @@ export function getClosestPlayer(player: alt.Player): alt.Player {
             continue;
         }
 
-        if (wasm.AthenaMath.isGreater(dist, newDistance)) {
+        if (dist > newDistance) {
             continue;
         }
 

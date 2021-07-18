@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import * as sm from 'simplymongo';
+import Database from '@stuyk/ezmongodb';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
 import { Permissions } from '../../shared/flags/permissions';
@@ -7,7 +7,6 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';
-import { getUniquePlayerHash } from '../utility/encryption';
 import { goToCharacterSelect } from '../views/characters';
 import { OptionsController } from './options';
 import { vehicleFuncs } from '../extensions/Vehicle';
@@ -18,8 +17,7 @@ import './voice';
 import './job';
 import './marker';
 import './textlabel';
-
-const db: sm.Database = sm.getDatabase();
+import Ares from '../utility/ares';
 
 export class LoginController {
     static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
@@ -58,7 +56,7 @@ export class LoginController {
         // Used for DiscordToken skirt.
         if (!account) {
             // Generate New Account for Database
-            let accountData: Partial<Account> | null = await db.fetchData<Account>(
+            let accountData: Partial<Account> | null = await Database.fetchData<Account>(
                 'discord',
                 data.id,
                 Collections.Accounts
@@ -72,7 +70,7 @@ export class LoginController {
                     permissionLevel: Permissions.None
                 };
 
-                account = await db.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
+                account = await Database.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
             } else {
                 account = accountData;
             }
@@ -92,8 +90,12 @@ export class LoginController {
             return;
         }
 
+        if (!player.data.name) {
+            return;
+        }
+
         if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
-            vehicleFuncs.new.despawn(player.lastVehicleID);
+            vehicleFuncs.utility.despawnAll(player.id);
         }
 
         alt.log(`${player.data.name} has logged out.`);
@@ -106,8 +108,8 @@ export class LoginController {
         }
 
         // Just enough unique data.
-        const hashToken: string = getUniquePlayerHash(player, discord);
-        const account: Partial<Account> | null = await db.fetchData<Account>(
+        const hashToken: string = Ares.getUniquePlayerHash(player, discord);
+        const account: Partial<Account> | null = await Database.fetchData<Account>(
             'quickToken',
             hashToken,
             Collections.Accounts
@@ -120,7 +122,11 @@ export class LoginController {
 
         if (!account.quickTokenExpiration || Date.now() > account.quickTokenExpiration) {
             player.needsQT = true;
-            db.updatePartialData(account._id, { quickToken: null, quickTokenExpiration: null }, Collections.Accounts);
+            Database.updatePartialData(
+                account._id,
+                { quickToken: null, quickTokenExpiration: null },
+                Collections.Accounts
+            );
             return;
         }
 

@@ -1,22 +1,25 @@
 import * as alt from 'alt-server';
-import { Account } from '../../interface/Account';
-import { Permissions } from '../../../shared/flags/permissions';
-import { getUniquePlayerHash } from '../../utility/encryption';
-import { Database, getDatabase } from 'simplymongo';
-import { DEFAULT_CONFIG } from '../../athena/main';
-import { distance2d } from '../../../shared/utility/vector';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import emit from './emit';
-import save from './save';
-import dataUpdater from './dataUpdater';
-import safe from './safe';
-import sync from './sync';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athena';
+import { Permissions } from '../../../shared/flags/permissions';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
-import { playerFuncs } from '../Player';
+import { distance2d } from '../../../shared/utility/vector';
+import { DEFAULT_CONFIG } from '../../athena/main';
+import { ATHENA_EVENTS_PLAYER } from '../../enums/athenaEvents';
+import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
+import Ares from '../../utility/ares';
+import { playerFuncs } from '../Player';
+import dataUpdater from './dataUpdater';
+import emit from './emit';
+import safe from './safe';
+import save from './save';
+import sync from './sync';
+import Database from '@stuyk/ezmongodb';
+import dotenv from 'dotenv';
+import { IConfig } from '../../interface/IConfig';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 
-const db: Database = getDatabase();
+const config: IConfig = dotenv.config().parsed as IConfig;
 
 /**
  * Set the current account data for this player.
@@ -27,13 +30,13 @@ const db: Database = getDatabase();
 async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = Permissions.None;
-        db.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
+        Database.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
     }
 
     if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
-        const qt: string = getUniquePlayerHash(p, p.discord.id);
+        const qt: string = Ares.getUniquePlayerHash(p, p.discord.id);
 
-        db.updatePartialData(
+        Database.updatePartialData(
             accountData._id,
             {
                 quickToken: qt,
@@ -89,6 +92,9 @@ async function firstConnect(p: alt.Player): Promise<void> {
         p.kick('Still warming up...');
         return;
     }
+
+    // Used to set the custom View instance with a Web Server URL.
+    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, config.WEBSERVER_IP);
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
@@ -163,11 +169,23 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
     alt.emit(ATHENA_EVENTS_PLAYER.SPAWNED, p);
 }
 
+function wantedLevel(player: alt.Player, stars: number) {
+    if (stars >= 6) {
+        stars = 5;
+    }
+
+    player.wanted = stars;
+    player.data.wanted = stars;
+    playerFuncs.save.field(player, 'wanted', player.data.wanted);
+    player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
+}
+
 export default {
     account,
     actionMenu,
     dead,
     firstConnect,
     frozen,
-    respawned
+    respawned,
+    wantedLevel
 };

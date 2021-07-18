@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
-import { ItemType } from '../../shared/enums/itemType';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Permissions } from '../../shared/flags/permissions';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -15,7 +15,7 @@ const teleporterItem: Item = {
     icon: 'teleporter',
     slot: 5,
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.CONSUMABLE,
     data: {
         event: 'effect:Teleport'
     }

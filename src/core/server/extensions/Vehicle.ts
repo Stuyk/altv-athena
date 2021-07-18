@@ -1,13 +1,12 @@
 import * as alt from 'alt-server';
-import { Vehicle_Behavior, Vehicle_Lock_State } from '../../shared/enums/vehicle';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import * as IVeh from '../../shared/interfaces/Vehicle';
 import getter from './vehicleFunctions/getter';
 import keys from './vehicleFunctions/keys';
 import newRef from './vehicleFunctions/new';
 import save from './vehicleFunctions/save';
 import setter from './vehicleFunctions/setter';
-import toggle from './vehicleFunctions/toggle';
 import utility from './vehicleFunctions/utility';
-import * as IVeh from '../../shared/interfaces/Vehicle';
 
 /**
  * Overwrites the default functionality of vehicles.
@@ -16,8 +15,6 @@ import * as IVeh from '../../shared/interfaces/Vehicle';
 
 declare module 'alt-server' {
     export interface Vehicle {
-        athenaLockState: Vehicle_Lock_State;
-        engineStatus: boolean;
         keys?: Array<string>;
         fuel?: number;
         player_id?: number;
@@ -25,11 +22,8 @@ declare module 'alt-server' {
         data?: Partial<IVeh.Vehicle>; // Special Vehicle Information
         nextSave?: number;
         nextUpdate?: number;
+        passengers?: Array<{ player: alt.Player; seat: number }>;
     }
-}
-
-export default function onLoad() {
-    //
 }
 
 export const vehicleFuncs = {
@@ -38,6 +32,5 @@ export const vehicleFuncs = {
     new: newRef,
     keys,
     save,
-    toggle,
     utility
 };

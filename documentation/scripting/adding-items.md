@@ -14,7 +14,7 @@ const refItem: Item = {
     icon: 'gun',
     slot: 4,
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.IS_TOOLBAR | ItemType.IS_WEAPON,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
         hash: 0x13532244 // Used as the weapon hash for giving the player a weapon
     }
@@ -94,7 +94,7 @@ const teleporterItem: Item = {
     icon: 'teleporter',
     slot: 5,
     quantity: 1,
-    behavior: ItemType.CAN_DROP | ItemType.CAN_TRADE | ItemType.CONSUMABLE,
+    behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.CONSUMABLE,
     data: {
         event: 'effect:Teleport'
     }

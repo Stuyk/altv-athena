@@ -10,16 +10,21 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
 
 - [Installing Athena Advanced](#installing-athena-advanced)
   - [Table of Contents](#table-of-contents)
-  - [Setup](#setup)
+  - [Setup Private Repo](#setup-private-repo)
+  - [Set Private Repo Main Branch to Master](#set-private-repo-main-branch-to-master)
+  - [Download from Private Repo](#download-from-private-repo)
     - [Updating Submodules](#updating-submodules)
     - [Installing Dependencies](#installing-dependencies)
     - [Installing Server Files](#installing-server-files)
-    - [Installing License Key](#installing-license-key)
+    - [Using License Key](#using-license-key)
+    - [Important Configuration](#important-configuration)
+  - [Obtaining your Own IP](#obtaining-your-own-ip)
+  - [Port Forwarding](#port-forwarding)
+  - [Checking Ports](#checking-ports)
   - [Running the Server](#running-the-server)
     - [Running Production on Windows](#running-production-on-windows)
     - [Running Production on Linux](#running-production-on-linux)
     - [Running in Debug / Auto Refresh Mode](#running-in-debug--auto-refresh-mode)
-    - [Cleaning Files, Cache, etc.](#cleaning-files-cache-etc)
 - [Updating and Storing Changes](#updating-and-storing-changes)
   - [Merge Conflicts?!](#merge-conflicts)
   - [Pushing Changes to Private Repository](#pushing-changes-to-private-repository)
@@ -103,77 +108,90 @@ From this point forward you can simply run this `npm` command to update dependen
 npm run update
 ```
 
-### Installing License Key
+### Using License Key
 
-The license key is unique to your Gumroad Transaction. The license key will allow you to properly boot the alt:V Athena Server. This can be installed by using Environment Variables or a simple `.env` file will do.
+The license key is unique to your Gumroad Transaction. The license key should be kept a secret.
+
+The [Official alt:V Athena Discord](https://discord.gg/pZvbJmKN8Y) will allow you to manage your license key and IP(s) which can use it through the Athena Key Manager Bot.
+
+Please make sure to join and and `!help` to get information about the bot.
+
+You should either `refresh` your email and key to keep it active. The backend service will check the validity of the key.
+
+```
+!refresh <gumroad_email> <key>
+```
+
+After binding the license you can append your IP to your license or any of your developer(s).
+
+```
+!append <key> <ip>
+```
+
+### Important Configuration
 
 **Creating the .env File**
 
 In the same directory as your `package.json` file. Create a file called `.env` and open it up in whatever text editor you like to use. Add the following lines to your `.env` file depending on what you need.
 
-**I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.**
+This file should not have **ANY EXTENSION** make sure it doesn't say it's a text document. You have to modify the extension of the file to make this work. Pick up a program like VSCode to do this. I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.
 
-**GUMROAD**
+**Bare Minimum Configuration**
 
-This argument is for your [alt:V Athena Subscription License](https://gumroad.com/products/SKpPN/). It lets you boot the script.
+* WEBSERVER_IP
 
-```text
-GUMROAD=XXXXXXXX-YYYYYYYY-...
+**Configuration Options**
+
+```sh    
+# Optional Discord Bot Integration
+DISCORD_BOT=<DISCORD_BOT_KEY>
+
+# Optional Discord Whitelist Role ID
+WHITELIST_ROLE=<SOME_ID>
+
+# A connection string for MongoDB. If using localhost don't bother.
+MONGO_URL=<MONGODB_CONNECTION_STRING>
+
+# List of Collections to Generate Besides the Default(s)
+# Collections are also known as tables.
+MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
+
+# You must specify your server's IP Address here.
+WEBSERVER_IP=<YOUR_SERVER_IP>
 ```
 
-**EMAIL**
+## Obtaining your Own IP
 
-This argument is for your Gumroad Email. The Email you used when you bought a license.
+**Windows**
 
-```text
-EMAIL=xyz@email.com
+Just google what is my IP.
+
+https://www.google.com/search?q=what+is+my+ip
+
+**Linux**
+
+Run the following in your terminal.
+
+```sh
+curl ipinfo.io/ip
 ```
 
-**MONGO\_URL\***
+## Port Forwarding
 
-This argument is if you went with a remote MongoDB Server.
+You will need to port forward for the following ports on TCP & UDP.
 
-_Optional. Not required to add._
+**DO NOT SKIP THIS. NOBODY CAN JOIN WITHOUT IT.**
 
-```text
-MONGO_URL=mongodb://localhost:27017
+```
+7788
+9111
 ```
 
+## Checking Ports
 
+Append your IP into this website with both ports while your **server is running** to verify that the ports are open.
 
-**MONGO\_USERNAME\***
-
-This argument is if your database has a username anbd password. Highly recommended if you have remote access.
-
-_Optional. Not required to add._
-
-```text
-MONGO_USERNAME=myUsername
-```
-
-**MONGO\_PASSWORD\***
-
-This argument is if your databae has a username and password. Highly recommended if you have remote access.
-
-_Optional. Not required to add._
-
-```text
-MONGO_PASSWORD=coolPassword
-```
-
-**Results May Vary**
-
-You should end up with something similar to this.
-
-_Do not put parameters if they are empty. You may not get the desired effect you want._
-
-```text
-GUMROAD=XXXXXXXX-YYYYYYYY-...
-EMAIL=xyz@emai...
-MONGO_URL=
-MONGO_USERNAME=
-MONGO_PASSWORD=
-```
+https://www.yougetsignal.com/tools/open-ports/
 
 ## Running the Server
 
@@ -195,32 +213,15 @@ npm run linux
 
 ### Running in Debug / Auto Refresh Mode
 
-You need to open two terminals. I recommend doing this inside of VSCode as you'll see compilation of your project as well as keeping the server running which will automatically refresh for updates.
+You need to run one simple command. This will start your server, webserver, and an auto-reconnection client.
 
-
-**First Terminal**
-
-```
-npm run windows
-```
-
-**Second Terminal**
+Only works on Windows.
 
 ```
-npm run watch-windows
+npm run dev
 ```
 
 _Replace windows with linux if you are using linux._
-
-### Cleaning Files, Cache, etc.
-
-If you run into issues during your runtime you can always run the cleaning process which will rebuild cache for faster build times. It is only recommended to clean if you are updating.
-
-You **will not** lose any major files upon running this process.
-
-```
-npm run clean
-```
 
 # Updating and Storing Changes
 

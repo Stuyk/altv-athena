@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import { distance2d } from '../../shared/utility/vector';
 
 const blips: { [key: string]: Array<Blip> } = {};
 

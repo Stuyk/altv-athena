@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <head>
+        <title>ATM by Stuyk</title>
+        <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/vuetify.min.css" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" type="text/css" href="../icomoon/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+        <div id="app" >
+            <v-app v-cloak>
+                    <div class="atm grey elevation-6 rounded-sm darken-4">
+                        <div class="toolbar pl-4 pr-4">
+                            <div class="overline">
+                                {{ locales.LABEL_ATM }}
+                            </div>
+                            <button @click="exit" class="exit" outlined text>
+                                <v-icon color="error">icon-times-circle</v-icon>
+                            </button>
+                        </div>
+                        <div class="inner pa-6">
+                            <div class="split">
+                                <div class="overline">
+                                    {{ locales.LABEL_CASH }}
+                                </div>
+                                <div class="overline">
+                                    {{ locales.LABEL_BANK }}
+                                </div>
+                            </div>
+                            <div class="split">
+                                <div class="text--subtitle-2 green--text">
+                                    ${{ cash.toLocaleString() }}
+                                </div>
+                                <div class="text--subtitle-2 blue--text">
+                                    ${{ bank.toLocaleString() }}
+                                </div>
+                            </div>
+                            <div class="balancer mb-4 mt-4 pa-2 rounded" :style="getBalancerBackground">
+                                <div class="bar blue darken-2" :style="getBalancerBackground"></div>
+                                <div class="text rounded-sm">${{ (cash + bank).toLocaleString() }}</div>
+                            </div>
+                            <div class="split button-group mb-4">
+                                <button @click="selectSetting(0)" :class="isSetting(0)" class="green--text flex-grow-1">deposit</button>
+                                <button @click="selectSetting(1)" :class="isSetting(1)" class="blue--text flex-grow-1">withdraw</button>
+                                <button @click="selectSetting(2)" :class="isSetting(2)" class="orange--text flex-grow-1">transfer</button>
+                            </div>
+                            <template v-if="setting !== -1">
+                                <component v-bind:is="getComponent"  v-bind:processing="processing" v-bind:bank="bank" v-bind:cash="cash" v-bind:locales="locales"></component>
+                            </template>
+                        </div>
+                    </div>
+                <div class="athena"></div>
+            </v-app>
+        </div>
+        <script src="../js/vue.min.js"></script>
+        <script src="../js/vuetify.js"></script>
+        <script src="./components/transfer.js" type="text/javascript"></script>
+        <script src="./components/deposit.js" type="text/javascript"></script>
+        <script src="./components/withdraw.js" type="text/javascript"></script>
+        <script src="./app.js" type="text/javascript"></script>
+    </body>
+</html>
