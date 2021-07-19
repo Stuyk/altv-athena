@@ -4,8 +4,11 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { sha256Random } from '../utility/encryption';
 import { IConfig } from '../interface/IConfig';
 import Ares from '../utility/ares';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
+const TIMES_TO_CHECK_CONNECTION = 25;
 const config: IConfig = dotenv.config().parsed as IConfig;
+const connectingUsers: { [key: string]: number } = {};
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
@@ -14,24 +17,32 @@ const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuy
 const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
 const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify`;
 
-alt.onClient('discord:Begin', handlePlayerConnect);
 alt.onClient('discord:FinishAuth', handleFinishAuth);
+alt.onClient(SYSTEM_EVENTS.CHECK_CONNECTION, checkConnection);
 
 /**
- * How does this work?
- * There is an azure web app that this module connects to.
- * It has a public key that is accessible by anyone.
- * That url is: https://altv-athena-discord.azurewebsites.net/v1/request/key
- * The module fetches the public key from the azure web app.
- * This module then uses that public key to generate a shared secret through a Diffie Helman Exchange with our private and their public.
- * Once the secret is generated we can encrypt data to send to the web app.
- * We send our module's generated public key and player information to the azure web app.
- * The player is then tasked to open an external url for a Discord oAuth2 Login.
- * The azure web app will automatically re-direct the page if the authorization is successful.
- * Then port the information through an event inside of this module.
- * The information ported through the express server is encrypted which helps us verify it's a real request.
+ * Called by the client multiple times to verify data is coming through.
+ * Also returns a response to get the next check.
+ * @param {alt.Player} player
+ * @return {*}
  */
-async function handlePlayerConnect(player) {
+function checkConnection(player: alt.Player) {
+    if (connectingUsers[player.ip] >= TIMES_TO_CHECK_CONNECTION) {
+        delete connectingUsers[player.ip];
+        handlePlayerConnect(player);
+        return;
+    }
+
+    if (!connectingUsers[player.ip]) {
+        connectingUsers[player.ip] = 1;
+    } else {
+        connectingUsers[player.ip] += 1;
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.CHECK_CONNECTION, [connectingUsers[player.ip], TIMES_TO_CHECK_CONNECTION]);
+}
+
+async function handlePlayerConnect(player: alt.Player) {
     if (!player || !player.valid) {
         return;
     }

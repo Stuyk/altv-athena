@@ -105,14 +105,6 @@ async function firstConnect(p: alt.Player): Promise<void> {
     safe.setPosition(p, pos.x, pos.y, pos.z);
     sync.time(p);
     sync.weather(p);
-
-    alt.setTimeout(() => {
-        if (!p || !p.valid) {
-            return;
-        }
-
-        alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_FETCH);
-    }, 500);
 }
 /**
  * Set if this player should be frozen.

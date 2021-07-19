@@ -4,6 +4,8 @@ export enum SYSTEM_EVENTS {
     APPEND_TEXTLABELS = 'append:TextLabel',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
+    // Check
+    CHECK_CONNECTION = 'check:Connection',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
     // GET

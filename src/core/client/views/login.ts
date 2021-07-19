@@ -1,12 +1,20 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
+import { fetchToken } from '../systems/quickToken';
+import { sleep } from '../utility/sleep';
+import { drawRectangle2D, drawText2D } from '../utility/text';
 
 const url = `http://assets/webview/client/login/index.html`;
 let view: View;
 let discordURI;
+let interval;
+let count = 0;
+let neededRequests = 0;
 
 export class LoginView implements ViewModel {
     static async open(oAuthUrl: string) {
@@ -16,6 +24,14 @@ export class LoginView implements ViewModel {
         view.on('discord:FinishAuth', LoginView.finish);
         view.on('discord:Ready', LoginView.ready);
         alt.toggleGameControls(false);
+
+        if (interval !== null && interval !== undefined) {
+            native.doScreenFadeOut(0);
+            alt.clearInterval(interval);
+        }
+
+        sleep(25);
+        fetchToken();
     }
 
     static ready() {
@@ -28,6 +44,10 @@ export class LoginView implements ViewModel {
 
     static close() {
         alt.toggleGameControls(true);
+
+        if (interval !== null && interval !== undefined) {
+            alt.clearInterval(interval);
+        }
 
         if (!view) {
             return;
@@ -57,12 +77,53 @@ export class LoginView implements ViewModel {
         view.emit('discord:Fail', message);
     }
 
-    static trigger() {
-        alt.emitServer('discord:Begin');
+    /**
+     * Creates a short feedback loop for testing connection before
+     * triggering the login screen to the client.
+     * @static
+     * @memberof LoginView
+     */
+    static async checkConnection(data: Array<number>) {
+        const [_count, _neededRequests] = data;
+
+        if (interval === undefined || interval === undefined) {
+            interval = alt.setInterval(LoginView.render, 0);
+        }
+
+        count = _count;
+        neededRequests = _neededRequests;
+
+        await sleep(25);
+        alt.emitServer(SYSTEM_EVENTS.CHECK_CONNECTION);
+    }
+
+    static render() {
+        drawRectangle2D({ x: 0.5, y: 0.5 }, { x: 1, y: 1 }, new alt.RGBA(0, 0, 0, 255));
+        drawText2D(`Testing Connection`, { x: 0.5, y: 0.75 }, 0.6, new alt.RGBA(255, 255, 255, 255), 0);
+
+        if (!neededRequests) {
+            return;
+        }
+
+        drawText2D(
+            `${((count / neededRequests) * 100).toFixed(0)}%`,
+            { x: 0.5, y: 0.8 },
+            0.6,
+            new alt.RGBA(255, 255, 255, 255),
+            0
+        );
+
+        drawText2D(
+            `If this takes longer than 5s there's a problem with your connection...`,
+            { x: 0.5, y: 0.85 },
+            0.55,
+            new alt.RGBA(255, 255, 255, 255),
+            0
+        );
     }
 }
 
-alt.on('connectionComplete', LoginView.trigger);
 alt.onServer(`Discord:Open`, LoginView.open);
 alt.onServer(`Discord:Close`, LoginView.close);
 alt.onServer('Discord:Fail', LoginView.emitFailureMessage);
+alt.onServer(SYSTEM_EVENTS.CHECK_CONNECTION, LoginView.checkConnection);
