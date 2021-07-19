@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { getAverage } from './math';
 
 interface TimerInfo {
     name?: string;
@@ -15,6 +16,7 @@ const TIMER_CATEGORIES = {
 };
 
 const timers: Array<TimerInfo> = [];
+const timersData: { [key: number]: Array<number> } = {};
 const timeouts: Array<TimerInfo> = [];
 let count;
 
@@ -27,7 +29,21 @@ export class Timer {
      * @memberof Timer
      */
     static createInterval(callback: (...args: any[]) => void, ms: number, name = ''): number {
-        const id = alt.setInterval(callback, ms);
+        const id = alt.setInterval(async () => {
+            const startTime = Date.now();
+            await callback();
+            const totalTime = Date.now() - startTime;
+            if (!timersData[id]) {
+                timersData[id] = [];
+            }
+
+            if (timersData[id].length >= 25) {
+                timersData[id].shift();
+            }
+
+            timersData[id].push(totalTime);
+        }, ms);
+
         alt.log(`| Interval | ID ${id} | ${name} | ${ms}ms |`);
         timers.push({ id, ms, name });
         return id;
@@ -88,6 +104,13 @@ export class Timer {
         return id;
     }
 
+    static getTimers() {
+        for (let i = 0; i < timers.length; i++) {
+            const timer = timers[i];
+            alt.log(`| Interval | ID ${timer.id} | ${timer.name} | ${timer.ms}ms |`);
+        }
+    }
+
     static getTimersInfo() {
         alt.log(`=== TIMERS INFO ===`);
         Object.keys(TIMER_CATEGORIES).forEach((category) => {
@@ -98,14 +121,34 @@ export class Timer {
         });
     }
 
+    static getTimerInfo(id: string) {
+        if (!timersData[id]) {
+            alt.log(`No Timer Info for ${id}`);
+            return;
+        }
+
+        const avg = getAverage(timersData[id]);
+        alt.log(`${id} || Completion Time: ${avg}ms`);
+    }
+
     static getTimeoutInfo() {
         alt.log(`=== INTERVAL INFO ===`);
         const count = timeouts.length;
         alt.log(`Total: ${count}`);
     }
 
-    static parse(cmd: string) {
+    static parse(cmd: string, id: string) {
+        if (cmd.includes('timerslist')) {
+            Timer.getTimers();
+            return;
+        }
+
         if (cmd.includes('timerinfo')) {
+            if (id) {
+                Timer.getTimerInfo(id);
+                return;
+            }
+
             Timer.getTimersInfo();
             return;
         }

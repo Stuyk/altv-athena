@@ -36,3 +36,12 @@ export function getPointsInCircle(points: number, radius: number, center: Vector
 
     return pointDefs;
 }
+
+export function getAverage(data: Array<number>): number {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+        sum += data[i];
+    }
+
+    return sum / data.length;
+}
