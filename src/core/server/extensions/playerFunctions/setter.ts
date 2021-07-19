@@ -62,21 +62,21 @@ function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
  * @param {*} weaponHash
  * @memberof SetPrototype
  */
-function dead(p: alt.Player, killer: alt.Player = null, weaponHash: any = null): void {
-    p.spawn(p.pos.x, p.pos.y, p.pos.z, 0);
+function dead(player: alt.Player, weaponHash: any = null): void {
+    player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
 
-    if (!p.data.isDead) {
-        p.data.isDead = true;
-        emit.meta(p, 'isDead', true);
-        save.field(p, 'isDead', true);
-        alt.log(`(${p.id}) ${p.data.name} has died.`);
+    if (!player.data.isDead) {
+        player.data.isDead = true;
+        emit.meta(player, 'isDead', true);
+        save.field(player, 'isDead', true);
+        alt.log(`(${player.id}) ${player.data.name} has died.`);
     }
 
-    if (!p.nextDeathSpawn) {
-        p.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
+    if (!player.nextDeathSpawn) {
+        player.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
     }
 
-    alt.emit(ATHENA_EVENTS_PLAYER.DIED, p);
+    alt.emit(ATHENA_EVENTS_PLAYER.DIED, player);
 }
 
 /**

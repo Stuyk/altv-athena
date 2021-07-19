@@ -15,6 +15,7 @@ import '../views/dealership';
 import './fuel';
 import { ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -144,8 +145,21 @@ export class VehicleFunctions {
         }
 
         if (VehicleFunctions.isVehicleLocked(vehicle)) {
-            // Handle Lock State
-            return;
+            if (!vehicle.data) {
+                return;
+            }
+
+            // Check the vehicle class.
+            // Check if the vehicle class should allow getting off while locked.
+            // Counts for motorcycles and cycle types.
+            const vehicleData = VehicleData.find((x) => x.name === vehicle.data.model);
+            if (!vehicleData) {
+                return;
+            }
+
+            if (vehicleData.class !== VEHICLE_CLASS.CYCLE && vehicleData.class !== VEHICLE_CLASS.MOTORCYCLE) {
+                return;
+            }
         }
 
         const tasks: Array<Task> = [
@@ -166,6 +180,10 @@ export class VehicleFunctions {
      * @memberof VehicleFunctions
      */
     static prunePassengers(vehicle: alt.Vehicle) {
+        if (!vehicle.passengers) {
+            vehicle.passengers = [];
+        }
+
         for (let i = vehicle.passengers.length - 1; i >= 0; i--) {
             const passenger = vehicle.passengers[i];
 
@@ -273,6 +291,13 @@ export class VehicleFunctions {
      */
     static leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
         VehicleFunctions.prunePassengers(vehicle);
+
+        // Prune Temporary Vehicles
+        if (!vehicle.isTemporary && seat !== 1) {
+            return;
+        }
+
+        vehicle.destroy();
     }
 
     /**

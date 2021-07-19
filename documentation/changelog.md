@@ -11,6 +11,12 @@ description: List of all the changes and current versions.
 + Bound all Intervals to Timer.createTimer to track Timers
 + Fixed falling through map with tpwp with native.clearFocus
 + Fixed small progress bar bug
++ Added Average Time for Interval Completion(s)
++ Added Ability to Exit Locked Motorcycles
++ Added Temporary Vehicle Flag for Vehicles
++ Temporary Vehicles Deleted after first driver exit
++ Added Death Logs to Console
++ Ensure Player Respawn for Death Logs
 ```
 
 ## 2.0.0

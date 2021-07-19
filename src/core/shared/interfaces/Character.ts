@@ -1,4 +1,4 @@
-import { Vector3 } from 'alt-server';
+import { Vector3 } from '../interfaces/Vector';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
