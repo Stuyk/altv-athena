@@ -1,6 +1,3 @@
-Vue.config.devtools = true;
-Vue.prototype.window = window;
-
 const exampleCharacter = {
     _id: '5f7117a3fd8d0a66b02eb998',
     pos: { x: -734.5714111328125, y: -264.4747314453125, z: 37.03076171875 },
@@ -77,15 +74,19 @@ const app = new Vue({
             this.url = `http://${url}:9111`;
         },
         pruneDecimals(value) {
-            if (isNaN(value)) {
+            try {
+                if (value === null || value === undefined) {
+                    return 0;
+                }
+
+                if (isNaN(value)) {
+                    return value;
+                }
+
+                return value.toFixed(2);
+            } catch (err) {
                 return value;
             }
-
-            if (value === null || value === undefined) {
-                return 0;
-            }
-
-            return value.toFixed(2);
         },
         handleSet(characters) {
             this.characterIndex = 0;
@@ -194,9 +195,9 @@ const app = new Vue({
             alt.on('characters:SetLocale', this.setLocales);
             alt.on('characters:Set', this.handleSet);
             alt.on('url', this.setURL);
+            alt.emit('url');
             alt.emit('characters:Ready');
             alt.emit('ready');
-            alt.emit('url');
         } else {
             this.characters = [
                 exampleCharacter,

@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 Vue.prototype.window = window;
 
 const plainText = new RegExp(/^[a-zA-Z 0-9]{3,32}$/);

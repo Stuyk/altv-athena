@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 Vue.prototype.window = window;
 
 const app = new Vue({
@@ -209,7 +208,7 @@ const app = new Vue({
         alt.on('creator:SetData', this.setData);
         alt.on('creator:SetLocales', this.setLocales);
         alt.on('url', this.setURL);
-           
+
         this.$nextTick(() => {
             alt.emit('ready');
             alt.emit('url');

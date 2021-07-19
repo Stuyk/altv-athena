@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 Vue.prototype.window = window;
 
 async function sleep(ms) {

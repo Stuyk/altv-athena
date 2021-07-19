@@ -83,6 +83,12 @@ export class View extends alt.WebView {
             _instance.isVisible = true;
         });
 
+        _instance.on('load', () => {
+            _instance.isVisible = true;
+        });
+
+        alt.log(`PICKED URL: ${url}`);
+
         // Custom WebView URL for data feeds.
         _instance.on('url', () => {
             _instance.emit('url', _serverURL);

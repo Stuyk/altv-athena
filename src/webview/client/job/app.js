@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 Vue.prototype.window = window;
 
 const app = new Vue({
@@ -64,6 +63,6 @@ const app = new Vue({
         alt.emit('play:Sound', 'ATM_WINDOW', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         alt.emit('job:Ready');
         alt.on('url', this.setURL);
-            alt.emit('url');
+        alt.emit('url');
     }
 });
