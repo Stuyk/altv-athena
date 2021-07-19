@@ -26,6 +26,7 @@ description: List of all the changes and current versions.
 + Pushing Vehicle Server-Side State
 + Entering Vehicle After Pushing Fixed
 + No More Pushing Inside Vehicle
++ Prevent Attacking while Pushing Vehicle
 ```
 
 ## 2.0.0

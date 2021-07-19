@@ -5,6 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { playAnimation } from './animations';
 import { AnimationFlags } from '../../shared/flags/animation';
+import { handleDisablingAttacks } from '../utility/disableControls';
 
 let interval;
 let vehicle: alt.Vehicle;
@@ -57,6 +58,8 @@ export class PushVehicle {
             PushVehicle.clear();
             return;
         }
+
+        handleDisablingAttacks();
 
         native.disableControlAction(0, 32, true);
         native.disableControlAction(0, 34, true);
