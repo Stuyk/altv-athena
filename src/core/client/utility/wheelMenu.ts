@@ -4,7 +4,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { getPointsInCircle } from './math';
 import { drawText2D } from './text';
-import { Vector2 } from '../../shared/interfaces/vector';
+import { Vector2 } from '../../shared/interfaces/Vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
 

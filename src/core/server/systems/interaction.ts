@@ -148,6 +148,20 @@ export class InteractionController {
     }
 }
 
-alt.on('entityLeaveColshape', InteractionController.leave);
-alt.on('entityEnterColshape', InteractionController.enter);
+// TODO: fix types
+// alt.on('entityLeaveColshape', InteractionController.leave);
+// alt.on('entityEnterColshape', InteractionController.enter);
+alt.on('entityLeaveColshape', (colshape: alt.Colshape, entity: alt.Entity) => {
+  if (!(entity instanceof alt.Player)) {
+    return;
+  }
+  InteractionController.leave(colshape as InteractionShape, entity as alt.Player);
+});
+alt.on('entityEnterColshape', (colshape: alt.Colshape, entity: alt.Entity) => {
+  if (!(entity instanceof alt.Player)) {
+    return;
+  }
+  InteractionController.enter(colshape as InteractionShape, entity as alt.Player);
+});
+
 alt.onClient(SYSTEM_EVENTS.INTERACTION, InteractionController.trigger);
