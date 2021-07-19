@@ -5,7 +5,7 @@ export interface Dealership {
     name: string;
     position: Vector3;
     vehiclePosition: Vector3;
-    vehicleRotation: Vector3;
+    vehicleHeading: number;
     vehiclePreview: string;
     class: VEHICLE_CLASS;
     stock: number;
