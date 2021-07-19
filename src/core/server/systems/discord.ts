@@ -18,7 +18,7 @@ export class DiscordController {
         DiscordController.client.login(process.env.DISCORD_BOT);
     }
 
-    static ready() {
+    static async ready() {
         Logger.info(`Discord Bot Connected Successfully`);
 
         if (DEFAULT_CONFIG.WHITELIST && !DiscordController.whitelistRole) {
@@ -31,31 +31,33 @@ export class DiscordController {
             return;
         }
 
-        DiscordController.guild = DiscordController.client.guilds.cache.get(process.env.DISCORD_SERVER_ID);
+        DiscordController.guild = await DiscordController.client.guilds.fetch(process.env.DISCORD_SERVER_ID);
     }
 
-    static userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
-        try {
-            const userFullName = `${newUser.user.username}#${newUser.user.discriminator}`;
-            const currentMember = DiscordController.guild.members.cache.get(newUser.user.id);
-            const hasRole = currentMember.roles.cache.find((role) => role.id === process.env.WHITELIST_ROLE);
+    static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
+        const oldUserHasRole = oldUser.roles.cache.has(process.env.WHITELIST_ROLE);
+        const newUserHasRole = newUser.roles.cache.has(process.env.WHITELIST_ROLE);
+        const name = `${newUser.user.username}#${newUser.user.discriminator}`;
 
-            if (!hasRole) {
-                const didRemove = OptionsController.removeFromWhitelist(currentMember.user.id);
-
-                if (didRemove) {
-                    Logger.log(`${userFullName} was removed from the whitelist.`);
-                }
-
+        // Removed from White List
+        if (oldUserHasRole && !newUserHasRole) {
+            if (!OptionsController.removeFromWhitelist(newUser.user.id)) {
                 return;
             }
 
-            const didAdd = OptionsController.addToWhitelist(currentMember.user.id);
-            if (didAdd) {
-                Logger.log(`${userFullName} was added to the whitelist.`);
+            Logger.log(`${name} was removed from the whitelist.`);
+            return;
+        }
+
+        // Added to White List
+        if (!oldUserHasRole && newUserHasRole) {
+            if (!OptionsController.addToWhitelist(newUser.user.id)) {
+                Logger.warning(`${name} could not be added to the white list.`);
+                return;
             }
-        } catch (err) {
-            Logger.warning(`Could not whitelist a Discord User. Turn on integrations and wait a few hours.`);
+
+            Logger.log(`${name} was added to the whitelist.`);
+            return;
         }
     }
 

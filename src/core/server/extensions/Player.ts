@@ -56,6 +56,7 @@ declare module 'alt-server' {
         // Vehicle Info
         lastEnteredVehicleID: number;
         lastVehicleID: number;
+        isPushingVehicle: boolean;
 
         /**
          * The total number of vehicles the player has spawned.

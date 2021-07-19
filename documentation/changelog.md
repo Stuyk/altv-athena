@@ -17,6 +17,15 @@ description: List of all the changes and current versions.
 + Temporary Vehicles Deleted after first driver exit
 + Added Death Logs to Console
 + Ensure Player Respawn for Death Logs
++ Update Discord.js Version
++ Fix Discord Whitelisting
++ Create Reliable Discord Whitelisting by User Comparison
++ Moved Attaching Server Side for Pushing
++ Detach Player when Entering Vehicle
++ Pushing Vehicle Moved to Own System
++ Pushing Vehicle Server-Side State
++ Entering Vehicle After Pushing Fixed
++ No More Pushing Inside Vehicle
 ```
 
 ## 2.0.0

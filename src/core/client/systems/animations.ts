@@ -16,6 +16,11 @@ const MaxLoadAttempts = 25;
  */
 async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
+        if (native.hasAnimDictLoaded(dict)) {
+            resolve(true);
+            return;
+        }
+
         const interval = Timer.createInterval(
             () => {
                 count += 1;

@@ -88,6 +88,10 @@ export class VehicleFunctions {
      * @memberof VehicleFunctions
      */
     static handleOutsideVehicle(player: alt.Player, vehicle: alt.Vehicle) {
+        if (player.isPushingVehicle) {
+            VehicleFunctions.stopPush(player);
+        }
+
         if (VehicleFunctions.isVehicleLocked(vehicle)) {
             playerFuncs.emit.notification(player, `~r~Vehicle is not currently unlocked.`);
             return;
@@ -293,7 +297,11 @@ export class VehicleFunctions {
         VehicleFunctions.prunePassengers(vehicle);
 
         // Prune Temporary Vehicles
-        if (!vehicle.isTemporary && seat !== 1) {
+        if (!vehicle.isTemporary) {
+            return;
+        }
+
+        if (seat !== 1) {
             return;
         }
 
@@ -455,9 +463,21 @@ export class VehicleFunctions {
         });
     }
 
-    static startPush(player: alt.Player): boolean {
-        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+    static startPush(player: alt.Player, position: alt.Vector3): boolean {
+        if (!player || !player.valid) {
+            return false;
+        }
 
+        if (player.vehicle) {
+            return false;
+        }
+
+        if (player.isPushingVehicle) {
+            player.detach();
+            return false;
+        }
+
+        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
         if (!vehicle || !vehicle.valid) {
             return false;
         }
@@ -466,20 +486,23 @@ export class VehicleFunctions {
             return false;
         }
 
+        player.isPushingVehicle = true;
         vehicle.setNetOwner(player);
-        player.setSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE, vehicle);
+        player.attachTo(vehicle, 0, 6286, position, new alt.Vector3(0, 0, 0), true, false);
+        alt.emitClient(player, VEHICLE_EVENTS.PUSH, vehicle);
         return true;
     }
 
     static stopPush(player: alt.Player) {
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
 
-        if (!vehicle || !vehicle.valid) {
-            return;
+        if (vehicle && vehicle.valid) {
+            vehicle.resetNetOwner();
         }
 
-        vehicle.resetNetOwner();
-        player.deleteSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE);
+        player.isPushingVehicle = false;
+        player.detach();
+        alt.emitClient(player, VEHICLE_EVENTS.STOP_PUSH);
     }
 }
 
