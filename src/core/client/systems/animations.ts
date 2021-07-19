@@ -2,10 +2,11 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AnimationFlags } from '../../shared/flags/animation';
+import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 
-const MaxLoadAttempts = 250;
+const MaxLoadAttempts = 25;
 
 /**
  * Attempts to load an animation dictionary multiple times before returning false.
@@ -15,23 +16,27 @@ const MaxLoadAttempts = 250;
  */
 async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
-        const interval = alt.setInterval(() => {
-            count += 1;
+        const interval = Timer.createInterval(
+            () => {
+                count += 1;
 
-            if (native.hasAnimDictLoaded(dict)) {
-                alt.clearInterval(interval);
-                resolve(true);
-                return;
-            }
+                if (native.hasAnimDictLoaded(dict)) {
+                    Timer.clearInterval(interval);
+                    resolve(true);
+                    return;
+                }
 
-            if (count >= 25) {
-                alt.clearInterval(interval);
-                resolve(false);
-                return;
-            }
+                if (count >= MaxLoadAttempts) {
+                    Timer.clearInterval(interval);
+                    resolve(false);
+                    return;
+                }
 
-            native.requestAnimDict(dict);
-        }, 250);
+                native.requestAnimDict(dict);
+            },
+            250,
+            'animation.ts'
+        );
     });
 }
 

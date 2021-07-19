@@ -7,6 +7,7 @@ import { drawText2D } from './text';
 import { Vector2 } from '../../shared/interfaces/vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
+import { Timer } from './timers';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -54,7 +55,8 @@ export class WheelMenu {
         }
 
         if (interval) {
-            alt.clearEveryTick(interval);
+            Timer.clearInterval(interval);
+            interval = null;
         }
 
         currentMenu = {
@@ -65,7 +67,7 @@ export class WheelMenu {
 
         lastHover = null;
 
-        interval = alt.everyTick(WheelMenu.render);
+        interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
 
         if (setMouseToCenter) {
             const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
@@ -82,7 +84,7 @@ export class WheelMenu {
     }
 
     static close() {
-        alt.clearEveryTick(interval);
+        Timer.clearInterval(interval);
         interval = null;
         currentMenu = null;
     }

@@ -4,6 +4,7 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { drawText3D } from '../utility/text';
+import { Timer } from '../utility/timers';
 import { HudSystem } from './hud';
 
 class ObjectiveController {
@@ -18,7 +19,8 @@ class ObjectiveController {
 
     static handleSync(data: Objective | null) {
         if (ObjectiveController.interval) {
-            alt.clearInterval(ObjectiveController.interval);
+            Timer.clearInterval(ObjectiveController.interval);
+            ObjectiveController.interval = null;
         }
 
         if (ObjectiveController.blip && ObjectiveController.blip.destroy) {
@@ -51,7 +53,7 @@ class ObjectiveController {
 
         HudSystem.setObjective(data.description);
         ObjectiveController.objective = data;
-        ObjectiveController.interval = alt.setInterval(ObjectiveController.verifyObjective, 0);
+        ObjectiveController.interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
     }
 
     private static getVector3Range() {

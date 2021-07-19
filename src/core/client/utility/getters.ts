@@ -23,11 +23,13 @@ class Getters {
 
             const newPos = { x: coords.x, y: coords.y, z: zPos };
             alt.emitServer(callbackName, newPos);
+            native.clearFocus();
             return;
         }
 
         native.requestCollisionAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z);
         alt.emitServer(callbackName, null);
+        native.clearFocus();
     }
 }
 

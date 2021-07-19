@@ -4,6 +4,15 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.1
+```diff
++ Add Client Console Command for 'timerinfo'
++ Prints the total amount of Timers and their Millisecond Interval
++ Bound all Intervals to Timer.createTimer to track Timers
++ Fixed falling through map with tpwp with native.clearFocus
++ Fixed small progress bar bug
+```
+
 ## 2.0.0
 ```diff
 + New Keybind Interface for Custom Keybinds

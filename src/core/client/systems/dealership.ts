@@ -10,6 +10,7 @@ import { drawText2D } from '../utility/text';
 import { distance2d } from '../../shared/utility/vector';
 import { getScaledCursorPosition } from '../utility/mouse';
 import { handleFrontendSound } from './sound';
+import { Timer } from '../utility/timers';
 
 const HOVER_DISTANCE = 0.05;
 const MAX_DISTANCE_BEFORE_EXIT = 5;
@@ -45,7 +46,7 @@ class DealershipView {
 
         HologramSystem.toggleVisibility(identifier, true);
         DealershipView.next();
-        interval = alt.setInterval(DealershipView.render, 0);
+        interval = Timer.createInterval(DealershipView.render, 0, 'dealership.ts');
     }
 
     static async resetVehicleModel() {
@@ -95,7 +96,7 @@ class DealershipView {
 
     static close() {
         if (interval) {
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
             interval = null;
         }
 

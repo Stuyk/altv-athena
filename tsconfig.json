@@ -15,12 +15,7 @@
         "outDir": "./athena-cache",
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
-        "composite": true
+        "composite": false
     },
-    "include": ["./src/**/*.ts"],
-    "watchOptions": {
-        "watchFile": "useFsEvents",
-        "watchDirectory": "useFsEvents",
-        "fallbackPolling": "dynamicPriority"
-    }
+    "include": ["./src/**/*.ts"]
 }

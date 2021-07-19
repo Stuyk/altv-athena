@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { Timer } from './timers';
 
 const MaxAttempts = 200;
 
@@ -6,21 +7,25 @@ export function waitFor(func: Function, ...args: any): Promise<boolean> {
     return new Promise((resolve) => {
         let attempts = 0;
 
-        const interval = alt.setInterval(() => {
-            if (attempts >= MaxAttempts) {
-                alt.clearInterval(interval);
-                resolve(false);
-                return;
-            }
+        const interval = Timer.createInterval(
+            () => {
+                if (attempts >= MaxAttempts) {
+                    Timer.clearInterval(interval);
+                    resolve(false);
+                    return;
+                }
 
-            if (!func(...args)) {
-                attempts += 1;
-                return;
-            }
+                if (!func(...args)) {
+                    attempts += 1;
+                    return;
+                }
 
-            alt.clearInterval(interval);
-            resolve(true);
-        }, 100);
+                Timer.clearInterval(interval);
+                resolve(true);
+            },
+            100,
+            'wait.ts'
+        );
     });
 }
 
@@ -28,20 +33,24 @@ export function waitForFalse(func: Function, ...args: any): Promise<boolean> {
     return new Promise((resolve) => {
         let attempts = 0;
 
-        const interval = alt.setInterval(() => {
-            if (attempts >= MaxAttempts) {
-                alt.clearInterval(interval);
-                resolve(false);
-                return;
-            }
+        const interval = Timer.createInterval(
+            () => {
+                if (attempts >= MaxAttempts) {
+                    Timer.clearInterval(interval);
+                    resolve(false);
+                    return;
+                }
 
-            if (func(...args)) {
-                attempts += 1;
-                return;
-            }
+                if (func(...args)) {
+                    attempts += 1;
+                    return;
+                }
 
-            alt.clearInterval(interval);
-            resolve(true);
-        }, 100);
+                Timer.clearInterval(interval);
+                resolve(true);
+            },
+            100,
+            'wait.ts'
+        );
     });
 }

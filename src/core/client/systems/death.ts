@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { drawText2D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleSingleMetaChange);
 
@@ -23,7 +24,7 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
 
     if (newValue) {
         if (!interval) {
-            interval = alt.setInterval(handleDeathMovement, 0);
+            interval = Timer.createInterval(handleDeathMovement, 0, 'death.ts');
             deathTime = Date.now() + SHARED_CONFIG.RESPAWN_TIME;
         }
         return;
@@ -34,7 +35,7 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
     }
 
     native.clearPedTasksImmediately(alt.Player.local.scriptID);
-    alt.clearInterval(interval);
+    Timer.clearInterval(interval);
     interval = null;
 }
 

@@ -5,6 +5,7 @@ import { Hologram } from '../../shared/interfaces/Hologram';
 import { distance2d } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadModel } from '../utility/model';
+import { Timer } from '../utility/timers';
 
 const MAX_HOLOGRAM_DISTANCE = 10;
 const TIME_TO_CHECK_HOLOGRAMS = 1000 * 3; // 3s
@@ -20,10 +21,10 @@ export class HologramSystem {
      */
     static init() {
         if (interval) {
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
         }
 
-        interval = alt.setInterval(HologramSystem.render, TIME_TO_CHECK_HOLOGRAMS);
+        interval = Timer.createInterval(HologramSystem.render, TIME_TO_CHECK_HOLOGRAMS, 'hologram.ts');
     }
 
     /**

@@ -3,6 +3,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { TextLabel } from '../../shared/interfaces/TextLabel';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText3D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 let addedLabels: Array<TextLabel> = [];
 let interval;
@@ -24,7 +25,7 @@ export class TextlabelController {
         addedLabels.push(label);
 
         if (!interval) {
-            interval = alt.setInterval(handleDrawTextlabels, 0);
+            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
         }
     }
 
@@ -38,7 +39,7 @@ export class TextlabelController {
         addedLabels = addedLabels.concat(markers);
 
         if (!interval) {
-            interval = alt.setInterval(handleDrawTextlabels, 0);
+            interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
         }
     }
 

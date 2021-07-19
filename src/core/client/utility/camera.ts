@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { Timer } from './timers';
 
 let cameraControlsInterval: number;
 let camera: number;
@@ -63,7 +64,7 @@ export function createPedEditCamera(offset: alt.IVector3 = null): void {
         native.renderScriptCams(true, false, 0, true, false, 0);
     }
 
-    cameraControlsInterval = alt.setInterval(handleControls, 0);
+    cameraControlsInterval = Timer.createInterval(handleControls, 0, 'camera.ts');
 }
 
 /**
@@ -72,7 +73,7 @@ export function createPedEditCamera(offset: alt.IVector3 = null): void {
  */
 export function destroyPedEditCamera() {
     if (cameraControlsInterval !== undefined || cameraControlsInterval !== null) {
-        alt.clearInterval(cameraControlsInterval);
+        Timer.clearInterval(cameraControlsInterval);
         cameraControlsInterval = null;
     }
 

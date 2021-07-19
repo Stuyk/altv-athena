@@ -4,6 +4,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ProgressBar } from '../../shared/interfaces/ProgressBar';
 import { distance2d } from '../../shared/utility/vector';
 import { drawRectangle, drawText3D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 const barWidth = 0.08; // Based on percentages of screen.
 const barHeight = 0.02;
@@ -65,7 +66,9 @@ function createBar(progressBar: ProgressBar) {
     bars.push(progressBar);
 
     clear();
-    alt.setInterval(drawBars, 0);
+    if (!interval) {
+        interval = Timer.createInterval(drawBars, 0, 'progressBar.ts');
+    }
 }
 
 function removeBar(uid: string) {
@@ -84,7 +87,7 @@ function removeBar(uid: string) {
 
 function clear() {
     if (bars.length <= 0) {
-        alt.clearEveryTick(interval);
+        Timer.clearInterval(interval);
         interval = null;
     }
 }

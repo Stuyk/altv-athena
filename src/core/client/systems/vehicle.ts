@@ -10,6 +10,7 @@ import { PedConfigFlag } from '../../shared/flags/pedflags';
 import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
+import { Timer } from '../utility/timers';
 import { WheelMenu } from '../utility/wheelMenu';
 import { playAnimation } from './animations';
 
@@ -133,7 +134,7 @@ export class VehicleController {
         // S
         if (native.isControlJustReleased(0, 8)) {
             if (interval) {
-                alt.clearInterval(interval);
+                Timer.clearInterval(interval);
                 interval = null;
             }
 
@@ -191,14 +192,18 @@ export class VehicleController {
                 name: 'Push',
                 callback: () => {
                     if (interval) {
-                        alt.clearInterval(interval);
+                        Timer.clearInterval(interval);
                         interval = null;
                     }
 
                     alt.emitServer(VEHICLE_EVENTS.PUSH);
-                    interval = alt.setInterval(() => {
-                        VehicleController.pushVehicle(vehicle);
-                    }, 0);
+                    interval = Timer.createInterval(
+                        () => {
+                            VehicleController.pushVehicle(vehicle);
+                        },
+                        0,
+                        'vehicle.ts - pushing'
+                    );
                 }
             });
         } else {

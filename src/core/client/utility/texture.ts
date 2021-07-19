@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { Timer } from './timers';
 
 const MAX_ATTEMPTS = 100;
 const textureData = {};
@@ -13,11 +14,11 @@ export function loadTexture(dictionary: string) {
             return;
         }
 
-        const interval = alt.setInterval(() => {
+        const interval = Timer.createInterval(() => {
             native.requestStreamedTextureDict(dictionary, false);
             if (attempts > MAX_ATTEMPTS) {
                 resolve();
-                alt.clearInterval(interval);
+                Timer.clearInterval(interval);
                 return;
             }
 
@@ -26,7 +27,7 @@ export function loadTexture(dictionary: string) {
                 return;
             }
 
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
             return resolve();
         }, 100);
     });
