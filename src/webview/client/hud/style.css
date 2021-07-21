@@ -388,21 +388,21 @@ body {
     position: fixed;
     margin-top: 2.5vh;
     max-height: calc(95%);
-    min-width: 40vw;
-    max-width: 60vw;
     overflow: hidden;
     animation: fadein 0.2s;
     opacity: 0.95;
-    background-color: #191919;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     box-sizing: border-box;
+    border: 10px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
 }
 .leaderboardWrapper .leaderboard .headers {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
     user-select: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 .leaderboardWrapper .leaderboard .content {
     display: flex;
@@ -414,9 +414,20 @@ body {
 }
 .leaderboardWrapper .leaderboard .content .section {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+
+.leaderboardWrapper .leaderboard .content .section:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.leaderboardWrapper .leaderboard .ping {
+    text-align: right !important;
+}
+
 @keyframes fadein {
     from {
         opacity: 0;

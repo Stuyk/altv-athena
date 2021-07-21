@@ -16,10 +16,6 @@ const app = new Vue({
         return {
             show: false,
             leaderboard: false,
-            youtubeInfo: {
-                identifier: null,
-                volume: 0
-            },
             player: null,
             players: [],
             url: 'http://localhost:9111'

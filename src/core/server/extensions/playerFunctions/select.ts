@@ -16,6 +16,7 @@ import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { World } from '../../systems/world';
 import { HologramController } from '../../systems/hologram';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 
 /**
  * Select a character based on the character data provided.
@@ -84,6 +85,10 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         sync.water(player);
         sync.food(player);
         sync.vehicles(player);
+
+        player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
+        player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+        player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
 
         // Information
         const hour = `${World.hour}`.length <= 1 ? `0${World.hour}` : `${World.hour}`;

@@ -12,7 +12,6 @@ import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
-
 // Systems
 import './systems/animations';
 import './systems/blip';
@@ -22,13 +21,13 @@ import './systems/debug';
 import './systems/disable';
 import './systems/help';
 import './systems/hologram';
+import './systems/hud';
 import './systems/interaction';
 import './systems/interiors';
 import './systems/job';
 import './systems/marker';
 import './systems/meta';
 import './systems/nametag';
-import './systems/hud';
 import './systems/noclip';
 import './systems/particle';
 import './systems/progressBar';
@@ -51,9 +50,8 @@ import './views/atm';
 import './views/characters';
 import './views/clothing';
 import './views/creator';
-
 import './views/garage';
+import './views/hud/hud';
 import './views/inventory';
 import './views/job';
 import './views/login';
-import './views/hud/hud';

@@ -31,7 +31,6 @@ function appearance(player: alt.Player): void {
         player.model = 'mp_m_freemode_01';
     }
 
-    player.setSyncedMeta('Name', player.data.name);
     emit.meta(player, 'appearance', player.data.appearance);
     alt.emitClient(player, View_Events_Creator.Sync, player.data.appearance);
 }
