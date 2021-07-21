@@ -43,8 +43,10 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
  * Draws text and sets into ragdoll mode.
  */
 function handleDeathMovement() {
-    if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
-        native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+    if (!alt.Player.local.vehicle) {
+        if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
+            native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+        }
     }
 
     const timeLeft = deathTime - Date.now();
@@ -56,6 +58,6 @@ function handleDeathMovement() {
             new alt.RGBA(255, 255, 255, 255)
         );
     } else {
-        drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255));
+        drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255), 0);
     }
 }

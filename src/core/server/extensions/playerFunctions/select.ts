@@ -17,6 +17,7 @@ import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { World } from '../../systems/world';
 import { HologramController } from '../../systems/hologram';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { playerFuncs } from '../Player';
 
 /**
  * Select a character based on the character data provided.
@@ -57,6 +58,10 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
             safe.addHealth(player, player.data.health, true);
         } else {
             safe.addHealth(player, 200, true);
+        }
+
+        if (player.data.health <= 99) {
+            playerFuncs.set.dead(player);
         }
 
         // Check if armour exists.

@@ -55,7 +55,7 @@ export class Timer {
      * @memberof Timer
      */
     static clearInterval(intervalNumber: number) {
-        if (intervalNumber !== undefined) {
+        if (intervalNumber !== undefined && intervalNumber !== null && !isNaN(intervalNumber)) {
             alt.clearInterval(intervalNumber);
         }
 

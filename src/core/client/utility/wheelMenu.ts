@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { distance2d } from '../../shared/utility/vector';
 import { getPointsInCircle } from './math';
-import { drawText2D } from './text';
+import { drawRectangle2D, drawText2D } from './text';
 import { Vector2 } from '../../shared/interfaces/Vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
@@ -126,6 +126,7 @@ export class WheelMenu {
             }
         }
 
+        drawRectangle2D({ x: 0.5, y: 0.5 }, { x: 1, y: 1 }, new alt.RGBA(0, 0, 0, 100));
         drawText2D(
             `${currentMenu.label}~n~~n~'ESC' - Close Menu`,
             currentMenu.center,

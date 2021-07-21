@@ -27,6 +27,11 @@ description: List of all the changes and current versions.
 + Entering Vehicle After Pushing Fixed
 + No More Pushing Inside Vehicle
 + Prevent Attacking while Pushing Vehicle
++ Fixed leaderboard
++ Fixed revive not working correctly
++ Fixed crash when smashing into a gas station
++ Added small delay to death event to prevent random crashing
++ Darkened Wheel Menu cause Fronty Hates Me
 ```
 
 ## 2.0.0
