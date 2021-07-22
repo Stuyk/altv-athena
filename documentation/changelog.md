@@ -32,6 +32,15 @@ description: List of all the changes and current versions.
 + Fixed crash when smashing into a gas station
 + Added small delay to death event to prevent random crashing
 + Darkened Wheel Menu cause Fronty Hates Me
++ Fix Ped Edit Camera Argument Bug
++ Full Chat Rework
++ Fixed Chat Scrolling Issues
++ Fixed Chat History
++ Added More Visual Command Suggestions
++ Added /size for Font Size
++ Added /timestamp to Toggle Timestamps
++ Fix Bug where Chat Loses Focus
++ Left-Click Automatically Closes Chat
 ```
 
 ## 2.0.0

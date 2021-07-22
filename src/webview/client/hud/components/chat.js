@@ -17,115 +17,116 @@ const tagOrComment = new RegExp(
     'gi'
 );
 
-const messages = ['Use {00FFFF}LEFT ALT + TAB {FFFFFF}to turn on Interaction', 'Use I for Inventory'];
-
-let commands = [
-    { name: 'timestamp', description: '/timestamp - Toggles timestamps.' },
-    { name: 'help', description: '/help - List all available commands for your permission level.' }
-];
-
 const chat = Vue.component('chat', {
     data() {
         return {
-            previous: [' ', 'alt:V Athena Chat', 'By Stuyk'],
-            currentMessage: '',
+            history: [],
+            historyIndex: -1,
+            commands: [],
+            messages: [],
             chatActive: false,
-            position: 0,
-            timestamp: false,
-            matchedCommand: null,
+            showTimestamps: true,
             show: false,
-            updateCount: 0
+            pageSize: 8,
+            page: 1,
+            updateCount: 0,
+            fontSize: 14,
+            matchedCommand: '',
+            currentMessage: '',
+            suggestions: []
         };
     },
     methods: {
-        appendMessage(msg) {
-            const currentTime = Date.now();
-            const date = new Date(currentTime);
-            messages.push({
-                message: msg,
-                time: `[${this.addZero(date.getHours())}:${this.addZero(date.getMinutes())}:${this.addZero(
-                    date.getSeconds()
-                )}]`
-            });
+        /**
+         * Used to set the messages for state.
+         * Messages are stored outside the scope of the CEF.
+         *
+         * Messages are appended from the front of the array.
+         * Means they're inserted in the front.
+         * [85, 86, 87, 88, 89... etc]
+         * @param {Array<{ message: string, timestamp: string }>} messages
+         */
+        setMessages(messages, commands) {
+            this.messages = messages;
+            this.commands = commands;
+        },
+        /**
+         * Gets all the messages from pagination.
+         *
+         * Should always have the newest message as the last element in
+         * the array.
+         * @return {*}
+         */
+        getMessages() {
+            return this.paginate(this.messages, this.page).reverse();
+        },
+        /**
+         * Splits the array into a smaller format based on the
+         * the page variable. Page implies a group of messages
+         * with a size that matches the pageSize.
+         *
+         * 8 messages per page is the default here.
+         *
+         * Incrementing the page number will show the next
+         * group of messages.
+         *
+         * @param {*} array
+         * @param {*} page
+         * @return {*}
+         */
+        paginate(array, page, skipFill = false) {
+            const results = array.slice((page - 1) * this.pageSize, page * this.pageSize);
 
-            // Log Messages to Console
-            if ('alt' in window) {
-                console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${msg}`);
-            }
-
-            if (messages.length >= 50) {
-                messages.shift();
-            }
-
-            this.updateCount += 1;
-
-            if (!this.chatActive) {
-                this.$nextTick(() => {
-                    if (!this.$refs || !this.$refs.messages) {
-                        return;
+            if (!skipFill) {
+                if (results.length < this.pageSize) {
+                    const appendCount = this.pageSize - results.length;
+                    for (let i = 0; i < appendCount; i++) {
+                        results.push({ message: '', timestamp: '' });
                     }
-
-                    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
-                });
-            }
-        },
-        trimDescription(description) {
-            if (description.length <= 55) {
-                return description;
+                }
             }
 
-            return `${description.substr(0, 55)}...`;
+            return results;
         },
+        /**
+         * Determine if the pageup/pagedown keys can be used
+         * to display the next set of messages in the
+         * array.
+         * @return {*}
+         */
+        canIncrementPage() {
+            const result = this.paginate(this.messages, this.page, true);
+            if (result.length < this.pageSize) {
+                return false;
+            }
+
+            return true;
+        },
+        /**
+         * Called when the player presses the chat
+         * button on the client-side.
+         */
         focusChat() {
             this.chatActive = true;
+            document.addEventListener('mousedown', this.unfocusChat);
 
             if ('alt' in window) {
                 alt.emit('commands:Update');
             }
         },
-        handleEscape() {
+        unfocusChat() {
+            document.removeEventListener('mousedown', this.focusChat);
             this.chatActive = false;
-            this.position = 0;
+            this.historyIndex = -1;
             this.currentMessage = '';
 
             if ('alt' in window) {
                 alt.emit('chat:Send');
             }
         },
-        prevMessage() {
-            if (this.position + 1 > this.previous.length - 1) {
-                return;
-            }
-
-            this.position += 1;
-            this.currentMessage = this.previous[this.position];
-        },
-        nextMessage() {
-            if (this.position - 1 < 0) {
-                return;
-            }
-
-            this.position -= 1;
-            this.currentMessage = this.previous[this.position];
-        },
-        appendPrevious(message) {
-            if (!this.previous.includes(message)) {
-                this.previous = this.previous.filter((x) => x !== '');
-                this.previous.unshift(message);
-                this.previous.unshift('');
-            }
-        },
-        addZero(i) {
-            if (i < 10) {
-                i = '0' + i;
-            }
-            return i;
-        },
         handleSend(e) {
             const message = e.target.value;
-            this.chatActive = false;
-            this.position = 0;
-            this.currentMessage = '';
+            this.unfocusChat();
 
             // Handle No Message
             if (!message || message === '') {
@@ -135,138 +136,152 @@ const chat = Vue.component('chat', {
                 return;
             }
 
-            if (message === '/timestamp') {
-                this.timestamp = !this.timestamp;
-                this.appendMessage(`You have toggled timestamps.`);
-                this.appendPrevious(message);
-
-                if ('alt' in window) {
-                    alt.emit('chat:Send');
+            // Append Commands to History
+            if (message.charAt(0) === '/') {
+                this.history.unshift(message);
+                if (this.history.length > 25) {
+                    this.history.pop();
                 }
-                return;
+
+                // Handle Chat Commands
+                if (this.isLocalCommand(message)) {
+                    if ('alt' in window) {
+                        alt.emit('chat:Send');
+                    }
+                    return;
+                }
+
+                this.historyIndex = -1;
             }
-
-            if (message === '/commands' || message === '/cmds') {
-                for (let i = 0; i < commands.length; i++) {
-                    this.appendMessage(`${commands[i].description}`);
-                }
-                this.appendPrevious(message);
-
-                if ('alt' in window) {
-                    alt.emit('chat:Send');
-                }
-                return;
-            }
-
-            if (message === '/help') {
-                this.appendMessage(`{00FFFF}[ alt ]{FFFFFF} - Toggle Interaction Mode`);
-                this.appendMessage(`{00FFFF}[ e ]{FFFFFF} - Interact`);
-                this.appendMessage(`{00FFFF}[ i ]{FFFFFF} - Inventory`);
-                this.appendMessage(`{00FFFF}[ f ]{FFFFFF} - (Vehicle) Enter / Exit / Start / Stop / Toggle Door`);
-                this.appendMessage(`{00FFFF}[ x ]{FFFFFF} - (Vehicle) Unlock / Lock `);
-                this.appendMessage(`{00FFFF}[ f2 ]{FFFFFF} - Leaderboard`);
-
-                if ('alt' in window) {
-                    alt.emit('chat:Send');
-                }
-                return;
-            }
-
-            // Appends message to front of array.
-            this.appendPrevious(message);
 
             // Handle Send Message
             if ('alt' in window) {
                 alt.emit('chat:Send', message);
             }
         },
-        handleTyping(e) {
-            if (!this.currentMessage.includes('/')) {
-                this.matchedCommand = null;
+        handleTyping() {
+            if (!this.chatActive) {
+                this.suggestions = [];
                 return;
             }
 
-            this.currentMessage = this.currentMessage.replace(tagOrComment, '').replace('/</g', '&lt;');
-
-            if (this.currentMessage === '' || this.currentMessage.length <= 2) {
-                this.matchedCommand = null;
+            if (this.currentMessage.charAt(0) !== '/') {
+                this.suggestions = [];
                 return;
             }
 
-            const index = commands.findIndex((x) => x && x.description && x.description.includes(this.currentMessage));
+            const parsedCommand = this.currentMessage
+                .replace(tagOrComment, '')
+                .replace('/</g', '&lt;')
+                .replace('/', '');
 
-            if (index <= -1) {
-                this.matchedCommand = null;
-                return;
-            }
+            const suggestions = [];
 
-            if (this.matchedCommand !== null && this.currentMessage.replace('/', '') === commands[index].name) {
-                this.matchedCommand = `/${commands[index].name}`;
-                return;
-            }
-
-            this.matchedName = commands[index].name;
-            this.matchedCommand = this.trimDescription(commands[index].description);
-        },
-        useCommand() {
-            if (this.matchedCommand && this.matchedName) {
-                this.currentMessage = `/${this.matchedName}`;
-            }
-        },
-        populateCommands(serverCommands) {
-            if (!Array.isArray(serverCommands)) {
-                return;
-            }
-
-            commands = commands.concat(serverCommands);
-            this.updateCount += 1;
-
-            this.$nextTick(() => {
-                if (!this.$refs || !this.$refs.messages) {
-                    return;
+            for (let i = 0; i < this.commands.length; i++) {
+                const cmd = this.commands[i];
+                if (!cmd.description.includes(parsedCommand)) {
+                    continue;
                 }
-                this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
-            });
+
+                if (suggestions.length >= 6) {
+                    break;
+                }
+
+                suggestions.push(cmd.description);
+            }
+
+            this.suggestions = suggestions;
         },
         handleKeybinds(e) {
-            // PageUp
-            if (e.keyCode === 33) {
-                this.$refs.messages.scrollTop -= 300;
-
-                if (this.$refs.messages.scrollTop < 0) {
-                    this.$refs.messages.scrollTop = 0;
-                }
-            }
-
-            // PageDown
-            if (e.keyCode === 34) {
-                this.$refs.messages.scrollTop += 300;
-
-                if (this.$refs.messages.scrollTop > this.$refs.messages.scrollHeight) {
-                    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
-                }
-            }
-
             // Escape for chat
             if (e.keyCode === 27) {
                 if (!this.chatActive) {
                     return;
                 }
 
-                this.handleEscape();
+                this.unfocusChat();
+                return;
             }
-        }
-    },
-    directives: {
-        focus: {
-            inserted: (el) => {
-                el.focus();
+
+            // PageUp
+            if (e.keyCode === 33) {
+                if (!this.canIncrementPage()) {
+                    return;
+                }
+
+                this.page += 1;
+                return;
             }
-        }
-    },
-    watch: {
-        currentMessage: (newValue) => {
-            this.currentMessage = newValue;
+
+            // PageDown
+            if (e.keyCode === 34) {
+                if (this.page === 1) {
+                    return;
+                }
+
+                this.page -= 1;
+                return;
+            }
+
+            if (!this.chatActive) {
+                return;
+            }
+
+            // Up Arrow
+            if (e.keyCode === 38) {
+                if (this.historyIndex + 1 >= this.history.length) {
+                    return;
+                }
+
+                this.historyIndex += 1;
+                this.currentMessage = this.history[this.historyIndex];
+                return;
+            }
+
+            // Down Arrow
+            if (e.keyCode === 40) {
+                if (this.historyIndex - 1 <= -1) {
+                    this.currentMessage = '';
+                    this.historyIndex = -1;
+                    return;
+                }
+
+                this.historyIndex -= 1;
+                this.currentMessage = this.history[this.historyIndex];
+                return;
+            }
+        },
+        /**
+         * Use a local command that changes chat parameters.
+         * @param {string} message
+         * @return {*}
+         */
+        isLocalCommand(message) {
+            if (message === '/clear') {
+                if ('alt' in window) {
+                    alt.emit('chat:Clear');
+                }
+                return true;
+            }
+
+            if (message.includes('/size')) {
+                const args = message.split(' ');
+                const size = args[1];
+
+                if (!size) {
+                    return false;
+                }
+
+                this.fontSize = size;
+                return true;
+            }
+
+            if (message === '/timestamp' || message === '/timestamps') {
+                this.showTimestamps = !this.showTimestamps;
+                return true;
+            }
+
+            return false;
         }
     },
     filters: {
@@ -310,64 +325,63 @@ const chat = Vue.component('chat', {
             return text;
         }
     },
-    template: `
-            <div class="chat">
-                <div class="messages mt-12" ref="messages" :key="updateCount">
-                    <div class="message" v-for="(message, index) in messages" :key="index">
-                        <template v-if="timestamp">
-                            <span>{{ message.time}}</span> <span :inner-html.prop="message.message | colorify" />
-                        </template>
-                        <template v-else>
-                            <span :inner-html.prop="message.message | colorify" />
-                        </template>
-                    </div>
-                </div>
-                <div class="outerInput" v-if="chatActive">
-                    <div class="mockInput">{{ matchedCommand !== null ? matchedCommand : '' }}</div>
-                    <input
-                        class="mainChatInput" 
-                        label="Use '/' to type a command." 
-                        ref="chatInput"
-                        v-model="currentMessage"
-                        @keyup.enter="handleSend" 
-                        @keyup.escape="handleEscape"
-                        @keyup.up="prevMessage"
-                        @keyup.down="nextMessage"
-                        @keyup.right="useCommand"
-                        @keyup="handleTyping"
-                        maxlength="128"
-                        v-focus>
-                    </input>
-                </div>
-                <div class="outerInput" v-else>
-                    <input class="chatInput-hidden" ref="chatInput" disabled></input>
-                </div>
-            </div>
-        `,
+    directives: {
+        focus: {
+            inserted: (el) => {
+                el.focus();
+            }
+        }
+    },
+    computed: {
+        getFontSize() {
+            return { 'font-size': `${this.fontSize}px` };
+        },
+        hasMatchingCommand() {
+            if (this.currentMessage.charAt(0) !== '/') {
+                return false;
+            }
+
+            return this.commands.find((x) => this.currentMessage.includes(x.description));
+        }
+    },
     mounted() {
+        window.addEventListener('keyup', this.handleKeybinds);
+
         if ('alt' in window) {
-            alt.on('chat:Append', this.appendMessage);
+            alt.on('chat:SetMessages', this.setMessages);
             alt.on('chat:Focus', this.focusChat);
-            alt.on('chat:PopulateCommands', this.populateCommands);
-        } else {
-            let count = 0;
-            let interval = setInterval(() => {
-                count += 1;
-                this.appendMessage(
-                    `Message ${count} lore impsum do stuff long words and this is me screaming internally.`
-                );
-
-                if (count >= 100) {
-                    clearInterval(interval);
-                }
-            }, 100);
-
-            setTimeout(() => {
-                this.focusChat();
-            }, 1000);
+            alt.emit('chat:Ready');
+            return;
         }
 
-        window.addEventListener('keyup', this.handleKeybinds);
+        // Used for debugging messages in CEF.
+        const messages = [];
+        for (let i = 0; i < 100; i++) {
+            if (i < 25) {
+                // Color Tests
+                messages.push({
+                    message: `{FF0000}Message ${i} lore impsum do stuff long words and this is me screaming internally.`,
+                    timestamp: '[00:00:00]'
+                });
+                continue;
+            }
+
+            // Normal Tests
+            messages.push({
+                message: `Message ${i} lore impsum do stuff long words and this is me screaming internally.`,
+                timestamp: '[00:00:00]'
+            });
+        }
+
+        // Reverse the messages to match the client-side.
+        this.setMessages(messages.reverse(), [
+            { name: 'timestamp', description: '/timestamp - Toggles Timestamps' },
+            { name: 'help', description: '/help - List Available Commands' }
+        ]);
+
+        setTimeout(() => {
+            this.focusChat();
+        }, 1000);
     },
     beforeDestroy() {
         window.removeEventListener('keyup', this.handleKeybinds);
@@ -379,5 +393,46 @@ const chat = Vue.component('chat', {
         alt.off('chat:Append', this.appendMessage);
         alt.off('chat:Focus', this.focusChat);
         alt.off('chat:PopulateCommands', this.populateCommands);
-    }
+    },
+    template: `
+            <div class="chat">
+                <div class="messages" ref="messages" :key="updateCount">
+                    <div class="message" v-for="(data, index) in getMessages()" :key="index">
+                        <div :style="getFontSize">
+                            <template v-if="showTimestamps && data.message">
+                                <span>{{ data.timestamp }}</span> <span :inner-html.prop="data.message | colorify" />
+                            </template>
+                            <template v-else-if="!showTimestamps && data.message">
+                                <span :inner-html.prop="data.message | colorify" />
+                            </template>
+                            <template v-else>
+                                &nbsp;
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="outerInput" v-if="chatActive">
+                    <input
+                        class="mainChatInput" 
+                        label="Use '/' to type a command." 
+                        ref="chatInput"
+                        id="chatInput"
+                        v-model="currentMessage"
+                        @keyup.enter="handleSend" 
+                        @keyup="handleTyping"
+                        maxlength="128"
+                        autofocus
+                        v-focus>
+                    </input>
+                    <div class="suggestions" v-if="suggestions.length >= 1">
+                        <div class="option" v-for="(option, index) in suggestions" :key="index">
+                            {{ option }}
+                        </div>
+                    </div>
+                </div>
+                <div class="outerInput" v-else>
+                    <input class="chatInput-hidden" ref="chatInput" disabled></input>
+                </div>
+            </div>
+        `
 });
