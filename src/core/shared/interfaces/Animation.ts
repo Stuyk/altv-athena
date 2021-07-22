@@ -1,5 +1,5 @@
-import { Vector3 } from 'alt-client';
 import { AnimationFlags } from '../flags/animation';
+import { Vector3 } from './Vector';
 
 export interface Animation {
     dict: string;

@@ -238,7 +238,7 @@ export class Job {
 
         setTimeout(() => {
             if (objective.animation.rotation) {
-                this.player.rot = objective.animation.rotation;
+                this.player.rot = objective.animation.rotation as alt.Vector3;
             }
 
             alt.nextTick(() => {
