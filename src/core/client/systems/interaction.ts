@@ -9,6 +9,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { drawTexture, loadTexture } from '../utility/texture';
+import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;
 let tick;
@@ -25,7 +26,7 @@ export class InteractionController {
      */
     static init() {
         if (!tick) {
-            tick = alt.setInterval(InteractionController.tick, 0);
+            tick = Timer.createInterval(InteractionController.tick, 0, 'interaction.ts');
         }
 
         InteractionController.registerKeybinds();

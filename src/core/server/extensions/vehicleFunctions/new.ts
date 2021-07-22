@@ -104,6 +104,7 @@ function tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: 
     vehicle.behavior = tmpBehavior;
     vehicle.numberPlateText = 'TEMP';
     vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+    vehicle.isTemporary = true;
     vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
     return vehicle;
 }

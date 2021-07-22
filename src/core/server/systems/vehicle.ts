@@ -15,6 +15,7 @@ import '../views/dealership';
 import './fuel';
 import { ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -87,6 +88,10 @@ export class VehicleFunctions {
      * @memberof VehicleFunctions
      */
     static handleOutsideVehicle(player: alt.Player, vehicle: alt.Vehicle) {
+        if (player.isPushingVehicle) {
+            VehicleFunctions.stopPush(player);
+        }
+
         if (VehicleFunctions.isVehicleLocked(vehicle)) {
             playerFuncs.emit.notification(player, `~r~Vehicle is not currently unlocked.`);
             return;
@@ -144,8 +149,21 @@ export class VehicleFunctions {
         }
 
         if (VehicleFunctions.isVehicleLocked(vehicle)) {
-            // Handle Lock State
-            return;
+            if (!vehicle.data) {
+                return;
+            }
+
+            // Check the vehicle class.
+            // Check if the vehicle class should allow getting off while locked.
+            // Counts for motorcycles and cycle types.
+            const vehicleData = VehicleData.find((x) => x.name === vehicle.data.model);
+            if (!vehicleData) {
+                return;
+            }
+
+            if (vehicleData.class !== VEHICLE_CLASS.CYCLE && vehicleData.class !== VEHICLE_CLASS.MOTORCYCLE) {
+                return;
+            }
         }
 
         const tasks: Array<Task> = [
@@ -166,6 +184,10 @@ export class VehicleFunctions {
      * @memberof VehicleFunctions
      */
     static prunePassengers(vehicle: alt.Vehicle) {
+        if (!vehicle.passengers) {
+            vehicle.passengers = [];
+        }
+
         for (let i = vehicle.passengers.length - 1; i >= 0; i--) {
             const passenger = vehicle.passengers[i];
 
@@ -273,6 +295,17 @@ export class VehicleFunctions {
      */
     static leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
         VehicleFunctions.prunePassengers(vehicle);
+
+        // Prune Temporary Vehicles
+        if (!vehicle.isTemporary) {
+            return;
+        }
+
+        if (seat !== 1) {
+            return;
+        }
+
+        vehicle.destroy();
     }
 
     /**
@@ -430,9 +463,21 @@ export class VehicleFunctions {
         });
     }
 
-    static startPush(player: alt.Player): boolean {
-        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+    static startPush(player: alt.Player, position: alt.Vector3): boolean {
+        if (!player || !player.valid) {
+            return false;
+        }
 
+        if (player.vehicle) {
+            return false;
+        }
+
+        if (player.isPushingVehicle) {
+            player.detach();
+            return false;
+        }
+
+        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
         if (!vehicle || !vehicle.valid) {
             return false;
         }
@@ -441,20 +486,23 @@ export class VehicleFunctions {
             return false;
         }
 
+        player.isPushingVehicle = true;
         vehicle.setNetOwner(player);
-        player.setSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE, vehicle);
+        player.attachTo(vehicle, 0, 6286, position, new alt.Vector3(0, 0, 0), true, false);
+        alt.emitClient(player, VEHICLE_EVENTS.PUSH, vehicle);
         return true;
     }
 
     static stopPush(player: alt.Player) {
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
 
-        if (!vehicle || !vehicle.valid) {
-            return;
+        if (vehicle && vehicle.valid) {
+            vehicle.resetNetOwner();
         }
 
-        vehicle.resetNetOwner();
-        player.deleteSyncedMeta(PLAYER_SYNCED_META.PUSHING_VEHICLE);
+        player.isPushingVehicle = false;
+        player.detach();
+        alt.emitClient(player, VEHICLE_EVENTS.STOP_PUSH);
     }
 }
 

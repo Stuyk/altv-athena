@@ -1,9 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText2D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 const drawDistance = 50;
 let interval;
@@ -12,7 +14,7 @@ let shouldScreenShake = false;
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleStart);
 
 function handleStart() {
-    interval = alt.setInterval(drawNametags, 0);
+    interval = Timer.createInterval(drawNametags, 0, 'nametag.ts');
     shouldScreenShake = SHARED_CONFIG.FORCE_SCREEN_SHAKE;
 }
 
@@ -56,7 +58,7 @@ function drawNametags() {
             continue;
         }
 
-        let name = player.getSyncedMeta('Name');
+        let name = player.getSyncedMeta(PLAYER_SYNCED_META.NAME);
         if (!name || name === null || name === undefined) {
             continue;
         }

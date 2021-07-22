@@ -94,6 +94,4 @@ export class OptionsController {
     }
 }
 
-export default function loader() {
-    OptionsController.propagateOptions();
-}
+OptionsController.propagateOptions();

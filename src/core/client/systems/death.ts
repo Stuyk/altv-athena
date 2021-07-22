@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { drawText2D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleSingleMetaChange);
 
@@ -23,7 +24,7 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
 
     if (newValue) {
         if (!interval) {
-            interval = alt.setInterval(handleDeathMovement, 0);
+            interval = Timer.createInterval(handleDeathMovement, 0, 'death.ts');
             deathTime = Date.now() + SHARED_CONFIG.RESPAWN_TIME;
         }
         return;
@@ -34,7 +35,7 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
     }
 
     native.clearPedTasksImmediately(alt.Player.local.scriptID);
-    alt.clearInterval(interval);
+    Timer.clearInterval(interval);
     interval = null;
 }
 
@@ -42,8 +43,10 @@ function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void
  * Draws text and sets into ragdoll mode.
  */
 function handleDeathMovement() {
-    if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
-        native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+    if (!alt.Player.local.vehicle) {
+        if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
+            native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+        }
     }
 
     const timeLeft = deathTime - Date.now();
@@ -55,6 +58,6 @@ function handleDeathMovement() {
             new alt.RGBA(255, 255, 255, 255)
         );
     } else {
-        drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255));
+        drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255), 0);
     }
 }

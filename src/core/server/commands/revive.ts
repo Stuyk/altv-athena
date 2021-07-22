@@ -24,10 +24,5 @@ function handleCommand(player: alt.Player, targetPlayerID: string | null = null)
         return;
     }
 
-    if (!target.data.isDead) {
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_NOT_DEAD));
-        return;
-    }
-
     playerFuncs.set.respawned(target, target.pos);
 }

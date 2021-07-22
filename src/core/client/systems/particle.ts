@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Particle } from '../../shared/interfaces/Particle';
 import { sleep } from '../utility/sleep';
+import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, handlePlayParticle);
 
@@ -10,24 +11,28 @@ function loadParticleDictionary(dictionary: string): Promise<boolean> {
     return new Promise((resolve: Function): void => {
         let count = 0;
 
-        const interval = alt.setInterval(() => {
-            count += 1;
+        const interval = Timer.createInterval(
+            () => {
+                count += 1;
 
-            if (native.hasNamedPtfxAssetLoaded(dictionary)) {
-                alt.clearInterval(interval);
-                resolve(true);
-                return;
-            }
+                if (native.hasNamedPtfxAssetLoaded(dictionary)) {
+                    Timer.clearInterval(interval);
+                    resolve(true);
+                    return;
+                }
 
-            if (count >= 50) {
-                alt.clearInterval(interval);
-                resolve(false);
-                alt.log(`Exceeded count for ${dictionary} ptfx`);
-                return;
-            }
+                if (count >= 50) {
+                    Timer.clearInterval(interval);
+                    resolve(false);
+                    alt.log(`Exceeded count for ${dictionary} ptfx`);
+                    return;
+                }
 
-            native.requestNamedPtfxAsset(dictionary);
-        }, 250);
+                native.requestNamedPtfxAsset(dictionary);
+            },
+            250,
+            'particle.ts'
+        );
     });
 }
 
@@ -48,26 +53,30 @@ export async function handlePlayParticle(data: Particle): Promise<void> {
     }
 
     const endTime = Date.now() + data.duration;
-    const interval = alt.setInterval(() => {
-        native.useParticleFxAsset(data.dict);
-        native.startParticleFxNonLoopedAtCoord(
-            data.name,
-            data.pos.x,
-            data.pos.y,
-            data.pos.z,
-            Math.floor(Math.random() * 360),
-            Math.floor(Math.random() * 360),
-            Math.floor(Math.random() * 360),
-            data.scale,
-            false,
-            false,
-            false
-        );
+    const interval = Timer.createInterval(
+        () => {
+            native.useParticleFxAsset(data.dict);
+            native.startParticleFxNonLoopedAtCoord(
+                data.name,
+                data.pos.x,
+                data.pos.y,
+                data.pos.z,
+                Math.floor(Math.random() * 360),
+                Math.floor(Math.random() * 360),
+                Math.floor(Math.random() * 360),
+                data.scale,
+                false,
+                false,
+                false
+            );
 
-        if (Date.now() > endTime) {
-            native.stopFireInRange(data.pos.x, data.pos.y, data.pos.z, 10);
-            alt.clearInterval(interval);
-            return;
-        }
-    }, 250);
+            if (Date.now() > endTime) {
+                native.stopFireInRange(data.pos.x, data.pos.y, data.pos.z, 10);
+                Timer.clearInterval(interval);
+                return;
+            }
+        },
+        250,
+        'particle.ts'
+    );
 }

@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vector3 } from '../../shared/interfaces/Vector';
+import { Timer } from './timers';
 
 export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
     let timerHandle: number;
@@ -14,19 +15,23 @@ export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
             1
         );
 
-        timerHandle = alt.setInterval(() => {
-            if (!native.isNewLoadSceneActive()) {
-                return resolve(false);
-            }
+        timerHandle = Timer.createInterval(
+            () => {
+                if (!native.isNewLoadSceneActive()) {
+                    return resolve(false);
+                }
 
-            if (!native.isNewLoadSceneLoaded()) {
-                return;
-            }
+                if (!native.isNewLoadSceneLoaded()) {
+                    return;
+                }
 
-            return resolve(true);
-        }, 10);
+                return resolve(true);
+            },
+            10,
+            'scene.ts'
+        );
     }).finally(() => {
         native.newLoadSceneStop();
-        alt.clearInterval(timerHandle);
+        Timer.clearInterval(timerHandle);
     });
 }

@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { Timer } from './timers';
 
 const temporaryText = [];
 let tempInterval;
@@ -110,11 +111,11 @@ export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
     temporaryText.push({ identifier, msg, x, y, scale, r, g, b, a, timeout });
 
     if (tempInterval) {
-        alt.clearInterval(tempInterval);
+        Timer.clearInterval(tempInterval);
         tempInterval = null;
     }
 
-    tempInterval = alt.setInterval(handleDrawTemporaryText, 0);
+    tempInterval = Timer.createInterval(handleDrawTemporaryText, 0, 'text.ts');
 }
 
 /**
@@ -131,7 +132,7 @@ function removeText(identifier: string): void {
     temporaryText.splice(index, 1);
 
     if (temporaryText.length <= 0) {
-        alt.clearInterval(tempInterval);
+        Timer.clearInterval(tempInterval);
         tempInterval = null;
     }
 }

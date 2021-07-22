@@ -3,6 +3,7 @@ import * as native from 'natives';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { handleFrontendSound } from '../systems/sound';
+import { Timer } from '../utility/timers';
 
 // Must be a blank index page.
 const blankURL = `http://resource/client/views/empty/html/index.html`;
@@ -54,12 +55,12 @@ export class View extends alt.WebView {
         // Wait for View to close.
         if (_isClosing) {
             await new Promise((resolve: Function) => {
-                const tmpInterval = alt.setInterval(() => {
+                const tmpInterval = Timer.createInterval(() => {
                     if (_isClosing) {
                         return;
                     }
 
-                    alt.clearInterval(tmpInterval);
+                    Timer.clearInterval(tmpInterval);
                     resolve();
                 }, 5);
             });

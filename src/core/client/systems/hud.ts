@@ -10,6 +10,7 @@ import { getPointsInCircle } from '../utility/math';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
 import { drawTexture2D, loadTexture } from '../utility/texture';
+import { Timer } from '../utility/timers';
 import { World } from './world';
 
 let interval;
@@ -185,10 +186,10 @@ export class HudSystem {
      */
     static init() {
         if (interval) {
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
         }
 
-        interval = alt.setInterval(HudSystem.render, 0);
+        interval = Timer.createInterval(HudSystem.render, 0, 'hud.ts');
     }
 
     /**

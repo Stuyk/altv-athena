@@ -13,6 +13,7 @@ import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
+import { Timer } from '../utility/timers';
 import { waitForFalse } from '../utility/wait';
 import { BaseHUD } from './hud/hud';
 
@@ -146,12 +147,12 @@ export class InventoryController implements ViewModel {
         lastDroppedItems = items;
 
         if (drawInterval) {
-            alt.clearInterval(drawInterval);
+            Timer.clearInterval(drawInterval);
             drawInterval = null;
         }
 
         if (lastDroppedItems.length >= 1) {
-            drawInterval = alt.setInterval(InventoryController.drawItemMarkers, 0);
+            drawInterval = Timer.createInterval(InventoryController.drawItemMarkers, 0, 'inventory.ts');
         }
 
         if (!view) {

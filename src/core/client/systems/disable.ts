@@ -2,13 +2,14 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
 
 let interval;
 
 function toggleOn() {
-    interval = alt.setInterval(disableDefaultBehavior, 0);
+    interval = Timer.createInterval(disableDefaultBehavior, 0, 'disable.ts');
 }
 
 function disableDefaultBehavior(): void {

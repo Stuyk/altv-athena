@@ -3,6 +3,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Marker } from '../../shared/interfaces/Marker';
 import { distance2d } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
+import { Timer } from '../utility/timers';
 
 let addedMarkers: Array<Marker> = [];
 let isRemoving = false;
@@ -24,7 +25,7 @@ export class MarkerController {
         addedMarkers.push(marker);
 
         if (!interval) {
-            interval = alt.setInterval(handleDrawMarkers, 0);
+            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
         }
     }
 
@@ -38,7 +39,7 @@ export class MarkerController {
         addedMarkers = addedMarkers.concat(markers);
 
         if (!interval) {
-            interval = alt.setInterval(handleDrawMarkers, 0);
+            interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
         }
     }
 

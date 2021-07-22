@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { getPointsInCircle } from './math';
-import { drawText2D } from './text';
-import { Vector2 } from '../../shared/interfaces/vector';
+import { drawRectangle2D, drawText2D } from './text';
+import { Vector2 } from '../../shared/interfaces/Vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
+import { Timer } from './timers';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -54,7 +54,8 @@ export class WheelMenu {
         }
 
         if (interval) {
-            alt.clearEveryTick(interval);
+            Timer.clearInterval(interval);
+            interval = null;
         }
 
         currentMenu = {
@@ -65,7 +66,7 @@ export class WheelMenu {
 
         lastHover = null;
 
-        interval = alt.everyTick(WheelMenu.render);
+        interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
 
         if (setMouseToCenter) {
             const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
@@ -82,7 +83,7 @@ export class WheelMenu {
     }
 
     static close() {
-        alt.clearEveryTick(interval);
+        Timer.clearInterval(interval);
         interval = null;
         currentMenu = null;
     }
@@ -125,6 +126,7 @@ export class WheelMenu {
             }
         }
 
+        drawRectangle2D({ x: 0.5, y: 0.5 }, { x: 1, y: 1 }, new alt.RGBA(0, 0, 0, 100));
         drawText2D(
             `${currentMenu.label}~n~~n~'ESC' - Close Menu`,
             currentMenu.center,

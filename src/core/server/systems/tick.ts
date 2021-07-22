@@ -1,4 +1,6 @@
 import * as alt from 'alt-server';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
@@ -26,6 +28,8 @@ function handlePing(player: alt.Player): void {
         return;
     }
 
+    player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
+    player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
     player.nextPingTime = Date.now() + timeBetweenPings;
 
     // Handles General Saving / Synchronization

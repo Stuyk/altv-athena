@@ -4,6 +4,45 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.1
+```diff
++ Add Client Console Command for 'timerinfo'
++ Prints the total amount of Timers and their Millisecond Interval
++ Bound all Intervals to Timer.createTimer to track Timers
++ Fixed falling through map with tpwp with native.clearFocus
++ Fixed small progress bar bug
++ Added Average Time for Interval Completion(s)
++ Added Ability to Exit Locked Motorcycles
++ Added Temporary Vehicle Flag for Vehicles
++ Temporary Vehicles Deleted after first driver exit
++ Added Death Logs to Console
++ Ensure Player Respawn for Death Logs
++ Update Discord.js Version
++ Fix Discord Whitelisting
++ Create Reliable Discord Whitelisting by User Comparison
++ Moved Attaching Server Side for Pushing
++ Detach Player when Entering Vehicle
++ Pushing Vehicle Moved to Own System
++ Pushing Vehicle Server-Side State
++ Entering Vehicle After Pushing Fixed
++ No More Pushing Inside Vehicle
++ Prevent Attacking while Pushing Vehicle
++ Fixed leaderboard
++ Fixed revive not working correctly
++ Fixed crash when smashing into a gas station
++ Added small delay to death event to prevent random crashing
++ Darkened Wheel Menu cause Fronty Hates Me
++ Fix Ped Edit Camera Argument Bug
++ Full Chat Rework
++ Fixed Chat Scrolling Issues
++ Fixed Chat History
++ Added More Visual Command Suggestions
++ Added /size for Font Size
++ Added /timestamp to Toggle Timestamps
++ Fix Bug where Chat Loses Focus
++ Left-Click Automatically Closes Chat
+```
+
 ## 2.0.0
 ```diff
 + New Keybind Interface for Custom Keybinds

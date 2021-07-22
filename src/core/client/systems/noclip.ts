@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { getCrossProduct, getNormalizedVector, rotationToDirection } from '../utility/math';
 import { addTemporaryText } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 const disabledControls = [
     30, // A & D
@@ -67,7 +68,7 @@ alt.on('syncedMetaChange', (entity, key, value) => {
 
     if (!value) {
         if (interval) {
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
             interval = null;
         }
 
@@ -88,7 +89,7 @@ alt.on('syncedMetaChange', (entity, key, value) => {
 
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setEntityInvincible(alt.Player.local.scriptID, true);
-    interval = alt.setInterval(handleCamera, 0);
+    interval = Timer.createInterval(handleCamera, 0, 'noclip.ts');
     addTemporaryText(`freecamStatus`, `NoClip: On`, 0.95, 0.2, 0.4, 255, 255, 255, 255, 2000);
 });
 

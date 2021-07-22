@@ -76,20 +76,20 @@ export class InteractionController {
      * @return {*}
      * @memberof InteractionController
      */
-    static enter(colshape: InteractionShape, player: alt.Player) {
+    static enter(colshape: InteractionShape, entity: alt.Entity) {
         if (!colshape.isInteraction) {
             return;
         }
 
-        if (!(player instanceof alt.Player)) {
+        if (!(entity instanceof alt.Player)) {
             return;
         }
 
         // When entering set the help text.
         // Don't pass the interaction. Just the description from it.
-        player.currentInteraction = colshape;
-        const interaction = player.currentInteraction.getInteraction();
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description);
+        entity.currentInteraction = colshape;
+        const interaction = entity.currentInteraction.getInteraction();
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description);
     }
 
     /**
@@ -100,19 +100,19 @@ export class InteractionController {
      * @return {*}
      * @memberof InteractionController
      */
-    static leave(colshape: InteractionShape, player: alt.Player) {
+    static leave(colshape: InteractionShape, entity: alt.Entity) {
         if (!colshape.isInteraction) {
             return;
         }
 
-        if (!(player instanceof alt.Player)) {
+        if (!(entity instanceof alt.Player)) {
             return;
         }
 
         // When leaving remove the help text.
         // Don't pass the interaction.
-        player.currentInteraction = null;
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
+        entity.currentInteraction = null;
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
     }
 
     /**

@@ -16,6 +16,7 @@ import './controllers/leaderBoardController';
 import { ChatController } from './controllers/chatController';
 
 const url = `http://assets/webview/client/hud/index.html`;
+// const url = `http://127.0.0.1:5500/src/webview/client/hud/index.html`;
 
 let commandList: Array<any> = [];
 let interval: number;
@@ -32,11 +33,13 @@ export class BaseHUD {
     static createView() {
         if (!BaseHUD.view) {
             BaseHUD.view = new alt.WebView(url, false);
-            BaseHUD.view.isVisible = false;
+            BaseHUD.view.isVisible = true;
             BaseHUD.view.on('url', BaseHUD.handleURL);
             BaseHUD.view.on('chat:Send', ChatController.send);
+            BaseHUD.view.on('chat:Clear', ChatController.clearChat);
+            BaseHUD.view.on('chat:Ready', ChatController.chatReady);
+            BaseHUD.view.on('commands:Update', ChatController.update);
             BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
-            BaseHUD.view.on('commands:Update', BaseHUD.updateCommands);
             BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
             BaseHUD.view.on('actions:Close', ActionsController.closed);
             BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
@@ -47,6 +50,8 @@ export class BaseHUD {
                 if (native.isScreenFadedOut()) {
                     native.doScreenFadeIn(2000);
                 }
+
+                handleFreezePlayer(false);
             }, 1000);
         }
 
@@ -55,22 +60,6 @@ export class BaseHUD {
 
     static handleURL() {
         BaseHUD.view.emit('url', _serverURL);
-    }
-
-    static populateCommands(_commandList: Array<Partial<Command>>): void {
-        commandList = _commandList;
-        handleFreezePlayer(false);
-        BaseHUD.updateCommands();
-        alt.log(`[Athena] Registered Commands: ${commandList.length}`);
-    }
-
-    static updateCommands() {
-        if (!BaseHUD.view) {
-            return;
-        }
-
-        BaseHUD.view.emit('chat:PopulateCommands', commandList);
-        BaseHUD.view.isVisible = true;
     }
 
     static setHudVisibility(value: boolean) {
@@ -136,4 +125,3 @@ export class BaseHUD {
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, BaseHUD.createView);
-alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, BaseHUD.populateCommands);

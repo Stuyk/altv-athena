@@ -6,7 +6,6 @@ import { distance } from '../../shared/utility/vector';
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
-let audioInterval: number;
 
 export function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);

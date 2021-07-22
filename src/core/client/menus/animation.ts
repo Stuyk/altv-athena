@@ -4,6 +4,7 @@ import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 import { playAnimation } from '../systems/animations';
+import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { WheelMenu } from '../utility/wheelMenu';
 import commonAnims from './animationMenus/commonAnims';
@@ -28,6 +29,10 @@ function handleAnimationMenu() {
     }
 
     if (isAnyMenuOpen()) {
+        return;
+    }
+
+    if (PushVehicle.isPushing()) {
         return;
     }
 

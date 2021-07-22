@@ -8,6 +8,7 @@ import ViewModel from '../models/ViewModel';
 import { fetchToken } from '../systems/quickToken';
 import { sleep } from '../utility/sleep';
 import { drawRectangle2D, drawText2D } from '../utility/text';
+import { Timer } from '../utility/timers';
 
 const url = `http://assets/webview/client/login/index.html`;
 let view: View;
@@ -27,7 +28,8 @@ export class LoginView implements ViewModel {
 
         if (interval !== null && interval !== undefined) {
             native.doScreenFadeOut(0);
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
+            interval = null;
         }
 
         sleep(25);
@@ -46,7 +48,8 @@ export class LoginView implements ViewModel {
         alt.toggleGameControls(true);
 
         if (interval !== null && interval !== undefined) {
-            alt.clearInterval(interval);
+            Timer.clearInterval(interval);
+            interval = null;
         }
 
         if (!view) {
@@ -87,7 +90,7 @@ export class LoginView implements ViewModel {
         const [_count, _neededRequests] = data;
 
         if (interval === undefined || interval === undefined) {
-            interval = alt.setInterval(LoginView.render, 0);
+            interval = Timer.createInterval(LoginView.render, 0, 'Login.ts - Connection Check');
         }
 
         count = _count;
