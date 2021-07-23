@@ -10,6 +10,9 @@ description: List of all the changes and current versions.
 + Added Custom Icons .ytd
 + Added Icons for HUD
 + Added Icon for Interaction
++ Fix Console Spam from Destroying Temporary Vehicle
++ Fix Food Displaying as 100 when 0
++ Fix Water Displaying as 100 when 0
 ```
 
 ## 2.0.1

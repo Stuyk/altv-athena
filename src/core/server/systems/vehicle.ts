@@ -305,7 +305,11 @@ export class VehicleFunctions {
             return;
         }
 
-        vehicle.destroy();
+        alt.setTimeout(() => {
+            try {
+                vehicle.destroy();
+            } catch (err) {}
+        }, 500);
     }
 
     /**

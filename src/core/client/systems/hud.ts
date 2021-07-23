@@ -72,7 +72,8 @@ let hudElements: Array<IHud> = [
                 drawTexture2D('athena_icons', 'food', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
             });
 
-            return alt.Player.local.meta.food ? `${alt.Player.local.meta.food.toFixed(0)}` : `100`;
+            const food = alt.Player.local.meta.food;
+            return food !== undefined && food !== null ? `${food.toFixed(0)}` : `100`;
         }
     },
     {
@@ -90,7 +91,8 @@ let hudElements: Array<IHud> = [
                 drawTexture2D('athena_icons', 'water', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
             });
 
-            return alt.Player.local.meta.water ? `${alt.Player.local.meta.water.toFixed(0)}` : `100`;
+            const water = alt.Player.local.meta.water;
+            return water !== undefined && water !== null ? `${water.toFixed(0)}` : `100`;
         }
     },
     {
