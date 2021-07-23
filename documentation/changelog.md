@@ -4,6 +4,14 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.2
+
+```diff
++ Added Custom Icons .ytd
++ Added Icons for HUD
++ Added Icon for Interaction
+```
+
 ## 2.0.1
 ```diff
 + Add Client Console Command for 'timerinfo'

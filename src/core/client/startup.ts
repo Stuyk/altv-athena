@@ -1,5 +1,3 @@
-import * as alt from 'alt-client';
-
 // Client Plugins
 import '../client-plugins/imports';
 // Events
@@ -12,8 +10,10 @@ import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
+import './menus/player';
 // Systems
 import './systems/animations';
+import './systems/arrest';
 import './systems/blip';
 import './systems/dealership';
 import './systems/death';

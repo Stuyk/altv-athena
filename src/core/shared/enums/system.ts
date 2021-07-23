@@ -28,6 +28,9 @@ export enum SYSTEM_EVENTS {
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
     //
+    PLAYER_CUFF = 'player:Cuff',
+    PLAYER_UNCUFF = 'player:Uncuff',
+    //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',

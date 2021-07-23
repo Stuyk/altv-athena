@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import * as http from 'http';
 import fs from 'fs';
+import * as http from 'http';
 
 const RECONNECTION_ADDRESS = 'http://localhost:9229/reconnect'; // http://localhost:9229/reconnect/debug
 const VALID_RECONNECT_STRINGS = ['debug: true', 'debug:true'];
@@ -8,6 +8,7 @@ const TIME_BETWEEN_CHECKS = 5000;
 const CFG = fs.readFileSync('server.cfg').toString();
 
 let isWaitingForReconnect = false;
+let attempts = 0;
 let interval;
 
 export class ReconnectHelper {
@@ -60,11 +61,19 @@ export class ReconnectHelper {
     }
 
     private static sendRequest() {
+        if (attempts >= 5) {
+            alt.clearInterval(interval);
+            isWaitingForReconnect = false;
+            return;
+        }
+
         const req = http.get(RECONNECTION_ADDRESS);
         req.on('error', () => {
             alt.log(`[altv-reconnect] Probably Not Running Reconnection Script`);
             alt.clearInterval(interval);
             isWaitingForReconnect = false;
         });
+
+        attempts += 1;
     }
 }

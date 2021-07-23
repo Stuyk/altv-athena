@@ -98,7 +98,7 @@ class Startup {
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
         Logger.info(`Server Warmup Complete. Now accepting connections.`);
-        ReconnectHelper.invoke();
+        // ReconnectHelper.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

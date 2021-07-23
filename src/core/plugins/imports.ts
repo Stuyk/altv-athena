@@ -10,7 +10,8 @@ const filePaths = [
     './deathLog/deathLog',
     './actionMenu/actionMenu',
     './interactionExample/index',
-    './noMiniGun/index'
+    './noMiniGun/index',
+    './jobGarbage/index'
     // YOUR IMPORTS -- BELOW HERE
 ];
 

@@ -15,6 +15,8 @@ import set from './playerFunctions/setter';
 import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
 
+import '../systems/arrest';
+
 declare module 'alt-server' {
     export interface Player {
         pendingLogin?: boolean; // Used when a player is pending login.

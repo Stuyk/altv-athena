@@ -1,10 +1,11 @@
 import * as alt from 'alt-server';
-import dotenv from 'dotenv';
 import axios, { AxiosRequestConfig } from 'axios';
-import { sha256Random } from '../utility/encryption';
+import dotenv from 'dotenv';
+
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IConfig } from '../interface/IConfig';
 import Ares from '../utility/ares';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { sha256Random } from '../utility/encryption';
 
 const TIMES_TO_CHECK_CONNECTION = 25;
 const config: IConfig = dotenv.config().parsed as IConfig;
