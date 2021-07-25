@@ -6,6 +6,14 @@ import { DEFAULT_CONFIG } from '../../athena/main';
 import { vehicleFuncs } from '../Vehicle';
 
 function updateFuel(vehicle: alt.Vehicle) {
+    if (!vehicle.behavior) {
+        return;
+    }
+
+    if (!vehicle.data) {
+        return;
+    }
+
     if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
         vehicle.fuel = 100;
         vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.fuel);
