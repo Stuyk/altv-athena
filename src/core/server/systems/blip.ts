@@ -33,7 +33,7 @@ export class BlipController {
         }
 
         BlipController.add(blip);
-        alt.emit(null, SYSTEM_EVENTS.APPEND_BLIP, blip);
+        alt.emitClient(null, SYSTEM_EVENTS.APPEND_BLIP, blip);
     }
 
     /**
@@ -49,7 +49,7 @@ export class BlipController {
             return false;
         }
 
-        alt.emit(null, SYSTEM_EVENTS.REMOVE_BLIP, uid);
+        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_BLIP, uid);
         globalBlips.splice(index, 1);
         return true;
     }
