@@ -31,7 +31,7 @@ export class TextLabelController {
         }
 
         TextLabelController.add(label);
-        alt.emit(null, SYSTEM_EVENTS.APPEND_TEXTLABELS, label);
+        alt.emitClient(null, SYSTEM_EVENTS.APPEND_TEXTLABELS, label);
     }
 
     /**
@@ -47,7 +47,7 @@ export class TextLabelController {
             return false;
         }
 
-        alt.emit(null, SYSTEM_EVENTS.REMOVE_TEXTLABEL, uid);
+        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_TEXTLABEL, uid);
         globalTextLabels.splice(index, 1);
         return true;
     }
