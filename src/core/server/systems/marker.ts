@@ -31,7 +31,7 @@ export class MarkerController {
         }
 
         MarkerController.add(marker);
-        alt.emit(null, SYSTEM_EVENTS.APPEND_MARKER, marker);
+        alt.emitClient(null, SYSTEM_EVENTS.APPEND_MARKER, marker);
     }
 
     /**
@@ -47,7 +47,7 @@ export class MarkerController {
             return false;
         }
 
-        alt.emit(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
+        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
         globalMarkers.splice(index, 1);
         return true;
     }
