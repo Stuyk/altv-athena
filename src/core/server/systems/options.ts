@@ -3,6 +3,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { Collections } from '../interface/DatabaseCollections';
 import { defaultOptions, DiscordID, Options } from '../interface/Options';
 import Logger from '../utility/athenaLogger';
+import './streamer';
 
 export class OptionsController {
     static data: Options = {};

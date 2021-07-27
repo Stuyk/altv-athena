@@ -8,12 +8,13 @@
         "clean": "rimraf ./resources",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
         "update": "altv-pkg d release",
-        "windows": "npm run build && altv-server.exe & npm run webserver",
-        "linux": "npm run build && ./start.sh & npm run webserver",
+        "windows": "npm run build && altv-server.exe & npm run webserver & npm run streamer",
+        "linux": "npm run build && ./start.sh & npm run webserver & npm run streamer",
+        "streamer": "node ./utility/streamer/index.mjs",
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
         "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
-        "dev": "npm-run-all --parallel reconnect-server webserver windev"
+        "dev": "npm-run-all --parallel streamer reconnect-server webserver windev"
     },
     "devDependencies": {
         "@altv/types-client": "^1.7.6",
@@ -29,6 +30,8 @@
         "@types/mongodb": "^3.6.8",
         "@types/node": "^14.6.1",
         "@types/ps-node": "^0.1.0",
+        "@types/sockjs": "^0.3.33",
+        "@types/sockjs-client": "^1.5.1",
         "altv-pkg": "^1.2.0",
         "dotenv": "^10.0.0",
         "fs-extra": "^9.1.0",
@@ -51,8 +54,11 @@
         "elliptic": "^6.5.4",
         "express": "^4.17.1",
         "node-fetch": "^2.6.1",
+        "pm2-axon": "^4.0.1",
         "ps-node": "^0.1.6",
-        "sjcl": "^1.0.8"
+        "sjcl": "^1.0.8",
+        "sockjs": "^0.3.21",
+        "sockjs-client": "^1.5.1"
     },
     "prettier": {
         "tabWidth": 4,
