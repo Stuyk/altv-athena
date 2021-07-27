@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';

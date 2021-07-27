@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../../shared/enums/vehicle';
 import { Vector3 } from '../../../shared/interfaces/Vector';
 import { Vehicle } from '../../../shared/interfaces/Vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athenaEvents';
+import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
 import { sha256Random } from '../../utility/encryption';
 import { playerFuncs } from '../Player';
 import { DEFAULT_CONFIG } from '../../athena/main';

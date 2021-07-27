@@ -16,6 +16,8 @@ import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
 
 import '../systems/arrest';
+import '../events/waypointEvent';
+import { Vector3 } from '../../shared/interfaces/Vector';
 
 declare module 'alt-server' {
     export interface Player {
@@ -66,6 +68,9 @@ declare module 'alt-server' {
          * @memberof Player
          */
         vehiclesSpawned: number;
+
+        // Custom Client Event Data
+        currentWaypoint: Vector3 | null;
 
         // Interaction
         currentInteraction: InteractionShape | null;

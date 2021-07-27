@@ -14,6 +14,7 @@ import './menus/player';
 // Systems
 import './systems/animations';
 import './systems/arrest';
+import './systems/athenaEvents';
 import './systems/blip';
 import './systems/dealership';
 import './systems/death';
@@ -40,7 +41,6 @@ import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
 // Utility
-import './utility/getters';
 import './utility/notification';
 import './utility/reload';
 import './utility/screenshot';

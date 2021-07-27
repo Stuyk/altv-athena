@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { VEHICLE_EVENTS, Vehicle_Seat_List } from '../../../shared/enums/vehicle';
-import { ATHENA_EVENTS_VEHICLE } from '../../enums/athenaEvents';
+import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
 import Logger from '../../utility/athenaLogger';
 import { playerFuncs } from '../Player';
 

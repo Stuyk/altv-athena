@@ -8,8 +8,6 @@ export enum SYSTEM_EVENTS {
     CHECK_CONNECTION = 'check:Connection',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
-    // GET
-    GET_WAYPOINT = `getter:Waypoint`,
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
     // Interior

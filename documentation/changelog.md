@@ -13,6 +13,11 @@ description: List of all the changes and current versions.
 + Fix Console Spam from Destroying Temporary Vehicle
 + Fix Food Displaying as 100 when 0
 + Fix Water Displaying as 100 when 0
++ Use Distance3D for Get Closest Entity
++ Remove Getter for Waypoint
++ Add Waypoint Event
++ Add player.currentWaypoint Extension
++ Added Synced Meta for Waypoint
 ```
 
 ## 2.0.1

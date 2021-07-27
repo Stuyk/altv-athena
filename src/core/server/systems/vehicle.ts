@@ -13,7 +13,7 @@ import { getClosestEntity } from '../utility/vector';
 import '../views/garage';
 import '../views/dealership';
 import './fuel';
-import { ATHENA_EVENTS_VEHICLE } from '../enums/athenaEvents';
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
 
