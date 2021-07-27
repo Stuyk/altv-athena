@@ -4,6 +4,7 @@ import { Marker } from '../../shared/interfaces/Marker';
 import Logger from '../utility/athenaLogger';
 
 const globalMarkers: Array<Marker> = [];
+let appendDataFinishTime = Date.now() + 5000;
 
 export class MarkerController {
     /**
@@ -13,6 +14,7 @@ export class MarkerController {
      * @memberof MarkerController
      */
     static add(marker: Marker) {
+        appendDataFinishTime = Date.now() + 500;
         globalMarkers.push(marker);
     }
 
@@ -50,6 +52,30 @@ export class MarkerController {
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
         globalMarkers.splice(index, 1);
         return true;
+    }
+
+    static get(): Promise<Array<Marker>> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (Date.now() < appendDataFinishTime) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve(globalMarkers);
+            }, 100);
+        });
+    }
+
+    /**
+     * Updates marker labels through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<Marker>} markers
+     * @memberof MarkerController
+     */
+    static update(player: alt.Player, markers: Array<Marker>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
     }
 
     static populateGlobalMarkers(player: alt.Player) {

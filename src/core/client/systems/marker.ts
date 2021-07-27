@@ -36,7 +36,7 @@ export class MarkerController {
      * @memberof MarkerController
      */
     static populate(markers: Array<Marker>) {
-        addedMarkers = addedMarkers.concat(markers);
+        addedMarkers = markers;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
@@ -72,6 +72,10 @@ export class MarkerController {
 
 function handleDrawMarkers() {
     if (isRemoving) {
+        return;
+    }
+
+    if (addedMarkers.length <= 0) {
         return;
     }
 

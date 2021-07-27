@@ -4,6 +4,7 @@ import { TextLabel } from '../../shared/interfaces/TextLabel';
 import Logger from '../utility/athenaLogger';
 
 const globalTextLabels: Array<TextLabel> = [];
+let appendDataFinishTime = Date.now() + 5000;
 
 export class TextLabelController {
     /**
@@ -13,6 +14,7 @@ export class TextLabelController {
      * @memberof TextLabelController
      */
     static add(label: TextLabel) {
+        appendDataFinishTime = Date.now() + 500;
         globalTextLabels.push(label);
     }
 
@@ -50,6 +52,30 @@ export class TextLabelController {
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_TEXTLABEL, uid);
         globalTextLabels.splice(index, 1);
         return true;
+    }
+
+    static get(): Promise<Array<TextLabel>> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (Date.now() < appendDataFinishTime) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve(globalTextLabels);
+            }, 100);
+        });
+    }
+
+    /**
+     * Updates text labels through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<TextLabel>} labels
+     * @memberof TextLabelController
+     */
+    static update(player: alt.Player, labels: Array<TextLabel>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
     }
 
     /**

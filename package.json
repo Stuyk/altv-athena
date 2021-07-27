@@ -10,11 +10,11 @@
         "update": "altv-pkg d release",
         "windows": "npm run build && altv-server.exe & npm run webserver & npm run streamer",
         "linux": "npm run build && ./start.sh & npm run webserver & npm run streamer",
-        "streamer": "node ./utility/streamer/index.mjs",
+        "streamer": "node ./resources/streamer/index.js",
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
         "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
-        "dev": "npm-run-all --parallel streamer reconnect-server webserver windev"
+        "dev": "npm run build && npm-run-all --parallel reconnect-server webserver streamer windev"
     },
     "devDependencies": {
         "@altv/types-client": "^1.7.6",

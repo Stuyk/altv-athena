@@ -6,6 +6,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { vehicleFuncs } from '../extensions/Vehicle';
 import { InventoryController } from '../views/inventory';
+import { StreamerService } from './streamer';
 
 const timeBetweenPings = 4950;
 
@@ -70,4 +71,6 @@ function handlePing(player: alt.Player): void {
             }
         }
     }
+
+    StreamerService.requestUpdate(player);
 }

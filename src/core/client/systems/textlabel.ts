@@ -32,11 +32,11 @@ export class TextlabelController {
     /**
      * Used to populate server-side markers.
      * @static
-     * @param {Array<Marker>} markers
+     * @param {Array<Marker>} labels
      * @memberof MarkerController
      */
-    static populate(markers: Array<TextLabel>) {
-        addedLabels = addedLabels.concat(markers);
+    static populate(labels: Array<TextLabel>) {
+        addedLabels = labels;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
@@ -71,6 +71,14 @@ export class TextlabelController {
 }
 
 function handleDrawTextlabels() {
+    if (isRemoving) {
+        return;
+    }
+
+    if (addedLabels.length <= 0) {
+        return;
+    }
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }
