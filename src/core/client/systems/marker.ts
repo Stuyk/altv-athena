@@ -6,12 +6,13 @@ import { drawMarker } from '../utility/marker';
 import { Timer } from '../utility/timers';
 
 let addedMarkers: Array<Marker> = [];
+let localMarkers: Array<Marker> = [];
 let isRemoving = false;
 let interval;
 
 export class MarkerController {
     /**
-     * Add a single marker.
+     * Add a single local marker.
      * @static
      * @param {Marker} marker
      * @memberof MarkerController
@@ -22,7 +23,7 @@ export class MarkerController {
             return;
         }
 
-        addedMarkers.push(marker);
+        localMarkers.push(marker);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
@@ -30,7 +31,8 @@ export class MarkerController {
     }
 
     /**
-     * Used to populate server-side markers.
+     * Used to populate server-side markers and keeps them
+     * separate from local markers.
      * @static
      * @param {Array<Marker>} markers
      * @memberof MarkerController
@@ -44,7 +46,7 @@ export class MarkerController {
     }
 
     /**
-     * Remove a marker from being drawn.
+     * Remove a local marker from being drawn.
      * @static
      * @param {string} uid
      * @return {*}
@@ -53,19 +55,19 @@ export class MarkerController {
     static remove(uid: string) {
         isRemoving = true;
 
-        const index = addedMarkers.findIndex((marker) => marker.uid === uid);
+        const index = localMarkers.findIndex((marker) => marker.uid === uid);
         if (index <= -1) {
             isRemoving = false;
             return;
         }
 
-        const marker = addedMarkers[index];
+        const marker = localMarkers[index];
         if (!marker) {
             isRemoving = false;
             return;
         }
 
-        addedMarkers.splice(index, 1);
+        localMarkers.splice(index, 1);
         isRemoving = false;
     }
 }
@@ -75,7 +77,9 @@ function handleDrawMarkers() {
         return;
     }
 
-    if (addedMarkers.length <= 0) {
+    const markers = addedMarkers.concat(localMarkers);
+
+    if (markers.length <= 0) {
         return;
     }
 
@@ -87,10 +91,10 @@ function handleDrawMarkers() {
         return;
     }
 
-    for (let i = 0; i < addedMarkers.length; i++) {
-        const marker = addedMarkers[i];
+    for (let i = 0; i < markers.length; i++) {
+        const marker = markers[i];
         if (!marker.maxDistance) {
-            marker.maxDistance = 50;
+            marker.maxDistance = 25;
         }
 
         if (distance2d(alt.Player.local.pos, marker.pos) > marker.maxDistance) {

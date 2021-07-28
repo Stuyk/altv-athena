@@ -9,6 +9,7 @@ import { ObjectController } from './object';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
+let ready = false;
 
 export class StreamerService {
     static Routes = {
@@ -74,44 +75,40 @@ export class StreamerService {
      * @memberof StreamerService
      */
     static async pong(id: number, data: string) {
-        // Populate Markers
-        const markers = await MarkerController.get();
-        const markerStreamInfo: IStreamMessage = {
+        Logger.info(data);
+        ready = true;
+    }
+
+    /**
+     * Populates Stream Data for External Process
+     * @static
+     * @template T
+     * @param {string} key
+     * @param {Array<T>} array
+     * @memberof StreamerService
+     */
+    static async updateData<T>(key: string, array: Array<T>) {
+        await new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!ready) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+            }, 100);
+        });
+
+        const streamInfo: IStreamMessage = {
             id: -1,
             route: 'populate',
             data: {
-                array: markers,
-                key: 'markers'
+                array,
+                key
             }
         };
 
-        sock.send(JSON.stringify(markerStreamInfo));
-
-        // Populate Text Labels
-        const textLabels = await TextLabelController.get();
-        const textlabelStreamInfo: IStreamMessage = {
-            id: -1,
-            route: 'populate',
-            data: {
-                array: textLabels,
-                key: 'labels'
-            }
-        };
-
-        sock.send(JSON.stringify(textlabelStreamInfo));
-
-        // Populate Objects
-        const objects = await ObjectController.get();
-        const objectStreamInfo: IStreamMessage = {
-            id: -1,
-            route: 'populate',
-            data: {
-                array: objects,
-                key: 'objects'
-            }
-        };
-
-        sock.send(JSON.stringify(objectStreamInfo));
+        sock.send(JSON.stringify(streamInfo));
     }
 
     /**

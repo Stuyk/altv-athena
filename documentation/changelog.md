@@ -24,6 +24,7 @@ description: List of all the changes and current versions.
 + Added Objects to Streamer Service
 + Added new object controller to server-side
 + Added Test Plugin for Streamer
++ Standardized Stream Based APIs, Added Local Creation Options Server-Side
 ```
 
 ## 2.0.1

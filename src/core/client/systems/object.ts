@@ -6,7 +6,9 @@ import { distance2d } from '../../shared/utility/vector';
 import { loadModel } from '../utility/model';
 import { Timer } from '../utility/timers';
 
+let localObjects: Array<IObject> = [];
 let addedObjects: Array<IObject> = [];
+let objectInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
 
@@ -23,7 +25,7 @@ export class ObjectController {
             return;
         }
 
-        addedObjects.push(objectData);
+        localObjects.push(objectData);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawObjects, 500, 'object.ts');
@@ -34,7 +36,7 @@ export class ObjectController {
      * Used to populate server-side markers.
      * @static
      * @param {Array<IObject>} objects
-     * @memberof MarkerController
+     * @memberof ObjectController
      */
     static populate(objects: Array<IObject>) {
         addedObjects = objects;
@@ -45,28 +47,28 @@ export class ObjectController {
     }
 
     /**
-     * Remove a marker from being drawn.
+     * Remove a object from being drawn.
      * @static
      * @param {string} uid
      * @return {*}
-     * @memberof MarkerController
+     * @memberof ObjectController
      */
     static remove(uid: string) {
         isRemoving = true;
 
-        const index = addedObjects.findIndex((object) => object.uid === uid);
+        const index = localObjects.findIndex((object) => object.uid === uid);
         if (index <= -1) {
             isRemoving = false;
             return;
         }
 
-        const objectData = addedObjects[index];
+        const objectData = localObjects[index];
         if (!objectData) {
             isRemoving = false;
             return;
         }
 
-        addedObjects.splice(index, 1);
+        localObjects.splice(index, 1);
         isRemoving = false;
     }
 }
@@ -76,7 +78,9 @@ function handleDrawObjects() {
         return;
     }
 
-    if (addedObjects.length <= 0) {
+    const objects = addedObjects.concat(localObjects);
+
+    if (objects.length <= 0) {
         return;
     }
 
@@ -88,40 +92,41 @@ function handleDrawObjects() {
         return;
     }
 
-    for (let i = 0; i < addedObjects.length; i++) {
-        const objectData = addedObjects[i];
+    for (let i = 0; i < objects.length; i++) {
+        const objectData = objects[i];
         if (!objectData.maxDistance) {
-            objectData.maxDistance = 50;
+            objectData.maxDistance = 25;
         }
 
         // Remove the Object if it has an id
         if (distance2d(alt.Player.local.pos, objectData.pos) > objectData.maxDistance) {
-            if (objectData.local !== undefined && objectData.local !== null) {
-                native.deleteObject(objectData.local);
-                objectData.local = null;
+            // Being Created. Delete it after creation.
+            if (objectInfo[objectData.uid] === -1) {
+                continue;
+            }
+
+            if (objectInfo[objectData.uid] !== undefined && objectInfo[objectData.uid] !== null) {
+                native.deleteObject(objectInfo[objectData.uid]);
+                objectInfo[objectData.uid] = null;
             }
             continue;
         }
 
         // Continue on. The object was already created.
-        if (objectData.local !== null && objectData.local !== undefined) {
+        if (objectInfo[objectData.uid] !== undefined && objectInfo[objectData.uid] !== null) {
             continue;
         }
 
-        if (objectData.isBeingCreated) {
-            continue;
-        }
-
-        objectData.isBeingCreated = true;
+        objectInfo[objectData.uid] = -1;
 
         const hash = alt.hash(objectData.model);
         loadModel(hash).then((res) => {
             if (!res) {
-                objectData.isBeingCreated = false;
+                objectInfo[objectData.uid] = null;
                 return;
             }
 
-            objectData.local = native.createObjectNoOffset(
+            objectInfo[objectData.uid] = native.createObjectNoOffset(
                 hash,
                 objectData.pos.x,
                 objectData.pos.y,
@@ -131,8 +136,9 @@ function handleDrawObjects() {
                 false
             );
 
-            native.freezeEntityPosition(objectData.local, true);
-            objectData.isBeingCreated = false;
+            const rot = objectData.rot ? objectData.rot : { x: 0, y: 0, z: 0 };
+            native.setEntityRotation(objectInfo[objectData.uid], rot.x, rot.y, rot.z, 1, false);
+            native.freezeEntityPosition(objectInfo[objectData.uid], true);
         });
     }
 }

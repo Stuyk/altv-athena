@@ -48,7 +48,8 @@ class GarageFunctions {
                 text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME)
             });
 
-            MarkerController.add({
+            MarkerController.append({
+                uid: `marker-garage-${i}`,
                 pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
                 color: new alt.RGBA(0, 150, 0, 100),
                 type: 1,

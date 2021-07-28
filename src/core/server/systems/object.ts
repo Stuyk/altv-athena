@@ -2,28 +2,27 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/IObject';
 import Logger from '../utility/athenaLogger';
+import { StreamerService } from './streamer';
 
 const globalObjects: Array<IObject> = [];
-let appendDataFinishTime = Date.now() + 5000;
+const KEY = 'objects';
 
 export class ObjectController {
     /**
-     * Adds a global label the player loads when they join.
+     * Internal function to refresh all global objects in the streamer service.
      * @static
-     * @param {Marker} marker
-     * @memberof MarkerController
+     * @memberof ObjectController
      */
-    static add(marker: IObject) {
-        appendDataFinishTime = Date.now() + 500;
-        globalObjects.push(marker);
+    static refresh() {
+        StreamerService.updateData(KEY, globalObjects);
     }
 
     /**
-     * Adds a global object for the player.
-     * Streamed in when they're in range.
+     * Add an object to the global stream.
      * @static
      * @param {IObject} objectData
-     * @memberof MarkerController
+     * @return {*}
+     * @memberof ObjectController
      */
     static append(objectData: IObject) {
         if (!objectData.uid) {
@@ -31,15 +30,16 @@ export class ObjectController {
             return;
         }
 
-        ObjectController.add(objectData);
+        globalObjects.push(objectData);
+        ObjectController.refresh();
     }
 
     /**
-     * Removes a text label based on uid.
+     * Remove an object from the global stream.
      * @static
      * @param {string} uid
      * @return {*}  {boolean}
-     * @memberof TextLabelController
+     * @memberof ObjectController
      */
     static remove(uid: string): boolean {
         const index = globalObjects.findIndex((label) => label.uid === uid);
@@ -47,32 +47,51 @@ export class ObjectController {
             return false;
         }
 
-        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
         globalObjects.splice(index, 1);
+        ObjectController.refresh();
         return true;
     }
 
-    static get(): Promise<Array<IObject>> {
-        return new Promise((resolve: Function) => {
-            const interval = alt.setInterval(() => {
-                if (Date.now() < appendDataFinishTime) {
-                    return;
-                }
+    /**
+     * Remove an object from the player that only they can see.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof ObjectController
+     */
+    static removeFromPlayer(player: alt.Player, uid: string) {
+        if (!uid) {
+            throw new Error(`Did not specify a uid for marker removal. ObjectController.removeFromPlayer`);
+        }
 
-                alt.clearInterval(interval);
-                resolve(globalObjects);
-            }, 100);
-        });
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid);
     }
 
     /**
-     * Updates marker labels through the streamer service.
+     * Add an object to the player that only they can see.
      * @static
      * @param {alt.Player} player
-     * @param {Array<Marker>} markers
-     * @memberof MarkerController
+     * @param {IObject} objectData
+     * @memberof ObjectController
      */
-    static update(player: alt.Player, markers: Array<IObject>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, markers);
+    static addToPlayer(player: alt.Player, objectData: IObject) {
+        if (!objectData.uid) {
+            throw new Error(
+                `Object ${JSON.stringify(objectData.pos)} does not have a uid. ObjectController.addToPlayer`
+            );
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
+    }
+
+    /**
+     * Updates objects through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<IObject>} objects
+     * @memberof ObjectController
+     */
+    static update(player: alt.Player, objects: Array<IObject>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
     }
 }

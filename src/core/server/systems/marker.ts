@@ -2,28 +2,25 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Marker } from '../../shared/interfaces/Marker';
 import Logger from '../utility/athenaLogger';
+import { StreamerService } from './streamer';
 
+const KEY = 'markers';
 const globalMarkers: Array<Marker> = [];
-let appendDataFinishTime = Date.now() + 5000;
 
 export class MarkerController {
     /**
-     * Adds a global label the player loads when they join.
+     * Internal function to refresh all global markers in the streamer service.
      * @static
-     * @param {Marker} marker
      * @memberof MarkerController
      */
-    static add(marker: Marker) {
-        appendDataFinishTime = Date.now() + 500;
-        globalMarkers.push(marker);
+    static refresh() {
+        StreamerService.updateData(KEY, globalMarkers);
     }
 
     /**
-     * Adds a global label the player loads when they join.
-     * Also appends it to any online players.
-     * Requires a UID to remove it later.
+     * Adds a global marker for all players.
      * @static
-     * @param {Marker} label
+     * @param {Marker} marker
      * @memberof MarkerController
      */
     static append(marker: Marker) {
@@ -32,15 +29,16 @@ export class MarkerController {
             return;
         }
 
-        MarkerController.add(marker);
+        globalMarkers.push(marker);
+        MarkerController.refresh();
     }
 
     /**
-     * Removes a text label based on uid.
+     * Removes a global marker from all players based on the global uid.
      * @static
      * @param {string} uid
-     * @return {*}  {boolean}
-     * @memberof TextLabelController
+     * @return {boolean}
+     * @memberof MarkerController
      */
     static remove(uid: string): boolean {
         const index = globalMarkers.findIndex((label) => label.uid === uid);
@@ -48,22 +46,39 @@ export class MarkerController {
             return false;
         }
 
-        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
         globalMarkers.splice(index, 1);
+        MarkerController.refresh();
         return true;
     }
 
-    static get(): Promise<Array<Marker>> {
-        return new Promise((resolve: Function) => {
-            const interval = alt.setInterval(() => {
-                if (Date.now() < appendDataFinishTime) {
-                    return;
-                }
+    /**
+     * Remove a marker from a single local player.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof MarkerController
+     */
+    static removeFromPlayer(player: alt.Player, uid: string) {
+        if (!uid) {
+            throw new Error(`Did not specify a uid for marker removal. MarkerController.removeFromPlayer`);
+        }
 
-                alt.clearInterval(interval);
-                resolve(globalMarkers);
-            }, 100);
-        });
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_MARKER, uid);
+    }
+
+    /**
+     * Add a marker to a single local player.
+     * @static
+     * @param {alt.Player} player
+     * @param {Marker} marker
+     * @memberof MarkerController
+     */
+    static addToPlayer(player: alt.Player, marker: Marker) {
+        if (!marker.uid) {
+            throw new Error(`Marker ${JSON.stringify(marker.pos)} does not have a uid. MarkerController.addToPlayer`);
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.APPEND_MARKER, marker);
     }
 
     /**

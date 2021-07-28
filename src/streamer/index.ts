@@ -101,7 +101,6 @@ class StreamerServer {
         }
 
         StreamData[data.key] = data.array;
-        console.log(`Set (${StreamData[data.key].length}) Items for Key (${data.key}) in StreamInfo`);
     }
 
     /**

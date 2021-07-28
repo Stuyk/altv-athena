@@ -3,6 +3,7 @@ import { Vector3 } from './Vector';
 export interface IObject {
     pos: Vector3;
     model: string;
+    rot?: Vector3;
     maxDistance?: number;
     uid?: string;
 

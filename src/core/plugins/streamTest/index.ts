@@ -12,7 +12,7 @@ function lerp(first: number, second: number, byProduct: number) {
 }
 
 function getBetweenPoints(vec1: Vector3, vec2: Vector3, dist: number) {
-    return new alt.Vector3(lerp(vec1.x, vec2.x, dist), lerp(vec1.y, vec2.y, dist), vec1.z);
+    return new alt.Vector3(lerp(vec1.x, vec2.x, dist), lerp(vec1.y, vec2.y, dist), lerp(vec1.z, vec2.z, dist));
 }
 
 function test() {
