@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Vector3 } from '../../shared/interfaces/Vector';
-import { distance2d } from '../../shared/utility/vector';
+import { distance } from '../../shared/utility/vector';
 
 /**
  * SERVER ONLY
@@ -60,7 +60,7 @@ export function getClosestEntity<T>(
     playerPosition: Vector3,
     rot: Vector3,
     entities: Array<{ pos: Vector3; valid?: boolean }>,
-    distance: number,
+    dist: number,
     checkBackwards: boolean = false
 ): T | null {
     const fwdVector = getForwardVector(rot);
@@ -68,14 +68,14 @@ export function getClosestEntity<T>(
 
     if (!checkBackwards) {
         position = {
-            x: playerPosition.x + fwdVector.x * distance,
-            y: playerPosition.y + fwdVector.y * distance,
+            x: playerPosition.x + fwdVector.x * dist,
+            y: playerPosition.y + fwdVector.y * dist,
             z: playerPosition.z
         };
     } else {
         position = {
-            x: playerPosition.x - fwdVector.x * distance,
-            y: playerPosition.y - fwdVector.y * distance,
+            x: playerPosition.x - fwdVector.x * dist,
+            y: playerPosition.y - fwdVector.y * dist,
             z: playerPosition.z
         };
     }
@@ -90,7 +90,7 @@ export function getClosestEntity<T>(
             continue;
         }
 
-        const dist = distance2d(position, entity.pos);
+        const dist = distance(position, entity.pos);
         if (dist > lastRange) {
             continue;
         }

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
 import { DEFAULT_CONFIG } from '../../athena/main';
@@ -18,6 +18,7 @@ import { World } from '../../systems/world';
 import { HologramController } from '../../systems/hologram';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { playerFuncs } from '../Player';
+import { StreamerService } from '../../systems/streamer';
 
 /**
  * Select a character based on the character data provided.
@@ -103,9 +104,10 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         // Propagation
         ChatController.populateCommands(player);
         BlipController.populateGlobalBlips(player);
-        MarkerController.populateGlobalMarkers(player);
-        TextLabelController.populateGlobalLabels(player);
         HologramController.populateHolograms(player);
+
+        // Markers, Text Labels, Objects, etc.
+        StreamerService.requestUpdate(player);
 
         // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);

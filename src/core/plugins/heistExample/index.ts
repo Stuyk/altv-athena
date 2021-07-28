@@ -269,7 +269,12 @@ alt.on('heist:Completed', (player: alt.Player, pos: alt.Vector3) => {
 });
 
 // Interactions for this Heist
-TextLabelController.add({ data: 'Jewelry Store Heist', pos: startPosition, maxDistance: 10 });
+TextLabelController.append({
+    uid: 'heist-jewelry-store',
+    data: 'Jewelry Store Heist',
+    pos: startPosition,
+    maxDistance: 10
+});
 
 InteractionController.add({
     callback: handleStartJob,

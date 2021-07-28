@@ -23,14 +23,18 @@ let hudElements: Array<IHud> = [
             x: 0.98,
             y: 0.02
         },
-        padding: 0.01,
+        padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
+        callback: (pos: { x: number; y: number }) => {
+            loadTexture('athena_icons').then(() => {
+                drawTexture2D('athena_icons', 'cash', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
+            });
+
             const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
-            const fixedValue = parseFloat(value.toFixed(2));
-            return `Cash ~g~$${fixedValue.toLocaleString()}`;
+            const fixedValue = parseFloat(value.toFixed(0));
+            return `~g~$${fixedValue.toLocaleString()}`;
         }
     },
     {
@@ -39,14 +43,18 @@ let hudElements: Array<IHud> = [
             x: 0.98,
             y: 0.07
         },
-        padding: 0.01,
+        padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
+        callback: (pos: { x: number; y: number }) => {
+            loadTexture('athena_icons').then(() => {
+                drawTexture2D('athena_icons', 'bank', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
+            });
+
             const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
-            const fixedValue = parseFloat(value.toFixed(2));
-            return `Bank ~g~$${fixedValue.toLocaleString()}`;
+            const fixedValue = parseFloat(value.toFixed(0));
+            return `~g~$${fixedValue.toLocaleString()}`;
         }
     },
     {
@@ -55,12 +63,17 @@ let hudElements: Array<IHud> = [
             x: 0.98,
             y: 0.12
         },
-        padding: 0.01,
+        padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
-            return alt.Player.local.meta.food ? `Food ${alt.Player.local.meta.food.toFixed(2)}%` : `Food - 100%`;
+        callback: (pos: { x: number; y: number }) => {
+            loadTexture('athena_icons').then(() => {
+                drawTexture2D('athena_icons', 'food', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
+            });
+
+            const food = alt.Player.local.meta.food;
+            return food !== undefined && food !== null ? `${food.toFixed(0)}` : `100`;
         }
     },
     {
@@ -69,12 +82,17 @@ let hudElements: Array<IHud> = [
             x: 0.98,
             y: 0.17
         },
-        padding: 0.01,
+        padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
-            return alt.Player.local.meta.water ? `Water ${alt.Player.local.meta.water.toFixed(2)}%` : `Water - 100%`;
+        callback: (pos: { x: number; y: number }) => {
+            loadTexture('athena_icons').then(() => {
+                drawTexture2D('athena_icons', 'water', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
+            });
+
+            const water = alt.Player.local.meta.water;
+            return water !== undefined && water !== null ? `${water.toFixed(0)}` : `100`;
         }
     },
     {

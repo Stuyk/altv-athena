@@ -185,6 +185,11 @@ We have a small demo server available for you to test the framework with Adminis
     -   Spawn Vehicles from Garage After Purchase
 -   Extendable Core Resource
     -   Extend the core resource by writing your own code in the 'plugins' folder.
+-   Streamer Service
+    -   Static Global Streaming Service
+    -   Marker Streaming
+    -   Object Streaming
+    -   Text Label Streaming
 
 ## Running this Project
 

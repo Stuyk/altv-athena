@@ -111,12 +111,12 @@ export class InteractionController {
         if (description && position) {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
 
-            loadTexture('mpmissmarkers128').then(() => {
+            loadTexture('athena_icons').then(() => {
                 if (!position) {
                     return;
                 }
 
-                drawTexture('mpmissmarkers128', 'corona_marker', position, 0.3);
+                drawTexture('athena_icons', 'interact', position, 0.56);
             });
         }
 

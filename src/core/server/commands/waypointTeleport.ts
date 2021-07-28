@@ -14,19 +14,10 @@ ChatController.addCommand(
 );
 
 function handleCommand(player: alt.Player): void {
-    const callBackName = `${player.name}-${player.id}-${Math.floor(Math.random())}`;
-    alt.onceClient(callBackName, handleWaypoint);
-    alt.emitClient(player, SYSTEM_EVENTS.GET_WAYPOINT, callBackName);
-    alt.setTimeout(() => {
-        alt.offClient(callBackName, handleWaypoint);
-    }, 5000);
-}
-
-function handleWaypoint(player: alt.Player, pos: alt.IVector3) {
-    if (!pos || !pos.z) {
-        playerFuncs.emit.message(player, `Could not find ground Z position.`);
+    if (!player.currentWaypoint) {
+        playerFuncs.emit.message(player, `Set a waypoint first.`);
         return;
     }
 
-    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+    playerFuncs.safe.setPosition(player, player.currentWaypoint.x, player.currentWaypoint.y, player.currentWaypoint.z);
 }

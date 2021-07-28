@@ -24,6 +24,7 @@ import Rancho from './parking/Rancho';
 import RockfordHills from './parking/RockfordHills';
 import SandyShores from './parking/SandyShores';
 import TongvaHills from './parking/TongvaHills';
+import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {
     // Whitelisting
@@ -127,5 +128,7 @@ export const DEFAULT_CONFIG = {
         PDMSport,
         PDMSuv,
         PDMSuper
-    ]
+    ],
+    // The Default Stream Configuration for Markers, Text Labels, etc.
+    STREAM_CONFIG: StreamConfiguration
 };

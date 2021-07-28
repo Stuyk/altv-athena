@@ -23,3 +23,7 @@ export enum ATHENA_EVENTS_PLAYER {
     SELECTED_CHARACTER = 'athena:SelectedCharacter',
     SPAWNED = 'athena:PlayerSpawned'
 }
+
+export enum ATHENA_EVENTS_PLAYER_CLIENT {
+    WAYPOINT = 'athena:PlayerWaypoint'
+}

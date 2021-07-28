@@ -1,5 +1,3 @@
-import * as alt from 'alt-client';
-
 // Client Plugins
 import '../client-plugins/imports';
 // Events
@@ -12,8 +10,11 @@ import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
+import './menus/player';
 // Systems
 import './systems/animations';
+import './systems/arrest';
+import './systems/athenaEvents';
 import './systems/blip';
 import './systems/dealership';
 import './systems/death';
@@ -29,6 +30,7 @@ import './systems/marker';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
+import './systems/object';
 import './systems/particle';
 import './systems/progressBar';
 import './systems/quickToken';
@@ -40,7 +42,6 @@ import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
 // Utility
-import './utility/getters';
 import './utility/notification';
 import './utility/reload';
 import './utility/screenshot';

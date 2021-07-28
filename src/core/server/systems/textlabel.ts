@@ -2,24 +2,23 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { TextLabel } from '../../shared/interfaces/TextLabel';
 import Logger from '../utility/athenaLogger';
+import { StreamerService } from './streamer';
 
 const globalTextLabels: Array<TextLabel> = [];
+const KEY = 'labels';
 
 export class TextLabelController {
     /**
-     * Adds a global label the player loads when they join.
+     * Internal function to refresh all global text labels in the streamer service.
      * @static
-     * @param {TextLabel} label
      * @memberof TextLabelController
      */
-    static add(label: TextLabel) {
-        globalTextLabels.push(label);
+    static refresh() {
+        StreamerService.updateData(KEY, globalTextLabels);
     }
 
     /**
-     * Adds a global label the player loads when they join.
-     * Also appends it to any online players.
-     * Requires a UID to remove it later.
+     * Adds a text label to the global streamer.
      * @static
      * @param {TextLabel} label
      * @memberof TextLabelController
@@ -30,15 +29,15 @@ export class TextLabelController {
             return;
         }
 
-        TextLabelController.add(label);
-        alt.emit(null, SYSTEM_EVENTS.APPEND_TEXTLABELS, label);
+        globalTextLabels.push(label);
+        TextLabelController.refresh();
     }
 
     /**
-     * Removes a text label based on uid.
+     * Removes a text label based on uid from the global streamer
      * @static
      * @param {string} uid
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof TextLabelController
      */
     static remove(uid: string): boolean {
@@ -47,18 +46,51 @@ export class TextLabelController {
             return false;
         }
 
-        alt.emit(null, SYSTEM_EVENTS.REMOVE_TEXTLABEL, uid);
         globalTextLabels.splice(index, 1);
+        TextLabelController.refresh();
         return true;
     }
 
     /**
-     * Creates all existing labels for a player.
+     * Remove a local text label from a player.
      * @static
      * @param {alt.Player} player
+     * @param {string} uid
      * @memberof TextLabelController
      */
-    static populateGlobalLabels(player: alt.Player) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, globalTextLabels);
+    static removeFromPlayer(player: alt.Player, uid: string) {
+        if (!uid) {
+            throw new Error(`Did not specify a uid for text label removal. TextLabelController.removeFromPlayer`);
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_TEXTLABEL, uid);
+    }
+
+    /**
+     * Add a local text label to player.
+     * @static
+     * @param {alt.Player} player
+     * @param {TextLabel} textLabel
+     * @memberof TextLabelController
+     */
+    static addToPlayer(player: alt.Player, textLabel: TextLabel) {
+        if (!textLabel.uid) {
+            throw new Error(
+                `Text Label ${JSON.stringify(textLabel.pos)} does not have a uid. TextLabelController.addToPlayer`
+            );
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.APPEND_TEXTLABELS, textLabel);
+    }
+
+    /**
+     * Updates text labels through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<TextLabel>} labels
+     * @memberof TextLabelController
+     */
+    static update(player: alt.Player, labels: Array<TextLabel>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
     }
 }

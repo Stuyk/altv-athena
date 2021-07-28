@@ -4,7 +4,7 @@ import { Permissions } from '../../../shared/flags/permissions';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
 import Ares from '../../utility/ares';

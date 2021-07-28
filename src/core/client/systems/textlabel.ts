@@ -5,6 +5,7 @@ import { distance2d } from '../../shared/utility/vector';
 import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
+let localLabels: Array<TextLabel> = [];
 let addedLabels: Array<TextLabel> = [];
 let interval;
 let isRemoving = false;
@@ -22,7 +23,7 @@ export class TextlabelController {
             return;
         }
 
-        addedLabels.push(label);
+        localLabels.push(label);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
@@ -32,11 +33,11 @@ export class TextlabelController {
     /**
      * Used to populate server-side markers.
      * @static
-     * @param {Array<Marker>} markers
+     * @param {Array<Marker>} labels
      * @memberof MarkerController
      */
-    static populate(markers: Array<TextLabel>) {
-        addedLabels = addedLabels.concat(markers);
+    static populate(labels: Array<TextLabel>) {
+        addedLabels = labels;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
@@ -53,24 +54,34 @@ export class TextlabelController {
     static remove(uid: string) {
         isRemoving = true;
 
-        const index = addedLabels.findIndex((marker) => marker.uid === uid);
+        const index = localLabels.findIndex((marker) => marker.uid === uid);
         if (index <= -1) {
             isRemoving = false;
             return;
         }
 
-        const label = addedLabels[index];
+        const label = localLabels[index];
         if (!label) {
             isRemoving = false;
             return;
         }
 
-        addedLabels.splice(index, 1);
+        localLabels.splice(index, 1);
         isRemoving = false;
     }
 }
 
 function handleDrawTextlabels() {
+    if (isRemoving) {
+        return;
+    }
+
+    const labels = addedLabels.concat(localLabels);
+
+    if (labels.length <= 0) {
+        return;
+    }
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }
@@ -79,8 +90,8 @@ function handleDrawTextlabels() {
         return;
     }
 
-    for (let i = 0; i < addedLabels.length; i++) {
-        const label = addedLabels[i];
+    for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
         if (!label.maxDistance) {
             label.maxDistance = 15;
         }

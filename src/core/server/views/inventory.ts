@@ -9,7 +9,7 @@ import { playerFuncs } from '../extensions/Player';
 import { sha256Random } from '../utility/encryption';
 import '../effects/heal';
 import '../effects/vehicleRepair';
-import { ATHENA_EVENTS_PLAYER } from '../enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/CategoryData';
 import { deepCloneObject } from '../../shared/utility/deepCopy';

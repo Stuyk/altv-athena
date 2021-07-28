@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { isFlagEnabled } from '../../shared/utility/flags';

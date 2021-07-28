@@ -4,6 +4,29 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.2
+
+```diff
++ Added Custom Icons .ytd
++ Added Icons for HUD
++ Added Icon for Interaction
++ Fix Console Spam from Destroying Temporary Vehicle
++ Fix Food Displaying as 100 when 0
++ Fix Water Displaying as 100 when 0
++ Use Distance3D for Get Closest Entity
++ Remove Getter for Waypoint
++ Add Waypoint Event
++ Add player.currentWaypoint Extension
++ Added Synced Meta for Waypoint
++ Added Streamer Service
++ Added Markers to Streamer Service
++ Added Text Labels to Streamer Service
++ Added Objects to Streamer Service
++ Added new object controller to server-side
++ Added Test Plugin for Streamer
++ Standardized Stream Based APIs, Added Local Creation Options Server-Side
+```
+
 ## 2.0.1
 ```diff
 + Add Client Console Command for 'timerinfo'
