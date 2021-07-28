@@ -59,7 +59,8 @@ function handleMenu() {
 }
 
 function init() {
-    KeybindController.registerKeybind({ key: KEY_BINDS.PLAYER_INTERACT, singlePress: handleMenu });
+    // Removed for 2.0.2 Merge
+    // KeybindController.registerKeybind({ key: KEY_BINDS.PLAYER_INTERACT, singlePress: handleMenu });
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, init);

@@ -8,12 +8,14 @@
         "clean": "rimraf ./resources",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
         "update": "altv-pkg d release",
-        "windows": "npm run build && altv-server.exe & npm run webserver & npm run streamer",
-        "linux": "npm run build && ./start.sh & npm run webserver & npm run streamer",
+        "windows-server": "altv-server.exe",
+        "windows": "npm run build && npm-run-all --parallel webserver streamer windows-server",
+        "linux-server": "./start.sh",
+        "linux": "npm run build && npm-run-all --parallel webserver streamer linux-server",
         "streamer": "node ./resources/streamer/index.js",
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
-        "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
+        "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && npm run windows-server\"",
         "dev": "npm run build && npm-run-all --parallel reconnect-server webserver streamer windev"
     },
     "devDependencies": {
