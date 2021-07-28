@@ -4,6 +4,8 @@ import Logger from '../utility/athenaLogger';
 import { MarkerController } from './marker';
 import { TextLabelController } from './textlabel';
 import { IStream, IStreamMessage } from '../../shared/interfaces/IStream';
+import { DEFAULT_CONFIG } from '../athena/main';
+import { ObjectController } from './object';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
@@ -16,13 +18,22 @@ export class StreamerService {
 
     static init() {
         Logger.info(`Connected to Streamer Service`);
-        const data: IStreamMessage = {
+        const pingMessage: IStreamMessage = {
             id: -1,
             route: 'ping',
             data: 'Ready!'
         };
 
-        sock.send(JSON.stringify(data));
+        sock.send(JSON.stringify(pingMessage));
+
+        Logger.info('Setting Up Configuration');
+        const configMessage: IStreamMessage = {
+            id: -1,
+            route: 'config',
+            data: DEFAULT_CONFIG.STREAM_CONFIG
+        };
+
+        sock.send(JSON.stringify(configMessage));
     }
 
     static requestUpdate(player: alt.Player) {
@@ -53,6 +64,7 @@ export class StreamerService {
 
         MarkerController.update(player, data.markers);
         TextLabelController.update(player, data.labels);
+        ObjectController.update(player, data.objects);
     }
 
     /**
@@ -87,6 +99,19 @@ export class StreamerService {
         };
 
         sock.send(JSON.stringify(textlabelStreamInfo));
+
+        // Populate Objects
+        const objects = await ObjectController.get();
+        const objectStreamInfo: IStreamMessage = {
+            id: -1,
+            route: 'populate',
+            data: {
+                array: objects,
+                key: 'objects'
+            }
+        };
+
+        sock.send(JSON.stringify(objectStreamInfo));
     }
 
     /**
@@ -104,9 +129,21 @@ export class StreamerService {
 
         StreamerService.Routes[msg.route](msg.id, msg.data);
     }
+
+    static tick() {
+        alt.Player.all.forEach((player) => {
+            if (!player || !player.valid || !player.data) {
+                return;
+            }
+
+            StreamerService.requestUpdate(player);
+        });
+    }
 }
 
 sock.onopen = StreamerService.init;
 sock.onmessage = (message: MessageEvent<any>) => {
     StreamerService.receive(message.data);
 };
+
+alt.setInterval(StreamerService.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);

@@ -1,38 +1,37 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/Marker';
+import { IObject } from '../../shared/interfaces/IObject';
 import Logger from '../utility/athenaLogger';
 
-const globalMarkers: Array<Marker> = [];
+const globalObjects: Array<IObject> = [];
 let appendDataFinishTime = Date.now() + 5000;
 
-export class MarkerController {
+export class ObjectController {
     /**
      * Adds a global label the player loads when they join.
      * @static
      * @param {Marker} marker
      * @memberof MarkerController
      */
-    static add(marker: Marker) {
+    static add(marker: IObject) {
         appendDataFinishTime = Date.now() + 500;
-        globalMarkers.push(marker);
+        globalObjects.push(marker);
     }
 
     /**
-     * Adds a global label the player loads when they join.
-     * Also appends it to any online players.
-     * Requires a UID to remove it later.
+     * Adds a global object for the player.
+     * Streamed in when they're in range.
      * @static
-     * @param {Marker} label
+     * @param {IObject} objectData
      * @memberof MarkerController
      */
-    static append(marker: Marker) {
-        if (!marker.uid) {
-            Logger.error(`(${JSON.stringify(marker.pos)}) Marker does not have a unique id (uid).`);
+    static append(objectData: IObject) {
+        if (!objectData.uid) {
+            Logger.error(`(${JSON.stringify(objectData.pos)}) Object does not have a unique id (uid).`);
             return;
         }
 
-        MarkerController.add(marker);
+        ObjectController.add(objectData);
     }
 
     /**
@@ -43,17 +42,17 @@ export class MarkerController {
      * @memberof TextLabelController
      */
     static remove(uid: string): boolean {
-        const index = globalMarkers.findIndex((label) => label.uid === uid);
+        const index = globalObjects.findIndex((label) => label.uid === uid);
         if (index <= -1) {
             return false;
         }
 
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_MARKER, uid);
-        globalMarkers.splice(index, 1);
+        globalObjects.splice(index, 1);
         return true;
     }
 
-    static get(): Promise<Array<Marker>> {
+    static get(): Promise<Array<IObject>> {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (Date.now() < appendDataFinishTime) {
@@ -61,7 +60,7 @@ export class MarkerController {
                 }
 
                 alt.clearInterval(interval);
-                resolve(globalMarkers);
+                resolve(globalObjects);
             }, 100);
         });
     }
@@ -73,7 +72,7 @@ export class MarkerController {
      * @param {Array<Marker>} markers
      * @memberof MarkerController
      */
-    static update(player: alt.Player, markers: Array<Marker>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
+    static update(player: alt.Player, markers: Array<IObject>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, markers);
     }
 }

@@ -71,6 +71,4 @@ function handlePing(player: alt.Player): void {
             }
         }
     }
-
-    StreamerService.requestUpdate(player);
 }

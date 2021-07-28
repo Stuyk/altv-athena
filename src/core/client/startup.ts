@@ -30,6 +30,7 @@ import './systems/marker';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
+import './systems/object';
 import './systems/particle';
 import './systems/progressBar';
 import './systems/quickToken';

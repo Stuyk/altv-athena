@@ -1,20 +1,34 @@
 import * as http from 'http';
 import * as SockJS from 'sockjs';
-import { IStream, IStreamMessage, IStreamPopulate, IStreamUpdate } from '../core/shared/interfaces/IStream';
+import {
+    IStream,
+    IStreamConfig,
+    IStreamMessage,
+    IStreamPopulate,
+    IStreamUpdate
+} from '../core/shared/interfaces/IStream';
 import { Vector3 } from '../core/shared/interfaces/Vector';
 
 const main = SockJS.createServer();
 const server = http.createServer();
 const StreamData: IStream = {
     markers: [],
-    labels: []
+    labels: [],
+    objects: []
 };
 
 let conn: SockJS.Connection;
+let config: IStreamConfig = {
+    TimeBetweenUpdates: 1000,
+    LabelsDistance: 100,
+    MarkersDistance: 100,
+    ObjectsDistance: 100
+};
 
 class StreamerServer {
     static Routes = {
         ping: StreamerServer.ping,
+        config: StreamerServer.config,
         populate: StreamerServer.populate,
         update: StreamerServer.update
     };
@@ -50,6 +64,14 @@ class StreamerServer {
         StreamerServer.Routes[msg.route](msg.id, msg.data);
     }
 
+    static config(id: number, data: IStreamConfig) {
+        config = data;
+        console.log(`=== Streamer Configuration ===`);
+        Object.keys(config).forEach((key) => {
+            console.log(`${key}: ${config[key]}`);
+        });
+    }
+
     /**
      * Retrieve a ping request, send a pong.
      * @static
@@ -79,7 +101,6 @@ class StreamerServer {
         }
 
         StreamData[data.key] = data.array;
-        console.log(StreamData[data.key]);
         console.log(`Set (${StreamData[data.key].length}) Items for Key (${data.key}) in StreamInfo`);
     }
 
@@ -91,15 +112,25 @@ class StreamerServer {
      * @memberof StreamerServer
      */
     static update(id: number, data: IStreamUpdate) {
-        const markers = StreamData.markers.filter((marker) => StreamerServer.distance(data.pos, marker.pos) <= 10);
-        const labels = StreamData.labels.filter((label) => StreamerServer.distance(data.pos, label.pos) <= 10);
+        const markers = StreamData.markers.filter(
+            (marker) => StreamerServer.distance(data.pos, marker.pos) <= config.MarkersDistance
+        );
+
+        const labels = StreamData.labels.filter(
+            (label) => StreamerServer.distance(data.pos, label.pos) <= config.LabelsDistance
+        );
+
+        const objects = StreamData.objects.filter(
+            (object) => StreamerServer.distance(data.pos, object.pos) <= config.ObjectsDistance
+        );
 
         const response: IStreamMessage = {
             id,
             route: 'update',
             data: {
                 markers,
-                labels
+                labels,
+                objects
             }
         };
 

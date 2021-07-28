@@ -18,6 +18,7 @@ import { World } from '../../systems/world';
 import { HologramController } from '../../systems/hologram';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { playerFuncs } from '../Player';
+import { StreamerService } from '../../systems/streamer';
 
 /**
  * Select a character based on the character data provided.
@@ -103,9 +104,10 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         // Propagation
         ChatController.populateCommands(player);
         BlipController.populateGlobalBlips(player);
-        MarkerController.populateGlobalMarkers(player);
-        TextLabelController.populateGlobalLabels(player);
         HologramController.populateHolograms(player);
+
+        // Markers, Text Labels, Objects, etc.
+        StreamerService.requestUpdate(player);
 
         // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);

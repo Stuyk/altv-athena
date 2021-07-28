@@ -18,6 +18,12 @@ description: List of all the changes and current versions.
 + Add Waypoint Event
 + Add player.currentWaypoint Extension
 + Added Synced Meta for Waypoint
++ Added Streamer Service
++ Added Markers to Streamer Service
++ Added Text Labels to Streamer Service
++ Added Objects to Streamer Service
++ Added new object controller to server-side
++ Added Test Plugin for Streamer
 ```
 
 ## 2.0.1

@@ -7,6 +7,11 @@ export async function loadModel(hash: number): Promise<boolean> {
         native.requestModel(hash);
         let count = 0;
 
+        if (native.hasModelLoaded(hash)) {
+            resolve(true);
+            return;
+        }
+
         const interval = Timer.createInterval(
             () => {
                 if (count >= 100) {

@@ -77,14 +77,4 @@ export class TextLabelController {
     static update(player: alt.Player, labels: Array<TextLabel>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
     }
-
-    /**
-     * Creates all existing labels for a player.
-     * @static
-     * @param {alt.Player} player
-     * @memberof TextLabelController
-     */
-    static populateGlobalLabels(player: alt.Player) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, globalTextLabels);
-    }
 }
