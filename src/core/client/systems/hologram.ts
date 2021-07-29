@@ -53,6 +53,10 @@ export class HologramSystem {
             return;
         }
 
+        if (holograms[index].clientRef) {
+            native.deleteVehicle(holograms[index].clientRef);
+        }
+
         holograms.splice(index, 1);
         isUpdating = false;
     }
@@ -83,16 +87,19 @@ export class HologramSystem {
 
         for (let i = 0; i < holograms.length; i++) {
             const hologram = holograms[i];
-            const isInRange = distance2d(alt.Player.local.pos, hologram.position) <= MAX_HOLOGRAM_DISTANCE;
 
-            // Don't display and hide holograms that are no close to the player.
-            if (!isInRange || hologram.isHidden) {
-                if (hologram.clientRef) {
-                    native.deleteEntity(hologram.clientRef);
-                    hologram.clientRef = null;
+            if (!hologram.noMaxDistance) {
+                const isInRange = distance2d(alt.Player.local.pos, hologram.position) <= MAX_HOLOGRAM_DISTANCE;
+
+                // Don't display and hide holograms that are no close to the player.
+                if (!isInRange || hologram.isHidden) {
+                    if (hologram.clientRef) {
+                        native.deleteEntity(hologram.clientRef);
+                        hologram.clientRef = null;
+                    }
+
+                    continue;
                 }
-
-                continue;
             }
 
             // Create and display the hologram.

@@ -5,6 +5,7 @@ export interface Hologram {
     model: string;
     position: Vector3;
     heading: number;
+    noMaxDistance?: boolean;
     isHidden?: boolean;
     clientRef?: number;
 }
