@@ -73,6 +73,19 @@ export class InteriorSystem {
         }
 
         isReady = true;
+
+        // Only triggered when interior(s) list has nothing in it.
+        if (interiors.length <= 0) {
+            InteriorSystem.createDefaultInteriors();
+        }
+    }
+
+    static createDefaultInteriors() {
+        InteriorSystem.create({
+            name: 'Diamond Resorts Casino',
+            outside: { x: 935.1909790039062, y: 46.17036819458008, z: 81.09584045410156 },
+            inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 }
+        });
     }
 
     /**
@@ -86,7 +99,7 @@ export class InteriorSystem {
         const groundOutside = {
             x: interior.outside.x,
             y: interior.outside.y,
-            z: interior.outside.z - 0.5
+            z: interior.outside.z - 1
         };
 
         const aboveGroundOutside = {
@@ -111,7 +124,7 @@ export class InteriorSystem {
             maxDistance: 15,
             color: new alt.RGBA(255, 255, 255, 75),
             pos: groundOutside,
-            type: 1
+            type: 0
         });
 
         TextLabelController.append({
@@ -208,6 +221,13 @@ export class InteriorSystem {
         }
 
         Logger.log(`Created New Interior at ${newInterior._id.toString()} with name ${newInterior.name}`);
+
+        // Update the Array
+        newInterior._id = newInterior._id.toString(); // Convert Interior ID to String
+        interiors.push(newInterior);
+        InteriorSystem.add(newInterior);
+
+        // Update Interior Count
         nextInterior += 1;
         return newInterior;
     }
@@ -251,7 +271,7 @@ export class InteriorSystem {
                 maxDistance: 15,
                 color: new alt.RGBA(255, 255, 255, 75),
                 pos: interior.insidePosition,
-                type: 1
+                type: 0
             });
         }
 
@@ -302,3 +322,5 @@ export class InteriorSystem {
         // Clear Interior Info Here
     }
 }
+
+InteriorSystem.init();

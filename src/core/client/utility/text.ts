@@ -18,7 +18,7 @@ export function drawText2D(
     pos: alt.IVector2,
     scale: number,
     color: alt.RGBA,
-    alignment: number = null,
+    alignment: number = 0,
     padding: number = 0
 ) {
     if (scale > 2) {
@@ -76,6 +76,7 @@ export function drawText3D(text: string, pos: alt.IVector3, scale: number, color
     native.setTextColour(color.r, color.g, color.b, color.a);
     native.setTextOutline();
     native.setTextDropShadow();
+    native.setTextJustification(0);
     native.endTextCommandDisplayText(0, 0, 0);
     native.clearDrawOrigin();
 }
