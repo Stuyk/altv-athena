@@ -36,4 +36,5 @@ export interface IStreamPopulate<T> {
 
 export interface IStreamUpdate {
     pos: Vector3;
+    dimension: number;
 }

@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/IObject';
 import { distance2d } from '../../shared/utility/vector';
@@ -26,7 +27,6 @@ export class ObjectController {
         }
 
         localObjects.push(objectData);
-
         if (!interval) {
             interval = Timer.createInterval(handleDrawObjects, 500, 'object.ts');
         }
@@ -53,10 +53,37 @@ export class ObjectController {
      * @return {*}
      * @memberof ObjectController
      */
-    static remove(uid: string) {
+    static remove(uid: string, removeAllInterior = false) {
         isRemoving = true;
 
-        const index = localObjects.findIndex((object) => object.uid === uid);
+        let index = -1;
+
+        // Removes all objects matching this prefix specifically.
+        if (removeAllInterior) {
+            let count = 0;
+            for (let i = localObjects.length - 1; i >= 0; i--) {
+                if (!localObjects[i].isInterior) {
+                    continue;
+                }
+
+                const actualID = localObjects[i].uid;
+                localObjects.splice(i, index);
+
+                if (objectInfo[actualID]) {
+                    native.deleteEntity(objectInfo[actualID]);
+                    objectInfo[actualID] = null;
+                }
+
+                count += 1;
+            }
+
+            alt.log(`Removed ${count} from Interior on Request`);
+            isRemoving = false;
+            return;
+        }
+
+        index = localObjects.findIndex((object) => object.uid === uid);
+
         if (index <= -1) {
             isRemoving = false;
             return;
@@ -123,7 +150,7 @@ function handleDrawObjects() {
         loadModel(hash).then((res) => {
             if (!res) {
                 objectInfo[objectData.uid] = null;
-                return;
+                throw new Error(`${objectData.model} is not a valid model.`);
             }
 
             objectInfo[objectData.uid] = native.createObjectNoOffset(
@@ -136,6 +163,8 @@ function handleDrawObjects() {
                 false
             );
 
+            alt.log(`CREATED MODEL ${objectInfo[objectData.uid]} for ${objectData.model}`);
+
             const rot = objectData.rot ? objectData.rot : { x: 0, y: 0, z: 0 };
             native.setEntityRotation(objectInfo[objectData.uid], rot.x, rot.y, rot.z, 1, false);
             native.freezeEntityPosition(objectInfo[objectData.uid], true);
@@ -143,5 +172,6 @@ function handleDrawObjects() {
     }
 }
 
+alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ObjectController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ObjectController.populate);
 alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ObjectController.remove);

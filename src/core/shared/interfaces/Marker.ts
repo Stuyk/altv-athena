@@ -7,4 +7,5 @@ export interface Marker {
     scale?: Vector3;
     maxDistance?: number;
     uid?: string;
+    dimension?: number;
 }

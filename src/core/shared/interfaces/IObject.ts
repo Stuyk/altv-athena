@@ -5,7 +5,7 @@ export interface IObject {
     model: string;
     rot?: Vector3;
     maxDistance?: number;
-    uid?: string;
+    uid: string;
 
     /**
      * Local Object ID.
@@ -22,4 +22,19 @@ export interface IObject {
      * @memberof IObject
      */
     isBeingCreated?: boolean;
+
+    /**
+     * Is this object interior only.
+     * Will only show in a matching interior dimension.
+     * @type {boolean}
+     * @memberof IObject
+     */
+    isInterior?: boolean;
+
+    /**
+     * Will show across all dimensions.
+     * @type {number}
+     * @memberof IObject
+     */
+    dimension?: number;
 }

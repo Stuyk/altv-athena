@@ -5,11 +5,14 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interior } from '../../shared/interfaces/Interior';
 import { IObject } from '../../shared/interfaces/IObject';
 import { Vector3 } from '../../shared/interfaces/Vector';
+import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
+import { getMissingNumber } from '../utility/math';
 import { InteractionController } from './interaction';
 import { MarkerController } from './marker';
+import { ObjectController } from './object';
 import { TextLabelController } from './textlabel';
 
 interface InteriorInfo {
@@ -57,9 +60,15 @@ interface InteriorInfo {
      * @memberof InteriorInfo
      */
     players: Array<alt.Player>;
+
+    /**
+     * Objects to create / delete in the interior.
+     * @type {Array<IObject>}
+     * @memberof InteriorInfo
+     */
+    objects: Array<IObject>;
 }
 
-let nextInterior = 0;
 let interiors: Array<Interior> = [];
 let interiorData: { [id: string]: InteriorInfo } = {};
 let isReady = false;
@@ -77,8 +86,6 @@ export class InteriorSystem {
             interiors = [];
         }
 
-        nextInterior = interiors.length;
-
         for (let i = 0; i < interiors.length; i++) {
             interiors[i]._id = interiors[i]._id.toString(); // Convert Interior IDs to String
             InteriorSystem.add(interiors[i]);
@@ -92,11 +99,33 @@ export class InteriorSystem {
         }
     }
 
+    static getNextID(): number {
+        if (interiors.length <= 0) {
+            return 1;
+        }
+
+        const values = interiors.map((interior) => {
+            return parseInt(`${interior._id}`);
+        });
+
+        // Start with index 1 because 0 is global dimension.
+        return getMissingNumber(values, 1);
+    }
+
     static createDefaultInteriors() {
         InteriorSystem.create({
             name: 'Diamond Resorts Casino',
             outside: { x: 935.1909790039062, y: 46.17036819458008, z: 81.09584045410156 },
-            inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 }
+            inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 },
+            objects: [
+                {
+                    uid: `jukebox-0-floor`,
+                    model: 'prop_50s_jukebox',
+                    pos: { x: 1089.7802734375, y: 219.3074951171875, z: -48.7 },
+                    rot: { x: 0, y: 0, z: 1.474472999572754 },
+                    isInterior: true
+                }
+            ]
         });
     }
 
@@ -161,7 +190,8 @@ export class InteriorSystem {
             insidePosition: groundInside,
             outsidePosition: groundOutside,
             ipl: interior.ipl,
-            players: []
+            players: [],
+            objects: interior.objects ? interior.objects : []
         };
     }
 
@@ -227,7 +257,11 @@ export class InteriorSystem {
             interior.storage = [];
         }
 
-        interior._id = nextInterior;
+        if (!interior.objects) {
+            interior.objects = [];
+        }
+
+        interior._id = InteriorSystem.getNextID();
         const newInterior = await Database.insertData<Interior>(interior, Collections.Interiors, true);
         if (!newInterior) {
             return null;
@@ -238,11 +272,105 @@ export class InteriorSystem {
         interiors.push(newInterior);
         InteriorSystem.add(newInterior);
 
-        // Update Interior Count
-        nextInterior += 1;
-
         Logger.log(`Created New Interior at ${newInterior._id.toString()} with name ${newInterior.name}`);
         return newInterior;
+    }
+
+    /**
+     * Refreshes an interior and for anyone inside of it.
+     * @static
+     * @param {string} id
+     * @memberof InteriorSystem
+     */
+    static async refreshInteriorForPlayer(player: alt.Player) {
+        if (!player || !player.valid || !player.data || player.data.interior === null) {
+            return;
+        }
+
+        if (!interiorData[player.data.interior]) {
+            throw new Error(`Could not refresh interior objects for ${player.data.interior}`);
+        }
+
+        alt.log(`Refreshing interior for ${player.data.name}`);
+        const interior = interiorData[player.data.interior];
+        const objects = interior.objects;
+
+        for (let i = 0; i < objects.length; i++) {
+            ObjectController.removeFromPlayer(player, objects[i].uid, true);
+        }
+
+        // Reset Objects and Re-Add Them
+        if (player.dimension === 0) {
+            return;
+        }
+
+        for (let i = 0; i < objects.length; i++) {
+            objects[i].isInterior = true;
+            ObjectController.addToPlayer(player, objects[i]);
+        }
+    }
+
+    /**
+     * Add an object to an interior.
+     * @static
+     * @param {(string | number)} id
+     * @param {IObject} objectData
+     * @memberof InteriorSystem
+     */
+    static async addObject(id: string, objectData: IObject): Promise<string> {
+        if (!interiorData[id]) {
+            throw new Error(`Could not add interior object for interior ${id}`);
+        }
+
+        const index = interiorData[id].objects.findIndex((x) => x.uid === objectData.uid);
+        if (index !== -1) {
+            Logger.warning(`Please Use Unique Identifiers for Interior Objects. ${objectData.uid}`);
+            objectData.uid = `${objectData.uid}${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}`;
+        }
+
+        interiorData[id].objects.push(objectData);
+        await Database.updatePartialData(id, { objects: interiorData[id].objects }, Collections.Interiors);
+
+        interiorData[id].players.forEach((player) => {
+            InteriorSystem.refreshInteriorForPlayer(player);
+        });
+
+        return objectData.uid;
+    }
+
+    /**
+     * Remove an object from an interior.
+     * @static
+     * @param {(string | number)} id
+     * @param {IObject} objectData
+     * @memberof InteriorSystem
+     */
+    static async removeObject(id: string, uid: string) {
+        if (!interiorData[id]) {
+            throw new Error(`Could not add interior object for interior ${id}`);
+        }
+
+        let wasModified = false;
+
+        for (let i = interiorData[id].objects.length - 1; i >= 0; i--) {
+            if (interiorData[id].objects[i].uid !== uid) {
+                continue;
+            }
+
+            wasModified = true;
+            interiorData[id].objects.splice(i, 1);
+            break;
+        }
+
+        if (!wasModified) {
+            return;
+        }
+
+        await Database.updatePartialData(id, { objects: interiorData[id].objects }, Collections.Interiors);
+
+        interiorData[id].players.forEach((player) => {
+            InteriorSystem.refreshInteriorForPlayer(player);
+        });
     }
 
     /**
@@ -266,6 +394,17 @@ export class InteriorSystem {
         }
 
         if (!interiorData[id]) {
+            // Small case where an interior just no longer exists.
+            if (doNotTeleport) {
+                Logger.error(`Interior with ID: ${id} did not exist. Moved ${player.data.name} to spawn.`);
+                playerFuncs.save.field(player, 'interior', null);
+                playerFuncs.safe.setPosition(
+                    player,
+                    DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
+                    DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
+                    DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
+                );
+            }
             return;
         }
 
@@ -277,7 +416,8 @@ export class InteriorSystem {
                 type: `interior`,
                 identifier: `house-inside-${id}`,
                 data: [id],
-                callback: InteriorSystem.exit
+                callback: InteriorSystem.exit,
+                dimension: parseInt(id)
             });
 
             MarkerController.append({
@@ -285,7 +425,8 @@ export class InteriorSystem {
                 maxDistance: 15,
                 color: new alt.RGBA(255, 255, 255, 75),
                 pos: interior.insidePosition,
-                type: 0
+                type: 0,
+                dimension: parseInt(id)
             });
         }
 
@@ -293,7 +434,7 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
         }
 
-        player.dimension = parseInt(id);
+        playerFuncs.safe.setDimension(player, parseInt(id));
 
         // Added solely for synchronizing interior for player's who
         // logged out inside of an interior.
@@ -322,34 +463,10 @@ export class InteriorSystem {
         }
 
         // Save Interior Info Here for Player
+        player.data.interior = id;
+        InteriorSystem.refreshInteriorForPlayer(player);
         playerFuncs.save.field(player, 'interior', id);
     }
-
-    /**
-     * Refreshes an interior and for anyone inside of it.
-     * @static
-     * @param {string} id
-     * @memberof InteriorSystem
-     */
-    static async refreshInteriorObjects(id: string) {}
-
-    /**
-     * Add an object to an interior.
-     * @static
-     * @param {(string | number)} id
-     * @param {IObject} objectData
-     * @memberof InteriorSystem
-     */
-    static async addObject(id: string, objectData: IObject) {}
-
-    /**
-     * Remove an object from an interior.
-     * @static
-     * @param {(string | number)} id
-     * @param {IObject} objectData
-     * @memberof InteriorSystem
-     */
-    static async removeObject(id: string, objectData: IObject) {}
 
     /**
      * Called when a player is 'exiting' an interior.
@@ -375,7 +492,7 @@ export class InteriorSystem {
         }
 
         const interior = interiorData[id];
-        player.dimension = 0;
+        playerFuncs.safe.setDimension(player, 0);
         playerFuncs.safe.setPosition(
             player,
             interior.outsidePosition.x,
@@ -388,12 +505,24 @@ export class InteriorSystem {
         }
 
         // Remove player from interior list if present.
-        const playerIndex = interior.players.findIndex((x) => x && x.valid && x.id == player.id);
-        if (playerIndex !== -1) {
-            interior.players.splice(playerIndex, 1);
+        // Work through the array backwards to prevent issues when modifying.
+        for (let i = interior.players.length - 1; i >= 0; i--) {
+            const target = interior.players[i];
+            if (!target || !target.valid) {
+                interior.players.splice(i, 1);
+                continue;
+            }
+
+            if (target.id !== player.id) {
+                continue;
+            }
+
+            interior.players.splice(i, 1);
         }
 
         // Clear Interior Info for Player
+        InteriorSystem.refreshInteriorForPlayer(player);
+        player.data.interior = '0';
         playerFuncs.save.field(player, 'interior', null);
     }
 }

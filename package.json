@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "a roleplay framework for alt:V",
     "author": "stuyk",
     "type": "module",
@@ -15,7 +15,7 @@
         "streamer": "node ./resources/streamer/index.js",
         "webserver": "node ./utility/webserver/index.mjs",
         "reconnect-server": "altv-reconnect",
-        "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && npm run windows-server\"",
+        "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
         "dev": "npm run build && npm-run-all --parallel reconnect-server webserver streamer windev"
     },
     "devDependencies": {

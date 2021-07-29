@@ -42,7 +42,8 @@ export class StreamerService {
             id: player.id,
             route: 'update',
             data: {
-                pos: player.pos
+                pos: player.pos,
+                dimension: player.dimension
             }
         };
 

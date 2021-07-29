@@ -32,7 +32,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.
-    player.dimension = 0;
+    safe.setDimension(player, 0);
     setter.frozen(player, true);
 
     alt.setTimeout(() => {

@@ -38,6 +38,10 @@ export class InteractionController {
         shape.setInteraction(interaction);
         interactions[interaction.type].push(shape);
 
+        if (interaction.dimension) {
+            shape.dimension = interaction.dimension;
+        }
+
         safeInteractions.push(shape.getInteraction());
         return shape;
     }

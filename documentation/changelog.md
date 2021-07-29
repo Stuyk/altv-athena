@@ -4,6 +4,15 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.3
+
+```diff
++ Fix Dev Mode for Scripts
++ Added Interior System
++ Added Dimensions to Streamer
++ Added Objects to Interior System
+```
+
 ## 2.0.2
 
 ```diff

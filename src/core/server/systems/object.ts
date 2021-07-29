@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/IObject';
 import Logger from '../utility/athenaLogger';
@@ -57,14 +58,15 @@ export class ObjectController {
      * @static
      * @param {alt.Player} player
      * @param {string} uid
+     * @param {boolean} isInterior Remove all objects that are interior based.
      * @memberof ObjectController
      */
-    static removeFromPlayer(player: alt.Player, uid: string) {
+    static removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
         if (!uid) {
             throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid);
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid, removeAllInterior);
     }
 
     /**

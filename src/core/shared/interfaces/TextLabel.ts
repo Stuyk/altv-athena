@@ -5,4 +5,5 @@ export interface TextLabel {
     data: string;
     maxDistance?: number;
     uid?: string;
+    dimension?: number;
 }
