@@ -11,6 +11,7 @@ description: List of all the changes and current versions.
 + Added Interior System
 + Added Dimensions to Streamer
 + Added Objects to Interior System
++ Fix Fetching Dropped Items by Dimension
 ```
 
 ## 2.0.2
