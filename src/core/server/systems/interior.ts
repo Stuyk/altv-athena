@@ -113,19 +113,13 @@ export class InteriorSystem {
     }
 
     static createDefaultInteriors() {
+        // This only gets inserted into the database once.
+        // Any additional changes have be removed / updated whatever.
         InteriorSystem.create({
             name: 'Diamond Resorts Casino',
             outside: { x: 935.1909790039062, y: 46.17036819458008, z: 81.09584045410156 },
             inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 },
-            objects: [
-                {
-                    uid: `jukebox-0-floor`,
-                    model: 'prop_50s_jukebox',
-                    pos: { x: 1089.7802734375, y: 219.3074951171875, z: -48.7 },
-                    rot: { x: 0, y: 0, z: 1.474472999572754 },
-                    isInterior: true
-                }
-            ]
+            objects: []
         });
     }
 

@@ -67,17 +67,16 @@ export class ObjectController {
                 }
 
                 const actualID = localObjects[i].uid;
-                localObjects.splice(i, index);
+                localObjects.splice(i, 1);
 
-                if (objectInfo[actualID]) {
+                if (objectInfo[actualID] !== null && objectInfo[actualID] !== undefined) {
                     native.deleteEntity(objectInfo[actualID]);
                     objectInfo[actualID] = null;
+                    count += 1;
                 }
-
-                count += 1;
             }
 
-            alt.log(`Removed ${count} from Interior on Request`);
+            alt.log(`Removed ${count} Spawned Objects from Local Interior Stream`);
             isRemoving = false;
             return;
         }
@@ -163,8 +162,7 @@ function handleDrawObjects() {
                 false
             );
 
-            alt.log(`CREATED MODEL ${objectInfo[objectData.uid]} for ${objectData.model}`);
-
+            // alt.log(`CREATED MODEL ${objectInfo[objectData.uid]} for ${objectData.model}`);
             const rot = objectData.rot ? objectData.rot : { x: 0, y: 0, z: 0 };
             native.setEntityRotation(objectInfo[objectData.uid], rot.x, rot.y, rot.z, 1, false);
             native.freezeEntityPosition(objectInfo[objectData.uid], true);
