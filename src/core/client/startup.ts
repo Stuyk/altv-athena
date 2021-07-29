@@ -42,6 +42,7 @@ import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
 // Utility
+import './utility/ipl';
 import './utility/notification';
 import './utility/reload';
 import './utility/screenshot';

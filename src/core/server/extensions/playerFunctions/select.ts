@@ -1,24 +1,24 @@
 import * as alt from 'alt-server';
+
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/Character';
+import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { BlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
-import { MarkerController } from '../../systems/marker';
+import { HologramController } from '../../systems/hologram';
+import { InteriorSystem } from '../../systems/interior';
+import { StreamerService } from '../../systems/streamer';
+import { World } from '../../systems/world';
+import { playerFuncs } from '../Player';
 import emit from './emit';
 import safe from './safe';
+import save from './save';
 import setter from './setter';
 import sync from './sync';
-import { TextLabelController } from '../../systems/textlabel';
-import save from './save';
-import { LocaleController } from '../../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
-import { World } from '../../systems/world';
-import { HologramController } from '../../systems/hologram';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { playerFuncs } from '../Player';
-import { StreamerService } from '../../systems/streamer';
 
 /**
  * Select a character based on the character data provided.
@@ -45,6 +45,11 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
             );
+        }
+
+        // Force the player into the interior they were last in.
+        if (player.data.interior) {
+            InteriorSystem.enter(player, player.data.interior, true);
         }
 
         // Save immediately after using exterior login.

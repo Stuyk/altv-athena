@@ -1,6 +1,9 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interior } from '../../shared/interfaces/Interior';
+import { IObject } from '../../shared/interfaces/IObject';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
@@ -45,6 +48,15 @@ interface InteriorInfo {
      * @memberof InteriorInfo
      */
     ipl?: string;
+
+    /**
+     * List of players inside of the interior.
+     * Does not remove players who logout or are no longer valid.
+     * Check for validity yourself if you use this.
+     * @type {Array<alt.Player>}
+     * @memberof InteriorInfo
+     */
+    players: Array<alt.Player>;
 }
 
 let nextInterior = 0;
@@ -148,7 +160,8 @@ export class InteriorSystem {
             outside: outsideColShape,
             insidePosition: groundInside,
             outsidePosition: groundOutside,
-            ipl: interior.ipl
+            ipl: interior.ipl,
+            players: []
         };
     }
 
@@ -220,8 +233,6 @@ export class InteriorSystem {
             return null;
         }
 
-        Logger.log(`Created New Interior at ${newInterior._id.toString()} with name ${newInterior.name}`);
-
         // Update the Array
         newInterior._id = newInterior._id.toString(); // Convert Interior ID to String
         interiors.push(newInterior);
@@ -229,16 +240,19 @@ export class InteriorSystem {
 
         // Update Interior Count
         nextInterior += 1;
+
+        Logger.log(`Created New Interior at ${newInterior._id.toString()} with name ${newInterior.name}`);
         return newInterior;
     }
 
     /**
      * Called when a player is 'entering' an interior.
+     * This can also be called when the player is logging in.
      * @static
      * @param {alt.Player} player
      * @memberof InteriorSystem
      */
-    static async enter(player: alt.Player, id: string) {
+    static async enter(player: alt.Player, id: string, doNotTeleport = false) {
         if (!player || !player.valid) {
             return;
         }
@@ -275,17 +289,67 @@ export class InteriorSystem {
             });
         }
 
-        // Load IPL Here
+        if (interior.ipl) {
+            alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
+        }
+
         player.dimension = parseInt(id);
-        playerFuncs.safe.setPosition(
-            player,
-            interior.insidePosition.x,
-            interior.insidePosition.y,
-            interior.insidePosition.z
-        );
+
+        // Added solely for synchronizing interior for player's who
+        // logged out inside of an interior.
+        if (!doNotTeleport) {
+            playerFuncs.set.frozen(player, true);
+
+            playerFuncs.safe.setPosition(
+                player,
+                interior.insidePosition.x,
+                interior.insidePosition.y,
+                interior.insidePosition.z
+            );
+
+            // Freeze Player for Interior Loading
+            alt.setTimeout(() => {
+                playerFuncs.set.frozen(player, false);
+            }, 1000);
+        }
+
+        // Check if the player exists already.
+        const playerIndex = interior.players.findIndex((x) => x && x.valid && x.id == player.id);
+        if (playerIndex <= -1) {
+            interior.players.push(player);
+        } else {
+            interior.players[playerIndex] = player;
+        }
 
         // Save Interior Info Here for Player
+        playerFuncs.save.field(player, 'interior', id);
     }
+
+    /**
+     * Refreshes an interior and for anyone inside of it.
+     * @static
+     * @param {string} id
+     * @memberof InteriorSystem
+     */
+    static async refreshInteriorObjects(id: string) {}
+
+    /**
+     * Add an object to an interior.
+     * @static
+     * @param {(string | number)} id
+     * @param {IObject} objectData
+     * @memberof InteriorSystem
+     */
+    static async addObject(id: string, objectData: IObject) {}
+
+    /**
+     * Remove an object from an interior.
+     * @static
+     * @param {(string | number)} id
+     * @param {IObject} objectData
+     * @memberof InteriorSystem
+     */
+    static async removeObject(id: string, objectData: IObject) {}
 
     /**
      * Called when a player is 'exiting' an interior.
@@ -319,7 +383,18 @@ export class InteriorSystem {
             interior.outsidePosition.z
         );
 
-        // Clear Interior Info Here
+        if (interior.ipl) {
+            alt.emitClient(player, SYSTEM_EVENTS.IPL_UNLOAD, interior.ipl);
+        }
+
+        // Remove player from interior list if present.
+        const playerIndex = interior.players.findIndex((x) => x && x.valid && x.id == player.id);
+        if (playerIndex !== -1) {
+            interior.players.splice(playerIndex, 1);
+        }
+
+        // Clear Interior Info for Player
+        playerFuncs.save.field(player, 'interior', null);
     }
 }
 

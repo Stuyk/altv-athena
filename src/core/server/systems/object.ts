@@ -61,7 +61,7 @@ export class ObjectController {
      */
     static removeFromPlayer(player: alt.Player, uid: string) {
         if (!uid) {
-            throw new Error(`Did not specify a uid for marker removal. ObjectController.removeFromPlayer`);
+            throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid);

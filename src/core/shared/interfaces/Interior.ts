@@ -1,3 +1,4 @@
+import { IObject } from './IObject';
 import { Item } from './Item';
 import { Vector3 } from './Vector';
 
@@ -46,6 +47,13 @@ export interface Interior {
      * @memberof Interior
      */
     storage?: Array<Item>;
+
+    /**
+     * Objects to give to the client who enters the interior.
+     * @type {Array<IObject>}
+     * @memberof Interior
+     */
+    objects?: Array<IObject>;
 
     /**
      * Optional IPL to associate with this interior.

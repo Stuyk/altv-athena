@@ -20,6 +20,9 @@ export enum SYSTEM_EVENTS {
     INTERACTION_FUEL = 'fuel:Action',
     INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
+    // IPL
+    IPL_LOAD = 'ipl:Load',
+    IPL_UNLOAD = 'ipl:Unload',
     //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',
