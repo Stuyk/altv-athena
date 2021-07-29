@@ -9,6 +9,7 @@ import { Interaction } from '../interface/Interaction';
 import { sha256Random } from '../utility/encryption';
 
 import '../views/atm';
+import './interior';
 
 const interactions: { [key: string]: Array<InteractionShape> } = {};
 const safeInteractions: Array<Interaction> = [];

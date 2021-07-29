@@ -1,27 +1,56 @@
 import { Item } from './Item';
 import { Vector3 } from './Vector';
-import { Vehicle } from './Vehicle';
-
-export interface Furniture {
-    pos: Vector3;
-    rot: Vector3;
-    hash: string;
-}
 
 export interface Interior {
-    _id?: any;
+    /**
+     * This is also the dimension for the interior.
+     * May need to be converted into a number.
+     * @type {unknown}
+     * @memberof Interior
+     */
+    _id?: unknown;
     outside: Vector3;
     inside: Vector3;
+
+    /**
+     * The name to display outside of the interior.
+     * @type {string}
+     * @memberof Interior
+     */
     name: string;
-    isActuallyOutside: boolean;
-    forSale?: boolean;
-    lockStatus?: boolean;
-    price?: number;
-    dimension?: number;
-    friends?: Array<string>;
-    factions?: Array<string>;
-    mlos?: Array<string>;
-    furniture?: Array<Furniture>;
+
+    /**
+     * Is this interior currently unlocked?
+     * @type {boolean}
+     * @memberof Interior
+     */
+    isUnlocked?: boolean;
+
+    /**
+     * A list of character ids who own this property and have full control over it.
+     * @type {Array<string>}
+     * @memberof Interior
+     */
+    owners?: Array<string>;
+
+    /**
+     * A list of faction ids who own have access to this property.
+     * @type {Array<number>}
+     * @memberof Interior
+     */
+    factions?: Array<number>;
+
+    /**
+     * Items that can be stored into the interior and are accessible by faction(s) or owner(s).
+     * @type {Array<Item>}
+     * @memberof Interior
+     */
     storage?: Array<Item>;
-    vehicles?: Array<Vehicle>;
+
+    /**
+     * Optional IPL to associate with this interior.
+     * @type {string}
+     * @memberof Interior
+     */
+    ipl?: string;
 }
