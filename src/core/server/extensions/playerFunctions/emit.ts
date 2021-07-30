@@ -44,7 +44,6 @@ function scenario(
     duration: number
 ): void {
     if (player.data.isDead) {
-        alt.logWarning(`[Athena] Cannot play ${name} while player is dead.`);
         return;
     }
 
