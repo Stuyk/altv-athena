@@ -34,6 +34,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_UNCUFF = 'player:Uncuff',
     //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
+    PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
     PLAYER_EMIT_SOUND_3D = 'sound:3D',

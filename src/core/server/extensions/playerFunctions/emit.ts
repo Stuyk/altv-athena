@@ -32,6 +32,26 @@ function animation(
 }
 
 /**
+ * Play an animation on this player.
+ * @param {string} name
+ * @param {number} duration
+ * @return {*}  {void}
+ * @memberof EmitPrototype
+ */
+function scenario(
+    player: alt.Player,
+    name: string,
+    duration: number
+): void {
+    if (player.data.isDead) {
+        alt.logWarning(`[Athena] Cannot play ${name} while player is dead.`);
+        return;
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, name, duration);
+}
+
+/**
  * Synchronize a local variable to access locally for this player.
  * @param {string} key
  * @param {*} value
@@ -137,6 +157,7 @@ function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
 
 export default {
     animation,
+    scenario,
     createProgressBar,
     meta,
     message,
