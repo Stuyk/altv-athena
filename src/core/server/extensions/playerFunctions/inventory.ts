@@ -45,6 +45,40 @@ function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: n
 }
 
 /**
+ * Return the tab indexes and the slots to use for the item.
+ * @return {*}  {(Array<{ tab: number; slot: number }>)}
+ * @memberof InventoryPrototype
+*/
+function getFreeInventorySlots(p: alt.Player, tabNumber: number = null): Array<{ tab: number; slot: number }> {
+    let slots: Array<{ tab: number; slot: number }> = []
+    
+    for (let i = 0; i < p.data.inventory.length; i++) {
+        if (tabNumber !== null && i !== tabNumber) {
+            continue;
+        }
+
+        const tab = p.data.inventory[i];
+
+        // Go to next tab if inventory is full.
+        if (tab.length >= 28) {
+            continue;
+        }
+
+        // x is the free slot to assign the item
+        for (let x = 0; x < 27; x++) {
+            const itemIndex = tab.findIndex((item) => item.slot === x);
+            if (itemIndex >= 0) {
+                continue;
+            }
+
+            slots.push({ tab: i, slot: x });
+        }
+    }
+
+    return slots;
+}
+
+/**
  * If the player has an item type anywhere in their inventory.
  * @param {Partial<Item>} item
  */
@@ -1005,6 +1039,7 @@ export default {
     getAllWeapons,
     getEquipmentItem,
     getFreeInventorySlot,
+    getFreeInventorySlots,
     getInventoryItem,
     getSlotType,
     getToolbarItem,
