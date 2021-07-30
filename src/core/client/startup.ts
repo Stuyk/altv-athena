@@ -13,6 +13,7 @@ import './menus/animation';
 import './menus/player';
 // Systems
 import './systems/animations';
+import './systems/scenarios';
 import './systems/arrest';
 import './systems/athenaEvents';
 import './systems/blip';
