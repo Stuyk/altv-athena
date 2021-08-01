@@ -23,6 +23,9 @@ description: List of all the changes and current versions.
 + Added Ability to Purchase Properties
 + Added Ability to Lock / Unlock Properties
 + Added Ability to Sell Properties
++ Added New Input Menu
++ Added Ability to Set Property Price
++ Added Abiity to Set Property Name
 ```
 
 ## 2.0.2

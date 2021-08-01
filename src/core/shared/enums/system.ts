@@ -18,6 +18,8 @@ export enum SYSTEM_EVENTS {
     INTERIOR_PURCHASE = 'interior:Purchase',
     INTERIOR_ENTER = 'interior:Enter',
     INTERIOR_EXIT = 'interior:Exit',
+    INTERIOR_SET_NAME = 'interior:SetName',
+    INTERIOR_SET_PRICE = 'interior:SetPrice',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',

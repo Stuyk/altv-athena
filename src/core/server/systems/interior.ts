@@ -587,6 +587,26 @@ export class InteriorSystem {
     }
 
     /**
+     * Check if player has ownership of this interior.
+     * @static
+     * @param {alt.Player} player
+     * @param {Interior} interior
+     * @return {*}  {boolean}
+     * @memberof InteriorSystem
+     */
+    static isOwner(player: alt.Player, interior: Interior): boolean {
+        if (!player || !player.valid || player.data.isDead || !interior) {
+            return false;
+        }
+
+        if (interior.owners[0] && interior.owners[0] === player.data._id.toString()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Purchase an interior from another player.
      * @static
      * @param {alt.Player} player
@@ -610,8 +630,7 @@ export class InteriorSystem {
             return;
         }
 
-        if (interiors[index].owners[0] && interiors[index].owners[0] === player.data._id.toString()) {
-            playerFuncs.emit.notification(player, `~r~You cannot buy from yourself.`);
+        if (InteriorSystem.isOwner(player, interiors[index])) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -665,11 +684,116 @@ export class InteriorSystem {
         playerFuncs.emit.notification(player, `~p~Purchased Property ${interiors[index].id} for $${originalPrice}`);
         playerFuncs.emit.sound2D(player, 'item_purchase');
     }
+
+    /**
+     * Set the name of the interior. Requires Ownership.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} id
+     * @param {string} name
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async setName(player: alt.Player, id: number, name: string) {
+        if (!player || !player.valid || player.data.isDead || !id) {
+            return;
+        }
+
+        if (name.length >= 24) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (!index) {
+            return;
+        }
+
+        const dist = distance2d(player.pos, interiors[index].outsidePosition);
+        if (dist >= 5) {
+            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            return;
+        }
+
+        if (!InteriorSystem.isOwner(player, interiors[index])) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        interiors[index].name = name;
+        await Database.updatePartialData(
+            interiors[index]._id,
+            {
+                name: interiors[index].name
+            },
+            Collections.Interiors
+        );
+
+        InteriorSystem.refreshHouseText(interiors[index]);
+        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+    }
+
+    /**
+     * Set the sale price of an interior. Requires ownership.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} id
+     * @param {(string | number)} value
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async setPrice(player: alt.Player, id: number, value: number) {
+        if (!player || !player.valid || player.data.isDead || !id) {
+            return;
+        }
+
+        if (isNaN(value)) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        value = Math.abs(value);
+
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (!index) {
+            return;
+        }
+
+        if (!InteriorSystem.isOwner(player, interiors[index])) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        const dist = distance2d(player.pos, interiors[index].outsidePosition);
+        if (dist >= 5) {
+            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            return;
+        }
+
+        if (value <= -1) {
+            interiors[index].price = null;
+        } else {
+            interiors[index].price = value;
+        }
+
+        await Database.updatePartialData(
+            interiors[index]._id,
+            {
+                price: interiors[index].price
+            },
+            Collections.Interiors
+        );
+
+        InteriorSystem.refreshHouseText(interiors[index]);
+        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+    }
 }
 
 alt.onClient(SYSTEM_EVENTS.INTERIOR_TOGGLE_LOCK, InteriorSystem.toggleLock);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_ENTER, InteriorSystem.enter);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_EXIT, InteriorSystem.exit);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_PURCHASE, InteriorSystem.purchase);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_SET_NAME, InteriorSystem.setName);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_SET_PRICE, InteriorSystem.setPrice);
 
 InteriorSystem.init();

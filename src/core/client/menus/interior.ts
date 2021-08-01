@@ -6,6 +6,7 @@ import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { InputOptionType, InputResult, InputView } from '../views/input';
 
 function initialCheck(): boolean {
     if (alt.Player.local.vehicle) {
@@ -48,6 +49,78 @@ function enterMenu(interior: Interior) {
         options.push({
             name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
             callback: toggleLockFunc
+        });
+
+        options.push({
+            name: 'Set Sale Price',
+            callback: () => {
+                const InputMenu = {
+                    title: 'Sale Price',
+                    options: [
+                        {
+                            id: 'price',
+                            desc: 'Price (Use -1 to Cancel Sale)',
+                            type: InputOptionType.NUMBER,
+                            placeholder: '25000'
+                        }
+                    ],
+                    callback: (results: InputResult[]) => {
+                        // Re-show this menu if it fails to find the value.
+                        if (results.length <= 0) {
+                            InputView.show(InputMenu);
+                            return;
+                        }
+
+                        // Check that there is a result.
+                        const data = results.find((x) => x && x.id === 'price');
+                        if (!data) {
+                            InputView.show(InputMenu);
+                            return;
+                        }
+
+                        alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_PRICE, interior.id, parseInt(data.value));
+                    }
+                };
+
+                InputView.show(InputMenu);
+            }
+        });
+
+        options.push({
+            name: 'Set House Name',
+            callback: () => {
+                const InputMenu = {
+                    title: 'Set House Name',
+                    options: [
+                        {
+                            id: 'name',
+                            desc: 'Name to Display on House',
+                            type: InputOptionType.TEXT,
+                            placeholder: `Stuyks House`,
+                            regex: '^[a-zA-Z0-9 ]{1,24}$', // Matches 3 to 24 Characters
+                            error: '3-24 Characters. No Special Characters.'
+                        }
+                    ],
+                    callback: (results: InputResult[]) => {
+                        // Re-show this menu if it fails to find the value.
+                        if (results.length <= 0) {
+                            InputView.show(InputMenu);
+                            return;
+                        }
+
+                        // Check that there is a result.
+                        const data = results.find((x) => x && x.id === 'name');
+                        if (!data) {
+                            InputView.show(InputMenu);
+                            return;
+                        }
+
+                        alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_NAME, interior.id, data.value);
+                    }
+                };
+
+                InputView.show(InputMenu);
+            }
         });
     }
 
