@@ -4,13 +4,32 @@ import { Vector3 } from './Vector';
 
 export interface Interior {
     /**
-     * This is also the dimension for the interior.
-     * May need to be converted into a number.
+     * The database entry id for this interior
      * @type {unknown}
      * @memberof Interior
      */
     _id?: unknown;
+
+    /**
+     * The interior id for lookups.
+     * This is automatically generated. Do not apply this.
+     * @type {number}
+     * @memberof IVehicle
+     */
+    id?: number;
+
+    /**
+     * The location for the outside entrance to the inside.
+     * @type {Vector3}
+     * @memberof Interior
+     */
     outside: Vector3;
+
+    /**
+     * The location inside of an interior that leads to the outside.
+     * @type {Vector3}
+     * @memberof Interior
+     */
     inside: Vector3;
 
     /**

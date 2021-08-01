@@ -51,7 +51,7 @@ export class InteriorSystem {
         }
 
         const values = interiors.map((interior) => {
-            return parseInt(`${interior._id}`);
+            return interior.id;
         });
 
         // Start with index 1 because 0 is global dimension.
@@ -98,10 +98,10 @@ export class InteriorSystem {
         let outsideName = '';
 
         outsideName += `${interior.name}~n~`;
-        outsideName += `ID: ${interior._id}`;
+        outsideName += `ID: ${interior.id}`;
 
         MarkerController.append({
-            uid: `house-marker-outside-${interior._id}`,
+            uid: `house-marker-outside-${interior.id}`,
             maxDistance: 15,
             color: new alt.RGBA(255, 255, 255, 75),
             pos: groundOutside,
@@ -109,7 +109,7 @@ export class InteriorSystem {
         });
 
         TextLabelController.append({
-            uid: `house-text-outside-${interior._id}`,
+            uid: `house-text-outside-${interior.id}`,
             pos: aboveGroundOutside,
             data: outsideName,
             maxDistance: 10
@@ -119,13 +119,14 @@ export class InteriorSystem {
             description: `Try Door`,
             position: groundOutside,
             type: `interior`,
-            identifier: `house-outside-${interior._id}`,
-            data: [interior._id.toString()],
+            identifier: `house-outside-${interior.id}`,
+            data: [interior.id.toString()],
             callback: InteriorSystem.enter
         });
 
         // Propogate Cache Information
-        interiorData[interior._id.toString()] = {
+        interiorData[interior.id.toString()] = {
+            _id: interior._id,
             outside: outsideColShape,
             insidePosition: groundInside,
             outsidePosition: groundOutside,
@@ -155,11 +156,6 @@ export class InteriorSystem {
 
         if (!interior.outside) {
             console.error(new Error(`Interior did not have an outside position specified during creation.`));
-            return false;
-        }
-
-        if (interior._id) {
-            console.error(new Error(`Do not specify an _id for an interior during creation. Used ID: ${interior._id}`));
             return false;
         }
 
@@ -201,7 +197,8 @@ export class InteriorSystem {
             interior.objects = [];
         }
 
-        interior._id = InteriorSystem.getNextID();
+        // Auto generates the next ID or an ID to use for this interior.
+        interior.id = InteriorSystem.getNextID();
         const newInterior = await Database.insertData<Interior>(interior, Collections.Interiors, true);
         if (!newInterior) {
             return null;
@@ -212,7 +209,7 @@ export class InteriorSystem {
         interiors.push(newInterior);
         InteriorSystem.add(newInterior);
 
-        Logger.log(`Created New Interior at ${newInterior._id.toString()} with name ${newInterior.name}`);
+        Logger.log(`Created New Interior at ${newInterior.id.toString()} with name ${newInterior.name}`);
         return newInterior;
     }
 
@@ -269,7 +266,11 @@ export class InteriorSystem {
         }
 
         interiorData[id].objects.push(objectData);
-        await Database.updatePartialData(id, { objects: interiorData[id].objects }, Collections.Interiors);
+        await Database.updatePartialData(
+            interiorData[id]._id,
+            { objects: interiorData[id].objects },
+            Collections.Interiors
+        );
 
         interiorData[id].players.forEach((player) => {
             InteriorSystem.refreshInteriorForPlayer(player);
@@ -306,7 +307,11 @@ export class InteriorSystem {
             return;
         }
 
-        await Database.updatePartialData(id, { objects: interiorData[id].objects }, Collections.Interiors);
+        await Database.updatePartialData(
+            interiorData[id]._id,
+            { objects: interiorData[id].objects },
+            Collections.Interiors
+        );
 
         interiorData[id].players.forEach((player) => {
             InteriorSystem.refreshInteriorForPlayer(player);

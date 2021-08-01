@@ -12,6 +12,13 @@ description: List of all the changes and current versions.
 + Added Dimensions to Streamer
 + Added Objects to Interior System
 + Fix Fetching Dropped Items by Dimension
++ Added Optional Distance Ignoring for Holograms
++ Added Example Plugin for Character Interface Extension
++ Added Example Plugin for IVehicle Interface Extension
++ Completely Rewrite Vehicle Funcs
++ Vehicle data is now saved separately from the player.
++ Additional options for vehicle spawning and saving.
++ Vehicle spawn behavior changed.
 ```
 
 ## 2.0.2

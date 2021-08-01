@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Permissions } from '../../shared/flags/permissions';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { VehicleFunctions } from '../systems/vehicle';
+import { VehicleSystem } from '../systems/vehicle';
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
@@ -14,7 +14,7 @@ ChatController.addCommand(
             return;
         }
 
-        VehicleFunctions.toggleEngine(player);
+        VehicleSystem.toggleEngine(player);
     }
 );
 
@@ -27,7 +27,7 @@ ChatController.addCommand(
             return;
         }
 
-        VehicleFunctions.toggleLock(player);
+        VehicleSystem.toggleLock(player);
     }
 );
 
@@ -49,6 +49,6 @@ ChatController.addCommand(
             return;
         }
 
-        VehicleFunctions.toggleDoor(player, doorIndex);
+        VehicleSystem.toggleDoor(player, doorIndex);
     }
 );

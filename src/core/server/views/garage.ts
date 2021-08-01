@@ -1,22 +1,24 @@
 import * as alt from 'alt-server';
+
+import { View_Events_Garage } from '../../shared/enums/views';
+import { isVehicleType } from '../../shared/flags/vehicleType';
+import { VehicleData } from '../../shared/information/vehicles';
+import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { vehicleFuncs } from '../extensions/Vehicle';
+import { playerFuncs } from '../extensions/Player';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { BlipController } from '../systems/blip';
 import { InteractionController } from '../systems/interaction';
-import { sha256 } from '../utility/encryption';
-import { View_Events_Garage } from '../../shared/enums/views';
-import { playerFuncs } from '../extensions/Player';
-import { VehicleData } from '../../shared/information/vehicles';
-import { isVehicleType } from '../../shared/flags/vehicleType';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { MarkerController } from '../systems/marker';
+import { sha256 } from '../utility/encryption';
 
 const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
+const VehicleCache: { [id: string]: Array<IVehicle> } = {};
 
 interface PositionAndRotation {
     position: Vector3;
@@ -59,11 +61,12 @@ class GarageFunctions {
         }
     }
 
-    static open(player: alt.Player, shopIndex: number) {
+    static async open(player: alt.Player, shopIndex: number) {
         GarageUsers[player.id] = shopIndex;
 
         const garageType = DEFAULT_CONFIG.VEHICLE_GARAGES[shopIndex].type;
-        const validVehicles = player.data.vehicles.filter((vehicle) => {
+        const playerVehicles = await playerFuncs.get.allVehicles(player);
+        const validVehicles = playerVehicles.filter((vehicle) => {
             // Check if the VehicleData has this vehicle model.
             const data = VehicleData.find((dat) => dat.name === vehicle.model);
             if (!data) {
@@ -87,13 +90,14 @@ class GarageFunctions {
             }
 
             // Append vehicles that belong to the player to this list.
-            const spawnedVehicle = alt.Vehicle.all.find((ref) => ref && ref.data && ref.data.uid === vehicle.uid);
-            if (spawnedVehicle) {
+            if (VehicleFuncs.hasBeenSpawned(vehicle.id)) {
                 return true;
             }
 
             return false;
         });
+
+        VehicleCache[player.id] = validVehicles;
 
         if (validVehicles.length <= 0) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -149,24 +153,23 @@ class GarageFunctions {
         return null;
     }
 
-    static spawnVehicle(player: alt.Player, uid: string) {
+    static spawnVehicle(player: alt.Player, id: number) {
         if (!player || !player.valid || !player.data) {
             return;
         }
 
-        if (!player.data.vehicles) {
+        if (!VehicleCache[player.id] || VehicleCache[player.id].length <= 0) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
-        const data = player.data.vehicles.find((ref) => ref.uid === uid) as Vehicle;
+        const data = VehicleCache[player.id].find((ref) => `${ref.id.toString()}` === `${id}`);
         if (!data) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
-        const vehicle = alt.Vehicle.all.find((ref) => ref && ref.data && ref.data.uid === data.uid);
-        if (vehicle) {
+        if (VehicleFuncs.hasBeenSpawned(data.id)) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED));
             alt.emitClient(player, View_Events_Garage.Close);
@@ -186,7 +189,7 @@ class GarageFunctions {
 
         // Create and store the vehicle on the hashed vehicle parking spot.
         const hash = sha256(JSON.stringify(openSpot));
-        const newVehicle = vehicleFuncs.new.spawn(player, data, openSpot.position, openSpot.rotation);
+        const newVehicle = VehicleFuncs.spawn(data, openSpot.position, openSpot.rotation);
 
         if (!newVehicle) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -198,25 +201,22 @@ class GarageFunctions {
         alt.emitClient(player, View_Events_Garage.Close);
     }
 
-    static despawnVehicle(player: alt.Player, uid: string) {
+    /**
+     * Removes a vehicle if its close to the garage.
+     * Stores it in a garage.
+     * @static
+     * @param {alt.Player} player
+     * @param {unknown} id
+     * @return {*}
+     * @memberof GarageFunctions
+     */
+    static despawnVehicle(player: alt.Player, id: number) {
         if (!player || !player.valid || !player.data) {
             return;
         }
 
-        if (!player.data.vehicles) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        // Check that the vehicle belongs to the player.
-        const data = player.data.vehicles.find((ref) => ref.uid === uid);
-        if (!data) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        // Check that the vehicle is currently spawned.
-        const vehicle = alt.Vehicle.all.find((ref) => ref && ref.data && ref.data.uid === data.uid);
+        // Check that the vehicle is currently spawned and exists.
+        const vehicle = alt.Vehicle.all.find((ref) => ref && ref.data && `${ref.data.id}` === `${id}`);
         if (!vehicle) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
@@ -237,10 +237,10 @@ class GarageFunctions {
 
         // Set the garage index.
         vehicle.data.garageIndex = shopIndex;
-        vehicleFuncs.save.data(player, vehicle);
+        VehicleFuncs.save(vehicle, { garageIndex: vehicle.data.garageIndex });
 
         // After setting the garage index. Despawn the vehicle.
-        vehicleFuncs.new.despawn(vehicle.id, player);
+        VehicleFuncs.despawn(vehicle.data.id);
         playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 }

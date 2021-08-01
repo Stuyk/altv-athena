@@ -115,15 +115,6 @@ function water(player: alt.Player): void {
     playerFuncs.safe.addWater(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
 }
 
-function vehicles(player: alt.Player): void {
-    if (!player.data.vehicles) {
-        emit.meta(player, 'vehicles', []);
-        return;
-    }
-
-    emit.meta(player, 'vehicles', player.data.vehicles);
-}
-
 export default {
     appearance,
     currencyData,
@@ -132,7 +123,6 @@ export default {
     playTime,
     syncedMeta,
     time,
-    vehicles,
     water,
     weather
 };
