@@ -1,36 +1,28 @@
 import * as alt from 'alt-server';
-
-import { IObject } from '../../shared/interfaces/IObject';
+import { Interior } from '../../shared/interfaces/Interior';
 import { Vector3 } from '../../shared/interfaces/Vector';
 
-export interface InteriorInfo {
-    /**
-     * Database reference id.
-     * @type {unknown}
-     * @memberof InteriorInfo
-     */
-    _id: unknown;
-
+export interface InteriorInfo extends Interior {
     /**
      * The ColShape used to enter the interior.
      * @type {alt.Colshape}
      * @memberof InteriorInfo
      */
-    outside: alt.Colshape;
+    outsideShape?: alt.Colshape;
 
     /**
      * The position to use to initialize the inside ColShape.
      * @type {Vector3}
      * @memberof InteriorInfo
      */
-    insidePosition: Vector3;
+    insidePosition?: Vector3;
 
     /**
      * The position to use to initialize the outside ColShape.
      * @type {Vector3}
      * @memberof InteriorInfo
      */
-    outsidePosition: Vector3;
+    outsidePosition?: Vector3;
 
     /**
      * The ColShape used to exit the interior.
@@ -38,7 +30,7 @@ export interface InteriorInfo {
      * @type {alt.Colshape}
      * @memberof InteriorInfo
      */
-    inside?: alt.Colshape;
+    insideShape?: alt.Colshape;
 
     /**
      * The IPL to load if necessary when 'entering' the interior.
@@ -54,12 +46,5 @@ export interface InteriorInfo {
      * @type {Array<alt.Player>}
      * @memberof InteriorInfo
      */
-    players: Array<alt.Player>;
-
-    /**
-     * Objects to create / delete in the interior.
-     * @type {Array<IObject>}
-     * @memberof InteriorInfo
-     */
-    objects: Array<IObject>;
+    players?: Array<alt.Player>;
 }

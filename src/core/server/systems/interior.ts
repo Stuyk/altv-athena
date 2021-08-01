@@ -5,6 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/interiorFlags';
 import { Interior } from '../../shared/interfaces/Interior';
 import { IObject } from '../../shared/interfaces/IObject';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
@@ -16,8 +17,7 @@ import { MarkerController } from './marker';
 import { ObjectController } from './object';
 import { TextLabelController } from './textlabel';
 
-let interiors: Array<Interior> = [];
-let interiorData: { [id: string]: InteriorInfo } = {};
+let interiors: Array<InteriorInfo> = [];
 let isReady = false;
 
 export class InteriorSystem {
@@ -27,15 +27,15 @@ export class InteriorSystem {
      * @memberof InteriorSystem
      */
     static async init() {
-        interiors = await Database.fetchAllData<Interior>(Collections.Interiors);
+        const currentInteriors = await Database.fetchAllData<Interior>(Collections.Interiors);
 
-        if (!Array.isArray(interiors)) {
+        if (!Array.isArray(currentInteriors)) {
             interiors = [];
         }
 
-        for (let i = 0; i < interiors.length; i++) {
-            interiors[i]._id = interiors[i]._id.toString(); // Convert Interior IDs to String
-            InteriorSystem.add(interiors[i]);
+        for (let i = 0; i < currentInteriors.length; i++) {
+            currentInteriors[i]._id = currentInteriors[i]._id.toString(); // Convert Interior IDs to String
+            InteriorSystem.add(currentInteriors[i]);
         }
 
         isReady = true;
@@ -127,16 +127,15 @@ export class InteriorSystem {
             callback: InteriorSystem.enter
         });
 
-        // Propogate Cache Information
-        interiorData[interior.id.toString()] = {
-            _id: interior._id,
-            outside: outsideColShape,
+        interiors.push({
+            ...interior,
+            outsideShape: outsideColShape,
             insidePosition: groundInside,
             outsidePosition: groundOutside,
             ipl: interior.ipl,
             players: [],
             objects: interior.objects ? interior.objects : []
-        };
+        });
     }
 
     /**
@@ -227,12 +226,11 @@ export class InteriorSystem {
             return;
         }
 
-        if (!interiorData[player.data.interior]) {
-            throw new Error(`Could not refresh interior objects for ${player.data.interior}`);
+        const interior = interiors.find((ref) => `${ref.id}` === `${player.data.interior}`);
+        if (!interior) {
+            return;
         }
 
-        alt.log(`Refreshing interior for ${player.data.name}`);
-        const interior = interiorData[player.data.interior];
         const objects = interior.objects;
 
         for (let i = 0; i < objects.length; i++) {
@@ -258,24 +256,21 @@ export class InteriorSystem {
      * @memberof InteriorSystem
      */
     static async addObject(id: string, objectData: IObject): Promise<string> {
-        if (!interiorData[id]) {
-            throw new Error(`Could not add interior object for interior ${id}`);
+        const interior = interiors.find((ref) => `${ref.id}` === `${id}`);
+        if (!interior) {
+            return null;
         }
 
-        const index = interiorData[id].objects.findIndex((x) => x.uid === objectData.uid);
+        const index = interior.objects.findIndex((x) => x.uid === objectData.uid);
         if (index !== -1) {
             Logger.warning(`Please Use Unique Identifiers for Interior Objects. ${objectData.uid}`);
             objectData.uid = `${objectData.uid}${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}`;
         }
 
-        interiorData[id].objects.push(objectData);
-        await Database.updatePartialData(
-            interiorData[id]._id,
-            { objects: interiorData[id].objects },
-            Collections.Interiors
-        );
+        interior.objects.push(objectData);
+        await Database.updatePartialData(interior._id, { objects: interior.objects }, Collections.Interiors);
 
-        interiorData[id].players.forEach((player) => {
+        interior.players.forEach((player) => {
             InteriorSystem.refreshInteriorForPlayer(player);
         });
 
@@ -290,19 +285,20 @@ export class InteriorSystem {
      * @memberof InteriorSystem
      */
     static async removeObject(id: string, uid: string) {
-        if (!interiorData[id]) {
-            throw new Error(`Could not add interior object for interior ${id}`);
+        const interior = interiors.find((ref) => `${ref.id}` === `${id}`);
+        if (!interior) {
+            return;
         }
 
         let wasModified = false;
 
-        for (let i = interiorData[id].objects.length - 1; i >= 0; i--) {
-            if (interiorData[id].objects[i].uid !== uid) {
+        for (let i = interior.objects.length - 1; i >= 0; i--) {
+            if (interior.objects[i].uid !== uid) {
                 continue;
             }
 
             wasModified = true;
-            interiorData[id].objects.splice(i, 1);
+            interior.objects.splice(i, 1);
             break;
         }
 
@@ -310,13 +306,8 @@ export class InteriorSystem {
             return;
         }
 
-        await Database.updatePartialData(
-            interiorData[id]._id,
-            { objects: interiorData[id].objects },
-            Collections.Interiors
-        );
-
-        interiorData[id].players.forEach((player) => {
+        await Database.updatePartialData(interior._id, { objects: interior.objects }, Collections.Interiors);
+        interior.players.forEach((player) => {
             InteriorSystem.refreshInteriorForPlayer(player);
         });
     }
@@ -329,19 +320,22 @@ export class InteriorSystem {
      * @memberof InteriorSystem
      */
     static async enter(player: alt.Player, id: string, doNotTeleport = false) {
-        if (!player || !player.valid) {
+        if (!player || !player.valid || player.data.isDead || !id) {
             return;
         }
 
-        if (player.data.isDead) {
+        const interior = interiors.find((ref) => `${ref.id}` === `${id}`);
+        if (!interior) {
             return;
         }
 
-        if (!id) {
+        const dist = distance2d(player.pos, interior.outsidePosition);
+        if (dist >= 5) {
+            playerFuncs.emit.notification(player, `Too far from entrance.`);
             return;
         }
 
-        if (!interiorData[id]) {
+        if (!interior) {
             // Small case where an interior just no longer exists.
             if (doNotTeleport) {
                 Logger.error(`Interior with ID: ${id} did not exist. Moved ${player.data.name} to spawn.`);
@@ -356,9 +350,8 @@ export class InteriorSystem {
             return;
         }
 
-        const interior = interiorData[id];
-        if (!interior.inside) {
-            interior.inside = InteractionController.add({
+        if (!interior.insideShape) {
+            interior.insideShape = InteractionController.add({
                 description: `Try Door`,
                 position: interior.insidePosition,
                 type: `interior`,
@@ -423,23 +416,21 @@ export class InteriorSystem {
      * @memberof InteriorSystem
      */
     static async exit(player: alt.Player, id: string) {
-        if (!player || !player.valid) {
+        if (!player || !player.valid || player.data.isDead || !id) {
             return;
         }
 
-        if (player.data.isDead) {
+        const interior = interiors.find((ref) => `${ref.id}` === `${id}`);
+        if (!interior) {
             return;
         }
 
-        if (!id) {
+        const dist = distance2d(player.pos, interior.insidePosition);
+        if (dist >= 5) {
+            playerFuncs.emit.notification(player, `Too far from exit.`);
             return;
         }
 
-        if (!interiorData[id]) {
-            return;
-        }
-
-        const interior = interiorData[id];
         playerFuncs.safe.setDimension(player, 0);
         playerFuncs.safe.setPosition(
             player,
