@@ -45,6 +45,14 @@ export enum View_Events_Garage {
     Close = 'garage:Close'
 }
 
+export enum View_Events_Storage {
+    Open = 'storage:Open',
+    MoveFromPlayer = 'storage:MoveFromPlayer',
+    MoveFromStorage = 'storage:MoveFromStorage',
+    Refresh = 'storage:Refresh',
+    Close = 'storage:Close'
+}
+
 export enum View_Events_Dealership {
     Open = 'dealership:Open',
     Purchase = 'dealership:Purchase'

@@ -59,3 +59,4 @@ import './views/hud/hud';
 import './views/inventory';
 import './views/job';
 import './views/login';
+import './views/storage';

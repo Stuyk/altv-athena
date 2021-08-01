@@ -23,6 +23,10 @@ import { MarkerController } from './marker';
 import { ObjectController } from './object';
 import { TextLabelController } from './textlabel';
 
+import './storage';
+import { StorageSystem } from './storage';
+import { StorageView } from '../views/storage';
+
 const ONE_BILLION = 1000000000;
 const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
 const NEW_LINE = `~n~`;
@@ -229,7 +233,6 @@ export class InteriorSystem {
 
         if (!InteriorSystem.verifyInteriorData(interior)) {
             Logger.warning(`Interior data verification is invalid for`);
-            console.log(interior);
             return null;
         }
 
@@ -243,10 +246,6 @@ export class InteriorSystem {
 
         if (!interior.owners) {
             interior.owners = [];
-        }
-
-        if (!interior.storage) {
-            interior.storage = [];
         }
 
         if (!interior.objects) {
@@ -415,7 +414,7 @@ export class InteriorSystem {
             return;
         }
 
-        const data = deepCloneObject(interior) as InteriorInfo;
+        const data = deepCloneObject<InteriorInfo>(interior);
         delete data.players;
         delete data.factions;
         delete data.storage;
@@ -623,7 +622,7 @@ export class InteriorSystem {
         }
 
         const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
-        if (!index) {
+        if (index <= -1) {
             return;
         }
 
@@ -708,7 +707,7 @@ export class InteriorSystem {
         }
 
         const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
-        if (!index) {
+        if (index <= -1) {
             return;
         }
 
@@ -763,7 +762,7 @@ export class InteriorSystem {
         }
 
         const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
-        if (!index) {
+        if (index <= -1) {
             return;
         }
 
@@ -795,6 +794,49 @@ export class InteriorSystem {
         InteriorSystem.refreshHouseText(interiors[index]);
         playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
+
+    /**
+     * Open storage for the interior. If allowed.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} id
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async storage(player: alt.Player, id: number) {
+        if (!player || !player.valid || player.data.isDead || !id) {
+            return;
+        }
+
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (index <= -1) {
+            return;
+        }
+
+        if (!InteriorSystem.isOwner(player, interiors[index])) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!isFlagEnabled(interiors[index].system, INTERIOR_SYSTEM.HAS_STORAGE)) {
+            playerFuncs.emit.notification(player, `Interior does not have storage.`);
+            return;
+        }
+
+        let storageID: string;
+
+        // Remove array. Make it a string reference to the storage box.
+        if (!interiors[index].storage || Array.isArray(interiors[index].storage)) {
+            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: 28 });
+            storageID = storage._id.toString();
+            interiors[index].storage = storageID;
+            await Database.updatePartialData(interiors[index]._id, { storage: storageID }, Collections.Interiors);
+        } else {
+            storageID = interiors[index].storage;
+        }
+
+        StorageView.open(player, storageID, `Interior - ${interiors[index].id} - Storage`);
+    }
 }
 
 alt.onClient(SYSTEM_EVENTS.INTERIOR_TOGGLE_LOCK, InteriorSystem.toggleLock);
@@ -803,5 +845,6 @@ alt.onClient(SYSTEM_EVENTS.INTERIOR_EXIT, InteriorSystem.exit);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_PURCHASE, InteriorSystem.purchase);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_SET_NAME, InteriorSystem.setName);
 alt.onClient(SYSTEM_EVENTS.INTERIOR_SET_PRICE, InteriorSystem.setPrice);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_STORAGE, InteriorSystem.storage);
 
 InteriorSystem.init();

@@ -7,5 +7,13 @@
  * @return {*}
  */
 export function deepCloneObject<T>(data: object): T {
-    return JSON.parse(JSON.stringify(data));
+    const result = JSON.parse(JSON.stringify(data));
+
+    Object.keys(result).forEach((key) => {
+        if (typeof result[key] === 'function') {
+            delete result[key];
+        }
+    });
+
+    return result;
 }

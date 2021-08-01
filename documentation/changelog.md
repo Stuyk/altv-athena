@@ -26,6 +26,9 @@ description: List of all the changes and current versions.
 + Added New Input Menu
 + Added Ability to Set Property Price
 + Added Abiity to Set Property Name
++ Added Storage System
++ Added Storage Collection
++ Added Storage Containers for Interiors
 ```
 
 ## 2.0.2

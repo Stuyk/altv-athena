@@ -1,5 +1,6 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/VehicleOwnershipFlags';
+import { IStorage } from './IStorage';
 import { Vector3 } from './Vector';
 
 export interface IVehicle {
@@ -111,6 +112,13 @@ export interface IVehicle {
      * @memberof IVehicle
      */
     lastUsed?: number;
+
+    /**
+     * The trunk of the vehicle can hand these items.
+     * @type {IStorage}
+     * @memberof IVehicle
+     */
+    storage?: IStorage;
 
     /**
      * Simply what colour is this vehicle?

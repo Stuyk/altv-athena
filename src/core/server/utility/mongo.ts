@@ -10,7 +10,8 @@ const DEFAULT_COLLECTIONS: string[] = [
     Collections.Characters,
     Collections.Options,
     Collections.Interiors,
-    Collections.Vehicles
+    Collections.Vehicles,
+    Collections.Storage
 ];
 
 export default {

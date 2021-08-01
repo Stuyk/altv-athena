@@ -20,6 +20,7 @@ export enum SYSTEM_EVENTS {
     INTERIOR_EXIT = 'interior:Exit',
     INTERIOR_SET_NAME = 'interior:SetName',
     INTERIOR_SET_PRICE = 'interior:SetPrice',
+    INTERIOR_STORAGE = 'interior:Storage',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',

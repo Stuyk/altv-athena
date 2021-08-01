@@ -63,11 +63,11 @@ export interface Interior {
     factions?: Array<number>;
 
     /**
-     * Items that can be stored into the interior and are accessible by faction(s) or owner(s).
-     * @type {Array<Item>}
+     * The associated storage container with this interior.
+     * @type {string}
      * @memberof Interior
      */
-    storage?: Array<Item>;
+    storage?: string;
 
     /**
      * Objects to give to the client who enters the interior.

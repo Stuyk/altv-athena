@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
@@ -13,12 +12,12 @@ import { Collections } from '../interface/DatabaseCollections';
 import { DiscordUser } from '../interface/DiscordUser';
 import Ares from '../utility/ares';
 import { goToCharacterSelect } from '../views/characters';
-import { EventController } from './athenaEvent';
-import { OptionsController } from './options';
-
 import '../views/login';
+import { StorageView } from '../views/storage';
+import { EventController } from './athenaEvent';
 import './job';
 import './marker';
+import { OptionsController } from './options';
 import './textlabel';
 import './tick';
 import './voice';
@@ -96,6 +95,7 @@ export class LoginController {
             return;
         }
 
+        StorageView.removeStorageBinding(player.id);
         VehicleFuncs.despawnAll(LoginController.getDatabaseIdForPlayer(player.id));
 
         if (!player.data.name) {

@@ -263,10 +263,6 @@ export class HudSystem {
             return;
         }
 
-        if (alt.Player.local.isWheelMenuOpen) {
-            return;
-        }
-
         if (isUpdating) {
             return;
         }

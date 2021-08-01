@@ -6,6 +6,7 @@ description: Learn how to add items to your game mode.
 - [Adding Items- Keywords and Inventory Syntax](#adding-items--keywords-and-inventory-syntax)
 - [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
 - [Difference Between Slot and Index](#difference-between-slot-and-index)
+- [Using Inventory Functions](#using-inventory-functions)
 - [Deep Cloning Objects](#deep-cloning-objects)
 - [Add / Create Items](#add--create-items)
   - [Giving Players Items](#giving-players-items)
@@ -73,6 +74,14 @@ If the function returns a slot for an inventory item. Then it means you need to 
 
 ```ts
 const item = player.data.inventory[someTabNumber].find(x => x.slot === someSlotNumber);
+```
+
+# Using Inventory Functions
+
+The inventory does not always save after each update. If you use any inventory functions you should be throwing a save.
+
+```ts
+playerFuncs.save.field(player, 'inventory', player.data.inventory);
 ```
 
 # Deep Cloning Objects

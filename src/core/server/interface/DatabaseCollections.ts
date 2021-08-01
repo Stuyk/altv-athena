@@ -3,5 +3,6 @@ export enum Collections {
     Characters = 'characters',
     Interiors = 'interiors',
     Options = 'options',
-    Vehicles = 'vehicles'
+    Vehicles = 'vehicles',
+    Storage = 'storage'
 }

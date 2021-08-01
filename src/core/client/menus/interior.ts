@@ -162,6 +162,13 @@ function exitMenu(interior: Interior) {
             name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
             callback: toggleLockFunc
         });
+
+        options.push({
+            name: 'Storage',
+            callback: () => {
+                alt.emitServer(SYSTEM_EVENTS.INTERIOR_STORAGE, interior.id);
+            }
+        });
     }
 
     options.push({
