@@ -23,6 +23,7 @@ import { MarkerController } from './marker';
 import { ObjectController } from './object';
 import { TextLabelController } from './textlabel';
 
+const ONE_BILLION = 1000000000;
 const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
 const NEW_LINE = `~n~`;
 
@@ -149,7 +150,7 @@ export class InteriorSystem {
         const groundOutside = {
             x: interior.outside.x,
             y: interior.outside.y,
-            z: interior.outside.z - 1
+            z: interior.outside.z - 0.5
         };
 
         const groundInside = {
@@ -161,8 +162,9 @@ export class InteriorSystem {
         MarkerController.append({
             uid: `house-marker-outside-${interior.id}`,
             maxDistance: 15,
-            color: new alt.RGBA(255, 255, 255, 75),
+            color: new alt.RGBA(255, 255, 0, 75),
             pos: groundOutside,
+            scale: { x: 0.25, y: 0.25, z: 0.25 },
             type: 0
         });
 
@@ -483,10 +485,11 @@ export class InteriorSystem {
             MarkerController.append({
                 uid: `house-marker-inside-${id}`,
                 maxDistance: 15,
-                color: new alt.RGBA(255, 255, 255, 75),
+                color: new alt.RGBA(255, 255, 0, 75),
                 pos: interior.insidePosition,
                 type: 0,
-                dimension: id
+                dimension: id,
+                scale: { x: 0.25, y: 0.25, z: 0.5 }
             });
         }
 
@@ -753,6 +756,11 @@ export class InteriorSystem {
         }
 
         value = Math.abs(value);
+
+        if (value > ONE_BILLION) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
 
         const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
         if (!index) {
