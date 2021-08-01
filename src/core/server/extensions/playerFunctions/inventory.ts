@@ -31,7 +31,7 @@ function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: n
         }
 
         // x is the free slot to assign the item
-        for (let x = 0; x < 27; x++) {
+        for (let x = 0; x <= 27; x++) {
             const itemIndex = tab.findIndex((item) => item.slot === x);
             if (itemIndex >= 0) {
                 continue;
@@ -65,7 +65,7 @@ function getFreeInventorySlots(p: alt.Player, tabNumber: number = null): Array<{
         }
 
         // x is the free slot to assign the item
-        for (let x = 0; x < 27; x++) {
+        for (let x = 0; x <= 27; x++) {
             const itemIndex = tab.findIndex((item) => item.slot === x);
             if (itemIndex >= 0) {
                 continue;
