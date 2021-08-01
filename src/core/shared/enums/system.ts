@@ -13,6 +13,11 @@ export enum SYSTEM_EVENTS {
     HOLOGRAM_APPEND = 'hologram:Append',
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
+    INTERIOR_SHOW_MENU = 'interior:Open:Menu',
+    INTERIOR_TOGGLE_LOCK = 'interior:Toggle:Lock',
+    INTERIOR_PURCHASE = 'interior:Purchase',
+    INTERIOR_ENTER = 'interior:Enter',
+    INTERIOR_EXIT = 'interior:Exit',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',

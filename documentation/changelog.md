@@ -20,6 +20,9 @@ description: List of all the changes and current versions.
 + Additional options for vehicle spawning and saving.
 + Vehicle spawn behavior changed.
 + Standardize Flags for Everything
++ Added Ability to Purchase Properties
++ Added Ability to Lock / Unlock Properties
++ Added Ability to Sell Properties
 ```
 
 ## 2.0.2

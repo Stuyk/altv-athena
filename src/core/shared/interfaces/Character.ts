@@ -98,7 +98,7 @@ export interface Character {
      * @type {(string | null)}
      * @memberof Character
      */
-    interior: string | null;
+    interior: number;
 
     /**
      * Wanted stars to display.

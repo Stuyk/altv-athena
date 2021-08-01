@@ -51,7 +51,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 
         // Force the player into the interior they were last in.
         if (player.data.interior) {
-            InteriorSystem.enter(player, player.data.interior, true);
+            InteriorSystem.enter(player, player.data.interior, true, true);
         }
 
         // Check if health exists.
@@ -94,6 +94,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
         player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
         player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
+        player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, player.data._id.toString());
 
         // Information
         const hour = `${World.hour}`.length <= 1 ? `0${World.hour}` : `${World.hour}`;

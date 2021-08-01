@@ -1,10 +1,15 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
+import { CurrencyTypes } from '../../shared/enums/currency';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/interiorFlags';
+import { Character } from '../../shared/interfaces/Character';
 import { Interior } from '../../shared/interfaces/Interior';
 import { IObject } from '../../shared/interfaces/IObject';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
@@ -12,10 +17,14 @@ import { Collections } from '../interface/DatabaseCollections';
 import { InteriorInfo } from '../interface/InteriorInfo';
 import Logger from '../utility/athenaLogger';
 import { getMissingNumber } from '../utility/math';
+import { EventController } from './athenaEvent';
 import { InteractionController } from './interaction';
 import { MarkerController } from './marker';
 import { ObjectController } from './object';
 import { TextLabelController } from './textlabel';
+
+const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
+const NEW_LINE = `~n~`;
 
 let interiors: Array<InteriorInfo> = [];
 let isReady = false;
@@ -59,16 +68,73 @@ export class InteriorSystem {
         return getMissingNumber(values, 1);
     }
 
-    static createDefaultInteriors() {
+    static async createDefaultInteriors() {
         // This only gets inserted into the database once.
         // Any additional changes have be removed / updated whatever.
-        InteriorSystem.create({
+        await InteriorSystem.create({
             name: 'Diamond Resorts Casino',
             outside: { x: 935.1909790039062, y: 46.17036819458008, z: 81.09584045410156 },
             inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 },
             objects: [],
             system: INTERIOR_SYSTEM.NONE,
             type: INTERIOR_TYPES.SYSTEM
+        });
+
+        // This is an example house.
+        await InteriorSystem.create({
+            name: 'Some Cool House',
+            outside: { x: -841.6432495117188, y: -24.96125030517578, z: 40.39847183227539 },
+            inside: new alt.Vector3(-786.8663, 315.7642, 217.6385),
+            type: INTERIOR_TYPES.HOUSE,
+            system:
+                INTERIOR_SYSTEM.HAS_LOCK |
+                INTERIOR_SYSTEM.HAS_OWNER |
+                INTERIOR_SYSTEM.HAS_PRICE |
+                INTERIOR_SYSTEM.HAS_STORAGE,
+            ipl: 'apa_v_mp_h_01_a',
+            price: 25000,
+            isUnlocked: true
+        });
+    }
+
+    /**
+     * Generates text to display outside based on interior properties.
+     * Refreshes label if present.
+     * @private
+     * @static
+     * @param {Interior} interior
+     * @memberof InteriorSystem
+     */
+    private static refreshHouseText(interior: Interior): void {
+        // Begin Outside Text Label Information
+        let outsideName = '';
+
+        outsideName += `${interior.name}`;
+        outsideName += NEW_LINE;
+        outsideName += `ID: ${interior.id}`;
+
+        if (!interior.isUnlocked) {
+            outsideName += NEW_LINE;
+            outsideName += `~r~Locked~w~`;
+        }
+
+        if (interior.price >= 1) {
+            outsideName += NEW_LINE;
+            outsideName += `~g~Price: $${interior.price}~w~`;
+        }
+
+        const aboveGroundOutside = {
+            x: interior.outside.x,
+            y: interior.outside.y,
+            z: interior.outside.z + 0.75
+        };
+
+        TextLabelController.remove(`${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`);
+        TextLabelController.append({
+            uid: `${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`,
+            pos: aboveGroundOutside,
+            data: outsideName,
+            maxDistance: 10
         });
     }
 
@@ -86,22 +152,11 @@ export class InteriorSystem {
             z: interior.outside.z - 1
         };
 
-        const aboveGroundOutside = {
-            x: interior.outside.x,
-            y: interior.outside.y,
-            z: interior.outside.z + 0.75
-        };
-
         const groundInside = {
             x: interior.inside.x,
             y: interior.inside.y,
             z: interior.inside.z - 0.5
         };
-
-        let outsideName = '';
-
-        outsideName += `${interior.name}~n~`;
-        outsideName += `ID: ${interior.id}`;
 
         MarkerController.append({
             uid: `house-marker-outside-${interior.id}`,
@@ -111,21 +166,16 @@ export class InteriorSystem {
             type: 0
         });
 
-        TextLabelController.append({
-            uid: `house-text-outside-${interior.id}`,
-            pos: aboveGroundOutside,
-            data: outsideName,
-            maxDistance: 10
-        });
-
         const outsideColShape = InteractionController.add({
-            description: `Try Door`,
+            description: `Open Interior Menu`,
             position: groundOutside,
             type: `interior`,
             identifier: `house-outside-${interior.id}`,
-            data: [interior.id.toString()],
-            callback: InteriorSystem.enter
+            data: [interior.id, true],
+            callback: InteriorSystem.showMenu
         });
+
+        InteriorSystem.refreshHouseText(interior);
 
         interiors.push({
             ...interior,
@@ -176,6 +226,8 @@ export class InteriorSystem {
         }
 
         if (!InteriorSystem.verifyInteriorData(interior)) {
+            Logger.warning(`Interior data verification is invalid for`);
+            console.log(interior);
             return null;
         }
 
@@ -208,8 +260,7 @@ export class InteriorSystem {
 
         // Update the Array
         newInterior._id = newInterior._id.toString(); // Convert Interior ID to String
-        interiors.push(newInterior);
-        InteriorSystem.add(newInterior);
+        await InteriorSystem.add(newInterior);
 
         Logger.log(`Created New Interior at ${newInterior.id.toString()} with name ${newInterior.name}`);
         return newInterior;
@@ -313,13 +364,46 @@ export class InteriorSystem {
     }
 
     /**
-     * Called when a player is 'entering' an interior.
-     * This can also be called when the player is logging in.
+     * Toggle a lock for the closest interior.
      * @static
      * @param {alt.Player} player
+     * @param {number} id
      * @memberof InteriorSystem
      */
-    static async enter(player: alt.Player, id: string, doNotTeleport = false) {
+    static async toggleLock(player: alt.Player, id: number) {
+        if (!player || !player.valid || !player.data || player.data.isDead || !id) {
+            return;
+        }
+
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (index <= -1) {
+            return;
+        }
+
+        if (!interiors[index].owners.find((x) => x === player.data._id.toString())) {
+            return;
+        }
+
+        // Change Lock Status
+        interiors[index].isUnlocked = !interiors[index].isUnlocked;
+        InteriorSystem.refreshHouseText(interiors[index]);
+        alt.emit(ATHENA_EVENTS_PLAYER.TOGGLED_INTERIOR_LOCK, player, id, interiors[index].isUnlocked);
+        await Database.updatePartialData(
+            interiors[index]._id,
+            { isUnlocked: interiors[index].isUnlocked },
+            Collections.Interiors
+        );
+    }
+
+    /**
+     * Called when the player interacts with an outside interaction interior point.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} id
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static showMenu(player: alt.Player, id: number, isOutside: boolean = true) {
         if (!player || !player.valid || player.data.isDead || !id) {
             return;
         }
@@ -329,9 +413,44 @@ export class InteriorSystem {
             return;
         }
 
-        const dist = distance2d(player.pos, interior.outsidePosition);
-        if (dist >= 5) {
-            playerFuncs.emit.notification(player, `Too far from entrance.`);
+        const data = deepCloneObject(interior) as InteriorInfo;
+        delete data.players;
+        delete data.factions;
+        delete data.storage;
+        delete data.insideShape;
+        delete data.outsideShape;
+        delete data.ipl;
+
+        alt.emitClient(player, SYSTEM_EVENTS.INTERIOR_SHOW_MENU, interior, isOutside);
+    }
+
+    /**
+     * Called when a player is 'entering' an interior.
+     * This can also be called when the player is logging in.
+     * @static
+     * @param {alt.Player} player
+     * @memberof InteriorSystem
+     */
+    static async enter(player: alt.Player, id: number, doNotTeleport = false, skipDistanceCheck = false) {
+        if (!player || !player.valid || player.data.isDead || !id) {
+            return;
+        }
+
+        const interior = interiors.find((ref) => `${ref.id}` === `${id}`);
+        if (!interior) {
+            return;
+        }
+
+        if (!skipDistanceCheck) {
+            const dist = distance2d(player.pos, interior.outsidePosition);
+            if (dist >= 5) {
+                playerFuncs.emit.notification(player, `Too far from entrance.`);
+                return;
+            }
+        }
+
+        if (isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_LOCK) && !interior.isUnlocked) {
+            playerFuncs.emit.notification(player, `Door is locked.`);
             return;
         }
 
@@ -352,13 +471,13 @@ export class InteriorSystem {
 
         if (!interior.insideShape) {
             interior.insideShape = InteractionController.add({
-                description: `Try Door`,
+                description: `Open Interior Menu`,
                 position: interior.insidePosition,
                 type: `interior`,
                 identifier: `house-inside-${id}`,
-                data: [id],
-                callback: InteriorSystem.exit,
-                dimension: parseInt(id)
+                data: [interior.id, false],
+                callback: InteriorSystem.showMenu,
+                dimension: id
             });
 
             MarkerController.append({
@@ -367,7 +486,7 @@ export class InteriorSystem {
                 color: new alt.RGBA(255, 255, 255, 75),
                 pos: interior.insidePosition,
                 type: 0,
-                dimension: parseInt(id)
+                dimension: id
             });
         }
 
@@ -375,7 +494,7 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
         }
 
-        playerFuncs.safe.setDimension(player, parseInt(id));
+        playerFuncs.safe.setDimension(player, id);
 
         // Added solely for synchronizing interior for player's who
         // logged out inside of an interior.
@@ -407,6 +526,7 @@ export class InteriorSystem {
         player.data.interior = id;
         InteriorSystem.refreshInteriorForPlayer(player);
         playerFuncs.save.field(player, 'interior', id);
+        alt.emit(ATHENA_EVENTS_PLAYER.ENTERED_INTERIOR, player, id);
     }
 
     /**
@@ -415,7 +535,7 @@ export class InteriorSystem {
      * @param {alt.Player} player
      * @memberof InteriorSystem
      */
-    static async exit(player: alt.Player, id: string) {
+    static async exit(player: alt.Player, id: number) {
         if (!player || !player.valid || player.data.isDead || !id) {
             return;
         }
@@ -461,9 +581,95 @@ export class InteriorSystem {
 
         // Clear Interior Info for Player
         InteriorSystem.refreshInteriorForPlayer(player);
-        player.data.interior = '0';
+        player.data.interior = 0;
         playerFuncs.save.field(player, 'interior', null);
+        alt.emit(ATHENA_EVENTS_PLAYER.LEFT_INTERIOR, player, id);
+    }
+
+    /**
+     * Purchase an interior from another player.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} id
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async purchase(player: alt.Player, id: number) {
+        if (!player || !player.valid || player.data.isDead || !id) {
+            return;
+        }
+
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (!index) {
+            return;
+        }
+
+        const dist = distance2d(player.pos, interiors[index].outsidePosition);
+        if (dist >= 5) {
+            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            return;
+        }
+
+        if (interiors[index].owners[0] && interiors[index].owners[0] === player.data._id.toString()) {
+            playerFuncs.emit.notification(player, `~r~You cannot buy from yourself.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (player.data.bank + player.data.cash < interiors[index].price) {
+            playerFuncs.emit.notification(player, `~r~Not Enough Currency`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!playerFuncs.currency.subAllCurrencies(player, interiors[index].price)) {
+            playerFuncs.emit.notification(player, `~r~Not Enough Currency`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        const originalOwner = interiors[index].owners[0];
+        const originalPrice = interiors[index].price;
+
+        interiors[index].owners = [player.data._id.toString()];
+        interiors[index].factions = [];
+        interiors[index].price = null;
+
+        // Add Cash to Original Owner
+        if (originalOwner) {
+            const target = alt.Player.all.find((x) => x && x.data && x.data._id.toString() === originalOwner);
+
+            if (target) {
+                playerFuncs.currency.add(target, CurrencyTypes.BANK, originalPrice);
+                playerFuncs.emit.sound2D(target, 'item_purchase');
+                playerFuncs.emit.notification(target, `~g~Sold ${interiors[index].id} for $${originalPrice}`);
+            } else {
+                const targetData = await Database.fetchData<Character>(`_id`, originalOwner, Collections.Characters);
+                targetData.bank += originalPrice;
+                await Database.updatePartialData(originalOwner, { bank: targetData.bank }, Collections.Characters);
+            }
+        }
+
+        await Database.updatePartialData(
+            interiors[index]._id,
+            {
+                isUnlocked: interiors[index].isUnlocked,
+                price: interiors[index].price,
+                owners: interiors[index].owners,
+                factions: interiors[index].factions
+            },
+            Collections.Interiors
+        );
+
+        InteriorSystem.refreshHouseText(interiors[index]);
+        playerFuncs.emit.notification(player, `~p~Purchased Property ${interiors[index].id} for $${originalPrice}`);
+        playerFuncs.emit.sound2D(player, 'item_purchase');
     }
 }
+
+alt.onClient(SYSTEM_EVENTS.INTERIOR_TOGGLE_LOCK, InteriorSystem.toggleLock);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_ENTER, InteriorSystem.enter);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_EXIT, InteriorSystem.exit);
+alt.onClient(SYSTEM_EVENTS.INTERIOR_PURCHASE, InteriorSystem.purchase);
 
 InteriorSystem.init();

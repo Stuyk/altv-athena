@@ -21,7 +21,10 @@ export enum ATHENA_EVENTS_PLAYER {
     DIED = 'athena:PlayerDied',
     DROPPED_ITEM = 'athena:PlayerDroppedItem',
     SELECTED_CHARACTER = 'athena:SelectedCharacter',
-    SPAWNED = 'athena:PlayerSpawned'
+    SPAWNED = 'athena:PlayerSpawned',
+    ENTERED_INTERIOR = 'athena:EnteredInterior',
+    LEFT_INTERIOR = 'athena:LeftInterior',
+    TOGGLED_INTERIOR_LOCK = 'athena:ToggleLock'
 }
 
 export enum ATHENA_EVENTS_PLAYER_CLIENT {

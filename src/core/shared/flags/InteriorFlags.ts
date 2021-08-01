@@ -13,7 +13,7 @@ export enum INTERIOR_SYSTEM {
 }
 
 /**
- * The type of interior this is
+ * The type of interior this is.
  * @export
  * @enum {number}
  */

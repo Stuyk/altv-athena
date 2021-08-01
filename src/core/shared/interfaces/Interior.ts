@@ -84,6 +84,13 @@ export interface Interior {
     ipl?: string;
 
     /**
+     * The price of this interior if it is for sale.
+     * @type {number}
+     * @memberof Interior
+     */
+    price?: number;
+
+    /**
      * The type of interior this is.
      * Use a single flag for this.
      * @type {INTERIOR_TYPES}
@@ -93,7 +100,7 @@ export interface Interior {
 
     /**
      * The type of system(s) this interior has access to.
-     * You can specify multiple flags. INTERIOR_SYSTEM.HAS_HOUSE | INTERIOR_SYSTEM.HAS_OWNER
+     * You can specify multiple flags. INTERIOR_SYSTEM.HAS_LOCK | INTERIOR_SYSTEM.HAS_OWNER
      * @type {INTERIOR_SYSTEM}
      * @memberof Interior
      */
