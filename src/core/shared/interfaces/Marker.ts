@@ -8,4 +8,6 @@ export interface Marker {
     maxDistance?: number;
     uid?: string;
     dimension?: number;
+    bobUpAndDown?: boolean;
+    faceCamera?: boolean;
 }
