@@ -7,6 +7,7 @@ import './currency';
 import './death';
 import './debugVehicle';
 import './garage';
+import './inventory';
 import './item';
 import './job';
 import './noclip';
