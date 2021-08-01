@@ -89,7 +89,7 @@ const app = new Vue({
         document.addEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.on('storage:SetName', this.name);
+            alt.on('storage:SetName', this.setName);
             alt.on('storage:SetStorage', this.setStorage);
             alt.on('storage:SetInventory', this.setInventory);
             alt.on('url', this.setURL);

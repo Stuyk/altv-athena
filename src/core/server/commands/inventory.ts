@@ -1,28 +1,28 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
-import { LOCALE_KEYS } from "../../shared/locale/languages/keys";
-import { LocaleController } from "../../shared/locale/locale";
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
-import ChatController from "../systems/chat";
+import ChatController from '../systems/chat';
 
 ChatController.addCommand(
     'clearinventory',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_INVENTORY, '/clearinventory'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     clearInventory
 );
 
 ChatController.addCommand(
     'cleartoolbar',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_TOOLBAR, '/cleartoolbar'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     clearToolbar
 );
 
 ChatController.addCommand(
     'clearequipment',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_EQUIPMENT, '/clearequipment'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     clearEquipment
 );
 
