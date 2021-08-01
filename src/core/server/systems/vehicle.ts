@@ -4,8 +4,8 @@ import * as alt from 'alt-server';
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { VEHICLE_CLASS } from '../../shared/flags/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Task } from '../../shared/interfaces/TaskTimeline';
@@ -504,7 +504,7 @@ export class VehicleSystem {
                 player,
                 `anim@mp_player_intmenu@key_fob@`,
                 'fob_click_fp',
-                AnimationFlags.UPPERBODY_ONLY | AnimationFlags.ENABLE_PLAYER_CONTROL,
+                ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 -1
             );
         }

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { getPlayersByPermissionLevel } from '../utility/filters';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { playerFuncs } from '../extensions/Player';
@@ -11,20 +11,20 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 ChatController.addCommand(
     'broadcast',
     LocaleController.get(LOCALE_KEYS.COMMAND_BROADCAST, '/broadcast'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleBroadcast
 );
 ChatController.addCommand(
     'ac',
     LocaleController.get(LOCALE_KEYS.COMMAND_ADMIN_CHAT, '/ac'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleAdminChat
 );
 
 ChatController.addCommand(
     'mc',
     LocaleController.get(LOCALE_KEYS.COMMAND_MOD_CHAT, '/mc'),
-    Permissions.Moderator | Permissions.Admin,
+    PERMISSIONS.MODERATOR | PERMISSIONS.ADMIN,
     handleModeratorChat
 );
 
@@ -34,7 +34,7 @@ function handleAdminChat(player: alt.Player, ...args): void {
         return;
     }
 
-    const admins = getPlayersByPermissionLevel([Permissions.Admin]);
+    const admins = getPlayersByPermissionLevel([PERMISSIONS.ADMIN]);
     emitAll(admins, View_Events_Chat.Append, `[AC] ${player.data.name}: ${args.join(' ')}`);
 }
 
@@ -44,7 +44,7 @@ function handleModeratorChat(player: alt.Player, ...args): void {
         return;
     }
 
-    const modsAndAdmins = getPlayersByPermissionLevel([Permissions.Admin, Permissions.Moderator]);
+    const modsAndAdmins = getPlayersByPermissionLevel([PERMISSIONS.ADMIN, PERMISSIONS.MODERATOR]);
     emitAll(modsAndAdmins, View_Events_Chat.Append, `[MC] ${player.data.name}: ${args.join(' ')}`);
 }
 

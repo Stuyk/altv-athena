@@ -19,17 +19,17 @@
  * They can be attached to commands.
  * Permissions are a group of bitwise flags that can be combined.
  * You can use isFlagEnabled to check if a flag is enabled.
- * Combine them to create a group of valid permissions.
+ * Combine them to create a group of valid PERMISSIONS.
  * These are not for jobs. Please don't use these for jobs.
- * Example: const modAdmin = Permissions.Moderator | Permissions.Admin;
+ * Example: const modAdmin = PERMISSIONS.MODERATOR | PERMISSIONS.ADMIN;
  * @export
  * @enum {number}
  */
-export enum Permissions {
-    None = 0,
+export enum PERMISSIONS {
+    NONE = 0,
     VIP = 1,
-    Moderator = 2,
-    Admin = 4
+    MODERATOR = 2,
+    ADMIN = 4
     // Do Not Exceed 33 Entries
 }
 
@@ -39,7 +39,7 @@ export enum Permissions {
  * @export
  * @enum {number}
  */
-export enum CharacterPermissions {
-    None = 0
+export enum CHARACTER_PERMISSIONS {
+    NONE = 0
     // Do Not Exceed 33 Entries
 }

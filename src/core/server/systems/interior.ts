@@ -2,6 +2,7 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/interiorFlags';
 import { Interior } from '../../shared/interfaces/Interior';
 import { IObject } from '../../shared/interfaces/IObject';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -65,7 +66,9 @@ export class InteriorSystem {
             name: 'Diamond Resorts Casino',
             outside: { x: 935.1909790039062, y: 46.17036819458008, z: 81.09584045410156 },
             inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 },
-            objects: []
+            objects: [],
+            system: INTERIOR_SYSTEM.NONE,
+            type: INTERIOR_TYPES.SYSTEM
         });
     }
 

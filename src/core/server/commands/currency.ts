@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 
 import { CurrencyTypes } from '../../shared/enums/currency';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -10,7 +10,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 ChatController.addCommand(
     'setcash',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_CASH, '/setcash'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleCommand
 );
 

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { View_Events_Garage } from '../../shared/enums/views';
-import { isVehicleType } from '../../shared/flags/vehicleType';
+import { isVehicleType } from '../../shared/flags/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
@@ -13,14 +13,14 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 ChatController.addCommand(
     'weapon',
     LocaleController.get(LOCALE_KEYS.COMMAND_WEAPON, '/weapon'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleCommand
 );
 
 ChatController.addCommand(
     'removeallweapons',
     LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_ALL_WEAPONS, '/removeallweapons'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleRemoveWeapons
 );
 

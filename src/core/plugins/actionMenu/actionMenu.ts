@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { Permissions } from '../../shared/flags/permissions';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { Action } from '../../shared/interfaces/Actions';
 import { Animation } from '../../shared/interfaces/Animation';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -11,7 +11,7 @@ import { LocaleController } from '../../shared/locale/locale';
 ChatController.addCommand(
     'actionmenu',
     LocaleController.get(LOCALE_KEYS.COMMAND_ACTION_MENU, '/actionmenu'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleCommand
 );
 
@@ -23,7 +23,7 @@ function handleCommand(player: alt.Player): void {
             dict: 'anim@mp_player_intupperface_palm',
             name: 'idle_a',
             duration: 3000,
-            flags: AnimationFlags.UPPERBODY_ONLY
+            flags: ANIMATION_FLAGS.UPPERBODY_ONLY
         }
     };
 
@@ -34,7 +34,7 @@ function handleCommand(player: alt.Player): void {
             dict: 'mp_player_int_uppergang_sign_a',
             name: 'mp_player_int_gang_sign_a',
             duration: 3000,
-            flags: AnimationFlags.UPPERBODY_ONLY
+            flags: ANIMATION_FLAGS.UPPERBODY_ONLY
         }
     };
 

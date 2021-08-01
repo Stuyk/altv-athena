@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat } from '../../../shared/enums/views';
-import { AnimationFlags } from '../../../shared/flags/animation';
+import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
@@ -11,7 +11,7 @@ import utility from './utility';
  * Play an animation on this player.
  * @param {string} dictionary
  * @param {string} name
- * @param {AnimationFlags} flags
+ * @param {ANIMATION_FLAGS} flags
  * @param {number} [duration=-1]
  * @return {*}  {void}
  * @memberof EmitPrototype
@@ -20,7 +20,7 @@ function animation(
     player: alt.Player,
     dictionary: string,
     name: string,
-    flags: AnimationFlags,
+    flags: ANIMATION_FLAGS,
     duration: number = -1
 ): void {
     if (player.data.isDead) {
@@ -38,11 +38,7 @@ function animation(
  * @return {*}  {void}
  * @memberof EmitPrototype
  */
-function scenario(
-    player: alt.Player,
-    name: string,
-    duration: number
-): void {
+function scenario(player: alt.Player, name: string, duration: number): void {
     if (player.data.isDead) {
         return;
     }

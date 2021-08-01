@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
 
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { LocaleController } from '../../shared/locale/locale';
@@ -11,14 +11,14 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 ChatController.addCommand(
     'vehicle',
     LocaleController.get(LOCALE_KEYS.COMMAND_VEHICLE, '/vehicle'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleTemp
 );
 
 ChatController.addCommand(
     'addvehicle',
     LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE, '/addvehicle'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleAdd
 );
 
@@ -57,6 +57,7 @@ function handleAdd(player: alt.Player, model: string): void {
 
     try {
         const veh = VehicleFuncs.tempVehicle(player, model, fwd, new alt.Vector3(0, 0, 0));
+
         VehicleFuncs.add(
             { owner: player.data._id.toString(), fuel: 100, model, position: veh.pos, rotation: veh.rot },
             false

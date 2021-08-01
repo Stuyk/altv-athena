@@ -3,7 +3,7 @@ import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './Appearance';
 import { CharacterInfo } from './CharacterInfo';
 import { Item } from './Item';
-import { CharacterPermissions } from '../flags/permissions';
+import { CHARACTER_PERMISSIONS } from '../flags/PermissionFlags';
 
 export interface Character {
     /**
@@ -112,7 +112,7 @@ export interface Character {
      * @type {(CharacterPermissions | null)}
      * @memberof Character
      */
-    characterPermission?: CharacterPermissions | null;
+    characterPermission?: CHARACTER_PERMISSIONS | null;
 
     /**
      * Appearance data for how this character looks.

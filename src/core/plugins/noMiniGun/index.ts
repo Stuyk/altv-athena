@@ -3,7 +3,7 @@ import { Item } from '../../shared/interfaces/Item';
 import * as alt from 'alt-server';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 
 InventoryController.addItemRuleCheck(handleNoMinigun);
 InventoryController.addItemRuleCheck(handleNoMinigunDrop);
@@ -50,7 +50,7 @@ function handleNoMinigunDrop(
         return true;
     }
 
-    if (isFlagEnabled(player.accountData.permissionLevel, Permissions.Admin)) {
+    if (isFlagEnabled(player.accountData.permissionLevel, PERMISSIONS.ADMIN)) {
         return true;
     }
 

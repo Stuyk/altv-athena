@@ -6,7 +6,7 @@ import { Job } from '../../server/systems/job';
 import { TextLabelController } from '../../server/systems/textlabel';
 import { CurrencyTypes } from '../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { AnimationFlags } from '../../shared/flags/animation';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { distance2d } from '../../shared/utility/vector';
@@ -64,7 +64,7 @@ const objectives: Array<Objective> = [
         animation: {
             dict: 'missheist_jewel',
             name: 'smash_case',
-            flags: AnimationFlags.NORMAL,
+            flags: ANIMATION_FLAGS.NORMAL,
             duration: 4000,
             rotation: { x: 0, y: 0, z: -2.498518466949463 } as alt.Vector3,
             atObjectiveStart: false
@@ -103,7 +103,7 @@ const objectives: Array<Objective> = [
         animation: {
             dict: 'missheist_jewel',
             name: 'smash_case',
-            flags: AnimationFlags.NORMAL,
+            flags: ANIMATION_FLAGS.NORMAL,
             duration: 4000,
             rotation: { x: 0, y: 0, z: -2.78486704826355 } as alt.Vector3,
             atObjectiveStart: false
@@ -138,7 +138,7 @@ const objectives: Array<Objective> = [
         animation: {
             dict: 'missheist_jewel',
             name: 'smash_case',
-            flags: AnimationFlags.NORMAL,
+            flags: ANIMATION_FLAGS.NORMAL,
             duration: 4000,
             rotation: { x: 0, y: 0, z: -0.7960096597671509 } as alt.Vector3,
             atObjectiveStart: false
@@ -173,7 +173,7 @@ const objectives: Array<Objective> = [
         animation: {
             dict: 'missheist_jewel',
             name: 'smash_case',
-            flags: AnimationFlags.NORMAL,
+            flags: ANIMATION_FLAGS.NORMAL,
             duration: 4000,
             rotation: { x: 0, y: 0, z: 2.2121686935424805 } as alt.Vector3,
             atObjectiveStart: false
@@ -208,7 +208,7 @@ const objectives: Array<Objective> = [
         animation: {
             dict: 'missheist_jewel',
             name: 'smash_case',
-            flags: AnimationFlags.NORMAL,
+            flags: ANIMATION_FLAGS.NORMAL,
             duration: 4000,
             rotation: { x: 0, y: 0, z: 0.49127936363220215 } as alt.Vector3,
             atObjectiveStart: false

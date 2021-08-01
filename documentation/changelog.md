@@ -19,6 +19,7 @@ description: List of all the changes and current versions.
 + Vehicle data is now saved separately from the player.
 + Additional options for vehicle spawning and saving.
 + Vehicle spawn behavior changed.
++ Standardize Flags for Everything
 ```
 
 ## 2.0.2

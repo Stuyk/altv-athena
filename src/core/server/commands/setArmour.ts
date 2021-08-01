@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -8,7 +8,7 @@ import ChatController from '../systems/chat';
 ChatController.addCommand(
     'setarmour',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_ARMOUR, '/setarmour'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleCommand
 );
 

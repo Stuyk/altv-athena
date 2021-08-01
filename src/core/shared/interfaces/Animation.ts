@@ -1,10 +1,10 @@
-import { AnimationFlags } from '../flags/animation';
+import { ANIMATION_FLAGS } from '../flags/AnimationFlags';
 import { Vector3 } from './Vector';
 
 export interface Animation {
     dict: string;
     name: string;
-    flags: AnimationFlags;
+    flags: ANIMATION_FLAGS;
     duration: number;
 }
 

@@ -5,8 +5,8 @@ import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { PedConfigFlag } from '../../shared/flags/pedflags';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { PED_CONFIG_FLAG } from '../../shared/flags/PedFlags';
 import { getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -96,9 +96,9 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static enterVehicle() {
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableShufflingToDriverSeat, true);
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableStartingVehEngine, true);
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableStoppingVehEngine, true);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_SEAT_SHUFFLE, true);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STARTING_VEHICLE_ENGINE, true);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STOPPING_VEHICLE_ENGINE, true);
     }
 
     static emitOptions() {

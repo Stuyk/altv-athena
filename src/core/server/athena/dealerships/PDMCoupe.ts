@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS } from '../../../shared/flags/vehicleType';
+import { VEHICLE_CLASS } from '../../../shared/flags/VehicleTypeFlags';
 import { Dealership } from '../../../shared/interfaces/Dealership';
 
 const Information: Dealership = {

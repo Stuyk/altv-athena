@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { IObject } from '../../shared/interfaces/IObject';
 import { Vector3 } from '../../shared/interfaces/Vector';
 

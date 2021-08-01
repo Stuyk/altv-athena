@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
@@ -8,7 +8,7 @@ const parkingList = [];
 ChatController.addCommand(
     'addparking',
     '/addparking - Add parking to a temporary list.',
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         parkingList.push({ position: player.pos, rotation: player.rot });
         playerFuncs.emit.message(player, `Appended parking to temporary list.`);
@@ -18,7 +18,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'removeparking',
     '/removeparking - Remove last element from parking list.',
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         parkingList.pop();
         playerFuncs.emit.message(player, `Removed last element from temporary list.`);
@@ -28,7 +28,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'clearparking',
     '/clearparking - Clear Temporary List',
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         while (parkingList.length >= 1) {
             parkingList.pop();
@@ -41,7 +41,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'printparking',
     '/printparking - Print Temporary List',
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         playerFuncs.emit.message(player, `Printed to Server Console`);
         console.log(JSON.stringify(parkingList, null, '\t'));

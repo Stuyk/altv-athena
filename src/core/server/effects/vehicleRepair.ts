@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { Vehicle_Door_List } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
@@ -77,7 +77,7 @@ function handleRepairTimeline(player: alt.Player) {
         player,
         'mp_car_bomb',
         'car_bomb_mechanic',
-        AnimationFlags.NORMAL | AnimationFlags.REPEAT,
+        ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT,
         12000
     );
 

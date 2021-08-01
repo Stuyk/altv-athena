@@ -1,6 +1,8 @@
+import { INTERIOR_TYPES } from '../flags/interiorFlags';
 import { IObject } from './IObject';
 import { Item } from './Item';
 import { Vector3 } from './Vector';
+import { INTERIOR_SYSTEM } from '../flags/InteriorFlags';
 
 export interface Interior {
     /**
@@ -80,4 +82,20 @@ export interface Interior {
      * @memberof Interior
      */
     ipl?: string;
+
+    /**
+     * The type of interior this is.
+     * Use a single flag for this.
+     * @type {INTERIOR_TYPES}
+     * @memberof Interior
+     */
+    type: INTERIOR_TYPES;
+
+    /**
+     * The type of system(s) this interior has access to.
+     * You can specify multiple flags. INTERIOR_SYSTEM.HAS_HOUSE | INTERIOR_SYSTEM.HAS_OWNER
+     * @type {INTERIOR_SYSTEM}
+     * @memberof Interior
+     */
+    system: INTERIOR_SYSTEM;
 }

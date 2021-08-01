@@ -1,14 +1,15 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
+
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { VehicleSystem } from '../systems/vehicle';
 import ChatController from '../systems/chat';
+import { VehicleSystem } from '../systems/vehicle';
 
 ChatController.addCommand(
     'engine',
     LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_ENGINE, '/engine'),
-    Permissions.None,
+    PERMISSIONS.NONE,
     (player: alt.Player) => {
         if (!player || !player.valid || !player.vehicle) {
             return;
@@ -21,7 +22,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'vehlock',
     LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK, '/vehlock'),
-    Permissions.None,
+    PERMISSIONS.NONE,
     (player: alt.Player) => {
         if (!player || !player.valid || !player.vehicle) {
             return;
@@ -34,7 +35,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'togdoor',
     LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR, '/togdoor'),
-    Permissions.None,
+    PERMISSIONS.NONE,
     (player: alt.Player, door: string) => {
         if (!player || !player.valid) {
             return;

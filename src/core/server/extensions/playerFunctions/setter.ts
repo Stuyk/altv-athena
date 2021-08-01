@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Permissions } from '../../../shared/flags/permissions';
+import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
@@ -29,8 +29,8 @@ const config: IConfig = dotenv.config().parsed as IConfig;
  */
 async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
-        accountData.permissionLevel = Permissions.None;
-        Database.updatePartialData(accountData._id, { permissionLevel: Permissions.None }, Collections.Accounts);
+        accountData.permissionLevel = PERMISSIONS.NONE;
+        Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
     }
 
     if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {

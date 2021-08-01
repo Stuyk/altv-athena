@@ -19,7 +19,7 @@ Open the file and add these two imports at the very top.
 ```typescript
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/permissions';
 ```
 
 When you're working with commands you will want to start by typing `ChatController.`
@@ -33,9 +33,9 @@ You're going to write the basis for your first command.
 ```typescript
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/permissions';
 
-ChatController.addCommand('mycommand', '/mycommand - does stuff', Permissions.None, handleCommand);
+ChatController.addCommand('mycommand', '/mycommand - does stuff', PERMISSIONS.NONE, handleCommand);
 
 function handleCommand(player: alt.Player) {
     player.emit().message(`Hello from server-side`);

@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+
 import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 

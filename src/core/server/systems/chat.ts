@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { CharacterPermissions, Permissions } from '../../shared/flags/permissions';
+import { CHARACTER_PERMISSIONS, PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { Command } from '../../shared/interfaces/Command';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -26,12 +26,12 @@ export default class ChatController {
      * @static
      * @param {string} name The name of the command.
      * @param {string} description The description of this command.
-     * @param {Permissions} permissions Permission needed to run this command.
+     * @param {PERMISSIONS} permissions Permission needed to run this command.
      * @param {Function} callback
      * @return {*}
      * @memberof ChatController
      */
-    static addCommand(name: string, description: string, permissions: Permissions, callback: Function): void {
+    static addCommand(name: string, description: string, permissions: PERMISSIONS, callback: Function): void {
         if (commandInterval) {
             alt.clearTimeout(commandInterval);
         }
@@ -64,14 +64,14 @@ export default class ChatController {
      * @static
      * @param {string} name
      * @param {string} description
-     * @param {CharacterPermissions} characterPermissions
+     * @param {CHARACTER_PERMISSIONS} characterPermissions
      * @param {Function} callback
      * @memberof ChatController
      */
     static addCharacterCommand(
         name: string,
         description: string,
-        characterPermissions: CharacterPermissions,
+        characterPermissions: CHARACTER_PERMISSIONS,
         callback: Function
     ): void {
         if (commandInterval) {

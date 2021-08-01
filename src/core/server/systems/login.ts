@@ -4,7 +4,7 @@ import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
@@ -73,7 +73,7 @@ export class LoginController {
                     ips: [player.ip],
                     hardware: [player.hwidHash, player.hwidExHash],
                     lastLogin: Date.now(),
-                    permissionLevel: Permissions.None
+                    permissionLevel: PERMISSIONS.NONE
                 };
 
                 account = await Database.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);

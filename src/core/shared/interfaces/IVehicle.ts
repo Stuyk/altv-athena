@@ -1,5 +1,5 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
-import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnership';
+import { VEHICLE_OWNERSHIP } from '../flags/VehicleOwnershipFlags';
 import { Vector3 } from './Vector';
 
 export interface IVehicle {
