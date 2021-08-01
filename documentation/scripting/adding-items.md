@@ -2,7 +2,89 @@
 description: Learn how to add items to your game mode.
 ---
 
-# Adding Items
+# Adding Items- [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
+- [Adding Items- Keywords and Inventory Syntax](#adding-items--keywords-and-inventory-syntax)
+- [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
+- [Difference Between Slot and Index](#difference-between-slot-and-index)
+- [Deep Cloning Objects](#deep-cloning-objects)
+- [Add / Create Items](#add--create-items)
+  - [Giving Players Items](#giving-players-items)
+  - [Removing Players Items](#removing-players-items)
+  - [Working with Player Inventories](#working-with-player-inventories)
+  - [Item Effects](#item-effects)
+    - [Item Example](#item-example)
+    - [Item Effect Receive](#item-effect-receive)
+
+# Keywords and Inventory Syntax
+
+The inventory is setup in a way to have multiple pages. Which means it is an array of array(s). Which is a bit of a weird concept if you're only used to a single array of items.
+
+What this means is that each array inside of the inventory has the items in it.
+
+So accessing individual items for a player is something like...
+
+```ts
+player.data.inventory[0][0]
+```
+
+This will get the first `tab` or `page` of the player's inventory and the first `item` in the `tab` or `page`.
+
+Here's what they may look like from a visual perspective.
+
+```ts
+[
+    [
+        {
+            name: 'Burger',
+            description: 'A delicious burger...',
+            quantity: 1,
+            slot: 0
+        }
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+        {
+            name: 'Taco',
+            description: 'A classic Mexican street taco.',
+            quantity: 0,
+            slot: 5
+        }
+    ]
+]
+```
+
+# Difference Between Slot and Index
+
+Slot is where the item is placed when the item is displayed to the user.
+
+Index is where the item is placed inside of the array.
+
+If a function returns an index for an inventory item then it means you can get the item like...
+
+```ts
+player.data.inventory[someTabNumber][index]
+```
+
+If the function returns a slot for an inventory item. Then it means you need to get it like this...
+
+```ts
+const item = player.data.inventory[someTabNumber].find(x => x.slot === someSlotNumber);
+```
+
+# Deep Cloning Objects
+
+Because these objects can be rather complicated there is a simple function that does a deep clone of an object and ensuring that you're not modifying the original data. You should always deep clone an object before adding it to a player inventory to prevent data from referencing other inventories and such.
+
+```ts
+const item = deepCloneObject(originalItem) as Item;
+// Then add the item somewhere...
+```
+
+# Add / Create Items
 
 Items come in a variety of flavors but their general creation follows a specific template.
 
@@ -72,6 +154,31 @@ if (!didRemoveItem) {
 }
 
 alt.log(`The item was removed!`);
+```
+
+## Working with Player Inventories
+
+Depending on what you want to do with the player inventory there are a ton of ways to work with it. However, more often than not the most common use case for working with an inventory is finding an item and removing it. Which is what we'll be covering here.
+
+```ts
+import * as alt from 'alt-server';
+import { playerFuncs } from '../../server/extensions/Player';
+
+function findPlayerBurgerItem(player: alt.Player) {
+    const someItemInfo = playerFuncs.inventory.isInInventory(player, { name: 'Burger' });
+    if (!someItemInfo) {
+        // Item does not exist.
+        return;
+    }
+
+    const item = player.data.inventory[someItemInfo.tab][someItemInfo.index];
+    console.log(item);
+}
+
+// Removes an item based on the `slot` of the item.
+function removePlayerBurgerItem(player: alt.Player, tab: number, slot: number) {
+    playerFuncs.inventory.inventoryRemove(player, slot, tab);
+}
 ```
 
 ## Item Effects
