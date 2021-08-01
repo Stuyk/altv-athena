@@ -19,6 +19,10 @@ export function isAnyMenuOpen(excludeChat = false): boolean {
         return true;
     }
 
+    if (alt.Player.local.isWheelMenuOpen) {
+        return true;
+    }
+
     if (alt.Player.local.isLeaderboardOpen) {
         return true;
     }

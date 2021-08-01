@@ -83,6 +83,10 @@ export class InteractionController {
             return;
         }
 
+        if (alt.Player.local.isWheelMenuOpen) {
+            return;
+        }
+
         InteractionController.drawInteractText();
 
         if (!pressedKey) {

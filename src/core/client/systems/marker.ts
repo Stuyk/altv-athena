@@ -83,6 +83,10 @@ function handleDrawMarkers() {
         return;
     }
 
+    if (alt.Player.local.isWheelMenuOpen) {
+        return;
+    }
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }
