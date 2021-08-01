@@ -1,3 +1,4 @@
+import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
@@ -14,6 +15,7 @@ import { InteriorSystem } from '../../systems/interior';
 import { StreamerService } from '../../systems/streamer';
 import { World } from '../../systems/world';
 import { playerFuncs } from '../Player';
+import VehicleFuncs from '../VehicleFuncs';
 import emit from './emit';
 import safe from './safe';
 import save from './save';
@@ -35,7 +37,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
     safe.setDimension(player, 0);
     setter.frozen(player, true);
 
-    alt.setTimeout(() => {
+    alt.setTimeout(async () => {
         if (player.data.pos) {
             safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
         } else {
@@ -50,13 +52,6 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         // Force the player into the interior they were last in.
         if (player.data.interior) {
             InteriorSystem.enter(player, player.data.interior, true);
-        }
-
-        // Save immediately after using exterior login.
-        if (player.data.exterior) {
-            safe.setPosition(player, player.data.exterior.x, player.data.exterior.y, player.data.exterior.z);
-            player.data.exterior = null;
-            save.field(player, 'exterior', player.data.exterior);
         }
 
         // Check if health exists.
@@ -95,7 +90,6 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         sync.inventory(player);
         sync.water(player);
         sync.food(player);
-        sync.vehicles(player);
 
         player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
         player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
@@ -116,6 +110,12 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 
         // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
+
+        // Vehicle Spawning
+        if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {
+            const vehicles = await VehicleFuncs.getPlayerVehicles(player.data._id);
+            VehicleFuncs.spawnPlayerVehicles(vehicles);
+        }
 
         // Finish Selection
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);

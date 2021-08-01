@@ -4,7 +4,7 @@ import { Vehicle_Door_List } from '../../shared/enums/vehicle';
 import { AnimationFlags } from '../../shared/flags/animation';
 import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
 import { playerFuncs } from '../extensions/Player';
-import { vehicleFuncs } from '../extensions/Vehicle';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { getForwardVector } from '../utility/vector';
 
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
@@ -82,6 +82,6 @@ function handleRepairTimeline(player: alt.Player) {
     );
 
     alt.setTimeout(() => {
-        vehicleFuncs.utility.repair(closestVehicle);
+        VehicleFuncs.repair(closestVehicle);
     }, 12000);
 }

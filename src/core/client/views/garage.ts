@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { View_Events_Garage } from '../../shared/enums/views';
-import { Vehicle } from '../../shared/interfaces/Vehicle';
+import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { View } from '../extensions/view';
@@ -10,7 +10,7 @@ import { BaseHUD } from './hud/hud';
 
 const url = `http://assets/webview/client/garage/index.html`;
 let view: View;
-let vehicles: Partial<Vehicle>[];
+let vehicles: Partial<IVehicle>[];
 
 class GarageView implements ViewModel {
     /**
@@ -19,7 +19,7 @@ class GarageView implements ViewModel {
      * @param {Partial<Vehicle>[]} _vehicles
      * @memberof GarageView
      */
-    static async show(_vehicles: Partial<Vehicle>[]): Promise<void> {
+    static async show(_vehicles: IVehicle[]): Promise<void> {
         vehicles = _vehicles;
 
         if (isAnyMenuOpen()) {

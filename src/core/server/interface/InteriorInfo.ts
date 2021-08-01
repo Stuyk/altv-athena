@@ -4,6 +4,13 @@ import { Vector3 } from '../../shared/interfaces/Vector';
 
 export interface InteriorInfo {
     /**
+     * Database reference id.
+     * @type {unknown}
+     * @memberof InteriorInfo
+     */
+    _id: unknown;
+
+    /**
      * The ColShape used to enter the interior.
      * @type {alt.Colshape}
      * @memberof InteriorInfo

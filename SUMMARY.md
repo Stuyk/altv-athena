@@ -27,6 +27,7 @@
 ## Basic Scripting
 
 -   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
+-   [Adding Interactions](documentation/scripting/adding-interactions.md)
 -   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 -   [Adding Commands](documentation/scripting/adding-commands.md)
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)

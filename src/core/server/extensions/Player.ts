@@ -14,6 +14,7 @@ import select from './playerFunctions/select';
 import set from './playerFunctions/setter';
 import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
+import getter from './playerFunctions/getter';
 
 import '../systems/arrest';
 import '../events/waypointEvent';
@@ -47,7 +48,11 @@ declare module 'alt-server' {
         nextFoodSync: number;
         nextPlayTime: number;
 
-        // Wanted Level
+        /**
+         * The player's current wanted level.
+         * @type {number}
+         * @memberof Player
+         */
         wanted: number;
 
         // Toolbar Information
@@ -69,10 +74,18 @@ declare module 'alt-server' {
          */
         vehiclesSpawned: number;
 
-        // Custom Client Event Data
+        /**
+         * The current waypoint position on the player's map.
+         * @type {(Vector3 | null)}
+         * @memberof Player
+         */
         currentWaypoint: Vector3 | null;
 
-        // Interaction
+        /**
+         * The current interaction point the player is standing in.
+         * @type {(InteractionShape | null)}
+         * @memberof Player
+         */
         currentInteraction: InteractionShape | null;
     }
 }
@@ -85,6 +98,7 @@ export const playerFuncs = {
     currency,
     dataUpdater,
     emit,
+    get: getter,
     inventory,
     createNew,
     safe,
