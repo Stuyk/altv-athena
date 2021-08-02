@@ -109,7 +109,7 @@ function handleDrawMarkers() {
             marker.scale = new alt.Vector3(1, 1, 1);
         }
 
-        drawMarker(marker.type, marker.pos, marker.scale, marker.color, marker.bobUpAndDown, marker.faceCamera);
+        drawMarker(marker.type, marker.pos, marker.scale, marker.color, marker.bobUpAndDown, marker.faceCamera, marker.rotate);
     }
 }
 
