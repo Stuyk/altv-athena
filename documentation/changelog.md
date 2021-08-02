@@ -32,6 +32,7 @@ description: List of all the changes and current versions.
 + Added Vehicle Storage Trunks
 + Begin Faction Prototyping
 + Fix Removing Global Object Locally
++ Add Configureable Storage Per Vehicle
 ```
 
 ## 2.0.2

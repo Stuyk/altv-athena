@@ -604,15 +604,21 @@ export class VehicleSystem {
             return;
         }
 
-        // Add -> Check if this vehicle is not a bike type.
+        const vehicleInfo = VehicleData.find(
+            (x) => x.name.toLocaleLowerCase() === vehicle.data.model.toLocaleLowerCase()
+        );
+
+        if (!vehicleInfo || !vehicleInfo.storage) {
+            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
 
         let storageID: string;
 
         // Remove array. Make it a string reference to the storage box.
         if (!vehicle.data.storage) {
             const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: 28 });
-            console.log(storage);
-
             vehicle.data.storage = storage._id.toString();
             await VehicleFuncs.save(vehicle, { storage: vehicle.data.storage });
             storageID = vehicle.data.storage;
