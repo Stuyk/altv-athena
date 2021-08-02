@@ -11,8 +11,9 @@ const zeroVector = { x: 0, y: 0, z: 0 };
  * @param  {alt.RGBA} color
  * @param  {boolean} bobUpAndDown
  * @param  {boolean} faceCamera
+ * @param {boolean} rotate
  */
-export function drawMarker(type: number, pos: alt.IVector3, scale: alt.IVector3, color: alt.RGBA, bobUpAndDown: boolean = false, faceCamera: boolean = true) {
+export function drawMarker(type: number, pos: alt.IVector3, scale: alt.IVector3, color: alt.RGBA, bobUpAndDown: boolean = false, faceCamera: boolean = true, rotate: boolean = false) {
     native.drawMarker(
         type,
         pos.x,
@@ -34,7 +35,7 @@ export function drawMarker(type: number, pos: alt.IVector3, scale: alt.IVector3,
         bobUpAndDown,
         faceCamera,
         2,
-        false,
+        rotate,
         undefined,
         undefined,
         false

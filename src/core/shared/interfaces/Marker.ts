@@ -10,4 +10,5 @@ export interface Marker {
     dimension?: number;
     bobUpAndDown?: boolean;
     faceCamera?: boolean;
+    rotate?: boolean;
 }
