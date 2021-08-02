@@ -114,11 +114,11 @@ export interface IVehicle {
     lastUsed?: number;
 
     /**
-     * The trunk of the vehicle can hand these items.
-     * @type {IStorage}
+     * The IStorage collection id reference in the database.
+     * @type {string}
      * @memberof IVehicle
      */
-    storage?: IStorage;
+    storage?: string;
 
     /**
      * Simply what colour is this vehicle?

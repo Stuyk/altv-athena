@@ -12,6 +12,7 @@ import './extensions/Vehicle';
 import './menus/animation';
 import './menus/player';
 import './menus/interior';
+import './menus/vehicle';
 // Systems
 import './systems/animations';
 import './systems/scenarios';

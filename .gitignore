@@ -15,6 +15,7 @@ configMongoDB
 .env
 crashdumps
 ./screenshots/*
+src/core/plugins/sandbox
 cdn_upload
 tsconfig.tsbuildinfo
 athena-cache/

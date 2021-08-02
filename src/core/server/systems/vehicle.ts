@@ -3,12 +3,20 @@ import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
+import {
+    Vehicle_Behavior,
+    VEHICLE_DOOR_STATE,
+    VEHICLE_EVENTS,
+    VEHICLE_LOCK_STATE,
+    VEHICLE_STATE
+} from '../../shared/enums/vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { VEHICLE_CLASS } from '../../shared/flags/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Task } from '../../shared/interfaces/TaskTimeline';
+import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
@@ -19,7 +27,9 @@ import { getClosestEntity } from '../utility/vector';
 
 import '../views/dealership';
 import '../views/garage';
+import { StorageView } from '../views/storage';
 import './fuel';
+import { StorageSystem } from './storage';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -562,8 +572,59 @@ export class VehicleSystem {
         player.detach();
         alt.emitClient(player, VEHICLE_EVENTS.STOP_PUSH);
     }
+
+    /**
+     * Opens or creates a storage interface for a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @return {*}
+     * @memberof VehicleSystem
+     */
+    static async storage(player: alt.Player, vehicle: alt.Vehicle) {
+        if (!player || !player.valid || player.data.isDead) {
+            return;
+        }
+
+        if (distance(player.pos, vehicle.pos) >= 5) {
+            playerFuncs.emit.notification(player, `Too far away from that vehicle.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!VehicleFuncs.hasOwnership(player, vehicle)) {
+            playerFuncs.emit.notification(player, `You do not have access to the trunk.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
+            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        // Add -> Check if this vehicle is not a bike type.
+
+        let storageID: string;
+
+        // Remove array. Make it a string reference to the storage box.
+        if (!vehicle.data.storage) {
+            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: 28 });
+            console.log(storage);
+
+            vehicle.data.storage = storage._id.toString();
+            await VehicleFuncs.save(vehicle, { storage: vehicle.data.storage });
+            storageID = vehicle.data.storage;
+        } else {
+            storageID = vehicle.data.storage.toString();
+        }
+
+        StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
+    }
 }
 
+alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
 alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
 alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
 alt.onClient(VEHICLE_EVENTS.ACTION, VehicleSystem.handleAction);
