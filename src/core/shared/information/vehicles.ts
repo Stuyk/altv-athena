@@ -1,6 +1,7 @@
-// This is shared between client and server.
+import { VehicleInfo } from '../interfaces/VehicleInfo';
+
 // However, prices are pulled from server-side on purchase.
-export const VehicleData = [
+export const VehicleData: Array<VehicleInfo> = [
     {
         display: 'Dinghy',
         name: 'dinghy',
