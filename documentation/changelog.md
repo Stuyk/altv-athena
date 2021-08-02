@@ -31,6 +31,7 @@ description: List of all the changes and current versions.
 + Added Storage Containers for Interiors
 + Added Vehicle Storage Trunks
 + Begin Faction Prototyping
++ Fix Removing Global Object Locally
 ```
 
 ## 2.0.2

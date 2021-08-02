@@ -76,14 +76,8 @@ body {
 }
 
 .frame .stack {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    display: block;
     background: rgba(0, 0, 0, 0.25);
-}
-
-.frame .item {
-    height: 100%;
 }
 
 .center-vertical {

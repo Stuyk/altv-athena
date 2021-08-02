@@ -110,6 +110,19 @@ const app = new Vue({
                         water: 100,
                         event: 'test'
                     }
+                },
+                {
+                    name: `Sack`,
+                    uuid: `some_hash_thing_26`,
+                    slot: 1,
+                    description: `Sack.`,
+                    icon: 'sack',
+                    behavior: 2,
+                    quantity: Math.floor(Math.random() * 10) + 5,
+                    data: {
+                        water: 100,
+                        event: 'test'
+                    }
                 }
             ]);
 
