@@ -1,4 +1,4 @@
-export enum FactionPermissionFlags {
+export enum FACTION_PERMISSION_FLAGS {
     SUPER_ADMIN = 1, // Skips all permission checks.
     CHANGE_NAME = 2, // Changes the name of the faction.
     CHANGE_MEMBER_RANK = 4, // Changes member rank if lower.
@@ -9,5 +9,6 @@ export enum FactionPermissionFlags {
     PREVENT_FACTION_CHAT = 128, // Prevents chatting in /f
     ACCESS_STORAGE = 256, // A place to store money and store items
     ACCESS_BANK = 512, // A place to store money.
-    ACCESS_WEAPONS = 1024 // A place to store money, items, and weapons.
+    ACCESS_WEAPONS = 1024, // A place to store money, items, and weapons.
+    ADD_MEMBERS = 2048 // Permission to add members to the faction.
 }

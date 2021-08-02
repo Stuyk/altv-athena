@@ -30,6 +30,7 @@ description: List of all the changes and current versions.
 + Added Storage Collection
 + Added Storage Containers for Interiors
 + Added Vehicle Storage Trunks
++ Begin Faction Prototyping
 ```
 
 ## 2.0.2

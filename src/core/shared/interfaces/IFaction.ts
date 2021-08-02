@@ -1,4 +1,4 @@
-import { FactionPermissionFlags } from '../flags/FactionPermissionFlags';
+import { FACTION_PERMISSION_FLAGS } from '../flags/FactionPermissionFlags';
 import { Vector3 } from './Vector';
 
 export interface FactionMember {
@@ -26,11 +26,18 @@ export interface FactionMember {
 
 export interface FactionRank {
     /**
-     * Permissions associated with this faction rank.
-     * @type {FactionPermissionFlags}
+     * The name of this faction rank.
+     * @type {string}
      * @memberof FactionRank
      */
-    permissions: FactionPermissionFlags;
+    name: string;
+
+    /**
+     * Permissions associated with this faction rank.
+     * @type {FACTION_PERMISSION_FLAGS}
+     * @memberof FactionRank
+     */
+    permissions: FACTION_PERMISSION_FLAGS;
 }
 
 export interface IFaction {
@@ -48,6 +55,14 @@ export interface IFaction {
      * @memberof IFaction
      */
     pos: Vector3;
+
+    /**
+     * The ranks in this faction.
+     * The highest rank always has an index of 0.
+     * @type {Array<FactionRank>}
+     * @memberof IFaction
+     */
+    ranks?: Array<FactionRank>;
 
     /**
      * Dimension for this faction if necessary.
