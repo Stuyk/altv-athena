@@ -116,6 +116,8 @@ export class ObjectController {
             native.deleteEntity(objectInfo[uid]);
             delete objectInfo[uid];
         }
+
+        isRemoving = false;
     }
 }
 
