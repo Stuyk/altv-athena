@@ -149,6 +149,14 @@ export interface Character {
      * @memberof Character
      */
     toolbar: Array<Partial<Item>>;
+
+    /**
+     * This player's current faction. If present.
+     * Represents an ID in the database for factions.
+     * @type {string}
+     * @memberof Character
+     */
+    faction: string;
 }
 
 export const CharacterDefaults: Partial<Character> = {
