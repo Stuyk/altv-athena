@@ -618,7 +618,7 @@ export class VehicleSystem {
 
         // Remove array. Make it a string reference to the storage box.
         if (!vehicle.data.storage) {
-            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: 28 });
+            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: vehicleInfo.storage });
             vehicle.data.storage = storage._id.toString();
             await VehicleFuncs.save(vehicle, { storage: vehicle.data.storage });
             storageID = vehicle.data.storage;
