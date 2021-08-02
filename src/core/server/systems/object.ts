@@ -50,6 +50,7 @@ export class ObjectController {
 
         globalObjects.splice(index, 1);
         ObjectController.refresh();
+        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;
     }
 

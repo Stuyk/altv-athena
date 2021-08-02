@@ -80,6 +80,7 @@ export enum SYSTEM_EVENTS {
     QUICK_TOKEN_NONE = 'quicktoken:None',
     QUICK_TOKEN_UPDATE = 'quicktoken:Update',
     //
+    REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
     REMOVE_MARKER = 'remove:Marker',
     REMOVE_BLIP = 'remove:Blip',

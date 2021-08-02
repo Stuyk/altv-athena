@@ -71,7 +71,7 @@ export class ObjectController {
 
                 if (objectInfo[actualID] !== null && objectInfo[actualID] !== undefined) {
                     native.deleteEntity(objectInfo[actualID]);
-                    objectInfo[actualID] = null;
+                    delete objectInfo[actualID];
                     count += 1;
                 }
             }
@@ -96,6 +96,26 @@ export class ObjectController {
 
         localObjects.splice(index, 1);
         isRemoving = false;
+    }
+
+    /**
+     * Force remove a global object if present.
+     * @static
+     * @param {string} uid
+     * @memberof ObjectController
+     */
+    static removeGlobalObject(uid: string) {
+        isRemoving = true;
+
+        let index = addedObjects.findIndex((object) => object.uid === uid);
+        if (index >= 0) {
+            addedObjects.splice(index, 1);
+        }
+
+        if (objectInfo[uid] !== null && objectInfo[uid] !== undefined) {
+            native.deleteEntity(objectInfo[uid]);
+            delete objectInfo[uid];
+        }
     }
 }
 
@@ -170,6 +190,7 @@ function handleDrawObjects() {
     }
 }
 
+alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ObjectController.removeGlobalObject);
 alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ObjectController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ObjectController.populate);
 alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ObjectController.remove);
