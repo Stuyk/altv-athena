@@ -14,6 +14,13 @@ interface Response {
     response: string;
 }
 
+/**
+ * Factions are not instance based. We simply don't need a class for Faction(s).
+ * Faction cache is updated in the 'factions' variable above.
+ * Faction modifications are then updated.
+ * @export
+ * @class FactionSystem
+ */
 export class FactionSystem {
     static async init() {
         const factions = await Database.fetchAllData(Collections.Factions);
@@ -71,8 +78,31 @@ export class FactionSystem {
      * @return {Promise<boolean>}
      * @memberof FactionSystem
      */
-    static async systemSave(id: string, data: Partial<IFaction>): Promise<boolean> {
+    private static async systemSave(id: string, data: Partial<IFaction>): Promise<boolean> {
         return await Database.updatePartialData(id, { ...data }, Collections.Factions);
+    }
+
+    /**
+     * Validate if player data is currently valid.
+     * Checks for faction validity and player validity.
+     * @private
+     * @static
+     * @param {alt.Player} player
+     * @return {*}  {Response}
+     * @memberof FactionSystem
+     */
+    private static validatePlayer(player: alt.Player): Response {
+        if (!player || !player.valid || !player.data.faction) {
+            return { status: false, response: 'You are not currently in a faction.' };
+        }
+
+        if (!factions[player.data.faction]) {
+            player.data.faction = null;
+            playerFuncs.save.field(player, 'faction', null);
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        return { status: true, response: null };
     }
 
     /**
@@ -133,15 +163,9 @@ export class FactionSystem {
      * @memberof FactionSystem
      */
     static async addMember(player: alt.Player, target: alt.Player | string): Promise<Response> {
-        // Check the player exists and has a faction.
-        if (!player || !player.valid || !player.data.faction) {
-            return { status: false, response: 'You are not currently in a faction.' };
-        }
-
-        if (!factions[player.data.faction]) {
-            player.data.faction = null;
-            playerFuncs.save.field(player, 'faction', null);
-            return { status: false, response: 'The faction you are in no longer exists.' };
+        const validateResponse = this.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
         }
 
         if (typeof target === 'string') {
@@ -192,7 +216,7 @@ export class FactionSystem {
 
         const lastRankInFaction = factions[id].ranks.length - 1;
         factions[id].players.push({ id: target.data._id.toString(), name: target.data.name, rank: lastRankInFaction });
-        await FactionSystem.systemSave(id, { players: factions[id].players });
+        await this.systemSave(id, { players: factions[id].players });
         return { status: true, response: 'Target player was added to the faction.' };
     }
 
@@ -205,15 +229,9 @@ export class FactionSystem {
      * @memberof FactionSystem
      */
     static async removeMember(player: alt.Player, targetID: string): Promise<Response> {
-        // Check the player exists and has a faction.
-        if (!player || !player.valid || !player.data.faction) {
-            return { status: false, response: 'You are not currently in a faction.' };
-        }
-
-        if (!factions[player.data.faction]) {
-            player.data.faction = null;
-            playerFuncs.save.field(player, 'faction', null);
-            return { status: false, response: 'The faction you are in no longer exists.' };
+        const validateResponse = this.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
         }
 
         // Check Permission System
@@ -250,7 +268,103 @@ export class FactionSystem {
         }
 
         factions[id].players.splice(memberIndex, 1);
-        await FactionSystem.systemSave(id, { players: factions[id].players });
+        await this.systemSave(id, { players: factions[id].players });
         return { status: true, response: 'Target player was removed from your faction.' };
+    }
+
+    /**
+     * External callable function for adding a rank from an interface or command.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} rankName Name of the Rank
+     * @return {*}  {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async addRank(player: alt.Player, rankName: string): Promise<Response> {
+        const validateResponse = this.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionSystem.systemHasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CREATE_RANK
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionSystem.systemAddRank(player.data.faction, rankName);
+    }
+
+    /**
+     * Add a rank to a faction.
+     * @static
+     * @param {string} id FactionID
+     * @param {string} rankName Name of New Rank
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async systemAddRank(id: string, rankName: string): Promise<Response> {
+        if (!factions[id]) {
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        factions[id].ranks.push({ name: rankName, permissions: 0 });
+        await this.systemSave(id, { ranks: factions[id].ranks });
+        return { status: true, response: `Rank ${rankName} was created.` };
+    }
+
+    /**
+     * External callable function for removing a rank from an interface or command.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} rankIndex Index in Rank Array
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async removeRank(player: alt.Player, rankIndex: number): Promise<Response> {
+        const validateResponse = this.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionSystem.systemHasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CREATE_RANK
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionSystem.systemRemoveRank(player.data.faction, rankIndex);
+    }
+
+    /**
+     * Remove a rank based on index from a faction.
+     * @static
+     * @param {string} id FactionID
+     * @param {number} rankIndex Index in Rank Array
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async systemRemoveRank(id: string, rankIndex: number): Promise<Response> {
+        if (!factions[id]) {
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        if (!factions[id].ranks[rankIndex]) {
+            return { status: false, response: `Faction rank ${rankIndex} does not exist.` };
+        }
+
+        factions[id].ranks.splice(rankIndex, 1);
+        await this.systemSave(id, { ranks: factions[id].ranks });
+        return { status: true, response: `Rank Index ${rankIndex} was removed.` };
     }
 }
