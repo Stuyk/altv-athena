@@ -754,8 +754,6 @@ export class InteriorSystem {
             return;
         }
 
-        value = Math.abs(value);
-
         if (value > ONE_BILLION) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
@@ -780,6 +778,7 @@ export class InteriorSystem {
         if (value <= -1) {
             interiors[index].price = null;
         } else {
+            value = Math.abs(Math.floor(value));
             interiors[index].price = value;
         }
 
