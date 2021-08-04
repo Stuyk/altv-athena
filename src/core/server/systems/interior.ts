@@ -4,7 +4,7 @@ import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { CurrencyTypes } from '../../shared/enums/currency';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/interiorFlags';
+import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/InteriorFlags';
 import { Character } from '../../shared/interfaces/Character';
 import { Interior } from '../../shared/interfaces/Interior';
 import { IObject } from '../../shared/interfaces/IObject';
