@@ -43,7 +43,7 @@ export class ObjectController {
      * @memberof ObjectController
      */
     static remove(uid: string): boolean {
-        const index = globalObjects.findIndex((label) => label.uid === uid);
+        const index = globalObjects.findIndex((object) => object.uid === uid);
         if (index <= -1) {
             return false;
         }

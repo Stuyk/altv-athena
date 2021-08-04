@@ -8,7 +8,13 @@ export enum FACTION_PERMISSION_FLAGS {
     CREATE_RANK = 64, // Create a new rank. Always starts as lowest.
     PREVENT_FACTION_CHAT = 128, // Prevents chatting in /f
     ACCESS_STORAGE = 256, // A place to store money and store items
-    ACCESS_BANK = 512, // A place to store money.
-    ACCESS_WEAPONS = 1024, // A place to store money, items, and weapons.
-    ADD_MEMBERS = 2048 // Permission to add members to the faction.
+    ADD_TO_BANK = 512, // Add money to the faction bank.
+    REMOVE_FROM_BANK = 1024, // Remove money from the faction bank.
+    ACCESS_WEAPONS = 2048, // A place to store money, items, and weapons.
+    ADD_MEMBERS = 4096 // Permission to add members to the faction.
+}
+
+export enum FACTION_STORAGE {
+    STORAGE = 'storage',
+    WEAPONS = 'weapons'
 }

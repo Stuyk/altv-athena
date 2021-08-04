@@ -49,6 +49,13 @@ export interface IFaction {
     _id?: unknown;
 
     /**
+     * The name of this faction.
+     * @type {string}
+     * @memberof IFaction
+     */
+    name: string;
+
+    /**
      * The faction central location for basing other points.
      * Should be an outside position.
      * @type {Vector3}
