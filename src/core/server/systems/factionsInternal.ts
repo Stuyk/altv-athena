@@ -1,9 +1,11 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { View_Events_Factions } from '../../shared/enums/views';
 
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
@@ -12,6 +14,7 @@ import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
 
 let factions: { [key: string]: IFaction } = {};
+let openFactionInterfaces: { [faction: string]: Array<alt.Player> } = {};
 
 /**
  * Feature List:
@@ -44,13 +47,35 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Create a Faction
+     * @static
+     * @param {IFaction} faction
+     * @memberof FactionInternalSystem
+     */
+    static async create(player: alt.Player, faction: IFaction): Promise<boolean> {
+        if (player.data.faction) {
+            return false;
+        }
+
+        faction.pos = player.pos;
+        faction.players = [{ name: player.data.name, id: player.data._id.toString(), rank: 0 }];
+
+        const newFaction = await Database.insertData(faction, Collections.Factions, true);
+        newFaction._id = newFaction._id.toString();
+        player.data.faction = newFaction._id.toString();
+        playerFuncs.save.field(player, 'faction', newFaction._id);
+        await FactionInternalSystem.setup(faction);
+        return true;
+    }
+
+    /**
      * Get a faction from cache.
      * @static
      * @param {string} id
      * @return {*}
      * @memberof FactionInternalSystem
      */
-    static async get(id: string) {
+    static get(id: string): IFaction {
         return factions[id];
     }
 
@@ -90,6 +115,73 @@ export class FactionInternalSystem {
         // Skip last used for faction vehicles
     }
 
+    static refresh(id: string) {
+        if (!factions[id]) {
+            return;
+        }
+
+        if (!openFactionInterfaces[id]) {
+            return;
+        }
+
+        const players = [...openFactionInterfaces[id]];
+        const factionRef = deepCloneObject<IFaction>(factions[id]);
+
+        for (let i = 0; i < players.length; i++) {
+            if (!players[i] || !players[i].valid) {
+                continue;
+            }
+
+            alt.emitClient(players[i], View_Events_Factions.Update, factionRef);
+        }
+    }
+
+    static opened(player: alt.Player) {
+        if (!player.data.faction) {
+            return;
+        }
+
+        if (!openFactionInterfaces[player.data.faction]) {
+            openFactionInterfaces[player.data.faction] = [];
+        }
+
+        const index = openFactionInterfaces[player.data.faction].findIndex((p) => p.id);
+        if (index >= 0) {
+            return;
+        }
+
+        openFactionInterfaces[player.data.faction].push(player);
+    }
+
+    static closed(player: alt.Player) {
+        if (!player.data.faction) {
+            return;
+        }
+
+        if (!openFactionInterfaces[player.data.faction]) {
+            openFactionInterfaces[player.data.faction] = [];
+        }
+
+        for (var i = openFactionInterfaces[player.data.faction].length - 1; i >= 0; i--) {
+            if (!openFactionInterfaces[player.data.faction][i]) {
+                openFactionInterfaces[player.data.faction].splice(i, 1);
+                continue;
+            }
+
+            if (!openFactionInterfaces[player.data.faction][i].valid) {
+                openFactionInterfaces[player.data.faction].splice(i, 1);
+                continue;
+            }
+
+            if (openFactionInterfaces[player.data.faction][i].id !== player.id) {
+                continue;
+            }
+
+            openFactionInterfaces[player.data.faction].splice(i, 1);
+            break;
+        }
+    }
+
     /**
      * Save part of faction data to the database.
      * @static
@@ -99,6 +191,7 @@ export class FactionInternalSystem {
      * @memberof FactionSystem
      */
     private static async save(id: string, data: Partial<IFaction>): Promise<boolean> {
+        FactionInternalSystem.refresh(id);
         return await Database.updatePartialData(id, { ...data }, Collections.Factions);
     }
 
@@ -385,6 +478,14 @@ export class FactionInternalSystem {
 
         if (!factions[id].ranks[rankIndex]) {
             return { status: false, response: 'That rank does not exist.' };
+        }
+
+        if (factions[id].ranks.length - 1 === rankIndex && moveDown) {
+            return { status: false, response: 'Cannot be moved down any further.' };
+        }
+
+        if (0 === rankIndex && !moveDown) {
+            return { status: false, response: 'Cannot be moved up any further.' };
         }
 
         const name = factions[id].ranks[rankIndex].name;

@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
+import { CurrencyTypes } from '../../shared/enums/currency';
 
-import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
+import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import { playerFuncs } from '../extensions/Player';
 import { FactionInternalSystem } from './factionsInternal';
 
 /**
@@ -136,7 +138,7 @@ export class FactionSystem {
     }
 
     /**
-     * External callable function for setting a rank name by index.
+     * Change rank name for a rankIndex.
      * @static
      * @param {alt.Player} player
      * @return {Promise<Response>}
@@ -160,6 +162,96 @@ export class FactionSystem {
         }
 
         return FactionInternalSystem.setRankName(player.data.faction, rankIndex, name);
+    }
+
+    /**
+     * Change the rank order based on rankIndex and a boolean.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} rankIndex
+     * @param {boolean} [moveDown=false] Set to 'true' to move the rank down.
+     * @return {Promise<IResponse>}
+     * @memberof FactionSystem
+     */
+    static async changeRankOrder(player: alt.Player, rankIndex: number, moveDown: boolean = false): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionInternalSystem.changeRankOrder(player.data.faction, rankIndex, moveDown);
+    }
+
+    /**
+     * Set a member rank to a specific rank index.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Player} target
+     * @param {number} rankIndex
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async setMemberRank(player: alt.Player, target: alt.Player, rankIndex: number): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        if (player.data.faction !== target.data.faction) {
+            return { status: false, response: 'Target player is not in the same faction.' };
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionInternalSystem.setMemberRank(target.data.faction, target.data._id.toString(), rankIndex);
+    }
+
+    /**
+     * Change the name of the faction.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} name New name for the faction.
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async setFactionName(player: alt.Player, name: string): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CHANGE_NAME
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionInternalSystem.setName(player.data.faction, name);
     }
 
     /**
@@ -187,5 +279,130 @@ export class FactionSystem {
         }
 
         return FactionInternalSystem.setName(player.data.faction, name);
+    }
+
+    /**
+     * External callable function for opening faction storages.
+     * @static
+     * @param {alt.Player} player
+     * @param {FACTION_STORAGE} storageName
+     * @memberof FactionSystem
+     */
+    static async openStorage(player: alt.Player, storageName: FACTION_STORAGE): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        switch (storageName) {
+            case FACTION_STORAGE.STORAGE: {
+                const result = FactionInternalSystem.hasPermission(
+                    player.data.faction,
+                    player.data._id.toString(),
+                    FACTION_PERMISSION_FLAGS.ACCESS_STORAGE
+                );
+
+                if (!result) {
+                    return { status: false, response: 'Storage Not Accessible' };
+                }
+
+                break;
+            }
+            case FACTION_STORAGE.WEAPONS: {
+                const result = FactionInternalSystem.hasPermission(
+                    player.data.faction,
+                    player.data._id.toString(),
+                    FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS
+                );
+
+                if (!result) {
+                    return { status: false, response: 'Storage Not Accessible' };
+                }
+
+                break;
+            }
+            default: {
+                return { status: false, response: 'Storage name does not exist.' };
+            }
+        }
+
+        return FactionInternalSystem.openStorage(player, player.data.faction, storageName);
+    }
+
+    /**
+     * Deposit money into a faction bank.
+     * @static
+     * @param {alt.Player} player Player who is depositing
+     * @param {number} amount Amount to deposit
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async depositToBank(player: alt.Player, amount: number): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        if (player.data.cash + player.data.bank !== amount) {
+            return { status: false, response: `Could not deposit ${amount}.` };
+        }
+
+        if (!playerFuncs.currency.subAllCurrencies(player, amount)) {
+            return { status: false, response: `Could not deposit ${amount}.` };
+        }
+
+        return FactionInternalSystem.depositToBank(player.data.faction, amount);
+    }
+
+    /**
+     * Withdraw money from a faction bank.
+     * @static
+     * @param {alt.Player} player Player who is depositing
+     * @param {number} amount Amount to deposit
+     * @return {Promise<Response>}
+     * @memberof FactionSystem
+     */
+    static async withdrawFromBank(player: alt.Player, amount: number): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+        );
+
+        if (!result.status) {
+            return result;
+        }
+
+        if (player.data.cash + player.data.bank !== amount) {
+            return { status: false, response: `Could not withdraw $${amount}.` };
+        }
+
+        const withdrawResult = FactionInternalSystem.withdrawFromBank(player.data.faction, amount);
+        if (!withdrawResult) {
+            return { status: false, response: `Could not withdraw $${amount}.` };
+        }
+
+        if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
+            return { status: false, response: `Could not withdraw $${amount}.` };
+        }
+
+        return { status: true, response: `Withdrew $${amount}.` };
     }
 }

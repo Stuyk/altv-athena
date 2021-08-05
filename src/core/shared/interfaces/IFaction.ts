@@ -84,14 +84,14 @@ export interface IFaction {
      * @type {Array<FactionMember>}
      * @memberof IFaction
      */
-    players: Array<FactionMember>;
+    players?: Array<FactionMember>;
 
     /**
      * The location to access the vehicle storage for the faction.
      * @type {Vector3}
      * @memberof IFaction
      */
-    storageLocation: Vector3;
+    storageLocation?: Vector3;
 
     /**
      * Storage ID for the storage collection.
@@ -105,7 +105,7 @@ export interface IFaction {
      * @type {Vector3}
      * @memberof IFaction
      */
-    weaponLocation: Vector3;
+    weaponLocation?: Vector3;
 
     /**
      * Storage ID for the storage collection.
@@ -119,7 +119,7 @@ export interface IFaction {
      * @type {number}
      * @memberof IFaction
      */
-    bank: number;
+    bank?: number;
 
     /**
      * A list of logs about who changed what, and when.

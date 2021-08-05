@@ -24,6 +24,8 @@ export const KEY_BINDS = {
     INVENTORY: 73,
     // J
     ANIMATION: 74,
+    // K
+    FACTIONS: 75,
     // T
     CHAT: 84,
     // X

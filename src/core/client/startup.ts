@@ -55,6 +55,7 @@ import './views/atm';
 import './views/characters';
 import './views/clothing';
 import './views/creator';
+import './views/factions';
 import './views/garage';
 import './views/hud/hud';
 import './views/inventory';

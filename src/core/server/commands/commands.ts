@@ -6,6 +6,7 @@ import './adminChat';
 import './currency';
 import './death';
 import './debugVehicle';
+import './factions';
 import './garage';
 import './inventory';
 import './item';
