@@ -1,19 +1,16 @@
 import * as alt from 'alt-server';
 import { View_Events_Factions } from '../../shared/enums/views';
-
-import { Vector3 } from '../../shared/interfaces/Vector';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
 import { FactionSystem } from '../systems/factions';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 
 import '../systems/factions';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 class FactionsFunctions {
     static async open(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
         if (!player.data.faction) {
             return;
         }
@@ -22,10 +19,13 @@ class FactionsFunctions {
             return;
         }
 
-        const faction = FactionInternalSystem.get(player.data.faction);
-        FactionInternalSystem.opened(player);
+        const clientInterface = FactionInternalSystem.getClientInterface(
+            player.data.faction,
+            player.data._id.toString()
+        );
 
-        alt.emitClient(player, View_Events_Factions.Open, deepCloneObject(faction));
+        FactionInternalSystem.opened(player);
+        alt.emitClient(player, View_Events_Factions.Open, clientInterface);
     }
 
     static async close(player: alt.Player) {

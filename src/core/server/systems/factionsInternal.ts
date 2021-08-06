@@ -4,8 +4,8 @@ import { View_Events_Factions } from '../../shared/enums/views';
 
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
+import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { IResponse } from '../../shared/interfaces/IResponse';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
@@ -149,14 +149,22 @@ export class FactionInternalSystem {
         }
 
         const players = [...openFactionInterfaces[id]];
-        const factionRef = deepCloneObject<IFaction>(factions[id]);
 
         for (let i = 0; i < players.length; i++) {
             if (!players[i] || !players[i].valid) {
                 continue;
             }
 
-            alt.emitClient(players[i], View_Events_Factions.Update, factionRef);
+            if (!players[i].data || !players[i].data.faction) {
+                continue;
+            }
+
+            const clientInterface = FactionInternalSystem.getClientInterface(
+                players[i].data.faction,
+                players[i].data._id.toString()
+            );
+
+            alt.emitClient(players[i], View_Events_Factions.Update, clientInterface);
         }
     }
 
@@ -628,6 +636,100 @@ export class FactionInternalSystem {
         factions[id].bank -= Math.abs(amount);
         await this.save(id, { bank: factions[id].bank });
         return { status: true, response: `Withdrew $${amount}` };
+    }
+
+    /**
+     * Constructs a faction object for use on client-side.
+     * This faction object helps display different parts of the interface.
+     * Use this as reference if you make any changes to the interface in the future.
+     * @static
+     * @param {string} id
+     * @param {string} playerID
+     * @return {IFactionClient}
+     * @memberof FactionInternalSystem
+     */
+    static getClientInterface(id: string, playerID: string): IFactionClient {
+        if (!factions[id]) {
+            return null;
+        }
+
+        const faction = factions[id];
+        const player = factions[id].players.find((p) => p.id === playerID);
+
+        if (!player) {
+            return null;
+        }
+
+        const playerRank = factions[id].ranks[player.rank];
+        const canChangeMemberRanks = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK);
+        const canChangeRankName = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES);
+        const canChangeRankOrder = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER);
+        const canKickMembers = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.KICK_MEMBER);
+        const canCreateRanks = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CREATE_RANK);
+
+        const members: Array<FactionMemberClient> = [];
+        for (let i = 0; i < factions[id].players.length; i++) {
+            const member = factions[id].players[i] as FactionMemberClient;
+
+            if (canChangeMemberRanks && player.rank < member.rank) {
+                if (player.rank < member.rank - 1) {
+                    member.canRankUp = true;
+                }
+
+                if (member.rank !== factions[id].ranks.length - 1) {
+                    member.canRankDown = true;
+                }
+            }
+
+            if (canKickMembers && player.rank < member.rank) {
+                member.canBeKicked = true;
+            }
+
+            members.push(member);
+        }
+
+        const clientRanks: Array<FactionRankClient> = [];
+        for (let i = 0; i < factions[id].ranks.length; i++) {
+            const rank = factions[id].ranks[i] as FactionRankClient;
+            if (canChangeRankName && player.rank < i) {
+                rank.canRenameRank = true;
+            }
+
+            if (canChangeRankOrder && player.rank < i) {
+                rank.canMoveRankDown = true;
+
+                if (i !== factions[id].ranks.length - 1) {
+                    rank.canMoveRankUp = true;
+                }
+            }
+
+            if (canCreateRanks && i === factions[id].ranks.length - 1) {
+                const memberInRank = factions[id].players.find((x) => x.rank === i);
+                if (!memberInRank) {
+                    rank.canRemoveRank = true;
+                }
+            }
+
+            clientRanks.push(rank);
+        }
+
+        const factionClient: IFactionClient = {
+            _id: faction._id,
+            clientID: id,
+            logs: faction.logs,
+            name: faction.name,
+            pos: faction.pos,
+            players: members,
+            ranks: clientRanks,
+            canAddRanks: canCreateRanks,
+            canAddToBank: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.ADD_TO_BANK),
+            canRemoveFromBank: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK),
+            canChangeName: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_NAME),
+            bank: faction.bank,
+            dimension: faction.dimension
+        };
+
+        return factionClient;
     }
 }
 
