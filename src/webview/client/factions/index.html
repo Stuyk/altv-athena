@@ -1,6 +1,6 @@
 <!DOCTYPE html>
     <head>
-        <title>Garage by Stuyk</title>
+        <title>Factions by Stuyk</title>
         <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
         <link rel="stylesheet" type="text/css" href="../css/vuetify.min.css" />
         <link rel="stylesheet" type="text/css" href="./style.css" />
@@ -10,14 +10,35 @@
     <body>
         <div id="app" >
             <v-app v-cloak>
-                <div class="frame grey elevation-6 rounded-sm darken-4">
-                    {{ faction }}
+                <div class="frame">
+                    <div class="navbar">
+                        <div class="left-nav fill-height">
+                            <div @click="exit" class="exit">
+                                <v-icon class="navitem pl-4 pr-4" color="red">icon-exit</v-icon>
+                            </div>
+                            <span class="text-sm-overline keybind pl-2 pr-2">ESC</span>
+                        </div>
+                        <div class="center-nav fill-height">
+                            <div v-for="(component, componentIndex) in components" :key="componentIndex" :class="isNavSelected(componentIndex)" @click="setPage(componentIndex)">
+                                {{ component.name }}
+                            </div>
+                        </div>
+                        <div class="split right-nav fill-height">
+                            
+                        </div>
+                    </div>
+                    <!-- {{ components[index] }} -->
+                    <component v-bind:is="components[index].component" v-bind:faction="faction"></component>
                 </div>
                 <div class="athena"></div>
             </v-app>
         </div>
         <script src="../js/vue.min.js"></script>
         <script src="../js/vuetify.js"></script>
+        <script src="./utility/events.js"></script>
+        <script src="./components/members.js"></script>
+        <script src="./components/ranks.js"></script>
+        <script src="./components/bank.js"></script>
         <script src="./app.js" type="text/javascript"></script>
     </body>
 </html>

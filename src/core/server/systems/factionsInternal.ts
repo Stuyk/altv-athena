@@ -90,7 +90,31 @@ export class FactionInternalSystem {
         faction._id = faction._id.toString();
 
         if (!faction.ranks) {
-            faction.ranks = [{ name: 'Admin', permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN }];
+            faction.ranks = [
+                {
+                    name: 'Admin',
+                    permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+                },
+                {
+                    name: 'Moderator',
+                    permissions:
+                        FACTION_PERMISSION_FLAGS.KICK_MEMBER |
+                        FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK |
+                        FACTION_PERMISSION_FLAGS.ACCESS_STORAGE |
+                        FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS |
+                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK |
+                        FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK |
+                        FACTION_PERMISSION_FLAGS.KICK_MEMBER |
+                        FACTION_PERMISSION_FLAGS.ADD_MEMBERS
+                },
+                {
+                    name: 'Goon',
+                    permissions:
+                        FACTION_PERMISSION_FLAGS.ACCESS_STORAGE |
+                        FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS |
+                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+                }
+            ];
         }
 
         if (faction.pos) {

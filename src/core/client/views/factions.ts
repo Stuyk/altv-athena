@@ -11,7 +11,7 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
-const url = `http://assets/webview/client/factions/index.html`;
+const url = `http://127.0.0.1:5500/src/webview/client/factions/index.html`;
 let view: View;
 let faction: IFaction;
 

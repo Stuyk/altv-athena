@@ -202,14 +202,10 @@ export class FactionSystem {
      * @return {Promise<Response>}
      * @memberof FactionSystem
      */
-    static async setMemberRank(player: alt.Player, target: alt.Player, rankIndex: number): Promise<IResponse> {
+    static async setMemberRank(player: alt.Player, memberID: string, rankIndex: number): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
             return validateResponse;
-        }
-
-        if (player.data.faction !== target.data.faction) {
-            return { status: false, response: 'Target player is not in the same faction.' };
         }
 
         // Check Permission System
@@ -223,7 +219,7 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setMemberRank(target.data.faction, target.data._id.toString(), rankIndex);
+        return FactionInternalSystem.setMemberRank(player.data.faction, memberID, rankIndex);
     }
 
     /**
