@@ -300,6 +300,22 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Raw Permission Check
+     * @static
+     * @param {FACTION_PERMISSION_FLAGS} permissions
+     * @param {FACTION_PERMISSION_FLAGS} flags
+     * @return {*}  {boolean}
+     * @memberof FactionInternalSystem
+     */
+    static checkPermission(permissions: FACTION_PERMISSION_FLAGS, flags: FACTION_PERMISSION_FLAGS): boolean {
+        if (isFlagEnabled(permissions, FACTION_PERMISSION_FLAGS.SUPER_ADMIN)) {
+            return true;
+        }
+
+        return isFlagEnabled(permissions, flags);
+    }
+
+    /**
      * Internal callable function to add a member to the faction.
      * @static
      * @param {string} id
@@ -497,6 +513,7 @@ export class FactionInternalSystem {
     /**
      * Internal function to change rank order(s).
      * Members will follow the direction of the rank move.
+     * Move down implies adding 1 to a rank.
      * @static
      * @param {string} id
      * @param {number} rankIndex
@@ -516,7 +533,7 @@ export class FactionInternalSystem {
             return { status: false, response: 'Cannot be moved down any further.' };
         }
 
-        if (0 === rankIndex && !moveDown) {
+        if ((0 === rankIndex || 1 === rankIndex) && !moveDown) {
             return { status: false, response: 'Cannot be moved up any further.' };
         }
 
@@ -524,12 +541,20 @@ export class FactionInternalSystem {
         const aboveRankIndex = moveDown ? rankIndex + 1 : rankIndex - 1;
 
         for (let i = 0; i < factions[id].players.length; i++) {
-            if (factions[id].players[i].rank !== aboveRankIndex) {
-                factions[id].players[i].rank += moveDown ? -1 : 1;
+            // If the player's rank matches the rank that is being swapped.
+            // We either move this player up or down.
+            // Swap all players who are currently this rank to this rank.
+            if (factions[id].players[i].rank === aboveRankIndex) {
+                factions[id].players[i].rank = rankIndex;
+                continue;
             }
 
+            // If the player's rank is the rank we are moving.
+            // We either move this player up or down.
+            // Move down implying we 'ADD' 1 to it.
             if (factions[id].players[i].rank === rankIndex) {
-                factions[id].players[i].rank += moveDown ? 1 : -1;
+                factions[id].players[i].rank = aboveRankIndex;
+                continue;
             }
         }
 
@@ -661,15 +686,34 @@ export class FactionInternalSystem {
         }
 
         const playerRank = factions[id].ranks[player.rank];
-        const canChangeMemberRanks = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK);
-        const canChangeRankName = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES);
-        const canChangeRankOrder = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER);
-        const canKickMembers = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.KICK_MEMBER);
-        const canCreateRanks = isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CREATE_RANK);
+        const canChangeMemberRanks = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+        );
 
-        const members: Array<FactionMemberClient> = [];
+        const canChangeRankName = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES
+        );
+
+        const canChangeRankOrder = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+        );
+
+        const canKickMembers = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.KICK_MEMBER
+        );
+
+        const canCreateRanks = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.CREATE_RANK
+        );
+
+        const clientPlayers: Array<FactionMemberClient> = [];
         for (let i = 0; i < factions[id].players.length; i++) {
-            const member = factions[id].players[i] as FactionMemberClient;
+            const member = { ...factions[id].players[i] } as FactionMemberClient;
 
             if (canChangeMemberRanks && player.rank < member.rank) {
                 if (player.rank < member.rank - 1) {
@@ -685,20 +729,22 @@ export class FactionInternalSystem {
                 member.canBeKicked = true;
             }
 
-            members.push(member);
+            clientPlayers.push(member);
         }
 
         const clientRanks: Array<FactionRankClient> = [];
         for (let i = 0; i < factions[id].ranks.length; i++) {
-            const rank = factions[id].ranks[i] as FactionRankClient;
+            const rank = { ...factions[id].ranks[i] } as FactionRankClient;
             if (canChangeRankName && player.rank < i) {
                 rank.canRenameRank = true;
             }
 
             if (canChangeRankOrder && player.rank < i) {
-                rank.canMoveRankDown = true;
+                if (i !== factions[id].ranks.length - 1 && i !== 0) {
+                    rank.canMoveRankDown = true;
+                }
 
-                if (i !== factions[id].ranks.length - 1) {
+                if (i !== 0 && i !== 1) {
                     rank.canMoveRankUp = true;
                 }
             }
@@ -719,16 +765,26 @@ export class FactionInternalSystem {
             logs: faction.logs,
             name: faction.name,
             pos: faction.pos,
-            players: members,
+            players: clientPlayers,
             ranks: clientRanks,
             canAddRanks: canCreateRanks,
-            canAddToBank: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.ADD_TO_BANK),
-            canRemoveFromBank: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK),
-            canChangeName: isFlagEnabled(playerRank.permissions, FACTION_PERMISSION_FLAGS.CHANGE_NAME),
+            canAddToBank: FactionInternalSystem.checkPermission(
+                playerRank.permissions,
+                FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+            ),
+            canRemoveFromBank: FactionInternalSystem.checkPermission(
+                playerRank.permissions,
+                FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK
+            ),
+            canChangeName: FactionInternalSystem.checkPermission(
+                playerRank.permissions,
+                FACTION_PERMISSION_FLAGS.CHANGE_NAME
+            ),
             bank: faction.bank,
             dimension: faction.dimension
         };
 
+        console.log(factionClient);
         return factionClient;
     }
 }

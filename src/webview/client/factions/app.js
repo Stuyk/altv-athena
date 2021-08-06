@@ -67,21 +67,69 @@ const app = new Vue({
             alt.emit('ready');
             alt.emit('url');
         } else {
+            let players = [
+                {
+                    name: 'Jane_Dane',
+                    id: '608729d7b1f7d6140ca718ac',
+                    rank: 0
+                },
+                {
+                    name: 'Some_Person',
+                    id: '608729d7b1f7d6140ca718fd',
+                    rank: 1,
+                    canBeKicked: true,
+                    canRankDown: true
+                },
+                {
+                    name: 'Jobi_Jones',
+                    id: '608729d7b1f7d6140ca718ad',
+                    rank: 1,
+                    canBeKicked: true,
+                    canRankDown: true
+                }
+            ];
+
+            for (let i = 0; i < 5; i++) {
+                players.forEach((player) => {
+                    players.push(player);
+                });
+            }
+
             this.setFaction({
                 _id: '610b2583173e6d562c301a9d',
-                name: 'Whatever',
+                clientID: '610b2583173e6d562c301a9d',
+                canAddRanks: true,
                 logs: [],
-                pos: { x: -802.1275024414062, y: -60.06593322753906, z: 37.75537109375, length: 805.2589115022635 },
-                players: [
-                    { name: 'Jane_Dane', id: '608729d7b1f7d6140ca718aa', rank: 0 },
-                    { name: 'Jobi_Jones', id: '608729d7b1f7d6140ca718ac', rank: 2 },
-                    { name: 'Jobi_Johan', id: '608729d7b1f7d6140ca718ab', rank: 1 }
-                ],
+                name: 'Whatever',
+                pos: {
+                    x: -802.1275024414062,
+                    y: -60.06593322753906,
+                    z: 37.75537109375,
+                    length: 805.2589115022635
+                },
+                players,
                 ranks: [
-                    { name: 'Admin', permissions: 1 },
-                    { name: 'Moderator', permissions: 1 },
-                    { name: 'Goon', permissions: 1 }
+                    {
+                        name: 'Admin',
+                        permissions: 1
+                    },
+                    {
+                        name: 'Moderator',
+                        permissions: 7972,
+                        canRenameRank: true,
+                        canMoveRankDown: true
+                    },
+                    {
+                        name: 'Goon',
+                        permissions: 2816,
+                        canRenameRank: true,
+                        canMoveRankUp: true,
+                        canRemoveRank: true
+                    }
                 ],
+                canAddToBank: true,
+                canRemoveFromBank: true,
+                canChangeName: true,
                 bank: 0
             });
         }

@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { View_Events_Factions } from '../../shared/enums/views';
-import { IFaction } from '../../shared/interfaces/IFaction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { KeybindController } from '../events/keyup';
@@ -10,10 +9,11 @@ import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IFactionClient } from '../../shared/interfaces/IFactionClient';
 
 const url = `http://127.0.0.1:5500/src/webview/client/factions/index.html`;
 let view: View;
-let faction: IFaction;
+let faction: IFactionClient;
 
 class FactionsView implements ViewModel {
     static init() {
@@ -25,7 +25,7 @@ class FactionsView implements ViewModel {
         });
     }
 
-    static async show(_faction: IFaction): Promise<void> {
+    static async show(_faction: IFactionClient): Promise<void> {
         console.log(JSON.stringify(_faction));
         faction = _faction;
 
@@ -35,8 +35,8 @@ class FactionsView implements ViewModel {
 
         view = await View.getInstance(url, true, false, true);
         view.on('factions:Ready', FactionsView.ready);
-        view.on('factions:Close', FactionsView.close);
-        view.on('factions:Bus', FactionsView.bus);
+        view.on(View_Events_Factions.Close, FactionsView.close);
+        view.on(View_Events_Factions.Bus, FactionsView.bus);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
     }
@@ -54,7 +54,7 @@ class FactionsView implements ViewModel {
         view = null;
     }
 
-    static update(_faction: IFaction = null) {
+    static update(_faction: IFactionClient = null) {
         if (_faction) {
             faction = _faction;
         }
@@ -67,7 +67,7 @@ class FactionsView implements ViewModel {
     }
 
     static ready() {
-        console.log(faction);
+        console.log(JSON.stringify(faction, null, '\t'));
         view.emit('factions:SetLocale', null);
         view.emit('factions:SetFaction', faction);
     }
