@@ -37,7 +37,7 @@ const app = new Vue({
          * @param {Array<Object>} items
          */
         updateInventory(inventoryItems) {
-            const newInventory = new Array(6);
+            const newInventory = new Array(5);
             for (let i = 0; i < newInventory.length; i++) {
                 newInventory[i] = new Array(28).fill(null);
             }
@@ -549,7 +549,7 @@ const app = new Vue({
         document.addEventListener('keyup', this.handleClose);
 
         // Used to populate data on entry.
-        this.inventory = new Array(6).fill(new Array(28).fill(null));
+        this.inventory = new Array(5).fill(new Array(28).fill(null));
         this.ground = new Array(8).fill(null);
         this.equipment = new Array(11).fill(null);
         this.toolbar = new Array(4).fill(null);
