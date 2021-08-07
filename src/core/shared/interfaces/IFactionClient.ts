@@ -54,6 +54,15 @@ export interface FactionRankClient extends FactionRank {
      * @memberof FactionRankClient
      */
     canRenameRank?: boolean;
+
+    /**
+     * Can the player change the rank permission(s).
+     * The player can append every permission but change rank perm(s).
+     * Only the owner can append change rank perm(s).
+     * @type {boolean}
+     * @memberof FactionRankClient
+     */
+    canChangeRankPerms?: boolean;
 }
 
 export interface IFactionClient extends IFaction {

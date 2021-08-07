@@ -5,9 +5,10 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
-            index: 0,
+            index: 1,
             locales: {},
             faction: {},
+            flags: {},
             components: [
                 { name: 'Members', component: MembersComponent },
                 { name: 'Ranks', component: RanksComponent },
@@ -26,6 +27,9 @@ const app = new Vue({
             });
 
             this.faction = faction;
+        },
+        setFlags(flags) {
+            this.flags = flags;
         },
         setPage(index) {
             this.index = index;
@@ -62,6 +66,7 @@ const app = new Vue({
         if ('alt' in window) {
             alt.on('factions:SetFaction', this.setFaction);
             alt.on('factions:SetLocale', this.setLocales);
+            alt.on('factions:SetFlags', this.setFlags);
             alt.on('url', this.setURL);
             alt.emit('factions:Ready');
             alt.emit('ready');
@@ -117,20 +122,54 @@ const app = new Vue({
                         name: 'Moderator',
                         permissions: 7972,
                         canRenameRank: true,
-                        canMoveRankDown: true
+                        canMoveRankDown: true,
+                        canChangeRankPerms: true
                     },
                     {
                         name: 'Goon',
                         permissions: 2816,
                         canRenameRank: true,
                         canMoveRankUp: true,
-                        canRemoveRank: true
+                        canRemoveRank: true,
+                        canChangeRankPerms: true
                     }
                 ],
                 canAddToBank: true,
                 canRemoveFromBank: true,
                 canChangeName: true,
                 bank: 0
+            });
+
+            // Example Output from Clientside Enum Send
+            this.setFlags({
+                1: 'SUPER_ADMIN',
+                2: 'CHANGE_NAME',
+                4: 'CHANGE_MEMBER_RANK',
+                8: 'CHANGE_RANK_ORDER',
+                16: 'CHANGE_RANK_NAMES',
+                32: 'KICK_MEMBER',
+                64: 'CREATE_RANK',
+                128: 'PREVENT_FACTION_CHAT',
+                256: 'ACCESS_STORAGE',
+                512: 'ADD_TO_BANK',
+                1024: 'REMOVE_FROM_BANK',
+                2048: 'ACCESS_WEAPONS',
+                4096: 'ADD_MEMBERS',
+                8192: 'CHANGE_RANK_PERMS',
+                ACCESS_STORAGE: 256,
+                ACCESS_WEAPONS: 2048,
+                ADD_MEMBERS: 4096,
+                ADD_TO_BANK: 512,
+                CHANGE_MEMBER_RANK: 4,
+                CHANGE_NAME: 2,
+                CHANGE_RANK_NAMES: 16,
+                CHANGE_RANK_ORDER: 8,
+                CHANGE_RANK_PERMS: 8192,
+                CREATE_RANK: 64,
+                KICK_MEMBER: 32,
+                PREVENT_FACTION_CHAT: 128,
+                REMOVE_FROM_BANK: 1024,
+                SUPER_ADMIN: 1
             });
         }
     }

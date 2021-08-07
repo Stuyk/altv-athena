@@ -81,14 +81,28 @@ const MembersComponent = Vue.component('members', {
                         <div class="cell name">{{ player.name }}</div>
                         <div class="cell rank overline">({{ player.rank }}) {{ faction.ranks[player.rank].name }}</div>
                         <div class="cell options split-auto">
-                            <div class="small-icon" @click="rankUp(player.id, player.rank)" v-if="player.canRankUp">
+                            <!-- Rank Up -->
+                            <div class="small-icon hoverable" @click="rankUp(player.id, player.rank)" v-if="player.canRankUp">
                                 <v-icon>icon-chevron-up</v-icon>
                             </div>
-                            <div class="small-icon" @click="rankDown(player.id, player.rank)" v-if="player.canRankDown">
+                            <div class="small-icon no-hover" v-else>
+                                <v-icon color="grey darken-2">icon-chevron-up</v-icon>
+                            </div>
+
+                            <!-- Rank Down -->
+                            <div class="small-icon hoverable" @click="rankDown(player.id, player.rank)" v-if="player.canRankDown">
                                 <v-icon>icon-chevron-down</v-icon>
                             </div>
-                            <div class="small-icon kick" @click="kickMember(player.id)" v-if="player.canBeKicked">
-                                <v-icon small>icon-user-times</v-icon>
+                            <div class="small-icon no-hover" v-else>
+                                <v-icon color="grey darken-2">icon-chevron-down</v-icon>
+                            </div>
+
+                            <!-- Kick -->
+                            <div class="small-icon hoverable" @click="kickMember(player.id)" v-if="player.canBeKicked">
+                                <v-icon small color="red">icon-user-times</v-icon>
+                            </div>
+                            <div class="small-icon no-hover" v-else>
+                                <v-icon color="grey darken-2" small>icon-user-times</v-icon>
                             </div>
                         </div>
                     </div>

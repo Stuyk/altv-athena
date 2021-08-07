@@ -389,6 +389,10 @@ export class FactionInternalSystem {
             return { status: false, response: 'Target player is not in your faction.' };
         }
 
+        if (Math.abs(factions[id].players[memberIndex].rank - rankIndex) > 1) {
+            return { status: false, response: 'May only move rank up or down 1 index at a time.' };
+        }
+
         factions[id].players[memberIndex].rank = rankIndex;
         await this.save(id, { players: factions[id].players });
         return { status: true, response: `Target player's rank was set to ${rankIndex}` };
@@ -711,6 +715,11 @@ export class FactionInternalSystem {
             FACTION_PERMISSION_FLAGS.CREATE_RANK
         );
 
+        const canChangeRankPerms = FactionInternalSystem.checkPermission(
+            playerRank.permissions,
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+        );
+
         const clientPlayers: Array<FactionMemberClient> = [];
         for (let i = 0; i < factions[id].players.length; i++) {
             const member = { ...factions[id].players[i] } as FactionMemberClient;
@@ -749,11 +758,16 @@ export class FactionInternalSystem {
                 }
             }
 
-            if (canCreateRanks && i === factions[id].ranks.length - 1) {
-                const memberInRank = factions[id].players.find((x) => x.rank === i);
-                if (!memberInRank) {
-                    rank.canRemoveRank = true;
-                }
+            // Basically; Check if last rank. Check that the faction rank length is at least 3.
+            // If there are only 2 ranks in the faction it cannot remove another.
+            if (canCreateRanks && i === factions[id].ranks.length - 1 && factions[id].ranks.length >= 3) {
+                rank.canRemoveRank = true;
+            }
+
+            // Prevents changing own rank permissions.
+            // However, only the owner can add the flag to change rank perms to a rank.
+            if (canChangeRankPerms && player.rank < i) {
+                rank.canChangeRankPerms = true;
             }
 
             clientRanks.push(rank);

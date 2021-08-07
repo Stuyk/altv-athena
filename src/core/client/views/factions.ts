@@ -1,8 +1,6 @@
 import * as alt from 'alt-client';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { View_Events_Factions } from '../../shared/enums/views';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
@@ -10,6 +8,7 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IFactionClient } from '../../shared/interfaces/IFactionClient';
+import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
 
 const url = `http://127.0.0.1:5500/src/webview/client/factions/index.html`;
 let view: View;
@@ -26,7 +25,6 @@ class FactionsView implements ViewModel {
     }
 
     static async show(_faction: IFactionClient): Promise<void> {
-        console.log(JSON.stringify(_faction));
         faction = _faction;
 
         if (isAnyMenuOpen()) {
@@ -70,6 +68,7 @@ class FactionsView implements ViewModel {
         console.log(JSON.stringify(faction, null, '\t'));
         view.emit('factions:SetLocale', null);
         view.emit('factions:SetFaction', faction);
+        view.emit('factions:SetFlags', FACTION_PERMISSION_FLAGS);
     }
 
     static bus(eventName: View_Events_Factions, ...args: any[]) {

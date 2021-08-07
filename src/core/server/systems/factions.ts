@@ -165,6 +165,54 @@ export class FactionSystem {
     }
 
     /**
+     * Set permission(s) for a specific rank.
+     * Only the owner can append rank permission setting.
+     * Anyone with the permission can change other(s) flags lower than themself.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} rankIndex
+     * @param {FACTION_PERMISSION_FLAGS} number
+     * @return {Promise<IResponse>}
+     * @memberof FactionSystem
+     */
+    static async setRankPermissions(
+        player: alt.Player,
+        rankIndex: number,
+        flags: FACTION_PERMISSION_FLAGS
+    ): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        // Check Permission System
+        const result = FactionInternalSystem.hasPermission(
+            player.data.faction,
+            player.data._id.toString(),
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+        );
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+
+        const wasAlreadySet = FactionInternalSystem.checkPermission(
+            faction.ranks[rankIndex].permissions,
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+        );
+
+        const isSettingPerms = FactionInternalSystem.checkPermission(flags, FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS);
+
+        if (!wasAlreadySet && isSettingPerms && faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: 'Only the owner can append rank permission(s) flag to a rank.' };
+        }
+
+        if (!result.status) {
+            return result;
+        }
+
+        return FactionInternalSystem.setRankPermissions(player.data.faction, rankIndex, flags);
+    }
+
+    /**
      * Change the rank order based on rankIndex and a boolean.
      * @static
      * @param {alt.Player} player

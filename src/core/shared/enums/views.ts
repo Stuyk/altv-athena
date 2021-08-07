@@ -72,5 +72,6 @@ export enum View_Events_Factions {
     SetMemberRank = 'factions:SetMemberRank',
     Deposit = 'factions:Deposit',
     Withdraw = 'factions:Withdraw',
-    ChangeRankOrder = 'factions:ChangeRankOrder'
+    ChangeRankOrder = 'factions:ChangeRankOrder',
+    SetPermissions = 'factions:SetPermissions'
 }

@@ -1,3 +1,11 @@
+/**
+ * Changing these numerical values can ruin your faction(s).
+ * Keep the default(s) but add additional below it.
+ * It's a bitwise permission structure.
+ * Just look at the number(s) and discover the pattern.
+ * @export
+ * @enum {number}
+ */
 export enum FACTION_PERMISSION_FLAGS {
     SUPER_ADMIN = 1, // Skips all permission checks.
     CHANGE_NAME = 2, // Changes the name of the faction.
@@ -11,7 +19,8 @@ export enum FACTION_PERMISSION_FLAGS {
     ADD_TO_BANK = 512, // Add money to the faction bank.
     REMOVE_FROM_BANK = 1024, // Remove money from the faction bank.
     ACCESS_WEAPONS = 2048, // A place to store money, items, and weapons.
-    ADD_MEMBERS = 4096 // Permission to add members to the faction.
+    ADD_MEMBERS = 4096, // Permission to add members to the faction.
+    CHANGE_RANK_PERMS = 8192 // Permission to change rank permission(s). Really strong. Careful.
 }
 
 export enum FACTION_STORAGE {

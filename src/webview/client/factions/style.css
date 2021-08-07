@@ -51,6 +51,22 @@ body {
     background: rgba(25, 25, 25, 0.9);
 }
 
+.no-hover {
+    cursor: unset;
+}
+
+.hoverable {
+    cursor: pointer;
+}
+
+.hoverable:hover {
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 25px rgba(255, 255, 255, 1);
+}
+
+.hoverable:active {
+    transform: translateY(-3px);
+}
+
 .frame .wrapper {
     overflow-y: scroll;
 }
@@ -181,20 +197,12 @@ body {
     align-content: center;
     align-items: center;
     justify-items: center;
-    cursor: pointer !important;
     padding: 6px;
 }
 
-.frame .small-icon:nth-of-type(odd) {
+.frame .small-icon:nth-of-type(even) {
     margin-right: 6px;
-}
-
-.frame .small-icon:hover {
-    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 25px rgba(255, 255, 255, 1);
-}
-
-.frame .small-icon:active {
-    transform: translateY(-3px);
+    margin-left: 6px;
 }
 
 .frame .navbar .keybind {
