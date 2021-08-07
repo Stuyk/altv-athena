@@ -27,7 +27,7 @@ ChatController.addCommand(
 );
 
 function clearInventory(player: alt.Player) {
-    player.data.inventory = new Array(6);
+    player.data.inventory = new Array(5);
     for (let i = 0; i < player.data.inventory.length; i++) {
         player.data.inventory[i] = [];
     }
