@@ -61,6 +61,7 @@ const MembersComponent = Vue.component('members', {
         <template>
             <div class="wrapper pa-6">
                 <v-text-field
+                    class="mb-4"
                     placeholder="Search for Name, or Rank Index"
                     v-model="search"
                     autocomplete="off"

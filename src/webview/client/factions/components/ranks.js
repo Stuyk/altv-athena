@@ -139,6 +139,7 @@ const RanksComponent = Vue.component('ranks', {
                         autocomplete="off"
                         @keyup="typing"
                         type="string"
+                        class="mb-4"
                         dense
                     />
                     <v-icon @click="addRank" class="ml-6 hoverable">icon-plus</v-icon>

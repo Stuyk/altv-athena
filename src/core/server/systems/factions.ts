@@ -194,15 +194,25 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
 
-        const wasAlreadySet = FactionInternalSystem.checkPermission(
-            faction.ranks[rankIndex].permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
-        );
+        const wasAlreadySet =
+            FactionInternalSystem.checkPermission(
+                faction.ranks[rankIndex].permissions,
+                FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+            ) ||
+            FactionInternalSystem.checkPermission(
+                faction.ranks[rankIndex].permissions,
+                FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+            );
 
-        const isSettingPerms = FactionInternalSystem.checkPermission(flags, FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS);
+        const isSettingPerms =
+            FactionInternalSystem.checkPermission(flags, FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS) ||
+            FactionInternalSystem.checkPermission(flags, FACTION_PERMISSION_FLAGS.SUPER_ADMIN);
 
         if (!wasAlreadySet && isSettingPerms && faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: 'Only the owner can append rank permission(s) flag to a rank.' };
+            return {
+                status: false,
+                response: 'Only the owner can append rank permission(s) or super admin flag to a rank.'
+            };
         }
 
         if (!result.status) {

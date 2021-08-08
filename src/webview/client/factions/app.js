@@ -5,7 +5,7 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
-            index: 2,
+            index: 3,
             locales: {},
             faction: {},
             flags: {},
