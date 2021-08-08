@@ -46,11 +46,13 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
 async function onTick(p: alt.Player): Promise<void> {
     // Update Server Data First
     p.data.pos = p.pos;
+    p.data.dimension = p.dimension;
     p.data.health = p.health;
     p.data.armour = p.armour;
 
     // Update Database
     saveField(p, 'pos', p.data.pos);
+    saveField(p, 'dimension', p.data.dimension);
     saveField(p, 'health', p.data.health);
     saveField(p, 'armour', p.data.armour);
 }

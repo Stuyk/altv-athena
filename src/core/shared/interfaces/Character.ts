@@ -29,6 +29,13 @@ export interface Character {
     pos: Partial<Vector3>;
 
     /**
+     * The dimension that this character last logged out at.
+     * @type {number}
+     * @memberof Character
+     */
+    dimension: number;
+
+    /**
      * The name of this character to display to other users.
      * @type {string}
      * @memberof Character

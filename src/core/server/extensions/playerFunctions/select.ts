@@ -33,8 +33,6 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
     sync.appearance(player);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
-    // Set player dimension to zero.
-    safe.setDimension(player, 0);
     setter.frozen(player, true);
 
     alt.setTimeout(async () => {
@@ -47,6 +45,12 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
             );
+        }
+
+        if (player.data.dimension) {
+            safe.setDimension(player, player.data.dimension);
+        } else {
+            safe.setDimension(player, 0);
         }
 
         // Force the player into the interior they were last in.
