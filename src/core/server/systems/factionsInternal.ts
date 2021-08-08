@@ -334,13 +334,13 @@ export class FactionInternalSystem {
 
         const memberIndex = factions[id].players.findIndex((member) => member.id === target.data._id.toString());
         if (memberIndex >= 0) {
-            return { status: true, response: 'Target player is already in this faction.' };
+            return { status: true, response: `${target.data.name} is already in this faction.` };
         }
 
         const lastRankInFaction = factions[id].ranks.length - 1;
         factions[id].players.push({ id: target.data._id.toString(), name: target.data.name, rank: lastRankInFaction });
         await this.save(id, { players: factions[id].players });
-        return { status: true, response: 'Target player was added to the faction.' };
+        return { status: true, response: `${target.data.name} was added to the faction.` };
     }
 
     /**
@@ -361,9 +361,9 @@ export class FactionInternalSystem {
             return { status: false, response: 'Target player is not in your faction.' };
         }
 
-        factions[id].players.splice(memberIndex, 1);
+        const oldData = factions[id].players.splice(memberIndex, 1)[0];
         await this.save(id, { players: factions[id].players });
-        return { status: true, response: 'Target player was removed from your faction.' };
+        return { status: true, response: `${oldData.name} was removed from your faction.` };
     }
 
     /**
@@ -395,7 +395,7 @@ export class FactionInternalSystem {
 
         factions[id].players[memberIndex].rank = rankIndex;
         await this.save(id, { players: factions[id].players });
-        return { status: true, response: `Target player's rank was set to ${rankIndex}` };
+        return { status: true, response: `${factions[id].players[memberIndex].name} rank was set to ${rankIndex}` };
     }
 
     /**
@@ -443,9 +443,9 @@ export class FactionInternalSystem {
             factions[id].players[i].rank -= 1;
         }
 
-        factions[id].ranks.pop();
+        const oldRank = factions[id].ranks.pop();
         await this.save(id, { ranks: factions[id].ranks, players: factions[id].players });
-        return { status: true, response: `Rank Index ${factions[id].ranks.length + 1} was removed.` };
+        return { status: true, response: `Rank ${oldRank.name} was removed.` };
     }
 
     /**
@@ -469,7 +469,7 @@ export class FactionInternalSystem {
         const oldName = factions[id].ranks[rankIndex].name;
         factions[id].ranks[rankIndex].name = name;
         await this.save(id, { ranks: factions[id].ranks });
-        return { status: true, response: `Rank ${rankIndex} was changed from ${oldName} to ${name}` };
+        return { status: true, response: `Rank ${oldName} was renamed to ${name}` };
     }
 
     /**

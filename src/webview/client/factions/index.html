@@ -29,7 +29,12 @@
                     </div>
                     <component ref="pageComponent" v-bind:is="components[index].component" v-bind:faction="faction" v-bind:flags="flags"></component>
                 </div>
-                <div class="athena"></div>
+                <div class="response-green pa-4" v-if="response && response.status">
+                    {{ response.response }}
+                </div>
+                <div class="response-red pa-4" v-if="response && !response.status">
+                    {{ response.response }}
+                </div>
             </v-app>
         </div>
         <script src="../js/vue.min.js"></script>

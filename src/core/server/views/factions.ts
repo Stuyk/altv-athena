@@ -45,7 +45,8 @@ class FactionsFunctions {
             throw new Error(`${eventName} is not a Faction Bus Event Binding`);
         }
 
-        EventBindings[eventName](player, ...args);
+        const response = await EventBindings[eventName](player, ...args);
+        alt.emitClient(player, View_Events_Factions.Response, response);
     }
 }
 

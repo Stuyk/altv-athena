@@ -5,7 +5,9 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
+            timeout: 0,
             index: 3,
+            response: null,
             locales: {},
             faction: {},
             flags: {},
@@ -21,6 +23,24 @@ const app = new Vue({
     methods: {
         setURL(url) {
             this.url = `http://${url}:9111`;
+        },
+        showResponse(response) {
+            if (!response) {
+                return;
+            }
+
+            this.response = response;
+
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+                this.timeout = null;
+            }
+
+            this.timeout = setTimeout(() => {
+                clearTimeout(this.timeout);
+                this.response = null;
+                this.timeout = null;
+            }, 3000);
         },
         setFaction(faction) {
             faction.players = faction.players.sort((a, b) => {
@@ -75,6 +95,7 @@ const app = new Vue({
             alt.on('factions:SetFaction', this.setFaction);
             alt.on('factions:SetLocale', this.setLocales);
             alt.on('factions:SetFlags', this.setFlags);
+            alt.on('factions:Response', this.showResponse);
             alt.on('url', this.setURL);
             alt.emit('factions:Ready');
             alt.emit('ready');
@@ -179,6 +200,8 @@ const app = new Vue({
                 REMOVE_FROM_BANK: 1024,
                 SUPER_ADMIN: 1
             });
+
+            this.showResponse({ status: true, response: 'Hello World' });
         }
     }
 });

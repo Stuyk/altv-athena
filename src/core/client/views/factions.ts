@@ -9,6 +9,7 @@ import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
+import { IResponse } from '../../shared/interfaces/IResponse';
 
 const url = `http://127.0.0.1:5500/src/webview/client/factions/index.html`;
 let view: View;
@@ -79,8 +80,21 @@ class FactionsView implements ViewModel {
     static bus(eventName: View_Events_Factions, ...args: any[]) {
         alt.emitServer(View_Events_Factions.Bus, eventName, ...args);
     }
+
+    static response(response: IResponse) {
+        if (!response) {
+            return;
+        }
+
+        if (!view) {
+            return;
+        }
+
+        view.emit('factions:Response', response);
+    }
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, FactionsView.init);
 alt.onServer(View_Events_Factions.Update, FactionsView.update);
 alt.onServer(View_Events_Factions.Open, FactionsView.show);
+alt.onServer(View_Events_Factions.Response, FactionsView.response);
