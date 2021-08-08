@@ -159,6 +159,11 @@ export class VehicleSystem {
             return;
         }
 
+        if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
+            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
+            return;
+        }
+
         const tasks: Array<Task> = [
             // native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, i - 1, 2, 1, 0);
             {
@@ -547,6 +552,11 @@ export class VehicleSystem {
 
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
         if (!vehicle || !vehicle.valid) {
+            return false;
+        }
+
+        if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
+            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
             return false;
         }
 
