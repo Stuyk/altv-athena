@@ -398,7 +398,7 @@ export class FactionSystem {
             return result;
         }
 
-        if (player.data.cash + player.data.bank !== amount) {
+        if (player.data.cash + player.data.bank < amount) {
             return { status: false, response: `Could not deposit ${amount}.` };
         }
 
@@ -434,12 +434,8 @@ export class FactionSystem {
             return result;
         }
 
-        if (player.data.cash + player.data.bank !== amount) {
-            return { status: false, response: `Could not withdraw $${amount}.` };
-        }
-
-        const withdrawResult = FactionInternalSystem.withdrawFromBank(player.data.faction, amount);
-        if (!withdrawResult) {
+        const withdrawResult = await FactionInternalSystem.withdrawFromBank(player.data.faction, amount);
+        if (!withdrawResult.status) {
             return { status: false, response: `Could not withdraw $${amount}.` };
         }
 

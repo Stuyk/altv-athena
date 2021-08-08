@@ -33,6 +33,7 @@ class FactionsView implements ViewModel {
 
         view = await View.getInstance(url, true, false, true);
         view.on('factions:Ready', FactionsView.ready);
+        view.on('factions:GetCurrency', FactionsView.getCurrency);
         view.on(View_Events_Factions.Close, FactionsView.close);
         view.on(View_Events_Factions.Bus, FactionsView.bus);
         alt.toggleGameControls(false);
@@ -50,6 +51,10 @@ class FactionsView implements ViewModel {
 
         view.close();
         view = null;
+    }
+
+    static getCurrency() {
+        view.emit('factions:SetCurrency', alt.Player.local.meta.bank + alt.Player.local.meta.cash);
     }
 
     static update(_faction: IFactionClient = null) {

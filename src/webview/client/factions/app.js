@@ -5,14 +5,15 @@ const app = new Vue({
     vuetify: new Vuetify({ theme: { dark: true } }),
     data() {
         return {
-            index: 1,
+            index: 2,
             locales: {},
             faction: {},
             flags: {},
             components: [
                 { name: 'Members', component: MembersComponent },
                 { name: 'Ranks', component: RanksComponent },
-                { name: 'Bank', component: BankComponent }
+                { name: 'Bank', component: BankComponent },
+                { name: 'Options', component: OptionsComponent }
             ],
             url: 'http://localhost:9111'
         };
@@ -41,7 +42,6 @@ const app = new Vue({
         },
         setPage(index) {
             this.index = index;
-            console.log(index);
         },
         exit() {
             if ('alt' in window) {

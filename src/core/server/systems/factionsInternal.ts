@@ -662,6 +662,10 @@ export class FactionInternalSystem {
             factions[id].bank = 0;
         }
 
+        if (factions[id].bank < amount) {
+            return { status: false, response: `Faction bank does not have $${amount} available.` };
+        }
+
         factions[id].bank -= Math.abs(amount);
         await this.save(id, { bank: factions[id].bank });
         return { status: true, response: `Withdrew $${amount}` };
