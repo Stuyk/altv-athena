@@ -70,6 +70,63 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Take over a faction as an Admin.
+     * @static
+     * @param {alt.Player} player
+     * @memberof FactionInternalSystem
+     */
+    static async takeOverFaction(player: alt.Player, faction: string): Promise<boolean> {
+        if (!factions[faction]) {
+            return false;
+        }
+
+        const owner = factions[faction].players[0];
+        if (owner.id === player.data._id.toString()) {
+            return false;
+        }
+
+        factions[faction].players[0].rank = 1;
+        factions[faction].players.unshift({ id: player.data._id.toString(), name: player.data.name, rank: 0 });
+        await FactionInternalSystem.save(faction, { players: factions[faction].players });
+        return true;
+    }
+
+    /**
+     * Hand over a faction to a player in the faction.
+     * The owner will leave the faction if this is done.
+     * @static
+     * @param {alt.Player} player
+     * @memberof FactionInternalSystem
+     */
+    static async handOffFaction(faction: string, characterID: string, leaveFaction: boolean = false): Promise<boolean> {
+        if (!factions[faction]) {
+            return false;
+        }
+
+        if (factions[faction].players[0].id === characterID) {
+            return false;
+        }
+
+        const targetIndex = factions[faction].players.findIndex((x) => x.id === characterID);
+        if (targetIndex <= -1) {
+            return false;
+        }
+
+        const newOwner = factions[faction].players.splice(targetIndex, 1)[0];
+
+        if (leaveFaction) {
+            factions[faction].players.splice(0, 1);
+        } else {
+            factions[faction].players[0].rank = 1;
+        }
+
+        newOwner.rank = 0;
+        factions[faction].players.unshift(newOwner);
+        await FactionInternalSystem.save(faction, { players: factions[faction].players });
+        return true;
+    }
+
+    /**
      * Disband, reset all member's factions, and delete faction.
      * Notifies all online players.
      * @static
