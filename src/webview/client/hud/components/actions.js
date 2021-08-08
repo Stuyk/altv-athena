@@ -56,6 +56,8 @@ const actions = Vue.component('actions', {
             return actions;
         },
         handleKeyBinds(key) {
+            console.log(key);
+
             const keyCode = key.keyCode;
 
             // 1 - 9

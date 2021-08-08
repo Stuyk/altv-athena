@@ -37,6 +37,7 @@ export class ActionsController {
 
         alt.Player.local.isActionMenuOpen = true;
         BaseHUD.view.emit('actions:Set', actionMenu);
+        BaseHUD.view.focus();
     }
 
     /**
@@ -64,6 +65,7 @@ export class ActionsController {
      */
     static closed() {
         alt.Player.local.isActionMenuOpen = false;
+        BaseHUD.view.unfocus();
     }
 
     /**
@@ -74,6 +76,7 @@ export class ActionsController {
      * @memberof ActionsController
      */
     static trigger(action: Action) {
+        BaseHUD.view.unfocus();
         ActionsController.closed();
         handleFrontendSound('SELECT', 'HUD_FREEMODE_SOUNDSET');
 
