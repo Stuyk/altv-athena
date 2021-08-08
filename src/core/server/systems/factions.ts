@@ -49,7 +49,9 @@ export class FactionSystem {
         }
 
         // Finish Adding Member
-        return FactionInternalSystem.addMember(player.data.faction, target);
+        const response = await FactionInternalSystem.addMember(player.data.faction, target);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -78,7 +80,9 @@ export class FactionSystem {
         }
 
         // Finish Adding Member
-        return FactionInternalSystem.removeMember(player.data.faction, targetID);
+        const response = await FactionInternalSystem.removeMember(player.data.faction, targetID);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -106,7 +110,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.addRank(player.data.faction, rankName);
+        const response = await FactionInternalSystem.addRank(player.data.faction, rankName);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -134,7 +140,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.removeRank(player.data.faction);
+        const response = await FactionInternalSystem.removeRank(player.data.faction);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -161,7 +169,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setRankName(player.data.faction, rankIndex, name);
+        const response = await FactionInternalSystem.setRankName(player.data.faction, rankIndex, name);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -219,7 +229,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setRankPermissions(player.data.faction, rankIndex, flags);
+        const response = await FactionInternalSystem.setRankPermissions(player.data.faction, rankIndex, flags);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -248,7 +260,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.changeRankOrder(player.data.faction, rankIndex, moveDown);
+        const response = await FactionInternalSystem.changeRankOrder(player.data.faction, rankIndex, moveDown);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -277,7 +291,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setMemberRank(player.data.faction, memberID, rankIndex);
+        const response = await FactionInternalSystem.setMemberRank(player.data.faction, memberID, rankIndex);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -305,7 +321,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setName(player.data.faction, name);
+        const response = await FactionInternalSystem.setName(player.data.faction, name);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -332,7 +350,9 @@ export class FactionSystem {
             return result;
         }
 
-        return FactionInternalSystem.setName(player.data.faction, name);
+        const response = await FactionInternalSystem.setName(player.data.faction, name);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -380,7 +400,9 @@ export class FactionSystem {
             }
         }
 
-        return FactionInternalSystem.openStorage(player, player.data.faction, storageName);
+        const response = await FactionInternalSystem.openStorage(player, player.data.faction, storageName);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -416,7 +438,9 @@ export class FactionSystem {
             return { status: false, response: `Could not deposit ${amount}.` };
         }
 
-        return FactionInternalSystem.depositToBank(player.data.faction, amount);
+        const response = await FactionInternalSystem.depositToBank(player.data.faction, amount);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 
     /**
@@ -453,6 +477,8 @@ export class FactionSystem {
             return { status: false, response: `Could not withdraw $${amount}.` };
         }
 
-        return { status: true, response: `Withdrew $${amount}.` };
+        const response = { status: true, response: `Withdrew $${amount}.` };
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 }

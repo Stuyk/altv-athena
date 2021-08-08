@@ -7,6 +7,7 @@ import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IF
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
@@ -66,6 +67,41 @@ export class FactionInternalSystem {
         playerFuncs.save.field(player, 'faction', newFaction._id);
         await FactionInternalSystem.setup(faction);
         return true;
+    }
+
+    /**
+     * Player Log(s)
+     * Only logs the last 50 messages.
+     * @static
+     * @param {string} factionID
+     * @param {string} whoDoneIt
+     * @param {boolean} status
+     * @param {string} response
+     * @memberof FactionInternalSystem
+     */
+    static async log(factionID: string, characterID: string, status: boolean, response: string) {
+        if (!factions[factionID]) {
+            return;
+        }
+
+        const member = factions[factionID].players.find((x) => x.id === characterID);
+        if (!member) {
+            return;
+        }
+
+        if (!factions[factionID].logs) {
+            factions[factionID].logs = [];
+        }
+
+        if (factions[factionID].logs.length >= DEFAULT_CONFIG.MAX_LOG_LENGTH) {
+            factions[factionID].logs.pop();
+        }
+
+        factions[factionID].logs.unshift(
+            `[${new Date(Date.now()).toISOString()}] ${member.name} - ${status} - ${response}`
+        );
+
+        FactionInternalSystem.save(factionID, { logs: factions[factionID].logs });
     }
 
     /**

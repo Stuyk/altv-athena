@@ -131,5 +131,7 @@ export const DEFAULT_CONFIG = {
         PDMSuper
     ],
     // The Default Stream Configuration for Markers, Text Labels, etc.
-    STREAM_CONFIG: StreamConfiguration
+    STREAM_CONFIG: StreamConfiguration,
+    // The Default Faction Configurations
+    MAX_LOG_LENGTH: 50 // Larger logs may have unintended side-effects.
 };
