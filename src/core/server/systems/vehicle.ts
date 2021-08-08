@@ -555,6 +555,12 @@ export class VehicleSystem {
             return false;
         }
 
+        const dist = distance(player.pos, vehicle.pos);
+        if (dist >= 3) {
+            playerFuncs.emit.notification(player, '~r~You are no longer near this vehicle.');
+            return false;
+        }
+
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
             playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
             return false;
