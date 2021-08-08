@@ -96,7 +96,6 @@ export class LoginController {
         }
 
         StorageView.removeStorageBinding(player.id);
-        VehicleFuncs.despawnAll(LoginController.getDatabaseIdForPlayer(player.id));
 
         if (!player.data.name) {
             return;
