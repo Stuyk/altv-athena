@@ -6,7 +6,7 @@ const app = new Vue({
     data() {
         return {
             timeout: 0,
-            index: 3,
+            index: 4,
             response: null,
             locales: {},
             faction: {},
@@ -15,7 +15,8 @@ const app = new Vue({
                 { name: 'Members', component: MembersComponent },
                 { name: 'Ranks', component: RanksComponent },
                 { name: 'Bank', component: BankComponent },
-                { name: 'Options', component: OptionsComponent }
+                { name: 'Options', component: OptionsComponent },
+                { name: 'Logs', component: LogComponent }
             ],
             url: 'http://localhost:9111'
         };
@@ -133,7 +134,7 @@ const app = new Vue({
                 _id: '610b2583173e6d562c301a9d',
                 clientID: '610b2583173e6d562c301a9d',
                 canAddRanks: true,
-                logs: [],
+                logs: [`[${new Date(Date.now()).toISOString()}] John_Dane - false - whatever...`],
                 name: 'Whatever',
                 pos: {
                     x: -802.1275024414062,
