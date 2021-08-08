@@ -12,6 +12,7 @@ let addedObjects: Array<IObject> = [];
 let objectInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
+let nextCleanupCheck = Date.now() + 5000;
 
 export class ObjectController {
     /**
@@ -119,9 +120,50 @@ export class ObjectController {
 
         isRemoving = false;
     }
+
+    static crossCompareObjects() {
+        if (isRemoving) {
+            return;
+        }
+
+        isRemoving = true;
+
+        const keys = Object.keys(objectInfo);
+        if (keys.length <= 0) {
+            return;
+        }
+
+        for (let i = 0; i < keys.length; i++) {
+            const uid = keys[i];
+
+            const foundLocal = localObjects.findIndex((x) => x.uid === uid);
+            if (foundLocal >= 0) {
+                continue;
+            }
+
+            const foundGlobal = addedObjects.findIndex((x) => x.uid === uid);
+            if (foundGlobal >= 0) {
+                continue;
+            }
+
+            try {
+                native.deleteObject(objectInfo[uid]);
+                delete objectInfo[uid];
+            } catch (err) {
+                //
+            }
+        }
+
+        isRemoving = false;
+    }
 }
 
 function handleDrawObjects() {
+    if (Date.now() > nextCleanupCheck) {
+        nextCleanupCheck = Date.now() + 2500;
+        ObjectController.crossCompareObjects();
+    }
+
     if (isRemoving) {
         return;
     }
