@@ -444,7 +444,7 @@ export class FactionInternalSystem {
         }
 
         factions[id].ranks.pop();
-        await this.save(id, { ranks: factions[id].ranks });
+        await this.save(id, { ranks: factions[id].ranks, players: factions[id].players });
         return { status: true, response: `Rank Index ${factions[id].ranks.length + 1} was removed.` };
     }
 
@@ -753,7 +753,7 @@ export class FactionInternalSystem {
                     rank.canMoveRankDown = true;
                 }
 
-                if (i !== 0 && i !== 1) {
+                if (i !== 0 && i !== 1 && player.rank < i - 1) {
                     rank.canMoveRankUp = true;
                 }
             }
@@ -798,7 +798,6 @@ export class FactionInternalSystem {
             dimension: faction.dimension
         };
 
-        console.log(factionClient);
         return factionClient;
     }
 }

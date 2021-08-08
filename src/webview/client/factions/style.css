@@ -59,6 +59,18 @@ body {
     cursor: pointer;
 }
 
+.hover-orange:hover {
+    text-shadow: 0px 0px 5px rgba(255, 165, 0, 1), 0px 0px 25px rgba(255, 165, 0, 0.5) !important;
+}
+
+.hover-red:hover {
+    text-shadow: 0px 0px 5px rgba(255, 0, 0, 1), 0px 0px 25px rgba(255, 0, 0, 0.5) !important;
+}
+
+.hover-green:hover {
+    text-shadow: 0px 0px 5px rgba(0, 255, 0, 1), 0px 0px 25px rgba(0, 255, 0, 0.5) !important;
+}
+
 .hoverable:hover {
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 25px rgba(255, 255, 255, 1);
 }
@@ -77,6 +89,21 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+
+.frame .split-auto {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.frame .v-messages {
+    display: none !important;
+}
+
+.frame .v-text-field__details {
+    display: none !important;
 }
 
 .frame .center-header {

@@ -76,10 +76,10 @@ const MembersComponent = Vue.component('members', {
                         <div class="cell font-weight-black overline">Options</div>
                     </div>
                     <!-- Repeating Member Info Here -->
-                    <div v-for="(player, index) in searchedPlayers.length ? searchedPlayers : faction.players" :key="index" class="row">
+                    <div v-for="(player, index) in searchedPlayers.length ? searchedPlayers : faction.players" :key="index" class="row" v-if="player">
                         <div class="cell id overline">{{ player.id }}</div>
                         <div class="cell name">{{ player.name }}</div>
-                        <div class="cell rank overline">({{ player.rank }}) {{ faction.ranks[player.rank].name }}</div>
+                        <div class="cell rank overline">({{ player.rank }}) {{ faction.ranks[player.rank] ? faction.ranks[player.rank].name : 'Rank is Invalid' }}</div>
                         <div class="cell options split-auto">
                             <!-- Rank Up -->
                             <div class="small-icon hoverable" @click="rankUp(player.id, player.rank)" v-if="player.canRankUp">
@@ -98,7 +98,7 @@ const MembersComponent = Vue.component('members', {
                             </div>
 
                             <!-- Kick -->
-                            <div class="small-icon hoverable" @click="kickMember(player.id)" v-if="player.canBeKicked">
+                            <div class="small-icon hoverable hover-red" @click="kickMember(player.id)" v-if="player.canBeKicked">
                                 <v-icon small color="red">icon-user-times</v-icon>
                             </div>
                             <div class="small-icon no-hover" v-else>

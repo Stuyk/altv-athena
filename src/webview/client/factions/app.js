@@ -27,6 +27,14 @@ const app = new Vue({
             });
 
             this.faction = faction;
+
+            if (!this.$refs.pageComponent) {
+                return;
+            }
+
+            if (this.$refs.pageComponent.factionUpdate) {
+                this.$refs.pageComponent.factionUpdate(faction);
+            }
         },
         setFlags(flags) {
             this.flags = flags;
