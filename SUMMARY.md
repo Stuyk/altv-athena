@@ -14,8 +14,9 @@
 
 ## Installation
 
--   [Before Installing Athena](documentation/before-setup.md)
--   [Installing Athena](documentation/installing-athena.md)
+-   [1. Initial Setup](documentation/before-setup.md)
+-   [2. Installation](documentation/installing-athena.md)
+-   [3. Saving Changes & Updating](documentation/updating-athena.md)
 
 ## Configuration
 
