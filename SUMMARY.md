@@ -24,17 +24,23 @@
 -   [Commands](documentation/commands.md)
 -   [Hotkeys](documentation/hotkeys.md)
 
+## Glossary
+
+-   [Menu Types in Athena](documentation/glossary/menu-types.md)
+
 ## Basic Scripting
 
--   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
--   [Adding Interactions](documentation/scripting/adding-interactions.md)
--   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 -   [Adding Commands](documentation/scripting/adding-commands.md)
+-   [Adding Interactions](documentation/scripting/adding-interactions.md)
+-   [Adding Action Menus](documentation/scripting/adding-action-menus.md)
+-   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Custom Features](documentation/scripting/adding-features.md)
 -   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
+-   [Adding Objects](documentation/scripting/adding-objects.md)
 -   [Adding Items](documentation/scripting/adding-items.md)
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
 -   [Adding Locale / Translations](documentation/scripting/adding-locale.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
 -   [Adding Whitelist](documentation/scripting/adding-whitelist.md)
+-   [Adding Wheel Menus](documentation/scripting/adding-wheel-menus.md)
