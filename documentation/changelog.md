@@ -34,6 +34,12 @@ description: List of all the changes and current versions.
 + Fix Removing Global Object Locally
 + Add Configureable Storage Per Vehicle
 + Fix Action Menu Focus Issues
++ Added Faction Interface and Controller
++ Added Faction Member Management
++ Added Faction Permission Management
++ Added Faction Rank Management
++ Added Faction Logs
++ Added Faction Options
 ```
 
 ## 2.0.2

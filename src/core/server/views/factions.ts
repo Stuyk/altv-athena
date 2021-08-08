@@ -61,7 +61,8 @@ const EventBindings = {
     [View_Events_Factions.ChangeRankOrder]: FactionSystem.changeRankOrder,
     [View_Events_Factions.Deposit]: FactionSystem.depositToBank,
     [View_Events_Factions.Withdraw]: FactionSystem.withdrawFromBank,
-    [View_Events_Factions.SetPermissions]: FactionSystem.setRankPermissions
+    [View_Events_Factions.SetPermissions]: FactionSystem.setRankPermissions,
+    [View_Events_Factions.Disband]: FactionSystem.disband
 };
 
 alt.onClient(View_Events_Factions.Open, FactionsFunctions.open);

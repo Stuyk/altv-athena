@@ -6,7 +6,7 @@ const app = new Vue({
     data() {
         return {
             timeout: 0,
-            index: 4,
+            index: 3,
             response: null,
             locales: {},
             faction: {},
@@ -132,7 +132,7 @@ const app = new Vue({
 
             this.setFaction({
                 _id: '610b2583173e6d562c301a9d',
-                clientID: '610b2583173e6d562c301a9d',
+                clientID: '608729d7b1f7d6140ca718ac',
                 canAddRanks: true,
                 logs: [`[${new Date(Date.now()).toISOString()}] John_Dane - false - whatever...`],
                 name: 'Whatever',

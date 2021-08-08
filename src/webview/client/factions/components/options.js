@@ -2,7 +2,8 @@ const OptionsComponent = Vue.component('options', {
     props: ['faction', 'locales'],
     data() {
         return {
-            textFactionName: ''
+            textFactionName: '',
+            matchFactionName: ''
         };
     },
     mounted() {},
@@ -17,6 +18,18 @@ const OptionsComponent = Vue.component('options', {
             }
 
             alt.emit('factions:Bus', View_Events_Factions.SetName, this.textFactionName);
+        },
+        disbandFaction() {
+            if (this.matchFactionName !== this.faction.name) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                console.log(`Matched for disband...`);
+                return;
+            }
+
+            alt.emit('factions:Bus', View_Events_Factions.Disband, this.matchFactionName);
         }
     },
     template: `
@@ -26,7 +39,7 @@ const OptionsComponent = Vue.component('options', {
                     <h1 class="center-header mt-4 mb-6">
                         {{ faction.name }}
                     </h1>
-                    <div class="table">
+                    <div class="table" v-if="faction">
                         <div class="row headers">
                             <div class="cell font-weight-black overline">Option Name</div>
                             <div class="cell font-weight-black overline">Current Value</div>
@@ -47,6 +60,25 @@ const OptionsComponent = Vue.component('options', {
                                     />
                                     <div class="small-icon hoverable hover-green" @click="changeFactionName">
                                         <v-icon color="green" class="pl-2 pr-2" small>icon-checkmark</v-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Disband Faction -->
+                        <div class="row" v-if="faction && faction.players && faction.players[0].id === faction.clientID">
+                            <div class="cell overline red--text" >Disband Faction?</div>
+                            <div class="cell overline red--text">Type Faction Name</div>
+                            <div class="cell overline">
+                                <div class="split">
+                                    <v-text-field
+                                        placeholder="Match faction name..."
+                                        v-model="matchFactionName"
+                                        autocomplete="off"
+                                        type="string"
+                                        dense
+                                    />
+                                    <div class="small-icon hoverable hover-red" @click="disbandFaction">
+                                        <v-icon color="red" class="pl-2 pr-2" small>icon-cancel</v-icon>
                                     </div>
                                 </div>
                             </div>

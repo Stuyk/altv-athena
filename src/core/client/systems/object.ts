@@ -12,7 +12,6 @@ let addedObjects: Array<IObject> = [];
 let objectInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
-let nextCleanupCheck = Date.now() + 5000;
 
 export class ObjectController {
     /**
@@ -59,25 +58,21 @@ export class ObjectController {
 
         let index = -1;
 
+        if (objectInfo[uid] !== null && objectInfo[uid] !== undefined) {
+            native.deleteEntity(objectInfo[uid]);
+            delete objectInfo[uid];
+        }
+
         // Removes all objects matching this prefix specifically.
         if (removeAllInterior) {
-            let count = 0;
             for (let i = localObjects.length - 1; i >= 0; i--) {
                 if (!localObjects[i].isInterior) {
                     continue;
                 }
 
-                const actualID = localObjects[i].uid;
                 localObjects.splice(i, 1);
-
-                if (objectInfo[actualID] !== null && objectInfo[actualID] !== undefined) {
-                    native.deleteEntity(objectInfo[actualID]);
-                    delete objectInfo[actualID];
-                    count += 1;
-                }
             }
 
-            alt.log(`Removed ${count} Spawned Objects from Local Interior Stream`);
             isRemoving = false;
             return;
         }
@@ -120,50 +115,9 @@ export class ObjectController {
 
         isRemoving = false;
     }
-
-    static crossCompareObjects() {
-        if (isRemoving) {
-            return;
-        }
-
-        isRemoving = true;
-
-        const keys = Object.keys(objectInfo);
-        if (keys.length <= 0) {
-            return;
-        }
-
-        for (let i = 0; i < keys.length; i++) {
-            const uid = keys[i];
-
-            const foundLocal = localObjects.findIndex((x) => x.uid === uid);
-            if (foundLocal >= 0) {
-                continue;
-            }
-
-            const foundGlobal = addedObjects.findIndex((x) => x.uid === uid);
-            if (foundGlobal >= 0) {
-                continue;
-            }
-
-            try {
-                native.deleteObject(objectInfo[uid]);
-                delete objectInfo[uid];
-            } catch (err) {
-                //
-            }
-        }
-
-        isRemoving = false;
-    }
 }
 
 function handleDrawObjects() {
-    if (Date.now() > nextCleanupCheck) {
-        nextCleanupCheck = Date.now() + 2500;
-        ObjectController.crossCompareObjects();
-    }
-
     if (isRemoving) {
         return;
     }

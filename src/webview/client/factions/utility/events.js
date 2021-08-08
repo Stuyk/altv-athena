@@ -11,5 +11,6 @@ const View_Events_Factions = {
     Deposit: 'factions:Deposit',
     Withdraw: 'factions:Withdraw',
     ChangeRankOrder: 'factions:ChangeRankOrder',
-    SetPermissions: 'factions:SetPermissions'
+    SetPermissions: 'factions:SetPermissions',
+    Disband: 'factions:Disband'
 };
