@@ -98,3 +98,4 @@ alt.onServer(SYSTEM_EVENTS.TICKS_START, FactionsView.init);
 alt.onServer(View_Events_Factions.Update, FactionsView.update);
 alt.onServer(View_Events_Factions.Open, FactionsView.show);
 alt.onServer(View_Events_Factions.Response, FactionsView.response);
+alt.onServer(View_Events_Factions.Close, FactionsView.close);

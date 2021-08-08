@@ -70,6 +70,47 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Disband, reset all member's factions, and delete faction.
+     * Notifies all online players.
+     * @static
+     * @param {string} faction
+     * @return {*}
+     * @memberof FactionInternalSystem
+     */
+    static async disband(faction: string): Promise<void> {
+        if (!factions[faction]) {
+            return;
+        }
+
+        const factionName = factions[faction].name;
+
+        await Database.updateDataByFieldMatch('faction', faction, { faction: null }, Collections.Characters);
+        const openInterfacePlayers = openFactionInterfaces[faction];
+        alt.Player.all.forEach((player) => {
+            if (!player && !player.data && !player.data.faction) {
+                return;
+            }
+
+            if (player.data.faction !== faction) {
+                return;
+            }
+
+            if (openInterfacePlayers.findIndex((x) => x.id === player.id) >= 0) {
+                alt.emitClient(player, View_Events_Factions.Close);
+            }
+
+            player.data.faction = null;
+            playerFuncs.emit.notification(player, `${factionName} was disbanded.`);
+        });
+
+        await Database.deleteById(faction, Collections.Factions);
+
+        delete factions[faction];
+        delete openFactionInterfaces[faction];
+        Logger.warning(`${factionName} was disbanded.`);
+    }
+
+    /**
      * Player Log(s)
      * Only logs the last 50 messages.
      * @static
@@ -815,7 +856,7 @@ export class FactionInternalSystem {
 
         const factionClient: IFactionClient = {
             _id: faction._id,
-            clientID: id,
+            clientID: playerID,
             logs: faction.logs,
             name: faction.name,
             pos: faction.pos,

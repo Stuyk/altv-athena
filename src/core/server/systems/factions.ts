@@ -4,6 +4,7 @@ import { CurrencyTypes } from '../../shared/enums/currency';
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import { playerFuncs } from '../extensions/Player';
+import Logger from '../utility/athenaLogger';
 import { FactionInternalSystem } from './factionsInternal';
 
 /**
@@ -480,5 +481,28 @@ export class FactionSystem {
         const response = { status: true, response: `Withdrew $${amount}.` };
         FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
         return response;
+    }
+
+    static async disband(player: alt.Player, factionName: string): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: `You are unable to disband the faction.` };
+        }
+
+        if (faction.name !== factionName) {
+            return { status: false, response: `Passed faction name does not match actual faction name.` };
+        }
+
+        await FactionInternalSystem.disband(player.data.faction);
+        return { status: true, response: `Faction Disbanded` };
     }
 }

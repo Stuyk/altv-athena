@@ -40,6 +40,10 @@ description: List of all the changes and current versions.
 + Added Faction Rank Management
 + Added Faction Logs
 + Added Faction Options
++ Fix Bug with Objects Not Being Deleted Locally
++ Fix Pushing Vehicle Distance
++ Fix Entering Vehicles Turned Over
++ Fix Broadcast Command
 ```
 
 ## 2.0.2
