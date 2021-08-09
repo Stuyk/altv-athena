@@ -365,6 +365,7 @@ export class FactionSystem {
     static async openStorage(player: alt.Player, storageName: FACTION_STORAGE): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
+            playerFuncs.emit.notification(player, `You do not have access to this.`);
             return validateResponse;
         }
 
@@ -377,6 +378,7 @@ export class FactionSystem {
                 );
 
                 if (!result) {
+                    playerFuncs.emit.notification(player, `You do not have access to this.`);
                     return { status: false, response: 'Storage Not Accessible' };
                 }
 
@@ -390,12 +392,14 @@ export class FactionSystem {
                 );
 
                 if (!result) {
+                    playerFuncs.emit.notification(player, `You do not have access to this.`);
                     return { status: false, response: 'Storage Not Accessible' };
                 }
 
                 break;
             }
             default: {
+                playerFuncs.emit.notification(player, `You do not have access to this.`);
                 return { status: false, response: 'Storage name does not exist.' };
             }
         }
