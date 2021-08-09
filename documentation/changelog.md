@@ -48,6 +48,11 @@ description: List of all the changes and current versions.
 + Commands for Faction Takeover (Admin)
 + Added Ownership Change Option for Factions
 + Fixed Action Menu Bug
++ Added Dynamic Faction Storage
++ Added Ability to Set Faction Position
++ Added Ability to Set Faction Weapon Storage
++ Added Ability to Set Faction Storage
++ Added Interface Option(s) for Above Changes
 ```
 
 ## 2.0.2
