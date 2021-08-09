@@ -88,6 +88,13 @@ declare module 'alt-server' {
          * @memberof Player
          */
         currentInteraction: InteractionShape | null;
+
+        /**
+         * Last Faction ID for invite.
+         * @type { alt.Player }
+         * @memberof Player
+         */
+        lastFactionInvite: alt.Player;
     }
 }
 
