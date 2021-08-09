@@ -476,7 +476,10 @@ export class FactionInternalSystem {
         }
 
         const lastRankInFaction = factions[id].ranks.length - 1;
+
         factions[id].players.push({ id: target.data._id.toString(), name: target.data.name, rank: lastRankInFaction });
+        target.data.faction = id;
+        await playerFuncs.save.field(target, 'faction', target.data.faction);
         await this.save(id, { players: factions[id].players });
         return { status: true, response: `${target.data.name} was added to the faction.` };
     }
@@ -497,6 +500,12 @@ export class FactionInternalSystem {
         const memberIndex = factions[id].players.findIndex((member) => member.id === characterID);
         if (memberIndex <= -1) {
             return { status: false, response: 'Target player is not in your faction.' };
+        }
+
+        const target = alt.Player.all.find((x) => x.data && x.data._id === characterID);
+        if (target) {
+            target.data.faction = null;
+            await playerFuncs.save.field(target, 'faction', target.data.faction);
         }
 
         const oldData = factions[id].players.splice(memberIndex, 1)[0];
