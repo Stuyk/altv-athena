@@ -100,7 +100,7 @@ function handleAccept(player: alt.Player) {
         return;
     }
 
-    if (!player.data.faction) {
+    if (player.data.faction) {
         playerFuncs.emit.message(player, `You are already in a faction.`);
         return;
     }
