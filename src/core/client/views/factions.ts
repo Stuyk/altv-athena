@@ -11,7 +11,7 @@ import { IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
 
-const url = `http://127.0.0.1:5500/src/webview/client/factions/index.html`;
+const url = `http://assets/webview/client/factions/index.html`;
 let view: View;
 let faction: IFactionClient;
 
