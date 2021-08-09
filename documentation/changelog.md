@@ -44,6 +44,10 @@ description: List of all the changes and current versions.
 + Fix Pushing Vehicle Distance
 + Fix Entering Vehicles Turned Over
 + Fix Broadcast Command
++ Commands for Creating Factions
++ Commands for Faction Takeover (Admin)
++ Added Ownership Change Option for Factions
++ Fixed Action Menu Bug
 ```
 
 ## 2.0.2
