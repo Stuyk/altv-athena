@@ -55,6 +55,10 @@ body {
     cursor: unset;
 }
 
+.selectable {
+    user-select: text !important;
+}
+
 .hoverable {
     cursor: pointer;
 }

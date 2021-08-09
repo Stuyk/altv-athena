@@ -78,7 +78,7 @@ const MembersComponent = Vue.component('members', {
                     </div>
                     <!-- Repeating Member Info Here -->
                     <div v-for="(player, index) in searchedPlayers.length ? searchedPlayers : faction.players" :key="index" class="row" v-if="player">
-                        <div class="cell id overline">{{ player.id }}</div>
+                        <div class="cell id overline selectable">{{ player.id }}</div>
                         <div class="cell name">{{ player.name }}</div>
                         <div class="cell rank overline">({{ player.rank }}) {{ faction.ranks[player.rank] ? faction.ranks[player.rank].name : 'Rank is Invalid' }}</div>
                         <div class="cell options split-auto">

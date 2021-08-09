@@ -98,18 +98,22 @@ export class FactionInternalSystem {
      * @param {alt.Player} player
      * @memberof FactionInternalSystem
      */
-    static async handOffFaction(faction: string, characterID: string, leaveFaction: boolean = false): Promise<boolean> {
+    static async handOffFaction(
+        faction: string,
+        characterID: string,
+        leaveFaction: boolean = false
+    ): Promise<IResponse> {
         if (!factions[faction]) {
-            return false;
+            return { status: false, response: 'Faction does not exist.' };
         }
 
         if (factions[faction].players[0].id === characterID) {
-            return false;
+            return { status: false, response: 'You are already the owner of the faction.' };
         }
 
         const targetIndex = factions[faction].players.findIndex((x) => x.id === characterID);
         if (targetIndex <= -1) {
-            return false;
+            return { status: false, response: `Target player is not in faction.` };
         }
 
         const newOwner = factions[faction].players.splice(targetIndex, 1)[0];
@@ -123,7 +127,7 @@ export class FactionInternalSystem {
         newOwner.rank = 0;
         factions[faction].players.unshift(newOwner);
         await FactionInternalSystem.save(faction, { players: factions[faction].players });
-        return true;
+        return { status: true, response: `Changed faction ownership to ${newOwner.name}` };
     }
 
     /**

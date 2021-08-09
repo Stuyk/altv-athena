@@ -3,7 +3,8 @@ const OptionsComponent = Vue.component('options', {
     data() {
         return {
             textFactionName: '',
-            matchFactionName: ''
+            matchFactionName: '',
+            newOwnerID: ''
         };
     },
     mounted() {},
@@ -18,6 +19,19 @@ const OptionsComponent = Vue.component('options', {
             }
 
             alt.emit('factions:Bus', View_Events_Factions.SetName, this.textFactionName);
+        },
+        changeOwner() {
+            const target = faction.players.find((p) => p.id === this.newOwnerID);
+
+            if (!target) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('factions:Bus', View_Events_Factions.ChangeOwner, this.newOwnerID);
         },
         disbandFaction() {
             if (this.matchFactionName !== this.faction.name) {
@@ -42,13 +56,13 @@ const OptionsComponent = Vue.component('options', {
                     <div class="table" v-if="faction">
                         <div class="row headers">
                             <div class="cell font-weight-black overline">Option Name</div>
-                            <div class="cell font-weight-black overline">Current Value</div>
+                            <div class="cell font-weight-black overline"></div>
                             <div class="cell font-weight-black overline">Option</div>
                         </div>
                         <!-- Set Faction Name -->
                         <div class="row" v-if="faction.canChangeName">
                             <div class="cell overline">Set Faction Name</div>
-                            <div class="cell overline">{{ faction.name }}</div>
+                            <div class="cell overline">Type New Faction Name</div>
                             <div class="cell overline">
                                 <div class="split">
                                     <v-text-field
@@ -60,6 +74,25 @@ const OptionsComponent = Vue.component('options', {
                                     />
                                     <div class="small-icon hoverable hover-green" @click="changeFactionName">
                                         <v-icon color="green" class="pl-2 pr-2" small>icon-checkmark</v-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hand Off Faction -->
+                        <div class="row" v-if="faction && faction.players && faction.players[0].id === faction.clientID">
+                            <div class="cell overline orange--text" >Hand Off Faction?</div>
+                            <div class="cell overline orange--text">Type New Owner ID</div>
+                            <div class="cell overline">
+                                <div class="split">
+                                    <v-text-field
+                                        placeholder="Type New Owner's ID"
+                                        v-model="newOwnerID"
+                                        autocomplete="off"
+                                        type="string"
+                                        dense
+                                    />
+                                    <div class="small-icon hoverable hover-red" @click="changeOwner">
+                                        <v-icon color="orange" class="pl-2 pr-2" small>icon-checkmark</v-icon>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +111,7 @@ const OptionsComponent = Vue.component('options', {
                                         dense
                                     />
                                     <div class="small-icon hoverable hover-red" @click="disbandFaction">
-                                        <v-icon color="red" class="pl-2 pr-2" small>icon-cancel</v-icon>
+                                        <v-icon color="red" class="pl-2 pr-2" small>icon-checkmark</v-icon>
                                     </div>
                                 </div>
                             </div>

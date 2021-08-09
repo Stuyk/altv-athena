@@ -12,5 +12,6 @@ const View_Events_Factions = {
     Withdraw: 'factions:Withdraw',
     ChangeRankOrder: 'factions:ChangeRankOrder',
     SetPermissions: 'factions:SetPermissions',
-    Disband: 'factions:Disband'
+    Disband: 'factions:Disband',
+    ChangeOwner: 'factions:ChangeOwner'
 };

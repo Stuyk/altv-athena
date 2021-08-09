@@ -75,5 +75,6 @@ export enum View_Events_Factions {
     ChangeRankOrder = 'factions:ChangeRankOrder',
     SetPermissions = 'factions:SetPermissions',
     Response = 'factions:Response',
-    Disband = 'factions:Disband'
+    Disband = 'factions:Disband',
+    ChangeOwner = 'factions:ChangeOwner'
 }

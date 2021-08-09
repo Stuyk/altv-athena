@@ -4,7 +4,6 @@ import { CurrencyTypes } from '../../shared/enums/currency';
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import { playerFuncs } from '../extensions/Player';
-import Logger from '../utility/athenaLogger';
 import { FactionInternalSystem } from './factionsInternal';
 
 /**
@@ -483,6 +482,14 @@ export class FactionSystem {
         return response;
     }
 
+    /**
+     * Disband and delete the faction.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} factionName
+     * @return {Promise<IResponse>}
+     * @memberof FactionSystem
+     */
     static async disband(player: alt.Player, factionName: string): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
@@ -504,5 +511,34 @@ export class FactionSystem {
 
         await FactionInternalSystem.disband(player.data.faction);
         return { status: true, response: `Faction Disbanded` };
+    }
+
+    /**
+     * Change ownership of the faction to someone else.
+     * Requires owner permission.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} characterID
+     * @return {Promise<IResponse>}
+     * @memberof FactionSystem
+     */
+    static async changeOwner(player: alt.Player, characterID: string): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: `You are unable to change ownership of the faction.` };
+        }
+
+        const response = await FactionInternalSystem.handOffFaction(player.data.faction, characterID, false);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
     }
 }
