@@ -44,6 +44,27 @@ const OptionsComponent = Vue.component('options', {
             }
 
             alt.emit('factions:Bus', View_Events_Factions.Disband, this.matchFactionName);
+        },
+        setWeaponStorage() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('factions:Bus', View_Events_Factions.SetWeaponsLocation);
+        },
+        setStorageLocation() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('factions:Bus', View_Events_Factions.SetStorageLocation);
+        },
+        setPosition() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('factions:Bus', View_Events_Factions.SetPosition);
         }
     },
     template: `
@@ -74,6 +95,42 @@ const OptionsComponent = Vue.component('options', {
                                     />
                                     <div class="small-icon hoverable hover-green" @click="changeFactionName">
                                         <v-icon color="green" class="pl-2 pr-2" small>icon-checkmark</v-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Set Position -->
+                        <div class="row" v-if="faction && faction.players && faction.players[0].id === faction.clientID">
+                            <div class="cell overline">Faction Location</div>
+                            <div class="cell overline">{{ faction.pos ? 'Already Set' : 'No Faction Location Set' }}</div>
+                            <div class="cell overline">
+                                <div class="split">
+                                    <div class="small-icon hoverable hover-green green--text" @click="setPosition">
+                                        Use Current Position
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Set Storage Location -->
+                        <div class="row" v-if="faction && faction.players && faction.players[0].id === faction.clientID">
+                            <div class="cell overline">Storage Location</div>
+                            <div class="cell overline">{{ faction.storageLocation ? 'Already Set' : 'No Storage Location Set' }}</div>
+                            <div class="cell overline">
+                                <div class="split">
+                                    <div class="small-icon hoverable hover-green green--text" @click="setStorageLocation">
+                                        Use Current Position
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Set Weapon Storage Location -->
+                        <div class="row" v-if="faction && faction.players && faction.players[0].id === faction.clientID">
+                            <div class="cell overline">Weapon Location</div>
+                            <div class="cell overline">{{ faction.weaponLocation ? 'Already Set' : 'No Weapons Location Set' }}</div>
+                            <div class="cell overline">
+                                <div class="split">
+                                    <div class="small-icon hoverable hover-green green--text" @click="setWeaponStorage">
+                                        Use Current Position
                                     </div>
                                 </div>
                             </div>

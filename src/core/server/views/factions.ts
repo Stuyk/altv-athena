@@ -63,7 +63,10 @@ const EventBindings = {
     [View_Events_Factions.Withdraw]: FactionSystem.withdrawFromBank,
     [View_Events_Factions.SetPermissions]: FactionSystem.setRankPermissions,
     [View_Events_Factions.Disband]: FactionSystem.disband,
-    [View_Events_Factions.ChangeOwner]: FactionSystem.changeOwner
+    [View_Events_Factions.ChangeOwner]: FactionSystem.changeOwner,
+    [View_Events_Factions.SetStorageLocation]: FactionSystem.setStorageLocation,
+    [View_Events_Factions.SetWeaponsLocation]: FactionSystem.setWeaponsLocation,
+    [View_Events_Factions.SetPosition]: FactionSystem.setPosition
 };
 
 alt.onClient(View_Events_Factions.Open, FactionsFunctions.open);

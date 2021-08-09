@@ -76,5 +76,8 @@ export enum View_Events_Factions {
     SetPermissions = 'factions:SetPermissions',
     Response = 'factions:Response',
     Disband = 'factions:Disband',
-    ChangeOwner = 'factions:ChangeOwner'
+    ChangeOwner = 'factions:ChangeOwner',
+    SetPosition = 'factions:SetPosition',
+    SetStorageLocation = 'factions:SetStorageLocation',
+    SetWeaponsLocation = 'factions:SetWeaponsLocation'
 }

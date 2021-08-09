@@ -13,5 +13,8 @@ const View_Events_Factions = {
     ChangeRankOrder: 'factions:ChangeRankOrder',
     SetPermissions: 'factions:SetPermissions',
     Disband: 'factions:Disband',
-    ChangeOwner: 'factions:ChangeOwner'
+    ChangeOwner: 'factions:ChangeOwner',
+    SetPosition: 'factions:SetPosition',
+    SetStorageLocation: 'factions:SetStorageLocation',
+    SetWeaponsLocation: 'factions:SetWeaponsLocation'
 };

@@ -6,12 +6,18 @@ import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/Fa
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import { Vector3 } from '../../shared/interfaces/Vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { StorageView } from '../views/storage';
+import { BlipController } from './blip';
+import { FactionSystem } from './factions';
+import { InteractionController } from './interaction';
+import { MarkerController } from './marker';
 import { StorageSystem } from './storage';
 
 let factions: { [key: string]: IFaction } = {};
@@ -67,6 +73,80 @@ export class FactionInternalSystem {
         playerFuncs.save.field(player, 'faction', newFaction._id);
         await FactionInternalSystem.setup(faction);
         return true;
+    }
+
+    static async refreshBlipsAndInteractions(faction: string) {
+        if (!factions[faction]) {
+            return;
+        }
+
+        const blipName = `${faction}-blip`;
+
+        const typeStorage = 'faction-storage';
+        const storageName = `${faction}-storage`;
+
+        const typeWeapons = 'faction-weapons';
+        const weaponsName = `${faction}-weapons`;
+
+        // Storage
+        InteractionController.remove(typeStorage, storageName);
+        MarkerController.remove(storageName);
+
+        if (factions[faction].storageLocation) {
+            InteractionController.add({
+                type: typeStorage,
+                description: `Access Faction Storage`,
+                identifier: storageName,
+                position: factions[faction].storageLocation,
+                data: [FACTION_STORAGE.STORAGE],
+                callback: FactionSystem.openStorage
+            });
+
+            MarkerController.append({
+                uid: storageName,
+                pos: factions[faction].storageLocation,
+                type: 0,
+                color: new alt.RGBA(255, 255, 255, 100)
+            });
+        }
+
+        // Weapons
+        InteractionController.remove(typeWeapons, weaponsName);
+        MarkerController.remove(weaponsName);
+
+        if (factions[faction].weaponLocation) {
+            InteractionController.add({
+                type: typeWeapons,
+                description: `Access Faction Weapons`,
+                identifier: weaponsName,
+                position: factions[faction].weaponLocation,
+                data: [FACTION_STORAGE.WEAPONS],
+                callback: FactionSystem.openStorage
+            });
+
+            MarkerController.append({
+                uid: weaponsName,
+                pos: factions[faction].weaponLocation,
+                type: 0,
+                color: new alt.RGBA(255, 255, 255, 100)
+            });
+        }
+
+        // Blip
+        BlipController.remove(blipName);
+
+        if (factions[faction].pos) {
+            BlipController.append({
+                uid: blipName,
+                pos: factions[faction].pos,
+                color: 9,
+                sprite: 478,
+                scale: 1,
+                shortRange: true,
+                text: factions[faction].name,
+                identifier: blipName
+            });
+        }
     }
 
     /**
@@ -272,9 +352,7 @@ export class FactionInternalSystem {
         }
 
         factions[faction._id as string] = faction;
-
-        // When spawning vehicles just go edit vehicle system
-        // Skip last used for faction vehicles
+        FactionInternalSystem.refreshBlipsAndInteractions(faction._id.toString());
     }
 
     static refresh(id: string) {
@@ -819,6 +897,90 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Set the position of this faction.
+     * @static
+     * @param {string} id
+     * @param {Vector3} position
+     * @return {Promise<IResponse>}
+     * @memberof FactionInternalSystem
+     */
+    static async setPosition(id: string, position: Vector3): Promise<IResponse> {
+        if (!factions[id]) {
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        factions[id].pos = {
+            x: position.x,
+            y: position.y,
+            z: position.z - 1
+        };
+
+        await this.save(id, { pos: factions[id].pos });
+        await this.refreshBlipsAndInteractions(id);
+        return { status: true, response: `Faction Position Set to ${JSON.stringify(factions[id].pos)}` };
+    }
+
+    /**
+     * Set the storage location of this faction.
+     * Re-initializes interaction as well.
+     * @static
+     * @param {string} id
+     * @param {Vector3} position
+     * @return {Promise<IResponse>}
+     * @memberof FactionInternalSystem
+     */
+    static async setStorageLocation(id: string, position: Vector3): Promise<IResponse> {
+        if (!factions[id]) {
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        const dist = distance2d(factions[id].pos, position);
+        if (dist >= 75) {
+            return { status: false, response: `Your position is too far from central location.` };
+        }
+
+        factions[id].storageLocation = {
+            x: position.x,
+            y: position.y,
+            z: position.z - 1
+        };
+
+        await this.save(id, { storageLocation: factions[id].storageLocation });
+        await this.refreshBlipsAndInteractions(id);
+        return { status: true, response: `Faction Storage Location Set to ${JSON.stringify(factions[id].pos)}` };
+    }
+
+    /**
+     * Set the weapons location of this faction.
+     * Re-initializes interaction as well.
+     * @static
+     * @param {string} id
+     * @param {Vector3} position
+     * @return {Promise<IResponse>}
+     * @memberof FactionInternalSystem
+     */
+    static async setWeaponsLocation(id: string, position: Vector3): Promise<IResponse> {
+        if (!factions[id]) {
+            return { status: false, response: 'The faction you are in no longer exists.' };
+        }
+
+        const dist = distance2d(factions[id].pos, position);
+        if (dist >= 75) {
+            return { status: false, response: `Your position is too far from central location.` };
+        }
+
+        factions[id].weaponLocation = {
+            x: position.x,
+            y: position.y,
+            z: position.z - 1
+        };
+
+        await this.save(id, { weaponLocation: factions[id].weaponLocation });
+        await this.refreshBlipsAndInteractions(id);
+        return { status: true, response: `Faction Weapons Location Set to ${JSON.stringify(factions[id].pos)}` };
+    }
+
+    /**
      * Constructs a faction object for use on client-side.
      * This faction object helps display different parts of the interface.
      * Use this as reference if you make any changes to the interface in the future.
@@ -933,6 +1095,8 @@ export class FactionInternalSystem {
             players: clientPlayers,
             ranks: clientRanks,
             canAddRanks: canCreateRanks,
+            storageLocation: faction.storageLocation,
+            weaponLocation: faction.weaponLocation,
             canAddToBank: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
                 FACTION_PERMISSION_FLAGS.ADD_TO_BANK

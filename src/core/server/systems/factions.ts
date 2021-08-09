@@ -541,4 +541,64 @@ export class FactionSystem {
         FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
         return response;
     }
+
+    static async setStorageLocation(player: alt.Player): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: `You are not the owner of this faction.` };
+        }
+
+        const response = await FactionInternalSystem.setStorageLocation(player.data.faction, player.pos);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
+    }
+
+    static async setWeaponsLocation(player: alt.Player): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: `You are not the owner of this faction.` };
+        }
+
+        const response = await FactionInternalSystem.setWeaponsLocation(player.data.faction, player.pos);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
+    }
+
+    static async setPosition(player: alt.Player): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id !== player.data._id.toString()) {
+            return { status: false, response: `You are not the owner of this faction.` };
+        }
+
+        const response = await FactionInternalSystem.setPosition(player.data.faction, player.pos);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
+    }
 }

@@ -6,7 +6,7 @@ const app = new Vue({
     data() {
         return {
             timeout: 0,
-            index: 0,
+            index: 3,
             response: null,
             locales: {},
             faction: {},
