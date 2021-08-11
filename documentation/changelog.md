@@ -53,6 +53,7 @@ description: List of all the changes and current versions.
 + Added Ability to Set Faction Weapon Storage
 + Added Ability to Set Faction Storage
 + Added Interface Option(s) for Above Changes
++ Fix Crash Related to Texture Loading
 ```
 
 ## 2.0.2

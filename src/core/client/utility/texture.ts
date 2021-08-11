@@ -1,8 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { Timer } from './timers';
 
-const MAX_ATTEMPTS = 100;
+const MAX_ATTEMPTS = 3;
 const textureData = {};
 
 export function loadTexture(dictionary: string) {
@@ -19,6 +20,7 @@ export function loadTexture(dictionary: string) {
             if (attempts > MAX_ATTEMPTS) {
                 resolve();
                 Timer.clearInterval(interval);
+                console.error(`Could not load texture dictionary: ${dictionary}. Invalid Dictionary.`);
                 return;
             }
 
