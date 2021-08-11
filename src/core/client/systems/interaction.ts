@@ -111,8 +111,6 @@ export class InteractionController {
         // Display Help Text
         if (description && position) {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
-
-            native.requestStreamedTextureDict('mpmissmarkers128', false);
             drawTexture('mpmissmarkers128', 'corona_marker', position, 0.1);
         }
 
