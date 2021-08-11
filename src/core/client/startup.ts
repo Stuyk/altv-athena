@@ -10,12 +10,11 @@ import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
-import './menus/player';
 import './menus/interior';
+import './menus/player';
 import './menus/vehicle';
 // Systems
 import './systems/animations';
-import './systems/scenarios';
 import './systems/arrest';
 import './systems/athenaEvents';
 import './systems/blip';
@@ -37,6 +36,7 @@ import './systems/object';
 import './systems/particle';
 import './systems/progressBar';
 import './systems/quickToken';
+import './systems/scenarios';
 import './systems/sound';
 import './systems/tasks';
 import './systems/textlabel';
