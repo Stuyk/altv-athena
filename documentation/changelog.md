@@ -57,6 +57,8 @@ description: List of all the changes and current versions.
 + Fix Marker Types for Jobs
 + Fix Extra Arrow in Job Interface
 + Add WebServer Resource for Production Mode
++ Fix Bug where Fuel is Not Synced / Updated
++ Added Fuel System Again
 ```
 
 ## 2.0.2

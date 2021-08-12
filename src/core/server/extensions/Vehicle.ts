@@ -13,5 +13,6 @@ declare module 'alt-server' {
         nextUpdate?: number;
         passengers?: Array<{ player: alt.Player; seat: number }>;
         isTemporary?: boolean;
+        isRefueling?: boolean;
     }
 }

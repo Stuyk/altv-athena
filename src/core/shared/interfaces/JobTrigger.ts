@@ -3,4 +3,5 @@ export interface JobTrigger {
     header: string;
     summary: string;
     event: string;
+    cancelEvent?: string;
 }

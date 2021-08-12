@@ -24,12 +24,12 @@ import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
+import { StorageView } from '../views/storage';
+import { StorageSystem } from './storage';
 
 import '../views/dealership';
 import '../views/garage';
-import { StorageView } from '../views/storage';
 import './fuel';
-import { StorageSystem } from './storage';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -399,6 +399,11 @@ export class VehicleSystem {
 
         if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
             playerFuncs.emit.notification(player, `~r~No fuel.`);
+            return;
+        }
+
+        if (player.vehicle.isRefueling) {
+            playerFuncs.emit.notification(player, `~r~Vehicle Refuel Not Completed`);
             return;
         }
 

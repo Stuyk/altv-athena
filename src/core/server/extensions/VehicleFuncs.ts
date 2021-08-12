@@ -143,7 +143,7 @@ export default class VehicleFuncs {
      * @memberof VehicleFuncs
      */
     static async updateFuel(vehicle: alt.Vehicle) {
-        if (!vehicle.behavior) {
+        if (!vehicle.data.behavior) {
             return;
         }
 
@@ -230,6 +230,7 @@ export default class VehicleFuncs {
 
         vehicle.data = document;
         vehicle.passengers = [];
+        vehicle.behavior = vehicle.data.behavior;
 
         if (vehicle.data.color) {
             vehicle.customPrimaryColor = document.color;
