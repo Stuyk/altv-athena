@@ -10,7 +10,7 @@ Adding icons for the inventory must be done in a `.png` format as it's the most 
 Icons need to be placed inside of:
 
 ```
-utility/webserver/files/icons
+src/webserver/files/icons
 ```
 
 It is highly recommended that you compress your `.png` file after it has been resized.
@@ -19,8 +19,18 @@ Check out [PNG Gauntlet](https://pnggauntlet.com/) for resizing several images.
 
 # Broken Images?
 
-Did you forget to port forward `9111` and verify you can make a connection to it while the server is running?
+If you are running in **production mode** add the resource `webserver` before core in your `server.cfg`.
+
+If you are running in **development mode** you may not have added `WEBSERVER_IP` to your `.env` file.
+
+You can append the following to make it work locally for development mode:
 
 ```
-http://<some_ip>:9111/icons/advancedrifle.png
+WEBSERVER_IP=127.0.0.1:9111
+```
+
+When you run the server in development mode you can verify images are available through this URL.
+
+```
+http://127.0.0.1:9111/icons/advancedrifle.png
 ```
