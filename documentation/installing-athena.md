@@ -136,8 +136,6 @@ This file should not have **ANY EXTENSION** make sure it doesn't say it's a text
 
 **Bare Minimum Configuration**
 
-* WEBSERVER_IP
-
 **Configuration Options**
 
 ```sh    
@@ -154,8 +152,10 @@ MONGO_URL=<MONGODB_CONNECTION_STRING>
 # Collections are also known as tables.
 MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
 
-# You must specify your server's IP Address here.
-WEBSERVER_IP=<YOUR_SERVER_IP>
+# You must specify your localhost here with port :9111
+# Only used for development mode on a local machine.
+# Otherwise import 'webserver' as a resource.
+WEBSERVER_IP=127.0.0.1:9111
 ```
 
 ## Obtaining your Own IP
@@ -178,11 +178,8 @@ curl ipinfo.io/ip
 
 You will need to port forward for the following ports on TCP & UDP.
 
-**DO NOT SKIP THIS. NOBODY CAN JOIN WITHOUT IT.**
-
 ```
 7788
-9111
 ```
 
 ## Checking Ports
@@ -194,6 +191,18 @@ https://www.yougetsignal.com/tools/open-ports/
 ## Running the Server
 
 Running the server should always be done through your command line, terminal, or powershell interface. You should use the `npm` scripts that included inside of `package.json`.
+
+**HEY, LISTEN!**
+
+When you run a server in `production` mode that means that your server is running without development node. You should be modifying your `server.cfg` and removing debug mode and adding the `webserver` resource before core.
+
+Example:
+
+```
+resources: ["webserver", "core"],
+```
+
+Please do not forget to do this!
 
 _Make sure you follow the full setup before running any of this._
 

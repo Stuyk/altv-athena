@@ -56,6 +56,7 @@ description: List of all the changes and current versions.
 + Fix Crash Related to Texture Loading
 + Fix Marker Types for Jobs
 + Fix Extra Arrow in Job Interface
++ Add WebServer Resource for Production Mode
 ```
 
 ## 2.0.2

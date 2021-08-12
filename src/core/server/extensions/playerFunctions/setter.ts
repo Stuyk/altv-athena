@@ -94,7 +94,8 @@ async function firstConnect(p: alt.Player): Promise<void> {
     }
 
     // Used to set the custom View instance with a Web Server URL.
-    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, config.WEBSERVER_IP);
+    const webServerPath = alt.hasResource('webserver') ? 'http://assets/webserver/files' : config.WEBSERVER_IP;
+    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 

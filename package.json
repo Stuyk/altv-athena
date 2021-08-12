@@ -13,7 +13,7 @@
         "linux-server": "./start.sh",
         "linux": "npm run build && npm-run-all --parallel webserver streamer linux-server",
         "streamer": "node ./resources/streamer/index.js",
-        "webserver": "node ./utility/webserver/index.mjs",
+        "webserver": "node ./resources/webserver/index.js",
         "reconnect-server": "altv-reconnect",
         "windev": "nodemon --watch \"./src/**\" --ext \"ts\" --exec \"npm run build && altv-server.exe\"",
         "dev": "npm run build && npm-run-all --parallel reconnect-server webserver streamer windev"

@@ -3,7 +3,9 @@ import * as path from 'path';
 import cors from 'cors';
 
 const app = express();
-const currentPath = path.join(process.cwd(), '/utility/webserver/files');
+const currentPath = path.join(process.cwd(), '/resources/webserver/files');
+
+console.log(currentPath);
 
 app.use(cors());
 

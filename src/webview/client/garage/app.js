@@ -20,7 +20,12 @@ const app = new Vue({
     },
     methods: {
         setURL(url) {
-            this.url = `http://${url}:9111`;
+            if (url.includes('assets/webserver')) {
+                this.url = url;
+                return;
+            }
+
+            this.url = `http://${url}`;
         },
         setVehicles(vehicles) {
             this.vehicles = vehicles;
