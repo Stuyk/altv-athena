@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 
+import { BlipController } from '../../client/systems/blip';
 import { playerFuncs } from '../../server/extensions/Player';
 import { InteractionController } from '../../server/systems/interaction';
 import { Job } from '../../server/systems/job';
@@ -10,9 +11,8 @@ import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { distance2d } from '../../shared/utility/vector';
-import { BlipController } from '../../client/systems/blip';
 
-const startPosition = { x: -664.4656372070312, y: -215.07139587402344, z: 37.201847076416016 };
+const startPosition = { x: -664.4656372070312, y: -215.07139587402344, z: 36.5 };
 const objectives: Array<Objective> = [
     {
         criteria: JobEnums.ObjectiveCriteria.NO_VEHICLE,
@@ -21,7 +21,7 @@ const objectives: Array<Objective> = [
         range: 3,
         pos: { x: -634.3856201171875, y: -239.7871551513672, z: 38.048484802246094 },
         marker: {
-            pos: { x: -634.3856201171875, y: -239.7871551513672, z: 38.048484802246094 } as alt.Vector3,
+            pos: { x: -634.3856201171875, y: -239.7871551513672, z: 37.4 } as alt.Vector3,
             type: 1,
             color: new alt.RGBA(0, 255, 0, 100)
         },
@@ -279,7 +279,8 @@ TextLabelController.append({
 InteractionController.add({
     callback: handleStartJob,
     type: 'heistjewelrystore',
-    position: startPosition
+    position: startPosition,
+    description: 'Inspect Heist'
 });
 
 function handleStartJob(player: alt.Player) {

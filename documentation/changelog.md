@@ -54,6 +54,8 @@ description: List of all the changes and current versions.
 + Added Ability to Set Faction Storage
 + Added Interface Option(s) for Above Changes
 + Fix Crash Related to Texture Loading
++ Fix Marker Types for Jobs
++ Fix Extra Arrow in Job Interface
 ```
 
 ## 2.0.2

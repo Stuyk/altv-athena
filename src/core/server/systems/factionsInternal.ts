@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { View_Events_Factions } from '../../shared/enums/views';
 
+import { View_Events_Factions } from '../../shared/enums/views';
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
@@ -105,7 +105,7 @@ export class FactionInternalSystem {
             MarkerController.append({
                 uid: storageName,
                 pos: factions[faction].storageLocation,
-                type: 0,
+                type: 1,
                 color: new alt.RGBA(255, 255, 255, 100)
             });
         }
@@ -127,7 +127,7 @@ export class FactionInternalSystem {
             MarkerController.append({
                 uid: weaponsName,
                 pos: factions[faction].weaponLocation,
-                type: 0,
+                type: 1,
                 color: new alt.RGBA(255, 255, 255, 100)
             });
         }
