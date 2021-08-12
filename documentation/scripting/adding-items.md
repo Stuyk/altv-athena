@@ -2,8 +2,11 @@
 description: Learn how to add items to your game mode.
 ---
 
-# Adding Items- [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
-- [Adding Items- Keywords and Inventory Syntax](#adding-items--keywords-and-inventory-syntax)
+# Adding Items
+
+ [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
+- [Adding Items](#adding-items)
+- [Video Guide](#video-guide)
 - [Keywords and Inventory Syntax](#keywords-and-inventory-syntax)
 - [Difference Between Slot and Index](#difference-between-slot-and-index)
 - [Using Inventory Functions](#using-inventory-functions)
@@ -15,6 +18,11 @@ description: Learn how to add items to your game mode.
   - [Item Effects](#item-effects)
     - [Item Example](#item-example)
     - [Item Effect Receive](#item-effect-receive)
+
+# Video Guide
+
+[![Item Creation Video](https://img.youtube.com/vi/dPztbrxcqQ8/0.jpg)](https://www.youtube.com/watch?v=dPztbrxcqQ8)
+
 
 # Keywords and Inventory Syntax
 

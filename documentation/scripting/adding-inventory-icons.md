@@ -17,6 +17,10 @@ It is highly recommended that you compress your `.png` file after it has been re
 
 Check out [PNG Gauntlet](https://pnggauntlet.com/) for resizing several images.
 
+# Video Guide
+
+[![Interaction Video Guide](https://img.youtube.com/vi/dPztbrxcqQ8/0.jpg)](https://www.youtube.com/watch?v=dPztbrxcqQ8)
+
 # Broken Images?
 
 If you are running in **production mode** add the resource `webserver` before core in your `server.cfg`.

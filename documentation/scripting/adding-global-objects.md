@@ -6,6 +6,10 @@ description: Learn how to add objects to the object streamer.
 
 Object(s) inheritely are always global unless they are attached to an interior. In our case we'll just be generating some basic objects and explaining what is happening.
 
+# Video Guide
+
+[![Object Adding Video](https://img.youtube.com/vi/admIUGmp4-g/0.jpg)](https://www.youtube.com/watch?v=admIUGmp4-g)
+
 # Adding a Global Object
 
 Global Object(s) are defined as a type of object that everyone can see.

@@ -6,6 +6,10 @@ description: Learn how to build a Wheel Menu.
 
 Wheel Menu's are exactly how they sound. It's a wheel with a bunch of items you can select. Those items inside of the menu can have other items buried behind it. They can currently only be created on `client-side`.
 
+# Video Guide
+
+[![Interaction Video Guide](https://img.youtube.com/vi/15K0IWaTrhw/0.jpg)](https://www.youtube.com/watch?v=15K0IWaTrhw)
+
 # Basic Example
 
 This example simply has an event where if an event is passed from server to client. It will open this menu.

@@ -3,6 +3,7 @@ description: Learn how to add interactions.
 ---
 
 - [What is an Interaction?](#what-is-an-interaction)
+- [Video Guide](#video-guide)
 - [Creation](#creation)
 - [Removal](#removal)
 
@@ -13,6 +14,10 @@ An interaction is an invisible position on the map where if a player walks over 
 Keep in mind that Interactions are **GLOBAL** which means all players can access them. However, you can write an `if` statement inside of the intraction trigger to prevent the code from going further.
 
 All interactions are `server-side` so if you want it to trigger `client-side` you will need to emit an event to the client to trigger it. This will ensure that interaction(s) are synced through `server-side` first.
+
+# Video Guide
+
+[![Interaction Video Guide](https://img.youtube.com/vi/O2aSiXwXoro/0.jpg)](https://www.youtube.com/watch?v=O2aSiXwXoro)
 
 # Creation
 

@@ -6,6 +6,10 @@ description: Learn how to add commands to your game mode.
 
 Adding commands can be done through the CommandController interface. This interface provides all the necessary functions for you to add a command and bind the functionality of what should happen during a command.
 
+# Video Guide
+
+[![Interaction Video Guide](https://img.youtube.com/vi/ljvPFAQGrQ4/0.jpg)](https://www.youtube.com/watch?v=ljvPFAQGrQ4)
+
 ## server/commands
 
 Inside of the Athena framework you will find a folder called `commands` in the `server` directory. Inside you will find various pre-baked commands that come with this game mode that will help you understand the logic behind writing a command.
