@@ -21,7 +21,7 @@ const objectives: Array<Objective> = [
         range: 3,
         pos: { x: -634.3856201171875, y: -239.7871551513672, z: 38.048484802246094 },
         marker: {
-            pos: { x: -634.3856201171875, y: -239.7871551513672, z: 37.4 } as alt.Vector3,
+            pos: { x: -634.3856201171875, y: -239.7871551513672, z: 36.4 } as alt.Vector3,
             type: 1,
             color: new alt.RGBA(0, 255, 0, 100)
         },
