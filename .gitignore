@@ -19,3 +19,8 @@ src/core/plugins/sandbox
 cdn_upload
 tsconfig.tsbuildinfo
 athena-cache/
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
