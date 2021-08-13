@@ -1,5 +1,5 @@
 import { ObjectId } from 'bson';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 
 /**
  * Used to store Discord Information, IPs, and User Data
@@ -12,7 +12,7 @@ export interface Account {
     ips: Array<string>;
     hardware: Array<string>;
     lastLogin: number;
-    permissionLevel: Permissions;
+    permissionLevel: PERMISSIONS;
     quickToken: string;
     quickTokenExpiration: number;
     banned: boolean;

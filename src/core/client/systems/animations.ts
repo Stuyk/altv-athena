@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { AnimationFlags } from '../../shared/flags/animation';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
@@ -50,13 +50,13 @@ async function loadAnimation(dict: string, count: number = 0): Promise<boolean> 
  * @export
  * @param {string} dict The dictionary of the animation.
  * @param {string} name The name of the animation.
- * @param {AnimationFlags} [flags=AnimationFlags.CANCELABLE] A combination of flags. ie. (AnimationFlags.CANCELABLE | AnimationFlags.UPPERBODY_ONLY)
+ * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE] A combination of flags. ie. (ANIMATION_FLAGS.CANCELABLE | ANIMATION_FLAGS.UPPERBODY_ONLY)
  * @return {Promise<void>}  {Promise<void>}
  */
 export async function playAnimation(
     dict: string,
     name: string,
-    flags: AnimationFlags = AnimationFlags.CANCELABLE,
+    flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
     duration: number = -1
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(dict);

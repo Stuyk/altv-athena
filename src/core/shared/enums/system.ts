@@ -13,6 +13,14 @@ export enum SYSTEM_EVENTS {
     HOLOGRAM_APPEND = 'hologram:Append',
     // Interior
     INTERIOR_SWITCH = 'interior:Switch',
+    INTERIOR_SHOW_MENU = 'interior:Open:Menu',
+    INTERIOR_TOGGLE_LOCK = 'interior:Toggle:Lock',
+    INTERIOR_PURCHASE = 'interior:Purchase',
+    INTERIOR_ENTER = 'interior:Enter',
+    INTERIOR_EXIT = 'interior:Exit',
+    INTERIOR_SET_NAME = 'interior:SetName',
+    INTERIOR_SET_PRICE = 'interior:SetPrice',
+    INTERIOR_STORAGE = 'interior:Storage',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_ATM = 'atm:Open',
@@ -20,6 +28,9 @@ export enum SYSTEM_EVENTS {
     INTERACTION_FUEL = 'fuel:Action',
     INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
+    // IPL
+    IPL_LOAD = 'ipl:Load',
+    IPL_UNLOAD = 'ipl:Unload',
     //
     META_SET = 'meta:Set',
     META_CHANGED = 'meta:Changed',
@@ -31,6 +42,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_UNCUFF = 'player:Uncuff',
     //
     PLAYER_EMIT_ANIMATION = 'animation:Play',
+    PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
     PLAYER_EMIT_SOUND_3D = 'sound:3D',
@@ -68,6 +80,7 @@ export enum SYSTEM_EVENTS {
     QUICK_TOKEN_NONE = 'quicktoken:None',
     QUICK_TOKEN_UPDATE = 'quicktoken:Update',
     //
+    REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
     REMOVE_MARKER = 'remove:Marker',
     REMOVE_BLIP = 'remove:Blip',

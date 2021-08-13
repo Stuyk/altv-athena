@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import emit from './emit';
 import save from './save';
 
@@ -104,10 +105,17 @@ function adjustAttribute(player: alt.Player, value: number, attributeName: strin
     save.field(player, attributeName, player.data[attributeName]);
 }
 
+function setDimension(player: alt.Player, value: number) {
+    player.dimension = value;
+    player.setSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
+    alt.log(`Player Dimension is now: ${player.dimension}`);
+}
+
 export default {
     addFood,
     addArmour,
     addHealth,
     addWater,
-    setPosition
+    setPosition,
+    setDimension
 };

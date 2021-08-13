@@ -2,20 +2,13 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 
 import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { PedConfigFlag } from '../../shared/flags/pedflags';
-import { getClosestVectorByPos } from '../../shared/utility/vector';
+import { PED_CONFIG_FLAG } from '../../shared/flags/PedFlags';
 import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
-import { Timer } from '../utility/timers';
-import { WheelMenu, IWheelItem } from '../utility/wheelMenu';
-import { playAnimation } from './animations';
 
 import './push';
-import { PushVehicle } from './push';
 
 let interval;
 
@@ -39,11 +32,6 @@ export class VehicleController {
         KeybindController.registerKeybind({
             key: KEY_BINDS.VEHICLE_LOCK,
             singlePress: VehicleController.emitLock
-        });
-
-        KeybindController.registerKeybind({
-            key: KEY_BINDS.VEHICLE_OPTIONS,
-            singlePress: VehicleController.emitOptions
         });
     }
 
@@ -96,39 +84,9 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static enterVehicle() {
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableShufflingToDriverSeat, true);
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableStartingVehEngine, true);
-        native.setPedConfigFlag(alt.Player.local.scriptID, PedConfigFlag.DisableStoppingVehEngine, true);
-    }
-
-    static emitOptions() {
-        if (isAnyMenuOpen()) {
-            return;
-        }
-
-        const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
-        if (!vehicle || !vehicle.valid) {
-            return;
-        }
-
-        const options: Array<IWheelItem> = [];
-
-        if (!alt.Player.local.vehicle) {
-            if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2) {
-                options.push({
-                    name: 'Push',
-                    callback: PushVehicle.start,
-                    data: [vehicle]
-                });
-            } else {
-                options.push({
-                    name: 'Stop Push',
-                    callback: PushVehicle.serverStop
-                });
-            }
-        }
-
-        WheelMenu.create('Vehicle Options', options);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_SEAT_SHUFFLE, true);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STARTING_VEHICLE_ENGINE, true);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STOPPING_VEHICLE_ENGINE, true);
     }
 
     /**

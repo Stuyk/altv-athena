@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { CharacterPermissions, Permissions } from '../../shared/flags/permissions';
+import { CHARACTER_PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
@@ -14,14 +14,14 @@ import { getPlayersByGridSpace } from '../utility/filters';
 ChatController.addCharacterCommand(
     'b',
     LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/b'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandOOC
 );
 
 ChatController.addCharacterCommand(
     'ooc',
     LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/ooc'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandOOC
 );
 
@@ -29,7 +29,7 @@ ChatController.addCharacterCommand(
 ChatController.addCharacterCommand(
     'me',
     LocaleController.get(LOCALE_KEYS.COMMAND_ME, '/me'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandMe
 );
 
@@ -37,7 +37,7 @@ ChatController.addCharacterCommand(
 ChatController.addCharacterCommand(
     'do',
     LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandDo
 );
 
@@ -45,7 +45,7 @@ ChatController.addCharacterCommand(
 ChatController.addCharacterCommand(
     'low',
     LocaleController.get(LOCALE_KEYS.COMMAND_LOW, '/low'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandLow
 );
 
@@ -53,7 +53,7 @@ ChatController.addCharacterCommand(
 ChatController.addCharacterCommand(
     'w',
     LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/w'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandWhisper
 );
 
@@ -61,7 +61,7 @@ ChatController.addCharacterCommand(
 ChatController.addCharacterCommand(
     'whisper',
     LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/whisper'),
-    CharacterPermissions.None,
+    CHARACTER_PERMISSIONS.NONE,
     handleCommandWhisper
 );
 

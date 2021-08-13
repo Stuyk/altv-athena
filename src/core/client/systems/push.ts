@@ -4,7 +4,7 @@ import { Timer } from '../utility/timers';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { playAnimation } from './animations';
-import { AnimationFlags } from '../../shared/flags/animation';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
 
 let interval;
@@ -85,7 +85,7 @@ export class PushVehicle {
                 playAnimation(
                     'missfinale_c2ig_11',
                     'pushcar_offcliff_m',
-                    AnimationFlags.REPEAT | AnimationFlags.ENABLE_PLAYER_CONTROL
+                    ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL
                 );
             }
 

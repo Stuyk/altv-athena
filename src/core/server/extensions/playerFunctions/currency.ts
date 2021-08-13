@@ -12,6 +12,10 @@ import save from './save';
  * @memberof CurrencyPrototype
  */
 function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (typeof amount === 'string') {
+        amount = parseFloat(amount);
+    }
+
     if (amount > Number.MAX_SAFE_INTEGER) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }
@@ -30,6 +34,7 @@ function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
         save.field(player, type, player.data[type]);
         return true;
     } catch (err) {
+        console.log(err);
         return false;
     }
 }
@@ -42,6 +47,10 @@ function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
  * @memberof CurrencyPrototype
  */
 function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (typeof amount === 'string') {
+        amount = parseFloat(amount);
+    }
+
     if (amount > Number.MAX_SAFE_INTEGER) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }

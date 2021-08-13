@@ -6,4 +6,5 @@ export interface VehicleInfo {
     sell: boolean;
     price: number;
     seats: number;
+    storage: number | null;
 }

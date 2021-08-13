@@ -6,7 +6,7 @@ import { BlipController } from '../systems/blip';
 import { HologramController } from '../systems/hologram';
 import { VehicleData } from '../../shared/information/vehicles';
 import { playerFuncs } from '../extensions/Player';
-import { vehicleFuncs } from '../extensions/Vehicle';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 
 class DealershipFunctions {
     static init() {
@@ -80,16 +80,16 @@ class DealershipFunctions {
             return;
         }
 
-        vehicleFuncs.new.add(
-            player,
+        VehicleFuncs.add(
             {
+                owner: player.data._id.toString(),
                 model: vehicleData.name,
                 fuel: 100,
                 position: { x: 0, y: 0, z: 0 },
                 rotation: { x: 0, y: 0, z: 0 },
                 color: { r: 255, g: 255, b: 255, a: 255 }
             },
-            false
+            true
         );
 
         playerFuncs.emit.notification(player, `Visit a garage to spawn your new vehicle.`);

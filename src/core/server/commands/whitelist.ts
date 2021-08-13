@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -9,14 +9,14 @@ import { OptionsController } from '../systems/options';
 ChatController.addCommand(
     'addwhitelist',
     LocaleController.get(LOCALE_KEYS.COMMAND_ADD_WHITELIST, '/addwhitelist'),
-    Permissions.Admin | Permissions.Moderator,
+    PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
     handleCommandAdd
 );
 
 ChatController.addCommand(
     'removewhitelist',
     LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_WHITELIST, '/removewhitelist'),
-    Permissions.Admin | Permissions.Moderator,
+    PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
     handleCommandRemove
 );
 

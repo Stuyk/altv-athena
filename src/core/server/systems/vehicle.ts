@@ -1,21 +1,35 @@
+import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
-import { AnimationFlags } from '../../shared/flags/animation';
+import {
+    Vehicle_Behavior,
+    VEHICLE_DOOR_STATE,
+    VEHICLE_EVENTS,
+    VEHICLE_LOCK_STATE,
+    VEHICLE_STATE
+} from '../../shared/enums/vehicle';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { VEHICLE_CLASS } from '../../shared/flags/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
+import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Task } from '../../shared/interfaces/TaskTimeline';
+import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance } from '../../shared/utility/vector';
+import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
-import { vehicleFuncs } from '../extensions/Vehicle';
+import VehicleFuncs from '../extensions/VehicleFuncs';
+import { Collections } from '../interface/DatabaseCollections';
+import Logger from '../utility/athenaLogger';
 import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
+import { StorageView } from '../views/storage';
+import { StorageSystem } from './storage';
 
-import '../views/garage';
 import '../views/dealership';
+import '../views/garage';
 import './fuel';
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -57,17 +71,57 @@ import { VEHICLE_CLASS } from '../../shared/flags/vehicleType';
  * from the inside.
  */
 
-export class VehicleFunctions {
+export class VehicleSystem {
+    static async init() {
+        if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
+            return;
+        }
+
+        const vehicles = await Database.fetchAllData<IVehicle>(Collections.Vehicles);
+        if (vehicles.length <= 0) {
+            return;
+        }
+
+        let count = 0;
+        for (let i = 0; i < vehicles.length; i++) {
+            const vehicle = vehicles[i];
+
+            // Skip vehicles without a garage index.
+            const hasGarageIndex = vehicle.garageIndex !== undefined && vehicle.garageIndex !== null;
+            if (hasGarageIndex && vehicle.garageIndex >= 0) {
+                continue;
+            }
+
+            // Skip Unused Vehicles
+            if (vehicle.lastUsed) {
+                const lastUseDate = vehicle.lastUsed + DEFAULT_CONFIG.VEHICLE_SPAWN_TIMEOUT * 60000 * 60 * 24;
+                if (Date.now() > lastUseDate) {
+                    continue;
+                }
+            }
+
+            // Skip New Vehicles
+            if (vehicle.position.x === 0 && vehicle.position.y === 0 && vehicle.position.z === 0) {
+                continue;
+            }
+
+            VehicleFuncs.spawn(vehicle);
+            count += 1;
+        }
+
+        Logger.info(`Vehicles Spawned: ${count}`);
+    }
+
     /**
      * Called when a player interacts with a vehicle.
      * @static
      * @param {alt.Player} player
      * @return {*}
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static handleAction(player: alt.Player) {
         if (player.vehicle) {
-            VehicleFunctions.handleInVehicle(player);
+            VehicleSystem.handleInVehicle(player);
             return;
         }
 
@@ -77,7 +131,7 @@ export class VehicleFunctions {
             return;
         }
 
-        VehicleFunctions.handleOutsideVehicle(player, vehicle);
+        VehicleSystem.handleOutsideVehicle(player, vehicle);
     }
 
     /**
@@ -85,23 +139,28 @@ export class VehicleFunctions {
      * @static
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static handleOutsideVehicle(player: alt.Player, vehicle: alt.Vehicle) {
         if (player.isPushingVehicle) {
-            VehicleFunctions.stopPush(player);
+            VehicleSystem.stopPush(player);
         }
 
-        if (VehicleFunctions.isVehicleLocked(vehicle)) {
+        if (VehicleSystem.isVehicleLocked(vehicle)) {
             playerFuncs.emit.notification(player, `~r~Vehicle is not currently unlocked.`);
             return;
         }
 
-        VehicleFunctions.prunePassengers(vehicle);
+        VehicleSystem.prunePassengers(vehicle);
 
-        const seat = VehicleFunctions.findOpenSeat(vehicle);
+        const seat = VehicleSystem.findOpenSeat(vehicle);
         if (seat === null) {
             playerFuncs.emit.notification(player, '~r~Could not find an open seat.');
+            return;
+        }
+
+        if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
+            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
             return;
         }
 
@@ -125,7 +184,7 @@ export class VehicleFunctions {
      * Check if a vehicle is locked.
      * @static
      * @param {alt.Vehicle} vehicle
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static isVehicleLocked(vehicle: alt.Vehicle): boolean {
         if (!vehicle || !vehicle.valid) {
@@ -140,7 +199,7 @@ export class VehicleFunctions {
      * @static
      * @param {alt.Player} player
      * @return {*}
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static handleInVehicle(player: alt.Player) {
         const vehicle = player.vehicle;
@@ -148,7 +207,7 @@ export class VehicleFunctions {
             return;
         }
 
-        if (VehicleFunctions.isVehicleLocked(vehicle)) {
+        if (VehicleSystem.isVehicleLocked(vehicle)) {
             if (!vehicle.data) {
                 return;
             }
@@ -181,7 +240,7 @@ export class VehicleFunctions {
     /**
      * Checks the passengers in a vehicle and removes invalid passengers.
      * @static
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static prunePassengers(vehicle: alt.Vehicle) {
         if (!vehicle.passengers) {
@@ -209,7 +268,7 @@ export class VehicleFunctions {
      * Find an open seat for the vehicle.
      * @static
      * @param {alt.Vehicle} vehicle
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static findOpenSeat(vehicle: alt.Vehicle): number {
         const vehicleData = VehicleData.find((x) => alt.hash(x.name) === vehicle.model);
@@ -241,11 +300,11 @@ export class VehicleFunctions {
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
      * @param {number} seat
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static entering(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
         // Clear the enter state for the vehicle if the door is locked.
-        if (VehicleFunctions.isVehicleLocked(vehicle)) {
+        if (VehicleSystem.isVehicleLocked(vehicle)) {
             const tasks: Array<Task> = [
                 //   native.clearPedTasksImmediately(alt.Player.local.scriptID);
                 {
@@ -266,7 +325,7 @@ export class VehicleFunctions {
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
      * @param {number} seat
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static enter(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
         const index = vehicle.passengers.findIndex((p) => p.player && p.player.id === player.id);
@@ -291,10 +350,15 @@ export class VehicleFunctions {
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
      * @param {number} seat
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
-        VehicleFunctions.prunePassengers(vehicle);
+        VehicleSystem.prunePassengers(vehicle);
+
+        // Saves the vehicle location / data on driver exit.
+        if (seat === 1) {
+            VehicleFuncs.update(vehicle);
+        }
 
         // Prune Temporary Vehicles
         if (!vehicle.isTemporary) {
@@ -317,7 +381,7 @@ export class VehicleFunctions {
      * @static
      * @param {alt.Player} player
      * @return {*}
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static toggleEngine(player: alt.Player) {
         if (!player || !player.vehicle || !player.vehicle.driver) {
@@ -328,8 +392,18 @@ export class VehicleFunctions {
             return;
         }
 
-        if (!vehicleFuncs.getter.isOwner(player.vehicle, player)) {
+        if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
             playerFuncs.emit.notification(player, `~r~You do not have keys for this vehicle.`);
+            return;
+        }
+
+        if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
+            playerFuncs.emit.notification(player, `~r~No fuel.`);
+            return;
+        }
+
+        if (player.vehicle.isRefueling) {
+            playerFuncs.emit.notification(player, `~r~Vehicle Refuel Not Completed`);
             return;
         }
 
@@ -362,7 +436,7 @@ export class VehicleFunctions {
      * @static
      * @param {alt.Vehicle} vehicle
      * @param {number} doorNumber
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static toggleDoor(player: alt.Player, doorNumber: number) {
         const vehicle = player.vehicle
@@ -418,7 +492,7 @@ export class VehicleFunctions {
      * @static
      * @param {alt.Player} player
      * @return {*}
-     * @memberof VehicleFunctions
+     * @memberof VehicleSystem
      */
     static toggleLock(player: alt.Player) {
         if (!player || !player.valid) {
@@ -432,7 +506,7 @@ export class VehicleFunctions {
             return;
         }
 
-        if (!vehicleFuncs.getter.isOwner(vehicle, player)) {
+        if (!VehicleFuncs.hasOwnership(player, vehicle)) {
             playerFuncs.emit.notification(player, `~r~You do not have keys for this vehicle.`);
             return;
         }
@@ -450,7 +524,7 @@ export class VehicleFunctions {
                 player,
                 `anim@mp_player_intmenu@key_fob@`,
                 'fob_click_fp',
-                AnimationFlags.UPPERBODY_ONLY | AnimationFlags.ENABLE_PLAYER_CONTROL,
+                ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 -1
             );
         }
@@ -486,6 +560,17 @@ export class VehicleFunctions {
             return false;
         }
 
+        const dist = distance(player.pos, vehicle.pos);
+        if (dist >= 3) {
+            playerFuncs.emit.notification(player, '~r~You are no longer near this vehicle.');
+            return false;
+        }
+
+        if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
+            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
+            return false;
+        }
+
         if (vehicle.driver) {
             return false;
         }
@@ -508,14 +593,73 @@ export class VehicleFunctions {
         player.detach();
         alt.emitClient(player, VEHICLE_EVENTS.STOP_PUSH);
     }
+
+    /**
+     * Opens or creates a storage interface for a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @return {*}
+     * @memberof VehicleSystem
+     */
+    static async storage(player: alt.Player, vehicle: alt.Vehicle) {
+        if (!player || !player.valid || player.data.isDead) {
+            return;
+        }
+
+        if (distance(player.pos, vehicle.pos) >= 5) {
+            playerFuncs.emit.notification(player, `Too far away from that vehicle.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!VehicleFuncs.hasOwnership(player, vehicle)) {
+            playerFuncs.emit.notification(player, `You do not have access to the trunk.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
+            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        const vehicleInfo = VehicleData.find(
+            (x) => x.name.toLocaleLowerCase() === vehicle.data.model.toLocaleLowerCase()
+        );
+
+        if (!vehicleInfo || !vehicleInfo.storage) {
+            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        let storageID: string;
+
+        // Remove array. Make it a string reference to the storage box.
+        if (!vehicle.data.storage) {
+            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: vehicleInfo.storage });
+            vehicle.data.storage = storage._id.toString();
+            await VehicleFuncs.save(vehicle, { storage: vehicle.data.storage });
+            storageID = vehicle.data.storage;
+        } else {
+            storageID = vehicle.data.storage.toString();
+        }
+
+        StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
+    }
 }
 
-alt.onClient(VEHICLE_EVENTS.PUSH, VehicleFunctions.startPush);
-alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleFunctions.stopPush);
-alt.onClient(VEHICLE_EVENTS.ACTION, VehicleFunctions.handleAction);
-alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleFunctions.toggleLock);
-alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleFunctions.toggleEngine);
+alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
+alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
+alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
+alt.onClient(VEHICLE_EVENTS.ACTION, VehicleSystem.handleAction);
+alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
+alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
 
-alt.on('playerEnteringVehicle', VehicleFunctions.entering);
-alt.on('playerEnteredVehicle', VehicleFunctions.enter);
-alt.on('playerLeftVehicle', VehicleFunctions.leave);
+alt.on('playerEnteringVehicle', VehicleSystem.entering);
+alt.on('playerEnteredVehicle', VehicleSystem.enter);
+alt.on('playerLeftVehicle', VehicleSystem.leave);
+
+VehicleSystem.init();

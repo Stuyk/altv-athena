@@ -82,6 +82,10 @@ function handleDrawTextlabels() {
         return;
     }
 
+    if (alt.Player.local.isWheelMenuOpen) {
+        return;
+    }
+
     if (alt.Player.local.isMenuOpen) {
         return;
     }

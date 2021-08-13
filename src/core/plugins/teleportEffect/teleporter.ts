@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -24,7 +24,7 @@ const teleporterItem: Item = {
 ChatController.addCommand(
     'teleporter',
     LocaleController.get(LOCALE_KEYS.COMMAND_TELEPORTER, '/teleporter'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         let itemClone = deepCloneObject<Item>(teleporterItem);
         let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);

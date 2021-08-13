@@ -1,37 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Timer } from './timers';
 
-const MAX_ATTEMPTS = 100;
 const textureData = {};
-
-export function loadTexture(dictionary: string) {
-    return new Promise((resolve: Function) => {
-        let attempts = 0;
-
-        if (native.hasStreamedTextureDictLoaded(dictionary)) {
-            resolve();
-            return;
-        }
-
-        const interval = Timer.createInterval(() => {
-            native.requestStreamedTextureDict(dictionary, false);
-            if (attempts > MAX_ATTEMPTS) {
-                resolve();
-                Timer.clearInterval(interval);
-                return;
-            }
-
-            if (!native.hasStreamedTextureDictLoaded(dictionary)) {
-                attempts += 1;
-                return;
-            }
-
-            Timer.clearInterval(interval);
-            return resolve();
-        }, 100);
-    });
-}
 
 export function drawTexture2D(
     dictionary: string,
@@ -40,6 +10,12 @@ export function drawTexture2D(
     scale: number = 1,
     opacity: number = 255
 ) {
+    if (!native.hasStreamedTextureDictLoaded(dictionary)) {
+        native.requestStreamedTextureDict(dictionary, false);
+        alt.log(`Requested Texture Dictionary: ${dictionary}`);
+        return;
+    }
+
     const identifier = `${dictionary}${name}`;
     if (!textureData[identifier]) {
         const [_, width, height] = native.getActiveScreenResolution(0, 0);
@@ -57,11 +33,16 @@ export function drawTexture2D(
 
     const width = texture.x * scale;
     const height = texture.y * scale;
-
     native.drawSprite(dictionary, name, position.x, position.y, width, height, 0, 255, 255, 255, opacity, false);
 }
 
 export function drawTexture(dictionary: string, name: string, position: alt.Vector3, scale: number = 1) {
+    if (!native.hasStreamedTextureDictLoaded(dictionary)) {
+        native.requestStreamedTextureDict(dictionary, false);
+        alt.log(`Requested Texture Dictionary: ${dictionary}`);
+        return;
+    }
+
     const identifier = `${dictionary}${name}`;
     if (!textureData[identifier]) {
         const [_, width, height] = native.getActiveScreenResolution(0, 0);

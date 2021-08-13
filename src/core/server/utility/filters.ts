@@ -1,14 +1,14 @@
 import * as alt from 'alt-server';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { distance } from '../../shared/utility/vector';
 
 /**
  * Returns an array of players filtered by permission level.
  * @export
- * @param {Array<Permissions>} permissionLevels An array of 'Permissions.x' levels.
+ * @param {Array<Permissions>} permissionLevels An array of 'PERMISSIONS.x' levels.
  * @return {Array<alt.Player>}
  */
-export function getPlayersByPermissionLevel(permissionLevels: Array<Permissions>): Array<alt.Player> {
+export function getPlayersByPermissionLevel(permissionLevels: Array<PERMISSIONS>): Array<alt.Player> {
     const validPlayers = [...alt.Player.all].filter(
         (p) => p && p.data && p.accountData && permissionLevels.includes(p.accountData.permissionLevel)
     );

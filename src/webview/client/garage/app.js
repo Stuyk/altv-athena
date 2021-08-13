@@ -20,7 +20,12 @@ const app = new Vue({
     },
     methods: {
         setURL(url) {
-            this.url = `http://${url}:9111`;
+            if (url.includes('assets/webserver')) {
+                this.url = url;
+                return;
+            }
+
+            this.url = `http://${url}`;
         },
         setVehicles(vehicles) {
             this.vehicles = vehicles;
@@ -49,7 +54,7 @@ const app = new Vue({
             }
 
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-            alt.emit('garage:Spawn', this.vehicles[index].uid);
+            alt.emit('garage:Spawn', this.vehicles[index].id);
         },
         despawn(index) {
             if (!('alt' in window)) {
@@ -58,7 +63,7 @@ const app = new Vue({
             }
 
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-            alt.emit('garage:Despawn', this.vehicles[index].uid);
+            alt.emit('garage:Despawn', this.vehicles[index].id);
         }
     },
     mounted() {
@@ -79,70 +84,70 @@ const app = new Vue({
                     model: 'washington',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'dsfdsafsafdsaf'
+                    plate: 'dsfdsafsafdsaf'
                 },
                 {
                     fuel: 100,
                     model: 'akuma',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'dfdsfsdfdsfdswfeew'
+                    plate: 'dfdsfsdfdsfdswfeew'
                 },
                 {
                     fuel: 100,
                     model: 'faggio',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'd1f1f1f'
+                    plate: 'd1f1f1f'
                 },
                 {
                     fuel: 100,
                     model: 'infernus',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'g4554g54g45g45'
+                    plate: 'g4554g54g45g45'
                 },
                 {
                     fuel: 100,
                     model: 'infernus2',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'g54g454444444'
+                    plate: 'g54g454444444'
                 },
                 {
                     fuel: 100,
                     model: 'washington',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'dsfdsafsafdsaf'
+                    plate: 'dsfdsafsafdsaf'
                 },
                 {
                     fuel: 100,
                     model: 'akuma',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'dfdsfsdfdsfdswfeew'
+                    plate: 'dfdsfsdfdsfdswfeew'
                 },
                 {
                     fuel: 100,
                     model: 'faggio',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'd1f1f1f'
+                    plate: 'd1f1f1f'
                 },
                 {
                     fuel: 100,
                     model: 'infernus',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'g4554g54g45g45'
+                    plate: 'g4554g54g45g45'
                 },
                 {
                     fuel: 100,
                     model: 'infernus2',
                     position: { x: 0, y: 0, z: 0 },
                     rotation: { x: 0, y: 0, z: 0 },
-                    uid: 'g54g454444444'
+                    plate: 'g54g454444444'
                 }
             ]);
         }

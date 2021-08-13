@@ -1,11 +1,9 @@
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-
 // All Vehicle Dealerships
 import PDMCoupe from './dealerships/PDMCoupe';
 import PDMSport from './dealerships/PDMSport';
 import PDMSuper from './dealerships/PDMSuper';
 import PDMSuv from './dealerships/PDMSuv';
-
 // All Parking Garages
 import BanhamCanyon from './parking/BanhamCanyon';
 import DelPerroBeach from './parking/DelPerroBeach';
@@ -100,7 +98,10 @@ export const DEFAULT_CONFIG = {
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
     FUEL_LOSS_PER_PLAYER_TICK: 0.15, // Happens every 10s
-    MAX_VEHICLE_SPAWNS: 3, // Players can have 3 vehicles spawned at one time.
+    SPAWN_ALL_VEHICLES_ON_START: true, // Will spawn all vehicles unless they're in a garage.
+    SPAWN_VEHICLES_ON_JOIN: false, // Will spawn all player vehicles not in a garage on join. Does not work if SPAWN_ALL_VEHICLES_ON_START is enabled.
+    DESPAWN_VEHICLES_ON_LOGOUT: false, // Will despawn all player vehicles on logout.
+    VEHICLE_SPAWN_TIMEOUT: 24, // Hours that must pass since a vehicle was last used to avoid spawning on server restart.
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
     VEHICLE_GARAGES: [
@@ -130,5 +131,7 @@ export const DEFAULT_CONFIG = {
         PDMSuper
     ],
     // The Default Stream Configuration for Markers, Text Labels, etc.
-    STREAM_CONFIG: StreamConfiguration
+    STREAM_CONFIG: StreamConfiguration,
+    // The Default Faction Configurations
+    MAX_LOG_LENGTH: 50 // Larger logs may have unintended side-effects.
 };

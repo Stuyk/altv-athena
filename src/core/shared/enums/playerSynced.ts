@@ -3,5 +3,7 @@ export enum PLAYER_SYNCED_META {
     POSITION = 'player-position',
     PING = 'player-ping',
     NAME = 'player-name',
-    WAYPOINT = 'player-waypoint'
+    DIMENSION = 'player-dimension',
+    WAYPOINT = 'player-waypoint',
+    DATABASE_ID = 'player-character-id'
 }

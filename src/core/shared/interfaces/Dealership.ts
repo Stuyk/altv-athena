@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS } from '../flags/vehicleType';
+import { VEHICLE_CLASS } from '../flags/VehicleTypeFlags';
 import { Vector3 } from './Vector';
 
 export interface Dealership {

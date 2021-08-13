@@ -1,14 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
 
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { drawTexture, loadTexture } from '../utility/texture';
+import { drawTexture } from '../utility/texture';
 import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;
@@ -44,9 +44,6 @@ export class InteractionController {
                 pressedKey = true;
             }
         });
-
-        loadTexture('mpsafecracking');
-        loadTexture('mpmissmarkers128');
     }
 
     /**
@@ -83,6 +80,10 @@ export class InteractionController {
             return;
         }
 
+        if (alt.Player.local.isWheelMenuOpen) {
+            return;
+        }
+
         InteractionController.drawInteractText();
 
         if (!pressedKey) {
@@ -110,14 +111,7 @@ export class InteractionController {
         // Display Help Text
         if (description && position) {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
-
-            loadTexture('athena_icons').then(() => {
-                if (!position) {
-                    return;
-                }
-
-                drawTexture('athena_icons', 'interact', position, 0.56);
-            });
+            drawTexture('mpmissmarkers128', 'corona_marker', position, 0.1);
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
@@ -137,19 +131,13 @@ export class InteractionController {
             const isInBack = distance2d(alt.Player.local.pos, backPosition) <= 2;
 
             if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
-                if (!native.hasStreamedTextureDictLoaded('mpsafecracking')) {
-                    loadTexture('mpsafecracking');
+                const newPosition = vehicle.pos.add(0, 0, 1);
+
+                if (isVehicleLocked) {
+                    drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+                } else {
+                    drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
                 }
-
-                loadTexture('mpsafecracking').then(() => {
-                    const newPosition = vehicle.pos.add(0, 0, 1);
-
-                    if (isVehicleLocked) {
-                        drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
-                    } else {
-                        drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
-                    }
-                });
 
                 if (!isVehicleLocked) {
                     // Press 'F' to enter vehicle

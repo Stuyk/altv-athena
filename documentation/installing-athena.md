@@ -2,13 +2,13 @@
 description: This will tell you how to setup a private mirror of Athena.
 ---
 
-# Installing Athena Advanced
+# Installing Athena
 
 Ensure that you have followed and completed the [Before Setup](./before-setup.md) instructional page. The prerequisites inside of that page are deeply important for making alt:V Athena function out of the box.
 
 ## Table of Contents
 
-- [Installing Athena Advanced](#installing-athena-advanced)
+- [Installing Athena](#installing-athena)
   - [Table of Contents](#table-of-contents)
   - [Setup Private Repo](#setup-private-repo)
   - [Set Private Repo Main Branch to Master](#set-private-repo-main-branch-to-master)
@@ -25,9 +25,7 @@ Ensure that you have followed and completed the [Before Setup](./before-setup.md
     - [Running Production on Windows](#running-production-on-windows)
     - [Running Production on Linux](#running-production-on-linux)
     - [Running in Debug / Auto Refresh Mode](#running-in-debug--auto-refresh-mode)
-- [Updating and Storing Changes](#updating-and-storing-changes)
-  - [Merge Conflicts?!](#merge-conflicts)
-  - [Pushing Changes to Private Repository](#pushing-changes-to-private-repository)
+- [What is Next?](#what-is-next)
 
 ## Setup Private Repo
 
@@ -138,8 +136,6 @@ This file should not have **ANY EXTENSION** make sure it doesn't say it's a text
 
 **Bare Minimum Configuration**
 
-* WEBSERVER_IP
-
 **Configuration Options**
 
 ```sh    
@@ -156,8 +152,10 @@ MONGO_URL=<MONGODB_CONNECTION_STRING>
 # Collections are also known as tables.
 MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
 
-# You must specify your server's IP Address here.
-WEBSERVER_IP=<YOUR_SERVER_IP>
+# You must specify your localhost here with port :9111
+# Only used for development mode on a local machine.
+# Otherwise import 'webserver' as a resource.
+WEBSERVER_IP=127.0.0.1:9111
 ```
 
 ## Obtaining your Own IP
@@ -180,11 +178,8 @@ curl ipinfo.io/ip
 
 You will need to port forward for the following ports on TCP & UDP.
 
-**DO NOT SKIP THIS. NOBODY CAN JOIN WITHOUT IT.**
-
 ```
 7788
-9111
 ```
 
 ## Checking Ports
@@ -196,6 +191,18 @@ https://www.yougetsignal.com/tools/open-ports/
 ## Running the Server
 
 Running the server should always be done through your command line, terminal, or powershell interface. You should use the `npm` scripts that included inside of `package.json`.
+
+**HEY, LISTEN!**
+
+When you run a server in `production` mode that means that your server is running without development node. You should be modifying your `server.cfg` and removing debug mode and adding the `webserver` resource before core.
+
+Example:
+
+```
+resources: ["webserver", "core"],
+```
+
+Please do not forget to do this!
 
 _Make sure you follow the full setup before running any of this._
 
@@ -223,40 +230,8 @@ npm run dev
 
 _Replace windows with linux if you are using linux._
 
-# Updating and Storing Changes
+# What is Next?
 
-Instead of being super ineffecient and merging files in one at a time, you're going to be using git to pull down changes. Which does things mostly automatically.
+Read the next page of this tutorial to fully understand how to save your changes and work with incoming Athena updates.
 
-Here are some notes before you perform these actions **\(SUPER IMPORTANT\)**:
-
-* Close All Open Files
-* Push All Current Change to Private Repository
-* Create a backup of your current folder
-* Run the two commands below.
-
-```bash
-git fetch upstream
-git pull upstream master
-```
-
-If you run into merge conflicts... see the video below. It will help you understand what needs to be done to resolve merge conflicts.
-
-## Merge Conflicts?!
-
-Don't worry I made a simple video to help explain merge conflicts. Check out this video:
-
-[![Resolving Merge Conflicts](https://img.youtube.com/vi/sc_vo30hu_M/0.jpg)](https://www.youtube.com/watch?v=sc_vo30hu_M)
-
-Merge conflicts only occur when you are pulling in new data from an existing repository. This means that it found similar code but isn't sure if you want to override your current code or mix the two. A merge conflict can easily be seen inside vscode when pulling dwon from the upstream.
-
-## Pushing Changes to Private Repository
-
-If you make changes in your private clone. You can now simply push to the private repository and pull it down anywhere. Which is really great.
-
-Here's how you can push changes.
-
-```bash
-git add .
-git commit -m "What did I commit to the repo"
-git push origin master
-```
+[Updating Athena](./updating-athena.md)

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentTypes';
@@ -76,14 +76,14 @@ const burgerItem: Item = {
 ChatController.addCommand(
     'dummyitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_DUMMY_ITEM, '/dummyitem'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleCommand
 );
 
 ChatController.addCommand(
     'getitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/getitem'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleGetItem
 );
 
@@ -91,7 +91,7 @@ ChatController.addCommand(
 ChatController.addCommand(
     'spawnitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/spawnitem'),
-    Permissions.Admin,
+    PERMISSIONS.ADMIN,
     handleGetItem
 );
 

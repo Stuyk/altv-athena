@@ -37,7 +37,7 @@ function appearance(player: alt.Player): void {
 
 function inventory(player: alt.Player): void {
     if (!player.data.inventory) {
-        player.data.inventory = new Array(6);
+        player.data.inventory = new Array(5);
         for (let i = 0; i < player.data.inventory.length; i++) {
             player.data.inventory[i] = [];
         }
@@ -115,15 +115,6 @@ function water(player: alt.Player): void {
     playerFuncs.safe.addWater(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
 }
 
-function vehicles(player: alt.Player): void {
-    if (!player.data.vehicles) {
-        emit.meta(player, 'vehicles', []);
-        return;
-    }
-
-    emit.meta(player, 'vehicles', player.data.vehicles);
-}
-
 export default {
     appearance,
     currencyData,
@@ -132,7 +123,6 @@ export default {
     playTime,
     syncedMeta,
     time,
-    vehicles,
     water,
     weather
 };

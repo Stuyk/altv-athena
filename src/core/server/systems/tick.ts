@@ -4,9 +4,8 @@ import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
-import { vehicleFuncs } from '../extensions/Vehicle';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { InventoryController } from '../views/inventory';
-import { StreamerService } from './streamer';
 
 const timeBetweenPings = 4950;
 
@@ -57,18 +56,16 @@ function handlePing(player: alt.Player): void {
         playerFuncs.sync.playTime(player);
     }
 
-    if (player.vehicle) {
+    // Only the driver of the vehicle should be responsible for vehicle updates.
+    if (player.vehicle && player.vehicle.driver === player) {
         if (!player.vehicle.nextUpdate || Date.now() > player.vehicle.nextUpdate) {
             player.vehicle.nextUpdate = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_UPDATES;
-            vehicleFuncs.setter.updateFuel(player.vehicle);
+            VehicleFuncs.updateFuel(player.vehicle);
         }
 
         if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {
             player.vehicle.nextSave = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_SAVES;
-            const owner = alt.Player.all.find((p) => p.id === player.vehicle.player_id);
-            if (owner) {
-                vehicleFuncs.save.data(owner, player.vehicle);
-            }
+            VehicleFuncs.update(player.vehicle);
         }
     }
 }

@@ -1,4 +1,4 @@
-import { VEHICLE_TYPE } from '../../../shared/flags/vehicleType';
+import { VEHICLE_TYPE } from '../../../shared/flags/VehicleTypeFlags';
 
 export default {
     position: { x: -732.739501953125, y: -1311.5386962890625, z: 4.5 },

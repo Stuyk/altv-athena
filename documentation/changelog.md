@@ -4,6 +4,63 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.3
+
+```diff
++ Fix Dev Mode for Scripts
++ Added Interior System
++ Added Dimensions to Streamer
++ Added Objects to Interior System
++ Fix Fetching Dropped Items by Dimension
++ Added Optional Distance Ignoring for Holograms
++ Added Example Plugin for Character Interface Extension
++ Added Example Plugin for IVehicle Interface Extension
++ Completely Rewrite Vehicle Funcs
++ Vehicle data is now saved separately from the player.
++ Additional options for vehicle spawning and saving.
++ Vehicle spawn behavior changed.
++ Standardize Flags for Everything
++ Added Ability to Purchase Properties
++ Added Ability to Lock / Unlock Properties
++ Added Ability to Sell Properties
++ Added New Input Menu
++ Added Ability to Set Property Price
++ Added Abiity to Set Property Name
++ Added Storage System
++ Added Storage Collection
++ Added Storage Containers for Interiors
++ Added Vehicle Storage Trunks
++ Begin Faction Prototyping
++ Fix Removing Global Object Locally
++ Add Configureable Storage Per Vehicle
++ Fix Action Menu Focus Issues
++ Added Faction Interface and Controller
++ Added Faction Member Management
++ Added Faction Permission Management
++ Added Faction Rank Management
++ Added Faction Logs
++ Added Faction Options
++ Fix Bug with Objects Not Being Deleted Locally
++ Fix Pushing Vehicle Distance
++ Fix Entering Vehicles Turned Over
++ Fix Broadcast Command
++ Commands for Creating Factions
++ Commands for Faction Takeover (Admin)
++ Added Ownership Change Option for Factions
++ Fixed Action Menu Bug
++ Added Dynamic Faction Storage
++ Added Ability to Set Faction Position
++ Added Ability to Set Faction Weapon Storage
++ Added Ability to Set Faction Storage
++ Added Interface Option(s) for Above Changes
++ Fix Crash Related to Texture Loading
++ Fix Marker Types for Jobs
++ Fix Extra Arrow in Job Interface
++ Add WebServer Resource for Production Mode
++ Fix Bug where Fuel is Not Synced / Updated
++ Added Fuel System Again
+```
+
 ## 2.0.2
 
 ```diff

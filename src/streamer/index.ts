@@ -111,17 +111,41 @@ class StreamerServer {
      * @memberof StreamerServer
      */
     static update(id: number, data: IStreamUpdate) {
-        const markers = StreamData.markers.filter(
-            (marker) => StreamerServer.distance(data.pos, marker.pos) <= config.MarkersDistance
-        );
+        const markers = StreamData.markers.filter((marker) => {
+            if (marker.dimension && marker.dimension !== data.dimension) {
+                return false;
+            }
 
-        const labels = StreamData.labels.filter(
-            (label) => StreamerServer.distance(data.pos, label.pos) <= config.LabelsDistance
-        );
+            if (StreamerServer.distance(data.pos, marker.pos) > config.MarkersDistance) {
+                return false;
+            }
 
-        const objects = StreamData.objects.filter(
-            (object) => StreamerServer.distance(data.pos, object.pos) <= config.ObjectsDistance
-        );
+            return true;
+        });
+
+        const labels = StreamData.labels.filter((label) => {
+            if (label.dimension && label.dimension !== data.dimension) {
+                return false;
+            }
+
+            if (StreamerServer.distance(data.pos, label.pos) > config.LabelsDistance) {
+                return false;
+            }
+
+            return true;
+        });
+
+        const objects = StreamData.objects.filter((object) => {
+            if (object.dimension && object.dimension !== data.dimension) {
+                return false;
+            }
+
+            if (StreamerServer.distance(data.pos, object.pos) > config.ObjectsDistance) {
+                return false;
+            }
+
+            return true;
+        });
 
         const response: IStreamMessage = {
             id,

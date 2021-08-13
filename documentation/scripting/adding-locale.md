@@ -45,4 +45,6 @@ const locales: LocaleFormat = {
 };
 ```
 
-Hope it's nice and easy to understand!
+## Using a Locale
+
+Once a locale is created you can change `en` in the same file of `src/core/shared/locale` to whatever your two-letter language identifier is. This will automatically convert _most_ of the game mode to whatever language was written in your locale file.

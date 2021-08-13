@@ -7,4 +7,8 @@ export interface Marker {
     scale?: Vector3;
     maxDistance?: number;
     uid?: string;
+    dimension?: number;
+    bobUpAndDown?: boolean;
+    faceCamera?: boolean;
+    rotate?: boolean;
 }

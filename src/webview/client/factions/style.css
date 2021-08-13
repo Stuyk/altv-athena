@@ -1,0 +1,399 @@
+@import '../css/common.css';
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter';
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.v-application .v-application--wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background: transparent !important;
+    width: 100vw;
+    height: 100vh;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.frame {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    min-width: 100vw;
+    height: 100vh;
+    backface-visibility: hidden;
+    animation: fadein ease 0.5s;
+    background: rgba(25, 25, 25, 0.9);
+}
+
+.no-hover {
+    cursor: unset;
+}
+
+.selectable {
+    user-select: text !important;
+}
+
+.hoverable {
+    cursor: pointer;
+}
+
+.hover-orange:hover {
+    text-shadow: 0px 0px 5px rgba(255, 165, 0, 1), 0px 0px 25px rgba(255, 165, 0, 0.5) !important;
+}
+
+.hover-red:hover {
+    text-shadow: 0px 0px 5px rgba(255, 0, 0, 1), 0px 0px 25px rgba(255, 0, 0, 0.5) !important;
+}
+
+.hover-green:hover {
+    text-shadow: 0px 0px 5px rgba(0, 255, 0, 1), 0px 0px 25px rgba(0, 255, 0, 0.5) !important;
+}
+
+.hoverable:hover {
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 25px rgba(255, 255, 255, 1);
+}
+
+.hoverable:active {
+    transform: translateY(-3px);
+}
+
+.frame .wrapper {
+    overflow-y: scroll;
+}
+
+.frame .split {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.frame .split-space-evenly {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.frame .split-auto {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.frame .v-messages {
+    display: none !important;
+}
+
+.frame .v-text-field__details {
+    display: none !important;
+}
+
+.frame .center-header {
+    width: 100%;
+    text-align: center;
+}
+
+.frame .button-group {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.frame .scroll {
+    overflow-y: scroll;
+    max-height: 50vh;
+}
+
+.frame .stack {
+    position: relative;
+    display: block;
+    height: 100%;
+}
+
+.frame .stack-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.frame .navbar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    width: 100%;
+    min-height: 75px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.frame .navbar .center-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-content: space-between;
+    justify-items: center;
+    align-items: center;
+}
+
+.frame .exit {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.table .headers {
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+}
+
+.table .row {
+    display: table-row;
+    padding-left: 25px;
+}
+
+.table .row:nth-of-type(odd) {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.table .cell {
+    display: table-cell;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.table .cell:first-child {
+    padding-left: 12px;
+}
+
+.table .cell:last-child {
+    padding-right: 12px;
+}
+
+.table .options {
+    display: flex;
+    text-align: center;
+    flex-wrap: nowrap;
+}
+
+.table-members {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 15px;
+    column-gap: 48px;
+    text-align: left;
+    width: 100%;
+}
+
+.frame .exit:hover {
+    opacity: 1;
+    text-shadow: 0px 0px 25px rgba(255, 0, 0, 1);
+}
+
+.frame .small-icon,
+.small-icon-solo {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    padding: 6px;
+}
+
+.frame .small-icon:nth-of-type(even) {
+    margin-right: 6px;
+    margin-left: 6px;
+}
+
+.frame .navbar .keybind {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 9px !important;
+}
+
+.frame .navbar .left-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    justify-items: center;
+    align-items: center;
+}
+
+.frame .fill-height {
+    height: 100%;
+}
+
+.frame .navbar .navitem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.frame .navbar .navitem:hover {
+    opacity: 0.75;
+}
+
+.frame .navbar .navselected {
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 25px rgba(255, 255, 255, 1);
+}
+
+.frame button {
+    padding-left: 5px;
+    font-size: 16px;
+    padding: 1vh 0vw;
+    font-variant: small-caps;
+    transition: 0.1s;
+    opacity: 0.75;
+    overflow: hidden;
+    outline: hidden !important;
+}
+
+.frame button:hover {
+    opacity: 1;
+}
+
+.frame button:active {
+    color: white !important;
+    transform: unset !important;
+    background: rgba(0, 0, 0, 0.3);
+    outline: hidden !important;
+}
+
+.frame .disabled-button {
+    opacity: 0.75 !important;
+}
+
+.frame .disabled-button:hover {
+    opacity: 0.75 !important;
+}
+
+.frame .disabled-button:active {
+    color: unset !important;
+    transform: unset !important;
+    background: unset !important;
+}
+
+.frame .active {
+    background: rgba(0, 0, 0, 0.3) !important;
+    opacity: 1 !important;
+}
+
+.frame .outline-round {
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.frame-loading {
+    position: absolute;
+    left: 2vw;
+    min-width: 550px;
+    max-width: 550px;
+    animation: fadein 0.75s;
+    user-select: none;
+    transform: perspective(1000px) rotateY(5deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    opacity: 0.95;
+}
+
+.response-red {
+    display: block;
+    position: fixed;
+    bottom: 25px;
+    min-height: 35px;
+    border-radius: 6px;
+    background: rgba(255, 0, 0, 0.5);
+    user-select: none !important;
+}
+
+.response-green {
+    display: block;
+    position: fixed;
+    bottom: 25px;
+    min-height: 35px;
+    border-radius: 6px;
+    background: rgba(0, 255, 0, 0.5);
+    user-select: none !important;
+}
+
+.outline-round {
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(20, 20, 20, 0.85);
+    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #646464;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer !important;
+}
+
+[v-cloak] {
+    display: none !important;
+}

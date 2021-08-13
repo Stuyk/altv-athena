@@ -28,12 +28,12 @@ This is an over the top menu with multiple menu levels and pointless functionali
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../server/extensions/Player';
 import ChatController from '../../server/systems/chat';
-import { AnimationFlags } from '../../shared/flags/animation';
-import { Permissions } from '../../shared/flags/permissions';
+import { ANIMATION_FLAGS } from '../../shared/flags/animation';
+import { PERMISSIONS } from '../../shared/flags/permissions';
 import { Action } from '../../shared/interfaces/Actions';
 import { Animation } from '../../shared/interfaces/Animation';
 
-ChatController.addCommand('actionmenu', '/actionmenu - Opens test action menu', Permissions.Admin, handleCommand);
+ChatController.addCommand('actionmenu', '/actionmenu - Opens test action menu', PERMISSIONS.ADMIN, handleCommand);
 
 function handleCommand(player: alt.Player): void {
     // Create an action called facePalm that uses the Animation Interface.
@@ -44,7 +44,7 @@ function handleCommand(player: alt.Player): void {
             dict: 'anim@mp_player_intupperface_palm',
             name: 'idle_a',
             duration: 3000,
-            flags: AnimationFlags.UPPERBODY_ONLY
+            flags: ANIMATION_FLAGS.UPPERBODY_ONLY
         }
     };
 
@@ -56,7 +56,7 @@ function handleCommand(player: alt.Player): void {
             dict: 'mp_player_int_uppergang_sign_a',
             name: 'mp_player_int_gang_sign_a',
             duration: 3000,
-            flags: AnimationFlags.UPPERBODY_ONLY
+            flags: ANIMATION_FLAGS.UPPERBODY_ONLY
         }
     };
 

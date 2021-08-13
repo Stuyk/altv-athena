@@ -120,6 +120,7 @@ We have a small demo server available for you to test the framework with Adminis
     -   Seatbelt / Handle Window Fly-through
     -   Control Vehicle Door States
     -   Fuel
+    -   Persistent Vehicle Spawning
 -   Inventory System
     -   Drop Items
     -   Pickup Items
@@ -190,6 +191,20 @@ We have a small demo server available for you to test the framework with Adminis
     -   Marker Streaming
     -   Object Streaming
     -   Text Label Streaming
+-   Interior System
+    -   Create Interiors Easily
+    -   Specify Different Interior Types (House, Faction, System)
+    -   Object Streaming for Interiors
+-   Faction System
+    -   Create Factions
+    -   Create Custom Ranks for Factions
+    -   Add Members to Factions
+    -   Remove Members from Factions
+    -   Manage Permissions Per Rank for Factions
+    -   Faction Weapon Storage
+    -   Faction Bank
+    -   Faction Item Storage
+    -   Faction Name Changing / Updating
 
 ## Running this Project
 

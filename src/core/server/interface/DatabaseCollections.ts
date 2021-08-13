@@ -2,5 +2,8 @@ export enum Collections {
     Accounts = 'accounts',
     Characters = 'characters',
     Interiors = 'interiors',
-    Options = 'options'
+    Options = 'options',
+    Vehicles = 'vehicles',
+    Storage = 'storage',
+    Factions = 'factions'
 }

@@ -1,23 +1,28 @@
-import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
+import * as alt from 'alt-server';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
-import { Permissions } from '../../shared/flags/permissions';
+import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { Account } from '../interface/Account';
-import { DiscordUser } from '../interface/DiscordUser';
-import { goToCharacterSelect } from '../views/characters';
-import { OptionsController } from './options';
-import { vehicleFuncs } from '../extensions/Vehicle';
 import { Collections } from '../interface/DatabaseCollections';
+import { DiscordUser } from '../interface/DiscordUser';
+import Ares from '../utility/ares';
+import { goToCharacterSelect } from '../views/characters';
 import '../views/login';
-import './tick';
-import './voice';
+import { StorageView } from '../views/storage';
+import { EventController } from './athenaEvent';
 import './job';
 import './marker';
+import { OptionsController } from './options';
 import './textlabel';
-import Ares from '../utility/ares';
+import './tick';
+import './voice';
+
+const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
     static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
@@ -67,7 +72,7 @@ export class LoginController {
                     ips: [player.ip],
                     hardware: [player.hwidHash, player.hwidExHash],
                     lastLogin: Date.now(),
-                    permissionLevel: Permissions.None
+                    permissionLevel: PERMISSIONS.NONE
                 };
 
                 account = await Database.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
@@ -90,12 +95,14 @@ export class LoginController {
             return;
         }
 
-        if (!player.data.name) {
-            return;
+        StorageView.removeStorageBinding(player.id);
+
+        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT) {
+            VehicleFuncs.despawnAll(LoginController.getDatabaseIdForPlayer(player.id));
         }
 
-        if (player.lastVehicleID !== null && player.lastVehicleID !== undefined) {
-            vehicleFuncs.utility.despawnAll(player.id);
+        if (!player.data.name) {
+            return;
         }
 
         alt.log(`${player.data.name} has logged out.`);
@@ -136,8 +143,21 @@ export class LoginController {
     static async handleNoQuickToken(player: alt.Player): Promise<void> {
         player.needsQT = true;
     }
+
+    static bindPlayerToID(player: alt.Player): void {
+        if (!player || !player.valid || !player.data) {
+            return;
+        }
+
+        UserRelation[player.id] = player.data._id.toString();
+    }
+
+    static getDatabaseIdForPlayer(id: number): string | null {
+        return UserRelation[id];
+    }
 }
 
+EventController.onPlayer(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
 alt.on('playerDisconnect', LoginController.tryDisconnect);

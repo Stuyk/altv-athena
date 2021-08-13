@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { Timer } from './timers';
 
 let cameraControlsInterval: number;

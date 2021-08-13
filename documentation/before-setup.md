@@ -64,7 +64,6 @@ At the very least you will need to open port 7788 for your main server.
 You will need to open the following ports in your **Windows Firewall** and **Router**.
 
 * 7788
-* 9111
 
 Here's a `.bat` script that will open both ports in your **Windows Firewall.**
 
@@ -75,17 +74,9 @@ echo Opening 7788 for TCP
 netsh advfirewall firewall add rule name="alt:V-7788-IN-TCP" dir=in action=allow protocol=TCP localport=7788
 netsh advfirewall firewall add rule name="alt:V-7788-OUT-TCP" dir=out action=allow protocol=TCP localport=7788
 
-echo Opening 9111 for TCP
-netsh advfirewall firewall add rule name="alt:V-9111-IN-TCP" dir=in action=allow protocol=TCP localport=9111
-netsh advfirewall firewall add rule name="alt:V-9111-OUT-TCP" dir=out action=allow protocol=TCP localport=9111
-
 echo Opening 7788 for UDP
 netsh advfirewall firewall add rule name="alt:V-7788-IN-UDP" dir=in action=allow protocol=UDP localport=7788
 netsh advfirewall firewall add rule name="alt:V-7788-OUT-UDP" dir=out action=allow protocol=UDP localport=7788
-
-echo Opening 9111 for UDP
-netsh advfirewall firewall add rule name="alt:V-9111-IN-UDP" dir=in action=allow protocol=UDP localport=9111
-netsh advfirewall firewall add rule name="alt:V-9111-OUT-UDP" dir=out action=allow protocol=UDP localport=9111
 
 pause
 ```

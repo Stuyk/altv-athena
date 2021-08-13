@@ -9,6 +9,7 @@ import { Interaction } from '../interface/Interaction';
 import { sha256Random } from '../utility/encryption';
 
 import '../views/atm';
+import './interior';
 
 const interactions: { [key: string]: Array<InteractionShape> } = {};
 const safeInteractions: Array<Interaction> = [];
@@ -36,6 +37,10 @@ export class InteractionController {
         const shape = new InteractionShape(interaction.position, interaction.range, 3);
         shape.setInteraction(interaction);
         interactions[interaction.type].push(shape);
+
+        if (interaction.dimension) {
+            shape.dimension = interaction.dimension;
+        }
 
         safeInteractions.push(shape.getInteraction());
         return shape;

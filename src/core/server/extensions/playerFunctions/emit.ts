@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat } from '../../../shared/enums/views';
-import { AnimationFlags } from '../../../shared/flags/animation';
+import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
+import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
+import { InputMenu } from '../../../shared/interfaces/InputMenus';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
@@ -11,7 +12,7 @@ import utility from './utility';
  * Play an animation on this player.
  * @param {string} dictionary
  * @param {string} name
- * @param {AnimationFlags} flags
+ * @param {ANIMATION_FLAGS} flags
  * @param {number} [duration=-1]
  * @return {*}  {void}
  * @memberof EmitPrototype
@@ -20,7 +21,7 @@ function animation(
     player: alt.Player,
     dictionary: string,
     name: string,
-    flags: AnimationFlags,
+    flags: ANIMATION_FLAGS,
     duration: number = -1
 ): void {
     if (player.data.isDead) {
@@ -29,6 +30,21 @@ function animation(
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
+}
+
+/**
+ * Play an animation on this player.
+ * @param {string} name
+ * @param {number} duration
+ * @return {*}  {void}
+ * @memberof EmitPrototype
+ */
+function scenario(player: alt.Player, name: string, duration: number): void {
+    if (player.data.isDead) {
+        return;
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, name, duration);
 }
 
 /**
@@ -135,9 +151,15 @@ function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
 }
 
+function inputMenu(player: alt.Player, inputMenu: InputMenu) {
+    alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
+}
+
 export default {
     animation,
+    scenario,
     createProgressBar,
+    inputMenu,
     meta,
     message,
     notification,

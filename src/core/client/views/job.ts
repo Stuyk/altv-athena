@@ -27,10 +27,21 @@ class JobView implements ViewModel {
 
     static select() {
         alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
-        JobView.close();
+        alt.toggleGameControls(true);
+
+        if (!view) {
+            return;
+        }
+
+        view.close();
+        view = null;
     }
 
     static close() {
+        if (trigger.cancelEvent) {
+            alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.cancelEvent);
+        }
+
         alt.toggleGameControls(true);
 
         if (!view) {

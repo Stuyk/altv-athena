@@ -287,8 +287,10 @@ export class InventoryController {
         alt.emit(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
     }
 
-    static getDroppedItemsByGridSpace(gridSpace: number): Array<DroppedItem> {
-        return InventoryController.groundItems.filter((item) => item.gridSpace === gridSpace);
+    static getDroppedItemsByGridSpace(dimension: number, gridSpace: number): Array<DroppedItem> {
+        return InventoryController.groundItems.filter(
+            (item) => item.gridSpace === gridSpace && item.dimension === dimension
+        );
     }
 
     static updateDroppedItemsAroundPlayer(player: alt.Player, updateOtherPlayers: boolean): void {
@@ -298,7 +300,7 @@ export class InventoryController {
             players = playerFuncs.utility.getClosestPlayers(player, 50);
         }
 
-        const items = InventoryController.getDroppedItemsByGridSpace(player.gridSpace);
+        const items = InventoryController.getDroppedItemsByGridSpace(player.dimension, player.gridSpace);
         for (let i = 0; i < players.length; i++) {
             const target = players[i];
             if (!target || !target.valid) {
