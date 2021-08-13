@@ -5,10 +5,9 @@
     "author": "stuyk",
     "type": "module",
     "scripts": {
-        "[-] Use the Deployment Commands to Run the Server": "",
         "[-] Server Deployment Commands": "",
-        "windows": "npm run build && npm-run-all --parallel athena-webserver athena-streamer windows-server",
-        "linux": "npm run build && npm-run-all --parallel athena-webserver athena-streamer linux-server",
+        "windows": "npm run build && npm run vue-build && npm-run-all --parallel athena-webserver athena-streamer windows-server",
+        "linux": "npm run build && npm run vue-build && npm-run-all --parallel athena-webserver athena-streamer linux-server",
         "dev": "npm run build && npm-run-all --parallel athena-webserver athena-streamer athena-devmode",
         "[-] Updating, Installing, Cleanup": "",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
