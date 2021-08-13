@@ -553,6 +553,7 @@ export class InteriorSystem {
             return;
         }
 
+        playerFuncs.set.frozen(player, true);
         playerFuncs.safe.setDimension(player, 0);
         playerFuncs.safe.setPosition(
             player,
@@ -586,6 +587,14 @@ export class InteriorSystem {
         player.data.interior = 0;
         playerFuncs.save.field(player, 'interior', null);
         alt.emit(ATHENA_EVENTS_PLAYER.LEFT_INTERIOR, player, id);
+
+        alt.setTimeout(() => {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            playerFuncs.set.frozen(player, false);
+        }, 1000);
     }
 
     /**

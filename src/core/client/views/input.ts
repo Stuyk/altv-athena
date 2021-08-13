@@ -1,37 +1,14 @@
 import * as alt from 'alt-client';
+import { InputMenu, InputResult } from '../../shared/interfaces/InputMenus';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
+import { View_Events_Input_Menu } from '../../shared/enums/views';
 
 const url = `http://assets/webview/client/input/index.html`;
 let inputMenu: InputMenu;
 let view: View;
-
-export enum InputOptionType {
-    TEXT = 'text',
-    NUMBER = 'number'
-}
-
-export interface InputOption {
-    id: string;
-    desc: string;
-    type: InputOptionType;
-    placeholder: string;
-    error?: string;
-    regex?: string;
-}
-
-export interface InputResult {
-    id: string;
-    value: string | null;
-}
-
-export interface InputMenu {
-    title: string;
-    options: InputOption[];
-    callback: (results: InputResult[]) => void;
-}
 
 export class InputView implements ViewModel {
     static async show(_inputMenu: InputMenu): Promise<void> {
@@ -63,7 +40,14 @@ export class InputView implements ViewModel {
     }
 
     static submit(results: InputResult[]) {
-        inputMenu.callback(results);
+        if (inputMenu.callback) {
+            inputMenu.callback(results);
+        }
+
+        if (inputMenu.serverEvent) {
+            alt.emitServer(inputMenu.serverEvent, results);
+        }
+
         InputView.close();
     }
 
@@ -71,3 +55,5 @@ export class InputView implements ViewModel {
         view.emit('input:SetMenu', inputMenu.title, inputMenu.options);
     }
 }
+
+alt.onServer(View_Events_Input_Menu.SetMenu, InputView.show);

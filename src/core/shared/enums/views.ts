@@ -81,3 +81,7 @@ export enum View_Events_Factions {
     SetStorageLocation = 'factions:SetStorageLocation',
     SetWeaponsLocation = 'factions:SetWeaponsLocation'
 }
+
+export enum View_Events_Input_Menu {
+    SetMenu = 'inputmenu:Set'
+}

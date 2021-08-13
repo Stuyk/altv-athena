@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat } from '../../../shared/enums/views';
+import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
+import { InputMenu } from '../../../shared/interfaces/InputMenus';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
@@ -150,10 +151,15 @@ function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
 }
 
+function inputMenu(player: alt.Player, inputMenu: InputMenu) {
+    alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
+}
+
 export default {
     animation,
     scenario,
     createProgressBar,
+    inputMenu,
     meta,
     message,
     notification,

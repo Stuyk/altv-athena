@@ -195,6 +195,16 @@ We have a small demo server available for you to test the framework with Adminis
     -   Create Interiors Easily
     -   Specify Different Interior Types (House, Faction, System)
     -   Object Streaming for Interiors
+-   Faction System
+    -   Create Factions
+    -   Create Custom Ranks for Factions
+    -   Add Members to Factions
+    -   Remove Members from Factions
+    -   Manage Permissions Per Rank for Factions
+    -   Faction Weapon Storage
+    -   Faction Bank
+    -   Faction Item Storage
+    -   Faction Name Changing / Updating
 
 ## Running this Project
 

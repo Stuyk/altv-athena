@@ -6,7 +6,8 @@ import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { InputOptionType, InputResult, InputView } from '../views/input';
+import { InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
+import { InputView } from '../views/input';
 
 function initialCheck(): boolean {
     if (alt.Player.local.vehicle) {
