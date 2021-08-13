@@ -4,7 +4,7 @@ import * as native from 'natives';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { PED_CONFIG_FLAG } from '../../shared/flags/PedFlags';
+import { PED_CONFIG_FLAG } from '../../shared/flags/pedFlags';
 import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
 

@@ -1,8 +1,7 @@
-import { INTERIOR_TYPES } from '../flags/interiorFlags';
+import { INTERIOR_TYPES, INTERIOR_SYSTEM } from '../flags/InteriorFlags';
 import { IObject } from './IObject';
 import { Item } from './Item';
 import { Vector3 } from './Vector';
-import { INTERIOR_SYSTEM } from '../flags/InteriorFlags';
 
 export interface Interior {
     /**

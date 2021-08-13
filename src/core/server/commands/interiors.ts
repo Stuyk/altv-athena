@@ -1,9 +1,7 @@
 import * as alt from 'alt-server';
-import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/interiorFlags';
+import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/InteriorFlags';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { InputMenu, InputOption, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
+import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { InteriorSystem } from '../systems/interior';
