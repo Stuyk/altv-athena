@@ -143,13 +143,8 @@ export default class VehicleFuncs {
      * @memberof VehicleFuncs
      */
     static async updateFuel(vehicle: alt.Vehicle) {
-        if (!vehicle.data.behavior) {
-            return;
-        }
-
-        // No data present on vehicle. Don't worry about fuel.
-        if (!vehicle.data) {
-            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, 100);
+        // No data present on vehicle. Don't worry about it.
+        if (!vehicle?.data?.behavior) {
             return;
         }
 
