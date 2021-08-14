@@ -123,7 +123,8 @@ export default defineComponent({
       if (!('alt' in window)) {
         console.log('adding pages...');
         this.pages = [ 
-          { name: pages.CharacterSelect.name, component: pages.CharacterSelect } 
+          // { name: pages.CharacterSelect.name, component: pages.CharacterSelect } 
+          { name: pages.Designs.name, component: pages.Designs } 
         ];
         return;
       }
