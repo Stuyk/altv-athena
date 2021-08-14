@@ -23,9 +23,21 @@ Helpful for seeing what default components look like.
             </div>
             <h2 class="grey--text text--lighten-2">Icons</h2>
             <div class="split space-between">
-                <Button color="grey" :callback="clickMe">
-                    <v-icon>icon-chevron-left</v-icon>
+                <Button color="blue" :callback="clickMe">
+                    <Icon class="blue--text" :size="16" icon="icon-chevron-left" />
                 </Button>
+                <Button color="blue" :callback="clickMe">
+                    <Icon class="blue--text" :size="16" icon="icon-chevron-right" />
+                </Button>
+                <Button color="red" :callback="clickMe">
+                    <Icon class="red--text" :size="32" icon="icon-cancel" />
+                </Button>
+                <Button color="green" :callback="clickMe">
+                    <Icon class="green--text" :size="64" icon="icon-checkmark" />
+                </Button>
+                <Icon class="grey--text" :size="16" icon="icon-laptop" />
+                <Icon class="grey--text" :size="32" icon="icon-server" />
+                <Icon class="grey--text" :size="64" icon="icon-user" />
             </div>
         </div>
     </div>
@@ -36,12 +48,14 @@ Helpful for seeing what default components look like.
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Button from '../../components/Button.vue';
+import Icon from '../../components/Icon.vue';
 
 const ComponentName = 'Designs';
 export default defineComponent({
   name: ComponentName,
   components: {
-      Button
+      Button,
+      Icon
   },
   methods: {
       clickMe(e) {

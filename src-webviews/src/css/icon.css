@@ -1,0 +1,6 @@
+/** Has a very small padding to help center icons **/
+.icon {
+    padding-left: 2px !important;
+    user-select: none !important;
+    pointer-events: none !important;
+}
