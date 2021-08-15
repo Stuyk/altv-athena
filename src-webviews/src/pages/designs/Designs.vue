@@ -68,6 +68,8 @@ Helpful for seeing what default components look like.
                 icon="icon-question"
                 placeholder="25..." 
             />
+            <h4 class="grey--text text--lighten-2">Range Input</h4>
+            <RangeInput :minIndex="0" :maxIndex="4" :indexValue="0" :values="rangeValues" />
         </div>
     </div>
 </template>
@@ -77,19 +79,22 @@ import { defineComponent } from 'vue'
 import Input from '../../components/Input.vue';
 import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
+import RangeInput from '../../components/RangeInput.vue';
 
 const ComponentName = 'Designs';
 export default defineComponent({
   name: ComponentName,
   data() {
       return {
-          ageValid: false
+          ageValid: false,
+          rangeValues: ['Head', 'Mouth', 'Shoulders', 'Knees', 'Toes']
       }
   },
   components: {
       Button,
       Icon,
-      Input
+      Input,
+      RangeInput
   },
   methods: {
       clickMe(e) {
