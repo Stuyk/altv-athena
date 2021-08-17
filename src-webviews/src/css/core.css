@@ -6,6 +6,7 @@
 @import './color.css';
 @import './elevate.css';
 @import './font.css';
+@import './font-weight.css';
 @import './hover.css';
 @import './hover-box.css';
 @import './hover-fill.css';
@@ -49,6 +50,16 @@ body {
     cursor: unset !important;
 }
 
+.center {
+    display: flex;
+    width: 100% !important;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
     background: rgba(20, 20, 20, 0.85);
@@ -69,6 +80,10 @@ body {
     flex-direction: row;
 }
 
+.split-full {
+    width: 100%;
+}
+
 .space-evenly {
     justify-content: space-evenly;
     align-items: center;
@@ -86,4 +101,15 @@ body {
 .stack {
     display: flex;
     flex-direction: column;
+}
+
+.page {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background: rgba(10, 10, 10, 1) !important;
 }

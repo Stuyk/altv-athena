@@ -1,5 +1,5 @@
 <template>
-    <div class="icon" :class="dynamicClass" :style="dynamicStyle" style="user-select: none !important; pointer-events: none !important;" />
+    <div class="icon" :class="dynamicClass" :style="dynamicStyle" />
 </template>
 
 <script lang="ts">
@@ -16,6 +16,10 @@ export default defineComponent({
       size: {
           type: Number,
           required: true
+      },
+      noSelect: {
+          type: Boolean,
+          required: false
       }
   },
   computed: {
@@ -25,6 +29,12 @@ export default defineComponent({
           if (!this.icon) {
               classes['icon-not-found'] = true;
               return classes;
+          }
+
+          if (this.noSelect) {
+              classes['icon-no-select'] = true;
+          } else {
+               classes['icon-active'] = true
           }
 
           classes[`${this.icon}`] = true;
