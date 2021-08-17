@@ -12,7 +12,7 @@
                 <p class="grey--text text--darken-1 center">
                     {{ locales.LABEL_OPEN_PAGE }}
                 </p>
-                <Button class="mt-16" color="blue" :callback="beginAuth" style="align-self: flex-end">
+                <Button class="mt-16" color="blue" @click="beginAuth">
                     {{ locales.LABEL_LOGIN_WITH_DISCORD }}
                 </Button>
             </template>
@@ -23,10 +23,10 @@
                 <p class="grey--text text--darken-1 center">
                     {{ locales.LABEL_TAB_OUT }}
                 </p>
-                <Button class="mt-16" color="blue" :callback="finishAuth" style="align-self: flex-end">
+                <Button class="mt-16" color="blue" @click="finishAuth">
                     {{ locales.LABEL_FINISH_LOGIN }}
                 </Button>
-                <Button class="mt-4" color="amber" :callback="authAgain" style="align-self: flex-end">
+                <Button class="mt-4" color="amber" @click="authAgain">
                     {{ locales.LABEL_OPEN_WINDOW }}
                 </Button>
             </template>
@@ -92,7 +92,7 @@ export default defineComponent({
                 }
             });
         },
-        beginAuth() {
+        beginAuth(payload: MouseEvent) {
             setTimeout(() => {
                 this.getURL();
                 this.errorMessage = null;
@@ -104,7 +104,7 @@ export default defineComponent({
                 this.updates += 1;
             }, 3000);
         },
-        finishAuth() {
+        finishAuth(payload: MouseEvent) {
             this.loading = true;
             this.updates += 1;
 
@@ -116,32 +116,23 @@ export default defineComponent({
                 }, 2500);
             }
         },
-        authAgain() {
+        authAgain(payload: MouseEvent) {
             this.getURL();
         },
         getURL() {
             this.waitingForAuth = true;
 
-            if ('alt' in window) {
+            if (window['alt']) {
                 alt.emit('discord:OpenURL');
             }
         },
         openURL(url) {
-            this.window = window.open(url);
+            window.open(url);
         },
         finishedLoading() {
             this.$nextTick(() => {
                 this.setAsReady();
             });
-        },
-        endWindow() {
-            if (this.window) {
-                try {
-                    this.window.close();
-                } catch (err) {
-                    console.log(err);
-                }
-            }
         },
         fail(message) {
             this.errorMessage = message;

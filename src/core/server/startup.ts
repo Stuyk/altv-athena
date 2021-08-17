@@ -11,7 +11,6 @@ import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
-import { ReconnectHelper } from './utility/reconnect';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();

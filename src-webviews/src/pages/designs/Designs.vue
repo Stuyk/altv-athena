@@ -9,28 +9,28 @@ Helpful for seeing what default components look like.
     <div class="stack background">
         <h2 class="grey--text text--lighten-2">Buttons</h2>
         <div class="split space-between">
-            <Button color="green" :callback="clickMe">Accept</Button>
-            <Button color="blue" :callback="clickMe">Submit</Button>
-            <Button color="amber" :callback="clickMe">Warning</Button>
-            <Button color="red" :callback="clickMe">Cancel</Button>
+            <Button color="green" @click="doSomething">Accept</Button>
+            <Button color="blue" @click="doSomething">Submit</Button>
+            <Button color="amber" @click="doSomething">Warning</Button>
+            <Button color="red" @click="doSomething">Cancel</Button>
             <Button :disable="true">Disabled</Button>
-            <Button color="green" :raise="false" :flatten="true" :callback="clickMe">Accept</Button>
-            <Button color="blue" :raise="false" :flatten="true" :callback="clickMe">Submit</Button>
-            <Button color="amber" :raise="false" :flatten="true" :callback="clickMe">Warning</Button>
-            <Button color="red" :raise="false" :flatten="true" :callback="clickMe">Cancel</Button>
+            <Button color="green" :raise="false" :flatten="true" @click="doSomething">Accept</Button>
+            <Button color="blue" :raise="false" :flatten="true" @click="doSomething">Submit</Button>
+            <Button color="amber" :raise="false" :flatten="true" @click="doSomething">Warning</Button>
+            <Button color="red" :raise="false" :flatten="true" @click="doSomething">Cancel</Button>
         </div>
         <h2 class="grey--text text--lighten-2">Icons</h2>
         <div class="split space-between">
-            <Button color="blue" :callback="clickMe">
+            <Button color="blue" @click="doSomething">
                 <Icon class="blue--text" :size="16" icon="icon-chevron-left" />
             </Button>
-            <Button color="blue" :callback="clickMe">
+            <Button color="blue" @click="doSomething">
                 <Icon class="blue--text" :size="16" icon="icon-chevron-right" />
             </Button>
-            <Button color="red" :callback="clickMe">
+            <Button color="red" @click="doSomething">
                 <Icon class="red--text" :size="32" icon="icon-cancel" />
             </Button>
-            <Button color="green" :callback="clickMe">
+            <Button color="green" @click="doSomething">
                 <Icon class="green--text" :size="64" icon="icon-checkmark" />
             </Button>
             <Icon class="grey--text" :size="16" icon="icon-laptop" />
@@ -67,7 +67,15 @@ Helpful for seeing what default components look like.
             placeholder="25..." 
         />
         <h4 class="grey--text text--lighten-2">Range Input</h4>
-        <RangeInput :minIndex="0" :maxIndex="4" :indexValue="0" :values="rangeValues" />
+        <RangeInput 
+            uid="someRangeName"
+            :minIndex="0" 
+            :maxIndex="4" 
+            :indexValue="0"
+            :increment="1"
+            :values="rangeValues"
+            :callback="onRangeInputChange"
+        />
     </div>
 </template>
 
@@ -94,11 +102,14 @@ export default defineComponent({
       RangeInput
   },
   methods: {
-      clickMe(e) {
-          console.log(e);
+      doSomething() {
+          console.log('did something')
       },
       onInputChange(text: string) {
           console.log(text);
+      },
+      onRangeInputChange(uid: string, value: number) {
+          console.log(uid, value);
       },
       ageValidCallback(valid: boolean) {
           this.ageValid = valid;

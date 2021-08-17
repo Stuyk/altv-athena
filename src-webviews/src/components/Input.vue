@@ -2,7 +2,9 @@
     <div>
         <div :class="inputClass" class="input">
             <div class="split">
-                <div :class="labelClass" class="label overline" v-if="label">{{ this.label }}</div>
+                <div :class="labelClass" class="label overline" v-if="label">
+                    {{ label }}
+                </div>
                 <Icon v-if="icon" class="grey--text pr-4" :size="24" :icon="icon" />
             </div>
             <input :class="textboxClass" class="textbox pa-2" v-model="text" :type="numberOnly ? 'number' : 'text'" :placeholder="placeholder" @keyup="handleInput"/>
@@ -13,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Icon from './Icon.vue';
 
 const ComponentName = 'Input';
@@ -39,7 +41,8 @@ export default defineComponent({
       },
       label: {
           type: String,
-          required: false
+          required: false,
+          default: null
       },
       stack: {
           type: Boolean,
@@ -47,7 +50,7 @@ export default defineComponent({
       },
       numberOnly: {
           type: Boolean,
-          required: true
+          required: false
       },
       icon: {
           type: String,
@@ -61,7 +64,7 @@ export default defineComponent({
           type: Function,
           required: false
       },
-      value: String
+      value: [String, Number] as PropType<string | number>
   },
   methods: {
       handleInput() {

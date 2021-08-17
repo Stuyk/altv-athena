@@ -2,35 +2,42 @@
     <div class="toolbar pa-2">
         <div class="split split-full space-between">
             <span class="grey--text overline">
-                <slot/>
+                <slot />
             </span>
-            <Icon v-if="exitCallback" class="red--text red--hover hover" @click="this.exitCallback" :size="24" icon="icon-times-circle" />
+            <Icon
+                v-if="pageName"
+                class="red--text red--hover hover"
+                @click="emitExit"
+                :size="24"
+                icon="icon-times-circle"
+            />
             <Icon v-else class="grey--text text--darken-3" :noSelect="true" :size="24" icon="icon-times-circle" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import Icon from './Icon.vue';
 
 const ComponentName = 'Toolbar';
 export default defineComponent({
-  name: ComponentName,
-  components: {
-      Icon
-  },
-  props: {
-      exitCallback: {
-          type: Function,
-          required: false
-      },
-      text: {
-          type: String,
-          required: true
-      }
-  }
-})
+    name: ComponentName,
+    components: {
+        Icon
+    },
+    props: {
+        pageName: {
+            type: String,
+            required: false
+        }
+    },
+    methods: {
+        emitExit() {
+            this.$emit('close-page', this.pageName);
+        }
+    }
+});
 </script>
 
 <style scoped>

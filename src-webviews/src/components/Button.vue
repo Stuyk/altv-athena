@@ -1,5 +1,5 @@
 <template>
-    <div :class="dynamicClass" @mouseover="playHover" @mouseup="playMouseUp" @click="callback" :style="style" v-if="callback">
+    <div :class="dynamicClass" @mouseover="playHover" @mouseup="playMouseUp" :style="style" v-if="!disable">
         <div style="user-select: none !important; pointer-events: none !important;">
             <slot />
         </div>
@@ -18,9 +18,11 @@ const ComponentName = 'Button';
 export default defineComponent({
   name: ComponentName,
   props: {
-      disable: Boolean,
+      disable: {
+          type: Boolean,
+          default: false,
+      },
       hover: Boolean,
-      callback: Function,
       style: {
           type: String,
           default: ''
@@ -95,8 +97,13 @@ export default defineComponent({
           return classes;
       }
   },
-  data() {
-      return {}
-  },
+  mounted() {
+      this.$nextTick(() => {
+           if (this.disable) {
+                this.sound = false;
+            }
+      });
+     
+  }
 })
 </script>
