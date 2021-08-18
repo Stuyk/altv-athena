@@ -93,7 +93,8 @@ async function firstConnect(p: alt.Player): Promise<void> {
         return;
     }
 
-    const vueDefaultPath = 'http://';
+    const vueDefaultPath = config.VUE_DEBUG ? 'http://localhost:3000/' : `http://webviews/index.html`;
+    alt.emitClient(p, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
     // Used to set the custom View instance with a Web Server URL.
     const webServerPath = alt.hasResource('webserver') ? 'http://assets/webserver/files' : config.WEBSERVER_IP;

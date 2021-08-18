@@ -98,5 +98,7 @@ export enum SYSTEM_EVENTS {
     WORLD_UPDATE_WEATHER = 'weather:Update',
     //
     VOICE_ADD = 'voice:Add',
-    VOICE_JOINED = 'voice:Joined'
+    VOICE_JOINED = 'voice:Joined',
+    //
+    WEBVIEW_INFO = 'webview:Info'
 }

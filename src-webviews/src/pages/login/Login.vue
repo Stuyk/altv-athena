@@ -87,7 +87,6 @@ export default defineComponent({
                 this.updates += 1;
 
                 if ('alt' in window) {
-                    alt.emit('ready');
                     alt.emit('discord:Ready');
                 }
             });
@@ -139,6 +138,16 @@ export default defineComponent({
             this.waitingForAuth = false;
             this.loading = false;
         }
+    },
+    mounted() {
+        if ('alt' in window) {
+            alt.on('discord:SetLocales', this.setLocales);
+            alt.on('discord:OpenURL', this.openURL);
+            alt.on('discord:endWindow', this.endWindow);
+            alt.on('discord:Fail', this.fail);
+        }
+
+        this.finishedLoading();
     }
 });
 </script>

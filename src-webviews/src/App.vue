@@ -53,28 +53,28 @@ import { defineComponent } from 'vue';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
-
-// Page Components
-import pages from './pages/components';
+import components from './pages/components';
 
 // Main Component
 export default defineComponent({
     name: 'App',
     components: {
-        CharacterSelect: pages.CharacterSelect
+      ...components.componentList
     },
     data() {
         return {
             pages: [] as Array<IPageData>,
-            // This is where you define pages to show / route.
-            // Multiple pages can be shown at the same time.
-            pageBindings: [{ name: pages.CharacterSelect.name, component: pages.CharacterSelect }]
+            pageBindings: [
+              ...components.generateComponentList()
+            ]
         };
     },
     // Define functions for the main controller.
     methods: {
         // Call different internal controller functions from client-side with this.
-        handleEventCall(functionName: string, args: any[]) {
+        handleEventCall(functionName: string, ...args: any[]) {
+            console.log(`FUNCTION NAME: ${functionName}`);
+
             if (!this[functionName] || typeof this[functionName] !== 'function') {
                 console.log(`Function: ${functionName} does not exist.`);
                 return;
@@ -96,7 +96,7 @@ export default defineComponent({
         },
         // Turn off all pages
         // Define null or undefined to hide everything.
-        hidePages(pagesToHide: Array<string> = null) {
+        closePages(pagesToHide: Array<string> = null) {
             // Hide All Defined Pages
             if (pagesToHide && Array.isArray(pagesToHide)) {
                 const currentPages = [...this.pages];
@@ -122,31 +122,20 @@ export default defineComponent({
                 return;
             }
 
-            const foundPages = this.pageBindings.some(page => {
-                if (pagesToShow.find(pageName => pageName === page.name)) {
-                  return true;
-                }
-
-                return false;
-            });
-
-            this.pages = foundPages
+            const foundPages = this.pageBindings.filter(page => pagesToShow.find(pageName => pageName === page.name));
+            this.pages = foundPages;
         }
     },
     mounted() {
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            console.log('adding pages...');
-            this.pages = [
-                // { name: pages.CharacterSelect.name, component: pages.CharacterSelect }
-                { name: pages.Designs.name, component: pages.Designs },
-                { name: pages.Login.name, component: pages.Login }
-            ];
+            this.setPages(['CharacterSelect']);
             return;
         }
 
         alt.on('view:Call', this.handleEventCall);
+        alt.emit('view:Ready');
     }
 });
 </script>

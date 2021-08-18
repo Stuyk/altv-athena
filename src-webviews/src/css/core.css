@@ -22,6 +22,7 @@ body {
     padding: 0 !important;
     margin: 0 !important;
     overflow: hidden;
+    background: transparent !important;
 }
 
 #app {
@@ -84,6 +85,11 @@ body {
     width: 100%;
 }
 
+.split-center {
+    align-items: center;
+    align-content: center;
+}
+
 .space-evenly {
     justify-content: space-evenly;
     align-items: center;
@@ -111,5 +117,5 @@ body {
     width: 100vw;
     height: 100vh;
     color: white;
-    background: rgba(10, 10, 10, 1) !important;
+    /* background: rgba(10, 10, 10, 1) !important; */
 }

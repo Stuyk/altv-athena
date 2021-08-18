@@ -133,7 +133,7 @@ const app = new Vue({
 
             setTimeout(() => {
                 alt.emit('characters:Equipment', this.characters[this.characterIndex].equipment);
-            }, 500);
+            }, 100);
         },
         selectCharacter() {
             if (!('alt' in window)) {
