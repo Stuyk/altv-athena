@@ -189,4 +189,4 @@ class StreamerServer {
 
 main.on('connection', StreamerServer.init);
 main.installHandlers(server);
-server.listen(3399, '10.8.0.2');
+server.listen(3399, '0.0.0.0');
