@@ -1,15 +1,17 @@
 <template>
     <div class="container">
-        <div class="navigation center pa-8" v-if="characters">
-            <Button color="blue" @click="decrementIndex">
-                <Icon class="blue--text" :size="32" icon="icon-chevron-left" />
-            </Button>
-            <div class="grey--text text--lighten-2" style="font-size: 24px">
-                {{ getName }}
+        <div class="nav-container">
+            <div class="navigation center pa-8" v-if="characters">
+                <Button color="blue" @click="decrementIndex">
+                    <Icon class="blue--text" :size="32" icon="icon-chevron-left" />
+                </Button>
+                <div class="grey--text text--lighten-2" style="font-size: 24px">
+                    {{ getName }}
+                </div>
+                <Button color="blue" @click="incrementIndex">
+                    <Icon class="blue--text" :size="32" icon="icon-chevron-right" />
+                </Button>
             </div>
-            <Button color="blue" @click="incrementIndex">
-                <Icon class="blue--text" :size="32" icon="icon-chevron-right" />
-            </Button>
         </div>
         <div class="stats pt-8 pb-8">
             <div class="stat split split-full split-center pl-6 pr-6">
@@ -257,14 +259,26 @@ export default defineComponent({
 }
 
 .navigation {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: rgba(0, 0, 0, 0.6);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    width: 100vw;
+    min-width: 40vw;
+    max-width: 40vw;
     box-sizing: border-box;
+    text-shadow: 0px 0px 1px black, 0px 0px 4px black;
+    bottom: 0px;
+    margin: 0 auto;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    min-width: 100vw;
+    max-width: 100vw;
 }
 
 .stats {
