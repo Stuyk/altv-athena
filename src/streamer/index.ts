@@ -14,7 +14,8 @@ const server = http.createServer();
 const StreamData: IStream = {
     markers: [],
     labels: [],
-    objects: []
+    objects: [],
+    peds: []
 };
 
 let conn: SockJS.Connection;
@@ -22,7 +23,8 @@ let config: IStreamConfig = {
     TimeBetweenUpdates: 1000,
     LabelsDistance: 100,
     MarkersDistance: 100,
-    ObjectsDistance: 100
+    ObjectsDistance: 100,
+    PedsDistance: 100
 };
 
 class StreamerServer {
@@ -111,6 +113,7 @@ class StreamerServer {
      * @memberof StreamerServer
      */
     static update(id: number, data: IStreamUpdate) {
+
         const markers = StreamData.markers.filter((marker) => {
             if (marker.dimension && marker.dimension !== data.dimension) {
                 return false;
@@ -147,13 +150,26 @@ class StreamerServer {
             return true;
         });
 
+        const peds = StreamData.peds.filter((ped) => {
+            if (ped.dimension && ped.dimension !== data.dimension) {
+                return false;
+            }
+
+            if (StreamerServer.distance(data.pos, ped.pos) > config.PedsDistance) {
+                return false;
+            }
+
+            return true;
+        });
+
         const response: IStreamMessage = {
             id,
             route: 'update',
             data: {
                 markers,
                 labels,
-                objects
+                objects,
+                peds
             }
         };
 
@@ -173,4 +189,4 @@ class StreamerServer {
 
 main.on('connection', StreamerServer.init);
 main.installHandlers(server);
-server.listen(3399, '0.0.0.0');
+server.listen(3399, '10.8.0.2');

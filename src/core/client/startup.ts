@@ -34,6 +34,7 @@ import './systems/nametag';
 import './systems/noclip';
 import './systems/object';
 import './systems/particle';
+import './systems/ped';
 import './systems/progressBar';
 import './systems/quickToken';
 import './systems/scenarios';

@@ -3,6 +3,7 @@ export enum SYSTEM_EVENTS {
     APPEND_MARKER = 'append:Marker',
     APPEND_TEXTLABELS = 'append:TextLabel',
     APPEND_OBJECT = 'append:Object',
+    APPEND_PED = 'append:Ped',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
@@ -74,6 +75,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_INTERACTIONS = 'interactions:Populate',
     POPULATE_TEXTLABELS = 'labels:Populate',
     POPULATE_OBJECTS = 'objects:Populate',
+    POPULATE_PEDS = 'peds:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
@@ -82,6 +84,8 @@ export enum SYSTEM_EVENTS {
     //
     REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
+    REMOVE_GLOBAL_PED = 'remove:Global:Object',
+    REMOVE_PED = 'remove:Object',
     REMOVE_MARKER = 'remove:Marker',
     REMOVE_BLIP = 'remove:Blip',
     REMOVE_TEXTLABEL = 'remove:Textlabel',
