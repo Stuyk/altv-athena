@@ -89,6 +89,9 @@ export enum SYSTEM_EVENTS {
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',
     //
+    SYNC_APPEARANCE = 'character:Appearance',
+    SYNC_EQUIPMENT = 'character:Equipment',
+    //
     TICKS_START = 'ticks:Start',
     //
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',

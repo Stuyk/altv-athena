@@ -1,47 +1,51 @@
 <template>
     <div class="container">
-        <div class="nav-container">
-            <div class="navigation center pa-8" v-if="characters">
+        <div class="stats pl-2 pr-2 pt-2 pb-2">
+            <!-- Top Buttons -->
+            <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box;">
                 <Button color="blue" @click="decrementIndex">
-                    <Icon class="blue--text" :size="32" icon="icon-chevron-left" />
+                    <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
                 </Button>
-                <div class="grey--text text--lighten-2" style="font-size: 24px">
+                <div class="grey--text text--lighten-2 pb-2" style="font-size: 16px; width: 100%; text-align: center !important">
                     {{ getName }}
                 </div>
                 <Button color="blue" @click="incrementIndex">
-                    <Icon class="blue--text" :size="32" icon="icon-chevron-right" />
+                    <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
                 </Button>
             </div>
-        </div>
-        <div class="stats pt-8 pb-8">
-            <div class="stat split split-full split-center pl-6 pr-6">
-                <Icon class="grey--text text--lighten-2" :noSelect="true" :size="18" icon="icon-clock"></Icon>
-                <span class="overline amber--text pl-6" style="font-size: 16px !important"> {{ getHours }} Hours </span>
+            <!-- Stats -->
+            <div class="stat-wrapper stack pl-2 pr-2 pb-6 pt-6" style="width: 100%; box-sizing: border-box !important;">
+                <div class="stat split split-full split-center">
+                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-clock"></Icon>
+                    <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> {{ getHours }} Hours </span>
+                </div>
+                <div class="stat split split-full split-center pt-4">
+                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-dollar"></Icon>
+                    <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> ${{ getCash }} </span>
+                </div>
+                <div class="stat split split-full split-center pt-4">
+                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-bank"></Icon>
+                    <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> ${{ getBank }} </span>
+                </div>
             </div>
-            <div class="stat split split-full split-center pt-6 pl-6 pr-6">
-                <Icon class="grey--text text--lighten-2" :noSelect="true" :size="18" icon="icon-wallet"></Icon>
-                <span class="overline amber--text pl-6" style="font-size: 16px !important"> ${{ getCash }} </span>
-            </div>
-            <div class="stat split split-full split-center pt-6 pl-6 pr-6">
-                <Icon class="grey--text text--lighten-2" :noSelect="true" :size="18" icon="icon-bank"></Icon>
-                <span class="overline amber--text pl-6" style="font-size: 16px !important"> ${{ getBank }} </span>
-            </div>
-        </div>
-        <div class="options">
-            <!-- Delete Character -->
-            <Button color="red" @click="showDeleteInterface">
-                <Icon class="red--text" :size="36" icon="icon-delete" />
-            </Button>
 
-            <!-- Create Character -->
-            <Button class="mt-6" color="green" @click="newCharacter">
-                <Icon class="green--text" :size="36" icon="icon-plus" />
-            </Button>
+            <!-- Bottom Buttons -->
+            <div class="split split-center space-between mt-6" style="width: 100%; box-sizing: border-box;">
+                <!-- Delete Character -->
+                <Button color="red" @click="showDeleteInterface">
+                    <Icon class="red--text" :size="24" icon="icon-delete" />
+                </Button>
 
-            <!-- Select Character -->
-            <Button class="mt-6" color="blue" @click="selectCharacter">
-                <Icon class="blue--text" :size="36" icon="icon-checkmark" />
-            </Button>
+                <!-- Create Character -->
+                <Button color="green" @click="newCharacter">
+                    <Icon class="green--text" :size="24" icon="icon-plus" />
+                </Button>
+
+                <!-- Select Character -->
+                <Button color="blue" @click="selectCharacter">
+                    <Icon class="blue--text" :size="24" icon="icon-checkmark" />
+                </Button>
+            </div>
         </div>
     </div>
 </template>
@@ -74,6 +78,7 @@ export default defineComponent({
                 LABEL_CONFIRM_DELETE: 'Are you sure you want to delete your character',
                 LABEL_NAME: 'Name',
                 LABEL_AGE: 'Age',
+                LABEL_STATS: 'Stats',
                 LABEL_GENDER: 'Gender',
                 LABEL_HOURS: 'Hours',
                 LABEL_CASH: 'Cash',
@@ -115,8 +120,6 @@ export default defineComponent({
         handleSet(characters) {
             this.characterIndex = 0;
             this.characters = characters;
-
-            console.log('Characters were set')
             this.updateAppearance();
         },
         incrementIndex() {
@@ -150,11 +153,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('characters:Update', this.characters[this.characterIndex].appearance);
-
-            setTimeout(() => {
-                alt.emit('characters:Equipment', this.characters[this.characterIndex].equipment);
-            }, 100);
+            alt.emit('characters:Update', this.characterIndex);
         },
         selectCharacter() {
             if (!('alt' in window)) {
@@ -256,6 +255,7 @@ export default defineComponent({
     /* background: black; */
     width: 100%;
     height: 100%;
+    background: linear-gradient(to top left, rgba(0, 0, 0, 1), transparent 35%);
 }
 
 .navigation {
@@ -295,25 +295,26 @@ export default defineComponent({
     max-width: 350px;
     border: 2px solid rgba(32, 32, 32, 1);
     overflow: hidden;
-    bottom: 32px;
-    left: 32px;
+    bottom: 64px;
+    right: 1.45vw;
 }
 
 .stat {
     box-sizing: border-box;
 }
 
-.options {
-    position: fixed;
-    display: flex !important;
-    flex-direction: column;
-    justify-items: flex-start !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-    align-content: flex-start !important;
-    box-sizing: border-box;
-    min-height: 25px;
-    bottom: 32px;
-    right: 32px;
+.stat-text {
+    width: 100%;
+    text-align: right;
+    font-size: 14px !important;
+}
+
+.stat-icon {
+    min-width: 30px;
+    max-width: 30px;;
+}
+
+.stat-wrapper {
+    border: 2px dashed rgba(48, 48, 48, 1);
 }
 </style>

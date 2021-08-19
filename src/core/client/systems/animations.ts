@@ -74,3 +74,32 @@ export async function playAnimation(
 
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
 }
+
+/**
+ * Play an animation on a Pedestrian
+ * @export
+ * @param {number} scriptID
+ * @param {string} dict
+ * @param {string} name
+ * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE]
+ * @param {number} [duration=-1]
+ * @return {*}
+ */
+export async function playPedAnimation(
+    scriptID: number,
+    dict: string,
+    name: string,
+    flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
+    duration: number = -1
+) {
+    const isReadyToPlay = await loadAnimation(dict);
+    if (!isReadyToPlay) {
+        return;
+    }
+
+    if (native.isEntityPlayingAnim(scriptID, dict, name, 3)) {
+        return;
+    }
+
+    native.taskPlayAnim(scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
+}
