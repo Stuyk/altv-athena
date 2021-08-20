@@ -4,14 +4,16 @@
             <span class="grey--text overline">
                 <slot />
             </span>
-            <Icon
-                v-if="pageName"
-                class="red--text red--hover hover"
-                @click="emitExit"
-                :size="24"
-                icon="icon-times-circle"
-            />
-            <Icon v-else class="grey--text text--darken-3" :noSelect="true" :size="24" icon="icon-times-circle" />
+            <template v-if="!hideExit">
+                <Icon
+                    v-if="pageName"
+                    class="red--text red--hover hover"
+                    @click="emitExit"
+                    :size="24"
+                    icon="icon-times-circle"
+                />
+                <Icon v-else class="grey--text text--darken-3" :noSelect="true" :size="24" icon="icon-times-circle" />
+            </template>
         </div>
     </div>
 </template>
@@ -30,6 +32,10 @@ export default defineComponent({
         pageName: {
             type: String,
             required: false
+        },
+        hideExit: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {

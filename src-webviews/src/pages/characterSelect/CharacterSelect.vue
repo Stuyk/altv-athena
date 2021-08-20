@@ -1,5 +1,28 @@
 <template>
     <div class="container">
+        <Modal v-if="deleteDialog">
+            <Frame minWidth="30vw" maxWidth="30vw" >
+                <template v-slot:toolbar>
+                    <Toolbar :hideExit="true"><span class="red--text">{{ locales.LABEL_DELETE }} {{ characters[characterIndex].name }}?</span></Toolbar>
+                </template>
+                <template v-slot:content>
+                    <div class="overline mb-8 mt-8 center">
+                        {{ locales.LABEL_CONFIRM_DELETE }}?
+                    </div>
+                    <div class="overline mb-8 mt-8 center amber--text">
+                        {{ characters[characterIndex].name }}
+                    </div>
+                    <div class="split split-full">
+                        <Button class="mt-2" color="red" style="width: 50%" @click="hideDeleteInterface">
+                            {{ locales.LABEL_NO }}
+                        </Button>
+                        <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="deleteCharacter">
+                            {{ locales.LABEL_YES }}
+                        </Button>
+                    </div>
+                </template>
+            </Frame>
+        </Modal>
         <div class="stats pl-2 pr-2 pt-2 pb-2">
             <!-- Top Buttons -->
             <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box;">
@@ -55,13 +78,19 @@ import { defineComponent } from 'vue';
 import ExCharacter from '../../exampleData/ExCharacter';
 import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
+import Modal from '../../components/Modal.vue';
+import Toolbar from '../../components/Toolbar.vue';
+import Frame from '../../components/Frame.vue';
 
 const ComponentName = 'CharacterSelect';
 export default defineComponent({
     name: ComponentName,
     components: {
         Button,
-        Icon
+        Icon,
+        Modal,
+        Toolbar,
+        Frame
     },
     data() {
         return {

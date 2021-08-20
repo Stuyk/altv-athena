@@ -7,7 +7,6 @@ import { View_Events_Creator } from '../../shared/enums/views';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { PedCharacter } from '../utility/characterPed';
-import { CharacterSystem } from '../systems/character';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { sleep } from '../utility/sleep';
 
@@ -24,103 +23,94 @@ let totalCharacters = 0;
 native.requestModel(fModel);
 native.requestModel(mModel);
 
-alt.onServer(View_Events_Creator.Sync, handleSync);
-alt.onServer(View_Events_Creator.Show, handleView);
-alt.onServer(View_Events_Creator.AwaitName, handleNameFinish);
+export class CreatorView {
+    static async open(
+        pos: Vector3,
+        heading: number,
+        _oldCharacterData = null,
+        _noDiscard = true,
+        _noName = true,
+        _totalCharacters = 0
+    ) {
+        oldCharacterData = _oldCharacterData;
+        noDiscard = _noDiscard;
+        noName = _noName;
+        totalCharacters = _totalCharacters;
 
-async function handleView(
-    pos: Vector3,
-    heading: number,
-    _oldCharacterData = null,
-    _noDiscard = true,
-    _noName = true,
-    _totalCharacters = 0
-) {
-    oldCharacterData = _oldCharacterData;
-    noDiscard = _noDiscard;
-    noName = _noName;
-    totalCharacters = _totalCharacters;
+        await PedCharacter.destroy();
+        await sleep(100);
 
-    await PedCharacter.destroy();
-    await sleep(100);
+        view = await View.getInstance(url, true);
+        view.on('creator:ReadyDone', CreatorView.handleReadyDone);
+        view.on('creator:Done', CreatorView.handleDone);
+        view.on('creator:Cancel', CreatorView.handleCancel);
+        view.on('creator:Sync', CreatorView.handleSync);
+        view.on('creator:CheckName', CreatorView.handleCheckName);
+        view.on('creator:DisableControls', CreatorView.handleDisableControls);
 
-    view = await View.getInstance(url, true);
-    view.on('creator:ReadyDone', handleReadyDone);
-    view.on('creator:Done', handleDone);
-    view.on('creator:Cancel', handleCancel);
-    view.on('creator:Sync', handleSync);
-    view.on('creator:CheckName', handleCheckName);
-    view.on('creator:DisableControls', handleDisableControls);
+        await PedCharacter.create(true, pos, heading);
+        await sleep(100);
+        await PedEditCamera.create(PedCharacter.get(), { x: 0.18, y: -0.5, z: 0 });
 
-    await PedCharacter.create(true, pos, heading);
-    await sleep(100);
-    await PedEditCamera.create(PedCharacter.get(), { x: 0.18, y: -0.5, z: 0 });
-
-    PedEditCamera.setFov(50);
-    PedEditCamera.setZPos(0.6);
-    readyInterval = alt.setInterval(waitForReady, 100);
-}
-
-function handleClose() {
-    if (!view) {
-        return;
+        PedEditCamera.setFov(50);
+        PedEditCamera.setZPos(0.6);
+        readyInterval = alt.setInterval(CreatorView.waitForReady, 100);
     }
 
-    native.doScreenFadeOut(100);
-    oldCharacterData = null;
-    PedEditCamera.destroy();
-    PedCharacter.destroy();
-    view.close();
-}
+    static close() {
+        if (!view) {
+            return;
+        }
 
-async function handleDone(newData, infoData, name: string) {
-    await handleClose();
-    alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
-}
-
-async function handleCancel() {
-    handleClose();
-    alt.emitServer(View_Events_Creator.Done, oldCharacterData);
-}
-
-function waitForReady() {
-    if (!view) {
-        return;
+        native.doScreenFadeOut(100);
+        oldCharacterData = null;
+        PedEditCamera.destroy();
+        PedCharacter.destroy();
+        view.close();
     }
 
-    view.emit('creator:Ready', noDiscard, noName);
-}
-
-function handleReadyDone() {
-    if (readyInterval !== undefined || readyInterval !== null) {
-        alt.clearInterval(readyInterval);
-        readyInterval = null;
+    static handleDone(newData, infoData, name: string) {
+        CreatorView.close();
+        alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
     }
 
-    view.emit('creator:SetData', oldCharacterData, totalCharacters);
-    view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
+    static handleCancel() {
+        CreatorView.close();
+        alt.emitServer(View_Events_Creator.Done, oldCharacterData);
+    }
+
+    static waitForReady() {
+        view.emit('creator:Ready', noDiscard, noName);
+    }
+
+    static handleReadyDone() {
+        if (readyInterval !== undefined || readyInterval !== null) {
+            alt.clearInterval(readyInterval);
+            readyInterval = null;
+        }
+
+        view.emit('creator:SetData', oldCharacterData, totalCharacters);
+        view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
+    }
+
+    static handleCheckName(name: string): void {
+        alt.emitServer(View_Events_Creator.AwaitName, name);
+    }
+
+    static handleNameFinish(result: boolean): void {
+        view.emit('creator:IsNameAvailable', result);
+    }
+
+    static handleDisableControls(shouldDisableControls: boolean): void {
+        PedEditCamera.disableControls(shouldDisableControls);
+    }
+
+    static async handleSync(data: Appearance): Promise<void> {
+        await PedCharacter.apply(data);
+        PedEditCamera.update(PedCharacter.get());
+    }
 }
 
-function handleCheckName(name: string): void {
-    alt.emitServer(View_Events_Creator.AwaitName, name);
-}
-
-function handleNameFinish(result: boolean): void {
-    view.emit('creator:IsNameAvailable', result);
-}
-
-function handleDisableControls(shouldDisableControls: boolean): void {
-    PedEditCamera.disableControls(shouldDisableControls);
-}
-
-/**
- * Begins the character synchronization process.
- * @export
- * @param {Appearance} data
- * @param {boolean} [shouldTPose=false]
- * @return {Promise<void>}
- */
-export async function handleSync(data: Appearance): Promise<void> {
-    await PedCharacter.apply(data);
-    PedEditCamera.update(PedCharacter.get());
-}
+alt.onServer(View_Events_Creator.Sync, CreatorView.handleSync);
+alt.onServer(View_Events_Creator.Show, CreatorView.open);
+alt.onServer(View_Events_Creator.AwaitName, CreatorView.handleNameFinish);
