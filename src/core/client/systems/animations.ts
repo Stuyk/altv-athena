@@ -77,16 +77,16 @@ export async function playAnimation(
 }
 
 export async function playAnimationForPed(
-    player: number = alt.Player.local.scriptID, animation: Animation
+    ped: number, animation: Animation
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(animation.dict);
     if (!isReadyToPlay) {
         return;
     }
 
-    if (native.isEntityPlayingAnim(player, animation.dict, animation.name, 3)) {
+    if (native.isEntityPlayingAnim(ped, animation.dict, animation.name, 3)) {
         return;
     }
 
-    native.taskPlayAnim(player, animation.dict, animation.name, 8.0, -1, animation.duration, animation.flags, 0, false, false, false);
+    native.taskPlayAnim(ped, animation.dict, animation.name, 8.0, -1, animation.duration, animation.flags, 0, false, false, false);
 }
