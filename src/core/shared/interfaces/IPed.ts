@@ -1,12 +1,14 @@
 import { Vector3 } from './Vector';
+import { Animation } from './Animation';
 
 export interface IPed {
     pos: Vector3;
     model: string;
-    rot?: Vector3;
+    heading?: number;
     maxDistance?: number;
     uid: string;
-
+    animations?: Animation[][];
+    randomizeAppearance?: boolean;
     /**
      * Local Object ID.
      * Do not actually fill this out.
@@ -24,17 +26,11 @@ export interface IPed {
     isBeingCreated?: boolean;
 
     /**
-     * Is this object interior only.
-     * Will only show in a matching interior dimension.
-     * @type {boolean}
-     * @memberof IObject
-     */
-    isInterior?: boolean;
-
-    /**
      * Will show across all dimensions.
      * @type {number}
      * @memberof IObject
      */
     dimension?: number;
+
+
 }

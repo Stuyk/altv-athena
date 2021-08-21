@@ -1,17 +1,10 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IPed } from '../../shared/interfaces/IPed';
+import {SYSTEM_EVENTS} from '../../shared/enums/system';
+import {IPed} from '../../shared/interfaces/IPed';
+import {Animation} from '../../shared/interfaces/Animation';
 import Logger from '../utility/athenaLogger';
-import { StreamerService } from './streamer';
-import ChatController from "./chat";
-import {LocaleController} from "../../shared/locale/locale";
-import {LOCALE_KEYS} from "../../shared/locale/languages/keys";
-import {PERMISSIONS} from "../../shared/flags/PermissionFlags";
-import {playerFuncs} from "../extensions/Player";
-import {getVectorInFrontOfPlayer} from "../utility/vector";
-import VehicleFuncs from "../extensions/VehicleFuncs";
-import crypto from 'crypto';
+import {StreamerService} from './streamer';
 
 const globalPeds: Array<IPed> = [];
 const KEY = 'peds';
@@ -20,22 +13,20 @@ export class PedController {
 
     static refresh() {
         StreamerService.updateData(KEY, globalPeds);
-        alt.log(`${globalPeds[0].uid}`)
     }
 
-    static append(objectData: IPed) {
-        if (!objectData.uid) {
-            Logger.error(`(${JSON.stringify(objectData.pos)}) Object does not have a unique id (uid).`);
+    static append(pedData: IPed) {
+        if (!pedData.uid) {
+            Logger.error(`(${JSON.stringify(pedData.pos)}) Ped does not have a unique id (uid).`);
             return;
         }
 
-        globalPeds.push(objectData);
+        globalPeds.push(pedData);
         PedController.refresh();
-        alt.log("append ped")
     }
 
     static remove(uid: string): boolean {
-        const index = globalPeds.findIndex((object) => object.uid === uid);
+        const index = globalPeds.findIndex((ped) => ped.uid === uid);
         if (index <= -1) {
             return false;
         }
@@ -46,52 +37,29 @@ export class PedController {
         return true;
     }
 
-    static removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
+    static removeFromPlayer(player: alt.Player, uid: string) {
         if (!uid) {
-            throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
+            throw new Error(`Did not specify a uid for ped removal. PedController.removeFromPlayer`);
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_PED, uid, removeAllInterior);
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_PED, uid);
     }
 
-    static addToPlayer(player: alt.Player, objectData: IPed) {
-        if (!objectData.uid) {
+    static addToPlayer(player: alt.Player, pedData: IPed) {
+        if (!pedData.uid) {
             throw new Error(
-                `Object ${JSON.stringify(objectData.pos)} does not have a uid. ObjectController.addToPlayer`
+                `Ped ${JSON.stringify(pedData.pos)} does not have a uid. PedController.addToPlayer`
             );
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.APPEND_PED, objectData);
+        alt.emitClient(player, SYSTEM_EVENTS.APPEND_PED, pedData);
     }
 
-    static update(player: alt.Player, objects: Array<IPed>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_PEDS, objects);
-    }
-}
-
-ChatController.addCommand(
-    'addped',
-    LocaleController.get(LOCALE_KEYS.COMMAND_VEHICLE, '/addped'),
-    PERMISSIONS.ADMIN,
-    handleAdd
-);
-
-
-function handleAdd(player: alt.Player, model: string): void {
-    if (!model) {
-        playerFuncs.emit.message(player, ChatController.getDescription('vehicle'));
-        return;
+    static update(player: alt.Player, peds: Array<IPed>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_PEDS, peds);
     }
 
-    if (player.data.isDead) {
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
-        return;
+    static playAnimation(uid: string, animation: Animation[]) {
+        alt.emitClient(null, SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
     }
-
-    const fwd = getVectorInFrontOfPlayer(player, 5);
-
-    PedController.append({uid: crypto.randomBytes(16).toString("hex"),
-    model: model,
-    pos: fwd})
-    alt.log("adding ped")
 }

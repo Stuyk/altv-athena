@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Timer } from '../utility/timers';
+import {Animation} from "../../shared/interfaces/Animation";
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 
@@ -73,4 +74,19 @@ export async function playAnimation(
     }
 
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
+}
+
+export async function playAnimationForPed(
+    player: number = alt.Player.local.scriptID, animation: Animation
+): Promise<void> {
+    const isReadyToPlay = await loadAnimation(animation.dict);
+    if (!isReadyToPlay) {
+        return;
+    }
+
+    if (native.isEntityPlayingAnim(player, animation.dict, animation.name, 3)) {
+        return;
+    }
+
+    native.taskPlayAnim(player, animation.dict, animation.name, 8.0, -1, animation.duration, animation.flags, 0, false, false, false);
 }
