@@ -1,5 +1,5 @@
 ---
-description: Learn how to add objects to the object streamer.
+description: Learn how to add peds to the object streamer.
 ---
 
 # Summary
@@ -8,9 +8,9 @@ Ped(s) can pe spawned globally or locally for the player. Peds accept an array o
 If the array contains only one set of animations, eg: ```animations: [[anim1, anim2]]```, only that set will be played, otherwise, of more sets are provided, eg: ```animations: [[anim1, anim2], [anim3]]``` then a random set will be played out of the array.
 It is also possible to play an animation for an already existing ped.
 
-# Adding a Global Object
+# Adding a Global Ped
 
-Global Ped(s) are defined as a type of object that everyone can see.
+Global Ped(s) are defined as a type of ped that everyone can see.
 
 All ped(s) must have a unique identifier or a `uid` just in case they need to be removed later.
 
@@ -48,15 +48,15 @@ All ped(s) must have a unique identifier or a `uid` just in case they need to be
 
 # Removing a Global Ped
 
-Global Object(s) can easily be removed if you know the `uid` of that object.
+Global Ped(s) can easily be removed if you know the `uid` of that ped.
 
 ```ts
  PedController.remove('test-ped-1')
 ```
 
-# Adding a Local Object to a Player
+# Adding a Local Ped to a Player
 
-Local Object(s) are only for a single player to see. Remember that the `uid` is something you define to remove it later.
+Local Ped(s) are only for a single player to see. Remember that the `uid` is something you define to remove it later.
 
 ```ts
 PedController.addToPlayer({
@@ -69,17 +69,15 @@ PedController.addToPlayer({
 
 ```
 
-# Removing a Local Object from a Player
+# Removing a Local Ped from a Player
 
-As long as you know the `uid` of the local object it can be removed.
+As long as you know the `uid` of the local ped it can be removed.
 
 ```ts        
-ObjectController.removeFromPlayer(player, 'test-ped-local-1');
+PedController.removeFromPlayer(player, 'test-ped-local-1');
 ```
 
 # Play animation for existing ped
-
-As long as you know the `uid` of the local object it can be removed.
 
 ```ts        
 let anim1: Animation = {
