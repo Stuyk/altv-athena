@@ -94,5 +94,5 @@ let anim2: Animation = {
     duration: -1
 }
 
-PedController.playAnimation('test-ped-1', [anim1,anim2])}, 5000)
+PedController.playAnimation('test-ped-1', [anim1,anim2])
 ```
