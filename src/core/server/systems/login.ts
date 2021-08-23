@@ -21,6 +21,7 @@ import { OptionsController } from './options';
 import './textlabel';
 import './tick';
 import './voice';
+import './ped';
 
 const UserRelation: { [key: number]: string } = {};
 

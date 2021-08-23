@@ -6,6 +6,7 @@ import { TextLabelController } from './textlabel';
 import { IStream, IStreamMessage } from '../../shared/interfaces/IStream';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { ObjectController } from './object';
+import { PedController } from './ped';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
@@ -67,6 +68,7 @@ export class StreamerService {
         MarkerController.update(player, data.markers);
         TextLabelController.update(player, data.labels);
         ObjectController.update(player, data.objects);
+        PedController.update(player, data.peds);
     }
 
     /**
@@ -140,7 +142,7 @@ export class StreamerService {
 }
 
 sock.onopen = StreamerService.init;
-sock.onmessage = (message: MessageEvent<any>) => {
+sock.onmessage = (message: MessageEvent) => {
     StreamerService.receive(message.data);
 };
 

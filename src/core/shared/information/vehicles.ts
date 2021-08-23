@@ -6351,5 +6351,16 @@ export const VehicleData: Array<VehicleInfo> = [
         price: 999999999,
         seats: 2,
         storage: 24
+    },
+    {
+        display: 'Lampadati Tigon',
+        name: 'tigon',
+        type: 'vehicle',
+        class: 'super',
+        sell: false,
+        price: 999999999,
+        seats: 2,
+        storage: 24
     }
+
 ];

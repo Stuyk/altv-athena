@@ -3,6 +3,7 @@ export enum SYSTEM_EVENTS {
     APPEND_MARKER = 'append:Marker',
     APPEND_TEXTLABELS = 'append:TextLabel',
     APPEND_OBJECT = 'append:Object',
+    APPEND_PED = 'append:Ped',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
@@ -63,6 +64,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //
     PLAY_PARTICLE_EFFECT = 'ptfx:Play',
+    PLAY_ANIMATION_FOR_PED = 'animation:PlayForPed',
     // Progress Bar
     PROGRESSBAR_CREATE = 'progressbar:Create',
     PROGRESSBAR_REMOVE = 'progressbar:Remove',
@@ -74,6 +76,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_INTERACTIONS = 'interactions:Populate',
     POPULATE_TEXTLABELS = 'labels:Populate',
     POPULATE_OBJECTS = 'objects:Populate',
+    POPULATE_PEDS = 'peds:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
@@ -82,6 +85,8 @@ export enum SYSTEM_EVENTS {
     //
     REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',
+    REMOVE_GLOBAL_PED = 'remove:Global:Object',
+    REMOVE_PED = 'remove:Object',
     REMOVE_MARKER = 'remove:Marker',
     REMOVE_BLIP = 'remove:Blip',
     REMOVE_TEXTLABEL = 'remove:Textlabel',

@@ -2,6 +2,7 @@ import { IObject } from './IObject';
 import { Marker } from './Marker';
 import { TextLabel } from './TextLabel';
 import { Vector3 } from './Vector';
+import {IPed} from "./IPed";
 
 export interface IStreamConfig {
     /**
@@ -14,6 +15,7 @@ export interface IStreamConfig {
     MarkersDistance: number;
     LabelsDistance: number;
     ObjectsDistance: number;
+    PedsDistance: number;
 }
 
 export interface IStream {
@@ -21,6 +23,7 @@ export interface IStream {
     labels: Array<TextLabel>;
     markers: Array<Marker>;
     objects: Array<IObject>;
+    peds: Array<IPed>;
 }
 
 export interface IStreamMessage {
