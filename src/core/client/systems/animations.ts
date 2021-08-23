@@ -3,7 +3,6 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Timer } from '../utility/timers';
-import {Animation} from "../../shared/interfaces/Animation";
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 
@@ -76,17 +75,31 @@ export async function playAnimation(
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
 }
 
-export async function playAnimationForPed(
-    ped: number, animation: Animation
-): Promise<void> {
-    const isReadyToPlay = await loadAnimation(animation.dict);
+/**
+ * Play an animation on a Pedestrian
+ * @export
+ * @param {number} scriptID
+ * @param {string} dict
+ * @param {string} name
+ * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE]
+ * @param {number} [duration=-1]
+ * @return {*}
+ */
+export async function playPedAnimation(
+    scriptID: number,
+    dict: string,
+    name: string,
+    flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
+    duration: number = -1
+) {
+    const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {
         return;
     }
 
-    if (native.isEntityPlayingAnim(ped, animation.dict, animation.name, 3)) {
+    if (native.isEntityPlayingAnim(scriptID, dict, name, 3)) {
         return;
     }
 
-    native.taskPlayAnim(ped, animation.dict, animation.name, 8.0, -1, animation.duration, animation.flags, 0, false, false, false);
+    native.taskPlayAnim(scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
 }

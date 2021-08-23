@@ -7,7 +7,7 @@ import {Animation} from '../../shared/interfaces/Animation';
 import {distance2d} from '../../shared/utility/vector';
 import {loadModel} from '../utility/model';
 import {Timer} from '../utility/timers';
-import {playAnimationForPed} from './animations';
+import {playPedAnimation} from './animations';
 
 
 
@@ -91,15 +91,7 @@ export class PedController {
     static playAnimation(uid: string, animation: Animation[]) {
         if (pedInfo[uid] !== null && pedInfo[uid] !== undefined) {
             for (let i = 0; i < animation.length; i++) {
-                playAnimationForPed(
-                    pedInfo[uid],
-                    {
-                        dict: animation[i].dict,
-                        name: animation[i].name,
-                        flags: animation[i].flags,
-                        duration: -1
-                    }
-                );
+                playPedAnimation(pedInfo[uid], animation[i].dict, animation[i].name, animation[i].flags, animation[i].duration)
             }
         }
 
