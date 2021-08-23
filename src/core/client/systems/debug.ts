@@ -25,6 +25,9 @@ export class DebugController {
         const heading = native.getEntityHeading(alt.Player.local.scriptID);
         alt.log(heading);
 
+        const nativeRotation = native.getEntityRotation(alt.Player.local.scriptID, 1);
+        alt.log(`NATIVE ROTATION: ${nativeRotation}`);
+
         if (alt.Player.local.isAiming) {
             alt.log(`AIM POSITION:`);
             const aimPos = alt.Player.local.aimPos;

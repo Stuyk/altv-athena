@@ -18,6 +18,7 @@ import './systems/animations';
 import './systems/arrest';
 import './systems/athenaEvents';
 import './systems/blip';
+import './systems/character';
 import './systems/dealership';
 import './systems/death';
 import './systems/debug';

@@ -46,10 +46,11 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
         return;
     }
 
+    player.visible = false;
     player.pendingCharacterEdit = false;
     playerFuncs.dataUpdater.updateByKeys(player, appearance, 'appearance');
     playerFuncs.dataUpdater.updateByKeys(player, info, 'info');
-    playerFuncs.sync.appearance(player);
+    playerFuncs.sync.appearance(player, appearance);
 
     // Resync Position After Appearance for Interior Bug
     alt.setTimeout(() => {

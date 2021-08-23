@@ -30,7 +30,7 @@ import sync from './sync';
  */
 async function selectCharacter(player: alt.Player, characterData: Partial<Character>): Promise<void> {
     player.data = { ...characterData };
-    sync.appearance(player);
+    sync.appearance(player, characterData.appearance);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.
@@ -121,6 +121,8 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         // Finish Selection
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
+
+    player.visible = true;
 
     // Delete unused data from the Player.
     delete player.currentCharacters;
