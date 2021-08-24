@@ -2,10 +2,10 @@
     <div class="stack">
         <div class="split">
             <div class="blue--text overline pr-2" style="min-width: 30px; text-align: right;">{{ getValue }}</div>
-            <input type="range" :min="_min" :max="_max" :step="_step" :value="_value" @input="handleInput" />
+            <input type="range" :min="_min" :max="_max" :step="_step" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
             <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left;">{{ _max }}</div>
         </div>
-        <div v-if="values" class="overline grey--text pt-2" style="text-align: center">{{ values[_value] }}</div>
+        <div v-if="values" class="overline grey--text pt-2" style="text-align: center">{{ values[modelValue] }}</div>
     </div>
 </template>
 
@@ -17,7 +17,6 @@ export default defineComponent({
     name: ComponentName,
     data() {
         return {
-            _value: 0,
             _min: 0,
             _max: 1,
             _step: 1
@@ -44,13 +43,12 @@ export default defineComponent({
             type: Number,
             required: true
         },
-        callback: {
-            type: Function,
-            required: true
-        },
         values: {
             type: Array,
             required: false
+        },
+        modelValue: {
+            type: Number
         }
     },
     methods: {
@@ -58,15 +56,6 @@ export default defineComponent({
             const audio = new Audio('/sounds/ui/hover.ogg');
             audio.volume = 0.1;
             await audio.play();
-        },
-        handleInput(e) {
-            this.playTick();
-
-            this._value = e.target.value;
-
-            if (this.callback && typeof this.callback === 'function') {
-                this.callback(this.uid, this._value);
-            }
         },
         isNotNumber(value) {
             if (value === undefined || value === null) {
@@ -89,10 +78,10 @@ export default defineComponent({
             return classes;
         },
         getValue() {
-            let value = this._value;
+            const value: string = this.modelValue;
 
             if (Math.abs(this._step) < 1) {
-                return value.toFixed(2);
+                return parseFloat(value).toFixed(2);
             }
 
             return value;
@@ -110,11 +99,6 @@ export default defineComponent({
 
         if (!this.isNotNumber(this.increment)) {
             this._step = this.increment;
-        }
-
-        if (!this.isNotNumber(this.indexValue)) {
-            console.log(this.indexValue);
-            this._value = this.indexValue;
         }
     }
 });

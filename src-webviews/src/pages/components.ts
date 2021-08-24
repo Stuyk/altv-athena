@@ -1,4 +1,5 @@
 import { shallowRef } from 'vue';
+import CharacterCreator from './characterCreator/CharacterCreator.vue';
 import CharacterSelect from './characterSelect/CharacterSelect.vue';
 import Designs from './designs/Designs.vue';
 import Login from './login/Login.vue';
@@ -7,6 +8,7 @@ import Login from './login/Login.vue';
 // All components that you want to load...
 // New interfaces, menus, etc.
 const componentList = {
+    CharacterCreator,
     CharacterSelect,
     Designs,
     Login

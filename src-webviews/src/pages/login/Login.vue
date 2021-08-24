@@ -148,6 +148,14 @@ export default defineComponent({
         }
 
         this.finishedLoading();
+    },
+    unmounted() {
+         if ('alt' in window) {
+            alt.off('discord:SetLocales', this.setLocales);
+            alt.off('discord:OpenURL', this.openURL);
+            alt.off('discord:endWindow', this.endWindow);
+            alt.off('discord:Fail', this.fail);
+        }
     }
 });
 </script>
