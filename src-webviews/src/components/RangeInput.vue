@@ -5,7 +5,9 @@
             <input type="range" :min="_min" :max="_max" :step="_step" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
             <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left;">{{ _max }}</div>
         </div>
-        <div v-if="values" class="overline grey--text pt-2" style="text-align: center">{{ values[modelValue] }}</div>
+        <div v-if="values" class="overline grey--text pt-2" style="text-align: center; font-size: 10px !important;">
+            {{ getCurrentValue }}
+        </div>
     </div>
 </template>
 
@@ -85,6 +87,13 @@ export default defineComponent({
             }
 
             return value;
+        },
+        getCurrentValue() {
+            if (this.values[this.modelValue].length >= 16) {
+                return this.values[this.modelValue].substr(0, 16) + '...'
+            }
+
+            return this.values[this.modelValue];
         }
     },
     mounted() {

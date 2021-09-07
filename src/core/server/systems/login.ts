@@ -1,5 +1,6 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
@@ -12,21 +13,24 @@ import { Collections } from '../interface/DatabaseCollections';
 import { DiscordUser } from '../interface/DiscordUser';
 import Ares from '../utility/ares';
 import { goToCharacterSelect } from '../views/characters';
-import '../views/login';
 import { StorageView } from '../views/storage';
 import { EventController } from './athenaEvent';
+import { OptionsController } from './options';
+
+import '../views/login';
 import './job';
 import './marker';
-import { OptionsController } from './options';
+import './ped';
 import './textlabel';
 import './tick';
 import './voice';
-import './ped';
 
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
     static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
+        console.log(data);
+
         delete player.pendingLogin;
         delete player.discordToken;
 

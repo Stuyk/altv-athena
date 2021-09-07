@@ -16,7 +16,7 @@ const connectingUsers: { [key: string]: number } = {};
 // These connect to a backend that helps users login with Discord oAuth2.
 const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuyk.com`;
 const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
-const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify`;
+const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify%20email`;
 
 alt.onClient('discord:FinishAuth', handleFinishAuth);
 alt.onClient(SYSTEM_EVENTS.CHECK_CONNECTION, checkConnection);

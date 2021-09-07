@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper stack" v-if="forceUpdate">
+    <div class="wrapper stack">
         <!-- Physical Frame -->
         <Module :name="getLocale('LABEL_FRAME')" class="mb-4">
             <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_FRAME') }}</div>
@@ -179,7 +179,7 @@
             </div>
         </Module>
 
-         <!-- Eye Colour -->
+        <!-- Eye Colour -->
         <Module :name="getLocale('LABEL_EYECOLOUR')" class="mb-4">
             <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_EYECOLOUR') }}</div>
             <div class="split split-full center">
@@ -205,13 +205,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
+
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
 import Module from '../../../components/Module.vue';
 import RangeInput from '../../../components/RangeInput.vue';
 
-import { defineComponent } from 'vue';
-import { MalePresets, FemalePresets } from '../utility/presets';
 
 const ComponentName = 'Appearance';
 export default defineComponent({
@@ -223,9 +224,12 @@ export default defineComponent({
         RangeInput
     },
     props: {
-        data: Object,
-        locales: Object,
-        update: Function,
+        data: {
+            type: Object
+        },
+        locales: {
+            type: Object
+        },
         'decrement-parameter': {
             type: Function
         },
@@ -238,16 +242,6 @@ export default defineComponent({
     },
     data() {
         return {
-            modules: {
-                frame: false,
-                presets: false,
-                father: false,
-                mother: false,
-                skinBlend: false,
-                faceBlend: false,
-                eyeColour: false
-            },
-            forceUpdate: 1,
             preset: 1
         };
     },
@@ -255,22 +249,6 @@ export default defineComponent({
         updatePreset(value: number) {
             this.preset = value;
             this.$emit('set-parameter', 'preset', value);
-        },
-        toggleModule(e) {
-            console.log();
-
-            // console.log(moduleName);
-            // this.modules[moduleName] = !this.modules[moduleName];
-        },
-        isActive(parameter, value) {
-            if (this.data[parameter] === value) {
-                return { active: true };
-            }
-
-            return { active: false };
-        },
-        isHighlighted(arg1, arg2) {
-            return arg1 === arg2 ? { 'blue--text': true, active: true } : { 'grey--text': true };
         },
         getLocale(name) {
             return this.locales.appearanceComponent[name]
