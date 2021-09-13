@@ -8,6 +8,9 @@ description: List of all the changes and current versions.
 
 ```diff
 + Began Interface Reworks
++ Added Lock Icon Toggle Server Wide
++ Added PED Streamer from Ravenous
++ Fix Fuel Bug Annoyance
 + Fixed Pushing Vehicle while Dead
 + Fixed Doing Vehicle things while Dead
 + Fixed Animation Bug while Pushing Vehicle
