@@ -133,7 +133,7 @@ export class InteractionController {
 
             if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
-                if (vehicle.getSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
                     if (isVehicleLocked) {
                         drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
                     } else {
@@ -157,7 +157,7 @@ export class InteractionController {
                 }
 
                 // Press 'X' to lock vehicle
-                if (vehicle.getSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
                     const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
                     interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_LOCK, lockText);
                 }
