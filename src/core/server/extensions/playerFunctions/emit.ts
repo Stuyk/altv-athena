@@ -6,6 +6,7 @@ import { InputMenu } from '../../../shared/interfaces/InputMenus';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
+import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
 
 /**
@@ -99,9 +100,15 @@ function particle(player: alt.Player, particle: Particle, emitToNearbyPlayers = 
  * Create a progress bar that eventually ends itself.
  * @param {alt.Player} player
  * @param {ProgressBar} progressbar
+ * @returns {string} A unique identifier to remove the progress bar.
  */
-function createProgressBar(player: alt.Player, progressbar: ProgressBar) {
+function createProgressBar(player: alt.Player, progressbar: ProgressBar): string {
+    if (!progressbar.uid) {
+        progressbar.uid = sha256Random(JSON.stringify(progressbar));
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PROGRESSBAR_CREATE, progressbar);
+    return progressbar.uid;
 }
 
 /**

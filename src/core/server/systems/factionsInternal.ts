@@ -587,7 +587,7 @@ export class FactionInternalSystem {
             return { status: false, response: 'Target player is not in your faction.' };
         }
 
-        const target = alt.Player.all.find((x) => x.data && x.data._id === characterID);
+        const target = alt.Player.all.find((x) => x.data && x.data._id.toString() === characterID);
         if (target) {
             target.data.faction = null;
             await playerFuncs.save.field(target, 'faction', target.data.faction);

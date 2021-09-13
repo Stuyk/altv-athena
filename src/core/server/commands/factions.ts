@@ -60,7 +60,7 @@ async function handleHandOff(player: alt.Player) {
     }
 
     const result = await FactionInternalSystem.handOffFaction(faction._id.toString(), nextInLine.id, true);
-    if (!result) {
+    if (!result.status) {
         playerFuncs.emit.message(player, `Could not hand off faction.`);
         return;
     }

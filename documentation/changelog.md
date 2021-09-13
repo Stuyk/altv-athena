@@ -13,6 +13,10 @@ description: List of all the changes and current versions.
 + Fixed Animation Bug while Pushing Vehicle
 + Fixed Job Objective State Issues
 + Added Temporary Vehicle Override to Prevent Despawning on Exit
++ Fixed Faction Hand Off Bug
++ Fixed Progress Bar Not Requiring UID
++ Creating a Progress Bar Now Returns a UID if not Supplied
++ Fixed Interactions Overriding UID
 ```
 
 ## 2.0.3
