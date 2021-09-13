@@ -6361,6 +6361,185 @@ export const VehicleData: Array<VehicleInfo> = [
         price: 999999999,
         seats: 2,
         storage: 24
+    },
+    {
+        display: 'Obey Tailgater S',
+        name: 'tailgater2',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Karen Calico GTF',
+        name: 'calico',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Comet 6',
+        name: 'comet6',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Ubermacht Cypher',
+        name: 'cypher',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Dominator 7',
+        name: 'dominator7',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Dominator 8',
+        name: 'dominator7',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Euros',
+        name: 'euros',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Futo 2',
+        name: 'futo2',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Pfister Growler',
+        name: 'growler',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Jester 4',
+        name: 'jester4',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Previon',
+        name: 'previon',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Remus',
+        name: 'remus',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'RT3000',
+        name: 'rt3000',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Sultan 3',
+        name: 'sultan3',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Vectre',
+        name: 'vectre',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Warrener 2',
+        name: 'warrener2',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'zr350',
+        name: 'zr350',
+        type: 'vehicle',
+        class: 'sport',
+        sell: true,
+        price: 375000,
+        seats: 2,
+        storage: 24
+    },
+    {
+        display: 'Freight Car 2',
+        name: 'freightcar2',
+        type: 'vehicle',
+        class: 'sport',
+        sell: false,
+        price: 99999999999,
+        seats: 2,
+        storage: 24
     }
-
 ];
