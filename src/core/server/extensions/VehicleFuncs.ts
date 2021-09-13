@@ -217,6 +217,7 @@ export default class VehicleFuncs {
         vehicle.passengers = [];
         vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
 
         // Setup Default Document Values
         if (document.fuel === null || document.fuel === undefined) {
@@ -310,6 +311,7 @@ export default class VehicleFuncs {
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
         vehicle.isTemporary = true;
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
         return vehicle;
     }
 
