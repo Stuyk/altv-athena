@@ -627,10 +627,7 @@ export class FactionSystem {
             return { status: false, response: `Could not quit faction because you are the leader.` };
         }
 
-        const response = await FactionInternalSystem.removeMember(
-            player.data._id.toString(),
-            player.data._id.toString()
-        );
+        const response = await FactionInternalSystem.removeMember(player.data.faction, player.data._id.toString());
 
         if (response.status) {
             response.response = `${player.data.name} quit the faction.`;
