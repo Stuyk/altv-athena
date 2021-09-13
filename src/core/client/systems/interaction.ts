@@ -4,6 +4,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
@@ -132,13 +133,13 @@ export class InteractionController {
 
             if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
-
-                if (isVehicleLocked) {
-                    drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
-                } else {
-                    drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+                if (vehicle.getSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                    if (isVehicleLocked) {
+                        drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
+                    } else {
+                        drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
+                    }
                 }
-
                 if (!isVehicleLocked) {
                     // Press 'F' to enter vehicle
                     const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
@@ -156,8 +157,10 @@ export class InteractionController {
                 }
 
                 // Press 'X' to lock vehicle
-                const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
-                interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_LOCK, lockText);
+                if (vehicle.getSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                    const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
+                    interactText = InteractionController.appendText(interactText, KEY_BINDS.VEHICLE_LOCK, lockText);
+                }
             }
         } else if (alt.Player.local.vehicle) {
             const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
