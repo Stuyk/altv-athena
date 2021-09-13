@@ -75,7 +75,7 @@ export class FactionInternalSystem {
         return true;
     }
 
-    static async refreshBlipsAndInteractions(faction: string) {
+    static async refreshBlipsAndInteractions(faction: string, doNotRefresh: boolean = false) {
         if (!factions[faction]) {
             return;
         }
@@ -91,6 +91,17 @@ export class FactionInternalSystem {
         // Storage
         InteractionController.remove(typeStorage, storageName);
         MarkerController.remove(storageName);
+
+        // Weapons
+        InteractionController.remove(typeWeapons, weaponsName);
+        MarkerController.remove(weaponsName);
+
+        // Blip
+        BlipController.remove(blipName);
+
+        if (doNotRefresh) {
+            return;
+        }
 
         if (factions[faction].storageLocation) {
             InteractionController.add({
@@ -110,10 +121,6 @@ export class FactionInternalSystem {
             });
         }
 
-        // Weapons
-        InteractionController.remove(typeWeapons, weaponsName);
-        MarkerController.remove(weaponsName);
-
         if (factions[faction].weaponLocation) {
             InteractionController.add({
                 type: typeWeapons,
@@ -131,9 +138,6 @@ export class FactionInternalSystem {
                 color: new alt.RGBA(255, 255, 255, 100)
             });
         }
-
-        // Blip
-        BlipController.remove(blipName);
 
         if (factions[faction].pos) {
             BlipController.append({
@@ -224,6 +228,9 @@ export class FactionInternalSystem {
         }
 
         const factionName = factions[faction].name;
+
+        // Delete / Remove Blips, Markers, etc.
+        FactionInternalSystem.refreshBlipsAndInteractions(factionName, true);
 
         await Database.updateDataByFieldMatch('faction', faction, { faction: null }, Collections.Characters);
         const openInterfacePlayers = openFactionInterfaces[faction];

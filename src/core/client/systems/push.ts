@@ -28,6 +28,9 @@ export class PushVehicle {
     }
 
     static serverStart(_vehicle: alt.Vehicle) {
+        // Clears animations when entering pushing state.
+        native.clearPedTasksImmediately(alt.Player.local.scriptID);
+
         vehicle = _vehicle;
         isPushing = true;
         if (!interval) {

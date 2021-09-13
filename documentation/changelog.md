@@ -4,6 +4,17 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.4
+
+```diff
++ Began Interface Reworks
++ Fixed Pushing Vehicle while Dead
++ Fixed Doing Vehicle things while Dead
++ Fixed Animation Bug while Pushing Vehicle
++ Fixed Job Objective State Issues
++ Added Temporary Vehicle Override to Prevent Despawning on Exit
+```
+
 ## 2.0.3
 
 ```diff
@@ -85,6 +96,7 @@ description: List of all the changes and current versions.
 ```
 
 ## 2.0.1
+
 ```diff
 + Add Client Console Command for 'timerinfo'
 + Prints the total amount of Timers and their Millisecond Interval
@@ -124,6 +136,7 @@ description: List of all the changes and current versions.
 ```
 
 ## 2.0.0
+
 ```diff
 + New Keybind Interface for Custom Keybinds
 + Added Register Keybind

@@ -23,8 +23,9 @@ export class InteractionController {
      * @returns {string} uid
      */
     static add(interaction: Interaction): InteractionShape {
-        const uid = sha256Random(JSON.stringify(interaction));
-        interaction.identifier = uid;
+        if (!interaction.identifier) {
+            interaction.identifier = sha256Random(JSON.stringify(interaction));
+        }
 
         if (!interactions[interaction.type]) {
             interactions[interaction.type] = [];

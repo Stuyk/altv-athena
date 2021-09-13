@@ -125,6 +125,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (player.data.isDead) {
+            return;
+        }
+
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
 
         if (!vehicle || !vehicle.valid) {
@@ -161,6 +165,11 @@ export class VehicleSystem {
 
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
             playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
+            return;
+        }
+
+        if (vehicle.isBeingPushed) {
+            playerFuncs.emit.notification(player, `~r~Cannot enter vehicle while it is being pushed.`);
             return;
         }
 
@@ -361,7 +370,7 @@ export class VehicleSystem {
         }
 
         // Prune Temporary Vehicles
-        if (!vehicle.isTemporary) {
+        if (!vehicle.isTemporary || vehicle.overrideTemporaryDeletion) {
             return;
         }
 
@@ -385,6 +394,10 @@ export class VehicleSystem {
      */
     static toggleEngine(player: alt.Player) {
         if (!player || !player.vehicle || !player.vehicle.driver) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 
@@ -442,7 +455,12 @@ export class VehicleSystem {
         const vehicle = player.vehicle
             ? player.vehicle
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
+
         if (!vehicle) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 
@@ -499,6 +517,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (player.data.isDead) {
+            return;
+        }
+
         const vehicle = player.vehicle
             ? player.vehicle
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
@@ -541,8 +563,20 @@ export class VehicleSystem {
         });
     }
 
+    /**
+     * Start pushing a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vector3} position
+     * @return {*}  {boolean}
+     * @memberof VehicleSystem
+     */
     static startPush(player: alt.Player, position: alt.Vector3): boolean {
         if (!player || !player.valid) {
+            return false;
+        }
+
+        if (player.data.isDead) {
             return false;
         }
 
@@ -566,6 +600,11 @@ export class VehicleSystem {
             return false;
         }
 
+        if (vehicle.isBeingPushed) {
+            playerFuncs.emit.notification(player, `~r~Vehicle is already being pushed.`);
+            return false;
+        }
+
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
             playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
             return false;
@@ -576,17 +615,31 @@ export class VehicleSystem {
         }
 
         player.isPushingVehicle = true;
+        vehicle.isBeingPushed = true;
         vehicle.setNetOwner(player);
         player.attachTo(vehicle, 0, 6286, position, new alt.Vector3(0, 0, 0), true, false);
         alt.emitClient(player, VEHICLE_EVENTS.PUSH, vehicle);
         return true;
     }
 
+    /**
+     * Stop a player from pushing a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @return {*}
+     * @memberof VehicleSystem
+     */
     static stopPush(player: alt.Player) {
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
 
         if (vehicle && vehicle.valid) {
             vehicle.resetNetOwner();
+        }
+
+        vehicle.isBeingPushed = false;
+
+        if (!player || !player.valid) {
+            return;
         }
 
         player.isPushingVehicle = false;
@@ -604,6 +657,10 @@ export class VehicleSystem {
      */
     static async storage(player: alt.Player, vehicle: alt.Vehicle) {
         if (!player || !player.valid || player.data.isDead) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 
