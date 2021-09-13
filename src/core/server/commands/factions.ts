@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { FactionSystem } from '../systems/factions';
@@ -120,6 +118,20 @@ function handleAccept(player: alt.Player) {
     player.lastFactionInvite = null;
 }
 
+async function handleLeave(player: alt.Player) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    if (!player.data.faction) {
+        playerFuncs.emit.message(player, `You are not in a faction.`);
+        return;
+    }
+
+    const response = await FactionSystem.leave(player);
+    playerFuncs.emit.notification(player, response.response);
+}
+
 ChatController.addCommand(
     'factiontake',
     '/factiontake [id] - Take Faction Ownership',
@@ -137,3 +149,4 @@ ChatController.addCommand(
 ChatController.addCommand('factionaccept', '/factionaccept - Accept latest invite.', PERMISSIONS.NONE, handleAccept);
 ChatController.addCommand('factioninvite', '/factioninvite [id] - Invite to faction', PERMISSIONS.NONE, handleInvite);
 ChatController.addCommand('factioncreate', '/factioncreate [name] - Create a faction', PERMISSIONS.ADMIN, handleCreate);
+ChatController.addCommand('factionleave', '/factionleave - Leave the faction', PERMISSIONS.NONE, handleLeave);

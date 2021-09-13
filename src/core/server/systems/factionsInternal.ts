@@ -572,17 +572,17 @@ export class FactionInternalSystem {
     /**
      * Internal callable function to remove a member from this faction based on their character id.
      * @static
-     * @param {string} id
+     * @param {string} factionID
      * @param {string} characterID
      * @return {Promise<boolean>}
      * @memberof FactionSystem
      */
-    static async removeMember(id: string, characterID: string): Promise<IResponse> {
-        if (!factions[id]) {
+    static async removeMember(factionID: string, characterID: string): Promise<IResponse> {
+        if (!factions[factionID]) {
             return { status: false, response: 'The faction you are in no longer exists.' };
         }
 
-        const memberIndex = factions[id].players.findIndex((member) => member.id === characterID);
+        const memberIndex = factions[factionID].players.findIndex((member) => member.id === characterID);
         if (memberIndex <= -1) {
             return { status: false, response: 'Target player is not in your faction.' };
         }
@@ -593,8 +593,8 @@ export class FactionInternalSystem {
             await playerFuncs.save.field(target, 'faction', target.data.faction);
         }
 
-        const oldData = factions[id].players.splice(memberIndex, 1)[0];
-        await this.save(id, { players: factions[id].players });
+        const oldData = factions[factionID].players.splice(memberIndex, 1)[0];
+        await this.save(factionID, { players: factions[factionID].players });
         return { status: true, response: `${oldData.name} was removed from your faction.` };
     }
 
