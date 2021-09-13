@@ -9,7 +9,10 @@ import { FactionInternalSystem } from '../systems/factionsInternal';
 
 function handleCreate(player: alt.Player, ...name: string[]): void {
     if (!player || !player.valid || player.data.faction) {
-        playerFuncs.emit.message(player, `Leave your faction or transfer ownership before creating a new one.`);
+        playerFuncs.emit.message(
+            player,
+            `Leave your faction (/leavefaction) or transfer ownership before creating a new one.`
+        );
         return;
     }
 
@@ -65,6 +68,8 @@ async function handleHandOff(player: alt.Player) {
         return;
     }
 
+    player.data.faction = null;
+    await playerFuncs.save.field(player, 'faction', player.data.faction);
     playerFuncs.emit.message(player, `Handed off faction to ${nextInLine.name}`);
 }
 

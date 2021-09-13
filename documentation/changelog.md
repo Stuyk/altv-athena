@@ -17,6 +17,7 @@ description: List of all the changes and current versions.
 + Fixed Progress Bar Not Requiring UID
 + Creating a Progress Bar Now Returns a UID if not Supplied
 + Fixed Interactions Overriding UID
++ Fixed Hand Off Command
 ```
 
 ## 2.0.3
