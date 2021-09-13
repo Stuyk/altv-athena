@@ -135,6 +135,11 @@ export class VehicleSystem {
             return;
         }
 
+        const dist = distance(vehicle.pos, player.pos);
+        if (dist > DEFAULT_CONFIG.VEHICLE_MAX_DISTANCE_TO_ENTER) {
+            return;
+        }
+
         VehicleSystem.handleOutsideVehicle(player, vehicle);
     }
 
@@ -173,7 +178,8 @@ export class VehicleSystem {
             return;
         }
 
-        const tasks: Array<Task> = [
+        const enterVehicleTimeout = 3250;
+        let tasks: Array<Task> = [
             // native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, i - 1, 2, 1, 0);
             {
                 nativeName: 'clearPedTasksImmediately',
@@ -182,11 +188,30 @@ export class VehicleSystem {
             },
             {
                 nativeName: 'taskEnterVehicle',
-                params: [2000, seat, 2, 1, 0],
-                timeToWaitInMs: 2000
+                params: [enterVehicleTimeout, seat, 2, 1, 0],
+                timeToWaitInMs: enterVehicleTimeout
             }
         ];
+
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
+
+        // This timeout is for killing the possibility of them not entering the vehicle.
+        // Pretty much stops them from teleporting into the vehicle.
+        alt.setTimeout(() => {
+            if (player.vehicle) {
+                return;
+            }
+
+            tasks = [
+                {
+                    nativeName: 'clearPedTasks',
+                    params: [],
+                    timeToWaitInMs: 100
+                }
+            ];
+
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
+        }, enterVehicleTimeout - 250);
     }
 
     /**

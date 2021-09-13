@@ -21,6 +21,8 @@ description: List of all the changes and current versions.
 + Creating a Progress Bar Now Returns a UID if not Supplied
 + Fixed Interactions Overriding UID
 + Fixed Hand Off Command
++ Added Max Distance Check Server Side for Entering Vehicle
++ Added Timeout for Server Side Vehicle Enter. Stops Teleporting.
 ```
 
 ## 2.0.3
