@@ -35,6 +35,7 @@ function handleCommand(player: alt.Player): void {
     player.setSyncedMeta('NoClipping', false);
     playerFuncs.emit.message(player, `No Clip: ${LocaleController.get(LOCALE_KEYS.LABEL_OFF)}`);
     player.visible = true;
+    player.health = 199;
 }
 
 function handleReset(player: alt.Player) {
