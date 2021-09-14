@@ -102,11 +102,32 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
             const value = component.drawables[index];
             const id = component.ids[index];
 
+            if (component.isDlc) {
+                const dlc = component.dlcs[index];
+
+                if (dlc === undefined || dlc === null) {
+                    alt.logWarning(
+                        `DLC was undefined for clothing component with ID: ${id}, VALUE: ${value}, TEXTURE: ${texture}`
+                    );
+                    alt.logWarning(`Make sure you add item.data.dlcs = [] to your dlc clothing item.`);
+                    continue;
+                }
+
+                if (component.isProp) {
+                    player.setDlcProp(dlc, id, value, texture);
+                    continue;
+                }
+
+                player.setDlcClothes(dlc, id, value, texture, 0);
+                continue;
+            }
+
             if (component.isProp) {
                 player.setProp(id, value, texture);
-            } else {
-                player.setClothes(id, value, texture, 0);
+                continue;
             }
+
+            player.setClothes(id, value, texture, 0);
         }
     }
 }

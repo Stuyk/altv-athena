@@ -23,6 +23,7 @@ description: List of all the changes and current versions.
 + Fixed Hand Off Command
 + Added Max Distance Check Server Side for Entering Vehicle
 + Added Timeout for Server Side Vehicle Enter. Stops Teleporting.
++ Added DLC Clothing Support on Server Side
 ```
 
 ## 2.0.3
