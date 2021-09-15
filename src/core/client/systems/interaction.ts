@@ -131,7 +131,7 @@ export class InteractionController {
 
             const isInBack = distance2d(alt.Player.local.pos, backPosition) <= 2;
 
-            if (vehicleDistance <= SHARED_CONFIG.MAX_INTERACTION_RANGE) {
+            if (vehicleDistance <= SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
                 if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
                     if (isVehicleLocked) {
@@ -140,6 +140,7 @@ export class InteractionController {
                         drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
                     }
                 }
+
                 if (!isVehicleLocked) {
                     // Press 'F' to enter vehicle
                     const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
