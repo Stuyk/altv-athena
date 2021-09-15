@@ -659,9 +659,8 @@ export class VehicleSystem {
 
         if (vehicle && vehicle.valid) {
             vehicle.resetNetOwner();
+            vehicle.isBeingPushed = false;
         }
-
-        vehicle.isBeingPushed = false;
 
         if (!player || !player.valid) {
             return;

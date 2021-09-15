@@ -15,6 +15,7 @@ import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { CharacterSystem } from '../systems/character';
 
+const PAGE_NAME = 'CharacterSelect';
 const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';
 const IDLE_ANIM = 'stand_phone_phoneputdown_idle_nowork';
 let characters: Partial<Character>[];
@@ -31,7 +32,7 @@ async function handleView(_characters: Partial<Character>[], pos: Vector3, headi
     view.on('characters:Update', updateCharacter); // Calls `creator.ts`
     view.on('characters:Delete', handleDelete);
     view.on('characters:Ready', handleReady);
-    WebViewController.openPages(['CharacterSelect']);
+    WebViewController.openPages([PAGE_NAME]);
     WebViewController.focus();
     WebViewController.showCursor(true);
 
@@ -109,7 +110,7 @@ function handleDelete(id) {
 }
 
 function handleDone() {
-    WebViewController.closePages(['CharacterSelect']);
+    WebViewController.closePages([PAGE_NAME]);
     WebViewController.unfocus();
     WebViewController.showCursor(false);
     PedEditCamera.destroy();

@@ -9,11 +9,11 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { sleep } from '../utility/sleep';
+import { WebViewController } from '../extensions/view2';
 
-const url = `http://assets/webview/client/creator/index.html`;
+const PAGE_NAME = 'CharacterCreator';
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
-let view: View;
 let oldCharacterData: Partial<Appearance> | null = {};
 let readyInterval: number;
 let noDiscard = true;
@@ -40,13 +40,16 @@ export class CreatorView {
         await PedCharacter.destroy();
         await sleep(100);
 
-        view = await View.getInstance(url, true);
+        const view = await WebViewController.get();
         view.on('creator:ReadyDone', CreatorView.handleReadyDone);
         view.on('creator:Done', CreatorView.handleDone);
         view.on('creator:Cancel', CreatorView.handleCancel);
         view.on('creator:Sync', CreatorView.handleSync);
         view.on('creator:CheckName', CreatorView.handleCheckName);
         view.on('creator:DisableControls', CreatorView.handleDisableControls);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
 
         await PedCharacter.create(true, pos, heading);
         await sleep(100);
@@ -58,15 +61,13 @@ export class CreatorView {
     }
 
     static close() {
-        if (!view) {
-            return;
-        }
-
-        native.doScreenFadeOut(100);
-        oldCharacterData = null;
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
         PedEditCamera.destroy();
         PedCharacter.destroy();
-        view.close();
+        native.doScreenFadeOut(100);
+        oldCharacterData = null;
     }
 
     static handleDone(newData, infoData, name: string) {
@@ -79,16 +80,18 @@ export class CreatorView {
         alt.emitServer(View_Events_Creator.Done, oldCharacterData);
     }
 
-    static waitForReady() {
+    static async waitForReady() {
+        const view = await WebViewController.get();
         view.emit('creator:Ready', noDiscard, noName);
     }
 
-    static handleReadyDone() {
+    static async handleReadyDone() {
         if (readyInterval !== undefined || readyInterval !== null) {
             alt.clearInterval(readyInterval);
             readyInterval = null;
         }
 
+        const view = await WebViewController.get();
         view.emit('creator:SetData', oldCharacterData, totalCharacters);
         view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
     }
@@ -97,7 +100,8 @@ export class CreatorView {
         alt.emitServer(View_Events_Creator.AwaitName, name);
     }
 
-    static handleNameFinish(result: boolean): void {
+    static async handleNameFinish(result: boolean) {
+        const view = await WebViewController.get();
         view.emit('creator:IsNameAvailable', result);
     }
 

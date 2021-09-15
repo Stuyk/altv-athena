@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, shallowRef } from 'vue';
 import ExCharacter from '../../exampleData/ExCharacter';
 import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
@@ -74,7 +74,13 @@ export default defineComponent({
         Icon,
         Modal,
         Toolbar,
-        Frame
+        Frame,
+        Appearance, 
+        Structure, 
+        Hair, 
+        Overlays, 
+        Makeup, 
+        Info
     },
     data() {
         return {
@@ -109,7 +115,14 @@ export default defineComponent({
                 gender: null,
                 name: ''
             },
-            navOptions: [Appearance, Structure, Hair, Overlays, Makeup, Info],
+            navOptions: [
+                'Appearance', 
+                'Structure', 
+                'Hair', 
+                'Overlays', 
+                'Makeup', 
+                'Info'
+            ],
             noDiscard: false,
             noName: false,
             totalCharacters: 1,
@@ -181,6 +194,10 @@ export default defineComponent({
             alt.emit('creator:ReadyDone');
         },
         setParameter(parameter, value: number) {
+            if (typeof value !== 'number') {
+                value = parseFloat(value);
+            }
+
             if (parameter === 'sex') {
                 if (value === 0) {
                     this.data.faceFather = 33;

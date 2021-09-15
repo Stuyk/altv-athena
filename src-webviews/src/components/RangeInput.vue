@@ -25,10 +25,6 @@ export default defineComponent({
         };
     },
     props: {
-        uid: {
-            type: String,
-            required: true
-        },
         indexValue: {
             type: Number,
             required: true

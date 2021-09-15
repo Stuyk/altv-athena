@@ -12,7 +12,6 @@ import { BaseHUD } from './hud/hud';
 
 const url = `http://assets/webview/client/clothing/index.html`;
 let view: View;
-let open = false;
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleMetaChanged);
 alt.onServer(View_Events_Clothing.Open, handleView);
@@ -25,7 +24,6 @@ async function handleView() {
     view.on('clothing:Exit', handleExit);
     view.on('clothing:DisableControls', handleControls);
     view.on('clothing:Ready', handleReady);
-    open = true;
     BaseHUD.setHudVisibility(false);
 
     // const ped = await PedCharacter.create(true, pos, { x: 0.18, y: -0.5, z: 0 });
@@ -98,7 +96,6 @@ function handleExit() {
     PedEditCamera.destroy();
     alt.emitServer(View_Events_Clothing.Exit);
     view.close();
-    open = false;
     BaseHUD.setHudVisibility(true);
 }
 
@@ -183,10 +180,6 @@ export function handleUpdate(components: Array<ClothingComponent>, justSync = fa
     }
 
     if (justSync) {
-        return;
-    }
-
-    if (!open) {
         return;
     }
 

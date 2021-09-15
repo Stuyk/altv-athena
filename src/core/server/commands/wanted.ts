@@ -29,5 +29,5 @@ function handleCommand(player: alt.Player, id: any = null, stars: any): void {
     }
 
     playerFuncs.emit.message(player, `Wanted Level set to: ${stars}`);
-    playerFuncs.set.wantedLevel(player, stars);
+    playerFuncs.set.wantedLevel(target, stars);
 }

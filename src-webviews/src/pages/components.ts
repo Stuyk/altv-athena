@@ -8,10 +8,10 @@ import Login from './login/Login.vue';
 // All components that you want to load...
 // New interfaces, menus, etc.
 const componentList = {
-    CharacterCreator,
-    CharacterSelect,
-    Designs,
-    Login
+    CharacterCreator: shallowRef(CharacterCreator),
+    CharacterSelect: shallowRef(CharacterSelect),
+    Designs: shallowRef(Designs),
+    Login: shallowRef(Login)
 };
 
 function generateComponentList(): Array<{ name: string; component: unknown }> {

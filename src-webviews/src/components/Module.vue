@@ -4,7 +4,7 @@
             <span class="overline" :class="show ? 'amber--text' : 'grey--text'">
                 {{ name }}
             </span>
-            <Button :color="!show ? 'blue' : 'amber'" @click="show = !show" :id="uid">
+            <Button :color="!show ? 'blue' : 'amber'" @click="show = !show">
                 <Icon :size="14" :icon="show ? 'icon-minus' : 'icon-plus'"></Icon>
             </Button>
         </div>
