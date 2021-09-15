@@ -102,7 +102,7 @@ export const DEFAULT_CONFIG = {
     SPAWN_VEHICLES_ON_JOIN: false, // Will spawn all player vehicles not in a garage on join. Does not work if SPAWN_ALL_VEHICLES_ON_START is enabled.
     DESPAWN_VEHICLES_ON_LOGOUT: false, // Will despawn all player vehicles on logout.
     VEHICLE_SPAWN_TIMEOUT: 24, // Hours that must pass since a vehicle was last used to avoid spawning on server restart.
-    VEHICLE_MAX_DISTANCE_TO_ENTER: 2.5, // Max distance to enter a vehicle.
+    VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
     VEHICLE_GARAGES: [

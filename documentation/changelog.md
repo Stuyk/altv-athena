@@ -28,6 +28,8 @@ description: List of all the changes and current versions.
 + Fix Pushing Vehicle Validity
 + Fix Seatbelt Command
 + Add Set Into Vehicle / Vehicle Seat Teleport
++ Removed Dead Config Options
++ Added Vehicle Interaction Range to Shared Config
 ```
 
 ## 2.0.3
