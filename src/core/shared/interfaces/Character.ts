@@ -156,7 +156,7 @@ export interface Character {
      * @type {string}
      * @memberof Character
      */
-    faction: string;
+    faction: string | null;
 }
 
 export const CharacterDefaults: Partial<Character> = {
@@ -171,5 +171,5 @@ export const CharacterDefaults: Partial<Character> = {
     health: 199,
     armour: 0,
     hours: 0,
-    wanted: 0
+    wanted: 0,
 };

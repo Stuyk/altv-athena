@@ -1,10 +1,39 @@
 import { Vector3 } from './Vector';
 
 export interface IObject {
+    /**
+     * Position of the Object in a 3D space.
+     * @type {Vector3}
+     * @memberof IObject
+     */
     pos: Vector3;
+
+    /**
+     * The model name this object.
+     * @type {string}
+     * @memberof IObject
+     */
     model: string;
+
+    /**
+     * The rotation of this object.
+     * @type {Vector3}
+     * @memberof IObject
+     */
     rot?: Vector3;
+
+    /**
+     * The max distance this object should render at.
+     * @type {number}
+     * @memberof IObject
+     */
     maxDistance?: number;
+
+    /**
+     * A unique identifier for this object.
+     * @type {string}
+     * @memberof IObject
+     */
     uid: string;
 
     /**

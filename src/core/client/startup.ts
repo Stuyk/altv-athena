@@ -23,7 +23,6 @@ import './systems/dealership';
 import './systems/death';
 import './systems/debug';
 import './systems/disable';
-import './systems/help';
 import './systems/hologram';
 import './systems/hud';
 import './systems/interaction';
