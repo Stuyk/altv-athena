@@ -24,6 +24,8 @@ description: List of all the changes and current versions.
 + Added Max Distance Check Server Side for Entering Vehicle
 + Added Timeout for Server Side Vehicle Enter. Stops Teleporting.
 + Added DLC Clothing Support on Server Side
++ Fix Wanted Level Values and Text
++ Fix Pushing Vehicle Validity
 ```
 
 ## 2.0.3

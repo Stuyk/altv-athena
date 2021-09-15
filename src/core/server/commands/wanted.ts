@@ -19,8 +19,18 @@ function handleCommand(player: alt.Player, id: any = null, stars: any): void {
 
     if (stars === null) {
         stars = 0;
-    } else {
+    }
+
+    if (typeof stars === 'string') {
         stars = parseInt(stars);
+    }
+
+    if (stars >= 6) {
+        stars = 5;
+    }
+
+    if (stars < 0) {
+        stars = 0;
     }
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === id);
