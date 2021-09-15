@@ -5,6 +5,7 @@ export interface ProgressBar {
     milliseconds: number;
     distance: number;
     text?: string;
+    percentageEnabled?: any;
     startTime?: number;
     finalTime?: number;
 }
