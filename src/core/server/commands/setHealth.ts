@@ -23,8 +23,8 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
         value = 99;
     }
 
-    if (value > 200) {
-        value = 200;
+    if (value > 199) {
+        value = 199;
     }
 
     if (targetPlayerID === null) {
