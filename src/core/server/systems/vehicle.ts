@@ -229,6 +229,22 @@ export class VehicleSystem {
     }
 
     /**
+     * Teleport a player into a vehicle seat.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @memberof VehicleSystem
+     */
+    static setIntoVehicle(player: alt.Player, vehicle: alt.Vehicle, clientSideSeat: number = -1) {
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        playerFuncs.safe.setPosition(player, vehicle.pos.x, vehicle.pos.y, vehicle.pos.z);
+        alt.emitClient(player, VEHICLE_EVENTS.SET_INTO, vehicle, clientSideSeat);
+    }
+
+    /**
      * Called when a player is already inside of a vehicle and hit the interaction button.
      * @static
      * @param {alt.Player} player
