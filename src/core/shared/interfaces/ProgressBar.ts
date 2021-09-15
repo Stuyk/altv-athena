@@ -42,6 +42,8 @@ export interface ProgressBar {
      */
     text?: string;
 
+    percentageEnabled?: boolean;
+
     /**
      * Do not set this. Leave it alone.
      * @type {number}

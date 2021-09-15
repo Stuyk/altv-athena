@@ -44,13 +44,23 @@ function drawBars() {
         drawRectangle(bar.position, { x: timeDiff, y: barHeight }, bar.color);
 
         const percentageText = (percentage * 100).toFixed(2);
-        const actualText = bar.text ? `${bar.text} (${percentageText}%)` : `${percentageText}%`;
-        drawText3D(actualText, bar.position, 0.35, {
-            r: 255,
-            g: 255,
-            b: 255,
-            a: 255
-        });
+        if (bar.percentageEnabled) {
+            const actualText = bar.text ? `${bar.text} (${percentageText}%)` : `${percentageText}%`;
+            drawText3D(actualText, bar.position, 0.35, {
+                r: 255,
+                g: 255,
+                b: 255,
+                a: 255
+            });
+        } else {
+            const actualText = bar.text ? `${bar.text}` : `${bar.text}`;
+            drawText3D(actualText, bar.position, 0.35, {
+                r: 255,
+                g: 255,
+                b: 255,
+                a: 255
+            });
+        }
     }
 }
 
