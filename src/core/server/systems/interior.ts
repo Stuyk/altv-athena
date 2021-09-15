@@ -17,7 +17,6 @@ import { Collections } from '../interface/DatabaseCollections';
 import { InteriorInfo } from '../interface/InteriorInfo';
 import Logger from '../utility/athenaLogger';
 import { getMissingNumber } from '../utility/math';
-import { EventController } from './athenaEvent';
 import { InteractionController } from './interaction';
 import { MarkerController } from './marker';
 import { ObjectController } from './object';

@@ -4,45 +4,96 @@ import { View_Events_Characters } from '../../shared/enums/views';
 import { Character } from '../../shared/interfaces/Character';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { View } from '../extensions/view';
-import { createPedEditCamera, destroyPedEditCamera, setFov, setZPos } from '../utility/camera';
-import { handleEquipment } from './clothing';
-import { handleSync } from './creator';
+import PedEditCamera from '../utility/camera';
+import { WebViewController } from '../extensions/view2';
+import { Appearance } from '../../shared/interfaces/Appearance';
+import { sleep } from '../utility/sleep';
+import { playPedAnimation } from '../systems/animations';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { Item } from '../../shared/interfaces/Item';
+import { PedCharacter } from '../utility/characterPed';
+import { Vector3 } from '../../shared/interfaces/Vector';
+import { CharacterSystem } from '../systems/character';
 
-const url = `http://assets/webview/client/characters/index.html`;
-let view: View;
+const PAGE_NAME = 'CharacterSelect';
+const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';
+const IDLE_ANIM = 'stand_phone_phoneputdown_idle_nowork';
 let characters: Partial<Character>[];
-let open = false;
 
 alt.onServer(View_Events_Characters.Show, handleView);
 alt.onServer(View_Events_Characters.Done, handleDone);
 
-async function handleView(_characters: Partial<Character>[]) {
+async function handleView(_characters: Partial<Character>[], pos: Vector3, heading: number) {
     characters = _characters;
 
-    view = await View.getInstance(url, true);
-    view.on('load', handleLoad);
+    const view = await WebViewController.get();
     view.on('characters:Select', handleSelect);
     view.on('characters:New', handleNew);
-    view.on('characters:Update', handleSync); // Calls `creator.ts`
-    view.on('characters:Equipment', handleEquipment);
+    view.on('characters:Update', updateCharacter); // Calls `creator.ts`
     view.on('characters:Delete', handleDelete);
     view.on('characters:Ready', handleReady);
+    WebViewController.openPages([PAGE_NAME]);
+    WebViewController.focus();
+    WebViewController.showCursor(true);
 
-    // Handle Duplicate View Instance Creations
-    if (open) {
-        view.emit('characters:Set', characters);
-        return;
-    }
+    await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
+    await PedCharacter.apply(_characters[0].appearance as Appearance);
 
-    open = true;
-    createPedEditCamera();
-    setFov(80);
-    setZPos(0.2);
+    await sleep(300);
+
+    await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
+
+    PedEditCamera.setFov(40);
+    PedEditCamera.setZPos(0.5);
 }
 
-function handleReady() {
+async function updateCharacter(index: number) {
+    native.doScreenFadeOut(100);
+    await sleep(100);
+
+    await PedCharacter.apply(characters[index].appearance as Appearance);
+    PedEditCamera.update(PedCharacter.get());
+    await sleep(100);
+
+    CharacterSystem.applyEquipment(PedCharacter.get(), characters[index].equipment as Array<Item>);
+
+    await new Promise((resolve: Function) => {
+        let count = 0;
+
+        const interval = alt.setInterval(() => {
+            playPedAnimation(
+                PedCharacter.get(),
+                IDLE_ANIM_DICT,
+                IDLE_ANIM,
+                ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT
+            );
+
+            const isInAnim = native.isEntityPlayingAnim(PedCharacter.get(), IDLE_ANIM_DICT, IDLE_ANIM, 3);
+
+            count += 1;
+
+            if (count >= 25) {
+                alt.clearInterval(interval);
+                resolve();
+            }
+
+            if (!isInAnim) {
+                return;
+            }
+
+            alt.clearInterval(interval);
+            resolve();
+        }, 100);
+    });
+
+    await sleep(100);
+    native.doScreenFadeIn(100);
+}
+
+async function handleReady() {
+    const view = await WebViewController.get();
     view.emit('characters:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CHARACTERS));
+    view.emit('characters:Set', characters);
 }
 
 async function handleSelect(id) {
@@ -54,26 +105,15 @@ function handleNew() {
     alt.emitServer(View_Events_Characters.New);
 }
 
-function handleLoad() {
-    if (!view) {
-        return;
-    }
-
-    view.emit('characters:Set', characters);
-}
-
 function handleDelete(id) {
     alt.emitServer(View_Events_Characters.Delete, id);
 }
 
 function handleDone() {
-    if (!view) {
-        open = false;
-        return;
-    }
-
-    destroyPedEditCamera();
+    WebViewController.closePages([PAGE_NAME]);
+    WebViewController.unfocus();
+    WebViewController.showCursor(false);
+    PedEditCamera.destroy();
+    PedCharacter.destroy();
     native.switchInPlayer(1500);
-    view.close();
-    open = false;
 }

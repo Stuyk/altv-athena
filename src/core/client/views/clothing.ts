@@ -7,18 +7,11 @@ import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { View } from '../extensions/view';
-import {
-    createPedEditCamera,
-    destroyPedEditCamera,
-    setFov,
-    setShouldDisableControls,
-    setZPos
-} from '../utility/camera';
+import PedEditCamera from '../utility/camera';
 import { BaseHUD } from './hud/hud';
 
 const url = `http://assets/webview/client/clothing/index.html`;
 let view: View;
-let open = false;
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, handleMetaChanged);
 alt.onServer(View_Events_Clothing.Open, handleView);
@@ -31,11 +24,12 @@ async function handleView() {
     view.on('clothing:Exit', handleExit);
     view.on('clothing:DisableControls', handleControls);
     view.on('clothing:Ready', handleReady);
-    open = true;
     BaseHUD.setHudVisibility(false);
-    createPedEditCamera({ x: 0.15, y: -0.5, z: 0 });
-    setFov(70);
-    setZPos(0.6);
+
+    // const ped = await PedCharacter.create(true, pos, { x: 0.18, y: -0.5, z: 0 });
+    PedEditCamera.create(alt.Player.local.scriptID, { x: 0.15, y: -0.5, z: 0 });
+    PedEditCamera.setFov(70);
+    PedEditCamera.setZPos(0.6);
 }
 
 function handleReady() {
@@ -65,7 +59,7 @@ export function handleEquipment(items: Array<Item>) {
     }
 
     // Default Components
-    if (alt.Player.local.meta.appearance.sex === 0) {
+    if (alt.Player.local.model !== 1885233650) {
         native.setPedComponentVariation(alt.Player.local.scriptID, 1, 0, 0, 0); // mask
         native.setPedComponentVariation(alt.Player.local.scriptID, 3, 15, 0, 0); // arms
         native.setPedComponentVariation(alt.Player.local.scriptID, 4, 14, 0, 0); // pants
@@ -95,14 +89,13 @@ export function handleEquipment(items: Array<Item>) {
 }
 
 function handleControls(value: boolean) {
-    setShouldDisableControls(value);
+    PedEditCamera.disableControls(value);
 }
 
 function handleExit() {
-    destroyPedEditCamera();
+    PedEditCamera.destroy();
     alt.emitServer(View_Events_Clothing.Exit);
     view.close();
-    open = false;
     BaseHUD.setHudVisibility(true);
 }
 
@@ -187,10 +180,6 @@ export function handleUpdate(components: Array<ClothingComponent>, justSync = fa
     }
 
     if (justSync) {
-        return;
-    }
-
-    if (!open) {
         return;
     }
 

@@ -125,9 +125,18 @@ export class VehicleSystem {
             return;
         }
 
+        if (player.data.isDead) {
+            return;
+        }
+
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
 
         if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        const dist = distance(vehicle.pos, player.pos);
+        if (dist > DEFAULT_CONFIG.VEHICLE_MAX_DISTANCE_TO_ENTER) {
             return;
         }
 
@@ -164,7 +173,13 @@ export class VehicleSystem {
             return;
         }
 
-        const tasks: Array<Task> = [
+        if (vehicle.isBeingPushed) {
+            playerFuncs.emit.notification(player, `~r~Cannot enter vehicle while it is being pushed.`);
+            return;
+        }
+
+        const enterVehicleTimeout = 3250;
+        let tasks: Array<Task> = [
             // native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, i - 1, 2, 1, 0);
             {
                 nativeName: 'clearPedTasksImmediately',
@@ -173,11 +188,30 @@ export class VehicleSystem {
             },
             {
                 nativeName: 'taskEnterVehicle',
-                params: [2000, seat, 2, 1, 0],
-                timeToWaitInMs: 2000
+                params: [enterVehicleTimeout, seat, 2, 1, 0],
+                timeToWaitInMs: enterVehicleTimeout
             }
         ];
+
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
+
+        // This timeout is for killing the possibility of them not entering the vehicle.
+        // Pretty much stops them from teleporting into the vehicle.
+        alt.setTimeout(() => {
+            if (player.vehicle) {
+                return;
+            }
+
+            tasks = [
+                {
+                    nativeName: 'clearPedTasks',
+                    params: [],
+                    timeToWaitInMs: 100
+                }
+            ];
+
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
+        }, enterVehicleTimeout - 250);
     }
 
     /**
@@ -192,6 +226,22 @@ export class VehicleSystem {
         }
 
         return (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
+    }
+
+    /**
+     * Teleport a player into a vehicle seat.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @memberof VehicleSystem
+     */
+    static setIntoVehicle(player: alt.Player, vehicle: alt.Vehicle, clientSideSeat: number = -1) {
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        playerFuncs.safe.setPosition(player, vehicle.pos.x, vehicle.pos.y, vehicle.pos.z);
+        alt.emitClient(player, VEHICLE_EVENTS.SET_INTO, vehicle, clientSideSeat);
     }
 
     /**
@@ -361,7 +411,7 @@ export class VehicleSystem {
         }
 
         // Prune Temporary Vehicles
-        if (!vehicle.isTemporary) {
+        if (!vehicle.isTemporary || vehicle.overrideTemporaryDeletion) {
             return;
         }
 
@@ -385,6 +435,10 @@ export class VehicleSystem {
      */
     static toggleEngine(player: alt.Player) {
         if (!player || !player.vehicle || !player.vehicle.driver) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 
@@ -442,7 +496,12 @@ export class VehicleSystem {
         const vehicle = player.vehicle
             ? player.vehicle
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
+
         if (!vehicle) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 
@@ -499,6 +558,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (player.data.isDead) {
+            return;
+        }
+
         const vehicle = player.vehicle
             ? player.vehicle
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
@@ -541,8 +604,20 @@ export class VehicleSystem {
         });
     }
 
+    /**
+     * Start pushing a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vector3} position
+     * @return {*}  {boolean}
+     * @memberof VehicleSystem
+     */
     static startPush(player: alt.Player, position: alt.Vector3): boolean {
         if (!player || !player.valid) {
+            return false;
+        }
+
+        if (player.data.isDead) {
             return false;
         }
 
@@ -566,6 +641,11 @@ export class VehicleSystem {
             return false;
         }
 
+        if (vehicle.isBeingPushed) {
+            playerFuncs.emit.notification(player, `~r~Vehicle is already being pushed.`);
+            return false;
+        }
+
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
             playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
             return false;
@@ -576,17 +656,30 @@ export class VehicleSystem {
         }
 
         player.isPushingVehicle = true;
+        vehicle.isBeingPushed = true;
         vehicle.setNetOwner(player);
         player.attachTo(vehicle, 0, 6286, position, new alt.Vector3(0, 0, 0), true, false);
         alt.emitClient(player, VEHICLE_EVENTS.PUSH, vehicle);
         return true;
     }
 
+    /**
+     * Stop a player from pushing a vehicle.
+     * @static
+     * @param {alt.Player} player
+     * @return {*}
+     * @memberof VehicleSystem
+     */
     static stopPush(player: alt.Player) {
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
 
         if (vehicle && vehicle.valid) {
             vehicle.resetNetOwner();
+            vehicle.isBeingPushed = false;
+        }
+
+        if (!player || !player.valid) {
+            return;
         }
 
         player.isPushingVehicle = false;
@@ -604,6 +697,10 @@ export class VehicleSystem {
      */
     static async storage(player: alt.Player, vehicle: alt.Vehicle) {
         if (!player || !player.valid || player.data.isDead) {
+            return;
+        }
+
+        if (player.data.isDead) {
             return;
         }
 

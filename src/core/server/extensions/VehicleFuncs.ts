@@ -303,13 +303,24 @@ export default class VehicleFuncs {
      * @return {alt.Vehicle}
      * @memberof VehicleFuncs
      */
-    static tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: alt.IVector3): alt.Vehicle {
+    static tempVehicle(
+        player: alt.Player,
+        model: string,
+        pos: alt.IVector3,
+        rot: alt.IVector3,
+        doNotDelete: boolean = false
+    ): alt.Vehicle {
         const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         vehicle.player_id = player.id;
         vehicle.behavior = TEMPORARY_VEHICLE;
         vehicle.numberPlateText = 'TEMP';
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
         vehicle.isTemporary = true;
+
+        if (doNotDelete) {
+            vehicle.overrideTemporaryDeletion = true;
+        }
+
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
         return vehicle;

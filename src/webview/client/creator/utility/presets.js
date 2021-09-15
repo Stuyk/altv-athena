@@ -1,4 +1,4 @@
-const malePresets = [
+export const malePresets = [
     {
         faceMother: 0,
         faceFather: 0,
@@ -104,7 +104,7 @@ const malePresets = [
     }
 ];
 
-const femalePresets = [
+export const femalePresets = [
     {
         faceMother: 45,
         faceFather: 45,

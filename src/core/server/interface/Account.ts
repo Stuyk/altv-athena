@@ -9,6 +9,7 @@ import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 export interface Account {
     _id: any;
     discord: string;
+    email: string;
     ips: Array<string>;
     hardware: Array<string>;
     lastLogin: number;

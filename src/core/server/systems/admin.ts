@@ -5,6 +5,14 @@ import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 
 export class AdminController {
+    /**
+     * Used to ban a player from the server.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} reason
+     * @return {Promise<boolean>}
+     * @memberof AdminController
+     */
     static async banPlayer(player: alt.Player, reason: string): Promise<boolean> {
         if (!player.accountData) {
             return false;
@@ -16,6 +24,13 @@ export class AdminController {
         return true;
     }
 
+    /**
+     * Used to unban a player from the server.
+     * @static
+     * @param {string} discord
+     * @return {Promise<boolean>}
+     * @memberof AdminController
+     */
     static async unbanPlayer(discord: string): Promise<boolean> {
         const account = await Database.fetchData<Account>('discord', discord, Collections.Accounts);
         if (!account) {

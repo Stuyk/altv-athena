@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { FactionSystem } from '../systems/factions';
@@ -9,7 +7,10 @@ import { FactionInternalSystem } from '../systems/factionsInternal';
 
 function handleCreate(player: alt.Player, ...name: string[]): void {
     if (!player || !player.valid || player.data.faction) {
-        playerFuncs.emit.message(player, `Leave your faction or transfer ownership before creating a new one.`);
+        playerFuncs.emit.message(
+            player,
+            `Leave your faction (/leavefaction) or transfer ownership before creating a new one.`
+        );
         return;
     }
 
@@ -60,11 +61,13 @@ async function handleHandOff(player: alt.Player) {
     }
 
     const result = await FactionInternalSystem.handOffFaction(faction._id.toString(), nextInLine.id, true);
-    if (!result) {
+    if (!result.status) {
         playerFuncs.emit.message(player, `Could not hand off faction.`);
         return;
     }
 
+    player.data.faction = null;
+    await playerFuncs.save.field(player, 'faction', player.data.faction);
     playerFuncs.emit.message(player, `Handed off faction to ${nextInLine.name}`);
 }
 
@@ -115,6 +118,20 @@ function handleAccept(player: alt.Player) {
     player.lastFactionInvite = null;
 }
 
+async function handleLeave(player: alt.Player) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    if (!player.data.faction) {
+        playerFuncs.emit.message(player, `You are not in a faction.`);
+        return;
+    }
+
+    const response = await FactionSystem.leave(player);
+    playerFuncs.emit.notification(player, response.response);
+}
+
 ChatController.addCommand(
     'factiontake',
     '/factiontake [id] - Take Faction Ownership',
@@ -132,3 +149,4 @@ ChatController.addCommand(
 ChatController.addCommand('factionaccept', '/factionaccept - Accept latest invite.', PERMISSIONS.NONE, handleAccept);
 ChatController.addCommand('factioninvite', '/factioninvite [id] - Invite to faction', PERMISSIONS.NONE, handleInvite);
 ChatController.addCommand('factioncreate', '/factioncreate [name] - Create a faction', PERMISSIONS.ADMIN, handleCreate);
+ChatController.addCommand('factionleave', '/factionleave - Leave the faction', PERMISSIONS.NONE, handleLeave);

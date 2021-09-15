@@ -75,7 +75,7 @@ export class FactionInternalSystem {
         return true;
     }
 
-    static async refreshBlipsAndInteractions(faction: string) {
+    static async refreshBlipsAndInteractions(faction: string, doNotRefresh: boolean = false) {
         if (!factions[faction]) {
             return;
         }
@@ -91,6 +91,17 @@ export class FactionInternalSystem {
         // Storage
         InteractionController.remove(typeStorage, storageName);
         MarkerController.remove(storageName);
+
+        // Weapons
+        InteractionController.remove(typeWeapons, weaponsName);
+        MarkerController.remove(weaponsName);
+
+        // Blip
+        BlipController.remove(blipName);
+
+        if (doNotRefresh) {
+            return;
+        }
 
         if (factions[faction].storageLocation) {
             InteractionController.add({
@@ -110,10 +121,6 @@ export class FactionInternalSystem {
             });
         }
 
-        // Weapons
-        InteractionController.remove(typeWeapons, weaponsName);
-        MarkerController.remove(weaponsName);
-
         if (factions[faction].weaponLocation) {
             InteractionController.add({
                 type: typeWeapons,
@@ -131,9 +138,6 @@ export class FactionInternalSystem {
                 color: new alt.RGBA(255, 255, 255, 100)
             });
         }
-
-        // Blip
-        BlipController.remove(blipName);
 
         if (factions[faction].pos) {
             BlipController.append({
@@ -224,6 +228,9 @@ export class FactionInternalSystem {
         }
 
         const factionName = factions[faction].name;
+
+        // Delete / Remove Blips, Markers, etc.
+        FactionInternalSystem.refreshBlipsAndInteractions(factionName, true);
 
         await Database.updateDataByFieldMatch('faction', faction, { faction: null }, Collections.Characters);
         const openInterfacePlayers = openFactionInterfaces[faction];
@@ -565,29 +572,29 @@ export class FactionInternalSystem {
     /**
      * Internal callable function to remove a member from this faction based on their character id.
      * @static
-     * @param {string} id
+     * @param {string} factionID
      * @param {string} characterID
      * @return {Promise<boolean>}
      * @memberof FactionSystem
      */
-    static async removeMember(id: string, characterID: string): Promise<IResponse> {
-        if (!factions[id]) {
+    static async removeMember(factionID: string, characterID: string): Promise<IResponse> {
+        if (!factions[factionID]) {
             return { status: false, response: 'The faction you are in no longer exists.' };
         }
 
-        const memberIndex = factions[id].players.findIndex((member) => member.id === characterID);
+        const memberIndex = factions[factionID].players.findIndex((member) => member.id === characterID);
         if (memberIndex <= -1) {
             return { status: false, response: 'Target player is not in your faction.' };
         }
 
-        const target = alt.Player.all.find((x) => x.data && x.data._id === characterID);
+        const target = alt.Player.all.find((x) => x.data && x.data._id.toString() === characterID);
         if (target) {
             target.data.faction = null;
             await playerFuncs.save.field(target, 'faction', target.data.faction);
         }
 
-        const oldData = factions[id].players.splice(memberIndex, 1)[0];
-        await this.save(id, { players: factions[id].players });
+        const oldData = factions[factionID].players.splice(memberIndex, 1)[0];
+        await this.save(factionID, { players: factions[factionID].players });
         return { status: true, response: `${oldData.name} was removed from your faction.` };
     }
 

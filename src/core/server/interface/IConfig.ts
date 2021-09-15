@@ -7,4 +7,5 @@ export interface IConfig {
     MONGO_PASSWORD?: string;
     MONGO_COLLECTIONS?: string;
     WEBSERVER_IP?: string;
+    VUE_DEBUG?: string | boolean;
 }

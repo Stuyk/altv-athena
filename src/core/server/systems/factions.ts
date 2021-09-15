@@ -605,4 +605,35 @@ export class FactionSystem {
         FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
         return response;
     }
+
+    /**
+     * Used to leave the faction.
+     * @static
+     * @param {alt.Player} player
+     * @memberof FactionSystem
+     */
+    static async leave(player: alt.Player): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: `Could not find your faction.` };
+        }
+
+        if (faction.players[0].id === player.data._id.toString()) {
+            return { status: false, response: `Could not quit faction because you are the leader.` };
+        }
+
+        const response = await FactionInternalSystem.removeMember(player.data.faction, player.data._id.toString());
+
+        if (response.status) {
+            response.response = `${player.data.name} quit the faction.`;
+        }
+
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
+    }
 }

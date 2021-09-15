@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { getClosestVectorByPos } from '../../shared/utility/vector';
+import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -16,6 +16,11 @@ function openMenu() {
 
     const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
     if (!vehicle || !vehicle.valid) {
+        return;
+    }
+
+    const dist = distance(alt.Player.local.pos, vehicle.pos);
+    if (dist >= 4) {
         return;
     }
 

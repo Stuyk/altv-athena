@@ -1,0 +1,83 @@
+.black--fill-hover:hover {
+    background: #000000 !important;
+}
+
+.white--fill-hover:hover {
+    background: #ffffff !important;
+}
+
+.red--fill-hover:hover {
+    background: #f44336 !important;
+}
+
+.pink--fill-hover:hover {
+    background: #e91e63 !important;
+}
+
+.purple--fill-hover:hover {
+    background: #9c27b0 !important;
+}
+
+.deep-purple--fill-hover:hover {
+    background: #673ab7 !important;
+}
+
+.indigo--fill-hover:hover {
+    background: #3f51b5 !important;
+}
+
+.blue--fill-hover:hover {
+    background: #2196f3 !important;
+}
+
+.light-blue--fill-hover:hover {
+    background: #03a9f4 !important;
+}
+
+.cyan--fill-hover:hover {
+    background: #00bcd4 !important;
+}
+
+.teal--fill-hover:hover {
+    background: #009688 !important;
+}
+
+.green--fill-hover:hover {
+    background: #4caf50 !important;
+}
+
+.light-green--fill-hover:hover {
+    background: #8bc34a !important;
+}
+
+.lime--fill-hover:hover {
+    background: #cddc39 !important;
+}
+
+.yellow--fill-hover:hover {
+    background: #ffeb3b !important;
+}
+
+.amber--fill-hover:hover {
+    background: #ffc107 !important;
+}
+
+.orange--fill-hover:hover {
+    background: #ff9800 !important;
+}
+
+.deep-orange--fill-hover:hover {
+    background: #ff5722 !important;
+}
+
+.brown--fill-hover:hover {
+    background: #795548 !important;
+}
+
+.blue-grey--fill-hover:hover {
+    background: #607d8b !important;
+}
+
+.grey--fill-hover:hover {
+    background: #9e9e9e !important;
+}

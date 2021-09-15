@@ -1,0 +1,451 @@
+.display-4 {
+    font-size: 6rem !important;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.015625em !important;
+}
+
+.display-3 {
+    font-size: 3.75rem !important;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em !important;
+}
+
+.display-2 {
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+}
+
+.display-1 {
+    font-size: 2.125rem !important;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.0073529412em !important;
+}
+
+.headline {
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+}
+
+.title {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em !important;
+}
+
+.subtitle-2 {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    letter-spacing: 0.0071428571em !important;
+    line-height: 1.375rem;
+}
+
+.subtitle-1 {
+    font-size: 1rem !important;
+    font-weight: normal;
+    letter-spacing: 0.009375em !important;
+    line-height: 1.75rem;
+}
+
+.body-2 {
+    font-size: 0.875rem !important;
+    font-weight: 400;
+    letter-spacing: 0.0178571429em !important;
+    line-height: 1.25rem;
+}
+
+.body-1 {
+    font-size: 1rem !important;
+    font-weight: 400;
+    letter-spacing: 0.03125em !important;
+    line-height: 1.5rem;
+}
+
+.caption {
+    font-size: 0.75rem !important;
+    font-weight: 400;
+    letter-spacing: 0.0333333333em !important;
+    line-height: 1.25rem;
+}
+
+.overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    text-transform: uppercase;
+}
+
+.text-sm-h1 {
+    font-size: 6rem !important;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.015625em !important;
+}
+
+.text-sm-h2 {
+    font-size: 3.75rem !important;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em !important;
+}
+
+.text-sm-h3 {
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+}
+
+.text-sm-h4 {
+    font-size: 2.125rem !important;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.0073529412em !important;
+}
+
+.text-sm-h5 {
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+}
+
+.text-sm-h6 {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em !important;
+}
+
+.text-sm-subtitle-1 {
+    font-size: 1rem !important;
+    font-weight: normal;
+    line-height: 1.75rem;
+    letter-spacing: 0.009375em !important;
+}
+
+.text-sm-subtitle-2 {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 1.375rem;
+    letter-spacing: 0.0071428571em !important;
+}
+
+.text-sm-body-1 {
+    font-size: 1rem !important;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.03125em !important;
+}
+
+.text-sm-body-2 {
+    font-size: 0.875rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0178571429em !important;
+}
+
+.text-sm-button {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 2.25rem;
+    letter-spacing: 0.0892857143em !important;
+    text-transform: uppercase !important;
+}
+
+.text-sm-caption {
+    font-size: 0.75rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0333333333em !important;
+}
+
+.text-sm-overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    text-transform: uppercase !important;
+}
+
+.text-md-h1 {
+    font-size: 6rem !important;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.015625em !important;
+}
+
+.text-md-h2 {
+    font-size: 3.75rem !important;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em !important;
+}
+
+.text-md-h3 {
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+}
+
+.text-md-h4 {
+    font-size: 2.125rem !important;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.0073529412em !important;
+}
+
+.text-md-h5 {
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+}
+
+.text-md-h6 {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em !important;
+}
+
+.text-md-subtitle-1 {
+    font-size: 1rem !important;
+    font-weight: normal;
+    line-height: 1.75rem;
+    letter-spacing: 0.009375em !important;
+}
+
+.text-md-subtitle-2 {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 1.375rem;
+    letter-spacing: 0.0071428571em !important;
+}
+
+.text-md-body-1 {
+    font-size: 1rem !important;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.03125em !important;
+}
+
+.text-md-body-2 {
+    font-size: 0.875rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0178571429em !important;
+}
+
+.text-md-button {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 2.25rem;
+    letter-spacing: 0.0892857143em !important;
+    text-transform: uppercase !important;
+}
+
+.text-md-caption {
+    font-size: 0.75rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0333333333em !important;
+}
+
+.text-md-overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    text-transform: uppercase !important;
+}
+
+.text-lg-h1 {
+    font-size: 6rem !important;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.015625em !important;
+}
+
+.text-lg-h2 {
+    font-size: 3.75rem !important;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em !important;
+}
+
+.text-lg-h3 {
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+}
+
+.text-lg-h4 {
+    font-size: 2.125rem !important;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.0073529412em !important;
+}
+
+.text-lg-h5 {
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+}
+
+.text-lg-h6 {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em !important;
+}
+
+.text-lg-subtitle-1 {
+    font-size: 1rem !important;
+    font-weight: normal;
+    line-height: 1.75rem;
+    letter-spacing: 0.009375em !important;
+}
+
+.text-lg-subtitle-2 {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 1.375rem;
+    letter-spacing: 0.0071428571em !important;
+}
+
+.text-lg-body-1 {
+    font-size: 1rem !important;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.03125em !important;
+}
+
+.text-lg-body-2 {
+    font-size: 0.875rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0178571429em !important;
+}
+
+.text-lg-button {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 2.25rem;
+    letter-spacing: 0.0892857143em !important;
+    text-transform: uppercase !important;
+}
+
+.text-lg-caption {
+    font-size: 0.75rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0333333333em !important;
+}
+
+.text-lg-overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    text-transform: uppercase !important;
+}
+
+.text-xl-h1 {
+    font-size: 6rem !important;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.015625em !important;
+}
+
+.text-xl-h2 {
+    font-size: 3.75rem !important;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.0083333333em !important;
+}
+
+.text-xl-h3 {
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+}
+
+.text-xl-h4 {
+    font-size: 2.125rem !important;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.0073529412em !important;
+}
+
+.text-xl-h5 {
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+}
+
+.text-xl-h6 {
+    font-size: 1.25rem !important;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em !important;
+}
+
+.text-xl-subtitle-1 {
+    font-size: 1rem !important;
+    font-weight: normal;
+    line-height: 1.75rem;
+    letter-spacing: 0.009375em !important;
+}
+
+.text-xl-subtitle-2 {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 1.375rem;
+    letter-spacing: 0.0071428571em !important;
+}
+
+.text-xl-body-1 {
+    font-size: 1rem !important;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.03125em !important;
+}
+
+.text-xl-body-2 {
+    font-size: 0.875rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0178571429em !important;
+}
+
+.text-xl-button {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 2.25rem;
+    letter-spacing: 0.0892857143em !important;
+    text-transform: uppercase !important;
+}
+
+.text-xl-caption {
+    font-size: 0.75rem !important;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.0333333333em !important;
+}
+
+.text-xl-overline {
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    letter-spacing: 0.1666666667em !important;
+    text-transform: uppercase !important;
+}

@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { playerFuncs } from '../extensions/Player';
+import { VehicleSystem } from '../systems/vehicle';
 
 alt.on('playerDeath', handleDeath);
 
@@ -7,6 +8,11 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
     if (player && player.valid) {
         if (player.vehicle) {
             player.pos = player.vehicle.pos;
+        }
+
+        // Stop the player from pushing a vehicle if it is being pushed.
+        if (player.isPushingVehicle) {
+            VehicleSystem.stopPush(player);
         }
 
         // Leave this timeout.

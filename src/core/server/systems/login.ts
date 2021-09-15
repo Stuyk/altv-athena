@@ -1,5 +1,6 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Discord } from '../../shared/enums/views';
@@ -12,19 +13,32 @@ import { Collections } from '../interface/DatabaseCollections';
 import { DiscordUser } from '../interface/DiscordUser';
 import Ares from '../utility/ares';
 import { goToCharacterSelect } from '../views/characters';
-import '../views/login';
 import { StorageView } from '../views/storage';
 import { EventController } from './athenaEvent';
+import { OptionsController } from './options';
+
+import '../views/login';
 import './job';
 import './marker';
-import { OptionsController } from './options';
+import './ped';
 import './textlabel';
 import './tick';
 import './voice';
+import { VehicleSystem } from './vehicle';
 
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
+    /**
+     * Called when the player is attemping to login to their account.
+     * At this stage we already have all the Discord Information or a Discord ID.
+     * @static
+     * @param {alt.Player} player
+     * @param {Partial<DiscordUser>} data
+     * @param {Partial<Account>} account
+     * @return {*}  {Promise<void>}
+     * @memberof LoginController
+     */
     static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
         delete player.pendingLogin;
         delete player.discordToken;
@@ -75,9 +89,27 @@ export class LoginController {
                     permissionLevel: PERMISSIONS.NONE
                 };
 
+                if (player.discord.email) {
+                    newDocument.email = player.discord.email;
+                }
+
                 account = await Database.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
             } else {
                 account = accountData;
+
+                // Update Email if Non-Existant
+                // Update Email if Does Not Match
+                if (
+                    (!account.email && player.discord.email) ||
+                    (player.discord.email && account.email !== player.discord.email)
+                ) {
+                    account.email = player.discord.email;
+                    await Database.updatePartialData(
+                        account._id.toString(),
+                        { email: player.discord.email },
+                        Collections.Accounts
+                    );
+                }
             }
         }
 
@@ -93,6 +125,10 @@ export class LoginController {
     static tryDisconnect(player: alt.Player, reason: string): void {
         if (!player || !player.valid || !player.data) {
             return;
+        }
+
+        if (player.isPushingVehicle) {
+            VehicleSystem.stopPush(player);
         }
 
         StorageView.removeStorageBinding(player.id);

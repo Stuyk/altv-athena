@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import JobEnums, { Objective } from '../../shared/interfaces/Job';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
@@ -52,7 +53,7 @@ export class Job {
      * @memberof Job
      */
     addObjective(objectiveData: Objective) {
-        this.objectives.push(objectiveData);
+        this.objectives.push(deepCloneObject(objectiveData));
     }
 
     /**
@@ -61,7 +62,13 @@ export class Job {
      * @memberof Job
      */
     loadObjectives(objectiveData: Array<Objective>) {
-        this.objectives = this.objectives.concat(objectiveData);
+        const uniqueObjectives = [];
+
+        for (let i = 0; i < objectiveData.length; i++) {
+            uniqueObjectives.push(deepCloneObject(objectiveData[i]));
+        }
+
+        this.objectives = this.objectives.concat(uniqueObjectives);
     }
 
     /**

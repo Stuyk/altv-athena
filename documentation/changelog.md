@@ -4,6 +4,34 @@ description: List of all the changes and current versions.
 
 # Changelog
 
+## 2.0.4
+
+```diff
++ Began Interface Reworks
++ Added Lock Icon Toggle Server Wide
++ Added PED Streamer from Ravenous
++ Fix Fuel Bug Annoyance
++ Fixed Pushing Vehicle while Dead
++ Fixed Doing Vehicle things while Dead
++ Fixed Animation Bug while Pushing Vehicle
++ Fixed Job Objective State Issues
++ Added Temporary Vehicle Override to Prevent Despawning on Exit
++ Fixed Faction Hand Off Bug
++ Fixed Progress Bar Not Requiring UID
++ Creating a Progress Bar Now Returns a UID if not Supplied
++ Fixed Interactions Overriding UID
++ Fixed Hand Off Command
++ Added Max Distance Check Server Side for Entering Vehicle
++ Added Timeout for Server Side Vehicle Enter. Stops Teleporting.
++ Added DLC Clothing Support on Server Side
++ Fix Wanted Level Values and Text
++ Fix Pushing Vehicle Validity
++ Fix Seatbelt Command
++ Add Set Into Vehicle / Vehicle Seat Teleport
++ Removed Dead Config Options
++ Added Vehicle Interaction Range to Shared Config
+```
+
 ## 2.0.3
 
 ```diff
@@ -85,6 +113,7 @@ description: List of all the changes and current versions.
 ```
 
 ## 2.0.1
+
 ```diff
 + Add Client Console Command for 'timerinfo'
 + Prints the total amount of Timers and their Millisecond Interval
@@ -124,6 +153,7 @@ description: List of all the changes and current versions.
 ```
 
 ## 2.0.0
+
 ```diff
 + New Keybind Interface for Custom Keybinds
 + Added Register Keybind

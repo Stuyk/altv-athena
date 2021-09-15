@@ -10,8 +10,6 @@ import { isAnyMenuOpen } from '../utility/menus';
 
 import './push';
 
-let interval;
-
 export class VehicleController {
     /**
      * Register the default vehicle keybinds.
@@ -122,8 +120,20 @@ export class VehicleController {
 
         native.setPedIntoVehicle(alt.Player.local.scriptID, vehicle.scriptID, seat);
     }
+
+    /**
+     * Prevents a pedestrian from flying out of a vehicle window.
+     * @static
+     * @param {boolean} [value=true]
+     * @memberof VehicleController
+     */
+    static enableSeatBelt(value: boolean = true) {
+        const seatBeltStatus = value ? false : true;
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
+    }
 }
 
-alt.on(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
+alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
 alt.on('enteredVehicle', VehicleController.enterVehicle);

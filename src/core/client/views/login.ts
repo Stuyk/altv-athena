@@ -3,15 +3,13 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { fetchToken } from '../systems/quickToken';
 import { sleep } from '../utility/sleep';
 import { drawRectangle2D, drawText2D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
-const url = `http://assets/webview/client/login/index.html`;
-let view: View;
 let discordURI;
 let interval;
 let count = 0;
@@ -20,10 +18,15 @@ let neededRequests = 0;
 export class LoginView implements ViewModel {
     static async open(oAuthUrl: string) {
         discordURI = oAuthUrl;
-        view = await View.getInstance(url, true, false, false);
+
+        const view = await WebViewController.get();
         view.on('discord:OpenURL', LoginView.openURL);
         view.on('discord:FinishAuth', LoginView.finish);
         view.on('discord:Ready', LoginView.ready);
+        WebViewController.openPages(['Login']);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
+
         alt.toggleGameControls(false);
 
         if (interval !== null && interval !== undefined) {
@@ -36,11 +39,8 @@ export class LoginView implements ViewModel {
         fetchToken();
     }
 
-    static ready() {
-        if (!view) {
-            return;
-        }
-
+    static async ready() {
+        const view = await WebViewController.get();
         view.emit('discord:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_LOGIN));
     }
 
@@ -52,19 +52,13 @@ export class LoginView implements ViewModel {
             interval = null;
         }
 
-        if (!view) {
-            return;
-        }
-
-        view.close();
-        view = null;
+        WebViewController.closePages(['Login']);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
     }
 
-    static openURL() {
-        if (!view) {
-            return;
-        }
-
+    static async openURL() {
+        const view = await WebViewController.get();
         view.emit('discord:OpenURL', discordURI, true);
     }
 
@@ -72,11 +66,8 @@ export class LoginView implements ViewModel {
         alt.emitServer('discord:FinishAuth');
     }
 
-    static emitFailureMessage(message: string) {
-        if (!view) {
-            return;
-        }
-
+    static async emitFailureMessage(message: string) {
+        const view = await WebViewController.get();
         view.emit('discord:Fail', message);
     }
 

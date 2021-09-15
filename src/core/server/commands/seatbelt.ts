@@ -32,5 +32,5 @@ function handleCommand(player: alt.Player): void {
 
     playerFuncs.emit.sound2D(player, 'seatbelt_on', 0.75);
     playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON));
-    alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT);
+    alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, true);
 }
