@@ -50,7 +50,7 @@ function drawBars() {
                 r: 255,
                 g: 255,
                 b: 255,
-                a: 255
+                a: 255,
             });
         } else {
             const actualText = bar.text ? `${bar.text}` : `${bar.text}`;
@@ -58,22 +58,23 @@ function drawBars() {
                 r: 255,
                 g: 255,
                 b: 255,
-                a: 255
+                a: 255,
             });
         }
     }
 }
 
 function createBar(progressBar: ProgressBar) {
-    const index = bars.findIndex((bar) => bar.uid === progressBar.uid);
-
-    if (index >= 0) {
-        throw new Error(`Progress bar does not have a unique UID.`);
-    }
-
     progressBar.startTime = Date.now();
     progressBar.finalTime = Date.now() + progressBar.milliseconds;
-    bars.push(progressBar);
+
+    const index = bars.findIndex((bar) => bar.uid === progressBar.uid);
+    if (index <= -1) {
+        bars.push(progressBar);
+    } else {
+        alt.logWarning(`${progressBar.uid} was not a unique identifier. Replaced Data in Progress Bar.`);
+        bars[index] = progressBar;
+    }
 
     clear();
     if (!interval) {

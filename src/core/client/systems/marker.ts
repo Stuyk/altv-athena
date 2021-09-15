@@ -23,7 +23,13 @@ export class MarkerController {
             return;
         }
 
-        localMarkers.push(marker);
+        const index = localMarkers.findIndex((obj) => obj.uid === marker.uid);
+        if (index <= -1) {
+            localMarkers.push(marker);
+        } else {
+            alt.logWarning(`${marker.uid} was not a unique identifier. Replaced Marker in MarkerController.`);
+            localMarkers[index] = marker;
+        }
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
@@ -109,7 +115,15 @@ function handleDrawMarkers() {
             marker.scale = new alt.Vector3(1, 1, 1);
         }
 
-        drawMarker(marker.type, marker.pos, marker.scale, marker.color, marker.bobUpAndDown, marker.faceCamera, marker.rotate);
+        drawMarker(
+            marker.type,
+            marker.pos,
+            marker.scale,
+            marker.color,
+            marker.bobUpAndDown,
+            marker.faceCamera,
+            marker.rotate,
+        );
     }
 }
 

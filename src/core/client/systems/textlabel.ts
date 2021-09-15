@@ -23,6 +23,14 @@ export class TextlabelController {
             return;
         }
 
+        const index = localLabels.findIndex((label) => label.uid === label.uid);
+        if (index <= -1) {
+            localLabels.push(label);
+        } else {
+            alt.logWarning(`${label.uid} was not a unique identifier. Replaced Label in TextLabelController.`);
+            localLabels[index] = label;
+        }
+
         localLabels.push(label);
 
         if (!interval) {

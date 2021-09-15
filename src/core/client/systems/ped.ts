@@ -1,15 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import {SYSTEM_EVENTS} from '../../shared/enums/system';
-import {IPed} from '../../shared/interfaces/IPed';
-import {Animation} from '../../shared/interfaces/Animation';
-import {distance2d} from '../../shared/utility/vector';
-import {loadModel} from '../utility/model';
-import {Timer} from '../utility/timers';
-import {playPedAnimation} from './animations';
-
-
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IPed } from '../../shared/interfaces/IPed';
+import { Animation } from '../../shared/interfaces/Animation';
+import { distance2d } from '../../shared/utility/vector';
+import { loadModel } from '../utility/model';
+import { Timer } from '../utility/timers';
+import { playPedAnimation } from './animations';
 
 let localPeds: Array<IPed> = [];
 let addedPeds: Array<IPed> = [];
@@ -17,13 +15,19 @@ let pedInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
 
-
 export class PedController {
-
     static append(pedData: IPed) {
         if (!pedData.uid) {
             alt.logError(`(${JSON.stringify(pedData.pos)}) Ped is missing uid.`);
             return;
+        }
+
+        const index = localPeds.findIndex((ped) => ped.uid === pedData.uid);
+        if (index <= -1) {
+            localPeds.push(pedData);
+        } else {
+            alt.logWarning(`${pedData.uid} was not a unique identifier. Replaced Ped in PedController.`);
+            localPeds[index] = pedData;
         }
 
         localPeds.push(pedData);
@@ -32,7 +36,6 @@ export class PedController {
         }
     }
 
-
     static populate(peds: Array<IPed>) {
         addedPeds = peds;
 
@@ -40,7 +43,6 @@ export class PedController {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
         }
     }
-
 
     static remove(uid: string) {
         isRemoving = true;
@@ -51,7 +53,6 @@ export class PedController {
             native.deleteEntity(pedInfo[uid]);
             delete pedInfo[uid];
         }
-
 
         index = localPeds.findIndex((ped) => ped.uid === uid);
 
@@ -70,7 +71,6 @@ export class PedController {
         isRemoving = false;
     }
 
-
     static removeGlobalPed(uid: string) {
         isRemoving = true;
 
@@ -87,20 +87,22 @@ export class PedController {
         isRemoving = false;
     }
 
-
     static playAnimation(uid: string, animation: Animation[]) {
         if (pedInfo[uid] !== null && pedInfo[uid] !== undefined) {
             for (let i = 0; i < animation.length; i++) {
-                playPedAnimation(pedInfo[uid], animation[i].dict, animation[i].name, animation[i].flags, animation[i].duration)
+                playPedAnimation(
+                    pedInfo[uid],
+                    animation[i].dict,
+                    animation[i].name,
+                    animation[i].flags,
+                    animation[i].duration,
+                );
             }
         }
-
     }
 }
 
-
 function handleDrawPeds() {
-
     if (isRemoving) {
         return;
     }
@@ -126,7 +128,6 @@ function handleDrawPeds() {
         }
 
         if (distance2d(alt.Player.local.pos, pedData.pos) > pedData.maxDistance) {
-
             if (pedInfo[pedData.uid] === -1) {
                 continue;
             }
@@ -137,7 +138,6 @@ function handleDrawPeds() {
             }
             continue;
         }
-
 
         if (pedInfo[pedData.uid] !== undefined && pedInfo[pedData.uid] !== null) {
             continue;
@@ -160,7 +160,7 @@ function handleDrawPeds() {
                 pedData.pos.z,
                 0,
                 false,
-                false
+                false,
             );
             native.setEntityNoCollisionEntity(pedInfo[pedData.uid], alt.Player.local.scriptID, false);
             native.setEntityAsMissionEntity(pedInfo[pedData.uid], true, false); // make sure its not despawned by game engine
@@ -187,10 +187,9 @@ function handleDrawPeds() {
             native.setPedAsEnemy(pedInfo[pedData.uid], false);
             native.setEntityInvincible(pedInfo[pedData.uid], true);
 
-            const heading = pedData.heading ? pedData.heading : 0
+            const heading = pedData.heading ? pedData.heading : 0;
             Timer.createTimeout(() => {
-
-                native.setEntityHeading(pedInfo[pedData.uid], heading)
+                native.setEntityHeading(pedInfo[pedData.uid], heading);
 
                 native.setPedRandomProps(pedInfo[pedData.uid]);
                 if (pedData.randomizeAppearance) {
@@ -200,28 +199,18 @@ function handleDrawPeds() {
 
                 native.freezeEntityPosition(pedInfo[pedData.uid], true);
                 native.setEntityNoCollisionEntity(pedInfo[pedData.uid], alt.Player.local.scriptID, true);
-            }, 2000)
-
+            }, 2000);
 
             if (pedData.animations.length > 0) {
                 let randomAnimation = pedData.animations[Math.floor(Math.random() * pedData.animations.length)];
-                PedController.playAnimation(pedData.uid, randomAnimation)
+                PedController.playAnimation(pedData.uid, randomAnimation);
             }
-
         });
     }
 }
-
 
 alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_PED, PedController.removeGlobalPed);
 alt.onServer(SYSTEM_EVENTS.APPEND_PED, PedController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_PEDS, PedController.populate);
 alt.onServer(SYSTEM_EVENTS.REMOVE_PED, PedController.remove);
 alt.onServer(SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, PedController.playAnimation);
-
-
-
-
-
-
-

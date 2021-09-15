@@ -26,7 +26,14 @@ export class ObjectController {
             return;
         }
 
-        localObjects.push(objectData);
+        const index = localObjects.findIndex((obj) => obj.uid === objectData.uid);
+        if (index <= -1) {
+            localObjects.push(objectData);
+        } else {
+            alt.logWarning(`${objectData.uid} was not a unique identifier. Replaced Object in ObjectController.`);
+            localObjects[index] = objectData;
+        }
+
         if (!interval) {
             interval = Timer.createInterval(handleDrawObjects, 500, 'object.ts');
         }
@@ -177,7 +184,7 @@ function handleDrawObjects() {
                 objectData.pos.z,
                 false,
                 false,
-                false
+                false,
             );
 
             // alt.log(`CREATED MODEL ${objectInfo[objectData.uid]} for ${objectData.model}`);
