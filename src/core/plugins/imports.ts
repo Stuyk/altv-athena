@@ -4,15 +4,8 @@ import logger from '../server/utility/athenaLogger';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 
 const filePaths = [
-    // GAMEMODE IMPORTS -- Remove what you don't want.
-    './teleportEffect/teleporter',
-    './heistExample/index',
-    './deathLog/deathLog',
-    './actionMenu/actionMenu',
-    './interactionExample/index',
-    './noMiniGun/index',
-    './streamTest/index'
-    // YOUR IMPORTS -- BELOW HERE
+    // Plugins Imports Appended Here
+    // ie. './some-folder/index'
 ];
 
 /**

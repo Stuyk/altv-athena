@@ -1,4 +1,2 @@
-import * as alt from 'alt-client';
-
 // Specify what you are loading here.
-import './example/helloWorld';
+// import './example-folder/index';
