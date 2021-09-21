@@ -129,6 +129,7 @@ export class HologramSystem {
                 native.freezeEntityPosition(hologram.clientRef, true);
                 native.setEntityAlpha(hologram.clientRef, 150, false);
                 native.setEntityInvincible(hologram.clientRef, true);
+                native.setEntityCanBeDamaged(hologram.clientRef, false);
             });
         }
     }
