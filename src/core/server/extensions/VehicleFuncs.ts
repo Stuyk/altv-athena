@@ -208,7 +208,7 @@ export default class VehicleFuncs {
             document.position.z,
             document.rotation.x,
             document.rotation.y,
-            document.rotation.z
+            document.rotation.z,
         );
 
         SpawnedVehicles[document.id] = vehicle;
@@ -308,7 +308,7 @@ export default class VehicleFuncs {
         model: string,
         pos: alt.IVector3,
         rot: alt.IVector3,
-        doNotDelete: boolean = false
+        doNotDelete: boolean = false,
     ): alt.Vehicle {
         const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         vehicle.player_id = player.id;
@@ -358,7 +358,8 @@ export default class VehicleFuncs {
     }
 
     /**
-     * Check if a player has keys or ownership of this vehicle
+     * Check if a player has keys or ownership of this vehicle.
+     * If the vehicle has no 'data' it automatically return true.
      * @static
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
@@ -380,6 +381,10 @@ export default class VehicleFuncs {
             if (vehicle.keys && vehicle.keys.includes(player.data._id.toString())) {
                 return true;
             }
+        }
+
+        if (!vehicle.data) {
+            return true;
         }
 
         if (vehicle.data.owner === player.data._id.toString()) {
@@ -454,7 +459,7 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
-            lastUsed: Date.now() // ms
+            lastUsed: Date.now(), // ms
         });
     }
 
