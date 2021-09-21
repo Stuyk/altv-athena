@@ -122,12 +122,13 @@ export class HologramSystem {
                 hologram.heading,
                 false,
                 false,
-                false
+                false,
             );
 
             alt.nextTick(() => {
                 native.freezeEntityPosition(hologram.clientRef, true);
                 native.setEntityAlpha(hologram.clientRef, 150, false);
+                native.setEntityInvincible(hologram.clientRef, true);
             });
         }
     }

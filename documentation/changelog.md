@@ -35,6 +35,7 @@ description: List of all the changes and current versions.
 + Remove Dead Code for Help
 + Fixed Non-Unique Identifiers for Stream Based Data
 + Fix ownership bug where no data is present on vehicle
++ Fix Hologram Invincibility
 ```
 
 ## 2.0.3
