@@ -32,6 +32,7 @@ import '../views/garage';
 import './fuel';
 import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -77,7 +78,9 @@ import { IResponse } from '../../shared/interfaces/IResponse';
  * Custom rules that can be extended and are triggered before invoking the rest of the function.
  *
  */
-const rules: { [key: string]: Array<(player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse> } = {
+const rules: {
+    [key: string]: Array<(player: alt.Player, vehicle: alt.Vehicle, data?: IVehicleRuleData) => IResponse>;
+} = {
     [VEHICLE_RULES.ENTER]: [],
     [VEHICLE_RULES.EXIT]: [],
     [VEHICLE_RULES.LOCK]: [],
@@ -137,6 +140,14 @@ export class VehicleSystem {
     /**
      * Add a custom rule. Each rule is checked before executing normal behavior.
      * ie. Check vehicle ownership -> check engine rules -> execute engine functionality
+     *
+     * Example (seat object is optional)
+     * ```ts
+     * VehicleSystem.addCustomRule(VEHICLE_RULES.ENTER, (player, vehicle, { seat }) => {
+     *      return { status: true, response: 'Entered vehicle without issue' };
+     * })
+     * ```
+     *
      * @static
      * @param {VEHICLE_RULES} ruleType The rule to append the check to
      * @param {(player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse} callback A function that receives player, vehicle, etc.
@@ -144,7 +155,7 @@ export class VehicleSystem {
      */
     static addCustomRule(
         ruleType: VEHICLE_RULES,
-        callback: (player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse,
+        callback: (player: alt.Player, vehicle: alt.Vehicle, data?: IVehicleRuleData) => IResponse,
     ) {
         if (!rules[ruleType]) {
             alt.logError(`${ruleType} does not exist for Vehicle Rules`);
@@ -164,7 +175,12 @@ export class VehicleSystem {
      * @return {boolean}
      * @memberof VehicleSystem
      */
-    static checkCustomRules(ruleType: VEHICLE_RULES, player: alt.Player, vehicle: alt.Vehicle, data?: any): boolean {
+    static checkCustomRules(
+        ruleType: VEHICLE_RULES,
+        player: alt.Player,
+        vehicle: alt.Vehicle,
+        data?: IVehicleRuleData,
+    ): boolean {
         if (!rules[ruleType]) {
             alt.logError(`${ruleType} does not exist for Vehicle Rules`);
             return false;
@@ -259,7 +275,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENTER, player, vehicle)) {
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENTER, player, vehicle, { seat })) {
             return;
         }
 
@@ -628,7 +644,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.DOOR, player, vehicle, doorNumber)) {
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.DOOR, player, vehicle, { door: doorNumber })) {
             return;
         }
 
