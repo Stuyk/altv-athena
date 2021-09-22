@@ -40,6 +40,7 @@ description: List of all the changes and current versions.
 + Add Custom Storage Rules for opening
 + Add Custom Interior Rules for enter, exit, unlock, and lock
 + Add / Remove Faction(s) from Interiors with Function
++ Add Faction Vehicle Information to Vehicle System
 ```
 
 ## 2.0.3

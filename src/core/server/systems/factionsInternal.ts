@@ -6,11 +6,13 @@ import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/Fa
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { StorageView } from '../views/storage';
@@ -110,14 +112,14 @@ export class FactionInternalSystem {
                 identifier: storageName,
                 position: factions[faction].storageLocation,
                 data: [FACTION_STORAGE.STORAGE],
-                callback: FactionSystem.openStorage
+                callback: FactionSystem.openStorage,
             });
 
             MarkerController.append({
                 uid: storageName,
                 pos: factions[faction].storageLocation,
                 type: 1,
-                color: new alt.RGBA(255, 255, 255, 100)
+                color: new alt.RGBA(255, 255, 255, 100),
             });
         }
 
@@ -128,14 +130,14 @@ export class FactionInternalSystem {
                 identifier: weaponsName,
                 position: factions[faction].weaponLocation,
                 data: [FACTION_STORAGE.WEAPONS],
-                callback: FactionSystem.openStorage
+                callback: FactionSystem.openStorage,
             });
 
             MarkerController.append({
                 uid: weaponsName,
                 pos: factions[faction].weaponLocation,
                 type: 1,
-                color: new alt.RGBA(255, 255, 255, 100)
+                color: new alt.RGBA(255, 255, 255, 100),
             });
         }
 
@@ -148,7 +150,7 @@ export class FactionInternalSystem {
                 scale: 1,
                 shortRange: true,
                 text: factions[faction].name,
-                identifier: blipName
+                identifier: blipName,
             });
         }
     }
@@ -185,7 +187,7 @@ export class FactionInternalSystem {
     static async handOffFaction(
         faction: string,
         characterID: string,
-        leaveFaction: boolean = false
+        leaveFaction: boolean = false,
     ): Promise<IResponse> {
         if (!factions[faction]) {
             return { status: false, response: 'Faction does not exist.' };
@@ -287,7 +289,7 @@ export class FactionInternalSystem {
         }
 
         factions[factionID].logs.unshift(
-            `[${new Date(Date.now()).toISOString()}] ${member.name} - ${status} - ${response}`
+            `[${new Date(Date.now()).toISOString()}] ${member.name} - ${status} - ${response}`,
         );
 
         FactionInternalSystem.save(factionID, { logs: factions[factionID].logs });
@@ -318,7 +320,7 @@ export class FactionInternalSystem {
             faction.ranks = [
                 {
                     name: 'Admin',
-                    permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+                    permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN,
                 },
                 {
                     name: 'Moderator',
@@ -330,28 +332,16 @@ export class FactionInternalSystem {
                         FACTION_PERMISSION_FLAGS.ADD_TO_BANK |
                         FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK |
                         FACTION_PERMISSION_FLAGS.KICK_MEMBER |
-                        FACTION_PERMISSION_FLAGS.ADD_MEMBERS
+                        FACTION_PERMISSION_FLAGS.ADD_MEMBERS,
                 },
                 {
                     name: 'Goon',
                     permissions:
                         FACTION_PERMISSION_FLAGS.ACCESS_STORAGE |
                         FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS |
-                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK
-                }
+                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
+                },
             ];
-        }
-
-        if (faction.pos) {
-            // Create Blip
-        }
-
-        if (faction.storageLocation) {
-            // Create Interaction
-        }
-
-        if (faction.weaponLocation) {
-            // Create Interaction
         }
 
         if (faction.bank === undefined || faction.bank === null) {
@@ -359,6 +349,15 @@ export class FactionInternalSystem {
         }
 
         factions[faction._id as string] = faction;
+
+        const factionVehicles = await Database.fetchAllByField<IVehicle>('_id', faction._id, Collections.Vehicles);
+        if (factionVehicles.length >= 1) {
+            for (let i = 0; i < factionVehicles.length; i++) {
+                const vehicle = factionVehicles[i];
+                VehicleFuncs.spawn(vehicle);
+            }
+        }
+
         FactionInternalSystem.refreshBlipsAndInteractions(faction._id.toString());
     }
 
@@ -384,7 +383,7 @@ export class FactionInternalSystem {
 
             const clientInterface = FactionInternalSystem.getClientInterface(
                 players[i].data.faction,
-                players[i].data._id.toString()
+                players[i].data._id.toString(),
             );
 
             alt.emitClient(players[i], View_Events_Factions.Update, clientInterface);
@@ -919,7 +918,7 @@ export class FactionInternalSystem {
         factions[id].pos = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { pos: factions[id].pos });
@@ -949,7 +948,7 @@ export class FactionInternalSystem {
         factions[id].storageLocation = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { storageLocation: factions[id].storageLocation });
@@ -979,7 +978,7 @@ export class FactionInternalSystem {
         factions[id].weaponLocation = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { weaponLocation: factions[id].weaponLocation });
@@ -1012,32 +1011,32 @@ export class FactionInternalSystem {
         const playerRank = factions[id].ranks[player.rank];
         const canChangeMemberRanks = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK,
         );
 
         const canChangeRankName = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES,
         );
 
         const canChangeRankOrder = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER,
         );
 
         const canKickMembers = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.KICK_MEMBER
+            FACTION_PERMISSION_FLAGS.KICK_MEMBER,
         );
 
         const canCreateRanks = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         const canChangeRankPerms = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
         );
 
         const clientPlayers: Array<FactionMemberClient> = [];
@@ -1106,18 +1105,18 @@ export class FactionInternalSystem {
             weaponLocation: faction.weaponLocation,
             canAddToBank: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+                FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
             ),
             canRemoveFromBank: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK
+                FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK,
             ),
             canChangeName: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.CHANGE_NAME
+                FACTION_PERMISSION_FLAGS.CHANGE_NAME,
             ),
             bank: faction.bank,
-            dimension: faction.dimension
+            dimension: faction.dimension,
         };
 
         return factionClient;

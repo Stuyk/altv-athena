@@ -45,6 +45,7 @@ export interface IVehicle {
     /**
      * The owner of this vehicle.
      * Owner can either be a character id or a faction id.
+     *
      * @type {string}
      * @memberof IVehicle
      */
@@ -52,6 +53,7 @@ export interface IVehicle {
 
     /**
      * The ownership type for this vehicle.
+     * null means it is player owned
      * @type {VEHICLE_OWNERSHIP}
      * @memberof IVehicle
      */

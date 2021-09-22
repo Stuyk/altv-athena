@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -107,6 +108,7 @@ export default class VehicleFuncs {
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
         vehicleData.fuel = 100;
+
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
 
@@ -384,6 +386,11 @@ export default class VehicleFuncs {
         }
 
         if (!vehicle.data) {
+            return true;
+        }
+
+        // Check Faction Ownership
+        if (vehicle.data.ownerType === VEHICLE_OWNERSHIP.FACTION && vehicle.data.owner === player.data.faction) {
             return true;
         }
 
