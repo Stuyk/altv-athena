@@ -7,6 +7,8 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { IResponse } from '../../shared/interfaces/IResponse';
+import { STORAGE_RULES } from '../../shared/flags/StorageRules';
 
 /**
  * Bind a player id to a storage container.
@@ -15,6 +17,9 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
  * */
 let storageBinding: { [id: string]: string } = {};
 let storageCache: { [id: number]: IStorage } = {};
+let rules: { [key: string]: Array<(player: alt.Player, storage: IStorage) => IResponse> } = {
+    [STORAGE_RULES.OPEN]: [],
+};
 
 export class StorageView {
     /**
@@ -26,18 +31,26 @@ export class StorageView {
      * @memberof StorageView
      */
     static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
+        const storage = await StorageSystem.get(storage_id);
+        if (!storage) {
+            playerFuncs.emit.notification(player, `~r~No Storage Available`);
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            StorageSystem.setRestricted(storage_id, false);
+            return;
+        }
+
+        // Check if storage is Restricted
         if (StorageSystem.isRestricted(storage_id)) {
             playerFuncs.emit.notification(player, `~r~Storage in Use`);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
+        // Restrict Storage Access to Single Player
         StorageSystem.setRestricted(storage_id, true);
-        const storage = await StorageSystem.get(storage_id);
 
-        if (!storage) {
-            playerFuncs.emit.notification(player, `~r~No Storage Available`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        // Check any custom rules that may apply.
+        if (!StorageView.checkCustomRules(STORAGE_RULES.OPEN, player, storage)) {
             StorageSystem.setRestricted(storage_id, false);
             return;
         }
@@ -46,6 +59,62 @@ export class StorageView {
         storageCache[player.id] = storage;
         StorageView.setStorageBinding(player.id, storage_id);
         alt.emitClient(player, View_Events_Storage.Open, storage_id, name, storage.items, player.data.inventory);
+    }
+
+    /**
+     * Add a custom rule to storage events.
+     * Such as opening the storage...
+     * @static
+     * @param {STORAGE_RULES} ruleType
+     * @param {(player: alt.Player, storage: IStorage) => IResponse} callback
+     * @return {*}
+     * @memberof StorageView
+     */
+    static addCustomRule(ruleType: STORAGE_RULES, callback: (player: alt.Player, storage: IStorage) => IResponse) {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for StorageView Rules`);
+            return;
+        }
+
+        rules[ruleType].push(callback);
+    }
+
+    /**
+     * Checks a custom rule.
+     * @static
+     * @param {STORAGE_RULES} ruleType
+     * @param {alt.Player} player
+     * @param {IStorage} storage
+     * @return {boolean}
+     * @memberof StorageView
+     */
+    static checkCustomRules(ruleType: STORAGE_RULES, player: alt.Player, storage: IStorage): boolean {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for StorageView Rules`);
+            return false;
+        }
+
+        if (rules[ruleType].length <= 0) {
+            return true;
+        }
+
+        for (let i = 0; i < rules[ruleType].length; i++) {
+            const rule = rules[ruleType][i];
+            const result = rule(player, storage);
+
+            if (!result.status && result.response !== '' && result.response !== null) {
+                playerFuncs.emit.message(player, result.response);
+                return false;
+            }
+
+            if (!result.status) {
+                return false;
+            }
+
+            continue;
+        }
+
+        return true;
     }
 
     /**
@@ -212,7 +281,7 @@ export class StorageView {
         const existingIndex = storageCache[player.id].items.findIndex(
             (x) =>
                 x.name === player.data.inventory[tab][index].name &&
-                isFlagEnabled(player.data.inventory[tab][index].behavior, ITEM_TYPE.CAN_STACK)
+                isFlagEnabled(player.data.inventory[tab][index].behavior, ITEM_TYPE.CAN_STACK),
         );
 
         if (existingIndex <= -1 && storageCache[player.id].items.length + 1 > storageCache[player.id].maxSize) {

@@ -37,6 +37,7 @@ description: List of all the changes and current versions.
 + Fix ownership bug where no data is present on vehicle
 + Fix Hologram Invincibility
 + Add Custom Vehicle Rules for engine, unlock, lock, doors, enter, and exit
++ Add Custom Storage Rules for opening
 ```
 
 ## 2.0.3
