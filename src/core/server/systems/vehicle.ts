@@ -84,6 +84,8 @@ const rules: { [key: string]: Array<IVehicleRule | IVehicleDoorRule> } = {
     [VEHICLE_RULES.LOCK]: [],
     [VEHICLE_RULES.UNLOCK]: [],
     [VEHICLE_RULES.STORAGE]: [],
+    [VEHICLE_RULES.ENGINE]: [],
+    [VEHICLE_RULES.DOOR]: [],
 };
 
 export class VehicleSystem {
@@ -150,12 +152,13 @@ export class VehicleSystem {
      * @param {Function} callback
      * @memberof VehicleSystem
      */
-    static addCustomRule(type: VEHICLE_RULES, callback: IVehicleRule) {
-        if (!rules[type]) {
-            throw new Error(`${type} does not exist for Vehicle Rules.`);
+    static addCustomRule(ruleType: VEHICLE_RULES, callback: IVehicleRule) {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for Vehicle Rules`);
+            return;
         }
 
-        rules[type].push(callback);
+        rules[ruleType].push(callback);
     }
 
     /**
@@ -168,22 +171,27 @@ export class VehicleSystem {
      * @return {boolean}
      * @memberof VehicleSystem
      */
-    static checkCustomRules(type: VEHICLE_RULES, player: alt.Player, vehicle: alt.Vehicle, data?: any): boolean {
-        if (rules[type].length <= 0) {
+    static checkCustomRules(ruleType: VEHICLE_RULES, player: alt.Player, vehicle: alt.Vehicle, data?: any): boolean {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for Vehicle Rules`);
+            return false;
+        }
+
+        if (rules[ruleType].length <= 0) {
             return true;
         }
 
-        for (let i = 0; i < rules[type].length; i++) {
+        for (let i = 0; i < rules[ruleType].length; i++) {
             let rule;
             let result: IResponse;
 
-            switch (type) {
+            switch (ruleType) {
                 case VEHICLE_RULES.DOOR:
-                    rule = rules[type][i] as IVehicleDoorRule;
+                    rule = rules[ruleType][i] as IVehicleDoorRule;
                     result = rule(player, vehicle, data as number);
                     break;
                 default:
-                    rule = rules[type][i] as IVehicleRule;
+                    rule = rules[ruleType][i] as IVehicleRule;
                     result = rule(player, vehicle);
                     break;
             }
