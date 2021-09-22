@@ -9,6 +9,7 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import { STORAGE_RULES } from '../../shared/flags/StorageRules';
+import SystemRules from '../systems/rules';
 
 /**
  * Bind a player id to a storage container.
@@ -50,8 +51,7 @@ export class StorageView {
         StorageSystem.setRestricted(storage_id, true);
 
         // Check any custom rules that may apply.
-        if (!StorageView.checkCustomRules(STORAGE_RULES.OPEN, player, storage)) {
-            StorageSystem.setRestricted(storage_id, false);
+        if (!SystemRules.check(STORAGE_RULES.OPEN, rules, player, storage)) {
             return;
         }
 
@@ -63,7 +63,6 @@ export class StorageView {
 
     /**
      * Add a custom rule to storage events.
-     * Such as opening the storage...
      * @static
      * @param {STORAGE_RULES} ruleType
      * @param {(player: alt.Player, storage: IStorage) => IResponse} callback
@@ -77,44 +76,6 @@ export class StorageView {
         }
 
         rules[ruleType].push(callback);
-    }
-
-    /**
-     * Checks a custom rule.
-     * @static
-     * @param {STORAGE_RULES} ruleType
-     * @param {alt.Player} player
-     * @param {IStorage} storage
-     * @return {boolean}
-     * @memberof StorageView
-     */
-    static checkCustomRules(ruleType: STORAGE_RULES, player: alt.Player, storage: IStorage): boolean {
-        if (!rules[ruleType]) {
-            alt.logError(`${ruleType} does not exist for StorageView Rules`);
-            return false;
-        }
-
-        if (rules[ruleType].length <= 0) {
-            return true;
-        }
-
-        for (let i = 0; i < rules[ruleType].length; i++) {
-            const rule = rules[ruleType][i];
-            const result = rule(player, storage);
-
-            if (!result.status && result.response !== '' && result.response !== null) {
-                playerFuncs.emit.message(player, result.response);
-                return false;
-            }
-
-            if (!result.status) {
-                return false;
-            }
-
-            continue;
-        }
-
-        return true;
     }
 
     /**

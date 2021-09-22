@@ -25,6 +25,9 @@ import { TextLabelController } from './textlabel';
 import './storage';
 import { StorageSystem } from './storage';
 import { StorageView } from '../views/storage';
+import { INTERIOR_RULES } from '../../shared/flags/InteriorRules';
+import { IResponse } from '../../shared/interfaces/IResponse';
+import SystemRules from './rules';
 
 const ONE_BILLION = 1000000000;
 const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
@@ -32,6 +35,12 @@ const NEW_LINE = `~n~`;
 
 let interiors: Array<InteriorInfo> = [];
 let isReady = false;
+let rules: { [key: string]: Array<(player: alt.Player, interior: Interior) => IResponse> } = {
+    [INTERIOR_RULES.ENTER]: [],
+    [INTERIOR_RULES.EXIT]: [],
+    [INTERIOR_RULES.LOCK]: [],
+    [INTERIOR_RULES.UNLOCK]: [],
+};
 
 export class InteriorSystem {
     /**
@@ -59,6 +68,25 @@ export class InteriorSystem {
         }
     }
 
+    /**
+     * Add a custom rule to interior events.
+     * Extends existing functionality and allows for more rule checks before performing an event.
+     *
+     * @static
+     * @param {INTERIOR_RULES} ruleType
+     * @param {(player: alt.Player, interior: Interior) => IResponse} callback
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static addCustomRule(ruleType: INTERIOR_RULES, callback: (player: alt.Player, interior: Interior) => IResponse) {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for InteriorSystem Rules`);
+            return;
+        }
+
+        rules[ruleType].push(callback);
+    }
+
     static getNextID(): number {
         if (interiors.length <= 0) {
             return 1;
@@ -81,7 +109,7 @@ export class InteriorSystem {
             inside: { x: 1089.8856201171875, y: 206.2451629638672, z: -49.5 },
             objects: [],
             system: INTERIOR_SYSTEM.NONE,
-            type: INTERIOR_TYPES.SYSTEM
+            type: INTERIOR_TYPES.SYSTEM,
         });
 
         // This is an example house.
@@ -97,7 +125,7 @@ export class InteriorSystem {
                 INTERIOR_SYSTEM.HAS_STORAGE,
             ipl: 'apa_v_mp_h_01_a',
             price: 25000,
-            isUnlocked: true
+            isUnlocked: true,
         });
     }
 
@@ -130,7 +158,7 @@ export class InteriorSystem {
         const aboveGroundOutside = {
             x: interior.outside.x,
             y: interior.outside.y,
-            z: interior.outside.z + 0.75
+            z: interior.outside.z + 0.75,
         };
 
         TextLabelController.remove(`${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`);
@@ -138,7 +166,7 @@ export class InteriorSystem {
             uid: `${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`,
             pos: aboveGroundOutside,
             data: outsideName,
-            maxDistance: 10
+            maxDistance: 10,
         });
     }
 
@@ -153,13 +181,13 @@ export class InteriorSystem {
         const groundOutside = {
             x: interior.outside.x,
             y: interior.outside.y,
-            z: interior.outside.z - 0.5
+            z: interior.outside.z - 0.5,
         };
 
         const groundInside = {
             x: interior.inside.x,
             y: interior.inside.y,
-            z: interior.inside.z - 0.5
+            z: interior.inside.z - 0.5,
         };
 
         MarkerController.append({
@@ -168,7 +196,7 @@ export class InteriorSystem {
             color: new alt.RGBA(255, 255, 0, 75),
             pos: groundOutside,
             scale: { x: 0.25, y: 0.25, z: 0.25 },
-            type: 0
+            type: 0,
         });
 
         const outsideColShape = InteractionController.add({
@@ -177,7 +205,7 @@ export class InteriorSystem {
             type: `interior`,
             identifier: `house-outside-${interior.id}`,
             data: [interior.id, true],
-            callback: InteriorSystem.showMenu
+            callback: InteriorSystem.showMenu,
         });
 
         InteriorSystem.refreshHouseText(interior);
@@ -189,7 +217,7 @@ export class InteriorSystem {
             outsidePosition: groundOutside,
             ipl: interior.ipl,
             players: [],
-            objects: interior.objects ? interior.objects : []
+            objects: interior.objects ? interior.objects : [],
         });
     }
 
@@ -380,7 +408,20 @@ export class InteriorSystem {
             return;
         }
 
-        if (!interiors[index].owners.find((x) => x === player.data._id.toString())) {
+        const isFactionOwner = interiors[index].factions.find(
+            (x) => player.data && player.data.faction && x === player.data.faction,
+        );
+
+        const isOwner = interiors[index].owners.find((x) => x === player.data._id.toString());
+
+        if (!isFactionOwner && !isOwner) {
+            return;
+        }
+
+        const ruleToCheck = interiors[index].isUnlocked ? INTERIOR_RULES.LOCK : INTERIOR_RULES.UNLOCK;
+
+        // Check rules for unlocking / locking interior.
+        if (!SystemRules.check(ruleToCheck, rules, player, interiors[index])) {
             return;
         }
 
@@ -391,7 +432,7 @@ export class InteriorSystem {
         await Database.updatePartialData(
             interiors[index]._id,
             { isUnlocked: interiors[index].isUnlocked },
-            Collections.Interiors
+            Collections.Interiors,
         );
     }
 
@@ -454,6 +495,11 @@ export class InteriorSystem {
             return;
         }
 
+        // Check rules for entering interior.
+        if (!SystemRules.check(INTERIOR_RULES.ENTER, rules, player, interior)) {
+            return;
+        }
+
         if (!interior) {
             // Small case where an interior just no longer exists.
             if (doNotTeleport) {
@@ -463,7 +509,7 @@ export class InteriorSystem {
                     player,
                     DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
                     DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
-                    DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
+                    DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z,
                 );
             }
             return;
@@ -477,7 +523,7 @@ export class InteriorSystem {
                 identifier: `house-inside-${id}`,
                 data: [interior.id, false],
                 callback: InteriorSystem.showMenu,
-                dimension: id
+                dimension: id,
             });
 
             MarkerController.append({
@@ -487,7 +533,7 @@ export class InteriorSystem {
                 pos: interior.insidePosition,
                 type: 0,
                 dimension: id,
-                scale: { x: 0.25, y: 0.25, z: 0.5 }
+                scale: { x: 0.25, y: 0.25, z: 0.5 },
             });
         }
 
@@ -506,7 +552,7 @@ export class InteriorSystem {
                 player,
                 interior.insidePosition.x,
                 interior.insidePosition.y,
-                interior.insidePosition.z
+                interior.insidePosition.z,
             );
 
             // Freeze Player for Interior Loading
@@ -552,13 +598,18 @@ export class InteriorSystem {
             return;
         }
 
+        // Check rules for exiting interior.
+        if (!SystemRules.check(INTERIOR_RULES.EXIT, rules, player, interior)) {
+            return;
+        }
+
         playerFuncs.set.frozen(player, true);
         playerFuncs.safe.setDimension(player, 0);
         playerFuncs.safe.setPosition(
             player,
             interior.outsidePosition.x,
             interior.outsidePosition.y,
-            interior.outsidePosition.z
+            interior.outsidePosition.z,
         );
 
         if (interior.ipl) {
@@ -685,9 +736,9 @@ export class InteriorSystem {
                 isUnlocked: interiors[index].isUnlocked,
                 price: interiors[index].price,
                 owners: interiors[index].owners,
-                factions: interiors[index].factions
+                factions: interiors[index].factions,
             },
-            Collections.Interiors
+            Collections.Interiors,
         );
 
         InteriorSystem.refreshHouseText(interiors[index]);
@@ -734,9 +785,9 @@ export class InteriorSystem {
         await Database.updatePartialData(
             interiors[index]._id,
             {
-                name: interiors[index].name
+                name: interiors[index].name,
             },
-            Collections.Interiors
+            Collections.Interiors,
         );
 
         InteriorSystem.refreshHouseText(interiors[index]);
@@ -793,9 +844,9 @@ export class InteriorSystem {
         await Database.updatePartialData(
             interiors[index]._id,
             {
-                price: interiors[index].price
+                price: interiors[index].price,
             },
-            Collections.Interiors
+            Collections.Interiors,
         );
 
         InteriorSystem.refreshHouseText(interiors[index]);

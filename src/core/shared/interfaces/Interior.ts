@@ -56,10 +56,10 @@ export interface Interior {
 
     /**
      * A list of faction ids who own have access to this property.
-     * @type {Array<number>}
+     * @type {Array<string>}
      * @memberof Interior
      */
-    factions?: Array<number>;
+    factions?: Array<string>;
 
     /**
      * The associated storage container with this interior.

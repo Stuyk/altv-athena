@@ -33,6 +33,7 @@ import './fuel';
 import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
+import SystemRules from './rules';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -190,50 +191,6 @@ export class VehicleSystem {
     }
 
     /**
-     * Runs custom rules.
-     * If true then the rule checks were successfully passed.
-     * @static
-     * @param {VEHICLE_RULES} type
-     * @param {alt.Player} player
-     * @param {alt.Vehicle} vehicle
-     * @return {boolean}
-     * @memberof VehicleSystem
-     */
-    static checkCustomRules(
-        ruleType: VEHICLE_RULES,
-        player: alt.Player,
-        vehicle: alt.Vehicle,
-        data?: IVehicleRuleData,
-    ): boolean {
-        if (!rules[ruleType]) {
-            alt.logError(`${ruleType} does not exist for Vehicle Rules`);
-            return false;
-        }
-
-        if (rules[ruleType].length <= 0) {
-            return true;
-        }
-
-        for (let i = 0; i < rules[ruleType].length; i++) {
-            const rule = rules[ruleType][i];
-            const result = rule(player, vehicle, data);
-
-            if (!result.status && result.response !== '' && result.response !== null) {
-                playerFuncs.emit.message(player, result.response);
-                return false;
-            }
-
-            if (!result.status && result.response === '') {
-                return false;
-            }
-
-            continue;
-        }
-
-        return true;
-    }
-
-    /**
      * Called when a player interacts with a vehicle.
      * @static
      * @param {alt.Player} player
@@ -299,7 +256,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENTER, player, vehicle, { seat })) {
+        if (!SystemRules.check(VEHICLE_RULES.ENTER, rules, player, vehicle, { seat })) {
             return;
         }
 
@@ -400,7 +357,7 @@ export class VehicleSystem {
             }
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.EXIT, player, vehicle)) {
+        if (!SystemRules.check(VEHICLE_RULES.EXIT, rules, player, vehicle)) {
             return;
         }
 
@@ -590,7 +547,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENGINE, player, player.vehicle)) {
+        if (!SystemRules.check(VEHICLE_RULES.ENGINE, rules, player, player.vehicle)) {
             return;
         }
 
@@ -668,7 +625,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.DOOR, player, vehicle, { door: doorNumber })) {
+        if (!SystemRules.check(VEHICLE_RULES.DOOR, rules, player, vehicle, { door: doorNumber })) {
             return;
         }
 
@@ -714,7 +671,7 @@ export class VehicleSystem {
         const isLocked = (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
         const ruleToRun = isLocked ? VEHICLE_RULES.UNLOCK : VEHICLE_RULES.LOCK;
 
-        if (!VehicleSystem.checkCustomRules(ruleToRun, player, vehicle)) {
+        if (!SystemRules.check(ruleToRun, rules, player, vehicle)) {
             return;
         }
 
@@ -876,7 +833,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.STORAGE, player, vehicle)) {
+        if (!SystemRules.check(VEHICLE_RULES.STORAGE, rules, player, vehicle)) {
             return;
         }
 

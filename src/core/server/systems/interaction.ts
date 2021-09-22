@@ -20,7 +20,7 @@ export class InteractionController {
      * @static
      * @param {Interaction} interaction
      * @memberof InteractionController
-     * @returns {string} uid
+     * @returns {InteractionShape} uid
      */
     static add(interaction: Interaction): InteractionShape {
         if (!interaction.identifier) {
@@ -52,6 +52,7 @@ export class InteractionController {
      * @static
      * @param {string} type
      * @param {string} uid
+     * @returns {boolean}
      * @memberof InteractionController
      */
     static remove(type: string, uid: string): boolean {
@@ -79,7 +80,6 @@ export class InteractionController {
      * @static
      * @param {InteractionShape} colshape
      * @param {alt.Entity} player
-     * @return {*}
      * @memberof InteractionController
      */
     static enter(colshape: InteractionShape, entity: alt.Entity) {
