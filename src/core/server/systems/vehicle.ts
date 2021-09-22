@@ -8,7 +8,7 @@ import {
     VEHICLE_DOOR_STATE,
     VEHICLE_EVENTS,
     VEHICLE_LOCK_STATE,
-    VEHICLE_STATE
+    VEHICLE_STATE,
 } from '../../shared/enums/vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { VEHICLE_CLASS } from '../../shared/flags/VehicleTypeFlags';
@@ -30,6 +30,8 @@ import { StorageSystem } from './storage';
 import '../views/dealership';
 import '../views/garage';
 import './fuel';
+import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
+import IVehicleRule from '../interface/IVehicleCallback';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -71,7 +73,25 @@ import './fuel';
  * from the inside.
  */
 
+/**
+ * Custom rules that can be extended and are triggered before invoking the rest of the function.
+ *
+ */
+const rules: { [key: string]: Array<IVehicleRule> } = {
+    [VEHICLE_RULES.ENTER]: [],
+    [VEHICLE_RULES.EXIT]: [],
+    [VEHICLE_RULES.LOCK]: [],
+    [VEHICLE_RULES.UNLOCK]: [],
+    [VEHICLE_RULES.STORAGE]: [],
+};
+
 export class VehicleSystem {
+    /**
+     * Initializes all vehicles on server start.
+     * @static
+     * @return {*}
+     * @memberof VehicleSystem
+     */
     static async init() {
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
             return;
@@ -110,6 +130,31 @@ export class VehicleSystem {
         }
 
         Logger.info(`Vehicles Spawned: ${count}`);
+    }
+
+    /**
+     * Add a custom rule to the vehicle system.
+     * These custom rules are checked based on the name.
+     *
+     * ie. if you choose exit. The callback is verified to return true
+     * before allowing the player to exit a vehicle.
+     *
+     * if you choose enter. the callback is verified to return true before
+     * allowing the player to enter a vehicle
+     *
+     * etc.
+     *
+     * @static
+     * @param {VEHICLE_RULES} type
+     * @param {Function} callback
+     * @memberof VehicleSystem
+     */
+    static addCustomRule(type: VEHICLE_RULES, callback: IVehicleRule) {
+        if (!rules[type]) {
+            throw new Error(`${type} does not exist for Vehicle Rules.`);
+        }
+
+        rules[type].push(callback);
     }
 
     /**
@@ -174,8 +219,27 @@ export class VehicleSystem {
         }
 
         if (vehicle.isBeingPushed) {
-            playerFuncs.emit.notification(player, `~r~Cannot enter vehicle while it is being pushed.`);
+            playerFuncs.emit.notification(player, `Cannot enter vehicle while it is being pushed.`);
             return;
+        }
+
+        // Enter Vehicle Ruleset
+        if (rules[VEHICLE_RULES.ENTER].length >= 1) {
+            for (let i = 0; i < rules[VEHICLE_RULES.ENTER].length; i++) {
+                const rule = rules[VEHICLE_RULES.ENTER][i];
+                const result = rule(player, vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
         }
 
         const enterVehicleTimeout = 3250;
@@ -184,13 +248,13 @@ export class VehicleSystem {
             {
                 nativeName: 'clearPedTasksImmediately',
                 params: [],
-                timeToWaitInMs: 100
+                timeToWaitInMs: 100,
             },
             {
                 nativeName: 'taskEnterVehicle',
                 params: [enterVehicleTimeout, seat, 2, 1, 0],
-                timeToWaitInMs: enterVehicleTimeout
-            }
+                timeToWaitInMs: enterVehicleTimeout,
+            },
         ];
 
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
@@ -206,8 +270,8 @@ export class VehicleSystem {
                 {
                     nativeName: 'clearPedTasks',
                     params: [],
-                    timeToWaitInMs: 100
-                }
+                    timeToWaitInMs: 100,
+                },
             ];
 
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, vehicle);
@@ -275,13 +339,32 @@ export class VehicleSystem {
             }
         }
 
+        // Exit Vehicle Ruleset
+        if (rules[VEHICLE_RULES.EXIT].length >= 1) {
+            for (let i = 0; i < rules[VEHICLE_RULES.EXIT].length; i++) {
+                const rule = rules[VEHICLE_RULES.EXIT][i];
+                const result = rule(player, vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
+        }
+
         const tasks: Array<Task> = [
             //   native.taskLeaveAnyVehicle(alt.Player.local.scriptID, 0, 0);
             {
                 nativeName: 'taskLeaveAnyVehicle',
                 params: [0, 0],
-                timeToWaitInMs: 0
-            }
+                timeToWaitInMs: 0,
+            },
         ];
 
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
@@ -360,8 +443,8 @@ export class VehicleSystem {
                 {
                     nativeName: 'clearPedTasksImmediately',
                     params: [],
-                    timeToWaitInMs: 0
-                }
+                    timeToWaitInMs: 0,
+                },
             ];
 
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
@@ -461,6 +544,25 @@ export class VehicleSystem {
             return;
         }
 
+        // Engine Vehicle Ruleset
+        if (rules[VEHICLE_RULES.ENGINE].length >= 1) {
+            for (let i = 0; i < rules[VEHICLE_RULES.ENGINE].length; i++) {
+                const rule = rules[VEHICLE_RULES.ENGINE][i];
+                const result = rule(player, player.vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
+        }
+
         // Setting the engine client-side appears to change the server-side variable.
         // Meaning that it's okay to use the native to toggle these things.
         const tasks: Array<Task> = [
@@ -468,8 +570,8 @@ export class VehicleSystem {
             {
                 nativeName: 'setVehicleEngineOn',
                 params: [!player.vehicle.engineOn, false, false],
-                timeToWaitInMs: 0
-            }
+                timeToWaitInMs: 0,
+            },
         ];
 
         // Force close vehicle doors on state change.
@@ -535,6 +637,25 @@ export class VehicleSystem {
             return;
         }
 
+        // Vehicle Door Ruleset
+        if (rules[VEHICLE_RULES.DOOR].length >= 1) {
+            for (let i = 0; i < rules[VEHICLE_RULES.DOOR].length; i++) {
+                const rule = rules[VEHICLE_RULES.DOOR][i];
+                const result = rule(player, vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
+        }
+
         const newValue = vehicle.hasStreamSyncedMeta(doorState) ? !vehicle.getStreamSyncedMeta(doorState) : true;
 
         // Prevent opening doors while the vehicle is locked.
@@ -574,6 +695,28 @@ export class VehicleSystem {
             return;
         }
 
+        const isLocked = (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
+        const rulesToRun = isLocked ? VEHICLE_RULES.UNLOCK : VEHICLE_RULES.LOCK;
+
+        // Run Lock or Unlock Rules
+        if (rules[rulesToRun].length >= 1) {
+            for (let i = 0; i < rules[rulesToRun].length; i++) {
+                const rule = rules[rulesToRun][i];
+                const result = rule(player, vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
+        }
+
         // Update Vehicle Lock State
         vehicle.lockState =
             (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED
@@ -588,7 +731,7 @@ export class VehicleSystem {
                 `anim@mp_player_intmenu@key_fob@`,
                 'fob_click_fp',
                 ANIMATION_FLAGS.UPPERBODY_ONLY | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
-                -1
+                -1,
             );
         }
 
@@ -723,13 +866,32 @@ export class VehicleSystem {
         }
 
         const vehicleInfo = VehicleData.find(
-            (x) => x.name.toLocaleLowerCase() === vehicle.data.model.toLocaleLowerCase()
+            (x) => x.name.toLocaleLowerCase() === vehicle.data.model.toLocaleLowerCase(),
         );
 
         if (!vehicleInfo || !vehicleInfo.storage) {
             playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
+        }
+
+        // Storage Vehicle Ruleset
+        if (rules[VEHICLE_RULES.STORAGE].length >= 1) {
+            for (let i = 0; i < rules[VEHICLE_RULES.STORAGE].length; i++) {
+                const rule = rules[VEHICLE_RULES.STORAGE][i];
+                const result = rule(player, vehicle);
+
+                if (!result.status && result.response !== '') {
+                    playerFuncs.emit.message(player, result.response);
+                    return;
+                }
+
+                if (!result.status && result.response === '') {
+                    return;
+                }
+
+                continue;
+            }
         }
 
         let storageID: string;

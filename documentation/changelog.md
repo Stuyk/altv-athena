@@ -36,6 +36,7 @@ description: List of all the changes and current versions.
 + Fixed Non-Unique Identifiers for Stream Based Data
 + Fix ownership bug where no data is present on vehicle
 + Fix Hologram Invincibility
++ Add Custom Vehicle Rules for engine, unlock, lock, doors, enter, and exit
 ```
 
 ## 2.0.3
