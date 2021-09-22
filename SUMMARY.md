@@ -48,6 +48,7 @@
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
 -   [Adding Locale / Translations](documentation/scripting/adding-locale.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
+-   [Adding Vehicle Rules](documentation/scripting/adding-vehicle-rules.md)
 -   [Adding Whitelist](documentation/scripting/adding-whitelist.md)
 -   [Adding Wheel Menus](documentation/scripting/adding-wheel-menus.md)
 -   [Adding Parking Garages](documentation/scripting/adding-parking-garages.md)
