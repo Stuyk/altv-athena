@@ -31,7 +31,6 @@ import '../views/dealership';
 import '../views/garage';
 import './fuel';
 import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
-import { IVehicleDoorRule, IVehicleRule } from '../interface/IVehicleCallback';
 import { IResponse } from '../../shared/interfaces/IResponse';
 
 /**
@@ -78,7 +77,7 @@ import { IResponse } from '../../shared/interfaces/IResponse';
  * Custom rules that can be extended and are triggered before invoking the rest of the function.
  *
  */
-const rules: { [key: string]: Array<IVehicleRule | IVehicleDoorRule> } = {
+const rules: { [key: string]: Array<(player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse> } = {
     [VEHICLE_RULES.ENTER]: [],
     [VEHICLE_RULES.EXIT]: [],
     [VEHICLE_RULES.LOCK]: [],
@@ -136,23 +135,17 @@ export class VehicleSystem {
     }
 
     /**
-     * Add a custom rule to the vehicle system.
-     * These custom rules are checked based on the name.
-     *
-     * ie. if you choose exit. The callback is verified to return true
-     * before allowing the player to exit a vehicle.
-     *
-     * if you choose enter. the callback is verified to return true before
-     * allowing the player to enter a vehicle
-     *
-     * etc.
-     *
+     * Add a custom rule. Each rule is checked before executing normal behavior.
+     * ie. Check vehicle ownership -> check engine rules -> execute engine functionality
      * @static
-     * @param {VEHICLE_RULES} type
-     * @param {Function} callback
+     * @param {VEHICLE_RULES} ruleType The rule to append the check to
+     * @param {(player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse} callback A function that receives player, vehicle, etc.
      * @memberof VehicleSystem
      */
-    static addCustomRule(ruleType: VEHICLE_RULES, callback: IVehicleRule) {
+    static addCustomRule(
+        ruleType: VEHICLE_RULES,
+        callback: (player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse,
+    ) {
         if (!rules[ruleType]) {
             alt.logError(`${ruleType} does not exist for Vehicle Rules`);
             return;
@@ -182,19 +175,8 @@ export class VehicleSystem {
         }
 
         for (let i = 0; i < rules[ruleType].length; i++) {
-            let rule;
-            let result: IResponse;
-
-            switch (ruleType) {
-                case VEHICLE_RULES.DOOR:
-                    rule = rules[ruleType][i] as IVehicleDoorRule;
-                    result = rule(player, vehicle, data as number);
-                    break;
-                default:
-                    rule = rules[ruleType][i] as IVehicleRule;
-                    result = rule(player, vehicle);
-                    break;
-            }
+            const rule = rules[ruleType][i];
+            const result = rule(player, vehicle, data);
 
             if (!result.status && result.response !== '' && result.response !== null) {
                 playerFuncs.emit.message(player, result.response);
