@@ -295,6 +295,72 @@ export class InteriorSystem {
     }
 
     /**
+     * Adds a faction to an interior.
+     * @static
+     * @param {string} id Interior Identifier
+     * @param {string} faction
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async addFactionOwnership(id: string, faction: string): Promise<boolean> {
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (index <= -1) {
+            return false;
+        }
+
+        if (!interiors[index].factions) {
+            interiors[index].factions = [];
+        }
+
+        const existingFaction = interiors[index].factions.find((x) => x === faction);
+        if (existingFaction) {
+            return true;
+        }
+
+        interiors[index].factions.push(faction);
+        await Database.updatePartialData(
+            interiors[index]._id.toString(),
+            { factions: interiors[index].factions },
+            Collections.Interiors,
+        );
+
+        return true;
+    }
+
+    /**
+     * Remove a faction from an interior.
+     * @static
+     * @param {string} id Interior Identifier
+     * @param {string} faction
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async removeFactionOwnership(id: string, faction: string): Promise<boolean> {
+        const index = interiors.findIndex((ref) => `${ref.id}` === `${id}`);
+        if (index <= -1) {
+            return false;
+        }
+
+        if (!interiors[index].factions) {
+            interiors[index].factions = [];
+        }
+
+        const factionIndex = interiors[index].factions.findIndex((x) => x === faction);
+        if (factionIndex <= -1) {
+            return true;
+        }
+
+        interiors[index].factions.splice(factionIndex, 1);
+        await Database.updatePartialData(
+            interiors[index]._id.toString(),
+            { factions: interiors[index].factions },
+            Collections.Interiors,
+        );
+
+        return true;
+    }
+
+    /**
      * Refreshes an interior and for anyone inside of it.
      * @static
      * @param {string} id
