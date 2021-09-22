@@ -31,7 +31,8 @@ import '../views/dealership';
 import '../views/garage';
 import './fuel';
 import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
-import IVehicleRule from '../interface/IVehicleCallback';
+import { IVehicleDoorRule, IVehicleRule } from '../interface/IVehicleCallback';
+import { IResponse } from '../../shared/interfaces/IResponse';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -77,7 +78,7 @@ import IVehicleRule from '../interface/IVehicleCallback';
  * Custom rules that can be extended and are triggered before invoking the rest of the function.
  *
  */
-const rules: { [key: string]: Array<IVehicleRule> } = {
+const rules: { [key: string]: Array<IVehicleRule | IVehicleDoorRule> } = {
     [VEHICLE_RULES.ENTER]: [],
     [VEHICLE_RULES.EXIT]: [],
     [VEHICLE_RULES.LOCK]: [],
@@ -158,6 +159,51 @@ export class VehicleSystem {
     }
 
     /**
+     * Runs custom rules.
+     * If true then the rule checks were successfully passed.
+     * @static
+     * @param {VEHICLE_RULES} type
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @return {boolean}
+     * @memberof VehicleSystem
+     */
+    static checkCustomRules(type: VEHICLE_RULES, player: alt.Player, vehicle: alt.Vehicle, data?: any): boolean {
+        if (rules[type].length <= 0) {
+            return true;
+        }
+
+        for (let i = 0; i < rules[type].length; i++) {
+            let rule;
+            let result: IResponse;
+
+            switch (type) {
+                case VEHICLE_RULES.DOOR:
+                    rule = rules[type][i] as IVehicleDoorRule;
+                    result = rule(player, vehicle, data as number);
+                    break;
+                default:
+                    rule = rules[type][i] as IVehicleRule;
+                    result = rule(player, vehicle);
+                    break;
+            }
+
+            if (!result.status && result.response !== '' && result.response !== null) {
+                playerFuncs.emit.message(player, result.response);
+                return false;
+            }
+
+            if (!result.status && result.response === '') {
+                return false;
+            }
+
+            continue;
+        }
+
+        return true;
+    }
+
+    /**
      * Called when a player interacts with a vehicle.
      * @static
      * @param {alt.Player} player
@@ -223,23 +269,8 @@ export class VehicleSystem {
             return;
         }
 
-        // Enter Vehicle Ruleset
-        if (rules[VEHICLE_RULES.ENTER].length >= 1) {
-            for (let i = 0; i < rules[VEHICLE_RULES.ENTER].length; i++) {
-                const rule = rules[VEHICLE_RULES.ENTER][i];
-                const result = rule(player, vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENTER, player, vehicle)) {
+            return;
         }
 
         const enterVehicleTimeout = 3250;
@@ -339,23 +370,8 @@ export class VehicleSystem {
             }
         }
 
-        // Exit Vehicle Ruleset
-        if (rules[VEHICLE_RULES.EXIT].length >= 1) {
-            for (let i = 0; i < rules[VEHICLE_RULES.EXIT].length; i++) {
-                const rule = rules[VEHICLE_RULES.EXIT][i];
-                const result = rule(player, vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.EXIT, player, vehicle)) {
+            return;
         }
 
         const tasks: Array<Task> = [
@@ -544,23 +560,8 @@ export class VehicleSystem {
             return;
         }
 
-        // Engine Vehicle Ruleset
-        if (rules[VEHICLE_RULES.ENGINE].length >= 1) {
-            for (let i = 0; i < rules[VEHICLE_RULES.ENGINE].length; i++) {
-                const rule = rules[VEHICLE_RULES.ENGINE][i];
-                const result = rule(player, player.vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.ENGINE, player, player.vehicle)) {
+            return;
         }
 
         // Setting the engine client-side appears to change the server-side variable.
@@ -637,23 +638,8 @@ export class VehicleSystem {
             return;
         }
 
-        // Vehicle Door Ruleset
-        if (rules[VEHICLE_RULES.DOOR].length >= 1) {
-            for (let i = 0; i < rules[VEHICLE_RULES.DOOR].length; i++) {
-                const rule = rules[VEHICLE_RULES.DOOR][i];
-                const result = rule(player, vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.DOOR, player, vehicle, doorNumber)) {
+            return;
         }
 
         const newValue = vehicle.hasStreamSyncedMeta(doorState) ? !vehicle.getStreamSyncedMeta(doorState) : true;
@@ -696,25 +682,10 @@ export class VehicleSystem {
         }
 
         const isLocked = (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
-        const rulesToRun = isLocked ? VEHICLE_RULES.UNLOCK : VEHICLE_RULES.LOCK;
+        const ruleToRun = isLocked ? VEHICLE_RULES.UNLOCK : VEHICLE_RULES.LOCK;
 
-        // Run Lock or Unlock Rules
-        if (rules[rulesToRun].length >= 1) {
-            for (let i = 0; i < rules[rulesToRun].length; i++) {
-                const rule = rules[rulesToRun][i];
-                const result = rule(player, vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(ruleToRun, player, vehicle)) {
+            return;
         }
 
         // Update Vehicle Lock State
@@ -875,23 +846,8 @@ export class VehicleSystem {
             return;
         }
 
-        // Storage Vehicle Ruleset
-        if (rules[VEHICLE_RULES.STORAGE].length >= 1) {
-            for (let i = 0; i < rules[VEHICLE_RULES.STORAGE].length; i++) {
-                const rule = rules[VEHICLE_RULES.STORAGE][i];
-                const result = rule(player, vehicle);
-
-                if (!result.status && result.response !== '') {
-                    playerFuncs.emit.message(player, result.response);
-                    return;
-                }
-
-                if (!result.status && result.response === '') {
-                    return;
-                }
-
-                continue;
-            }
+        if (!VehicleSystem.checkCustomRules(VEHICLE_RULES.STORAGE, player, vehicle)) {
+            return;
         }
 
         let storageID: string;
