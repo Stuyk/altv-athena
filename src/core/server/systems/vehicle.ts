@@ -141,11 +141,35 @@ export class VehicleSystem {
      * Add a custom rule. Each rule is checked before executing normal behavior.
      * ie. Check vehicle ownership -> check engine rules -> execute engine functionality
      *
+     * Returning true means it passed the check.
+     *
      * Example (seat object is optional)
      * ```ts
      * VehicleSystem.addCustomRule(VEHICLE_RULES.ENTER, (player, vehicle, { seat }) => {
-     *      return { status: true, response: 'Entered vehicle without issue' };
-     * })
+     *      // Probably not a 'faction' vehicle.
+     *      if (!vehicle.data) {
+     *           return { status: true, response: null };
+     *      }
+     *
+     *      // Vehicle is not a faction vehicle.
+     *      if (!vehicle.data.faction) {
+     *           return { status: true, response: null };
+     *      }
+     *
+     *      // Vehicle is a faction vehicle at this point.
+     *      // Player is not in a faction.
+     *      if (!player.data.faction) {
+     *          return { status: false, response: null };
+     *      }
+     *
+     *      // Faction matches player's faction.
+     *      if (player.data.faction === vehicle.data.faction) {
+     *          return { status: true, response: null };
+     *      }
+     *
+     *      // Player is not in same faction as vehicle.
+     *      return { status: false, response: 'You do not have keys for this faction vehicle.' };
+     * });
      * ```
      *
      * @static
