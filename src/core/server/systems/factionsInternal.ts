@@ -315,7 +315,7 @@ export class FactionInternalSystem {
      */
     static find(partialID: string): IFaction | null {
         const keys = Object.keys(factions);
-        const key = keys.find((x) => x.includes(partialID));
+        const key = keys.find((x) => x.toLocaleLowerCase().includes(partialID.toLowerCase()));
 
         if (!key) {
             return null;
@@ -356,13 +356,14 @@ export class FactionInternalSystem {
      * @memberof FactionInternalSystem
      */
     static getAllFactions(): Array<IFaction> {
-        const factions = [];
+        const factionList = [];
+
         Object.keys(factions).forEach((identifier) => {
             const faction = factions[identifier];
-            factions.push(faction);
+            factionList.push(faction);
         });
 
-        return factions;
+        return factionList;
     }
 
     /**

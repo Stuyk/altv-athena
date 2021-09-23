@@ -11,7 +11,7 @@
         "dev": "npm run build && npm-run-all --parallel athena-webserver athena-streamer athena-devmode",
         "[-] Updating, Installing, Cleanup": "",
         "build": "npm run clean && swc ./src -d ./resources --copy-files --only **/*.ts --quiet",
-        "clean": "rimraf ./resources",
+        "clean": "node ./scripts/rimraf/index.js",
         "update": "altv-pkg d release",
         "check": "tsc",
         "[-] Binary Running Commands": "",

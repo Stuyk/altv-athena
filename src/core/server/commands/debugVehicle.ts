@@ -8,6 +8,7 @@ import VehicleFuncs from '../extensions/VehicleFuncs';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
+import { FactionInternalSystem } from '../systems/factionsInternal';
 
 ChatController.addCommand(
     'vehicle',
@@ -31,7 +32,7 @@ ChatController.addCommand(
 );
 
 ChatController.addCommand(
-    'addfactionvehicle',
+    'addfactionvehiclebyid',
     '/addfactionvehiclebyid [faction_id] [model]',
     PERMISSIONS.ADMIN,
     handleAddFactionVehicleByID,
@@ -101,6 +102,13 @@ function handleAddFactionVehicle(player: alt.Player, model: string): void {
         return;
     }
 
+    const isValidFaction = FactionInternalSystem.find(player.data.faction);
+
+    if (!isValidFaction) {
+        playerFuncs.emit.message(player, `Could not find that faction.`);
+        return;
+    }
+
     const fwd = getVectorInFrontOfPlayer(player, 5);
 
     try {
@@ -108,7 +116,7 @@ function handleAddFactionVehicle(player: alt.Player, model: string): void {
 
         VehicleFuncs.add(
             {
-                owner: player.data.faction.toString(),
+                owner: isValidFaction._id.toString(),
                 ownerType: VEHICLE_OWNERSHIP.FACTION,
                 fuel: 100,
                 model,
@@ -137,6 +145,13 @@ function handleAddFactionVehicleByID(player: alt.Player, id: string, model: stri
         return;
     }
 
+    const isValidFaction = FactionInternalSystem.find(id);
+
+    if (!isValidFaction) {
+        playerFuncs.emit.message(player, `Could not find that faction.`);
+        return;
+    }
+
     if (!model) {
         playerFuncs.emit.message(player, `Vehicle model not specified`);
         return;
@@ -154,7 +169,7 @@ function handleAddFactionVehicleByID(player: alt.Player, id: string, model: stri
 
         VehicleFuncs.add(
             {
-                owner: player.data.faction.toString(),
+                owner: isValidFaction._id.toString(),
                 ownerType: VEHICLE_OWNERSHIP.FACTION,
                 fuel: 100,
                 model,
