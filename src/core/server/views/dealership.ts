@@ -27,16 +27,16 @@ class DealershipFunctions {
                         dealership.vehiclePosition,
                         dealership.vehicleHeading,
                         vehicles,
-                        `dealership-holo-${i}` // identifier
+                        `dealership-holo-${i}`, // identifier
                     );
-                }
+                },
             });
 
             HologramController.add({
                 position: dealership.vehiclePosition,
                 heading: dealership.vehicleHeading,
                 identifier: `dealership-holo-${i}`,
-                model: dealership.vehiclePreview
+                model: dealership.vehiclePreview,
             });
 
             if (dealership.createBlip) {
@@ -47,7 +47,7 @@ class DealershipFunctions {
                     scale: 1,
                     shortRange: true,
                     pos: dealership.position,
-                    uid: `dealership-${i}`
+                    uid: `dealership-${i}`,
                 });
             }
         }
@@ -87,9 +87,9 @@ class DealershipFunctions {
                 fuel: 100,
                 position: { x: 0, y: 0, z: 0 },
                 rotation: { x: 0, y: 0, z: 0 },
-                color: { r: 255, g: 255, b: 255, a: 255 }
+                color: { r: 255, g: 255, b: 255, a: 255 },
             },
-            true
+            true,
         );
 
         playerFuncs.emit.notification(player, `Visit a garage to spawn your new vehicle.`);

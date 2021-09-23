@@ -41,6 +41,7 @@ description: List of all the changes and current versions.
 + Add Custom Interior Rules for enter, exit, unlock, and lock
 + Add / Remove Faction(s) from Interiors with Function
 + Add Faction Vehicle Information to Vehicle System
++ Add / Remove Blip(s) from individual players
 ```
 
 ## 2.0.3
