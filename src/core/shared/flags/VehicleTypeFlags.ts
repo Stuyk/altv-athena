@@ -21,13 +21,14 @@ export const enum VEHICLE_CLASS {
     TRAILER = 'trailer',
     TRAIN = 'train',
     UTILITY = 'utility',
-    VAN = 'van'
+    VAN = 'van',
 }
 
 export const enum VEHICLE_TYPE {
     BOAT = 'boat',
     AIRCRAFT = 'aircraft',
-    VEHICLE = 'vehicle'
+    VEHICLE = 'vehicle',
+    TRAIN = 'train',
 }
 
 export function isVehicleType(type: string, vehicleType: VEHICLE_TYPE): boolean {
