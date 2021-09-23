@@ -307,6 +307,65 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Finds a faction by partial id
+     * @static
+     * @param {string} partialID
+     * @return {(IFaction | null)}
+     * @memberof FactionInternalSystem
+     */
+    static find(partialID: string): IFaction | null {
+        const keys = Object.keys(factions);
+        const key = keys.find((x) => x.includes(partialID));
+
+        if (!key) {
+            return null;
+        }
+
+        return factions[key];
+    }
+
+    /**
+     * Finds a faction by name.
+     * @static
+     * @param {string} name
+     * @return {(IFaction | null)}
+     * @memberof FactionInternalSystem
+     */
+    static findByName(name: string): IFaction | null {
+        let matchingIdentifier;
+
+        Object.keys(factions).forEach((identifier) => {
+            const faction = factions[identifier];
+
+            if (faction.name.toLowerCase().includes(name.toLowerCase())) {
+                matchingIdentifier = identifier;
+            }
+        });
+
+        if (!matchingIdentifier) {
+            return null;
+        }
+
+        return factions[matchingIdentifier];
+    }
+
+    /**
+     * Returns all currently loaded factions.
+     * @static
+     * @return {Array<IFaction>}
+     * @memberof FactionInternalSystem
+     */
+    static getAllFactions(): Array<IFaction> {
+        const factions = [];
+        Object.keys(factions).forEach((identifier) => {
+            const faction = factions[identifier];
+            factions.push(faction);
+        });
+
+        return factions;
+    }
+
+    /**
      * Does general setup for the faction.
      * Also looks up vehicles and spawns them.
      * @static

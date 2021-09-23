@@ -42,6 +42,9 @@ description: List of all the changes and current versions.
 + Add / Remove Faction(s) from Interiors with Function
 + Add Faction Vehicle Information to Vehicle System
 + Add / Remove Blip(s) from individual players
++ Updated Vehicle List with Missing Vehicles, and Typings
++ Added Modding Information Snippet for Vehicle Mods
++ Added Faction List / Lookup
 ```
 
 ## 2.0.3

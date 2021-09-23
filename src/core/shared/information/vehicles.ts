@@ -4,6 +4,9 @@ import { VehicleInfo } from '../interfaces/VehicleInfo';
 /**
  * If you add a 'modded vehicle' you will need to append it into this list.
  * This list contains the seat count, and basically makes modded vehicles function.
+ *
+ * Make sure you look at other example vehicles because `seat count` may not be what it seems.
+ * Find a default vehicle that has similar seating to the vehicle you are adding.
  */
 export const VehicleData: Array<VehicleInfo> = [
     {

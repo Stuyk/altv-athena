@@ -9,7 +9,7 @@ function handleCreate(player: alt.Player, ...name: string[]): void {
     if (!player || !player.valid || player.data.faction) {
         playerFuncs.emit.message(
             player,
-            `Leave your faction (/leavefaction) or transfer ownership before creating a new one.`
+            `Leave your faction (/leavefaction) or transfer ownership before creating a new one.`,
         );
         return;
     }
@@ -132,18 +132,37 @@ async function handleLeave(player: alt.Player) {
     playerFuncs.emit.notification(player, response.response);
 }
 
+function handleFactions(player: alt.Player) {
+    const factions = FactionInternalSystem.getAllFactions();
+    playerFuncs.emit.message(player, '--- Faction List ---');
+    for (let i = 0; i < factions.length; i++) {
+        const faction = factions[i];
+        playerFuncs.emit.message(
+            player,
+            `${faction.name} - ID: ${faction._id.toString()} - Members: ${faction.players.length}`,
+        );
+    }
+}
+
 ChatController.addCommand(
     'factiontake',
     '/factiontake [id] - Take Faction Ownership',
     PERMISSIONS.ADMIN,
-    handleTakeover
+    handleTakeover,
 );
 
 ChatController.addCommand(
     'factionhandoff',
     '/factionhandoff - Hand off faction ownership.',
     PERMISSIONS.ADMIN,
-    handleHandOff
+    handleHandOff,
+);
+
+ChatController.addCommand(
+    'factions',
+    '/factions - Returns a list of factions.',
+    PERMISSIONS.MODERATOR | PERMISSIONS.ADMIN,
+    handleFactions,
 );
 
 ChatController.addCommand('factionaccept', '/factionaccept - Accept latest invite.', PERMISSIONS.NONE, handleAccept);

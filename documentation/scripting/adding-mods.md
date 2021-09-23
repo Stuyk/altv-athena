@@ -33,3 +33,11 @@ This is necessary to ensure a clean build is created for each deployment.
 **Resource Name**
 
 `hospital`
+
+# Vehicle Mods
+
+If you are adding vehicle mods you will need to append their vehicle data to `src/core/shared/information/vehicles.ts` and add their seat count, type, class, etc.
+
+If you do not add these your vehicle **will not** function.
+
+Make sure you look at other example vehicles because `seat count` may not be what it seems.
