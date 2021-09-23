@@ -45,6 +45,7 @@ description: List of all the changes and current versions.
 + Updated Vehicle List with Missing Vehicles, and Typings
 + Added Modding Information Snippet for Vehicle Mods
 + Added Faction List / Lookup
++ Add Faction Vehicles to Garage System
 ```
 
 ## 2.0.3

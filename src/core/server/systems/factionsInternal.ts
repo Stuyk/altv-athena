@@ -325,6 +325,17 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Get all vehicles that belong to a faction.
+     * @static
+     * @param {string} id
+     * @return {*}
+     * @memberof FactionInternalSystem
+     */
+    static async getAllVehicles(id: string): Promise<IVehicle[]> {
+        return await Database.fetchAllByField(`owner`, id, Collections.Vehicles);
+    }
+
+    /**
      * Finds a faction by name.
      * @static
      * @param {string} name

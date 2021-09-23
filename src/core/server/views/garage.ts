@@ -12,6 +12,7 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { BlipController } from '../systems/blip';
+import { FactionInternalSystem } from '../systems/factionsInternal';
 import { InteractionController } from '../systems/interaction';
 import { MarkerController } from '../systems/marker';
 import { sha256 } from '../utility/encryption';
@@ -38,7 +39,7 @@ class GarageFunctions {
                 description: LocaleController.get(LOCALE_KEYS.GARAGE_DESCRIPTION, properTypeName),
                 type: 'garage',
                 data: [i], // Shop Index
-                callback: GarageFunctions.open
+                callback: GarageFunctions.open,
             });
 
             BlipController.add({
@@ -47,7 +48,7 @@ class GarageFunctions {
                 sprite: 50,
                 scale: 1,
                 shortRange: true,
-                text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME)
+                text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME),
             });
 
             MarkerController.append({
@@ -56,7 +57,7 @@ class GarageFunctions {
                 color: new alt.RGBA(0, 150, 0, 100),
                 type: 1,
                 maxDistance: 10,
-                scale: { x: 2, y: 2, z: 3 }
+                scale: { x: 2, y: 2, z: 3 },
             });
         }
     }
@@ -65,7 +66,15 @@ class GarageFunctions {
         GarageUsers[player.id] = shopIndex;
 
         const garageType = DEFAULT_CONFIG.VEHICLE_GARAGES[shopIndex].type;
-        const playerVehicles = await playerFuncs.get.allVehicles(player);
+        let playerVehicles = await playerFuncs.get.allVehicles(player);
+
+        if (player.data && player.data.faction) {
+            const factionVehicles = await FactionInternalSystem.getAllVehicles(player.data.faction);
+            if (factionVehicles.length >= 1) {
+                playerVehicles = playerVehicles.concat(factionVehicles);
+            }
+        }
+
         const validVehicles = playerVehicles.filter((vehicle) => {
             // Check if the VehicleData has this vehicle model.
             const data = VehicleData.find((dat) => dat.name === vehicle.model);
