@@ -7,7 +7,6 @@ import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import IHud from '../interface/IHud';
-import { getPointsInCircle } from '../utility/math';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
 import { drawTexture2D } from '../utility/texture';
@@ -22,77 +21,69 @@ let hudElements: Array<IHud> = [
         identifier: 'hud-cash',
         position: {
             x: 0.98,
-            y: 0.02
+            y: 0.02,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'cash', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
             const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
             const fixedValue = parseFloat(value.toFixed(0));
-            return `~g~$${fixedValue.toLocaleString()}`;
-        }
+            return `~g~$${fixedValue.toLocaleString()} ~w~CASH`;
+        },
     },
     {
         identifier: 'hud-bank',
         position: {
             x: 0.98,
-            y: 0.07
+            y: 0.07,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'bank', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
             const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
             const fixedValue = parseFloat(value.toFixed(0));
-            return `~g~$${fixedValue.toLocaleString()}`;
-        }
+            return ` ~g~$${fixedValue.toLocaleString()} ~w~BANK`;
+        },
     },
     {
         identifier: 'hud-food',
         position: {
             x: 0.98,
-            y: 0.12
+            y: 0.12,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'food', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
             const food = alt.Player.local.meta.food;
-            return food !== undefined && food !== null ? `${food.toFixed(0)}` : `100`;
-        }
+            return food !== undefined && food !== null ? `${food.toFixed(0)} FOOD` : `100 FOOD`;
+        },
     },
     {
         identifier: 'hud-water',
         position: {
             x: 0.98,
-            y: 0.17
+            y: 0.17,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'water', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
             const water = alt.Player.local.meta.water;
-            return water !== undefined && water !== null ? `${water.toFixed(0)}` : `100`;
-        }
+            return water !== undefined && water !== null ? `${water.toFixed(0)} WATER` : `100 WATER`;
+        },
     },
     {
         identifier: 'hud-vehicle',
         position: {
             x: 0.5,
-            y: 0.95
+            y: 0.95,
         },
         padding: 0,
         align: 0,
@@ -124,13 +115,13 @@ let hudElements: Array<IHud> = [
 
             return text;
         },
-        isVehicle: true
+        isVehicle: true,
     },
     {
         identifier: 'hud-time',
         position: {
             x: 0.5,
-            y: 0.02
+            y: 0.02,
         },
         padding: 0,
         align: 0,
@@ -138,13 +129,13 @@ let hudElements: Array<IHud> = [
         color: new alt.RGBA(255, 255, 255, 225),
         callback: () => {
             return World.getTimeAsString();
-        }
+        },
     },
     {
         identifier: 'hud-objective',
         position: {
             x: 0.5,
-            y: 0.9
+            y: 0.9,
         },
         padding: 0,
         align: 0,
@@ -152,13 +143,13 @@ let hudElements: Array<IHud> = [
         color: new alt.RGBA(255, 255, 255, 225),
         callback: () => {
             return objective ? objective : '';
-        }
+        },
     },
     {
         identifier: 'hud-wanted',
         position: {
             x: 0.54,
-            y: 0.08
+            y: 0.08,
         },
         padding: 0,
         align: 0,
@@ -171,7 +162,7 @@ let hudElements: Array<IHud> = [
             for (let i = 0; i < 5; i++) {
                 const newPos = {
                     x: pos.x - 0.02 * i,
-                    y: pos.y
+                    y: pos.y,
                 };
 
                 if (i + 1 >= 6 - stars) {
@@ -183,8 +174,8 @@ let hudElements: Array<IHud> = [
             }
 
             return null;
-        }
-    }
+        },
+    },
 ];
 
 export class HudSystem {
