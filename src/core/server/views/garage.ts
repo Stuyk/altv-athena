@@ -17,6 +17,7 @@ import { InteractionController } from '../systems/interaction';
 import { MarkerController } from '../systems/marker';
 import { sha256 } from '../utility/encryption';
 
+const IGNORE_DISTANCE = 25;
 const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
 const VehicleCache: { [id: string]: Array<IVehicle> } = {};
@@ -90,6 +91,19 @@ class GarageFunctions {
             // Check if Vehicle Type is null or undefined.
             // Basically means does this vehicle have a garage yet?
             if (vehicle.garageIndex === null || vehicle.garageIndex === undefined) {
+                const existingVehicle = alt.Vehicle.all.find(
+                    (x) => x.data && x.data._id.toString() === vehicle._id.toString(),
+                );
+
+                if (!existingVehicle) {
+                    return false;
+                }
+
+                const dist = distance2d(existingVehicle.pos, player.pos);
+                if (dist >= IGNORE_DISTANCE) {
+                    return false;
+                }
+
                 return true;
             }
 
@@ -98,7 +112,7 @@ class GarageFunctions {
                 return true;
             }
 
-            // Append vehicles that belong to the player to this list.
+            // Append vehicles that have been spawned that the player has access to to this list.
             if (VehicleFuncs.hasBeenSpawned(vehicle.id)) {
                 return true;
             }

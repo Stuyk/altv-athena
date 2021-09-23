@@ -46,6 +46,9 @@ description: List of all the changes and current versions.
 + Added Modding Information Snippet for Vehicle Mods
 + Added Faction List / Lookup
 + Add Faction Vehicles to Garage System
++ Remove Icons from HUD
++ Add Mission Row PD Garage
++ Fix Garage Showing Vehicles Out of Range
 ```
 
 ## 2.0.3
