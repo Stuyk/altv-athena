@@ -30,7 +30,7 @@ export class PedCharacter {
     static async create(
         isMale: boolean,
         _pos: Vector3,
-        _rot: Vector3 | number = { x: 0, y: 0, z: 0 }
+        _rot: Vector3 | number = { x: 0, y: 0, z: 0 },
     ): Promise<number> {
         pos = _pos;
         rot = _rot;
@@ -69,9 +69,10 @@ export class PedCharacter {
      * Apply pedestrian appearance data.
      * @static
      * @param {Appearance} appearance
+     * @param {boolean} forceSameShoes Set to true to make female / male switching equal height.
      * @memberof PedCharacter
      */
-    static async apply(_appearance: Appearance): Promise<void> {
+    static async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
             return;
         }
@@ -83,7 +84,12 @@ export class PedCharacter {
             await PedCharacter.create(_appearance.sex === 1 ? true : false, pos, rot);
         }
 
-        CharacterSystem.applyAppearance(id, _appearance);
+        await CharacterSystem.applyAppearance(id, _appearance);
+
+        if (forceSameShoes) {
+            native.setPedComponentVariation(id, 6, 1, 0, 0);
+        }
+
         appearance = _appearance;
         isUpdating = false;
     }

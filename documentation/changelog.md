@@ -50,6 +50,9 @@ description: List of all the changes and current versions.
 + Add Mission Row PD Garage
 + Fix Garage Showing Vehicles Out of Range
 + Added Methods to Overwrite Default HUD
++ Added Tuning Interface
++ Fixed Vue3 Custom Component Build Errors
++ Fixed Height for Character Creator
 ```
 
 ## 2.0.3

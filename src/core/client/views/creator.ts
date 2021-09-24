@@ -30,7 +30,7 @@ export class CreatorView {
         _oldCharacterData = null,
         _noDiscard = true,
         _noName = true,
-        _totalCharacters = 0
+        _totalCharacters = 0,
     ) {
         oldCharacterData = _oldCharacterData;
         noDiscard = _noDiscard;
@@ -53,7 +53,7 @@ export class CreatorView {
 
         await PedCharacter.create(true, pos, heading);
         await sleep(100);
-        await PedEditCamera.create(PedCharacter.get(), { x: 0.18, y: -0.5, z: 0 });
+        await PedEditCamera.create(PedCharacter.get(), { x: -0.15, y: 0, z: 0 });
 
         PedEditCamera.setFov(50);
         PedEditCamera.setZPos(0.6);
@@ -110,7 +110,7 @@ export class CreatorView {
     }
 
     static async handleSync(data: Appearance): Promise<void> {
-        await PedCharacter.apply(data);
+        await PedCharacter.apply(data, true);
         PedEditCamera.update(PedCharacter.get());
     }
 }
