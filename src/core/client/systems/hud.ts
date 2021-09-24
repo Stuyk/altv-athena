@@ -268,7 +268,7 @@ export class HudSystem {
      * @param {string} identifier
      * @memberof HudSystem
      */
-    static remove(identifier: string): boolean {
+    static remove(identifier: HUD_IDENTIFIER | string): boolean {
         isUpdating = true;
 
         const index = hudElements.findIndex((x) => x.identifier === identifier);

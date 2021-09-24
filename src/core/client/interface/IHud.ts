@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
 
 export default interface IHUD {
     /**
@@ -6,7 +7,7 @@ export default interface IHUD {
      * @type {string}
      * @memberof IHUD
      */
-    identifier: string;
+    identifier: HUD_IDENTIFIER | string;
 
     /**
      * The Relative Percentage Position on Screen
