@@ -1,4 +1,4 @@
-import IVehicleHandling from '../IVehicleHandling';
+import IVehicleHandling from './IVehicleHandling';
 import IVehicleMod from './IVehicleMod';
 
 export default interface IVehicleTuning {
