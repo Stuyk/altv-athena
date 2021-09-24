@@ -39,48 +39,42 @@ Helpful for seeing what default components look like.
         </div>
         <h2 class="grey--text text--lighten-2">Input Boxes</h2>
         <h4 class="grey--text text--lighten-2">Basic</h4>
-        <Input  
-            :stack="true" 
-            :onInput="onInputChange" 
-            placeholder="Input First Name..."
-        />
+        <Input :stack="true" :onInput="onInputChange" placeholder="Input First Name..." />
         <h4 class="grey--text text--lighten-2">Basic Unstacked</h4>
-        <Input 
-            label="First Name" 
-            :stack="false" 
-            :onInput="onInputChange" 
-            placeholder="Hello World" 
-        />
+        <Input label="First Name" :stack="false" :onInput="onInputChange" placeholder="Hello World" />
         <h4 class="grey--text text--lighten-2">Advanced with Rules</h4>
-        <Input 
-            label="Age" 
-            :numberOnly="true" 
-            :stack="false" 
+        <Input
+            label="Age"
+            :numberOnly="true"
+            :stack="false"
             :onInput="ageInputChange"
             :validateCallback="ageValidCallback"
             :value="5"
             :rules="[
-                (text) => { return parseInt(text) >= 18 ? null : 'Age must be at least 18' },
-                (text) => { return parseInt(text) <= 99 ? null : 'Age cannot exceed 99' },
+                (text) => {
+                    return parseInt(text) >= 18 ? null : 'Age must be at least 18';
+                },
+                (text) => {
+                    return parseInt(text) <= 99 ? null : 'Age cannot exceed 99';
+                },
             ]"
             icon="icon-question"
-            placeholder="25..." 
+            placeholder="25..."
         />
         <h4 class="grey--text text--lighten-2">Range Input</h4>
-        <RangeInput 
-            uid="someRangeName"
-            :minIndex="0" 
-            :maxIndex="4" 
+        <RangeInput
+            :minIndex="0"
+            :maxIndex="4"
             :indexValue="0"
             :increment="1"
             :values="rangeValues"
-            :callback="onRangeInputChange"
+            @input="changedInput"
         />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import Input from '../../components/Input.vue';
 import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
@@ -88,39 +82,38 @@ import RangeInput from '../../components/RangeInput.vue';
 
 const ComponentName = 'Designs';
 export default defineComponent({
-  name: ComponentName,
-  data() {
-      return {
-          ageValid: false,
-          rangeValues: ['Head', 'Mouth', 'Shoulders', 'Knees', 'Toes']
-      }
-  },
-  components: {
-      Button,
-      Icon,
-      Input,
-      RangeInput
-  },
-  methods: {
-      doSomething() {
-          console.log('did something')
-      },
-      onInputChange(text: string) {
-          console.log(text);
-      },
-      onRangeInputChange(uid: string, value: number) {
-          console.log(uid, value);
-      },
-      ageValidCallback(valid: boolean) {
-          this.ageValid = valid;
-          console.log(`Is Age Valid: ${this.ageValid}`);
-      },
-      ageInputChange(text: string) {
-          console.log(`Age Input as: ${text}`);
-      }
-  },
-  
-})
+    name: ComponentName,
+    data() {
+        return {
+            ageValid: false,
+            rangeValues: ['Head', 'Mouth', 'Shoulders', 'Knees', 'Toes'],
+        };
+    },
+    components: {
+        Button,
+        Icon,
+        Input,
+        RangeInput,
+    },
+    methods: {
+        doSomething() {
+            console.log('did something');
+        },
+        onInputChange(text: string) {
+            console.log(text);
+        },
+        changedInput(e: Event) {
+            console.log(parseFloat(e.target['value']));
+        },
+        ageValidCallback(valid: boolean) {
+            this.ageValid = valid;
+            console.log(`Is Age Valid: ${this.ageValid}`);
+        },
+        ageInputChange(text: string) {
+            console.log(`Age Input as: ${text}`);
+        },
+    },
+});
 </script>
 
 <style scoped>

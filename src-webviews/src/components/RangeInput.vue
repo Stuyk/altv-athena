@@ -1,11 +1,11 @@
 <template>
     <div class="stack">
         <div class="split">
-            <div class="blue--text overline pr-2" style="min-width: 30px; text-align: right;">{{ getValue }}</div>
-            <input type="range" :min="_min" :max="_max" :step="_step" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
-            <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left;">{{ _max }}</div>
+            <div class="blue--text overline pr-2" style="min-width: 30px; text-align: right">{{ getValue }}</div>
+            <input type="range" :min="_min" :max="_max" :step="_step" :value="_value" />
+            <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left">{{ _max }}</div>
         </div>
-        <div v-if="values" class="overline grey--text pt-2" style="text-align: center; font-size: 10px !important;">
+        <div v-if="values" class="overline grey--text pt-2" style="text-align: center; font-size: 10px !important">
             {{ getCurrentValue }}
         </div>
     </div>
@@ -21,47 +21,40 @@ export default defineComponent({
         return {
             _min: 0,
             _max: 1,
-            _step: 1
+            _step: 1,
+            _value: 0,
         };
     },
     props: {
         indexValue: {
             type: Number,
-            required: true
+            required: true,
         },
         minIndex: {
             type: Number,
-            required: true
+            required: true,
         },
         maxIndex: {
             type: Number,
-            required: true
+            required: true,
         },
         increment: {
             type: Number,
-            required: true
+            required: true,
         },
         values: {
             type: Array,
-            required: false
+            required: false,
         },
-        modelValue: {
-            type: Number
-        }
     },
     methods: {
-        async playTick() {
-            const audio = new Audio('/sounds/ui/hover.ogg');
-            audio.volume = 0.1;
-            await audio.play();
-        },
         isNotNumber(value) {
             if (value === undefined || value === null) {
                 return true;
             }
 
             return false;
-        }
+        },
     },
     computed: {
         inputClass() {
@@ -76,7 +69,7 @@ export default defineComponent({
             return classes;
         },
         getValue() {
-            const value: string = this.modelValue;
+            const value: string = this.indexValue;
 
             if (Math.abs(this._step) < 1) {
                 return parseFloat(value).toFixed(2);
@@ -85,16 +78,19 @@ export default defineComponent({
             return value;
         },
         getCurrentValue() {
-            if (this.values[this.modelValue].length >= 16) {
-                return this.values[this.modelValue].substr(0, 16) + '...'
+            if (!this.values[this._value]) {
+                return 'Value Not Defined';
             }
 
-            return this.values[this.modelValue];
-        }
+            if (this.values[this._value].length >= 16) {
+                return this.values[this._value].substr(0, 16) + '...';
+            }
+
+            return this.values[this._value];
+        },
     },
     mounted() {
         if (!this.isNotNumber(this.minIndex)) {
-            console.log(this.minIndex);
             this._min = this.minIndex;
         }
 
@@ -105,6 +101,21 @@ export default defineComponent({
         if (!this.isNotNumber(this.increment)) {
             this._step = this.increment;
         }
-    }
+
+        this._value = this.indexValue;
+    },
+    watch: {
+        async indexValue(newValue) {
+            this._value = newValue;
+
+            try {
+                const audio = new Audio('/sounds/ui/hover.ogg');
+                audio.volume = 0.1;
+                await audio.play();
+            } catch (err) {
+                return;
+            }
+        },
+    },
 });
 </script>

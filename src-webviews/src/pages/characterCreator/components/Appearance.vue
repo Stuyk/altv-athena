@@ -53,12 +53,12 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        uid="faceFather"
                         :minIndex="0"
                         :maxIndex="locales.faces.length - 1"
-                        v-model="data.faceFather"
+                        :indexValue="data.faceFather"
                         :increment="1"
                         :values="locales.faces"
+                        @input="(e) => setValueWrap(e, 'faceFather')"
                         style="width: 100%"
                     />
                     <Button color="blue" @click="$emit('inc-parameter', 'faceFather', 0, 45, 1)">
@@ -73,12 +73,12 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        uid="skinFather"
                         :minIndex="0"
                         :maxIndex="locales.faces.length - 1"
-                        v-model="data.skinFather"
+                        :indexValue="data.skinFather"
                         :increment="1"
                         :values="locales.faces"
+                        @input="(e) => setValueWrap(e, 'skinFather')"
                         style="width: 100%"
                     />
                     <Button color="blue" @click="$emit('inc-parameter', 'skinFather', 0, 45, 1)">
@@ -100,12 +100,12 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        uid="faceMother"
                         :minIndex="0"
                         :maxIndex="locales.faces.length - 1"
-                        v-model="data.faceMother"
+                        :indexValue="data.faceMother"
                         :increment="1"
                         :values="locales.faces"
+                        @input="(e) => setValueWrap(e, 'faceMother')"
                         style="width: 100%"
                     />
                     <Button color="blue" @click="$emit('inc-parameter', 'faceMother', 0, 45, 1)">
@@ -120,12 +120,12 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        uid="skinMother"
                         :minIndex="0"
                         :maxIndex="locales.faces.length - 1"
-                        v-model="data.skinMother"
+                        :indexValue="data.skinMother"
                         :increment="1"
                         :values="locales.faces"
+                        @input="(e) => setValueWrap(e, 'skinMother')"
                         style="width: 100%"
                     />
                     <Button color="blue" @click="$emit('inc-parameter', 'skinMother', 0, 45, 1)">
@@ -143,11 +143,11 @@
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    uid="faceMix"
                     :minIndex="0"
                     :maxIndex="1"
-                    v-model="data.faceMix"
+                    :indexValue="data.faceMix"
                     :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'faceMix')"
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
@@ -165,11 +165,11 @@
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    uid="skinMix"
                     :minIndex="0"
                     :maxIndex="1"
-                    v-model="data.skinMix"
+                    :indexValue="data.skinMix"
                     :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'skinMix')"
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
@@ -187,12 +187,12 @@
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    uid="skinMix"
                     :minIndex="0"
                     :maxIndex="locales.color.eyes.length - 1"
-                    v-model="data.eyes"
+                    :indexValue="data.eyes"
                     :values="locales.color.eyes"
                     :increment="1"
+                    @input="(e) => setValueWrap(e, 'eyes')"
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
@@ -207,12 +207,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
 import Module from '../../../components/Module.vue';
 import RangeInput from '../../../components/RangeInput.vue';
-
 
 const ComponentName = 'Appearance';
 export default defineComponent({
@@ -221,31 +219,34 @@ export default defineComponent({
         Button,
         Icon,
         Module,
-        RangeInput
+        RangeInput,
     },
     props: {
         data: {
-            type: Object
+            type: Object,
         },
         locales: {
-            type: Object
+            type: Object,
         },
         'decrement-parameter': {
-            type: Function
+            type: Function,
         },
         'increment-parameter': {
-            type: Function
+            type: Function,
         },
         'set-parameter': {
-            type: Function
-        }
+            type: Function,
+        },
     },
     data() {
         return {
-            preset: 1
+            preset: 1,
         };
     },
     methods: {
+        setValueWrap(e: Event, parameterName: string) {
+            this.$emit('set-parameter', parameterName, parseFloat(e.target['value']));
+        },
         updatePreset(value: number) {
             this.preset = value;
             this.$emit('set-parameter', 'preset', value);
@@ -254,7 +255,7 @@ export default defineComponent({
             return this.locales.appearanceComponent[name]
                 ? this.locales.appearanceComponent[name]
                 : `COULD NOT FIND LOCALE FOR appearanceComponent.${name}`;
-        }
-    }
+        },
+    },
 });
 </script>

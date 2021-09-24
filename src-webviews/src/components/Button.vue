@@ -1,10 +1,10 @@
 <template>
-    <div :class="dynamicClass" @mouseover="playHover" @mouseup="playMouseUp" :style="style" v-if="!disable">
+    <div :class="dynamicClass" @mouseover="playHover" @mouseup="playMouseUp" v-if="!disable">
         <div style="user-select: none !important; pointer-events: none !important;">
             <slot />
         </div>
     </div>
-    <div :class="dynamicClass" :style="style" v-else>
+    <div :class="dynamicClass" v-else>
         <div style="user-select: none !important; pointer-events: none !important;">
             <slot />
         </div>
@@ -23,10 +23,6 @@ export default defineComponent({
           default: false,
       },
       hover: Boolean,
-      style: {
-          type: String,
-          default: ''
-      },
       color: {
           type: String,
           default: 'blue-grey'
@@ -50,9 +46,14 @@ export default defineComponent({
   },
   methods: {
       async playHover() {
-          const audio = new Audio('/sounds/ui/hover.ogg');
-          audio.volume = 0.2;
-          await audio.play();
+          try {
+            const audio = new Audio('/sounds/ui/hover.ogg');
+            audio.volume = 0.2;
+            await audio.play();
+          } catch(err) {
+              return;
+          }
+         
       },
       async playMouseUp() {
           const audio = new Audio('/sounds/ui/click.ogg');

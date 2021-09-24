@@ -11,7 +11,7 @@
                     uid="hair"
                     :minIndex="0"
                     :maxIndex="getHairCount()"
-                    v-model="data.hair"
+                    :indexValue="data.hair"
                     :increment="1"
                     :values="data.sex === 0 ? locales.hairComponent.feminine : locales.hairComponent.masculine"
                     style="width: 100%"
@@ -34,7 +34,7 @@
                     uid="hair"
                     :minIndex="0"
                     :maxIndex="getHairCount()"
-                    v-model="data.hair"
+                    :indexValue="data.hair"
                     :increment="1"
                     :values="locales.color.hair"
                     style="width: 100%"
@@ -69,7 +69,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getHairCount()" step="1" v-model.number="data.hair" @input="e => handleChange(e, 'hair')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getHairCount()" step="1" :indexValue.number="data.hair" @input="e => handleChange(e, 'hair')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_COLOUR') }}</div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor1" @input="e => handleChange(e, 'hairColor1')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.hairColor1" @input="e => handleChange(e, 'hairColor1')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_HIGHLIGHTS') }}</div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor2 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.hairColor2" @input="e => handleChange(e, 'hairColor2')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.hairColor2" @input="e => handleChange(e, 'hairColor2')"/>
                         </div>
                     </div>
                 </template>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrows }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getEyebrowsCount()" step="1" v-model.number="data.eyebrows" @input="e => handleChange(e, 'eyebrows')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getEyebrowsCount()" step="1" :indexValue.number="data.eyebrows" @input="e => handleChange(e, 'eyebrows')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_EYEBROWS_COLOUR') }}</div>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrowsColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.eyebrowsColor1" @input="e => handleChange(e, 'eyebrowsColor1')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.eyebrowsColor1" @input="e => handleChange(e, 'eyebrowsColor1')"/>
                         </div>
                     </div>
                 </template>
@@ -166,7 +166,7 @@
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_OPACITY') }}</div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHairOpacity }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" v-model.number="data.facialHairOpacity" @input="e => handleChange(e, 'facialHairOpacity')" />
+                            <v-slider dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" :indexValue.number="data.facialHairOpacity" @input="e => handleChange(e, 'facialHairOpacity')" />
                         </div>
                     
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_FACIAL_HAIR') }}</div>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getFacialCount()" step="1" v-model.number="data.facialHair" @input="e => handleChange(e, 'facialHair')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getFacialCount()" step="1" :indexValue.number="data.facialHair" @input="e => handleChange(e, 'facialHair')"/>
                         </div>
 
                         <div class="overline blue-grey--text">{{ getLocale('LABEL_FACIAL_HAIR_COLOUR') }}</div>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="split mt-4 mb-4">
                             <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" v-model.number="data.facialHairColor1" @input="e => handleChange(e, 'facialHairColor1')"/>
+                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.facialHairColor1" @input="e => handleChange(e, 'facialHairColor1')"/>
                         </div>
                     </div>
                 </template> -->
@@ -222,11 +222,11 @@ export default defineComponent({
         Button,
         Icon,
         Module,
-        RangeInput
+        RangeInput,
     },
     props: {
         data: Object,
-        locales: Object
+        locales: Object,
     },
 
     methods: {
@@ -250,7 +250,7 @@ export default defineComponent({
             return this.locales.hairComponent[name]
                 ? this.locales.hairComponent[name]
                 : `COULD NOT FIND LOCALE FOR hairComponent.${name}`;
-        }
-    }
+        },
+    },
 });
 </script>

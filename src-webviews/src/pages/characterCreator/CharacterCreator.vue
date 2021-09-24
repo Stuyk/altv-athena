@@ -34,7 +34,7 @@
                     @dec-parameter="decrementParameter"
                     v-bind:nodiscard="noDiscard"
                     v-bind:noname="noName"
-                    v-bind:currentname="data.name"
+                    v-bind:currentname="infoData.name"
                     v-bind:infodata="infoData"
                     v-bind:totalcharacters="totalCharacters"
                 ></component>
@@ -75,12 +75,12 @@ export default defineComponent({
         Modal,
         Toolbar,
         Frame,
-        Appearance, 
-        Structure, 
-        Hair, 
-        Overlays, 
-        Makeup, 
-        Info
+        Appearance,
+        Structure,
+        Hair,
+        Overlays,
+        Makeup,
+        Info,
     },
     data() {
         return {
@@ -108,26 +108,19 @@ export default defineComponent({
                 eyebrowsColor1: 0,
                 eyes: 0,
                 opacityOverlays: [],
-                colorOverlays: []
+                colorOverlays: [],
             },
             infoData: {
                 age: new Date(1990, 1, 1),
                 gender: null,
-                name: ''
+                name: '',
             },
-            navOptions: [
-                'Appearance', 
-                'Structure', 
-                'Hair', 
-                'Overlays', 
-                'Makeup', 
-                'Info'
-            ],
+            navOptions: ['Appearance', 'Structure', 'Hair', 'Overlays', 'Makeup', 'Info'],
             noDiscard: false,
             noName: false,
             totalCharacters: 1,
             locales: DefaultLocales,
-            url: 'http://localhost:9111'
+            url: 'http://localhost:9111',
         };
     },
     computed: {
@@ -159,7 +152,7 @@ export default defineComponent({
             }
 
             return false;
-        }
+        },
     },
     methods: {
         incrementIndex() {
@@ -302,7 +295,7 @@ export default defineComponent({
         },
         resetSelection() {
             this.selection = 0;
-        }
+        },
     },
     mounted() {
         OverlaysList.forEach((overlay) => {
@@ -333,7 +326,7 @@ export default defineComponent({
             alt.emit('url');
         }
     },
-    unmounted() {}
+    unmounted() {},
 });
 </script>
 
