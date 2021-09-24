@@ -7,8 +7,8 @@ export enum ATHENA_EVENTS_VEHICLE {
     DESPAWNED = 'athena:VehicleDespawned',
     ENGINE_STATE_CHANGE = 'athena:VehicleEngineState',
     LOCK_STATE_CHANGE = 'athena:VehicleLockState',
+    REPAIRED = 'athena:VehicleRepaired',
     SPAWNED = 'athena:VehicleSpawned',
-    REPAIRED = 'athena:VehicleRepaired'
 }
 
 /**
@@ -20,13 +20,14 @@ export enum ATHENA_EVENTS_VEHICLE {
 export enum ATHENA_EVENTS_PLAYER {
     DIED = 'athena:PlayerDied',
     DROPPED_ITEM = 'athena:PlayerDroppedItem',
-    SELECTED_CHARACTER = 'athena:SelectedCharacter',
-    SPAWNED = 'athena:PlayerSpawned',
     ENTERED_INTERIOR = 'athena:EnteredInterior',
     LEFT_INTERIOR = 'athena:LeftInterior',
-    TOGGLED_INTERIOR_LOCK = 'athena:ToggleLock'
+    PURCHASED_VEHICLE = 'athena:PurchasedVehicle',
+    SELECTED_CHARACTER = 'athena:SelectedCharacter',
+    SPAWNED = 'athena:PlayerSpawned',
+    TOGGLED_INTERIOR_LOCK = 'athena:ToggleLock',
 }
 
 export enum ATHENA_EVENTS_PLAYER_CLIENT {
-    WAYPOINT = 'athena:PlayerWaypoint'
+    WAYPOINT = 'athena:PlayerWaypoint',
 }

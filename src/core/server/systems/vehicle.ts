@@ -11,7 +11,7 @@ import {
     VEHICLE_STATE,
 } from '../../shared/enums/vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
-import { VEHICLE_CLASS } from '../../shared/flags/VehicleTypeFlags';
+import { VEHICLE_CLASS } from '../../shared/enums/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Task } from '../../shared/interfaces/TaskTimeline';
@@ -30,7 +30,7 @@ import { StorageSystem } from './storage';
 import '../views/dealership';
 import '../views/garage';
 import './fuel';
-import { VEHICLE_RULES } from '../../shared/flags/VehicleRules';
+import { VEHICLE_RULES } from '../../shared/enums/VehicleRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
 import SystemRules from './rules';

@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS } from '../flags/VehicleTypeFlags';
+import { VEHICLE_CLASS } from '../enums/VehicleTypeFlags';
 import { Vector3 } from './Vector';
 
 export interface Dealership {

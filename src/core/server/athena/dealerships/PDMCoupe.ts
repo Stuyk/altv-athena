@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS } from '../../../shared/flags/VehicleTypeFlags';
+import { VEHICLE_CLASS } from '../../../shared/enums/VehicleTypeFlags';
 import { Dealership } from '../../../shared/interfaces/Dealership';
 
 const Information: Dealership = {
@@ -9,7 +9,7 @@ const Information: Dealership = {
     vehiclePreview: 'exemplar',
     class: VEHICLE_CLASS.COUPE,
     stock: 100,
-    createBlip: true
+    createBlip: true,
 };
 
 export default Information;

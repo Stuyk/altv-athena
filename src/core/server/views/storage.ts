@@ -8,7 +8,7 @@ import { Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { IResponse } from '../../shared/interfaces/IResponse';
-import { STORAGE_RULES } from '../../shared/flags/StorageRules';
+import { STORAGE_RULES } from '../../shared/enums/StorageRules';
 import SystemRules from '../systems/rules';
 
 /**

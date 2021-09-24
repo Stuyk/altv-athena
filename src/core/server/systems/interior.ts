@@ -25,7 +25,7 @@ import { TextLabelController } from './textlabel';
 import './storage';
 import { StorageSystem } from './storage';
 import { StorageView } from '../views/storage';
-import { INTERIOR_RULES } from '../../shared/flags/InteriorRules';
+import { INTERIOR_RULES } from '../../shared/enums/InteriorRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import SystemRules from './rules';
 

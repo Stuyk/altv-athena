@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS, VEHICLE_TYPE } from '../flags/VehicleTypeFlags';
+import { VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/VehicleTypeFlags';
 
 /**
  * Interface for working with / using vehicles.
