@@ -49,6 +49,7 @@ description: List of all the changes and current versions.
 + Remove Icons from HUD
 + Add Mission Row PD Garage
 + Fix Garage Showing Vehicles Out of Range
++ Added Methods to Overwrite Default HUD
 ```
 
 ## 2.0.3

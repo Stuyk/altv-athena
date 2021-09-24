@@ -53,10 +53,21 @@ export default interface IHUD {
     color: alt.RGBA;
 
     /**
+     * When this function is applied it will take the data from the HUD
+     * and re-route it into a different function.
+     *
+     * Instead of drawing the HUD normally.
+     *
+     * Think of it as the overwrite function.
+     * @memberof IHUD
+     */
+    callbackReroute?: (...args: any[]) => void;
+
+    /**
      * A callback function that should return a string value for your HUD.
      * @memberof IHUD
      */
-    callback: (position: { x: number; y: number }, scale: number) => string;
+    callback: (self: IHUD, position: { x: number; y: number }, scale: number) => string;
 
     /**
      * Should this only display inside of a vehicle?
