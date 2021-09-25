@@ -46,7 +46,7 @@ const TransferComponent = Vue.component('transfer', {
             if ('alt' in window) {
                 alt.emit('atm:Action', 'transfer', this.wireTransferAmount);
             } else {
-                console.log(`Deposit action go brr...`);
+                console.log(`Transfer action go brr...`);
             }
         },
         setMax() {
