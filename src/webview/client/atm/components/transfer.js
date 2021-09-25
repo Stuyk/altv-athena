@@ -40,11 +40,11 @@ const TransferComponent = Vue.component('transfer', {
         }
     },
     methods: {
-        handleDeposit() {
+        handleTransfer() {
             this.$root.$emit('set-processing');
   
             if ('alt' in window) {
-                alt.emit('atm:Action', 'withdraw', this.wireTransferAmount);
+                alt.emit('atm:Action', 'transfer', this.wireTransferAmount);
             } else {
                 console.log(`Deposit action go brr...`);
             }
@@ -78,7 +78,7 @@ const TransferComponent = Vue.component('transfer', {
                 </div>
                 
                 <template v-if="isValid && !processing">
-                    <button @click="handleDeposit" class="flex-grow-1 outline-round">
+                    <button @click="handleTransfer" class="flex-grow-1 outline-round">
                         <v-icon color="orange">icon-checkmark</v-icon>
                     </button>
                 </template>
