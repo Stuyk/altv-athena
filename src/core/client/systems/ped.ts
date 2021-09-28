@@ -188,7 +188,7 @@ function handleDrawPeds() {
             native.setEntityInvincible(pedInfo[pedData.uid], true);
 
             const heading = pedData.heading ? pedData.heading : 0;
-            Timer.createTimeout(() => {
+            alt.nextTick(() => {
                 native.setEntityHeading(pedInfo[pedData.uid], heading);
 
                 native.setPedRandomProps(pedInfo[pedData.uid]);
@@ -199,12 +199,12 @@ function handleDrawPeds() {
 
                 native.freezeEntityPosition(pedInfo[pedData.uid], true);
                 native.setEntityNoCollisionEntity(pedInfo[pedData.uid], alt.Player.local.scriptID, true);
-            }, 2000);
 
-            if (pedData.animations && pedData.animations.length > 0) {
-                let randomAnimation = pedData.animations[Math.floor(Math.random() * pedData.animations.length)];
-                PedController.playAnimation(pedData.uid, randomAnimation);
-            }
+                if (pedData.animations && pedData.animations.length > 0) {
+                    let randomAnimation = pedData.animations[Math.floor(Math.random() * pedData.animations.length)];
+                    PedController.playAnimation(pedData.uid, randomAnimation);
+                }
+            });
         });
     }
 }
