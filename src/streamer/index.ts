@@ -11,13 +11,12 @@ import { Vector3 } from '../core/shared/interfaces/Vector';
 
 const main = SockJS.createServer();
 const server = http.createServer();
-const DefaultKeys = ['markers', 'labels', 'objects', 'peds'];
 const StreamData: IStream = {};
+const StreamRange: { [key: string]: number } = {};
 
 let conn: SockJS.Connection;
 let config: IStreamConfig = {
     TimeBetweenUpdates: 1000,
-    StreamDistance: 100,
 };
 
 class StreamerServer {
@@ -26,6 +25,7 @@ class StreamerServer {
         config: StreamerServer.config,
         populate: StreamerServer.populate,
         update: StreamerServer.update,
+        'update-range': StreamerServer.updateRange,
     };
 
     /**
@@ -94,6 +94,23 @@ class StreamerServer {
     }
 
     /**
+     * Updates the stream range for a key.
+     * All stream ranges defaul to 100.
+     * @static
+     * @param {number} id
+     * @param {{ key: string; range: number }} data
+     * @return {*}
+     * @memberof StreamerServer
+     */
+    static updateRange(id: number, data: { key: string; range: number }) {
+        if (!data) {
+            return;
+        }
+
+        StreamRange[data.key] = data.range;
+    }
+
+    /**
      * Retrieve all the closest elements based on position
      * @static
      * @param {number} id
@@ -116,12 +133,13 @@ class StreamerServer {
                 continue;
             }
 
+            const streamDistance = StreamRange[key] ? StreamRange[key] : 100;
             const validData = StreamData[key].filter((streamData: IStreamUpdate) => {
                 if (streamData.dimension && streamData.dimension !== data.dimension) {
                     return false;
                 }
 
-                if (StreamerServer.distance(streamData.pos, data.pos) > config.StreamDistance) {
+                if (StreamerServer.distance(streamData.pos, data.pos) > streamDistance) {
                     return false;
                 }
 

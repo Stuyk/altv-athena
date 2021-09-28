@@ -11,13 +11,6 @@ export interface IStreamConfig {
      * @memberof IStreamConfig
      */
     TimeBetweenUpdates: number;
-
-    /**
-     * The distance to add data from the streamer.
-     * @type {number}
-     * @memberof IStreamConfig
-     */
-    StreamDistance: number;
 }
 
 export interface IStream {

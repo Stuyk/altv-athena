@@ -44,12 +44,28 @@ export class StreamerService {
      * When the key is updated with data it will come back through the callback.
      * @static
      * @template T
-     * @param {string} key
+     * @param {string} key A unique key for this stream data.
      * @param {(player: alt.Player, streamedData: Array<T>) => void} callback
+     * @param {number} range How far away should we look from the player's position.
      * @memberof StreamerService
      */
-    static registerCallback<T>(key: string, callback: (player: alt.Player, streamedData: Array<T>) => void) {
+    static registerCallback<T>(
+        key: string,
+        callback: (player: alt.Player, streamedData: Array<T>) => void,
+        range: number = 100,
+    ) {
         callbacks[key] = callback;
+
+        const playerInfo: IStreamMessage = {
+            id: -1,
+            route: 'update-range',
+            data: {
+                key,
+                range,
+            },
+        };
+
+        sock.send(JSON.stringify(playerInfo));
     }
 
     static requestUpdate(player: alt.Player) {
