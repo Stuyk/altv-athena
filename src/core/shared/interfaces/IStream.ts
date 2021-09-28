@@ -13,40 +13,15 @@ export interface IStreamConfig {
     TimeBetweenUpdates: number;
 
     /**
-     * The distance which players should see markers.
+     * The distance to add data from the streamer.
      * @type {number}
      * @memberof IStreamConfig
      */
-    MarkersDistance: number;
-
-    /**
-     * The distance which players can see text labels.
-     * @type {number}
-     * @memberof IStreamConfig
-     */
-    LabelsDistance: number;
-
-    /**
-     * The distance which players can see objects.
-     * @type {number}
-     * @memberof IStreamConfig
-     */
-    ObjectsDistance: number;
-
-    /**
-     * The distance which players can see static peds.
-     * @type {number}
-     * @memberof IStreamConfig
-     */
-    PedsDistance: number;
+    StreamDistance: number;
 }
 
 export interface IStream {
     id?: number;
-    labels: Array<TextLabel>;
-    markers: Array<Marker>;
-    objects: Array<IObject>;
-    peds: Array<IPed>;
 }
 
 export interface IStreamMessage {
@@ -62,5 +37,5 @@ export interface IStreamPopulate<T> {
 
 export interface IStreamUpdate {
     pos: Vector3;
-    dimension: number;
+    dimension?: number;
 }

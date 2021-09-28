@@ -5,26 +5,19 @@ import {
     IStreamConfig,
     IStreamMessage,
     IStreamPopulate,
-    IStreamUpdate
+    IStreamUpdate,
 } from '../core/shared/interfaces/IStream';
 import { Vector3 } from '../core/shared/interfaces/Vector';
 
 const main = SockJS.createServer();
 const server = http.createServer();
-const StreamData: IStream = {
-    markers: [],
-    labels: [],
-    objects: [],
-    peds: []
-};
+const DefaultKeys = ['markers', 'labels', 'objects', 'peds'];
+const StreamData: IStream = {};
 
 let conn: SockJS.Connection;
 let config: IStreamConfig = {
     TimeBetweenUpdates: 1000,
-    LabelsDistance: 100,
-    MarkersDistance: 100,
-    ObjectsDistance: 100,
-    PedsDistance: 100
+    StreamDistance: 100,
 };
 
 class StreamerServer {
@@ -32,7 +25,7 @@ class StreamerServer {
         ping: StreamerServer.ping,
         config: StreamerServer.config,
         populate: StreamerServer.populate,
-        update: StreamerServer.update
+        update: StreamerServer.update,
     };
 
     /**
@@ -97,11 +90,6 @@ class StreamerServer {
             return;
         }
 
-        if (!StreamData[data.key]) {
-            console.warn(`Key: ${data.key} does not exist for StreamData. Did not append data.`);
-            return;
-        }
-
         StreamData[data.key] = data.array;
     }
 
@@ -113,65 +101,35 @@ class StreamerServer {
      * @memberof StreamerServer
      */
     static update(id: number, data: IStreamUpdate) {
-
-        const markers = StreamData.markers.filter((marker) => {
-            if (marker.dimension && marker.dimension !== data.dimension) {
-                return false;
-            }
-
-            if (StreamerServer.distance(data.pos, marker.pos) > config.MarkersDistance) {
-                return false;
-            }
-
-            return true;
-        });
-
-        const labels = StreamData.labels.filter((label) => {
-            if (label.dimension && label.dimension !== data.dimension) {
-                return false;
-            }
-
-            if (StreamerServer.distance(data.pos, label.pos) > config.LabelsDistance) {
-                return false;
-            }
-
-            return true;
-        });
-
-        const objects = StreamData.objects.filter((object) => {
-            if (object.dimension && object.dimension !== data.dimension) {
-                return false;
-            }
-
-            if (StreamerServer.distance(data.pos, object.pos) > config.ObjectsDistance) {
-                return false;
-            }
-
-            return true;
-        });
-
-        const peds = StreamData.peds.filter((ped) => {
-            if (ped.dimension && ped.dimension !== data.dimension) {
-                return false;
-            }
-
-            if (StreamerServer.distance(data.pos, ped.pos) > config.PedsDistance) {
-                return false;
-            }
-
-            return true;
-        });
+        const keys = Object.keys(StreamData);
 
         const response: IStreamMessage = {
             id,
             route: 'update',
-            data: {
-                markers,
-                labels,
-                objects,
-                peds
-            }
+            data: {},
         };
+
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+
+            if (!StreamData[key]) {
+                continue;
+            }
+
+            const validData = StreamData[key].filter((streamData: IStreamUpdate) => {
+                if (streamData.dimension && streamData.dimension !== data.dimension) {
+                    return false;
+                }
+
+                if (StreamerServer.distance(streamData.pos, data.pos) > config.StreamDistance) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            response.data[key] = validData;
+        }
 
         conn.write(JSON.stringify(response));
     }
@@ -182,7 +140,9 @@ class StreamerServer {
         }
 
         return Math.sqrt(
-            Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2)
+            Math.pow(vector1.x - vector2.x, 2) +
+                Math.pow(vector1.y - vector2.y, 2) +
+                Math.pow(vector1.z - vector2.z, 2),
         );
     }
 }

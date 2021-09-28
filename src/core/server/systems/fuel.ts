@@ -34,14 +34,14 @@ class FuelSystem {
         for (let i = 0; i < fuel.length; i++) {
             const fuelPump = fuel[i];
             if (fuelPump.isBlip) {
-                BlipController.add({
+                BlipController.append({
                     text: 'Fuel',
                     color: 1,
                     sprite: 361,
                     scale: 1,
                     shortRange: true,
                     pos: fuelPump,
-                    uid: `fuel-${i}`
+                    uid: `fuel-${i}`,
                 });
             }
 
@@ -49,7 +49,7 @@ class FuelSystem {
                 position: fuelPump,
                 description: 'Refuel Vehicle',
                 type: 'fuel',
-                callback: FuelSystem.request
+                callback: FuelSystem.request,
             });
         }
     }
@@ -118,13 +118,13 @@ class FuelSystem {
             image: 'https://i.imgur.com/MVSTdju.jpeg',
             summary: `Refill ${missingFuel.toFixed(2)}% of fuel in the ${
                 closestVehicle.data.model
-            } for $${maximumCost.toFixed(2)}?`
+            } for $${maximumCost.toFixed(2)}?`,
         };
 
         fuelInfo[player.id] = {
             cost: maximumCost,
             fuel: missingFuel,
-            vehicle: closestVehicle
+            vehicle: closestVehicle,
         };
 
         alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
@@ -167,7 +167,7 @@ class FuelSystem {
             distance: 15,
             milliseconds: 10000,
             position: data.vehicle.pos,
-            text: `Fueling...`
+            text: `Fueling...`,
         });
 
         alt.setTimeout(() => {
@@ -175,7 +175,7 @@ class FuelSystem {
                 playerFuncs.emit.removeProgressBar(player, `FUEL-${player.data._id.toString()}`);
                 playerFuncs.emit.notification(
                     player,
-                    LocaleController.get(LOCALE_KEYS.FUEL_PAID, data.cost.toFixed(2), data.fuel.toFixed(2))
+                    LocaleController.get(LOCALE_KEYS.FUEL_PAID, data.cost.toFixed(2), data.fuel.toFixed(2)),
                 );
             }
 

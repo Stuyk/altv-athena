@@ -11,6 +11,15 @@ const KEY = 'objects';
 
 export class ObjectController {
     /**
+     * Initialize the Object Controller Streamer
+     * @static
+     * @memberof ObjectController
+     */
+    static init() {
+        StreamerService.registerCallback(KEY, ObjectController.update);
+    }
+
+    /**
      * Internal function to refresh all global objects in the streamer service.
      * @static
      * @memberof ObjectController
@@ -99,3 +108,5 @@ export class ObjectController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
     }
 }
+
+ObjectController.init();

@@ -10,12 +10,13 @@ import { PedController } from './ped';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
+const callbacks: { [key: string]: (player: alt.Player, streamedData: Array<any>) => void } = {};
 let ready = false;
 
 export class StreamerService {
     static Routes = {
         pong: StreamerService.pong,
-        update: StreamerService.update
+        update: StreamerService.update,
     };
 
     static init() {
@@ -23,7 +24,7 @@ export class StreamerService {
         const pingMessage: IStreamMessage = {
             id: -1,
             route: 'ping',
-            data: 'Ready!'
+            data: 'Ready!',
         };
 
         sock.send(JSON.stringify(pingMessage));
@@ -32,10 +33,23 @@ export class StreamerService {
         const configMessage: IStreamMessage = {
             id: -1,
             route: 'config',
-            data: DEFAULT_CONFIG.STREAM_CONFIG
+            data: DEFAULT_CONFIG.STREAM_CONFIG,
         };
 
         sock.send(JSON.stringify(configMessage));
+    }
+
+    /**
+     * Register a custom callback function.
+     * When the key is updated with data it will come back through the callback.
+     * @static
+     * @template T
+     * @param {string} key
+     * @param {(player: alt.Player, streamedData: Array<T>) => void} callback
+     * @memberof StreamerService
+     */
+    static registerCallback<T>(key: string, callback: (player: alt.Player, streamedData: Array<T>) => void) {
+        callbacks[key] = callback;
     }
 
     static requestUpdate(player: alt.Player) {
@@ -44,8 +58,8 @@ export class StreamerService {
             route: 'update',
             data: {
                 pos: player.pos,
-                dimension: player.dimension
-            }
+                dimension: player.dimension,
+            },
         };
 
         sock.send(JSON.stringify(playerInfo));
@@ -65,10 +79,20 @@ export class StreamerService {
             return;
         }
 
-        MarkerController.update(player, data.markers);
-        TextLabelController.update(player, data.labels);
-        ObjectController.update(player, data.objects);
-        PedController.update(player, data.peds);
+        const keys = Object.keys(callbacks);
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+
+            if (!callbacks[key]) {
+                continue;
+            }
+
+            if (!data[key]) {
+                continue;
+            }
+
+            callbacks[key](player, data[key]);
+        }
     }
 
     /**
@@ -107,8 +131,8 @@ export class StreamerService {
             route: 'populate',
             data: {
                 array,
-                key
-            }
+                key,
+            },
         };
 
         sock.send(JSON.stringify(streamInfo));

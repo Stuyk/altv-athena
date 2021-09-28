@@ -14,14 +14,14 @@ class AtmFunctions {
         for (let i = 0; i < atms.length; i++) {
             const position = atms[i];
 
-            BlipController.add({
+            BlipController.append({
                 text: 'ATM',
                 color: 11,
                 sprite: 207,
                 scale: 1,
                 shortRange: true,
                 pos: position,
-                uid: `atm-${i}`
+                uid: `atm-${i}`,
             });
 
             InteractionController.add({
@@ -30,7 +30,7 @@ class AtmFunctions {
                 type: 'atm',
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_ATM);
-                }
+                },
             });
         }
     }
@@ -154,7 +154,7 @@ const ActionHandlers = {
     deposit: AtmFunctions.deposit,
     withdraw: AtmFunctions.withdraw,
     transfer: AtmFunctions.transfer,
-    transferCash: AtmFunctions.transferCash
+    transferCash: AtmFunctions.transferCash,
 };
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, AtmFunctions.init);

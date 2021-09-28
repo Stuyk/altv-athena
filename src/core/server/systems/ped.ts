@@ -12,6 +12,15 @@ const KEY = 'peds';
 
 export class PedController {
     /**
+     * Initialize the PedController Streamer Service
+     * @static
+     * @memberof PedController
+     */
+    static init() {
+        StreamerService.registerCallback(KEY, PedController.update);
+    }
+
+    /**
      * Refresh all global pedestrians.
      * @static
      * @memberof PedController
@@ -96,3 +105,5 @@ export class PedController {
         alt.emitClient(null, SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
     }
 }
+
+PedController.init();

@@ -9,6 +9,15 @@ const globalMarkers: Array<Marker> = [];
 
 export class MarkerController {
     /**
+     * Initialize this Marker Stream Service
+     * @static
+     * @memberof MarkerController
+     */
+    static init() {
+        StreamerService.registerCallback(KEY, MarkerController.update);
+    }
+
+    /**
      * Internal function to refresh all global markers in the streamer service.
      * @static
      * @memberof MarkerController
@@ -95,3 +104,5 @@ export class MarkerController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
     }
 }
+
+MarkerController.init();

@@ -2,12 +2,22 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { TextLabel } from '../../shared/interfaces/TextLabel';
 import Logger from '../utility/athenaLogger';
+import { sha256Random } from '../utility/encryption';
 import { StreamerService } from './streamer';
 
 const globalTextLabels: Array<TextLabel> = [];
 const KEY = 'labels';
 
 export class TextLabelController {
+    /**
+     * Initialize the TextLabel Streamer Service
+     * @static
+     * @memberof TextLabelController
+     */
+    static init() {
+        StreamerService.registerCallback(KEY, TextLabelController.update);
+    }
+
     /**
      * Internal function to refresh all global text labels in the streamer service.
      * @static
@@ -21,16 +31,17 @@ export class TextLabelController {
      * Adds a text label to the global streamer.
      * @static
      * @param {TextLabel} label
+     * @returns {string} uid for removal
      * @memberof TextLabelController
      */
-    static append(label: TextLabel) {
+    static append(label: TextLabel): string {
         if (!label.uid) {
-            Logger.error(`(${label.data}) Label does not have a unique id (uid).`);
-            return;
+            label.uid = sha256Random(JSON.stringify(label));
         }
 
         globalTextLabels.push(label);
         TextLabelController.refresh();
+        return label.uid;
     }
 
     /**
@@ -71,16 +82,16 @@ export class TextLabelController {
      * @static
      * @param {alt.Player} player
      * @param {TextLabel} textLabel
+     * @returns {string} uid for removal
      * @memberof TextLabelController
      */
-    static addToPlayer(player: alt.Player, textLabel: TextLabel) {
+    static addToPlayer(player: alt.Player, textLabel: TextLabel): string {
         if (!textLabel.uid) {
-            throw new Error(
-                `Text Label ${JSON.stringify(textLabel.pos)} does not have a uid. TextLabelController.addToPlayer`
-            );
+            textLabel.uid = sha256Random(JSON.stringify(textLabel));
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_TEXTLABELS, textLabel);
+        return textLabel.uid;
     }
 
     /**
@@ -94,3 +105,5 @@ export class TextLabelController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
     }
 }
+
+TextLabelController.init();

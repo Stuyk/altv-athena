@@ -21,7 +21,7 @@ const wearableRef: Item = {
     slot: 0,
     quantity: 1,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_EQUIPMENT,
-    data: {}
+    data: {},
 };
 
 class ClothingFunctions {
@@ -30,14 +30,14 @@ class ClothingFunctions {
             const position = clothingStores[i];
             const uid = `clothing-store-${i}`;
 
-            BlipController.add({
+            BlipController.append({
                 text: 'Clothing Store',
                 color: 11,
                 sprite: 73,
                 scale: 1,
                 shortRange: true,
                 pos: position,
-                uid
+                uid,
             });
 
             InteractionController.add({
@@ -46,7 +46,7 @@ class ClothingFunctions {
                 type: 'clothing-store',
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, View_Events_Clothing.Open);
-                }
+                },
             });
         }
     }
@@ -60,7 +60,7 @@ class ClothingFunctions {
         equipmentSlot: number,
         component: ClothingComponent,
         name: string,
-        desc: string
+        desc: string,
     ) {
         const newItem = deepCloneObject<Item>(wearableRef);
         newItem.name = name;
