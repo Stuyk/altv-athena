@@ -58,6 +58,7 @@ description: List of all the changes and current versions.
 + Fix Marker Scale for Jobs
 + Make Creation Interfaces Return UID(s)
 + Added Custom Streamer Key(s) based on Dimension and Position
++ Added Custom Stream Ranges
 ```
 
 ## 2.0.3
