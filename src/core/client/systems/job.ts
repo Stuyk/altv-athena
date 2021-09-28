@@ -107,12 +107,9 @@ class ObjectiveController {
         const dist = distance(alt.Player.local.pos, objective.pos);
 
         if (objective.marker && dist <= objective.range * 25) {
-            drawMarker(
-                objective.marker.type,
-                objective.marker.pos as alt.Vector3,
-                ObjectiveController.getVector3Range(),
-                objective.marker.color
-            );
+            const scale = objective.marker.scale ? objective.marker.scale : ObjectiveController.getVector3Range();
+
+            drawMarker(objective.marker.type, objective.marker.pos as alt.Vector3, scale, objective.marker.color);
         }
 
         if (objective.textLabel && dist <= objective.range * 10) {
@@ -120,7 +117,7 @@ class ObjectiveController {
                 objective.textLabel.data,
                 objective.textLabel.pos as alt.Vector3,
                 0.4,
-                new alt.RGBA(255, 255, 255, 255)
+                new alt.RGBA(255, 255, 255, 255),
             );
         }
 

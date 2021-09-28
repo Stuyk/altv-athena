@@ -55,6 +55,7 @@ description: List of all the changes and current versions.
 + Fixed Height for Character Creator
 + Fix Length Error for Ped Spawning
 + Some Interface Work
++ Fix Marker Scale for Jobs
 ```
 
 ## 2.0.3
