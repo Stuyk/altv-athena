@@ -10,30 +10,21 @@ const globalBlips: Array<Blip> = [];
 export class BlipController {
     /**
      * Adds a global label the player loads when they join.
-     * @static
-     * @param {Blip} blip
-     * @memberof BlipController
-     */
-    static add(blip: Blip) {
-        globalBlips.push(blip);
-    }
-
-    /**
-     * Adds a global label the player loads when they join.
      * Also appends it to any online players.
      * Requires a UID to remove it later.
      * @static
      * @param {Blip} label
+     * @returns {string} A uid to remove it later.
      * @memberof BlipController
      */
-    static append(blip: Blip) {
+    static append(blip: Blip): string {
         if (!blip.uid) {
-            Logger.error(`(${JSON.stringify(blip.pos)}) Blip does not have a unique id (uid).`);
-            return;
+            blip.uid = sha256Random(JSON.stringify(blip));
         }
 
-        BlipController.add(blip);
+        globalBlips.push(blip);
         alt.emitClient(null, SYSTEM_EVENTS.APPEND_BLIP, blip);
+        return blip.uid;
     }
 
     /**

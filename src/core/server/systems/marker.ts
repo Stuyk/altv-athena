@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Marker } from '../../shared/interfaces/Marker';
-import Logger from '../utility/athenaLogger';
+import { sha256Random } from '../utility/encryption';
 import { StreamerService } from './streamer';
 
 const KEY = 'markers';
@@ -21,16 +21,17 @@ export class MarkerController {
      * Adds a global marker for all players.
      * @static
      * @param {Marker} marker
+     * @returns {string} uid for marker
      * @memberof MarkerController
      */
-    static append(marker: Marker) {
+    static append(marker: Marker): string {
         if (!marker.uid) {
-            Logger.error(`(${JSON.stringify(marker.pos)}) Marker does not have a unique id (uid).`);
-            return;
+            marker.uid = sha256Random(JSON.stringify(marker));
         }
 
         globalMarkers.push(marker);
         MarkerController.refresh();
+        return marker.uid;
     }
 
     /**
@@ -71,14 +72,16 @@ export class MarkerController {
      * @static
      * @param {alt.Player} player
      * @param {Marker} marker
+     * @returns {string} uid for marker
      * @memberof MarkerController
      */
-    static addToPlayer(player: alt.Player, marker: Marker) {
+    static addToPlayer(player: alt.Player, marker: Marker): string {
         if (!marker.uid) {
-            throw new Error(`Marker ${JSON.stringify(marker.pos)} does not have a uid. MarkerController.addToPlayer`);
+            marker.uid = sha256Random(JSON.stringify(marker));
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_MARKER, marker);
+        return marker.uid;
     }
 
     /**

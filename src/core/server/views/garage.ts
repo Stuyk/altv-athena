@@ -43,7 +43,7 @@ class GarageFunctions {
                 callback: GarageFunctions.open,
             });
 
-            BlipController.add({
+            BlipController.append({
                 pos: garage.position,
                 color: 4,
                 sprite: 50,

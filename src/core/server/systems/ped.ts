@@ -1,30 +1,49 @@
 import * as alt from 'alt-server';
 
-import {SYSTEM_EVENTS} from '../../shared/enums/system';
-import {IPed} from '../../shared/interfaces/IPed';
-import {Animation} from '../../shared/interfaces/Animation';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IPed } from '../../shared/interfaces/IPed';
+import { Animation } from '../../shared/interfaces/Animation';
 import Logger from '../utility/athenaLogger';
-import {StreamerService} from './streamer';
+import { StreamerService } from './streamer';
+import { sha256Random } from '../utility/encryption';
 
 const globalPeds: Array<IPed> = [];
 const KEY = 'peds';
 
 export class PedController {
-
+    /**
+     * Refresh all global pedestrians.
+     * @static
+     * @memberof PedController
+     */
     static refresh() {
         StreamerService.updateData(KEY, globalPeds);
     }
 
-    static append(pedData: IPed) {
+    /**
+     * Create a global static ped for the server.
+     * @static
+     * @param {IPed} pedData
+     * @return {string} uid for the ped
+     * @memberof PedController
+     */
+    static append(pedData: IPed): string {
         if (!pedData.uid) {
-            Logger.error(`(${JSON.stringify(pedData.pos)}) Ped does not have a unique id (uid).`);
-            return;
+            pedData.uid = sha256Random(JSON.stringify(pedData));
         }
 
         globalPeds.push(pedData);
         PedController.refresh();
+        return pedData.uid;
     }
 
+    /**
+     * Remove a global pedestrian
+     * @static
+     * @param {string} uid
+     * @return {*}  {boolean}
+     * @memberof PedController
+     */
     static remove(uid: string): boolean {
         const index = globalPeds.findIndex((ped) => ped.uid === uid);
         if (index <= -1) {
@@ -37,6 +56,13 @@ export class PedController {
         return true;
     }
 
+    /**
+     * Remove a pedestrian from a player.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof PedController
+     */
     static removeFromPlayer(player: alt.Player, uid: string) {
         if (!uid) {
             throw new Error(`Did not specify a uid for ped removal. PedController.removeFromPlayer`);
@@ -45,14 +71,21 @@ export class PedController {
         alt.emitClient(player, SYSTEM_EVENTS.REMOVE_PED, uid);
     }
 
-    static addToPlayer(player: alt.Player, pedData: IPed) {
+    /**
+     * Add a single ped that only a single player can see
+     * @static
+     * @param {alt.Player} player
+     * @param {IPed} pedData
+     * @return {string}
+     * @memberof PedController
+     */
+    static addToPlayer(player: alt.Player, pedData: IPed): string {
         if (!pedData.uid) {
-            throw new Error(
-                `Ped ${JSON.stringify(pedData.pos)} does not have a uid. PedController.addToPlayer`
-            );
+            pedData.uid = sha256Random(JSON.stringify(pedData));
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_PED, pedData);
+        return pedData.uid;
     }
 
     static update(player: alt.Player, peds: Array<IPed>) {

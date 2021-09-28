@@ -41,7 +41,7 @@ class DealershipFunctions {
             });
 
             if (dealership.createBlip) {
-                BlipController.add({
+                BlipController.append({
                     text: `${dealership.name}`,
                     color: 13,
                     sprite: 225,

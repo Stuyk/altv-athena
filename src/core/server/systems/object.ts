@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/IObject';
 import Logger from '../utility/athenaLogger';
+import { sha256Random } from '../utility/encryption';
 import { StreamerService } from './streamer';
 
 const globalObjects: Array<IObject> = [];
@@ -22,17 +23,17 @@ export class ObjectController {
      * Add an object to the global stream.
      * @static
      * @param {IObject} objectData
-     * @return {*}
+     * @return {string} uid for object
      * @memberof ObjectController
      */
-    static append(objectData: IObject) {
+    static append(objectData: IObject): string {
         if (!objectData.uid) {
-            Logger.error(`(${JSON.stringify(objectData.pos)}) Object does not have a unique id (uid).`);
-            return;
+            objectData.uid = sha256Random(JSON.stringify(objectData));
         }
 
         globalObjects.push(objectData);
         ObjectController.refresh();
+        return objectData.uid;
     }
 
     /**
@@ -75,16 +76,16 @@ export class ObjectController {
      * @static
      * @param {alt.Player} player
      * @param {IObject} objectData
+     * @returns {string} uid for object
      * @memberof ObjectController
      */
-    static addToPlayer(player: alt.Player, objectData: IObject) {
+    static addToPlayer(player: alt.Player, objectData: IObject): string {
         if (!objectData.uid) {
-            throw new Error(
-                `Object ${JSON.stringify(objectData.pos)} does not have a uid. ObjectController.addToPlayer`
-            );
+            objectData.uid = sha256Random(JSON.stringify(objectData));
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
+        return objectData.uid;
     }
 
     /**
