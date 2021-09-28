@@ -53,6 +53,8 @@ description: List of all the changes and current versions.
 + Added Tuning Interface
 + Fixed Vue3 Custom Component Build Errors
 + Fixed Height for Character Creator
++ Fix Length Error for Ped Spawning
++ Some Interface Work
 ```
 
 ## 2.0.3

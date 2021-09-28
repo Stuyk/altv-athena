@@ -186,7 +186,7 @@ export default defineComponent({
 
             alt.emit('creator:ReadyDone');
         },
-        setParameter(parameter, value: number) {
+        setParameter(parameter, value: number, arrayIndex: number = null) {
             if (typeof value !== 'number') {
                 value = parseFloat(value);
             }
@@ -227,33 +227,55 @@ export default defineComponent({
                 this.data.facialHairColor1 = 0;
                 this.data.eyebrows = 0;
             } else {
-                if (isNaN(value as number)) {
-                    this.data[parameter] = value;
+                if (arrayIndex) {
+                    if (isNaN(value as number)) {
+                        this.data[parameter] = value;
+                    } else {
+                        this.data[parameter] = parseFloat(value.toString());
+                    }
                 } else {
-                    this.data[parameter] = parseFloat(value.toString());
+                    if (isNaN(value as number)) {
+                        this.data[parameter][arrayIndex] = value;
+                    } else {
+                        this.data[parameter][arrayIndex] = parseFloat(value.toString());
+                    }
                 }
             }
 
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        decrementParameter(parameter, min, max, incrementValue) {
-            this.data[parameter] -= incrementValue;
+        decrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+            if (arrayIndex === null || arrayIndex === undefined) {
+                this.data[parameter] -= incrementValue;
 
-            if (this.data[parameter] < min) {
-                this.data[parameter] = max;
+                if (this.data[parameter] < min) {
+                    this.data[parameter] = max;
+                }
+            } else {
+                this.data[parameter][arrayIndex] -= incrementValue;
+
+                if (this.data[parameter][arrayIndex] < min) {
+                    this.data[parameter][arrayIndex] = max;
+                }
             }
 
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        incrementParameter(parameter, min, max, incrementValue) {
-            console.log(parameter, min, max, incrementValue);
+        incrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+            if (arrayIndex === null || arrayIndex === undefined) {
+                this.data[parameter] += incrementValue;
 
-            this.data[parameter] += incrementValue;
+                if (this.data[parameter] > max) {
+                    this.data[parameter] = min;
+                }
+            } else {
+                this.data[parameter][arrayIndex] += incrementValue;
 
-            if (this.data[parameter] > max) {
-                this.data[parameter] = min;
+                if (this.data[parameter][arrayIndex] > max) {
+                    this.data[parameter][arrayIndex] = min;
+                }
             }
 
             this.forceUpdate += 1;
