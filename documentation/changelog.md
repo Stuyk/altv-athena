@@ -60,6 +60,8 @@ description: List of all the changes and current versions.
 + Added Custom Streamer Key(s) based on Dimension and Position
 + Added Custom Stream Ranges
 + Fixed Bug where Eyebrow Opacity Wasn't Changing
++ Finished Character Creation Interface
++ Updated Locales for Character Creation
 ```
 
 ## 2.0.3

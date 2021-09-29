@@ -153,7 +153,7 @@ export default {
         GREATER_THAN_ZERO: `Value must be greater than zero`,
         LESS_THAN_CASH: `Value must be less than cash`,
         LESS_THAN_BANK: `Value must be less than bank`,
-        USER_ID_POSITIVE: `User ID must be positive`
+        USER_ID_POSITIVE: `User ID must be positive`,
     },
     [LOCALE_KEYS.WEBVIEW_CHARACTERS]: {
         LABEL_DELETE: 'Delete',
@@ -167,11 +167,12 @@ export default {
         LABEL_GENDER: 'Gender',
         LABEL_HOURS: 'Hours',
         LABEL_CASH: 'Cash',
-        LABEL_BANK: 'Bank'
+        LABEL_BANK: 'Bank',
     },
     [LOCALE_KEYS.WEBVIEW_CREATOR]: {
         titles: ['Appearance', 'Facial Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
-        LABEL_NAME: 'Name',
+        LABEL_FIRST_NAME: 'First Name',
+        LABEL_LAST_NAME: 'Last Name',
         LABEL_BIRTHDAY: 'Birthday',
         LABEL_GENDER: 'Gender',
         LABEL_DAY: 'Day',
@@ -209,7 +210,7 @@ export default {
             LABEL_EYECOLOUR: 'Eye Colour',
             DESC_EYECOLOUR: 'Use this slider to pick an eye colour.',
             LABEL_FACE: 'Face',
-            LABEL_SKIN: 'Skin'
+            LABEL_SKIN: 'Skin',
         },
         hairComponent: {
             LABEL_HAIRSTYLE: 'Hairstyle',
@@ -298,7 +299,7 @@ export default {
                 'Center Parted Bob',
                 'Shaved Sides Flat Top',
                 'Shaved Sides Short Top',
-                'Elvis'
+                'Elvis',
             ],
             feminine: [
                 'Close Shave',
@@ -379,7 +380,7 @@ export default {
                 'Pixie Bob',
                 'Tight Pony Tail Bun',
                 'Pixie Cut',
-                'Elvis'
+                'Elvis',
             ],
             facial: [
                 'Stubble',
@@ -411,7 +412,7 @@ export default {
                 'The Hampstead',
                 'The Ambrose',
                 'Lincoln Curtain',
-                'Clean Shaven'
+                'Clean Shaven',
             ],
             eyebrows: [
                 'Balanced',
@@ -448,8 +449,8 @@ export default {
                 'Cutouts',
                 'Fade Away',
                 'Solo Tram',
-                'None'
-            ]
+                'None',
+            ],
         },
         structureComponent: [
             'Nose Width',
@@ -471,7 +472,7 @@ export default {
             'Chin Depth',
             'Chin Width',
             'Chin Indent',
-            'Neck Width'
+            'Neck Width',
         ],
         makeupComponent: {
             LABEL_STYLE: 'Style',
@@ -524,13 +525,13 @@ export default {
                         'Rocker',
                         'Goth',
                         'Punk',
-                        'Devastated'
-                    ]
+                        'Devastated',
+                    ],
                 },
                 5: {
                     name: 'Blush',
                     description: 'Makeup that goes on your cheeks.',
-                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties']
+                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties'],
                 },
                 8: {
                     name: 'Lipstick',
@@ -545,10 +546,10 @@ export default {
                         'Lined Nude Matte',
                         'Liner Nude Gloss',
                         'Smudged',
-                        'Geisha'
-                    ]
-                }
-            }
+                        'Geisha',
+                    ],
+                },
+            },
         },
         overlaysComponent: {
             LABEL_STYLE: 'Style',
@@ -581,8 +582,8 @@ export default {
                         'Acne Scarring',
                         'Full Acne Scarring',
                         'Cold Sores',
-                        'Impetigo'
-                    ]
+                        'Impetigo',
+                    ],
                 },
                 3: {
                     name: 'Age',
@@ -602,8 +603,8 @@ export default {
                         'Vintage',
                         'Retired',
                         'Junkie',
-                        'Geriatric'
-                    ]
+                        'Geriatric',
+                    ],
                 },
                 6: {
                     name: 'Complexion',
@@ -620,8 +621,8 @@ export default {
                         'Blood Vessels',
                         'Damaged',
                         'Pale',
-                        'Ghostly'
-                    ]
+                        'Ghostly',
+                    ],
                 },
                 7: {
                     name: 'Sun Damage',
@@ -637,8 +638,8 @@ export default {
                         'Rugged',
                         'Creased',
                         'Cracked',
-                        'Gritty'
-                    ]
+                        'Gritty',
+                    ],
                 },
                 9: {
                     name: 'Freckles',
@@ -661,15 +662,28 @@ export default {
                         'Double Dip',
                         'One Sided',
                         'Pairs',
-                        'Growth'
-                    ]
+                        'Growth',
+                    ],
                 },
                 11: {
                     name: 'Body Blemish',
                     description: 'Do you have any body imperfections?',
-                    labels: null
-                }
-            }
+                    labels: [
+                        'unk0',
+                        'unk1',
+                        'unk2',
+                        'unk3',
+                        'unk4',
+                        'unk5',
+                        'unk6',
+                        'unk7',
+                        'unk8',
+                        'unk9',
+                        'unk10',
+                        'unk11',
+                    ],
+                },
+            },
         },
         faces: [
             'Benjamin',
@@ -717,7 +731,7 @@ export default {
             'Claude',
             'Niko',
             'John',
-            'Misty'
+            'Misty',
         ],
         color: {
             hair: [
@@ -780,7 +794,7 @@ export default {
                 'Black',
                 'Black',
                 'Black',
-                'Black'
+                'Black',
             ],
             overlays: [
                 'Red',
@@ -846,7 +860,7 @@ export default {
                 'Light Brown',
                 'Brown',
                 'Dark Brown',
-                'Darker Brown'
+                'Darker Brown',
             ],
             eyes: [
                 'Green',
@@ -880,13 +894,13 @@ export default {
                 'Infected',
                 'Alien',
                 'Undead',
-                'Zombie'
-            ]
-        }
+                'Zombie',
+            ],
+        },
     },
     [LOCALE_KEYS.WEBVIEW_JOB]: {
         LABEL_DECLINE: 'Decline',
-        LABEL_ACCEPT: 'Accept'
+        LABEL_ACCEPT: 'Accept',
     },
     [LOCALE_KEYS.WEBVIEW_INVENTORY]: {
         ITEM_SLOTS: [
@@ -900,10 +914,10 @@ export default {
             'Bag',
             'Armour',
             'Watches',
-            'Bracelets'
+            'Bracelets',
         ],
         LABEL_SPLIT: 'split',
-        LABEL_CANCEL: 'cancel'
+        LABEL_CANCEL: 'cancel',
     },
     [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
         LABEL_HAT: 'Hat',
@@ -921,7 +935,7 @@ export default {
         LABEL_UNDERSHIRT: 'Undershirt',
         LABEL_TORSO: 'Arms / Torso / Gloves',
         LABEL_BUY: 'purchase',
-        LABEL_EXIT: 'exit'
+        LABEL_EXIT: 'exit',
     },
     [LOCALE_KEYS.WEBVIEW_LOGIN]: {
         LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
@@ -930,7 +944,7 @@ export default {
         LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
-        LABEL_OPEN_WINDOW: `Open Login Window Again`
+        LABEL_OPEN_WINDOW: `Open Login Window Again`,
     },
     [LOCALE_KEYS.WEBVIEW_GARAGE]: {
         LABEL_GARAGE: 'Garage',
@@ -939,6 +953,6 @@ export default {
         LABEL_FUEL: 'Fuel',
         LABEL_CONTROLS: 'Controls',
         LABEL_SPAWN: 'spawn',
-        LABEL_DESPAWN: 'despawn'
-    }
+        LABEL_DESPAWN: 'despawn',
+    },
 };
