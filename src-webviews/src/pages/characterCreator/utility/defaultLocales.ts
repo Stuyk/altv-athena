@@ -1,6 +1,7 @@
 export default {
     titles: ['Appearance', 'Facial Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
-    LABEL_NAME: 'Name',
+    LABEL_FIRST_NAME: 'First Name',
+    LABEL_LAST_NAME: 'Last Name',
     LABEL_BIRTHDAY: 'Birthday',
     LABEL_GENDER: 'Gender',
     LABEL_DAY: 'Day',

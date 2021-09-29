@@ -138,8 +138,6 @@ export default defineComponent({
             const currentValues = [...this.data.colorOverlays];
             currentValues[index][valueName] -= incrementValue;
 
-            console.log(valueName);
-
             if (currentValues[index][valueName] < min) {
                 currentValues[index][valueName] = max;
             }

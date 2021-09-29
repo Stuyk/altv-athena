@@ -2,10 +2,11 @@
     <div>
         <div :class="inputClass" class="input">
             <div class="split">
+                <Icon v-if="icon && swapIconSide" class="grey--text pr-4" :size="24" :icon="icon" />
                 <div :class="labelClass" class="label overline" v-if="label">
                     {{ label }}
                 </div>
-                <Icon v-if="icon" class="grey--text pr-4" :size="24" :icon="icon" />
+                <Icon v-if="icon && !swapIconSide" class="grey--text pr-4" :size="24" :icon="icon" />
             </div>
             <input
                 :class="textboxClass"
@@ -75,6 +76,10 @@ export default defineComponent({
             type: Function,
             required: false,
         },
+        swapIconSide: {
+            type: Boolean,
+            required: false,
+        },
         value: [String, Number] as PropType<string | number>,
     },
     methods: {
@@ -138,6 +143,10 @@ export default defineComponent({
 
             if (!this.stack) {
                 classes['textbox-full-width'] = true;
+            }
+
+            if (this.stack) {
+                classes['mt-2'] = true;
             }
 
             return classes;

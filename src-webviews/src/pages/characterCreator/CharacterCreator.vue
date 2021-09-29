@@ -14,12 +14,14 @@
                 <span class="overline">{{ locales.titles[selection] }}</span>
 
                 <!-- Navigate Right -->
-                <Button color="blue" @click="incrementIndex" v-if="!isInactiveNext">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
-                </Button>
-                <Button :disable="true" v-else>
-                    <Icon :size="24" icon="icon-chevron-right" />
-                </Button>
+                <template v-if="selection !== navOptions.length - 1">
+                    <Button color="blue" @click="incrementIndex" v-if="!isInactiveNext">
+                        <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
+                    </Button>
+                    <Button :disable="true" v-else>
+                        <Icon :size="24" icon="icon-chevron-right" />
+                    </Button>
+                </template>
             </div>
             <div class="inner-page pl-4 pt-4 pr-4">
                 <component
@@ -29,11 +31,9 @@
                     @set-parameter="setParameter"
                     @inc-parameter="incrementParameter"
                     @dec-parameter="decrementParameter"
-                    v-bind:nodiscard="noDiscard"
-                    v-bind:noname="noName"
-                    v-bind:currentname="infoData.name"
+                    @set-infodata="setInfoData"
+                    v-bind:emit="emit"
                     v-bind:infodata="infoData"
-                    v-bind:totalcharacters="totalCharacters"
                 ></component>
             </div>
         </div>
@@ -85,7 +85,7 @@ export default defineComponent({
     data() {
         return {
             show: false,
-            selection: 0,
+            selection: 5,
             forceUpdate: 0,
             data: {
                 sex: 1,
@@ -116,8 +116,6 @@ export default defineComponent({
                 name: '',
             },
             navOptions: ['Appearance', 'Structure', 'Hair', 'Overlays', 'Makeup', 'Info'],
-            noDiscard: false,
-            noName: false,
             totalCharacters: 1,
             locales: DefaultLocales,
         };
@@ -128,7 +126,7 @@ export default defineComponent({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validInfoData) {
+            if (this.selection === 5) {
                 return true;
             }
 
@@ -139,7 +137,7 @@ export default defineComponent({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validInfoData) {
+            if (this.selection === 5) {
                 return true;
             }
 
@@ -302,6 +300,9 @@ export default defineComponent({
 
             this.data = oldData;
             this.updateCharacter();
+        },
+        setInfoData(parameter: string, value: any) {
+            this.infoData[parameter] = value;
         },
         setLocales(localeObject) {
             this.locales = localeObject;
