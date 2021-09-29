@@ -71,7 +71,7 @@ export default defineComponent({
     },
     data() {
         return {
-            overlaysList: OverlaysList,
+            overlaysList: [...OverlaysList],
         };
     },
     methods: {
@@ -87,8 +87,6 @@ export default defineComponent({
             const currentValues = [...this.data.opacityOverlays];
             const valueToChange = isOpacity ? 'opacity' : 'value';
             const value = parseFloat(e.target['value']);
-
-            console.log(valueToChange);
 
             currentValues[index][valueToChange] = value;
             this.$emit('set-parameter', 'opacityOverlays', currentValues);

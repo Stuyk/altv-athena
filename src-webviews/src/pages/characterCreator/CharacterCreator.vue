@@ -1,10 +1,7 @@
 <template>
     <div class="container">
         <div class="creator stack">
-            <div
-                class="navigation split split-full center mt-4 pl-4 pr-4 pb-4 space-between"
-                style="box-sizing: border-box"
-            >
+            <div class="navigation split split-full center mt-4 pl-4 pr-4 pb-4 space-between">
                 <!-- Navigate Left -->
                 <Button color="blue" @click="decrementIndex" v-if="!isInactiveBack">
                     <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
@@ -123,7 +120,6 @@ export default defineComponent({
             noName: false,
             totalCharacters: 1,
             locales: DefaultLocales,
-            url: 'http://localhost:9111',
         };
     },
     computed: {
@@ -372,6 +368,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
+/* This style is applied to only this page */
 .container {
     display: block;
     position: absolute;
@@ -392,6 +389,8 @@ export default defineComponent({
 
 .navigation {
     border-bottom: 2px solid rgba(64, 64, 64, 1);
+    min-height: 75px !important;
+    box-sizing: border-box !important;
 }
 
 .inner-page {
@@ -403,6 +402,7 @@ export default defineComponent({
 </style>
 
 <style>
+/* This style is applied to all components too */
 .subtitle-2 {
     white-space: pre-line !important;
 }

@@ -127,7 +127,7 @@
             </div>
         </Module>
 
-        <Module :name="getLocale('LABEL_FACIAL_HAIR')" class="mb-4">
+        <Module :name="getLocale('LABEL_FACIAL_HAIR')" class="mb-4" v-if="data.sex === 1">
             <!-- Facial Hair -->
             <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_FACIAL_HAIR') }}</div>
             <div class="split split-full center">
@@ -148,6 +148,7 @@
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
+
             <!-- Facial Hair Colour -->
             <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_FACIAL_HAIR_COLOUR') }}</div>
             <div class="split split-full center">
