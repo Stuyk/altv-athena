@@ -4,7 +4,7 @@
             <!-- Hair Style -->
             <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_HAIRSTYLE') }}</div>
             <div class="split split-full center">
-                <Button color="blue" @click="$emit('dec-parameter', 'hair', 0, getHairCount(), 1)">
+                <Button color="blue" @click="decValueWrap('hair', 0, getHairCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
@@ -17,7 +17,7 @@
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
-                <Button color="blue" @click="$emit('inc-parameter', 'hair', 0, getHairCount(), 1)">
+                <Button color="blue" @click="incValueWrap('hair', 0, getHairCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
@@ -214,9 +214,49 @@ export default defineComponent({
         data: Object,
         locales: Object,
     },
+    data() {
+        return {
+            // Used to prevent certain hair values
+            greylist: {
+                masculine: [23],
+                feminine: [24],
+            },
+        };
+    },
     methods: {
+        isFeminine(): boolean {
+            return this.data.sex === 0;
+        },
+        isInvalidValue(value: number): boolean {
+            if (typeof value === 'string') {
+                value = parseFloat(value);
+            }
+
+            const valuesToCheck = this.isFeminine() ? this.greylist.feminine : this.greylist.masculine;
+            return valuesToCheck.includes(value);
+        },
+        incValueWrap(parameterName: string, min: number, max: number, increment: number) {
+            if (parameterName === 'hair' && this.isInvalidValue(this.data[parameterName] + increment)) {
+                increment = 2;
+            }
+
+            this.$emit('inc-parameter', 'hair', min, max, increment);
+        },
+        decValueWrap(parameterName: string, min: number, max: number, increment: number) {
+            if (parameterName === 'hair' && this.isInvalidValue(this.data[parameterName] - increment)) {
+                increment = 2;
+            }
+
+            this.$emit('dec-parameter', 'hair', min, max, increment);
+        },
         setValueWrap(e: Event, parameterName: string) {
-            this.$emit('set-parameter', parameterName, parseFloat(e.target['value']));
+            let value = parseFloat(e.target['value']);
+
+            if (parameterName === 'hair' && this.isInvalidValue(value)) {
+                value += 1;
+            }
+
+            this.$emit('set-parameter', parameterName, value);
         },
         getHairCount() {
             if (this.data.sex === 0) {

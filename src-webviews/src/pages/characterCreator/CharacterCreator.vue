@@ -245,7 +245,13 @@ export default defineComponent({
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        decrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+        decrementParameter(
+            parameter: string,
+            min: number,
+            max: number,
+            incrementValue: number,
+            arrayIndex: number = null,
+        ) {
             if (arrayIndex === null || arrayIndex === undefined) {
                 this.data[parameter] -= incrementValue;
 
@@ -263,7 +269,13 @@ export default defineComponent({
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        incrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+        incrementParameter(
+            parameter: string,
+            min: number,
+            max: number,
+            incrementValue: number,
+            arrayIndex: number = null,
+        ) {
             if (arrayIndex === null || arrayIndex === undefined) {
                 this.data[parameter] += incrementValue;
 
@@ -308,9 +320,6 @@ export default defineComponent({
             this.data.skinMix = parseFloat(this.data.skinMix);
             this.data.faceMix = parseFloat(this.data.faceMix);
             this.forceUpdate += 1;
-
-            console.log('test...');
-            console.log(this.data.eyebrowsOpacity);
 
             if (!('alt' in window)) {
                 return;

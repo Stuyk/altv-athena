@@ -1,6 +1,6 @@
 <template>
     <div class="modal-page">
-         <slot></slot>
+        <slot></slot>
     </div>
 </template>
 
@@ -9,7 +9,7 @@ import { defineComponent } from 'vue';
 
 const ComponentName = 'Modal';
 export default defineComponent({
-    name: ComponentName
+    name: ComponentName,
 });
 </script>
 
@@ -30,6 +30,6 @@ export default defineComponent({
     align-items: center;
     justify-items: center;
     z-index: 999;
-    background: rgba(0, 0, 0, 0.7)
+    background: rgba(0, 0, 0, 0.7);
 }
 </style>

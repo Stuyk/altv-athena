@@ -18,12 +18,12 @@ export default defineComponent({
     props: {
         minWidth: {
             type: String,
-            required: true
+            required: true,
         },
         maxWidth: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     computed: {
         computedStyle() {
@@ -32,14 +32,14 @@ export default defineComponent({
             if (this.minWidth) {
                 style += `min-width: ${this.minWidth} !important;`;
             }
-            
+
             if (this.maxWidth) {
                 style += `max-width: ${this.maxWidth} !important;`;
             }
 
             return style;
-        }
-    }
+        },
+    },
 });
 </script>
 

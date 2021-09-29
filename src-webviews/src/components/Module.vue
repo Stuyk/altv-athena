@@ -1,6 +1,6 @@
 <template>
     <div class="module stack">
-        <div class="split space-between" style="width: 100%;">
+        <div class="split space-between" style="width: 100%">
             <span class="overline" :class="show ? 'amber--text' : 'grey--text'">
                 {{ name }}
             </span>
@@ -24,19 +24,19 @@ export default defineComponent({
     name: ComponentName,
     components: {
         Button,
-        Icon
+        Icon,
     },
     props: {
         name: {
             type: String,
-            required: false
-        }
+            required: false,
+        },
     },
     data() {
         return {
-            show: false
-        }
-    }
+            show: false,
+        };
+    },
 });
 </script>
 
