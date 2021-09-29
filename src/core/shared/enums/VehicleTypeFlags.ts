@@ -11,6 +11,7 @@ export const enum VEHICLE_CLASS {
     MOTORCYCLE = 'motorcycle',
     MUSCLE = 'muscle',
     OFFROAD = 'offroad',
+    OPENWHEEL = 'openwheel',
     AIRCRAFT = 'aircraft',
     SUV = 'suv',
     SEDAN = 'sedan',
