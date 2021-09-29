@@ -35,7 +35,7 @@ export class CharacterSystem {
             parseFloat(appearance.faceMix.toString()),
             parseFloat(appearance.skinMix.toString()),
             0,
-            false
+            false,
         );
 
         // Facial Features
@@ -62,7 +62,7 @@ export class CharacterSystem {
         native.setPedHeadOverlayColor(ped, 1, 1, appearance.facialHairColor1, appearance.facialHairColor1);
 
         // Eyebrows
-        native.setPedHeadOverlay(ped, 2, appearance.eyebrows, 1);
+        native.setPedHeadOverlay(ped, 2, appearance.eyebrows, appearance.eyebrowsOpacity);
         native.setPedHeadOverlayColor(ped, 2, 1, appearance.eyebrowsColor1, appearance.eyebrowsColor1);
 
         // Decor

@@ -227,7 +227,7 @@ export default defineComponent({
                 this.data.facialHairColor1 = 0;
                 this.data.eyebrows = 0;
             } else {
-                if (arrayIndex) {
+                if (arrayIndex === undefined || arrayIndex === null) {
                     if (isNaN(value as number)) {
                         this.data[parameter] = value;
                     } else {
@@ -308,6 +308,9 @@ export default defineComponent({
             this.data.skinMix = parseFloat(this.data.skinMix);
             this.data.faceMix = parseFloat(this.data.faceMix);
             this.forceUpdate += 1;
+
+            console.log('test...');
+            console.log(this.data.eyebrowsOpacity);
 
             if (!('alt' in window)) {
                 return;

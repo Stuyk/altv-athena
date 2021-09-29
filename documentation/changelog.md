@@ -59,6 +59,7 @@ description: List of all the changes and current versions.
 + Make Creation Interfaces Return UID(s)
 + Added Custom Streamer Key(s) based on Dimension and Position
 + Added Custom Stream Ranges
++ Fixed Bug where Eyebrow Opacity Wasn't Changing
 ```
 
 ## 2.0.3

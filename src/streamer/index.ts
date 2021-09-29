@@ -65,6 +65,8 @@ class StreamerServer {
         Object.keys(config).forEach((key) => {
             console.log(`${key}: ${config[key]}`);
         });
+
+        conn.write(JSON.stringify({ id: -1, route: 'ready', data: '[Streamer] Ready!' }));
     }
 
     /**

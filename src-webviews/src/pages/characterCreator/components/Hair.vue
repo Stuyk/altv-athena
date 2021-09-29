@@ -1,19 +1,19 @@
 <template>
     <div class="wrapper stack">
-        <!-- Hair Style -->
         <Module :name="getLocale('LABEL_HAIRSTYLE')" class="mb-4">
+            <!-- Hair Style -->
             <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_HAIRSTYLE') }}</div>
             <div class="split split-full center">
                 <Button color="blue" @click="$emit('dec-parameter', 'hair', 0, getHairCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    uid="hair"
                     :minIndex="0"
                     :maxIndex="getHairCount()"
                     :indexValue="data.hair"
                     :increment="1"
                     :values="data.sex === 0 ? locales.hairComponent.feminine : locales.hairComponent.masculine"
+                    @input="(e) => setValueWrap(e, 'hair')"
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
@@ -21,189 +21,175 @@
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
-        </Module>
-
-        <!-- Hair Colour -->
-        <Module :name="getLocale('LABEL_HAIRSTYLE_COLOUR')" class="mb-4">
-            <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_HAIRSTYLE_COLOUR') }}</div>
+            <!-- Hair Colours -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_HAIRSTYLE_COLOUR') }}</div>
             <div class="split split-full center">
-                <Button color="blue" @click="$emit('dec-parameter', 'hair', 0, getHairCount(), 1)">
+                <Button color="blue" @click="$emit('dec-parameter', 'hairColor1', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    uid="hair"
                     :minIndex="0"
-                    :maxIndex="getHairCount()"
-                    :indexValue="data.hair"
+                    :maxIndex="getColourCount()"
+                    :indexValue="data.hairColor1"
                     :increment="1"
                     :values="locales.color.hair"
+                    @input="(e) => setValueWrap(e, 'hairColor1')"
                     style="width: 100%"
                     class="pl-3 pr-3"
                 />
-                <Button color="blue" @click="$emit('inc-parameter', 'hair', 0, getHairCount(), 1)">
+                <Button color="blue" @click="$emit('inc-parameter', 'hairColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Highlights -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_HAIRSTYLE_HIGHLIGHTS') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'hairColor2', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getColourCount()"
+                    :indexValue="data.hairColor2"
+                    :increment="1"
+                    :values="locales.color.hair"
+                    @input="(e) => setValueWrap(e, 'hairColor2')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'hairColor2', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
         </Module>
 
-        <!-- <button @click="toggleModule('hairstyle')" class="mt-2 split-close">
-                    <v-icon class="blue--text" small>{{ modules.hairstyle ? 'icon-minus' : 'icon-plus' }}</v-icon>
-                    <div class="overline blue--text">
-                        &nbsp;{{ getLocale('LABEL_HAIRSTYLE') }}
-                    </div>
-                </button>
-                <template v-if="modules.hairstyle">
-                    <div class="subtitle-2 grey--text mb-2">{{ getLocale('DESC_HAIRSTYLE') }}</div>
-                    <div class="button-group pa-2">
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('hair', 0, getHairCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ data.sex === 0 ? locales.hairComponent.feminine[data.hair] : locales.hairComponent.masculine[data.hair] }}
-                            </span>
-                            <button @click="incrementParameter('hair', 0, getHairCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.hair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getHairCount()" step="1" :indexValue.number="data.hair" @input="e => handleChange(e, 'hair')"/>
-                        </div>
+        <Module :name="getLocale('LABEL_EYEBROWS')" class="mb-4">
+            <!-- Eyebrows -->
+            <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_EYEBROWS') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'eyebrows', 0, getEyebrowsCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getEyebrowsCount()"
+                    :indexValue="data.eyebrows"
+                    :increment="1"
+                    :values="locales.hairComponent.eyebrows"
+                    @input="(e) => setValueWrap(e, 'eyebrows')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'eyebrows', 0, getEyebrowsCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Eyebrow Colour -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_EYEBROWS_COLOUR') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'eyebrowsColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getColourCount()"
+                    :indexValue="data.eyebrowsColor1"
+                    :increment="1"
+                    :values="locales.color.hair"
+                    @input="(e) => setValueWrap(e, 'eyebrowsColor1')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'eyebrowsColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Eyebrow Opacity -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">
+                {{ getLocale('LABEL_EYEBROWS') }} {{ getLocale('LABEL_OPACITY') }}
+            </div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'eyebrowsOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="1"
+                    :indexValue="data.eyebrowsOpacity"
+                    :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'eyebrowsOpacity')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'eyebrowsOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+        </Module>
 
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_COLOUR') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('hairColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.color.hair[data.hairColor1] }}
-                            </span>
-                            <button @click="incrementParameter('hairColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.hairColor1" @input="e => handleChange(e, 'hairColor1')"/>
-                        </div>
-
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_HAIRSTYLE_HIGHLIGHTS') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('hairColor2', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.color.hair[data.hairColor2] }}
-                            </span>
-                            <button @click="incrementParameter('hairColor2', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.hairColor2 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.hairColor2" @input="e => handleChange(e, 'hairColor2')"/>
-                        </div>
-                    </div>
-                </template>
-    
-                <button @click="toggleModule('eyebrows')" class="mt-2 split-close">
-                    <v-icon class="blue--text" small>{{ modules.eyebrows ? 'icon-minus' : 'icon-plus' }}</v-icon>
-                    <div class="overline blue--text">
-                        &nbsp;{{ getLocale('LABEL_EYEBROWS') }}
-                    </div>
-                </button>
-                <template v-if="modules.eyebrows">
-                    <div class="subtitle-2 grey--text mb-2">{{ getLocale('DESC_EYEBROWS') }}</div>
-                    <div class="button-group pa-2">
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_EYEBROWS') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.hairComponent.eyebrows[data.eyebrows] }}
-                            </span>
-                            <button @click="incrementParameter('eyebrows', 0, getEyebrowsCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrows }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getEyebrowsCount()" step="1" :indexValue.number="data.eyebrows" @input="e => handleChange(e, 'eyebrows')"/>
-                        </div>
-
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_EYEBROWS_COLOUR') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('eyebrowsColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.color.hair[data.eyebrowsColor1] }}
-                            </span>
-                            <button @click="incrementParameter('eyebrowsColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.eyebrowsColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.eyebrowsColor1" @input="e => handleChange(e, 'eyebrowsColor1')"/>
-                        </div>
-                    </div>
-                </template>
-
-
-                <button @click="toggleModule('facial')" class="mt-2 split-close">
-                    <v-icon class="blue--text" small>{{ modules.facial ? 'icon-minus' : 'icon-plus' }}</v-icon>
-                    <div class="overline blue--text">
-                        &nbsp;{{ getLocale('LABEL_FACIAL_HAIR') }}
-                    </div>
-                </button>
-                <template v-if="modules.facial">
-                    <div class="subtitle-2 grey--text mb-2">{{ getLocale('DESC_FACIAL_HAIR') }}</div>
-                    <div class="button-group pa-2">
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_OPACITY') }}</div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHairOpacity }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="4" class="flex-grow-1" type="range" min="0" max="1" step="0.1" :indexValue.number="data.facialHairOpacity" @input="e => handleChange(e, 'facialHairOpacity')" />
-                        </div>
-                    
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_FACIAL_HAIR') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('facialHair', 0, getFacialCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.hairComponent.facial[data.facialHair] }}
-                            </span>
-                            <button @click="incrementParameter('facialHair', 0, getFacialCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHair }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getFacialCount()" step="1" :indexValue.number="data.facialHair" @input="e => handleChange(e, 'facialHair')"/>
-                        </div>
-
-                        <div class="overline blue-grey--text">{{ getLocale('LABEL_FACIAL_HAIR_COLOUR') }}</div>
-                        <div class="split flex-grow-1">
-                            <button @click="decrementParameter('facialHairColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-left</v-icon>
-                            </button>
-                            <span class="flex-grow-1 text-center grey--text caption"> 
-                                {{ locales.color.hair[data.facialHairColor1] }}
-                            </span>
-                            <button @click="incrementParameter('facialHairColor1', 0, getColourCount(), 1)" class="outline-transparent pl-4 pr-4">
-                                <v-icon class="blue--text">icon-chevron-right</v-icon>
-                            </button>
-                        </div>
-                        <div class="split mt-4 mb-4">
-                            <v-chip class="light-blue--text mr-3" label outlined>{{ data.facialHairColor1 }}</v-chip>
-                            <v-slider dense hide-details ticks="always" tick-size="1" class="flex-grow-1" type="range" min="0" :max="getColourCount()" step="1" :indexValue.number="data.facialHairColor1" @input="e => handleChange(e, 'facialHairColor1')"/>
-                        </div>
-                    </div>
-                </template> -->
+        <Module :name="getLocale('LABEL_FACIAL_HAIR')" class="mb-4">
+            <!-- Facial Hair -->
+            <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_FACIAL_HAIR') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'facialHair', 0, getFacialCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getFacialCount()"
+                    :indexValue="data.facialHair"
+                    :increment="1"
+                    :values="locales.hairComponent.facial"
+                    @input="(e) => setValueWrap(e, 'facialHair')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'facialHair', 0, getFacialCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Facial Hair Colour -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_FACIAL_HAIR_COLOUR') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'facialHairColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getColourCount()"
+                    :indexValue="data.facialHairColor1"
+                    :increment="1"
+                    :values="locales.color.hair"
+                    @input="(e) => setValueWrap(e, 'facialHairColor1')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'facialHairColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Eyebrow Opacity -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">
+                {{ getLocale('LABEL_FACIAL_HAIR') }} {{ getLocale('LABEL_OPACITY') }}
+            </div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'facialHairOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="1"
+                    :indexValue="data.facialHairOpacity"
+                    :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'facialHairOpacity')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'facialHairOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+        </Module>
     </div>
 </template>
 
@@ -228,8 +214,10 @@ export default defineComponent({
         data: Object,
         locales: Object,
     },
-
     methods: {
+        setValueWrap(e: Event, parameterName: string) {
+            this.$emit('set-parameter', parameterName, parseFloat(e.target['value']));
+        },
         getHairCount() {
             if (this.data.sex === 0) {
                 return this.locales.hairComponent.feminine.length - 2;
