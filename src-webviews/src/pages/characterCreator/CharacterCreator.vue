@@ -394,3 +394,9 @@ export default defineComponent({
     box-sizing: border-box;
 }
 </style>
+
+<style>
+.subtitle-2 {
+    white-space: pre-line !important;
+}
+</style>

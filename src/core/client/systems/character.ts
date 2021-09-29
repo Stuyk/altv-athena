@@ -50,16 +50,12 @@ export class CharacterSystem {
             native.setPedHeadOverlay(ped, overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
         }
 
-        console.log(appearance.hairOverlay);
-
         // Hair
         const collection = native.getHashKey(appearance.hairOverlay.collection);
         const overlay = native.getHashKey(appearance.hairOverlay.overlay);
         native.addPedDecorationFromHashes(ped, collection, overlay);
         native.setPedComponentVariation(ped, 2, appearance.hair, 0, 0);
         native.setPedHairColor(ped, appearance.hairColor1, appearance.hairColor2);
-
-        console.log(`Hair: ${appearance.hair} || Color: ${appearance.hairColor1}`);
 
         // Facial Hair
         native.setPedHeadOverlay(ped, 1, appearance.facialHair, appearance.facialHairOpacity);

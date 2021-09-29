@@ -1,25 +1,26 @@
 <template>
     <div class="wrapper stack">
         <template v-for="(name, index) in locales.structureComponent" :key="index">
-            <Module :name="locales.structureComponent[index]" class="mb-4">
-                <div class="split split-full center">
-                    <Button color="blue" @click="$emit('dec-parameter', 'structure', -1, 1, 0.1, index)">
-                        <Icon :size="14" icon="icon-chevron-left"></Icon>
-                    </Button>
-                    <RangeInput
-                        :minIndex="-1"
-                        :maxIndex="1"
-                        :indexValue="data.structure[index]"
-                        :increment="0.1"
-                        @input="(e) => setValueWrap(e, 'structure', index)"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
-                    />
-                    <Button color="blue" @click="$emit('inc-parameter', 'structure', -1, 1, 0.1, index)">
-                        <Icon :size="14" icon="icon-chevron-right"></Icon>
-                    </Button>
-                </div>
-            </Module>
+            <div class="subtitle-2 grey--text mb-2">
+                {{ locales.structureComponent[index] }}
+            </div>
+            <div class="split split-full center mt-2 mb-4">
+                <Button color="blue" @click="$emit('dec-parameter', 'structure', -1, 1, 0.1, index)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="-1"
+                    :maxIndex="1"
+                    :indexValue="data.structure[index]"
+                    :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'structure', index)"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'structure', -1, 1, 0.1, index)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
         </template>
     </div>
 </template>
