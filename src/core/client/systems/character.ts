@@ -21,8 +21,8 @@ export class CharacterSystem {
 
         native.clearPedBloodDamage(ped);
         native.clearPedDecorations(ped);
-        native.setPedHeadBlendData(ped, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
 
+        native.setPedHeadBlendData(ped, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
         native.setPedHeadBlendData(ped, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
         native.setPedHeadBlendData(
             ped,

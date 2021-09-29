@@ -48,7 +48,9 @@ export default defineComponent({
     },
     methods: {
         setValueWrap(e: Event, parameterName: string, indexValue: number) {
-            this.$emit('set-parameter', parameterName, parseFloat(e.target['value']), indexValue);
+            const originalValues = [...this.data[parameterName]];
+            originalValues[indexValue] = parseFloat(e.target['value']);
+            this.$emit('set-parameter', parameterName, originalValues);
         },
     },
 });

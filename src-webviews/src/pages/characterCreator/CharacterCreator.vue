@@ -69,6 +69,9 @@ import { MalePresets, FemalePresets } from './utility/presets';
 const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
+    props: {
+        emit: Function,
+    },
     components: {
         Button,
         Icon,
@@ -325,7 +328,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('creator:Sync', this.data);
+            this.emit('creator:Sync', this.data);
         },
         resetSelection() {
             this.selection = 0;
@@ -356,11 +359,15 @@ export default defineComponent({
             alt.on('creator:Ready', this.setReady);
             alt.on('creator:SetData', this.setData);
             alt.on('creator:SetLocales', this.setLocales);
-            alt.emit('ready');
-            alt.emit('url');
         }
     },
-    unmounted() {},
+    unmounted() {
+        if ('alt' in window) {
+            alt.off('creator:Ready', this.setReady);
+            alt.off('creator:SetData', this.setData);
+            alt.off('creator:SetLocales', this.setLocales);
+        }
+    },
 });
 </script>
 

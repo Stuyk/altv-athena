@@ -43,7 +43,7 @@ This is if you want to design out-of-game and just work on some design.
 <template>
     <keep-alive>
         <div class="page">
-            <component v-for="(page, index) in pages" :key="index" :is="page.component"></component>
+            <component v-for="(page, index) in pages" :key="index" :is="page.component" v-bind:emit="emit"></component>
         </div>
     </keep-alive>
 </template>
@@ -59,18 +59,29 @@ import components from './pages/components';
 export default defineComponent({
     name: 'App',
     components: {
-      ...components.componentList
+        ...components.componentList,
     },
     data() {
         return {
             pages: [] as Array<IPageData>,
-            pageBindings: [
-              ...components.generateComponentList()
-            ]
+            pageBindings: [...components.generateComponentList()],
         };
     },
     // Define functions for the main controller.
     methods: {
+        emit(value: string, ...args: any[]) {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            for (let i = 0; i < args.length; i++) {
+                if (typeof args === 'object') {
+                    args[i] = JSON.parse(JSON.stringify(args[i]));
+                }
+            }
+
+            alt.emit(value, ...args);
+        },
         // Call different internal controller functions from client-side with this.
         handleEventCall(functionName: string, ...args: any[]) {
             console.log(`FUNCTION NAME: ${functionName}`);
@@ -122,9 +133,11 @@ export default defineComponent({
                 return;
             }
 
-            const foundPages = this.pageBindings.filter(page => pagesToShow.find(pageName => pageName === page.name));
+            const foundPages = this.pageBindings.filter((page) =>
+                pagesToShow.find((pageName) => pageName === page.name),
+            );
             this.pages = foundPages;
-        }
+        },
     },
     mounted() {
         // What to show when 'alt' is not present.
@@ -136,7 +149,7 @@ export default defineComponent({
 
         alt.on('view:Call', this.handleEventCall);
         alt.emit('view:Ready');
-    }
+    },
 });
 </script>
 

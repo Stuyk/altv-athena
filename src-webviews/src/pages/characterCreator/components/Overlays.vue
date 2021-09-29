@@ -2,6 +2,7 @@
     <div class="wrapper stack">
         <template v-for="(option, i) in overlaysList" :key="i">
             <Module :name="getLocale(option.id).name" class="mb-4">
+                <!-- Option -->
                 <div class="subtitle-2 grey--text mb-2">{{ getLocale(option.id).description }}</div>
                 <div class="split space-between">
                     <Button color="blue" @click="(e) => decValueWrap(i, option.min, option.max, 1)">
@@ -21,6 +22,7 @@
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
                     </Button>
                 </div>
+
                 <!-- Opacity -->
                 <div class="subtitle-2 grey--text mb-2 mt-2">{{ locales.overlaysComponent.LABEL_OPACITY }}</div>
                 <div class="split space-between">
