@@ -17,7 +17,7 @@ let deathTime: number;
  * @param {*} oldValue
  * @return {*}  {void}
  */
-function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void {
+function handleSingleMetaChange(key: string, newValue: any): void {
     if (key !== 'isDead') {
         return;
     }
