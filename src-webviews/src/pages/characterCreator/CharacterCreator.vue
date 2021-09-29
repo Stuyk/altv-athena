@@ -186,8 +186,8 @@ export default defineComponent({
 
             alt.emit('creator:ReadyDone');
         },
-        setParameter(parameter, value: number, arrayIndex: number = null) {
-            if (typeof value !== 'number') {
+        setParameter(parameter: string, value: any, arrayIndex: number = null) {
+            if (typeof value !== 'number' && typeof value !== 'object') {
                 value = parseFloat(value);
             }
 
