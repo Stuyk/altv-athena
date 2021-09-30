@@ -22,6 +22,7 @@ export const MaleHairOverlays = {
     20: { collection: 'multiplayer_overlays', overlay: 'NGHip_M_Hair_000' },
     21: { collection: 'multiplayer_overlays', overlay: 'NGHip_M_Hair_001' },
     22: { collection: 'multiplayer_overlays', overlay: 'NGInd_M_Hair_000' },
+    23: { collection: 'mpbeach_overlays', overlay: 'FM_Hair_Fuzz' },
     24: { collection: 'mplowrider_overlays', overlay: 'LR_M_Hair_000' },
     25: { collection: 'mplowrider_overlays', overlay: 'LR_M_Hair_001' },
     26: { collection: 'mplowrider_overlays', overlay: 'LR_M_Hair_002' },
@@ -72,12 +73,12 @@ export const MaleHairOverlays = {
     71: { collection: 'mpbiker_overlays', overlay: 'MP_Biker_Hair_005_M' },
     72: {
         collection: 'mpgunrunning_overlays',
-        overlay: 'MP_Gunrunning_Hair_M_000_M'
+        overlay: 'MP_Gunrunning_Hair_M_000_M',
     },
     73: {
         collection: 'mpgunrunning_overlays',
-        overlay: 'MP_Gunrunning_Hair_M_001_M'
-    }
+        overlay: 'MP_Gunrunning_Hair_M_001_M',
+    },
 };
 
 export const FemaleHairOverlays = {
@@ -105,6 +106,7 @@ export const FemaleHairOverlays = {
     21: { collection: 'multiplayer_overlays', overlay: 'NGBea_F_Hair_001' },
     22: { collection: 'multiplayer_overlays', overlay: 'NGHip_F_Hair_000' },
     23: { collection: 'multiplayer_overlays', overlay: 'NGInd_F_Hair_000' },
+    24: { collection: 'mpbeach_overlays', overlay: 'FM_Hair_Fuzz' },
     25: { collection: 'mplowrider_overlays', overlay: 'LR_F_Hair_000' },
     26: { collection: 'mplowrider_overlays', overlay: 'LR_F_Hair_001' },
     27: { collection: 'mplowrider_overlays', overlay: 'LR_F_Hair_002' },
@@ -158,10 +160,10 @@ export const FemaleHairOverlays = {
     75: { collection: 'mpbiker_overlays', overlay: 'MP_Biker_Hair_004_F' },
     76: {
         collection: 'mpgunrunning_overlays',
-        overlay: 'MP_Gunrunning_Hair_F_000_F'
+        overlay: 'MP_Gunrunning_Hair_F_000_F',
     },
     77: {
         collection: 'mpgunrunning_overlays',
-        overlay: 'MP_Gunrunning_Hair_F_001_F'
-    }
+        overlay: 'MP_Gunrunning_Hair_F_001_F',
+    },
 };

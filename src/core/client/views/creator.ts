@@ -109,8 +109,13 @@ export class CreatorView {
         PedEditCamera.disableControls(shouldDisableControls);
     }
 
-    static async handleSync(data: Appearance): Promise<void> {
-        await PedCharacter.apply(data, true);
+    static async handleSync(appearanceData: Appearance): Promise<void> {
+        console.log(`ARRAY CHECK:`);
+        console.log(Array.isArray(appearanceData.structure));
+
+        console.log(JSON.stringify(appearanceData));
+
+        await PedCharacter.apply(appearanceData, true);
         PedEditCamera.update(PedCharacter.get());
     }
 }

@@ -49,12 +49,23 @@ export class StreamerService {
      * @param {number} range How far away should we look from the player's position.
      * @memberof StreamerService
      */
-    static registerCallback<T>(
+    static async registerCallback<T>(
         key: string,
         callback: (player: alt.Player, streamedData: Array<T>) => void,
         range: number = 100,
     ) {
         callbacks[key] = callback;
+
+        await new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!ready) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+            }, 100);
+        });
 
         const playerInfo: IStreamMessage = {
             id: -1,

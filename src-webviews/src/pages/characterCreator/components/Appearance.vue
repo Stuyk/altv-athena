@@ -228,15 +228,6 @@ export default defineComponent({
         locales: {
             type: Object,
         },
-        'decrement-parameter': {
-            type: Function,
-        },
-        'increment-parameter': {
-            type: Function,
-        },
-        'set-parameter': {
-            type: Function,
-        },
     },
     data() {
         return {

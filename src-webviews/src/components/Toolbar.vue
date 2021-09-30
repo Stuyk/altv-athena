@@ -26,23 +26,23 @@ const ComponentName = 'Toolbar';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Icon
+        Icon,
     },
     props: {
         pageName: {
             type: String,
-            required: false
+            required: false,
         },
         hideExit: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     methods: {
         emitExit() {
             this.$emit('close-page', this.pageName);
-        }
-    }
+        },
+    },
 });
 </script>
 

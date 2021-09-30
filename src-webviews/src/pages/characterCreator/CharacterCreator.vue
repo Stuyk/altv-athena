@@ -1,10 +1,7 @@
 <template>
     <div class="container">
         <div class="creator stack">
-            <div
-                class="navigation split split-full center mt-4 pl-4 pr-4 pb-4 space-between"
-                style="box-sizing: border-box"
-            >
+            <div class="navigation split split-full center mt-4 pl-4 pr-4 pb-4 space-between">
                 <!-- Navigate Left -->
                 <Button color="blue" @click="decrementIndex" v-if="!isInactiveBack">
                     <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
@@ -17,12 +14,14 @@
                 <span class="overline">{{ locales.titles[selection] }}</span>
 
                 <!-- Navigate Right -->
-                <Button color="blue" @click="incrementIndex" v-if="!isInactiveNext">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
-                </Button>
-                <Button :disable="true" v-else>
-                    <Icon :size="24" icon="icon-chevron-right" />
-                </Button>
+                <template v-if="selection !== navOptions.length - 1">
+                    <Button color="blue" @click="incrementIndex" v-if="!isInactiveNext">
+                        <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
+                    </Button>
+                    <Button :disable="true" v-else>
+                        <Icon :size="24" icon="icon-chevron-right" />
+                    </Button>
+                </template>
             </div>
             <div class="inner-page pl-4 pt-4 pr-4">
                 <component
@@ -32,11 +31,9 @@
                     @set-parameter="setParameter"
                     @inc-parameter="incrementParameter"
                     @dec-parameter="decrementParameter"
-                    v-bind:nodiscard="noDiscard"
-                    v-bind:noname="noName"
-                    v-bind:currentname="infoData.name"
+                    @set-infodata="setInfoData"
+                    v-bind:emit="emit"
                     v-bind:infodata="infoData"
-                    v-bind:totalcharacters="totalCharacters"
                 ></component>
             </div>
         </div>
@@ -69,6 +66,9 @@ import { MalePresets, FemalePresets } from './utility/presets';
 const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
+    props: {
+        emit: Function,
+    },
     components: {
         Button,
         Icon,
@@ -85,7 +85,7 @@ export default defineComponent({
     data() {
         return {
             show: false,
-            selection: 0,
+            selection: 5,
             forceUpdate: 0,
             data: {
                 sex: 1,
@@ -116,11 +116,8 @@ export default defineComponent({
                 name: '',
             },
             navOptions: ['Appearance', 'Structure', 'Hair', 'Overlays', 'Makeup', 'Info'],
-            noDiscard: false,
-            noName: false,
             totalCharacters: 1,
             locales: DefaultLocales,
-            url: 'http://localhost:9111',
         };
     },
     computed: {
@@ -129,7 +126,7 @@ export default defineComponent({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validInfoData) {
+            if (this.selection === 5) {
                 return true;
             }
 
@@ -140,7 +137,7 @@ export default defineComponent({
                 return true;
             }
 
-            if (this.selection === 5 && !this.noName && !this.validInfoData) {
+            if (this.selection === 5) {
                 return true;
             }
 
@@ -186,8 +183,8 @@ export default defineComponent({
 
             alt.emit('creator:ReadyDone');
         },
-        setParameter(parameter, value: number, arrayIndex: number = null) {
-            if (typeof value !== 'number') {
+        setParameter(parameter: string, value: any, arrayIndex: number = null) {
+            if (typeof value !== 'number' && typeof value !== 'object') {
                 value = parseFloat(value);
             }
 
@@ -227,7 +224,7 @@ export default defineComponent({
                 this.data.facialHairColor1 = 0;
                 this.data.eyebrows = 0;
             } else {
-                if (arrayIndex) {
+                if (arrayIndex === undefined || arrayIndex === null) {
                     if (isNaN(value as number)) {
                         this.data[parameter] = value;
                     } else {
@@ -245,7 +242,13 @@ export default defineComponent({
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        decrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+        decrementParameter(
+            parameter: string,
+            min: number,
+            max: number,
+            incrementValue: number,
+            arrayIndex: number = null,
+        ) {
             if (arrayIndex === null || arrayIndex === undefined) {
                 this.data[parameter] -= incrementValue;
 
@@ -263,7 +266,13 @@ export default defineComponent({
             this.forceUpdate += 1;
             this.updateCharacter();
         },
-        incrementParameter(parameter, min, max, incrementValue, arrayIndex: number = null) {
+        incrementParameter(
+            parameter: string,
+            min: number,
+            max: number,
+            incrementValue: number,
+            arrayIndex: number = null,
+        ) {
             if (arrayIndex === null || arrayIndex === undefined) {
                 this.data[parameter] += incrementValue;
 
@@ -292,6 +301,9 @@ export default defineComponent({
             this.data = oldData;
             this.updateCharacter();
         },
+        setInfoData(parameter: string, value: any) {
+            this.infoData[parameter] = value;
+        },
         setLocales(localeObject) {
             this.locales = localeObject;
         },
@@ -313,7 +325,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('creator:Sync', this.data);
+            this.emit('creator:Sync', this.data);
         },
         resetSelection() {
             this.selection = 0;
@@ -344,15 +356,20 @@ export default defineComponent({
             alt.on('creator:Ready', this.setReady);
             alt.on('creator:SetData', this.setData);
             alt.on('creator:SetLocales', this.setLocales);
-            alt.emit('ready');
-            alt.emit('url');
         }
     },
-    unmounted() {},
+    unmounted() {
+        if ('alt' in window) {
+            alt.off('creator:Ready', this.setReady);
+            alt.off('creator:SetData', this.setData);
+            alt.off('creator:SetLocales', this.setLocales);
+        }
+    },
 });
 </script>
 
 <style scoped>
+/* This style is applied to only this page */
 .container {
     display: block;
     position: absolute;
@@ -373,6 +390,8 @@ export default defineComponent({
 
 .navigation {
     border-bottom: 2px solid rgba(64, 64, 64, 1);
+    min-height: 75px !important;
+    box-sizing: border-box !important;
 }
 
 .inner-page {
@@ -380,5 +399,12 @@ export default defineComponent({
     overflow-y: auto;
     width: 100%;
     box-sizing: border-box;
+}
+</style>
+
+<style>
+/* This style is applied to all components too */
+.subtitle-2 {
+    white-space: pre-line !important;
 }
 </style>

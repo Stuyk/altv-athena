@@ -74,21 +74,23 @@ export class PedCharacter {
      */
     static async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
+            console.log('still updating...');
             return;
         }
 
         isUpdating = true;
 
         if (!appearance || (appearance && appearance.sex !== _appearance.sex)) {
+            console.log('not matching appearance');
             await PedCharacter.destroy();
             await PedCharacter.create(_appearance.sex === 1 ? true : false, pos, rot);
         }
 
-        await CharacterSystem.applyAppearance(id, _appearance);
-
         if (forceSameShoes) {
             native.setPedComponentVariation(id, 6, 1, 0, 0);
         }
+
+        await CharacterSystem.applyAppearance(id, _appearance);
 
         appearance = _appearance;
         isUpdating = false;
