@@ -5,9 +5,10 @@ import { LOCALE_KEYS } from './keys';
  * When you get the key of 'greet-user' from the LocaleController
  * It will return a string of 'Hello someVariableYouPass, welcome to the server.'
  * It's a simple way to create locales without hurting performance too much.
+ * DO NOT RENAME THE VARIABLES IN THIS FILE!
  */
 export default {
-    // Commands
+    // Translations related to Athena-Core Commands
     [LOCALE_KEYS.COMMAND_ADMIN_CHAT]: `_%_ [message] - Speak to other admins`,
     [LOCALE_KEYS.COMMAND_ACCEPT_DEATH]: `_%_ - Respawn at hospital after death`,
     [LOCALE_KEYS.COMMAND_ACTION_MENU]: `_%_ - Create a test action menu`,
@@ -50,21 +51,25 @@ export default {
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER]: `Command is not permitted for your character.`,
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN]: `Command is not permitted for your account.`,
     [LOCALE_KEYS.COMMAND_NOT_VALID]: `_%_ is not a valid command.`,
-    // Cannot
+
+    // Translations for forbidden actions i.e. Chatting while dead
     [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
     [LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD]: `Cannot perform this command while you are dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PERSONAL_VEHICLES]: `Cannot find any personal vehicles.`,
     [LOCALE_KEYS.CANNOT_FIND_THAT_PERSONAL_VEHICLE]: 'Cannot locate that personal vehicle.',
-    // Clothing
+
+    // Translations Related to Clothing
     [LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY]: `A clothing item was sent to your inventory.`,
-    // Discord
+
+    // Translations related to Discord Stuff
     [LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH]: `Discord ID must be at least 18 characters long.`,
     [LOCALE_KEYS.DISCORD_ALREADY_WHITELISTED]: `_%_ is already whitelisted.`,
     [LOCALE_KEYS.DISCORD_NOT_WHITELISTED]: `_%_ is not whitelisted.`,
     [LOCALE_KEYS.DISCORD_ADDED_WHITELIST]: `_%_ was added to the whitelist.`,
     [LOCALE_KEYS.DISCORD_REMOVED_WHITELIST]: `_%_ was removed from the whitelist.`,
-    // FUEL
+
+    // Translations related to Fuel-Staff
     [LOCALE_KEYS.FUEL_EXIT_VEHICLE_FIRST]: `You must exit your vehicle before fueling.`,
     [LOCALE_KEYS.FUEL_UPDATE_VEHICLE_FIRST]: `You must enter and exit a vehicle first to fuel.`,
     [LOCALE_KEYS.FUEL_VEHICLE_NOT_CLOSE]: `Vehicle is not close enough to fuel.`,
@@ -74,35 +79,43 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
-    // Garage
+
+    // Translations related to Garages
     [LOCALE_KEYS.GARAGE_BLIP_NAME]: `Garage`,
     [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
-    // House
+
+    // Translations related to Houses
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
-    // Invalid
+
+    // Translations for invalid stuff
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
-    // Interaction
-    [LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY]: `You are too far away to interact. Move closer.`,
-    [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
+
+    // Translations for InteractionController related stuff
     [LOCALE_KEYS.INTERACTION_INTERACT_WITH_OBJECT]: `Interact with Object`,
     [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
+    [LOCALE_KEYS.INTERACTION_INVALID_OBJECT]: `This object does not have an interaction.`,
+    [LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY]: `You are too far away to interact. Move closer.`,
     [LOCALE_KEYS.INTERACTION_VIEW_OPTIONS]: `View Options`,
-    // Item
-    [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
-    [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
+
+    // Translations related to Itemhandling
     [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_EQUIPMENT]: `_%_ was added to your equipment.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_TOOLBAR]: `_%_ was added to your toolbar.`,
-    // Job
+    [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
+    [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
+
+    // Translations related to the job-interface
     [LOCALE_KEYS.JOB_ALREADY_WORKING]: `You are already working on a job.`,
     [LOCALE_KEYS.JOB_NOT_WORKING]: `You are not currently working.`,
     [LOCALE_KEYS.JOB_QUIT]: `You have quit your current job.`,
-    // Labels
-    [LOCALE_KEYS.LABEL_ON]: `ON`,
-    [LOCALE_KEYS.LABEL_OFF]: `OFF`,
+
+    // Translations for Labels
     [LOCALE_KEYS.LABEL_BROADCAST]: `Broadcast`,
     [LOCALE_KEYS.LABEL_ENGINE]: `Engine`,
-    // Player
+    [LOCALE_KEYS.LABEL_ON]: `ON`,
+    [LOCALE_KEYS.LABEL_OFF]: `OFF`,
+
+    // Translations for Player related stuff
     [LOCALE_KEYS.PLAYER_IS_TOO_FAR]: `That player is too far away.`,
     [LOCALE_KEYS.PLAYER_IS_TOO_CLOSE]: `That player is too close.`,
     [LOCALE_KEYS.PLAYER_IS_NOT_DEAD]: `That player is not dead.`,
@@ -111,15 +124,18 @@ export default {
     [LOCALE_KEYS.PLAYER_SEATBELT_ON]: `You put on your seatbelt.`,
     [LOCALE_KEYS.PLAYER_SEATBELT_OFF]: `You take off your seatbelt.`,
     [LOCALE_KEYS.PLAYER_RECEIVED_BLANK]: `You received _%_ from _%_`,
-    // Use
-    [LOCALE_KEYS.USE_FUEL_PUMP]: 'Use Fuel Pump',
-    [LOCALE_KEYS.USE_ATM]: 'Use ATM',
+
+    // Translations for Use of stuff, for example ATM, Fuel Stations...
     [LOCALE_KEYS.USE_VENDING_MACHINE]: 'Use Vending Machine',
     [LOCALE_KEYS.USE_CLOTHING_STORE]: 'Browse Clothing',
-    // Weapon
+    [LOCALE_KEYS.USE_FUEL_PUMP]: 'Use Fuel Pump',
+    [LOCALE_KEYS.USE_ATM]: 'Use ATM',
+
+    // Translations related to weapon
     [LOCALE_KEYS.WEAPON_NO_HASH]: `Weapon does not have a hash.`,
-    // Vehicle
-    [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
+
+    // Translations related to vehicles
+    [LOCALE_KEYS.VEHICLE_NO_KEYS]: `You do not have keys for this vehicle.`,
     [LOCALE_KEYS.VEHICLE_LOCK_SET_TO]: `Vehicle lock has been set to: _%_`,
     [LOCALE_KEYS.VEHICLE_TOGGLE_LOCK]: `Toggle Lock`,
     [LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE]: `Toggle Engine`,
@@ -130,14 +146,40 @@ export default {
     [LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS]: `There are no parking spots at this garage.`,
     [LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED]: `That vehicle is already spawned.`,
     [LOCALE_KEYS.VEHICLE_COUNT_EXCEEDED]: `You may only have _%_ vehicles spawned at a time. You have exceeded the vehicle spawn count.`,
+    [LOCALE_KEYS.VEHICLE_NO_STORAGE]: `This vehicle does not have storage.`,
+    [LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS]: `You do not have access to the trunk.`,
     [LOCALE_KEYS.VEHICLE_LOCKED]: `Locked`,
     [LOCALE_KEYS.VEHICLE_UNLOCKED]: `Unlocked`,
+    [LOCALE_KEYS.VEHICLE_NOT_UNLOCKED]: `Vehicle is not currently unlocked.`,
+    [LOCALE_KEYS.VEHICLE_NO_OPEN_SEAT]: `Could not find an open seat.`,
     [LOCALE_KEYS.VEHICLE_FUEL]: `Fuel`,
-    // World
+    [LOCALE_KEYS.VEHICLE_NO_FUEL]: `Vehicle has no fuel.`,
+    [LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE]: `Vehicle Refuel Not Completed`,
+    [LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE]: `You are no longer near this vehicle.`,
+    [LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP]: `Vehicle is not right side up.`,
+
+    // Translations related to factions (non-webview)
+    [LOCALE_KEYS.FACTION_PLAYER_IS_ALREADY_IN_FACTION]: `_%_ is already in a faction or player does not exist.`,
+    [LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP]: `You are unable to change ownership of the faction.`,
+    [LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE]: `Storage Not Accessible`,
+    [LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS]: `You do not have access to this.`,
+    [LOCALE_KEYS.FACTION_ONLY_OWNER_IS_ALLOWED]: `Only the owner can append rank permission(s) or super admin flag to a rank.`,
+    [LOCALE_KEYS.FACTION_UNABLE_TO_DISBAND]: `You are unable to disband the faction.`,
+    [LOCALE_KEYS.FACTION_NAME_DOESNT_MATCH]: `Passed faction name does not match actual faction name.`,
+    [LOCALE_KEYS.FACTION_NOT_THE_OWNER]: `You are not the owner of this faction.`,
+    [LOCALE_KEYS.FACTION_COULD_NOT_FIND]: `Could not find your faction.`,
+    [LOCALE_KEYS.FACTION_DISABNDED]: `Faction Disbanded`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW]: `Could not withdraw: _%_$`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT]: `Could not deposit _%_$`,
+    [LOCALE_KEYS.FACTION_BANK_WITHDREW]: `Withdrew _%_$`,
+
+    // World Time-Translation
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
+
     // ============================
     // WebView Locales Start Here
     // ============================
+    // Translation for WebView-ATM
     [LOCALE_KEYS.WEBVIEW_ATM]: {
         LABEL_ATM: 'ATM',
         LABEL_CASH: 'Cash',
@@ -153,8 +195,9 @@ export default {
         GREATER_THAN_ZERO: `Value must be greater than zero`,
         LESS_THAN_CASH: `Value must be less than cash`,
         LESS_THAN_BANK: `Value must be less than bank`,
-        USER_ID_POSITIVE: `User ID must be positive`,
+        USER_ID_POSITIVE: `User ID must be positive`
     },
+    // Translation for WebView-Characters
     [LOCALE_KEYS.WEBVIEW_CHARACTERS]: {
         LABEL_DELETE: 'Delete',
         LABEL_NEW: 'New',
@@ -167,12 +210,12 @@ export default {
         LABEL_GENDER: 'Gender',
         LABEL_HOURS: 'Hours',
         LABEL_CASH: 'Cash',
-        LABEL_BANK: 'Bank',
+        LABEL_BANK: 'Bank'
     },
+    // Translation for WebView-Creator
     [LOCALE_KEYS.WEBVIEW_CREATOR]: {
         titles: ['Appearance', 'Facial Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
-        LABEL_FIRST_NAME: 'First Name',
-        LABEL_LAST_NAME: 'Last Name',
+        LABEL_NAME: 'Name',
         LABEL_BIRTHDAY: 'Birthday',
         LABEL_GENDER: 'Gender',
         LABEL_DAY: 'Day',
@@ -210,7 +253,7 @@ export default {
             LABEL_EYECOLOUR: 'Eye Colour',
             DESC_EYECOLOUR: 'Use this slider to pick an eye colour.',
             LABEL_FACE: 'Face',
-            LABEL_SKIN: 'Skin',
+            LABEL_SKIN: 'Skin'
         },
         hairComponent: {
             LABEL_HAIRSTYLE: 'Hairstyle',
@@ -299,7 +342,7 @@ export default {
                 'Center Parted Bob',
                 'Shaved Sides Flat Top',
                 'Shaved Sides Short Top',
-                'Elvis',
+                'Elvis'
             ],
             feminine: [
                 'Close Shave',
@@ -380,7 +423,7 @@ export default {
                 'Pixie Bob',
                 'Tight Pony Tail Bun',
                 'Pixie Cut',
-                'Elvis',
+                'Elvis'
             ],
             facial: [
                 'Stubble',
@@ -412,7 +455,7 @@ export default {
                 'The Hampstead',
                 'The Ambrose',
                 'Lincoln Curtain',
-                'Clean Shaven',
+                'Clean Shaven'
             ],
             eyebrows: [
                 'Balanced',
@@ -449,8 +492,8 @@ export default {
                 'Cutouts',
                 'Fade Away',
                 'Solo Tram',
-                'None',
-            ],
+                'None'
+            ]
         },
         structureComponent: [
             'Nose Width',
@@ -472,7 +515,7 @@ export default {
             'Chin Depth',
             'Chin Width',
             'Chin Indent',
-            'Neck Width',
+            'Neck Width'
         ],
         makeupComponent: {
             LABEL_STYLE: 'Style',
@@ -525,13 +568,13 @@ export default {
                         'Rocker',
                         'Goth',
                         'Punk',
-                        'Devastated',
-                    ],
+                        'Devastated'
+                    ]
                 },
                 5: {
                     name: 'Blush',
                     description: 'Makeup that goes on your cheeks.',
-                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties'],
+                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties']
                 },
                 8: {
                     name: 'Lipstick',
@@ -546,10 +589,10 @@ export default {
                         'Lined Nude Matte',
                         'Liner Nude Gloss',
                         'Smudged',
-                        'Geisha',
-                    ],
-                },
-            },
+                        'Geisha'
+                    ]
+                }
+            }
         },
         overlaysComponent: {
             LABEL_STYLE: 'Style',
@@ -582,8 +625,8 @@ export default {
                         'Acne Scarring',
                         'Full Acne Scarring',
                         'Cold Sores',
-                        'Impetigo',
-                    ],
+                        'Impetigo'
+                    ]
                 },
                 3: {
                     name: 'Age',
@@ -603,8 +646,8 @@ export default {
                         'Vintage',
                         'Retired',
                         'Junkie',
-                        'Geriatric',
-                    ],
+                        'Geriatric'
+                    ]
                 },
                 6: {
                     name: 'Complexion',
@@ -621,8 +664,8 @@ export default {
                         'Blood Vessels',
                         'Damaged',
                         'Pale',
-                        'Ghostly',
-                    ],
+                        'Ghostly'
+                    ]
                 },
                 7: {
                     name: 'Sun Damage',
@@ -638,8 +681,8 @@ export default {
                         'Rugged',
                         'Creased',
                         'Cracked',
-                        'Gritty',
-                    ],
+                        'Gritty'
+                    ]
                 },
                 9: {
                     name: 'Freckles',
@@ -662,28 +705,15 @@ export default {
                         'Double Dip',
                         'One Sided',
                         'Pairs',
-                        'Growth',
-                    ],
+                        'Growth'
+                    ]
                 },
                 11: {
                     name: 'Body Blemish',
                     description: 'Do you have any body imperfections?',
-                    labels: [
-                        'unk0',
-                        'unk1',
-                        'unk2',
-                        'unk3',
-                        'unk4',
-                        'unk5',
-                        'unk6',
-                        'unk7',
-                        'unk8',
-                        'unk9',
-                        'unk10',
-                        'unk11',
-                    ],
-                },
-            },
+                    labels: null
+                }
+            }
         },
         faces: [
             'Benjamin',
@@ -731,7 +761,7 @@ export default {
             'Claude',
             'Niko',
             'John',
-            'Misty',
+            'Misty'
         ],
         color: {
             hair: [
@@ -794,7 +824,7 @@ export default {
                 'Black',
                 'Black',
                 'Black',
-                'Black',
+                'Black'
             ],
             overlays: [
                 'Red',
@@ -860,7 +890,7 @@ export default {
                 'Light Brown',
                 'Brown',
                 'Dark Brown',
-                'Darker Brown',
+                'Darker Brown'
             ],
             eyes: [
                 'Green',
@@ -894,14 +924,16 @@ export default {
                 'Infected',
                 'Alien',
                 'Undead',
-                'Zombie',
-            ],
-        },
+                'Zombie'
+            ]
+        }
     },
+    // Translation for WebView-Job
     [LOCALE_KEYS.WEBVIEW_JOB]: {
         LABEL_DECLINE: 'Decline',
-        LABEL_ACCEPT: 'Accept',
+        LABEL_ACCEPT: 'Accept'
     },
+    // Translation for WebView-Inventory
     [LOCALE_KEYS.WEBVIEW_INVENTORY]: {
         ITEM_SLOTS: [
             'Hat',
@@ -914,11 +946,12 @@ export default {
             'Bag',
             'Armour',
             'Watches',
-            'Bracelets',
+            'Bracelets'
         ],
         LABEL_SPLIT: 'split',
-        LABEL_CANCEL: 'cancel',
+        LABEL_CANCEL: 'cancel'
     },
+    // Translation for WebView-Clothing
     [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
         LABEL_HAT: 'Hat',
         LABEL_SHIRT: 'Shirt',
@@ -935,8 +968,10 @@ export default {
         LABEL_UNDERSHIRT: 'Undershirt',
         LABEL_TORSO: 'Arms / Torso / Gloves',
         LABEL_BUY: 'purchase',
-        LABEL_EXIT: 'exit',
+        LABEL_EXIT: 'exit'
     },
+
+    // Translation for WebView-Login
     [LOCALE_KEYS.WEBVIEW_LOGIN]: {
         LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
         LABEL_LOGIN_WITH_DISCORD: `Login with Discord`,
@@ -944,8 +979,10 @@ export default {
         LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
-        LABEL_OPEN_WINDOW: `Open Login Window Again`,
+        LABEL_OPEN_WINDOW: `Open Login Window Again`
     },
+
+    // Translation for WebView-Garage
     [LOCALE_KEYS.WEBVIEW_GARAGE]: {
         LABEL_GARAGE: 'Garage',
         LABEL_DESC: 'Spawn your vehicles through this terminal.',
@@ -953,6 +990,68 @@ export default {
         LABEL_FUEL: 'Fuel',
         LABEL_CONTROLS: 'Controls',
         LABEL_SPAWN: 'spawn',
-        LABEL_DESPAWN: 'despawn',
+        LABEL_DESPAWN: 'despawn'
     },
+
+    // Translation for WebView-Faction (Options)
+    [LOCALE_KEYS.WEBVIEW_FACTION]: {
+        // << OPTION WINDOW >>
+        // This usually handles all of the "option"-stuff in the faction webview.
+        // Didnt figure this out yet.
+        LABEL_FACTION_MEMBERS: 'Members Test',
+        LABEL_FACTION_RANKS: 'Ranks',
+        LABEL_FACTION_BANK: 'Bank',
+        LABEL_FACTION_OPTIONS: 'Options',
+        LABEL_FACTION_LOGS: 'Logs',
+
+        // Translations for the faction headers inside of the option window.
+        LABEL_FACTION_OPTION_NAME: 'Option Name',
+        LABEL_FACTION_OPTION_DESCRIPTION: 'Description',
+        LABEL_FACTION_OPTION: 'Options',
+
+        // Translations for faction names option
+        LABEL_FACTION_OPTION_SETNAME: 'Set a new name for this faction',
+        LABEL_FACTION_OPTION_SETNAME_DESCRIPTION: 'Change the name of this Faction',
+        LABEL_FACTION_OPTION_SETNAME_PLACEHOLDER: 'Change faction name... (Placeholder)',
+
+        // Translations for faction location option
+        LABEL_FACTION_OPTION_LOCATION: 'Faction Location',
+        LABEL_FACTION_OPTION_LOCATION_SET: 'Faction Location was already set',
+        LABEL_FACTION_OPTION_LOCATION_UNSET: 'No Faction Location Set',
+
+        // Translations for faction storage option
+        LABEL_FACTION_OPTION_STORAGE_LOCATION: 'Storage Location',
+        LABEL_FACTION_OPTION_STORAGE_LOCATION_SET: 'Storage location was already set',
+        LABEL_FACTION_OPTION_STORAGE_LOCATION_UNSET: 'No Storage Location Set',
+
+        // Translations for faction weapon option
+        LABEL_FACTION_OPTION_WEAPON_LOCATION: 'Weapon Location',
+        LABEL_FACTION_OPTION_WEAPON_LOCATION_SET: 'Weapon location was already set',
+        LABEL_FACTION_OPTION_WEAPON_LOCATION_UNSET: 'No Weapon Location set',
+
+        // Translations for faction handoff
+        LABEL_FACTION_OPTION_HANDOFF: 'Hand Off Faction?',
+        LABEL_FACTION_OPTION_HANDOFF_DESCRIPTION: 'Type New Owner ID',
+        LABEL_FACTION_OPTION_HANDOFF_PLACEHOLDER: `Type New Owner's ID (Placeholder)`,
+
+        // Translations for faction disbanding
+        LABEL_FACTION_OPTION_DISBAND: 'Disband Faction?',
+        LABEL_FACTION_OPTION_DISBAND_DESCRIPTION: 'Type Faction Name',
+        LABEL_FACTION_OPTION_DISBAND_PLACEHOLDER: 'Match faction name... (Placeholder)',
+
+        // Translations for faction button i.e. use current position
+        LABEL_FACTION_BUTTON_CURRENTPOS: 'Use Current Position',
+
+        // Translation for when a player dont has permission to see cofiguration options of the faction (normal member).
+        LABEL_FACTION_NO_PERMISSIONS: 'If there are no option(s) you may not have permission.',
+
+        // << RANK WINDOW >>
+        LABEL_FACTION_RANKS_PLACEHOLDER: 'Rank Name to Add (Min: 4, Max: 36)',
+
+        // << BANK WINDOW >>
+        // Translations for faction banks stuff
+        LABEL_FACTION_BANK_WITHDRAW: 'Withdraw',
+        LABEL_FACTION_BANK_DEPOSIT: 'Deposit',
+        LABEL_FACTION_BANK_FACTIONMONEY: 'Faction Cash',
+    }
 };
