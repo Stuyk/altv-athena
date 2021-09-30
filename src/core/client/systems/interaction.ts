@@ -13,9 +13,10 @@ import { drawTexture } from '../utility/texture';
 import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;
-let tick;
+let tick: number;
 let pressedKey = false;
 let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
+let disableMarker: boolean = false;
 let description: string;
 let position: alt.Vector3;
 
@@ -54,7 +55,7 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static set(_position: alt.Vector3, _description: string) {
+    static set(_position: alt.Vector3, _description: string, _disableMarker: boolean) {
         if (!_position || !_description) {
             position = null;
             description = null;
@@ -63,6 +64,7 @@ export class InteractionController {
 
         position = _position;
         description = _description;
+        disableMarker = _disableMarker;
     }
 
     static tick() {
@@ -112,7 +114,9 @@ export class InteractionController {
         // Display Help Text
         if (description && position) {
             interactText = InteractionController.appendText(interactText, KEY_BINDS.INTERACT, description);
-            drawTexture('mpmissmarkers128', 'corona_marker', position, 0.1);
+            if (!disableMarker) {
+                drawTexture('mpmissmarkers128', 'corona_marker', position, 0.1);
+            }
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');

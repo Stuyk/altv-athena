@@ -8,5 +8,6 @@ export interface Interaction {
     type?: string;
     dimension?: number;
     callback?: Function;
+    disableMarker?: boolean;
     data?: Array<any>;
 }

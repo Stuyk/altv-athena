@@ -95,7 +95,7 @@ export class InteractionController {
         // Don't pass the interaction. Just the description from it.
         entity.currentInteraction = colshape;
         const interaction = entity.currentInteraction.getInteraction();
-        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description);
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description, interaction.disableMarker);
     }
 
     /**
