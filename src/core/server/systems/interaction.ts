@@ -26,10 +26,6 @@ export class InteractionController {
         const uid = sha256Random(JSON.stringify(interaction));
         interaction.identifier = uid;
 
-        if(interaction.drawMarker === null || interaction.drawMarker === undefined) {
-            interaction.drawMarker = true;
-        }
-        
         if (!interactions[interaction.type]) {
             interactions[interaction.type] = [];
         }
@@ -98,7 +94,7 @@ export class InteractionController {
         // Don't pass the interaction. Just the description from it.
         entity.currentInteraction = colshape;
         const interaction = entity.currentInteraction.getInteraction();
-        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description, interaction.drawMarker);
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description, interaction.disableMarker);
     }
 
     /**
