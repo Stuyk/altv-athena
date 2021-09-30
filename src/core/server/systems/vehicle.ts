@@ -32,6 +32,10 @@ import './fuel';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { VEHICLE_CLASS } from '../../shared/enums/VehicleTypeFlags';
+import { VEHICLE_RULES } from '../../shared/enums/VehicleRules';
+import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
+import { IResponse } from '../../shared/interfaces/IResponse';
+import SystemRules from './rules';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -72,6 +76,61 @@ import { VEHICLE_CLASS } from '../../shared/enums/VehicleTypeFlags';
  * the door itself will always be shut by the passenger. It is best not to toggle the door
  * from the inside.
  */
+/**
+ * Vehicle Functionality Writeup for Server / Client
+ *
+ * Engine(s):
+ * The functionality of the vehicle engine can be triggered on either client or server-side.
+ * The variable for the engine on server-side is always updated when using a task.
+ * Which means the engine can be controlled from client-side via tasks.
+ *
+ * The engine toggle automatically sets all door(s) to false to prevent buggy code.
+ *
+ * Seat(s):
+ * Seats on server-side are different than client-side.
+ * Meaning the numbers differ from server-side and client-side.
+ * Server-side seats start at 1. (Driver)
+ * Client-side seats start at -1. (Driver)
+ *
+ * So to get the proper seat for a native on server-side you must subtract 2.
+ * So if they enter a seat on server-side their seat is 1.
+ * However, if you want that seat to work on client-side you subtract 2.
+ * Thus resulting in -1 for the seat.
+ *
+ * The loops used the code below take into account that -1 is the starting client-side seat.
+ *
+ * Door(s):
+ * Doors start at 0 and at at the maximum amount of doors / seats in the vehicle.
+ * Not always true for seats because of vehicles like a bus that have like 12 seats or whatever.
+ *
+ * So technically if you're opening a door based on seat it's (seat + 1) for client and (seat - 1) for server.
+ *
+ * Toggling a door on client-side does not affect the door on sever-side.
+ *
+ * The behavior of doors is dependent on who is sitting in the seat next to it.
+ *
+ * The door itself cannot be opened with the vehicle being unlocked.
+ *
+ * Due to GTA:V's default settings when a player is sitting in a seat and a door is opened,
+ * the door itself will always be shut by the passenger. It is best not to toggle the door
+ * from the inside.
+ */
+
+/**
+ * Custom rules that can be extended and are triggered before invoking the rest of the function.
+ *
+ */
+ const rules: {
+    [key: string]: Array<(player: alt.Player, vehicle: alt.Vehicle, data?: IVehicleRuleData) => IResponse>;
+} = {
+    [VEHICLE_RULES.ENTER]: [],
+    [VEHICLE_RULES.EXIT]: [],
+    [VEHICLE_RULES.LOCK]: [],
+    [VEHICLE_RULES.UNLOCK]: [],
+    [VEHICLE_RULES.STORAGE]: [],
+    [VEHICLE_RULES.ENGINE]: [],
+    [VEHICLE_RULES.DOOR]: [],
+};
 
 export class VehicleSystem {
     static async init() {
@@ -114,6 +173,57 @@ export class VehicleSystem {
         Logger.info(`Vehicles Spawned: ${count}`);
     }
 
+    /**
+     * Add a custom rule. Each rule is checked before executing normal behavior.
+     * ie. Check vehicle ownership -> check engine rules -> execute engine functionality
+     *
+     * Returning true means it passed the check.
+     *
+     * Example (seat object is optional)
+     * ```ts
+     * VehicleSystem.addCustomRule(VEHICLE_RULES.ENTER, (player, vehicle, { seat }) => {
+     *      // Probably not a 'faction' vehicle.
+     *      if (!vehicle.data) {
+     *           return { status: true, response: null };
+     *      }
+     *
+     *      // Vehicle is not a faction vehicle.
+     *      if (!vehicle.data.faction) {
+     *           return { status: true, response: null };
+     *      }
+     *
+     *      // Vehicle is a faction vehicle at this point.
+     *      // Player is not in a faction.
+     *      if (!player.data.faction) {
+     *          return { status: false, response: null };
+     *      }
+     *
+     *      // Faction matches player's faction.
+     *      if (player.data.faction === vehicle.data.faction) {
+     *          return { status: true, response: null };
+     *      }
+     *
+     *      // Player is not in same faction as vehicle.
+     *      return { status: false, response: 'You do not have keys for this faction vehicle.' };
+     * });
+     * ```
+     *
+     * @static
+     * @param {VEHICLE_RULES} ruleType The rule to append the check to
+     * @param {(player: alt.Player, vehicle: alt.Vehicle, seat?: number) => IResponse} callback A function that receives player, vehicle, etc.
+     * @memberof VehicleSystem
+     */
+     static addCustomRule(
+        ruleType: VEHICLE_RULES,
+        callback: (player: alt.Player, vehicle: alt.Vehicle, data?: IVehicleRuleData) => IResponse,
+    ) {
+        if (!rules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for Vehicle Rules`);
+            return;
+        }
+
+        rules[ruleType].push(callback);
+    }
     /**
      * Called when a player interacts with a vehicle.
      * @static
@@ -166,6 +276,15 @@ export class VehicleSystem {
             return;
         }
 
+        if (vehicle.isBeingPushed) {
+            playerFuncs.emit.notification(player, `Cannot enter vehicle while it is being pushed.`);
+            return;
+        }
+
+        if (!SystemRules.check(VEHICLE_RULES.ENTER, rules, player, vehicle, { seat })) {
+            return;
+        }
+        
         const tasks: Array<Task> = [
             // native.taskEnterVehicle(alt.Player.local.scriptID, closestVehicle.scriptID, 2000, i - 1, 2, 1, 0);
             {
@@ -225,6 +344,10 @@ export class VehicleSystem {
             if (vehicleData.class !== VEHICLE_CLASS.CYCLE && vehicleData.class !== VEHICLE_CLASS.MOTORCYCLE) {
                 return;
             }
+        }
+
+        if (!SystemRules.check(VEHICLE_RULES.EXIT, rules, player, vehicle)) {
+            return;
         }
 
         const tasks: Array<Task> = [
@@ -409,6 +532,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (!SystemRules.check(VEHICLE_RULES.ENGINE, rules, player, player.vehicle)) {
+            return;
+        }
+
         // Setting the engine client-side appears to change the server-side variable.
         // Meaning that it's okay to use the native to toggle these things.
         const tasks: Array<Task> = [
@@ -478,6 +605,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (!SystemRules.check(VEHICLE_RULES.DOOR, rules, player, vehicle, { door: doorNumber })) {
+            return;
+        }
+
         const newValue = vehicle.hasStreamSyncedMeta(doorState) ? !vehicle.getStreamSyncedMeta(doorState) : true;
 
         // Prevent opening doors while the vehicle is locked.
@@ -510,6 +641,13 @@ export class VehicleSystem {
 
         if (!VehicleFuncs.hasOwnership(player, vehicle)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
+            return;
+        }
+
+        const isLocked = (vehicle.lockState as number) === VEHICLE_LOCK_STATE.LOCKED;
+        const ruleToRun = isLocked ? VEHICLE_RULES.UNLOCK : VEHICLE_RULES.LOCK;
+
+        if (!SystemRules.check(ruleToRun, rules, player, vehicle)) {
             return;
         }
 
@@ -634,6 +772,10 @@ export class VehicleSystem {
         if (!vehicleInfo || !vehicleInfo.storage) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!SystemRules.check(VEHICLE_RULES.STORAGE, rules, player, vehicle)) {
             return;
         }
 
