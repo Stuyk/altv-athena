@@ -26,6 +26,10 @@ export class InteractionController {
         const uid = sha256Random(JSON.stringify(interaction));
         interaction.identifier = uid;
 
+        if(interaction.drawMarker === null || interaction.drawMarker === undefined) {
+            interaction.drawMarker = true;
+        }
+        
         if (!interactions[interaction.type]) {
             interactions[interaction.type] = [];
         }
