@@ -71,6 +71,13 @@ export const LOCALE_KEYS = {
     GARAGE_DESCRIPTION: `garage-description`,
     // Interior
     INTERIOR_INTERACT: 'interior-interact',
+    INTERIOR_TOO_FAR_FROM_ENTRANCE: 'interior-too-far-from-entrance',
+    INTERIOR_TOO_FAR_FROM_EXIT: 'interior-too-far-from-exit',
+    INTERIOR_NOT_ENOUGH_CURRENCY: 'interior-not-enough-currency',
+    INTERIOR_DOOR_LOCKED: 'interior-door-locked',
+    INTERIOR_PURCHASED: 'interior-purchased',
+    INTERIOR_SOLD: 'interior-sold',
+    INTERIOR_NO_STORAGE: 'interior-no-storage',
     // Invalid
     INVALID_VEHICLE_MODEL: `invalid-vehicle-model`,
     // Interact
@@ -125,6 +132,33 @@ export const LOCALE_KEYS = {
     VEHICLE_LOCKED: 'vehicle-locked',
     VEHICLE_UNLOCKED: 'vehicle-unlocked',
     VEHICLE_FUEL: 'vehicle-fuel',
+    VEHICLE_NO_KEYS: 'vehicle-no-keys',
+    VEHICLE_NO_STORAGE: 'vehicle-no-storage',
+    VEHICLE_NO_TRUNK_ACCESS: 'vehicle-no-trunk-access',
+    VEHICLE_NOT_UNLOCKED: 'vehicle-not-unlocked',
+    VEHICLE_NO_OPEN_SEAT: 'vehicle-no-open-seat',
+    VEHICLE_REFUEL_INCOMPLETE: 'vehicle-refuel-incomplete',
+    VEHICLE_NO_LONGER_NEAR_VEHICLE: 'vehicle-no-longer-near-vehicle',
+    VEHICLE_NOT_RIGHT_SIDE_UP: 'vehicle-not-right-side-up',
+    VEHICLE_IS_ALREADY_BEING_PUSHED: 'vehicle-is-already-being-pushed',
+    VEHICLE_STORAGE_VIEW_NAME: 'vehicle-storage-view-name',
+
+    // Faction
+    FACTION_PLAYER_IS_ALREADY_IN_FACTION: 'faction-player-is-already-in-faction',
+    FACTION_CANNOT_CHANGE_OWNERSHIP: 'faction-cannot-change-ownership',
+    FACTION_STORAGE_NOT_ACCESSIBLE: 'faction-storage-not-accessible',
+    FACTION_STORAGE_NO_ACCESS: 'faction-storage-no-access',
+    FACTION_ONLY_OWNER_IS_ALLOWED: 'faction-only-owner-is-allowed',
+    FACTION_UNABLE_TO_DISBAND: 'faction-unable-to-disband',
+    FACTION_NAME_DOESNT_MATCH: 'faction-name-doesnt-match',
+    FACTION_NOT_THE_OWNER: 'faction-not-the-owner',
+    FACTION_COULD_NOT_FIND: 'faction-could-not-find',
+    FACTION_DISABNDED: 'faction-disbanded',
+    FACTION_BANK_COULD_NOT_WITHDRAW: 'faction-bank-could-not-withdraw',
+    FACTION_BANK_COULD_NOT_DEPOSIT: 'faction-bank-could-not-deposit',
+    FACTION_BANK_WITHDREW: 'faction-bank-withdrew',
+    FACTION_PLAYER_QUITTED: 'faction-player-quitted',
+    FACTION_COULDNT_QUIT: 'faction-couldnt-quit',
     // World
     WORLD_TIME_IS: `world-time-is`,
     // =====================
@@ -137,5 +171,6 @@ export const LOCALE_KEYS = {
     WEBVIEW_INVENTORY: 'webview-inventory',
     WEBVIEW_CLOTHING: 'webview-clothing',
     WEBVIEW_LOGIN: 'webview-login',
-    WEBVIEW_GARAGE: 'webview-garage'
+    WEBVIEW_GARAGE: 'webview-garage',
+    WEBVIEW_FACTION: 'webview-faction'
 };

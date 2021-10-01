@@ -28,6 +28,8 @@ import { StorageView } from '../views/storage';
 import { INTERIOR_RULES } from '../../shared/enums/InteriorRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import SystemRules from './rules';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 const ONE_BILLION = 1000000000;
 const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
@@ -551,13 +553,13 @@ export class InteriorSystem {
         if (!skipDistanceCheck) {
             const dist = distance2d(player.pos, interior.outsidePosition);
             if (dist >= 5) {
-                playerFuncs.emit.notification(player, `Too far from entrance.`);
+                playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE));
                 return;
             }
         }
 
         if (isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_LOCK) && !interior.isUnlocked) {
-            playerFuncs.emit.notification(player, `Door is locked.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_DOOR_LOCKED));
             return;
         }
 
@@ -660,7 +662,7 @@ export class InteriorSystem {
 
         const dist = distance2d(player.pos, interior.insidePosition);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, `Too far from exit.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_EXIT));
             return;
         }
 
@@ -753,7 +755,7 @@ export class InteriorSystem {
 
         const dist = distance2d(player.pos, interiors[index].outsidePosition);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE));
             return;
         }
 
@@ -763,13 +765,13 @@ export class InteriorSystem {
         }
 
         if (player.data.bank + player.data.cash < interiors[index].price) {
-            playerFuncs.emit.notification(player, `~r~Not Enough Currency`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_NOT_ENOUGH_CURRENCY));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!playerFuncs.currency.subAllCurrencies(player, interiors[index].price)) {
-            playerFuncs.emit.notification(player, `~r~Not Enough Currency`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_NOT_ENOUGH_CURRENCY));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -788,7 +790,7 @@ export class InteriorSystem {
             if (target) {
                 playerFuncs.currency.add(target, CurrencyTypes.BANK, originalPrice);
                 playerFuncs.emit.sound2D(target, 'item_purchase');
-                playerFuncs.emit.notification(target, `~g~Sold ${interiors[index].id} for $${originalPrice}`);
+                playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_SOLD, interiors[index].id, originalPrice));
             } else {
                 const targetData = await Database.fetchData<Character>(`_id`, originalOwner, Collections.Characters);
                 targetData.bank += originalPrice;
@@ -808,7 +810,7 @@ export class InteriorSystem {
         );
 
         InteriorSystem.refreshHouseText(interiors[index]);
-        playerFuncs.emit.notification(player, `~p~Purchased Property ${interiors[index].id} for $${originalPrice}`);
+        playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_PURCHASED, interiors[index].id, originalPrice));
         playerFuncs.emit.sound2D(player, 'item_purchase');
     }
 
@@ -838,7 +840,7 @@ export class InteriorSystem {
 
         const dist = distance2d(player.pos, interiors[index].outsidePosition);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE));
             return;
         }
 
@@ -896,7 +898,7 @@ export class InteriorSystem {
 
         const dist = distance2d(player.pos, interiors[index].outsidePosition);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, `Too far from entrance.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE));
             return;
         }
 
@@ -943,7 +945,7 @@ export class InteriorSystem {
         }
 
         if (!isFlagEnabled(interiors[index].system, INTERIOR_SYSTEM.HAS_STORAGE)) {
-            playerFuncs.emit.notification(player, `Interior does not have storage.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_NO_STORAGE));
             return;
         }
 
