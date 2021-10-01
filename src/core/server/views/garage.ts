@@ -16,11 +16,16 @@ import { FactionInternalSystem } from '../systems/factionsInternal';
 import { InteractionController } from '../systems/interaction';
 import { MarkerController } from '../systems/marker';
 import { sha256 } from '../utility/encryption';
+import IGarage from '../../shared/interfaces/IGarage';
 
 const IGNORE_DISTANCE = 25;
 const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
 const VehicleCache: { [id: string]: Array<IVehicle> } = {};
+
+let queue: Array<IGarage> = [];
+let hasFinishedInit = false;
+let count = 0;
 
 interface PositionAndRotation {
     position: Vector3;
@@ -33,34 +38,59 @@ class GarageFunctions {
 
         for (let i = 0; i < garages.length; i++) {
             const garage = garages[i];
-            const properTypeName = garage.type.charAt(0).toUpperCase() + garage.type.slice(1);
-
-            InteractionController.add({
-                position: garage.position,
-                description: LocaleController.get(LOCALE_KEYS.GARAGE_DESCRIPTION, properTypeName),
-                type: 'garage',
-                data: [i], // Shop Index
-                callback: GarageFunctions.open,
-            });
-
-            BlipController.append({
-                pos: garage.position,
-                color: 4,
-                sprite: 50,
-                scale: 1,
-                shortRange: true,
-                text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME),
-            });
-
-            MarkerController.append({
-                uid: `marker-garage-${i}`,
-                pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
-                color: new alt.RGBA(0, 150, 0, 100),
-                type: 1,
-                maxDistance: 10,
-                scale: { x: 2, y: 2, z: 3 },
-            });
+            GarageFunctions.add(garage);
         }
+
+        hasFinishedInit = true;
+
+        // Finish by doing queue last.
+        for (let i = 0; i < queue.length; i++) {
+            const garage = queue[i];
+            GarageFunctions.add(garage);
+        }
+    }
+
+    /**
+     * Add a garage to the garage system
+     * @static
+     * @param {IGarage} garage
+     * @param {boolean} isInit Leave as false if adding
+     * @memberof GarageFunctions
+     */
+    static async add(garage: IGarage, isInit = false) {
+        if (!hasFinishedInit && !isInit) {
+            queue.push(garage);
+        }
+
+        const properTypeName = garage.type.charAt(0).toUpperCase() + garage.type.slice(1);
+
+        InteractionController.add({
+            position: garage.position,
+            description: LocaleController.get(LOCALE_KEYS.GARAGE_DESCRIPTION, properTypeName),
+            type: 'garage',
+            data: [count], // Shop Index
+            callback: GarageFunctions.open,
+        });
+
+        BlipController.append({
+            pos: garage.position,
+            color: 4,
+            sprite: 50,
+            scale: 1,
+            shortRange: true,
+            text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME),
+        });
+
+        MarkerController.append({
+            uid: `marker-garage-${count}`,
+            pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
+            color: new alt.RGBA(0, 150, 0, 100),
+            type: 1,
+            maxDistance: 10,
+            scale: { x: 2, y: 2, z: 3 },
+        });
+
+        count += 1;
     }
 
     static async open(player: alt.Player, shopIndex: number) {

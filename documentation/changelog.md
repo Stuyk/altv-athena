@@ -62,6 +62,8 @@ description: List of all the changes and current versions.
 + Fixed Bug where Eyebrow Opacity Wasn't Changing
 + Finished Character Creation Interface
 + Updated Locales for Character Creation
++ Added Function to Add New Garages through Plugin(s)
++ Added Queue Adding to Garages (Default Garages Added First)
 ```
 
 ## 2.0.3

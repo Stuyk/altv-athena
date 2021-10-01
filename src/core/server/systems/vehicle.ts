@@ -644,10 +644,9 @@ export class VehicleSystem {
      * Finds the closest vehicle if outside.
      * @static
      * @param {alt.Player} player
-     * @return {*}
      * @memberof VehicleSystem
      */
-    static toggleLock(player: alt.Player) {
+    static toggleLock(player: alt.Player): void {
         if (!player || !player.valid) {
             return;
         }
@@ -710,7 +709,7 @@ export class VehicleSystem {
      * @static
      * @param {alt.Player} player
      * @param {alt.Vector3} position
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof VehicleSystem
      */
     static startPush(player: alt.Player, position: alt.Vector3): boolean {
