@@ -1,6 +1,7 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/VehicleOwnershipFlags';
 import { IStorage } from './IStorage';
+import IVehicleOptical from './IVehicleOptical';
 import IVehicleTuning from './IVehicleTuning';
 import { Vector3 } from './Vector';
 
@@ -148,4 +149,11 @@ export interface IVehicle {
      * @memberof IVehicle
      */
     tuning?: IVehicleTuning | null;
+
+    /**
+     * Vehicle Optical Tuning Interface
+     * @type {IVehicleOptical}
+     * @memberof IVehicle
+     */
+    optical?: IVehicleOptical | null;
 }
