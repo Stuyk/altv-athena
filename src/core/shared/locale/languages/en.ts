@@ -79,6 +79,14 @@ export default {
     [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
     // House
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
+    //Translations related to interiors
+    [LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE]: `Too far from entrance.`,
+    [LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_EXIT]: `Too far from exit.`,
+    [LOCALE_KEYS.INTERIOR_NOT_ENOUGH_CURRENCY]: `Not Enough Currency`,
+    [LOCALE_KEYS.INTERIOR_DOOR_LOCKED]: `Door is locked`,
+    [LOCALE_KEYS.INTERIOR_PURCHASED]: `Purchased property with id _%_ for $_%_.`,
+    [LOCALE_KEYS.INTERIOR_SOLD]: `Sold property with id _%_ for $_%_.`,
+    [LOCALE_KEYS.INTERIOR_NO_STORAGE]: `Interior does not have storage.`,    
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction
@@ -133,6 +141,32 @@ export default {
     [LOCALE_KEYS.VEHICLE_LOCKED]: `Locked`,
     [LOCALE_KEYS.VEHICLE_UNLOCKED]: `Unlocked`,
     [LOCALE_KEYS.VEHICLE_FUEL]: `Fuel`,
+    [LOCALE_KEYS.VEHICLE_NO_KEYS]: `You do not have keys for this vehicle.`,
+    [LOCALE_KEYS.VEHICLE_NO_STORAGE]: `This vehicle does not have storage.`,
+    [LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS]: `You do not have access to the trunk.`,
+    [LOCALE_KEYS.VEHICLE_NOT_UNLOCKED]: `Vehicle is not currently unlocked.`,
+    [LOCALE_KEYS.VEHICLE_NO_OPEN_SEAT]: `Could not find an open seat.`,
+    [LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE]: `Vehicle Refuel Not Completed`,
+    [LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE]: `You are no longer near this vehicle.`,
+    [LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP]: `Vehicle is not right side up.`,
+    [LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED]: `Vehicle is already being pushed.`,
+    [LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME]: `Vehicle - _%_ - Storage`,
+    // Faction
+    [LOCALE_KEYS.FACTION_PLAYER_IS_ALREADY_IN_FACTION]: `_%_ is already in a faction or does not exist.`,
+    [LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP]: `You are unable to change ownership of the faction.`,
+    [LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE]: `Storage Not Accessible`,
+    [LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS]: `You do not have access to this.`,
+    [LOCALE_KEYS.FACTION_ONLY_OWNER_IS_ALLOWED]: `Only the owner can append rank permission(s) or super admin flag to a rank.`,
+    [LOCALE_KEYS.FACTION_UNABLE_TO_DISBAND]: `You are unable to disband the faction.`,
+    [LOCALE_KEYS.FACTION_NAME_DOESNT_MATCH]: `Passed faction name does not match actual faction name.`,
+    [LOCALE_KEYS.FACTION_NOT_THE_OWNER]: `You are not the owner of this faction.`,
+    [LOCALE_KEYS.FACTION_COULD_NOT_FIND]: `Could not find your faction.`,
+    [LOCALE_KEYS.FACTION_DISABNDED]: `Faction disbanded.`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW]: `Could not withdraw $_%_.`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT]: `Could not deposit $_%_`,
+    [LOCALE_KEYS.FACTION_BANK_WITHDREW]: `Withdrew $_%_`,
+    [LOCALE_KEYS.FACTION_PLAYER_QUITTED]: `_%_ quit the faction.`,
+    [LOCALE_KEYS.FACTION_COULDNT_QUIT]: `Could not quit faction because you are the leader.`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================

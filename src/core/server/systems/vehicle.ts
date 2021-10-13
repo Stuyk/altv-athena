@@ -34,6 +34,8 @@ import { VEHICLE_RULES } from '../../shared/enums/VehicleRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
 import SystemRules from './rules';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -234,7 +236,7 @@ export class VehicleSystem {
         }
 
         if (VehicleSystem.isVehicleLocked(vehicle)) {
-            playerFuncs.emit.notification(player, `~r~Vehicle is not currently unlocked.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_UNLOCKED));
             return;
         }
 
@@ -242,17 +244,17 @@ export class VehicleSystem {
 
         const seat = VehicleSystem.findOpenSeat(vehicle);
         if (seat === null) {
-            playerFuncs.emit.notification(player, '~r~Could not find an open seat.');
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_OPEN_SEAT));
             return;
         }
 
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
-            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP));
             return;
         }
 
         if (vehicle.isBeingPushed) {
-            playerFuncs.emit.notification(player, `Cannot enter vehicle while it is being pushed.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED));
             return;
         }
 
@@ -533,17 +535,17 @@ export class VehicleSystem {
         }
 
         if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
-            playerFuncs.emit.notification(player, `~r~You do not have keys for this vehicle.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
         }
 
         if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
-            playerFuncs.emit.notification(player, `~r~No fuel.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_FUEL));
             return;
         }
 
         if (player.vehicle.isRefueling) {
-            playerFuncs.emit.notification(player, `~r~Vehicle Refuel Not Completed`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE));
             return;
         }
 
@@ -663,7 +665,7 @@ export class VehicleSystem {
         }
 
         if (!VehicleFuncs.hasOwnership(player, vehicle)) {
-            playerFuncs.emit.notification(player, `~r~You do not have keys for this vehicle.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
         }
 
@@ -737,17 +739,17 @@ export class VehicleSystem {
 
         const dist = distance(player.pos, vehicle.pos);
         if (dist >= 3) {
-            playerFuncs.emit.notification(player, '~r~You are no longer near this vehicle.');
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE));
             return false;
         }
 
         if (vehicle.isBeingPushed) {
-            playerFuncs.emit.notification(player, `~r~Vehicle is already being pushed.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED));
             return false;
         }
 
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
-            playerFuncs.emit.notification(player, '~r~Vehicle is not right side up.');
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP));
             return false;
         }
 
@@ -805,19 +807,19 @@ export class VehicleSystem {
         }
 
         if (distance(player.pos, vehicle.pos) >= 5) {
-            playerFuncs.emit.notification(player, `Too far away from that vehicle.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!VehicleFuncs.hasOwnership(player, vehicle)) {
-            playerFuncs.emit.notification(player, `You do not have access to the trunk.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
-            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
