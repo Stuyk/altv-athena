@@ -3,13 +3,12 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 
-const url = `http://assets/webview/client/atm/index.html`;
-let view: View;
+const PAGE_NAME = 'Atm';
 
 class AtmView implements ViewModel {
     static async open() {
@@ -17,28 +16,34 @@ class AtmView implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
+        const view = await WebViewController.get();
         view.on('atm:Ready', AtmView.ready);
         view.on('atm:Close', AtmView.close);
         view.on('atm:Action', AtmView.action);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
     }
 
-    static close() {
+    static async close() {
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
-        if (!view) {
-            return;
-        }
+        const view = await WebViewController.get();
+        view.off('atm:Ready', AtmView.ready);
+        view.off('atm:Close', AtmView.close);
+        view.off('atm:Action', AtmView.action);
 
-        view.close();
-        view = null;
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
     }
 
-    static ready() {
+    static async ready() {
         AtmView.change('bank');
+        const view = await WebViewController.get();
         view.emit('atm:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_ATM));
     }
 
@@ -46,15 +51,12 @@ class AtmView implements ViewModel {
         alt.emitServer(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, type, amount, id);
     }
 
-    static change(key: string) {
+    static async change(key: string) {
         if (key !== 'bank' && key !== 'cash') {
             return;
         }
 
-        if (!view) {
-            return;
-        }
-
+        const view = await WebViewController.get();
         view.emit('atm:Update', alt.Player.local.meta.bank, alt.Player.local.meta.cash);
     }
 }

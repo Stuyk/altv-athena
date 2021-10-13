@@ -242,7 +242,7 @@ export default defineComponent({
             this.preset = value;
             this.$emit('set-parameter', 'preset', value);
         },
-        getLocale(name) {
+        getLocale(name: string | number) {
             return this.locales.appearanceComponent[name]
                 ? this.locales.appearanceComponent[name]
                 : `COULD NOT FIND LOCALE FOR appearanceComponent.${name}`;

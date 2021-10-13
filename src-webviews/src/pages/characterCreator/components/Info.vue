@@ -17,7 +17,7 @@
                     },
                 ]"
                 :swapIconSide="true"
-                :icon="this.valid.first ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.first ? 'icon-checkmark' : 'icon-question'"
                 placeholder="Ivy"
                 style="width: 100%"
             />
@@ -38,7 +38,7 @@
                     },
                 ]"
                 :swapIconSide="true"
-                :icon="this.valid.last ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.last ? 'icon-checkmark' : 'icon-question'"
                 placeholder="Vilachi"
                 style="width: 100%"
             />
@@ -59,7 +59,7 @@
                     },
                 ]"
                 :swapIconSide="true"
-                :icon="this.valid.month ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.month ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="month.toString()"
                 style="width: 100%"
             />
@@ -79,7 +79,7 @@
                 ]"
                 :swapIconSide="true"
                 :placeholder="day.toString()"
-                :icon="this.valid.day ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.day ? 'icon-checkmark' : 'icon-question'"
                 style="width: 100% !important"
             />
         </div>
@@ -93,14 +93,14 @@
                 :value="''"
                 :rules="[
                     (text) => {
-                        return parseFloat(text) >= minYear ? null : `Minimum Year: ${this.minYear}`;
+                        return parseFloat(text) >= minYear ? null : `Minimum Year: ${minYear}`;
                     },
                     (text) => {
-                        return parseFloat(text) <= maxYear ? null : `Maixmum Year: ${this.maxYear}`;
+                        return parseFloat(text) <= maxYear ? null : `Maixmum Year: ${maxYear}`;
                     },
                 ]"
                 :swapIconSide="true"
-                :icon="this.valid.year ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.year ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="year.toString()"
                 style="width: 100% !important"
             />
@@ -123,18 +123,15 @@
                     },
                 ]"
                 :swapIconSide="true"
-                :icon="this.valid.gender ? 'icon-checkmark' : 'icon-question'"
+                :icon="valid?.gender ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="gender"
                 style="width: 100%"
             />
         </div>
-        <div class="split split-full center mt-8" v-if="!isAllValid() && this.valid.first && this.valid.last">
+        <div class="split split-full center mt-8" v-if="!isAllValid() && valid.first && valid.last">
             <Button color="amber" :raise="true" @click="verifyName">Verify Name</Button>
         </div>
-        <div
-            class="split split-full space-between center mt-8"
-            v-if="isAllValid() && this.valid.first && this.valid.last"
-        >
+        <div class="split split-full space-between center mt-8" v-if="isAllValid() && valid?.first && valid.last">
             <Button class="mr-2" color="amber" style="width: 100% !important" :raise="true" @click="verifyName"
                 >Verify Name</Button
             >

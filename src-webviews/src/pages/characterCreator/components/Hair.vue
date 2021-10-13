@@ -275,12 +275,12 @@ export default defineComponent({
         getEyebrowsCount() {
             return this.locales.hairComponent.eyebrows.length - 1;
         },
-        getLocale(name) {
+        getLocale(name: string | number) {
             let localeInfo = this.locales.hairComponent[name]
                 ? this.locales.hairComponent[name]
                 : `N/A hairComponent.${name}`;
 
-            if (localeInfo.length >= 48) {
+            if (typeof name === 'string' && localeInfo.length >= 48) {
                 localeInfo = `${localeInfo.substr(0, 48)}\r\n${localeInfo.substr(48, localeInfo.length - 1)}`;
             }
 

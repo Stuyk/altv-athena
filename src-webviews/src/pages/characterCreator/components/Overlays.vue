@@ -75,7 +75,7 @@ export default defineComponent({
         };
     },
     methods: {
-        getLocale(id: string) {
+        getLocale(id: string | number) {
             return this.locales.overlaysComponent.ids[id]
                 ? this.locales.overlaysComponent.ids[id]
                 : `COULD NOT FIND LOCALE FOR overlaysComponent.${id}`;

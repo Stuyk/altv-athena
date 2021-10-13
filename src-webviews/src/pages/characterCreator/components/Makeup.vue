@@ -119,7 +119,7 @@ export default defineComponent({
         };
     },
     methods: {
-        getLocale(id: string) {
+        getLocale(id: string | number) {
             return this.locales.makeupComponent.ids[id]
                 ? this.locales.makeupComponent.ids[id]
                 : `COULD NOT FIND LOCALE FOR makeupComponent.${id}`;
