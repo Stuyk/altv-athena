@@ -17,6 +17,7 @@
 -   [1. Initial Setup](documentation/before-setup.md)
 -   [2. Installation](documentation/installing-athena.md)
 -   [3. Saving Changes & Updating](documentation/updating-athena.md)
+-   [Debugging](documentation/debugging-athena.md)
 
 ## Configuration
 

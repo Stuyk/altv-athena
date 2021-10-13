@@ -3,6 +3,7 @@ import CharacterCreator from './characterCreator/CharacterCreator.vue';
 import CharacterSelect from './characterSelect/CharacterSelect.vue';
 import Designs from './designs/Designs.vue';
 import Login from './login/Login.vue';
+import Atm from './atm/Atm.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -11,7 +12,8 @@ const componentList = {
     CharacterCreator: shallowRef(CharacterCreator),
     CharacterSelect: shallowRef(CharacterSelect),
     Designs: shallowRef(Designs),
-    Login: shallowRef(Login)
+    Login: shallowRef(Login),
+    Atm: shallowRef(Atm),
 };
 
 function generateComponentList(): Array<{ name: string; component: unknown }> {
@@ -25,5 +27,5 @@ function generateComponentList(): Array<{ name: string; component: unknown }> {
 
 export default {
     generateComponentList,
-    componentList
+    componentList,
 };

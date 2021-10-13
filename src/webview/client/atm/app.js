@@ -76,16 +76,6 @@ const app = new Vue({
                 console.log('Exit button go brr');
             }
         },
-        setProcessing() {
-            this.processing = true;
-            this.update += 1;
-
-            if (!('alt' in window)) {
-                return;
-            }
-
-            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-        },
         setLocales(localeObject) {
             this.locales = localeObject;
         },
@@ -99,14 +89,13 @@ const app = new Vue({
     },
     computed: {
         getBalancerBackground() {
-            return { width: `${this.balancerPercentage}%` };
+            return { width: `${this.balancerPercentage}% !important` };
         },
         getComponent() {
             return this.components[this.setting];
         }
     },
     mounted() {
-        this.$on('set-processing', this.setProcessing);
         document.addEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {

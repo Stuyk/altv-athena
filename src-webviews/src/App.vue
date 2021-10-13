@@ -143,7 +143,7 @@ export default defineComponent({
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.setPages(['CharacterCreator']);
+            this.setPages(['Atm']);
             return;
         }
 
