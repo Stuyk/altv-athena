@@ -1,9 +1,10 @@
 import * as alt from 'alt-server';
+
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-
 import { playerFuncs } from '../extensions/Player';
+
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
@@ -28,7 +29,7 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
     }
 
     if (targetPlayerID === null) {
-        finishSetArmour(player, value);
+        finishSetHealth(player, value);
         return;
     }
 
@@ -38,10 +39,10 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
         return;
     }
 
-    finishSetArmour(target, value);
+    finishSetHealth(target, value);
 }
 
-function finishSetArmour(target: alt.Player, value: number) {
+function finishSetHealth(target: alt.Player, value: number) {
     playerFuncs.safe.addHealth(target, value, true);
     playerFuncs.emit.message(target, LocaleController.get(LOCALE_KEYS.PLAYER_HEALTH_SET_TO, value));
 }

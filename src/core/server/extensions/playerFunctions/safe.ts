@@ -22,7 +22,7 @@ function setPosition(player: alt.Player, x: number, y: number, z: number): void 
 }
 /**
  * Safely add health to this player.
- * @param {number} value 99-200
+ * @param {number} value 99-199
  * @param {boolean} exactValue
  * @memberof SafePrototype
  */

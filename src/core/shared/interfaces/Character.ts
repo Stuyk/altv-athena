@@ -51,7 +51,7 @@ export interface Character {
 
     /**
      * The amount of health the player last had.
-     * @type {number} 99 - 200
+     * @type {number} 99 - 199
      * @memberof Character
      */
     health: number;
