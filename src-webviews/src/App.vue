@@ -43,7 +43,13 @@ This is if you want to design out-of-game and just work on some design.
 <template>
     <keep-alive>
         <div class="page">
-            <component v-for="(page, index) in pages" :key="index" :is="page.component" v-bind:emit="emit"></component>
+            <component
+                v-for="(page, index) in pages"
+                :key="index"
+                :is="page.component"
+                @close-page="closePage"
+                v-bind:emit="emit"
+            ></component>
         </div>
     </keep-alive>
 </template>
@@ -104,6 +110,15 @@ export default defineComponent({
             }
 
             alt.emit('activePages', activePages);
+        },
+        closePage(page: string) {
+            this.closePages([page]);
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${page}:Close`);
         },
         // Turn off all pages
         // Define null or undefined to hide everything.

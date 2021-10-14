@@ -17,9 +17,9 @@ class AtmView implements ViewModel {
         }
 
         const view = await WebViewController.get();
-        view.on('atm:Ready', AtmView.ready);
-        view.on('atm:Close', AtmView.close);
-        view.on('atm:Action', AtmView.action);
+        view.on(`${PAGE_NAME}:Ready`, AtmView.ready);
+        view.on(`${PAGE_NAME}:Close`, AtmView.close);
+        view.on(`${PAGE_NAME}:Action`, AtmView.action);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -32,9 +32,9 @@ class AtmView implements ViewModel {
         BaseHUD.setHudVisibility(true);
 
         const view = await WebViewController.get();
-        view.off('atm:Ready', AtmView.ready);
-        view.off('atm:Close', AtmView.close);
-        view.off('atm:Action', AtmView.action);
+        view.off(`${PAGE_NAME}:Ready`, AtmView.ready);
+        view.off(`${PAGE_NAME}:Close`, AtmView.close);
+        view.off(`${PAGE_NAME}:Action`, AtmView.action);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -44,7 +44,7 @@ class AtmView implements ViewModel {
     static async ready() {
         AtmView.change('bank');
         const view = await WebViewController.get();
-        view.emit('atm:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_ATM));
+        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_ATM));
     }
 
     static action(type: string, amount: number, id = null) {
@@ -57,7 +57,7 @@ class AtmView implements ViewModel {
         }
 
         const view = await WebViewController.get();
-        view.emit('atm:Update', alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        view.emit(`${PAGE_NAME}:Update`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
     }
 }
 

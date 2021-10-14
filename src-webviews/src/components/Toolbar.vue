@@ -8,7 +8,7 @@
                 <Icon
                     v-if="pageName"
                     class="red--text red--hover hover"
-                    @click="emitExit"
+                    @click="closePage"
                     :size="24"
                     icon="icon-times-circle"
                 />
@@ -39,7 +39,7 @@ export default defineComponent({
         },
     },
     methods: {
-        emitExit() {
+        closePage() {
             this.$emit('close-page', this.pageName);
         },
     },

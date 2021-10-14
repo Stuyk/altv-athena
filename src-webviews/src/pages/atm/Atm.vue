@@ -1,7 +1,7 @@
 <template>
     <Frame minWidth="30vw" maxWidth="30vw">
         <template v-slot:toolbar>
-            <Toolbar pageName="Atm">
+            <Toolbar @close-page="relayClosePage" pageName="Atm">
                 {{ locales.LABEL_ATM }}
             </Toolbar>
         </template>
@@ -59,7 +59,7 @@ import Deposit from './components/Deposit.vue';
 import Withdraw from './components/Withdraw.vue';
 import Transfer from './components/Transfer.vue';
 
-const ComponentName = 'Atm';
+export const ComponentName = 'Atm';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -70,6 +70,9 @@ export default defineComponent({
         Deposit,
         Withdraw,
         Transfer,
+    },
+    props: {
+        emit: Function,
     },
     data() {
         return {
@@ -103,6 +106,9 @@ export default defineComponent({
         };
     },
     methods: {
+        relayClosePage(pageName: string) {
+            this.$emit('close-page', pageName);
+        },
         selectSetting(value) {
             this.setting = value;
 
@@ -149,9 +155,9 @@ export default defineComponent({
         document.addEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.on('atm:Update', this.updateBalances);
-            alt.on('atm:SetLocale', this.setLocales);
-            alt.emit('atm:Ready');
+            alt.on(`${ComponentName}:Update`, this.updateBalances);
+            alt.on(`${ComponentName}:SetLocale`, this.setLocales);
+            alt.emit(`${ComponentName}:Ready`);
             alt.emit('ready');
         } else {
             const cash = Math.floor(Math.random() * 5000000);
@@ -161,6 +167,8 @@ export default defineComponent({
     },
     unmounted() {
         if ('alt' in window) {
+            alt.off(`${ComponentName}:Update`, this.updateBalances);
+            alt.off(`${ComponentName}:SetLocale`, this.setLocales);
         }
     },
 });

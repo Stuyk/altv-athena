@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { ComponentName as PageName } from '../Atm.vue';
 
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
@@ -69,7 +70,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('atm:Action', 'withdraw', this.value);
+            alt.emit(`${PageName}:Action`, 'withdraw', this.value);
         },
         inputChange(text: number) {
             if (typeof text === 'string') {

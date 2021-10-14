@@ -51,6 +51,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { ComponentName as PageName } from '../Atm.vue';
 
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
@@ -88,7 +89,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('atm:Action', 'transfer', this.value, this.id);
+            alt.emit(`${PageName}:Action`, 'transfer', this.value, this.id);
         },
         idChange(text: number) {
             if (typeof text === 'string') {
