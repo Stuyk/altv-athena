@@ -68,6 +68,8 @@ description: List of all the changes and current versions.
 + Hooked up ATM to Backend
 + Added Spinner Utility
 + Added Spinner Events on Server Side to PlayerFuncs
++ Added Error Screen
++ Added Error Screen Events on Server Side to PlayerFuncs
 ```
 
 ## 2.0.3

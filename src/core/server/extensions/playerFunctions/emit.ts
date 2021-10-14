@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
+import IErrorScreen from '../../../shared/interfaces/IErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
 import ISpinner from '../../../shared/interfaces/ISpinner';
 import { Particle } from '../../../shared/interfaces/Particle';
@@ -181,12 +182,31 @@ function clearSpinner(player: alt.Player) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER_CLEAR);
 }
 
+/**
+ * Create a full-screen message. Cannot be cleared by the player.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN, screen);
+}
+
+/**
+ * Clear a full-screen message.
+ * @param {alt.Player} player
+ */
+function clearErrorScreen(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN_CLEAR);
+}
+
 export default {
     animation,
     scenario,
     createProgressBar,
     createSpinner,
     clearSpinner,
+    createErrorScreen,
+    clearErrorScreen,
     inputMenu,
     meta,
     message,
