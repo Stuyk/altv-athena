@@ -49,6 +49,8 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_SOUND_3D = 'sound:3D',
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',
+    PLAYER_EMIT_SPINNER = 'spinner:Show',
+    PLAYER_EMIT_SPINNER_CLEAR = 'spinner:Clear',
     PLAYER_EMIT_TASK_MOVE = 'task:Move',
     PLAYER_EMIT_TASK_TIMELINE = 'task:Timeline',
     //
@@ -108,5 +110,5 @@ export enum SYSTEM_EVENTS {
     VOICE_ADD = 'voice:Add',
     VOICE_JOINED = 'voice:Joined',
     //
-    WEBVIEW_INFO = 'webview:Info'
+    WEBVIEW_INFO = 'webview:Info',
 }

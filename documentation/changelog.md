@@ -64,6 +64,10 @@ description: List of all the changes and current versions.
 + Updated Locales for Character Creation
 + Added Function to Add New Garages through Plugin(s)
 + Added Queue Adding to Garages (Default Garages Added First)
++ Added ATM Interface Update
++ Hooked up ATM to Backend
++ Added Spinner Utility
++ Added Spinner Events on Server Side to PlayerFuncs
 ```
 
 ## 2.0.3

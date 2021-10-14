@@ -3,6 +3,7 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
+import ISpinner from '../../../shared/interfaces/ISpinner';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
@@ -23,7 +24,7 @@ function animation(
     dictionary: string,
     name: string,
     flags: ANIMATION_FLAGS,
-    duration: number = -1
+    duration: number = -1,
 ): void {
     if (player.data.isDead) {
         alt.logWarning(`[Athena] Cannot play ${dictionary}@${name} while player is dead.`);
@@ -162,10 +163,30 @@ function inputMenu(player: alt.Player, inputMenu: InputMenu) {
     alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
 }
 
+/**
+ * Create a spinner in the bottom-right corner.
+ * @param {alt.Player} player
+ * @param {ISpinner} spinner
+ */
+function createSpinner(player: alt.Player, spinner: ISpinner) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER, spinner);
+}
+
+/**
+ * Clear a spinner in the bottom-right corner.
+ * No UID necessary since it can only have one spinner at a time.
+ * @param {alt.Player} player
+ */
+function clearSpinner(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER_CLEAR);
+}
+
 export default {
     animation,
     scenario,
     createProgressBar,
+    createSpinner,
+    clearSpinner,
     inputMenu,
     meta,
     message,
@@ -175,5 +196,5 @@ export default {
     sound2D,
     sound3D,
     soundFrontend,
-    taskTimeline
+    taskTimeline,
 };
