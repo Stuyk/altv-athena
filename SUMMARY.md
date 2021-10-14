@@ -38,6 +38,7 @@
 -   [Adding Athena Events](documentation/scripting/adding-athena-events.md)
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Custom Features](documentation/scripting/adding-features.md)
+-   [Adding Custom Streamers](documentation/scripting/adding-custom-streamers.md);
 -   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
 -   [Adding Global Objects](documentation/scripting/adding-global-objects.md)
 -   [Adding Global Blips](documentation/scripting/adding-global-blips.md)
