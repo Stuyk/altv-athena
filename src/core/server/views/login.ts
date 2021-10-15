@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import dotenv from 'dotenv';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { DEFAULT_CONFIG } from '../athena/main';
 import { IConfig } from '../interface/IConfig';
 import Ares from '../utility/ares';
 import { sha256Random } from '../utility/encryption';
@@ -54,15 +55,21 @@ async function handlePlayerConnect(player: alt.Player) {
 
     // Used as the main data format for talking to the Azure Web App.
     const encryptionFormatObject = {
-        player_identifier: player.discordToken
+        player_identifier: player.discordToken,
+        redirect_url: null,
     };
+
+    // Used to add a custom redirect endpoint after successful authentication.
+    if (DEFAULT_CONFIG.LOGIN_REDIRECT_URL) {
+        encryptionFormatObject.redirect_url = DEFAULT_CONFIG.LOGIN_REDIRECT_URL;
+    }
 
     // Setup Parseable Format for Azure
     const public_key = await Ares.getPublicKey();
     const encryptedData = await Ares.encrypt(JSON.stringify(encryptionFormatObject));
     const senderFormat = {
         public_key,
-        data: encryptedData
+        data: encryptedData,
     };
 
     const encryptedDataJSON = JSON.stringify(senderFormat);
@@ -121,9 +128,9 @@ async function handleFinishAuth(player) {
         data: {
             data: {
                 player_identifier,
-                public_key
-            }
-        }
+                public_key,
+            },
+        },
     };
 
     const result = await axios.request(options).catch((err) => {
