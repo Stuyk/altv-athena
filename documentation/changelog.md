@@ -71,6 +71,7 @@ description: List of all the changes and current versions.
 + Added Error Screen
 + Added Error Screen Events on Server Side to PlayerFuncs
 + Added Configuration Option to Redirect to Any URL after oAuth
++ Added Full-Screen Shards
 ```
 
 ## 2.0.3

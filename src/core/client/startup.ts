@@ -52,6 +52,7 @@ import './utility/ipl';
 import './utility/notification';
 import './utility/reload';
 import './utility/screenshot';
+import './utility/shard';
 import './utility/spinner';
 import './utility/wheelMenu';
 

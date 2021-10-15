@@ -20,3 +20,16 @@ ChatController.addCommand(
         playerFuncs.emit.createSpinner(player, { duration: 5000, text: 'Hello World!' });
     },
 );
+
+ChatController.addCommand(
+    'testshard',
+    '/testshard - Shows a temporary shard',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        playerFuncs.emit.createShard(player, {
+            duration: 5000,
+            title: '~r~Hello World!',
+            text: '~y~Shards are pretty neat sometimes.',
+        });
+    },
+);

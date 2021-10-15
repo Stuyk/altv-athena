@@ -36,7 +36,7 @@ export class Scaleform {
                 }
                 default: {
                     alt.logError(
-                        `Bad Argument: ${typeof arg} = ${arg.toString()} passed to scaleform with handle ${this.id}`
+                        `Bad Argument: ${typeof arg} = ${arg.toString()} passed to scaleform with handle ${this.id}`,
                     );
                 }
             }

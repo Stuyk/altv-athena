@@ -4,6 +4,7 @@ import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import IErrorScreen from '../../../shared/interfaces/IErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
+import IShard from '../../../shared/interfaces/IShard';
 import ISpinner from '../../../shared/interfaces/ISpinner';
 import { Particle } from '../../../shared/interfaces/Particle';
 import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
@@ -199,12 +200,31 @@ function clearErrorScreen(player: alt.Player) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN_CLEAR);
 }
 
+/**
+ * Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createShard(player: alt.Player, shard: IShard) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD, shard);
+}
+
+/**
+ * Clear a shard.
+ * @param {alt.Player} player
+ */
+function clearShard(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD_CLEAR);
+}
+
 export default {
     animation,
     scenario,
     createProgressBar,
     createSpinner,
     clearSpinner,
+    createShard,
+    clearShard,
     createErrorScreen,
     clearErrorScreen,
     inputMenu,
