@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
+import ICredit from '../../../shared/interfaces/ICredit';
 import IErrorScreen from '../../../shared/interfaces/IErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
 import IShard from '../../../shared/interfaces/IShard';
@@ -217,22 +218,42 @@ function clearShard(player: alt.Player) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD_CLEAR);
 }
 
+/**
+ * Create a 'credits' text aligned to a certain side of the screen.
+ * Automatically clear(s) over-time.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createCredits(player: alt.Player, credits: ICredit) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS, credits);
+}
+
+/**
+ * Clears a 'credits' display.
+ * @param {alt.Player} player
+ */
+function clearCredits(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS_CLEAR);
+}
+
 export default {
     animation,
-    scenario,
-    createProgressBar,
-    createSpinner,
-    clearSpinner,
-    createShard,
-    clearShard,
-    createErrorScreen,
+    clearCredits,
     clearErrorScreen,
+    clearShard,
+    clearSpinner,
+    createCredits,
+    createErrorScreen,
+    createProgressBar,
+    createShard,
+    createSpinner,
     inputMenu,
-    meta,
     message,
+    meta,
     notification,
     particle,
     removeProgressBar,
+    scenario,
     sound2D,
     sound3D,
     soundFrontend,

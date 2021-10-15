@@ -45,6 +45,8 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ANIMATION = 'animation:Play',
     PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
+    PLAYER_EMIT_CREDITS = 'credits:Create',
+    PLAYER_EMIT_CREDITS_CLEAR = 'credits:Clear',
     PLAYER_EMIT_ERROR_SCREEN = 'errorScreen:Create',
     PLAYER_EMIT_ERROR_SCREEN_CLEAR = 'errorScreen:Clear',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',

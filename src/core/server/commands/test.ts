@@ -33,3 +33,16 @@ ChatController.addCommand(
         });
     },
 );
+
+ChatController.addCommand(
+    'testcredits',
+    '/testcredits - Shows a temporary credits display',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        playerFuncs.emit.createCredits(player, {
+            duration: 5000,
+            role: 'Athena Creator',
+            name: 'Stuyk',
+        });
+    },
+);

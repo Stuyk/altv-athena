@@ -1,3 +1,7 @@
+---
+description: Learn how to add a spinner display.
+---
+
 # Adding a Spinner
 
 Spinner(s) display in the bottom right-hand corner of the screen.

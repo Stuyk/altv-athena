@@ -72,6 +72,7 @@ description: List of all the changes and current versions.
 + Added Error Screen Events on Server Side to PlayerFuncs
 + Added Configuration Option to Redirect to Any URL after oAuth
 + Added Full-Screen Shards
++ Added Credits Scaleform
 ```
 
 ## 2.0.3

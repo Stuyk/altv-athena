@@ -47,6 +47,7 @@ import './systems/vehicle';
 import './systems/world';
 
 // Utility
+import './utility/credits';
 import './utility/errorScreen';
 import './utility/ipl';
 import './utility/notification';

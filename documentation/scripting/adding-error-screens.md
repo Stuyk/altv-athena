@@ -1,3 +1,7 @@
+---
+description: Learn how to add a spinner display.
+---
+
 # Adding a Error Screen
 
 Error Screen(s) take up the entire screen and generally prevent the user from seeing anything.
