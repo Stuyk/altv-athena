@@ -137,5 +137,5 @@ export const DEFAULT_CONFIG = {
     STREAM_CONFIG: StreamConfiguration,
     // The Default Faction Configurations
     MAX_LOG_LENGTH: 50, // Larger logs may have unintended side-effects.
-    LOGIN_REDIRECT_URL: 'https://stuyk.com', // Set this to something other than null to redirect to a specific url.
+    LOGIN_REDIRECT_URL: null, // Set this to something other than null to redirect to a specific url.
 };
