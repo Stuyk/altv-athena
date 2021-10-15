@@ -42,7 +42,9 @@ export default class ErrorScreen {
             );
         }, 0);
 
-        alt.setTimeout(ErrorScreen.clear, screen.duration);
+        if (screen.duration >= 0) {
+            alt.setTimeout(ErrorScreen.clear, screen.duration);
+        }
     }
 
     /**

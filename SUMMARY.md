@@ -39,6 +39,7 @@
 -   [Adding Custom Sounds](documentation/scripting/adding-custom-sounds.md)
 -   [Adding Custom Features](documentation/scripting/adding-features.md)
 -   [Adding Custom Streamers](documentation/scripting/adding-custom-streamers.md);
+-   [Adding Error Screens](documentation/scripting/adding-error-screens.md);
 -   [Adding Inventory Icons](documentation/scripting/adding-inventory-icons.md)
 -   [Adding Global Objects](documentation/scripting/adding-global-objects.md)
 -   [Adding Global Blips](documentation/scripting/adding-global-blips.md)
@@ -50,6 +51,7 @@
 -   [Adding Jobs](documentation/scripting/adding-jobs.md)
 -   [Adding Locale / Translations](documentation/scripting/adding-locale.md)
 -   [Adding Mods](documentation/scripting/adding-mods.md)
+-   [Adding Spinners](documentation/scripting/adding-spinners.md);
 -   [Adding Vehicle Rules](documentation/scripting/adding-vehicle-rules.md)
 -   [Adding Whitelist](documentation/scripting/adding-whitelist.md)
 -   [Adding Wheel Menus](documentation/scripting/adding-wheel-menus.md)

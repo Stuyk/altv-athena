@@ -21,6 +21,7 @@ import './setArmour';
 import './setFood';
 import './setHealth';
 import './setWater';
+import './test';
 import './updateweather';
 import './vehicle';
 import './waypointTeleport';

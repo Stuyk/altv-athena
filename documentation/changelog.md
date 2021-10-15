@@ -70,6 +70,7 @@ description: List of all the changes and current versions.
 + Added Spinner Events on Server Side to PlayerFuncs
 + Added Error Screen
 + Added Error Screen Events on Server Side to PlayerFuncs
++ Added Configuration Option to Redirect to Any URL after oAuth
 ```
 
 ## 2.0.3

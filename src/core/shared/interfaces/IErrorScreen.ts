@@ -22,6 +22,7 @@ export default interface IErrorScreen {
 
     /**
      * How long should this display for in milliseconds.
+     * Use -1 to set forever.
      * @type {number}
      * @memberof
      */

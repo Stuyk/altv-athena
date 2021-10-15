@@ -22,7 +22,10 @@ export default class Spinner {
         native.beginTextCommandBusyspinnerOn('STRING');
         native.addTextComponentSubstringPlayerName(data.text);
         native.endTextCommandBusyspinnerOn(data.type);
-        timeout = alt.setTimeout(Spinner.clear, data.duration);
+
+        if (data.duration >= 0) {
+            timeout = alt.setTimeout(Spinner.clear, data.duration);
+        }
     }
 
     /**
