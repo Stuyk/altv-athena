@@ -121,6 +121,7 @@ export class CharacterSystem {
 
         for (let i = 0; i < components.length; i++) {
             const component = components[i].data as ClothingComponent;
+            console.log(component);
             if (!component) {
                 continue;
             }

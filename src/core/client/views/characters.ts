@@ -36,15 +36,15 @@ async function handleView(_characters: Partial<Character>[], pos: Vector3, headi
     WebViewController.focus();
     WebViewController.showCursor(true);
 
+    native.doScreenFadeOut(100);
     await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
     await PedCharacter.apply(_characters[0].appearance as Appearance);
-
     await sleep(300);
-
     await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-
     PedEditCamera.setFov(40);
     PedEditCamera.setZPos(0.5);
+
+    updateCharacter(0);
 }
 
 async function updateCharacter(index: number) {
@@ -65,7 +65,7 @@ async function updateCharacter(index: number) {
                 PedCharacter.get(),
                 IDLE_ANIM_DICT,
                 IDLE_ANIM,
-                ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT
+                ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT,
             );
 
             const isInAnim = native.isEntityPlayingAnim(PedCharacter.get(), IDLE_ANIM_DICT, IDLE_ANIM, 3);

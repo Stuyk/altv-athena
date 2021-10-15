@@ -1,5 +1,5 @@
 ---
-description: Learn how to add a spinner display.
+description: Learn how to add a error screen display.
 ---
 
 # Adding a Error Screen

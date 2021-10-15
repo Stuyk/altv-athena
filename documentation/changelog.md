@@ -73,6 +73,7 @@ description: List of all the changes and current versions.
 + Added Configuration Option to Redirect to Any URL after oAuth
 + Added Full-Screen Shards
 + Added Credits Scaleform
++ Fix First Character Equipment not Updating
 ```
 
 ## 2.0.3
