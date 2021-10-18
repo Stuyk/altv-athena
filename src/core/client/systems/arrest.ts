@@ -4,7 +4,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Timer } from '../utility/timers';
 import { playAnimation } from './animations';
 
-let interval;
+let interval: number;
 let cuffer: alt.Player;
 
 class ArrestController {

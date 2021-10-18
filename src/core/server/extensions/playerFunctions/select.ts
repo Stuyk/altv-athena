@@ -1,4 +1,3 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';

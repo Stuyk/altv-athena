@@ -8,7 +8,7 @@ import { Timer } from '../utility/timers';
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];
 let isRemoving = false;
-let interval;
+let interval: number;
 
 export class MarkerController {
     /**

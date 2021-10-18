@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View } from '../extensions/view';
 import PedEditCamera from '../utility/camera';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { View_Events_Creator } from '../../shared/enums/views';
