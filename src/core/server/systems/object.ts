@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/IObject';
-import Logger from '../utility/athenaLogger';
 import { sha256Random } from '../utility/encryption';
 import { StreamerService } from './streamer';
 

@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { Vector2 } from '../../shared/interfaces/Vector';
 
 export function getCrossProduct(v1: alt.Vector3, v2: alt.Vector3): alt.Vector3 {

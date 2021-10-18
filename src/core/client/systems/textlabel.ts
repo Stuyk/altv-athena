@@ -7,7 +7,7 @@ import { Timer } from '../utility/timers';
 
 let localLabels: Array<TextLabel> = [];
 let addedLabels: Array<TextLabel> = [];
-let interval;
+let interval: number;
 let isRemoving = false;
 
 export class TextlabelController {

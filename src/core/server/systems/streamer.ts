@@ -1,12 +1,8 @@
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import Logger from '../utility/athenaLogger';
-import { MarkerController } from './marker';
-import { TextLabelController } from './textlabel';
 import { IStream, IStreamMessage } from '../../shared/interfaces/IStream';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { ObjectController } from './object';
-import { PedController } from './ped';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);

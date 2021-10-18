@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 
-import { Vehicle_Door_List } from '../../shared/enums/vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
 import { playerFuncs } from '../extensions/Player';

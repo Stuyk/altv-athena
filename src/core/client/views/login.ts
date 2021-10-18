@@ -10,8 +10,8 @@ import { sleep } from '../utility/sleep';
 import { drawRectangle2D, drawText2D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
-let discordURI;
-let interval;
+let discordURI: string;
+let interval: number;
 let count = 0;
 let neededRequests = 0;
 
