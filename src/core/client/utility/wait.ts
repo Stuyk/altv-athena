@@ -1,4 +1,3 @@
-import * as alt from 'alt-client';
 import { Timer } from './timers';
 
 const MaxAttempts = 200;

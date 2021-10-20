@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { View_Events_Creator } from '../../../shared/enums/views';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';

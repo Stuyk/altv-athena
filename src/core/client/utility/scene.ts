@@ -1,4 +1,3 @@
-import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { Timer } from './timers';

@@ -3,7 +3,6 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IPed } from '../../shared/interfaces/IPed';
 import { Animation } from '../../shared/interfaces/Animation';
-import Logger from '../utility/athenaLogger';
 import { StreamerService } from './streamer';
 import { sha256Random } from '../utility/encryption';
 

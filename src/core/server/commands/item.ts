@@ -6,7 +6,7 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentTypes';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { getFromRegistry, ItemRegistry } from '../../shared/items/itemRegistry';
+import { getFromRegistry } from '../../shared/items/itemRegistry';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 

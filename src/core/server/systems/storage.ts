@@ -1,4 +1,3 @@
-import * as alt from 'alt-server';
 import { IStorage } from '../../shared/interfaces/IStorage';
 import Database from '@stuyk/ezmongodb';
 import { Collections } from '../interface/DatabaseCollections';

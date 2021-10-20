@@ -1,4 +1,3 @@
-import * as alt from 'alt-client';
 import { Meta } from './Meta';
 
 declare module 'alt-client' {
