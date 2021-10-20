@@ -74,14 +74,12 @@ export class PedCharacter {
      */
     static async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
-            console.log('still updating...');
             return;
         }
 
         isUpdating = true;
 
         if (!appearance || (appearance && appearance.sex !== _appearance.sex)) {
-            console.log('not matching appearance');
             await PedCharacter.destroy();
             await PedCharacter.create(_appearance.sex === 1 ? true : false, pos, rot);
         }

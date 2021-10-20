@@ -38,6 +38,28 @@ function animation(
 }
 
 /**
+ * Used to clear an animation or a task.
+ * Does not trigger if the player is in a vehicle.
+ *
+ * @param {alt.Player} player
+ */
+function clearAnimation(player: alt.Player) {
+    if (!player || !player.valid || player.vehicle) {
+        return;
+    }
+
+    const tasks = [
+        {
+            nativeName: 'clearPedTasks',
+            params: [],
+            timeToWaitInMs: 100,
+        },
+    ];
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
+}
+
+/**
  * Play an animation on this player.
  * @param {string} name
  * @param {number} duration
@@ -238,6 +260,7 @@ function clearCredits(player: alt.Player) {
 
 export default {
     animation,
+    clearAnimation,
     clearCredits,
     clearErrorScreen,
     clearShard,

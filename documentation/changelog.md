@@ -74,6 +74,9 @@ description: List of all the changes and current versions.
 + Added Full-Screen Shards
 + Added Credits Scaleform
 + Fix First Character Equipment not Updating
++ Add Clear Animation Server-Side to PlayerFuncs
++ Add Raycast Client-Side for Gameplay Camera (Snippet) and Facing Direction
++ Raycast Water Probe (Snippet)
 ```
 
 ## 2.0.3
