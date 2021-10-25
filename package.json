@@ -27,10 +27,10 @@
         "vue-serve": "vite preview ./src-webviews"
     },
     "devDependencies": {
-        "@altv/types-client": "^1.8.8",
+        "@altv/types-client": "^1.8.9",
         "@altv/types-natives": "^1.4.2",
-        "@altv/types-server": "^2.0.6",
-        "@altv/types-shared": "^1.0.7",
+        "@altv/types-server": "^2.0.7",
+        "@altv/types-shared": "^1.0.8",
         "@altv/types-webview": "^1.0.2",
         "@swc/cli": "^0.1.50",
         "@swc/core": "^1.2.90",
