@@ -98,7 +98,7 @@ export default defineComponent({
 
             this.id = text;
         },
-        inputChange(text: number) {
+        inputChange(text: number): void {
             if (typeof text === 'string') {
                 text = parseFloat(text);
             }

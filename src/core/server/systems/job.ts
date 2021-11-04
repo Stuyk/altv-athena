@@ -205,7 +205,7 @@ export class Job {
      * @private
      * @memberof JobBuilder
      */
-    private goToNextObjective() {
+    goToNextObjective() {
         this.objectives.shift();
 
         if (this.objectives.length <= 0) {
@@ -255,7 +255,7 @@ export class Job {
                     objective.animation.dict,
                     objective.animation.name,
                     objective.animation.flags,
-                    objective.animation.duration
+                    objective.animation.duration,
                 );
             });
         }, delay);

@@ -6,8 +6,7 @@ export default {
     validate: (config: IConfig): boolean => {
         if (config.WEBSERVER_IP && !alt.hasResource('webserver')) {
             if (!config.WEBSERVER_IP) {
-                logger.warning(`Add WEBSERVER_IP to your .env file and target: 127.0.0.1:9111`);
-                return false;
+                config.WEBSERVER_IP = '127.0.0.1:9111';
             }
 
             if (!config.WEBSERVER_IP.includes(':')) {
@@ -19,5 +18,5 @@ export default {
         }
 
         return true;
-    }
+    },
 };
