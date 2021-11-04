@@ -26,7 +26,7 @@ import * as alt from 'alt-server';
 import { sha256Random } from '../utility/encryption';
 import { StreamerService } from './streamer';
 
-const globalDoors: Array<IObject> = [];
+const globalDoors: Array<IDoorState> = [];
 const STREAM_RANGE = 25;
 const KEY = 'doors';
 
@@ -36,7 +36,7 @@ interface IDoorState {
     /**
      * Position of the Object in a 3D space.
      * @type {Vector3}
-     * @memberof IObject
+     * @memberof IDoorState
      */
     pos: Vector3;
 
