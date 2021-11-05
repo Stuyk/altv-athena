@@ -129,12 +129,12 @@ export interface Character {
     info: Partial<CharacterInfo>;
 
     /**
-     * An array of array(s) that hold player items.
+     * An array that holds the players items.
      * Each array in this array are tabs.
-     * @type {Array<Array<Partial<Item>>>}
+     * @type {Array<Partial<Item>>}
      * @memberof Character
      */
-    inventory: Array<Array<Partial<Item>>>;
+    inventory: Array<Partial<Item>>;
 
     /**
      * Clothing the player has equipped.

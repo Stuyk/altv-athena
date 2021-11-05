@@ -18,8 +18,8 @@ const pistolItem: Item = {
     quantity: 1,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
-        hash: 0x1b06d571
-    }
+        hash: 0x1b06d571,
+    },
 };
 
 const equipmentItem: Item = {
@@ -31,8 +31,8 @@ const equipmentItem: Item = {
     equipment: EQUIPMENT_TYPE.BAG,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_EQUIPMENT,
     data: {
-        drawable: 0
-    }
+        drawable: 0,
+    },
 };
 
 const boxItem: Item = {
@@ -43,8 +43,8 @@ const boxItem: Item = {
     quantity: 1,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE,
     data: {
-        drawable: 0
-    }
+        drawable: 0,
+    },
 };
 
 const smgItem: Item = {
@@ -55,8 +55,8 @@ const smgItem: Item = {
     quantity: 1,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
-        hash: 0x13532244
-    }
+        hash: 0x13532244,
+    },
 };
 
 const burgerItem: Item = {
@@ -69,22 +69,22 @@ const burgerItem: Item = {
     data: {
         event: 'effect:Heal',
         heal: 25,
-        sound: 'item_eat'
-    }
+        sound: 'item_eat',
+    },
 };
 
 ChatController.addCommand(
     'dummyitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_DUMMY_ITEM, '/dummyitem'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 ChatController.addCommand(
     'getitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/getitem'),
     PERMISSIONS.ADMIN,
-    handleGetItem
+    handleGetItem,
 );
 
 // alias
@@ -92,25 +92,25 @@ ChatController.addCommand(
     'spawnitem',
     LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/spawnitem'),
     PERMISSIONS.ADMIN,
-    handleGetItem
+    handleGetItem,
 );
 
 function handleCommand(player: alt.Player): void {
     let itemClone = deepCloneObject<Item>(pistolItem);
     let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     itemClone = deepCloneObject<Item>(equipmentItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     itemClone = deepCloneObject<Item>(boxItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     itemClone = deepCloneObject<Item>(smgItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     itemClone = deepCloneObject<Item>(burgerItem);
     slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
 }
@@ -125,7 +125,7 @@ function handleGetItem(player: alt.Player, name: string) {
 
     const itemClone = deepCloneObject<Item>(item);
     let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
-    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot, slotInfo.tab);
+    playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
     playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY, item.name));

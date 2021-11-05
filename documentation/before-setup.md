@@ -44,7 +44,7 @@ Athena uses a licensing system for assisting with booting the framework.
 
 You need to download and install these programs and binaries from the links below.
 
-[Download and install NodeJS 13+](https://nodejs.org/en/download/)
+[Download and install NodeJS 16+](https://nodejs.org/en/download/)
 
 [Download and install GIT](https://git-scm.com/downloads)
 
@@ -115,7 +115,6 @@ This is just a general server recommendation for Linux Servers. If you can affor
 
 ```text
 sudo ufw allow 7788
-sudo ufw allow 9111
 ```
 
 Special Note: Your server host may have an additional firewall option in their control panel. Ensure you open your ports through there as well. OVH is known to have this feature.
@@ -157,7 +156,7 @@ source ~/.bashrc
 ```
 
 ```text
-nvm install 14
+nvm install 16
 ```
 
 ```text

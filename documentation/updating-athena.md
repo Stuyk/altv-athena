@@ -8,10 +8,15 @@ description: This will tell you how to setup a private mirror of Athena.
 
 - [Updating Athena](#updating-athena)
 - [Table of Contents](#table-of-contents)
+  - [Migrating from 2.0.3 to Latest](#migrating-from-203-to-latest)
   - [Why Update?](#why-update)
   - [Updating and Storing Changes](#updating-and-storing-changes)
   - [Merge Conflicts?!](#merge-conflicts)
   - [Pushing Changes to Private Repository](#pushing-changes-to-private-repository)
+
+## Migrating from 2.0.3 to Latest
+
+Ensure you have NodeJS 16+ installed. Remove your `node_modules` and your `package-lock.json` and perform `npm install` to update all dependencies.
 
 ## Why Update?
 

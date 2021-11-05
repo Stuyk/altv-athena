@@ -25,7 +25,6 @@ import { distance2d } from '../../shared/utility/vector';
  *
  * i - is for inventory
  * e - is for equipment
- * tab - is for a tab, belongs under inventory
  * g - is for ground
  * t - is for toolbar
  *
@@ -57,18 +56,11 @@ export class InventoryController {
      * @param {alt.Player} player
      * @param {string} selectedSlot
      * @param {string} endSlot
-     * @param {number} tab
      * @param {(string | null)} hash
      * @return {*}  {void}
      * @memberof InventoryController
      */
-    static processItemMovement(
-        player: alt.Player,
-        selectedSlot: string,
-        endSlot: string,
-        tab: number,
-        hash: string | null
-    ): void {
+    static processItemMovement(player: alt.Player, selectedSlot: string, endSlot: string, hash: string | null): void {
         if (!player || !player.valid) {
             return;
         }
@@ -89,59 +81,31 @@ export class InventoryController {
 
         // Handle Drop Ground
         if (endData.name === INVENTORY_TYPE.GROUND) {
-            InventoryController.handleDropGround(player, selectedSlot, tab);
+            InventoryController.handleDropGround(player, selectedSlot);
             return;
         }
 
         // Pickup Item from Ground
         if (selectData.name === INVENTORY_TYPE.GROUND) {
-            InventoryController.handlePickupGround(player, endData, endSlotIndex, hash, tab);
+            InventoryController.handlePickupGround(player, endData, endSlotIndex, hash);
             return;
         }
 
         // Check if this is a swap or stack.
-        if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex, tab)) {
-            playerFuncs.inventory.handleSwapOrStack(
-                player,
-                selectedSlot,
-                endSlot,
-                tab,
-                InventoryController.customItemRules
-            );
+        if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex)) {
+            playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot);
             return;
         }
 
         const selectSlotIndex = stripCategory(selectedSlot);
-        const itemClone: Item = selectData.getItem(player, selectSlotIndex, tab);
+        const itemClone: Item = selectData.getItem(player, selectSlotIndex);
 
         if (!itemClone) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        if (endData.name === INVENTORY_TYPE.TAB) {
-            InventoryController.handleMoveTabs(
-                player,
-                itemClone,
-                selectSlotIndex,
-                tab,
-                endSlotIndex,
-                selectData.name,
-                endData.name
-            );
-            return;
-        }
-
-        if (
-            !playerFuncs.inventory.allItemRulesValid(
-                player,
-                itemClone,
-                endData,
-                endSlotIndex,
-                InventoryController.customItemRules,
-                tab
-            )
-        ) {
+        if (!playerFuncs.inventory.allItemRulesValid(player, itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -152,13 +116,13 @@ export class InventoryController {
             return;
         }
 
-        const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
+        const didRemoveItem = selectData.removeItem(player, itemClone.slot);
         if (!didRemoveItem) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        const didAddItem = endData.addItem(player, itemClone, endSlotIndex, tab);
+        const didAddItem = endData.addItem(player, itemClone, endSlotIndex);
         if (!didAddItem) {
             playerFuncs.sync.inventory(player);
             return;
@@ -171,53 +135,12 @@ export class InventoryController {
     }
 
     /**
-     * Move an item to a different tab.
-     * We know the item exists when this function is called.
-     * @static
-     * @param {alt.Player} player
-     * @param {Item} item
-     * @memberof InventoryController
-     */
-    static handleMoveTabs(
-        player: alt.Player,
-        item: Item,
-        selectSlotIndex: number,
-        tab: number,
-        tabToMoveTo: number,
-        selectName: string,
-        endName: string
-    ) {
-        // Find a similar item if it exists and stack it if it does exist.
-        const freeSlot = playerFuncs.inventory.getFreeInventorySlot(player, tabToMoveTo);
-        if (!freeSlot) {
-            playerFuncs.sync.inventory(player);
-            return;
-        }
-
-        if (!playerFuncs.inventory.inventoryRemove(player, selectSlotIndex, tab)) {
-            playerFuncs.sync.inventory(player);
-            return;
-        }
-
-        if (!playerFuncs.inventory.inventoryAdd(player, item, freeSlot.slot, freeSlot.tab)) {
-            playerFuncs.sync.inventory(player);
-            return;
-        }
-
-        playerFuncs.save.field(player, selectName, player.data[selectName]);
-        playerFuncs.save.field(player, endName, player.data[endName]);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
-    }
-
-    /**
      * Propogates the item to appear on the ground.
      * @static
      * @param {string} selectedSlot
-     * @param {number} tab
      * @memberof InventoryController
      */
-    static handleDropGround(player: alt.Player, selectedSlot: string, tab: number) {
+    static handleDropGround(player: alt.Player, selectedSlot: string) {
         const selectSlotIndex = stripCategory(selectedSlot);
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
 
@@ -226,7 +149,7 @@ export class InventoryController {
             return;
         }
 
-        const itemClone: Item = selectData.getItem(player, selectSlotIndex, tab);
+        const itemClone: Item = selectData.getItem(player, selectSlotIndex);
 
         if (player.vehicle) {
             playerFuncs.sync.inventory(player);
@@ -243,21 +166,12 @@ export class InventoryController {
             return;
         }
 
-        if (
-            !playerFuncs.inventory.allItemRulesValid(
-                player,
-                itemClone,
-                { name: 'ground' },
-                null,
-                InventoryController.customItemRules,
-                tab
-            )
-        ) {
+        if (!playerFuncs.inventory.allItemRulesValid(player, itemClone, { name: 'ground' }, null)) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        const didRemoveItem = selectData.removeItem(player, itemClone.slot, tab);
+        const didRemoveItem = selectData.removeItem(player, itemClone.slot);
         if (!didRemoveItem) {
             playerFuncs.sync.inventory(player);
             return;
@@ -279,7 +193,7 @@ export class InventoryController {
             gridSpace: player.gridSpace,
             item: itemClone,
             position: playerFuncs.utility.getPositionFrontOf(player, 1),
-            dimension: player.dimension
+            dimension: player.dimension,
         });
 
         this.updateDroppedItemsAroundPlayer(player, true);
@@ -289,7 +203,7 @@ export class InventoryController {
 
     static getDroppedItemsByGridSpace(dimension: number, gridSpace: number): Array<DroppedItem> {
         return InventoryController.groundItems.filter(
-            (item) => item.gridSpace === gridSpace && item.dimension === dimension
+            (item) => item.gridSpace === gridSpace && item.dimension === dimension,
         );
     }
 
@@ -324,22 +238,16 @@ export class InventoryController {
             return;
         }
 
-        InventoryController.handlePickupGround(player, endData, openSlot.slot, hash, openSlot.tab);
+        InventoryController.handlePickupGround(player, endData, openSlot.slot, hash);
     }
 
-    static handlePickupGround(
-        player: alt.Player,
-        endData: CategoryData,
-        endSlotIndex: number,
-        hash: string | null,
-        tab: number
-    ) {
+    static handlePickupGround(player: alt.Player, endData: CategoryData, endSlotIndex: number, hash: string | null) {
         if (player.vehicle) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        if (!endData.emptyCheck(player, endSlotIndex, tab)) {
+        if (!endData.emptyCheck(player, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -363,16 +271,7 @@ export class InventoryController {
             return;
         }
 
-        if (
-            !playerFuncs.inventory.allItemRulesValid(
-                player,
-                droppedItem.item,
-                endData,
-                endSlotIndex,
-                InventoryController.customItemRules,
-                tab
-            )
-        ) {
+        if (!playerFuncs.inventory.allItemRulesValid(player, droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
             return;
@@ -393,7 +292,7 @@ export class InventoryController {
             return;
         }
 
-        const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex, tab);
+        const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex);
         if (!didAddItem) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
@@ -412,12 +311,11 @@ export class InventoryController {
      * @static
      * @param {alt.Player} player
      * @param {string} selectedSlot // i-0
-     * @param {number} tab // 0-3
      * @return {*}
      * @memberof InventoryController
      */
-    static processUse(player: alt.Player, selectedSlot: string, tab: number) {
-        if (!selectedSlot || tab === undefined || tab === null) {
+    static processUse(player: alt.Player, selectedSlot: string) {
+        if (!selectedSlot) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -429,9 +327,7 @@ export class InventoryController {
         }
 
         const slotType = playerFuncs.inventory.getSlotType(selectedSlot);
-        const originalItem = slotType.includes('inventory')
-            ? player.data[slotType][tab].find((i) => i && i.slot === slot)
-            : player.data[slotType].find((i) => i && i.slot === slot);
+        const originalItem = player.data[slotType].find((i) => i && i.slot === slot);
 
         if (!originalItem) {
             playerFuncs.sync.inventory(player);
@@ -458,11 +354,11 @@ export class InventoryController {
                     return;
                 }
 
-                playerFuncs.inventory.inventoryAdd(player, item, openSlot.slot, openSlot.tab);
+                playerFuncs.inventory.inventoryAdd(player, item, openSlot.slot);
             } else {
                 // Equip
                 // Remove item from inventory.
-                if (!playerFuncs.inventory.inventoryRemove(player, item.slot, tab)) {
+                if (!playerFuncs.inventory.inventoryRemove(player, item.slot)) {
                     playerFuncs.sync.inventory(player);
                     return;
                 }
@@ -479,7 +375,7 @@ export class InventoryController {
                     }
 
                     // Add old item to inventory from equipment
-                    playerFuncs.inventory.inventoryAdd(player, removedItem, item.slot, tab);
+                    playerFuncs.inventory.inventoryAdd(player, removedItem, item.slot);
                 }
 
                 playerFuncs.inventory.equipmentAdd(player, item, item.equipment);
@@ -500,9 +396,9 @@ export class InventoryController {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {
-                playerFuncs.inventory.inventoryRemove(player, slot, tab);
+                playerFuncs.inventory.inventoryRemove(player, slot);
             } else {
-                playerFuncs.inventory.replaceInventoryItem(player, item, tab);
+                playerFuncs.inventory.replaceInventoryItem(player, item);
             }
 
             playerFuncs.save.field(player, 'inventory', player.data.inventory);
@@ -510,12 +406,12 @@ export class InventoryController {
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item, slot, tab);
+            alt.emit(item.data.event, player, item, slot);
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }
 
-    static processSplit(player: alt.Player, selectedSlot: string, tab: number, amount: number) {
+    static processSplit(player: alt.Player, selectedSlot: string, amount: number) {
         if (isNaN(amount)) {
             playerFuncs.sync.inventory(player);
             return;
@@ -532,7 +428,7 @@ export class InventoryController {
         }
 
         const currentSlotValue = stripCategory(selectedSlot);
-        const index = player.data.inventory[tab].findIndex((i) => i && i.slot === currentSlotValue);
+        const index = player.data.inventory.findIndex((i) => i && i.slot === currentSlotValue);
 
         if (index <= -1) {
             playerFuncs.sync.inventory(player);
@@ -545,7 +441,7 @@ export class InventoryController {
             return;
         }
 
-        const clonedItem = deepCloneObject(player.data.inventory[tab][index]) as Item;
+        const clonedItem = deepCloneObject(player.data.inventory[index]) as Item;
         if (clonedItem.quantity < amount) {
             playerFuncs.sync.inventory(player);
             return;
@@ -556,9 +452,9 @@ export class InventoryController {
             return;
         }
 
-        player.data.inventory[tab][index].quantity -= amount;
+        player.data.inventory[index].quantity -= amount;
         clonedItem.quantity = amount;
-        playerFuncs.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot, inventorySlot.tab);
+        playerFuncs.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot);
 
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
@@ -572,7 +468,7 @@ const DataHelpers: Array<CategoryData> = [
         emptyCheck: playerFuncs.inventory.isInventorySlotFree,
         getItem: playerFuncs.inventory.getInventoryItem,
         removeItem: playerFuncs.inventory.inventoryRemove,
-        addItem: playerFuncs.inventory.inventoryAdd
+        addItem: playerFuncs.inventory.inventoryAdd,
     },
     {
         abbrv: 't-',
@@ -580,7 +476,7 @@ const DataHelpers: Array<CategoryData> = [
         emptyCheck: playerFuncs.inventory.isToolbarSlotFree,
         getItem: playerFuncs.inventory.getToolbarItem,
         removeItem: playerFuncs.inventory.toolbarRemove,
-        addItem: playerFuncs.inventory.toolbarAdd
+        addItem: playerFuncs.inventory.toolbarAdd,
     },
     {
         abbrv: 'e-',
@@ -588,17 +484,9 @@ const DataHelpers: Array<CategoryData> = [
         emptyCheck: playerFuncs.inventory.isEquipmentSlotFree,
         getItem: playerFuncs.inventory.getEquipmentItem,
         removeItem: playerFuncs.inventory.equipmentRemove,
-        addItem: playerFuncs.inventory.equipmentAdd
+        addItem: playerFuncs.inventory.equipmentAdd,
     },
     { abbrv: 'g-', name: 'ground', emptyCheck: null, getItem: null, removeItem: null, addItem: null },
-    {
-        abbrv: 'tab-',
-        name: 'tab',
-        emptyCheck: null,
-        getItem: null,
-        removeItem: null,
-        addItem: null
-    }
 ];
 
 alt.onClient(View_Events_Inventory.Use, InventoryController.processUse);

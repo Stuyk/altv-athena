@@ -40,6 +40,13 @@ export interface Item {
     quantity: number;
 
     /**
+     * If this value is defined it will be used as the maximum stack size for the item.
+     * @type {number}
+     * @memberof Item
+     */
+    maxStack?: number;
+
+    /**
      * A bitwise enum representing functionality of the item.
      * ie. 'ITEM_TYPE.CAN_EQUIP | ITEM_TYPE.IS_TOOLBAR'
      *
@@ -84,7 +91,6 @@ export interface Item {
 export interface ItemSpecial extends Item {
     dataName: string;
     dataIndex: number;
-    dataTab?: number;
     isInventory: boolean;
     isEquipment: boolean;
     isToolbar: boolean;

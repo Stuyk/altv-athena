@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-
 import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentTypes';
 import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
@@ -8,74 +7,350 @@ import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/CategoryData';
 import { stripCategory } from '../../utility/category';
-import emit from './emit';
-import save from './save';
-import sync from './sync';
+import { playerFuncs } from '../Player';
+
+const MAX_EQUIPMENT_SLOTS = 11; // This really should not be changed. Ever.
+const TEMP_MAX_TOOLBAR_SIZE = 4;
+const TEMP_MAX_INVENTORY_SLOTS = 28;
 
 /**
- * Return the tab index and the slot to use for the item.
- * @return {*}  {({ tab: number; index: number } | null)}
+ * Converts an inventory from 2.0.2 to 3.0.0 inventory style.
+ * Which is a single Array of items.
+ * @param {alt.Player} player
+ * @return {*}
+ */
+async function convert(player: alt.Player): Promise<void> {
+    if (!player.data) {
+        return;
+    }
+
+    // Not a legacy inventory system. Ignoring.
+    if (Array.isArray(player.data.inventory) && !Array.isArray(player.data.inventory[0])) {
+        return;
+    }
+
+    const inventory = player.data.inventory as Array<Array<Partial<Item>>>;
+    const playerItems: Array<Partial<Item>> = [];
+    let currentSlot = 0;
+
+    for (let x = 0; x < inventory.length; x++) {
+        for (let y = 0; y < inventory[x].length; y++) {
+            const item = inventory[x][y];
+            item.slot = currentSlot;
+            playerItems.push(item);
+            currentSlot += 1;
+        }
+    }
+
+    player.data.inventory = playerItems;
+    await playerFuncs.save.field(player, 'inventory', player.data.inventory);
+}
+
+/**
+ * Adds an item to the equipment tab.
+ * @param {alt.Player} player
+ * @param {Item} item
+ * @param {EQUIPMENT_TYPE} slot
+ * @return {boolean}
+ */
+function equipmentAdd(player: alt.Player, item: Item, slot: EQUIPMENT_TYPE): boolean {
+    if (slot >= MAX_EQUIPMENT_SLOTS) {
+        return false;
+    }
+
+    if (!isEquipmentSlotFree(player, slot)) {
+        return false;
+    }
+
+    // Prevent from adding equipment to wrong section.
+    if (item.equipment !== slot) {
+        return false;
+    }
+
+    // Update slot to match where it needs to go.
+    if (item.slot !== slot) {
+        item.slot = slot;
+    }
+
+    const safeItemCopy = deepCloneObject(item);
+    player.data.equipment.push(safeItemCopy);
+    return true;
+}
+
+/**
+ * Check if an equipment slot is free.
+ * @param {alt.Player} player
+ * @param {EQUIPMENT_TYPE} slot
+ * @return {boolean}
  * @memberof InventoryPrototype
  */
-function getFreeInventorySlot(p: alt.Player, tabNumber: number = null): { tab: number; slot: number } | null {
-    for (let i = 0; i < p.data.inventory.length; i++) {
-        if (tabNumber !== null && i !== tabNumber) {
-            continue;
-        }
+function isEquipmentSlotFree(player: alt.Player, slot: EQUIPMENT_TYPE): boolean {
+    if (slot >= MAX_EQUIPMENT_SLOTS) {
+        return false;
+    }
 
-        const tab = p.data.inventory[i];
+    if (player.data.equipment.length <= 0) {
+        return true;
+    }
 
-        // Go to next tab if inventory is full.
-        if (tab.length >= 28) {
-            continue;
-        }
+    return player.data.equipment.findIndex((item) => item.slot === slot) === -1 ? true : false;
+}
 
-        // x is the free slot to assign the item
-        for (let x = 0; x <= 27; x++) {
-            const itemIndex = tab.findIndex((item) => item.slot === x);
-            if (itemIndex >= 0) {
-                continue;
-            }
+/**
+ * Returns an array of all items in inventory, equipment, etc. as a single list.
+ * @param {alt.Player} player
+ * @return {Array<Item>}
+ */
+function getAllItems(player: alt.Player): Array<ItemSpecial> {
+    let items = [];
 
-            return { tab: i, slot: x };
-        }
+    for (let i = 0; i < player.data.equipment.length; i++) {
+        const item = deepCloneObject(player.data.equipment[i]) as ItemSpecial;
+        item.dataIndex = i;
+        item.dataName = 'equipment';
+        item.isEquipment = true;
+        items.push(item);
+    }
+
+    for (let i = 0; i < player.data.toolbar.length; i++) {
+        const item = deepCloneObject(player.data.toolbar[i]) as ItemSpecial;
+        item.dataIndex = i;
+        item.dataName = 'toolbar';
+        item.isToolbar = true;
+        items.push(item);
+    }
+
+    for (let i = 0; i < player.data.inventory.length; i++) {
+        const item = deepCloneObject(player.data.inventory[i]) as ItemSpecial;
+        item.dataIndex = i;
+        item.dataName = 'inventory';
+        item.isInventory = true;
+        items.push(item);
+    }
+
+    return items;
+}
+
+/**
+ * Get a list of all weapons the player has on them.
+ * @param {alt.Player} player
+ * @return {*}  {Array<Item>}
+ */
+function getAllWeapons(player: alt.Player): Array<Item> {
+    const weapons = getAllItems(player).filter((item) => {
+        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
+    });
+
+    if (weapons.length <= 0) {
+        return [];
+    }
+
+    return weapons;
+}
+
+/**
+ * Get an equipment item based on slot.
+ * @param {number} slot
+ * @return {*}  {(Item | null)}
+ * @memberof InventoryPrototype
+ */
+function getEquipmentItem(player: alt.Player, slot: number): Item | null {
+    if (slot >= MAX_EQUIPMENT_SLOTS) {
+        return null;
+    }
+
+    const index = player.data.equipment.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return null;
+    }
+
+    return deepCloneObject<Item>(player.data.equipment[index]);
+}
+
+function getSlotType(slot: string): string {
+    if (slot.includes('i')) {
+        return 'inventory';
+    }
+
+    if (slot.includes('t')) {
+        return 'toolbar';
+    }
+
+    if (slot.includes('g')) {
+        return 'ground';
+    }
+
+    if (slot.includes('e')) {
+        return 'equipment';
     }
 
     return null;
 }
 
 /**
- * Return the tab indexes and the slots to use for the item.
- * @return {*}  {(Array<{ tab: number; slot: number }>)}
+ * Get a toolbar item based on slot.
+ * @param {number} slot
+ * @return {*}  {boolean}
  * @memberof InventoryPrototype
-*/
-function getFreeInventorySlots(p: alt.Player, tabNumber: number = null): Array<{ tab: number; slot: number }> {
-    let slots: Array<{ tab: number; slot: number }> = []
-    
-    for (let i = 0; i < p.data.inventory.length; i++) {
-        if (tabNumber !== null && i !== tabNumber) {
-            continue;
-        }
-
-        const tab = p.data.inventory[i];
-
-        // Go to next tab if inventory is full.
-        if (tab.length >= 28) {
-            continue;
-        }
-
-        // x is the free slot to assign the item
-        for (let x = 0; x <= 27; x++) {
-            const itemIndex = tab.findIndex((item) => item.slot === x);
-            if (itemIndex >= 0) {
-                continue;
-            }
-
-            slots.push({ tab: i, slot: x });
-        }
+ */
+function getToolbarItem(player: alt.Player, slot: number): Item | null {
+    if (slot >= TEMP_MAX_TOOLBAR_SIZE) {
+        return null;
     }
 
-    return slots;
+    const index = player.data.toolbar.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return null;
+    }
+
+    return deepCloneObject<Item>(player.data.toolbar[index]);
+}
+
+/**
+ * Checks if an item is in the inventory data section.
+ * Returns the tab in the inventory where it is.
+ * Returns the index in the array of where this item is.
+ * @param {INVENTORY_TYPE} type
+ * @param {string} uuid
+ * @return { { index: number}  | null }
+ * @memberof InventoryPrototype
+ */
+function isInInventory(player: alt.Player, item: Partial<Item>): { index: number } | null {
+    for (let i = 0; i < player.data.inventory.length; i++) {
+        const inventoryItem = player.data.inventory[i];
+        if (!item) {
+            continue;
+        }
+
+        const objectKeys = Object.keys(item);
+        const keyIndex = objectKeys.findIndex((key) => item[key] === inventoryItem[key]);
+
+        if (keyIndex <= -1) {
+            continue;
+        }
+
+        return { index: i };
+    }
+
+    return null;
+}
+
+/**
+ * Checks if an item is in the equipment data section.
+ * Returns the index in the array of where this item is.
+ * @param {Partial<Item>} item
+ * @return { { index: number } | null }
+ * @memberof InventoryPrototype
+ */
+function isInEquipment(player: alt.Player, item: Partial<Item>): { index: number } | null {
+    if (player.data.equipment.length <= 0) {
+        return null;
+    }
+
+    if (!item) {
+        throw new Error(`[Athena] Specified item is null for isInEquipment`);
+    }
+
+    for (let i = 0; i < player.data.equipment.length; i++) {
+        const equipmentItem = player.data.equipment[i];
+
+        if (!equipmentItem) {
+            continue;
+        }
+
+        const objectKeys = Object.keys(item);
+        const keyIndex = objectKeys.findIndex((key) => item[key] === equipmentItem[key]);
+
+        if (keyIndex <= -1) {
+            continue;
+        }
+
+        return { index: i };
+    }
+
+    return null;
+}
+
+/**
+ * Check if the inventory slot is free.
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function isInventorySlotFree(player: alt.Player, slot: number): boolean {
+    if (slot >= TEMP_MAX_INVENTORY_SLOTS) {
+        return false;
+    }
+
+    const index = player.data.inventory.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Check if a slot in the toolbar is free.
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function isToolbarSlotFree(player: alt.Player, slot: number): boolean {
+    if (slot >= TEMP_MAX_TOOLBAR_SIZE) {
+        return false;
+    }
+
+    if (player.data.toolbar.length >= TEMP_MAX_TOOLBAR_SIZE) {
+        return false;
+    }
+
+    return player.data.toolbar.findIndex((item) => item.slot === slot) === -1 ? true : false;
+}
+
+/**
+ * Sets an item into the toolbar section of this player.
+ * Returns true if it was successfully set.
+ * @param {Item} item
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function toolbarAdd(player: alt.Player, item: Item, slot: number): boolean {
+    if (slot >= TEMP_MAX_TOOLBAR_SIZE) {
+        return false;
+    }
+
+    if (!isToolbarSlotFree(player, slot)) {
+        return false;
+    }
+
+    // Update slot to match where it needs to go.
+    if (item.slot !== slot) {
+        item.slot = slot;
+    }
+
+    const safeItemCopy = deepCloneObject(item);
+    player.data.toolbar.push(safeItemCopy);
+    return true;
+}
+
+/**
+ * Removes an item from this player's toolbar.
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function toolbarRemove(player: alt.Player, slot: number): boolean {
+    const index = player.data.toolbar.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    player.data.toolbar.splice(index, 1);
+    return true;
 }
 
 /**
@@ -97,37 +372,104 @@ function hasItem(player: alt.Player, item: Partial<Item>): boolean {
 }
 
 /**
- * Check if a player has a weapon.
+ * Checks if an item is in the toolbar data section.
+ * Returns the index of the toolbar if it's present.
+ * Returns null if the slot is empty.
  * @param {alt.Player} player
+ * @param {Partial<Item>} item
+ * @return {{ index: number } | null}
+ * @memberof InventoryPrototype
  */
-function hasWeapon(player: alt.Player): Item | null {
-    for (let t = 0; t < player.data.inventory.length; t++) {
-        const tab = player.data.inventory[t];
+function isInToolbar(player: alt.Player, item: Partial<Item>): { index: number } | null {
+    if (player.data.toolbar.length <= 0) {
+        return null;
+    }
 
-        if (tab.length <= 0) {
+    if (!item) {
+        throw new Error(`[Athena] Specified item is null for isInToolbar`);
+    }
+
+    for (let i = 0; i < player.data.toolbar.length; i++) {
+        const toolbarItem = player.data.toolbar[i];
+
+        if (!toolbarItem) {
             continue;
         }
 
-        for (let i = 0; i < tab.length; i++) {
-            const inventoryItem = tab[i];
-            if (!inventoryItem) {
-                continue;
-            }
+        const objectKeys = Object.keys(item);
+        const keyIndex = objectKeys.findIndex((key) => item[key] === toolbarItem[key]);
 
-            if (!inventoryItem.data) {
-                continue;
-            }
-
-            if (!inventoryItem.data.hash) {
-                continue;
-            }
-
-            if (!isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.IS_WEAPON)) {
-                continue;
-            }
-
-            return inventoryItem as Item;
+        if (keyIndex <= -1) {
+            continue;
         }
+
+        return { index: i };
+    }
+
+    return null;
+}
+
+/**
+ * Removes all weapons from the player's inventory.
+ * Returns the list of removed weapons.
+ * @param {alt.Player} player
+ * @return {Array<Item>}
+ */
+function removeAllWeapons(player: alt.Player): Array<Item> {
+    const weapons = getAllItems(player).filter((item) => {
+        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
+    });
+
+    if (weapons.length <= 0) {
+        return [];
+    }
+
+    const removedWeapons = [];
+
+    // Work Backwards in Array
+    // This prevents removing the wrong items.
+    for (let i = weapons.length - 1; i >= 0; i--) {
+        if (weapons[i].isInventory) {
+            removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
+            continue;
+        }
+
+        removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
+    }
+
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
+    playerFuncs.sync.inventory(player);
+    player.removeAllWeapons();
+    return removedWeapons;
+}
+
+/**
+ * Check if the player has a weapon.
+ * Returns the item if they do.
+ * @param {alt.Player} player
+ * @return {(Item | null)}
+ */
+function hasWeapon(player: alt.Player): Item | null {
+    for (let i = 0; i < player.data.inventory.length; i++) {
+        const inventoryItem = player.data.inventory[i];
+        if (!inventoryItem) {
+            continue;
+        }
+
+        if (!inventoryItem.data) {
+            continue;
+        }
+
+        if (!inventoryItem.data.hash) {
+            continue;
+        }
+
+        if (!isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.IS_WEAPON)) {
+            continue;
+        }
+
+        return inventoryItem as Item;
     }
 
     for (let i = 0; i < player.data.toolbar.length; i++) {
@@ -155,459 +497,24 @@ function hasWeapon(player: alt.Player): Item | null {
 }
 
 /**
- * Get an inventory item based on tab and slot.
- * @param {number} tab
- * @param {number} index
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-
-function getInventoryItem(p: alt.Player, slot: number, tab: number): Item | null {
-    if (tab >= 6) {
-        return null;
-    }
-
-    if (slot >= 28) {
-        return null;
-    }
-
-    const index = p.data.inventory[tab].findIndex((item) => item.slot === slot);
-    if (index <= -1) {
-        return null;
-    }
-
-    return deepCloneObject<Item>(p.data.inventory[tab][index]);
-}
-
-/**
- * Replaces an existing item with an updated version of itself.
- * Uses the same item slot.
- * @param {alt.Player} p
- * @param {Item} item
- * @param {number} tab
- * @return {*}  {boolean}
- */
-function replaceInventoryItem(p: alt.Player, item: Item, tab: number): boolean {
-    const itemIndex = p.data.inventory[tab].findIndex((existingItem) => existingItem.slot === item.slot);
-    if (itemIndex <= -1) {
-        return false;
-    }
-
-    p.data.inventory[tab][itemIndex] = item;
-    return true;
-}
-
-/**
- * Get an equipment item based on slot.
- * @param {number} slot
- * @return {*}  {(Item | null)}
- * @memberof InventoryPrototype
- */
-function getEquipmentItem(p: alt.Player, slot: number): Item | null {
-    if (slot >= 11) {
-        return null;
-    }
-
-    const index = p.data.equipment.findIndex((item) => item.slot === slot);
-    if (index <= -1) {
-        return null;
-    }
-
-    return deepCloneObject<Item>(p.data.equipment[index]);
-}
-
-/**
- * Get a toolbar item based on slot.
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function getToolbarItem(p: alt.Player, slot: number): Item | null {
-    if (slot >= 4) {
-        return null;
-    }
-
-    const index = p.data.toolbar.findIndex((item) => item.slot === slot);
-    if (index <= -1) {
-        return null;
-    }
-
-    return deepCloneObject<Item>(p.data.toolbar[index]);
-}
-
-/**
- * Checks if an item is in the inventory data section.
- * Returns the tab in the inventory where it is.
- * Returns the index in the array of where this item is.
- * @param {INVENTORY_TYPE} type
- * @param {string} uuid
- * @return {boolean}  {Promise<void>}
- * @memberof InventoryPrototype
- */
-function isInInventory(p: alt.Player, item: Partial<Item>): { tab: number; index: number } | null {
-    for (let t = 0; t < p.data.inventory.length; t++) {
-        const tab = p.data.inventory[t];
-
-        if (tab.length <= 0) {
-            continue;
-        }
-
-        for (let i = 0; i < tab.length; i++) {
-            const inventoryItem = tab[i];
-            if (!item) {
-                continue;
-            }
-
-            const objectKeys = Object.keys(item);
-            const keyIndex = objectKeys.findIndex((key) => item[key] === inventoryItem[key]);
-
-            if (keyIndex <= -1) {
-                continue;
-            }
-
-            return { tab: t, index: i };
-        }
-    }
-
-    return null;
-}
-/**
- * Checks if an item is in the equipment data section.
- * Returns the index in the array of where this item is.
- * @param {Partial<Item>} item
- * @return {*}  {({ index: number } | null)}
- * @memberof InventoryPrototype
- */
-function isInEquipment(p: alt.Player, item: Partial<Item>): { index: number } | null {
-    if (p.data.equipment.length <= 0) {
-        return null;
-    }
-
-    if (!item) {
-        throw new Error(`[Athena] Specified item is null for isInEquipment`);
-    }
-
-    for (let i = 0; i < p.data.equipment.length; i++) {
-        const equipmentItem = p.data.equipment[i];
-
-        if (!equipmentItem) {
-            continue;
-        }
-
-        const objectKeys = Object.keys(item);
-        const keyIndex = objectKeys.findIndex((key) => item[key] === equipmentItem[key]);
-
-        if (keyIndex <= -1) {
-            continue;
-        }
-
-        return { index: i };
-    }
-
-    return null;
-}
-
-/**
- * Check if an equipment slot is free.
- * @param {EQUIPMENT_TYPE} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function isEquipmentSlotFree(p: alt.Player, slot: EQUIPMENT_TYPE): boolean {
-    if (slot >= 11) {
-        return false;
-    }
-
-    if (p.data.equipment.length <= 0) {
-        return true;
-    }
-
-    return p.data.equipment.findIndex((item) => item.slot === slot) === -1 ? true : false;
-}
-
-/**
- * Check if the inventory slot is free.
- * @param {number} tab
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function isInventorySlotFree(p: alt.Player, slot: number, tab: number): boolean {
-    if (tab >= 6) {
-        return false;
-    }
-
-    if (slot >= 28) {
-        return false;
-    }
-
-    const index = p.data.inventory[tab].findIndex((item) => item.slot === slot);
-    if (index <= -1) {
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * Add an item to this player's inventory.
- * If the tab & slot are not empty it will return false.
- * @param {Item} item
- * @param {number} tab
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function inventoryAdd(p: alt.Player, item: Item, slot: number, tab: number): boolean {
-    if (tab >= 6) {
-        return false;
-    }
-
-    if (slot >= 28) {
-        return false;
-    }
-
-    if (!p.data.inventory[tab]) {
-        return false;
-    }
-
-    const index = p.data.inventory[tab].findIndex((item) => item.slot === slot);
-
-    if (index >= 0) {
-        return false;
-    }
-
-    if (item.slot !== slot) {
-        item.slot = slot;
-    }
-
-    const safeItemCopy = deepCloneObject(item);
-    p.data.inventory[tab].push(safeItemCopy);
-    return true;
-}
-
-/**
- * Remove an item from this player's inventory.
- * Returns if the item is successfully removed from the slot.
- * @param {number} tab
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function inventoryRemove(p: alt.Player, slot: number, tab: number): boolean {
-    if (slot >= 28) {
-        return false;
-    }
-
-    if (tab >= 6) {
-        return false;
-    }
-
-    if (!p.data.inventory[tab]) {
-        return false;
-    }
-
-    const index = p.data.inventory[tab].findIndex((item) => item.slot === slot);
-
-    if (index <= -1) {
-        return false;
-    }
-
-    p.data.inventory[tab].splice(index, 1);
-    return true;
-}
-
-/**
  * Remove an item from equipment base don slot.
+ * Does not save after removing item.
  * @param {EQUIPMENT_TYPE} slot
- * @return {*}  {boolean}
+ * @return {boolean}
  * @memberof InventoryPrototype
  */
-function equipmentRemove(p: alt.Player, slot: EQUIPMENT_TYPE): boolean {
-    if (slot >= 11) {
+function equipmentRemove(player: alt.Player, slot: EQUIPMENT_TYPE): boolean {
+    if (slot >= MAX_EQUIPMENT_SLOTS) {
         return false;
     }
 
-    const index = p.data.equipment.findIndex((item) => item.slot === slot);
+    const index = player.data.equipment.findIndex((item) => item.slot === slot);
     if (index <= -1) {
         return false;
     }
 
-    p.data.equipment.splice(index, 1);
+    player.data.equipment.splice(index, 1);
     return true;
-}
-
-/**
- * Checks if the equipment slot the item is going to is correct.
- * @param {Item} item
- * @param {EQUIPMENT_TYPE} slot Is the 'item.slot' the item will go to.
- * @return {*}
- */
-function isEquipmentSlotValid(item: Item, slot: EQUIPMENT_TYPE) {
-    if (slot >= 11) {
-        return false;
-    }
-
-    if (item.equipment === null || item.equipment === undefined) {
-        return false;
-    }
-
-    if (item.equipment !== slot) {
-        return false;
-    }
-
-    return true;
-}
-
-/**
- * Sets an item into the equipment section of this inventory.
- * @param {Item} item
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function equipmentAdd(p: alt.Player, item: Item, slot: EQUIPMENT_TYPE): boolean {
-    if (slot >= 11) {
-        return false;
-    }
-
-    if (!isEquipmentSlotFree(p, slot)) {
-        return false;
-    }
-
-    // Prevent from adding equipment to wrong section.
-    if (item.equipment !== slot) {
-        return false;
-    }
-
-    // Update slot to match where it needs to go.
-    if (item.slot !== slot) {
-        item.slot = slot;
-    }
-
-    const safeItemCopy = deepCloneObject(item);
-    p.data.equipment.push(safeItemCopy);
-    return true;
-}
-
-/**
- * Check if a slot in the toolbar is free.
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function isToolbarSlotFree(p: alt.Player, slot: number): boolean {
-    if (slot >= 4) {
-        return false;
-    }
-
-    if (p.data.toolbar.length >= 4) {
-        return false;
-    }
-
-    return p.data.toolbar.findIndex((item) => item.slot === slot) === -1 ? true : false;
-}
-
-/**
- * Sets an item into the toolbar section of this player.
- * Returns true if it was successfully set.
- * @param {Item} item
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function toolbarAdd(p: alt.Player, item: Item, slot: number): boolean {
-    if (slot >= 4) {
-        return false;
-    }
-
-    if (!isToolbarSlotFree(p, slot)) {
-        return false;
-    }
-
-    // Update slot to match where it needs to go.
-    if (item.slot !== slot) {
-        item.slot = slot;
-    }
-
-    const safeItemCopy = deepCloneObject(item);
-    p.data.toolbar.push(safeItemCopy);
-    return true;
-}
-
-/**
- * Removes an item from this player's toolbar.
- * @param {number} slot
- * @return {*}  {boolean}
- * @memberof InventoryPrototype
- */
-function toolbarRemove(p: alt.Player, slot: number): boolean {
-    if (slot >= 4) {
-        return false;
-    }
-
-    const index = p.data.toolbar.findIndex((item) => item.slot === slot);
-    if (index <= -1) {
-        return false;
-    }
-
-    p.data.toolbar.splice(index, 1);
-    return true;
-}
-
-/**
- * Replaces an existing item with an updated version of itself.
- * Uses the same item slot.
- * @param {alt.Player} p
- * @param {Item} item
- * @param {number} tab
- * @return {*}  {boolean}
- */
-function replaceToolbarItem(p: alt.Player, item: Item): boolean {
-    const itemIndex = p.data.toolbar.findIndex((existingItem) => existingItem.slot === item.slot);
-    if (itemIndex <= -1) {
-        return false;
-    }
-
-    p.data.toolbar[itemIndex] = item;
-    return true;
-}
-
-/**
- * Checks if an item is in the toolbar data section.
- * Returns the index of the toolbar if it's present.
- * Returns null if the slot is empty.
- * @param {Partial<Item>} item
- * @return {*}  {({ index: number } | null)}
- * @memberof InventoryPrototype
- */
-function isInToolbar(p: alt.Player, item: Partial<Item>): { index: number } | null {
-    if (p.data.toolbar.length <= 0) {
-        return null;
-    }
-
-    if (!item) {
-        throw new Error(`[Athena] Specified item is null for isInToolbar`);
-    }
-
-    for (let i = 0; i < p.data.toolbar.length; i++) {
-        const toolbarItem = p.data.toolbar[i];
-
-        if (!toolbarItem) {
-            continue;
-        }
-
-        const objectKeys = Object.keys(item);
-        const keyIndex = objectKeys.findIndex((key) => item[key] === toolbarItem[key]);
-
-        if (keyIndex <= -1) {
-            continue;
-        }
-
-        return { index: i };
-    }
-
-    return null;
 }
 
 /**
@@ -616,10 +523,9 @@ function isInToolbar(p: alt.Player, item: Partial<Item>): { index: number } | nu
  * Automatically saves inventory or toolbar on removal.
  * @param {alt.Player} player
  * @param {string} itemName This is CaSeSeNsItIvE
- * @return {*}  {boolean}
+ * @return {boolean}
  */
 function findAndRemove(player: alt.Player, itemName: string): boolean {
-    // Check Toolbar First
     const toolbarItem = isInToolbar(player, { name: itemName });
     if (toolbarItem) {
         const item = player.data.toolbar[toolbarItem.index];
@@ -632,8 +538,8 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
             return false;
         }
 
-        save.field(player, 'toolbar', player.data.toolbar);
-        sync.inventory(player);
+        playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
+        playerFuncs.sync.inventory(player);
         return true;
     }
 
@@ -643,92 +549,72 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
         return false;
     }
 
-    const item = player.data.inventory[inventoryItem.tab][inventoryItem.index];
+    const item = player.data.inventory[inventoryItem.index];
     if (!item) {
         return false;
     }
 
-    const removedFromInventory = inventoryRemove(player, item.slot, inventoryItem.tab);
+    const removedFromInventory = inventoryRemove(player, item.slot);
     if (!removedFromInventory) {
         return false;
     }
 
-    save.field(player, 'inventory', player.data.inventory);
-    sync.inventory(player);
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
     return true;
 }
 
-function findItemBySlot(
-    player: alt.Player,
-    selectedSlot: string,
-    tab: number | null
-): { item: Item; index: number } | null {
-    // Inventory
-    if (selectedSlot.includes('i')) {
-        const item = getInventoryItem(player, stripCategory(selectedSlot), tab);
-        if (!item) {
-            return null;
-        }
-
-        return {
-            item: deepCloneObject(item),
-            index: player.data.inventory[tab].findIndex((i) => i.slot === item.slot)
-        };
+/**
+ * Remove an item from this player's inventory.
+ * Does not save after removing the item.
+ * Returns if the item is successfully removed from the slot.
+ * @param {alt.Player} player
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function inventoryRemove(player: alt.Player, slot: number): boolean {
+    if (slot >= TEMP_MAX_INVENTORY_SLOTS) {
+        return false;
     }
 
-    // Equipment
-    if (selectedSlot.includes('e')) {
-        const item = getEquipmentItem(player, stripCategory(selectedSlot));
-        if (!item) {
-            return null;
-        }
+    const index = player.data.inventory.findIndex((item) => item.slot === slot);
 
-        return { item: deepCloneObject(item), index: player.data.equipment.findIndex((i) => i.slot === item.slot) };
+    if (index <= -1) {
+        return false;
     }
 
-    // Toolbar
-    if (selectedSlot.includes('t')) {
-        const item = getToolbarItem(player, stripCategory(selectedSlot));
-        if (!item) {
-            return null;
-        }
-
-        return { item: deepCloneObject(item), index: player.data.toolbar.findIndex((i) => i.slot === item.slot) };
-    }
-
-    return null;
+    player.data.inventory.splice(index, 1);
+    return true;
 }
 
-function getSlotType(slot: string): string {
-    if (slot.includes('i')) {
-        return 'inventory';
+/**
+ * Add an item to this player's inventory.
+ * If the tab & slot are not empty it will return false.
+ * @param {alt.Player} player
+ * @param {Item} item
+ * @param {number} slot
+ * @return {boolean}
+ * @memberof InventoryPrototype
+ */
+function inventoryAdd(player: alt.Player, item: Item, slot: number): boolean {
+    if (slot >= TEMP_MAX_INVENTORY_SLOTS) {
+        return false;
     }
 
-    if (slot.includes('tab')) {
-        return 'tab';
+    const index = player.data.inventory.findIndex((item) => item.slot === slot);
+
+    if (index >= 0) {
+        return false;
     }
 
-    if (slot.includes('t')) {
-        return 'toolbar';
+    if (item.slot !== slot) {
+        item.slot = slot;
     }
 
-    if (slot.includes('g')) {
-        return 'ground';
-    }
-
-    if (slot.includes('e')) {
-        return 'equipment';
-    }
-
-    return null;
-}
-
-function saveFields(player: alt.Player, fields: string[]): void {
-    for (let i = 0; i < fields.length; i++) {
-        save.field(player, fields[i], player.data[fields[i]]);
-    }
-
-    sync.inventory(player);
+    const safeItemCopy = deepCloneObject(item);
+    player.data.inventory.push(safeItemCopy);
+    return true;
 }
 
 /**
@@ -736,23 +622,16 @@ function saveFields(player: alt.Player, fields: string[]): void {
  * @param {alt.Player} player
  * @param {string} selectedSlot
  * @param {string} endSlot
- * @param {(number | null)} tab
  * @return {*}
  */
-function handleSwapOrStack(
-    player: alt.Player,
-    selectedSlot: string,
-    endSlot: string,
-    tab: number | null,
-    customItemRules: Array<Function>
-) {
+function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: string) {
     const fieldsToSave = [];
-    const selectItem = findItemBySlot(player, selectedSlot, tab);
-    const endItem = findItemBySlot(player, endSlot, tab);
+    const selectItem = findItemBySlot(player, selectedSlot);
+    const endItem = findItemBySlot(player, endSlot);
 
     if (!endItem || !selectItem) {
-        console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} at ${tab} (may be null)`);
-        sync.inventory(player);
+        console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} (may be null)`);
+        playerFuncs.sync.inventory(player);
         return;
     }
 
@@ -772,12 +651,9 @@ function handleSwapOrStack(
     fieldsToSave.push(endSlotName);
 
     if (fieldsToSave.includes(null)) {
-        sync.inventory(player);
+        playerFuncs.sync.inventory(player);
         return;
     }
-
-    const isSelectInventory = selectedSlotName.includes('inventory');
-    const isEndInventory = endSlotName.includes('inventory');
 
     const isSelectEquipment = isFlagEnabled(selectItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
     const isEndEquipment = isFlagEnabled(endItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
@@ -785,32 +661,30 @@ function handleSwapOrStack(
     // Check if equipment types are compatible...
     if (isSelectEquipment || isEndEquipment) {
         if (endItem.item.equipment !== selectItem.item.equipment) {
-            sync.inventory(player);
+            playerFuncs.sync.inventory(player);
             return;
         }
     }
 
-    const selectedArray: Array<Item> = isSelectInventory
-        ? player.data[selectedSlotName][tab]
-        : player.data[selectedSlotName];
+    const selectedArray: Array<Item> = player.data[selectedSlotName];
     let endArray;
 
     if (selectedSlotName === endSlotName) {
         endArray = selectedArray;
     } else {
-        endArray = isEndInventory ? player.data[endSlotName][tab] : player.data[endSlotName];
+        endArray = player.data[endSlotName];
     }
 
     // Do Not Stack. Swap Instead.
     if (selectItem.item.name !== endItem.item.name) {
         // Need to verify that each slot follows the rules for the slot it is going into.
-        if (!allItemRulesValid(player, selectItem.item, { name: endSlotName }, newEndSlot, customItemRules, tab)) {
-            sync.inventory(player);
+        if (!allItemRulesValid(player, selectItem.item, { name: endSlotName }, newEndSlot)) {
+            playerFuncs.sync.inventory(player);
             return;
         }
 
-        if (!allItemRulesValid(player, endItem.item, { name: selectedSlotName }, newSelectSlot, customItemRules, tab)) {
-            sync.inventory(player);
+        if (!allItemRulesValid(player, endItem.item, { name: selectedSlotName }, newSelectSlot)) {
+            playerFuncs.sync.inventory(player);
             return;
         }
 
@@ -827,7 +701,7 @@ function handleSwapOrStack(
 
         // Handle Stacking
         if (!isSelectStackable || !isEndStackable) {
-            sync.inventory(player);
+            playerFuncs.sync.inventory(player);
             return;
         }
 
@@ -837,32 +711,26 @@ function handleSwapOrStack(
     }
 
     // Determine which slot we are saving and if they are the same slot or not.
-    // Assign the data to the player. Not turning back here.
+    // Assign the data to the player. No turning back here.
     if (selectedSlotName !== endSlotName) {
-        if (isSelectInventory) {
-            player.data[selectedSlotName][tab] = selectedArray;
-        } else {
-            player.data[selectedSlotName] = selectedArray;
-        }
-
-        if (isEndInventory) {
-            player.data[endSlotName][tab] = endArray;
-        } else {
-            player.data[endSlotName] = endArray;
-        }
+        player.data[selectedSlotName] = selectedArray;
+        player.data[endSlotName] = endArray;
     } else {
-        if (isSelectInventory) {
-            player.data[selectedSlotName][tab] = selectedArray;
-        } else {
-            player.data[selectedSlotName] = selectedArray;
-        }
-
+        player.data[selectedSlotName] = selectedArray;
         fieldsToSave.pop();
-        emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 
     saveFields(player, fieldsToSave);
-    sync.inventory(player);
+    playerFuncs.sync.inventory(player);
+}
+
+function saveFields(player: alt.Player, fields: string[]): void {
+    for (let i = 0; i < fields.length; i++) {
+        playerFuncs.save.field(player, fields[i], player.data[fields[i]]);
+    }
+
+    playerFuncs.sync.inventory(player);
 }
 
 /**
@@ -878,8 +746,6 @@ function allItemRulesValid(
     item: Item,
     endSlot: CategoryData,
     endSlotIndex: number | null,
-    customItemRules: Array<Function>,
-    tab: number | null
 ): boolean {
     if (!item.behavior) {
         return true;
@@ -909,60 +775,179 @@ function allItemRulesValid(
         }
     }
 
-    if (customItemRules.length >= 1) {
-        for (let i = 0; i < customItemRules.length; i++) {
-            if (!customItemRules[i](player, item, endSlot ? endSlot.name : null, endSlotIndex, tab)) {
-                return false;
-            }
+    return true;
+}
+
+function findItemBySlot(player: alt.Player, selectedSlot: string): { item: Item; index: number } | null {
+    // Inventory
+    if (selectedSlot.includes('i')) {
+        const item = getInventoryItem(player, stripCategory(selectedSlot));
+        if (!item) {
+            return null;
         }
+
+        return {
+            item: deepCloneObject(item),
+            index: player.data.inventory.findIndex((i) => i.slot === item.slot),
+        };
+    }
+
+    // Equipment
+    if (selectedSlot.includes('e')) {
+        const item = getEquipmentItem(player, stripCategory(selectedSlot));
+        if (!item) {
+            return null;
+        }
+
+        return { item: deepCloneObject(item), index: player.data.equipment.findIndex((i) => i.slot === item.slot) };
+    }
+
+    // Toolbar
+    if (selectedSlot.includes('t')) {
+        const item = getToolbarItem(player, stripCategory(selectedSlot));
+        if (!item) {
+            return null;
+        }
+
+        return { item: deepCloneObject(item), index: player.data.toolbar.findIndex((i) => i.slot === item.slot) };
+    }
+
+    return null;
+}
+
+/**
+ * Get an inventory item based on slot.
+ * @param { alt.Player } player
+ * @param { number } slot
+ * @return { Item | null }
+ * @memberof InventoryPrototype
+ */
+
+function getInventoryItem(player: alt.Player, slot: number): Item | null {
+    if (slot >= TEMP_MAX_INVENTORY_SLOTS) {
+        return null;
+    }
+
+    const index = player.data.inventory.findIndex((item) => item.slot === slot);
+    if (index <= -1) {
+        return null;
+    }
+
+    return deepCloneObject<Item>(player.data.inventory[index]);
+}
+
+/**
+ * Checks if the equipment slot the item is going to is correct.
+ * @param {Item} item
+ * @param {EQUIPMENT_TYPE} slot Is the 'item.slot' the item will go to.
+ * @return {*}
+ */
+function isEquipmentSlotValid(item: Item, slot: EQUIPMENT_TYPE) {
+    if (slot >= 11) {
+        return false;
+    }
+
+    if (item.equipment === null || item.equipment === undefined) {
+        return false;
+    }
+
+    if (item.equipment !== slot) {
+        return false;
     }
 
     return true;
 }
 
 /**
- * Returns an array of all items in inventory, equipment, etc. as a single list.
- * @param {alt.Player} player
- * @return {*}  {Array<Item>}
+ * Return the slot to use for adding an item.
+ * @param { alt.Player } player
+ * @return { { slot: number } }
+ * @memberof InventoryPrototype
  */
-function getAllItems(player: alt.Player): Array<ItemSpecial> {
-    let items = [];
-
-    for (let i = 0; i < player.data.equipment.length; i++) {
-        const item = deepCloneObject(player.data.equipment[i]) as ItemSpecial;
-        item.dataIndex = i;
-        item.dataName = 'equipment';
-        item.isEquipment = true;
-        items.push(item);
+function getFreeInventorySlot(player: alt.Player): { slot: number } | null {
+    if (player.data.inventory.length >= TEMP_MAX_INVENTORY_SLOTS) {
+        return null;
     }
 
-    for (let i = 0; i < player.data.toolbar.length; i++) {
-        const item = deepCloneObject(player.data.toolbar[i]) as ItemSpecial;
-        item.dataIndex = i;
-        item.dataName = 'toolbar';
-        item.isToolbar = true;
-        items.push(item);
+    for (let i = 0; i <= TEMP_MAX_INVENTORY_SLOTS - 1; i++) {
+        const itemIndex = player.data.inventory.findIndex((item) => item.slot === i);
+        if (itemIndex >= 0) {
+            continue;
+        }
+
+        return { slot: i };
     }
 
-    player.data.inventory.forEach((tab, index) => {
-        tab.forEach((originalItem, originalItemIndex) => {
-            const item = deepCloneObject(originalItem) as ItemSpecial;
-            item.dataIndex = originalItemIndex;
-            item.dataName = 'inventory';
-            item.isInventory = true;
-            item.dataTab = index;
-            items.push(item);
-        });
-    });
+    return null;
+}
 
-    return items;
+/**
+ * Return slots available in the player's inventory.
+ * @param { alt.Player } player
+ * @return { Array<{ slot: number }> }
+ * @memberof InventoryPrototype
+ */
+function getFreeInventorySlots(player: alt.Player): Array<{ slot: number }> {
+    let slots: Array<{ slot: number }> = [];
+
+    if (player.data.inventory.length >= TEMP_MAX_INVENTORY_SLOTS) {
+        return slots;
+    }
+
+    // x is the free slot to assign the item
+    for (let x = 0; x <= TEMP_MAX_INVENTORY_SLOTS - 1; x++) {
+        const itemIndex = player.data.inventory.findIndex((item) => item.slot === x);
+        if (itemIndex >= 0) {
+            continue;
+        }
+
+        slots.push({ slot: x });
+    }
+
+    return slots;
+}
+
+/**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * Does not save.
+ * @param {alt.Player} player
+ * @param {Item} item
+ * @return {*}  {boolean}
+ */
+function replaceInventoryItem(player: alt.Player, item: Item): boolean {
+    const itemIndex = player.data.inventory.findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    player.data.inventory[itemIndex] = item;
+    return true;
+}
+
+/**
+ * Replaces an existing item with an updated version of itself.
+ * Uses the same item slot.
+ * Does not save.
+ * @param {alt.Player} player
+ * @param {Item} item
+ * @return {boolean}
+ */
+function replaceToolbarItem(player: alt.Player, item: Item): boolean {
+    const itemIndex = player.data.toolbar.findIndex((existingItem) => existingItem.slot === item.slot);
+    if (itemIndex <= -1) {
+        return false;
+    }
+
+    player.data.toolbar[itemIndex] = item;
+    return true;
 }
 
 /**
  * Stack an item in the player's inventory.
  * @param {alt.Player} player
  * @param {Item} item
- * @return {*}  {boolean}
+ * @return {boolean}
  */
 function stackInventoryItem(player: alt.Player, item: Item): boolean {
     const existingItem = isInInventory(player, item);
@@ -971,66 +956,19 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
         return false;
     }
 
-    player.data.inventory[existingItem.tab][existingItem.index].quantity += item.quantity;
-    save.field(player, 'inventory', player.data.inventory);
-    sync.inventory(player);
+    const newSize = player.data.inventory[existingItem.index].quantity + item.quantity;
+    if (item.maxStack && newSize > item.maxStack) {
+        return false;
+    }
+
+    player.data.inventory[existingItem.index].quantity += item.quantity;
+    playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    playerFuncs.sync.inventory(player);
     return true;
 }
 
-/**
- * Get a list of all weapons the player has on them.
- * @param {alt.Player} player
- * @return {*}  {Array<Item>}
- */
-function getAllWeapons(player: alt.Player): Array<Item> {
-    const weapons = getAllItems(player).filter((item) => {
-        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
-    });
-
-    if (weapons.length <= 0) {
-        return [];
-    }
-
-    return weapons;
-}
-
-/**
- * Removes all weapons from the player's inventory.
- * Returns the list of removed weapons.
- *
- * @param {alt.Player} player
- * @return {*}  {Array<Item>}
- */
-function removeAllWeapons(player: alt.Player): Array<Item> {
-    const weapons = getAllItems(player).filter((item) => {
-        return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
-    });
-
-    if (weapons.length <= 0) {
-        return [];
-    }
-
-    const removedWeapons = [];
-
-    // Work Backwards in Array
-    // This prevents removing the wrong items.
-    for (let i = weapons.length - 1; i >= 0; i--) {
-        if (weapons[i].isInventory) {
-            removedWeapons.push(player.data[weapons[i].dataName][weapons[i].dataTab].splice(weapons[i].dataIndex, 1));
-            continue;
-        }
-
-        removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
-    }
-
-    save.field(player, 'inventory', player.data.inventory);
-    save.field(player, 'toolbar', player.data.toolbar);
-    sync.inventory(player);
-    player.removeAllWeapons();
-    return removedWeapons;
-}
-
 export default {
+    convert,
     allItemRulesValid,
     equipmentAdd,
     equipmentRemove,
@@ -1060,5 +998,5 @@ export default {
     replaceToolbarItem,
     stackInventoryItem,
     toolbarAdd,
-    toolbarRemove
+    toolbarRemove,
 };

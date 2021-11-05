@@ -4,7 +4,7 @@ description: List of all the changes and current versions.
 
 # Changelog
 
-## 2.0.4
+## 3.0.0
 
 ```diff
 + Began Interface Reworks
@@ -77,6 +77,9 @@ description: List of all the changes and current versions.
 + Add Clear Animation Server-Side to PlayerFuncs
 + Add Raycast Client-Side for Gameplay Camera (Snippet) and Facing Direction
 + Raycast Water Probe (Snippet)
++ Changed Inventory for Players to Single Array
++ Added Conversion from legacy Inventory
++ Updated Inventory, Equipment, etc. functions.
 ```
 
 ## 2.0.3

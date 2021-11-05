@@ -29,6 +29,10 @@ import sync from './sync';
  */
 async function selectCharacter(player: alt.Player, characterData: Partial<Character>): Promise<void> {
     player.data = { ...characterData };
+
+    // Converts inventory from 2.0.3 to 3.0.0
+    await playerFuncs.inventory.convert(player);
+
     sync.appearance(player, characterData.appearance);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
@@ -44,7 +48,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
                 player,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
-                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
+                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z,
             );
         }
 
@@ -128,5 +132,5 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 }
 
 export default {
-    character: selectCharacter
+    character: selectCharacter,
 };

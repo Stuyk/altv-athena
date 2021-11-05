@@ -24,10 +24,7 @@ function currencyData(player: alt.Player): void {
 
 function inventory(player: alt.Player): void {
     if (!player.data.inventory) {
-        player.data.inventory = new Array(5);
-        for (let i = 0; i < player.data.inventory.length; i++) {
-            player.data.inventory[i] = [];
-        }
+        player.data.inventory = [];
     }
 
     if (!player.data.toolbar) {
@@ -106,7 +103,7 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
 
                 if (dlc === undefined || dlc === null) {
                     alt.logWarning(
-                        `DLC was undefined for clothing component with ID: ${id}, VALUE: ${value}, TEXTURE: ${texture}`
+                        `DLC was undefined for clothing component with ID: ${id}, VALUE: ${value}, TEXTURE: ${texture}`,
                     );
                     alt.logWarning(`Make sure you add item.data.dlcs = [] to your dlc clothing item.`);
                     continue;
@@ -200,5 +197,5 @@ export default {
     syncedMeta,
     time,
     water,
-    weather
+    weather,
 };

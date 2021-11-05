@@ -9,28 +9,25 @@ ChatController.addCommand(
     'clearinventory',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_INVENTORY, '/clearinventory'),
     PERMISSIONS.ADMIN,
-    clearInventory
+    clearInventory,
 );
 
 ChatController.addCommand(
     'cleartoolbar',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_TOOLBAR, '/cleartoolbar'),
     PERMISSIONS.ADMIN,
-    clearToolbar
+    clearToolbar,
 );
 
 ChatController.addCommand(
     'clearequipment',
     LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_EQUIPMENT, '/clearequipment'),
     PERMISSIONS.ADMIN,
-    clearEquipment
+    clearEquipment,
 );
 
 function clearInventory(player: alt.Player) {
-    player.data.inventory = new Array(5);
-    for (let i = 0; i < player.data.inventory.length; i++) {
-        player.data.inventory[i] = [];
-    }
+    player.data.inventory = [];
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
 }

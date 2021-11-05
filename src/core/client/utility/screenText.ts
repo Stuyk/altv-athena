@@ -67,7 +67,7 @@ export class ScreenText {
      * @memberof ScreenText
      */
     static getTextHeight(scale: number, font: number): number {
-        return native.getTextScaleHeight(scale, font);
+        return native.getRenderedCharacterHeight(scale, font);
     }
 
     /**

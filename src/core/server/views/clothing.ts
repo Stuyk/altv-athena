@@ -84,7 +84,7 @@ class ClothingFunctions {
             }
 
             playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
-            didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot, openSlot.tab);
+            didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot);
         }
 
         if (!didGetAdded) {

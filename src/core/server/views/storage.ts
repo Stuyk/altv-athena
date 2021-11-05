@@ -185,7 +185,7 @@ export class StorageView {
 
         // Remove, Update Database, Add to Inventory, Emit to Player
         const itemClone = deepCloneObject<Item>(removedItem);
-        playerFuncs.inventory.inventoryAdd(player, itemClone, openSlot.slot, openSlot.tab);
+        playerFuncs.inventory.inventoryAdd(player, itemClone, openSlot.slot);
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
 
@@ -252,7 +252,7 @@ export class StorageView {
         }
 
         const itemClone = deepCloneObject<Item>(player.data.inventory[tab][index]);
-        if (!playerFuncs.inventory.inventoryRemove(player, player.data.inventory[tab][index].slot, tab)) {
+        if (!playerFuncs.inventory.inventoryRemove(player, player.data.inventory[tab][index].slot)) {
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }

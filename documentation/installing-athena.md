@@ -134,28 +134,40 @@ In the same directory as your `package.json` file. Create a file called `.env` a
 
 This file should not have **ANY EXTENSION** make sure it doesn't say it's a text document. You have to modify the extension of the file to make this work. Pick up a program like VSCode to do this. I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.
 
-**Bare Minimum Configuration**
+_Do not leave commented lines in your env file_
 
 **Configuration Options**
 
+**Optional: Discord Bot Integration**
+
 ```sh    
-# Optional Discord Bot Integration
 DISCORD_BOT=<DISCORD_BOT_KEY>
+```
 
-# Optional Discord Whitelist Role ID
+**Optional: Whitelist Role for Discord**
+
+A role id from the Discord application for your 'approved' role.
+
+```sh
 WHITELIST_ROLE=<SOME_ID>
+```
 
-# A connection string for MongoDB. If using localhost don't bother.
+**Optional: MongoDB External Connection**
+
+A connection string for MongoDB. If using localhost do not specify this.
+
+```sh
 MONGO_URL=<MONGODB_CONNECTION_STRING>
+```
 
-# List of Collections to Generate Besides the Default(s)
-# Collections are also known as tables.
+**Optional: MongoDB Collections**
+
+List of Collections to Generate Besides the Default(s)
+
+Collections are also known as tables.
+
+```
 MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
-
-# You must specify your localhost here with port :9111
-# Only used for development mode on a local machine.
-# Otherwise import 'webserver' as a resource.
-WEBSERVER_IP=127.0.0.1:9111
 ```
 
 ## Obtaining your Own IP
