@@ -15,6 +15,8 @@ import { CategoryData } from '../interface/CategoryData';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { distance2d } from '../../shared/utility/vector';
 
+const groundItems: Array<DroppedItem> = [];
+
 /**
  * Let's talk about Inventory Logic! Woo!
  *
@@ -36,20 +38,6 @@ import { distance2d } from '../../shared/utility/vector';
  */
 
 export class InventoryController {
-    static groundItems: Array<DroppedItem> = [];
-    static customItemRules: Array<Function> = [];
-
-    /**
-     * Item swap / equip / etc. rules that apply to an item swap, equip, etc.
-     * These are ran for all items, equips, etc.
-     * @static
-     * @param {Function} someFunction
-     * @memberof InventoryController
-     */
-    static addItemRuleCheck(someFunction: Function) {
-        InventoryController.customItemRules.push(someFunction);
-    }
-
     /**
      * Used when a player is moving one item from one space to another, equipping, etc.
      * @static
@@ -61,10 +49,11 @@ export class InventoryController {
      * @memberof InventoryController
      */
     static processItemMovement(player: alt.Player, selectedSlot: string, endSlot: string, hash: string | null): void {
-        if (!player || !player.valid) {
+        if (!player || !player.valid || !player.data) {
             return;
         }
 
+        // Do nothing. They're placing it in the same slot.
         if (selectedSlot === endSlot) {
             playerFuncs.sync.inventory(player);
             return;
@@ -73,25 +62,34 @@ export class InventoryController {
         // The data locations on `player.data` we are using.
         const endData = DataHelpers.find((dataInfo) => endSlot.includes(dataInfo.abbrv));
         const endSlotIndex = stripCategory(endSlot);
+
+        // This is just an array of function(s) that can be called.
+        // The data abbreviation is used to determine what functions should be called.
+        // Removes a lot of unnecessary duplicate code.
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
 
+        // If the item is being removed from the toolbar.
+        // Remove current weapons which are on the player.
         if (selectData.name === INVENTORY_TYPE.TOOLBAR && endData.name !== INVENTORY_TYPE.TOOLBAR) {
             player.removeAllWeapons();
         }
 
         // Handle Drop Ground
+        // Implies that an item is being dropped on the ground.
         if (endData.name === INVENTORY_TYPE.GROUND) {
             InventoryController.handleDropGround(player, selectedSlot);
             return;
         }
 
         // Pickup Item from Ground
+        // Implies that an item is being picked up from the ground.
         if (selectData.name === INVENTORY_TYPE.GROUND) {
             InventoryController.handlePickupGround(player, endData, endSlotIndex, hash);
             return;
         }
 
         // Check if this is a swap or stack.
+        // This will automatically save the player inventory and synchronize it.
         if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex)) {
             playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot);
             return;
@@ -105,6 +103,11 @@ export class InventoryController {
             return;
         }
 
+        // Before doing anything it checks that the item move is valid.
+        // Example(s) being:
+        // Can the item be dropped.
+        // Can the item be equipped as equipment.
+        // Can the item be moved to the Toolbar.
         if (!playerFuncs.inventory.allItemRulesValid(player, itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
@@ -189,7 +192,7 @@ export class InventoryController {
         }
 
         itemClone.hash = sha256Random(JSON.stringify(itemClone));
-        InventoryController.groundItems.push({
+        groundItems.push({
             gridSpace: player.gridSpace,
             item: itemClone,
             position: playerFuncs.utility.getPositionFrontOf(player, 1),
@@ -202,9 +205,7 @@ export class InventoryController {
     }
 
     static getDroppedItemsByGridSpace(dimension: number, gridSpace: number): Array<DroppedItem> {
-        return InventoryController.groundItems.filter(
-            (item) => item.gridSpace === gridSpace && item.dimension === dimension,
-        );
+        return groundItems.filter((item) => item.gridSpace === gridSpace && item.dimension === dimension);
     }
 
     static updateDroppedItemsAroundPlayer(player: alt.Player, updateOtherPlayers: boolean): void {
@@ -257,14 +258,14 @@ export class InventoryController {
             return;
         }
 
-        const index = InventoryController.groundItems.findIndex((gItem) => gItem.item.hash === hash);
+        const index = groundItems.findIndex((gItem) => gItem.item.hash === hash);
         if (index <= -1) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
-        const droppedItem: DroppedItem = { ...InventoryController.groundItems[index] };
+        const droppedItem: DroppedItem = { ...groundItems[index] };
         if (distance2d(player.pos, droppedItem.position) >= 10) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
@@ -285,7 +286,7 @@ export class InventoryController {
             return;
         }
 
-        const removedItems = InventoryController.groundItems.splice(index, 1);
+        const removedItems = groundItems.splice(index, 1);
         if (removedItems.length <= 0) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);

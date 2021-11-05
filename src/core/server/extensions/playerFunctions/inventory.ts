@@ -667,13 +667,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     }
 
     const selectedArray: Array<Item> = player.data[selectedSlotName];
-    let endArray;
-
-    if (selectedSlotName === endSlotName) {
-        endArray = selectedArray;
-    } else {
-        endArray = player.data[endSlotName];
-    }
+    const endArray: Array<Item> = selectedSlotName === endSlotName ? selectedArray : player.data[endSlotName];
 
     // Do Not Stack. Swap Instead.
     if (selectItem.item.name !== endItem.item.name) {
@@ -705,8 +699,14 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
             return;
         }
 
+        const newValue = endArray[endIndex].quantity + selectItem.item.quantity;
+        if (endArray[endIndex].maxStack && newValue > endArray[endIndex].maxStack) {
+            playerFuncs.sync.inventory(player);
+            return;
+        }
+
         // Add Selected Item to the Dropped on Item
-        endArray[endIndex].quantity += selectItem.item.quantity;
+        endArray[endIndex].quantity = newValue;
         selectedArray.splice(selectIndex, 1);
     }
 
