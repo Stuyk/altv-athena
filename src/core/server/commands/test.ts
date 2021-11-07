@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
+import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
+import { WorldNotificationController } from '../systems/worldNotifications';
 
 ChatController.addCommand(
     'testerrorscreen',
@@ -9,6 +11,27 @@ ChatController.addCommand(
     PERMISSIONS.ADMIN,
     (player: alt.Player) => {
         playerFuncs.emit.createErrorScreen(player, { duration: 5000, title: 'Test', text: 'Hello World!' });
+    },
+);
+
+ChatController.addCommand(
+    'testworldhelptext',
+    '/testworldhelptext - Shows temporary world help text',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        const uid = WorldNotificationController.addToPlayer(player, {
+            text: 'Hello World!',
+            type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
+            pos: { ...player.pos },
+        });
+
+        alt.setTimeout(() => {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            WorldNotificationController.removeFromPlayer(player, uid);
+        }, 5000);
     },
 );
 

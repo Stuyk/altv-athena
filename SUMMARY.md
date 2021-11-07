@@ -45,6 +45,7 @@
 -   [Adding Global Blips](documentation/scripting/adding-global-blips.md)
 -   [Adding Global Markers](documentation/scripting/adding-global-markers.md)
 -   [Adding Global Text Labels](documentation/scripting/adding-global-textlabels.md)
+-   [Adding Global World Notifications](documentation/scripting/adding-global-world-notifications.md)
 -   [Adding Interiors](documentation/scripting/adding-interiors.md)
 -   [Adding Factions](documentation/scripting/adding-factions.md)
 -   [Adding Items](documentation/scripting/adding-items.md)
