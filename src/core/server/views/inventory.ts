@@ -14,8 +14,19 @@ import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/CategoryData';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { distance2d } from '../../shared/utility/vector';
+import { INVENTORY_RULES } from '../../shared/enums/InventoryRules';
 
 const groundItems: Array<DroppedItem> = [];
+const ItemRules = {
+    [INVENTORY_RULES.FROM_EQUIPMENT_TO_INVENTORY]: [],
+    [INVENTORY_RULES.FROM_EQUIPMENT_TO_TOOLBAR]: [],
+    [INVENTORY_RULES.FROM_GROUND_TO_INVENTORY]: [],
+    [INVENTORY_RULES.FROM_INVENTORY_TO_EQUIPMENT]: [],
+    [INVENTORY_RULES.FROM_INVENTORY_TO_GROUND]: [],
+    [INVENTORY_RULES.FROM_INVENTORY_TO_TOOLBAR]: [],
+    [INVENTORY_RULES.FROM_TOOLBAR_TO_EQUIPMENT]: [],
+    [INVENTORY_RULES.FROM_TOOLBAR_TO_INVENTORY]: [],
+};
 
 /**
  * Let's talk about Inventory Logic! Woo!
@@ -108,7 +119,7 @@ export class InventoryController {
         // Can the item be dropped.
         // Can the item be equipped as equipment.
         // Can the item be moved to the Toolbar.
-        if (!playerFuncs.inventory.allItemRulesValid(player, itemClone, endData, endSlotIndex)) {
+        if (!playerFuncs.inventory.allItemRulesValid(itemClone, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -169,7 +180,7 @@ export class InventoryController {
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(player, itemClone, { name: 'ground' }, null)) {
+        if (!playerFuncs.inventory.allItemRulesValid(itemClone, { name: 'ground' }, null)) {
             playerFuncs.sync.inventory(player);
             return;
         }
@@ -272,7 +283,7 @@ export class InventoryController {
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(player, droppedItem.item, endData, endSlotIndex)) {
+        if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
             this.updateDroppedItemsAroundPlayer(player, false);
             return;

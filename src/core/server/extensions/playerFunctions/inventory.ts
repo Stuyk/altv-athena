@@ -739,14 +739,9 @@ function saveFields(player: alt.Player, fields: string[]): void {
  * @param {Item} item
  * @param {CategoryData} endSlot
  * @param {number} endSlotIndex
- * @return {*}  {boolean}
+ * @return {boolean}
  */
-function allItemRulesValid(
-    player: alt.Player,
-    item: Item,
-    endSlot: CategoryData,
-    endSlotIndex: number | null,
-): boolean {
+function allItemRulesValid(item: Item, endSlot: CategoryData, endSlotIndex: number | null): boolean {
     if (!item.behavior) {
         return true;
     }

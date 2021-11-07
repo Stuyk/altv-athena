@@ -45,6 +45,7 @@ import './systems/tick';
 import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
+import './systems/worldNotifications';
 
 // Utility
 import './utility/credits';

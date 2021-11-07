@@ -80,6 +80,7 @@ description: List of all the changes and current versions.
 + Changed Inventory for Players to Single Array
 + Added Conversion from legacy Inventory
 + Updated Inventory, Equipment, etc. functions.
++ Added World Notifications (3D Help Text) Functions
 ```
 
 ## 2.0.3
