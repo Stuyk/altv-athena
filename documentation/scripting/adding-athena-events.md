@@ -22,6 +22,10 @@ EventController.onPlayer(ATHENA_EVENTS_PLAYER.DIED, (player: alt.Player) => {
 EventController.onVehicle(ATHENA_EVENTS_VEHICLE.SPAWNED, (vehicle: alt.Vehicle) => {
     console.log(`A player owned vehicle was spawned.`);
 });
+
+EventController.onVehicle(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELLED, (vehicle: alt.Vehicle, dist: number) => {
+    console.log(`Vehicle has travelled ${dist}`);
+});
 ```
 
 Auto-completion in VSCode will assist you with the rest.

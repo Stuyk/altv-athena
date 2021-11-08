@@ -9,6 +9,7 @@ export enum ATHENA_EVENTS_VEHICLE {
     LOCK_STATE_CHANGE = 'athena:VehicleLockState',
     REPAIRED = 'athena:VehicleRepaired',
     SPAWNED = 'athena:VehicleSpawned',
+    DISTANCE_TRAVELED = 'athena:DistanceTraveled',
 }
 
 /**

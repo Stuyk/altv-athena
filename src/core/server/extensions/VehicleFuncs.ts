@@ -7,6 +7,7 @@ import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { Collections } from '../interface/DatabaseCollections';
 import { sha256Random } from '../utility/encryption';
@@ -160,6 +161,19 @@ export default class VehicleFuncs {
             vehicle.data.fuel = 100;
         }
 
+        // Emits the distance travelled from one point to another.
+        // Does not emit if distance is less than 5
+        if (!vehicle.lastPosition) {
+            vehicle.lastPosition = vehicle.pos;
+        }
+
+        const dist = distance2d(vehicle.pos, vehicle.lastPosition);
+        if (dist >= 5) {
+            alt.emit(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
+            vehicle.lastPosition = vehicle.pos;
+        }
+
+        // Do nothing with the fuel if the engine is off.
         if (!vehicle.engineOn) {
             vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
             return;

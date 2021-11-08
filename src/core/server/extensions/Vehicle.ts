@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
+import { Vector3 } from '../../shared/interfaces/Vector';
 
 declare module 'alt-server' {
     export interface Vehicle {
@@ -85,5 +86,14 @@ declare module 'alt-server' {
          * @memberof Vehicle
          */
         isRefueling?: boolean;
+
+        /**
+         * The last position of the vehicle.
+         * This is only defined for vehicles that use fuel.
+         * As well as vehicles that can be saved.
+         * @type {Vector3}
+         * @memberof Vehicle
+         */
+        lastPosition?: Vector3;
     }
 }
