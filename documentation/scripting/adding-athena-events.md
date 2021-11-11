@@ -23,7 +23,7 @@ EventController.onVehicle(ATHENA_EVENTS_VEHICLE.SPAWNED, (vehicle: alt.Vehicle) 
     console.log(`A player owned vehicle was spawned.`);
 });
 
-EventController.onVehicle(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELLED, (vehicle: alt.Vehicle, dist: number) => {
+EventController.onVehicle(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, (vehicle: alt.Vehicle, dist: number) => {
     console.log(`Vehicle has travelled ${dist}`);
 });
 ```

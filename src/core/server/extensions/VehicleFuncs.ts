@@ -145,7 +145,7 @@ export default class VehicleFuncs {
      * @param {alt.Vehicle} vehicle
      * @memberof VehicleFuncs
      */
-    static async updateFuel(vehicle: alt.Vehicle) {
+    static async updateFuel(vehicle: alt.Vehicle, timeBetweenUpdates: number = 5000) {
         // No data present on vehicle. Don't worry about it.
         if (!vehicle?.data?.behavior) {
             return;
@@ -169,6 +169,10 @@ export default class VehicleFuncs {
 
         const dist = distance2d(vehicle.pos, vehicle.lastPosition);
         if (dist >= 5) {
+            // const potentialSpeed = (dist / timeBetweenUpdates) * 1000;
+            // const feetPerSecond = potentialSpeed * 1.4666666667;
+            // const distanceTraveled = (potentialSpeed / 3600) * timeBetweenUpdates;
+
             alt.emit(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
             vehicle.lastPosition = vehicle.pos;
         }
@@ -268,7 +272,7 @@ export default class VehicleFuncs {
             VehicleFuncs.save(vehicle, { garageIndex: null });
         }
 
-        VehicleFuncs.updateFuel(vehicle);
+        VehicleFuncs.updateFuel(vehicle, 5000);
 
         // Synchronize Ownership
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);

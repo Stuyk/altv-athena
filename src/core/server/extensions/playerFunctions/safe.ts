@@ -87,6 +87,10 @@ function addWater(player: alt.Player, value: number) {
 }
 
 function adjustAttribute(player: alt.Player, value: number, attributeName: string) {
+    if (typeof value === 'string') {
+        value = parseFloat(value);
+    }
+
     if (player.data[attributeName] === undefined || player.data[attributeName] === null) {
         player.data[attributeName] = 100;
     }
@@ -117,5 +121,5 @@ export default {
     addHealth,
     addWater,
     setPosition,
-    setDimension
+    setDimension,
 };

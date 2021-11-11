@@ -60,7 +60,7 @@ function handlePing(player: alt.Player): void {
     if (player.vehicle && player.vehicle.driver === player) {
         if (!player.vehicle.nextUpdate || Date.now() > player.vehicle.nextUpdate) {
             player.vehicle.nextUpdate = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_UPDATES;
-            VehicleFuncs.updateFuel(player.vehicle);
+            VehicleFuncs.updateFuel(player.vehicle, timeBetweenPings);
         }
 
         if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {

@@ -9,7 +9,14 @@ import {
 } from '../core/shared/interfaces/IStream';
 import { Vector3 } from '../core/shared/interfaces/Vector';
 
-const main = SockJS.createServer();
+let main;
+
+if (SockJS['default']) {
+    main = SockJS['default'].createServer();
+} else {
+    main = SockJS.createServer();
+}
+
 const server = http.createServer();
 const StreamData: IStream = {};
 const StreamRange: { [key: string]: number } = {};
