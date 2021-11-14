@@ -20,30 +20,30 @@ async function addhouse(player: alt.Player) {
                 desc: 'Name of Property',
                 placeholder: 'Property Name',
                 type: InputOptionType.TEXT,
-                error: 'Must specify property name.'
+                error: 'Must specify property name.',
             },
             {
                 id: 'price',
                 desc: 'Price of Property',
                 placeholder: '5000...',
                 type: InputOptionType.NUMBER,
-                error: 'Must specify property value.'
+                error: 'Must specify property value.',
             },
             {
                 id: 'interior',
                 desc: 'Position of Property Interior. As JSON String.',
                 placeholder: '{ "x": 0, "y": 0, "z": 0 }',
                 type: InputOptionType.TEXT,
-                error: 'Must specify property position.'
+                error: 'Must specify property position.',
             },
             {
                 id: 'ipl',
                 desc: 'Optional IPL to load on enter if necessary.',
                 placeholder: 'Google it.',
-                type: InputOptionType.TEXT
-            }
+                type: InputOptionType.TEXT,
+            },
         ],
-        serverEvent: 'cmd:Create:House'
+        serverEvent: 'cmd:Create:House',
     };
 
     playerFuncs.emit.inputMenu(player, menu);
@@ -96,7 +96,7 @@ alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult
             INTERIOR_SYSTEM.HAS_OWNER |
             INTERIOR_SYSTEM.HAS_PRICE |
             INTERIOR_SYSTEM.HAS_STORAGE,
-        type: INTERIOR_TYPES.HOUSE
+        type: INTERIOR_TYPES.HOUSE,
     };
 
     if (ipl && ipl.value) {

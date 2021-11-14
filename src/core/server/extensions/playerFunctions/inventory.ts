@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
 import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentTypes';
+import { INVENTORY_RULES } from '../../../shared/enums/InventoryRules';
+import { SLOT_TYPE } from '../../../shared/enums/InventorySlotType';
 import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
 import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
@@ -7,6 +9,7 @@ import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/CategoryData';
 import { stripCategory } from '../../utility/category';
+import { InventoryController } from '../../views/inventory';
 import { playerFuncs } from '../Player';
 
 const MAX_EQUIPMENT_SLOTS = 11; // This really should not be changed. Ever.
@@ -672,12 +675,14 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     // Do Not Stack. Swap Instead.
     if (selectItem.item.name !== endItem.item.name) {
         // Need to verify that each slot follows the rules for the slot it is going into.
-        if (!allItemRulesValid(player, selectItem.item, { name: endSlotName }, newEndSlot)) {
+        // Handles rules for the end item slot.
+        if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
             playerFuncs.sync.inventory(player);
             return;
         }
 
-        if (!allItemRulesValid(player, endItem.item, { name: selectedSlotName }, newSelectSlot)) {
+        // Handles rules for the selected item slot.
+        if (!allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
             playerFuncs.sync.inventory(player);
             return;
         }

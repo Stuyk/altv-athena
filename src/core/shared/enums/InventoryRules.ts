@@ -11,4 +11,10 @@ export enum INVENTORY_RULES {
     // Equipment <-> Toolbar
     FROM_EQUIPMENT_TO_TOOLBAR = 'from-equipment-to-toolbar',
     FROM_TOOLBAR_TO_EQUIPMENT = 'from-toolbar-to-equipment',
+    // Equipment <-> Ground
+    FROM_EQUIPMENT_TO_GROUND = 'from-equipment-to-ground',
+    FROM_GROUND_TO_EQUIPMENT = 'from-ground-to-equipment',
+    // Toolbar <-> Ground
+    FROM_TOOLBAR_TO_GROUND = 'from-toolbar-to-ground',
+    FROM_GROUND_TO_TOOLBAR = 'from-ground-to-toolbar',
 }
