@@ -27,6 +27,10 @@ async function convert(player: alt.Player): Promise<void> {
         return;
     }
 
+    if (!player.data.inventory) {
+        return;
+    }
+
     // Not a legacy inventory system. Ignoring.
     if (Array.isArray(player.data.inventory) && !Array.isArray(player.data.inventory[0])) {
         return;
