@@ -4,6 +4,7 @@ import CharacterSelect from './characterSelect/CharacterSelect.vue';
 import Designs from './designs/Designs.vue';
 import Login from './login/Login.vue';
 import Atm from './atm/Atm.vue';
+import Inventory from './inventory/Inventory.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -14,6 +15,7 @@ const componentList = {
     Designs: shallowRef(Designs),
     Login: shallowRef(Login),
     Atm: shallowRef(Atm),
+    Inventory: shallowRef(Inventory),
 };
 
 function generateComponentList(): Array<{ name: string; component: unknown }> {
