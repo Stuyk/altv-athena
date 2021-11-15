@@ -144,7 +144,7 @@ function syncedMeta(player: alt.Player): void {
  * @memberof SyncPrototype
  */
 function time(player: alt.Player): void {
-    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.hour, World.minute);
+    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.getWorldHour(), World.getWorldMinute());
 }
 
 /**
@@ -154,6 +154,7 @@ function time(player: alt.Player): void {
 function weather(player: alt.Player): void {
     player.gridSpace = World.getGridSpace(player);
     player.currentWeather = World.getWeatherByGrid(player.gridSpace);
+
     emit.meta(player, 'gridSpace', player.gridSpace);
     alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, player.currentWeather);
 }

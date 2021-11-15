@@ -82,6 +82,8 @@ description: List of all the changes and current versions.
 + Updated Inventory, Equipment, etc. functions.
 + Added World Notifications (3D Help Text) Functions
 + Added Custom Inventory Rule Support for All Inventory Action(s)
++ Added Weather Override Commands and Clear Command
++ Added Time Override Commands and Clear Command
 ```
 
 ## 2.0.3

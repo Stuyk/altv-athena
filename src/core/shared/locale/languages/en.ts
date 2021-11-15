@@ -39,7 +39,6 @@ export default {
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK]: `_%_ - Toggle the vehicle lock`,
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR]: `_%_ - [0-5] - Toggle a vehicle door`,
     [LOCALE_KEYS.COMMAND_TOGGLE_ENGINE]: `_%_ - Toggle the vehicle engine`,
-    [LOCALE_KEYS.COMMAND_UPDATE_WEATHER]: `_%_ - Forces synchronization of weather`,
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
     [LOCALE_KEYS.COMMAND_WANTED]: `_%_ [player_id] [stars] - Set player wanted level`,
     [LOCALE_KEYS.COMMAND_WHISPER]: `_%_ [player_id][message] - Privately whisper to a nearby player`,
@@ -50,6 +49,10 @@ export default {
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER]: `Command is not permitted for your character.`,
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN]: `Command is not permitted for your account.`,
     [LOCALE_KEYS.COMMAND_NOT_VALID]: `_%_ is not a valid command.`,
+    [LOCALE_KEYS.COMMAND_SET_WEATHER]: `_%_ [weather name] - Override all region weathers`,
+    [LOCALE_KEYS.COMMAND_CLEAR_WEATHER]: `_%_ - Turn off weather override`,
+    [LOCALE_KEYS.COMMAND_SET_TIME]: `_%_ [hour] - Override time to this hour`,
+    [LOCALE_KEYS.COMMAND_CLEAR_TIME]: `_%_ - Clear override for time`,
     // Cannot
     [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
@@ -86,7 +89,7 @@ export default {
     [LOCALE_KEYS.INTERIOR_DOOR_LOCKED]: `Door is locked`,
     [LOCALE_KEYS.INTERIOR_PURCHASED]: `Purchased property with id _%_ for $_%_.`,
     [LOCALE_KEYS.INTERIOR_SOLD]: `Sold property with id _%_ for $_%_.`,
-    [LOCALE_KEYS.INTERIOR_NO_STORAGE]: `Interior does not have storage.`,    
+    [LOCALE_KEYS.INTERIOR_NO_STORAGE]: `Interior does not have storage.`,
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction

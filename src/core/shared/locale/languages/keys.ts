@@ -42,6 +42,10 @@ export const LOCALE_KEYS = {
     COMMAND_NOT_PERMITTED_CHARACTER: `command-not-permitted-character`,
     COMMAND_NOT_PERMITTED_ADMIN: `command-not-permitted-account`,
     COMMAND_NOT_VALID: `command-not-valid`,
+    COMMAND_SET_WEATHER: `command-set-weather`,
+    COMMAND_CLEAR_WEATHER: `command-clear-weather`,
+    COMMAND_SET_TIME: `command-set-time`,
+    COMMAND_CLEAR_TIME: `command-clear-time`,
     // Cannot
     CANNOT_CHAT_WHILE_DEAD: `cannot-chat-while-dead`,
     CANNOT_FIND_PLAYER: `cannot-find-player`,
@@ -172,5 +176,5 @@ export const LOCALE_KEYS = {
     WEBVIEW_CLOTHING: 'webview-clothing',
     WEBVIEW_LOGIN: 'webview-login',
     WEBVIEW_GARAGE: 'webview-garage',
-    WEBVIEW_FACTION: 'webview-faction'
+    WEBVIEW_FACTION: 'webview-faction',
 };

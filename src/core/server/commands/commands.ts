@@ -22,11 +22,12 @@ import './setFood';
 import './setHealth';
 import './setWater';
 import './test';
-import './updateweather';
+import './time';
 import './vehicle';
 import './waypointTeleport';
 import './wanted';
 import './weapon';
+import './weather';
 import './whitelist';
 
 alt.emit(SYSTEM_EVENTS.COMMANDS_LOADED);
