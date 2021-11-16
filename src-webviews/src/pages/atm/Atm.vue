@@ -166,6 +166,8 @@ export default defineComponent({
         }
     },
     unmounted() {
+        document.removeEventListener('keyup', this.handlePress);
+
         if ('alt' in window) {
             alt.off(`${ComponentName}:Update`, this.updateBalances);
             alt.off(`${ComponentName}:SetLocale`, this.setLocales);

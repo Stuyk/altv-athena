@@ -7,9 +7,7 @@
                     :id="`e-${index}`"
                     :class="getItemClass(item, index, equipmentSize)"
                     :key="index"
-                    v-on="
-                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
-                    "
+                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -37,9 +35,7 @@
                     :key="index"
                     :id="`t-${index}`"
                     :class="!item ? { 'is-null-item': true } : { item: true }"
-                    v-on="
-                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
-                    "
+                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -70,9 +66,7 @@
                     :id="`i-${index}`"
                     :key="index"
                     :class="getItemClass(item, index, inventorySize)"
-                    v-on="
-                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
-                    "
+                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
                 >
                     <template v-if="item">
                         <div class="icon">
@@ -106,6 +100,9 @@ export default defineComponent({
     components: {
         Icon,
     },
+    props: {
+        emit: Function,
+    },
     // Used to define state
     data() {
         return {
@@ -135,6 +132,19 @@ export default defineComponent({
     },
     // Used to define functions you can call with 'this.x'
     methods: {
+        handleClose(keyPress) {
+            // Escape && 'i'
+            if (keyPress.keyCode !== 27 && keyPress.keyCode !== 73) {
+                return;
+            }
+
+            document.removeEventListener('keyup', this.handleClose);
+            setTimeout(() => {
+                if ('alt' in window) {
+                    alt.emit(`${ComponentName}:Close`);
+                }
+            }, 50);
+        },
         getCurrentWeight() {
             let weight = 0;
 
@@ -238,19 +248,6 @@ export default defineComponent({
         },
         stripCategory(value) {
             return parseInt(value.replace(/.-/gm, ''));
-        },
-        handleClose(keyPress) {
-            if (keyPress.keyCode !== 27) {
-                return;
-            }
-
-            document.removeEventListener('keyup', this.handleClose);
-
-            setTimeout(() => {
-                if ('alt' in window) {
-                    alt.emit(`${ComponentName}:Close`);
-                }
-            }, 50);
         },
         setPreviewDisabled(isDisabled: boolean) {
             this.disablePreview = isDisabled;
@@ -535,6 +532,8 @@ export default defineComponent({
     },
     // Called when the page is loaded.
     mounted() {
+        document.addEventListener('keyup', this.handleClose);
+
         if (!('alt' in window)) {
             // Normal equipment is 11. 12 is to make it even.
             this.equipment = new Array(12).fill(null);
@@ -649,6 +648,8 @@ export default defineComponent({
     },
     // Called when the page is unloaded.
     unmounted() {
+        document.removeEventListener('keyup', this.handleClose);
+
         // Unbind Events from the Mounted Function
         if ('alt' in window) {
             alt.off(`${ComponentName}:Toolbar`, this.updateToolbar);
@@ -716,7 +717,7 @@ export default defineComponent({
 
 .inventory-grid {
     max-height: calc(100vh - 24px);
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 5px !important;
     box-sizing: border-box;
