@@ -179,6 +179,10 @@ export default defineComponent({
             const inventory = new Array(sizeToUse).fill(null);
 
             for (let i = 0; i < items.length; i++) {
+                if (!items[i]) {
+                    continue;
+                }
+
                 const slot = items[i].slot;
                 inventory[slot] = items[i];
             }
@@ -411,11 +415,15 @@ export default defineComponent({
 
             this.clonedElement.remove();
 
+            // selectElement.style = this.dragAndDrop.selectedElement.style;
             const selectElement = document.getElementById(this.dragAndDrop.itemIndex);
             Object.keys(this.dragAndDrop.selectedElement.style).forEach((key) => {
                 const actualKey = parseInt(key);
                 if (isNaN(actualKey)) {
                     selectElement.style[key] = this.dragAndDrop.selectedElement.style[key];
+                } else {
+                    const nameAsKey = this.dragAndDrop.selectedElement.style[key];
+                    selectElement.style[nameAsKey] = '';
                 }
             });
 
@@ -520,6 +528,9 @@ export default defineComponent({
             }
 
             return 'toolbar';
+        },
+        capitalizeFirst(value) {
+            return value.charAt(0).toUpperCase() + value.slice(1);
         },
     },
     // Called when the page is loaded.

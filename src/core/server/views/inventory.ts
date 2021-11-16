@@ -233,17 +233,21 @@ export class InventoryController {
             return;
         }
 
-        const rules = InventoryController.getInventoryRule(selectData, endData);
-        const selectedResult = await InventoryController.verifyRules(
-            rules.selected,
-            itemClone,
-            selectSlotIndex,
-            endSlotIndex,
-        );
+        // Only run rules on different inventory, equipment, etc. movements.
+        // Will never run rules on inventory to inventory movement.
+        if (selectData.abbrv !== endData.abbrv) {
+            const rules = InventoryController.getInventoryRule(selectData, endData);
+            const selectedResult = await InventoryController.verifyRules(
+                rules.selected,
+                itemClone,
+                selectSlotIndex,
+                endSlotIndex,
+            );
 
-        if (!selectedResult) {
-            playerFuncs.sync.inventory(player);
-            return;
+            if (!selectedResult) {
+                playerFuncs.sync.inventory(player);
+                return;
+            }
         }
 
         // Check if this is a swap or stack.
@@ -252,18 +256,20 @@ export class InventoryController {
         // This will automatically save the player inventory and synchronize it.
         if (endData.emptyCheck && !endData.emptyCheck(player, endSlotIndex)) {
             // End Data Swaps
-            const endItemClone: Item = endData.getItem(player, endSlotIndex);
-            const rules = InventoryController.getInventoryRule(selectData, endData);
-            const selectedResult = await InventoryController.verifyRules(
-                rules.selected,
-                endItemClone,
-                endSlotIndex,
-                selectSlotIndex,
-            );
+            if (selectData.abbrv !== endData.abbrv) {
+                const endItemClone: Item = endData.getItem(player, endSlotIndex);
+                const rules = InventoryController.getInventoryRule(selectData, endData);
+                const selectedResult = await InventoryController.verifyRules(
+                    rules.selected,
+                    endItemClone,
+                    endSlotIndex,
+                    selectSlotIndex,
+                );
 
-            if (!selectedResult) {
-                playerFuncs.sync.inventory(player);
-                return;
+                if (!selectedResult) {
+                    playerFuncs.sync.inventory(player);
+                    return;
+                }
             }
 
             playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot);
