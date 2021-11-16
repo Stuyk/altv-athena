@@ -10,7 +10,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -19,8 +19,8 @@ import { waitForFalse } from '../utility/wait';
 import { BaseHUD } from './hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
-const url = `http://assets/webview/client/inventory/index.html`;
-let view: View;
+const PAGE_NAME = 'Inventory';
+
 let camera;
 let lastDroppedItems: Array<DroppedItem> = [];
 let drawInterval: number = null;
@@ -48,13 +48,16 @@ export class InventoryController implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, false);
-        view.on('inventory:Update', InventoryController.ready);
-        view.on('inventory:Use', InventoryController.handleUse);
-        view.on('inventory:Process', InventoryController.handleProcess);
-        view.on('inventory:Close', InventoryController.close);
-        view.on('inventory:Split', InventoryController.handleSplit);
-        view.on('inventory:Pickup', InventoryController.handlePickup);
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Update`, InventoryController.ready);
+        view.on(`${PAGE_NAME}:Use`, InventoryController.handleUse);
+        view.on(`${PAGE_NAME}:Process`, InventoryController.handleProcess);
+        view.on(`${PAGE_NAME}:Close`, InventoryController.close);
+        view.on(`${PAGE_NAME}:Split`, InventoryController.handleSplit);
+        view.on(`${PAGE_NAME}:Pickup`, InventoryController.handlePickup);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
     }
@@ -68,42 +71,30 @@ export class InventoryController implements ViewModel {
     }
 
     static async ready(): Promise<void> {
-        if (!view) {
-            return;
-        }
-
         Object.keys(keyFunctions).forEach((key) => {
             keyFunctions[key]();
         });
 
         InventoryController.processClosestGroundItems();
         const didRenderCamera = await InventoryController.showPreview();
-        view.emit('inventory:DisablePreview', !didRenderCamera ? true : false);
-        view.emit('inventory:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:DisablePreview`, !didRenderCamera ? true : false);
+        view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
     }
 
-    static updateInventory(): void {
-        if (!view) {
-            return;
-        }
-
-        view.emit('inventory:Inventory', alt.Player.local.meta.inventory);
+    static async updateInventory() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Inventory`, alt.Player.local.meta.inventory);
     }
 
-    static async updateEquipment(): Promise<void> {
-        if (!view) {
-            return;
-        }
-
-        view.emit('inventory:Equipment', alt.Player.local.meta.equipment);
+    static async updateEquipment() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Equipment`, alt.Player.local.meta.equipment);
     }
 
-    static updateToolbar(): void {
-        if (!view) {
-            return;
-        }
-
-        view.emit('inventory:Toolbar', alt.Player.local.meta.toolbar);
+    static async updateToolbar() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Toolbar`, alt.Player.local.meta.toolbar);
     }
 
     static handleUse(selectedSlot: string, tab: number): void {
@@ -114,25 +105,31 @@ export class InventoryController implements ViewModel {
         alt.emitServer(View_Events_Inventory.Split, selectedSlot, tab, amount);
     }
 
-    static close(): void {
+    static async close() {
         native.clearFocus();
-        alt.toggleGameControls(true);
         native.renderScriptCams(false, false, 255, true, false, 0);
         native.setCamActive(camera, false);
         native.destroyAllCams(true);
         native.setEntityVisible(alt.Player.local.scriptID, true, false);
+
+        alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
-        if (!view) {
-            return;
-        }
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Update`, InventoryController.ready);
+        view.off(`${PAGE_NAME}:Use`, InventoryController.handleUse);
+        view.off(`${PAGE_NAME}:Process`, InventoryController.handleProcess);
+        view.off(`${PAGE_NAME}:Close`, InventoryController.close);
+        view.off(`${PAGE_NAME}:Split`, InventoryController.handleSplit);
+        view.off(`${PAGE_NAME}:Pickup`, InventoryController.handlePickup);
 
-        view.close();
-        view = null;
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
     }
 
     static processMetaChange(key: string, value: any, oldValue: any): void {
-        // Weed out the keys we don't care about.
+        // Weed out the keys we don`t care about.
         if (!validKeys.includes(key)) {
             return;
         }
@@ -153,26 +150,23 @@ export class InventoryController implements ViewModel {
         }
 
         if (lastDroppedItems.length >= 1) {
-            drawInterval = Timer.createInterval(InventoryController.drawItemMarkers, 0, 'inventory.ts');
-        }
-
-        if (!view) {
-            return;
+            drawInterval = Timer.createInterval(InventoryController.drawItemMarkers, 0, `${PAGE_NAME}.ts`);
         }
 
         alt.setTimeout(InventoryController.processClosestGroundItems, 0);
     }
 
-    static processClosestGroundItems() {
+    static async processClosestGroundItems() {
         let itemsNearPlayer = lastDroppedItems.filter(
-            (item) => distance2d(item.position, alt.Player.local.pos) <= SHARED_CONFIG.MAX_PICKUP_RANGE
+            (item) => distance2d(item.position, alt.Player.local.pos) <= SHARED_CONFIG.MAX_PICKUP_RANGE,
         );
 
         if (alt.Player.local.vehicle) {
             itemsNearPlayer = [];
         }
 
-        view.emit('inventory:Ground', itemsNearPlayer);
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Ground`, itemsNearPlayer);
     }
 
     static drawItemMarkers() {
@@ -181,14 +175,14 @@ export class InventoryController implements ViewModel {
             const newPosition = {
                 x: groundItem.position.x,
                 y: groundItem.position.y,
-                z: groundItem.position.z - 0.98
+                z: groundItem.position.z - 0.98,
             };
 
             drawMarker(
                 28,
                 newPosition as alt.Vector3,
                 new alt.Vector3(0.25, 0.25, 0.25),
-                new alt.RGBA(0, 181, 204, 200)
+                new alt.RGBA(0, 181, 204, 200),
             );
         }
     }
@@ -206,7 +200,7 @@ export class InventoryController implements ViewModel {
         const fwdPos = {
             x: pos.x + fwd.x * 1.75,
             y: pos.y + fwd.y * 1.75,
-            z: pos.z + 0.2
+            z: pos.z + 0.2,
         };
 
         camera = native.createCamWithParams(
@@ -219,7 +213,7 @@ export class InventoryController implements ViewModel {
             0,
             fov,
             true,
-            0
+            0,
         );
 
         native.pointCamAtEntity(camera, alt.Player.local.scriptID, 0, 0, 0, false);
@@ -236,5 +230,5 @@ alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.registerKeybinds);
 const keyFunctions = {
     inventory: InventoryController.updateInventory,
     toolbar: InventoryController.updateToolbar,
-    equipment: InventoryController.updateEquipment
+    equipment: InventoryController.updateEquipment,
 };

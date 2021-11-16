@@ -7,7 +7,9 @@
                     :id="`e-${index}`"
                     :class="getItemClass(item, index, equipmentSize)"
                     :key="index"
-                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                    v-on="
+                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -16,7 +18,7 @@
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
                             <div class="weight" v-if="item && item.data && item.data.weight">
-                                {{ item.data.weight }}u
+                                {{ item.data.weight }}{{ unitSuffix }}
                             </div>
                         </div>
                     </template>
@@ -35,7 +37,9 @@
                     :key="index"
                     :id="`t-${index}`"
                     :class="!item ? { 'is-null-item': true } : { item: true }"
-                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                    v-on="
+                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -44,7 +48,7 @@
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
                             <div class="weight" v-if="item && item.data && item.data.weight">
-                                {{ item.data.weight }}u
+                                {{ item.data.weight }}{{ unitSuffix }}
                             </div>
                         </div>
                     </template>
@@ -66,19 +70,23 @@
                     :id="`i-${index}`"
                     :key="index"
                     :class="getItemClass(item, index, inventorySize)"
-                    v-on="!item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: setItemInfo }"
+                    v-on="
+                        !item ? null : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon">
                             <img :src="`../../assets/icons/${item.icon}.png`" />
                         </div>
                         <div class="consume" v-if="item && item.data && item.data.event">
-                            <v-icon color="light-blue accent-3" small>icon-arrow-down</v-icon>
+                            <Icon class="yellow--text" :size="18" icon="icon-arrow-down"></Icon>
                         </div>
                         <div class="quantity">{{ item.quantity }}x</div>
-                        <div class="weight" v-if="item && item.data && item.data.weight">{{ item.data.weight }}u</div>
+                        <div class="weight" v-if="item && item.data && item.data.weight">
+                            {{ item.data.weight }}{{ unitSuffix }}
+                        </div>
                     </template>
-                    <template v-if="!item && index >= size" />
+                    <!-- <template v-if="!item && index >= inventorySize" /> -->
                 </div>
             </div>
         </div>
@@ -88,21 +96,40 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import DefaultLocales from './utility/defaultLocale';
+import Icon from '../../components/Icon.vue';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
 const ComponentName = 'Inventory';
 export default defineComponent({
     name: ComponentName,
+    components: {
+        Icon,
+    },
     // Used to define state
     data() {
         return {
+            // Item Movement Data / Dragging
+            x: 0,
+            y: 0,
+            itemInfo: null,
+            dragAndDrop: {
+                shiftX: null,
+                shiftY: null,
+                clonedElement: null,
+                itemIndex: null,
+                selectedElement: null,
+            },
+            // Default Configuration(s) for Previews
             inventorySize: 28,
             equipmentSize: 11,
             toolbarSize: 4,
+            // Data to use for display
             inventory: [],
             equipment: [],
             toolbar: [],
+            // Default weight unit suffix.
+            unitSuffix: 'u',
             locales: DefaultLocales,
         };
     },
@@ -190,6 +217,310 @@ export default defineComponent({
 
             this.toolbar = toolbar;
         },
+        // Used to populate the item that has been hovered over.
+        selectItemInfo(e) {
+            if (this.dragging) {
+                return;
+            }
+
+            if (!e || !e.target || !e.target.id) {
+                return;
+            }
+
+            this.itemInfo = e.target.id;
+        },
+        clearItemInfo() {
+            this.itemInfo = null;
+        },
+        stripCategory(value) {
+            return parseInt(value.replace(/.-/gm, ''));
+        },
+        handleClose(keyPress) {
+            if (keyPress.keyCode !== 27) {
+                return;
+            }
+
+            document.removeEventListener('keyup', this.handleClose);
+
+            setTimeout(() => {
+                if ('alt' in window) {
+                    alt.emit(`${ComponentName}:Close`);
+                }
+            }, 50);
+        },
+        setPreviewDisabled(isDisabled: boolean) {
+            this.disablePreview = isDisabled;
+        },
+        isFlagEnabled(flags: number, flagToCheck: number) {
+            let currentFlags = flags;
+            let currentFlagToCheck = flagToCheck;
+
+            if ((currentFlags & currentFlagToCheck) !== 0) {
+                return true;
+            }
+
+            return false;
+        },
+        setLocales(locales: any) {
+            this.locales = locales;
+        },
+        // Functionality for Moving / Dragging Items
+        selectItem(e, index: number) {
+            if (this.dragging) {
+                return;
+            }
+
+            // Right-Click
+            if (e.button === 2) {
+                if (!e.target.id || e.target.id === '') {
+                    return;
+                }
+
+                if (e.shiftKey) {
+                    const actualSlot = this.stripCategory(e.target.id);
+                    let element;
+
+                    if (e.target.id.includes('i-')) {
+                        element = this.inventory.find((i) => i && i.slot === actualSlot);
+                    }
+
+                    if (e.target.id.includes('e-')) {
+                        element = this.equipment.find((i) => i && i.slot === actualSlot);
+                    }
+
+                    if (e.target.id.includes('t-')) {
+                        element = this.toolbar.find((i) => i && i.slot === actualSlot);
+                    }
+
+                    if (!element) {
+                        return;
+                    }
+
+                    // Check if there is more than 1 in the stack.
+                    if (!element.quantity || element.quantity <= 1) {
+                        return;
+                    }
+
+                    // 2 is the flag for stackable items
+                    if (!this.isFlagEnabled(element.behavior, 2)) {
+                        return;
+                    }
+
+                    this.split = {
+                        slot: e.target.id,
+                        item: element,
+                    };
+
+                    this.splitAmount = Math.floor(element.quantity / 2);
+                    return;
+                }
+
+                if (!('alt' in window)) {
+                    return;
+                }
+
+                alt.emit('play:Sound', 'YES', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+
+                if (e.target.id.includes('g-')) {
+                    alt.emit(`${ComponentName}:Pickup`, e.target.dataset.hash);
+                    return;
+                }
+
+                alt.emit(`${ComponentName}:Use`, e.target.id);
+                return;
+            }
+
+            // Start Dragging Process
+            this.dragging = true;
+
+            // Calculate Element Size
+            const element = document.getElementById(e.target.id);
+
+            if (!element) {
+                this.dragging = false;
+                return;
+            }
+
+            this.dragAndDrop.shiftX = e.clientX - element.getBoundingClientRect().left;
+            this.dragAndDrop.shiftY = e.clientY - element.getBoundingClientRect().top;
+            this.dragAndDrop.selectedElement = { style: element.style, classList: element.classList.toString() };
+            this.dragAndDrop.itemIndex = e.target.id;
+
+            // Append Cloned Element to Page and Modify Style
+            const clonedElement = element.cloneNode(true);
+            clonedElement['id'] = `cloned-${element.id}`;
+            document.body.append(clonedElement);
+            this.clonedElement = document.getElementById(`cloned-${element.id}`);
+            this.clonedElement.classList.add('item-clone');
+            this.clonedElement.classList.add('no-animation');
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
+            this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
+
+            // Modify Current Element
+            element.style.pointerEvents = 'none';
+            element.style.setProperty('border', '2px dashed rgba(255, 255, 255, 0.5)', 'important');
+            element.style.setProperty('opacity', '0.2', 'important');
+            element.classList.add('grey', 'darken-4');
+            element.classList.remove('grey', 'darken-3');
+
+            // Toggle Event Listeners
+            document.addEventListener('mouseup', this.dropItem);
+            document.addEventListener('mouseover', this.mouseOver);
+            document.addEventListener('mousemove', this.updatePosition); // This calls UpdatePosition
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'TOGGLE_ON', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        updatePosition(e) {
+            this.clonedElement.style.left = `${e.clientX - this.dragAndDrop.shiftX}px`;
+            this.clonedElement.style.top = `${e.clientY - this.dragAndDrop.shiftY}px`;
+        },
+        mouseOver(e) {
+            if (this.lastHoverID) {
+                const element = document.getElementById(this.lastHoverID);
+                element.style.removeProperty('border');
+                this.lastHoverID = null;
+            }
+
+            if (!e || !e.target || !e.target.id || e.target.id === '') {
+                return;
+            }
+
+            if (this.lastHoverID !== e.target.id) {
+                const element = document.getElementById(e.target.id);
+                element.style.setProperty('border', '2px dashed white', 'important');
+                this.lastHoverID = e.target.id;
+            }
+        },
+        async dropItem(e) {
+            this.dragging = false;
+
+            document.removeEventListener('mouseover', this.mouseOver);
+            document.removeEventListener('mouseup', this.dropItem);
+            document.removeEventListener('mousemove', this.updatePosition);
+
+            if (this.lastHoverID) {
+                const element = document.getElementById(this.lastHoverID);
+                element.style.removeProperty('border');
+                element.style.removeProperty('box-shadow');
+                this.lastHoverID = null;
+            }
+
+            this.clonedElement.remove();
+
+            const selectElement = document.getElementById(this.dragAndDrop.itemIndex);
+            Object.keys(this.dragAndDrop.selectedElement.style).forEach((key) => {
+                const actualKey = parseInt(key);
+                if (isNaN(actualKey)) {
+                    selectElement.style[key] = this.dragAndDrop.selectedElement.style[key];
+                }
+            });
+
+            selectElement.style.pointerEvents = 'all';
+
+            const classList = [];
+            for (let i = 0; i < selectElement.classList.length; i++) {
+                classList.push(selectElement[i]);
+            }
+
+            selectElement.classList.remove(...classList);
+            selectElement.classList.add(...this.dragAndDrop.selectedElement.classList.split(' '));
+
+            this.x = 0;
+            this.y = 0;
+
+            if (!e || !e.target || !e.target.id || e.target.id === '') {
+                return;
+            }
+
+            const selectedSlot = this.dragAndDrop.itemIndex;
+            const endSlot = e.target.id;
+
+            const endElement = document.getElementById(endSlot);
+            const isTab = endElement.id.includes('tab');
+
+            const isGroundItem = this.dragAndDrop.itemIndex.includes('g-');
+            const isNullEndSlot = endElement.classList.contains('is-null-item');
+            const isInventoryEndSlot = !endElement.id.includes('i-');
+
+            // Check to make sure ground items are only being moved into the inventory slots.
+            if (!isTab && isGroundItem && !isNullEndSlot && !isInventoryEndSlot) {
+                return;
+            }
+
+            // Check if the selected slot isn't the same as the end slot.
+            if (selectedSlot === endSlot) {
+                return;
+            }
+
+            const hash = selectElement.dataset.hash ? `${selectElement.dataset.hash}` : null;
+
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:Process`, selectedSlot, endSlot, hash);
+            }
+
+            if (!isTab) {
+                await this.updateLocalData(selectedSlot, endSlot);
+            }
+        },
+        updateLocalData(selectedSlot, endSlot) {
+            const selectIndex = this.stripCategory(selectedSlot);
+            const endIndex = this.stripCategory(endSlot);
+
+            const selectName = this.getDataName(selectedSlot);
+            const endName = this.getDataName(endSlot);
+
+            const selectItems = [...this[selectName]];
+            const endItems = [...this[endName]];
+
+            const selectItem = this.removeLocalItem(selectIndex, selectItems);
+            const endItem = this.removeLocalItem(endIndex, endItems);
+
+            if (endItem) {
+                endItem.slot = selectIndex;
+            }
+
+            selectItem.slot = endIndex;
+
+            this.replaceLocalData(endIndex, selectItem, endItems);
+            this.replaceLocalData(selectIndex, endItem, selectItems);
+
+            const selectFunctionUpdater = `update${this.capitalizeFirst(selectName)}`;
+            const endFunctionUpdater = `update${this.capitalizeFirst(endName)}`;
+
+            this[selectFunctionUpdater](selectItems);
+            this[endFunctionUpdater](endItems);
+        },
+        removeLocalItem(index: number, localArray: Array<unknown>) {
+            const itemClone = localArray[index];
+            localArray[index] = null;
+            return itemClone;
+        },
+        replaceLocalData(index: number, replacementItem: unknown, localArray: Array<unknown>) {
+            localArray[index] = replacementItem;
+        },
+        getDataName(prefix: string) {
+            if (prefix.includes('tab-')) {
+                return 'tab';
+            }
+
+            if (prefix.includes('i-')) {
+                return 'inventory';
+            }
+
+            if (prefix.includes('g-')) {
+                return 'ground';
+            }
+
+            if (prefix.includes('e-')) {
+                return 'equipment';
+            }
+
+            return 'toolbar';
+        },
     },
     // Called when the page is loaded.
     mounted() {
@@ -276,26 +607,45 @@ export default defineComponent({
                         weight: 1,
                     },
                 },
+                {
+                    name: `Box`,
+                    uuid: `some_hash_thing_ground`,
+                    description: `It is a box.`,
+                    icon: 'crate',
+                    slot: Math.floor(Math.random() * 28),
+                    quantity: 1,
+                    weight: Math.floor(Math.random() * 5),
+                    data: {
+                        weight: 1,
+                        event: 'wahtever',
+                    },
+                },
             ]);
             return;
         }
 
         // Bind Events to Methods
         if ('alt' in window) {
-            // alt.on('x', this.whatever);
+            alt.on(`${ComponentName}:Toolbar`, this.updateToolbar);
+            alt.on(`${ComponentName}:Inventory`, this.updateInventory);
+            alt.on(`${ComponentName}:Equipment`, this.updateEquipment);
+            alt.on(`${ComponentName}:DisablePreview`, this.setPreviewDisabled);
+            alt.on(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.emit(`${ComponentName}:Update`);
+            alt.emit('ready');
+            alt.emit('url');
         }
     },
     // Called when the page is unloaded.
     unmounted() {
         // Unbind Events from the Mounted Function
         if ('alt' in window) {
-            // alt.off('x', this.whatever);
+            alt.off(`${ComponentName}:Toolbar`, this.updateToolbar);
+            alt.off(`${ComponentName}:Inventory`, this.updateInventory);
+            alt.off(`${ComponentName}:Equipment`, this.updateEquipment);
+            alt.off(`${ComponentName}:DisablePreview`, this.setPreviewDisabled);
+            alt.off(`${ComponentName}:SetLocales`, this.setLocales);
         }
-
-        // Make sure to turn off any document events as well.
-        // Only if they are present of course.
-        // Example:
-        // document.removeEventListener('mousemove', this.someFunction)
     },
 });
 </script>
@@ -308,7 +658,7 @@ export default defineComponent({
     min-height: 100vh;
     max-height: 100vh;
     overflow: hidden;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .equipment,
@@ -425,7 +775,7 @@ export default defineComponent({
     box-sizing: border-box;
     overflow: hidden;
     height: 100%;
-    background: rgba(255, 0, 0, 0.5);
+    background: rgba(45, 60, 75, 0.5);
     border: 2px dotted rgba(0, 0, 0, 0.5);
     cursor: auto;
 }
@@ -460,6 +810,7 @@ export default defineComponent({
     align-content: center;
     align-items: center;
     height: 100%;
+    pointer-events: none !important;
 }
 
 .weight-holder {
@@ -474,5 +825,42 @@ export default defineComponent({
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.item-clone {
+    position: fixed !important;
+    display: flex !important;
+    pointer-events: none !important;
+    background-color: #424242 !important;
+    min-width: 10vh;
+    max-width: 10vh;
+    min-height: 10vh;
+    max-height: 10vh;
+    box-shadow: 0px 0px 5px 2px black;
+    left: 0;
+    right: 0;
+    direction: ltr;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-sizing: border-box !important;
+    overflow: visible;
+    z-index: 99;
+}
+
+.item-clone:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.consume {
+    position: absolute;
+    text-shadow: 1px 1px black;
+    font-size: 11px;
+    color: white;
+    bottom: 1px;
+    left: -2px;
+    pointer-events: none !important;
+    z-index: 99;
+    width: 18px;
+    height: 18px;
 }
 </style>
