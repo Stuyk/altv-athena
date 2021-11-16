@@ -80,7 +80,6 @@
                             {{ item.data.weight }}{{ unitSuffix }}
                         </div>
                     </template>
-                    <!-- <template v-if="!item && index >= inventorySize" /> -->
                 </div>
             </div>
         </div>

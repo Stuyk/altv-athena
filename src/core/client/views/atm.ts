@@ -25,6 +25,8 @@ class AtmView implements ViewModel {
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
+
+        alt.Player.local.isMenuOpen = true;
     }
 
     static async close() {
@@ -39,6 +41,8 @@ class AtmView implements ViewModel {
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
     }
 
     static async ready() {

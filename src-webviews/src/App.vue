@@ -47,8 +47,10 @@ This is if you want to design out-of-game and just work on some design.
                 v-for="(page, index) in pages"
                 :key="index"
                 :is="page.component"
+                :id="'page-' + page"
                 @close-page="closePage"
                 v-bind:emit="emit"
+                class="fade-in"
             ></component>
         </div>
     </keep-alive>
@@ -131,11 +133,18 @@ export default defineComponent({
                         continue;
                     }
 
+                    const element = document.getElementById(`page-${currentPages[i]}`);
+                    if (element) {
+                        element.classList.replace('fade-in', 'fade-out');
+                    }
+
                     currentPages.splice(i, 1);
                     continue;
                 }
 
-                this.pages = currentPages;
+                setTimeout(() => {
+                    this.pages = currentPages;
+                }, 500);
                 return;
             }
 
@@ -170,4 +179,30 @@ export default defineComponent({
 
 <style>
 @import './css/core.css';
+
+.fade-in {
+    animation: FadeIn 0.5s;
+}
+
+.fade-out {
+    animation: FadeOut 0.5s;
+}
+
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes FadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 </style>

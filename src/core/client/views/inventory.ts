@@ -15,13 +15,14 @@ import ViewModel from '../models/ViewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { Timer } from '../utility/timers';
-import { waitForFalse } from '../utility/wait';
+import { waitForFalse, waitFor } from '../utility/wait';
 import { BaseHUD } from './hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const PAGE_NAME = 'Inventory';
 
 let camera;
+let camera2;
 let lastDroppedItems: Array<DroppedItem> = [];
 let drawInterval: number = null;
 
@@ -59,6 +60,7 @@ export class InventoryController implements ViewModel {
         WebViewController.focus();
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
+        alt.Player.local.isMenuOpen = true;
         BaseHUD.setHudVisibility(false);
     }
 
@@ -109,8 +111,12 @@ export class InventoryController implements ViewModel {
         native.clearFocus();
         native.renderScriptCams(false, false, 255, true, false, 0);
         native.setCamActive(camera, false);
+        native.setCamActive(camera2, false);
         native.destroyAllCams(true);
         native.setEntityVisible(alt.Player.local.scriptID, true, false);
+
+        camera = null;
+        camera2 = null;
 
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
@@ -126,6 +132,8 @@ export class InventoryController implements ViewModel {
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
     }
 
     static processMetaChange(key: string, value: any, oldValue: any): void {
@@ -193,7 +201,11 @@ export class InventoryController implements ViewModel {
         }
 
         await waitForFalse(native.isPedWalking, alt.Player.local.scriptID);
+        await waitForFalse(native.isPedRunning, alt.Player.local.scriptID);
+        await waitFor(native.isPedStill, alt.Player.local.scriptID);
 
+        const gamePlayCamRot = native.getGameplayCamRot(0);
+        const gamePlayCamPos = native.getGameplayCamCoord();
         const fov = 80;
         const fwd = native.getEntityForwardVector(alt.Player.local.scriptID);
         const pos = { ...alt.Player.local.pos };
@@ -205,6 +217,20 @@ export class InventoryController implements ViewModel {
 
         camera = native.createCamWithParams(
             'DEFAULT_SCRIPTED_CAMERA',
+            gamePlayCamPos.x,
+            gamePlayCamPos.y,
+            gamePlayCamPos.z,
+            0,
+            0,
+            0,
+            fov,
+            false,
+            0,
+        );
+        native.setCamRot(camera, gamePlayCamRot.x, gamePlayCamRot.y, gamePlayCamRot.z, 0);
+
+        camera2 = native.createCamWithParams(
+            'DEFAULT_SCRIPTED_CAMERA',
             fwdPos.x,
             fwdPos.y,
             fwdPos.z,
@@ -212,13 +238,20 @@ export class InventoryController implements ViewModel {
             0,
             0,
             fov,
-            true,
+            false,
             0,
         );
 
-        native.pointCamAtEntity(camera, alt.Player.local.scriptID, 0, 0, 0, false);
-        native.setCamActive(camera, true);
-        native.renderScriptCams(true, false, 0, true, false, 0);
+        const easeTime = 750;
+        native.setEntityVisible(alt.Player.local.scriptID, false, false);
+        native.pointCamAtEntity(camera2, alt.Player.local.scriptID, 0, 0, 0, false);
+        native.setCamActiveWithInterp(camera2, camera, 500, 1, 1);
+
+        alt.setTimeout(() => {
+            native.setEntityVisible(alt.Player.local.scriptID, true, false);
+        }, easeTime / 3);
+
+        native.renderScriptCams(true, true, 0, true, false, 0);
         return true;
     }
 }

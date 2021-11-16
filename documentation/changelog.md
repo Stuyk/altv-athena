@@ -84,6 +84,9 @@ description: List of all the changes and current versions.
 + Added Custom Inventory Rule Support for All Inventory Action(s)
 + Added Weather Override Commands and Clear Command
 + Added Time Override Commands and Clear Command
++ Added Inventory Backend Hookup and Frontend
++ Added Inventory Camera Smoothing
++ Added Fade In / Fade Out to Menus
 ```
 
 ## 2.0.3
