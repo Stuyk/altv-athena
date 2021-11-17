@@ -144,6 +144,7 @@ description: List of all the changes and current versions.
 + Add WebServer Resource for Production Mode
 + Fix Bug where Fuel is Not Synced / Updated
 + Added Fuel System Again
++ Added In-Menu Notifications to Inventory
 ```
 
 ## 2.0.2

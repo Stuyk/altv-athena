@@ -58,6 +58,11 @@
             <h4 class="white--text boldest overline weight-holder" v-if="getCurrentWeight() >= 1">
                 Weight | {{ getCurrentWeight() }}u
             </h4>
+            <div class="notifications" v-if="notifications && notifications.length >= 1">
+                <div v-for="(entry, index) in notifications" :key="index" class="notification">
+                    {{ entry }}
+                </div>
+            </div>
         </div>
         <div class="inventory">
             <div class="inventory-grid">
@@ -126,11 +131,24 @@ export default defineComponent({
             toolbar: [],
             // Default weight unit suffix.
             unitSuffix: 'u',
+            // Notification Data
+            notifications: [],
             locales: DefaultLocales,
         };
     },
     // Used to define functions you can call with 'this.x'
     methods: {
+        addNotification(info: string) {
+            const _notifications = [...this.notifications];
+            _notifications.unshift(info);
+            this.notifications = _notifications;
+
+            setTimeout(() => {
+                const currentNotifications = [...this.notifications];
+                currentNotifications.pop();
+                this.notifications = currentNotifications;
+            }, 1500);
+        },
         handleClose(keyPress) {
             // Escape && 'i'
             if (keyPress.keyCode !== 27 && keyPress.keyCode !== 73) {
@@ -539,6 +557,18 @@ export default defineComponent({
             this.inventory = new Array(28).fill(null);
             this.toolbar = new Array(4).fill(null);
 
+            setTimeout(() => {
+                this.addNotification('hello world 1');
+            }, 200);
+
+            setTimeout(() => {
+                this.addNotification('hello world 2');
+            }, 400);
+
+            setTimeout(() => {
+                this.addNotification('hello world 3');
+            }, 800);
+
             this.updateEquipment([
                 {
                     name: `Hat`,
@@ -640,6 +670,7 @@ export default defineComponent({
             alt.on(`${ComponentName}:Equipment`, this.updateEquipment);
             alt.on(`${ComponentName}:DisablePreview`, this.setPreviewDisabled);
             alt.on(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.on(`${ComponentName}:AddNotification`, this.addNotification);
             alt.emit(`${ComponentName}:Update`);
             alt.emit('ready');
             alt.emit('url');
@@ -656,6 +687,7 @@ export default defineComponent({
             alt.off(`${ComponentName}:Equipment`, this.updateEquipment);
             alt.off(`${ComponentName}:DisablePreview`, this.setPreviewDisabled);
             alt.off(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.off(`${ComponentName}:AddNotification`, this.addNotification);
         }
     },
 });
@@ -836,6 +868,8 @@ export default defineComponent({
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-top: 16px !important;
+    margin-bottom: 0px !important;
 }
 
 .item-clone {
@@ -873,5 +907,28 @@ export default defineComponent({
     z-index: 99;
     width: 18px;
     height: 18px;
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.notifications .notification {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(0, 0, 0, 0.4) 30%,
+        rgba(0, 0, 0, 0.4) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    width: 50%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 16px;
 }
 </style>

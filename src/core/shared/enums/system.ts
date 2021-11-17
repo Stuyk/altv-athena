@@ -60,6 +60,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_SHARD_CLEAR = 'shard:Clear',
     PLAYER_EMIT_TASK_MOVE = 'task:Move',
     PLAYER_EMIT_TASK_TIMELINE = 'task:Timeline',
+    PLAYER_EMIT_INVENTORY_NOTIFICATION = 'inventory:Notification',
     //
     PLAYER_RELOAD = 'player:ForceReload',
     //

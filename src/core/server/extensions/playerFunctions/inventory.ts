@@ -4,6 +4,7 @@ import { INVENTORY_RULES } from '../../../shared/enums/InventoryRules';
 import { SLOT_TYPE } from '../../../shared/enums/InventorySlotType';
 import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
@@ -971,6 +972,15 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
     return true;
 }
 
+/**
+ * Used to send information to the in-game menu of the inventory if it is open.
+ * @param {alt.Player} player
+ * @param {string} info
+ */
+function notify(player: alt.Player, info: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, info);
+}
+
 export default {
     convert,
     allItemRulesValid,
@@ -997,6 +1007,7 @@ export default {
     isInToolbar,
     isInventorySlotFree,
     isToolbarSlotFree,
+    notify,
     removeAllWeapons,
     replaceInventoryItem,
     replaceToolbarItem,

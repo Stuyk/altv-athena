@@ -11,6 +11,7 @@ function handleItemEvent(player: alt.Player, item: Item, slot: number, tab: numb
     }
 
     playerFuncs.safe.addFood(player, item.data.amount);
+    playerFuncs.inventory.notify(player, `+${item.data.amount} Food`);
 
     if (item.data.sound) {
         playerFuncs.emit.sound3D(player, item.data.sound, player);

@@ -195,6 +195,18 @@ export class InventoryController implements ViewModel {
         }
     }
 
+    /**
+     * Adds an in-menu notification only when the menu is open.
+     * Does not work for normal notifications.
+     * @static
+     * @param {string} value
+     * @memberof InventoryController
+     */
+    static async addInventoryNotification(value: string) {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:AddNotification`, value);
+    }
+
     static async showPreview(): Promise<boolean> {
         if (alt.Player.local.vehicle) {
             return false;
@@ -258,6 +270,7 @@ export class InventoryController implements ViewModel {
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, InventoryController.addInventoryNotification);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.registerKeybinds);
 
 const keyFunctions = {
