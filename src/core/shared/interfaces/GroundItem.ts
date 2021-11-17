@@ -8,18 +8,18 @@ import { Vector3 } from './Vector';
  */
 export interface GroundItem {
     /**
-     * The position where to place the GroundItem in a 3D space.
-     * @type {Vector3}
-     * @memberof GroundItem
-     */
-    pos: Vector3;
-
-    /**
      * The DroppedItem Representation of this Item
      * @type {string}
      * @memberof GroundItem
      */
     item: DroppedItem;
+
+    /**
+     * The position of the item.
+     * @type {Vector3}
+     * @memberof GroundItem
+     */
+    pos: Vector3;
 
     /**
      * The maximum distance this item should render at.
@@ -34,11 +34,4 @@ export interface GroundItem {
      * @memberof GroundItem
      */
     uid?: string;
-
-    /**
-     * The dimension to show this ground item in.
-     * @type {number}
-     * @memberof GroundItem
-     */
-    dimension?: number;
 }

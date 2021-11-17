@@ -80,6 +80,14 @@ export interface Item {
     equipment?: EQUIPMENT_TYPE;
 
     /**
+     * The model representation of the item.
+     * Should be a GTA:V item like: 'prop_cs_box_clothes'
+     * @type {string}
+     * @memberof Item
+     */
+    model?: string;
+
+    /**
      * Any custom data associated with this item.
      * Useful for item effects and such.
      * @type {{ [key: string]: any }}

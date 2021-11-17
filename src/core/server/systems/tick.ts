@@ -38,12 +38,6 @@ function handlePing(player: alt.Player): void {
     playerFuncs.sync.time(player);
     playerFuncs.sync.weather(player);
 
-    // Updates Items on Ground for Player
-    if (!player.nextItemSync || Date.now() > player.nextItemSync) {
-        player.nextItemSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_INVENTORY_UPDATES;
-        InventoryController.updateDroppedItemsAroundPlayer(player, false);
-    }
-
     // Updates Food & Water
     if (!player.nextFoodSync || Date.now() > player.nextFoodSync) {
         player.nextFoodSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_FOOD_UPDATES;

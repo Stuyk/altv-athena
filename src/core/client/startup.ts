@@ -13,6 +13,14 @@ import './menus/animation';
 import './menus/interior';
 import './menus/player';
 import './menus/vehicle';
+
+// Streamers
+import './streamers/item';
+import './streamers/marker';
+import './streamers/object';
+import './streamers/textlabel';
+import './streamers/worldNotifications';
+
 // Systems
 import './systems/animations';
 import './systems/arrest';
@@ -28,11 +36,9 @@ import './systems/hud';
 import './systems/interaction';
 import './systems/interiors';
 import './systems/job';
-import './systems/marker';
 import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
-import './systems/object';
 import './systems/particle';
 import './systems/ped';
 import './systems/progressBar';
@@ -40,12 +46,10 @@ import './systems/quickToken';
 import './systems/scenarios';
 import './systems/sound';
 import './systems/tasks';
-import './systems/textlabel';
 import './systems/tick';
 import './systems/toolbar';
 import './systems/vehicle';
 import './systems/world';
-import './systems/worldNotifications';
 
 // Utility
 import './utility/credits';

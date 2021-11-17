@@ -53,6 +53,14 @@ export class ObjectController {
         }
     }
 
+    static removeAllObjects() {
+        isRemoving = true;
+        const objects = addedObjects.concat(localObjects);
+        for (let i = 0; i < objects.length; i++) {
+            ObjectController.remove(objects[i].uid);
+        }
+    }
+
     /**
      * Remove a object from being drawn.
      * @static
@@ -191,10 +199,15 @@ function handleDrawObjects() {
             const rot = objectData.rot ? objectData.rot : { x: 0, y: 0, z: 0 };
             native.setEntityRotation(objectInfo[objectData.uid], rot.x, rot.y, rot.z, 1, false);
             native.freezeEntityPosition(objectInfo[objectData.uid], true);
+
+            if (objectData.noCollision) {
+                native.setEntityCollision(objectInfo[objectData.uid], false, true);
+            }
         });
     }
 }
 
+alt.on('disconnect', ObjectController.removeAllObjects);
 alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ObjectController.removeGlobalObject);
 alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ObjectController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ObjectController.populate);

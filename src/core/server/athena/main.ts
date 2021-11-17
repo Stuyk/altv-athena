@@ -68,8 +68,6 @@ export const DEFAULT_CONFIG = {
     BOOTUP_MINUTE: 0,
     MINUTES_PER_MINUTE: 5,
     USE_SERVER_TIME: true, // Overwrites the server time to use the current time of the computer it is running on.
-    // Inventory Properites
-    TIME_BETWEEN_INVENTORY_UPDATES: 10000,
     // Food Properties
     TIME_BETWEEN_FOOD_UPDATES: 10000,
     WATER_REMOVAL_RATE: 0.08, // How much food to remove every update.

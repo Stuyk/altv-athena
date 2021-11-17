@@ -66,4 +66,11 @@ export interface IObject {
      * @memberof IObject
      */
     dimension?: number;
+
+    /**
+     * Should this object have no collision?
+     * @type {boolean}
+     * @memberof IObject
+     */
+    noCollision?: boolean;
 }

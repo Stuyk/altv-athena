@@ -29,6 +29,7 @@
             </div>
         </div>
         <div class="character">
+            <!-- Toolbar Display -->
             <div class="toolbar-grid">
                 <div
                     v-for="(item, index) in toolbar"
@@ -55,12 +56,20 @@
                     </template>
                 </div>
             </div>
+            <!-- Weight Display -->
             <h4 class="white--text boldest overline weight-holder" v-if="getCurrentWeight() >= 1">
-                Weight | {{ getCurrentWeight() }}u
+                {{ locales.LABEL_WEIGHT }} | {{ getCurrentWeight() }}{{ unitSuffix }}
             </h4>
+            <!-- Notification Display -->
             <div class="notifications" v-if="notifications && notifications.length >= 1">
                 <div v-for="(entry, index) in notifications" :key="index" class="notification">
                     {{ entry }}
+                </div>
+            </div>
+            <!-- Drop Item Display -->
+            <div class="drop-box-container">
+                <div class="drop-box grey--text text--darken-2 overline boldest" id="g-0">
+                    {{ locales.LABEL_DROP_ITEM }}
                 </div>
             </div>
         </div>
@@ -458,18 +467,19 @@ export default defineComponent({
                 return;
             }
 
+            let endSlot = e.target.id;
             const selectedSlot = this.dragAndDrop.itemIndex;
-            const endSlot = e.target.id;
 
             const endElement = document.getElementById(endSlot);
             const isTab = endElement.id.includes('tab');
 
-            const isGroundItem = this.dragAndDrop.itemIndex.includes('g-');
+            // const isGroundItem = this.dragAndDrop.itemIndex.includes('g-');
             const isNullEndSlot = endElement.classList.contains('is-null-item');
+            const isDropBox = endElement.classList.contains('drop-box');
             const isInventoryEndSlot = !endElement.id.includes('i-');
 
             // Check to make sure ground items are only being moved into the inventory slots.
-            if (!isTab && isGroundItem && !isNullEndSlot && !isInventoryEndSlot) {
+            if (!isTab && !isDropBox && !isNullEndSlot && !isInventoryEndSlot) {
                 return;
             }
 
@@ -478,13 +488,18 @@ export default defineComponent({
                 return;
             }
 
+            // Force Drop Box to Ground Slot
+            if (isDropBox) {
+                endSlot = 'g-0';
+            }
+
             const hash = selectElement.dataset.hash ? `${selectElement.dataset.hash}` : null;
 
             if ('alt' in window) {
                 alt.emit(`${ComponentName}:Process`, selectedSlot, endSlot, hash);
             }
 
-            if (!isTab) {
+            if (!isTab && !isDropBox) {
                 await this.updateLocalData(selectedSlot, endSlot);
             }
         },
@@ -720,6 +735,7 @@ export default defineComponent({
 
 .character {
     width: 50vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -930,5 +946,34 @@ export default defineComponent({
     padding-top: 5px;
     padding-bottom: 5px;
     margin-top: 16px;
+}
+
+.drop-box-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.drop-box-container .drop-box {
+    display: flex;
+    border: 2px dashed rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    align-self: flex-end;
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.drop-box-container .drop-box:hover {
+    border-color: red !important;
+    background: rgba(255, 0, 0, 0.5) !important;
 }
 </style>

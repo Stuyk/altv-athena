@@ -16,6 +16,8 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { distance2d } from '../../shared/utility/vector';
 import { INVENTORY_RULES } from '../../shared/enums/InventoryRules';
 import { SLOT_TYPE } from '../../shared/enums/InventorySlotType';
+import { ServerItemController } from '../streamers/item';
+import { ServerObjectController } from '../streamers/object';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
@@ -383,38 +385,42 @@ export class InventoryController {
         }
 
         itemClone.hash = sha256Random(JSON.stringify(itemClone));
-        GROUND_ITEMS.push({
+
+        const frontPosition = playerFuncs.utility.getPositionFrontOf(player, 0.5);
+        const groundPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 1 };
+        const itemInfoPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 0.3 };
+
+        const droppedItem = {
             gridSpace: player.gridSpace,
             item: itemClone,
-            position: playerFuncs.utility.getPositionFrontOf(player, 1),
+            position: itemInfoPos,
             dimension: player.dimension,
+        };
+
+        GROUND_ITEMS.push(droppedItem);
+        ServerItemController.append({
+            item: droppedItem,
+            uid: itemClone.hash,
+            maxDistance: 10,
+            pos: itemInfoPos,
         });
 
-        this.updateDroppedItemsAroundPlayer(player, true);
+        const objectModel = itemClone.model ? itemClone.model : 'prop_cs_box_clothes';
+        ServerObjectController.append({
+            pos: groundPos,
+            uid: itemClone.hash,
+            maxDistance: 10,
+            model: objectModel,
+            dimension: player.dimension,
+            noCollision: true,
+        });
+
         playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
         alt.emit(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
     }
 
     static getDroppedItemsByGridSpace(dimension: number, gridSpace: number): Array<DroppedItem> {
         return GROUND_ITEMS.filter((item) => item.gridSpace === gridSpace && item.dimension === dimension);
-    }
-
-    static updateDroppedItemsAroundPlayer(player: alt.Player, updateOtherPlayers: boolean): void {
-        let players = [player];
-
-        if (updateOtherPlayers) {
-            players = playerFuncs.utility.getClosestPlayers(player, 50);
-        }
-
-        const items = InventoryController.getDroppedItemsByGridSpace(player.dimension, player.gridSpace);
-        for (let i = 0; i < players.length; i++) {
-            const target = players[i];
-            if (!target || !target.valid) {
-                continue;
-            }
-
-            alt.emitClient(target, SYSTEM_EVENTS.POPULATE_ITEMS, items);
-        }
     }
 
     static handleProcessPickup(player: alt.Player, hash: string) {
@@ -457,20 +463,20 @@ export class InventoryController {
         const index = GROUND_ITEMS.findIndex((gItem) => gItem.item.hash === hash);
         if (index <= -1) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const droppedItem: DroppedItem = { ...GROUND_ITEMS[index] };
         if (distance2d(player.pos, droppedItem.position) >= 10) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
@@ -496,21 +502,21 @@ export class InventoryController {
         const isGoingToEquipment = endData.name === INVENTORY_TYPE.EQUIPMENT;
         if (isEquipmentItem && isGoingToEquipment && droppedItem.item.data.sex !== player.data.appearance.sex) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const removedItems = GROUND_ITEMS.splice(index, 1);
         if (removedItems.length <= 0) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex);
         if (!didAddItem) {
             playerFuncs.sync.inventory(player);
-            this.updateDroppedItemsAroundPlayer(player, false);
+            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
@@ -518,7 +524,9 @@ export class InventoryController {
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
         playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
-        this.updateDroppedItemsAroundPlayer(player, true);
+
+        ServerObjectController.remove(hash);
+        ServerItemController.remove(hash);
     }
 
     /**

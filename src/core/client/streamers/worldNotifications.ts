@@ -2,9 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { IWorldNotification } from '../../shared/interfaces/IWorldNotification';
-import { Marker } from '../../shared/interfaces/Marker';
 import { distance2d } from '../../shared/utility/vector';
-import { drawMarker } from '../utility/marker';
 import { Timer } from '../utility/timers';
 
 let addedNotifications: Array<IWorldNotification> = [];
@@ -88,7 +86,7 @@ function handleDrawNotifications() {
     for (let i = 0; i < notifications.length; i++) {
         const notification = notifications[i];
         if (!notification.maxDistance) {
-            notification.maxDistance = 25;
+            notification.maxDistance = 5;
         }
 
         if (distance2d(alt.Player.local.pos, notification.pos) > notification.maxDistance) {

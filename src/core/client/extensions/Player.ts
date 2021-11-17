@@ -1,3 +1,4 @@
+import { GroundItem } from '../../shared/interfaces/GroundItem';
 import { Meta } from './Meta';
 
 declare module 'alt-client' {
@@ -11,6 +12,9 @@ declare module 'alt-client' {
         isWheelMenuOpen: boolean;
         isActionMenuOpen: boolean;
         isLeaderboardOpen: boolean;
+
+        // Closest Item
+        closestItem: GroundItem | null;
 
         // The time that a player is seen by our local player.
         // Used to reveal nametags.

@@ -955,6 +955,8 @@ export default {
         ],
         LABEL_SPLIT: 'split',
         LABEL_CANCEL: 'cancel',
+        LABEL_DROP_ITEM: 'Drop Item',
+        LABEL_WEIGHT: 'Weight',
     },
     [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
         LABEL_HAT: 'Hat',
