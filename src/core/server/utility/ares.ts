@@ -1,6 +1,9 @@
 import * as alt from 'alt-server';
 import axios from 'axios';
+import { exec } from 'child_process';
 import ecc from 'elliptic';
+import { existsSync } from 'fs';
+import path from 'path';
 import sjcl from 'sjcl';
 
 import { sha256 } from './encryption';
@@ -173,6 +176,34 @@ export default class Ares {
         }
 
         return result.data;
+    }
+
+    static async getHwid(): Promise<string | null> {
+        let toolsPath = path.join(process.cwd(), 'tools');
+
+        if (process.platform.includes('win')) {
+            toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
+        } else {
+            toolsPath = path.join(toolsPath, 'altv-athena-hwid-win');
+        }
+
+        if (!existsSync(toolsPath)) {
+            console.error(`Tools for HWID do not exist. Make sure to get the latest version.`);
+            return null;
+        }
+
+        const result: string = await new Promise((resolve: Function) => {
+            exec(toolsPath, (stderr, stdout) => {
+                if (stderr) {
+                    return null;
+                }
+
+                resolve(stdout.replace(/(\r\n|\n|\r)/gm, '').replace(/ /g, ''));
+            });
+        });
+
+        console.log(`HWID: ${result}`);
+        return result;
     }
 
     /**

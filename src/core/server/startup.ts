@@ -66,8 +66,10 @@ class Startup {
         });
 
         const endpoint = await Ares.getAresEndpoint();
+        const hwid = await Ares.getHwid();
         const result = await PostController.post(`${endpoint}/v1/post/verify`, {
             public_key: Ares.getPublicKey(),
+            hwid,
         });
 
         if (!result) {

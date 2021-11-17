@@ -93,6 +93,7 @@ description: List of all the changes and current versions.
 + Added Object Models to Item Drops
 + Added Text to Item Drops
 + Removed Markers from Item Drops
++ Added HWID Tools and HWID Support for Licenses
 ```
 
 ## 2.0.3
