@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
 import { Appearance } from '../../shared/interfaces/Appearance';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { Item } from '../../shared/interfaces/Item';
 
 export class CharacterSystem {

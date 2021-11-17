@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 
-import { CurrencyTypes } from '../../shared/enums/currency';
+import { CurrencyTypes } from '../../shared/enums/Currency';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
@@ -11,7 +11,7 @@ ChatController.addCommand(
     'setcash',
     LocaleController.get(LOCALE_KEYS.COMMAND_SET_CASH, '/setcash'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player, amount: string, id: string | null = null): void {

@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { Blip } from '../../shared/interfaces/Blip';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { sha256Random } from '../utility/encryption';
 
 const globalBlips: Array<Blip> = [];
 
-export class BlipController {
+export class ServerBlipController {
     /**
      * Adds a global label the player loads when they join.
      * Also appends it to any online players.
@@ -81,7 +81,7 @@ export class BlipController {
 
 DEFAULT_CONFIG.VALID_HOSPITALS.forEach((position) => {
     const hash = sha256Random(JSON.stringify(position));
-    BlipController.append({
+    ServerBlipController.append({
         text: 'Hospital',
         color: 6,
         sprite: 153,

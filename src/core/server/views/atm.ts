@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { CurrencyTypes } from '../../shared/enums/Currency';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import atms from '../../shared/information/atms';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
-import { BlipController } from '../systems/blip';
+import { ServerBlipController } from '../systems/blip';
 import { InteractionController } from '../systems/interaction';
 
 class AtmFunctions {
@@ -14,7 +14,7 @@ class AtmFunctions {
         for (let i = 0; i < atms.length; i++) {
             const position = atms[i];
 
-            BlipController.append({
+            ServerBlipController.append({
                 text: 'ATM',
                 color: 11,
                 sprite: 207,

@@ -1,15 +1,15 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/AthenaEvents';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import {
     Vehicle_Behavior,
     VEHICLE_DOOR_STATE,
     VEHICLE_EVENTS,
     VEHICLE_LOCK_STATE,
     VEHICLE_STATE,
-} from '../../shared/enums/vehicle';
+} from '../../shared/enums/Vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { VEHICLE_CLASS } from '../../shared/enums/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';

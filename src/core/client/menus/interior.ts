@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import { Interior } from '../../shared/interfaces/Interior';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
 import { InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
 import { InputView } from '../views/input';
 
@@ -48,7 +48,7 @@ function enterMenu(interior: Interior) {
     if (isOwner) {
         options.push({
             name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
-            callback: toggleLockFunc
+            callback: toggleLockFunc,
         });
 
         options.push({
@@ -61,8 +61,8 @@ function enterMenu(interior: Interior) {
                             id: 'price',
                             desc: 'Price (Use -1 to Cancel Sale)',
                             type: InputOptionType.NUMBER,
-                            placeholder: '25000'
-                        }
+                            placeholder: '25000',
+                        },
                     ],
                     callback: (results: InputResult[]) => {
                         // Re-show this menu if it fails to find the value.
@@ -79,11 +79,11 @@ function enterMenu(interior: Interior) {
                         }
 
                         alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_PRICE, interior.id, parseInt(data.value));
-                    }
+                    },
                 };
 
                 InputView.show(InputMenu);
-            }
+            },
         });
 
         options.push({
@@ -98,8 +98,8 @@ function enterMenu(interior: Interior) {
                             type: InputOptionType.TEXT,
                             placeholder: `Stuyks House`,
                             regex: '^[a-zA-Z0-9 ]{1,24}$', // Matches 3 to 24 Characters
-                            error: '3-24 Characters. No Special Characters.'
-                        }
+                            error: '3-24 Characters. No Special Characters.',
+                        },
                     ],
                     callback: (results: InputResult[]) => {
                         // Re-show this menu if it fails to find the value.
@@ -116,11 +116,11 @@ function enterMenu(interior: Interior) {
                         }
 
                         alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_NAME, interior.id, data.value);
-                    }
+                    },
                 };
 
                 InputView.show(InputMenu);
-            }
+            },
         });
     }
 
@@ -129,7 +129,7 @@ function enterMenu(interior: Interior) {
             name: `Purchase~n~~p~$${interior.price}`,
             callback: () => {
                 alt.emitServer(SYSTEM_EVENTS.INTERIOR_PURCHASE, interior.id);
-            }
+            },
         });
     }
 
@@ -138,7 +138,7 @@ function enterMenu(interior: Interior) {
             name: '~g~Enter',
             callback: () => {
                 alt.emitServer(SYSTEM_EVENTS.INTERIOR_ENTER, interior.id);
-            }
+            },
         });
     }
 
@@ -160,14 +160,14 @@ function exitMenu(interior: Interior) {
     if (isOwner) {
         options.push({
             name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
-            callback: toggleLockFunc
+            callback: toggleLockFunc,
         });
 
         options.push({
             name: 'Storage',
             callback: () => {
                 alt.emitServer(SYSTEM_EVENTS.INTERIOR_STORAGE, interior.id);
-            }
+            },
         });
     }
 
@@ -175,7 +175,7 @@ function exitMenu(interior: Interior) {
         name: '~r~Exit',
         callback: () => {
             alt.emitServer(SYSTEM_EVENTS.INTERIOR_EXIT, interior.id);
-        }
+        },
     });
 
     WheelMenu.create(`Interior: ${interior.id}`, options, true);

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { distance2d } from '../../shared/utility/vector';
 import { drawText2D } from '../utility/text';
 import { Timer } from '../utility/timers';
@@ -103,7 +103,7 @@ function drawNametags() {
             pos.x + vector.x * frameTime,
             pos.y + vector.y * frameTime,
             pos.z + vector.z * frameTime,
-            0
+            0,
         );
 
         const modifiedName = isChatting ? `(${player.id}) ${name}~r~*` : `(${player.id}) ${name}`;

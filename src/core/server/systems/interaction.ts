@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionShape } from '../extensions/Colshape';
@@ -95,7 +95,13 @@ export class InteractionController {
         // Don't pass the interaction. Just the description from it.
         entity.currentInteraction = colshape;
         const interaction = entity.currentInteraction.getInteraction();
-        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description, interaction.disableMarker);
+        alt.emitClient(
+            entity,
+            SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
+            interaction.position,
+            interaction.description,
+            interaction.disableMarker,
+        );
     }
 
     /**

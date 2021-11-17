@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { KEY_BINDS } from '../../shared/enums/KeyBinds';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { KeybindController } from '../events/keyup';
 
 export class ToolbarController {
@@ -12,22 +12,22 @@ export class ToolbarController {
     static registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_ONE,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_TWO,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_THREE,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_FOUR,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
     }
 

@@ -1,15 +1,15 @@
 import * as alt from 'alt-server';
-import { View_Events_Clothing } from '../../shared/enums/views';
+import { View_Events_Clothing } from '../../shared/enums/Views';
 import { playerFuncs } from '../extensions/Player';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
 import { Item } from '../../shared/interfaces/Item';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import clothingStores from '../../shared/information/clothingStores';
-import { BlipController } from '../systems/blip';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ServerBlipController } from '../systems/blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { InteractionController } from '../systems/interaction';
 
 // Do not change order
@@ -30,7 +30,7 @@ class ClothingFunctions {
             const position = clothingStores[i];
             const uid = `clothing-store-${i}`;
 
-            BlipController.append({
+            ServerBlipController.append({
                 text: 'Clothing Store',
                 color: 11,
                 sprite: 73,

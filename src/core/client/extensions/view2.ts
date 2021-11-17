@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 // Must be a blank index page.
 let _defaultURL = `http://webviews/index.html`;

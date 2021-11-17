@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { View_Events_Creator } from '../../shared/enums/views';
+import { View_Events_Creator } from '../../shared/enums/Views';
 import { Appearance } from '../../shared/interfaces/Appearance';
 import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
 import { goToCharacterSelect, handleNewCharacter } from './characters';

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
+import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -11,14 +11,14 @@ ChatController.addCommand(
     'seatbelt',
     LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'),
     PERMISSIONS.NONE,
-    handleCommand
+    handleCommand,
 );
 
 ChatController.addCommand(
     'sb',
     LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/sb'),
     PERMISSIONS.NONE,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player): void {

@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../../shared/enums/System';
 import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
 import { ActionMenu } from '../../../shared/interfaces/Actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
 import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
 import Ares from '../../utility/ares';
@@ -17,7 +17,7 @@ import sync from './sync';
 import Database from '@stuyk/ezmongodb';
 import dotenv from 'dotenv';
 import { IConfig } from '../../interface/IConfig';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
 
 const config: IConfig = dotenv.config().parsed as IConfig;
 
@@ -40,9 +40,9 @@ async function account(p: alt.Player, accountData: Partial<Account>): Promise<vo
             accountData._id,
             {
                 quickToken: qt,
-                quickTokenExpiration: Date.now() + 60000 * 60 * 48 // 48 Hours
+                quickTokenExpiration: Date.now() + 60000 * 60 * 48, // 48 Hours
             },
-            Collections.Accounts
+            Collections.Accounts,
         );
 
         alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
@@ -183,5 +183,5 @@ export default {
     firstConnect,
     frozen,
     respawned,
-    wantedLevel
+    wantedLevel,
 };

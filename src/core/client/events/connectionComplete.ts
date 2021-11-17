@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 alt.on('connectionComplete', handleConnectionComplete);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);

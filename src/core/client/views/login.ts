@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
@@ -104,7 +104,7 @@ export class LoginView implements ViewModel {
             { x: 0.5, y: 0.8 },
             0.6,
             new alt.RGBA(255, 255, 255, 255),
-            0
+            0,
         );
 
         drawText2D(
@@ -112,7 +112,7 @@ export class LoginView implements ViewModel {
             { x: 0.5, y: 0.85 },
             0.55,
             new alt.RGBA(255, 255, 255, 255),
-            0
+            0,
         );
     }
 }

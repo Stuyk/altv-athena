@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { VEHICLE_DOOR_STATE } from '../../../shared/enums/vehicle';
+import { VEHICLE_DOOR_STATE } from '../../../shared/enums/Vehicle';
 
 function update(vehicle: alt.Vehicle): void {
     // Synchronize Doors
@@ -15,5 +15,5 @@ function update(vehicle: alt.Vehicle): void {
 }
 
 export default {
-    update
+    update,
 };

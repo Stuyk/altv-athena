@@ -1,14 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { KEY_BINDS } from '../../shared/enums/KeyBinds';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { KeybindController } from '../events/keyup';
 
 export class DebugController {
     static registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.DEBUG_KEY,
-            singlePress: DebugController.handleDebugMessages
+            singlePress: DebugController.handleDebugMessages,
         });
     }
 

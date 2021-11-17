@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { drawText2D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
@@ -55,7 +55,7 @@ function handleDeathMovement() {
             `${(timeLeft / 1000).toFixed(2)}s Until Respawn`,
             { x: 0.5, y: 0.2 },
             0.5,
-            new alt.RGBA(255, 255, 255, 255)
+            new alt.RGBA(255, 255, 255, 255),
         );
     } else {
         drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255), 0);

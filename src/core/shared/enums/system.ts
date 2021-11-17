@@ -88,6 +88,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_OBJECTS = 'objects:Populate',
     POPULATE_PEDS = 'peds:Populate',
     POPULATE_WORLD_NOTIFICATIONS = 'worldNotifications:Populate',
+    POPULATE_ITEM_DROPS = 'itemDrops:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',

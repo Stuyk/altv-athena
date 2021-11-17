@@ -1,4 +1,4 @@
-import { BLIP_COLOR } from '../enums/blipColor';
+import { BLIP_COLOR } from '../enums/BlipColor';
 import { Vector3 } from './Vector';
 
 export interface Blip {

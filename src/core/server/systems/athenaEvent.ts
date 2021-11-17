@@ -2,8 +2,8 @@ import * as alt from 'alt-server';
 import {
     ATHENA_EVENTS_PLAYER,
     ATHENA_EVENTS_PLAYER_CLIENT,
-    ATHENA_EVENTS_VEHICLE
-} from '../../shared/enums/athenaEvents';
+    ATHENA_EVENTS_VEHICLE,
+} from '../../shared/enums/AthenaEvents';
 
 const events: { [key: string]: Array<any> } = {};
 
@@ -12,7 +12,7 @@ type vehicleCallback = (result: alt.Vehicle, ...args: any) => void;
 
 function on(
     eventName: ATHENA_EVENTS_PLAYER | ATHENA_EVENTS_VEHICLE | ATHENA_EVENTS_PLAYER_CLIENT,
-    callback: playerCallback | vehicleCallback
+    callback: playerCallback | vehicleCallback,
 ) {
     if (!events[eventName]) {
         events[eventName] = [];

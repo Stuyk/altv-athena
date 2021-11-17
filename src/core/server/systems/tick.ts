@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';

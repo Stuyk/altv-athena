@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { Timer } from '../utility/timers';
 import { playAnimation } from './animations';
 
@@ -35,7 +35,7 @@ class ArrestController {
         const pos = {
             x: cuffer.pos.x - fwd.x * 1,
             y: cuffer.pos.y - fwd.y * 1,
-            z: cuffer.pos.z
+            z: cuffer.pos.z,
         };
 
         native.taskGoToCoordAnyMeans(alt.Player.local.scriptID, pos.x, pos.y, pos.z, 2, 0, false, 786603, 0);

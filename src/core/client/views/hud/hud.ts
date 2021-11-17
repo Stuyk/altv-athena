@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat } from '../../../shared/enums/views';
+import { SYSTEM_EVENTS } from '../../../shared/enums/System';
+import { View_Events_Chat } from '../../../shared/enums/Views';
 import { Command } from '../../../shared/interfaces/Command';
 import { handleFrontendSound } from '../../systems/sound';
 import { disableAllAttacks, disableAllControls } from '../../utility/disableControls';

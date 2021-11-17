@@ -1,13 +1,13 @@
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
+import { SYSTEM_EVENTS } from '../../../shared/enums/System';
 import { Character } from '../../../shared/interfaces/Character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { BlipController } from '../../systems/blip';
+import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
 import { InteriorSystem } from '../../systems/interior';
@@ -106,7 +106,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 
         // Propagation
         ChatController.populateCommands(player);
-        BlipController.populateGlobalBlips(player);
+        ServerBlipController.populateGlobalBlips(player);
         HologramController.populateHolograms(player);
 
         // Markers, Text Labels, Objects, etc.

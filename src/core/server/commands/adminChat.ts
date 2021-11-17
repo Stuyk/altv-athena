@@ -3,7 +3,7 @@ import ChatController from '../systems/chat';
 import { getPlayersByPermissionLevel } from '../utility/filters';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { emitAll } from '../utility/emitHelper';
-import { View_Events_Chat } from '../../shared/enums/views';
+import { View_Events_Chat } from '../../shared/enums/Views';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -12,20 +12,20 @@ ChatController.addCommand(
     'broadcast',
     LocaleController.get(LOCALE_KEYS.COMMAND_BROADCAST, '/broadcast'),
     PERMISSIONS.ADMIN,
-    handleBroadcast
+    handleBroadcast,
 );
 ChatController.addCommand(
     'ac',
     LocaleController.get(LOCALE_KEYS.COMMAND_ADMIN_CHAT, '/ac'),
     PERMISSIONS.ADMIN,
-    handleAdminChat
+    handleAdminChat,
 );
 
 ChatController.addCommand(
     'mc',
     LocaleController.get(LOCALE_KEYS.COMMAND_MOD_CHAT, '/mc'),
     PERMISSIONS.MODERATOR | PERMISSIONS.ADMIN,
-    handleModeratorChat
+    handleModeratorChat,
 );
 
 function handleAdminChat(player: alt.Player, ...args): void {
@@ -57,6 +57,6 @@ function handleBroadcast(player: alt.Player, ...args) {
     emitAll(
         alt.Player.all,
         View_Events_Chat.Append,
-        `[${LocaleController.get(LOCALE_KEYS.LABEL_BROADCAST)}] ${player.data.name}: ${args.join(' ')}`
+        `[${LocaleController.get(LOCALE_KEYS.LABEL_BROADCAST)}] ${player.data.name}: ${args.join(' ')}`,
     );
 }

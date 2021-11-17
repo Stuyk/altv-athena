@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, playScenario);
 
@@ -11,10 +11,7 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SCENARIO, playScenario);
  * @param {number} duration The duration of the scenario.
  * @return {Promise<void>}  {Promise<void>}
  */
-export async function playScenario(
-    name: string,
-    duration: number
-): Promise<void> {
+export async function playScenario(name: string, duration: number): Promise<void> {
     if (alt.Player.local.meta.isDead) {
         return;
     }

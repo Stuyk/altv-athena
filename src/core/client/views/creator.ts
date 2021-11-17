@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import PedEditCamera from '../utility/camera';
 import { Appearance } from '../../shared/interfaces/Appearance';
-import { View_Events_Creator } from '../../shared/enums/views';
+import { View_Events_Creator } from '../../shared/enums/Views';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { PedCharacter } from '../utility/characterPed';

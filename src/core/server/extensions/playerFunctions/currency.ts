@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { CurrencyTypes } from '../../../shared/enums/currency';
+import { CurrencyTypes } from '../../../shared/enums/Currency';
 import emit from './emit';
 import save from './save';
 
@@ -125,5 +125,5 @@ export default {
     set,
     sub,
     add,
-    subAllCurrencies
+    subAllCurrencies,
 };

@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Timer } from '../utility/timers';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
+import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
 import { playAnimation } from './animations';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
@@ -20,7 +20,7 @@ export class PushVehicle {
         const attachPosition = {
             x: 0,
             y: min.y - 0.3,
-            z: min.z + 1
+            z: min.z + 1,
         };
 
         alt.emitServer(VEHICLE_EVENTS.PUSH, attachPosition);
@@ -71,7 +71,7 @@ export class PushVehicle {
             alt.Player.local.scriptID,
             'missfinale_c2ig_11',
             'pushcar_offcliff_m',
-            3
+            3,
         );
 
         // S
@@ -87,7 +87,7 @@ export class PushVehicle {
                 playAnimation(
                     'missfinale_c2ig_11',
                     'pushcar_offcliff_m',
-                    ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL
+                    ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 );
             }
 

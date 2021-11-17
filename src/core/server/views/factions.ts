@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { View_Events_Factions } from '../../shared/enums/views';
+import { View_Events_Factions } from '../../shared/enums/Views';
 import { FactionSystem } from '../systems/factions';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 
@@ -21,7 +21,7 @@ class FactionsFunctions {
 
         const clientInterface = FactionInternalSystem.getClientInterface(
             player.data.faction,
-            player.data._id.toString()
+            player.data._id.toString(),
         );
 
         FactionInternalSystem.opened(player);
@@ -66,7 +66,7 @@ const EventBindings = {
     [View_Events_Factions.ChangeOwner]: FactionSystem.changeOwner,
     [View_Events_Factions.SetStorageLocation]: FactionSystem.setStorageLocation,
     [View_Events_Factions.SetWeaponsLocation]: FactionSystem.setWeaponsLocation,
-    [View_Events_Factions.SetPosition]: FactionSystem.setPosition
+    [View_Events_Factions.SetPosition]: FactionSystem.setPosition,
 };
 
 alt.onClient(View_Events_Factions.Open, FactionsFunctions.open);

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
-import { KEY_BINDS } from '../../../../shared/enums/keybinds';
-import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { KEY_BINDS } from '../../../../shared/enums/KeyBinds';
+import { PLAYER_SYNCED_META } from '../../../../shared/enums/PlayerSynced';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/System';
 import { KeybindController } from '../../../events/keyup';
 import { BaseHUD } from '../hud';
 
@@ -15,7 +15,7 @@ export class LeaderboardController {
     static registerKeybind() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.LEADERBOARD,
-            singlePress: LeaderboardController.focusLeaderBoard
+            singlePress: LeaderboardController.focusLeaderBoard,
         });
     }
 

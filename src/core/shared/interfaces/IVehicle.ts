@@ -1,4 +1,4 @@
-import { Vehicle_Behavior } from '../enums/vehicle';
+import { Vehicle_Behavior } from '../enums/Vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/VehicleOwnershipFlags';
 import { IStorage } from './IStorage';
 import IVehicleTuning from './IVehicleTuning';

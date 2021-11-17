@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Clothing } from '../../shared/enums/views';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { View_Events_Clothing } from '../../shared/enums/Views';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

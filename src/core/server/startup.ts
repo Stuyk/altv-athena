@@ -4,7 +4,7 @@ import env from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
-import { SYSTEM_EVENTS } from '../shared/enums/system';
+import { SYSTEM_EVENTS } from '../shared/enums/System';
 import { PostController } from './ares/postRequests';
 import { IConfig } from './interface/IConfig';
 import Ares from './utility/ares';
@@ -67,7 +67,7 @@ class Startup {
 
         const endpoint = await Ares.getAresEndpoint();
         const result = await PostController.post(`${endpoint}/v1/post/verify`, {
-            public_key: Ares.getPublicKey()
+            public_key: Ares.getPublicKey(),
         });
 
         if (!result) {

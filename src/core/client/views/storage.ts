@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { View_Events_Storage } from '../../shared/enums/views';
+import { View_Events_Storage } from '../../shared/enums/Views';
 import { Item } from '../../shared/interfaces/Item';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';

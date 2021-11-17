@@ -1,5 +1,5 @@
-import { EQUIPMENT_TYPE } from '../enums/equipmentTypes';
-import { ITEM_TYPE } from '../enums/itemTypes';
+import { EQUIPMENT_TYPE } from '../enums/EquipmentType';
+import { ITEM_TYPE } from '../enums/ItemTypes';
 
 export interface Item {
     /**

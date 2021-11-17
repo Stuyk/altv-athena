@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 import dotenv from 'dotenv';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { IConfig } from '../interface/IConfig';
 import Ares from '../utility/ares';

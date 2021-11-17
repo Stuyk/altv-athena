@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { WORLD_WEATHER } from '../../shared/enums/weather';
+import { WORLD_WEATHER } from '../../shared/enums/Weather';
 
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

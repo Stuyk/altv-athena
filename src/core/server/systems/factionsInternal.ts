@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { View_Events_Factions } from '../../shared/enums/views';
+import { View_Events_Factions } from '../../shared/enums/Views';
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
@@ -16,10 +16,10 @@ import VehicleFuncs from '../extensions/VehicleFuncs';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { StorageView } from '../views/storage';
-import { BlipController } from './blip';
+import { ServerBlipController } from './blip';
 import { FactionSystem } from './factions';
 import { InteractionController } from './interaction';
-import { MarkerController } from './marker';
+import { ServerMarkerController } from '../streamers/marker';
 import { StorageSystem } from './storage';
 
 let factions: { [key: string]: IFaction } = {};
@@ -92,14 +92,14 @@ export class FactionInternalSystem {
 
         // Storage
         InteractionController.remove(typeStorage, storageName);
-        MarkerController.remove(storageName);
+        ServerMarkerController.remove(storageName);
 
         // Weapons
         InteractionController.remove(typeWeapons, weaponsName);
-        MarkerController.remove(weaponsName);
+        ServerMarkerController.remove(weaponsName);
 
         // Blip
-        BlipController.remove(blipName);
+        ServerBlipController.remove(blipName);
 
         if (doNotRefresh) {
             return;
@@ -115,7 +115,7 @@ export class FactionInternalSystem {
                 callback: FactionSystem.openStorage,
             });
 
-            MarkerController.append({
+            ServerMarkerController.append({
                 uid: storageName,
                 pos: factions[faction].storageLocation,
                 type: 1,
@@ -133,7 +133,7 @@ export class FactionInternalSystem {
                 callback: FactionSystem.openStorage,
             });
 
-            MarkerController.append({
+            ServerMarkerController.append({
                 uid: weaponsName,
                 pos: factions[faction].weaponLocation,
                 type: 1,
@@ -142,7 +142,7 @@ export class FactionInternalSystem {
         }
 
         if (factions[faction].pos) {
-            BlipController.append({
+            ServerBlipController.append({
                 uid: blipName,
                 pos: factions[faction].pos,
                 color: 9,

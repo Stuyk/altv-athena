@@ -42,7 +42,7 @@ export class WheelMenu {
         label: string,
         options: Array<IWheelItem>,
         setMouseToCenter = false,
-        center: Vector2 = { x: 0.5, y: 0.5 }
+        center: Vector2 = { x: 0.5, y: 0.5 },
     ) {
         if (options.length > 10) {
             throw new Error('Wheel Menu cannot exceed 10 Options');
@@ -62,7 +62,7 @@ export class WheelMenu {
         currentMenu = {
             label,
             points: points,
-            center
+            center,
         };
 
         lastHover = null;
@@ -141,7 +141,7 @@ export class WheelMenu {
             currentMenu.center,
             0.5,
             new alt.RGBA(255, 255, 255, 255),
-            0
+            0,
         );
 
         // Escape

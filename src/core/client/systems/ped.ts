@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { IPed } from '../../shared/interfaces/IPed';
 import { Animation } from '../../shared/interfaces/Animation';
 import { distance2d } from '../../shared/utility/vector';

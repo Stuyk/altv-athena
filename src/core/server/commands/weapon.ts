@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/Item';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';

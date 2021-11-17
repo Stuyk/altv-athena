@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { CREDIT_ALIGN } from '../../shared/enums/CreditAlign';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import ICredit from '../../shared/interfaces/ICredit';
 import { requestScaleForm, Scaleform } from './scaleform';
 

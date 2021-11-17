@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List } from '../../../shared/enums/vehicle';
+import { Vehicle_Door_List } from '../../../shared/enums/Vehicle';
 
 /**
  * Toggle a local vehicle's door state.
@@ -24,5 +24,5 @@ function door(v: alt.Vehicle, door: Vehicle_Door_List): void {
 }
 
 export default {
-    door
+    door,
 };

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
+import { SYSTEM_EVENTS } from '../../../shared/enums/System';
+import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/Views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import ICredit from '../../../shared/interfaces/ICredit';
 import IErrorScreen from '../../../shared/interfaces/IErrorScreen';

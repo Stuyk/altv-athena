@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { View_Events_Garage } from '../../shared/enums/views';
+import { View_Events_Garage } from '../../shared/enums/Views';
 import { isVehicleType } from '../../shared/enums/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
@@ -11,10 +11,10 @@ import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
-import { BlipController } from '../systems/blip';
+import { ServerBlipController } from '../systems/blip';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 import { InteractionController } from '../systems/interaction';
-import { MarkerController } from '../systems/marker';
+import { ServerMarkerController } from '../streamers/marker';
 import { sha256 } from '../utility/encryption';
 import IGarage from '../../shared/interfaces/IGarage';
 
@@ -72,7 +72,7 @@ class GarageFunctions {
             callback: GarageFunctions.open,
         });
 
-        BlipController.append({
+        ServerBlipController.append({
             pos: garage.position,
             color: 4,
             sprite: 50,
@@ -81,7 +81,7 @@ class GarageFunctions {
             text: LocaleController.get(LOCALE_KEYS.GARAGE_BLIP_NAME),
         });
 
-        MarkerController.append({
+        ServerMarkerController.append({
             uid: `marker-garage-${count}`,
             pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
             color: new alt.RGBA(0, 150, 0, 100),

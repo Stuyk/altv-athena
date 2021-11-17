@@ -1,20 +1,20 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { TextLabel } from '../../shared/interfaces/TextLabel';
 import { sha256Random } from '../utility/encryption';
-import { StreamerService } from './streamer';
+import { StreamerService } from '../systems/streamer';
 
 const globalTextLabels: Array<TextLabel> = [];
 const KEY = 'labels';
 
-export class TextLabelController {
+export class ServerTextLabelController {
     /**
      * Initialize the TextLabel Streamer Service
      * @static
      * @memberof TextLabelController
      */
     static init() {
-        StreamerService.registerCallback(KEY, TextLabelController.update);
+        StreamerService.registerCallback(KEY, ServerTextLabelController.update);
     }
 
     /**
@@ -39,7 +39,7 @@ export class TextLabelController {
         }
 
         globalTextLabels.push(label);
-        TextLabelController.refresh();
+        ServerTextLabelController.refresh();
         return label.uid;
     }
 
@@ -57,7 +57,7 @@ export class TextLabelController {
         }
 
         globalTextLabels.splice(index, 1);
-        TextLabelController.refresh();
+        ServerTextLabelController.refresh();
         return true;
     }
 
@@ -105,4 +105,4 @@ export class TextLabelController {
     }
 }
 
-TextLabelController.init();
+ServerTextLabelController.init();

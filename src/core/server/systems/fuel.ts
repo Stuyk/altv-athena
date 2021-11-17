@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import { CurrencyTypes } from '../../shared/enums/Currency';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { Vehicle_Behavior } from '../../shared/enums/Vehicle';
 import fuel from '../../shared/information/fuel';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -13,7 +13,7 @@ import { distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { getClosestEntity } from '../utility/vector';
-import { BlipController } from './blip';
+import { ServerBlipController } from './blip';
 import { InteractionController } from './interaction';
 
 // player.id to retrieve
@@ -34,7 +34,7 @@ class FuelSystem {
         for (let i = 0; i < fuel.length; i++) {
             const fuelPump = fuel[i];
             if (fuelPump.isBlip) {
-                BlipController.append({
+                ServerBlipController.append({
                     text: 'Fuel',
                     color: 1,
                     sprite: 361,

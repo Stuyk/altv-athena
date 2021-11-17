@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { handleFrontendSound } from '../systems/sound';
 import { Timer } from '../utility/timers';
 
@@ -40,7 +40,7 @@ export class View extends alt.WebView {
         url: string,
         addCursor: boolean,
         isInit: boolean = false,
-        blurBackground: boolean = false
+        blurBackground: boolean = false,
     ): Promise<View> {
         if (!_instance) {
             _instance = new View(url);

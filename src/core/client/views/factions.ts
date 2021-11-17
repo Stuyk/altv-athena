@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { View_Events_Factions } from '../../shared/enums/views';
+import { KEY_BINDS } from '../../shared/enums/KeyBinds';
+import { View_Events_Factions } from '../../shared/enums/Views';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
@@ -21,7 +21,7 @@ class FactionsView implements ViewModel {
             key: KEY_BINDS.FACTIONS,
             singlePress: () => {
                 alt.emitServer(View_Events_Factions.Open);
-            }
+            },
         });
     }
 

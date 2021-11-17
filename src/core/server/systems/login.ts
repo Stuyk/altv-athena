@@ -1,9 +1,9 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Discord } from '../../shared/enums/views';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/AthenaEvents';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { View_Events_Discord } from '../../shared/enums/Views';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
@@ -19,9 +19,9 @@ import { OptionsController } from './options';
 
 import '../views/login';
 import './job';
-import './marker';
+import '../streamers/marker';
 import './ped';
-import './textlabel';
+import '../streamers/textlabel';
 import './tick';
 import './voice';
 import { VehicleSystem } from './vehicle';
@@ -78,7 +78,7 @@ export class LoginController {
             let accountData: Partial<Account> | null = await Database.fetchData<Account>(
                 'discord',
                 data.id,
-                Collections.Accounts
+                Collections.Accounts,
             );
             if (!accountData) {
                 const newDocument: Partial<Account> = {
@@ -86,7 +86,7 @@ export class LoginController {
                     ips: [player.ip],
                     hardware: [player.hwidHash, player.hwidExHash],
                     lastLogin: Date.now(),
-                    permissionLevel: PERMISSIONS.NONE
+                    permissionLevel: PERMISSIONS.NONE,
                 };
 
                 if (player.discord.email) {
@@ -107,7 +107,7 @@ export class LoginController {
                     await Database.updatePartialData(
                         account._id.toString(),
                         { email: player.discord.email },
-                        Collections.Accounts
+                        Collections.Accounts,
                     );
                 }
             }
@@ -155,7 +155,7 @@ export class LoginController {
         const account: Partial<Account> | null = await Database.fetchData<Account>(
             'quickToken',
             hashToken,
-            Collections.Accounts
+            Collections.Accounts,
         );
 
         if (!account) {
@@ -168,7 +168,7 @@ export class LoginController {
             Database.updatePartialData(
                 account._id,
                 { quickToken: null, quickTokenExpiration: null },
-                Collections.Accounts
+                Collections.Accounts,
             );
             return;
         }

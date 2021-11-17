@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
-import { KEY_BINDS } from '../../../../shared/enums/keybinds';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
-import { View_Events_Chat } from '../../../../shared/enums/views';
+import { KEY_BINDS } from '../../../../shared/enums/KeyBinds';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/System';
+import { View_Events_Chat } from '../../../../shared/enums/Views';
 import { Command } from '../../../../shared/interfaces/Command';
 import { KeybindController } from '../../../events/keyup';
 import { disableAllControls } from '../../../utility/disableControls';
@@ -25,7 +25,7 @@ export class ChatController {
     static registerKeybind() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.CHAT,
-            singlePress: ChatController.focusChat
+            singlePress: ChatController.focusChat,
         });
     }
 
@@ -114,7 +114,7 @@ export class ChatController {
         // Insert the new messages to the front of the array.
         messages.unshift({
             timestamp,
-            message
+            message,
         });
 
         if (messages.length >= 150) {

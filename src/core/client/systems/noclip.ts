@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { getCrossProduct, getNormalizedVector, rotationToDirection } from '../utility/math';
 import { addTemporaryText } from '../utility/text';
 import { Timer } from '../utility/timers';
@@ -36,7 +36,7 @@ const disabledControls = [
     218,
     219,
     16,
-    17
+    17,
 ];
 
 const timeBetweenPlayerUpdates = 250;
@@ -112,7 +112,7 @@ function handleCamera() {
             0,
             90,
             false,
-            0
+            0,
         );
         native.setCamActive(cam, true);
         native.renderScriptCams(true, false, 0, true, false, 0);
@@ -206,19 +206,19 @@ function handleCamera() {
     const movementVector = {
         x: rr.x * leftAxisY * speed,
         y: rr.y * leftAxisY * speed,
-        z: rr.z * leftAxisY * (speed / 1.5)
+        z: rr.z * leftAxisY * (speed / 1.5),
     };
 
     const rightVector = {
         x: preRightVector.x * leftAxisX * speed,
         y: preRightVector.y * leftAxisX * speed,
-        z: preRightVector.z * leftAxisX * speed
+        z: preRightVector.z * leftAxisX * speed,
     };
 
     const newPos = {
         x: pos.x - movementVector.x + rightVector.x,
         y: pos.y - movementVector.y + rightVector.y,
-        z: pos.z - movementVector.z + rightVector.z + zSpeedUp - zSpeedDown
+        z: pos.z - movementVector.z + rightVector.z + zSpeedUp - zSpeedDown,
     };
 
     native.setCamCoord(cam, newPos.x, newPos.y, newPos.z);

@@ -1,4 +1,4 @@
-import { MARKER_TYPE } from '../enums/markerTypes';
+import { MARKER_TYPE } from '../enums/MarkerTypes';
 import { Vector3 } from './Vector';
 
 export interface Marker {

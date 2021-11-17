@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { Timer } from '../utility/timers';
 
@@ -40,7 +40,7 @@ async function loadAnimation(dict: string, count: number = 0): Promise<boolean> 
                 native.requestAnimDict(dict);
             },
             250,
-            'animation.ts'
+            'animation.ts',
         );
     });
 }
@@ -57,7 +57,7 @@ export async function playAnimation(
     dict: string,
     name: string,
     flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
-    duration: number = -1
+    duration: number = -1,
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {
@@ -90,7 +90,7 @@ export async function playPedAnimation(
     dict: string,
     name: string,
     flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
-    duration: number = -1
+    duration: number = -1,
 ) {
     const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {

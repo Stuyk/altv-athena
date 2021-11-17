@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import logger from '../server/utility/athenaLogger';
-import { SYSTEM_EVENTS } from '../shared/enums/system';
+import { SYSTEM_EVENTS } from '../shared/enums/System';
 
 const filePaths = [
     // Plugins Imports Appended Here

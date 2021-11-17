@@ -2,9 +2,9 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { KEY_BINDS } from '../../shared/enums/KeyBinds';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
@@ -44,7 +44,7 @@ export class InteractionController {
             key: KEY_BINDS.INTERACT,
             singlePress: () => {
                 pressedKey = true;
-            }
+            },
         });
     }
 
@@ -130,7 +130,7 @@ export class InteractionController {
             const backPosition = {
                 x: vehicle.pos.x - vehicleFwd.x * 2,
                 y: vehicle.pos.y - vehicleFwd.y * 2,
-                z: vehicle.pos.z
+                z: vehicle.pos.z,
             };
 
             const isInBack = distance2d(alt.Player.local.pos, backPosition) <= 2;
@@ -157,7 +157,7 @@ export class InteractionController {
                     interactText = InteractionController.appendText(
                         interactText,
                         KEY_BINDS.VEHICLE_OPTIONS,
-                        optionsText
+                        optionsText,
                     );
                 }
 

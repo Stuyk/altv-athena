@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import natives from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, fixMissingInteriors);
 

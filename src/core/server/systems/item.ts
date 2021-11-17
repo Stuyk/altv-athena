@@ -1,4 +1,4 @@
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
 import { Item } from '../../shared/interfaces/Item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 
@@ -22,7 +22,7 @@ export class ItemFactory {
         quantity: number,
         behavior: ITEM_TYPE,
         data: { [key: string]: any },
-        slot: number
+        slot: number,
     ): Item | null {
         if (slot <= -1) {
             return null;
@@ -35,7 +35,7 @@ export class ItemFactory {
             quantity,
             behavior,
             data,
-            slot
+            slot,
         };
 
         if (item.quantity <= -1) {
@@ -49,11 +49,10 @@ export class ItemFactory {
      * Creates an exact clone of an item but gives it a new hash.
      * @static
      * @param {Item} item
-     * @return {*}  {Item}
+     * @return {Item}
      * @memberof ItemFactory
      */
     static clone(item: Item): Item {
-        const newItem: Item = deepCloneObject(item);
-        return newItem;
+        return deepCloneObject(item);
     }
 }

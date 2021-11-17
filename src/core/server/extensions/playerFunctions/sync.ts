@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../../shared/enums/currency';
+import { CurrencyTypes } from '../../../shared/enums/Currency';
 import { World } from '../../systems/world';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../../shared/enums/System';
 import emit from './emit';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { playerFuncs } from '../Player';
 import save from './save';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
 import { Item } from '../../../shared/interfaces/Item';
 import { Appearance } from '../../../shared/interfaces/Appearance';
 

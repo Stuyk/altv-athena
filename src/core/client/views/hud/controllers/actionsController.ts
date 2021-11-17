@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/System';
 import { Action, ActionMenu } from '../../../../shared/interfaces/Actions';
 import { handleFrontendSound } from '../../../systems/sound';
 import { BaseHUD } from '../hud';

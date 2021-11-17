@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { View_Events_Garage } from '../../shared/enums/views';
+import { View_Events_Garage } from '../../shared/enums/Views';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

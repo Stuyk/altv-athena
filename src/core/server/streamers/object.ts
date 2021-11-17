@@ -1,21 +1,21 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { IObject } from '../../shared/interfaces/IObject';
 import { sha256Random } from '../utility/encryption';
-import { StreamerService } from './streamer';
+import { StreamerService } from '../systems/streamer';
 
 const globalObjects: Array<IObject> = [];
 const KEY = 'objects';
 
-export class ObjectController {
+export class ServerObjectController {
     /**
      * Initialize the Object Controller Streamer
      * @static
      * @memberof ObjectController
      */
     static init() {
-        StreamerService.registerCallback(KEY, ObjectController.update);
+        StreamerService.registerCallback(KEY, ServerObjectController.update);
     }
 
     /**
@@ -40,7 +40,7 @@ export class ObjectController {
         }
 
         globalObjects.push(objectData);
-        ObjectController.refresh();
+        ServerObjectController.refresh();
         return objectData.uid;
     }
 
@@ -58,7 +58,7 @@ export class ObjectController {
         }
 
         globalObjects.splice(index, 1);
-        ObjectController.refresh();
+        ServerObjectController.refresh();
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;
     }
@@ -108,4 +108,4 @@ export class ObjectController {
     }
 }
 
-ObjectController.init();
+ServerObjectController.init();

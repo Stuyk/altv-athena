@@ -1,7 +1,7 @@
-import { ITEM_TYPE } from '../enums/itemTypes';
+import { ITEM_TYPE } from '../enums/ItemTypes';
 import { Item } from '../interfaces/Item';
 import { deepCloneObject } from '../utility/deepCopy';
-import EFFECTS from '../enums/effects';
+import EFFECTS from '../enums/Effects';
 
 export const ItemRegistry: Array<Item> = [
     {
@@ -19,8 +19,8 @@ export const ItemRegistry: Array<Item> = [
         data: {
             event: EFFECTS.EFFECT_FOOD,
             amount: 5,
-            sound: 'item_eat'
-        }
+            sound: 'item_eat',
+        },
     },
     {
         name: `Bread`,
@@ -37,8 +37,8 @@ export const ItemRegistry: Array<Item> = [
         data: {
             event: EFFECTS.EFFECT_FOOD,
             amount: 3,
-            sound: 'item_eat'
-        }
+            sound: 'item_eat',
+        },
     },
     {
         name: `Repair Kit`,
@@ -53,9 +53,9 @@ export const ItemRegistry: Array<Item> = [
             ITEM_TYPE.CONSUMABLE |
             ITEM_TYPE.SKIP_CONSUMABLE,
         data: {
-            event: 'effect:Vehicle:Repair'
-        }
-    }
+            event: 'effect:Vehicle:Repair',
+        },
+    },
 ];
 
 /**

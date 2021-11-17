@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 const KEY_UP_BINDS: Keybinds = {};
 const DELAY_BETWEEN_LONG_PRESSES = 800;

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../shared/enums/currency';
+import { CurrencyTypes } from '../../shared/enums/Currency';
 
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
@@ -43,7 +43,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_MEMBERS
+            FACTION_PERMISSION_FLAGS.ADD_MEMBERS,
         );
 
         if (!result.status) {
@@ -74,7 +74,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.KICK_MEMBER
+            FACTION_PERMISSION_FLAGS.KICK_MEMBER,
         );
 
         if (!result.status) {
@@ -105,7 +105,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         if (!result.status) {
@@ -135,7 +135,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         if (!result.status) {
@@ -164,7 +164,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES,
         );
 
         if (!result.status) {
@@ -190,7 +190,7 @@ export class FactionSystem {
     static async setRankPermissions(
         player: alt.Player,
         rankIndex: number,
-        flags: FACTION_PERMISSION_FLAGS
+        flags: FACTION_PERMISSION_FLAGS,
     ): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
@@ -201,7 +201,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
         );
 
         const faction = FactionInternalSystem.get(player.data.faction);
@@ -209,11 +209,11 @@ export class FactionSystem {
         const wasAlreadySet =
             FactionInternalSystem.checkPermission(
                 faction.ranks[rankIndex].permissions,
-                FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+                FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
             ) ||
             FactionInternalSystem.checkPermission(
                 faction.ranks[rankIndex].permissions,
-                FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+                FACTION_PERMISSION_FLAGS.SUPER_ADMIN,
             );
 
         const isSettingPerms =
@@ -223,7 +223,7 @@ export class FactionSystem {
         if (!wasAlreadySet && isSettingPerms && faction.players[0].id !== player.data._id.toString()) {
             return {
                 status: false,
-                response: 'Only the owner can append rank permission(s) or super admin flag to a rank.'
+                response: 'Only the owner can append rank permission(s) or super admin flag to a rank.',
             };
         }
 
@@ -255,7 +255,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER,
         );
 
         if (!result.status) {
@@ -286,7 +286,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK,
         );
 
         if (!result.status) {
@@ -316,7 +316,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_NAME
+            FACTION_PERMISSION_FLAGS.CHANGE_NAME,
         );
 
         if (!result.status) {
@@ -345,7 +345,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_NAME
+            FACTION_PERMISSION_FLAGS.CHANGE_NAME,
         );
 
         if (!result.status) {
@@ -376,12 +376,15 @@ export class FactionSystem {
                 const result = FactionInternalSystem.hasPermission(
                     player.data.faction,
                     player.data._id.toString(),
-                    FACTION_PERMISSION_FLAGS.ACCESS_STORAGE
+                    FACTION_PERMISSION_FLAGS.ACCESS_STORAGE,
                 );
 
                 if (!result) {
                     playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
-                    return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE) };
+                    return {
+                        status: false,
+                        response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE),
+                    };
                 }
 
                 break;
@@ -390,12 +393,15 @@ export class FactionSystem {
                 const result = FactionInternalSystem.hasPermission(
                     player.data.faction,
                     player.data._id.toString(),
-                    FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS
+                    FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS,
                 );
 
                 if (!result) {
                     playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
-                    return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE) };
+                    return {
+                        status: false,
+                        response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE),
+                    };
                 }
 
                 break;
@@ -429,7 +435,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
         );
 
         if (!result.status) {
@@ -437,11 +443,17 @@ export class FactionSystem {
         }
 
         if (player.data.cash + player.data.bank < amount) {
-            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount) };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount),
+            };
         }
 
         if (!playerFuncs.currency.subAllCurrencies(player, amount)) {
-            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount) };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount),
+            };
         }
 
         const response = await FactionInternalSystem.depositToBank(player.data.faction, amount);
@@ -467,7 +479,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
         );
 
         if (!result.status) {
@@ -476,11 +488,17 @@ export class FactionSystem {
 
         const withdrawResult = await FactionInternalSystem.withdrawFromBank(player.data.faction, amount);
         if (!withdrawResult.status) {
-            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount) };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount),
+            };
         }
 
         if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
-            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount) };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount),
+            };
         }
 
         const response = { status: true, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_WITHDREW, amount) };

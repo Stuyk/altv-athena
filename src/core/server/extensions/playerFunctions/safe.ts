@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
 import emit from './emit';
 import save from './save';
 

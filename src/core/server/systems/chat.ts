@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Chat } from '../../shared/enums/views';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { View_Events_Chat } from '../../shared/enums/Views';
 import { CHARACTER_PERMISSIONS, PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { Command } from '../../shared/interfaces/Command';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -55,7 +55,7 @@ export default class ChatController {
             name,
             description,
             func: callback,
-            permission: permissions
+            permission: permissions,
         };
     }
 
@@ -72,7 +72,7 @@ export default class ChatController {
         name: string,
         description: string,
         characterPermissions: CHARACTER_PERMISSIONS,
-        callback: Function
+        callback: Function,
     ): void {
         if (commandInterval) {
             alt.clearTimeout(commandInterval);
@@ -97,7 +97,7 @@ export default class ChatController {
             name,
             description,
             func: callback,
-            characterPermissions
+            characterPermissions,
         };
     }
 
@@ -163,7 +163,7 @@ export default class ChatController {
             player.pos,
             alt.Player.all,
             DEFAULT_CONFIG.CHAT_DISTANCE,
-            ['discord'] // Used to check if they're logged in.
+            ['discord'], // Used to check if they're logged in.
         );
 
         emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${message}`);
@@ -182,7 +182,7 @@ export default class ChatController {
         if (!commandInfo || !commandInfo.func) {
             playerFuncs.emit.message(
                 player,
-                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`
+                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`,
             );
             return;
         }
@@ -193,7 +193,7 @@ export default class ChatController {
             if (!isAdminPermissionValid) {
                 playerFuncs.emit.message(
                     player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`,
                 );
                 return;
             }
@@ -203,20 +203,20 @@ export default class ChatController {
             if (!player.data.characterPermission) {
                 playerFuncs.emit.message(
                     player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
                 );
                 return;
             }
 
             const isCharacterPermValid = isFlagEnabled(
                 player.data.characterPermission,
-                commandInfo.characterPermissions
+                commandInfo.characterPermissions,
             );
 
             if (!isCharacterPermValid) {
                 playerFuncs.emit.message(
                     player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
                 );
                 return;
             }
@@ -254,7 +254,7 @@ export default class ChatController {
             if (commandInfo.permission) {
                 const isAdminPermissionValid = isFlagEnabled(
                     player.accountData.permissionLevel,
-                    commandInfo.permission
+                    commandInfo.permission,
                 );
                 if (!isAdminPermissionValid) {
                     return;
@@ -263,7 +263,7 @@ export default class ChatController {
                 commandList.push({
                     name: commandInfo.name,
                     description: commandInfo.description,
-                    permission: commandInfo.permission
+                    permission: commandInfo.permission,
                 });
                 return;
             }
@@ -276,7 +276,7 @@ export default class ChatController {
 
                 const isCharacterPermValid = isFlagEnabled(
                     player.data.characterPermission,
-                    commandInfo.characterPermissions
+                    commandInfo.characterPermissions,
                 );
                 if (!isCharacterPermValid) {
                     return;
@@ -285,7 +285,7 @@ export default class ChatController {
                 commandList.push({
                     name: commandInfo.name,
                     description: commandInfo.description,
-                    characterPermissions: commandInfo.characterPermissions
+                    characterPermissions: commandInfo.characterPermissions,
                 });
                 return;
             }

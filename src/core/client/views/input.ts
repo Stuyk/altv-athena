@@ -4,7 +4,7 @@ import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
-import { View_Events_Input_Menu } from '../../shared/enums/views';
+import { View_Events_Input_Menu } from '../../shared/enums/Views';
 
 const url = `http://assets/webview/client/input/index.html`;
 let inputMenu: InputMenu;

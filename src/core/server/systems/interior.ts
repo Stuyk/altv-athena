@@ -1,9 +1,9 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { CurrencyTypes } from '../../shared/enums/currency';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/AthenaEvents';
+import { CurrencyTypes } from '../../shared/enums/Currency';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/InteriorFlags';
 import { Character } from '../../shared/interfaces/Character';
 import { Interior } from '../../shared/interfaces/Interior';
@@ -18,9 +18,9 @@ import { InteriorInfo } from '../interface/InteriorInfo';
 import Logger from '../utility/athenaLogger';
 import { getMissingNumber } from '../utility/math';
 import { InteractionController } from './interaction';
-import { MarkerController } from './marker';
-import { ObjectController } from './object';
-import { TextLabelController } from './textlabel';
+import { ServerMarkerController } from '../streamers/marker';
+import { ServerObjectController } from '../streamers/object';
+import { ServerTextLabelController } from '../streamers/textlabel';
 
 import './storage';
 import { StorageSystem } from './storage';
@@ -163,8 +163,8 @@ export class InteriorSystem {
             z: interior.outside.z + 0.75,
         };
 
-        TextLabelController.remove(`${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`);
-        TextLabelController.append({
+        ServerTextLabelController.remove(`${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`);
+        ServerTextLabelController.append({
             uid: `${PREFIX_HOUSE_TEXT_OUTSIDE}${interior.id}`,
             pos: aboveGroundOutside,
             data: outsideName,
@@ -192,7 +192,7 @@ export class InteriorSystem {
             z: interior.inside.z - 0.5,
         };
 
-        MarkerController.append({
+        ServerMarkerController.append({
             uid: `house-marker-outside-${interior.id}`,
             maxDistance: 15,
             color: new alt.RGBA(255, 255, 0, 75),
@@ -381,7 +381,7 @@ export class InteriorSystem {
         const objects = interior.objects;
 
         for (let i = 0; i < objects.length; i++) {
-            ObjectController.removeFromPlayer(player, objects[i].uid, true);
+            ServerObjectController.removeFromPlayer(player, objects[i].uid, true);
         }
 
         // Reset Objects and Re-Add Them
@@ -391,7 +391,7 @@ export class InteriorSystem {
 
         for (let i = 0; i < objects.length; i++) {
             objects[i].isInterior = true;
-            ObjectController.addToPlayer(player, objects[i]);
+            ServerObjectController.addToPlayer(player, objects[i]);
         }
     }
 
@@ -594,7 +594,7 @@ export class InteriorSystem {
                 dimension: id,
             });
 
-            MarkerController.append({
+            ServerMarkerController.append({
                 uid: `house-marker-inside-${id}`,
                 maxDistance: 15,
                 color: new alt.RGBA(255, 255, 0, 75),
@@ -790,7 +790,10 @@ export class InteriorSystem {
             if (target) {
                 playerFuncs.currency.add(target, CurrencyTypes.BANK, originalPrice);
                 playerFuncs.emit.sound2D(target, 'item_purchase');
-                playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_SOLD, interiors[index].id, originalPrice));
+                playerFuncs.emit.notification(
+                    player,
+                    LocaleController.get(LOCALE_KEYS.INTERIOR_SOLD, interiors[index].id, originalPrice),
+                );
             } else {
                 const targetData = await Database.fetchData<Character>(`_id`, originalOwner, Collections.Characters);
                 targetData.bank += originalPrice;
@@ -810,7 +813,10 @@ export class InteriorSystem {
         );
 
         InteriorSystem.refreshHouseText(interiors[index]);
-        playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERIOR_PURCHASED, interiors[index].id, originalPrice));
+        playerFuncs.emit.notification(
+            player,
+            LocaleController.get(LOCALE_KEYS.INTERIOR_PURCHASED, interiors[index].id, originalPrice),
+        );
         playerFuncs.emit.sound2D(player, 'item_purchase');
     }
 
