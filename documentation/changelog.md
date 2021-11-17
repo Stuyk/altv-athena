@@ -87,6 +87,12 @@ description: List of all the changes and current versions.
 + Added Inventory Backend Hookup and Frontend
 + Added Inventory Camera Smoothing
 + Added Fade In / Fade Out to Menus
++ Added In-Menu Notifications to Inventory
++ Added Item Drops to Inventory
++ Added Inventory Drop Panel
++ Added Object Models to Item Drops
++ Added Text to Item Drops
++ Removed Markers from Item Drops
 ```
 
 ## 2.0.3
@@ -144,12 +150,6 @@ description: List of all the changes and current versions.
 + Add WebServer Resource for Production Mode
 + Fix Bug where Fuel is Not Synced / Updated
 + Added Fuel System Again
-+ Added In-Menu Notifications to Inventory
-+ Added Item Drops to Inventory
-+ Added Inventory Drop Panel
-+ Added Object Models to Item Drops
-+ Added Text to Item Drops
-+ Removed Markers from Item Drops
 ```
 
 ## 2.0.2
