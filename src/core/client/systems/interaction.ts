@@ -212,7 +212,7 @@ export class InteractionController {
 
         for (let i = 0; i < textToDraw.length; i++) {
             const text = textToDraw[i];
-            drawText2D(text, { x: 0.01, y: 0.01 }, 0.5, new alt.RGBA(255, 255, 255, 255), 1);
+            drawText2D(text, { x: 0.01, y: 0.01 + i * 0.05 }, 0.5, new alt.RGBA(255, 255, 255, 255), 1);
         }
 
         // Draw the Help Text (Top Left)

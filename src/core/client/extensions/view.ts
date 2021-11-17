@@ -18,7 +18,7 @@ alt.on('disconnect', async () => {
 });
 
 alt.on('connectionComplete', async () => {
-    const view = await View.getInstance(blankURL, false, true);
+    // const view = await View.getInstance(blankURL, false, true);
 });
 
 alt.onServer(SYSTEM_EVENTS.SET_VIEW_URL, (url: string) => {
