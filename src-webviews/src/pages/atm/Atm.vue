@@ -58,6 +58,7 @@ import Frame from '../../components/Frame.vue';
 import Deposit from './components/Deposit.vue';
 import Withdraw from './components/Withdraw.vue';
 import Transfer from './components/Transfer.vue';
+import DefaultLocale from './utility/defaultLocale';
 
 export const ComponentName = 'Atm';
 export default defineComponent({
@@ -80,23 +81,7 @@ export default defineComponent({
             bank: 0,
             colors: ['green', 'blue', 'orange'],
             labels: ['LABEL_DEPOSIT', 'LABEL_WITHDRAW', 'LABEL_TRANSFER'],
-            locales: {
-                LABEL_ATM: 'ATM',
-                LABEL_CASH: 'Cash',
-                LABEL_BANK: 'Bank',
-                LABEL_DEPOSIT: 'Deposit',
-                LABEL_WITHDRAW: 'Withdraw',
-                LABEL_TRANSFER: 'Transfer',
-                LABEL_CASH_TO_DEPOSIT: 'Cash to Deposit',
-                LABEL_CASH_TO_WITHDRAW: 'Cash to Withdraw',
-                LABEL_BANK_TO_TRANSFER: 'Bank amount to transfer',
-                LABEL_USER_ID: `User ID to transfer to`,
-                FIELD_IS_REQUIRED: `Field is required`,
-                GREATER_THAN_ZERO: `Value must be greater than zero`,
-                LESS_THAN_CASH: `Value must be less than cash`,
-                LESS_THAN_BANK: `Value must be less than bank`,
-                USER_ID_POSITIVE: `User ID must be positive`,
-            },
+            locales: DefaultLocale,
             options: ['Deposit', 'Withdraw', 'Transfer'],
             // components: [DepositComponent, WithdrawComponent, TransferComponent],
             processing: true,

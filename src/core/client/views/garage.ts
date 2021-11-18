@@ -3,13 +3,13 @@ import { View_Events_Garage } from '../../shared/enums/Views';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 
-const url = `http://assets/webview/client/garage/index.html`;
-let view: View;
+const PAGE_NAME = 'Garage';
+
 let vehicles: Partial<IVehicle>[];
 
 class GarageView implements ViewModel {
@@ -26,30 +26,41 @@ class GarageView implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
-        view.on('garage:Ready', GarageView.ready);
-        view.on('garage:Close', GarageView.close);
-        view.on('garage:Spawn', GarageView.spawn);
-        view.on('garage:Despawn', GarageView.despawn);
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Ready`, GarageView.ready);
+        view.on(`${PAGE_NAME}:Close`, GarageView.close);
+        view.on(`${PAGE_NAME}:Spawn`, GarageView.spawn);
+        view.on(`${PAGE_NAME}:Despawn`, GarageView.despawn);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
+
+        alt.Player.local.isMenuOpen = true;
     }
 
-    static close() {
+    static async close() {
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
-        if (!view) {
-            return;
-        }
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, GarageView.ready);
+        view.off(`${PAGE_NAME}:Close`, GarageView.close);
+        view.off(`${PAGE_NAME}:Spawn`, GarageView.spawn);
+        view.off(`${PAGE_NAME}:Despawn`, GarageView.despawn);
 
-        view.close();
-        view = null;
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
     }
 
-    static ready() {
-        view.emit('garage:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_GARAGE));
-        view.emit('garage:SetVehicles', vehicles);
+    static async ready() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_GARAGE));
+        view.emit(`${PAGE_NAME}:SetVehicles`, vehicles);
     }
 
     static spawn(uid: string) {
