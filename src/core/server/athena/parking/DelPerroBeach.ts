@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -1603.747314453125, y: -935.0883178710938, z: 8.2 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'del-perro-beach',
     parking: [
         {
             position: { x: -1607.014404296875, y: -933.580810546875, z: 8.7178955078125 },

@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -1055.502685546875, y: -2646.731201171875, z: 13.3 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'los-santos-international-vehicle',
     parking: [
         {
             position: {

@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: 1690.7730712890625, y: 4785.0712890625, z: 41.4 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'grape-seed',
     parking: [
         {
             position: {

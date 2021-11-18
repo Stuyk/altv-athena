@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -2954.107666015625, y: 470.46356201171875, z: 14.9 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'banham-canyon',
     parking: [
         {
             position: {

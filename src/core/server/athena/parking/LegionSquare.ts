@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: 213.7648468017578, y: -809.2598876953125, z: 30.5 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'legion-square',
     parking: [
         {
             position: {

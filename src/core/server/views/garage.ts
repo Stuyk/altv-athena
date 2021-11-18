@@ -23,9 +23,9 @@ const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
 const VehicleCache: { [id: string]: Array<IVehicle> } = {};
 
+let activeGarages: Array<IGarage> = [];
 let queue: Array<IGarage> = [];
 let hasFinishedInit = false;
-let count = 0;
 
 interface PositionAndRotation {
     position: Vector3;
@@ -38,7 +38,7 @@ class GarageFunctions {
 
         for (let i = 0; i < garages.length; i++) {
             const garage = garages[i];
-            GarageFunctions.add(garage);
+            GarageFunctions.add(garage, true);
         }
 
         hasFinishedInit = true;
@@ -60,6 +60,7 @@ class GarageFunctions {
     static async add(garage: IGarage, isInit = false) {
         if (!hasFinishedInit && !isInit) {
             queue.push(garage);
+            return;
         }
 
         const properTypeName = garage.type.charAt(0).toUpperCase() + garage.type.slice(1);
@@ -68,7 +69,7 @@ class GarageFunctions {
             position: garage.position,
             description: LocaleController.get(LOCALE_KEYS.GARAGE_DESCRIPTION, properTypeName),
             type: 'garage',
-            data: [count], // Shop Index
+            data: [garage.index], // Shop Index
             callback: GarageFunctions.open,
         });
 
@@ -82,7 +83,7 @@ class GarageFunctions {
         });
 
         ServerMarkerController.append({
-            uid: `marker-garage-${count}`,
+            uid: `marker-garage-${garage.index}`,
             pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
             color: new alt.RGBA(0, 150, 0, 100),
             type: 1,
@@ -90,13 +91,18 @@ class GarageFunctions {
             scale: { x: 2, y: 2, z: 3 },
         });
 
-        count += 1;
+        activeGarages.push(garage);
     }
 
-    static async open(player: alt.Player, shopIndex: number) {
+    static async open(player: alt.Player, shopIndex: number | string) {
         GarageUsers[player.id] = shopIndex;
 
-        const garageType = DEFAULT_CONFIG.VEHICLE_GARAGES[shopIndex].type;
+        const index = activeGarages.findIndex((garage) => garage.index === shopIndex);
+        if (index <= -1) {
+            return;
+        }
+
+        const garageType = activeGarages[index].type;
         let playerVehicles = await playerFuncs.get.allVehicles(player);
 
         if (player.data && player.data.faction) {
@@ -231,7 +237,13 @@ class GarageFunctions {
 
         // Get the garage terminal information.
         const shopIndex = GarageUsers[player.id];
-        const parkingSpots = DEFAULT_CONFIG.VEHICLE_GARAGES[shopIndex].parking;
+        const index = activeGarages.findIndex((garage) => garage.index === shopIndex);
+        if (index <= -1) {
+            console.error(`Garage at ${shopIndex} was not found.`);
+            return;
+        }
+
+        const parkingSpots = activeGarages[index].parking;
         const openSpot = GarageFunctions.findOpenSpot(parkingSpots);
         if (!openSpot) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -278,7 +290,13 @@ class GarageFunctions {
         // Get the garage garage information, and position.
         // Determine if the vehicle is close enough to the garage.
         const shopIndex = GarageUsers[player.id];
-        const garage = DEFAULT_CONFIG.VEHICLE_GARAGES[shopIndex];
+        const index = activeGarages.findIndex((garage) => garage.index === shopIndex);
+        if (index <= -1) {
+            console.error(`Garage at ${shopIndex} was not found.`);
+            return;
+        }
+
+        const garage = activeGarages[index];
         const dist = distance2d(vehicle.pos, garage.position);
 
         // Check if the vehicle is either close to a parking spot or the garage itself.

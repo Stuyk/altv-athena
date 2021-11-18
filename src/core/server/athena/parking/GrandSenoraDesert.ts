@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: 1183.4117431640625, y: 2700.958984375, z: 37.6 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'grand-senora-desert',
     parking: [
         {
             position: {

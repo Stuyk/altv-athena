@@ -29,6 +29,13 @@ export interface IVehicle {
     behavior?: Vehicle_Behavior;
 
     /**
+     * Used for players to easily know what vehicle they're pulling out.
+     * @type {string}
+     * @memberof IVehicle
+     */
+    nickname?: string;
+
+    /**
      * Last interior this vehicle was in.
      * @type {string}
      * @memberof IVehicle
@@ -86,7 +93,7 @@ export interface IVehicle {
      * @type {number}
      * @memberof IVehicle
      */
-    garageIndex?: number;
+    garageIndex?: number | string;
 
     /**
      * The amount of fuel left in this vehicle.

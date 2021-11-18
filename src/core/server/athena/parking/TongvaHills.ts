@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -1892.1685791015625, y: 2039.3367919921875, z: 140.3 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'tongva-hills',
     parking: [
         {
             position: {

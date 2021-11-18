@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -732.739501953125, y: -1311.5386962890625, z: 4.5 },
     type: VEHICLE_TYPE.BOAT,
+    index: 'la-puerta-dock',
     parking: [
         {
             position: { x: -727.3632202148438, y: -1325.9879150390625, z: -0.47485408186912537 },

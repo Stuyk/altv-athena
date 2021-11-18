@@ -98,6 +98,7 @@ description: List of all the changes and current versions.
 + Items with different rarity by default do not stack
 + Rarity is optional
 + Fixed /getitem to support spaces in item names
++ Made Garage Names Persistent
 ```
 
 ## 2.0.3

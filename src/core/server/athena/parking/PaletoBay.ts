@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -20.12179183959961, y: 6311.2998046875, z: 30.8 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'paleto-bay',
     parking: [
         {
             position: {

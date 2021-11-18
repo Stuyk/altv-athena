@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: 638.1083374023438, y: 206.50425720214844, z: 97.1 },
     type: VEHICLE_TYPE.VEHICLE,
+    index: 'downtown-vinewood-upper',
     parking: [
         {
             position: { x: 628.10546875, y: 196.30441284179688, z: 97.22518157958984 },

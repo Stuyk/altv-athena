@@ -3,6 +3,7 @@ import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
 export default {
     position: { x: -1125.9300537109375, y: -2917.38916015625, z: 13.4 },
     type: VEHICLE_TYPE.AIRCRAFT,
+    index: 'los-santos-international-air',
     parking: [
         {
             position: {
