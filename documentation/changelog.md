@@ -94,6 +94,10 @@ description: List of all the changes and current versions.
 + Added Text to Item Drops
 + Removed Markers from Item Drops
 + Added HWID Tools and HWID Support for Licenses
++ Added Rarity Support for Items
++ Items with different rarity by default do not stack
++ Rarity is optional
++ Fixed /getitem to support spaces in item names
 ```
 
 ## 2.0.3

@@ -7,7 +7,15 @@
                     :id="`e-${index}`"
                     :class="getItemClass(item, index, equipmentSize)"
                     :key="index"
-                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
+                    v-on="
+                        !item
+                            ? {}
+                            : {
+                                  mousedown: selectItem,
+                                  mouseenter: (e) => selectItemInfo(e, item),
+                                  mouseleave: clearItemInfo,
+                              }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -27,7 +35,29 @@
                     </template>
                 </div>
             </div>
+            <div class="stats-wrapper">
+                <div class="stats-bg" v-if="itemInfo">
+                    <div class="stats">
+                        <div class="split split-full">
+                            <div class="item-name boldest" :class="getClassRarity">
+                                {{ itemInfo.name }}
+                            </div>
+                            <div class="item-quantity" :class="getClassRarity">{{ itemInfo.quantity }}x</div>
+                        </div>
+                        <div class="item-desc" v-if="itemInfo.description" :class="getClassRarity">
+                            {{ itemInfo.description }}
+                        </div>
+                        <div class="key-group" v-for="(prop, index) in getHoveredItemStats" :key="index">
+                            <div class="split split-full">
+                                <span class="overline">{{ prop.key }}:</span>
+                                <span class="overline">{{ prop.value }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="spacer">&nbsp;</div>
         <div class="character">
             <!-- Toolbar Display -->
             <div class="toolbar-grid">
@@ -36,7 +66,15 @@
                     :key="index"
                     :id="`t-${index}`"
                     :class="!item ? { 'is-null-item': true } : { item: true }"
-                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
+                    v-on="
+                        !item
+                            ? {}
+                            : {
+                                  mousedown: selectItem,
+                                  mouseenter: (e) => selectItemInfo(e, item),
+                                  mouseleave: clearItemInfo,
+                              }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
@@ -68,11 +106,12 @@
             </div>
             <!-- Drop Item Display -->
             <div class="drop-box-container">
-                <div class="drop-box grey--text text--darken-2 overline boldest" id="g-0">
+                <div class="drop-box grey--text text--lighten-2 overline boldest" id="g-0">
                     {{ locales.LABEL_DROP_ITEM }}
                 </div>
             </div>
         </div>
+        <div class="spacer">&nbsp;</div>
         <div class="inventory">
             <div class="inventory-grid">
                 <div
@@ -80,7 +119,15 @@
                     :id="`i-${index}`"
                     :key="index"
                     :class="getItemClass(item, index, inventorySize)"
-                    v-on="!item ? {} : { mousedown: selectItem, mouseenter: selectItemInfo, mouseleave: clearItemInfo }"
+                    v-on="
+                        !item
+                            ? {}
+                            : {
+                                  mousedown: selectItem,
+                                  mouseenter: (e) => selectItemInfo(e, item),
+                                  mouseleave: clearItemInfo,
+                              }
+                    "
                 >
                     <template v-if="item">
                         <div class="icon">
@@ -122,7 +169,6 @@ export default defineComponent({
             // Item Movement Data / Dragging
             x: 0,
             y: 0,
-            itemInfo: null,
             dragAndDrop: {
                 shiftX: null,
                 shiftY: null,
@@ -142,6 +188,17 @@ export default defineComponent({
             unitSuffix: 'u',
             // Notification Data
             notifications: [],
+            // Rarity Color Information
+            rarity: {
+                0: 'grey--text text--lighten-2',
+                1: 'grey--text text--lighten-4',
+                2: 'green--text text--lighten-2',
+                3: 'blue--text text--lighten-2',
+                4: 'purple--text text--lighten-2',
+                5: 'orange--text text--lighten-2',
+                6: 'red--text text--lighten-2',
+            },
+            itemInfo: null,
             locales: DefaultLocales,
         };
     },
@@ -258,7 +315,7 @@ export default defineComponent({
             this.toolbar = toolbar;
         },
         // Used to populate the item that has been hovered over.
-        selectItemInfo(e) {
+        selectItemInfo(e, item: any) {
             if (this.dragging) {
                 return;
             }
@@ -267,7 +324,7 @@ export default defineComponent({
                 return;
             }
 
-            this.itemInfo = e.target.id;
+            this.itemInfo = item;
         },
         clearItemInfo() {
             this.itemInfo = null;
@@ -562,6 +619,28 @@ export default defineComponent({
             return value.charAt(0).toUpperCase() + value.slice(1);
         },
     },
+    computed: {
+        getHoveredItemStats() {
+            return Object.keys(this.itemInfo.data).map((key) => {
+                if (key === 'event') {
+                    return { key: 'consumeable', value: true };
+                }
+
+                return { key, value: this.itemInfo.data[key] };
+            });
+        },
+        getClassRarity() {
+            if (this.itemInfo.rarity === undefined || this.itemInfo.rarity === null) {
+                return {};
+            }
+
+            if (!this.rarity[this.itemInfo.rarity]) {
+                return {};
+            }
+
+            return { [this.rarity[this.itemInfo.rarity]]: true };
+        },
+    },
     // Called when the page is loaded.
     mounted() {
         document.addEventListener('keyup', this.handleClose);
@@ -628,11 +707,12 @@ export default defineComponent({
                 {
                     name: `Box`,
                     uuid: `some_hash_thing_ground`,
-                    description: `It is a box.`,
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
+                    rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
                     },
@@ -640,11 +720,12 @@ export default defineComponent({
                 {
                     name: `Box`,
                     uuid: `some_hash_thing_ground`,
-                    description: `It is a box.`,
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
+                    rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
                     },
@@ -652,11 +733,12 @@ export default defineComponent({
                 {
                     name: `Box`,
                     uuid: `some_hash_thing_ground`,
-                    description: `It is a box.`,
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
+                    rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
                     },
@@ -664,11 +746,12 @@ export default defineComponent({
                 {
                     name: `Box`,
                     uuid: `some_hash_thing_ground`,
-                    description: `It is a box.`,
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
+                    rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
                         event: 'wahtever',
@@ -721,29 +804,77 @@ export default defineComponent({
 
 .equipment,
 .inventory {
-    width: auto;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
     align-self: flex-start;
-    align-items: center;
     flex-direction: column;
-    margin-top: 12px !important;
-    margin-left: 12px;
-    margin-right: 12px;
+    padding: 12px;
+}
+
+.equipment {
+    height: 100vh;
+}
+
+.inside-split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-height: calc(100vh - 24px) !important;
+}
+
+.stats-wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.stats-wrapper .stats-bg {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    align-self: flex-end;
+    width: 100%;
+    padding: 5px !important;
+}
+
+.stats-wrapper .stats-bg .stats {
+    display: flex;
+    padding: 5px !important;
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: column;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.key-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 6px;
+    margin-top: 3px;
+    padding-top: 3px;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.key-group span {
+    font-size: 10px !important;
 }
 
 .character {
-    width: 50vw;
+    min-width: 50vw;
+    max-width: 50vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding-top: 12px;
-    padding-bottom: 12px;
     align-self: flex-start;
     flex-direction: column;
+    padding: 12px;
 }
 
 .inventory-grid,
@@ -763,13 +894,20 @@ export default defineComponent({
 }
 
 .inventory-grid {
-    max-height: calc(100vh - 24px);
+    max-height: calc(100vh - 24px) !important;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px !important;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.3);
     background: rgba(0, 0, 0, 0.3);
+    align-self: flex-end;
+}
+
+.equipment-grid {
+    align-self: flex-start;
+    width: 100%;
+    grid-template-columns: repeat(3, auto);
 }
 
 .toolbar-grid {
@@ -785,6 +923,7 @@ export default defineComponent({
     height: 100%;
     border: 2px solid rgba(0, 0, 0, 0.5);
     background: rgba(0, 0, 0, 0.75);
+    min-width: 10vh;
 }
 
 .item:hover {
@@ -824,6 +963,7 @@ export default defineComponent({
     background: rgba(0, 0, 0, 0.85);
     border: 2px solid rgba(0, 0, 0, 0.5);
     cursor: auto;
+    min-width: 10vh;
 }
 
 .is-unusable-slot {
@@ -837,6 +977,7 @@ export default defineComponent({
     background: rgba(45, 60, 75, 0.5);
     border: 2px dotted rgba(0, 0, 0, 0.5);
     cursor: auto;
+    min-width: 10vh;
 }
 
 .quantity {
@@ -886,6 +1027,15 @@ export default defineComponent({
     padding-bottom: 5px;
     margin-top: 16px !important;
     margin-bottom: 0px !important;
+}
+
+.item-name,
+.item-quantity {
+    font-size: 14px;
+}
+
+.item-desc {
+    font-size: 12px !important;
 }
 
 .item-clone {
@@ -975,5 +1125,16 @@ export default defineComponent({
 .drop-box-container .drop-box:hover {
     border-color: red !important;
     background: rgba(255, 0, 0, 0.5) !important;
+}
+
+.spacer {
+    flex-grow: 1 !important;
+    width: 100%;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 </style>

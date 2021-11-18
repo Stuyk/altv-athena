@@ -115,11 +115,16 @@ function handleCommand(player: alt.Player): void {
     playerFuncs.sync.inventory(player);
 }
 
-function handleGetItem(player: alt.Player, name: string) {
-    const item = getFromRegistry(name);
+function handleGetItem(player: alt.Player, ...args) {
+    const fullItemName = args.join(' ');
+    if (fullItemName.length <= 2) {
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
+        return;
+    }
 
+    const item = getFromRegistry(fullItemName);
     if (!item) {
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, name));
+        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
         return;
     }
 

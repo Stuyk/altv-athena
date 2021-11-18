@@ -24,6 +24,20 @@ export interface Item {
     description: string;
 
     /**
+     * Auto-color rarity.
+     * 0 - Grey
+     * 1 - White
+     * 2 - Green
+     * 3 - Blue
+     * 4 - Purple
+     * 5 - Orange
+     * 6 - Red
+     * @type {number}
+     * @memberof Item
+     */
+    rarity?: number;
+
+    /**
      * A client-side icon name.
      * They are specified and created by you.
      * @type {string}

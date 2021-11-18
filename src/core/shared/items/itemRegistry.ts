@@ -23,6 +23,25 @@ export const ItemRegistry: Array<Item> = [
         },
     },
     {
+        name: `Ultra Delicious Burger`,
+        description: `An absurdly delicious burger.`,
+        icon: 'burger',
+        slot: 0,
+        quantity: 1,
+        rarity: 5,
+        behavior:
+            ITEM_TYPE.CAN_DROP |
+            ITEM_TYPE.CAN_TRADE |
+            ITEM_TYPE.CAN_STACK |
+            ITEM_TYPE.IS_TOOLBAR |
+            ITEM_TYPE.CONSUMABLE,
+        data: {
+            event: EFFECTS.EFFECT_FOOD,
+            amount: 25,
+            sound: 'item_eat',
+        },
+    },
+    {
         name: `Bread`,
         description: `An entire loaf of bread. It has 5 slices.`,
         icon: 'bread',
@@ -76,7 +95,7 @@ export function appendToItemRegistry(item: Item) {
  * @return {*}  {(Item | null)}
  */
 export function getFromRegistry(name: string): Item | null {
-    const index = ItemRegistry.findIndex((itemRef) => itemRef.name.toLowerCase().includes(name));
+    const index = ItemRegistry.findIndex((itemRef) => itemRef.name.toLowerCase().includes(name.toLowerCase()));
     if (index <= -1) {
         return null;
     }
