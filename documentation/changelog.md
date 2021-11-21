@@ -99,6 +99,7 @@ description: List of all the changes and current versions.
 + Rarity is optional
 + Fixed /getitem to support spaces in item names
 + Made Garage Names Persistent
++ Added Split / Stack to Inventory System
 ```
 
 ## 2.0.3
