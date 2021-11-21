@@ -985,6 +985,36 @@ function notify(player: alt.Player, info: string) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, info);
 }
 
+/**
+ * Gets weight from the entire inventory.
+ * Weight can be assigned to an item by putting 'weight' in data.
+ * @param {alt.Player} player
+ * @return {number}
+ */
+function getTotalWeight(player: alt.Player): number {
+    const inventory = [...player.data.inventory];
+    let total = 0;
+
+    for (let i = 0; i < inventory.length; i++) {
+        const item = inventory[i];
+        if (!item) {
+            continue;
+        }
+
+        if (!item.data) {
+            continue;
+        }
+
+        if (!item.data.weight) {
+            continue;
+        }
+
+        total += parseFloat(item.data.weight);
+    }
+
+    return total;
+}
+
 export default {
     convert,
     allItemRulesValid,
@@ -999,6 +1029,7 @@ export default {
     getInventoryItem,
     getSlotType,
     getToolbarItem,
+    getTotalWeight,
     handleSwapOrStack,
     hasItem,
     hasWeapon,
