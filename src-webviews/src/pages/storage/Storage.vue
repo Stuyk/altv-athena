@@ -1,7 +1,7 @@
 <template>
     <Frame minWidth="75vw" maxWidth="75vw">
         <template v-slot:toolbar>
-            <Toolbar @close-page="relayClosePage" pageName="Storage">Storage</Toolbar>
+            <Toolbar @close-page="relayClosePage" pageName="Storage">{{ name }}</Toolbar>
         </template>
         <template v-slot:content>
             <div class="split split-full space-between">

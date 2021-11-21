@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
 import { EQUIPMENT_TYPE } from '../../../shared/enums/EquipmentType';
-import { INVENTORY_RULES } from '../../../shared/enums/InventoryRules';
-import { SLOT_TYPE } from '../../../shared/enums/InventorySlotType';
 import { INVENTORY_TYPE } from '../../../shared/enums/InventoryTypes';
 import { ITEM_TYPE } from '../../../shared/enums/ItemTypes';
 import { SYSTEM_EVENTS } from '../../../shared/enums/System';
@@ -10,7 +8,6 @@ import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/CategoryData';
 import { stripCategory } from '../../utility/category';
-import { InventoryController } from '../../views/inventory';
 import { playerFuncs } from '../Player';
 
 const MAX_EQUIPMENT_SLOTS = 11; // This really should not be changed. Ever.
