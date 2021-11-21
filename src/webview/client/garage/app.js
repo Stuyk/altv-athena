@@ -27,9 +27,7 @@ const app = new Vue({
 
             this.url = `http://${url}`;
         },
-        setVehicles(vehicles) {
-            this.vehicles = vehicles;
-        },
+        
         exit() {
             if ('alt' in window) {
                 alt.emit('garage:Close');
@@ -64,7 +62,10 @@ const app = new Vue({
 
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
             alt.emit('garage:Despawn', this.vehicles[index].id);
-        }
+        },
+        setVehicles(vehicles) {
+            this.vehicles = vehicles;
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);

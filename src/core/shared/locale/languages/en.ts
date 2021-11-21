@@ -957,6 +957,7 @@ export default {
         LABEL_CANCEL: 'cancel',
         LABEL_DROP_ITEM: 'Drop Item',
         LABEL_WEIGHT: 'Weight',
+        LABEL_SPLIT_TEXT: 'Make a stack of this quantity?',
     },
     [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
         LABEL_HAT: 'Hat',

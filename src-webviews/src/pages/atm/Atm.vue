@@ -128,7 +128,11 @@ export default defineComponent({
                 return;
             }
 
-            this.exit();
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:Close`);
         },
     },
     computed: {

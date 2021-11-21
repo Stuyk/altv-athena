@@ -1,5 +1,49 @@
 <template>
-    <div class="split-three-way">
+    <div class="split-three-way" oncontextmenu="return false;">
+        <!-- Split Interface -->
+        <Modal v-if="split">
+            <Frame minWidth="45vw" maxWidth="45vw">
+                <template v-slot:toolbar>
+                    <Toolbar :hideExit="true">
+                        <span class="yellow--text"> {{ split.item.name }} ({{ split.item.quantity }}x) </span>
+                    </Toolbar>
+                </template>
+                <template v-slot:content>
+                    <div class="split-interface">
+                        <div class="subtitle-2 grey--text mb-2 mt-2">
+                            {{ locales.LABEL_SPLIT_TEXT }} {{ splitAmount }}x
+                        </div>
+                        <div class="split split-full center pb-4 pt-4" v-if="split.item.quantity - 1 >= 2">
+                            <Button color="blue" @click="setIncrementAmount(null, -1)">
+                                <Icon :size="14" icon="icon-chevron-left"></Icon>
+                            </Button>
+                            <RangeInput
+                                :minIndex="1"
+                                :maxIndex="split.item.quantity - 1"
+                                :indexValue="splitAmount"
+                                :increment="1"
+                                @input="(e) => setIncrementAmount(e)"
+                                style="width: 100%"
+                                class="pl-3 pr-3"
+                            />
+                            <Button color="blue" @click="setIncrementAmount(null, 1)">
+                                <Icon :size="14" icon="icon-chevron-right"></Icon>
+                            </Button>
+                        </div>
+                        <div class="split split-full">
+                            <Button class="mt-2" color="red" style="width: 50%" @click="cancelSplitStack">
+                                {{ locales.LABEL_CANCEL }}
+                            </Button>
+                            <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="splitStack">
+                                {{ locales.LABEL_SPLIT }}
+                            </Button>
+                        </div>
+                    </div>
+                </template>
+            </Frame>
+        </Modal>
+
+        <!-- Normal Interfaces -->
         <div class="equipment">
             <div class="equipment-grid">
                 <div
@@ -150,7 +194,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import DefaultLocales from './utility/defaultLocale';
+import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
+import Modal from '../../components/Modal.vue';
+import Toolbar from '../../components/Toolbar.vue';
+import Frame from '../../components/Frame.vue';
+import RangeInput from '../../components/RangeInput.vue';
+import Module from '../../components/Module.vue';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
@@ -158,7 +208,13 @@ const ComponentName = 'Inventory';
 export default defineComponent({
     name: ComponentName,
     components: {
+        Button,
+        Frame,
         Icon,
+        Modal,
+        Module,
+        RangeInput,
+        Toolbar,
     },
     props: {
         emit: Function,
@@ -200,10 +256,31 @@ export default defineComponent({
             },
             itemInfo: null,
             locales: DefaultLocales,
+            // Split Information
+            split: null,
+            splitAmount: 0,
         };
     },
     // Used to define functions you can call with 'this.x'
     methods: {
+        setIncrementAmount(e, amount) {
+            // Clicked a button
+            if (!e) {
+                if (amount <= -1 && this.splitAmount - 1 >= 1) {
+                    this.splitAmount -= 1;
+                    return;
+                }
+
+                if (amount >= 1 && this.splitAmount + 1 <= this.split.item.quantity - 1) {
+                    this.splitAmount += 1;
+                    return;
+                }
+                return;
+            }
+
+            const value = parseFloat(e.target['value']);
+            this.splitAmount = value;
+        },
         addNotification(info: string) {
             const _notifications = [...this.notifications];
             _notifications.unshift(info);
@@ -214,6 +291,35 @@ export default defineComponent({
                 currentNotifications.pop();
                 this.notifications = currentNotifications;
             }, 1500);
+        },
+        cancelSplitStack() {
+            this.split = null;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+        },
+        splitStack() {
+            let amount = parseFloat(this.splitAmount);
+
+            if (isNaN(amount)) {
+                this.split = null;
+                return;
+            }
+
+            if (this.splitAmount > this.split.item.quantity) {
+                return;
+            }
+
+            if ('alt' in window) {
+                alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
+                alt.emit(`${ComponentName}:Split`, this.split.slot, this.splitAmount);
+            }
+
+            this.splitAmount = 1;
+            this.split = null;
         },
         handleClose(keyPress) {
             // Escape && 'i'
@@ -395,6 +501,7 @@ export default defineComponent({
                         item: element,
                     };
 
+                    console.log(this.split);
                     this.splitAmount = Math.floor(element.quantity / 2);
                     return;
                 }
@@ -534,14 +641,10 @@ export default defineComponent({
             const isNullEndSlot = endElement.classList.contains('is-null-item');
             const isDropBox = endElement.classList.contains('drop-box');
             const isInventoryEndSlot = !endElement.id.includes('i-');
+            const isSameSlot = selectedSlot === endSlot;
 
             // Check to make sure ground items are only being moved into the inventory slots.
-            if (!isTab && !isDropBox && !isNullEndSlot && !isInventoryEndSlot) {
-                return;
-            }
-
-            // Check if the selected slot isn't the same as the end slot.
-            if (selectedSlot === endSlot) {
+            if (!isTab && !isDropBox && !isNullEndSlot && !isInventoryEndSlot && isSameSlot) {
                 return;
             }
 
@@ -723,7 +826,8 @@ export default defineComponent({
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
-                    quantity: 1,
+                    behavior: 151,
+                    quantity: 4,
                     weight: Math.floor(Math.random() * 5),
                     rarity: Math.floor(Math.random() * 6),
                     data: {
@@ -736,7 +840,8 @@ export default defineComponent({
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
                     slot: Math.floor(Math.random() * 28),
-                    quantity: 1,
+                    quantity: 2,
+                    behavior: 151,
                     weight: Math.floor(Math.random() * 5),
                     rarity: Math.floor(Math.random() * 6),
                     data: {
@@ -930,7 +1035,7 @@ export default defineComponent({
     background: rgba(0, 0, 0, 0.85);
 }
 
-.icon {
+.item .icon {
     display: flex;
     justify-content: center;
     justify-items: center;
@@ -945,7 +1050,7 @@ export default defineComponent({
     pointer-events: none !important;
 }
 
-.icon img {
+.item .icon img {
     min-width: 6.6666666666667vh;
     max-width: 6.6666666666667vh;
     user-select: none !important;
@@ -1136,5 +1241,10 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.button {
+    position: relative;
 }
 </style>

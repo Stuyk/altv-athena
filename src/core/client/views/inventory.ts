@@ -103,8 +103,8 @@ export class InventoryController implements ViewModel {
         alt.emitServer(View_Events_Inventory.Use, selectedSlot, tab);
     }
 
-    static handleSplit(selectedSlot: string, tab: number, amount: number): void {
-        alt.emitServer(View_Events_Inventory.Split, selectedSlot, tab, amount);
+    static handleSplit(selectedSlot: string, amount: number): void {
+        alt.emitServer(View_Events_Inventory.Split, selectedSlot, amount);
     }
 
     static async close() {
