@@ -170,15 +170,16 @@ export class StorageView {
             return;
         }
 
-        const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
-        if (!openSlot) {
-            playerFuncs.emit.notification(player, `Inventory is Full`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
+        const itemClone = deepCloneObject<Item>(storageCache[player.id].items[index]);
+        const canStack = isFlagEnabled(itemClone.behavior, ITEM_TYPE.CAN_STACK);
+
+        // Moving an item from storage we either specify an amount or null.
+        // null assumes that it's the maximum quantity of the item to be moved.
+        if (amount === null) {
+            amount = itemClone.quantity;
         }
 
-        const itemClone = deepCloneObject<Item>(storageCache[player.id].items[index]);
-        if (amount === null) {
+        if (amount > itemClone.maxStack) {
             amount = itemClone.quantity;
         }
 
@@ -186,20 +187,110 @@ export class StorageView {
             amount = itemClone.quantity;
         }
 
-        if (amount === itemClone.quantity) {
-            const removedItem = storageCache[player.id].items.splice(index, 1)[0];
-            if (!removedItem) {
+        // Get the existing item from the inventory if it matches.
+        const invIndex = player.data.inventory.findIndex((i) => {
+            if (i.name !== itemClone.name) {
+                return false;
+            }
+
+            if (i.rarity !== itemClone.rarity) {
+                return false;
+            }
+
+            if (i.maxStack === i.quantity) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // If the item is not found in the inventory.
+        // Simply add the item and remove the item from storage.
+        // Granted the item in storage is the same amount.
+        const invInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+        if (invIndex <= -1 || !canStack) {
+            if (amount < storageCache[player.id].items[index].quantity) {
+                storageCache[player.id].items[index].quantity -= amount;
+            } else {
+                const removedItem = storageCache[player.id].items.splice(index, 1)[0];
+                if (!removedItem) {
+                    playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                    return;
+                }
+            }
+
+            itemClone.quantity = amount;
+            if (!playerFuncs.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
+                playerFuncs.emit.notification(player, `Inventory is Full`);
                 playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
-        } else {
-            itemClone.quantity -= amount;
+
+            playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
+            playerFuncs.sync.inventory(player);
+            await StorageSystem.update(storageCache[player.id]._id.toString(), {
+                items: storageCache[player.id].items,
+            });
+            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
+            return;
         }
 
-        playerFuncs.inventory.inventoryAdd(player, itemClone, openSlot.slot);
+        // If the amount we want to move + the current inventory amount is less than max stack.
+        // Simply add it. Also remove the amount from the storage.
+        if (
+            !itemClone.maxStack ||
+            amount + player.data.inventory[invIndex].quantity < storageCache[player.id].items[index].maxStack
+        ) {
+            player.data.inventory[invIndex].quantity += amount;
+            storageCache[player.id].items[index].quantity -= amount;
+
+            if (storageCache[player.id].items[index].quantity <= 0) {
+                storageCache[player.id].items.splice(index, 1)[0];
+            }
+
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
+            playerFuncs.sync.inventory(player);
+            await StorageSystem.update(storageCache[player.id]._id.toString(), {
+                items: storageCache[player.id].items,
+            });
+            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
+            playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+            return;
+        }
+
+        if (!invInfo) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        // If the amount we want to move has exceeded inventory amount.
+        // We need to update inventory quantity. Which means find the amount missing to reach max stack for existing.
+        // Subtract the amount missing from the main amount.
+        // After, we add a new item clone with the left over amount.
+        // We add the amount missing to the existing item.
+        let amountMissing = player.data.inventory[invIndex].maxStack - player.data.inventory[invIndex].quantity;
+        amount -= amountMissing;
+
+        player.data.inventory[invIndex].quantity += amountMissing;
+
+        if (amount >= 1) {
+            itemClone.quantity = amount;
+
+            if (!playerFuncs.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
+                playerFuncs.emit.notification(player, `Inventory is Full`);
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
+        }
+
+        storageCache[player.id].items[index].quantity -= amount + amountMissing;
+        if (storageCache[player.id].items[index].quantity <= 0) {
+            storageCache[player.id].items.splice(index, 1)[0];
+        }
+
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
-
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
         alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
@@ -273,6 +364,10 @@ export class StorageView {
             amount = itemClone.quantity;
         }
 
+        if (amount > itemClone.maxStack) {
+            amount = itemClone.quantity;
+        }
+
         if (amount > itemClone.quantity) {
             amount = itemClone.quantity;
         }
@@ -304,7 +399,7 @@ export class StorageView {
                 // Add missing amount to storage. However, create another item to push into storage.
                 // We add to the existing.
                 // We remove from the clone and then push the clone to fill in the rest.
-                const missingAmount = itemClone.maxStack - currentStorageItem.quantity;
+                const missingAmount = currentStorageItem.maxStack - currentStorageItem.quantity;
                 storageCache[player.id].items[existingIndex].quantity += missingAmount;
                 amount -= missingAmount;
 

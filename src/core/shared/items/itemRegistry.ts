@@ -9,6 +9,7 @@ export const ItemRegistry: Array<Item> = [
         description: `A delicious burger that packs your arteries.`,
         icon: 'burger',
         slot: 0,
+        maxStack: 3,
         quantity: 1,
         behavior:
             ITEM_TYPE.CAN_DROP |
