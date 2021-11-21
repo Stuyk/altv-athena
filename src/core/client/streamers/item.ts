@@ -4,13 +4,20 @@ import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { GroundItem } from '../../shared/interfaces/GroundItem';
 import { distance2d } from '../../shared/utility/vector';
 import { Timer } from '../utility/timers';
-import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { drawText3D } from '../utility/text';
 
 let addedItems: Array<GroundItem> = [];
 let interval: number;
 
 export class ClientItemStreamer {
+    static stop() {
+        if (!interval) {
+            return;
+        }
+
+        Timer.clearInterval(interval);
+    }
+
     static populate(items: Array<GroundItem>) {
         addedItems = items;
 
@@ -66,4 +73,5 @@ export class ClientItemStreamer {
     }
 }
 
+alt.on('disconnect', ClientItemStreamer.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEM_DROPS, ClientItemStreamer.populate);

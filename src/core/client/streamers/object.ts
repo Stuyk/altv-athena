@@ -13,12 +13,12 @@ let objectInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
 
-export class ObjectController {
+export class ClientObjectController {
     /**
      * Add a single marker.
      * @static
      * @param {IObject} objectData
-     * @memberof ObjectController
+     * @memberof ClientObjectController
      */
     static append(objectData: IObject) {
         if (!objectData.uid) {
@@ -30,7 +30,7 @@ export class ObjectController {
         if (index <= -1) {
             localObjects.push(objectData);
         } else {
-            alt.logWarning(`${objectData.uid} was not a unique identifier. Replaced Object in ObjectController.`);
+            alt.logWarning(`${objectData.uid} was not a unique identifier. Replaced Object in ClientObjectController.`);
             localObjects[index] = objectData;
         }
 
@@ -43,7 +43,7 @@ export class ObjectController {
      * Used to populate server-side markers.
      * @static
      * @param {Array<IObject>} objects
-     * @memberof ObjectController
+     * @memberof ClientObjectController
      */
     static populate(objects: Array<IObject>) {
         addedObjects = objects;
@@ -53,12 +53,18 @@ export class ObjectController {
         }
     }
 
-    static removeAllObjects() {
+    static stop() {
         isRemoving = true;
         const objects = addedObjects.concat(localObjects);
         for (let i = 0; i < objects.length; i++) {
-            ObjectController.remove(objects[i].uid);
+            ClientObjectController.remove(objects[i].uid);
         }
+
+        if (!interval) {
+            return;
+        }
+
+        Timer.clearInterval(interval);
     }
 
     /**
@@ -66,7 +72,7 @@ export class ObjectController {
      * @static
      * @param {string} uid
      * @return {*}
-     * @memberof ObjectController
+     * @memberof ClientObjectController
      */
     static remove(uid: string, removeAllInterior = false) {
         isRemoving = true;
@@ -113,7 +119,7 @@ export class ObjectController {
      * Force remove a global object if present.
      * @static
      * @param {string} uid
-     * @memberof ObjectController
+     * @memberof ClientObjectController
      */
     static removeGlobalObject(uid: string) {
         isRemoving = true;
@@ -207,8 +213,8 @@ function handleDrawObjects() {
     }
 }
 
-alt.on('disconnect', ObjectController.removeAllObjects);
-alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ObjectController.removeGlobalObject);
-alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ObjectController.append);
-alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ObjectController.populate);
-alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ObjectController.remove);
+alt.on('disconnect', ClientObjectController.stop);
+alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
+alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
+alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ClientObjectController.populate);
+alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.remove);

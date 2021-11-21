@@ -10,7 +10,15 @@ let localNotifications: Array<IWorldNotification> = [];
 let isRemoving = false;
 let interval: number;
 
-export class WorldNotificationController {
+export class ClientWorldNotificationController {
+    static stop() {
+        if (!interval) {
+            return;
+        }
+
+        Timer.clearInterval(interval);
+    }
+
     static append(notification: IWorldNotification) {
         if (!notification.uid) {
             alt.logError(`(${JSON.stringify(notification.pos)}) WorldNotification is missing uid.`);
@@ -22,7 +30,7 @@ export class WorldNotificationController {
             localNotifications.push(notification);
         } else {
             alt.logWarning(
-                `${notification.uid} was not a unique identifier. Replaced WorldNotifications in WorldNotificationController.`,
+                `${notification.uid} was not a unique identifier. Replaced WorldNotifications in ClientWorldNotificationController.`,
             );
             localNotifications[index] = notification;
         }
@@ -106,6 +114,7 @@ function handleDrawNotifications() {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, WorldNotificationController.populate);
-alt.onServer(SYSTEM_EVENTS.APPEND_WORLD_NOTIFICATION, WorldNotificationController.append);
-alt.onServer(SYSTEM_EVENTS.REMOVE_WORLD_NOTIFICATION, WorldNotificationController.remove);
+alt.on('disconnect', ClientWorldNotificationController.stop);
+alt.onServer(SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, ClientWorldNotificationController.populate);
+alt.onServer(SYSTEM_EVENTS.APPEND_WORLD_NOTIFICATION, ClientWorldNotificationController.append);
+alt.onServer(SYSTEM_EVENTS.REMOVE_WORLD_NOTIFICATION, ClientWorldNotificationController.remove);

@@ -10,12 +10,20 @@ let localMarkers: Array<Marker> = [];
 let isRemoving = false;
 let interval: number;
 
-export class MarkerController {
+export class ClientMarkerController {
+    static stop() {
+        if (!interval) {
+            return;
+        }
+
+        Timer.clearInterval(interval);
+    }
+
     /**
      * Add a single local marker.
      * @static
      * @param {Marker} marker
-     * @memberof MarkerController
+     * @memberof ClientMarkerController
      */
     static append(marker: Marker) {
         if (!marker.uid) {
@@ -27,7 +35,7 @@ export class MarkerController {
         if (index <= -1) {
             localMarkers.push(marker);
         } else {
-            alt.logWarning(`${marker.uid} was not a unique identifier. Replaced Marker in MarkerController.`);
+            alt.logWarning(`${marker.uid} was not a unique identifier. Replaced Marker in ClientMarkerController.`);
             localMarkers[index] = marker;
         }
 
@@ -41,7 +49,7 @@ export class MarkerController {
      * separate from local markers.
      * @static
      * @param {Array<Marker>} markers
-     * @memberof MarkerController
+     * @memberof ClientMarkerController
      */
     static populate(markers: Array<Marker>) {
         addedMarkers = markers;
@@ -56,7 +64,7 @@ export class MarkerController {
      * @static
      * @param {string} uid
      * @return {*}
-     * @memberof MarkerController
+     * @memberof ClientMarkerController
      */
     static remove(uid: string) {
         isRemoving = true;
@@ -127,6 +135,7 @@ function handleDrawMarkers() {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, MarkerController.populate);
-alt.onServer(SYSTEM_EVENTS.APPEND_MARKER, MarkerController.append);
-alt.onServer(SYSTEM_EVENTS.REMOVE_MARKER, MarkerController.remove);
+alt.on('disconnect', ClientMarkerController.stop);
+alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, ClientMarkerController.populate);
+alt.onServer(SYSTEM_EVENTS.APPEND_MARKER, ClientMarkerController.append);
+alt.onServer(SYSTEM_EVENTS.REMOVE_MARKER, ClientMarkerController.remove);

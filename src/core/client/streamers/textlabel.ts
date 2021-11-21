@@ -10,7 +10,15 @@ let addedLabels: Array<TextLabel> = [];
 let interval: number;
 let isRemoving = false;
 
-export class TextlabelController {
+export class ClientTextLabelController {
+    static stop() {
+        if (!interval) {
+            return;
+        }
+
+        Timer.clearInterval(interval);
+    }
+
     /**
      * Add a single text label.
      * @static
@@ -27,7 +35,7 @@ export class TextlabelController {
         if (index <= -1) {
             localLabels.push(label);
         } else {
-            alt.logWarning(`${label.uid} was not a unique identifier. Replaced Label in TextLabelController.`);
+            alt.logWarning(`${label.uid} was not a unique identifier. Replaced Label in ClientTextLabelController.`);
             localLabels[index] = label;
         }
 
@@ -116,6 +124,7 @@ function handleDrawTextlabels() {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.APPEND_TEXTLABELS, TextlabelController.append);
-alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, TextlabelController.populate);
-alt.onServer(SYSTEM_EVENTS.REMOVE_TEXTLABEL, TextlabelController.remove);
+alt.on('disconnect', ClientTextLabelController.stop);
+alt.onServer(SYSTEM_EVENTS.APPEND_TEXTLABELS, ClientTextLabelController.append);
+alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, ClientTextLabelController.populate);
+alt.onServer(SYSTEM_EVENTS.REMOVE_TEXTLABEL, ClientTextLabelController.remove);
