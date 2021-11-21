@@ -10,7 +10,7 @@ Adding icons for the inventory must be done in a `.png` format as it's the most 
 Icons need to be placed inside of:
 
 ```
-src/webserver/files/icons
+src-webviews/public/assets/icons
 ```
 
 It is highly recommended that you compress your `.png` file after it has been resized.

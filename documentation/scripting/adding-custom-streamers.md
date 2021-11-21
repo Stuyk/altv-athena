@@ -66,7 +66,7 @@ export class DoorController {
      * Call this when you add / remove global stream data.
      */
     static refresh() {
-        StreamerService.updateData(KEY, globalObjects);
+        StreamerService.updateData(KEY, globalDoors);
     }
 
     /**
