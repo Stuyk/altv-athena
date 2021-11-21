@@ -7,3 +7,8 @@
 export const enum STORAGE_RULES {
     OPEN = 'storage-open',
 }
+
+export const enum STORAGE_MOVE_RULES {
+    FROM_STORAGE = 'from-storage',
+    TO_STORAGE = 'to-storage',
+}

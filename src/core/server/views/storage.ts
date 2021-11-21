@@ -8,7 +8,7 @@ import { Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
 import { IResponse } from '../../shared/interfaces/IResponse';
-import { STORAGE_RULES } from '../../shared/enums/StorageRules';
+import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/StorageRules';
 import SystemRules from '../systems/rules';
 
 /**
@@ -20,6 +20,13 @@ let storageBinding: { [id: string]: string } = {};
 let storageCache: { [id: number]: IStorage } = {};
 let rules: { [key: string]: Array<(player: alt.Player, storage: IStorage) => IResponse> } = {
     [STORAGE_RULES.OPEN]: [],
+};
+
+let storageMoveRules: {
+    [key: string]: Array<(player: alt.Player, itemBeingMoved: Item, amount: number) => IResponse>;
+} = {
+    [STORAGE_MOVE_RULES.FROM_STORAGE]: [],
+    [STORAGE_MOVE_RULES.TO_STORAGE]: [],
 };
 
 export class StorageView {
@@ -76,6 +83,26 @@ export class StorageView {
         }
 
         rules[ruleType].push(callback);
+    }
+
+    /**
+     * Used for defining rules when items are being moved to or from storage
+     * @static
+     * @param {STORAGE_MOVE_RULES} ruleType
+     * @param {(player: alt.Player, itemBeingMoved: Item) => IResponse} callback
+     * @return {*}
+     * @memberof StorageView
+     */
+    static addMovementRule(
+        ruleType: STORAGE_MOVE_RULES,
+        callback: (player: alt.Player, itemBeingMoved: Item, amount: number) => IResponse,
+    ) {
+        if (!storageMoveRules[ruleType]) {
+            alt.logError(`${ruleType} does not exist for Storage View Move Rules`);
+            return;
+        }
+
+        storageMoveRules[ruleType].push(callback);
     }
 
     /**
@@ -185,6 +212,20 @@ export class StorageView {
 
         if (amount > itemClone.quantity) {
             amount = itemClone.quantity;
+        }
+
+        for (let i = 0; i < storageMoveRules[STORAGE_MOVE_RULES.FROM_STORAGE].length; i++) {
+            const rule = storageMoveRules[STORAGE_MOVE_RULES.FROM_STORAGE][i];
+            if (!rule) {
+                continue;
+            }
+
+            const result = rule(player, itemClone, amount);
+            if (!result.status) {
+                playerFuncs.emit.notification(player, result.response);
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
         }
 
         // Get the existing item from the inventory if it matches.
@@ -370,6 +411,20 @@ export class StorageView {
 
         if (amount > itemClone.quantity) {
             amount = itemClone.quantity;
+        }
+
+        for (let i = 0; i < storageMoveRules[STORAGE_MOVE_RULES.TO_STORAGE].length; i++) {
+            const rule = storageMoveRules[STORAGE_MOVE_RULES.TO_STORAGE][i];
+            if (!rule) {
+                continue;
+            }
+
+            const result = rule(player, itemClone, amount);
+            if (!result.status) {
+                playerFuncs.emit.notification(player, result.response);
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
         }
 
         // Literally the exact amount to remove.
