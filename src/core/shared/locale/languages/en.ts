@@ -939,6 +939,9 @@ export default {
         LABEL_DECLINE: 'Decline',
         LABEL_ACCEPT: 'Accept',
     },
+    [LOCALE_KEYS.WEBVIEW_STORAGE]: {
+        LABEL_SPLIT_TEXT: 'Move a stack of this quantity?',
+    },
     [LOCALE_KEYS.WEBVIEW_INVENTORY]: {
         ITEM_SLOTS: [
             'Hat',

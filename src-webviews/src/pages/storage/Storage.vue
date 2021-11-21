@@ -10,6 +10,9 @@
                         <div class="stack card pa-2" style="width: 100%">
                             <!-- Top Half of Item -->
                             <div class="item-split">
+                                <div class="icon-wrap pr-2">
+                                    <img :src="`../../assets/icons/${item.icon}.png`" />
+                                </div>
                                 <span style="width: 100%">{{ item.name }} ({{ item.quantity }}x)</span>
                                 <Button
                                     class="mr-2"
@@ -71,6 +74,9 @@
                                 <span style="width: 100%; text-align: right"
                                     >{{ item.name }} ({{ item.quantity }}x)</span
                                 >
+                                <div class="icon-wrap pl-2">
+                                    <img :src="`../../assets/icons/${item.icon}.png`" />
+                                </div>
                             </div>
                             <template v-if="split && split.name === 'inventory' && split.index === index">
                                 <span class="center pt-4">{{ locales.LABEL_SPLIT_TEXT }}</span>
@@ -302,5 +308,16 @@ export default defineComponent({
     flex-grow: 1;
     flex-direction: row;
     align-items: center;
+}
+
+.icon-wrap {
+    max-width: 35px;
+    max-height: 35px !important;
+    object-fit: cover;
+}
+
+.icon-wrap img {
+    width: 100%;
+    height: 100%;
 }
 </style>

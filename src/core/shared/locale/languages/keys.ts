@@ -177,4 +177,5 @@ export const LOCALE_KEYS = {
     WEBVIEW_LOGIN: 'webview-login',
     WEBVIEW_GARAGE: 'webview-garage',
     WEBVIEW_FACTION: 'webview-faction',
+    WEBVIEW_STORAGE: `webview-storage`,
 };
