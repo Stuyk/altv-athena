@@ -100,6 +100,8 @@ description: List of all the changes and current versions.
 + Fixed /getitem to support spaces in item names
 + Made Garage Names Persistent
 + Added Split / Stack to Inventory System
++ Added Initial Storage Design
++ Added Split Functionality to Storage
 ```
 
 ## 2.0.3

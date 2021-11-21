@@ -1,13 +1,13 @@
 import * as alt from 'alt-client';
 import { View_Events_Storage } from '../../shared/enums/Views';
 import { Item } from '../../shared/interfaces/Item';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 
-const url = `http://assets/webview/client/storage/index.html`;
-let view: View;
+const PAGE_NAME = 'Storage';
+
 let name: string;
 let id: string;
 let storage: Item[];
@@ -24,16 +24,20 @@ class StorageView implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
-        view.on('storage:Ready', StorageView.refresh);
-        view.on('storage:Close', StorageView.close);
-        view.on('storage:MoveFromPlayer', StorageView.moveFromPlayer);
-        view.on('storage:MoveFromStorage', StorageView.moveFromStorage);
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Ready`, StorageView.refresh);
+        view.on(`${PAGE_NAME}:Close`, StorageView.close);
+        view.on(`${PAGE_NAME}:MoveFromPlayer`, StorageView.moveFromPlayer);
+        view.on(`${PAGE_NAME}:MoveFromStorage`, StorageView.moveFromStorage);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
         alt.toggleGameControls(false);
+        alt.Player.local.isMenuOpen = true;
         BaseHUD.setHudVisibility(false);
     }
 
-    static close() {
+    static async close() {
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
         alt.emitServer(View_Events_Storage.Close);
@@ -43,15 +47,20 @@ class StorageView implements ViewModel {
         storage = null;
         inventory = null;
 
-        if (!view) {
-            return;
-        }
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, StorageView.refresh);
+        view.off(`${PAGE_NAME}:Close`, StorageView.close);
+        view.off(`${PAGE_NAME}:MoveFromPlayer`, StorageView.moveFromPlayer);
+        view.off(`${PAGE_NAME}:MoveFromStorage`, StorageView.moveFromStorage);
 
-        view.close();
-        view = null;
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
     }
 
-    static refresh(_inventory: Array<Array<Item>>, _storage: Item[]) {
+    static async refresh(_inventory: Array<Array<Item>>, _storage: Item[]) {
         if (_storage) {
             storage = _storage;
         }
@@ -60,21 +69,18 @@ class StorageView implements ViewModel {
             inventory = _inventory;
         }
 
-        if (!view) {
-            return;
-        }
-
-        view.emit('storage:SetName', name);
-        view.emit('storage:SetStorage', storage);
-        view.emit('storage:SetInventory', inventory);
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetName`, name);
+        view.emit(`${PAGE_NAME}:SetStorage`, storage);
+        view.emit(`${PAGE_NAME}:SetInventory`, inventory);
     }
 
-    static moveFromStorage(index: number) {
-        alt.emitServer(View_Events_Storage.MoveFromStorage, id, index);
+    static moveFromStorage(index: number, amount: number) {
+        alt.emitServer(View_Events_Storage.MoveFromStorage, id, index, amount);
     }
 
-    static moveFromPlayer(tab: number, index: number) {
-        alt.emitServer(View_Events_Storage.MoveFromPlayer, id, tab, index);
+    static moveFromPlayer(index: number, amount: number) {
+        alt.emitServer(View_Events_Storage.MoveFromPlayer, id, index, amount);
     }
 }
 

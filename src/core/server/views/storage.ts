@@ -136,7 +136,7 @@ export class StorageView {
      * @param {alt.Player} player
      * @memberof StorageView
      */
-    static async moveFromStorage(player: alt.Player, id: string, index: number) {
+    static async moveFromStorage(player: alt.Player, id: string, index: number, amount: number) {
         if (!id) {
             return;
         }
@@ -177,14 +177,25 @@ export class StorageView {
             return;
         }
 
-        const removedItem = storageCache[player.id].items.splice(index, 1)[0];
-        if (!removedItem) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
+        const itemClone = deepCloneObject<Item>(storageCache[player.id].items[index]);
+        if (amount === null) {
+            amount = itemClone.quantity;
         }
 
-        // Remove, Update Database, Add to Inventory, Emit to Player
-        const itemClone = deepCloneObject<Item>(removedItem);
+        if (amount > itemClone.quantity) {
+            amount = itemClone.quantity;
+        }
+
+        if (amount === itemClone.quantity) {
+            const removedItem = storageCache[player.id].items.splice(index, 1)[0];
+            if (!removedItem) {
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
+        } else {
+            itemClone.quantity -= amount;
+        }
+
         playerFuncs.inventory.inventoryAdd(player, itemClone, openSlot.slot);
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
@@ -202,7 +213,7 @@ export class StorageView {
      * @param {number} index
      * @memberof StorageView
      */
-    static async moveFromPlayer(player: alt.Player, id: string, tab: number, index: number) {
+    static async moveFromPlayer(player: alt.Player, id: string, index: number, amount: number) {
         if (!id) {
             return;
         }
@@ -229,21 +240,26 @@ export class StorageView {
             return;
         }
 
-        if (!player.data.inventory[tab]) {
+        if (!player.data.inventory[index]) {
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
 
-        if (!player.data.inventory[tab][index]) {
-            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
-            return;
-        }
+        const existingIndex = storageCache[player.id].items.findIndex((x) => {
+            if (x.name !== player.data.inventory[index].name) {
+                return false;
+            }
 
-        const existingIndex = storageCache[player.id].items.findIndex(
-            (x) =>
-                x.name === player.data.inventory[tab][index].name &&
-                isFlagEnabled(player.data.inventory[tab][index].behavior, ITEM_TYPE.CAN_STACK),
-        );
+            if (x.rarity !== player.data.inventory[index].rarity) {
+                return false;
+            }
+
+            if (x.maxStack && x.quantity === x.maxStack) {
+                return false;
+            }
+
+            return true;
+        });
 
         if (existingIndex <= -1 && storageCache[player.id].items.length + 1 > storageCache[player.id].maxSize) {
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
@@ -251,21 +267,60 @@ export class StorageView {
             return;
         }
 
-        const itemClone = deepCloneObject<Item>(player.data.inventory[tab][index]);
-        if (!playerFuncs.inventory.inventoryRemove(player, player.data.inventory[tab][index].slot)) {
-            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
-            return;
+        // Simply clone and remove the item.
+        const itemClone = deepCloneObject<Item>(player.data.inventory[index]);
+        if (amount === null) {
+            amount = itemClone.quantity;
+        }
+
+        if (amount > itemClone.quantity) {
+            amount = itemClone.quantity;
+        }
+
+        // Literally the exact amount to remove.
+        // Remove the item from the inventory entirely.
+        if (amount === itemClone.quantity) {
+            if (!playerFuncs.inventory.inventoryRemove(player, player.data.inventory[index].slot)) {
+                alt.emitClient(
+                    player,
+                    View_Events_Storage.Refresh,
+                    player.data.inventory,
+                    storageCache[player.id].items,
+                );
+                return;
+            }
+        } else {
+            // Remove the amount from the inventory stack.
+            player.data.inventory[index].quantity -= amount;
+        }
+
+        // Item exists in storage and can be stacked.
+        const canStack = isFlagEnabled(itemClone.behavior, ITEM_TYPE.CAN_STACK);
+        if (existingIndex >= 0 && canStack) {
+            const currentStorageItem = storageCache[player.id].items[existingIndex];
+
+            // If the max stack is exceeded in storage if quantity is added to it
+            if (itemClone.maxStack && currentStorageItem.quantity + amount > itemClone.maxStack) {
+                // Add missing amount to storage. However, create another item to push into storage.
+                // We add to the existing.
+                // We remove from the clone and then push the clone to fill in the rest.
+                const missingAmount = itemClone.maxStack - currentStorageItem.quantity;
+                storageCache[player.id].items[existingIndex].quantity += missingAmount;
+                amount -= missingAmount;
+
+                itemClone.quantity = amount;
+                storageCache[player.id].items.push(itemClone);
+            } else {
+                // Stack and ignore max stack property.
+                storageCache[player.id].items[existingIndex].quantity += amount;
+            }
+        } else {
+            itemClone.quantity = amount;
+            storageCache[player.id].items.push(itemClone);
         }
 
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
         playerFuncs.sync.inventory(player);
-
-        // Stack if Possible
-        if (existingIndex >= 0) {
-            storageCache[player.id].items[existingIndex].quantity += itemClone.quantity;
-        } else {
-            storageCache[player.id].items.push(itemClone);
-        }
 
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
         playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
