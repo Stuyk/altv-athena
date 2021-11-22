@@ -105,6 +105,8 @@ description: List of all the changes and current versions.
 + Added InputBox to Vue3 Designs
 + Migrated InputBox Backend
 + Added InputBox Small Customizations
++ Fixed Sound Bugs in HTML5 Audio API for Inputs
++ Added First Iteration of Clothing Editor for Vue3 (Still WIP)
 ```
 
 ## 2.0.3

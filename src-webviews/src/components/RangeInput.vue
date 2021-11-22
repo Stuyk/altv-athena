@@ -19,6 +19,7 @@ export default defineComponent({
     name: ComponentName,
     data() {
         return {
+            _audio: null,
             _min: 0,
             _max: 1,
             _step: 1,
@@ -107,14 +108,12 @@ export default defineComponent({
     watch: {
         async indexValue(newValue) {
             this._value = newValue;
-
-            try {
-                const audio = new Audio('/sounds/ui/hover.ogg');
-                audio.volume = 0.1;
-                await audio.play();
-            } catch (err) {
-                return;
+            if (!this._audio) {
+                this._audio = new Audio('/sounds/ui/hover.ogg');
+                this._audio.volume = 0.1;
             }
+
+            await this._audio.play();
         },
     },
 });

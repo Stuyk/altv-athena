@@ -50,6 +50,10 @@ async function addhouse(player: alt.Player) {
 }
 
 alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult[]) => {
+    if (!results) {
+        return;
+    }
+
     if (!player.accountData) {
         return;
     }

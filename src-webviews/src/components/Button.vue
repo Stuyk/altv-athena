@@ -17,6 +17,11 @@ import { defineComponent } from 'vue';
 const ComponentName = 'Button';
 export default defineComponent({
     name: ComponentName,
+    data() {
+        return {
+            _audio: null,
+        };
+    },
     props: {
         disable: {
             type: Boolean,
@@ -46,18 +51,22 @@ export default defineComponent({
     },
     methods: {
         async playHover() {
-            try {
-                const audio = new Audio('/sounds/ui/hover.ogg');
-                audio.volume = 0.2;
-                await audio.play();
-            } catch (err) {
-                return;
+            if (!this._audio) {
+                this._audio = new Audio('/sounds/ui/hover.ogg');
+                this._audio.volume = 0.2;
             }
+
+            this._audio.setAttribute('src', '/sounds/ui/hover.ogg');
+            await this._audio.play();
         },
         async playMouseUp() {
-            const audio = new Audio('/sounds/ui/click.ogg');
-            audio.volume = 0.2;
-            await audio.play();
+            if (!this._audio) {
+                this._audio = new Audio('/sounds/ui/click.ogg');
+                this._audio.volume = 0.2;
+            }
+
+            this._audio.setAttribute('src', '/sounds/ui/click.ogg');
+            await this._audio.play();
         },
     },
     computed: {

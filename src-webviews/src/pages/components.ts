@@ -8,6 +8,7 @@ import Inventory from './inventory/Inventory.vue';
 import Garage from './garage/Garage.vue';
 import Storage from './storage/Storage.vue';
 import InputBox from './input/InputBox.vue';
+import Clothing from './clothing/Clothing.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -16,6 +17,7 @@ const componentList = {
     Atm: shallowRef(Atm),
     CharacterCreator: shallowRef(CharacterCreator),
     CharacterSelect: shallowRef(CharacterSelect),
+    Clothing: shallowRef(Clothing),
     Designs: shallowRef(Designs),
     Garage: shallowRef(Garage),
     InputBox: shallowRef(InputBox),
