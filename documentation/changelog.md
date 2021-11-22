@@ -102,6 +102,9 @@ description: List of all the changes and current versions.
 + Added Split / Stack to Inventory System
 + Added Initial Storage Design
 + Added Split Functionality to Storage
++ Added InputBox to Vue3 Designs
++ Migrated InputBox Backend
++ Added InputBox Small Customizations
 ```
 
 ## 2.0.3
