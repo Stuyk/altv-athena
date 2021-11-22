@@ -493,6 +493,7 @@ description: List of all the changes and current versions.
 + Fixed Lock Status Bug for Vehicle
 + Added 'F' & 'G' keys to Enter / Exit Vehicles
 + Removed Old Vehicle Code
++ Added Ability for PedEditCamera to Interpolate Positions
 ```
 
 ## 1.6.0 - February 1-10, 2021

@@ -13,6 +13,19 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 
 const PAGE_NAME = 'Clothing';
+const CAMERA_POSITIONS = [
+    { zpos: 0.6, fov: 33 }, // Hat
+    { zpos: 0.6, fov: 33 }, // Mask
+    { zpos: 0.18999999999999967, fov: 49 }, // Shirt
+    { zpos: -0.47000000000000064, fov: 59 }, // Bottoms
+    { zpos: -0.7100000000000009, fov: 53 }, // Shoes
+    { zpos: 0.61, fov: 29 }, // Glasses
+    { zpos: 0.62, fov: 29 }, // Earrings / Earpieces
+    { zpos: 0.2799999999999997, fov: 57 }, // Backpacks
+    { zpos: 0.2799999999999997, fov: 57 }, // Armour
+    { zpos: -0.09999999999999902, fov: 45 }, // Wrist Watch
+    { zpos: -0.09999999999999902, fov: 45 }, // Bracelet
+];
 
 class ClothingView implements ViewModel {
     static async open() {
@@ -27,15 +40,19 @@ class ClothingView implements ViewModel {
         view.on(`${PAGE_NAME}:Purchase`, ClothingView.purchase);
         view.on(`${PAGE_NAME}:Populate`, ClothingView.populate);
         view.on(`${PAGE_NAME}:DisableControls`, ClothingView.controls);
+        view.on(`${PAGE_NAME}:PageUpdate`, ClothingView.pageUpdate);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-        alt.toggleGameControls(false);
+
         BaseHUD.setHudVisibility(false);
 
-        await PedEditCamera.create(alt.Player.local.scriptID, { x: -0.15, y: 0, z: 0 });
-        PedEditCamera.setFov(70);
-        PedEditCamera.setZPos(0.6);
+        if (PedEditCamera.exists) {
+            await PedEditCamera.destroy();
+        }
+
+        await PedEditCamera.create(alt.Player.local.scriptID, { x: -0.2, y: 0, z: 0 }, true);
+        PedEditCamera.setCamParams(0.6, 65);
 
         alt.Player.local.isMenuOpen = true;
     }
@@ -49,12 +66,36 @@ class ClothingView implements ViewModel {
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, ClothingView.ready);
         view.off(`${PAGE_NAME}:Close`, ClothingView.close);
+        view.off(`${PAGE_NAME}:Update`, ClothingView.update);
+        view.off(`${PAGE_NAME}:Purchase`, ClothingView.purchase);
+        view.off(`${PAGE_NAME}:Populate`, ClothingView.populate);
+        view.off(`${PAGE_NAME}:DisableControls`, ClothingView.controls);
+        view.off(`${PAGE_NAME}:PageUpdate`, ClothingView.pageUpdate);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+    }
+
+    /**
+     * Updates the camera position on page changes.
+     * @static
+     * @param {number} page
+     * @memberof ClothingView
+     */
+    static async pageUpdate(page: number) {
+        if (!PedEditCamera.exists()) {
+            await PedEditCamera.create(alt.Player.local.scriptID, { x: -0.2, y: 0, z: 0 }, true);
+        }
+
+        if (!CAMERA_POSITIONS[page]) {
+            PedEditCamera.setCamParams(0.6, 65);
+            return;
+        }
+
+        PedEditCamera.setCamParams(CAMERA_POSITIONS[page].zpos, CAMERA_POSITIONS[page].fov);
     }
 
     static async ready() {

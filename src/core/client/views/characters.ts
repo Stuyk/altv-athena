@@ -41,8 +41,7 @@ async function handleView(_characters: Partial<Character>[], pos: Vector3, headi
     await PedCharacter.apply(_characters[0].appearance as Appearance);
     await sleep(300);
     await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-    PedEditCamera.setFov(40);
-    PedEditCamera.setZPos(0.5);
+    PedEditCamera.setCamParams(0.5, 40);
 
     updateCharacter(0);
 }

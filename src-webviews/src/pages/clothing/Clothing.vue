@@ -75,6 +75,13 @@ export default defineComponent({
         getData(dataName: string, index: number) {
             return this.labels[this.page][dataName][index];
         },
+        sendPageUpdate() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:PageUpdate`, this.page);
+        },
         nextPage() {
             if (this.page + 1 >= this.labels.length) {
                 this.page = 0;
@@ -83,6 +90,7 @@ export default defineComponent({
             }
 
             this.update += 1;
+            this.sendPageUpdate();
         },
         prevPage() {
             if (this.page - 1 <= -1) {
@@ -92,6 +100,7 @@ export default defineComponent({
             }
 
             this.update += 1;
+            this.sendPageUpdate();
         },
         setLocales(data) {
             this.locales = data;
@@ -148,6 +157,8 @@ export default defineComponent({
             alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
             alt.emit(`${ComponentName}:Ready`);
         }
+
+        this.sendPageUpdate();
     },
     unmounted() {
         if ('alt' in window) {
