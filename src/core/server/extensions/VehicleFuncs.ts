@@ -12,6 +12,8 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import { Collections } from '../interface/DatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
+import { VehicleData } from '../../shared/information/vehicles';
+import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -231,6 +233,7 @@ export default class VehicleFuncs {
             document.rotation.z,
         );
 
+        vehicle.modelName = document.model;
         SpawnedVehicles[document.id] = vehicle;
 
         // Setup Default Values
@@ -336,6 +339,7 @@ export default class VehicleFuncs {
         vehicle.numberPlateText = 'TEMP';
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
         vehicle.isTemporary = true;
+        vehicle.modelName = model;
 
         if (doNotDelete) {
             vehicle.overrideTemporaryDeletion = true;
@@ -509,5 +513,25 @@ export default class VehicleFuncs {
                 continue;
             }
         }
+    }
+
+    /**
+     * Returns stored information about the vehicle.
+     * However, does not work with new alt.Vehicle vehicle(s).
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @return {VehicleInfo}
+     * @memberof VehicleFuncs
+     */
+    static getInfo(vehicle: alt.Vehicle): VehicleInfo {
+        if (!vehicle || !vehicle.valid) {
+            return null;
+        }
+
+        if (!vehicle.modelName) {
+            return null;
+        }
+
+        return VehicleData.find((info) => info.name === vehicle.modelName);
     }
 }

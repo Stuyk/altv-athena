@@ -95,5 +95,14 @@ declare module 'alt-server' {
          * @memberof Vehicle
          */
         lastPosition?: Vector3;
+
+        /**
+         * The model name of the vehicle.
+         * Only available if the vehicle was spawned through Athena functions.
+         * Meaning you did not use new alt.Vehicle
+         * @type {string}
+         * @memberof Vehicle
+         */
+        modelName?: string;
     }
 }
