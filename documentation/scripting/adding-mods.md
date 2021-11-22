@@ -4,12 +4,12 @@ description: Learn where to place mods for your server.
 
 # Load Order
 
-**This is very, very, very, very, very important.** You absolutely must put altv-ares and core last in your `server.cfg`.
+You absolutely must put **core last** in your `server.cfg`.
 
 Example:
 
 ```
-resources: ["my-building-mod", "altv-ares","core"],
+resources: ["my-building-mod", "my-car-mod", "webserver","core"],
 ```
 
 # Where to Place Mods

@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { WorldNotificationController } from '../systems/worldNotifications';
@@ -69,3 +70,44 @@ ChatController.addCommand(
         });
     },
 );
+
+ChatController.addCommand('testinput', '/testinput', PERMISSIONS.ADMIN, (player: alt.Player) => {
+    const menu: InputMenu = {
+        title: 'Input Test',
+        options: [
+            {
+                id: 'some-name',
+                desc: 'Write something...',
+                placeholder: 'Property Name',
+                type: InputOptionType.TEXT,
+                error: 'Must specify property name.',
+            },
+            {
+                id: 'some-number',
+                desc: 'Some kind of number...',
+                placeholder: '5000...',
+                type: InputOptionType.NUMBER,
+                error: 'Must specify property value.',
+            },
+        ],
+        serverEvent: 'cmd:Input:Test',
+        generalOptions: {
+            submitText: 'Wow Nice Submit',
+            cancelText: 'Bad Submit',
+            description: 'idk there is some text here now lul',
+            skipChecks: false,
+        },
+    };
+
+    playerFuncs.emit.inputMenu(player, menu);
+});
+
+alt.onClient('cmd:Input:Test', (player: alt.Player, results: InputResult[] | null) => {
+    if (!results) {
+        console.log(`They cancelled the test input.`);
+        return;
+    }
+
+    console.log(`Results from test input:`);
+    console.log(results);
+});

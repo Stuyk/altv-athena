@@ -13,7 +13,7 @@ World Notifications or 3D Help Text are these cool little bubbles that show up i
 Adds a single world notification to ALL players.
 
 ```ts
-const uid = WorldNotificationController.append({
+const uid = ServerWorldNotificationController.append({
     text: 'Hello World!',
     type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
     pos: { x:195.04470825195312, y:-933.7807006835938, z:30.686779022216797},
@@ -21,7 +21,7 @@ const uid = WorldNotificationController.append({
 
 // Removes it after 5 seconds.
 alt.setTimeout(() => {
-    WorldNotificationController.remove(uid);
+    ServerWorldNotificationController.remove(uid);
 }, 5000);
 ```
 
@@ -30,7 +30,7 @@ alt.setTimeout(() => {
 Adds a single world notification to a single user.
 
 ```ts
-const uid = WorldNotificationController.addToPlayer(player, {
+const uid = ServerWorldNotificationController.addToPlayer(player, {
     text: 'Hello World!',
     type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
     pos: { x:195.04470825195312, y:-933.7807006835938, z:30.686779022216797},
@@ -41,7 +41,6 @@ alt.setTimeout(() => {
             return;
         }
 
-        WorldNotificationController.removeFromPlayer(player, uid);
-    }, 5000);
-},
+        ServerWorldNotificationController.removeFromPlayer(player, uid);
+}, 5000);
 ```

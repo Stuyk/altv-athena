@@ -1,6 +1,8 @@
 import * as alt from 'alt-client';
 import { View_Events_Storage } from '../../shared/enums/Views';
 import { Item } from '../../shared/interfaces/Item';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -73,6 +75,7 @@ class StorageView implements ViewModel {
         view.emit(`${PAGE_NAME}:SetName`, name);
         view.emit(`${PAGE_NAME}:SetStorage`, storage);
         view.emit(`${PAGE_NAME}:SetInventory`, inventory);
+        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_STORAGE));
     }
 
     static moveFromStorage(index: number, amount: number) {

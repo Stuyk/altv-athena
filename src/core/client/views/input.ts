@@ -5,10 +5,10 @@ import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';
 import { View_Events_Input_Menu } from '../../shared/enums/Views';
+import { WebViewController } from '../extensions/view2';
 
-const url = `http://assets/webview/client/input/index.html`;
+const PAGE_NAME = 'InputBox';
 let inputMenu: InputMenu;
-let view: View;
 
 export class InputView implements ViewModel {
     static async show(_inputMenu: InputMenu): Promise<void> {
@@ -18,25 +18,43 @@ export class InputView implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
-        view.on('input:Ready', InputView.ready);
-        view.on('input:Submit', InputView.submit);
-        view.on('input:Close', InputView.close);
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Ready`, InputView.ready);
+        view.on(`${PAGE_NAME}:Submit`, InputView.submit);
+        view.on(`${PAGE_NAME}:Close`, InputView.close);
+
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
+
         alt.toggleGameControls(false);
         BaseHUD.setHudVisibility(false);
+
+        alt.Player.local.isMenuOpen = true;
     }
 
-    static close() {
+    static async close() {
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
-        if (!view) {
-            return;
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, InputView.ready);
+        view.off(`${PAGE_NAME}:Submit`, InputView.submit);
+        view.off(`${PAGE_NAME}:Close`, InputView.close);
+
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
+
+        if (inputMenu.callback) {
+            inputMenu.callback(null);
         }
 
-        view.close();
-        view = null;
-        inputMenu = null;
+        if (inputMenu.serverEvent) {
+            alt.emitServer(inputMenu.serverEvent, null);
+        }
     }
 
     static submit(results: InputResult[]) {
@@ -51,8 +69,9 @@ export class InputView implements ViewModel {
         InputView.close();
     }
 
-    static ready() {
-        view.emit('input:SetMenu', inputMenu.title, inputMenu.options);
+    static async ready() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetMenu`, inputMenu.title, inputMenu.options, inputMenu.generalOptions);
     }
 }
 

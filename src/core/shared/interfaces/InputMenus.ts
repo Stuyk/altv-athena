@@ -1,6 +1,6 @@
 export enum InputOptionType {
     TEXT = 'text',
-    NUMBER = 'number'
+    NUMBER = 'number',
 }
 
 export interface InputOption {
@@ -19,7 +19,39 @@ export interface InputResult {
 
 export interface InputMenu {
     title: string;
-    options: InputOption[];
-    callback?: (results: InputResult[]) => void;
+    options?: InputOption[];
+    callback?: (results: InputResult[] | null) => void;
     serverEvent?: string;
+    generalOptions?: InputGeneralOptions;
+}
+
+export interface InputGeneralOptions {
+    /**
+     * Inject a paragraph above all input elements.
+     * @type {string}
+     * @memberof InputOptions
+     */
+    description?: string;
+
+    /**
+     * What does the 'submit' button display to the user.
+     * @type {string}
+     * @memberof InputOptions
+     */
+    submitText?: string;
+
+    /**
+     * What does the 'cancel' button display to the user.
+     * @type {string}
+     * @memberof InputOptions
+     */
+    cancelText?: string;
+
+    /**
+     * Do we skip 'regex' checks.
+     * Basically turns this into a accept / decline.
+     * @type {boolean}
+     * @memberof InputOptions
+     */
+    skipChecks?: boolean;
 }

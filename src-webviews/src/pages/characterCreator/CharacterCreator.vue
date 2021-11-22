@@ -85,7 +85,7 @@ export default defineComponent({
     data() {
         return {
             show: false,
-            selection: 5,
+            selection: 0,
             forceUpdate: 0,
             data: {
                 sex: 1,
