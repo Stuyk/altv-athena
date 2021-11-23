@@ -32,22 +32,24 @@ async function handleView(_characters: Partial<Character>[], pos: Vector3, headi
     view.on('characters:Update', updateCharacter); // Calls `creator.ts`
     view.on('characters:Delete', handleDelete);
     view.on('characters:Ready', handleReady);
+
     WebViewController.openPages([PAGE_NAME]);
     WebViewController.focus();
     WebViewController.showCursor(true);
 
-    native.doScreenFadeOut(100);
     await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
     await PedCharacter.apply(_characters[0].appearance as Appearance);
     await sleep(300);
     await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-    PedEditCamera.setCamParams(0.5, 40);
+    await PedEditCamera.setCamParams(0.5, 40, 100);
 
     updateCharacter(0);
+
+    await sleep(2000);
+    native.doScreenFadeIn(500);
 }
 
 async function updateCharacter(index: number) {
-    native.doScreenFadeOut(100);
     await sleep(100);
 
     await PedCharacter.apply(characters[index].appearance as Appearance);
@@ -96,7 +98,6 @@ async function handleReady() {
 }
 
 async function handleSelect(id) {
-    native.doScreenFadeOut(100);
     alt.emitServer(View_Events_Characters.Select, id);
 }
 
@@ -108,11 +109,21 @@ function handleDelete(id) {
     alt.emitServer(View_Events_Characters.Delete, id);
 }
 
-function handleDone() {
+async function handleDone() {
+    const view = await WebViewController.get();
+    view.off('characters:Select', handleSelect);
+    view.off('characters:New', handleNew);
+    view.off('characters:Update', updateCharacter); // Calls `creator.ts`
+    view.off('characters:Delete', handleDelete);
+    view.off('characters:Ready', handleReady);
+
     WebViewController.closePages([PAGE_NAME]);
     WebViewController.unfocus();
     WebViewController.showCursor(false);
-    PedEditCamera.destroy();
-    PedCharacter.destroy();
+
+    await PedEditCamera.destroy();
+    await PedCharacter.destroy();
+
     native.switchInPlayer(1500);
+    native.freezeEntityPosition(alt.Player.local.scriptID, false);
 }

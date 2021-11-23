@@ -123,6 +123,7 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 
         // Finish Selection
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
+        playerFuncs.set.frozen(player, false);
     }, 500);
 
     player.visible = true;

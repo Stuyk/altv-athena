@@ -15,7 +15,7 @@ export class CharacterSystem {
      * @memberof CharacterSystem
      */
     static applyAppearance(ped: number, appearance: Appearance) {
-        if (!native.doesEntityExist(ped)) {
+        if (!ped || !native.doesEntityExist(ped)) {
             return;
         }
 
