@@ -5,6 +5,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { fetchToken } from '../systems/quickToken';
+import { disableAllControls } from '../utility/disableControls';
 import { sleep } from '../utility/sleep';
 
 const PAGE_NAME = 'Login';
@@ -35,8 +36,6 @@ export class LoginView implements ViewModel {
     }
 
     static async close() {
-        alt.toggleGameControls(true);
-
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:OpenURL`, LoginView.openURL);
         view.off(`${PAGE_NAME}:FinishAuth`, LoginView.finish);
@@ -45,6 +44,8 @@ export class LoginView implements ViewModel {
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
+
+        alt.toggleGameControls(true);
     }
 
     static async openURL() {

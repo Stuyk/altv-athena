@@ -17,12 +17,6 @@
             </div>
             <!-- Customization -->
             <Option v-bind:page="labels[page]" @update-component="updateComponent"></Option>
-            <!-- <div class="stack center-page pa-6" :key="update">
-                <div class="component stack" v-for="(id, index) in getIDs" :key="index">
-                    <div class="overline">
-                        {{ getLocaleByName('LABEL_DESIGN') }}
-                    </div>
-            -->
         </div>
     </div>
 </template>

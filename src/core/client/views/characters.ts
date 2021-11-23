@@ -14,6 +14,7 @@ import { Item } from '../../shared/interfaces/Item';
 import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { CharacterSystem } from '../systems/character';
+import { disableAllControls } from '../utility/disableControls';
 
 const PAGE_NAME = 'CharacterSelect';
 const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';
@@ -126,4 +127,7 @@ async function handleDone() {
 
     native.switchInPlayer(1500);
     native.freezeEntityPosition(alt.Player.local.scriptID, false);
+
+    alt.toggleGameControls(true);
+    disableAllControls(false);
 }

@@ -9,6 +9,7 @@ import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { sleep } from '../utility/sleep';
 import { WebViewController } from '../extensions/view2';
+import { disableAllControls } from '../utility/disableControls';
 
 const PAGE_NAME = 'CharacterCreator';
 const fModel = alt.hash('mp_f_freemode_01');
@@ -66,6 +67,9 @@ export class CreatorView {
         PedCharacter.destroy();
         native.doScreenFadeOut(100);
         oldCharacterData = null;
+
+        alt.toggleGameControls(true);
+        disableAllControls(false);
     }
 
     static handleDone(newData, infoData, name: string) {
