@@ -1,9 +1,12 @@
 <template>
-    <div class="stack center-page pa-6">
-        <div class="component stack" v-for="(id, index) in page.ids" :key="index">
-            <!-- <div class="overline">
+    <div class="stack center-page pa-3">
+        <div class="component stack pa-3 mb-3" v-for="(id, index) in page.ids" :key="index">
+            <div class="overline boldest pb-3" v-if="page.addonLocales && page.addonLocales.length >= 1">
+                {{ getLocaleByName(page.addonLocales[index]) }}
+            </div>
+            <div class="overline">
                 {{ getLocaleByName('LABEL_DESIGN') }}
-            </div> -->
+            </div>
             <div class="split split-full center pt-6 pb-6">
                 <Button
                     color="blue"
@@ -25,6 +28,11 @@
                             $emit('update-component', index, 'drawables', parseInt(e.target.value));
                         }
                     "
+                    @mouseup="
+                        (e) => {
+                            $emit('force-populate');
+                        }
+                    "
                     style="width: 100%"
                     class="pl-3 pr-3"
                     :key="page"
@@ -41,10 +49,10 @@
                 </Button>
             </div>
             <template v-if="page.maxTextures[index] >= 1">
-                <!-- <div class="overline">
+                <div class="overline">
                     {{ getLocaleByName('LABEL_TEXTURE') }}
-                </div> -->
-                <div class="split split-full center pt-6 pb-6">
+                </div>
+                <div class="split split-full center pt-6">
                     <Button
                         color="blue"
                         @click="
@@ -56,7 +64,7 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        :minIndex="-1"
+                        :minIndex="1"
                         :maxIndex="page.maxTextures[index]"
                         :indexValue="page.textures[index]"
                         :increment="1"
@@ -103,6 +111,7 @@ export default defineComponent({
     },
     props: {
         page: Object,
+        locales: Object,
     },
     data() {
         return {
@@ -113,6 +122,21 @@ export default defineComponent({
             },
         };
     },
-    methods: {},
+    methods: {
+        getLocaleByName(name: string) {
+            if (!this.locales[name]) {
+                return `${name} is not a locale. Please fix your code.`;
+            }
+
+            return this.locales[name];
+        },
+    },
 });
 </script>
+
+<style scoped>
+.component {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+</style>

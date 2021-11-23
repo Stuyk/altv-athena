@@ -209,7 +209,7 @@ class ClothingView implements ViewModel {
         view.emit(`${PAGE_NAME}:Propagate`, components);
     }
 
-    static async update(components: Array<ClothingComponent>, justSync = false) {
+    static async update(components: Array<ClothingComponent>, justSync = false, populateData = false) {
         if (typeof components === 'string') {
             components = JSON.parse(components);
         }
@@ -238,11 +238,18 @@ class ClothingView implements ViewModel {
             }
         }
 
-        if (!justSync) {
+        if (justSync) {
             return;
         }
 
         PedEditCamera.update(alt.Player.local.scriptID);
+
+        // Only update data if necessary.
+        if (!populateData) {
+            return;
+        }
+
+        ClothingView.populate(components);
     }
 }
 

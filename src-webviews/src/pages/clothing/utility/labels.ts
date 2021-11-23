@@ -19,6 +19,7 @@ export default [
     },
     {
         name: 'LABEL_SHIRT',
+        addonLocales: ['LABEL_TOP', 'LABEL_UNDERSHIRT', 'LABEL_TORSO'],
         ids: [11, 8, 3],
         drawables: [0, 0, 0],
         textures: [0, 0, 0],

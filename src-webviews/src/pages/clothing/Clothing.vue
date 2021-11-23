@@ -16,7 +16,16 @@
                 </Button>
             </div>
             <!-- Customization -->
-            <Option v-bind:page="labels[page]" @update-component="updateComponent"></Option>
+            <Option
+                v-bind:page="labels[page]"
+                v-bind:locales="locales"
+                @force-populate="forcePopulate"
+                @update-component="updateComponent"
+            ></Option>
+        </div>
+        <div class="escape pa-4" @click="handleClose">
+            <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
+            <span class="overline white--text boldest">ESC</span>
         </div>
     </div>
 </template>
@@ -106,18 +115,30 @@ export default defineComponent({
 
             return this.locales[name];
         },
+        forcePopulate() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
+        },
         updateComponent(index: number, dataName: string, value: number, isIncrement = false) {
             const labels = [...this.labels];
-
-            if (isIncrement) {
-                labels[this.page][dataName][index] += value;
-            } else {
-                labels[this.page][dataName][index] = value;
-            }
+            let shouldPopulate = false;
 
             // This will always set the texture back to zero if the drawable id changes.
             if (dataName === 'drawables') {
                 labels[this.page].textures[index] = 0;
+                shouldPopulate = true;
+            }
+
+            // Determine how we update this data.
+            if (isIncrement) {
+                labels[this.page][dataName][index] += value;
+            } else {
+                // is A Range Input
+                labels[this.page][dataName][index] = value;
+                shouldPopulate = false;
             }
 
             // This ensures min and max values are not exceeded.
@@ -127,7 +148,8 @@ export default defineComponent({
                 labels[this.page][dataName][index] = 0;
             }
 
-            if (labels[this.page][dataName][index] <= -2) {
+            const minValue = dataName === 'drawables' ? -2 : -1;
+            if (labels[this.page][dataName][index] <= minValue) {
                 labels[this.page][dataName][index] = maxValue;
             }
 
@@ -136,13 +158,30 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Update`, JSON.stringify(labels));
+            // Determine if we should update the labels / components based on what changed.
+            alt.emit(`${ComponentName}:Update`, JSON.stringify(labels), false, shouldPopulate);
         },
         async setLabels(newLabels) {
             this.labels = newLabels;
         },
+        handlePress(e) {
+            if (e.keyCode !== 27) {
+                return;
+            }
+
+            this.handleClose();
+        },
+        handleClose() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:Close`);
+        },
     },
     mounted() {
+        document.addEventListener('keyup', this.handlePress);
+
         this.labels = [...LabelsRef];
 
         if ('alt' in window) {
@@ -155,6 +194,8 @@ export default defineComponent({
         this.sendPageUpdate();
     },
     unmounted() {
+        document.removeEventListener('keyup', this.handlePress);
+
         if ('alt' in window) {
             alt.off(`${ComponentName}:SetLocales`, this.setLocales);
             alt.off(`${ComponentName}:Propagate`, this.setLabels);
@@ -198,5 +239,10 @@ export default defineComponent({
 
 .split {
     box-sizing: border-box;
+}
+
+.escape {
+    top: 2vh;
+    left: 2vw;
 }
 </style>

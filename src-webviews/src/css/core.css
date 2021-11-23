@@ -119,3 +119,17 @@ body {
     color: white;
     /* background: rgba(10, 10, 10, 1) !important; */
 }
+
+.escape {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.escape:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
