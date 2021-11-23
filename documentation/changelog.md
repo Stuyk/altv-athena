@@ -494,6 +494,7 @@ description: List of all the changes and current versions.
 + Added 'F' & 'G' keys to Enter / Exit Vehicles
 + Removed Old Vehicle Code
 + Added Ability for PedEditCamera to Interpolate Positions
++ Remove Connection Verification
 ```
 
 ## 1.6.0 - February 1-10, 2021

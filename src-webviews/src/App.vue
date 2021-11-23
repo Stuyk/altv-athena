@@ -160,6 +160,7 @@ export default defineComponent({
             const foundPages = this.pageBindings.filter((page) =>
                 pagesToShow.find((pageName) => pageName === page.name),
             );
+
             this.pages = foundPages;
         },
     },
@@ -167,7 +168,7 @@ export default defineComponent({
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.setPages(['Clothing']);
+            this.setPages(['Login']);
             return;
         }
 

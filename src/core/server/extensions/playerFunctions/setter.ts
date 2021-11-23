@@ -83,33 +83,36 @@ function dead(player: alt.Player, weaponHash: any = null): void {
  * Called when a player does their first connection to the server.
  * @memberof SetPrototype
  */
-async function firstConnect(p: alt.Player): Promise<void> {
-    if (!p || !p.valid) {
+async function firstConnect(player: alt.Player): Promise<void> {
+    if (!player || !player.valid) {
         return;
     }
 
     if (process.env.ATHENA_READY === 'false') {
-        p.kick('Still warming up...');
+        player.kick('Still warming up...');
         return;
     }
 
     const vueDefaultPath = config.VUE_DEBUG ? `http://localhost:3000/` : `http://webviews/index.html`;
-    alt.emitClient(p, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
+    alt.emitClient(player, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
     // Used to set the custom View instance with a Web Server URL.
     const webServerPath = alt.hasResource(`webserver`) ? `http://assets/webserver/files` : config.WEBSERVER_IP;
-    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
+    alt.emitClient(player, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
-    p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
-    p.pendingLogin = true;
+    // First ID is 0. We add 1 so everyone gets a unique dimension.
+    player.dimension = player.id + 1;
+    player.pendingLogin = true;
 
-    dataUpdater.init(p, null);
-    safe.setPosition(p, pos.x, pos.y, pos.z);
-    sync.time(p);
-    sync.weather(p);
+    // Some general initialization setup.
+    dataUpdater.init(player, null);
+    safe.setPosition(player, pos.x, pos.y, pos.z);
+    sync.time(player);
+    sync.weather(player);
 }
+
 /**
  * Set if this player should be frozen.
  * @param {boolean} value

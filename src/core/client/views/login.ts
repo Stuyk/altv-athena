@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -7,117 +6,63 @@ import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { fetchToken } from '../systems/quickToken';
 import { sleep } from '../utility/sleep';
-import { drawRectangle2D, drawText2D } from '../utility/text';
-import { Timer } from '../utility/timers';
+
+const PAGE_NAME = 'Login';
 
 let discordURI: string;
-let interval: number;
-let count = 0;
-let neededRequests = 0;
 
 export class LoginView implements ViewModel {
     static async open(oAuthUrl: string) {
         discordURI = oAuthUrl;
+        alt.toggleGameControls(false);
+        fetchToken();
+    }
 
+    static async finishOpen() {
         const view = await WebViewController.get();
-        view.on('discord:OpenURL', LoginView.openURL);
-        view.on('discord:FinishAuth', LoginView.finish);
-        view.on('discord:Ready', LoginView.ready);
-        WebViewController.openPages(['Login']);
+        view.on(`${PAGE_NAME}:OpenURL`, LoginView.openURL);
+        view.on(`${PAGE_NAME}:FinishAuth`, LoginView.finish);
+        view.on(`${PAGE_NAME}:Ready`, LoginView.ready);
+
+        WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-
-        alt.toggleGameControls(false);
-
-        if (interval !== null && interval !== undefined) {
-            native.doScreenFadeOut(0);
-            Timer.clearInterval(interval);
-            interval = null;
-        }
-
-        sleep(25);
-        fetchToken();
     }
 
     static async ready() {
         const view = await WebViewController.get();
-        view.emit('discord:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_LOGIN));
+        view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_LOGIN));
     }
 
-    static close() {
+    static async close() {
         alt.toggleGameControls(true);
 
-        if (interval !== null && interval !== undefined) {
-            Timer.clearInterval(interval);
-            interval = null;
-        }
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:OpenURL`, LoginView.openURL);
+        view.off(`${PAGE_NAME}:FinishAuth`, LoginView.finish);
+        view.off(`${PAGE_NAME}:Ready`, LoginView.ready);
 
-        WebViewController.closePages(['Login']);
+        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
     }
 
     static async openURL() {
         const view = await WebViewController.get();
-        view.emit('discord:OpenURL', discordURI, true);
+        view.emit(`${PAGE_NAME}:OpenURL`, discordURI, true);
     }
 
     static finish() {
-        alt.emitServer('discord:FinishAuth');
+        alt.emitServer(SYSTEM_EVENTS.DISCORD_FINISH_AUTH);
     }
 
     static async emitFailureMessage(message: string) {
         const view = await WebViewController.get();
-        view.emit('discord:Fail', message);
-    }
-
-    /**
-     * Creates a short feedback loop for testing connection before
-     * triggering the login screen to the client.
-     * @static
-     * @memberof LoginView
-     */
-    static async checkConnection(data: Array<number>) {
-        const [_count, _neededRequests] = data;
-
-        if (interval === undefined || interval === undefined) {
-            interval = Timer.createInterval(LoginView.render, 0, 'Login.ts - Connection Check');
-        }
-
-        count = _count;
-        neededRequests = _neededRequests;
-
-        await sleep(25);
-        alt.emitServer(SYSTEM_EVENTS.CHECK_CONNECTION);
-    }
-
-    static render() {
-        drawRectangle2D({ x: 0.5, y: 0.5 }, { x: 1, y: 1 }, new alt.RGBA(0, 0, 0, 255));
-        drawText2D(`Testing Connection`, { x: 0.5, y: 0.75 }, 0.6, new alt.RGBA(255, 255, 255, 255), 0);
-
-        if (!neededRequests) {
-            return;
-        }
-
-        drawText2D(
-            `${((count / neededRequests) * 100).toFixed(0)}%`,
-            { x: 0.5, y: 0.8 },
-            0.6,
-            new alt.RGBA(255, 255, 255, 255),
-            0,
-        );
-
-        drawText2D(
-            `If this takes longer than 5s there's a problem with your connection...`,
-            { x: 0.5, y: 0.85 },
-            0.55,
-            new alt.RGBA(255, 255, 255, 255),
-            0,
-        );
+        view.emit(`${PAGE_NAME}:Fail`, message);
     }
 }
 
-alt.onServer(`Discord:Open`, LoginView.open);
-alt.onServer(`Discord:Close`, LoginView.close);
-alt.onServer('Discord:Fail', LoginView.emitFailureMessage);
-alt.onServer(SYSTEM_EVENTS.CHECK_CONNECTION, LoginView.checkConnection);
+alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN, LoginView.finishOpen);
+alt.onServer(SYSTEM_EVENTS.DISCORD_OPEN, LoginView.open);
+alt.onServer(SYSTEM_EVENTS.DISCORD_CLOSE, LoginView.close);
+alt.onServer(SYSTEM_EVENTS.DISCORD_FAIL, LoginView.emitFailureMessage);

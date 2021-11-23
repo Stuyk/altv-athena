@@ -9,11 +9,13 @@ alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
 async function handleConnectionComplete() {
     native.destroyAllCams(true);
     native.renderScriptCams(false, false, 0, false, false, 0);
-    native.doScreenFadeIn(0);
+    native.doScreenFadeOut(0);
     native.triggerScreenblurFadeOut(0);
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
-    alt.emitServer(SYSTEM_EVENTS.CHECK_CONNECTION);
+
+    // Calls the login functionality
+    alt.emitServer(SYSTEM_EVENTS.BEGIN_CONNECTION);
     handleTick();
 }
 

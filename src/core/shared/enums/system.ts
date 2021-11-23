@@ -8,9 +8,15 @@ export enum SYSTEM_EVENTS {
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
-    CHECK_CONNECTION = 'check:Connection',
+    BEGIN_CONNECTION = 'connection:Begin',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
+    // Discord
+    DISCORD_OPEN = 'discord:Open',
+    DISCORD_CLOSE = 'discord:Close',
+    DISCORD_FAIL = 'discord:Fail',
+    DISCORD_LOGIN = 'discord:Login',
+    DISCORD_FINISH_AUTH = 'discord:FinishAuth',
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
     // Interior
@@ -94,6 +100,7 @@ export enum SYSTEM_EVENTS {
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
     QUICK_TOKEN_NONE = 'quicktoken:None',
     QUICK_TOKEN_UPDATE = 'quicktoken:Update',
+    QUICK_TOKEN_NONE_BUT_DO_LOGIN = 'quicktoken:None:ButLogin',
     //
     REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',

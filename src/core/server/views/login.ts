@@ -1,16 +1,17 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 import dotenv from 'dotenv';
+import { LoginView } from '../../client/views/login';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { playerFuncs } from '../extensions/Player';
 import { IConfig } from '../interface/IConfig';
+import { LoginController } from '../systems/login';
 import Ares from '../utility/ares';
 import { sha256Random } from '../utility/encryption';
 
-const TIMES_TO_CHECK_CONNECTION = 25;
 const config: IConfig = dotenv.config().parsed as IConfig;
-const connectingUsers: { [key: string]: number } = {};
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
@@ -19,30 +20,9 @@ const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuy
 const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
 const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify%20email`;
 
-alt.onClient('discord:FinishAuth', handleFinishAuth);
-alt.onClient(SYSTEM_EVENTS.CHECK_CONNECTION, checkConnection);
-
-/**
- * Called by the client multiple times to verify data is coming through.
- * Also returns a response to get the next check.
- * @param {alt.Player} player
- * @return {*}
- */
-function checkConnection(player: alt.Player) {
-    if (connectingUsers[player.ip] >= TIMES_TO_CHECK_CONNECTION) {
-        delete connectingUsers[player.ip];
-        handlePlayerConnect(player);
-        return;
-    }
-
-    if (!connectingUsers[player.ip]) {
-        connectingUsers[player.ip] = 1;
-    } else {
-        connectingUsers[player.ip] += 1;
-    }
-
-    alt.emitClient(player, SYSTEM_EVENTS.CHECK_CONNECTION, [connectingUsers[player.ip], TIMES_TO_CHECK_CONNECTION]);
-}
+// This is called from the connectionComplete event on client-side.
+alt.onClient(SYSTEM_EVENTS.BEGIN_CONNECTION, handlePlayerConnect);
+alt.onClient(SYSTEM_EVENTS.DISCORD_FINISH_AUTH, handleFinishAuth);
 
 async function handlePlayerConnect(player: alt.Player) {
     if (!player || !player.valid) {
@@ -75,8 +55,8 @@ async function handlePlayerConnect(player: alt.Player) {
     const encryptedDataJSON = JSON.stringify(senderFormat);
     const discordOAuth2URL = getDiscordOAuth2URL();
 
-    alt.emit(`Discord:Opened`, player);
-    alt.emitClient(player, 'Discord:Open', `${discordOAuth2URL}&state=${encryptedDataJSON}`);
+    playerFuncs.set.firstConnect(player);
+    alt.emitClient(player, SYSTEM_EVENTS.DISCORD_OPEN, `${discordOAuth2URL}&state=${encryptedDataJSON}`);
 }
 
 /**
@@ -112,7 +92,7 @@ export function getAresURL() {
     return aresURL;
 }
 
-async function handleFinishAuth(player) {
+async function handleFinishAuth(player: alt.Player) {
     const player_identifier = player.discordToken;
     if (!player_identifier) {
         return;
@@ -152,5 +132,5 @@ async function handleFinishAuth(player) {
     }
 
     alt.emitClient(player, `Discord:Close`);
-    alt.emit('Discord:Login', player, JSON.parse(data));
+    LoginController.tryLogin(player, JSON.parse(data));
 }

@@ -39,7 +39,11 @@ export class LoginController {
      * @return {*}  {Promise<void>}
      * @memberof LoginController
      */
-    static async tryLogin(player: alt.Player, data: Partial<DiscordUser>, account: Partial<Account>): Promise<void> {
+    static async tryLogin(
+        player: alt.Player,
+        data: Partial<DiscordUser>,
+        account: Partial<Account> = null,
+    ): Promise<void> {
         delete player.pendingLogin;
         delete player.discordToken;
 
@@ -80,6 +84,7 @@ export class LoginController {
                 data.id,
                 Collections.Accounts,
             );
+
             if (!accountData) {
                 const newDocument: Partial<Account> = {
                     discord: player.discord.id,
@@ -147,6 +152,8 @@ export class LoginController {
 
     static async tryDiscordQuickToken(player: alt.Player, discord: string): Promise<void> {
         if (!discord) {
+            player.needsQT = true;
+            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
             return;
         }
 
@@ -160,6 +167,7 @@ export class LoginController {
 
         if (!account) {
             player.needsQT = true;
+            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
             return;
         }
 
@@ -170,6 +178,7 @@ export class LoginController {
                 { quickToken: null, quickTokenExpiration: null },
                 Collections.Accounts,
             );
+            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
             return;
         }
 
@@ -178,6 +187,7 @@ export class LoginController {
 
     static async handleNoQuickToken(player: alt.Player): Promise<void> {
         player.needsQT = true;
+        alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
     }
 
     static bindPlayerToID(player: alt.Player): void {
@@ -197,4 +207,3 @@ EventController.onPlayer(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginControlle
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
 alt.on('playerDisconnect', LoginController.tryDisconnect);
-alt.on('Discord:Login', LoginController.tryLogin);

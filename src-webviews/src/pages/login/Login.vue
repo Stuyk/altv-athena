@@ -48,7 +48,7 @@ export default defineComponent({
         Button,
         Frame,
         Icon,
-        Toolbar
+        Toolbar,
     },
     data() {
         return {
@@ -65,20 +65,11 @@ export default defineComponent({
                 LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
                 window again.`,
                 LABEL_FINISH_LOGIN: `Finish Login`,
-                LABEL_OPEN_WINDOW: `Open Login Window Again`
+                LABEL_OPEN_WINDOW: `Open Login Window Again`,
             },
-            url: 'http://localhost:9111'
         };
     },
     methods: {
-        setURL(url) {
-            if (url.includes('assets/webserver')) {
-                this.url = url;
-                return;
-            }
-
-            this.url = `http://${url}`;
-        },
         setLocales(locales) {
             this.locales = locales;
         },
@@ -87,7 +78,7 @@ export default defineComponent({
                 this.updates += 1;
 
                 if ('alt' in window) {
-                    alt.emit('discord:Ready');
+                    alt.emit(`${ComponentName}:Ready`);
                 }
             });
         },
@@ -108,7 +99,7 @@ export default defineComponent({
             this.updates += 1;
 
             if ('alt' in window) {
-                alt.emit('discord:FinishAuth');
+                alt.emit(`${ComponentName}:FinishAuth`);
             } else {
                 setTimeout(() => {
                     this.fail('Testing fail message');
@@ -121,8 +112,8 @@ export default defineComponent({
         getURL() {
             this.waitingForAuth = true;
 
-            if (window['alt']) {
-                alt.emit('discord:OpenURL');
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:OpenURL`);
             }
         },
         openURL(url) {
@@ -137,26 +128,26 @@ export default defineComponent({
             this.errorMessage = message;
             this.waitingForAuth = false;
             this.loading = false;
-        }
+        },
     },
     mounted() {
         if ('alt' in window) {
-            alt.on('discord:SetLocales', this.setLocales);
-            alt.on('discord:OpenURL', this.openURL);
-            alt.on('discord:endWindow', this.endWindow);
-            alt.on('discord:Fail', this.fail);
+            alt.on(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.on(`${ComponentName}:OpenURL`, this.openURL);
+            alt.on(`${ComponentName}:endWindow`, this.endWindow);
+            alt.on(`${ComponentName}:Fail`, this.fail);
         }
 
         this.finishedLoading();
     },
     unmounted() {
-         if ('alt' in window) {
-            alt.off('discord:SetLocales', this.setLocales);
-            alt.off('discord:OpenURL', this.openURL);
-            alt.off('discord:endWindow', this.endWindow);
-            alt.off('discord:Fail', this.fail);
+        if (`alt` in window) {
+            alt.off(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.off(`${ComponentName}:OpenURL`, this.openURL);
+            alt.off(`${ComponentName}:endWindow`, this.endWindow);
+            alt.off(`${ComponentName}:Fail`, this.fail);
         }
-    }
+    },
 });
 </script>
 
