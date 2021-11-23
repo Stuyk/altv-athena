@@ -33,7 +33,7 @@ export class InputView implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static async close() {
+    static async close(isNotCancel = false) {
         alt.toggleGameControls(true);
         BaseHUD.setHudVisibility(true);
 
@@ -47,6 +47,10 @@ export class InputView implements ViewModel {
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        if (isNotCancel) {
+            return;
+        }
 
         if (inputMenu.callback) {
             inputMenu.callback(null);
@@ -66,7 +70,7 @@ export class InputView implements ViewModel {
             alt.emitServer(inputMenu.serverEvent, results);
         }
 
-        InputView.close();
+        InputView.close(true);
     }
 
     static async ready() {
