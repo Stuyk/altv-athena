@@ -17,4 +17,12 @@ export default {
     LABEL_TOP: 'Top Layer',
     LABEL_UNDERSHIRT: 'Undershirt',
     LABEL_TORSO: 'Arms / Torso / Gloves',
+    LABEL_NAME: 'Name',
+    LABEL_DESC: 'Description',
+    LABEL_INSTRUCTION_HEADER: 'Purchase Item',
+    LABEL_INSTRUCTION: 'Give the clothing item a name and description.',
+    LABEL_CANCEL: 'Cancel',
+    LABEL_PURCHASE: 'Purchase',
+    LABEL_HELPER_DESC: 'A red hat with a blue brim',
+    LABEL_HELPER_NAME: 'Steezy Red Hat',
 };

@@ -77,6 +77,8 @@ class ClothingView implements ViewModel {
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        alt.emitServer(View_Events_Clothing.Exit);
     }
 
     /**

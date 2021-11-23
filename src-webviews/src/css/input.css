@@ -3,7 +3,8 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    width: 100%;
+    width: auto;
+    box-sizing: border-box;
 }
 
 .input:focus {
@@ -29,7 +30,7 @@
 }
 
 .input-full-width {
-    justify-content: left;
+    justify-content: flex-start;
 }
 
 .textbox {
@@ -39,10 +40,12 @@
     font-family: Roboto !important;
     font-size: 16px;
     margin: 0 !important;
+    box-sizing: border-box;
 }
 
 .textbox-full-width {
     width: 100%;
+    box-sizing: border-box;
 }
 
 .textbox:focus {

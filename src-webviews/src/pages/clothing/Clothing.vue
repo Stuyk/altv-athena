@@ -1,5 +1,79 @@
 <template>
     <div class="container">
+        <!-- Pop Up for Purchase -->
+        <Modal v-if="showDialog">
+            <Frame minWidth="30vw" maxWidth="30vw">
+                <template v-slot:toolbar>
+                    <Toolbar :hideExit="true">
+                        <span class="green--text">{{ getLocaleByName('LABEL_INSTRUCTION_HEADER') }}</span>
+                    </Toolbar>
+                </template>
+                <template v-slot:content>
+                    <div class="subtitle-2 mb-3 mt-1">{{ getLocaleByName('LABEL_INSTRUCTION') }}</div>
+                    <Input
+                        :label="getLocaleByName('LABEL_NAME')"
+                        :stack="true"
+                        :onInput="(text) => inputChange('name', text)"
+                        :validateCallback="(valid) => setValidityProp('name', valid)"
+                        :value="name"
+                        :rules="[
+                            (text) => {
+                                return new RegExp(/^[a-zA-Z ]+$/gm).test(text)
+                                    ? null
+                                    : 'Name cannot include special characters';
+                            },
+                            (text) => {
+                                return text.length >= 4 ? null : 'Name must be at least 4 characters';
+                            },
+                            (text) => {
+                                return text.length <= 16 ? null : 'Name must be less than 16 characters';
+                            },
+                        ]"
+                        :placeholder="getLocaleByName('LABEL_HELPER_NAME')"
+                        class="mb-3"
+                    />
+                    <Input
+                        :label="getLocaleByName('LABEL_DESC')"
+                        :stack="true"
+                        :onInput="(text) => inputChange('desc', text)"
+                        :validateCallback="(valid) => setValidityProp('desc', valid)"
+                        :value="desc"
+                        :rules="[
+                            (text) => {
+                                return new RegExp(/^[a-zA-Z ]+$/gm).test(text)
+                                    ? null
+                                    : 'Name cannot include special characters';
+                            },
+                            (text) => {
+                                return text.length >= 4 ? null : 'Name must be at least 4 characters';
+                            },
+                            (text) => {
+                                return text.length <= 16 ? null : 'Name must be less than 16 characters';
+                            },
+                        ]"
+                        :placeholder="getLocaleByName('LABEL_HELPER_DESC')"
+                        class="mb-3"
+                    />
+                    <div class="split split-full">
+                        <Button class="mt-2" color="red" style="width: 50%" @click="togglePurchaseInterface(false)">
+                            {{ getLocaleByName('LABEL_CANCEL') }}
+                        </Button>
+
+                        <template v-if="allValid">
+                            <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="purchaseComponent">
+                                {{ getLocaleByName('LABEL_PURCHASE') }}
+                            </Button>
+                        </template>
+                        <template v-else>
+                            <Button class="ml-4 mt-2" color="grey" :disable="true" style="width: 50%">
+                                {{ getLocaleByName('LABEL_PURCHASE') }}
+                            </Button>
+                        </template>
+                    </div>
+                </template>
+            </Frame>
+        </Modal>
+        <!-- Right Panel -->
         <div class="creator stack" v-if="labels && labels.length >= 1">
             <!-- Navigation -->
             <div class="split split-full navigation space-between pa-6">
@@ -22,6 +96,15 @@
                 @force-populate="forcePopulate"
                 @update-component="updateComponent"
             ></Option>
+            <!-- Purchase Options -->
+            <div class="footer pa-4">
+                <div class="split split-full space-between">
+                    <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
+                        <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
+                    </Button>
+                    <span class="price pa-3">$0</span>
+                </div>
+            </div>
         </div>
         <div class="escape pa-4" @click="handleClose">
             <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
@@ -31,17 +114,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import Button from '../../components/Button.vue';
 import Icon from '../../components/Icon.vue';
 import Modal from '../../components/Modal.vue';
 import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
+import Input from '../../components/Input.vue';
 import RangeInput from '../../components/RangeInput.vue';
 import Option from './components/Option.vue';
 
 import DefaultLocale from './utility/defaultLocales';
 import LabelsRef from './utility/labels';
+import Template from '../template/Template.vue';
 
 const ComponentName = 'Clothing';
 export default defineComponent({
@@ -51,19 +136,29 @@ export default defineComponent({
     },
     components: {
         Button,
-        Icon,
-        Modal,
-        Toolbar,
         Frame,
-        RangeInput,
+        Icon,
+        Input,
+        Modal,
         Option,
+        RangeInput,
+        Toolbar,
+        Template,
     },
     data() {
         return {
             update: 0,
             page: 0,
             locales: DefaultLocale,
+            showDialog: false,
+            name: '',
+            desc: '',
             labels: [],
+            allValid: false,
+            validity: {
+                name: false,
+                desc: false,
+            },
         };
     },
     computed: {
@@ -75,6 +170,28 @@ export default defineComponent({
         },
     },
     methods: {
+        inputChange(prop: string, value: string) {
+            this[prop] = value;
+        },
+        setValidityProp(propName: string, result: boolean) {
+            this.validity[propName] = result;
+
+            let allValid = true;
+            Object.keys(this.validity).forEach((key) => {
+                if (!this.validity[key]) {
+                    allValid = false;
+                    return;
+                }
+            });
+
+            this.allValid = allValid;
+        },
+        togglePurchaseInterface(value: boolean) {
+            this.showDialog = value;
+
+            this.name = '';
+            this.desc = '';
+        },
         getData(dataName: string, index: number) {
             return this.labels[this.page][dataName][index];
         },
@@ -178,6 +295,20 @@ export default defineComponent({
 
             alt.emit(`${ComponentName}:Close`);
         },
+        purchaseComponent() {
+            const componentData = JSON.parse(JSON.stringify(this.labels[this.page]));
+            delete componentData.maxDrawables;
+            delete componentData.maxTextures;
+            delete componentData.name;
+
+            if (!('alt' in window)) {
+                this.togglePurchaseInterface(false);
+                return;
+            }
+
+            alt.emit(`${ComponentName}:Purchase`, this.page, componentData, this.name, this.desc);
+            this.togglePurchaseInterface(false);
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
@@ -217,6 +348,7 @@ export default defineComponent({
 .creator {
     position: fixed;
     min-width: 400px;
+    max-width: 400px;
     min-height: 100vh;
     max-height: 100vh;
     background: rgba(12, 12, 12, 1) !important;
@@ -230,13 +362,6 @@ export default defineComponent({
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.center-page {
-    min-height: calc(100vh - 100px);
-    max-height: calc(100vh - 100px);
-    overflow-y: scroll;
-    box-sizing: border-box;
-}
-
 .split {
     box-sizing: border-box;
 }
@@ -244,5 +369,23 @@ export default defineComponent({
 .escape {
     top: 2vh;
     left: 2vw;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    max-height: auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.price {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>

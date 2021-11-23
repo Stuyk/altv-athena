@@ -87,7 +87,7 @@ export class CharacterSystem {
      * @memberof CharacterSystem
      */
     static applyEquipment(ped: number, components: Array<Item>, isMale = false) {
-        if (!native.doesEntityExist(ped)) {
+        if (!ped || !native.doesEntityExist(ped)) {
             return;
         }
 

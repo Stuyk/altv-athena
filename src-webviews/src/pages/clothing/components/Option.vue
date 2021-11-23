@@ -139,4 +139,12 @@ export default defineComponent({
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-sizing: border-box;
 }
+
+.center-page {
+    min-height: calc(100vh - 175px);
+    max-height: calc(100vh - 175px);
+    overflow-y: scroll;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
 </style>
