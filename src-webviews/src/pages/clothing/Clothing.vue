@@ -300,6 +300,7 @@ export default defineComponent({
             delete componentData.maxDrawables;
             delete componentData.maxTextures;
             delete componentData.name;
+            delete componentData.addonLocales;
 
             if (!('alt' in window)) {
                 this.togglePurchaseInterface(false);
