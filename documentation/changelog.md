@@ -495,6 +495,11 @@ description: List of all the changes and current versions.
 + Removed Old Vehicle Code
 + Added Ability for PedEditCamera to Interpolate Positions
 + Remove Connection Verification
++ Added Ability to Override Clothing Stores
++ Clothing Stores Can Now Hide Pages
++ Clothing Stores Can Now Hide Individual Components
++ Clothing Stores Can Have Per Page Pricing
++ Clothing Stores Can Have Per Component Pricing
 ```
 
 ## 1.6.0 - February 1-10, 2021
