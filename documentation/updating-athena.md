@@ -26,7 +26,7 @@ When you **do not update** you are going to eventually soft-lock your software w
 
 It is highly recommended that you **always update** as soon as possible. Staying on older iteration(s) of Athena does not guarentee support for you in the future.
 
-**Some of you are going to literally ignore what I'm saying  here and will never update. I'm not going to help you if you're not willing to learn the methods used to update. Learn it or lose it.**
+**Some of you are going to literally ignore what I'm saying here and will never update. I'm not going to help you if you're not willing to learn the methods used to update. Learn it or lose it.**
 
 ## Updating and Storing Changes
 

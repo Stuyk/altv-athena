@@ -99,10 +99,20 @@
             <!-- Purchase Options -->
             <div class="footer pa-4">
                 <div class="split split-full space-between">
-                    <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
-                        <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
-                    </Button>
-                    <span class="price pa-3">$0</span>
+                    <!-- Component is Available and Can Be Purchased -->
+                    <template v-if="isComponentAvailable()">
+                        <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
+                            <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
+                        </Button>
+                        <span class="price pa-3">${{ getPrice() }}</span>
+                    </template>
+                    <!-- Component is Unavailable and **Cannot** Be Purchased -->
+                    <template v-else>
+                        <Button class="mr-3" color="grey" :disable="true">
+                            <span class="grey--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
+                        </Button>
+                        <span class="price red--text pa-3">${{ getPrice() }}</span>
+                    </template>
                 </div>
             </div>
         </div>
@@ -124,6 +134,7 @@ import Input from '../../components/Input.vue';
 import RangeInput from '../../components/RangeInput.vue';
 import Option from './components/Option.vue';
 
+import DefaultData from './utility/defaultData';
 import DefaultLocale from './utility/defaultLocales';
 import LabelsRef from './utility/labels';
 import Template from '../template/Template.vue';
@@ -149,7 +160,6 @@ export default defineComponent({
         return {
             update: 0,
             page: 0,
-            locales: DefaultLocale,
             showDialog: false,
             name: '',
             desc: '',
@@ -159,6 +169,8 @@ export default defineComponent({
                 name: false,
                 desc: false,
             },
+            locales: DefaultLocale,
+            storeData: DefaultData,
         };
     },
     computed: {
@@ -170,6 +182,52 @@ export default defineComponent({
         },
     },
     methods: {
+        getPrice() {
+            // clothingPrices
+            // pagePrices
+
+            const label = this.labels[this.page];
+            const internalID = label.internalID;
+
+            if (this.storeData.clothingPrices[internalID]) {
+                const currentComponent = label.drawables[0];
+                const priceInfo = this.storeData.clothingPrices[internalID].find((x) => x.id === currentComponent);
+
+                if (priceInfo) {
+                    return priceInfo.price;
+                }
+            }
+
+            return this.storeData.pagePrices[internalID] ? this.storeData.pagePrices[internalID] : 0;
+        },
+        isComponentAvailable() {
+            let allAvailable = true;
+
+            // Need to loop through all ids.
+            for (let i = 0; i < this.labels[this.page].ids.length; i++) {
+                // This is the ID of the component.
+                // ie. A mask ID is 1
+                const internalID = this.labels[this.page].internalID;
+                const hiddenComponents: Array<number> = this.storeData.hiddenComponents[internalID];
+
+                // No internal component info found. Everything is available.
+                if (!hiddenComponents) {
+                    break;
+                }
+
+                const currentValue = this.labels[this.page].drawables[i];
+                const index = hiddenComponents.findIndex((id) => id === currentValue);
+
+                if (index <= -1) {
+                    continue;
+                }
+
+                allAvailable = false;
+                break;
+            }
+
+            return allAvailable;
+        },
         inputChange(prop: string, value: string) {
             this[prop] = value;
         },
@@ -310,6 +368,25 @@ export default defineComponent({
             alt.emit(`${ComponentName}:Purchase`, this.page, componentData, this.name, this.desc);
             this.togglePurchaseInterface(false);
         },
+        setData(data) {
+            this.storeData = data;
+
+            const pagesToRemove = [...this.storeData.hiddenPages];
+            const currentLabels = [...this.labels];
+
+            // Loop through this backwards so it does not screw up the order
+            // of the labels.
+            for (let i = currentLabels.length - 1; i >= 0; i--) {
+                const pageIndex = pagesToRemove.findIndex((id) => id === i);
+                if (pageIndex <= -1) {
+                    continue;
+                }
+
+                currentLabels.splice(i, 1);
+            }
+
+            this.labels = currentLabels;
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
@@ -317,10 +394,14 @@ export default defineComponent({
         this.labels = [...LabelsRef];
 
         if ('alt' in window) {
+            alt.on(`${ComponentName}:SetData`, this.setData);
             alt.on(`${ComponentName}:SetLocales`, this.setLocales);
             alt.on(`${ComponentName}:Propagate`, this.setLabels);
             alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
             alt.emit(`${ComponentName}:Ready`);
+        } else {
+            // Run this twice because it needs to remove some pages.
+            this.setData(DefaultData);
         }
 
         this.sendPageUpdate();

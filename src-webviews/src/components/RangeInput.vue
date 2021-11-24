@@ -113,7 +113,9 @@ export default defineComponent({
                 this._audio.volume = 0.1;
             }
 
-            await this._audio.play();
+            try {
+                await this._audio.play();
+            } catch (err) {}
         },
     },
 });

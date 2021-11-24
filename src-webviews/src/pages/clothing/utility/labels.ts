@@ -1,3 +1,5 @@
+import { CLOTHING_STORE_PAGE } from './defaultData';
+
 export default [
     {
         name: 'LABEL_HAT',
@@ -6,6 +8,7 @@ export default [
         textures: [0],
         maxDrawables: [5],
         maxTextures: [5],
+        internalID: CLOTHING_STORE_PAGE.HATS,
         isProp: true,
     },
     {
@@ -15,6 +18,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.MASK,
         isProp: false,
     },
     {
@@ -25,6 +29,7 @@ export default [
         textures: [0, 0, 0],
         maxDrawables: [0, 0, 0],
         maxTextures: [0, 0, 0],
+        internalID: CLOTHING_STORE_PAGE.SHIRT,
         isProp: false,
     },
     {
@@ -34,6 +39,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.BOTTOMS,
         isProp: false,
     },
     {
@@ -43,6 +49,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.SHOES,
         isProp: false,
     },
     {
@@ -52,6 +59,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.GLASSES,
         isProp: true,
     },
     {
@@ -61,6 +69,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.EARRINGS,
         isProp: true,
     },
     {
@@ -70,6 +79,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.BAG,
         isProp: false,
     },
     {
@@ -79,6 +89,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.ARMOUR,
         isProp: false,
     },
     {
@@ -88,6 +99,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.WATCH,
         isProp: true,
     },
     {
@@ -97,6 +109,7 @@ export default [
         textures: [0],
         maxDrawables: [0],
         maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.BRACELET,
         isProp: true,
     },
 ];

@@ -11,6 +11,12 @@ import clothingStores from '../../shared/information/clothingStores';
 import { ServerBlipController } from '../systems/blip';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { InteractionController } from '../systems/interaction';
+import IClothingStore from '../../shared/interfaces/IClothingStore';
+import { CLOTHING_STORE_PAGE } from '../../shared/enums/ClothingStorePages';
+import { sha256 } from '../utility/encryption';
+import { Blip } from '../../shared/interfaces/Blip';
+import { Interaction } from '../interface/Interaction';
+import { Vector3 } from '../../shared/interfaces/Vector';
 
 // Do not change order
 const icons = ['hat', 'mask', 'shirt', 'bottoms', 'shoes', 'glasses', 'ear', 'backpack', 'armour', 'watch', 'bracelet'];
@@ -24,13 +30,46 @@ const wearableRef: Item = {
     data: {},
 };
 
+const DefaultClothingData: IClothingStore = {
+    hiddenComponents: {},
+    hiddenPages: [],
+    pagePrices: {
+        [CLOTHING_STORE_PAGE.ARMOUR]: 1000,
+        [CLOTHING_STORE_PAGE.BAG]: 125,
+        [CLOTHING_STORE_PAGE.BOTTOMS]: 25,
+        [CLOTHING_STORE_PAGE.BRACELET]: 5,
+        [CLOTHING_STORE_PAGE.EARRINGS]: 5,
+        [CLOTHING_STORE_PAGE.GLASSES]: 50,
+        [CLOTHING_STORE_PAGE.HATS]: 75,
+        [CLOTHING_STORE_PAGE.MASK]: 250,
+        [CLOTHING_STORE_PAGE.SHIRT]: 25,
+        [CLOTHING_STORE_PAGE.SHOES]: 25,
+        [CLOTHING_STORE_PAGE.WATCH]: 200,
+    },
+    clothingPrices: {},
+};
+
+let clothingStoreList: Array<IClothingStore> = [];
+let isClothingStoresReady = false;
+
 class ClothingFunctions {
+    /**
+     * Initializes all clothing stores on server-start.
+     * @static
+     * @memberof ClothingFunctions
+     */
     static init() {
         for (let i = 0; i < clothingStores.length; i++) {
             const position = clothingStores[i];
             const uid = `clothing-store-${i}`;
 
-            ServerBlipController.append({
+            if (i === 0) {
+                console.log(`LOOK AT ME`);
+                console.log(position);
+            }
+
+            // Do not change.
+            const defaultBlip: Blip = {
                 text: 'Clothing Store',
                 color: 11,
                 sprite: 73,
@@ -38,23 +77,143 @@ class ClothingFunctions {
                 shortRange: true,
                 pos: position,
                 uid,
-            });
+            };
 
-            InteractionController.add({
+            // Do not change.
+            const defaultInteraction: Interaction = {
                 position,
                 description: 'Browse Clothing Store',
                 type: 'clothing-store',
-                callback: (player: alt.Player) => {
-                    alt.emitClient(player, View_Events_Clothing.Open);
-                },
-            });
+            };
+
+            const clothingData = deepCloneObject<IClothingStore>(DefaultClothingData);
+            clothingData.uid = uid;
+
+            ClothingFunctions.create(
+                position,
+                clothingData,
+                deepCloneObject(defaultBlip),
+                deepCloneObject(defaultInteraction),
+            );
         }
+
+        isClothingStoresReady = true;
     }
 
+    /**
+     * Used to create dynamic clothing stores.
+     * @static
+     * @param {IClothingStore} store
+     * @memberof ClothingFunctions
+     */
+    static create(position: Vector3, store: IClothingStore, blip: Blip, interaction: Interaction) {
+        if (!store.uid) {
+            store.uid = sha256(JSON.stringify(store));
+        }
+
+        blip.uid = store.uid;
+        blip.pos = position;
+        interaction.position = {
+            x: position.x,
+            y: position.y,
+            z: position.z - 1,
+        };
+
+        interaction.callback = (player: alt.Player) => {
+            const data = ClothingFunctions.getClothingStoreData(store.uid);
+
+            console.log(data);
+            alt.emitClient(player, View_Events_Clothing.Open, data);
+        };
+
+        ServerBlipController.append(blip);
+        InteractionController.add(interaction);
+        clothingStoreList.push(store);
+    }
+
+    /**
+     * Used to get the clothing store data and pass it down to the player.
+     * @static
+     * @param {string} uid
+     * @return {*}
+     * @memberof ClothingFunctions
+     */
+    static getClothingStoreData(uid: string): IClothingStore {
+        console.log(uid);
+        console.log(clothingStoreList);
+
+        const index = clothingStoreList.findIndex((x) => x.uid === uid);
+        if (index <= -1) {
+            // Actually should just return a default value
+            return null;
+        }
+
+        return clothingStoreList[index];
+    }
+
+    /**
+     * Used to override default clothing store data.
+     * @static
+     * @param {string} uid
+     * @param {IClothingStore} data
+     * @return {*}
+     * @memberof ClothingFunctions
+     */
+    static async overrideClothingData(uid: string, data: IClothingStore) {
+        await this.waitForReady();
+        const index = clothingStoreList.findIndex((x) => x.uid === uid);
+        if (index <= -1) {
+            console.error(new Error(`Clothing store with ${uid} does not exist.`));
+            return;
+        }
+
+        data.uid = clothingStoreList[index].uid;
+        clothingStoreList[index] = data;
+    }
+
+    /**
+     * Used to wait for the clothing store to be ready before
+     * overriding any data.
+     * @private
+     * @static
+     * @return {*}  {Promise<void>}
+     * @memberof ClothingFunctions
+     */
+    private static waitForReady(): Promise<void> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!isClothingStoresReady) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                return resolve();
+            }, 100);
+        });
+    }
+
+    /**
+     * Forces re-synchronization so that the player's equipment and clothing
+     * are set to what they currently have equipped after leaving.
+     * @static
+     * @param {alt.Player} player
+     * @memberof ClothingFunctions
+     */
     static exit(player: alt.Player) {
         playerFuncs.sync.inventory(player);
     }
 
+    /**
+     * How clothing purchases are handled.
+     * @static
+     * @param {alt.Player} player
+     * @param {number} equipmentSlot
+     * @param {ClothingComponent} component
+     * @param {string} name
+     * @param {string} desc
+     * @return {*}
+     * @memberof ClothingFunctions
+     */
     static purchase(
         player: alt.Player,
         equipmentSlot: number,

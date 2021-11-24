@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { View_Events_Clothing } from '../../shared/enums/Views';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
+import IClothingStore from '../../shared/interfaces/IClothingStore';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -27,11 +28,15 @@ const CAMERA_POSITIONS = [
     { zpos: -0.09999999999999902, fov: 45 }, // Bracelet
 ];
 
+let storeData: IClothingStore = null;
+
 class ClothingView implements ViewModel {
-    static async open() {
+    static async open(_storeData: IClothingStore) {
         if (isAnyMenuOpen()) {
             return;
         }
+
+        storeData = _storeData;
 
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, ClothingView.ready);
@@ -102,6 +107,7 @@ class ClothingView implements ViewModel {
 
     static async ready() {
         const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetData`, storeData);
         view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CLOTHING));
     }
 

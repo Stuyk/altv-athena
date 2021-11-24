@@ -57,7 +57,10 @@ export default defineComponent({
             }
 
             this._audio.setAttribute('src', '/sounds/ui/hover.ogg');
-            await this._audio.play();
+
+            try {
+                await this._audio.play();
+            } catch (err) {}
         },
         async playMouseUp() {
             if (!this._audio) {
@@ -66,7 +69,9 @@ export default defineComponent({
             }
 
             this._audio.setAttribute('src', '/sounds/ui/click.ogg');
-            await this._audio.play();
+            try {
+                await this._audio.play();
+            } catch (err) {}
         },
     },
     computed: {

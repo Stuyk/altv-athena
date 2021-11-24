@@ -113,15 +113,6 @@ export default defineComponent({
         page: Object,
         locales: Object,
     },
-    data() {
-        return {
-            // Used to prevent certain hair values
-            greylist: {
-                masculine: [23],
-                feminine: [24],
-            },
-        };
-    },
     methods: {
         getLocaleByName(name: string) {
             if (!this.locales[name]) {
