@@ -48,3 +48,19 @@ There are currently two ways to navigate to different pages while in development
 **Hover Example**
 
 ![](https://thumbs.gfycat.com/OrganicThreadbareBarasingha-size_restricted.gif)
+
+## Working with Vue
+
+It's best to use the current pages as general examples but head over to the `your-first-page` section to learn more.
+
+## How to Develop In-Game
+
+Keep in mind that you do this in-game you are going to be the ONLY PERSON who can be on the server while doing this.
+
+Inside of your `.env` file add the following:
+
+```
+VUE_DEBUG=true
+```
+
+_Remember to remove this if you are running the server in production mode._
