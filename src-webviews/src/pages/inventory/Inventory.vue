@@ -22,7 +22,7 @@
                                 :maxIndex="split.item.quantity - 1"
                                 :indexValue="splitAmount"
                                 :increment="1"
-                                @input="(e) => setIncrementAmount(e)"
+                                @input="(e) => setIncrementAmount(e, null)"
                                 style="width: 100%"
                                 class="pl-3 pr-3"
                             />

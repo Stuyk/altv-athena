@@ -30,10 +30,10 @@
         "hwid-linux": "cd tools && altv-athena-hwid-linux"
     },
     "devDependencies": {
-        "@altv/types-client": "^1.9.3",
+        "@altv/types-client": "^1.9.5",
         "@altv/types-natives": "^1.4.3",
-        "@altv/types-server": "^2.1.1",
-        "@altv/types-shared": "^1.0.9",
+        "@altv/types-server": "^2.1.2",
+        "@altv/types-shared": "^1.1.0",
         "@altv/types-webview": "^1.0.2",
         "@swc/cli": "^0.1.50",
         "@swc/core": "^1.2.90",

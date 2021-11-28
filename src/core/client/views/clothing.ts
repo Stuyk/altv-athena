@@ -111,12 +111,15 @@ class ClothingView implements ViewModel {
         view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CLOTHING));
     }
 
-    static handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
-        if (key !== 'equipment') {
+    static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
+        if (key !== 'equipment' && key !== 'bank' && key !== 'cash') {
             return;
         }
 
         ClothingView.setEquipment(items);
+
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
     }
 
     static setEquipment(items: Array<Item>) {

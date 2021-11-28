@@ -35,7 +35,7 @@
                     "
                     style="width: 100%"
                     class="pl-3 pr-3"
-                    :key="page"
+                    :key="index"
                 />
                 <Button
                     color="blue"

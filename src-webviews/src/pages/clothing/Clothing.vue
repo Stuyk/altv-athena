@@ -158,6 +158,8 @@ export default defineComponent({
     },
     data() {
         return {
+            cash: 0,
+            bank: 0,
             update: 0,
             page: 0,
             showDialog: false,
@@ -182,6 +184,9 @@ export default defineComponent({
         },
     },
     methods: {
+        hasEnoughMoney() {
+            //
+        },
         getPrice() {
             // clothingPrices
             // pagePrices
@@ -387,6 +392,10 @@ export default defineComponent({
 
             this.labels = currentLabels;
         },
+        setBankData(bank: number, cash: number) {
+            this.bank = bank;
+            this.cash = cash;
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
@@ -397,6 +406,7 @@ export default defineComponent({
             alt.on(`${ComponentName}:SetData`, this.setData);
             alt.on(`${ComponentName}:SetLocales`, this.setLocales);
             alt.on(`${ComponentName}:Propagate`, this.setLabels);
+            alt.on(`${ComponentName}:SetBankData`, this.setBankData);
             alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
             alt.emit(`${ComponentName}:Ready`);
         } else {

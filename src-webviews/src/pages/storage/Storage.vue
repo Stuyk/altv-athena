@@ -43,7 +43,7 @@
                                         :maxIndex="getItem().quantity - 1"
                                         :indexValue="splitAmount"
                                         :increment="1"
-                                        @input="(e) => setIncrementAmount(e)"
+                                        @input="(e) => setIncrementAmount(e, null)"
                                         style="width: 100%"
                                         class="pl-1 pr-1"
                                     />
@@ -94,7 +94,7 @@
                                         :maxIndex="getItem().quantity - 1"
                                         :indexValue="splitAmount"
                                         :increment="1"
-                                        @input="(e) => setIncrementAmount(e)"
+                                        @input="(e) => setIncrementAmount(e, null)"
                                         style="width: 100%"
                                         class="pl-1 pr-1"
                                     />
