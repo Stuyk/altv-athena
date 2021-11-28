@@ -1,5 +1,8 @@
 <template>
-    <h1>Hello from Template!</h1>
+    <div class="wrapper">
+        <span class="green--text">{{ increment }}</span>
+        <Button class="mt-4" color="blue" @click="someMethodName"> Add </Button>
+    </div>
 </template>
 
 <script lang="ts">
@@ -18,7 +21,6 @@ import Toolbar from '../../components/Toolbar.vue';
 const ComponentName = 'Template';
 export default defineComponent({
     name: ComponentName,
-    // Used to add Custom Components
     components: {
         Button,
         Frame,
@@ -32,45 +34,33 @@ export default defineComponent({
     // Used to define state
     data() {
         return {
-            //
+            increment: 0,
         };
+    },
+    // Used to define functions you can call with 'this.x'
+    methods: {
+        someMethodName() {
+            this.increment += 1;
+        },
     },
     // Called when the page is loaded.
     mounted() {
         // Bind Events to Methods
         if ('alt' in window) {
             // alt.on('x', this.whatever);
-            alt.on(`${ComponentName}:SendSomeData`, this.sendSomeData);
-            alt.emit(`${ComponentName}:Ready`);
         }
-
-        // Add Keybinds for In-Menu
-        document.addEventListener('keyup', this.handleKeyPress);
     },
     // Called when the page is unloaded.
     unmounted() {
+        // Unbind Events from the Mounted Function
+        if ('alt' in window) {
+            // alt.off('x', this.whatever);
+        }
+
         // Make sure to turn off any document events as well.
         // Only if they are present of course.
         // Example:
         // document.removeEventListener('mousemove', this.someFunction)
-        if ('alt' in window) {
-            alt.off(`${ComponentName}:Close`, this.close);
-        }
-
-        // Remove Keybinds for In-Menu
-        document.removeEventListener('keyup', this.handleKeyPress);
-    },
-    // Used to define functions you can call with 'this.x'
-    methods: {
-        handleKeyPress(e) {
-            // Escape Key
-            if (e.keyCode === 27 && 'alt' in window) {
-                alt.emit(`${ComponentName}:Close`);
-            }
-        },
-        sendSomeData(arg1: string) {
-            console.log(arg1);
-        },
     },
 });
 </script>

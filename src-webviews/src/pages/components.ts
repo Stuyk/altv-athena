@@ -9,6 +9,7 @@ import Garage from './garage/Garage.vue';
 import Storage from './storage/Storage.vue';
 import InputBox from './input/InputBox.vue';
 import Clothing from './clothing/Clothing.vue';
+import Test from './test/Test.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -24,6 +25,7 @@ const componentList = {
     Inventory: shallowRef(Inventory),
     Login: shallowRef(Login),
     Storage: shallowRef(Storage),
+    Test: shallowRef(Test),
 };
 
 function generateComponentList(): Array<{ name: string; component: unknown }> {

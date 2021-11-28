@@ -43,11 +43,23 @@ This is if you want to design out-of-game and just work on some design.
 <template>
     <keep-alive>
         <div class="page">
+            <!-- Developer Menu for Local Host -->
+            <div class="devMenu" v-if="isDevMenu()" @mouseenter="setDevMode(true)" @mouseleave="setDevMode(false)">
+                <div class="devMode" v-if="devMode">
+                    <template v-for="(pageName, index) in getAllPageNames" :key="index">
+                        <span class="simple-link" @click="overridePages(pageName)">
+                            {{ pageName }}
+                        </span>
+                    </template>
+                </div>
+            </div>
+            <!-- Displays Individual Pages -->
             <component
                 v-for="(page, index) in pages"
                 :key="index"
                 :is="page.component"
                 :id="'page-' + page"
+                @set-page="setPages"
                 @close-page="closePage"
                 v-bind:emit="emit"
                 class="fade-in"
@@ -58,6 +70,7 @@ This is if you want to design out-of-game and just work on some design.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import DefaultPage from './defaultPage';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
@@ -73,10 +86,19 @@ export default defineComponent({
         return {
             pages: [] as Array<IPageData>,
             pageBindings: [...components.generateComponentList()],
+            devMode: false,
         };
+    },
+    computed: {
+        getAllPageNames() {
+            return Object.keys(components.componentList);
+        },
     },
     // Define functions for the main controller.
     methods: {
+        setDevMode(value: boolean) {
+            this.devMode = value;
+        },
         emit(value: string, ...args: any[]) {
             if (!('alt' in window)) {
                 return;
@@ -151,6 +173,15 @@ export default defineComponent({
             // Just Hide All Pages
             this.pages = [];
         },
+        overridePages(pageName: string) {
+            const foundPages = this.pageBindings.filter((page) => page.name === pageName);
+            if (!foundPages || foundPages.length <= 0) {
+                this.pages = [];
+                return;
+            }
+
+            this.pages = foundPages;
+        },
         setPages(pagesToShow: Array<string>) {
             if (!pagesToShow || !Array.isArray(pagesToShow)) {
                 console.error(`Failed to set any pages.`);
@@ -163,12 +194,19 @@ export default defineComponent({
 
             this.pages = foundPages;
         },
+        isDevMenu() {
+            if (!('alt' in window)) {
+                return true;
+            }
+
+            return false;
+        },
     },
     mounted() {
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.setPages(['Clothing']);
+            this.setPages([DefaultPage]);
             return;
         }
 
@@ -205,5 +243,52 @@ export default defineComponent({
     100% {
         opacity: 0;
     }
+}
+
+.devMenu {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    min-width: 5px;
+    max-width: 5px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: transparent;
+    z-index: 99;
+}
+
+.devMenu:hover {
+    background: rgba(0, 0, 0, 0.5) !important;
+    max-width: 300px;
+    text-decoration: unset;
+    color: black;
+}
+
+.devMode {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.simple-link {
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 3px !important;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.simple-link:hover {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 </style>
