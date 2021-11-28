@@ -19,10 +19,10 @@
         "dev": "npm run build && npm-run-all --parallel reconnect-server webserver streamer windev"
     },
     "devDependencies": {
-        "@altv/types-client": "^1.7.6",
-        "@altv/types-natives": "^1.4.2",
-        "@altv/types-server": "^1.9.6",
-        "@altv/types-shared": "^1.0.1",
+        "@altv/types-client": "^1.9.5",
+        "@altv/types-natives": "^1.4.3",
+        "@altv/types-server": "^2.1.2",
+        "@altv/types-shared": "^1.1.0",
         "@altv/types-webview": "^1.0.2",
         "@stuyk/altv-reconnect": "^1.5.0",
         "@swc/cli": "^0.1.46",

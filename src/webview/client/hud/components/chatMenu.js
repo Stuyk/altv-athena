@@ -17,7 +17,7 @@ const tagOrComment = new RegExp(
     'gi'
 );
 
-const chat = Vue.component('chat', {
+const ChatComponent = Vue.component('chat', {
     data() {
         return {
             history: [],

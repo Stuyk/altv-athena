@@ -1,4 +1,4 @@
-const leaderboard = Vue.component('leaderboard', {
+const LeaderboardComponent = Vue.component('leaderboard', {
     props: ['players'],
     template: `
         <div class="leaderboardWrapper">

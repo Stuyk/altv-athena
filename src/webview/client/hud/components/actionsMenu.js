@@ -1,4 +1,4 @@
-const actions = Vue.component('actions', {
+const ActionsComponent = Vue.component('actions', {
     data() {
         return {
             history: [],

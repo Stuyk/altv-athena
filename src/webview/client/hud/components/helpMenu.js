@@ -1,4 +1,4 @@
-const help = Vue.component('help', {
+const HelpComponent = Vue.component('help', {
     data() {
         return {
             helpText: null,
