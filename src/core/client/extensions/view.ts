@@ -6,7 +6,7 @@ import { handleFrontendSound } from '../systems/sound';
 import { Timer } from '../utility/timers';
 
 // Must be a blank index page.
-const blankURL = `http://resource/client/views/empty/html/index.html`;
+const blankURL = `http://assets/webview/client/empty/index.html`;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
 let _isClosing: boolean = false;

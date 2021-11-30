@@ -11,7 +11,7 @@ async function sleep(ms) {
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({ theme: { dark: true } }),
-    components: [actions, leaderboard, chat, help, status],
+    components: [ActionsComponent, LeaderboardComponent, ChatComponent, HelpComponent],
     data() {
         return {
             show: false,
