@@ -191,7 +191,6 @@ function handleDrawPeds() {
             alt.nextTick(() => {
                 native.setEntityHeading(pedInfo[pedData.uid], heading);
 
-                native.setPedRandomProps(pedInfo[pedData.uid]);
                 if (pedData.randomizeAppearance) {
                     native.setPedRandomProps(pedInfo[pedData.uid]);
                     native.setPedRandomComponentVariation(pedInfo[pedData.uid], 0);
