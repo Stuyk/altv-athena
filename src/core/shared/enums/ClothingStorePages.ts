@@ -10,6 +10,7 @@ export enum CLOTHING_STORE_PAGE {
     ARMOUR = 8,
     WATCH = 9,
     BRACELET = 10,
+    ACCESSORY = 11,
     // Do not change these; they're hard-coded.
     UNDERSHIRT = 90,
     TORSO = 91,

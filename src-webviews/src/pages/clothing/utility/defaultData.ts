@@ -10,12 +10,14 @@ export enum CLOTHING_STORE_PAGE {
     ARMOUR = 8,
     WATCH = 9,
     BRACELET = 10,
+    ACCESSORY = 11,
     // Do not change these; they're hard-coded.
     UNDERSHIRT = 90,
     TORSO = 91,
 }
 
 export default {
+    uid: 'clothing-store-0',
     hiddenComponents: {
         [CLOTHING_STORE_PAGE.HATS]: [-1, 0, 1],
     },
@@ -32,6 +34,7 @@ export default {
         [CLOTHING_STORE_PAGE.SHIRT]: 100,
         [CLOTHING_STORE_PAGE.SHOES]: 75,
         [CLOTHING_STORE_PAGE.WATCH]: 500,
+        [CLOTHING_STORE_PAGE.ACCESSORY]: 900,
     },
     clothingPrices: {
         // [CLOTHING_STORE_PAGE.ARMOUR]: Array<{ price: number; id: number; }>

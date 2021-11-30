@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import env from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
@@ -14,12 +13,12 @@ import MongoUtil from './utility/mongo';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
-const config = env.config().parsed as IConfig;
+let config: IConfig;
 
 class Startup {
     static async begin() {
         // Validate the Configuration
-        ConfigUtil.validate(config);
+        config = ConfigUtil.get();
 
         // Start Database
         Startup.database();

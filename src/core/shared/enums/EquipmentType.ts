@@ -7,5 +7,8 @@ export enum EQUIPMENT_TYPE {
     GLASSES = 5,
     EARS = 6,
     BAG = 7,
-    ARMOUR = 8
+    ARMOUR = 8,
+    WATCH = 9,
+    BRACELET = 10,
+    ACCESSORY = 11,
 }

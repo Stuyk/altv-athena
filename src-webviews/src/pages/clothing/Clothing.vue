@@ -93,6 +93,7 @@
             <Option
                 v-bind:page="labels[page]"
                 v-bind:locales="locales"
+                v-bind:update="updateCount"
                 @force-populate="forcePopulate"
                 @update-component="updateComponent"
             ></Option>
@@ -100,7 +101,7 @@
             <div class="footer pa-4">
                 <div class="split split-full space-between">
                     <!-- Component is Available and Can Be Purchased -->
-                    <template v-if="isComponentAvailable()">
+                    <template v-if="isComponentAvailable() && hasEnoughMoney()">
                         <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
                             <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
                         </Button>
@@ -160,7 +161,7 @@ export default defineComponent({
         return {
             cash: 0,
             bank: 0,
-            update: 0,
+            updateCount: 0,
             page: 0,
             showDialog: false,
             name: '',
@@ -185,12 +186,14 @@ export default defineComponent({
     },
     methods: {
         hasEnoughMoney() {
-            //
+            const price = this.getPrice();
+            if (this.cash >= price) {
+                return true;
+            }
+
+            return false;
         },
         getPrice() {
-            // clothingPrices
-            // pagePrices
-
             const label = this.labels[this.page];
             const internalID = label.internalID;
 
@@ -272,7 +275,7 @@ export default defineComponent({
                 this.page += 1;
             }
 
-            this.update += 1;
+            this.updateCount += 1;
             this.sendPageUpdate();
         },
         prevPage() {
@@ -282,10 +285,10 @@ export default defineComponent({
                 this.page -= 1;
             }
 
-            this.update += 1;
+            this.updateCount += 1;
             this.sendPageUpdate();
         },
-        setLocales(data) {
+        setLocale(data) {
             this.locales = data;
         },
         getLocaleByName(name: string) {
@@ -343,6 +346,7 @@ export default defineComponent({
         },
         async setLabels(newLabels) {
             this.labels = newLabels;
+            this.updateCount += 1;
         },
         handlePress(e) {
             if (e.keyCode !== 27) {
@@ -370,11 +374,13 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Purchase`, this.page, componentData, this.name, this.desc);
+            alt.emit(`${ComponentName}:Purchase`, this.storeData.uid, this.page, componentData, this.name, this.desc);
             this.togglePurchaseInterface(false);
         },
         setData(data) {
             this.storeData = data;
+
+            console.log(`Clothing Store: '${this.storeData.uid}'`);
 
             const pagesToRemove = [...this.storeData.hiddenPages];
             const currentLabels = [...this.labels];
@@ -393,6 +399,7 @@ export default defineComponent({
             this.labels = currentLabels;
         },
         setBankData(bank: number, cash: number) {
+            console.log(cash);
             this.bank = bank;
             this.cash = cash;
         },
@@ -404,7 +411,7 @@ export default defineComponent({
 
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetData`, this.setData);
-            alt.on(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.on(`${ComponentName}:SetLocale`, this.setLocale);
             alt.on(`${ComponentName}:Propagate`, this.setLabels);
             alt.on(`${ComponentName}:SetBankData`, this.setBankData);
             alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
@@ -420,7 +427,7 @@ export default defineComponent({
         document.removeEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.off(`${ComponentName}:SetLocales`, this.setLocales);
+            alt.off(`${ComponentName}:SetLocale`, this.setLocale);
             alt.off(`${ComponentName}:Propagate`, this.setLabels);
         }
     },

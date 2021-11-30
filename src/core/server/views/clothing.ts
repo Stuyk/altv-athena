@@ -17,9 +17,24 @@ import { sha256 } from '../utility/encryption';
 import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../interface/Interaction';
 import { Vector3 } from '../../shared/interfaces/Vector';
+import { CurrencyTypes } from '../../shared/enums/Currency';
 
 // Do not change order
-const icons = ['hat', 'mask', 'shirt', 'bottoms', 'shoes', 'glasses', 'ear', 'backpack', 'armour', 'watch', 'bracelet'];
+const icons = [
+    'hat',
+    'mask',
+    'shirt',
+    'bottoms',
+    'shoes',
+    'glasses',
+    'ear',
+    'backpack',
+    'armour',
+    'watch',
+    'bracelet',
+    'accessory',
+];
+
 const wearableRef: Item = {
     name: `Item`,
     description: `An Item`,
@@ -45,6 +60,7 @@ const DefaultClothingData: IClothingStore = {
         [CLOTHING_STORE_PAGE.SHIRT]: 25,
         [CLOTHING_STORE_PAGE.SHOES]: 25,
         [CLOTHING_STORE_PAGE.WATCH]: 200,
+        [CLOTHING_STORE_PAGE.ACCESSORY]: 50,
     },
     clothingPrices: {},
 };
@@ -62,11 +78,6 @@ class ClothingFunctions {
         for (let i = 0; i < clothingStores.length; i++) {
             const position = clothingStores[i];
             const uid = `clothing-store-${i}`;
-
-            if (i === 0) {
-                console.log(`LOOK AT ME`);
-                console.log(position);
-            }
 
             // Do not change.
             const defaultBlip: Blip = {
@@ -121,8 +132,6 @@ class ClothingFunctions {
 
         interaction.callback = (player: alt.Player) => {
             const data = ClothingFunctions.getClothingStoreData(store.uid);
-
-            console.log(data);
             alt.emitClient(player, View_Events_Clothing.Open, data);
         };
 
@@ -139,12 +148,8 @@ class ClothingFunctions {
      * @memberof ClothingFunctions
      */
     static getClothingStoreData(uid: string): IClothingStore {
-        console.log(uid);
-        console.log(clothingStoreList);
-
         const index = clothingStoreList.findIndex((x) => x.uid === uid);
         if (index <= -1) {
-            // Actually should just return a default value
             return null;
         }
 
@@ -216,11 +221,57 @@ class ClothingFunctions {
      */
     static purchase(
         player: alt.Player,
+        shopUID: string,
         equipmentSlot: number,
         component: ClothingComponent,
         name: string,
         desc: string,
     ) {
+        const index = clothingStoreList.findIndex((x) => x.uid === shopUID);
+        if (index <= -1) {
+            playerFuncs.emit.sound2D(player, 'item_error');
+            return;
+        }
+
+        const shop = clothingStoreList[index];
+        const id: number = component.internalID;
+
+        let totalCost: number = 0;
+        for (let i = 0; i < component.drawables.length; i++) {
+            const drawable: number = component.drawables[i];
+
+            // Price based on component id in individual shop.
+            if (shop.clothingPrices[id]) {
+                const componentInfo = shop.clothingPrices[id].find((item) => {
+                    if (item.id === drawable) {
+                        return true;
+                    }
+
+                    return false;
+                });
+
+                if (componentInfo && componentInfo.price) {
+                    totalCost += componentInfo.price;
+                    continue;
+                }
+            }
+
+            // Get individual page cost for all items if component has no price.
+            if (shop.pagePrices[id]) {
+                totalCost += shop.pagePrices[id];
+            }
+        }
+
+        if (totalCost >= 1) {
+            if (player.data.cash < totalCost) {
+                playerFuncs.emit.sound2D(player, 'item_error');
+                return;
+            }
+        }
+
+        // Remove unncessary information
+        delete component.internalID;
+
         const newItem = deepCloneObject<Item>(wearableRef);
         newItem.name = name;
         newItem.description = desc;
@@ -249,6 +300,13 @@ class ClothingFunctions {
         if (!didGetAdded) {
             playerFuncs.emit.sound2D(player, 'item_error');
             return;
+        }
+
+        if (totalCost >= 1) {
+            if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, totalCost)) {
+                playerFuncs.emit.sound2D(player, 'item_error');
+                return;
+            }
         }
 
         playerFuncs.save.field(player, 'inventory', player.data.inventory);

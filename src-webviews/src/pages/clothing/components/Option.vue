@@ -35,7 +35,7 @@
                     "
                     style="width: 100%"
                     class="pl-3 pr-3"
-                    :key="index"
+                    :key="update"
                 />
                 <Button
                     color="blue"
@@ -112,6 +112,7 @@ export default defineComponent({
     props: {
         page: Object,
         locales: Object,
+        update: Number,
     },
     methods: {
         getLocaleByName(name: string) {

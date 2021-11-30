@@ -1,0 +1,17 @@
+{
+    "[?] A Discord Bot Secret from the Discord Developer Panel": {},
+    "DISCORD_BOT": "",
+    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": {},
+    "WHITELIST_ROLE": "",
+    "[?] A URI with authentication to connect to a MongoDB Database": {},
+    "[?] ex: mongodb://username:password@127.0.0.1:27017": {},
+    "MONGO_URL": "",
+    "[?] A list of collection(s) to create. Separated by a common. ie. one,two,three": {},
+    "MONGO_COLLECTIONS": "",
+    "[?] Used to turn on development mode for WebViews": {},
+    "VUE_DEBUG": true,
+    "[?] Used for Ares Service Debugging": {},
+    "ARES_ENDPOINT": "",
+    "[?] Used to give the client the IP to connect to the WebServer **Deprecated": {},
+    "WEBSERVER_IP": ""
+}

@@ -13,6 +13,7 @@ Helpful for seeing what default components look like.
                 :numberOnly="false"
                 :stack="false"
                 :onChange="searchTerm"
+                :onInput="() => {}"
                 :validateCallback="() => {}"
                 :value="userInput"
                 :rules="[]"

@@ -35,6 +35,7 @@ export default interface IClothingStore {
      *         [CLOTHING_STORE_PAGE.TORSO]?: Array<number>;
      *         [CLOTHING_STORE_PAGE.UNDERSHIRT]?: Array<number>;
      *         [CLOTHING_STORE_PAGE.WATCH]?: Array<number>;
+     *         [CLOTHING_STORE_PAGE.ACCESSORY]?: Array<number>;
      *     }}
      * @memberof IClothingStore
      */
@@ -52,6 +53,7 @@ export default interface IClothingStore {
         [CLOTHING_STORE_PAGE.TORSO]?: Array<number>;
         [CLOTHING_STORE_PAGE.UNDERSHIRT]?: Array<number>;
         [CLOTHING_STORE_PAGE.WATCH]?: Array<number>;
+        [CLOTHING_STORE_PAGE.ACCESSORY]?: Array<number>;
     };
 
     /**
@@ -69,6 +71,7 @@ export default interface IClothingStore {
      *         [CLOTHING_STORE_PAGE.SHIRT]?: number;
      *         [CLOTHING_STORE_PAGE.SHOES]?: number;
      *         [CLOTHING_STORE_PAGE.WATCH]?: number;
+     *         [CLOTHING_STORE_PAGE.ACCESSORY]?: number;
      *     }}
      * @memberof IClothingStore
      */
@@ -84,6 +87,7 @@ export default interface IClothingStore {
         [CLOTHING_STORE_PAGE.SHIRT]?: number;
         [CLOTHING_STORE_PAGE.SHOES]?: number;
         [CLOTHING_STORE_PAGE.WATCH]?: number;
+        [CLOTHING_STORE_PAGE.ACCESSORY]?: number;
     };
 
     /**
@@ -100,6 +104,7 @@ export default interface IClothingStore {
      *         [CLOTHING_STORE_PAGE.SHIRT]?: Array<IClothingPrice>;
      *         [CLOTHING_STORE_PAGE.SHOES]?: Array<IClothingPrice>;
      *         [CLOTHING_STORE_PAGE.WATCH]?: Array<IClothingPrice>;
+     *         [CLOTHING_STORE_PAGE.ACCESSORY]?: Array<IClothingPrice>;
      *     }}
      * @memberof IClothingStore
      */
@@ -115,5 +120,6 @@ export default interface IClothingStore {
         [CLOTHING_STORE_PAGE.SHIRT]?: Array<IClothingPrice>;
         [CLOTHING_STORE_PAGE.SHOES]?: Array<IClothingPrice>;
         [CLOTHING_STORE_PAGE.WATCH]?: Array<IClothingPrice>;
+        [CLOTHING_STORE_PAGE.ACCESSORY]?: Array<IClothingPrice>;
     };
 }

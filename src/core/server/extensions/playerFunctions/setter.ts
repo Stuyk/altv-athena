@@ -15,11 +15,11 @@ import safe from './safe';
 import save from './save';
 import sync from './sync';
 import Database from '@stuyk/ezmongodb';
-import dotenv from 'dotenv';
-import { IConfig } from '../../interface/IConfig';
+import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
+import Logger from '../../utility/athenaLogger';
 
-const config: IConfig = dotenv.config().parsed as IConfig;
+const config = ConfigUtil.get();
 
 /**
  * Set the current account data for this player.
@@ -93,10 +93,11 @@ async function firstConnect(player: alt.Player): Promise<void> {
         return;
     }
 
-    const vueDefaultPath = config.VUE_DEBUG ? `http://localhost:3000/` : `http://webviews/index.html`;
+    const vueDefaultPath = config.VUE_DEBUG ? ConfigUtil.getViteServer() : `http://webviews/index.html`;
     alt.emitClient(player, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
     // Used to set the custom View instance with a Web Server URL.
+    // REMOVE WHEN CLOSING OUT 3.0.0 -- NO LONGER NEEDED - STUYK PLS LOOK AT THIS
     const webServerPath = alt.hasResource(`webserver`) ? `http://assets/webserver/files` : config.WEBSERVER_IP;
     alt.emitClient(player, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
 

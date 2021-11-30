@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
-import dotenv from 'dotenv';
-import { LoginView } from '../../client/views/login';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -10,12 +8,13 @@ import { IConfig } from '../interface/IConfig';
 import { LoginController } from '../systems/login';
 import Ares from '../utility/ares';
 import { sha256Random } from '../utility/encryption';
-
-const config: IConfig = dotenv.config().parsed as IConfig;
+import ConfigUtil from '../utility/config';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
 // These connect to a backend that helps users login with Discord oAuth2.
+
+const config = ConfigUtil.get();
 const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuyk.com`;
 const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
 const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify%20email`;

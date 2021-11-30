@@ -48,6 +48,13 @@ export interface ClothingComponent {
     isProp: boolean;
 
     /**
+     * The page which this component belongs to inside of the shop system.
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    internalID?: number;
+
+    /**
      * For client-side usage. Do not set manually.
      * Calls the native and gets max drawables for an id.
      * @type {Array<number>}

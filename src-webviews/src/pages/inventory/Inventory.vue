@@ -234,7 +234,7 @@ export default defineComponent({
             },
             // Default Configuration(s) for Previews
             inventorySize: 28,
-            equipmentSize: 11,
+            equipmentSize: 12,
             toolbarSize: 4,
             // Data to use for display
             inventory: [],

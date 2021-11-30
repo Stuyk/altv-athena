@@ -10,7 +10,7 @@ import { CategoryData } from '../../interface/CategoryData';
 import { stripCategory } from '../../utility/category';
 import { playerFuncs } from '../Player';
 
-const MAX_EQUIPMENT_SLOTS = 11; // This really should not be changed. Ever.
+const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
 const TEMP_MAX_INVENTORY_SLOTS = 28;
 
@@ -845,7 +845,7 @@ function getInventoryItem(player: alt.Player, slot: number): Item | null {
  * @return {*}
  */
 function isEquipmentSlotValid(item: Item, slot: EQUIPMENT_TYPE) {
-    if (slot >= 11) {
+    if (slot >= MAX_EQUIPMENT_SLOTS) {
         return false;
     }
 

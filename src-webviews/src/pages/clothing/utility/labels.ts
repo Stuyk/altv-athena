@@ -112,4 +112,14 @@ export default [
         internalID: CLOTHING_STORE_PAGE.BRACELET,
         isProp: true,
     },
+    {
+        name: 'LABEL_ACCESSORY',
+        ids: [7],
+        drawables: [0],
+        textures: [0],
+        maxDrawables: [0],
+        maxTextures: [0],
+        internalID: CLOTHING_STORE_PAGE.ACCESSORY,
+        isProp: false,
+    },
 ];

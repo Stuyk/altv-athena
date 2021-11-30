@@ -29,6 +29,7 @@ const CAMERA_POSITIONS = [
 ];
 
 let storeData: IClothingStore = null;
+let isOpen = false;
 
 class ClothingView implements ViewModel {
     static async open(_storeData: IClothingStore) {
@@ -60,6 +61,7 @@ class ClothingView implements ViewModel {
         PedEditCamera.setCamParams(0.6, 65);
 
         alt.Player.local.isMenuOpen = true;
+        isOpen = true;
     }
 
     static async close() {
@@ -84,6 +86,7 @@ class ClothingView implements ViewModel {
         alt.Player.local.isMenuOpen = false;
 
         alt.emitServer(View_Events_Clothing.Exit);
+        isOpen = false;
     }
 
     /**
@@ -109,17 +112,18 @@ class ClothingView implements ViewModel {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetData`, storeData);
         view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CLOTHING));
+        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
     }
 
     static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
-        if (key !== 'equipment' && key !== 'bank' && key !== 'cash') {
-            return;
+        if (key === 'equipment') {
+            ClothingView.setEquipment(items);
         }
 
-        ClothingView.setEquipment(items);
-
-        const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        if (key === 'bank' || (key === 'cash' && isOpen)) {
+            const view = await WebViewController.get();
+            view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        }
     }
 
     static setEquipment(items: Array<Item>) {
@@ -166,8 +170,18 @@ class ClothingView implements ViewModel {
         PedEditCamera.disableControls(value);
     }
 
-    static purchase(index: number, component: ClothingComponent, name: string, desc: string) {
-        alt.emitServer(View_Events_Clothing.Purchase, index, component, name, desc);
+    /**
+     * Handles how clothes are purchased.
+     * @static
+     * @param {string} uid
+     * @param {number} index
+     * @param {ClothingComponent} component
+     * @param {string} name
+     * @param {string} desc
+     * @memberof ClothingView
+     */
+    static purchase(uid: string, index: number, component: ClothingComponent, name: string, desc: string) {
+        alt.emitServer(View_Events_Clothing.Purchase, uid, index, component, name, desc);
     }
 
     static async populate(components: Array<ClothingComponent>) {

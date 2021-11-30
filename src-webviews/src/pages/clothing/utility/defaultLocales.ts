@@ -10,6 +10,7 @@ export default {
     LABEL_ARMOUR: 'Armour',
     LABEL_WATCH: 'Wrist Watch',
     LABEL_BRACELET: 'Wrist Bracelet',
+    LABEL_ACCESSORY: 'Accessory',
     LABEL_BUY: 'purchase',
     LABEL_EXIT: 'exit',
     LABEL_DESIGN: 'Design',
