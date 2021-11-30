@@ -1,14 +1,16 @@
 <template>
     <div class="container">
         <Modal v-if="deleteDialog">
-            <Frame minWidth="30vw" maxWidth="30vw" >
+            <Frame minWidth="30vw" maxWidth="30vw">
                 <template v-slot:toolbar>
-                    <Toolbar :hideExit="true"><span class="red--text">{{ locales.LABEL_DELETE }} {{ characters[characterIndex].name }}?</span></Toolbar>
+                    <Toolbar :hideExit="true"
+                        ><span class="red--text"
+                            >{{ locales.LABEL_DELETE }} {{ characters[characterIndex].name }}?</span
+                        ></Toolbar
+                    >
                 </template>
                 <template v-slot:content>
-                    <div class="overline mb-8 mt-8 center">
-                        {{ locales.LABEL_CONFIRM_DELETE }}?
-                    </div>
+                    <div class="overline mb-8 mt-8 center">{{ locales.LABEL_CONFIRM_DELETE }}?</div>
                     <div class="overline mb-8 mt-8 center amber--text">
                         {{ characters[characterIndex].name }}
                     </div>
@@ -25,11 +27,14 @@
         </Modal>
         <div class="stats pl-2 pr-2 pt-2 pb-2">
             <!-- Top Buttons -->
-            <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box;">
+            <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box">
                 <Button color="blue" @click="decrementIndex">
                     <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
                 </Button>
-                <div class="grey--text text--lighten-2 pb-2" style="font-size: 16px; width: 100%; text-align: center !important">
+                <div
+                    class="grey--text text--lighten-2 pb-2"
+                    style="font-size: 16px; width: 100%; text-align: center !important"
+                >
                     {{ getName }}
                 </div>
                 <Button color="blue" @click="incrementIndex">
@@ -37,23 +42,38 @@
                 </Button>
             </div>
             <!-- Stats -->
-            <div class="stat-wrapper stack pl-2 pr-2 pb-6 pt-6" style="width: 100%; box-sizing: border-box !important;">
+            <div class="stat-wrapper stack pl-2 pr-2 pb-6 pt-6" style="width: 100%; box-sizing: border-box !important">
                 <div class="stat split split-full split-center">
-                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-clock"></Icon>
+                    <Icon
+                        class="stat-icon grey--text text--darken-2"
+                        :noSelect="true"
+                        :size="18"
+                        icon="icon-clock"
+                    ></Icon>
                     <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> {{ getHours }} Hours </span>
                 </div>
                 <div class="stat split split-full split-center pt-4">
-                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-dollar"></Icon>
+                    <Icon
+                        class="stat-icon grey--text text--darken-2"
+                        :noSelect="true"
+                        :size="18"
+                        icon="icon-dollar"
+                    ></Icon>
                     <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> ${{ getCash }} </span>
                 </div>
                 <div class="stat split split-full split-center pt-4">
-                    <Icon class="stat-icon grey--text text--darken-2" :noSelect="true" :size="18" icon="icon-bank"></Icon>
+                    <Icon
+                        class="stat-icon grey--text text--darken-2"
+                        :noSelect="true"
+                        :size="18"
+                        icon="icon-bank"
+                    ></Icon>
                     <span class="stat-text overline grey--text text--lighten-1 pl-6 pr-2"> ${{ getBank }} </span>
                 </div>
             </div>
 
             <!-- Bottom Buttons -->
-            <div class="split split-center space-between mt-6" style="width: 100%; box-sizing: border-box;">
+            <div class="split split-center space-between mt-6" style="width: 100%; box-sizing: border-box">
                 <!-- Delete Character -->
                 <Button color="red" @click="showDeleteInterface">
                     <Icon class="red--text" :size="24" icon="icon-delete" />
@@ -90,7 +110,7 @@ export default defineComponent({
         Icon,
         Modal,
         Toolbar,
-        Frame
+        Frame,
     },
     data() {
         return {
@@ -111,8 +131,8 @@ export default defineComponent({
                 LABEL_GENDER: 'Gender',
                 LABEL_HOURS: 'Hours',
                 LABEL_CASH: 'Cash',
-                LABEL_BANK: 'Bank'
-            }
+                LABEL_BANK: 'Bank',
+            },
         };
     },
     computed: {
@@ -143,7 +163,7 @@ export default defineComponent({
             }
 
             return this.characters[this.characterIndex].cash.toFixed(2);
-        }
+        },
     },
     methods: {
         handleSet(characters) {
@@ -182,7 +202,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('characters:Update', this.characterIndex);
+            alt.emit(`${ComponentName}:Update`, this.characterIndex);
         },
         selectCharacter() {
             if (!('alt' in window)) {
@@ -190,14 +210,14 @@ export default defineComponent({
             }
 
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-            alt.emit('characters:Select', this.characters[this.characterIndex]._id);
+            alt.emit(`${ComponentName}:Select`, this.characters[this.characterIndex]._id);
         },
         newCharacter() {
             if (!('alt' in window)) {
                 return;
             }
 
-            alt.emit('characters:New');
+            alt.emit(`${ComponentName}:New`);
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         showDeleteInterface() {
@@ -225,7 +245,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('characters:Delete', this.characters[this.characterIndex]._id);
+            alt.emit(`${ComponentName}:Delete`, this.characters[this.characterIndex]._id);
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setLocales(localeObject) {
@@ -240,29 +260,29 @@ export default defineComponent({
                 { varName: this.locales.LABEL_GENDER, varRef: 'gender', useInfo: true },
                 { varName: this.locales.LABEL_HOURS, varRef: 'hours' },
                 { varName: this.locales.LABEL_CASH, varRef: 'cash', prefix: '$' },
-                { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' }
+                { varName: this.locales.LABEL_BANK, varRef: 'bank', prefix: '$' },
             ];
-        }
+        },
     },
     mounted() {
         if ('alt' in window) {
-            alt.on('characters:SetLocale', this.setLocales);
-            alt.on('characters:Set', this.handleSet);
-            alt.emit('characters:Ready');
+            alt.on(`${ComponentName}:SetLocale`, this.setLocales);
+            alt.on(`${ComponentName}:Set`, this.handleSet);
+            alt.emit(`${ComponentName}:Ready`);
         } else {
             this.characters = [
                 {
                     ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Ade_Jacbosin', bank: 25000, cash: 25, hours: 100 }
+                    ...{ appearance: { sex: 0 }, name: 'Ade_Jacbosin', bank: 25000, cash: 25, hours: 100 },
                 },
                 {
                     ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Mobi_Jobonai', bank: 26000, cash: 35, hours: 255 }
+                    ...{ appearance: { sex: 0 }, name: 'Mobi_Jobonai', bank: 26000, cash: 35, hours: 255 },
                 },
                 {
                     ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Tony_Jablinski', bank: 21111, cash: 409, hours: 69 }
-                }
+                    ...{ appearance: { sex: 0 }, name: 'Tony_Jablinski', bank: 21111, cash: 409, hours: 69 },
+                },
             ];
         }
 
@@ -270,10 +290,10 @@ export default defineComponent({
     },
     unmounted() {
         if ('alt' in window) {
-            alt.off('characters:SetLocale', this.setLocales);
-            alt.off('characters:Set', this.handleSet);
+            alt.off(`${ComponentName}:SetLocale`, this.setLocales);
+            alt.off(`${ComponentName}:Set`, this.handleSet);
         }
-    }
+    },
 });
 </script>
 
@@ -340,7 +360,7 @@ export default defineComponent({
 
 .stat-icon {
     min-width: 30px;
-    max-width: 30px;;
+    max-width: 30px;
 }
 
 .stat-wrapper {

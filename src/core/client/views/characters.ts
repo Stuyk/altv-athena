@@ -15,120 +15,133 @@ import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { CharacterSystem } from '../systems/character';
 import { disableAllControls } from '../utility/disableControls';
+import ViewModel from '../models/ViewModel';
 
 const PAGE_NAME = 'CharacterSelect';
 const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';
 const IDLE_ANIM = 'stand_phone_phoneputdown_idle_nowork';
 let characters: Partial<Character>[];
+let isOpen = false;
 
-alt.onServer(View_Events_Characters.Show, handleView);
-alt.onServer(View_Events_Characters.Done, handleDone);
+class CharactersView implements ViewModel {
+    static async open(_characters: Partial<Character>[], pos: Vector3, heading: number) {
+        characters = _characters;
+        const view = await WebViewController.get();
 
-async function handleView(_characters: Partial<Character>[], pos: Vector3, heading: number) {
-    characters = _characters;
+        if (isOpen) {
+            view.emit(`${PAGE_NAME}:Set`, characters);
+            return;
+        }
 
-    const view = await WebViewController.get();
-    view.on('characters:Select', handleSelect);
-    view.on('characters:New', handleNew);
-    view.on('characters:Update', updateCharacter); // Calls `creator.ts`
-    view.on('characters:Delete', handleDelete);
-    view.on('characters:Ready', handleReady);
+        view.on(`${PAGE_NAME}:Select`, CharactersView.select);
+        view.on(`${PAGE_NAME}:New`, CharactersView.handleNew);
+        view.on(`${PAGE_NAME}:Update`, CharactersView.update); // Calls `creator.ts`
+        view.on(`${PAGE_NAME}:Delete`, CharactersView.handleDelete);
+        view.on(`${PAGE_NAME}:Ready`, CharactersView.ready);
 
-    WebViewController.openPages([PAGE_NAME]);
-    WebViewController.focus();
-    WebViewController.showCursor(true);
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
 
-    await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
-    await PedCharacter.apply(_characters[0].appearance as Appearance);
-    await sleep(300);
-    await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
-    await PedEditCamera.setCamParams(0.5, 40, 100);
+        await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
+        await PedCharacter.apply(_characters[0].appearance as Appearance);
+        await sleep(300);
+        await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
+        await PedEditCamera.setCamParams(0.5, 40, 100);
 
-    updateCharacter(0);
+        CharactersView.update(0);
 
-    await sleep(2000);
-    native.doScreenFadeIn(500);
-}
+        await sleep(2000);
+        native.doScreenFadeIn(500);
 
-async function updateCharacter(index: number) {
-    await sleep(100);
+        isOpen = true;
+    }
 
-    await PedCharacter.apply(characters[index].appearance as Appearance);
-    PedEditCamera.update(PedCharacter.get());
-    await sleep(100);
+    static async update(index: number) {
+        await sleep(100);
 
-    CharacterSystem.applyEquipment(PedCharacter.get(), characters[index].equipment as Array<Item>);
+        await PedCharacter.apply(characters[index].appearance as Appearance);
+        PedEditCamera.update(PedCharacter.get());
+        await sleep(100);
 
-    await new Promise((resolve: Function) => {
-        let count = 0;
+        CharacterSystem.applyEquipment(PedCharacter.get(), characters[index].equipment as Array<Item>);
 
-        const interval = alt.setInterval(() => {
-            playPedAnimation(
-                PedCharacter.get(),
-                IDLE_ANIM_DICT,
-                IDLE_ANIM,
-                ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT,
-            );
+        await new Promise((resolve: Function) => {
+            let count = 0;
 
-            const isInAnim = native.isEntityPlayingAnim(PedCharacter.get(), IDLE_ANIM_DICT, IDLE_ANIM, 3);
+            const interval = alt.setInterval(() => {
+                playPedAnimation(
+                    PedCharacter.get(),
+                    IDLE_ANIM_DICT,
+                    IDLE_ANIM,
+                    ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT,
+                );
 
-            count += 1;
+                const isInAnim = native.isEntityPlayingAnim(PedCharacter.get(), IDLE_ANIM_DICT, IDLE_ANIM, 3);
 
-            if (count >= 25) {
+                count += 1;
+
+                if (count >= 25) {
+                    alt.clearInterval(interval);
+                    resolve();
+                }
+
+                if (!isInAnim) {
+                    return;
+                }
+
                 alt.clearInterval(interval);
                 resolve();
-            }
+            }, 100);
+        });
 
-            if (!isInAnim) {
-                return;
-            }
+        await sleep(100);
+        native.doScreenFadeIn(100);
+    }
 
-            alt.clearInterval(interval);
-            resolve();
-        }, 100);
-    });
+    static async close() {
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Select`, CharactersView.select);
+        view.off(`${PAGE_NAME}:New`, CharactersView.handleNew);
+        view.off(`${PAGE_NAME}:Update`, CharactersView.update); // Calls `creator.ts`
+        view.off(`${PAGE_NAME}:Delete`, CharactersView.handleDelete);
+        view.off(`${PAGE_NAME}:Ready`, CharactersView.ready);
 
-    await sleep(100);
-    native.doScreenFadeIn(100);
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        await PedEditCamera.destroy();
+        await PedCharacter.destroy();
+
+        native.switchInPlayer(1500);
+        native.freezeEntityPosition(alt.Player.local.scriptID, false);
+
+        alt.toggleGameControls(true);
+        disableAllControls(false);
+
+        isOpen = false;
+    }
+
+    static async ready() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CHARACTERS));
+        view.emit(`${PAGE_NAME}:Set`, characters);
+    }
+
+    static async select(id) {
+        PedCharacter.setHidden(true);
+        alt.emitServer(View_Events_Characters.Select, id);
+    }
+
+    static async handleNew() {
+        alt.emitServer(View_Events_Characters.New);
+    }
+
+    static async handleDelete(id) {
+        alt.emitServer(View_Events_Characters.Delete, id);
+    }
 }
 
-async function handleReady() {
-    const view = await WebViewController.get();
-    view.emit('characters:SetLocale', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CHARACTERS));
-    view.emit('characters:Set', characters);
-}
-
-async function handleSelect(id) {
-    PedCharacter.setHidden(true);
-    alt.emitServer(View_Events_Characters.Select, id);
-}
-
-function handleNew() {
-    alt.emitServer(View_Events_Characters.New);
-}
-
-function handleDelete(id) {
-    alt.emitServer(View_Events_Characters.Delete, id);
-}
-
-async function handleDone() {
-    const view = await WebViewController.get();
-    view.off('characters:Select', handleSelect);
-    view.off('characters:New', handleNew);
-    view.off('characters:Update', updateCharacter); // Calls `creator.ts`
-    view.off('characters:Delete', handleDelete);
-    view.off('characters:Ready', handleReady);
-
-    WebViewController.closePages([PAGE_NAME]);
-    WebViewController.unfocus();
-    WebViewController.showCursor(false);
-
-    await PedEditCamera.destroy();
-    await PedCharacter.destroy();
-
-    native.switchInPlayer(1500);
-    native.freezeEntityPosition(alt.Player.local.scriptID, false);
-
-    alt.toggleGameControls(true);
-    disableAllControls(false);
-}
+alt.onServer(View_Events_Characters.Show, CharactersView.open);
+alt.onServer(View_Events_Characters.Done, CharactersView.close);
