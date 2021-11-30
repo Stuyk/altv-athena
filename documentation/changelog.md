@@ -116,6 +116,8 @@ description: List of all the changes and current versions.
 + Clothing Stores Can Have Per Component Pricing
 + Added Cash Consumption to Clothing
 + Added Accessory Slot
++ Fixed Character Select Double Character
++ Fixed Production Mode
 ```
 
 ## 2.0.3

@@ -10,6 +10,7 @@ let appearance: Appearance = null;
 let pos: Vector3;
 let rot: Vector3 | number;
 let isUpdating: boolean = false;
+let hidden: boolean = false;
 
 /**
  * Used to create a single instance of a character pedestrian.
@@ -34,6 +35,7 @@ export class PedCharacter {
     ): Promise<number> {
         pos = _pos;
         rot = _rot;
+        hidden = false;
 
         await PedCharacter.destroy();
 
@@ -106,6 +108,24 @@ export class PedCharacter {
      */
     static get(): number {
         return id;
+    }
+
+    /**
+     * Hide this pedestrian
+     * @static
+     * @param {boolean} value
+     * @memberof PedCharacter
+     */
+    static setHidden(value: boolean) {
+        hidden = value;
+
+        if (hidden && id && native.doesEntityExist(id)) {
+            native.setEntityVisible(id, false, false);
+        }
+
+        if (!hidden && id && native.doesEntityExist(id)) {
+            native.setEntityVisible(id, true, false);
+        }
     }
 
     /**

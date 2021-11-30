@@ -99,6 +99,7 @@ async function handleReady() {
 }
 
 async function handleSelect(id) {
+    PedCharacter.setHidden(true);
     alt.emitServer(View_Events_Characters.Select, id);
 }
 
