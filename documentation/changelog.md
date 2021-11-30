@@ -118,6 +118,8 @@ description: List of all the changes and current versions.
 + Added Accessory Slot
 + Fixed Character Select Double Character
 + Fixed Production Mode
++ Fixed Various Bugs
++ Migrated Job Menu to Vue 3
 ```
 
 ## 2.0.3

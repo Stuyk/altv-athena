@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
+import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
+import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { WorldNotificationController } from '../systems/worldNotifications';
@@ -110,4 +112,29 @@ alt.onClient('cmd:Input:Test', (player: alt.Player, results: InputResult[] | nul
 
     console.log(`Results from test input:`);
     console.log(results);
+});
+
+ChatController.addCommand(
+    'testjobmenu',
+    '/testjobmenu - Shows a test job menu',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        const trigger: JobTrigger = {
+            header: 'My Job Header',
+            event: 'job:Example:Response',
+            image: '../../assets/images/job.jpg',
+            summary: `<b>Hey Listen!</b>
+            
+                <p>Isn't it neat that you can write whatever you want here?</p>
+
+                <p>I sure think so!</p>
+            `,
+        };
+
+        alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
+    },
+);
+
+alt.on('job:Example:Response', (player: alt.Player) => {
+    playerFuncs.emit.message(player, `Accepted 'job:Example:Response'`);
 });

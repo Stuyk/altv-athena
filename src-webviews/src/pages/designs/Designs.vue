@@ -21,10 +21,10 @@ Helpful for seeing what default components look like.
         </div>
         <h2 class="grey--text text--lighten-2">Icons</h2>
         <div class="split space-between">
-            <Button color="blue" @click="doSomething">
+            <Button color="blue" @click="doSomething" class="fab">
                 <Icon class="blue--text" :size="16" icon="icon-chevron-left" />
             </Button>
-            <Button color="blue" @click="doSomething">
+            <Button color="blue" @click="doSomething" class="fab">
                 <Icon class="blue--text" :size="16" icon="icon-chevron-right" />
             </Button>
             <Button color="red" @click="doSomething">

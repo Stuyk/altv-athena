@@ -1,7 +1,7 @@
 <template>
     <div class="frame" :style="computedStyle">
         <slot name="toolbar"></slot>
-        <div class="wrapper pa-4">
+        <div class="wrapper" :class="computedWrapper">
             <div class="content">
                 <slot name="content"></slot>
             </div>
@@ -24,6 +24,11 @@ export default defineComponent({
             type: String,
             required: true,
         },
+        noPadding: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     computed: {
         computedStyle() {
@@ -35,6 +40,15 @@ export default defineComponent({
 
             if (this.maxWidth) {
                 style += `max-width: ${this.maxWidth} !important;`;
+            }
+
+            return style;
+        },
+        computedWrapper() {
+            let style = {};
+
+            if (!this.noPadding) {
+                style['pa-4'] = true;
             }
 
             return style;

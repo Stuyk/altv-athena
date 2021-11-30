@@ -4,13 +4,13 @@ import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { View } from '../extensions/view';
+import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
+import { BaseHUD } from './hud/hud';
 
-const url = `http://assets/webview/client/job/index.html`;
+const PAGE_NAME = 'Job';
 let trigger: JobTrigger;
-let view: View;
 
 class JobView implements ViewModel {
     static async open(_trigger: JobTrigger) {
@@ -19,47 +19,54 @@ class JobView implements ViewModel {
         }
 
         trigger = _trigger;
-        view = await View.getInstance(url, true, false, true);
-        view.on('job:Select', JobView.select);
-        view.on('job:Exit', JobView.close);
-        view.on('ready', JobView.ready);
+
+        // This is where we bind our received events from the WebView to
+        // the functions in our WebView.
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Ready`, JobView.ready);
+        view.on(`${PAGE_NAME}:Close`, JobView.close);
+        view.on(`${PAGE_NAME}:Select`, JobView.select);
+
+        // This is where we open the page and show the cursor.
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
+
+        // Turn off game controls, hide the hud.
         alt.toggleGameControls(false);
+        BaseHUD.setHudVisibility(false);
+
+        // Let the rest of the script know this menu is open.
+        alt.Player.local.isMenuOpen = true;
     }
 
     static select() {
         alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
         alt.toggleGameControls(true);
-
-        if (!view) {
-            return;
-        }
-
-        view.close();
-        view = null;
+        JobView.close();
     }
 
-    static close() {
-        if (trigger.cancelEvent) {
-            alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.cancelEvent);
-        }
-
+    static async close() {
         alt.toggleGameControls(true);
+        BaseHUD.setHudVisibility(true);
 
-        if (!view) {
-            return;
-        }
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, JobView.ready);
+        view.off(`${PAGE_NAME}:Close`, JobView.close);
+        view.off(`${PAGE_NAME}:Select`, JobView.select);
 
-        view.close();
-        view = null;
+        WebViewController.closePages([PAGE_NAME]);
+
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
     }
 
-    static ready() {
-        if (!view) {
-            return;
-        }
-
-        view.emit('job:Data', trigger);
-        view.emit('job:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
+    static async ready() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Data`, trigger);
+        view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_JOB));
     }
 }
 

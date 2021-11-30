@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import { InputMenu, InputResult } from '../../shared/interfaces/InputMenus';
-import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { BaseHUD } from './hud/hud';

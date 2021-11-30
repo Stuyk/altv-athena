@@ -57,3 +57,7 @@
     transform: translateY(0px) !important;
     box-shadow: unset !important;
 }
+
+.fab {
+    border-radius: 50% !important;
+}

@@ -11,6 +11,7 @@ import InputBox from './input/InputBox.vue';
 import Clothing from './clothing/Clothing.vue';
 import Icons from './icons/Icons.vue';
 import MultiPageExample from './multiPageExample/MultiPageExample.vue';
+import Job from './job/Job.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -25,6 +26,7 @@ const componentList = {
     Icons: shallowRef(Icons),
     InputBox: shallowRef(InputBox),
     Inventory: shallowRef(Inventory),
+    Job: shallowRef(Job),
     Login: shallowRef(Login),
     Storage: shallowRef(Storage),
     MultiPageExample: shallowRef(MultiPageExample),

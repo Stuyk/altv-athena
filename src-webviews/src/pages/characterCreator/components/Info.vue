@@ -107,7 +107,7 @@
         </div>
 
         <div class="subtitle-2 grey--text mb-2 mt-6">Gender</div>
-        <div class="split split-full center mt-2">
+        <div class="split split-full center mt-2 mb-4">
             <Input
                 :label="locales.characterGender"
                 :stack="true"
@@ -128,10 +128,10 @@
                 style="width: 100%"
             />
         </div>
-        <div class="split split-full center mt-8" v-if="!isAllValid() && valid.first && valid.last">
+        <div class="split split-full center mt-8 pb-4" v-if="!isAllValid() && valid.first && valid.last">
             <Button color="amber" :raise="true" @click="verifyName">Verify Name</Button>
         </div>
-        <div class="split split-full space-between center mt-8" v-if="isAllValid() && valid?.first && valid.last">
+        <div class="split split-full space-between center mt-8 pb-4" v-if="isAllValid() && valid?.first && valid.last">
             <Button class="mr-2" color="amber" style="width: 100% !important" :raise="true" @click="verifyName"
                 >Verify Name</Button
             >
