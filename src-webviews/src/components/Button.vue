@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ResolvePath from '../utility/pathResolver';
 
 const ComponentName = 'Button';
 export default defineComponent({
@@ -50,13 +51,14 @@ export default defineComponent({
         },
     },
     methods: {
+        ResolvePath,
         async playHover() {
             if (!this._audio) {
-                this._audio = new Audio('/sounds/ui/hover.ogg');
+                this._audio = new Audio(this.ResolvePath('assets/sounds/ui/hover.ogg'));
                 this._audio.volume = 0.2;
             }
 
-            this._audio.setAttribute('src', '/sounds/ui/hover.ogg');
+            this._audio.setAttribute('src', this.ResolvePath('assets/sounds/ui/hover.ogg'));
 
             try {
                 await this._audio.play();
@@ -64,11 +66,11 @@ export default defineComponent({
         },
         async playMouseUp() {
             if (!this._audio) {
-                this._audio = new Audio('/sounds/ui/click.ogg');
+                this._audio = new Audio(this.ResolvePath('assets/sounds/ui/click.ogg'));
                 this._audio.volume = 0.2;
             }
 
-            this._audio.setAttribute('src', '/sounds/ui/click.ogg');
+            this._audio.setAttribute('src', this.ResolvePath('assets/sounds/ui/click.ogg'));
             try {
                 await this._audio.play();
             } catch (err) {}

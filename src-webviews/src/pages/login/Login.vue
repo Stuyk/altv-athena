@@ -6,7 +6,7 @@
         <template v-slot:content>
             <template v-if="!waitingForAuth">
                 <div class="stack center">
-                    <img class="discord center mb-4 mt-4" src="/public/images/discord.svg" />
+                    <img class="discord center mb-4 mt-4" :src="ResolvePath(`../../assets/images/discord.svg`)" />
                     <span class="grey--text text--darken-1 boldest">{{ locales.LABEL_LOGIN_WITH_DISCORD }}</span>
                 </div>
                 <p class="grey--text text--darken-1 center">
@@ -18,7 +18,7 @@
             </template>
             <template v-else>
                 <div class="stack center">
-                    <img class="discord center mb-4 mt-4" src="/public/images/discord.svg" />
+                    <img class="discord center mb-4 mt-4" :src="ResolvePath(`../../assets/images/discord.svg`)" />
                 </div>
                 <p class="grey--text text--darken-1 center">
                     {{ locales.LABEL_TAB_OUT }}
@@ -40,6 +40,7 @@ import Icon from '../../components/Icon.vue';
 import Button from '../../components/Button.vue';
 import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
+import ResolvePath from '../../utility/pathResolver';
 
 const ComponentName = 'Login';
 export default defineComponent({
@@ -70,6 +71,7 @@ export default defineComponent({
         };
     },
     methods: {
+        ResolvePath,
         setLocales(locales) {
             this.locales = locales;
         },

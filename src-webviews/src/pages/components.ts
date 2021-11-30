@@ -10,6 +10,7 @@ import Storage from './storage/Storage.vue';
 import InputBox from './input/InputBox.vue';
 import Clothing from './clothing/Clothing.vue';
 import Icons from './icons/Icons.vue';
+import MultiPageExample from './multiPageExample/MultiPageExample.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -26,6 +27,7 @@ const componentList = {
     Inventory: shallowRef(Inventory),
     Login: shallowRef(Login),
     Storage: shallowRef(Storage),
+    MultiPageExample: shallowRef(MultiPageExample),
 };
 
 function generateComponentList(): Array<{ name: string; component: unknown }> {

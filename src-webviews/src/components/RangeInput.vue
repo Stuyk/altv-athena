@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ResolvePath from '../utility/pathResolver';
 
 const ComponentName = 'RangeInput';
 export default defineComponent({
@@ -49,6 +50,7 @@ export default defineComponent({
         },
     },
     methods: {
+        ResolvePath,
         isNotNumber(value) {
             if (value === undefined || value === null) {
                 return true;
@@ -109,7 +111,7 @@ export default defineComponent({
         async indexValue(newValue) {
             this._value = newValue;
             if (!this._audio) {
-                this._audio = new Audio('/sounds/ui/hover.ogg');
+                this._audio = new Audio(this.ResolvePath('assets/sounds/ui/hover.ogg'));
                 this._audio.volume = 0.1;
             }
 
