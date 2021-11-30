@@ -3,7 +3,7 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 // Must be a blank index page.
-let _defaultURL = `http://webviews/index.html`;
+let _defaultURL = `http://assets/webviews/index.html`;
 let _isReady: boolean = false;
 let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
@@ -19,6 +19,8 @@ export class WebViewController {
     static create(url: string) {
         _defaultURL = url;
 
+        console.log(_defaultURL);
+
         if (url.includes('localhost')) {
             console.warn(`Running WebService in Development Mode. Nobody can see these pages but the host computer.`);
         }
@@ -27,6 +29,11 @@ export class WebViewController {
             _webview = new alt.WebView(_defaultURL, false);
             _webview.on('view:Ready', () => {
                 _isReady = true;
+                alt.log('ready...');
+            });
+
+            _webview.on('load', () => {
+                alt.log('loaded...');
             });
         }
     }

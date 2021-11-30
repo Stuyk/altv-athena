@@ -93,7 +93,7 @@ async function firstConnect(player: alt.Player): Promise<void> {
         return;
     }
 
-    const vueDefaultPath = config.VUE_DEBUG ? ConfigUtil.getViteServer() : `http://webviews/index.html`;
+    const vueDefaultPath = config.VUE_DEBUG ? ConfigUtil.getViteServer() : `http://assets/webviews/index.html`;
     alt.emitClient(player, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
     // Used to set the custom View instance with a Web Server URL.

@@ -11,7 +11,7 @@
                         <div class="stack">
                             <div class="preview">
                                 <!-- Vehicle Image -->
-                                <img :src="`../../assets/vehicles/${vehicle.model}.png`" />
+                                <img :src="ResolvePath(`../../assets/vehicles/${vehicle.model}.png`)" />
                                 <!-- Vehicle Model -->
                                 <div class="overline model">{{ vehicle.model }}</div>
                                 <!-- Vehicle Plate -->
@@ -46,6 +46,7 @@ import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
 import DefaultLocale from './utility/defaultLocale';
 import TestData from './utility/testData';
+import ResolvePath from '../../utility/pathResolver';
 
 export const ComponentName = 'Garage';
 export default defineComponent({
@@ -66,6 +67,7 @@ export default defineComponent({
         };
     },
     methods: {
+        ResolvePath,
         relayClosePage(pageName: string) {
             this.$emit('close-page', pageName);
         },

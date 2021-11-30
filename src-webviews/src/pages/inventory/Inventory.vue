@@ -63,7 +63,7 @@
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
-                            <img :src="`../../assets/icons/${item.icon}.png`" />
+                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                         </div>
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
@@ -122,7 +122,7 @@
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
-                            <img :src="`../../assets/icons/${item.icon}.png`" />
+                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                         </div>
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
@@ -175,7 +175,7 @@
                 >
                     <template v-if="item">
                         <div class="icon">
-                            <img :src="`../../assets/icons/${item.icon}.png`" />
+                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                         </div>
                         <div class="consume" v-if="item && item.data && item.data.event">
                             <Icon class="yellow--text" :size="18" icon="icon-arrow-down"></Icon>
@@ -201,6 +201,7 @@ import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
 import RangeInput from '../../components/RangeInput.vue';
 import Module from '../../components/Module.vue';
+import ResolvePath from '../../utility/pathResolver';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
@@ -263,6 +264,7 @@ export default defineComponent({
     },
     // Used to define functions you can call with 'this.x'
     methods: {
+        ResolvePath,
         setIncrementAmount(e, amount) {
             // Clicked a button
             if (!e) {

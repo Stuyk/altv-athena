@@ -11,7 +11,7 @@
                             <!-- Top Half of Item -->
                             <div class="item-split">
                                 <div class="icon-wrap pr-2">
-                                    <img :src="`../../assets/icons/${item.icon}.png`" />
+                                    <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                                 </div>
                                 <span style="width: 100%">{{ item.name }} ({{ item.quantity }}x)</span>
                                 <Button
@@ -75,7 +75,7 @@
                                     >{{ item.name }} ({{ item.quantity }}x)</span
                                 >
                                 <div class="icon-wrap pl-2">
-                                    <img :src="`../../assets/icons/${item.icon}.png`" />
+                                    <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                                 </div>
                             </div>
                             <template v-if="split && split.name === 'inventory' && split.index === index">
@@ -120,6 +120,7 @@ import Frame from '../../components/Frame.vue';
 import RangeInput from '../../components/RangeInput.vue';
 import { inventory, storage } from './utility/testData';
 import DefaultLocale from './utility/defaultLocale';
+import ResolvePath from '../../utility/pathResolver';
 
 export const ComponentName = 'Storage';
 export default defineComponent({
@@ -145,6 +146,7 @@ export default defineComponent({
         };
     },
     methods: {
+        ResolvePath,
         setIncrementAmount(e, amount) {
             // Clicked a button
             if (!e) {
