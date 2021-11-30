@@ -160,6 +160,10 @@ nvm install 16
 ```
 
 ```text
+nvm use 16
+```
+
+```text
 node --version && npm --version
 ```
 

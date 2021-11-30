@@ -128,46 +128,28 @@ After binding the license you can append your IP to your license or any of your 
 
 ### Important Configuration
 
-**Creating the .env File**
+There is now a file called `AthenaConfig.json` in the root of your project. This is where you can specify different parameters and configuration option(s) for Athena.
 
-In the same directory as your `package.json` file. Create a file called `.env` and open it up in whatever text editor you like to use. Add the following lines to your `.env` file depending on what you need.
+Here's an example configuration with descriptions.
 
-This file should not have **ANY EXTENSION** make sure it doesn't say it's a text document. You have to modify the extension of the file to make this work. Pick up a program like VSCode to do this. I cannot stress this enough .env.txt is not the same as a .env file. Make sure your file is actually called `.env` with no extension.
-
-_Do not leave commented lines in your env file_
-
-**Configuration Options**
-
-**Optional: Discord Bot Integration**
-
-```sh    
-DISCORD_BOT=<DISCORD_BOT_KEY>
-```
-
-**Optional: Whitelist Role for Discord**
-
-A role id from the Discord application for your 'approved' role.
-
-```sh
-WHITELIST_ROLE=<SOME_ID>
-```
-
-**Optional: MongoDB External Connection**
-
-A connection string for MongoDB. If using localhost do not specify this.
-
-```sh
-MONGO_URL=<MONGODB_CONNECTION_STRING>
-```
-
-**Optional: MongoDB Collections**
-
-List of Collections to Generate Besides the Default(s)
-
-Collections are also known as tables.
-
-```
-MONGO_COLLECTIONS=SomeCollection,SomeOtherCollection,SomeMoreCollection
+```json
+{
+    "[?] A Discord Bot Secret from the Discord Developer Panel": {},
+    "DISCORD_BOT": "",
+    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": {},
+    "WHITELIST_ROLE": "",
+    "[?] A URI with authentication to connect to a MongoDB Database": {},
+    "[?] ex: mongodb://username:password@127.0.0.1:27017": {},
+    "MONGO_URL": "",
+    "[?] A list of collection(s) to create. Separated by a common. ie. one,two,three": {},
+    "MONGO_COLLECTIONS": "",
+    "[?] Used to turn on development mode for WebViews": {},
+    "VUE_DEBUG": true,
+    "[?] Used for Ares Service Debugging": {},
+    "ARES_ENDPOINT": "",
+    "[?] Used to give the client the IP to connect to the WebServer **Deprecated": {},
+    "WEBSERVER_IP": ""
+}
 ```
 
 ## Obtaining your Own IP
