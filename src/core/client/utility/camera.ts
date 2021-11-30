@@ -133,6 +133,7 @@ export default class PedEditCamera {
         }
 
         if (camera) {
+            native.destroyCam(camera, true);
             camera = null;
         }
 
@@ -147,6 +148,8 @@ export default class PedEditCamera {
         isLocalPlayer = false;
         camUpdateQueue = [];
         isQueueReady = true;
+        scriptID = null;
+        controlStatus = false;
     }
 
     /**

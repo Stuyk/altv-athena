@@ -9,7 +9,7 @@
     "[?] A list of collection(s) to create. Separated by a common. ie. one,two,three": {},
     "MONGO_COLLECTIONS": "",
     "[?] Used to turn on development mode for WebViews": {},
-    "VUE_DEBUG": false,
+    "VUE_DEBUG": true,
     "[?] Used for Ares Service Debugging": {},
     "ARES_ENDPOINT": "",
     "[?] Used to give the client the IP to connect to the WebServer **Deprecated": {},

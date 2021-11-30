@@ -53,8 +53,8 @@ export class CreatorView {
 
         await PedCharacter.create(true, pos, heading);
         await sleep(100);
-        await PedEditCamera.create(PedCharacter.get(), { x: -0.15, y: 0, z: 0 });
-        await PedEditCamera.setCamParams(50, 0.6);
+        await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
+        await PedEditCamera.setCamParams(0.6, 50);
 
         readyInterval = alt.setInterval(CreatorView.waitForReady, 100);
     }
