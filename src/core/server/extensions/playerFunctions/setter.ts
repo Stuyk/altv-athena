@@ -106,6 +106,7 @@ async function firstConnect(player: alt.Player): Promise<void> {
     // First ID is 0. We add 1 so everyone gets a unique dimension.
     player.dimension = player.id + 1;
     player.pendingLogin = true;
+    player.visible = false;
 
     // Some general initialization setup.
     dataUpdater.init(player, null);

@@ -114,8 +114,6 @@ export default defineComponent({
         },
         // Call different internal controller functions from client-side with this.
         handleEventCall(functionName: string, ...args: any[]) {
-            console.log(`FUNCTION NAME: ${functionName}`);
-
             if (!this[functionName] || typeof this[functionName] !== 'function') {
                 console.log(`Function: ${functionName} does not exist.`);
                 return;

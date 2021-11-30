@@ -53,6 +53,7 @@ export class CreatorView {
 
         await PedCharacter.create(true, pos, heading);
         await sleep(100);
+        await PedCharacter.setHidden(true);
         await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
         await PedEditCamera.setCamParams(0.6, 50);
 
@@ -92,6 +93,12 @@ export class CreatorView {
             alt.clearInterval(readyInterval);
             readyInterval = null;
         }
+
+        if (native.isScreenFadedOut() || native.isScreenFadingOut()) {
+            native.doScreenFadeIn(1000);
+        }
+
+        await PedCharacter.setHidden(false);
 
         const view = await WebViewController.get();
         view.emit('creator:SetData', oldCharacterData, totalCharacters);

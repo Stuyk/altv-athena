@@ -37,8 +37,6 @@ export default defineComponent({
             if (this.pageIndex >= this.pages.length) {
                 this.pageIndex = 0;
             }
-
-            console.log('clicky');
         },
         prevPage() {
             this.pageIndex -= 1;

@@ -11,6 +11,5 @@ export default function resolvePath(currentPath: string): string {
         currentPath = currentPath.replace('assets/', './assets/');
     }
 
-    console.log(currentPath);
     return currentPath;
 }

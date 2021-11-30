@@ -239,7 +239,6 @@ export default defineComponent({
             let allValid = true;
 
             Object.keys(this.valid).forEach((key) => {
-                console.log(this.valid[key]);
                 if (!this.valid[key]) {
                     allValid = false;
                 }

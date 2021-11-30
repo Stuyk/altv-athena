@@ -503,7 +503,6 @@ export default defineComponent({
                         item: element,
                     };
 
-                    console.log(this.split);
                     this.splitAmount = Math.floor(element.quantity / 2);
                     return;
                 }

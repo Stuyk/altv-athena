@@ -380,8 +380,6 @@ export default defineComponent({
         setData(data) {
             this.storeData = data;
 
-            console.log(`Clothing Store: '${this.storeData.uid}'`);
-
             const pagesToRemove = [...this.storeData.hiddenPages];
             const currentLabels = [...this.labels];
 
@@ -399,7 +397,6 @@ export default defineComponent({
             this.labels = currentLabels;
         },
         setBankData(bank: number, cash: number) {
-            console.log(cash);
             this.bank = bank;
             this.cash = cash;
         },
