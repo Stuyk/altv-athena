@@ -20,6 +20,7 @@ import '../views/factions';
 import '../systems/arrest';
 import '../events/waypointEvent';
 import { Vector3 } from '../../shared/interfaces/Vector';
+import IAttachable from '../../shared/interfaces/IAttachable';
 
 declare module 'alt-server' {
     export interface Player {
@@ -213,6 +214,13 @@ declare module 'alt-server' {
          * @memberof Player
          */
         lastFactionInvite: alt.Player;
+
+        /**
+         * An array of attachables. Is not automatically initialized.
+         * @type {(Array<IAttachable> | null)}
+         * @memberof Player
+         */
+        attachables?: Array<IAttachable> | null;
     }
 }
 
@@ -232,5 +240,5 @@ export const playerFuncs = {
     select,
     set,
     sync,
-    utility
+    utility,
 };

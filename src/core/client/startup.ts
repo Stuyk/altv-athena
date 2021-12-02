@@ -24,6 +24,7 @@ import './streamers/worldNotifications';
 // Systems
 import './systems/animations';
 import './systems/arrest';
+import './systems/attachable';
 import './systems/athenaEvents';
 import './systems/blip';
 import './systems/character';

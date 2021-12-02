@@ -120,6 +120,8 @@ description: List of all the changes and current versions.
 + Fixed Production Mode
 + Fixed Various Bugs
 + Migrated Job Menu to Vue 3
++ Add Object Attachment to Players
++ Added Object Attachment Stream
 ```
 
 ## 2.0.3

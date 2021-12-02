@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
 import { SYSTEM_EVENTS } from '../../../shared/enums/System';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/Views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
+import IAttachable from '../../../shared/interfaces/IAttachable';
 import ICredit from '../../../shared/interfaces/ICredit';
 import IErrorScreen from '../../../shared/interfaces/IErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
@@ -258,6 +260,78 @@ function clearCredits(player: alt.Player) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS_CLEAR);
 }
 
+/**
+ * Attach an object to a player.
+ * Automatically synchronized and handled client-side.
+ * Last parameter is when to remove the object. Automatically set to infinite.
+ * @param {alt.Player} player
+ * @param {IAttachable} attachable
+ * @param {number} removeAfterMilliseconds
+ * @return {string} UID for attachable object
+ */
+function objectAttach(player: alt.Player, attachable: IAttachable, removeAfterMilliseconds = -1): string | null {
+    if (!player || !player.valid) {
+        return null;
+    }
+
+    if (!attachable.uid) {
+        attachable.uid = sha256Random(JSON.stringify(attachable));
+    }
+
+    if (!player.attachables || !Array.isArray(player.attachables)) {
+        player.attachables = [];
+    }
+
+    const index = player.attachables.findIndex((x) => x.uid === attachable.uid);
+    if (index >= 0) {
+        player.attachables[index] = attachable;
+    } else {
+        player.attachables.push(attachable);
+    }
+
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
+
+    if (removeAfterMilliseconds >= 0) {
+        alt.setTimeout(() => {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            objectRemove(player, attachable.uid);
+        }, removeAfterMilliseconds);
+    }
+
+    return attachable.uid;
+}
+
+/**
+ * Remove an object from the player.
+ * @param {alt.Player} player
+ * @param {string} uid
+ * @return {*}
+ */
+function objectRemove(player: alt.Player, uid: string) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    if (!player.attachables || !Array.isArray(player.attachables)) {
+        return;
+    }
+
+    for (let i = player.attachables.length - 1; i >= 0; i--) {
+        if (player.attachables[i].uid !== uid) {
+            continue;
+        }
+
+        alt.log(`Deleting: ${uid}`);
+
+        player.attachables.splice(i, 1);
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
+        return;
+    }
+}
+
 export default {
     animation,
     clearAnimation,
@@ -274,6 +348,8 @@ export default {
     message,
     meta,
     notification,
+    objectAttach,
+    objectRemove,
     particle,
     removeProgressBar,
     scenario,

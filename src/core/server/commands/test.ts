@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import IAttachable from '../../shared/interfaces/IAttachable';
 import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { playerFuncs } from '../extensions/Player';
@@ -113,6 +114,56 @@ alt.onClient('cmd:Input:Test', (player: alt.Player, results: InputResult[] | nul
     console.log(`Results from test input:`);
     console.log(results);
 });
+
+ChatController.addCommand(
+    'testobjectattach',
+    '/testobjectattach - Test object attachment',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        const attachable: IAttachable = {
+            model: 'prop_tool_fireaxe',
+            bone: 57005,
+            pos: {
+                x: 0.1,
+                y: -0.1,
+                z: -0.02,
+            },
+            rot: {
+                x: 80,
+                y: 0,
+                z: 170,
+            },
+        };
+
+        playerFuncs.emit.objectAttach(player, attachable, 5000);
+    },
+);
+
+ChatController.addCommand(
+    'testobjectattachinfinite',
+    '/testobjectattachinfinite - Test object attachment',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        playerFuncs.emit.message(player, `Will last for about 5 minutes~`);
+
+        const attachable: IAttachable = {
+            model: 'prop_tool_fireaxe',
+            bone: 57005,
+            pos: {
+                x: 0.1,
+                y: -0.1,
+                z: -0.02,
+            },
+            rot: {
+                x: 80,
+                y: 0,
+                z: 170,
+            },
+        };
+
+        playerFuncs.emit.objectAttach(player, attachable, 60000 * 5);
+    },
+);
 
 ChatController.addCommand(
     'testjobmenu',

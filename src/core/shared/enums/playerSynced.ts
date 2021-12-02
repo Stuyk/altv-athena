@@ -5,5 +5,6 @@ export enum PLAYER_SYNCED_META {
     NAME = 'player-name',
     DIMENSION = 'player-dimension',
     WAYPOINT = 'player-waypoint',
-    DATABASE_ID = 'player-character-id'
+    DATABASE_ID = 'player-character-id',
+    ATTACHABLES = 'player-attachable-list',
 }
