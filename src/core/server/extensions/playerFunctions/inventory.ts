@@ -675,7 +675,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     const endArray: Array<Item> = selectedSlotName === endSlotName ? selectedArray : player.data[endSlotName];
 
     // Do Not Stack. Swap Instead.
-    if (selectItem.item.name !== endItem.item.name && selectItem.item.rarity !== selectItem.item.rarity) {
+    if (selectItem.item.name !== endItem.item.name || selectItem.item.rarity !== selectItem.item.rarity) {
         // Need to verify that each slot follows the rules for the slot it is going into.
         // Handles rules for the end item slot.
         if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
