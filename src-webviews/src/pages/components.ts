@@ -1,17 +1,18 @@
 import { shallowRef } from 'vue';
+import Atm from './atm/Atm.vue';
 import CharacterCreator from './characterCreator/CharacterCreator.vue';
 import CharacterSelect from './characterSelect/CharacterSelect.vue';
-import Designs from './designs/Designs.vue';
-import Login from './login/Login.vue';
-import Atm from './atm/Atm.vue';
-import Inventory from './inventory/Inventory.vue';
-import Garage from './garage/Garage.vue';
-import Storage from './storage/Storage.vue';
-import InputBox from './input/InputBox.vue';
 import Clothing from './clothing/Clothing.vue';
+import Designs from './designs/Designs.vue';
+import Garage from './garage/Garage.vue';
 import Icons from './icons/Icons.vue';
-import MultiPageExample from './multiPageExample/MultiPageExample.vue';
+import InputBox from './input/InputBox.vue';
+import Inventory from './inventory/Inventory.vue';
 import Job from './job/Job.vue';
+import Login from './login/Login.vue';
+import MultiPageExample from './multiPageExample/MultiPageExample.vue';
+import Storage from './storage/Storage.vue';
+import Chat from './chat/Chat.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -20,6 +21,7 @@ const componentList = {
     Atm: shallowRef(Atm),
     CharacterCreator: shallowRef(CharacterCreator),
     CharacterSelect: shallowRef(CharacterSelect),
+    Chat: shallowRef(Chat),
     Clothing: shallowRef(Clothing),
     Designs: shallowRef(Designs),
     Garage: shallowRef(Garage),
