@@ -7,10 +7,16 @@
                     :key="index"
                     :message="msg.message"
                     :timestamp="msg.timestamp"
-                    :useTimestamps="showTimestamp"
+                    :useTimestamps="chatbox.timestamp"
                     :fontSize="`${getFontSize}${chatbox.unit}`"
-                    :msgSize="msgSize"
+                    :fade="chatbox.shouldFade"
+                    :msgSize="chatbox.msgLength"
                 />
+            </div>
+            <!-- Icons for Chat -->
+            <div class="chat-info pa-1" v-if="showInputBox">
+                <Icon v-if="chatbox.timestamp" icon="icon-watch" :size="16" class="white--text" />
+                <Icon v-if="chatbox.shouldFade" icon="icon-sun" :size="16" class="white--text" />
             </div>
             <!-- Chat Input Box -->
             <Input v-if="showInputBox" @input="handleInput" v-model="userInput" @suggestion-tab="handleSuggestionTab" />
@@ -26,7 +32,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { defaultCommands, defaultMessages } from './utility/defaultData';
+import { defaultCommands, defaultMessages, localCommands } from './utility/defaultData';
+import Icon from '../../components/Icon.vue';
 import RegexData from './utility/regex';
 import IMessage from './interfaces/IMessage';
 import ICommand from './interfaces/ICommand';
@@ -41,6 +48,7 @@ export default defineComponent({
         Input,
         Message,
         Suggestions,
+        Icon,
     },
     data() {
         return {
@@ -50,30 +58,38 @@ export default defineComponent({
             history: [],
             userInput: '',
             chatbox: {
+                timestamp: true,
+                shouldFade: true,
                 size: 1.5,
                 height: 45,
                 width: 45,
                 unit: 'vh',
+                msgLength: 256,
             },
+            historyIndex: -1,
             updateCount: 0,
             pageSize: 5, // Do not exceed 5. 5 is already pushing it.
             page: 1,
-            msgSize: 256, // Try not to do anything larger. It won't display right.
-            showTimestamp: true,
             showInputBox: false,
             showChat: true,
         };
     },
     mounted() {
-        document.addEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
+            alt.on(`${ComponentName}:SetMessages`, this.setMessages);
+            alt.on(`${ComponentName}:Focus`, this.handleShowInput);
+            alt.emit(`${ComponentName}:Ready`);
         } else {
             this.setMessages(defaultMessages(), defaultCommands());
-            this.showInputBox = true;
+            this.handleShowInput();
         }
     },
     unmounted() {
+        if ('alt' in window) {
+            alt.off(`${ComponentName}:SetMessages`, this.setMessages);
+            alt.off(`${ComponentName}:Focus`, this.handleShowInput);
+        }
+
         document.removeEventListener('keyup', this.handlePress);
     },
     computed: {
@@ -127,8 +143,14 @@ export default defineComponent({
          */
         setMessages(messages: Array<IMessage>, commands: Array<ICommand>) {
             this.messages = messages;
+
+            // Append Local Commands to Commands
+            const _cmds = localCommands();
+            for (let i = 0; i < _cmds.length; i++) {
+                commands.unshift(_cmds[i]);
+            }
+
             this.commands = commands;
-            this.updateCount += 1;
 
             let clientHeight = document.body.clientHeight;
 
@@ -143,6 +165,8 @@ export default defineComponent({
             if (clientHeight <= 600) {
                 this.pageSize = 3;
             }
+
+            this.updateCount += 1;
         },
         /**
          * Splits the array into a smaller format based on the
@@ -204,16 +228,38 @@ export default defineComponent({
             this.userInput = '';
             this.showInputBox = false;
 
-            // Reshow Input Box for Debugging
-            if (!('alt' in window)) {
-                setTimeout(() => {
-                    this.showInputBox = true;
-                }, 2000);
-            }
+            document.removeEventListener('keyup', this.handlePress);
         },
         processInput() {
-            let message = this.userInput;
-            this.userInput = '';
+            const originalMessage = this.userInput;
+            this.hideInput();
+
+            // Append Commands to History
+            if (originalMessage.charAt(0) === '/') {
+                this.history.unshift(originalMessage);
+                if (this.history.length > 25) {
+                    this.history.pop();
+                }
+
+                // Handle Chat Commands
+                if (this.isLocalCommand(originalMessage)) {
+                    if ('alt' in window) {
+                        alt.emit(`${ComponentName}:Send`);
+                    }
+                    return;
+                }
+
+                this.historyIndex = -1;
+            }
+
+            // Handle Send Message
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:Send`, originalMessage === '' ? null : originalMessage);
+            }
+        },
+        handleShowInput() {
+            this.showInputBox = true;
+            document.addEventListener('keyup', this.handlePress);
         },
         handleSuggestionTab() {
             this.userInput = `/${this.suggestions[0].name}`;
@@ -223,22 +269,80 @@ export default defineComponent({
             this.userInput = selected;
             this.handleInput();
         },
+        /**
+         * Use a local command that changes chat parameters.
+         * @param {string} message
+         * @return {*}
+         */
+        isLocalCommand(message: string): boolean {
+            if (message === '/chatclear' && 'alt' in window) {
+                alt.emit('chat:Clear');
+                this.userInput = '';
+                this.handleInput();
+                return true;
+            }
+
+            if (message === '/chattimestamp' || message === '/chattimestamps') {
+                this.chatbox.timestamp = !this.chatbox.timestamp;
+                this.userInput = '';
+                this.handleInput();
+                return true;
+            }
+
+            if (message == '/chatfade') {
+                this.chatbox.shouldFade = !this.chatbox.shouldFade;
+                this.userInput = '';
+                this.handleInput();
+                return true;
+            }
+
+            return false;
+        },
         handlePress(e) {
             this.updateCount += 1;
 
             // Escape
             if (e.keyCode === 27) {
                 this.hideInput();
+                return;
             }
 
             // Enter
             if (e.keyCode === 13) {
                 this.processInput();
+                return;
             }
 
             // Page Up && Page Down
             if (e.keyCode === 33 || e.keyCode == 34) {
                 this.navigatePagination(e.keyCode !== 34);
+                return;
+            }
+
+            // Up Arrow
+            if (e.keyCode === 38) {
+                if (this.historyIndex + 1 >= this.history.length) {
+                    return;
+                }
+
+                this.historyIndex += 1;
+                this.userInput = this.history[this.historyIndex];
+                this.handleInput();
+                return;
+            }
+
+            // Down Arrow
+            if (e.keyCode === 40) {
+                if (this.historyIndex - 1 <= -1) {
+                    this.userInput = '';
+                    this.historyIndex = -1;
+                    return;
+                }
+
+                this.historyIndex -= 1;
+                this.userInput = this.history[this.historyIndex];
+                this.handleInput();
+                return;
             }
         },
         handleInput() {
@@ -313,5 +417,16 @@ export default defineComponent({
     box-sizing: border-box;
     flex-grow: 1;
     justify-content: flex-end;
+}
+
+.chat-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+    bottom: -32px;
+    border-radius: 3px;
 }
 </style>

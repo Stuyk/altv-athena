@@ -1,5 +1,5 @@
 <template>
-    <div class="message pt-2 pb-2 pl-2 pr-4 mt-1" :style="getStyle">
+    <div class="message pt-2 pb-2 pl-2 pr-4 mt-1" :style="getStyle" :class="getClass">
         <span v-if="useTimestamps">{{ timestamp }}</span> <span v-html="getMessage"></span>
     </div>
 </template>
@@ -32,6 +32,10 @@ export default defineComponent({
             type: String,
             default: 14,
         },
+        fade: {
+            type: Boolean,
+            default: true,
+        },
     },
     computed: {
         getMessage() {
@@ -51,6 +55,13 @@ export default defineComponent({
             style += `font-size: ${this.fontSize};`;
 
             return style;
+        },
+        getClass() {
+            if (this.fade) {
+                return { 'message-fade': true };
+            }
+
+            return {};
         },
     },
     methods: {
@@ -113,6 +124,9 @@ export default defineComponent({
     text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000,
         -1px 1px 0 #000, -1px 0 0 #000;
     -webkit-font-smoothing: antialiased;
+}
+
+.message-fade {
     opacity: 0;
     animation: longFade 20s;
 }

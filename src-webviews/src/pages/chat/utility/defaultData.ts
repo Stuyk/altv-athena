@@ -35,3 +35,11 @@ export function defaultCommands(): Array<ICommand> {
         },
     ];
 }
+
+export function localCommands(): Array<ICommand> {
+    return [
+        { name: 'chattimestamp', description: '/chattimestamp - Toggle Timestamps' },
+        { name: 'chatfade', description: '/chatfade - Toggle Chat Fade' },
+        { name: 'chatclear', description: '/chatclear - Clear Chat' },
+    ];
+}
