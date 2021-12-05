@@ -4,7 +4,7 @@
         type="text"
         :placeholder="getPlaceholder"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="$emit('update:modelValue', $event.target['value'])"
         @blur="forceRefocus"
         @keydown="handleKeyPress"
         ref="chatInput"

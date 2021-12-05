@@ -60,11 +60,11 @@ export default defineComponent({
             chatbox: {
                 timestamp: true,
                 shouldFade: true,
-                size: 1.5,
+                size: 1.6,
                 height: 45,
                 width: 45,
                 unit: 'vh',
-                msgLength: 256,
+                msgLength: 150,
             },
             historyIndex: -1,
             updateCount: 0,
@@ -120,6 +120,10 @@ export default defineComponent({
         getFontSize() {
             const clientHeight = document.body.clientHeight;
             let fontSize = this.chatbox.size;
+
+            if (clientHeight > 720) {
+                fontSize = 1.7;
+            }
 
             if (clientHeight <= 720 && clientHeight > 600) {
                 fontSize = 1.6;
@@ -417,6 +421,7 @@ export default defineComponent({
     box-sizing: border-box;
     flex-grow: 1;
     justify-content: flex-end;
+    overflow-y: hidden;
 }
 
 .chat-info {
