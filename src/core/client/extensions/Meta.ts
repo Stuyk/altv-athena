@@ -18,7 +18,7 @@ export interface Meta {
     appearance: Appearance;
 
     // Inventory
-    inventory: Array<Array<Partial<Item>>>;
+    inventory: Array<Partial<Item>>;
     equipment: Array<Partial<Item>>;
     toolbar: Array<Partial<Item>>;
 }
