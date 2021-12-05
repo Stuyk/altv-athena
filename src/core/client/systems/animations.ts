@@ -68,6 +68,10 @@ export async function playAnimation(
         return;
     }
 
+    if (!alt.Player.local || !alt.Player.local.valid) {
+        return;
+    }
+
     if (native.isEntityPlayingAnim(alt.Player.local.scriptID, dict, name, 3)) {
         return;
     }
@@ -94,6 +98,10 @@ export async function playPedAnimation(
 ) {
     const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {
+        return;
+    }
+
+    if (!scriptID || !native.doesEntityExist(scriptID)) {
         return;
     }
 
