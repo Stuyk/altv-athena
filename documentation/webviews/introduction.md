@@ -24,7 +24,7 @@ Athena currently uses `Vite` which is a way to write `Vue 3` based menus and all
 It's quite easy to start our Vue interfaces in Development mode we only need to run a single command.
 
 ```
-npm run vue-dev
+npm run dev
 ```
 
 ![](https://i.imgur.com/pjOQ6Ed.png)
@@ -52,15 +52,3 @@ There are currently two ways to navigate to different pages while in development
 ## Working with Vue
 
 It's best to use the current pages as general examples but head over to the `your-first-page` section to learn more.
-
-## How to Develop In-Game
-
-Keep in mind that you do this in-game you are going to be the ONLY PERSON who can be on the server while doing this.
-
-Inside of your `.env` file add the following:
-
-```
-VUE_DEBUG=true
-```
-
-_Remember to remove this if you are running the server in production mode._
