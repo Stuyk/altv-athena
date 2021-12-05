@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { Vector3 } from '../../shared/interfaces/Vector';
 import { Interaction } from '../interface/Interaction';
 
 export class InteractionShape extends alt.ColshapeCylinder {
@@ -46,5 +47,28 @@ export class InteractionShape extends alt.ColshapeCylinder {
      */
     getIdentifier(): string {
         return this.interaction.identifier;
+    }
+}
+
+export class GarageSpaceShape extends alt.ColshapeSphere {
+    private rotation: Vector3;
+    private isOpen: boolean = true;
+    isGarage: boolean = true;
+
+    constructor(position: alt.IVector3, rotation: Vector3, radius: number) {
+        super(position.x, position.y, position.z, radius);
+        this.rotation = rotation;
+    }
+
+    setSpaceStatus(value: boolean) {
+        this.isOpen = value;
+    }
+
+    getPositionAndRotation() {
+        return { position: this.pos, rotation: this.rotation };
+    }
+
+    getSpaceStatus() {
+        return this.isOpen;
     }
 }

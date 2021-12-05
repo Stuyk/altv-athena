@@ -17,8 +17,9 @@ import { InteractionController } from '../systems/interaction';
 import { ServerMarkerController } from '../streamers/marker';
 import { sha256 } from '../utility/encryption';
 import IGarage from '../../shared/interfaces/IGarage';
+import { GarageSpaceShape } from '../extensions/Colshape';
 
-const IGNORE_DISTANCE = 25;
+const PARKING_SPACE_DIST_LIMIT = 5;
 const GarageUsers = {};
 const LastParkedCarSpawn: { [key: string]: alt.Vehicle } = {};
 const VehicleCache: { [id: string]: Array<IVehicle> } = {};
@@ -26,6 +27,7 @@ const VehicleCache: { [id: string]: Array<IVehicle> } = {};
 let activeGarages: Array<IGarage> = [];
 let queue: Array<IGarage> = [];
 let hasFinishedInit = false;
+let parkingSpots: { [key: string]: Array<GarageSpaceShape> } = {};
 
 interface PositionAndRotation {
     position: Vector3;
@@ -91,6 +93,17 @@ class GarageFunctions {
             scale: { x: 2, y: 2, z: 3 },
         });
 
+        if (!parkingSpots[garage.index]) {
+            parkingSpots[garage.index] = [];
+        }
+
+        // Create Spots for Each Garage Parking spot
+        for (let i = 0; i < garage.parking.length; i++) {
+            const spot = garage.parking[i];
+            const colshape = new GarageSpaceShape(spot.position, spot.rotation, 1);
+            parkingSpots[garage.index].push(colshape);
+        }
+
         activeGarages.push(garage);
     }
 
@@ -102,6 +115,7 @@ class GarageFunctions {
             return;
         }
 
+        const garage = activeGarages[index];
         const garageType = activeGarages[index].type;
         let playerVehicles = await playerFuncs.get.allVehicles(player);
 
@@ -124,6 +138,11 @@ class GarageFunctions {
                 return false;
             }
 
+            // Unspawned / New Vehicle - Can Spawn Anywhere
+            if (vehicle.position.x === 0 && vehicle.position.y === 0 && vehicle.position.z === 0) {
+                return true;
+            }
+
             // Check if Vehicle Type is null or undefined.
             // Basically means does this vehicle have a garage yet?
             if (vehicle.garageIndex === null || vehicle.garageIndex === undefined) {
@@ -135,12 +154,18 @@ class GarageFunctions {
                     return false;
                 }
 
-                const dist = distance2d(existingVehicle.pos, player.pos);
-                if (dist >= IGNORE_DISTANCE) {
-                    return false;
+                // The vehicle exists and may or may not be in a parking space
+                // Need to check if the vehicle is close enough to a parking space.
+                for (let i = 0; i < garage.parking.length; i++) {
+                    const dist = distance2d(existingVehicle.pos, garage.parking[i].position);
+                    if (dist > PARKING_SPACE_DIST_LIMIT) {
+                        continue;
+                    }
+
+                    return true;
                 }
 
-                return true;
+                return false;
             }
 
             // Check if the garage index belongs to the vehicle if it's present.
@@ -180,36 +205,14 @@ class GarageFunctions {
         return false;
     }
 
-    static findOpenSpot(parkingSpots: Array<PositionAndRotation>): PositionAndRotation {
-        const spots = [...parkingSpots].sort(function () {
-            return 0.5 - Math.random();
-        });
-
-        for (let i = 0; i < spots.length; i++) {
-            const hash = sha256(JSON.stringify(spots[i]));
-
-            // Parking spot is unused.
-            if (!LastParkedCarSpawn[hash]) {
-                return spots[i];
-            }
-
-            // Vehicle is no longer valid.
-            if (LastParkedCarSpawn[hash] && !LastParkedCarSpawn[hash].valid) {
-                return spots[i];
-            }
-
-            const vehicle = LastParkedCarSpawn[hash];
-            const dist = distance2d(vehicle.pos, spots[i].position);
-
-            // Parking Spot Open! Assumed...
-            if (dist >= 5) {
-                continue;
-            }
-
-            return spots[i];
+    static findOpenSpot(garageIndex: number | string): PositionAndRotation {
+        const spots = parkingSpots[garageIndex];
+        if (!spots) {
+            return null;
         }
 
-        return null;
+        const spot = spots.find((x) => x.getSpaceStatus());
+        return spot ? spot.getPositionAndRotation() : null;
     }
 
     static spawnVehicle(player: alt.Player, id: number) {
@@ -243,8 +246,7 @@ class GarageFunctions {
             return;
         }
 
-        const parkingSpots = activeGarages[index].parking;
-        const openSpot = GarageFunctions.findOpenSpot(parkingSpots);
+        const openSpot = GarageFunctions.findOpenSpot(shopIndex);
         if (!openSpot) {
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS));
@@ -318,5 +320,29 @@ class GarageFunctions {
 
 alt.onClient(View_Events_Garage.Spawn, GarageFunctions.spawnVehicle);
 alt.onClient(View_Events_Garage.Despawn, GarageFunctions.despawnVehicle);
+
+alt.on('entityEnterColshape', (colshape: alt.Colshape | GarageSpaceShape, entity: alt.Entity) => {
+    if (!(entity instanceof alt.Vehicle)) {
+        return;
+    }
+
+    if (!(colshape instanceof GarageSpaceShape)) {
+        return;
+    }
+
+    colshape.setSpaceStatus(false);
+});
+
+alt.on('entityLeaveColshape', (colshape: alt.Colshape | GarageSpaceShape, entity: alt.Entity) => {
+    if (!(entity instanceof alt.Vehicle)) {
+        return;
+    }
+
+    if (!(colshape instanceof GarageSpaceShape)) {
+        return;
+    }
+
+    colshape.setSpaceStatus(true);
+});
 
 GarageFunctions.init();

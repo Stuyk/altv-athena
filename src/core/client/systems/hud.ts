@@ -207,20 +207,7 @@ let hudElements: Array<IHud> = [
                 return null;
             }
 
-            for (let i = 0; i < 5; i++) {
-                const newPos = {
-                    x: pos.x - 0.02 * i,
-                    y: pos.y,
-                };
-
-                if (i + 1 >= 6 - stars) {
-                    drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 255);
-                    continue;
-                }
-
-                drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 100);
-            }
-
+            drawText2D(`Stars: ${stars}`, { x: pos.x, y: pos.y }, 0.4, new alt.RGBA(255, 255, 255, 100));
             return null;
         },
     },

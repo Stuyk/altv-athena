@@ -96,7 +96,30 @@ export function appendToItemRegistry(item: Item) {
  * @return {*}  {(Item | null)}
  */
 export function getFromRegistry(name: string): Item | null {
-    const index = ItemRegistry.findIndex((itemRef) => itemRef.name.toLowerCase().includes(name.toLowerCase()));
+    const itemName = name.replace(/\s/g, '').toLowerCase();
+
+    // First Pass Through - Exact Name Check
+    let index = ItemRegistry.findIndex((itemRef) => {
+        const refItemName = itemRef.name.replace(/\s/g, '').toLowerCase();
+        if (refItemName === itemName) {
+            return true;
+        }
+
+        return false;
+    });
+
+    // Second Pass Through - Includes Search
+    if (index <= -1) {
+        index = ItemRegistry.findIndex((itemRef) => {
+            const refItemName = itemRef.name.replace(/\s/g, '').toLowerCase();
+            if (refItemName.includes(itemName)) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
     if (index <= -1) {
         return null;
     }

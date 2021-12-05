@@ -11,7 +11,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { drawText2D } from '../utility/text';
-import { drawTexture } from '../utility/texture';
 import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;
@@ -134,7 +133,7 @@ export class InteractionController {
             textToDraw.push(newText);
 
             if (!disableMarker) {
-                drawTexture('mpmissmarkers128', 'corona_marker', position, 0.1);
+                drawText2D('o', position, 0.4, new alt.RGBA(255, 255, 255, 100));
             }
         }
 
@@ -157,11 +156,12 @@ export class InteractionController {
             if (vehicleDistance <= SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
                 if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
-                    if (isVehicleLocked) {
-                        drawTexture('mpsafecracking', 'lock_closed', newPosition, 1);
-                    } else {
-                        drawTexture('mpsafecracking', 'lock_open', newPosition, 1);
-                    }
+                    drawText2D(
+                        isVehicleLocked ? 'Locked' : 'Unlocked',
+                        newPosition,
+                        0.4,
+                        new alt.RGBA(255, 255, 255, 125),
+                    );
                 }
 
                 if (!isVehicleLocked) {

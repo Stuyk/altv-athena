@@ -6,7 +6,7 @@ const temporaryText = [];
 let tempInterval;
 
 /**
- * Draw text on your screen in a 2D position wtih an every tick.
+ * Draw text on your screen in a 2D position with an every tick.
  * @param  {string} text
  * @param  {alt.Vector2} pos
  * @param  {number} scale
@@ -19,7 +19,7 @@ export function drawText2D(
     scale: number,
     color: alt.RGBA,
     alignment: number = 0,
-    padding: number = 0
+    padding: number = 0,
 ) {
     if (scale > 2) {
         scale = 2;

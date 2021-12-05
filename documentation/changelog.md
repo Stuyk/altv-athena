@@ -126,6 +126,9 @@ description: List of all the changes and current versions.
 + Added Configurations for 3 Mode(s)
 + 3 Mode(s): dev, devtest, and production
 + Dev has Vue Debugging + Reconnect, Devtest has WebViews + Reconnect, Production is Normal
++ Fix Item Search for Item Registry, Includes 2 Pass-throughs
++ Make Parking Spots Based on ColShapes
++ Fixed Vehicles Spawning in Same Spot Twice
 ```
 
 ## 2.0.3

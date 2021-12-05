@@ -115,8 +115,8 @@ export class VehicleSystem {
             const vehicle = vehicles[i];
 
             // Skip vehicles without a garage index.
-            const hasGarageIndex = vehicle.garageIndex !== undefined && vehicle.garageIndex !== null;
-            if (hasGarageIndex && vehicle.garageIndex >= 0) {
+            const isInGarage = vehicle.garageIndex !== undefined && vehicle.garageIndex !== null;
+            if (isInGarage) {
                 continue;
             }
 
