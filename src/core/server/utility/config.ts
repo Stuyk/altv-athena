@@ -4,12 +4,13 @@ import fs from 'fs';
 import logger from './athenaLogger';
 import net from 'net';
 
+const DefaultServerCFGName = 'server.cfg';
 const DefaultViteServer = '127.0.0.1';
 const DefaultVitePort = 3000;
 const DefaultConfigName = 'AthenaConfig.json';
 let configCache: IConfig;
 let firstRun = true;
-let isVueDebugReady = false;
+let isVueDebug = false;
 
 export default {
     get: (): IConfig | null => {
@@ -45,28 +46,20 @@ export default {
             }
         }
 
-        // Process VUE_DEBUG
-        if (typeof config.VUE_DEBUG === 'string') {
-            config.VUE_DEBUG = config.VUE_DEBUG.toLowerCase() === 'true' ? true : false;
-        }
-
-        if (config.VUE_DEBUG) {
-            const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                logger.warning(`Server running in VUE_DEBUG mode.`);
-                isVueDebugReady = true;
-            });
-
-            sock.once('once', (err) => {
-                if (!isVueDebugReady) {
-                    logger.warning(`Error while trying to use VUE_DEBUG mode.`);
-                    logger.warning(`Please Run: 'npm run vue-dev' in a separate terminal.`);
-                } else {
-                    logger.warning(`'npm run vue-dev' process was shut down`);
-                    logger.warning(`Either restart it or set VUE_DEBUG to false`);
-                }
-
-                process.exit(1);
-            });
+        const file = fs.readFileSync(DefaultServerCFGName).toString();
+        if (file.includes('vue-athena')) {
+            try {
+                const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
+                    logger.warning(`Server running with Vue Debug mode on.`);
+                    logger.warning(`Open http://localhost:3000 in your browser`);
+                    logger.warning(`Only a local player may connect.`);
+                    logger.warning(`Server MUST be running on a local computer`);
+                    isVueDebug = true;
+                    sock.destroy();
+                });
+            } catch (err) {
+                logger.warning(``);
+            }
         }
 
         // Finish Up
@@ -76,5 +69,8 @@ export default {
     },
     getViteServer() {
         return `http://${DefaultViteServer}:${DefaultVitePort}`;
+    },
+    getVueDebugMode() {
+        return isVueDebug;
     },
 };

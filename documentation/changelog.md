@@ -122,6 +122,10 @@ description: List of all the changes and current versions.
 + Migrated Job Menu to Vue 3
 + Add Object Attachment to Players
 + Added Object Attachment Stream
++ Added Dynamic Server.cfg Creator
++ Added Configurations for 3 Mode(s)
++ 3 Mode(s): dev, devtest, and production
++ Dev has Vue Debugging + Reconnect, Devtest has WebViews + Reconnect, Production is Normal
 ```
 
 ## 2.0.3

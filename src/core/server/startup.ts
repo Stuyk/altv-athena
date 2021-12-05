@@ -34,7 +34,7 @@ class Startup {
      */
     static database() {
         const url = MongoUtil.getURL(config);
-        const collections = MongoUtil.getCollections(config);
+        const collections = MongoUtil.getCollections();
 
         Database.init(url, MongoUtil.getName(), collections)
             .catch(() => {
