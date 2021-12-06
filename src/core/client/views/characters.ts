@@ -70,6 +70,10 @@ class CharactersView implements ViewModel {
             let count = 0;
 
             const interval = alt.setInterval(() => {
+                if (!native.doesEntityExist(PedCharacter.get())) {
+                    return;
+                }
+
                 playPedAnimation(
                     PedCharacter.get(),
                     IDLE_ANIM_DICT,
