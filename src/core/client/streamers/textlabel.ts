@@ -11,6 +11,11 @@ let interval: number;
 let isRemoving = false;
 
 export class ClientTextLabelController {
+    static init() {
+        localLabels = [];
+        addedLabels = [];
+    }
+
     static stop() {
         if (!interval) {
             return;
@@ -124,6 +129,7 @@ function handleDrawTextlabels() {
     }
 }
 
+alt.on('connectionComplete', ClientTextLabelController.init);
 alt.on('disconnect', ClientTextLabelController.stop);
 alt.onServer(SYSTEM_EVENTS.APPEND_TEXTLABELS, ClientTextLabelController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, ClientTextLabelController.populate);

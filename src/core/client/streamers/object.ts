@@ -14,6 +14,11 @@ let isRemoving = false;
 let interval;
 
 export class ClientObjectController {
+    static init() {
+        localObjects = [];
+        addedObjects = [];
+    }
+
     /**
      * Add a single marker.
      * @static
@@ -213,6 +218,7 @@ function handleDrawObjects() {
     }
 }
 
+alt.on('connectionComplete', ClientObjectController.init);
 alt.on('disconnect', ClientObjectController.stop);
 alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
 alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);

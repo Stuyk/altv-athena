@@ -11,6 +11,11 @@ let isRemoving = false;
 let interval: number;
 
 export class ClientMarkerController {
+    static init() {
+        addedMarkers = [];
+        localMarkers = [];
+    }
+
     static stop() {
         if (!interval) {
             return;
@@ -135,6 +140,7 @@ function handleDrawMarkers() {
     }
 }
 
+alt.on('connectionComplete', ClientMarkerController.init);
 alt.on('disconnect', ClientMarkerController.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_MARKERS, ClientMarkerController.populate);
 alt.onServer(SYSTEM_EVENTS.APPEND_MARKER, ClientMarkerController.append);

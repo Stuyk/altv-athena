@@ -10,6 +10,10 @@ let addedItems: Array<GroundItem> = [];
 let interval: number;
 
 export class ClientItemStreamer {
+    static init() {
+        addedItems = [];
+    }
+
     static stop() {
         if (!interval) {
             return;
@@ -73,5 +77,6 @@ export class ClientItemStreamer {
     }
 }
 
+alt.on('connectionComplete', ClientItemStreamer.init);
 alt.on('disconnect', ClientItemStreamer.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEM_DROPS, ClientItemStreamer.populate);

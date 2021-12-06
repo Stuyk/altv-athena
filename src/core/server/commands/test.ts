@@ -4,9 +4,11 @@ import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTyp
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import IAttachable from '../../shared/interfaces/IAttachable';
 import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
+import { IPed } from '../../shared/interfaces/IPed';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
+import { PedController } from '../systems/ped';
 import { WorldNotificationController } from '../systems/worldNotifications';
 
 ChatController.addCommand(
@@ -189,3 +191,22 @@ ChatController.addCommand(
 alt.on('job:Example:Response', (player: alt.Player) => {
     playerFuncs.emit.message(player, `Accepted 'job:Example:Response'`);
 });
+
+ChatController.addCommand(
+    'testped',
+    '/testped - A Test Ped. Does not delete itself',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        const ped: IPed = {
+            uid: `ped-${Math.floor(Math.random() * 500000)}`,
+            model: 'u_f_m_casinocash_01',
+            pos: {
+                x: player.pos.x,
+                y: player.pos.y,
+                z: player.pos.z - 1,
+            },
+        };
+
+        PedController.append(ped);
+    },
+);

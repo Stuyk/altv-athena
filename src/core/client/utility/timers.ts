@@ -12,7 +12,7 @@ const TIMER_CATEGORIES = {
     SMALL: [2, 9],
     MEDIUM: [10, 99],
     LARGE: [100, 999],
-    HUGE: [1000, 999999999]
+    HUGE: [1000, 999999999],
 };
 
 const timers: Array<TimerInfo> = [];
@@ -158,6 +158,19 @@ export class Timer {
             return;
         }
     }
+
+    static clearAllTimers() {
+        while (timers.length >= 1) {
+            const timer = timers.pop();
+            alt.clearTimer(timer.id);
+        }
+
+        while (timeouts.length >= 1) {
+            const timeout = timeouts.pop();
+            alt.clearTimeout(timeout.id);
+        }
+    }
 }
 
 alt.on('consoleCommand', Timer.parse);
+alt.on('disconnect', Timer.clearAllTimers);

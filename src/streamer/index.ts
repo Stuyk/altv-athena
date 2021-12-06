@@ -18,8 +18,8 @@ if (SockJS['default']) {
 }
 
 const server = http.createServer();
-const StreamData: IStream = {};
 const StreamRange: { [key: string]: number } = {};
+let StreamData: IStream = {};
 
 let conn: SockJS.Connection;
 let config: IStreamConfig = {
@@ -84,7 +84,8 @@ class StreamerServer {
      * @memberof StreamerServer
      */
     static ping(id: number) {
-        conn.write(JSON.stringify({ id, route: 'pong', data: '[Streamer] Ready for Events!' }));
+        StreamData = {};
+        conn.write(JSON.stringify({ id, route: 'pong', data: '[Streamer] Cleaned & Ready for Events!' }));
     }
 
     /**

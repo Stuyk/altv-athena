@@ -129,6 +129,11 @@ description: List of all the changes and current versions.
 + Fix Item Search for Item Registry, Includes 2 Pass-throughs
 + Make Parking Spots Based on ColShapes
 + Fixed Vehicles Spawning in Same Spot Twice
++ Removed Duplicate Blips on Reconnect
++ Fixed Duplicate Ped Holograms
++ Fixed Duplicate Item Holograms
++ Fixed Duplicate Text Label Holograms
++ Fixed Streamer Memory Leak in Development Modes
 ```
 
 ## 2.0.3

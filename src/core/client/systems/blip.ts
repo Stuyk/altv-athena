@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { Blip } from '../../shared/interfaces/Blip';
 
-const addedBlips: Array<any> = [];
+const addedBlips: Array<alt.PointBlip> = [];
 
 function create(blipData: Blip): alt.PointBlip {
     const blip = new alt.PointBlip(blipData.pos.x, blipData.pos.y, blipData.pos.z);
@@ -27,6 +27,7 @@ function create(blipData: Blip): alt.PointBlip {
 export class BlipController {
     static append(blipData: Blip): alt.PointBlip {
         const blip = create(blipData);
+        blip['uid'] = blipData.uid;
         addedBlips.push(blip);
         return blip;
     }
@@ -40,7 +41,7 @@ export class BlipController {
     }
 
     static remove(uid: string) {
-        const index = addedBlips.findIndex((blip) => blip.uid === uid);
+        const index = addedBlips.findIndex((blip) => blip && blip['uid'] === uid);
         if (index <= -1) {
             return;
         }
@@ -53,8 +54,18 @@ export class BlipController {
 
         blip.destroy();
     }
+
+    static removeAll() {
+        while (addedBlips.length >= 1) {
+            const removedBlip = addedBlips.pop();
+            try {
+                removedBlip.destroy();
+            } catch (err) {}
+        }
+    }
 }
 
 alt.onServer(SYSTEM_EVENTS.POPULATE_BLIPS, BlipController.populate);
 alt.onServer(SYSTEM_EVENTS.APPEND_BLIP, BlipController.append);
 alt.onServer(SYSTEM_EVENTS.REMOVE_BLIP, BlipController.remove);
+alt.on('disconnect', BlipController.removeAll);

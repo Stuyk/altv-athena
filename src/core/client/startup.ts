@@ -18,6 +18,7 @@ import './menus/vehicle';
 import './streamers/item';
 import './streamers/marker';
 import './streamers/object';
+import './streamers/ped';
 import './streamers/textlabel';
 import './streamers/worldNotifications';
 
@@ -41,7 +42,6 @@ import './systems/meta';
 import './systems/nametag';
 import './systems/noclip';
 import './systems/particle';
-import './systems/ped';
 import './systems/progressBar';
 import './systems/quickToken';
 import './systems/scenarios';

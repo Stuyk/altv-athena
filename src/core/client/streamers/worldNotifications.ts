@@ -11,6 +11,11 @@ let isRemoving = false;
 let interval: number;
 
 export class ClientWorldNotificationController {
+    static init() {
+        addedNotifications = [];
+        localNotifications = [];
+    }
+
     static stop() {
         if (!interval) {
             return;
@@ -114,6 +119,7 @@ function handleDrawNotifications() {
     }
 }
 
+alt.on('connectionComplete', ClientWorldNotificationController.init);
 alt.on('disconnect', ClientWorldNotificationController.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_WORLD_NOTIFICATIONS, ClientWorldNotificationController.populate);
 alt.onServer(SYSTEM_EVENTS.APPEND_WORLD_NOTIFICATION, ClientWorldNotificationController.append);

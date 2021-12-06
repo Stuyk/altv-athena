@@ -7,7 +7,7 @@ import { Animation } from '../../shared/interfaces/Animation';
 import { distance2d } from '../../shared/utility/vector';
 import { loadModel } from '../utility/model';
 import { Timer } from '../utility/timers';
-import { playPedAnimation } from './animations';
+import { playPedAnimation } from '../systems/animations';
 
 let localPeds: Array<IPed> = [];
 let addedPeds: Array<IPed> = [];
@@ -16,7 +16,15 @@ let isRemoving = false;
 let interval;
 
 export class PedController {
+    static init() {
+        localPeds = [];
+        addedPeds = [];
+        pedInfo = {};
+    }
+
     static append(pedData: IPed) {
+        console.log(pedData);
+
         if (!pedData.uid) {
             alt.logError(`(${JSON.stringify(pedData.pos)}) Ped is missing uid.`);
             return;
@@ -38,6 +46,8 @@ export class PedController {
 
     static populate(peds: Array<IPed>) {
         addedPeds = peds;
+
+        console.log(peds);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
@@ -98,6 +108,20 @@ export class PedController {
                     animation[i].duration,
                 );
             }
+        }
+    }
+
+    static removeAll() {
+        const peds = addedPeds.concat(localPeds);
+        while (peds.length >= 1) {
+            const ped = peds.pop();
+            const id = pedInfo[ped.uid];
+
+            if (id === undefined || id === null) {
+                return;
+            }
+
+            native.deletePed(id);
         }
     }
 }
@@ -208,6 +232,8 @@ function handleDrawPeds() {
     }
 }
 
+alt.on('connectionComplete', PedController.init);
+alt.on('disconnect', PedController.removeAll);
 alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_PED, PedController.removeGlobalPed);
 alt.onServer(SYSTEM_EVENTS.APPEND_PED, PedController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_PEDS, PedController.populate);
