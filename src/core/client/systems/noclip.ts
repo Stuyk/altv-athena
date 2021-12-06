@@ -1,231 +1,261 @@
 import alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { getCrossProduct, getNormalizedVector, rotationToDirection } from '../utility/math';
-import { addTemporaryText } from '../utility/text';
-import { Timer } from '../utility/timers';
-
-const disabledControls = [
-    30, // A & D
-    31, // W & S
-    21, // Left Shift
-    36, // Left Ctrl
-    22, // Space
-    44, // Q
-    38, // E
-    71, // W - Vehicle
-    72, // S - Vehicle
-    59, // A & D - Vehicle
-    60, // L Shift & L CTRL - Vehicle
-    42, // D PAD Up || ]
-    43, // D PAD Down || [
-    85,
-    86,
-    15, // Mouse Wheel Up
-    14, // Mouse Wheel Down
-    228,
-    229,
-    172,
-    173,
-    37,
-    44,
-    178,
-    244,
-    220,
-    221,
-    218,
-    219,
-    16,
-    17,
-];
+import { DirectionVector } from '../utility/directionToVector';
+import { drawText2D } from '../utility/text';
 
 const timeBetweenPlayerUpdates = 250;
-
 let nextUpdate = Date.now() + 50;
-let maxSpeed = 0.5;
-let speed = 0;
-let zSpeedUp = 0;
-let zSpeedDown = 0;
-let interval;
-let cam;
+let tick: number = null;
+let noclipCam: number = null;
+let sensitivity = 0.15;
+let sensMultiplier = 5;
 
-function getCameraRotation(cam: number): alt.IVector3 {
-    return { ...native.getCamRot(cam, 2) };
-}
-
-function getCameraPosition(cam: number): alt.IVector3 {
-    return { ...native.getCamCoord(cam) };
-}
-
-alt.on('syncedMetaChange', (entity, key, value) => {
-    if (entity !== alt.Player.local) {
-        return;
-    }
-
-    if (key !== 'NoClipping') {
-        return;
-    }
-
-    if (!value) {
-        if (interval) {
-            Timer.clearInterval(interval);
-            interval = null;
+class NoClip {
+    static init(entity: alt.Entity, key: string, value: any | boolean) {
+        if (entity !== alt.Player.local) {
+            return;
         }
 
-        if (cam) {
-            native.renderScriptCams(false, false, 255, true, false, 0);
-            native.setCamActive(cam, false);
-            native.destroyCam(cam, false);
-            native.destroyAllCams(true);
-            cam = null;
+        if (key !== 'NoClipping') {
+            return;
         }
 
-        native.resetEntityAlpha(alt.Player.local.scriptID);
+        if (value) {
+            NoClip.enable();
+        } else {
+            NoClip.disable();
+        }
+    }
+
+    private static enable() {
+        tick = alt.everyTick(NoClip.tick);
+        sensMultiplier = 5;
+
+        const gameplayCamPos = native.getGameplayCamCoord();
+        const gameplayCamRot = native.getGameplayCamRot(2);
+
+        noclipCam = native.createCamWithParams(
+            'DEFAULT_SCRIPTED_CAMERA',
+            gameplayCamPos.x,
+            gameplayCamPos.y,
+            gameplayCamPos.z,
+            0.0,
+            0.0,
+            gameplayCamRot.z,
+            native.getGameplayCamFov(),
+            false,
+            2,
+        );
+
+        native.setCamActiveWithInterp(noclipCam, native.getRenderingCam(), 500, 0, 0);
+        native.renderScriptCams(true, true, 500, true, false, 0);
+        native.freezeEntityPosition(alt.Player.local.scriptID, true);
+        native.setEntityInvincible(alt.Player.local.scriptID, true);
+    }
+
+    private static disable() {
+        alt.clearEveryTick(tick);
+
+        noclipCam = null;
+        native.renderScriptCams(false, true, 500, true, false, 0);
+
+        const position = native.getEntityCoords(alt.Player.local.scriptID, true);
+        let [unk, ground] = native.getGroundZFor3dCoord(position.x, position.y, position.z, 0.0, false, false);
+        native.setEntityCoordsNoOffset(alt.Player.local.scriptID, position.x, position.y, ground, false, false, false);
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
         native.setEntityInvincible(alt.Player.local.scriptID, false);
-        addTemporaryText(`freecamStatus`, `NoClip: Off`, 0.95, 0.2, 0.4, 255, 255, 255, 255, 2000);
-        return;
     }
 
-    native.freezeEntityPosition(alt.Player.local.scriptID, true);
-    native.setEntityInvincible(alt.Player.local.scriptID, true);
-    interval = Timer.createInterval(handleCamera, 0, 'noclip.ts');
-    addTemporaryText(`freecamStatus`, `NoClip: On`, 0.95, 0.2, 0.4, 255, 255, 255, 255, 2000);
-});
+    private static tick() {
+        native.disableControlAction(0, 1, true);
+        native.disableControlAction(0, 2, true);
+        native.disableControlAction(0, 14, true);
+        native.disableControlAction(0, 15, true);
+        native.disableControlAction(0, 24, true);
+        native.disableControlAction(0, 25, true);
+        native.disableControlAction(0, 30, true);
+        native.disableControlAction(0, 31, true);
+        native.disableControlAction(0, 49, true);
 
-function handleCamera() {
-    if (native.isPauseMenuActive()) {
-        return;
-    }
+        const pos = native.getCamCoord(noclipCam);
+        const rot = native.getCamRot(noclipCam, 2);
 
-    if (!cam) {
-        native.destroyAllCams(true);
+        const dir = new DirectionVector(pos, rot);
+        const fwd = dir.forward(3.5);
+        const sens = NoClip.getSensitivity();
 
-        const coords = { ...alt.Player.local.pos };
-        cam = native.createCamWithParams(
-            'DEFAULT_SCRIPTED_CAMERA',
-            coords.x,
-            coords.y,
-            coords.z,
-            0,
-            0,
-            0,
-            90,
-            false,
+        // native.setEntityCoords(alt.Player.local.scriptID, fwd.x, fwd.y, fwd.z - 2.0, true, false, false, true);
+
+        if (alt.gameControlsEnabled() === false) {
+            return;
+        }
+
+        // Scroll Up - Increase Multiplier
+        if (native.isDisabledControlPressed(0, 15)) {
+            sensMultiplier += 2;
+
+            alt.log(sensMultiplier);
+
+            if (sensMultiplier >= 100) {
+                sensMultiplier = 100;
+            }
+        }
+
+        // Scroll Down - Decrease Multiplier
+        if (native.isDisabledControlPressed(0, 14)) {
+            sensMultiplier -= 2;
+
+            alt.log(sensMultiplier);
+
+            if (sensMultiplier <= 2) {
+                sensMultiplier = 2;
+            }
+        }
+
+        // 'W' and 'D'
+        if (native.isDisabledControlPressed(0, 32) && native.isDisabledControlPressed(0, 30)) {
+            const forward = dir.forward(sens);
+            const right = dir.right(sens);
+
+            const finishedPos = {
+                x: (forward.x + right.x) / 2,
+                y: (forward.y + right.y) / 2,
+                z: (forward.z + right.z) / 2,
+            };
+
+            native.setCamCoord(noclipCam, finishedPos.x, finishedPos.y, finishedPos.z);
+        }
+
+        // 'W' and 'A'
+        else if (native.isDisabledControlPressed(0, 32) && native.isDisabledControlPressed(0, 34)) {
+            const forward = dir.forward(sens);
+            const left = dir.right(-sens);
+
+            const finishedPos = {
+                x: (forward.x + left.x) / 2,
+                y: (forward.y + left.y) / 2,
+                z: (forward.z + left.z) / 2,
+            };
+
+            native.setCamCoord(noclipCam, finishedPos.x, finishedPos.y, finishedPos.z);
+        }
+
+        // 'S' and 'D'
+        else if (native.isDisabledControlPressed(0, 33) && native.isDisabledControlPressed(0, 30)) {
+            const back = dir.forward(-sens);
+            const right = dir.right(sens);
+
+            const finishedPos = {
+                x: (back.x + right.x) / 2,
+                y: (back.y + right.y) / 2,
+                z: (back.z + right.z) / 2,
+            };
+
+            native.setCamCoord(noclipCam, finishedPos.x, finishedPos.y, finishedPos.z);
+        }
+
+        // 'S' and 'A'
+        else if (native.isDisabledControlPressed(0, 33) && native.isDisabledControlPressed(0, 34)) {
+            const back = dir.forward(-sens);
+            const left = dir.right(-sens);
+
+            const finishedPos = {
+                x: (back.x + left.x) / 2,
+                y: (back.y + left.y) / 2,
+                z: (back.z + left.z) / 2,
+            };
+
+            native.setCamCoord(noclipCam, finishedPos.x, finishedPos.y, finishedPos.z);
+        } else {
+            let direction = null;
+
+            if (native.isDisabledControlPressed(0, 32)) {
+                direction = dir.forward(sens);
+            }
+
+            if (native.isDisabledControlPressed(0, 33)) {
+                direction = dir.forward(-sens);
+            }
+
+            if (native.isDisabledControlPressed(0, 34)) {
+                direction = dir.right(-sens);
+            }
+
+            if (native.isDisabledControlPressed(0, 30)) {
+                direction = dir.right(sens);
+            }
+
+            if (direction !== null) {
+                native.setCamCoord(noclipCam, direction.x, direction.y, direction.z);
+            }
+        }
+
+        if (Date.now() > nextUpdate) {
+            nextUpdate = Date.now() + timeBetweenPlayerUpdates;
+            alt.emitServer(SYSTEM_EVENTS.NOCLIP_UPDATE, fwd);
+        }
+
+        drawText2D(
+            `Left Shift (Sprint Speed) | Scroll (Change Sprint Speed)`,
+            { x: 0.5, y: 0.9 },
+            0.4,
+            new alt.RGBA(255, 255, 255, 200),
             0,
         );
-        native.setCamActive(cam, true);
-        native.renderScriptCams(true, false, 0, true, false, 0);
-        native.setCamAffectsAiming(cam, false);
+        drawText2D(`Speed: ${sens.toFixed(2)}`, { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 200), 0);
+
+        NoClip.processCameraRotation();
     }
 
-    for (let i = 0; i < disabledControls.length; i++) {
-        const disabledControl = disabledControls[i];
-        native.disableControlAction(0, disabledControl, true);
-    }
+    // Noclip functions
+    private static processCameraRotation() {
+        const camRot = native.getCamRot(noclipCam, 2);
+        const mouseX = native.getDisabledControlNormal(1, 1);
+        const mouseY = native.getDisabledControlNormal(1, 2);
 
-    native.disableFirstPersonCamThisFrame();
-    native.blockWeaponWheelThisFrame();
+        const mouseSens = native.getProfileSetting(13);
 
-    // 38 - E
-    if (native.isDisabledControlPressed(0, 38)) {
-        if (zSpeedUp < maxSpeed) {
-            zSpeedUp = zSpeedUp += 0.02 * (zSpeedUp + 0.01);
-        }
-    } else {
-        if (zSpeedUp > 0) {
-            zSpeedUp = zSpeedUp -= 0.02 * (zSpeedUp + 0.01);
-        }
-    }
+        let finalRot = {
+            x: camRot.x - mouseY * mouseSens,
+            y: camRot.y,
+            z: camRot.z - mouseX * mouseSens,
+        };
 
-    // 44 - Q
-    if (native.isDisabledControlPressed(0, 44)) {
-        if (zSpeedDown < maxSpeed) {
-            zSpeedDown = zSpeedDown += 0.02 * (zSpeedDown + 0.01);
-        }
-    } else {
-        if (zSpeedDown > 0) {
-            zSpeedDown = zSpeedDown -= 0.02 * (zSpeedDown + 0.01);
-        }
-    }
-
-    // 14 - Scroll Down - DPAD Right
-    if (native.isDisabledControlJustPressed(0, 14)) {
-        maxSpeed += 0.1;
-        maxSpeed = parseFloat(maxSpeed.toFixed(2));
-
-        if (maxSpeed >= 5.0) {
-            maxSpeed = 5.0;
+        if (finalRot.x >= 89) {
+            finalRot.x = 89;
         }
 
-        addTemporaryText(`speed`, `Speed: ${maxSpeed}`, 0.95, 0.05, 0.4, 255, 255, 255, 255, 2000);
-    }
-
-    // 15 - Scroll Up - DPAD Left
-    if (native.isDisabledControlJustPressed(0, 15)) {
-        maxSpeed -= 0.1;
-        maxSpeed = parseFloat(maxSpeed.toFixed(2));
-
-        if (maxSpeed <= 0.01) {
-            maxSpeed = 0.01;
+        if (finalRot.x <= -89) {
+            finalRot.x = -89;
         }
 
-        addTemporaryText(`speed`, `Speed: ${maxSpeed}`, 0.95, 0.05, 0.4, 255, 255, 255, 255, 2000);
+        native.setCamRot(noclipCam, finalRot.x, finalRot.y, finalRot.z, 2);
+        native.setEntityRotation(alt.Player.local.scriptID, finalRot.x, finalRot.y, finalRot.z, 2, true);
+        native.setGameplayCamRelativeRotation(finalRot.x, finalRot.y, finalRot.z);
+        native.setRadarZoom(0);
     }
 
-    // A + D - Right Control Stick
-    const rightAxisX = native.getDisabledControlNormal(0, 220);
-    const rightAxisY = native.getDisabledControlNormal(0, 221);
+    private static getSensitivity(): number {
+        let currentSens = sensitivity;
 
-    // W + S - Left Control Stick
-    const leftAxisX = native.getDisabledControlNormal(0, 218);
-    const leftAxisY = native.getDisabledControlNormal(0, 219);
+        // Left Shift
+        if (native.isDisabledControlPressed(0, 21)) {
+            // 'E' Key
+            if (native.isDisabledControlPressed(0, 38)) {
+                currentSens *= sensMultiplier;
+            }
 
-    // Smooth Out Speed Controls
-    if (leftAxisX === 0 && leftAxisY === 0) {
-        speed = 0;
-    } else {
-        if (speed < maxSpeed) {
-            //speed += 0.02 * (speed + 0.01);
-            speed = maxSpeed;
+            return (currentSens *= sensMultiplier);
         }
-    }
 
-    if (speed > maxSpeed) {
-        //speed -= 0.02 * (speed + 0.01);
-        speed = maxSpeed;
-    }
+        // Left Ctrl
+        if (native.isDisabledControlPressed(0, 36)) {
+            return (currentSens = 0.035);
+        }
 
-    // Calculations
-    const upVector = new alt.Vector3(0, 0, 1);
-    const pos = getCameraPosition(cam);
-    const rot = getCameraRotation(cam);
-    const rr = rotationToDirection(rot);
-    const preRightVector = getCrossProduct(getNormalizedVector(rr), getNormalizedVector(upVector));
-
-    const movementVector = {
-        x: rr.x * leftAxisY * speed,
-        y: rr.y * leftAxisY * speed,
-        z: rr.z * leftAxisY * (speed / 1.5),
-    };
-
-    const rightVector = {
-        x: preRightVector.x * leftAxisX * speed,
-        y: preRightVector.y * leftAxisX * speed,
-        z: preRightVector.z * leftAxisX * speed,
-    };
-
-    const newPos = {
-        x: pos.x - movementVector.x + rightVector.x,
-        y: pos.y - movementVector.y + rightVector.y,
-        z: pos.z - movementVector.z + rightVector.z + zSpeedUp - zSpeedDown,
-    };
-
-    native.setCamCoord(cam, newPos.x, newPos.y, newPos.z);
-    native.setCamRot(cam, rot.x + rightAxisY * -5.0, 0.0, rot.z + rightAxisX * -5.0, 2);
-
-    if (Date.now() > nextUpdate) {
-        nextUpdate = Date.now() + timeBetweenPlayerUpdates;
-        alt.emitServer(SYSTEM_EVENTS.NOCLIP_UPDATE, newPos);
+        return currentSens;
     }
 }
+
+alt.on('syncedMetaChange', NoClip.init);

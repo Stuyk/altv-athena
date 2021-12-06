@@ -134,6 +134,7 @@ description: List of all the changes and current versions.
 + Fixed Duplicate Item Holograms
 + Fixed Duplicate Text Label Holograms
 + Fixed Streamer Memory Leak in Development Modes
++ Used Extended Freeroam No Clip
 ```
 
 ## 2.0.3
