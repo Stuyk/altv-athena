@@ -1,5 +1,6 @@
 export interface IConfig {
     DISCORD_BOT?: string;
+    DISCORD_SERVER_ID?: string;
     WHITELIST_ROLE?: string;
     ARES_ENDPOINT?: string;
     MONGO_URL?: string;
