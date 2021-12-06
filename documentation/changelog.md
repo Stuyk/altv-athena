@@ -137,6 +137,7 @@ description: List of all the changes and current versions.
 + Used Extended Freeroam No Clip
 + Added Polygon Areas with ColShape Ability
 + Added Test Polygon Shape
++ Add Entity Validity to getEntityHeading
 ```
 
 ## 2.0.3

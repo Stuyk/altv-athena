@@ -261,6 +261,10 @@ export default class PedEditCamera {
             return;
         }
 
+        if (!native.doesEntityExist(isLocalPlayer ? alt.Player.local.scriptID : scriptID)) {
+            return;
+        }
+
         const [_, width] = native.getActiveScreenResolution(0, 0);
         const cursor = alt.getCursorPos();
         const _x = cursor.x;
