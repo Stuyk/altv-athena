@@ -21,6 +21,7 @@
     ],
     "resources": [
         "webview",
+        "webviews",
         "webserver", 
         "core"
     ],

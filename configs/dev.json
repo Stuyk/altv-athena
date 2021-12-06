@@ -17,6 +17,7 @@
         "js-module"
     ],
     "resources": [
+        "webview",
         "webserver", 
         "core"
     ],

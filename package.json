@@ -38,7 +38,7 @@
     "devDependencies": {
         "@altv/types-client": "^1.9.7",
         "@altv/types-natives": "^1.4.3",
-        "@altv/types-server": "^2.1.4",
+        "@altv/types-server": "^2.1.6",
         "@altv/types-shared": "^1.1.1",
         "@altv/types-webview": "^1.0.2",
         "@stuyk/altv-config": "^1.0.2",
