@@ -6,7 +6,7 @@ export function distance(vector1: Vector3, vector2: Vector3) {
     }
 
     return Math.sqrt(
-        Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2)
+        Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2),
     );
 }
 
@@ -48,7 +48,7 @@ export function getClosestTypes<T>(
     elements: Array<{ pos: Vector3; valid: boolean }>,
     maxDistance: number,
     mustHaveProperties: Array<string> = [],
-    positionName: string = 'pos'
+    positionName: string = 'pos',
 ): Array<T> {
     const newElements = [];
 

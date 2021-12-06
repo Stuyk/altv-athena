@@ -5,6 +5,7 @@ export enum SYSTEM_EVENTS {
     APPEND_OBJECT = 'append:Object',
     APPEND_PED = 'append:Ped',
     APPEND_WORLD_NOTIFICATION = 'append:WorldNotification',
+    APPEND_POLYGON = 'append:Polygon',
     //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
@@ -95,6 +96,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_PEDS = 'peds:Populate',
     POPULATE_WORLD_NOTIFICATIONS = 'worldNotifications:Populate',
     POPULATE_ITEM_DROPS = 'itemDrops:Populate',
+    POPULATE_POLYGONS = 'polygons:Populate',
     //
     QUICK_TOKEN_EMIT = 'quicktoken:Emit',
     QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
@@ -110,6 +112,7 @@ export enum SYSTEM_EVENTS {
     REMOVE_BLIP = 'remove:Blip',
     REMOVE_TEXTLABEL = 'remove:Textlabel',
     REMOVE_WORLD_NOTIFICATION = 'remove:WorldNotification',
+    REMOVE_POLYGON = 'remove:Polygon',
     //
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',

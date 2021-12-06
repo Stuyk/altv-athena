@@ -135,6 +135,8 @@ description: List of all the changes and current versions.
 + Fixed Duplicate Text Label Holograms
 + Fixed Streamer Memory Leak in Development Modes
 + Used Extended Freeroam No Clip
++ Added Polygon Areas with ColShape Ability
++ Added Test Polygon Shape
 ```
 
 ## 2.0.3

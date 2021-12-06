@@ -5,11 +5,14 @@ import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import IAttachable from '../../shared/interfaces/IAttachable';
 import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
 import { IPed } from '../../shared/interfaces/IPed';
+import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
 import { JobTrigger } from '../../shared/interfaces/JobTrigger';
 import { playerFuncs } from '../extensions/Player';
+import { ServerPolygonController } from '../streamers/polygon';
 import ChatController from '../systems/chat';
 import { PedController } from '../systems/ped';
 import { WorldNotificationController } from '../systems/worldNotifications';
+import { sha256Random } from '../utility/encryption';
 
 ChatController.addCommand(
     'testerrorscreen',
@@ -210,3 +213,69 @@ ChatController.addCommand(
         PedController.append(ped);
     },
 );
+
+ChatController.addCommand(
+    'testpolygon',
+    '/testpolygon - A Test Polygon for Streamer',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        const positions = [
+            { x: -1498.1483154296875, y: -677.0752563476562, z: 28.048023223876953 },
+            { x: -1491.2274169921875, y: -671.2970581054688, z: 28.943195343017578 },
+            { x: -1498.2650146484375, y: -664.248291015625, z: 29.025087356567383 },
+            { x: -1463.30908203125, y: -638.9778442382812, z: 29.582916259765625 },
+            { x: -1452.80712890625, y: -652.8944091796875, z: 29.582338333129883 },
+            { x: -1478.6595458984375, y: -672.8909301757812, z: 29.041839599609375 },
+            { x: -1481.732421875, y: -672.94677734375, z: 28.943140029907227 },
+            { x: -1493.603271484375, y: -681.1644897460938, z: 27.73985481262207 },
+            { x: -1493.603271484375, y: -681.1644897460938, z: 27.73985481262207 },
+        ];
+
+        playerFuncs.safe.setPosition(player, positions[0].x, positions[0].y, positions[0].z);
+
+        const streamPolygon: IStreamPolygon = {
+            pos: positions[0],
+            vertices: positions,
+            debug: true,
+        };
+
+        const uid = sha256Random(JSON.stringify(streamPolygon));
+        streamPolygon.uid = uid;
+
+        streamPolygon.enterEventCall = {
+            eventName: `${streamPolygon.uid}-test-enter`,
+            isServer: true,
+        };
+
+        streamPolygon.leaveEventCall = {
+            eventName: `${streamPolygon.uid}-test-leave`,
+            isServer: true,
+        };
+
+        // Setup Temporary Events
+        alt.onClient(`${streamPolygon.uid}-test-enter`, testEnter);
+        alt.onClient(`${streamPolygon.uid}-test-leave`, testLeave);
+
+        // Setup the Temporary - All Player Polygon
+        ServerPolygonController.append(streamPolygon);
+
+        console.log(`Created: ${streamPolygon.uid}`);
+
+        playerFuncs.emit.message(player, `Streamed polygon will be removed in 60 seconds.`);
+        alt.setTimeout(() => {
+            ServerPolygonController.remove(uid);
+
+            // Remove Temporary Events
+            alt.offClient(`${streamPolygon.uid}-test-enter`, testEnter);
+            alt.offClient(`${streamPolygon.uid}-test-leave`, testLeave);
+        }, 60000);
+    },
+);
+
+function testEnter(player: alt.Player, stream: IStreamPolygon) {
+    playerFuncs.emit.message(player, `You have entered: ${stream.uid}`);
+}
+
+function testLeave(player: alt.Player, stream: IStreamPolygon) {
+    playerFuncs.emit.message(player, `You have left: ${stream.uid}`);
+}
