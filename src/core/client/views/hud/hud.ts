@@ -31,31 +31,28 @@ export class BaseHUD {
     static view: alt.WebView;
 
     static createView() {
-        if (!BaseHUD.view) {
-            BaseHUD.view = new alt.WebView(url, false);
-            BaseHUD.view.isVisible = true;
-            BaseHUD.view.on('url', BaseHUD.handleURL);
-            BaseHUD.view.on('chat:Send', ChatController.send);
-            BaseHUD.view.on('chat:Clear', ChatController.clearChat);
-            BaseHUD.view.on('chat:Ready', ChatController.chatReady);
-            BaseHUD.view.on('commands:Update', ChatController.update);
-            BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
-            BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
-            BaseHUD.view.on('actions:Close', ActionsController.closed);
-            BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
-            BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
-            BaseHUD.view.on('play:Sound', handleFrontendSound);
-
-            alt.setTimeout(() => {
-                if (native.isScreenFadedOut()) {
-                    native.doScreenFadeIn(2000);
-                }
-
-                handleFreezePlayer(false);
-            }, 1000);
-        }
-
-        BaseHUD.view.unfocus();
+        // if (!BaseHUD.view) {
+        //     BaseHUD.view = new alt.WebView(url, false);
+        //     BaseHUD.view.isVisible = true;
+        //     BaseHUD.view.on('url', BaseHUD.handleURL);
+        //     BaseHUD.view.on('chat:Send', ChatController.send);
+        //     BaseHUD.view.on('chat:Clear', ChatController.clearChat);
+        //     BaseHUD.view.on('chat:Ready', ChatController.chatReady);
+        //     BaseHUD.view.on('commands:Update', ChatController.update);
+        //     BaseHUD.view.on('mouse:Focus', BaseHUD.handleFocus);
+        //     BaseHUD.view.on('actions:Navigate', ActionsController.navigate);
+        //     BaseHUD.view.on('actions:Close', ActionsController.closed);
+        //     BaseHUD.view.on('actions:LeftRight', ActionsController.leftRight);
+        //     BaseHUD.view.on('actions:Trigger', ActionsController.trigger);
+        //     BaseHUD.view.on('play:Sound', handleFrontendSound);
+        //     alt.setTimeout(() => {
+        //         if (native.isScreenFadedOut()) {
+        //             native.doScreenFadeIn(2000);
+        //         }
+        //         handleFreezePlayer(false);
+        //     }, 1000);
+        // }
+        // BaseHUD.view.unfocus();
     }
 
     static handleURL() {

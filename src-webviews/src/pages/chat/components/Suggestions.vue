@@ -39,8 +39,8 @@ export default defineComponent({
 
 <style scoped>
 .suggestions {
-    position: relative;
     display: flex;
+    position: absolute;
     flex-direction: column;
     color: white;
     user-select: none;

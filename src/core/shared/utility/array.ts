@@ -8,19 +8,16 @@
  * @param {number} aLength
  * @param {number} bLength
  */
-export function findMissingElements<T>(a: Array<T>, b: Array<T>, aLength: number, bLength: number): Array<T> {
+export function findMissingElements<T>(a: Array<T>, b: Array<T>, propertyName: string): Array<T> {
     let missing: Array<T> = [];
-    let s = new Set();
-    for (let i = 0; i < bLength; i++) {
-        s.add(b[i]);
-    }
 
-    for (let i = 0; i < aLength; i++) {
-        if (s.has(a[i])) {
+    for (let i = 0; i < b.length; i++) {
+        // If 'A' array has element from 'B' array then it is not missing.
+        if (a.findIndex((x) => x[propertyName] === b[i][propertyName]) >= 0) {
             continue;
         }
 
-        missing.push(a[i]);
+        missing.push(b[i]);
     }
 
     return missing;

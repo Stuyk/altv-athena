@@ -129,8 +129,6 @@ export class WebViewController {
      */
     static async openPages(pageNames: Array<string>) {
         const view = await WebViewController.get();
-
-        alt.log('Attempting to open page...');
         view.emit('view:Call', 'setPages', pageNames);
     }
 

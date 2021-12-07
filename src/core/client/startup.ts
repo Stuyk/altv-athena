@@ -67,6 +67,7 @@ import './utility/wheelMenu';
 
 // Views
 import './views/atm';
+import './views/chat';
 import './views/characters';
 import './views/clothing';
 import './views/creator';

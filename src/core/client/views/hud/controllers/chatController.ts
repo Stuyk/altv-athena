@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 
 import { KEY_BINDS } from '../../../../shared/enums/KeyBinds';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/System';
 import { View_Events_Chat } from '../../../../shared/enums/Views';
 import { Command } from '../../../../shared/interfaces/Command';
 import { KeybindController } from '../../../events/keyup';
@@ -23,10 +22,10 @@ export class ChatController {
      * @memberof ChatController
      */
     static registerKeybind() {
-        KeybindController.registerKeybind({
-            key: KEY_BINDS.CHAT,
-            singlePress: ChatController.focusChat,
-        });
+        // KeybindController.registerKeybind({
+        //     key: KEY_BINDS.CHAT,
+        //     singlePress: ChatController.focusChat,
+        // });
     }
 
     static focusChat(): void {
@@ -152,6 +151,6 @@ export class ChatController {
     }
 }
 
-alt.onServer(View_Events_Chat.Append, ChatController.receive);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatController.registerKeybind);
-alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, ChatController.populateCommands);
+// alt.onServer(View_Events_Chat.Append, ChatController.receive);
+// alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatController.registerKeybind);
+// alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, ChatController.populateCommands);

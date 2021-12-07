@@ -86,6 +86,7 @@ export default defineComponent({
         return {
             pages: [] as Array<IPageData>,
             pageBindings: [...components.generateComponentList()],
+            setPagesQueue: [],
             devMode: false,
         };
     },
@@ -136,6 +137,8 @@ export default defineComponent({
         closePage(page: string) {
             this.closePages([page]);
 
+            console.log(`[Vue] Closed Page -> ${page}`);
+
             if (!('alt' in window)) {
                 return;
             }
@@ -158,13 +161,12 @@ export default defineComponent({
                         element.classList.replace('fade-in', 'fade-out');
                     }
 
+                    console.log(`[Vue] Closed Page -> ${currentPages[i].name}`);
                     currentPages.splice(i, 1);
                     continue;
                 }
 
-                setTimeout(() => {
-                    this.pages = currentPages;
-                }, 500);
+                this.pages = currentPages;
                 return;
             }
 
@@ -190,6 +192,7 @@ export default defineComponent({
                 pagesToShow.find((pageName) => pageName === page.name),
             );
 
+            console.log(`[Vue] Opened Pages -> ${JSON.stringify(foundPages.map((x) => x.name))}`);
             this.pages = foundPages;
         },
         isDevMenu() {
