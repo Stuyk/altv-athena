@@ -5,11 +5,11 @@ import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { IFactionClient } from '../../shared/interfaces/IFactionClient';
 import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
 import { IResponse } from '../../shared/interfaces/IResponse';
+import { WebViewController } from '../extensions/view2';
 
 const url = `http://assets/webview/client/factions/index.html`;
 let view: View;
@@ -38,12 +38,12 @@ class FactionsView implements ViewModel {
         view.on(View_Events_Factions.Close, FactionsView.close);
         view.on(View_Events_Factions.Bus, FactionsView.bus);
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
     }
 
     static close() {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
         alt.emitServer(View_Events_Factions.Close);
 
         if (!view) {

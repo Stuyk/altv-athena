@@ -57,7 +57,7 @@ export default defineComponent({
             userInput: '',
             chatbox: {
                 timestamp: true,
-                shouldFade: false,
+                shouldFade: true,
                 msgLength: 64,
             },
             historyIndex: -1,
@@ -232,6 +232,7 @@ export default defineComponent({
         processInput() {
             const originalMessage = this.userInput;
             this.hideInput();
+            this.suggestions = [];
 
             // Append Commands to History
             if (originalMessage.charAt(0) === '/') {
@@ -275,7 +276,7 @@ export default defineComponent({
          */
         isLocalCommand(message: string): boolean {
             if (message === '/chatclear' && 'alt' in window) {
-                alt.emit('chat:Clear');
+                alt.emit(`${ComponentName}:Clear`);
                 this.userInput = '';
                 this.handleInput();
                 return true;
@@ -363,9 +364,6 @@ export default defineComponent({
                 .replace('/', '');
 
             const suggestions = [];
-
-            console.log(this.commands);
-
             for (let i = 0; i < this.commands.length; i++) {
                 const cmd = this.commands[i];
                 if (!cmd.description.includes(parsedCommand)) {
@@ -383,8 +381,6 @@ export default defineComponent({
 
                 suggestions.push(cmd);
             }
-
-            console.log(suggestions);
 
             this.suggestions = suggestions;
         },

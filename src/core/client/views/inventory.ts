@@ -16,7 +16,6 @@ import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { Timer } from '../utility/timers';
 import { waitForFalse, waitFor } from '../utility/wait';
-import { BaseHUD } from './hud/hud';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const PAGE_NAME = 'Inventory';
@@ -59,9 +58,10 @@ export class InventoryController implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
+        WebViewController.setOverlaysVisible(false);
+
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
-        BaseHUD.setHudVisibility(false);
     }
 
     static handleProcess(selectedSlot, endSlot, page, hash): void {
@@ -119,7 +119,7 @@ export class InventoryController implements ViewModel {
         camera2 = null;
 
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Update`, InventoryController.ready);

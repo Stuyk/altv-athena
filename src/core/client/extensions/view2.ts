@@ -8,6 +8,7 @@ let _isReady: boolean = false;
 let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
+let _overlays: Array<{ name: string; callback: (isVisible: boolean) => void }> = [];
 
 export class WebViewController {
     /**
@@ -32,6 +33,43 @@ export class WebViewController {
             _webview.on('load', () => {
                 alt.log(`WebView has mounted successfully.`);
             });
+        }
+    }
+
+    /**
+     * Components like Chat, HUD, etc. all need to be displayed at once.
+     * You can register additional Overlays you want to toggle here.
+     *
+     * Requires a callback to toggle on / off your page.
+     * @static
+     * @param {string} pageName
+     * @param {(isVisible: boolean) => void} callback
+     * @memberof WebViewController
+     */
+    static registerOverlay(pageName: string, callback: (isVisible: boolean) => void) {
+        const index = _overlays.findIndex((x) => x.name === pageName);
+        if (index >= 0) {
+            _overlays[index] = {
+                name: pageName,
+                callback,
+            };
+        } else {
+            _overlays.push({
+                name: pageName,
+                callback,
+            });
+        }
+    }
+
+    /**
+     * Trigger this to hide/show all overlays like Chat, HUD, etc.
+     * @static
+     * @param {boolean} value
+     * @memberof WebViewController
+     */
+    static setOverlaysVisible(value: boolean) {
+        for (let i = 0; i < _overlays.length; i++) {
+            _overlays[i].callback(value);
         }
     }
 

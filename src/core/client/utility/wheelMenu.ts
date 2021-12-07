@@ -7,7 +7,7 @@ import { Vector2 } from '../../shared/interfaces/Vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
 import { Timer } from './timers';
-import { BaseHUD } from '../views/hud/hud';
+import { WebViewController } from '../extensions/view2';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -70,7 +70,7 @@ export class WheelMenu {
         interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
         native.triggerScreenblurFadeIn(250);
         native.displayRadar(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
         alt.Player.local.isWheelMenuOpen = true;
 
         if (setMouseToCenter) {
@@ -94,7 +94,7 @@ export class WheelMenu {
         alt.Player.local.isWheelMenuOpen = false;
         native.triggerScreenblurFadeOut(100);
         native.displayRadar(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
     }
 
     static render() {

@@ -32,25 +32,6 @@ export default defineComponent({
     computed: {
         getMessage() {
             return this.colorify(this.message);
-
-            if (!this.message) {
-                return '&nbsp;';
-            }
-
-            return this.message;
-
-            if (this.message.length <= this.msgSize && this.message.length <= this.splitLength) {
-                return this.colorify(this.message);
-            }
-
-            let a = this.message.slice(0, this.splitLength);
-            let b = '<br />';
-            let c = this.message.slice(
-                this.splitLength + 1,
-                this.message.length > this.msgSize ? this.msgSize : this.message.length,
-            );
-
-            return this.colorify(`${a}${b}${c}`);
         },
         getClass() {
             if (this.fade) {
@@ -116,7 +97,7 @@ export default defineComponent({
     font-weight: 600;
     overflow-wrap: break-word;
     overflow: visible;
-    text-align: left;
+    text-align: justify;
     width: 100%;
     margin-bottom: 14px;
 }

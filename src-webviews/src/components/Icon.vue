@@ -21,6 +21,11 @@ export default defineComponent({
             type: Boolean,
             required: false,
         },
+        shadow: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     computed: {
         dynamicClass() {
@@ -47,6 +52,10 @@ export default defineComponent({
                 style += ' font-size: 16px !important;';
             } else {
                 style += ` font-size: ${this.size}px !important;`;
+            }
+
+            if (this.shadow) {
+                style += `text-shadow: 1px 1px black !important;`;
             }
 
             return style;

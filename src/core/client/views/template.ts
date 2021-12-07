@@ -3,7 +3,6 @@ import * as alt from 'alt-client';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'Template';
@@ -28,7 +27,7 @@ class TemplateView implements ViewModel {
 
         // Turn off game controls, hide the hud.
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
 
         // Let the rest of the script know this menu is open.
         alt.Player.local.isMenuOpen = true;
@@ -36,7 +35,7 @@ class TemplateView implements ViewModel {
 
     static async close() {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
 
         // Turn off bound events.
         // If we do not turn them off we get duplicate event behavior.

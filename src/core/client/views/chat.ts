@@ -15,6 +15,8 @@ const PAGE_NAME = 'Chat';
 const messages: Array<IMessage> = [];
 let commands: Array<Partial<Command>> = [];
 let isReady = false;
+let isDisabled = false;
+let hasRegistered = false;
 
 interface IMessage {
     message: string;
@@ -34,7 +36,23 @@ class ChatView implements ViewModel {
         });
     }
 
+    static async setVisible(value: boolean) {
+        isDisabled = !value;
+
+        if (!isDisabled) {
+            ChatView.open();
+            return;
+        }
+
+        WebViewController.closePages([PAGE_NAME]);
+    }
+
     static async open() {
+        if (!hasRegistered) {
+            WebViewController.registerOverlay(PAGE_NAME, ChatView.setVisible);
+            hasRegistered = true;
+        }
+
         const view = await WebViewController.get();
         if (isReady) {
             view.off(`${PAGE_NAME}:Ready`, ChatView.ready);
@@ -56,7 +74,19 @@ class ChatView implements ViewModel {
     }
 
     static async focus() {
-        if (isAnyMenuOpen(false)) {
+        if (alt.Player.local.isActionMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isWheelMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isChatOpen) {
             return;
         }
 

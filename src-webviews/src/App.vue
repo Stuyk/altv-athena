@@ -84,9 +84,9 @@ export default defineComponent({
     },
     data() {
         return {
+            isClosingPage: false,
             pages: [] as Array<IPageData>,
             pageBindings: [...components.generateComponentList()],
-            setPagesQueue: [],
             devMode: false,
         };
     },
@@ -134,6 +134,18 @@ export default defineComponent({
 
             alt.emit('activePages', activePages);
         },
+        isPageCloseReady(): Promise<void> {
+            return new Promise((r: Function) => {
+                const interval = setInterval(() => {
+                    if (this.isClosingPage) {
+                        return;
+                    }
+
+                    clearInterval(interval);
+                    r();
+                }, 100);
+            });
+        },
         closePage(page: string) {
             this.closePages([page]);
 
@@ -147,7 +159,13 @@ export default defineComponent({
         },
         // Turn off all pages
         // Define null or undefined to hide everything.
-        closePages(pagesToHide: Array<string> = null) {
+        async closePages(pagesToHide: Array<string> = null) {
+            if (this.isClosingPage) {
+                await this.isPageCloseReady();
+            }
+
+            this.isClosingPage = true;
+
             // Hide All Defined Pages
             if (pagesToHide && Array.isArray(pagesToHide)) {
                 const currentPages = [...this.pages];
@@ -167,11 +185,13 @@ export default defineComponent({
                 }
 
                 this.pages = currentPages;
+                this.isClosingPage = false;
                 return;
             }
 
             // Just Hide All Pages
             this.pages = [];
+            this.isClosingPage = false;
         },
         overridePages(pageName: string) {
             const foundPages = this.pageBindings.filter((page) => page.name === pageName);
@@ -182,18 +202,33 @@ export default defineComponent({
 
             this.pages = foundPages;
         },
-        setPages(pagesToShow: Array<string>) {
+        async setPages(pagesToShow: Array<string>) {
             if (!pagesToShow || !Array.isArray(pagesToShow)) {
                 console.error(`Failed to set any pages.`);
                 return;
+            }
+
+            if (this.isClosingPage) {
+                await this.isPageCloseReady();
             }
 
             const foundPages = this.pageBindings.filter((page) =>
                 pagesToShow.find((pageName) => pageName === page.name),
             );
 
-            console.log(`[Vue] Opened Pages -> ${JSON.stringify(foundPages.map((x) => x.name))}`);
-            this.pages = foundPages;
+            let newPagesArray = [];
+            const combined = this.pages.concat(foundPages);
+            for (let i = 0; i < combined.length; i++) {
+                const page = combined[i];
+                if (newPagesArray.findIndex((x) => x.name === page.name) >= 0) {
+                    continue;
+                }
+
+                newPagesArray.push(page);
+            }
+
+            console.log(`[Vue] Opened Pages -> ${JSON.stringify(newPagesArray.map((x) => x.name))}`);
+            this.pages = newPagesArray;
         },
         isDevMenu() {
             if (!('alt' in window)) {
@@ -247,7 +282,7 @@ export default defineComponent({
 }
 
 .devMenu {
-    position: fixed;
+    position: absolute;
     left: 0px;
     top: 0px;
     min-width: 5px;

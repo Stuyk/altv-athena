@@ -1,17 +1,18 @@
 <template>
     <div class="suggestions">
         <div
-            class="suggestion pa-1"
+            class="suggestion pa-2"
             v-for="(suggestion, index) in getSuggestions"
             @click="$emit('suggestion-select', `/${suggestion.name}`)"
             :key="index"
         >
             <template v-if="index === 0">
-                <span class="blue--text">[TAB] {{ suggestion.description }}</span>
+                <div>
+                    <kbd class="black white--text pl-2 pr-2">TAB</kbd>
+                    &nbsp;<span class="orange--text">{{ suggestion.description }}</span>
+                </div>
             </template>
-            <template v-else>
-                {{ suggestion.description }}
-            </template>
+            <template v-else> > {{ suggestion.description }} </template>
         </div>
     </div>
 </template>
@@ -31,7 +32,7 @@ export default defineComponent({
     },
     computed: {
         getSuggestions() {
-            return this.suggestions.slice(0, 5);
+            return this.suggestions.slice(0, 4);
         },
     },
 });
@@ -44,23 +45,20 @@ export default defineComponent({
     flex-direction: column;
     color: white;
     user-select: none;
-    font-family: 'Roboto';
-    font-weight: 500;
     overflow-wrap: break-word;
     text-align: left;
     text-shadow: 1px 1px black;
-    letter-spacing: 0.05em;
-    text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000,
-        -1px 1px 0 #000, -1px 0 0 #000;
     -webkit-font-smoothing: antialiased;
-    background: rgba(0, 0, 0, 0.5);
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 
 .suggestion {
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 14px;
+    font-family: 'Arial';
+    font-weight: 600;
+    width: 100%;
 }
 
 .suggestion:hover {

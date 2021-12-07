@@ -19,7 +19,6 @@
     "resources": [
         "webview",
         "webviews",
-        "webserver", 
         "core"
     ],
     "tags": [
