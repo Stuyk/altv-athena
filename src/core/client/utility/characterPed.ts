@@ -107,6 +107,10 @@ export class PedCharacter {
      * @memberof PedCharacter
      */
     static get(): number {
+        if (id === undefined || id === null) {
+            return -1;
+        }
+
         return id;
     }
 

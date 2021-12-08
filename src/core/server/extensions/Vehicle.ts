@@ -73,6 +73,13 @@ declare module 'alt-server' {
         isBeingPushed?: boolean;
 
         /**
+         * Get or set the vehicle pusher.
+         * @type {number}
+         * @memberof Vehicle
+         */
+        vehiclePusherID?: number;
+
+        /**
          * Override the isTemporary flag from.
          * Will not delete the vehicle if this is enabled.
          * @type {boolean}

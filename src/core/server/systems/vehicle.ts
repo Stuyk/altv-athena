@@ -200,6 +200,20 @@ export class VehicleSystem {
         VehicleSystem.stopPush(player);
     }
 
+    static enter(player: alt.Player, vehicle: alt.Vehicle) {
+        if (!vehicle.isBeingPushed) {
+            return;
+        }
+
+        VehicleSystem.stopPush(vehicle);
+    }
+
+    static leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
+        if (seat === 1) {
+            VehicleFuncs.update(vehicle);
+        }
+    }
+
     /**
      * Check if a vehicle is locked.
      * @static
@@ -490,6 +504,7 @@ export class VehicleSystem {
         }
 
         player.isPushingVehicle = true;
+        vehicle.vehiclePusherID = player.id;
         vehicle.isBeingPushed = true;
         vehicle.setNetOwner(player);
         player.attachTo(vehicle, 0, 6286, position, new alt.Vector3(0, 0, 0), true, false);
@@ -504,21 +519,32 @@ export class VehicleSystem {
      * @return {*}
      * @memberof VehicleSystem
      */
-    static stopPush(player: alt.Player) {
-        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+    static stopPush(entity: alt.Player | alt.Vehicle | number) {
+        if (entity instanceof alt.Vehicle) {
+            const someVehicle = entity as alt.Vehicle;
+            const target = alt.Player.all.find((x) => x.id === someVehicle.vehiclePusherID);
+            entity = target;
+        }
+
+        if (typeof entity === 'number') {
+            const target = alt.Player.all.find((x) => x.id === entity);
+            entity = target;
+        }
+
+        const vehicle = getClosestEntity<alt.Vehicle>(entity.pos, entity.rot, alt.Vehicle.all, 1);
 
         if (vehicle && vehicle.valid) {
             vehicle.resetNetOwner();
             vehicle.isBeingPushed = false;
         }
 
-        if (!player || !player.valid) {
+        if (!entity || !entity.valid) {
             return;
         }
 
-        player.isPushingVehicle = false;
-        player.detach();
-        alt.emitClient(player, VEHICLE_EVENTS.STOP_PUSH);
+        entity.isPushingVehicle = false;
+        entity.detach();
+        alt.emitClient(entity, VEHICLE_EVENTS.STOP_PUSH);
     }
 
     /**
@@ -597,6 +623,7 @@ alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
 alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
 
 alt.on('playerEnteringVehicle', VehicleSystem.entering);
-// alt.on('playerLeftVehicle', VehicleSystem.leave);
+alt.on('playerEnteredVehicle', VehicleSystem.enter);
+alt.on('playerLeftVehicle', VehicleSystem.leave);
 
 VehicleSystem.init();

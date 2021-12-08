@@ -9,6 +9,7 @@ import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
 
 import './push';
+import { PushVehicle } from './push';
 
 export class VehicleController {
     /**
@@ -112,6 +113,31 @@ export class VehicleController {
     static enableSeatBelt(value: boolean = true) {
         const seatBeltStatus = value ? false : true;
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
+    }
+
+    static handleVehicleDisables() {
+        if (!alt.Player.local || !alt.Player.local.valid) {
+            return;
+        }
+
+        if (!alt.Player.local.vehicle && native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID)) {
+            native.clearPedTasks(alt.Player.local.scriptID);
+            native.clearPedSecondaryTask(alt.Player.local.scriptID);
+        }
+
+        let isLocked = false;
+        if (alt.Player.local.vehicle) {
+            isLocked = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
+        }
+
+        const isDead = alt.Player.local.meta.isDead;
+        const isPushing = PushVehicle.isPushing();
+        if (!isDead && !isLocked && !isPushing) {
+            return;
+        }
+
+        native.disableControlAction(0, 23, true); // F - Enter
+        native.disableControlAction(0, 75, true); // F - Exit
     }
 }
 
