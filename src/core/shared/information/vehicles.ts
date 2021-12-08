@@ -5156,7 +5156,17 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
+        seats: 1,
+        storage: 24,
+    },
+    {
+        display: 'Formula',
+        name: 'formula2',
+        type: VEHICLE_TYPE.VEHICLE,
+        class: VEHICLE_CLASS.SUPER,
+        sell: true,
+        price: 2500000,
+        seats: 1,
         storage: 24,
     },
     {
@@ -6988,5 +6998,5 @@ export const VehicleData: Array<VehicleInfo> = [
         price: 99999999999,
         seats: 2,
         storage: 24,
-    }
+    },
 ];

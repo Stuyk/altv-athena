@@ -411,13 +411,17 @@ export class VehicleSystem {
     static findOpenSeat(vehicle: alt.Vehicle): number {
         const vehicleData = VehicleData.find((x) => alt.hash(x.name) === vehicle.model);
         if (!vehicleData) {
+            if (vehicle.modelName) {
+                console.log(`Vehicle with ${vehicle.modelName} does not have an information entry.`);
+                console.log(`Please add it to: src/core/shared/information/vehicles.ts`);
+            }
+
             return null;
         }
 
         // Start at -1 for driver.
         // Check if the passengers array contains the seat.
         // If it does not contain the seat. Use it.
-
         for (let i = -1; i < vehicleData.seats; i++) {
             const index = vehicle.passengers.findIndex((x) => x.seat === i);
 
