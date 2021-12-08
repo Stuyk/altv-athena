@@ -8,6 +8,11 @@ function handleReload() {
     let attempts = 0;
     let interval = alt.setInterval(() => {
         const [_unk, _hash] = native.getCurrentPedWeapon(alt.Player.local.scriptID, undefined, undefined);
+        if (alt.Player.local.vehicle) {
+            alt.clearInterval(interval);
+            native.setAmmoInClip(alt.Player.local.scriptID, _hash, 9999);
+            return;
+        }
 
         if (attempts >= 4) {
             alt.clearInterval(interval);

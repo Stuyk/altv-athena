@@ -27,8 +27,10 @@ function openMenu() {
     const options: Array<IWheelItem> = [];
 
     if (!alt.Player.local.vehicle) {
+        const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
+
         // Not Pushing & Vehicle is Currently Unlocked
-        if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2) {
+        if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2 && !isDestroyed) {
             options.push({
                 name: 'Push',
                 callback: PushVehicle.start,

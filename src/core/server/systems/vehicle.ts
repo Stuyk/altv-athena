@@ -215,6 +215,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (vehicle.engineHealth <= 0) {
+            return;
+        }
+
         const dist = distance(vehicle.pos, player.pos);
         if (dist > DEFAULT_CONFIG.VEHICLE_MAX_DISTANCE_TO_ENTER) {
             return;
@@ -538,6 +542,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (player.vehicle.engineHealth <= 0) {
+            return;
+        }
+
         if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
@@ -594,6 +602,10 @@ export class VehicleSystem {
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
 
         if (!vehicle) {
+            return;
+        }
+
+        if (vehicle.engineHealth <= 0) {
             return;
         }
 
@@ -668,6 +680,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (vehicle.engineHealth <= 0) {
+            return;
+        }
+
         if (!VehicleFuncs.hasOwnership(player, vehicle)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
@@ -738,6 +754,10 @@ export class VehicleSystem {
 
         const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
         if (!vehicle || !vehicle.valid) {
+            return false;
+        }
+
+        if (vehicle.engineHealth <= 0) {
             return false;
         }
 
@@ -825,6 +845,10 @@ export class VehicleSystem {
         if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (vehicle.engineHealth <= 0) {
             return;
         }
 

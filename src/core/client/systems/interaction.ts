@@ -167,12 +167,7 @@ export class InteractionController {
             if (vehicleDistance <= SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
                 if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
-                    drawText2D(
-                        isVehicleLocked ? 'Locked' : 'Unlocked',
-                        newPosition,
-                        0.4,
-                        new alt.RGBA(255, 255, 255, 125),
-                    );
+                    drawText3D(isVehicleLocked ? '~r~L' : '~g~U', newPosition, 0.4, new alt.RGBA(255, 255, 255, 125));
                 }
 
                 if (!isVehicleLocked) {

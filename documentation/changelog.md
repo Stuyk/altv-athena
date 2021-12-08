@@ -138,6 +138,11 @@ description: List of all the changes and current versions.
 + Added Polygon Areas with ColShape Ability
 + Added Test Polygon Shape
 + Add Entity Validity to getEntityHeading
++ Fixed Slow Shooting in Vehicles
++ Fix Entering Vehicle when Destroyed
++ Fix Accessing Vehicle Storage when Destroyed
++ Fix Pushing Vehicle when Destroyed
++ Fix Toggling Doors when Vehicle Destroyed
 ```
 
 ## 2.0.3
