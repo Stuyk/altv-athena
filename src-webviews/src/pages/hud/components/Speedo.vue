@@ -26,10 +26,10 @@
                         <em>E</em>
                     </div>
                     <div class="lock" :class="getLockClass">
-                        <em>{{ this.lock ? 'L' : 'U' }}</em>
+                        <em>{{ lock ? 'L' : 'U' }}</em>
                     </div>
                     <div class="gear">
-                        <em>{{ this.gear === 0 ? 'R' : this.gear }}</em>
+                        <em>{{ gear === 0 ? 'R' : gear }}</em>
                     </div>
                 </div>
                 <div class="metrics">

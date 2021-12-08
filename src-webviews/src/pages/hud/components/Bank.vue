@@ -1,7 +1,7 @@
 <template>
     <div class="stat-wrapper">
         <Icon :shadow="true" class="amber--text text--accent-4 mr-1" icon="icon-wallet" :size="14" />
-        <span class="bank amber--text text--accent-4">{{ this.value.toLocaleString() }}</span>
+        <span class="bank amber--text text--accent-4">{{ value.toLocaleString() }}</span>
     </div>
 </template>
 

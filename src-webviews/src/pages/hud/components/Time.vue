@@ -1,6 +1,6 @@
 <template>
     <div class="stat-wrapper">
-        <span class="time">{{ this.value.toLocaleString() }}</span>
+        <span class="time">{{ value.toLocaleString() }}</span>
     </div>
 </template>
 
