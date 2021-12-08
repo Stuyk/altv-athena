@@ -212,6 +212,21 @@ export class VehicleSystem {
         if (seat === 1) {
             VehicleFuncs.update(vehicle);
         }
+
+        // Prune Temporary Vehicles
+        if (!vehicle.isTemporary || vehicle.overrideTemporaryDeletion) {
+            return;
+        }
+
+        if (seat !== 1) {
+            return;
+        }
+
+        alt.setTimeout(() => {
+            try {
+                vehicle.destroy();
+            } catch (err) {}
+        }, 500);
     }
 
     /**
