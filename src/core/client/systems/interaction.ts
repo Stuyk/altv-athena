@@ -166,19 +166,20 @@ export class InteractionController {
 
             if (vehicleDistance <= SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE) {
                 const newPosition = vehicle.pos.add(0, 0, 1);
-                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
+
+                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true && !isDestroyed) {
                     drawText3D(isVehicleLocked ? '~r~L' : '~g~U', newPosition, 0.4, new alt.RGBA(255, 255, 255, 125));
                 }
 
-                if (!isVehicleLocked) {
+                if (!isVehicleLocked && !isDestroyed) {
                     // Press 'F' to enter vehicle
                     const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
-
                     const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_FUNCS, enterText);
                     interactionInfo.push(newText);
                 }
 
-                if (!isVehicleLocked && isInBack) {
+                if (!isVehicleLocked && isInBack && !isDestroyed) {
                     // Press 'U' for Options
                     const optionsText = 'Options';
                     const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_OPTIONS, optionsText);
@@ -186,7 +187,7 @@ export class InteractionController {
                 }
 
                 // Press 'X' to lock vehicle
-                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
+                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true && !isDestroyed) {
                     const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
                     const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_LOCK, lockText);
                     interactionInfo.push(newText);

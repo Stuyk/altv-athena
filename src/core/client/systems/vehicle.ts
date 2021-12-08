@@ -18,11 +18,6 @@ export class VehicleController {
      */
     static registerKeybinds() {
         KeybindController.registerKeybind({
-            key: KEY_BINDS.VEHICLE_FUNCS,
-            singlePress: VehicleController.emitAction,
-        });
-
-        KeybindController.registerKeybind({
             key: KEY_BINDS.VEHICLE_ENGINE,
             singlePress: VehicleController.emitEngine,
         });
@@ -31,19 +26,6 @@ export class VehicleController {
             key: KEY_BINDS.VEHICLE_LOCK,
             singlePress: VehicleController.emitLock,
         });
-    }
-
-    /**
-     * Called when the player presses the proper key near or inside of a vehicle.
-     * @static
-     * @memberof VehicleController
-     */
-    static emitAction() {
-        if (isAnyMenuOpen()) {
-            return;
-        }
-
-        alt.emitServer(VEHICLE_EVENTS.ACTION);
     }
 
     /**

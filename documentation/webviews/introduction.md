@@ -1,6 +1,6 @@
 # WebViews
 
-WebViews are a way for you to easily create custom HTML, CSS, and JavaScript based menus. However, Athena has done a lot of the heavy lifting to get you started with the best industry practices.
+WebViews are a way for you to easily create custom HTML, CSS, and JavaScript based menus. However, Athena has done a lot of the heavy lifting to get you started with the best industry practices. Keep in mind that regular WebViews are not supported anymore and you will need to switch your tooling over to Vue 3 in Athena `3.0.0+`. This keeps everything meshed together and ensures compatability with the entire framework.
 
 Athena currently uses `Vite` which is a way to write `Vue 3` based menus and all inside a single page application.
 
@@ -18,6 +18,12 @@ Athena currently uses `Vite` which is a way to write `Vue 3` based menus and all
 
 * Learning Curve for Vue 3
 * Hard to Understand Making a Custom Page
+
+## Before Working with Vue
+
+Install this extension in VSCode
+
+[https://marketplace.visualstudio.com/items?itemName=octref.vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 
 ## How to Start Development Mode
 

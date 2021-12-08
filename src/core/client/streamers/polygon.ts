@@ -217,24 +217,14 @@ function handleDrawPolygons() {
         if (polygon.streamPolygon.debug) {
             const color = isInside ? new alt.RGBA(0, 255, 0, 255) : new alt.RGBA(255, 0, 0, 255);
             const lines = polygon.getDrawLines();
+            const maxYPos = polygon.getMaxY();
             for (let i = 0; i < lines.length; i++) {
                 const a = lines[i].a;
                 const b = lines[i].b;
                 native.drawLine(a.x, a.y, a.z, b.x, b.y, b.z, color.r, color.g, color.b, color.a);
+                native.drawLine(a.x, a.y, a.z, a.x, a.y, maxYPos.z, color.r, color.g, color.b, color.a);
+                native.drawLine(a.x, a.y, maxYPos.z, b.x, b.y, maxYPos.z, color.r, color.g, color.b, color.a);
             }
-
-            native.drawLine(
-                center.x,
-                center.y,
-                center.z,
-                center.x,
-                center.y,
-                center.z + 2,
-                color.r,
-                color.g,
-                color.b,
-                color.a,
-            );
         }
     }
 }

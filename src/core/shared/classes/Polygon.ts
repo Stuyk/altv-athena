@@ -103,7 +103,32 @@ export default class Polygon {
             }
         }
 
+        if (this.streamPolygon.maxY) {
+            const center = this.getCenter();
+            if (position.z < center.z - 1.5 || position.z > center.z + this.streamPolygon.maxY) {
+                inside = false;
+            }
+        }
+
         return inside;
+    }
+
+    getMaxY() {
+        const center = this.getCenter();
+
+        if (!this.streamPolygon.maxY) {
+            return {
+                x: center.x,
+                y: center.y,
+                z: center.z + 100,
+            };
+        }
+
+        return {
+            x: center.x,
+            y: center.y,
+            z: center.z + this.streamPolygon.maxY,
+        };
     }
 
     /**

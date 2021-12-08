@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { Timer } from '../utility/timers';
+import { PushVehicle } from './push';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
 
@@ -42,9 +43,17 @@ function disableDefaultBehavior(): void {
     native.disableControlAction(0, 15, true);
 
     // Disable Default Controls
-    native.disableControlAction(0, 23, true); // F
-    native.disableControlAction(0, 75, true); // F
     native.disableControlAction(0, 104, true); // H
+
+    // Disable Exiting Locked Vehicle, or using vehicle while dead
+    if (
+        (alt.Player.local.vehicle && native.getVehicleDoorLockStatus(alt.Player.local.scriptID) === 2) ||
+        alt.Player.local.meta.isDead ||
+        PushVehicle.isPushing()
+    ) {
+        native.disableControlAction(0, 23, true); // F
+        native.disableControlAction(0, 75, true); // F
+    }
 
     // Disable default vehicle behavior.
     if (native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID)) {

@@ -45,6 +45,16 @@ export interface IStreamPolygon {
     enterEventCall?: EventCall;
 
     /**
+     * Maximum Y Position for Polygon
+     * Used to prevent triggering above a certain height.
+     * Uses the Z of the center point as the basis.
+     * Player height is roughly 2 so a building's internal height is roughly 6 or 7.
+     * @type {number}
+     * @memberof IStreamPolygon
+     */
+    maxY?: number;
+
+    /**
      * An event to call when the player leaves the colshape.
      * @type {EventCall}
      * @memberof IStreamPolygon

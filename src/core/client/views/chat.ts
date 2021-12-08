@@ -99,6 +99,7 @@ class ChatView implements ViewModel {
         disableAllControls(true);
 
         const view = await WebViewController.get();
+        WebViewController.showCursor(true);
         view.emit(`${PAGE_NAME}:Focus`);
         view.focus();
     }
@@ -148,6 +149,7 @@ class ChatView implements ViewModel {
         alt.Player.local.isChatOpen = false;
 
         const view = await WebViewController.get();
+        WebViewController.showCursor(false);
         view.unfocus();
 
         if (!message) {

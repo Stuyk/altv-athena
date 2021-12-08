@@ -18,6 +18,9 @@ import { Blip } from '../../shared/interfaces/Blip';
 import { Interaction } from '../interface/Interaction';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { CurrencyTypes } from '../../shared/enums/Currency';
+import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
+import { ServerPolygonController } from '../streamers/polygon';
+import { POLYGON_EVENTS } from '../../shared/enums/PolygonEvents';
 
 // Do not change order
 const icons = [
@@ -96,6 +99,22 @@ class ClothingFunctions {
                 description: 'Browse Clothing Store',
                 type: 'clothing-store',
             };
+
+            if (clothingStores[i].vertices) {
+                const polygon: IStreamPolygon = {
+                    uid,
+                    pos: position,
+                    vertices: clothingStores[i].vertices,
+                    debug: true,
+                    enterEventCall: {
+                        eventName: POLYGON_EVENTS.CLOTHING_SHOP_ENTER,
+                        isServer: true,
+                    },
+                    maxY: 2.5,
+                };
+
+                ServerPolygonController.append(polygon);
+            }
 
             const clothingData = deepCloneObject<IClothingStore>(DefaultClothingData);
             clothingData.uid = uid;
@@ -314,8 +333,18 @@ class ClothingFunctions {
         playerFuncs.sync.inventory(player);
         playerFuncs.emit.sound2D(player, 'item_purchase');
     }
+
+    static enter(player: alt.Player, stream: IStreamPolygon) {
+        playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
+    }
+
+    static leave(player: alt.Player, stream: IStreamPolygon) {
+        // playerFuncs.emit.message(player, `You have left: ${stream.uid}`);
+    }
 }
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, ClothingFunctions.init);
 alt.onClient(View_Events_Clothing.Exit, ClothingFunctions.exit);
 alt.onClient(View_Events_Clothing.Purchase, ClothingFunctions.purchase);
+alt.onClient(POLYGON_EVENTS.CLOTHING_SHOP_ENTER, ClothingFunctions.enter);
+alt.onClient(POLYGON_EVENTS.CLOTHING_SHOP_LEAVE, ClothingFunctions.leave);
