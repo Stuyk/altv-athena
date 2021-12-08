@@ -23,8 +23,6 @@ export class PedController {
     }
 
     static append(pedData: IPed) {
-        console.log(pedData);
-
         if (!pedData.uid) {
             alt.logError(`(${JSON.stringify(pedData.pos)}) Ped is missing uid.`);
             return;
@@ -46,8 +44,6 @@ export class PedController {
 
     static populate(peds: Array<IPed>) {
         addedPeds = peds;
-
-        console.log(peds);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
