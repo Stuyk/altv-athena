@@ -3,7 +3,6 @@ import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/AthenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { View_Events_Discord } from '../../shared/enums/Views';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
@@ -74,7 +73,7 @@ export class LoginController {
         }
 
         player.discord = data as DiscordUser;
-        alt.emitClient(player, View_Events_Discord.Close);
+        alt.emitClient(player, SYSTEM_EVENTS.DISCORD_CLOSE);
 
         // Used for DiscordToken skirt.
         if (!account) {
