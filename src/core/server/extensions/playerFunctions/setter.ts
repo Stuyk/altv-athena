@@ -98,11 +98,6 @@ async function firstConnect(player: alt.Player): Promise<void> {
         : `http://assets/webviews/index.html`;
     alt.emitClient(player, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
-    // Used to set the custom View instance with a Web Server URL.
-    // REMOVE WHEN CLOSING OUT 3.0.0 -- NO LONGER NEEDED - STUYK PLS LOOK AT THIS
-    const webServerPath = alt.hasResource(`webserver`) ? `http://assets/webserver/files` : config.WEBSERVER_IP;
-    alt.emitClient(player, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
-
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
     // First ID is 0. We add 1 so everyone gets a unique dimension.

@@ -67,12 +67,14 @@ import './utility/wheelMenu';
 
 // Views
 import './views/atm';
+import './views/audio';
+import './views/chat';
 import './views/characters';
 import './views/clothing';
 import './views/creator';
 import './views/factions';
 import './views/garage';
-import './views/hud/hud';
+import './views/hud';
 import './views/inventory';
 import './views/job';
 import './views/login';

@@ -13,18 +13,22 @@ import Login from './login/Login.vue';
 import MultiPageExample from './multiPageExample/MultiPageExample.vue';
 import Storage from './storage/Storage.vue';
 import Chat from './chat/Chat.vue';
+import Hud from './hud/Hud.vue';
+import Audio from './audio/Audio.vue';
 
 // Append components here...
 // All components that you want to load...
 // New interfaces, menus, etc.
 const componentList = {
     Atm: shallowRef(Atm),
+    Audio: shallowRef(Audio),
     CharacterCreator: shallowRef(CharacterCreator),
     CharacterSelect: shallowRef(CharacterSelect),
     Chat: shallowRef(Chat),
     Clothing: shallowRef(Clothing),
     Designs: shallowRef(Designs),
     Garage: shallowRef(Garage),
+    Hud: shallowRef(Hud),
     Icons: shallowRef(Icons),
     InputBox: shallowRef(InputBox),
     Inventory: shallowRef(Inventory),

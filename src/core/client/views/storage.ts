@@ -6,7 +6,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 
 const PAGE_NAME = 'Storage';
 
@@ -36,12 +35,12 @@ class StorageView implements ViewModel {
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
     }
 
     static async close() {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
         alt.emitServer(View_Events_Storage.Close);
 
         id = null;

@@ -54,6 +54,13 @@ export default interface IHUD {
     color: alt.RGBA;
 
     /**
+     * Skip the callback and do nothing with it.
+     * @type {boolean}
+     * @memberof IHUD
+     */
+    disabled?: boolean;
+
+    /**
      * When this function is applied it will take the data from the HUD
      * and re-route it into a different function.
      *
@@ -68,7 +75,7 @@ export default interface IHUD {
      * A callback function that should return a string value for your HUD.
      * @memberof IHUD
      */
-    callback: (self: IHUD, position: { x: number; y: number }, scale: number) => string;
+    callback: (self: IHUD, position: { x: number; y: number }, scale: number) => string | number | boolean | void;
 
     /**
      * Should this only display inside of a vehicle?
@@ -76,4 +83,12 @@ export default interface IHUD {
      * @memberof IHUD
      */
     isVehicle?: boolean;
+
+    /**
+     * Is return only?
+     * Meaning should this callback have a value returned so we can push it elsewhere
+     * @type {boolean}
+     * @memberof IHUD
+     */
+    isReturnOnly?: boolean;
 }

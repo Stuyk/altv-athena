@@ -7,7 +7,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 
 const PAGE_NAME = 'Job';
 let trigger: JobTrigger;
@@ -34,7 +33,7 @@ class JobView implements ViewModel {
 
         // Turn off game controls, hide the hud.
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
 
         // Let the rest of the script know this menu is open.
         alt.Player.local.isMenuOpen = true;
@@ -48,7 +47,7 @@ class JobView implements ViewModel {
 
     static async close() {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, JobView.ready);

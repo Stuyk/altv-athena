@@ -9,7 +9,5 @@
     "[?] ex: mongodb://username:password@127.0.0.1:27017": {},
     "MONGO_URL": null,
     "[?] Used for Ares Service Debugging": {},
-    "ARES_ENDPOINT": null,
-    "[?] Used to give the client the IP to connect to the WebServer **Deprecated": {},
-    "WEBSERVER_IP": null
+    "ARES_ENDPOINT": null
 }

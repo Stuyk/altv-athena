@@ -6,12 +6,15 @@ import { KEY_BINDS } from '../../shared/enums/KeyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
 import { View_Events_Inventory } from '../../shared/enums/Views';
+import keyboardMap from '../../shared/information/keyboardMap';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { drawText2D } from '../utility/text';
+import Minimap from '../utility/minimap';
+import { drawText2D, drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
+import { HudView } from '../views/hud';
 
 const TIME_BETWEEN_CHECKS = 500;
 let tick: number;
@@ -120,17 +123,25 @@ export class InteractionController {
         return originalText + `~y~' ${String.fromCharCode(key).toUpperCase()} ' ~w~${description} ~n~`;
     }
 
-    static getCombinedText(key: number, description: string): string {
-        return `~y~' ${String.fromCharCode(key).toUpperCase()} ' ~w~${description} ~n~`;
+    static getInteractionInfo(key: number, description: string): { keyPress: string; description: string } {
+        let legibleName = keyboardMap[key];
+        if (!legibleName) {
+            legibleName = `UNK_${key}`;
+        }
+
+        return {
+            keyPress: legibleName,
+            description,
+        };
     }
 
     static drawInteractText() {
-        const textToDraw = [];
+        const interactionInfo = [];
 
         // Display Help Text - Only will show if the player is not near any items.
         if (description && position && !alt.Player.local.closestItem) {
-            const newText = InteractionController.getCombinedText(KEY_BINDS.INTERACT, description);
-            textToDraw.push(newText);
+            const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, description);
+            interactionInfo.push(newText);
 
             if (!disableMarker) {
                 drawText2D('o', position, 0.4, new alt.RGBA(255, 255, 255, 100));
@@ -168,22 +179,22 @@ export class InteractionController {
                     // Press 'F' to enter vehicle
                     const enterText = LocaleController.get(LOCALE_KEYS.VEHICLE_ENTER_VEHICLE);
 
-                    const newText = InteractionController.getCombinedText(KEY_BINDS.VEHICLE_FUNCS, enterText);
-                    textToDraw.push(newText);
+                    const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_FUNCS, enterText);
+                    interactionInfo.push(newText);
                 }
 
                 if (!isVehicleLocked && isInBack) {
                     // Press 'U' for Options
                     const optionsText = 'Options';
-                    const newText = InteractionController.getCombinedText(KEY_BINDS.VEHICLE_OPTIONS, optionsText);
-                    textToDraw.push(newText);
+                    const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_OPTIONS, optionsText);
+                    interactionInfo.push(newText);
                 }
 
                 // Press 'X' to lock vehicle
                 if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true) {
                     const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
-                    const newText = InteractionController.getCombinedText(KEY_BINDS.VEHICLE_LOCK, lockText);
-                    textToDraw.push(newText);
+                    const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_LOCK, lockText);
+                    interactionInfo.push(newText);
                 }
             }
         } else if (alt.Player.local.vehicle) {
@@ -192,33 +203,21 @@ export class InteractionController {
             if (!engineOn) {
                 // Press 'Y' to toggle engine
                 const engineText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_ENGINE);
-                const newText = InteractionController.getCombinedText(KEY_BINDS.VEHICLE_ENGINE, engineText);
-                textToDraw.push(newText);
+                const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_ENGINE, engineText);
+                interactionInfo.push(newText);
             }
         }
 
         if (!alt.Player.local.vehicle && alt.Player.local.closestItem) {
             const groundItem = alt.Player.local.closestItem;
-            const newText = InteractionController.getCombinedText(
+            const newText = InteractionController.getInteractionInfo(
                 KEY_BINDS.INTERACT,
                 `${groundItem.item.item.name} (x${groundItem.item.item.quantity})`,
             );
-            textToDraw.push(newText);
+            interactionInfo.push(newText);
         }
 
-        if (textToDraw.length <= 0) {
-            return;
-        }
-
-        for (let i = 0; i < textToDraw.length; i++) {
-            const text = textToDraw[i];
-            drawText2D(text, { x: 0.01, y: 0.01 + i * 0.05 }, 0.5, new alt.RGBA(255, 255, 255, 255), 1);
-        }
-
-        // Draw the Help Text (Top Left)
-        // native.beginTextCommandDisplayHelp('THREESTRINGS');
-        // native.addTextComponentSubstringPlayerName(interactText);
-        // native.endTextCommandDisplayHelp(0, false, false, 0);
+        HudView.setInteractions(interactionInfo);
     }
 }
 

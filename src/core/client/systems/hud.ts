@@ -319,9 +319,17 @@ export class HudSystem {
                 continue;
             }
 
-            drawText2D(value, element.position, element.scale, element.color, element.align, element.padding);
+            drawText2D(
+                value.toString(),
+                element.position,
+                element.scale,
+                element.color,
+                element.align,
+                element.padding,
+            );
         }
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, HudSystem.init);
+// Turn on Old Hud Here
+// alt.onServer(SYSTEM_EVENTS.TICKS_START, HudSystem.init);

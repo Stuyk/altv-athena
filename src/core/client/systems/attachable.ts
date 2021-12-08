@@ -4,7 +4,7 @@ import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
 import IAttachable from '../../shared/interfaces/IAttachable';
 import { loadModel } from '../utility/model';
 
-const cache: { [key: string | number]: Array<IAttachable> } = {};
+const cache: { [key: string]: Array<IAttachable> } = {};
 
 class ClientAttachableSystem {
     /**

@@ -11,7 +11,6 @@ import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import PedEditCamera from '../utility/camera';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -50,8 +49,7 @@ class ClothingView implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
 
         if (PedEditCamera.exists) {
             await PedEditCamera.destroy();
@@ -68,7 +66,7 @@ class ClothingView implements ViewModel {
         PedEditCamera.destroy();
 
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, ClothingView.ready);

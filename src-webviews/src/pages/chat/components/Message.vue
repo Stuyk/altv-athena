@@ -1,6 +1,6 @@
 <template>
-    <div class="message pt-2 pb-2 pl-2 pr-4 mt-1" :style="getStyle" :class="getClass">
-        <span v-if="useTimestamps">{{ timestamp }}</span> <span v-html="getMessage"></span>
+    <div class="message" :class="getClass">
+        <span v-html="getMessage"></span>
     </div>
 </template>
 
@@ -15,10 +15,6 @@ export default defineComponent({
             type: String,
             required: true,
         },
-        timestamp: {
-            type: String,
-            required: false,
-        },
         useTimestamps: {
             type: Boolean,
             required: false,
@@ -28,10 +24,6 @@ export default defineComponent({
             type: Number,
             default: 128,
         },
-        fontSize: {
-            type: String,
-            default: 14,
-        },
         fade: {
             type: Boolean,
             default: true,
@@ -39,22 +31,7 @@ export default defineComponent({
     },
     computed: {
         getMessage() {
-            if (!this.message) {
-                return '&nbsp;';
-            }
-
-            if (this.message.length <= this.msgSize) {
-                return this.colorify(this.message);
-            }
-
-            return this.colorify(`${this.message.slice(0, 128)}...`);
-        },
-        getStyle() {
-            let style = '';
-
-            style += `font-size: ${this.fontSize};`;
-
-            return style;
+            return this.colorify(this.message);
         },
         getClass() {
             if (this.fade) {
@@ -112,18 +89,17 @@ export default defineComponent({
 .message {
     display: block;
     color: white;
-    user-select: none;
-    font-family: 'Roboto';
-    font-weight: 500;
-    overflow-wrap: break-word;
-    text-align: left;
     text-shadow: 1px 1px black;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    letter-spacing: 0.05em;
-    text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000,
-        -1px 1px 0 #000, -1px 0 0 #000;
-    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    user-select: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    overflow: visible;
+    text-align: justify;
+    width: 100%;
+    margin-bottom: 14px;
 }
 
 .message-fade {

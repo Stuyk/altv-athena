@@ -36,16 +36,6 @@ export default {
             process.exit(1);
         }
 
-        // Process WEBSERVER_IP
-        if (config.WEBSERVER_IP === '' && !alt.hasResource('webserver')) {
-            config.WEBSERVER_IP = '127.0.0.1:9111';
-
-            if (firstRun) {
-                logger.warning(`Reminder that you are using development mode for distributing files.`);
-                logger.warning(`Please add 'webserver' as a resource when running in production mode.`);
-            }
-        }
-
         const file = fs.readFileSync(DefaultServerCFGName).toString();
         if (file.includes('vue-athena')) {
             try {

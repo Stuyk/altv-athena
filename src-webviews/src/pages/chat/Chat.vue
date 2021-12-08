@@ -1,31 +1,31 @@
 <template>
     <div class="chat-wrapper">
         <div class="chatbox" v-if="showChat">
-            <div class="messages pb-2" :style="getChatBoxStyle" :key="updateCount">
+            <div class="messages" :key="updateCount">
                 <Message
                     v-for="(msg, index) in getMessages"
                     :key="index"
-                    :message="msg.message"
-                    :timestamp="msg.timestamp"
+                    :message="msg"
                     :useTimestamps="chatbox.timestamp"
-                    :fontSize="`${getFontSize}${chatbox.unit}`"
                     :fade="chatbox.shouldFade"
                     :msgSize="chatbox.msgLength"
                 />
             </div>
-            <!-- Icons for Chat -->
-            <div class="chat-info pa-1" v-if="showInputBox">
-                <Icon v-if="chatbox.timestamp" icon="icon-watch" :size="16" class="white--text" />
-                <Icon v-if="chatbox.shouldFade" icon="icon-sun" :size="16" class="white--text" />
+            <div class="input-holder">
+                <!-- Chat Input Box -->
+                <Input
+                    v-if="showInputBox"
+                    @input="handleInput"
+                    v-model="userInput"
+                    @suggestion-tab="handleSuggestionTab"
+                />
+                <!-- Chat Suggestions -->
+                <Suggestions
+                    v-if="suggestions.length >= 1"
+                    :suggestions="suggestions"
+                    @suggestion-select="handleSuggestionSelect"
+                />
             </div>
-            <!-- Chat Input Box -->
-            <Input v-if="showInputBox" @input="handleInput" v-model="userInput" @suggestion-tab="handleSuggestionTab" />
-            <!-- Chat Suggestions -->
-            <Suggestions
-                v-if="suggestions.length >= 1"
-                :suggestions="suggestions"
-                @suggestion-select="handleSuggestionSelect"
-            />
         </div>
     </div>
 </template>
@@ -35,8 +35,6 @@ import { defineComponent } from 'vue';
 import { defaultCommands, defaultMessages, localCommands } from './utility/defaultData';
 import Icon from '../../components/Icon.vue';
 import RegexData from './utility/regex';
-import IMessage from './interfaces/IMessage';
-import ICommand from './interfaces/ICommand';
 import Input from './components/Input.vue';
 import Message from './components/Message.vue';
 import Suggestions from './components/Suggestions.vue';
@@ -60,37 +58,15 @@ export default defineComponent({
             chatbox: {
                 timestamp: true,
                 shouldFade: true,
-                size: 1.6,
-                height: 45,
-                width: 45,
-                unit: 'vh',
-                msgLength: 150,
+                msgLength: 64,
             },
             historyIndex: -1,
             updateCount: 0,
-            pageSize: 5, // Do not exceed 5. 5 is already pushing it.
+            pageSize: 11,
             page: 1,
             showInputBox: false,
             showChat: true,
         };
-    },
-    mounted() {
-        if ('alt' in window) {
-            alt.on(`${ComponentName}:SetMessages`, this.setMessages);
-            alt.on(`${ComponentName}:Focus`, this.handleShowInput);
-            alt.emit(`${ComponentName}:Ready`);
-        } else {
-            this.setMessages(defaultMessages(), defaultCommands());
-            this.handleShowInput();
-        }
-    },
-    unmounted() {
-        if ('alt' in window) {
-            alt.off(`${ComponentName}:SetMessages`, this.setMessages);
-            alt.off(`${ComponentName}:Focus`, this.handleShowInput);
-        }
-
-        document.removeEventListener('keyup', this.handlePress);
     },
     computed: {
         /**
@@ -101,21 +77,14 @@ export default defineComponent({
          * @return {*}
          */
         getMessages() {
-            return this.paginate(this.messages, this.page).reverse();
+            const paginated = this.paginate(this.messages, this.page).reverse();
+            return paginated;
         },
         getChatHeight() {
             return `${this.chatbox.height}${this.chatbox.unit}`;
         },
         getChatWidth() {
             return `${this.chatbox.width}${this.chatbox.unit}`;
-        },
-        getChatBoxStyle() {
-            let style = '';
-
-            style += `min-height: ${this.getChatHeight}; max-height: ${this.getChatHeight} !important;`;
-            style += `min-width: ${this.getChatWidth}; max-width: ${this.getChatWidth} !important;`;
-
-            return style;
         },
         getFontSize() {
             const clientHeight = document.body.clientHeight;
@@ -145,30 +114,53 @@ export default defineComponent({
          * Means they're inserted in the front.
          * [85, 86, 87, 88, 89... etc]
          */
-        setMessages(messages: Array<IMessage>, commands: Array<ICommand>) {
-            this.messages = messages;
+        setMessages(messages: string, commands: string) {
+            let _messages = JSON.parse(messages);
+            let splitMessages = [];
+
+            for (let i = 0; i < _messages.length; i++) {
+                const timestamp = _messages[i].timestamp;
+                const text = _messages[i].message;
+                const content = this.chatbox.timestamp ? `${timestamp} ${text}` : text;
+
+                if (content.length < this.chatbox.msgLength) {
+                    splitMessages.push(content);
+                    continue;
+                }
+
+                let firstHalf = content.slice(0, this.chatbox.msgLength);
+                let endHalf = content.slice(this.chatbox.msgLength, this.chatbox.msgLength * 2);
+                let lastEight = firstHalf.slice(firstHalf.length - 8, firstHalf.length);
+
+                let whatToAppend: string | null = null;
+                if (lastEight.includes('{') && !lastEight.includes('}')) {
+                    const whatToSlice = lastEight.match(/{+[^}]*}*(?!.*{)/gm);
+                    if (whatToSlice && whatToSlice.length >= 1) {
+                        firstHalf = firstHalf.slice(0, firstHalf.length - whatToSlice[0].length);
+                        whatToAppend = whatToSlice[0];
+                    }
+                } else {
+                    const lastColor = firstHalf.match(/{+[^}]*}*(?!.*{)/gm);
+                    if (lastColor && lastColor.length >= 1) {
+                        whatToAppend = lastColor[0];
+                    }
+                }
+
+                const finalHalf = whatToAppend ? `${whatToAppend}${endHalf}` : endHalf;
+                splitMessages.push(`${finalHalf}`);
+                splitMessages.push(`${firstHalf}-`);
+            }
+
+            this.messages = splitMessages;
 
             // Append Local Commands to Commands
+            const cmds = JSON.parse(commands);
             const _cmds = localCommands();
             for (let i = 0; i < _cmds.length; i++) {
-                commands.unshift(_cmds[i]);
+                cmds.unshift(_cmds[i]);
             }
 
-            this.commands = commands;
-
-            let clientHeight = document.body.clientHeight;
-
-            if (clientHeight > 1280) {
-                this.pageSize = 5;
-            }
-
-            if (clientHeight <= 720 && clientHeight > 600) {
-                this.pageSize = 4;
-            }
-
-            if (clientHeight <= 600) {
-                this.pageSize = 3;
-            }
+            this.commands = cmds;
 
             this.updateCount += 1;
         },
@@ -186,7 +178,7 @@ export default defineComponent({
          * @param {*} page
          * @return {*}
          */
-        paginate(array: Array<IMessage>, page: number, skipFill = false) {
+        paginate(array: Array<string>, page: number, skipFill = false) {
             if (!array || array.length <= 0) {
                 return [];
             }
@@ -197,7 +189,7 @@ export default defineComponent({
                 if (results.length < pageSize) {
                     const appendCount = pageSize - results.length;
                     for (let i = 0; i < appendCount; i++) {
-                        results.push({ message: '', timestamp: '' });
+                        results.push('');
                     }
                 }
             }
@@ -231,12 +223,16 @@ export default defineComponent({
         hideInput() {
             this.userInput = '';
             this.showInputBox = false;
-
             document.removeEventListener('keyup', this.handlePress);
+
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:Send`);
+            }
         },
         processInput() {
             const originalMessage = this.userInput;
             this.hideInput();
+            this.suggestions = [];
 
             // Append Commands to History
             if (originalMessage.charAt(0) === '/') {
@@ -280,7 +276,7 @@ export default defineComponent({
          */
         isLocalCommand(message: string): boolean {
             if (message === '/chatclear' && 'alt' in window) {
-                alt.emit('chat:Clear');
+                alt.emit(`${ComponentName}:Clear`);
                 this.userInput = '';
                 this.handleInput();
                 return true;
@@ -368,7 +364,6 @@ export default defineComponent({
                 .replace('/', '');
 
             const suggestions = [];
-
             for (let i = 0; i < this.commands.length; i++) {
                 const cmd = this.commands[i];
                 if (!cmd.description.includes(parsedCommand)) {
@@ -390,6 +385,24 @@ export default defineComponent({
             this.suggestions = suggestions;
         },
     },
+    mounted() {
+        if ('alt' in window) {
+            alt.on(`${ComponentName}:SetMessages`, this.setMessages);
+            alt.on(`${ComponentName}:Focus`, this.handleShowInput);
+            alt.emit(`${ComponentName}:Ready`);
+        } else {
+            this.setMessages(JSON.stringify(defaultMessages()), JSON.stringify(defaultCommands()));
+            this.handleShowInput();
+        }
+    },
+    unmounted() {
+        if ('alt' in window) {
+            alt.off(`${ComponentName}:SetMessages`, this.setMessages);
+            alt.off(`${ComponentName}:Focus`, this.handleShowInput);
+        }
+
+        document.removeEventListener('keyup', this.handlePress);
+    },
 });
 </script>
 
@@ -406,32 +419,32 @@ export default defineComponent({
 
 .chatbox {
     display: flex;
-    position: fixed;
-    left: 10px;
-    top: 150px;
     flex-direction: column;
+    min-width: 450px;
+    min-height: 336px; /* Font Size + Message Margin Bottom * Page Size */
+    max-height: 336px; /* Font Size + Message Margin Bottom * Page Size */
+    margin-left: 1vw;
+    margin-top: 2vh;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .messages {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    overflow-y: visible;
-    box-sizing: border-box;
-    flex-grow: 1;
     justify-content: flex-end;
-    overflow-y: hidden;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.chat-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
+.input-holder {
     position: absolute;
-    background: rgba(0, 0, 0, 0.2);
-    bottom: -32px;
-    border-radius: 3px;
+    min-width: 450px;
+    max-width: 450px;
+    bottom: -50px;
 }
 </style>

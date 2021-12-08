@@ -7,6 +7,7 @@
         @input="$emit('update:modelValue', $event.target['value'])"
         @blur="forceRefocus"
         @keydown="handleKeyPress"
+        maxlength="128"
         ref="chatInput"
     />
 </template>
@@ -71,14 +72,19 @@ export default defineComponent({
 
 <style scoped>
 .chatInput {
-    text-shadow: 1px 1px black;
-    display: block;
-    font-family: 'Roboto';
-    font-size: 16px;
-    font-weight: 600;
     color: white;
-    background: rgba(0, 0, 0, 0.75);
     border: 2px solid rgba(0, 0, 0, 0.9);
-    max-width: 50vw;
+    text-shadow: 1px 1px black;
+    background: rgba(0, 0, 0, 0.75);
+    outline: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: 600;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 30px;
+    max-height: 30px;
+    box-sizing: border-box;
 }
 </style>

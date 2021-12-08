@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 import { InputMenu, InputResult } from '../../shared/interfaces/InputMenus';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 import { View_Events_Input_Menu } from '../../shared/enums/Views';
 import { WebViewController } from '../extensions/view2';
 
@@ -27,14 +26,15 @@ export class InputView implements ViewModel {
         WebViewController.showCursor(true);
 
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
 
         alt.Player.local.isMenuOpen = true;
     }
 
     static async close(isNotCancel = false) {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+
+        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, InputView.ready);
