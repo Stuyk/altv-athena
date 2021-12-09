@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
+import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import IAttachable from '../../shared/interfaces/IAttachable';
 import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
@@ -13,6 +14,8 @@ import ChatController from '../systems/chat';
 import { PedController } from '../systems/ped';
 import { WorldNotificationController } from '../systems/worldNotifications';
 import { sha256Random } from '../utility/encryption';
+import { Animation } from '../../shared/interfaces/Animation';
+import { Action } from '../../shared/interfaces/Actions';
 
 ChatController.addCommand(
     'testerrorscreen',
@@ -279,3 +282,75 @@ function testLeave<T>(player: T, stream: IStreamPolygon) {
 
     playerFuncs.emit.message(player, `You have left: ${stream.uid}`);
 }
+
+ChatController.addCommand(
+    'testactionmenu',
+    '/testactionmenu - A test action menu',
+    PERMISSIONS.ADMIN,
+    (player: alt.Player) => {
+        // Create an action called facePalm that uses the Animation Interface.
+        const facePalm: Action = {
+            eventName: 'animation:Action:Server',
+            isServer: true,
+            data: {
+                dict: 'anim@mp_player_intupperface_palm',
+                name: 'idle_a',
+                duration: 3000,
+                flags: ANIMATION_FLAGS.UPPERBODY_ONLY,
+            },
+        };
+
+        // Create an action called gangSign that uses the Animation Interface.
+        const gangSign: Action = {
+            eventName: 'animation:Action:Server',
+            isServer: true,
+            data: {
+                dict: 'mp_player_int_uppergang_sign_a',
+                name: 'mp_player_int_gang_sign_a',
+                duration: 3000,
+                flags: ANIMATION_FLAGS.UPPERBODY_ONLY,
+            },
+        };
+
+        // Create the menu and send it to the player/
+        playerFuncs.set.actionMenu(
+            player,
+            // The Menu
+            {
+                // Option 1 in the menu is a single event.
+                'Option 1': {
+                    eventName: 'hello:From:Client',
+                    isServer: true,
+                },
+                // Animations in the menu contains 2 more events. You can also add another menu.
+                Animations: {
+                    'Face Palm': facePalm,
+                    'Gang Sign': gangSign,
+                    // Creates a menu in the menu.
+                    'More Animations': {
+                        'Face Palm 2': facePalm, // Just using the same one for testing purposes
+                        'Gang Sign 2': gangSign,
+                        // Creates a menu in the menu in the menu
+                        'More More Animations': {
+                            'Face Palm 3': facePalm, // Just using the same one for testing purposes
+                            'Gang Sign 3': gangSign,
+                            // etc...
+                        },
+                    },
+                },
+            },
+        );
+    },
+);
+
+alt.onClient('hello:From:Client', (player) => {
+    playerFuncs.emit.message(player, `Got menu option from client.`);
+});
+
+alt.onClient('animation:Action:Server', (player, data: Animation) => {
+    if (!data) {
+        return;
+    }
+
+    playerFuncs.emit.animation(player, data.dict, data.name, data.flags, data.duration);
+});

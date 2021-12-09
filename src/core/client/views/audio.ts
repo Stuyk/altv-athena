@@ -12,6 +12,11 @@ let interval;
  * @implements {ViewModel}
  */
 export class AudioView implements ViewModel {
+    /**
+     * Opens the Audio Service to play '.ogg' files.
+     * @static
+     * @memberof AudioView
+     */
     static async open() {
         if (!interval) {
             interval = alt.setInterval(AudioView.handleQueue, 100);
@@ -20,6 +25,11 @@ export class AudioView implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
     }
 
+    /**
+     * Called every 100ms to invoke a dequeue
+     * @static
+     * @memberof AudioView
+     */
     static async handleQueue() {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:TriggerQueue`);

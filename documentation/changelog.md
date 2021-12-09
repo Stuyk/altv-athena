@@ -152,6 +152,8 @@ description: List of all the changes and current versions.
 + Added TypeDoc Generator for Athena API (Not Useful Yet)
 + Turn Polygons into a Similar Functionality of a ColShape
 + Abstract the Polygon Creation Process
++ Added Native Audio Support to WebViews with `play:Sound`
++ Added Action Menu to Hud Overlays
 ```
 
 ## 2.0.3

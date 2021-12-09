@@ -15,11 +15,13 @@ import Storage from './storage/Storage.vue';
 import Chat from './chat/Chat.vue';
 import Hud from './hud/Hud.vue';
 import Audio from './audio/Audio.vue';
+import Actions from './actions/Actions.vue';
 
 // Append components here...
 // All components that you want to load...
 // New interfaces, menus, etc.
 const componentList = {
+    Actions: shallowRef(Actions),
     Atm: shallowRef(Atm),
     Audio: shallowRef(Audio),
     CharacterCreator: shallowRef(CharacterCreator),

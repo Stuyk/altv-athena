@@ -1,3 +1,4 @@
+import * as native from 'natives';
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
@@ -28,6 +29,10 @@ export class WebViewController {
             _webview = new alt.WebView(_defaultURL, false);
             _webview.on('view:Ready', () => {
                 _isReady = true;
+            });
+
+            _webview.on('play:Sound', (audioName: string, ref: string) => {
+                native.playSoundFrontend(-1, audioName, ref, true);
             });
 
             _webview.on('load', () => {

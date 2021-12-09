@@ -66,6 +66,7 @@ import './utility/spinner';
 import './utility/wheelMenu';
 
 // Views
+import './views/actions';
 import './views/atm';
 import './views/audio';
 import './views/chat';
