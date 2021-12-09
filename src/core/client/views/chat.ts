@@ -32,7 +32,7 @@ class ChatView implements ViewModel {
             return;
         }
 
-        alt.off('keyup', ChatView.keyUp);
+        alt.off('keyup', ChatView.keyDown);
         WebViewController.closePages([PAGE_NAME]);
     }
 
@@ -50,7 +50,7 @@ class ChatView implements ViewModel {
             view.off(`${PAGE_NAME}:Clear`, ChatView.clear);
         }
 
-        alt.on('keydown', ChatView.keyUp);
+        alt.on('keydown', ChatView.keyDown);
         view.on(`${PAGE_NAME}:Ready`, ChatView.ready);
         view.on(`${PAGE_NAME}:Send`, ChatView.send);
         view.on(`${PAGE_NAME}:Refresh`, ChatView.update);
@@ -157,8 +157,8 @@ class ChatView implements ViewModel {
         alt.emitServer(View_Events_Chat.Send, message, commands);
     }
 
-    static async keyUp(key: number) {
-        // Page Up
+    static async keyDown(key: number) {
+        // Page Up & Page Down
         if (key === 33 || key === 34) {
             const view = await WebViewController.get();
             view.emit(`${PAGE_NAME}:UnfocusedKeyBind`, key);

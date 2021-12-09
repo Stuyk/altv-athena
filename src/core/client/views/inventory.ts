@@ -24,16 +24,16 @@ let camera;
 let camera2;
 let lastDroppedItems: Array<DroppedItem> = [];
 let drawInterval: number = null;
+let isOpen = false;
 
 export class InventoryController implements ViewModel {
     /**
-     * Register the keybind to the Keybind Controller.
-     * Triggers opening the inventory when pressed.
+     * Initialize key listeners.
      * @static
      * @memberof InventoryController
      */
-    static registerKeybinds() {
-        KeybindController.registerKeybind({ key: KEY_BINDS.INVENTORY, singlePress: InventoryController.open });
+    static init() {
+        alt.on('keyup', InventoryController.keyUp);
     }
 
     /**
@@ -48,6 +48,8 @@ export class InventoryController implements ViewModel {
             return;
         }
 
+        isOpen = true;
+
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Update`, InventoryController.ready);
         view.on(`${PAGE_NAME}:Use`, InventoryController.handleUse);
@@ -55,6 +57,7 @@ export class InventoryController implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, InventoryController.close);
         view.on(`${PAGE_NAME}:Split`, InventoryController.handleSplit);
         view.on(`${PAGE_NAME}:Pickup`, InventoryController.handlePickup);
+
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -134,6 +137,7 @@ export class InventoryController implements ViewModel {
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+        isOpen = false;
     }
 
     static processMetaChange(key: string, value: any, oldValue: any): void {
@@ -207,6 +211,33 @@ export class InventoryController implements ViewModel {
         view.emit(`${PAGE_NAME}:AddNotification`, value);
     }
 
+    /**
+     * Used to listen for events that pertain to this specific view.
+     * @static
+     * @param {number} key
+     * @return {*}
+     * @memberof InventoryController
+     */
+    static async keyUp(key: number) {
+        // Default: I
+        if (key === KEY_BINDS.INVENTORY && !isOpen) {
+            InventoryController.open();
+            return;
+        }
+
+        // Default: I or ESC
+        if ((key === KEY_BINDS.INVENTORY || key === 27) && isOpen) {
+            InventoryController.close();
+            return;
+        }
+    }
+
+    /**
+     * Used to rotate the camera and show the player a specific way.
+     * @static
+     * @return {*}  {Promise<boolean>}
+     * @memberof InventoryController
+     */
     static async showPreview(): Promise<boolean> {
         if (alt.Player.local.vehicle) {
             return false;
@@ -271,7 +302,7 @@ export class InventoryController implements ViewModel {
 alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, InventoryController.addInventoryNotification);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.registerKeybinds);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.init);
 
 const keyFunctions = {
     inventory: InventoryController.updateInventory,

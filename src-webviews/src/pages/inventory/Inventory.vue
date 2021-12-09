@@ -323,19 +323,6 @@ export default defineComponent({
             this.splitAmount = 1;
             this.split = null;
         },
-        handleClose(keyPress) {
-            // Escape && 'i'
-            if (keyPress.keyCode !== 27 && keyPress.keyCode !== 73) {
-                return;
-            }
-
-            document.removeEventListener('keyup', this.handleClose);
-            setTimeout(() => {
-                if ('alt' in window) {
-                    alt.emit(`${ComponentName}:Close`);
-                }
-            }, 50);
-        },
         getCurrentWeight() {
             let weight = 0;
 
@@ -747,8 +734,6 @@ export default defineComponent({
     },
     // Called when the page is loaded.
     mounted() {
-        document.addEventListener('keyup', this.handleClose);
-
         if (!('alt' in window)) {
             // Normal equipment is 11. 12 is to make it even.
             this.equipment = new Array(12).fill(null);
@@ -882,7 +867,9 @@ export default defineComponent({
     },
     // Called when the page is unloaded.
     unmounted() {
-        document.removeEventListener('keyup', this.handleClose);
+        document.removeEventListener('mouseover', this.mouseOver);
+        document.removeEventListener('mouseup', this.dropItem);
+        document.removeEventListener('mousemove', this.updatePosition);
 
         // Unbind Events from the Mounted Function
         if ('alt' in window) {
