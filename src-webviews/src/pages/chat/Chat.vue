@@ -358,25 +358,25 @@ export default defineComponent({
                 return;
             }
 
-            const parsedCommand = this.userInput
+            let parsedCommand = this.userInput
                 .replace(RegexData.tagOrComment, '')
                 .replace('/</g', '&lt;')
                 .replace('/', '');
 
+            const splitInput = parsedCommand.split(' ');
+            if (splitInput.length >= 2) {
+                parsedCommand = splitInput[0];
+            }
+
             const suggestions = [];
             for (let i = 0; i < this.commands.length; i++) {
                 const cmd = this.commands[i];
-                if (!cmd.description.includes(parsedCommand)) {
+                if (!cmd.name.includes(parsedCommand)) {
                     continue;
                 }
 
                 if (suggestions.length >= 6) {
                     break;
-                }
-
-                if (cmd.name === parsedCommand) {
-                    this.suggestions = [];
-                    return;
                 }
 
                 suggestions.push(cmd);
