@@ -85,6 +85,9 @@ export enum SYSTEM_EVENTS {
     // Progress Bar
     PROGRESSBAR_CREATE = 'progressbar:Create',
     PROGRESSBAR_REMOVE = 'progressbar:Remove',
+    // Polygon
+    POLYGON_ENTER = 'polygon:Enter',
+    POLYGON_LEAVE = 'polygon:Leave',
     //
     POPULATE_BLIPS = 'blips:Populate',
     POPULATE_MARKERS = 'markers:Populate',

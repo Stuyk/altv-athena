@@ -7,6 +7,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
 import { View_Events_Inventory } from '../../shared/enums/Views';
 import keyboardMap from '../../shared/information/keyboardMap';
+import IClientInteraction from '../../shared/interfaces/IClientInteraction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
@@ -123,7 +124,7 @@ export class InteractionController {
         return originalText + `~y~' ${String.fromCharCode(key).toUpperCase()} ' ~w~${description} ~n~`;
     }
 
-    static getInteractionInfo(key: number, description: string): { keyPress: string; description: string } {
+    static getInteractionInfo(key: number, description: string): IClientInteraction {
         let legibleName = keyboardMap[key];
         if (!legibleName) {
             legibleName = `UNK_${key}`;

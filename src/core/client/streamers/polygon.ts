@@ -8,14 +8,12 @@ import { distance2d } from '../../shared/utility/vector';
 import { Timer } from '../utility/timers';
 
 let addedPolygons: Array<Polygon> = [];
-let localPolygons: Array<Polygon> = [];
 let isRemoving = false;
 let interval: number;
 
 export class ClientPolygonController {
     static init() {
         addedPolygons = [];
-        localPolygons = [];
     }
 
     static stop() {
@@ -24,25 +22,6 @@ export class ClientPolygonController {
         }
 
         Timer.clearInterval(interval);
-    }
-
-    static append(polygon: IStreamPolygon) {
-        if (!polygon.uid) {
-            alt.logError(`(${JSON.stringify(polygon.pos)}) Polygon is missing uid.`);
-            return;
-        }
-
-        const index = localPolygons.findIndex((obj) => obj.streamPolygon.uid === polygon.uid);
-        if (index <= -1) {
-            localPolygons.push(new Polygon(polygon));
-        } else {
-            alt.logWarning(`${polygon.uid} was not a unique identifier. Replaced polygon in ClientPolygonController.`);
-            localPolygons[index] = new Polygon(polygon);
-        }
-
-        if (!interval) {
-            interval = Timer.createInterval(handleDrawPolygons, 0, 'polygon.ts');
-        }
     }
 
     static populate(polygons: Array<IStreamPolygon>) {
@@ -125,47 +104,12 @@ export class ClientPolygonController {
         }
     }
 
-    static remove(uid: string) {
-        isRemoving = true;
-
-        const index = localPolygons.findIndex((marker) => marker.streamPolygon.uid === uid);
-        if (index <= -1) {
-            isRemoving = false;
-            return;
-        }
-
-        const marker = localPolygons[index];
-        if (!marker) {
-            isRemoving = false;
-            return;
-        }
-
-        localPolygons.splice(index, 1);
-        isRemoving = false;
+    static tryEnter(streamPolygon: IStreamPolygon) {
+        alt.emitServer(SYSTEM_EVENTS.POLYGON_ENTER, streamPolygon);
     }
 
-    static tryEnter(entity: alt.Player, streamPolygon: IStreamPolygon) {
-        if (!streamPolygon.enterEventCall) {
-            return;
-        }
-
-        if (streamPolygon.enterEventCall.isServer) {
-            alt.emitServer(streamPolygon.enterEventCall.eventName, streamPolygon);
-        } else {
-            alt.emit(streamPolygon.enterEventCall.eventName, streamPolygon);
-        }
-    }
-
-    static tryLeave(entity: alt.Player, streamPolygon: IStreamPolygon) {
-        if (!streamPolygon.leaveEventCall) {
-            return;
-        }
-
-        if (streamPolygon.leaveEventCall.isServer) {
-            alt.emitServer(streamPolygon.leaveEventCall.eventName, streamPolygon);
-        } else {
-            alt.emit(streamPolygon.leaveEventCall.eventName, streamPolygon);
-        }
+    static tryLeave(streamPolygon: IStreamPolygon) {
+        alt.emitServer(SYSTEM_EVENTS.POLYGON_LEAVE, streamPolygon);
     }
 }
 
@@ -174,7 +118,7 @@ function handleDrawPolygons() {
         return;
     }
 
-    const polygons = addedPolygons.concat(localPolygons);
+    const polygons = [...addedPolygons];
 
     if (polygons.length <= 0) {
         return;
@@ -232,5 +176,3 @@ function handleDrawPolygons() {
 alt.on('connectionComplete', ClientPolygonController.init);
 alt.on('disconnect', ClientPolygonController.stop);
 alt.onServer(SYSTEM_EVENTS.POPULATE_POLYGONS, ClientPolygonController.populate);
-alt.onServer(SYSTEM_EVENTS.APPEND_POLYGON, ClientPolygonController.append);
-alt.onServer(SYSTEM_EVENTS.REMOVE_POLYGON, ClientPolygonController.remove);

@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { sha256Random } from '../utility/encryption';
-import { StreamerService } from '../systems/streamer';
 import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
+import { StreamerService } from '../systems/streamer';
+import { sha256Random } from '../utility/encryption';
 
 const KEY = 'polygons';
-const globalPolygons: Array<IStreamPolygon> = [];
+const globalPolygons: { [key: string]: IStreamPolygon } = {};
 
 export class ServerPolygonController {
     static init() {
@@ -14,57 +14,51 @@ export class ServerPolygonController {
 
     /**
      * Internal function to refresh all global markers in the streamer service.
+     * Must abuse stringify, and parse to clear functions.
      * @static
      * @memberof ServerPolygonController
      */
     static refresh() {
-        StreamerService.updateData(KEY, globalPolygons);
+        const polygons = [];
+
+        Object.keys(globalPolygons).forEach((key) => {
+            polygons.push(globalPolygons[key]);
+        });
+
+        StreamerService.updateData(KEY, JSON.parse(JSON.stringify(polygons)));
     }
 
+    /**
+     * Add or overwrite a global polygon stream.
+     * @static
+     * @param {IStreamPolygon} streamPolygon
+     * @return {*}  {string}
+     * @memberof ServerPolygonController
+     */
     static append(streamPolygon: IStreamPolygon): string {
         if (!streamPolygon.uid) {
             streamPolygon.uid = sha256Random(JSON.stringify(streamPolygon));
         }
 
-        globalPolygons.push(streamPolygon);
+        globalPolygons[streamPolygon.uid] = streamPolygon;
         ServerPolygonController.refresh();
         return streamPolygon.uid;
-    }
-
-    static remove(uid: string): boolean {
-        const index = globalPolygons.findIndex((label) => label.uid === uid);
-        if (index <= -1) {
-            return false;
-        }
-
-        globalPolygons.splice(index, 1);
-        ServerPolygonController.refresh();
-        return true;
-    }
-
-    static removeFromPlayer(player: alt.Player, uid: string) {
-        if (!uid) {
-            throw new Error(`Did not specify a uid for polygon removal. ServerPolygonController.removeFromPlayer`);
-        }
-
-        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_POLYGON, uid);
     }
 
     /**
-     * Add a marker to a single local player.
+     * Remove a global polygon from streamer.
      * @static
-     * @param {alt.Player} player
-     * @param {IStreamPolygon} streamPolygon
-     * @returns {string} uid for polygon
+     * @param {string} uid
+     * @return {*}  {boolean}
      * @memberof ServerPolygonController
      */
-    static addToPlayer(player: alt.Player, streamPolygon: IStreamPolygon): string {
-        if (!streamPolygon.uid) {
-            streamPolygon.uid = sha256Random(JSON.stringify(streamPolygon));
+    static remove(uid: string): boolean {
+        if (globalPolygons[uid]) {
+            delete globalPolygons[uid];
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.APPEND_POLYGON, streamPolygon);
-        return streamPolygon.uid;
+        ServerPolygonController.refresh();
+        return true;
     }
 
     /**
@@ -80,6 +74,44 @@ export class ServerPolygonController {
     static update(player: alt.Player, polygons: Array<IStreamPolygon>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_POLYGONS, polygons);
     }
+
+    /**
+     * Handles relaying the polygon eventcalls for entering.
+     * @static
+     * @param {alt.Player} player
+     * @param {IStreamPolygon} polygon
+     * @memberof ServerPolygonController
+     */
+    static enter(player: alt.Player, polygonStream: IStreamPolygon) {
+        alt.log('hello world');
+        console.log(polygonStream);
+
+        const polygon = globalPolygons[polygonStream.uid];
+        if (!polygon) {
+            return;
+        }
+
+        if (!polygon.enterEventCall) {
+            return;
+        }
+
+        polygon.enterEventCall(player, polygonStream);
+    }
+
+    static leave(player: alt.Player, polygonStream: IStreamPolygon) {
+        const polygon = globalPolygons[polygonStream.uid];
+        if (!polygon) {
+            return;
+        }
+
+        if (!polygon.leaveEventCall) {
+            return;
+        }
+
+        polygon.leaveEventCall(player, polygonStream);
+    }
 }
 
+alt.onClient(SYSTEM_EVENTS.POLYGON_ENTER, ServerPolygonController.enter);
+alt.onClient(SYSTEM_EVENTS.POLYGON_LEAVE, ServerPolygonController.leave);
 ServerPolygonController.init();

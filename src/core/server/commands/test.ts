@@ -241,16 +241,8 @@ ChatController.addCommand(
 
         const uid = sha256Random(JSON.stringify(streamPolygon));
         streamPolygon.uid = uid;
-
-        streamPolygon.enterEventCall = {
-            eventName: `${streamPolygon.uid}-test-enter`,
-            isServer: true,
-        };
-
-        streamPolygon.leaveEventCall = {
-            eventName: `${streamPolygon.uid}-test-leave`,
-            isServer: true,
-        };
+        streamPolygon.enterEventCall = testEnter;
+        streamPolygon.leaveEventCall = testLeave;
 
         // Setup Temporary Events
         alt.onClient(`${streamPolygon.uid}-test-enter`, testEnter);
@@ -272,10 +264,18 @@ ChatController.addCommand(
     },
 );
 
-function testEnter(player: alt.Player, stream: IStreamPolygon) {
+function testEnter<T>(player: T, stream: IStreamPolygon) {
+    if (!(player instanceof alt.Player)) {
+        return;
+    }
+
     playerFuncs.emit.message(player, `You have entered: ${stream.uid}`);
 }
 
-function testLeave(player: alt.Player, stream: IStreamPolygon) {
+function testLeave<T>(player: T, stream: IStreamPolygon) {
+    if (!(player instanceof alt.Player)) {
+        return;
+    }
+
     playerFuncs.emit.message(player, `You have left: ${stream.uid}`);
 }

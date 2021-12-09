@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { HUD_IDENTIFIER } from '../../shared/enums/HudIdentifiers';
-
 import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
@@ -13,6 +12,13 @@ import { drawText2D } from '../utility/text';
 import { drawTexture2D } from '../utility/texture';
 import { Timer } from '../utility/timers';
 import { World } from './world';
+
+/**
+ * DEPRECATED IN 3.0.0
+ * FILE LEFT HERE FOR INFORMATION PURPOSES
+ *
+ * NEW HUD IS IN VIEWS/HUD.TS
+ */
 
 let interval;
 let objective: string;

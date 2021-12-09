@@ -143,6 +143,15 @@ description: List of all the changes and current versions.
 + Fix Accessing Vehicle Storage when Destroyed
 + Fix Pushing Vehicle when Destroyed
 + Fix Toggling Doors when Vehicle Destroyed
++ Removed Overriding 'F' Key for Vehicles
++ Added Checks to Prevent 'F' Key while Pushing
++ Removed Tasks for Entering / Exiting Vehicles
++ Removed Vehicle Pusher when someone enters a vehicle
++ Made custom HUD component register and unregister functions
++ Made custom HUD components pass prop names to send to HUD interface
++ Added TypeDoc Generator for Athena API (Not Useful Yet)
++ Turn Polygons into a Similar Functionality of a ColShape
++ Abstract the Polygon Creation Process
 ```
 
 ## 2.0.3

@@ -26,3 +26,4 @@ dist-ssr
 *.local
 !altv-athena-hwid-win.exe
 server.cfg
+doc

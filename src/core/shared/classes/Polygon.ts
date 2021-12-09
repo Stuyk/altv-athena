@@ -141,8 +141,8 @@ export default class Polygon {
      */
     isEntityInPolygon<T extends { id: number; pos: Vector3 }>(
         entity: T,
-        enterEvent: (entity: T, streamPolygon: IStreamPolygon) => void = null,
-        leaveEvent: (entity: T, streamPolygon: IStreamPolygon) => void = null,
+        enterEvent: (streamPolygon: IStreamPolygon) => void = null,
+        leaveEvent: (streamPolygon: IStreamPolygon) => void = null,
     ): boolean {
         const isInside = this.isInPolygon(entity.pos);
         const index = this.ids.findIndex((id) => id === entity.id);
@@ -151,7 +151,7 @@ export default class Polygon {
         if (isInside && index <= -1) {
             this.ids.push(entity.id);
             if (typeof enterEvent === 'function') {
-                enterEvent(entity, this.streamPolygon);
+                enterEvent(this.streamPolygon);
             }
         }
 
@@ -159,7 +159,7 @@ export default class Polygon {
         if (!isInside && index >= 0) {
             this.ids.splice(index, 1);
             if (typeof leaveEvent === 'function') {
-                leaveEvent(entity, this.streamPolygon);
+                leaveEvent(this.streamPolygon);
             }
         }
 
