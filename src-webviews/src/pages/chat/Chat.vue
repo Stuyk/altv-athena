@@ -223,6 +223,7 @@ export default defineComponent({
         hideInput() {
             this.userInput = '';
             this.showInputBox = false;
+            this.suggestions = [];
             document.removeEventListener('keyup', this.handlePress);
 
             if ('alt' in window) {
