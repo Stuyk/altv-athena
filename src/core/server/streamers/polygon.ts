@@ -83,9 +83,6 @@ export class ServerPolygonController {
      * @memberof ServerPolygonController
      */
     static enter(player: alt.Player, polygonStream: IStreamPolygon) {
-        alt.log('hello world');
-        console.log(polygonStream);
-
         const polygon = globalPolygons[polygonStream.uid];
         if (!polygon) {
             return;
@@ -98,6 +95,14 @@ export class ServerPolygonController {
         polygon.enterEventCall(player, polygonStream);
     }
 
+    /**
+     * Handles relaying the polygon eventcalls for leaving.
+     * @static
+     * @param {alt.Player} player
+     * @param {IStreamPolygon} polygonStream
+     * @return {*}
+     * @memberof ServerPolygonController
+     */
     static leave(player: alt.Player, polygonStream: IStreamPolygon) {
         const polygon = globalPolygons[polygonStream.uid];
         if (!polygon) {

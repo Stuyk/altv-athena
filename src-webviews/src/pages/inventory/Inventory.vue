@@ -234,7 +234,7 @@ export default defineComponent({
                 selectedElement: null,
             },
             // Default Configuration(s) for Previews
-            inventorySize: 28,
+            inventorySize: 27,
             equipmentSize: 12,
             toolbarSize: 4,
             // Data to use for display
@@ -372,7 +372,7 @@ export default defineComponent({
 
             return { item: true };
         },
-        updateInventory(items: Array<{ slot: number }>, size = 28) {
+        updateInventory(items: Array<{ slot: number }>, size = 27) {
             // Establishing the initial inventory size.
             // Based on a server-side setting.
             // However, the size will handle expanded inventory size automatically.
@@ -752,7 +752,7 @@ export default defineComponent({
         if (!('alt' in window)) {
             // Normal equipment is 11. 12 is to make it even.
             this.equipment = new Array(12).fill(null);
-            this.inventory = new Array(28).fill(null);
+            this.inventory = new Array(27).fill(null);
             this.toolbar = new Array(4).fill(null);
 
             setTimeout(() => {
@@ -813,7 +813,7 @@ export default defineComponent({
                     uuid: `some_hash_thing_ground`,
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
-                    slot: Math.floor(Math.random() * 28),
+                    slot: Math.floor(Math.random() * 27),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
                     rarity: Math.floor(Math.random() * 6),
@@ -826,7 +826,7 @@ export default defineComponent({
                     uuid: `some_hash_thing_ground`,
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
-                    slot: Math.floor(Math.random() * 28),
+                    slot: Math.floor(Math.random() * 27),
                     behavior: 151,
                     quantity: 4,
                     weight: Math.floor(Math.random() * 5),
@@ -840,7 +840,7 @@ export default defineComponent({
                     uuid: `some_hash_thing_ground`,
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
-                    slot: Math.floor(Math.random() * 28),
+                    slot: Math.floor(Math.random() * 27),
                     quantity: 2,
                     behavior: 151,
                     weight: Math.floor(Math.random() * 5),
@@ -854,7 +854,7 @@ export default defineComponent({
                     uuid: `some_hash_thing_ground`,
                     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a luctus nunc, ut dapibus odio. Integer venenatis libero rutrum ante sodales, nec eleifend augue aliquam.`,
                     icon: 'crate',
-                    slot: Math.floor(Math.random() * 28),
+                    slot: Math.floor(Math.random() * 27),
                     quantity: 1,
                     weight: Math.floor(Math.random() * 5),
                     rarity: Math.floor(Math.random() * 6),
