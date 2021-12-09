@@ -12,7 +12,7 @@ import { handleFreezePlayer } from '../utility/freeze';
 import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Chat';
-const messages: Array<IMessage> = [];
+let messages: Array<IMessage> = [];
 let commands: Array<Partial<Command>> = [];
 let isReady = false;
 let isDisabled = false;
@@ -46,11 +46,15 @@ class ChatView implements ViewModel {
         if (isReady) {
             view.off(`${PAGE_NAME}:Ready`, ChatView.ready);
             view.off(`${PAGE_NAME}:Send`, ChatView.send);
+            view.off(`${PAGE_NAME}:Refresh`, ChatView.update);
+            view.off(`${PAGE_NAME}:Clear`, ChatView.clear);
         }
 
         alt.on('keydown', ChatView.keyUp);
         view.on(`${PAGE_NAME}:Ready`, ChatView.ready);
         view.on(`${PAGE_NAME}:Send`, ChatView.send);
+        view.on(`${PAGE_NAME}:Refresh`, ChatView.update);
+        view.on(`${PAGE_NAME}:Clear`, ChatView.clear);
         WebViewController.openPages([PAGE_NAME]);
 
         alt.setTimeout(() => {
@@ -130,6 +134,11 @@ class ChatView implements ViewModel {
     static async update() {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetMessages`, JSON.stringify(messages), JSON.stringify(commands));
+    }
+
+    static clear() {
+        messages = [];
+        ChatView.update();
     }
 
     static async send(message: string) {

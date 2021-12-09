@@ -41,5 +41,6 @@ export function localCommands(): Array<ICommand> {
         { name: 'chattimestamp', description: '/chattimestamp - Toggle Timestamps' },
         { name: 'chatfade', description: '/chatfade - Toggle Chat Fade' },
         { name: 'chatclear', description: '/chatclear - Clear Chat' },
+        { name: 'chatprint', description: '/chatprint - Print Chat to F8 Console' },
     ];
 }

@@ -11,6 +11,10 @@
                     :msgSize="chatbox.msgLength"
                 />
             </div>
+            <div class="new-messages split" v-if="page > 1">
+                <Icon class="red--text" icon="icon-arrow-down" :shadow="true" :size="14" />
+                <span class="red--text new-messages-text">PGDN</span>
+            </div>
             <div class="input-holder">
                 <!-- Chat Input Box -->
                 <Input
@@ -243,6 +247,7 @@ export default defineComponent({
             const originalMessage = this.userInput;
             this.hideInput();
             this.suggestions = [];
+            this.page = 1;
 
             // Append Commands to History
             if (originalMessage.charAt(0) === '/') {
@@ -269,6 +274,8 @@ export default defineComponent({
         },
         handleShowInput() {
             this.showInputBox = true;
+            this.updateCount += 1;
+            this.page = 1;
             document.addEventListener('keyup', this.handlePress);
         },
         handleSuggestionTab() {
@@ -289,6 +296,9 @@ export default defineComponent({
                 alt.emit(`${ComponentName}:Clear`);
                 this.userInput = '';
                 this.handleInput();
+                if ('alt' in window) {
+                    alt.emit(`${ComponentName}:Clear`);
+                }
                 return true;
             }
 
@@ -296,11 +306,23 @@ export default defineComponent({
                 this.chatbox.timestamp = !this.chatbox.timestamp;
                 this.userInput = '';
                 this.handleInput();
+                if ('alt' in window) {
+                    alt.emit(`${ComponentName}:Refresh`);
+                }
                 return true;
             }
 
-            if (message == '/chatfade') {
+            if (message === '/chatfade') {
                 this.chatbox.shouldFade = !this.chatbox.shouldFade;
+                this.userInput = '';
+                this.handleInput();
+                return true;
+            }
+
+            if (message === '/chatprint') {
+                for (let i = 0; i < this.messages.length; i++) {
+                    console.log(this.messages[i]);
+                }
                 this.userInput = '';
                 this.handleInput();
                 return true;
@@ -356,6 +378,13 @@ export default defineComponent({
                 this.userInput = this.history[this.historyIndex];
                 this.handleInput();
                 return;
+            }
+
+            if (!('alt' in window)) {
+                if (e.keyCode === 33 || e.keyCode == 34) {
+                    this.navigatePagination(e.keyCode !== 34);
+                    return;
+                }
             }
         },
         handleInput() {
@@ -454,6 +483,19 @@ export default defineComponent({
     text-align: left;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
+}
+
+.new-messages {
+    position: absolute;
+    left: -5px;
+    bottom: -12px;
+}
+
+.new-messages-text {
+    font-size: 12px !important;
+    font-weight: 800;
+    text-shadow: 1px 1px black;
 }
 
 .input-holder {

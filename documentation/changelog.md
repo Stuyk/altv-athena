@@ -154,6 +154,11 @@ description: List of all the changes and current versions.
 + Abstract the Polygon Creation Process
 + Added Native Audio Support to WebViews with `play:Sound`
 + Added Action Menu to Hud Overlays
++ Increased Chat Response Time
++ Added Icon to Show Page is not Latest in Messages
++ Added Page Reset on Chat Key Press
++ Added Page Reset on Input Sending
++ Added /chatprint to Print Messages to Console
 ```
 
 ## 2.0.3
