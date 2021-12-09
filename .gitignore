@@ -27,3 +27,4 @@ dist-ssr
 !altv-athena-hwid-win.exe
 server.cfg
 doc
+typedoc.json
