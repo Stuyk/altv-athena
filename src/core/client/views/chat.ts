@@ -24,18 +24,6 @@ interface IMessage {
 }
 
 class ChatView implements ViewModel {
-    /**
-     * Register the keybind to toggle the leaderboard.
-     * @static
-     * @memberof ChatController
-     */
-    static registerKeybind() {
-        KeybindController.registerKeybind({
-            key: KEY_BINDS.CHAT,
-            singlePress: ChatView.focus,
-        });
-    }
-
     static async setVisible(value: boolean) {
         isDisabled = !value;
 
@@ -44,6 +32,7 @@ class ChatView implements ViewModel {
             return;
         }
 
+        alt.off('keyup', ChatView.keyUp);
         WebViewController.closePages([PAGE_NAME]);
     }
 
@@ -59,9 +48,9 @@ class ChatView implements ViewModel {
             view.off(`${PAGE_NAME}:Send`, ChatView.send);
         }
 
+        alt.on('keydown', ChatView.keyUp);
         view.on(`${PAGE_NAME}:Ready`, ChatView.ready);
         view.on(`${PAGE_NAME}:Send`, ChatView.send);
-
         WebViewController.openPages([PAGE_NAME]);
 
         alt.setTimeout(() => {
@@ -158,9 +147,21 @@ class ChatView implements ViewModel {
 
         alt.emitServer(View_Events_Chat.Send, message, commands);
     }
+
+    static async keyUp(key: number) {
+        // Page Up
+        if (key === 33 || key === 34) {
+            const view = await WebViewController.get();
+            view.emit(`${PAGE_NAME}:UnfocusedKeyBind`, key);
+        }
+
+        // Default: T
+        if (key === KEY_BINDS.CHAT) {
+            ChatView.focus();
+        }
+    }
 }
 
 alt.onServer(View_Events_Chat.Append, ChatView.receive);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatView.registerKeybind);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatView.open);
 alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, ChatView.populateCommands);

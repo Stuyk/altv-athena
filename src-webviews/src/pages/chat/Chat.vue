@@ -14,10 +14,10 @@
             <div class="input-holder">
                 <!-- Chat Input Box -->
                 <Input
-                    v-if="showInputBox"
                     @input="handleInput"
                     v-model="userInput"
                     @suggestion-tab="handleSuggestionTab"
+                    :style="getInputStyle"
                 />
                 <!-- Chat Suggestions -->
                 <Suggestions
@@ -103,6 +103,13 @@ export default defineComponent({
             }
 
             return fontSize;
+        },
+        getInputStyle() {
+            if (!this.showInputBox) {
+                return 'opacity: 0 !important;';
+            }
+
+            return 'opacity: 1 !important;';
         },
     },
     methods: {
@@ -205,6 +212,8 @@ export default defineComponent({
             return true;
         },
         navigatePagination(increase: boolean) {
+            this.updateCount += 1;
+
             if (!increase) {
                 if (this.page <= 1) {
                     return;
@@ -298,6 +307,15 @@ export default defineComponent({
 
             return false;
         },
+        unfocusedPress(key: number) {
+            this.updateCount += 1;
+
+            // Page Up && Page Down
+            if (key === 33 || key == 34) {
+                this.navigatePagination(key !== 34);
+                return;
+            }
+        },
         handlePress(e) {
             this.updateCount += 1;
 
@@ -310,12 +328,6 @@ export default defineComponent({
             // Enter
             if (e.keyCode === 13) {
                 this.processInput();
-                return;
-            }
-
-            // Page Up && Page Down
-            if (e.keyCode === 33 || e.keyCode == 34) {
-                this.navigatePagination(e.keyCode !== 34);
                 return;
             }
 
@@ -389,6 +401,7 @@ export default defineComponent({
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetMessages`, this.setMessages);
             alt.on(`${ComponentName}:Focus`, this.handleShowInput);
+            alt.on(`${ComponentName}:UnfocusedKeyBind`, this.unfocusedPress);
             alt.emit(`${ComponentName}:Ready`);
         } else {
             this.setMessages(JSON.stringify(defaultMessages()), JSON.stringify(defaultCommands()));
@@ -399,6 +412,7 @@ export default defineComponent({
         if ('alt' in window) {
             alt.off(`${ComponentName}:SetMessages`, this.setMessages);
             alt.off(`${ComponentName}:Focus`, this.handleShowInput);
+            alt.off(`${ComponentName}:UnfocusedKeyBind`, this.unfocusedPress);
         }
 
         document.removeEventListener('keyup', this.handlePress);
