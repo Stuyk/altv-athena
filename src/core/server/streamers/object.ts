@@ -52,12 +52,20 @@ export class ServerObjectController {
      * @memberof ObjectController
      */
     static remove(uid: string): boolean {
-        const index = globalObjects.findIndex((object) => object.uid === uid);
-        if (index <= -1) {
+        let wasFound = false;
+        for (let i = globalObjects.length - 1; i >= 0; i--) {
+            if (globalObjects[i].uid !== uid) {
+                continue;
+            }
+
+            globalObjects.splice(i, 1);
+            wasFound = true;
+        }
+
+        if (!wasFound) {
             return false;
         }
 
-        globalObjects.splice(index, 1);
         ServerObjectController.refresh();
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;

@@ -27,12 +27,20 @@ export class ServerItemController {
     }
 
     static remove(uid: string): boolean {
-        const index = globalItemDrops.findIndex((label) => label.uid === uid);
-        if (index <= -1) {
+        let wasFound = false;
+        for (let i = globalItemDrops.length - 1; i >= 0; i--) {
+            if (globalItemDrops[i].uid !== uid) {
+                continue;
+            }
+
+            globalItemDrops.splice(i, 1);
+            wasFound = true;
+        }
+
+        if (!wasFound) {
             return false;
         }
 
-        globalItemDrops.splice(index, 1);
         ServerItemController.refresh();
         return true;
     }

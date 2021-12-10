@@ -463,20 +463,17 @@ export class InventoryController {
         const index = GROUND_ITEMS.findIndex((gItem) => gItem.item.hash === hash);
         if (index <= -1) {
             playerFuncs.sync.inventory(player);
-            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const droppedItem: DroppedItem = { ...GROUND_ITEMS[index] };
         if (distance2d(player.pos, droppedItem.position) >= 10) {
             playerFuncs.sync.inventory(player);
-            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
             playerFuncs.sync.inventory(player);
-            // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 

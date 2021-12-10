@@ -125,7 +125,7 @@ export default defineComponent({
          * Means they're inserted in the front.
          * [85, 86, 87, 88, 89... etc]
          */
-        setMessages(messages: string, commands: string) {
+        setMessages(messages: string, commands: string, history: string) {
             let _messages = JSON.parse(messages);
             let splitMessages = [];
 
@@ -172,6 +172,7 @@ export default defineComponent({
             }
 
             this.commands = cmds;
+            this.history = JSON.parse(history);
 
             this.updateCount += 1;
         },
@@ -251,11 +252,6 @@ export default defineComponent({
 
             // Append Commands to History
             if (originalMessage.charAt(0) === '/') {
-                this.history.unshift(originalMessage);
-                if (this.history.length > 25) {
-                    this.history.pop();
-                }
-
                 // Handle Chat Commands
                 if (this.isLocalCommand(originalMessage)) {
                     if ('alt' in window) {
@@ -362,6 +358,7 @@ export default defineComponent({
 
                 this.historyIndex += 1;
                 this.userInput = this.history[this.historyIndex];
+                this.suggestions = [];
                 this.handleInput();
                 return;
             }
@@ -371,6 +368,7 @@ export default defineComponent({
                 if (this.historyIndex - 1 <= -1) {
                     this.userInput = '';
                     this.historyIndex = -1;
+                    this.handleInput();
                     return;
                 }
 

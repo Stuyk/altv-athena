@@ -4,16 +4,15 @@ import { KEY_BINDS } from '../../shared/enums/KeyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 import { View_Events_Chat } from '../../shared/enums/Views';
 import { Command } from '../../shared/interfaces/Command';
-import { KeybindController } from '../events/keyup';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { disableAllControls } from '../utility/disableControls';
 import { handleFreezePlayer } from '../utility/freeze';
-import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Chat';
 let messages: Array<IMessage> = [];
 let commands: Array<Partial<Command>> = [];
+let history: Array<string> = [];
 let isReady = false;
 let isDisabled = false;
 let hasRegistered = false;
@@ -133,7 +132,12 @@ class ChatView implements ViewModel {
 
     static async update() {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetMessages`, JSON.stringify(messages), JSON.stringify(commands));
+        view.emit(
+            `${PAGE_NAME}:SetMessages`,
+            JSON.stringify(messages),
+            JSON.stringify(commands),
+            JSON.stringify(history),
+        );
     }
 
     static clear() {
@@ -152,6 +156,12 @@ class ChatView implements ViewModel {
 
         if (!message) {
             return;
+        }
+
+        history.unshift(message);
+
+        if (history.length >= 25) {
+            history.pop();
         }
 
         alt.emitServer(View_Events_Chat.Send, message, commands);
