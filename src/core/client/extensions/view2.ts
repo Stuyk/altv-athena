@@ -79,6 +79,23 @@ export class WebViewController {
     }
 
     /**
+     * Trigger this to hide/show a specific overlay
+     * @static
+     * @param {string} pageName
+     * @param {boolean} state
+     * @memberof WebViewController
+     */
+	static setOverlayVisible(pageName: string, state: boolean) {
+		const index = _overlays.findIndex((page) => page.name === pageName);
+
+		if (index === -1) {
+			return;
+		}
+
+		_overlays[index].callback(state);
+	}
+    
+    /**
      * Get the current WebView instance.
      * @static
      * @return {Promise<alt.WebView>}
