@@ -17,11 +17,6 @@ export class StreamerService {
     };
 
     static init() {
-        if (hasInitialized) {
-            return;
-        }
-
-        hasInitialized = true;
         Logger.info(`Connected to Streamer Service`);
         const pingMessage: IStreamMessage = {
             id: -1,
@@ -194,9 +189,12 @@ export class StreamerService {
     }
 }
 
-sock.onopen = StreamerService.init;
-sock.onmessage = (message: MessageEvent) => {
-    StreamerService.receive(message.data);
-};
+if (!hasInitialized) {
+    hasInitialized = true;
+    sock.onopen = StreamerService.init;
+    sock.onmessage = (message: MessageEvent) => {
+        StreamerService.receive(message.data);
+    };
 
-alt.setInterval(StreamerService.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
+    alt.setInterval(StreamerService.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
+}
