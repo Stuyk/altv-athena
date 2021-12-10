@@ -89,6 +89,16 @@ export class InteriorSystem {
         rules[ruleType].push(callback);
     }
 
+    /**
+     * Needs to be a player.data._id;
+     * @static
+     * @param {string} ownerIdentifier
+     * @memberof InteriorSystem
+     */
+    static getInteriorsByOwner(ownerIdentifier: string): Array<Interior> {
+        return interiors.filter((x) => x.owners && x.owners[0] === ownerIdentifier);
+    }
+
     static getNextID(): number {
         if (interiors.length <= 0) {
             return 1;
