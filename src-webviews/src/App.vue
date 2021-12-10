@@ -58,7 +58,7 @@ This is if you want to design out-of-game and just work on some design.
                 v-for="(page, index) in pages"
                 :key="index"
                 :is="page.component"
-                :id="'page-' + page"
+                :id="'page-' + page.name"
                 @set-page="setPages"
                 @close-page="closePage"
                 v-bind:emit="emit"
@@ -174,7 +174,7 @@ export default defineComponent({
                         continue;
                     }
 
-                    const element = document.getElementById(`page-${currentPages[i]}`);
+                    const element = document.getElementById(`page-${currentPages[i].name}`);
                     if (element) {
                         element.classList.replace('fade-in', 'fade-out');
                     }
