@@ -6,6 +6,7 @@ import { SYSTEM_EVENTS } from '../shared/enums/System';
 const filePaths = [
     // Plugins Imports Appended Here
     // ie. './some-folder/index'
+    './test/index',
 ];
 
 /**

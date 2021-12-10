@@ -8,6 +8,7 @@ const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
 const callbacks: { [key: string]: (player: alt.Player, streamedData: Array<any>) => void } = {};
 let ready = false;
+let hasInitialized = false;
 
 export class StreamerService {
     static Routes = {
@@ -16,6 +17,11 @@ export class StreamerService {
     };
 
     static init() {
+        if (hasInitialized) {
+            return;
+        }
+
+        hasInitialized = true;
         Logger.info(`Connected to Streamer Service`);
         const pingMessage: IStreamMessage = {
             id: -1,
