@@ -8,14 +8,18 @@ import { StreamerService } from '../systems/streamer';
 const globalObjects: Array<IObject> = [];
 const KEY = 'objects';
 
-export class ServerObjectController {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     /**
      * Initialize the Object Controller Streamer
      * @static
      * @memberof ObjectController
      */
     static init() {
-        StreamerService.registerCallback(KEY, ServerObjectController.update);
+        StreamerService.registerCallback(KEY, InternalController.update);
     }
 
     /**
@@ -27,6 +31,19 @@ export class ServerObjectController {
         StreamerService.updateData(KEY, globalObjects);
     }
 
+    /**
+     * Updates objects through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<IObject>} objects
+     * @memberof ObjectController
+     */
+    static update(player: alt.Player, objects: Array<IObject>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
+    }
+}
+
+export class ServerObjectController {
     /**
      * Add an object to the global stream.
      * @static
@@ -40,7 +57,7 @@ export class ServerObjectController {
         }
 
         globalObjects.push(objectData);
-        ServerObjectController.refresh();
+        InternalController.refresh();
         return objectData.uid;
     }
 
@@ -66,7 +83,7 @@ export class ServerObjectController {
             return false;
         }
 
-        ServerObjectController.refresh();
+        InternalController.refresh();
         alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;
     }
@@ -103,17 +120,6 @@ export class ServerObjectController {
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
         return objectData.uid;
     }
-
-    /**
-     * Updates objects through the streamer service.
-     * @static
-     * @param {alt.Player} player
-     * @param {Array<IObject>} objects
-     * @memberof ObjectController
-     */
-    static update(player: alt.Player, objects: Array<IObject>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
-    }
 }
 
-ServerObjectController.init();
+InternalController.init();

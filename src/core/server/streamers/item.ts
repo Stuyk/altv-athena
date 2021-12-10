@@ -7,22 +7,32 @@ import { GroundItem } from '../../shared/interfaces/GroundItem';
 const globalItemDrops: Array<GroundItem> = [];
 const KEY = 'item-drops';
 
-export class ServerItemController {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     static init() {
-        StreamerService.registerCallback(KEY, ServerItemController.update);
+        StreamerService.registerCallback(KEY, InternalController.update);
     }
 
     static refresh() {
         StreamerService.updateData(KEY, globalItemDrops);
     }
 
+    static update(player: alt.Player, drops: Array<GroundItem>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, drops);
+    }
+}
+
+export class ServerItemController {
     static append(itemInfo: GroundItem): string {
         if (!itemInfo.uid) {
             itemInfo.uid = sha256Random(JSON.stringify(itemInfo));
         }
 
         globalItemDrops.push(itemInfo);
-        ServerItemController.refresh();
+        InternalController.refresh();
         return itemInfo.uid;
     }
 
@@ -41,13 +51,9 @@ export class ServerItemController {
             return false;
         }
 
-        ServerItemController.refresh();
+        InternalController.refresh();
         return true;
-    }
-
-    static update(player: alt.Player, drops: Array<GroundItem>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, drops);
     }
 }
 
-ServerItemController.init();
+InternalController.init();

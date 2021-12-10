@@ -7,14 +7,18 @@ import { StreamerService } from '../systems/streamer';
 const KEY = 'markers';
 const globalMarkers: Array<Marker> = [];
 
-export class ServerMarkerController {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     /**
      * Initialize this Marker Stream Service
      * @static
      * @memberof ServerMarkerController
      */
     static init() {
-        StreamerService.registerCallback(KEY, ServerMarkerController.update);
+        StreamerService.registerCallback(KEY, InternalController.update);
     }
 
     /**
@@ -26,6 +30,19 @@ export class ServerMarkerController {
         StreamerService.updateData(KEY, globalMarkers);
     }
 
+    /**
+     * Updates marker labels through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<Marker>} markers
+     * @memberof ServerMarkerController
+     */
+    static update(player: alt.Player, markers: Array<Marker>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
+    }
+}
+
+export class ServerMarkerController {
     /**
      * Adds a global marker for all players.
      * @static
@@ -39,7 +56,7 @@ export class ServerMarkerController {
         }
 
         globalMarkers.push(marker);
-        ServerMarkerController.refresh();
+        InternalController.refresh();
         return marker.uid;
     }
 
@@ -57,7 +74,7 @@ export class ServerMarkerController {
         }
 
         globalMarkers.splice(index, 1);
-        ServerMarkerController.refresh();
+        InternalController.refresh();
         return true;
     }
 
@@ -92,17 +109,6 @@ export class ServerMarkerController {
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_MARKER, marker);
         return marker.uid;
     }
-
-    /**
-     * Updates marker labels through the streamer service.
-     * @static
-     * @param {alt.Player} player
-     * @param {Array<Marker>} markers
-     * @memberof ServerMarkerController
-     */
-    static update(player: alt.Player, markers: Array<Marker>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_MARKERS, markers);
-    }
 }
 
-ServerMarkerController.init();
+InternalController.init();

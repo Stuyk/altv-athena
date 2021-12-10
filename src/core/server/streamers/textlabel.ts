@@ -7,25 +7,42 @@ import { StreamerService } from '../systems/streamer';
 const globalTextLabels: Array<TextLabel> = [];
 const KEY = 'labels';
 
-export class ServerTextLabelController {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     /**
      * Initialize the TextLabel Streamer Service
      * @static
-     * @memberof TextLabelController
+     * @memberof InternalController
      */
     static init() {
-        StreamerService.registerCallback(KEY, ServerTextLabelController.update);
+        StreamerService.registerCallback(KEY, InternalController.update);
     }
 
     /**
      * Internal function to refresh all global text labels in the streamer service.
      * @static
-     * @memberof TextLabelController
+     * @memberof InternalController
      */
     static refresh() {
         StreamerService.updateData(KEY, globalTextLabels);
     }
 
+    /**
+     * Updates text labels through the streamer service.
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<TextLabel>} labels
+     * @memberof InternalController
+     */
+    static update(player: alt.Player, labels: Array<TextLabel>) {
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
+    }
+}
+
+export class ServerTextLabelController {
     /**
      * Adds a text label to the global streamer.
      * @static
@@ -39,7 +56,7 @@ export class ServerTextLabelController {
         }
 
         globalTextLabels.push(label);
-        ServerTextLabelController.refresh();
+        InternalController.refresh();
         return label.uid;
     }
 
@@ -57,7 +74,7 @@ export class ServerTextLabelController {
         }
 
         globalTextLabels.splice(index, 1);
-        ServerTextLabelController.refresh();
+        InternalController.refresh();
         return true;
     }
 
@@ -92,17 +109,6 @@ export class ServerTextLabelController {
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_TEXTLABELS, textLabel);
         return textLabel.uid;
     }
-
-    /**
-     * Updates text labels through the streamer service.
-     * @static
-     * @param {alt.Player} player
-     * @param {Array<TextLabel>} labels
-     * @memberof TextLabelController
-     */
-    static update(player: alt.Player, labels: Array<TextLabel>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_TEXTLABELS, labels);
-    }
 }
 
-ServerTextLabelController.init();
+InternalController.init();

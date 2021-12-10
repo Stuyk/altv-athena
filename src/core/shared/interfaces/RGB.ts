@@ -3,5 +3,5 @@ export interface RGB {
     g: number;
     b: number;
     a?: number;
-    alpha: number;
+    alpha?: number;
 }

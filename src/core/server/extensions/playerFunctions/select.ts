@@ -11,7 +11,6 @@ import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
 import { InteriorSystem } from '../../systems/interior';
-import { StreamerService } from '../../systems/streamer';
 import { World } from '../../systems/world';
 import { playerFuncs } from '../Player';
 import VehicleFuncs from '../VehicleFuncs';
@@ -108,9 +107,6 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         ChatController.populateCommands(player);
         ServerBlipController.populateGlobalBlips(player);
         HologramController.populateHolograms(player);
-
-        // Markers, Text Labels, Objects, etc.
-        StreamerService.requestUpdate(player);
 
         // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);

@@ -7,16 +7,20 @@ import { sha256Random } from '../utility/encryption';
 const KEY = 'polygons';
 const globalPolygons: { [key: string]: IStreamPolygon } = {};
 
-export class ServerPolygonController {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     static init() {
-        StreamerService.registerCallback(KEY, ServerPolygonController.update);
+        StreamerService.registerCallback(KEY, InternalController.update);
     }
 
     /**
      * Internal function to refresh all global markers in the streamer service.
      * Must abuse stringify, and parse to clear functions.
      * @static
-     * @memberof ServerPolygonController
+     * @memberof InternalController
      */
     static refresh() {
         const polygons = [];
@@ -29,39 +33,6 @@ export class ServerPolygonController {
     }
 
     /**
-     * Add or overwrite a global polygon stream.
-     * @static
-     * @param {IStreamPolygon} streamPolygon
-     * @return {*}  {string}
-     * @memberof ServerPolygonController
-     */
-    static append(streamPolygon: IStreamPolygon): string {
-        if (!streamPolygon.uid) {
-            streamPolygon.uid = sha256Random(JSON.stringify(streamPolygon));
-        }
-
-        globalPolygons[streamPolygon.uid] = streamPolygon;
-        ServerPolygonController.refresh();
-        return streamPolygon.uid;
-    }
-
-    /**
-     * Remove a global polygon from streamer.
-     * @static
-     * @param {string} uid
-     * @return {*}  {boolean}
-     * @memberof ServerPolygonController
-     */
-    static remove(uid: string): boolean {
-        if (globalPolygons[uid]) {
-            delete globalPolygons[uid];
-        }
-
-        ServerPolygonController.refresh();
-        return true;
-    }
-
-    /**
      * Automatically passes through the closest polygons to a player.
      * It does not check if they are inside. Only gets polygons in the relative area.
      *
@@ -69,7 +40,7 @@ export class ServerPolygonController {
      * @static
      * @param {alt.Player} player
      * @param {Array<IStreamPolygon>} polygons
-     * @memberof ServerPolygonController
+     * @memberof InternalController
      */
     static update(player: alt.Player, polygons: Array<IStreamPolygon>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_POLYGONS, polygons);
@@ -80,7 +51,7 @@ export class ServerPolygonController {
      * @static
      * @param {alt.Player} player
      * @param {IStreamPolygon} polygon
-     * @memberof ServerPolygonController
+     * @memberof InternalController
      */
     static enter(player: alt.Player, polygonStream: IStreamPolygon) {
         const polygon = globalPolygons[polygonStream.uid];
@@ -101,7 +72,7 @@ export class ServerPolygonController {
      * @param {alt.Player} player
      * @param {IStreamPolygon} polygonStream
      * @return {*}
-     * @memberof ServerPolygonController
+     * @memberof InternalController
      */
     static leave(player: alt.Player, polygonStream: IStreamPolygon) {
         const polygon = globalPolygons[polygonStream.uid];
@@ -117,6 +88,41 @@ export class ServerPolygonController {
     }
 }
 
-alt.onClient(SYSTEM_EVENTS.POLYGON_ENTER, ServerPolygonController.enter);
-alt.onClient(SYSTEM_EVENTS.POLYGON_LEAVE, ServerPolygonController.leave);
-ServerPolygonController.init();
+export class ServerPolygonController {
+    /**
+     * Add or overwrite a global polygon stream.
+     * @static
+     * @param {IStreamPolygon} streamPolygon
+     * @return {*}  {string}
+     * @memberof ServerPolygonController
+     */
+    static append(streamPolygon: IStreamPolygon): string {
+        if (!streamPolygon.uid) {
+            streamPolygon.uid = sha256Random(JSON.stringify(streamPolygon));
+        }
+
+        globalPolygons[streamPolygon.uid] = streamPolygon;
+        InternalController.refresh();
+        return streamPolygon.uid;
+    }
+
+    /**
+     * Remove a global polygon from streamer.
+     * @static
+     * @param {string} uid
+     * @return {*}  {boolean}
+     * @memberof ServerPolygonController
+     */
+    static remove(uid: string): boolean {
+        if (globalPolygons[uid]) {
+            delete globalPolygons[uid];
+        }
+
+        InternalController.refresh();
+        return true;
+    }
+}
+
+alt.onClient(SYSTEM_EVENTS.POLYGON_ENTER, InternalController.enter);
+alt.onClient(SYSTEM_EVENTS.POLYGON_LEAVE, InternalController.leave);
+InternalController.init();
