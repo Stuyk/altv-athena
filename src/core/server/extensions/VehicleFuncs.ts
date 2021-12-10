@@ -14,6 +14,7 @@ import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
 import { VehicleData } from '../../shared/information/vehicles';
 import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
+import { RGBA } from 'alt-shared';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -251,11 +252,6 @@ export default class VehicleFuncs {
         vehicle.passengers = [];
         vehicle.behavior = vehicle.data.behavior;
 
-        if (vehicle.data.color) {
-            vehicle.customPrimaryColor = document.color;
-            vehicle.customSecondaryColor = document.color;
-        }
-
         if (vehicle.data.bodyHealth) {
             vehicle.bodyHealth = vehicle.data.bodyHealth;
         }
@@ -267,6 +263,7 @@ export default class VehicleFuncs {
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+        VehicleFuncs.updateVehicleMods(vehicle);
 
         // Synchronization
         if (pos && rot) {
@@ -281,6 +278,13 @@ export default class VehicleFuncs {
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
         alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
         return vehicle;
+    }
+
+    static updateVehicleMods(vehicle: alt.Vehicle) {
+        if (vehicle.data.color) {
+            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
+            vehicle.customSecondaryColor = vehicle.data.color2 as RGBA;
+        }
     }
 
     /**

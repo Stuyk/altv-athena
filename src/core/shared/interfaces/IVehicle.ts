@@ -2,6 +2,7 @@ import { Vehicle_Behavior } from '../enums/Vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/VehicleOwnershipFlags';
 import { IStorage } from './IStorage';
 import IVehicleTuning from './IVehicleTuning';
+import { RGB } from './RGB';
 import { Vector3 } from './Vector';
 
 export interface IVehicle {
@@ -142,12 +143,14 @@ export interface IVehicle {
      *     }}
      * @memberof IVehicle
      */
-    color?: {
-        r: number;
-        g: number;
-        b: number;
-        a: number;
-    };
+    color?: RGB;
+
+    /**
+     * Secondary color of the vehicle.
+     * @type {RGB}
+     * @memberof IVehicle
+     */
+    color2?: RGB;
 
     /**
      * Vehicle Tuning Interface

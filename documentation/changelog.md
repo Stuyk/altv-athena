@@ -159,6 +159,10 @@ description: List of all the changes and current versions.
 + Added Page Reset on Chat Key Press
 + Added Page Reset on Input Sending
 + Added /chatprint to Print Messages to Console
++ Leonard added setOverlayVisible for view2 which lets you toggle overlay visibility
++ Added Temporary Custom Interactions
++ Added Temporary Custom Interaction Text
++ Added Paint Shop Concept
 ```
 
 ## 2.0.3

@@ -14,7 +14,8 @@ const RegisteredComponents: { [key: string]: IHudComponent } = {};
 
 let interval;
 let isDisabled = false;
-let interactions: Array<{ keyPress: string; description: string }> = [];
+let interactions: Array<IClientInteraction> = [];
+let customInteractions: Array<IClientInteraction> = [];
 let hasRegistered = false;
 
 export class HudView implements ViewModel {
@@ -42,6 +43,30 @@ export class HudView implements ViewModel {
         view.off(`${PAGE_NAME}:Ready`, HudView.ready);
         WebViewController.closePages([PAGE_NAME]);
         native.displayRadar(false);
+    }
+
+    static addCustomInteraction(_interaction: IClientInteraction) {
+        const index = customInteractions.findIndex((x) => x.uid === _interaction.uid);
+        if (index >= 0) {
+            customInteractions[index] = {
+                uid: _interaction.uid,
+                ..._interaction,
+            };
+        } else {
+            customInteractions.push({
+                uid: _interaction.uid,
+                ..._interaction,
+            });
+        }
+    }
+
+    static removeCustomInteraction(uid: string) {
+        const index = customInteractions.findIndex((x) => x.uid === uid);
+        if (index <= -1) {
+            return;
+        }
+
+        customInteractions.splice(index, 1);
     }
 
     static async setInteractions(_interactions: Array<IClientInteraction>) {
@@ -229,8 +254,10 @@ export class HudView implements ViewModel {
     }
 
     static defaultInteractionsComponent(propName) {
-        HudView.passComponentInfo(propName, JSON.stringify(interactions), true);
+        HudView.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
     }
 }
 
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, HudView.open);
+alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, HudView.addCustomInteraction);
+alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, HudView.removeCustomInteraction);

@@ -16,6 +16,7 @@ import Chat from './chat/Chat.vue';
 import Hud from './hud/Hud.vue';
 import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
+import PaintShop from './paintshop/PaintShop.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -36,6 +37,7 @@ const componentList = {
     Inventory: shallowRef(Inventory),
     Job: shallowRef(Job),
     Login: shallowRef(Login),
+    PaintShop: shallowRef(PaintShop),
     Storage: shallowRef(Storage),
     MultiPageExample: shallowRef(MultiPageExample),
 };

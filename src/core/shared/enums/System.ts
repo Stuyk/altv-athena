@@ -37,6 +37,9 @@ export enum SYSTEM_EVENTS {
     INTERACTION_FUEL = 'fuel:Action',
     INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
+    INTERACTION_TEXT_CREATE = 'interaction:Text:Create',
+    INTERACTION_TEXT_REMOVE = 'interaction:Text:Remove',
+    INTERACTION_TEMPORARY = 'interaction:Temporary',
     // IPL
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',

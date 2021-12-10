@@ -4,6 +4,7 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/System';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/Views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import IAttachable from '../../../shared/interfaces/IAttachable';
+import IClientInteraction from '../../../shared/interfaces/IClientInteraction';
 import ICredit from '../../../shared/interfaces/ICredit';
 import IErrorScreen from '../../../shared/interfaces/IErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/InputMenus';
@@ -332,7 +333,35 @@ function objectRemove(player: alt.Player, uid: string) {
     }
 }
 
+/**
+ * Add Interaction Text
+ * @param {alt.Player} player
+ * @param {IClientInteraction} interaction
+ */
+function interactionAdd(player: alt.Player, interaction: IClientInteraction) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, interaction);
+}
+
+/**
+ * Remove Interaction Text
+ * @param {alt.Player} player
+ * @param {string} uid
+ */
+function interactionRemove(player: alt.Player, uid: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, uid);
+}
+
+/**
+ * Makes the user press 'E' to trigger this callback event.
+ * @param {alt.Player} player
+ * @param {string} eventName
+ */
+function interactionTemporary(player: alt.Player, eventName: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEMPORARY, eventName);
+}
+
 export default {
+    interactionAdd,
     animation,
     clearAnimation,
     clearCredits,
@@ -351,10 +380,12 @@ export default {
     objectAttach,
     objectRemove,
     particle,
+    interactionRemove,
     removeProgressBar,
     scenario,
     sound2D,
     sound3D,
     soundFrontend,
     taskTimeline,
+    interactionTemporary,
 };

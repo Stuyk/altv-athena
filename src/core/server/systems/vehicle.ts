@@ -11,7 +11,6 @@ import {
     VEHICLE_STATE,
 } from '../../shared/enums/Vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
-import { VEHICLE_CLASS } from '../../shared/enums/VehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Task } from '../../shared/interfaces/TaskTimeline';
@@ -26,16 +25,16 @@ import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
 import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
-
-import '../views/dealership';
-import '../views/garage';
-import './fuel';
 import { VEHICLE_RULES } from '../../shared/enums/VehicleRules';
 import { IResponse } from '../../shared/interfaces/IResponse';
 import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
 import SystemRules from './rules';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import '../views/paintshop';
+import '../views/dealership';
+import '../views/garage';
+import './fuel';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -193,6 +192,8 @@ export class VehicleSystem {
     }
 
     static entering(player: alt.Player, vehicle: alt.Vehicle) {
+        player.hasSatDown = false;
+
         if (!player.isPushingVehicle) {
             return;
         }
@@ -201,6 +202,8 @@ export class VehicleSystem {
     }
 
     static enter(player: alt.Player, vehicle: alt.Vehicle) {
+        player.hasSatDown = true;
+
         if (!vehicle.isBeingPushed) {
             return;
         }
@@ -209,6 +212,10 @@ export class VehicleSystem {
     }
 
     static leave(player: alt.Player, vehicle: alt.Vehicle, seat: number) {
+        if (player && player.valid) {
+            player.hasSatDown = false;
+        }
+
         if (seat === 1) {
             VehicleFuncs.update(vehicle);
         }
@@ -268,6 +275,10 @@ export class VehicleSystem {
      */
     static toggleEngine(player: alt.Player) {
         if (!player || !player.vehicle || !player.vehicle.driver) {
+            return;
+        }
+
+        if (!player.hasSatDown) {
             return;
         }
 

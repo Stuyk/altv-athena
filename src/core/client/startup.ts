@@ -79,4 +79,5 @@ import './views/hud';
 import './views/inventory';
 import './views/job';
 import './views/login';
+import './views/paintshop';
 import './views/storage';

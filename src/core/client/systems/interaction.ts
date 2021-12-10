@@ -24,6 +24,7 @@ let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 let disableMarker: boolean = false;
 let description: string;
 let position: alt.Vector3;
+let temporaryInteraction: string = null;
 
 export class InteractionController {
     /**
@@ -37,6 +38,16 @@ export class InteractionController {
         }
 
         InteractionController.registerKeybinds();
+    }
+
+    /**
+     * Adds a temporary interaction that calls back a server-side event.
+     * @static
+     * @param {(string | null)} eventName
+     * @memberof InteractionController
+     */
+    static setTemporaryInteraction(eventName: string | null) {
+        temporaryInteraction = eventName;
     }
 
     /**
@@ -114,6 +125,11 @@ export class InteractionController {
             }
 
             alt.emitServer(View_Events_Inventory.Pickup, groundItem.uid);
+            return;
+        }
+
+        if (temporaryInteraction) {
+            alt.emitServer(temporaryInteraction);
             return;
         }
 
@@ -218,5 +234,6 @@ export class InteractionController {
     }
 }
 
+alt.onServer(SYSTEM_EVENTS.INTERACTION_TEMPORARY, InteractionController.setTemporaryInteraction);
 alt.onServer(SYSTEM_EVENTS.PLAYER_SET_INTERACTION, InteractionController.set);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InteractionController.init);

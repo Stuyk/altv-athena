@@ -221,6 +221,14 @@ declare module 'alt-server' {
          * @memberof Player
          */
         attachables?: Array<IAttachable> | null;
+
+        /**
+         * Used for vehicle seating.
+         * Determines if the player has fully sat down.
+         * @type {boolean}
+         * @memberof Player
+         */
+        hasSatDown?: boolean;
     }
 }
 
