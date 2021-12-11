@@ -19,6 +19,12 @@ async function handleConnectionComplete() {
     handleTick();
 }
 
+alt.everyTick(() => {
+    native.hideHudComponentThisFrame(6); // Vehicle Name
+    native.hideHudComponentThisFrame(8); // Vehicle Class
+    native.hideHudComponentThisFrame(9); // Street Name
+});
+
 function handleTick() {
     native.startAudioScene(`CHARACTER_CHANGE_IN_SKY_SCENE`);
     native.startAudioScene('FBI_HEIST_H5_MUTE_AMBIENCE_SCENE'); // Used to stop police sound in town
