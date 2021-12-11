@@ -45,6 +45,7 @@ export class ActionsView implements ViewModel {
             return;
         }
 
+        alt.Player.local.isActionMenuOpen = false;
         ActionsView.close();
     }
 
@@ -94,15 +95,14 @@ export class ActionsView implements ViewModel {
     }
 
     static async ready() {
-        alt.Player.local.isActionMenuOpen = true;
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:Set`, actionMenu);
+        alt.Player.local.isActionMenuOpen = true;
     }
 
     static async close() {
         actionMenu = null;
         const view = await WebViewController.get();
-        alt.Player.local.isActionMenuOpen = false;
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         view.off(`${PAGE_NAME}:Ready`, ActionsView.ready);
@@ -110,6 +110,9 @@ export class ActionsView implements ViewModel {
         view.off(`${PAGE_NAME}:Trigger`, ActionsView.trigger);
         view.unfocus();
         alt.off('keyup', ActionsView.keyUp);
+        alt.Player.local.isActionMenuOpen = false;
+
+        alt.log('clsoed menu...');
     }
 
     static async keyUp(key: number) {

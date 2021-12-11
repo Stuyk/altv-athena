@@ -67,6 +67,7 @@ class ChatView implements ViewModel {
 
     static async focus() {
         if (alt.Player.local.isActionMenuOpen) {
+            alt.log('cannot open cause action menu is open');
             return;
         }
 

@@ -269,6 +269,7 @@ export default defineComponent({
             }
         },
         handleShowInput() {
+            this.userInput = '';
             this.showInputBox = true;
             this.updateCount += 1;
             this.page = 1;
