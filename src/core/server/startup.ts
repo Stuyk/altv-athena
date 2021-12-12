@@ -10,6 +10,7 @@ import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
+import { ReconnectHelper } from './utility/reconnect';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
@@ -98,7 +99,7 @@ class Startup {
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
         Logger.info(`Server Warmup Complete. Now accepting connections.`);
-        // ReconnectHelper.invoke();
+        ReconnectHelper.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

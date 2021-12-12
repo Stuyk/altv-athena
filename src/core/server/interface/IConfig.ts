@@ -9,4 +9,5 @@ export interface IConfig {
     MONGO_COLLECTIONS?: string;
     WEBSERVER_IP?: string;
     VUE_DEBUG?: string | boolean;
+    USE_ALTV_RECONNECT?: boolean;
 }
