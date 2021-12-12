@@ -28,3 +28,4 @@ dist-ssr
 server.cfg
 doc
 typedoc.json
+!scripts/streamer/dist
