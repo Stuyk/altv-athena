@@ -9,7 +9,6 @@ import { DroppedItem } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
-import { KeybindController } from '../events/keyup';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { drawMarker } from '../utility/marker';
@@ -25,6 +24,7 @@ let camera2;
 let lastDroppedItems: Array<DroppedItem> = [];
 let drawInterval: number = null;
 let isOpen = false;
+let isCameraBeingCreated = false;
 
 export class InventoryController implements ViewModel {
     /**
@@ -81,10 +81,14 @@ export class InventoryController implements ViewModel {
         });
 
         InventoryController.processClosestGroundItems();
-        const didRenderCamera = await InventoryController.showPreview();
+
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:DisablePreview`, !didRenderCamera ? true : false);
+        view.emit(`${PAGE_NAME}:DisablePreview`, alt.Player.local.vehicle ? true : false);
         view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
+
+        if (!isCameraBeingCreated) {
+            await InventoryController.showPreview();
+        }
     }
 
     static async updateInventory() {
@@ -112,10 +116,10 @@ export class InventoryController implements ViewModel {
 
     static async close() {
         native.clearFocus();
-        native.renderScriptCams(false, false, 255, true, false, 0);
         native.setCamActive(camera, false);
         native.setCamActive(camera2, false);
         native.destroyAllCams(true);
+        native.renderScriptCams(false, false, 0, false, false, 0);
         native.setEntityVisible(alt.Player.local.scriptID, true, false);
 
         camera = null;
@@ -239,9 +243,7 @@ export class InventoryController implements ViewModel {
      * @memberof InventoryController
      */
     static async showPreview(): Promise<boolean> {
-        if (alt.Player.local.vehicle) {
-            return false;
-        }
+        isCameraBeingCreated = true;
 
         await waitForFalse(native.isPedWalking, alt.Player.local.scriptID);
         await waitForFalse(native.isPedRunning, alt.Player.local.scriptID);
@@ -295,6 +297,9 @@ export class InventoryController implements ViewModel {
         }, easeTime / 3);
 
         native.renderScriptCams(true, true, 0, true, false, 0);
+        alt.setTimeout(() => {
+            isCameraBeingCreated = false;
+        }, easeTime);
         return true;
     }
 }
