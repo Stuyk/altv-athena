@@ -14,6 +14,9 @@ class TemplateView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
         const view = await WebViewController.get();
@@ -27,7 +30,6 @@ class TemplateView implements ViewModel {
 
         // Turn off game controls, hide the hud.
         alt.toggleGameControls(false);
-        WebViewController.setOverlaysVisible(false);
 
         // Let the rest of the script know this menu is open.
         alt.Player.local.isMenuOpen = true;

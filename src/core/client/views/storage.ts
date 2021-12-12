@@ -25,6 +25,9 @@ class StorageView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, StorageView.refresh);
         view.on(`${PAGE_NAME}:Close`, StorageView.close);
@@ -35,7 +38,6 @@ class StorageView implements ViewModel {
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
-        WebViewController.setOverlaysVisible(false);
     }
 
     static async close() {

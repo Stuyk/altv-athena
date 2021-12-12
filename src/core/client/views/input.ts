@@ -16,6 +16,9 @@ export class InputView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, InputView.ready);
         view.on(`${PAGE_NAME}:Submit`, InputView.submit);
@@ -26,7 +29,6 @@ export class InputView implements ViewModel {
         WebViewController.showCursor(true);
 
         alt.toggleGameControls(false);
-        WebViewController.setOverlaysVisible(false);
 
         alt.Player.local.isMenuOpen = true;
     }

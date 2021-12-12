@@ -32,13 +32,15 @@ class FactionsView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         view = await View.getInstance(url, true, false, true);
         view.on('factions:Ready', FactionsView.ready);
         view.on('factions:GetCurrency', FactionsView.getCurrency);
         view.on(View_Events_Factions.Close, FactionsView.close);
         view.on(View_Events_Factions.Bus, FactionsView.bus);
         alt.toggleGameControls(false);
-        WebViewController.setOverlaysVisible(false);
     }
 
     static close() {

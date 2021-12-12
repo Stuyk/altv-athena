@@ -25,6 +25,9 @@ class GarageView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, GarageView.ready);
         view.on(`${PAGE_NAME}:Close`, GarageView.close);
@@ -33,7 +36,6 @@ class GarageView implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-        WebViewController.setOverlaysVisible(false);
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
     }

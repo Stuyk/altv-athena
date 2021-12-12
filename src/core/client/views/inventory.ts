@@ -49,6 +49,7 @@ export class InventoryController implements ViewModel {
         }
 
         isOpen = true;
+        await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Update`, InventoryController.ready);
@@ -61,7 +62,6 @@ export class InventoryController implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-        WebViewController.setOverlaysVisible(false);
 
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;

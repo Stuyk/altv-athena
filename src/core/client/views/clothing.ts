@@ -38,6 +38,9 @@ class ClothingView implements ViewModel {
 
         storeData = _storeData;
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, ClothingView.ready);
         view.on(`${PAGE_NAME}:Close`, ClothingView.close);
@@ -49,7 +52,6 @@ class ClothingView implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
-        WebViewController.setOverlaysVisible(false);
 
         if (PedEditCamera.exists) {
             await PedEditCamera.destroy();
