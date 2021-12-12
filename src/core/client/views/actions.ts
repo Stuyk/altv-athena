@@ -37,11 +37,18 @@ export class ActionsView implements ViewModel {
         alt.on('keyup', ActionsView.keyUp);
     }
 
+    /**
+     * This overlay is different.
+     * We want it to just close when the overlay is toggled.
+     * @static
+     * @param {boolean} value
+     * @return {*}
+     * @memberof ActionsView
+     */
     static async setVisible(value: boolean) {
         isDisabled = !value;
 
         if (!isDisabled) {
-            ActionsView.open();
             return;
         }
 
@@ -111,8 +118,6 @@ export class ActionsView implements ViewModel {
         view.unfocus();
         alt.off('keyup', ActionsView.keyUp);
         alt.Player.local.isActionMenuOpen = false;
-
-        alt.log('clsoed menu...');
     }
 
     static async keyUp(key: number) {
