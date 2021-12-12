@@ -10,7 +10,7 @@ let hasRegistered = false;
 let isDisabled = false;
 let actionMenu: ActionMenu;
 
-export class ActionsView implements ViewModel {
+class ActionsView implements ViewModel {
     /**
      * The events are bound once to the WebView.
      * They are never bound again.

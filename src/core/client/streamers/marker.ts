@@ -10,7 +10,10 @@ let localMarkers: Array<Marker> = [];
 let isRemoving = false;
 let interval: number;
 
-export class ClientMarkerController {
+/**
+ * Do Not Export Internal Only
+ */
+class ClientMarkerController {
     static init() {
         addedMarkers = [];
         localMarkers = [];

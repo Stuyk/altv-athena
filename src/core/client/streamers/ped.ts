@@ -15,7 +15,10 @@ let pedInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
 
-export class PedController {
+/**
+ * Do Not Export Internal Only
+ */
+class PedController {
     static init() {
         localPeds = [];
         addedPeds = [];

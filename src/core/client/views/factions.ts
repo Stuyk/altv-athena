@@ -15,6 +15,9 @@ const url = `http://assets/webview/client/factions/index.html`;
 let view: View;
 let faction: IFactionClient;
 
+/**
+ * Do Not Export Internal Only
+ */
 class FactionsView implements ViewModel {
     static init() {
         KeybindController.registerKeybind({

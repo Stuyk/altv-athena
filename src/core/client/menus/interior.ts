@@ -67,14 +67,14 @@ function enterMenu(interior: Interior) {
                     callback: (results: InputResult[]) => {
                         // Re-show this menu if it fails to find the value.
                         if (results.length <= 0) {
-                            InputView.show(InputMenu);
+                            InputView.setMenu(InputMenu);
                             return;
                         }
 
                         // Check that there is a result.
                         const data = results.find((x) => x && x.id === 'price');
                         if (!data) {
-                            InputView.show(InputMenu);
+                            InputView.setMenu(InputMenu);
                             return;
                         }
 
@@ -82,7 +82,7 @@ function enterMenu(interior: Interior) {
                     },
                 };
 
-                InputView.show(InputMenu);
+                InputView.setMenu(InputMenu);
             },
         });
 
@@ -104,14 +104,14 @@ function enterMenu(interior: Interior) {
                     callback: (results: InputResult[]) => {
                         // Re-show this menu if it fails to find the value.
                         if (results.length <= 0) {
-                            InputView.show(InputMenu);
+                            InputView.setMenu(InputMenu);
                             return;
                         }
 
                         // Check that there is a result.
                         const data = results.find((x) => x && x.id === 'name');
                         if (!data) {
-                            InputView.show(InputMenu);
+                            InputView.setMenu(InputMenu);
                             return;
                         }
 
@@ -119,7 +119,7 @@ function enterMenu(interior: Interior) {
                     },
                 };
 
-                InputView.show(InputMenu);
+                InputView.setMenu(InputMenu);
             },
         });
     }

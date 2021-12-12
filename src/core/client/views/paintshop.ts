@@ -18,7 +18,7 @@ let secondaryColor: RGB = null;
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'PaintShop';
 
-class PaintShopView implements ViewModel {
+class InternalFunctions implements ViewModel {
     static async open() {
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
@@ -34,10 +34,10 @@ class PaintShopView implements ViewModel {
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, PaintShopView.ready);
-        view.on(`${PAGE_NAME}:Close`, PaintShopView.close);
-        view.on(`${PAGE_NAME}:Update`, PaintShopView.update);
-        view.on(`${PAGE_NAME}:Purchase`, PaintShopView.purchase);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:Update`, InternalFunctions.update);
+        view.on(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -59,10 +59,10 @@ class PaintShopView implements ViewModel {
         // If we do not turn them off we get duplicate event behavior.
         // Also will cause a memory leak if you do not turn them off.
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, PaintShopView.ready);
-        view.off(`${PAGE_NAME}:Close`, PaintShopView.close);
-        view.off(`${PAGE_NAME}:Update`, PaintShopView.update);
-        view.off(`${PAGE_NAME}:Purchase`, PaintShopView.purchase);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:Update`, InternalFunctions.update);
+        view.off(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
 
         // Close the page.
         WebViewController.closePages([PAGE_NAME]);
@@ -111,7 +111,7 @@ class PaintShopView implements ViewModel {
         }
 
         alt.emitServer(View_Events_PaintShop.Purchase, primary, secondary);
-        PaintShopView.close();
+        InternalFunctions.close();
     }
 
     static async update(primary: RGB, secondary: RGB) {
@@ -147,4 +147,4 @@ class PaintShopView implements ViewModel {
     }
 }
 
-alt.onServer(View_Events_PaintShop.Open, PaintShopView.open);
+alt.onServer(View_Events_PaintShop.Open, InternalFunctions.open);

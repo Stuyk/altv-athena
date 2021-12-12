@@ -13,7 +13,10 @@ let objectInfo: { [uid: string]: number } = {};
 let isRemoving = false;
 let interval;
 
-export class ClientObjectController {
+/**
+ * Do Not Export Internal Only
+ */
+class ClientObjectController {
     static init() {
         localObjects = [];
         addedObjects = [];

@@ -163,6 +163,14 @@ description: List of all the changes and current versions.
 + Added Temporary Custom Interactions
 + Added Temporary Custom Interaction Text
 + Added Paint Shop Concept
++ Rewrote Plugin Handler
++ Plugin Handler Requires Plugin Registration Now
++ Wrote Custom Compiler Functionality through SWC
++ Removed rimraf script
++ Increased Boot Times*
++ Fixed Action Menu Bug
++ Internalized lots of client-side code
++ Prevent client-side streamer from being Invoked
 ```
 
 ## 2.0.3

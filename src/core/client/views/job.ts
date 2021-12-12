@@ -11,7 +11,10 @@ import { isAnyMenuOpen } from '../utility/menus';
 const PAGE_NAME = 'Job';
 let trigger: JobTrigger;
 
-class JobView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async open(_trigger: JobTrigger) {
         if (isAnyMenuOpen()) {
             return;
@@ -25,9 +28,9 @@ class JobView implements ViewModel {
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, JobView.ready);
-        view.on(`${PAGE_NAME}:Close`, JobView.close);
-        view.on(`${PAGE_NAME}:Select`, JobView.select);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:Select`, InternalFunctions.select);
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -44,7 +47,7 @@ class JobView implements ViewModel {
     static select() {
         alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
         alt.toggleGameControls(true);
-        JobView.close();
+        InternalFunctions.close();
     }
 
     static async close() {
@@ -52,9 +55,9 @@ class JobView implements ViewModel {
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, JobView.ready);
-        view.off(`${PAGE_NAME}:Close`, JobView.close);
-        view.off(`${PAGE_NAME}:Select`, JobView.select);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:Select`, InternalFunctions.select);
 
         WebViewController.closePages([PAGE_NAME]);
 
@@ -71,4 +74,4 @@ class JobView implements ViewModel {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.INTERACTION_JOB, JobView.open);
+alt.onServer(SYSTEM_EVENTS.INTERACTION_JOB, InternalFunctions.open);

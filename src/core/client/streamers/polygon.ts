@@ -11,7 +11,10 @@ let addedPolygons: Array<Polygon> = [];
 let isRemoving = false;
 let interval: number;
 
-export class ClientPolygonController {
+/**
+ * Do Not Export Internal Only
+ */
+class ClientPolygonController {
     static init() {
         addedPolygons = [];
     }

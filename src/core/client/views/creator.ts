@@ -23,7 +23,10 @@ let totalCharacters = 0;
 native.requestModel(fModel);
 native.requestModel(mModel);
 
-export class CreatorView {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions {
     static async open(
         pos: Vector3,
         heading: number,
@@ -41,12 +44,12 @@ export class CreatorView {
         await sleep(100);
 
         const view = await WebViewController.get();
-        view.on('creator:ReadyDone', CreatorView.handleReadyDone);
-        view.on('creator:Done', CreatorView.handleDone);
-        view.on('creator:Cancel', CreatorView.handleCancel);
-        view.on('creator:Sync', CreatorView.handleSync);
-        view.on('creator:CheckName', CreatorView.handleCheckName);
-        view.on('creator:DisableControls', CreatorView.handleDisableControls);
+        view.on('creator:ReadyDone', InternalFunctions.handleReadyDone);
+        view.on('creator:Done', InternalFunctions.handleDone);
+        view.on('creator:Cancel', InternalFunctions.handleCancel);
+        view.on('creator:Sync', InternalFunctions.handleSync);
+        view.on('creator:CheckName', InternalFunctions.handleCheckName);
+        view.on('creator:DisableControls', InternalFunctions.handleDisableControls);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -57,7 +60,7 @@ export class CreatorView {
         await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
         await PedEditCamera.setCamParams(0.6, 50);
 
-        readyInterval = alt.setInterval(CreatorView.waitForReady, 100);
+        readyInterval = alt.setInterval(InternalFunctions.waitForReady, 100);
     }
 
     static close() {
@@ -74,12 +77,12 @@ export class CreatorView {
     }
 
     static handleDone(newData, infoData, name: string) {
-        CreatorView.close();
+        InternalFunctions.close();
         alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
     }
 
     static handleCancel() {
-        CreatorView.close();
+        InternalFunctions.close();
         alt.emitServer(View_Events_Creator.Done, oldCharacterData);
     }
 
@@ -124,6 +127,6 @@ export class CreatorView {
     }
 }
 
-alt.onServer(View_Events_Creator.Sync, CreatorView.handleSync);
-alt.onServer(View_Events_Creator.Show, CreatorView.open);
-alt.onServer(View_Events_Creator.AwaitName, CreatorView.handleNameFinish);
+alt.onServer(View_Events_Creator.Sync, InternalFunctions.handleSync);
+alt.onServer(View_Events_Creator.Show, InternalFunctions.open);
+alt.onServer(View_Events_Creator.AwaitName, InternalFunctions.handleNameFinish);

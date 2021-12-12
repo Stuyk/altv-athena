@@ -14,7 +14,7 @@ let id: string;
 let storage: Item[];
 let inventory: Array<Array<Item>>;
 
-class StorageView implements ViewModel {
+class InternalFunctions implements ViewModel {
     static async show(_id: string, _name: string, _storage: Item[], _inventory: Array<Array<Item>>): Promise<void> {
         id = _id;
         name = _name;
@@ -29,10 +29,10 @@ class StorageView implements ViewModel {
         await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, StorageView.refresh);
-        view.on(`${PAGE_NAME}:Close`, StorageView.close);
-        view.on(`${PAGE_NAME}:MoveFromPlayer`, StorageView.moveFromPlayer);
-        view.on(`${PAGE_NAME}:MoveFromStorage`, StorageView.moveFromStorage);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.refresh);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:MoveFromPlayer`, InternalFunctions.moveFromPlayer);
+        view.on(`${PAGE_NAME}:MoveFromStorage`, InternalFunctions.moveFromStorage);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -51,10 +51,10 @@ class StorageView implements ViewModel {
         inventory = null;
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, StorageView.refresh);
-        view.off(`${PAGE_NAME}:Close`, StorageView.close);
-        view.off(`${PAGE_NAME}:MoveFromPlayer`, StorageView.moveFromPlayer);
-        view.off(`${PAGE_NAME}:MoveFromStorage`, StorageView.moveFromStorage);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.refresh);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:MoveFromPlayer`, InternalFunctions.moveFromPlayer);
+        view.off(`${PAGE_NAME}:MoveFromStorage`, InternalFunctions.moveFromStorage);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -88,6 +88,6 @@ class StorageView implements ViewModel {
     }
 }
 
-alt.onServer(View_Events_Storage.Open, StorageView.show);
-alt.onServer(View_Events_Storage.Close, StorageView.close);
-alt.onServer(View_Events_Storage.Refresh, StorageView.refresh);
+alt.onServer(View_Events_Storage.Open, InternalFunctions.show);
+alt.onServer(View_Events_Storage.Close, InternalFunctions.close);
+alt.onServer(View_Events_Storage.Refresh, InternalFunctions.refresh);

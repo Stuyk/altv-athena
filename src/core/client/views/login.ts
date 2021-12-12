@@ -12,7 +12,10 @@ const PAGE_NAME = 'Login';
 
 let discordURI: string;
 
-export class LoginView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async open(oAuthUrl: string) {
         discordURI = oAuthUrl;
         alt.toggleGameControls(false);
@@ -21,9 +24,9 @@ export class LoginView implements ViewModel {
 
     static async finishOpen() {
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:OpenURL`, LoginView.openURL);
-        view.on(`${PAGE_NAME}:FinishAuth`, LoginView.finish);
-        view.on(`${PAGE_NAME}:Ready`, LoginView.ready);
+        view.on(`${PAGE_NAME}:OpenURL`, InternalFunctions.openURL);
+        view.on(`${PAGE_NAME}:FinishAuth`, InternalFunctions.finish);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
 
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
@@ -37,9 +40,9 @@ export class LoginView implements ViewModel {
 
     static async close() {
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:OpenURL`, LoginView.openURL);
-        view.off(`${PAGE_NAME}:FinishAuth`, LoginView.finish);
-        view.off(`${PAGE_NAME}:Ready`, LoginView.ready);
+        view.off(`${PAGE_NAME}:OpenURL`, InternalFunctions.openURL);
+        view.off(`${PAGE_NAME}:FinishAuth`, InternalFunctions.finish);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -63,7 +66,7 @@ export class LoginView implements ViewModel {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN, LoginView.finishOpen);
-alt.onServer(SYSTEM_EVENTS.DISCORD_OPEN, LoginView.open);
-alt.onServer(SYSTEM_EVENTS.DISCORD_CLOSE, LoginView.close);
-alt.onServer(SYSTEM_EVENTS.DISCORD_FAIL, LoginView.emitFailureMessage);
+alt.onServer(SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN, InternalFunctions.finishOpen);
+alt.onServer(SYSTEM_EVENTS.DISCORD_OPEN, InternalFunctions.open);
+alt.onServer(SYSTEM_EVENTS.DISCORD_CLOSE, InternalFunctions.close);
+alt.onServer(SYSTEM_EVENTS.DISCORD_FAIL, InternalFunctions.emitFailureMessage);

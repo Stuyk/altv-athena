@@ -52,9 +52,9 @@ function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
         volume = 1;
     }
 
-    AudioView.handle3DAudio(soundName, pan, volume);
+    AudioView.play3DAudio(soundName, pan, volume);
 }
 
 function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
-    AudioView.handle3DAudio(soundName, 0, volume);
+    AudioView.play3DAudio(soundName, 0, volume);
 }

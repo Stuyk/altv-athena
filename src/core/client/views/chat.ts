@@ -22,38 +22,41 @@ interface IMessage {
     timestamp: string;
 }
 
-class ChatView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async setVisible(value: boolean) {
         isDisabled = !value;
 
         if (!isDisabled) {
-            ChatView.open();
+            InternalFunctions.open();
             return;
         }
 
-        alt.off('keyup', ChatView.keyDown);
+        alt.off('keyup', InternalFunctions.keyDown);
         WebViewController.closePages([PAGE_NAME]);
     }
 
     static async open() {
         if (!hasRegistered) {
-            WebViewController.registerOverlay(PAGE_NAME, ChatView.setVisible);
+            WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.setVisible);
             hasRegistered = true;
         }
 
         const view = await WebViewController.get();
         if (isReady) {
-            view.off(`${PAGE_NAME}:Ready`, ChatView.ready);
-            view.off(`${PAGE_NAME}:Send`, ChatView.send);
-            view.off(`${PAGE_NAME}:Refresh`, ChatView.update);
-            view.off(`${PAGE_NAME}:Clear`, ChatView.clear);
+            view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+            view.off(`${PAGE_NAME}:Send`, InternalFunctions.send);
+            view.off(`${PAGE_NAME}:Refresh`, InternalFunctions.update);
+            view.off(`${PAGE_NAME}:Clear`, InternalFunctions.clear);
         }
 
-        alt.on('keydown', ChatView.keyDown);
-        view.on(`${PAGE_NAME}:Ready`, ChatView.ready);
-        view.on(`${PAGE_NAME}:Send`, ChatView.send);
-        view.on(`${PAGE_NAME}:Refresh`, ChatView.update);
-        view.on(`${PAGE_NAME}:Clear`, ChatView.clear);
+        alt.on('keydown', InternalFunctions.keyDown);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Send`, InternalFunctions.send);
+        view.on(`${PAGE_NAME}:Refresh`, InternalFunctions.update);
+        view.on(`${PAGE_NAME}:Clear`, InternalFunctions.clear);
         WebViewController.openPages([PAGE_NAME]);
 
         alt.setTimeout(() => {
@@ -99,7 +102,7 @@ class ChatView implements ViewModel {
 
     static async ready() {
         isReady = true;
-        ChatView.update();
+        InternalFunctions.update();
     }
 
     static async receive(message: string): Promise<void> {
@@ -123,12 +126,12 @@ class ChatView implements ViewModel {
             return;
         }
 
-        ChatView.update();
+        InternalFunctions.update();
     }
 
     static populateCommands(_commands: Array<Partial<Command>>): void {
         commands = _commands;
-        ChatView.update();
+        InternalFunctions.update();
     }
 
     static async update() {
@@ -143,7 +146,7 @@ class ChatView implements ViewModel {
 
     static clear() {
         messages = [];
-        ChatView.update();
+        InternalFunctions.update();
     }
 
     static async send(message: string) {
@@ -177,11 +180,11 @@ class ChatView implements ViewModel {
 
         // Default: T
         if (key === KEY_BINDS.CHAT) {
-            ChatView.focus();
+            InternalFunctions.focus();
         }
     }
 }
 
-alt.onServer(View_Events_Chat.Append, ChatView.receive);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, ChatView.open);
-alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, ChatView.populateCommands);
+alt.onServer(View_Events_Chat.Append, InternalFunctions.receive);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
+alt.onServer(SYSTEM_EVENTS.POPULATE_COMMANDS, InternalFunctions.populateCommands);

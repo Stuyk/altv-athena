@@ -26,14 +26,17 @@ let drawInterval: number = null;
 let isOpen = false;
 let isCameraBeingCreated = false;
 
-export class InventoryController implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+export class InternalFunctions implements ViewModel {
     /**
      * Initialize key listeners.
      * @static
-     * @memberof InventoryController
+     * @memberof InternalFunctions
      */
     static init() {
-        alt.on('keyup', InventoryController.keyUp);
+        alt.on('keyup', InternalFunctions.keyUp);
     }
 
     /**
@@ -41,7 +44,7 @@ export class InventoryController implements ViewModel {
      * Checks if any other menus are open.
      * @static
      * @return {*}
-     * @memberof InventoryController
+     * @memberof InternalFunctions
      */
     static async open() {
         if (isAnyMenuOpen()) {
@@ -52,12 +55,12 @@ export class InventoryController implements ViewModel {
         await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Update`, InventoryController.ready);
-        view.on(`${PAGE_NAME}:Use`, InventoryController.handleUse);
-        view.on(`${PAGE_NAME}:Process`, InventoryController.handleProcess);
-        view.on(`${PAGE_NAME}:Close`, InventoryController.close);
-        view.on(`${PAGE_NAME}:Split`, InventoryController.handleSplit);
-        view.on(`${PAGE_NAME}:Pickup`, InventoryController.handlePickup);
+        view.on(`${PAGE_NAME}:Update`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Use`, InternalFunctions.handleUse);
+        view.on(`${PAGE_NAME}:Process`, InternalFunctions.handleProcess);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:Split`, InternalFunctions.handleSplit);
+        view.on(`${PAGE_NAME}:Pickup`, InternalFunctions.handlePickup);
 
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
@@ -80,14 +83,14 @@ export class InventoryController implements ViewModel {
             keyFunctions[key]();
         });
 
-        InventoryController.processClosestGroundItems();
+        InternalFunctions.processClosestGroundItems();
 
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:DisablePreview`, alt.Player.local.vehicle ? true : false);
         view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
 
         if (!isCameraBeingCreated) {
-            await InventoryController.showPreview();
+            await InternalFunctions.showPreview();
         }
     }
 
@@ -129,12 +132,12 @@ export class InventoryController implements ViewModel {
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Update`, InventoryController.ready);
-        view.off(`${PAGE_NAME}:Use`, InventoryController.handleUse);
-        view.off(`${PAGE_NAME}:Process`, InventoryController.handleProcess);
-        view.off(`${PAGE_NAME}:Close`, InventoryController.close);
-        view.off(`${PAGE_NAME}:Split`, InventoryController.handleSplit);
-        view.off(`${PAGE_NAME}:Pickup`, InventoryController.handlePickup);
+        view.off(`${PAGE_NAME}:Update`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Use`, InternalFunctions.handleUse);
+        view.off(`${PAGE_NAME}:Process`, InternalFunctions.handleProcess);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:Split`, InternalFunctions.handleSplit);
+        view.off(`${PAGE_NAME}:Pickup`, InternalFunctions.handlePickup);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -166,10 +169,10 @@ export class InventoryController implements ViewModel {
         }
 
         if (lastDroppedItems.length >= 1) {
-            drawInterval = Timer.createInterval(InventoryController.drawItemMarkers, 0, `${PAGE_NAME}.ts`);
+            drawInterval = Timer.createInterval(InternalFunctions.drawItemMarkers, 0, `${PAGE_NAME}.ts`);
         }
 
-        alt.setTimeout(InventoryController.processClosestGroundItems, 0);
+        alt.setTimeout(InternalFunctions.processClosestGroundItems, 0);
     }
 
     static async processClosestGroundItems() {
@@ -208,7 +211,7 @@ export class InventoryController implements ViewModel {
      * Does not work for normal notifications.
      * @static
      * @param {string} value
-     * @memberof InventoryController
+     * @memberof InternalFunctions
      */
     static async addInventoryNotification(value: string) {
         const view = await WebViewController.get();
@@ -220,18 +223,18 @@ export class InventoryController implements ViewModel {
      * @static
      * @param {number} key
      * @return {*}
-     * @memberof InventoryController
+     * @memberof InternalFunctions
      */
     static async keyUp(key: number) {
         // Default: I
         if (key === KEY_BINDS.INVENTORY && !isOpen) {
-            InventoryController.open();
+            InternalFunctions.open();
             return;
         }
 
         // Default: I or ESC
         if ((key === KEY_BINDS.INVENTORY || key === 27) && isOpen) {
-            InventoryController.close();
+            InternalFunctions.close();
             return;
         }
     }
@@ -240,7 +243,7 @@ export class InventoryController implements ViewModel {
      * Used to rotate the camera and show the player a specific way.
      * @static
      * @return {*}  {Promise<boolean>}
-     * @memberof InventoryController
+     * @memberof InternalFunctions
      */
     static async showPreview(): Promise<boolean> {
         isCameraBeingCreated = true;
@@ -304,13 +307,13 @@ export class InventoryController implements ViewModel {
     }
 }
 
-alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryController.processMetaChange);
-alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InventoryController.updateGroundItems);
-alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, InventoryController.addInventoryNotification);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, InventoryController.init);
+alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.processMetaChange);
+alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InternalFunctions.updateGroundItems);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, InternalFunctions.addInventoryNotification);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
 
 const keyFunctions = {
-    inventory: InventoryController.updateInventory,
-    toolbar: InventoryController.updateToolbar,
-    equipment: InventoryController.updateEquipment,
+    inventory: InternalFunctions.updateInventory,
+    toolbar: InternalFunctions.updateToolbar,
+    equipment: InternalFunctions.updateEquipment,
 };

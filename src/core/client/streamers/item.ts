@@ -9,7 +9,10 @@ import { drawText3D } from '../utility/text';
 let addedItems: Array<GroundItem> = [];
 let interval: number;
 
-export class ClientItemStreamer {
+/**
+ * Do Not Export Internal Only
+ */
+class ClientItemStreamer {
     static init() {
         addedItems = [];
     }

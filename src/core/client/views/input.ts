@@ -8,7 +8,10 @@ import { WebViewController } from '../extensions/view2';
 const PAGE_NAME = 'InputBox';
 let inputMenu: InputMenu;
 
-export class InputView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async show(_inputMenu: InputMenu): Promise<void> {
         inputMenu = _inputMenu;
 
@@ -20,9 +23,9 @@ export class InputView implements ViewModel {
         await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, InputView.ready);
-        view.on(`${PAGE_NAME}:Submit`, InputView.submit);
-        view.on(`${PAGE_NAME}:Close`, InputView.close);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
@@ -39,9 +42,9 @@ export class InputView implements ViewModel {
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, InputView.ready);
-        view.off(`${PAGE_NAME}:Submit`, InputView.submit);
-        view.off(`${PAGE_NAME}:Close`, InputView.close);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -71,7 +74,7 @@ export class InputView implements ViewModel {
             alt.emitServer(inputMenu.serverEvent, results);
         }
 
-        InputView.close(true);
+        InternalFunctions.close(true);
     }
 
     static async ready() {
@@ -80,4 +83,16 @@ export class InputView implements ViewModel {
     }
 }
 
-alt.onServer(View_Events_Input_Menu.SetMenu, InputView.show);
+export class InputView {
+    /**
+     * Show an input menu from client-side.
+     * @static
+     * @param {InputMenu} _inputMenu
+     * @memberof InputView
+     */
+    static setMenu(_inputMenu: InputMenu) {
+        InternalFunctions.show(_inputMenu);
+    }
+}
+
+alt.onServer(View_Events_Input_Menu.SetMenu, InternalFunctions.show);

@@ -30,7 +30,10 @@ const CAMERA_POSITIONS = [
 let storeData: IClothingStore = null;
 let isOpen = false;
 
-class ClothingView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async open(_storeData: IClothingStore) {
         if (isAnyMenuOpen()) {
             return;
@@ -42,13 +45,13 @@ class ClothingView implements ViewModel {
         await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, ClothingView.ready);
-        view.on(`${PAGE_NAME}:Close`, ClothingView.close);
-        view.on(`${PAGE_NAME}:Update`, ClothingView.update);
-        view.on(`${PAGE_NAME}:Purchase`, ClothingView.purchase);
-        view.on(`${PAGE_NAME}:Populate`, ClothingView.populate);
-        view.on(`${PAGE_NAME}:DisableControls`, ClothingView.controls);
-        view.on(`${PAGE_NAME}:PageUpdate`, ClothingView.pageUpdate);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:Update`, InternalFunctions.update);
+        view.on(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
+        view.on(`${PAGE_NAME}:Populate`, InternalFunctions.populate);
+        view.on(`${PAGE_NAME}:DisableControls`, InternalFunctions.controls);
+        view.on(`${PAGE_NAME}:PageUpdate`, InternalFunctions.pageUpdate);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -71,13 +74,13 @@ class ClothingView implements ViewModel {
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, ClothingView.ready);
-        view.off(`${PAGE_NAME}:Close`, ClothingView.close);
-        view.off(`${PAGE_NAME}:Update`, ClothingView.update);
-        view.off(`${PAGE_NAME}:Purchase`, ClothingView.purchase);
-        view.off(`${PAGE_NAME}:Populate`, ClothingView.populate);
-        view.off(`${PAGE_NAME}:DisableControls`, ClothingView.controls);
-        view.off(`${PAGE_NAME}:PageUpdate`, ClothingView.pageUpdate);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:Update`, InternalFunctions.update);
+        view.off(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
+        view.off(`${PAGE_NAME}:Populate`, InternalFunctions.populate);
+        view.off(`${PAGE_NAME}:DisableControls`, InternalFunctions.controls);
+        view.off(`${PAGE_NAME}:PageUpdate`, InternalFunctions.pageUpdate);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -93,7 +96,7 @@ class ClothingView implements ViewModel {
      * Updates the camera position on page changes.
      * @static
      * @param {number} page
-     * @memberof ClothingView
+     * @memberof InternalFunctions
      */
     static async pageUpdate(page: number) {
         if (!PedEditCamera.exists()) {
@@ -117,7 +120,7 @@ class ClothingView implements ViewModel {
 
     static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
         if (key === 'equipment') {
-            ClothingView.setEquipment(items);
+            InternalFunctions.setEquipment(items);
         }
 
         if (key === 'bank' || (key === 'cash' && isOpen)) {
@@ -163,7 +166,7 @@ class ClothingView implements ViewModel {
             return;
         }
 
-        ClothingView.update(clothingComponents, true);
+        InternalFunctions.update(clothingComponents, true);
     }
 
     static controls(value: boolean) {
@@ -178,7 +181,7 @@ class ClothingView implements ViewModel {
      * @param {ClothingComponent} component
      * @param {string} name
      * @param {string} desc
-     * @memberof ClothingView
+     * @memberof InternalFunctions
      */
     static purchase(uid: string, index: number, component: ClothingComponent, name: string, desc: string) {
         alt.emitServer(View_Events_Clothing.Purchase, uid, index, component, name, desc);
@@ -274,9 +277,9 @@ class ClothingView implements ViewModel {
             return;
         }
 
-        ClothingView.populate(components);
+        InternalFunctions.populate(components);
     }
 }
 
-alt.on(SYSTEM_EVENTS.META_CHANGED, ClothingView.handleMetaChanged);
-alt.onServer(View_Events_Clothing.Open, ClothingView.open);
+alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.handleMetaChanged);
+alt.onServer(View_Events_Clothing.Open, InternalFunctions.open);

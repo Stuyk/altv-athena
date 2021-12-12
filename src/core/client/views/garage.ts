@@ -11,12 +11,15 @@ const PAGE_NAME = 'Garage';
 
 let vehicles: Partial<IVehicle>[];
 
-class GarageView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     /**
      * Displays the Garage WebView to the client if available.
      * @static
      * @param {Partial<Vehicle>[]} _vehicles
-     * @memberof GarageView
+     * @memberof InternalFunctions
      */
     static async show(_vehicles: IVehicle[]): Promise<void> {
         vehicles = _vehicles;
@@ -29,10 +32,10 @@ class GarageView implements ViewModel {
         await WebViewController.setOverlaysVisible(false);
 
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, GarageView.ready);
-        view.on(`${PAGE_NAME}:Close`, GarageView.close);
-        view.on(`${PAGE_NAME}:Spawn`, GarageView.spawn);
-        view.on(`${PAGE_NAME}:Despawn`, GarageView.despawn);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.on(`${PAGE_NAME}:Spawn`, InternalFunctions.spawn);
+        view.on(`${PAGE_NAME}:Despawn`, InternalFunctions.despawn);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -46,10 +49,10 @@ class GarageView implements ViewModel {
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, GarageView.ready);
-        view.off(`${PAGE_NAME}:Close`, GarageView.close);
-        view.off(`${PAGE_NAME}:Spawn`, GarageView.spawn);
-        view.off(`${PAGE_NAME}:Despawn`, GarageView.despawn);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+        view.off(`${PAGE_NAME}:Spawn`, InternalFunctions.spawn);
+        view.off(`${PAGE_NAME}:Despawn`, InternalFunctions.despawn);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -73,5 +76,5 @@ class GarageView implements ViewModel {
     }
 }
 
-alt.onServer(View_Events_Garage.Open, GarageView.show);
-alt.onServer(View_Events_Garage.Close, GarageView.close);
+alt.onServer(View_Events_Garage.Open, InternalFunctions.show);
+alt.onServer(View_Events_Garage.Close, InternalFunctions.close);

@@ -7,7 +7,7 @@ import { isAnyMenuOpen } from '../utility/menus';
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'Template';
 
-class TemplateView implements ViewModel {
+class InternalFunctions implements ViewModel {
     static async open() {
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
@@ -20,8 +20,8 @@ class TemplateView implements ViewModel {
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
         const view = await WebViewController.get();
-        view.on(`${PAGE_NAME}:Ready`, TemplateView.ready);
-        view.on(`${PAGE_NAME}:Close`, TemplateView.close);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -43,8 +43,8 @@ class TemplateView implements ViewModel {
         // If we do not turn them off we get duplicate event behavior.
         // Also will cause a memory leak if you do not turn them off.
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, TemplateView.ready);
-        view.off(`${PAGE_NAME}:Close`, TemplateView.close);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
         // Close the page.
         WebViewController.closePages([PAGE_NAME]);
@@ -67,7 +67,7 @@ class TemplateView implements ViewModel {
      * Send From WebView -> Get the Data Here -> Send to the WebView
      *
      * @static
-     * @memberof TemplateView
+     * @memberof InternalFunctions
      */
     static async ready() {
         const view = await WebViewController.get();

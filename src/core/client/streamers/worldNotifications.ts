@@ -10,7 +10,7 @@ let localNotifications: Array<IWorldNotification> = [];
 let isRemoving = false;
 let interval: number;
 
-export class ClientWorldNotificationController {
+class ClientWorldNotificationController {
     static init() {
         addedNotifications = [];
         localNotifications = [];

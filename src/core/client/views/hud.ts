@@ -18,33 +18,7 @@ let interactions: Array<IClientInteraction> = [];
 let customInteractions: Array<IClientInteraction> = [];
 let hasRegistered = false;
 
-export class HudView implements ViewModel {
-    static async open() {
-        if (!hasRegistered) {
-            WebViewController.registerOverlay(PAGE_NAME, HudView.setVisible);
-            hasRegistered = true;
-        }
-
-        const view = await WebViewController.get();
-        WebViewController.openPages([PAGE_NAME]);
-        view.on(`${PAGE_NAME}:Ready`, HudView.ready);
-    }
-
-    static async setVisible(value: boolean) {
-        isDisabled = !value;
-
-        if (!isDisabled) {
-            native.displayRadar(true);
-            HudView.open();
-            return;
-        }
-
-        const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, HudView.ready);
-        WebViewController.closePages([PAGE_NAME]);
-        native.displayRadar(false);
-    }
-
+export class HudView {
     static addCustomInteraction(_interaction: IClientInteraction) {
         const index = customInteractions.findIndex((x) => x.uid === _interaction.uid);
         if (index >= 0) {
@@ -73,31 +47,79 @@ export class HudView implements ViewModel {
         interactions = _interactions;
     }
 
+    /**
+     * Register a component for the HUD.
+     * You should pass the data inside the callback with:
+     * 'HudView.passComponentInfo()'
+     * @static
+     * @param {number} [msBetweenUpdates=1000]
+     * @param {(propName: string) => void, msBetweenUpdates: number = 1000} callback
+     * @memberof HudView
+     */
+    static registerComponent(uid: string, callback: (propName: string) => void, msBetweenUpdates: number = 1000) {
+        RegisteredComponents[uid] = {
+            callback,
+            msBetweenUpdates,
+            lastUpdate: Date.now(),
+        };
+    }
+}
+
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
+    static async open() {
+        if (!hasRegistered) {
+            WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.setVisible);
+            hasRegistered = true;
+        }
+
+        const view = await WebViewController.get();
+        WebViewController.openPages([PAGE_NAME]);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+    }
+
+    static async setVisible(value: boolean) {
+        isDisabled = !value;
+
+        if (!isDisabled) {
+            native.displayRadar(true);
+            InternalFunctions.open();
+            return;
+        }
+
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        WebViewController.closePages([PAGE_NAME]);
+        native.displayRadar(false);
+    }
+
     static async ready() {
         if (interval) {
             alt.clearInterval(interval);
         }
 
         // Standard Walking Components
-        HudView.registerComponent(HUD_COMPONENT.HEALTH, HudView.defaultHealthComponent, 50);
-        HudView.registerComponent(HUD_COMPONENT.ARMOUR, HudView.defaultArmourComponent, 50);
-        HudView.registerComponent(HUD_COMPONENT.CASH, HudView.defaultCashComponent, 1000);
-        HudView.registerComponent(HUD_COMPONENT.BANK, HudView.defaultBankComponent, 1000);
-        HudView.registerComponent(HUD_COMPONENT.TIME, HudView.defaultTimeComponent, 5000);
-        HudView.registerComponent(HUD_COMPONENT.WATER, HudView.defaultWaterComponent, 1000);
-        HudView.registerComponent(HUD_COMPONENT.FOOD, HudView.defaultFoodComponent, 1000);
-        HudView.registerComponent(HUD_COMPONENT.INTERACTIONS, HudView.defaultInteractionsComponent, 500);
+        HudView.registerComponent(HUD_COMPONENT.HEALTH, InternalFunctions.defaultHealthComponent, 50);
+        HudView.registerComponent(HUD_COMPONENT.ARMOUR, InternalFunctions.defaultArmourComponent, 50);
+        HudView.registerComponent(HUD_COMPONENT.CASH, InternalFunctions.defaultCashComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.BANK, InternalFunctions.defaultBankComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.TIME, InternalFunctions.defaultTimeComponent, 5000);
+        HudView.registerComponent(HUD_COMPONENT.WATER, InternalFunctions.defaultWaterComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.FOOD, InternalFunctions.defaultFoodComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.INTERACTIONS, InternalFunctions.defaultInteractionsComponent, 500);
 
         // Vehicle Components
-        HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, HudView.defaultIsInVehicleComponent, 1000);
-        HudView.registerComponent(HUD_COMPONENT.SPEED, HudView.defaultSpeedComponent, 100);
-        HudView.registerComponent(HUD_COMPONENT.GEAR, HudView.defaultGearComponent, 100);
-        HudView.registerComponent(HUD_COMPONENT.ENGINE, HudView.defaultEngineComponent, 100);
-        HudView.registerComponent(HUD_COMPONENT.LOCK, HudView.defaultLockComponent, 100);
-        HudView.registerComponent(HUD_COMPONENT.METRIC, HudView.defaultMetricComponent, 2500);
-        HudView.registerComponent(HUD_COMPONENT.FUEL, HudView.defaultFuelComponent, 5000);
+        HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.SPEED, InternalFunctions.defaultSpeedComponent, 100);
+        HudView.registerComponent(HUD_COMPONENT.GEAR, InternalFunctions.defaultGearComponent, 100);
+        HudView.registerComponent(HUD_COMPONENT.ENGINE, InternalFunctions.defaultEngineComponent, 100);
+        HudView.registerComponent(HUD_COMPONENT.LOCK, InternalFunctions.defaultLockComponent, 100);
+        HudView.registerComponent(HUD_COMPONENT.METRIC, InternalFunctions.defaultMetricComponent, 2500);
+        HudView.registerComponent(HUD_COMPONENT.FUEL, InternalFunctions.defaultFuelComponent, 5000);
 
-        interval = alt.setInterval(HudView.renderComponents, 0);
+        interval = alt.setInterval(InternalFunctions.renderComponents, 0);
     }
 
     static renderComponents() {
@@ -127,23 +149,6 @@ export class HudView implements ViewModel {
     }
 
     /**
-     * Register a component for the HUD.
-     * You should pass the data inside the callback with:
-     * 'HudView.passComponentInfo()'
-     * @static
-     * @param {number} [msBetweenUpdates=1000]
-     * @param {(propName: string) => void, msBetweenUpdates: number = 1000} callback
-     * @memberof HudView
-     */
-    static registerComponent(uid: string, callback: (propName: string) => void, msBetweenUpdates: number = 1000) {
-        RegisteredComponents[uid] = {
-            callback,
-            msBetweenUpdates,
-            lastUpdate: Date.now(),
-        };
-    }
-
-    /**
      * Remove a component to render on the HUD.
      * It simply stops it from pushing data the CEF but does not stop it from drawing.
      * @static
@@ -161,7 +166,7 @@ export class HudView implements ViewModel {
     }
 
     static defaultTimeComponent() {
-        HudView.passComponentInfo('time', World.getTimeAsString());
+        InternalFunctions.passComponentInfo('time', World.getTimeAsString());
     }
 
     static defaultFuelComponent(propName: string) {
@@ -175,7 +180,7 @@ export class HudView implements ViewModel {
             fuel = alt.Player.local.vehicle.getSyncedMeta(VEHICLE_STATE.FUEL);
         }
 
-        HudView.passComponentInfo(propName, parseInt(fuel.toFixed(0)));
+        InternalFunctions.passComponentInfo(propName, parseInt(fuel.toFixed(0)));
     }
 
     static defaultSpeedComponent(propName: string) {
@@ -186,37 +191,43 @@ export class HudView implements ViewModel {
         const isMetric = native.getProfileSetting(227);
         const currentSpeed = native.getEntitySpeed(alt.Player.local.vehicle.scriptID);
         const speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);
-        HudView.passComponentInfo(propName, parseInt(speedCalc));
+        InternalFunctions.passComponentInfo(propName, parseInt(speedCalc));
     }
 
     static defaultMetricComponent(propName: string) {
-        HudView.passComponentInfo(propName, native.getProfileSetting(227) === 1);
+        InternalFunctions.passComponentInfo(propName, native.getProfileSetting(227) === 1);
     }
 
     static defaultIsInVehicleComponent(propName: string) {
-        HudView.passComponentInfo(propName, alt.Player.local.vehicle ? true : false);
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.vehicle ? true : false);
     }
 
     static defaultWaterComponent(propName: string) {
         const water = alt.Player.local.meta.water;
-        HudView.passComponentInfo(propName, water !== undefined && water !== null ? parseInt(water.toFixed(0)) : 100);
+        InternalFunctions.passComponentInfo(
+            propName,
+            water !== undefined && water !== null ? parseInt(water.toFixed(0)) : 100,
+        );
     }
 
     static defaultFoodComponent(propName: string) {
         const food = alt.Player.local.meta.food;
-        HudView.passComponentInfo(propName, food !== undefined && food !== null ? parseInt(food.toFixed(0)) : 100);
+        InternalFunctions.passComponentInfo(
+            propName,
+            food !== undefined && food !== null ? parseInt(food.toFixed(0)) : 100,
+        );
     }
 
     static defaultCashComponent(propName: string) {
         const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
         const fixedValue = parseFloat(value.toFixed(0));
-        HudView.passComponentInfo(propName, fixedValue);
+        InternalFunctions.passComponentInfo(propName, fixedValue);
     }
 
     static defaultBankComponent(propName: string) {
         const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
         const fixedValue = parseFloat(value.toFixed(0));
-        HudView.passComponentInfo(propName, fixedValue);
+        InternalFunctions.passComponentInfo(propName, fixedValue);
     }
 
     static defaultGearComponent(propName: string) {
@@ -224,7 +235,7 @@ export class HudView implements ViewModel {
             return;
         }
 
-        HudView.passComponentInfo(propName, alt.Player.local.vehicle.gear);
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.vehicle.gear);
     }
 
     static defaultEngineComponent(propName: string) {
@@ -233,7 +244,7 @@ export class HudView implements ViewModel {
         }
 
         const isEngineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
-        HudView.passComponentInfo(propName, isEngineOn);
+        InternalFunctions.passComponentInfo(propName, isEngineOn);
     }
 
     static defaultLockComponent(propName: string) {
@@ -242,22 +253,22 @@ export class HudView implements ViewModel {
         }
 
         const lockStatus = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
-        HudView.passComponentInfo(propName, lockStatus);
+        InternalFunctions.passComponentInfo(propName, lockStatus);
     }
 
     static defaultHealthComponent(propName: string) {
-        HudView.passComponentInfo(propName, alt.Player.local.health - 1);
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.health - 1);
     }
 
     static defaultArmourComponent(propName: string) {
-        HudView.passComponentInfo(propName, alt.Player.local.armour);
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.armour);
     }
 
     static defaultInteractionsComponent(propName) {
-        HudView.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
+        InternalFunctions.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
     }
 }
 
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, HudView.open);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, HudView.addCustomInteraction);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, HudView.removeCustomInteraction);

@@ -23,7 +23,10 @@ const IDLE_ANIM = 'stand_phone_phoneputdown_idle_nowork';
 let characters: Partial<Character>[];
 let isOpen = false;
 
-class CharactersView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async open(_characters: Partial<Character>[], pos: Vector3, heading: number) {
         characters = _characters;
         const view = await WebViewController.get();
@@ -33,11 +36,11 @@ class CharactersView implements ViewModel {
             return;
         }
 
-        view.on(`${PAGE_NAME}:Select`, CharactersView.select);
-        view.on(`${PAGE_NAME}:New`, CharactersView.handleNew);
-        view.on(`${PAGE_NAME}:Update`, CharactersView.update); // Calls `creator.ts`
-        view.on(`${PAGE_NAME}:Delete`, CharactersView.handleDelete);
-        view.on(`${PAGE_NAME}:Ready`, CharactersView.ready);
+        view.on(`${PAGE_NAME}:Select`, InternalFunctions.select);
+        view.on(`${PAGE_NAME}:New`, InternalFunctions.handleNew);
+        view.on(`${PAGE_NAME}:Update`, InternalFunctions.update); // Calls `creator.ts`
+        view.on(`${PAGE_NAME}:Delete`, InternalFunctions.handleDelete);
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
 
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
@@ -49,7 +52,7 @@ class CharactersView implements ViewModel {
         await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
         await PedEditCamera.setCamParams(0.5, 40, 100);
 
-        CharactersView.update(0);
+        InternalFunctions.update(0);
 
         await sleep(2000);
         native.doScreenFadeIn(500);
@@ -109,11 +112,11 @@ class CharactersView implements ViewModel {
 
     static async close() {
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Select`, CharactersView.select);
-        view.off(`${PAGE_NAME}:New`, CharactersView.handleNew);
-        view.off(`${PAGE_NAME}:Update`, CharactersView.update); // Calls `creator.ts`
-        view.off(`${PAGE_NAME}:Delete`, CharactersView.handleDelete);
-        view.off(`${PAGE_NAME}:Ready`, CharactersView.ready);
+        view.off(`${PAGE_NAME}:Select`, InternalFunctions.select);
+        view.off(`${PAGE_NAME}:New`, InternalFunctions.handleNew);
+        view.off(`${PAGE_NAME}:Update`, InternalFunctions.update); // Calls `creator.ts`
+        view.off(`${PAGE_NAME}:Delete`, InternalFunctions.handleDelete);
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -151,5 +154,5 @@ class CharactersView implements ViewModel {
     }
 }
 
-alt.onServer(View_Events_Characters.Show, CharactersView.open);
-alt.onServer(View_Events_Characters.Done, CharactersView.close);
+alt.onServer(View_Events_Characters.Show, InternalFunctions.open);
+alt.onServer(View_Events_Characters.Done, InternalFunctions.close);

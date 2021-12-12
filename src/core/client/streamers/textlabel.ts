@@ -10,7 +10,10 @@ let addedLabels: Array<TextLabel> = [];
 let interval: number;
 let isRemoving = false;
 
-export class ClientTextLabelController {
+/**
+ * Do Not Export Internal Only
+ */
+class ClientTextLabelController {
     static init() {
         localLabels = [];
         addedLabels = [];
