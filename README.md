@@ -1,43 +1,34 @@
----
-description: 'A subscription based GTA:V Roleplay Framework for alt:V.'
----
-
-# Introduction
+# Athena Framework for alt:V
 
 ## Summary
 
-This project solely exists as a new standard for GTA 5 roleplay scripts on the [alt:V](https://altv.mp/) client. The Athena Roleplay Script for GTA 5 has type safety through TypeScript and a solid foundation for what is considered core for a Roleplay server. You can find a list of features for the Athena Roleplay Script below in the Feature List section.
+[Athena Framework](https://athenaframework.com) is Roleplay framework for GTA:V that is utilized by not FiveM or ragemp but the [alt:V platform](https://altv.mp). This is a full fledged framework similar to ESX that allows you to build a more robust game mode out without having to think about core scripts. This framework is built with TypeScript and tries to keep developers in mind for major implementations and extendability.
 
-**BEFORE YOU CONSIDER THIS FRAMEWORK**
+## Documentation
 
-* You need to know how to use command line.
-* You need to know Typescript / Javascript.
-* You need to be self-starting and self-learning.
-* You need to understand how to run commands in consoles.
-* You need to not ask the Developer(s) for support on how to run the clearly stated instructions in the Documentation.
+https://docs.athenaframework.com/
 
-**Documentation**
+## Development Stack
 
-https://athena.stuyk.com/
-
-
-**You will have to do some general programming** and know Javascript or Typescript to fully understand what this script has to offer. The script itself takes some of the harder pieces of writing a roleplay script for GTA 5 and makes them more accessible.
-
-This is a framework and not a out-of-the-box full-featured script. This framework aims to provide the bare minimum necessary to help you get your server running at a much faster rate.
-
-## Is this for non-programmers?
-
-No, this framework is meant to get people who have fiddled with programming languages off the ground and give them features that are already completed. This makes it much easier to start a Roleplay server, but adding the additional code necessary to make a full-featured server is a bit more difficult.
+* MongoDB
+* TypeScript
+* Vue 3
 
 ## Where to Purchase?
 
-Configuration files may be purchased from [Gumroad](https://gumroad.com/products/SKpPN).
+License keys may be purchased from [Athena Framework](https://athenaframework.com).
 
 _No there is not a lifetime package for Athena._
 
-## Demo Server?
+## Why is it Open Source?
 
-We have a small demo server available for you to test the framework with Administrative capabilities. You can check that out using the alt:V client at [https://altstats.net/server/504](https://altstats.net/server/504)
+Unlike other servers and frameworks I believe in helping everyone as much as possible. Leaving Athena open source allows developers to learn a few things about the way the author of this repository thinks. Sharing is caring unless you don't support your care giver.
+
+## Demo
+
+Small demo server available for you to test the framework with Administrative capabilities. 
+
+You can check that out using the alt:V client at [https://altstats.net/server/504](https://altstats.net/server/504)
 
 ## Feature List
 
@@ -205,7 +196,3 @@ We have a small demo server available for you to test the framework with Adminis
     -   Faction Bank
     -   Faction Item Storage
     -   Faction Name Changing / Updating
-
-## Running this Project
-
-Please see [the before setup page](documentation/before-setup.md) for setup instructions.

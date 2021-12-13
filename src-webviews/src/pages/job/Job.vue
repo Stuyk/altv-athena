@@ -42,7 +42,7 @@ export default defineComponent({
     },
     data() {
         return {
-            image: '.../../assets/images/job.jpg',
+            image: '../../assets/images/job.jpg',
             header: 'Rob the Bank',
             summary: `This is a basic summary example.
                 You use can this to set new lines. Also write really awesome text.
