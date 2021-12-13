@@ -281,7 +281,10 @@ export default class VehicleFuncs {
     }
 
     static updateVehicleMods(vehicle: alt.Vehicle) {
-        if (vehicle.data.color) {
+        if (vehicle.data.color && !vehicle.data.color2) {
+            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
+            vehicle.customSecondaryColor = vehicle.data.color as RGBA;
+        } else if (vehicle.data.color && vehicle.data.color2) {
             vehicle.customPrimaryColor = vehicle.data.color as RGBA;
             vehicle.customSecondaryColor = vehicle.data.color2 as RGBA;
         }
