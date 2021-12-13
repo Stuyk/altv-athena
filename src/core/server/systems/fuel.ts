@@ -115,7 +115,7 @@ class FuelSystem {
             header: 'Fuel Vehicle',
             event: FUEL_START_EVENT,
             cancelEvent: FUEL_CANCEL_EVENT,
-            image: 'https://i.imgur.com/MVSTdju.jpeg',
+            image: '../../assets/images/refuel.jpg',
             summary: `Refill ${missingFuel.toFixed(2)}% of fuel in the ${
                 closestVehicle.data.model
             } for $${maximumCost.toFixed(2)}?`,
