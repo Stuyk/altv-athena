@@ -25,6 +25,7 @@ export function drawText2D(
         scale = 2;
     }
 
+    native.clearDrawOrigin();
     native.beginTextCommandDisplayText('STRING');
     native.addTextComponentSubstringPlayerName(text);
     native.setTextFont(4);
@@ -52,6 +53,7 @@ export function drawRectangle(pos: alt.IVector3, width: alt.IVector2, color: alt
 }
 
 export function drawRectangle2D(pos: alt.IVector2, size: alt.IVector2, color: alt.RGBA) {
+    native.clearDrawOrigin();
     native.drawRect(pos.x, pos.y, size.x, size.y, color.r, color.g, color.b, color.a, false);
 }
 

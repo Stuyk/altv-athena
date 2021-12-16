@@ -102,6 +102,7 @@ export class WheelMenu {
             return;
         }
 
+        native.clearDrawOrigin();
         native.setMouseCursorActiveThisFrame();
         native.setMouseCursorSprite(1);
         native.disableControlAction(0, 1, true);
