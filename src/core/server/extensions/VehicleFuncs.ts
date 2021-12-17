@@ -24,7 +24,32 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.UNLIMITED_FUEL |
     Vehicle_Behavior.NO_SAVE;
 
+const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
+
 export default class VehicleFuncs {
+    /**
+     * Lets you create an injection into the default save function.
+     *
+     * What that means is you can return specific data from a callback as an object.
+     *
+     * That object will then be appended to the data to save for the vehicle.
+     *
+     * Example:
+     * ```ts
+     * function saveEngineStatus(vehicle: alt.Vehicle) {
+     *     return { engineStatus: vehicle.engineOn };
+     * }
+     *
+     * VehicleFuncs.addSaveInjection(saveEngineStatus)
+     * ```
+     * @static
+     * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
+     * @memberof VehicleFuncs
+     */
+    static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
+        SaveInjections.push(callback);
+    }
+
     /**
      * Gets the next available ID in the database for the vehicle.
      * @static
@@ -364,6 +389,10 @@ export default class VehicleFuncs {
      * @return {Promise<boolean>}
      */
     static async save(vehicle: alt.Vehicle, dataObject: Partial<IVehicle>): Promise<boolean> {
+        if (!vehicle.valid) {
+            return false;
+        }
+
         if (!vehicle.data) {
             return false;
         }
@@ -373,7 +402,17 @@ export default class VehicleFuncs {
             return false;
         }
 
-        return await Database.updatePartialData(vehicle.data._id.toString(), { ...dataObject }, Collections.Vehicles);
+        let injections = { ...dataObject };
+        for (let i = 0; i < SaveInjections.length; i++) {
+            try {
+                injections = { ...injections, ...SaveInjections[i](vehicle) };
+            } catch (err) {
+                console.warn(`Got Save Injection Error for Vehicle: ${err}`);
+                continue;
+            }
+        }
+
+        return await Database.updatePartialData(vehicle.data._id.toString(), { ...injections }, Collections.Vehicles);
     }
 
     /**

@@ -1,4 +1,5 @@
 import './example/index';
+import './core-atm-view/index';
 
 // Example: import './hotels/index'
 // Make sure example import is calling the PluginSystem
