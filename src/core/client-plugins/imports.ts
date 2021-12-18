@@ -1,4 +1,5 @@
 import './core-atm-view/view';
+import './core-clothing-view/view';
 import './core-garage-view/view';
 
 // Specify what you are loading here.

@@ -1,16 +1,15 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { WebViewController } from '../../client/extensions/view2';
+import ViewModel from '../../client/models/ViewModel';
+import PedEditCamera from '../../client/utility/camera';
+import { isAnyMenuOpen } from '../../client/utility/menus';
+import { CLOTHING_INTERACTIONS } from '../../shared-plugins/core-clothing-view/events';
+import { IClothingStore } from '../../shared-plugins/core-clothing-view/interfaces';
+import { LOCALE_CLOTHING_VIEW } from '../../shared-plugins/core-clothing-view/locales';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { View_Events_Clothing } from '../../shared/enums/Views';
 import { ClothingComponent } from '../../shared/interfaces/Clothing';
-import IClothingStore from '../../shared/interfaces/IClothingStore';
 import { Item } from '../../shared/interfaces/Item';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
-import PedEditCamera from '../utility/camera';
-import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -88,7 +87,7 @@ class InternalFunctions implements ViewModel {
 
         alt.Player.local.isMenuOpen = false;
 
-        alt.emitServer(View_Events_Clothing.Exit);
+        alt.emitServer(CLOTHING_INTERACTIONS.EXIT);
         isOpen = false;
     }
 
@@ -114,7 +113,7 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetData`, storeData);
-        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CLOTHING));
+        view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_CLOTHING_VIEW);
         view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
     }
 
@@ -184,7 +183,7 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static purchase(uid: string, index: number, component: ClothingComponent, name: string, desc: string) {
-        alt.emitServer(View_Events_Clothing.Purchase, uid, index, component, name, desc);
+        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc);
     }
 
     static async populate(components: Array<ClothingComponent>) {
@@ -282,4 +281,4 @@ class InternalFunctions implements ViewModel {
 }
 
 alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.handleMetaChanged);
-alt.onServer(View_Events_Clothing.Open, InternalFunctions.open);
+alt.onServer(CLOTHING_INTERACTIONS.OPEN, InternalFunctions.open);

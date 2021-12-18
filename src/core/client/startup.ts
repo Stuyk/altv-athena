@@ -70,7 +70,6 @@ import './views/actions';
 import './views/audio';
 import './views/chat';
 import './views/characters';
-import './views/clothing';
 import './views/creator';
 import './views/factions';
 import './views/hud';

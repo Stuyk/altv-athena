@@ -1,5 +1,6 @@
 import './example/index';
 import './core-atm-view/index';
+import './core-clothing-view/index';
 import './core-garage-view/index';
 
 // Example: import './hotels/index'

@@ -15,13 +15,6 @@ export enum View_Events_Inventory {
     Pickup = 'inventory:Pickup',
 }
 
-export enum View_Events_Clothing {
-    Open = 'clothing:Open',
-    Sync = 'clothing:Sync',
-    Purchase = 'clothing:Purchase',
-    Exit = 'clothing:Exit',
-}
-
 export enum View_Events_Characters {
     Select = 'characters:Select',
     New = 'characters:New',

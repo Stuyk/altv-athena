@@ -1,7 +1,11 @@
-import { CLOTHING_STORE_PAGE } from '../enums/ClothingStorePages';
-import IClothingPrice from './IClothingPrice';
+import { CLOTHING_STORE_PAGE } from './enums';
 
-export default interface IClothingStore {
+export interface IClothingPrice {
+    price: number;
+    id: number;
+}
+
+export interface IClothingStore {
     /**
      * A unique identifier for a clothing store.
      * Usually automatically generated.
