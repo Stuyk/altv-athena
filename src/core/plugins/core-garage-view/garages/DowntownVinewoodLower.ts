@@ -1,6 +1,7 @@
 import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
+import { GarageFunctions } from '../src/view';
 
-export default {
+const garage = {
     position: { x: 596.8131713867188, y: 91.3467025756836, z: 92.6 },
     type: VEHICLE_TYPE.VEHICLE,
     index: 'downtown-vinewood-lower',
@@ -59,3 +60,4 @@ export default {
         },
     ],
 };
+GarageFunctions.add(garage);

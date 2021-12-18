@@ -1,11 +1,10 @@
 import * as alt from 'alt-client';
-
+import { WebViewController } from '../../client/extensions/view2';
+import ViewModel from '../../client/models/ViewModel';
+import { isAnyMenuOpen } from '../../client/utility/menus';
+import { ATM_INTERACTIONS } from '../../shared-plugins/core-atm-view/events';
+import { LOCALE_ATM_VIEW } from '../../shared-plugins/core-atm-view/locales';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
-import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Atm';
 
@@ -49,11 +48,11 @@ class AtmView implements ViewModel {
     static async ready() {
         AtmView.change('bank');
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_ATM));
+        view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_ATM_VIEW);
     }
 
     static action(type: string, amount: number, id = null) {
-        alt.emitServer(SYSTEM_EVENTS.INTERACTION_ATM_ACTION, type, amount, id);
+        alt.emitServer(ATM_INTERACTIONS.ACTION, type, amount, id);
     }
 
     static async change(key: string) {
@@ -66,5 +65,5 @@ class AtmView implements ViewModel {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.INTERACTION_ATM, AtmView.open);
+alt.onServer(ATM_INTERACTIONS.OPEN, AtmView.open);
 alt.on(SYSTEM_EVENTS.META_CHANGED, AtmView.change);

@@ -70,9 +70,6 @@ export const LOCALE_KEYS = {
     FUEL_CANNOT_AFFORD: `fuel-cannot-afford`,
     FUEL_PAYMENT: `fuel-payment`,
     FUEL_PAID: `fuel-paid`,
-    // Garage
-    GARAGE_BLIP_NAME: `garage-name`,
-    GARAGE_DESCRIPTION: `garage-description`,
     // Interior
     INTERIOR_INTERACT: 'interior-interact',
     INTERIOR_TOO_FAR_FROM_ENTRANCE: 'interior-too-far-from-entrance',
@@ -168,14 +165,12 @@ export const LOCALE_KEYS = {
     // =====================
     // WebView Locales
     // =====================
-    WEBVIEW_ATM: 'webview-atm',
     WEBVIEW_CHARACTERS: 'webview-characters',
     WEBVIEW_CREATOR: 'webview-creator',
     WEBVIEW_JOB: 'webview-job',
     WEBVIEW_INVENTORY: 'webview-inventory',
     WEBVIEW_CLOTHING: 'webview-clothing',
     WEBVIEW_LOGIN: 'webview-login',
-    WEBVIEW_GARAGE: 'webview-garage',
     WEBVIEW_FACTION: 'webview-faction',
     WEBVIEW_STORAGE: `webview-storage`,
 };

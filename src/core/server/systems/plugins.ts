@@ -5,7 +5,6 @@ const pluginRegistration: Array<{ name: string; callback: Function }> = [];
 let hasInitialized = false;
 
 function loadPlugins() {
-    console.log('\r\n');
     alt.log(`~lc~=== Loading Plugins ===`);
     for (let i = 0; i < pluginRegistration.length; i++) {
         const plugin = pluginRegistration[i];
@@ -19,7 +18,6 @@ function loadPlugins() {
 
     alt.log(`~lc~Extra Resources Loaded ~ly~(${pluginRegistration.length})`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
-    console.log('\r\n');
 }
 
 /**

@@ -35,13 +35,6 @@ export enum View_Events_Chat {
     Append = 'chat:Append',
 }
 
-export enum View_Events_Garage {
-    Open = 'garage:Open',
-    Spawn = 'garage:Spawn',
-    Despawn = 'garage:Despawn',
-    Close = 'garage:Close',
-}
-
 export enum View_Events_Storage {
     Open = 'storage:Open',
     MoveFromPlayer = 'storage:MoveFromPlayer',

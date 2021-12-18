@@ -32,8 +32,6 @@ export enum SYSTEM_EVENTS {
     INTERIOR_STORAGE = 'interior:Storage',
     //
     INTERACTION = 'player:Interact',
-    INTERACTION_ATM = 'atm:Open',
-    INTERACTION_ATM_ACTION = 'atm:Action',
     INTERACTION_FUEL = 'fuel:Action',
     INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
