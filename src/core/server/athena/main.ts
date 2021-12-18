@@ -5,24 +5,6 @@ import PDMSport from './dealerships/PDMSport';
 import PDMSuper from './dealerships/PDMSuper';
 import PDMSuv from './dealerships/PDMSuv';
 // All Parking Garages
-import BanhamCanyon from './parking/BanhamCanyon';
-import DelPerroBeach from './parking/DelPerroBeach';
-import DowntownVinewoodLower from './parking/DowntownVinewoodLower';
-import DowntownVinewoodUpper from './parking/DowntownVinewoodUpper';
-import GrandSenoraDesert from './parking/GrandSenoraDesert';
-import GrapeSeed from './parking/GrapeSeed';
-import LaPuertaDocks from './parking/LaPuertaDocks';
-import LaPuertaVehicle from './parking/LaPuertaVehicle';
-import LegionSquare from './parking/LegionSquare';
-import LosSantosInternational from './parking/LosSantosInternational';
-import LosSantosInternationalAir from './parking/LosSantosInternationalAir';
-import MissionRowPD from './parking/MissionRowPD';
-import PaletoBay from './parking/PaletoBay';
-import PaletoForest from './parking/PaletoForest';
-import Rancho from './parking/Rancho';
-import RockfordHills from './parking/RockfordHills';
-import SandyShores from './parking/SandyShores';
-import TongvaHills from './parking/TongvaHills';
 import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {
@@ -104,26 +86,6 @@ export const DEFAULT_CONFIG = {
     VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
-    VEHICLE_GARAGES: [
-        DowntownVinewoodUpper,
-        DowntownVinewoodLower,
-        LaPuertaDocks,
-        LaPuertaVehicle,
-        DelPerroBeach,
-        LegionSquare,
-        RockfordHills,
-        LosSantosInternational,
-        LosSantosInternationalAir,
-        MissionRowPD,
-        Rancho,
-        BanhamCanyon,
-        GrandSenoraDesert,
-        TongvaHills,
-        SandyShores,
-        GrapeSeed,
-        PaletoForest,
-        PaletoBay,
-    ],
     VEHICLE_DEALERSHIPS: [
         //
         PDMCoupe,

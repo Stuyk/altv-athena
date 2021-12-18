@@ -1,6 +1,7 @@
 import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
+import { GarageFunctions } from '../src/view';
 
-export default {
+const garage = {
     position: { x: -798.5142822265625, y: -110.65055084228516, z: 37.0 },
     type: VEHICLE_TYPE.VEHICLE,
     index: 'rockford-hills',
@@ -151,3 +152,5 @@ export default {
         },
     ],
 };
+
+GarageFunctions.add(garage);

@@ -1,6 +1,7 @@
 import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
+import { GarageFunctions } from '../src/view';
 
-export default {
+const garage = {
     position: { x: -1603.747314453125, y: -935.0883178710938, z: 8.2 },
     type: VEHICLE_TYPE.VEHICLE,
     index: 'del-perro-beach',
@@ -47,3 +48,5 @@ export default {
         },
     ],
 };
+
+GarageFunctions.add(garage);

@@ -1,11 +1,10 @@
 import * as alt from 'alt-client';
-import { View_Events_Garage } from '../../shared/enums/Views';
+import { WebViewController } from '../../client/extensions/view2';
+import ViewModel from '../../client/models/ViewModel';
+import { isAnyMenuOpen } from '../../client/utility/menus';
+import { GARAGE_INTERACTIONS } from '../../shared-plugins/core-garage-view/events';
+import { LOCALE_GARAGE_VIEW } from '../../shared-plugins/core-garage-view/locales';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
-import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Garage';
 
@@ -63,18 +62,18 @@ class InternalFunctions implements ViewModel {
 
     static async ready() {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_GARAGE));
+        view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_GARAGE_VIEW);
         view.emit(`${PAGE_NAME}:SetVehicles`, vehicles);
     }
 
     static spawn(uid: string) {
-        alt.emitServer(View_Events_Garage.Spawn, uid);
+        alt.emitServer(GARAGE_INTERACTIONS.SPAWN, uid);
     }
 
     static despawn(uid: string) {
-        alt.emitServer(View_Events_Garage.Despawn, uid);
+        alt.emitServer(GARAGE_INTERACTIONS.DESPAWN, uid);
     }
 }
 
-alt.onServer(View_Events_Garage.Open, InternalFunctions.show);
-alt.onServer(View_Events_Garage.Close, InternalFunctions.close);
+alt.onServer(GARAGE_INTERACTIONS.OPEN, InternalFunctions.show);
+alt.onServer(GARAGE_INTERACTIONS.CLOSE, InternalFunctions.close);

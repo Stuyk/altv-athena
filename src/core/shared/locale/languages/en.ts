@@ -77,9 +77,6 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
-    // Garage
-    [LOCALE_KEYS.GARAGE_BLIP_NAME]: `Garage`,
-    [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
     // House
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
     //Translations related to interiors
@@ -175,23 +172,6 @@ export default {
     // ============================
     // WebView Locales Start Here
     // ============================
-    [LOCALE_KEYS.WEBVIEW_ATM]: {
-        LABEL_ATM: 'ATM',
-        LABEL_CASH: 'Cash',
-        LABEL_BANK: 'Bank',
-        LABEL_DEPOSIT: 'Deposit',
-        LABEL_WITHDRAW: 'Withdraw',
-        LABEL_TRANSFER: 'Transfer',
-        LABEL_CASH_TO_DEPOSIT: 'Cash to Deposit',
-        LABEL_CASH_TO_WITHDRAW: 'Cash to Withdraw',
-        LABEL_BANK_TO_TRANSFER: 'Bank amount to transfer',
-        LABEL_USER_ID: `User ID to transfer to`,
-        FIELD_IS_REQUIRED: `Field is required`,
-        GREATER_THAN_ZERO: `Value must be greater than zero`,
-        LESS_THAN_CASH: `Value must be less than cash`,
-        LESS_THAN_BANK: `Value must be less than bank`,
-        USER_ID_POSITIVE: `User ID must be positive`,
-    },
     [LOCALE_KEYS.WEBVIEW_CHARACTERS]: {
         LABEL_DELETE: 'Delete',
         LABEL_NEW: 'New',
@@ -1000,14 +980,5 @@ export default {
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
         LABEL_OPEN_WINDOW: `Open Login Window Again`,
-    },
-    [LOCALE_KEYS.WEBVIEW_GARAGE]: {
-        LABEL_GARAGE: 'Garage',
-        LABEL_DESC: 'Spawn your vehicles through this terminal.',
-        LABEL_MODEL: 'Model',
-        LABEL_FUEL: 'Fuel',
-        LABEL_CONTROLS: 'Controls',
-        LABEL_SPAWN: 'spawn',
-        LABEL_DESPAWN: 'despawn',
     },
 };
