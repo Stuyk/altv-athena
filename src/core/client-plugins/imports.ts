@@ -1,6 +1,6 @@
-import './core-atm-view/view';
-import './core-clothing-view/view';
-import './core-garage-view/view';
+import './core-atm/view';
+import './core-clothing/view';
+import './core-garage/view';
 
 // Specify what you are loading here.
 // import './example-folder/index';

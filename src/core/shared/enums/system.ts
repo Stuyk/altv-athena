@@ -20,16 +20,6 @@ export enum SYSTEM_EVENTS {
     DISCORD_FINISH_AUTH = 'discord:FinishAuth',
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
-    // Interior
-    INTERIOR_SWITCH = 'interior:Switch',
-    INTERIOR_SHOW_MENU = 'interior:Open:Menu',
-    INTERIOR_TOGGLE_LOCK = 'interior:Toggle:Lock',
-    INTERIOR_PURCHASE = 'interior:Purchase',
-    INTERIOR_ENTER = 'interior:Enter',
-    INTERIOR_EXIT = 'interior:Exit',
-    INTERIOR_SET_NAME = 'interior:SetName',
-    INTERIOR_SET_PRICE = 'interior:SetPrice',
-    INTERIOR_STORAGE = 'interior:Storage',
     //
     INTERACTION = 'player:Interact',
     INTERACTION_FUEL = 'fuel:Action',

@@ -30,6 +30,7 @@ import { IResponse } from '../../shared/interfaces/IResponse';
 import SystemRules from './rules';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { INTERIOR_INTERACTIONS } from '../../shared-plugins/core-interiors/enums';
 
 const ONE_BILLION = 1000000000;
 const PREFIX_HOUSE_TEXT_OUTSIDE = 'house-text-outside-';
@@ -540,7 +541,7 @@ export class InteriorSystem {
         delete data.outsideShape;
         delete data.ipl;
 
-        alt.emitClient(player, SYSTEM_EVENTS.INTERIOR_SHOW_MENU, interior, isOutside);
+        alt.emitClient(player, INTERIOR_INTERACTIONS.SHOW, interior, isOutside);
     }
 
     /**

@@ -1,7 +1,7 @@
 import './example/index';
-import './core-atm-view/index';
-import './core-clothing-view/index';
-import './core-garage-view/index';
+import './core-atm/index';
+import './core-clothing/index';
+import './core-garage/index';
 
 // Example: import './hotels/index'
 // Make sure example import is calling the PluginSystem

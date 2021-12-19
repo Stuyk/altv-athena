@@ -4,7 +4,7 @@ import atms from '../../../shared/information/atms';
 import { playerFuncs } from '../../../server/extensions/Player';
 import { ServerBlipController } from '../../../server/systems/blip';
 import { InteractionController } from '../../../server/systems/interaction';
-import { ATM_INTERACTIONS } from '../../../shared-plugins/core-atm-view/events';
+import { ATM_INTERACTIONS } from '../../../shared-plugins/core-atm/events';
 import { CurrencyTypes } from '../../../shared/enums/Currency';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
