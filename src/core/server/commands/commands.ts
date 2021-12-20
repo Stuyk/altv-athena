@@ -8,7 +8,6 @@ import './death';
 import './debugVehicle';
 import './factions';
 import './garage';
-import './interiors';
 import './inventory';
 import './item';
 import './job';

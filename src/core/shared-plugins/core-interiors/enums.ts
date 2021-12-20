@@ -16,3 +16,7 @@ export enum INTERIOR_INTERACTIONS {
     SET_PRICE = 'interior:SetPrice',
     STORAGE = 'interior:Storage',
 }
+
+export enum INTERIOR_COLLECTIONS {
+    CORE = 'interiors',
+}

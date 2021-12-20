@@ -10,13 +10,11 @@ import { DEFAULT_CONFIG } from '../../athena/main';
 import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
-import { InteriorSystem } from '../../systems/interior';
 import { World } from '../../systems/world';
 import { playerFuncs } from '../Player';
 import VehicleFuncs from '../VehicleFuncs';
 import emit from './emit';
 import safe from './safe';
-import save from './save';
 import setter from './setter';
 import sync from './sync';
 
@@ -49,11 +47,6 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z,
             );
-        }
-
-        // Force the player into the interior they were last in.
-        if (player.data.interior) {
-            InteriorSystem.enter(player, player.data.interior, true, true);
         }
 
         // Check if health exists.
@@ -118,9 +111,9 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         }
 
         // Finish Selection
-        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
         playerFuncs.set.frozen(player, false);
         player.visible = true;
+        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 
     // Delete unused data from the Player.
