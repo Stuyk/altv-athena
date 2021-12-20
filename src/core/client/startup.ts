@@ -10,7 +10,6 @@ import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
-import './menus/interior';
 import './menus/player';
 import './menus/vehicle';
 

@@ -1,13 +1,13 @@
 import * as alt from 'alt-server';
-import { INTERIOR_SYSTEM, INTERIOR_TYPES } from '../../shared/flags/InteriorFlags';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
-import { playerFuncs } from '../extensions/Player';
-import ChatController from '../systems/chat';
-import { InteriorSystem } from '../systems/interior';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { Vector3 } from '../../shared/interfaces/Vector';
-import { Interior } from '../../shared/interfaces/Interior';
+import { playerFuncs } from '../../../server/extensions/Player';
+import ChatController from '../../../server/systems/chat';
+import { INTERIOR_SYSTEM } from '../../../shared-plugins/core-interiors/flags';
+import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
+import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
+import { InputMenu, InputOptionType, InputResult } from '../../../shared/interfaces/InputMenus';
+import { Vector3 } from '../../../shared/interfaces/Vector';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import { InteriorSystem } from './system';
 
 ChatController.addCommand('addhouse', '/addhouse', PERMISSIONS.ADMIN, addhouse);
 
@@ -100,13 +100,12 @@ alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult
             INTERIOR_SYSTEM.HAS_OWNER |
             INTERIOR_SYSTEM.HAS_PRICE |
             INTERIOR_SYSTEM.HAS_STORAGE,
-        type: INTERIOR_TYPES.HOUSE,
     };
 
     if (ipl && ipl.value) {
         houseData.ipl = ipl.value;
     }
 
-    await InteriorSystem.create(houseData);
-    playerFuncs.emit.message(player, `Created House.`);
+    await InteriorSystem.add(houseData);
+    playerFuncs.emit.message(player, `Created House`);
 });

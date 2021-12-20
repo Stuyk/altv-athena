@@ -93,14 +93,6 @@ export interface Character {
     hours: number;
 
     /**
-     * The last interior this player was in.
-     * This is simply an id.
-     * @type {(string | null)}
-     * @memberof Character
-     */
-    interior: number;
-
-    /**
      * Wanted stars to display.
      * @type {number} 0 - 5
      * @memberof Character

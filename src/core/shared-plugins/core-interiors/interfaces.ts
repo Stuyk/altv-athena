@@ -1,7 +1,6 @@
-import { INTERIOR_TYPES, INTERIOR_SYSTEM } from '../flags/InteriorFlags';
-import { IObject } from './IObject';
-import { Item } from './Item';
-import { Vector3 } from './Vector';
+import { IObject } from '../../shared/interfaces/IObject';
+import { Vector3 } from '../../shared/interfaces/Vector';
+import { INTERIOR_SYSTEM } from './flags';
 
 export interface Interior {
     /**
@@ -12,12 +11,13 @@ export interface Interior {
     _id?: unknown;
 
     /**
-     * The interior id for lookups.
-     * This is automatically generated. Do not apply this.
-     * @type {number}
-     * @memberof IVehicle
+     * A unique identifier for this interior.
+     * It can be any string but there is an automatic generator if this is not supplied.
+     *
+     * @type {string}
+     * @memberof Interior
      */
-    id?: number;
+    uid?: string;
 
     /**
      * The location for the outside entrance to the inside.
@@ -48,11 +48,18 @@ export interface Interior {
     isUnlocked?: boolean;
 
     /**
-     * A list of character ids who own this property and have full control over it.
+     * The owner of this property.
+     * @type {string}
+     * @memberof Interior
+     */
+    owner?: string;
+
+    /**
+     * A list of unique identifiers to create 'keys' for this interior.
      * @type {Array<string>}
      * @memberof Interior
      */
-    owners?: Array<string>;
+    keys?: Array<string>;
 
     /**
      * A list of faction ids who own have access to this property.
@@ -88,14 +95,6 @@ export interface Interior {
      * @memberof Interior
      */
     price?: number;
-
-    /**
-     * The type of interior this is.
-     * Use a single flag for this.
-     * @type {INTERIOR_TYPES}
-     * @memberof Interior
-     */
-    type: INTERIOR_TYPES;
 
     /**
      * The type of system(s) this interior has access to.

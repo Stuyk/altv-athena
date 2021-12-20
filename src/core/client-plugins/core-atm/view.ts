@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import { WebViewController } from '../../client/extensions/view2';
 import ViewModel from '../../client/models/ViewModel';
 import { isAnyMenuOpen } from '../../client/utility/menus';
-import { ATM_INTERACTIONS } from '../../shared-plugins/core-atm-view/events';
-import { LOCALE_ATM_VIEW } from '../../shared-plugins/core-atm-view/locales';
+import { ATM_INTERACTIONS } from '../../shared-plugins/core-atm/events';
+import { LOCALE_ATM_VIEW } from '../../shared-plugins/core-atm/locales';
 import { SYSTEM_EVENTS } from '../../shared/enums/System';
 
 const PAGE_NAME = 'Atm';

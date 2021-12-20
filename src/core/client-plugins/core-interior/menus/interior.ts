@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
-import { Interior } from '../../shared/interfaces/Interior';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { PushVehicle } from '../systems/push';
-import { isAnyMenuOpen } from '../utility/menus';
-import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
-import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
-import { InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
-import { InputView } from '../views/input';
+import { PushVehicle } from '../../../client/systems/push';
+import { isAnyMenuOpen } from '../../../client/utility/menus';
+import { IWheelItem, WheelMenu } from '../../../client/utility/wheelMenu';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
+import { InputOptionType, InputResult } from '../../../shared/interfaces/InputMenus';
+import { InputView } from '../../../client/views/input';
+import { INTERIOR_INTERACTIONS } from '../../../shared-plugins/core-interiors/enums';
+import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
 
 function initialCheck(): boolean {
     if (alt.Player.local.vehicle) {
@@ -39,9 +39,11 @@ function enterMenu(interior: Interior) {
     }
 
     const options: IWheelItem[] = [];
-    const isOwner = interior.owners.find((x) => x === alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID));
+    const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
+    const isOwner = interior.owner === playerIdentifier;
+
     const toggleLockFunc = () => {
-        alt.emitServer(SYSTEM_EVENTS.INTERIOR_TOGGLE_LOCK, interior.id);
+        alt.emitServer(INTERIOR_INTERACTIONS.TOGGLE_LOCK, interior.uid);
     };
 
     // Ownership Related Menu Functions
@@ -78,7 +80,7 @@ function enterMenu(interior: Interior) {
                             return;
                         }
 
-                        alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_PRICE, interior.id, parseInt(data.value));
+                        alt.emitServer(INTERIOR_INTERACTIONS.SET_PRICE, interior.uid, parseInt(data.value));
                     },
                 };
 
@@ -115,7 +117,7 @@ function enterMenu(interior: Interior) {
                             return;
                         }
 
-                        alt.emitServer(SYSTEM_EVENTS.INTERIOR_SET_NAME, interior.id, data.value);
+                        alt.emitServer(INTERIOR_INTERACTIONS.SET_NAME, interior.uid, data.value);
                     },
                 };
 
@@ -128,7 +130,7 @@ function enterMenu(interior: Interior) {
         options.push({
             name: `Purchase~n~~p~$${interior.price}`,
             callback: () => {
-                alt.emitServer(SYSTEM_EVENTS.INTERIOR_PURCHASE, interior.id);
+                alt.emitServer(INTERIOR_INTERACTIONS.PURCHASE, interior.uid);
             },
         });
     }
@@ -137,12 +139,12 @@ function enterMenu(interior: Interior) {
         options.push({
             name: '~g~Enter',
             callback: () => {
-                alt.emitServer(SYSTEM_EVENTS.INTERIOR_ENTER, interior.id);
+                alt.emitServer(INTERIOR_INTERACTIONS.ENTER, interior.uid);
             },
         });
     }
 
-    WheelMenu.create(`Interior: ${interior.id}`, options, true);
+    WheelMenu.create(`Interior: ${interior.uid}`, options, true);
 }
 
 function exitMenu(interior: Interior) {
@@ -151,9 +153,11 @@ function exitMenu(interior: Interior) {
     }
 
     const options: IWheelItem[] = [];
-    const isOwner = interior.owners.find((x) => x === alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID));
+
+    const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
+    const isOwner = interior.owner === playerIdentifier;
     const toggleLockFunc = () => {
-        alt.emitServer(SYSTEM_EVENTS.INTERIOR_TOGGLE_LOCK, interior.id);
+        alt.emitServer(INTERIOR_INTERACTIONS.TOGGLE_LOCK, interior.uid);
     };
 
     // Ownership Related Menu Functions
@@ -166,7 +170,7 @@ function exitMenu(interior: Interior) {
         options.push({
             name: 'Storage',
             callback: () => {
-                alt.emitServer(SYSTEM_EVENTS.INTERIOR_STORAGE, interior.id);
+                alt.emitServer(INTERIOR_INTERACTIONS.STORAGE, interior.uid);
             },
         });
     }
@@ -174,11 +178,11 @@ function exitMenu(interior: Interior) {
     options.push({
         name: '~r~Exit',
         callback: () => {
-            alt.emitServer(SYSTEM_EVENTS.INTERIOR_EXIT, interior.id);
+            alt.emitServer(INTERIOR_INTERACTIONS.EXIT, interior.uid);
         },
     });
 
-    WheelMenu.create(`Interior: ${interior.id}`, options, true);
+    WheelMenu.create(`Interior: ${interior.uid}`, options, true);
 }
 
-alt.onServer(SYSTEM_EVENTS.INTERIOR_SHOW_MENU, showMenu);
+alt.onServer(INTERIOR_INTERACTIONS.SHOW_MENU, showMenu);
