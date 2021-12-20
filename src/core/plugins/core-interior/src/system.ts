@@ -222,7 +222,7 @@ class InternalSystem {
      * @param {number} id
      * @memberof InteriorSystem
      */
-    static async toggleLock(player: alt.Player, uid: string) {
+    static async toggleLock(player: alt.Player, uid: string, skipOwnerCheck = false) {
         if (!player || !player.valid || !player.data || player.data.isDead || !uid) {
             return;
         }
@@ -232,9 +232,11 @@ class InternalSystem {
             return;
         }
 
-        const hasAccess = await InteriorSystem.hasAccess(player, interior);
-        if (!hasAccess) {
-            return;
+        if (!skipOwnerCheck) {
+            const hasAccess = await InteriorSystem.hasAccess(player, interior);
+            if (!hasAccess) {
+                return;
+            }
         }
 
         const ruleToCheck = interior.isUnlocked ? INTERIOR_RULES.LOCK : INTERIOR_RULES.UNLOCK;
