@@ -7,6 +7,7 @@ import { InputOptionType, InputResult } from '../../../shared/interfaces/InputMe
 import { InputView } from '../../../client/views/input';
 import { INTERIOR_INTERACTIONS } from '../../../shared-plugins/core-interiors/enums';
 import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
+import { LOCALE_INTERIOR_VIEW } from '../../../shared-plugins/core-interiors/locales';
 
 function initialCheck(): boolean {
     if (alt.Player.local.vehicle) {
@@ -46,22 +47,24 @@ function enterMenu(interior: Interior) {
         alt.emitServer(INTERIOR_INTERACTIONS.TOGGLE_LOCK, interior.uid);
     };
 
+    options.push({
+        name: interior.isUnlocked
+            ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
+            : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
+        callback: toggleLockFunc,
+    });
+
     // Ownership Related Menu Functions
     if (isOwner) {
         options.push({
-            name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
-            callback: toggleLockFunc,
-        });
-
-        options.push({
-            name: 'Set Sale Price',
+            name: LOCALE_INTERIOR_VIEW.LABEL_SET_SALE_PRICE,
             callback: () => {
                 const InputMenu = {
-                    title: 'Sale Price',
+                    title: LOCALE_INTERIOR_VIEW.LABEL_SALE_PRICE,
                     options: [
                         {
                             id: 'price',
-                            desc: 'Price (Use -1 to Cancel Sale)',
+                            desc: LOCALE_INTERIOR_VIEW.LABEL_SALE_PLACHOLDER,
                             type: InputOptionType.NUMBER,
                             placeholder: '25000',
                         },
@@ -89,14 +92,14 @@ function enterMenu(interior: Interior) {
         });
 
         options.push({
-            name: 'Set House Name',
+            name: LOCALE_INTERIOR_VIEW.LABEL_SET_HOUSE_NAME,
             callback: () => {
                 const InputMenu = {
-                    title: 'Set House Name',
+                    title: LOCALE_INTERIOR_VIEW.LABEL_SET_HOUSE_NAME,
                     options: [
                         {
                             id: 'name',
-                            desc: 'Name to Display on House',
+                            desc: LOCALE_INTERIOR_VIEW.LABEL_SET_HOUSE_NAME_PLACEHOLDER,
                             type: InputOptionType.TEXT,
                             placeholder: `Stuyks House`,
                             regex: '^[a-zA-Z0-9 ]{1,24}$', // Matches 3 to 24 Characters
@@ -128,7 +131,7 @@ function enterMenu(interior: Interior) {
 
     if (!isOwner && interior.price >= 1) {
         options.push({
-            name: `Purchase~n~~p~$${interior.price}`,
+            name: `${LOCALE_INTERIOR_VIEW.LABEL_PURCHASE}~n~~p~$${interior.price}`,
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.PURCHASE, interior.uid);
             },
@@ -137,7 +140,7 @@ function enterMenu(interior: Interior) {
 
     if (interior.isUnlocked) {
         options.push({
-            name: '~g~Enter',
+            name: `~g~${LOCALE_INTERIOR_VIEW.LABEL_ENTER}`,
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.ENTER, interior.uid);
             },
@@ -160,15 +163,17 @@ function exitMenu(interior: Interior) {
         alt.emitServer(INTERIOR_INTERACTIONS.TOGGLE_LOCK, interior.uid);
     };
 
+    options.push({
+        name: interior.isUnlocked
+            ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
+            : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
+        callback: toggleLockFunc,
+    });
+
     // Ownership Related Menu Functions
     if (isOwner) {
         options.push({
-            name: interior.isUnlocked ? '~o~Lock' : '~g~Unlock',
-            callback: toggleLockFunc,
-        });
-
-        options.push({
-            name: 'Storage',
+            name: LOCALE_INTERIOR_VIEW.LABEL_STORAGE,
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.STORAGE, interior.uid);
             },
@@ -176,7 +181,7 @@ function exitMenu(interior: Interior) {
     }
 
     options.push({
-        name: '~r~Exit',
+        name: `~r~${LOCALE_INTERIOR_VIEW.LABEL_EXIT}`,
         callback: () => {
             alt.emitServer(INTERIOR_INTERACTIONS.EXIT, interior.uid);
         },

@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
-import { Vector3 } from '../../../shared/interfaces/Vector';
 
 export interface InteriorInternal extends Interior {
     /**

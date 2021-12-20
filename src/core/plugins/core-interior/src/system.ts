@@ -30,6 +30,7 @@ import {
 } from '../../../shared-plugins/core-interiors/enums';
 import { IObject } from '../../../shared/interfaces/IObject';
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
+import { LOCALE_INTERIOR_VIEW } from '../../../shared-plugins/core-interiors/locales';
 
 /**
  * Interiors should work in the following way.
@@ -83,7 +84,7 @@ class InternalSystem {
         });
 
         interiorInfo.outsideShape = InteractionController.add({
-            description: `Open Interior Menu`,
+            description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
             position: interior.outside,
             type: `interior`,
             identifier: `${interior.uid}-outside`,
@@ -192,12 +193,12 @@ class InternalSystem {
 
         if (!interior.isUnlocked) {
             outsideName += NEW_LINE;
-            outsideName += `~r~Locked~w~`;
+            outsideName += `~r~${LOCALE_INTERIOR_VIEW.LABEL_LOCKED}~w~`;
         }
 
         if (interior.price >= 1) {
             outsideName += NEW_LINE;
-            outsideName += `~g~Price: $${interior.price}~w~`;
+            outsideName += `~g~${LOCALE_INTERIOR_VIEW.LABEL_PRICE}: $${interior.price}~w~`;
         }
 
         const aboveGroundOutside = {
@@ -278,11 +279,12 @@ class InternalSystem {
 
         const dist = distance(player.pos, interior.outside);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, 'LOCALE_TOO_FAR_FROM_ENTRANCE');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
             return;
         }
 
         if (!InteriorSystem.isOwner(player, interior)) {
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -330,13 +332,14 @@ class InternalSystem {
         }
 
         if (!InteriorSystem.isOwner(player, interior)) {
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         const dist = distance(player.pos, interior.outside);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, 'LOCALE_TOO_FAR_FROM_ENTRANCE');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
             return;
         }
 
@@ -378,12 +381,13 @@ class InternalSystem {
         }
 
         if (!InteriorSystem.isOwner(player, interior)) {
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_STORAGE)) {
-            playerFuncs.emit.notification(player, 'LOCALE_NO_STORAGE');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_STORAGE);
             return;
         }
 
@@ -422,7 +426,7 @@ class InternalSystem {
 
         const dist = distance(player.pos, interior.outside);
         if (dist >= 5) {
-            playerFuncs.emit.notification(player, 'LOCALE_TOO_FAR_FROM_ENTRANCE');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
             return;
         }
 
@@ -432,13 +436,13 @@ class InternalSystem {
         }
 
         if (player.data.bank + player.data.cash < interior.price) {
-            playerFuncs.emit.notification(player, 'LOCALE_NOT_ENOUGH_CURRENCY');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!playerFuncs.currency.subAllCurrencies(player, interior.price)) {
-            playerFuncs.emit.notification(player, 'LOCALE_NOT_ENOUGH_CURRENCY');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -458,7 +462,7 @@ class InternalSystem {
             if (target) {
                 playerFuncs.currency.add(target, CurrencyTypes.BANK, originalPrice);
                 playerFuncs.emit.sound2D(target, 'item_purchase');
-                playerFuncs.emit.notification(player, 'LOCALE_SOLD');
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_SELL_INTERIOR);
             } else {
                 const targetData = await Database.fetchData<Character>(`_id`, originalOwner, Collections.Characters);
                 targetData.bank += originalPrice;
@@ -478,7 +482,7 @@ class InternalSystem {
             INTERIOR_COLLECTIONS.CORE,
         );
 
-        playerFuncs.emit.notification(player, 'INTERIOR PURCHASE');
+        playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_PURCHASE_INTERIOR);
         playerFuncs.emit.sound2D(player, 'item_purchase');
 
         InteriorSystem.refresh(interior.uid);
@@ -622,13 +626,13 @@ export class InteriorSystem {
         if (!skipDistanceCheck) {
             const dist = distance(player.pos, interior.outside);
             if (dist > DOOR_CHECK_DIST) {
-                playerFuncs.emit.notification(player, 'LOCALE_TOO_FAR_FROM_DOOR');
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
                 return false;
             }
         }
 
         if (isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_LOCK) && !interior.isUnlocked) {
-            playerFuncs.emit.notification(player, 'LOCALE_DOOR_IS_LOCKED');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DOOR_IS_LOCKED);
             return false;
         }
 
@@ -642,7 +646,7 @@ export class InteriorSystem {
         // Lowers need for additional interaction controllers.
         if (!interior.insideShape) {
             interior.insideShape = InteractionController.add({
-                description: `Open Interior Menu`,
+                description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
                 position: interior.inside,
                 type: `interior`,
                 identifier: `${interior.uid}-inside`,
@@ -709,7 +713,7 @@ export class InteriorSystem {
 
         const dist = distance(player.pos, interior.inside);
         if (dist > DOOR_CHECK_DIST) {
-            playerFuncs.emit.notification(player, 'LOCALE_TOO_FAR_FROM_EXIT');
+            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
             return false;
         }
 
