@@ -1,14 +1,14 @@
 import * as alt from 'alt-server';
-import { IStorage } from '../../shared/interfaces/IStorage';
+import { IStorage } from '../../shared/interfaces/iStorage';
 import { playerFuncs } from '../extensions/Player';
 import { StorageSystem } from '../systems/storage';
-import { View_Events_Storage } from '../../shared/enums/Views';
+import { View_Events_Storage } from '../../shared/enums/views';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Item } from '../../shared/interfaces/Item';
+import { Item } from '../../shared/interfaces/item';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
-import { IResponse } from '../../shared/interfaces/IResponse';
-import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/StorageRules';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/storageRules';
 import SystemRules from '../systems/rules';
 
 /**

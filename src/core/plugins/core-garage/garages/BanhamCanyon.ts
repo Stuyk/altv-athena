@@ -1,4 +1,4 @@
-import { VEHICLE_TYPE } from '../../../shared/enums/VehicleTypeFlags';
+import { VEHICLE_TYPE } from '../../../shared/enums/vehicleTypeFlags';
 import { GarageFunctions } from '../src/view';
 
 const garage = {

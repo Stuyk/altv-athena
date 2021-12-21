@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { handleFrontendSound } from '../systems/sound';
 import { Timer } from '../utility/timers';
 

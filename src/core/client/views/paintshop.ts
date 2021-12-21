@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as natives from 'natives';
-import { View_Events_PaintShop } from '../../shared/enums/Views';
+import { View_Events_PaintShop } from '../../shared/enums/views';
 
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';

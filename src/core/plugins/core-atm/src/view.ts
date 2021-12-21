@@ -5,7 +5,7 @@ import { playerFuncs } from '../../../server/extensions/Player';
 import { ServerBlipController } from '../../../server/systems/blip';
 import { InteractionController } from '../../../server/systems/interaction';
 import { ATM_INTERACTIONS } from '../../../shared-plugins/core-atm/events';
-import { CurrencyTypes } from '../../../shared/enums/Currency';
+import { CurrencyTypes } from '../../../shared/enums/currency';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 

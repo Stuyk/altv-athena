@@ -1,4 +1,4 @@
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 
 export interface Interaction {
     description?: string;

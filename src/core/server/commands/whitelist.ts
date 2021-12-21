@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -10,14 +10,14 @@ ChatController.addCommand(
     'addwhitelist',
     LocaleController.get(LOCALE_KEYS.COMMAND_ADD_WHITELIST, '/addwhitelist'),
     PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
-    handleCommandAdd
+    handleCommandAdd,
 );
 
 ChatController.addCommand(
     'removewhitelist',
     LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_WHITELIST, '/removewhitelist'),
     PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
-    handleCommandRemove
+    handleCommandRemove,
 );
 
 async function handleCommandAdd(player: alt.Player, discord: string): Promise<void> {

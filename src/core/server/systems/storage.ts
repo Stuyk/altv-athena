@@ -1,4 +1,4 @@
-import { IStorage } from '../../shared/interfaces/IStorage';
+import { IStorage } from '../../shared/interfaces/iStorage';
 import Database from '@stuyk/ezmongodb';
 import { Collections } from '../interface/DatabaseCollections';
 

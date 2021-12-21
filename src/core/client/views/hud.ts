@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { HUD_COMPONENT } from '../../shared/enums/HudComponents';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
-import IClientInteraction from '../../shared/interfaces/IClientInteraction';
-import IHudComponent from '../../shared/interfaces/IHudComponent';
+import { HUD_COMPONENT } from '../../shared/enums/hudComponents';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_STATE } from '../../shared/enums/vehicle';
+import IClientInteraction from '../../shared/interfaces/iClientInteraction';
+import IHudComponent from '../../shared/interfaces/iHudComponent';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';
 import { World } from '../systems/world';

@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Timer } from '../utility/timers';
-import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
+import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { playAnimation } from './animations';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
 
 let interval;

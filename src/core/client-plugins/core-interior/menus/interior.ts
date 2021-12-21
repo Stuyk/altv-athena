@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import { PushVehicle } from '../../../client/systems/push';
 import { isAnyMenuOpen } from '../../../client/utility/menus';
 import { IWheelItem, WheelMenu } from '../../../client/utility/wheelMenu';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
-import { InputOptionType, InputResult } from '../../../shared/interfaces/InputMenus';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { InputOptionType, InputResult } from '../../../shared/interfaces/inputMenus';
 import { InputView } from '../../../client/views/input';
 import { INTERIOR_INTERACTIONS } from '../../../shared-plugins/core-interiors/enums';
 import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
@@ -52,6 +52,14 @@ function enterMenu(interior: Interior) {
             ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
             : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
+    });
+
+    options.push({
+        name: 'UID',
+        callback: () => {
+            console.log(`===> ${interior.name}`);
+            console.log(`UID: ${interior.uid}`);
+        },
     });
 
     // Ownership Related Menu Functions
@@ -168,6 +176,14 @@ function exitMenu(interior: Interior) {
             ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
             : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
+    });
+
+    options.push({
+        name: 'UID',
+        callback: () => {
+            console.log(`===> ${interior.name}`);
+            console.log(`UID: ${interior.uid}`);
+        },
     });
 
     // Ownership Related Menu Functions

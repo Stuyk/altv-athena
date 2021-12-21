@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
-import IAttachable from '../../shared/interfaces/IAttachable';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import IAttachable from '../../shared/interfaces/iAttachable';
 import { loadModel } from '../utility/model';
 
 const cache: { [key: string]: Array<IAttachable> } = {};

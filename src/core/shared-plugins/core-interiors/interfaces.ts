@@ -1,5 +1,5 @@
-import { IObject } from '../../shared/interfaces/IObject';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { IObject } from '../../shared/interfaces/iObject';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { INTERIOR_SYSTEM } from './flags';
 
 export interface Interior {

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../shared/enums/Currency';
+import { CurrencyTypes } from '../../shared/enums/currency';
 
-import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
-import { IResponse } from '../../shared/interfaces/IResponse';
+import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/factionPermissionFlags';
+import { IResponse } from '../../shared/interfaces/iResponse';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';

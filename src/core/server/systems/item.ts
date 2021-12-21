@@ -1,5 +1,5 @@
-import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
-import { Item } from '../../shared/interfaces/Item';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { Item } from '../../shared/interfaces/item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 
 export class ItemFactory {

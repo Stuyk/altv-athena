@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { View_Events_PaintShop } from '../../shared/enums/Views';
-import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
-import { RGB } from '../../shared/interfaces/RGB';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { View_Events_PaintShop } from '../../shared/enums/views';
+import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
+import { RGB } from '../../shared/interfaces/rgb';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { ServerPolygonController } from '../streamers/polygon';

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
 import { StreamerService } from '../systems/streamer';
 import { sha256Random } from '../utility/encryption';
 

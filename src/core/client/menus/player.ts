@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { WheelMenu } from '../utility/wheelMenu';

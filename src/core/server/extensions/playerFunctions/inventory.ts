@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { EQUIPMENT_TYPE } from '../../../shared/enums/EquipmentType';
-import { INVENTORY_TYPE } from '../../../shared/enums/InventoryTypes';
-import { ITEM_TYPE } from '../../../shared/enums/ItemTypes';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
-import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
+import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentType';
+import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
+import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Item, ItemSpecial } from '../../../shared/interfaces/item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/CategoryData';
@@ -839,6 +839,39 @@ function getInventoryItem(player: alt.Player, slot: number): Item | null {
 }
 
 /**
+ * Scans the players inventory to try and find a key / value pair in the 'data' section.
+ * Useful to find an arbitrary item with a key / value pair.
+ *
+ *
+ * @param {alt.Player} player
+ * @param {string} key
+ * @param {*} value
+ */
+function checkForKeyValuePair(player: alt.Player, key: string, value: any) {
+    const index = player.data.inventory.findIndex((item) => {
+        if (!item.data) {
+            return false;
+        }
+
+        if (typeof item.data !== 'object') {
+            return false;
+        }
+
+        if (!item.data[key]) {
+            return false;
+        }
+
+        if (item.data[key] !== value) {
+            return false;
+        }
+
+        return true;
+    });
+
+    return index >= 0;
+}
+
+/**
  * Checks if the equipment slot the item is going to is correct.
  * @param {Item} item
  * @param {EQUIPMENT_TYPE} slot Is the 'item.slot' the item will go to.
@@ -1015,6 +1048,7 @@ function getTotalWeight(player: alt.Player): number {
 export default {
     convert,
     allItemRulesValid,
+    checkForKeyValuePair,
     equipmentAdd,
     equipmentRemove,
     findAndRemove,

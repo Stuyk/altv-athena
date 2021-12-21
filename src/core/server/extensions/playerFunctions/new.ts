@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
+import { Character, CharacterDefaults } from '../../../shared/interfaces/character';
 import Database from '@stuyk/ezmongodb';
-import { Appearance } from '../../../shared/interfaces/Appearance';
-import { CharacterInfo } from '../../../shared/interfaces/CharacterInfo';
+import { Appearance } from '../../../shared/interfaces/appearance';
+import { CharacterInfo } from '../../../shared/interfaces/characterInfo';
 import select from './select';
 import { Collections } from '../../interface/DatabaseCollections';
 
@@ -18,7 +18,7 @@ async function character(
     p: alt.Player,
     appearance: Partial<Appearance>,
     info: Partial<CharacterInfo>,
-    name: string
+    name: string,
 ): Promise<void> {
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearance;
@@ -32,5 +32,5 @@ async function character(
 }
 
 export default {
-    character
+    character,
 };

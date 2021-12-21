@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vehicle_Door_List } from '../../../shared/enums/Vehicle';
+import { Vehicle_Door_List } from '../../../shared/enums/vehicle';
 
 /**
  * Toggle a local vehicle's door state.

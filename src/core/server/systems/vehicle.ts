@@ -1,19 +1,19 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/AthenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import {
     Vehicle_Behavior,
     VEHICLE_DOOR_STATE,
     VEHICLE_EVENTS,
     VEHICLE_LOCK_STATE,
     VEHICLE_STATE,
-} from '../../shared/enums/Vehicle';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+} from '../../shared/enums/vehicle';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { VehicleData } from '../../shared/information/vehicles';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { Task } from '../../shared/interfaces/TaskTimeline';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Task } from '../../shared/interfaces/taskTimeline';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -25,9 +25,9 @@ import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
 import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
-import { VEHICLE_RULES } from '../../shared/enums/VehicleRules';
-import { IResponse } from '../../shared/interfaces/IResponse';
-import IVehicleRuleData from '../../shared/interfaces/IVehicleRuleData';
+import { VEHICLE_RULES } from '../../shared/enums/vehicleRules';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import IVehicleRuleData from '../../shared/interfaces/iVehicleRuleData';
 import SystemRules from './rules';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

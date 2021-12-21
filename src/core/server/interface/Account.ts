@@ -1,4 +1,4 @@
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 
 /**
  * Used to store Discord Information, IPs, and User Data

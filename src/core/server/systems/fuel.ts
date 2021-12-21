@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { CurrencyTypes } from '../../shared/enums/Currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { Vehicle_Behavior } from '../../shared/enums/Vehicle';
+import { CurrencyTypes } from '../../shared/enums/currency';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import fuel from '../../shared/information/fuel';
-import { JobTrigger } from '../../shared/interfaces/JobTrigger';
+import { JobTrigger } from '../../shared/interfaces/jobTrigger';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';

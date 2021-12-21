@@ -4,7 +4,7 @@ import ViewModel from '../../client/models/ViewModel';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { GARAGE_INTERACTIONS } from '../../shared-plugins/core-garage/events';
 import { LOCALE_GARAGE_VIEW } from '../../shared-plugins/core-garage/locales';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
 
 const PAGE_NAME = 'Garage';
 

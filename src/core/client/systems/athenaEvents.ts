@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/AthenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadSceneAtCoords } from '../utility/scene';
 import { Timer } from '../utility/timers';

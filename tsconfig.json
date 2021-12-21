@@ -15,7 +15,8 @@
         "outDir": "./athena-cache",
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
-        "composite": false
+        "composite": false,
+        "forceConsistentCasingInFileNames": false
     },
     "include": ["./src/**/*.ts"]
 }

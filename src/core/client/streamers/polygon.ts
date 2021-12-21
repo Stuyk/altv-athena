@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import Polygon from '../../shared/classes/Polygon';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
+import Polygon from '../../shared/classes/polygon';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
 import { findMissingElements } from '../../shared/utility/array';
 import { distance2d } from '../../shared/utility/vector';
 import { Timer } from '../utility/timers';

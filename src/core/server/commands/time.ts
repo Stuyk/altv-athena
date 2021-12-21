@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { WORLD_WEATHER } from '../../shared/enums/Weather';
+import { WORLD_WEATHER } from '../../shared/enums/weather';
 
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';

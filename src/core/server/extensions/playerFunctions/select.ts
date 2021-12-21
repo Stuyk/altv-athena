@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
-import { Character } from '../../../shared/interfaces/Character';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Character } from '../../../shared/interfaces/character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../../athena/main';

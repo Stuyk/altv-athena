@@ -7,9 +7,9 @@ import { isAnyMenuOpen } from '../../client/utility/menus';
 import { CLOTHING_INTERACTIONS } from '../../shared-plugins/core-clothing/events';
 import { IClothingStore } from '../../shared-plugins/core-clothing/interfaces';
 import { LOCALE_CLOTHING_VIEW } from '../../shared-plugins/core-clothing/locales';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { ClothingComponent } from '../../shared/interfaces/Clothing';
-import { Item } from '../../shared/interfaces/Item';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ClothingComponent } from '../../shared/interfaces/clothing';
+import { Item } from '../../shared/interfaces/item';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [

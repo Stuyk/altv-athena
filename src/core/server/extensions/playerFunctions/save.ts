@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Character } from '../../../shared/interfaces/Character';
+import { Character } from '../../../shared/interfaces/character';
 import { Collections } from '../../interface/DatabaseCollections';
 
 const SaveInjections: Array<(vehicle: alt.Player) => { [key: string]: any }> = [];

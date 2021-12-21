@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { distance } from '../../shared/utility/vector';
 
 /**
@@ -11,7 +11,7 @@ export function getForwardVector(rot: Vector3): Vector3 {
     return {
         x: fwdX(rot.x, rot.z),
         y: fwdY(rot.x, rot.z),
-        z: fwdZ(rot.x)
+        z: fwdZ(rot.x),
     } as Vector3;
 }
 
@@ -28,7 +28,7 @@ export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): 
     const posFront = {
         x: player.pos.x + forwardVector.x * distance,
         y: player.pos.y + forwardVector.y * distance,
-        z: player.pos.z
+        z: player.pos.z,
     };
 
     return new alt.Vector3(posFront.x, posFront.y, posFront.z);
@@ -61,7 +61,7 @@ export function getClosestEntity<T>(
     rot: Vector3,
     entities: Array<{ pos: Vector3; valid?: boolean }>,
     dist: number,
-    checkBackwards: boolean = false
+    checkBackwards: boolean = false,
 ): T | null {
     const fwdVector = getForwardVector(rot);
     let position;
@@ -70,13 +70,13 @@ export function getClosestEntity<T>(
         position = {
             x: playerPosition.x + fwdVector.x * dist,
             y: playerPosition.y + fwdVector.y * dist,
-            z: playerPosition.z
+            z: playerPosition.z,
         };
     } else {
         position = {
             x: playerPosition.x - fwdVector.x * dist,
             y: playerPosition.y - fwdVector.y * dist,
-            z: playerPosition.z
+            z: playerPosition.z,
         };
     }
 

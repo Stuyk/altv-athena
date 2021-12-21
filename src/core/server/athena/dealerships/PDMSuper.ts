@@ -1,5 +1,5 @@
-import { VEHICLE_CLASS } from '../../../shared/enums/VehicleTypeFlags';
-import { Dealership } from '../../../shared/interfaces/Dealership';
+import { VEHICLE_CLASS } from '../../../shared/enums/vehicleTypeFlags';
+import { Dealership } from '../../../shared/interfaces/dealership';
 
 const Information: Dealership = {
     name: 'Premium Deluxe Motorsport',

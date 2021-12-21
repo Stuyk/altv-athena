@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { IObject } from '../../shared/interfaces/IObject';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IObject } from '../../shared/interfaces/iObject';
 import { sha256Random } from '../utility/encryption';
 import { StreamerService } from '../systems/streamer';
 

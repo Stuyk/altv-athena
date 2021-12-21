@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Item } from '../../shared/interfaces/Item';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import { ITEM_TYPE } from '../../shared/enums/ItemTypes';
+import { Item } from '../../shared/interfaces/item';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
-import { EQUIPMENT_TYPE } from '../../shared/enums/EquipmentType';
+import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentType';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { getFromRegistry } from '../../shared/items/itemRegistry';
 import { LocaleController } from '../../shared/locale/locale';

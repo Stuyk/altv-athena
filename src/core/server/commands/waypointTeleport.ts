@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -9,7 +9,7 @@ ChatController.addCommand(
     'tpwp',
     LocaleController.get(LOCALE_KEYS.COMMAND_TELEPORT_WAYPOINT, '/tpwp'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player): void {

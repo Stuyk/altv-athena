@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { CurrencyTypes } from '../../../shared/enums/Currency';
+import { CurrencyTypes } from '../../../shared/enums/currency';
 import emit from './emit';
 import save from './save';
 

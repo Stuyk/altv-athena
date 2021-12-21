@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View_Events_Dealership } from '../../shared/enums/Views';
-import { Vector3 } from '../../shared/interfaces/Vector';
-import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
+import { View_Events_Dealership } from '../../shared/enums/views';
+import { Vector3 } from '../../shared/interfaces/vector';
+import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadModel } from '../utility/model';
 import { HologramSystem } from '../../client/systems/hologram';

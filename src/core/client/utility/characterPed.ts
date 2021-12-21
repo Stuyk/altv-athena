@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { loadModel } from './model';
-import { Appearance } from '../../shared/interfaces/Appearance';
+import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterSystem } from '../systems/character';
 
 let id: number;

@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { HUD_IDENTIFIER } from '../../shared/enums/HudIdentifiers';
-import { PLAYER_SYNCED_META } from '../../shared/enums/PlayerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
+import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import IHud from '../interface/IHud';

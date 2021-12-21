@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { Blip } from '../../shared/interfaces/Blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Blip } from '../../shared/interfaces/blip';
 
 const addedBlips: Array<alt.PointBlip> = [];
 

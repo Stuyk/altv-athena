@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Timer } from '../utility/timers';
 import { VehicleController } from './vehicle';
 

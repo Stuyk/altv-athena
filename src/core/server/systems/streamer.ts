@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import Logger from '../utility/athenaLogger';
-import { IStream, IStreamMessage } from '../../shared/interfaces/IStream';
+import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
 import { DEFAULT_CONFIG } from '../athena/main';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
