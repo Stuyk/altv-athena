@@ -6,8 +6,8 @@ import {
     IStreamMessage,
     IStreamPopulate,
     IStreamUpdate,
-} from '../core/shared/interfaces/IStream';
-import { Vector3 } from '../core/shared/interfaces/Vector';
+} from '../../../src/core/shared/interfaces/IStream';
+import { Vector3 } from '../../../src/core/shared/interfaces/Vector';
 
 let main;
 
