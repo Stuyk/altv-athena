@@ -6,8 +6,8 @@ import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 
 function openMenu() {
     if (isAnyMenuOpen()) {

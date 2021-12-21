@@ -3,7 +3,7 @@ import {
     ATHENA_EVENTS_PLAYER,
     ATHENA_EVENTS_PLAYER_CLIENT,
     ATHENA_EVENTS_VEHICLE,
-} from '../../shared/enums/AthenaEvents';
+} from '../../shared/enums/athenaEvents';
 
 const events: { [key: string]: Array<any> } = {};
 

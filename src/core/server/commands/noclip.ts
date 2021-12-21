@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';

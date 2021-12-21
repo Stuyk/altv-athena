@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Action, ActionMenu } from '../../shared/interfaces/Actions';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';

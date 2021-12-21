@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { EQUIPMENT_TYPE } from '../../../shared/enums/EquipmentType';
-import { INVENTORY_TYPE } from '../../../shared/enums/InventoryTypes';
+import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../../shared/enums/ItemTypes';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Item, ItemSpecial } from '../../../shared/interfaces/Item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';

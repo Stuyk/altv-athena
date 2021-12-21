@@ -14,7 +14,7 @@ import { isFlagEnabled } from '../../../shared/utility/flags';
 import { INTERIOR_SYSTEM } from '../../../shared-plugins/core-interiors/flags';
 import SystemRules from '../../../server/systems/rules';
 import { IResponse } from '../../../shared/interfaces/IResponse';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { ServerObjectController } from '../../../server/streamers/object';
 import { ServerTextLabelController } from '../../../server/streamers/textlabel';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
@@ -29,7 +29,7 @@ import {
     INTERIOR_RULES,
 } from '../../../shared-plugins/core-interiors/enums';
 import { IObject } from '../../../shared/interfaces/IObject';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { LOCALE_INTERIOR_VIEW } from '../../../shared-plugins/core-interiors/locales';
 
 /**

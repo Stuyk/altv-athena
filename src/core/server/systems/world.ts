@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { WORLD_WEATHER } from '../../shared/enums/Weather';
+import { WORLD_WEATHER } from '../../shared/enums/weather';
 import { DEFAULT_CONFIG } from '../athena/main';
 
 /* -- Top of Map --

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
+import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

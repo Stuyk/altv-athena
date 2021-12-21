@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
 import { KEY_BINDS } from '../../../../shared/enums/KeyBinds';
-import { PLAYER_SYNCED_META } from '../../../../shared/enums/PlayerSynced';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/System';
+import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { KeybindController } from '../../../events/keyup';
 
 // export class LeaderboardController {

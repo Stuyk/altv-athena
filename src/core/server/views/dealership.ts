@@ -1,13 +1,13 @@
 import * as alt from 'alt-server';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionController } from '../systems/interaction';
-import { View_Events_Dealership } from '../../shared/enums/Views';
+import { View_Events_Dealership } from '../../shared/enums/views';
 import { ServerBlipController } from '../systems/blip';
 import { HologramController } from '../systems/hologram';
 import { VehicleData } from '../../shared/information/vehicles';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/AthenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 
 class DealershipFunctions {
     static init() {

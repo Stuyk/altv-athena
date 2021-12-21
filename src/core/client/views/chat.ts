@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '../../shared/enums/KeyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { View_Events_Chat } from '../../shared/enums/Views';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { View_Events_Chat } from '../../shared/enums/views';
 import { Command } from '../../shared/interfaces/Command';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/ViewModel';

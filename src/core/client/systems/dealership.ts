@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View_Events_Dealership } from '../../shared/enums/Views';
+import { View_Events_Dealership } from '../../shared/enums/views';
 import { Vector3 } from '../../shared/interfaces/Vector';
 import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
 import { isAnyMenuOpen } from '../utility/menus';

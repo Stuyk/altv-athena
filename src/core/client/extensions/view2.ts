@@ -1,7 +1,7 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 // Must be a blank index page.
 let _defaultURL = `http://assets/webviews/index.html`;

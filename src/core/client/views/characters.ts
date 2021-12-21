@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View_Events_Characters } from '../../shared/enums/Views';
+import { View_Events_Characters } from '../../shared/enums/views';
 import { Character } from '../../shared/interfaces/Character';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

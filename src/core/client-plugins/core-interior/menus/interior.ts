@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import { PushVehicle } from '../../../client/systems/push';
 import { isAnyMenuOpen } from '../../../client/utility/menus';
 import { IWheelItem, WheelMenu } from '../../../client/utility/wheelMenu';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { InputOptionType, InputResult } from '../../../shared/interfaces/InputMenus';
 import { InputView } from '../../../client/views/input';
 import { INTERIOR_INTERACTIONS } from '../../../shared-plugins/core-interiors/enums';

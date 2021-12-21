@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { View_Events_Factions } from '../../shared/enums/Views';
+import { View_Events_Factions } from '../../shared/enums/views';
 import { FactionSystem } from '../systems/factions';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 

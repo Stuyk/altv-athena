@@ -1,8 +1,8 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/AthenaEvents';
-import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/Vehicle';
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
+import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
 import { IVehicle } from '../../shared/interfaces/IVehicle';
 import { Vector3 } from '../../shared/interfaces/Vector';

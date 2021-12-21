@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Particle } from '../../shared/interfaces/Particle';
 import { sleep } from '../utility/sleep';
 import { Timer } from '../utility/timers';

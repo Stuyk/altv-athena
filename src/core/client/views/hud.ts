@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { HUD_COMPONENT } from '../../shared/enums/HudComponents';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import IClientInteraction from '../../shared/interfaces/IClientInteraction';
 import IHudComponent from '../../shared/interfaces/IHudComponent';
 import { WebViewController } from '../extensions/view2';

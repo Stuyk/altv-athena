@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { IStorage } from '../../shared/interfaces/IStorage';
 import { playerFuncs } from '../extensions/Player';
 import { StorageSystem } from '../systems/storage';
-import { View_Events_Storage } from '../../shared/enums/Views';
+import { View_Events_Storage } from '../../shared/enums/views';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { Item } from '../../shared/interfaces/Item';
 import { isFlagEnabled } from '../../shared/utility/flags';

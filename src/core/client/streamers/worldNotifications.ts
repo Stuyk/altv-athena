@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IWorldNotification } from '../../shared/interfaces/IWorldNotification';
 import { distance2d } from '../../shared/utility/vector';
 import { Timer } from '../utility/timers';
