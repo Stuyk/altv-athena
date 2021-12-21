@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { IConfig } from '../interface/IConfig';

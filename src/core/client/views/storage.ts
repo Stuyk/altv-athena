@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { View_Events_Storage } from '../../shared/enums/Views';
+import { View_Events_Storage } from '../../shared/enums/views';
 import { Item } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

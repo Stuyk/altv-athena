@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IPed } from '../../shared/interfaces/IPed';
 import { Animation } from '../../shared/interfaces/Animation';
 import { StreamerService } from './streamer';

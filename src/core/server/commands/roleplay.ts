@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { View_Events_Chat } from '../../shared/enums/Views';
+import { View_Events_Chat } from '../../shared/enums/views';
 import { CHARACTER_PERMISSIONS } from '../../shared/flags/PermissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

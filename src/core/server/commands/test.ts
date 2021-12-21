@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
 import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
 import { PERMISSIONS } from '../../shared/flags/PermissionFlags';

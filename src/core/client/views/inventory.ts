@@ -3,8 +3,8 @@ import * as native from 'natives';
 
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { KEY_BINDS } from '../../shared/enums/KeyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { View_Events_Inventory } from '../../shared/enums/Views';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { View_Events_Inventory } from '../../shared/enums/views';
 import { DroppedItem } from '../../shared/interfaces/Item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';

@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import { InputMenu, InputResult } from '../../shared/interfaces/InputMenus';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { View_Events_Input_Menu } from '../../shared/enums/Views';
+import { View_Events_Input_Menu } from '../../shared/enums/views';
 import { WebViewController } from '../extensions/view2';
 
 const PAGE_NAME = 'InputBox';

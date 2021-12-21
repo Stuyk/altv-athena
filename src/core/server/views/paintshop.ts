@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { View_Events_PaintShop } from '../../shared/enums/Views';
+import { View_Events_PaintShop } from '../../shared/enums/views';
 import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
 import { RGB } from '../../shared/interfaces/RGB';
 import { Vector3 } from '../../shared/interfaces/Vector';

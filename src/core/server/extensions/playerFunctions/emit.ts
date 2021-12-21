@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
-import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/Views';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
 import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
 import IAttachable from '../../../shared/interfaces/IAttachable';
 import IClientInteraction from '../../../shared/interfaces/IClientInteraction';

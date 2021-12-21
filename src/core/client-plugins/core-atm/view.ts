@@ -4,7 +4,7 @@ import ViewModel from '../../client/models/ViewModel';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { ATM_INTERACTIONS } from '../../shared-plugins/core-atm/events';
 import { LOCALE_ATM_VIEW } from '../../shared-plugins/core-atm/locales';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 const PAGE_NAME = 'Atm';
 

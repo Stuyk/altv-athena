@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { View_Events_Factions } from '../../shared/enums/Views';
+import { View_Events_Factions } from '../../shared/enums/views';
 import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
 import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
 import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';

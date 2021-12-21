@@ -3,9 +3,9 @@ import * as native from 'natives';
 
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { KEY_BINDS } from '../../shared/enums/KeyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_STATE } from '../../shared/enums/Vehicle';
-import { View_Events_Inventory } from '../../shared/enums/Views';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { View_Events_Inventory } from '../../shared/enums/views';
 import keyboardMap from '../../shared/information/keyboardMap';
 import IClientInteraction from '../../shared/interfaces/IClientInteraction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

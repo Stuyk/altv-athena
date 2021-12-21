@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/Views';
+import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { Character } from '../../shared/interfaces/Character';
 import { Item } from '../../shared/interfaces/Item';
 import { DEFAULT_CONFIG } from '../athena/main';
