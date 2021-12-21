@@ -111,6 +111,9 @@ export enum SYSTEM_EVENTS {
     SET_ACTION_MENU = 'actions:Set',
     SET_VIEW_URL = 'actions:SetViewURL',
     //
+    SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
+    SCREENSHOT_CREATE = 'screenshot:Create',
+    //
     SYNC_APPEARANCE = 'character:Appearance',
     SYNC_EQUIPMENT = 'character:Equipment',
     //
