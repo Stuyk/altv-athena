@@ -16,7 +16,7 @@
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
         "composite": false,
-        "forceConsistentCasingInFileNames": false
+        "forceConsistentCasingInFileNames": true
     },
     "include": ["./src/**/*.ts"]
 }
