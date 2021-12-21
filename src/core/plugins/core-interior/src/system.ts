@@ -1030,6 +1030,17 @@ export class InteriorSystem {
 
         return true;
     }
+
+    /**
+     * Public facing purchase function that calls internal purchase.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof InteriorSystem
+     */
+    static async purchase(player: alt.Player, uid: string) {
+        InternalSystem.purchase(player, uid);
+    }
 }
 
 alt.on('playerDisconnect', InternalSystem.removePlayer);
