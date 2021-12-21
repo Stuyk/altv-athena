@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { IPed } from '../../shared/interfaces/IPed';
-import { Animation } from '../../shared/interfaces/Animation';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IPed } from '../../shared/interfaces/iPed';
+import { Animation } from '../../shared/interfaces/animation';
 import { StreamerService } from './streamer';
 import { sha256Random } from '../utility/encryption';
 

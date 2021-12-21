@@ -3,9 +3,9 @@ import { playerFuncs } from '../../../server/extensions/Player';
 import ChatController from '../../../server/systems/chat';
 import { INTERIOR_SYSTEM } from '../../../shared-plugins/core-interiors/flags';
 import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
-import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
-import { InputMenu, InputOptionType, InputResult } from '../../../shared/interfaces/InputMenus';
-import { Vector3 } from '../../../shared/interfaces/Vector';
+import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
+import { InputMenu, InputOptionType, InputResult } from '../../../shared/interfaces/inputMenus';
+import { Vector3 } from '../../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { InteriorSystem } from './system';
 

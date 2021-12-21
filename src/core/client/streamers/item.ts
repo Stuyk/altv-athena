@@ -1,7 +1,7 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { GroundItem } from '../../shared/interfaces/GroundItem';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { GroundItem } from '../../shared/interfaces/groundItem';
 import { distance2d } from '../../shared/utility/vector';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';

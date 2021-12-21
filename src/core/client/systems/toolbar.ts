@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/KeyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 
 export class ToolbarController {

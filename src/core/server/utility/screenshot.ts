@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import Jimp from 'jimp';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AthenaBuffer } from '../../shared/utility/buffer';
 
 const MAX_TRIES = 1000;

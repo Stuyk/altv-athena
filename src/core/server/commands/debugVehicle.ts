@@ -2,12 +2,12 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
 
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
+import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 
 ChatController.addCommand(

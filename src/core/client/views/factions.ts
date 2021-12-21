@@ -1,14 +1,14 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/KeyBinds';
-import { View_Events_Factions } from '../../shared/enums/Views';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
+import { View_Events_Factions } from '../../shared/enums/views';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { IFactionClient } from '../../shared/interfaces/IFactionClient';
-import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
-import { IResponse } from '../../shared/interfaces/IResponse';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { IFactionClient } from '../../shared/interfaces/iFactionClient';
+import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/factionPermissionFlags';
+import { IResponse } from '../../shared/interfaces/iResponse';
 import { WebViewController } from '../extensions/view2';
 
 const url = `http://assets/webview/client/factions/index.html`;

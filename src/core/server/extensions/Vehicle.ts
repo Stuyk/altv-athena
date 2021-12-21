@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 
-import { Vehicle_Behavior } from '../../shared/enums/Vehicle';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vector3 } from '../../shared/interfaces/vector';
 
 declare module 'alt-server' {
     export interface Vehicle {

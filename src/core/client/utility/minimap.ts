@@ -1,6 +1,6 @@
 import * as native from 'natives';
-import IMiniMap from '../../shared/interfaces/IMiniMap';
-import { Vector2 } from '../../shared/interfaces/Vector';
+import IMiniMap from '../../shared/interfaces/iMiniMap';
+import { Vector2 } from '../../shared/interfaces/vector';
 
 export default class Minimap {
     /**

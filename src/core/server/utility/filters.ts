@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { distance } from '../../shared/utility/vector';
 
 /**
@@ -10,7 +10,7 @@ import { distance } from '../../shared/utility/vector';
  */
 export function getPlayersByPermissionLevel(permissionLevels: Array<PERMISSIONS>): Array<alt.Player> {
     const validPlayers = [...alt.Player.all].filter(
-        (p) => p && p.data && p.accountData && permissionLevels.includes(p.accountData.permissionLevel)
+        (p) => p && p.data && p.accountData && permissionLevels.includes(p.accountData.permissionLevel),
     );
 
     return validPlayers;
@@ -26,7 +26,7 @@ export function getPlayersByPermissionLevel(permissionLevels: Array<PERMISSIONS>
 export function getPlayersByGridSpace(player: alt.Player, maxDistance: number): Array<alt.Player> {
     const currentPlayers = [...alt.Player.all];
     return currentPlayers.filter(
-        (p) => p && p.valid && p.data && player.gridSpace === p.gridSpace && distance(player.pos, p.pos) < maxDistance
+        (p) => p && p.valid && p.data && player.gridSpace === p.gridSpace && distance(player.pos, p.pos) < maxDistance,
     );
 }
 

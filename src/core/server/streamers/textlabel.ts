@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { TextLabel } from '../../shared/interfaces/TextLabel';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { TextLabel } from '../../shared/interfaces/textLabel';
 import { sha256Random } from '../utility/encryption';
 import { StreamerService } from '../systems/streamer';
 

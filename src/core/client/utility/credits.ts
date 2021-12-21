@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { CREDIT_ALIGN } from '../../shared/enums/CreditAlign';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import ICredit from '../../shared/interfaces/ICredit';
+import { CREDIT_ALIGN } from '../../shared/enums/creditAlign';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import ICredit from '../../shared/interfaces/iCredit';
 import { requestScaleForm, Scaleform } from './scaleform';
 
 let scaleform: Scaleform;

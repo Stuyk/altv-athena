@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { Blip } from '../../shared/interfaces/Blip';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Blip } from '../../shared/interfaces/blip';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { sha256Random } from '../utility/encryption';
 

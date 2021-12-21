@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { WORLD_WEATHER } from '../../shared/enums/Weather';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { WORLD_WEATHER } from '../../shared/enums/weather';
 
 export class World {
     static hasPausedClock = false;

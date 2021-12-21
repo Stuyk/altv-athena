@@ -1,4 +1,4 @@
-import { Vector2, Vector3 } from '../interfaces/Vector';
+import { Vector2, Vector3 } from '../interfaces/vector';
 
 export function distance(vector1: Vector3, vector2: Vector3) {
     if (vector1 === undefined || vector2 === undefined) {

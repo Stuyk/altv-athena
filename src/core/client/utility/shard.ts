@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import IShard from '../../shared/interfaces/IShard';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import IShard from '../../shared/interfaces/iShard';
 import { requestScaleForm, Scaleform } from './scaleform';
 
 let scaleform: Scaleform;

@@ -1,9 +1,9 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/AthenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';

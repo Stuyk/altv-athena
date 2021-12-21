@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
 import { AudioView } from '../views/audio';
 

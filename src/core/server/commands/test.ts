@@ -1,21 +1,21 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/WorldNotificationTypes';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
-import IAttachable from '../../shared/interfaces/IAttachable';
-import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/InputMenus';
-import { IPed } from '../../shared/interfaces/IPed';
-import { IStreamPolygon } from '../../shared/interfaces/IStreamPolygon';
-import { JobTrigger } from '../../shared/interfaces/JobTrigger';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/worldNotificationTypes';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
+import IAttachable from '../../shared/interfaces/iAttachable';
+import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/inputMenus';
+import { IPed } from '../../shared/interfaces/iPed';
+import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
+import { JobTrigger } from '../../shared/interfaces/jobTrigger';
 import { playerFuncs } from '../extensions/Player';
 import { ServerPolygonController } from '../streamers/polygon';
 import ChatController from '../systems/chat';
 import { PedController } from '../systems/ped';
 import { WorldNotificationController } from '../systems/worldNotifications';
 import { sha256Random } from '../utility/encryption';
-import { Animation } from '../../shared/interfaces/Animation';
-import { Action } from '../../shared/interfaces/Actions';
+import { Animation } from '../../shared/interfaces/animation';
+import { Action } from '../../shared/interfaces/actions';
 
 ChatController.addCommand(
     'testerrorscreen',

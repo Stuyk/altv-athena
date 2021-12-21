@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Character } from '../../shared/interfaces/Character';
+import { Character } from '../../shared/interfaces/character';
 import { Account } from '../interface/Account';
 import { DiscordUser } from '../interface/DiscordUser';
 import { InteractionShape } from './Colshape';
@@ -19,8 +19,8 @@ import getter from './playerFunctions/getter';
 import '../views/factions';
 import '../systems/arrest';
 import '../events/waypointEvent';
-import { Vector3 } from '../../shared/interfaces/Vector';
-import IAttachable from '../../shared/interfaces/IAttachable';
+import { Vector3 } from '../../shared/interfaces/vector';
+import IAttachable from '../../shared/interfaces/iAttachable';
 
 declare module 'alt-server' {
     export interface Player {

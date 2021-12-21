@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import PedEditCamera from '../utility/camera';
-import { Appearance } from '../../shared/interfaces/Appearance';
-import { View_Events_Creator } from '../../shared/enums/Views';
+import { Appearance } from '../../shared/interfaces/appearance';
+import { View_Events_Creator } from '../../shared/enums/views';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { PedCharacter } from '../utility/characterPed';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { sleep } from '../utility/sleep';
 import { WebViewController } from '../extensions/view2';
 import { disableAllControls } from '../utility/disableControls';

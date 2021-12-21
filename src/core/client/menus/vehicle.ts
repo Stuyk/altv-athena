@@ -1,13 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/KeyBinds';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { VEHICLE_EVENTS } from '../../shared/enums/Vehicle';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 
 function openMenu() {
     if (isAnyMenuOpen()) {

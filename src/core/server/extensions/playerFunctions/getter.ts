@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { IVehicle } from '../../../shared/interfaces/IVehicle';
+import { IVehicle } from '../../../shared/interfaces/iVehicle';
 import { Collections } from '../../interface/DatabaseCollections';
 
 /**
@@ -13,5 +13,5 @@ async function allVehicles(player: alt.Player): Promise<IVehicle[]> {
 }
 
 export default {
-    allVehicles
+    allVehicles,
 };

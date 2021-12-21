@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { Marker } from '../../shared/interfaces/Marker';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Marker } from '../../shared/interfaces/marker';
 import { distance2d } from '../../shared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { Timer } from '../utility/timers';

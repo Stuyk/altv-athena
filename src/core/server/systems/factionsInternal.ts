@@ -1,13 +1,13 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { View_Events_Factions } from '../../shared/enums/Views';
-import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
-import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
-import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
-import { IResponse } from '../../shared/interfaces/IResponse';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { View_Events_Factions } from '../../shared/enums/views';
+import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/factionPermissionFlags';
+import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/iFaction';
+import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/iFactionClient';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';

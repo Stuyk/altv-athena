@@ -1,5 +1,5 @@
-import { VEHICLE_TYPE, VEHICLE_CLASS } from '../enums/VehicleTypeFlags';
-import { VehicleInfo } from '../interfaces/VehicleInfo';
+import { VEHICLE_TYPE, VEHICLE_CLASS } from '../enums/vehicleTypeFlags';
+import { VehicleInfo } from '../interfaces/vehicleInfo';
 
 /**
  * If you add a 'modded vehicle' you will need to append it into this list.

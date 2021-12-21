@@ -2,6 +2,8 @@ import * as alt from 'alt-server';
 
 // Yes; there needs to be this many imports to get this working.
 import './player';
+import './cmds';
+
 import { Interior } from '../../../shared-plugins/core-interiors/interfaces';
 import Database from '@stuyk/ezmongodb';
 import { sha256Random } from '../../../server/utility/encryption';
@@ -13,13 +15,13 @@ import { distance } from '../../../shared/utility/vector';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { INTERIOR_SYSTEM } from '../../../shared-plugins/core-interiors/flags';
 import SystemRules from '../../../server/systems/rules';
-import { IResponse } from '../../../shared/interfaces/IResponse';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
+import { IResponse } from '../../../shared/interfaces/iResponse';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { ServerObjectController } from '../../../server/streamers/object';
 import { ServerTextLabelController } from '../../../server/streamers/textlabel';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { CurrencyTypes } from '../../../shared/enums/Currency';
-import { Character } from '../../../shared/interfaces/Character';
+import { CurrencyTypes } from '../../../shared/enums/currency';
+import { Character } from '../../../shared/interfaces/character';
 import { Collections } from '../../../server/interface/DatabaseCollections';
 import { StorageView } from '../../../server/views/storage';
 import { StorageSystem } from '../../../server/systems/storage';
@@ -28,8 +30,8 @@ import {
     INTERIOR_INTERACTIONS,
     INTERIOR_RULES,
 } from '../../../shared-plugins/core-interiors/enums';
-import { IObject } from '../../../shared/interfaces/IObject';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
+import { IObject } from '../../../shared/interfaces/iObject';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { LOCALE_INTERIOR_VIEW } from '../../../shared-plugins/core-interiors/locales';
 
 /**
@@ -74,7 +76,7 @@ class InternalSystem {
 
         interiorInfo._id = interiorInfo._id.toString();
 
-        if (interior.removeOutsideColshape) {
+        if (!interior.removeOutsideColshape) {
             ServerMarkerController.append({
                 uid: `${interior.uid}-outside`,
                 maxDistance: 15,
@@ -162,8 +164,11 @@ class InternalSystem {
             return;
         }
 
-        const objects = interior.objects;
+        if (!interior.objects) {
+            interior.objects = [];
+        }
 
+        const objects = interior.objects;
         for (let i = 0; i < objects.length; i++) {
             ServerObjectController.removeFromPlayer(player, objects[i].uid, true);
         }
@@ -242,6 +247,7 @@ class InternalSystem {
         if (!skipOwnerCheck) {
             const hasAccess = await InteriorSystem.hasAccess(player, interior);
             if (!hasAccess) {
+                console.log('no access get fucked bing bong');
                 return;
             }
         }
@@ -769,13 +775,29 @@ export class InteriorSystem {
     /**
      * Returns a new key 'string' that can be appended to an item.
      * That item can be used for 'acccess' to this interior.
+     *
+     * Example Item:
+     * ```
+     * {
+     *  name: "House 1",
+     *  icon: "Key",
+     *  data: {
+     *    key: "jkfdjklsflksd"
+     *  }
+     * }
+     * ```
+     *
      * @static
      * @param {string} uid
      * @param {string} uniqueKey
      * @memberof InteriorSystem
      */
-    static async addKeyAccess(uid: string): Promise<string | null> {
-        const interior = await InteriorSystem.get(uid);
+    static async addKeyAccess(item: { data: { key: string } }): Promise<string | null> {
+        if (!item || !item.data || !item.data.key) {
+            return null;
+        }
+
+        const interior = await InteriorSystem.get(item.data.key);
         if (!interior) {
             return null;
         }
@@ -824,6 +846,21 @@ export class InteriorSystem {
         const hasFactionSupport = interior.factions && player.data.faction;
         if (hasFactionSupport && interior.factions.findIndex((id) => id === player.data.faction) >= 0) {
             return true;
+        }
+
+        if (player.data._id.toString() === interior.owner) {
+            return true;
+        }
+
+        if (interior.keys) {
+            for (let i = 0; i < interior.keys.length; i++) {
+                const isValidKey = playerFuncs.inventory.checkForKeyValuePair(player, 'key', interior.keys);
+                if (!isValidKey) {
+                    continue;
+                }
+
+                return true;
+            }
         }
 
         return false;

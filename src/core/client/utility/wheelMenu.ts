@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { distance2d } from '../../shared/utility/vector';
 import { getPointsInCircle } from './math';
 import { drawRectangle2D, drawText2D } from './text';
-import { Vector2 } from '../../shared/interfaces/Vector';
+import { Vector2 } from '../../shared/interfaces/vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
 import { Timer } from './timers';

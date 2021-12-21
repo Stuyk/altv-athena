@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 
@@ -12,7 +12,7 @@ ChatController.addCommand(
     (player: alt.Player) => {
         parkingList.push({ position: player.pos, rotation: player.rot });
         playerFuncs.emit.message(player, `Appended parking to temporary list.`);
-    }
+    },
 );
 
 ChatController.addCommand(
@@ -22,7 +22,7 @@ ChatController.addCommand(
     (player: alt.Player) => {
         parkingList.pop();
         playerFuncs.emit.message(player, `Removed last element from temporary list.`);
-    }
+    },
 );
 
 ChatController.addCommand(
@@ -35,7 +35,7 @@ ChatController.addCommand(
         }
 
         playerFuncs.emit.message(player, `Cleared temporary parking list.`);
-    }
+    },
 );
 
 ChatController.addCommand(
@@ -45,5 +45,5 @@ ChatController.addCommand(
     (player: alt.Player) => {
         playerFuncs.emit.message(player, `Printed to Server Console`);
         console.log(JSON.stringify(parkingList, null, '\t'));
-    }
+    },
 );

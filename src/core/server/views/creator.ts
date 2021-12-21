@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { View_Events_Creator } from '../../shared/enums/Views';
-import { Appearance } from '../../shared/interfaces/Appearance';
-import { CharacterInfo } from '../../shared/interfaces/CharacterInfo';
+import { View_Events_Creator } from '../../shared/enums/views';
+import { Appearance } from '../../shared/interfaces/appearance';
+import { CharacterInfo } from '../../shared/interfaces/characterInfo';
 import { goToCharacterSelect, handleNewCharacter } from './characters';
 import Database from '@stuyk/ezmongodb';
-import { Character } from '../../shared/interfaces/Character';
+import { Character } from '../../shared/interfaces/character';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
 

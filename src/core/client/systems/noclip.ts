@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DirectionVector } from '../utility/directionToVector';
 import { drawText2D } from '../utility/text';
 

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import ChatController from '../systems/chat';
@@ -16,7 +16,7 @@ ChatController.addCommand(
         }
 
         VehicleSystem.toggleEngine(player);
-    }
+    },
 );
 
 ChatController.addCommand(
@@ -29,7 +29,7 @@ ChatController.addCommand(
         }
 
         VehicleSystem.toggleLock(player);
-    }
+    },
 );
 
 ChatController.addCommand(
@@ -51,5 +51,5 @@ ChatController.addCommand(
         }
 
         VehicleSystem.toggleDoor(player, doorIndex);
-    }
+    },
 );

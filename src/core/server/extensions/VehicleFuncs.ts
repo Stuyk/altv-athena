@@ -1,11 +1,11 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/AthenaEvents';
-import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/Vehicle';
-import { VEHICLE_OWNERSHIP } from '../../shared/flags/VehicleOwnershipFlags';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
+import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -13,7 +13,7 @@ import { Collections } from '../interface/DatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
 import { VehicleData } from '../../shared/information/vehicles';
-import { VehicleInfo } from '../../shared/interfaces/VehicleInfo';
+import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { RGBA } from 'alt-shared';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};

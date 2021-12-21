@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);

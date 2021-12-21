@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { Interaction } from '../interface/Interaction';
 
 export class InteractionShape extends alt.ColshapeCylinder {

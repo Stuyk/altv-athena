@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 
-import { CurrencyTypes } from '../../shared/enums/Currency';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { CurrencyTypes } from '../../shared/enums/currency';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';

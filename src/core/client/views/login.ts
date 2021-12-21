@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/System';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';

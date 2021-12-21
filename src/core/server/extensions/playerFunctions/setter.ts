@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/System';
-import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
-import { ActionMenu } from '../../../shared/interfaces/Actions';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
+import { ActionMenu } from '../../../shared/interfaces/actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/AthenaEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { Account } from '../../interface/Account';
 import { Collections } from '../../interface/DatabaseCollections';
 import Ares from '../../utility/ares';
@@ -16,7 +16,7 @@ import save from './save';
 import sync from './sync';
 import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/PlayerSynced';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import Logger from '../../utility/athenaLogger';
 
 const config = ConfigUtil.get();
