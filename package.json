@@ -92,5 +92,8 @@
         "semi": true,
         "arrowParens": "always",
         "trailingComma": "all"
+    },
+    "engines": {
+        "node": ">=16.0.0"
     }
 }

@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import glob from 'glob';
 import path from 'path';
 
+const VERSION_REQUIRED = 16;
 const FILES_TO_COMPILE = [
     //
     'src/**/*.ts',
@@ -132,6 +133,12 @@ async function compileFiles(files) {
 }
 
 async function beginCompilation() {
+    if (parseInt(process.versions.node.split('.')[0]) < VERSION_REQUIRED) {
+        console.log(`===> ATHENA REQUIRES NODE VERSION: ${VERSION_REQUIRED}+`);
+        console.log(`===> DOWNLOAD LATEST: https://nodejs.org/en/download/`);
+        process.exit(1);
+    }
+
     const start = Date.now();
     const files = await getFiles();
     await cleanFolders();
