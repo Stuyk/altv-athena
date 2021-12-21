@@ -1078,6 +1078,50 @@ export class InteriorSystem {
     static async purchase(player: alt.Player, uid: string) {
         InternalSystem.purchase(player, uid);
     }
+
+    /**
+     * Public facing setPrice function that calls internal setPrice.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof InteriorSystem
+     */
+    static async setPrice(player: alt.Player, uid: string, value: number) {
+        InternalSystem.setPrice(player, uid, value);
+    }
+
+    /**
+     * Public facing toggleLock function that calls internal toggleLock.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof InteriorSystem
+     */
+    static async toggleLock(player: alt.Player, uid: string, skipOwnerCheck = false) {
+        InternalSystem.toggleLock(player, uid, skipOwnerCheck);
+    }
+
+    /**
+     * Public facing setName function that calls internal setName.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof InteriorSystem
+     */
+    static async setName(player: alt.Player, uid: string, name: string) {
+        InternalSystem.setName(player, uid, name);
+    }
+
+    /**
+     * Public facing storage function that calls internal storage.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof InteriorSystem
+     */
+    static async storage(player: alt.Player, uid: string) {
+        InternalSystem.storage(player, uid);
+    }
 }
 
 alt.on('playerDisconnect', InternalSystem.removePlayer);
