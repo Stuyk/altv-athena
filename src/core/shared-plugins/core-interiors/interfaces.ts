@@ -103,4 +103,25 @@ export interface Interior {
      * @memberof Interior
      */
     system: INTERIOR_SYSTEM;
+
+    /**
+     * Remove the outside colshape from creation process.
+     * @type {boolean}
+     * @memberof Interior
+     */
+    removeOutsideColshape?: boolean;
+
+    /**
+     * Remove the inside colshape from creation process.
+     * @type {boolean}
+     * @memberof Interior
+     */
+    removeInsideColshape?: boolean;
+
+    /**
+     * Removes text from the outside instance.
+     * @type {boolean}
+     * @memberof Interior
+     */
+    removeTextLabel?: boolean;
 }

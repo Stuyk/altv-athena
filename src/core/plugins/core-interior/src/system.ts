@@ -74,23 +74,25 @@ class InternalSystem {
 
         interiorInfo._id = interiorInfo._id.toString();
 
-        ServerMarkerController.append({
-            uid: `${interior.uid}-outside`,
-            maxDistance: 15,
-            color: new alt.RGBA(255, 255, 0, 75),
-            pos: interior.outside,
-            scale: { x: 0.25, y: 0.25, z: 0.25 },
-            type: 0,
-        });
+        if (interior.removeOutsideColshape) {
+            ServerMarkerController.append({
+                uid: `${interior.uid}-outside`,
+                maxDistance: 15,
+                color: new alt.RGBA(255, 255, 0, 75),
+                pos: interior.outside,
+                scale: { x: 0.25, y: 0.25, z: 0.25 },
+                type: 0,
+            });
 
-        interiorInfo.outsideShape = InteractionController.add({
-            description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
-            position: interior.outside,
-            type: `interior`,
-            identifier: `${interior.uid}-outside`,
-            data: [interior.uid, true],
-            callback: InteriorSystem.showMenu,
-        });
+            interiorInfo.outsideShape = InteractionController.add({
+                description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
+                position: interior.outside,
+                type: `interior`,
+                identifier: `${interior.uid}-outside`,
+                data: [interior.uid, true],
+                callback: InteriorSystem.showMenu,
+            });
+        }
 
         InternalSystem.refreshInteriorText(interiorInfo);
         interiors.set(interior.uid, interiorInfo);
@@ -208,6 +210,10 @@ class InternalSystem {
         };
 
         ServerTextLabelController.remove(`${interior.uid}-outside`);
+        if (interior.removeTextLabel) {
+            return;
+        }
+
         ServerTextLabelController.append({
             uid: `${interior.uid}-outside`,
             pos: aboveGroundOutside,
