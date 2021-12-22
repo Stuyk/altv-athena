@@ -33,7 +33,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import '../views/paintshop';
 import '../views/dealership';
-import '../views/garage';
 import './fuel';
 
 /**
@@ -412,7 +411,7 @@ export class VehicleSystem {
 
         const vehicle = player.vehicle
             ? player.vehicle
-            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
+            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 2);
         if (!vehicle) {
             return;
         }
