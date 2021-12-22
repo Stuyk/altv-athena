@@ -4,6 +4,7 @@ import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { View_Events_Input_Menu } from '../../shared/enums/views';
 import { WebViewController } from '../extensions/view2';
+import { sleep } from '../utility/sleep';
 
 const PAGE_NAME = 'InputBox';
 let inputMenu: InputMenu;
@@ -19,6 +20,9 @@ class InternalFunctions implements ViewModel {
             return;
         }
 
+        // Need to add a sleep here because wheel menu inputs can be be too quick.
+        await sleep(150);
+
         // Must always be called first if you want to hide HUD.
         await WebViewController.setOverlaysVisible(false);
 
@@ -32,7 +36,6 @@ class InternalFunctions implements ViewModel {
         WebViewController.showCursor(true);
 
         alt.toggleGameControls(false);
-
         alt.Player.local.isMenuOpen = true;
     }
 

@@ -72,7 +72,7 @@ export class WebViewController {
      * @param {boolean} value
      * @memberof WebViewController
      */
-    static setOverlaysVisible(value: boolean) {
+    static async setOverlaysVisible(value: boolean) {
         for (let i = 0; i < _overlays.length; i++) {
             _overlays[i].callback(value);
         }
@@ -124,9 +124,7 @@ export class WebViewController {
      * @memberof WebViewController
      */
     static dispose() {
-        if (_webview && _webview.valid) {
-            _webview.destroy();
-        }
+        _webview.destroy();
     }
 
     /**

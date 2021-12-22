@@ -87,17 +87,17 @@ export class WheelMenu {
         }
     }
 
-    static close() {
+    static async close() {
         Timer.clearInterval(interval);
+        alt.Player.local.isWheelMenuOpen = false;
+        await WebViewController.setOverlaysVisible(true);
         interval = null;
         currentMenu = null;
-        alt.Player.local.isWheelMenuOpen = false;
         native.triggerScreenblurFadeOut(100);
         native.displayRadar(true);
-        WebViewController.setOverlaysVisible(true);
     }
 
-    static render() {
+    static async render() {
         if (!currentMenu) {
             return;
         }
@@ -169,7 +169,8 @@ export class WheelMenu {
 
         const option = { ...currentMenu.points[index] };
         handleFrontendSound('SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-        WheelMenu.close();
+
+        await WheelMenu.close();
 
         if (option.callback) {
             if (option.data) {
