@@ -15,6 +15,7 @@ import { getMissingNumber } from '../utility/math';
 import { VehicleData } from '../../shared/information/vehicles';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { RGBA } from 'alt-shared';
+import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -276,6 +277,16 @@ export default class VehicleFuncs {
         vehicle.data = document;
         vehicle.passengers = [];
         vehicle.behavior = vehicle.data.behavior;
+
+        // Check if the vehicle is of the bike type
+        // Force it to use unlimited fuel.
+        const vehicleInfo = VehicleData.find((x) => x.name === vehicle.data.model);
+        if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
+            if (!isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
+                vehicle.data.behavior = vehicle.data.behavior | Vehicle_Behavior.UNLIMITED_FUEL;
+                vehicle.behavior = Vehicle_Behavior.UNLIMITED_FUEL;
+            }
+        }
 
         if (vehicle.data.bodyHealth) {
             vehicle.bodyHealth = vehicle.data.bodyHealth;
