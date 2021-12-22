@@ -49,7 +49,7 @@ function enterMenu(interior: Interior) {
 
     options.push({
         name: interior.isUnlocked
-            ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
+            ? `~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
             : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
     });
@@ -155,7 +155,7 @@ function enterMenu(interior: Interior) {
         });
     }
 
-    WheelMenu.create(`Interior: ${interior.uid}`, options, true);
+    WheelMenu.create(interior.name, options, true);
 }
 
 function exitMenu(interior: Interior) {
@@ -173,7 +173,7 @@ function exitMenu(interior: Interior) {
 
     options.push({
         name: interior.isUnlocked
-            ? `'~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}'`
+            ? `~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
             : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
     });

@@ -120,11 +120,6 @@ export class VehicleController {
             return;
         }
 
-        if (!alt.Player.local.vehicle && native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID)) {
-            native.clearPedTasks(alt.Player.local.scriptID);
-            native.clearPedSecondaryTask(alt.Player.local.scriptID);
-        }
-
         let isLocked = false;
         if (alt.Player.local.vehicle) {
             isLocked = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
