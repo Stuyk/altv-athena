@@ -246,6 +246,10 @@ export class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async showPreview(): Promise<boolean> {
+        if (alt.Player.local.vehicle) {
+            return true;
+        }
+
         isCameraBeingCreated = true;
 
         await waitForFalse(native.isPedWalking, alt.Player.local.scriptID);
