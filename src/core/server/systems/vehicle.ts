@@ -313,23 +313,12 @@ export class VehicleSystem {
             return;
         }
 
-        // Setting the engine client-side appears to change the server-side variable.
-        // Meaning that it's okay to use the native to toggle these things.
-        const tasks: Array<Task> = [
-            //   native.setVehicleEngineOn(vehicle.scriptID, onOrOff, instant, autostart);
-            {
-                nativeName: 'setVehicleEngineOn',
-                params: [!player.vehicle.engineOn, false, false],
-                timeToWaitInMs: 0,
-            },
-        ];
+        alt.emitClient(player, SYSTEM_EVENTS.VEHICLE_ENGINE, !player.vehicle.engineOn);
 
         // Force close vehicle doors on state change.
         Object.keys(VEHICLE_DOOR_STATE).forEach((key, index) => {
             player.vehicle.setStreamSyncedMeta(VEHICLE_DOOR_STATE[key], false);
         });
-
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks, player.vehicle, true);
 
         // Custom Engine Event
         alt.nextTick(() => {

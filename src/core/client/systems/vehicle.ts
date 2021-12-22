@@ -134,9 +134,18 @@ export class VehicleController {
         native.disableControlAction(0, 23, true); // F - Enter
         native.disableControlAction(0, 75, true); // F - Exit
     }
+
+    static toggleEngine(status: boolean) {
+        if (!alt.Player.local.scriptID) {
+            return;
+        }
+
+        native.setVehicleEngineOn(alt.Player.local.vehicle, status, false, false);
+    }
 }
 
 alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
 alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
 alt.on('enteredVehicle', VehicleController.enterVehicle);

@@ -119,6 +119,7 @@ export enum SYSTEM_EVENTS {
     //
     TICKS_START = 'ticks:Start',
     //
+    VEHICLE_ENGINE = 'vehicle:Engine',
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',
     VEHICLES_VIEW_DESPAWN = 'vehicles:Despawn',
     //
