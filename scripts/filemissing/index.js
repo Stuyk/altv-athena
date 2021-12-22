@@ -31,6 +31,11 @@ async function findMissingFiles() {
     const files = await getFiles();
     const jsonData = fs.readFileSync(path.join(process.cwd(), './scripts/fileassurance/filelist.json')).toString();
     const fullList = JSON.parse(jsonData);
+
+    for (let i = 0; i < fullList.length; i++) {
+        fullList[i] = fullList[i].replace('D:/projects/altv-athena/', process.cwd());
+    }
+
     const absent = files.filter((e) => !fullList.includes(e));
 
     console.log(`MISSING ${absent.length} FILES`);
