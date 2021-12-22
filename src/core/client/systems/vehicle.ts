@@ -125,6 +125,15 @@ export class VehicleController {
             isLocked = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
         }
 
+        // Prevent Window Breaking. It's annoying.
+        const vehicle = native.getVehiclePedIsTryingToEnter(alt.Player.local.scriptID);
+        const enteringLockedVehicle = native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID);
+        const isWindowFixed = native.isVehicleWindowIntact(vehicle, 0);
+
+        if (native.doesEntityExist(vehicle) && enteringLockedVehicle && isWindowFixed) {
+            native.clearPedTasksImmediately(alt.Player.local.scriptID);
+        }
+
         const isDead = alt.Player.local.meta.isDead;
         const isPushing = PushVehicle.isPushing();
         if (!isDead && !isLocked && !isPushing) {
