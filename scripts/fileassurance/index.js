@@ -29,6 +29,11 @@ async function getFiles() {
 
 async function constructFileList() {
     const files = await getFiles();
+
+    for (let i = 0; i < files.length; i++) {
+        files[i] = path.normalize(files[i]);
+    }
+
     fs.writeFileSync(
         path.join(process.cwd(), 'scripts/fileassurance/filelist.json'),
         JSON.stringify(files, null, '\t'),
