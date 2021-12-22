@@ -52,6 +52,8 @@ class NoClip {
         native.renderScriptCams(true, true, 500, true, false, 0);
         native.freezeEntityPosition(alt.Player.local.scriptID, true);
         native.setEntityInvincible(alt.Player.local.scriptID, true);
+
+        alt.Player.local.isNoClipOn = true;
     }
 
     private static disable() {
@@ -65,6 +67,8 @@ class NoClip {
         native.setEntityCoordsNoOffset(alt.Player.local.scriptID, position.x, position.y, ground, false, false, false);
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
         native.setEntityInvincible(alt.Player.local.scriptID, false);
+
+        alt.Player.local.isNoClipOn = false;
     }
 
     private static tick() {
