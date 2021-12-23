@@ -38,10 +38,10 @@
                                 dense
                             />
                             <div class="small-icon hoverable hover-green ml-2" @click="finishRankNameChange">
-                                <Icon color="green" class="pl-2 pr-2" icon="icon-checkmark" />
+                                <Icon color="green" class="pl-2 pr-2" icon="icon-checkmark" :size="14" />
                             </div>
                             <div class="small-icon hoverable hover-red" @click="cancelRankNameChange">
-                                <Icon color="red" class="pl-2 pr-2" icon="icon-cancel" />
+                                <Icon color="red" class="pl-2 pr-2" icon="icon-cancel" :size="14" />
                             </div>
                         </div>
                     </template>
