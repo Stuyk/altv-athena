@@ -236,6 +236,13 @@ declare module 'alt-server' {
          * @memberof Player
          */
         selectedCharacterIndex?: number;
+
+        /**
+         * When the player is in-world and selected a character.
+         * @type {boolean}
+         * @memberof Player
+         */
+        hasFullySpawned?: boolean;
     }
 }
 

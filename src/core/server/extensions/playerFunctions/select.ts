@@ -113,6 +113,7 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         // Finish Selection
         playerFuncs.set.frozen(player, false);
         player.visible = true;
+        player.hasFullySpawned = true;
         alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 
