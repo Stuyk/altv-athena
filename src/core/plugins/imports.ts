@@ -1,4 +1,5 @@
 import './example/index';
+import './example-agenda/index';
 import './core-atm/index';
 import './core-clothing/index';
 import './core-garage/index';

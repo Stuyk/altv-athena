@@ -21,16 +21,16 @@ import sync from './sync';
 /**
  * Select a character based on the character data provided.
  * @param {Partial<Character>} characterData
- * @return {*}  {Promise<void>}
+ * @return {Promise<void>}
  * @memberof SelectPrototype
  */
-async function selectCharacter(player: alt.Player, characterData: Partial<Character>): Promise<void> {
-    player.data = { ...characterData };
+async function selectCharacter(player: alt.Player): Promise<void> {
+    player.data = { ...player.currentCharacters[player.selectedCharacterIndex] };
 
     // Converts inventory from 2.0.3 to 3.0.0
     await playerFuncs.inventory.convert(player);
 
-    sync.appearance(player, characterData.appearance);
+    sync.appearance(player, player.data.appearance);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.

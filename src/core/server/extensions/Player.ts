@@ -229,6 +229,13 @@ declare module 'alt-server' {
          * @memberof Player
          */
         hasSatDown?: boolean;
+
+        /**
+         * Temporary index for selecting a character.
+         * @type {number}
+         * @memberof Player
+         */
+        selectedCharacterIndex?: number;
     }
 }
 

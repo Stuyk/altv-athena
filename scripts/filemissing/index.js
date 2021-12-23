@@ -44,7 +44,6 @@ async function findMissingFiles() {
 
     console.log(`MISSING ${absent.length} FILES`);
     console.log(JSON.stringify(absent, null, '\t'));
-    console.log(process.cwd());
 }
 
 findMissingFiles();

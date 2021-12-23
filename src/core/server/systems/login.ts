@@ -11,7 +11,6 @@ import { Account } from '../interface/Account';
 import { Collections } from '../interface/DatabaseCollections';
 import { DiscordUser } from '../interface/DiscordUser';
 import Ares from '../utility/ares';
-import { goToCharacterSelect } from '../views/characters';
 import { StorageView } from '../views/storage';
 import { EventController } from './athenaEvent';
 import { OptionsController } from './options';
@@ -24,10 +23,28 @@ import '../streamers/textlabel';
 import './tick';
 import './voice';
 import { VehicleSystem } from './vehicle';
+import { AgendaSystem } from './agenda';
 
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
+    /**
+     * Handles login from login webview.
+     * Called through Agenda System.
+     * @static
+     * @param {alt.Player} player
+     * @return {*}
+     * @memberof LoginController
+     */
+    static async show(player: alt.Player) {
+        if (!player.discord) {
+            AgendaSystem.goNext(player, true);
+            return;
+        }
+
+        LoginController.tryLogin(player, null);
+    }
+
     /**
      * Called when the player is attemping to login to their account.
      * At this stage we already have all the Discord Information or a Discord ID.
@@ -35,29 +52,23 @@ export class LoginController {
      * @param {alt.Player} player
      * @param {Partial<DiscordUser>} data
      * @param {Partial<Account>} account
-     * @return {*}  {Promise<void>}
+     * @return {Promise<void>}
      * @memberof LoginController
      */
-    static async tryLogin(
-        player: alt.Player,
-        data: Partial<DiscordUser>,
-        account: Partial<Account> = null,
-    ): Promise<void> {
+    static async tryLogin(player: alt.Player, account: Partial<Account> = null): Promise<void> {
         delete player.pendingLogin;
         delete player.discordToken;
 
         // Whitelist Handling
         if (DEFAULT_CONFIG.WHITELIST) {
-            if (!OptionsController.isWhitelisted(data.id)) {
+            if (!OptionsController.isWhitelisted(player.discord.id)) {
                 player.kick(`You are not currently whitelisted.`);
                 return;
             }
         }
 
-        player.setMeta('Athena:Discord:Info', data);
-
-        if (data.username) {
-            alt.log(`[Athena] (${player.id}) ${data.username} has authenticated.`);
+        if (player.discord.username) {
+            alt.log(`[Athena] (${player.id}) ${player.discord.username} has authenticated.`);
         }
 
         if (account && account.discord) {
@@ -65,22 +76,21 @@ export class LoginController {
         }
 
         const currentPlayers = [...alt.Player.all];
-        const index = currentPlayers.findIndex((p) => p.discord && p.discord.id === data.id && p.id !== player.id);
+        const index = currentPlayers.findIndex(
+            (p) => p.discord && p.discord.id === player.discord.id && p.id !== player.id,
+        );
 
         if (index >= 1) {
             player.kick('That ID is already logged in.');
             return;
         }
 
-        player.discord = data as DiscordUser;
-        alt.emitClient(player, SYSTEM_EVENTS.DISCORD_CLOSE);
-
         // Used for DiscordToken skirt.
         if (!account) {
             // Generate New Account for Database
             let accountData: Partial<Account> | null = await Database.fetchData<Account>(
                 'discord',
-                data.id,
+                player.discord.id,
                 Collections.Accounts,
             );
 
@@ -123,7 +133,7 @@ export class LoginController {
         }
 
         await playerFuncs.set.account(player, account);
-        goToCharacterSelect(player);
+        AgendaSystem.goNext(player);
     }
 
     static tryDisconnect(player: alt.Player, reason: string): void {
@@ -181,7 +191,8 @@ export class LoginController {
             return;
         }
 
-        LoginController.tryLogin(player, { id: discord }, account);
+        player.discord = { id: discord } as DiscordUser;
+        LoginController.tryLogin(player, account);
     }
 
     static async handleNoQuickToken(player: alt.Player): Promise<void> {

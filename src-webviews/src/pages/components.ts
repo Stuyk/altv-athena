@@ -17,6 +17,7 @@ import Hud from './hud/Hud.vue';
 import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
 import PaintShop from './paintshop/PaintShop.vue';
+import AthenaLogo from './athenaLogo/AthenaLogo.vue';
 // import Factions from './factions/Factions.vue';
 
 // Append components here...
@@ -24,6 +25,7 @@ import PaintShop from './paintshop/PaintShop.vue';
 // New interfaces, menus, etc.
 const componentList = {
     Actions: shallowRef(Actions),
+    AthenaLogo: shallowRef(AthenaLogo),
     Atm: shallowRef(Atm),
     Audio: shallowRef(Audio),
     CharacterCreator: shallowRef(CharacterCreator),

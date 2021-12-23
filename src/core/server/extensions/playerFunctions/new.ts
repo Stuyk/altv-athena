@@ -5,6 +5,7 @@ import { Appearance } from '../../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../../shared/interfaces/characterInfo';
 import select from './select';
 import { Collections } from '../../interface/DatabaseCollections';
+import { AgendaSystem } from '../../systems/agenda';
 
 /**
  * Create a new character with appearance data and info for this player.
@@ -15,7 +16,7 @@ import { Collections } from '../../interface/DatabaseCollections';
  * @memberof NewPrototype
  */
 async function character(
-    p: alt.Player,
+    player: alt.Player,
     appearance: Partial<Appearance>,
     info: Partial<CharacterInfo>,
     name: string,
@@ -23,12 +24,11 @@ async function character(
     const newDocument: Partial<Character> = { ...CharacterDefaults };
     newDocument.appearance = appearance;
     newDocument.info = info;
-    newDocument.account_id = p.accountData._id;
+    newDocument.account_id = player.accountData._id;
     newDocument.name = name;
 
     const document = await Database.insertData(newDocument, Collections.Characters, true);
     document._id = document._id.toString(); // Re-cast id object as string.
-    select.character(p, document);
 }
 
 export default {

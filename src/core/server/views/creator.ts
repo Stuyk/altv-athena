@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../shared/interfaces/characterInfo';
-import { goToCharacterSelect, handleNewCharacter } from './characters';
+import { CharacterSelectFunctions, handleNewCharacter } from './characters';
 import Database from '@stuyk/ezmongodb';
 import { Character } from '../../shared/interfaces/character';
 import { playerFuncs } from '../extensions/Player';
@@ -17,7 +17,12 @@ alt.onClient(View_Events_Creator.AwaitName, handleAwaitNameValid);
  * @param  {alt.Player} player
  * @param  {Appearance} appearance
  */
-function handleCreatorDone(player: alt.Player, appearance: Appearance, info: CharacterInfo, name: string): void {
+async function handleCreatorDone(
+    player: alt.Player,
+    appearance: Appearance,
+    info: CharacterInfo,
+    name: string,
+): Promise<void> {
     if (!player.pendingCharacterEdit) {
         alt.log(`${player.name} | Attempted to edit a character when no edit was requested.`);
         return;
@@ -28,7 +33,7 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
         player.pendingCharacterEdit = false;
 
         if (player.currentCharacters && player.currentCharacters.length >= 1) {
-            goToCharacterSelect(player);
+            CharacterSelectFunctions.show(player);
             return;
         }
 
@@ -42,7 +47,8 @@ function handleCreatorDone(player: alt.Player, appearance: Appearance, info: Cha
 
     if (player.pendingNewCharacter) {
         player.pendingNewCharacter = false;
-        playerFuncs.createNew.character(player, appearance, info, name);
+        await playerFuncs.createNew.character(player, appearance, info, name);
+        CharacterSelectFunctions.show(player);
         return;
     }
 

@@ -7,51 +7,53 @@ import { Item } from '../../shared/interfaces/item';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
 import { Collections } from '../interface/DatabaseCollections';
+import { AgendaSystem } from '../systems/agenda';
 import './clothing';
 
-alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
-alt.onClient(View_Events_Characters.New, handleNewCharacter);
-alt.onClient(View_Events_Characters.Delete, handleDelete);
-
-/**
- * Called when a player needs to go to character select.
- * @param  {Player} player
- */
-export async function goToCharacterSelect(player: Player): Promise<void> {
-    const characters: Array<Character> = await Database.fetchAllByField<Character>(
-        'account_id',
-        player.accountData._id,
-        Collections.Characters,
-    );
-
-    player.pendingCharacterSelect = true;
-
-    // No Characters Found
-    if (characters.length <= 0) {
-        handleNewCharacter(player);
-        return;
-    }
-
-    // Fixes all character _id to string format.
-    for (let i = 0; i < characters.length; i++) {
-        characters[i]._id = characters[i]._id.toString();
-    }
-
-    const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
-
-    player.currentCharacters = characters;
-    player.visible = false;
-    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
-
-    alt.setTimeout(() => {
-        alt.emitClient(
-            player,
-            View_Events_Characters.Show,
-            characters,
-            DEFAULT_CONFIG.CHARACTER_SELECT_POS,
-            DEFAULT_CONFIG.CHARACTER_SELECT_ROT,
+export class CharacterSelectFunctions {
+    /**
+     * Called when a player needs to go to character select.
+     * @static
+     * @param {alt.Player} player
+     * @return {*}
+     * @memberof CharacterSelectFunctions
+     */
+    static async show(player: alt.Player) {
+        const characters: Array<Character> = await Database.fetchAllByField<Character>(
+            'account_id',
+            player.accountData._id,
+            Collections.Characters,
         );
-    }, 1000);
+
+        player.pendingCharacterSelect = true;
+
+        // No Characters Found
+        if (characters.length <= 0) {
+            handleNewCharacter(player);
+            return;
+        }
+
+        // Fixes all character _id to string format.
+        for (let i = 0; i < characters.length; i++) {
+            characters[i]._id = characters[i]._id.toString();
+        }
+
+        const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
+
+        player.currentCharacters = characters;
+        player.visible = false;
+        playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+
+        alt.setTimeout(() => {
+            alt.emitClient(
+                player,
+                View_Events_Characters.Show,
+                characters,
+                DEFAULT_CONFIG.CHARACTER_SELECT_POS,
+                DEFAULT_CONFIG.CHARACTER_SELECT_ROT,
+            );
+        }, 1000);
+    }
 }
 
 /**
@@ -66,7 +68,7 @@ export async function handleSelectCharacter(player: Player, id: string): Promise
 
     if (!player.currentCharacters) {
         alt.logWarning(`[Athena] Failed to get characters for a player. Sending them to character select again.`);
-        goToCharacterSelect(player);
+        CharacterSelectFunctions.show(player);
         return;
     }
 
@@ -80,9 +82,10 @@ export async function handleSelectCharacter(player: Player, id: string): Promise
         return;
     }
 
+    player.selectedCharacterIndex = index;
     player.pendingCharacterSelect = false;
     alt.emitClient(player, View_Events_Characters.Done);
-    playerFuncs.select.character(player, player.currentCharacters[index]);
+    AgendaSystem.goNext(player);
 }
 
 /**
@@ -174,26 +177,6 @@ export function handleNewCharacter(player: Player): void {
     }, 1000);
 }
 
-function update(player: alt.Player, id: string) {
-    if (!player.currentCharacters) {
-        player.kick('Something went wrong during selection...');
-        return;
-    }
-
-    const index = player.currentCharacters.findIndex((x) => x._id === id);
-    if (index <= -1) {
-        goToCharacterSelect(player);
-        return;
-    }
-
-    const character = player.currentCharacters[index];
-    const isMale = character.appearance.sex === 1 ? true : false;
-
-    player.model = isMale ? 'mp_m_freemode_01' : 'mp_f_freemode_01';
-    player.pos = player.pos;
-
-    // Update Appearance
-
-    // Update Equipment
-    playerFuncs.sync.equipment(player, character.equipment as Array<Item>, isMale);
-}
+alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
+alt.onClient(View_Events_Characters.New, handleNewCharacter);
+alt.onClient(View_Events_Characters.Delete, handleDelete);
