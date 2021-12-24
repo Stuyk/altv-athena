@@ -111,5 +111,12 @@ declare module 'alt-server' {
          * @memberof Vehicle
          */
         modelName?: string;
+
+        /**
+         * A simple unique identifier to add to a vehicle.
+         * @type {string}
+         * @memberof Vehicle
+         */
+        uid?: string;
     }
 }

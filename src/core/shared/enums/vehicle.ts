@@ -10,14 +10,14 @@ export const VEHICLE_LOCK_STATE = {
     UNLOCKED: 1,
     LOCKED: 2,
     LOCKOUT_PLAYER: 3,
-    KIDNAP_MODE: 4
+    KIDNAP_MODE: 4,
 };
 
 export enum Vehicle_Seat_List {
     DRIVER = -1,
     PASSENGER = 0,
     DRIVER_REAR = 1,
-    PASSENGER_REAR = 2
+    PASSENGER_REAR = 2,
 }
 
 export enum Vehicle_Door_List {
@@ -26,7 +26,7 @@ export enum Vehicle_Door_List {
     DRIVER_REAR = 2,
     PASSENGER_REAR = 3,
     HOOD = 4,
-    TRUNK = 5
+    TRUNK = 5,
 }
 
 export enum Vehicle_Behavior {
@@ -35,7 +35,7 @@ export enum Vehicle_Behavior {
     NEED_KEY_TO_START = 4,
     NO_KEY_TO_START = 8,
     NO_KEY_TO_LOCK = 16,
-    NO_SAVE = 32
+    NO_SAVE = 32,
 }
 
 export const VEHICLE_EVENTS = {
@@ -48,7 +48,7 @@ export const VEHICLE_EVENTS = {
     SET_SEATBELT: 'Vehicle-Seatbelt',
     OPEN_STORAGE: 'Vehicle-Open-Storage',
     PUSH: 'Vehicle-Push',
-    STOP_PUSH: 'Vehicle-Stop-Push'
+    STOP_PUSH: 'Vehicle-Stop-Push',
 };
 
 export const VEHICLE_DOOR_STATE = {
@@ -57,7 +57,7 @@ export const VEHICLE_DOOR_STATE = {
     DOOR_DRIVER_REAR: `Door-${Vehicle_Door_List.DRIVER_REAR}`,
     DOOR_PASSENGER_REAR: `Door-${Vehicle_Door_List.PASSENGER_REAR}`,
     DOOR_HOOD: `Door-${Vehicle_Door_List.HOOD}`,
-    DOOR_TRUNK: `Door-${Vehicle_Door_List.TRUNK}`
+    DOOR_TRUNK: `Door-${Vehicle_Door_List.TRUNK}`,
 };
 
 export const VEHICLE_STATE = {
@@ -67,5 +67,5 @@ export const VEHICLE_STATE = {
     ENGINE: 'Vehicle-Engine',
     FUEL: 'Vehicle-Fuel',
     POSITION: 'Vehicle-Position',
-    LOCKSYMBOL: 'Vehicle-Locksymbol'
+    LOCKSYMBOL: 'Vehicle-Locksymbol',
 };

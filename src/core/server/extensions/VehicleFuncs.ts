@@ -452,6 +452,10 @@ export default class VehicleFuncs {
         const isNotLockable = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_LOCK);
         const needsNoKeys = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_START);
 
+        if (vehicle.player_id === player.id) {
+            return true;
+        }
+
         if (isNotLockable && needsNoKeys) {
             return true;
         }

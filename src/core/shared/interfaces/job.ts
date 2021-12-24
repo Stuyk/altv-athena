@@ -11,6 +11,9 @@ enum ObjectiveCriteria {
     NO_WEAPON = 2,
     NO_DYING = 4,
     IN_VEHICLE = 8,
+    IN_JOB_VEHICLE = 16,
+    FAIL_ON_JOB_VEHICLE_DESTROY = 32,
+    JOB_VEHICLE_NEARBY = 64,
 }
 
 enum ObjectiveType {
@@ -125,6 +128,18 @@ export interface Objective {
      * @memberof Objective
      */
     particle?: Particle;
+
+    /**
+     * Server-side callback when objective is started.
+     * @memberof Objective
+     */
+    callbackOnStart?: (player: any) => void;
+
+    /**
+     * Server-side callback when objective is completed.
+     * @memberof Objective
+     */
+    callbackOnFinish?: (player: any) => void;
 }
 
 export default {
