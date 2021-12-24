@@ -174,7 +174,7 @@ export class LoginController {
             Collections.Accounts,
         );
 
-        if (!account) {
+        if (!account || !account.quickToken) {
             player.needsQT = true;
             alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
             return;

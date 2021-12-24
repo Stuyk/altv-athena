@@ -82,7 +82,12 @@ async function finishLogin(player: alt.Player) {
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.DISCORD_CLOSE);
-    player.discord = data as DiscordUser;
+    if (typeof data === 'string') {
+        player.discord = JSON.parse(data);
+    } else {
+        player.discord = data;
+    }
+
     AgendaSystem.goNext(player, false);
 }
 
