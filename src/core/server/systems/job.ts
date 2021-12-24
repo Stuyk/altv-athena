@@ -355,7 +355,7 @@ export class Job {
                 }
 
                 const dist = distance2d(this.vehicles[i].pos, objective.pos);
-                if (dist >= 10) {
+                if (dist >= 50) {
                     continue;
                 }
 
