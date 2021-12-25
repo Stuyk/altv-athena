@@ -12,12 +12,11 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import Minimap from '../utility/minimap';
 import { drawText2D, drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
-import { HudView } from '../views/hud';
 
 const TIME_BETWEEN_CHECKS = 500;
+let hookInteractions: Array<(interactions: Array<IClientInteraction>) => void> = [];
 let tick: number;
 let pressedKey = false;
 let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
@@ -38,6 +37,16 @@ export class InteractionController {
         }
 
         InteractionController.registerKeybinds();
+    }
+
+    /**
+     * Interaction information is fed through this callback.
+     * @static
+     * @param {(callback: IClientInteraction) => void} callback
+     * @memberof InteractionController
+     */
+    static addInfoCallback(callback: (interactions: Array<IClientInteraction>) => void) {
+        hookInteractions.push(callback);
     }
 
     /**
@@ -230,7 +239,9 @@ export class InteractionController {
             interactionInfo.push(newText);
         }
 
-        HudView.setInteractions(interactionInfo);
+        for (let i = 0; i < hookInteractions.length; i++) {
+            hookInteractions[i](interactionInfo);
+        }
     }
 }
 

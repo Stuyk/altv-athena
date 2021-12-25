@@ -71,7 +71,6 @@ import './views/chat';
 import './views/characters';
 import './views/creator';
 import './views/factions';
-import './views/hud';
 import './views/inventory';
 import './views/job';
 import './views/login';

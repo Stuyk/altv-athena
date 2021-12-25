@@ -5,9 +5,10 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
 import IHudComponent from '../../shared/interfaces/iHudComponent';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
-import { World } from '../systems/world';
+import { WebViewController } from '../../client/extensions/view2';
+import ViewModel from '../../client/models/ViewModel';
+import { InteractionController } from '../../client/systems/interaction';
+import { World } from '../../client/systems/world';
 
 const PAGE_NAME = 'Hud';
 const RegisteredComponents: { [key: string]: IHudComponent } = {};
@@ -19,6 +20,10 @@ let customInteractions: Array<IClientInteraction> = [];
 let hasRegistered = false;
 
 export class HudView {
+    static init() {
+        InteractionController.addInfoCallback(HudView.setInteractions);
+    }
+
     static addCustomInteraction(_interaction: IClientInteraction) {
         const index = customInteractions.findIndex((x) => x.uid === _interaction.uid);
         if (index >= 0) {
@@ -272,3 +277,5 @@ class InternalFunctions implements ViewModel {
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, HudView.addCustomInteraction);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, HudView.removeCustomInteraction);
+
+HudView.init();
