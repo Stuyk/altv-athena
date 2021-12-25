@@ -56,6 +56,7 @@ import './systems/world';
 import './utility/credits';
 import './utility/errorScreen';
 import './utility/ipl';
+import './utility/lerp';
 import './utility/notification';
 import './utility/reload';
 import './utility/sandbox';

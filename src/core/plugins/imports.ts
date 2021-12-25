@@ -5,6 +5,7 @@ import './core-clothing/index';
 import './core-garage/index';
 import './core-interior/index';
 import './job-mule-delivery/index';
+import './job-pizza-delivery/index';
 
 // Example: import './hotels/index'
 // Make sure example import is calling the PluginSystem

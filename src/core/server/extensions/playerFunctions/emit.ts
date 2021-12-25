@@ -13,6 +13,7 @@ import ISpinner from '../../../shared/interfaces/iSpinner';
 import { Particle } from '../../../shared/interfaces/particle';
 import { ProgressBar } from '../../../shared/interfaces/progressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
+import { Vector3 } from '../../../shared/interfaces/vector';
 import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
 
@@ -360,6 +361,10 @@ function interactionTemporary(player: alt.Player, eventName: string) {
     alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEMPORARY, eventName);
 }
 
+function tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: Vector3, speed: number) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
+}
+
 export default {
     interactionAdd,
     animation,
@@ -387,5 +392,6 @@ export default {
     sound3D,
     soundFrontend,
     taskTimeline,
+    tempObjectLerp,
     interactionTemporary,
 };
