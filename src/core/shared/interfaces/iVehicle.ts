@@ -22,6 +22,13 @@ export interface IVehicle {
     id?: number;
 
     /**
+     * A unique SHA256 key for players to mint keys for this vehicle;
+     * @type {string}
+     * @memberof Vehicle
+     */
+    key?: string;
+
+    /**
      * Behavior of this vehicle.
      * Determines what players can do with this vehicle.
      * @type {Vehicle_Behavior}

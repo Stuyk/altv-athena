@@ -3,6 +3,8 @@ import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
+import { playerFuncs } from '../extensions/Player';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import ChatController from '../systems/chat';
 import { VehicleSystem } from '../systems/vehicle';
 
@@ -51,5 +53,36 @@ ChatController.addCommand(
         }
 
         VehicleSystem.toggleDoor(player, doorIndex);
+    },
+);
+
+ChatController.addCommand(
+    'givevehkey',
+    '/givevehkey [id] - Give key to vehicle to player',
+    PERMISSIONS.NONE,
+    (player: alt.Player, id: string) => {
+        if (!player || !player.valid || !id) {
+            playerFuncs.emit.message(player, `/givevehkey [id]`);
+            return;
+        }
+
+        if (!player.vehicle || !player.vehicle.data) {
+            playerFuncs.emit.message(player, `Must be in a vehicle you own.`);
+            return;
+        }
+
+        if (player.vehicle.data.owner.toString() !== player.data._id.toString()) {
+            playerFuncs.emit.message(player, `Must be in a vehicle you own.`);
+            return;
+        }
+
+        const target = alt.Player.all.find((t) => t.id.toString() === id);
+        if (!target) {
+            playerFuncs.emit.message(player, `Could not find that target player`);
+            return;
+        }
+
+        VehicleFuncs.createKey(target, player.vehicle);
+        playerFuncs.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
     },
 );

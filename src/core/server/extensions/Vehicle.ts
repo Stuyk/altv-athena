@@ -7,13 +7,6 @@ import { Vector3 } from '../../shared/interfaces/vector';
 declare module 'alt-server' {
     export interface Vehicle {
         /**
-         * List of player ids who currently have a key.
-         * @type {Array<string>}
-         * @memberof Vehicle
-         */
-        keys?: Array<string>;
-
-        /**
          * The alt:V player id who owns this vehicle.
          * @type {number}
          * @memberof Vehicle

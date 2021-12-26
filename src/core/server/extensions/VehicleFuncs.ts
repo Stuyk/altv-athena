@@ -16,6 +16,9 @@ import { VehicleData } from '../../shared/information/vehicles';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { RGBA } from 'alt-shared';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
+import { Item } from '../../shared/interfaces/item';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { playerFuncs } from './Player';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -26,6 +29,13 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.NO_SAVE;
 
 const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
+
+interface VehicleKeyItem extends Item {
+    data: {
+        vehicle: string;
+        key: string;
+    };
+}
 
 export default class VehicleFuncs {
     /**
@@ -448,7 +458,7 @@ export default class VehicleFuncs {
      * @return {*}  {boolean}
      * @memberof VehicleFuncs
      */
-    static hasOwnership(player: alt.Player, vehicle: alt.Vehicle, skipKeys = false): boolean {
+    static hasOwnership(player: alt.Player, vehicle: alt.Vehicle): boolean {
         const isNotLockable = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_LOCK);
         const needsNoKeys = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_START);
 
@@ -460,14 +470,6 @@ export default class VehicleFuncs {
             return true;
         }
 
-        // Used to skip keys for a vehicle.
-        // Used for checking ownership while ignoring keys.
-        if (!skipKeys) {
-            if (vehicle.keys && vehicle.keys.includes(player.data._id.toString())) {
-                return true;
-            }
-        }
-
         if (!vehicle.data) {
             return true;
         }
@@ -477,7 +479,34 @@ export default class VehicleFuncs {
             return true;
         }
 
+        // Check Actual Ownership
         if (vehicle.data.owner === player.data._id.toString()) {
+            return true;
+        }
+
+        // Check for Physical Key
+        for (let i = 0; i < player.data.inventory.length; i++) {
+            const item = player.data.inventory[i];
+            if (!item) {
+                continue;
+            }
+
+            if (!item.data) {
+                continue;
+            }
+
+            if (!item.data.vehicle && !item.data.key) {
+                continue;
+            }
+
+            if (item.data.vehicle.toString() !== vehicle.data._id.toString()) {
+                continue;
+            }
+
+            if (item.data.key !== vehicle.data.key) {
+                continue;
+            }
+
             return true;
         }
 
@@ -594,5 +623,117 @@ export default class VehicleFuncs {
         }
 
         return VehicleData.find((info) => info.name === vehicle.modelName);
+    }
+
+    /**
+     * Create a physical key for the vehicle and gives it to the specified player.
+     *
+     * Allows players to spawn this vehicle regardless of ownership.
+     * Physical key can be wiped by having vehicle owner wipe keys.
+     *
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @return {Item}
+     * @memberof VehicleFuncs
+     */
+    static async createKey(player: alt.Player, vehicle: alt.Vehicle): Promise<VehicleKeyItem | null> {
+        if (!vehicle || !vehicle.valid) {
+            return null;
+        }
+
+        if (!vehicle.data) {
+            return null;
+        }
+
+        if (!vehicle.data.key) {
+            vehicle.data.key = sha256Random(JSON.stringify(vehicle.data));
+            await Database.updatePartialData(
+                vehicle.data._id.toString(),
+                { key: vehicle.data.key },
+                Collections.Vehicles,
+            );
+        }
+
+        const item: VehicleKeyItem = {
+            name: `Key for ${vehicle.data.model}`,
+            description: `A key for the vehicle model ${vehicle.data.model}`,
+            behavior: ITEM_TYPE.DESTROY_ON_DROP,
+            quantity: 1,
+            icon: 'key',
+            data: {
+                vehicle: vehicle.data._id.toString(),
+                key: vehicle.data.key,
+            },
+        };
+
+        const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
+        if (!inventory) {
+            playerFuncs.emit.notification(player, 'No room in inventory.');
+            return null;
+        }
+
+        if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
+            playerFuncs.emit.notification(player, 'No room in inventory.');
+            return null;
+        }
+
+        playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        return item;
+    }
+
+    /**
+     * Return a list of physical keys a player has.
+     * @static
+     * @param {alt.Player} player
+     * @return {Array<VehicleKeyItem>}
+     * @memberof VehicleFuncs
+     */
+    static getAllVehicleKeys(player: alt.Player): Array<VehicleKeyItem> {
+        if (!player || !player.valid) {
+            return [];
+        }
+
+        const keys = player.data.inventory.filter((item) => {
+            if (!item) {
+                return false;
+            }
+
+            if (!item.data) {
+                return false;
+            }
+
+            if (!item.data.vehicle) {
+                return false;
+            }
+
+            if (!item.data.key) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return keys as Array<VehicleKeyItem>;
+    }
+
+    /**
+     * Get a list of vehicles that can be spawned by vehicle key items.
+     * @static
+     * @param {Array<VehicleKeyItem>} keys
+     * @memberof VehicleFuncs
+     */
+    static async getValidVehicleIDsFromKeys(keys: Array<VehicleKeyItem>): Promise<Array<IVehicle>> {
+        const validVehicles: Array<IVehicle> = [];
+
+        for (let i = 0; i < keys.length; i++) {
+            const document = await Database.fetchData<IVehicle>('key', keys[i].data.key, Collections.Vehicles);
+            if (!document) {
+                continue;
+            }
+
+            validVehicles.push(document);
+        }
+
+        return validVehicles;
     }
 }
