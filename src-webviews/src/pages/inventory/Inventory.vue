@@ -818,6 +818,8 @@ export default defineComponent({
                     rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
+                        reallyLongText:
+                            'kl;fdj;klsajfkl;dasjf;klsjfkl;sajl;kfjs;klfewj;klfwjkal;fjwe;klfajwkl;fwejal;kfweaj',
                     },
                 },
                 {
@@ -832,6 +834,8 @@ export default defineComponent({
                     rarity: Math.floor(Math.random() * 6),
                     data: {
                         weight: 1,
+                        reallyLongText:
+                            'kl;fdj;klsajfkl;dasjf;klsjfkl;sajl;kfjs;klfewj;klfwjkal;fjwe;klfajwkl;fwejal;kfweaj',
                     },
                 },
                 {
@@ -846,6 +850,8 @@ export default defineComponent({
                     data: {
                         weight: 1,
                         event: 'wahtever',
+                        reallyLongText:
+                            'kl;fdj;klsajfkl;dasjf;klsjfkl;sajl;kfjs;klfewj;klfwjkal;fjwe;klfajwkl;fwejal;kfweaj',
                     },
                 },
             ]);
@@ -907,6 +913,7 @@ export default defineComponent({
 
 .equipment {
     height: 100vh;
+    max-width: 450px !important;
 }
 
 .inside-split {
@@ -1213,6 +1220,7 @@ export default defineComponent({
     justify-content: center;
     align-content: center;
     align-items: center;
+    z-index: 98;
 }
 
 .drop-box-container .drop-box:hover {

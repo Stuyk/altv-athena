@@ -13,7 +13,6 @@ import {
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
-import { Task } from '../../shared/interfaces/taskTimeline';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -584,7 +583,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleFuncs.hasOwnership(player, vehicle)) {
+        if (VehicleSystem.isVehicleLocked(vehicle)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS));
             playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;

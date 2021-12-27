@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { DroppedItem, Item } from '../../shared/interfaces/item';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -18,6 +17,7 @@ import { INVENTORY_RULES } from '../../shared/enums/inventoryRules';
 import { SLOT_TYPE } from '../../shared/enums/inventorySlotTypes';
 import { ServerItemController } from '../streamers/item';
 import { ServerObjectController } from '../streamers/object';
+import '../systems/item';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 

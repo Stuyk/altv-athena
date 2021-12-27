@@ -3,11 +3,26 @@ import { ITEM_TYPE } from '../enums/itemTypes';
 
 export interface Item {
     /**
+     * Database entry for item. Do not add / append.
+     * @type {unknown}
+     * @memberof Item
+     */
+    _id?: unknown;
+
+    /**
      * The name of this item.
      * @type {string}
      * @memberof Item
      */
     name: string;
+
+    /**
+     * Only apply this if the item is going in the item registry database.
+     * You will use this fetch an exact item from the database.
+     * @type {string}
+     * @memberof Item
+     */
+    dbName?: string;
 
     /**
      * A unique identifier for this item.

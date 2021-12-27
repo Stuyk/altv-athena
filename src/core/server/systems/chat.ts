@@ -250,12 +250,22 @@ export default class ChatController {
         Object.keys(ChatController.commands).forEach((key) => {
             const commandInfo = ChatController.commands[key];
 
+            if (commandInfo.permission === 0 || commandInfo.characterPermissions === 0) {
+                commandList.push({
+                    name: commandInfo.name,
+                    description: commandInfo.description,
+                    permission: commandInfo.permission,
+                });
+                return;
+            }
+
             // Check Admin Permission Commands
             if (commandInfo.permission) {
                 const isAdminPermissionValid = isFlagEnabled(
                     player.accountData.permissionLevel,
                     commandInfo.permission,
                 );
+
                 if (!isAdminPermissionValid) {
                     return;
                 }

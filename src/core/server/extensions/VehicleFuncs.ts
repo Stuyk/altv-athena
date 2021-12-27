@@ -678,6 +678,7 @@ export default class VehicleFuncs {
         }
 
         playerFuncs.save.field(player, 'inventory', player.data.inventory);
+        playerFuncs.sync.inventory(player);
         return item;
     }
 
