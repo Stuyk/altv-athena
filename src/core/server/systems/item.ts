@@ -50,7 +50,7 @@ export class ItemFactory {
         if (!itemDocument) {
             return null;
         }
-
+        databaseItemNames.push(itemDocument.dbName);
         return itemDocument;
     }
 
