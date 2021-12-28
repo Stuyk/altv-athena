@@ -1,11 +1,11 @@
 export enum InputOptionType {
     TEXT = 'text',
     NUMBER = 'number',
-    choice = 'choice',
+    CHOICE = 'choice',
 }
 
 export interface SelectOption {
-    text: string,
+    text: string;
     value: string;
 }
 
