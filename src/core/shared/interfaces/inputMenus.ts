@@ -1,6 +1,12 @@
 export enum InputOptionType {
     TEXT = 'text',
     NUMBER = 'number',
+    choice = 'choice',
+}
+
+export interface SelectOption {
+    text: string,
+    value: string;
 }
 
 export interface InputOption {
@@ -10,6 +16,7 @@ export interface InputOption {
     placeholder: string;
     error?: string;
     regex?: string;
+    choices?: SelectOption[];
 }
 
 export interface InputResult {
