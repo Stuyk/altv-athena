@@ -89,126 +89,126 @@ import Template from '../template/Template.vue';
 
 export const ComponentName = 'InputBox';
 export default defineComponent({
-  name: ComponentName,
-  components: {
-    Button,
-    Frame,
-    Icon,
-    Input,
-    Choice,
-    Toolbar,
-    Template,
-  },
-  props: {
-    emit: Function,
-  },
-  data() {
-    return {
-      title: 'Input Menu',
-      menu: [],
-      model: {},
-      valid: {},
-      options: {
-        description: null,
-        submitText: 'Submit',
-        cancelText: 'Cancel',
-        skipChecks: false,
-      },
-      allValid: false,
-    };
-  },
-  computed: {
-    getSubmitText() {
-      return this.options.submitText;
+    name: ComponentName,
+    components: {
+        Button,
+        Frame,
+        Icon,
+        Input,
+        Choice,
+        Toolbar,
+        Template,
     },
-    getCancelText() {
-      return this.options.cancelText;
+    props: {
+        emit: Function,
     },
-  },
-  methods: {
-    inputChange(id: string, value: string) {
-      this.model[id] = value;
+    data() {
+        return {
+            title: 'Input Menu',
+            menu: [],
+            model: {},
+            valid: {},
+            options: {
+                description: null,
+                submitText: 'Submit',
+                cancelText: 'Cancel',
+                skipChecks: false,
+            },
+            allValid: false,
+        };
     },
-    validateCallback(id: string, isValid: boolean) {
-      this.valid[id] = isValid;
+    computed: {
+        getSubmitText() {
+            return this.options.submitText;
+        },
+        getCancelText() {
+            return this.options.cancelText;
+        },
+    },
+    methods: {
+        inputChange(id: string, value: string) {
+            this.model[id] = value;
+        },
+        validateCallback(id: string, isValid: boolean) {
+            this.valid[id] = isValid;
 
-      let allValidData = true;
-      Object.keys(this.valid).forEach((key) => {
-        if (!this.valid[key]) {
-          allValidData = false;
-          return;
+            let allValidData = true;
+            Object.keys(this.valid).forEach((key) => {
+                if (!this.valid[key]) {
+                    allValidData = false;
+                    return;
+                }
+            });
+
+            this.allValid = allValidData;
+        },
+        setMenu(title: string, menuData: Array<{ id: string }>, menuOptions: Object) {
+            this.title = title;
+
+            for (let i = 0; i < menuData.length; i++) {
+                this.model[menuData[i].id] = '';
+                this.valid[menuData[i].id] = false;
+            }
+
+            const oldModel = { ...this.model };
+            const oldValid = { ...this.valid };
+
+            this.valid = oldValid;
+            this.oldModel = oldModel;
+            this.menu = menuData;
+
+            if (menuOptions && typeof menuOptions === 'object') {
+                Object.keys(menuOptions).forEach((key) => {
+                    this.options[key] = menuOptions[key];
+                });
+            }
+        },
+        handlePress(e) {
+            if (e.keyCode !== 27) {
+                return;
+            }
+
+            this.exit();
+        },
+        handleExit() {
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:Close`);
+            }
+        },
+        submit() {
+            const results = [];
+            if (!this.skipChecks) {
+                const menuState = [...this.menu];
+                for (let i = 0; i < menuState.length; i++) {
+                    results.push({ id: menuState[i].id, value: this.model[menuState[i].id] });
+                }
+            }
+
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:Submit`, results);
+            }
+        },
+        relayClosePage(pageName: string) {
+            this.$emit('close-page', pageName);
+        },
+    },
+    mounted() {
+        document.addEventListener('keyup', this.handlePress);
+
+        if ('alt' in window) {
+            alt.on(`${ComponentName}:SetMenu`, this.setMenu);
+            alt.emit(`${ComponentName}:Ready`);
+        } else {
+            this.setMenu('Generic Example', TestData, { description: 'Hello, what the chicken...' });
         }
-      });
-
-      this.allValid = allValidData;
     },
-    setMenu(title: string, menuData: Array<{ id: string }>, menuOptions: Object) {
-      this.title = title;
+    unmounted() {
+        document.removeEventListener('keyup', this.handlePress);
 
-      for (let i = 0; i < menuData.length; i++) {
-        this.model[menuData[i].id] = '';
-        this.valid[menuData[i].id] = false;
-      }
-
-      const oldModel = { ...this.model };
-      const oldValid = { ...this.valid };
-
-      this.valid = oldValid;
-      this.oldModel = oldModel;
-      this.menu = menuData;
-
-      if (menuOptions && typeof menuOptions === 'object') {
-        Object.keys(menuOptions).forEach((key) => {
-          this.options[key] = menuOptions[key];
-        });
-      }
-    },
-    handlePress(e) {
-      if (e.keyCode !== 27) {
-        return;
-      }
-
-      this.exit();
-    },
-    handleExit() {
-      if ('alt' in window) {
-        alt.emit(`${ComponentName}:Close`);
-      }
-    },
-    submit() {
-      const results = [];
-      if (!this.skipChecks) {
-        const menuState = [...this.menu];
-        for (let i = 0; i < menuState.length; i++) {
-          results.push({ id: menuState[i].id, value: this.model[menuState[i].id] });
+        if ('alt' in window) {
+            alt.off(`${ComponentName}:SetMenu`, this.setMenu);
         }
-      }
-
-      if ('alt' in window) {
-        alt.emit(`${ComponentName}:Submit`, results);
-      }
     },
-    relayClosePage(pageName: string) {
-      this.$emit('close-page', pageName);
-    },
-  },
-  mounted() {
-    document.addEventListener('keyup', this.handlePress);
-
-    if ('alt' in window) {
-      alt.on(`${ComponentName}:SetMenu`, this.setMenu);
-      alt.emit(`${ComponentName}:Ready`);
-    } else {
-      this.setMenu('Generic Example', TestData, { description: 'Hello, what the chicken...' });
-    }
-  },
-  unmounted() {
-    document.removeEventListener('keyup', this.handlePress);
-
-    if ('alt' in window) {
-      alt.off(`${ComponentName}:SetMenu`, this.setMenu);
-    }
-  },
 });
 </script>
 
