@@ -12,12 +12,29 @@
                 </div>
                 <div v-for="(item, index) in menu" :key="index" class="mb-4 element">
                     <Input
+                        v-if="item.type != 'choice'"
                         :label="item.desc"
                         :stack="true"
                         :onInput="(text) => inputChange(item.id, text)"
                         :validateCallback="(valid) => validateCallback(item.id, valid)"
                         :placeholder="item.placeholder.toString()"
                         :numberOnly="item.type === 'number'"
+                        :rules="[
+                            (text) => {
+                                return new RegExp(item.regex).test(text) ? null : item.error;
+                            },
+                        ]"
+                        autocomplete="off"
+                    />
+
+                    <Choice
+                        v-if="item.type === 'choice'"
+                        :label="item.desc"
+                        :stack="true"
+                        :onInput="(text) => inputChange(item.id, text)"
+                        :validateCallback="(valid) => validateCallback(item.id, valid)"
+                        :placeholder="item.placeholder.toString()"
+                        :options="item.choices"
                         :rules="[
                             (text) => {
                                 return new RegExp(item.regex).test(text) ? null : item.error;
@@ -66,6 +83,7 @@ import Button from '../../components/Button.vue';
 import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
 import Input from '../../components/Input.vue';
+import Choice from '../../components/Choice.vue';
 import TestData from './utility/testData';
 import Template from '../template/Template.vue';
 
@@ -77,6 +95,7 @@ export default defineComponent({
         Frame,
         Icon,
         Input,
+        Choice,
         Toolbar,
         Template,
     },
