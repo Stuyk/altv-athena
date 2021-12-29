@@ -4,7 +4,7 @@ export interface ProgressBar {
      * @type {string}
      * @memberof ProgressBar
      */
-    uid: string;
+    uid?: string;
 
     /**
      * The position in a 3D space to show the progress bar.
