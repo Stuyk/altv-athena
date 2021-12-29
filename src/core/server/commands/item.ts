@@ -128,6 +128,8 @@ async function handleGetItem(player: alt.Player, ...args) {
         return;
     }
 
+    item.quantity = 1;
+
     const itemClone = deepCloneObject<Item>(item);
     let slotInfo = playerFuncs.inventory.getFreeInventorySlot(player);
     playerFuncs.inventory.inventoryAdd(player, itemClone, slotInfo.slot);

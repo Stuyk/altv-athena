@@ -94,7 +94,9 @@ export class ItemFactory {
             return null;
         }
 
-        return deepCloneObject(item);
+        const newItem = deepCloneObject<Item>(item);
+        newItem.quantity = 1;
+        return newItem;
     }
 
     /**
@@ -136,7 +138,9 @@ export class ItemFactory {
             return null;
         }
 
-        return await ItemFactory.get(databaseItemNames[index].dbName);
+        const newItem = await ItemFactory.get(databaseItemNames[index].dbName);
+        newItem.quantity = 1;
+        return newItem;
     }
 
     /**
