@@ -4,6 +4,7 @@ import './core-atm/index';
 import './core-clothing/index';
 import './core-garage/index';
 import './core-interior/index';
+import './core-items/index';
 import './job-mule-delivery/index';
 import './job-pizza-delivery/index';
 

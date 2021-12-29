@@ -6,9 +6,9 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentType';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { getFromRegistry } from '../../shared/items/itemRegistry';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { ItemFactory } from '../systems/item';
 
 const pistolItem: Item = {
     name: `Pistol`,
@@ -115,14 +115,14 @@ function handleCommand(player: alt.Player): void {
     playerFuncs.sync.inventory(player);
 }
 
-function handleGetItem(player: alt.Player, ...args) {
+async function handleGetItem(player: alt.Player, ...args) {
     const fullItemName = args.join(' ');
     if (fullItemName.length <= 2) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
         return;
     }
 
-    const item = getFromRegistry(fullItemName);
+    const item = await ItemFactory.getByName(fullItemName);
     if (!item) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
         return;

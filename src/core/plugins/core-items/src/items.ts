@@ -1,12 +1,12 @@
-import { ITEM_TYPE } from '../enums/itemTypes';
-import { Item } from '../interfaces/item';
-import { deepCloneObject } from '../utility/deepCopy';
-import EFFECTS from '../enums/effects';
+import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
+import EFFECTS from '../../../shared/enums/effects';
+import { Item } from '../../../shared/interfaces/item';
 
-export const ItemRegistry: Array<Item> = [
+export const items: Array<Item> = [
     {
         name: `Burger`,
         description: `A delicious burger that packs your arteries.`,
+        dbName: 'burger',
         icon: 'burger',
         slot: 0,
         maxStack: 3,
@@ -26,6 +26,7 @@ export const ItemRegistry: Array<Item> = [
     {
         name: `Ultra Delicious Burger`,
         description: `An absurdly delicious burger.`,
+        dbName: 'ultra-burger',
         icon: 'burger',
         slot: 0,
         quantity: 1,
@@ -45,6 +46,7 @@ export const ItemRegistry: Array<Item> = [
     {
         name: `Bread`,
         description: `An entire loaf of bread. It has 5 slices.`,
+        dbName: 'bread',
         icon: 'bread',
         slot: 0,
         quantity: 5,
@@ -63,6 +65,7 @@ export const ItemRegistry: Array<Item> = [
     {
         name: `Repair Kit`,
         description: `A toolkit to repair a vehicle.`,
+        dbName: 'repair-kit',
         icon: 'toolbox',
         slot: 0,
         quantity: 1,
@@ -76,53 +79,5 @@ export const ItemRegistry: Array<Item> = [
             event: 'effect:Vehicle:Repair',
         },
     },
+    // Add more items here if you want
 ];
-
-/**
- * Used to add items to the server-side item registry.
- * Has no purpose on client-side and items that are pushed late are inaccessible on client-side.
- * If you wish to access items on client-side you will need to add them to the ItemRegistry array.
- * @export
- * @param {Item} item
- */
-export function appendToItemRegistry(item: Item) {
-    ItemRegistry.push(item);
-}
-
-/**
- * Returns a deep cloned item from the registry.
- * @export
- * @param {string} name
- * @return {*}  {(Item | null)}
- */
-export function getFromRegistry(name: string): Item | null {
-    const itemName = name.replace(/\s/g, '').toLowerCase();
-
-    // First Pass Through - Exact Name Check
-    let index = ItemRegistry.findIndex((itemRef) => {
-        const refItemName = itemRef.name.replace(/\s/g, '').toLowerCase();
-        if (refItemName === itemName) {
-            return true;
-        }
-
-        return false;
-    });
-
-    // Second Pass Through - Includes Search
-    if (index <= -1) {
-        index = ItemRegistry.findIndex((itemRef) => {
-            const refItemName = itemRef.name.replace(/\s/g, '').toLowerCase();
-            if (refItemName.includes(itemName)) {
-                return true;
-            }
-
-            return false;
-        });
-    }
-
-    if (index <= -1) {
-        return null;
-    }
-
-    return deepCloneObject<Item>(ItemRegistry[index]);
-}

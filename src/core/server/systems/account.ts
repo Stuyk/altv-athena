@@ -1,5 +1,6 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { Account } from '../interface/Account';
 import { Collections } from '../interface/DatabaseCollections';
