@@ -24,6 +24,7 @@ import './tick';
 import './voice';
 import { VehicleSystem } from './vehicle';
 import { AgendaSystem } from './agenda';
+import { AccountSystem } from './account';
 
 const UserRelation: { [key: number]: string } = {};
 
@@ -95,19 +96,7 @@ export class LoginController {
             );
 
             if (!accountData) {
-                const newDocument: Partial<Account> = {
-                    discord: player.discord.id,
-                    ips: [player.ip],
-                    hardware: [player.hwidHash, player.hwidExHash],
-                    lastLogin: Date.now(),
-                    permissionLevel: PERMISSIONS.NONE,
-                };
-
-                if (player.discord.email) {
-                    newDocument.email = player.discord.email;
-                }
-
-                account = await Database.insertData<Partial<Account>>(newDocument, Collections.Accounts, true);
+                account = await AccountSystem.create(player);
             } else {
                 account = accountData;
 

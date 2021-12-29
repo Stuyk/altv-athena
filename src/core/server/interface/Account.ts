@@ -7,6 +7,7 @@ import { PERMISSIONS } from '../../shared/flags/permissionFlags';
  */
 export interface Account {
     _id: any;
+    id?: number;
     discord: string;
     email: string;
     ips: Array<string>;
