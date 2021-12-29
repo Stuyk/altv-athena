@@ -8,6 +8,7 @@ import { VehicleData } from '../../shared/information/vehicles';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
+import { PlayerEvents } from '../events/playerEvents';
 
 class DealershipFunctions {
     static init() {
@@ -95,7 +96,7 @@ class DealershipFunctions {
 
         playerFuncs.emit.notification(player, `Visit a garage to spawn your new vehicle.`);
         playerFuncs.emit.sound2D(player, 'item_purchase');
-        alt.emit(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleData.name);
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleData.name);
     }
 }
 

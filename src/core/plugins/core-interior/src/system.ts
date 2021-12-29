@@ -33,6 +33,7 @@ import {
 import { IObject } from '../../../shared/interfaces/iObject';
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { LOCALE_INTERIOR_VIEW } from '../../../shared-plugins/core-interiors/locales';
+import { PlayerEvents } from '../../../server/events/playerEvents';
 
 /**
  * Interiors should work in the following way.
@@ -1133,4 +1134,4 @@ alt.onClient(INTERIOR_INTERACTIONS.STORAGE, InternalSystem.storage);
 alt.onClient(INTERIOR_INTERACTIONS.TOGGLE_LOCK, InternalSystem.toggleLock);
 alt.onClient(INTERIOR_INTERACTIONS.ENTER, InteriorSystem.movePlayerIn);
 alt.onClient(INTERIOR_INTERACTIONS.EXIT, InteriorSystem.movePlayerOut);
-alt.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, InternalSystem.spawn);
+PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, InternalSystem.spawn);

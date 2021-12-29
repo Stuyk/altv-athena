@@ -7,6 +7,7 @@ import { Character } from '../../../shared/interfaces/character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../../athena/main';
+import { PlayerEvents } from '../../events/playerEvents';
 import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
@@ -114,7 +115,7 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         playerFuncs.set.frozen(player, false);
         player.visible = true;
         player.hasFullySpawned = true;
-        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 
     // Delete unused data from the Player.

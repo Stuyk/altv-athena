@@ -12,7 +12,6 @@ import { Collections } from '../interface/DatabaseCollections';
 import { DiscordUser } from '../interface/DiscordUser';
 import Ares from '../utility/ares';
 import { StorageView } from '../views/storage';
-import { EventController } from './athenaEvent';
 import { OptionsController } from './options';
 
 import '../views/login';
@@ -25,6 +24,7 @@ import './voice';
 import { VehicleSystem } from './vehicle';
 import { AgendaSystem } from './agenda';
 import { AccountSystem } from './account';
+import { PlayerEvents } from '../events/playerEvents';
 
 const UserRelation: { [key: number]: string } = {};
 
@@ -202,7 +202,7 @@ export class LoginController {
     }
 }
 
-EventController.onPlayer(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
+PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
 alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
 alt.on('playerDisconnect', LoginController.tryDisconnect);

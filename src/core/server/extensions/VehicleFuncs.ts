@@ -19,6 +19,7 @@ import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 import { Item } from '../../shared/interfaces/item';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from './Player';
+import { VehicleEvents } from '../events/vehicleEvents';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -212,7 +213,7 @@ export default class VehicleFuncs {
             // const feetPerSecond = potentialSpeed * 1.4666666667;
             // const distanceTraveled = (potentialSpeed / 3600) * timeBetweenUpdates;
 
-            alt.emit(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
+            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
             vehicle.lastPosition = vehicle.pos;
         }
 
@@ -322,7 +323,7 @@ export default class VehicleFuncs {
 
         // Synchronize Ownership
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
-        alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
         return vehicle;
     }
 
@@ -363,7 +364,7 @@ export default class VehicleFuncs {
             passenger.player.lastEnteredVehicleID = null;
         }
 
-        alt.emit(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
         SpawnedVehicles[id].destroy();
         delete SpawnedVehicles[id];
         return true;
@@ -444,7 +445,7 @@ export default class VehicleFuncs {
      */
     static repair(vehicle: alt.Vehicle) {
         vehicle.repair();
-        alt.emit(ATHENA_EVENTS_VEHICLE.REPAIRED, vehicle);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.REPAIRED, vehicle);
         VehicleFuncs.update(vehicle);
     }
 

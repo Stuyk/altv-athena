@@ -18,6 +18,7 @@ import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import Logger from '../../utility/athenaLogger';
+import { PlayerEvents } from '../../events/playerEvents';
 
 const config = ConfigUtil.get();
 
@@ -77,7 +78,7 @@ function dead(player: alt.Player, weaponHash: any = null): void {
         player.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
     }
 
-    alt.emit(ATHENA_EVENTS_PLAYER.DIED, player);
+    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
 }
 
 /**
@@ -165,7 +166,7 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
         safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
     });
 
-    alt.emit(ATHENA_EVENTS_PLAYER.SPAWNED, p);
+    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, p);
 }
 
 function wantedLevel(player: alt.Player, stars: number) {

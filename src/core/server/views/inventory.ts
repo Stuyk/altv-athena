@@ -18,6 +18,7 @@ import { SLOT_TYPE } from '../../shared/enums/inventorySlotTypes';
 import { ServerItemController } from '../streamers/item';
 import { ServerObjectController } from '../streamers/object';
 import '../systems/item';
+import { PlayerEvents } from '../events/playerEvents';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
@@ -416,7 +417,7 @@ export class InventoryController {
         });
 
         playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
-        alt.emit(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
     }
 
     static getDroppedItemsByGridSpace(dimension: number, gridSpace: number): Array<DroppedItem> {

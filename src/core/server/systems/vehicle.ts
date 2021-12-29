@@ -33,6 +33,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import '../views/paintshop';
 import '../views/dealership';
 import './fuel';
+import { VehicleEvents } from '../events/vehicleEvents';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -320,7 +321,7 @@ export class VehicleSystem {
 
         // Custom Engine Event
         alt.nextTick(() => {
-            alt.emit(ATHENA_EVENTS_VEHICLE.ENGINE_STATE_CHANGE, player.vehicle);
+            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.ENGINE_STATE_CHANGE, player.vehicle);
         });
     }
 
@@ -457,7 +458,7 @@ export class VehicleSystem {
 
         // Custom Lock Event
         alt.nextTick(() => {
-            alt.emit(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, player.vehicle);
+            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.LOCK_STATE_CHANGE, vehicle);
         });
     }
 
