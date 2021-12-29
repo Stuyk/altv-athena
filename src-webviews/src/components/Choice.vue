@@ -15,8 +15,8 @@
                 :placeholder="placeholder"
                 @change="handleChange"
             >
-                <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">
-                    {{ option.text }}
+                <option v-for="option in options" v-bind:value="option['value']" v-bind:key="option['value']">
+                    {{ option['text'] }}
                 </option>
             </select>
 
