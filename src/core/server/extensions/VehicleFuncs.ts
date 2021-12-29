@@ -636,7 +636,11 @@ export default class VehicleFuncs {
      * @return {Item}
      * @memberof VehicleFuncs
      */
-    static async createKey(player: alt.Player, vehicle: alt.Vehicle): Promise<VehicleKeyItem | null> {
+    static async createKey(
+        player: alt.Player,
+        vehicle: alt.Vehicle,
+        doNotAdd: boolean = false,
+    ): Promise<VehicleKeyItem | null> {
         if (!vehicle || !vehicle.valid) {
             return null;
         }
@@ -666,19 +670,22 @@ export default class VehicleFuncs {
             },
         };
 
-        const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
-        if (!inventory) {
-            playerFuncs.emit.notification(player, 'No room in inventory.');
-            return null;
+        if (!doNotAdd) {
+            const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
+            if (!inventory) {
+                playerFuncs.emit.notification(player, 'No room in inventory.');
+                return null;
+            }
+
+            if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
+                playerFuncs.emit.notification(player, 'No room in inventory.');
+                return null;
+            }
+
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
+            playerFuncs.sync.inventory(player);
         }
 
-        if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
-            playerFuncs.emit.notification(player, 'No room in inventory.');
-            return null;
-        }
-
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.sync.inventory(player);
         return item;
     }
 
