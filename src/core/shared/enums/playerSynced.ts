@@ -7,4 +7,5 @@ export enum PLAYER_SYNCED_META {
     WAYPOINT = 'player-waypoint',
     DATABASE_ID = 'player-character-id',
     ATTACHABLES = 'player-attachable-list',
+    ACCOUNT_ID = 'player-account-id',
 }

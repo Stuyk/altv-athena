@@ -27,14 +27,14 @@ const config = ConfigUtil.get();
  * @return {*}  {Promise<void>}
  * @memberof SetPrototype
  */
-async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
+async function account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = PERMISSIONS.NONE;
         Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
     }
 
-    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
-        const qt: string = Ares.getUniquePlayerHash(p, p.discord.id);
+    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || player.needsQT) {
+        const qt: string = Ares.getUniquePlayerHash(player, player.discord.id);
 
         Database.updatePartialData(
             accountData._id,
@@ -45,11 +45,12 @@ async function account(p: alt.Player, accountData: Partial<Account>): Promise<vo
             Collections.Accounts,
         );
 
-        alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
+        alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, player.discord.id);
     }
 
-    emit.meta(p, 'permissionLevel', accountData.permissionLevel);
-    p.accountData = accountData;
+    player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
+    emit.meta(player, 'permissionLevel', accountData.permissionLevel);
+    player.accountData = accountData;
 }
 
 function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
