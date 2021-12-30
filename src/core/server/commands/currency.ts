@@ -15,12 +15,12 @@ ChatController.addCommand(
 );
 
 function handleCommand(player: alt.Player, amount: string, id: string | null = null): void {
-    if (id === null) {
+    if (id === null || id === undefined) {
         playerFuncs.currency.set(player, CurrencyTypes.CASH, parseInt(amount));
         return;
     }
 
-    const target: alt.Player = [...alt.Player.all].find((x) => `${x.id}` === `${id}`);
+    const target = playerFuncs.get.findByUid(id);
     if (!target) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;

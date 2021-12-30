@@ -87,7 +87,7 @@ function handleInvite(player: alt.Player, id: string) {
         return;
     }
 
-    const foundPlayer = alt.Player.all.find((x) => `${x.id}` === `${id}`);
+    const foundPlayer = playerFuncs.get.findByUid(id);
     if (!foundPlayer) {
         playerFuncs.emit.message(player, `Player does not exist.`);
         return;

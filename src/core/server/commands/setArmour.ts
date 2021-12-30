@@ -12,7 +12,7 @@ ChatController.addCommand(
     handleCommand,
 );
 
-function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: string | null = null): void {
+function handleCommand(player: alt.Player, value: number = 100, id: string | null = null): void {
     if (isNaN(value)) {
         playerFuncs.emit.message(player, ChatController.getDescription('setarmour'));
         return;
@@ -26,12 +26,12 @@ function handleCommand(player: alt.Player, value: number = 100, targetPlayerID: 
         value = 100;
     }
 
-    if (targetPlayerID === null) {
+    if (id === null || id === undefined) {
         finishSetArmour(player, value);
         return;
     }
 
-    const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
+    const target = playerFuncs.get.findByUid(id);
     if (!target) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;

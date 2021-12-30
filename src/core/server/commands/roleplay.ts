@@ -139,14 +139,12 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
         return;
     }
 
-    if (id === null) {
+    if (id === null || id === undefined) {
         playerFuncs.emit.message(player, ChatController.getDescription('w'));
         return;
     }
 
-    const players = [...alt.Player.all];
-    const target = players.find((target) => target && id === target.id.toString());
-
+    const target = playerFuncs.get.findByUid(id);
     if (!target || !target.valid) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;

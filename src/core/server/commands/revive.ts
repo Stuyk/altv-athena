@@ -12,13 +12,13 @@ ChatController.addCommand(
     handleCommand,
 );
 
-function handleCommand(player: alt.Player, targetPlayerID: string | null = null): void {
-    if (targetPlayerID === null) {
+function handleCommand(player: alt.Player, id: string | null = null): void {
+    if (id === null || id === undefined) {
         playerFuncs.set.respawned(player, player.pos);
         return;
     }
 
-    const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === targetPlayerID);
+    const target = playerFuncs.get.findByUid(id);
     if (!target) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;

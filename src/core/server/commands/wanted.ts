@@ -13,7 +13,7 @@ ChatController.addCommand(
 );
 
 function handleCommand(player: alt.Player, id: any = null, stars: any): void {
-    if (id === null) {
+    if (id === null || id === undefined) {
         id = player.id;
     }
 

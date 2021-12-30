@@ -456,7 +456,7 @@ export default class VehicleFuncs {
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
      * @param {boolean} skipKeys Should we check for keys (other players)?
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof VehicleFuncs
      */
     static hasOwnership(player: alt.Player, vehicle: alt.Vehicle): boolean {

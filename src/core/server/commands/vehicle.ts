@@ -61,7 +61,7 @@ ChatController.addCommand(
     '/givevehkey [id] - Give key to vehicle to player',
     PERMISSIONS.NONE,
     (player: alt.Player, id: string) => {
-        if (!player || !player.valid || !id) {
+        if (!player || !player.valid || id === null || id === undefined) {
             playerFuncs.emit.message(player, `/givevehkey [id]`);
             return;
         }
@@ -76,7 +76,7 @@ ChatController.addCommand(
             return;
         }
 
-        const target = alt.Player.all.find((t) => t.id.toString() === id);
+        const target = playerFuncs.get.findByUid(id);
         if (!target) {
             playerFuncs.emit.message(player, `Could not find that target player`);
             return;

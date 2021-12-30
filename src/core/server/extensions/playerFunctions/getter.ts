@@ -39,6 +39,28 @@ function uid(player: alt.Player): number {
     return player.accountData.id;
 }
 
+function findByUid(id: number | string) {
+    if (typeof id === 'number') {
+        id = id.toString();
+    }
+
+    return alt.Player.all.find((t) => {
+        if (!t.accountData) {
+            return false;
+        }
+
+        if (t.accountData === undefined || t.accountData === null) {
+            return false;
+        }
+
+        if (t.accountData.id.toString() !== id) {
+            return false;
+        }
+
+        return true;
+    });
+}
+
 /**
  * Get all characters associated with a player.
  * @param {alt.Player} player
@@ -51,5 +73,6 @@ async function allCharacters(player: alt.Player): Promise<Array<Character>> {
 export default {
     allCharacters,
     allVehicles,
+    findByUid,
     uid,
 };
