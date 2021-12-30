@@ -125,5 +125,5 @@ export default {
     set,
     sub,
     add,
-    subAllCurrencies
+    subAllCurrencies,
 };

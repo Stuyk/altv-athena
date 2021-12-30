@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Hologram } from '../../shared/interfaces/Hologram';
+import { Hologram } from '../../shared/interfaces/hologram';
+import { sha256Random } from '../utility/encryption';
 
 const holograms = [];
 
@@ -9,10 +10,16 @@ export class HologramController {
      * Add a Hologram to Render
      * @static
      * @param {Hologram} hologram
+     * @returns {string} uid for hologram
      * @memberof HologramSystem
      */
-    static add(hologram: Hologram) {
+    static add(hologram: Hologram): string {
+        if (!hologram.identifier) {
+            hologram.identifier = sha256Random(JSON.stringify(hologram));
+        }
+
         holograms.push(hologram);
+        return hologram.identifier;
     }
 
     /**

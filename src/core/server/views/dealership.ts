@@ -2,11 +2,13 @@ import * as alt from 'alt-server';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { InteractionController } from '../systems/interaction';
 import { View_Events_Dealership } from '../../shared/enums/views';
-import { BlipController } from '../systems/blip';
+import { ServerBlipController } from '../systems/blip';
 import { HologramController } from '../systems/hologram';
 import { VehicleData } from '../../shared/information/vehicles';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
+import { PlayerEvents } from '../events/playerEvents';
 
 class DealershipFunctions {
     static init() {
@@ -27,27 +29,27 @@ class DealershipFunctions {
                         dealership.vehiclePosition,
                         dealership.vehicleHeading,
                         vehicles,
-                        `dealership-holo-${i}` // identifier
+                        `dealership-holo-${i}`, // identifier
                     );
-                }
+                },
             });
 
             HologramController.add({
                 position: dealership.vehiclePosition,
                 heading: dealership.vehicleHeading,
                 identifier: `dealership-holo-${i}`,
-                model: dealership.vehiclePreview
+                model: dealership.vehiclePreview,
             });
 
             if (dealership.createBlip) {
-                BlipController.add({
+                ServerBlipController.append({
                     text: `${dealership.name}`,
                     color: 13,
                     sprite: 225,
                     scale: 1,
                     shortRange: true,
                     pos: dealership.position,
-                    uid: `dealership-${i}`
+                    uid: `dealership-${i}`,
                 });
             }
         }
@@ -87,13 +89,14 @@ class DealershipFunctions {
                 fuel: 100,
                 position: { x: 0, y: 0, z: 0 },
                 rotation: { x: 0, y: 0, z: 0 },
-                color: { r: 255, g: 255, b: 255, a: 255 }
+                color: { r: 255, g: 255, b: 255 },
             },
-            true
+            true,
         );
 
         playerFuncs.emit.notification(player, `Visit a garage to spawn your new vehicle.`);
         playerFuncs.emit.sound2D(player, 'item_purchase');
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleData.name);
     }
 }
 

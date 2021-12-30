@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 
@@ -12,22 +12,22 @@ export class ToolbarController {
     static registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_ONE,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_TWO,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_THREE,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_FOUR,
-            singlePress: ToolbarController.handleToolbarSwitch
+            singlePress: ToolbarController.handleToolbarSwitch,
         });
     }
 
@@ -41,6 +41,10 @@ export class ToolbarController {
         }
 
         if (alt.Player.local.isActionMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isNoClipOn) {
             return;
         }
 

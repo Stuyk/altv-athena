@@ -1,39 +1,29 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/Blip';
+import { Blip } from '../../shared/interfaces/blip';
 import { DEFAULT_CONFIG } from '../athena/main';
-import Logger from '../utility/athenaLogger';
 import { sha256Random } from '../utility/encryption';
 
 const globalBlips: Array<Blip> = [];
 
-export class BlipController {
-    /**
-     * Adds a global label the player loads when they join.
-     * @static
-     * @param {Blip} blip
-     * @memberof BlipController
-     */
-    static add(blip: Blip) {
-        globalBlips.push(blip);
-    }
-
+export class ServerBlipController {
     /**
      * Adds a global label the player loads when they join.
      * Also appends it to any online players.
      * Requires a UID to remove it later.
      * @static
      * @param {Blip} label
+     * @returns {string} A uid to remove it later.
      * @memberof BlipController
      */
-    static append(blip: Blip) {
+    static append(blip: Blip): string {
         if (!blip.uid) {
-            Logger.error(`(${JSON.stringify(blip.pos)}) Blip does not have a unique id (uid).`);
-            return;
+            blip.uid = sha256Random(JSON.stringify(blip));
         }
 
-        BlipController.add(blip);
+        globalBlips.push(blip);
         alt.emitClient(null, SYSTEM_EVENTS.APPEND_BLIP, blip);
+        return blip.uid;
     }
 
     /**
@@ -54,6 +44,36 @@ export class BlipController {
         return true;
     }
 
+    /**
+     * Remove a blip from the player.
+     * @static
+     * @param {alt.Player} player
+     * @param {string} uid
+     * @memberof BlipController
+     */
+    static removeFromPlayer(player: alt.Player, uid: string) {
+        if (!uid) {
+            throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.REMOVE_BLIP, uid);
+    }
+
+    /**
+     * Add a blip to the player.
+     * @static
+     * @param {alt.Player} player
+     * @param {Blip} blipData
+     * @memberof BlipController
+     */
+    static addToPlayer(player: alt.Player, blipData: Blip) {
+        if (!blipData.uid) {
+            throw new Error(`Object ${JSON.stringify(blipData)} does not have a uid. ObjectController.addToPlayer`);
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.APPEND_BLIP, blipData);
+    }
+
     static populateGlobalBlips(player: alt.Player) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
     }
@@ -61,13 +81,13 @@ export class BlipController {
 
 DEFAULT_CONFIG.VALID_HOSPITALS.forEach((position) => {
     const hash = sha256Random(JSON.stringify(position));
-    BlipController.append({
+    ServerBlipController.append({
         text: 'Hospital',
         color: 6,
         sprite: 153,
         scale: 1,
         shortRange: true,
         pos: position,
-        uid: hash
+        uid: hash,
     });
 });

@@ -3,5 +3,4 @@ export enum INVENTORY_TYPE {
     EQUIPMENT = 'equipment',
     TOOLBAR = 'toolbar',
     GROUND = 'ground',
-    TAB = 'tab'
 }

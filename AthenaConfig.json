@@ -1,0 +1,15 @@
+{
+    "[?] A Discord Bot Secret from the Discord Developer Panel": {},
+    "DISCORD_BOT": null,
+    "[?] The Discord Server ID your Bot is On": {},
+    "DISCORD_SERVER_ID": null,
+    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": {},
+    "WHITELIST_ROLE": null,
+    "[?] A URI with authentication to connect to a MongoDB Database": {},
+    "[?] ex: mongodb://username:password@127.0.0.1:27017": {},
+    "MONGO_URL": null,
+    "[?] Used for Ares Service Debugging": {},
+    "ARES_ENDPOINT": null,
+    "[?] Use altv-reconnect Program? https://github.com/Stuyk/altv-reconnect": {},
+    "USE_ALTV_RECONNECT": true
+}

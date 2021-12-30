@@ -1,10 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Timer } from '../utility/timers';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { playAnimation } from './animations';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
 
 let interval;
@@ -21,13 +20,16 @@ export class PushVehicle {
         const attachPosition = {
             x: 0,
             y: min.y - 0.3,
-            z: min.z + 1
+            z: min.z + 1,
         };
 
         alt.emitServer(VEHICLE_EVENTS.PUSH, attachPosition);
     }
 
     static serverStart(_vehicle: alt.Vehicle) {
+        // Clears animations when entering pushing state.
+        native.clearPedTasksImmediately(alt.Player.local.scriptID);
+
         vehicle = _vehicle;
         isPushing = true;
         if (!interval) {
@@ -69,7 +71,7 @@ export class PushVehicle {
             alt.Player.local.scriptID,
             'missfinale_c2ig_11',
             'pushcar_offcliff_m',
-            3
+            3,
         );
 
         // S
@@ -85,7 +87,7 @@ export class PushVehicle {
                 playAnimation(
                     'missfinale_c2ig_11',
                     'pushcar_offcliff_m',
-                    ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL
+                    ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.ENABLE_PLAYER_CONTROL,
                 );
             }
 

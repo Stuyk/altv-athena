@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -9,14 +9,14 @@ ChatController.addCommand(
     'acceptdeath',
     LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/acceptdeath'),
     PERMISSIONS.NONE,
-    handleCommand
+    handleCommand,
 );
 
 ChatController.addCommand(
     'respawn',
     LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/respawn'),
     PERMISSIONS.NONE,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player): void {

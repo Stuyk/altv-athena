@@ -3,11 +3,11 @@ import * as native from 'natives';
 import { distance2d } from '../../shared/utility/vector';
 import { getPointsInCircle } from './math';
 import { drawRectangle2D, drawText2D } from './text';
-import { Vector2 } from '../../shared/interfaces/Vector';
+import { Vector2 } from '../../shared/interfaces/vector';
 import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
 import { Timer } from './timers';
-import { BaseHUD } from '../views/hud/hud';
+import { WebViewController } from '../extensions/view2';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -42,7 +42,7 @@ export class WheelMenu {
         label: string,
         options: Array<IWheelItem>,
         setMouseToCenter = false,
-        center: Vector2 = { x: 0.5, y: 0.5 }
+        center: Vector2 = { x: 0.5, y: 0.5 },
     ) {
         if (options.length > 10) {
             throw new Error('Wheel Menu cannot exceed 10 Options');
@@ -62,7 +62,7 @@ export class WheelMenu {
         currentMenu = {
             label,
             points: points,
-            center
+            center,
         };
 
         lastHover = null;
@@ -70,7 +70,7 @@ export class WheelMenu {
         interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
         native.triggerScreenblurFadeIn(250);
         native.displayRadar(false);
-        BaseHUD.setHudVisibility(false);
+        WebViewController.setOverlaysVisible(false);
         alt.Player.local.isWheelMenuOpen = true;
 
         if (setMouseToCenter) {
@@ -87,21 +87,22 @@ export class WheelMenu {
         }
     }
 
-    static close() {
+    static async close() {
         Timer.clearInterval(interval);
+        alt.Player.local.isWheelMenuOpen = false;
+        await WebViewController.setOverlaysVisible(true);
         interval = null;
         currentMenu = null;
-        alt.Player.local.isWheelMenuOpen = false;
         native.triggerScreenblurFadeOut(100);
         native.displayRadar(true);
-        BaseHUD.setHudVisibility(true);
     }
 
-    static render() {
+    static async render() {
         if (!currentMenu) {
             return;
         }
 
+        native.clearDrawOrigin();
         native.setMouseCursorActiveThisFrame();
         native.setMouseCursorSprite(1);
         native.disableControlAction(0, 1, true);
@@ -141,7 +142,7 @@ export class WheelMenu {
             currentMenu.center,
             0.5,
             new alt.RGBA(255, 255, 255, 255),
-            0
+            0,
         );
 
         // Escape
@@ -168,7 +169,8 @@ export class WheelMenu {
 
         const option = { ...currentMenu.points[index] };
         handleFrontendSound('SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-        WheelMenu.close();
+
+        await WheelMenu.close();
 
         if (option.callback) {
             if (option.data) {

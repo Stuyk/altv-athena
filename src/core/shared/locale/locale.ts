@@ -1,4 +1,4 @@
-import { LocaleFormat } from '../interfaces/LocaleFormat';
+import { LocaleFormat } from '../interfaces/localeFormat';
 import en from './languages/en'; // Importing the English Locale
 export const placeholder = `_%_`;
 
@@ -18,7 +18,7 @@ let defaultLanguage = 'en';
  */
 
 const locales: LocaleFormat = {
-    en
+    en,
     // Additional languages can be added here...
 };
 

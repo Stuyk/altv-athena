@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ProgressBar } from '../../shared/interfaces/ProgressBar';
+import { ProgressBar } from '../../shared/interfaces/progressBar';
 import { distance2d } from '../../shared/utility/vector';
 import { drawRectangle, drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
@@ -44,26 +44,37 @@ function drawBars() {
         drawRectangle(bar.position, { x: timeDiff, y: barHeight }, bar.color);
 
         const percentageText = (percentage * 100).toFixed(2);
-        const actualText = bar.text ? `${bar.text} (${percentageText}%)` : `${percentageText}%`;
-        drawText3D(actualText, bar.position, 0.35, {
-            r: 255,
-            g: 255,
-            b: 255,
-            a: 255
-        });
+        if (bar.percentageEnabled) {
+            const actualText = bar.text ? `${bar.text} (${percentageText}%)` : `${percentageText}%`;
+            drawText3D(actualText, bar.position, 0.35, {
+                r: 255,
+                g: 255,
+                b: 255,
+                a: 255,
+            });
+        } else {
+            const actualText = bar.text ? `${bar.text}` : `${bar.text}`;
+            drawText3D(actualText, bar.position, 0.35, {
+                r: 255,
+                g: 255,
+                b: 255,
+                a: 255,
+            });
+        }
     }
 }
 
 function createBar(progressBar: ProgressBar) {
-    const index = bars.findIndex((bar) => bar.uid === progressBar.uid);
-
-    if (index >= 0) {
-        throw new Error(`Progress bar does not have a unique UID.`);
-    }
-
     progressBar.startTime = Date.now();
     progressBar.finalTime = Date.now() + progressBar.milliseconds;
-    bars.push(progressBar);
+
+    const index = bars.findIndex((bar) => bar.uid === progressBar.uid);
+    if (index <= -1) {
+        bars.push(progressBar);
+    } else {
+        alt.logWarning(`${progressBar.uid} was not a unique identifier. Replaced Data in Progress Bar.`);
+        bars[index] = progressBar;
+    }
 
     clear();
     if (!interval) {

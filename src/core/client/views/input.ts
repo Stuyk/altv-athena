@@ -1,16 +1,18 @@
 import * as alt from 'alt-client';
-import { InputMenu, InputResult } from '../../shared/interfaces/InputMenus';
-import { View } from '../extensions/view';
+import { InputMenu, InputResult } from '../../shared/interfaces/inputMenus';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 import { View_Events_Input_Menu } from '../../shared/enums/views';
+import { WebViewController } from '../extensions/view2';
+import { sleep } from '../utility/sleep';
 
-const url = `http://assets/webview/client/input/index.html`;
+const PAGE_NAME = 'InputBox';
 let inputMenu: InputMenu;
-let view: View;
 
-export class InputView implements ViewModel {
+/**
+ * Do Not Export Internal Only
+ */
+class InternalFunctions implements ViewModel {
     static async show(_inputMenu: InputMenu): Promise<void> {
         inputMenu = _inputMenu;
 
@@ -18,25 +20,52 @@ export class InputView implements ViewModel {
             return;
         }
 
-        view = await View.getInstance(url, true, false, true);
-        view.on('input:Ready', InputView.ready);
-        view.on('input:Submit', InputView.submit);
-        view.on('input:Close', InputView.close);
+        // Need to add a sleep here because wheel menu inputs can be be too quick.
+        await sleep(150);
+
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
+        const view = await WebViewController.get();
+        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
+        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
+
+        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.focus();
+        WebViewController.showCursor(true);
+
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
+        alt.Player.local.isMenuOpen = true;
     }
 
-    static close() {
+    static async close(isNotCancel = false) {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
 
-        if (!view) {
+        WebViewController.setOverlaysVisible(true);
+
+        const view = await WebViewController.get();
+        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
+        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
+
+        WebViewController.closePages([PAGE_NAME]);
+        WebViewController.unfocus();
+        WebViewController.showCursor(false);
+
+        alt.Player.local.isMenuOpen = false;
+
+        if (isNotCancel) {
             return;
         }
 
-        view.close();
-        view = null;
-        inputMenu = null;
+        if (inputMenu.callback) {
+            inputMenu.callback(null);
+        }
+
+        if (inputMenu.serverEvent) {
+            alt.emitServer(inputMenu.serverEvent, null);
+        }
     }
 
     static submit(results: InputResult[]) {
@@ -48,12 +77,25 @@ export class InputView implements ViewModel {
             alt.emitServer(inputMenu.serverEvent, results);
         }
 
-        InputView.close();
+        InternalFunctions.close(true);
     }
 
-    static ready() {
-        view.emit('input:SetMenu', inputMenu.title, inputMenu.options);
+    static async ready() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:SetMenu`, inputMenu.title, inputMenu.options, inputMenu.generalOptions);
     }
 }
 
-alt.onServer(View_Events_Input_Menu.SetMenu, InputView.show);
+export class InputView {
+    /**
+     * Show an input menu from client-side.
+     * @static
+     * @param {InputMenu} _inputMenu
+     * @memberof InputView
+     */
+    static setMenu(_inputMenu: InputMenu) {
+        InternalFunctions.show(_inputMenu);
+    }
+}
+
+alt.onServer(View_Events_Input_Menu.SetMenu, InternalFunctions.show);

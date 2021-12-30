@@ -1,0 +1,11 @@
+.boldest {
+    font-weight: 900 !important;
+}
+
+.bolder {
+    font-weight: bolder !important;
+}
+
+.bold {
+    font-weight: bold !important;
+}

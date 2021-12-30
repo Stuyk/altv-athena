@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
-import { Vector2 } from '../../shared/interfaces/Vector';
+import { Vector2 } from '../../shared/interfaces/vector';
 
 export function getCrossProduct(v1: alt.Vector3, v2: alt.Vector3): alt.Vector3 {
     return new alt.Vector3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
@@ -15,6 +14,12 @@ export function degToRad(degrees: number): number {
     return (degrees * Math.PI) / 180;
 }
 
+/**
+ * Could also be seen as rotAnglesToVector
+ * @export
+ * @param {alt.IVector3} rotation
+ * @return {*}  {alt.Vector3}
+ */
 export function rotationToDirection(rotation: alt.IVector3): alt.Vector3 {
     const z = degToRad(rotation.z);
     const x = degToRad(rotation.x);

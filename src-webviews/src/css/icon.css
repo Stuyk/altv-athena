@@ -1,0 +1,14 @@
+/** Has a very small padding to help center icons **/
+.icon {
+    display: block;
+    padding-left: 2px !important;
+}
+
+.icon-active:active {
+    transform: scale(0.95) !important;
+}
+
+.icon-no-select {
+    user-select: none !important;
+    pointer-events: none !important;
+}

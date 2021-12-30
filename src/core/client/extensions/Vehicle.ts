@@ -27,6 +27,10 @@ function handleSyncedMetaChange(entity: alt.Entity, key: string, value: any, old
         return;
     }
 
+    if (!entity.valid) {
+        return;
+    }
+
     alt.setTimeout(() => {
         sync.update(entity);
     }, 250);
@@ -34,6 +38,10 @@ function handleSyncedMetaChange(entity: alt.Entity, key: string, value: any, old
 
 function handleEntityCreation(entity: alt.Entity): void {
     if (!(entity instanceof alt.Vehicle)) {
+        return;
+    }
+
+    if (!entity.valid) {
         return;
     }
 
@@ -46,5 +54,5 @@ function handleEntityCreation(entity: alt.Entity): void {
 export default {
     play,
     sync,
-    toggle
+    toggle,
 };

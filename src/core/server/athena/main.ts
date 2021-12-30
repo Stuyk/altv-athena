@@ -5,23 +5,6 @@ import PDMSport from './dealerships/PDMSport';
 import PDMSuper from './dealerships/PDMSuper';
 import PDMSuv from './dealerships/PDMSuv';
 // All Parking Garages
-import BanhamCanyon from './parking/BanhamCanyon';
-import DelPerroBeach from './parking/DelPerroBeach';
-import DowntownVinewoodLower from './parking/DowntownVinewoodLower';
-import DowntownVinewoodUpper from './parking/DowntownVinewoodUpper';
-import GrandSenoraDesert from './parking/GrandSenoraDesert';
-import GrapeSeed from './parking/GrapeSeed';
-import LaPuertaDocks from './parking/LaPuertaDocks';
-import LaPuertaVehicle from './parking/LaPuertaVehicle';
-import LegionSquare from './parking/LegionSquare';
-import LosSantosInternational from './parking/LosSantosInternational';
-import LosSantosInternationalAir from './parking/LosSantosInternationalAir';
-import PaletoBay from './parking/PaletoBay';
-import PaletoForest from './parking/PaletoForest';
-import Rancho from './parking/Rancho';
-import RockfordHills from './parking/RockfordHills';
-import SandyShores from './parking/SandyShores';
-import TongvaHills from './parking/TongvaHills';
 import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {
@@ -32,12 +15,12 @@ export const DEFAULT_CONFIG = {
     VOICE_ON: SHARED_CONFIG.VOICE_ON,
     VOICE_MAX_DISTANCE: 35,
     // Character Selection View
-    CHARACTER_SELECT_POS: { x: 36.19486618041992, y: 859.3850708007812, z: 197.71343994140625 },
-    CHARACTER_SELECT_ROT: { x: 0, y: 0, z: -0.1943807601928711 },
+    CHARACTER_SELECT_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
+    CHARACTER_SELECT_ROT: 249.58352661132812,
     PLAYER_MAX_CHARACTER_SLOTS: 5,
     // Character Creation View
-    CHARACTER_CREATOR_POS: { x: -673.5911254882812, y: -227.51573181152344, z: 37.090972900390625 },
-    CHARACTER_CREATOR_ROT: { x: 0, y: 0, z: 1.302026629447937 },
+    CHARACTER_CREATOR_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
+    CHARACTER_CREATOR_ROT: 249.58352661132812,
     // New Character Properties
     PLAYER_NEW_SPAWN_POS: { x: -867.1437377929688, y: -172.6201934814453, z: 37.799232482910156 },
     PLAYER_CASH: 100,
@@ -48,7 +31,7 @@ export const DEFAULT_CONFIG = {
     // Death / Respawn Properties
     RESPAWN_TIME: SHARED_CONFIG.RESPAWN_TIME, // 30s in Milliseconds
     RESPAWN_LOSE_WEAPONS: true, // Removes player weapons on death.
-    RESPAWN_HEALTH: 200, // Health is 100 - 200. 99 is dead.
+    RESPAWN_HEALTH: 199, // Health is 100 - 199. 99 is dead. 200 will return 101%.
     RESPAWN_ARMOUR: 0, // Lose weapons when you respawn
     // Command Properties
     COMMAND_OOC_DISTANCE: 35,
@@ -67,8 +50,6 @@ export const DEFAULT_CONFIG = {
     BOOTUP_MINUTE: 0,
     MINUTES_PER_MINUTE: 5,
     USE_SERVER_TIME: true, // Overwrites the server time to use the current time of the computer it is running on.
-    // Inventory Properites
-    TIME_BETWEEN_INVENTORY_UPDATES: 10000,
     // Food Properties
     TIME_BETWEEN_FOOD_UPDATES: 10000,
     WATER_REMOVAL_RATE: 0.08, // How much food to remove every update.
@@ -79,7 +60,7 @@ export const DEFAULT_CONFIG = {
         { x: 1839.15771484375, y: 3672.702392578125, z: 34.51904296875 },
         { x: 297.4647521972656, y: -584.7089233398438, z: 44.292724609375 },
         { x: -677.0172119140625, y: 311.7821350097656, z: 83.601806640625 },
-        { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 }
+        { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 },
     ],
     WEATHER_ROTATION: [
         'EXTRASUNNY',
@@ -92,7 +73,7 @@ export const DEFAULT_CONFIG = {
         'RAIN',
         'FOGGY',
         'OVERCAST',
-        'CLEARING'
+        'CLEARING',
     ],
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
@@ -102,36 +83,19 @@ export const DEFAULT_CONFIG = {
     SPAWN_VEHICLES_ON_JOIN: false, // Will spawn all player vehicles not in a garage on join. Does not work if SPAWN_ALL_VEHICLES_ON_START is enabled.
     DESPAWN_VEHICLES_ON_LOGOUT: false, // Will despawn all player vehicles on logout.
     VEHICLE_SPAWN_TIMEOUT: 24, // Hours that must pass since a vehicle was last used to avoid spawning on server restart.
+    VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
-    VEHICLE_GARAGES: [
-        DowntownVinewoodUpper,
-        DowntownVinewoodLower,
-        LaPuertaDocks,
-        LaPuertaVehicle,
-        DelPerroBeach,
-        LegionSquare,
-        RockfordHills,
-        LosSantosInternational,
-        LosSantosInternationalAir,
-        Rancho,
-        BanhamCanyon,
-        GrandSenoraDesert,
-        TongvaHills,
-        SandyShores,
-        GrapeSeed,
-        PaletoForest,
-        PaletoBay
-    ],
     VEHICLE_DEALERSHIPS: [
         //
         PDMCoupe,
         PDMSport,
         PDMSuv,
-        PDMSuper
+        PDMSuper,
     ],
     // The Default Stream Configuration for Markers, Text Labels, etc.
     STREAM_CONFIG: StreamConfiguration,
     // The Default Faction Configurations
-    MAX_LOG_LENGTH: 50 // Larger logs may have unintended side-effects.
+    MAX_LOG_LENGTH: 50, // Larger logs may have unintended side-effects.
+    LOGIN_REDIRECT_URL: null, // Set this to something other than null to redirect to a specific url.
 };

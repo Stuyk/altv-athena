@@ -1,20 +1,23 @@
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import Logger from '../utility/athenaLogger';
-import { MarkerController } from './marker';
-import { TextLabelController } from './textlabel';
-import { IStream, IStreamMessage } from '../../shared/interfaces/IStream';
+import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { ObjectController } from './object';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
+const callbacks: { [key: string]: (player: alt.Player, streamedData: Array<any>) => void } = {};
 let ready = false;
+let hasInitialized = false;
 
-export class StreamerService {
+/**
+ * Should not be exported. Do not export.
+ * @class InternalController
+ */
+class InternalController {
     static Routes = {
-        pong: StreamerService.pong,
-        update: StreamerService.update
+        pong: InternalController.pong,
+        update: InternalController.update,
     };
 
     static init() {
@@ -22,7 +25,7 @@ export class StreamerService {
         const pingMessage: IStreamMessage = {
             id: -1,
             route: 'ping',
-            data: 'Ready!'
+            data: 'Ready!',
         };
 
         sock.send(JSON.stringify(pingMessage));
@@ -31,23 +34,10 @@ export class StreamerService {
         const configMessage: IStreamMessage = {
             id: -1,
             route: 'config',
-            data: DEFAULT_CONFIG.STREAM_CONFIG
+            data: DEFAULT_CONFIG.STREAM_CONFIG,
         };
 
         sock.send(JSON.stringify(configMessage));
-    }
-
-    static requestUpdate(player: alt.Player) {
-        const playerInfo: IStreamMessage = {
-            id: player.id,
-            route: 'update',
-            data: {
-                pos: player.pos,
-                dimension: player.dimension
-            }
-        };
-
-        sock.send(JSON.stringify(playerInfo));
     }
 
     /**
@@ -56,7 +46,7 @@ export class StreamerService {
      * @param {number} id
      * @param {IStream} data
      * @return {*}
-     * @memberof StreamerService
+     * @memberof InternalController
      */
     static update(id: number, data: IStream) {
         const player = alt.Player.all.find((p) => p.id === id);
@@ -64,20 +54,123 @@ export class StreamerService {
             return;
         }
 
-        MarkerController.update(player, data.markers);
-        TextLabelController.update(player, data.labels);
-        ObjectController.update(player, data.objects);
+        const keys = Object.keys(callbacks);
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+
+            if (!callbacks[key]) {
+                continue;
+            }
+
+            if (!data[key]) {
+                continue;
+            }
+
+            callbacks[key](player, data[key]);
+        }
+    }
+
+    /**
+     * Parse Data from the WebSocket Server
+     * @static
+     * @param {string} message
+     * @return {*}
+     * @memberof InternalController
+     */
+    static receive(message: string) {
+        const msg: IStreamMessage = JSON.parse(message);
+        if (!InternalController.Routes[msg.route]) {
+            return;
+        }
+
+        InternalController.Routes[msg.route](msg.id, msg.data);
+    }
+
+    /**
+     * Used to call streamer updates for each player.
+     * @static
+     * @memberof InternalController
+     */
+    static tick() {
+        alt.Player.all.forEach((player) => {
+            if (!player || !player.valid || !player.data) {
+                return;
+            }
+
+            InternalController.requestUpdate(player);
+        });
+    }
+
+    /**
+     * Used to request an update for a specific player.
+     * @static
+     * @param {alt.Player} player
+     * @memberof InternalController
+     */
+    static requestUpdate(player: alt.Player) {
+        const playerInfo: IStreamMessage = {
+            id: player.id,
+            route: 'update',
+            data: {
+                pos: player.pos,
+                dimension: player.dimension,
+            },
+        };
+
+        sock.send(JSON.stringify(playerInfo));
     }
 
     /**
      * Message back from sending a ping request.
      * @static
      * @param {string} data
-     * @memberof StreamerService
+     * @memberof InternalController
      */
     static async pong(id: number, data: string) {
         Logger.info(data);
         ready = true;
+    }
+}
+
+export class StreamerService {
+    /**
+     * Register a custom callback function.
+     * When the key is updated with data it will come back through the callback.
+     * @static
+     * @template T
+     * @param {string} key A unique key for this stream data.
+     * @param {(player: alt.Player, streamedData: Array<T>) => void} callback
+     * @param {number} range How far away should we look from the player's position.
+     * @memberof StreamerService
+     */
+    static async registerCallback<T>(
+        key: string,
+        callback: (player: alt.Player, streamedData: Array<T>) => void,
+        range: number = 100,
+    ) {
+        callbacks[key] = callback;
+
+        await new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!ready) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+            }, 100);
+        });
+
+        const playerInfo: IStreamMessage = {
+            id: -1,
+            route: 'update-range',
+            data: {
+                key,
+                range,
+            },
+        };
+
+        sock.send(JSON.stringify(playerInfo));
     }
 
     /**
@@ -105,43 +198,20 @@ export class StreamerService {
             route: 'populate',
             data: {
                 array,
-                key
-            }
+                key,
+            },
         };
 
         sock.send(JSON.stringify(streamInfo));
     }
-
-    /**
-     * Parse Data from the WebSocket Server
-     * @static
-     * @param {string} message
-     * @return {*}
-     * @memberof StreamerService
-     */
-    static receive(message: string) {
-        const msg: IStreamMessage = JSON.parse(message);
-        if (!StreamerService.Routes[msg.route]) {
-            return;
-        }
-
-        StreamerService.Routes[msg.route](msg.id, msg.data);
-    }
-
-    static tick() {
-        alt.Player.all.forEach((player) => {
-            if (!player || !player.valid || !player.data) {
-                return;
-            }
-
-            StreamerService.requestUpdate(player);
-        });
-    }
 }
 
-sock.onopen = StreamerService.init;
-sock.onmessage = (message: MessageEvent<any>) => {
-    StreamerService.receive(message.data);
-};
+if (!hasInitialized) {
+    hasInitialized = true;
+    sock.onopen = InternalController.init;
+    sock.onmessage = (message: MessageEvent) => {
+        InternalController.receive(message.data);
+    };
 
-alt.setInterval(StreamerService.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
+    alt.setInterval(InternalController.tick, DEFAULT_CONFIG.STREAM_CONFIG.TimeBetweenUpdates);
+}

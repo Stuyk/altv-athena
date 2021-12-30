@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import env from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
@@ -11,15 +10,16 @@ import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
+import { ReconnectHelper } from './utility/reconnect';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
-const config = env.config().parsed as IConfig;
+let config: IConfig;
 
 class Startup {
     static async begin() {
         // Validate the Configuration
-        ConfigUtil.validate(config);
+        config = ConfigUtil.get();
 
         // Start Database
         Startup.database();
@@ -35,7 +35,7 @@ class Startup {
      */
     static database() {
         const url = MongoUtil.getURL(config);
-        const collections = MongoUtil.getCollections(config);
+        const collections = MongoUtil.getCollections();
 
         Database.init(url, MongoUtil.getName(), collections)
             .catch(() => {
@@ -66,8 +66,10 @@ class Startup {
         });
 
         const endpoint = await Ares.getAresEndpoint();
+        const hwid = await Ares.getHwid();
         const result = await PostController.post(`${endpoint}/v1/post/verify`, {
-            public_key: Ares.getPublicKey()
+            public_key: Ares.getPublicKey(),
+            hwid,
         });
 
         if (!result) {
@@ -97,7 +99,7 @@ class Startup {
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
         Logger.info(`Server Warmup Complete. Now accepting connections.`);
-        // ReconnectHelper.invoke();
+        ReconnectHelper.invoke();
     }
 
     static handleEarlyConnect(player: alt.Player) {

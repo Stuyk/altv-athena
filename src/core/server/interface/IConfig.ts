@@ -1,5 +1,6 @@
 export interface IConfig {
     DISCORD_BOT?: string;
+    DISCORD_SERVER_ID?: string;
     WHITELIST_ROLE?: string;
     ARES_ENDPOINT?: string;
     MONGO_URL?: string;
@@ -7,4 +8,6 @@ export interface IConfig {
     MONGO_PASSWORD?: string;
     MONGO_COLLECTIONS?: string;
     WEBSERVER_IP?: string;
+    VUE_DEBUG?: string | boolean;
+    USE_ALTV_RECONNECT?: boolean;
 }

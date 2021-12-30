@@ -8,8 +8,8 @@ import { AdminController } from '../systems/admin';
 import ChatController from '../systems/chat';
 import { OptionsController } from '../systems/options';
 import Logger from './athenaLogger';
+import { AthenaScreenshot } from './screenshot';
 
-alt.onClient('/screenshot', handleSaveScreenshot);
 alt.on('consoleCommand', handleConsoleMessage);
 
 const command = {
@@ -22,7 +22,7 @@ const command = {
     '/dox': handleDox,
     '/addwhitelist': handleAddWhitelist,
     '/removewhitelist': handleRemoveWhitelist,
-    '/commands': ChatController.printAllCommands
+    '/commands': ChatController.printAllCommands,
 };
 
 /**
@@ -159,8 +159,19 @@ async function handleScreenshot(cmdName: string, id: string) {
         return;
     }
 
-    Logger.info(`Attempting screenshot of... ${player.id}`);
-    alt.emitClient(player, cmdName);
+    if (player.data.name) {
+        Logger.info(`Creating screenshot of... (${player.id}) ${player.data.name}`);
+    } else {
+        Logger.info(`Creating screenshot of... ID: ${player.id}`);
+    }
+
+    const screenshot = await AthenaScreenshot.takeScreenshot(player);
+    if (!screenshot) {
+        Logger.warning(`Failed to create screenshot of ${player.id}`);
+        return;
+    }
+
+    handleSaveScreenshot(player, screenshot);
 }
 
 function handleDox(cmdName: string, id: string) {
@@ -214,10 +225,10 @@ async function handleRemoveWhitelist(cmdName: string, id: string) {
 
 async function handleSaveScreenshot(player: alt.Player, base64Image: string) {
     const path = `${process.cwd()}/screenshots/${player.data.name}.jpg`;
-    Logger.info(path);
     const data = base64Image.replace(/^data:image\/\w+;base64,/, '');
     const buf = Buffer.from(data, 'base64');
     fs.writeFileSync(path, buf);
+    Logger.info(path);
 }
 
 async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Promise<void> {

@@ -91,7 +91,7 @@ export class ScreenText {
         font: number,
         background: alt.RGBA,
         foreground: alt.RGBA,
-        props: TextProperties
+        props: TextProperties,
     ) {
         const textHeight = ScreenText.getTextHeight(scale, font);
         const textWidth = ScreenText.getTextWidth(text, font, scale);

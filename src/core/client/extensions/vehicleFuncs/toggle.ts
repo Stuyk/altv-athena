@@ -24,5 +24,5 @@ function door(v: alt.Vehicle, door: Vehicle_Door_List): void {
 }
 
 export default {
-    door
+    door,
 };

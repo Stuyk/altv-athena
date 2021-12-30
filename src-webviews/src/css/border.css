@@ -1,0 +1,83 @@
+.black--border {
+    border: 2px solid #000000 !important;
+}
+
+.white--border {
+    border: 2px solid #ffffff !important;
+}
+
+.red--border {
+    border: 2px solid #f44336 !important;
+}
+
+.pink--border {
+    border: 2px solid #e91e63 !important;
+}
+
+.purple--border {
+    border: 2px solid #9c27b0 !important;
+}
+
+.deep-purple--border {
+    border: 2px solid #673ab7 !important;
+}
+
+.indigo--border {
+    border: 2px solid #3f51b5 !important;
+}
+
+.blue--border {
+    border: 2px solid #2196f3 !important;
+}
+
+.light-blue--border {
+    border: 2px solid #03a9f4 !important;
+}
+
+.cyan--border {
+    border: 2px solid #00bcd4 !important;
+}
+
+.teal--border {
+    border: 2px solid #009688 !important;
+}
+
+.green--border {
+    border: 2px solid #4caf50 !important;
+}
+
+.light-green--border {
+    border: 2px solid #8bc34a !important;
+}
+
+.lime--border {
+    border: 2px solid #cddc39 !important;
+}
+
+.yellow--border {
+    border: 2px solid #ffeb3b !important;
+}
+
+.amber--border {
+    border: 2px solid #ffc107 !important;
+}
+
+.orange--border {
+    border: 2px solid #ff9800 !important;
+}
+
+.deep-orange--border {
+    border: 2px solid #ff5722 !important;
+}
+
+.brown--border {
+    border: 2px solid #795548 !important;
+}
+
+.blue-grey--border {
+    border: 2px solid #607d8b !important;
+}
+
+.grey--border {
+    border: 2px solid #9e9e9e !important;
+}

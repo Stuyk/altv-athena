@@ -1,11 +1,20 @@
 import * as alt from 'alt-server';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
-import { ANIMATION_FLAGS } from '../../../shared/flags/AnimationFlags';
-import { InputMenu } from '../../../shared/interfaces/InputMenus';
-import { Particle } from '../../../shared/interfaces/Particle';
-import { ProgressBar } from '../../../shared/interfaces/ProgressBar';
-import { Task, TaskCallback } from '../../../shared/interfaces/TaskTimeline';
+import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
+import IAttachable from '../../../shared/interfaces/iAttachable';
+import IClientInteraction from '../../../shared/interfaces/iClientInteraction';
+import ICredit from '../../../shared/interfaces/iCredit';
+import IErrorScreen from '../../../shared/interfaces/iErrorScreen';
+import { InputMenu } from '../../../shared/interfaces/inputMenus';
+import IShard from '../../../shared/interfaces/iShard';
+import ISpinner from '../../../shared/interfaces/iSpinner';
+import { Particle } from '../../../shared/interfaces/particle';
+import { ProgressBar } from '../../../shared/interfaces/progressBar';
+import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
+import { Vector3 } from '../../../shared/interfaces/vector';
+import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
 
 /**
@@ -22,7 +31,7 @@ function animation(
     dictionary: string,
     name: string,
     flags: ANIMATION_FLAGS,
-    duration: number = -1
+    duration: number = -1,
 ): void {
     if (player.data.isDead) {
         alt.logWarning(`[Athena] Cannot play ${dictionary}@${name} while player is dead.`);
@@ -30,6 +39,28 @@ function animation(
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, dictionary, name, flags, duration);
+}
+
+/**
+ * Used to clear an animation or a task.
+ * Does not trigger if the player is in a vehicle.
+ *
+ * @param {alt.Player} player
+ */
+function clearAnimation(player: alt.Player) {
+    if (!player || !player.valid || player.vehicle) {
+        return;
+    }
+
+    const tasks = [
+        {
+            nativeName: 'clearPedTasks',
+            params: [],
+            timeToWaitInMs: 100,
+        },
+    ];
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
 }
 
 /**
@@ -99,9 +130,15 @@ function particle(player: alt.Player, particle: Particle, emitToNearbyPlayers = 
  * Create a progress bar that eventually ends itself.
  * @param {alt.Player} player
  * @param {ProgressBar} progressbar
+ * @returns {string} A unique identifier to remove the progress bar.
  */
-function createProgressBar(player: alt.Player, progressbar: ProgressBar) {
+function createProgressBar(player: alt.Player, progressbar: ProgressBar): string {
+    if (!progressbar.uid) {
+        progressbar.uid = sha256Random(JSON.stringify(progressbar));
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PROGRESSBAR_CREATE, progressbar);
+    return progressbar.uid;
 }
 
 /**
@@ -155,18 +192,206 @@ function inputMenu(player: alt.Player, inputMenu: InputMenu) {
     alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
 }
 
+/**
+ * Create a spinner in the bottom-right corner.
+ * @param {alt.Player} player
+ * @param {ISpinner} spinner
+ */
+function createSpinner(player: alt.Player, spinner: ISpinner) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER, spinner);
+}
+
+/**
+ * Clear a spinner in the bottom-right corner.
+ * No UID necessary since it can only have one spinner at a time.
+ * @param {alt.Player} player
+ */
+function clearSpinner(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER_CLEAR);
+}
+
+/**
+ * Create a full-screen message. Cannot be cleared by the player.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN, screen);
+}
+
+/**
+ * Clear a full-screen message.
+ * @param {alt.Player} player
+ */
+function clearErrorScreen(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN_CLEAR);
+}
+
+/**
+ * Create a full-screen shard. Similar to 'mission-passed' or 'wasted'.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createShard(player: alt.Player, shard: IShard) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD, shard);
+}
+
+/**
+ * Clear a shard.
+ * @param {alt.Player} player
+ */
+function clearShard(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD_CLEAR);
+}
+
+/**
+ * Create a 'credits' text aligned to a certain side of the screen.
+ * Automatically clear(s) over-time.
+ * @param {alt.Player} player
+ * @param {IErrorScreen} screen
+ */
+function createCredits(player: alt.Player, credits: ICredit) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS, credits);
+}
+
+/**
+ * Clears a 'credits' display.
+ * @param {alt.Player} player
+ */
+function clearCredits(player: alt.Player) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS_CLEAR);
+}
+
+/**
+ * Attach an object to a player.
+ * Automatically synchronized and handled client-side.
+ * Last parameter is when to remove the object. Automatically set to infinite.
+ * @param {alt.Player} player
+ * @param {IAttachable} attachable
+ * @param {number} removeAfterMilliseconds
+ * @return {string} UID for attachable object
+ */
+function objectAttach(player: alt.Player, attachable: IAttachable, removeAfterMilliseconds = -1): string | null {
+    if (!player || !player.valid) {
+        return null;
+    }
+
+    if (!attachable.uid) {
+        attachable.uid = sha256Random(JSON.stringify(attachable));
+    }
+
+    if (!player.attachables || !Array.isArray(player.attachables)) {
+        player.attachables = [];
+    }
+
+    const index = player.attachables.findIndex((x) => x.uid === attachable.uid);
+    if (index >= 0) {
+        player.attachables[index] = attachable;
+    } else {
+        player.attachables.push(attachable);
+    }
+
+    player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
+
+    if (removeAfterMilliseconds >= 0) {
+        alt.setTimeout(() => {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            objectRemove(player, attachable.uid);
+        }, removeAfterMilliseconds);
+    }
+
+    return attachable.uid;
+}
+
+/**
+ * Remove an object from the player.
+ * @param {alt.Player} player
+ * @param {string} uid
+ * @return {*}
+ */
+function objectRemove(player: alt.Player, uid: string) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    if (!player.attachables || !Array.isArray(player.attachables)) {
+        return;
+    }
+
+    for (let i = player.attachables.length - 1; i >= 0; i--) {
+        if (player.attachables[i].uid !== uid) {
+            continue;
+        }
+
+        alt.log(`Deleting: ${uid}`);
+
+        player.attachables.splice(i, 1);
+        player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
+        return;
+    }
+}
+
+/**
+ * Add Interaction Text
+ * @param {alt.Player} player
+ * @param {IClientInteraction} interaction
+ */
+function interactionAdd(player: alt.Player, interaction: IClientInteraction) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, interaction);
+}
+
+/**
+ * Remove Interaction Text
+ * @param {alt.Player} player
+ * @param {string} uid
+ */
+function interactionRemove(player: alt.Player, uid: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, uid);
+}
+
+/**
+ * Makes the user press 'E' to trigger this callback event.
+ * @param {alt.Player} player
+ * @param {string} eventName
+ */
+function interactionTemporary(player: alt.Player, eventName: string) {
+    alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEMPORARY, eventName);
+}
+
+function tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: Vector3, speed: number) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
+}
+
 export default {
+    interactionAdd,
     animation,
-    scenario,
+    clearAnimation,
+    clearCredits,
+    clearErrorScreen,
+    clearShard,
+    clearSpinner,
+    createCredits,
+    createErrorScreen,
     createProgressBar,
+    createShard,
+    createSpinner,
     inputMenu,
-    meta,
     message,
+    meta,
     notification,
+    objectAttach,
+    objectRemove,
     particle,
+    interactionRemove,
     removeProgressBar,
+    scenario,
     sound2D,
     sound3D,
     soundFrontend,
-    taskTimeline
+    taskTimeline,
+    tempObjectLerp,
+    interactionTemporary,
 };

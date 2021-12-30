@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 import { playAnimation } from '../systems/animations';
@@ -47,52 +47,52 @@ function handleAnimationMenu() {
                     }
 
                     native.clearPedTasks(alt.Player.local.scriptID);
-                }
+                },
             },
             {
                 name: 'Dance',
                 callback: () => {
                     WheelMenu.create('Dance', danceAnims(callback));
-                }
+                },
             },
             {
                 name: 'Idle',
                 callback: () => {
                     WheelMenu.create('Idle', idleAnims(callback));
-                }
+                },
             },
             {
                 name: 'Fun',
                 callback: () => {
                     WheelMenu.create('Fun', funAnims(callback));
-                }
+                },
             },
             {
                 name: 'Wait',
                 callback: () => {
                     WheelMenu.create('Wait', waitAnims(callback));
-                }
+                },
             },
             {
                 name: 'Lean',
                 callback: () => {
                     WheelMenu.create('Lean', leanAnims(callback));
-                }
+                },
             },
             {
                 name: 'Emote',
                 callback: () => {
                     WheelMenu.create('Emote', emoteAnims(callback));
-                }
+                },
             },
             {
                 name: 'Common',
                 callback: () => {
                     WheelMenu.create('Common', commonAnims(callback));
-                }
-            }
+                },
+            },
         ],
-        true
+        true,
     );
 }
 

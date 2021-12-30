@@ -1,10 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
-import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
 import { WheelMenu } from '../utility/wheelMenu';
 
@@ -23,7 +21,7 @@ function handleMenu() {
     const pos = {
         x: alt.Player.local.pos.x + fwd.x * 1,
         y: alt.Player.local.pos.y + fwd.y * 1,
-        z: alt.Player.local.pos.z
+        z: alt.Player.local.pos.z,
     };
 
     const target = alt.Player.all.find((x) => {
@@ -51,10 +49,10 @@ function handleMenu() {
                 name: 'Cuff & Drag',
                 callback: () => {
                     alt.emitServer(SYSTEM_EVENTS.PLAYER_CUFF, target);
-                }
-            }
+                },
+            },
         ],
-        true
+        true,
     );
 }
 

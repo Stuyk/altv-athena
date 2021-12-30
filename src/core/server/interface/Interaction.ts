@@ -1,4 +1,4 @@
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 
 export interface Interaction {
     description?: string;
@@ -8,5 +8,6 @@ export interface Interaction {
     type?: string;
     dimension?: number;
     callback?: Function;
+    disableMarker?: boolean;
     data?: Array<any>;
 }

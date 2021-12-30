@@ -2,22 +2,24 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
 import { View_Events_Factions } from '../../shared/enums/views';
-import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
-import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/IFaction';
-import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/IFactionClient';
-import { IResponse } from '../../shared/interfaces/IResponse';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/factionPermissionFlags';
+import { FactionMember, FactionRank, IFaction } from '../../shared/interfaces/iFaction';
+import { FactionMemberClient, FactionRankClient, IFactionClient } from '../../shared/interfaces/iFactionClient';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { playerFuncs } from '../extensions/Player';
+import VehicleFuncs from '../extensions/VehicleFuncs';
 import { Collections } from '../interface/DatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { StorageView } from '../views/storage';
-import { BlipController } from './blip';
+import { ServerBlipController } from './blip';
 import { FactionSystem } from './factions';
 import { InteractionController } from './interaction';
-import { MarkerController } from './marker';
+import { ServerMarkerController } from '../streamers/marker';
 import { StorageSystem } from './storage';
 
 let factions: { [key: string]: IFaction } = {};
@@ -75,7 +77,7 @@ export class FactionInternalSystem {
         return true;
     }
 
-    static async refreshBlipsAndInteractions(faction: string) {
+    static async refreshBlipsAndInteractions(faction: string, doNotRefresh: boolean = false) {
         if (!factions[faction]) {
             return;
         }
@@ -90,7 +92,18 @@ export class FactionInternalSystem {
 
         // Storage
         InteractionController.remove(typeStorage, storageName);
-        MarkerController.remove(storageName);
+        ServerMarkerController.remove(storageName);
+
+        // Weapons
+        InteractionController.remove(typeWeapons, weaponsName);
+        ServerMarkerController.remove(weaponsName);
+
+        // Blip
+        ServerBlipController.remove(blipName);
+
+        if (doNotRefresh) {
+            return;
+        }
 
         if (factions[faction].storageLocation) {
             InteractionController.add({
@@ -99,20 +112,16 @@ export class FactionInternalSystem {
                 identifier: storageName,
                 position: factions[faction].storageLocation,
                 data: [FACTION_STORAGE.STORAGE],
-                callback: FactionSystem.openStorage
+                callback: FactionSystem.openStorage,
             });
 
-            MarkerController.append({
+            ServerMarkerController.append({
                 uid: storageName,
                 pos: factions[faction].storageLocation,
                 type: 1,
-                color: new alt.RGBA(255, 255, 255, 100)
+                color: new alt.RGBA(255, 255, 255, 100),
             });
         }
-
-        // Weapons
-        InteractionController.remove(typeWeapons, weaponsName);
-        MarkerController.remove(weaponsName);
 
         if (factions[faction].weaponLocation) {
             InteractionController.add({
@@ -121,22 +130,19 @@ export class FactionInternalSystem {
                 identifier: weaponsName,
                 position: factions[faction].weaponLocation,
                 data: [FACTION_STORAGE.WEAPONS],
-                callback: FactionSystem.openStorage
+                callback: FactionSystem.openStorage,
             });
 
-            MarkerController.append({
+            ServerMarkerController.append({
                 uid: weaponsName,
                 pos: factions[faction].weaponLocation,
                 type: 1,
-                color: new alt.RGBA(255, 255, 255, 100)
+                color: new alt.RGBA(255, 255, 255, 100),
             });
         }
 
-        // Blip
-        BlipController.remove(blipName);
-
         if (factions[faction].pos) {
-            BlipController.append({
+            ServerBlipController.append({
                 uid: blipName,
                 pos: factions[faction].pos,
                 color: 9,
@@ -144,7 +150,7 @@ export class FactionInternalSystem {
                 scale: 1,
                 shortRange: true,
                 text: factions[faction].name,
-                identifier: blipName
+                identifier: blipName,
             });
         }
     }
@@ -181,7 +187,7 @@ export class FactionInternalSystem {
     static async handOffFaction(
         faction: string,
         characterID: string,
-        leaveFaction: boolean = false
+        leaveFaction: boolean = false,
     ): Promise<IResponse> {
         if (!factions[faction]) {
             return { status: false, response: 'Faction does not exist.' };
@@ -224,6 +230,9 @@ export class FactionInternalSystem {
         }
 
         const factionName = factions[faction].name;
+
+        // Delete / Remove Blips, Markers, etc.
+        FactionInternalSystem.refreshBlipsAndInteractions(factionName, true);
 
         await Database.updateDataByFieldMatch('faction', faction, { faction: null }, Collections.Characters);
         const openInterfacePlayers = openFactionInterfaces[faction];
@@ -280,7 +289,7 @@ export class FactionInternalSystem {
         }
 
         factions[factionID].logs.unshift(
-            `[${new Date(Date.now()).toISOString()}] ${member.name} - ${status} - ${response}`
+            `[${new Date(Date.now()).toISOString()}] ${member.name} - ${status} - ${response}`,
         );
 
         FactionInternalSystem.save(factionID, { logs: factions[factionID].logs });
@@ -298,6 +307,77 @@ export class FactionInternalSystem {
     }
 
     /**
+     * Finds a faction by partial id
+     * @static
+     * @param {string} partialID
+     * @return {(IFaction | null)}
+     * @memberof FactionInternalSystem
+     */
+    static find(partialID: string): IFaction | null {
+        const keys = Object.keys(factions);
+        const key = keys.find((x) => x.toLocaleLowerCase().includes(partialID.toLowerCase()));
+
+        if (!key) {
+            return null;
+        }
+
+        return factions[key];
+    }
+
+    /**
+     * Get all vehicles that belong to a faction.
+     * @static
+     * @param {string} id
+     * @return {*}
+     * @memberof FactionInternalSystem
+     */
+    static async getAllVehicles(id: string): Promise<IVehicle[]> {
+        return await Database.fetchAllByField(`owner`, id, Collections.Vehicles);
+    }
+
+    /**
+     * Finds a faction by name.
+     * @static
+     * @param {string} name
+     * @return {(IFaction | null)}
+     * @memberof FactionInternalSystem
+     */
+    static findByName(name: string): IFaction | null {
+        let matchingIdentifier;
+
+        Object.keys(factions).forEach((identifier) => {
+            const faction = factions[identifier];
+
+            if (faction.name.toLowerCase().includes(name.toLowerCase())) {
+                matchingIdentifier = identifier;
+            }
+        });
+
+        if (!matchingIdentifier) {
+            return null;
+        }
+
+        return factions[matchingIdentifier];
+    }
+
+    /**
+     * Returns all currently loaded factions.
+     * @static
+     * @return {Array<IFaction>}
+     * @memberof FactionInternalSystem
+     */
+    static getAllFactions(): Array<IFaction> {
+        const factionList = [];
+
+        Object.keys(factions).forEach((identifier) => {
+            const faction = factions[identifier];
+            factionList.push(faction);
+        });
+
+        return factionList;
+    }
+
+    /**
      * Does general setup for the faction.
      * Also looks up vehicles and spawns them.
      * @static
@@ -311,7 +391,7 @@ export class FactionInternalSystem {
             faction.ranks = [
                 {
                     name: 'Admin',
-                    permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+                    permissions: FACTION_PERMISSION_FLAGS.SUPER_ADMIN,
                 },
                 {
                     name: 'Moderator',
@@ -323,28 +403,16 @@ export class FactionInternalSystem {
                         FACTION_PERMISSION_FLAGS.ADD_TO_BANK |
                         FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK |
                         FACTION_PERMISSION_FLAGS.KICK_MEMBER |
-                        FACTION_PERMISSION_FLAGS.ADD_MEMBERS
+                        FACTION_PERMISSION_FLAGS.ADD_MEMBERS,
                 },
                 {
                     name: 'Goon',
                     permissions:
                         FACTION_PERMISSION_FLAGS.ACCESS_STORAGE |
                         FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS |
-                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK
-                }
+                        FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
+                },
             ];
-        }
-
-        if (faction.pos) {
-            // Create Blip
-        }
-
-        if (faction.storageLocation) {
-            // Create Interaction
-        }
-
-        if (faction.weaponLocation) {
-            // Create Interaction
         }
 
         if (faction.bank === undefined || faction.bank === null) {
@@ -352,6 +420,15 @@ export class FactionInternalSystem {
         }
 
         factions[faction._id as string] = faction;
+
+        const factionVehicles = await Database.fetchAllByField<IVehicle>('_id', faction._id, Collections.Vehicles);
+        if (factionVehicles.length >= 1) {
+            for (let i = 0; i < factionVehicles.length; i++) {
+                const vehicle = factionVehicles[i];
+                VehicleFuncs.spawn(vehicle);
+            }
+        }
+
         FactionInternalSystem.refreshBlipsAndInteractions(faction._id.toString());
     }
 
@@ -377,7 +454,7 @@ export class FactionInternalSystem {
 
             const clientInterface = FactionInternalSystem.getClientInterface(
                 players[i].data.faction,
-                players[i].data._id.toString()
+                players[i].data._id.toString(),
             );
 
             alt.emitClient(players[i], View_Events_Factions.Update, clientInterface);
@@ -565,29 +642,29 @@ export class FactionInternalSystem {
     /**
      * Internal callable function to remove a member from this faction based on their character id.
      * @static
-     * @param {string} id
+     * @param {string} factionID
      * @param {string} characterID
      * @return {Promise<boolean>}
      * @memberof FactionSystem
      */
-    static async removeMember(id: string, characterID: string): Promise<IResponse> {
-        if (!factions[id]) {
+    static async removeMember(factionID: string, characterID: string): Promise<IResponse> {
+        if (!factions[factionID]) {
             return { status: false, response: 'The faction you are in no longer exists.' };
         }
 
-        const memberIndex = factions[id].players.findIndex((member) => member.id === characterID);
+        const memberIndex = factions[factionID].players.findIndex((member) => member.id === characterID);
         if (memberIndex <= -1) {
             return { status: false, response: 'Target player is not in your faction.' };
         }
 
-        const target = alt.Player.all.find((x) => x.data && x.data._id === characterID);
+        const target = alt.Player.all.find((x) => x.data && x.data._id.toString() === characterID);
         if (target) {
             target.data.faction = null;
             await playerFuncs.save.field(target, 'faction', target.data.faction);
         }
 
-        const oldData = factions[id].players.splice(memberIndex, 1)[0];
-        await this.save(id, { players: factions[id].players });
+        const oldData = factions[factionID].players.splice(memberIndex, 1)[0];
+        await this.save(factionID, { players: factions[factionID].players });
         return { status: true, response: `${oldData.name} was removed from your faction.` };
     }
 
@@ -912,7 +989,7 @@ export class FactionInternalSystem {
         factions[id].pos = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { pos: factions[id].pos });
@@ -942,7 +1019,7 @@ export class FactionInternalSystem {
         factions[id].storageLocation = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { storageLocation: factions[id].storageLocation });
@@ -972,7 +1049,7 @@ export class FactionInternalSystem {
         factions[id].weaponLocation = {
             x: position.x,
             y: position.y,
-            z: position.z - 1
+            z: position.z - 1,
         };
 
         await this.save(id, { weaponLocation: factions[id].weaponLocation });
@@ -1005,32 +1082,32 @@ export class FactionInternalSystem {
         const playerRank = factions[id].ranks[player.rank];
         const canChangeMemberRanks = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK,
         );
 
         const canChangeRankName = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES,
         );
 
         const canChangeRankOrder = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER,
         );
 
         const canKickMembers = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.KICK_MEMBER
+            FACTION_PERMISSION_FLAGS.KICK_MEMBER,
         );
 
         const canCreateRanks = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         const canChangeRankPerms = FactionInternalSystem.checkPermission(
             playerRank.permissions,
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
         );
 
         const clientPlayers: Array<FactionMemberClient> = [];
@@ -1099,18 +1176,18 @@ export class FactionInternalSystem {
             weaponLocation: faction.weaponLocation,
             canAddToBank: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+                FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
             ),
             canRemoveFromBank: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK
+                FACTION_PERMISSION_FLAGS.REMOVE_FROM_BANK,
             ),
             canChangeName: FactionInternalSystem.checkPermission(
                 playerRank.permissions,
-                FACTION_PERMISSION_FLAGS.CHANGE_NAME
+                FACTION_PERMISSION_FLAGS.CHANGE_NAME,
             ),
             bank: faction.bank,
-            dimension: faction.dimension
+            dimension: faction.dimension,
         };
 
         return factionClient;

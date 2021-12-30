@@ -9,13 +9,21 @@ alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
 async function handleConnectionComplete() {
     native.destroyAllCams(true);
     native.renderScriptCams(false, false, 0, false, false, 0);
-    native.doScreenFadeIn(0);
+    native.doScreenFadeOut(0);
     native.triggerScreenblurFadeOut(0);
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
-    alt.emitServer(SYSTEM_EVENTS.CHECK_CONNECTION);
+
+    // Calls the login functionality
+    alt.emitServer(SYSTEM_EVENTS.BEGIN_CONNECTION);
     handleTick();
 }
+
+alt.everyTick(() => {
+    native.hideHudComponentThisFrame(6); // Vehicle Name
+    native.hideHudComponentThisFrame(8); // Vehicle Class
+    native.hideHudComponentThisFrame(9); // Street Name
+});
 
 function handleTick() {
     native.startAudioScene(`CHARACTER_CHANGE_IN_SKY_SCENE`);

@@ -1,16 +1,15 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { KEY_BINDS } from '../../shared/enums/keybinds';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { PED_CONFIG_FLAG } from '../../shared/flags/pedFlags';
+import { PED_CONFIG_FLAG } from '../../shared/flags/pedflags';
 import { KeybindController } from '../events/keyup';
 import { isAnyMenuOpen } from '../utility/menus';
 
 import './push';
-
-let interval;
+import { PushVehicle } from './push';
 
 export class VehicleController {
     /**
@@ -20,32 +19,14 @@ export class VehicleController {
      */
     static registerKeybinds() {
         KeybindController.registerKeybind({
-            key: KEY_BINDS.VEHICLE_FUNCS,
-            singlePress: VehicleController.emitAction
-        });
-
-        KeybindController.registerKeybind({
             key: KEY_BINDS.VEHICLE_ENGINE,
-            singlePress: VehicleController.emitEngine
+            singlePress: VehicleController.emitEngine,
         });
 
         KeybindController.registerKeybind({
             key: KEY_BINDS.VEHICLE_LOCK,
-            singlePress: VehicleController.emitLock
+            singlePress: VehicleController.emitLock,
         });
-    }
-
-    /**
-     * Called when the player presses the proper key near or inside of a vehicle.
-     * @static
-     * @memberof VehicleController
-     */
-    static emitAction() {
-        if (isAnyMenuOpen()) {
-            return;
-        }
-
-        alt.emitServer(VEHICLE_EVENTS.ACTION);
     }
 
     /**
@@ -122,8 +103,58 @@ export class VehicleController {
 
         native.setPedIntoVehicle(alt.Player.local.scriptID, vehicle.scriptID, seat);
     }
+
+    /**
+     * Prevents a pedestrian from flying out of a vehicle window.
+     * @static
+     * @param {boolean} [value=true]
+     * @memberof VehicleController
+     */
+    static enableSeatBelt(value: boolean = true) {
+        const seatBeltStatus = value ? false : true;
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
+    }
+
+    static handleVehicleDisables() {
+        if (!alt.Player.local || !alt.Player.local.valid) {
+            return;
+        }
+
+        let isLocked = false;
+        if (alt.Player.local.vehicle) {
+            isLocked = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
+        }
+
+        // Prevent Window Breaking. It's annoying.
+        const vehicle = native.getVehiclePedIsTryingToEnter(alt.Player.local.scriptID);
+        const enteringLockedVehicle = native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID);
+        const isWindowFixed = native.isVehicleWindowIntact(vehicle, 0);
+
+        if (native.doesEntityExist(vehicle) && enteringLockedVehicle && isWindowFixed) {
+            native.clearPedTasksImmediately(alt.Player.local.scriptID);
+        }
+
+        const isDead = alt.Player.local.meta.isDead;
+        const isPushing = PushVehicle.isPushing();
+        if (!isDead && !isLocked && !isPushing) {
+            return;
+        }
+
+        native.disableControlAction(0, 23, true); // F - Enter
+        native.disableControlAction(0, 75, true); // F - Exit
+    }
+
+    static toggleEngine(status: boolean) {
+        if (!alt.Player.local.scriptID) {
+            return;
+        }
+
+        native.setVehicleEngineOn(alt.Player.local.vehicle, status, false, false);
+    }
 }
 
-alt.on(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
+alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
 alt.on('enteredVehicle', VehicleController.enterVehicle);

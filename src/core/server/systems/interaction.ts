@@ -20,11 +20,12 @@ export class InteractionController {
      * @static
      * @param {Interaction} interaction
      * @memberof InteractionController
-     * @returns {string} uid
+     * @returns {InteractionShape} uid
      */
     static add(interaction: Interaction): InteractionShape {
-        const uid = sha256Random(JSON.stringify(interaction));
-        interaction.identifier = uid;
+        if (!interaction.identifier) {
+            interaction.identifier = sha256Random(JSON.stringify(interaction));
+        }
 
         if (!interactions[interaction.type]) {
             interactions[interaction.type] = [];
@@ -51,6 +52,7 @@ export class InteractionController {
      * @static
      * @param {string} type
      * @param {string} uid
+     * @returns {boolean}
      * @memberof InteractionController
      */
     static remove(type: string, uid: string): boolean {
@@ -78,7 +80,6 @@ export class InteractionController {
      * @static
      * @param {InteractionShape} colshape
      * @param {alt.Entity} player
-     * @return {*}
      * @memberof InteractionController
      */
     static enter(colshape: InteractionShape, entity: alt.Entity) {
@@ -94,7 +95,13 @@ export class InteractionController {
         // Don't pass the interaction. Just the description from it.
         entity.currentInteraction = colshape;
         const interaction = entity.currentInteraction.getInteraction();
-        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, interaction.position, interaction.description);
+        alt.emitClient(
+            entity,
+            SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
+            interaction.position,
+            interaction.description,
+            interaction.disableMarker,
+        );
     }
 
     /**

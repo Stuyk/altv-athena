@@ -15,5 +15,5 @@ function update(vehicle: alt.Vehicle): void {
 }
 
 export default {
-    update
+    update,
 };

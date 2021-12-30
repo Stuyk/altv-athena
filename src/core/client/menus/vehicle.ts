@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
-import { getClosestVectorByPos } from '../../shared/utility/vector';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
+import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -19,27 +19,34 @@ function openMenu() {
         return;
     }
 
+    const dist = distance(alt.Player.local.pos, vehicle.pos);
+    if (dist >= 4) {
+        return;
+    }
+
     const options: Array<IWheelItem> = [];
 
     if (!alt.Player.local.vehicle) {
+        const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
+
         // Not Pushing & Vehicle is Currently Unlocked
-        if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2) {
+        if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2 && !isDestroyed) {
             options.push({
                 name: 'Push',
                 callback: PushVehicle.start,
-                data: [vehicle]
+                data: [vehicle],
             });
 
             options.push({
                 name: 'Open Storage',
                 callback: () => {
                     alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
-                }
+                },
             });
         } else {
             options.push({
                 name: 'Stop Push',
-                callback: PushVehicle.serverStop
+                callback: PushVehicle.serverStop,
             });
         }
     }
@@ -50,7 +57,7 @@ function openMenu() {
 function init() {
     KeybindController.registerKeybind({
         key: KEY_BINDS.VEHICLE_OPTIONS,
-        singlePress: openMenu
+        singlePress: openMenu,
     });
 }
 

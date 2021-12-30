@@ -39,7 +39,6 @@ export default {
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK]: `_%_ - Toggle the vehicle lock`,
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR]: `_%_ - [0-5] - Toggle a vehicle door`,
     [LOCALE_KEYS.COMMAND_TOGGLE_ENGINE]: `_%_ - Toggle the vehicle engine`,
-    [LOCALE_KEYS.COMMAND_UPDATE_WEATHER]: `_%_ - Forces synchronization of weather`,
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
     [LOCALE_KEYS.COMMAND_WANTED]: `_%_ [player_id] [stars] - Set player wanted level`,
     [LOCALE_KEYS.COMMAND_WHISPER]: `_%_ [player_id][message] - Privately whisper to a nearby player`,
@@ -50,6 +49,10 @@ export default {
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER]: `Command is not permitted for your character.`,
     [LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN]: `Command is not permitted for your account.`,
     [LOCALE_KEYS.COMMAND_NOT_VALID]: `_%_ is not a valid command.`,
+    [LOCALE_KEYS.COMMAND_SET_WEATHER]: `_%_ [weather name] - Override all region weathers`,
+    [LOCALE_KEYS.COMMAND_CLEAR_WEATHER]: `_%_ - Turn off weather override`,
+    [LOCALE_KEYS.COMMAND_SET_TIME]: `_%_ [hour] - Override time to this hour`,
+    [LOCALE_KEYS.COMMAND_CLEAR_TIME]: `_%_ - Clear override for time`,
     // Cannot
     [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
@@ -74,11 +77,16 @@ export default {
     [LOCALE_KEYS.FUEL_CANNOT_AFFORD]: `You cannot afford any fuel.`,
     [LOCALE_KEYS.FUEL_PAYMENT]: `You will pay $_%_ for _%_ units of fuel. Run this menu again to cancel fueling.`,
     [LOCALE_KEYS.FUEL_PAID]: `You paid $_%_ for _%_ units of fuel.`,
-    // Garage
-    [LOCALE_KEYS.GARAGE_BLIP_NAME]: `Garage`,
-    [LOCALE_KEYS.GARAGE_DESCRIPTION]: `Garage for _%_ Type`,
     // House
     [LOCALE_KEYS.INTERIOR_INTERACT]: `Interact with House`,
+    //Translations related to interiors
+    [LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_ENTRANCE]: `Too far from entrance.`,
+    [LOCALE_KEYS.INTERIOR_TOO_FAR_FROM_EXIT]: `Too far from exit.`,
+    [LOCALE_KEYS.INTERIOR_NOT_ENOUGH_CURRENCY]: `Not Enough Currency`,
+    [LOCALE_KEYS.INTERIOR_DOOR_LOCKED]: `Door is locked`,
+    [LOCALE_KEYS.INTERIOR_PURCHASED]: `Purchased property with id _%_ for $_%_.`,
+    [LOCALE_KEYS.INTERIOR_SOLD]: `Sold property with id _%_ for $_%_.`,
+    [LOCALE_KEYS.INTERIOR_NO_STORAGE]: `Interior does not have storage.`,
     // Invalid
     [LOCALE_KEYS.INVALID_VEHICLE_MODEL]: `Vehicle model is not vehicle.`,
     // Interaction
@@ -133,28 +141,37 @@ export default {
     [LOCALE_KEYS.VEHICLE_LOCKED]: `Locked`,
     [LOCALE_KEYS.VEHICLE_UNLOCKED]: `Unlocked`,
     [LOCALE_KEYS.VEHICLE_FUEL]: `Fuel`,
+    [LOCALE_KEYS.VEHICLE_NO_KEYS]: `You do not have keys for this vehicle.`,
+    [LOCALE_KEYS.VEHICLE_NO_STORAGE]: `This vehicle does not have storage.`,
+    [LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS]: `You do not have access to the trunk.`,
+    [LOCALE_KEYS.VEHICLE_NOT_UNLOCKED]: `Vehicle is not currently unlocked.`,
+    [LOCALE_KEYS.VEHICLE_NO_OPEN_SEAT]: `Could not find an open seat.`,
+    [LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE]: `Vehicle Refuel Not Completed`,
+    [LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE]: `You are no longer near this vehicle.`,
+    [LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP]: `Vehicle is not right side up.`,
+    [LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED]: `Vehicle is already being pushed.`,
+    [LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME]: `Vehicle - _%_ - Storage`,
+    // Faction
+    [LOCALE_KEYS.FACTION_PLAYER_IS_ALREADY_IN_FACTION]: `_%_ is already in a faction or does not exist.`,
+    [LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP]: `You are unable to change ownership of the faction.`,
+    [LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE]: `Storage Not Accessible`,
+    [LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS]: `You do not have access to this.`,
+    [LOCALE_KEYS.FACTION_ONLY_OWNER_IS_ALLOWED]: `Only the owner can append rank permission(s) or super admin flag to a rank.`,
+    [LOCALE_KEYS.FACTION_UNABLE_TO_DISBAND]: `You are unable to disband the faction.`,
+    [LOCALE_KEYS.FACTION_NAME_DOESNT_MATCH]: `Passed faction name does not match actual faction name.`,
+    [LOCALE_KEYS.FACTION_NOT_THE_OWNER]: `You are not the owner of this faction.`,
+    [LOCALE_KEYS.FACTION_COULD_NOT_FIND]: `Could not find your faction.`,
+    [LOCALE_KEYS.FACTION_DISABNDED]: `Faction disbanded.`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW]: `Could not withdraw $_%_.`,
+    [LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT]: `Could not deposit $_%_`,
+    [LOCALE_KEYS.FACTION_BANK_WITHDREW]: `Withdrew $_%_`,
+    [LOCALE_KEYS.FACTION_PLAYER_QUITTED]: `_%_ quit the faction.`,
+    [LOCALE_KEYS.FACTION_COULDNT_QUIT]: `Could not quit faction because you are the leader.`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // ============================
     // WebView Locales Start Here
     // ============================
-    [LOCALE_KEYS.WEBVIEW_ATM]: {
-        LABEL_ATM: 'ATM',
-        LABEL_CASH: 'Cash',
-        LABEL_BANK: 'Bank',
-        LABEL_DEPOSIT: 'Deposit',
-        LABEL_WITHDRAW: 'Withdraw',
-        LABEL_TRANSFER: 'Transfer',
-        LABEL_CASH_TO_DEPOSIT: 'Cash to Deposit',
-        LABEL_CASH_TO_WITHDRAW: 'Cash to Withdraw',
-        LABEL_BANK_TO_TRANSFER: 'Bank amount to transfer',
-        LABEL_USER_ID: `User ID to transfer to`,
-        FIELD_IS_REQUIRED: `Field is required`,
-        GREATER_THAN_ZERO: `Value must be greater than zero`,
-        LESS_THAN_CASH: `Value must be less than cash`,
-        LESS_THAN_BANK: `Value must be less than bank`,
-        USER_ID_POSITIVE: `User ID must be positive`
-    },
     [LOCALE_KEYS.WEBVIEW_CHARACTERS]: {
         LABEL_DELETE: 'Delete',
         LABEL_NEW: 'New',
@@ -167,11 +184,12 @@ export default {
         LABEL_GENDER: 'Gender',
         LABEL_HOURS: 'Hours',
         LABEL_CASH: 'Cash',
-        LABEL_BANK: 'Bank'
+        LABEL_BANK: 'Bank',
     },
     [LOCALE_KEYS.WEBVIEW_CREATOR]: {
         titles: ['Appearance', 'Facial Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
-        LABEL_NAME: 'Name',
+        LABEL_FIRST_NAME: 'First Name',
+        LABEL_LAST_NAME: 'Last Name',
         LABEL_BIRTHDAY: 'Birthday',
         LABEL_GENDER: 'Gender',
         LABEL_DAY: 'Day',
@@ -209,7 +227,7 @@ export default {
             LABEL_EYECOLOUR: 'Eye Colour',
             DESC_EYECOLOUR: 'Use this slider to pick an eye colour.',
             LABEL_FACE: 'Face',
-            LABEL_SKIN: 'Skin'
+            LABEL_SKIN: 'Skin',
         },
         hairComponent: {
             LABEL_HAIRSTYLE: 'Hairstyle',
@@ -298,7 +316,7 @@ export default {
                 'Center Parted Bob',
                 'Shaved Sides Flat Top',
                 'Shaved Sides Short Top',
-                'Elvis'
+                'Elvis',
             ],
             feminine: [
                 'Close Shave',
@@ -379,7 +397,7 @@ export default {
                 'Pixie Bob',
                 'Tight Pony Tail Bun',
                 'Pixie Cut',
-                'Elvis'
+                'Elvis',
             ],
             facial: [
                 'Stubble',
@@ -411,7 +429,7 @@ export default {
                 'The Hampstead',
                 'The Ambrose',
                 'Lincoln Curtain',
-                'Clean Shaven'
+                'Clean Shaven',
             ],
             eyebrows: [
                 'Balanced',
@@ -448,8 +466,8 @@ export default {
                 'Cutouts',
                 'Fade Away',
                 'Solo Tram',
-                'None'
-            ]
+                'None',
+            ],
         },
         structureComponent: [
             'Nose Width',
@@ -471,7 +489,7 @@ export default {
             'Chin Depth',
             'Chin Width',
             'Chin Indent',
-            'Neck Width'
+            'Neck Width',
         ],
         makeupComponent: {
             LABEL_STYLE: 'Style',
@@ -524,13 +542,13 @@ export default {
                         'Rocker',
                         'Goth',
                         'Punk',
-                        'Devastated'
-                    ]
+                        'Devastated',
+                    ],
                 },
                 5: {
                     name: 'Blush',
                     description: 'Makeup that goes on your cheeks.',
-                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties']
+                    labels: ['Full', 'Angled', 'Round', 'Horizontal', 'High', 'Sweetheart', 'Eighties'],
                 },
                 8: {
                     name: 'Lipstick',
@@ -545,10 +563,10 @@ export default {
                         'Lined Nude Matte',
                         'Liner Nude Gloss',
                         'Smudged',
-                        'Geisha'
-                    ]
-                }
-            }
+                        'Geisha',
+                    ],
+                },
+            },
         },
         overlaysComponent: {
             LABEL_STYLE: 'Style',
@@ -581,8 +599,8 @@ export default {
                         'Acne Scarring',
                         'Full Acne Scarring',
                         'Cold Sores',
-                        'Impetigo'
-                    ]
+                        'Impetigo',
+                    ],
                 },
                 3: {
                     name: 'Age',
@@ -602,8 +620,8 @@ export default {
                         'Vintage',
                         'Retired',
                         'Junkie',
-                        'Geriatric'
-                    ]
+                        'Geriatric',
+                    ],
                 },
                 6: {
                     name: 'Complexion',
@@ -620,8 +638,8 @@ export default {
                         'Blood Vessels',
                         'Damaged',
                         'Pale',
-                        'Ghostly'
-                    ]
+                        'Ghostly',
+                    ],
                 },
                 7: {
                     name: 'Sun Damage',
@@ -637,8 +655,8 @@ export default {
                         'Rugged',
                         'Creased',
                         'Cracked',
-                        'Gritty'
-                    ]
+                        'Gritty',
+                    ],
                 },
                 9: {
                     name: 'Freckles',
@@ -661,15 +679,28 @@ export default {
                         'Double Dip',
                         'One Sided',
                         'Pairs',
-                        'Growth'
-                    ]
+                        'Growth',
+                    ],
                 },
                 11: {
                     name: 'Body Blemish',
                     description: 'Do you have any body imperfections?',
-                    labels: null
-                }
-            }
+                    labels: [
+                        'unk0',
+                        'unk1',
+                        'unk2',
+                        'unk3',
+                        'unk4',
+                        'unk5',
+                        'unk6',
+                        'unk7',
+                        'unk8',
+                        'unk9',
+                        'unk10',
+                        'unk11',
+                    ],
+                },
+            },
         },
         faces: [
             'Benjamin',
@@ -717,7 +748,7 @@ export default {
             'Claude',
             'Niko',
             'John',
-            'Misty'
+            'Misty',
         ],
         color: {
             hair: [
@@ -780,7 +811,7 @@ export default {
                 'Black',
                 'Black',
                 'Black',
-                'Black'
+                'Black',
             ],
             overlays: [
                 'Red',
@@ -846,7 +877,7 @@ export default {
                 'Light Brown',
                 'Brown',
                 'Dark Brown',
-                'Darker Brown'
+                'Darker Brown',
             ],
             eyes: [
                 'Green',
@@ -880,13 +911,16 @@ export default {
                 'Infected',
                 'Alien',
                 'Undead',
-                'Zombie'
-            ]
-        }
+                'Zombie',
+            ],
+        },
     },
     [LOCALE_KEYS.WEBVIEW_JOB]: {
         LABEL_DECLINE: 'Decline',
-        LABEL_ACCEPT: 'Accept'
+        LABEL_ACCEPT: 'Accept',
+    },
+    [LOCALE_KEYS.WEBVIEW_STORAGE]: {
+        LABEL_SPLIT_TEXT: 'Move a stack of this quantity?',
     },
     [LOCALE_KEYS.WEBVIEW_INVENTORY]: {
         ITEM_SLOTS: [
@@ -900,28 +934,14 @@ export default {
             'Bag',
             'Armour',
             'Watches',
-            'Bracelets'
+            'Bracelets',
+            'Accessory',
         ],
         LABEL_SPLIT: 'split',
-        LABEL_CANCEL: 'cancel'
-    },
-    [LOCALE_KEYS.WEBVIEW_CLOTHING]: {
-        LABEL_HAT: 'Hat',
-        LABEL_SHIRT: 'Shirt',
-        LABEL_MASK: 'Mask',
-        LABEL_BOTTOMS: 'Bottoms',
-        LABEL_SHOES: 'Shoes',
-        LABEL_GLASSES: 'Glasses',
-        LABEL_EARRINGS: 'Earrings / Ear Pieces',
-        LABEL_BAG: 'Bags / Backpacks',
-        LABEL_ARMOUR: 'Armour',
-        LABEL_WATCH: 'Wrist Watch',
-        LABEL_BRACELET: 'Wrist Bracelet',
-        LABEL_TOP: 'Shirt Top',
-        LABEL_UNDERSHIRT: 'Undershirt',
-        LABEL_TORSO: 'Arms / Torso / Gloves',
-        LABEL_BUY: 'purchase',
-        LABEL_EXIT: 'exit'
+        LABEL_CANCEL: 'cancel',
+        LABEL_DROP_ITEM: 'Drop Item',
+        LABEL_WEIGHT: 'Weight',
+        LABEL_SPLIT_TEXT: 'Make a stack of this quantity?',
     },
     [LOCALE_KEYS.WEBVIEW_LOGIN]: {
         LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
@@ -930,15 +950,6 @@ export default {
         LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
         window again.`,
         LABEL_FINISH_LOGIN: `Finish Login`,
-        LABEL_OPEN_WINDOW: `Open Login Window Again`
+        LABEL_OPEN_WINDOW: `Open Login Window Again`,
     },
-    [LOCALE_KEYS.WEBVIEW_GARAGE]: {
-        LABEL_GARAGE: 'Garage',
-        LABEL_DESC: 'Spawn your vehicles through this terminal.',
-        LABEL_MODEL: 'Model',
-        LABEL_FUEL: 'Fuel',
-        LABEL_CONTROLS: 'Controls',
-        LABEL_SPAWN: 'spawn',
-        LABEL_DESPAWN: 'despawn'
-    }
 };

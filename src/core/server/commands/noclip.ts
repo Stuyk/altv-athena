@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { playerFuncs } from '../extensions/Player';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -14,7 +14,7 @@ ChatController.addCommand(
     'noclip',
     LocaleController.get(LOCALE_KEYS.COMMAND_NO_CLIP, '/noclip'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player): void {
@@ -35,6 +35,7 @@ function handleCommand(player: alt.Player): void {
     player.setSyncedMeta('NoClipping', false);
     playerFuncs.emit.message(player, `No Clip: ${LocaleController.get(LOCALE_KEYS.LABEL_OFF)}`);
     player.visible = true;
+    player.health = 199;
 }
 
 function handleReset(player: alt.Player) {

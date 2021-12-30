@@ -17,7 +17,7 @@ let deathTime: number;
  * @param {*} oldValue
  * @return {*}  {void}
  */
-function handleSingleMetaChange(key: string, newValue: any, oldValue: any): void {
+function handleSingleMetaChange(key: string, newValue: any): void {
     if (key !== 'isDead') {
         return;
     }
@@ -55,7 +55,7 @@ function handleDeathMovement() {
             `${(timeLeft / 1000).toFixed(2)}s Until Respawn`,
             { x: 0.5, y: 0.2 },
             0.5,
-            new alt.RGBA(255, 255, 255, 255)
+            new alt.RGBA(255, 255, 255, 255),
         );
     } else {
         drawText2D(`/acceptdeath - To Trigger Respawn`, { x: 0.5, y: 0.2 }, 0.5, new alt.RGBA(255, 255, 255, 255), 0);

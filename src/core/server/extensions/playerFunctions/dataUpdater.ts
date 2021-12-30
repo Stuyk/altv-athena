@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Character, CharacterDefaults } from '../../../shared/interfaces/Character';
+import { Character, CharacterDefaults } from '../../../shared/interfaces/character';
 
 /**
  * Used to initialize player.data with all data from a Character object.
@@ -35,5 +35,5 @@ function updateByKeys(p: alt.Player, dataObject: { [key: string]: any }, targetD
 
 export default {
     init,
-    updateByKeys
+    updateByKeys,
 };

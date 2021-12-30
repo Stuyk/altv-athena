@@ -1,8 +1,10 @@
 import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../shared/enums/currency';
 
-import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/FactionPermissionFlags';
-import { IResponse } from '../../shared/interfaces/IResponse';
+import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/factionPermissionFlags';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
 import { FactionInternalSystem } from './factionsInternal';
 
@@ -41,7 +43,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_MEMBERS
+            FACTION_PERMISSION_FLAGS.ADD_MEMBERS,
         );
 
         if (!result.status) {
@@ -72,7 +74,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.KICK_MEMBER
+            FACTION_PERMISSION_FLAGS.KICK_MEMBER,
         );
 
         if (!result.status) {
@@ -103,7 +105,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         if (!result.status) {
@@ -133,7 +135,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CREATE_RANK
+            FACTION_PERMISSION_FLAGS.CREATE_RANK,
         );
 
         if (!result.status) {
@@ -162,7 +164,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_NAMES,
         );
 
         if (!result.status) {
@@ -188,7 +190,7 @@ export class FactionSystem {
     static async setRankPermissions(
         player: alt.Player,
         rankIndex: number,
-        flags: FACTION_PERMISSION_FLAGS
+        flags: FACTION_PERMISSION_FLAGS,
     ): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
@@ -199,7 +201,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
         );
 
         const faction = FactionInternalSystem.get(player.data.faction);
@@ -207,11 +209,11 @@ export class FactionSystem {
         const wasAlreadySet =
             FactionInternalSystem.checkPermission(
                 faction.ranks[rankIndex].permissions,
-                FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS
+                FACTION_PERMISSION_FLAGS.CHANGE_RANK_PERMS,
             ) ||
             FactionInternalSystem.checkPermission(
                 faction.ranks[rankIndex].permissions,
-                FACTION_PERMISSION_FLAGS.SUPER_ADMIN
+                FACTION_PERMISSION_FLAGS.SUPER_ADMIN,
             );
 
         const isSettingPerms =
@@ -221,7 +223,7 @@ export class FactionSystem {
         if (!wasAlreadySet && isSettingPerms && faction.players[0].id !== player.data._id.toString()) {
             return {
                 status: false,
-                response: 'Only the owner can append rank permission(s) or super admin flag to a rank.'
+                response: 'Only the owner can append rank permission(s) or super admin flag to a rank.',
             };
         }
 
@@ -253,7 +255,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER
+            FACTION_PERMISSION_FLAGS.CHANGE_RANK_ORDER,
         );
 
         if (!result.status) {
@@ -284,7 +286,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK
+            FACTION_PERMISSION_FLAGS.CHANGE_MEMBER_RANK,
         );
 
         if (!result.status) {
@@ -314,7 +316,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_NAME
+            FACTION_PERMISSION_FLAGS.CHANGE_NAME,
         );
 
         if (!result.status) {
@@ -343,7 +345,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.CHANGE_NAME
+            FACTION_PERMISSION_FLAGS.CHANGE_NAME,
         );
 
         if (!result.status) {
@@ -365,7 +367,7 @@ export class FactionSystem {
     static async openStorage(player: alt.Player, storageName: FACTION_STORAGE): Promise<IResponse> {
         const validateResponse = FactionInternalSystem.validatePlayer(player);
         if (!validateResponse.status) {
-            playerFuncs.emit.notification(player, `You do not have access to this.`);
+            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
             return validateResponse;
         }
 
@@ -374,12 +376,15 @@ export class FactionSystem {
                 const result = FactionInternalSystem.hasPermission(
                     player.data.faction,
                     player.data._id.toString(),
-                    FACTION_PERMISSION_FLAGS.ACCESS_STORAGE
+                    FACTION_PERMISSION_FLAGS.ACCESS_STORAGE,
                 );
 
                 if (!result) {
-                    playerFuncs.emit.notification(player, `You do not have access to this.`);
-                    return { status: false, response: 'Storage Not Accessible' };
+                    playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
+                    return {
+                        status: false,
+                        response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE),
+                    };
                 }
 
                 break;
@@ -388,19 +393,22 @@ export class FactionSystem {
                 const result = FactionInternalSystem.hasPermission(
                     player.data.faction,
                     player.data._id.toString(),
-                    FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS
+                    FACTION_PERMISSION_FLAGS.ACCESS_WEAPONS,
                 );
 
                 if (!result) {
-                    playerFuncs.emit.notification(player, `You do not have access to this.`);
-                    return { status: false, response: 'Storage Not Accessible' };
+                    playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
+                    return {
+                        status: false,
+                        response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE),
+                    };
                 }
 
                 break;
             }
             default: {
-                playerFuncs.emit.notification(player, `You do not have access to this.`);
-                return { status: false, response: 'Storage name does not exist.' };
+                playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NO_ACCESS));
+                return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_STORAGE_NOT_ACCESSIBLE) };
             }
         }
 
@@ -427,7 +435,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
         );
 
         if (!result.status) {
@@ -435,11 +443,17 @@ export class FactionSystem {
         }
 
         if (player.data.cash + player.data.bank < amount) {
-            return { status: false, response: `Could not deposit ${amount}.` };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount),
+            };
         }
 
         if (!playerFuncs.currency.subAllCurrencies(player, amount)) {
-            return { status: false, response: `Could not deposit ${amount}.` };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_DEPOSIT, amount),
+            };
         }
 
         const response = await FactionInternalSystem.depositToBank(player.data.faction, amount);
@@ -465,7 +479,7 @@ export class FactionSystem {
         const result = FactionInternalSystem.hasPermission(
             player.data.faction,
             player.data._id.toString(),
-            FACTION_PERMISSION_FLAGS.ADD_TO_BANK
+            FACTION_PERMISSION_FLAGS.ADD_TO_BANK,
         );
 
         if (!result.status) {
@@ -474,14 +488,20 @@ export class FactionSystem {
 
         const withdrawResult = await FactionInternalSystem.withdrawFromBank(player.data.faction, amount);
         if (!withdrawResult.status) {
-            return { status: false, response: `Could not withdraw $${amount}.` };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount),
+            };
         }
 
         if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
-            return { status: false, response: `Could not withdraw $${amount}.` };
+            return {
+                status: false,
+                response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_COULD_NOT_WITHDRAW, amount),
+            };
         }
 
-        const response = { status: true, response: `Withdrew $${amount}.` };
+        const response = { status: true, response: LocaleController.get(LOCALE_KEYS.FACTION_BANK_WITHDREW, amount) };
         FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
         return response;
     }
@@ -502,19 +522,19 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
         if (!faction) {
-            return { status: false, response: `Could not find your faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
         }
 
         if (faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: `You are unable to disband the faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_UNABLE_TO_DISBAND) };
         }
 
         if (faction.name !== factionName) {
-            return { status: false, response: `Passed faction name does not match actual faction name.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_NAME_DOESNT_MATCH) };
         }
 
         await FactionInternalSystem.disband(player.data.faction);
-        return { status: true, response: `Faction Disbanded` };
+        return { status: true, response: LocaleController.get(LOCALE_KEYS.FACTION_DISABNDED) };
     }
 
     /**
@@ -534,11 +554,11 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
         if (!faction) {
-            return { status: false, response: `Could not find your faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
         }
 
         if (faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: `You are unable to change ownership of the faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP) };
         }
 
         const response = await FactionInternalSystem.handOffFaction(player.data.faction, characterID, false);
@@ -554,11 +574,11 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
         if (!faction) {
-            return { status: false, response: `Could not find your faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
         }
 
         if (faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: `You are not the owner of this faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_NOT_THE_OWNER) };
         }
 
         const response = await FactionInternalSystem.setStorageLocation(player.data.faction, player.pos);
@@ -574,11 +594,11 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
         if (!faction) {
-            return { status: false, response: `Could not find your faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
         }
 
         if (faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: `You are not the owner of this faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_NOT_THE_OWNER) };
         }
 
         const response = await FactionInternalSystem.setWeaponsLocation(player.data.faction, player.pos);
@@ -594,14 +614,45 @@ export class FactionSystem {
 
         const faction = FactionInternalSystem.get(player.data.faction);
         if (!faction) {
-            return { status: false, response: `Could not find your faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
         }
 
         if (faction.players[0].id !== player.data._id.toString()) {
-            return { status: false, response: `You are not the owner of this faction.` };
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_NOT_THE_OWNER) };
         }
 
         const response = await FactionInternalSystem.setPosition(player.data.faction, player.pos);
+        FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
+        return response;
+    }
+
+    /**
+     * Used to leave the faction.
+     * @static
+     * @param {alt.Player} player
+     * @memberof FactionSystem
+     */
+    static async leave(player: alt.Player): Promise<IResponse> {
+        const validateResponse = FactionInternalSystem.validatePlayer(player);
+        if (!validateResponse.status) {
+            return validateResponse;
+        }
+
+        const faction = FactionInternalSystem.get(player.data.faction);
+        if (!faction) {
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULD_NOT_FIND) };
+        }
+
+        if (faction.players[0].id === player.data._id.toString()) {
+            return { status: false, response: LocaleController.get(LOCALE_KEYS.FACTION_COULDNT_QUIT) };
+        }
+
+        const response = await FactionInternalSystem.removeMember(player.data.faction, player.data._id.toString());
+
+        if (response.status) {
+            response.response = LocaleController.get(LOCALE_KEYS.FACTION_PLAYER_QUITTED, player.data.name);
+        }
+
         FactionInternalSystem.log(player.data.faction, player.data._id.toString(), response.status, response.response);
         return response;
     }

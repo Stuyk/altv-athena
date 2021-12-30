@@ -1,21 +1,30 @@
 import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import JobEnums, { Objective } from '../../shared/interfaces/Job';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import JobEnums, { Objective } from '../../shared/interfaces/job';
+import { Vector3 } from '../../shared/interfaces/vector';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
+import { distance, distance2d } from '../../shared/utility/vector';
 import { playerFuncs } from '../extensions/Player';
+import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
 
-export type PlayerDataName = string;
-
 export class Job {
-    private name: PlayerDataName;
+    /**
+     * The ID of the player.
+     * @private
+     * @type {number}
+     * @memberof Job
+     */
+    private id: number;
     private player: alt.Player;
     private objectives: Array<Objective> = [];
+    private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
 
     /**
@@ -34,15 +43,17 @@ export class Job {
      */
     addPlayer(player: alt.Player) {
         this.player = player;
-        this.name = player.data.name as PlayerDataName;
+        this.id = this.player.id;
 
-        if (JobInstances[this.name]) {
-            JobInstances[this.name].quit(`Switched Job`);
+        if (JobInstances[this.player.id]) {
+            JobInstances[this.player.id].quit(`Switched Job`);
         }
 
-        JobInstances[this.name] = this;
+        JobInstances[this.player.id] = this;
         this.startTime = Date.now();
         this.syncObjective();
+
+        playerFuncs.emit.message(player, '/quitjob - To stop this job.');
     }
 
     /**
@@ -52,7 +63,83 @@ export class Job {
      * @memberof Job
      */
     addObjective(objectiveData: Objective) {
-        this.objectives.push(objectiveData);
+        const callbackOnStart = objectiveData.callbackOnStart;
+        const callbackOnFinish = objectiveData.callbackOnFinish;
+        const objectiveClone = deepCloneObject<Objective>(objectiveData);
+
+        objectiveClone.callbackOnStart = callbackOnStart;
+        objectiveClone.callbackOnFinish = callbackOnFinish;
+        this.objectives.push(objectiveClone);
+    }
+
+    /**
+     * Create a unique vehicle for this job.
+     * Objective eventually removes the job vehicle.
+     * This unique job vehicle is temporarily assinged to the player.
+     *
+     * Returns a vehicle with a 'uid'.
+     *
+     * @param {string} model
+     * @param {alt.RGBA} [color1]
+     * @param {alt.RGBA} [color2]
+     * @return {alt.Vehicle}
+     * @memberof Job
+     */
+    addVehicle(
+        player: alt.Player,
+        model: string,
+        pos: Vector3,
+        rot: Vector3,
+        color1?: alt.RGBA,
+        color2?: alt.RGBA,
+    ): alt.Vehicle {
+        const uid = sha256Random(JSON.stringify(player.data));
+        const veh = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+        veh.uid = uid;
+
+        if (!color1) {
+            color1 = new alt.RGBA(255, 255, 255, 255);
+        }
+
+        if (!color2) {
+            color2 = new alt.RGBA(255, 255, 255, 255);
+        }
+
+        veh.player_id = player.id;
+        veh.customPrimaryColor = color1;
+        veh.customSecondaryColor = color2;
+        veh.behavior = Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NO_SAVE;
+        this.vehicles.push(veh);
+        return veh;
+    }
+
+    /**
+     * Remove all vehicles from this job.
+     * @memberof Job
+     */
+    removeAllVehicles() {
+        for (let i = 0; i < this.vehicles.length; i++) {
+            try {
+                this.vehicles[i].destroy();
+            } catch (err) {}
+        }
+    }
+
+    /**
+     * Remove a vehicle by unique identifier assigned when adding a vehicle.
+     * @param {string} uid
+     * @return {*}
+     * @memberof Job
+     */
+    removeVehicle(uid: string) {
+        for (let i = this.vehicles.length - 1; i >= 0; i--) {
+            if (this.vehicles[i].uid !== uid) {
+                continue;
+            }
+
+            this.vehicles.splice(i, 1);
+            return;
+        }
     }
 
     /**
@@ -61,7 +148,20 @@ export class Job {
      * @memberof Job
      */
     loadObjectives(objectiveData: Array<Objective>) {
-        this.objectives = this.objectives.concat(objectiveData);
+        const uniqueObjectives = [];
+
+        for (let i = 0; i < objectiveData.length; i++) {
+            const callbackOnStart = objectiveData[i].callbackOnStart;
+            const callbackOnFinish = objectiveData[i].callbackOnFinish;
+            const objectiveClone = deepCloneObject<Objective>(objectiveData[i]);
+
+            objectiveClone.callbackOnStart = callbackOnStart;
+            objectiveClone.callbackOnFinish = callbackOnFinish;
+
+            uniqueObjectives.push(objectiveClone);
+        }
+
+        this.objectives = this.objectives.concat(uniqueObjectives);
     }
 
     /**
@@ -99,13 +199,23 @@ export class Job {
         return true;
     }
 
+    /**
+     * Call this to cleanup a job.
+     *
+     * @param {string} reason
+     * @memberof Job
+     */
     quit(reason: string) {
-        if (JobInstances[this.player.data.name]) {
-            delete JobInstances[this.player.data.name];
+        if (JobInstances[this.player.id]) {
+            delete JobInstances[this.player.id];
         }
 
-        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
-        playerFuncs.emit.message(this.player, reason);
+        if (this.player.valid) {
+            alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
+            playerFuncs.emit.message(this.player, reason);
+        }
+
+        this.removeAllVehicles();
     }
 
     /**
@@ -179,13 +289,80 @@ export class Job {
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_DYING)) {
             if (this.player && this.player.data.isDead) {
-                this.quit(`Died while on the job.`);
                 return false;
             }
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.IN_VEHICLE)) {
             if (this.player && !this.player.vehicle) {
+                return false;
+            }
+        }
+
+        // Check if the player is in a specific job vehicle or any job vehicle.
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE)) {
+            if (this.player && !this.player.vehicle) {
+                return false;
+            }
+
+            if (!this.player.vehicle.uid) {
+                return false;
+            }
+
+            let foundVehicle = false;
+            for (let i = 0; i < this.vehicles.length; i++) {
+                if (this.vehicles[i].uid === this.player.vehicle.uid) {
+                    foundVehicle = true;
+                    break;
+                }
+            }
+
+            if (!foundVehicle) {
+                return false;
+            }
+        }
+
+        // Called when a job vehicle is destroyed.
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.FAIL_ON_JOB_VEHICLE_DESTROY)) {
+            let allValid = true;
+            for (let i = 0; i < this.vehicles.length; i++) {
+                if (!this.vehicles[i].valid) {
+                    continue;
+                }
+
+                if (this.vehicles[i].engineHealth <= 50) {
+                    allValid = false;
+                    break;
+                }
+
+                if (this.vehicles[i].destroyed) {
+                    allValid = false;
+                    break;
+                }
+            }
+
+            if (!allValid) {
+                return false;
+            }
+        }
+
+        // Check if any vehicle is nearby.
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.JOB_VEHICLE_NEARBY)) {
+            let foundValid = false;
+            for (let i = 0; i < this.vehicles.length; i++) {
+                if (!this.vehicles[i].valid) {
+                    continue;
+                }
+
+                const dist = distance2d(this.vehicles[i].pos, objective.pos);
+                if (dist >= 50) {
+                    continue;
+                }
+
+                foundValid = true;
+            }
+
+            if (!foundValid) {
                 return false;
             }
         }
@@ -198,10 +375,14 @@ export class Job {
      * @private
      * @memberof JobBuilder
      */
-    private goToNextObjective() {
-        this.objectives.shift();
+    goToNextObjective() {
+        const returnedObjective = this.objectives.shift();
+        if (returnedObjective && returnedObjective.callbackOnFinish) {
+            returnedObjective.callbackOnFinish(this.player);
+        }
 
         if (this.objectives.length <= 0) {
+            this.removeAllVehicles();
             playerFuncs.emit.message(this.player, `Job Completed`);
             alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
             return;
@@ -248,7 +429,7 @@ export class Job {
                     objective.animation.dict,
                     objective.animation.name,
                     objective.animation.flags,
-                    objective.animation.duration
+                    objective.animation.duration,
                 );
             });
         }, delay);
@@ -262,6 +443,10 @@ export class Job {
     private syncObjective() {
         const objective = this.getCurrentObjective();
 
+        if (objective.callbackOnStart) {
+            objective.callbackOnStart(this.player);
+        }
+
         if (objective.animation && objective.animation.atObjectiveStart) {
             this.tryAnimation();
         }
@@ -270,7 +455,7 @@ export class Job {
             this.tryEventCall();
         }
 
-        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, objective);
+        alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, deepCloneObject(objective));
     }
 
     /**
@@ -284,7 +469,7 @@ export class Job {
 }
 
 function handleVerify(player: alt.Player) {
-    const instance = JobInstances[player.data.name];
+    const instance = JobInstances[player.id];
 
     if (!instance) {
         alt.log(`${player.data.name} has a dead job instance.`);
@@ -308,5 +493,15 @@ function handleJobAction(player: alt.Player, triggerName: string) {
  * @return {Job | null}  {(Job | null)}
  */
 export function getPlayerJob(player: alt.Player): Job | null {
-    return JobInstances[player.data.name];
+    return JobInstances[player.id];
 }
+
+alt.on('playerDisconnect', (player: alt.Player) => {
+    const id = player.id;
+
+    if (!JobInstances[player.id]) {
+        return;
+    }
+
+    JobInstances[player.id].quit('Disconnected');
+});

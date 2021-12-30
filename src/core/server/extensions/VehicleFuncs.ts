@@ -3,13 +3,23 @@ import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
-import { IVehicle } from '../../shared/interfaces/IVehicle';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
+import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { Collections } from '../interface/DatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
+import { VehicleData } from '../../shared/information/vehicles';
+import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
+import { RGBA } from 'alt-shared';
+import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
+import { Item } from '../../shared/interfaces/item';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
+import { playerFuncs } from './Player';
+import { VehicleEvents } from '../events/vehicleEvents';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -19,7 +29,39 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.UNLIMITED_FUEL |
     Vehicle_Behavior.NO_SAVE;
 
+const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
+
+interface VehicleKeyItem extends Item {
+    data: {
+        vehicle: string;
+        key: string;
+    };
+}
+
 export default class VehicleFuncs {
+    /**
+     * Lets you create an injection into the default save function.
+     *
+     * What that means is you can return specific data from a callback as an object.
+     *
+     * That object will then be appended to the data to save for the vehicle.
+     *
+     * Example:
+     * ```ts
+     * function saveEngineStatus(vehicle: alt.Vehicle) {
+     *     return { engineStatus: vehicle.engineOn };
+     * }
+     *
+     * VehicleFuncs.addSaveInjection(saveEngineStatus)
+     * ```
+     * @static
+     * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
+     * @memberof VehicleFuncs
+     */
+    static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
+        SaveInjections.push(callback);
+    }
+
     /**
      * Gets the next available ID in the database for the vehicle.
      * @static
@@ -107,6 +149,7 @@ export default class VehicleFuncs {
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
         vehicleData.fuel = 100;
+
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
 
@@ -142,7 +185,7 @@ export default class VehicleFuncs {
      * @param {alt.Vehicle} vehicle
      * @memberof VehicleFuncs
      */
-    static async updateFuel(vehicle: alt.Vehicle) {
+    static async updateFuel(vehicle: alt.Vehicle, timeBetweenUpdates: number = 5000) {
         // No data present on vehicle. Don't worry about it.
         if (!vehicle?.data?.behavior) {
             return;
@@ -158,6 +201,23 @@ export default class VehicleFuncs {
             vehicle.data.fuel = 100;
         }
 
+        // Emits the distance travelled from one point to another.
+        // Does not emit if distance is less than 5
+        if (!vehicle.lastPosition) {
+            vehicle.lastPosition = vehicle.pos;
+        }
+
+        const dist = distance2d(vehicle.pos, vehicle.lastPosition);
+        if (dist >= 5) {
+            // const potentialSpeed = (dist / timeBetweenUpdates) * 1000;
+            // const feetPerSecond = potentialSpeed * 1.4666666667;
+            // const distanceTraveled = (potentialSpeed / 3600) * timeBetweenUpdates;
+
+            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
+            vehicle.lastPosition = vehicle.pos;
+        }
+
+        // Do nothing with the fuel if the engine is off.
         if (!vehicle.engineOn) {
             vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
             return;
@@ -208,15 +268,17 @@ export default class VehicleFuncs {
             document.position.z,
             document.rotation.x,
             document.rotation.y,
-            document.rotation.z
+            document.rotation.z,
         );
 
+        vehicle.modelName = document.model;
         SpawnedVehicles[document.id] = vehicle;
 
         // Setup Default Values
         vehicle.passengers = [];
         vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
 
         // Setup Default Document Values
         if (document.fuel === null || document.fuel === undefined) {
@@ -227,9 +289,14 @@ export default class VehicleFuncs {
         vehicle.passengers = [];
         vehicle.behavior = vehicle.data.behavior;
 
-        if (vehicle.data.color) {
-            vehicle.customPrimaryColor = document.color;
-            vehicle.customSecondaryColor = document.color;
+        // Check if the vehicle is of the bike type
+        // Force it to use unlimited fuel.
+        const vehicleInfo = VehicleData.find((x) => x.name === vehicle.data.model);
+        if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
+            if (!isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
+                vehicle.data.behavior = vehicle.data.behavior | Vehicle_Behavior.UNLIMITED_FUEL;
+                vehicle.behavior = Vehicle_Behavior.UNLIMITED_FUEL;
+            }
         }
 
         if (vehicle.data.bodyHealth) {
@@ -243,6 +310,7 @@ export default class VehicleFuncs {
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+        VehicleFuncs.updateVehicleMods(vehicle);
 
         // Synchronization
         if (pos && rot) {
@@ -251,12 +319,22 @@ export default class VehicleFuncs {
             VehicleFuncs.save(vehicle, { garageIndex: null });
         }
 
-        VehicleFuncs.updateFuel(vehicle);
+        VehicleFuncs.updateFuel(vehicle, 5000);
 
         // Synchronize Ownership
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
-        alt.emit(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
         return vehicle;
+    }
+
+    static updateVehicleMods(vehicle: alt.Vehicle) {
+        if (vehicle.data.color && !vehicle.data.color2) {
+            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
+            vehicle.customSecondaryColor = vehicle.data.color as RGBA;
+        } else if (vehicle.data.color && vehicle.data.color2) {
+            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
+            vehicle.customSecondaryColor = vehicle.data.color2 as RGBA;
+        }
     }
 
     /**
@@ -286,7 +364,7 @@ export default class VehicleFuncs {
             passenger.player.lastEnteredVehicleID = null;
         }
 
-        alt.emit(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
         SpawnedVehicles[id].destroy();
         delete SpawnedVehicles[id];
         return true;
@@ -302,14 +380,27 @@ export default class VehicleFuncs {
      * @return {alt.Vehicle}
      * @memberof VehicleFuncs
      */
-    static tempVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: alt.IVector3): alt.Vehicle {
+    static tempVehicle(
+        player: alt.Player,
+        model: string,
+        pos: alt.IVector3,
+        rot: alt.IVector3,
+        doNotDelete: boolean = false,
+    ): alt.Vehicle {
         const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         vehicle.player_id = player.id;
         vehicle.behavior = TEMPORARY_VEHICLE;
         vehicle.numberPlateText = 'TEMP';
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
         vehicle.isTemporary = true;
+        vehicle.modelName = model;
+
+        if (doNotDelete) {
+            vehicle.overrideTemporaryDeletion = true;
+        }
+
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
         return vehicle;
     }
 
@@ -320,6 +411,10 @@ export default class VehicleFuncs {
      * @return {Promise<boolean>}
      */
     static async save(vehicle: alt.Vehicle, dataObject: Partial<IVehicle>): Promise<boolean> {
+        if (!vehicle.valid) {
+            return false;
+        }
+
         if (!vehicle.data) {
             return false;
         }
@@ -329,7 +424,17 @@ export default class VehicleFuncs {
             return false;
         }
 
-        return await Database.updatePartialData(vehicle.data._id.toString(), { ...dataObject }, Collections.Vehicles);
+        let injections = { ...dataObject };
+        for (let i = 0; i < SaveInjections.length; i++) {
+            try {
+                injections = { ...injections, ...SaveInjections[i](vehicle) };
+            } catch (err) {
+                console.warn(`Got Save Injection Error for Vehicle: ${err}`);
+                continue;
+            }
+        }
+
+        return await Database.updatePartialData(vehicle.data._id.toString(), { ...injections }, Collections.Vehicles);
     }
 
     /**
@@ -340,36 +445,69 @@ export default class VehicleFuncs {
      */
     static repair(vehicle: alt.Vehicle) {
         vehicle.repair();
-        alt.emit(ATHENA_EVENTS_VEHICLE.REPAIRED, vehicle);
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.REPAIRED, vehicle);
         VehicleFuncs.update(vehicle);
     }
 
     /**
-     * Check if a player has keys or ownership of this vehicle
+     * Check if a player has keys or ownership of this vehicle.
+     * If the vehicle has no 'data' it automatically return true.
      * @static
      * @param {alt.Player} player
      * @param {alt.Vehicle} vehicle
      * @param {boolean} skipKeys Should we check for keys (other players)?
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof VehicleFuncs
      */
-    static hasOwnership(player: alt.Player, vehicle: alt.Vehicle, skipKeys = false): boolean {
+    static hasOwnership(player: alt.Player, vehicle: alt.Vehicle): boolean {
         const isNotLockable = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_LOCK);
         const needsNoKeys = isFlagEnabled(vehicle.behavior, Vehicle_Behavior.NO_KEY_TO_START);
+
+        if (vehicle.player_id === player.id) {
+            return true;
+        }
 
         if (isNotLockable && needsNoKeys) {
             return true;
         }
 
-        // Used to skip keys for a vehicle.
-        // Used for checking ownership while ignoring keys.
-        if (!skipKeys) {
-            if (vehicle.keys && vehicle.keys.includes(player.data._id.toString())) {
-                return true;
-            }
+        if (!vehicle.data) {
+            return true;
         }
 
+        // Check Faction Ownership
+        if (vehicle.data.ownerType === VEHICLE_OWNERSHIP.FACTION && vehicle.data.owner === player.data.faction) {
+            return true;
+        }
+
+        // Check Actual Ownership
         if (vehicle.data.owner === player.data._id.toString()) {
+            return true;
+        }
+
+        // Check for Physical Key
+        for (let i = 0; i < player.data.inventory.length; i++) {
+            const item = player.data.inventory[i];
+            if (!item) {
+                continue;
+            }
+
+            if (!item.data) {
+                continue;
+            }
+
+            if (!item.data.vehicle && !item.data.key) {
+                continue;
+            }
+
+            if (item.data.vehicle.toString() !== vehicle.data._id.toString()) {
+                continue;
+            }
+
+            if (item.data.key !== vehicle.data.key) {
+                continue;
+            }
+
             return true;
         }
 
@@ -441,7 +579,7 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
-            lastUsed: Date.now() // ms
+            lastUsed: Date.now(), // ms
         });
     }
 
@@ -466,5 +604,145 @@ export default class VehicleFuncs {
                 continue;
             }
         }
+    }
+
+    /**
+     * Returns stored information about the vehicle.
+     * However, does not work with new alt.Vehicle vehicle(s).
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @return {VehicleInfo}
+     * @memberof VehicleFuncs
+     */
+    static getInfo(vehicle: alt.Vehicle): VehicleInfo {
+        if (!vehicle || !vehicle.valid) {
+            return null;
+        }
+
+        if (!vehicle.modelName) {
+            return null;
+        }
+
+        return VehicleData.find((info) => info.name === vehicle.modelName);
+    }
+
+    /**
+     * Create a physical key for the vehicle and gives it to the specified player.
+     *
+     * Allows players to spawn this vehicle regardless of ownership.
+     * Physical key can be wiped by having vehicle owner wipe keys.
+     *
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @return {Item}
+     * @memberof VehicleFuncs
+     */
+    static async createKey(
+        player: alt.Player,
+        vehicle: alt.Vehicle,
+        doNotAdd: boolean = false,
+    ): Promise<VehicleKeyItem | null> {
+        if (!vehicle || !vehicle.valid) {
+            return null;
+        }
+
+        if (!vehicle.data) {
+            return null;
+        }
+
+        if (!vehicle.data.key) {
+            vehicle.data.key = sha256Random(JSON.stringify(vehicle.data));
+            await Database.updatePartialData(
+                vehicle.data._id.toString(),
+                { key: vehicle.data.key },
+                Collections.Vehicles,
+            );
+        }
+
+        const item: VehicleKeyItem = {
+            name: `Key for ${vehicle.data.model}`,
+            description: `A key for the vehicle model ${vehicle.data.model}`,
+            behavior: ITEM_TYPE.DESTROY_ON_DROP,
+            quantity: 1,
+            icon: 'key',
+            data: {
+                vehicle: vehicle.data._id.toString(),
+                key: vehicle.data.key,
+            },
+        };
+
+        if (!doNotAdd) {
+            const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
+            if (!inventory) {
+                playerFuncs.emit.notification(player, 'No room in inventory.');
+                return null;
+            }
+
+            if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
+                playerFuncs.emit.notification(player, 'No room in inventory.');
+                return null;
+            }
+
+            playerFuncs.save.field(player, 'inventory', player.data.inventory);
+            playerFuncs.sync.inventory(player);
+        }
+
+        return item;
+    }
+
+    /**
+     * Return a list of physical keys a player has.
+     * @static
+     * @param {alt.Player} player
+     * @return {Array<VehicleKeyItem>}
+     * @memberof VehicleFuncs
+     */
+    static getAllVehicleKeys(player: alt.Player): Array<VehicleKeyItem> {
+        if (!player || !player.valid) {
+            return [];
+        }
+
+        const keys = player.data.inventory.filter((item) => {
+            if (!item) {
+                return false;
+            }
+
+            if (!item.data) {
+                return false;
+            }
+
+            if (!item.data.vehicle) {
+                return false;
+            }
+
+            if (!item.data.key) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return keys as Array<VehicleKeyItem>;
+    }
+
+    /**
+     * Get a list of vehicles that can be spawned by vehicle key items.
+     * @static
+     * @param {Array<VehicleKeyItem>} keys
+     * @memberof VehicleFuncs
+     */
+    static async getValidVehicleIDsFromKeys(keys: Array<VehicleKeyItem>): Promise<Array<IVehicle>> {
+        const validVehicles: Array<IVehicle> = [];
+
+        for (let i = 0; i < keys.length; i++) {
+            const document = await Database.fetchData<IVehicle>('key', keys[i].data.key, Collections.Vehicles);
+            if (!document) {
+                continue;
+            }
+
+            validVehicles.push(document);
+        }
+
+        return validVehicles;
     }
 }

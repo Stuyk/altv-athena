@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Hologram } from '../../shared/interfaces/Hologram';
+import { Hologram } from '../../shared/interfaces/hologram';
 import { distance2d } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadModel } from '../utility/model';
@@ -122,12 +122,14 @@ export class HologramSystem {
                 hologram.heading,
                 false,
                 false,
-                false
+                false,
             );
 
             alt.nextTick(() => {
                 native.freezeEntityPosition(hologram.clientRef, true);
                 native.setEntityAlpha(hologram.clientRef, 150, false);
+                native.setEntityInvincible(hologram.clientRef, true);
+                native.setEntityCanBeDamaged(hologram.clientRef, false);
             });
         }
     }

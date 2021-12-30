@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { playerFuncs } from '../extensions/Player';
@@ -9,18 +9,28 @@ ChatController.addCommand(
     'wanted',
     LocaleController.get(LOCALE_KEYS.COMMAND_WANTED, '/wanted'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 function handleCommand(player: alt.Player, id: any = null, stars: any): void {
-    if (id === null) {
+    if (id === null || id === undefined) {
         id = player.id;
     }
 
     if (stars === null) {
         stars = 0;
-    } else {
+    }
+
+    if (typeof stars === 'string') {
         stars = parseInt(stars);
+    }
+
+    if (stars >= 6) {
+        stars = 5;
+    }
+
+    if (stars < 0) {
+        stars = 0;
     }
 
     const target: alt.Player = [...alt.Player.all].find((x) => x.id.toString() === id);
@@ -29,5 +39,5 @@ function handleCommand(player: alt.Player, id: any = null, stars: any): void {
     }
 
     playerFuncs.emit.message(player, `Wanted Level set to: ${stars}`);
-    playerFuncs.set.wantedLevel(player, stars);
+    playerFuncs.set.wantedLevel(target, stars);
 }

@@ -3,19 +3,22 @@ import Discord from 'discord.js';
 import { DEFAULT_CONFIG } from '../athena/main';
 import Logger from '../utility/athenaLogger';
 import { OptionsController } from './options';
+import ConfigUtil from '../utility/config';
+
+const config = ConfigUtil.get();
 
 export class DiscordController {
     static client: Discord.Client = new Discord.Client({
-        ws: { intents: new Discord.Intents(Discord.Intents.ALL) }
+        ws: { intents: new Discord.Intents(Discord.Intents.ALL) },
     });
 
-    static whitelistRole = process.env.WHITELIST_ROLE ? process.env.WHITELIST_ROLE : null;
+    static whitelistRole = config.WHITELIST_ROLE ? config.WHITELIST_ROLE : null;
     static guild: Discord.Guild;
 
     static populateEndpoints() {
         DiscordController.client.on('ready', DiscordController.ready);
         DiscordController.client.on('guildMemberUpdate', DiscordController.userUpdate);
-        DiscordController.client.login(process.env.DISCORD_BOT);
+        DiscordController.client.login(config.DISCORD_BOT);
     }
 
     static async ready() {
@@ -26,17 +29,17 @@ export class DiscordController {
             return;
         }
 
-        if (!process.env.DISCORD_SERVER_ID) {
+        if (!config.DISCORD_SERVER_ID) {
             Logger.warning(`DISCORD_SERVER_ID is not defined. You will not be able to use messaging services.`);
             return;
         }
 
-        DiscordController.guild = await DiscordController.client.guilds.fetch(process.env.DISCORD_SERVER_ID);
+        DiscordController.guild = await DiscordController.client.guilds.fetch(config.DISCORD_SERVER_ID);
     }
 
     static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
-        const oldUserHasRole = oldUser.roles.cache.has(process.env.WHITELIST_ROLE);
-        const newUserHasRole = newUser.roles.cache.has(process.env.WHITELIST_ROLE);
+        const oldUserHasRole = oldUser.roles.cache.has(config.WHITELIST_ROLE);
+        const newUserHasRole = newUser.roles.cache.has(config.WHITELIST_ROLE);
         const name = `${newUser.user.username}#${newUser.user.discriminator}`;
 
         // Removed from White List
@@ -86,7 +89,7 @@ export class DiscordController {
 }
 
 if (DEFAULT_CONFIG.USE_DISCORD_BOT) {
-    if (!process.env.DISCORD_BOT) {
+    if (!config.DISCORD_BOT) {
         Logger.error(`.env is missing DISCORD_BOT secret for logging in. Don't forget to add WHITELIST_ROLE as well.`);
     } else {
         DiscordController.populateEndpoints();

@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { View_Events_Creator } from '../../../shared/enums/views';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
@@ -8,6 +7,8 @@ import { DEFAULT_CONFIG } from '../../athena/main';
 import { playerFuncs } from '../Player';
 import save from './save';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { Item } from '../../../shared/interfaces/item';
+import { Appearance } from '../../../shared/interfaces/appearance';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -20,27 +21,10 @@ function currencyData(player: alt.Player): void {
         emit.meta(player, currencyName, player.data[currencyName]);
     }
 }
-/**
- * Synchronize player appearance.
- * @memberof SyncPrototype
- */
-function appearance(player: alt.Player): void {
-    if (player.data.appearance.sex === 0) {
-        player.model = 'mp_f_freemode_01';
-    } else {
-        player.model = 'mp_m_freemode_01';
-    }
-
-    emit.meta(player, 'appearance', player.data.appearance);
-    alt.emitClient(player, View_Events_Creator.Sync, player.data.appearance);
-}
 
 function inventory(player: alt.Player): void {
     if (!player.data.inventory) {
-        player.data.inventory = new Array(5);
-        for (let i = 0; i < player.data.inventory.length; i++) {
-            player.data.inventory[i] = [];
-        }
+        player.data.inventory = [];
     }
 
     if (!player.data.toolbar) {
@@ -54,6 +38,94 @@ function inventory(player: alt.Player): void {
     emit.meta(player, 'inventory', player.data.inventory);
     emit.meta(player, 'equipment', player.data.equipment);
     emit.meta(player, 'toolbar', player.data.toolbar);
+}
+
+function appearance(player: alt.Player, appearance: Partial<Appearance>) {
+    if (appearance.sex === 0) {
+        player.model = 'mp_f_freemode_01';
+    } else {
+        player.model = 'mp_m_freemode_01';
+    }
+
+    emit.meta(player, 'appearance', appearance);
+    alt.emitClient(player, SYSTEM_EVENTS.SYNC_APPEARANCE, appearance);
+}
+
+function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
+    const clothingComponents = new Array(11).fill(null);
+    const propComponents = [0, 1, 2, 6, 7];
+
+    for (let i = 0; i < propComponents.length; i++) {
+        player.clearProp(propComponents[i]);
+    }
+
+    if (!isMale) {
+        player.setClothes(1, 0, 0, 0); // mask
+        player.setClothes(3, 15, 0, 0); // arms
+        player.setClothes(4, 14, 0, 0); // pants
+        player.setClothes(5, 0, 0, 0); // bag
+        player.setClothes(6, 35, 0, 0); // shoes
+        player.setClothes(7, 0, 0, 0); // accessories
+        player.setClothes(8, 15, 0, 0); // undershirt
+        player.setClothes(9, 0, 0, 0); // body armour
+        player.setClothes(11, 15, 0, 0); // torso
+    } else {
+        player.setClothes(1, 0, 0, 0); // mask
+        player.setClothes(3, 15, 0, 0); // arms
+        player.setClothes(5, 0, 0, 0); // bag
+        player.setClothes(4, 14, 0, 0); // pants
+        player.setClothes(6, 34, 0, 0); // shoes
+        player.setClothes(7, 0, 0, 0); // accessories
+        player.setClothes(8, 15, 0, 0); // undershirt
+        player.setClothes(9, 0, 0, 0); // body armour
+        player.setClothes(11, 91, 0, 0); // torso
+    }
+
+    if (items && Array.isArray(items)) {
+        for (let i = 0; i < items.length; i++) {
+            clothingComponents[items[i].slot] = items[i].data;
+        }
+    }
+
+    for (let i = 0; i < clothingComponents.length; i++) {
+        const component = clothingComponents[i];
+        if (!component) {
+            continue;
+        }
+
+        for (let index = 0; index < component.drawables.length; index++) {
+            const texture = component.textures[index];
+            const value = component.drawables[index];
+            const id = component.ids[index];
+
+            if (component.isDlc) {
+                const dlc = component.dlcs[index];
+
+                if (dlc === undefined || dlc === null) {
+                    alt.logWarning(
+                        `DLC was undefined for clothing component with ID: ${id}, VALUE: ${value}, TEXTURE: ${texture}`,
+                    );
+                    alt.logWarning(`Make sure you add item.data.dlcs = [] to your dlc clothing item.`);
+                    continue;
+                }
+
+                if (component.isProp) {
+                    player.setDlcProp(dlc, id, value, texture);
+                    continue;
+                }
+
+                player.setDlcClothes(dlc, id, value, texture, 0);
+                continue;
+            }
+
+            if (component.isProp) {
+                player.setProp(id, value, texture);
+                continue;
+            }
+
+            player.setClothes(id, value, texture, 0);
+        }
+    }
 }
 
 /**
@@ -72,7 +144,7 @@ function syncedMeta(player: alt.Player): void {
  * @memberof SyncPrototype
  */
 function time(player: alt.Player): void {
-    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.hour, World.minute);
+    alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.getWorldHour(), World.getWorldMinute());
 }
 
 /**
@@ -82,6 +154,7 @@ function time(player: alt.Player): void {
 function weather(player: alt.Player): void {
     player.gridSpace = World.getGridSpace(player);
     player.currentWeather = World.getWeatherByGrid(player.gridSpace);
+
     emit.meta(player, 'gridSpace', player.gridSpace);
     alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, player.currentWeather);
 }
@@ -119,10 +192,11 @@ export default {
     appearance,
     currencyData,
     food,
+    equipment,
     inventory,
     playTime,
     syncedMeta,
     time,
     water,
-    weather
+    weather,
 };

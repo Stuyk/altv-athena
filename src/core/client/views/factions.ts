@@ -1,27 +1,30 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/keybinds';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { View_Events_Factions } from '../../shared/enums/views';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
 import ViewModel from '../models/ViewModel';
 import { isAnyMenuOpen } from '../utility/menus';
-import { BaseHUD } from './hud/hud';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IFactionClient } from '../../shared/interfaces/IFactionClient';
-import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/FactionPermissionFlags';
-import { IResponse } from '../../shared/interfaces/IResponse';
+import { IFactionClient } from '../../shared/interfaces/iFactionClient';
+import { FACTION_PERMISSION_FLAGS } from '../../shared/flags/factionPermissionFlags';
+import { IResponse } from '../../shared/interfaces/iResponse';
+import { WebViewController } from '../extensions/view2';
 
 const url = `http://assets/webview/client/factions/index.html`;
 let view: View;
 let faction: IFactionClient;
 
+/**
+ * Do Not Export Internal Only
+ */
 class FactionsView implements ViewModel {
     static init() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.FACTIONS,
             singlePress: () => {
                 alt.emitServer(View_Events_Factions.Open);
-            }
+            },
         });
     }
 
@@ -32,18 +35,20 @@ class FactionsView implements ViewModel {
             return;
         }
 
+        // Must always be called first if you want to hide HUD.
+        await WebViewController.setOverlaysVisible(false);
+
         view = await View.getInstance(url, true, false, true);
         view.on('factions:Ready', FactionsView.ready);
         view.on('factions:GetCurrency', FactionsView.getCurrency);
         view.on(View_Events_Factions.Close, FactionsView.close);
         view.on(View_Events_Factions.Bus, FactionsView.bus);
         alt.toggleGameControls(false);
-        BaseHUD.setHudVisibility(false);
     }
 
     static close() {
         alt.toggleGameControls(true);
-        BaseHUD.setHudVisibility(true);
+        WebViewController.setOverlaysVisible(true);
         alt.emitServer(View_Events_Factions.Close);
 
         if (!view) {

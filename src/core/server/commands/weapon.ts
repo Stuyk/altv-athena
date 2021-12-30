@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import ChatController from '../systems/chat';
-import { Item } from '../../shared/interfaces/Item';
-import { PERMISSIONS } from '../../shared/flags/PermissionFlags';
+import { Item } from '../../shared/interfaces/item';
+import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { playerFuncs } from '../extensions/Player';
 import { getWeaponByName } from '../../shared/information/weaponList';
@@ -14,14 +14,14 @@ ChatController.addCommand(
     'weapon',
     LocaleController.get(LOCALE_KEYS.COMMAND_WEAPON, '/weapon'),
     PERMISSIONS.ADMIN,
-    handleCommand
+    handleCommand,
 );
 
 ChatController.addCommand(
     'removeallweapons',
     LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_ALL_WEAPONS, '/removeallweapons'),
     PERMISSIONS.ADMIN,
-    handleRemoveWeapons
+    handleRemoveWeapons,
 );
 
 const itemRef: Item = {
@@ -33,14 +33,14 @@ const itemRef: Item = {
     quantity: 1,
     behavior: ITEM_TYPE.CAN_DROP | ITEM_TYPE.CAN_TRADE | ITEM_TYPE.IS_TOOLBAR | ITEM_TYPE.IS_WEAPON,
     data: {
-        hash: 0x13532244
-    }
+        hash: 0x13532244,
+    },
 };
 
 function handleCommand(player: alt.Player, weaponName: string): void {
     const inv = playerFuncs.inventory.getFreeInventorySlot(player);
 
-    if (inv === null || inv.tab === null || inv.slot === null) {
+    if (inv === null || inv.slot === null) {
         playerFuncs.emit.message(player, `No room in first inventory tab.`);
         return;
     }
@@ -66,7 +66,7 @@ function handleCommand(player: alt.Player, weaponName: string): void {
         });
     }
 
-    playerFuncs.inventory.inventoryAdd(player, newItem, inv.slot, inv.tab);
+    playerFuncs.inventory.inventoryAdd(player, newItem, inv.slot);
     playerFuncs.save.field(player, 'inventory', player.data.inventory);
     playerFuncs.sync.inventory(player);
     playerFuncs.emit.message(player, `Added weapon: ${weapon.name}`);

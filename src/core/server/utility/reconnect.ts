@@ -1,15 +1,9 @@
 import * as alt from 'alt-server';
-import fs from 'fs';
 import * as http from 'http';
+import ConfigUtil from './config';
 
-const RECONNECTION_ADDRESS = 'http://localhost:9229/reconnect'; // http://localhost:9229/reconnect/debug
-const VALID_RECONNECT_STRINGS = ['debug: true', 'debug:true'];
-const TIME_BETWEEN_CHECKS = 5000;
-const CFG = fs.readFileSync('server.cfg').toString();
-
-let isWaitingForReconnect = false;
-let attempts = 0;
-let interval;
+const RECONNECTION_ADDRESS = 'http://localhost:5599';
+let caughtErrorOnce = false;
 
 export class ReconnectHelper {
     /**
@@ -20,29 +14,14 @@ export class ReconnectHelper {
      * @memberof ReconnectHelper
      */
     static invoke() {
+        if (!ConfigUtil.get().USE_ALTV_RECONNECT) {
+            return;
+        }
+
         if (!ReconnectHelper.isWindows()) {
             return;
         }
 
-        for (let i = 0; i < VALID_RECONNECT_STRINGS.length; i++) {
-            const isValid = ReconnectHelper.isValidReconnectionString(CFG, VALID_RECONNECT_STRINGS[i]);
-            if (!isValid) {
-                continue;
-            }
-
-            isWaitingForReconnect = true;
-            break;
-        }
-
-        // Not Running Reconnection Mode
-        if (!isWaitingForReconnect) {
-            alt.log(`Not Running Reconnection Mode. Add: 'debug: true' to your server.cfg`);
-            return;
-        }
-
-        // Invoke the Reconnection Request
-        alt.once('playerConnect', ReconnectHelper.clearRequest);
-        interval = alt.setInterval(ReconnectHelper.sendRequest, TIME_BETWEEN_CHECKS);
         ReconnectHelper.sendRequest();
     }
 
@@ -50,30 +29,21 @@ export class ReconnectHelper {
         return process.platform.includes('win');
     }
 
-    private static isValidReconnectionString(cfg: string, testString: string): boolean {
-        return cfg.toLowerCase().includes(testString);
-    }
-
-    private static clearRequest() {
-        alt.clearInterval(interval);
-        isWaitingForReconnect = false;
-        alt.log(`[altv-reconnect] Finished Reconnection`);
-    }
-
     private static sendRequest() {
-        if (attempts >= 5) {
-            alt.clearInterval(interval);
-            isWaitingForReconnect = false;
-            return;
-        }
-
         const req = http.get(RECONNECTION_ADDRESS);
-        req.on('error', () => {
-            alt.log(`[altv-reconnect] Probably Not Running Reconnection Script`);
-            alt.clearInterval(interval);
-            isWaitingForReconnect = false;
+        req.on('response', () => {
+            alt.log(`~g~[altv-reconnect] Invoked Reconnection Successfully`);
         });
 
-        attempts += 1;
+        req.on('error', () => {
+            if (caughtErrorOnce) {
+                return;
+            }
+
+            caughtErrorOnce = true;
+            alt.log(`~r~[altv-reconnect] ~y~Not Currently Running`);
+            alt.log(`~r~[altv-reconnect] ~y~Download Binaries from https://github.com/Stuyk/altv-reconnect`);
+            alt.log(`~r~[altv-reconnect] ~y~Turn off 'USE_ALTV_RECONNECT' if in production mode`);
+        });
     }
 }

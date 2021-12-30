@@ -1,18 +1,24 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-
+import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import IHud from '../interface/IHud';
-import { getPointsInCircle } from '../utility/math';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
 import { drawTexture2D } from '../utility/texture';
 import { Timer } from '../utility/timers';
 import { World } from './world';
+
+/**
+ * DEPRECATED IN 3.0.0
+ * FILE LEFT HERE FOR INFORMATION PURPOSES
+ *
+ * NEW HUD IS IN VIEWS/HUD.TS
+ */
 
 let interval;
 let objective: string;
@@ -22,83 +28,101 @@ let hudElements: Array<IHud> = [
         identifier: 'hud-cash',
         position: {
             x: 0.98,
-            y: 0.02
+            y: 0.02,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'cash', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
+        callback: (self: IHud, pos: { x: number; y: number }) => {
             const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
             const fixedValue = parseFloat(value.toFixed(0));
-            return `~g~$${fixedValue.toLocaleString()}`;
-        }
+
+            if (self.callbackReroute) {
+                self.callbackReroute(fixedValue);
+                return null;
+            }
+
+            return `~g~$${fixedValue.toLocaleString()} ~w~CASH`;
+        },
     },
     {
         identifier: 'hud-bank',
         position: {
             x: 0.98,
-            y: 0.07
+            y: 0.07,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'bank', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
+        callback: (self: IHud, pos: { x: number; y: number }) => {
             const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
             const fixedValue = parseFloat(value.toFixed(0));
-            return `~g~$${fixedValue.toLocaleString()}`;
-        }
+
+            if (self.callbackReroute) {
+                self.callbackReroute(fixedValue);
+                return null;
+            }
+
+            return ` ~g~$${fixedValue.toLocaleString()} ~w~BANK`;
+        },
     },
     {
         identifier: 'hud-food',
         position: {
             x: 0.98,
-            y: 0.12
+            y: 0.12,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'food', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
+        callback: (self: IHud, pos: { x: number; y: number }) => {
             const food = alt.Player.local.meta.food;
-            return food !== undefined && food !== null ? `${food.toFixed(0)}` : `100`;
-        }
+
+            if (self.callbackReroute) {
+                const actualFood = food !== undefined && food !== null ? food.toFixed(0) : 100;
+                self.callbackReroute(actualFood);
+                return null;
+            }
+
+            return food !== undefined && food !== null ? `${food.toFixed(0)} FOOD` : `100 FOOD`;
+        },
     },
     {
         identifier: 'hud-water',
         position: {
             x: 0.98,
-            y: 0.17
+            y: 0.17,
         },
         padding: 0.04,
         align: 2,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: (pos: { x: number; y: number }) => {
-            drawTexture2D('athena_icons', 'water', { x: pos.x, y: pos.y + 0.015 }, 0.36, 255);
-
+        callback: (self: IHud, pos: { x: number; y: number }) => {
             const water = alt.Player.local.meta.water;
-            return water !== undefined && water !== null ? `${water.toFixed(0)}` : `100`;
-        }
+
+            if (self.callbackReroute) {
+                const actualWater = water !== undefined && water !== null ? water.toFixed(0) : 100;
+                self.callbackReroute(actualWater);
+                return null;
+            }
+
+            return water !== undefined && water !== null ? `${water.toFixed(0)} WATER` : `100 WATER`;
+        },
     },
     {
         identifier: 'hud-vehicle',
         position: {
             x: 0.5,
-            y: 0.95
+            y: 0.95,
         },
         padding: 0,
         align: 0,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
+        callback: (self: IHud) => {
             let text = '';
             const isMetric = native.getProfileSetting(227);
             const currentSpeed = native.getEntitySpeed(alt.Player.local.vehicle.scriptID);
@@ -116,75 +140,83 @@ let hudElements: Array<IHud> = [
             text += `~o~${LocaleController.get(LOCALE_KEYS.VEHICLE_FUEL)} ${fuel.toFixed(2)}% ~w~| `;
 
             // Door Locks
-            if (native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2) {
+            const isLocked = native.getVehicleDoorLockStatus(alt.Player.local.vehicle.scriptID) === 2;
+            if (isLocked) {
                 text += `~r~${LocaleController.get(LOCALE_KEYS.VEHICLE_LOCKED)}`;
             } else {
                 text += `~g~${LocaleController.get(LOCALE_KEYS.VEHICLE_UNLOCKED)}`;
             }
 
+            if (self.callbackReroute) {
+                self.callbackReroute(isMetric, speedCalc, fuel, isLocked);
+                return null;
+            }
+
             return text;
         },
-        isVehicle: true
+        isVehicle: true,
     },
     {
         identifier: 'hud-time',
         position: {
             x: 0.5,
-            y: 0.02
+            y: 0.02,
         },
         padding: 0,
         align: 0,
         scale: 0.5,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
+        callback: (self: IHud) => {
+            if (self.callbackReroute) {
+                self.callbackReroute(World.getTimeAsString());
+                return null;
+            }
+
             return World.getTimeAsString();
-        }
+        },
     },
     {
         identifier: 'hud-objective',
         position: {
             x: 0.5,
-            y: 0.9
+            y: 0.9,
         },
         padding: 0,
         align: 0,
         scale: 0.6,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: () => {
+        callback: (self: IHud) => {
+            if (self.callbackReroute) {
+                self.callbackReroute(objective);
+                return null;
+            }
+
             return objective ? objective : '';
-        }
+        },
     },
     {
         identifier: 'hud-wanted',
         position: {
             x: 0.54,
-            y: 0.08
+            y: 0.08,
         },
         padding: 0,
         align: 0,
         scale: 0.75,
         color: new alt.RGBA(255, 255, 255, 225),
-        callback: (pos: { x: number; y: number }, scale: number) => {
+        callback: (self: IHud, pos: { x: number; y: number }, scale: number) => {
             const value = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL);
             const stars = value !== null ? value : 0;
 
-            for (let i = 0; i < 5; i++) {
-                const newPos = {
-                    x: pos.x - 0.02 * i,
-                    y: pos.y
-                };
-
-                if (i + 1 >= 6 - stars) {
-                    drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 255);
-                    continue;
-                }
-
-                drawTexture2D('mpleaderboard', 'leaderboard_star_icon', newPos, scale, 100);
+            if (self.callbackReroute) {
+                self.callbackReroute(stars);
+                return null;
             }
 
+            drawText2D(`Stars: ${stars}`, { x: pos.x, y: pos.y }, 0.4, new alt.RGBA(255, 255, 255, 100));
             return null;
-        }
-    }
+        },
+    },
 ];
 
 export class HudSystem {
@@ -229,7 +261,7 @@ export class HudSystem {
      * @param {string} identifier
      * @memberof HudSystem
      */
-    static remove(identifier: string): boolean {
+    static remove(identifier: HUD_IDENTIFIER | string): boolean {
         isUpdating = true;
 
         const index = hudElements.findIndex((x) => x.identifier === identifier);
@@ -241,6 +273,28 @@ export class HudSystem {
         hudElements.splice(index, 1);
         isUpdating = false;
         return true;
+    }
+
+    /**
+     * Used to Overwrite a Default HUD Element
+     * Great for re-routing to your own WebView
+     * @static
+     * @param {HUD_IDENTIFIER} identifier
+     * @param {(...args: any[]) => void} overwriteCallback
+     * @return {*}
+     * @memberof HudSystem
+     */
+    static overwriteCallback(identifier: HUD_IDENTIFIER, overwriteCallback: (...args: any[]) => void) {
+        isUpdating = true;
+
+        const index = hudElements.findIndex((x) => x.identifier === identifier);
+        if (index <= -1) {
+            isUpdating = false;
+            return;
+        }
+
+        hudElements[index].callbackReroute = overwriteCallback;
+        isUpdating = false;
     }
 
     /**
@@ -266,14 +320,22 @@ export class HudSystem {
                 continue;
             }
 
-            const value = hudElements[i].callback(element.position, element.scale);
+            const value = hudElements[i].callback(hudElements[i], element.position, element.scale);
             if (!value) {
                 continue;
             }
 
-            drawText2D(value, element.position, element.scale, element.color, element.align, element.padding);
+            drawText2D(
+                value.toString(),
+                element.position,
+                element.scale,
+                element.color,
+                element.align,
+                element.padding,
+            );
         }
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, HudSystem.init);
+// Turn on Old Hud Here
+// alt.onServer(SYSTEM_EVENTS.TICKS_START, HudSystem.init);

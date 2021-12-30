@@ -1,10 +1,7 @@
-import { IStreamConfig } from '../../../shared/interfaces/IStream';
+import { IStreamConfig } from '../../../shared/interfaces/iStream';
 
 const StreamConfiguration: IStreamConfig = {
     TimeBetweenUpdates: 1000, // 1s
-    LabelsDistance: 100,
-    MarkersDistance: 100,
-    ObjectsDistance: 100
 };
 
 export default StreamConfiguration;

@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { WORLD_WEATHER } from '../../shared/enums/weather';
 
 export class World {
     static hasPausedClock = false;
@@ -55,12 +56,16 @@ export class World {
             native.setWeatherTypeOvertimePersist(World.weather, 30);
             World.previousWeather = World.weather;
 
-            if (World.weather === 'XMAS') {
+            if (World.weather === WORLD_WEATHER.XMAS) {
                 native.setForceVehicleTrails(true);
                 native.setForcePedFootstepsTracks(true);
+                native.requestScriptAudioBank('ICE_FOOTSTEPS', false, 0);
+                native.requestScriptAudioBank('SNOW_FOOTSTEPS', false, 0);
                 return;
             }
 
+            native.releaseNamedScriptAudioBank('ICE_FOOTSTEPS');
+            native.releaseNamedScriptAudioBank('SNOW_FOOTSTEPS');
             native.setForceVehicleTrails(false);
             native.setForcePedFootstepsTracks(false);
         }

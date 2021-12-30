@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
+import { AudioView } from '../views/audio';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
@@ -51,9 +52,9 @@ function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
         volume = 1;
     }
 
-    alt.emit('hud:PlayAudio3D', soundName, pan, volume);
+    AudioView.play3DAudio(soundName, pan, volume);
 }
 
 function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
-    alt.emit('hud:PlayAudio3D', soundName, 0, volume);
+    AudioView.play3DAudio(soundName, 0, volume);
 }

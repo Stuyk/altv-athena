@@ -1,7 +1,7 @@
 import alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Particle } from '../../shared/interfaces/Particle';
+import { Particle } from '../../shared/interfaces/particle';
 import { sleep } from '../utility/sleep';
 import { Timer } from '../utility/timers';
 
@@ -31,7 +31,7 @@ function loadParticleDictionary(dictionary: string): Promise<boolean> {
                 native.requestNamedPtfxAsset(dictionary);
             },
             250,
-            'particle.ts'
+            'particle.ts',
         );
     });
 }
@@ -67,7 +67,7 @@ export async function handlePlayParticle(data: Particle): Promise<void> {
                 data.scale,
                 false,
                 false,
-                false
+                false,
             );
 
             if (Date.now() > endTime) {
@@ -77,6 +77,6 @@ export async function handlePlayParticle(data: Particle): Promise<void> {
             }
         },
         250,
-        'particle.ts'
+        'particle.ts',
     );
 }

@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
 
-import { Vehicle_Door_List } from '../../shared/enums/vehicle';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
-import { Task, TaskCallback } from '../../shared/interfaces/TaskTimeline';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
+import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
 import { playerFuncs } from '../extensions/Player';
 import VehicleFuncs from '../extensions/VehicleFuncs';
 import { getForwardVector } from '../utility/vector';
@@ -35,7 +34,7 @@ function handleRepair(player: alt.Player) {
     const fwdPosition = {
         x: closestVehicle.pos.x + fwdVector.x * 2,
         y: closestVehicle.pos.y + fwdVector.y * 2,
-        z: closestVehicle.pos.z
+        z: closestVehicle.pos.z,
     };
 
     const timeline: Array<Task | TaskCallback> = [
@@ -43,17 +42,17 @@ function handleRepair(player: alt.Player) {
             // taskGoToCoordAnyMeans(ped: number, x: number, y: number, z: number, speed: number, p5: any, p6: boolean, walkingStyle: number, p8: number
             nativeName: 'taskGoToCoordAnyMeans',
             params: [fwdPosition.x, fwdPosition.y, fwdPosition.z, 1, 0, false, 786603, 0],
-            timeToWaitInMs: 5000
+            timeToWaitInMs: 5000,
         },
         {
             // taskTurnPedToFaceCoord(ped: number, x: number, y: number, z: number, duration: number)
             nativeName: 'taskTurnPedToFaceCoord',
             params: [closestVehicle.pos.x, closestVehicle.pos.y, closestVehicle.pos.z, 2000],
-            timeToWaitInMs: 2000
+            timeToWaitInMs: 2000,
         },
         {
-            callbackName: 'task:Vehicle:Repair:Timeline'
-        }
+            callbackName: 'task:Vehicle:Repair:Timeline',
+        },
     ];
 
     isUsingTimeline.push({ player, vehicle: closestVehicle });
@@ -78,7 +77,7 @@ function handleRepairTimeline(player: alt.Player) {
         'mp_car_bomb',
         'car_bomb_mechanic',
         ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.REPEAT,
-        12000
+        12000,
     );
 
     alt.setTimeout(() => {

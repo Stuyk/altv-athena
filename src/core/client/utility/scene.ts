@@ -1,6 +1,5 @@
-import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/Vector';
+import { Vector3 } from '../../shared/interfaces/vector';
 import { Timer } from './timers';
 
 export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
@@ -12,7 +11,7 @@ export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
             pos.y,
             pos.z ?? native.getHeightmapBottomZForPosition(pos.x, pos.y),
             2,
-            1
+            1,
         );
 
         timerHandle = Timer.createInterval(
@@ -28,7 +27,7 @@ export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
                 return resolve(true);
             },
             10,
-            'scene.ts'
+            'scene.ts',
         );
     }).finally(() => {
         native.newLoadSceneStop();

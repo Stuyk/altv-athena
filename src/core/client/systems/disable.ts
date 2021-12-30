@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Timer } from '../utility/timers';
+import { VehicleController } from './vehicle';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
 
@@ -34,13 +35,6 @@ function disableDefaultBehavior(): void {
     native.disableControlAction(0, 15, true);
 
     // Disable Default Controls
-    native.disableControlAction(0, 23, true); // F
-    native.disableControlAction(0, 75, true); // F
     native.disableControlAction(0, 104, true); // H
-
-    // Disable default vehicle behavior.
-    if (native.isPedTryingToEnterALockedVehicle(alt.Player.local.scriptID)) {
-        native.clearPedTasks(alt.Player.local.scriptID);
-        native.clearPedSecondaryTask(alt.Player.local.scriptID);
-    }
+    VehicleController.handleVehicleDisables();
 }

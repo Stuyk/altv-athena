@@ -38,12 +38,6 @@ function handlePing(player: alt.Player): void {
     playerFuncs.sync.time(player);
     playerFuncs.sync.weather(player);
 
-    // Updates Items on Ground for Player
-    if (!player.nextItemSync || Date.now() > player.nextItemSync) {
-        player.nextItemSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_INVENTORY_UPDATES;
-        InventoryController.updateDroppedItemsAroundPlayer(player, false);
-    }
-
     // Updates Food & Water
     if (!player.nextFoodSync || Date.now() > player.nextFoodSync) {
         player.nextFoodSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_FOOD_UPDATES;
@@ -60,7 +54,7 @@ function handlePing(player: alt.Player): void {
     if (player.vehicle && player.vehicle.driver === player) {
         if (!player.vehicle.nextUpdate || Date.now() > player.vehicle.nextUpdate) {
             player.vehicle.nextUpdate = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_VEHICLE_UPDATES;
-            VehicleFuncs.updateFuel(player.vehicle);
+            VehicleFuncs.updateFuel(player.vehicle, timeBetweenPings);
         }
 
         if (!player.vehicle.nextSave || Date.now() > player.vehicle.nextSave) {

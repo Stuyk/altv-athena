@@ -1,7 +1,6 @@
-import * as alt from 'alt-client';
 import { Timer } from './timers';
 
-const MaxAttempts = 200;
+const MAX_ATTEMPTS = 200;
 
 export function waitFor(func: Function, ...args: any): Promise<boolean> {
     return new Promise((resolve) => {
@@ -9,7 +8,7 @@ export function waitFor(func: Function, ...args: any): Promise<boolean> {
 
         const interval = Timer.createInterval(
             () => {
-                if (attempts >= MaxAttempts) {
+                if (attempts >= MAX_ATTEMPTS) {
                     Timer.clearInterval(interval);
                     resolve(false);
                     return;
@@ -24,7 +23,7 @@ export function waitFor(func: Function, ...args: any): Promise<boolean> {
                 resolve(true);
             },
             100,
-            'wait.ts'
+            'wait.ts',
         );
     });
 }
@@ -35,7 +34,7 @@ export function waitForFalse(func: Function, ...args: any): Promise<boolean> {
 
         const interval = Timer.createInterval(
             () => {
-                if (attempts >= MaxAttempts) {
+                if (attempts >= MAX_ATTEMPTS) {
                     Timer.clearInterval(interval);
                     resolve(false);
                     return;
@@ -50,7 +49,7 @@ export function waitForFalse(func: Function, ...args: any): Promise<boolean> {
                 resolve(true);
             },
             100,
-            'wait.ts'
+            'wait.ts',
         );
     });
 }

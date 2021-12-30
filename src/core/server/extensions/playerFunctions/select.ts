@@ -1,36 +1,37 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Character } from '../../../shared/interfaces/Character';
+import { Character } from '../../../shared/interfaces/character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { BlipController } from '../../systems/blip';
+import { PlayerEvents } from '../../events/playerEvents';
+import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
-import { InteriorSystem } from '../../systems/interior';
-import { StreamerService } from '../../systems/streamer';
 import { World } from '../../systems/world';
 import { playerFuncs } from '../Player';
 import VehicleFuncs from '../VehicleFuncs';
 import emit from './emit';
 import safe from './safe';
-import save from './save';
 import setter from './setter';
 import sync from './sync';
 
 /**
  * Select a character based on the character data provided.
  * @param {Partial<Character>} characterData
- * @return {*}  {Promise<void>}
+ * @return {Promise<void>}
  * @memberof SelectPrototype
  */
-async function selectCharacter(player: alt.Player, characterData: Partial<Character>): Promise<void> {
-    player.data = { ...characterData };
-    sync.appearance(player);
+async function selectCharacter(player: alt.Player): Promise<void> {
+    player.data = { ...player.currentCharacters[player.selectedCharacterIndex] };
+
+    // Converts inventory from 2.0.3 to 3.0.0
+    await playerFuncs.inventory.convert(player);
+
+    sync.appearance(player, player.data.appearance);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
     // Set player dimension to zero.
@@ -45,13 +46,8 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
                 player,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.x,
                 DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.y,
-                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z
+                DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS.z,
             );
-        }
-
-        // Force the player into the interior they were last in.
-        if (player.data.interior) {
-            InteriorSystem.enter(player, player.data.interior, true, true);
         }
 
         // Check if health exists.
@@ -103,11 +99,8 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 
         // Propagation
         ChatController.populateCommands(player);
-        BlipController.populateGlobalBlips(player);
+        ServerBlipController.populateGlobalBlips(player);
         HologramController.populateHolograms(player);
-
-        // Markers, Text Labels, Objects, etc.
-        StreamerService.requestUpdate(player);
 
         // Voice Service
         alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
@@ -119,7 +112,10 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
         }
 
         // Finish Selection
-        alt.emit(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
+        playerFuncs.set.frozen(player, false);
+        player.visible = true;
+        player.hasFullySpawned = true;
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
     }, 500);
 
     // Delete unused data from the Player.
@@ -127,5 +123,5 @@ async function selectCharacter(player: alt.Player, characterData: Partial<Charac
 }
 
 export default {
-    character: selectCharacter
+    character: selectCharacter,
 };

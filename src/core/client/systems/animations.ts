@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ANIMATION_FLAGS } from '../../shared/flags/AnimationFlags';
+import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
@@ -40,7 +40,7 @@ async function loadAnimation(dict: string, count: number = 0): Promise<boolean> 
                 native.requestAnimDict(dict);
             },
             250,
-            'animation.ts'
+            'animation.ts',
         );
     });
 }
@@ -57,7 +57,7 @@ export async function playAnimation(
     dict: string,
     name: string,
     flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
-    duration: number = -1
+    duration: number = -1,
 ): Promise<void> {
     const isReadyToPlay = await loadAnimation(dict);
     if (!isReadyToPlay) {
@@ -68,9 +68,46 @@ export async function playAnimation(
         return;
     }
 
+    if (!alt.Player.local || !alt.Player.local.valid) {
+        return;
+    }
+
     if (native.isEntityPlayingAnim(alt.Player.local.scriptID, dict, name, 3)) {
         return;
     }
 
     native.taskPlayAnim(alt.Player.local.scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
+}
+
+/**
+ * Play an animation on a Pedestrian
+ * @export
+ * @param {number} scriptID
+ * @param {string} dict
+ * @param {string} name
+ * @param {ANIMATION_FLAGS} [flags=ANIMATION_FLAGS.CANCELABLE]
+ * @param {number} [duration=-1]
+ * @return {*}
+ */
+export async function playPedAnimation(
+    scriptID: number,
+    dict: string,
+    name: string,
+    flags: ANIMATION_FLAGS = ANIMATION_FLAGS.CANCELABLE,
+    duration: number = -1,
+) {
+    const isReadyToPlay = await loadAnimation(dict);
+    if (!isReadyToPlay) {
+        return;
+    }
+
+    if (!scriptID || !native.doesEntityExist(scriptID)) {
+        return;
+    }
+
+    if (native.isEntityPlayingAnim(scriptID, dict, name, 3)) {
+        return;
+    }
+
+    native.taskPlayAnim(scriptID, dict, name, 8.0, -1, duration, flags, 0, false, false, false);
 }

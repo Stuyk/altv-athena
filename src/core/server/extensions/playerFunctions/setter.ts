@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { PERMISSIONS } from '../../../shared/flags/PermissionFlags';
-import { ActionMenu } from '../../../shared/interfaces/Actions';
+import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
+import { ActionMenu } from '../../../shared/interfaces/actions';
 import { distance2d } from '../../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
@@ -15,11 +15,12 @@ import safe from './safe';
 import save from './save';
 import sync from './sync';
 import Database from '@stuyk/ezmongodb';
-import dotenv from 'dotenv';
-import { IConfig } from '../../interface/IConfig';
+import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import Logger from '../../utility/athenaLogger';
+import { PlayerEvents } from '../../events/playerEvents';
 
-const config: IConfig = dotenv.config().parsed as IConfig;
+const config = ConfigUtil.get();
 
 /**
  * Set the current account data for this player.
@@ -27,29 +28,30 @@ const config: IConfig = dotenv.config().parsed as IConfig;
  * @return {*}  {Promise<void>}
  * @memberof SetPrototype
  */
-async function account(p: alt.Player, accountData: Partial<Account>): Promise<void> {
+async function account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
     if (!accountData.permissionLevel) {
         accountData.permissionLevel = PERMISSIONS.NONE;
         Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
     }
 
-    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || p.needsQT) {
-        const qt: string = Ares.getUniquePlayerHash(p, p.discord.id);
+    if (!accountData.quickToken || Date.now() > accountData.quickTokenExpiration || player.needsQT) {
+        const qt: string = Ares.getUniquePlayerHash(player, player.discord.id);
 
         Database.updatePartialData(
             accountData._id,
             {
                 quickToken: qt,
-                quickTokenExpiration: Date.now() + 60000 * 60 * 48 // 48 Hours
+                quickTokenExpiration: Date.now() + 60000 * 60 * 48, // 48 Hours
             },
-            Collections.Accounts
+            Collections.Accounts,
         );
 
-        alt.emitClient(p, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, p.discord.id);
+        alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, player.discord.id);
     }
 
-    emit.meta(p, 'permissionLevel', accountData.permissionLevel);
-    p.accountData = accountData;
+    player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
+    emit.meta(player, 'permissionLevel', accountData.permissionLevel);
+    player.accountData = accountData;
 }
 
 function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
@@ -76,37 +78,42 @@ function dead(player: alt.Player, weaponHash: any = null): void {
         player.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
     }
 
-    alt.emit(ATHENA_EVENTS_PLAYER.DIED, player);
+    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
 }
 
 /**
  * Called when a player does their first connection to the server.
  * @memberof SetPrototype
  */
-async function firstConnect(p: alt.Player): Promise<void> {
-    if (!p || !p.valid) {
+async function firstConnect(player: alt.Player): Promise<void> {
+    if (!player || !player.valid) {
         return;
     }
 
     if (process.env.ATHENA_READY === 'false') {
-        p.kick('Still warming up...');
+        player.kick('Still warming up...');
         return;
     }
 
-    // Used to set the custom View instance with a Web Server URL.
-    const webServerPath = alt.hasResource('webserver') ? 'http://assets/webserver/files' : config.WEBSERVER_IP;
-    alt.emitClient(p, SYSTEM_EVENTS.SET_VIEW_URL, webServerPath);
+    const vueDefaultPath = ConfigUtil.getVueDebugMode()
+        ? ConfigUtil.getViteServer()
+        : `http://assets/webviews/index.html`;
+    alt.emitClient(player, SYSTEM_EVENTS.WEBVIEW_INFO, vueDefaultPath);
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
 
-    p.dimension = p.id + 1; // First ID is 0. We add 1 so everyone gets a unique dimension.
-    p.pendingLogin = true;
+    // First ID is 0. We add 1 so everyone gets a unique dimension.
+    player.dimension = player.id + 1;
+    player.pendingLogin = true;
+    player.visible = false;
 
-    dataUpdater.init(p, null);
-    safe.setPosition(p, pos.x, pos.y, pos.z);
-    sync.time(p);
-    sync.weather(p);
+    // Some general initialization setup.
+    dataUpdater.init(player, null);
+    safe.setPosition(player, pos.x, pos.y, pos.z);
+    sync.time(player);
+    sync.weather(player);
 }
+
 /**
  * Set if this player should be frozen.
  * @param {boolean} value
@@ -159,7 +166,7 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
         safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
     });
 
-    alt.emit(ATHENA_EVENTS_PLAYER.SPAWNED, p);
+    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, p);
 }
 
 function wantedLevel(player: alt.Player, stars: number) {
@@ -180,5 +187,5 @@ export default {
     firstConnect,
     frozen,
     respawned,
-    wantedLevel
+    wantedLevel,
 };

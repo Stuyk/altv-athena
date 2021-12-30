@@ -1,4 +1,4 @@
-import { Vector2, Vector3 } from '../interfaces/Vector';
+import { Vector2, Vector3 } from '../interfaces/vector';
 
 export function distance(vector1: Vector3, vector2: Vector3) {
     if (vector1 === undefined || vector2 === undefined) {
@@ -6,7 +6,7 @@ export function distance(vector1: Vector3, vector2: Vector3) {
     }
 
     return Math.sqrt(
-        Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2)
+        Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2),
     );
 }
 
@@ -48,7 +48,7 @@ export function getClosestTypes<T>(
     elements: Array<{ pos: Vector3; valid: boolean }>,
     maxDistance: number,
     mustHaveProperties: Array<string> = [],
-    positionName: string = 'pos'
+    positionName: string = 'pos',
 ): Array<T> {
     const newElements = [];
 
@@ -79,4 +79,26 @@ export function getClosestTypes<T>(
     }
 
     return newElements as Array<T>;
+}
+
+export function lerp(a: number, b: number, t: number) {
+    return (1 - t) * a + t * b;
+}
+
+export function vectorLerp(vector1: Vector3, vector2: Vector3, l: number, clamp: boolean) {
+    if (clamp) {
+        if (l < 0.0) {
+            l = 0.0;
+        }
+
+        if (l > 0.0) {
+            l = 1.0;
+        }
+    }
+
+    let x = lerp(vector1.x, vector2.x, l);
+    let y = lerp(vector1.y, vector2.y, l);
+    let z = lerp(vector1.z, vector2.z, l);
+
+    return { x: x, y: y, z: z };
 }

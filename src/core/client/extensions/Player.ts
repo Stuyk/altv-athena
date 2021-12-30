@@ -1,4 +1,4 @@
-import * as alt from 'alt-client';
+import { GroundItem } from '../../shared/interfaces/groundItem';
 import { Meta } from './Meta';
 
 declare module 'alt-client' {
@@ -12,9 +12,9 @@ declare module 'alt-client' {
         isWheelMenuOpen: boolean;
         isActionMenuOpen: boolean;
         isLeaderboardOpen: boolean;
+        isNoClipOn: boolean;
 
-        // The time that a player is seen by our local player.
-        // Used to reveal nametags.
-        inVisionTime: number | null;
+        // Closest Item
+        closestItem: GroundItem | null;
     }
 }
