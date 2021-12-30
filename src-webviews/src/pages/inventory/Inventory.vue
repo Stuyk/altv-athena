@@ -913,7 +913,8 @@ export default defineComponent({
 
 .equipment {
     height: 100vh;
-    max-width: 450px !important;
+    min-width: 350px;
+    max-width: 350px !important;
 }
 
 .inside-split {
@@ -948,6 +949,10 @@ export default defineComponent({
     flex-direction: column;
     border: 2px solid rgba(0, 0, 0, 0.5);
     background: rgba(0, 0, 0, 0.75);
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    max-width: 350px !important;
+    overflow: hidden;
 }
 
 .key-group {
@@ -958,6 +963,10 @@ export default defineComponent({
     margin-top: 3px;
     padding-top: 3px;
     border-top: 2px solid rgba(0, 0, 0, 0.2);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    height: auto;
+    max-width: 350px !important;
 }
 
 .key-group span {
