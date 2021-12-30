@@ -39,7 +39,6 @@ import './systems/interaction';
 import './systems/interiors';
 import './systems/job';
 import './systems/meta';
-import './systems/nametag';
 import './systems/noclip';
 import './systems/particle';
 import './systems/progressBar';

@@ -16,9 +16,5 @@ declare module 'alt-client' {
 
         // Closest Item
         closestItem: GroundItem | null;
-
-        // The time that a player is seen by our local player.
-        // Used to reveal nametags.
-        inVisionTime: number | null;
     }
 }

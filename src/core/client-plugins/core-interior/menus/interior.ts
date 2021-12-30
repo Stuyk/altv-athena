@@ -203,7 +203,7 @@ function exitMenu(interior: Interior) {
         },
     });
 
-    WheelMenu.create(`Interior: ${interior.uid}`, options, true);
+    WheelMenu.create(`${interior.name}`, options, true);
 }
 
 alt.onServer(INTERIOR_INTERACTIONS.SHOW_MENU, showMenu);

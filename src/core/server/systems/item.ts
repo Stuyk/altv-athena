@@ -100,6 +100,31 @@ export class ItemFactory {
     }
 
     /**
+     * Get all items stored for local lookups.
+     * Fastest way to find an item that exists in the database.
+     *
+     * Make sure to you `ItemFactory.get` with the `dbName` to get the full item.
+     * @static
+     * @return {*}  {Array<{ name: string; dbName: string }>}
+     * @memberof ItemFactory
+     */
+    static getAllItems(): Array<{ name: string; dbName: string }> {
+        return databaseItemNames;
+    }
+
+    /**
+     * Get all items from the database.
+     * Considered as an expensive database call.
+     * Use sparingly.
+     * @static
+     * @return {Promise<Array<Item>>}
+     * @memberof ItemFactory
+     */
+    static async getAllItemsFromDatabase(): Promise<Array<Item>> {
+        return await Database.fetchAllData<Item>(Collections.Items);
+    }
+
+    /**
      * Get item by item name.
      * It's like a fuzzy search for an item.
      * @static
