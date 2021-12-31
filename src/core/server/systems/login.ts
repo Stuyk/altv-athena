@@ -125,6 +125,12 @@ export class LoginController {
         AgendaSystem.goNext(player);
     }
 
+    /**
+     * When a player logs out, we want to save their data and despawn all their vehicles.
+     * @param {alt.Player} player - alt.Player - The player that is logging out.
+     * @param {string} reason - The reason the player logged out.
+     * @returns The player's database ID.
+     */
     static tryDisconnect(player: alt.Player, reason: string): void {
         if (!player || !player.valid || !player.data) {
             return;
@@ -148,6 +154,12 @@ export class LoginController {
         playerFuncs.save.onTick(player);
     }
 
+    /**
+     * If the player has a Discord ID, and they have a valid Quick Token, then we'll try to log them in.
+     * @param {alt.Player} player - alt.Player - The player that is attempting to login.
+     * @param {string} discord - string - The Discord ID of the player.
+     * @returns The account object.
+     */
     static async tryDiscordQuickToken(player: alt.Player, discord: string): Promise<void> {
         if (!discord) {
             player.needsQT = true;

@@ -8,6 +8,12 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/Player';
 
 export class ToolbarController {
+    /**
+     * This function is called when the player changes the item in their toolbar.
+     * @param {alt.Player} player - alt.Player - The player who is using the item.
+     * @param {number} slot - The slot number of the item in the toolbar.
+     * @returns The item that was equipped.
+     */
     static handleToolbarChange(player: alt.Player, slot: number): void {
         if (slot <= -1 || slot >= 4) {
             return;
@@ -39,6 +45,13 @@ export class ToolbarController {
         // No idea what this will be yet.
     }
 
+    /**
+     * When the player equips a weapon, the function will remove all weapons from the player and
+     * then give them the weapon that was just equipped.
+     * @param {alt.Player} player - The player who is using the item.
+     * @param {Item} item - The item that was selected.
+     * @returns The function that handles the weapon equip.
+     */
     static handleWeaponEquip(player: alt.Player, item: Item) {
         player.removeAllWeapons();
 
@@ -76,6 +89,13 @@ export class ToolbarController {
         playerFuncs.emit.sound3D(player, 'item_remove', player);
     }
 
+    /**
+     * If the item is not consumable, remove one from the quantity and if the quantity is now 0,
+     * remove the item from the toolbar. If the item has a data.event, emit it.
+     * @param {alt.Player} player - The player who used the item.
+     * @param {Item} item - The item that was used.
+     * @returns None
+     */
     static handleToolbarUse(player: alt.Player, item: Item) {
         if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;

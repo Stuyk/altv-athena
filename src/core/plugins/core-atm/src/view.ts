@@ -170,6 +170,9 @@ class InternalFunctions {
 }
 
 export class AtmFunctions {
+    /**
+     * Create blips for all ATMs and add an interaction to them.
+     */
     static init() {
         for (let i = 0; i < atms.length; i++) {
             const position = atms[i];

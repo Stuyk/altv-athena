@@ -46,6 +46,9 @@ export class AccountSystem {
         isDoneLoading = true;
     }
 
+    /**
+     * Wait until the `isDoneLoading` variable is set to `true` before continuing.
+     */
     static async isDoneLoading(): Promise<void> {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {

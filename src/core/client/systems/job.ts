@@ -19,6 +19,11 @@ class ObjectiveController {
         console.log(JSON.stringify(data));
     }
 
+    /**
+     * If the objective is null, clear the objective and blip. Otherwise, set the objective and blip.
+     * @param {uniontype} data - Objective | null
+     * @returns The Objective object.
+     */
     static handleSync(data: Objective | null) {
         if (interval) {
             Timer.clearInterval(interval);

@@ -54,6 +54,10 @@ class FuelSystem {
         }
     }
 
+    /**
+     * Request to refuel a vehicle.
+     * @param {alt.Player} player - alt.Player - The player who is requesting the refuel.
+     */
     static request(player: alt.Player) {
         if (fuelInfo[player.id]) {
             playerFuncs.emit.notification(player, `Currently already refueling...`);
@@ -130,6 +134,10 @@ class FuelSystem {
         alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
     }
 
+    /**
+     * Start the fuel process for the given player.
+     * @param {alt.Player} player - alt.Player - The player who started the refueling.
+     */
     static start(player: alt.Player) {
         if (!player || !player.valid) {
             return;
@@ -189,6 +197,11 @@ class FuelSystem {
         }, 10000);
     }
 
+    /**
+     * `cancel` is a function that takes a player as an argument and deletes the fuelInfo object for that player.
+     * @param {alt.Player} player - alt.Player - The player that is using the command.
+     * @returns None
+     */
     static cancel(player: alt.Player) {
         if (fuelInfo[player.id]) {
             delete fuelInfo[player.id];

@@ -10,6 +10,14 @@ let vehicle;
 let vehicle_only = false;
 
 class TaskHelper {
+    /**
+     * Set the tasks for the player.
+     * @param {Array} tasks - An array of tasks to be executed.
+     * @param {alt.Vehicle} _vehicle - The vehicle to use for the task.
+     * @param _vehicle_only - If true, the task will only be executed if the vehicle is the same as
+    the one specified in the setTasks function.
+     * @returns The next task in the timeline.
+     */
     static setTasks(tasks: Array<Task | TaskCallback>, _vehicle: alt.Vehicle = null, _vehicle_only = false) {
         if (!_vehicle) {
             vehicle = null;

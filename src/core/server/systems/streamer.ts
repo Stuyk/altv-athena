@@ -20,6 +20,10 @@ class InternalController {
         update: InternalController.update,
     };
 
+    /**
+     * Send a ping message to the server and then send a configuration message.
+     * @returns None
+     */
     static init() {
         Logger.info(`Connected to Streamer Service`);
         const pingMessage: IStreamMessage = {

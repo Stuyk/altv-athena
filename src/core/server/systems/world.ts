@@ -121,6 +121,11 @@ export class World {
         }
     }
 
+    /**
+     * "Get the grid space of the player."
+     * @param {alt.Player} player - alt.Player - The player to check.
+     * @returns The index of the minMaxGroups array.
+     */
     static getGridSpace(player: alt.Player): number {
         const gridSpace = World.minMaxGroups.findIndex(
             (pos) => player && player.valid && player.pos.y > pos.minY && player.pos.y < pos.maxY,
@@ -129,6 +134,11 @@ export class World {
         return gridSpace === -1 ? 0 : gridSpace;
     }
 
+    /**
+     * Get the weather for the current grid.
+     * @param {number} gridIndex - The index of the grid in the grid array.
+     * @returns The weather for the gridIndex.
+     */
     static getWeatherByGrid(gridIndex: number): string {
         if (weatherOverride) {
             return weatherOverrideName;
@@ -137,6 +147,11 @@ export class World {
         return DEFAULT_CONFIG.WEATHER_ROTATION[gridIndex];
     }
 
+    /**
+     * return the hour of the world if there's a time override, otherwise return the hour of the
+    world.
+     * @returns The current hour.
+     */
     static getWorldHour() {
         if (timeOverride) {
             return timeOverrideHour;
@@ -145,6 +160,10 @@ export class World {
         return World.hour;
     }
 
+    /**
+     * return the current minute of the world.
+     * @returns The number of minutes in the current world.
+     */
     static getWorldMinute() {
         return World.minute;
     }

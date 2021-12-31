@@ -64,6 +64,11 @@ function drawBars() {
     }
 }
 
+/**
+ * Create a new progress bar.
+ * @param {ProgressBar} progressBar - ProgressBar
+ * @returns None
+ */
 function createBar(progressBar: ProgressBar) {
     progressBar.startTime = Date.now();
     progressBar.finalTime = Date.now() + progressBar.milliseconds;
@@ -82,6 +87,11 @@ function createBar(progressBar: ProgressBar) {
     }
 }
 
+/**
+ * `removeBar` removes a bar from the `bars` array.
+ * @param {string} uid - The unique identifier of the bar.
+ * @returns The function that is being returned is the function that is being called.
+ */
 function removeBar(uid: string) {
     pause = true;
     const index = bars.findIndex((bar) => bar.uid === uid);
@@ -96,6 +106,10 @@ function removeBar(uid: string) {
     clear();
 }
 
+/**
+ * Clear the progress bar if there are no more bars to show.
+ * @returns None
+ */
 function clear() {
     if (bars.length <= 0) {
         Timer.clearInterval(interval);

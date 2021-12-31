@@ -8,7 +8,13 @@ import { playerFuncs } from '../extensions/Player';
 import ChatController from '../systems/chat';
 import { World } from '../systems/world';
 
-function setWeather(player: alt.Player, weatherName: string) {
+/**
+ * Set the weather to a specific weather type.
+ * @param {alt.Player} player - alt.Player - The player who is using the command.
+ * @param {string} weatherName - The name of the weather to override the entire weather system with.
+ * @returns The weather type.
+ */
+function setWeather(player: alt.Player, weatherName: string): void {
     if (!player || !player.valid) {
         return;
     }
@@ -29,7 +35,12 @@ function setWeather(player: alt.Player, weatherName: string) {
     playerFuncs.emit.message(player, `Use /clearweather to stop overriding the weather.`);
     World.setOverrideWeather(true, weatherEntries[index]);
 }
-
+/**
+ * Clear the weather override
+ * The `playerFuncs` module is a collection of functions that
+ * @param {alt.Player} player - alt.Player - The player who called the command.
+ * @returns The weather override is now disabled.
+ */
 function clearWeather(player: alt.Player) {
     if (!player || !player.valid) {
         return;
