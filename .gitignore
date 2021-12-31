@@ -29,3 +29,4 @@ server.cfg
 doc
 typedoc.json
 !scripts/streamer/dist
+package-lock.json
