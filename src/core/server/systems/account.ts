@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { Account } from '../interface/Account';
 import { Collections } from '../interface/DatabaseCollections';
@@ -16,7 +15,7 @@ export class AccountSystem {
      * @memberof AccountSystem
      */
     static async init() {
-        const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
+        let accounts = await Database.fetchAllData<Account>(Collections.Accounts);
 
         // Turn off loading after init
         if (accounts.length <= 0) {
@@ -30,17 +29,37 @@ export class AccountSystem {
             id = lastAccount.id;
         }
 
-        // Add IDs for currently existing accounts
-        const accountsNoIds = accounts.filter((x) => x.id === null || x.id === undefined);
-        for (let i = 0; i < accountsNoIds.length; i++) {
-            const nextIdentifier = AccountSystem.getNextIdentifier();
-            await Database.updatePartialData(
-                accountsNoIds[i]._id.toString(),
-                { id: nextIdentifier },
-                Collections.Accounts,
-            );
+        // De-duplicate entries
+        let inUse = [];
+        for (let i = 0; i < accounts.length; i++) {
+            if (accounts[i].id === null || accounts[i].id === undefined) {
+                const nextIdentifier = AccountSystem.getNextIdentifier();
+                await Database.updatePartialData(
+                    accounts[i]._id.toString(),
+                    { id: nextIdentifier },
+                    Collections.Accounts,
+                );
 
-            console.log(`Account ${accountsNoIds[i]._id.toString()} | Added ID: ${nextIdentifier}`);
+                console.log(`Account ${accounts[i]._id.toString()} | Added ID: ${nextIdentifier}`);
+                inUse.push(nextIdentifier);
+                continue;
+            }
+
+            if (inUse.findIndex((id) => id === accounts[i].id) >= 0) {
+                const nextIdentifier = AccountSystem.getNextIdentifier();
+                await Database.updatePartialData(
+                    accounts[i]._id.toString(),
+                    { id: nextIdentifier },
+                    Collections.Accounts,
+                );
+
+                console.log(`Account ${accounts[i]._id.toString()} De-Duplicated | Added ID: ${nextIdentifier}`);
+                inUse.push(nextIdentifier);
+                continue;
+            }
+
+            inUse.push(accounts[i].id);
+            continue;
         }
 
         isDoneLoading = true;
@@ -74,6 +93,31 @@ export class AccountSystem {
     }
 
     /**
+     * Fetch account for player who has discord information.
+     * @static
+     * @param {alt.Player} player
+     * @return {(Promise<Account | null>)}
+     * @memberof AccountSystem
+     */
+    static async getAccount(player: alt.Player): Promise<Account | null> {
+        if (!player.discord) {
+            return null;
+        }
+
+        const accountData: Account | null = await Database.fetchData<Account>(
+            'discord',
+            player.discord.id,
+            Collections.Accounts,
+        );
+
+        if ((accountData && accountData.id === null) || accountData.id === undefined) {
+            accountData.id = AccountSystem.getNextIdentifier();
+        }
+
+        return accountData;
+    }
+
+    /**
      * Create an account with default data.
      * @static
      * @param {alt.Player} player
@@ -89,6 +133,7 @@ export class AccountSystem {
             hardware: [player.hwidHash, player.hwidExHash],
             lastLogin: Date.now(),
             permissionLevel: PERMISSIONS.NONE,
+            id: AccountSystem.getNextIdentifier(),
         };
 
         if (player.discord.email) {

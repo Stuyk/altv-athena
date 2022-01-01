@@ -88,12 +88,7 @@ export class LoginController {
 
         // Used for DiscordToken skirt.
         if (!account) {
-            // Generate New Account for Database
-            let accountData: Partial<Account> | null = await Database.fetchData<Account>(
-                'discord',
-                player.discord.id,
-                Collections.Accounts,
-            );
+            const accountData = await AccountSystem.getAccount(player);
 
             if (!accountData) {
                 account = await AccountSystem.create(player);
