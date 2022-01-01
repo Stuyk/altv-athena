@@ -110,7 +110,11 @@ export class AccountSystem {
             Collections.Accounts,
         );
 
-        if ((accountData && accountData.id === null) || accountData.id === undefined) {
+        if (!accountData) {
+            return null;
+        }
+
+        if (accountData && (accountData.id === null || accountData.id === undefined)) {
             accountData.id = AccountSystem.getNextIdentifier();
         }
 
