@@ -10,9 +10,10 @@ https://docs.athenaframework.com/
 
 ## Development Stack
 
-* MongoDB
-* TypeScript
-* Vue 3
+* [MongoDB](https://www.mongodb.com/) (Database)
+* [TypeScript](https://www.typescriptlang.org/) / [JavaScript](https://www.javascript.com/) (Programming Language)
+* [Vue 3](https://v3.vuejs.org/) (Frontend)
+* [Vite](https://vitejs.dev/) (Vue 3 Tooling for Instant Server Start)
 
 ## Where to Purchase?
 
