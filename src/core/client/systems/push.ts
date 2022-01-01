@@ -11,6 +11,11 @@ let vehicle: alt.Vehicle;
 let isPushing: boolean = false;
 
 export class PushVehicle {
+    /**
+     * `start` is a function that takes a vehicle as an argument and emits a server event.
+     * @param {alt.Vehicle} vehicle - The vehicle to attach the camera to.
+     * @returns The vehicle's model dimensions.
+     */
     static start(vehicle: alt.Vehicle) {
         if (!vehicle || !vehicle.valid) {
             return;
@@ -26,6 +31,12 @@ export class PushVehicle {
         alt.emitServer(VEHICLE_EVENTS.PUSH, attachPosition);
     }
 
+    /**
+     * When the player enters the pushing state, the vehicle is assigned to the variable `vehicle`
+    and the pushing state is set to `true`.
+     * @param {alt.Vehicle} _vehicle - The vehicle that is being pushed.
+     * @returns None
+     */
     static serverStart(_vehicle: alt.Vehicle) {
         // Clears animations when entering pushing state.
         native.clearPedTasksImmediately(alt.Player.local.scriptID);

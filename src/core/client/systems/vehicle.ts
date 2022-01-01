@@ -115,6 +115,11 @@ export class VehicleController {
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
     }
 
+    /**
+     * If the player is dead, or if the player is trying to enter a locked vehicle, or if the player
+     * is trying to push a vehicle, then disable the F key.
+     * @returns The vehicle that the player is trying to enter.
+     */
     static handleVehicleDisables() {
         if (!alt.Player.local || !alt.Player.local.valid) {
             return;
@@ -144,6 +149,11 @@ export class VehicleController {
         native.disableControlAction(0, 75, true); // F - Exit
     }
 
+    /**
+     * Toggle the engine of the player's vehicle.
+     * @param {boolean} status - true or false
+     * @returns The vehicle's engine status.
+     */
     static toggleEngine(status: boolean) {
         if (!alt.Player.local.scriptID) {
             return;

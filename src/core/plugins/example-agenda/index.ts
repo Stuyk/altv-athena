@@ -5,6 +5,11 @@ import { ATHENA_EXAMPLE_AGENDA } from '../../shared-plugins/example-agenda/enums
 
 const PLUGIN_NAME = 'Agenda - Athena Logo Example';
 
+/**
+ * `Show the Athena logo and then wait 2 seconds before continuing`
+ * @param {alt.Player} player - alt.Player - The player who is going to be shown the agenda.
+ * @returns The function itself.
+ */
 function showAthenaLogo(player: alt.Player) {
     alt.emitClient(player, ATHENA_EXAMPLE_AGENDA.SHOW);
     alt.setTimeout(() => {

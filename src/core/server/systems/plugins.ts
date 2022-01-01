@@ -26,7 +26,10 @@ function loadPlugins() {
  * @class PluginSystem
  */
 export class PluginSystem {
-    static init() {
+    /**
+     * Loads the plugins.
+     */
+    static init(): void {
         if (hasInitialized) {
             return;
         }

@@ -40,6 +40,11 @@ export class BlipController {
         }
     }
 
+    /**
+     * Remove a blip from the list of added blips.
+     * @param {string} uid - The unique identifier of the blip.
+     * @returns The blip object.
+     */
     static remove(uid: string) {
         const index = addedBlips.findIndex((blip) => blip && blip['uid'] === uid);
         if (index <= -1) {
@@ -55,6 +60,10 @@ export class BlipController {
         blip.destroy();
     }
 
+    /**
+     * It removes all blips from the map.
+     * @returns None
+     */
     static removeAll() {
         while (addedBlips.length >= 1) {
             const removedBlip = addedBlips.pop();

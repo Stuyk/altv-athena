@@ -330,6 +330,11 @@ export class ClothingFunctions {
         playerFuncs.emit.sound2D(player, 'item_purchase');
     }
 
+    /**
+     * When a player enters a stream polygon, play a sound.
+     * @param {uniontype} player - The player that entered the polygon.
+     * @param {IStreamPolygon} polygon - The polygon that the player is entering.
+     */
     static enter<T>(player: T | alt.Player, polygon: IStreamPolygon) {
         if (!(player instanceof alt.Player)) {
             return;
@@ -338,6 +343,11 @@ export class ClothingFunctions {
         playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
     }
 
+    /**
+     * When a player leaves a polygon, the function is called.
+     * @param {T} player - The player that is leaving the polygon.
+     * @param {IStreamPolygon} polygon - The polygon that the player is leaving.
+     */
     static leave<T>(player: T, polygon: IStreamPolygon) {
         if (!(player instanceof alt.Player)) {
             return;
