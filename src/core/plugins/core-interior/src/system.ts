@@ -45,6 +45,7 @@ const ONE_BILLION = 1000000000;
 const DOOR_CHECK_DIST = 3;
 const LOST_PLAYER_POS = { x: -867.1437377929688, y: -172.6201934814453, z: 37.799232482910156 };
 const NEW_LINE = `~n~`;
+const INTERACTION_DISTANCE = 2;
 const interiors: Map<string, InteriorInternal> = new Map();
 
 let nextDimension = 2;
@@ -93,6 +94,7 @@ class InternalSystem {
                 type: `interior`,
                 identifier: `${interior.uid}-outside`,
                 data: [interior.uid, true],
+                range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
             });
         }
@@ -664,6 +666,7 @@ export class InteriorSystem {
                 type: `interior`,
                 identifier: `${interior.uid}-inside`,
                 data: [interior.uid, false],
+                range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
                 dimension: interior.dimension,
             });
