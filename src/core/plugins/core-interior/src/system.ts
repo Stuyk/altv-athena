@@ -45,6 +45,7 @@ const ONE_BILLION = 1000000000;
 const DOOR_CHECK_DIST = 3;
 const LOST_PLAYER_POS = { x: -867.1437377929688, y: -172.6201934814453, z: 37.799232482910156 };
 const NEW_LINE = `~n~`;
+const INTERACTION_DISTANCE = 2;
 const interiors: Map<string, InteriorInternal> = new Map();
 
 let nextDimension = 2;
@@ -93,6 +94,7 @@ class InternalSystem {
                 type: `interior`,
                 identifier: `${interior.uid}-outside`,
                 data: [interior.uid, true],
+                range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
             });
         }
@@ -275,7 +277,13 @@ class InternalSystem {
      * @return {*}
      * @memberof InteriorSystem
      */
-    static async setName(player: alt.Player, uid: string, name: string) {
+    static async setName(
+        player: alt.Player,
+        uid: string,
+        name: string,
+        skipDistanceCheck = false,
+        skipOwnerCheck = false,
+    ) {
         if (!player || !player.valid || player.data.isDead || !uid) {
             return;
         }
@@ -290,16 +298,20 @@ class InternalSystem {
             return;
         }
 
-        const dist = distance(player.pos, interior.outside);
-        if (dist >= 5) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
-            return;
+        if (!skipDistanceCheck) {
+            const dist = distance(player.pos, interior.outside);
+            if (dist >= 5) {
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                return;
+            }
         }
 
-        if (!InteriorSystem.isOwner(player, interior)) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
+        if (skipOwnerCheck) {
+            if (!InteriorSystem.isOwner(player, interior)) {
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
         }
 
         interior.name = name;
@@ -324,7 +336,13 @@ class InternalSystem {
      * @return {*}
      * @memberof InteriorSystem
      */
-    static async setPrice(player: alt.Player, uid: string, value: number) {
+    static async setPrice(
+        player: alt.Player,
+        uid: string,
+        value: number,
+        skipDistanceCheck = false,
+        skipOwnerCheck = false,
+    ) {
         if (!player || !player.valid || player.data.isDead || !uid) {
             return;
         }
@@ -344,16 +362,20 @@ class InternalSystem {
             return;
         }
 
-        if (!InteriorSystem.isOwner(player, interior)) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
+        if (!skipOwnerCheck) {
+            if (!InteriorSystem.isOwner(player, interior)) {
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
         }
 
-        const dist = distance(player.pos, interior.outside);
-        if (dist >= 5) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
-            return;
+        if (!skipDistanceCheck) {
+            const dist = distance(player.pos, interior.outside);
+            if (dist >= 5) {
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                return;
+            }
         }
 
         if (value <= -1) {
@@ -427,7 +449,7 @@ class InternalSystem {
      * @return {*}
      * @memberof InteriorSystem
      */
-    static async purchase(player: alt.Player, uid: string) {
+    static async purchase(player: alt.Player, uid: string, skipDistanceCheck = false, skipOwnerCheck = false) {
         if (!player || !player.valid || player.data.isDead || !uid) {
             return;
         }
@@ -437,15 +459,19 @@ class InternalSystem {
             return;
         }
 
-        const dist = distance(player.pos, interior.outside);
-        if (dist >= 5) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
-            return;
+        if (!skipDistanceCheck) {
+            const dist = distance(player.pos, interior.outside);
+            if (dist >= 5) {
+                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                return;
+            }
         }
 
-        if (InteriorSystem.isOwner(player, interior)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
+        if (!skipOwnerCheck) {
+            if (InteriorSystem.isOwner(player, interior)) {
+                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
         }
 
         if (player.data.bank + player.data.cash < interior.price) {
@@ -664,6 +690,7 @@ export class InteriorSystem {
                 type: `interior`,
                 identifier: `${interior.uid}-inside`,
                 data: [interior.uid, false],
+                range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
                 dimension: interior.dimension,
             });
@@ -1070,14 +1097,34 @@ export class InteriorSystem {
     }
 
     /**
+     * Remove a owner from an interior.
+     * @static
+     * @param {string} id Interior Identifier
+     * @return {*}
+     * @memberof InteriorSystem
+     */
+    static async removeOwnership(uid: string): Promise<boolean> {
+        const interior = await InteriorSystem.get(uid);
+        if (!interior) {
+            return false;
+        }
+
+        interior.owner = null;
+        await Database.updatePartialData(interior._id.toString(), { owner: interior.owner }, Collections.Interiors);
+        InteriorSystem.refresh(interior.uid);
+
+        return true;
+    }
+
+    /**
      * Public facing purchase function that calls internal purchase.
      * @static
      * @param {alt.Player} player
      * @param {string} uid
      * @memberof InteriorSystem
      */
-    static async purchase(player: alt.Player, uid: string) {
-        InternalSystem.purchase(player, uid);
+    static async purchase(player: alt.Player, uid: string, skipDistanceCheck = false, skipOwnerCheck = false) {
+        InternalSystem.purchase(player, uid, skipDistanceCheck, skipOwnerCheck);
     }
 
     /**
@@ -1087,8 +1134,14 @@ export class InteriorSystem {
      * @param {string} uid
      * @memberof InteriorSystem
      */
-    static async setPrice(player: alt.Player, uid: string, value: number) {
-        InternalSystem.setPrice(player, uid, value);
+    static async setPrice(
+        player: alt.Player,
+        uid: string,
+        value: number,
+        skipDistanceCheck = false,
+        skipOwnerCheck = false,
+    ) {
+        InternalSystem.setPrice(player, uid, value, skipDistanceCheck, skipOwnerCheck);
     }
 
     /**
@@ -1109,8 +1162,14 @@ export class InteriorSystem {
      * @param {string} uid
      * @memberof InteriorSystem
      */
-    static async setName(player: alt.Player, uid: string, name: string) {
-        InternalSystem.setName(player, uid, name);
+    static async setName(
+        player: alt.Player,
+        uid: string,
+        name: string,
+        skipDistanceCheck = false,
+        skipOwnerCheck = false,
+    ) {
+        InternalSystem.setName(player, uid, name, skipDistanceCheck, skipOwnerCheck);
     }
 
     /**
