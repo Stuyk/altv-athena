@@ -1,4 +1,4 @@
-import Discord from 'discord.js';
+import Discord, { MessageEmbed } from 'discord.js';
 
 import { DEFAULT_CONFIG } from '../athena/main';
 import Logger from '../utility/athenaLogger';
@@ -38,9 +38,12 @@ export class DiscordController {
     }
 
     /**
-     * If the user was removed from the whitelist, remove them from the database. If the user was added to the whitelist, add them to the database.
+     * If the user was removed from the whitelist, remove them from the database. If the user was
+    added to the whitelist, add them to the database.
      * @param {Discord.GuildMember} oldUser - The old user object.
      * @param {Discord.GuildMember} newUser - The user that was added or removed.
+     * @returns The return value of the function is the value of the last expression evaluated. In
+    this case, the return value is undefined.
      */
     static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
         const oldUserHasRole = oldUser.roles.cache.has(config.WHITELIST_ROLE);
@@ -70,12 +73,10 @@ export class DiscordController {
     }
 
     /**
-     * Send a message to a Discord Channel.
-     * @static
-     * @param {string} channel_id
-     * @param {string} message
-     * @return {*}
-     * @memberof DiscordController
+     * Send a message to a Discord channel.
+     * @param {string} channel_id - The ID of the channel to send the message to.
+     * @param {string} message - The message to send to the channel.
+     * @returns The Discord.Guild object.
      */
     static sendToChannel(channel_id: string, message: string) {
         if (!DiscordController.guild) {
@@ -90,6 +91,27 @@ export class DiscordController {
         }
 
         channel.send(message);
+    }
+
+    /**
+     * Send a message to a Discord channel.
+     * @param {string} channel_id - The ID of the channel to send the message to.
+     * @param {MessageEmbed} msg - MessageEmbed - The message to send.
+     * @returns The Discord.Guild object.
+     */
+    static sendEmbed(channel_id: string, msg: MessageEmbed) {
+        if (!DiscordController.guild) {
+            Logger.error(`You do not currently have a Discord Bot Setup for sending messages.`);
+            return;
+        }
+
+        const channel = DiscordController.guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
+        if (!channel) {
+            Logger.error(`Channel does not exist.`);
+            return;
+        }
+
+        channel.send(msg);
     }
 }
 
