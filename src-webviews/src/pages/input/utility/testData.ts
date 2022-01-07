@@ -26,7 +26,7 @@ export default [
         desc: 'Your gender',
         type: 'choice',
         placeholder: 'male',
-        error: 'Slect male or femalse',
+        error: 'Select male or female',
         choices: [
             { text: 'male', value: 'male' },
             { text: 'female', values: 'female' },
