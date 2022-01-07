@@ -886,6 +886,10 @@ export default defineComponent({
             alt.off(`${ComponentName}:SetLocales`, this.setLocales);
             alt.off(`${ComponentName}:AddNotification`, this.addNotification);
         }
+
+        if (this.clonedElement) {
+            this.clonedElement.remove();
+        }
     },
 });
 </script>
