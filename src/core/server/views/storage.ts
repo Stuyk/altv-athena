@@ -377,6 +377,18 @@ export class StorageView {
             return;
         }
 
+        // Prevent items from being moved that are untradeable.
+        if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_TRADE)) {
+            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
+            return;
+        }
+
+        // Prevent items from being moved that are undroppable.
+        if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_DROP)) {
+            alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
+            return;
+        }
+
         const existingIndex = storageCache[player.id].items.findIndex((x) => {
             if (x.name !== player.data.inventory[index].name) {
                 return false;
