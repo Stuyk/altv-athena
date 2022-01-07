@@ -190,6 +190,12 @@ export class VehicleSystem {
         rules[ruleType].push(callback);
     }
 
+    /**
+     * When a player enters a vehicle, stop the vehicle from being pushed.
+     * @param {alt.Player} player - The player who entered the vehicle.
+     * @param {alt.Vehicle} vehicle - The vehicle that the player is entering.
+     * @returns The vehicle that the player is pushing.
+     */
     static entering(player: alt.Player, vehicle: alt.Vehicle) {
         player.hasSatDown = false;
 
@@ -200,6 +206,12 @@ export class VehicleSystem {
         VehicleSystem.stopPush(player);
     }
 
+    /**
+     * `enter` is called when a player enters a vehicle.
+     * @param {alt.Player} player - alt.Player - The player who entered the vehicle.
+     * @param {alt.Vehicle} vehicle - The vehicle that the player is sitting in.
+     * @returns The vehicle.
+     */
     static enter(player: alt.Player, vehicle: alt.Vehicle) {
         player.hasSatDown = true;
 

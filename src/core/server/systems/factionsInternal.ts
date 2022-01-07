@@ -77,6 +77,13 @@ export class FactionInternalSystem {
         return true;
     }
 
+    /**
+     * It removes all the blips and interactions for a faction, and then adds them back.
+     * @param {string} faction - The name of the faction.
+     * @param {boolean} doNotRefresh - This is a boolean that determines whether or not the blip and
+    interaction will be refreshed.
+     * @returns The faction object.
+     */
     static async refreshBlipsAndInteractions(faction: string, doNotRefresh: boolean = false) {
         if (!factions[faction]) {
             return;

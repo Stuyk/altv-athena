@@ -37,6 +37,11 @@ export class DiscordController {
         DiscordController.guild = await DiscordController.client.guilds.fetch(config.DISCORD_SERVER_ID);
     }
 
+    /**
+     * If the user was removed from the whitelist, remove them from the database. If the user was added to the whitelist, add them to the database.
+     * @param {Discord.GuildMember} oldUser - The old user object.
+     * @param {Discord.GuildMember} newUser - The user that was added or removed.
+     */
     static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
         const oldUserHasRole = oldUser.roles.cache.has(config.WHITELIST_ROLE);
         const newUserHasRole = newUser.roles.cache.has(config.WHITELIST_ROLE);

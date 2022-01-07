@@ -10,6 +10,11 @@ export class World {
     static hour: number = 0;
     static minute: number = 0;
 
+    /**
+     * Normalize the hour value to be between 0 and 23.
+     * @param {number} value - number - The value to be normalized.
+     * @returns The function normalizeHour() is returning the value of the parameter value.
+     */
     static normalizeHour(value: number) {
         if (value >= 13) {
             return value - 12;
@@ -18,6 +23,11 @@ export class World {
         return value;
     }
 
+    /**
+     * Normalize a value to two digits.
+     * @param {number} value - number - The value to be normalized.
+     * @returns The function is returning the value of the variable.
+     */
     static normalizeValue(value: number) {
         if (value <= 9) {
             return `0${value}`;
@@ -34,10 +44,20 @@ export class World {
         return `${hour}:${minute} ${timeOfDay}`;
     }
 
+    /**
+     * return the current time as a number.
+     * @returns The time as a number.
+     */
     static getTimeAsNumber(): { hour: number; minute: number } {
         return { hour: World.hour, minute: World.minute };
     }
 
+    /**
+     * Update the time of day.
+     * @param {number} hour - The hour of the day.
+     * @param {number} minute - The minute of the day.
+     * @returns None
+     */
     static updateTime(hour: number, minute: number) {
         if (!World.hasPausedClock) {
             World.hasPausedClock = true;
@@ -49,6 +69,10 @@ export class World {
         native.setClockTime(hour, minute, 0);
     }
 
+    /**
+     * When the weather changes, update the weather and play the appropriate audio.
+     * @param {string} name - The name of the weather.
+     */
     static updateWeather(name: string) {
         World.weather = name;
 

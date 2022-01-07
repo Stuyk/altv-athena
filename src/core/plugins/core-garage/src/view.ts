@@ -174,6 +174,12 @@ export class GarageFunctions {
         alt.emitClient(player, GARAGE_INTERACTIONS.OPEN, validVehicles);
     }
 
+    /**
+     * Determines if a position is close enough to a spot within 5 distance.
+     * @param {Vector3} position - The position of the player.
+     * @param {Array} parkingSpots - Array<PositionAndRotation>
+     * @returns The distance between the player and the closest parking spot.
+     */
     static isCloseToSpot(position: Vector3, parkingSpots: Array<PositionAndRotation>): boolean {
         for (let i = 0; i < parkingSpots.length; i++) {
             const dist = distance2d(position, parkingSpots[i].position);
@@ -187,6 +193,10 @@ export class GarageFunctions {
         return false;
     }
 
+    /**
+     * Finds an open spot for the garage.
+     * @param {uniontype} garageIndex - number | string
+     */
     static findOpenSpot(garageIndex: number | string): PositionAndRotation {
         const spots = parkingSpots[garageIndex];
         if (!spots) {
@@ -197,6 +207,11 @@ export class GarageFunctions {
         return spot ? spot.getPositionAndRotation() : null;
     }
 
+    /**
+     * Spawns a vehicle based on the vehicle ID.
+     * @param {alt.Player} player - The player that is spawning the vehicle.
+     * @param {number} id - The vehicle id.
+     */
     static spawnVehicle(player: alt.Player, id: number) {
         if (!player || !player.valid || !player.data) {
             return;
