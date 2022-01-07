@@ -9,6 +9,7 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 
+const INTERACTION_RANGE = 0.5;
 class InternalFunctions {
     /**
      * Determines what function to call based on action passed.
@@ -191,6 +192,7 @@ export class AtmFunctions {
                 position,
                 description: 'Open the ATM',
                 type: 'atm',
+                range: INTERACTION_RANGE,
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, ATM_INTERACTIONS.OPEN);
                 },
