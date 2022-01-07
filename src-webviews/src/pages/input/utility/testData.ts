@@ -21,4 +21,26 @@ export default [
         type: 'text',
         placeholder: 'Whatever',
     },
+    {
+        id: 'gender',
+        desc: 'Your gender',
+        type: 'choice',
+        placeholder: 'male',
+        error: 'Slect male or femalse',
+        choices: [
+            { text: 'male', value: 'male' },
+            { text: 'female', values: 'female' },
+        ],
+    },
+    {
+        id: 'mate',
+        desc: 'Fav mate',
+        type: 'choice',
+        placeholder: 'male',
+        error: 'Select male or female',
+        choices: [
+            { text: 'male', value: 'male' },
+            { text: 'female', values: 'female' },
+        ],
+    },
 ];
