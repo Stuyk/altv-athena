@@ -373,18 +373,21 @@ export class StorageView {
         }
 
         if (!player.data.inventory[index]) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
 
         // Prevent items from being moved that are untradeable.
         if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_TRADE)) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
 
         // Prevent items from being moved that are undroppable.
         if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_DROP)) {
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
