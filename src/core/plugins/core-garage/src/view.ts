@@ -52,7 +52,6 @@ export class GarageFunctions {
         InteractionController.add({
             position: garage.position,
             description: `${LOCALE_GARAGE_FUNCS.BLIP_GARAGE} ${properTypeName}`,
-            type: 'garage',
             data: [garage.index], // Shop Index
             callback: GarageFunctions.open,
         });

@@ -2,51 +2,28 @@ import * as alt from 'alt-server';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { Interaction } from '../interface/Interaction';
 
+const DEFAULT_INTERACTION_HEIGHT = 3;
+
 export class InteractionShape extends alt.ColshapeCylinder {
-    isInteraction: boolean = true;
-    private interaction: Interaction = {};
+    interaction: Interaction = {};
 
-    constructor(position: alt.IVector3, radius: number, height: number) {
-        super(position.x, position.y, position.z, radius, height);
-        this.interaction.position = position;
-        this.isInteraction = true;
-        this.playersOnly = true;
-    }
+    constructor(interaction: Interaction) {
+        super(
+            interaction.position.x,
+            interaction.position.y,
+            interaction.position.z,
+            interaction.range,
+            DEFAULT_INTERACTION_HEIGHT,
+        );
 
-    /**
-     * Set the interaction functionality.
-     * @param {Interaction} interaction
-     * @memberof InteractionShape
-     */
-    setInteraction(interaction: Interaction): void {
+        // Set the dimension based on specifications from the interaction interface
+        if (this.dimension === undefined || this.dimension === null) {
+            this.dimension = 0;
+        } else {
+            this.dimension = interaction.dimension;
+        }
+
         this.interaction = interaction;
-    }
-
-    /**
-     * Get interaction functionality object.
-     * @return {*}  {Interaction}
-     * @memberof InteractionShape
-     */
-    getInteraction(): Interaction {
-        return this.interaction;
-    }
-
-    /**
-     * Set the unique identifier for this ColShape
-     * @param {string} identifier
-     * @memberof InteractionShape
-     */
-    setIdentifier(identifier: string): void {
-        this.interaction.identifier = identifier;
-    }
-
-    /**
-     * Get the identifier associated with this ColShape.
-     * @return {string}
-     * @memberof InteractionShape
-     */
-    getIdentifier(): string {
-        return this.interaction.identifier;
     }
 }
 

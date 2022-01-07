@@ -191,7 +191,6 @@ export class AtmFunctions {
             InteractionController.add({
                 position,
                 description: 'Open the ATM',
-                type: 'atm',
                 range: INTERACTION_RANGE,
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, ATM_INTERACTIONS.OPEN);

@@ -95,7 +95,6 @@ export class ClothingFunctions {
             const defaultInteraction: Interaction = {
                 position,
                 description: 'Browse Clothing Store',
-                type: 'clothing-store',
             };
 
             if (clothingStores[i].vertices) {

@@ -40,7 +40,6 @@ export class MuleJob {
         InteractionController.add({
             callback: MuleJob.begin,
             description: 'Deliver Packages',
-            disableMarker: true,
             position: START_POINT,
             range: 2,
         });

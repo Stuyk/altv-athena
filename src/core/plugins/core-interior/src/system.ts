@@ -88,15 +88,16 @@ class InternalSystem {
                 type: 0,
             });
 
-            interiorInfo.outsideShape = InteractionController.add({
+            const outsideUid = InteractionController.add({
                 description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
                 position: interior.outside,
-                type: `interior`,
-                identifier: `${interior.uid}-outside`,
+                uid: `${interior.uid}-outside`,
                 data: [interior.uid, true],
                 range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
             });
+
+            interiorInfo.outsideShape = InteractionController.get(outsideUid);
         }
 
         InternalSystem.refreshInteriorText(interiorInfo);
@@ -684,16 +685,17 @@ export class InteriorSystem {
         // Only creates it once for the single dimension since it does not exist yet.
         // Lowers need for additional interaction controllers.
         if (!interior.insideShape) {
-            interior.insideShape = InteractionController.add({
+            const insideUid = InteractionController.add({
                 description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
                 position: interior.inside,
-                type: `interior`,
-                identifier: `${interior.uid}-inside`,
+                uid: `${interior.uid}-inside`,
                 data: [interior.uid, false],
                 range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
                 dimension: interior.dimension,
             });
+
+            interior.insideShape = InteractionController.get(insideUid);
 
             ServerMarkerController.append({
                 uid: `${interior.uid}-inside`,

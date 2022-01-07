@@ -43,4 +43,26 @@ export default [
             { text: 'female', values: 'female' },
         ],
     },
+    {
+        id: 'randomize',
+        desc: 'Should this peds apperance be randomized?',
+        placeholder: '',
+        type: 'choice',
+        error: '',
+        choices: [
+            { text: 'Yes', value: 'true' },
+            { text: 'No', value: 'false' },
+        ],
+    },
+    {
+        id: 'textlabel',
+        desc: 'Should this ped have an Textlabel?',
+        placeholder: '',
+        type: 'choice',
+        error: '',
+        choices: [
+            { text: 'Yes', value: 'true' },
+            { text: 'No', value: 'false' },
+        ],
+    },
 ];
