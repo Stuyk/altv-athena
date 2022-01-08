@@ -39,10 +39,10 @@ export interface IPed {
 
     /**
      * A list of random animations to play on this pedestrian.
-     * @type {Animation[][]}
+     * @type {Animation[]}
      * @memberof IPed
      */
-    animations?: Animation[][];
+    animations?: Animation[];
 
     /**
      * Should the appearance of this ped be randomized when spawned?
