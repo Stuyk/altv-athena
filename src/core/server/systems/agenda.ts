@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { CharacterSelectFunctions } from '../views/characters';
 import { LoginFunctions } from '../views/login';
 import { LoginController } from './login';

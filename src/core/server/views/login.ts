@@ -3,13 +3,12 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { LoginController } from '../systems/login';
 import Ares from '../utility/ares';
 import { sha256Random } from '../utility/encryption';
 import ConfigUtil from '../utility/config';
 import { AgendaSystem } from '../systems/agenda';
-import { DiscordUser } from '../interface/DiscordUser';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.

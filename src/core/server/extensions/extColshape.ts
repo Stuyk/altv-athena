@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
+import { Interaction } from '../../shared/interfaces/interaction';
 import { Vector3 } from '../../shared/interfaces/vector';
-import { Interaction } from '../interface/Interaction';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
 

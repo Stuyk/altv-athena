@@ -2,10 +2,11 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { InteractionShape } from '../extensions/Colshape';
-import { playerFuncs } from '../extensions/Player';
-import { Interaction } from '../interface/Interaction';
 import { sha256Random } from '../utility/encryption';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { Interaction } from '../../shared/interfaces/interaction';
+import { InteractionShape } from '../extensions/extColshape';
+import { playerFuncs } from '../extensions/extPlayer';
 
 const interactions: Array<InteractionShape> = [];
 
@@ -61,6 +62,23 @@ class InternalFunctions {
             return;
         }
 
+        let valid = false;
+        if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
+            valid = true;
+        }
+
+        if (colshape.interaction.isVehicleOnly && entity.vehicle) {
+            valid = true;
+        }
+
+        if (!colshape.interaction.isPlayerOnly && !colshape.interaction.isVehicleOnly) {
+            valid = true;
+        }
+
+        if (!valid) {
+            return;
+        }
+
         // ! --- Debug Function
         if (colshape.interaction.debug) {
             console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
@@ -69,25 +87,9 @@ class InternalFunctions {
             playerFuncs.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
-        if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
-            entity.currentInteraction = colshape;
-            alt.emitClient(
-                entity,
-                SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
-                colshape.interaction.position,
-                colshape.interaction.description,
-            );
-        }
-
-        if (colshape.interaction.isVehicleOnly && entity.vehicle) {
-            entity.currentInteraction = colshape;
-            alt.emitClient(
-                entity,
-                SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
-                colshape.interaction.position,
-                colshape.interaction.description,
-            );
-        }
+        entity.currentInteraction = colshape;
+        const cleanInteraction = deepCloneObject<Omit<Interaction, 'callback'>>(colshape.interaction);
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, cleanInteraction);
     }
 
     /**
@@ -113,22 +115,8 @@ class InternalFunctions {
             playerFuncs.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
-        // Either in a vehicle, or on foot.
-        if (!colshape.interaction.isPlayerOnly && !colshape.interaction.isVehicleOnly) {
-            entity.currentInteraction = colshape;
-            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
-            return;
-        }
-
-        if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
-            entity.currentInteraction = colshape;
-            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
-        }
-
-        if (colshape.interaction.isVehicleOnly && entity.vehicle) {
-            entity.currentInteraction = colshape;
-            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
-        }
+        entity.currentInteraction = null;
+        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null);
     }
 
     /**

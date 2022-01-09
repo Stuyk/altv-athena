@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AgendaSystem } from '../systems/agenda';
-import './playerDeath';
 
 /**
  * Called when a player connects to the server.

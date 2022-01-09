@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
 import { IVehicle } from '../../../shared/interfaces/iVehicle';
-import { Collections } from '../../interface/DatabaseCollections';
-import VehicleFuncs from '../VehicleFuncs';
+import { Collections } from '../../interface/iDatabaseCollections';
 import { Character } from '../../../shared/interfaces/character';
+import VehicleFuncs from '../vehicleFuncs';
 
 /**
  * Get all the vehicles that belong to this player.

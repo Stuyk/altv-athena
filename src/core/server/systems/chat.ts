@@ -9,7 +9,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 

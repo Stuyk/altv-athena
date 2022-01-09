@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { IStorage } from '../../shared/interfaces/iStorage';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { StorageSystem } from '../systems/storage';
 import { View_Events_Storage } from '../../shared/enums/views';
 import { deepCloneObject } from '../../shared/utility/deepCopy';

@@ -1,9 +1,8 @@
 import Database from '@stuyk/ezmongodb';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { Collections } from '../interface/DatabaseCollections';
-import { defaultOptions, DiscordID, Options } from '../interface/Options';
+import { Collections } from '../interface/iDatabaseCollections';
+import { defaultOptions, DiscordID, Options } from '../interface/iOptions';
 import Logger from '../utility/athenaLogger';
-import './streamer';
 
 export class OptionsController {
     static data: Options = {};
@@ -47,7 +46,7 @@ export class OptionsController {
         Database.updatePartialData(
             OptionsController.data._id,
             { whitelist: OptionsController.data.whitelist },
-            Collections.Options
+            Collections.Options,
         );
 
         return true;
@@ -88,7 +87,7 @@ export class OptionsController {
         Database.updatePartialData(
             OptionsController.data._id,
             { whitelist: OptionsController.data.whitelist },
-            Collections.Options
+            Collections.Options,
         );
 
         return true;

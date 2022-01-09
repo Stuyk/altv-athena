@@ -1,9 +1,8 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Item } from '../../shared/interfaces/item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Collections } from '../interface/DatabaseCollections';
+import { Collections } from '../interface/iDatabaseCollections';
 
 const databaseItemNames: Array<{ name: string; dbName: string }> = [];
 let isDoneLoading = false;

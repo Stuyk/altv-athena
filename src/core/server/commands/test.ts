@@ -8,11 +8,11 @@ import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces
 import { IPed } from '../../shared/interfaces/iPed';
 import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
 import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { ServerPolygonController } from '../streamers/polygon';
 import ChatController from '../systems/chat';
-import { PedController } from '../systems/ped';
-import { WorldNotificationController } from '../systems/worldNotifications';
+import { PedController } from '../streamers/ped';
+import { WorldNotificationController } from '../streamers/worldNotifications';
 import { sha256Random } from '../utility/encryption';
 import { Animation } from '../../shared/interfaces/animation';
 import { Action } from '../../shared/interfaces/actions';

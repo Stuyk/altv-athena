@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { ServerPolygonController } from '../streamers/polygon';
 
 // Does nothing. Just writing some code here.

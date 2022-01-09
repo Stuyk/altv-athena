@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import ChatController from '../systems/chat';
 import { FactionSystem } from '../systems/factions';
 import { FactionInternalSystem } from '../systems/factionsInternal';

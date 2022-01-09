@@ -2,8 +2,8 @@ import * as alt from 'alt-server';
 
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
+import { playerFuncs } from '../extensions/extPlayer';
+import VehicleFuncs from '../extensions/vehicleFuncs';
 import { getForwardVector } from '../utility/vector';
 
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];

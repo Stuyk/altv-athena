@@ -1,8 +1,8 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { Account } from '../interface/Account';
-import { Collections } from '../interface/DatabaseCollections';
+import { Account } from '../interface/iAccount';
+import { Collections } from '../interface/iDatabaseCollections';
 
 let isDoneLoading = false;
 let id = -1;

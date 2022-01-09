@@ -7,7 +7,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};

@@ -1,8 +1,6 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { VehicleSystem } from '../systems/vehicle';
-
-alt.on('playerDeath', handleDeath);
 
 function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): void {
     if (player && player.valid) {
@@ -39,3 +37,5 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
         alt.log(`(${player.id}) ${player.data.name} killed themself in a vehicular incident.`);
     }
 }
+
+alt.on('playerDeath', handleDeath);

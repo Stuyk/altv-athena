@@ -5,7 +5,7 @@ import { FACTION_PERMISSION_FLAGS, FACTION_STORAGE } from '../../shared/flags/fa
 import { IResponse } from '../../shared/interfaces/iResponse';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { FactionInternalSystem } from './factionsInternal';
 
 /**

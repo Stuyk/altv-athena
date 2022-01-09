@@ -3,8 +3,8 @@ import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
+import { playerFuncs } from '../extensions/extPlayer';
+import VehicleFuncs from '../extensions/vehicleFuncs';
 import ChatController from '../systems/chat';
 import { VehicleSystem } from '../systems/vehicle';
 

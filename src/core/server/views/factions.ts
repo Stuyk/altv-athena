@@ -3,8 +3,6 @@ import { View_Events_Factions } from '../../shared/enums/views';
 import { FactionSystem } from '../systems/factions';
 import { FactionInternalSystem } from '../systems/factionsInternal';
 
-import '../systems/factions';
-
 class FactionsFunctions {
     static async open(player: alt.Player) {
         if (!player || !player.valid) {
