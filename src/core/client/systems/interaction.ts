@@ -166,14 +166,11 @@ export class InteractionController {
         if (validInteract && !alt.Player.local.closestItem) {
             const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, interaction.description);
             interactionInfo.push(newText);
-<<<<<<< HEAD
 
             // ! --- Debug Function
             if (interaction.debug) {
                 drawText3D(`${interaction.uid}`, interaction.position, 0.4, new alt.RGBA(255, 255, 255, 100));
             }
-=======
->>>>>>> a6b45a5ef6806868303b4d4af4bb302bc9ef4bee
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');

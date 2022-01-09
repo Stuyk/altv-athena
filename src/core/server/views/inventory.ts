@@ -17,7 +17,6 @@ import { INVENTORY_RULES } from '../../shared/enums/inventoryRules';
 import { SLOT_TYPE } from '../../shared/enums/inventorySlotTypes';
 import { ServerItemController } from '../streamers/item';
 import { ServerObjectController } from '../streamers/object';
-import '../systems/item';
 import { PlayerEvents } from '../events/playerEvents';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
