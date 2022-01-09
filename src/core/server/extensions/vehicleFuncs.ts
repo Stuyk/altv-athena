@@ -9,7 +9,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance2d } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { Collections } from '../interface/DatabaseCollections';
+import { Collections } from '../interface/iDatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
 import { VehicleData } from '../../shared/information/vehicles';
@@ -18,7 +18,7 @@ import { RGBA } from 'alt-shared';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 import { Item } from '../../shared/interfaces/item';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { playerFuncs } from './Player';
+import { playerFuncs } from './extPlayer';
 import { VehicleEvents } from '../events/vehicleEvents';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
