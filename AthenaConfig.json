@@ -9,7 +9,7 @@
     "[?] ex: mongodb://username:password@127.0.0.1:27017": "TYPE IS STRING",
     "MONGO_URL": null,
     "[?] Used for Ares Service Debugging": "TYPE IS STRING",
-    "ARES_ENDPOINT": "http://73.203.79.117:8080",
+    "ARES_ENDPOINT": null,
     "[?] Use altv-reconnect Program? https://github.com/Stuyk/altv-reconnect": "TYPE IS STRING",
     "USE_ALTV_RECONNECT": true
 }
