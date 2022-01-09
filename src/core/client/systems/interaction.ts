@@ -12,7 +12,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { drawText2D, drawText3D } from '../utility/text';
+import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;

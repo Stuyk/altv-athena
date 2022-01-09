@@ -17,18 +17,23 @@ class InternalFunctions {
      */
     static add(shape: InteractionShape) {
         interactions.push(shape);
-        console.log(`--> Total Interactions: ${interactions.length}`);
     }
 
     /**
      * Remove all interactions with the given uid.
      * @param {string} uid - The unique identifier for the interaction.
-     * @returns None
      */
     static remove(uid: string): void {
         for (var i = interactions.length - 1; i >= 0; i--) {
             if (interactions[i].interaction && interactions[i].interaction.uid !== uid) {
                 continue;
+            }
+
+            // ! --- Debug Function
+            if (interactions[i].interaction.debug) {
+                console.log(`--- ColShape Interaction ---`);
+                console.log(`Remove ColShape`);
+                console.log(`Removing ${interactions[i].interaction.uid}`);
             }
 
             try {
@@ -56,6 +61,7 @@ class InternalFunctions {
             return;
         }
 
+        // ! --- Debug Function
         if (colshape.interaction.debug) {
             console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
@@ -99,6 +105,7 @@ class InternalFunctions {
             return;
         }
 
+        // ! --- Debug Function
         if (colshape.interaction.debug) {
             console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
@@ -133,20 +140,48 @@ class InternalFunctions {
             return;
         }
 
-        const dist = distance2d(player.pos, player.currentInteraction.pos);
+        const shape: InteractionShape = player.currentInteraction;
+        if (!shape.interaction) {
+            return;
+        }
+
+        const dist = distance2d(player.pos, shape.interaction.position);
+
+        // ! --- Debug Function
+        if (shape.interaction.debug) {
+            console.log(`--- ColShape Interaction ---`);
+            console.log(`UID: ${shape.interaction.uid}`);
+            console.log(`Triggered by ${player.data.name}`);
+            console.log(`Range: ${shape.interaction.range}`);
+            console.log(`Distance From Player: ${dist}`);
+        }
+
         if (dist >= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
             playerFuncs.emit.notification(player, `~r~Too far away to interact.`);
             return;
         }
 
-        const interaction = player.currentInteraction.interaction;
+        const interaction = shape.interaction;
         if (!interaction || !interaction.callback) {
             return;
         }
 
         if (interaction.data) {
+            // ! --- Debug Function
+            if (shape.interaction.debug) {
+                console.log(`Triggered Callback for Interaction`);
+                console.log(`Arguments:`);
+                console.log(JSON.stringify(interaction.data, null, '\t'));
+            }
+
             interaction.callback(player, ...interaction.data);
             return;
+        }
+
+        // ! --- Debug Function
+        if (shape.interaction.debug) {
+            console.log(`Triggered Callback for Interaction`);
+            console.log(`No Arguments`);
         }
 
         interaction.callback(player);
@@ -170,6 +205,14 @@ export class InteractionController {
 
         if (interaction.range < 1) {
             interaction.range = 1;
+        }
+
+        // ! --- Debug Function
+        if (interaction.debug) {
+            console.log(`--- ColShape Interaction ---`);
+            console.log(`Interaction Created`);
+            console.log(`UID: ${interaction.uid}`);
+            console.log(interaction);
         }
 
         const shape = new InteractionShape(interaction);
