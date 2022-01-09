@@ -6,7 +6,7 @@ import './events/disconnect';
 import './events/keyup';
 // Interfaces - Always Load First
 import './extensions/Meta';
-import './extensions/extPlayer';
+import './extensions/Player';
 import './extensions/Vehicle';
 // Menus
 import './menus/animation';
