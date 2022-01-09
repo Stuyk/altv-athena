@@ -9,7 +9,7 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 
-const INTERACTION_RANGE = 0.5;
+const INTERACTION_RANGE = 1.5;
 class InternalFunctions {
     /**
      * Determines what function to call based on action passed.

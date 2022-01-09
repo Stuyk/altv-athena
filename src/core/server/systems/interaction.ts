@@ -17,6 +17,7 @@ class InternalFunctions {
      */
     static add(shape: InteractionShape) {
         interactions.push(shape);
+        console.log(`--> Total Interactions: ${interactions.length}`);
     }
 
     /**
@@ -163,6 +164,10 @@ export class InteractionController {
 
         if (!interaction.range) {
             interaction.range = 2.5;
+        }
+
+        if (interaction.range < 1) {
+            interaction.range = 1;
         }
 
         const shape = new InteractionShape(interaction);
