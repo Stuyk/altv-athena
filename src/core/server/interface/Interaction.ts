@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Vector3 } from '../../shared/interfaces/vector';
 
 /**
- * By default Interactions are 'player' only unless specified.
+ * By default Interactions are supported for vehicle and player.
  * @export
  * @interface Interaction
  */
@@ -64,8 +64,7 @@ export interface Interaction {
     isVehicleOnly?: boolean;
 
     /**
-     * Used to force an interaction to be player only.
-     * By default is neither is specified it is player only.
+     * Should this interaction only work if the player is on foot?
      * @type {boolean}
      * @memberof Interaction
      */

@@ -91,6 +91,13 @@ class InternalFunctions {
             return;
         }
 
+        // Either in a vehicle, or on foot.
+        if (!colshape.interaction.isPlayerOnly && !colshape.interaction.isVehicleOnly) {
+            entity.currentInteraction = colshape;
+            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
+            return;
+        }
+
         if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
             entity.currentInteraction = colshape;
             alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
@@ -144,11 +151,6 @@ export class InteractionController {
 
         if (!interaction.range) {
             interaction.range = 2.5;
-        }
-
-        // Auto-set ColShape to be player only if not specified.
-        if (interaction.isPlayerOnly === undefined && interaction.isVehicleOnly === undefined) {
-            interaction.isPlayerOnly = true;
         }
 
         const shape = new InteractionShape(interaction);
