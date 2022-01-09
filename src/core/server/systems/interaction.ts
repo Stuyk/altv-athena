@@ -55,6 +55,12 @@ class InternalFunctions {
             return;
         }
 
+        if (colshape.interaction.debug) {
+            console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
+            console.log(`--- ColShape Interaction ---`);
+            console.log(colshape.interaction);
+        }
+
         if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
             entity.currentInteraction = colshape;
             alt.emitClient(
@@ -89,6 +95,12 @@ class InternalFunctions {
 
         if (!(entity instanceof alt.Player)) {
             return;
+        }
+
+        if (colshape.interaction.debug) {
+            console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);
+            console.log(`--- ColShape Interaction ---`);
+            console.log(colshape.interaction);
         }
 
         // Either in a vehicle, or on foot.

@@ -54,6 +54,7 @@ export class GarageFunctions {
             description: `${LOCALE_GARAGE_FUNCS.BLIP_GARAGE} ${properTypeName}`,
             data: [garage.index], // Shop Index
             callback: GarageFunctions.open,
+            isPlayerOnly: true,
         });
 
         ServerBlipController.append({

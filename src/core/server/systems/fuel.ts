@@ -50,6 +50,7 @@ class FuelSystem {
                 position: fuelPump,
                 description: 'Refuel Vehicle',
                 callback: FuelSystem.request,
+                isPlayerOnly: true,
             });
         }
     }

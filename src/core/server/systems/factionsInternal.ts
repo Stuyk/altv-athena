@@ -115,6 +115,7 @@ export class FactionInternalSystem {
                 position: factions[faction].storageLocation,
                 data: [FACTION_STORAGE.STORAGE],
                 callback: FactionSystem.openStorage,
+                isPlayerOnly: true,
             });
 
             ServerMarkerController.append({
@@ -132,6 +133,7 @@ export class FactionInternalSystem {
                 position: factions[faction].weaponLocation,
                 data: [FACTION_STORAGE.WEAPONS],
                 callback: FactionSystem.openStorage,
+                isPlayerOnly: true,
             });
 
             ServerMarkerController.append({

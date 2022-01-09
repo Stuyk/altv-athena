@@ -42,6 +42,7 @@ export class MuleJob {
             description: 'Deliver Packages',
             position: START_POINT,
             range: 2,
+            isPlayerOnly: true,
         });
     }
 

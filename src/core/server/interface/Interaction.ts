@@ -69,4 +69,11 @@ export interface Interaction {
      * @memberof Interaction
      */
     isPlayerOnly?: boolean;
+
+    /**
+     * If set to true debug information will be sent to console.
+     * @type {boolean}
+     * @memberof Interaction
+     */
+    debug?: boolean;
 }

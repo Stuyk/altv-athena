@@ -95,6 +95,7 @@ class InternalSystem {
                 data: [interior.uid, true],
                 range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
+                isPlayerOnly: true,
             });
 
             interiorInfo.outsideShape = InteractionController.get(outsideUid);
@@ -693,6 +694,7 @@ export class InteriorSystem {
                 range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
                 dimension: interior.dimension,
+                isPlayerOnly: true,
             });
 
             interior.insideShape = InteractionController.get(insideUid);

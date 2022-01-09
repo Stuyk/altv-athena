@@ -42,6 +42,7 @@ export class PizzaJob {
             description: 'Deliver Pizzas',
             position: START_POINT,
             range: 2,
+            isPlayerOnly: true,
         });
     }
 

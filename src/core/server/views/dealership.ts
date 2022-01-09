@@ -32,6 +32,7 @@ class DealershipFunctions {
                         `dealership-holo-${i}`, // identifier
                     );
                 },
+                isPlayerOnly: true,
             });
 
             HologramController.add({

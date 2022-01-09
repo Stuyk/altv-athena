@@ -195,6 +195,7 @@ export class AtmFunctions {
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, ATM_INTERACTIONS.OPEN);
                 },
+                isPlayerOnly: true,
             });
         }
     }
