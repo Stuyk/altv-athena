@@ -21,9 +21,8 @@ let hookInteractions: Array<(interactions: Array<IClientInteraction>) => void> =
 let tick: number;
 let pressedKey = false;
 let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-let interaction: Omit<Interaction, 'callback'>;
+let interaction: Interaction = null;
 let temporaryInteraction: string = null;
-let isVehicleOnly: boolean = false;
 
 export class InteractionController {
     /**
@@ -80,8 +79,8 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static set(_interaction: Omit<Interaction, 'callback'>) {
-        if (!interaction) {
+    static set(_interaction: Interaction) {
+        if (!_interaction) {
             interaction = null;
             return;
         }
@@ -162,8 +161,7 @@ export class InteractionController {
         const interactionInfo = [];
 
         // Display Help Text - Only will show if the player is not near any items.
-        const validInteract = interaction && interaction.description;
-        if (validInteract && !alt.Player.local.closestItem) {
+        if (interaction && interaction.description && !alt.Player.local.closestItem) {
             const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, interaction.description);
             interactionInfo.push(newText);
 

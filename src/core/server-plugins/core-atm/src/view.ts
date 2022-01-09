@@ -196,6 +196,7 @@ export class AtmFunctions {
                     alt.emitClient(player, ATM_INTERACTIONS.OPEN);
                 },
                 isPlayerOnly: true,
+                debug: false,
             });
         }
     }

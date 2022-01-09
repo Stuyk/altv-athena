@@ -89,6 +89,7 @@ class InternalFunctions {
 
         entity.currentInteraction = colshape;
         const cleanInteraction = deepCloneObject<Omit<Interaction, 'callback'>>(colshape.interaction);
+        console.log(cleanInteraction);
         alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, cleanInteraction);
     }
 
