@@ -55,17 +55,25 @@ class InternalFunctions {
             return;
         }
 
-        if (colshape.interaction.isVehicleOnly && !entity.vehicle) {
-            return;
+        if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
+            entity.currentInteraction = colshape;
+            alt.emitClient(
+                entity,
+                SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
+                colshape.interaction.position,
+                colshape.interaction.description,
+            );
         }
 
-        entity.currentInteraction = colshape;
-        alt.emitClient(
-            entity,
-            SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
-            colshape.interaction.position,
-            colshape.interaction.description,
-        );
+        if (colshape.interaction.isVehicleOnly && entity.vehicle) {
+            entity.currentInteraction = colshape;
+            alt.emitClient(
+                entity,
+                SYSTEM_EVENTS.PLAYER_SET_INTERACTION,
+                colshape.interaction.position,
+                colshape.interaction.description,
+            );
+        }
     }
 
     /**
@@ -83,13 +91,15 @@ class InternalFunctions {
             return;
         }
 
-        if (colshape.interaction.isVehicleOnly && !entity.vehicle) {
-            return;
+        if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
+            entity.currentInteraction = colshape;
+            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
         }
 
-        entity.currentInteraction = colshape;
-        alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
-        return;
+        if (colshape.interaction.isVehicleOnly && entity.vehicle) {
+            entity.currentInteraction = colshape;
+            alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, null, null);
+        }
     }
 
     /**
@@ -134,6 +144,11 @@ export class InteractionController {
 
         if (!interaction.range) {
             interaction.range = 2.5;
+        }
+
+        // Auto-set ColShape to be player only if not specified.
+        if (interaction.isPlayerOnly === undefined && interaction.isVehicleOnly === undefined) {
+            interaction.isPlayerOnly = true;
         }
 
         const shape = new InteractionShape(interaction);

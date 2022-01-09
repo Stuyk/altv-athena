@@ -1,6 +1,11 @@
 import * as alt from 'alt-server';
 import { Vector3 } from '../../shared/interfaces/vector';
 
+/**
+ * By default Interactions are 'player' only unless specified.
+ * @export
+ * @interface Interaction
+ */
 export interface Interaction {
     /**
      * A unique identifier for the Interaction
@@ -57,4 +62,12 @@ export interface Interaction {
      * @memberof Interaction
      */
     isVehicleOnly?: boolean;
+
+    /**
+     * Used to force an interaction to be player only.
+     * By default is neither is specified it is player only.
+     * @type {boolean}
+     * @memberof Interaction
+     */
+    isPlayerOnly?: boolean;
 }
