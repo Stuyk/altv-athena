@@ -102,6 +102,32 @@ export class ItemFactory {
     }
 
     /**
+     * Updates a Database Item
+     * Item requires full-overwrite and returns true if updated.
+     * May return false if item does not exist.
+     * @static
+     * @param {string} dbItemName
+     * @return {*}  {Promise<boolean>}
+     * @memberof ItemFactory
+     */
+    static async update(dbItemName: string, partialItemReplacement: Partial<Item>): Promise<boolean> {
+        await ItemFactory.isDoneLoading();
+
+        if (databaseItemNames.findIndex((x) => x.dbName === dbItemName) <= -1) {
+            alt.logWarning(`Item Registry - Could not find item ${dbItemName} to update.`);
+            return false;
+        }
+
+        const item = await Database.fetchData<Item>('dbName', dbItemName, Collections.Items);
+        if (!item) {
+            alt.logWarning(`Item Registry - Could not find item ${dbItemName} to update.`);
+            return false;
+        }
+
+        return await Database.updatePartialData(item._id.toString(), partialItemReplacement, Collections.Items);
+    }
+
+    /**
      * Get all items stored for local lookups.
      * Fastest way to find an item that exists in the database.
      *
