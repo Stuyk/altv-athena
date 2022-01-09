@@ -90,19 +90,15 @@ export class FactionInternalSystem {
         }
 
         const blipName = `${faction}-blip`;
-
-        const typeStorage = 'faction-storage';
         const storageName = `${faction}-storage`;
-
-        const typeWeapons = 'faction-weapons';
         const weaponsName = `${faction}-weapons`;
 
         // Storage
-        InteractionController.remove(typeStorage, storageName);
+        InteractionController.remove(storageName);
         ServerMarkerController.remove(storageName);
 
         // Weapons
-        InteractionController.remove(typeWeapons, weaponsName);
+        InteractionController.remove(weaponsName);
         ServerMarkerController.remove(weaponsName);
 
         // Blip
@@ -114,12 +110,12 @@ export class FactionInternalSystem {
 
         if (factions[faction].storageLocation) {
             InteractionController.add({
-                type: typeStorage,
+                uid: storageName,
                 description: `Access Faction Storage`,
-                identifier: storageName,
                 position: factions[faction].storageLocation,
                 data: [FACTION_STORAGE.STORAGE],
                 callback: FactionSystem.openStorage,
+                isPlayerOnly: true,
             });
 
             ServerMarkerController.append({
@@ -132,12 +128,12 @@ export class FactionInternalSystem {
 
         if (factions[faction].weaponLocation) {
             InteractionController.add({
-                type: typeWeapons,
+                uid: weaponsName,
                 description: `Access Faction Weapons`,
-                identifier: weaponsName,
                 position: factions[faction].weaponLocation,
                 data: [FACTION_STORAGE.WEAPONS],
                 callback: FactionSystem.openStorage,
+                isPlayerOnly: true,
             });
 
             ServerMarkerController.append({

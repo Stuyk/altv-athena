@@ -100,6 +100,28 @@ ChatController.addCommand('testinput', '/testinput', PERMISSIONS.ADMIN, (player:
                 type: InputOptionType.NUMBER,
                 error: 'Must specify property value.',
             },
+            {
+                id: 'randomize',
+                desc: 'Should this peds apperance be randomized?',
+                placeholder: '',
+                type: InputOptionType.CHOICE,
+                error: '',
+                choices: [
+                    { text: 'Yes', value: 'true' },
+                    { text: 'No', value: 'false' },
+                ],
+            },
+            {
+                id: 'textlabel',
+                desc: 'Should this ped have an Textlabel?',
+                placeholder: '',
+                type: InputOptionType.CHOICE,
+                error: '',
+                choices: [
+                    { text: 'Yes', value: 'true' },
+                    { text: 'No', value: 'false' },
+                ],
+            },
         ],
         serverEvent: 'cmd:Input:Test',
         generalOptions: {
@@ -203,6 +225,20 @@ ChatController.addCommand(
     '/testped - A Test Ped. Does not delete itself',
     PERMISSIONS.ADMIN,
     (player: alt.Player) => {
+        let anim1: Animation = {
+            dict: 'random@arrests@busted',
+            name: 'idle_a',
+            flags: ANIMATION_FLAGS.REPEAT | ANIMATION_FLAGS.UPPERBODY_ONLY,
+            duration: -1,
+        };
+
+        let anim2: Animation = {
+            dict: 'random@arrests',
+            name: 'idle_2_hands_up',
+            flags: ANIMATION_FLAGS.NORMAL | ANIMATION_FLAGS.STOP_LAST_FRAME,
+            duration: -1,
+        };
+
         const ped: IPed = {
             uid: `ped-${Math.floor(Math.random() * 500000)}`,
             model: 'u_f_m_casinocash_01',
@@ -211,6 +247,7 @@ ChatController.addCommand(
                 y: player.pos.y,
                 z: player.pos.z - 1,
             },
+            animations: [anim1, anim2],
         };
 
         PedController.append(ped);

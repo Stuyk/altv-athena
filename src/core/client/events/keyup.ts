@@ -56,6 +56,10 @@ export class KeybindController {
             return;
         }
 
+        if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
         // Console Menu
         if (alt.isMenuOpen()) {
             return;
@@ -95,6 +99,10 @@ export class KeybindController {
     static keyDown(key: number) {
         // Athena Menus
         if (alt.Player.local.isMenuOpen) {
+            return;
+        }
+
+        if (alt.Player.local.isChatOpen) {
             return;
         }
 

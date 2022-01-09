@@ -40,9 +40,9 @@ export class PizzaJob {
         InteractionController.add({
             callback: PizzaJob.begin,
             description: 'Deliver Pizzas',
-            disableMarker: true,
             position: START_POINT,
             range: 2,
+            isPlayerOnly: true,
         });
     }
 

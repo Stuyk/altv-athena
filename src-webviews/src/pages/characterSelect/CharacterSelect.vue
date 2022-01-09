@@ -148,6 +148,10 @@ export default defineComponent({
                 return '';
             }
 
+            if (!this.characters[this.characterIndex].hours) {
+                return '';
+            }
+
             return this.characters[this.characterIndex].hours.toFixed(2);
         },
         getBank() {
@@ -155,10 +159,18 @@ export default defineComponent({
                 return '';
             }
 
+            if (!this.characters[this.characterIndex].bank) {
+                return '';
+            }
+
             return this.characters[this.characterIndex].bank.toFixed(2);
         },
         getCash() {
             if (!this.characters[this.characterIndex]) {
+                return '';
+            }
+
+            if (!this.characters[this.characterIndex].cash) {
                 return '';
             }
 

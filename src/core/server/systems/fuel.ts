@@ -46,10 +46,11 @@ class FuelSystem {
             }
 
             InteractionController.add({
+                uid: `fuel-pump-${i}`,
                 position: fuelPump,
                 description: 'Refuel Vehicle',
-                type: 'fuel',
                 callback: FuelSystem.request,
+                isPlayerOnly: true,
             });
         }
     }

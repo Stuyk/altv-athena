@@ -96,17 +96,9 @@ class PedController {
         isRemoving = false;
     }
 
-    static playAnimation(uid: string, animation: Animation[]) {
+    static playAnimation(uid: string, animation: Animation) {
         if (pedInfo[uid] !== null && pedInfo[uid] !== undefined) {
-            for (let i = 0; i < animation.length; i++) {
-                playPedAnimation(
-                    pedInfo[uid],
-                    animation[i].dict,
-                    animation[i].name,
-                    animation[i].flags,
-                    animation[i].duration,
-                );
-            }
+            playPedAnimation(pedInfo[uid], animation.dict, animation.name, animation.flags, animation.duration);
         }
     }
 

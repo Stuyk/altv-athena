@@ -95,7 +95,6 @@ export class ClothingFunctions {
             const defaultInteraction: Interaction = {
                 position,
                 description: 'Browse Clothing Store',
-                type: 'clothing-store',
             };
 
             if (clothingStores[i].vertices) {
@@ -144,7 +143,7 @@ export class ClothingFunctions {
             y: position.y,
             z: position.z - 1,
         };
-
+        interaction.isPlayerOnly = true;
         interaction.callback = (player: alt.Player) => {
             const data = ClothingFunctions.getClothingStoreData(store.uid);
             alt.emitClient(player, CLOTHING_INTERACTIONS.OPEN, data);

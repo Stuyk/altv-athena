@@ -1,9 +1,12 @@
 {
     "[?] A Discord Bot Secret from the Discord Developer Panel": {},
+    "[?] Needs to be a string 1/3": {},
     "DISCORD_BOT": null,
     "[?] The Discord Server ID your Bot is On": {},
+    "[?] Needs to be a string 2/3": {},
     "DISCORD_SERVER_ID": null,
     "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": {},
+    "[?] Needs to be a string 3/3": {},
     "WHITELIST_ROLE": null,
     "[?] A URI with authentication to connect to a MongoDB Database": {},
     "[?] ex: mongodb://username:password@127.0.0.1:27017": {},

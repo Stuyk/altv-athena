@@ -21,4 +21,48 @@ export default [
         type: 'text',
         placeholder: 'Whatever',
     },
+    {
+        id: 'gender',
+        desc: 'Your gender',
+        type: 'choice',
+        placeholder: 'male',
+        error: 'Select male or female',
+        choices: [
+            { text: 'male', value: 'male' },
+            { text: 'female', values: 'female' },
+        ],
+    },
+    {
+        id: 'mate',
+        desc: 'Fav mate',
+        type: 'choice',
+        placeholder: 'male',
+        error: 'Select male or female',
+        choices: [
+            { text: 'male', value: 'male' },
+            { text: 'female', values: 'female' },
+        ],
+    },
+    {
+        id: 'randomize',
+        desc: 'Should this peds apperance be randomized?',
+        placeholder: '',
+        type: 'choice',
+        error: '',
+        choices: [
+            { text: 'Yes', value: 'true' },
+            { text: 'No', value: 'false' },
+        ],
+    },
+    {
+        id: 'textlabel',
+        desc: 'Should this ped have an Textlabel?',
+        placeholder: '',
+        type: 'choice',
+        error: '',
+        choices: [
+            { text: 'Yes', value: 'true' },
+            { text: 'No', value: 'false' },
+        ],
+    },
 ];

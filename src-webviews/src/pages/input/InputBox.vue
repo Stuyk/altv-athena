@@ -12,7 +12,7 @@
                 </div>
                 <div v-for="(item, index) in menu" :key="index" class="mb-4 element">
                     <Input
-                        v-if="item.type != 'choice'"
+                        v-if="item.type !== 'choice'"
                         :label="item.desc"
                         :stack="true"
                         :onInput="(text) => inputChange(item.id, text)"

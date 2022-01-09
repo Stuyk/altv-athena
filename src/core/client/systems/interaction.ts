@@ -12,7 +12,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import { drawText2D, drawText3D } from '../utility/text';
+import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
 const TIME_BETWEEN_CHECKS = 500;
@@ -24,6 +24,7 @@ let disableMarker: boolean = false;
 let description: string;
 let position: alt.Vector3;
 let temporaryInteraction: string = null;
+let isVehicleOnly: boolean = false;
 
 export class InteractionController {
     /**
@@ -80,16 +81,17 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static set(_position: alt.Vector3, _description: string, _disableMarker: boolean) {
+    static set(_position: alt.Vector3, _description: string, _isVehicleOnly = false) {
         if (!_position || !_description) {
             position = null;
             description = null;
+            isVehicleOnly = false;
             return;
         }
 
         position = _position;
         description = _description;
-        disableMarker = _disableMarker;
+        isVehicleOnly = _isVehicleOnly;
     }
 
     static tick() {
@@ -168,10 +170,6 @@ export class InteractionController {
         if (description && position && !alt.Player.local.closestItem) {
             const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, description);
             interactionInfo.push(newText);
-
-            if (!disableMarker) {
-                drawText2D('o', position, 0.4, new alt.RGBA(255, 255, 255, 100));
-            }
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');

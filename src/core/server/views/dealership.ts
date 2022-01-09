@@ -18,7 +18,7 @@ class DealershipFunctions {
             InteractionController.add({
                 position: dealership.position,
                 description: `Browse ${dealership.class}'s`,
-                type: `dealership-${i}`,
+                uid: `dealership-${i}`,
                 range: 2,
                 callback: (player: alt.Player) => {
                     const vehicles = VehicleData.filter((x) => x.class === dealership.class);
@@ -32,6 +32,7 @@ class DealershipFunctions {
                         `dealership-holo-${i}`, // identifier
                     );
                 },
+                isPlayerOnly: true,
             });
 
             HologramController.add({
