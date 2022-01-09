@@ -60,6 +60,7 @@ class InternalFunctions {
             console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
+            playerFuncs.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
         if (colshape.interaction.isPlayerOnly && !entity.vehicle) {
@@ -102,6 +103,7 @@ class InternalFunctions {
             console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
+            playerFuncs.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
         // Either in a vehicle, or on foot.
