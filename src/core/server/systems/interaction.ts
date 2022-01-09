@@ -107,6 +107,11 @@ class InternalFunctions {
             return;
         }
 
+        const shape: InteractionShape = entity.currentInteraction;
+        if (!shape.interaction) {
+            return;
+        }
+
         // ! --- Debug Function
         if (colshape.interaction.debug) {
             console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);

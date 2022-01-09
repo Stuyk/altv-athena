@@ -4,7 +4,7 @@ import { CHARACTER_PERMISSIONS } from '../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
 import { distance2d } from '../../../shared/utility/vector';
-import { playerFuncs } from '../../../server/extensions/extPlayer';
+import { playerFuncs } from '../../../server/extensions/Player';
 import ChatController from '../../../server/systems/chat';
 import { emitAll } from '../../../server/utility/emitHelper';
 import { getPlayersByGridSpace } from '../../../server/utility/filters';
