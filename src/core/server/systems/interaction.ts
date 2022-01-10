@@ -54,6 +54,10 @@ class InternalFunctions {
      * @returns None
      */
     static enter(colshape: InteractionShape, entity: alt.Entity) {
+        if (!colshape || !colshape.interaction || !entity || !entity.valid) {
+            return;
+        }
+
         if (!colshape.interaction || !colshape.interaction.uid) {
             return;
         }
@@ -100,6 +104,10 @@ class InternalFunctions {
      * @returns None
      */
     static leave(colshape: InteractionShape, entity: alt.Entity) {
+        if (!colshape || !colshape.interaction || !entity || !entity.valid) {
+            return;
+        }
+
         if (!colshape.interaction || !colshape.interaction.uid) {
             return;
         }
