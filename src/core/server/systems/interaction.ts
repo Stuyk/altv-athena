@@ -93,7 +93,6 @@ class InternalFunctions {
 
         entity.currentInteraction = colshape;
         const cleanInteraction = deepCloneObject<Omit<Interaction, 'callback'>>(colshape.interaction);
-        console.log(cleanInteraction);
         alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, cleanInteraction);
     }
 
@@ -118,6 +117,11 @@ class InternalFunctions {
 
         const shape: InteractionShape = entity.currentInteraction;
         if (!shape.interaction) {
+            return;
+        }
+
+        // Prevents the leave event until a shape is actually left
+        if (colshape.interaction.uid !== shape.interaction.uid) {
             return;
         }
 
