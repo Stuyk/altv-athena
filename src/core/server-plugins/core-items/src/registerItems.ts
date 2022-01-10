@@ -23,7 +23,8 @@ export class RegisterItems {
                 data: {
                     hash: weapon.hash,
                 },
-                dbName: weapon.name
+                dbName: weapon.name,
+                version: 1
             });
         }
     }
