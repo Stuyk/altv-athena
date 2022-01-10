@@ -22,6 +22,7 @@ export const items: Array<Item> = [
             amount: 5,
             sound: 'item_eat',
         },
+        version: 1
     },
     {
         name: `Ultra Delicious Burger`,
@@ -42,6 +43,7 @@ export const items: Array<Item> = [
             amount: 25,
             sound: 'item_eat',
         },
+        version: 1
     },
     {
         name: `Bread`,
@@ -61,6 +63,7 @@ export const items: Array<Item> = [
             amount: 3,
             sound: 'item_eat',
         },
+        version: 1
     },
     {
         name: `Repair Kit`,
@@ -78,6 +81,7 @@ export const items: Array<Item> = [
         data: {
             event: 'effect:Vehicle:Repair',
         },
+        version: 1
     },
     // Add more items here if you want
 ];
