@@ -2,6 +2,7 @@ import './example/index';
 import './example-agenda/index';
 import './core-atm/index';
 import './core-clothing/index';
+import './core-factions/index';
 import './core-garage/index';
 import './core-interior/index';
 import './core-items/index';

@@ -19,3 +19,19 @@ export interface IResponse {
      */
     response: string;
 }
+
+export interface IGenericResponse<ReturnType> {
+    /**
+     * Did this function pass or fail.
+     * @type {boolean}
+     * @memberof IResponse
+     */
+    status: boolean;
+
+    /**
+     * What was the reason why it passed or failed.
+     * @type {ReturnType}
+     * @memberof IResponse
+     */
+    response: ReturnType;
+}
