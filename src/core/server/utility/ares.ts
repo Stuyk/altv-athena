@@ -184,7 +184,8 @@ export default class Ares {
         if (process.platform.includes('win')) {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
         } else {
-            toolsPath = path.join(toolsPath, 'altv-athena-hwid-win');
+            toolsPath = path.join(toolsPath, 'altv-athena-hwid-linux');
+            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => {});
         }
 
         if (!existsSync(toolsPath)) {
@@ -195,7 +196,8 @@ export default class Ares {
         const result: string = await new Promise((resolve: Function) => {
             exec(toolsPath, (stderr, stdout) => {
                 if (stderr) {
-                    return null;
+                    console.log(stderr);
+                    return resolve(null);
                 }
 
                 resolve(stdout.replace(/(\r\n|\n|\r)/gm, '').replace(/ /g, ''));

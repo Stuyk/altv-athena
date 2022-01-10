@@ -3,7 +3,7 @@ import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/item';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { EQUIPMENT_TYPE } from '../../shared/enums/equipmentType';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';

@@ -6,9 +6,9 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Item, ItemSpecial } from '../../../shared/interfaces/item';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
-import { CategoryData } from '../../interface/CategoryData';
+import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
-import { playerFuncs } from '../Player';
+import { playerFuncs } from '../extPlayer';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;

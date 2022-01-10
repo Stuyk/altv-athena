@@ -3,12 +3,10 @@ import * as alt from 'alt-server';
 import { Player } from 'alt-server';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { Character } from '../../shared/interfaces/character';
-import { Item } from '../../shared/interfaces/item';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/Player';
-import { Collections } from '../interface/DatabaseCollections';
+import { playerFuncs } from '../extensions/extPlayer';
+import { Collections } from '../interface/iDatabaseCollections';
 import { AgendaSystem } from '../systems/agenda';
-import './clothing';
 
 export class CharacterSelectFunctions {
     /**

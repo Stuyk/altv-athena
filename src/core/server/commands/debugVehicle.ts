@@ -3,8 +3,8 @@ import ChatController from '../systems/chat';
 import { getVectorInFrontOfPlayer } from '../utility/vector';
 
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
+import { playerFuncs } from '../extensions/extPlayer';
+import VehicleFuncs from '../extensions/vehicleFuncs';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';

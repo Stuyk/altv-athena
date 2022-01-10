@@ -16,9 +16,9 @@ import { IVehicle } from '../../shared/interfaces/iVehicle';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
-import { Collections } from '../interface/DatabaseCollections';
+import { playerFuncs } from '../extensions/extPlayer';
+import VehicleFuncs from '../extensions/vehicleFuncs';
+import { Collections } from '../interface/iDatabaseCollections';
 import Logger from '../utility/athenaLogger';
 import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
@@ -30,9 +30,6 @@ import IVehicleRuleData from '../../shared/interfaces/iVehicleRuleData';
 import SystemRules from './rules';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import '../views/paintshop';
-import '../views/dealership';
-import './fuel';
 import { VehicleEvents } from '../events/vehicleEvents';
 
 /**

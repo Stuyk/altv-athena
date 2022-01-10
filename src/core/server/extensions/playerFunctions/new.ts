@@ -4,7 +4,7 @@ import Database from '@stuyk/ezmongodb';
 import { Appearance } from '../../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../../shared/interfaces/characterInfo';
 import select from './select';
-import { Collections } from '../../interface/DatabaseCollections';
+import { Collections } from '../../interface/iDatabaseCollections';
 import { AgendaSystem } from '../../systems/agenda';
 
 /**

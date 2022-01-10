@@ -2,8 +2,8 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import fs from 'fs';
 
-import { Account } from '../interface/Account';
-import { Collections } from '../interface/DatabaseCollections';
+import { Account } from '../interface/iAccount';
+import { Collections } from '../interface/iDatabaseCollections';
 import { AdminController } from '../systems/admin';
 import ChatController from '../systems/chat';
 import { OptionsController } from '../systems/options';

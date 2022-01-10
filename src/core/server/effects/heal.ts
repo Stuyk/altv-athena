@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
 import { Item } from '../../shared/interfaces/item';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import EFFECT from '../../shared/enums/effects';
-import './loadEffects';
 
 alt.on(EFFECT.EFFECT_HEAL, handleItemEvent);
 

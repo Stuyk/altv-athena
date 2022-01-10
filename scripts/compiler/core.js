@@ -27,7 +27,7 @@ const SWC_CONFIG = {
             dynamicImport: true,
         },
         target: 'es2020',
-    },
+    }
 };
 
 async function cleanFolders() {

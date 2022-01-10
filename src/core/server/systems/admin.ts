@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../interface/Account';
-import { Collections } from '../interface/DatabaseCollections';
+import { Account } from '../interface/iAccount';
+import { Collections } from '../interface/iDatabaseCollections';
 import Logger from '../utility/athenaLogger';
 
 export class AdminController {

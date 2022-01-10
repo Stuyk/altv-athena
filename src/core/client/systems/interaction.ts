@@ -8,6 +8,7 @@ import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import keyboardMap from '../../shared/information/keyboardMap';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
+import { Interaction } from '../../shared/interfaces/interaction';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
@@ -20,11 +21,8 @@ let hookInteractions: Array<(interactions: Array<IClientInteraction>) => void> =
 let tick: number;
 let pressedKey = false;
 let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
-let disableMarker: boolean = false;
-let description: string;
-let position: alt.Vector3;
+let interaction: Interaction = null;
 let temporaryInteraction: string = null;
-let isVehicleOnly: boolean = false;
 
 export class InteractionController {
     /**
@@ -81,17 +79,13 @@ export class InteractionController {
      * @param {alt.Vector3} position
      * @memberof InteractionController
      */
-    static set(_position: alt.Vector3, _description: string, _isVehicleOnly = false) {
-        if (!_position || !_description) {
-            position = null;
-            description = null;
-            isVehicleOnly = false;
+    static set(_interaction: Interaction) {
+        if (!_interaction) {
+            interaction = null;
             return;
         }
 
-        position = _position;
-        description = _description;
-        isVehicleOnly = _isVehicleOnly;
+        interaction = _interaction;
     }
 
     static tick() {
@@ -167,9 +161,14 @@ export class InteractionController {
         const interactionInfo = [];
 
         // Display Help Text - Only will show if the player is not near any items.
-        if (description && position && !alt.Player.local.closestItem) {
-            const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, description);
+        if (interaction && interaction.description && !alt.Player.local.closestItem) {
+            const newText = InteractionController.getInteractionInfo(KEY_BINDS.INTERACT, interaction.description);
             interactionInfo.push(newText);
+
+            // ! --- Debug Function
+            if (interaction.debug) {
+                drawText3D(`${interaction.uid}`, interaction.position, 0.4, new alt.RGBA(255, 255, 255, 100));
+            }
         }
 
         const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');

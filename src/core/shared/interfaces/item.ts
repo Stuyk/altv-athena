@@ -123,6 +123,13 @@ export interface Item {
      * @memberof Item
      */
     data: { [key: string]: any };
+
+    /**
+     * In case you want to track item versions and modify older versions of items per-inventory.
+     * @type {number}
+     * @memberof Item
+     */
+    version?: number;
 }
 
 export interface ItemSpecial extends Item {

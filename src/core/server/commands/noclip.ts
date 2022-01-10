@@ -3,7 +3,7 @@ import ChatController from '../systems/chat';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 

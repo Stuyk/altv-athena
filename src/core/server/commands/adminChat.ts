@@ -4,7 +4,7 @@ import { getPlayersByPermissionLevel } from '../utility/filters';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { emitAll } from '../utility/emitHelper';
 import { View_Events_Chat } from '../../shared/enums/views';
-import { playerFuncs } from '../extensions/Player';
+import { playerFuncs } from '../extensions/extPlayer';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 

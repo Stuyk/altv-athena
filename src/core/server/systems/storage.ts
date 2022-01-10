@@ -1,8 +1,6 @@
 import { IStorage } from '../../shared/interfaces/iStorage';
 import Database from '@stuyk/ezmongodb';
-import { Collections } from '../interface/DatabaseCollections';
-
-import '../views/storage';
+import { Collections } from '../interface/iDatabaseCollections';
 
 let isInUse: { [storage_id: string]: boolean } = {};
 

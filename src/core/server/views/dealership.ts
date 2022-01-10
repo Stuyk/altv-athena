@@ -5,8 +5,8 @@ import { View_Events_Dealership } from '../../shared/enums/views';
 import { ServerBlipController } from '../systems/blip';
 import { HologramController } from '../systems/hologram';
 import { VehicleData } from '../../shared/information/vehicles';
-import { playerFuncs } from '../extensions/Player';
-import VehicleFuncs from '../extensions/VehicleFuncs';
+import { playerFuncs } from '../extensions/extPlayer';
+import VehicleFuncs from '../extensions/vehicleFuncs';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PlayerEvents } from '../events/playerEvents';
 

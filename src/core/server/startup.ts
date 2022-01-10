@@ -5,7 +5,7 @@ import path from 'path';
 
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { PostController } from './ares/postRequests';
-import { IConfig } from './interface/IConfig';
+import { IConfig } from './interface/iConfig';
 import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
@@ -70,16 +70,20 @@ class Startup {
         const result = await PostController.post(`${endpoint}/v1/post/verify`, {
             public_key: Ares.getPublicKey(),
             hwid,
+            version: ConfigUtil.getAthenaVersion(),
         });
 
         if (!result) {
-            Logger.error(`Cannot Verify IP at this time. Try again.`);
+            alt.logWarning(`Cannot Verify IP or Hardware ID. Did you read the docs?`);
+            alt.logWarning(`https://docs.athenaframework.com/`);
             process.exit(1);
         }
 
         // Not Verified
         if (result && result.status === false) {
-            Logger.error(result.message);
+            alt.logWarning(result.message);
+            alt.logWarning(`Cannot Verify IP or Hardware ID. Did you read the docs?`);
+            alt.logWarning(`https://docs.athenaframework.com/`);
             process.exit(1);
         }
 

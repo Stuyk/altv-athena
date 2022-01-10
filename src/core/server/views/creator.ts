@@ -5,8 +5,8 @@ import { CharacterInfo } from '../../shared/interfaces/characterInfo';
 import { CharacterSelectFunctions, handleNewCharacter } from './characters';
 import Database from '@stuyk/ezmongodb';
 import { Character } from '../../shared/interfaces/character';
-import { playerFuncs } from '../extensions/Player';
-import { Collections } from '../interface/DatabaseCollections';
+import { playerFuncs } from '../extensions/extPlayer';
+import { Collections } from '../interface/iDatabaseCollections';
 
 alt.onClient(View_Events_Creator.Done, handleCreatorDone);
 alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);

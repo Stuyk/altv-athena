@@ -1,9 +1,8 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Item } from '../../shared/interfaces/item';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Collections } from '../interface/DatabaseCollections';
+import { Collections } from '../interface/iDatabaseCollections';
 
 const databaseItemNames: Array<{ name: string; dbName: string }> = [];
 let isDoneLoading = false;
@@ -100,6 +99,32 @@ export class ItemFactory {
         const newItem = deepCloneObject<Item>(item);
         newItem.quantity = 1;
         return newItem;
+    }
+
+    /**
+     * Updates a Database Item
+     * Item requires full-overwrite and returns true if updated.
+     * May return false if item does not exist.
+     * @static
+     * @param {string} dbItemName
+     * @return {*}  {Promise<boolean>}
+     * @memberof ItemFactory
+     */
+    static async update(dbItemName: string, partialItemReplacement: Partial<Item>): Promise<boolean> {
+        await ItemFactory.isDoneLoading();
+
+        if (databaseItemNames.findIndex((x) => x.dbName === dbItemName) <= -1) {
+            alt.logWarning(`Item Registry - Could not find item ${dbItemName} to update.`);
+            return false;
+        }
+
+        const item = await Database.fetchData<Item>('dbName', dbItemName, Collections.Items);
+        if (!item) {
+            alt.logWarning(`Item Registry - Could not find item ${dbItemName} to update.`);
+            return false;
+        }
+
+        return await Database.updatePartialData(item._id.toString(), partialItemReplacement, Collections.Items);
     }
 
     /**
