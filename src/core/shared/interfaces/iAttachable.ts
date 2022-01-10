@@ -35,7 +35,7 @@ export default interface IAttachable {
      * @type {number}
      * @memberof IAttachable
      */
-    bone?: number;
+    bone: number;
 
     /**
      * Do not define this. Leave it alone.
