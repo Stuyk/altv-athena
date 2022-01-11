@@ -31,6 +31,14 @@ export interface RankPermissions {
     manageRanks: boolean;
 
     /**
+     * Can this rank manage rank permissions lower than itself?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    manageRankPermissions: boolean;
+
+    /**
      * Can this rank manage members by promoting and demoting lower than itself?
      *
      * @type {boolean}
