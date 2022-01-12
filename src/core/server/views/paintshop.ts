@@ -22,19 +22,9 @@ export class PainShopFunctions {
     static init() {
         const someShops: Array<IPaintShop> = [
             {
-                cost: 500,
-                uid: 'paint-shop-1',
-                vertices: [
-                    { x: -329.2366638183594, y: -141.3553009033203, z: 38.06044387817383 },
-                    { x: -330.82879638671875, y: -145.72210693359375, z: 38.059635162353516 },
-                    { x: -324.7835388183594, y: -147.92138671875, z: 38.063636779785156 },
-                    { x: -323.1226501464844, y: -143.58056640625, z: 38.06044387817383 },
-                ],
-            },
-            {
                 // LSC Burton Carcer Way Paint Shop
                 cost: 500,
-                uid: 'paint-shop-2',
+                uid: 'paint-shop-1',
                 vertices: [
                     { x: -329.2366638183594, y: -141.3553009033203, z: 38.06044387817383 },
                     { x: -330.82879638671875, y: -145.72210693359375, z: 38.059635162353516 },
@@ -45,7 +35,7 @@ export class PainShopFunctions {
             {
                 // LSC International Airport Greenwich Pkwy Paint Shop
                 cost: 500,
-                uid: 'paint-shop-3',
+                uid: 'paint-shop-2',
                 vertices: [
                     { x: -1163.248291015625, y: -2012.6636962890625, z: 13.221923828125},
                     { x: -1167.82421875, y: -2017.3055419921875, z: 13.221923828125},
@@ -56,7 +46,7 @@ export class PainShopFunctions {
             {
                 // LSC La Mesa Olympic Fwy Paint Shop
                 cost: 500,
-                uid: 'paint-shop-4',
+                uid: 'paint-shop-3',
                 vertices: [
                     { x: 733.3450317382812, y: -1075.5692138671875, z: 22.2197265625 },
                     { x: 733.3450317382812, y: -1069.054931640625, z: 22.2197265625},
@@ -67,7 +57,7 @@ export class PainShopFunctions {
             {
                 //Benny's Strawberry Alta St Paint Shop
                 cost: 500,
-                uid: 'paint-shop-5',
+                uid: 'paint-shop-4',
                 vertices: [
                     { x: -201.95603942871094, y: -1322.03076171875, z: 31.116455078125},
                     { x: -195.45494079589844, y: -1322.017578125, z: 31.116455078125},
