@@ -1,15 +1,20 @@
 {
-    "[?] A Discord Bot Secret from the Discord Developer Panel": "TYPE IS STRING",
+    "[?] A Discord Bot Secret from the Discord Developer Panel": {},
     "DISCORD_BOT": null,
-    "[?] The Discord Server ID your Bot is On": "TYPE IS STRING",
+
+    "[?] The Discord Server ID your Bot is On": {},
     "DISCORD_SERVER_ID": null,
-    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": "TYPE IS STRING",
+
+    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": {},
     "WHITELIST_ROLE": null,
-    "[?] A URI with authentication to connect to a MongoDB Database": "TYPE IS STRING",
-    "[?] ex: mongodb://username:password@127.0.0.1:27017": "TYPE IS STRING",
-    "MONGO_URL": null,
-    "[?] Used for Ares Service Debugging": "TYPE IS STRING",
+
+    "[?] A URI with authentication to connect to a MongoDB Database": {},
+    "[?] ex: mongodb://username:password@127.0.0.1:27017": {},
+    "MONGO_URL": "mongodb+srv://admin:HalloHallo123@altv.hsyhs.mongodb.net/test?authSource=admin&replicaSet=atlas-8m4yx7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true",
+
+    "[?] Used for Ares Service Debugging": {},
     "ARES_ENDPOINT": null,
-    "[?] Use altv-reconnect Program? https://github.com/Stuyk/altv-reconnect": "TYPE IS STRING",
-    "USE_ALTV_RECONNECT": true
+
+    "[?] Use altv-reconnect Program? https://github.com/Stuyk/altv-reconnect": {},
+    "USE_ALTV_RECONNECT": false
 }
