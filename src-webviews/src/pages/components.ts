@@ -18,6 +18,7 @@ import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
 import PaintShop from './paintshop/PaintShop.vue';
 import AthenaLogo from './athenaLogo/AthenaLogo.vue';
+import ShopUI from './shopUI/ShopUI.vue';
 // import Factions from './factions/Factions.vue';
 
 // Append components here...
@@ -34,6 +35,7 @@ const componentList = {
     Clothing: shallowRef(Clothing),
     Designs: shallowRef(Designs),
     // Factions: shallowRef(Factions),
+    ShopUI: shallowRef(ShopUI),
     Garage: shallowRef(Garage),
     Hud: shallowRef(Hud),
     Icons: shallowRef(Icons),

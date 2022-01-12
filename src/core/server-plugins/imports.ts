@@ -9,7 +9,7 @@ import './core-nametags/index';
 import './job-mule-delivery/index';
 import './job-pizza-delivery/index';
 import './commands-roleplay/index';
-
+import './athena-oss/index';
 // Example: import './hotels/index'
 // Make sure example import is calling the PluginSystem
 // for a callback registration.

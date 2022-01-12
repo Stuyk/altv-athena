@@ -6,5 +6,8 @@ import './core-interior/index';
 import './core-nametags/index';
 import './example-agenda/index';
 
+import './athena-oss/view';
+import './athena-oss/src/client-events';
+
 // Specify what you are loading here.
 // import './example-folder/index';
