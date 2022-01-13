@@ -210,7 +210,7 @@ export class InteractionController {
                 }
 
                 // Press 'X' to lock vehicle
-                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL) == true && !isDestroyed) {
+                if (vehicle.getStreamSyncedMeta(VEHICLE_STATE.LOCK_INTERACTION_INFO) == true && !isDestroyed) {
                     const lockText = LocaleController.get(LOCALE_KEYS.VEHICLE_TOGGLE_LOCK);
                     const newText = InteractionController.getInteractionInfo(KEY_BINDS.VEHICLE_LOCK, lockText);
                     interactionInfo.push(newText);
