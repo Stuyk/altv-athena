@@ -75,7 +75,7 @@ export const DEFAULT_CONFIG = {
     VEHICLE_SPAWN_TIMEOUT: 24, // Hours that must pass since a vehicle was last used to avoid spawning on server restart.
     VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     VEHICLE_DISPLAY_LOCK_STATUS: true, // Display vehicle lock status above vehicle
-    VEHICLE_DISPLAY_LOCK_INTERACTION_INFO: true, // Display interaction info above vehicle
+    VEHICLE_DISPLAY_LOCK_INTERACTION_INFO: true, // Display interaction info in hud
     // Vehicle Garage List, Includes Parking Spots with Rotations
     // Order of the array matters. Don't forget that.
     VEHICLE_DEALERSHIPS: [
