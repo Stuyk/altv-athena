@@ -278,7 +278,8 @@ export default class VehicleFuncs {
         vehicle.passengers = [];
         vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK_INTERACTION_INFO, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO);
 
         // Setup Default Document Values
         if (document.fuel === null || document.fuel === undefined) {
@@ -400,7 +401,8 @@ export default class VehicleFuncs {
         }
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK_INTERACTION_INFO, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO);
         return vehicle;
     }
 
