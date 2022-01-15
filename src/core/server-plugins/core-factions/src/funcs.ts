@@ -304,6 +304,32 @@ export class FactionFuncs {
         const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
+
+    /**
+     * Updates rank weight to specified weight.
+     * Ensures that rank is not already weight 99.
+     * Auto-saves
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} rankUid
+     * @return {Promise<boolean>}
+     * @memberof FactionFuncs
+     */
+    static async updateRankWeight(faction: Faction, rankUid: string, weight: number): Promise<boolean> {
+        if (weight <= -1 || weight >= 99) {
+            return false;
+        }
+
+        const index = faction.ranks.findIndex((r) => r.uid === rankUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        faction.ranks[index].weight = weight;
+        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        return didUpdate.status;
+    }
 }
 
 /**
@@ -729,5 +755,37 @@ export class FactionPlayerFuncs {
         }
 
         return await FactionFuncs.updateRankPermissions(faction, rankUid, rankPermissions);
+    }
+
+    /**
+     * Set the weight of a rank.
+     * @param player - The player who is trying to change the rank weight.
+     * @param {string} rankUid - The rank to update.
+     * @param {number} weight - The weight of the rank.
+     */
+    static async setRankWeight(player: alt.Player, rankUid: string, weight: number) {
+        const faction = FactionSystem.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageRanks) {
+                return false;
+            }
+
+            if (selfRank.uid === rankUid) {
+                return false;
+            }
+
+            const isRankAbove = FactionFuncs.isRankAbove(faction, selfRank.uid, rankUid);
+            if (isRankAbove) {
+                return false;
+            }
+        }
+
+        return await FactionFuncs.updateRankWeight(faction, rankUid, weight);
     }
 }
