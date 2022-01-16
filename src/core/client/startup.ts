@@ -5,9 +5,9 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 // Interfaces - Always Load First
-import './extensions/Meta';
-import './extensions/Player';
-import './extensions/Vehicle';
+import './extensions/meta';
+import './extensions/player';
+import './extensions/vehicle';
 // Menus
 import './menus/animation';
 import './menus/player';

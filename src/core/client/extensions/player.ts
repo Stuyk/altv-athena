@@ -1,5 +1,5 @@
 import { GroundItem } from '../../shared/interfaces/groundItem';
-import { Meta } from './Meta';
+import { Meta } from './meta';
 
 declare module 'alt-client' {
     export interface Player {
