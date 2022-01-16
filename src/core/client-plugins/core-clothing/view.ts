@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import PedEditCamera from '../../client/utility/camera';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { CLOTHING_INTERACTIONS } from '../../shared-plugins/core-clothing/events';

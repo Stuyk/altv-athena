@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import { ATHENA_EXAMPLE_AGENDA } from '../../shared-plugins/example-agenda/enums';
 
 // You should change this to match your Vue Template's ComponentName.

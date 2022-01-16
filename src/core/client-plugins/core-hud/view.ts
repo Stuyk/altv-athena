@@ -6,7 +6,7 @@ import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
 import IHudComponent from '../../shared/interfaces/iHudComponent';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import { InteractionController } from '../../client/systems/interaction';
 import { World } from '../../client/systems/world';
 

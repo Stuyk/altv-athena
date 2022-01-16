@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import fetch from 'node-fetch';
 import * as http from 'http';
 import ConfigUtil from './config';
 
@@ -22,11 +23,33 @@ export class ReconnectHelper {
             return;
         }
 
+        const [major, minor] = alt.version.split('.');
+        if (parseInt(major) >= 9) {
+            console.log(`Using built-in reconnect strategy`);
+            this.altvReconnect();
+            return;
+        }
+
+        console.log(`Using Old Reconnect Strategy`);
+        // Use altv-reconnect strategy
         ReconnectHelper.sendRequest();
     }
 
     private static isWindows(): boolean {
         return process.platform.includes('win');
+    }
+
+    private static altvReconnect() {
+        fetch('http://127.0.0.1:9223/status')
+            .then(async (res) => {
+                const body = await res.text();
+                if (body == 'MAIN_MENU' || body == 'IN_GAME') {
+                    fetch('http://127.0.0.1:9223/reconnect');
+                } else {
+                    alt.setTimeout(this.altvReconnect, 3000);
+                }
+            })
+            .catch(alt.log);
     }
 
     private static sendRequest() {

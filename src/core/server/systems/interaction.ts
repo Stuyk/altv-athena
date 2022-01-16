@@ -116,7 +116,7 @@ class InternalFunctions {
         }
 
         const shape: InteractionShape = entity.currentInteraction;
-        if (!shape.interaction) {
+        if (!shape || !shape.interaction) {
             return;
         }
 

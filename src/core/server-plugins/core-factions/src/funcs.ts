@@ -15,6 +15,19 @@ import { isFlagEnabled } from '../../../shared/utility/flags';
 import { FACTION_CONFIG } from './config';
 import { FactionSystem, FACTION_COLLECTION } from './system';
 
+/**
+ * ? addMember
+ * ? kickMember
+ * ? addRank
+ * ? removeRank
+ * ? updateRankName
+ * ? updateRankWeight
+ * ? addBank
+ * ? removeBank
+ *
+ * @export
+ * @class FactionFuncs
+ */
 export class FactionFuncs {
     /**
      * Get a faction character's rank based on character identifier

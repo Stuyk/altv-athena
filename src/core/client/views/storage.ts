@@ -4,7 +4,7 @@ import { Item } from '../../shared/interfaces/item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 
 const PAGE_NAME = 'Storage';

@@ -10,7 +10,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { Timer } from '../utility/timers';
