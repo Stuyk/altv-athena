@@ -19,6 +19,8 @@ import { VehicleSystem } from '../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../shared/interfaces/iResponse';
 
+let hasInitialized = false;
+
 /**
  * ? addMember
  * ? kickMember
@@ -33,13 +35,18 @@ import { IResponse } from '../../../shared/interfaces/iResponse';
  * @export
  * @class FactionFuncs
  */
-export class FactionFuncs {
+class FactionFuncs {
     /**
      * This function is called when factions are initialized. It adds custom rules to the
      * VehicleSystem to check for faction specific vehicles.
      * @returns None
      */
     static init() {
+        if (hasInitialized) {
+            return;
+        }
+
+        hasInitialized = true;
         VehicleSystem.addCustomRule(VEHICLE_RULES.UNLOCK, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.LOCK, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
@@ -407,6 +414,7 @@ export class FactionFuncs {
 
     /**
      * Create a storage facility for the faction.
+     * Auto-saves
      *
      * @static
      * @param {Faction} faction
@@ -430,6 +438,7 @@ export class FactionFuncs {
 
     /**
      * Add a rank to access a storage facility.
+     * Auto-saves
      *
      * @static
      * @param {Faction} faction
@@ -460,6 +469,7 @@ export class FactionFuncs {
 
     /**
      * Remove a rank from a storage facility
+     * Auto-saves
      *
      * @param {Faction} faction - Faction
      * @param {number} storageIndex - The index of the storage in the faction's storages array.
@@ -487,6 +497,7 @@ export class FactionFuncs {
 
     /**
      * Add a vehicle to the faction garage
+     * Auto-saves
      *
      * @static
      * @param {Faction} faction
@@ -507,6 +518,7 @@ export class FactionFuncs {
 
     /**
      * Remove a vehicle from the faction garage.
+     * Auto-saves
      *
      * @static
      * @param {Faction} faction
@@ -531,6 +543,8 @@ export class FactionFuncs {
 
     /**
      * Add a rank to a vehicle.
+     * Auto-saves
+     *
      * @param {Faction} faction - Faction
      * @param {string} vehicleUid - _id of the vehicle
      * @param {string} rankUid - The rank to add to the vehicle
@@ -558,6 +572,8 @@ export class FactionFuncs {
 
     /**
      * Remove a rank from a vehicle.
+     * Auto-saves
+     *
      * @param {Faction} faction - Faction
      * @param {string} vehicleUid - The vehicle's _id
      * @param {string} rankUid - The rank to remove from the vehicle.
@@ -591,7 +607,7 @@ export class FactionFuncs {
  * @export
  * @class FactionPlayerFuncs
  */
-export class FactionPlayerFuncs {
+class FactionPlayerFuncs {
     /**
      * Verify a player is a Faction Admin
      *
@@ -1041,3 +1057,10 @@ export class FactionPlayerFuncs {
         return await FactionFuncs.updateRankWeight(faction, rankUid, weight);
     }
 }
+
+export const factionFuncs = {
+    init: FactionFuncs.init,
+    player: FactionPlayerFuncs,
+    system: FactionFuncs,
+    utility: FactionSystem,
+};

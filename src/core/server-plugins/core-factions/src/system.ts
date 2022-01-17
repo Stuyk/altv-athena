@@ -9,7 +9,7 @@ import { Faction, FactionCore, FactionRank } from '../../../shared-plugins/core-
 import { Character } from '../../../shared/interfaces/character';
 import { IGenericResponse } from '../../../shared/interfaces/iResponse';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import './funcs';
+import { factionFuncs } from './funcs';
 
 export const FACTION_COLLECTION = 'factions';
 const factions: { [key: string]: Faction } = {};
@@ -46,6 +46,9 @@ export class FactionSystem {
         for (let i = 0; i < factions.length; i++) {
             InternalFunctions.create(factions[i]);
         }
+
+        // Used to initialize internal functions for factions.
+        factionFuncs.init();
     }
 
     /**
@@ -244,5 +247,35 @@ export class FactionSystem {
      */
     static get(_id: string): Faction {
         return factions[_id];
+    }
+
+    /**
+     * Find a faction by name.
+     *
+     * @static
+     * @param {string} nameOrPartialName
+     * @return {*}  {(Faction | null)}
+     * @memberof FactionSystem
+     */
+    static find(nameOrPartialName: string): Faction | null {
+        let faction: Faction;
+
+        nameOrPartialName = nameOrPartialName.replace(/ /g, '').toLowerCase();
+
+        const factionsList = Object.values(faction) as Array<Faction>;
+        const index = factionsList.findIndex((f) => {
+            const adjustedName = f.name.replace(/ /g, '').toLowerCase();
+            if (adjustedName.includes(nameOrPartialName)) {
+                return true;
+            }
+
+            return false;
+        });
+
+        if (index <= -1) {
+            return null;
+        }
+
+        return factionsList[index];
     }
 }
