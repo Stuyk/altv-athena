@@ -2,10 +2,10 @@ import * as alt from 'alt-server';
 import { Item } from '../../shared/interfaces/item';
 import { playerFuncs } from '../extensions/extPlayer';
 import EFFECT from '../../shared/enums/effects';
+import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
+import { ItemEffects } from '../systems/itemEffects';
 
-alt.on(EFFECT.EFFECT_HEAL, handleItemEvent);
-
-function handleItemEvent(player: alt.Player, item: Item, slot: number, tab: number) {
+function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE) {
     if (!item || !item.data || !item.data.amount) {
         return;
     }
@@ -17,3 +17,5 @@ function handleItemEvent(player: alt.Player, item: Item, slot: number, tab: numb
         playerFuncs.emit.sound3D(player, item.data.sound, player);
     }
 }
+
+ItemEffects.add(EFFECT.EFFECT_HEAL, handleItemEvent);
