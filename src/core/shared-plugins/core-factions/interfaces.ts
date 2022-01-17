@@ -301,6 +301,18 @@ export interface Faction extends FactionCore {
     actions: { [key: string]: Array<string> };
 
     /**
+     * A way to passively invoke faction based actions on a faction.
+     * This is a unique way to update a specific faction's user base in-game.
+     * Think of it like a 'tick' event for factions but it's slower.
+     *
+     * Can be used for things like paychecks, robbery reports, etc.
+     *
+     * @type {Array<string>}
+     * @memberof Faction
+     */
+    tickActions: Array<string>;
+
+    /**
      * Vehicles that are in control for this Faction.
      *
      * @type {Array<FactionVehicle>}

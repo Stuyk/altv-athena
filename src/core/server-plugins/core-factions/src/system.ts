@@ -95,6 +95,7 @@ export class FactionSystem {
             vehicles: [],
             storages: [],
             actions: {},
+            tickActions: [],
         };
 
         const document = await Database.insertData<Faction>(faction, FACTION_COLLECTION, true);
@@ -277,5 +278,16 @@ export class FactionSystem {
         }
 
         return factionsList[index];
+    }
+
+    /**
+     * Return an array of all factions
+     *
+     * @static
+     * @return {*}
+     * @memberof FactionSystem
+     */
+    static getAllFactions() {
+        return Object.values(factions) as Array<Faction>;
     }
 }

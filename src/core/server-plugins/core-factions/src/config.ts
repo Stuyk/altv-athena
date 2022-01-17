@@ -5,4 +5,5 @@ export const FACTION_CONFIG = {
         //
         PERMISSIONS.ADMIN,
     ],
+    FactionActionTickTime: 5000, // Highly recommended to keep this slow
 };

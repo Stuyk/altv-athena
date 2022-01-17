@@ -598,6 +598,93 @@ class FactionFuncs {
         const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
+
+    /**
+     * Add a callable player faction action to a faction.
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} rankUid
+     * @param {string} actionUid
+     * @return {Promise<boolean>}
+     * @memberof FactionFuncs
+     */
+    static async addPlayerAction(faction: Faction, rankUid: string, actionUid: string): Promise<boolean> {
+        if (!faction.actions[rankUid]) {
+            faction.actions[rankUid] = [];
+        }
+
+        const index = faction.actions[rankUid].findIndex((uid) => uid === actionUid);
+        if (index >= 0) {
+            return false;
+        }
+
+        faction.actions[rankUid].push(actionUid);
+        const didUpdate = await FactionSystem.update(faction._id as string, { actions: faction.actions });
+        return didUpdate.status;
+    }
+
+    /**
+     * removePlayerAction removes an action from the faction
+     * @param {Faction} faction - Faction - The faction that the action is being removed from.
+     * @param {string} rankUid - The rankUid of the rank that the action belongs to.
+     * @param {string} actionUid - The unique ID of the action to remove.
+     */
+    static async removePlayerAction(faction: Faction, rankUid: string, actionUid: string): Promise<void> {
+        if (!faction.actions[rankUid]) {
+            faction.actions[rankUid] = [];
+        }
+
+        const index = faction.actions[rankUid].findIndex((uid) => uid === actionUid);
+        if (index <= -1) {
+            return;
+        }
+
+        faction.actions[rankUid].splice(index, 1);
+        await FactionSystem.update(faction._id as string, { actions: faction.actions });
+    }
+
+    /**
+     * Add a tick action to a faction.
+     * @param {Faction} faction - Faction
+     * @param {string} actionUid - The unique identifier of the action to add.
+     * @returns A boolean value.
+     */
+    static async addTickAction(faction: Faction, actionUid: string): Promise<boolean> {
+        if (!faction.tickActions) {
+            faction.tickActions = [];
+        }
+
+        const index = faction.tickActions.findIndex((uid) => uid === actionUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        faction.tickActions.push(actionUid);
+        const didUpdate = await FactionSystem.update(faction._id as string, { tickActions: faction.tickActions });
+        return didUpdate.status;
+    }
+
+    /**
+     * Add a tick action to a faction.
+     * @param {Faction} faction - Faction
+     * @param {string} actionUid - The unique identifier of the action to add.
+     * @returns A boolean value.
+     */
+    static async removeTickAction(faction: Faction, actionUid: string): Promise<boolean> {
+        if (!faction.tickActions) {
+            faction.tickActions = [];
+        }
+
+        const index = faction.tickActions.findIndex((uid) => uid === actionUid);
+        if (index >= 0) {
+            return false;
+        }
+
+        faction.tickActions.splice(index, 1);
+        const didUpdate = await FactionSystem.update(faction._id as string, { tickActions: faction.tickActions });
+        return didUpdate.status;
+    }
 }
 
 /**
