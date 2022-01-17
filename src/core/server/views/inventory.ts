@@ -626,7 +626,7 @@ export class InventoryController {
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item, slot);
+            alt.emit(item.data.event, player, item, slot, 'inventory');
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }

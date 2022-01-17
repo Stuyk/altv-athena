@@ -37,7 +37,7 @@ export class ToolbarController {
 
         // Handle Consume Item from Toolbar
         if (isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
-            ToolbarController.handleToolbarUse(player, item);
+            ToolbarController.handleToolbarUse(player, item, slot);
             return;
         }
 
@@ -96,7 +96,7 @@ export class ToolbarController {
      * @param {Item} item - The item that was used.
      * @returns None
      */
-    static handleToolbarUse(player: alt.Player, item: Item) {
+    static handleToolbarUse(player: alt.Player, item: Item, slot: number) {
         if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;
 
@@ -111,7 +111,7 @@ export class ToolbarController {
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item);
+            alt.emit(item.data.event, player, item, slot, 'toolbar');
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }

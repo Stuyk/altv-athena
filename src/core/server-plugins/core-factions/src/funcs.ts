@@ -18,6 +18,7 @@ import { Vector3 } from '../../../shared/interfaces/vector';
 import { VehicleSystem } from '../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../shared/interfaces/iResponse';
+import { FactionActions } from './actions';
 
 let hasInitialized = false;
 
@@ -1146,6 +1147,7 @@ class FactionPlayerFuncs {
 }
 
 export const factionFuncs = {
+    actions: FactionActions,
     init: FactionFuncs.init,
     player: FactionPlayerFuncs,
     system: FactionFuncs,
