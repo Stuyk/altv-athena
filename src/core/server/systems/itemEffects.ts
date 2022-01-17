@@ -36,6 +36,7 @@ export class ItemEffects {
 
     /**
      * Invokes a callback for an item effect
+     *
      * @param player - The player who is using the item.
      * @param {Item} item - The item object.
      * @param {INVENTORY_TYPE} type - INVENTORY_TYPE
@@ -46,11 +47,11 @@ export class ItemEffects {
             return;
         }
 
-        if (!item.data.effect) {
+        if (!item.data.event) {
             return;
         }
 
-        const callback = effects.get(item.data.effect);
+        const callback = effects.get(item.data.event);
         if (!callback || typeof callback !== 'function') {
             return;
         }

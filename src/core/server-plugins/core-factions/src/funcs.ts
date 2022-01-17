@@ -7,18 +7,18 @@ import { Character } from '../../../shared/interfaces/character';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { FACTION_CONFIG } from './config';
 import { FactionSystem, FACTION_COLLECTION } from './system';
-import {
-    Faction,
-    FactionCharacter,
-    FactionRank,
-    RankPermissions,
-} from '../../../shared-plugins/core-factions/interfaces';
 import { StorageSystem } from '../../../server/systems/storage';
 import { Vector3 } from '../../../shared/interfaces/vector';
 import { VehicleSystem } from '../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../shared/interfaces/iResponse';
 import { FactionActions } from './actions';
+import {
+    Faction,
+    FactionCharacter,
+    FactionRank,
+    RankPermissions,
+} from '../../../shared-plugins/core-factions/interfaces';
 
 let hasInitialized = false;
 

@@ -14,7 +14,7 @@ const tickActions: {
 
 class InternalFunctions {
     static init() {
-        alt.setInterval(InternalFunctions.tick, 2500);
+        alt.setInterval(InternalFunctions.tick, 1000);
     }
 
     static tick() {
@@ -35,6 +35,11 @@ class InternalFunctions {
             for (let actionIndex = 0; actionIndex < faction.tickActions.length; actionIndex++) {
                 const actionUid = faction.tickActions[actionIndex];
                 if (!tickActions[actionUid]) {
+                    continue;
+                }
+
+                // Check that it's ready to be invoked
+                if (tickActions[actionUid].nextUpdate && Date.now() < tickActions[actionUid].nextUpdate) {
                     continue;
                 }
 
