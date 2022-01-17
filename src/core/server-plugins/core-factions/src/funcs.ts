@@ -6,13 +6,12 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { Character } from '../../../shared/interfaces/character';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { FACTION_CONFIG } from './config';
-import { FactionSystem, FACTION_COLLECTION } from './system';
+import { FactionHandler, FACTION_COLLECTION } from './handler';
 import { StorageSystem } from '../../../server/systems/storage';
 import { Vector3 } from '../../../shared/interfaces/vector';
 import { VehicleSystem } from '../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../shared/interfaces/iResponse';
-import { FactionActions } from './actions';
 import {
     Faction,
     FactionCharacter,
@@ -36,7 +35,7 @@ let hasInitialized = false;
  * @export
  * @class FactionFuncs
  */
-class FactionFuncs {
+export class FactionFuncs {
     /**
      * This function is called when factions are initialized. It adds custom rules to the
      * VehicleSystem to check for faction specific vehicles.
@@ -70,7 +69,7 @@ class FactionFuncs {
         }
 
         // Check if vehicle is owned by a faction
-        const faction = FactionSystem.get(vehicle.data.owner);
+        const faction = FactionHandler.get(vehicle.data.owner);
         if (!faction) {
             return { status: true, response: 'Not a faction vehicle' };
         }
@@ -185,7 +184,7 @@ class FactionFuncs {
         amount = Math.abs(amount);
 
         faction.bank += amount;
-        const didUpdate = await FactionSystem.update(faction._id as string, { bank: faction.bank });
+        const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
         return didUpdate.status;
     }
 
@@ -207,7 +206,7 @@ class FactionFuncs {
         }
 
         faction.bank -= amount;
-        const didUpdate = await FactionSystem.update(faction._id as string, { bank: faction.bank });
+        const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
         return didUpdate.status;
     }
 
@@ -224,7 +223,7 @@ class FactionFuncs {
      */
     static async setCharacterRank(faction: Faction, characterID: string, newRank: string): Promise<boolean> {
         faction.members[characterID].rank = newRank;
-        const didUpdate = await FactionSystem.update(faction._id as string, { members: faction.members });
+        const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
         return didUpdate.status;
     }
 
@@ -258,7 +257,7 @@ class FactionFuncs {
             FACTION_COLLECTION,
         );
 
-        const didUpdate = await FactionSystem.update(faction._id as string, { members: faction.members });
+        const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
         return didUpdate.status;
     }
 
@@ -279,7 +278,7 @@ class FactionFuncs {
         }
 
         delete faction.members[characterID];
-        const didUpdate = await FactionSystem.update(faction._id as string, { members: faction.members });
+        const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
         return didUpdate.status;
     }
 
@@ -301,7 +300,7 @@ class FactionFuncs {
         }
 
         faction.ranks[index].name = newName;
-        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -326,7 +325,7 @@ class FactionFuncs {
         }
 
         faction.ranks.splice(index, 1);
-        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -357,7 +356,7 @@ class FactionFuncs {
             weight: 1,
         });
 
-        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -383,7 +382,7 @@ class FactionFuncs {
         }
 
         faction.ranks[index].rankPermissions = rankPermissions;
-        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -409,7 +408,7 @@ class FactionFuncs {
         }
 
         faction.ranks[index].weight = weight;
-        const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -433,7 +432,7 @@ class FactionFuncs {
         }
 
         faction.storages.push({ id: storage._id.toString(), name, allowRanks: [], pos });
-        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
         return didUpdate.status;
     }
 
@@ -464,7 +463,7 @@ class FactionFuncs {
         }
 
         faction.storages[storageIndex].allowRanks.push(rankUid);
-        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
         return didUpdate.status;
     }
 
@@ -492,7 +491,7 @@ class FactionFuncs {
         }
 
         faction.storages[storageIndex].allowRanks.splice(existingRankIndex, 1);
-        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
         return didUpdate.status;
     }
 
@@ -513,7 +512,7 @@ class FactionFuncs {
         }
 
         faction.vehicles.push({ name, id: vehicleUid, allowRanks: [] });
-        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
 
@@ -538,7 +537,7 @@ class FactionFuncs {
         }
 
         faction.vehicles.splice(index, 1);
-        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
 
@@ -567,7 +566,7 @@ class FactionFuncs {
         }
 
         faction.vehicles[index].allowRanks.push(rankUid);
-        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
 
@@ -596,7 +595,7 @@ class FactionFuncs {
         }
 
         faction.vehicles[index].allowRanks.splice(rankIndex, 1);
-        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
 
@@ -621,7 +620,7 @@ class FactionFuncs {
         }
 
         faction.actions[rankUid].push(actionUid);
-        const didUpdate = await FactionSystem.update(faction._id as string, { actions: faction.actions });
+        const didUpdate = await FactionHandler.update(faction._id as string, { actions: faction.actions });
         return didUpdate.status;
     }
 
@@ -642,7 +641,7 @@ class FactionFuncs {
         }
 
         faction.actions[rankUid].splice(index, 1);
-        await FactionSystem.update(faction._id as string, { actions: faction.actions });
+        await FactionHandler.update(faction._id as string, { actions: faction.actions });
     }
 
     /**
@@ -662,7 +661,7 @@ class FactionFuncs {
         }
 
         faction.tickActions.push(actionUid);
-        const didUpdate = await FactionSystem.update(faction._id as string, { tickActions: faction.tickActions });
+        const didUpdate = await FactionHandler.update(faction._id as string, { tickActions: faction.tickActions });
         return didUpdate.status;
     }
 
@@ -683,7 +682,7 @@ class FactionFuncs {
         }
 
         faction.tickActions.splice(index, 1);
-        const didUpdate = await FactionSystem.update(faction._id as string, { tickActions: faction.tickActions });
+        const didUpdate = await FactionHandler.update(faction._id as string, { tickActions: faction.tickActions });
         return didUpdate.status;
     }
 }
@@ -695,7 +694,7 @@ class FactionFuncs {
  * @export
  * @class FactionPlayerFuncs
  */
-class FactionPlayerFuncs {
+export class FactionPlayerFuncs {
     /**
      * Verify a player is a Faction Admin
      *
@@ -726,7 +725,7 @@ class FactionPlayerFuncs {
      * @memberof FactionPlayerFuncs
      */
     static isOwner(player: alt.Player): boolean {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -761,7 +760,7 @@ class FactionPlayerFuncs {
      * @memberof FactionFuncs
      */
     static getPlayerFactionRank(player: alt.Player): FactionRank | null {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return null;
         }
@@ -783,7 +782,7 @@ class FactionPlayerFuncs {
      * @memberof FactionFuncs
      */
     static getPlayerInFaction(player: alt.Player): FactionCharacter {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return null;
         }
@@ -807,7 +806,7 @@ class FactionPlayerFuncs {
             return false;
         }
 
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -840,7 +839,7 @@ class FactionPlayerFuncs {
      * @memberof FactionFuncs
      */
     static async kickMember(player: alt.Player, characterId: string): Promise<boolean> {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -884,7 +883,7 @@ class FactionPlayerFuncs {
      * @memberof FactionFuncs
      */
     static async setCharacterRank(player: alt.Player, characterId: string, rankUid: string): Promise<boolean> {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -933,7 +932,7 @@ class FactionPlayerFuncs {
      * @memberof FactionFuncs
      */
     static async addBank(player: alt.Player, amount: number) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -965,7 +964,7 @@ class FactionPlayerFuncs {
      * @memberof FactionPlayerFuncs
      */
     static async subBank(player: alt.Player, amount: number) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1002,7 +1001,7 @@ class FactionPlayerFuncs {
      * @memberof FactionPlayerFuncs
      */
     static async addRank(player: alt.Player, newName: string) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1028,7 +1027,7 @@ class FactionPlayerFuncs {
      * @memberof FactionPlayerFuncs
      */
     static async removeRank(player: alt.Player, rankUid: string) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1050,7 +1049,7 @@ class FactionPlayerFuncs {
     }
 
     static async setRankName(player: alt.Player, rankUid: string, newName: string) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1088,7 +1087,7 @@ class FactionPlayerFuncs {
      * @memberof FactionPlayerFuncs
      */
     static async setRankPermissions(player: alt.Player, rankUid: string, rankPermissions: RankPermissions) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1120,7 +1119,7 @@ class FactionPlayerFuncs {
      * @param {number} weight - The weight of the rank.
      */
     static async setRankWeight(player: alt.Player, rankUid: string, weight: number) {
-        const faction = FactionSystem.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
         }
@@ -1145,11 +1144,3 @@ class FactionPlayerFuncs {
         return await FactionFuncs.updateRankWeight(faction, rankUid, weight);
     }
 }
-
-export const factionFuncs = {
-    actions: FactionActions,
-    init: FactionFuncs.init,
-    player: FactionPlayerFuncs,
-    system: FactionFuncs,
-    utility: FactionSystem,
-};

@@ -9,7 +9,6 @@ import { Faction, FactionCore, FactionRank } from '../../../shared-plugins/core-
 import { Character } from '../../../shared/interfaces/character';
 import { IGenericResponse } from '../../../shared/interfaces/iResponse';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { factionFuncs } from './funcs';
 
 export const FACTION_COLLECTION = 'factions';
 const factions: { [key: string]: Faction } = {};
@@ -28,12 +27,12 @@ class InternalFunctions {
     }
 }
 
-export class FactionSystem {
+export class FactionHandler {
     /**
      * Initialize Factions on Startup
      *
      * @static
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static async init() {
         const factions = await Database.fetchAllData<Faction>(FACTION_COLLECTION);
@@ -48,7 +47,7 @@ export class FactionSystem {
         }
 
         // Used to initialize internal functions for factions.
-        factionFuncs.init();
+        // factionFuncs.init();
     }
 
     /**
@@ -58,7 +57,7 @@ export class FactionSystem {
      * @param {alt.Player} player
      * @param {FactionCore} _faction
      * @return {Promise<IGenericResponse>} _id
-     * @memberof FactionSystem
+     * @memberof FactionHandler
      */
     static async add(characterOwnerID: string, _faction: FactionCore): Promise<IGenericResponse<string>> {
         if (!_faction.name) {
@@ -117,7 +116,7 @@ export class FactionSystem {
      *
      * @static
      * @param {string} _id
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static async remove(_id: string): Promise<IGenericResponse<string>> {
         // Find the faction...
@@ -218,7 +217,7 @@ export class FactionSystem {
      * @param {string} _id
      * @param {Partial<Faction>} partialObject
      * @return {Promise<IGenericResponse<string>>}
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static async update(_id: string, partialObject: Partial<Faction>): Promise<IGenericResponse<string>> {
         const faction = factions[_id];
@@ -244,7 +243,7 @@ export class FactionSystem {
      * @static
      * @param {string} _id
      * @return {Faction}
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static get(_id: string): Faction {
         return factions[_id];
@@ -256,7 +255,7 @@ export class FactionSystem {
      * @static
      * @param {string} nameOrPartialName
      * @return {*}  {(Faction | null)}
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static find(nameOrPartialName: string): Faction | null {
         let faction: Faction;
@@ -285,7 +284,7 @@ export class FactionSystem {
      *
      * @static
      * @return {*}
-     * @memberof FactionSystem
+     * @memberof FactionCore
      */
     static getAllFactions() {
         return Object.values(factions) as Array<Faction>;

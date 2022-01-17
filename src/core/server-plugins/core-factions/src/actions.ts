@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
 import { Faction } from '../../../shared-plugins/core-factions/interfaces';
 import { FACTION_CONFIG } from './config';
-import { factionFuncs } from './funcs';
+import { FactionPlayerFuncs } from './funcs';
+import { FactionHandler } from './handler';
 
 const playerActions: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {};
 const tickActions: {
@@ -12,13 +13,16 @@ const tickActions: {
     };
 } = {};
 
+let hasInitialized = false;
+
 class InternalFunctions {
     static init() {
+        hasInitialized = true;
         alt.setInterval(InternalFunctions.tick, 1000);
     }
 
     static tick() {
-        const factions = factionFuncs.utility.getAllFactions();
+        const factions = FactionHandler.getAllFactions();
 
         if (factions.length <= 0) {
             return;
@@ -28,7 +32,7 @@ class InternalFunctions {
 
         for (let factionIndex = 0; factionIndex < factions.length; factionIndex++) {
             const faction = factions[factionIndex];
-            if (faction.tickActions.length <= 0) {
+            if (!faction.tickActions || faction.tickActions.length <= 0) {
                 continue;
             }
 
@@ -62,6 +66,14 @@ class InternalFunctions {
 }
 
 export class FactionActions {
+    static init() {
+        if (hasInitialized) {
+            return;
+        }
+
+        InternalFunctions.init();
+    }
+
     /**
      * Given a faction, a rank UID, and an action UID, return the function that will be called when
      * the player uses that action.
@@ -72,12 +84,12 @@ export class FactionActions {
      * @param {string} actionUid - The unique identifier of the action.
      */
     static getPlayerAction(player: alt.Player, actionUid: string): (player: alt.Player, ...args: any[]) => void | null {
-        const faction = factionFuncs.utility.get(player.data.faction);
+        const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return null;
         }
 
-        const rank = factionFuncs.player.getPlayerFactionRank(player);
+        const rank = FactionPlayerFuncs.getPlayerFactionRank(player);
         if (!rank) {
             return null;
         }
@@ -87,7 +99,7 @@ export class FactionActions {
         }
 
         // Permission Check
-        if (!factionFuncs.player.isOwnerOrAdmin(player)) {
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
             const index = faction.actions[rank.uid].findIndex((uid) => uid === actionUid);
             if (index <= -1) {
                 return null;
@@ -127,6 +139,10 @@ export class FactionActions {
      * @param callback - (faction: Faction) => void
      */
     static addTickAction(actionUid: string, msBetweenUpdates: number, callback: (faction: Faction) => void) {
+        if (!hasInitialized) {
+            InternalFunctions.init();
+        }
+
         if (msBetweenUpdates < FACTION_CONFIG.FactionActionTickTime) {
             msBetweenUpdates = FACTION_CONFIG.FactionActionTickTime;
         }
@@ -145,5 +161,3 @@ export class FactionActions {
         delete tickActions[actionUid];
     }
 }
-
-InternalFunctions.init();
