@@ -1,9 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { Collection } from 'discord.js';
 import { playerFuncs } from '../../../server/extensions/extPlayer';
 import { Collections } from '../../../server/interface/iDatabaseCollections';
-import { StorageSystem } from '../../../server/systems/storage';
 import { sha256Random } from '../../../server/utility/encryption';
 import { StorageView } from '../../../server/views/storage';
 import { DefaultRanks } from '../../../shared-plugins/core-factions/defaultData';
@@ -11,6 +9,7 @@ import { Faction, FactionCore, FactionRank } from '../../../shared-plugins/core-
 import { Character } from '../../../shared/interfaces/character';
 import { IGenericResponse } from '../../../shared/interfaces/iResponse';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
+import './funcs';
 
 export const FACTION_COLLECTION = 'factions';
 const factions: { [key: string]: Faction } = {};

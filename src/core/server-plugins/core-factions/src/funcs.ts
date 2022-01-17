@@ -2,22 +2,27 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { playerFuncs } from '../../../server/extensions/extPlayer';
 import { Collections } from '../../../server/interface/iDatabaseCollections';
+import { CurrencyTypes } from '../../../shared/enums/currency';
+import { Character } from '../../../shared/interfaces/character';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import { FACTION_CONFIG } from './config';
+import { FactionSystem, FACTION_COLLECTION } from './system';
 import {
     Faction,
     FactionCharacter,
     FactionRank,
     RankPermissions,
 } from '../../../shared-plugins/core-factions/interfaces';
-import { CurrencyTypes } from '../../../shared/enums/currency';
-import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
-import { Character } from '../../../shared/interfaces/character';
-import { isFlagEnabled } from '../../../shared/utility/flags';
-import { FACTION_CONFIG } from './config';
-import { FactionSystem, FACTION_COLLECTION } from './system';
+import { StorageSystem } from '../../../server/systems/storage';
+import { Vector3 } from '../../../shared/interfaces/vector';
+import { VehicleSystem } from '../../../server/systems/vehicle';
+import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
+import { IResponse } from '../../../shared/interfaces/iResponse';
 
 /**
  * ? addMember
  * ? kickMember
+ * ? setRank
  * ? addRank
  * ? removeRank
  * ? updateRankName
@@ -29,6 +34,63 @@ import { FactionSystem, FACTION_COLLECTION } from './system';
  * @class FactionFuncs
  */
 export class FactionFuncs {
+    /**
+     * This function is called when factions are initialized. It adds custom rules to the
+     * VehicleSystem to check for faction specific vehicles.
+     * @returns None
+     */
+    static init() {
+        VehicleSystem.addCustomRule(VEHICLE_RULES.UNLOCK, FactionFuncs.handleFactionVehicleChecks);
+        VehicleSystem.addCustomRule(VEHICLE_RULES.LOCK, FactionFuncs.handleFactionVehicleChecks);
+        VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
+        VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
+        VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
+    }
+
+    /**
+     * Check if the vehicle is owned by a faction, if it is, check if the player is in the same
+     * faction, if they are, check if the vehicle is in the faction vehicles list, if it is, check if
+     * the player has access to the vehicle, if they do, return true, else return false.
+     *
+     * @param player - alt.Player - The player that is trying to use the vehicle
+     * @param vehicle - The vehicle that is being checked.
+     * @returns A response object with the status and response properties.
+     */
+    static handleFactionVehicleChecks(player: alt.Player, vehicle: alt.Vehicle): IResponse {
+        if (!vehicle.data) {
+            return { status: true, response: 'Not a faction vehicle' };
+        }
+
+        // Check if vehicle is owned by a faction
+        const faction = FactionSystem.get(vehicle.data.owner);
+        if (!faction) {
+            return { status: true, response: 'Not a faction vehicle' };
+        }
+
+        // Check if in same faction
+        if (vehicle.data.owner !== player.data.faction) {
+            return { status: false, response: 'Not in same faction for vehicle usage' };
+        }
+
+        // Check if the vehicle identifier exists in the faction vehicles list
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicle.data._id.toString());
+        if (index <= -1) {
+            return { status: false, response: 'Vehicle not found for faction' };
+        }
+
+        // Check if the players rank has access to this vehicle specifically
+        const character = FactionFuncs.getFactionMemberRank(faction, player.data._id.toString());
+        if (!character) {
+            return { status: false, response: 'Player not found in faction' };
+        }
+
+        if (faction.vehicles[index].allowRanks.findIndex((ar) => ar === character.uid) <= -1) {
+            return { status: false, response: 'Faction rank does not have access to vehicle' };
+        }
+
+        return { status: true, response: 'Has Faction Rank Access' };
+    }
+
     /**
      * Get a faction character's rank based on character identifier
      *
@@ -283,7 +345,6 @@ export class FactionFuncs {
                 manageRanks: false,
                 manageRankPermissions: false,
             },
-            storages: [],
             vehicles: [],
             weight: 1,
         });
@@ -341,6 +402,184 @@ export class FactionFuncs {
 
         faction.ranks[index].weight = weight;
         const didUpdate = await FactionSystem.update(faction._id as string, { ranks: faction.ranks });
+        return didUpdate.status;
+    }
+
+    /**
+     * Create a storage facility for the faction.
+     *
+     * @static
+     * @param {Faction} faction
+     * @return {*}
+     * @memberof FactionFuncs
+     */
+    static async createStorage(faction: Faction, name: string, pos: Vector3) {
+        if (!faction.storages) {
+            faction.storages = [];
+        }
+
+        const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: 128 });
+        if (!storage) {
+            return false;
+        }
+
+        faction.storages.push({ id: storage._id.toString(), name, allowRanks: [], pos });
+        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        return didUpdate.status;
+    }
+
+    /**
+     * Add a rank to access a storage facility.
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {number} storageIndex
+     * @param {string} rankUid
+     * @return {*}
+     * @memberof FactionFuncs
+     */
+    static async addRankToStorage(faction: Faction, storageIndex: number, rankUid: string) {
+        const index = faction.ranks.findIndex((r) => r.uid === rankUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        if (!faction.storages[storageIndex]) {
+            return false;
+        }
+
+        const existingRankIndex = faction.storages[storageIndex].allowRanks.findIndex((ar) => ar === rankUid);
+        if (existingRankIndex >= 0) {
+            return false;
+        }
+
+        faction.storages[storageIndex].allowRanks.push(rankUid);
+        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        return didUpdate.status;
+    }
+
+    /**
+     * Remove a rank from a storage facility
+     *
+     * @param {Faction} faction - Faction
+     * @param {number} storageIndex - The index of the storage in the faction's storages array.
+     * @param {string} rankUid - The uid of the rank to remove from the storage.
+     */
+    static async removeRankFromStorage(faction: Faction, storageIndex: number, rankUid: string) {
+        const index = faction.ranks.findIndex((r) => r.uid === rankUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        if (!faction.storages[storageIndex]) {
+            return false;
+        }
+
+        const existingRankIndex = faction.storages[storageIndex].allowRanks.findIndex((ar) => ar === rankUid);
+        if (existingRankIndex <= -1) {
+            return false;
+        }
+
+        faction.storages[storageIndex].allowRanks.splice(existingRankIndex, 1);
+        const didUpdate = await FactionSystem.update(faction._id as string, { storages: faction.storages });
+        return didUpdate.status;
+    }
+
+    /**
+     * Add a vehicle to the faction garage
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} vehicleUid
+     * @param {string} name
+     * @return {*}
+     * @memberof FactionFuncs
+     */
+    static async addVehicle(faction: Faction, vehicleUid: string, name: string) {
+        if (!faction.vehicles) {
+            faction.vehicles = [];
+        }
+
+        faction.vehicles.push({ name, id: vehicleUid, allowRanks: [] });
+        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        return didUpdate.status;
+    }
+
+    /**
+     * Remove a vehicle from the faction garage.
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} vehicleUid
+     * @return {*}
+     * @memberof FactionFuncs
+     */
+    static async removeVehicle(faction: Faction, vehicleUid: string) {
+        if (!faction.vehicles) {
+            return false;
+        }
+
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicleUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        faction.vehicles.splice(index, 1);
+        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        return didUpdate.status;
+    }
+
+    /**
+     * Add a rank to a vehicle.
+     * @param {Faction} faction - Faction
+     * @param {string} vehicleUid - _id of the vehicle
+     * @param {string} rankUid - The rank to add to the vehicle
+     */
+    static async addRankToVehicle(faction: Faction, vehicleUid: string, rankUid: string) {
+        if (!faction.vehicles) {
+            return false;
+        }
+
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicleUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        // Already Exists
+        const rankIndex = faction.vehicles[index].allowRanks.findIndex((ar) => ar === rankUid);
+        if (rankIndex >= 0) {
+            return false;
+        }
+
+        faction.vehicles[index].allowRanks.push(rankUid);
+        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
+        return didUpdate.status;
+    }
+
+    /**
+     * Remove a rank from a vehicle.
+     * @param {Faction} faction - Faction
+     * @param {string} vehicleUid - The vehicle's _id
+     * @param {string} rankUid - The rank to remove from the vehicle.
+     */
+    static async removeRankFromVehicle(faction: Faction, vehicleUid: string, rankUid: string) {
+        if (!faction.vehicles) {
+            return false;
+        }
+
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicleUid);
+        if (index <= -1) {
+            return false;
+        }
+
+        // Does not exist
+        const rankIndex = faction.vehicles[index].allowRanks.findIndex((ar) => ar === rankUid);
+        if (rankIndex <= -1) {
+            return false;
+        }
+
+        faction.vehicles[index].allowRanks.splice(rankIndex, 1);
+        const didUpdate = await FactionSystem.update(faction._id as string, { vehicles: faction.vehicles });
         return didUpdate.status;
     }
 }
@@ -540,7 +779,7 @@ export class FactionPlayerFuncs {
      * @return {Promise<boolean>}
      * @memberof FactionFuncs
      */
-    static async setRank(player: alt.Player, characterId: string, rankUid: string): Promise<boolean> {
+    static async setCharacterRank(player: alt.Player, characterId: string, rankUid: string): Promise<boolean> {
         const faction = FactionSystem.get(player.data.faction);
         if (!faction) {
             return false;

@@ -1,3 +1,5 @@
+import { Vector3 } from '../../shared/interfaces/vector';
+
 type _id = string;
 
 /**
@@ -144,14 +146,6 @@ export interface FactionRank {
     rankPermissions: RankPermissions;
 
     /**
-     * An array of storages this rank can access.
-     *
-     * @type {Array<_id>}
-     * @memberof FactionRank
-     */
-    storages: Array<_id>;
-
-    /**
      * Vehicles this rank has keys to by default.
      *
      * @type {Array<_id>}
@@ -210,6 +204,66 @@ export interface FactionCore {
     canDisband: boolean;
 }
 
+export interface FactionStorage {
+    /**
+     * The name of this storage facility.
+     *
+     * @type {string}
+     * @memberof FactionStorage
+     */
+    name: string;
+
+    /**
+     * Position of the storage facility
+     *
+     * @type {Vector3}
+     * @memberof FactionStorage
+     */
+    pos: Vector3;
+
+    /**
+     * Database _id for the storage
+     *
+     * @type {string}
+     * @memberof FactionStorage
+     */
+    id: string;
+
+    /**
+     * Allow what ranks to use this storage facility?
+     *
+     * @type {Array<string>}
+     * @memberof FactionStorage
+     */
+    allowRanks: Array<string>;
+}
+
+export interface FactionVehicle {
+    /**
+     * The name given to this vehicle for easier tracking
+     *
+     * @type {string}
+     * @memberof FactionVehicle
+     */
+    name: string;
+
+    /**
+     * Database _id for the vehicle
+     *
+     * @type {string}
+     * @memberof FactionVehicle
+     */
+    id: string;
+
+    /**
+     * Allow what ranks to use this vehicle?
+     *
+     * @type {Array<string>}
+     * @memberof FactionStorage
+     */
+    allowRanks: Array<string>;
+}
+
 /**
  * Main Faction Interface
  * Values not needed during faction creation
@@ -249,16 +303,16 @@ export interface Faction extends FactionCore {
     /**
      * Vehicles that are in control for this Faction.
      *
-     * @type {Array<_id>}
+     * @type {Array<FactionVehicle>}
      * @memberof Faction
      */
-    vehicles: Array<_id>;
+    vehicles: Array<FactionVehicle>;
 
     /**
      * Storages that belong to this faction.
      *
-     * @type {Array<string>}
+     * @type {Array<FactionStorage>}
      * @memberof Faction
      */
-    storages?: Array<string>;
+    storages?: Array<FactionStorage>;
 }
