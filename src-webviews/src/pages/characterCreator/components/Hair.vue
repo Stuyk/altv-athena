@@ -281,7 +281,7 @@ export default defineComponent({
                 : `N/A hairComponent.${name}`;
 
             if (typeof name === 'string' && localeInfo.length >= 48) {
-                localeInfo = `${localeInfo.substr(0, 48)}\r\n${localeInfo.substr(48, localeInfo.length - 1)}`;
+                localeInfo = `${localeInfo.substring(0, 48)}\r\n${localeInfo.substring(48, localeInfo.length - 1)}`;
             }
 
             return localeInfo;

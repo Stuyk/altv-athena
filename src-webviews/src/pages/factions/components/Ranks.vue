@@ -253,7 +253,7 @@ export default defineComponent({
         },
         typing() {
             if (this.rankName.length > 36) {
-                this.rankName = this.rankName.substr(0, 36);
+                this.rankName = this.rankName.substring(0, 36);
                 return;
             }
         },

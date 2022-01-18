@@ -86,7 +86,7 @@ export default defineComponent({
             }
 
             if (this.values[this._value].length >= 16) {
-                return this.values[this._value].substr(0, 16) + '...';
+                return this.values[this._value].substring(0, 16) + '...';
             }
 
             return this.values[this._value];
