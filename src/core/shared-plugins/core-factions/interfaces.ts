@@ -17,7 +17,9 @@ export interface RankPermissions {
     bankAdd: boolean;
 
     /**
-     * Can this rank remove from the bank?
+     * Can this rank remove from the bank,
+     * purchase vehicles,
+     * and do general faction bank purchases.
      *
      * @type {boolean}
      * @memberof FactionRank

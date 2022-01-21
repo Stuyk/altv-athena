@@ -2,14 +2,12 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import IHud from '../interface/IHud';
+import IHud from '../interface/iHud';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';
-import { drawTexture2D } from '../utility/texture';
 import { Timer } from '../utility/timers';
 import { World } from './world';
 

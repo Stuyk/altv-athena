@@ -4,11 +4,11 @@ import { CharacterSelectFunctions } from '../views/characters';
 import { LoginFunctions } from '../views/login';
 import { LoginController } from './login';
 
-enum AgendaOrder {
+export enum AgendaOrder {
     'DISCORD_LOGIN' = 1,
     'ACCOUNT_SETUP' = 2,
     'CHARACTER_SETUP' = 3,
-    'SPAWN_CHARACTER' = 100
+    'SPAWN_CHARACTER' = 100,
 }
 
 const agenda: { [key: string]: (player: alt.Player) => void } = {
@@ -21,7 +21,7 @@ const agenda: { [key: string]: (player: alt.Player) => void } = {
 const timelines: {
     [key: string]: {
         index: number;
-        agenda: Array<(player: alt.Player, ...args: any[]) => void>;
+        agenda: Array<{ index: number; callback: (player: alt.Player) => void }>;
     };
 } = {};
 
@@ -67,14 +67,29 @@ export class AgendaSystem {
         return agenda;
     }
 
-    static getAsArray(): Array<(player: alt.Player) => void> {
-        const timeline = [];
+    static getAsArray(): Array<{ index: number; callback: (player: alt.Player) => void }> {
+        const timeline: Array<{ index: number; callback: (player: alt.Player) => void }> = [];
 
-        Object.keys(agenda).forEach((key) => {
-            timeline.push(agenda[key]);
+        Object.keys(agenda).forEach((key, index) => {
+            timeline.push({ index, callback: agenda[key] });
         });
 
         return timeline;
+    }
+
+    /**
+     * Initializes an agenda system for a player.
+     * Does not auto-force them to next agenda.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @memberof AgendaSystem
+     */
+    static init(player: alt.Player) {
+        timelines[player.id] = {
+            index: -1,
+            agenda: AgendaSystem.getAsArray(),
+        };
     }
 
     /**
@@ -93,7 +108,32 @@ export class AgendaSystem {
         }
 
         timelines[player.id].index += 1;
-        return timelines[player.id].agenda[timelines[player.id].index];
+        return timelines[player.id].agenda[timelines[player.id].index].callback;
+    }
+
+    /**
+     * Go to the agenda at the given index and execute the callback.
+     * @param player - The player who is using the command.
+     * @param {number} index - The index of the agenda.
+     */
+    static goToAgenda(player: alt.Player, index: number) {
+        if (!timelines[player.id]) {
+            timelines[player.id] = {
+                index: -1,
+                agenda: AgendaSystem.getAsArray(),
+            };
+        }
+
+        const actualIndex = timelines[player.id].agenda.findIndex((x) => x.index === index);
+        if (actualIndex <= -1) {
+            throw new Error(`Agenda at ${index} does not exist. Please use correct index.`);
+        }
+
+        console.log(`Going to ${index}`);
+
+        const agenda = timelines[player.id].agenda[actualIndex];
+        timelines[player.id].index = index;
+        agenda.callback(player);
     }
 
     /**
@@ -120,7 +160,7 @@ export class AgendaSystem {
      * @memberof AgendaSystem
      */
     static getFromIndex(player: alt.Player, index: number): Function | null {
-        return timelines[player.id].agenda[index];
+        return timelines[player.id].agenda[index].callback;
     }
 
     /**
@@ -140,6 +180,6 @@ export class AgendaSystem {
             timelines[player.id].index = 0;
         }
 
-        return timelines[player.id].agenda[timelines[player.id].index];
+        return timelines[player.id].agenda[timelines[player.id].index].callback;
     }
 }

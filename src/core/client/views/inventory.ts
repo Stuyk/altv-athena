@@ -311,6 +311,16 @@ export class InternalFunctions implements ViewModel {
     }
 }
 
+export class ClientInventoryView {
+    static close() {
+        if (!isOpen) {
+            return;
+        }
+
+        InternalFunctions.close();
+    }
+}
+
 alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.processMetaChange);
 alt.onServer(SYSTEM_EVENTS.POPULATE_ITEMS, InternalFunctions.updateGroundItems);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_NOTIFICATION, InternalFunctions.addInventoryNotification);

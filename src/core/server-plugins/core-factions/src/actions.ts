@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { Faction } from '../../../shared-plugins/core-factions/interfaces';
 import { FACTION_CONFIG } from './config';
-import { FactionPlayerFuncs } from './funcs';
 import { FactionHandler } from './handler';
+import { FactionPlayerFuncs } from './playerFuncs';
 
 const playerActions: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {};
 const tickActions: {
@@ -21,6 +21,10 @@ class InternalFunctions {
         alt.setInterval(InternalFunctions.tick, 1000);
     }
 
+    /**
+     * For each faction, for each tick action, if the action is ready to be invoked, invoke it.
+     * @returns The faction handler.
+     */
     static tick() {
         const factions = FactionHandler.getAllFactions();
 
@@ -30,12 +34,14 @@ class InternalFunctions {
 
         const tickActionsCalled = [];
 
+        // Loop through each faction
         for (let factionIndex = 0; factionIndex < factions.length; factionIndex++) {
             const faction = factions[factionIndex];
             if (!faction.tickActions || faction.tickActions.length <= 0) {
                 continue;
             }
 
+            // Loop through each factions passive tick actions
             for (let actionIndex = 0; actionIndex < faction.tickActions.length; actionIndex++) {
                 const actionUid = faction.tickActions[actionIndex];
                 if (!tickActions[actionUid]) {
