@@ -10,6 +10,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { sleep } from '../utility/sleep';
 import { WebViewController } from '../extensions/view2';
 import { disableAllControls } from '../utility/disableControls';
+import { CharacterSystem } from '../systems/character';
 
 const PAGE_NAME = 'CharacterCreator';
 const fModel = alt.hash('mp_f_freemode_01');
@@ -59,7 +60,7 @@ class InternalFunctions {
         await PedCharacter.setHidden(true);
         await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
         await PedEditCamera.setCamParams(0.6, 50);
-
+        await CharacterSystem.applyEquipment(PedCharacter.get(), null, true);
         readyInterval = alt.setInterval(InternalFunctions.waitForReady, 100);
     }
 

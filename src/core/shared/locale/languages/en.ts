@@ -239,8 +239,11 @@ export default {
             LABEL_EYEBROWS_COLOUR: 'Eyebrows Colour',
             LABEL_FACIAL_HAIR: 'Facial Hair',
             DESC_FACIAL_HAIR: 'Choose your facial hair style, colour, opacity, and highlights.',
+            LABEL_CHEST_HAIR: 'Chest Hair',
+            DESC_CHEST_HAIR: 'Choose your chest hair style, colour, opacity, and highlights.',
             LABEL_OPACITY: 'Opacity',
             LABEL_FACIAL_HAIR_COLOUR: 'Facial Hair Colour',
+            LABEL_CHEST_HAIR_COLOUR: 'Chest Hair Colour',
             masculine: [
                 'Close Shave',
                 'Buzzcut',
@@ -468,6 +471,26 @@ export default {
                 'Solo Tram',
                 'None',
             ],
+            chest: [
+                'Natural',
+                'The Strip',
+                'The Tree',
+                'Hairy',
+                'Grisly',
+                'Ape',
+                'Hairy with Arms',
+                'The Bikini',
+                'Lightning Bolt',
+                'Reverse Lightning',
+                'Love Heart',
+                'Chestache',
+                'Happy Face',
+                'Skull',
+                'Snail Trail',
+                'Slug and Nips',
+                'Hairy Arms',
+                'Shaved'
+            ]
         },
         structureComponent: [
             'Nose Width',

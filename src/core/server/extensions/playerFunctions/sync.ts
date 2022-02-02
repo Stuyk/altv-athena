@@ -76,9 +76,9 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
         player.setClothes(4, 14, 0, 0); // pants
         player.setClothes(6, 34, 0, 0); // shoes
         player.setClothes(7, 0, 0, 0); // accessories
-        player.setClothes(8, 15, 0, 0); // undershirt
+        player.setClothes(8, 0, 0, 0); // undershirt
         player.setClothes(9, 0, 0, 0); // body armour
-        player.setClothes(11, 91, 0, 0); // torso
+        player.setClothes(11, 0, 0, 0); // torso
     }
 
     if (items && Array.isArray(items)) {
