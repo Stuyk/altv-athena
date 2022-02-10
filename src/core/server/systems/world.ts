@@ -27,11 +27,24 @@ let weatherOverride = false;
 let weatherOverrideName = null;
 let timeOverride = false;
 let timeOverrideHour = null;
+let timeRule: () => { hour: number; minute: number; updateWeather?: boolean } = null;
 
 export class World {
     static minMaxGroups: Array<{ minY: number; maxY: number }>;
     static hour: number = DEFAULT_CONFIG.BOOTUP_HOUR;
     static minute: number = DEFAULT_CONFIG.BOOTUP_MINUTE;
+
+    /**
+     * Register a time rule where when the rule is ran it will return the hour, minute, and second.
+     * This allows you to completely override the entire time system.
+     *
+     * @static
+     * @param {() => { hour: number, minute: number }} callback
+     * @memberof World
+     */
+    static registerTimeRule(callback: () => { hour: number; minute: number; updateWeather?: boolean }) {
+        timeRule = callback;
+    }
 
     /**
      * Used to override weather setting for all players.
@@ -90,6 +103,24 @@ export class World {
     }
 
     static updateWorldTime(): void {
+        // Set a time rule to completely override this system.
+        if (timeRule) {
+            const result = timeRule();
+            if (result) {
+                World.hour = result.hour;
+                World.minute = result.minute;
+
+                if (result.updateWeather) {
+                    const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
+                    DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+                }
+
+                return;
+            }
+
+            alt.logWarning(`World Time Update Override was Incorrect. Fix formatting and object.`);
+        }
+
         if (DEFAULT_CONFIG.USE_SERVER_TIME) {
             // Uses local time of where the server is located.
             // Change the time of the server to change this.
