@@ -25,7 +25,7 @@
                     :increment="1"
                     @input="
                         (e) => {
-                            $emit('update-component', index, 'drawables', parseInt(e.target.value));
+                            $emit('update-component', index, 'drawables', parseInt(e.target['value']));
                         }
                     "
                     @mouseup="
@@ -70,7 +70,7 @@
                         :increment="1"
                         @input="
                             (e) => {
-                                $emit('update-component', index, 'textures', parseInt(e.target.value));
+                                $emit('update-component', index, 'textures', parseInt(e.target['value']));
                             }
                         "
                         style="width: 100%"
