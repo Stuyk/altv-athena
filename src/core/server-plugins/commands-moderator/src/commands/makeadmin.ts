@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Logger } from 'mongodb';
 import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
