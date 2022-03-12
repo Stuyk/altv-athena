@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { playerFuncs } from '../../../server/extensions/extPlayer';
-import Logger from '../../../server/utility/athenaLogger';
-import { LocaleController } from '../../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
-import { Collections } from '../../../server/interface/iDatabaseCollections';
+import { playerFuncs } from '../../../../server/extensions/extPlayer';
+import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
 
 
 export async function makeAdminCmd(player: alt.Player, id: number | string, permissionLevel: number) {
@@ -20,7 +19,7 @@ export async function makeAdminCmd(player: alt.Player, id: number | string, perm
     target.accountData.permissionLevel = permissionLevel;
 
     await Database.updatePartialData(target.accountData._id, { permissionLevel: target.accountData.permissionLevel }, Collections.Accounts);
-    Logger.info(`(${target.data.name}) had their permission level changed to: ${permissionLevel}.`);
+    alt.logWarning(`(${target.data.name}) had their permission level changed to: ${permissionLevel}.`);
 }
 
 
