@@ -17,7 +17,7 @@ let nextClick = Date.now() + 250;
 let interval;
 let lastHover;
 
-interface IClientWheelItem extends IWheelItem {
+export interface IClientWheelItem extends IWheelItem {
     callback?: Function;
 }
 
