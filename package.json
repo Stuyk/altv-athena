@@ -35,7 +35,9 @@
         "cfg-devtest": "npx altv-config ./configs/devtest.json",
         "cfg-prod": "npx altv-config ./configs/prod.json",
         "[-] Typedocs": "",
-        "typedoc-build": "node ./scripts/typedoc/index.js && typedoc --options typedoc.json"
+        "typedoc-build": "node ./scripts/typedoc/index.js && typedoc --options typedoc.json",
+        "[-] Utility": "",
+        "fix": "node ./scripts/doctor/index.js"
     },
     "devDependencies": {
         "@altv/types-client": "^2.0.5",
