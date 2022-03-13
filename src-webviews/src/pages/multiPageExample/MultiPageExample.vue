@@ -1,12 +1,6 @@
 <template>
     <div class="wrapper">
-        <div class="stack">
-            <div class="split">
-                <div class="grey white--text pa-6" @click="prevPage">Previous</div>
-                <div class="grey white--text pa-6" @click="nextPage">Next</div>
-            </div>
-            <component :is="pages[pageIndex]" class="fade-in" :key="pageIndex"></component>
-        </div>
+        <component :is="pages[pageIndex]" class="fade-in" :key="pageIndex" @next-page="nextPage" @prev-page="prevPage"></component>
     </div>
 </template>
 
@@ -41,7 +35,7 @@ export default defineComponent({
     data() {
         return {
             pageIndex: 0,
-            pages: ['Page1', 'Page2', 'Page3'],
+            pages: ['YourFirstPage', 'YourSecondPage', 'YourThirdPage'],
         };
     },
     mounted() {},
