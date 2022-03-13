@@ -307,16 +307,6 @@ export class VehicleSystem {
             return;
         }
 
-        if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_FUEL));
-            return;
-        }
-
-        if (player.vehicle.isRefueling) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE));
-            return;
-        }
-
         if (!SystemRules.check(VEHICLE_RULES.ENGINE, rules, player, player.vehicle)) {
             return;
         }

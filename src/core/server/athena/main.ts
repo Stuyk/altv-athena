@@ -68,7 +68,6 @@ export const DEFAULT_CONFIG = {
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
-    FUEL_LOSS_PER_PLAYER_TICK: 0.15, // Happens every 10s
     SPAWN_ALL_VEHICLES_ON_START: true, // Will spawn all vehicles unless they're in a garage.
     SPAWN_VEHICLES_ON_JOIN: false, // Will spawn all player vehicles not in a garage on join. Does not work if SPAWN_ALL_VEHICLES_ON_START is enabled.
     DESPAWN_VEHICLES_ON_LOGOUT: false, // Will despawn all player vehicles on logout.

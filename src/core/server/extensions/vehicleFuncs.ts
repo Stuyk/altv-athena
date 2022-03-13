@@ -150,6 +150,9 @@ export default class VehicleFuncs {
         vehicleData.behavior = OWNED_VEHICLE;
         vehicleData.fuel = 100;
 
+        // ! TODO
+        // Need to add a way to add additional properties to save when a vehicle is created.
+
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
 
@@ -177,69 +180,6 @@ export default class VehicleFuncs {
         }
 
         return Database.deleteById(vehicles[0]._id, Collections.Vehicles);
-    }
-
-    /**
-     * Updates the fuel for this vehicle.
-     * @static
-     * @param {alt.Vehicle} vehicle
-     * @memberof VehicleFuncs
-     */
-    static async updateFuel(vehicle: alt.Vehicle, timeBetweenUpdates: number = 5000) {
-        // No data present on vehicle. Don't worry about it.
-        if (!vehicle?.data?.behavior) {
-            return;
-        }
-
-        // Has unlimited fuel. Always set to 100.
-        if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
-            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, 100);
-            return;
-        }
-
-        if (vehicle.data.fuel === undefined || vehicle.data.fuel === null) {
-            vehicle.data.fuel = 100;
-        }
-
-        // Emits the distance travelled from one point to another.
-        // Does not emit if distance is less than 5
-        if (!vehicle.lastPosition) {
-            vehicle.lastPosition = vehicle.pos;
-        }
-
-        const dist = distance2d(vehicle.pos, vehicle.lastPosition);
-        if (dist >= 5) {
-            // const potentialSpeed = (dist / timeBetweenUpdates) * 1000;
-            // const feetPerSecond = potentialSpeed * 1.4666666667;
-            // const distanceTraveled = (potentialSpeed / 3600) * timeBetweenUpdates;
-
-            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
-            vehicle.lastPosition = vehicle.pos;
-        }
-
-        // Do nothing with the fuel if the engine is off.
-        if (!vehicle.engineOn) {
-            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
-            return;
-        }
-
-        vehicle.data.fuel = vehicle.data.fuel - DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
-
-        if (vehicle.data.fuel < 0) {
-            vehicle.data.fuel = 0;
-
-            if (vehicle.engineOn) {
-                vehicle.engineOn = false;
-            }
-        }
-
-        vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
-        vehicle.setSyncedMeta(VEHICLE_STATE.POSITION, vehicle.pos);
-
-        if (!vehicle.nextSave || Date.now() > vehicle.nextSave) {
-            VehicleFuncs.save(vehicle, { fuel: vehicle.data.fuel });
-            vehicle.nextSave = Date.now() + 15000;
-        }
     }
 
     /**
@@ -279,7 +219,10 @@ export default class VehicleFuncs {
         vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK_INTERACTION_INFO, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
 
         // Setup Default Document Values
         if (document.fuel === null || document.fuel === undefined) {
@@ -319,8 +262,6 @@ export default class VehicleFuncs {
         } else {
             VehicleFuncs.save(vehicle, { garageIndex: null });
         }
-
-        VehicleFuncs.updateFuel(vehicle, 5000);
 
         // Synchronize Ownership
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
@@ -402,7 +343,10 @@ export default class VehicleFuncs {
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK_INTERACTION_INFO, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
         return vehicle;
     }
 
@@ -514,34 +458,6 @@ export default class VehicleFuncs {
         }
 
         return false;
-    }
-
-    /**
-     * Check if a vehicle has fuel.
-     * @static
-     * @param {alt.Vehicle} vehicle
-     * @return {*}
-     * @memberof VehicleFuncs
-     */
-    static hasFuel(vehicle: alt.Vehicle) {
-        if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
-            return true;
-        }
-
-        if (!vehicle.data) {
-            return true;
-        }
-
-        if (vehicle.data.fuel === undefined || vehicle.data.fuel === null) {
-            vehicle.data.fuel = 100;
-            return true;
-        }
-
-        if (vehicle.data.fuel <= 0) {
-            return false;
-        }
-
-        return true;
     }
 
     /**

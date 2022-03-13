@@ -4,6 +4,7 @@ import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
 import { ServerBlipController } from '../../../server/systems/blip';
 import { InteractionController } from '../../../server/systems/interaction';
 import { getClosestEntity } from '../../../server/utility/vector';
+import { FUEL_STATION_EVENTS } from '../../../shared-plugins/core-fuel-stations/events';
 import { LOCALE_FUEL_STATIONS } from '../../../shared-plugins/core-fuel-stations/locales';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
@@ -13,10 +14,6 @@ import { isFlagEnabled } from '../../../shared/utility/flags';
 import { distance2d } from '../../../shared/utility/vector';
 import { FUEL_CONFIG } from './config';
 import stations from './stations';
-
-// player.id to retrieve
-const FUEL_START_EVENT = 'fuel:Start';
-const FUEL_CANCEL_EVENT = 'fuel:Cancel';
 
 const maximumFuel = 100;
 const fuelInfo: { [playerID: string]: FuelStatus } = {};
@@ -28,7 +25,7 @@ interface FuelStatus {
     timeout: number;
 }
 
-export class FuelSystem {
+export class FuelStationSystem {
     static init() {
         for (let i = 0; i < stations.length; i++) {
             const fuelPump = stations[i];
@@ -48,7 +45,7 @@ export class FuelSystem {
                 uid: `fuel-pump-${i}`,
                 position: fuelPump,
                 description: 'Refuel Vehicle',
-                callback: FuelSystem.request,
+                callback: FuelStationSystem.request,
                 isPlayerOnly: true,
                 debug: false,
             });
@@ -123,8 +120,8 @@ export class FuelSystem {
 
         const trigger: JobTrigger = {
             header: 'Fuel Vehicle',
-            event: FUEL_START_EVENT,
-            cancelEvent: FUEL_CANCEL_EVENT,
+            event: FUEL_STATION_EVENTS.START,
+            cancelEvent: FUEL_STATION_EVENTS.CANCEL,
             image: '../../assets/images/refuel.jpg',
             summary: `Refill ${missingFuel.toFixed(2)}% of fuel in the ${
                 closestVehicle.data.model
@@ -216,5 +213,5 @@ export class FuelSystem {
     }
 }
 
-alt.on(FUEL_START_EVENT, FuelSystem.start);
-alt.on(FUEL_CANCEL_EVENT, FuelSystem.cancel);
+alt.on(FUEL_STATION_EVENTS.START, FuelStationSystem.start);
+alt.on(FUEL_STATION_EVENTS.CANCEL, FuelStationSystem.cancel);
