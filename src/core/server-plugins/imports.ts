@@ -5,6 +5,7 @@ import './core-clothing/index';
 import './core-cuffs/index';
 import './core-factions/index';
 import './core-garage/index';
+import './core-fuel-stations/index';
 import './core-interior/index';
 import './core-items/index';
 import './core-nametags/index';

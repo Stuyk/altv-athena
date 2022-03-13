@@ -62,8 +62,10 @@ export class CharacterSystem {
         native.setPedHeadOverlayColor(ped, 1, 1, appearance.facialHairColor1, appearance.facialHairColor1);
 
         // Chest Hair
-        native.setPedHeadOverlay(ped, 10, appearance.chestHair, appearance.chestHairOpacity);
-        native.setPedHeadOverlayColor(ped, 10, 1, appearance.chestHairColor1, appearance.chestHairColor1);
+        if (appearance.chestHair !== null && appearance.chestHair !== undefined) {
+            native.setPedHeadOverlay(ped, 10, appearance.chestHair, appearance.chestHairOpacity);
+            native.setPedHeadOverlayColor(ped, 10, 1, appearance.chestHairColor1, appearance.chestHairColor1);
+        }
 
         // Eyebrows
         native.setPedHeadOverlay(ped, 2, appearance.eyebrows, appearance.eyebrowsOpacity);

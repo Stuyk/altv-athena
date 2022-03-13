@@ -14,6 +14,4 @@ export const SHARED_CONFIG = {
     MAX_VEHICLE_INTERACTION_RANGE: 2.5,
     // Voice
     VOICE_ON: false,
-    // Fuel Price
-    FUEL_PRICE: 2
 };

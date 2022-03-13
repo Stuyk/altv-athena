@@ -7,7 +7,6 @@ import '../systems/chat';
 import '../systems/discord';
 import '../systems/factions';
 import '../systems/factionsInternal';
-import '../systems/fuel';
 import '../systems/hologram';
 import '../systems/interaction';
 import '../systems/item';

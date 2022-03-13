@@ -1,20 +1,18 @@
 import * as alt from 'alt-server';
-
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { CurrencyTypes } from '../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
-import fuel from '../../shared/information/fuel';
-import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
-import { playerFuncs } from '../extensions/extPlayer';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { getClosestEntity } from '../utility/vector';
-import { ServerBlipController } from './blip';
-import { InteractionController } from './interaction';
+import { playerFuncs } from '../../../server/extensions/extPlayer';
+import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
+import { ServerBlipController } from '../../../server/systems/blip';
+import { InteractionController } from '../../../server/systems/interaction';
+import { getClosestEntity } from '../../../server/utility/vector';
+import { LOCALE_FUEL_STATIONS } from '../../../shared-plugins/core-fuel-stations/locales';
+import { CurrencyTypes } from '../../../shared/enums/currency';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Vehicle_Behavior } from '../../../shared/enums/vehicle';
+import { JobTrigger } from '../../../shared/interfaces/jobTrigger';
+import { isFlagEnabled } from '../../../shared/utility/flags';
+import { distance2d } from '../../../shared/utility/vector';
+import { FUEL_CONFIG } from './config';
+import stations from './stations';
 
 // player.id to retrieve
 const FUEL_START_EVENT = 'fuel:Start';
@@ -27,12 +25,13 @@ interface FuelStatus {
     vehicle: alt.Vehicle;
     cost: number;
     fuel: number;
+    timeout: number;
 }
 
-class FuelSystem {
+export class FuelSystem {
     static init() {
-        for (let i = 0; i < fuel.length; i++) {
-            const fuelPump = fuel[i];
+        for (let i = 0; i < stations.length; i++) {
+            const fuelPump = stations[i];
             if (fuelPump.isBlip) {
                 ServerBlipController.append({
                     text: 'Fuel',
@@ -51,6 +50,7 @@ class FuelSystem {
                 description: 'Refuel Vehicle',
                 callback: FuelSystem.request,
                 isPlayerOnly: true,
+                debug: false,
             });
         }
     }
@@ -60,58 +60,63 @@ class FuelSystem {
      * @param {alt.Player} player - alt.Player - The player who is requesting the refuel.
      */
     static request(player: alt.Player) {
-        if (fuelInfo[player.id]) {
-            playerFuncs.emit.notification(player, `Currently already refueling...`);
+        if (fuelInfo[player.id] && Date.now() < fuelInfo[player.id].timeout) {
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_REFILLING);
             return;
+        }
+
+        // Reset fuel timeout if exceeded
+        if (fuelInfo[player.id] && Date.now() > fuelInfo[player.id].timeout) {
+            delete fuelInfo[player.id];
         }
 
         const closestVehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 2, true);
         if (!closestVehicle) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_TOO_FAR_FROM_PUMP));
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_TOO_FAR_FROM_PUMP);
             return;
         }
 
         if (!isFlagEnabled(closestVehicle.behavior, Vehicle_Behavior.CONSUMES_FUEL)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_ALREADY_FULL));
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_FULL);
             return;
         }
 
         if (closestVehicle.engineOn) {
-            playerFuncs.emit.notification(player, `~r~Turn the Engine Off`);
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_TURN_OFF_ENGINE);
             return;
         }
 
         if (closestVehicle.isRefueling) {
-            playerFuncs.emit.notification(player, `Vehicle already being refueled...`);
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_REFILLING);
             return;
         }
 
         const dist = distance2d(player.pos, closestVehicle.pos);
         if (dist >= 4) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_TOO_FAR_FROM_PUMP));
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_TOO_FAR_FROM_PUMP);
             return;
         }
 
         if (!closestVehicle.data) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_ALREADY_FULL));
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_FULL);
             return;
         }
 
         if (closestVehicle.data.fuel >= 99) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_ALREADY_FULL));
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_FULL);
             return;
         }
 
         const currentFuel = closestVehicle.data.fuel;
         let missingFuel = maximumFuel - currentFuel;
-        let maximumCost = missingFuel * SHARED_CONFIG.FUEL_PRICE;
+        let maximumCost = missingFuel * FUEL_CONFIG.FUEL_PRICE;
 
         // re-calculate based on what the player can afford.
         if (player.data.cash < maximumCost) {
-            maximumCost = SHARED_CONFIG.FUEL_PRICE * player.data.cash;
-            missingFuel = missingFuel - SHARED_CONFIG.FUEL_PRICE * player.data.cash;
+            maximumCost = FUEL_CONFIG.FUEL_PRICE * player.data.cash;
+            missingFuel = missingFuel - FUEL_CONFIG.FUEL_PRICE * player.data.cash;
             if (missingFuel <= 2) {
-                playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.FUEL_CANNOT_AFFORD));
+                playerFuncs.emit.notification(player, `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${maximumCost}`);
                 return;
             }
         }
@@ -130,6 +135,7 @@ class FuelSystem {
             cost: maximumCost,
             fuel: missingFuel,
             vehicle: closestVehicle,
+            timeout: Date.now() + FUEL_CONFIG.FUEL_RESET_TIMEOUT,
         };
 
         alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
@@ -146,25 +152,25 @@ class FuelSystem {
 
         const id = player.id;
         if (!fuelInfo[id]) {
-            playerFuncs.emit.notification(player, `Try again...`);
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_TRY_AGAIN);
             return;
         }
 
         const data = fuelInfo[id];
 
         if (data.vehicle.isRefueling) {
-            playerFuncs.emit.notification(player, `Vehicle already being refueled...`);
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_REFILLING);
             delete fuelInfo[id];
             return;
         }
 
         if (data.vehicle.engineOn) {
-            playerFuncs.emit.notification(player, `~r~Turn the Engine Off`);
+            playerFuncs.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_TURN_OFF_ENGINE);
             return;
         }
 
         if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, data.cost)) {
-            playerFuncs.emit.notification(player, `Not enough cash on hand... $${data.cost}`);
+            playerFuncs.emit.notification(player, `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${data.cost}`);
             delete fuelInfo[id];
             return;
         }
@@ -176,7 +182,7 @@ class FuelSystem {
             distance: 15,
             milliseconds: 10000,
             position: data.vehicle.pos,
-            text: `Fueling...`,
+            text: LOCALE_FUEL_STATIONS.FUELING_PROGRESS_BAR,
         });
 
         alt.setTimeout(() => {
@@ -184,7 +190,7 @@ class FuelSystem {
                 playerFuncs.emit.removeProgressBar(player, `FUEL-${player.data._id.toString()}`);
                 playerFuncs.emit.notification(
                     player,
-                    LocaleController.get(LOCALE_KEYS.FUEL_PAID, data.cost.toFixed(2), data.fuel.toFixed(2)),
+                    `${LOCALE_FUEL_STATIONS.FUEL_COST}${data.cost.toFixed(2)} | ${data.fuel.toFixed(2)}`,
                 );
             }
 
@@ -212,4 +218,3 @@ class FuelSystem {
 
 alt.on(FUEL_START_EVENT, FuelSystem.start);
 alt.on(FUEL_CANCEL_EVENT, FuelSystem.cancel);
-alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, FuelSystem.init);
