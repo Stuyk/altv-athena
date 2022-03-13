@@ -16,6 +16,14 @@ export class DevModeOverride {
      */
     static async login(player: alt.Player) {
         const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
+        if (!accounts || !accounts[0]) {
+            alt.log(
+                `PLEASE RUN THE SERVER AT LEAST ONCE WITH 'npm run windows' OR 'npm run linux' before using dev mode.`,
+            );
+            alt.log(`ENSURE THAT YOU JOIN THE SERVER ONCE AND CREATE AN ACCOUNT.`);
+            process.exit(1);
+        }
+
         const account = accounts[0];
 
         player.discord = {
