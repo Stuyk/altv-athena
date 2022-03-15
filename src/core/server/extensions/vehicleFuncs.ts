@@ -170,7 +170,7 @@ export default class VehicleFuncs {
         vehicleData.behavior = OWNED_VEHICLE;
 
         for (let i = 0; i < CreateInjections.length; i++) {
-            vehicleData = { ...CreateInjections[i](vehicleData) } as IVehicle;
+            vehicleData = { ...vehicleData, ...CreateInjections[i](vehicleData) } as IVehicle;
         }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
