@@ -123,6 +123,17 @@ export class VehicleSystem {
                 }
             }
 
+            if (!vehicle.model) {
+                alt.logWarning(
+                    `Vehicle with ID: ${vehicle._id.toString()} is missing multiple properties. Skipped during initialization.`,
+                );
+                continue;
+            }
+
+            if (!vehicle.position) {
+                continue;
+            }
+
             // Skip New Vehicles
             if (vehicle.position.x === 0 && vehicle.position.y === 0 && vehicle.position.z === 0) {
                 continue;
