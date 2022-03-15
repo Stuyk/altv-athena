@@ -171,4 +171,19 @@ export class FuelSystem {
             vehicle.nextSave = Date.now() + 15000;
         }
     }
+
+    static enterVehicle(player: alt.Player, vehicle: alt.Vehicle) {
+        if (!vehicle.data) {
+            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, FUEL_CONFIG.MAXIMUM_FUEL);
+            return;
+        }
+
+        if (vehicle.data.fuel === undefined || vehicle.data.fuel === null) {
+            vehicle.data.fuel = 100;
+        }
+
+        vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
+    }
 }
+
+alt.on('playerEnteredVehicle', FuelSystem.enterVehicle);
