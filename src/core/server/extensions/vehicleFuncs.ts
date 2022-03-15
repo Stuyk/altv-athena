@@ -577,35 +577,37 @@ export default class VehicleFuncs {
      */
     static async createKey(
         player: alt.Player,
-        vehicle: alt.Vehicle,
+        vehicle: alt.Vehicle | IVehicle,
         doNotAdd: boolean = false,
     ): Promise<VehicleKeyItem | null> {
-        if (!vehicle || !vehicle.valid) {
+        // Get vehicle data specifically
+        if (vehicle instanceof alt.Vehicle) {
+            if (!vehicle || !vehicle.valid || !vehicle.data) {
+                return null;
+            }
+
+            vehicle = vehicle.data;
+        }
+
+        // Verify data is valid
+        if (!vehicle._id) {
             return null;
         }
 
-        if (!vehicle.data) {
-            return null;
-        }
-
-        if (!vehicle.data.key) {
-            vehicle.data.key = sha256Random(JSON.stringify(vehicle.data));
-            await Database.updatePartialData(
-                vehicle.data._id.toString(),
-                { key: vehicle.data.key },
-                Collections.Vehicles,
-            );
+        if (!vehicle.key) {
+            vehicle.key = sha256Random(JSON.stringify(vehicle));
+            await Database.updatePartialData(vehicle._id.toString(), { key: vehicle.key }, Collections.Vehicles);
         }
 
         const item: VehicleKeyItem = {
-            name: `Key for ${vehicle.data.model}`,
-            description: `A key for the vehicle model ${vehicle.data.model}`,
+            name: `Key for ${vehicle.model}`,
+            description: `A key for the vehicle model ${vehicle.model}`,
             behavior: ITEM_TYPE.DESTROY_ON_DROP,
             quantity: 1,
             icon: 'key',
             data: {
-                vehicle: vehicle.data._id.toString(),
-                key: vehicle.data.key,
+                vehicle: vehicle._id.toString(),
+                key: vehicle.key,
             },
         };
 
