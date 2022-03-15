@@ -30,6 +30,7 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.NO_SAVE;
 
 const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
+const CreateInjections: Array<(vehicle: IVehicle) => Object> = [];
 
 interface VehicleKeyItem extends Item {
     data: {
@@ -60,6 +61,25 @@ export default class VehicleFuncs {
      */
     static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
         SaveInjections.push(callback);
+    }
+
+    /**
+     * When a new vehicle is created, add a returnable object to append to the vehicle data to save.
+     *
+     * Example:
+     * ```ts
+     * function setNewVehicleFuel(vehicle: alt.Vehicle) {
+     *     return { fuel: 100 };
+     * }
+     *
+     * VehicleFuncs.addCreateInjection(setNewVehicleFuel)
+     * ```
+     * @static
+     * @param {(vehicle: alt.Vehicle) => Object} callback
+     * @memberof VehicleFuncs
+     */
+    static addCreateVehicleInjection(callback: (vehicle: IVehicle) => Object): void {
+        CreateInjections.push(callback);
     }
 
     /**
@@ -148,10 +168,10 @@ export default class VehicleFuncs {
         vehicleData.id = await VehicleFuncs.getNextID();
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
-        vehicleData.fuel = 100;
 
-        // ! TODO
-        // Need to add a way to add additional properties to save when a vehicle is created.
+        for (let i = 0; i < CreateInjections.length; i++) {
+            vehicleData = { ...CreateInjections[i](vehicleData) } as IVehicle;
+        }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();

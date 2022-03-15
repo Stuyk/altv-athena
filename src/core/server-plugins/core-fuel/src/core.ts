@@ -17,6 +17,7 @@ export class FuelSystem {
      */
     static init() {
         alt.setInterval(FuelSystem.updateDrivingPlayers, FUEL_CONFIG.TIME_BETWEEN_UPDATES);
+
         VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, (player: alt.Player, vehicle: alt.Vehicle) => {
             if (!vehicle.driver || vehicle.driver.id !== player.id) {
                 playerFuncs.emit.notification(player, LOCALE_FUEL.VEHICLE_IS_NOT_DRIVER);
@@ -34,6 +35,10 @@ export class FuelSystem {
             }
 
             return { status: true, response: '' };
+        });
+
+        VehicleFuncs.addCreateVehicleInjection((veh) => {
+            return { fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE };
         });
     }
 
