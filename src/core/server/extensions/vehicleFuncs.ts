@@ -578,7 +578,7 @@ export default class VehicleFuncs {
     static async createKey(
         player: alt.Player,
         vehicle: alt.Vehicle | IVehicle,
-        doNotAdd: boolean = false,
+        doNotAddToInventory: boolean = false,
     ): Promise<VehicleKeyItem | null> {
         // Get vehicle data specifically
         if (vehicle instanceof alt.Vehicle) {
@@ -611,7 +611,7 @@ export default class VehicleFuncs {
             },
         };
 
-        if (!doNotAdd) {
+        if (!doNotAddToInventory) {
             const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
             if (!inventory) {
                 playerFuncs.emit.notification(player, 'No room in inventory.');

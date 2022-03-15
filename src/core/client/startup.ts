@@ -13,6 +13,9 @@ import './menus/animation';
 import './menus/player';
 import './menus/vehicle';
 
+// rmlui
+import './rmlui/screenText';
+
 // Streamers
 import './streamers/item';
 import './streamers/marker';
