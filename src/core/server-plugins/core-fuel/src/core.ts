@@ -7,6 +7,9 @@ import { LOCALE_FUEL } from '../../../shared-plugins/core-fuel/locales';
 import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
 import { Vehicle_Behavior, VEHICLE_STATE } from '../../../shared/enums/vehicle';
 import { VEHICLE_RULES } from '../../../shared/enums/vehicleRules';
+import { VEHICLE_CLASS } from '../../../shared/enums/vehicleTypeFlags';
+import { VehicleData } from '../../../shared/information/vehicles';
+import { IVehicle } from '../../../shared/interfaces/iVehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { distance2d } from '../../../shared/utility/vector';
 import { FUEL_CONFIG } from './config';
@@ -37,7 +40,16 @@ export class FuelSystem {
             return { status: true, response: '' };
         });
 
-        VehicleFuncs.addCreateVehicleInjection((veh) => {
+        VehicleFuncs.addCreateVehicleInjection((veh: IVehicle) => {
+            const vehicleInfo = VehicleData.find((x) => x.name === veh.model);
+
+            if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
+                return {
+                    fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE,
+                    behavior: Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NEED_KEY_TO_START,
+                };
+            }
+
             return { fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE };
         });
     }
