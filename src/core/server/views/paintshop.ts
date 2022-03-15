@@ -1,11 +1,10 @@
 import * as alt from 'alt-server';
 import { View_Events_PaintShop } from '../../shared/enums/views';
-import { IStreamPolygon } from '../../shared/interfaces/iStreamPolygon';
 import { RGB } from '../../shared/interfaces/rgb';
 import { Vector3 } from '../../shared/interfaces/vector';
+import { PolygonShape } from '../extensions/extColshape';
 import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
-import { ServerPolygonController } from '../streamers/polygon';
 import { VehicleSystem } from '../systems/vehicle';
 import { sha256Random } from '../utility/encryption';
 
@@ -30,18 +29,18 @@ export class PainShopFunctions {
                     { x: -330.82879638671875, y: -145.72210693359375, z: 38.059635162353516 },
                     { x: -324.7835388183594, y: -147.92138671875, z: 38.063636779785156 },
                     { x: -323.1226501464844, y: -143.58056640625, z: 38.06044387817383 },
-                ]
+                ],
             },
             {
                 // LSC International Airport Greenwich Pkwy Paint Shop
                 cost: 500,
                 uid: 'paint-shop-2',
                 vertices: [
-                    { x: -1163.248291015625, y: -2012.6636962890625, z: 13.221923828125},
-                    { x: -1167.82421875, y: -2017.3055419921875, z: 13.221923828125},
-                    { x: -1171.068115234375, y: -2013.96923828125, z: 13.5421142578125},
-                    { x: -1166.5054931640625, y: -2009.4197998046875, z: 13.221923828125},
-                ]
+                    { x: -1163.248291015625, y: -2012.6636962890625, z: 13.221923828125 },
+                    { x: -1167.82421875, y: -2017.3055419921875, z: 13.221923828125 },
+                    { x: -1171.068115234375, y: -2013.96923828125, z: 13.5421142578125 },
+                    { x: -1166.5054931640625, y: -2009.4197998046875, z: 13.221923828125 },
+                ],
             },
             {
                 // LSC La Mesa Olympic Fwy Paint Shop
@@ -49,22 +48,22 @@ export class PainShopFunctions {
                 uid: 'paint-shop-3',
                 vertices: [
                     { x: 733.3450317382812, y: -1075.5692138671875, z: 22.2197265625 },
-                    { x: 733.3450317382812, y: -1069.054931640625, z: 22.2197265625},
-                    { x: 738, y: -1069.068115234375, z: 22.2197265625},
-                    { x: 738, y: -1075.5692138671875, z: 22.2197265625},
-                ]
+                    { x: 733.3450317382812, y: -1069.054931640625, z: 22.2197265625 },
+                    { x: 738, y: -1069.068115234375, z: 22.2197265625 },
+                    { x: 738, y: -1075.5692138671875, z: 22.2197265625 },
+                ],
             },
             {
                 //Benny's Strawberry Alta St Paint Shop
                 cost: 500,
                 uid: 'paint-shop-4',
                 vertices: [
-                    { x: -201.95603942871094, y: -1322.03076171875, z: 31.116455078125},
-                    { x: -195.45494079589844, y: -1322.017578125, z: 31.116455078125},
-                    { x: -195.45494079589844, y: -1326.6724853515625, z: 31.116455078125},
-                    { x: -201.95603942871094, y: -1326.6724853515625, z: 31.116455078125},
-                ]
-            }
+                    { x: -201.95603942871094, y: -1322.03076171875, z: 31.116455078125 },
+                    { x: -195.45494079589844, y: -1322.017578125, z: 31.116455078125 },
+                    { x: -195.45494079589844, y: -1326.6724853515625, z: 31.116455078125 },
+                    { x: -201.95603942871094, y: -1326.6724853515625, z: 31.116455078125 },
+                ],
+            },
         ];
 
         for (let i = 0; i < someShops.length; i++) {
@@ -90,25 +89,29 @@ export class PainShopFunctions {
             return null;
         }
 
-        const polygon: IStreamPolygon = {
-            vertices: shop.vertices,
-            pos: shop.vertices[0],
-            enterEventCall: PainShopFunctions.enter,
-            leaveEventCall: PainShopFunctions.leave,
-            maxY: 1.5,
-            debug: true,
-        };
-
-        ServerPolygonController.append(polygon);
+        const polygon = new PolygonShape(
+            shop.vertices[0].z - 2.5,
+            shop.vertices[0].z + 2.5,
+            shop.vertices,
+            true,
+            false,
+        );
+        polygon.addEnterCallback(PainShopFunctions.enter);
+        polygon.addLeaveCallback(PainShopFunctions.leave);
         return shop.uid;
     }
 
-    static enter<T>(player: T | alt.Player, polygon: IStreamPolygon) {
+    static enter(polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
         }
 
         if (!player.vehicle) {
+            playerFuncs.emit.notification(player, `Must be in a vehicle to use this.`);
+            return;
+        }
+
+        if (player.vehicle.driver.id !== player.id) {
             return;
         }
 
@@ -124,7 +127,7 @@ export class PainShopFunctions {
         playerFuncs.emit.interactionTemporary(player, View_Events_PaintShop.Open);
     }
 
-    static leave<T>(player: T, polygon: IStreamPolygon) {
+    static leave(polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
         }

@@ -1,58 +1,10 @@
 import * as alt from 'alt-server';
+import { IVector2 } from 'alt-shared';
 import { Interaction } from '../../shared/interfaces/interaction';
-import { Vector3 } from '../../shared/interfaces/vector';
+import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 import { sha256Random } from '../utility/encryption';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
-
-/**
- * Purpose of the ColShape is to easily call all callbacks added
- * to this ColShape so that it is easily deciphered.
- *
- * @export
- * @class BoundPlayerColShape
- * @extends {alt.ColshapeCylinder}
- */
-export class BoundPlayerColShape extends alt.ColshapeCylinder {
-    uid: string;
-    enterCallbacks: Array<(colshape: alt.Colshape, player: alt.Player) => void>;
-    leaveCallbacks: Array<(colshape: alt.Colshape, player: alt.Player) => void>;
-
-    constructor(x: number, y: number, z: number, range: number, height: number) {
-        super(x, y, z, range, height);
-        this.enterCallbacks = [];
-        this.leaveCallbacks = [];
-        this.uid = `bound-player-colshape-${sha256Random(JSON.stringify(this))}`;
-    }
-
-    /**
-     * Add a callback to this specific ColShape
-     *
-     * @param {(colshape: alt.Colshape, player: alt.Player) => void} callback
-     * @memberof BoundColshape
-     */
-    addEnterCallback(callback: (colshape: alt.Colshape, player: alt.Player) => void) {
-        this.enterCallbacks.push(callback);
-    }
-
-    /**
-     * Invokes all callbacks bound to this ColShape.
-     *
-     * @param {alt.Player} player
-     * @memberof BoundPlayerColShape
-     */
-    invokeEnter(player: alt.Player) {
-        for (let i = 0; i < this.enterCallbacks.length; i++) {
-            this.enterCallbacks[i](this, player);
-        }
-    }
-
-    invokeLeave(player: alt.Player) {
-        for (let i = 0; i < this.leaveCallbacks.length; i++) {
-            this.leaveCallbacks[i](this, player);
-        }
-    }
-}
 
 export class InteractionShape extends alt.ColshapeCylinder {
     interaction: Interaction = {};
@@ -100,15 +52,96 @@ export class GarageSpaceShape extends alt.ColshapeSphere {
     }
 }
 
+export class PolygonShape extends alt.ColshapePolygon {
+    uid: string;
+    isPlayerOnly: boolean;
+    isVehicleOnly: boolean;
+    isPolygonShape = true;
+
+    private enterCallbacks: Array<(shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void> = [];
+    private leaveCallbacks: Array<(shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void> = [];
+
+    /**
+     * Creates an expensive instance of PolygonShape.
+     *
+     * Enter / Exit can be fetched with 'entityEnterColshape' and 'entityLeaveColshape' events
+     *
+     * @param {number} minZ The floor level of the polygon
+     * @param {number} maxZ The max height of the polygon
+     * @param {Array<IVector2>} vertices An array of {x, y} to determine where to draw the polygon around
+     * @memberof PolygonShape
+     */
+    constructor(
+        minZ: number,
+        maxZ: number,
+        vertices: Vector2[] | Vector3[],
+        isPlayerOnly: boolean,
+        isVehicleOnly: boolean,
+    ) {
+        const processedVertices = vertices.map((pos) => {
+            return new alt.Vector2(pos.x, pos.y);
+        });
+
+        super(minZ, maxZ, processedVertices);
+        this.isPolygonShape = true;
+        this.isPlayerOnly = isPlayerOnly;
+        this.isVehicleOnly = isVehicleOnly;
+        this.uid = sha256Random(JSON.stringify(this));
+    }
+
+    addEnterCallback(callback: (shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void) {
+        this.enterCallbacks.push(callback);
+    }
+
+    addLeaveCallback(callback: (shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void) {
+        this.leaveCallbacks.push(callback);
+    }
+
+    invokeEnterCallbacks(entity: alt.Entity) {
+        for (let i = 0; i < this.enterCallbacks.length; i++) {
+            this.enterCallbacks[i](this, entity);
+        }
+    }
+
+    invokeLeaveCallbacks(entity: alt.Entity) {
+        for (let i = 0; i < this.leaveCallbacks.length; i++) {
+            this.leaveCallbacks[i](this, entity);
+        }
+    }
+}
+
 alt.on('entityEnterColshape', (colshape: alt.Colshape, entity: alt.Entity) => {
-    if (!(colshape instanceof BoundPlayerColShape)) {
+    if (!(colshape instanceof PolygonShape)) {
         return;
     }
 
-    if (!colshape.uid || !colshape.invokeEnter || !colshape.invokeLeave) {
+    if (!colshape.isPolygonShape) {
         return;
     }
 
+    if (entity instanceof alt.Player && colshape.isPlayerOnly) {
+        colshape.invokeEnterCallbacks(entity);
+    }
 
+    if (entity instanceof alt.Vehicle && colshape.isVehicleOnly) {
+        colshape.invokeEnterCallbacks(entity);
+    }
+});
 
+alt.on('entityLeaveColshape', (colshape: alt.Colshape, entity: alt.Entity) => {
+    if (!(colshape instanceof PolygonShape)) {
+        return;
+    }
+
+    if (!colshape.isPolygonShape) {
+        return;
+    }
+
+    if (entity instanceof alt.Player && colshape.isPlayerOnly) {
+        colshape.invokeLeaveCallbacks(entity);
+    }
+
+    if (entity instanceof alt.Vehicle && colshape.isVehicleOnly) {
+        colshape.invokeLeaveCallbacks(entity);
+    }
 });

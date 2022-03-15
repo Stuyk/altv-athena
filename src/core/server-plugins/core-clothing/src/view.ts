@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
+import { PolygonShape } from '../../../server/extensions/extColshape';
 import { playerFuncs } from '../../../server/extensions/extPlayer';
-import { ServerPolygonController } from '../../../server/streamers/polygon';
 import { ServerBlipController } from '../../../server/systems/blip';
 import { InteractionController } from '../../../server/systems/interaction';
 import { sha256 } from '../../../server/utility/encryption';
@@ -12,7 +12,6 @@ import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
 import { Blip } from '../../../shared/interfaces/blip';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Interaction } from '../../../shared/interfaces/interaction';
-import { IStreamPolygon } from '../../../shared/interfaces/iStreamPolygon';
 import { Item } from '../../../shared/interfaces/item';
 import { Vector3 } from '../../../shared/interfaces/vector';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
@@ -98,17 +97,10 @@ export class ClothingFunctions {
             };
 
             if (clothingStores[i].vertices) {
-                const polygon: IStreamPolygon = {
-                    uid,
-                    pos: position,
-                    vertices: clothingStores[i].vertices,
-                    debug: true,
-                    enterEventCall: ClothingFunctions.enter,
-                    leaveEventCall: ClothingFunctions.leave,
-                    maxY: 2.5,
-                };
-
-                ServerPolygonController.append(polygon);
+                const polygon = new PolygonShape(position.z, position.z + 2.5, clothingStores[i].vertices, true, false);
+                polygon.addEnterCallback(ClothingFunctions.enter);
+                polygon.addLeaveCallback(ClothingFunctions.leave);
+                polygon.isPlayerOnly = true;
             }
 
             const clothingData = deepCloneObject<IClothingStore>(DefaultClothingData);
@@ -334,7 +326,7 @@ export class ClothingFunctions {
      * @param {uniontype} player - The player that entered the polygon.
      * @param {IStreamPolygon} polygon - The polygon that the player is entering.
      */
-    static enter<T>(player: T | alt.Player, polygon: IStreamPolygon) {
+    static enter(polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
         }
@@ -347,10 +339,8 @@ export class ClothingFunctions {
      * @param {T} player - The player that is leaving the polygon.
      * @param {IStreamPolygon} polygon - The polygon that the player is leaving.
      */
-    static leave<T>(player: T, polygon: IStreamPolygon) {
-        if (!(player instanceof alt.Player)) {
-            return;
-        }
+    static leave(polygon: PolygonShape, player: alt.Player) {
+        // Not Important. Just a placeholder
     }
 }
 
