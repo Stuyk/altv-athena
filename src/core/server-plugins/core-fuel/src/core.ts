@@ -44,13 +44,19 @@ export class FuelSystem {
             const vehicleInfo = VehicleData.find((x) => x.name === veh.model);
 
             if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
-                return {
+                const dataToAppend: Partial<IVehicle> = {
                     fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE,
                     behavior: Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NEED_KEY_TO_START,
                 };
+
+                return dataToAppend;
             }
 
-            return { fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE };
+            const dataToAppend: Partial<IVehicle> = {
+                fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE,
+            };
+
+            return dataToAppend;
         });
     }
 
