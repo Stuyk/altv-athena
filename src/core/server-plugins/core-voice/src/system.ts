@@ -44,8 +44,26 @@ export class VoiceSystem {
      * @param {number} maxDistance
      * @memberof VoiceSystem
      */
-    static createChannel(name: string, isSpatial: boolean, maxDistance: number) {
-        Channels.push({ name, channel: new alt.VoiceChannel(isSpatial, maxDistance), joinEmits: [], leaveEmits: [] });
+    static createChannel(
+        name: string,
+        isSpatial: boolean,
+        maxDistance: number,
+    ): IVoiceChannel<alt.Player, alt.VoiceChannel> | null {
+        const index = Channels.findIndex((x) => x.name === name);
+        if (index <= -1) {
+            return null;
+        }
+
+        const newChannel = {
+            name,
+            channel: new alt.VoiceChannel(isSpatial, maxDistance),
+            joinEmits: [],
+            leaveEmits: [],
+        };
+
+        Channels.push(newChannel);
+
+        return newChannel;
     }
 
     /**
