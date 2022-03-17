@@ -20,5 +20,4 @@ import '../systems/streamer';
 import '../systems/tick';
 import '../systems/toolbar';
 import '../systems/vehicle';
-import '../systems/voice';
 import '../systems/world';

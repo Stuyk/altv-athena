@@ -11,9 +11,6 @@ export const DEFAULT_CONFIG = {
     // Whitelisting
     WHITELIST: false,
     USE_DISCORD_BOT: false,
-    // Use Voice
-    VOICE_ON: SHARED_CONFIG.VOICE_ON,
-    VOICE_MAX_DISTANCE: 35,
     // Character Selection View
     CHARACTER_SELECT_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
     CHARACTER_SELECT_ROT: 249.58352661132812,

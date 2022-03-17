@@ -102,9 +102,6 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         ServerBlipController.populateGlobalBlips(player);
         HologramController.populateHolograms(player);
 
-        // Voice Service
-        alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
-
         // Vehicle Spawning
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {
             const vehicles = await VehicleFuncs.getPlayerVehicles(player.data._id);
