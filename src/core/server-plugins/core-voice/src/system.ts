@@ -10,6 +10,8 @@ const Channels: Array<IVoiceChannel<alt.Player, alt.VoiceChannel>> = [];
 export class VoiceSystem {
     /**
      * Initializes the main voice channel
+     *
+     * The main voice channel automatically handles dimensions by default.
      * @returns Nothing.
      */
     static init() {
