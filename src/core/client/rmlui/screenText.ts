@@ -17,8 +17,10 @@
 import alt, { RmlElement } from 'alt-client';
 import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 import { distance2d } from '../../shared/utility/vector';
+import { isAnyMenuOpen } from '../utility/menus';
+import { UID } from '../utility/uid';
 
-const elements: { [key: string]: { element: RmlElement; timeout?: number } } = {};
+const elements: { [uid: string]: { element: RmlElement; position: Vector2 | Vector3 } } = {};
 const fontsToLoad = [
     {
         path: '/client/rmlui/fonts/arialbd.ttf', // Only supports TTF
@@ -45,10 +47,65 @@ class InternalFunctions {
         document = new alt.RmlDocument('/client/rmlui/screenText.rml');
         container = document.getElementByID('container');
         document.show();
+        alt.setInterval(InternalFunctions.update, 0);
     }
 
-    static removeElement(text: string) {
-        const elementRef = elements[text];
+    static update() {
+        if (isAnyMenuOpen(true)) {
+            document.hide();
+            return;
+        }
+
+        const currentDraws = Object.keys(elements).map((key) => {
+            return { key, ...elements[key] };
+        });
+
+        for (let i = 0; i < currentDraws.length; i++) {
+            const textDraw = currentDraws[i];
+            let screenPosition: Vector2;
+
+            // Convert Vector3 to screen position if necessary
+            if (textDraw.position.hasOwnProperty('z')) {
+                const vectorPos = textDraw.position as Vector3;
+                screenPosition = alt.worldToScreen(vectorPos.x, vectorPos.y, vectorPos.z);
+            } else {
+                screenPosition = textDraw.position;
+            }
+
+            textDraw.element.setProperty('left', `${screenPosition.x}px`);
+            textDraw.element.setProperty('top', `${screenPosition.y}px`);
+            textDraw.element.setProperty('font-size', '70dp');
+            // Add Text Scaling Here...
+        }
+    }
+}
+
+export class ScreenText {
+    static addText(text: string, position: Vector2 | Vector3, uid: string = null): string {
+        if (!uid) {
+            uid = UID.generate();
+        }
+
+        if (elements[uid]) {
+            ScreenText.removeText(uid);
+        }
+
+        elements[uid] = {
+            element: document.createElement('div'),
+            position,
+        };
+        elements[text].element.addClass('text');
+        elements[text].element.innerRML = text;
+        elements[text].element.setProperty('left', `${position.x}px`);
+        elements[text].element.setProperty('top', `${position.y}px`);
+        elements[text].element.setProperty('font-size', '70dp');
+        container.appendChild(elements[text].element);
+
+        return uid;
+    }
+
+    static removeText(uid: string) {
+        const elementRef = elements[uid];
         if (!elementRef) {
             return;
         }
@@ -56,64 +113,10 @@ class InternalFunctions {
         const element = elementRef.element;
 
         try {
-            console.log(text);
-
             container.removeChild(element);
-            console.log('removed element');
-            delete elements[text];
-            console.log('removed ref');
+            delete elements[uid];
         } catch (err) {}
     }
 }
 
-export class ScreenText {
-    static draw3D(text: string, position: Vector3) {
-        const screen = alt.worldToScreen(position.x, position.y, position.z);
-        ScreenText.draw2D(text, new alt.Vector2(screen.x, screen.y));
-    }
-
-    static draw2D(text: string, position: Vector2) {
-        if (!elements[text]) {
-            elements[text] = {
-                element: document.createElement('div'),
-                timeout: alt.setTimeout(() => {
-                    InternalFunctions.removeElement(text);
-                }, 500),
-            };
-            elements[text].element.addClass('text');
-            elements[text].element.innerRML = text;
-            elements[text].element.setProperty('left', `${position.x}px`);
-            elements[text].element.setProperty('top', `${position.y}px`);
-            elements[text].element.setProperty('font-size', '70dp');
-            container.appendChild(elements[text].element);
-        } else {
-            const elementRef = elements[text];
-            if (!elementRef) {
-                return;
-            }
-
-            alt.clearTimeout(elementRef.timeout);
-            elementRef.element.setProperty('left', `${position.x}px`);
-            elementRef.element.setProperty('top', `${position.y}px`);
-            elementRef.timeout = alt.setTimeout(() => {
-                InternalFunctions.removeElement(text);
-            }, 500);
-        }
-    }
-}
-
 InternalFunctions.init();
-
-// alt.setInterval(() => {
-//     ScreenText.draw3D('Me', alt.Player.local.pos);
-//     ScreenText.draw2D(`Hello World`, { x: 50, y: 50 });
-
-//     alt.Vehicle.all.forEach((veh) => {
-//         const dist = distance2d(veh.pos, alt.Player.local.pos);
-//         if (dist >= 10) {
-//             return;
-//         }
-
-//         ScreenText.draw3D(`Car: ${veh.id}`, veh.pos);
-//     });
-// }, 0);
