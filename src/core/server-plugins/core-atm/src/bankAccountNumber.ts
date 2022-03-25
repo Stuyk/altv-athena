@@ -22,9 +22,12 @@ class InternalFunctions {
             return;
         }
 
+        // Increase the value outright
+        await Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
+
         player.data.bankNumber = await Global.getKey<number>(metaName);
         await playerFuncs.save.field(player, metaName, player.data.bankNumber);
-        await Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
+
         playerFuncs.emit.meta(player, metaName, player.data[metaName]);
 
         alt.log(`Created Bank Account # ${player.data[metaName]} for ${player.data.name}`);
