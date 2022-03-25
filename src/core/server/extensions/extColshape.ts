@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { IVector2 } from 'alt-shared';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 import { sha256Random } from '../utility/encryption';
@@ -54,9 +55,11 @@ export class GarageSpaceShape extends alt.ColshapeSphere {
 
 export class PolygonShape extends alt.ColshapePolygon {
     uid: string;
+    vertices: Array<Vector2>;
     isPlayerOnly: boolean;
     isVehicleOnly: boolean;
     isPolygonShape = true;
+    isDebug = false;
 
     private enterCallbacks: Array<(shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void> = [];
     private leaveCallbacks: Array<(shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void> = [];
@@ -77,16 +80,19 @@ export class PolygonShape extends alt.ColshapePolygon {
         vertices: Vector2[] | Vector3[],
         isPlayerOnly: boolean,
         isVehicleOnly: boolean,
+        debug = false,
     ) {
         const processedVertices = vertices.map((pos) => {
             return new alt.Vector2(pos.x, pos.y);
         });
 
         super(minZ, maxZ, processedVertices);
+        this.vertices = processedVertices;
         this.isPolygonShape = true;
         this.isPlayerOnly = isPlayerOnly;
         this.isVehicleOnly = isVehicleOnly;
         this.uid = sha256Random(JSON.stringify(this));
+        this.isDebug = debug;
     }
 
     addEnterCallback(callback: (shape: PolygonShape, entity: alt.Vehicle | alt.Player | alt.Entity) => void) {
@@ -121,10 +127,18 @@ alt.on('entityEnterColshape', (colshape: alt.Colshape, entity: alt.Entity) => {
 
     if (entity instanceof alt.Player && colshape.isPlayerOnly) {
         colshape.invokeEnterCallbacks(entity);
+
+        if (colshape.isDebug) {
+            alt.emitClient(entity, SYSTEM_EVENTS.DEBUG_COLSHAPE_VERTICES, colshape.uid, colshape.vertices);
+        }
     }
 
     if (entity instanceof alt.Vehicle && colshape.isVehicleOnly) {
         colshape.invokeEnterCallbacks(entity);
+
+        if (colshape.isDebug && entity.driver) {
+            alt.emitClient(entity.driver, SYSTEM_EVENTS.DEBUG_COLSHAPE_VERTICES, colshape.uid, colshape.vertices);
+        }
     }
 });
 

@@ -238,10 +238,6 @@ declare module 'alt-server' {
     }
 }
 
-export default function onLoad() {
-    //
-}
-
 export const playerFuncs = {
     currency,
     dataUpdater,

@@ -59,6 +59,7 @@ import './utility/errorScreen';
 import './utility/ipl';
 import './utility/lerp';
 import './utility/notification';
+import './utility/polygonShape';
 import './utility/reload';
 import './utility/sandbox';
 import './utility/screenshot';

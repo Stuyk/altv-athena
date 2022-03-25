@@ -12,6 +12,8 @@ export enum SYSTEM_EVENTS {
     BEGIN_CONNECTION = 'connection:Begin',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
+    // Debug
+    DEBUG_COLSHAPE_VERTICES = 'debug:Colshape:Vertices',
     // Discord
     DISCORD_OPEN = 'discord:Open',
     DISCORD_CLOSE = 'discord:Close',

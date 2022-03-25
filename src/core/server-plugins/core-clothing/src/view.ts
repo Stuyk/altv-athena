@@ -98,6 +98,7 @@ export class ClothingFunctions {
 
             if (clothingStores[i].vertices) {
                 const polygon = new PolygonShape(position.z, position.z + 2.5, clothingStores[i].vertices, true, false);
+
                 polygon.addEnterCallback(ClothingFunctions.enter);
                 polygon.addLeaveCallback(ClothingFunctions.leave);
                 polygon.isPlayerOnly = true;
