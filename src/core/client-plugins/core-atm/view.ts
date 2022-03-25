@@ -56,12 +56,17 @@ class AtmView implements ViewModel {
     }
 
     static async change(key: string) {
-        if (key !== 'bank' && key !== 'cash') {
+        if (key !== 'bank' && key !== 'cash' && key !== 'bankNumber') {
             return;
         }
 
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:Update`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        view.emit(
+            `${PAGE_NAME}:Update`,
+            alt.Player.local.meta.bank,
+            alt.Player.local.meta.cash,
+            alt.Player.local.meta.bankNumber,
+        );
     }
 }
 

@@ -6,6 +6,9 @@
             </Toolbar>
         </template>
         <template v-slot:content>
+            <div class="split center pb-4">
+                {{ locales.LABEL_BANK_ACCOUNT_NUMBER }} <span class="allow-select">{{ bankNumber }}</span>
+            </div>
             <!-- Balance Group -->
             <div class="split space-between">
                 <div class="overline">
@@ -79,6 +82,7 @@ export default defineComponent({
         return {
             cash: 0,
             bank: 0,
+            bankNumber: 9999,
             colors: ['green', 'blue', 'orange'],
             labels: ['LABEL_DEPOSIT', 'LABEL_WITHDRAW', 'LABEL_TRANSFER'],
             locales: DefaultLocale,
@@ -108,9 +112,10 @@ export default defineComponent({
 
             return {};
         },
-        updateBalances(bank, cash) {
+        updateBalances(bank, cash, bankNumber) {
             this.bank = bank;
             this.cash = cash;
+            this.bankNumber = bankNumber;
 
             const total = this.bank + this.cash;
             this.balancerPercentage = (this.bank / total) * 100;
@@ -151,7 +156,7 @@ export default defineComponent({
         } else {
             const cash = Math.floor(Math.random() * 5000000);
             const bank = Math.floor(Math.random() * 5000000);
-            this.updateBalances(cash, bank);
+            this.updateBalances(cash, bank, 9999);
         }
     },
     unmounted() {

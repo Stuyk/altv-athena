@@ -8,6 +8,9 @@ import { ATM_INTERACTIONS } from '../../../shared-plugins/core-atm/events';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import { LocaleController } from '../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
+import { Character } from '../../../shared/interfaces/character';
+import Database from '@stuyk/ezmongodb';
+import { Collections } from '../../../server/interface/iDatabaseCollections';
 
 const INTERACTION_RANGE = 1.5;
 class InternalFunctions {
@@ -106,30 +109,51 @@ class InternalFunctions {
      * @return {*}  {boolean}
      * @memberof InternalFunctions
      */
-    static transfer(player: alt.Player, amount: number, id: string | number): boolean {
-        const target: alt.Player = [...alt.Player.all].find((x) => `${x.id}` === `${id}`);
-        if (!target) {
+    static async transfer(player: alt.Player, amount: number, bankNumber: string | number): Promise<boolean> {
+        if (typeof bankNumber === 'string') {
+            bankNumber = parseInt(bankNumber);
+        }
+
+        // Check they are not transferring to self.
+        if (player.data.bankNumber === bankNumber) {
             return false;
         }
 
-        if (target.id === player.id) {
-            return false;
-        }
+        const onlinePlayer = [...alt.Player.all].find(
+            (target) => target && target.data && target.data.bankNumber === bankNumber,
+        );
 
         if (amount > player.data.bank) {
             return false;
         }
 
-        if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
-            return false;
+        if (onlinePlayer) {
+            // Update by Online Player Route
+            if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
+                return false;
+            }
+
+            if (!playerFuncs.currency.add(onlinePlayer, CurrencyTypes.BANK, amount)) {
+                return false;
+            }
+
+            const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
+            playerFuncs.emit.message(onlinePlayer, msg);
+        } else {
+            // Update by Document Route
+            const document = await Database.fetchData<Character>('bankNumber', bankNumber, Collections.Characters);
+            if (!document) {
+                return false;
+            }
+
+            if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
+                return false;
+            }
+
+            document.bank += amount;
+            await Database.updatePartialData(document._id.toString(), { bank: document.bank }, Collections.Characters);
         }
 
-        if (!playerFuncs.currency.add(target, CurrencyTypes.BANK, amount)) {
-            return false;
-        }
-
-        const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
-        playerFuncs.emit.message(target, msg);
         return true;
     }
 

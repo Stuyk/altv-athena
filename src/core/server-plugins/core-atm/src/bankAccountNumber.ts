@@ -6,23 +6,28 @@ import { BANK_CONFIG } from './config';
 import * as charRef from '../../../shared/interfaces/character';
 import { playerFuncs } from '../../../server/extensions/extPlayer';
 
+const metaName = 'bankNumber';
+
 // Extends the player interface.
 declare module 'alt-server' {
     export interface Character extends Partial<charRef.Character> {
-        bankNumber?: null | undefined | number;
+        [metaName]?: null | undefined | number;
     }
 }
 
 class InternalFunctions {
     static async handleSelect(player: alt.Player) {
         if (player.data.bankNumber !== undefined && player.data.bankNumber !== null) {
+            playerFuncs.emit.meta(player, metaName, player.data[metaName]);
             return;
         }
 
-        player.data.bankNumber = await Global.getKey<number>('bankNumber');
-        await playerFuncs.save.field(player, 'bankNumber', player.data.bankNumber);
-        await Global.increase('bankNumber', 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
-        alt.log(`Created Bank Account # ${player.data.bankNumber} for ${player.data.name}`);
+        player.data.bankNumber = await Global.getKey<number>(metaName);
+        await playerFuncs.save.field(player, metaName, player.data.bankNumber);
+        await Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
+        playerFuncs.emit.meta(player, metaName, player.data[metaName]);
+
+        alt.log(`Created Bank Account # ${player.data[metaName]} for ${player.data.name}`);
     }
 }
 

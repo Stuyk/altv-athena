@@ -9,6 +9,7 @@ export interface Meta {
     // Currency
     bank: number;
     cash: number;
+    bankNumber: number;
 
     // Food & Water
     food: number;
