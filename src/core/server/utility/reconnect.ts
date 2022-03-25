@@ -1,10 +1,6 @@
 import * as alt from 'alt-server';
 import fetch from 'node-fetch';
-import * as http from 'http';
 import ConfigUtil from './config';
-
-const RECONNECTION_ADDRESS = 'http://localhost:5599';
-let caughtErrorOnce = false;
 
 export class ReconnectHelper {
     /**
@@ -23,16 +19,7 @@ export class ReconnectHelper {
             return;
         }
 
-        const [major, minor] = alt.version.split('.');
-        if (parseInt(major) >= 9) {
-            console.log(`Using built-in reconnect strategy`);
-            this.altvReconnect();
-            return;
-        }
-
-        console.log(`Using Old Reconnect Strategy`);
-        // Use altv-reconnect strategy
-        ReconnectHelper.sendRequest();
+        this.altvReconnect();
     }
 
     private static isWindows(): boolean {
@@ -50,23 +37,5 @@ export class ReconnectHelper {
                 }
             })
             .catch(alt.log);
-    }
-
-    private static sendRequest() {
-        const req = http.get(RECONNECTION_ADDRESS);
-        req.on('response', () => {
-            alt.log(`~g~[altv-reconnect] Invoked Reconnection Successfully`);
-        });
-
-        req.on('error', () => {
-            if (caughtErrorOnce) {
-                return;
-            }
-
-            caughtErrorOnce = true;
-            alt.log(`~r~[altv-reconnect] ~y~Not Currently Running`);
-            alt.log(`~r~[altv-reconnect] ~y~Download Binaries from https://github.com/Stuyk/altv-reconnect`);
-            alt.log(`~r~[altv-reconnect] ~y~Turn off 'USE_ALTV_RECONNECT' if in production mode`);
-        });
     }
 }
