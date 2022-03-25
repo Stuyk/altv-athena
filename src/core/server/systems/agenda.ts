@@ -20,7 +20,7 @@ const agenda: { [key: string]: (player: alt.Player) => void } = {
 
 const timelines: {
     [key: string]: {
-        index: number;
+        agendaIndex: number;
         agenda: Array<{ index: number; callback: (player: alt.Player) => void }>;
     };
 } = {};
@@ -70,8 +70,8 @@ export class AgendaSystem {
     static getAsArray(): Array<{ index: number; callback: (player: alt.Player) => void }> {
         const timeline: Array<{ index: number; callback: (player: alt.Player) => void }> = [];
 
-        Object.keys(agenda).forEach((key, index) => {
-            timeline.push({ index, callback: agenda[key] });
+        Object.keys(agenda).forEach((key) => {
+            timeline.push({ index: parseInt(key), callback: agenda[key] });
         });
 
         return timeline;
@@ -87,7 +87,7 @@ export class AgendaSystem {
      */
     static init(player: alt.Player) {
         timelines[player.id] = {
-            index: -1,
+            agendaIndex: -1,
             agenda: AgendaSystem.getAsArray(),
         };
     }
@@ -102,13 +102,13 @@ export class AgendaSystem {
     static getNext(player: alt.Player, startNew = false): (player: alt.Player, ...args: any[]) => void | null {
         if (!timelines[player.id] || startNew) {
             timelines[player.id] = {
-                index: -1,
+                agendaIndex: -1,
                 agenda: AgendaSystem.getAsArray(),
             };
         }
 
-        timelines[player.id].index += 1;
-        return timelines[player.id].agenda[timelines[player.id].index].callback;
+        timelines[player.id].agendaIndex += 1;
+        return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 
     /**
@@ -119,20 +119,18 @@ export class AgendaSystem {
     static goToAgenda(player: alt.Player, index: number) {
         if (!timelines[player.id]) {
             timelines[player.id] = {
-                index: -1,
+                agendaIndex: -1,
                 agenda: AgendaSystem.getAsArray(),
             };
         }
 
-        const actualIndex = timelines[player.id].agenda.findIndex((x) => x.index === index);
-        if (actualIndex <= -1) {
+        const actualAgendaIndex = timelines[player.id].agenda.findIndex((x) => x.index === index);
+        if (actualAgendaIndex <= -1) {
             throw new Error(`Agenda at ${index} does not exist. Please use correct index.`);
         }
 
-        console.log(`Going to ${index}`);
-
-        const agenda = timelines[player.id].agenda[actualIndex];
-        timelines[player.id].index = index;
+        const agenda = timelines[player.id].agenda[actualAgendaIndex];
+        timelines[player.id].agendaIndex = actualAgendaIndex;
         agenda.callback(player);
     }
 
@@ -175,11 +173,11 @@ export class AgendaSystem {
             return null;
         }
 
-        timelines[player.id].index -= 1;
-        if (timelines[player.id].index < 0) {
-            timelines[player.id].index = 0;
+        timelines[player.id].agendaIndex -= 1;
+        if (timelines[player.id].agendaIndex < 0) {
+            timelines[player.id].agendaIndex = 0;
         }
 
-        return timelines[player.id].agenda[timelines[player.id].index].callback;
+        return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 }
