@@ -72,7 +72,7 @@ function setDimension(player: alt.Player, value: number) {
     alt.log(`Player Dimension is now: ${player.dimension}`);
 }
 
-function override(functionName: string, callback: (player: alt.Player) => void) {
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
     exports[functionName] = callback;
 }
 

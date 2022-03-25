@@ -168,7 +168,7 @@ function playTime(player: alt.Player): void {
     save.field(player, 'hours', player.data.hours);
 }
 
-function override(functionName: string, callback: (player: alt.Player) => void) {
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
     exports[functionName] = callback;
 }
 

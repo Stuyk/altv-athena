@@ -386,7 +386,13 @@ function wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelIt
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems);
 }
 
-export default {
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    console.log(`Overriding ${functionName} with own function.`);
+
+    exports[functionName] = callback;
+}
+
+const exports = {
     interactionAdd,
     animation,
     clearAnimation,
@@ -405,6 +411,7 @@ export default {
     notification,
     objectAttach,
     objectRemove,
+    override,
     particle,
     interactionRemove,
     removeProgressBar,
@@ -417,3 +424,5 @@ export default {
     interactionTemporary,
     wheelMenu,
 };
+
+export default exports;
