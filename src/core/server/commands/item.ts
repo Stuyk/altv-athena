@@ -19,7 +19,7 @@ ChatController.addCommand(
 
 async function handleGetItem(player: alt.Player, ...args) {
     const fullItemName = args.join(' ');
-    if (fullItemName.length <= 2) {
+    if (fullItemName.length <= 1) {
         playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
         return;
     }
