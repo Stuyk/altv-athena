@@ -15,6 +15,7 @@
  **/
 
 import alt, { RmlElement } from 'alt-client';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 import { distance2d } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
@@ -119,4 +120,4 @@ export class ScreenText {
     }
 }
 
-InternalFunctions.init();
+alt.on(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);

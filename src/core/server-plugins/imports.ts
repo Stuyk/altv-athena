@@ -10,6 +10,7 @@ import './core-garage/index';
 import './core-interior/index';
 import './core-items/index';
 import './core-nametags/index';
+import './core-vitals/index';
 import './core-voice/index';
 import './job-mule-delivery/index';
 import './job-pizza-delivery/index';

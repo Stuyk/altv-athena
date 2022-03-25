@@ -60,7 +60,6 @@ class ClientAttachableSystem {
             return;
         }
 
-        alt.log('updating attachables....');
         ClientAttachableSystem.update(entity, value);
     }
 

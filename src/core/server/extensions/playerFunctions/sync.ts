@@ -168,35 +168,20 @@ function playTime(player: alt.Player): void {
     save.field(player, 'hours', player.data.hours);
 }
 
-function food(player: alt.Player): void {
-    if (player.data.isDead && player.data.food <= 0) {
-        player.data.food = 100;
-        emit.meta(player, 'food', player.data.food);
-        return;
-    }
-
-    playerFuncs.safe.addFood(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
+function override(functionName: string, callback: (player: alt.Player) => void) {
+    exports[functionName] = callback;
 }
 
-function water(player: alt.Player): void {
-    if (player.data.isDead && player.data.water <= 0) {
-        player.data.water = 100;
-        emit.meta(player, 'water', player.data.water);
-        return;
-    }
-
-    playerFuncs.safe.addWater(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
-}
-
-export default {
+const exports = {
     appearance,
     currencyData,
-    food,
     equipment,
     inventory,
     playTime,
+    override,
     syncedMeta,
     time,
-    water,
     weather,
 };
+
+export default exports;

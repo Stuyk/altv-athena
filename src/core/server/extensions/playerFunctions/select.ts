@@ -84,8 +84,6 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         sync.weather(player);
         sync.time(player);
         sync.inventory(player);
-        sync.water(player);
-        sync.food(player);
 
         player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
         player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);

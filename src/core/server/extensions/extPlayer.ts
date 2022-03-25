@@ -128,13 +128,6 @@ declare module 'alt-server' {
         nextItemSync: number;
 
         /**
-         * The next time to update Food and Water Status.
-         * @type {number}
-         * @memberof Player
-         */
-        nextFoodSync: number;
-
-        /**
          * The next play time update.
          * @type {number}
          * @memberof Player

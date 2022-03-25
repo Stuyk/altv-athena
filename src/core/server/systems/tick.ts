@@ -36,13 +36,6 @@ function handlePing(player: alt.Player): void {
     playerFuncs.sync.time(player);
     playerFuncs.sync.weather(player);
 
-    // Updates Food & Water
-    if (!player.nextFoodSync || Date.now() > player.nextFoodSync) {
-        player.nextFoodSync = Date.now() + DEFAULT_CONFIG.TIME_BETWEEN_FOOD_UPDATES;
-        playerFuncs.sync.food(player);
-        playerFuncs.sync.water(player);
-    }
-
     if (!player.nextPlayTime || Date.now() > player.nextPlayTime) {
         player.nextPlayTime = Date.now() + 60000;
         playerFuncs.sync.playTime(player);

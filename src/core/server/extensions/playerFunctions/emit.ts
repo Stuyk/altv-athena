@@ -327,8 +327,6 @@ function objectRemove(player: alt.Player, uid: string) {
             continue;
         }
 
-        alt.log(`Deleting: ${uid}`);
-
         player.attachables.splice(i, 1);
         player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
         return;
