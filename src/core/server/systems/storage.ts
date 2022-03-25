@@ -9,7 +9,7 @@ export class StorageSystem {
      * Create a storage box and return the full storage Document.
      * @static
      * @param {IStorage} storage
-     * @return {*}  {IStorage}
+     * @return {IStorage}
      * @memberof StorageSystem
      */
     static async create(storage: IStorage): Promise<IStorage> {

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { ATM_INTERACTIONS } from '../../shared-plugins/core-atm/events';
 import { LOCALE_ATM_VIEW } from '../../shared-plugins/core-atm/locales';
@@ -56,12 +56,17 @@ class AtmView implements ViewModel {
     }
 
     static async change(key: string) {
-        if (key !== 'bank' && key !== 'cash') {
+        if (key !== 'bank' && key !== 'cash' && key !== 'bankNumber') {
             return;
         }
 
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:Update`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        view.emit(
+            `${PAGE_NAME}:Update`,
+            alt.Player.local.meta.bank,
+            alt.Player.local.meta.cash,
+            alt.Player.local.meta.bankNumber,
+        );
     }
 }
 

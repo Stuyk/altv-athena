@@ -140,6 +140,29 @@ export interface Appearance {
     eyebrowsColor1: number;
 
     /**
+     * The chest hair on a character.
+     * This will not show without opacity being set.
+     * @type {number}
+     * @memberof Appearance
+     */
+    chestHair: number;
+
+    /**
+     * How visible chest hair should be.
+     * Values 0.0 to 1.0
+     * @type {number}
+     * @memberof Appearance
+     */
+    chestHairOpacity: number;
+
+    /**
+     * The colors of the chest hair.
+     * @type {number}
+     * @memberof Appearance
+     */
+    chestHairColor1: number;
+
+    /**
      * Eye Color
      * @type {number}
      * @memberof Appearance

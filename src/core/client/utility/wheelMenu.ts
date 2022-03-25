@@ -8,11 +8,18 @@ import { handleFrontendSound } from '../systems/sound';
 import { getScaledCursorPosition } from './mouse';
 import { Timer } from './timers';
 import { WebViewController } from '../extensions/view2';
+import { IWheelItem } from '../../shared/interfaces/iWheelMenu';
+import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ClientInventoryView } from '../views/inventory';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
 let interval;
 let lastHover;
+
+export interface IClientWheelItem extends IWheelItem {
+    callback?: Function;
+}
 
 export interface IWheelMenu {
     label: string;
@@ -20,15 +27,7 @@ export interface IWheelMenu {
     center: alt.IVector2;
 }
 
-export interface IWheelItem {
-    name?: string;
-    data?: Array<any>;
-    callback?: Function;
-    emitServer?: string;
-    emitClient?: string;
-}
-
-interface FullWheelItem extends IWheelItem, Vector2 {
+interface FullWheelItem extends IClientWheelItem, Vector2 {
     name?: string;
     callback?: Function;
     emitServer?: string;
@@ -37,10 +36,25 @@ interface FullWheelItem extends IWheelItem, Vector2 {
     points?: Array<FullWheelItem>;
 }
 
+class InternalFunctions {
+    /**
+     * Creates a simple dynamic wheel menu passed down from the server
+     *
+     * @static
+     * @param {string} label
+     * @param {Array<IClientWheelItem>} items
+     * @memberof WheelMenu
+     */
+    static dynamicWheelMenu(label: string, items: Array<IClientWheelItem>) {
+        ClientInventoryView.close();
+        WheelMenu.create(label, items);
+    }
+}
+
 export class WheelMenu {
     static create(
         label: string,
-        options: Array<IWheelItem>,
+        options: Array<IClientWheelItem>,
         setMouseToCenter = false,
         center: Vector2 = { x: 0.5, y: 0.5 },
     ) {
@@ -197,3 +211,5 @@ export class WheelMenu {
         }
     }
 }
+
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, InternalFunctions.dynamicWheelMenu);

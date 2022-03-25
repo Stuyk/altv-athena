@@ -60,7 +60,7 @@ export interface IVehicle {
 
     /**
      * The owner of this vehicle.
-     * Owner can either be a character id or a faction id.
+     * Owner can either be a character id, faction, whatever.
      *
      * @type {string}
      * @memberof IVehicle

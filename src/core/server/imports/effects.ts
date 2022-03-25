@@ -1,2 +1,2 @@
-import '../effects/food';
-import '../effects/water';
+import '../effects/heal';
+import '../effects/vehicleRepair';

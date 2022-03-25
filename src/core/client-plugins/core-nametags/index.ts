@@ -78,6 +78,10 @@ class ClientNametags {
                 continue;
             }
 
+            if (player.getSyncedMeta('NoClipping')) {
+                continue;
+            }
+
             if (player.vehicle && alt.Player.local.vehicle !== player.vehicle) {
                 continue;
             }

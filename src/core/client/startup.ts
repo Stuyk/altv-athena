@@ -5,20 +5,22 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 // Interfaces - Always Load First
-import './extensions/Meta';
-import './extensions/Player';
-import './extensions/Vehicle';
+import './extensions/meta';
+import './extensions/player';
+import './extensions/vehicle';
 // Menus
 import './menus/animation';
 import './menus/player';
 import './menus/vehicle';
+
+// rmlui
+import './rmlui/screenText';
 
 // Streamers
 import './streamers/item';
 import './streamers/marker';
 import './streamers/object';
 import './streamers/ped';
-import './streamers/polygon';
 import './streamers/textlabel';
 import './streamers/worldNotifications';
 
@@ -57,6 +59,7 @@ import './utility/errorScreen';
 import './utility/ipl';
 import './utility/lerp';
 import './utility/notification';
+import './utility/polygonShape';
 import './utility/reload';
 import './utility/sandbox';
 import './utility/screenshot';

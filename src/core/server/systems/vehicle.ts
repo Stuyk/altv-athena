@@ -123,6 +123,17 @@ export class VehicleSystem {
                 }
             }
 
+            if (!vehicle.model) {
+                alt.logWarning(
+                    `Vehicle with ID: ${vehicle._id.toString()} is missing multiple properties. Skipped during initialization.`,
+                );
+                continue;
+            }
+
+            if (!vehicle.position) {
+                continue;
+            }
+
             // Skip New Vehicles
             if (vehicle.position.x === 0 && vehicle.position.y === 0 && vehicle.position.z === 0) {
                 continue;
@@ -304,16 +315,6 @@ export class VehicleSystem {
 
         if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
             playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
-            return;
-        }
-
-        if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_FUEL));
-            return;
-        }
-
-        if (player.vehicle.isRefueling) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE));
             return;
         }
 

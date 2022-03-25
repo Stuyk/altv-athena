@@ -1,8 +1,9 @@
 {
     "name": "Development Mode - Vue Debug - 1 Player",
     "host": "0.0.0.0",
+    "env": "dev",
     "port": 7788,
-    "players": 1,
+    "players": 2,
     "password": null,
     "token": null,
     "announce": false,

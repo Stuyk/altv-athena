@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { GARAGE_INTERACTIONS } from '../../shared-plugins/core-garage/events';
 import { LOCALE_GARAGE_VIEW } from '../../shared-plugins/core-garage/locales';

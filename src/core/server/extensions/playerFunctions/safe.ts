@@ -66,60 +66,22 @@ function addArmour(p: alt.Player, value: number, exactValue: boolean = false): v
     p.armour = p.acArmour;
 }
 
-/**
- * Add or Remove food from the player.
- * Use a negative number to remove food from the player.
- * @param {alt.Player} player
- * @param {number} value
- */
-function addFood(player: alt.Player, value: number) {
-    adjustAttribute(player, value, 'food');
-}
-
-/**
- * Add or Remove water from the player.
- * Use a negative number to remove water from the player.
- * @param {alt.Player} player
- * @param {number} value
- */
-function addWater(player: alt.Player, value: number) {
-    adjustAttribute(player, value, 'water');
-}
-
-function adjustAttribute(player: alt.Player, value: number, attributeName: string) {
-    if (typeof value === 'string') {
-        value = parseFloat(value);
-    }
-
-    if (player.data[attributeName] === undefined || player.data[attributeName] === null) {
-        player.data[attributeName] = 100;
-    }
-
-    player.data[attributeName] += value;
-
-    if (player.data[attributeName] < 0) {
-        player.data[attributeName] = 0;
-    }
-
-    if (player.data[attributeName] > 100) {
-        player.data[attributeName] = 100;
-    }
-
-    emit.meta(player, attributeName, player.data[attributeName]);
-    save.field(player, attributeName, player.data[attributeName]);
-}
-
 function setDimension(player: alt.Player, value: number) {
     player.dimension = value;
     player.setSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
     alt.log(`Player Dimension is now: ${player.dimension}`);
 }
 
-export default {
-    addFood,
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    exports[functionName] = callback;
+}
+
+const exports = {
     addArmour,
     addHealth,
-    addWater,
+    override,
     setPosition,
     setDimension,
 };
+
+export default exports;

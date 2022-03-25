@@ -27,7 +27,8 @@ const SWC_CONFIG = {
             dynamicImport: true,
         },
         target: 'es2020',
-    }
+    },
+    sourceMaps: true,
 };
 
 async function cleanFolders() {
@@ -149,8 +150,7 @@ async function beginCompilation() {
     const result = currentTime.match(/\d\d:\d\d:\d\d/);
     const time = result && Array.isArray(result) && result.length >= 1 ? result[0] : '00:00:00';
     console.log(
-        `[${time}] [SWC] ${filesCompiled.length} Files Transpiled - ${filesCopied.length} Files Copied - Total Time ${
-            Date.now() - start
+        `[${time}] [SWC] ${filesCompiled.length} Files Transpiled - ${filesCopied.length} Files Copied - Total Time ${Date.now() - start
         }ms`,
     );
 }

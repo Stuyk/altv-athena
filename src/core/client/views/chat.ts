@@ -5,7 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { View_Events_Chat } from '../../shared/enums/views';
 import { Command } from '../../shared/interfaces/command';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { disableAllControls } from '../utility/disableControls';
 import { handleFreezePlayer } from '../utility/freeze';
 

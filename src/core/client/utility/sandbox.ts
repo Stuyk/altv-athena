@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import Polygon from '../../shared/classes/polygon';
 import MinimapHelper from './minimap';
 import { drawRectangle2D, drawText2D } from './text';
 

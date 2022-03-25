@@ -10,6 +10,7 @@ import IErrorScreen from '../../../shared/interfaces/iErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/inputMenus';
 import IShard from '../../../shared/interfaces/iShard';
 import ISpinner from '../../../shared/interfaces/iSpinner';
+import { IWheelItem } from '../../../shared/interfaces/iWheelMenu';
 import { Particle } from '../../../shared/interfaces/particle';
 import { ProgressBar } from '../../../shared/interfaces/progressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
@@ -326,8 +327,6 @@ function objectRemove(player: alt.Player, uid: string) {
             continue;
         }
 
-        alt.log(`Deleting: ${uid}`);
-
         player.attachables.splice(i, 1);
         player.setStreamSyncedMeta(PLAYER_SYNCED_META.ATTACHABLES, player.attachables);
         return;
@@ -361,11 +360,39 @@ function interactionTemporary(player: alt.Player, eventName: string) {
     alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_TEMPORARY, eventName);
 }
 
+/**
+ * Allows a temporary object to be created and moved.
+ * The object is only seen by this one player.
+ *
+ * @param {alt.Player} player
+ * @param {string} model
+ * @param {Vector3} start
+ * @param {Vector3} end
+ * @param {number} speed
+ */
 function tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: Vector3, speed: number) {
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
 }
 
-export default {
+/**
+ * Create a wheel menu and emit  it to the player.
+ * Can emit events to client or server-side.
+ *
+ * @param {alt.Player} player
+ * @param {string} label
+ * @param {Array<IWheelItem>} wheelItems
+ */
+function wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelItem>) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems);
+}
+
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    console.log(`Overriding ${functionName} with own function.`);
+
+    exports[functionName] = callback;
+}
+
+const exports = {
     interactionAdd,
     animation,
     clearAnimation,
@@ -384,6 +411,7 @@ export default {
     notification,
     objectAttach,
     objectRemove,
+    override,
     particle,
     interactionRemove,
     removeProgressBar,
@@ -394,4 +422,7 @@ export default {
     taskTimeline,
     tempObjectLerp,
     interactionTemporary,
+    wheelMenu,
 };
+
+export default exports;

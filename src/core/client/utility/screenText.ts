@@ -28,7 +28,7 @@ export class ScreenText {
         const maxStringLength = 99;
 
         for (let i = 0, position; i < text.length; i += maxStringLength) {
-            let currentText = text.substr(i, i + maxStringLength);
+            let currentText = text.substring(i, i + maxStringLength);
             let currentIndex = i;
             if ((currentText.match(/~/g) || []).length % 2 !== 0) {
                 position = currentText.lastIndexOf('~');
@@ -37,7 +37,7 @@ export class ScreenText {
                 position = Math.min(maxStringLength, text.length - currentIndex);
             }
 
-            native.addTextComponentSubstringPlayerName(text.substr(currentIndex, position));
+            native.addTextComponentSubstringPlayerName(text.substring(currentIndex, position));
         }
     }
 

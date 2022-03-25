@@ -1,17 +1,19 @@
 import * as alt from 'alt-server';
+import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
+import { Item } from '../../shared/interfaces/item';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
 import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
+import { ItemEffects } from '../systems/itemEffects';
 import { getForwardVector } from '../utility/vector';
 
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
 
 alt.onClient('task:Vehicle:Repair:Timeline', handleRepairTimeline);
-alt.on('effect:Vehicle:Repair', handleRepair);
 
-function handleRepair(player: alt.Player) {
+function handleRepair(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE) {
     const closestVehicle = playerFuncs.utility.getVehicleInFrontOf(player, 2);
 
     if (!closestVehicle) {
@@ -84,3 +86,5 @@ function handleRepairTimeline(player: alt.Player) {
         VehicleFuncs.repair(closestVehicle);
     }, 12000);
 }
+
+ItemEffects.add('effect:Vehicle:Repair', handleRepair);

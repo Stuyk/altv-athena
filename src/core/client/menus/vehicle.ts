@@ -5,7 +5,7 @@ import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
-import { IWheelItem, WheelMenu } from '../utility/wheelMenu';
+import { IClientWheelItem, WheelMenu } from '../utility/wheelMenu';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 
@@ -24,7 +24,7 @@ function openMenu() {
         return;
     }
 
-    const options: Array<IWheelItem> = [];
+    const options: Array<IClientWheelItem> = [];
 
     if (!alt.Player.local.vehicle) {
         const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;

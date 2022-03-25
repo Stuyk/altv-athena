@@ -18,6 +18,7 @@ import { SLOT_TYPE } from '../../shared/enums/inventorySlotTypes';
 import { ServerItemController } from '../streamers/item';
 import { ServerObjectController } from '../streamers/object';
 import { PlayerEvents } from '../events/playerEvents';
+import { ItemEffects } from '../systems/itemEffects';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
@@ -626,7 +627,7 @@ export class InventoryController {
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item, slot);
+            ItemEffects.invoke(player, item, INVENTORY_TYPE.INVENTORY);
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }

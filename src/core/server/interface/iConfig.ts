@@ -10,4 +10,5 @@ export interface IConfig {
     WEBSERVER_IP?: string;
     VUE_DEBUG?: string | boolean;
     USE_ALTV_RECONNECT?: boolean;
+    USE_DEV_MODE?: boolean;
 }

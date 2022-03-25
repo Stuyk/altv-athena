@@ -2,14 +2,20 @@ import './example/index';
 import './example-agenda/index';
 import './core-atm/index';
 import './core-clothing/index';
+import './core-cuffs/index';
+import './core-factions/index';
+import './core-fuel/index';
+import './core-fuel-stations/index';
 import './core-garage/index';
 import './core-interior/index';
 import './core-items/index';
 import './core-nametags/index';
+import './core-vitals/index';
+import './core-voice/index';
 import './job-mule-delivery/index';
 import './job-pizza-delivery/index';
 import './commands-roleplay/index';
-
+import './commands-moderator/index';
 // Example: import './hotels/index'
 // Make sure example import is calling the PluginSystem
 // for a callback registration.

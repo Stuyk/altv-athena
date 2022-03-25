@@ -30,6 +30,7 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.NO_SAVE;
 
 const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
+const CreateInjections: Array<(vehicle: IVehicle) => Object> = [];
 
 interface VehicleKeyItem extends Item {
     data: {
@@ -60,6 +61,25 @@ export default class VehicleFuncs {
      */
     static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
         SaveInjections.push(callback);
+    }
+
+    /**
+     * When a new vehicle is created, add a returnable object to append to the vehicle data to save.
+     *
+     * Example:
+     * ```ts
+     * function setNewVehicleFuel(vehicle: alt.Vehicle) {
+     *     return { fuel: 100 };
+     * }
+     *
+     * VehicleFuncs.addCreateInjection(setNewVehicleFuel)
+     * ```
+     * @static
+     * @param {(vehicle: alt.Vehicle) => Object} callback
+     * @memberof VehicleFuncs
+     */
+    static addCreateVehicleInjection(callback: (vehicle: IVehicle) => Object): void {
+        CreateInjections.push(callback);
     }
 
     /**
@@ -148,7 +168,10 @@ export default class VehicleFuncs {
         vehicleData.id = await VehicleFuncs.getNextID();
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
-        vehicleData.fuel = 100;
+
+        for (let i = 0; i < CreateInjections.length; i++) {
+            vehicleData = { ...vehicleData, ...CreateInjections[i](vehicleData) } as IVehicle;
+        }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
@@ -177,69 +200,6 @@ export default class VehicleFuncs {
         }
 
         return Database.deleteById(vehicles[0]._id, Collections.Vehicles);
-    }
-
-    /**
-     * Updates the fuel for this vehicle.
-     * @static
-     * @param {alt.Vehicle} vehicle
-     * @memberof VehicleFuncs
-     */
-    static async updateFuel(vehicle: alt.Vehicle, timeBetweenUpdates: number = 5000) {
-        // No data present on vehicle. Don't worry about it.
-        if (!vehicle?.data?.behavior) {
-            return;
-        }
-
-        // Has unlimited fuel. Always set to 100.
-        if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
-            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, 100);
-            return;
-        }
-
-        if (vehicle.data.fuel === undefined || vehicle.data.fuel === null) {
-            vehicle.data.fuel = 100;
-        }
-
-        // Emits the distance travelled from one point to another.
-        // Does not emit if distance is less than 5
-        if (!vehicle.lastPosition) {
-            vehicle.lastPosition = vehicle.pos;
-        }
-
-        const dist = distance2d(vehicle.pos, vehicle.lastPosition);
-        if (dist >= 5) {
-            // const potentialSpeed = (dist / timeBetweenUpdates) * 1000;
-            // const feetPerSecond = potentialSpeed * 1.4666666667;
-            // const distanceTraveled = (potentialSpeed / 3600) * timeBetweenUpdates;
-
-            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DISTANCE_TRAVELED, vehicle, dist);
-            vehicle.lastPosition = vehicle.pos;
-        }
-
-        // Do nothing with the fuel if the engine is off.
-        if (!vehicle.engineOn) {
-            vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
-            return;
-        }
-
-        vehicle.data.fuel = vehicle.data.fuel - DEFAULT_CONFIG.FUEL_LOSS_PER_PLAYER_TICK;
-
-        if (vehicle.data.fuel < 0) {
-            vehicle.data.fuel = 0;
-
-            if (vehicle.engineOn) {
-                vehicle.engineOn = false;
-            }
-        }
-
-        vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, vehicle.data.fuel);
-        vehicle.setSyncedMeta(VEHICLE_STATE.POSITION, vehicle.pos);
-
-        if (!vehicle.nextSave || Date.now() > vehicle.nextSave) {
-            VehicleFuncs.save(vehicle, { fuel: vehicle.data.fuel });
-            vehicle.nextSave = Date.now() + 15000;
-        }
     }
 
     /**
@@ -278,7 +238,11 @@ export default class VehicleFuncs {
         vehicle.passengers = [];
         vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
 
         // Setup Default Document Values
         if (document.fuel === null || document.fuel === undefined) {
@@ -318,8 +282,6 @@ export default class VehicleFuncs {
         } else {
             VehicleFuncs.save(vehicle, { garageIndex: null });
         }
-
-        VehicleFuncs.updateFuel(vehicle, 5000);
 
         // Synchronize Ownership
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
@@ -400,7 +362,11 @@ export default class VehicleFuncs {
         }
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
-        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, true);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
         return vehicle;
     }
 
@@ -515,34 +481,6 @@ export default class VehicleFuncs {
     }
 
     /**
-     * Check if a vehicle has fuel.
-     * @static
-     * @param {alt.Vehicle} vehicle
-     * @return {*}
-     * @memberof VehicleFuncs
-     */
-    static hasFuel(vehicle: alt.Vehicle) {
-        if (isFlagEnabled(vehicle.behavior, Vehicle_Behavior.UNLIMITED_FUEL)) {
-            return true;
-        }
-
-        if (!vehicle.data) {
-            return true;
-        }
-
-        if (vehicle.data.fuel === undefined || vehicle.data.fuel === null) {
-            vehicle.data.fuel = 100;
-            return true;
-        }
-
-        if (vehicle.data.fuel <= 0) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Has a vehicle been spawned.
      * @static
      * @param {number} id
@@ -639,39 +577,41 @@ export default class VehicleFuncs {
      */
     static async createKey(
         player: alt.Player,
-        vehicle: alt.Vehicle,
-        doNotAdd: boolean = false,
+        vehicle: alt.Vehicle | IVehicle,
+        doNotAddToInventory: boolean = false,
     ): Promise<VehicleKeyItem | null> {
-        if (!vehicle || !vehicle.valid) {
+        // Get vehicle data specifically
+        if (vehicle instanceof alt.Vehicle) {
+            if (!vehicle || !vehicle.valid || !vehicle.data) {
+                return null;
+            }
+
+            vehicle = vehicle.data;
+        }
+
+        // Verify data is valid
+        if (!vehicle._id) {
             return null;
         }
 
-        if (!vehicle.data) {
-            return null;
-        }
-
-        if (!vehicle.data.key) {
-            vehicle.data.key = sha256Random(JSON.stringify(vehicle.data));
-            await Database.updatePartialData(
-                vehicle.data._id.toString(),
-                { key: vehicle.data.key },
-                Collections.Vehicles,
-            );
+        if (!vehicle.key) {
+            vehicle.key = sha256Random(JSON.stringify(vehicle));
+            await Database.updatePartialData(vehicle._id.toString(), { key: vehicle.key }, Collections.Vehicles);
         }
 
         const item: VehicleKeyItem = {
-            name: `Key for ${vehicle.data.model}`,
-            description: `A key for the vehicle model ${vehicle.data.model}`,
+            name: `Key for ${vehicle.model}`,
+            description: `A key for the vehicle model ${vehicle.model}`,
             behavior: ITEM_TYPE.DESTROY_ON_DROP,
             quantity: 1,
             icon: 'key',
             data: {
-                vehicle: vehicle.data._id.toString(),
-                key: vehicle.data.key,
+                vehicle: vehicle._id.toString(),
+                key: vehicle.key,
             },
         };
 
-        if (!doNotAdd) {
+        if (!doNotAddToInventory) {
             const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
             if (!inventory) {
                 playerFuncs.emit.notification(player, 'No room in inventory.');

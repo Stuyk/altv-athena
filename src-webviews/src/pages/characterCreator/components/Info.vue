@@ -206,8 +206,8 @@ export default defineComponent({
             this.valid[name] = valid;
         },
         normalizeName(value: string) {
-            const firstLetter = value.substr(0, 1).toUpperCase();
-            const theRestOfTheValue = value.substr(1, value.length);
+            const firstLetter = value.substring(0, 1).toUpperCase();
+            const theRestOfTheValue = value.substring(1, value.length);
             return `${firstLetter}${theRestOfTheValue}`;
         },
         constructName(): string {

@@ -68,4 +68,5 @@ export const VEHICLE_STATE = {
     FUEL: 'Vehicle-Fuel',
     POSITION: 'Vehicle-Position',
     LOCKSYMBOL: 'Vehicle-Locksymbol',
+    LOCK_INTERACTION_INFO: 'Vehicle-LockInteractionInfo',
 };

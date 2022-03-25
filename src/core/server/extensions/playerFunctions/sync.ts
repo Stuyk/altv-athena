@@ -76,9 +76,9 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
         player.setClothes(4, 14, 0, 0); // pants
         player.setClothes(6, 34, 0, 0); // shoes
         player.setClothes(7, 0, 0, 0); // accessories
-        player.setClothes(8, 15, 0, 0); // undershirt
+        player.setClothes(8, 0, 0, 0); // undershirt
         player.setClothes(9, 0, 0, 0); // body armour
-        player.setClothes(11, 91, 0, 0); // torso
+        player.setClothes(11, 0, 0, 0); // torso
     }
 
     if (items && Array.isArray(items)) {
@@ -168,35 +168,20 @@ function playTime(player: alt.Player): void {
     save.field(player, 'hours', player.data.hours);
 }
 
-function food(player: alt.Player): void {
-    if (player.data.isDead && player.data.food <= 0) {
-        player.data.food = 100;
-        emit.meta(player, 'food', player.data.food);
-        return;
-    }
-
-    playerFuncs.safe.addFood(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    exports[functionName] = callback;
 }
 
-function water(player: alt.Player): void {
-    if (player.data.isDead && player.data.water <= 0) {
-        player.data.water = 100;
-        emit.meta(player, 'water', player.data.water);
-        return;
-    }
-
-    playerFuncs.safe.addWater(player, -DEFAULT_CONFIG.FOOD_REMOVAL_RATE);
-}
-
-export default {
+const exports = {
     appearance,
     currencyData,
-    food,
     equipment,
     inventory,
     playTime,
+    override,
     syncedMeta,
     time,
-    water,
     weather,
 };
+
+export default exports;

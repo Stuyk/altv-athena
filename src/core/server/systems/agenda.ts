@@ -4,17 +4,24 @@ import { CharacterSelectFunctions } from '../views/characters';
 import { LoginFunctions } from '../views/login';
 import { LoginController } from './login';
 
+export enum AgendaOrder {
+    'DISCORD_LOGIN' = 1,
+    'ACCOUNT_SETUP' = 2,
+    'CHARACTER_SETUP' = 3,
+    'SPAWN_CHARACTER' = 100,
+}
+
 const agenda: { [key: string]: (player: alt.Player) => void } = {
-    1: LoginFunctions.show, // Discord Login
-    2: LoginController.show, // Account Setup / Player Setup
-    3: CharacterSelectFunctions.show, // Character Selection / Character Creator
-    100: playerFuncs.select.character, // Selected Character / Do Spawn
+    [AgendaOrder.DISCORD_LOGIN]: LoginFunctions.show, // Discord Login
+    [AgendaOrder.ACCOUNT_SETUP]: LoginController.show, // Account Setup / Player Setup
+    [AgendaOrder.CHARACTER_SETUP]: CharacterSelectFunctions.show, // Character Selection / Character Creator
+    [AgendaOrder.SPAWN_CHARACTER]: playerFuncs.select.character, // Selected Character / Do Spawn
 };
 
 const timelines: {
     [key: string]: {
-        index: number;
-        agenda: Array<(player: alt.Player, ...args: any[]) => void>;
+        agendaIndex: number;
+        agenda: Array<{ index: number; callback: (player: alt.Player) => void }>;
     };
 } = {};
 
@@ -38,16 +45,16 @@ export class AgendaSystem {
      */
     static set(id: number, callback: (player: alt.Player) => void) {
         if (id > 100) {
-            alt.log(`~r~Failed to Set Agenda Timeline @ ${id}.`);
+            alt.log(`~r~Failed to Set Agenda Timeline @ ${AgendaOrder[id]} (${id}).`);
             return;
         }
 
         if (agenda[id]) {
-            alt.log(`Overwrote Agenda @ ${id} with new callback.`);
+            alt.log(`Overwrote Agenda @ ${AgendaOrder[id]} (${id}) with new callback.`);
         }
 
         agenda[id] = callback;
-        alt.log(`~g~Added Agenda to Timeline @ ${id}`);
+        alt.log(`~g~Added Agenda to Timeline @ ${AgendaOrder[id]} (${id})`);
     }
 
     /**
@@ -60,14 +67,29 @@ export class AgendaSystem {
         return agenda;
     }
 
-    static getAsArray(): Array<(player: alt.Player) => void> {
-        const timeline = [];
+    static getAsArray(): Array<{ index: number; callback: (player: alt.Player) => void }> {
+        const timeline: Array<{ index: number; callback: (player: alt.Player) => void }> = [];
 
         Object.keys(agenda).forEach((key) => {
-            timeline.push(agenda[key]);
+            timeline.push({ index: parseInt(key), callback: agenda[key] });
         });
 
         return timeline;
+    }
+
+    /**
+     * Initializes an agenda system for a player.
+     * Does not auto-force them to next agenda.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @memberof AgendaSystem
+     */
+    static init(player: alt.Player) {
+        timelines[player.id] = {
+            agendaIndex: -1,
+            agenda: AgendaSystem.getAsArray(),
+        };
     }
 
     /**
@@ -80,13 +102,36 @@ export class AgendaSystem {
     static getNext(player: alt.Player, startNew = false): (player: alt.Player, ...args: any[]) => void | null {
         if (!timelines[player.id] || startNew) {
             timelines[player.id] = {
-                index: -1,
+                agendaIndex: -1,
                 agenda: AgendaSystem.getAsArray(),
             };
         }
 
-        timelines[player.id].index += 1;
-        return timelines[player.id].agenda[timelines[player.id].index];
+        timelines[player.id].agendaIndex += 1;
+        return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
+    }
+
+    /**
+     * Go to the agenda at the given index and execute the callback.
+     * @param player - The player who is using the command.
+     * @param {number} index - The index of the agenda.
+     */
+    static goToAgenda(player: alt.Player, index: number) {
+        if (!timelines[player.id]) {
+            timelines[player.id] = {
+                agendaIndex: -1,
+                agenda: AgendaSystem.getAsArray(),
+            };
+        }
+
+        const actualAgendaIndex = timelines[player.id].agenda.findIndex((x) => x.index === index);
+        if (actualAgendaIndex <= -1) {
+            throw new Error(`Agenda at ${index} does not exist. Please use correct index.`);
+        }
+
+        const agenda = timelines[player.id].agenda[actualAgendaIndex];
+        timelines[player.id].agendaIndex = actualAgendaIndex;
+        agenda.callback(player);
     }
 
     /**
@@ -113,7 +158,7 @@ export class AgendaSystem {
      * @memberof AgendaSystem
      */
     static getFromIndex(player: alt.Player, index: number): Function | null {
-        return timelines[player.id].agenda[index];
+        return timelines[player.id].agenda[index].callback;
     }
 
     /**
@@ -128,11 +173,11 @@ export class AgendaSystem {
             return null;
         }
 
-        timelines[player.id].index -= 1;
-        if (timelines[player.id].index < 0) {
-            timelines[player.id].index = 0;
+        timelines[player.id].agendaIndex -= 1;
+        if (timelines[player.id].agendaIndex < 0) {
+            timelines[player.id].agendaIndex = 0;
         }
 
-        return timelines[player.id].agenda[timelines[player.id].index];
+        return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 }

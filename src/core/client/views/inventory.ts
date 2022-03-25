@@ -10,7 +10,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { distance2d } from '../../shared/utility/vector';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { Timer } from '../utility/timers';
@@ -19,17 +19,14 @@ import { waitForFalse, waitFor } from '../utility/wait';
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const PAGE_NAME = 'Inventory';
 
-let camera;
-let camera2;
 let lastDroppedItems: Array<DroppedItem> = [];
 let drawInterval: number = null;
 let isOpen = false;
-let isCameraBeingCreated = false;
 
 /**
  * Do Not Export Internal Only
  */
-export class InternalFunctions implements ViewModel {
+class InternalFunctions implements ViewModel {
     /**
      * Initialize key listeners.
      * @static
@@ -88,10 +85,6 @@ export class InternalFunctions implements ViewModel {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:DisablePreview`, alt.Player.local.vehicle ? true : false);
         view.emit(`${PAGE_NAME}:SetLocales`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_INVENTORY));
-
-        if (!isCameraBeingCreated) {
-            await InternalFunctions.showPreview();
-        }
     }
 
     static async updateInventory() {
@@ -119,14 +112,7 @@ export class InternalFunctions implements ViewModel {
 
     static async close() {
         native.clearFocus();
-        native.setCamActive(camera, false);
-        native.setCamActive(camera2, false);
-        native.destroyAllCams(true);
-        native.renderScriptCams(false, false, 0, false, false, 0);
         native.setEntityVisible(alt.Player.local.scriptID, true, false);
-
-        camera = null;
-        camera2 = null;
 
         alt.toggleGameControls(true);
         WebViewController.setOverlaysVisible(true);
@@ -238,76 +224,15 @@ export class InternalFunctions implements ViewModel {
             return;
         }
     }
+}
 
-    /**
-     * Used to rotate the camera and show the player a specific way.
-     * @static
-     * @return {*}  {Promise<boolean>}
-     * @memberof InternalFunctions
-     */
-    static async showPreview(): Promise<boolean> {
-        if (alt.Player.local.vehicle) {
-            return true;
+export class ClientInventoryView {
+    static close() {
+        if (!isOpen) {
+            return;
         }
 
-        isCameraBeingCreated = true;
-
-        await waitForFalse(native.isPedWalking, alt.Player.local.scriptID);
-        await waitForFalse(native.isPedRunning, alt.Player.local.scriptID);
-        await waitFor(native.isPedStill, alt.Player.local.scriptID);
-
-        const gamePlayCamRot = native.getGameplayCamRot(0);
-        const gamePlayCamPos = native.getGameplayCamCoord();
-        const fov = 80;
-        const fwd = native.getEntityForwardVector(alt.Player.local.scriptID);
-        const pos = { ...alt.Player.local.pos };
-        const fwdPos = {
-            x: pos.x + fwd.x * 1.75,
-            y: pos.y + fwd.y * 1.75,
-            z: pos.z + 0.2,
-        };
-
-        camera = native.createCamWithParams(
-            'DEFAULT_SCRIPTED_CAMERA',
-            gamePlayCamPos.x,
-            gamePlayCamPos.y,
-            gamePlayCamPos.z,
-            0,
-            0,
-            0,
-            fov,
-            false,
-            0,
-        );
-        native.setCamRot(camera, gamePlayCamRot.x, gamePlayCamRot.y, gamePlayCamRot.z, 0);
-
-        camera2 = native.createCamWithParams(
-            'DEFAULT_SCRIPTED_CAMERA',
-            fwdPos.x,
-            fwdPos.y,
-            fwdPos.z,
-            0,
-            0,
-            0,
-            fov,
-            false,
-            0,
-        );
-
-        const easeTime = 750;
-        native.setEntityVisible(alt.Player.local.scriptID, false, false);
-        native.pointCamAtEntity(camera2, alt.Player.local.scriptID, 0, 0, 0, false);
-        native.setCamActiveWithInterp(camera2, camera, 500, 1, 1);
-
-        alt.setTimeout(() => {
-            native.setEntityVisible(alt.Player.local.scriptID, true, false);
-        }, easeTime / 3);
-
-        native.renderScriptCams(true, true, 0, true, false, 0);
-        alt.setTimeout(() => {
-            isCameraBeingCreated = false;
-        }, easeTime);
-        return true;
+        InternalFunctions.close();
     }
 }
 

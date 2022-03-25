@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/item';
@@ -6,6 +7,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { playerFuncs } from '../extensions/extPlayer';
+import { ItemEffects } from './itemEffects';
 
 export class ToolbarController {
     /**
@@ -37,7 +39,7 @@ export class ToolbarController {
 
         // Handle Consume Item from Toolbar
         if (isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
-            ToolbarController.handleToolbarUse(player, item);
+            ToolbarController.handleToolbarUse(player, item, slot);
             return;
         }
 
@@ -96,7 +98,7 @@ export class ToolbarController {
      * @param {Item} item - The item that was used.
      * @returns None
      */
-    static handleToolbarUse(player: alt.Player, item: Item) {
+    static handleToolbarUse(player: alt.Player, item: Item, slot: number) {
         if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;
 
@@ -111,7 +113,7 @@ export class ToolbarController {
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item);
+            ItemEffects.invoke(player, item, INVENTORY_TYPE.TOOLBAR);
             playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }

@@ -84,8 +84,6 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         sync.weather(player);
         sync.time(player);
         sync.inventory(player);
-        sync.water(player);
-        sync.food(player);
 
         player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
         player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
@@ -101,9 +99,6 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         ChatController.populateCommands(player);
         ServerBlipController.populateGlobalBlips(player);
         HologramController.populateHolograms(player);
-
-        // Voice Service
-        alt.emit(SYSTEM_EVENTS.VOICE_ADD, player);
 
         // Vehicle Spawning
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {

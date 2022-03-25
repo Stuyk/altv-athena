@@ -81,13 +81,6 @@ declare module 'alt-server' {
         overrideTemporaryDeletion?: boolean;
 
         /**
-         * Is this vehicle currently being refueled.
-         * @type {boolean}
-         * @memberof Vehicle
-         */
-        isRefueling?: boolean;
-
-        /**
          * The last position of the vehicle.
          * This is only defined for vehicles that use fuel.
          * As well as vehicles that can be saved.

@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Action, ActionMenu } from '../../shared/interfaces/actions';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 
 const PAGE_NAME = 'Actions';
 

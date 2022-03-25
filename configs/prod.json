@@ -1,6 +1,7 @@
 {
     "name": "Athena 3.0.0",
     "host": "0.0.0.0",
+    "env": "prod",
     "port": 7788,
     "players": 512,
     "password": null,

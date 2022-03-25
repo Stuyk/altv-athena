@@ -15,7 +15,7 @@ import { PedCharacter } from '../utility/characterPed';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { CharacterSystem } from '../systems/character';
 import { disableAllControls } from '../utility/disableControls';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 
 const PAGE_NAME = 'CharacterSelect';
 const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';

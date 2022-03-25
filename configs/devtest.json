@@ -1,6 +1,7 @@
 {
     "name": "Development Mode - No Vue - 32 Players",
     "host": "0.0.0.0",
+    "env": "devtest",
     "port": 7788,
     "players": 32,
     "password": null,

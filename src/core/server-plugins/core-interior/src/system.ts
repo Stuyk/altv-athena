@@ -133,6 +133,10 @@ class InternalSystem {
      * @memberof InternalSystem
      */
     static removePlayer(player: alt.Player, interior: InteriorInternal = null) {
+        if (!player || !player.valid) {
+            return;
+        }
+
         const id = player.id;
         const data = player.data;
 

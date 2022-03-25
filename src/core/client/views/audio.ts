@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 
 const PAGE_NAME = 'Audio';
 let interval;

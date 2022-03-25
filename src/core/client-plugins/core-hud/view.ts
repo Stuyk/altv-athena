@@ -6,7 +6,7 @@ import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
 import IHudComponent from '../../shared/interfaces/iHudComponent';
 import { WebViewController } from '../../client/extensions/view2';
-import ViewModel from '../../client/models/ViewModel';
+import ViewModel from '../../client/models/viewModel';
 import { InteractionController } from '../../client/systems/interaction';
 import { World } from '../../client/systems/world';
 
@@ -122,7 +122,7 @@ class InternalFunctions implements ViewModel {
         HudView.registerComponent(HUD_COMPONENT.ENGINE, InternalFunctions.defaultEngineComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.LOCK, InternalFunctions.defaultLockComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.METRIC, InternalFunctions.defaultMetricComponent, 2500);
-        HudView.registerComponent(HUD_COMPONENT.FUEL, InternalFunctions.defaultFuelComponent, 5000);
+        HudView.registerComponent(HUD_COMPONENT.FUEL, InternalFunctions.defaultFuelComponent, 100);
 
         interval = alt.setInterval(InternalFunctions.renderComponents, 0);
     }

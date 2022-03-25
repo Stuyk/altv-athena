@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import { PushVehicle } from '../../../client/systems/push';
 import { isAnyMenuOpen } from '../../../client/utility/menus';
-import { IWheelItem, WheelMenu } from '../../../client/utility/wheelMenu';
+import { IClientWheelItem, WheelMenu } from '../../../client/utility/wheelMenu';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { InputOptionType, InputResult } from '../../../shared/interfaces/inputMenus';
 import { InputView } from '../../../client/views/input';
@@ -39,7 +39,7 @@ function enterMenu(interior: Interior) {
         return;
     }
 
-    const options: IWheelItem[] = [];
+    const options: IClientWheelItem[] = [];
     const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
     const isOwner = interior.owner === playerIdentifier;
 
@@ -163,7 +163,7 @@ function exitMenu(interior: Interior) {
         return;
     }
 
-    const options: IWheelItem[] = [];
+    const options: IClientWheelItem[] = [];
 
     const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
     const isOwner = interior.owner === playerIdentifier;

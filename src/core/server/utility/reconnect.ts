@@ -1,9 +1,6 @@
 import * as alt from 'alt-server';
-import * as http from 'http';
+import fetch from 'node-fetch';
 import ConfigUtil from './config';
-
-const RECONNECTION_ADDRESS = 'http://localhost:5599';
-let caughtErrorOnce = false;
 
 export class ReconnectHelper {
     /**
@@ -22,28 +19,23 @@ export class ReconnectHelper {
             return;
         }
 
-        ReconnectHelper.sendRequest();
+        this.altvReconnect();
     }
 
     private static isWindows(): boolean {
         return process.platform.includes('win');
     }
 
-    private static sendRequest() {
-        const req = http.get(RECONNECTION_ADDRESS);
-        req.on('response', () => {
-            alt.log(`~g~[altv-reconnect] Invoked Reconnection Successfully`);
-        });
-
-        req.on('error', () => {
-            if (caughtErrorOnce) {
-                return;
-            }
-
-            caughtErrorOnce = true;
-            alt.log(`~r~[altv-reconnect] ~y~Not Currently Running`);
-            alt.log(`~r~[altv-reconnect] ~y~Download Binaries from https://github.com/Stuyk/altv-reconnect`);
-            alt.log(`~r~[altv-reconnect] ~y~Turn off 'USE_ALTV_RECONNECT' if in production mode`);
-        });
+    private static altvReconnect() {
+        fetch('http://127.0.0.1:9223/status')
+            .then(async (res) => {
+                const body = await res.text();
+                if (body == 'MAIN_MENU' || body == 'IN_GAME') {
+                    fetch('http://127.0.0.1:9223/reconnect');
+                } else {
+                    alt.setTimeout(this.altvReconnect, 3000);
+                }
+            })
+            .catch(alt.log);
     }
 }

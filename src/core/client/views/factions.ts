@@ -3,7 +3,7 @@ import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { View_Events_Factions } from '../../shared/enums/views';
 import { KeybindController } from '../events/keyup';
 import { View } from '../extensions/view';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IFactionClient } from '../../shared/interfaces/iFactionClient';

@@ -9,6 +9,7 @@ import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
 import { playerFuncs } from '../extPlayer';
+import {ItemFactory} from "../../systems/item";
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
@@ -1045,6 +1046,113 @@ function getTotalWeight(player: alt.Player): number {
     return total;
 }
 
+/**
+ * Remove amount of item from this player's inventory by looking into slots and quantities
+ * Does not save after removing the items.
+ * Returns amount left if inventory hadn't enough to remove.
+ * @param {alt.Player} player
+ * @param {itemToRemove} item to Remove
+ * @param {amount} amount to be removed from Inventory
+ * @return {number}
+ * @memberof InventoryPrototype
+ */
+async function removeAmountFromInventoryReturnRemainingAmount(player: alt.Player, itemDbName: string, amount: number): Promise<number> {
+    const itemToRemove = await ItemFactory.get(itemDbName);
+    let amountToBeRemoved = amount;
+    for (let inventoryItem of player.data.inventory) {
+        if (amountToBeRemoved > 0) {
+            if (inventoryItem.dbName === itemToRemove.dbName && inventoryItem.rarity === itemToRemove.rarity) {
+                //So how much is left on this stack?
+                if (inventoryItem.quantity > amountToBeRemoved) {
+                    //Everything we want to sell is here
+                    inventoryItem.quantity -= amountToBeRemoved;
+                    return 0;
+                } else {
+                    //We sell the whole item-stack
+                    amountToBeRemoved -= inventoryItem.quantity;
+                    inventoryRemove(player, inventoryItem.slot)
+                }
+            }
+        }
+    }
+    return amountToBeRemoved;
+}
+
+/**
+ * Adds or stacks amount of itemDbName to Inventory by item-quantity times.
+ * Does not save after adding the items.
+ * Returns amount left if inventory was full.
+ *
+ * TODO Deal with weight?!
+ * @param {alt.Player} player
+ * @param {itemToAdd} item to Add
+ * @param {amount} amount to be added to Inventory
+ * @return {number}
+ * @memberof InventoryPrototype
+ */
+async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, itemDbName: string, amount: number): Promise<number> {
+    const itemToAdd = await ItemFactory.get(itemDbName);
+    let itemsLeftToStoreInInventory = amount * itemToAdd.quantity;
+    if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
+        for (let inventoryItem of player.data.inventory) {
+            if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+                if (isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.CAN_STACK) && inventoryItem.dbName === itemToAdd.dbName && inventoryItem.rarity === itemToAdd.rarity) {
+                    if (!inventoryItem.maxStack) {
+                        //You can stack as much as you want. So go for it
+                        inventoryItem.quantity += itemsLeftToStoreInInventory;
+                        //Obvoiusly there is nothing left to be stored here:
+                        return 0;
+                    } else {
+                        //So how much is left to stack?
+                        let freeQuantity = inventoryItem.maxStack - inventoryItem.quantity
+                        if (freeQuantity >= itemsLeftToStoreInInventory) {
+                            //Everything we buy fits on top of this stack
+                            inventoryItem.quantity += itemsLeftToStoreInInventory;
+                            return 0;
+                        } else {
+                            //We still have something left. So we fill this stack and move on
+                            inventoryItem.quantity = inventoryItem.maxStack;
+                            itemsLeftToStoreInInventory -= freeQuantity;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (itemsLeftToStoreInInventory > 0 && itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+        //Either there is something left or wasn't stackable. So go for the Empty-Slots
+        const emptySlots = getFreeInventorySlots(player);
+        for (let emptySlot of emptySlots) {
+
+            if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+                let addableItem:Item = deepCloneObject(itemToAdd);
+                if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
+                    if (!itemToAdd.maxStack || itemToAdd.maxStack >= itemsLeftToStoreInInventory) {
+                        //Everything fits into this stack. So go for it
+                        addableItem.quantity = itemsLeftToStoreInInventory;
+                        //Obvoiusly there is nothing left to be stored here:
+                        itemsLeftToStoreInInventory= 0;
+                    } else if (itemToAdd.maxStack) {
+                        //We still have something left. So we fill this stack and move on
+                        addableItem.quantity = itemToAdd.maxStack;
+                        itemsLeftToStoreInInventory -= itemToAdd.maxStack;
+                    }
+                } else {
+                    addableItem.quantity = itemsLeftToStoreInInventory--;
+                }
+                inventoryAdd(player, addableItem, emptySlot.slot);
+
+            }
+        }
+    }
+    if (itemsLeftToStoreInInventory > 0 && itemsLeftToStoreInInventory < itemToAdd.quantity) {
+        //We have less then itemToAdd.quantity left when inventory was full, so
+        return 1;
+    } else {
+        return itemsLeftToStoreInInventory / itemToAdd.quantity;
+    }
+}
+
 export default {
     convert,
     allItemRulesValid,
@@ -1080,4 +1188,6 @@ export default {
     stackInventoryItem,
     toolbarAdd,
     toolbarRemove,
+    addAmountToInventoryReturnRemainingAmount,
+    removeAmountFromInventoryReturnRemainingAmount,
 };

@@ -191,6 +191,71 @@
                 </Button>
             </div>
         </Module>
+
+        <Module :name="getLocale('LABEL_CHEST_HAIR')" class="mb-4" v-if="data.sex === 1">
+            <!-- Chest Hair -->
+            <div class="subtitle-2 grey--text mb-2 mt-2">{{ getLocale('DESC_CHEST_HAIR') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'chestHair', 0, getChestCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getChestCount()"
+                    :indexValue="data.chestHair"
+                    :increment="1"
+                    :values="locales.hairComponent.chest"
+                    @input="(e) => setValueWrap(e, 'chestHair')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'chestHair', 0, getChestCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+
+            <!-- Chest Hair Colour -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">{{ getLocale('LABEL_CHEST_HAIR_COLOUR') }}</div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'chestHairColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="getColourCount()"
+                    :indexValue="data.chestHairColor1"
+                    :increment="1"
+                    :values="locales.color.hair"
+                    @input="(e) => setValueWrap(e, 'chestHairColor1')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'chestHairColor1', 0, getColourCount(), 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+            <!-- Chest Hair Opacity -->
+            <div class="subtitle-2 grey--text mb-2 mt-4">
+                {{ getLocale('LABEL_CHEST_HAIR') }} {{ getLocale('LABEL_OPACITY') }}
+            </div>
+            <div class="split split-full center">
+                <Button color="blue" @click="$emit('dec-parameter', 'chestHairOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="0"
+                    :maxIndex="1"
+                    :indexValue="data.chestHairOpacity"
+                    :increment="0.1"
+                    @input="(e) => setValueWrap(e, 'chestHairOpacity')"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
+                />
+                <Button color="blue" @click="$emit('inc-parameter', 'chestHairOpacity', 0, 1, 0.1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
+        </Module>
     </div>
 </template>
 
@@ -275,13 +340,16 @@ export default defineComponent({
         getEyebrowsCount() {
             return this.locales.hairComponent.eyebrows.length - 1;
         },
+        getChestCount() {
+            return this.locales.hairComponent.chest.length - 1;
+        },
         getLocale(name: string | number) {
             let localeInfo = this.locales.hairComponent[name]
                 ? this.locales.hairComponent[name]
                 : `N/A hairComponent.${name}`;
 
             if (typeof name === 'string' && localeInfo.length >= 48) {
-                localeInfo = `${localeInfo.substr(0, 48)}\r\n${localeInfo.substr(48, localeInfo.length - 1)}`;
+                localeInfo = `${localeInfo.substring(0, 48)}\r\n${localeInfo.substring(48, localeInfo.length - 1)}`;
             }
 
             return localeInfo;

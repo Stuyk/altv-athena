@@ -22,7 +22,7 @@
         <Input
             :label="locales.LABEL_USER_ID"
             :stack="true"
-            :onInput="(text) => inputChange(text)"
+            :onInput="(text) => idChange(text)"
             :validateCallback="(valid) => setValidityProp('id', valid)"
             :value="''"
             :numberOnly="true"
