@@ -31,7 +31,8 @@
             </div>
             <div class="split">
                 <Button style="width: 100%" color="red" class="mt-4 mr-2" @click="exit">Exit</Button>
-                <Button style="width: 100%" color="green" class="mt-4 mr-2" @click="purchase">Purchase</Button>
+                <Button style="width: 100%" color="yellow" class="mt-4 mr-2" @click="toggleControls">Camera</Button>
+                <Button style="width: 100%" color="green" class="mt-4 mr-2" @click="purchase">Buy</Button>
             </div>
         </div>
     </div>
@@ -115,6 +116,11 @@ export default defineComponent({
                     this.finish2,
                     this.pearl,
                 );
+            }
+        },
+        toggleControls() {
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:ToggleControls`);
             }
         },
         purchase() {

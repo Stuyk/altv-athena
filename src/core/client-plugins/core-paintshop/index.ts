@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../client/extensions/view2';
 import ViewModel from '../../client/models/viewModel';
+import PedEditCamera from '../../client/utility/camera';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { Paintshop_View_Events } from '../../shared-plugins/core-paintshop/events';
 
@@ -10,11 +11,15 @@ interface RGB {
     b: number;
 }
 
+let areControlsEnabled = false;
+
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'PaintShop';
 
 class InternalFunctions implements ViewModel {
     static async open() {
+        areControlsEnabled = false;
+
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
             return;
@@ -30,6 +35,10 @@ class InternalFunctions implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:Update`, InternalFunctions.update);
         view.on(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
+        view.on(`${PAGE_NAME}:ToggleControls`, () => {
+            areControlsEnabled = !areControlsEnabled;
+            alt.toggleGameControls(areControlsEnabled);
+        });
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -65,6 +74,8 @@ class InternalFunctions implements ViewModel {
 
         // Let the rest of the script know this menu is closed.
         alt.Player.local.isMenuOpen = false;
+
+        PedEditCamera.destroy();
     }
 
     /**
