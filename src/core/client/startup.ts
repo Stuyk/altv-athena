@@ -77,5 +77,4 @@ import './views/factions';
 import './views/inventory';
 import './views/job';
 import './views/login';
-import './views/paintshop';
 import './views/storage';

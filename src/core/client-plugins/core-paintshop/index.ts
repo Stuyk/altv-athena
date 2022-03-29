@@ -1,19 +1,14 @@
 import * as alt from 'alt-client';
-import * as natives from 'natives';
-import { View_Events_PaintShop } from '../../shared/enums/views';
-
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
+import { WebViewController } from '../../client/extensions/view2';
+import ViewModel from '../../client/models/viewModel';
+import { isAnyMenuOpen } from '../../client/utility/menus';
+import { Paintshop_View_Events } from '../../shared-plugins/core-paintshop/events';
 
 interface RGB {
     r: number;
     g: number;
     b: number;
 }
-
-let primaryColor: RGB = null;
-let secondaryColor: RGB = null;
 
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'PaintShop';
@@ -24,9 +19,6 @@ class InternalFunctions implements ViewModel {
         if (isAnyMenuOpen()) {
             return;
         }
-
-        primaryColor = null;
-        secondaryColor = null;
 
         // Must always be called first if you want to hide HUD.
         await WebViewController.setOverlaysVisible(false);
@@ -91,60 +83,62 @@ class InternalFunctions implements ViewModel {
         const view = await WebViewController.get();
     }
 
-    static async purchase(primary: RGB, secondary: RGB) {
-        if (primaryColor) {
-            natives.setVehicleCustomPrimaryColour(
-                alt.Player.local.vehicle.scriptID,
-                primaryColor.r,
-                primaryColor.g,
-                primaryColor.b,
-            );
-        }
-
-        if (secondaryColor) {
-            natives.setVehicleCustomSecondaryColour(
-                alt.Player.local.vehicle.scriptID,
-                secondaryColor.r,
-                secondaryColor.g,
-                secondaryColor.b,
-            );
-        }
-
-        alt.emitServer(View_Events_PaintShop.Purchase, primary, secondary);
+    static async purchase(
+        primary: RGB | number,
+        secondary: RGB | number,
+        isCustom = false,
+        finish1: number,
+        finish2: number,
+        pearl: number,
+    ) {
+        InternalFunctions.update(primary, secondary, isCustom, finish1, finish2, pearl);
+        alt.emitServer(Paintshop_View_Events.PURCHASE, primary, secondary);
         InternalFunctions.close();
     }
 
-    static async update(primary: RGB, secondary: RGB) {
+    static async update(
+        primary: RGB | number,
+        secondary: RGB | number,
+        isCustom = false,
+        finish1: number,
+        finish2: number,
+        pearl: number,
+    ) {
         if (!alt.Player.local.vehicle) {
             return;
         }
 
-        if (!primaryColor) {
-            const [_a, r, g, b] = natives.getVehicleCustomPrimaryColour(alt.Player.local.vehicle.scriptID);
-            primaryColor = {
-                r,
-                g,
-                b,
-            };
+        let color1;
+        let color2;
+
+        if (primary) {
+            if (isCustom) {
+                color1 = primary as RGB;
+            } else {
+                color1 = primary as number;
+            }
         }
 
-        if (!secondaryColor) {
-            const [_a, r, g, b] = natives.getVehicleCustomSecondaryColour(alt.Player.local.vehicle.scriptID);
-            secondaryColor = {
-                r,
-                g,
-                b,
-            };
+        if (secondary) {
+            if (isCustom) {
+                color2 = secondary as RGB;
+            } else {
+                color2 = secondary as number;
+            }
         }
 
-        natives.setVehicleCustomPrimaryColour(alt.Player.local.vehicle.scriptID, primary.r, primary.g, primary.b);
-        natives.setVehicleCustomSecondaryColour(
-            alt.Player.local.vehicle.scriptID,
-            secondary.r,
-            secondary.g,
-            secondary.b,
-        );
+        if (typeof color1 !== 'number' && typeof color2 === 'number') {
+            color2 = color1;
+        }
+
+        if (!color2 && color1) {
+            color2 = color1;
+        }
+
+        if (color1 && color2) {
+            alt.emitServer(Paintshop_View_Events.PREVIEW_PAINT, color1, color2, finish1, finish2, pearl);
+        }
     }
 }
 
-alt.onServer(View_Events_PaintShop.Open, InternalFunctions.open);
+alt.onServer(Paintshop_View_Events.OPEN, InternalFunctions.open);

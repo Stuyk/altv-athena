@@ -1,12 +1,14 @@
 import * as alt from 'alt-server';
-import { View_Events_PaintShop } from '../../shared/enums/views';
-import { RGB } from '../../shared/interfaces/rgb';
-import { Vector3 } from '../../shared/interfaces/vector';
-import { PolygonShape } from '../extensions/extColshape';
-import { playerFuncs } from '../extensions/extPlayer';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { VehicleSystem } from '../systems/vehicle';
-import { sha256Random } from '../utility/encryption';
+import { RGB } from '../../../shared/interfaces/rgb';
+import { Vector3 } from '../../../shared/interfaces/vector';
+import { PolygonShape } from '../../../server/extensions/extColshape';
+import { playerFuncs } from '../../../server/extensions/extPlayer';
+import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
+import { sha256Random } from '../../../server/utility/encryption';
+import { RGBA } from 'alt-shared';
+import { VehicleEvents } from '../../../server/events/vehicleEvents';
+import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
+import { Paintshop_View_Events } from '../../../shared-plugins/core-paintshop/events';
 
 interface IPaintShop {
     uid: string;
@@ -17,7 +19,79 @@ interface IPaintShop {
 const shops: Array<IPaintShop> = [];
 const inShop = {};
 
-export class PainShopFunctions {
+class InternalFunctions {
+    /**
+     * Update the vehicle paint based on data.
+     * @param vehicle - The vehicle to update.
+     */
+    static updatePaint(vehicle: alt.Vehicle) {
+        // Handle Color Updates - Custom RGBA
+        if (vehicle.data.color && vehicle.data.color.hasOwnProperty('r')) {
+            if (!vehicle.data.color2) {
+                vehicle.data.color2 = vehicle.data.color;
+            }
+
+            if (vehicle.data.finish1) {
+                vehicle.primaryColor = vehicle.data.finish1;
+            }
+
+            if (vehicle.data.finish2) {
+                vehicle.secondaryColor = vehicle.data.finish2;
+            }
+
+            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
+            vehicle.customSecondaryColor = vehicle.data.color2 as RGBA;
+
+            if (vehicle.data.pearl >= 0) {
+                vehicle.pearlColor = vehicle.data.pearl;
+            }
+        }
+
+        // Handle Color Updates - GTA Colours
+        if (vehicle.data.color && typeof vehicle.data.color === 'number') {
+            if (!vehicle.data.color2) {
+                vehicle.data.color2 = vehicle.data.color;
+            }
+
+            vehicle.primaryColor = vehicle.data.color as number;
+            vehicle.secondaryColor = vehicle.data.color2 as number;
+        }
+    }
+
+    static previewPaint(
+        player: alt.Player,
+        color1: number | RGBA,
+        color2: number | RGBA,
+        finish1: number,
+        finish2: number,
+        pearl: number = -1,
+    ) {
+        if (!inShop[player.id]) {
+            return;
+        }
+
+        if (!player.vehicle) {
+            return;
+        }
+
+        if (typeof color1 === 'number') {
+            player.vehicle.primaryColor = color1 as number;
+            player.vehicle.secondaryColor = color2 as number;
+        } else {
+            player.vehicle.primaryColor = finish1;
+            player.vehicle.secondaryColor = finish2;
+
+            player.vehicle.customPrimaryColor = color1 as RGBA;
+            player.vehicle.customSecondaryColor = color2 as RGBA;
+
+            if (pearl >= 0) {
+                player.vehicle.pearlColor = pearl;
+            }
+        }
+    }
+}
+
+export class PaintShopView {
     static init() {
         const someShops: Array<IPaintShop> = [
             {
@@ -67,8 +141,23 @@ export class PainShopFunctions {
         ];
 
         for (let i = 0; i < someShops.length; i++) {
-            PainShopFunctions.register(someShops[i]);
+            PaintShopView.register(someShops[i]);
         }
+
+        alt.onClient(Paintshop_View_Events.PREVIEW_PAINT, InternalFunctions.previewPaint);
+        alt.onClient(Paintshop_View_Events.OPEN, PaintShopView.open);
+        alt.onClient(Paintshop_View_Events.PURCHASE, PaintShopView.purchase);
+        alt.onClient(Paintshop_View_Events.CLOSE, PaintShopView.close);
+        VehicleEvents.on(ATHENA_EVENTS_VEHICLE.SPAWNED, InternalFunctions.updatePaint);
+    }
+
+    static close(player: alt.Player) {
+        if (!player.vehicle) {
+            return;
+        }
+
+        InternalFunctions.updatePaint(player.vehicle);
+        delete inShop[player.id];
     }
 
     /**
@@ -76,7 +165,7 @@ export class PainShopFunctions {
      * @static
      * @param {IPaintShop} shop
      * @return {*}  {string}
-     * @memberof PainShopFunctions
+     * @memberof PaintShopView
      */
     static register(shop: IPaintShop): string {
         if (!shop.uid) {
@@ -96,8 +185,8 @@ export class PainShopFunctions {
             true,
             false,
         );
-        polygon.addEnterCallback(PainShopFunctions.enter);
-        polygon.addLeaveCallback(PainShopFunctions.leave);
+        polygon.addEnterCallback(PaintShopView.enter);
+        polygon.addLeaveCallback(PaintShopView.leave);
         return shop.uid;
     }
 
@@ -117,14 +206,14 @@ export class PainShopFunctions {
 
         inShop[player.id] = true;
 
-        playerFuncs.emit.createShard(player, { title: 'Paint Shop', text: 'Paint Your Vehicle', duration: 1500 });
+        // playerFuncs.emit.createShard(player, { title: 'Paint Shop', text: 'Paint Your Vehicle', duration: 1500 });
         playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
         playerFuncs.emit.interactionAdd(player, {
             keyPress: 'E',
             description: 'Open Paint Panel',
             uid: polygon.uid,
         });
-        playerFuncs.emit.interactionTemporary(player, View_Events_PaintShop.Open);
+        playerFuncs.emit.interactionTemporary(player, Paintshop_View_Events.OPEN);
     }
 
     static leave(polygon: PolygonShape, player: alt.Player) {
@@ -155,10 +244,10 @@ export class PainShopFunctions {
             return;
         }
 
-        alt.emitClient(player, View_Events_PaintShop.Open);
+        alt.emitClient(player, Paintshop_View_Events.OPEN);
     }
 
-    static purchase(player: alt.Player, color1: RGB, color2: RGB) {
+    static purchase(player: alt.Player, color1: RGB | number, color2: RGB | number) {
         if (!player.vehicle || player.vehicle.driver !== player) {
             return;
         }
@@ -177,11 +266,7 @@ export class PainShopFunctions {
 
         player.vehicle.data.color = color1;
         player.vehicle.data.color2 = color2;
-        VehicleFuncs.updateVehicleMods(player.vehicle);
+        InternalFunctions.updatePaint(player.vehicle);
         VehicleFuncs.save(player.vehicle, { color: player.vehicle.data.color, color2: player.vehicle.data.color2 });
     }
 }
-
-PainShopFunctions.init();
-alt.onClient(View_Events_PaintShop.Open, PainShopFunctions.open);
-alt.onClient(View_Events_PaintShop.Purchase, PainShopFunctions.purchase);
