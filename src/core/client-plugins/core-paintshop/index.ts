@@ -74,8 +74,6 @@ class InternalFunctions implements ViewModel {
 
         // Let the rest of the script know this menu is closed.
         alt.Player.local.isMenuOpen = false;
-
-        PedEditCamera.destroy();
     }
 
     /**
