@@ -18,7 +18,7 @@
         </div>
         <span class="mb-2 mt-2 overline" style="width: 100%">Secondary</span>
         <div class="stack mb-2 mr-2">
-            <input type="color" style="width: 100%" id="color1" name="color1" value="#ffffff" @input="setSecondary" />
+            <input type="color" style="width: 100%" id="color2" name="color2" value="#ffffff" @input="setSecondary" />
             <div class="finishes">
                 <Button
                     style="width: 100%"
