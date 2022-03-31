@@ -182,13 +182,6 @@ class InternalFunctions implements ViewModel {
         const offsetCalculations = [];
         const additional = 0.5;
 
-        // Middle Left
-        offsetCalculations.push({
-            x: min.x - additional,
-            y: 0,
-            z: zPos,
-        });
-
         // Top Left
         offsetCalculations.push({
             x: min.x - additional,
@@ -235,6 +228,13 @@ class InternalFunctions implements ViewModel {
         offsetCalculations.push({
             x: min.x - additional,
             y: min.y - additional,
+            z: zPos,
+        });
+
+        // Middle Left
+        offsetCalculations.push({
+            x: min.x - additional,
+            y: 0,
             z: zPos,
         });
 
