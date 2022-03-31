@@ -1,0 +1,17 @@
+export const PAINTSHOP_LOCALE = {
+    PRESETS: 'Presets',
+    CUSTOM: 'Custom',
+    PRIMARY_COLOUR: 'Primary Colour',
+    SECONDARY_COLOUR: 'Secondary Colour',
+    PRIMARY_FINISH: 'Primary Finish',
+    SECONDARY_FINISH: 'Secondary Finish',
+    MATTE: 'MATTE',
+    METALLIC: 'METALLIC',
+    WORN: 'WORN',
+    CHROME: 'CHROME',
+    EXIT: 'Exit',
+    CAMERA: 'Camera',
+    BUY: 'Buy',
+    PEARL_FINISH: 'Pearl Finish',
+    PEARL_DESC: 'Changes the paint undertone of the vehicle.',
+};

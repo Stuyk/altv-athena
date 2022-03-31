@@ -1,16 +1,29 @@
 <template>
     <div class="wrapper stack mt-2 mr-2">
-        <span class="mb-2 overline" style="width: 100%">Primary</span>
-        <div class="palette mb-2">
-            <div v-for="(color, index) in getColors" :key="index">
-                <div class="selectable-box" @click="setColor(color.id, true)" :style="getStyle(color.hex)"></div>
-            </div>
-        </div>
-        <span class="mb-2 overline" style="width: 100%">Secondary</span>
-        <div class="palette">
-            <div v-for="(color, index) in getColors" :key="index">
-                <div class="selectable-box" @click="setColor(color.id, false)" :style="getStyle(color.hex)"></div>
-            </div>
+        <div class="stack mb-2 mr-2 mt-2">
+            <Module :name="locale.PRIMARY_COLOUR">
+                <div class="palette mb-2">
+                    <div v-for="(color, index) in getColors" :key="index">
+                        <div
+                            class="selectable-box"
+                            @click="setColor(color.id, true)"
+                            :style="getStyle(color.hex)"
+                        ></div>
+                    </div>
+                </div>
+            </Module>
+            <br />
+            <Module :name="locale.SECONDARY_COLOUR">
+                <div class="palette">
+                    <div v-for="(color, index) in getColors" :key="index">
+                        <div
+                            class="selectable-box"
+                            @click="setColor(color.id, false)"
+                            :style="getStyle(color.hex)"
+                        ></div>
+                    </div>
+                </div>
+            </Module>
         </div>
     </div>
 </template>
@@ -20,6 +33,7 @@ import { defineComponent } from 'vue';
 import { VehicleColorPresets } from '../../../../../src/core/shared-plugins/core-paintshop/colors';
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
+import Module from '../../../components/Module.vue';
 
 const ComponentName = 'Presets';
 export default defineComponent({
@@ -30,9 +44,16 @@ export default defineComponent({
             secondary: 1,
         };
     },
+    props: {
+        locale: {
+            type: Object,
+            required: true,
+        },
+    },
     components: {
         Button,
         Icon,
+        Module,
     },
     computed: {
         getColors(): Array<{ name: string; id: number; hex: string }> {
@@ -62,6 +83,7 @@ export default defineComponent({
 .wrapper {
     min-height: calc(100vh - 125px);
     max-height: calc(100vh - 125px);
+    overflow: auto;
 }
 
 .palette {
@@ -73,6 +95,7 @@ export default defineComponent({
     padding: 12px;
     background: rgba(24, 24, 24, 1);
     align-self: stretch;
+    max-height: 45vh;
 }
 
 .selectable-box {

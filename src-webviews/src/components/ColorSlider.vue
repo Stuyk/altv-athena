@@ -91,7 +91,18 @@ export default defineComponent({
             this.r = newValue.r;
             this.g = newValue.g;
             this.b = newValue.b;
+
+            this.$emit('input', this.r, this.g, this.b);
+            this.$emit('change', this.r, this.g, this.b);
         },
+    },
+    mounted() {
+        this.r = this.rgb.r;
+        this.g = this.rgb.g;
+        this.b = this.rgb.b;
+
+        this.$emit('input', this.r, this.g, this.b);
+        this.$emit('change', this.r, this.g, this.b);
     },
 });
 </script>

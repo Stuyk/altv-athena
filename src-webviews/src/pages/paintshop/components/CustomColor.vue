@@ -1,48 +1,57 @@
 <template>
     <div class="wrapper stack mt-2">
-        <span class="mb-2 mt-2 overline" style="width: 100%">Primary</span>
-        <div class="stack mb-2 mr-2">
-            <ColorSlider class="mr-2" :rgb="color1" @change="outputPrimaryColor" />
-            <div class="finishes">
-                <Button
-                    style="width: 100%"
-                    class="finish mt-4"
-                    v-for="(finish, index) in getFinishes"
-                    :color="finish1 === finish.value ? 'blue' : 'blue-grey'"
-                    :key="index"
-                    @click="setFinishType(finish.value, true)"
-                >
-                    {{ finish.key }}
-                </Button>
-            </div>
-        </div>
-        <span class="mb-2 mt-2 overline" style="width: 100%">Secondary</span>
-        <div class="stack mb-2 mr-2">
-            <ColorSlider class="mr-2" :rgb="color2" @change="outputSecondaryColor" />
-            <div class="finishes">
-                <Button
-                    style="width: 100%"
-                    class="finish mt-4"
-                    v-for="(finish, index) in getFinishes"
-                    :color="finish2 === finish.value ? 'blue' : 'blue-grey'"
-                    :key="index"
-                    @click="setFinishType(finish.value, false)"
-                >
-                    {{ finish.key }}
-                </Button>
-            </div>
-        </div>
-        <span class="mb-2 mt-2 overline" style="width: 100%">Pearl Finish</span>
-        <span class="subtitle-2 pb-4">Click and use arrow keys for precise adjustment.</span>
-        <div class="stack mr-2">
-            <RangeInput
-                :minIndex="0"
-                :maxIndex="180"
-                :indexValue="pearl"
-                :increment="1"
-                @input="(e) => setPearl(e)"
-                style="width: 100%"
-            />
+        <div class="stack mb-2 mr-2 mt-2">
+            <Module :name="locale.PRIMARY_COLOUR">
+                <ColorSlider class="mr-2" :rgb="color1" @change="outputPrimaryColor" />
+            </Module>
+            <br />
+            <Module :name="locale.SECONDARY_COLOUR">
+                <ColorSlider class="mr-2" :rgb="color2" @change="outputSecondaryColor" />
+            </Module>
+            <br />
+            <Module :name="locale.PRIMARY_FINISH">
+                <div class="finishes">
+                    <Button
+                        style="width: 100%"
+                        class="finish"
+                        v-for="(finish, index) in getFinishes"
+                        :color="finish1 === finish.value ? 'green' : 'blue-grey'"
+                        :key="index"
+                        @click="setFinishType(finish.value, true)"
+                    >
+                        {{ locale[finish.key.toUpperCase()] }}
+                    </Button>
+                </div>
+            </Module>
+            <br />
+            <Module :name="locale.SECONDARY_FINISH">
+                <div class="finishes">
+                    <Button
+                        style="width: 100%"
+                        class="finish"
+                        v-for="(finish, index) in getFinishes"
+                        :color="finish2 === finish.value ? 'green' : 'blue-grey'"
+                        :key="index"
+                        @click="setFinishType(finish.value, false)"
+                    >
+                        {{ locale[finish.key.toUpperCase()] }}
+                    </Button>
+                </div>
+            </Module>
+            <br />
+            <Module :name="locale.PEARL_FINISH">
+                <span class="subtitle-2 pb-4">{{ locale.PEARL_DESC }}</span>
+                <div class="stack pt-6">
+                    <RangeInput
+                        :minIndex="0"
+                        :maxIndex="180"
+                        :indexValue="pearl"
+                        :increment="1"
+                        @input="(e) => setPearl(e)"
+                        style="width: 100%"
+                    />
+                </div>
+            </Module>
         </div>
     </div>
 </template>
@@ -53,6 +62,7 @@ import ColorSlider from '../../../components/ColorSlider.vue';
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
 import RangeInput from '../../../components/RangeInput.vue';
+import Module from '../../../components/Module.vue';
 import { VEHICLE_COLOR_PAINTS } from '../../../../../src/core/shared-plugins/core-paintshop/paints';
 
 const ComponentName = 'CustomColor';
@@ -73,12 +83,17 @@ export default defineComponent({
         color2: {
             type: Object,
         },
+        locale: {
+            type: Object,
+            required: true,
+        },
     },
     components: {
         Button,
         Icon,
         RangeInput,
         ColorSlider,
+        Module,
     },
     computed: {
         getFinishes(): Array<{ key: string; value: number }> {
@@ -136,12 +151,16 @@ export default defineComponent({
             this.$emit('set-colour', { r, g, b }, false);
         },
     },
+    mounted() {
+        this.$emit('set-colour', { r: this.color1, g: this.color1, b: this.color1 }, true);
+        this.$emit('set-colour', { r: this.color2, g: this.color2, b: this.color2 }, false);
+    },
 });
 </script>
 
 <style scoped>
 .wrapper {
-    overflow-y: auto;
+    overflow-y: scroll;
     min-height: calc(100vh - 125px);
     max-height: calc(100vh - 125px);
 }

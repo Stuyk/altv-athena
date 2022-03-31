@@ -2,8 +2,10 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { WebViewController } from '../../client/extensions/view2';
 import ViewModel from '../../client/models/viewModel';
+import { CinematicCam } from '../../client/utility/cinematic';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { Paintshop_View_Events } from '../../shared-plugins/core-paintshop/events';
+import { Vector3 } from '../../shared/interfaces/vector';
 
 interface RGB {
     r: number;
@@ -11,7 +13,6 @@ interface RGB {
     b: number;
 }
 
-let areControlsEnabled = false;
 let serverColor1: RGB;
 let serverColor2: RGB;
 
@@ -20,8 +21,6 @@ const PAGE_NAME = 'PaintShop';
 
 class InternalFunctions implements ViewModel {
     static async open(_serverColor1: RGB, _serverColor2: RGB) {
-        areControlsEnabled = false;
-
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
             return;
@@ -40,9 +39,8 @@ class InternalFunctions implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:Update`, InternalFunctions.update);
         view.on(`${PAGE_NAME}:Purchase`, InternalFunctions.purchase);
-        view.on(`${PAGE_NAME}:ToggleControls`, () => {
-            areControlsEnabled = !areControlsEnabled;
-            alt.toggleGameControls(areControlsEnabled);
+        view.on(`${PAGE_NAME}:NextCam`, () => {
+            CinematicCam.next(false);
         });
 
         // This is where we open the page and show the cursor.
@@ -55,6 +53,23 @@ class InternalFunctions implements ViewModel {
 
         // Let the rest of the script know this menu is open.
         alt.Player.local.isMenuOpen = true;
+
+        const points = InternalFunctions.generateCameraPoints();
+
+        // Clear Cinematic Camera
+        CinematicCam.destroy();
+
+        // Add Camera Ponts to Cinematic Cam List
+        for (let i = 0; i < points.length; i++) {
+            CinematicCam.addNode({
+                pos: points[i],
+                fov: 90,
+                easeTime: 250,
+                positionToTrack: alt.Player.local.vehicle.pos,
+            });
+        }
+
+        CinematicCam.next(false);
     }
 
     static async close() {
@@ -81,6 +96,8 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = false;
 
         alt.emitServer(Paintshop_View_Events.CLOSE);
+
+        CinematicCam.destroy();
     }
 
     /**
@@ -109,7 +126,7 @@ class InternalFunctions implements ViewModel {
         pearl: number,
     ) {
         InternalFunctions.update(primary, secondary, isCustom, finish1, finish2, pearl);
-        alt.emitServer(Paintshop_View_Events.PURCHASE, primary, secondary);
+        alt.emitServer(Paintshop_View_Events.PURCHASE, primary, secondary, finish1, finish2, pearl);
         InternalFunctions.close();
     }
 
@@ -155,6 +172,84 @@ class InternalFunctions implements ViewModel {
         if (color1 && color2) {
             alt.emitServer(Paintshop_View_Events.PREVIEW_PAINT, color1, color2, finish1, finish2, pearl);
         }
+    }
+
+    static generateCameraPoints(): Array<Vector3> {
+        const cameraPoints = [];
+        const zPos = alt.Player.local.pos.z;
+
+        const [_, min, max] = native.getModelDimensions(alt.Player.local.vehicle.model);
+        const offsetCalculations = [];
+        const additional = 0.5;
+
+        // Middle Left
+        offsetCalculations.push({
+            x: min.x - additional,
+            y: 0,
+            z: zPos,
+        });
+
+        // Top Left
+        offsetCalculations.push({
+            x: min.x - additional,
+            y: max.y + additional,
+            z: zPos,
+        });
+
+        // Top Middle
+        offsetCalculations.push({
+            x: 0,
+            y: max.y + additional,
+            z: zPos,
+        });
+
+        // Top Right
+        offsetCalculations.push({
+            x: max.x + additional,
+            y: max.y + additional,
+            z: zPos,
+        });
+
+        // Middle Right
+        offsetCalculations.push({
+            x: max.x + additional,
+            y: 0,
+            z: zPos,
+        });
+
+        // Back Right
+        offsetCalculations.push({
+            x: max.x + additional,
+            y: min.y - additional,
+            z: zPos,
+        });
+
+        // Middle Center
+        offsetCalculations.push({
+            x: 0,
+            y: min.y - additional,
+            z: zPos,
+        });
+
+        // Bottom Left
+        offsetCalculations.push({
+            x: min.x - additional,
+            y: min.y - additional,
+            z: zPos,
+        });
+
+        for (let i = 0; i < offsetCalculations.length; i++) {
+            const calc = native.getOffsetFromEntityInWorldCoords(
+                alt.Player.local.vehicle.scriptID,
+                offsetCalculations[i].x,
+                offsetCalculations[i].y,
+                1,
+            );
+
+            cameraPoints.push(calc);
+        }
+
+        return cameraPoints;
     }
 }
 

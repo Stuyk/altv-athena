@@ -6,6 +6,7 @@ import { getPointsInCircle } from './math';
 import { loadSceneAtCoords } from './scene';
 
 const nodes: Array<iCameraNode> = [];
+let currentCamIndex = -1;
 let cam1;
 let cam2;
 
@@ -254,6 +255,8 @@ class InternalFunctions {
         native.clearFocus();
         native.destroyAllCams(true);
         native.renderScriptCams(false, false, 0, false, false, 0);
+
+        currentCamIndex = -1;
     }
 
     /**
@@ -302,20 +305,35 @@ export class CinematicCam {
     }
 
     /**
-     * Navigate to the next camera node regardless of its status.
-     * Removes the node from the node array upon completion.
+     * Goes to the next camera.
+     *
+     * If `false` is passed in the function it will not remove a camera
+     * from the camera array. Allows for repeating camera movement over and over.
      *
      * @static
-     * @returns {boolean} Whether or not the camera node played through
+     * @param {boolean} [removeFromArray=true]
+     * @return {*}  {Promise<boolean>}
      * @memberof CinematicCam
      */
-    static async next(): Promise<boolean> {
+    static async next(removeFromArray = true): Promise<boolean> {
         if (nodes.length <= 0) {
             return false;
         }
 
-        const nextCam = nodes.shift();
-        await InternalFunctions.next(nextCam);
+        if (removeFromArray) {
+            const nextCam = nodes.shift();
+            await InternalFunctions.next(nextCam);
+        } else {
+            currentCamIndex += 1;
+
+            if (currentCamIndex >= nodes.length) {
+                currentCamIndex = 0;
+            }
+
+            const nextCam = nodes[currentCamIndex];
+            await InternalFunctions.next(nextCam);
+        }
+
         return true;
     }
 

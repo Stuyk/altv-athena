@@ -253,7 +253,14 @@ export class PaintShopView {
         alt.emitClient(player, Paintshop_View_Events.OPEN, customColor1, customColor2);
     }
 
-    static purchase(player: alt.Player, color1: RGB | number, color2: RGB | number) {
+    static purchase(
+        player: alt.Player,
+        color1: RGB | number,
+        color2: RGB | number,
+        finish1: number,
+        finish2: number,
+        pearl: number,
+    ) {
         if (!player.vehicle || player.vehicle.driver !== player) {
             return;
         }
@@ -270,9 +277,34 @@ export class PaintShopView {
             return;
         }
 
-        player.vehicle.data.color = color1;
-        player.vehicle.data.color2 = color2;
+        let whatToUpdate = {};
+
+        if (color1 !== undefined && color1 !== null) {
+            whatToUpdate['color1'] = color1;
+        }
+
+        if (color2 !== undefined && color2 !== null) {
+            whatToUpdate['color2'] = color2;
+        }
+
+        if (finish1 !== undefined && finish1 !== null) {
+            whatToUpdate['finish1'] = finish1;
+        }
+
+        if (finish2 !== undefined && finish2 !== null) {
+            whatToUpdate['finish2'] = finish2;
+        }
+
+        if (pearl !== undefined && pearl !== null) {
+            whatToUpdate['pearl'] = pearl;
+        }
+
+
+        Object.keys(whatToUpdate).forEach(key => {
+            player.vehicle.data[key] = whatToUpdate[key];
+        });
+
         InternalFunctions.updatePaint(player.vehicle);
-        VehicleFuncs.save(player.vehicle, { color: player.vehicle.data.color, color2: player.vehicle.data.color2 });
+        VehicleFuncs.save(player.vehicle, whatToUpdate);
     }
 }

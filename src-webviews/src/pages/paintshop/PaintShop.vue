@@ -8,7 +8,7 @@
                     :color="pageIndex === 0 ? 'orange' : 'blue'"
                     @click="setPage(0)"
                 >
-                    Presets
+                    {{ locale.PRESETS }}
                 </Button>
                 <Button
                     class="mr-2"
@@ -16,7 +16,7 @@
                     :color="pageIndex === 1 ? 'orange' : 'blue'"
                     @click="setPage(1)"
                 >
-                    Custom
+                    {{ locale.CUSTOM }}
                 </Button>
             </div>
             <div class="page-filler">
@@ -24,6 +24,7 @@
                     :is="pages[pageIndex]"
                     class="fade-in"
                     :key="pageIndex"
+                    v-bind:locale="locale"
                     v-bind:color1="initialColor1"
                     v-bind:color2="initialColor2"
                     @set-colour="setColour"
@@ -32,9 +33,15 @@
                 ></component>
             </div>
             <div class="split">
-                <Button style="width: 100%" color="red" class="mt-4 mr-2" @click="exit">Exit</Button>
-                <Button style="width: 100%" color="yellow" class="mt-4 mr-2" @click="toggleControls">Camera</Button>
-                <Button style="width: 100%" color="green" class="mt-4 mr-2" @click="purchase">Buy</Button>
+                <Button style="width: 100%" color="red" class="mt-4 mr-2" @click="exit">
+                    {{ locale.EXIT }}
+                </Button>
+                <Button style="width: 100%" color="yellow" class="mt-4 mr-2" @click="nextCam">
+                    {{ locale.CAMERA }}
+                </Button>
+                <Button style="width: 100%" color="green" class="mt-4 mr-2" @click="purchase">
+                    {{ locale.BUY }}
+                </Button>
             </div>
         </div>
     </div>
@@ -42,6 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { PAINTSHOP_LOCALE } from '../../../../src/core/shared-plugins/core-paintshop/locales';
 import Button from '../../components/Button.vue';
 import Frame from '../../components/Frame.vue';
 import Icon from '../../components/Icon.vue';
@@ -77,6 +85,7 @@ export default defineComponent({
             initialColor2: { r: 255, g: 255, b: 255 },
             pageIndex: 1,
             pages: ['Presets', 'CustomColor'],
+            locale: PAINTSHOP_LOCALE,
         };
     },
     mounted() {
@@ -126,9 +135,9 @@ export default defineComponent({
                 );
             }
         },
-        toggleControls() {
+        nextCam() {
             if ('alt' in window) {
-                alt.emit(`${ComponentName}:ToggleControls`);
+                alt.emit(`${ComponentName}:NextCam`);
             }
         },
         purchase() {
