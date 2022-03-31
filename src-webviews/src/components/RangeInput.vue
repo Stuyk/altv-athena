@@ -48,6 +48,10 @@ export default defineComponent({
             type: Array,
             required: false,
         },
+        enableAudio: {
+            type: Boolean,
+            default: true,
+        },
     },
     methods: {
         ResolvePath,
@@ -110,6 +114,11 @@ export default defineComponent({
     watch: {
         async indexValue(newValue) {
             this._value = newValue;
+
+            if (!this.enableAudio) {
+                return;
+            }
+
             if (!this._audio) {
                 this._audio = new Audio(this.ResolvePath('assets/sounds/ui/hover.ogg'));
                 this._audio.volume = 0.1;

@@ -244,7 +244,13 @@ export class PaintShopView {
             return;
         }
 
-        alt.emitClient(player, Paintshop_View_Events.OPEN);
+        const customColor1 =
+            typeof player.vehicle.data.color === 'object' ? player.vehicle.data.color : { r: 255, g: 255, b: 255 };
+
+        const customColor2 =
+            typeof player.vehicle.data.color2 === 'object' ? player.vehicle.data.color2 : { r: 255, g: 255, b: 255 };
+
+        alt.emitClient(player, Paintshop_View_Events.OPEN, customColor1, customColor2);
     }
 
     static purchase(player: alt.Player, color1: RGB | number, color2: RGB | number) {

@@ -2,7 +2,7 @@
     <div class="wrapper stack mt-2">
         <span class="mb-2 mt-2 overline" style="width: 100%">Primary</span>
         <div class="stack mb-2 mr-2">
-            <input type="color" style="width: 100%" id="color1" name="color1" v-model="primary" @input="setPrimary" />
+            <ColorSlider class="mr-2" :rgb="color1" @change="outputPrimaryColor" />
             <div class="finishes">
                 <Button
                     style="width: 100%"
@@ -18,14 +18,7 @@
         </div>
         <span class="mb-2 mt-2 overline" style="width: 100%">Secondary</span>
         <div class="stack mb-2 mr-2">
-            <input
-                type="color"
-                style="width: 100%"
-                id="color2"
-                name="color2"
-                v-model="secondary"
-                @input="setSecondary"
-            />
+            <ColorSlider class="mr-2" :rgb="color2" @change="outputSecondaryColor" />
             <div class="finishes">
                 <Button
                     style="width: 100%"
@@ -56,6 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ColorSlider from '../../../components/ColorSlider.vue';
 import Button from '../../../components/Button.vue';
 import Icon from '../../../components/Icon.vue';
 import RangeInput from '../../../components/RangeInput.vue';
@@ -66,17 +60,25 @@ export default defineComponent({
     name: ComponentName,
     data() {
         return {
+            update: 1,
             pearl: 0,
-            primary: '#ffffff',
-            secondary: '#ffffff',
             finish1: VEHICLE_COLOR_PAINTS.MATTE,
             finish2: VEHICLE_COLOR_PAINTS.MATTE,
         };
+    },
+    props: {
+        color1: {
+            type: Object,
+        },
+        color2: {
+            type: Object,
+        },
     },
     components: {
         Button,
         Icon,
         RangeInput,
+        ColorSlider,
     },
     computed: {
         getFinishes(): Array<{ key: string; value: number }> {
@@ -119,25 +121,20 @@ export default defineComponent({
                   }
                 : null;
         },
-        setPrimary(e) {
-            const hexColor = e.target['value'];
-            if (!hexColor) {
+        outputPrimaryColor(r: number, g: number, b: number) {
+            if (r === undefined || g === undefined || b === undefined) {
                 return;
             }
 
-            const value = this.hexToRgb(hexColor);
-            this.$emit('set-colour', value, true);
+            this.$emit('set-colour', { r, g, b }, true);
         },
-        setSecondary(e) {
-            const hexColor = e.target['value'];
-            if (!hexColor) {
+        outputSecondaryColor(r: number, g: number, b: number) {
+            if (r === undefined || g === undefined || b === undefined) {
                 return;
             }
 
-            const value = this.hexToRgb(hexColor);
-            this.$emit('set-colour', value, false);
+            this.$emit('set-colour', { r, g, b }, false);
         },
-        forceUpdate() {},
     },
 });
 </script>

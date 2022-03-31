@@ -24,6 +24,8 @@
                     :is="pages[pageIndex]"
                     class="fade-in"
                     :key="pageIndex"
+                    v-bind:color1="initialColor1"
+                    v-bind:color2="initialColor2"
                     @set-colour="setColour"
                     @update-finish="updateFinish"
                     @update-pearl="updatePearl"
@@ -71,17 +73,23 @@ export default defineComponent({
             finish2: 12,
             color1: { r: 255, g: 255, b: 255 },
             color2: { r: 255, g: 255, b: 255 },
+            initialColor1: { r: 255, g: 255, b: 255 },
+            initialColor2: { r: 255, g: 255, b: 255 },
             pageIndex: 1,
             pages: ['Presets', 'CustomColor'],
         };
     },
     mounted() {
-        this.$nextTick(() => {
-            // document.getElementById('color1').focus();
-        });
+        if ('alt' in window) {
+            alt.on(`${ComponentName}:CustomColours`, this.customColorReady);
+            alt.emit(`${ComponentName}:Ready`);
+        }
     },
-    unmounted() {},
     methods: {
+        customColorReady(primary: { r: number; g: number; b: number }, secondary: { r: number; g: number; b: number }) {
+            this.initialColor1 = primary;
+            this.initialColor2 = secondary;
+        },
         setColour(value: number | { r: number; g: number; b: number; a: number }, isPrimary = true) {
             if (isPrimary) {
                 this.color1 = value;

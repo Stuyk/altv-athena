@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 import { WebViewController } from '../../client/extensions/view2';
 import ViewModel from '../../client/models/viewModel';
-import PedEditCamera from '../../client/utility/camera';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { Paintshop_View_Events } from '../../shared-plugins/core-paintshop/events';
 
@@ -12,18 +12,23 @@ interface RGB {
 }
 
 let areControlsEnabled = false;
+let serverColor1: RGB;
+let serverColor2: RGB;
 
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'PaintShop';
 
 class InternalFunctions implements ViewModel {
-    static async open() {
+    static async open(_serverColor1: RGB, _serverColor2: RGB) {
         areControlsEnabled = false;
 
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
             return;
         }
+
+        serverColor1 = _serverColor1;
+        serverColor2 = _serverColor2;
 
         // Must always be called first if you want to hide HUD.
         await WebViewController.setOverlaysVisible(false);
@@ -92,6 +97,7 @@ class InternalFunctions implements ViewModel {
      */
     static async ready() {
         const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:CustomColours`, serverColor1, serverColor2);
     }
 
     static async purchase(
