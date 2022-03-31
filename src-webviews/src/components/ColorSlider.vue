@@ -88,7 +88,6 @@ export default defineComponent({
     },
     watch: {
         rgb(newValue, oldValue) {
-            console.log('updated');
             this.r = newValue.r;
             this.g = newValue.g;
             this.b = newValue.b;
