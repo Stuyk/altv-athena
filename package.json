@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "description": "a roleplay framework for alt:V",
     "author": "stuyk",
     "type": "module",
@@ -40,7 +40,6 @@
         "fix": "node ./scripts/doctor/index.js"
     },
     "devDependencies": {
-
         "@altv/types-client": "^2.1.1",
         "@altv/types-natives": "^1.4.4",
         "@altv/types-server": "^2.2.8",

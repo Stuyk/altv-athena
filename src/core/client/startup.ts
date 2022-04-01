@@ -54,6 +54,7 @@ import './systems/vehicle';
 import './systems/world';
 
 // Utility
+import './utility/cinematic';
 import './utility/credits';
 import './utility/errorScreen';
 import './utility/ipl';
@@ -77,5 +78,4 @@ import './views/factions';
 import './views/inventory';
 import './views/job';
 import './views/login';
-import './views/paintshop';
 import './views/storage';

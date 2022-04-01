@@ -139,6 +139,30 @@ export interface IVehicle {
     storage?: string;
 
     /**
+     * The paint 'finish' on the vehicle. Only applies for custom colors.
+     *
+     * @type {number}
+     * @memberof IVehicle
+     */
+    finish1?: number;
+
+    /**
+     * The paint 'finish' on the vehicle. Only applies for custom colors.
+     *
+     * @type {number}
+     * @memberof IVehicle
+     */
+    finish2?: number;
+
+    /**
+     * Pearl Color, -1 does not apply
+     *
+     * @type {number}
+     * @memberof IVehicle
+     */
+    pearl?: number;
+
+    /**
      * Simply what colour is this vehicle?
      * Alpha should always be 255.
      * No other value matters.
@@ -150,14 +174,14 @@ export interface IVehicle {
      *     }}
      * @memberof IVehicle
      */
-    color?: RGB;
+    color?: RGB | number;
 
     /**
      * Secondary color of the vehicle.
      * @type {RGB}
      * @memberof IVehicle
      */
-    color2?: RGB;
+    color2?: RGB | number;
 
     /**
      * Vehicle Tuning Interface

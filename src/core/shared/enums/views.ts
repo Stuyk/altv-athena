@@ -68,8 +68,3 @@ export enum View_Events_Factions {
 export enum View_Events_Input_Menu {
     SetMenu = 'inputmenu:Set',
 }
-
-export enum View_Events_PaintShop {
-    Open = 'paint:Shop:Open',
-    Purchase = 'paint:Shop:Purchase',
-}

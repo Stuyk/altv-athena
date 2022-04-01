@@ -12,6 +12,7 @@ import { VehicleData } from '../../../shared/information/vehicles';
 import { IVehicle } from '../../../shared/interfaces/iVehicle';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { distance2d } from '../../../shared/utility/vector';
+import { FuelCommands } from './commands';
 import { FUEL_CONFIG } from './config';
 
 export class FuelSystem {
@@ -58,6 +59,8 @@ export class FuelSystem {
 
             return dataToAppend;
         });
+
+        FuelCommands.init();
     }
 
     /**
