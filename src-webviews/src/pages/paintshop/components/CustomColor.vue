@@ -2,11 +2,11 @@
     <div class="wrapper stack mt-2">
         <div class="stack mb-2 mr-2 mt-2">
             <Module :name="locale.PRIMARY_COLOUR">
-                <ColorSlider class="mr-2" :rgb="color1" @change="outputPrimaryColor" />
+                <ColorSlider class="mr-2" :rgb="data.color" @change="outputPrimaryColor" />
             </Module>
             <br />
             <Module :name="locale.SECONDARY_COLOUR">
-                <ColorSlider class="mr-2" :rgb="color2" @change="outputSecondaryColor" />
+                <ColorSlider class="mr-2" :rgb="data.color2" @change="outputSecondaryColor" />
             </Module>
             <br />
             <Module :name="locale.PRIMARY_FINISH">
@@ -64,6 +64,7 @@ import Icon from '../../../components/Icon.vue';
 import RangeInput from '../../../components/RangeInput.vue';
 import Module from '../../../components/Module.vue';
 import { VEHICLE_COLOR_PAINTS } from '../../../../../src/core/shared-plugins/core-paintshop/paints';
+import { iPaintshopSync } from '../../../../../src/core/shared-plugins/core-paintshop/interfaces';
 
 const ComponentName = 'CustomColor';
 export default defineComponent({
@@ -77,10 +78,7 @@ export default defineComponent({
         };
     },
     props: {
-        color1: {
-            type: Object,
-        },
-        color2: {
+        data: {
             type: Object,
         },
         locale: {
@@ -151,9 +149,19 @@ export default defineComponent({
             this.$emit('set-colour', { r, g, b }, false);
         },
     },
-    mounted() {
-        this.$emit('set-colour', { r: this.color1, g: this.color1, b: this.color1 }, true);
-        this.$emit('set-colour', { r: this.color2, g: this.color2, b: this.color2 }, false);
+    watch: {
+        data(syncData: iPaintshopSync) {
+            this.finish1 = syncData.finish1;
+            this.finish2 = syncData.finish2;
+            this.pearl = syncData.pearl;
+
+            this.$nextTick(() => {
+                this.$emit('set-colour', syncData.color, true);
+                this.$emit('set-colour', syncData.color2, false);
+                this.$emit('update-finish', this.finish1, this.finish2);
+                this.$emit('update-pearl', this.pearl);
+            });
+        },
     },
 });
 </script>

@@ -5,6 +5,7 @@ import ViewModel from '../../client/models/viewModel';
 import { CinematicCam } from '../../client/utility/cinematic';
 import { isAnyMenuOpen } from '../../client/utility/menus';
 import { Paintshop_View_Events } from '../../shared-plugins/core-paintshop/events';
+import { iPaintshopSync } from '../../shared-plugins/core-paintshop/interfaces';
 import { Vector3 } from '../../shared/interfaces/vector';
 
 interface RGB {
@@ -13,21 +14,20 @@ interface RGB {
     b: number;
 }
 
-let serverColor1: RGB;
-let serverColor2: RGB;
+let syncData: iPaintshopSync;
 
 // You should change this to match your Vue Template's ComponentName.
 const PAGE_NAME = 'PaintShop';
 
 class InternalFunctions implements ViewModel {
-    static async open(_serverColor1: RGB, _serverColor2: RGB) {
+    static async open(_syncData: iPaintshopSync) {
         // Check if any other menu is open before opening this.
         if (isAnyMenuOpen()) {
             return;
         }
 
-        serverColor1 = _serverColor1;
-        serverColor2 = _serverColor2;
+        // Data to sync in the interface
+        syncData = _syncData;
 
         // Must always be called first if you want to hide HUD.
         await WebViewController.setOverlaysVisible(false);
@@ -114,19 +114,19 @@ class InternalFunctions implements ViewModel {
      */
     static async ready() {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:CustomColours`, serverColor1, serverColor2);
+        view.emit(`${PAGE_NAME}:Ready`, syncData);
     }
 
     static async purchase(
-        primary: RGB | number,
-        secondary: RGB | number,
+        color1: RGB | number,
+        color2: RGB | number,
         isCustom = false,
         finish1: number,
         finish2: number,
         pearl: number,
     ) {
-        InternalFunctions.update(primary, secondary, isCustom, finish1, finish2, pearl);
-        alt.emitServer(Paintshop_View_Events.PURCHASE, primary, secondary, finish1, finish2, pearl);
+        InternalFunctions.update(color1, color2, isCustom, finish1, finish2, pearl);
+        alt.emitServer(Paintshop_View_Events.PURCHASE, color1, color2, finish1, finish2, pearl);
         InternalFunctions.close();
     }
 

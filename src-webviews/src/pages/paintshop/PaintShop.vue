@@ -25,8 +25,7 @@
                     class="fade-in"
                     :key="pageIndex"
                     v-bind:locale="locale"
-                    v-bind:color1="initialColor1"
-                    v-bind:color2="initialColor2"
+                    v-bind:data="data"
                     @set-colour="setColour"
                     @update-finish="updateFinish"
                     @update-pearl="updatePearl"
@@ -49,6 +48,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { iPaintshopSync } from '../../../../src/core/shared-plugins/core-paintshop/interfaces';
 import { PAINTSHOP_LOCALE } from '../../../../src/core/shared-plugins/core-paintshop/locales';
 import Button from '../../components/Button.vue';
 import Frame from '../../components/Frame.vue';
@@ -81,23 +81,32 @@ export default defineComponent({
             finish2: 12,
             color1: { r: 255, g: 255, b: 255 },
             color2: { r: 255, g: 255, b: 255 },
-            initialColor1: { r: 255, g: 255, b: 255 },
-            initialColor2: { r: 255, g: 255, b: 255 },
             pageIndex: 1,
             pages: ['Presets', 'CustomColor'],
             locale: PAINTSHOP_LOCALE,
+            data: {
+                color: { r: 255, g: 255, b: 255 },
+                color2: { r: 255, g: 255, b: 255 },
+                finish1: 12,
+                finish2: 12,
+                pearl: 0,
+            },
         };
     },
     mounted() {
         if ('alt' in window) {
-            alt.on(`${ComponentName}:CustomColours`, this.customColorReady);
+            alt.on(`${ComponentName}:Ready`, this.syncData);
             alt.emit(`${ComponentName}:Ready`);
         }
     },
+    unmounted() {
+        if ('alt' in window) {
+            alt.off(`${ComponentName}:Ready`, this.syncData);
+        }
+    },
     methods: {
-        customColorReady(primary: { r: number; g: number; b: number }, secondary: { r: number; g: number; b: number }) {
-            this.initialColor1 = primary;
-            this.initialColor2 = secondary;
+        syncData(syncData: iPaintshopSync) {
+            this.data = syncData;
         },
         setColour(value: number | { r: number; g: number; b: number; a: number }, isPrimary = true) {
             if (isPrimary) {

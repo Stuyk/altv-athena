@@ -9,6 +9,8 @@ import { RGBA } from 'alt-shared';
 import { VehicleEvents } from '../../../server/events/vehicleEvents';
 import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
 import { Paintshop_View_Events } from '../../../shared-plugins/core-paintshop/events';
+import { iPaintshopSync } from '../../../shared-plugins/core-paintshop/interfaces';
+import { VEHICLE_COLOR_PAINTS } from '../../../shared-plugins/core-paintshop/paints';
 
 interface IPaintShop {
     uid: string;
@@ -244,13 +246,30 @@ export class PaintShopView {
             return;
         }
 
-        const customColor1 =
-            typeof player.vehicle.data.color === 'object' ? player.vehicle.data.color : { r: 255, g: 255, b: 255 };
+        const syncData: iPaintshopSync = {
+            color:
+                typeof player.vehicle.data.color === 'object' //
+                    ? player.vehicle.data.color
+                    : { r: 255, g: 255, b: 255 },
+            color2:
+                typeof player.vehicle.data.color2 === 'object' //
+                    ? player.vehicle.data.color2
+                    : { r: 255, g: 255, b: 255 },
+            finish1:
+                typeof player.vehicle.data.finish1 === 'number' //
+                    ? player.vehicle.data.finish1
+                    : VEHICLE_COLOR_PAINTS.MATTE,
+            finish2:
+                typeof player.vehicle.data.finish2 === 'number' //
+                    ? player.vehicle.data.finish2
+                    : VEHICLE_COLOR_PAINTS.MATTE,
+            pearl:
+                typeof player.vehicle.data.pearl === 'number' //
+                    ? player.vehicle.data.pearl
+                    : 0,
+        };
 
-        const customColor2 =
-            typeof player.vehicle.data.color2 === 'object' ? player.vehicle.data.color2 : { r: 255, g: 255, b: 255 };
-
-        alt.emitClient(player, Paintshop_View_Events.OPEN, customColor1, customColor2);
+        alt.emitClient(player, Paintshop_View_Events.OPEN, syncData);
     }
 
     static purchase(
@@ -299,8 +318,7 @@ export class PaintShopView {
             whatToUpdate['pearl'] = pearl;
         }
 
-
-        Object.keys(whatToUpdate).forEach(key => {
+        Object.keys(whatToUpdate).forEach((key) => {
             player.vehicle.data[key] = whatToUpdate[key];
         });
 
