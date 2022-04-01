@@ -62,7 +62,7 @@ class InternalFunctions {
 
     static previewPaint(
         player: alt.Player,
-        color1: number | RGBA,
+        color: number | RGBA,
         color2: number | RGBA,
         finish1: number,
         finish2: number,
@@ -76,14 +76,14 @@ class InternalFunctions {
             return;
         }
 
-        if (typeof color1 === 'number') {
-            player.vehicle.primaryColor = color1 as number;
+        if (typeof color === 'number') {
+            player.vehicle.primaryColor = color as number;
             player.vehicle.secondaryColor = color2 as number;
         } else {
             player.vehicle.primaryColor = finish1;
             player.vehicle.secondaryColor = finish2;
 
-            player.vehicle.customPrimaryColor = color1 as RGBA;
+            player.vehicle.customPrimaryColor = color as RGBA;
             player.vehicle.customSecondaryColor = color2 as RGBA;
 
             if (pearl >= 0) {
@@ -274,7 +274,7 @@ export class PaintShopView {
 
     static purchase(
         player: alt.Player,
-        color1: RGB | number,
+        color: RGB | number,
         color2: RGB | number,
         finish1: number,
         finish2: number,
@@ -298,8 +298,8 @@ export class PaintShopView {
 
         let whatToUpdate = {};
 
-        if (color1 !== undefined && color1 !== null) {
-            whatToUpdate['color1'] = color1;
+        if (color !== undefined && color !== null) {
+            whatToUpdate['color'] = color;
         }
 
         if (color2 !== undefined && color2 !== null) {
