@@ -329,4 +329,12 @@ export interface Faction extends FactionCore {
      * @memberof Faction
      */
     storages?: Array<FactionStorage>;
+
+    /**
+     * Message of the Day
+     *
+     * @type {string}
+     * @memberof Faction
+     */
+    motd?: string;
 }
