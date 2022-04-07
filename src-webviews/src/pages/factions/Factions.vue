@@ -4,13 +4,14 @@
             <div class="factions-nav">
                 <Navigation v-bind:pages="pages" v-bind:page="pageIndex" @navigate="setPage" />
             </div>
-            <div class="factions-content stack">
+            <div class="factions-content stack" v-if="faction">
                 <Header v-bind:faction="faction" />
                 <component
                     :is="pages[pageIndex].page"
                     class="fade-in"
                     :key="pageIndex"
                     v-bind:faction="faction"
+                    v-bind:character="character"
                 ></component>
             </div>
         </div>
@@ -23,6 +24,7 @@ import Icon from '../../components/Icon.vue';
 import Button from '../../components/Button.vue';
 import Navigation from './components/Navigation.vue';
 import Header from './components/Header.vue';
+import { ExampleFactionData } from './utility/exampleFactionData';
 import { FactionPages } from './pages/exports';
 
 export const ComponentName = 'Factions';
@@ -49,10 +51,8 @@ export default defineComponent({
                 { name: 'Actions', page: 'Actions' },
                 { name: 'Settings', page: 'Settings' },
             ],
-            faction: {
-                name: 'Los Santos Police Department',
-                motd: '',
-            },
+            faction: null,
+            character: '51a8efe590851930ac59f5eg', // 51a8efe590851930ac59f5cc - 0 Rank
         };
     },
     methods: {
@@ -65,6 +65,8 @@ export default defineComponent({
 
         if ('alt' in window) {
             alt.emit(`${ComponentName}:Ready`);
+        } else {
+            this.faction = ExampleFactionData;
         }
     },
     unmounted() {

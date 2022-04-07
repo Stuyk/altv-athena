@@ -2,6 +2,16 @@ import { Vector3 } from '../../shared/interfaces/vector';
 
 type _id = string;
 
+export const RankPermissionNames = {
+    bankAdd: 'bankAdd',
+    bankRemove: 'bankRemove',
+    manageRanks: 'manageRanks',
+    manageRankPermissions: 'manageRankPermissions',
+    manageMembers: 'manageMembers',
+    kickMembers: 'kickMembers',
+    addMembers: 'addMembers',
+};
+
 /**
  * Permissions that belong to an individual rank.
  * @export

@@ -102,6 +102,12 @@ export class PaintShopView {
         VehicleEvents.on(ATHENA_EVENTS_VEHICLE.SPAWNED, InternalFunctions.updatePaint);
     }
 
+    /**
+     * Update the vehicle's paintjob and remove the player from the inShop array.
+     * Restores the previous paint job that was applied to the vehicle.
+     * @param player - alt.Player - The player who is opening the paint shop.
+     * @returns Nothing.
+     */
     static close(player: alt.Player) {
         if (!player.vehicle) {
             return;
@@ -151,6 +157,13 @@ export class PaintShopView {
         return shop.uid;
     }
 
+    /**
+     * When the player enters the polygon, they will be able to open the paint shop.
+     * This function is triggered when a player has entered the PolygonShape.
+     * @param {PolygonShape} polygon - PolygonShape
+     * @param player - alt.Player
+     * @returns Nothing.
+     */
     static enter(polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
@@ -167,7 +180,6 @@ export class PaintShopView {
 
         inShop[player.id] = true;
 
-        // playerFuncs.emit.createShard(player, { title: 'Paint Shop', text: 'Paint Your Vehicle', duration: 1500 });
         playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
         playerFuncs.emit.interactionAdd(player, {
             keyPress: 'E',
@@ -177,6 +189,13 @@ export class PaintShopView {
         playerFuncs.emit.interactionTemporary(player, Paintshop_View_Events.OPEN);
     }
 
+    /**
+     * When a player leaves the shop, the shop will be removed from the player's interaction list.
+     * Removes all temporary interactions that were created in the PolygonShape.
+     * @param {PolygonShape} polygon - The polygon that the player is leaving.
+     * @param player - alt.Player - The player that is leaving the shop.
+     * @returns Nothing.
+     */
     static leave(polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
@@ -188,6 +207,11 @@ export class PaintShopView {
         playerFuncs.emit.interactionTemporary(player, null);
     }
 
+    /**
+     * Opens the paint shop for the player
+     * @param player - alt.Player
+     * @returns The `alt.emitClient` function returns a `Promise` object.
+     */
     static open(player: alt.Player) {
         if (!player.vehicle || player.vehicle.driver !== player) {
             return;
@@ -231,6 +255,17 @@ export class PaintShopView {
         alt.emitClient(player, Paintshop_View_Events.OPEN, syncData);
     }
 
+    /**
+     * It takes in a player, the color, color2, finish1, finish2, and pearl and updates the vehicle's
+     * color, color2, finish1, finish2, and pearl
+     * @param player - alt.Player - The player who is purchasing the vehicle.
+     * @param {RGB | number} color - The primary color of the vehicle.
+     * @param {RGB | number} color2 - The second color of the vehicle.
+     * @param {number} finish1 - number
+     * @param {number} finish2 - number
+     * @param {number} pearl - number
+     * @returns Nothing.
+     */
     static purchase(
         player: alt.Player,
         color: RGB | number,
