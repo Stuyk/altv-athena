@@ -175,7 +175,7 @@ export class FuelStationSystem {
         data.vehicle.isRefueling = true;
         playerFuncs.emit.createProgressBar(player, {
             uid: `FUEL-${player.data._id.toString()}`,
-            color: { r: 255, g: 0, b: 0, a: 200 },
+            color: new alt.RGBA(255, 255, 255, 255),
             distance: 15,
             milliseconds: 10000,
             position: data.vehicle.pos,

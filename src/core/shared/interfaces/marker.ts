@@ -1,3 +1,4 @@
+import * as alt from 'alt-shared';
 import { MARKER_TYPE } from '../enums/markerTypes';
 import { Vector3 } from './vector';
 
@@ -18,10 +19,10 @@ export interface Marker {
 
     /**
      * The color of the marker. All values are 0 - 255.
-     * @type {{ r: number; g: number; b: number; a: number }}
+     * @type { alt.RGBA }
      * @memberof Marker
      */
-    color: { r: number; g: number; b: number; a: number };
+    color: alt.RGBA;
 
     /**
      * The scale of this marker.
