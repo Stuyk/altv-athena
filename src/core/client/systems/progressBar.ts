@@ -46,20 +46,10 @@ function drawBars() {
         const percentageText = (percentage * 100).toFixed(2);
         if (bar.percentageEnabled) {
             const actualText = bar.text ? `${bar.text} (${percentageText}%)` : `${percentageText}%`;
-            drawText3D(actualText, bar.position, 0.35, {
-                r: 255,
-                g: 255,
-                b: 255,
-                a: 255,
-            });
+            drawText3D(actualText, bar.position, 0.35, new alt.RGBA(255, 255, 255, 255));
         } else {
             const actualText = bar.text ? `${bar.text}` : `${bar.text}`;
-            drawText3D(actualText, bar.position, 0.35, {
-                r: 255,
-                g: 255,
-                b: 255,
-                a: 255,
-            });
+            drawText3D(actualText, bar.position, 0.35, new alt.RGBA(255, 255, 255, 255));
         }
     }
 }

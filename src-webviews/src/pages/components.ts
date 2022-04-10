@@ -18,7 +18,7 @@ import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
 import PaintShop from './paintshop/PaintShop.vue';
 import AthenaLogo from './athenaLogo/AthenaLogo.vue';
-// import Factions from './factions/Factions.vue';
+import Factions from './factions/Factions.vue';
 
 // Append components here...
 // All components that you want to load...
@@ -33,7 +33,7 @@ const componentList = {
     Chat: shallowRef(Chat),
     Clothing: shallowRef(Clothing),
     Designs: shallowRef(Designs),
-    // Factions: shallowRef(Factions),
+    Factions: shallowRef(Factions),
     Garage: shallowRef(Garage),
     Hud: shallowRef(Hud),
     Icons: shallowRef(Icons),

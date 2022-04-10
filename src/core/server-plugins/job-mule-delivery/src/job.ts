@@ -185,8 +185,8 @@ export class MuleJob {
             'mule',
             openSpot.pos,
             openSpot.rot,
-            { r: 255, g: 255, b: 255, a: 255 },
-            { r: 255, g: 255, b: 255, a: 255 },
+            new alt.RGBA(255, 255, 255, 255),
+            new alt.RGBA(255, 255, 255, 255),
         );
 
         job.loadObjectives(objectives);

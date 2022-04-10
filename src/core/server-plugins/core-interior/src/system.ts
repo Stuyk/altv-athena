@@ -1192,7 +1192,9 @@ export class InteriorSystem {
     }
 }
 
-alt.on('playerDisconnect', InternalSystem.removePlayer);
+alt.on('playerDisconnect', (player: alt.Player, reason: string) => {
+    InternalSystem.removePlayer(player);
+});
 
 alt.onClient(INTERIOR_INTERACTIONS.SET_NAME, InternalSystem.setName);
 alt.onClient(INTERIOR_INTERACTIONS.SET_PRICE, InternalSystem.setPrice);

@@ -75,6 +75,10 @@ export class FactionHandler {
             return { status: false, response: `Could not find a character with identifier: ${characterOwnerID}` };
         }
 
+        if (character.faction) {
+            return { status: false, response: `Character is already in a faction.` };
+        }
+
         const defaultRanks = deepCloneObject<Array<FactionRank>>(DefaultRanks);
         for (let i = 0; i < defaultRanks.length; i++) {
             defaultRanks[i].uid = sha256Random(JSON.stringify(defaultRanks[i]));
