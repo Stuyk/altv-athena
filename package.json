@@ -84,7 +84,7 @@
         "discord.js": "12.5.3",
         "elliptic": "6.5.4",
         "jimp": "0.16.1",
-        "node-fetch": "3.0.0",
+        "node-fetch": "3.2.3",
         "ps-node": "0.1.6",
         "sjcl": "1.0.8",
         "sockjs": "0.3.21",
