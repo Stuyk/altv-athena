@@ -18,7 +18,7 @@ ChatController.addCommand(
 );
 
 function handleCommand(player: alt.Player): void {
-    const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping');
+    const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping') as boolean;
 
     if (!isNoClipping && !player.data.isDead) {
         player.setSyncedMeta('NoClipping', true);

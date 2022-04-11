@@ -128,7 +128,7 @@ let hudElements: Array<IHud> = [
             let fuel = 100;
 
             if (alt.Player.local.vehicle.hasSyncedMeta(VEHICLE_STATE.FUEL)) {
-                fuel = alt.Player.local.vehicle.getSyncedMeta(VEHICLE_STATE.FUEL);
+                fuel = alt.Player.local.vehicle.getSyncedMeta(VEHICLE_STATE.FUEL) as number;
             }
 
             // Speedometer

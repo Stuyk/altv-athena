@@ -182,7 +182,7 @@ class InternalFunctions implements ViewModel {
         let fuel = 100;
 
         if (alt.Player.local.vehicle.hasSyncedMeta(VEHICLE_STATE.FUEL)) {
-            fuel = alt.Player.local.vehicle.getSyncedMeta(VEHICLE_STATE.FUEL);
+            fuel = alt.Player.local.vehicle.getSyncedMeta(VEHICLE_STATE.FUEL) as number;
         }
 
         InternalFunctions.passComponentInfo(propName, parseInt(fuel.toFixed(0)));

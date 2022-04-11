@@ -41,7 +41,7 @@ function handleMenu() {
         return;
     }
 
-    const targetName = target.getSyncedMeta(PLAYER_SYNCED_META.NAME);
+    const targetName = target.getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
     WheelMenu.create(
         targetName,
         [
