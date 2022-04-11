@@ -91,7 +91,7 @@ class ClientNametags {
             }
 
             let accountIdentifier = player.getSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID);
-            let name = player.getSyncedMeta(PLAYER_SYNCED_META.NAME);
+            let name = player.getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
 
             if (!name || name === null || name === undefined) {
                 continue;
