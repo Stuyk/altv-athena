@@ -254,6 +254,9 @@ export default defineComponent({
                 this.data.facialHairColor1 = 0;
             }
 
+            this.$emit('set-infodata', 'gender', this.gender);
+            this.$emit('set-infodata', 'age', `${this.day}-${this.month}-${this.year}`);
+
             if (!('alt' in window)) {
                 return;
             }
