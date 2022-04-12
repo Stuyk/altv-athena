@@ -133,7 +133,7 @@ export class GarageFunctions {
                 );
 
                 if (!existingVehicle) {
-                    return false;
+                    return true;
                 }
 
                 // The vehicle exists and may or may not be in a parking space
