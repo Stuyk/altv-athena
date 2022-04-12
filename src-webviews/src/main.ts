@@ -1,4 +1,14 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import { App, createApp } from 'vue';
+import ActualApp from './App.vue';
 
-createApp(App).mount('#app');
+const MOUNT_DIV_ID = '#app';
+let app: App<Element>;
+
+export class ComponentRegistration {
+    static init() {
+        app = createApp(ActualApp);
+        app.mount(MOUNT_DIV_ID);
+    }
+}
+
+ComponentRegistration.init();

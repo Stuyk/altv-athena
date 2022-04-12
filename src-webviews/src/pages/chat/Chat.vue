@@ -126,7 +126,18 @@ export default defineComponent({
          * [85, 86, 87, 88, 89... etc]
          */
         setMessages(messages: string, commands: string, history: string) {
-            let _messages = JSON.parse(messages);
+            if (!messages) {
+                return;
+            }
+
+            let _messages;
+            try {
+                _messages = JSON.parse(messages);
+            } catch (err) {
+                console.log(err);
+                return;
+            }
+
             let splitMessages = [];
 
             for (let i = 0; i < _messages.length; i++) {
@@ -433,7 +444,7 @@ export default defineComponent({
             alt.on(`${ComponentName}:UnfocusedKeyBind`, this.unfocusedPress);
             alt.emit(`${ComponentName}:Ready`);
         } else {
-            this.setMessages(JSON.stringify(defaultMessages()), JSON.stringify(defaultCommands()));
+            this.setMessages(JSON.stringify(defaultMessages()), JSON.stringify(defaultCommands()), JSON.stringify([]));
             this.handleShowInput();
         }
     },

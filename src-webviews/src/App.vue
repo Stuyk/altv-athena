@@ -70,29 +70,44 @@ This is if you want to design out-of-game and just work on some design.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { PLUGIN_IMPORTS } from '../../src/core/plugins/athena/webview/imports';
 import DefaultPage from './defaultPage';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
-import components from './pages/components';
+import { CORE_IMPORTS } from './pages/components';
+// import components from './pages/components';
 
-// Main Component
+const ALL_THE_COMPONENTS = {
+    ...PLUGIN_IMPORTS,
+    ...CORE_IMPORTS,
+};
+
+function componentsToArray() {
+    let componentList = [];
+    Object.keys(ALL_THE_COMPONENTS).forEach((key) => {
+        componentList.push({ name: key, component: ALL_THE_COMPONENTS[key] });
+    });
+
+    return componentList;
+}
+
 export default defineComponent({
     name: 'App',
     components: {
-        ...components.componentList,
+        ...ALL_THE_COMPONENTS,
     },
     data() {
         return {
             isClosingPage: false,
             pages: [] as Array<IPageData>,
-            pageBindings: [...components.generateComponentList()],
+            pageBindings: componentsToArray(),
             devMode: false,
         };
     },
     computed: {
         getAllPageNames() {
-            return Object.keys(components.componentList);
+            return Object.keys(ALL_THE_COMPONENTS);
         },
     },
     // Define functions for the main controller.

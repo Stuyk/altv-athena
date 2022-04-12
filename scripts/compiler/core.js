@@ -5,15 +5,19 @@ import path from 'path';
 
 const VERSION_REQUIRED = 16;
 const FILES_TO_COMPILE = [
-    //
-    'src/**/*.ts',
-    'scripts/streamer/src/**/*.ts',
+    'src/**/*.ts', // Compile all typescript files
+    'scripts/streamer/src/**/*.ts', // Compile streamer
 ];
 
 const FILES_TO_COPY = [
     // Anything but .ts
-    'src/**/*.!(ts|md)',
+    'src/**/*.!(ts|md|vue)',
 ];
+
+const FOLDERS_TO_IGNORE = [
+    '\/webview\/',
+    '\\webview\\'
+]
 
 const FOLDERS_TO_CLEAN = [
     //
@@ -55,6 +59,23 @@ async function getFiles() {
 
             files = files.concat(filesFound);
         }
+
+        files = files.filter(x => {
+            let isIgnored = false;
+
+            for (let i = 0; i < FOLDERS_TO_IGNORE.length; i++) {
+                if (x.includes(FOLDERS_TO_IGNORE[i])) {
+                    isIgnored = true;
+                    break;
+                }
+            }
+
+            if (isIgnored) {
+                return false;
+            }
+
+            return true
+        })
 
         resolve(files);
     });

@@ -1,5 +1,6 @@
 // Client Plugins
-import '../client-plugins/imports';
+import '../plugins/athena/client/imports';
+
 // Events
 import './events/connectionComplete';
 import './events/disconnect';
