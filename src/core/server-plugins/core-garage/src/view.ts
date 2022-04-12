@@ -89,9 +89,33 @@ export class GarageFunctions {
         activeGarages.push(garage);
     }
 
+    /**
+     * 1. Obtain the current garage the player is accessing.
+     * 2. Obtains all player vehicles from the database.
+     * 3. Filter the vehicles down by doing the following...
+     * 4. Verify the VehicleData has an entry for the vehicle model.
+     * 5. Grab the garage type and verify that this garage type can spawn this vehicle.
+     * 6. If the vehicle has never been spawned before it has {x: 0, y: 0, and z: 0 }
+     *      6a. Meaning that the vehicle can be spawned ANYWHERE
+     * 7. If the vehicle is not spawned and has no garage index.
+     *      7a. Spawn the vehicle from any garage of the same type.
+     * 8. If a garageIndex is not defined, look at currently spawned vehicles.
+     *      8a. If a currently spawned vehicle does not match the vehicle we are looking for
+     *      8b. Do not add to garage spawns
+     *      8c. If the vehicle is close enough to a parking spot. Add to the vehicle list.
+     *      8d. If the vehicle is too far away from parking spot we do not add the vehicle to the list.
+     * 9. Push vehicle list to client.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {(number | string)} shopIndex
+     * @return {*}
+     * @memberof GarageFunctions
+     */
     static async open(player: alt.Player, shopIndex: number | string) {
         GarageUsers[player.id] = shopIndex;
 
+        // 1
         const index = activeGarages.findIndex((garage) => garage.index === shopIndex);
         if (index <= -1) {
             return;
@@ -99,43 +123,45 @@ export class GarageFunctions {
 
         const garage = activeGarages[index];
         const garageType = activeGarages[index].type;
+
+        // 2
         let playerVehicles = await playerFuncs.get.allVehicles(player);
 
-        if (player.data && player.data.faction) {
-            const factionVehicles = await FactionInternalSystem.getAllVehicles(player.data.faction);
-            if (factionVehicles.length >= 1) {
-                playerVehicles = playerVehicles.concat(factionVehicles);
-            }
-        }
-
+        // 3
         const validVehicles = playerVehicles.filter((vehicle) => {
+            // 4
             // Check if the VehicleData has this vehicle model.
             const data = VehicleData.find((dat) => dat.name === vehicle.model);
             if (!data) {
                 return false;
             }
 
+            // 5
             // Filter Vehicles by Type
             if (!isVehicleType(data.type, garageType)) {
                 return false;
             }
 
+            // 6
             // Unspawned / New Vehicle - Can Spawn Anywhere
             if (vehicle.position.x === 0 && vehicle.position.y === 0 && vehicle.position.z === 0) {
                 return true;
             }
 
-            // Check if Vehicle Type is null or undefined.
-            // Basically means does this vehicle have a garage yet?
-            if (vehicle.garageIndex === null || vehicle.garageIndex === undefined) {
-                const existingVehicle = alt.Vehicle.all.find(
-                    (x) => x.data && x.data._id.toString() === vehicle._id.toString(),
-                );
+            // 7
+            const existingVehicle = alt.Vehicle.all.find(
+                (x) => x.data && x.data._id.toString() === vehicle._id.toString(),
+            );
 
-                if (!existingVehicle) {
-                    return false;
-                }
+            // 7
+            // Return true because it has nowhere to go, it is not spawned, and has no garage. Allow spawning it.
+            if (!existingVehicle && (vehicle.garageIndex === null || vehicle.garageIndex === undefined)) {
+                return true;
+            }
 
+            // 8
+            // It's an existing vehicle and is spawned but has no garage.
+            if (existingVehicle && (vehicle.garageIndex === null || vehicle.garageIndex === undefined)) {
                 // The vehicle exists and may or may not be in a parking space
                 // Need to check if the vehicle is close enough to a parking space.
                 for (let i = 0; i < garage.parking.length; i++) {
@@ -171,6 +197,7 @@ export class GarageFunctions {
             return;
         }
 
+        // 9
         alt.emitClient(player, GARAGE_INTERACTIONS.OPEN, validVehicles);
     }
 

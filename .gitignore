@@ -30,3 +30,7 @@ doc
 typedoc.json
 !scripts/streamer/dist
 package-lock.json
+
+# Yarn stuff
+.yarn/
+yarn.lock

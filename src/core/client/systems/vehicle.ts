@@ -115,6 +115,10 @@ export class VehicleController {
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
     }
 
+    static removeSeatBelt(vehicle: alt.Vehicle) {
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, false);
+    }
+
     /**
      * If the player is dead, or if the player is trying to enter a locked vehicle, or if the player
      * is trying to push a vehicle, then disable the F key.
@@ -168,3 +172,4 @@ alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
 alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
 alt.on('enteredVehicle', VehicleController.enterVehicle);
+alt.on('leftVehicle', VehicleController.removeSeatBelt);
