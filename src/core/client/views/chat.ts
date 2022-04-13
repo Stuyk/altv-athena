@@ -7,7 +7,6 @@ import { Command } from '../../shared/interfaces/command';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/viewModel';
 import { disableAllControls } from '../utility/disableControls';
-import { handleFreezePlayer } from '../utility/freeze';
 
 const PAGE_NAME = 'Chat';
 let messages: Array<IMessage> = [];
@@ -64,7 +63,7 @@ class InternalFunctions implements ViewModel {
                 native.doScreenFadeIn(2000);
             }
 
-            handleFreezePlayer(false);
+            native.freezeEntityPosition(alt.Player.local.scriptID, false);
         }, 1000);
     }
 
