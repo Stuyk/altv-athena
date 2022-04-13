@@ -77,18 +77,18 @@ class InternalFunctions {
                 const vectorPos = textDraw.position as Vector3;
 
                 screenPosition = alt.worldToScreen(vectorPos.x, vectorPos.y, vectorPos.z);
-                const isOnScreen = native.isSphereVisible(vectorPos.x, vectorPos.y, vectorPos.z, 0.0099999998);
+                // const isOnScreen = native.isSphereVisible(vectorPos.x, vectorPos.y, vectorPos.z, 0.0099999998);
 
-                // Check if on-screen
-                if (!isOnScreen) {
-                    if (!textDraw.element.hasClass('hide')) {
-                        textDraw.element.addClass('hide');
-                    }
-                } else {
-                    if (textDraw.element.hasClass('hide')) {
-                        textDraw.element.removeClass('hide');
-                    }
-                }
+                // // Check if on-screen
+                // if (!isOnScreen) {
+                //     if (!textDraw.element.hasClass('hide')) {
+                //         textDraw.element.addClass('hide');
+                //     }
+                // } else {
+                //     if (textDraw.element.hasClass('hide')) {
+                //         textDraw.element.removeClass('hide');
+                //     }
+                // }
 
                 // const [onScreen, _x, _y] = native.getScreenCoordFromWorldCoord()
 
@@ -188,7 +188,7 @@ alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
             if (!vehicle || !vehicle.valid) {
                 return;
             }
-            let isOnScreen = native.isSphereVisible(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z, 0.0099999998);
+            let isOnScreen = true; //native.isSphereVisible(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z, 0.0099999998);
             const dist = distance2d(vehicle.pos, alt.Player.local.pos);
             if (dist > 25) {
                 isOnScreen = false;
