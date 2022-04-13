@@ -136,6 +136,10 @@ class InternalSystem {
         const id = player.id;
         const data = player.data;
 
+        if (!data) {
+            return;
+        }
+
         interior = data.interior ? interiors.get(data.interior) : interior;
         if (!interior) {
             return;
