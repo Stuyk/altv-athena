@@ -40,9 +40,7 @@
 		"plugins/job-mule-delivery/client/*",
 		"plugins/job-pizza-delivery/client/*"
 	],
-	"deps": [
-		"webview"
-	],
+	"deps": [],
 	"required-permissions": [
 		"Screen Capture"
 	]
