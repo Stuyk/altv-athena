@@ -15,7 +15,7 @@
         "build-core": "node ./scripts/compiler/core",
         "kill-port": "node ./scripts/killport/index",
         "update": "npx altv-pkg d release",
-        "check": "tsc",
+        "check": "tsc -p ./src/tsconfig.json",
         "[-] Binary Running Commands": "",
         "windows-server": "npm run cfg-prod && npm run cfg-resource && altv-server.exe",
         "linux-server": "npm run cfg-prod && npm run cfg-resource && ./start.sh",
