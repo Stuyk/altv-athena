@@ -118,8 +118,8 @@ async function firstConnect(player: alt.Player): Promise<void> {
  * @param {boolean} value
  * @memberof SetPrototype
  */
-function frozen(p: alt.Player, value: boolean): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_SET_FREEZE, value);
+function frozen(player: alt.Player, value: boolean): void {
+    player.setSyncedMeta(PLAYER_SYNCED_META.IS_FROZEN, value);
 }
 
 /**

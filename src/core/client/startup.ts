@@ -48,6 +48,7 @@ import './systems/progressBar';
 import './systems/quickToken';
 import './systems/scenarios';
 import './systems/sound';
+import './systems/syncedMeta';
 import './systems/tasks';
 import './systems/tick';
 import './systems/toolbar';

@@ -8,4 +8,5 @@ export enum PLAYER_SYNCED_META {
     DATABASE_ID = 'player-character-id',
     ATTACHABLES = 'player-attachable-list',
     ACCOUNT_ID = 'player-account-id',
+    IS_FROZEN = 'player-is-frozen',
 }
