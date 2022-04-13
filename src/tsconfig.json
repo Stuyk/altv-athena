@@ -10,5 +10,5 @@
         "composite": false,
         "forceConsistentCasingInFileNames": true
     },
-    "exclude": ["./core/plugins/**/webview/**/*.ts"]
+    "exclude": ["./core/plugins/**/webview/**/*.ts", "./core/plugins/**/webview/**/*.vue"]
 }

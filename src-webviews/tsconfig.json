@@ -9,12 +9,20 @@
         "lib": ["esnext", "dom"],
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
-            "@utility/*": ["src/utility/*"],
-            "@components/*": ["src/components/*"]
+            "@/*": ["./src/src/*"],
+            "@utility/*": ["./src/utility/*"],
+            "@components/*": ["./src/components/*"],
+            "@plugins/*": ["./src/core/plugins/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "../src/core/plugins/**/webview/**.ts",
+        "../src/core/plugins/**/webview/**.vue"
+    ],
     "exclude": [
         "../src/core/server/**",
         "../src/core/client/**",

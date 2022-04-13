@@ -1,23 +1,21 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
     base: './',
     build: {
-        outDir: '../resources/webviews',
+        outDir: './resources/webviews',
         emptyOutDir: true,
     },
     resolve: {
         alias: [
-            { find: '@', replacement: '/src' },
-            { find: '@components', replacement: '/src/components' },
-            { find: '@utility', replacement: '/src/utility' },
-            // '/@/': path.resolve(__dirname, './src'),
-            // '/@plugins/': path.resolve(__dirname, '..', './src/core/plugins'),
-            // '/@components/': path.resolve(__dirname, './src/components'),
+            { find: '@', replacement: path.resolve(__dirname, './src') },
+            { find: '@components', replacement: path.resolve(__dirname, './src/components') },
+            { find: '@utility', replacement: path.resolve(__dirname, './src/utility') },
+            { find: '@plugins', replacement: path.resolve(__dirname, '../src/core/plugins') },
         ],
     },
 });
