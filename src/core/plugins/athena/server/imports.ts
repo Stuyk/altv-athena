@@ -1,3 +1,4 @@
+import { PluginSystem } from '../../../server/systems/plugins';
 import '../../example-agenda/server/index';
 import '../../core-atm/server/index';
 import '../../core-clothing/server/index';
@@ -30,6 +31,5 @@ import '../../core-console-cmds/server/index';
 // ---------------------------------
 // Place Imports Above
 // Always Load this Last
-import { PluginSystem } from '../../../server/systems/plugins';
 
 PluginSystem.init();

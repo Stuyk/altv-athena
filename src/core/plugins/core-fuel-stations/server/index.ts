@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
-import { FuelStationSystem } from './src/core';
+import { FuelStationSystem } from './src/fuelStation';
 
 const PLUGIN_NAME = 'Athena Fuel Stations';
 

@@ -184,28 +184,28 @@ alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
         //     `player-${alt.Player.local.id}`,
         //     new alt.Vector3(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z + 1),
         // );
-        // alt.Vehicle.all.forEach((vehicle) => {
-        //     if (!vehicle || !vehicle.valid) {
-        //         return;
-        //     }
-        //     let isOnScreen = native.isSphereVisible(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z, 0.0099999998);
-        //     const dist = distance2d(vehicle.pos, alt.Player.local.pos);
-        //     if (dist > 25) {
-        //         isOnScreen = false;
-        //     }
-        //     if (!isOnScreen) {
-        //         if (ScreenText.hasText(`vehicle-${vehicle.id}`)) {
-        //             ScreenText.removeText(`vehicle-${vehicle.id}`);
-        //         }
-        //         return;
-        //     }
-        //     if (!ScreenText.hasText(`vehicle-${vehicle.id}`)) {
-        //         ScreenText.addText(`(${vehicle.id})`, vehicle.pos, `vehicle-${vehicle.id}`);
-        //     }
-        //     ScreenText.updateText(
-        //         `vehicle-${vehicle.id}`,
-        //         new alt.Vector3(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z),
-        //     );
-        // });
+        alt.Vehicle.all.forEach((vehicle) => {
+            if (!vehicle || !vehicle.valid) {
+                return;
+            }
+            let isOnScreen = native.isSphereVisible(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z, 0.0099999998);
+            const dist = distance2d(vehicle.pos, alt.Player.local.pos);
+            if (dist > 25) {
+                isOnScreen = false;
+            }
+            if (!isOnScreen) {
+                if (ScreenText.hasText(`vehicle-${vehicle.id}`)) {
+                    ScreenText.removeText(`vehicle-${vehicle.id}`);
+                }
+                return;
+            }
+            if (!ScreenText.hasText(`vehicle-${vehicle.id}`)) {
+                ScreenText.addText(`(${vehicle.id})`, vehicle.pos, `vehicle-${vehicle.id}`);
+            }
+            ScreenText.updateText(
+                `vehicle-${vehicle.id}`,
+                new alt.Vector3(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z),
+            );
+        });
     });
 });
