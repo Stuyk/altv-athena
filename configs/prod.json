@@ -11,7 +11,7 @@
     "website": "athenaframework.com",
     "language": "en",
     "description": "Standard Production Configuration",
-    "debug": false,
+    "debug": true,
     "streamingDistance": 400,
     "migrationDistance": 150,
     "timeout": 1,

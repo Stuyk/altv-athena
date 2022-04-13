@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [vue()],
     base: './',
     build: {
-        outDir: './resources/webviews',
+        outDir: '../resources/webviews',
         emptyOutDir: true,
     },
     resolve: {
