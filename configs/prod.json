@@ -21,7 +21,6 @@
         "js-module"
     ],
     "resources": [
-        "webview",
         "webviews",
         "core"
     ],

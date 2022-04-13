@@ -5,7 +5,6 @@ import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
 import { ServerBlipController } from '../../../../server/systems/blip';
-import { FactionInternalSystem } from '../../../../server/systems/factionsInternal';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
 import { GARAGE_INTERACTIONS } from '../../shared/events';

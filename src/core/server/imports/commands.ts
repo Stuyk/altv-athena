@@ -6,7 +6,6 @@ import '../commands/adminChat';
 import '../commands/currency';
 import '../commands/death';
 import '../commands/debugVehicle';
-import '../commands/factions';
 import '../commands/garage';
 import '../commands/inventory';
 import '../commands/item';

@@ -22,7 +22,10 @@ import { distance, distance2d } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { UID } from '../utility/uid';
 
-const elements: { [uid: string]: { element: RmlElement; position: Vector2 | Vector3 } } = {};
+const elements: {
+    [uid: string]: { element: RmlElement; position: Vector2 | Vector3; nextCheck?: number; isOffScreen?: boolean };
+} = {};
+
 const fontsToLoad = [
     {
         path: '/client/rmlui/fonts/arialbd.ttf', // Only supports TTF
@@ -34,6 +37,7 @@ const fontsToLoad = [
 
 let document: alt.RmlDocument;
 let container: alt.RmlElement;
+let nextcheck = Date.now() + 2000;
 
 class InternalFunctions {
     static init() {
@@ -63,8 +67,6 @@ class InternalFunctions {
         });
 
         const camPos = alt.getCamPos();
-        const [_nothing, x, y] = native.getActiveScreenResolution();
-
         for (let i = 0; i < currentDraws.length; i++) {
             const textDraw = currentDraws[i];
             let screenPosition: Vector2;
@@ -75,14 +77,10 @@ class InternalFunctions {
                 const vectorPos = textDraw.position as Vector3;
 
                 screenPosition = alt.worldToScreen(vectorPos.x, vectorPos.y, vectorPos.z);
-                const [_onScreen, _nothingX, _nothingY] = native.getScreenCoordFromWorldCoord(
-                    vectorPos.x,
-                    vectorPos.y,
-                    vectorPos.z,
-                );
+                const isOnScreen = native.isSphereVisible(vectorPos.x, vectorPos.y, vectorPos.z, 0.0099999998);
 
                 // Check if on-screen
-                if (!_onScreen) {
+                if (!isOnScreen) {
                     if (!textDraw.element.hasClass('hide')) {
                         textDraw.element.addClass('hide');
                     }
@@ -96,12 +94,12 @@ class InternalFunctions {
 
                 const dist = distance(camPos, vectorPos);
                 let scale = 2 * dist;
-                if (scale > 25) {
-                    scale = 25;
+                if (scale > 20) {
+                    scale = 20;
                 }
 
-                if (scale < 8) {
-                    scale = 8;
+                if (scale < 12) {
+                    scale = 12;
                 }
 
                 fontSize = `${scale}dp`;
@@ -109,9 +107,12 @@ class InternalFunctions {
                 screenPosition = textDraw.position;
             }
 
-            textDraw.element.setProperty('left', `${screenPosition.x}px`);
+            const leftModification = textDraw.element.clientWidth / 2;
+
+            textDraw.element.setProperty('left', `${screenPosition.x - leftModification}px`);
             textDraw.element.setProperty('top', `${screenPosition.y}px`);
             textDraw.element.setProperty('font-size', fontSize);
+            textDraw.element.setProperty('text-shadow', '0px 1px 2px black');
         }
     }
 }
@@ -174,33 +175,42 @@ export class ScreenText {
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
-    // alt.log('starting...');
-    // alt.everyTick(() => {
-    //     if (!ScreenText.hasText(`player-${alt.Player.local.id}`)) {
-    //         ScreenText.addText(`${alt.Player.local.name}`, alt.Player.local.pos, `player-${alt.Player.local.id}`);
-    //     }
-    //     ScreenText.updateText(
-    //         `player-${alt.Player.local.id}`,
-    //         new alt.Vector3(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z + 1),
-    //     );
-    //     alt.Vehicle.all.forEach((vehicle) => {
-    //         if (!vehicle || !vehicle.valid) {
-    //             return;
-    //         }
-    //         const dist = distance2d(vehicle.pos, alt.Player.local.pos);
-    //         if (dist > 50) {
-    //             if (ScreenText.hasText(`vehicle-${vehicle.id}`)) {
-    //                 ScreenText.removeText(`vehicle-${vehicle.id}`);
-    //             }
-    //             return;
-    //         }
-    //         if (!ScreenText.hasText(`vehicle-${vehicle.id}`)) {
-    //             ScreenText.addText(`(${vehicle.id})`, vehicle.pos, `vehicle-${vehicle.id}`);
-    //         }
-    //         ScreenText.updateText(
-    //             `vehicle-${vehicle.id}`,
-    //             new alt.Vector3(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z),
-    //         );
-    //     });
-    // });
+    alt.log('starting...');
+    alt.everyTick(() => {
+        // if (!ScreenText.hasText(`player-${alt.Player.local.id}`)) {
+        //     ScreenText.addText(`${alt.Player.local.name}`, alt.Player.local.pos, `player-${alt.Player.local.id}`);
+        // }
+        // ScreenText.updateText(
+        //     `player-${alt.Player.local.id}`,
+        //     new alt.Vector3(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z + 1),
+        // );
+        alt.Vehicle.all.forEach((vehicle) => {
+            if (!vehicle || !vehicle.valid) {
+                return;
+            }
+
+            let isOnScreen = native.isSphereVisible(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z, 0.0099999998);
+
+            const dist = distance2d(vehicle.pos, alt.Player.local.pos);
+            if (dist > 25) {
+                isOnScreen = false;
+            }
+
+            if (!isOnScreen) {
+                if (ScreenText.hasText(`vehicle-${vehicle.id}`)) {
+                    ScreenText.removeText(`vehicle-${vehicle.id}`);
+                }
+
+                return;
+            }
+
+            if (!ScreenText.hasText(`vehicle-${vehicle.id}`)) {
+                ScreenText.addText(`(${vehicle.id})`, vehicle.pos, `vehicle-${vehicle.id}`);
+            }
+            ScreenText.updateText(
+                `vehicle-${vehicle.id}`,
+                new alt.Vector3(vehicle.pos.x, vehicle.pos.y, vehicle.pos.z),
+            );
+        });
+    });
 });
