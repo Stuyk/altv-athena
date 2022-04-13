@@ -6,6 +6,7 @@ import '../../core-interior/client/index';
 import '../../core-nametags/client/index';
 import '../../core-paintshop/client/index';
 import '../../example-agenda/client/index';
+import '../../core-console-cmds/client/index';
 
 // Specify what you are loading here.
 // import './example-folder/client/index';
