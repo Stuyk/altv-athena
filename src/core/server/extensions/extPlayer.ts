@@ -15,8 +15,6 @@ import sync from './playerFunctions/sync';
 import utility from './playerFunctions/utility';
 import getter from './playerFunctions/getter';
 
-import '../views/factions';
-import '../systems/arrest';
 import '../events/waypointEvent';
 import { Vector3 } from '../../shared/interfaces/vector';
 import IAttachable from '../../shared/interfaces/iAttachable';

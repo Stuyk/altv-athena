@@ -13,6 +13,8 @@
 		"plugins/core-atm/shared/*",
 		"plugins/core-clothing/client/*",
 		"plugins/core-clothing/shared/*",
+		"plugins/core-console-cmds/client/*",
+		"plugins/core-console-cmds/shared/*",
 		"plugins/core-cuffs/client/*",
 		"plugins/core-cuffs/shared/*",
 		"plugins/core-factions/client/*",
