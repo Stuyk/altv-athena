@@ -1,8 +1,5 @@
 import * as alt from 'alt-server';
 import { VehicleEvents } from '../../../../server/events/vehicleEvents';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
-import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
-import { VehicleSystem } from '../../../../server/systems/vehicle';
 import { LOCALE_FUEL } from '../../shared/locales';
 import { ATHENA_EVENTS_VEHICLE } from '../../../../shared/enums/athenaEvents';
 import { Vehicle_Behavior, VEHICLE_STATE } from '../../../../shared/enums/vehicle';
@@ -14,6 +11,7 @@ import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { distance2d } from '../../../../shared/utility/vector';
 import { FuelCommands } from './commands';
 import { FUEL_CONFIG } from './config';
+import { Athena } from '../../../../server/api/athena';
 
 export class FuelSystem {
     /**
@@ -22,26 +20,26 @@ export class FuelSystem {
     static init() {
         alt.setInterval(FuelSystem.updateDrivingPlayers, FUEL_CONFIG.TIME_BETWEEN_UPDATES);
 
-        VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, (player: alt.Player, vehicle: alt.Vehicle) => {
+        Athena.vehicle.system.addCustomRule(VEHICLE_RULES.ENGINE, (player: alt.Player, vehicle: alt.Vehicle) => {
             if (!vehicle.driver || vehicle.driver.id !== player.id) {
-                playerFuncs.emit.notification(player, LOCALE_FUEL.VEHICLE_IS_NOT_DRIVER);
+                Athena.player.emit.notification(player, LOCALE_FUEL.VEHICLE_IS_NOT_DRIVER);
                 return { status: false, response: LOCALE_FUEL.VEHICLE_IS_NOT_DRIVER };
             }
 
             if (!player.vehicle.engineOn && !FuelSystem.hasFuel(player.vehicle)) {
-                playerFuncs.emit.notification(player, LOCALE_FUEL.VEHICLE_NO_FUEL);
+                Athena.player.emit.notification(player, LOCALE_FUEL.VEHICLE_NO_FUEL);
                 return { status: false, response: LOCALE_FUEL.VEHICLE_NO_FUEL };
             }
 
             if (player.vehicle.isRefueling) {
-                playerFuncs.emit.notification(player, LOCALE_FUEL.VEHICLE_IS_BEING_REFUELED);
+                Athena.player.emit.notification(player, LOCALE_FUEL.VEHICLE_IS_BEING_REFUELED);
                 return { status: false, response: LOCALE_FUEL.VEHICLE_IS_BEING_REFUELED };
             }
 
             return { status: true, response: '' };
         });
 
-        VehicleFuncs.addCreateVehicleInjection((veh: IVehicle) => {
+        Athena.vehicle.funcs.addCreateVehicleInjection((veh: IVehicle) => {
             const vehicleInfo = VehicleData.find((x) => x.name === veh.model);
 
             if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
@@ -170,7 +168,7 @@ export class FuelSystem {
         vehicle.setSyncedMeta(VEHICLE_STATE.POSITION, vehicle.pos);
 
         if (!vehicle.nextSave || Date.now() > vehicle.nextSave) {
-            VehicleFuncs.save(vehicle, { fuel: vehicle.data.fuel });
+            Athena.vehicle.funcs.save(vehicle, { fuel: vehicle.data.fuel });
             vehicle.nextSave = Date.now() + 15000;
         }
     }
