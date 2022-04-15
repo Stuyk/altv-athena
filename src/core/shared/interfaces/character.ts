@@ -21,6 +21,15 @@ export interface Character {
     account_id: any;
 
     /**
+     * The current dimension of the player. When they spawn
+     * they are automatically moved into this dimension.
+     *
+     * @type {number}
+     * @memberof Character
+     */
+    dimension: number;
+
+    /**
      * The position that this character last logged out at.
      * This also updates every 5s or so.
      * @type {Partial<Vector3>}

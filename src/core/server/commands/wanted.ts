@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
@@ -38,6 +38,6 @@ function handleCommand(player: alt.Player, id: any = null, stars: any): void {
         return;
     }
 
-    playerFuncs.emit.message(player, `Wanted Level set to: ${stars}`);
-    playerFuncs.set.wantedLevel(target, stars);
+    Athena.player.emit.message(player, `Wanted Level set to: ${stars}`);
+    Athena.player.set.wantedLevel(target, stars);
 }

@@ -3,11 +3,11 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import Ares from '../utility/ares';
 import { sha256Random } from '../utility/encryption';
 import ConfigUtil from '../utility/config';
 import { AgendaSystem } from '../systems/agenda';
+import { playerConst } from '../api/consts/constPlayer';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
@@ -89,7 +89,11 @@ async function finishLogin(player: alt.Player) {
     AgendaSystem.goNext(player, false);
 }
 
-export class LoginFunctions {
+export class LoginView {
+    static init() {
+        alt.onClient(SYSTEM_EVENTS.DISCORD_FINISH_AUTH, finishLogin);
+    }
+
     /**
      * Show the Login Screen to the Client
      * @static
@@ -128,10 +132,14 @@ export class LoginFunctions {
         const encryptedDataJSON = JSON.stringify(senderFormat);
         const discordOAuth2URL = getDiscordOAuth2URL();
 
-        playerFuncs.set.firstConnect(player);
+        playerConst.set.firstConnect(player);
         alt.emitClient(player, SYSTEM_EVENTS.DISCORD_OPEN, `${discordOAuth2URL}&state=${encryptedDataJSON}`);
     }
 }
 
-// This is called from the connectionComplete event on client-side.
-alt.onClient(SYSTEM_EVENTS.DISCORD_FINISH_AUTH, finishLogin);
+/**
+ * @deprecated Use {@link LoginView}
+ */
+export const LoginFunctions = LoginView;
+
+LoginView.init();

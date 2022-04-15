@@ -43,19 +43,16 @@
 
 /** Raise Style Type **/
 .raise {
-    transform: translateY(-3px);
-    box-shadow: 0px 3px rgba(36, 36, 36, 1);
+    box-shadow: inset 0px -4px rgba(12, 12, 12, 1);
 }
 
 .raise:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 5px rgba(36, 36, 36, 1);
+    box-shadow: inset 0px -5px rgba(12, 12, 12, 1);
 }
 
 .raise:active {
+    box-shadow: inset 0px -3px rgba(12, 12, 12, 1);
     background: rgba(18, 18, 18, 1);
-    transform: translateY(0px) !important;
-    box-shadow: unset !important;
 }
 
 .fab {

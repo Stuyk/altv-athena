@@ -2,11 +2,11 @@ import * as alt from 'alt-server';
 import { View_Events_Creator } from '../../shared/enums/views';
 import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../shared/interfaces/characterInfo';
-import { CharacterSelectFunctions, handleNewCharacter } from './characters';
+import { CharacterSelectView, handleNewCharacter } from './characters';
 import Database from '@stuyk/ezmongodb';
 import { Character } from '../../shared/interfaces/character';
-import { playerFuncs } from '../extensions/extPlayer';
 import { Collections } from '../interface/iDatabaseCollections';
+import { Athena } from '../api/athena';
 
 alt.onClient(View_Events_Creator.Done, handleCreatorDone);
 alt.onClient(View_Events_Creator.AwaitModel, handleAwaitModel);
@@ -33,7 +33,7 @@ async function handleCreatorDone(
         player.pendingCharacterEdit = false;
 
         if (player.currentCharacters && player.currentCharacters.length >= 1) {
-            CharacterSelectFunctions.show(player);
+            CharacterSelectView.show(player);
             return;
         }
 
@@ -47,16 +47,16 @@ async function handleCreatorDone(
 
     if (player.pendingNewCharacter) {
         player.pendingNewCharacter = false;
-        await playerFuncs.createNew.character(player, appearance, info, name);
-        CharacterSelectFunctions.show(player);
+        await Athena.player.createNew.character(player, appearance, info, name);
+        CharacterSelectView.show(player);
         return;
     }
 
     player.visible = false;
     player.pendingCharacterEdit = false;
-    playerFuncs.dataUpdater.updateByKeys(player, appearance, 'appearance');
-    playerFuncs.dataUpdater.updateByKeys(player, info, 'info');
-    playerFuncs.sync.appearance(player, appearance);
+    Athena.player.dataUpdater.updateByKeys(player, appearance, 'appearance');
+    Athena.player.dataUpdater.updateByKeys(player, info, 'info');
+    Athena.player.sync.appearance(player, appearance);
 
     // Resync Position After Appearance for Interior Bug
     alt.setTimeout(() => {
@@ -64,7 +64,7 @@ async function handleCreatorDone(
             return;
         }
 
-        playerFuncs.safe.setPosition(player, player.pos.x, player.pos.y, player.pos.z);
+        Athena.player.safe.setPosition(player, player.pos.x, player.pos.y, player.pos.z);
     }, 500);
 }
 

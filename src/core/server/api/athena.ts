@@ -1,29 +1,19 @@
-import { playerFuncs } from '../extensions/extPlayer';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { Controllers } from './controllers';
-import { AgendaSystem } from '../systems/agenda';
-import { ItemFactory } from '../systems/item';
-import ChatController from '../systems/chat';
-import { ItemEffects } from '../systems/itemEffects';
-import { PluginSystem } from '../systems/plugins';
-import { StorageSystem } from '../systems/storage';
-import { World } from '../systems/world';
-import { VehicleSystem } from '../systems/vehicle';
+import { controllersConst } from './consts/constControllers';
+import { databaseConst } from './consts/constDatabase';
+import { extensionsConst } from './consts/constExtensions';
+import { playerConst } from './consts/constPlayer';
+import { systemConst } from './consts/constSystem';
+import { utilityConst } from './consts/constUtility';
+import { vehicleConst } from './consts/constVehicle';
+import { viewsConst } from './consts/constViews';
 
 export const Athena = {
-    controllers: Controllers,
-    player: playerFuncs,
-    systems: {
-        chat: ChatController,
-        agenda: AgendaSystem,
-        itemFactory: ItemFactory,
-        effects: ItemEffects,
-        plugins: PluginSystem,
-        storage: StorageSystem,
-        world: World,
-    },
-    vehicle: {
-        system: VehicleSystem,
-        funcs: VehicleFuncs,
-    },
+    database: databaseConst,
+    controllers: controllersConst,
+    extensions: extensionsConst,
+    player: playerConst,
+    systems: systemConst,
+    vehicle: vehicleConst,
+    views: viewsConst,
+    utility: utilityConst,
 };

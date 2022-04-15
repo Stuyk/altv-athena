@@ -1,8 +1,10 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../extensions/extPlayer';
-import { CharacterSelectFunctions } from '../views/characters';
-import { LoginFunctions } from '../views/login';
+import { playerConst } from '../api/consts/constPlayer';
+import { CharacterSelectView } from '../views/characters';
+import { LoginView } from '../views/login';
 import { LoginController } from './login';
+
+const agenda: { [key: string]: (player: alt.Player) => void } = {};
 
 export enum AgendaOrder {
     'DISCORD_LOGIN' = 1,
@@ -10,13 +12,6 @@ export enum AgendaOrder {
     'CHARACTER_SETUP' = 3,
     'SPAWN_CHARACTER' = 100,
 }
-
-const agenda: { [key: string]: (player: alt.Player) => void } = {
-    [AgendaOrder.DISCORD_LOGIN]: LoginFunctions.show, // Discord Login
-    [AgendaOrder.ACCOUNT_SETUP]: LoginController.show, // Account Setup / Player Setup
-    [AgendaOrder.CHARACTER_SETUP]: CharacterSelectFunctions.show, // Character Selection / Character Creator
-    [AgendaOrder.SPAWN_CHARACTER]: playerFuncs.select.character, // Selected Character / Do Spawn
-};
 
 const timelines: {
     [key: string]: {
@@ -31,6 +26,13 @@ const timelines: {
  * @class AgendaSystem
  */
 export class AgendaSystem {
+    static init() {
+        AgendaSystem.set(AgendaOrder.DISCORD_LOGIN, LoginView.show);
+        AgendaSystem.set(AgendaOrder.ACCOUNT_SETUP, LoginController.show);
+        AgendaSystem.set(AgendaOrder.CHARACTER_SETUP, CharacterSelectView.show);
+        AgendaSystem.set(AgendaOrder.SPAWN_CHARACTER, playerConst.select.character);
+    }
+
     /**
      * Set the agenda to the passed agenda timeline.
      * By Default the Load Order:
@@ -45,16 +47,16 @@ export class AgendaSystem {
      */
     static set(id: number, callback: (player: alt.Player) => void) {
         if (id > 100) {
-            alt.log(`~r~Failed to Set Agenda Timeline @ ${AgendaOrder[id]} (${id}).`);
+            alt.log(`~r~Failed to Set Agenda Timeline @ (${id}).`);
             return;
         }
 
         if (agenda[id]) {
-            alt.log(`Overwrote Agenda @ ${AgendaOrder[id]} (${id}) with new callback.`);
+            alt.log(`Overwrote Agenda @ (${id}) with new callback.`);
         }
 
         agenda[id] = callback;
-        alt.log(`~g~Added Agenda to Timeline @ ${AgendaOrder[id]} (${id})`);
+        alt.log(`~g~Added Agenda to Timeline @ (${id})`);
     }
 
     /**
@@ -85,7 +87,7 @@ export class AgendaSystem {
      * @param {alt.Player} player
      * @memberof AgendaSystem
      */
-    static init(player: alt.Player) {
+    static initPlayer(player: alt.Player) {
         timelines[player.id] = {
             agendaIndex: -1,
             agenda: AgendaSystem.getAsArray(),
@@ -181,3 +183,5 @@ export class AgendaSystem {
         return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 }
+
+AgendaSystem.init();

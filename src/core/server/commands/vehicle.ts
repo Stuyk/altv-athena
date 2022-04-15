@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import ChatController from '../systems/chat';
 import { VehicleSystem } from '../systems/vehicle';
@@ -62,27 +62,27 @@ ChatController.addCommand(
     PERMISSIONS.NONE,
     (player: alt.Player, id: string) => {
         if (!player || !player.valid || id === null || id === undefined) {
-            playerFuncs.emit.message(player, `/givevehkey [id]`);
+            Athena.player.emit.message(player, `/givevehkey [id]`);
             return;
         }
 
         if (!player.vehicle || !player.vehicle.data) {
-            playerFuncs.emit.message(player, `Must be in a vehicle you own.`);
+            Athena.player.emit.message(player, `Must be in a vehicle you own.`);
             return;
         }
 
         if (player.vehicle.data.owner.toString() !== player.data._id.toString()) {
-            playerFuncs.emit.message(player, `Must be in a vehicle you own.`);
+            Athena.player.emit.message(player, `Must be in a vehicle you own.`);
             return;
         }
 
-        const target = playerFuncs.get.findByUid(id);
+        const target = Athena.player.get.findByUid(id);
         if (!target) {
-            playerFuncs.emit.message(player, `Could not find that target player`);
+            Athena.player.emit.message(player, `Could not find that target player`);
             return;
         }
 
         VehicleFuncs.createKey(target, player.vehicle);
-        playerFuncs.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
+        Athena.player.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
     },
 );

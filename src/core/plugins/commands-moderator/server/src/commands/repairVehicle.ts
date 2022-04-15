@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../../server/api/athena';
 import VehicleFuncs from '../../../../../server/extensions/vehicleFuncs';
 
 export function handleRepairVehicleCmd(player: alt.Player) {
@@ -10,5 +10,5 @@ export function handleRepairVehicleCmd(player: alt.Player) {
     player.vehicle.data.engineHealth = 1000;
     VehicleFuncs.repair(player.vehicle);
     VehicleFuncs.save(player.vehicle, player.vehicle.data);
-    playerFuncs.emit.notification(player, `Vehicle successfully repaired.`);
+    Athena.player.emit.notification(player, `Vehicle successfully repaired.`);
 }
