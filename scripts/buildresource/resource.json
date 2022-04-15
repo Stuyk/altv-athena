@@ -17,6 +17,8 @@
 		"plugins/core-console-cmds/shared/*",
 		"plugins/core-cuffs/client/*",
 		"plugins/core-cuffs/shared/*",
+		"plugins/core-dealership/client/*",
+		"plugins/core-dealership/shared/*",
 		"plugins/core-factions/client/*",
 		"plugins/core-factions/shared/*",
 		"plugins/core-fuel-stations/client/*",

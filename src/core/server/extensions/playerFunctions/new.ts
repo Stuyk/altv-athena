@@ -3,9 +3,7 @@ import { Character, CharacterDefaults } from '../../../shared/interfaces/charact
 import Database from '@stuyk/ezmongodb';
 import { Appearance } from '../../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../../shared/interfaces/characterInfo';
-import select from './select';
 import { Collections } from '../../interface/iDatabaseCollections';
-import { AgendaSystem } from '../../systems/agenda';
 
 /**
  * Create a new character with appearance data and info for this player.

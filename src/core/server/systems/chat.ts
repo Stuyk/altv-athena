@@ -8,8 +8,8 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 
@@ -54,7 +54,7 @@ class InternalFunctions {
         }
 
         if (player.data.isDead) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
             return;
         }
 
@@ -79,7 +79,7 @@ class InternalFunctions {
     static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
         const commandInfo = ChatController.commands[commandName];
         if (!commandInfo || !commandInfo.func) {
-            playerFuncs.emit.message(
+            Athena.player.emit.message(
                 player,
                 `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`,
             );
@@ -90,7 +90,7 @@ class InternalFunctions {
             const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
 
             if (!isAdminPermissionValid) {
-                playerFuncs.emit.message(
+                Athena.player.emit.message(
                     player,
                     `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`,
                 );
@@ -100,7 +100,7 @@ class InternalFunctions {
 
         if (commandInfo.characterPermissions) {
             if (!player.data.characterPermission) {
-                playerFuncs.emit.message(
+                Athena.player.emit.message(
                     player,
                     `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
                 );
@@ -113,7 +113,7 @@ class InternalFunctions {
             );
 
             if (!isCharacterPermValid) {
-                playerFuncs.emit.message(
+                Athena.player.emit.message(
                     player,
                     `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
                 );

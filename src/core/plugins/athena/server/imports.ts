@@ -18,6 +18,7 @@ import '../../job-pizza-delivery/server/index';
 import '../../commands-roleplay/server/index';
 import '../../commands-moderator/server/index';
 import '../../core-console-cmds/server/index';
+import '../../core-dealership/server/index';
 
 // Example: import './hotels/server/index'
 // Make sure example import is calling the PluginSystem

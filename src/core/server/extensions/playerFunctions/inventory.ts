@@ -1172,7 +1172,7 @@ async function addAmountToInventoryReturnRemainingAmount(
  */
 function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
     if (!exports[functionName]) {
-        alt.logError(`playerFuncs.inventory does not provide an export named ${functionName}`);
+        alt.logError(`Athena.player.inventory does not provide an export named ${functionName}`);
     }
 
     exports[functionName] = callback;

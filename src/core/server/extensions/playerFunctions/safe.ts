@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import emit from './emit';
-import save from './save';
 
 /**
  * Safely set a player's position.

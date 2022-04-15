@@ -4,7 +4,7 @@ import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Item } from '../../shared/interfaces/item';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { ItemEffects } from '../systems/itemEffects';
 import { getForwardVector } from '../utility/vector';
@@ -14,21 +14,21 @@ const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
 alt.onClient('task:Vehicle:Repair:Timeline', handleRepairTimeline);
 
 function handleRepair(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE) {
-    const closestVehicle = playerFuncs.utility.getVehicleInFrontOf(player, 2);
+    const closestVehicle = Athena.player.utility.getVehicleInFrontOf(player, 2);
 
     if (!closestVehicle) {
-        playerFuncs.emit.message(player, `Could not find a vehicle to use this on.`);
+        Athena.player.emit.message(player, `Could not find a vehicle to use this on.`);
         return;
     }
 
     if (player.vehicle) {
-        playerFuncs.emit.message(player, `You must exit the vehicle first.`);
+        Athena.player.emit.message(player, `You must exit the vehicle first.`);
         return;
     }
 
-    const removedKit = playerFuncs.inventory.findAndRemove(player, 'Repair Kit');
+    const removedKit = Athena.player.inventory.findAndRemove(player, 'Repair Kit');
     if (!removedKit) {
-        playerFuncs.emit.message(player, `You do not have a repair kit.`);
+        Athena.player.emit.message(player, `You do not have a repair kit.`);
         return;
     }
 
@@ -58,7 +58,7 @@ function handleRepair(player: alt.Player, item: Item, slot: number, type: INVENT
     ];
 
     isUsingTimeline.push({ player, vehicle: closestVehicle });
-    playerFuncs.emit.taskTimeline(player, timeline);
+    Athena.player.emit.taskTimeline(player, timeline);
 }
 
 function handleRepairTimeline(player: alt.Player) {
@@ -74,7 +74,7 @@ function handleRepairTimeline(player: alt.Player) {
         return;
     }
 
-    playerFuncs.emit.animation(
+    Athena.player.emit.animation(
         player,
         'mp_car_bomb',
         'car_bomb_mechanic',

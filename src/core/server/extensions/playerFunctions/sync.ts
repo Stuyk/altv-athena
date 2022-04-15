@@ -3,8 +3,6 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
-import { DEFAULT_CONFIG } from '../../athena/main';
-import { playerFuncs } from '../extPlayer';
 import save from './save';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { Item } from '../../../shared/interfaces/item';

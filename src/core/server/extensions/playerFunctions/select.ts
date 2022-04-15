@@ -6,13 +6,13 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { Character } from '../../../shared/interfaces/character';
 import { LOCALE_KEYS } from '../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../shared/locale/locale';
+import { playerConst } from '../../api/consts/constPlayer';
 import { DEFAULT_CONFIG } from '../../athena/main';
 import { PlayerEvents } from '../../events/playerEvents';
 import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
 import { World } from '../../systems/world';
-import { playerFuncs } from '../extPlayer';
 import VehicleFuncs from '../vehicleFuncs';
 import emit from './emit';
 import safe from './safe';
@@ -29,7 +29,7 @@ async function selectCharacter(player: alt.Player): Promise<void> {
     player.data = { ...player.currentCharacters[player.selectedCharacterIndex] };
 
     // Converts inventory from 2.0.3 to 3.0.0
-    await playerFuncs.inventory.convert(player);
+    await playerConst.inventory.convert(player);
 
     sync.appearance(player, player.data.appearance);
     alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
@@ -58,7 +58,7 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         }
 
         if (player.data.health <= 99) {
-            playerFuncs.set.dead(player);
+            playerConst.set.dead(player);
         }
 
         // Check if armour exists.
@@ -107,7 +107,7 @@ async function selectCharacter(player: alt.Player): Promise<void> {
         }
 
         // Finish Selection
-        playerFuncs.set.frozen(player, false);
+        playerConst.set.frozen(player, false);
         player.visible = true;
         player.hasFullySpawned = true;
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
