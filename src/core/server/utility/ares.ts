@@ -2,9 +2,8 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 import { exec } from 'child_process';
 import ecc from 'elliptic';
-import { existsSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
-import fs from "fs";
 import sjcl from 'sjcl';
 
 import { sha256 } from './encryption';
@@ -185,7 +184,7 @@ export default class Ares {
         const cachePath = path.join(process.cwd(), "athena-cache");
         let cacheFileName = Ares.getPublicKey() + '.areh';
 
-        fs.readdirSync(cachePath).forEach(file => {
+        readdirSync(cachePath).forEach(file => {
             if (file.endsWith(".areh")) {
                 cacheFileName = file;
             }
@@ -194,8 +193,8 @@ export default class Ares {
         const cacheFile = cachePath + path.sep + cacheFileName;
 
         /* It's checking if the cache file exists. */
-        if (fs.existsSync(cacheFile)) {
-            const fileContent = fs.readFileSync(cacheFile);
+        if (existsSync(cacheFile)) {
+            const fileContent = readFileSync(cacheFile);
             const data: { hwid: string, timestamp: number } = fileContent && JSON.parse(fileContent.toString());
 
             if (data && data.timestamp && data.timestamp > Date.now() - (1000 * 60 * 60 * 24)) {
@@ -227,7 +226,7 @@ export default class Ares {
             });
         });
 
-        fs.writeFileSync(cacheFile, JSON.stringify({ hwid: result, timestamp: Date.now() }));
+        writeFileSync(cacheFile, JSON.stringify({ hwid: result, timestamp: Date.now() }));
         console.log(`HWID: ${result}`);
         return result;
     }
