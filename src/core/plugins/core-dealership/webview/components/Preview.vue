@@ -5,8 +5,12 @@
         </div>
         <div class="stack pl-2 pr-2 dealership-options">
             <div class="split space-between">
-                <Button class="mr-2" style="width: 100%" color="red" @click="exit"> EXIT </Button>
-                <Button style="width: 100%" color="orange" @click="camera"> CAMERA </Button>
+                <Button class="mr-2" style="width: 100%" color="red" @click="exit">
+                    {{ LOCALE.EXIT }}
+                </Button>
+                <Button style="width: 100%" color="orange" @click="camera">
+                    {{ LOCALE.CAMERA }}
+                </Button>
             </div>
         </div>
         <div class="stack pt-4 pl-2 pr-2 dealership-body">
@@ -25,9 +29,11 @@
                     </div>
                     <div class="split space-between">
                         <Button class="mr-2" style="width: 100%" color="blue" @click="() => preview(vehicle)">
-                            PREVIEW
+                            {{ LOCALE.PREVIEW }}
                         </Button>
-                        <Button style="width: 100%" color="blue" @click="() => selectVehicle(vehicle)"> SELECT </Button>
+                        <Button style="width: 100%" color="blue" @click="() => selectVehicle(vehicle)">
+                            {{ LOCALE.SELECT }}
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -41,7 +47,7 @@ import Icon from '@components/Icon.vue';
 import Button from '@components/Button.vue';
 import SimpleInput from '@components/SimpleInput.vue';
 import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
-import { DEALERSHIP_WEBVIEW_EVENTS } from '../../shared/events';
+import { DEALERSHIP_LOCALE } from '../../shared/locale';
 
 export default defineComponent({
     name: 'Preview',
@@ -62,6 +68,7 @@ export default defineComponent({
     },
     data() {
         return {
+            LOCALE: DEALERSHIP_LOCALE,
             search: '',
         };
     },

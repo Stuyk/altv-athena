@@ -2,20 +2,29 @@
     <div class="preview-component">
         <div class="stack pt-2 pl-2 pr-2 dealership-header">
             <div class="split space-between">
-                <Button class="mr-2" style="width: 100%" color="yellow" @click="goBack">&lt; Back </Button>
-
+                <Button class="mr-2" style="width: 100%" color="yellow" @click="goBack">
+                    &lt; {{ LOCALE.BACK }}
+                </Button>
                 <template v-if="canPurchase">
-                    <Button style="width: 100%" color="green" @click="purchaseVehicle">Purchase</Button>
+                    <Button style="width: 100%" color="green" @click="purchaseVehicle">
+                        {{ LOCALE.PURCHASE }}
+                    </Button>
                 </template>
                 <template v-else>
-                    <Button style="width: 100%" :disable="true">Purchase</Button>
+                    <Button style="width: 100%" :disable="true">
+                        {{ LOCALE.PURCHASE }}
+                    </Button>
                 </template>
             </div>
         </div>
         <div class="stack pt-2 pl-2 pr-2 dealership-options">
             <div class="split space-between">
-                <Button class="mr-2" style="width: 100%" color="red" @click="exit"> EXIT </Button>
-                <Button style="width: 100%" color="orange" @click="camera"> CAMERA </Button>
+                <Button class="mr-2" style="width: 100%" color="red" @click="exit">
+                    {{ LOCALE.EXIT }}
+                </Button>
+                <Button style="width: 100%" color="orange" @click="camera">
+                    {{ LOCALE.CAMERA }}
+                </Button>
             </div>
         </div>
         <div class="stack pt-4 pl-2 pr-2 dealership-body">
@@ -41,7 +50,7 @@ import { defineComponent } from 'vue';
 import Icon from '@components/Icon.vue';
 import Button from '@components/Button.vue';
 import SimpleInput from '@components/SimpleInput.vue';
-import { DEALERSHIP_WEBVIEW_EVENTS } from '../../shared/events';
+import { DEALERSHIP_LOCALE } from '../../shared/locale';
 
 export default defineComponent({
     name: 'Preview',
@@ -62,6 +71,7 @@ export default defineComponent({
     },
     data() {
         return {
+            LOCALE: DEALERSHIP_LOCALE,
             colors: [
                 { id: 0, color: `#0d1116` }, // Metallic Black
                 { id: 5, color: `#c2c4c6` }, // Metallic Blue Silver

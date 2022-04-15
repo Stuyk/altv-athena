@@ -5,6 +5,7 @@ import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_EVENTS } from '../../shared/events';
 import { IDealership } from '../../shared/interfaces';
+import { DEALERSHIP_LOCALE } from '../../shared/locale';
 
 const dealerships: Array<IDealership> = [];
 let inDealership: { [key: string]: string } = {};
@@ -105,7 +106,6 @@ export class DealershipView {
 
     static purchase(player: alt.Player, vehicle: VehicleInfo, color: number) {
         if (!inDealership[player.id]) {
-            alt.log(1);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -114,29 +114,25 @@ export class DealershipView {
         delete inDealership[player.id];
 
         if (!dealership) {
-            alt.log(2);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         const vehicleInfo = dealership.vehicles.find((x) => x.name === vehicle.name);
         if (!vehicleInfo || !vehicleInfo.sell) {
-            alt.log(3);
-            Athena.player.emit.message(player, `Vehicle Model ${vehicle.name} is not for sale.`);
+            Athena.player.emit.message(player, DEALERSHIP_LOCALE.INVALID_MODEL);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (player.data.bank + player.data.cash < vehicleInfo.price) {
-            alt.log(4);
-            Athena.player.emit.message(player, `Not enough money for that vehicle.`);
+            Athena.player.emit.message(player, DEALERSHIP_LOCALE.NOT_ENOUGH_MONEY);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!Athena.player.currency.subAllCurrencies(player, vehicleInfo.price)) {
-            alt.log(5);
-            Athena.player.emit.notification(player, `~r~Invalid Balance`);
+            Athena.player.emit.message(player, DEALERSHIP_LOCALE.NOT_ENOUGH_MONEY);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -154,7 +150,7 @@ export class DealershipView {
             true,
         );
 
-        Athena.player.emit.notification(player, `Your new vehicle was sent to the nearest garage.`);
+        Athena.player.emit.notification(player, DEALERSHIP_LOCALE.VEHICLE_MOVED_TO_NEAREST_GARAGE);
         Athena.player.emit.sound2D(player, 'item_purchase');
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleInfo.name);
     }
