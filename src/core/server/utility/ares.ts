@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 import { exec } from 'child_process';
 import ecc from 'elliptic';
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import sjcl from 'sjcl';
 
@@ -183,6 +183,10 @@ export default class Ares {
 
         const cachePath = path.join(process.cwd(), "athena-cache");
         let cacheFileName = Ares.getPublicKey() + '.areh';
+
+        if (!existsSync(cachePath)) {
+            mkdirSync(cachePath);
+        }
 
         readdirSync(cachePath).forEach(file => {
             if (file.endsWith(".areh")) {
