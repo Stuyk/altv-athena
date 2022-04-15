@@ -1,10 +1,4 @@
 import { SHARED_CONFIG } from '../../shared/configurations/shared';
-// All Vehicle Dealerships
-import PDMCoupe from './dealerships/PDMCoupe';
-import PDMSport from './dealerships/PDMSport';
-import PDMSuper from './dealerships/PDMSuper';
-import PDMSuv from './dealerships/PDMSuv';
-// All Parking Garages
 import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {
@@ -72,15 +66,6 @@ export const DEFAULT_CONFIG = {
     VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     VEHICLE_DISPLAY_LOCK_STATUS: true, // Display vehicle lock status above vehicle
     VEHICLE_DISPLAY_LOCK_INTERACTION_INFO: true, // Display interaction info in hud
-    // Vehicle Garage List, Includes Parking Spots with Rotations
-    // Order of the array matters. Don't forget that.
-    VEHICLE_DEALERSHIPS: [
-        //
-        PDMCoupe,
-        PDMSport,
-        PDMSuv,
-        PDMSuper,
-    ],
     // The Default Stream Configuration for Markers, Text Labels, etc.
     STREAM_CONFIG: StreamConfiguration,
     // The Default Faction Configurations

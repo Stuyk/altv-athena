@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
-import { VEHICLE_CLASS } from '../../../../shared/enums/vehicleTypeFlags';
-import { VehicleData } from '../../../../shared/information/vehicles';
+import { PlayerEvents } from '../../../../server/events/playerEvents';
+import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_EVENTS } from '../../shared/events';
 import { IDealership } from '../../shared/interfaces';
@@ -18,7 +18,7 @@ class InternalFunctions {
     static propogate(dealership: IDealership) {
         Athena.controllers.interaction.add({
             uid: dealership.uid,
-            description: `Has Vehicles In It`,
+            description: dealership.name,
             isPlayerOnly: true,
             position: dealership.pos,
             range: 3,
@@ -30,7 +30,7 @@ class InternalFunctions {
         Athena.controllers.blip.append({
             uid: dealership.uid,
             color: 43, // Light Green
-            text: dealership.uid,
+            text: dealership.name,
             pos: dealership.pos,
             shortRange: true,
             scale: 1,
@@ -42,16 +42,29 @@ class InternalFunctions {
             type: 36,
             color: new alt.RGBA(0, 255, 0, 100),
             pos: new alt.Vector3(dealership.pos.x, dealership.pos.y, dealership.pos.z + 0.5),
-            maxDistance: 10,
+            maxDistance: 25,
             scale: new alt.Vector3(1, 1, 1),
+        });
+
+        Athena.controllers.text.append({
+            data: dealership.name,
+            pos: dealership.pos,
+            uid: dealership.uid,
+            maxDistance: 10,
         });
     }
 }
 
+let isInitialized = false;
+
 export class DealershipView {
     static init() {
+        if (isInitialized) {
+            return;
+        }
+
+        isInitialized = true;
         alt.onClient(DEALERSHIP_EVENTS.PURCHASE, DealershipView.purchase);
-        alt.onClient(DEALERSHIP_EVENTS.EXIT, DealershipView.exit);
     }
 
     /**
@@ -90,22 +103,59 @@ export class DealershipView {
         inDealership[player.id] = dealership.uid;
     }
 
-    static purchase(player: alt.Player, vehicle: VehicleInfo) {
-        //
-    }
+    static purchase(player: alt.Player, vehicle: VehicleInfo, color: number) {
+        if (!inDealership[player.id]) {
+            alt.log(1);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
 
-    static exit(player: alt.Player) {
-        //
+        const dealership = dealerships.find((x) => x.uid === inDealership[player.id]);
+        delete inDealership[player.id];
+
+        if (!dealership) {
+            alt.log(2);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        const vehicleInfo = dealership.vehicles.find((x) => x.name === vehicle.name);
+        if (!vehicleInfo || !vehicleInfo.sell) {
+            alt.log(3);
+            Athena.player.emit.message(player, `Vehicle Model ${vehicle.name} is not for sale.`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (player.data.bank + player.data.cash < vehicleInfo.price) {
+            alt.log(4);
+            Athena.player.emit.message(player, `Not enough money for that vehicle.`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        if (!Athena.player.currency.subAllCurrencies(player, vehicleInfo.price)) {
+            alt.log(5);
+            Athena.player.emit.notification(player, `~r~Invalid Balance`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return;
+        }
+
+        Athena.vehicle.funcs.add(
+            {
+                owner: player.data._id.toString(),
+                model: vehicleInfo.name,
+                fuel: 100,
+                position: { x: 0, y: 0, z: 0 },
+                rotation: { x: 0, y: 0, z: 0 },
+                color: color,
+                color2: color,
+            },
+            true,
+        );
+
+        Athena.player.emit.notification(player, `Your new vehicle was sent to the nearest garage.`);
+        Athena.player.emit.sound2D(player, 'item_purchase');
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleInfo.name);
     }
 }
-
-const dealership: IDealership = {
-    uid: 'dealership-1',
-    vehiclePosition: { x: -653.681640625, y: -967.2091674804688, z: 20.7 },
-    cam: { x: -650.1626586914062, y: -963.4005126953125, z: 21.293882369995117 },
-    pos: { x: -643.3508911132812, y: -972.0877685546875, z: 20.7 },
-    vehicles: VehicleData.filter((x) => x.class === VEHICLE_CLASS.MUSCLE && x.sell),
-};
-
-DealershipView.add(dealership);
-DealershipView.init();

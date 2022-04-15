@@ -5,7 +5,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { getPointsInCircle } from './math';
 import { loadSceneAtCoords } from './scene';
 
-const nodes: Array<iCameraNode> = [];
+let nodes: Array<iCameraNode> = [];
 let currentCamIndex = -1;
 let cam1;
 let cam2;
@@ -279,6 +279,10 @@ export class CinematicCam {
      */
     static async destroy(): Promise<void> {
         return await InternalFunctions.destroy();
+    }
+
+    static async overrideNodes(_nodes: Array<iCameraNode>) {
+        nodes = _nodes;
     }
 
     /**

@@ -13,4 +13,6 @@ export const DEALERSHIP_WEBVIEW_EVENTS = {
     SET_VEHICLES: `${PAGE_NAME}:SetVehicles`,
     EXIT: `${PAGE_NAME}:Exit`,
     PREVIEW: `${PAGE_NAME}:Preview`,
+    CAMERA: `${PAGE_NAME}:Camera`,
+    SET_BANK: `${PAGE_NAME}:SetBank`,
 };

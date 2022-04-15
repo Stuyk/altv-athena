@@ -32,7 +32,6 @@ import './systems/attachable';
 import './systems/athenaEvents';
 import './systems/blip';
 import './systems/character';
-import './systems/dealership';
 import './systems/death';
 import './systems/debug';
 import './systems/disable';

@@ -181,15 +181,15 @@ export default class Ares {
     static async getHwid(): Promise<string | null> {
         let toolsPath = path.join(process.cwd(), 'tools');
 
-        const cachePath = path.join(process.cwd(), "athena-cache");
+        const cachePath = path.join(process.cwd(), 'athena-cache');
         let cacheFileName = Ares.getPublicKey() + '.areh';
 
         if (!existsSync(cachePath)) {
             mkdirSync(cachePath);
         }
 
-        readdirSync(cachePath).forEach(file => {
-            if (file.endsWith(".areh")) {
+        readdirSync(cachePath).forEach((file) => {
+            if (file.endsWith('.areh')) {
                 cacheFileName = file;
             }
         });
@@ -199,9 +199,9 @@ export default class Ares {
         /* It's checking if the cache file exists. */
         if (existsSync(cacheFile)) {
             const fileContent = readFileSync(cacheFile);
-            const data: { hwid: string, timestamp: number } = fileContent && JSON.parse(fileContent.toString());
+            const data: { hwid: string; timestamp: number } = fileContent && JSON.parse(fileContent.toString());
 
-            if (data && data.timestamp && data.timestamp > Date.now() - (1000 * 60 * 60 * 24)) {
+            if (data && data.timestamp && data.timestamp > Date.now() - 1000 * 60 * 60 * 24) {
                 console.log(`HWID: ${data.hwid}`);
                 return data.hwid;
             }
@@ -211,7 +211,7 @@ export default class Ares {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
         } else {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-linux');
-            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => { });
+            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => {});
         }
 
         if (!existsSync(toolsPath)) {

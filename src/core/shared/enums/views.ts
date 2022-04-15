@@ -36,11 +36,6 @@ export enum View_Events_Storage {
     Close = 'storage:Close',
 }
 
-export enum View_Events_Dealership {
-    Open = 'dealership:Open',
-    Purchase = 'dealership:Purchase',
-}
-
 export enum View_Events_Factions {
     Bus = 'factions:Bus',
     Open = 'factions:Open',
