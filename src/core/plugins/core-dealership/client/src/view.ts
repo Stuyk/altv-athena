@@ -133,8 +133,6 @@ class InternalFunctions implements ViewModel {
 
         await loadModel(model);
 
-        InternalFunctions.destroyVehicle();
-
         // Create Vehicle
         vehicleIdentifier = native.createVehicle(
             model,
@@ -158,6 +156,11 @@ class InternalFunctions implements ViewModel {
             false,
         );
         native.setVehicleColours(vehicleIdentifier, color, color);
+
+        alt.setTimeout(() => {
+            native.setVehicleEngineOn(vehicleIdentifier, true, false, false);
+            native.setVehicleLights(vehicleIdentifier, 3);
+        }, 200);
 
         InternalFunctions.updatePoints();
     }
@@ -193,7 +196,7 @@ class InternalFunctions implements ViewModel {
 
         // Middle Right
         offsetCalculations.push({
-            x: max.x + additional,
+            x: max.x + additional * 2,
             y: 0,
             z: zPos,
         });
@@ -221,7 +224,7 @@ class InternalFunctions implements ViewModel {
 
         // Middle Left
         offsetCalculations.push({
-            x: min.x - additional,
+            x: min.x - additional * 2,
             y: 0,
             z: zPos,
         });

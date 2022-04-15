@@ -27,14 +27,7 @@
                         <Button class="mr-2" style="width: 100%" color="blue" @click="() => preview(vehicle)">
                             PREVIEW
                         </Button>
-                        <template v-if="vehicle.canPurchase">
-                            <Button style="width: 100%" color="green" @click="() => selectVehicle(vehicle)">
-                                SELECT
-                            </Button>
-                        </template>
-                        <template v-else>
-                            <Button style="width: 100%" :disable="true"> SELECT </Button>
-                        </template>
+                        <Button style="width: 100%" color="blue" @click="() => selectVehicle(vehicle)"> SELECT </Button>
                     </div>
                 </div>
             </div>

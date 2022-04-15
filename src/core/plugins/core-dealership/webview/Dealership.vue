@@ -17,6 +17,7 @@
             @set-color="setColor"
             @purchase="purchase"
             @exit-window="exit"
+            v-bind:money="money"
             v-bind:vehicle="selectedVehicle"
             v-if="step === 1"
         ></Custom>

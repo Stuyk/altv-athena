@@ -3,7 +3,13 @@
         <div class="stack pt-2 pl-2 pr-2 dealership-header">
             <div class="split space-between">
                 <Button class="mr-2" style="width: 100%" color="yellow" @click="goBack">&lt; Back </Button>
-                <Button style="width: 100%" color="green" @click="purchaseVehicle"> Purchase </Button>
+
+                <template v-if="canPurchase">
+                    <Button style="width: 100%" color="green" @click="purchaseVehicle">Purchase</Button>
+                </template>
+                <template v-else>
+                    <Button style="width: 100%" :disable="true">Purchase</Button>
+                </template>
             </div>
         </div>
         <div class="stack pt-2 pl-2 pr-2 dealership-options">
@@ -45,6 +51,10 @@ export default defineComponent({
         SimpleInput,
     },
     props: {
+        money: {
+            type: Number,
+            required: true,
+        },
         vehicle: {
             type: Object,
             required: true,
@@ -69,6 +79,11 @@ export default defineComponent({
                 { id: 145, color: `#621276` }, //Purple
             ],
         };
+    },
+    computed: {
+        canPurchase() {
+            return this.vehicle.canPurchase;
+        },
     },
     methods: {
         camera() {

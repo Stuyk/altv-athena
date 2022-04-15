@@ -115,7 +115,6 @@ class InternalFunctions {
         let camNumber: number;
 
         if (cam1) {
-            console.log(`Camera Node -> Transitioning Between Cameras`);
             cam2 = native.createCamWithParams(
                 'DEFAULT_SCRIPTED_CAMERA',
                 node.pos.x,
@@ -132,7 +131,6 @@ class InternalFunctions {
             camNumber = cam2;
             assignCam2to1 = true;
         } else {
-            console.log(`Camera Node -> Created 1st Camera`);
             cam1 = native.createCamWithParams(
                 'DEFAULT_SCRIPTED_CAMERA',
                 node.pos.x,
@@ -211,8 +209,6 @@ class InternalFunctions {
             native.setCamActiveWithInterp(cam2, cam1, node.easeTime ? node.easeTime : 0, 1, 1);
         }
 
-        const startTime = Date.now();
-
         await new Promise((resolve: Function) => {
             alt.setTimeout(
                 () => {
@@ -230,9 +226,6 @@ class InternalFunctions {
                 node.easeTime ? node.easeTime * 2 : 0,
             );
         });
-
-        console.log(`End Time: ${Date.now() - startTime}`);
-        console.log(`Camera Node -> Rendered`);
     }
 
     /**
