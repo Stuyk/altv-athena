@@ -4,6 +4,7 @@ import { exec } from 'child_process';
 import ecc from 'elliptic';
 import { existsSync } from 'fs';
 import path from 'path';
+import fs from "fs";
 import sjcl from 'sjcl';
 
 import { sha256 } from './encryption';
@@ -181,11 +182,33 @@ export default class Ares {
     static async getHwid(): Promise<string | null> {
         let toolsPath = path.join(process.cwd(), 'tools');
 
+        const cachePath = path.join(process.cwd(), "athena-cache");
+        let cacheFileName = Ares.getPublicKey() + '.areh';
+
+        fs.readdirSync(cachePath).forEach(file => {
+            if (file.endsWith(".areh")) {
+                cacheFileName = file;
+            }
+        });
+
+        const cacheFile = cachePath + path.sep + cacheFileName;
+
+        /* It's checking if the cache file exists. */
+        if (fs.existsSync(cacheFile)) {
+            const fileContent = fs.readFileSync(cacheFile);
+            const data: { hwid: string, timestamp: number } = fileContent && JSON.parse(fileContent.toString());
+
+            if (data && data.timestamp && data.timestamp > Date.now() - (1000 * 60 * 60 * 24)) {
+                console.log(`HWID: ${data.hwid}`);
+                return data.hwid;
+            }
+        }
+
         if (process.platform.includes('win')) {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
         } else {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-linux');
-            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => {});
+            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => { });
         }
 
         if (!existsSync(toolsPath)) {
@@ -204,6 +227,7 @@ export default class Ares {
             });
         });
 
+        fs.writeFileSync(cacheFile, JSON.stringify({ hwid: result, timestamp: Date.now() }));
         console.log(`HWID: ${result}`);
         return result;
     }
