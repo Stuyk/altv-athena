@@ -60,6 +60,10 @@ export class KeybindController {
             return;
         }
 
+        if (alt.isConsoleOpen()) {
+            return;
+        }
+
         // Console Menu
         if (alt.isMenuOpen()) {
             return;
@@ -103,6 +107,10 @@ export class KeybindController {
         }
 
         if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.isConsoleOpen()) {
             return;
         }
 

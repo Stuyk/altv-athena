@@ -4,7 +4,7 @@ import { WORLD_WEATHER } from '../../shared/enums/weather';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import ChatController from '../systems/chat';
 import { World } from '../systems/world';
 
@@ -21,8 +21,8 @@ function setTime(player: alt.Player, hour: number) {
         hour = 0;
     }
 
-    playerFuncs.emit.message(player, `Time will now always be ${hour}`);
-    playerFuncs.emit.message(player, `Use /cleartime to stop overriding the time.`);
+    Athena.player.emit.message(player, `Time will now always be ${hour}`);
+    Athena.player.emit.message(player, `Use /cleartime to stop overriding the time.`);
     World.setOverrideTime(true, hour);
 }
 
@@ -32,7 +32,7 @@ function clearTime(player: alt.Player) {
     }
 
     World.setOverrideTime(false, 0);
-    playerFuncs.emit.message(player, `Time override is now disabled.`);
+    Athena.player.emit.message(player, `Time override is now disabled.`);
 }
 
 ChatController.addCommand(

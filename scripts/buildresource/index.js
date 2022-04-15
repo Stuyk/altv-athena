@@ -11,9 +11,7 @@ const defaults = {
         'client/*',
         'shared/*',
     ],
-    deps: [
-        "webview"
-    ],
+    deps: [],
     "required-permissions": [
         "Screen Capture"
     ]

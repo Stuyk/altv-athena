@@ -5,12 +5,12 @@ import { View_Events_Dealership } from '../../shared/enums/views';
 import { ServerBlipController } from '../systems/blip';
 import { HologramController } from '../systems/hologram';
 import { VehicleData } from '../../shared/information/vehicles';
-import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PlayerEvents } from '../events/playerEvents';
+import { Athena } from '../api/athena';
 
-class DealershipFunctions {
+class DealershipView {
     static init() {
         for (let i = 0; i < DEFAULT_CONFIG.VEHICLE_DEALERSHIPS.length; i++) {
             const dealership = DEFAULT_CONFIG.VEHICLE_DEALERSHIPS[i];
@@ -62,24 +62,24 @@ class DealershipFunctions {
         }
 
         if (!model) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         const vehicleData = VehicleData.find((x) => x.name === model);
         if (!vehicleData || !vehicleData.sell) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (player.data.bank + player.data.cash < vehicleData.price) {
-            playerFuncs.emit.notification(player, `~r~Invalid Balance`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, `~r~Invalid Balance`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
-        if (!playerFuncs.currency.subAllCurrencies(player, vehicleData.price)) {
-            playerFuncs.emit.notification(player, `~r~Invalid Balance`);
+        if (!Athena.player.currency.subAllCurrencies(player, vehicleData.price)) {
+            Athena.player.emit.notification(player, `~r~Invalid Balance`);
             return;
         }
 
@@ -95,11 +95,11 @@ class DealershipFunctions {
             true,
         );
 
-        playerFuncs.emit.notification(player, `Visit a garage to spawn your new vehicle.`);
-        playerFuncs.emit.sound2D(player, 'item_purchase');
+        Athena.player.emit.notification(player, `Visit a garage to spawn your new vehicle.`);
+        Athena.player.emit.sound2D(player, 'item_purchase');
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.PURCHASED_VEHICLE, player, vehicleData.name);
     }
 }
 
-alt.onClient(View_Events_Dealership.Purchase, DealershipFunctions.purchase);
-DealershipFunctions.init();
+alt.onClient(View_Events_Dealership.Purchase, DealershipView.purchase);
+DealershipView.init();

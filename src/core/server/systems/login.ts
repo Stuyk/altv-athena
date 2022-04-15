@@ -4,7 +4,6 @@ import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
@@ -16,10 +15,18 @@ import { VehicleSystem } from './vehicle';
 import { AgendaSystem } from './agenda';
 import { AccountSystem } from './account';
 import { PlayerEvents } from '../events/playerEvents';
+import { playerConst } from '../api/consts/constPlayer';
 
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
+    static init() {
+        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
+        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
+        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
+        alt.on('playerDisconnect', LoginController.tryDisconnect);
+    }
+
     /**
      * Handles login from login webview.
      * Called through Agenda System.
@@ -107,7 +114,7 @@ export class LoginController {
             return;
         }
 
-        await playerFuncs.set.account(player, account);
+        await playerConst.set.account(player, account);
         AgendaSystem.goNext(player);
     }
 
@@ -137,7 +144,7 @@ export class LoginController {
         }
 
         alt.log(`${player.data.name} has logged out.`);
-        playerFuncs.save.onTick(player);
+        playerConst.save.onTick(player);
     }
 
     /**
@@ -200,7 +207,4 @@ export class LoginController {
     }
 }
 
-PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
-alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
-alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
-alt.on('playerDisconnect', LoginController.tryDisconnect);
+LoginController.init();

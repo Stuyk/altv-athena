@@ -7,10 +7,8 @@ if (SockJS['default']) {
     main = SockJS.createServer();
 }
 const server = http.createServer();
-const StreamRange = {
-};
-let StreamData = {
-};
+const StreamRange = {};
+let StreamData = {};
 let conn;
 let config = {
     TimeBetweenUpdates: 1000
@@ -59,8 +57,7 @@ class StreamerServer {
      * @param {string} data
      * @memberof StreamerServer
      */ static ping(id) {
-        StreamData = {
-        };
+        StreamData = {};
         conn.write(JSON.stringify({
             id,
             route: 'pong',
@@ -104,8 +101,7 @@ class StreamerServer {
         const response = {
             id,
             route: 'update',
-            data: {
-            }
+            data: {}
         };
         for(let i = 0; i < keys.length; i++){
             const key = keys[i];

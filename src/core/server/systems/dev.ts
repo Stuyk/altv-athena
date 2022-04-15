@@ -1,10 +1,12 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
 import { DiscordUser } from '../interface/iDiscordUser';
-import { AgendaOrder, AgendaSystem } from './agenda';
+import { AgendaSystem } from './agenda';
+
+const ACCOUNT_SETUP = 2;
 
 export class DevModeOverride {
     /**
@@ -30,9 +32,9 @@ export class DevModeOverride {
             id: account.discord,
         } as DiscordUser;
 
-        playerFuncs.set.firstConnect(player);
+        Athena.player.set.firstConnect(player);
 
-        AgendaSystem.init(player);
-        AgendaSystem.goToAgenda(player, AgendaOrder.ACCOUNT_SETUP);
+        AgendaSystem.initPlayer(player);
+        AgendaSystem.goToAgenda(player, ACCOUNT_SETUP);
     }
 }

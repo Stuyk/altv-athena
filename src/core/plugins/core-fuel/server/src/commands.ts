@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
-import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
+import { Athena } from '../../../../server/api/athena';
 import ChatController from '../../../../server/systems/chat';
 import { Vehicle_Behavior, VEHICLE_STATE } from '../../../../shared/enums/vehicle';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
@@ -11,7 +10,7 @@ function setFuel(player: alt.Player, amount: string) {
     let actualAmount = parseInt(amount);
 
     if (typeof actualAmount !== 'number') {
-        playerFuncs.emit.message(player, `Invalid amount to fuel to.`);
+        Athena.player.emit.message(player, `Invalid amount to fuel to.`);
         return;
     }
 
@@ -20,7 +19,7 @@ function setFuel(player: alt.Player, amount: string) {
     }
 
     if (!player.vehicle) {
-        playerFuncs.emit.message(player, `Must be in a vehicle.`);
+        Athena.player.emit.message(player, `Must be in a vehicle.`);
         return;
     }
 
@@ -31,7 +30,7 @@ function setFuel(player: alt.Player, amount: string) {
     player.vehicle.data.fuel = actualAmount;
     player.vehicle.setSyncedMeta(VEHICLE_STATE.FUEL, player.vehicle.data.fuel);
     player.vehicle.setSyncedMeta(VEHICLE_STATE.POSITION, player.vehicle.pos);
-    VehicleFuncs.save(player.vehicle, { fuel: player.vehicle.data.fuel });
+    Athena.vehicle.funcs.save(player.vehicle, { fuel: player.vehicle.data.fuel });
 }
 
 export class FuelCommands {

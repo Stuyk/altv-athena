@@ -9,7 +9,7 @@ import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
 import { playerFuncs } from '../extPlayer';
-import {ItemFactory} from "../../systems/item";
+import { ItemFactory } from '../../systems/item';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
@@ -1056,7 +1056,11 @@ function getTotalWeight(player: alt.Player): number {
  * @return {number}
  * @memberof InventoryPrototype
  */
-async function removeAmountFromInventoryReturnRemainingAmount(player: alt.Player, itemDbName: string, amount: number): Promise<number> {
+async function removeAmountFromInventoryReturnRemainingAmount(
+    player: alt.Player,
+    itemDbName: string,
+    amount: number,
+): Promise<number> {
     const itemToRemove = await ItemFactory.get(itemDbName);
     let amountToBeRemoved = amount;
     for (let inventoryItem of player.data.inventory) {
@@ -1070,7 +1074,7 @@ async function removeAmountFromInventoryReturnRemainingAmount(player: alt.Player
                 } else {
                     //We sell the whole item-stack
                     amountToBeRemoved -= inventoryItem.quantity;
-                    inventoryRemove(player, inventoryItem.slot)
+                    inventoryRemove(player, inventoryItem.slot);
                 }
             }
         }
@@ -1090,13 +1094,21 @@ async function removeAmountFromInventoryReturnRemainingAmount(player: alt.Player
  * @return {number}
  * @memberof InventoryPrototype
  */
-async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, itemDbName: string, amount: number): Promise<number> {
+async function addAmountToInventoryReturnRemainingAmount(
+    player: alt.Player,
+    itemDbName: string,
+    amount: number,
+): Promise<number> {
     const itemToAdd = await ItemFactory.get(itemDbName);
     let itemsLeftToStoreInInventory = amount * itemToAdd.quantity;
     if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
         for (let inventoryItem of player.data.inventory) {
             if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
-                if (isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.CAN_STACK) && inventoryItem.dbName === itemToAdd.dbName && inventoryItem.rarity === itemToAdd.rarity) {
+                if (
+                    isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.CAN_STACK) &&
+                    inventoryItem.dbName === itemToAdd.dbName &&
+                    inventoryItem.rarity === itemToAdd.rarity
+                ) {
                     if (!inventoryItem.maxStack) {
                         //You can stack as much as you want. So go for it
                         inventoryItem.quantity += itemsLeftToStoreInInventory;
@@ -1104,7 +1116,7 @@ async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, ite
                         return 0;
                     } else {
                         //So how much is left to stack?
-                        let freeQuantity = inventoryItem.maxStack - inventoryItem.quantity
+                        let freeQuantity = inventoryItem.maxStack - inventoryItem.quantity;
                         if (freeQuantity >= itemsLeftToStoreInInventory) {
                             //Everything we buy fits on top of this stack
                             inventoryItem.quantity += itemsLeftToStoreInInventory;
@@ -1123,15 +1135,14 @@ async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, ite
         //Either there is something left or wasn't stackable. So go for the Empty-Slots
         const emptySlots = getFreeInventorySlots(player);
         for (let emptySlot of emptySlots) {
-
             if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
-                let addableItem:Item = deepCloneObject(itemToAdd);
+                let addableItem: Item = deepCloneObject(itemToAdd);
                 if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
                     if (!itemToAdd.maxStack || itemToAdd.maxStack >= itemsLeftToStoreInInventory) {
                         //Everything fits into this stack. So go for it
                         addableItem.quantity = itemsLeftToStoreInInventory;
                         //Obvoiusly there is nothing left to be stored here:
-                        itemsLeftToStoreInInventory= 0;
+                        itemsLeftToStoreInInventory = 0;
                     } else if (itemToAdd.maxStack) {
                         //We still have something left. So we fill this stack and move on
                         addableItem.quantity = itemToAdd.maxStack;
@@ -1141,7 +1152,6 @@ async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, ite
                     addableItem.quantity = itemsLeftToStoreInInventory--;
                 }
                 inventoryAdd(player, addableItem, emptySlot.slot);
-
             }
         }
     }
@@ -1153,7 +1163,22 @@ async function addAmountToInventoryReturnRemainingAmount(player: alt.Player, ite
     }
 }
 
-export default {
+/**
+ * Used to override an existing playerFuncs.inventory function.
+ * Requires the same exact name of the function, and the parameters.
+ *
+ * @param {string} functionName
+ * @param {(player: alt.Player, ...args: any[]) => void} callback
+ */
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    if (!exports[functionName]) {
+        alt.logError(`playerFuncs.inventory does not provide an export named ${functionName}`);
+    }
+
+    exports[functionName] = callback;
+}
+
+const exports = {
     convert,
     allItemRulesValid,
     checkForKeyValuePair,
@@ -1190,4 +1215,7 @@ export default {
     toolbarRemove,
     addAmountToInventoryReturnRemainingAmount,
     removeAmountFromInventoryReturnRemainingAmount,
+    override,
 };
+
+export default exports;

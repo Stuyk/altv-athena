@@ -1,15 +1,16 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../../server/api/athena';
+
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 export function handleKickCmd(player: alt.Player, id: number, ...reason: string[]) {
     reason.join(' ');
-    const target = playerFuncs.get.findByUid(id);
+    const target = Athena.player.get.findByUid(id);
     if (!target || !target.valid) {
         return;
     }
 
     if (target.accountData.permissionLevel >= PERMISSIONS.ADMIN) {
-        playerFuncs.emit.notification(player, `This person can't be kicked.`);
+        Athena.player.emit.notification(player, `This person can't be kicked.`);
         return;
     }
 

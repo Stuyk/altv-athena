@@ -1,12 +1,6 @@
 import * as alt from 'alt-server';
 
 import { GarageSpaceShape } from '../../../../server/extensions/extColshape';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
-import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
-import { ServerMarkerController } from '../../../../server/streamers/marker';
-import { ServerBlipController } from '../../../../server/systems/blip';
-import { FactionInternalSystem } from '../../../../server/systems/factionsInternal';
-import { InteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
 import { GARAGE_INTERACTIONS } from '../../shared/events';
 import { LOCALE_GARAGE_FUNCS } from '../../shared/locales';
@@ -18,6 +12,7 @@ import { Vector3 } from '../../../../shared/interfaces/vector';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { distance2d } from '../../../../shared/utility/vector';
+import { Athena } from '../../../../server/api/athena';
 
 const PARKING_SPACE_DIST_LIMIT = 5;
 const GarageUsers = {};
@@ -49,7 +44,7 @@ export class GarageFunctions {
 
         const properTypeName = garage.type.charAt(0).toUpperCase() + garage.type.slice(1);
 
-        InteractionController.add({
+        Athena.controllers.interaction.add({
             position: garage.position,
             description: `${LOCALE_GARAGE_FUNCS.BLIP_GARAGE} ${properTypeName}`,
             data: [garage.index], // Shop Index
@@ -57,7 +52,7 @@ export class GarageFunctions {
             isPlayerOnly: true,
         });
 
-        ServerBlipController.append({
+        Athena.controllers.blip.append({
             pos: garage.position,
             color: 4,
             sprite: 50,
@@ -66,7 +61,7 @@ export class GarageFunctions {
             text: LOCALE_GARAGE_FUNCS.BLIP_GARAGE,
         });
 
-        ServerMarkerController.append({
+        Athena.controllers.marker.append({
             uid: `marker-garage-${garage.index}`,
             pos: new alt.Vector3(garage.position.x, garage.position.y, garage.position.z - 1),
             color: new alt.RGBA(0, 150, 0, 100),
@@ -125,7 +120,7 @@ export class GarageFunctions {
         const garageType = activeGarages[index].type;
 
         // 2
-        let playerVehicles = await playerFuncs.get.allVehicles(player);
+        let playerVehicles = await Athena.player.get.allVehicles(player);
 
         // 3
         const validVehicles = playerVehicles.filter((vehicle) => {
@@ -182,7 +177,7 @@ export class GarageFunctions {
             }
 
             // Append vehicles that have been spawned that the player has access to to this list.
-            if (VehicleFuncs.hasBeenSpawned(vehicle.id)) {
+            if (Athena.vehicle.funcs.hasBeenSpawned(vehicle.id)) {
                 return true;
             }
 
@@ -192,8 +187,8 @@ export class GarageFunctions {
         VehicleCache[player.id] = validVehicles;
 
         if (validVehicles.length <= 0) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_VEHICLES_IN_GARAGE));
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_VEHICLES_IN_GARAGE));
             return;
         }
 
@@ -245,19 +240,19 @@ export class GarageFunctions {
         }
 
         if (!VehicleCache[player.id] || VehicleCache[player.id].length <= 0) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         const data = VehicleCache[player.id].find((ref) => `${ref.id.toString()}` === `${id}`);
         if (!data) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
-        if (VehicleFuncs.hasBeenSpawned(data.id)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED));
+        if (Athena.vehicle.funcs.hasBeenSpawned(data.id)) {
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_ALREADY_SPAWNED));
             alt.emitClient(player, GARAGE_INTERACTIONS.CLOSE);
             return;
         }
@@ -272,23 +267,23 @@ export class GarageFunctions {
 
         const openSpot = GarageFunctions.findOpenSpot(shopIndex);
         if (!openSpot) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS));
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_PARKING_SPOTS));
             alt.emitClient(player, GARAGE_INTERACTIONS.CLOSE);
             return;
         }
 
         // Create and store the vehicle on the hashed vehicle parking spot.
         const hash = sha256(JSON.stringify(openSpot));
-        const newVehicle = VehicleFuncs.spawn(data, openSpot.position, openSpot.rotation);
+        const newVehicle = Athena.vehicle.funcs.spawn(data, openSpot.position, openSpot.rotation);
 
         if (!newVehicle) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         LastParkedCarSpawn[hash] = newVehicle;
-        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         alt.emitClient(player, GARAGE_INTERACTIONS.CLOSE);
     }
 
@@ -309,7 +304,7 @@ export class GarageFunctions {
         // Check that the vehicle is currently spawned and exists.
         const vehicle = alt.Vehicle.all.find((ref) => ref && ref.data && `${ref.data.id}` === `${id}`);
         if (!vehicle) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -327,18 +322,18 @@ export class GarageFunctions {
 
         // Check if the vehicle is either close to a parking spot or the garage itself.
         if (dist >= 10 && !GarageFunctions.isCloseToSpot(vehicle.pos, garage.parking)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
             return;
         }
 
         // Set the garage index.
         vehicle.data.garageIndex = shopIndex;
-        VehicleFuncs.save(vehicle, { garageIndex: vehicle.data.garageIndex });
+        Athena.vehicle.funcs.save(vehicle, { garageIndex: vehicle.data.garageIndex });
 
         // After setting the garage index. Despawn the vehicle.
-        VehicleFuncs.despawn(vehicle.data.id);
-        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        Athena.vehicle.funcs.despawn(vehicle.data.id);
+        Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 }
 

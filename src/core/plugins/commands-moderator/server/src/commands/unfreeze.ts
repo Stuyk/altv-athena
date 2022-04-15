@@ -1,12 +1,13 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../../server/api/athena';
+
 export function handleUnfreezeCmd(player: alt.Player, id: number) {
-    const target = playerFuncs.get.findByUid(id);
+    const target = Athena.player.get.findByUid(id);
 
     if (!target || !target.valid) {
         return;
     }
 
-    playerFuncs.set.frozen(target, false);
-    playerFuncs.emit.notification(player, `Unfroze ${target.data.name} successfully!`);
+    Athena.player.set.frozen(target, false);
+    Athena.player.emit.notification(player, `Unfroze ${target.data.name} successfully!`);
 }

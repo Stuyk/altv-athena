@@ -1,10 +1,11 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../../server/api/athena';
+
 export function handleGotoCmd(player: alt.Player, id: number) {
-    const target = playerFuncs.get.findByUid(id);
+    const target = Athena.player.get.findByUid(id);
     if (!target || !target.valid || !id || target === player) {
         return;
     }
 
-    playerFuncs.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
+    Athena.player.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
 }

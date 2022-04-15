@@ -4,22 +4,20 @@ import { CHARACTER_PERMISSIONS } from '../../../../shared/flags/permissionFlags'
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { distance2d } from '../../../../shared/utility/vector';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import ChatController from '../../../../server/systems/chat';
-import { emitAll } from '../../../../server/utility/emitHelper';
-import { getPlayersByGridSpace } from '../../../../server/utility/filters';
 import { RoleplayCmdsConfig } from './config';
+import { Athena } from '../../../../server/api/athena';
 
 function handleCommandOOC(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        playerFuncs.emit.message(player, ChatController.getDescription('b'));
+        Athena.player.emit.message(player, ChatController.getDescription('b'));
         return;
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getPlayersByGridSpace(player, RoleplayCmdsConfig.COMMAND_OOC_DISTANCE);
+    const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_OOC_DISTANCE);
 
-    emitAll(
+    alt.emitClient(
         closestPlayers,
         View_Events_Chat.Append,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_OOC_COLOR}${player.data.name}: (( ${fullMessage} ))`,
@@ -28,14 +26,14 @@ function handleCommandOOC(player: alt.Player, ...args): void {
 
 function handleCommandMe(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        playerFuncs.emit.message(player, ChatController.getDescription('me'));
+        Athena.player.emit.message(player, ChatController.getDescription('me'));
         return;
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getPlayersByGridSpace(player, RoleplayCmdsConfig.COMMAND_ME_DISTANCE);
+    const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_ME_DISTANCE);
 
-    emitAll(
+    alt.emitClient(
         closestPlayers,
         View_Events_Chat.Append,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_COLOR}${player.data.name} ${fullMessage}`,
@@ -44,14 +42,14 @@ function handleCommandMe(player: alt.Player, ...args): void {
 
 function handleCommandDo(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        playerFuncs.emit.message(player, ChatController.getDescription('do'));
+        Athena.player.emit.message(player, ChatController.getDescription('do'));
         return;
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getPlayersByGridSpace(player, RoleplayCmdsConfig.COMMAND_DO_DISTANCE);
+    const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_DO_DISTANCE);
 
-    emitAll(
+    alt.emitClient(
         closestPlayers,
         View_Events_Chat.Append,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_COLOR}* ${fullMessage} ((${player.data.name}))`,
@@ -60,14 +58,14 @@ function handleCommandDo(player: alt.Player, ...args): void {
 
 function handleCommandLow(player: alt.Player, ...args): void {
     if (args.length <= 0) {
-        playerFuncs.emit.message(player, ChatController.getDescription('low'));
+        Athena.player.emit.message(player, ChatController.getDescription('low'));
         return;
     }
 
     const fullMessage = args.join(' ');
-    const closestPlayers = getPlayersByGridSpace(player, RoleplayCmdsConfig.COMMAND_LOW_DISTANCE);
+    const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_LOW_DISTANCE);
 
-    emitAll(
+    alt.emitClient(
         closestPlayers,
         View_Events_Chat.Append,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_LOW_COLOR}${player.data.name} ${fullMessage}`,
@@ -80,33 +78,33 @@ function handleCommandWhisper(player: alt.Player, id: string, ...args) {
     }
 
     if (typeof id !== 'string') {
-        playerFuncs.emit.message(player, ChatController.getDescription('w'));
+        Athena.player.emit.message(player, ChatController.getDescription('w'));
         return;
     }
 
     if (id === null || id === undefined) {
-        playerFuncs.emit.message(player, ChatController.getDescription('w'));
+        Athena.player.emit.message(player, ChatController.getDescription('w'));
         return;
     }
 
-    const target = playerFuncs.get.findByUid(id);
+    const target = Athena.player.get.findByUid(id);
     if (!target || !target.valid) {
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
+        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
         return;
     }
 
     if (distance2d(target.pos, player.pos) > RoleplayCmdsConfig.COMMAND_WHISPER_DISTANCE) {
-        playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_TOO_FAR));
+        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_TOO_FAR));
         return;
     }
 
     const fullMessage = args.join(' ');
-    playerFuncs.emit.message(
+    Athena.player.emit.message(
         player,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`,
     );
 
-    playerFuncs.emit.message(
+    Athena.player.emit.message(
         target,
         `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`,
     );

@@ -1,13 +1,14 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../../server/api/athena';
+
 export function handleInfoCmd(player: alt.Player, id: number) {
-    const target = playerFuncs.get.findByUid(id);
+    const target = Athena.player.get.findByUid(id);
     if (!target || !target.valid) {
         return;
     }
 
     if (!target.accountData) {
-        playerFuncs.emit.notification(player, `Could not find account info for ${id}!`);
+        Athena.player.emit.notification(player, `Could not find account info for ${id}!`);
     }
 
     const dataToSend = [];
@@ -21,6 +22,6 @@ export function handleInfoCmd(player: alt.Player, id: number) {
     dataToSend.push(`--- --- ---`);
 
     for (let i = 0; i < dataToSend.length; i++) {
-        playerFuncs.emit.message(player, dataToSend[i]);
+        Athena.player.emit.message(player, dataToSend[i]);
     }
 }

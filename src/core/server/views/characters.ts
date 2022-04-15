@@ -3,18 +3,22 @@ import * as alt from 'alt-server';
 import { Player } from 'alt-server';
 import { View_Events_Characters, View_Events_Creator } from '../../shared/enums/views';
 import { Character } from '../../shared/interfaces/character';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import { Collections } from '../interface/iDatabaseCollections';
 import { AgendaSystem } from '../systems/agenda';
 
-export class CharacterSelectFunctions {
+export class CharacterSelectView {
+    static init() {
+        // Leave as empty
+    }
+
     /**
      * Called when a player needs to go to character select.
      * @static
      * @param {alt.Player} player
      * @return {*}
-     * @memberof CharacterSelectFunctions
+     * @memberof CharacterSelectView
      */
     static async show(player: alt.Player) {
         const characters: Array<Character> = await Database.fetchAllByField<Character>(
@@ -40,7 +44,7 @@ export class CharacterSelectFunctions {
 
         player.currentCharacters = characters;
         player.visible = false;
-        playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+        Athena.player.safe.setPosition(player, pos.x, pos.y, pos.z);
 
         alt.setTimeout(() => {
             alt.emitClient(
@@ -66,7 +70,7 @@ export async function handleSelectCharacter(player: Player, id: string): Promise
 
     if (!player.currentCharacters) {
         alt.logWarning(`[Athena] Failed to get characters for a player. Sending them to character select again.`);
-        CharacterSelectFunctions.show(player);
+        CharacterSelectView.show(player);
         return;
     }
 
@@ -121,7 +125,7 @@ async function handleDelete(player: Player, id: string): Promise<void> {
     }
 
     const pos = { ...DEFAULT_CONFIG.CHARACTER_SELECT_POS };
-    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+    Athena.player.safe.setPosition(player, pos.x, pos.y, pos.z);
 
     player.currentCharacters = characters;
     alt.emitClient(player, View_Events_Characters.Show, characters);
@@ -152,8 +156,8 @@ export function handleNewCharacter(player: Player): void {
     player.pendingCharacterEdit = true;
     player.pendingNewCharacter = true;
     player.visible = false;
-    playerFuncs.set.frozen(player, true);
-    playerFuncs.safe.setPosition(
+    Athena.player.set.frozen(player, true);
+    Athena.player.safe.setPosition(
         player,
         DEFAULT_CONFIG.CHARACTER_CREATOR_POS.x,
         DEFAULT_CONFIG.CHARACTER_CREATOR_POS.y,
@@ -178,3 +182,8 @@ export function handleNewCharacter(player: Player): void {
 alt.onClient(View_Events_Characters.Select, handleSelectCharacter);
 alt.onClient(View_Events_Characters.New, handleNewCharacter);
 alt.onClient(View_Events_Characters.Delete, handleDelete);
+
+/**
+ * @deprecated Use {@link CharacterSelectView}
+ */
+export const CharacterSelectFunctions = CharacterSelectView;

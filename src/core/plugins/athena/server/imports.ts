@@ -1,3 +1,4 @@
+import { PluginSystem } from '../../../server/systems/plugins';
 import '../../example-agenda/server/index';
 import '../../core-atm/server/index';
 import '../../core-clothing/server/index';
@@ -16,6 +17,7 @@ import '../../job-mule-delivery/server/index';
 import '../../job-pizza-delivery/server/index';
 import '../../commands-roleplay/server/index';
 import '../../commands-moderator/server/index';
+import '../../core-console-cmds/server/index';
 
 // Example: import './hotels/server/index'
 // Make sure example import is calling the PluginSystem
@@ -29,6 +31,5 @@ import '../../commands-moderator/server/index';
 // ---------------------------------
 // Place Imports Above
 // Always Load this Last
-import { PluginSystem } from '../../../server/systems/plugins';
 
 PluginSystem.init();
