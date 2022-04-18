@@ -14,6 +14,14 @@ export interface Character {
     _id?: any;
 
     /**
+     * An incremental numerical identifier that increases with each character created.
+     * Does not fill gaps. Do not use as a way to save character information.
+     * @type {number}
+     * @memberof Character
+     */
+    character_id?: number;
+
+    /**
      * The account id associated with this character.
      * @type {*}
      * @memberof Character

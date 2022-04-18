@@ -40,10 +40,10 @@ class StreamerServer {
     }
     static config(id, data) {
         config = data;
-        console.log(`=== Streamer Configuration ===`);
-        Object.keys(config).forEach((key) => {
-            console.log(`${key}: ${config[key]}`);
-        });
+        // console.log(`=== Streamer Configuration ===`);
+        // Object.keys(config).forEach((key) => {
+        //     console.log(`${key}: ${config[key]}`);
+        // });
         conn.write(JSON.stringify({ id: -1, route: 'ready', data: '[Streamer] Ready!' }));
     }
     static ping(id) {

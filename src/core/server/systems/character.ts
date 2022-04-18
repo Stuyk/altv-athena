@@ -11,6 +11,7 @@ import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { Item } from '../../shared/interfaces/item';
+import { Global } from './global';
 
 const Injections: { [key: string]: Array<(player: alt.Player) => void> } = {
     select: [],
@@ -85,8 +86,24 @@ export class CharacterSystem {
      * @param {Character} character
      * @memberof CharacterSystem
      */
-    static select(player: alt.Player, character: Character) {
+    static async select(player: alt.Player, character: Character) {
         player.data = deepCloneObject(character);
+
+        // Give the player an identifier if it does not already have one.
+        // if (player.data.character_id !== undefined && player.data.character_id !== null) {
+        //     playerFuncs.emit.meta(player, metaName, player.data[metaName]);
+        // }
+
+        // Increase the value outright
+        if (player.data.character_id === undefined || player.data.character_id === null) {
+            await Global.increase('nextCharacterId', 1, 1);
+            player.data.character_id = await Global.getKey<number>('nextCharacterId');
+            await Athena.player.save.field(player, 'character_id', player.data.character_id);
+        }
+
+        alt.log(
+            `Selected | ${player.data.name} | ID: (${player.id}) | Character ID: ${player.data.character_id} | Account: ${player.data.account_id}`,
+        );
 
         for (let i = 0; i < Injections.beforeSelect.length; i++) {
             Injections.beforeSelect[i](player);
