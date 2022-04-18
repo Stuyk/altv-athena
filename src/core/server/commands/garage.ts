@@ -1,49 +1,37 @@
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
+import { Athena } from '../api/athena';
+import { command } from '../decorators/commands';
 import { playerFuncs } from '../extensions/extPlayer';
 import ChatController from '../systems/chat';
 
 const parkingList = [];
 
-ChatController.addCommand(
-    'addparking',
-    '/addparking - Add parking to a temporary list.',
-    PERMISSIONS.ADMIN,
-    (player: alt.Player) => {
+class GarageCommands {
+    @command('addparking', '/addparking - Add parking to a temporary list.', PERMISSIONS.ADMIN)
+    private static addParkingCommand(player: alt.Player) {
         parkingList.push({ position: player.pos, rotation: player.rot });
-        playerFuncs.emit.message(player, `Appended parking to temporary list.`);
-    },
-);
+        Athena.player.emit.message(player, `Appended parking to temporary list.`);
+    }
 
-ChatController.addCommand(
-    'removeparking',
-    '/removeparking - Remove last element from parking list.',
-    PERMISSIONS.ADMIN,
-    (player: alt.Player) => {
+    @command('removeparking', '/removeparking - Remove last element from parking list.', PERMISSIONS.ADMIN)
+    private static removeParkingCommand(player: alt.Player) {
         parkingList.pop();
-        playerFuncs.emit.message(player, `Removed last element from temporary list.`);
-    },
-);
+        Athena.player.emit.message(player, `Removed last element from temporary list.`);
+    }
 
-ChatController.addCommand(
-    'clearparking',
-    '/clearparking - Clear Temporary List',
-    PERMISSIONS.ADMIN,
-    (player: alt.Player) => {
+    @command('clearparking', '/clearparking - Clear Temporary List', PERMISSIONS.ADMIN)
+    private static clearParkingCommand(player: alt.Player) {
         while (parkingList.length >= 1) {
             parkingList.pop();
         }
 
-        playerFuncs.emit.message(player, `Cleared temporary parking list.`);
-    },
-);
+        Athena.player.emit.message(player, `Cleared temporary parking list.`);
+    }
 
-ChatController.addCommand(
-    'printparking',
-    '/printparking - Print Temporary List',
-    PERMISSIONS.ADMIN,
-    (player: alt.Player) => {
-        playerFuncs.emit.message(player, `Printed to Server Console`);
+    @command('printparking', '/printparking - Print Temporary List', PERMISSIONS.ADMIN)
+    private static printParkingCommand(player: alt.Player) {
+        Athena.player.emit.message(player, `Printed to Server Console`);
         console.log(JSON.stringify(parkingList, null, '\t'));
-    },
-);
+    }
+}
