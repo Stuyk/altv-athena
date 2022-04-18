@@ -24,15 +24,22 @@ const FOLDERS_TO_CLEAN = [
     'resources',
 ];
 
+/** @type {import('@swc/core').Config} */
 const SWC_CONFIG = {
     jsc: {
         parser: {
             syntax: 'typescript',
             dynamicImport: true,
+            decorators: true,
+        },
+        transform: {
+            legacyDecorator: true,
+            decoratorMetadata: true
         },
         target: 'es2020',
     },
     sourceMaps: true,
+
 };
 
 async function cleanFolders() {

@@ -20,6 +20,7 @@ import { handleModeratorChat } from './commands/mc';
 import { addVehicleToPlayer, createTemporaryVehicle } from './commands/vehicle';
 import { handleAddBank, handleAddCash, handleSetBank, handleSetCash } from './commands/currency';
 import { cmdSetHealth } from './commands/health';
+import { command } from '../../../../server/decorators/commands';
 
 export class ModeratorCommands {
     static init() {
