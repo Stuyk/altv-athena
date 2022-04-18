@@ -8,7 +8,9 @@
         "rootDir": ".",
         "allowSyntheticDefaultImports": true,
         "composite": false,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "exclude": ["./core/plugins/**/webview/**/*.ts", "./core/plugins/**/webview/**/*.vue"]
 }
