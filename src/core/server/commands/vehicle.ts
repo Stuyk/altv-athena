@@ -4,63 +4,38 @@ import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { Athena } from '../api/athena';
+import { command } from '../decorators/commands';
 import VehicleFuncs from '../extensions/vehicleFuncs';
-import ChatController from '../systems/chat';
 import { VehicleSystem } from '../systems/vehicle';
 
-ChatController.addCommand(
-    'engine',
-    LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_ENGINE, '/engine'),
-    PERMISSIONS.NONE,
-    (player: alt.Player) => {
-        if (!player || !player.valid || !player.vehicle) {
-            return;
-        }
+class VehicleCommands {
+    @command('engine', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_ENGINE, '/engine'), PERMISSIONS.NONE)
+    private static engineCommand(player: alt.Player) {
+        if (!player || !player.valid || !player.vehicle) return;
 
         VehicleSystem.toggleEngine(player);
-    },
-);
+    }
 
-ChatController.addCommand(
-    'vehlock',
-    LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK, '/vehlock'),
-    PERMISSIONS.NONE,
-    (player: alt.Player) => {
-        if (!player || !player.valid || !player.vehicle) {
-            return;
-        }
+    @command('vehlock', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK, '/vehlock'), PERMISSIONS.NONE)
+    private static vehicleLockCommand(player: alt.Player) {
+        if (!player || !player.valid || !player.vehicle) return;
 
         VehicleSystem.toggleLock(player);
-    },
-);
+    }
 
-ChatController.addCommand(
-    'togdoor',
-    LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR, '/togdoor'),
-    PERMISSIONS.NONE,
-    (player: alt.Player, door: string) => {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        if (!door) {
-            return;
-        }
+    @command('togdoor', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR, '/togdoor'), PERMISSIONS.NONE)
+    private static toggleDoorCommand(player: alt.Player, door: string) {
+        if (!player || !player.valid) return;
+        if (!door) return;
 
         const doorIndex = +door;
-        if (doorIndex >= 6) {
-            return;
-        }
+        if (doorIndex >= 6) return;
 
         VehicleSystem.toggleDoor(player, doorIndex);
-    },
-);
+    }
 
-ChatController.addCommand(
-    'givevehkey',
-    '/givevehkey [id] - Give key to vehicle to player',
-    PERMISSIONS.NONE,
-    (player: alt.Player, id: string) => {
+    @command('givevehkey', '/givevehkey [id] - Give key to vehicle to player', PERMISSIONS.NONE)
+    private static giveVehicleKeyCommand(player: alt.Player, id: string) {
         if (!player || !player.valid || id === null || id === undefined) {
             Athena.player.emit.message(player, `/givevehkey [id]`);
             return;
@@ -84,5 +59,5 @@ ChatController.addCommand(
 
         VehicleFuncs.createKey(target, player.vehicle);
         Athena.player.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
-    },
-);
+    }
+}
