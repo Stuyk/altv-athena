@@ -45,8 +45,65 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
         player.model = 'mp_m_freemode_01';
     }
 
-    emit.meta(player, 'appearance', appearance);
-    alt.emitClient(player, SYSTEM_EVENTS.SYNC_APPEARANCE, appearance);
+    // Set Face
+    player.clearBloodDamage();
+    player.setHeadBlendData(
+        appearance.faceMother,
+        appearance.faceFather,
+        0,
+        appearance.skinMother,
+        appearance.skinFather,
+        0,
+        parseFloat(appearance.faceMix.toString()),
+        parseFloat(appearance.skinMix.toString()),
+        0,
+    );
+
+    // Facial Features
+    for (let i = 0; i < appearance.structure.length; i++) {
+        const value = appearance.structure[i];
+        player.setFaceFeature(i, value);
+    }
+
+    // Overlay Features - NO COLORS
+    for (let i = 0; i < appearance.opacityOverlays.length; i++) {
+        const overlay = appearance.opacityOverlays[i];
+        player.setHeadOverlay(overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
+    }
+
+    // Hair - Tattoo
+    alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, [appearance.hairOverlay]);
+
+    // Hair
+    player.setClothes(2, appearance.hair, 0, 0);
+    player.setHairColor(appearance.hairColor1);
+    player.setHairHighlightColor(appearance.hairColor2);
+
+    // Facial Hair
+    player.setHeadOverlay(1, appearance.facialHair, appearance.facialHairOpacity);
+    player.setHeadOverlayColor(1, 1, appearance.facialHairColor1, appearance.facialHairColor1);
+
+    // Chest Hair
+    if (appearance.chestHair !== null && appearance.chestHair !== undefined) {
+        player.setHeadOverlay(10, appearance.chestHair, appearance.chestHairOpacity);
+        player.setHeadOverlayColor(10, 1, appearance.chestHairColor1, appearance.chestHairColor1);
+    }
+
+    // Eyebrows
+    player.setHeadOverlay(2, appearance.eyebrows, appearance.eyebrowsOpacity);
+    player.setHeadOverlayColor(2, 1, appearance.eyebrowsColor1, appearance.eyebrowsColor1);
+
+    // Decor
+    for (let i = 0; i < appearance.colorOverlays.length; i++) {
+        const overlay = appearance.colorOverlays[i];
+        const color2 = overlay.color2 ? overlay.color2 : overlay.color1;
+
+        player.setHeadOverlay(overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
+        player.setHeadOverlayColor(overlay.id, 1, overlay.color1, color2);
+    }
+
+    // Eyes
+    player.setEyeColor(appearance.eyes);
 }
 
 function equipment(player: alt.Player, items: Array<Item>, isMale = false) {

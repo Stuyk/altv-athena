@@ -73,8 +73,6 @@ import './utility/wheelMenu';
 import './views/actions';
 import './views/audio';
 import './views/chat';
-import './views/characters';
-import './views/creator';
 import './views/factions';
 import './views/inventory';
 import './views/job';

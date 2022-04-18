@@ -32,7 +32,6 @@
                     @inc-parameter="incrementParameter"
                     @dec-parameter="decrementParameter"
                     @set-infodata="setInfoData"
-                    v-bind:emit="emit"
                     v-bind:infodata="infoData"
                 ></component>
             </div>
@@ -41,13 +40,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, shallowRef } from 'vue';
-import ExCharacter from '../../exampleData/ExCharacter';
-import Button from '../../components/Button.vue';
-import Icon from '../../components/Icon.vue';
-import Modal from '../../components/Modal.vue';
-import Toolbar from '../../components/Toolbar.vue';
-import Frame from '../../components/Frame.vue';
+import { defineComponent } from 'vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Modal from '@components/Modal.vue';
+import Toolbar from '@components/Toolbar.vue';
+import Frame from '@components/Frame.vue';
 
 /** Components for this View Only */
 import Appearance from './components/Appearance.vue';
@@ -57,18 +55,16 @@ import Makeup from './components/Makeup.vue';
 import Overlays from './components/Overlays.vue';
 import Structure from './components/Structure.vue';
 
-import DefaultLocales from './utility/defaultLocales';
 import MakeupList from './utility/makeupList';
 import OverlaysList from './utility/overlaysList';
 import { MaleHairOverlays, FemaleHairOverlays } from './utility/hairOverlays';
 import { MalePresets, FemalePresets } from './utility/presets';
+import { CHARACTER_CREATOR_LOCALE } from '../shared/locale';
+import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../shared/events';
 
 const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
-    props: {
-        emit: Function,
-    },
     components: {
         Button,
         Icon,
@@ -120,7 +116,7 @@ export default defineComponent({
             },
             navOptions: ['Appearance', 'Structure', 'Hair', 'Overlays', 'Makeup', 'Info'],
             totalCharacters: 1,
-            locales: DefaultLocales,
+            locales: CHARACTER_CREATOR_LOCALE,
         };
     },
     computed: {
@@ -184,7 +180,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('creator:ReadyDone');
+            alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY_SETUP_COMPLETE);
         },
         setParameter(parameter: string, value: any, arrayIndex: number = null) {
             if (typeof value !== 'number' && typeof value !== 'object') {
@@ -328,7 +324,7 @@ export default defineComponent({
                 return;
             }
 
-            this.emit('creator:Sync', this.data);
+            alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.SYNC, JSON.parse(JSON.stringify(this.data)));
         },
         resetSelection() {
             this.selection = 0;
@@ -356,16 +352,14 @@ export default defineComponent({
         });
 
         if ('alt' in window) {
-            alt.on('creator:Ready', this.setReady);
-            alt.on('creator:SetData', this.setData);
-            alt.on('creator:SetLocales', this.setLocales);
+            alt.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY, this.setReady);
+            alt.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.SET_DATA, this.setData);
         }
     },
     unmounted() {
         if ('alt' in window) {
-            alt.off('creator:Ready', this.setReady);
-            alt.off('creator:SetData', this.setData);
-            alt.off('creator:SetLocales', this.setLocales);
+            alt.off(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY, this.setReady);
+            alt.off(CHARACTER_CREATOR_WEBVIEW_EVENTS.SET_DATA, this.setData);
         }
     },
 });

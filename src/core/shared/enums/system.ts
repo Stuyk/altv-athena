@@ -121,6 +121,7 @@ export enum SYSTEM_EVENTS {
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',
     //
+    SET_PLAYER_DECORATIONS = 'character:Ped:Decoration',
     SYNC_APPEARANCE = 'character:Appearance',
     SYNC_EQUIPMENT = 'character:Equipment',
     //

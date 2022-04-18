@@ -7,6 +7,7 @@ import { WorldNotificationController } from '../../streamers/worldNotifications'
 import { AdminController } from '../../systems/admin';
 import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
+import { HologramController } from '../../systems/hologram';
 import { InteractionController } from '../../systems/interaction';
 
 export const controllersConst = {
@@ -15,6 +16,7 @@ export const controllersConst = {
     chat: ChatController,
     interaction: InteractionController,
     item: ServerItemController,
+    holograms: HologramController,
     marker: ServerMarkerController,
     object: ServerObjectController,
     ped: PedController,

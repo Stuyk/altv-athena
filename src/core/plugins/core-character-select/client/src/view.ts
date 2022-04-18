@@ -1,21 +1,21 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { View_Events_Characters } from '../../shared/enums/views';
-import { Character } from '../../shared/interfaces/character';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import PedEditCamera from '../utility/camera';
-import { WebViewController } from '../extensions/view2';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { sleep } from '../utility/sleep';
-import { playPedAnimation } from '../systems/animations';
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { Item } from '../../shared/interfaces/item';
-import { PedCharacter } from '../utility/characterPed';
-import { Vector3 } from '../../shared/interfaces/vector';
-import { CharacterSystem } from '../systems/character';
-import { disableAllControls } from '../utility/disableControls';
-import ViewModel from '../models/viewModel';
+import { WebViewController } from '../../../../client/extensions/view2';
+import ViewModel from '../../../../client/models/viewModel';
+import { playPedAnimation } from '../../../../client/systems/animations';
+import { CharacterSystem } from '../../../../client/systems/character';
+import PedEditCamera from '../../../../client/utility/camera';
+import { PedCharacter } from '../../../../client/utility/characterPed';
+import { disableAllControls } from '../../../../client/utility/disableControls';
+import { sleep } from '../../../../client/utility/sleep';
+import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
+import { Appearance } from '../../../../shared/interfaces/appearance';
+import { Character } from '../../../../shared/interfaces/character';
+import { Item } from '../../../../shared/interfaces/item';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
+import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
+import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../../shared/events';
 
 const PAGE_NAME = 'CharacterSelect';
 const IDLE_ANIM_DICT = 'anim@amb@business@bgen@bgen_no_work@';
@@ -27,26 +27,31 @@ let isOpen = false;
  * Do Not Export Internal Only
  */
 class InternalFunctions implements ViewModel {
-    static async open(_characters: Partial<Character>[], pos: Vector3, heading: number) {
+    static async open(_characters: Partial<Character>[]) {
         characters = _characters;
         const view = await WebViewController.get();
 
         if (isOpen) {
-            view.emit(`${PAGE_NAME}:Set`, characters);
+            view.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, characters);
             return;
         }
 
-        view.on(`${PAGE_NAME}:Select`, InternalFunctions.select);
-        view.on(`${PAGE_NAME}:New`, InternalFunctions.handleNew);
-        view.on(`${PAGE_NAME}:Update`, InternalFunctions.update); // Calls `creator.ts`
-        view.on(`${PAGE_NAME}:Delete`, InternalFunctions.handleDelete);
-        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.SELECT, InternalFunctions.select);
+        view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.NEW, InternalFunctions.handleNew);
+        view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.UPDATE, InternalFunctions.update); // Calls `creator.ts`
+        view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.DELETE, InternalFunctions.handleDelete);
+        view.on(CHARACTER_SELECT_WEBVIEW_EVENTS.READY, InternalFunctions.ready);
 
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
-        await PedCharacter.create(_characters[0].appearance.sex === 1 ? true : false, pos, heading);
+        await PedCharacter.create(
+            _characters[0].appearance.sex === 1 ? true : false,
+            CHARACTER_SELECT_CONFIG.CHARACTER_SELECT_POS,
+            CHARACTER_SELECT_CONFIG.CHARACTER_SELECT_ROT,
+        );
+
         await PedCharacter.apply(_characters[0].appearance as Appearance);
         await sleep(300);
         await PedEditCamera.create(PedCharacter.get(), { x: -0.25, y: 0, z: 0 });
@@ -112,11 +117,11 @@ class InternalFunctions implements ViewModel {
 
     static async close() {
         const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Select`, InternalFunctions.select);
-        view.off(`${PAGE_NAME}:New`, InternalFunctions.handleNew);
-        view.off(`${PAGE_NAME}:Update`, InternalFunctions.update); // Calls `creator.ts`
-        view.off(`${PAGE_NAME}:Delete`, InternalFunctions.handleDelete);
-        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+        view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.SELECT, InternalFunctions.select);
+        view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.NEW, InternalFunctions.handleNew);
+        view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.UPDATE, InternalFunctions.update); // Calls `creator.ts`
+        view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.DELETE, InternalFunctions.handleDelete);
+        view.off(CHARACTER_SELECT_WEBVIEW_EVENTS.READY, InternalFunctions.ready);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -136,23 +141,23 @@ class InternalFunctions implements ViewModel {
 
     static async ready() {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetLocale`, LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CHARACTERS));
-        view.emit(`${PAGE_NAME}:Set`, characters);
+        view.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, characters);
     }
 
     static async select(id) {
         PedCharacter.setHidden(true);
-        alt.emitServer(View_Events_Characters.Select, id);
+
+        alt.emitServer(CHARACTER_SELECT_EVENTS.SELECT, id);
     }
 
     static async handleNew() {
-        alt.emitServer(View_Events_Characters.New);
+        alt.emitServer(CHARACTER_SELECT_EVENTS.NEW);
     }
 
     static async handleDelete(id) {
-        alt.emitServer(View_Events_Characters.Delete, id);
+        alt.emitServer(CHARACTER_SELECT_EVENTS.DELETE, id);
     }
 }
 
-alt.onServer(View_Events_Characters.Show, InternalFunctions.open);
-alt.onServer(View_Events_Characters.Done, InternalFunctions.close);
+alt.onServer(CHARACTER_SELECT_EVENTS.SHOW, InternalFunctions.open);
+alt.onServer(CHARACTER_SELECT_EVENTS.DONE, InternalFunctions.close);

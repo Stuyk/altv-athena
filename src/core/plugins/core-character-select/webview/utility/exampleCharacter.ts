@@ -1,4 +1,4 @@
-export default {
+export const EXAMPLE_CHARACTER = {
     _id: '5f7117a3fd8d0a66b02eb998',
     pos: { x: -734.5714111328125, y: -264.4747314453125, z: 37.03076171875 },
     cash: 25,
@@ -6,7 +6,7 @@ export default {
     rewardPoints: 0,
     info: {
         age: 18,
-        gender: 'male'
+        gender: 'male',
     },
     name: 'Jane_Delane',
     appearance: {
@@ -30,11 +30,11 @@ export default {
         sex: 1,
         skinFather: 16,
         skinMix: 0.1,
-        skinMother: 23
+        skinMother: 23,
     },
     equipment: [],
     account_id: '5f70bb5e829f5c3e80aa4192',
     position: { x: -740.6505737304688, y: -254.8219757080078, z: 37.03076171875 },
     characterIndex: 0,
-    hours: 40.55555555
+    hours: 40.55555555,
 };

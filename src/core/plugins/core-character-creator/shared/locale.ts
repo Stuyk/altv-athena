@@ -1,4 +1,4 @@
-export default {
+export const CHARACTER_CREATOR_LOCALE = {
     titles: ['Appearance', 'Facial Structure', 'Hair', 'Details', 'Makeup', 'Info', 'Done'],
     LABEL_FIRST_NAME: 'First Name',
     LABEL_LAST_NAME: 'Last Name',
@@ -52,7 +52,7 @@ export default {
         LABEL_FACIAL_HAIR: 'Facial Hair',
         DESC_FACIAL_HAIR: 'Choose your facial hair style, colour, opacity, and highlights.',
         LABEL_CHEST_HAIR: 'Chest Hair',
-        DESC_CHEST_HAIR: 'Choose your Chest hair style, colour, opacity, and highlights.',
+        DESC_CHEST_HAIR: 'Choose your chest hair style, colour, opacity, and highlights.',
         LABEL_OPACITY: 'Opacity',
         LABEL_FACIAL_HAIR_COLOUR: 'Facial Hair Colour',
         LABEL_CHEST_HAIR_COLOUR: 'Chest Hair Colour',
@@ -301,8 +301,8 @@ export default {
             'Snail Trail',
             'Slug and Nips',
             'Hairy Arms',
-            'Shaved'
-        ]
+            'Shaved',
+        ],
     },
     structureComponent: [
         'Nose Width',

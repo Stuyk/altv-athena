@@ -1,7 +1,5 @@
-import { DefineComponent, ShallowRef, shallowRef } from 'vue';
+import { shallowRef } from 'vue';
 
-import CharacterCreator from './characterCreator/CharacterCreator.vue';
-import CharacterSelect from './characterSelect/CharacterSelect.vue';
 import Designs from './designs/Designs.vue';
 import Icons from './icons/Icons.vue';
 import InputBox from './input/InputBox.vue';
@@ -20,8 +18,6 @@ export const CORE_IMPORTS = {
     Actions: shallowRef(Actions),
     AthenaLogo: shallowRef(AthenaLogo),
     Audio: shallowRef(Audio),
-    CharacterCreator: shallowRef(CharacterCreator),
-    CharacterSelect: shallowRef(CharacterSelect),
     Chat: shallowRef(Chat),
     Designs: shallowRef(Designs),
     Icons: shallowRef(Icons),

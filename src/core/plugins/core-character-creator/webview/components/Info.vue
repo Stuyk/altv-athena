@@ -145,9 +145,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import Input from '../../../components/Input.vue';
-import Button from '../../../components/Button.vue';
-import Icon from '../../../components/Icon.vue';
+import Input from '@components/Input.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
 const ComponentName = 'Info';
 export default defineComponent({
@@ -222,7 +223,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit('creator:CheckName', name);
+            alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, name);
         },
         handleNameAvailable(result: boolean) {
             this.valid.name = result;
@@ -261,17 +262,22 @@ export default defineComponent({
                 return;
             }
 
-            this.emit('creator:Done', this.data, this.infodata, this.infodata.name);
+            alt.emit(
+                CHARACTER_CREATOR_WEBVIEW_EVENTS.DONE,
+                JSON.parse(JSON.stringify(this.data)),
+                JSON.parse(JSON.stringify(this.infodata)),
+                this.infodata.name,
+            );
         },
     },
     mounted() {
         if ('alt' in window) {
-            alt.on('creator:IsNameAvailable', this.handleNameAvailable);
+            alt.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, this.handleNameAvailable);
         }
     },
     unmounted() {
         if ('alt' in window) {
-            alt.off('creator:IsNameAvailable', this.handleNameAvailable);
+            alt.off(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, this.handleNameAvailable);
         }
     },
 });

@@ -4,7 +4,7 @@ import fs from 'fs';
 
 async function constructFilePaths() {
     const serverFiles = await new Promise((resolve) => {
-        glob(path.join(process.cwd(), 'src/core/server/**/*.ts'), (err, _files) => {
+        glob(path.join(process.cwd(), 'src/core/server/api/**/*.ts'), (err, _files) => {
             resolve(_files);
         });
     });

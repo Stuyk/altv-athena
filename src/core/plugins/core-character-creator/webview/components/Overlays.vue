@@ -51,10 +51,10 @@
 import { defineComponent } from 'vue';
 import OverlaysList from '../utility/overlaysList';
 
-import Button from '../../../components/Button.vue';
-import Icon from '../../../components/Icon.vue';
-import Module from '../../../components/Module.vue';
-import RangeInput from '../../../components/RangeInput.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
+import RangeInput from '@components/RangeInput.vue';
 
 const ComponentName = 'Overlays';
 export default defineComponent({
@@ -89,6 +89,7 @@ export default defineComponent({
             const value = parseFloat(e.target['value']);
 
             currentValues[index][valueToChange] = value;
+
             this.$emit('set-parameter', 'opacityOverlays', currentValues);
         },
         decValueWrap(index: number, min: number, max: number, incrementValue: number, isOpacity = false) {

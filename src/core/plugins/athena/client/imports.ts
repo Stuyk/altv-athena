@@ -8,6 +8,8 @@ import '../../core-paintshop/client/index';
 import '../../example-agenda/client/index';
 import '../../core-console-cmds/client/index';
 import '../../core-dealership/client/index';
+import '../../core-character-creator/client/index';
+import '../../core-character-select/client/index';
 
 // Specify what you are loading here.
 // import './example-folder/client/index';

@@ -1,16 +1,15 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import PedEditCamera from '../utility/camera';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { View_Events_Creator } from '../../shared/enums/views';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { PedCharacter } from '../utility/characterPed';
-import { Vector3 } from '../../shared/interfaces/vector';
-import { sleep } from '../utility/sleep';
-import { WebViewController } from '../extensions/view2';
-import { disableAllControls } from '../utility/disableControls';
-import { CharacterSystem } from '../systems/character';
+import { WebViewController } from '../../../../client/extensions/view2';
+import { CharacterSystem } from '../../../../client/systems/character';
+import PedEditCamera from '../../../../client/utility/camera';
+import { PedCharacter } from '../../../../client/utility/characterPed';
+import { disableAllControls } from '../../../../client/utility/disableControls';
+import { sleep } from '../../../../client/utility/sleep';
+import { Appearance } from '../../../../shared/interfaces/appearance';
+import { CHARACTER_SELECT_EVENTS } from '../../../core-character-select/shared/events';
+import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
+import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
 const PAGE_NAME = 'CharacterCreator';
 const fModel = alt.hash('mp_f_freemode_01');
@@ -29,7 +28,7 @@ native.requestModel(mModel);
  */
 class InternalFunctions {
     static async open(
-        pos: Vector3,
+        pos: alt.Vector3,
         heading: number,
         _oldCharacterData = null,
         _noDiscard = true,
@@ -45,12 +44,11 @@ class InternalFunctions {
         await sleep(100);
 
         const view = await WebViewController.get();
-        view.on('creator:ReadyDone', InternalFunctions.handleReadyDone);
-        view.on('creator:Done', InternalFunctions.handleDone);
-        view.on('creator:Cancel', InternalFunctions.handleCancel);
-        view.on('creator:Sync', InternalFunctions.handleSync);
-        view.on('creator:CheckName', InternalFunctions.handleCheckName);
-        view.on('creator:DisableControls', InternalFunctions.handleDisableControls);
+        view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY_SETUP_COMPLETE, InternalFunctions.handleReadyDone);
+        view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.DONE, InternalFunctions.handleDone);
+        view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.SYNC, InternalFunctions.handleSync);
+        view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, InternalFunctions.handleCheckName);
+        view.on(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, InternalFunctions.handleDisableControls);
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
@@ -79,17 +77,12 @@ class InternalFunctions {
 
     static handleDone(newData, infoData, name: string) {
         InternalFunctions.close();
-        alt.emitServer(View_Events_Creator.Done, newData, infoData, name);
-    }
-
-    static handleCancel() {
-        InternalFunctions.close();
-        alt.emitServer(View_Events_Creator.Done, oldCharacterData);
+        alt.emitServer(CHARACTER_CREATOR_EVENTS.DONE, newData, infoData, name);
     }
 
     static async waitForReady() {
         const view = await WebViewController.get();
-        view.emit('creator:Ready', noDiscard, noName);
+        view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.READY, noDiscard, noName);
     }
 
     static async handleReadyDone() {
@@ -105,29 +98,29 @@ class InternalFunctions {
         await PedCharacter.setHidden(false);
 
         const view = await WebViewController.get();
-        view.emit('creator:SetData', oldCharacterData, totalCharacters);
-        view.emit('creator:SetLocales', LocaleController.getWebviewLocale(LOCALE_KEYS.WEBVIEW_CREATOR));
+        view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.SET_DATA, oldCharacterData, totalCharacters);
     }
 
     static handleCheckName(name: string): void {
-        alt.emitServer(View_Events_Creator.AwaitName, name);
+        alt.emitServer(CHARACTER_CREATOR_EVENTS.VERIFY_NAME, name);
     }
 
     static async handleNameFinish(result: boolean) {
         const view = await WebViewController.get();
-        view.emit('creator:IsNameAvailable', result);
+        view.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.VERIFY_NAME, result);
     }
 
     static handleDisableControls(shouldDisableControls: boolean): void {
         PedEditCamera.disableControls(shouldDisableControls);
     }
 
-    static async handleSync(appearanceData: Appearance): Promise<void> {
-        await PedCharacter.apply(appearanceData, true);
+    static async handleSync(_appearance: Appearance): Promise<void> {
+        await PedCharacter.apply(_appearance, true);
         PedEditCamera.update(PedCharacter.get());
     }
 }
 
-alt.onServer(View_Events_Creator.Sync, InternalFunctions.handleSync);
-alt.onServer(View_Events_Creator.Show, InternalFunctions.open);
-alt.onServer(View_Events_Creator.AwaitName, InternalFunctions.handleNameFinish);
+// Needs to be moved server side... yay nightmares
+// alt.onServer(View_Events_Creator.Sync, InternalFunctions.handleSync);
+alt.onServer(CHARACTER_CREATOR_EVENTS.SHOW, InternalFunctions.open);
+alt.onServer(CHARACTER_CREATOR_EVENTS.VERIFY_NAME, InternalFunctions.handleNameFinish);

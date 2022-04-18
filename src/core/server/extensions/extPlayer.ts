@@ -37,34 +37,6 @@ declare module 'alt-server' {
         hasModel?: boolean;
 
         /**
-         * A temporary array assigned when the account fetches all characters.
-         * @type {Array<Character>}
-         * @memberof Player
-         */
-        currentCharacters?: Array<Character>;
-
-        /**
-         * Used to check if the character is pending editing.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingCharacterEdit?: boolean;
-
-        /**
-         * Used to bring up / interact with new character screen.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingNewCharacter?: boolean;
-
-        /**
-         * Used to bring up / interace with the select character screen.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingCharacterSelect?: boolean;
-
-        /**
          * Account identifiers for Discord
          * @type {Partial<Account>}
          * @memberof Player
@@ -206,13 +178,6 @@ declare module 'alt-server' {
          * @memberof Player
          */
         hasSatDown?: boolean;
-
-        /**
-         * Temporary index for selecting a character.
-         * @type {number}
-         * @memberof Player
-         */
-        selectedCharacterIndex?: number;
 
         /**
          * When the player is in-world and selected a character.

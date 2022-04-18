@@ -95,10 +95,10 @@
 import { defineComponent } from 'vue';
 import MakeupList from '../utility/makeupList';
 
-import Button from '../../../components/Button.vue';
-import Icon from '../../../components/Icon.vue';
-import Module from '../../../components/Module.vue';
-import RangeInput from '../../../components/RangeInput.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
+import RangeInput from '@components/RangeInput.vue';
 
 const ComponentName = 'Makeup';
 export default defineComponent({

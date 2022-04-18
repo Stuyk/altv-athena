@@ -95,12 +95,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ExCharacter from '../../exampleData/ExCharacter';
-import Button from '../../components/Button.vue';
-import Icon from '../../components/Icon.vue';
-import Modal from '../../components/Modal.vue';
-import Toolbar from '../../components/Toolbar.vue';
-import Frame from '../../components/Frame.vue';
+import { EXAMPLE_CHARACTER } from './utility/exampleCharacter';
+import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
+import { CHARACTER_SELECT_LOCALE } from '../shared/locale';
+
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Modal from '@components/Modal.vue';
+import Toolbar from '@components/Toolbar.vue';
+import Frame from '@components/Frame.vue';
 
 const ComponentName = 'CharacterSelect';
 export default defineComponent({
@@ -118,21 +121,7 @@ export default defineComponent({
             characters: [],
             statNames: [],
             deleteDialog: false,
-            locales: {
-                LABEL_DELETE: 'Delete',
-                LABEL_NEW: 'New',
-                LABEL_SELECT: 'Select',
-                LABEL_YES: 'Yes',
-                LABEL_NO: 'No',
-                LABEL_CONFIRM_DELETE: 'Are you sure you want to delete your character',
-                LABEL_NAME: 'Name',
-                LABEL_AGE: 'Age',
-                LABEL_STATS: 'Stats',
-                LABEL_GENDER: 'Gender',
-                LABEL_HOURS: 'Hours',
-                LABEL_CASH: 'Cash',
-                LABEL_BANK: 'Bank',
-            },
+            locales: CHARACTER_SELECT_LOCALE,
         };
     },
     computed: {
@@ -178,7 +167,7 @@ export default defineComponent({
         },
     },
     methods: {
-        handleSet(characters) {
+        setCharacters(characters) {
             this.characterIndex = 0;
             this.characters = characters;
             this.updateAppearance();
@@ -214,7 +203,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Update`, this.characterIndex);
+            alt.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.UPDATE, this.characterIndex);
         },
         selectCharacter() {
             if (!('alt' in window)) {
@@ -222,14 +211,14 @@ export default defineComponent({
             }
 
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
-            alt.emit(`${ComponentName}:Select`, this.characters[this.characterIndex]._id);
+            alt.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.SELECT, this.characters[this.characterIndex]._id);
         },
         newCharacter() {
             if (!('alt' in window)) {
                 return;
             }
 
-            alt.emit(`${ComponentName}:New`);
+            alt.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.NEW);
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         showDeleteInterface() {
@@ -257,7 +246,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Delete`, this.characters[this.characterIndex]._id);
+            alt.emit(CHARACTER_SELECT_WEBVIEW_EVENTS.DELETE, this.characters[this.characterIndex]._id);
             alt.emit('play:Sound', 'SELECT', 'HUD_FRONTEND_DEFAULT_SOUNDSET');
         },
         setLocales(localeObject) {
@@ -278,22 +267,21 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
-            alt.on(`${ComponentName}:SetLocale`, this.setLocales);
-            alt.on(`${ComponentName}:Set`, this.handleSet);
+            alt.on(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, this.setCharacters);
             alt.emit(`${ComponentName}:Ready`);
         } else {
             this.characters = [
                 {
-                    ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Ade_Jacbosin', bank: 25000, cash: 25, hours: 100 },
+                    ...EXAMPLE_CHARACTER,
+                    ...{ appearance: { sex: 0 }, name: 'Elon_Musk', bank: 25000, cash: 25, hours: 100 },
                 },
                 {
-                    ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Mobi_Jobonai', bank: 26000, cash: 35, hours: 255 },
+                    ...EXAMPLE_CHARACTER,
+                    ...{ appearance: { sex: 0 }, name: 'Is_A', bank: 26000, cash: 35, hours: 255 },
                 },
                 {
-                    ...ExCharacter,
-                    ...{ appearance: { sex: 0 }, name: 'Tony_Jablinski', bank: 21111, cash: 409, hours: 69 },
+                    ...EXAMPLE_CHARACTER,
+                    ...{ appearance: { sex: 0 }, name: 'Fucking_Lizard', bank: 21111, cash: 409, hours: 69 },
                 },
             ];
         }
@@ -302,8 +290,7 @@ export default defineComponent({
     },
     unmounted() {
         if ('alt' in window) {
-            alt.off(`${ComponentName}:SetLocale`, this.setLocales);
-            alt.off(`${ComponentName}:Set`, this.handleSet);
+            alt.off(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, this.setCharacters);
         }
     },
 });

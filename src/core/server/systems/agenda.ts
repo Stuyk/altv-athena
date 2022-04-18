@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { playerConst } from '../api/consts/constPlayer';
-import { CharacterSelectView } from '../views/characters';
+// import { CharacterSelectView } from '../views/characters';
 import { LoginView } from '../views/login';
 import { LoginController } from './login';
 
@@ -9,8 +9,7 @@ const agenda: { [key: string]: (player: alt.Player) => void } = {};
 export enum AgendaOrder {
     'DISCORD_LOGIN' = 1,
     'ACCOUNT_SETUP' = 2,
-    'CHARACTER_SETUP' = 3,
-    'SPAWN_CHARACTER' = 100,
+    'CHARACTER_SELECT' = 99,
 }
 
 const timelines: {
@@ -29,8 +28,6 @@ export class AgendaSystem {
     static init() {
         AgendaSystem.set(AgendaOrder.DISCORD_LOGIN, LoginView.show);
         AgendaSystem.set(AgendaOrder.ACCOUNT_SETUP, LoginController.show);
-        AgendaSystem.set(AgendaOrder.CHARACTER_SETUP, CharacterSelectView.show);
-        AgendaSystem.set(AgendaOrder.SPAWN_CHARACTER, playerConst.select.character);
     }
 
     /**
@@ -148,6 +145,8 @@ export class AgendaSystem {
         if (!nextCallback) {
             return;
         }
+
+        alt.log(`~g~Going to next agenda @ (${timelines[player.id].agendaIndex})`);
 
         nextCallback(player, ...args);
     }
