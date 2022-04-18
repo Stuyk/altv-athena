@@ -1,11 +1,14 @@
 <template>
-    <div class="factions-wrapper">
-        <div class="split">
+    <div class="factions-wrapper stack">
+        <div class="toolbar split space-between">
+            <span class="pl-2">{{ faction && faction.name ? faction.name : 'Faction Name Missing' }}</span>
+            <Icon class="red--text red--hover hover pr-2" :size="24" icon="icon-times-circle" />
+        </div>
+        <div class="split" style="width: 100%">
             <div class="factions-nav">
                 <Navigation v-bind:pages="pages" v-bind:page="pageIndex" @navigate="setPage" />
             </div>
             <div class="factions-content stack" v-if="faction">
-                <Header v-bind:faction="faction" />
                 <component
                     :is="pages[pageIndex].page"
                     class="fade-in"
@@ -54,7 +57,9 @@ export default defineComponent({
                 { name: 'Settings', page: 'Settings' },
             ],
             faction: null,
-            character: '51a8efe590851930ac59f5eg', // 51a8efe590851930ac59f5cc - 0 Rank
+            // Character IDs and their associated test ranks...
+            // 61a8efe590851930ac59f5ef - 0 Rank // 51a8efe590851930ac59f5eg - 1 Rank // 51a8efe590851930ac59f5cc - 2 Rank
+            character: '51a8efe590851930ac59f5eg',
         };
     },
     methods: {
@@ -78,13 +83,28 @@ export default defineComponent({
 </script>
 
 <style>
+.toolbar {
+    min-height: 35px;
+    max-height: 35px;
+    background-color: rgba(12, 12, 12, 1);
+    border-bottom: 2px solid rgba(28, 28, 28, 1);
+    box-shadow: 2px 2px 2px black;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
 .factions-wrapper {
     display: flex;
-    min-width: 100vw;
-    max-width: 100vw;
-    min-height: 100vh;
-    max-height: 100vh;
-    background-color: rgba(12, 12, 12, 0.85);
+    min-width: 75vw;
+    max-width: 75vw;
+    min-height: calc(75vh + 35px);
+    max-height: calc(75vh + 35px);
+    background-color: rgba(36, 36, 36, 1);
+    overflow: hidden;
+    border: 2px solid rgba(22, 22, 22, 1);
+    box-shadow: 2px 2px 10px black;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }
 
 .factions-nav {
@@ -92,17 +112,16 @@ export default defineComponent({
     flex-direction: column;
     min-width: 175px;
     max-width: 175px;
-    min-height: 100vh;
-    max-height: 100vh;
-    border-right: 2px solid rgba(23, 23, 23, 1);
+    height: 100%;
+    border-right: 2px solid rgba(28, 28, 28, 1);
     box-sizing: border-box;
 }
 
 .factions-content {
     width: 100%;
-    min-width: calc(100vw - 175px);
-    max-width: calc(100vw - 175px);
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100%;
+    min-height: 75vh;
+    max-height: 75vh;
+    box-sizing: border-box;
 }
 </style>

@@ -470,4 +470,22 @@ export class FactionPlayerFuncs {
 
         return await FactionFuncs.updateRankWeight(faction, rankUid, weight);
     }
+
+    /**
+     * Invoke an event by an event name.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @return {*}
+     * @memberof FactionPlayerFuncs
+     */
+    static invoke(player: alt.Player, eventName: string, ...args: any[]): boolean {
+        if (!FactionPlayerFuncs[eventName]) {
+            return false;
+        }
+
+        return FactionPlayerFuncs[eventName](player, ...args);
+    }
 }

@@ -1,10 +1,10 @@
 <template>
-    <div :class="dynamicClass" @mouseover="playHover" @mouseup="playMouseUp" v-if="!disable">
+    <div :class="dynamicClass" :style="style" @mouseover="playHover" @mouseup="playMouseUp" v-if="!disable">
         <div style="user-select: none !important; pointer-events: none !important">
             <slot />
         </div>
     </div>
-    <div :class="dynamicClass" v-else>
+    <div :class="dynamicClass" :style="style" v-else>
         <div style="user-select: none !important; pointer-events: none !important">
             <slot />
         </div>
@@ -48,6 +48,10 @@ export default defineComponent({
         padding: {
             type: Number,
             default: 3,
+        },
+        style: {
+            type: String,
+            default: '',
         },
     },
     methods: {

@@ -61,6 +61,36 @@ export class FactionParser {
     }
 
     /**
+     * Returns a list of faction members by rank.
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} rankID
+     * @return {*}
+     * @memberof FactionParser
+     */
+    static getFactionMembersByRank(faction: Faction, rankID: string) {
+        if (!faction || !faction.ranks || !rankID) {
+            return [];
+        }
+
+        const members: Array<{ id?: string } & FactionCharacter> = [];
+        Object.keys(faction.members).forEach((key) => {
+            if (!faction.members[key]) {
+                return;
+            }
+
+            if (faction.members[key].rank !== rankID) {
+                return;
+            }
+
+            members.push({ ...faction.members[key], id: key });
+        });
+
+        return members;
+    }
+
+    /**
      * It returns an array of objects containing the members of the faction.
      * @param {Faction} faction - The faction object that we're getting the members of.
      * @returns An array of objects.
@@ -80,7 +110,6 @@ export class FactionParser {
             }
 
             const rank = FactionParser.getRank(faction, faction.members[key].rank);
-            console.log(rank);
 
             let weight = 0;
             if (rank && rank.weight) {
@@ -90,18 +119,13 @@ export class FactionParser {
             members.push({ ...faction.members[key], id: key, weight: weight });
         });
 
-        console.log(members);
-
         let sorted = members;
         if (orderByRank) {
-            console.log('sorting...');
             sorted = members.sort((a, b) => {
                 console.log(b.weight, a.weight);
                 return b.weight - a.weight;
             });
         }
-
-        console.log(sorted);
 
         return sorted;
     }
@@ -128,11 +152,35 @@ export class FactionParser {
      * @return {*}  {Partial<RankPermissions>}
      * @memberof FactionParser
      */
-    static getValidPermissions(actingUserRank: FactionRank, againstUserRank: FactionRank): Partial<RankPermissions> {
+    static getValidPermissions(
+        actingUserRank: FactionRank,
+        againstUserRank: FactionRank,
+        hasOwnership = false,
+    ): Partial<RankPermissions> {
+        if (actingUserRank.uid === againstUserRank.uid && !hasOwnership) {
+            return {};
+        }
+
         if (actingUserRank.weight < againstUserRank.weight) {
             return {};
         }
 
         return actingUserRank.rankPermissions;
+    }
+
+    /**
+     * Get a list of current faction ranks
+     *
+     * @static
+     * @param {Faction} faction
+     * @return {Array<FactionRank>}
+     * @memberof FactionParser
+     */
+    static getFactionRanks(faction: Faction): Array<FactionRank> {
+        if (!faction.ranks) {
+            return [];
+        }
+
+        return faction.ranks;
     }
 }

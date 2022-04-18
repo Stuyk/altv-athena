@@ -1,12 +1,13 @@
 <template>
     <div class="wrapper stack">
-        <Button class="mt-2 mr-2 ml-2" color="red">Exit</Button>
         <Button
             class="mr-2 ml-2"
             v-for="(page, index) in pages"
             :key="index"
             :color="getButtonColor(index)"
             :class="getButtonSpacing(index)"
+            :raise="false"
+            :style="getButtonStyle()"
             @click="navigate(index)"
         >
             {{ page.name }}
@@ -40,6 +41,14 @@ export default defineComponent({
         Icon,
     },
     methods: {
+        getButtonStyle() {
+            let style = '';
+
+            style += 'background: transparent !important;';
+            style += 'border: 0px !important;';
+
+            return style;
+        },
         getButtonColor(index: number) {
             if (index === this.page) {
                 return 'orange';
@@ -61,9 +70,10 @@ export default defineComponent({
 
 <style scoped>
 .wrapper {
-    overflow-y: scroll;
+    overflow-y: auto;
     min-height: 100vh;
     max-height: 100vh;
     width: 100%;
+    background-color: rgba(12, 12, 12, 1);
 }
 </style>

@@ -71,7 +71,7 @@ This is if you want to design out-of-game and just work on some design.
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { PLUGIN_IMPORTS } from '../../src/core/plugins/athena/webview/imports';
-import DefaultPage from './defaultPage';
+import DefaultPages from './defaultPage';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
@@ -257,7 +257,7 @@ export default defineComponent({
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.setPages([DefaultPage]);
+            this.setPages([...DefaultPages]);
             return;
         }
 
