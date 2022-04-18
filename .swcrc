@@ -2,7 +2,12 @@
     "jsc": {
       "parser": {
         "syntax": "typescript",
-        "dynamicImport": true
+        "dynamicImport": true,
+        "decorators": true
+      },
+      "transform": {
+        "legacyDecorator": true,
+        "decoratorMetadata": true
       },
       "target": "es2020"
     }
