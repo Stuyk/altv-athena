@@ -31,6 +31,9 @@ typedoc.json
 !scripts/streamer/dist
 package-lock.json
 
+# Plugin stuff
+/src/core/plugins/athena/**/*.ts
+
 # Yarn stuff
 .yarn/
 yarn.lock
