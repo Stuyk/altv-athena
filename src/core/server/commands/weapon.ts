@@ -3,12 +3,12 @@ import ChatController from '../systems/chat';
 import { Item } from '../../shared/interfaces/item';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { playerFuncs } from '../extensions/extPlayer';
 import { getWeaponByName } from '../../shared/information/weaponList';
 import { sha256Random } from '../utility/encryption';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { Athena } from '../api/athena';
 
 ChatController.addCommand(
     'weapon',
@@ -38,16 +38,16 @@ const itemRef: Item = {
 };
 
 function handleCommand(player: alt.Player, weaponName: string): void {
-    const inv = playerFuncs.inventory.getFreeInventorySlot(player);
+    const inv = Athena.player.inventory.getFreeInventorySlot(player);
 
     if (inv === null || inv.slot === null) {
-        playerFuncs.emit.message(player, `No room in first inventory tab.`);
+        Athena.player.emit.message(player, `No room in first inventory tab.`);
         return;
     }
 
     const weapon = getWeaponByName(weaponName);
     if (!weapon) {
-        playerFuncs.emit.message(player, `Weapon does not exist.`);
+        Athena.player.emit.message(player, `Weapon does not exist.`);
         return;
     }
 
@@ -66,13 +66,13 @@ function handleCommand(player: alt.Player, weaponName: string): void {
         });
     }
 
-    playerFuncs.inventory.inventoryAdd(player, newItem, inv.slot);
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.sync.inventory(player);
-    playerFuncs.emit.message(player, `Added weapon: ${weapon.name}`);
+    Athena.player.inventory.inventoryAdd(player, newItem, inv.slot);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.sync.inventory(player);
+    Athena.player.emit.message(player, `Added weapon: ${weapon.name}`);
 }
 
 function handleRemoveWeapons(player: alt.Player): void {
-    const weps = playerFuncs.inventory.removeAllWeapons(player);
-    playerFuncs.emit.message(player, `Removed: ${weps.length} weapons`);
+    const weps = Athena.player.inventory.removeAllWeapons(player);
+    Athena.player.emit.message(player, `Removed: ${weps.length} weapons`);
 }

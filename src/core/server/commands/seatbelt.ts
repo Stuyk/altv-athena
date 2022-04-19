@@ -4,7 +4,7 @@ import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import ChatController from '../systems/chat';
 
 ChatController.addCommand(
@@ -30,7 +30,7 @@ function handleCommand(player: alt.Player): void {
         return;
     }
 
-    playerFuncs.emit.sound2D(player, 'seatbelt_on', 0.75);
-    playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON));
+    Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
+    Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON));
     alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, true);
 }
