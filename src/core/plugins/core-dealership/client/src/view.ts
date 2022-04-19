@@ -5,7 +5,6 @@ import ViewModel from '../../../../client/models/viewModel';
 import { CinematicCam } from '../../../../client/utility/cinematic';
 import { isAnyMenuOpen } from '../../../../client/utility/menus';
 import { loadModel } from '../../../../client/utility/model';
-import { ClientParticles } from '../../../../client/utility/particle';
 import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_EVENTS, DEALERSHIP_WEBVIEW_EVENTS } from '../../shared/events';
 import { IDealership } from '../../shared/interfaces';
@@ -129,6 +128,8 @@ class InternalFunctions implements ViewModel {
     }
 
     static async preview(vehicle: VehicleInfo, color: number) {
+        InternalFunctions.destroyVehicle();
+
         const model = alt.hash(vehicle.name);
 
         await loadModel(model);
