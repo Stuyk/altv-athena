@@ -1,32 +1,47 @@
-# Athena Framework for alt:V
+<center>
+    <img src="https://i.imgur.com/o0B5JzN.png" width="200">
+    <h2>Athena Framework for alt:V</h2>
+    <sup>A Roleplay Framework for Developers for GTA:V</sup>
+    <br />
+    <sup>
+        <a href="https://patreon.com/stuyk/">Support on Patreon</a>
+    </sup>
+</center>
+<br />
+<center>
 
-A Roleplay Framework for GTA:V Developers
+[![Patreon](https://img.shields.io/badge/Support-Patreon-orange.svg)](https://patreon.com/stuyk)
+[![Language TypeScript](https://img.shields.io/badge/Language-TS-blue.svg)](https://typescriptlang.org)
+[![Framework Vue 3](https://img.shields.io/badge/Framework-Vue%203-green.svg)](https://vuejs.org)
+[![NodeJS](https://img.shields.io/badge/Using-NodeJS-darkgreen.svg)](https://nodejs.org)
+[![Using Vite](https://img.shields.io/badge/Using-Vite-cyan.svg)](https://vitejs.dev)
 
-## Summary
+</center>
+<center>
 
-This repository is open source for **learning purposes only**.
+[![MongoDB](https://img.shields.io/badge/Using-MongoDB-green.svg)](https://patreon.com/stuyk)
 
-It uses the [alt:V Multiplayer Client for GTA:V](https://altv.mp/).
+</center>
+<br />
 
-Retrieve a license to properly deploy and use this license visit [the official website](https://athenaframework.com/).
+## Build with the Best
 
-Documentation can be found at [the Athena Framework Docs Website](https://docs.athenaframework.com/).
+Ever wanted to start your own GTA:V Roleplay Server? No idea where to start? Well this repository includes all of the basic tools necessary to begin developing your very own roleplay server for GTA:V.
 
-Report Bugs at [Athena Framework Issues Repository](https://github.com/Stuyk/altv-athena-issues/).
+## Important Links
 
-Join the [Discord Community](https://discord.com/invite/pZvbJmKN8Y).
+* [Support](https://patreon.com/stuyk/)
+* [Issues](https://github.com/stuyk/altv-athena-issues)
+* [Documentation](https://docs.athenaframework.com)
+* [Discord](https://discord.com/invite/pZvbJmKN8Y)
+* [alt:V Client](https://altv.mp)
 
-## Development Stack
+## Contributors
 
-* [MongoDB](https://www.mongodb.com/) (Database)
-* [TypeScript](https://www.typescriptlang.org/) / [JavaScript](https://www.javascript.com/) (Programming Language)
-* [Vue 3](https://v3.vuejs.org/) (Frontend)
-* [Vite](https://vitejs.dev/) (Vue 3 Tooling for Instant Server Start)
+Special thank you to all these wonderful people who have helped move the Athena Framework forward.
 
-## Where is the License?
+<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=stuyk/altv-athena"/>
+</a>
 
-You can purchase a license for usage by visting [the official website](https://athenaframework.com/).
-
-## Why isn't it free?
-
-When you pour your soul into a project you love it's very annoying when other developers claim it as their own.
+Made with [contributors-img](https://contrib.rocks).
