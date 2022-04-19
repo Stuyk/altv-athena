@@ -1,11 +1,17 @@
 import { ItemFactory } from '../../../../server/systems/item';
 import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
 import { getWeaponList } from '../../../../shared/information/weaponList';
-import { items } from './items';
-
+import { drinks } from './items/drinks';
+import { food } from './items/food';
+import { utility } from './items/utility';
 export class RegisterItems {
     static async init() {
-        const itemsToAdd = [...items];
+        const itemsToAdd = [
+            ...drinks, 
+            ...food, 
+            ...utility
+        ];
+
         for (let i = 0; i < itemsToAdd.length; i++) {
             ItemFactory.add(itemsToAdd[i]);
         }
