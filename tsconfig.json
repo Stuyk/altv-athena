@@ -1,22 +1,15 @@
 {
     "compilerOptions": {
-        "typeRoots": ["./node_modules/@types", "./node_modules/@altv"],
+        "typeRoots": ["../node_modules/@types", "../node_modules/@altv"],
         "removeComments": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noImplicitReturns": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
         "allowJs": true,
+        "resolveJsonModule": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "ESNext",
-        "target": "ESNext",
-        "outDir": "./athena-cache",
-        "rootDir": "./src",
-        "allowSyntheticDefaultImports": true,
-        "composite": false,
-        "forceConsistentCasingInFileNames": true
-    },
-    "include": ["./src/**/*.ts"]
+        "moduleResolution": "node",
+        "jsx": "preserve"
+    }
 }

@@ -20,12 +20,12 @@ let faction: IFactionClient;
  */
 class FactionsView implements ViewModel {
     static init() {
-        KeybindController.registerKeybind({
-            key: KEY_BINDS.FACTIONS,
-            singlePress: () => {
-                alt.emitServer(View_Events_Factions.Open);
-            },
-        });
+        // KeybindController.registerKeybind({
+        //     key: KEY_BINDS.FACTIONS,
+        //     singlePress: () => {
+        //         alt.emitServer(View_Events_Factions.Open);
+        //     },
+        // });
     }
 
     static async show(_faction: IFactionClient): Promise<void> {

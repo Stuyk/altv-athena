@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import ChatController from '../systems/chat';
 import { getPlayerJob } from '../systems/job';
 
@@ -21,7 +21,7 @@ function handleCommand(player: alt.Player): void {
     const job = getPlayerJob(player);
 
     if (!job) {
-        playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.JOB_NOT_WORKING));
+        Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.JOB_NOT_WORKING));
         return;
     }
 

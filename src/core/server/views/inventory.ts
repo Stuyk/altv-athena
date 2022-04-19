@@ -4,10 +4,7 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import { DroppedItem, Item } from '../../shared/interfaces/item';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { playerFuncs } from '../extensions/extPlayer';
 import { sha256Random } from '../utility/encryption';
-import '../effects/heal';
-import '../effects/vehicleRepair';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { stripCategory } from '../utility/category';
 import { CategoryData } from '../interface/iCategoryData';
@@ -19,11 +16,12 @@ import { ServerItemController } from '../streamers/item';
 import { ServerObjectController } from '../streamers/object';
 import { PlayerEvents } from '../events/playerEvents';
 import { ItemEffects } from '../systems/itemEffects';
+import { playerConst } from '../api/consts/constPlayer';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
 // These are all custom rules that can be defined for custom functionality.
-// Use the addItemRule function in the InventoryController.
+// Use the addItemRule function in the InventoryView.
 const ITEM_RULES: { [key: string]: Function[] } = {
     [INVENTORY_RULES.FROM_EQUIPMENT_TO_INVENTORY]: [],
     [INVENTORY_RULES.FROM_EQUIPMENT_TO_TOOLBAR]: [],
@@ -59,7 +57,7 @@ const ITEM_RULES: { [key: string]: Function[] } = {
  * Makes it nice and neat and keeps all the underlying code elsewhere.
  */
 
-export class InventoryController {
+export class InventoryView {
     /**
      * Add an inventory item rule.
      * Rules are for anything that has to do with moving items.
@@ -67,7 +65,7 @@ export class InventoryController {
      * @param {INVENTORY_RULES} rule
      * @param {(item: Item, selectedSlot: number, endSlot: number) => boolean} callback
      * @return {boolean}
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static addRule(
         rule: INVENTORY_RULES,
@@ -89,7 +87,7 @@ export class InventoryController {
      * @param {number} selectedSlot
      * @param {number} endSlot
      * @return {Promise<boolean>}
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static async verifyRules(
         rule: INVENTORY_RULES,
@@ -119,7 +117,7 @@ export class InventoryController {
      * @param {CategoryData} selectData
      * @param {CategoryData} endData
      * @return {({ selected: INVENTORY_RULES; end: INVENTORY_RULES } | null)}
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static getInventoryRule(
         selectData: CategoryData,
@@ -181,7 +179,7 @@ export class InventoryController {
      * @param {string} endSlot
      * @param {(string | null)} hash
      * @return {*}  {void}
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static async processItemMovement(
         player: alt.Player,
@@ -195,7 +193,7 @@ export class InventoryController {
 
         // Do nothing. They're placing it in the same slot.
         if (selectedSlot === endSlot) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
@@ -217,14 +215,14 @@ export class InventoryController {
         // Handle Drop Ground
         // Implies that an item is being dropped on the ground.
         if (endData.name === INVENTORY_TYPE.GROUND) {
-            InventoryController.handleDropGround(player, selectedSlot);
+            InventoryView.handleDropGround(player, selectedSlot);
             return;
         }
 
         // Pickup Item from Ground
         // Implies that an item is being picked up from the ground.
         if (selectData.name === INVENTORY_TYPE.GROUND) {
-            InventoryController.handlePickupGround(player, endData, endSlotIndex, hash);
+            InventoryView.handlePickupGround(player, endData, endSlotIndex, hash);
             return;
         }
 
@@ -232,15 +230,15 @@ export class InventoryController {
         const itemClone: Item = selectData.getItem(player, selectSlotIndex);
 
         if (!itemClone) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         // Only run rules on different inventory, equipment, etc. movements.
         // Will never run rules on inventory to inventory movement.
         if (selectData.abbrv !== endData.abbrv) {
-            const rules = InventoryController.getInventoryRule(selectData, endData);
-            const selectedResult = await InventoryController.verifyRules(
+            const rules = InventoryView.getInventoryRule(selectData, endData);
+            const selectedResult = await InventoryView.verifyRules(
                 rules.selected,
                 itemClone,
                 selectSlotIndex,
@@ -248,7 +246,7 @@ export class InventoryController {
             );
 
             if (!selectedResult) {
-                playerFuncs.sync.inventory(player);
+                playerConst.sync.inventory(player);
                 return;
             }
         }
@@ -261,8 +259,8 @@ export class InventoryController {
             // End Data Swaps
             if (selectData.abbrv !== endData.abbrv) {
                 const endItemClone: Item = endData.getItem(player, endSlotIndex);
-                const rules = InventoryController.getInventoryRule(selectData, endData);
-                const selectedResult = await InventoryController.verifyRules(
+                const rules = InventoryView.getInventoryRule(selectData, endData);
+                const selectedResult = await InventoryView.verifyRules(
                     rules.selected,
                     endItemClone,
                     endSlotIndex,
@@ -270,12 +268,12 @@ export class InventoryController {
                 );
 
                 if (!selectedResult) {
-                    playerFuncs.sync.inventory(player);
+                    playerConst.sync.inventory(player);
                     return;
                 }
             }
 
-            playerFuncs.inventory.handleSwapOrStack(player, selectedSlot, endSlot);
+            playerConst.inventory.handleSwapOrStack(player, selectedSlot, endSlot);
             return;
         }
 
@@ -284,69 +282,69 @@ export class InventoryController {
         // Can the item be dropped.
         // Can the item be equipped as equipment.
         // Can the item be moved to the Toolbar.
-        if (!playerFuncs.inventory.allItemRulesValid(itemClone, endData, endSlotIndex)) {
-            playerFuncs.sync.inventory(player);
+        if (!playerConst.inventory.allItemRulesValid(itemClone, endData, endSlotIndex)) {
+            playerConst.sync.inventory(player);
             return;
         }
 
         const isEquipmentItem = isFlagEnabled(itemClone.behavior, ITEM_TYPE.IS_EQUIPMENT);
         if (isEquipmentItem && itemClone.data.sex !== player.data.appearance.sex) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const didRemoveItem = selectData.removeItem(player, itemClone.slot);
         if (!didRemoveItem) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const didAddItem = endData.addItem(player, itemClone, endSlotIndex);
         if (!didAddItem) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
-        playerFuncs.save.field(player, endData.name, player.data[endData.name]);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        playerConst.save.field(player, selectData.name, player.data[selectData.name]);
+        playerConst.save.field(player, endData.name, player.data[endData.name]);
+        playerConst.sync.inventory(player);
+        playerConst.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 
     /**
      * Propogates the item to appear on the ground.
      * @static
      * @param {string} selectedSlot
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static async handleDropGround(player: alt.Player, selectedSlot: string) {
         const selectSlotIndex = stripCategory(selectedSlot);
         const selectData = DataHelpers.find((dataInfo) => selectedSlot.includes(dataInfo.abbrv));
 
         if (selectData.name === INVENTORY_TYPE.GROUND) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const itemClone: Item = selectData.getItem(player, selectSlotIndex);
 
         if (player.vehicle) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!itemClone) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!isFlagEnabled(itemClone.behavior, ITEM_TYPE.CAN_DROP)) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(itemClone, { name: 'ground' }, null)) {
-            playerFuncs.sync.inventory(player);
+        if (!playerConst.inventory.allItemRulesValid(itemClone, { name: 'ground' }, null)) {
+            playerConst.sync.inventory(player);
             return;
         }
 
@@ -361,33 +359,33 @@ export class InventoryController {
         }
 
         if (dataType) {
-            const result = await InventoryController.verifyRules(dataType, itemClone, selectSlotIndex, -1);
+            const result = await InventoryView.verifyRules(dataType, itemClone, selectSlotIndex, -1);
             if (!result) {
-                playerFuncs.sync.inventory(player);
+                playerConst.sync.inventory(player);
                 return;
             }
         }
 
         const didRemoveItem = selectData.removeItem(player, itemClone.slot);
         if (!didRemoveItem) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        playerFuncs.save.field(player, selectData.name, player.data[selectData.name]);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
+        playerConst.save.field(player, selectData.name, player.data[selectData.name]);
+        playerConst.sync.inventory(player);
+        playerConst.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
 
         // Destroys an item when it is dropped on the ground if the behavior calls for it.
         if (isFlagEnabled(itemClone.behavior, ITEM_TYPE.DESTROY_ON_DROP)) {
-            playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
-            playerFuncs.emit.message(player, `${itemClone.name} was destroyed on drop.`);
+            playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
+            playerConst.emit.message(player, `${itemClone.name} was destroyed on drop.`);
             return;
         }
 
         itemClone.hash = sha256Random(JSON.stringify(itemClone));
 
-        const frontPosition = playerFuncs.utility.getPositionFrontOf(player, 0.5);
+        const frontPosition = playerConst.utility.getPositionFrontOf(player, 0.5);
         const groundPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 1 };
         const itemInfoPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 0.3 };
 
@@ -416,7 +414,7 @@ export class InventoryController {
             noCollision: true,
         });
 
-        playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
+        playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DROPPED_ITEM, player, itemClone);
     }
 
@@ -425,19 +423,19 @@ export class InventoryController {
     }
 
     static handleProcessPickup(player: alt.Player, hash: string) {
-        const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+        const openSlot = playerConst.inventory.getFreeInventorySlot(player);
         if (!openSlot) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const endData = DataHelpers.find((dataInfo) => 'i-'.includes(dataInfo.abbrv));
         if (!endData) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        InventoryController.handlePickupGround(player, endData, openSlot.slot, hash);
+        InventoryView.handlePickupGround(player, endData, openSlot.slot, hash);
     }
 
     static async handlePickupGround(
@@ -447,34 +445,34 @@ export class InventoryController {
         hash: string | null,
     ) {
         if (player.vehicle) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!endData.emptyCheck(player, endSlotIndex)) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!hash) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const index = GROUND_ITEMS.findIndex((gItem) => gItem.item.hash === hash);
         if (index <= -1) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const droppedItem: DroppedItem = { ...GROUND_ITEMS[index] };
         if (distance2d(player.pos, droppedItem.position) >= 10) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        if (!playerFuncs.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
-            playerFuncs.sync.inventory(player);
+        if (!playerConst.inventory.allItemRulesValid(droppedItem.item, endData, endSlotIndex)) {
+            playerConst.sync.inventory(player);
             return;
         }
 
@@ -489,9 +487,9 @@ export class InventoryController {
         }
 
         if (dataType) {
-            const result = await InventoryController.verifyRules(dataType, droppedItem.item, droppedItem.gridSpace, -1);
+            const result = await InventoryView.verifyRules(dataType, droppedItem.item, droppedItem.gridSpace, -1);
             if (!result) {
-                playerFuncs.sync.inventory(player);
+                playerConst.sync.inventory(player);
                 return;
             }
         }
@@ -499,29 +497,29 @@ export class InventoryController {
         const isEquipmentItem = isFlagEnabled(droppedItem.item.behavior, ITEM_TYPE.IS_EQUIPMENT);
         const isGoingToEquipment = endData.name === INVENTORY_TYPE.EQUIPMENT;
         if (isEquipmentItem && isGoingToEquipment && droppedItem.item.data.sex !== player.data.appearance.sex) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const removedItems = GROUND_ITEMS.splice(index, 1);
         if (removedItems.length <= 0) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
         const didAddItem = endData.addItem(player, droppedItem.item, endSlotIndex);
         if (!didAddItem) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             // this.updateDroppedItemsAroundPlayer(player, false);
             return;
         }
 
-        playerFuncs.save.field(player, endData.name, player.data[endData.name]);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
-        playerFuncs.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
+        playerConst.save.field(player, endData.name, player.data[endData.name]);
+        playerConst.sync.inventory(player);
+        playerConst.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
 
         ServerObjectController.remove(hash);
         ServerItemController.remove(hash);
@@ -533,54 +531,54 @@ export class InventoryController {
      * @param {alt.Player} player
      * @param {string} selectedSlot // i-0
      * @return {*}
-     * @memberof InventoryController
+     * @memberof InventoryView
      */
     static processUse(player: alt.Player, selectedSlot: string) {
         if (!selectedSlot) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const slot = stripCategory(selectedSlot);
         if (isNaN(slot)) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        const slotType = playerFuncs.inventory.getSlotType(selectedSlot);
+        const slotType = playerConst.inventory.getSlotType(selectedSlot);
         const originalItem = player.data[slotType].find((i) => i && i.slot === slot);
 
         if (!originalItem) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const item = deepCloneObject(originalItem) as Item;
         if (item.equipment !== undefined && item.equipment !== null) {
             if (selectedSlot.includes('t-')) {
-                playerFuncs.sync.inventory(player);
+                playerConst.sync.inventory(player);
                 return;
             }
 
             if (selectedSlot.includes('e-')) {
                 // Unequip
-                const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+                const openSlot = playerConst.inventory.getFreeInventorySlot(player);
                 if (!openSlot) {
-                    playerFuncs.sync.inventory(player);
+                    playerConst.sync.inventory(player);
                     return;
                 }
 
-                if (!playerFuncs.inventory.equipmentRemove(player, item.equipment)) {
-                    playerFuncs.sync.inventory(player);
+                if (!playerConst.inventory.equipmentRemove(player, item.equipment)) {
+                    playerConst.sync.inventory(player);
                     return;
                 }
 
-                playerFuncs.inventory.inventoryAdd(player, item, openSlot.slot);
+                playerConst.inventory.inventoryAdd(player, item, openSlot.slot);
             } else {
                 // Equip
                 // Remove item from inventory.
-                if (!playerFuncs.inventory.inventoryRemove(player, item.slot)) {
-                    playerFuncs.sync.inventory(player);
+                if (!playerConst.inventory.inventoryRemove(player, item.slot)) {
+                    playerConst.sync.inventory(player);
                     return;
                 }
 
@@ -590,26 +588,26 @@ export class InventoryController {
                 const targetSlotIndex = player.data.equipment.findIndex((i) => i && i.equipment === item.equipment);
                 if (targetSlotIndex >= 0) {
                     removedItem = deepCloneObject(player.data.equipment[targetSlotIndex]);
-                    if (!playerFuncs.inventory.equipmentRemove(player, item.equipment)) {
-                        playerFuncs.sync.inventory(player);
+                    if (!playerConst.inventory.equipmentRemove(player, item.equipment)) {
+                        playerConst.sync.inventory(player);
                         return;
                     }
 
                     // Add old item to inventory from equipment
-                    playerFuncs.inventory.inventoryAdd(player, removedItem, item.slot);
+                    playerConst.inventory.inventoryAdd(player, removedItem, item.slot);
                 }
 
-                playerFuncs.inventory.equipmentAdd(player, item, item.equipment);
+                playerConst.inventory.equipmentAdd(player, item, item.equipment);
             }
 
-            playerFuncs.save.field(player, INVENTORY_TYPE.EQUIPMENT, player.data.equipment);
-            playerFuncs.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            playerConst.save.field(player, INVENTORY_TYPE.EQUIPMENT, player.data.equipment);
+            playerConst.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
@@ -617,34 +615,34 @@ export class InventoryController {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {
-                playerFuncs.inventory.inventoryRemove(player, slot);
+                playerConst.inventory.inventoryRemove(player, slot);
             } else {
-                playerFuncs.inventory.replaceInventoryItem(player, item);
+                playerConst.inventory.replaceInventoryItem(player, item);
             }
 
-            playerFuncs.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            playerConst.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
+            playerConst.sync.inventory(player);
         }
 
         if (item.data && item.data.event) {
             ItemEffects.invoke(player, item, INVENTORY_TYPE.INVENTORY);
-            playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
+            playerConst.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }
 
     static processSplit(player: alt.Player, selectedSlot: string, amount: number) {
         if (isNaN(amount)) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (amount <= 0) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (!selectedSlot.includes('i-')) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
@@ -652,33 +650,33 @@ export class InventoryController {
         const index = player.data.inventory.findIndex((i) => i && i.slot === currentSlotValue);
 
         if (index <= -1) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
-        const inventorySlot = playerFuncs.inventory.getFreeInventorySlot(player);
+        const inventorySlot = playerConst.inventory.getFreeInventorySlot(player);
         if (!inventorySlot) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         const clonedItem = deepCloneObject(player.data.inventory[index]) as Item;
         if (clonedItem.quantity < amount) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         if (amount >= clonedItem.quantity) {
-            playerFuncs.sync.inventory(player);
+            playerConst.sync.inventory(player);
             return;
         }
 
         player.data.inventory[index].quantity -= amount;
         clonedItem.quantity = amount;
-        playerFuncs.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot);
+        playerConst.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot);
 
-        playerFuncs.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
-        playerFuncs.sync.inventory(player);
+        playerConst.save.field(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
+        playerConst.sync.inventory(player);
     }
 }
 
@@ -686,26 +684,26 @@ const DataHelpers: Array<CategoryData> = [
     {
         abbrv: SLOT_TYPE.INVENTORY,
         name: INVENTORY_TYPE.INVENTORY,
-        emptyCheck: playerFuncs.inventory.isInventorySlotFree,
-        getItem: playerFuncs.inventory.getInventoryItem,
-        removeItem: playerFuncs.inventory.inventoryRemove,
-        addItem: playerFuncs.inventory.inventoryAdd,
+        emptyCheck: playerConst.inventory.isInventorySlotFree,
+        getItem: playerConst.inventory.getInventoryItem,
+        removeItem: playerConst.inventory.inventoryRemove,
+        addItem: playerConst.inventory.inventoryAdd,
     },
     {
         abbrv: SLOT_TYPE.TOOLBAR,
         name: INVENTORY_TYPE.TOOLBAR,
-        emptyCheck: playerFuncs.inventory.isToolbarSlotFree,
-        getItem: playerFuncs.inventory.getToolbarItem,
-        removeItem: playerFuncs.inventory.toolbarRemove,
-        addItem: playerFuncs.inventory.toolbarAdd,
+        emptyCheck: playerConst.inventory.isToolbarSlotFree,
+        getItem: playerConst.inventory.getToolbarItem,
+        removeItem: playerConst.inventory.toolbarRemove,
+        addItem: playerConst.inventory.toolbarAdd,
     },
     {
         abbrv: SLOT_TYPE.EQUIPMENT,
         name: INVENTORY_TYPE.EQUIPMENT,
-        emptyCheck: playerFuncs.inventory.isEquipmentSlotFree,
-        getItem: playerFuncs.inventory.getEquipmentItem,
-        removeItem: playerFuncs.inventory.equipmentRemove,
-        addItem: playerFuncs.inventory.equipmentAdd,
+        emptyCheck: playerConst.inventory.isEquipmentSlotFree,
+        getItem: playerConst.inventory.getEquipmentItem,
+        removeItem: playerConst.inventory.equipmentRemove,
+        addItem: playerConst.inventory.equipmentAdd,
     },
     {
         abbrv: SLOT_TYPE.GROUND,
@@ -717,7 +715,12 @@ const DataHelpers: Array<CategoryData> = [
     },
 ];
 
-alt.onClient(View_Events_Inventory.Use, InventoryController.processUse);
-alt.onClient(View_Events_Inventory.Process, InventoryController.processItemMovement);
-alt.onClient(View_Events_Inventory.Split, InventoryController.processSplit);
-alt.onClient(View_Events_Inventory.Pickup, InventoryController.handleProcessPickup);
+/**
+ * @deprecated Use {@link InventoryView}
+ */
+export const InventoryController = InventoryView;
+
+alt.onClient(View_Events_Inventory.Use, InventoryView.processUse);
+alt.onClient(View_Events_Inventory.Process, InventoryView.processItemMovement);
+alt.onClient(View_Events_Inventory.Split, InventoryView.processSplit);
+alt.onClient(View_Events_Inventory.Pickup, InventoryView.handleProcessPickup);

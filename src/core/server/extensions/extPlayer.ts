@@ -2,24 +2,9 @@ import * as alt from 'alt-server';
 import { Account } from '../interface/iAccount';
 import { DiscordUser } from '../interface/iDiscordUser';
 import { InteractionShape } from './extColshape';
-import currency from './playerFunctions/currency';
-import dataUpdater from './playerFunctions/dataUpdater';
-import emit from './playerFunctions/emit';
-import inventory from './playerFunctions/inventory';
-import createNew from './playerFunctions/new';
-import safe from './playerFunctions/safe';
-import save from './playerFunctions/save';
-import select from './playerFunctions/select';
-import set from './playerFunctions/setter';
-import sync from './playerFunctions/sync';
-import utility from './playerFunctions/utility';
-import getter from './playerFunctions/getter';
-
-import '../views/factions';
-import '../systems/arrest';
-import '../events/waypointEvent';
 import { Vector3 } from '../../shared/interfaces/vector';
 import IAttachable from '../../shared/interfaces/iAttachable';
+import { playerConst } from '../api/consts/constPlayer';
 
 declare module 'alt-server' {
     export interface Player {
@@ -50,34 +35,6 @@ declare module 'alt-server' {
          * @memberof Player
          */
         hasModel?: boolean;
-
-        /**
-         * A temporary array assigned when the account fetches all characters.
-         * @type {Array<Character>}
-         * @memberof Player
-         */
-        currentCharacters?: Array<Character>;
-
-        /**
-         * Used to check if the character is pending editing.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingCharacterEdit?: boolean;
-
-        /**
-         * Used to bring up / interact with new character screen.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingNewCharacter?: boolean;
-
-        /**
-         * Used to bring up / interace with the select character screen.
-         * @type {boolean}
-         * @memberof Player
-         */
-        pendingCharacterSelect?: boolean;
 
         /**
          * Account identifiers for Discord
@@ -223,13 +180,6 @@ declare module 'alt-server' {
         hasSatDown?: boolean;
 
         /**
-         * Temporary index for selecting a character.
-         * @type {number}
-         * @memberof Player
-         */
-        selectedCharacterIndex?: number;
-
-        /**
          * When the player is in-world and selected a character.
          * @type {boolean}
          * @memberof Player
@@ -238,17 +188,11 @@ declare module 'alt-server' {
     }
 }
 
-export const playerFuncs = {
-    currency,
-    dataUpdater,
-    emit,
-    get: getter,
-    inventory,
-    createNew,
-    safe,
-    save,
-    select,
-    set,
-    sync,
-    utility,
-};
+/**
+ * The deprecated version of the Athena playerFuncs API.
+ *
+ * Use `Athena.player` instead.
+ *
+ * @deprecated Use the new {@link Athena} const.
+ */
+export const playerFuncs = playerConst;

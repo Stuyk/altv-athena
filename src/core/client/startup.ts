@@ -1,5 +1,6 @@
 // Client Plugins
-import '../client-plugins/imports';
+import '../plugins/athena/client/imports';
+
 // Events
 import './events/connectionComplete';
 import './events/disconnect';
@@ -31,7 +32,6 @@ import './systems/attachable';
 import './systems/athenaEvents';
 import './systems/blip';
 import './systems/character';
-import './systems/dealership';
 import './systems/death';
 import './systems/debug';
 import './systems/disable';
@@ -47,6 +47,7 @@ import './systems/progressBar';
 import './systems/quickToken';
 import './systems/scenarios';
 import './systems/sound';
+import './systems/syncedMeta';
 import './systems/tasks';
 import './systems/tick';
 import './systems/toolbar';
@@ -72,8 +73,6 @@ import './utility/wheelMenu';
 import './views/actions';
 import './views/audio';
 import './views/chat';
-import './views/characters';
-import './views/creator';
 import './views/factions';
 import './views/inventory';
 import './views/job';

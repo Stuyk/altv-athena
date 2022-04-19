@@ -1,0 +1,16 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "typeRoots": ["../node_modules/@types", "../node_modules/@altv"],
+        "module": "ESNext",
+        "target": "ESNext",
+        "outDir": "../athena-cache",
+        "rootDir": ".",
+        "allowSyntheticDefaultImports": true,
+        "composite": false,
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": ["./core/plugins/**/webview/**/*.ts", "./core/plugins/**/webview/**/*.vue"]
+}

@@ -1,36 +1,23 @@
 import * as alt from 'alt-server';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { playerFuncs } from '../extensions/extPlayer';
-import ChatController from '../systems/chat';
+import { Athena } from '../api/athena';
+import { command } from '../decorators/commands';
 
-ChatController.addCommand(
-    'acceptdeath',
-    LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/acceptdeath'),
-    PERMISSIONS.NONE,
-    handleCommand,
-);
+class Death {
+    @command(['acceptdeath', 'respawn'], '/acceptdeath - Accept death.', PERMISSIONS.NONE)
+    static handleCommand(player: alt.Player): void {
+        if (!player || !player.valid) {
+            return;
+        }
 
-ChatController.addCommand(
-    'respawn',
-    LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/respawn'),
-    PERMISSIONS.NONE,
-    handleCommand,
-);
+        if (!player.data.isDead) {
+            return;
+        }
 
-function handleCommand(player: alt.Player): void {
-    if (!player || !player.valid) {
-        return;
+        if (Date.now() < player.nextDeathSpawn) {
+            return;
+        }
+
+        Athena.player.set.respawned(player, null);
     }
-
-    if (!player.data.isDead) {
-        return;
-    }
-
-    if (Date.now() < player.nextDeathSpawn) {
-        return;
-    }
-
-    playerFuncs.set.respawned(player, null);
 }

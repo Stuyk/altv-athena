@@ -7,12 +7,12 @@ import { Character, CharacterDefaults } from '../../../shared/interfaces/charact
  * @param {Character} data
  * @memberof DataUpdaterPrototype
  */
-function init(p: alt.Player, data: Character = null) {
-    p.data = Object.assign({}, CharacterDefaults);
+function init(player: alt.Player, data: Character = null) {
+    player.data = Object.assign({}, CharacterDefaults);
 
     if (data) {
         Object.keys(data).forEach((key) => {
-            p.data[key] = data[key];
+            player.data[key] = data[key];
         });
     }
 }
@@ -23,12 +23,12 @@ function init(p: alt.Player, data: Character = null) {
  * @param {string} [targetDataName=''] A property inside of player.data* OPTIONAL
  * @memberof DataUpdaterPrototype
  */
-function updateByKeys(p: alt.Player, dataObject: { [key: string]: any }, targetDataName: string = '') {
+function updateByKeys(player: alt.Player, dataObject: { [key: string]: any }, targetDataName: string = '') {
     Object.keys(dataObject).forEach((key) => {
         if (targetDataName !== '') {
-            p.data[targetDataName][key] = dataObject[key];
+            player.data[targetDataName][key] = dataObject[key];
         } else {
-            p.data[key] = dataObject[key];
+            player.data[key] = dataObject[key];
         }
     });
 }

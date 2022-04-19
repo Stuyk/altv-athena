@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import axios from 'axios';
 import { exec } from 'child_process';
 import ecc from 'elliptic';
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import sjcl from 'sjcl';
 
@@ -181,6 +181,32 @@ export default class Ares {
     static async getHwid(): Promise<string | null> {
         let toolsPath = path.join(process.cwd(), 'tools');
 
+        const cachePath = path.join(process.cwd(), 'athena-cache');
+        let cacheFileName = Ares.getPublicKey() + '.areh';
+
+        if (!existsSync(cachePath)) {
+            mkdirSync(cachePath);
+        }
+
+        readdirSync(cachePath).forEach((file) => {
+            if (file.endsWith('.areh')) {
+                cacheFileName = file;
+            }
+        });
+
+        const cacheFile = cachePath + path.sep + cacheFileName;
+
+        /* It's checking if the cache file exists. */
+        if (existsSync(cacheFile)) {
+            const fileContent = readFileSync(cacheFile);
+            const data: { hwid: string; timestamp: number } = fileContent && JSON.parse(fileContent.toString());
+
+            if (data && data.timestamp && data.timestamp > Date.now() - 1000 * 60 * 60 * 24) {
+                console.log(`HWID: ${data.hwid}`);
+                return data.hwid;
+            }
+        }
+
         if (process.platform.includes('win')) {
             toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
         } else {
@@ -204,6 +230,7 @@ export default class Ares {
             });
         });
 
+        writeFileSync(cacheFile, JSON.stringify({ hwid: result, timestamp: Date.now() }));
         console.log(`HWID: ${result}`);
         return result;
     }

@@ -5,7 +5,8 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { getPointsInCircle } from './math';
 import { loadSceneAtCoords } from './scene';
 
-const nodes: Array<iCameraNode> = [];
+let isUpdating = false;
+let nodes: Array<iCameraNode> = [];
 let currentCamIndex = -1;
 let cam1;
 let cam2;
@@ -104,10 +105,41 @@ interface iCameraNode {
 
 class InternalFunctions {
     /**
+     * Check if the camera is currently moving between nodes.
+     *
+     * @static
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static async isCameraUpdating() {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (isUpdating) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+                return;
+            }, 25);
+        });
+    }
+
+    /**
      * Create a camera at the given position
      * @param {Vector3} pos - The position of the camera.
      */
     static async next(node: iCameraNode): Promise<void> {
+        if (!node) {
+            return;
+        }
+
+        if (isUpdating) {
+            return;
+        }
+
+        isUpdating = true;
+
         native.requestCollisionAtCoord(node.pos.x, node.pos.y, node.pos.z);
         native.setFocusPosAndVel(node.pos.x, node.pos.y, node.pos.z, 0, 0, 0);
         await loadSceneAtCoords(node.pos);
@@ -115,7 +147,6 @@ class InternalFunctions {
         let camNumber: number;
 
         if (cam1) {
-            console.log(`Camera Node -> Transitioning Between Cameras`);
             cam2 = native.createCamWithParams(
                 'DEFAULT_SCRIPTED_CAMERA',
                 node.pos.x,
@@ -132,7 +163,6 @@ class InternalFunctions {
             camNumber = cam2;
             assignCam2to1 = true;
         } else {
-            console.log(`Camera Node -> Created 1st Camera`);
             cam1 = native.createCamWithParams(
                 'DEFAULT_SCRIPTED_CAMERA',
                 node.pos.x,
@@ -211,8 +241,6 @@ class InternalFunctions {
             native.setCamActiveWithInterp(cam2, cam1, node.easeTime ? node.easeTime : 0, 1, 1);
         }
 
-        const startTime = Date.now();
-
         await new Promise((resolve: Function) => {
             alt.setTimeout(
                 () => {
@@ -223,16 +251,19 @@ class InternalFunctions {
                     }
 
                     if (assignCam2to1) {
+                        if (cam1 !== null && cam1 !== undefined) {
+                            native.destroyCam(cam1, true);
+                        }
+
                         cam1 = cam2;
                         cam2 = null;
                     }
+
+                    isUpdating = false;
                 },
                 node.easeTime ? node.easeTime * 2 : 0,
             );
         });
-
-        console.log(`End Time: ${Date.now() - startTime}`);
-        console.log(`Camera Node -> Rendered`);
     }
 
     /**
@@ -263,6 +294,7 @@ class InternalFunctions {
      * Destroy all cameras and clear the focus
      */
     static async destroy() {
+        isUpdating = false;
         InternalFunctions.clear();
         while (nodes.length >= 1) {
             nodes.pop();
@@ -279,6 +311,10 @@ export class CinematicCam {
      */
     static async destroy(): Promise<void> {
         return await InternalFunctions.destroy();
+    }
+
+    static async overrideNodes(_nodes: Array<iCameraNode>) {
+        nodes = _nodes;
     }
 
     /**
@@ -312,13 +348,15 @@ export class CinematicCam {
      *
      * @static
      * @param {boolean} [removeFromArray=true]
-     * @return {*}  {Promise<boolean>}
+     * @return {Promise<boolean>}
      * @memberof CinematicCam
      */
     static async next(removeFromArray = true): Promise<boolean> {
         if (nodes.length <= 0) {
             return false;
         }
+
+        await InternalFunctions.isCameraUpdating();
 
         if (removeFromArray) {
             const nextCam = nodes.shift();
@@ -346,6 +384,7 @@ export class CinematicCam {
     static async play() {
         const cameraNodes = [...nodes];
         for (let i = 0; i < cameraNodes.length; i++) {
+            await InternalFunctions.isCameraUpdating();
             await InternalFunctions.next(cameraNodes[i]);
         }
     }

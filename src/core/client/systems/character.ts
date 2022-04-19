@@ -50,10 +50,12 @@ export class CharacterSystem {
             native.setPedHeadOverlay(ped, overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
         }
 
-        // Hair
+        // Hair - Tattoo
         const collection = native.getHashKey(appearance.hairOverlay.collection);
         const overlay = native.getHashKey(appearance.hairOverlay.overlay);
         native.addPedDecorationFromHashes(ped, collection, overlay);
+
+        // Hair
         native.setPedComponentVariation(ped, 2, appearance.hair, 0, 0);
         native.setPedHairColor(ped, appearance.hairColor1, appearance.hairColor2);
 
@@ -149,8 +151,14 @@ export class CharacterSystem {
             }
         }
     }
+
+    static applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {
+        for (let i = 0; i < decorations.length; i++) {
+            const collection = native.getHashKey(decorations[i].collection);
+            const overlay = native.getHashKey(decorations[i].overlay);
+            native.addPedDecorationFromHashes(alt.Player.local.scriptID, collection, overlay);
+        }
+    }
 }
 
-alt.onServer(SYSTEM_EVENTS.SYNC_APPEARANCE, (appearance: Appearance) => {
-    CharacterSystem.applyAppearance(alt.Player.local.scriptID, appearance);
-});
+alt.onServer(SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, CharacterSystem.applyHairOverlay);

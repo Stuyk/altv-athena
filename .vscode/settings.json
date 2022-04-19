@@ -1,5 +1,4 @@
 {
-    "cmake.configureOnOpen": false,
     "editor.formatOnSave": true,
     "docwriter.style": "Auto-detect"
 }

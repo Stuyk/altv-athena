@@ -1,4 +1,5 @@
 import fs from 'fs';
+import glob from 'glob';
 
 async function init() {
     await cleanup();
@@ -8,7 +9,7 @@ async function init() {
     console.log(`npm run update`);
 }
 
-function cleanup() {
+async function cleanup() {
     if (fs.existsSync('package-lock.json')) {
         console.log(`Removing package-lock.json`);
         fs.unlinkSync('package-lock.json');
@@ -32,6 +33,23 @@ function cleanup() {
     if (fs.existsSync('cache')) {
         console.log(`Removing cache`);
         fs.rmSync('cache', { recursive: true, force: true });
+    }
+
+    let badFiles = [];
+    badFiles = await new Promise(resolve => {
+        glob('./src/core/**/*.js', (err, files) => {
+            if (err) {
+                return resolve(files);;
+            }
+
+            return resolve(files);
+        });
+    });
+
+    for (let i = 0; i < badFiles.length; i++) {
+        if (fs.existsSync(badFiles[i])) {
+            fs.rmSync(badFiles[i], { recursive: true, force: true });
+        }
     }
 }
 
