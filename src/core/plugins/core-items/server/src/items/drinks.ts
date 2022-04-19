@@ -22,7 +22,7 @@ export const drinks: Array<Item> = [
             amount: 5,
             sound: 'item_drink',
         },
-        version: 2
+        version: 1
     },
     {
         name: `Cola`,

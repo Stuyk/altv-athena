@@ -23,7 +23,7 @@ export const food: Array<Item> = [
             sound: 'item_eat',
             testData: 'Hello World!'
         },
-        version: 3
+        version: 1
     },
     {
         name: `Ultra Delicious Burger`,
