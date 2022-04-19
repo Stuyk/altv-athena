@@ -1,13 +1,12 @@
 import { ItemFactory } from '../../../../server/systems/item';
 import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
 import { getWeaponList } from '../../../../shared/information/weaponList';
-import { items } from './items';
+import items from './items';
 
 export class RegisterItems {
     static async init() {
-        const itemsToAdd = [...items];
-        for (let i = 0; i < itemsToAdd.length; i++) {
-            ItemFactory.add(itemsToAdd[i]);
+        for (let i = 0; i < items.length; i++) {
+            ItemFactory.add(items[i]);
         }
 
         const weaponList = getWeaponList();
