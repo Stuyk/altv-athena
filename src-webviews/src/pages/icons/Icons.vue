@@ -13,16 +13,19 @@ Helpful for seeing what default components look like.
                 :numberOnly="false"
                 :stack="false"
                 :onChange="searchTerm"
-                :onInput="() => {}"
-                :validateCallback="() => {}"
                 :value="userInput"
                 :rules="[]"
                 style="width: 100%"
-                placeholder="user"
+                placeholder="Search icon..."
             />
         </div>
         <div class="icons mt-4">
-            <div v-for="(icon, index) in getIcons" :key="index" class="preview-stack mb-12">
+            <div
+                v-for="(icon, index) in getIcons"
+                :key="index"
+                class="preview-stack mb-12 preview-icon"
+                @click="copyToClipboard(icon)"
+            >
                 <Icon :icon="icon" :size="36" />
                 <span class="subtitle-2 center pt-2">{{ icon }}</span>
             </div>
@@ -61,8 +64,11 @@ export default defineComponent({
         Input,
     },
     methods: {
-        searchTerm(value: string) {
-            this.userInput = value;
+        searchTerm(evt: Event) {
+            this.userInput = (<HTMLInputElement>evt.target).value;
+        },
+        copyToClipboard(text: string) {
+            navigator.clipboard.writeText(text);
         },
     },
 });
@@ -86,5 +92,9 @@ export default defineComponent({
     grid-template-columns: repeat(3, auto);
     max-height: 90vh;
     overflow-y: scroll;
+}
+
+.preview-icon:hover {
+    cursor: pointer;
 }
 </style>
