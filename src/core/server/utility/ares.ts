@@ -178,6 +178,8 @@ export default class Ares {
         return result.data;
     }
 
+<<<<<<< HEAD
+=======
     static async getHwid(): Promise<string | null> {
         let toolsPath = path.join(process.cwd(), 'tools');
 
@@ -235,6 +237,7 @@ export default class Ares {
         return result;
     }
 
+>>>>>>> 7636c75777d7ef164ed7f1e33b39cc7cf9343a97
     /**
      * Hashes some unique player data.
      * @static

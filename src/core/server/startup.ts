@@ -57,46 +57,8 @@ class Startup {
      * @memberof Startup
      */
     static async ares() {
-        // Setup Ares Endpoint
         Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
-
-        // Get the current Ares Version - For Version Debugging
-        Ares.getVersion().then((res) => {
-            Logger.info(`Ares Version: ${res}`);
-        });
-
-        const endpoint = await Ares.getAresEndpoint();
-        const hwid = await Ares.getHwid();
-        const result = await PostController.post(`${endpoint}/v1/post/verify`, {
-            public_key: Ares.getPublicKey(),
-            hwid,
-            version: ConfigUtil.getAthenaVersion(),
-        });
-
-        if (!result) {
-            alt.logWarning(`Cannot Verify IP or Hardware ID. Did you read the docs?`);
-            alt.logWarning(`https://docs.athenaframework.com/`);
-            process.exit(1);
-        }
-
-        // Not Verified
-        if (result && result.status === false) {
-            alt.logWarning(result.message);
-            alt.logWarning(`Cannot Verify IP or Hardware ID. Did you read the docs?`);
-            alt.logWarning(`https://docs.athenaframework.com/`);
-            process.exit(1);
-        }
-
-        const tmpPath = path.join(alt.getResourcePath(alt.resourceName), `/server/${Ares.getPublicKey()}.js`);
-        await new Promise(async (r: Function) => {
-            for (let x = 0; x < result.length; x++) {
-                await fs.appendFileSync(tmpPath, `${result[x]}\r\n`);
-            }
-            r();
-        });
-
-        await import(`./${Ares.getPublicKey()}.js`);
-        fs.unlinkSync(tmpPath);
+        await import(`./boot.js`);
         Logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     }
 
