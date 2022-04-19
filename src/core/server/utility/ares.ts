@@ -178,6 +178,66 @@ export default class Ares {
         return result.data;
     }
 
+<<<<<<< HEAD
+=======
+    static async getHwid(): Promise<string | null> {
+        let toolsPath = path.join(process.cwd(), 'tools');
+
+        const cachePath = path.join(process.cwd(), 'athena-cache');
+        let cacheFileName = Ares.getPublicKey() + '.areh';
+
+        if (!existsSync(cachePath)) {
+            mkdirSync(cachePath);
+        }
+
+        readdirSync(cachePath).forEach((file) => {
+            if (file.endsWith('.areh')) {
+                cacheFileName = file;
+            }
+        });
+
+        const cacheFile = cachePath + path.sep + cacheFileName;
+
+        /* It's checking if the cache file exists. */
+        if (existsSync(cacheFile)) {
+            const fileContent = readFileSync(cacheFile);
+            const data: { hwid: string; timestamp: number } = fileContent && JSON.parse(fileContent.toString());
+
+            if (data && data.timestamp && data.timestamp > Date.now() - 1000 * 60 * 60 * 24) {
+                console.log(`HWID: ${data.hwid}`);
+                return data.hwid;
+            }
+        }
+
+        if (process.platform.includes('win')) {
+            toolsPath = path.join(toolsPath, 'altv-athena-hwid-win.exe');
+        } else {
+            toolsPath = path.join(toolsPath, 'altv-athena-hwid-linux');
+            exec(`chmod +x ${toolsPath}`, (stderr, stdout) => {});
+        }
+
+        if (!existsSync(toolsPath)) {
+            console.error(`Tools for HWID do not exist. Make sure to get the latest version.`);
+            return null;
+        }
+
+        const result: string = await new Promise((resolve: Function) => {
+            exec(toolsPath, (stderr, stdout) => {
+                if (stderr) {
+                    console.log(stderr);
+                    return resolve(null);
+                }
+
+                resolve(stdout.replace(/(\r\n|\n|\r)/gm, '').replace(/ /g, ''));
+            });
+        });
+
+        writeFileSync(cacheFile, JSON.stringify({ hwid: result, timestamp: Date.now() }));
+        console.log(`HWID: ${result}`);
+        return result;
+    }
+
+>>>>>>> 7636c75777d7ef164ed7f1e33b39cc7cf9343a97
     /**
      * Hashes some unique player data.
      * @static
