@@ -7,6 +7,8 @@ export class UpdateItems {
         for(let i = 0; i < items.length; i++) {
             const item = items[i];
             let itemFactoryItem = await Athena.systems.itemFactory.get(item.dbName);
+            
+            if(!item.version) continue;
             if(itemFactoryItem.version != item.version) {
                 alt.log(`${itemFactoryItem.name} is outdated - Version: ${itemFactoryItem.version}. Trying to update.`);
                 try {
@@ -16,7 +18,7 @@ export class UpdateItems {
                 } catch(e) {
                     alt.logError(`Seems like something went wrong in the item updating process. ${e}`);
                 }
-            } else continue;
+            }
         }
     }
 }
