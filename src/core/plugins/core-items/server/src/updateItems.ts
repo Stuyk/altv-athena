@@ -1,16 +1,9 @@
 import alt from 'alt-server';
 import { Athena } from "../../../../server/api/athena";
-import { drinks } from './items/drinks';
-import { food } from './items/food';
-import { utility } from './items/utility';
-
+import items from './items';
 export class UpdateItems {
     static async init() {
-        const itemsToUpdate = [
-            ...drinks,
-            ...food,
-            ...utility
-        ];
+        const itemsToUpdate = items;
 
         for(let i = 0; i < itemsToUpdate.length; i++) {
             const item = itemsToUpdate[i];
