@@ -2,7 +2,7 @@ import alt, { IVector3 } from 'alt-server';
 import { Athena } from '../api/athena';
 
 /**
- * @param {IVector3} pos - The position of the interaction.
+ * @param {IVector3} position - The position of the interaction.
  * @param {string} description - The description of the interaction.
  * @param {number} range - The range of the interaction.
  * @param {number} dimension - The dimension to search in.
@@ -19,7 +19,7 @@ import { Athena } from '../api/athena';
  */
 
 export function interaction(
-    pos: IVector3,
+    position: IVector3,
     description: string,
     range: number,
     dimension: number,
@@ -31,7 +31,7 @@ export function interaction(
     return (_target: Function, _propertyName: string, descriptor: PropertyDescriptor) => {
         const callback: (player: alt.Player, ...args: any[]) => void = descriptor.value;
         Athena.controllers.interaction.add({
-            position: pos,
+            position: position,
             description: description,
             dimension: dimension,
             isPlayerOnly: playerOnly,
