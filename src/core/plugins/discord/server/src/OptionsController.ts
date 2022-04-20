@@ -1,8 +1,8 @@
 import Database from '@stuyk/ezmongodb';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { Collections } from '../interface/iDatabaseCollections';
-import { defaultOptions, DiscordID, Options } from '../interface/iOptions';
-import Logger from '../utility/athenaLogger';
+import alt from 'alt-server';
+import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { defaultOptions, DiscordID, Options } from '../../../../server/interface/iOptions';
+import config from '../config';
 
 export class OptionsController {
     static data: Options = {};
@@ -24,8 +24,8 @@ export class OptionsController {
             OptionsController.data = await Database.insertData(OptionsController.data, Collections.Options, true);
         }
 
-        if (DEFAULT_CONFIG.WHITELIST) {
-            Logger.info(`Whitelisted Users: ${OptionsController.data.whitelist.length}`);
+        if (config?.whitelist?.enabled) {
+            alt.log(`~lg~[Discord] Whitelisted Users: ${OptionsController.data.whitelist.length}`);
         }
     }
 
@@ -39,7 +39,7 @@ export class OptionsController {
         const isWhitelisted = await OptionsController.isWhitelisted(id);
 
         if (isWhitelisted) {
-            return true;
+            return;
         }
 
         OptionsController.data.whitelist.push(id);
@@ -48,8 +48,6 @@ export class OptionsController {
             { whitelist: OptionsController.data.whitelist },
             Collections.Options,
         );
-
-        return true;
     }
 
     /**
