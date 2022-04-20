@@ -1,5 +1,5 @@
 {
     "dependencies": [
-        "discord.js"
+        "discord.js@12.5.3"
     ]
 }
