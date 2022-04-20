@@ -12,5 +12,16 @@
         "moduleResolution": "node",
         "jsx": "preserve"
     },
-    "exclude": [ "./resources", "./scripts" ]
+    "exclude": [
+        "./resources",
+        "./scripts",
+        "./altv-athena-cache",
+        "./node_modules",
+        "./cache",
+        "./crashdumps",
+        "./data",
+        "./doc",
+        "./modules",
+        "./screenshots"
+    ]
 }
