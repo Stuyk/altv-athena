@@ -51,8 +51,8 @@ export class CharacterSystem {
         }
 
         // Hair - Tattoo
-        const collection = native.getHashKey(appearance.hairOverlay.collection);
-        const overlay = native.getHashKey(appearance.hairOverlay.overlay);
+        const collection = alt.hash(appearance.hairOverlay.collection);
+        const overlay = alt.hash(appearance.hairOverlay.overlay);
         native.addPedDecorationFromHashes(ped, collection, overlay);
 
         // Hair
@@ -154,8 +154,8 @@ export class CharacterSystem {
 
     static applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {
         for (let i = 0; i < decorations.length; i++) {
-            const collection = native.getHashKey(decorations[i].collection);
-            const overlay = native.getHashKey(decorations[i].overlay);
+            const collection = alt.hash(decorations[i].collection);
+            const overlay = alt.hash(decorations[i].overlay);
             native.addPedDecorationFromHashes(alt.Player.local.scriptID, collection, overlay);
         }
     }
