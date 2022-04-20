@@ -1,6 +1,5 @@
 import alt from 'alt-server';
 import Discord, { MessageEmbed } from 'discord.js';
-import Logger from '../../../../server/utility/athenaLogger';
 import config from '../config';
 import { OptionsController } from './OptionsController';
 
@@ -22,12 +21,12 @@ export class DiscordController {
         alt.log(`~lg~[Discord] Bot Connected Successfully`);
 
         if (config?.whitelist?.enabled && !config?.whitelist?.role) {
-            Logger.error(`missing config.whitelist.role for auto-whitelist.`);
+            alt.logError(`[Discord] missing whitelist role for auto-whitelist.`);
             return;
         }
 
         if (!config.serverId) {
-            Logger.warning(`config.serverid is not defined. You will not be able to use messaging services.`);
+            alt.logWarning(`[Discord] No ServerId provided in config. You will not be able to use messaging services.`);
             return;
         }
 
@@ -53,18 +52,18 @@ export class DiscordController {
                 return;
             }
 
-            Logger.log(`${name} was removed from the whitelist.`);
+            alt.log(`[Discord] ${name} was removed from the whitelist.`);
             return;
         }
 
         // Added to White List
         if (!oldUserHasRole && newUserHasRole) {
             if (!OptionsController.addToWhitelist(newUser.user.id)) {
-                Logger.warning(`${name} could not be added to the white list.`);
+                alt.logWarning(`[Discord] ${name} could not be added to the white list.`);
                 return;
             }
 
-            Logger.log(`${name} was added to the whitelist.`);
+            alt.log(`[Discord] ${name} was added to the whitelist.`);
         }
     }
 
@@ -76,13 +75,13 @@ export class DiscordController {
      */
     static sendToChannel(channel_id: string, message: string) {
         if (!DiscordController.guild) {
-            Logger.error(`You do not currently have a Discord Bot Setup for sending messages.`);
+            alt.logError(`[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
         const channel = DiscordController.guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
         if (!channel) {
-            Logger.error(`Channel does not exist.`);
+            alt.logError(`[Discord] Channel does not exist.`);
             return;
         }
 
@@ -97,13 +96,13 @@ export class DiscordController {
      */
     static sendEmbed(channel_id: string, msg: MessageEmbed) {
         if (!DiscordController.guild) {
-            Logger.error(`You do not currently have a Discord Bot Setup for sending messages.`);
+            alt.logError(`[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
         const channel = DiscordController.guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
         if (!channel) {
-            Logger.error(`Channel does not exist.`);
+            alt.logError(`[Discord] Channel does not exist.`);
             return;
         }
 

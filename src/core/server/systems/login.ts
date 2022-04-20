@@ -18,7 +18,7 @@ import { VehicleSystem } from './vehicle';
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
-    static TryLoginInjectionCallbacks: Array<
+    private static TryLoginInjectionCallbacks: Array<
         (player: alt.Player, data: Partial<Account>) => string | undefined | null | void
     > = [];
 
@@ -33,7 +33,7 @@ export class LoginController {
      * @memberof LoginController
      */
     static addTryLoginInjectionCallback(
-        callback: (player: alt.Player, data: Partial<Account>) => string | undefined | null | void,
+        callback: (player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean,
     ): void {
         LoginController.TryLoginInjectionCallbacks.push(callback);
     }
@@ -84,15 +84,6 @@ export class LoginController {
                 return;
             }
         }
-
-        // Whitelist Handling
-        // TODO: needs implementation
-        // if (DEFAULT_CONFIG.WHITELIST) {
-        //     if (!OptionsController.isWhitelisted(player.discord.id)) {
-        //         player.kick(`You are not currently whitelisted.`);
-        //         return;
-        //     }
-        // }
 
         if (player.discord.username) {
             alt.log(`[Athena] (${player.id}) ${player.discord.username} has authenticated.`);
