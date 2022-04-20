@@ -3,6 +3,12 @@ import fs from "fs";
 import glob from 'glob';
 import * as path from 'path';
 
+const viablePluginDisablers = [
+    'disable.plugin',
+    'disabled.plugin',
+    'disable',
+]
+
 function sanitizePath(p) {
     return p.replace(/\\/g, path.sep);
 }
@@ -10,7 +16,7 @@ function sanitizePath(p) {
 function getInstalledDependencies() {
     const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
 
-    let contents;    
+    let contents;
     try {
         contents = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
     } catch (error) {
@@ -33,19 +39,21 @@ function getInstalledDependencies() {
 
 function getPluginDependencies(pluginName) {
     const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
-    const disabledPath = sanitizePath(path.join(pluginPath, 'disabled.plugin'));
 
     const dependencies = {
         dependencies: [],
         devDependencies: []
     }
 
-    if (fs.existsSync(disabledPath)) {
-        return dependencies;
+    for (let i = 0; i < viablePluginDisablers.length; i++) {
+        const disabledPath = sanitizePath(path.join(pluginPath, viablePluginDisablers[i]));
+        if (fs.existsSync(disabledPath)) {
+            return dependencies;
+        }
     }
 
     const dependencyPath = sanitizePath(path.join(pluginPath, 'dependencies.json'));
-    
+
     if (!fs.existsSync(dependencyPath)) {
         return dependencies;
     }
@@ -60,7 +68,7 @@ function getPluginDependencies(pluginName) {
     if (!contents) {
         return dependencies;
     }
-        
+
     for (const name of (contents.dependencies ?? [])) {
         dependencies.dependencies.push(name);
     }
@@ -86,7 +94,7 @@ function updatePluginDependencies() {
 
         if (pluginDependencies.dependencies.length === 0 && pluginDependencies.devDependencies.length === 0)
             continue;
-        
+
         console.log(`Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies, ${pluginDependencies.devDependencies.length} dev dependencies`);
 
         if (pluginDependencies.dependencies.length > 0) {
