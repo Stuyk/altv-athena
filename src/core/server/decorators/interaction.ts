@@ -31,15 +31,15 @@ export function interaction(
     return (_target: Function, _propertyName: string, descriptor: PropertyDescriptor) => {
         const callback: (player: alt.Player, ...args: any[]) => void = descriptor.value;
         Athena.controllers.interaction.add({
-            position: position,
-            description: description,
-            dimension: dimension,
+            position,
+            description,
+            dimension,
+            range,
+            debug,
+            uid,
+            callback,
             isPlayerOnly: playerOnly,
             isVehicleOnly: vehicleOnly,
-            range: range,
-            debug: debug,
-            uid: uid,
-            callback: callback,
         });
     };
 }
