@@ -9,7 +9,7 @@ import { Athena } from '../api/athena';
  * @param {string} uid - The uid of the interaction.
  * Decorator for Athena's Interaction Controller
  * ```
- * class ExampleDecorators {
+ * class ExampleInteraction {
  *   @interaction({ x: 0, y: 0, z: 0 }, 'Hello World!', 25, 0, 'UUID')
  *   static exampleInteraction() {
  *      alt.log("Interaction controller got triggerd by player through decorator!");
