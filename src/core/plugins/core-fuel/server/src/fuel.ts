@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
+import { Athena } from '../../../../server/api/athena';
 import { VehicleEvents } from '../../../../server/events/vehicleEvents';
-import { LOCALE_FUEL } from '../../shared/locales';
 import { ATHENA_EVENTS_VEHICLE } from '../../../../shared/enums/athenaEvents';
 import { Vehicle_Behavior, VEHICLE_STATE } from '../../../../shared/enums/vehicle';
 import { VEHICLE_RULES } from '../../../../shared/enums/vehicleRules';
@@ -9,9 +9,9 @@ import { VehicleData } from '../../../../shared/information/vehicles';
 import { IVehicle } from '../../../../shared/interfaces/iVehicle';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { distance2d } from '../../../../shared/utility/vector';
+import { LOCALE_FUEL } from '../../shared/locales';
 import { FuelCommands } from './commands';
 import { FUEL_CONFIG } from './config';
-import { Athena } from '../../../../server/api/athena';
 
 export class FuelSystem {
     /**
@@ -39,23 +39,17 @@ export class FuelSystem {
             return { status: true, response: '' };
         });
 
-        Athena.vehicle.funcs.addCreateVehicleInjection((veh: IVehicle) => {
-            const vehicleInfo = VehicleData.find((x) => x.name === veh.model);
+        Athena.vehicle.funcs.addBeforeCreateInjection((document: IVehicle) => {
+            const vehicleInfo = VehicleData.find((x) => x.name === document.model);
+
+            document.fuel = FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE;
 
             if (vehicleInfo && vehicleInfo.class === VEHICLE_CLASS.CYCLE) {
-                const dataToAppend: Partial<IVehicle> = {
-                    fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE,
-                    behavior: Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NEED_KEY_TO_START,
-                };
-
-                return dataToAppend;
+                document.fuel = FUEL_CONFIG.MAXIMUM_FUEL;
+                document.behavior = Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
             }
 
-            const dataToAppend: Partial<IVehicle> = {
-                fuel: FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE,
-            };
-
-            return dataToAppend;
+            return document;
         });
 
         FuelCommands.init();
