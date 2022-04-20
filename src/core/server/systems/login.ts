@@ -19,7 +19,7 @@ const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
     private static TryLoginInjectionCallbacks: Array<
-        (player: alt.Player, data: Partial<Account>) => string | undefined | null | void
+        (player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean
     > = [];
 
     /**
@@ -29,7 +29,7 @@ export class LoginController {
      * return a string to abort the login process and to kick the player
      *
      * @static
-     * @param {((player: alt.Player, data: Partial<Account>) => string | undefined | null | void)} callback
+     * @param {((player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean)} callback
      * @memberof LoginController
      */
     static addTryLoginInjectionCallback(
@@ -77,7 +77,7 @@ export class LoginController {
         delete player.discordToken;
 
         for (const callback of LoginController.TryLoginInjectionCallbacks) {
-            const result: string | undefined | null | void = callback(player, account);
+            const result: string | undefined | null | void | boolean = callback(player, account);
 
             if (typeof result == 'string') {
                 player.kick(result);
