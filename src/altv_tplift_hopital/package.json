@@ -1,0 +1,25 @@
+{
+	"name": "altv-mapping-teleport",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@gitlab.com/Trackoad/altv-mapping-teleport.git"
+	},
+	"author": "Trackoad",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://gitlab.com/Trackoad/altv-mapping-teleport/issues"
+	},
+	"homepage": "https://gitlab.com/Trackoad/altv-mapping-teleport#readme",
+	"devDependencies": {
+		"@altv/types-client": "^1.5.5",
+		"@altv/types-natives": "^1.3.0",
+		"@altv/types-server": "^1.7.5"
+	}
+}

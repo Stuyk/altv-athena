@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SInteriorOrderData>
+  <startFrom value="7000" />
+  <proxies>
+	<Item>bh1_occl_05</Item>
+	<Item>hei_bh1_22_strm_0</Item>
+	<Item>urgence_milo</Item>
+	<Item>mz_carpack_milo</Item>
+	<Item>operation_floor</Item>
+	<Item>room_milo</Item>
+	<Item>helilift_floor</Item>
+  </proxies>
+</SInteriorOrderData>

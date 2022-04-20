@@ -1,0 +1,13 @@
+Version 165 30
+{
+	DataCRC 3624623659
+	NumBones 1
+	Bone V_HairD_Mousse 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+	}
+}

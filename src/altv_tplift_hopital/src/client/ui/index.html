@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Teleport for Alt:V</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+		body {
+			background: transparent;
+		}
+
+		.background-container {
+			padding: 2vh;
+			background: rgba(0, 0, 0, 0.159);
+			border: 1px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="row" style="margin: 1.5%;">
+		<div class="col-12 col-md-6 col-lg-3 background-container">
+			<select class="col form-select form-select-lg mb-3" aria-label="Select your waypoint">
+				<option selected>Select your waypoint</option>
+			</select>
+			<button type="button" id="button-waypoint" class="btn btn-success">Teleport to waypoint</button>
+			<button type="button" id="button-quit" class="btn btn-danger">Quit</button>
+		</div>
+	</div>
+	<script src="./ui.js"></script>
+</body>
+
+</html>

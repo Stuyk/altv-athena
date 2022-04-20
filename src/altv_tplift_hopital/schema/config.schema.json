@@ -1,0 +1,127 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"required": [
+		"key",
+		"areas"
+	],
+	"definitions": {
+		"vector": {
+			"required": [
+				"x",
+				"y",
+				"z"
+			],
+			"type": "object",
+			"properties": {
+				"x": {
+					"type": "number"
+				},
+				"y": {
+					"type": "number"
+				},
+				"z": {
+					"type": "number"
+				}
+			}
+		},
+		"color": {
+			"required": [
+				"r",
+				"g",
+				"b",
+				"a"
+			],
+			"type": "object",
+			"properties": {
+				"r": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 255
+				},
+				"g": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 255
+				},
+				"b": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 255
+				},
+				"a": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 255
+				}
+			}
+		}
+	},
+	"properties": {
+		"distanceRenderMarker": {
+			"type": "number",
+			"minimum": 1,
+			"maximum": 300
+		},
+		"key": {
+			"type": "string"
+		},
+		"dimension": {
+			"type": "number"
+		},
+		"areas": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object",
+				"required": [
+					"marker",
+					"spawn",
+					"id"
+				],
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"marker": {
+						"type": "object",
+						"required": [
+							"size",
+							"color",
+							"type",
+							"heading",
+							"pos"
+						],
+						"properties": {
+							"size": {
+								"$ref": "#/definitions/vector"
+							},
+							"color": {
+								"$ref": "#/definitions/color"
+							},
+							"type": {
+								"type": "number",
+								"pattern": "/[0-9]+/"
+							},
+							"heading": {
+								"type": "number"
+							},
+							"pos": {
+								"$ref": "#/definitions/vector"
+							}
+						}
+					},
+					"spawn": {
+						"$ref": "#/definitions/vector"
+					},
+					"canGoTo": {
+						"type": "array",
+						"default": [],
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

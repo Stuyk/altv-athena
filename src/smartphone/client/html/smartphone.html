@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/fontawesome.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<title>smartphone</title>
+	</head>
+	<body>
+		<div id="smartphone">
+			<div id="head">
+				<div id="clock"></div>
+				<div id="notch"></div>
+				<div id="headInfo">
+					<i class="fas fa-battery-full" id="battery"></i>
+					<i class="fas fa-signal" id="signal"></i>
+				</div>
+			</div>
+			<div id="homeScreen">
+				<div id="apps">
+					<div class="app" id="appCalenderButton"></div>
+					<div class="app" id="appWeatherButton">
+						<i class="fas fa-cloud-sun"></i>
+					</div>
+					<div class="app" id="appChargeButton">
+						<i class="fas fa-charging-station"></i>
+					</div>
+					<div class="app" id="appAirplaneButton">
+						<i class="fas fa-plane"></i>
+					</div>
+				</div>
+				<div id="fav">
+					<div class="app" id="appPhoneButton">
+						<i class="fas fa-phone"></i>
+					</div>
+					<div class="app" id="appContactsButton">
+						<i class="fas fa-address-book"></i>
+					</div>
+					<div class="app" id="appMessagesButton">
+						<i class="fas fa-comment"></i>
+					</div>
+					<div class="app" id="appGpsButton">
+						<i class="fas fa-map-marker-alt"></i>
+					</div>
+				</div>
+			</div>
+
+			<div id="appScreen">
+				<!-- CONTACTS -->
+				<div id="appContacts">
+					<div id="appContactsOverview">
+						<h5>Contacts</h5>
+						<input
+							type="text"
+							id="appContactsSearch"
+							placeholder="Search"
+						/>
+						<div id="appContactsList"></div>
+					</div>
+					<div id="appContactsEdit">
+						<div id="editContactHead">
+							<i class="fas fa-chevron-left"></i> Contacts
+						</div>
+						<div id="editContactLetter">
+							<span></span>
+						</div>
+						<div id="editContactName"></div>
+						<div id="editContactButtons">
+							<div><i class="fas fa-phone"></i></div>
+							<div><i class="fas fa-comment"></i></div>
+							<div id="editContactDeleteButton">
+								<i class="fas fa-trash"></i>
+							</div>
+						</div>
+						<div id="editContact">
+							<input type="hidden" id="contactId" />
+							<input type="text" id="contactNewName" />
+							<input type="text" id="contactNewPhone" />
+						</div>
+					</div>
+				</div>
+				<!-- CONTACTS END -->
+			</div>
+
+			<div id="homeButton"></div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>

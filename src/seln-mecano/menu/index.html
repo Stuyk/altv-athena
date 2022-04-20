@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+
+        <link rel="stylesheet" href="assets/default.css" />
+
+        <script src="https://kit.fontawesome.com/69e9972841.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="assets/npmvue2.js"></script>
+        <script type="text/javascript" src="assets/npmvue.js"></script>
+    </head>
+    <body>
+    <div id="app" v-if="visible">
+
+
+        <div id="optionsbonus">
+            <img src="assets/door.png" v-on:click="BonusPortes"/>
+            <img src="assets/engine.png" v-on:click="BonusMoteur"/>
+            <img src="assets/repair.png" v-on:click="BonusRepair"/>
+            <img src="assets/shiny.png" v-on:click="BonusClean"/>
+            <img src="assets/en.png" v-on:click="Language('fr')" v-if="lang == 'en'"/>
+            <img src="assets/fr.png" v-on:click="Language('en')" v-if="lang == 'fr'"/>
+        </div>
+
+        <div id="logo">
+            <img src="assets/lsc.png" v-on:click="MenuChoice('menu')"/>
+        </div>
+
+        <div class="pov1">
+            <input v-on:input="POV()" type="range" min="0" :max="360" value="180" id="POV1" class="slider2" >
+        </div>
+        <div class="pov2">
+            <input v-on:input="POV()" type="range"  min="-20"  :max="50" value="25" id="POV2" class="slider3" >
+        </div>
+
+
+
+        <table class="tablebas">
+
+            <template v-if="visiblecouleur && catname && catname != 'Stickers'">
+
+                <div class="miniimgs ligne">
+                    <template v-for="couleur in couleurs">
+                        <template v-if="couleur.code != undefined ">
+                            <button :id="couleur.code" :style="'background-color: #'+couleur.hex" v-on:click="ChoixCouleur(couleur)"></button>
+                        </template>
+                        <template v-else>
+                            <button :style="'background-color: #'+couleur.hex" v-on:click="ChoixCouleur(couleur)"></button>
+                        </template>
+                    </template>
+                </div>
+
+            </template>
+
+            <template v-if="visiblerouescouleur">
+
+                <div class="miniimgs ligne">
+                    <template v-for="couleur in couleurs">
+                        <template v-if="couleur.code != undefined ">
+                            <button :id="couleur.code" :style="'background-color: #'+couleur.hex" v-on:click="ChoixCouleurRoues(couleur)"></button>
+                        </template>
+                        <template v-else>
+                            <button :style="'background-color: #'+couleur.hex" v-on:click="ChoixCouleurRoues(couleur)"></button>
+                        </template>
+                    </template>
+                </div>
+
+            </template>
+
+
+
+            <template v-if="visibleneon">
+                <div class="miniimgs ligne">
+                    <template v-if="visiblexenonlist == false" v-for="couleur in couleursneon">
+                        <button :style="'background-color: #'+couleur" v-on:click="Neon(couleur)">{{ couleur }}</button>
+                    </template>
+
+                    <template v-if="visiblexenonlist" v-for="couleur in couleursxenon">
+                        <button :style="'background-color: #'+couleur.hex" v-on:click="Xenon(couleur.value)">{{ couleur[lang] }}</button>
+                    </template>
+                </div>
+            </template>
+
+
+            <template v-if="visibleextra">
+                <div class="miniimgs ligne">
+                    <template v-for="i in extras">
+                        <button v-if="i.state" v-on:click="Extras(i.id)">{{ i.id }}</button>
+                    </template>
+                    <button v-if="noextra">{{ texts[lang].NoExtra }}</button>
+                </div>
+            </template>
+
+            <template v-if="visibleplate">
+                <div class="miniimgs ligne">
+                    <template v-for="plate in platetypes">
+                        <button v-on:click="PlateChanger(plate.id)">{{ plate[lang] }}</button>
+                    </template>
+                </div>
+            </template>
+
+
+            <template v-if="visiblecouleur && catname == 'Stickers'">
+                <div class="miniimgs ligne">
+                    <template v-if="stickers != 0">
+                        <template v-for="i in stickers">
+                            <button v-on:click="Stickers(i.i)">{{ i.name }} </button>
+                        </template>
+                    </template>
+                    <template v-if="livery != -1">
+                        <template v-for="i in livery">
+                            <button v-on:click="Livery(i)">{{ texts[lang].Livery }} {{ i }} </button>
+                        </template>
+                    </template>
+                    <template v-if="roofs != 0">
+                        <template v-for="i in roofs">
+                            <button v-on:click="Roof(i)">{{ texts[lang].Roof }} {{ i }} </button>
+                        </template>
+                    </template>
+                    <template v-if="( stickers == 0 ) && ( livery == -1 ) && ( roofs == 0 )">
+                        <button>{{ texts[lang].NoStickers }}</button>
+                    </template>
+                </div>
+            </template>
+
+
+            
+            <template v-if="visibleupgrades || visiblecustoms">
+                
+                <div class="ligne2">
+                    <input 
+                        v-on:input="SliderWatch($event)"
+                        type="range" 
+                        min="0" 
+                        :max="slidermax" 
+                        :value="0" 
+                        class="slider" 
+                        id="slider"
+                    > 
+
+                    &MediumSpace; {{ slidercurrent }} / {{ slidermax }}
+                    
+                </div>
+            </template>
+
+            <template v-if="catwc != -1">
+                
+                <div class="ligne2">
+                    <input 
+                        v-on:input="SliderWatchWheels($event)"
+                        type="range" 
+                        min="0" 
+                        :max="slidermax" 
+                        :value="0" 
+                        class="slider" 
+                        id="sliderwheels"
+                    > 
+
+                    &MediumSpace; {{ slidercurrent }} / {{ slidermax }}
+                    
+                </div>
+            </template>
+
+        </table>
+        
+
+
+
+
+
+        
+        <div id="modifs">
+
+            
+            <!--<center><template v-if="alerte">{{ alerte }}</template></center>-->
+
+            <template v-if="menu">
+            <center><div id="menu1">
+                <img src="assets/paint.png"  v-on:click="MenuChoice('visiblecouleur')"/>
+                <img src="assets/neon.png" v-on:click="MenuChoice('visibleneon')"/>
+                <img src="assets/engine.png" v-on:click="MenuChoice('visibleupgrades')"/>
+                <img src="assets/repair.png" v-on:click="MenuChoice('visiblecustoms')"/>
+                <img src="assets/tire.png" v-on:click="MenuChoice('visibleroues')"/>
+                <img src="assets/plate.png" v-on:click="MenuChoicePlates()"/>
+                <img src="assets/extras.png" v-on:click="MenuChoiceExtras()"/>
+                <img src="assets/close.png" v-on:click="Fermer()"/>
+            </div></center>
+            </template>
+
+
+
+            <template v-if="visibleroues">
+
+                <center><div class="menubutton">
+                    <button id="CatWC8" v-on:click="WheelsCat(8, $event)">{{ texts[lang].WC_Benny }}</button>
+                    <button id="CatWC0" v-on:click="WheelsCat(0, $event)">{{ texts[lang].WC_Sport }}</button>
+                    <button id="CatWC1" v-on:click="WheelsCat(1, $event)">{{ texts[lang].WC_Muscles }}</button>
+                    <button id="CatWC2" v-on:click="WheelsCat(2, $event)">{{ texts[lang].WC_Low }}</button>
+                    <button id="CatWC3" v-on:click="WheelsCat(3, $event)">{{ texts[lang].WC_SUV }}</button>
+                    <button id="CatWC4" v-on:click="WheelsCat(4, $event)">{{ texts[lang].WC_4x4 }}</button>
+                    <button id="CatWC5" v-on:click="WheelsCat(5, $event)">{{ texts[lang].WC_Tuning }}</button>
+                    <button id="CatWC6" v-on:click="WheelsCat(6, $event)">{{ texts[lang].WC_Bikes }}</button>
+                    <button id="CatWC7" v-on:click="WheelsCat(7, $event)">{{ texts[lang].WC_HighEnds }}</button>
+                    <button style="background: rgb(141, 34, 38);" v-on:click="MenuChoice('menu')"> X </button>
+                </div></center>
+            </template>
+
+
+
+            <template v-if="visibleneon">
+                <center><div class="menubutton">
+                    <button  v-on:click="NeonOnOff('front')">{{ texts[lang].front }}</button>
+                    <button  v-on:click="NeonOnOff('back')">{{ texts[lang].back }}</button>
+                    <button  v-on:click="NeonOnOff('left')">{{ texts[lang].left }}</button>
+                    <button  v-on:click="NeonOnOff('right')">{{ texts[lang].right }}</button>
+                    <button  v-on:click="NeonOnOff('allon')">{{ texts[lang].allon }}</button>
+                    <button  v-on:click="NeonOnOff('alloff')">{{ texts[lang].alloff }}</button>
+                    <button  v-on:click="VisibleXenon()">{{ texts[lang].xenon }}</button>
+                    <button style="background: rgb(141, 34, 38);" v-on:click="MenuChoice('menu')"> X </button>
+                </div></center>
+            </template>
+
+
+
+            <template v-if="visiblecouleur">
+                <center><div class="menuimgs">
+                    <img src="assets/paint.png" id="CatPrimary" v-on:click="ChoixCat('Premiere')"/>
+                    <img src="assets/paint2.png" id="CatSeconde" v-on:click="ChoixCat('Seconde')"/>
+                    <img src="assets/paint3.png" id="CatInterior" v-on:click="ChoixCat('Interieur')"/>
+                    <img src="assets/shiny.png" id="CatReflets" v-on:click="ChoixCat('Reflets')"/>
+                    <img src="assets/tire.png" id="CatJantes" v-on:click="ChoixCat('Jantes')"/>
+                    <img src="assets/close.png" v-on:click="MenuChoice('menu')"/>
+                </div></center>
+            </template>
+
+            <template v-if="visiblecouleur">
+                <center><div class="miniimgs" style="width: 12vw;">
+                    <img src="assets/sticker.png" style="background: #ffffff22" id="CatStickers" v-on:click="ChoixCat('Stickers')"/>
+                    <img src="assets/vide.png" style="background: grey" onClick="document.getElementById('grey').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: red" onClick="document.getElementById('red').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: orange" onClick="document.getElementById('orange').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: green" onClick="document.getElementById('green').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: blue" onClick="document.getElementById('blue').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: maroon" onClick="document.getElementById('maroon').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                    <img src="assets/vide.png" style="background: purple" onClick="document.getElementById('purple').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });">
+                </div></center>
+            </template>
+
+
+
+            <template v-if="visibleupgrades">
+                <center><div class="menuimgs">
+                    <img src="assets/engine.png" id="CatMotor" v-on:click="ChoixUpg('engine', $event, 11)"/>
+                    <img src="assets/brakes.png" id="CatBrakes" v-on:click="ChoixUpg('brakes', $event, 12)"/>
+                    <img src="assets/trans.png" id="CatTransmission" v-on:click="ChoixUpg('trans', $event, 13)"/>
+                    <img src="assets/suspension.png" id="CatSuspension" v-on:click="ChoixUpg('suspension', $event, 15)"/>
+                    <img src="assets/armor.png" id="CatArmor" v-on:click="ChoixUpg('armor', $event, 16)"/>
+                    <img src="assets/turbo.png" id="CatTurbo" v-on:click="ChoixUpg('turbo', $event, 18)"/>
+                    <img src="assets/close.png" v-on:click="MenuChoice('menu')"/>
+                </div></center>
+            </template>
+
+            <template v-if="visiblecustoms">
+
+                    <center></center><div class="menubutton">
+                        <button style="background: rgb(141, 34, 38);" v-on:click="MenuChoice('menu')"> X </button>
+                        <template v-for="i in customs">
+                            <template v-if="modscount[i.type] > 0">
+                                <button  :id="'CatCustom'+i.type" v-on:click="ChoixUpg(i.type, $event, i.code)">{{ i[lang] }}</button>
+                            </template>
+                        </template>
+                        <button style="background: rgb(141, 34, 38);" v-on:click="MenuChoice('menu')"> X </button>
+                    </div></center>
+                   
+            </template>
+
+
+        </div>
+    </div>
+
+        <script src="app.js"></script>
+        <script>
+            if ('alt' in window) {
+                alt.on('ouvrir', (type, modscount, currentmods, liveries, roofs) => {
+                    app.catname = false;
+                    app.visibleneon = false;
+                    app.visiblecouleur = false;
+                    app.visibleroues = false;
+                    app.visiblerouescouleurs = false;
+                    app.visibleupgrades = false;
+                    app.visiblecustoms = false;
+                    app.visiblexenonlist = false;
+                    app.visibleplate = false;
+                    app.visibleextra = false;
+                    app.visible = true;
+
+                    app.currentpov = 1;
+                    app.currentpov2 = 1;
+                    
+
+                    app.slidermax = 0;
+                    app.slidercurrent = 0;
+                    app.stickers = 0;
+                    app.livery = liveries;
+                    app.roofs = roofs;
+                    app.modscount = modscount;
+                    app.currentmods = currentmods;
+
+                    app[type] = true;
+
+
+                });
+                alt.on('senddata', (type, data) => {
+                    app[type] = data;
+                });
+                alt.on('close', () => {
+                    app.catname = false;
+                    app.catupg = 'vide';
+                    app.catupgid = 0;
+                    app.catwc = -1;
+                    app.menu = false;
+                    app.visible = false;
+                    app.visiblecouleur = false;
+                    app.visiblexenonlist = false;
+                    app.visiblestickers = false;
+                    app.visibleneon = false;
+                    app.visibleupgrades = false;
+                    app.visiblecustoms = false;
+                    app.visibleplate = false;
+                    app.visibleextra = false;
+                });
+            }
+        </script>
+    </body>
+</html>
