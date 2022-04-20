@@ -1,3 +1,4 @@
+import { ConsoleCommander } from '../../plugins/core-console-cmds/shared/consoleCommander';
 import { Athena } from '../../server/api/athena';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 
@@ -21,5 +22,18 @@ export function command(commandName: string | Array<string>, description: string
                 Athena.controllers.chat.addCommand(commandName[i], description, permissions, descriptor.value);
             }
         }
+    };
+}
+
+/**
+ * Registers a console command
+ *
+ * @export
+ * @param {string} commandName
+ * @return {*}
+ */
+export function consoleCommand(commandName: string) {
+    return (_target: Function, _propertyKey: string, descriptor: PropertyDescriptor) => {
+        ConsoleCommander.registerConsoleCommand(commandName, descriptor.value);
     };
 }
