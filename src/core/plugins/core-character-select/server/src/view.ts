@@ -110,7 +110,7 @@ class InternalFunctions {
             playerCharacters[i]._id = playerCharacters[i]._id.toString();
         }
 
-        if (CHARACTER_SELECT_CONFIG.MAX_CHARACTERS <= 1) {
+        if (CHARACTER_SELECT_CONFIG.MAX_CHARACTERS < 1) {
             if (CharacterList[player.id]) {
                 delete CharacterList[player.id];
             }
@@ -167,6 +167,7 @@ class InternalFunctions {
         }
 
         if (CharacterList[player.id] && CharacterList[player.id].length >= CHARACTER_SELECT_CONFIG.MAX_CHARACTERS) {
+            Athena.player.emit.notification(player, 'You have reached the maximum number of characters.');
             InternalFunctions.show(player);
             return;
         }
