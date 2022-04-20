@@ -18,6 +18,26 @@ import { VehicleSystem } from './vehicle';
 const UserRelation: { [key: number]: string } = {};
 
 export class LoginController {
+    static TryLoginInjectionCallbacks: Array<
+        (player: alt.Player, data: Partial<Account>) => string | undefined | null | void
+    > = [];
+
+    /**
+     * Adds a tryLogin injection callback.
+     *
+     * useful for adding custom logic to the login process.
+     * return a string to abort the login process and to kick the player
+     *
+     * @static
+     * @param {((player: alt.Player, data: Partial<Account>) => string | undefined | null | void)} callback
+     * @memberof LoginController
+     */
+    static addTryLoginInjectionCallback(
+        callback: (player: alt.Player, data: Partial<Account>) => string | undefined | null | void,
+    ): void {
+        LoginController.TryLoginInjectionCallbacks.push(callback);
+    }
+
     static init() {
         PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
         alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
@@ -55,6 +75,15 @@ export class LoginController {
     static async tryLogin(player: alt.Player, account: Partial<Account> = null): Promise<void> {
         delete player.pendingLogin;
         delete player.discordToken;
+
+        for (const callback of LoginController.TryLoginInjectionCallbacks) {
+            const result: string | undefined | null | void = callback(player, account);
+
+            if (typeof result == 'string') {
+                player.kick(result);
+                return;
+            }
+        }
 
         // Whitelist Handling
         // TODO: needs implementation
