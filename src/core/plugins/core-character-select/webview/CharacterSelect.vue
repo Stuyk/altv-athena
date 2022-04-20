@@ -80,7 +80,7 @@
                 </Button>
 
                 <!-- Create Character -->
-                <Button color="green" @click="newCharacter">
+                <Button color="green" @click="newCharacter" v-if="getTotalCharacters < MAX_CHARACTERS">
                     <Icon class="green--text" :size="24" icon="icon-plus" />
                 </Button>
 
@@ -96,7 +96,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { EXAMPLE_CHARACTER } from './utility/exampleCharacter';
-import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
+import { CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
 import { CHARACTER_SELECT_LOCALE } from '../shared/locale';
 
 import Button from '@components/Button.vue';
@@ -104,6 +104,7 @@ import Icon from '@components/Icon.vue';
 import Modal from '@components/Modal.vue';
 import Toolbar from '@components/Toolbar.vue';
 import Frame from '@components/Frame.vue';
+import { CHARACTER_SELECT_CONFIG } from '../shared/config';
 
 const ComponentName = 'CharacterSelect';
 export default defineComponent({
@@ -117,6 +118,7 @@ export default defineComponent({
     },
     data() {
         return {
+            MAX_CHARACTERS: 0,
             characterIndex: 0,
             characters: [],
             statNames: [],
@@ -125,6 +127,9 @@ export default defineComponent({
         };
     },
     computed: {
+        getTotalCharacters() {
+            return this.characters.length;
+        },
         getName() {
             if (!this.characters[this.characterIndex]) {
                 return '';
@@ -267,6 +272,7 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
+            this.MAX_CHARACTERS = CHARACTER_SELECT_CONFIG.MAX_CHARACTERS;
             alt.on(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, this.setCharacters);
             alt.emit(`${ComponentName}:Ready`);
         } else {
