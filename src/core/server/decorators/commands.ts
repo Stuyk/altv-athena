@@ -10,18 +10,21 @@ import { PERMISSIONS } from '../../shared/flags/permissionFlags';
  * @param {PERMISSIONS} permissions - PERMISSIONS
  * @returns A function that takes in 3 parameters.
  */
-export function command(commandName: string | Array<string>, description: string, permissions: PERMISSIONS) {
+export function command(commandName: string | string[], description: string, permissions: PERMISSIONS) {
     return (_target: Function, _propertyKey: string, descriptor: PropertyDescriptor) => {
+        const callback: (...args: any[]) => void = descriptor.value;
+
         if (typeof commandName === 'string') {
-            Athena.controllers.chat.addCommand(commandName, description, permissions, descriptor.value);
+            Athena.controllers.chat.addCommand(commandName, description, permissions, callback);
             return;
         }
-
+        
+        // TODO: May not valid anymore. Re-Check this. 
         if (Array.isArray(commandName)) {
             for (let i = 0; i < commandName.length; i++) {
-                Athena.controllers.chat.addCommand(commandName[i], description, permissions, descriptor.value);
+                Athena.controllers.chat.addCommand(commandName[i], description, permissions, callback);
             }
-        }
+        } 
     };
 }
 
