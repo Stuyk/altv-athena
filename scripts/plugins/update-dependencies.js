@@ -5,7 +5,14 @@ import * as path from 'path';
 
 function getInstalledDependencies() {
     const packageJsonPath = path.join(process.cwd(), 'package.json');
-    const contents = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
+    let contents;    
+    try {
+        contents = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    } catch (error) {
+        console.error(`Failed to read package.json: ${error}`);
+        process.exit(1);
+    }
 
     const dependencies = [];
     for (const dependency in contents.dependencies) {
@@ -33,8 +40,17 @@ function getPluginDependencies(pluginName) {
         return dependencies;
     }
 
-    const contents = JSON.parse(fs.readFileSync(dependencyPath, 'utf8'));
-    
+    let contents = null;
+    try {
+        contents = JSON.parse(fs.readFileSync(dependencyPath, 'utf8'));
+    } catch (error) {
+        console.error(`Failed to read dependencies.json for plugin ${pluginName}: ${error}`);
+    }
+
+    if (!contents) {
+        return dependencies;
+    }
+        
     for (const name of (contents.dependencies ?? [])) {
         dependencies.dependencies.push(name);
     }
