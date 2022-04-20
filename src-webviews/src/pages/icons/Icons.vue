@@ -12,7 +12,7 @@ Helpful for seeing what default components look like.
                 label="Search"
                 :numberOnly="false"
                 :stack="false"
-                :onChange="searchTerm"
+                :onInput="searchTerm"
                 :value="userInput"
                 :rules="[]"
                 style="width: 100%"
@@ -64,8 +64,8 @@ export default defineComponent({
         Input,
     },
     methods: {
-        searchTerm(evt: Event) {
-            this.userInput = (<HTMLInputElement>evt.target).value;
+        searchTerm(value: string) {
+            this.userInput = value;
         },
         copyToClipboard(text: string) {
             navigator.clipboard.writeText(text);
