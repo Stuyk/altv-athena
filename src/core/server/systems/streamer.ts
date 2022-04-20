@@ -212,8 +212,34 @@ export class StreamerService {
 
 if (!hasInitialized) {
     hasInitialized = true;
+
+    let didGetFirstCallback = false;
+
+    alt.setTimeout(() => {
+        if (didGetFirstCallback) {
+            return;
+        }
+
+        console.log(`\r\n`);
+        alt.logWarning(`Streamer Service was not started correctly.`);
+        alt.logWarning(`Do not run alt:V Server with the executable.`);
+        alt.logWarning(`Start the server with any of the following:`);
+        console.log(`\r\n`);
+        alt.logWarning(`npm run windows`);
+        alt.logWarning(`npm run linux`);
+        alt.logWarning(`npm run devtest`);
+        alt.logWarning(`npm run dev`);
+        console.log(`\r\n`);
+        alt.logWarning(`Process will now exit`);
+
+        alt.setTimeout(() => {
+            process.exit();
+        }, 5000);
+    }, 5000);
+
     sock.onopen = InternalController.init;
     sock.onmessage = (message: MessageEvent) => {
+        didGetFirstCallback = true;
         InternalController.receive(message.data);
     };
 
