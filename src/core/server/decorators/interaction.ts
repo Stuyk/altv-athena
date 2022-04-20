@@ -2,11 +2,6 @@ import alt, { IVector3 } from 'alt-server';
 import { Athena } from '../api/athena';
 
 /**
- * @param {IVector3} position - The position of the interaction.
- * @param {string} description - The description of the interaction.
- * @param {number} range - The range of the interaction.
- * @param {number} dimension - The dimension to search in.
- * @param {string} uid - The uid of the interaction.
  * Decorator for Athena's Interaction Controller
  * ```
  * class ExampleInteraction {
@@ -16,6 +11,11 @@ import { Athena } from '../api/athena';
  *   }
  * }
  * ```
+ * @param {IVector3} position - The position of the interaction.
+ * @param {string} description - The description of the interaction.
+ * @param {number} range - The range of the interaction.
+ * @param {number} dimension - The dimension to search in.
+ * @param {string} uid - The uid of the interaction.
  */
 
 export function interaction(
