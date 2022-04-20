@@ -18,6 +18,11 @@ function getEnabledPlugins() {
 
 function cleanupPluginsFolder() {
     const pluginsFolder = sanitizePath(path.join(process.cwd(), 'resources/core/plugins'));
+
+    if (!fs.existsSync(pluginsFolder)) {
+        return;
+    }
+
     const plugins = fs.readdirSync(pluginsFolder);
 
     for (const plugin of plugins) {
