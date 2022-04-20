@@ -11,7 +11,5 @@
     "[?] Used for Ares Service Debugging": "TYPE IS STRING",
     "ARES_ENDPOINT": null,
     "[?] Use altv built-in reconnect?": "TYPE IS BOOLEAN",
-    "USE_ALTV_RECONNECT": true,
-    "[?] Plugins To Load": "TYPE IS ARRAY OF STRINGS - Empty Array = Load All",
-    "PLUGINS_TO_LOAD": []
+    "USE_ALTV_RECONNECT": true
 }
