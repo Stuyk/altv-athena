@@ -156,7 +156,7 @@ function run() {
     writeClientImports(clientImports);
     const vueFiles = writeWebviewPlugins(webviewPlugins);
 
-    console.log(`Enabled plugins: ${enabledPlugins.length} (${clientImports.length} client files, ${serverImports.length} server files, ${vueFiles} vue files)`);
+    console.log(`Enabled plugins: ${enabledPlugins.length} (${clientImports.length} client, ${serverImports.length} server, ${vueFiles} webview)`);
 }
 
 run();
