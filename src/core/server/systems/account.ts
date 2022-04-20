@@ -32,7 +32,7 @@ export class AccountSystem {
         // De-duplicate entries
         let inUse = [];
         for (let i = 0; i < accounts.length; i++) {
-            if (accounts[i].id === null || accounts[i].id === undefined || inUse.includes(accounts[i].id)) {
+            if (accounts[i].id === null || accounts[i].id === undefined) {
                 const nextIdentifier = AccountSystem.getNextIdentifier();
                 await Database.updatePartialData(
                     accounts[i]._id.toString(),
