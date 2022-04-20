@@ -5,7 +5,7 @@ import { Athena } from '../api/athena';
  * @param {IVector3} pos - The position of the interaction.
  * @param {string} description - The description of the interaction.
  * @param {number} range - The range of the interaction.
- * @param {number} dim - The dimension to search in.
+ * @param {number} dimension - The dimension to search in.
  * @param {string} uid - The uid of the interaction.
  * Decorator for Athena's Interaction Controller
  * ```
@@ -22,7 +22,7 @@ export function interaction(
     pos: IVector3,
     description: string,
     range: number,
-    dim: number,
+    dimension: number,
     uid: string,
     debug?: boolean,
     playerOnly?: boolean,
@@ -33,7 +33,7 @@ export function interaction(
         Athena.controllers.interaction.add({
             position: pos,
             description: description,
-            dimension: dim,
+            dimension: dimension,
             isPlayerOnly: playerOnly,
             isVehicleOnly: vehicleOnly,
             range: range,
