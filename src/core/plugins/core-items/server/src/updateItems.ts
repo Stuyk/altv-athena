@@ -8,7 +8,7 @@ export class UpdateItems {
             const item = items[i];
             let itemFactoryItem = await Athena.systems.itemFactory.get(item.dbName);
             
-            if(!item.version) continue;
+            if(!item.version || !item || !itemFactoryItem || !itemFactoryItem.version) continue;
             if(itemFactoryItem.version != item.version) {
                 alt.log(`${itemFactoryItem.name} is outdated - Version: ${itemFactoryItem.version}. Trying to update.`);
                 try {
