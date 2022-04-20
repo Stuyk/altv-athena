@@ -19,7 +19,6 @@ export function command(commandName: string | string[], description: string, per
             return;
         }
         
-        // TODO: May not valid anymore. Re-Check this. 
         if (Array.isArray(commandName)) {
             for (let i = 0; i < commandName.length; i++) {
                 Athena.controllers.chat.addCommand(commandName[i], description, permissions, callback);
