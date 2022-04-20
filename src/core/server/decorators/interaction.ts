@@ -1,45 +1,59 @@
 import alt, { IVector3 } from 'alt-server';
+import { Interaction } from '../../shared/interfaces/interaction';
 import { Athena } from '../api/athena';
 
+let position: IVector3;
+let description: string;
+let range: number;
+let dimension: number;
+let uid: string;
+let debug: boolean;
+let isPlayerOnly: boolean;
+let isVehicleOnly: boolean;
+
+let data: Interaction = {
+    position, 
+    description,
+    dimension, 
+    range, 
+    uid, 
+    debug, 
+    isPlayerOnly, 
+    isVehicleOnly,
+};
 /**
  * Decorator for Athena's Interaction Controller
  * ```
- * class ExampleInteraction {
- *   @interaction({ x: 0, y: 0, z: 0 }, 'Hello World!', 25, 0, 'UUID')
- *   static exampleInteraction() {
- *      alt.log("Interaction controller got triggerd by player through decorator!");
- *   }
- * }
+ * class ExampleDecoratorInteraction {
+ *      @interaction({ 
+ *      position: { x: 0, y: 0, z: 71 }, 
+ *      description: 'Hello World!', 
+ *      range: 25, 
+ *      dimension: 0, 
+ *      uid: 'UUID', 
+ *      debug: false, 
+ *      isPlayerOnly: false, 
+ *      isVehicleOnly: false 
+ *  })
+ * 
+ *  static doSomething() {
+ *      alt.logError("Hello World");
+ *  }
+ *}
  * ```
- * @param {IVector3} position - The position of the interaction.
- * @param {string} description - The description of the interaction.
- * @param {number} range - The range of the interaction.
- * @param {number} dimension - The dimension to search in.
- * @param {string} uid - The uid of the interaction.
+ * @param {IVector3} data.position - The position of the interaction.
+ * @param {string} data.description - The description of the interaction.
+ * @param {number} data.range - The range of the interaction.
+ * @param {number} data.dimension - The dimension to search in.
+ * @param {string} data.uid - The uid of the interaction.
+ * @param {boolean} data.debug - If the interaction should be debugged.
+ * @param {boolean} data.playerOnly - If the interaction should only be triggered by players.
+ * @param {boolean} data.vehicleOnly - If the interaction should only be triggered by vehicles.
  */
-
-export function interaction(
-    position: IVector3,
-    description: string,
-    range: number,
-    dimension: number,
-    uid: string,
-    debug?: boolean,
-    playerOnly?: boolean,
-    vehicleOnly?: boolean,
-) {
+export function interaction(data: Interaction) {
+    alt.log(data);
     return (_target: Function, _propertyName: string, descriptor: PropertyDescriptor) => {
         const callback: (player: alt.Player, ...args: any[]) => void = descriptor.value;
-        Athena.controllers.interaction.add({
-            position: position,
-            description: description,
-            dimension: dimension,
-            isPlayerOnly: playerOnly,
-            isVehicleOnly: vehicleOnly,
-            range: range,
-            debug: debug,
-            uid: uid,
-            callback: callback,
-        });
+        Athena.controllers.interaction.add({ ...data, callback });
     };
 }
