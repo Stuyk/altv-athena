@@ -50,7 +50,6 @@ let data: Interaction = {
  * @param {boolean} data.vehicleOnly - If the interaction should only be triggered by vehicles.
  */
 export function interaction(data: Interaction) {
-    alt.log(data);
     return (_target: Function, _propertyName: string, descriptor: PropertyDescriptor) => {
         const callback: (player: alt.Player, ...args: any[]) => void = descriptor.value;
         Athena.controllers.interaction.add({ ...data, callback });
