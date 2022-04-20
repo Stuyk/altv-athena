@@ -5,7 +5,7 @@ import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 
 class CurrencyCommands {
-    @command('setcash', '/setcash [amount] [id]', PERMISSIONS.ADMIN)
+    @command(['cash', 'setcash'], '/setcash [amount] [id]', PERMISSIONS.ADMIN)
     private static setCashCommand(player: alt.Player, amount: string, id: string | null = null): void {
         if (id === null || id === undefined) {
             Athena.player.currency.set(player, CurrencyTypes.CASH, parseInt(amount));
