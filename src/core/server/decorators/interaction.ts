@@ -1,26 +1,6 @@
-import alt, { IVector3 } from 'alt-server';
+import alt from 'alt-server';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { Athena } from '../api/athena';
-
-let position: IVector3;
-let description: string;
-let range: number;
-let dimension: number;
-let uid: string;
-let debug: boolean;
-let isPlayerOnly: boolean;
-let isVehicleOnly: boolean;
-
-let data: Interaction = {
-    position, 
-    description,
-    dimension, 
-    range, 
-    uid, 
-    debug, 
-    isPlayerOnly, 
-    isVehicleOnly,
-};
 /**
  * Decorator for Athena's Interaction Controller
  * ```
