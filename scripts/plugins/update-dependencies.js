@@ -3,8 +3,12 @@ import fs from "fs";
 import glob from 'glob';
 import * as path from 'path';
 
+function sanitizePath(p) {
+    return p.replace(/\\/g, path.sep);
+}
+
 function getInstalledDependencies() {
-    const packageJsonPath = path.join(process.cwd(), 'package.json');
+    const packageJsonPath = sanitizePath(path.join(process.cwd(), 'package.json'));
 
     let contents;    
     try {
@@ -28,13 +32,19 @@ function getInstalledDependencies() {
 }
 
 function getPluginDependencies(pluginName) {
-    const pluginPath = path.join(process.cwd(), 'src/core/plugins', pluginName);
-    const dependencyPath = path.join(pluginPath, 'dependencies.json');
+    const pluginPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
+    const disabledPath = sanitizePath(path.join(pluginPath, 'disabled.plugin'));
 
     const dependencies = {
         dependencies: [],
         devDependencies: []
     }
+
+    if (fs.existsSync(disabledPath)) {
+        return dependencies;
+    }
+
+    const dependencyPath = sanitizePath(path.join(pluginPath, 'dependencies.json'));
     
     if (!fs.existsSync(dependencyPath)) {
         return dependencies;
@@ -64,7 +74,7 @@ function getPluginDependencies(pluginName) {
 
 function updatePluginDependencies() {
     const installedDependencies = getInstalledDependencies();
-    const plugins = glob.sync(path.join(process.cwd(), 'src/core/plugins/*'));
+    const plugins = glob.sync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDepdendencies = [];
     const missingDevDependencies = [];
@@ -113,8 +123,6 @@ function updatePluginDependencies() {
             }
         });
     }
-
-    // console.log(plugins);
 }
 
 updatePluginDependencies();
