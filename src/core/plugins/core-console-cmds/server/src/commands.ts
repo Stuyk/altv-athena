@@ -1,13 +1,12 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import fs from 'fs';
 import { Account } from '../../../../server/interface/iAccount';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { AdminController } from '../../../../server/systems/admin';
 import ChatController from '../../../../server/systems/chat';
 import { AthenaScreenshot } from '../../../../server/utility/screenshot';
 import { ConsoleCommander } from '../../shared/consoleCommander';
-import fs from 'fs';
-import { OptionsController } from '../../../../server/systems/options';
 
 async function handleSaveScreenshot(player: alt.Player, base64Image: string) {
     const path = `${process.cwd()}/screenshots/${player.data.name}.jpg`;
@@ -26,8 +25,6 @@ export class ConsoleCommands {
         ConsoleCommander.registerConsoleCommand('/ban', ConsoleCommands.ban);
         ConsoleCommander.registerConsoleCommand('/screenshot', ConsoleCommands.screenshot);
         ConsoleCommander.registerConsoleCommand('/dox', ConsoleCommands.dox);
-        ConsoleCommander.registerConsoleCommand('/addwhitelist', ConsoleCommands.addWhitelist);
-        ConsoleCommander.registerConsoleCommand('/removewhitelist', ConsoleCommands.removeWhitelist);
     }
 
     static commands() {
@@ -192,35 +189,5 @@ export class ConsoleCommands {
         Object.keys(player.accountData).forEach((key) => {
             alt.log(`${key}: ${JSON.stringify(player.accountData[key])}`);
         });
-    }
-
-    static addWhitelist(discord: string) {
-        if (discord === undefined) {
-            alt.logWarning(`/addwhitelist <discord_id>>`);
-            return;
-        }
-
-        const wasAdded = OptionsController.addToWhitelist(discord);
-        if (!wasAdded) {
-            alt.logWarning(`Could not add: ${discord} to the whitelist.`);
-            return;
-        }
-
-        alt.log(`${discord} was added to the list.`);
-    }
-
-    static removeWhitelist(discord: string) {
-        if (discord === undefined) {
-            alt.logWarning(`/removewhitelist <discord_id>>`);
-            return;
-        }
-
-        const wasRemoved = OptionsController.removeFromWhitelist(discord);
-        if (!wasRemoved) {
-            alt.logWarning(`${discord} does not exist in the list or was already removed.`);
-            return;
-        }
-
-        alt.log(`${discord} was removed from the list.`);
     }
 }

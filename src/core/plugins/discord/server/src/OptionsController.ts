@@ -1,8 +1,8 @@
 import Database from '@stuyk/ezmongodb';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { Collections } from '../interface/iDatabaseCollections';
-import { defaultOptions, DiscordID, Options } from '../interface/iOptions';
-import Logger from '../utility/athenaLogger';
+import { DEFAULT_CONFIG } from '../../../../server/athena/main';
+import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { defaultOptions, DiscordID, Options } from '../../../../server/interface/iOptions';
+import Logger from '../../../../server/utility/athenaLogger';
 
 export class OptionsController {
     static data: Options = {};

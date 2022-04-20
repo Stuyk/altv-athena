@@ -1,53 +1,50 @@
+import alt from 'alt-server';
 import Discord, { MessageEmbed } from 'discord.js';
-
-import { DEFAULT_CONFIG } from '../athena/main';
-import Logger from '../utility/athenaLogger';
-import { OptionsController } from './options';
-import ConfigUtil from '../utility/config';
-
-const config = ConfigUtil.get();
+import Logger from '../../../../server/utility/athenaLogger';
+import config from '../config';
+import { OptionsController } from './OptionsController';
 
 export class DiscordController {
     static client: Discord.Client = new Discord.Client({
         ws: { intents: new Discord.Intents(Discord.Intents.ALL) },
     });
 
-    static whitelistRole = config.WHITELIST_ROLE ? config.WHITELIST_ROLE : null;
+    static whitelistRole = config?.whitelist.role ?? null;
     static guild: Discord.Guild;
 
     static populateEndpoints() {
         DiscordController.client.on('ready', DiscordController.ready);
         DiscordController.client.on('guildMemberUpdate', DiscordController.userUpdate);
-        DiscordController.client.login(config.DISCORD_BOT);
+        DiscordController.client.login(config.token);
     }
 
     static async ready() {
-        Logger.info(`Discord Bot Connected Successfully`);
+        alt.log(`~lg~[Discord] Bot Connected Successfully`);
 
-        if (DEFAULT_CONFIG.WHITELIST && !DiscordController.whitelistRole) {
-            Logger.error(`.env file is missing WHITELIST_ROLE identifaction for auto-whitelist.`);
+        if (config?.whitelist?.enabled && !config?.whitelist?.role) {
+            Logger.error(`missing config.whitelist.role for auto-whitelist.`);
             return;
         }
 
-        if (!config.DISCORD_SERVER_ID) {
-            Logger.warning(`DISCORD_SERVER_ID is not defined. You will not be able to use messaging services.`);
+        if (!config.serverId) {
+            Logger.warning(`config.serverid is not defined. You will not be able to use messaging services.`);
             return;
         }
 
-        DiscordController.guild = await DiscordController.client.guilds.fetch(config.DISCORD_SERVER_ID);
+        DiscordController.guild = await DiscordController.client.guilds.fetch(config.serverId);
     }
 
     /**
-     * If the user was removed from the whitelist, remove them from the database. If the user was
-    added to the whitelist, add them to the database.
-     * @param {Discord.GuildMember} oldUser - The old user object.
-     * @param {Discord.GuildMember} newUser - The user that was added or removed.
-     * @returns The return value of the function is the value of the last expression evaluated. In
-    this case, the return value is undefined.
-     */
+         * If the user was removed from the whitelist, remove them from the database. If the user was
+        added to the whitelist, add them to the database.
+         * @param {Discord.GuildMember} oldUser - The old user object.
+         * @param {Discord.GuildMember} newUser - The user that was added or removed.
+         * @returns The return value of the function is the value of the last expression evaluated. In
+        this case, the return value is undefined.
+         */
     static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
-        const oldUserHasRole = oldUser.roles.cache.has(config.WHITELIST_ROLE);
-        const newUserHasRole = newUser.roles.cache.has(config.WHITELIST_ROLE);
+        const oldUserHasRole = oldUser.roles.cache.has(config.whitelist.role);
+        const newUserHasRole = newUser.roles.cache.has(config.whitelist.role);
         const name = `${newUser.user.username}#${newUser.user.discriminator}`;
 
         // Removed from White List
@@ -68,7 +65,6 @@ export class DiscordController {
             }
 
             Logger.log(`${name} was added to the whitelist.`);
-            return;
         }
     }
 
@@ -112,13 +108,5 @@ export class DiscordController {
         }
 
         channel.send(msg);
-    }
-}
-
-if (DEFAULT_CONFIG.USE_DISCORD_BOT) {
-    if (!config.DISCORD_BOT) {
-        Logger.error(`.env is missing DISCORD_BOT secret for logging in. Don't forget to add WHITELIST_ROLE as well.`);
-    } else {
-        DiscordController.populateEndpoints();
     }
 }

@@ -1,21 +1,19 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerConst } from '../api/consts/constPlayer';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { PlayerEvents } from '../events/playerEvents';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
 import { DiscordUser } from '../interface/iDiscordUser';
 import Ares from '../utility/ares';
 import { StorageView } from '../views/storage';
-import { OptionsController } from './options';
-import { VehicleSystem } from './vehicle';
-import { AgendaSystem } from './agenda';
 import { AccountSystem } from './account';
-import { PlayerEvents } from '../events/playerEvents';
-import { playerConst } from '../api/consts/constPlayer';
+import { AgendaSystem } from './agenda';
+import { VehicleSystem } from './vehicle';
 
 const UserRelation: { [key: number]: string } = {};
 
@@ -59,12 +57,13 @@ export class LoginController {
         delete player.discordToken;
 
         // Whitelist Handling
-        if (DEFAULT_CONFIG.WHITELIST) {
-            if (!OptionsController.isWhitelisted(player.discord.id)) {
-                player.kick(`You are not currently whitelisted.`);
-                return;
-            }
-        }
+        // TODO: needs implementation
+        // if (DEFAULT_CONFIG.WHITELIST) {
+        //     if (!OptionsController.isWhitelisted(player.discord.id)) {
+        //         player.kick(`You are not currently whitelisted.`);
+        //         return;
+        //     }
+        // }
 
         if (player.discord.username) {
             alt.log(`[Athena] (${player.id}) ${player.discord.username} has authenticated.`);
