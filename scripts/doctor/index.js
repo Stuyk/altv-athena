@@ -5,8 +5,8 @@ async function init() {
     await cleanup();
     console.log(`-- Cleanup Complete, Perform the Following --`);
     console.log(`-- Execute these Commands in Console --`);
-    console.log(`npm install`);
-    console.log(`npm run update`);
+    console.log(`npm install or yarn install`);
+    console.log(`npm  run update or yarn update`);
 }
 
 async function cleanup() {

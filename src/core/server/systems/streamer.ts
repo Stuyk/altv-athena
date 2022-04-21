@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
-import Logger from '../utility/athenaLogger';
 import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
 import { DEFAULT_CONFIG } from '../athena/main';
+import Logger from '../utility/athenaLogger';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
@@ -225,10 +225,10 @@ if (!hasInitialized) {
         alt.logWarning(`Do not run alt:V Server with the executable.`);
         alt.logWarning(`Start the server with any of the following:`);
         console.log(`\r\n`);
-        alt.logWarning(`npm run windows`);
-        alt.logWarning(`npm run linux`);
-        alt.logWarning(`npm run devtest`);
-        alt.logWarning(`npm run dev`);
+        alt.logWarning(`npm run windows or yarn windows`);
+        alt.logWarning(`npm run linux or yarn linux`);
+        alt.logWarning(`npm run devtest or yarn devtest`);
+        alt.logWarning(`npm run dev or yarn dev`);
         console.log(`\r\n`);
         alt.logWarning(`Process will now exit`);
 
