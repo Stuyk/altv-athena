@@ -11,7 +11,7 @@ const Commands: ConsoleCommand = {};
  * @param {...string[]} args
  * @return {*}
  */
-function handleConsoleMessage(cmdName: string, ...args: string[]): any {
+function handleConsoleMessage(cmdName: string, ...args: string[]): void {
     if (!Commands[cmdName]) {
         console.warn(`Command: ${cmdName} does not exist!`);
         return;
