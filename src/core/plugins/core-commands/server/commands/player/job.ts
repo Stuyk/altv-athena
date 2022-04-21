@@ -5,6 +5,7 @@ import { getPlayerJob } from '../../../../../server/systems/job';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../../shared/locale/locale';
+
 class JobCommands {
     @command('quitjob', LocaleController.get(LOCALE_KEYS.COMMAND_QUIT_JOB, '/quitjob'), PERMISSIONS.NONE)
     private static handleCommand(player: alt.Player): void {

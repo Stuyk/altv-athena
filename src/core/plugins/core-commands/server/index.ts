@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
 
-// TODO: Add Imports here.
+// Add Command Imports here.
 import './commands/moderator/currency';
 import './commands/moderator/garage';
 import './commands/moderator/interior';

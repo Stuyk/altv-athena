@@ -7,7 +7,7 @@ import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../../shared/locale/locale';
 import { distance2d } from '../../../../../shared/utility/vector';
-import { RoleplayCmdsConfig } from '../../config';
+import { RoleplayCmdsConfig } from '../../config/command-config';
 
 class ChatCommands {
     @command('do', LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'), PERMISSIONS.NONE)
