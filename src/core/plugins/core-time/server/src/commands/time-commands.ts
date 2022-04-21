@@ -1,12 +1,10 @@
 import * as alt from 'alt-server';
-
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { Athena } from '../api/athena';
-import { command } from '../decorators/commands';
-import { World } from '../systems/world';
-
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { World } from '../../../../../server/systems/world';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 class TimerCommands {
     @command('settime', LocaleController.get(LOCALE_KEYS.COMMAND_SET_TIME, '/settime'), PERMISSIONS.ADMIN)
     private static setTimeCommand(player: alt.Player, hour: number) {

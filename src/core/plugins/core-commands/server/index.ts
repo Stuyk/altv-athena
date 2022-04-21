@@ -9,7 +9,6 @@ import './commands/moderator/inventory';
 import './commands/moderator/item';
 import './commands/moderator/noclip';
 import './commands/moderator/player';
-import './commands/moderator/position';
 import './commands/moderator/revive';
 import './commands/moderator/teleport';
 import './commands/moderator/test';
