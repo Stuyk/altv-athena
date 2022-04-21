@@ -2,6 +2,7 @@ import { exec } from 'child_process';
 import fs from "fs";
 import glob from 'glob';
 import * as path from 'path';
+import yarn from 'yarn-or-npm';
 
 const viablePluginDisablers = [
     'disable.plugin',
@@ -114,8 +115,10 @@ function updatePluginDependencies() {
         }
     }
 
+    const executable = yarn.hasYarn() ? 'yarn add' : 'npm install';
+
     if (missingDepdendencies.length > 0) {
-        exec(`npm install ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
+        exec(`${executable} ${missingDepdendencies.join(' ')}`, (error, _stdout, stderr) => {
             if (error) {
                 console.error(`Failed to install dependencies: ${error}`);
                 console.error(stderr);
@@ -124,7 +127,7 @@ function updatePluginDependencies() {
     }
 
     if (missingDevDependencies.length > 0) {
-        exec(`npm install --save-dev ${missingDevDependencies.join(' ')}`, (error, _stdout, stderr) => {
+        exec(`${executable} -D ${missingDevDependencies.join(' ')}`, (error, _stdout, stderr) => {
             if (error) {
                 console.error(`Failed to install dev dependencies: ${error}`);
                 console.error(stderr);
