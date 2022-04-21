@@ -12,16 +12,14 @@ import { PERMISSIONS } from '../../shared/flags/permissionFlags';
  */
 export function command(commandName: string | string[], description: string, permissions: PERMISSIONS) {
     return (_target: Function, _propertyKey: string, descriptor: PropertyDescriptor) => {
-        const callback: (...args: any[]) => void = descriptor.value;
-
         if (typeof commandName === 'string') {
-            Athena.controllers.chat.addCommand(commandName, description, permissions, callback);
+            Athena.controllers.chat.addCommand(commandName, description, permissions, descriptor.value);
             return;
         }
         
         if (Array.isArray(commandName)) {
             for (let i = 0; i < commandName.length; i++) {
-                Athena.controllers.chat.addCommand(commandName[i], description, permissions, callback);
+                Athena.controllers.chat.addCommand(commandName[i], description, permissions, descriptor.value);
             }
         } 
     };
