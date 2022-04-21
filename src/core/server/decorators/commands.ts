@@ -1,7 +1,8 @@
 
 import { Athena } from '../../server/api/athena';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { ConsoleCommander } from '../../shared/utility/console-commander';
+import { ConsoleCommander } from '../../shared/utility/consoleCommander';
+
 
 /**
  * It takes in a command name, a description, and a permissions level, and then adds a command to the

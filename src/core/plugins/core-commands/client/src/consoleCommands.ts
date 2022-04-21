@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
-import { ConsoleCommander } from '../../../../shared/utility/console-commander';
+import { ConsoleCommander } from '../../../../shared/utility/consoleCommander';
 
 class ClientPlugin {
     static async init() {
