@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import ChatController from '../../../../server/systems/chat';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
-import { ConsoleCommander } from '../../../core-commands/shared/console-commander';
+import { ConsoleCommander } from '../../../../shared/utility/console-commander';
 import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 import { DiscordController } from './discordController';
 
