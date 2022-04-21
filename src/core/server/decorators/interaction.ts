@@ -32,7 +32,6 @@ import { Athena } from '../api/athena';
  */
 export function interaction(data: Interaction) {
     return (_target: Function, _propertyName: string, descriptor: PropertyDescriptor) => {
-        const callback: (player: alt.Player, ...args: any[]) => void = descriptor.value;
-        Athena.controllers.interaction.add({ ...data, callback });
+        Athena.controllers.interaction.add({ ...data, callback: descriptor.value });
     };
 }
