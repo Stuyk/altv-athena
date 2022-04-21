@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../server/api/athena';
 import ChatController from '../../../../server/systems/chat';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
-import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
 
 export class FactionCommands {
@@ -28,11 +27,11 @@ export class FactionCommands {
         });
 
         if (!result.status) {
-            playerFuncs.emit.message(player, result.response);
+            Athena.player.emit.message(player, result.response);
             return;
         }
 
         const id = result.response;
-        playerFuncs.emit.message(player, `Created Faction with ID: ${id}`);
+        Athena.player.emit.message(player, `Created Faction with ID: ${id}`);
     }
 }

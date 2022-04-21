@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import ChatController from '../../../../server/systems/chat';
 import { VITAL_NAMES } from '../enums';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { VitalsSystem } from './system';
+import { Athena } from '../../../../server/api/athena';
 
 class InternalCommands {
     /**
@@ -19,7 +19,7 @@ class InternalCommands {
         let value = parseInt(commandValue);
 
         if (isNaN(value)) {
-            playerFuncs.emit.message(player, ChatController.getDescription('setwater'));
+            Athena.player.emit.message(player, ChatController.getDescription('setwater'));
             return;
         }
 
@@ -40,7 +40,7 @@ class InternalCommands {
         let value = parseInt(commandValue);
 
         if (isNaN(value)) {
-            playerFuncs.emit.message(player, ChatController.getDescription('setfood'));
+            Athena.player.emit.message(player, ChatController.getDescription('setfood'));
             return;
         }
 

@@ -6,7 +6,7 @@ import { sha256Random } from '../utility/encryption';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { InteractionShape } from '../extensions/extColshape';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 
 const interactions: Array<InteractionShape> = [];
 
@@ -88,7 +88,7 @@ class InternalFunctions {
             console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
-            playerFuncs.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
         entity.currentInteraction = colshape;
@@ -130,7 +130,7 @@ class InternalFunctions {
             console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
-            playerFuncs.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
         entity.currentInteraction = null;
@@ -163,7 +163,7 @@ class InternalFunctions {
         }
 
         if (dist >= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
-            playerFuncs.emit.notification(player, `~r~Too far away to interact.`);
+            Athena.player.emit.notification(player, `~r~Too far away to interact.`);
             return;
         }
 
