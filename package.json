@@ -27,7 +27,7 @@
         "athena-devmode": "npx chokidar \"AthenaConfig.json\" \"src/**/*.ts\" --ignore \"/athena/\" --verbose --initial -c \"npm run plugins:build && npm run build-core && npm run cfg-dev && npm run cfg-resource && npm run kill-port && altv-server.exe\"",
         "[-] Vue WebView Deployment": "",
         "vue-dev": "npx vite ./src-webviews --clearScreen=false --debug=false --logLevel=silent",
-        "vue-build": "npx vue-tsc --noEmit -p ./src-webviews/tsconfig.json && npx vite build ./src-webviews",
+        "vue-build": "npx vite build ./src-webviews",
         "vue-serve": "npx vite preview ./src-webviews",
         "[-] Tools": "",
         "hwid-win": "cd tools && altv-athena-hwid-win.exe",
