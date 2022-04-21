@@ -7169,4 +7169,26 @@ export const VehicleData: Array<VehicleInfo> = [
         seats: 2,
         storage: 24,
     },
+    // USMS Fahrzeuge
+    {
+        display: '2016 Ford Expedition USMS',
+        name: 'usms1',
+        type: VEHICLE_TYPE.VEHICLE,
+        class: VEHICLE_CLASS.EMERGENCY,
+        sell: true,
+        price: 1,
+        seats: 2,
+        storage: 24,
+    },
+    {
+        display: '2014 Dodge Charger USMS',
+        name: 'usms2',
+        type: VEHICLE_TYPE.VEHICLE,
+        class: VEHICLE_CLASS.EMERGENCY,
+        sell: true,
+        price: 1,
+        seats: 2,
+        storage: 24,
+    },
+
 ];
