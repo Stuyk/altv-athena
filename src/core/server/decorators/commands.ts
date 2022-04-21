@@ -1,4 +1,5 @@
-import { ConsoleCommander } from '../../plugins/core-console-cmds/shared/consoleCommander';
+
+import { ConsoleCommander } from '../../plugins/core-commands/shared/console-commander';
 import { Athena } from '../../server/api/athena';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 

@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { ConsoleCommander } from '../shared/consoleCommander';
+import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
+import { ConsoleCommander } from '../../shared/console-commander';
 
 class ClientPlugin {
     static async init() {
-        await ConsoleCommander.init(alt);
+        ConsoleCommander.init(alt);
         ConsoleCommander.registerConsoleCommand('/commands', ClientPlugin.commands);
         ConsoleCommander.registerConsoleCommand('/pos', ClientPlugin.position);
         ConsoleCommander.registerConsoleCommand('/position', ClientPlugin.position);
