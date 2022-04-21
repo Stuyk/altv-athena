@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { Athena } from '../api/athena';
-import { command } from '../decorators/commands';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 
 class InventoryCommands {
     @command(

@@ -1,9 +1,7 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { Athena } from '../api/athena';
-import { command } from '../decorators/commands';
-import { playerFuncs } from '../extensions/extPlayer';
-import ChatController from '../systems/chat';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 const parkingList = [];
 

@@ -1,18 +1,18 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/worldNotificationTypes';
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import IAttachable from '../../shared/interfaces/iAttachable';
-import { InputMenu, InputOptionType, InputResult } from '../../shared/interfaces/inputMenus';
-import { IPed } from '../../shared/interfaces/iPed';
-import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { PedController } from '../streamers/ped';
-import { WorldNotificationController } from '../streamers/worldNotifications';
-import { Animation } from '../../shared/interfaces/animation';
-import { Action } from '../../shared/interfaces/actions';
-import { command } from '../decorators/commands';
-import { Athena } from '../api/athena';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { PedController } from '../../../../../server/streamers/ped';
+import { WorldNotificationController } from '../../../../../server/streamers/worldNotifications';
+import { SYSTEM_EVENTS } from '../../../../../shared/enums/system';
+import { WORLD_NOTIFICATION_TYPE } from '../../../../../shared/enums/worldNotificationTypes';
+import { ANIMATION_FLAGS } from '../../../../../shared/flags/animationFlags';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { Action } from '../../../../../shared/interfaces/actions';
+import { Animation } from '../../../../../shared/interfaces/animation';
+import IAttachable from '../../../../../shared/interfaces/iAttachable';
+import { InputMenu, InputOptionType, InputResult } from '../../../../../shared/interfaces/inputMenus';
+import { IPed } from '../../../../../shared/interfaces/iPed';
+import { JobTrigger } from '../../../../../shared/interfaces/jobTrigger';
 
 class TestCommands {
     @command('testerrorscreen', '/testerrorscreen - Shows a temporary error screen', PERMISSIONS.ADMIN)

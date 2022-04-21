@@ -2,6 +2,8 @@ import alt from 'alt-server';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 
 class TeleportCommands {
     @command('gethere', '/gethere <ID> - Teleports a player to your position.', PERMISSIONS.ADMIN)
@@ -21,5 +23,20 @@ class TeleportCommands {
         if (!target || !target.valid || !id || target === player) return;
 
         Athena.player.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
+    }
+
+    @command('tpwp', LocaleController.get(LOCALE_KEYS.COMMAND_TELEPORT_WAYPOINT, '/tpwp'), PERMISSIONS.ADMIN)
+    private static tpWpCommand(player: alt.Player) {
+        if (!player.currentWaypoint) {
+            Athena.player.emit.message(player, `Set a waypoint first.`);
+            return;
+        }
+
+        Athena.player.safe.setPosition(
+            player,
+            player.currentWaypoint.x,
+            player.currentWaypoint.y,
+            player.currentWaypoint.z,
+        );
     }
 }

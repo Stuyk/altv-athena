@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { Athena } from '../api/athena';
-import { command } from '../decorators/commands';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class Death {
     @command(['acceptdeath', 'respawn'], '/acceptdeath - Accept death.', PERMISSIONS.NONE)
