@@ -1,21 +1,36 @@
 import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
-import { command, consoleCommand } from '../../../../server/decorators/commands';
 import ChatController from '../../../../server/systems/chat';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
-import { OptionsController } from './OptionsController';
+import { ConsoleCommander } from '../../../core-console-cmds/shared/consoleCommander';
+import { DiscordController } from './discordController';
 
-class DiscordCommands {
-    @command(
-        'addwhitelist',
-        LocaleController.get(LOCALE_KEYS.COMMAND_ADD_WHITELIST, '/addwhitelist'),
-        PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
-    )
-    private static addWhitelistCommand(player: alt.Player, discord: string) {
+export class DiscordCommands {
+    static init() {
+        alt.log('~lb~Discord Allow List Commands Loaded');
+        Athena.controllers.chat.addCommand(
+            'addallowlist',
+            '/addallowlist <discord_id>',
+            PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
+            DiscordCommands.addAllowListCommand,
+        );
+
+        Athena.controllers.chat.addCommand(
+            'removeallowlist',
+            '/removeallowlist <discord_id>',
+            PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
+            DiscordCommands.removeAllowlistCommand,
+        );
+
+        ConsoleCommander.registerConsoleCommand('/addallowlist', DiscordCommands.addAllowListConsoleCommand);
+        ConsoleCommander.registerConsoleCommand('/removeallowlist', DiscordCommands.removeAllowListConsoleCommand);
+    }
+
+    private static async addAllowListCommand(player: alt.Player, discord: string) {
         if (!discord) {
-            Athena.player.emit.message(player, ChatController.getDescription('addwhitelist'));
+            Athena.player.emit.message(player, ChatController.getDescription('addallowlist'));
             return;
         }
 
@@ -24,23 +39,21 @@ class DiscordCommands {
             return;
         }
 
-        const didAdd = OptionsController.addToWhitelist(discord);
-        if (!didAdd) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ALREADY_WHITELISTED, discord));
+        const member = await DiscordController.addToAllowList(discord);
+        if (!member) {
+            Athena.player.emit.message(player, `{FF0000}Could not find that user in discord.`);
             return;
         }
 
-        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ADDED_WHITELIST, discord));
+        Athena.player.emit.message(
+            player,
+            `{00FF00} Added to the allow list. ${member.user.username}#${member.user.discriminator}`,
+        );
     }
 
-    @command(
-        'removewhitelist',
-        LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_WHITELIST, '/removewhitelist'),
-        PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR,
-    )
-    private static removeWhitelistCommand(player: alt.Player, discord: string) {
+    private static async removeAllowlistCommand(player: alt.Player, discord: string) {
         if (!discord) {
-            Athena.player.emit.message(player, ChatController.getDescription('removewhitelist'));
+            Athena.player.emit.message(player, ChatController.getDescription('removeallowlist'));
             return;
         }
 
@@ -49,44 +62,45 @@ class DiscordCommands {
             return;
         }
 
-        const didRemove = OptionsController.removeFromWhitelist(discord);
-        if (!didRemove) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_NOT_WHITELISTED, discord));
+        const member = await DiscordController.removeFromAllowList(discord);
+        if (!member) {
+            Athena.player.emit.message(player, `{FF0000}Could not find that user in discord.`);
             return;
         }
 
-        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_REMOVED_WHITELIST, discord));
+        Athena.player.emit.message(
+            player,
+            `{FFFF00} Removed from the allow list. ${member.user.username}#${member.user.discriminator}`,
+        );
     }
 
-    @consoleCommand('/addwhitelist')
-    static addWhitelistConsoleCommand(discord: string) {
+    private static async addAllowListConsoleCommand(discord: string) {
         if (discord === undefined) {
-            alt.logWarning(`/addwhitelist <discord_id>>`);
+            alt.logWarning(`/addallowlist <discord_id>>`);
             return;
         }
 
-        const wasAdded = OptionsController.addToWhitelist(discord);
-        if (!wasAdded) {
-            alt.logWarning(`Could not add: ${discord} to the whitelist.`);
+        const member = await DiscordController.addToAllowList(discord);
+        if (!member) {
+            alt.log(`~lr~[Discord] Could not find that user in discord.`);
             return;
         }
 
-        alt.log(`${discord} was added to the list.`);
+        alt.log(`~c~[Discord] Added to the allow list. ${member.user.username}#${member.user.discriminator}`);
     }
 
-    @consoleCommand('/removewhitelist')
-    static removeWhitelistConsoleCommand(discord: string) {
+    private static async removeAllowListConsoleCommand(discord: string) {
         if (discord === undefined) {
-            alt.logWarning(`/removewhitelist <discord_id>>`);
+            alt.logWarning(`/removeallowlist <discord_id>>`);
             return;
         }
 
-        const wasRemoved = OptionsController.removeFromWhitelist(discord);
-        if (!wasRemoved) {
-            alt.logWarning(`${discord} does not exist in the list or was already removed.`);
+        const member = await DiscordController.removeFromAllowList(discord);
+        if (!member) {
+            alt.log(`~lr~[Discord] Could not find that user in discord.`);
             return;
         }
 
-        alt.log(`${discord} was removed from the list.`);
+        alt.log(`~c~[Discord] Removed from the allow list. ${member.user.username}#${member.user.discriminator}`);
     }
 }

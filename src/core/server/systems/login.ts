@@ -15,27 +15,24 @@ import { AccountSystem } from './account';
 import { AgendaSystem } from './agenda';
 import { VehicleSystem } from './vehicle';
 
+type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => boolean;
+
 const UserRelation: { [key: number]: string } = {};
+const TryLoginInjections: Array<TryLoginCallback> = [];
 
 export class LoginController {
-    private static TryLoginInjectionCallbacks: Array<
-        (player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean
-    > = [];
-
     /**
      * Adds a tryLogin injection callback.
      *
      * useful for adding custom logic to the login process.
-     * return a string to abort the login process and to kick the player
+     * Return a string to abort the login process and to kick the player
      *
      * @static
-     * @param {((player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean)} callback
+     * @param {TryLoginCallback} callback
      * @memberof LoginController
      */
-    static addTryLoginInjectionCallback(
-        callback: (player: alt.Player, data: Partial<Account>) => string | undefined | null | void | boolean,
-    ): void {
-        LoginController.TryLoginInjectionCallbacks.push(callback);
+    static addTryLoginInjection(callback: TryLoginCallback): void {
+        TryLoginInjections.push(callback);
     }
 
     static init() {
@@ -76,11 +73,10 @@ export class LoginController {
         delete player.pendingLogin;
         delete player.discordToken;
 
-        for (const callback of LoginController.TryLoginInjectionCallbacks) {
-            const result: string | undefined | null | void | boolean = callback(player, account);
+        for (const callback of TryLoginInjections) {
+            const didPass = await callback(player, account);
 
-            if (typeof result == 'string') {
-                player.kick(result);
+            if (!didPass) {
                 return;
             }
         }
