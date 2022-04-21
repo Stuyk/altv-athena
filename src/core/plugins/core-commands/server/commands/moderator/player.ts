@@ -1,10 +1,10 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { command } from '../../../../server/decorators/commands';
-import { AdminController } from '../../../../server/systems/admin';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../shared/locale/locale';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { AdminController } from '../../../../../server/systems/admin';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 
 class PlayersCommand {
     @command('sethealth', '/sethealth [value] [id]', PERMISSIONS.ADMIN)

@@ -1,7 +1,7 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { command } from '../../../../server/decorators/commands';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class TeleportCommands {
     @command('gethere', '/gethere <ID> - Teleports a player to your position.', PERMISSIONS.ADMIN)

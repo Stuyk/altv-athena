@@ -1,10 +1,13 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
-import { RoleplayCommands } from './src/commands';
+
+// TODO: Add Imports here.
+import './commands/player/me';
+import './commands/player/low';
+import './commands/player/whisper';
 
 const PLUGIN_NAME = 'Athena Roleplay Commands';
 
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {
-    RoleplayCommands.init();
-    alt.log(`~lg~${PLUGIN_NAME} was Loaded`);
+    alt.log(`~lg~CORE ==> ${PLUGIN_NAME} was Loaded!`);
 });

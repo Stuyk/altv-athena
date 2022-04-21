@@ -1,8 +1,8 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { command } from '../../../../server/decorators/commands';
-import { View_Events_Chat } from '../../../../shared/enums/views';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { View_Events_Chat } from '../../../../../shared/enums/views';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class ChatCommands {
     @command('ac', '/ac <very_long_message> - Chat with other admins', PERMISSIONS.ADMIN)

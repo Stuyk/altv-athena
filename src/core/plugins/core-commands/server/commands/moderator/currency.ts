@@ -1,8 +1,8 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { command } from '../../../../server/decorators/commands';
-import { CurrencyTypes } from '../../../../shared/enums/currency';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { Athena } from '../../../../../server/api/athena';
+import { command } from '../../../../../server/decorators/commands';
+import { CurrencyTypes } from '../../../../../shared/enums/currency';
+import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class CurrencyCommands {
     @command(['cash', 'setcash'], '/setcash [amount] [id]', PERMISSIONS.ADMIN)
