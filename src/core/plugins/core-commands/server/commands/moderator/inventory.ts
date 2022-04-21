@@ -25,7 +25,6 @@ class InventoryCommands {
         LocaleController.get(LOCALE_KEYS.COMMAND_CLEAR_TOOLBAR, '/cleartoolbar'),
         PERMISSIONS.ADMIN,
     )
-
     private static clearToolbeltCommand(player: alt.Player) {
         player.data.toolbar = [];
         Athena.player.save.field(player, 'toolbar', player.data.toolbar);
