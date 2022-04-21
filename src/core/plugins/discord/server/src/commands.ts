@@ -5,6 +5,7 @@ import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { ConsoleCommander } from '../../../core-console-cmds/shared/consoleCommander';
+import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 import { DiscordController } from './discordController';
 
 export class DiscordCommands {
@@ -35,19 +36,19 @@ export class DiscordCommands {
         }
 
         if (discord.length <= 17) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH));
+            Athena.player.emit.message(player, LOCALE_DISCORD_ALLOW_LIST.ID_NOT_LONG_ENOUGH);
             return;
         }
 
         const member = await DiscordController.addToAllowList(discord);
         if (!member) {
-            Athena.player.emit.message(player, `{FF0000}Could not find that user in discord.`);
+            Athena.player.emit.message(player, `{FF0000}${LOCALE_DISCORD_ALLOW_LIST.USER_WAS_NOT_IN_DISCORD}`);
             return;
         }
 
         Athena.player.emit.message(
             player,
-            `{00FF00} Added to the allow list. ${member.user.username}#${member.user.discriminator}`,
+            `{00FF00}${LOCALE_DISCORD_ALLOW_LIST.ADD_TO_ALLOW_LIST} ${member.user.username}#${member.user.discriminator} (${member.user.id})`,
         );
     }
 
@@ -58,19 +59,19 @@ export class DiscordCommands {
         }
 
         if (discord.length <= 17) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.DISCORD_ID_NOT_LONG_ENOUGH));
+            Athena.player.emit.message(player, LOCALE_DISCORD_ALLOW_LIST.ID_NOT_LONG_ENOUGH);
             return;
         }
 
         const member = await DiscordController.removeFromAllowList(discord);
         if (!member) {
-            Athena.player.emit.message(player, `{FF0000}Could not find that user in discord.`);
+            Athena.player.emit.message(player, `{FF0000}${LOCALE_DISCORD_ALLOW_LIST.USER_WAS_NOT_IN_DISCORD}`);
             return;
         }
 
         Athena.player.emit.message(
             player,
-            `{FFFF00} Removed from the allow list. ${member.user.username}#${member.user.discriminator}`,
+            `{FFFF00} ${LOCALE_DISCORD_ALLOW_LIST.REMOVE_FROM_ALLOW_LIST} ${member.user.username}#${member.user.discriminator} (${member.user.id})`,
         );
     }
 

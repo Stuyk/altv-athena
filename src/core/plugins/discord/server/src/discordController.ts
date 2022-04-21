@@ -2,6 +2,7 @@ import alt from 'alt-server';
 import Discord, { MessageEmbed } from 'discord.js';
 import { Account } from '../../../../server/interface/iAccount';
 import { LoginController } from '../../../../server/systems/login';
+import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 
 const client: Discord.Client = new Discord.Client({
     ws: { intents: new Discord.Intents(Discord.Intents.ALL) },
@@ -42,7 +43,7 @@ export class DiscordController {
             return;
         }
 
-        player.kick(`Server is still warming up. Try reconnecting.`);
+        player.kick(LOCALE_DISCORD_ALLOW_LIST.SERVER_STILL_WARMING_UP);
     }
 
     /**
@@ -128,26 +129,25 @@ export class DiscordController {
         }
 
         if (!player.discord || !player.discord.id) {
-            player.kick('You are not logged in with Discord');
+            player.kick(LOCALE_DISCORD_ALLOW_LIST.ACCOUNT_NOT_ACCESSIBLE);
             return false;
         }
 
         const member = await guild.members.cache.get(player.discord.id);
         if (!member) {
-            console.log(`No Member`);
-            player.kick(`You are not currently allow listed.`);
+            player.kick(LOCALE_DISCORD_ALLOW_LIST.USER_WAS_NOT_IN_DISCORD);
             return false;
         }
 
         const role = await guild.roles.cache.get(allowListRole);
         if (!role) {
-            player.kick(`Could not find the allow list role during runtime.`);
+            player.kick(LOCALE_DISCORD_ALLOW_LIST.NO_ALLOW_LIST_ROLE);
             return false;
         }
 
         const hasRole = await member.roles.cache.get(allowListRole);
         if (!hasRole) {
-            player.kick(`You are not currently allow listed.`);
+            player.kick(LOCALE_DISCORD_ALLOW_LIST.NOT_ALLOW_LISTED);
             return false;
         }
 
@@ -196,12 +196,12 @@ export class DiscordController {
         const member = await guild.members.fetch(discord);
 
         try {
-            member.send(`You have been removed from the allow list.`);
+            member.send(LOCALE_DISCORD_ALLOW_LIST.REMOVE_FROM_ALLOW_LIST);
         } catch (err) {}
 
         const existingPlayer = alt.Player.all.find((p) => p && p.accountData && p.accountData.discord === discord);
         if (existingPlayer) {
-            existingPlayer.kick('Removed from the allow list.');
+            existingPlayer.kick(LOCALE_DISCORD_ALLOW_LIST.REMOVE_FROM_ALLOW_LIST);
         }
 
         if (alreadyRemovedRole) {
@@ -243,7 +243,7 @@ export class DiscordController {
         }
 
         try {
-            member.send(`You have been added to the allow list.`);
+            member.send(LOCALE_DISCORD_ALLOW_LIST.ADD_TO_ALLOW_LIST);
         } catch (err) {}
 
         // Add role if not just sending message.

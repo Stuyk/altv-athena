@@ -15,7 +15,7 @@ import { AccountSystem } from './account';
 import { AgendaSystem } from './agenda';
 import { VehicleSystem } from './vehicle';
 
-type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => boolean;
+type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => Promise<boolean>;
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
