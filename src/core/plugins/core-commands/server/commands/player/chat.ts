@@ -1,57 +1,119 @@
 import alt from 'alt-server';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
+import ChatController from '../../../../../server/systems/chat';
 import { View_Events_Chat } from '../../../../../shared/enums/views';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
+import { distance2d } from '../../../../../shared/utility/vector';
+import { RoleplayCmdsConfig } from '../../config';
 
 class ChatCommands {
-    @command('ac', '/ac <very_long_message> - Chat with other admins', PERMISSIONS.ADMIN)
-    private static adminChatCommand(player: alt.Player, ...args): void {
+    @command('do', LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'), PERMISSIONS.NONE)
+    private static handleDoCommand(player: alt.Player, ...args: any[]) {
         if (args.length <= 0) {
-            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('ac'));
+            Athena.player.emit.message(player, ChatController.getDescription('do'));
             return;
         }
 
-        const admins = Athena.player.get.playersByPermissionLevel([PERMISSIONS.ADMIN]);
-        alt.emitClient(admins, View_Events_Chat.Append, `[AC] ${player.data.name}: ${args.join(' ')}`);
+        const fullMessage = args.join(' ');
+        const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_DO_DISTANCE);
+
+        alt.emitClient(
+            closestPlayers,
+            View_Events_Chat.Append,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_COLOR}* ${fullMessage} ((${player.data.name}))`,
+        );
     }
 
-    @command('apm', '/apm <ID> - Sends an administrative private message to the specified player.', PERMISSIONS.ADMIN)
-    private static adminPrivateMessageCommand(player: alt.Player, id: string, ...args: string[]) {
+    @command('low', LocaleController.get(LOCALE_KEYS.COMMAND_LOW, '/low'), PERMISSIONS.NONE)
+    private static handleLowCommand(player: alt.Player, ...args: any[]) {
+        if (args.length <= 0) {
+            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('low'));
+            return;
+        }
+
+        const fullMessage = args.join(' ');
+        const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_LOW_DISTANCE);
+
+        alt.emitClient(
+            closestPlayers,
+            View_Events_Chat.Append,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_LOW_COLOR}${player.data.name} ${fullMessage}`,
+        );
+    }
+
+    @command('me', LocaleController.get(LOCALE_KEYS.COMMAND_ME, 'me'), PERMISSIONS.NONE)
+    private static handleMeCommand(player: alt.Player, ...args: any[]) {
+        if (args.length <= 0) {
+            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('me'));
+            return;
+        }
+    
+        const fullMessage = args.join(' ');
+        const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_ME_DISTANCE);
+    
+        alt.emitClient(
+            closestPlayers,
+            View_Events_Chat.Append,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_COLOR}${player.data.name} ${fullMessage}`,
+        );
+    }
+
+    @command('ooc', LocaleController.get(LOCALE_KEYS.COMMAND_OOC, '/b'), PERMISSIONS.NONE)
+    static handleOocCommand(player: alt.Player, ...args: any[]) {
+        if (args.length <= 0) {
+            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('b'));
+            return;
+        }
+    
+        const fullMessage = args.join(' ');
+        const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_OOC_DISTANCE);
+    
+        alt.emitClient(
+            closestPlayers,
+            View_Events_Chat.Append,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_OOC_COLOR}${player.data.name}: (( ${fullMessage} ))`,
+        );
+    }
+
+    @command(['whisper', 'w'], LocaleController.get(LOCALE_KEYS.COMMAND_WHISPER, '/w'), PERMISSIONS.NONE)
+    private static handleWhisperCommand(player: alt.Player, id: string, ...args: any[]) {
+        if (args.length <= 0) {
+            return;
+        }
+    
+        if (typeof id !== 'string') {
+            Athena.player.emit.message(player, ChatController.getDescription('w'));
+            return;
+        }
+    
+        if (id === null || id === undefined) {
+            Athena.player.emit.message(player, ChatController.getDescription('w'));
+            return;
+        }
+    
         const target = Athena.player.get.findByUid(id);
-        if (!player || !player.valid || !target || !target.valid) {
+        if (!target || !target.valid) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
-
-        if (!args || args.length <= 0) {
-            Athena.player.emit.message(player, `Must specify what to send after in-game id.`);
+    
+        if (distance2d(target.pos, player.pos) > RoleplayCmdsConfig.COMMAND_WHISPER_DISTANCE) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_TOO_FAR));
             return;
         }
-
-        let msg = `{FF0000}[APM] ${player.data.name}: ${args.join(' ')}`;
-        Athena.player.emit.message(player, msg);
-        Athena.player.emit.message(target, msg);
-    }
-
-    @command('broadcast', '/broadcast <very_long_message> - Broadcast to the whole server', PERMISSIONS.ADMIN)
-    private static broadcastCommand(player: alt.Player, ...args) {
-        if (args.length <= 0) {
-            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('broadcast'));
-            return;
-        }
-
-        const validPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.data);
-        alt.emitClient(validPlayers, View_Events_Chat.Append, `[BROADCAST] ${player.data.name}: ${args.join(' ')}`);
-    }
-
-    @command('mc', '/mc', PERMISSIONS.MODERATOR | PERMISSIONS.ADMIN)
-    private static moderatorChatCommand(player: alt.Player, ...args): void {
-        if (args.length <= 0) {
-            Athena.player.emit.message(player, Athena.controllers.chat.getDescription('mc'));
-            return;
-        }
-
-        const modsAndAdmins = Athena.player.get.playersByPermissionLevel([PERMISSIONS.ADMIN, PERMISSIONS.MODERATOR]);
-        alt.emitClient(modsAndAdmins, View_Events_Chat.Append, `[MC] ${player.data.name}: ${args.join(' ')}`);
+    
+        const fullMessage = args.join(' ');
+        Athena.player.emit.message(
+            player,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`,
+        );
+    
+        Athena.player.emit.message(
+            target,
+            `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`,
+        );
     }
 }
