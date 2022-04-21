@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
 
-import './src/commands/time-commands';
+import './src/commands/timeCommands';
 
 const PLUGIN_NAME = 'Athena Time';
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {

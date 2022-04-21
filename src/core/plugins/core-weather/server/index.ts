@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
 
-import './src/commands/weather-commands';
+import './src/commands/weatherCommands';
 
 const PLUGIN_NAME = 'Athena Weather';
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {

@@ -1,1 +1,1 @@
-import './src/console-commands';
+import './src/consoleCommands';
