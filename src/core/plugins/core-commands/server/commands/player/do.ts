@@ -4,10 +4,12 @@ import { command } from '../../../../../server/decorators/commands';
 import ChatController from '../../../../../server/systems/chat';
 import { View_Events_Chat } from '../../../../../shared/enums/views';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 import { RoleplayCmdsConfig } from '../../config';
 
 class DoCommand {
-    @command('do', ChatController.getDescription('do'), PERMISSIONS.NONE)
+    @command('do', LocaleController.get(LOCALE_KEYS.COMMAND_DO, '/do'), PERMISSIONS.NONE)
     private static handleCommand(player: alt.Player, ...args: any[]) {
         if (args.length <= 0) {
             Athena.player.emit.message(player, ChatController.getDescription('do'));

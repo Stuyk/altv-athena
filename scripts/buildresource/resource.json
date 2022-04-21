@@ -6,8 +6,6 @@
 		"client/*",
 		"shared/*",
 		"plugins/athena/client/*",
-		"plugins/commands-roleplay/client/*",
-		"plugins/commands-roleplay/shared/*",
 		"plugins/core-atm/client/*",
 		"plugins/core-atm/shared/*",
 		"plugins/core-character-creator/client/*",
