@@ -11,12 +11,12 @@ import { IVehicle } from '../../shared/interfaces/iVehicle';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { isFlagEnabled } from '../../shared/utility/flags';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { VehicleEvents } from '../events/vehicleEvents';
 import { Collections } from '../interface/iDatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
-import { playerFuncs } from './extPlayer';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -630,19 +630,19 @@ export default class VehicleFuncs {
         };
 
         if (!doNotAddToInventory) {
-            const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
+            const inventory = Athena.player.inventory.getFreeInventorySlot(player);
             if (!inventory) {
-                playerFuncs.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, 'No room in inventory.');
                 return null;
             }
 
-            if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
-                playerFuncs.emit.notification(player, 'No room in inventory.');
+            if (!Athena.player.inventory.inventoryAdd(player, item, inventory.slot)) {
+                Athena.player.emit.notification(player, 'No room in inventory.');
                 return null;
             }
 
-            playerFuncs.save.field(player, 'inventory', player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.player.sync.inventory(player);
         }
 
         return item;

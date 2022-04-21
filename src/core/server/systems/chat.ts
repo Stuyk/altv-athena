@@ -16,7 +16,7 @@ import { emitAll } from '../utility/emitHelper';
 const maxMessageLength: number = 128;
 const printCommands = false;
 let commandCount = 0;
-let commandInterval;
+let commandInterval: number | undefined;
 
 class InternalFunctions {
     /**

@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import EFFECT from '../../../../shared/enums/effects';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ItemEffects } from '../../../../server/systems/itemEffects';
 import { VITAL_NAMES } from '../../shared/enums';
 import { Item } from '../../../../shared/interfaces/item';
 import { VitalsSystem } from './system';
 import IAttachable from '../../../../shared/interfaces/iAttachable';
 import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
+import { Athena } from '../../../../server/api/athena';
 
 export class InternalFunctions {
     /**
@@ -19,10 +19,10 @@ export class InternalFunctions {
      */
     static handleVitalsChange(player: alt.Player, item: Item, vitalsName: VITAL_NAMES) {
         VitalsSystem.adjustVital(player, vitalsName, item.data.amount);
-        playerFuncs.inventory.notify(player, `+${item.data.amount} ${vitalsName}`);
+        Athena.player.inventory.notify(player, `+${item.data.amount} ${vitalsName}`);
 
         if (item.data.sound) {
-            playerFuncs.emit.sound3D(player, item.data.sound, player);
+            Athena.player.emit.sound3D(player, item.data.sound, player);
         }
 
         if (vitalsName === VITAL_NAMES.FOOD) {
@@ -33,8 +33,8 @@ export class InternalFunctions {
                 rot: { x: -180, y: -150, z: -95 },
             };
 
-            playerFuncs.emit.objectAttach(player, attachedObject, 6000);
-            playerFuncs.emit.animation(
+            Athena.player.emit.objectAttach(player, attachedObject, 6000);
+            Athena.player.emit.animation(
                 player,
                 'amb@code_human_wander_eating_donut@male@idle_a',
                 'idle_c',
@@ -51,8 +51,8 @@ export class InternalFunctions {
                 rot: { x: 100, y: -220, z: 180 },
             };
 
-            playerFuncs.emit.objectAttach(player, attachedObject, 5000);
-            playerFuncs.emit.animation(
+            Athena.player.emit.objectAttach(player, attachedObject, 5000);
+            Athena.player.emit.animation(
                 player,
                 'amb@world_human_drinking@beer@male@idle_a',
                 'idle_c',

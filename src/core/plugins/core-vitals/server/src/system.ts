@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { VITAL_NAMES } from '../../shared/enums';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { VITALS_CONFIG } from '../../shared/src/config';
+import { Athena } from '../../../../server/api/athena';
 
 const syncTimes: { [player_id: string]: number } = {};
 
@@ -25,8 +25,8 @@ class InternalFunctions {
         if (player.data.isDead) {
             player.data[VITAL_NAMES.FOOD] = 100;
             player.data[VITAL_NAMES.WATER] = 100;
-            playerFuncs.emit.meta(player, VITAL_NAMES.FOOD, player.data[VITAL_NAMES.FOOD]);
-            playerFuncs.emit.meta(player, VITAL_NAMES.WATER, player.data[VITAL_NAMES.WATER]);
+            Athena.player.emit.meta(player, VITAL_NAMES.FOOD, player.data[VITAL_NAMES.FOOD]);
+            Athena.player.emit.meta(player, VITAL_NAMES.WATER, player.data[VITAL_NAMES.WATER]);
             return;
         }
 
@@ -64,7 +64,7 @@ export class VitalsSystem {
             player.data[vitalName] = 100;
         }
 
-        playerFuncs.emit.meta(player, vitalName, player.data[vitalName]);
+        Athena.player.emit.meta(player, vitalName, player.data[vitalName]);
     }
 
     /**
@@ -100,8 +100,8 @@ export class VitalsSystem {
             player.data[vitalName] = Math.abs(value);
         }
 
-        playerFuncs.emit.meta(player, vitalName, player.data[vitalName]);
-        playerFuncs.save.field(player, vitalName, player.data[vitalName]);
+        Athena.player.emit.meta(player, vitalName, player.data[vitalName]);
+        Athena.player.save.field(player, vitalName, player.data[vitalName]);
     }
 
     /**

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import { VehicleSystem } from '../systems/vehicle';
 
 function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): void {
@@ -17,7 +17,7 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
         // It prevents a crash when a player smashes into a gas station with a car.
         // Seemingly random I know, but that's just how it fixed.
         alt.setTimeout(() => {
-            playerFuncs.set.dead(player, weaponHash);
+            Athena.player.set.dead(player, weaponHash);
         }, 1500);
     }
 
