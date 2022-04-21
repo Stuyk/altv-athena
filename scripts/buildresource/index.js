@@ -44,7 +44,7 @@ async function start() {
     const folders = await getClientPluginFolders();
     defaults['client-files'] = [...defaults['client-files'], ...folders];
 
-    fs.outputFileSync(scriptPath, JSON.stringify(defaults));
+    fs.outputFileSync(scriptPath, JSON.stringify(defaults, null, '\t'));
 }
 
 start();
