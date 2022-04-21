@@ -38,7 +38,6 @@ class NoClipCommand {
     static handleCamUpdate(player, pos) {
         player.pos = pos;
     }
-
 }
 
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, NoClipCommand.handleReset);

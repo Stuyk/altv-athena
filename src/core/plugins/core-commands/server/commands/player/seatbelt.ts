@@ -7,8 +7,7 @@ import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../../shared/locale/locale';
 
 class SeatbeltCommand {
-    @command('seatbelt',     LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'),
-    PERMISSIONS.NONE)
+    @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)
     private static handleCommand(player: alt.Player): void {
         if (!player || !player.valid || !player.vehicle) {
             return;
