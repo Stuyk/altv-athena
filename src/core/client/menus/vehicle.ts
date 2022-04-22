@@ -46,8 +46,11 @@ function openMenu() {
         } else {
             options.push({
                 name: 'Stop Push',
-                callback: PushVehicle.serverStop,
-            });
+                callback: () => {
+                    PushVehicle.clear();
+                    alt.emitServer(VEHICLE_EVENTS.STOP_PUSH);
+                }
+            }); 
         }
     }
 
