@@ -60,6 +60,7 @@ export class PushVehicle {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
+            alt.emitServer(VEHICLE_EVENTS.STOP_PUSH);
         }
 
         vehicle = null;
