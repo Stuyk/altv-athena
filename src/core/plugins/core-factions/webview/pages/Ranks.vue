@@ -1,62 +1,28 @@
 <template>
     <div class="wrapper ranks-wrapper pa-4">
-        <Modal v-if="editRank">
-            <Frame minWidth="30vw" maxWidth="30vw">
-                <template v-slot:toolbar>
-                    <Toolbar :hideExit="true">Editing Rank Name - ({{ editRank.name }})</Toolbar>
-                </template>
-                <template v-slot:content>
-                    <div class="stack">
-                        <input class="mb-4" v-model="newRankName" placeholder="New rank name..." />
-                        <div class="split">
-                            <div style="width: 100%; display: block"></div>
-                            <Button class="mt-2" color="red" :style="'border-radius: 6px;'" @click="edit(null)">
-                                <Icon :size="14" icon="icon-cross" />
-                            </Button>
-                            <Button
-                                class="ml-4 mt-2"
-                                color="green"
-                                :style="'border-radius: 6px;'"
-                                @click="finishRankEdit()"
-                            >
-                                <Icon :size="14" icon="icon-checkmark" />
-                            </Button>
-                        </div>
-                    </div>
-                </template>
-            </Frame>
-        </Modal>
-        <Modal v-if="rankToDelete">
-            <Frame minWidth="30vw" maxWidth="30vw">
-                <template v-slot:toolbar>
-                    <Toolbar :hideExit="true">Delete Rank? - ({{ rankToDelete.name }})</Toolbar>
-                </template>
-                <template v-slot:content>
-                    <div class="stack">
-                        <div class="overline">Are you sure?</div>
-                        <div class="split">
-                            <div style="width: 100%; display: block"></div>
-                            <Button class="mt-2" color="red" :style="'border-radius: 6px;'" @click="deleteRank(null)">
-                                <Icon :size="14" icon="icon-cross" />
-                            </Button>
-                            <Button
-                                class="ml-4 mt-2"
-                                color="green"
-                                :style="'border-radius: 6px;'"
-                                @click="finishRankDelete()"
-                            >
-                                <Icon :size="14" icon="icon-checkmark" />
-                            </Button>
-                        </div>
-                    </div>
-                </template>
-            </Frame>
-        </Modal>
+        <!-- Modals -->
+        <EditRank v-if="editRank" :rank="editRank" @close="() => startRankEdit(null)" @update="finishRankEdit" />
+        <DeleteRank
+            v-if="rankToDelete"
+            :rank="rankToDelete"
+            @close="() => startRankDelete(null)"
+            @update="finishRankDelete"
+        />
+        <AddRank v-bind:faction="faction" v-if="addRank" @close="() => (addRank = false)" @update="finishAddRank" />
+        <!-- END MODALS -->
+        <div class="rank-panel mb-4">
+            <div class="split space-between">
+                <div class="overline">Add New Rank?</div>
+                <Button class="rank-button" color="green" @click="addRank = true">
+                    <Icon :size="14" icon="icon-plus" />
+                </Button>
+            </div>
+        </div>
         <div class="rank-panel mb-4" v-for="(rank, index) in getRanks()" :key="index">
             <div class="split space-between">
-                <div class="overline">{{ rank.name }} ({{ rank.weight }})</div>
+                <div class="overline">[ {{ rank.weight <= 9 ? `0${rank.weight}` : rank.weight }} ] {{ rank.name }}</div>
                 <div class="split">
-                    <Button class="rank-button" color="blue" @click="edit(rank)">
+                    <Button class="rank-button" color="blue" @click="startRankEdit(rank)">
                         <Icon :size="14" icon="icon-pencil1" />
                     </Button>
                     <template v-if="rank.weight <= 98 && index !== 1">
@@ -81,7 +47,7 @@
                     </template>
 
                     <template v-if="rank.weight <= 98">
-                        <Button class="rank-button" color="red" @click="deleteRank(rank)">
+                        <Button class="rank-button" color="red" @click="startRankDelete(rank)">
                             <Icon :size="14" icon="icon-cross" />
                         </Button>
                     </template>
@@ -104,6 +70,11 @@ import Modal from '@components/Modal.vue';
 import Frame from '@components/Frame.vue';
 import Toolbar from '@components/Toolbar.vue';
 
+// Local Components
+import EditRank from './ranks/EditRank.vue';
+import DeleteRank from './ranks/DeleteRank.vue';
+import AddRank from './ranks/AddRank.vue';
+
 import { Faction, FactionRank } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
 
@@ -120,6 +91,9 @@ export default defineComponent({
         Modal,
         Frame,
         Toolbar,
+        EditRank,
+        DeleteRank,
+        AddRank,
     },
     data() {
         return {
@@ -127,7 +101,7 @@ export default defineComponent({
             manageRankPermissions: false,
             editRank: null,
             rankToDelete: null,
-            newRankName: '',
+            addRank: false,
         };
     },
     computed: {},
@@ -135,7 +109,15 @@ export default defineComponent({
         getRanks(): Array<FactionRank> {
             return FactionParser.getFactionRanks(this.faction);
         },
-        edit(rank: FactionRank) {
+        startRankDelete(rank: FactionRank) {
+            if (!rank) {
+                this.rankToDelete = null;
+                return;
+            }
+
+            this.rankToDelete = rank;
+        },
+        startRankEdit(rank: FactionRank) {
             if (!rank) {
                 this.newRankName = '';
                 this.editRank = null;
@@ -145,18 +127,9 @@ export default defineComponent({
             this.editRank = rank;
             this.newRankName = this.editRank.name;
         },
-        deleteRank(rank: FactionRank) {
-            if (!rank) {
-                this.rankToDelete = null;
-                return;
-            }
-
-            this.rankToDelete = rank;
-        },
-        finishRankEdit() {
-            const newRankName = this.newRankName;
+        finishRankEdit(_newRankName: string) {
+            const newRankName = _newRankName;
             this.editRank = null;
-            this.newRankName = '';
             console.log(newRankName);
         },
         finishRankDelete() {
@@ -167,6 +140,10 @@ export default defineComponent({
 
             console.log(`Deleting... ${this.rankToDelete.name}`);
             this.rankToDelete = null;
+        },
+        finishAddRank(rankName: string, rankWeight: number) {
+            this.addRank = false;
+            console.log(`Adding... ${rankName} with weight ${rankWeight}`);
         },
     },
     mounted() {
