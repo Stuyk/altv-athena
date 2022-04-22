@@ -10,7 +10,7 @@
         />
         <AddRank v-bind:faction="faction" v-if="addRank" @close="() => (addRank = false)" @update="finishAddRank" />
         <!-- END MODALS -->
-        <div class="rank-panel mb-4">
+        <div class="rank-panel mb-4" v-if="manageRanks">
             <div class="split space-between">
                 <div class="overline">Add New Rank?</div>
                 <Button class="rank-button" color="green" @click="addRank = true">
@@ -21,12 +21,15 @@
         <div class="rank-panel mb-4" v-for="(rank, index) in getRanks()" :key="index">
             <div class="split space-between">
                 <div class="overline">[ {{ rank.weight <= 9 ? `0${rank.weight}` : rank.weight }} ] {{ rank.name }}</div>
-                <div class="split">
-                    <Button class="rank-button" color="blue" @click="startRankEdit(rank)">
+                <div class="split" v-if="manageRanks">
+                    <!-- Change Rank Name -->
+                    <Button class="rank-button" color="blue" @click="startRankEdit(rank)" help="Edit Rank">
                         <Icon :size="14" icon="icon-pencil1" />
                     </Button>
+
+                    <!-- Change Rank Order -->
                     <template v-if="rank.weight <= 98 && index !== 1">
-                        <Button class="rank-button" color="cyan">
+                        <Button class="rank-button" color="cyan" help="Rank Up">
                             <Icon :size="14" icon="icon-arrow-bold-up" />
                         </Button>
                     </template>
@@ -36,7 +39,7 @@
                         </Button>
                     </template>
                     <template v-if="getRanks().length - 1 !== index && rank.weight <= 98">
-                        <Button class="rank-button" color="cyan">
+                        <Button class="rank-button" color="cyan" help="Rank Down">
                             <Icon :size="14" icon="icon-arrow-bold-down" />
                         </Button>
                     </template>
@@ -46,8 +49,21 @@
                         </Button>
                     </template>
 
+                    <!-- Change Rank Permissions -->
+                    <template v-if="rank.weight <= 98 && manageRankPermissions">
+                        <Button class="rank-button" color="green" help="Permissions">
+                            <Icon :size="14" icon="icon-cog2" />
+                        </Button>
+                    </template>
+                    <template v-else>
+                        <Button class="rank-button" :disable="true">
+                            <Icon :size="14" icon="icon-cog2" />
+                        </Button>
+                    </template>
+
+                    <!-- Delete Rank -->
                     <template v-if="rank.weight <= 98">
-                        <Button class="rank-button" color="red" @click="startRankDelete(rank)">
+                        <Button class="rank-button" color="red" @click="startRankDelete(rank)" help="Delete Rank">
                             <Icon :size="14" icon="icon-cross" />
                         </Button>
                     </template>
