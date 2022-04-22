@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import fs from 'fs-extra';
 import glob from 'glob';
 import path from 'path';
 
@@ -43,7 +43,8 @@ async function getClientPluginFolders() {
 async function start() {
     const folders = await getClientPluginFolders();
     defaults['client-files'] = [...defaults['client-files'], ...folders];
-    writeFileSync(scriptPath, JSON.stringify(defaults, null, '\t'));
+
+    fs.outputFileSync(scriptPath, JSON.stringify(defaults, null, '\t'));
 }
 
 start();

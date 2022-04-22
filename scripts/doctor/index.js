@@ -6,13 +6,18 @@ async function init() {
     console.log(`-- Cleanup Complete, Perform the Following --`);
     console.log(`-- Execute these Commands in Console --`);
     console.log(`npm install or yarn install`);
-    console.log(`npm  run update or yarn update`);
+    console.log(`npm run update or yarn update`);
 }
 
 async function cleanup() {
     if (fs.existsSync('package-lock.json')) {
         console.log(`Removing package-lock.json`);
         fs.unlinkSync('package-lock.json');
+    }
+
+    if (fs.existsSync('yarn.lock')) {
+        console.log(`Removing yarn.lock`);
+        fs.unlinkSync('yarn.lock');
     }
 
     if (fs.existsSync('node_modules')) {
