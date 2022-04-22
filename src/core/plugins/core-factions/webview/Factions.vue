@@ -31,6 +31,8 @@ import Navigation from './components/Navigation.vue';
 import Header from './components/Header.vue';
 import { ExampleFactionData } from './utility/exampleFactionData';
 import { FactionPages } from './pages/exports';
+import { Faction } from '../shared/interfaces';
+import { FACTION_EVENTS } from '../shared/factionEvents';
 
 export const ComponentName = 'Factions';
 export default defineComponent({
@@ -66,12 +68,20 @@ export default defineComponent({
         setPage(pageIndex: number) {
             this.pageIndex = pageIndex;
         },
+        updateFaction(faction: Faction, character: string) {
+            this.faction = faction;
+            this.character = character;
+        },
+        handlePress() {
+            //
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.emit(`${ComponentName}:Ready`);
+            alt.on(FACTION_EVENTS.WEBVIEW.UPDATE_DATA, this.updateFaction);
+            alt.emit(FACTION_EVENTS.WEBVIEW.READY);
         } else {
             this.faction = ExampleFactionData;
         }

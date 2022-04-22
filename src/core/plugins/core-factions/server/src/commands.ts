@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import ChatController from '../../../../server/systems/chat';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FactionHandler } from './handler';
 
 export class FactionCommands {
@@ -10,6 +11,7 @@ export class FactionCommands {
      */
     static init() {
         ChatController.addCommand('fcreate', '/fcreate <name>', PERMISSIONS.ADMIN, FactionCommands.handleCreate);
+        ChatController.addCommand('fopen', '/fopen - Open Faction Menu', PERMISSIONS.NONE, FactionCommands.open);
     }
 
     /**
@@ -33,5 +35,20 @@ export class FactionCommands {
 
         const id = result.response;
         Athena.player.emit.message(player, `Created Faction with ID: ${id}`);
+    }
+
+    static async open(player: alt.Player) {
+        if (!player.data.faction) {
+            Athena.player.emit.message(player, 'You are not in a faction.');
+            return;
+        }
+
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            Athena.player.emit.message(player, 'You are not in a faction.');
+            return;
+        }
+
+        alt.emitClient(player, FACTION_EVENTS.PROTOCOL.OPEN, faction);
     }
 }
