@@ -1,27 +1,28 @@
-<center>
+<p align="center">
     <img src="https://i.imgur.com/o0B5JzN.png" width="200">
-    <h2>Athena Framework for alt:V</h2>
+</p>
+
+<h2 align="center">
+	Athena Framework for alt:V      
+</h2>
+
+<p align="center">
     <sup>A Roleplay Framework for Developers for GTA:V</sup>
     <br />
     <sup>
         <a href="https://patreon.com/stuyk/">Support on Patreon</a>
     </sup>
-</center>
-<br />
-<center>
+</p>
 
-[![Patreon](https://img.shields.io/badge/Support-Patreon-orange.svg)](https://patreon.com/stuyk)
-[![Language TypeScript](https://img.shields.io/badge/Language-TS-blue.svg)](https://typescriptlang.org)
-[![Framework Vue 3](https://img.shields.io/badge/Framework-Vue%203-green.svg)](https://vuejs.org)
-[![NodeJS](https://img.shields.io/badge/Using-NodeJS-darkgreen.svg)](https://nodejs.org)
-[![Using Vite](https://img.shields.io/badge/Using-Vite-cyan.svg)](https://vitejs.dev)
+<p align="center">
+    <a href="https://patreon.com/stuyk" target="__blank"><img src="https://img.shields.io/badge/Support-Patreon-orange.svg?label=" alt="Patreon"></a>
+    <a href="https://typescriptlang.org" target="__blank"><img src="https://img.shields.io/badge/Typescript-Typescript-007acc?label=" alt="Language TypeScript"></a>
+    <a href="https://vuejs.org" target="__blank"><img src="https://img.shields.io/badge/Framework-Vue%203-green.svg?label=" alt="Framework Vue 3"></a>
+    <a href="https://nodejs.org" target="__blank"><img src="https://img.shields.io/badge/Using-NodeJS-darkgreen.svg?label=" alt="NodeJS"></a>
+    <a href="https://vitejs.dev" target="__blank"><img src="https://img.shields.io/badge/Using-Vite-cyan.svg?label=" alt="Using Vite"></a>
+    <a href="https://mongodb.com/" target="__blank"><img src="https://img.shields.io/badge/Using-MongoDB-green.svg?label=" alt="MongoDB"></a>
+</p>
 
-</center>
-<center>
-
-[![MongoDB](https://img.shields.io/badge/Using-MongoDB-green.svg)](https://patreon.com/stuyk)
-
-</center>
 <br />
 
 ## Build with the Best

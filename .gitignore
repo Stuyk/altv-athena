@@ -33,6 +33,7 @@ package-lock.json
 
 # Plugin stuff
 /src/core/plugins/athena/**/*.ts
+/scripts/buildresource/*.json
 
 # Yarn stuff
 .yarn/

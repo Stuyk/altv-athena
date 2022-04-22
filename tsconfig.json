@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "typeRoots": ["../node_modules/@types", "../node_modules/@altv"],
+        "typeRoots": ["./node_modules/@types", "./node_modules/@altv"],
         "removeComments": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
@@ -11,5 +11,18 @@
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "jsx": "preserve"
-    }
+    },
+    "exclude": [
+        "./resources",
+        "./scripts",
+        "./altv-athena-cache",
+        "./athena-cache",
+        "./node_modules",
+        "./cache",
+        "./crashdumps",
+        "./data",
+        "./doc",
+        "./modules",
+        "./screenshots"
+    ]
 }

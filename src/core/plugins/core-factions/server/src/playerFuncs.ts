@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { FactionCharacter, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { FACTION_CONFIG } from './config';
 import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
+import { Athena } from '../../../../server/api/athena';
 
 /**
  * Bound to the player to manipulate individual faction functionality.
@@ -266,7 +266,7 @@ export class FactionPlayerFuncs {
         }
 
         amount = Math.abs(amount);
-        if (!playerFuncs.currency.subAllCurrencies(player, amount)) {
+        if (!Athena.player.currency.subAllCurrencies(player, amount)) {
             return false;
         }
 
@@ -303,7 +303,7 @@ export class FactionPlayerFuncs {
             return false;
         }
 
-        if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
+        if (!Athena.player.currency.add(player, CurrencyTypes.CASH, amount)) {
             return false;
         }
 

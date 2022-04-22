@@ -110,13 +110,13 @@ class InternalFunctions {
             playerCharacters[i]._id = playerCharacters[i]._id.toString();
         }
 
-        if (CHARACTER_SELECT_CONFIG.MAX_CHARACTERS <= 1) {
+        if (CHARACTER_SELECT_CONFIG.MAX_CHARACTERS <= 1 && CHARACTER_SELECT_CONFIG.SKIP_SELECTOR) {
             if (CharacterList[player.id]) {
                 delete CharacterList[player.id];
             }
 
             alt.emitClient(player, CHARACTER_SELECT_EVENTS.DONE);
-            CharacterSystem.select(player, playerCharacters[player.id][0]);
+            CharacterSystem.select(player, playerCharacters[0]);
             return;
         }
 

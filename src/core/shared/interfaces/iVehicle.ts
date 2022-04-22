@@ -1,6 +1,5 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnershipFlags';
-import { IStorage } from './iStorage';
 import IVehicleTuning from './iVehicleTuning';
 import { RGB } from './rgb';
 import { Vector3 } from './vector';

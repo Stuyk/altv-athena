@@ -615,6 +615,12 @@ export default defineComponent({
             this.x = 0;
             this.y = 0;
 
+            if (e.target && e.target.id === 'drop-slot') {
+                const event = new CustomEvent('drop-slot', { detail: this.dragAndDrop.itemIndex });
+                document.dispatchEvent(event);
+                return;
+            }
+
             if (!e || !e.target || !e.target.id || e.target.id === '') {
                 return;
             }

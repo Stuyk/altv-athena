@@ -1,25 +1,22 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
+import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
+import { VehicleData } from '../../shared/information/vehicles';
+import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
 import { Vector3 } from '../../shared/interfaces/vector';
+import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance2d } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { VehicleEvents } from '../events/vehicleEvents';
 import { Collections } from '../interface/iDatabaseCollections';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
-import { VehicleData } from '../../shared/information/vehicles';
-import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
-import { RGBA } from 'alt-shared';
-import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
-import { Item } from '../../shared/interfaces/item';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { playerFuncs } from './extPlayer';
-import { VehicleEvents } from '../events/vehicleEvents';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
@@ -30,7 +27,9 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.NO_SAVE;
 
 const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
-const CreateInjections: Array<(vehicle: IVehicle) => Object> = [];
+
+const BeforeCreateInjections: Array<(document: IVehicle) => IVehicle | void> = [];
+const BeforeDespawnInjections: Array<(vehicle: alt.Vehicle) => void> = [];
 
 interface VehicleKeyItem extends Item {
     data: {
@@ -64,22 +63,48 @@ export default class VehicleFuncs {
     }
 
     /**
-     * When a new vehicle is created, add a returnable object to append to the vehicle data to save.
+     * Let's you create an injection into the default create function.
+     *
+     * Useful when you want to perform some action before the vehicle is created.
+     * You can technically also modify the document before Athena will make use of them.
+     *
+     * IMPORTANT: Modified documents may be saved after all callbacks have been executed.
+     * Missuse of this feature can cause data loss.
      *
      * Example:
      * ```ts
-     * function setNewVehicleFuel(vehicle: alt.Vehicle) {
-     *     return { fuel: 100 };
-     * }
+     * function beforeVehicleCreate(document: IVehicle) {
+     *   const blacklistedVehicles = ['rhino', 'hydra'];
      *
-     * VehicleFuncs.addCreateInjection(setNewVehicleFuel)
+     *   if (blacklistedVehicles.includes(document.model)) {
+     *       alt.logWarn(`Vehicle model ${document.model} is blacklisted, replacing with faggio`);
+     *       document.model = 'faggio';
+     *   }
+     *
+     *   return document;
+     * }
+     * VehicleFuncs.addBeforeCreateInjection(beforeVehicleCreate);
      * ```
      * @static
-     * @param {(vehicle: alt.Vehicle) => Object} callback
+     * @param {(document: IVehicle) => void} callback
      * @memberof VehicleFuncs
      */
-    static addCreateVehicleInjection(callback: (vehicle: IVehicle) => Object): void {
-        CreateInjections.push(callback);
+    static addBeforeCreateInjection(callback: (document: IVehicle) => IVehicle | void) {
+        BeforeCreateInjections.push(callback);
+    }
+
+    /**
+     * Let's you create an injection into the default despawn function.
+     *
+     * What that means is you can do something when a vehicle is despawned.
+     * For example, you can cleanup any data you have stored for the vehicle element.
+     *
+     * @static
+     * @param {(vehicle: alt.Vehicle) => void} callback
+     * @memberof VehicleFuncs
+     */
+    static addBeforeDespawnInjection(callback: (vehicle: alt.Vehicle) => void) {
+        BeforeDespawnInjections.push(callback);
     }
 
     /**
@@ -123,7 +148,7 @@ export default class VehicleFuncs {
      * @memberof VehicleFuncs
      */
     static async getPlayerVehicles(_id: string): Promise<IVehicle[]> {
-        return await Database.fetchAllByField('owner', _id, Collections.Vehicles);
+        return Database.fetchAllByField('owner', _id, Collections.Vehicles);
     }
 
     /**
@@ -138,9 +163,7 @@ export default class VehicleFuncs {
             return;
         }
 
-        for (let i = 0; i < vehicles.length; i++) {
-            const vehicle = vehicles[i];
-
+        for (const vehicle of vehicles) {
             // Skip vehicles without a garage index.
             const hasGarageIndex = vehicle.garageIndex !== undefined && vehicle.garageIndex !== null;
             if (hasGarageIndex && vehicle.garageIndex >= 0) {
@@ -168,10 +191,6 @@ export default class VehicleFuncs {
         vehicleData.id = await VehicleFuncs.getNextID();
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
-
-        for (let i = 0; i < CreateInjections.length; i++) {
-            vehicleData = { ...vehicleData, ...CreateInjections[i](vehicleData) } as IVehicle;
-        }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
@@ -218,6 +237,14 @@ export default class VehicleFuncs {
         if (pos && rot) {
             document.position = pos;
             document.rotation = rot;
+        }
+
+        for (const callback of BeforeCreateInjections) {
+            const result = callback(document);
+
+            if (result) {
+                document = result;
+            }
         }
 
         // Create the new vehicle.
@@ -274,7 +301,6 @@ export default class VehicleFuncs {
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
-        VehicleFuncs.updateVehicleMods(vehicle);
 
         // Synchronization
         if (pos && rot) {
@@ -287,14 +313,6 @@ export default class VehicleFuncs {
         //vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
         VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.SPAWNED, vehicle);
         return vehicle;
-    }
-
-    /**
-     * Update the vehicle's mods.
-     * @param vehicle - The vehicle to update.
-     */
-    static updateVehicleMods(vehicle: alt.Vehicle) {
-        // Placeholder
     }
 
     /**
@@ -312,6 +330,10 @@ export default class VehicleFuncs {
         if (!SpawnedVehicles[id].valid) {
             delete SpawnedVehicles[id];
             return false;
+        }
+
+        for (const callback of BeforeDespawnInjections) {
+            callback(SpawnedVehicles[id]);
         }
 
         // Remove all information from passengers regarding this vehicle.
@@ -526,19 +548,17 @@ export default class VehicleFuncs {
      * @return {*}
      * @memberof VehicleFuncs
      */
-    static despawnAll(id: string) {
+    static async despawnAll(id: string) {
         const vehicles = [...alt.Vehicle.all].filter((veh) => veh && veh.valid && `${veh.data.owner}` === `${id}`);
 
         if (vehicles.length <= 0) {
             return;
         }
 
-        for (let i = 0; i < vehicles.length; i++) {
+        for (const vehicle of vehicles) {
             try {
-                VehicleFuncs.despawn(vehicles[i].data.id);
-            } catch (err) {
-                continue;
-            }
+                await VehicleFuncs.despawn(vehicle.data.id);
+            } catch {}
         }
     }
 
@@ -610,19 +630,19 @@ export default class VehicleFuncs {
         };
 
         if (!doNotAddToInventory) {
-            const inventory = playerFuncs.inventory.getFreeInventorySlot(player);
+            const inventory = Athena.player.inventory.getFreeInventorySlot(player);
             if (!inventory) {
-                playerFuncs.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, 'No room in inventory.');
                 return null;
             }
 
-            if (!playerFuncs.inventory.inventoryAdd(player, item, inventory.slot)) {
-                playerFuncs.emit.notification(player, 'No room in inventory.');
+            if (!Athena.player.inventory.inventoryAdd(player, item, inventory.slot)) {
+                Athena.player.emit.notification(player, 'No room in inventory.');
                 return null;
             }
 
-            playerFuncs.save.field(player, 'inventory', player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.player.sync.inventory(player);
         }
 
         return item;

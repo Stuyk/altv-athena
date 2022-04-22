@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { IVoiceChannel } from '../interfaces';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { VOICE_CONFIG } from './config';
+import { Athena } from '../../../../server/api/athena';
 
 const Channels: Array<IVoiceChannel<alt.Player, alt.VoiceChannel>> = [];
 
@@ -154,7 +154,7 @@ export class VoiceSystem {
             return;
         }
 
-        playerFuncs.emit.message(player, `[Athena] You have joined the global voice server.`);
+        Athena.player.emit.message(player, `[Athena] You have joined the global voice server.`);
         virtualChannel.channel.addPlayer(player);
 
         // Sends multiple `emitClient` events based on events that were registered above.

@@ -1,17 +1,9 @@
 {
-    "[?] A Discord Bot Secret from the Discord Developer Panel": "TYPE IS STRING",
-    "DISCORD_BOT": null,
-    "[?] The Discord Server ID your Bot is On": "TYPE IS STRING",
-    "DISCORD_SERVER_ID": null,
-    "[?] A Role ID from your Discord to use as the white list role. Requires DISCORD_BOT": "TYPE IS STRING",
-    "WHITELIST_ROLE": null,
     "[?] A URI with authentication to connect to a MongoDB Database": "TYPE IS STRING",
     "[?] ex: mongodb://username:password@127.0.0.1:27017": "TYPE IS STRING",
     "MONGO_URL": null,
     "[?] Used for Ares Service Debugging": "TYPE IS STRING",
     "ARES_ENDPOINT": null,
     "[?] Use altv built-in reconnect?": "TYPE IS BOOLEAN",
-    "USE_ALTV_RECONNECT": true,
-    "[?] Plugins To Load": "TYPE IS ARRAY OF STRINGS - Empty Array = Load All",
-    "PLUGINS_TO_LOAD": []
+    "USE_ALTV_RECONNECT": true
 }

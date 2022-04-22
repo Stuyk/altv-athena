@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
+import { Athena } from '../../../../server/api/athena';
 import { PolygonShape } from '../../../../server/extensions/extColshape';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
@@ -212,7 +212,7 @@ export class ClothingFunctions {
      * @memberof ClothingFunctions
      */
     static exit(player: alt.Player) {
-        playerFuncs.sync.inventory(player);
+        Athena.player.sync.inventory(player);
     }
 
     /**
@@ -236,7 +236,7 @@ export class ClothingFunctions {
     ) {
         const index = clothingStoreList.findIndex((x) => x.uid === shopUID);
         if (index <= -1) {
-            playerFuncs.emit.sound2D(player, 'item_error');
+            Athena.player.emit.sound2D(player, 'item_error');
             return;
         }
 
@@ -271,7 +271,7 @@ export class ClothingFunctions {
 
         if (totalCost >= 1) {
             if (player.data.cash < totalCost) {
-                playerFuncs.emit.sound2D(player, 'item_error');
+                Athena.player.emit.sound2D(player, 'item_error');
                 return;
             }
         }
@@ -291,35 +291,35 @@ export class ClothingFunctions {
 
         let didGetAdded = false;
 
-        if (playerFuncs.inventory.isEquipmentSlotFree(player, equipmentSlot)) {
-            didGetAdded = playerFuncs.inventory.equipmentAdd(player, newItem, equipmentSlot);
+        if (Athena.player.inventory.isEquipmentSlotFree(player, equipmentSlot)) {
+            didGetAdded = Athena.player.inventory.equipmentAdd(player, newItem, equipmentSlot);
         } else {
-            const openSlot = playerFuncs.inventory.getFreeInventorySlot(player);
+            const openSlot = Athena.player.inventory.getFreeInventorySlot(player);
             if (!openSlot) {
-                playerFuncs.emit.sound2D(player, 'item_error');
+                Athena.player.emit.sound2D(player, 'item_error');
                 return;
             }
 
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
-            didGetAdded = playerFuncs.inventory.inventoryAdd(player, newItem, openSlot.slot);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
+            didGetAdded = Athena.player.inventory.inventoryAdd(player, newItem, openSlot.slot);
         }
 
         if (!didGetAdded) {
-            playerFuncs.emit.sound2D(player, 'item_error');
+            Athena.player.emit.sound2D(player, 'item_error');
             return;
         }
 
         if (totalCost >= 1) {
-            if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, totalCost)) {
-                playerFuncs.emit.sound2D(player, 'item_error');
+            if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, totalCost)) {
+                Athena.player.emit.sound2D(player, 'item_error');
                 return;
             }
         }
 
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.save.field(player, 'equipment', player.data.equipment);
-        playerFuncs.sync.inventory(player);
-        playerFuncs.emit.sound2D(player, 'item_purchase');
+        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.player.save.field(player, 'equipment', player.data.equipment);
+        Athena.player.sync.inventory(player);
+        Athena.player.emit.sound2D(player, 'item_purchase');
     }
 
     /**
@@ -332,7 +332,7 @@ export class ClothingFunctions {
             return;
         }
 
-        playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
+        Athena.player.emit.sound2D(player, 'shop_enter', 0.5);
     }
 
     /**

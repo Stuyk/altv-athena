@@ -12,17 +12,20 @@ Helpful for seeing what default components look like.
                 label="Search"
                 :numberOnly="false"
                 :stack="false"
-                :onChange="searchTerm"
-                :onInput="() => {}"
-                :validateCallback="() => {}"
+                :onInput="searchTerm"
                 :value="userInput"
                 :rules="[]"
                 style="width: 100%"
-                placeholder="user"
+                placeholder="Search icon..."
             />
         </div>
         <div class="icons mt-4">
-            <div v-for="(icon, index) in getIcons" :key="index" class="preview-stack mb-12">
+            <div
+                v-for="(icon, index) in getIcons"
+                :key="index"
+                class="preview-stack mb-12 preview-icon"
+                @click="copyToClipboard(icon)"
+            >
                 <Icon :icon="icon" :size="36" />
                 <span class="subtitle-2 center pt-2">{{ icon }}</span>
             </div>
@@ -33,9 +36,9 @@ Helpful for seeing what default components look like.
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Icons from '../../exampleData/Icons';
-import Input from '../../components/Input.vue';
-import Button from '../../components/Button.vue';
-import Icon from '../../components/Icon.vue';
+import Input from '@components/Input.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
 
 const ComponentName = 'Icons';
 export default defineComponent({
@@ -64,6 +67,9 @@ export default defineComponent({
         searchTerm(value: string) {
             this.userInput = value;
         },
+        copyToClipboard(text: string) {
+            navigator.clipboard.writeText(text);
+        },
     },
 });
 </script>
@@ -86,5 +92,9 @@ export default defineComponent({
     grid-template-columns: repeat(3, auto);
     max-height: 90vh;
     overflow-y: scroll;
+}
+
+.preview-icon:hover {
+    cursor: pointer;
 }
 </style>

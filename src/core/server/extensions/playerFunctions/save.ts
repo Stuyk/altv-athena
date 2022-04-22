@@ -22,7 +22,7 @@ const SaveInjections: Array<(vehicle: alt.Player) => { [key: string]: any }> = [
  *     return { armour: player.armour };
  * }
  *
- * playerFuncs.save.addSaveInjection(savePlayerArmour)
+ * Athena.player.save.addSaveInjection(savePlayerArmour)
  * ```
  * @static
  * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
