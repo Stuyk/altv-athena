@@ -9,6 +9,12 @@
             @update="finishRankDelete"
         />
         <AddRank v-bind:faction="faction" v-if="addRank" @close="() => (addRank = false)" @update="finishAddRank" />
+        <ManageRank
+            :rank="rankPermissionsToManage"
+            v-if="rankPermissionsToManage"
+            @close="() => (rankPermissionsToManage = null)"
+            @update="finishManageRankPermissions"
+        />
         <!-- END MODALS -->
         <div class="rank-panel mb-4" v-if="manageRanks">
             <div class="split space-between">
@@ -51,7 +57,12 @@
 
                     <!-- Change Rank Permissions -->
                     <template v-if="rank.weight <= 98 && manageRankPermissions">
-                        <Button class="rank-button" color="green" help="Permissions">
+                        <Button
+                            class="rank-button"
+                            color="green"
+                            help="Permissions"
+                            @click="startManageRankPermissions(rank)"
+                        >
                             <Icon :size="14" icon="icon-cog2" />
                         </Button>
                     </template>
@@ -90,8 +101,9 @@ import Toolbar from '@components/Toolbar.vue';
 import EditRank from './ranks/EditRank.vue';
 import DeleteRank from './ranks/DeleteRank.vue';
 import AddRank from './ranks/AddRank.vue';
+import ManageRank from './ranks/ManageRank.vue';
 
-import { Faction, FactionRank } from '../../shared/interfaces';
+import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
 
 const ComponentName = 'Ranks';
@@ -110,6 +122,7 @@ export default defineComponent({
         EditRank,
         DeleteRank,
         AddRank,
+        ManageRank,
     },
     data() {
         return {
@@ -117,6 +130,7 @@ export default defineComponent({
             manageRankPermissions: false,
             editRank: null,
             rankToDelete: null,
+            rankPermissionsToManage: null,
             addRank: false,
         };
     },
@@ -143,6 +157,9 @@ export default defineComponent({
             this.editRank = rank;
             this.newRankName = this.editRank.name;
         },
+        startManageRankPermissions(rank: FactionRank) {
+            this.rankPermissionsToManage = rank;
+        },
         finishRankEdit(_newRankName: string) {
             const newRankName = _newRankName;
             this.editRank = null;
@@ -160,6 +177,13 @@ export default defineComponent({
         finishAddRank(rankName: string, rankWeight: number) {
             this.addRank = false;
             console.log(`Adding... ${rankName} with weight ${rankWeight}`);
+        },
+        finishManageRankPermissions(result: RankPermissions) {
+            const rankIdentifier = this.rankPermissionsToManage.uid;
+            this.rankPermissionsToManage = null;
+
+            console.log(rankIdentifier);
+            console.log(result);
         },
     },
     mounted() {
