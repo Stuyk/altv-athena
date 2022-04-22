@@ -67,6 +67,9 @@ export default defineComponent({
     max-width: 30vw;
     backface-visibility: hidden;
     box-sizing: border-box;
+    box-shadow: 0px 0px 50px black;
+    border: 2px solid rgba(28, 28, 28, 1);
+    border-radius: 6px;
 }
 
 .frame .content {

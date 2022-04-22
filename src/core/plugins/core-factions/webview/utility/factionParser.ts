@@ -144,6 +144,27 @@ export class FactionParser {
     }
 
     /**
+     * Check if a rank is higher.
+     *
+     * @static
+     * @param {FactionRank} actingUserRank
+     * @param {FactionRank} againstUserRank
+     * @return {*}
+     * @memberof FactionParser
+     */
+    static isRankHigher(actingUserRank: FactionRank, againstUserRank: FactionRank) {
+        if (actingUserRank.uid === againstUserRank.uid) {
+            return true;
+        }
+
+        if (actingUserRank.weight >= againstUserRank.weight) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Compares two ranks and returns permissions if the rank is lower than their current rank.
      *
      * @static

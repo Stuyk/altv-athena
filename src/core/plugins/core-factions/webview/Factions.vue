@@ -47,7 +47,7 @@ export default defineComponent({
     },
     data() {
         return {
-            pageIndex: 0,
+            pageIndex: 1,
             pages: [
                 { name: 'Members', page: 'Members' },
                 { name: 'Ranks', page: 'Ranks' },
@@ -59,7 +59,7 @@ export default defineComponent({
             faction: null,
             // Character IDs and their associated test ranks...
             // 61a8efe590851930ac59f5ef - 0 Rank // 51a8efe590851930ac59f5eg - 1 Rank // 51a8efe590851930ac59f5cc - 2 Rank
-            character: '51a8efe590851930ac59f5eg',
+            character: '61a8efe590851930ac59f5ef',
         };
     },
     methods: {
@@ -87,16 +87,15 @@ export default defineComponent({
     min-height: 35px;
     max-height: 35px;
     background-color: rgba(12, 12, 12, 1);
-    border-bottom: 2px solid rgba(28, 28, 28, 1);
-    box-shadow: 2px 2px 2px black;
+    border-bottom: 2px solid rgba(48, 48, 48, 1);
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
 }
 
 .factions-wrapper {
     display: flex;
-    min-width: 75vw;
-    max-width: 75vw;
+    min-width: 800px;
+    width: 900px;
     min-height: calc(75vh + 35px);
     max-height: calc(75vh + 35px);
     background-color: rgba(36, 36, 36, 1);

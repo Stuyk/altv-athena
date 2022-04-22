@@ -84,6 +84,38 @@ export const ExampleFactionData = {
             uid: '541b72671c4af46361a8b52b9949fb357d8f96eb1133aae8a6569bc4f8253005',
         },
         {
+            name: 'Chief Officer',
+            actionPermissions: [],
+            rankPermissions: {
+                addMembers: true,
+                bankAdd: true,
+                bankRemove: false,
+                kickMembers: true,
+                manageMembers: true,
+                manageRanks: false,
+                manageRankPermissions: false,
+            },
+            vehicles: [],
+            weight: 55,
+            uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b49677',
+        },
+        {
+            name: 'Senior Officer',
+            actionPermissions: [],
+            rankPermissions: {
+                addMembers: true,
+                bankAdd: true,
+                bankRemove: false,
+                kickMembers: true,
+                manageMembers: true,
+                manageRanks: false,
+                manageRankPermissions: false,
+            },
+            vehicles: [],
+            weight: 55,
+            uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b49677',
+        },
+        {
             name: 'Officer',
             actionPermissions: [],
             rankPermissions: {
