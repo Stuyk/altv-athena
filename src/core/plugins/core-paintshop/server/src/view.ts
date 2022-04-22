@@ -1,8 +1,6 @@
 import * as alt from 'alt-server';
 import { RGB } from '../../../../shared/interfaces/rgb';
-import { Vector3 } from '../../../../shared/interfaces/vector';
 import { PolygonShape } from '../../../../server/extensions/extColshape';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
 import { sha256Random } from '../../../../server/utility/encryption';
 import { RGBA } from 'alt-shared';
@@ -13,6 +11,7 @@ import { IPaintShop, iPaintshopSync } from '../../shared/interfaces';
 import { VEHICLE_COLOR_PAINTS } from '../../shared/paints';
 import { PAINT_SHOPS } from './shops';
 import { ServerBlipController } from '../../../../server/systems/blip';
+import { Athena } from '../../../../server/api/athena';
 
 const shops: Array<IPaintShop> = [];
 const inShop = {};
@@ -170,7 +169,7 @@ export class PaintShopView {
         }
 
         if (!player.vehicle) {
-            playerFuncs.emit.notification(player, `Must be in a vehicle to use this.`);
+            Athena.player.emit.notification(player, `Must be in a vehicle to use this.`);
             return;
         }
 
@@ -180,13 +179,13 @@ export class PaintShopView {
 
         inShop[player.id] = true;
 
-        playerFuncs.emit.sound2D(player, 'shop_enter', 0.5);
-        playerFuncs.emit.interactionAdd(player, {
+        Athena.player.emit.sound2D(player, 'shop_enter', 0.5);
+        Athena.player.emit.interactionAdd(player, {
             keyPress: 'E',
             description: 'Open Paint Panel',
             uid: polygon.uid,
         });
-        playerFuncs.emit.interactionTemporary(player, Paintshop_View_Events.OPEN);
+        Athena.player.emit.interactionTemporary(player, Paintshop_View_Events.OPEN);
     }
 
     /**
@@ -203,8 +202,8 @@ export class PaintShopView {
 
         inShop[player.id] = false;
         delete inShop[player.id];
-        playerFuncs.emit.interactionRemove(player, polygon.uid);
-        playerFuncs.emit.interactionTemporary(player, null);
+        Athena.player.emit.interactionRemove(player, polygon.uid);
+        Athena.player.emit.interactionTemporary(player, null);
     }
 
     /**

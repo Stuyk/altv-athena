@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 
 const timeBetweenPings = 4950;
@@ -31,14 +31,14 @@ function handlePing(player: alt.Player): void {
     player.nextPingTime = Date.now() + timeBetweenPings;
 
     // Handles General Saving / Synchronization
-    playerFuncs.save.onTick(player);
-    playerFuncs.sync.syncedMeta(player);
-    playerFuncs.sync.time(player);
-    playerFuncs.sync.weather(player);
+    Athena.player.save.onTick(player);
+    Athena.player.sync.syncedMeta(player);
+    Athena.player.sync.time(player);
+    Athena.player.sync.weather(player);
 
     if (!player.nextPlayTime || Date.now() > player.nextPlayTime) {
         player.nextPlayTime = Date.now() + 60000;
-        playerFuncs.sync.playTime(player);
+        Athena.player.sync.playTime(player);
     }
 
     // Only the driver of the vehicle should be responsible for vehicle updates.

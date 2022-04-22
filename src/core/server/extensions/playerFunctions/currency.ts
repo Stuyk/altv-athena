@@ -122,7 +122,7 @@ function subAllCurrencies(player: alt.Player, amount: number): boolean {
 }
 
 /**
- * Used to override an existing playerFuncs.inventory function.
+ * Used to override an existing Athena.player.inventory function.
  * Requires the same exact name of the function, and the parameters.
  *
  * @param {string} functionName

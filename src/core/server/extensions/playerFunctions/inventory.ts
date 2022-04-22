@@ -8,8 +8,8 @@ import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
-import { playerFuncs } from '../extPlayer';
 import { ItemFactory } from '../../systems/item';
+import { Athena } from '../../api/athena';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
@@ -49,7 +49,7 @@ async function convert(player: alt.Player): Promise<void> {
     }
 
     player.data.inventory = playerItems;
-    await playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    await Athena.player.save.field(player, 'inventory', player.data.inventory);
 }
 
 /**
@@ -443,9 +443,9 @@ function removeAllWeapons(player: alt.Player): Array<Item> {
         removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
     }
 
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+    Athena.player.sync.inventory(player);
     player.removeAllWeapons();
     return removedWeapons;
 }
@@ -544,8 +544,8 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
             return false;
         }
 
-        playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
-        playerFuncs.sync.inventory(player);
+        Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+        Athena.player.sync.inventory(player);
         return true;
     }
 
@@ -565,8 +565,8 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
         return false;
     }
 
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.sync.inventory(player);
     return true;
 }
 
@@ -637,7 +637,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
 
     if (!endItem || !selectItem) {
         console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} (may be null)`);
-        playerFuncs.sync.inventory(player);
+        Athena.player.sync.inventory(player);
         return;
     }
 
@@ -657,7 +657,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     fieldsToSave.push(endSlotName);
 
     if (fieldsToSave.includes(null)) {
-        playerFuncs.sync.inventory(player);
+        Athena.player.sync.inventory(player);
         return;
     }
 
@@ -667,7 +667,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     // Check if equipment types are compatible...
     if (isSelectEquipment || isEndEquipment) {
         if (endItem.item.equipment !== selectItem.item.equipment) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
     }
@@ -680,13 +680,13 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
         // Need to verify that each slot follows the rules for the slot it is going into.
         // Handles rules for the end item slot.
         if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
         // Handles rules for the selected item slot.
         if (!allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
@@ -703,13 +703,13 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
 
         // Handle Stacking
         if (!isSelectStackable || !isEndStackable) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
         const newValue = endArray[endIndex].quantity + selectItem.item.quantity;
         if (endArray[endIndex].maxStack && newValue > endArray[endIndex].maxStack) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
@@ -726,19 +726,19 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     } else {
         player.data[selectedSlotName] = selectedArray;
         fieldsToSave.pop();
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 
     saveFields(player, fieldsToSave);
-    playerFuncs.sync.inventory(player);
+    Athena.player.sync.inventory(player);
 }
 
 function saveFields(player: alt.Player, fields: string[]): void {
     for (let i = 0; i < fields.length; i++) {
-        playerFuncs.save.field(player, fields[i], player.data[fields[i]]);
+        Athena.player.save.field(player, fields[i], player.data[fields[i]]);
     }
 
-    playerFuncs.sync.inventory(player);
+    Athena.player.sync.inventory(player);
 }
 
 /**
@@ -1002,8 +1002,8 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
     }
 
     player.data.inventory[existingItem.index].quantity += item.quantity;
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.sync.inventory(player);
     return true;
 }
 
@@ -1164,7 +1164,7 @@ async function addAmountToInventoryReturnRemainingAmount(
 }
 
 /**
- * Used to override an existing playerFuncs.inventory function.
+ * Used to override an existing Athena.player.inventory function.
  * Requires the same exact name of the function, and the parameters.
  *
  * @param {string} functionName

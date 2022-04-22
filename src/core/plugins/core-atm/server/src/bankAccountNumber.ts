@@ -4,7 +4,7 @@ import { Global } from '../../../../server/systems/global';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { BANK_CONFIG } from './config';
 import * as charRef from '../../../../shared/interfaces/character';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
+import { Athena } from '../../../../server/api/athena';
 
 const metaName = 'bankNumber';
 
@@ -18,7 +18,7 @@ declare module 'alt-server' {
 class InternalFunctions {
     static async handleSelect(player: alt.Player) {
         if (player.data.bankNumber !== undefined && player.data.bankNumber !== null) {
-            playerFuncs.emit.meta(player, metaName, player.data[metaName]);
+            Athena.player.emit.meta(player, metaName, player.data[metaName]);
             return;
         }
 
@@ -26,9 +26,9 @@ class InternalFunctions {
         await Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
 
         player.data.bankNumber = await Global.getKey<number>(metaName);
-        await playerFuncs.save.field(player, metaName, player.data.bankNumber);
+        await Athena.player.save.field(player, metaName, player.data.bankNumber);
 
-        playerFuncs.emit.meta(player, metaName, player.data[metaName]);
+        Athena.player.emit.meta(player, metaName, player.data[metaName]);
 
         alt.log(`Created Bank Account # ${player.data[metaName]} for ${player.data.name}`);
     }

@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
@@ -10,6 +9,7 @@ import { Vector3 } from '../../../../shared/interfaces/vector';
 import JOB_DATA from './data';
 import JobEnums from '../../../../shared/interfaces/job';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
+import { Athena } from '../../../../server/api/athena';
 
 const START_POINT = { x: -1289.2508544921875, y: -1388.552734375, z: 3.481008052825928 };
 const TOTAL_DROP_OFFS = 5;
@@ -55,7 +55,7 @@ export class PizzaJob {
     static async begin(player: alt.Player) {
         const openSpot = await PizzaJob.getVehicleSpawnPoint();
         if (!openSpot) {
-            playerFuncs.emit.notification(player, `~r~No room for vehicles right now. Please wait...`);
+            Athena.player.emit.notification(player, `~r~No room for vehicles right now. Please wait...`);
             return;
         }
 
@@ -88,7 +88,7 @@ export class PizzaJob {
                 JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                 JobEnums.ObjectiveCriteria.NO_DYING,
             callbackOnStart: (player: alt.Player) => {
-                playerFuncs.emit.notification(player, `Hop on the Faggio`);
+                Athena.player.emit.notification(player, `Hop on the Faggio`);
             },
         });
 
@@ -125,12 +125,12 @@ export class PizzaJob {
                     JobEnums.ObjectiveCriteria.NO_DYING |
                     JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE,
                 callbackOnStart: (player: alt.Player) => {
-                    playerFuncs.emit.notification(player, `Drive to the Drop Off Point`);
+                    Athena.player.emit.notification(player, `Drive to the Drop Off Point`);
                 },
                 callbackOnFinish: (player: alt.Player) => {
-                    playerFuncs.emit.soundFrontend(player, 'BASE_JUMP_PASSED', 'HUD_AWARDS');
-                    playerFuncs.emit.notification(player, `Pizza Delivered!`);
-                    playerFuncs.emit.tempObjectLerp(
+                    Athena.player.emit.soundFrontend(player, 'BASE_JUMP_PASSED', 'HUD_AWARDS');
+                    Athena.player.emit.notification(player, `Pizza Delivered!`);
+                    Athena.player.emit.tempObjectLerp(
                         player,
                         'prop_pizza_box_01',
                         { x: rPoint.drop.x, y: rPoint.drop.y, z: rPoint.drop.z + 1 },
@@ -175,10 +175,10 @@ export class PizzaJob {
                     JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                     JobEnums.ObjectiveCriteria.NO_DYING,
                 callbackOnStart: (player: alt.Player) => {
-                    playerFuncs.emit.notification(player, `Get the Next Order`);
+                    Athena.player.emit.notification(player, `Get the Next Order`);
                 },
                 callbackOnFinish: (player: alt.Player) => {
-                    playerFuncs.emit.soundFrontend(
+                    Athena.player.emit.soundFrontend(
                         player,
                         'PICKUP_WEAPON_BALL',
                         'HUD_FRONTEND_WEAPONS_PICKUPS_SOUNDSET',
@@ -222,13 +222,13 @@ export class PizzaJob {
                 JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                 JobEnums.ObjectiveCriteria.NO_DYING,
             callbackOnStart: (player: alt.Player) => {
-                playerFuncs.emit.notification(player, `Drive the Bike Back`);
+                Athena.player.emit.notification(player, `Drive the Bike Back`);
             },
             callbackOnFinish: (player: alt.Player) => {
                 // Payout 100 - 200; Random;
                 const earned = Math.floor(Math.random() * 100) + 100;
-                playerFuncs.currency.add(player, CurrencyTypes.CASH, earned);
-                playerFuncs.emit.notification(player, `~g~$${earned}`);
+                Athena.player.currency.add(player, CurrencyTypes.CASH, earned);
+                Athena.player.emit.notification(player, `~g~$${earned}`);
             },
         });
 
