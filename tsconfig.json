@@ -16,6 +16,7 @@
         "./resources",
         "./scripts",
         "./altv-athena-cache",
+        "./athena-cache",
         "./node_modules",
         "./cache",
         "./crashdumps",
