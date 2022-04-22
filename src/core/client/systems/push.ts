@@ -6,7 +6,7 @@ import { playAnimation } from './animations';
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
 
-let interval;
+let interval: number | undefined;
 let vehicle: alt.Vehicle;
 let isPushing: boolean = false;
 
@@ -60,8 +60,9 @@ export class PushVehicle {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
+            alt.emitServer(VEHICLE_EVENTS.STOP_PUSH);
         }
-
+        
         vehicle = null;
         isPushing = false;
     }
