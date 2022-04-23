@@ -1,12 +1,12 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import fs from 'fs';
-import { Account } from '../../../../../server/interface/iAccount';
-import { Collections } from '../../../../../server/interface/iDatabaseCollections';
-import { AdminController } from '../../../../../server/systems/admin';
-import ChatController from '../../../../../server/systems/chat';
-import { AthenaScreenshot } from '../../../../../server/utility/screenshot';
-import { ConsoleCommander } from '../../../../../shared/utility/consoleCommander';
+import { Account } from '../../../../server/interface/iAccount';
+import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { AdminController } from '../../../../server/systems/admin';
+import ChatController from '../../../../server/systems/chat';
+import { AthenaScreenshot } from '../../../../server/utility/screenshot';
+import { ConsoleCommander } from '../../../../shared/utility/consoleCommander';
 
 async function handleSaveScreenshot(player: alt.Player, base64Image: string) {
     const path = `${process.cwd()}/screenshots/${player.data.name}.jpg`;
@@ -174,11 +174,11 @@ export class ConsoleCommands {
 
     static dox(id: string) {
         if (id === undefined) {
-            alt.logWarning(`/dox <discord_id>>`);
+            alt.logWarning(`/dox <discord_id>`);
             return;
         }
 
-        const player = alt.Player.all.find((p) => p && p.accountData.discord === id);
+        const player = alt.Player.all.find((p) => p && p.accountData && `${p.id}` === `${id}`);
         if (!player) {
             alt.logWarning(`That player is not currently logged in.`);
             return;

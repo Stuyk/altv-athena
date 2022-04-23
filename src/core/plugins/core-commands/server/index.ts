@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '../../../server/systems/plugins';
 import { ConsoleCommander } from '../../../shared/utility/consoleCommander';
-import { ConsoleCommands } from './commands/console';
+import { ConsoleCommands } from './commands/consoleCommands';
 
 import './commands/moderator';
 import './commands/player';
