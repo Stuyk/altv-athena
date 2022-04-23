@@ -15,6 +15,7 @@
                     :key="pageIndex"
                     v-bind:faction="faction"
                     v-bind:character="character"
+                    v-bind:money="money"
                 ></component>
             </div>
         </div>
@@ -49,7 +50,7 @@ export default defineComponent({
     },
     data() {
         return {
-            pageIndex: 1,
+            pageIndex: 2,
             pages: [
                 { name: 'Members', page: 'Members' },
                 { name: 'Ranks', page: 'Ranks' },
@@ -62,15 +63,18 @@ export default defineComponent({
             // Character IDs and their associated test ranks...
             // 61a8efe590851930ac59f5ef - 0 Rank // 51a8efe590851930ac59f5eg - 1 Rank // 51a8efe590851930ac59f5cc - 2 Rank
             character: '61a8efe590851930ac59f5ef',
+            // Money = Bank + Cash
+            money: 0,
         };
     },
     methods: {
         setPage(pageIndex: number) {
             this.pageIndex = pageIndex;
         },
-        updateFaction(faction: Faction, character: string) {
+        updateFaction(faction: Faction, character: string, money: number) {
             this.faction = faction;
             this.character = character;
+            this.money = money;
         },
         close() {
             if (!('alt' in window)) {

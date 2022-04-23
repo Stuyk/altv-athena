@@ -1,5 +1,6 @@
 export const ExampleFactionData = {
     name: 'Los Santos Police Department',
+    bank: 50000,
     motd: '',
     members: {
         // Rank -> 'Member'

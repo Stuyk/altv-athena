@@ -280,6 +280,9 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    min-height: 75vh;
+    max-height: 75vh;
+    overflow-y: scroll;
 }
 
 .rank-panel {

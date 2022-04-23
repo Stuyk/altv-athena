@@ -246,8 +246,6 @@ export default defineComponent({
             return permissionList;
         },
         permAction(perm) {
-            console.log(`GO PERM GO`);
-
             if (!this.selected) {
                 return;
             }
@@ -354,6 +352,10 @@ export default defineComponent({
 .permissions {
     display: flex;
     flex-direction: column;
+    min-height: 75vh;
+    max-height: 75vh;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .permission {

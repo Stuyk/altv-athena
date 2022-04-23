@@ -194,6 +194,10 @@ export class FactionFuncs {
 
         faction.bank += amount;
         const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
         return didUpdate.status;
     }
 
@@ -216,6 +220,10 @@ export class FactionFuncs {
 
         faction.bank -= amount;
         const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
         return didUpdate.status;
     }
 
