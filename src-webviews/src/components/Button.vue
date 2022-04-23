@@ -1,10 +1,21 @@
 <template>
-    <div :class="dynamicClass" :style="style" @mouseover="playHover" @mouseup="playMouseUp" v-if="!disable">
+    <div
+        class="button-mock"
+        :class="dynamicClass"
+        :style="style"
+        @mouseover="playHover"
+        @mouseup="playMouseUp"
+        v-if="!disable"
+    >
+        <div class="help" v-if="help">
+            {{ help }}
+        </div>
         <div style="user-select: none !important; pointer-events: none !important">
             <slot />
         </div>
     </div>
-    <div :class="dynamicClass" :style="style" v-else>
+    <div class="button-mock" :class="dynamicClass" :style="style" v-else>
+        <div class="help" v-if="help">{{ help }}</div>
         <div style="user-select: none !important; pointer-events: none !important">
             <slot />
         </div>
@@ -52,6 +63,10 @@ export default defineComponent({
         style: {
             type: String,
             default: '',
+        },
+        help: {
+            type: String,
+            default: null,
         },
     },
     methods: {
@@ -126,3 +141,25 @@ export default defineComponent({
     },
 });
 </script>
+
+<style>
+.help {
+    display: none;
+    position: absolute;
+}
+
+.button-mock:hover .help {
+    display: block;
+    position: absolute;
+    left: -42px;
+    right: 0;
+    top: -25px;
+    background: rgba(12, 12, 12, 1);
+    color: #fff !important;
+    padding: 4px;
+    width: 120px;
+    z-index: 99;
+    text-shadow: unset !important;
+    border-radius: 6px;
+}
+</style>

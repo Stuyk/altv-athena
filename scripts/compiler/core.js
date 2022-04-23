@@ -40,7 +40,7 @@ function getEnabledPlugins() {
 
         for (const fileName of viablePluginDisablers) {
             const disabledPath = sanitizePath(path.join(pluginPath, fileName));
-            
+
             if (fs.existsSync(disabledPath)) {
                 return false;
             }
@@ -52,16 +52,20 @@ function getEnabledPlugins() {
 
 function getFilesForTranspilation(enabledPlugins) {
     const rootPath = sanitizePath(path.join(process.cwd(), "src/**/*.ts"));
-    const files = glob.sync(rootPath, { ignore: [
-        "**/node_modules/**",
-        "**/core/plugins/**", // ignore plugins - will be handled seperatly
-    ]});
+    const files = glob.sync(rootPath, {
+        ignore: [
+            "**/node_modules/**",
+            "**/core/plugins/**", // ignore plugins - will be handled seperatly
+        ]
+    });
 
     for (const pluginName of enabledPlugins) {
         const pluginPath = sanitizePath(path.join(process.cwd(), "src/core/plugins", pluginName));
-        const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), { ignore: [
-            "**/webview/**",
-        ]});
+        const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), {
+            ignore: [
+                "**/webview/**",
+            ]
+        });
 
         for (const file of pluginFiles) {
             files.push(file);
@@ -86,7 +90,7 @@ function getFilesToCopy(enabledPlugins) {
 
 async function transpileFile(file) {
     const targetPath = file.replace("src/", "resources/").replace(".ts", ".js");
-    
+
     return new Promise(async resolve => {
         const result = await swc.transformFile(file, SWC_CONFIG);
         fs.outputFileSync(targetPath, result.code);
@@ -94,7 +98,7 @@ async function transpileFile(file) {
     });
 }
 
-async function run()  {
+async function run() {
     const startTime = +new Date;
     const enabledPlugins = getEnabledPlugins();
 
@@ -103,7 +107,7 @@ async function run()  {
 
     const resourcesFolder = sanitizePath(path.join(process.cwd(), "resources"));
     if (fs.existsSync(resourcesFolder)) {
-        fs.rmSync(resourcesFolder, { recursive: true });
+        fs.rmSync(resourcesFolder, { recursive: true, force: true });
     }
 
     for (const file of filesToCopy) {
