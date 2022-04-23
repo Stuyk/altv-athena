@@ -253,7 +253,7 @@ export default defineComponent({
             }
 
             if (perm.key === RankPermissionNames.kickMembers) {
-                alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.KICK_MEMBER, this.selected);
+                alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.KICK_MEMBER, this.selected.id);
                 this.selected = null;
                 return;
             }
