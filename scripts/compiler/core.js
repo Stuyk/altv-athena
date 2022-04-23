@@ -53,6 +53,7 @@ function getEnabledPlugins() {
 function getFilesForTranspilation(enabledPlugins) {
     const rootPath = sanitizePath(path.join(process.cwd(), "src/**/*.ts"));
     const files = glob.sync(rootPath, {
+        nodir: true,
         ignore: [
             "**/node_modules/**",
             "**/core/plugins/**", // ignore plugins - will be handled seperatly
@@ -62,6 +63,7 @@ function getFilesForTranspilation(enabledPlugins) {
     for (const pluginName of enabledPlugins) {
         const pluginPath = sanitizePath(path.join(process.cwd(), "src/core/plugins", pluginName));
         const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), {
+            nodir: true,
             ignore: [
                 "**/webview/**",
             ]
