@@ -74,11 +74,14 @@ function getFilesForTranspilation(enabledPlugins) {
 function getFilesToCopy(enabledPlugins) {
     const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)'));
 
-    return glob.sync(filePath, { ignore: [
-        "**/tsconfig.json",
-        "**/dependencies.json",
-        `**/core/plugins/!(${enabledPlugins.join('|')})/**`
-    ]});
+    return glob.sync(filePath, {
+        nodir: true,
+        ignore: [
+            "**/tsconfig.json",
+            "**/dependencies.json",
+            `**/core/plugins/!(${enabledPlugins.join('|')})/**`
+        ]
+    });
 }
 
 async function transpileFile(file) {
