@@ -225,13 +225,13 @@ class InternalFunctions implements ViewModel {
 
     static defaultCashComponent(propName: string) {
         const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
-        const fixedValue = parseFloat(value.toFixed(0));
+        const fixedValue = parseFloat(value.toFixed?.(0));
         InternalFunctions.passComponentInfo(propName, fixedValue);
     }
 
     static defaultBankComponent(propName: string) {
         const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
-        const fixedValue = parseFloat(value.toFixed(0));
+        const fixedValue = parseFloat(value.toFixed?.(0));
         InternalFunctions.passComponentInfo(propName, fixedValue);
     }
 

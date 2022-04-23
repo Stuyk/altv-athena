@@ -34,7 +34,7 @@ let hudElements: Array<IHud> = [
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (self: IHud, pos: { x: number; y: number }) => {
             const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
-            const fixedValue = parseFloat(value.toFixed(0));
+            const fixedValue = parseFloat(value.toFixed?.(0));
 
             if (self.callbackReroute) {
                 self.callbackReroute(fixedValue);
@@ -56,7 +56,7 @@ let hudElements: Array<IHud> = [
         color: new alt.RGBA(255, 255, 255, 225),
         callback: (self: IHud, pos: { x: number; y: number }) => {
             const value = alt.Player.local.meta.bank ? alt.Player.local.meta.bank : 0;
-            const fixedValue = parseFloat(value.toFixed(0));
+            const fixedValue = parseFloat(value.toFixed?.(0));
 
             if (self.callbackReroute) {
                 self.callbackReroute(fixedValue);
