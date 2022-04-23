@@ -83,6 +83,7 @@ export default defineComponent({
             show: false,
             selection: 0,
             forceUpdate: 0,
+            controlsEnabled: true,
             data: {
                 sex: 1,
                 faceMother: 0,
@@ -158,12 +159,22 @@ export default defineComponent({
             }
 
             this.selection += 1;
+
+            if(this.selection >= this.navOptions.length - 1 && this.controlsEnabled) {
+                alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, true);
+                this.controlsEnabled = false;
+            }
         },
         decrementIndex() {
             if (this.selection - 1 <= -1) {
                 this.selection = 0;
                 return;
             }
+            
+            if(!this.controlsEnabled) {
+                alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, false);
+                this.controlsEnabled = true;
+            } 
 
             this.selection -= 1;
         },
