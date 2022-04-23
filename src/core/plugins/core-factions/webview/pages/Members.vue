@@ -32,7 +32,9 @@
                                 {{ perm.desc }}
                             </div>
                             <div v-if="perm && perm.key && perm.value">
-                                <Button class="perm-button" color="blue">{{ perm.name }}</Button>
+                                <Button class="perm-button" color="blue" @click="permAction(perm)">{{
+                                    perm.name
+                                }}</Button>
                             </div>
                             <div v-else>
                                 <Button class="perm-button" :disable="true">{{ perm.name }}</Button>
@@ -95,6 +97,8 @@ import Module from '@components/Module.vue';
 import { Faction, FactionCharacter, FactionRank, RankPermissionNames } from '../../shared/interfaces';
 import { FactionLocale } from '../../shared/locale';
 import { FactionParser } from '../utility/factionParser';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
+import { FACTION_PFUNC } from '../../shared/funcNames';
 
 const ComponentName = 'Members';
 export default defineComponent({
@@ -105,7 +109,7 @@ export default defineComponent({
     },
     data() {
         return {
-            selected: null,
+            selected: null as FactionCharacter,
             search: '',
         };
     },
@@ -187,7 +191,13 @@ export default defineComponent({
             const actingRank = FactionParser.getRank(this.faction, character);
             const againstRank = FactionParser.getRank(this.faction, rank);
             const validPermissions = FactionParser.getValidPermissions(actingRank, againstRank, character.hasOwnership);
-            const permissionList: Array<{ key: string; value: boolean; desc: string; name: string }> = [];
+            const permissionList: Array<{
+                key: string;
+                value: boolean;
+                desc: string;
+                name: string;
+                uniqueValue?: string;
+            }> = [];
 
             for (let i = 0; i < permissions.length; i++) {
                 const key = permissions[i];
@@ -212,16 +222,74 @@ export default defineComponent({
 
                 if (key === RankPermissionNames.manageMembers) {
                     if (validPermissions.hasOwnProperty(key) && character.name !== this.selected) {
-                        permissionList.push({ key, value: validPermissions[key], name: 'Promote', desc });
-                        permissionList.push({ key, value: validPermissions[key], name: 'Demote', desc });
+                        permissionList.push({
+                            key,
+                            uniqueValue: 'promote',
+                            value: validPermissions[key],
+                            name: 'Promote',
+                            desc,
+                        });
+                        permissionList.push({
+                            key,
+                            uniqueValue: 'demote',
+                            value: validPermissions[key],
+                            name: 'Demote',
+                            desc,
+                        });
                     } else {
-                        permissionList.push({ key, value: false, name: 'Promote', desc });
-                        permissionList.push({ key, value: false, name: 'Demote', desc });
+                        permissionList.push({ key, uniqueValue: 'promote', value: false, name: 'Promote', desc });
+                        permissionList.push({ key, uniqueValue: 'demote', value: false, name: 'Demote', desc });
                     }
                 }
             }
 
             return permissionList;
+        },
+        permAction(perm) {
+            console.log(`GO PERM GO`);
+
+            if (!this.selected) {
+                return;
+            }
+
+            if (perm.key === RankPermissionNames.kickMembers) {
+                alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.KICK_MEMBER, this.selected);
+                this.selected = null;
+                return;
+            }
+
+            if (perm.key === RankPermissionNames.manageMembers) {
+                const ranks = FactionParser.getFactionRanks(this.faction);
+                const index = ranks.findIndex((rank) => rank && rank.uid === this.selected.rank);
+
+                if (index <= -1) {
+                    return;
+                }
+
+                if (perm.uniqueValue === 'promote') {
+                    alt.emit(
+                        FACTION_EVENTS.WEBVIEW.ACTION,
+                        FACTION_PFUNC.SET_CHARACTER_RANK,
+                        this.selected.id,
+                        ranks[index - 1].uid,
+                    );
+                    this.selected = null;
+                    return;
+                }
+
+                if (perm.uniqueValue === 'demote') {
+                    alt.emit(
+                        FACTION_EVENTS.WEBVIEW.ACTION,
+                        FACTION_PFUNC.SET_CHARACTER_RANK,
+                        this.selected.id,
+                        ranks[index + 1].uid,
+                    );
+                    this.selected = null;
+                    return;
+                }
+
+                return;
+            }
         },
     },
 });

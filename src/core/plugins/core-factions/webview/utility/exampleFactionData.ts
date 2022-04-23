@@ -96,7 +96,7 @@ export const ExampleFactionData = {
                 manageRankPermissions: false,
             },
             vehicles: [],
-            weight: 55,
+            weight: 65,
             uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b49677',
         },
         {

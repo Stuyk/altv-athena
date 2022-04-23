@@ -35,7 +35,7 @@
 
                     <!-- Change Rank Order -->
                     <template v-if="rank.weight <= 98 && index !== 1">
-                        <Button class="rank-button" color="cyan" help="Rank Up">
+                        <Button class="rank-button" color="cyan" help="Rank Up" @click="swapRank(rank, true)">
                             <Icon :size="14" icon="icon-arrow-bold-up" />
                         </Button>
                     </template>
@@ -45,7 +45,7 @@
                         </Button>
                     </template>
                     <template v-if="getRanks().length - 1 !== index && rank.weight <= 98">
-                        <Button class="rank-button" color="cyan" help="Rank Down">
+                        <Button class="rank-button" color="cyan" help="Rank Down" @click="swapRank(rank, false)">
                             <Icon :size="14" icon="icon-arrow-bold-down" />
                         </Button>
                     </template>
@@ -136,10 +136,48 @@ export default defineComponent({
             addRank: false,
         };
     },
-    computed: {},
     methods: {
         getRanks(): Array<FactionRank> {
             return FactionParser.getFactionRanks(this.faction);
+        },
+        swapRank(rank: FactionRank, increasingWeight: boolean) {
+            const ranks = this.getRanks() as Array<FactionRank>;
+            let targetRank: FactionRank = null;
+            let changingWeight = rank.weight + (increasingWeight ? 1 : -1);
+
+            while (!targetRank) {
+                const foundRank = ranks.find((r) => r.weight === changingWeight);
+
+                if (changingWeight >= 99 || changingWeight === 0) {
+                    targetRank = null;
+                    break;
+                }
+
+                if (!foundRank) {
+                    if (increasingWeight) {
+                        changingWeight++;
+                    } else {
+                        changingWeight--;
+                    }
+                    continue;
+                }
+
+                targetRank = foundRank;
+            }
+
+            if (!targetRank) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                console.log(`Swapping ${rank.name} with ${targetRank.name}`);
+                return;
+            }
+
+            console.log(`Swapping... ${rank.name} with ${targetRank.name}`);
+            console.log(rank.uid);
+            console.log(JSON.stringify(rank));
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.SWAP_RANKS, rank.uid, targetRank.uid);
         },
         startRankDelete(rank: FactionRank) {
             if (!rank) {
@@ -164,8 +202,18 @@ export default defineComponent({
         },
         finishRankEdit(_newRankName: string) {
             const newRankName = _newRankName;
+            const rank = this.editRank;
             this.editRank = null;
-            console.log(newRankName);
+
+            if (!rank) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.SET_RANK_NAME, rank.uid, newRankName);
         },
         finishRankDelete() {
             if (!this.rankToDelete) {
@@ -173,12 +221,32 @@ export default defineComponent({
                 return;
             }
 
-            console.log(`Deleting... ${this.rankToDelete.name}`);
+            const uid = this.rankToDelete.uid;
             this.rankToDelete = null;
+
+            if (!uid) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.REMOVE_RANK, uid);
         },
         finishAddRank(rankName: string, rankWeight: number) {
             this.addRank = false;
-            console.log(`Adding... ${rankName} with weight ${rankWeight}`);
+
+            if (!rankName || !rankWeight) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                console.log(`Adding... ${rankName} with weight ${rankWeight}`);
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.ADD_RANK, rankName, rankWeight);
         },
         finishManageRankPermissions(rankPermissions: RankPermissions) {
             const rankIdentifier = this.rankPermissionsToManage.uid;
