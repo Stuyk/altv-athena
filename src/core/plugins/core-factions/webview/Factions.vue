@@ -2,7 +2,7 @@
     <div class="factions-wrapper stack">
         <div class="toolbar split space-between">
             <span class="pl-2">{{ faction && faction.name ? faction.name : 'Faction Name Missing' }}</span>
-            <Icon class="red--text red--hover hover pr-2" :size="24" icon="icon-times-circle" />
+            <Icon class="red--text red--hover hover pr-2" :size="24" icon="icon-times-circle" @click="close" />
         </div>
         <div class="split" style="width: 100%">
             <div class="factions-nav">
@@ -72,8 +72,21 @@ export default defineComponent({
             this.faction = faction;
             this.character = character;
         },
-        handlePress() {
-            //
+        close() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            console.log('test');
+            alt.emit(FACTION_EVENTS.WEBVIEW.CLOSE);
+        },
+        handlePress(e: KeyboardEvent) {
+            // Escape
+            if (e.keyCode !== 27) {
+                return;
+            }
+
+            this.close();
         },
     },
     mounted() {
@@ -87,6 +100,10 @@ export default defineComponent({
         }
     },
     unmounted() {
+        if ('alt' in window) {
+            alt.off(FACTION_EVENTS.WEBVIEW.UPDATE_DATA, this.updateFaction);
+        }
+
         document.removeEventListener('keyup', this.handlePress);
     },
 });

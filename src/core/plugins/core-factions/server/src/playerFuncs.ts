@@ -6,6 +6,7 @@ import { FACTION_CONFIG } from './config';
 import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
 import { Athena } from '../../../../server/api/athena';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
 
 /**
  * Bound to the player to manipulate individual faction functionality.
@@ -476,16 +477,20 @@ export class FactionPlayerFuncs {
      *
      * @static
      * @param {alt.Player} player
-     * @param {string} eventName
+     * @param {string} functionName
      * @param {...any[]} args
      * @return {*}
      * @memberof FactionPlayerFuncs
      */
-    static invoke(player: alt.Player, eventName: string, ...args: any[]): boolean {
-        if (!FactionPlayerFuncs[eventName]) {
+    static invoke(player: alt.Player, functionName: string, ...args: any[]): boolean {
+        if (!FactionPlayerFuncs[functionName]) {
             return false;
         }
 
-        return FactionPlayerFuncs[eventName](player, ...args);
+        console.log(`[FactionPlayerFuncs] Invoking ${functionName}`);
+        console.log(...args);
+        return FactionPlayerFuncs[functionName](player, ...args);
     }
 }
+
+alt.onClient(FACTION_EVENTS.PROTOCOL.INVOKE, FactionPlayerFuncs.invoke);

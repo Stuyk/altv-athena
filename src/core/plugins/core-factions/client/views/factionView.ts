@@ -32,12 +32,22 @@ class InternalFunctions {
         view.on(FACTION_EVENTS.WEBVIEW.READY, InternalFunctions.ready);
         view.on(FACTION_EVENTS.WEBVIEW.CLOSE, InternalFunctions.close);
         view.on(FACTION_EVENTS.WEBVIEW.ACTION, InternalFunctions.action);
+
         WebViewController.openPages([FACTION_EVENTS.WEBVIEW.NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
+    }
+
+    static refresh(_faction: Faction) {
+        if (!isOpen) {
+            return;
+        }
+
+        faction = _faction;
+        InternalFunctions.ready();
     }
 
     static async close() {
@@ -69,13 +79,13 @@ class InternalFunctions {
     }
 
     static action(functionName: string, ...args: any[]) {
-        alt.emitServer(FACTION_EVENTS.WEBVIEW.ACTION, functionName, ...args);
+        alt.emitServer(FACTION_EVENTS.PROTOCOL.INVOKE, functionName, ...args);
     }
 }
 
 export class FactionView {
     static init() {
         alt.onServer(FACTION_EVENTS.PROTOCOL.OPEN, InternalFunctions.open);
-        alt.onServer(FACTION_EVENTS.PROTOCOL.REFRESH, InternalFunctions.open);
+        alt.onServer(FACTION_EVENTS.PROTOCOL.REFRESH, InternalFunctions.refresh);
     }
 }

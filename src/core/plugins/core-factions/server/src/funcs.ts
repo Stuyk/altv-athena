@@ -9,6 +9,7 @@ import { VehicleSystem } from '../../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../../shared/interfaces/iResponse';
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
 
 let hasInitialized = false;
 
@@ -43,6 +44,22 @@ export class FactionFuncs {
         VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
+    }
+
+    /**
+     * Handle refreshing the faction information.
+     *
+     * @static
+     * @param {Faction} faction
+     * @memberof FactionFuncs
+     */
+    static updateMembers(faction: Faction) {
+        const memberIdentifiers = Object.keys(faction.members);
+        const members = alt.Player.all.filter(
+            (p) => p && p.valid && p.data && memberIdentifiers.includes(p.data._id.toString()),
+        );
+
+        alt.emitClient(members, FACTION_EVENTS.PROTOCOL.REFRESH, faction);
     }
 
     /**

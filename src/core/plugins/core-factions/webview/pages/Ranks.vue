@@ -105,6 +105,8 @@ import ManageRank from './ranks/ManageRank.vue';
 
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
+import { FACTION_PFUNC } from '../../shared/funcNames';
 
 const ComponentName = 'Ranks';
 export default defineComponent({
@@ -178,12 +180,21 @@ export default defineComponent({
             this.addRank = false;
             console.log(`Adding... ${rankName} with weight ${rankWeight}`);
         },
-        finishManageRankPermissions(result: RankPermissions) {
+        finishManageRankPermissions(rankPermissions: RankPermissions) {
             const rankIdentifier = this.rankPermissionsToManage.uid;
             this.rankPermissionsToManage = null;
 
-            console.log(rankIdentifier);
-            console.log(result);
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(
+                FACTION_EVENTS.WEBVIEW.ACTION,
+                FACTION_PFUNC.SET_RANK_PERMISSIONS,
+                rankIdentifier,
+                // Have to convert rankPermissions to non-proxy object.
+                JSON.parse(JSON.stringify(rankPermissions)),
+            );
         },
     },
     mounted() {

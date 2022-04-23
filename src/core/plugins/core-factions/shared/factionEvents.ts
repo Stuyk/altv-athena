@@ -2,6 +2,7 @@ export const FACTION_EVENTS = {
     PROTOCOL: {
         OPEN: 'faction:Open',
         REFRESH: 'faction:Refresh',
+        INVOKE: 'faction:Invoke',
     },
     WEBVIEW: {
         NAME: 'Factions',
