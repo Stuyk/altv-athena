@@ -26,7 +26,6 @@
 import { defineComponent, defineAsyncComponent } from 'vue';
 
 import { ExampleFactionData } from './utility/exampleFactionData';
-import { FactionPages } from './pages/exports';
 import { Faction } from '../shared/interfaces';
 import { FACTION_EVENTS } from '../shared/factionEvents';
 
