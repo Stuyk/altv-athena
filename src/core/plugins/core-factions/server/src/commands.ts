@@ -25,7 +25,7 @@ export class FactionCommands {
         );
         ChatController.addCommand(
             'finvite',
-            '/finvite [id_above_head] - Invite to faction',
+            '/finvite [id_or_first_last] - Invite to faction',
             PERMISSIONS.NONE,
             FactionCommands.invite,
         );
@@ -119,13 +119,15 @@ export class FactionCommands {
         let target: alt.Player;
 
         if (isNaN(parseInt(idOrName))) {
-            target = alt.Player.all.find((x) => x && x.data && x.data.name.includes(idOrName));
+            target = alt.Player.all.find(
+                (x) => x && x.data && x.data.name.toLowerCase().includes(idOrName.toLowerCase()),
+            );
         } else {
             target = Athena.player.get.findByUid(idOrName);
         }
 
         if (!target || !target.data || !target.valid || !idOrName || target === player) {
-            Athena.player.emit.message(player, `/finvite [id]`);
+            Athena.player.emit.message(player, `/finvite [id_or_first_last]`);
             return;
         }
 
