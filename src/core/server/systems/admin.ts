@@ -19,7 +19,7 @@ export class AdminController {
         }
 
         player.kick(`[Banned] ${reason}`);
-        const result = Database.updatePartialData(player.accountData._id, { banned: true, reason }, Collections.Accounts);
+        const result = await Database.updatePartialData(player.accountData._id, { banned: true, reason }, Collections.Accounts);
         if(result) {
             Logger.info(`(${player.discord.id}) Has been banned from the server.`);
         }else {
@@ -45,7 +45,7 @@ export class AdminController {
             return false;
         }
 
-        const result = Database.updatePartialData(account._id.toString(), { banned: false, reason: null }, Collections.Accounts);
+        const result = await Database.updatePartialData(account._id.toString(), { banned: false, reason: null }, Collections.Accounts);
         if(result) {
             Logger.info(`(${discord}) Has been unbanned from the server.`);
         }else {
