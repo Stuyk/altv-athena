@@ -3,7 +3,7 @@ import { PluginSystem } from '../../../server/systems/plugins';
 import { VitalsSystem } from './src/system';
 
 import './src/commands';
-import { VitalsEffects } from '../shared/src/effects';
+import { VitalsEffects } from './src/effects';
 
 const PLUGIN_NAME = 'Vitals Plugin';
 
