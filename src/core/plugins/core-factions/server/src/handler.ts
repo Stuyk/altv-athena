@@ -107,6 +107,20 @@ export class FactionHandler {
             return { status: false, response: `Cannot insert faction into database.` };
         }
 
+        character.faction = document._id.toString();
+        await Database.updatePartialData(
+            character._id,
+            {
+                faction: character.faction,
+            },
+            Collections.Characters,
+        );
+
+        const target = alt.Player.all.find((x) => x && x.data && x.data._id.toString() === character._id.toString());
+        if (target) {
+            target.data.faction = character.faction;
+        }
+
         InternalFunctions.create(document);
         return { status: false, response: document._id.toString() };
     }

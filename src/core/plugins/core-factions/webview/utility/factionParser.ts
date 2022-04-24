@@ -122,7 +122,6 @@ export class FactionParser {
         let sorted = members;
         if (orderByRank) {
             sorted = members.sort((a, b) => {
-                console.log(b.weight, a.weight);
                 return b.weight - a.weight;
             });
         }
@@ -141,6 +140,27 @@ export class FactionParser {
         }
 
         return rank.rankPermissions;
+    }
+
+    /**
+     * Check if a rank is higher.
+     *
+     * @static
+     * @param {FactionRank} actingUserRank
+     * @param {FactionRank} againstUserRank
+     * @return {*}
+     * @memberof FactionParser
+     */
+    static isRankHigher(actingUserRank: FactionRank, againstUserRank: FactionRank) {
+        if (actingUserRank.uid === againstUserRank.uid) {
+            return true;
+        }
+
+        if (actingUserRank.weight >= againstUserRank.weight) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -169,7 +189,7 @@ export class FactionParser {
     }
 
     /**
-     * Get a list of current faction ranks
+     * Get a list of current faction ranks sorted by rank.
      *
      * @static
      * @param {Faction} faction
@@ -181,6 +201,10 @@ export class FactionParser {
             return [];
         }
 
-        return faction.ranks;
+        const ranks = faction.ranks.sort((a, b) => {
+            return b.weight - a.weight;
+        });
+
+        return ranks;
     }
 }
