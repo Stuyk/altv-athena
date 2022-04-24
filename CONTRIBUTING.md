@@ -35,3 +35,13 @@ Here are some examples of what you shouldn't write and what you should write ins
   - Make them have different inventories.
 
 Contributing to Athena is about bringing value to developers that cannot otherwise write complex systems.
+
+Obviously, we take fixes for bugs or slight changes to existing features as long as they are backwards compatible.
+
+## How to Create a Pull Request
+
+All pull requests should be built off of the latest developer version. There is usually an open `Tracking PR` to determine what version to use.
+
+When your code is ready you can create a PR to merge into the `Tracking PR`.
+
+We **WILL NOT** take pull requests based off the `master` branch.
