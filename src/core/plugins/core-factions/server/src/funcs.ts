@@ -275,6 +275,14 @@ export class FactionFuncs {
             return false;
         }
 
+        const onlinePlayer = alt.Player.all.find(
+            (x) => x && x.valid && x.data && x.data._id.toString() === characterID,
+        );
+
+        if (onlinePlayer) {
+            onlinePlayer.data.faction = faction._id.toString();
+        }
+
         faction.members[characterID] = {
             id: characterID,
             name: character.name,
