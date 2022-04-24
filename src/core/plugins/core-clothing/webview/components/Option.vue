@@ -93,7 +93,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 const ComponentName = 'Option';
 export default defineComponent({
