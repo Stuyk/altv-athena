@@ -17,15 +17,15 @@
             ]"
             :swapIconSide="true"
             icon="icon-arrow-up"
-            style="width: 100%"
+            class="fill-full-width"
         />
         <template v-if="validity.withdraw">
-            <Button class="mt-4" color="blue" style="width: 100%" @click="action">
+            <Button class="mt-4 fill-full-width" color="blue" @click="action">
                 {{ locales.LABEL_WITHDRAW }}
             </Button>
         </template>
         <template v-else>
-            <Button class="mt-4" color="grey" style="width: 100%" :disable="true">
+            <Button class="mt-4 fill-full-width" color="grey" :disable="true">
                 {{ locales.LABEL_WITHDRAW }}
             </Button>
         </template>
@@ -85,3 +85,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style>
+.fill-full-width {
+    width: 100%;
+}
+</style>

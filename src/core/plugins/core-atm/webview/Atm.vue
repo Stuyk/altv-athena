@@ -30,18 +30,12 @@
             <div class="split mb-6">
                 <template v-for="(color, index) in colors" :key="index">
                     <template v-if="setting === index">
-                        <Button
-                            class="mt-2"
-                            :raise="false"
-                            :color="color"
-                            style="width: 50%"
-                            @click="selectSetting(index)"
-                        >
+                        <Button class="mt-2 button-group" :raise="false" :color="color" @click="selectSetting(index)">
                             {{ locales[labels[index]] }}
                         </Button>
                     </template>
                     <template v-else>
-                        <Button class="mt-2" :color="color" style="width: 50%" @click="selectSetting(index)">
+                        <Button class="mt-2 button-group" :color="color" @click="selectSetting(index)">
                             {{ locales[labels[index]] }}
                         </Button>
                     </template>
@@ -53,29 +47,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-// Global Components
-import Icon from '@components/Icon.vue';
-import Button from '@components/Button.vue';
-import Toolbar from '@components/Toolbar.vue';
-import Frame from '@components/Frame.vue';
-// Local Components
-import Deposit from './components/Deposit.vue';
-import Withdraw from './components/Withdraw.vue';
-import Transfer from './components/Transfer.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import DefaultLocale from './utility/defaultLocale';
 
 export const ComponentName = 'Atm';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Frame,
-        Icon,
-        Toolbar,
-        Deposit,
-        Withdraw,
-        Transfer,
+        Deposit: defineAsyncComponent(() => import('./components/Deposit.vue')),
+        Withdraw: defineAsyncComponent(() => import('./components/Withdraw.vue')),
+        Transfer: defineAsyncComponent(() => import('./components/Transfer.vue')),
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
     },
     props: {
         emit: Function,
@@ -144,7 +129,7 @@ export default defineComponent({
     },
     computed: {
         getBalancerBackground() {
-            return { width: `${this.balancerPercentage}% !important` };
+            return `width: ${this.balancerPercentage}% !important`;
         },
     },
     mounted() {
@@ -201,5 +186,9 @@ export default defineComponent({
     z-index: 99;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.button-group {
+    width: 50%;
 }
 </style>
