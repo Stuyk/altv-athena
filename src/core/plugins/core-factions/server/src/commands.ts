@@ -98,7 +98,7 @@ export class FactionCommands {
         Athena.player.emit.message(player, `Moved to Faction: ${faction.name}`);
     }
 
-    static async invite(player: alt.Player, id: string) {
+    static async invite(player: alt.Player, idOrName: string) {
         const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             Athena.player.emit.message(player, `You are not in a faction.`);
@@ -116,8 +116,15 @@ export class FactionCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
-        if (!target || !target.data || !target.valid || !id || target === player) {
+        let target: alt.Player;
+
+        if (isNaN(parseInt(idOrName))) {
+            target = alt.Player.all.find((x) => x && x.data && x.data.name.includes(idOrName));
+        } else {
+            target = Athena.player.get.findByUid(idOrName);
+        }
+
+        if (!target || !target.data || !target.valid || !idOrName || target === player) {
             Athena.player.emit.message(player, `/finvite [id]`);
             return;
         }
