@@ -6,8 +6,8 @@
     "type": "module",
     "scripts": {
         "[-] Server Deployment Commands (They All Do Different Things)": "",
-        "windows": "yon run plugins:build && yon run build-core && yon run vue-build && yon run athena-streamer & yon run windows-server",
-        "linux": "yon run plugins:build && yon run build-core && yon run vue-build && yon run athena-streamer & yon run linux-server",
+        "windows": "yon run plugins:build && yon run build-core && yon run vue-build && npm-run-all --parallel athena-streamer windows-server",
+        "linux": "yon run plugins:build && yon run build-core && yon run vue-build && npm-run-all --parallel athena-streamer linux-server",
         "devtest": "npm-run-all --parallel athena-streamer athena-devtest",
         "dev": "npm-run-all --parallel vue-dev athena-streamer athena-devmode",
         "[-] Updating, Installing, Cleanup": "",
