@@ -3,10 +3,10 @@ import EFFECT from '../../../../shared/enums/effects';
 import { ItemEffects } from '../../../../server/systems/itemEffects';
 import { VITAL_NAMES } from '../../shared/enums';
 import { Item } from '../../../../shared/interfaces/item';
-import { VitalsSystem } from './system';
 import IAttachable from '../../../../shared/interfaces/iAttachable';
 import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
 import { Athena } from '../../../../server/api/athena';
+import { VitalsSystem } from './system';
 
 export class InternalFunctions {
     /**
