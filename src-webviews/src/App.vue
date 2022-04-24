@@ -70,7 +70,7 @@ This is if you want to design out-of-game and just work on some design.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { PLUGIN_IMPORTS } from '../../src/core/plugins/athena/webview/imports';
+import { PLUGIN_IMPORTS } from '../../resources/core/plugins/athena/webview/imports';
 import DefaultPages from './defaultPage';
 
 // Interfaces

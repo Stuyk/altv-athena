@@ -28,22 +28,6 @@ function getEnabledPlugins() {
     });
 }
 
-function cleanupPluginsFolder() {
-    const pluginsFolder = sanitizePath(path.join(process.cwd(), 'resources/core/plugins'));
-
-    if (!fs.existsSync(pluginsFolder)) {
-        return;
-    }
-
-    const plugins = fs.readdirSync(pluginsFolder);
-
-    for (const plugin of plugins) {
-        if (plugin === 'athena') continue;
-
-        fs.rmSync(sanitizePath(path.join(pluginsFolder, plugin)), { recursive: true, force: true });
-    }
-}
-
 function copyPluginFiles(pluginName) {
     const pluginsFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
 
@@ -55,18 +39,6 @@ function copyPluginFiles(pluginName) {
     const hasWebviewFiles = fs.existsSync(sanitizePath(path.join(pluginsFolder, 'webview')));
 
     const destPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins', pluginName));
-
-    if (hasClientFiles) {
-        fs.copySync(sanitizePath(path.join(pluginsFolder, 'client')), sanitizePath(path.join(destPath, 'client')));
-    }
-
-    if (hasServerFiles) {
-        fs.copySync(sanitizePath(path.join(pluginsFolder, 'server')), sanitizePath(path.join(destPath, 'server')));
-    }
-
-    if (hasSharedFiles) {
-        fs.copySync(sanitizePath(path.join(pluginsFolder, 'shared')), sanitizePath(path.join(destPath, 'shared')));
-    }
 
     if (hasWebviewFiles) {
         fs.copySync(sanitizePath(path.join(pluginsFolder, 'webview')), sanitizePath(path.join(destPath, 'webview')));
@@ -93,8 +65,8 @@ function writeServerImports(plugins) {
 
     content = content + `\n\nPluginSystem.init();\n`
 
-    const importPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/athena/server/imports.ts'));
-    fs.writeFileSync(importPath, content, { overwrite: true });
+    const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/server/imports.js'));
+    fs.outputFileSync(importPath, content);
 }
 
 function writeClientImports(plugins) {
@@ -106,8 +78,8 @@ function writeClientImports(plugins) {
         return `import '../../${pluginName}/client';`;
     }).join('\n');
 
-    const importPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/athena/client/imports.ts'));
-    fs.writeFileSync(importPath, content, { overwrite: true });
+    const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/client/imports.js'));
+    fs.outputFileSync(importPath, content + '\n');
 }
 
 function writeWebviewPlugins(plugins) {
@@ -141,16 +113,16 @@ function writeWebviewPlugins(plugins) {
         + '\n};\n';
 
 
-    const importPath = sanitizePath(path.join(process.cwd(), 'src/core/plugins/athena/webview/imports.ts'));
-    fs.writeFileSync(importPath, content, { overwrite: true });
+    const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/webview/imports.js'));
+    fs.outputFileSync(importPath, content);
+
+    fs.rm(sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/webview/imports.ts')), { force: true });
 
     return Object.keys(vueFiles).length;
 }
 
 function run() {
     const enabledPlugins = getEnabledPlugins();
-
-    cleanupPluginsFolder();
 
     const clientImports = [];
     const serverImports = [];
