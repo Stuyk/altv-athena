@@ -16,7 +16,7 @@
             </div>
             <div class="split full-split space-between">
                 <div class="panel mb-4 mr-2 pa-4">
-                    <template v-if="bankAdd && faction.bank >= 1 && isValid">
+                    <template v-if="bankRemove && faction.bank >= 1 && isValid">
                         <Button class="bank-button" color="red" @click="withdraw">Withdraw</Button>
                     </template>
                     <template v-else>
@@ -24,7 +24,7 @@
                     </template>
                 </div>
                 <div class="panel mb-4 ml-2 pa-4">
-                    <template v-if="bankRemove && money >= 1 && isValid">
+                    <template v-if="bankAdd && money >= 1 && isValid">
                         <Button class="bank-button" color="blue" @click="deposit">Deposit</Button>
                     </template>
                     <template v-else>
