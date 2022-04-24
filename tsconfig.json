@@ -13,16 +13,16 @@
         "jsx": "preserve"
     },
     "exclude": [
-        "./resources",
-        "./scripts",
-        "./altv-athena-cache",
-        "./athena-cache",
-        "./node_modules",
-        "./cache",
-        "./crashdumps",
-        "./data",
-        "./doc",
-        "./modules",
-        "./screenshots"
+        "resources",
+        "scripts",
+        "altv-athena-cache",
+        "athena-cache",
+        "node_modules",
+        "cache",
+        "crashdumps",
+        "data",
+        "doc",
+        "modules",
+        "screenshots"
     ]
 }
