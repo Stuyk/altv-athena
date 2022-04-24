@@ -65,7 +65,7 @@ function getFilesForTranspilation(enabledPlugins) {
         const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), {
             nodir: true,
             ignore: [
-                "**/webview/**",
+                "**/imports.ts",
             ]
         });
 
