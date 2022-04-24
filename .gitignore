@@ -33,6 +33,7 @@ package-lock.json
 
 # Plugin stuff
 /scripts/buildresource/*.json
+./src-webviews/src/plugins/imports.ts
 
 # Yarn stuff
 .yarn/
