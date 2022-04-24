@@ -41,14 +41,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import Icon from '@components/Icon.vue';
 
 const ComponentName = 'Speedo';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Icon,
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
     },
     props: {
         speed: {

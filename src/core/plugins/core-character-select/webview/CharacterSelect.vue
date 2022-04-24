@@ -94,27 +94,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { EXAMPLE_CHARACTER } from './utility/exampleCharacter';
 import { CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
 import { CHARACTER_SELECT_LOCALE } from '../shared/locale';
 
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Modal from '@components/Modal.vue';
-import Toolbar from '@components/Toolbar.vue';
-import Frame from '@components/Frame.vue';
 import { CHARACTER_SELECT_CONFIG } from '../shared/config';
 
 const ComponentName = 'CharacterSelect';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Icon,
-        Modal,
-        Toolbar,
-        Frame,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
     },
     data() {
         return {

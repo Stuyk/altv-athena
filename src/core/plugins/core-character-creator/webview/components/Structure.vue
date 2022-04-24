@@ -26,21 +26,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Module from '@components/Module.vue';
-import RangeInput from '@components/RangeInput.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 const ComponentName = 'Structure';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Icon,
-        Module,
-        RangeInput,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
     },
     props: {
         data: Object,

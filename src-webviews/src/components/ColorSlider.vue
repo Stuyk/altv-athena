@@ -11,7 +11,7 @@
             :indexValue="r"
             :increment="1"
             :enableAudio="false"
-            style="width: 100%"
+            class="fill-full-width"
         />
         <br />
         <RangeInput
@@ -21,7 +21,7 @@
             :indexValue="g"
             :increment="1"
             :enableAudio="false"
-            style="width: 100%"
+            class="fill-full-width"
         />
         <br />
         <RangeInput
@@ -31,7 +31,7 @@
             :indexValue="b"
             :increment="1"
             :enableAudio="false"
-            style="width: 100%"
+            class="fill-full-width"
         />
     </div>
 </template>
@@ -129,5 +129,9 @@ export default defineComponent({
     box-sizing: border-box;
     margin: 6px;
     display: flex;
+}
+
+.fill-full-width {
+    width: 100%;
 }
 </style>

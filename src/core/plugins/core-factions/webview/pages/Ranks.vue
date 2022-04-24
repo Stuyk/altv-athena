@@ -90,18 +90,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Modal from '@components/Modal.vue';
-import Frame from '@components/Frame.vue';
-import Toolbar from '@components/Toolbar.vue';
-
-// Local Components
-import EditRank from './ranks/EditRank.vue';
-import DeleteRank from './ranks/DeleteRank.vue';
-import AddRank from './ranks/AddRank.vue';
-import ManageRank from './ranks/ManageRank.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
@@ -116,15 +105,17 @@ export default defineComponent({
         character: String,
     },
     components: {
-        Button,
-        Icon,
-        Modal,
-        Frame,
-        Toolbar,
-        EditRank,
-        DeleteRank,
-        AddRank,
-        ManageRank,
+        // Global Components
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
+        // Local Components
+        EditRank: defineAsyncComponent(() => import('./ranks/EditRank.vue')),
+        DeleteRank: defineAsyncComponent(() => import('./ranks/DeleteRank.vue')),
+        AddRank: defineAsyncComponent(() => import('./ranks/AddRank.vue')),
+        ManageRank: defineAsyncComponent(() => import('./ranks/ManageRank.vue')),
     },
     data() {
         return {

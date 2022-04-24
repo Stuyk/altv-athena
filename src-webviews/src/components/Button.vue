@@ -10,13 +10,13 @@
         <div class="help" v-if="help">
             {{ help }}
         </div>
-        <div style="user-select: none !important; pointer-events: none !important">
+        <div class="no-select">
             <slot />
         </div>
     </div>
     <div class="button-mock" :class="dynamicClass" :style="style" v-else>
         <div class="help" v-if="help">{{ help }}</div>
-        <div style="user-select: none !important; pointer-events: none !important">
+        <div class="no-select">
             <slot />
         </div>
     </div>
@@ -161,5 +161,10 @@ export default defineComponent({
     z-index: 99;
     text-shadow: unset !important;
     border-radius: 6px;
+}
+
+.no-select {
+    user-select: none !important;
+    pointer-events: none !important;
 }
 </style>

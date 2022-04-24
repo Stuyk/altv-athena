@@ -47,34 +47,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { iPaintshopSync } from '../shared/interfaces';
 import { PAINTSHOP_LOCALE } from '../shared/locales';
-// Global Components
-import Button from '@components/Button.vue';
-import Frame from '@components/Frame.vue';
-import Icon from '@components/Icon.vue';
-import Input from '@components/Input.vue';
-import Modal from '@components/Modal.vue';
-import Module from '@components/Module.vue';
-import RangeInput from '@components/RangeInput.vue';
-import Toolbar from '@components/Toolbar.vue';
-// Local Components
+
 import Pages from './components/exports';
 
 const ComponentName = 'PaintShop';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Frame,
-        Icon,
-        Input,
-        Modal,
-        Module,
-        RangeInput,
-        Toolbar,
-        ...Pages,
+        // Global Components
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Input: defineAsyncComponent(() => import('@components/Input.vue')),
+        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
+        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
+        // Local Components
+        CustomColor: defineAsyncComponent(() => import('./components/CustomColor.vue')),
+        Presets: defineAsyncComponent(() => import('./components/Presets.vue')),
     },
     data() {
         return {

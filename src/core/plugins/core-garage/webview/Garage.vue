@@ -39,11 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Icon from '@components/Icon.vue';
-import Button from '@components/Button.vue';
-import Toolbar from '@components/Toolbar.vue';
-import Frame from '@components/Frame.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import DefaultLocale from './utility/defaultLocale';
 import TestData from './utility/testData';
 import ResolvePath from '@utility/pathResolver';
@@ -52,10 +48,10 @@ export const ComponentName = 'Garage';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Frame,
-        Icon,
-        Toolbar,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
     },
     props: {
         emit: Function,

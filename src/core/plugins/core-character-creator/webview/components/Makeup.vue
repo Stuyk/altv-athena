@@ -92,13 +92,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import MakeupList from '../utility/makeupList';
-
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Module from '@components/Module.vue';
-import RangeInput from '@components/RangeInput.vue';
 
 const ComponentName = 'Makeup';
 export default defineComponent({
@@ -108,10 +103,10 @@ export default defineComponent({
         locales: Object,
     },
     components: {
-        Button,
-        Icon,
-        Module,
-        RangeInput,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
     },
     data() {
         return {

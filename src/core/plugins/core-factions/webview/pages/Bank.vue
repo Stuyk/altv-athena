@@ -37,10 +37,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { Faction } from '../../shared/interfaces';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
 
 import { FactionParser } from '../utility/factionParser';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
@@ -55,8 +53,8 @@ export default defineComponent({
         money: Number,
     },
     components: {
-        Button,
-        Icon,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
     },
     data() {
         return {

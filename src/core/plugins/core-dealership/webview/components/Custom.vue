@@ -46,18 +46,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Icon from '@components/Icon.vue';
-import Button from '@components/Button.vue';
-import SimpleInput from '@components/SimpleInput.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
+
 import { DEALERSHIP_LOCALE } from '../../shared/locale';
 
 export default defineComponent({
     name: 'Preview',
     components: {
-        Button,
-        Icon,
-        SimpleInput,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        SimpleInput: defineAsyncComponent(() => import('@components/SimpleInput.vue')),
     },
     props: {
         money: {
