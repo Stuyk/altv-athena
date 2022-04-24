@@ -29,19 +29,20 @@ function getEnabledPlugins() {
 }
 
 function copyPluginFiles(pluginName) {
-    const pluginsFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
+    const pluginFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
 
-    const files = glob.sync(sanitizePath(path.join(pluginsFolder, '@(client|server)/index.ts')));
+    const files = glob.sync(sanitizePath(path.join(pluginFolder, '@(client|server)/index.ts')));
 
     const hasClientFiles = !!files.find(file => file.includes('client/index.ts'));
     const hasServerFiles = !!files.find(file => file.includes('server/index.ts'));
-    const hasSharedFiles = fs.existsSync(sanitizePath(path.join(pluginsFolder, 'shared')));
-    const hasWebviewFiles = fs.existsSync(sanitizePath(path.join(pluginsFolder, 'webview')));
+    const hasSharedFiles = fs.existsSync(sanitizePath(path.join(pluginFolder, 'shared')));
+    const hasWebviewFiles = fs.existsSync(sanitizePath(path.join(pluginFolder, 'webview')));
 
     const destPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins', pluginName));
 
     if (hasWebviewFiles) {
-        fs.copySync(sanitizePath(path.join(pluginsFolder, 'webview')), sanitizePath(path.join(destPath, 'webview')));
+        fs.copySync(sanitizePath(path.join(pluginFolder, 'webview')), sanitizePath(path.join(destPath, 'webview')));
+        fs.rm(sanitizePath(path.join(destPath, 'webview/imports.ts')), { force: true });
     }
 
     return {
@@ -115,8 +116,6 @@ function writeWebviewPlugins(plugins) {
 
     const importPath = sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/webview/imports.js'));
     fs.outputFileSync(importPath, content);
-
-    fs.rm(sanitizePath(path.join(process.cwd(), 'resources/core/plugins/athena/webview/imports.ts')), { force: true });
 
     return Object.keys(vueFiles).length;
 }
