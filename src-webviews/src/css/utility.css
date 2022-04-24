@@ -731,3 +731,7 @@
 .fill-full-width {
     width: 100%;
 }
+
+.fill-half-width {
+    width: 50%;
+}

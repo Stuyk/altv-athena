@@ -55,17 +55,17 @@
                         class="mb-3"
                     />
                     <div class="split split-full">
-                        <Button class="mt-2" color="red" style="width: 50%" @click="togglePurchaseInterface(false)">
+                        <Button class="mt-2 fill-half-width" color="red" @click="togglePurchaseInterface(false)">
                             {{ getLocaleByName('LABEL_CANCEL') }}
                         </Button>
 
                         <template v-if="allValid">
-                            <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="purchaseComponent">
+                            <Button class="ml-4 mt-2 fill-half-width" color="green" @click="purchaseComponent">
                                 {{ getLocaleByName('LABEL_PURCHASE') }}
                             </Button>
                         </template>
                         <template v-else>
-                            <Button class="ml-4 mt-2" color="grey" :disable="true" style="width: 50%">
+                            <Button class="ml-4 mt-2 fill-half-width" color="grey" :disable="true">
                                 {{ getLocaleByName('LABEL_PURCHASE') }}
                             </Button>
                         </template>

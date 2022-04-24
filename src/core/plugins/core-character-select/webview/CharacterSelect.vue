@@ -15,10 +15,10 @@
                         {{ characters[characterIndex].name }}
                     </div>
                     <div class="split split-full">
-                        <Button class="mt-2" color="red" style="width: 50%" @click="hideDeleteInterface">
+                        <Button class="mt-2 fill-half-width" color="red" @click="hideDeleteInterface">
                             {{ locales.LABEL_NO }}
                         </Button>
-                        <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="deleteCharacter">
+                        <Button class="ml-4 mt-2 fill-half-width" color="green" @click="deleteCharacter">
                             {{ locales.LABEL_YES }}
                         </Button>
                     </div>
@@ -27,7 +27,7 @@
         </Modal>
         <div class="stats pl-2 pr-2 pt-2 pb-2">
             <!-- Top Buttons -->
-            <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box">
+            <div class="split split-center mb-6 fill-full-width" style="box-sizing: border-box">
                 <Button color="blue" @click="decrementIndex">
                     <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
                 </Button>

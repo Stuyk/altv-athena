@@ -15,8 +15,7 @@
                         :increment="1"
                         :values="getLocale(option.id).labels"
                         @input="(e) => setValueWrap(e, i)"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, option.min, option.max, 1)">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -35,8 +34,7 @@
                         :indexValue="data.opacityOverlays[i].opacity"
                         :increment="0.1"
                         @input="(e) => setValueWrap(e, i, true)"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, 0, 1, 0.1, true)">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>

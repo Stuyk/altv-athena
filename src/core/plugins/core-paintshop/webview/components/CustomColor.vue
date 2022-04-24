@@ -12,8 +12,7 @@
             <Module :name="locale.PRIMARY_FINISH">
                 <div class="finishes">
                     <Button
-                        style="width: 100%"
-                        class="finish"
+                        class="finish fill-full-width"
                         v-for="(finish, index) in getFinishes"
                         :color="finish1 === finish.value ? 'green' : 'blue-grey'"
                         :key="index"
@@ -27,8 +26,7 @@
             <Module :name="locale.SECONDARY_FINISH">
                 <div class="finishes">
                     <Button
-                        style="width: 100%"
-                        class="finish"
+                        class="finish fill-full-width"
                         v-for="(finish, index) in getFinishes"
                         :color="finish2 === finish.value ? 'green' : 'blue-grey'"
                         :key="index"
@@ -48,7 +46,7 @@
                         :indexValue="pearl"
                         :increment="1"
                         @input="(e) => setPearl(e)"
-                        style="width: 100%"
+                        class="fill-full-width"
                     />
                 </div>
             </Module>

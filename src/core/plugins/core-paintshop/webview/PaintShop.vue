@@ -2,20 +2,10 @@
     <div class="paint-shop-wrapper pl-2">
         <div class="stack">
             <div class="split split-full space-between mt-2">
-                <Button
-                    class="mr-2"
-                    style="width: 100%"
-                    :color="pageIndex === 0 ? 'orange' : 'blue'"
-                    @click="setPage(0)"
-                >
+                <Button class="mr-2 fill-full-width" :color="pageIndex === 0 ? 'orange' : 'blue'" @click="setPage(0)">
                     {{ locale.PRESETS }}
                 </Button>
-                <Button
-                    class="mr-2"
-                    style="width: 100%"
-                    :color="pageIndex === 1 ? 'orange' : 'blue'"
-                    @click="setPage(1)"
-                >
+                <Button class="mr-2 fill-full-width" :color="pageIndex === 1 ? 'orange' : 'blue'" @click="setPage(1)">
                     {{ locale.CUSTOM }}
                 </Button>
             </div>
@@ -32,13 +22,13 @@
                 ></component>
             </div>
             <div class="split">
-                <Button style="width: 100%" color="red" class="mt-4 mr-2" @click="exit">
+                <Button color="red" class="mt-4 mr-2 fill-full-width" @click="exit">
                     {{ locale.EXIT }}
                 </Button>
-                <Button style="width: 100%" color="yellow" class="mt-4 mr-2" @click="nextCam">
+                <Button color="yellow" class="mt-4 mr-2 fill-full-width" @click="nextCam">
                     {{ locale.CAMERA }}
                 </Button>
-                <Button style="width: 100%" color="green" class="mt-4 mr-2" @click="purchase">
+                <Button color="green" class="mt-4 mr-2 fill-full-width" @click="purchase">
                     {{ locale.BUY }}
                 </Button>
             </div>

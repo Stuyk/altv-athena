@@ -14,8 +14,7 @@
                     :indexValue="data.structure[index]"
                     :increment="0.1"
                     @input="(e) => setValueWrap(e, 'structure', index)"
-                    style="width: 100%"
-                    class="pl-3 pr-3"
+                    class="pl-3 pr-3 fill-full-width"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'structure', -1, 1, 0.1, index)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>

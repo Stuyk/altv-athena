@@ -33,8 +33,7 @@
                             $emit('force-populate');
                         }
                     "
-                    style="width: 100%"
-                    class="pl-3 pr-3"
+                    class="pl-3 pr-3 fill-full-width"
                     :key="update"
                 />
                 <Button
@@ -73,8 +72,7 @@
                                 $emit('update-component', index, 'textures', parseInt(e.target['value']));
                             }
                         "
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button
                         color="blue"

@@ -132,12 +132,8 @@
             <Button color="amber" :raise="true" @click="verifyName">Verify Name</Button>
         </div>
         <div class="split split-full space-between center mt-8 pb-4" v-if="isAllValid() && valid?.first && valid.last">
-            <Button class="mr-2" color="amber" style="width: 100% !important" :raise="true" @click="verifyName"
-                >Verify Name</Button
-            >
-            <Button class="ml-2" color="green" style="width: 100% !important" :raise="true" @click="save"
-                >Finish</Button
-            >
+            <Button class="mr-2 fill-full-width" color="amber" :raise="true" @click="verifyName">Verify Name</Button>
+            <Button class="ml-2 fill-full-width" color="green" :raise="true" @click="save">Finish</Button>
         </div>
     </div>
 </template>

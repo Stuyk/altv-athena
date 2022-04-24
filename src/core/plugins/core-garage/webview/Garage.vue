@@ -24,10 +24,10 @@
                         </div>
                         <!-- Vehicle Controls -->
                         <div class="split split-full">
-                            <Button class="mt-2" color="green" @click="spawn(index)" style="width: 100%">
+                            <Button class="mt-2 fill-full-width" color="green" @click="spawn(index)">
                                 {{ locales.LABEL_SPAWN }}
                             </Button>
-                            <Button class="mt-2" color="red" @click="despawn(index)" style="width: 100%">
+                            <Button class="mt-2 fill-full-width" color="red" @click="despawn(index)">
                                 {{ locales.LABEL_DESPAWN }}
                             </Button>
                         </div>

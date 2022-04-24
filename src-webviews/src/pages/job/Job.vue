@@ -9,10 +9,10 @@
             </div>
             <p class="body-2" v-html="getSummary"></p>
             <div class="split space-between split-full pt-4">
-                <Button color="red" class="mr-2" style="width: 100%" @click="close">
+                <Button color="red" class="mr-2 fill-full-width" @click="close">
                     {{ locales.LABEL_DECLINE }}
                 </Button>
-                <Button color="green" class="ml-2" style="width: 100%" @click="select">
+                <Button color="green" class="ml-2 fill-full-width" @click="select">
                     {{ locales.LABEL_ACCEPT }}
                 </Button>
             </div>

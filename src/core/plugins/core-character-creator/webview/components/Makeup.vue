@@ -15,8 +15,7 @@
                         :increment="1"
                         :values="getLocale(option.id).labels"
                         @input="(e) => setValueWrap(e, i, 'value')"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, option.min, option.max, 1, 'value')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -35,8 +34,7 @@
                         :indexValue="data.colorOverlays[i].opacity"
                         :increment="0.1"
                         @input="(e) => setValueWrap(e, i, 'opacity')"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, 0, 1, 0.1, 'opacity')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -56,8 +54,7 @@
                         :increment="1"
                         :values="locales.color.overlays"
                         @input="(e) => setValueWrap(e, i, 'color1')"
-                        style="width: 100%"
-                        class="pl-3 pr-3"
+                        class="pl-3 pr-3 fill-full-width"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, 0, getOverlayColorCount(), 1, 'color1')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -78,8 +75,7 @@
                             :increment="1"
                             :values="locales.color.overlays"
                             @input="(e) => setValueWrap(e, i, 'color2')"
-                            style="width: 100%"
-                            class="pl-3 pr-3"
+                            class="pl-3 pr-3 fill-full-width"
                         />
                         <Button color="blue" @click="(e) => incValueWrap(i, 0, getOverlayColorCount(), 1, 'color2')">
                             <Icon :size="14" icon="icon-chevron-right"></Icon>

@@ -5,10 +5,10 @@
         </div>
         <div class="stack pl-2 pr-2 dealership-options">
             <div class="split space-between">
-                <Button class="mr-2" style="width: 100%" color="red" @click="exit">
+                <Button class="mr-2 fill-full-width" color="red" @click="exit">
                     {{ LOCALE.EXIT }}
                 </Button>
-                <Button style="width: 100%" color="orange" @click="camera">
+                <Button class="fill-full-width" color="orange" @click="camera">
                     {{ LOCALE.CAMERA }}
                 </Button>
             </div>
@@ -28,10 +28,10 @@
                         </span>
                     </div>
                     <div class="split space-between">
-                        <Button class="mr-2" style="width: 100%" color="blue" @click="() => preview(vehicle)">
+                        <Button class="mr-2 fill-full-width" color="blue" @click="() => preview(vehicle)">
                             {{ LOCALE.PREVIEW }}
                         </Button>
-                        <Button style="width: 100%" color="blue" @click="() => selectVehicle(vehicle)">
+                        <Button class="fill-full-width" color="blue" @click="() => selectVehicle(vehicle)">
                             {{ LOCALE.SELECT }}
                         </Button>
                     </div>
