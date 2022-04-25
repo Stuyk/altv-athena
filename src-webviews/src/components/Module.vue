@@ -1,6 +1,6 @@
 <template>
     <div class="stack" :class="getClass" :style="getStyle">
-        <div :class="getSplitClass" style="width: 100%">
+        <div :class="getSplitClass" class="fill-full-width">
             <template v-if="buttonLeftSide">
                 <Button class="mr-2" :color="!show ? 'blue' : 'amber'" @click="show = !show">
                     <Icon :size="14" :icon="show ? 'icon-minus' : 'icon-plus'"></Icon>
@@ -120,5 +120,9 @@ export default defineComponent({
 .module-text {
     display: flex;
     align-items: center;
+}
+
+.fill-full-width {
+    width: 100%;
 }
 </style>

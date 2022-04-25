@@ -293,7 +293,7 @@ export class FactionFuncs {
         await Database.updatePartialData(
             character._id.toString(),
             { faction: faction._id.toString() },
-            FACTION_COLLECTION,
+            Athena.database.collections.Characters,
         );
 
         const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
@@ -385,20 +385,20 @@ export class FactionFuncs {
             return b.weight - a.weight;
         });
 
-        const orderedRankIndex = faction.ranks.findIndex((x) => x.uid === faction.ranks[index].uid);
+        const orderedRankIndex = orderedRanks.findIndex((x) => x.uid === orderedRanks[index].uid);
         let replacementRank: FactionRank;
 
         // What does this mean?
         // It means that if the orderedRankIndex is the LAST element in the array.
         // We know that the only option is to go up the array for the next weight.
         // Thus resulting in the rank we need.
-        if (orderedRankIndex === faction.ranks.length - 1) {
-            replacementRank = faction.ranks[faction.ranks.length - 2];
+        if (orderedRankIndex === orderedRanks.length - 1) {
+            replacementRank = orderedRanks[orderedRanks.length - 2];
         } else {
             // Now if it's NOT the last element in the array.
             // We need to increase the orderedRankIndex by 1.
             // Since it's ordered that means the smallest weight is in the back.
-            replacementRank = faction.ranks[orderedRankIndex + 1];
+            replacementRank = orderedRanks[orderedRankIndex + 1];
         }
 
         const removedRank = faction.ranks.splice(index, 1)[0];

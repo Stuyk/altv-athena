@@ -41,23 +41,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Modal from '@components/Modal.vue';
-import Frame from '@components/Frame.vue';
-import Toolbar from '@components/Toolbar.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { FactionRank } from '../../../shared/interfaces';
 
 const ComponentName = 'ManageRank';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Icon,
-        Modal,
-        Frame,
-        Toolbar,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
     },
     props: {
         rank: {

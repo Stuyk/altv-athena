@@ -25,20 +25,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { VehicleInfo } from '../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_WEBVIEW_EVENTS } from '../shared/events';
 import { VehicleData } from '../../../shared/information/vehicles';
 import { VEHICLE_CLASS } from '../../../shared/enums/vehicleTypeFlags';
-import Preview from './components/Preview.vue';
-import Custom from './components/Custom.vue';
 
 export const ComponentName = 'Dealership';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Preview,
-        Custom,
+        Preview: defineAsyncComponent(() => import('./components/Preview.vue')),
+        Custom: defineAsyncComponent(() => import('./components/Custom.vue')),
     },
     data() {
         return {

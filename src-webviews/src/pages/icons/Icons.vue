@@ -15,7 +15,7 @@ Helpful for seeing what default components look like.
                 :onInput="searchTerm"
                 :value="userInput"
                 :rules="[]"
-                style="width: 100%"
+                class="fill-full-width"
                 placeholder="Search icon..."
             />
         </div>

@@ -23,15 +23,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-// Global Components
-import Icon from '@components/Icon.vue';
-import Button from '@components/Button.vue';
-// Local Components
-import Navigation from './components/Navigation.vue';
-import Header from './components/Header.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
+
 import { ExampleFactionData } from './utility/exampleFactionData';
-import { FactionPages } from './pages/exports';
 import { Faction } from '../shared/interfaces';
 import { FACTION_EVENTS } from '../shared/factionEvents';
 
@@ -39,11 +33,18 @@ export const ComponentName = 'Factions';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Icon,
-        Navigation,
-        Header,
-        ...FactionPages,
+        // Global Components
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        // Local Components
+        Navigation: defineAsyncComponent(() => import('./components/Navigation.vue')),
+        Header: defineAsyncComponent(() => import('./components/Header.vue')),
+        Actions: defineAsyncComponent(() => import('./pages/Actions.vue')),
+        Bank: defineAsyncComponent(() => import('./pages/Bank.vue')),
+        Members: defineAsyncComponent(() => import('./pages/Members.vue')),
+        Ranks: defineAsyncComponent(() => import('./pages/Ranks.vue')),
+        Settings: defineAsyncComponent(() => import('./pages/Settings.vue')),
+        Vehicles: defineAsyncComponent(() => import('./pages/Vehicles.vue')),
     },
     props: {
         emit: Function,

@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/item';
 
 type EffectCallback = (player: alt.Player, item: Item, slot: number, inventoryType: string) => void;
