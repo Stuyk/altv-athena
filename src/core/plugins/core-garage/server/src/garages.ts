@@ -18,3 +18,4 @@ import '../garages/SandyShores';
 import '../garages/TongvaHills';
 
 // Register new garages here.
+import '../garages/Cardealer';
