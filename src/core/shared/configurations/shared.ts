@@ -1,6 +1,6 @@
 export const SHARED_CONFIG = {
     // Default Respawn Time for Player
-    RESPAWN_TIME: 25000,
+    RESPAWN_TIME: 500,
     // PLAYERS
     FORCE_SCREEN_SHAKE: true, // Used to shake the player's screen. Makes most aimbots a hell of a lot worse.
     // FOOD & WATER
