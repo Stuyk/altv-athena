@@ -36,6 +36,14 @@ const dealerships: Array<IDealership> = [
         pos: { x: -52.828433990478516, y: -1097.793701171875, z: 25.6 },
         vehicles: VehicleData.filter((x) => x.class === VEHICLE_CLASS.SEDAN && x.sell),
     },
+    {
+        uid: 'emergency-1',
+        name: 'Emergency Cars',
+        vehiclePosition: { x: -43.83578109741211, y: -1097.210693359375, z: 25.6 },
+        cam: { x: -45.301246643066406, y: -1100.4744873046875, z: 25.6 },
+        pos: { x: -34.32527160644531, y: -1103.103271484375, z: 25.6 },
+        vehicles: VehicleData.filter((x) => x.class === VEHICLE_CLASS.EMERGENCY && x.sell),
+    },
 ];
 
 export class DefaultDealerships {
