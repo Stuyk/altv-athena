@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
+import { playerFuncs } from '../extensions/extPlayer';
+
 export default class SystemRules {
     /**
      * Verifies Rules for all System Types
@@ -26,7 +27,7 @@ export default class SystemRules {
             const isEmptyResponse = result.response !== '' && result.response !== null ? false : true;
 
             if (args[0] instanceof alt.Player && !result.status && !isEmptyResponse) {
-                Athena.player.emit.message(args[0], result.response);
+                playerFuncs.emit.message(args[0], result.response);
             }
 
             if (!result.status) {

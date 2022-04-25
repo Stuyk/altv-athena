@@ -49,7 +49,7 @@ export default defineComponent({
         },
         onInput: {
             type: Function,
-            required: false,
+            required: true,
         },
         label: {
             type: String,

@@ -6,7 +6,7 @@ import { Item } from '../../shared/interfaces/item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { Athena } from '../api/athena';
+import { playerFuncs } from '../extensions/extPlayer';
 import { ItemEffects } from './itemEffects';
 
 export class ToolbarController {
@@ -21,9 +21,9 @@ export class ToolbarController {
             return;
         }
 
-        const item = Athena.player.inventory.getToolbarItem(player, slot);
+        const item = playerFuncs.inventory.getToolbarItem(player, slot);
         if (!item) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_NOT_EQUIPPED));
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_NOT_EQUIPPED));
             return;
         }
 
@@ -58,7 +58,7 @@ export class ToolbarController {
         player.removeAllWeapons();
 
         if (!item.data.hash) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.WEAPON_NO_HASH));
+            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.WEAPON_NO_HASH));
             return;
         }
 
@@ -66,7 +66,7 @@ export class ToolbarController {
         if (!player.lastToolbarData) {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
-            Athena.player.emit.sound3D(player, 'item_equip', player);
+            playerFuncs.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
@@ -74,7 +74,7 @@ export class ToolbarController {
         if (player.lastToolbarData.slot !== item.slot) {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
-            Athena.player.emit.sound3D(player, 'item_equip', player);
+            playerFuncs.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
@@ -82,13 +82,13 @@ export class ToolbarController {
         if (!player.lastToolbarData.equipped) {
             player.giveWeapon(item.data.hash, 9999, true);
             player.lastToolbarData.equipped = true;
-            Athena.player.emit.sound3D(player, 'item_equip', player);
+            playerFuncs.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
         player.lastToolbarData.equipped = false;
-        Athena.player.emit.sound3D(player, 'item_remove', player);
+        playerFuncs.emit.sound3D(player, 'item_remove', player);
     }
 
     /**
@@ -103,18 +103,18 @@ export class ToolbarController {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {
-                Athena.player.inventory.toolbarRemove(player, item.slot);
+                playerFuncs.inventory.toolbarRemove(player, item.slot);
             } else {
-                Athena.player.inventory.replaceToolbarItem(player, item);
+                playerFuncs.inventory.replaceToolbarItem(player, item);
             }
 
-            Athena.player.sync.inventory(player);
-            Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+            playerFuncs.sync.inventory(player);
+            playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
         }
 
         if (item.data && item.data.event) {
             ItemEffects.invoke(player, item, INVENTORY_TYPE.TOOLBAR);
-            Athena.player.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
+            playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }
 }

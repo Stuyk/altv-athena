@@ -52,6 +52,7 @@ import './systems/tasks';
 import './systems/tick';
 import './systems/toolbar';
 import './systems/vehicle';
+import './systems/world';
 
 // Utility
 import './utility/cinematic';

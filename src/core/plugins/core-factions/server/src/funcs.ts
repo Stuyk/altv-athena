@@ -9,8 +9,6 @@ import { VehicleSystem } from '../../../../server/systems/vehicle';
 import { VEHICLE_RULES } from '../../../../shared/enums/vehicleRules';
 import { IResponse } from '../../../../shared/interfaces/iResponse';
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
-import { FACTION_EVENTS } from '../../shared/factionEvents';
-import { Athena } from '../../../../server/api/athena';
 
 let hasInitialized = false;
 
@@ -45,22 +43,6 @@ export class FactionFuncs {
         VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
-    }
-
-    /**
-     * Handle refreshing the faction information.
-     *
-     * @static
-     * @param {Faction} faction
-     * @memberof FactionFuncs
-     */
-    static updateMembers(faction: Faction) {
-        const memberIdentifiers = Object.keys(faction.members);
-        const members = alt.Player.all.filter(
-            (p) => p && p.valid && p.data && memberIdentifiers.includes(p.data._id.toString()),
-        );
-
-        alt.emitClient(members, FACTION_EVENTS.PROTOCOL.REFRESH, faction);
     }
 
     /**
@@ -194,10 +176,6 @@ export class FactionFuncs {
 
         faction.bank += amount;
         const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -220,10 +198,6 @@ export class FactionFuncs {
 
         faction.bank -= amount;
         const didUpdate = await FactionHandler.update(faction._id as string, { bank: faction.bank });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -239,22 +213,8 @@ export class FactionFuncs {
      * @memberof FactionFuncs
      */
     static async setCharacterRank(faction: Faction, characterID: string, newRank: string): Promise<boolean> {
-        const rankIndex = faction.ranks.findIndex((x) => x.uid === newRank);
-        if (rankIndex <= -1) {
-            return false;
-        }
-
-        if (faction.ranks[rankIndex].weight >= 99) {
-            return false;
-        }
-
         faction.members[characterID].rank = newRank;
-
         const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -275,14 +235,6 @@ export class FactionFuncs {
             return false;
         }
 
-        const onlinePlayer = alt.Player.all.find(
-            (x) => x && x.valid && x.data && x.data._id.toString() === characterID,
-        );
-
-        if (onlinePlayer) {
-            onlinePlayer.data.faction = faction._id.toString();
-        }
-
         faction.members[characterID] = {
             id: characterID,
             name: character.name,
@@ -293,14 +245,10 @@ export class FactionFuncs {
         await Database.updatePartialData(
             character._id.toString(),
             { faction: faction._id.toString() },
-            Athena.database.collections.Characters,
+            FACTION_COLLECTION,
         );
 
         const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -322,10 +270,6 @@ export class FactionFuncs {
 
         delete faction.members[characterID];
         const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -348,10 +292,6 @@ export class FactionFuncs {
 
         faction.ranks[index].name = newName;
         const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -367,12 +307,6 @@ export class FactionFuncs {
      */
     static async removeRank(faction: Faction, rankUid: string): Promise<boolean> {
         const index = faction.ranks.findIndex((r) => r.uid === rankUid);
-
-        // Do not allow less than two ranks at any given time.
-        if (faction.ranks.length <= 2) {
-            return false;
-        }
-
         if (index <= -1) {
             return false;
         }
@@ -381,51 +315,8 @@ export class FactionFuncs {
             return false;
         }
 
-        const orderedRanks = faction.ranks.sort((a, b) => {
-            return b.weight - a.weight;
-        });
-
-        const orderedRankIndex = orderedRanks.findIndex((x) => x.uid === orderedRanks[index].uid);
-        let replacementRank: FactionRank;
-
-        // What does this mean?
-        // It means that if the orderedRankIndex is the LAST element in the array.
-        // We know that the only option is to go up the array for the next weight.
-        // Thus resulting in the rank we need.
-        if (orderedRankIndex === orderedRanks.length - 1) {
-            replacementRank = orderedRanks[orderedRanks.length - 2];
-        } else {
-            // Now if it's NOT the last element in the array.
-            // We need to increase the orderedRankIndex by 1.
-            // Since it's ordered that means the smallest weight is in the back.
-            replacementRank = orderedRanks[orderedRankIndex + 1];
-        }
-
-        const removedRank = faction.ranks.splice(index, 1)[0];
-
-        if (!removedRank) {
-            FactionFuncs.updateMembers(faction);
-            return false;
-        }
-
-        if (replacementRank) {
-            Object.keys(faction.members).forEach((key) => {
-                if (faction.members[key].rank !== removedRank.uid) {
-                    return;
-                }
-
-                faction.members[key].rank = replacementRank.uid;
-            });
-        }
-
-        const didUpdate = await FactionHandler.update(faction._id as string, {
-            ranks: faction.ranks,
-            members: faction.members,
-        });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
+        faction.ranks.splice(index, 1);
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         return didUpdate.status;
     }
 
@@ -439,12 +330,7 @@ export class FactionFuncs {
      * @return {Promise<boolean>}
      * @memberof FactionFuncs
      */
-    static async addRank(faction: Faction, newName: string, weight: number): Promise<boolean> {
-        const rankIndex = faction.ranks.findIndex((r) => r.weight === weight);
-        if (rankIndex >= 0) {
-            return false;
-        }
-
+    static async addRank(faction: Faction, newName: string): Promise<boolean> {
         faction.ranks.push({
             name: newName,
             actionPermissions: [],
@@ -458,15 +344,10 @@ export class FactionFuncs {
                 manageRankPermissions: false,
             },
             vehicles: [],
-            weight,
-            uid: Athena.utility.hash.sha256Random(JSON.stringify(faction.ranks)),
+            weight: 1,
         });
 
         const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -493,10 +374,6 @@ export class FactionFuncs {
 
         faction.ranks[index].rankPermissions = rankPermissions;
         const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -523,42 +400,6 @@ export class FactionFuncs {
 
         faction.ranks[index].weight = weight;
         const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
-        return didUpdate.status;
-    }
-
-    /**
-     * Swap rank weights based on uids.
-     *
-     * @static
-     * @param {Faction} faction
-     * @param {string} swap
-     * @param {string} swapWith
-     * @return {Promise<boolean>}
-     * @memberof FactionFuncs
-     */
-    static async swapRanks(faction: Faction, swap: string, swapWith: string): Promise<boolean> {
-        const fromIndex = faction.ranks.findIndex((r) => r.uid === swap);
-        const withIndex = faction.ranks.findIndex((r) => r.uid === swapWith);
-
-        if (fromIndex <= -1 || withIndex <= -1) {
-            return false;
-        }
-
-        const fromWeight = faction.ranks[fromIndex].weight;
-        const withWeight = faction.ranks[withIndex].weight;
-
-        faction.ranks[fromIndex].weight = withWeight;
-        faction.ranks[withIndex].weight = fromWeight;
-
-        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -583,10 +424,6 @@ export class FactionFuncs {
 
         faction.storages.push({ id: storage._id.toString(), name, allowRanks: [], pos });
         const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -618,10 +455,6 @@ export class FactionFuncs {
 
         faction.storages[storageIndex].allowRanks.push(rankUid);
         const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -650,10 +483,6 @@ export class FactionFuncs {
 
         faction.storages[storageIndex].allowRanks.splice(existingRankIndex, 1);
         const didUpdate = await FactionHandler.update(faction._id as string, { storages: faction.storages });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -675,10 +504,6 @@ export class FactionFuncs {
 
         faction.vehicles.push({ name, id: vehicleUid, allowRanks: [] });
         const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -704,10 +529,6 @@ export class FactionFuncs {
 
         faction.vehicles.splice(index, 1);
         const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -737,10 +558,6 @@ export class FactionFuncs {
 
         faction.vehicles[index].allowRanks.push(rankUid);
         const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -770,10 +587,6 @@ export class FactionFuncs {
 
         faction.vehicles[index].allowRanks.splice(rankIndex, 1);
         const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -799,10 +612,6 @@ export class FactionFuncs {
 
         faction.actions[rankUid].push(actionUid);
         const didUpdate = await FactionHandler.update(faction._id as string, { actions: faction.actions });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -812,24 +621,18 @@ export class FactionFuncs {
      * @param {string} rankUid - The rankUid of the rank that the action belongs to.
      * @param {string} actionUid - The unique ID of the action to remove.
      */
-    static async removePlayerAction(faction: Faction, rankUid: string, actionUid: string): Promise<boolean> {
+    static async removePlayerAction(faction: Faction, rankUid: string, actionUid: string): Promise<void> {
         if (!faction.actions[rankUid]) {
             faction.actions[rankUid] = [];
         }
 
         const index = faction.actions[rankUid].findIndex((uid) => uid === actionUid);
         if (index <= -1) {
-            return false;
+            return;
         }
 
         faction.actions[rankUid].splice(index, 1);
-        const didUpdate = await FactionHandler.update(faction._id as string, { actions: faction.actions });
-
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
-        return didUpdate.status;
+        await FactionHandler.update(faction._id as string, { actions: faction.actions });
     }
 
     /**
@@ -850,10 +653,6 @@ export class FactionFuncs {
 
         faction.tickActions.push(actionUid);
         const didUpdate = await FactionHandler.update(faction._id as string, { tickActions: faction.tickActions });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 
@@ -875,10 +674,6 @@ export class FactionFuncs {
 
         faction.tickActions.splice(index, 1);
         const didUpdate = await FactionHandler.update(faction._id as string, { tickActions: faction.tickActions });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
         return didUpdate.status;
     }
 }

@@ -9,5 +9,4 @@ export const FACTION_PFUNC = {
     SET_RANK_NAME: 'setRankName',
     SET_RANK_PERMISSIONS: 'setRankPermissions',
     SET_RANK_WEIGHT: 'setRankWeight',
-    SWAP_RANKS: 'swapRanks',
 };

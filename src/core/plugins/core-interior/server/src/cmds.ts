@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import ChatController from '../../../../server/systems/chat';
 import { INTERIOR_SYSTEM } from '../../shared/flags';
 import { Interior } from '../../shared/interfaces';
@@ -7,7 +8,6 @@ import { InputMenu, InputOptionType, InputResult } from '../../../../shared/inte
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { InteriorSystem } from './system';
-import { Athena } from '../../../../server/api/athena';
 
 ChatController.addCommand('addhouse', '/addhouse', PERMISSIONS.ADMIN, addhouse);
 
@@ -46,7 +46,7 @@ async function addhouse(player: alt.Player) {
         serverEvent: 'cmd:Create:House',
     };
 
-    Athena.player.emit.inputMenu(player, menu);
+    playerFuncs.emit.inputMenu(player, menu);
 }
 
 alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult[]) => {
@@ -65,12 +65,12 @@ alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult
     const [name, price, interior, ipl] = results;
 
     if (!name || !price || !interior) {
-        Athena.player.emit.message(player, `Please make sure all fields are valid.`);
+        playerFuncs.emit.message(player, `Please make sure all fields are valid.`);
         return;
     }
 
     if (!name.value || !price.value || !interior.value) {
-        Athena.player.emit.message(player, `Please make sure all fields are valid.`);
+        playerFuncs.emit.message(player, `Please make sure all fields are valid.`);
         return;
     }
 
@@ -79,12 +79,12 @@ alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult
     try {
         actualPos = JSON.parse(interior.value);
     } catch (err) {
-        Athena.player.emit.message(player, `Not a valid Vector3 JSON`);
+        playerFuncs.emit.message(player, `Not a valid Vector3 JSON`);
         return;
     }
 
     if (!actualPos) {
-        Athena.player.emit.message(player, `Not a valid Vector3 JSON`);
+        playerFuncs.emit.message(player, `Not a valid Vector3 JSON`);
         return;
     }
 
@@ -107,5 +107,5 @@ alt.onClient('cmd:Create:House', async (player: alt.Player, results: InputResult
     }
 
     await InteriorSystem.add(houseData);
-    Athena.player.emit.message(player, `Created House`);
+    playerFuncs.emit.message(player, `Created House`);
 });

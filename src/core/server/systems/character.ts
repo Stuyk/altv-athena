@@ -91,7 +91,7 @@ export class CharacterSystem {
 
         // Give the player an identifier if it does not already have one.
         // if (player.data.character_id !== undefined && player.data.character_id !== null) {
-        //     Athena.player.emit.meta(player, metaName, player.data[metaName]);
+        //     playerFuncs.emit.meta(player, metaName, player.data[metaName]);
         // }
 
         // Increase the value outright

@@ -46,8 +46,8 @@ function openMenu() {
         } else {
             options.push({
                 name: 'Stop Push',
-                callback: PushVehicle.clear
-            }); 
+                callback: PushVehicle.serverStop,
+            });
         }
     }
 

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
+import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
 import { ItemFactory } from '../../../../server/systems/item';
 import { ItemEffects } from '../../../../server/systems/itemEffects';
@@ -176,45 +176,45 @@ export class CuffSystem {
         }
 
         if (!target) {
-            Athena.player.emit.notification(cuffer, `Could not find a target player.`);
+            playerFuncs.emit.notification(cuffer, `Could not find a target player.`);
             return;
         }
 
         if (target.isCuffed) {
-            Athena.player.emit.notification(cuffer, `Target is already cuffed.`);
+            playerFuncs.emit.notification(cuffer, `Target is already cuffed.`);
             return;
         }
 
         if (inventoryType === INVENTORY_TYPE.TOOLBAR) {
-            if (!Athena.player.inventory.toolbarRemove(cuffer, item.slot)) {
-                Athena.player.emit.notification(cuffer, `Could not find cuffs`);
+            if (!playerFuncs.inventory.toolbarRemove(cuffer, item.slot)) {
+                playerFuncs.emit.notification(cuffer, `Could not find cuffs`);
                 return;
             }
 
-            Athena.player.save.field(cuffer, 'toolbar', cuffer.data.toolbar);
+            playerFuncs.save.field(cuffer, 'toolbar', cuffer.data.toolbar);
         }
 
         if (inventoryType === INVENTORY_TYPE.INVENTORY) {
-            if (!Athena.player.inventory.inventoryRemove(cuffer, item.slot)) {
-                Athena.player.emit.notification(cuffer, `Could not find cuffs`);
+            if (!playerFuncs.inventory.inventoryRemove(cuffer, item.slot)) {
+                playerFuncs.emit.notification(cuffer, `Could not find cuffs`);
                 return;
             }
         }
 
         const keyItem = await ItemFactory.get(CUFF_ITEM_DB_NAMES.KEY);
-        const invRef = Athena.player.inventory.getFreeInventorySlot(cuffer);
+        const invRef = playerFuncs.inventory.getFreeInventorySlot(cuffer);
 
         if (!invRef) {
-            Athena.player.emit.notification(cuffer, `No room in inventory`);
+            playerFuncs.emit.notification(cuffer, `No room in inventory`);
             return;
         }
 
         // Add the Key Item to the Cuffer
-        Athena.player.inventory.inventoryAdd(cuffer, keyItem, invRef.slot);
+        playerFuncs.inventory.inventoryAdd(cuffer, keyItem, invRef.slot);
 
         // Save Inventory & Synchronize Changes
-        Athena.player.save.partial(cuffer, { inventory: cuffer.data.inventory, toolbar: cuffer.data.toolbar });
-        Athena.player.sync.inventory(cuffer);
+        playerFuncs.save.partial(cuffer, { inventory: cuffer.data.inventory, toolbar: cuffer.data.toolbar });
+        playerFuncs.sync.inventory(cuffer);
 
         // Register Cuff Information
         cufferRegistry[cuffer.id] = `${target.id}`;
@@ -311,7 +311,7 @@ export class CuffSystem {
         target.detach();
         target.isCuffed = true;
         target.isCuffedFreeMoving = true;
-        Athena.player.emit.animation(target, 'mp_arresting', 'idle', 49);
+        playerFuncs.emit.animation(target, 'mp_arresting', 'idle', 49);
     }
 
     /**
@@ -337,7 +337,7 @@ export class CuffSystem {
 
         target.isCuffed = true;
         target.isCuffedFreeMoving = false;
-        Athena.player.emit.animation(target, 'mp_arresting', 'idle', 49);
+        playerFuncs.emit.animation(target, 'mp_arresting', 'idle', 49);
         target.attachTo(
             cuffer,
             0,
@@ -368,12 +368,12 @@ export class CuffSystem {
 
         const vehicle = CuffSystem.findVehicleInFrontOf(cuffer);
         if (!vehicle) {
-            Athena.player.emit.notification(cuffer, `Could not find vehicle close enough.`);
+            playerFuncs.emit.notification(cuffer, `Could not find vehicle close enough.`);
             return;
         }
 
         if (!VehicleFuncs.hasOwnership(cuffer, vehicle)) {
-            Athena.player.emit.notification(cuffer, `This is not your vehicle.`);
+            playerFuncs.emit.notification(cuffer, `This is not your vehicle.`);
             return;
         }
 
@@ -400,16 +400,16 @@ export class CuffSystem {
 
         const vehicle = CuffSystem.findVehicleInFrontOf(cuffer);
         if (!vehicle || !vehicle.valid) {
-            Athena.player.emit.notification(cuffer, `Could not find vehicle close enough.`);
+            playerFuncs.emit.notification(cuffer, `Could not find vehicle close enough.`);
             return;
         }
 
         if (target.vehicle.id !== vehicle.id) {
-            Athena.player.emit.notification(cuffer, `Cuffed player is not in this vehicle.`);
+            playerFuncs.emit.notification(cuffer, `Cuffed player is not in this vehicle.`);
             return;
         }
 
-        Athena.player.safe.setPosition(target, cuffer.pos.x, cuffer.pos.y, cuffer.pos.z);
+        playerFuncs.safe.setPosition(target, cuffer.pos.x, cuffer.pos.y, cuffer.pos.z);
         CuffSystem.attach(cuffer);
     }
 
@@ -467,7 +467,7 @@ export class CuffSystem {
         }
 
         // Emit the wheel menu
-        Athena.player.emit.wheelMenu(cuffer, `${cuffed.data.name}`, options);
+        playerFuncs.emit.wheelMenu(cuffer, `${cuffed.data.name}`, options);
     }
 }
 

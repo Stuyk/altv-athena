@@ -1,15 +1,15 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
+import { playerFuncs } from '../extensions/extPlayer';
 import { Global } from '../systems/global';
 
 // Does nothing. Just writing some code here.
 // May change from version to version but it's mostly just Stuyk's notepad.
 
-// Athena.player.emit.override('notification', (player: alt.Player, message: string) => {
+// playerFuncs.emit.override('notification', (player: alt.Player, message: string) => {
 //     console.log(`This was overrided, and you can't see ${message} in-game.`);
 // });
 
-// Athena.player.emit.notification()
+// playerFuncs.emit.notification()
 
 // async function testing() {
 //     for (let i = 0; i < 100; i++) {

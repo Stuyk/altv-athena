@@ -3,41 +3,22 @@
         <div class="split space-between members-fill">
             <div class="selection pa-4">
                 <template v-if="!selected">
-                    <div class="acting-member stack center mb-4">
-                        <div class="headline mb-2 grey--text" style="font-size: 24px !important">
-                            Hello, {{ getMember(character).name.replace('_', ' ') }}.
-                        </div>
-                        <div class="subtitle-2 grey--text">Rank - {{ getRankName(getMember(character).rank) }}</div>
-                    </div>
-                    <div class="acting-member">
-                        <span class="subtitle-1 grey--text">Select a member to modify permissions.</span>
-                        <br />
-                        <span class="subtitle-1 grey--text">Permissions may vary by your rank.</span>
-                    </div>
+                    <span class="overline">Select a member to modify permissions</span>
+                    <br />
+                    <span class="overline">Permissions may vary by your rank</span>
                 </template>
                 <template v-else>
                     <div class="permissions">
-                        <div class="member-header center stack mb-4">
-                            <div class="headline mb-2 grey--text" style="font-size: 24px !important">
-                                {{ selected.name.replace('_', ' ') }}
-                            </div>
-                            <div class="subtitle-2 grey--text">Rank - {{ getRankName(selected.rank) }}</div>
-                        </div>
                         <div
                             class="permission mb-4"
                             v-for="(perm, index) in getRankPermissions(selected.rank)"
                             :key="index"
                         >
-                            <div class="perm-desc grey--text">
-                                {{ perm.desc }}
-                            </div>
                             <div v-if="perm && perm.key && perm.value">
-                                <Button class="perm-button" color="blue" @click="permAction(perm)">{{
-                                    perm.name
-                                }}</Button>
+                                <Button color="green">{{ perm.name }}</Button>
                             </div>
                             <div v-else>
-                                <Button class="perm-button" :disable="true">{{ perm.name }}</Button>
+                                <Button :disable="true">{{ perm.name }}</Button>
                             </div>
                         </div>
                     </div>
@@ -63,22 +44,14 @@
                                 class="member mb-2"
                             >
                                 <div class="split space-between">
-                                    <template v-if="!isRankHigher(rank)">
-                                        <Button
-                                            @click="() => selectMember(member)"
-                                            :color="getMemberSelectColor(member)"
-                                            :flatten="true"
-                                            :class="getMemberSelectClass(member)"
-                                            class="member-button"
-                                        >
-                                            {{ member.name }}
-                                        </Button>
-                                    </template>
-                                    <template v-else>
-                                        <Button :disable="true" class="member-button">
-                                            {{ member.name }}
-                                        </Button>
-                                    </template>
+                                    <Button
+                                        @click="() => selectMember(member)"
+                                        :color="getMemberSelectClass(member)"
+                                        :flatten="true"
+                                        class="member-button"
+                                        style="width: 100%"
+                                        >{{ member.name }}</Button
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -90,12 +63,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
 import { Faction, FactionCharacter, FactionRank, RankPermissionNames } from '../../shared/interfaces';
 import { FactionLocale } from '../../shared/locale';
 import { FactionParser } from '../utility/factionParser';
-import { FACTION_EVENTS } from '../../shared/factionEvents';
-import { FACTION_PFUNC } from '../../shared/funcNames';
 
 const ComponentName = 'Members';
 export default defineComponent({
@@ -106,58 +80,30 @@ export default defineComponent({
     },
     data() {
         return {
-            selected: null as FactionCharacter,
+            selected: null,
             search: '',
         };
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        Button,
+        Icon,
+        Module,
     },
+    computed: {},
     methods: {
-        getMemberSelectColor(member: FactionCharacter) {
-            if (!this.selected) {
-                return 'blue';
-            }
-
-            if (this.selected.name !== member.name) {
-                return 'blue';
-            }
-
-            return 'cyan';
-        },
         getMemberSelectClass(member: FactionCharacter) {
             if (!this.selected) {
-                return {};
+                return 'blue';
             }
 
             if (this.selected.name !== member.name) {
-                return {};
+                return 'blue';
             }
 
-            return {
-                'member-selected': true,
-            };
+            return 'orange';
         },
         selectMember(member: FactionCharacter) {
             this.selected = member;
-        },
-        isRankHigher(againstRank: FactionRank) {
-            const member = this.getMember(this.character);
-            if (!member) {
-                return false;
-            }
-
-            const actingRank = FactionParser.getRank(this.faction, member.rank);
-            if (!actingRank) {
-                return false;
-            }
-
-            return FactionParser.isRankHigher(actingRank, againstRank);
-        },
-        getMember(uid: string) {
-            return FactionParser.getMember(this.faction, uid);
         },
         getMembersByRank(rank: string): Array<FactionCharacter & { id?: string }> {
             const members = FactionParser.getFactionMembersByRank(this.faction, rank);
@@ -188,13 +134,7 @@ export default defineComponent({
             const actingRank = FactionParser.getRank(this.faction, character);
             const againstRank = FactionParser.getRank(this.faction, rank);
             const validPermissions = FactionParser.getValidPermissions(actingRank, againstRank, character.hasOwnership);
-            const permissionList: Array<{
-                key: string;
-                value: boolean;
-                desc: string;
-                name: string;
-                uniqueValue?: string;
-            }> = [];
+            const permissionList: Array<{ key: string; value: boolean; desc: string; name: string }> = [];
 
             for (let i = 0; i < permissions.length; i++) {
                 const key = permissions[i];
@@ -219,72 +159,16 @@ export default defineComponent({
 
                 if (key === RankPermissionNames.manageMembers) {
                     if (validPermissions.hasOwnProperty(key) && character.name !== this.selected) {
-                        permissionList.push({
-                            key,
-                            uniqueValue: 'promote',
-                            value: validPermissions[key],
-                            name: 'Promote',
-                            desc,
-                        });
-                        permissionList.push({
-                            key,
-                            uniqueValue: 'demote',
-                            value: validPermissions[key],
-                            name: 'Demote',
-                            desc,
-                        });
+                        permissionList.push({ key, value: validPermissions[key], name: 'Promote', desc });
+                        permissionList.push({ key, value: validPermissions[key], name: 'Demote', desc });
                     } else {
-                        permissionList.push({ key, uniqueValue: 'promote', value: false, name: 'Promote', desc });
-                        permissionList.push({ key, uniqueValue: 'demote', value: false, name: 'Demote', desc });
+                        permissionList.push({ key, value: false, name: 'Promote', desc });
+                        permissionList.push({ key, value: false, name: 'Demote', desc });
                     }
                 }
             }
 
             return permissionList;
-        },
-        permAction(perm) {
-            if (!this.selected) {
-                return;
-            }
-
-            if (perm.key === RankPermissionNames.kickMembers) {
-                alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.KICK_MEMBER, this.selected.id);
-                this.selected = null;
-                return;
-            }
-
-            if (perm.key === RankPermissionNames.manageMembers) {
-                const ranks = FactionParser.getFactionRanks(this.faction);
-                const index = ranks.findIndex((rank) => rank && rank.uid === this.selected.rank);
-
-                if (index <= -1) {
-                    return;
-                }
-
-                if (perm.uniqueValue === 'promote') {
-                    alt.emit(
-                        FACTION_EVENTS.WEBVIEW.ACTION,
-                        FACTION_PFUNC.SET_CHARACTER_RANK,
-                        this.selected.id,
-                        ranks[index - 1].uid,
-                    );
-                    this.selected = null;
-                    return;
-                }
-
-                if (perm.uniqueValue === 'demote') {
-                    alt.emit(
-                        FACTION_EVENTS.WEBVIEW.ACTION,
-                        FACTION_PFUNC.SET_CHARACTER_RANK,
-                        this.selected.id,
-                        ranks[index + 1].uid,
-                    );
-                    this.selected = null;
-                    return;
-                }
-
-                return;
-            }
         },
     },
 });
@@ -294,7 +178,6 @@ export default defineComponent({
 .members-wrapper {
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .members {
@@ -347,31 +230,9 @@ export default defineComponent({
 }
 
 .permissions {
-    display: flex;
-    flex-direction: column;
-    min-height: 75vh;
-    max-height: 75vh;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-.permission {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 2px solid rgba(28, 28, 28, 1);
-    background: rgb(48, 48, 48);
-    border-radius: 6px;
-}
-
-.perm-desc {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 12px;
-}
-
-.perm-button {
-    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 12px;
 }
 
 .selection {
@@ -393,7 +254,6 @@ export default defineComponent({
 
 .member-button {
     border-radius: 6px;
-    width: 100%;
 }
 
 .search {
@@ -409,31 +269,5 @@ export default defineComponent({
 
 .search:focus {
     border-color: rgba(52, 52, 52, 1);
-}
-
-.member-selected {
-    border-color: #00bcd4 !important;
-    box-shadow: 0px 0px 3px #00bcd4;
-    background: rgb(48, 48, 48);
-}
-
-.member-header {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 2px solid rgba(28, 28, 28, 1);
-    background: rgba(28, 28, 28, 1);
-    border-radius: 6px;
-    background: rgb(48, 48, 48);
-}
-
-.acting-member {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 2px solid rgba(28, 28, 28, 1);
-    background: rgba(28, 28, 28, 1);
-    border-radius: 6px;
-    background: rgb(48, 48, 48);
 }
 </style>

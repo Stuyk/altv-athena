@@ -15,7 +15,8 @@
                         :increment="1"
                         :values="getLocale(option.id).labels"
                         @input="(e) => setValueWrap(e, i, 'value')"
-                        class="pl-3 pr-3 fill-full-width"
+                        style="width: 100%"
+                        class="pl-3 pr-3"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, option.min, option.max, 1, 'value')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -34,7 +35,8 @@
                         :indexValue="data.colorOverlays[i].opacity"
                         :increment="0.1"
                         @input="(e) => setValueWrap(e, i, 'opacity')"
-                        class="pl-3 pr-3 fill-full-width"
+                        style="width: 100%"
+                        class="pl-3 pr-3"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, 0, 1, 0.1, 'opacity')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -54,7 +56,8 @@
                         :increment="1"
                         :values="locales.color.overlays"
                         @input="(e) => setValueWrap(e, i, 'color1')"
-                        class="pl-3 pr-3 fill-full-width"
+                        style="width: 100%"
+                        class="pl-3 pr-3"
                     />
                     <Button color="blue" @click="(e) => incValueWrap(i, 0, getOverlayColorCount(), 1, 'color1')">
                         <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -75,7 +78,8 @@
                             :increment="1"
                             :values="locales.color.overlays"
                             @input="(e) => setValueWrap(e, i, 'color2')"
-                            class="pl-3 pr-3 fill-full-width"
+                            style="width: 100%"
+                            class="pl-3 pr-3"
                         />
                         <Button color="blue" @click="(e) => incValueWrap(i, 0, getOverlayColorCount(), 1, 'color2')">
                             <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -88,8 +92,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 import MakeupList from '../utility/makeupList';
+
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
+import RangeInput from '@components/RangeInput.vue';
 
 const ComponentName = 'Makeup';
 export default defineComponent({
@@ -99,10 +108,10 @@ export default defineComponent({
         locales: Object,
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
+        Button,
+        Icon,
+        Module,
+        RangeInput,
     },
     data() {
         return {

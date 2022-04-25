@@ -1,11 +1,11 @@
 <template>
     <div class="stack">
         <div class="split">
-            <div class="blue--text overline pr-2 align-right">{{ getValue }}</div>
+            <div class="blue--text overline pr-2" style="min-width: 30px; text-align: right">{{ getValue }}</div>
             <input type="range" :min="_min" :max="_max" :step="_step" :value="_value" />
-            <div class="blue--text overline pl-2 align-left">{{ _max }}</div>
+            <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left">{{ _max }}</div>
         </div>
-        <div v-if="values" class="overline grey--text pt-2 align-center">
+        <div v-if="values" class="overline grey--text pt-2" style="text-align: center; font-size: 10px !important">
             {{ getCurrentValue }}
         </div>
     </div>
@@ -131,20 +131,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style scoped>
-.align-left {
-    text-align: left;
-    min-width: 30px;
-}
-
-.align-right {
-    text-align: right;
-    min-width: 30px;
-}
-
-.align-center {
-    text-align: center;
-    font-size: 10px !important;
-}
-</style>

@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
@@ -9,7 +10,6 @@ import { Vector3 } from '../../../../shared/interfaces/vector';
 import JOB_DATA from './data';
 import JobEnums from '../../../../shared/interfaces/job';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
-import { Athena } from '../../../../server/api/athena';
 
 const START_POINT = { x: 1245.790771484375, y: -3165.754150390625, z: 4.60198450088501 };
 const TOTAL_DROP_OFFS = 5;
@@ -55,7 +55,7 @@ export class MuleJob {
     static async begin(player: alt.Player) {
         const openSpot = await MuleJob.getVehicleSpawnPoint();
         if (!openSpot) {
-            Athena.player.emit.notification(player, `~r~No room for vehicles right now. Please wait...`);
+            playerFuncs.emit.notification(player, `~r~No room for vehicles right now. Please wait...`);
             return;
         }
 
@@ -88,7 +88,7 @@ export class MuleJob {
                 JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                 JobEnums.ObjectiveCriteria.NO_DYING,
             callbackOnStart: (player: alt.Player) => {
-                Athena.player.emit.notification(player, `Get in the Mule`);
+                playerFuncs.emit.notification(player, `Get in the Mule`);
             },
         });
 
@@ -126,10 +126,10 @@ export class MuleJob {
                     JobEnums.ObjectiveCriteria.NO_VEHICLE |
                     JobEnums.ObjectiveCriteria.JOB_VEHICLE_NEARBY,
                 callbackOnStart: (player: alt.Player) => {
-                    Athena.player.emit.notification(player, `Drive to the Drop Off Point`);
+                    playerFuncs.emit.notification(player, `Drive to the Drop Off Point`);
                 },
                 callbackOnFinish: (player: alt.Player) => {
-                    Athena.player.emit.notification(player, `You have dropped off the package`);
+                    playerFuncs.emit.notification(player, `You have dropped off the package`);
                 },
             });
         }
@@ -169,13 +169,13 @@ export class MuleJob {
                 JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                 JobEnums.ObjectiveCriteria.NO_DYING,
             callbackOnStart: (player: alt.Player) => {
-                Athena.player.emit.notification(player, `Drive the vehicle back`);
+                playerFuncs.emit.notification(player, `Drive the vehicle back`);
             },
             callbackOnFinish: (player: alt.Player) => {
                 // Payout 100 - 200; Random;
                 const earned = Math.floor(Math.random() * 100) + 100;
-                Athena.player.currency.add(player, CurrencyTypes.CASH, earned);
-                Athena.player.emit.notification(player, `~g~$${earned}`);
+                playerFuncs.currency.add(player, CurrencyTypes.CASH, earned);
+                playerFuncs.emit.notification(player, `~g~$${earned}`);
             },
         });
 

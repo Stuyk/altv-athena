@@ -15,10 +15,10 @@
                         {{ characters[characterIndex].name }}
                     </div>
                     <div class="split split-full">
-                        <Button class="mt-2 fill-half-width" color="red" @click="hideDeleteInterface">
+                        <Button class="mt-2" color="red" style="width: 50%" @click="hideDeleteInterface">
                             {{ locales.LABEL_NO }}
                         </Button>
-                        <Button class="ml-4 mt-2 fill-half-width" color="green" @click="deleteCharacter">
+                        <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="deleteCharacter">
                             {{ locales.LABEL_YES }}
                         </Button>
                     </div>
@@ -27,7 +27,7 @@
         </Modal>
         <div class="stats pl-2 pr-2 pt-2 pb-2">
             <!-- Top Buttons -->
-            <div class="split split-center mb-6 fill-full-width" style="box-sizing: border-box">
+            <div class="split split-center mb-6" style="width: 100% !important; box-sizing: border-box">
                 <Button color="blue" @click="decrementIndex">
                     <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
                 </Button>
@@ -80,7 +80,7 @@
                 </Button>
 
                 <!-- Create Character -->
-                <Button color="green" @click="newCharacter" v-if="getTotalCharacters < MAX_CHARACTERS">
+                <Button color="green" @click="newCharacter">
                     <Icon class="green--text" :size="24" icon="icon-plus" />
                 </Button>
 
@@ -94,26 +94,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { EXAMPLE_CHARACTER } from './utility/exampleCharacter';
-import { CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
+import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../shared/events';
 import { CHARACTER_SELECT_LOCALE } from '../shared/locale';
 
-import { CHARACTER_SELECT_CONFIG } from '../shared/config';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Modal from '@components/Modal.vue';
+import Toolbar from '@components/Toolbar.vue';
+import Frame from '@components/Frame.vue';
 
 const ComponentName = 'CharacterSelect';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
-        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
-        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Button,
+        Icon,
+        Modal,
+        Toolbar,
+        Frame,
     },
     data() {
         return {
-            MAX_CHARACTERS: 0,
             characterIndex: 0,
             characters: [],
             statNames: [],
@@ -122,9 +125,6 @@ export default defineComponent({
         };
     },
     computed: {
-        getTotalCharacters() {
-            return this.characters.length;
-        },
         getName() {
             if (!this.characters[this.characterIndex]) {
                 return '';
@@ -267,7 +267,6 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
-            this.MAX_CHARACTERS = CHARACTER_SELECT_CONFIG.MAX_CHARACTERS;
             alt.on(CHARACTER_SELECT_WEBVIEW_EVENTS.SET_CHARACTERS, this.setCharacters);
             alt.emit(`${ComponentName}:Ready`);
         } else {

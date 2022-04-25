@@ -70,18 +70,17 @@ This is if you want to design out-of-game and just work on some design.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { CORE_IMPORTS } from './pages/components';
-import { PLUGIN_IMPORTS } from './plugins/imports';
+import { PLUGIN_IMPORTS } from '../../src/core/plugins/athena/webview/imports';
 import DefaultPages from './defaultPage';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
-
+import { CORE_IMPORTS } from './pages/components';
 // import components from './pages/components';
 
 const ALL_THE_COMPONENTS = {
-    ...CORE_IMPORTS,
     ...PLUGIN_IMPORTS,
+    ...CORE_IMPORTS,
 };
 
 function componentsToArray() {

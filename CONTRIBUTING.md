@@ -1,47 +1,24 @@
 # Contributing
 
-## Prerequisites
+If you wish to contribute to this repository you should fork it and stay up-to-date with the latest `branched version`. 
 
-Before contributing to the Athena Framework there are a few requirements which are **REQUIRED** before making pull requests.
+At the time of writing this it will be `2.0.4`. 
 
-### Use VSCode
+The latest branch will have the latest changes.
 
-This repository currently uses VSCode as the main IDE. If you are using WebStorm you are reponsible for making `Prettier` work with it.
+If you choose to contribute to this project you will be creating a `pull request` from your `fork`.
 
-### Install Prettier
+## What will Athena Accept?
 
-Prettier is a code formatter and the entire repository uses it.
+* Bug Fixes
+* New Features within the idea of a Framework
 
-[![](https://i.imgur.com/kSv5ure.png)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## What will Athena Not Accept?
 
-After installation make sure to turn on `Format on Save`.
+* Very specific features such as... an LSPD Faction, a death box system, etc.
 
-`File > Preferences > Settings`
+## Why Not Accepting Features?
 
-![](https://i.imgur.com/gspTN2k.png)
+Athena is targetted towards developers who need core functionality.
 
-Now when you are contributing code it will format it like **EVERYONE ELSES** code.
-
-## What to Contribute?
-
-Athena is working towards being a 'core' framework. This means that anything that is contributed that does not bring value to other developers will not be accepted. Do not waste your time writing anything that cannot be re-used by other developers.
-
-Here are some examples of what you shouldn't write and what you should write instead.
-
-- Instead of LSPD you write an entire Faction System to handle ALL factions.
-- Instead of making one dumpster diveable you write a way for all objects to be interacted with.
-- Instead of making one vending machine function, make them all function. 
-  - Make them removeable. 
-  - Make them have different inventories.
-
-Contributing to Athena is about bringing value to developers that cannot otherwise write complex systems.
-
-Obviously, we take fixes for bugs or slight changes to existing features as long as they are backwards compatible.
-
-## How to Create a Pull Request
-
-All pull requests should be built off of the latest developer version. There is usually an open `Tracking PR` to determine what version to use.
-
-When your code is ready you can create a PR to merge into the `Tracking PR`.
-
-We **WILL NOT** take pull requests based off the `master` branch.
+If you wish to create those things they should be individual plugins for the framework.

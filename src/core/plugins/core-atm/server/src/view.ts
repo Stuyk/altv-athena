@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 
 import atms from '../../../../shared/information/atms';
+import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
@@ -10,7 +11,6 @@ import { Character } from '../../../../shared/interfaces/character';
 import Database from '@stuyk/ezmongodb';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { ATM_INTERACTIONS } from '../../shared/events';
-import { Athena } from '../../../../server/api/athena';
 
 const INTERACTION_RANGE = 1.5;
 class InternalFunctions {
@@ -26,29 +26,29 @@ class InternalFunctions {
      */
     static action(player: alt.Player, type: string, amount: string | number, id: null | number) {
         if (isNaN(amount as number)) {
-            Athena.player.sync.currencyData(player);
+            playerFuncs.sync.currencyData(player);
             return;
         }
 
         amount = parseFloat(amount as string);
 
         if (!amount || amount <= 0) {
-            Athena.player.sync.currencyData(player);
+            playerFuncs.sync.currencyData(player);
             return;
         }
 
         if (!ActionHandlers[type]) {
-            Athena.player.sync.currencyData(player);
+            playerFuncs.sync.currencyData(player);
             return;
         }
 
         const result = ActionHandlers[type](player, amount, id);
-        Athena.player.sync.currencyData(player);
+        playerFuncs.sync.currencyData(player);
 
         if (!result) {
-            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         } else {
-            Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
     }
 
@@ -65,11 +65,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, amount)) {
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(player, CurrencyTypes.BANK, amount)) {
+        if (!playerFuncs.currency.add(player, CurrencyTypes.BANK, amount)) {
             return false;
         }
 
@@ -89,11 +89,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(player, CurrencyTypes.CASH, amount)) {
+        if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
             return false;
         }
 
@@ -129,16 +129,16 @@ class InternalFunctions {
 
         if (onlinePlayer) {
             // Update by Online Player Route
-            if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
-            if (!Athena.player.currency.add(onlinePlayer, CurrencyTypes.BANK, amount)) {
+            if (!playerFuncs.currency.add(onlinePlayer, CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
             const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
-            Athena.player.emit.message(onlinePlayer, msg);
+            playerFuncs.emit.message(onlinePlayer, msg);
         } else {
             // Update by Document Route
             const document = await Database.fetchData<Character>('bankNumber', bankNumber, Collections.Characters);
@@ -146,7 +146,7 @@ class InternalFunctions {
                 return false;
             }
 
-            if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            if (!playerFuncs.currency.sub(player, CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
@@ -180,16 +180,16 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, amount)) {
+        if (!playerFuncs.currency.sub(player, CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(target, CurrencyTypes.CASH, amount)) {
+        if (!playerFuncs.currency.add(target, CurrencyTypes.CASH, amount)) {
             return false;
         }
 
         const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
-        Athena.player.emit.message(target, msg);
+        playerFuncs.emit.message(target, msg);
         return true;
     }
 }

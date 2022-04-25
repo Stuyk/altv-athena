@@ -12,7 +12,8 @@
             <Module :name="locale.PRIMARY_FINISH">
                 <div class="finishes">
                     <Button
-                        class="finish fill-full-width"
+                        style="width: 100%"
+                        class="finish"
                         v-for="(finish, index) in getFinishes"
                         :color="finish1 === finish.value ? 'green' : 'blue-grey'"
                         :key="index"
@@ -26,7 +27,8 @@
             <Module :name="locale.SECONDARY_FINISH">
                 <div class="finishes">
                     <Button
-                        class="finish fill-full-width"
+                        style="width: 100%"
+                        class="finish"
                         v-for="(finish, index) in getFinishes"
                         :color="finish2 === finish.value ? 'green' : 'blue-grey'"
                         :key="index"
@@ -46,7 +48,7 @@
                         :indexValue="pearl"
                         :increment="1"
                         @input="(e) => setPearl(e)"
-                        class="fill-full-width"
+                        style="width: 100%"
                     />
                 </div>
             </Module>
@@ -55,7 +57,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
+import ColorSlider from '@components/ColorSlider.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import RangeInput from '@components/RangeInput.vue';
+import Module from '@components/Module.vue';
 import { VEHICLE_COLOR_PAINTS } from '../../shared/paints';
 import { iPaintshopSync } from '../../shared/interfaces';
 
@@ -80,11 +87,11 @@ export default defineComponent({
         },
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
-        ColorSlider: defineAsyncComponent(() => import('@components/ColorSlider.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        Button,
+        Icon,
+        RangeInput,
+        ColorSlider,
+        Module,
     },
     computed: {
         getFinishes(): Array<{ key: string; value: number }> {
