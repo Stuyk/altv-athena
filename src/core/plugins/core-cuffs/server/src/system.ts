@@ -171,12 +171,12 @@ export class CuffSystem {
     static async cuff(cuffer: alt.Player, item: Item, slot: number, inventoryType: INVENTORY_TYPE) {
         const target = CuffSystem.findPlayerInFrontOf(cuffer);
 
-        if (target.isDead || cuffer.isDead) {
+        if (!target) {
+            Athena.player.emit.notification(cuffer, `Could not find a target player.`);
             return;
         }
 
-        if (!target) {
-            Athena.player.emit.notification(cuffer, `Could not find a target player.`);
+        if (target.isDead || cuffer.isDead) {
             return;
         }
 
