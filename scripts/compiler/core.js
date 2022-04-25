@@ -1,28 +1,14 @@
 import swc from '@swc/core';
-import fs from 'fs-extra';
-import glob from 'glob';
-import path from 'path';
+import fs from "fs-extra";
+import glob from "glob";
+import path from "path";
 
-const VERSION_REQUIRED = 16;
-const FILES_TO_COMPILE = [
-    'src/**/*.ts', // Compile all typescript files
-    'scripts/streamer/src/**/*.ts', // Compile streamer
-];
-
-const FILES_TO_COPY = [
-    // Anything but .ts
-    'src/**/*.!(ts|md|vue)',
-];
-
-const FOLDERS_TO_IGNORE = [
-    '\/webview\/',
-    '\\webview\\'
+const viablePluginDisablers = [
+    'disable.plugin',
+    'disabled.plugin',
+    'disable',
 ]
 
-const FOLDERS_TO_CLEAN = [
-    //
-    'resources',
-];
 
 /** @type {import('@swc/core').Config} */
 const SWC_CONFIG = {
@@ -39,148 +25,108 @@ const SWC_CONFIG = {
         target: 'es2020',
     },
     sourceMaps: true,
-
 };
 
-async function cleanFolders() {
-    const promises = [];
-
-    for (let i = 0; i < FOLDERS_TO_CLEAN.length; i++) {
-        promises.push(fs.rm(path.join(process.cwd(), FOLDERS_TO_CLEAN[i]), { recursive: true, force: true }));
-    }
-
-    await Promise.all(promises);
+function sanitizePath(p) {
+    return p.replace(/\\/g, path.sep);
 }
 
-async function getFiles() {
-    return new Promise(async (resolve) => {
-        let files = [];
+function getEnabledPlugins() {
+    const rootPath = sanitizePath(path.join(process.cwd(), "src/core/plugins"));
+    const pluginFolders = fs.readdirSync(rootPath);
 
-        for (let i = 0; i < FILES_TO_COMPILE.length; i++) {
-            const somePath = path.join(process.cwd(), FILES_TO_COMPILE[i]);
-            const filesFound = await new Promise((resolve) => {
-                glob(somePath, (err, _files) => {
-                    resolve(_files);
-                });
-            });
+    return pluginFolders.filter(pluginName => {
+        const pluginPath = sanitizePath(path.join(rootPath, pluginName));
 
-            files = files.concat(filesFound);
-        }
+        for (const fileName of viablePluginDisablers) {
+            const disabledPath = sanitizePath(path.join(pluginPath, fileName));
 
-        files = files.filter(x => {
-            let isIgnored = false;
-
-            for (let i = 0; i < FOLDERS_TO_IGNORE.length; i++) {
-                if (x.includes(FOLDERS_TO_IGNORE[i])) {
-                    isIgnored = true;
-                    break;
-                }
-            }
-
-            if (isIgnored) {
+            if (fs.existsSync(disabledPath)) {
                 return false;
             }
+        }
 
-            return true
-        })
-
-        resolve(files);
+        return true;
     });
 }
 
-async function copyFiles() {
-    let promises = [];
-    let files = [];
+function getFilesForTranspilation(enabledPlugins) {
+    const rootPath = sanitizePath(path.join(process.cwd(), "src/**/*.ts"));
+    const files = glob.sync(rootPath, {
+        nodir: true,
+        ignore: [
+            "**/node_modules/**",
+            "**/core/plugins/**", // ignore plugins - will be handled seperatly
+        ]
+    });
 
-    for (let i = 0; i < FILES_TO_COPY.length; i++) {
-        const somePath = path.join(process.cwd(), FILES_TO_COPY[i]);
-        const somePromise = new Promise((resolve) => {
-            glob(somePath, (err, _files) => {
-                resolve(_files);
-            });
-        }).then((_files) => {
-            files = files.concat(_files);
+    for (const pluginName of enabledPlugins) {
+        const pluginPath = sanitizePath(path.join(process.cwd(), "src/core/plugins", pluginName));
+        const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), {
+            nodir: true,
+            ignore: [
+                "**/imports.ts",
+                "**/webview/**"
+            ]
         });
 
-        promises.push(somePromise);
+        for (const file of pluginFiles) {
+            files.push(file);
+        }
     }
 
-    await Promise.all(promises);
-    promises = [];
-
-    for (let i = 0; i < files.length; i++) {
-        const originalPath = files[i];
-        let newPath = files[i].replace('src/', 'resources/');
-        const newPromise = fs.copy(originalPath, newPath, { recursive: true, overwrite: true });
-        promises.push(newPromise);
-    }
-
-    await Promise.all(promises);
     return files;
 }
 
-async function compileFiles(files) {
-    const coreFiles = [];
+function getFilesToCopy(enabledPlugins) {
+    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)'));
 
-    for (let i = 0; i < files.length; i++) {
-        swc.transformFile(files[i], SWC_CONFIG).then(async (output) => {
-            let newPath = files[i].replace('src/', 'resources/').replace('.ts', '.js');
-
-            if (files[i].includes('scripts')) {
-                console.log(files[i]);
-                newPath = files[i].replace('src/', 'dist/').replace('.ts', '.js');
-            }
-
-            const coreFile = {
-                path: newPath,
-                code: output.code,
-            };
-
-            await new Promise((resolve) => {
-                fs.unlink(coreFile.path, () => {
-                    resolve();
-                });
-            });
-
-            await fs.outputFile(coreFile.path, coreFile.code);
-            coreFiles.push(coreFile.path);
-        });
-    }
-
-    await new Promise((resolve) => {
-        const interval = setInterval(() => {
-            if (coreFiles.length !== files.length) {
-                return;
-            }
-
-            clearInterval(interval);
-            resolve();
-        }, 0);
+    const result = glob.sync(filePath, {
+        nodir: true,
+        ignore: [
+            "**/tsconfig.json",
+            "**/dependencies.json",
+            `**/core/plugins/!(${enabledPlugins.join('|')})/**`,
+        ]
     });
 
-    return coreFiles;
+    return result;
 }
 
-async function beginCompilation() {
-    if (parseInt(process.versions.node.split('.')[0]) < VERSION_REQUIRED) {
-        console.log(`===> ATHENA REQUIRES NODE VERSION: ${VERSION_REQUIRED}+`);
-        console.log(`===> DOWNLOAD LATEST: https://nodejs.org/en/download/`);
-        process.exit(1);
+async function transpileFile(file) {
+    const targetPath = file.replace("src/", "resources/").replace(".ts", ".js");
+
+    return new Promise(async resolve => {
+        const result = await swc.transformFile(file, SWC_CONFIG);
+        fs.outputFileSync(targetPath, result.code);
+        resolve();
+    });
+}
+
+async function run() {
+    const startTime = +new Date;
+    const enabledPlugins = getEnabledPlugins();
+
+    const filesToTranspile = getFilesForTranspilation(enabledPlugins);
+    const filesToCopy = getFilesToCopy(enabledPlugins);
+
+    const resourcesFolder = sanitizePath(path.join(process.cwd(), "resources"));
+    if (fs.existsSync(resourcesFolder)) {
+        fs.rmSync(resourcesFolder, { recursive: true, force: true });
     }
 
-    const start = Date.now();
-    const files = await getFiles();
-    await cleanFolders();
-    const filesCompiled = await compileFiles(files);
-    const filesCopied = await copyFiles();
+    for (const file of filesToCopy) {
+        const targetPath = file.replace("src/", "resources/");
+        fs.copy(file, targetPath, { overwrite: true });
+    }
 
-    const currentTime = new Date(Date.now()).toISOString();
-    const result = currentTime.match(/\d\d:\d\d:\d\d/);
-    const time = result && Array.isArray(result) && result.length >= 1 ? result[0] : '00:00:00';
-    console.log(
-        `[${time}] [SWC] ${filesCompiled.length} Files Transpiled - ${filesCopied.length} Files Copied - Total Time ${Date.now() - start
-        }ms`,
-    );
+    const promises = filesToTranspile.map(file => transpileFile(file))
+    await Promise.all(promises);
+
+    const elapsedTime = +new Date - startTime;
+    console.log(`Transpiled ${filesToTranspile.length} files`);
+    console.log(`Copied ${filesToCopy.length} files to resources folder`);
+    console.log(`Build completed in: ${elapsedTime}ms`);
 }
 
-beginCompilation();
+run();

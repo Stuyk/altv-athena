@@ -63,10 +63,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Module from '@components/Module.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { Faction, FactionCharacter, FactionRank, RankPermissionNames } from '../../shared/interfaces';
 import { FactionLocale } from '../../shared/locale';
 import { FactionParser } from '../utility/factionParser';
@@ -85,9 +82,9 @@ export default defineComponent({
         };
     },
     components: {
-        Button,
-        Icon,
-        Module,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Module: defineAsyncComponent(() => import('@components/Module.vue')),
     },
     computed: {},
     methods: {

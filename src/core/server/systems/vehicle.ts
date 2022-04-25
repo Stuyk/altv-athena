@@ -95,6 +95,16 @@ export class VehicleSystem {
      * @memberof VehicleSystem
      */
     static async init() {
+        alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
+        alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
+        alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
+        alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
+        alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
+
+        alt.on('playerEnteringVehicle', VehicleSystem.entering);
+        alt.on('playerEnteredVehicle', VehicleSystem.enter);
+        alt.on('playerLeftVehicle', VehicleSystem.leave);
+
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
             return;
         }
@@ -638,15 +648,3 @@ export class VehicleSystem {
         StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
     }
 }
-
-alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
-alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
-alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
-alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
-alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
-
-alt.on('playerEnteringVehicle', VehicleSystem.entering);
-alt.on('playerEnteredVehicle', VehicleSystem.enter);
-alt.on('playerLeftVehicle', VehicleSystem.leave);
-
-VehicleSystem.init();

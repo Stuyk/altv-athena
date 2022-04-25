@@ -23,18 +23,17 @@
                                 :indexValue="splitAmount"
                                 :increment="1"
                                 @input="(e) => setIncrementAmount(e, null)"
-                                style="width: 100%"
-                                class="pl-3 pr-3"
+                                class="pl-3 pr-3 fill-full-width"
                             />
                             <Button color="blue" @click="setIncrementAmount(null, 1)">
                                 <Icon :size="14" icon="icon-chevron-right"></Icon>
                             </Button>
                         </div>
                         <div class="split split-full">
-                            <Button class="mt-2" color="red" style="width: 50%" @click="cancelSplitStack">
+                            <Button class="mt-2 fill-half-width" color="red" @click="cancelSplitStack">
                                 {{ locales.LABEL_CANCEL }}
                             </Button>
-                            <Button class="ml-4 mt-2" color="green" style="width: 50%" @click="splitStack">
+                            <Button class="ml-4 mt-2 fill-half-width" color="green" @click="splitStack">
                                 {{ locales.LABEL_SPLIT }}
                             </Button>
                         </div>
