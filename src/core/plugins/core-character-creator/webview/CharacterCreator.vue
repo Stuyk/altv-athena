@@ -40,20 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Button from '@components/Button.vue';
-import Icon from '@components/Icon.vue';
-import Modal from '@components/Modal.vue';
-import Toolbar from '@components/Toolbar.vue';
-import Frame from '@components/Frame.vue';
-
-/** Components for this View Only */
-import Appearance from './components/Appearance.vue';
-import Hair from './components/Hair.vue';
-import Info from './components/Info.vue';
-import Makeup from './components/Makeup.vue';
-import Overlays from './components/Overlays.vue';
-import Structure from './components/Structure.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 import MakeupList from './utility/makeupList';
 import OverlaysList from './utility/overlaysList';
@@ -66,23 +53,24 @@ const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button,
-        Icon,
-        Modal,
-        Toolbar,
-        Frame,
-        Appearance,
-        Structure,
-        Hair,
-        Overlays,
-        Makeup,
-        Info,
+        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
+        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
+        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Appearance: defineAsyncComponent(() => import('./components/Appearance.vue')),
+        Structure: defineAsyncComponent(() => import('./components/Structure.vue')),
+        Hair: defineAsyncComponent(() => import('./components/Hair.vue')),
+        Overlays: defineAsyncComponent(() => import('./components/Overlays.vue')),
+        Makeup: defineAsyncComponent(() => import('./components/Makeup.vue')),
+        Info: defineAsyncComponent(() => import('./components/Info.vue')),
     },
     data() {
         return {
             show: false,
             selection: 0,
             forceUpdate: 0,
+            controlsEnabled: true,
             data: {
                 sex: 1,
                 faceMother: 0,
@@ -158,11 +146,27 @@ export default defineComponent({
             }
 
             this.selection += 1;
+
+            if (this.selection >= this.navOptions.length - 1 && this.controlsEnabled) {
+                if ('alt' in window) {
+                    alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, true);
+                }
+
+                this.controlsEnabled = false;
+            }
         },
         decrementIndex() {
             if (this.selection - 1 <= -1) {
                 this.selection = 0;
                 return;
+            }
+
+            if (!this.controlsEnabled) {
+                if ('alt' in window) {
+                    alt.emit(CHARACTER_CREATOR_WEBVIEW_EVENTS.DISABLE_CONTROLS, false);
+                }
+
+                this.controlsEnabled = true;
             }
 
             this.selection -= 1;

@@ -13,6 +13,7 @@ import Hud from './hud/Hud.vue';
 import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
 import AthenaLogo from './athenaLogo/AthenaLogo.vue';
+import TestDrop from './testDrop/TestDrop.vue';
 
 export const CORE_IMPORTS = {
     Actions: shallowRef(Actions),
@@ -27,4 +28,5 @@ export const CORE_IMPORTS = {
     Login: shallowRef(Login),
     Storage: shallowRef(Storage),
     MultiPageExample: shallowRef(MultiPageExample),
+    TestDrop: shallowRef(TestDrop),
 };

@@ -10,7 +10,6 @@ import { sha256Random } from '../../../../server/utility/encryption';
 import { InteriorInternal } from './interfaces';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
 import { InteractionController } from '../../../../server/systems/interaction';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { distance } from '../../../../shared/utility/vector';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { INTERIOR_SYSTEM } from '../../shared/flags';
@@ -30,6 +29,7 @@ import { IObject } from '../../../../shared/interfaces/iObject';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { LOCALE_INTERIOR_VIEW } from '../../shared/locales';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
+import { Athena } from '../../../../server/api/athena';
 
 /**
  * Interiors should work in the following way.
@@ -295,7 +295,7 @@ class InternalSystem {
         }
 
         if (name.length >= 24) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -307,15 +307,15 @@ class InternalSystem {
         if (!skipDistanceCheck) {
             const dist = distance(player.pos, interior.outside);
             if (dist >= 5) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
                 return;
             }
         }
 
         if (skipOwnerCheck) {
             if (!InteriorSystem.isOwner(player, interior)) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
@@ -330,7 +330,7 @@ class InternalSystem {
         );
 
         InternalSystem.refreshInteriorText(interior);
-        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 
     /**
@@ -354,12 +354,12 @@ class InternalSystem {
         }
 
         if (isNaN(value)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (value > ONE_BILLION) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -370,8 +370,8 @@ class InternalSystem {
 
         if (!skipOwnerCheck) {
             if (!InteriorSystem.isOwner(player, interior)) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
@@ -379,7 +379,7 @@ class InternalSystem {
         if (!skipDistanceCheck) {
             const dist = distance(player.pos, interior.outside);
             if (dist >= 5) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
                 return;
             }
         }
@@ -400,7 +400,7 @@ class InternalSystem {
         );
 
         InternalSystem.refreshInteriorText(interior);
-        playerFuncs.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
     }
 
     /**
@@ -422,13 +422,13 @@ class InternalSystem {
         }
 
         if (!InteriorSystem.isOwner(player, interior)) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_KEYS);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_STORAGE)) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_STORAGE);
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NO_STORAGE);
             return;
         }
 
@@ -468,27 +468,27 @@ class InternalSystem {
         if (!skipDistanceCheck) {
             const dist = distance(player.pos, interior.outside);
             if (dist >= 5) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
                 return;
             }
         }
 
         if (!skipOwnerCheck) {
             if (InteriorSystem.isOwner(player, interior)) {
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
 
         if (player.data.bank + player.data.cash < interior.price) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
-        if (!playerFuncs.currency.subAllCurrencies(player, interior.price)) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        if (!Athena.player.currency.subAllCurrencies(player, interior.price)) {
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_NOT_ENOUGH_CURRENCY);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -505,9 +505,9 @@ class InternalSystem {
             const target = alt.Player.all.find((x) => x && x.data && x.data._id.toString() === originalOwner);
 
             if (target) {
-                playerFuncs.currency.add(target, CurrencyTypes.BANK, originalPrice);
-                playerFuncs.emit.sound2D(target, 'item_purchase');
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_SELL_INTERIOR);
+                Athena.player.currency.add(target, CurrencyTypes.BANK, originalPrice);
+                Athena.player.emit.sound2D(target, 'item_purchase');
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_SELL_INTERIOR);
             } else {
                 const targetData = await Database.fetchData<Character>(`_id`, originalOwner, Collections.Characters);
                 targetData.bank += originalPrice;
@@ -527,8 +527,8 @@ class InternalSystem {
             INTERIOR_COLLECTIONS.CORE,
         );
 
-        playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_PURCHASE_INTERIOR);
-        playerFuncs.emit.sound2D(player, 'item_purchase');
+        Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DID_PURCHASE_INTERIOR);
+        Athena.player.emit.sound2D(player, 'item_purchase');
 
         InteriorSystem.refresh(interior.uid);
     }
@@ -671,13 +671,13 @@ export class InteriorSystem {
         if (!skipDistanceCheck) {
             const dist = distance(player.pos, interior.outside);
             if (dist > DOOR_CHECK_DIST) {
-                playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+                Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
                 return false;
             }
         }
 
         if (isFlagEnabled(interior.system, INTERIOR_SYSTEM.HAS_LOCK) && !interior.isUnlocked) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DOOR_IS_LOCKED);
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_DOOR_IS_LOCKED);
             return false;
         }
 
@@ -718,22 +718,22 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
         }
 
-        playerFuncs.safe.setDimension(player, interior.dimension);
+        Athena.player.safe.setDimension(player, interior.dimension);
 
         // Added solely for synchronizing interior for player's who
         // logged out inside of an interior.
         if (!noTeleport) {
-            playerFuncs.set.frozen(player, true);
-            playerFuncs.safe.setPosition(player, interior.inside.x, interior.inside.y, interior.inside.z + 1);
+            Athena.player.set.frozen(player, true);
+            Athena.player.safe.setPosition(player, interior.inside.x, interior.inside.y, interior.inside.z + 1);
 
             // Freeze Player for Interior Loading
             alt.setTimeout(() => {
-                playerFuncs.set.frozen(player, false);
+                Athena.player.set.frozen(player, false);
             }, 1000);
         }
 
         player.data.interior = interior.uid;
-        playerFuncs.save.field(player, 'interior', player.data.interior);
+        Athena.player.save.field(player, 'interior', player.data.interior);
         InternalSystem.refreshInteriorForPlayer(player);
         return true;
     }
@@ -750,8 +750,8 @@ export class InteriorSystem {
         const interior = await InteriorSystem.get(player.data.interior);
 
         if (!interior) {
-            playerFuncs.safe.setDimension(player, 0);
-            playerFuncs.safe.setPosition(player, LOST_PLAYER_POS.x, LOST_PLAYER_POS.y, LOST_PLAYER_POS.z);
+            Athena.player.safe.setDimension(player, 0);
+            Athena.player.safe.setPosition(player, LOST_PLAYER_POS.x, LOST_PLAYER_POS.y, LOST_PLAYER_POS.z);
             return false;
         }
 
@@ -761,7 +761,7 @@ export class InteriorSystem {
 
         const dist = distance(player.pos, interior.inside);
         if (dist > DOOR_CHECK_DIST) {
-            playerFuncs.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
+            Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
             return false;
         }
 
@@ -772,17 +772,17 @@ export class InteriorSystem {
         InternalSystem.removePlayer(player, interior);
         InternalSystem.refreshInteriorForPlayer(player);
 
-        playerFuncs.set.frozen(player, true);
-        playerFuncs.safe.setDimension(player, 0);
-        playerFuncs.safe.setPosition(player, interior.outside.x, interior.outside.y, interior.outside.z + 1);
+        Athena.player.set.frozen(player, true);
+        Athena.player.safe.setDimension(player, 0);
+        Athena.player.safe.setPosition(player, interior.outside.x, interior.outside.y, interior.outside.z + 1);
         player.data.interior = null;
-        playerFuncs.save.field(player, 'interior', player.data.interior);
+        Athena.player.save.field(player, 'interior', player.data.interior);
         alt.setTimeout(() => {
             if (!player || !player.valid) {
                 return;
             }
 
-            playerFuncs.set.frozen(player, false);
+            Athena.player.set.frozen(player, false);
         }, 1000);
 
         return true;
@@ -890,7 +890,7 @@ export class InteriorSystem {
 
         if (interior.keys) {
             for (let i = 0; i < interior.keys.length; i++) {
-                const isValidKey = playerFuncs.inventory.checkForKeyValuePair(player, 'key', interior.keys);
+                const isValidKey = Athena.player.inventory.checkForKeyValuePair(player, 'key', interior.keys);
                 if (!isValidKey) {
                     continue;
                 }

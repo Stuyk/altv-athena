@@ -1,7 +1,7 @@
 <template>
     <div class="frame" :style="computedStyle">
         <slot name="toolbar"></slot>
-        <div class="wrapper" :class="computedWrapper">
+        <div class="wrapper" :class="computedWrapper" :style="computedInnerWrapperStyle">
             <div class="content">
                 <slot name="content"></slot>
             </div>
@@ -24,6 +24,10 @@ export default defineComponent({
             type: String,
             required: true,
         },
+        maxHeight: {
+            type: String,
+            required: false,
+        },
         noPadding: {
             type: Boolean,
             required: false,
@@ -40,6 +44,15 @@ export default defineComponent({
 
             if (this.maxWidth) {
                 style += `max-width: ${this.maxWidth} !important;`;
+            }
+
+            return style;
+        },
+        computedInnerWrapperStyle() {
+            let style = '';
+
+            if (this.maxHeight) {
+                style += `max-height: ${this.maxHeight} !important; overflow-y: scroll;`;
             }
 
             return style;
@@ -67,6 +80,9 @@ export default defineComponent({
     max-width: 30vw;
     backface-visibility: hidden;
     box-sizing: border-box;
+    box-shadow: 0px 0px 50px black;
+    border: 2px solid rgba(28, 28, 28, 1);
+    border-radius: 6px;
 }
 
 .frame .content {

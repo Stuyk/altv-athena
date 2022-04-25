@@ -36,18 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Icon from '@components/Icon.vue';
-
-import Health from './components/Health.vue';
-import Armour from './components/Armour.vue';
-import Cash from './components/Cash.vue';
-import Bank from './components/Bank.vue';
-import Food from './components/Food.vue';
-import Water from './components/Water.vue';
-import Time from './components/Time.vue';
-import Speedo from './components/Speedo.vue';
-import Interaction from './components/Interaction.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
@@ -56,16 +45,16 @@ export default defineComponent({
     name: ComponentName,
     // Used to add Custom Components
     components: {
-        Icon,
-        Armour,
-        Cash,
-        Food,
-        Interaction,
-        Health,
-        Water,
-        Bank,
-        Speedo,
-        Time,
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Armour: defineAsyncComponent(() => import('./components/Armour.vue')),
+        Cash: defineAsyncComponent(() => import('./components/Cash.vue')),
+        Food: defineAsyncComponent(() => import('./components/Food.vue')),
+        Interaction: defineAsyncComponent(() => import('./components/Interaction.vue')),
+        Health: defineAsyncComponent(() => import('./components/Health.vue')),
+        Water: defineAsyncComponent(() => import('./components/Water.vue')),
+        Bank: defineAsyncComponent(() => import('./components/Bank.vue')),
+        Speedo: defineAsyncComponent(() => import('./components/Speedo.vue')),
+        Time: defineAsyncComponent(() => import('./components/Time.vue')),
     },
     // Used to define state
     data() {

@@ -1,11 +1,12 @@
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { FactionCharacter, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { FACTION_CONFIG } from './config';
 import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
+import { Athena } from '../../../../server/api/athena';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
 
 /**
  * Bound to the player to manipulate individual faction functionality.
@@ -266,7 +267,7 @@ export class FactionPlayerFuncs {
         }
 
         amount = Math.abs(amount);
-        if (!playerFuncs.currency.subAllCurrencies(player, amount)) {
+        if (!Athena.player.currency.subAllCurrencies(player, amount)) {
             return false;
         }
 
@@ -303,7 +304,7 @@ export class FactionPlayerFuncs {
             return false;
         }
 
-        if (!playerFuncs.currency.add(player, CurrencyTypes.CASH, amount)) {
+        if (!Athena.player.currency.add(player, CurrencyTypes.CASH, amount)) {
             return false;
         }
 
@@ -320,7 +321,7 @@ export class FactionPlayerFuncs {
      * @return {*}
      * @memberof FactionPlayerFuncs
      */
-    static async addRank(player: alt.Player, newName: string) {
+    static async addRank(player: alt.Player, newName: string, weight: number) {
         const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
@@ -334,7 +335,7 @@ export class FactionPlayerFuncs {
             }
         }
 
-        return await FactionFuncs.addRank(faction, newName);
+        return await FactionFuncs.addRank(faction, newName, weight);
     }
 
     /**
@@ -439,6 +440,35 @@ export class FactionPlayerFuncs {
         return await FactionFuncs.updateRankPermissions(faction, rankUid, rankPermissions);
     }
 
+    static async swapRanks(player: alt.Player, swap: string, swapWith: string) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (faction.ranks.findIndex((x) => x.uid === swap) === -1) {
+            return false;
+        }
+
+        if (faction.ranks.findIndex((x) => x.uid === swapWith) === -1) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageRanks) {
+                return false;
+            }
+
+            if (selfRank.uid === swap) {
+                return false;
+            }
+        }
+
+        return await FactionFuncs.swapRanks(faction, swap, swapWith);
+    }
+
     /**
      * Set the weight of a rank.
      * @param player - The player who is trying to change the rank weight.
@@ -476,16 +506,22 @@ export class FactionPlayerFuncs {
      *
      * @static
      * @param {alt.Player} player
-     * @param {string} eventName
+     * @param {string} functionName
      * @param {...any[]} args
      * @return {*}
      * @memberof FactionPlayerFuncs
      */
-    static invoke(player: alt.Player, eventName: string, ...args: any[]): boolean {
-        if (!FactionPlayerFuncs[eventName]) {
+    static invoke(player: alt.Player, functionName: string, ...args: any[]): boolean {
+        console.log(`invoking...`);
+        console.log(functionName, JSON.stringify(args));
+
+        if (!FactionPlayerFuncs[functionName]) {
             return false;
         }
 
-        return FactionPlayerFuncs[eventName](player, ...args);
+        console.log('invoked');
+        return FactionPlayerFuncs[functionName](player, ...args);
     }
 }
+
+alt.onClient(FACTION_EVENTS.PROTOCOL.INVOKE, FactionPlayerFuncs.invoke);

@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { sha256Random } from '../../../../server/utility/encryption';
 import { StorageView } from '../../../../server/views/storage';
@@ -9,6 +8,7 @@ import { Faction, FactionCore, FactionRank } from '../../shared/interfaces';
 import { Character } from '../../../../shared/interfaces/character';
 import { IGenericResponse } from '../../../../shared/interfaces/iResponse';
 import { deepCloneObject } from '../../../../shared/utility/deepCopy';
+import { Athena } from '../../../../server/api/athena';
 
 export const FACTION_COLLECTION = 'factions';
 const factions: { [key: string]: Faction } = {};
@@ -107,6 +107,20 @@ export class FactionHandler {
             return { status: false, response: `Cannot insert faction into database.` };
         }
 
+        character.faction = document._id.toString();
+        await Database.updatePartialData(
+            character._id,
+            {
+                faction: character.faction,
+            },
+            Collections.Characters,
+        );
+
+        const target = alt.Player.all.find((x) => x && x.data && x.data._id.toString() === character._id.toString());
+        if (target) {
+            target.data.faction = character.faction;
+        }
+
         InternalFunctions.create(document);
         return { status: false, response: document._id.toString() };
     }
@@ -158,9 +172,9 @@ export class FactionHandler {
                 // Add bank balance to owner character
                 if (player.data._id === ownerIdentifier) {
                     player.data.bank += factionClone.bank;
-                    playerFuncs.sync.currencyData(player);
-                    playerFuncs.save.field(player, 'bank', player.data.bank);
-                    playerFuncs.emit.notification(player, `+$${factionClone.bank}`);
+                    Athena.player.sync.currencyData(player);
+                    Athena.player.save.field(player, 'bank', player.data.bank);
+                    Athena.player.emit.notification(player, `+$${factionClone.bank}`);
                 }
 
                 onlinePlayers.push(player);

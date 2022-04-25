@@ -1,3 +1,4 @@
+import { Blip } from '../../../shared/interfaces/blip';
 import { Vector3 } from '../../../shared/interfaces/vector';
 
 type _id = string;
@@ -274,6 +275,42 @@ export interface FactionVehicle {
      * @memberof FactionStorage
      */
     allowRanks: Array<string>;
+}
+
+export interface FactionSettings {
+    /**
+     * A list of vehicle parking spots to spawn vehicles from.
+     *
+     * @type {Array<Vector3>}
+     * @memberof Faction
+     */
+    parkingSpots?: Array<Vector3>;
+
+    /**
+     * A list of vehicles available for purchase for this faction.
+     *
+     * @type {Array<{ model: string, price: number }>}
+     * @memberof FactionSettings
+     */
+    vehicles: Array<{ model: string; price: number }>;
+
+    /**
+     * Maximum number of vehicles purchaseable by the Faction
+     *
+     * @type {number}
+     * @memberof FactionSettings
+     */
+    maxVehicles: number | undefined;
+
+    /**
+     * A blip representation of this faction's main head quarters.
+     * Does not automatically get created.
+     *
+     *
+     * @type {(Blip | undefined)}
+     * @memberof FactionSettings
+     */
+    blip: Blip | undefined;
 }
 
 /**

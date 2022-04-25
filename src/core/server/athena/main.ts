@@ -2,9 +2,6 @@ import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {
-    // Whitelisting
-    WHITELIST: false,
-    USE_DISCORD_BOT: false,
     // Character Selection View
     CHARACTER_SELECT_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
     CHARACTER_SELECT_ROT: 249.58352661132812,

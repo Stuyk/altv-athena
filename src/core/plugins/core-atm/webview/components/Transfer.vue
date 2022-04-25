@@ -17,7 +17,7 @@
             ]"
             :swapIconSide="true"
             icon="icon-dollar"
-            style="width: 100%"
+            class="fill-full-width"
         />
         <Input
             :label="locales.LABEL_USER_ID"
@@ -33,16 +33,15 @@
             ]"
             :swapIconSide="true"
             icon="icon-user"
-            style="width: 100%"
-            class="mt-4"
+            class="mt-4 fill-full-width"
         />
         <template v-if="validity.transfer && validity.id">
-            <Button class="mt-4" color="green" style="width: 100%" @click="action">
+            <Button class="mt-4 fill-full-width" color="green" @click="action">
                 {{ locales.LABEL_TRANSFER }}
             </Button>
         </template>
         <template v-else>
-            <Button class="mt-4" color="grey" style="width: 100%" :disable="true">
+            <Button class="mt-4 fill-full-width" color="grey" :disable="true">
                 {{ locales.LABEL_TRANSFER }}
             </Button>
         </template>
@@ -111,3 +110,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style>
+.fill-full-width {
+    width: 100%;
+}
+</style>
