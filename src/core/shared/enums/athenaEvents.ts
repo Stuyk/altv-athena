@@ -10,6 +10,7 @@ export enum ATHENA_EVENTS_VEHICLE {
     REPAIRED = 'athena:VehicleRepaired',
     SPAWNED = 'athena:VehicleSpawned',
     DISTANCE_TRAVELED = 'athena:DistanceTraveled',
+    DESTROYED = 'athena:VehicleDestroyed',
 }
 
 /**
