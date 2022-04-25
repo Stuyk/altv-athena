@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 import Icon from '@components/Icon.vue';
 
 const ComponentName = 'Food';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Icon,
     },
     props: {
         value: {

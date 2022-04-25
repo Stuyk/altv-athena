@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import EFFECT from '../../../../shared/enums/effects';
 import { playerFuncs } from '../../../../server/extensions/extPlayer';
 import { ItemEffects } from '../../../../server/systems/itemEffects';
-import { VITAL_NAMES } from '../../shared/enums';
+import { VITAL_NAMES } from '../enums';
 import { Item } from '../../../../shared/interfaces/item';
 import { VitalsSystem } from './system';
 import IAttachable from '../../../../shared/interfaces/iAttachable';

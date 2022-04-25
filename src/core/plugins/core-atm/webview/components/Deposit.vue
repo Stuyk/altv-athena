@@ -17,15 +17,15 @@
             ]"
             :swapIconSide="true"
             icon="icon-arrow-down"
-            class="fill-full-width"
+            style="width: 100%"
         />
         <template v-if="validity.deposit">
-            <Button class="mt-4 fill-full-width" color="green" @click="action">
+            <Button class="mt-4" color="green" style="width: 100%" @click="action">
                 {{ locales.LABEL_DEPOSIT }}
             </Button>
         </template>
         <template v-else>
-            <Button class="mt-4 fill-full-width" color="grey" :disable="true">
+            <Button class="mt-4" color="grey" style="width: 100%" :disable="true">
                 {{ locales.LABEL_DEPOSIT }}
             </Button>
         </template>
@@ -85,9 +85,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style>
-.fill-full-width {
-    width: 100%;
-}
-</style>

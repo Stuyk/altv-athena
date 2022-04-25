@@ -13,6 +13,7 @@ const Commands: ConsoleCommand = {};
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]) {
     if (!Commands[cmdName]) {
+        console.warn(`Command: ${cmdName} does not exist!`);
         return;
     }
 

@@ -14,7 +14,8 @@
                     :increment="1"
                     :values="data.sex === 0 ? locales.hairComponent.feminine : locales.hairComponent.masculine"
                     @input="(e) => setValueWrap(e, 'hair')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="incValueWrap('hair', 0, getHairCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -33,7 +34,8 @@
                     :increment="1"
                     :values="locales.color.hair"
                     @input="(e) => setValueWrap(e, 'hairColor1')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'hairColor1', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -52,7 +54,8 @@
                     :increment="1"
                     :values="locales.color.hair"
                     @input="(e) => setValueWrap(e, 'hairColor2')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'hairColor2', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -74,7 +77,8 @@
                     :increment="1"
                     :values="locales.hairComponent.eyebrows"
                     @input="(e) => setValueWrap(e, 'eyebrows')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'eyebrows', 0, getEyebrowsCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -93,7 +97,8 @@
                     :increment="1"
                     :values="locales.color.hair"
                     @input="(e) => setValueWrap(e, 'eyebrowsColor1')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'eyebrowsColor1', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -113,7 +118,8 @@
                     :indexValue="data.eyebrowsOpacity"
                     :increment="0.1"
                     @input="(e) => setValueWrap(e, 'eyebrowsOpacity')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'eyebrowsOpacity', 0, 1, 0.1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -135,7 +141,8 @@
                     :increment="1"
                     :values="locales.hairComponent.facial"
                     @input="(e) => setValueWrap(e, 'facialHair')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'facialHair', 0, getFacialCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -155,7 +162,8 @@
                     :increment="1"
                     :values="locales.color.hair"
                     @input="(e) => setValueWrap(e, 'facialHairColor1')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'facialHairColor1', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -175,7 +183,8 @@
                     :indexValue="data.facialHairOpacity"
                     :increment="0.1"
                     @input="(e) => setValueWrap(e, 'facialHairOpacity')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'facialHairOpacity', 0, 1, 0.1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -197,7 +206,8 @@
                     :increment="1"
                     :values="locales.hairComponent.chest"
                     @input="(e) => setValueWrap(e, 'chestHair')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'chestHair', 0, getChestCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -217,7 +227,8 @@
                     :increment="1"
                     :values="locales.color.hair"
                     @input="(e) => setValueWrap(e, 'chestHairColor1')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'chestHairColor1', 0, getColourCount(), 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -237,7 +248,8 @@
                     :indexValue="data.chestHairOpacity"
                     :increment="0.1"
                     @input="(e) => setValueWrap(e, 'chestHairOpacity')"
-                    class="pl-3 pr-3 fill-full-width"
+                    style="width: 100%"
+                    class="pl-3 pr-3"
                 />
                 <Button color="blue" @click="$emit('inc-parameter', 'chestHairOpacity', 0, 1, 0.1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -248,16 +260,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
+
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
+import RangeInput from '@components/RangeInput.vue';
 
 const ComponentName = 'Hair';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
+        Button,
+        Icon,
+        Module,
+        RangeInput,
     },
     props: {
         data: Object,

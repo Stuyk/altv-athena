@@ -19,7 +19,7 @@
                 :swapIconSide="true"
                 :icon="valid?.first ? 'icon-checkmark' : 'icon-question'"
                 placeholder="Ivy"
-                class="fill-full-width"
+                style="width: 100%"
             />
         </div>
         <div class="split split-full center mt-4">
@@ -40,7 +40,7 @@
                 :swapIconSide="true"
                 :icon="valid?.last ? 'icon-checkmark' : 'icon-question'"
                 placeholder="Vilachi"
-                class="fill-full-width"
+                style="width: 100%"
             />
         </div>
 
@@ -61,7 +61,7 @@
                 :swapIconSide="true"
                 :icon="valid?.month ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="month.toString()"
-                class="fill-full-width"
+                style="width: 100%"
             />
         </div>
         <div class="split split-full center mt-4">
@@ -80,7 +80,7 @@
                 :swapIconSide="true"
                 :placeholder="day.toString()"
                 :icon="valid?.day ? 'icon-checkmark' : 'icon-question'"
-                class="fill-full-width"
+                style="width: 100% !important"
             />
         </div>
         <div class="split split-full center mt-4">
@@ -102,7 +102,7 @@
                 :swapIconSide="true"
                 :icon="valid?.year ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="year.toString()"
-                class="fill-full-width"
+                style="width: 100% !important"
             />
         </div>
 
@@ -125,22 +125,29 @@
                 :swapIconSide="true"
                 :icon="valid?.gender ? 'icon-checkmark' : 'icon-question'"
                 :placeholder="gender"
-                class="fill-full-width"
+                style="width: 100%"
             />
         </div>
         <div class="split split-full center mt-8 pb-4" v-if="!isAllValid() && valid.first && valid.last">
             <Button color="amber" :raise="true" @click="verifyName">Verify Name</Button>
         </div>
         <div class="split split-full space-between center mt-8 pb-4" v-if="isAllValid() && valid?.first && valid.last">
-            <Button class="mr-2 fill-full-width" color="amber" :raise="true" @click="verifyName">Verify Name</Button>
-            <Button class="ml-2 fill-full-width" color="green" :raise="true" @click="save">Finish</Button>
+            <Button class="mr-2" color="amber" style="width: 100% !important" :raise="true" @click="verifyName"
+                >Verify Name</Button
+            >
+            <Button class="ml-2" color="green" style="width: 100% !important" :raise="true" @click="save"
+                >Finish</Button
+            >
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 
+import Input from '@components/Input.vue';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
 import { CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
 const ComponentName = 'Info';
@@ -153,9 +160,9 @@ export default defineComponent({
         emit: Function,
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Input: defineAsyncComponent(() => import('@components/Input.vue')),
+        Button,
+        Icon,
+        Input,
     },
     data() {
         return {

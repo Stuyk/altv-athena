@@ -29,8 +29,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { VehicleColorPresets } from '../../shared/colors';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
+import Module from '@components/Module.vue';
 
 const ComponentName = 'Presets';
 export default defineComponent({
@@ -48,9 +51,9 @@ export default defineComponent({
         },
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        Button,
+        Icon,
+        Module,
     },
     computed: {
         getColors(): Array<{ name: string; id: number; hex: string }> {

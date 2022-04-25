@@ -5,10 +5,10 @@
         </div>
         <div class="stack pl-2 pr-2 dealership-options">
             <div class="split space-between">
-                <Button class="mr-2 fill-full-width" color="red" @click="exit">
+                <Button class="mr-2" style="width: 100%" color="red" @click="exit">
                     {{ LOCALE.EXIT }}
                 </Button>
-                <Button class="fill-full-width" color="orange" @click="camera">
+                <Button style="width: 100%" color="orange" @click="camera">
                     {{ LOCALE.CAMERA }}
                 </Button>
             </div>
@@ -28,10 +28,10 @@
                         </span>
                     </div>
                     <div class="split space-between">
-                        <Button class="mr-2 fill-full-width" color="blue" @click="() => preview(vehicle)">
+                        <Button class="mr-2" style="width: 100%" color="blue" @click="() => preview(vehicle)">
                             {{ LOCALE.PREVIEW }}
                         </Button>
-                        <Button class="fill-full-width" color="blue" @click="() => selectVehicle(vehicle)">
+                        <Button style="width: 100%" color="blue" @click="() => selectVehicle(vehicle)">
                             {{ LOCALE.SELECT }}
                         </Button>
                     </div>
@@ -42,17 +42,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-
+import { defineComponent } from 'vue';
+import Icon from '@components/Icon.vue';
+import Button from '@components/Button.vue';
+import SimpleInput from '@components/SimpleInput.vue';
 import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_LOCALE } from '../../shared/locale';
 
 export default defineComponent({
     name: 'Preview',
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        SimpleInput: defineAsyncComponent(() => import('@components/SimpleInput.vue')),
+        Button,
+        Icon,
+        SimpleInput,
     },
     props: {
         vehicles: {

@@ -3,8 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { Faction } from '../../shared/interfaces';
+import Button from '@components/Button.vue';
+import Icon from '@components/Icon.vue';
 
 const ComponentName = 'Actions';
 export default defineComponent({
@@ -13,8 +15,8 @@ export default defineComponent({
         faction: Object as () => Faction,
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Button,
+        Icon,
     },
     computed: {},
     methods: {},

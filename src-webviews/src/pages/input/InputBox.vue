@@ -46,16 +46,18 @@
                 <div class="split split-full space-between pt-4">
                     <Button
                         color="red"
+                        style="width: 100%"
                         @click="handleExit"
-                        class="red--text flex-grow-1 outline-round mr-2 fill-full-width"
+                        class="red--text flex-grow-1 outline-round mr-2"
                         >{{ getCancelText }}</Button
                     >
 
                     <template v-if="allValid || options.skipChecks">
                         <Button
                             color="green"
+                            style="width: 100%"
                             @click="submit"
-                            class="green--text flex-grow-1 outline-round ml-2 fill-full-width"
+                            class="green--text flex-grow-1 outline-round ml-2"
                             >{{ getSubmitText }}</Button
                         >
                     </template>
@@ -63,7 +65,8 @@
                         <Button
                             :disable="true"
                             color="green"
-                            class="grey--text flex-grow-1 outline-round ml-2 fill-full-width"
+                            style="width: 100%"
+                            class="grey--text flex-grow-1 outline-round ml-2"
                             >{{ getSubmitText }}</Button
                         >
                     </template>

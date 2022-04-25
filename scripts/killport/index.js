@@ -1,9 +1,14 @@
-import fkill from 'fkill';
-const ports = [7788, 'altv-server', 'altv-server.exe', 3399];
+import { kill, killer } from 'cross-port-killer';
 
-for (let i = 0; i < ports.length; i++) {
-    try {
-        fkill(ports[i], { force: true, ignoreCase: true, silent: true });
-    } catch (err) {
+const ports = [7788];
+
+async function tryKillingPortProcesses() {
+    for (let i = 0; i < ports.length; i++) {
+        const pids = await kill(ports[i]);
+        if (pids && pids.length >= 1) {
+            await killer.killByPids(pids);
+        }
     }
 }
+
+tryKillingPortProcesses();

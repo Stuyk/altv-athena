@@ -32,8 +32,7 @@ typedoc.json
 package-lock.json
 
 # Plugin stuff
-scripts/buildresource/*.json
-src-webviews/src/plugins/imports.ts
+/src/core/plugins/athena/**/*.ts
 
 # Yarn stuff
 .yarn/
