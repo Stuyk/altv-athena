@@ -41,7 +41,7 @@ async function getFiles() {
         let files = [];
 
         for (let i = 0; i < FILES_TO_COMPILE.length; i++) {
-            const somePath = path.join(process.cwd(), FILES_TO_COMPILE[i]);
+            const somePath = path.join(process.cwd(), FILES_TO_COMPILE[i]).replace(/\\/g, '/');
             const filesFound = await new Promise((resolve) => {
                 glob(somePath, (err, _files) => {
                     resolve(_files);
@@ -60,7 +60,7 @@ async function copyFiles() {
     let files = [];
 
     for (let i = 0; i < FILES_TO_COPY.length; i++) {
-        const somePath = path.join(process.cwd(), FILES_TO_COPY[i]);
+        const somePath = path.join(process.cwd(), FILES_TO_COPY[i]).replace(/\\/g, '/');
         const somePromise = new Promise((resolve) => {
             glob(somePath, (err, _files) => {
                 resolve(_files);

@@ -32,14 +32,14 @@ function sanitizePath(p) {
 }
 
 function getEnabledPlugins() {
-    const rootPath = sanitizePath(path.join(process.cwd(), "src/core/plugins"));
+    const rootPath = sanitizePath(path.join(process.cwd(), "src/core/plugins")).replace(/\\/g, '/');
     const pluginFolders = fs.readdirSync(rootPath);
 
     return pluginFolders.filter(pluginName => {
-        const pluginPath = sanitizePath(path.join(rootPath, pluginName));
+        const pluginPath = sanitizePath(path.join(rootPath, pluginName)).replace(/\\/g, '/');
 
         for (const fileName of viablePluginDisablers) {
-            const disabledPath = sanitizePath(path.join(pluginPath, fileName));
+            const disabledPath = sanitizePath(path.join(pluginPath, fileName)).replace(/\\/g, '/');
 
             if (fs.existsSync(disabledPath)) {
                 return false;
@@ -51,7 +51,7 @@ function getEnabledPlugins() {
 }
 
 function getFilesForTranspilation(enabledPlugins) {
-    const rootPath = sanitizePath(path.join(process.cwd(), "src/**/*.ts"));
+    const rootPath = sanitizePath(path.join(process.cwd(), "src/**/*.ts").replace(/\\/g, '/'));
     const files = glob.sync(rootPath, {
         nodir: true,
         ignore: [
@@ -61,8 +61,8 @@ function getFilesForTranspilation(enabledPlugins) {
     });
 
     for (const pluginName of enabledPlugins) {
-        const pluginPath = sanitizePath(path.join(process.cwd(), "src/core/plugins", pluginName));
-        const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts"), {
+        const pluginPath = sanitizePath(path.join(process.cwd(), "src/core/plugins", pluginName).replace(/\\/g, '/'));
+        const pluginFiles = glob.sync(path.join(pluginPath, "**/*.ts").replace(/\\/g, '/'), {
             nodir: true,
             ignore: [
                 "**/imports.ts",
@@ -79,7 +79,7 @@ function getFilesForTranspilation(enabledPlugins) {
 }
 
 function getFilesToCopy(enabledPlugins) {
-    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)'));
+    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)').replace(/\\/g, '/'));
 
     const result = glob.sync(filePath, {
         nodir: true,
@@ -110,7 +110,7 @@ async function run() {
     const filesToTranspile = getFilesForTranspilation(enabledPlugins);
     const filesToCopy = getFilesToCopy(enabledPlugins);
 
-    const resourcesFolder = sanitizePath(path.join(process.cwd(), "resources"));
+    const resourcesFolder = sanitizePath(path.join(process.cwd(), "resources")).replace(/\\/g, '/');
     if (fs.existsSync(resourcesFolder)) {
         fs.rmSync(resourcesFolder, { recursive: true, force: true });
     }

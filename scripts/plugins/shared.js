@@ -8,7 +8,7 @@ const viablePluginDisablers = [
 ]
 
 export function sanitizePath(p) {
-    return p.replace(/\\/g, path.sep);
+    return p.replace(/\\/g, '/');
 }
 
 export function getEnabledPlugins() {
