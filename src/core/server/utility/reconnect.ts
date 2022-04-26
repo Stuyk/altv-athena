@@ -36,6 +36,9 @@ export class ReconnectHelper {
                     alt.setTimeout(this.altvReconnect, 3000);
                 }
             })
-            .catch(alt.log);
+            .catch((err) => {
+                // Suppress warning
+                // alt.log(err);
+            });
     }
 }
