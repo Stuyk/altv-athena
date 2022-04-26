@@ -279,6 +279,14 @@ export interface FactionVehicle {
 
 export interface FactionSettings {
     /**
+     * The current positions of faction headquarters.
+     *
+     * @type {Vector3}
+     * @memberof FactionSettings
+     */
+    position?: Vector3;
+
+    /**
      * A list of vehicle parking spots to spawn vehicles from.
      *
      * @type {Array<Vector3>}
@@ -292,7 +300,7 @@ export interface FactionSettings {
      * @type {Array<{ model: string, price: number }>}
      * @memberof FactionSettings
      */
-    vehicles: Array<{ model: string; price: number }>;
+    vehicles?: Array<{ model: string; price: number }>;
 
     /**
      * Maximum number of vehicles purchaseable by the Faction
@@ -300,17 +308,31 @@ export interface FactionSettings {
      * @type {number}
      * @memberof FactionSettings
      */
-    maxVehicles: number | undefined;
+    maxVehicles?: number | undefined;
 
     /**
-     * A blip representation of this faction's main head quarters.
-     * Does not automatically get created.
+     * A blip sprite index.
      *
-     *
-     * @type {(Blip | undefined)}
+     * @type {number}
      * @memberof FactionSettings
      */
-    blip: Blip | undefined;
+    blip?: number;
+
+    /**
+     * A blip sprite colour.
+     *
+     * @type {number}
+     * @memberof FactionSettings
+     */
+    blipColor?: number;
+
+    /**
+     * Message of the day for factions.
+     *
+     * @type {string}
+     * @memberof FactionSettings
+     */
+    motd?: string;
 }
 
 /**
@@ -378,10 +400,10 @@ export interface Faction extends FactionCore {
     storages?: Array<FactionStorage>;
 
     /**
-     * Message of the Day
+     * Expandable Faction Settings for Individual Settings
      *
-     * @type {string}
+     * @type {FactionSettings}
      * @memberof Faction
      */
-    motd?: string;
+    settings?: FactionSettings;
 }

@@ -149,4 +149,7 @@ export const ExampleFactionData = {
             uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
         },
     ],
+    settings: {
+        position: { x: 0, y: 0, z: 0 },
+    },
 };

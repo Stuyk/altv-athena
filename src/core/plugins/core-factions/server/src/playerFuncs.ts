@@ -502,6 +502,52 @@ export class FactionPlayerFuncs {
     }
 
     /**
+     * Sets the head quarter location of the faction.
+     * Requires ownership permission.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {alt.Vector3} pos
+     * @return {*}
+     * @memberof FactionPlayerFuncs
+     */
+    static async setHeadQuarters(player: alt.Player, pos: alt.Vector3) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        return await FactionFuncs.setHeadQuarters(faction, pos);
+    }
+
+    /**
+     * Sets the blip for the faction. Re
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {number} blip
+     * @param {number} [color=36]
+     * @return {*}
+     * @memberof FactionPlayerFuncs
+     */
+    static async setBlip(player: alt.Player, blip: number | undefined, color: number | undefined = 36) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        return await FactionFuncs.setBlip(faction, blip, color);
+    }
+
+    /**
      * Invoke an event by an event name.
      *
      * @static

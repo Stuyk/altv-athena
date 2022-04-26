@@ -24,6 +24,12 @@ class InternalFunctions {
     static create(faction: Faction) {
         faction._id = faction._id.toString();
         factions[faction._id as string] = faction;
+
+        if (!faction.settings) {
+            faction.settings = {};
+        }
+
+        FactionHandler.updateSettings(faction);
     }
 }
 
@@ -306,5 +312,32 @@ export class FactionHandler {
      */
     static getAllFactions() {
         return Object.values(factions) as Array<Faction>;
+    }
+
+    /**
+     * Reloads blips, markers, parking spots, etc.
+     *
+     * @static
+     * @param {Faction} faction
+     * @memberof FactionFuncs
+     */
+    static updateSettings(faction: Faction) {
+        if (!faction.settings) {
+            return;
+        }
+
+        if (faction.settings.blip) {
+            Athena.controllers.blip.append({
+                uid: faction._id.toString(),
+                color: faction.settings.blipColor,
+                sprite: faction.settings.blip,
+                pos: faction.settings.position,
+                scale: 1,
+                text: faction.name,
+                shortRange: true,
+            });
+        } else {
+            Athena.controllers.blip.remove(faction._id.toString());
+        }
     }
 }

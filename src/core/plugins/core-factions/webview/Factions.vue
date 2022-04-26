@@ -16,6 +16,8 @@
                     v-bind:faction="faction"
                     v-bind:character="character"
                     v-bind:money="money"
+                    v-bind:pos="pos"
+                    v-bind:rot="rot"
                 ></component>
             </div>
         </div>
@@ -28,6 +30,7 @@ import { defineComponent, defineAsyncComponent } from 'vue';
 import { ExampleFactionData } from './utility/exampleFactionData';
 import { Faction } from '../shared/interfaces';
 import { FACTION_EVENTS } from '../shared/factionEvents';
+import { Vector3 } from '../../../shared/interfaces/vector';
 
 export const ComponentName = 'Factions';
 export default defineComponent({
@@ -51,7 +54,7 @@ export default defineComponent({
     },
     data() {
         return {
-            pageIndex: 2,
+            pageIndex: 5,
             pages: [
                 { name: 'Members', page: 'Members' },
                 { name: 'Ranks', page: 'Ranks' },
@@ -66,16 +69,21 @@ export default defineComponent({
             character: '61a8efe590851930ac59f5ef',
             // Money = Bank + Cash
             money: 0,
+            // Position and rotation of the faction
+            pos: { x: 0, y: 0, z: 0 },
+            rot: { x: 0, y: 0, z: 0 },
         };
     },
     methods: {
         setPage(pageIndex: number) {
             this.pageIndex = pageIndex;
         },
-        updateFaction(faction: Faction, character: string, money: number) {
+        updateFaction(faction: Faction, character: string, money: number, pos: Vector3, rot: Vector3) {
             this.faction = faction;
             this.character = character;
             this.money = money;
+            this.pos = pos;
+            this.rot = rot;
         },
         close() {
             if (!('alt' in window)) {
