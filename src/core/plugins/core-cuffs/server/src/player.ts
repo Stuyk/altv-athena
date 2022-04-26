@@ -1,6 +1,3 @@
-import * as alt from 'alt-server';
-import * as charRef from '../../../../shared/interfaces/character';
-
 // Extends the player interface.
 declare module 'alt-server' {
     export interface Player {

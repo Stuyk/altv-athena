@@ -14,7 +14,6 @@ import ViewModel from '../models/viewModel';
 import { drawMarker } from '../utility/marker';
 import { isAnyMenuOpen } from '../utility/menus';
 import { Timer } from '../utility/timers';
-import { waitForFalse, waitFor } from '../utility/wait';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const PAGE_NAME = 'Inventory';

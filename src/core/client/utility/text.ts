@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { Timer } from './timers';
 
 const temporaryText = [];
-let tempInterval;
+let tempInterval: number | undefined;
 
 /**
  * Draw text on your screen in a 2D position with an every tick.

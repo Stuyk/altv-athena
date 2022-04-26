@@ -1,4 +1,3 @@
-import alt from 'alt-server';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { Athena } from '../api/athena';
 

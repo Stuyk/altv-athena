@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { getPointsInCircle } from './math';
 import { loadSceneAtCoords } from './scene';

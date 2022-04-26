@@ -12,8 +12,6 @@ import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
 import { Appearance } from '../../../../shared/interfaces/appearance';
 import { Character } from '../../../../shared/interfaces/character';
 import { Item } from '../../../../shared/interfaces/item';
-import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../shared/locale/locale';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../../shared/events';
 

@@ -15,10 +15,9 @@
  **/
 
 import alt, { RmlElement } from 'alt-client';
-import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vector2, Vector3 } from '../../shared/interfaces/vector';
-import { distance, distance2d } from '../../shared/utility/vector';
+import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { UID } from '../utility/uid';
 
