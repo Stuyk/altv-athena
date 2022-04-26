@@ -27,7 +27,7 @@ class VehicleCommands {
         Athena.player.emit.notification(player, `Vehicle successfully repaired.`);
     }
 
-    @command('vehicle', '/tempvehicle', PERMISSIONS.ADMIN)
+    @command('tempvehicle', '/tempvehicle', PERMISSIONS.ADMIN)
     private static createTemporaryVehicleCommand(player: alt.Player, model: string): void {
         if (!model) {
             Athena.player.emit.message(player, Athena.controllers.chat.getDescription('tempvehicle'));
