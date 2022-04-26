@@ -5,8 +5,6 @@ import { LocaleController } from '../../shared/locale/locale';
 import { WebViewController } from '../extensions/view2';
 import ViewModel from '../models/viewModel';
 import { fetchToken } from '../systems/quickToken';
-import { disableAllControls } from '../utility/disableControls';
-import { sleep } from '../utility/sleep';
 
 const PAGE_NAME = 'Login';
 

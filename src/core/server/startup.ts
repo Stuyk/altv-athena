@@ -1,10 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import fs from 'fs';
-import path from 'path';
 
 import { SYSTEM_EVENTS } from '../shared/enums/system';
-import { PostController } from './ares/postRequests';
 import { IConfig } from './interface/iConfig';
 import Ares from './utility/ares';
 import Logger from './utility/athenaLogger';
