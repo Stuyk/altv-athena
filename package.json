@@ -45,7 +45,7 @@
     "devDependencies": {
         "@altv/types-client": "^2.1.5",
         "@altv/types-natives": "^1.4.4",
-        "@altv/types-server": "^2.3.2",
+        "@altv/types-server": "^2.3.3",
         "@altv/types-shared": "^1.2.3",
         "@altv/types-webview": "^1.0.2",
         "@altv/types-worker": "^1.0.6",
