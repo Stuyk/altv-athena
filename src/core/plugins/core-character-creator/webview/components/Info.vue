@@ -96,7 +96,7 @@
                         return parseFloat(text) >= minYear ? null : `Minimum Year: ${minYear}`;
                     },
                     (text) => {
-                        return parseFloat(text) <= maxYear ? null : `Maixmum Year: ${maxYear}`;
+                        return parseFloat(text) <= maxYear ? null : `Maximum Year: ${maxYear}`;
                     },
                 ]"
                 :swapIconSide="true"
