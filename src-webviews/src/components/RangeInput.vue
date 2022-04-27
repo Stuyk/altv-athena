@@ -2,8 +2,8 @@
     <div class="stack">
         <div class="split">
             <div class="blue--text overline pr-2 align-right">{{ getValue }}</div>
-            <input type="range" :min="_min" :max="_max" :step="_step" :value="_value" />
-            <div class="blue--text overline pl-2 align-left">{{ _max }}</div>
+            <input type="range" :min="minIndex" :max="minIndex" :step="_step" :value="indexValue" />
+            <div class="blue--text overline pl-2 align-left">{{ maxIndex }}</div>
         </div>
         <div v-if="values" class="overline grey--text pt-2 align-center">
             {{ getCurrentValue }}
@@ -21,10 +21,9 @@ export default defineComponent({
     data() {
         return {
             _audio: null,
-            _min: 0,
-            _max: 1,
             _step: 1,
             _value: 0,
+            update: 1,
         };
     },
     props: {

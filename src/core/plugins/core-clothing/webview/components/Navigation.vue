@@ -1,14 +1,14 @@
 <template>
     <div class="split split-full navigation space-between pa-6">
-        <Button color="blue" @click="$emit('next')">
+        <Button class="nav-btn" color="blue" @click="$emit('next')">
             <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
         </Button>
 
-        <span class="overline">
+        <span class="pretty text-lg-h5 grey--text text--lighten-4 grey--glow">
             {{ pageName }}
         </span>
 
-        <Button color="blue" @click="$emit('prev')">
+        <Button class="nav-btn" color="blue" @click="$emit('prev')">
             <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
         </Button>
     </div>
@@ -25,7 +25,7 @@ export default defineComponent({
             type: Number,
             required: true,
         },
-        labels: {
+        pages: {
             type: Object,
             required: true,
         },
@@ -40,3 +40,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style>
+.nav-btn {
+    border-radius: 6px !important;
+}
+</style>

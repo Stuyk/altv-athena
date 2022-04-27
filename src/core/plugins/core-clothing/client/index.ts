@@ -13,7 +13,6 @@ import { Item } from '../../../shared/interfaces/item';
 import { CLOTHING_CONFIG } from '../shared/config';
 import { CLOTHING_INTERACTIONS } from '../shared/events';
 import { IClothingStore } from '../shared/interfaces';
-import { LOCALE_CLOTHING_VIEW } from '../shared/locales';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -148,7 +147,6 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetData`, storeData);
-        view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_CLOTHING_VIEW);
         view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
         native.doScreenFadeIn(100);
     }
