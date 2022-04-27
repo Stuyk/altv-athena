@@ -1,4 +1,3 @@
-import * as alt from 'alt-server';
 import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
 import logger from './athenaLogger';

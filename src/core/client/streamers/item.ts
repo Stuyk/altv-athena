@@ -1,4 +1,3 @@
-import * as native from 'natives';
 import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { GroundItem } from '../../shared/interfaces/groundItem';

@@ -1,6 +1,6 @@
-import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
-import { Global } from '../systems/global';
+// import * as alt from 'alt-server';
+// import { Athena } from '../api/athena';
+// import { Global } from '../systems/global';
 
 // Does nothing. Just writing some code here.
 // May change from version to version but it's mostly just Stuyk's notepad.

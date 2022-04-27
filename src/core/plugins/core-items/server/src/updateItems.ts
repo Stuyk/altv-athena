@@ -1,4 +1,4 @@
-import alt from 'alt-server';
+import * as alt from 'alt-server';
 import { Athena } from "../../../../server/api/athena";
 import items from './items';
 

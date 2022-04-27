@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../../../client/extensions/view2';
-import ViewModel from '../../../../client/models/viewModel';
 import { isAnyMenuOpen } from '../../../../client/utility/menus';
 import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
