@@ -10,6 +10,7 @@ import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
+import { consoleCommand } from '../decorators/commands';
 import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 
@@ -306,11 +307,40 @@ export default class ChatController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
     }
 
+    @consoleCommand('/dumpcommands')
     static printAllCommands() {
+        let allCommands: Array<Command> = [];
+
         Object.keys(ChatController.commands).forEach((key) => {
             const cmdData = ChatController.commands[key];
-            console.log(`${cmdData.description}`);
+            allCommands.push(cmdData);
+            console.log(cmdData);
         });
+
+        let adminCommands = allCommands.filter((x) =>
+            isFlagEnabled(x.permission, PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR),
+        );
+
+        let moderatorCommands = allCommands.filter((x) => isFlagEnabled(x.permission, PERMISSIONS.MODERATOR));
+
+        let normalCommands = allCommands.filter(
+            (x) => !isFlagEnabled(x.permission, PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR),
+        );
+
+        console.log(`ADMIN`);
+        for (let i = 0; i < adminCommands.length; i++) {
+            console.log(adminCommands[i].description);
+        }
+
+        console.log('MODERATOR');
+        for (let i = 0; i < moderatorCommands.length; i++) {
+            console.log(moderatorCommands[i].description);
+        }
+
+        console.log('USER');
+        for (let i = 0; i < normalCommands.length; i++) {
+            console.log(normalCommands[i].description);
+        }
     }
 }
 

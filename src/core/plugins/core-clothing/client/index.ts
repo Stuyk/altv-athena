@@ -149,14 +149,14 @@ class InternalFunctions implements ViewModel {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetData`, storeData);
         view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_CLOTHING_VIEW);
-        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
         native.doScreenFadeIn(100);
     }
 
     static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
         if (key === 'bank' || (key === 'cash' && isOpen)) {
             const view = await WebViewController.get();
-            view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+            view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
         }
     }
 

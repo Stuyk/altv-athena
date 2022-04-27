@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <!-- Pop Up for Purchase -->
-        <Modal v-if="showDialog">
+        <!-- <Modal v-if="showDialog">
             <Frame minWidth="30vw" maxWidth="30vw">
                 <template v-slot:toolbar>
                     <Toolbar :hideExit="true">
@@ -72,42 +72,34 @@
                     </div>
                 </template>
             </Frame>
-        </Modal>
+        </Modal> -->
         <!-- Right Panel -->
-        <div class="creator stack" v-if="labels && labels.length >= 1">
+        <div class="creator stack">
             <!-- Navigation -->
-            <div class="split split-full navigation space-between pa-6">
-                <Button color="blue" @click="prevPage">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
-                </Button>
-
-                <span class="overline">
-                    {{ getLocaleByName(labels[page].name) }}
-                </span>
-
-                <Button color="blue" @click="nextPage">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
-                </Button>
-            </div>
+            <Navigation
+                v-bind:page-index="pageIndex"
+                v-bind:labels="labels"
+                v-bind:page-name="pageName"
+                @next="nextPage"
+                @prev="prevPage"
+            />
             <!-- Customization -->
-            <Option
+            <!-- <Option
                 v-bind:page="labels[page]"
                 v-bind:locales="locales"
                 v-bind:update="updateCount"
                 @force-populate="forcePopulate"
                 @update-component="updateComponent"
-            ></Option>
+            ></Option> -->
             <!-- Purchase Options -->
-            <div class="footer pa-4">
+            <!-- <div class="footer pa-4">
                 <div class="split split-full space-between">
-                    <!-- Component is Available and Can Be Purchased -->
                     <template v-if="isComponentAvailable() && hasEnoughMoney()">
                         <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
                             <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
                         </Button>
                         <span class="price pa-3">${{ getPrice() }}</span>
                     </template>
-                    <!-- Component is Unavailable and **Cannot** Be Purchased -->
                     <template v-else>
                         <Button class="mr-3" color="grey" :disable="true">
                             <span class="grey--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
@@ -115,7 +107,7 @@
                         <span class="price red--text pa-3">${{ getPrice() }}</span>
                     </template>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="escape pa-4" @click="handleClose">
             <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
@@ -126,10 +118,8 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-
-import DefaultData from './utility/defaultData';
-import DefaultLocale from './utility/defaultLocales';
-import LabelsRef from './utility/labels';
+import { EXAMPLE_CLOTHING_DATA } from './utility/exampleData';
+import { DEFAULT_CLOTHING_STORE } from './utility/defaultData';
 
 const ComponentName = 'Clothing';
 export default defineComponent({
@@ -146,13 +136,17 @@ export default defineComponent({
         RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
         Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
         Option: defineAsyncComponent(() => import('./components/Option.vue')),
+        Navigation: defineAsyncComponent(() => import('./components/Navigation.vue')),
     },
     data() {
         return {
-            cash: 0,
-            bank: 0,
-            updateCount: 0,
-            page: 0,
+            // New stuff
+            pageIndex: 0,
+            pageName: '',
+            money: 0,
+            page: {},
+            pages: [],
+            // Old dog shit
             showDialog: false,
             name: '',
             desc: '',
@@ -162,8 +156,7 @@ export default defineComponent({
                 name: false,
                 desc: false,
             },
-            locales: DefaultLocale,
-            storeData: DefaultData,
+            storeData: DEFAULT_CLOTHING_STORE,
         };
     },
     computed: {
@@ -175,6 +168,32 @@ export default defineComponent({
         },
     },
     methods: {
+        nextPage() {
+            if (this.pageIndex + 1 >= this.pages.length) {
+                this.pageIndex = 0;
+            } else {
+                this.pageIndex += 1;
+            }
+
+            this.setPage(this.pageIndex);
+        },
+        prevPage() {
+            if (this.pageIndex - 1 <= -1) {
+                this.pageIndex = this.pages.length - 1;
+            } else {
+                this.pageIndex -= 1;
+            }
+
+            this.setPage(this.pageIndex);
+        },
+        setPage(index: number) {
+            this.pageName = this.pages[index].pageName;
+            this.page = this.pages[index];
+        },
+        setBankData(money: number) {
+            this.money = money;
+        },
+        // Old Stuff
         hasEnoughMoney() {
             const price = this.getPrice();
             if (this.cash >= price) {
@@ -262,26 +281,7 @@ export default defineComponent({
 
             alt.emit(`${ComponentName}:PageUpdate`, this.page);
         },
-        nextPage() {
-            if (this.page + 1 >= this.labels.length) {
-                this.page = 0;
-            } else {
-                this.page += 1;
-            }
 
-            this.updateCount += 1;
-            this.sendPageUpdate();
-        },
-        prevPage() {
-            if (this.page - 1 <= -1) {
-                this.page = this.labels.length - 1;
-            } else {
-                this.page -= 1;
-            }
-
-            this.updateCount += 1;
-            this.sendPageUpdate();
-        },
         setLocale(data) {
             this.locales = data;
         },
@@ -395,32 +395,32 @@ export default defineComponent({
 
             this.labels = currentLabels;
         },
-        setBankData(bank: number, cash: number) {
-            this.bank = bank;
-            this.cash = cash;
-        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
 
-        this.labels = [...LabelsRef];
+        // Set Default Example Data
+        this.pages = EXAMPLE_CLOTHING_DATA;
+        this.setPage(this.pageIndex);
 
-        if ('alt' in window) {
-            alt.on(`${ComponentName}:SetData`, this.setData);
-            alt.on(`${ComponentName}:SetLocale`, this.setLocale);
-            alt.on(`${ComponentName}:Propagate`, this.setLabels);
-            alt.on(`${ComponentName}:SetBankData`, this.setBankData);
-            alt.emit(`${ComponentName}:Ready`);
+        // this.labels = [...LabelsRef];
 
-            setTimeout(() => {
-                alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
-            }, 200);
-        } else {
-            // Run this twice because it needs to remove some pages.
-            this.setData(DefaultData);
-        }
+        // if ('alt' in window) {
+        //     alt.on(`${ComponentName}:SetData`, this.setData);
+        //     alt.on(`${ComponentName}:SetLocale`, this.setLocale);
+        //     alt.on(`${ComponentName}:Propagate`, this.setLabels);
+        //     alt.on(`${ComponentName}:SetBankData`, this.setBankData);
+        //     alt.emit(`${ComponentName}:Ready`);
 
-        this.sendPageUpdate();
+        //     setTimeout(() => {
+        //         alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
+        //     }, 200);
+        // } else {
+        //     // Run this twice because it needs to remove some pages.
+        //     this.setData(DefaultData);
+        // }
+
+        // this.sendPageUpdate();
     },
     unmounted() {
         document.removeEventListener('keyup', this.handlePress);

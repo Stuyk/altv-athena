@@ -1,6 +1,6 @@
 <template>
     <div class="stack center-page pa-3">
-        <div class="component stack pa-3 mb-3" v-for="(id, index) in page.ids" :key="index">
+        <div class="component stack pa-3 mb-3" v-for="(id, index) in getPages" :key="index">
             <div class="overline boldest pb-3" v-if="page.addonLocales && page.addonLocales.length >= 1">
                 {{ getLocaleByName(page.addonLocales[index]) }}
             </div>
@@ -47,7 +47,7 @@
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
-            <template v-if="page.maxTextures[index] >= 1">
+            <template v-if="page.maxTextures[index] >= 2">
                 <div class="overline">
                     {{ getLocaleByName('LABEL_TEXTURE') }}
                 </div>
@@ -63,8 +63,10 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <RangeInput
-                        :minIndex="1"
-                        :maxIndex="page.maxTextures[index]"
+                        :minIndex="0"
+                        :maxIndex="
+                            page.maxTextures[index] && page.maxTextures[index] >= 1 ? page.maxTextures[index] : 1
+                        "
                         :indexValue="page.textures[index]"
                         :increment="1"
                         @input="
@@ -114,6 +116,18 @@ export default defineComponent({
             }
 
             return this.locales[name];
+        },
+        getMaxTextures(index: number) {
+            if (!this.page.maxTextures) {
+                return 1;
+            }
+
+            return this.page.maxTextures[index] - 1;
+        },
+    },
+    computed: {
+        getPages() {
+            return this.page.ids;
         },
     },
 });
