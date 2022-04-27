@@ -1,9 +1,6 @@
 import * as alt from 'alt-server';
 import axios from 'axios';
-import { exec } from 'child_process';
-import ecc from 'elliptic';
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
-import path from 'path';
+import ecc from 'elliptic'
 import sjcl from 'sjcl';
 
 import { sha256 } from './encryption';

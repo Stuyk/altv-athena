@@ -7,8 +7,6 @@ import { PedCharacter } from '../../../../client/utility/characterPed';
 import { disableAllControls } from '../../../../client/utility/disableControls';
 import { sleep } from '../../../../client/utility/sleep';
 import { Appearance } from '../../../../shared/interfaces/appearance';
-import { CHARACTER_SELECT_EVENTS } from '../../../core-character-select/shared/events';
-import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
 import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
 const PAGE_NAME = 'CharacterCreator';

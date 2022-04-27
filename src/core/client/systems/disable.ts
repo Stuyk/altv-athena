@@ -7,7 +7,7 @@ import { VehicleController } from './vehicle';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);
 
-let interval;
+let interval: number | undefined;
 
 function toggleOn() {
     interval = Timer.createInterval(disableDefaultBehavior, 0, 'disable.ts');

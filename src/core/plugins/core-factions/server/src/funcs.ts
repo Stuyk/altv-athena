@@ -881,4 +881,44 @@ export class FactionFuncs {
 
         return didUpdate.status;
     }
+
+    /**
+     * It sets the faction's headquarters to the given position, and then updates the faction's
+     * members.
+     * @param {Faction} faction - Faction - The faction object
+     * @param {Vector3} pos - Vector3
+     * @returns A boolean value.
+     */
+    static async setHeadQuarters(faction: Faction, pos: Vector3) {
+        faction.settings.position = pos;
+
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
+     * It sets the blip of a faction to a specific blip and color.
+     * @param {Faction} faction - Faction - This is the faction object that you want to set the blip
+     * for.
+     * @param {number | undefined} blip - number -&gt; The blip ID
+     * @param {number | undefined} color - number
+     * @returns A boolean value.
+     */
+    static async setBlip(faction: Faction, blip: number | undefined, color: number | undefined) {
+        faction.settings.blip = typeof blip !== 'undefined' ? blip : undefined;
+        faction.settings.blipColor = typeof blip !== 'undefined' && typeof color !== 'undefined' ? color : undefined;
+
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
 }

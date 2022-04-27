@@ -41,8 +41,7 @@ class TeleportCommands {
         );
     }
 
-    @command('position',LocaleController.get(LOCALE_KEYS.COMMAND_COORDS, '/coords'),
-    PERMISSIONS.ADMIN)
+    @command('coords', LocaleController.get(LOCALE_KEYS.COMMAND_COORDS, '/coords'), PERMISSIONS.ADMIN)
     private static handleCommand(player: alt.Player, x: string, y: string, z: string): void {
         try {
             Athena.player.safe.setPosition(player, parseFloat(x), parseFloat(y), parseFloat(z));

@@ -14,8 +14,8 @@ import { ClientInventoryView } from '../views/inventory';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
-let interval;
-let lastHover;
+let interval: number | undefined;
+let lastHover: number | null;
 
 export interface IClientWheelItem extends IWheelItem {
     callback?: Function;

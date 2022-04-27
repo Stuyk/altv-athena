@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector2, Vector3 } from '../../shared/interfaces/vector';
+import { Vector2 } from '../../shared/interfaces/vector';
 
 const drawables: { [uid: string]: Array<Vector2> } = {};
-let interval: number;
+let interval: number | undefined;
 
 function drawTick() {
     Object.keys(drawables).forEach((key) => {

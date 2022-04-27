@@ -22,7 +22,7 @@ async function getClientPluginFolders() {
 
     const removalPath = path.join(process.cwd(), 'src/core/').replace(/\\/gm, '/')
     const results = await new Promise((resolve) => {
-        glob(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`), (err, files) => {
+        glob(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`).replace(/\\/g, '/'), (err, files) => {
             if (err) {
                 resolve([])
                 return;

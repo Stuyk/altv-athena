@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { IVector2 } from 'alt-shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { Vector2, Vector3 } from '../../shared/interfaces/vector';

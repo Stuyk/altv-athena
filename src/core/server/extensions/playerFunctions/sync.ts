@@ -33,6 +33,8 @@ function inventory(player: alt.Player): void {
         player.data.equipment = [];
     }
 
+    equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
+
     emit.meta(player, 'inventory', player.data.inventory);
     emit.meta(player, 'equipment', player.data.equipment);
     emit.meta(player, 'toolbar', player.data.toolbar);
@@ -116,24 +118,24 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
 
     if (!isMale) {
         player.setClothes(1, 0, 0, 0); // mask
-        player.setClothes(3, 15, 0, 0); // arms
+        player.setClothes(3, 0, 0, 0); // torso / arms
         player.setClothes(4, 14, 0, 0); // pants
         player.setClothes(5, 0, 0, 0); // bag
         player.setClothes(6, 35, 0, 0); // shoes
         player.setClothes(7, 0, 0, 0); // accessories
         player.setClothes(8, 15, 0, 0); // undershirt
         player.setClothes(9, 0, 0, 0); // body armour
-        player.setClothes(11, 15, 0, 0); // torso
+        player.setClothes(11, 0, 0, 0); // tops
     } else {
         player.setClothes(1, 0, 0, 0); // mask
-        player.setClothes(3, 15, 0, 0); // arms
+        player.setClothes(3, 15, 0, 0); // torso / arms
         player.setClothes(5, 0, 0, 0); // bag
         player.setClothes(4, 14, 0, 0); // pants
         player.setClothes(6, 34, 0, 0); // shoes
         player.setClothes(7, 0, 0, 0); // accessories
-        player.setClothes(8, 0, 0, 0); // undershirt
+        player.setClothes(8, 15, 0, 0); // undershirt
         player.setClothes(9, 0, 0, 0); // body armour
-        player.setClothes(11, 0, 0, 0); // torso
+        player.setClothes(11, 91, 0, 0); // tops
     }
 
     if (items && Array.isArray(items)) {

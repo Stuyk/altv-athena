@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import { WebViewController } from '../../../../client/extensions/view2';
-import ViewModel from '../../../../client/models/viewModel';
 import { isAnyMenuOpen } from '../../../../client/utility/menus';
 import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
@@ -76,6 +75,8 @@ class InternalFunctions {
             faction,
             alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID),
             alt.Player.local.meta.cash + alt.Player.local.meta.bank,
+            alt.Player.local.pos,
+            alt.Player.local.rot,
         );
     }
 

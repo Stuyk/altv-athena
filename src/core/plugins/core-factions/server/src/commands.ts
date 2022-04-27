@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { AthenaEvents } from '../../../../client/systems/athenaEvents';
 import { Athena } from '../../../../server/api/athena';
 import ChatController from '../../../../server/systems/chat';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';

@@ -63,6 +63,7 @@ export const DEFAULT_CONFIG = {
     VEHICLE_MAX_DISTANCE_TO_ENTER: SHARED_CONFIG.MAX_VEHICLE_INTERACTION_RANGE, // Max distance to enter a vehicle.
     VEHICLE_DISPLAY_LOCK_STATUS: true, // Display vehicle lock status above vehicle
     VEHICLE_DISPLAY_LOCK_INTERACTION_INFO: true, // Display interaction info in hud
+    VEHICLE_DESPAWN_TIMEOUT: 30000,
     // The Default Stream Configuration for Markers, Text Labels, etc.
     STREAM_CONFIG: StreamConfiguration,
     // The Default Faction Configurations

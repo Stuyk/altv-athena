@@ -104,6 +104,7 @@ export class VehicleSystem {
         alt.on('playerEnteringVehicle', VehicleSystem.entering);
         alt.on('playerEnteredVehicle', VehicleSystem.enter);
         alt.on('playerLeftVehicle', VehicleSystem.leave);
+        alt.on('vehicleDestroy', VehicleSystem.destroyed);
 
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
             return;
@@ -646,5 +647,37 @@ export class VehicleSystem {
         }
 
         StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
+    }
+
+    /**
+     * Eventually just despawns the vehicle after some time.
+     *
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @memberof VehicleSystem
+     */
+    static async destroyed(vehicle: alt.Vehicle) {
+        await new Promise((resolve: Function) => {
+            alt.setTimeout(() => {
+                resolve();
+            }, DEFAULT_CONFIG.VEHICLE_DESPAWN_TIMEOUT);
+        });
+
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESTROYED, vehicle);
+
+        alt.nextTick(() => {
+            if (vehicle && vehicle.valid && vehicle.data) {
+                VehicleFuncs.despawn(vehicle.data.id);
+                return;
+            }
+
+            try {
+                vehicle.destroy();
+            } catch (err) {}
+        });
     }
 }

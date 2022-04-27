@@ -5,6 +5,8 @@ import '../plugins/athena/client/imports';
 import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
+import './events/keyHeld';
+
 // Interfaces - Always Load First
 import './extensions/meta';
 import './extensions/player';
