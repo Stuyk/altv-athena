@@ -103,14 +103,14 @@ export class CharacterSystem {
 
         if (!isMale) {
             native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
-            native.setPedComponentVariation(ped, 3, 15, 0, 0); // arms
+            native.setPedComponentVariation(ped, 3, 0, 0, 0); // arms
             native.setPedComponentVariation(ped, 4, 14, 0, 0); // pants
             native.setPedComponentVariation(ped, 5, 0, 0, 0); // bag
             native.setPedComponentVariation(ped, 6, 35, 0, 0); // shoes
             native.setPedComponentVariation(ped, 7, 0, 0, 0); // accessories
             native.setPedComponentVariation(ped, 8, 15, 0, 0); // undershirt
             native.setPedComponentVariation(ped, 9, 0, 0, 0); // body armour
-            native.setPedComponentVariation(ped, 11, 15, 0, 0); // torso
+            native.setPedComponentVariation(ped, 11, 0, 0, 0); // torso
         } else {
             native.setPedComponentVariation(ped, 1, 0, 0, 0); // mask
             native.setPedComponentVariation(ped, 3, 15, 0, 0); // arms

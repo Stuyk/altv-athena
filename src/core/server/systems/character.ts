@@ -111,8 +111,8 @@ export class CharacterSystem {
 
         Athena.player.sync.appearance(player, player.data.appearance);
 
-        if (player.data.equipment) {
-            Athena.player.sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
+        if (!player.data.equipment) {
+            player.data.equipment = [];
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);

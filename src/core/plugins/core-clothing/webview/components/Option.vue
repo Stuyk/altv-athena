@@ -19,7 +19,7 @@
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
                 <RangeInput
-                    :minIndex="-1"
+                    :minIndex="page.isProp ? -1 : 0"
                     :maxIndex="page.maxDrawables[index]"
                     :indexValue="page.drawables[index]"
                     :increment="1"

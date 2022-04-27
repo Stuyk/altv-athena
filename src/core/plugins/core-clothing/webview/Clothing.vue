@@ -247,6 +247,10 @@ export default defineComponent({
 
             this.name = '';
             this.desc = '';
+
+            if ('alt' in window) {
+                alt.emit(`${ComponentName}:DisableControls`, value);
+            }
         },
         getData(dataName: string, index: number) {
             return this.labels[this.page][dataName][index];
@@ -321,8 +325,13 @@ export default defineComponent({
                 labels[this.page][dataName][index] = 0;
             }
 
-            const minValue = dataName === 'drawables' ? -2 : -1;
-            if (labels[this.page][dataName][index] <= minValue) {
+            let minValue = 0;
+
+            if (labels[this.page].isProp) {
+                minValue = -1;
+            }
+
+            if (labels[this.page][dataName][index] < minValue) {
                 labels[this.page][dataName][index] = maxValue;
             }
 
@@ -401,8 +410,11 @@ export default defineComponent({
             alt.on(`${ComponentName}:SetLocale`, this.setLocale);
             alt.on(`${ComponentName}:Propagate`, this.setLabels);
             alt.on(`${ComponentName}:SetBankData`, this.setBankData);
-            alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
             alt.emit(`${ComponentName}:Ready`);
+
+            setTimeout(() => {
+                alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
+            }, 200);
         } else {
             // Run this twice because it needs to remove some pages.
             this.setData(DefaultData);

@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { PolygonShape } from '../../../../server/extensions/extColshape';
 import { ServerBlipController } from '../../../../server/systems/blip';
+import { CharacterSystem } from '../../../../server/systems/character';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
@@ -139,7 +140,7 @@ export class ClothingFunctions {
         interaction.isPlayerOnly = true;
         interaction.callback = (player: alt.Player) => {
             const data = ClothingFunctions.getClothingStoreData(store.uid);
-            alt.emitClient(player, CLOTHING_INTERACTIONS.OPEN, data);
+            alt.emitClient(player, CLOTHING_INTERACTIONS.OPEN, data, player.data.appearance, player.data.equipment);
         };
 
         ServerBlipController.append(blip);

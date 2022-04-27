@@ -3,4 +3,5 @@ export enum CLOTHING_INTERACTIONS {
     SYNC = 'clothing:Sync',
     PURCHASE = 'clothing:Purchase',
     EXIT = 'clothing:Exit',
+    SYNC_ON_SERVER = 'clothing:SyncOnServer',
 }
