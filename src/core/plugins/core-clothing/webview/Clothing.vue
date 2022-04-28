@@ -126,10 +126,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="escape pa-4" @click="handleClose">
-            <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
-            <span class="overline white--text boldest">ESC</span>
-        </div> -->
     </div>
 </template>
 
