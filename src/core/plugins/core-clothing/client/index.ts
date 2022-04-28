@@ -90,6 +90,9 @@ class InternalFunctions implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
+
+        // Top Left
+        alt.setWatermarkPosition(2);
     }
 
     static async close() {
@@ -123,6 +126,8 @@ class InternalFunctions implements ViewModel {
         isOpen = false;
 
         native.doScreenFadeIn(100);
+
+        alt.setWatermarkPosition(4);
     }
 
     /**
@@ -213,8 +218,15 @@ class InternalFunctions implements ViewModel {
      * @param {string} desc
      * @memberof InternalFunctions
      */
-    static purchase(uid: string, index: number, component: ClothingComponent, name: string, desc: string) {
-        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc);
+    static purchase(
+        uid: string,
+        index: number,
+        component: ClothingComponent,
+        name: string,
+        desc: string,
+        noSound = false,
+    ) {
+        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc, noSound);
     }
 
     static async populate(components: Array<ClothingComponent>) {
@@ -239,6 +251,10 @@ class InternalFunctions implements ViewModel {
                 if (component.isProp) {
                     // Get Current Value of Prop Player is Wearing
                     value = native.getPedPropIndex(PedCharacter.get(), id);
+                    if (typeof component.startValue === 'undefined') {
+                        component.startValue = value;
+                    }
+
                     component.drawables[index] = value;
 
                     textureValue = native.getPedPropTextureIndex(PedCharacter.get(), id);
@@ -250,6 +266,10 @@ class InternalFunctions implements ViewModel {
                     // Get Current Value of Component Player is Wearing
                     value = native.getPedDrawableVariation(PedCharacter.get(), id);
                     component.drawables[index] = value;
+
+                    if (typeof component.startValue === 'undefined') {
+                        component.startValue = value;
+                    }
 
                     textureValue = native.getPedTextureVariation(PedCharacter.get(), id);
                     component.textures[index] = textureValue;

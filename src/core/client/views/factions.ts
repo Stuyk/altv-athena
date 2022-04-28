@@ -74,7 +74,6 @@ class FactionsView implements ViewModel {
     }
 
     static ready() {
-        console.log(JSON.stringify(faction, null, '\t'));
         view.emit('factions:SetLocale', null);
         view.emit('factions:SetFaction', faction);
         view.emit('factions:SetFlags', FACTION_PERMISSION_FLAGS);

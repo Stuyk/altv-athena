@@ -65,7 +65,7 @@
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
                     <template v-if="getMaximumDrawables(page, index)">
-                        <span class="counter mml-4 mr-4 overline blue--text">
+                        <span class="counter ml-4 mr-4 overline blue--text">
                             {{ page.textures[index] }}
                         </span>
                         <input
@@ -158,6 +158,8 @@ export default defineComponent({
 .component {
     border: 2px solid rgba(28, 28, 28, 1);
     box-sizing: border-box;
+    background: url('../../../../../../src-webviews/public/assets/images/bg.png');
+    border-radius: 12px;
 }
 
 .center-page {

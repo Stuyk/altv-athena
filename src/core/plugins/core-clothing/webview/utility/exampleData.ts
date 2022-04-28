@@ -11,6 +11,7 @@ export const EXAMPLE_CLOTHING_DATA = [
         maxDrawables: [163],
         maxTextures: [1],
         textures: [0],
+        startValue: 0,
     },
     {
         pageName: LOCALE_CLOTHING.LABEL_MASK,

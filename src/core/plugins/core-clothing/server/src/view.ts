@@ -234,6 +234,7 @@ export class ClothingFunctions {
         component: ClothingComponent,
         name: string,
         desc: string,
+        noSound = false,
     ) {
         const index = clothingStoreList.findIndex((x) => x.uid === shopUID);
         if (index <= -1) {
@@ -320,6 +321,11 @@ export class ClothingFunctions {
         Athena.player.save.field(player, 'inventory', player.data.inventory);
         Athena.player.save.field(player, 'equipment', player.data.equipment);
         Athena.player.sync.inventory(player);
+
+        if (noSound) {
+            return;
+        }
+
         Athena.player.emit.sound2D(player, 'item_purchase');
     }
 

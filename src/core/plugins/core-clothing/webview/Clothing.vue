@@ -1,5 +1,10 @@
 <template>
     <div class="container">
+        <span class="price-item-invalid pr-3" v-if="!isComponentAvailable()">
+            ${{ getPrice() }} {{ getItemPriceText }}
+        </span>
+        <span class="price-item pr-3" v-else>${{ getPrice() }} {{ getItemPriceText }}</span>
+        <span class="price-all pr-3">${{ getAllPricing() }} {{ getAllPriceText }}</span>
         <div class="money pl-4 pb-2 green--text text--lighten-1">${{ money.toFixed(2).toLocaleString() }}</div>
         <!-- Pop Up for Purchase -->
         <Modal v-if="showDialog">
@@ -59,7 +64,6 @@
                         <Button class="mt-2 fill-half-width" color="red" @click="togglePurchaseInterface(false)">
                             {{ getLocaleText('LABEL_CANCEL') }}
                         </Button>
-
                         <template v-if="allValid">
                             <Button class="ml-4 mt-2 fill-half-width" color="green" @click="purchaseComponent">
                                 {{ getLocaleText('LABEL_PURCHASE') }}
@@ -93,24 +97,39 @@
             <div class="footer pa-4" v-if="page">
                 <div class="split split-full space-between">
                     <template v-if="isComponentAvailable() && hasEnoughMoney()">
-                        <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
+                        <Button
+                            class="smooth-button fill-full-width mr-3"
+                            color="green"
+                            @click="togglePurchaseInterface(true)"
+                        >
                             <span class="green--text">{{ getPurchaseText }}</span>
                         </Button>
-                        <span class="price pa-3">${{ getPrice() }}</span>
                     </template>
                     <template v-else>
-                        <Button class="mr-3" color="grey" :disable="true">
+                        <Button class="smooth-button fill-full-width mr-3" color="grey" :disable="true">
                             <span class="grey--text">{{ getPurchaseText }}</span>
                         </Button>
-                        <span class="price red--text pa-3">${{ getPrice() }}</span>
                     </template>
+                    <template v-if="isComponentAvailableAll() && hasEnoughMoneyAll()">
+                        <Button class="smooth-button fill-full-width mr-3" color="green" @click="purchaseAll">
+                            <span class="green--text">{{ getPurchaseAllText }}</span>
+                        </Button>
+                    </template>
+                    <template v-else>
+                        <Button class="smooth-button fill-full-width mr-3" color="grey" :disable="true">
+                            <span class="grey--text">{{ getPurchaseAllText }}</span>
+                        </Button>
+                    </template>
+                    <Button class="smooth-button fill-full-width mr-3" color="grey" @click="handleClose">
+                        <span class="red--text">{{ getExitText }}</span>
+                    </Button>
                 </div>
             </div>
         </div>
-        <div class="escape pa-4" @click="handleClose">
+        <!-- <div class="escape pa-4" @click="handleClose">
             <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
             <span class="overline white--text boldest">ESC</span>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -167,6 +186,18 @@ export default defineComponent({
         },
         getPurchaseText() {
             return LOCALE_CLOTHING.LABEL_PURCHASE;
+        },
+        getPurchaseAllText() {
+            return LOCALE_CLOTHING.LABEL_PURCHASE_ALL;
+        },
+        getExitText() {
+            return LOCALE_CLOTHING.LABEL_EXIT;
+        },
+        getAllPriceText() {
+            return LOCALE_CLOTHING.LABEL_ALL_PRICE;
+        },
+        getItemPriceText() {
+            return LOCALE_CLOTHING.LABEL_ITEM;
         },
     },
     methods: {
@@ -260,12 +291,27 @@ export default defineComponent({
             alt.emit(`${ComponentName}:Update`, JSON.stringify(this.pages), false, shouldPopulate);
         },
         async setPages(pages) {
-            console.log(JSON.stringify(pages));
             this.pages = pages;
             this.page = this.pages[this.pageIndex];
         },
         hasEnoughMoney() {
             const price = this.getPrice();
+            if (price <= 0) {
+                return false;
+            }
+
+            if (this.money >= price) {
+                return true;
+            }
+
+            return false;
+        },
+        hasEnoughMoneyAll() {
+            const price = this.getAllPricing();
+            if (price <= 0) {
+                return false;
+            }
+
             if (this.money >= price) {
                 return true;
             }
@@ -274,11 +320,15 @@ export default defineComponent({
         },
         getPrice() {
             if (!this.pages[this.pageIndex]) {
-                return -1;
+                return 0;
             }
 
             const label = this.pages[this.pageIndex];
             const internalID = label.internalID;
+
+            if (this.pages[this.pageIndex].startValue === this.pages[this.pageIndex].drawables[0]) {
+                return 0;
+            }
 
             if (this.storeData.clothingPrices[internalID]) {
                 const currentComponent = label.drawables[0];
@@ -291,11 +341,134 @@ export default defineComponent({
 
             return this.storeData.pagePrices[internalID] ? this.storeData.pagePrices[internalID] : 0;
         },
+        getAllPricing() {
+            if (!this.pages || this.pages.length <= 0) {
+                return -1;
+            }
+
+            let price = 0;
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+                const id = page.internalID;
+
+                if (page.startValue === 'undefined' || page.startValue === null) {
+                    continue;
+                }
+
+                if (page.drawables[0] === page.startValue) {
+                    continue;
+                }
+
+                if (page.isProp && page.drawables[0] === -1) {
+                    continue;
+                }
+
+                if (this.storeData.clothingPrices[id]) {
+                    const currentComponent = page.drawables[0];
+                    const priceInfo = this.storeData.clothingPrices[id].find((x) => x.id === currentComponent);
+
+                    if (priceInfo) {
+                        price += priceInfo.price;
+                        continue;
+                    }
+                }
+
+                price += this.storeData.pagePrices[id] ? this.storeData.pagePrices[id] : 0;
+            }
+
+            return price;
+        },
+        purchaseAll() {
+            if (!this.pages || this.pages.length <= 0) {
+                return;
+            }
+
+            const components = [];
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+
+                if (page.startValue === 'undefined' || page.startValue === null) {
+                    continue;
+                }
+
+                if (page.drawables[0] === page.startValue) {
+                    continue;
+                }
+
+                if (page.isProp && page.drawables[0] === -1) {
+                    continue;
+                }
+
+                const componentData = JSON.parse(JSON.stringify(page));
+                delete componentData.maxDrawables;
+                delete componentData.maxTextures;
+                delete componentData.name;
+                delete componentData.pageName;
+                delete componentData.names;
+
+                if ('alt' in window) {
+                    alt.emit(
+                        `${ComponentName}:Purchase`,
+                        this.storeData.uid,
+                        i,
+                        componentData,
+                        page.pageName,
+                        '',
+                        true,
+                    );
+                }
+            }
+        },
+        isComponentAvailableAll() {
+            let allAvailable = true;
+
+            if (!this.pages || this.pages.length <= 0) {
+                return allAvailable;
+            }
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+
+                for (let y = 0; y < page.ids.length; y++) {
+                    // This is the ID of the component.
+                    // ie. A mask ID is 1
+                    const internalID = page.internalID;
+                    const hiddenComponents: Array<number> = this.storeData.hiddenComponents[internalID];
+
+                    // No internal component info found. Everything is available.
+                    if (!hiddenComponents) {
+                        break;
+                    }
+
+                    const currentValue = page.drawables[y];
+                    const index = hiddenComponents.findIndex((id) => id === currentValue);
+
+                    if (index <= -1) {
+                        continue;
+                    }
+
+                    allAvailable = false;
+                    break;
+                }
+            }
+
+            return allAvailable;
+        },
         isComponentAvailable() {
             let allAvailable = true;
 
             if (!this.pages[this.pageIndex]) {
                 return allAvailable;
+            }
+
+            if (this.pages[this.pageIndex].isProp && this.pages[this.pageIndex].drawables[0] === -1) {
+                return false;
+            }
+
+            if (this.pages[this.pageIndex].startValue === this.pages[this.pageIndex].drawables[0]) {
+                return false;
             }
 
             // Need to loop through all ids.
@@ -440,9 +613,9 @@ export default defineComponent({
         document.removeEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.on(`${ComponentName}:SetData`, this.setData);
-            alt.on(`${ComponentName}:Propagate`, this.setPages);
-            alt.on(`${ComponentName}:SetBankData`, this.setBankData);
+            alt.off(`${ComponentName}:SetData`, this.setData);
+            alt.off(`${ComponentName}:Propagate`, this.setPages);
+            alt.off(`${ComponentName}:SetBankData`, this.setBankData);
         }
     },
 });
@@ -456,6 +629,34 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent 35%);
+}
+
+.price-item {
+    position: fixed;
+    top: 48px;
+    right: 402px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 16px !important;
+}
+
+.price-item-invalid {
+    position: fixed;
+    top: 48px;
+    right: 402px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 16px !important;
+    color: rgba(200, 50, 50, 1);
+}
+
+.price-all {
+    position: fixed;
+    top: 6px;
+    right: 400px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 32px !important;
 }
 
 .creator {
@@ -511,5 +712,13 @@ export default defineComponent({
     font-weight: 600;
     text-shadow: 1px 1px black;
     z-index: 99;
+}
+
+.footer {
+    background: url('../../../../../src-webviews/public/assets/images/bg.png');
+}
+
+.smooth-button {
+    border-radius: 6px;
 }
 </style>

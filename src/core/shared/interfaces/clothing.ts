@@ -69,4 +69,12 @@ export interface ClothingComponent {
      * @memberof ClothingComponent
      */
     maxTextures?: Array<number>;
+
+    /**
+     * Current value that player is using.
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    startValue?: number;
 }

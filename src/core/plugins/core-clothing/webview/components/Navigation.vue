@@ -42,6 +42,10 @@ export default defineComponent({
 </script>
 
 <style>
+.navigation {
+    background: url('../../../../../../src-webviews/public/assets/images/bg.png');
+}
+
 .nav-btn {
     border-radius: 6px !important;
 }
