@@ -15,7 +15,7 @@ export class InteractionShape extends alt.ColshapeCylinder {
             interaction.position.y,
             interaction.position.z,
             interaction.range,
-            DEFAULT_INTERACTION_HEIGHT,
+            interaction.height ? interaction.height : DEFAULT_INTERACTION_HEIGHT,
         );
 
         // Set the dimension based on specifications from the interaction interface

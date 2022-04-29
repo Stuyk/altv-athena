@@ -8,7 +8,7 @@
             <div class="setting-content">
                 <div v-for="(spot, index) in getParkingSpots" :key="index">
                     <div class="split space-between fill-full-width mb-4">
-                        <span class="subtitle-2 label">{{ spot.dist }} Units Away</span>
+                        <span class="subtitle-2 label">{{ spot.dist.toFixed(2) }} Units Away</span>
                         <template v-if="isOwner">
                             <Button color="red" class="settings-button" @click="() => removeLocation(spot.index)">
                                 <Icon :size="12" icon="icon-cross" />

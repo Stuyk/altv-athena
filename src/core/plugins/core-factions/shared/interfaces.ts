@@ -76,6 +76,14 @@ export interface RankPermissions {
      * @memberof RankPermissions
      */
     addMembers: boolean;
+
+    /**
+     * Can manage vehicles by purchasing vehicles available.
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    manageVehicles?: boolean;
 }
 
 /**
