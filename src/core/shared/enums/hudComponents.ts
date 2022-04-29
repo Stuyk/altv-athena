@@ -14,4 +14,7 @@ export enum HUD_COMPONENT {
     LOCK = 'lock',
     METRIC = 'isMetric',
     FUEL = 'fuel',
+    ZONE = 'zone',
+    STREET = 'street',
+    CROSSSTREET = 'crossstreet',
 }

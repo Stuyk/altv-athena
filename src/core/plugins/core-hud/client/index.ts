@@ -114,6 +114,8 @@ class InternalFunctions implements ViewModel {
         HudView.registerComponent(HUD_COMPONENT.WATER, InternalFunctions.defaultWaterComponent, 1000);
         HudView.registerComponent(HUD_COMPONENT.FOOD, InternalFunctions.defaultFoodComponent, 1000);
         HudView.registerComponent(HUD_COMPONENT.INTERACTIONS, InternalFunctions.defaultInteractionsComponent, 500);
+        HudView.registerComponent(HUD_COMPONENT.STREET, InternalFunctions.defaultStreetComponent, 500);
+        HudView.registerComponent(HUD_COMPONENT.CROSSSTREET, InternalFunctions.defaultCrossStreetComponent, 500);
 
         // Vehicle Components
         HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
@@ -271,6 +273,18 @@ class InternalFunctions implements ViewModel {
 
     static defaultInteractionsComponent(propName) {
         InternalFunctions.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
+    }
+
+
+    static defaultStreetComponent(propName: string) {
+        const streetHash = native.getStreetNameAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z, null, null,)[1];
+        const value = native.getStreetNameFromHashKey(streetHash)
+        InternalFunctions.passComponentInfo(propName, value);
+    }
+    static defaultCrossStreetComponent(propName: string) {
+        const crossStreetHash = native.getStreetNameAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z, null, null,)[2];
+        const value = native.getStreetNameFromHashKey(crossStreetHash)
+        InternalFunctions.passComponentInfo(propName, value);
     }
 }
 

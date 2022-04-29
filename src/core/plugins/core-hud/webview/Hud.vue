@@ -32,6 +32,11 @@
             <Armour class="mb-2" :value="armour" />
             <Health class="mb-2" :value="health" />
         </div>
+        <div class="location-placement">
+            <CrossStreet class="ml-2" :value="crossstreet" />
+            <Street class="ml-2" :value="street" />
+        </div>
+
     </div>
 </template>
 
@@ -55,6 +60,9 @@ export default defineComponent({
         Bank: defineAsyncComponent(() => import('./components/Bank.vue')),
         Speedo: defineAsyncComponent(() => import('./components/Speedo.vue')),
         Time: defineAsyncComponent(() => import('./components/Time.vue')),
+        Street: defineAsyncComponent(() => import('./components/Street.vue')),
+        CrossStreet: defineAsyncComponent(() => import('./components/CrossStreet.vue')),
+
     },
     // Used to define state
     data() {
@@ -76,6 +84,9 @@ export default defineComponent({
             isInVehicle: false,
             interactions: [],
             updateCount: 0,
+            street:'Low Power St',
+            crossstreet:'Low Power St2',
+
         };
     },
     mounted() {
@@ -168,6 +179,22 @@ export default defineComponent({
     border-radius: 12px !important;
     margin-bottom: 90px;
 }
+
+.location-placement {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    justify-content: flex-end;
+    align-items: left;
+    border-radius: 12px !important;
+    margin-bottom: 50px;
+    margin-left: 300px;
+   
+}
+
+
 
 .speedo-placement {
     display: flex;
