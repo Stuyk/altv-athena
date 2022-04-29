@@ -590,6 +590,43 @@ export class FactionPlayerFuncs {
     }
 
     /**
+     * If the player is the owner or admin of the faction, or if the player has the permission to manage
+     * vehicles, then purchase the vehicle.
+     * @param player - alt.Player - The player who is purchasing the vehicle.
+     * @param {string} model - The model of the vehicle you want to purchase.
+     * @returns The return value is a boolean.
+     */
+    static async purchaseVehicle(player: alt.Player, model: string) {
+        let result = true;
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            result = false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageVehicles) {
+                result = false;
+            }
+        }
+
+        // If everything passed so far, try the purchase.
+        if (result) {
+            result = await FactionFuncs.purchaseVehicle(faction, model);
+        }
+
+        // Play sound based on the result.
+        Athena.player.emit.soundFrontend(
+            player,
+            result ? 'Hack_Success' : 'Hack_Failed',
+            'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS',
+        );
+
+        return result;
+    }
+
+    /**
      * Invoke an event by an event name.
      *
      * @static

@@ -178,7 +178,7 @@ export const ExampleFactionData: Faction = {
         ],
     },
     canDisband: false,
-    vehicles: [],
+    vehicles: [{ model: 'police', id: '626c64fbfdf5ff231b4991ee' }],
     actions: {},
     tickActions: [],
 };

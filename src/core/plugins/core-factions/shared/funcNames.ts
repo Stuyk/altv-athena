@@ -14,4 +14,5 @@ export const FACTION_PFUNC = {
     SWAP_RANKS: 'swapRanks',
     ADD_PARKING_SPOT: 'addParkingSpot',
     REMOVE_PARKING_SPOT: 'removeParkingSpot',
+    PURCHASE_VEHICLE: `purchaseVehicle`,
 };

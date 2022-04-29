@@ -266,7 +266,7 @@ export interface FactionVehicle {
      * @type {string}
      * @memberof FactionVehicle
      */
-    name: string;
+    model: string;
 
     /**
      * Database _id for the vehicle
@@ -275,14 +275,6 @@ export interface FactionVehicle {
      * @memberof FactionVehicle
      */
     id: string;
-
-    /**
-     * Allow what ranks to use this vehicle?
-     *
-     * @type {Array<string>}
-     * @memberof FactionStorage
-     */
-    allowRanks: Array<string>;
 }
 
 export interface FactionSettings {

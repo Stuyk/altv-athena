@@ -165,9 +165,6 @@ export default defineComponent({
                 return;
             }
 
-            console.log(`Swapping... ${rank.name} with ${targetRank.name}`);
-            console.log(rank.uid);
-            console.log(JSON.stringify(rank));
             alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.SWAP_RANKS, rank.uid, targetRank.uid);
         },
         startRankDelete(rank: FactionRank) {

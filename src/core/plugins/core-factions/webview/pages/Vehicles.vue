@@ -4,7 +4,7 @@
             v-bind:faction="faction"
             v-if="addVehicle"
             @close="() => (addVehicle = false)"
-            @update="finishAddVehicle"
+            @purchase-vehicle="finishPurchase"
         />
         <div class="vehicle-panel mb-4" v-if="manageVehicles">
             <div class="split space-between">
@@ -21,14 +21,23 @@
                 </template>
             </div>
         </div>
+        <div class="vehicle-panel split space-between mb-4" v-for="(vehicle, index) in faction.vehicles">
+            <div class="vehicle-image">
+                <img :src="ResolvePath(`../../assets/vehicles/${vehicle.model}.png`)" />
+            </div>
+            <div class="vehicle-name subtitle-2">Model: {{ vehicle.model }}</div>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { Vector3 } from '../../../../shared/interfaces/vector';
+import { FACTION_EVENTS } from '../../shared/factionEvents';
+import { FACTION_PFUNC } from '../../shared/funcNames';
 import { Faction } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
+import ResolvePath from '@utility/pathResolver';
 
 const ComponentName = 'Vehicles';
 export default defineComponent({
@@ -48,6 +57,7 @@ export default defineComponent({
         return {
             addVehicle: false,
             manageVehicles: false,
+            ResolvePath: ResolvePath,
         };
     },
     mounted() {
@@ -65,8 +75,15 @@ export default defineComponent({
         },
     },
     methods: {
-        finishAddVehicle(model: string) {
-            //
+        finishPurchase(model: string) {
+            this.addVehicle = false;
+
+            if (!('alt' in window)) {
+                console.log(`Attempting to purchase ${model}`);
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.PURCHASE_VEHICLE, model);
         },
     },
 });
@@ -93,5 +110,12 @@ export default defineComponent({
 
 :deep() .veh-button {
     border-radius: 12px;
+}
+
+:deep() .vehicle-image img {
+    border-radius: 6px;
+    max-width: 150px;
+    border: 2px solid rgba(36, 36, 36, 1);
+    box-sizing: border-box;
 }
 </style>

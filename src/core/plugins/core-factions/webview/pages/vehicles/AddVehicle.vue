@@ -24,12 +24,16 @@
                                 <div class="vehicle-name subtitle-2">Model: {{ vehicle.model }}</div>
                                 <div class="vehicle-name subtitle-2">${{ vehicle.price }}</div>
                                 <template v-if="faction.bank >= vehicle.price">
-                                    <Button class="mt-2 veh-button" color="green">
+                                    <Button
+                                        class="veh-button mr-4"
+                                        color="green"
+                                        @click="(e) => purchase(vehicle.model)"
+                                    >
                                         <Icon :size="14" icon="icon-dollar" />
                                     </Button>
                                 </template>
                                 <template v-else>
-                                    <Button class="mt-2 veh-button" color="red" :disable="true">
+                                    <Button class="veh-button mr-4" color="red" :disable="true">
                                         <Icon :size="14" icon="icon-dollar" />
                                     </Button>
                                 </template>
@@ -77,9 +81,9 @@ export default defineComponent({
         close() {
             this.$emit('close');
         },
-        // update() {
-        //     this.$emit('update');
-        // },
+        purchase(model: string) {
+            this.$emit('purchase-vehicle', model);
+        },
     },
 });
 </script>
@@ -98,13 +102,6 @@ input {
 
 input:focus {
     border-color: rgba(52, 52, 52, 1);
-}
-
-.vehicle-image img {
-    border-radius: 6px;
-    max-width: 150px;
-    border: 2px solid rgba(36, 36, 36, 1);
-    box-sizing: border-box;
 }
 
 .vehicle-option {
