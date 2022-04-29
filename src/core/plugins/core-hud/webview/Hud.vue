@@ -36,7 +36,6 @@
             <CrossStreet class="ml-2" :value="crossstreet" />
             <Street class="ml-2" :value="street" />
         </div>
-
     </div>
 </template>
 
@@ -62,7 +61,6 @@ export default defineComponent({
         Time: defineAsyncComponent(() => import('./components/Time.vue')),
         Street: defineAsyncComponent(() => import('./components/Street.vue')),
         CrossStreet: defineAsyncComponent(() => import('./components/CrossStreet.vue')),
-
     },
     // Used to define state
     data() {
@@ -84,9 +82,8 @@ export default defineComponent({
             isInVehicle: false,
             interactions: [],
             updateCount: 0,
-            street:'Low Power St',
-            crossstreet:'Low Power St2',
-
+            street: 'Low Power St',
+            crossstreet: 'Low Power St2',
         };
     },
     mounted() {
@@ -189,12 +186,9 @@ export default defineComponent({
     justify-content: flex-end;
     align-items: left;
     border-radius: 12px !important;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     margin-left: 300px;
-   
 }
-
-
 
 .speedo-placement {
     display: flex;

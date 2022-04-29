@@ -277,12 +277,14 @@ class InternalFunctions implements ViewModel {
 
 
     static defaultStreetComponent(propName: string) {
-        const streetHash = native.getStreetNameAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z, null, null,)[1];
+        const pos = alt.Player.local.pos;
+        const streetHash = native.getStreetNameAtCoord(pos.x, pos.y, pos.z, null, null,)[1];
         const value = native.getStreetNameFromHashKey(streetHash)
         InternalFunctions.passComponentInfo(propName, value);
     }
     static defaultCrossStreetComponent(propName: string) {
-        const crossStreetHash = native.getStreetNameAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z, null, null,)[2];
+        const pos = alt.Player.local.pos;
+        const crossStreetHash = native.getStreetNameAtCoord(pos.x, pos.y, pos.z, null, null,)[2];
         const value = native.getStreetNameFromHashKey(crossStreetHash)
         InternalFunctions.passComponentInfo(propName, value);
     }
