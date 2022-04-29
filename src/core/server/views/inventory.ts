@@ -69,7 +69,7 @@ export class InventoryView {
      */
     static addRule(
         rule: INVENTORY_RULES,
-        callback: (item: Item, selectedSlot: number, endSlot: number, rule: string) => boolean,
+        callback: (player: alt.Player, item: Item, selectedSlot: number, endSlot: number, rule: string) => boolean,
     ): boolean {
         if (!ITEM_RULES[rule]) {
             return false;
@@ -90,6 +90,7 @@ export class InventoryView {
      * @memberof InventoryView
      */
     static async verifyRules(
+        player: alt.Player,
         rule: INVENTORY_RULES,
         item: Item,
         selectedSlot: number,
@@ -100,7 +101,7 @@ export class InventoryView {
         }
 
         for (let i = 0; i < ITEM_RULES[rule].length; i++) {
-            const didPass = await ITEM_RULES[rule][i](item, selectedSlot, endSlot, rule);
+            const didPass = await ITEM_RULES[rule][i](player, item, selectedSlot, endSlot, rule);
             if (didPass) {
                 continue;
             }
@@ -359,7 +360,7 @@ export class InventoryView {
         }
 
         if (dataType) {
-            const result = await InventoryView.verifyRules(dataType, itemClone, selectSlotIndex, -1);
+            const result = await InventoryView.verifyRules(player, dataType, itemClone, selectSlotIndex, -1);
             if (!result) {
                 playerConst.sync.inventory(player);
                 return;
