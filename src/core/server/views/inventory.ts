@@ -240,6 +240,7 @@ export class InventoryView {
         if (selectData.abbrv !== endData.abbrv) {
             const rules = InventoryView.getInventoryRule(selectData, endData);
             const selectedResult = await InventoryView.verifyRules(
+                player,
                 rules.selected,
                 itemClone,
                 selectSlotIndex,
@@ -262,6 +263,7 @@ export class InventoryView {
                 const endItemClone: Item = endData.getItem(player, endSlotIndex);
                 const rules = InventoryView.getInventoryRule(selectData, endData);
                 const selectedResult = await InventoryView.verifyRules(
+                    player,
                     rules.selected,
                     endItemClone,
                     endSlotIndex,
@@ -488,7 +490,7 @@ export class InventoryView {
         }
 
         if (dataType) {
-            const result = await InventoryView.verifyRules(dataType, droppedItem.item, droppedItem.gridSpace, -1);
+            const result = await InventoryView.verifyRules(player, dataType, droppedItem.item, droppedItem.gridSpace, -1);
             if (!result) {
                 playerConst.sync.inventory(player);
                 return;
