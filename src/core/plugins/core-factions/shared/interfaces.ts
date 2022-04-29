@@ -292,7 +292,7 @@ export interface FactionSettings {
      * @type {Array<Vector3>}
      * @memberof Faction
      */
-    parkingSpots?: Array<Vector3>;
+    parkingSpots?: Array<{ pos: Vector3; rot: Vector3 }>;
 
     /**
      * A list of vehicles available for purchase for this faction.

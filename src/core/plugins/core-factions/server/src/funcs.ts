@@ -929,12 +929,12 @@ export class FactionFuncs {
      * @param pos - alt.Vector3
      * @returns a boolean value.
      */
-    static async addParkingSpot(faction: Faction, pos: alt.Vector3) {
+    static async addParkingSpot(faction: Faction, pos: alt.Vector3, rot: alt.Vector3) {
         if (!faction.settings.parkingSpots) {
             faction.settings.parkingSpots = [];
         }
 
-        faction.settings.parkingSpots.push(pos);
+        faction.settings.parkingSpots.push({ pos, rot });
         const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
         if (didUpdate.status) {
             FactionFuncs.updateMembers(faction);

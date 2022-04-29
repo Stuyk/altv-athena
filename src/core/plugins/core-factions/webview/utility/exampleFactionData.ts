@@ -152,9 +152,9 @@ export const ExampleFactionData = {
     settings: {
         position: { x: 0, y: 0, z: 0 },
         parkingSpots: [
-            { x: 1, y: 1, z: 1 },
-            { x: 3, y: 3, z: 3 },
-            { x: 55, y: 55, z: 55 },
+            { pos: { x: 1, y: 1, z: 1 }, rot: { x: 1, y: 1, z: 1 } },
+            { pos: { x: 25, y: 25, z: 5 }, rot: { x: 1, y: 1, z: 1 } },
+            { pos: { x: 12, y: 12, z: 1 }, rot: { x: 1, y: 1, z: 1 } },
         ],
     },
 };

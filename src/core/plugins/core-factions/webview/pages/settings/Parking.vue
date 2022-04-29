@@ -69,7 +69,7 @@ export default defineComponent({
             }
 
             const distanceSpots = this.faction.settings.parkingSpots.map((spot, index) => {
-                const dist = distance(this.pos, spot);
+                const dist = distance(this.pos, spot.pos);
                 return {
                     ...spot,
                     dist,
@@ -91,7 +91,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.ADD_PARKING_SPOT, this.pos);
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.ADD_PARKING_SPOT, this.pos, this.rot);
         },
         removeLocation(index: number) {
             if (!('alt' in window)) {

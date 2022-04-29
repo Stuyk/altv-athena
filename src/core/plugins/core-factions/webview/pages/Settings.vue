@@ -49,7 +49,6 @@ export default defineComponent({
             isOwner: false,
         };
     },
-    computed: {},
     methods: {
         hasOwnership() {
             const member = FactionParser.getMember(this.faction, this.character);
@@ -78,10 +77,6 @@ export default defineComponent({
     max-height: 75vh;
     box-sizing: border-box;
     overflow-y: scroll;
-}
-
-.border-slot {
-    background: red !important;
 }
 
 :deep() .panel {

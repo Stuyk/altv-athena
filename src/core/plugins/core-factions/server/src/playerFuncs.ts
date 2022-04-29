@@ -553,7 +553,7 @@ export class FactionPlayerFuncs {
      * @param pos - alt.Vector3
      * @returns a boolean value.
      */
-    static async addParkingSpot(player: alt.Player, pos: alt.Vector3) {
+    static async addParkingSpot(player: alt.Player, pos: alt.Vector3, rot: alt.Vector3) {
         const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             return false;
@@ -564,10 +564,10 @@ export class FactionPlayerFuncs {
         }
 
         if (!player.vehicle) {
-            return await FactionFuncs.addParkingSpot(faction, new alt.Vector3(pos.x, pos.y, pos.z - 0.5));
+            return await FactionFuncs.addParkingSpot(faction, new alt.Vector3(pos.x, pos.y, pos.z - 0.5), rot);
         }
 
-        return await FactionFuncs.addParkingSpot(faction, pos);
+        return await FactionFuncs.addParkingSpot(faction, pos, rot);
     }
 
     /**
