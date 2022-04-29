@@ -43,11 +43,9 @@ export default class VehicleMenu {
      * ```
      *
      * @static
-     * @param {((
-     *             player: alt.Player,
-     *             vehicle: alt.Vehicle,
-     *             options?: Array<IClientWheelItem>,
-     *         ) => Array<IClientWheelItem> | void)} callback
+     * @param {alt.Player} player
+     * @param {alt.Vehicle} vehicle
+     * @param {Array<IClientWheelItem>} [options]
      * @memberof VehicleMenu
      */
     static addVehicleMenuInjections(
