@@ -21,6 +21,8 @@ export default class VehicleMenu {
      *
      * The options created will replace the current vehicle menu options.
      *
+     * If you don't return any option, the options won't be replaced.
+     *
      * Example:
      *
      * ```ts
