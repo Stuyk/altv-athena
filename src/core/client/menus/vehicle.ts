@@ -14,6 +14,40 @@ const VehicleMenuInjections: Array<
 > = [];
 
 export default class VehicleMenu {
+    /**
+     * Lets you create an injection into the vehicle menu options
+     *
+     * This means you can create new options from a callback as an object.
+     *
+     * The options created will replace the current vehicle menu options.
+     *
+     * Example:
+     *
+     * ```ts
+     * function hoodOption(
+     *     player: alt.Player,
+     *     vehicle: alt.Vehicle,
+     *     options: Array<IClientWheelItem>
+     * ) {
+     *     options.push({
+     *       name: 'Hood',
+     *       callback: () => {
+     *           console.log('Open the hood!');
+     *       },
+     *   });
+     * }
+     *
+     * VehicleMenu.addVehicleMenuInjections(hoodOption)
+     * ```
+     *
+     * @static
+     * @param {((
+     *             player: alt.Player,
+     *             vehicle: alt.Vehicle,
+     *             options?: Array<IClientWheelItem>,
+     *         ) => Array<IClientWheelItem> | void)} callback
+     * @memberof VehicleMenu
+     */
     static addVehicleMenuInjections(
         callback: (
             player: alt.Player,
