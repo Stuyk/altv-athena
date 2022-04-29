@@ -70,7 +70,7 @@ export default defineComponent({
             // Money = Bank + Cash
             money: 0,
             // Position and rotation of the faction
-            pos: { x: 0, y: 0, z: 0 },
+            pos: { x: 25, y: 1, z: 25 },
             rot: { x: 0, y: 0, z: 0 },
         };
     },

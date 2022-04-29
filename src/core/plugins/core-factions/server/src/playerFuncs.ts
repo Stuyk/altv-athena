@@ -548,6 +548,48 @@ export class FactionPlayerFuncs {
     }
 
     /**
+     * If the player is the owner of the faction, add a parking spot to the faction.
+     * @param player - alt.Player - The player who is adding the parking spot.
+     * @param pos - alt.Vector3
+     * @returns a boolean value.
+     */
+    static async addParkingSpot(player: alt.Player, pos: alt.Vector3) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        if (!player.vehicle) {
+            return await FactionFuncs.addParkingSpot(faction, new alt.Vector3(pos.x, pos.y, pos.z - 0.5));
+        }
+
+        return await FactionFuncs.addParkingSpot(faction, pos);
+    }
+
+    /**
+     * If the player is the owner of the faction, remove the parking spot at the given index.
+     * @param player - alt.Player - The player who is calling the function
+     * @param {number} index - number - The index of the parking spot you want to remove.
+     * @returns The return value is a boolean.
+     */
+    static async removeParkingSpot(player: alt.Player, index: number) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        return await FactionFuncs.removeParkingSpot(faction, index);
+    }
+
+    /**
      * Invoke an event by an event name.
      *
      * @static

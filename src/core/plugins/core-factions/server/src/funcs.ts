@@ -921,4 +921,51 @@ export class FactionFuncs {
 
         return didUpdate.status;
     }
+
+    /**
+     * It adds a parking spot to a faction.
+     * @param {Faction} faction - Faction - This is the faction that you want to add the parking spot
+     * to.
+     * @param pos - alt.Vector3
+     * @returns a boolean value.
+     */
+    static async addParkingSpot(faction: Faction, pos: alt.Vector3) {
+        if (!faction.settings.parkingSpots) {
+            faction.settings.parkingSpots = [];
+        }
+
+        faction.settings.parkingSpots.push(pos);
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
+     * It removes a parking spot from a faction
+     * @param {Faction} faction - Faction - The faction object
+     * @param {number} index - number - The index of the parking spot you want to remove.
+     * @returns A boolean value.
+     */
+    static async removeParkingSpot(faction: Faction, index: number) {
+        if (!faction.settings.parkingSpots) {
+            return false;
+        }
+
+        if (!faction.settings.parkingSpots[index]) {
+            return false;
+        }
+
+        faction.settings.parkingSpots.splice(index, 1);
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
 }
