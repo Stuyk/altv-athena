@@ -9,7 +9,7 @@ import { IClientWheelItem, WheelMenu } from '../utility/wheelMenu';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 
-const VehicleMenuInjections: Array<
+const vehicleMenuInjections: Array<
     (player: alt.Player, vehicle: alt.Vehicle, options?: Array<IClientWheelItem>) => Array<IClientWheelItem> | void
 > = [];
 
@@ -54,7 +54,7 @@ export default class VehicleMenu {
             options?: Array<IClientWheelItem>,
         ) => Array<IClientWheelItem> | void,
     ) {
-        VehicleMenuInjections.push(callback);
+        vehicleMenuInjections.push(callback);
     }
 
     static openMenu() {
@@ -98,7 +98,7 @@ export default class VehicleMenu {
                 });
             }
 
-            for (const callback of VehicleMenuInjections) {
+            for (const callback of vehicleMenuInjections) {
                 try {
                     const tempOptions = callback(alt.Player.local, vehicle, options);
                     if (tempOptions) {
