@@ -17,12 +17,15 @@ class VehicleCommands {
 
     @command('repairVehicle', '/repairVehicle - Repairs an vehicle by administrative power.', PERMISSIONS.ADMIN)
     private static repairVehicleCommand(player: alt.Player) {
-        if (!player.vehicle || !player.vehicle.data) {
+        if (!player.vehicle) {
+            return;
+        }
+        Athena.vehicle.funcs.repair(player.vehicle);
+        if (!player.vehicle.data) {
             return;
         }
         player.vehicle.data.bodyHealth = 1000;
         player.vehicle.data.engineHealth = 1000;
-        Athena.vehicle.funcs.repair(player.vehicle);
         Athena.vehicle.funcs.save(player.vehicle, player.vehicle.data);
         Athena.player.emit.notification(player, `Vehicle successfully repaired.`);
     }
