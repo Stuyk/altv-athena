@@ -34,7 +34,7 @@ Ever wanted to start your own GTA:V Roleplay Server? No idea where to start? Wel
 * [Documentation](https://docs.athenaframework.com)
 * [Issues](https://github.com/stuyk/altv-athena-issues)
 * [Support](https://patreon.com/stuyk/)
-* [Discord](https://discord.gg/AzqtCrE8Xs)
+* [Discord](https://ares.stuyk.com/v1/get/discord)
 * [alt:V Client](https://altv.mp)
 
 ## Quick Start
