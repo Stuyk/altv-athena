@@ -1,5 +1,4 @@
 import alt from 'alt-server';
-import { isPedOnFoot } from 'natives';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
