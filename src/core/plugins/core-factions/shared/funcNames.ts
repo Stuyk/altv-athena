@@ -15,4 +15,5 @@ export const FACTION_PFUNC = {
     ADD_PARKING_SPOT: 'addParkingSpot',
     REMOVE_PARKING_SPOT: 'removeParkingSpot',
     PURCHASE_VEHICLE: `purchaseVehicle`,
+    TOGGLE_VEHICLE_RANK_PERMISSION: `toggleVehicleRankPermission`,
 };

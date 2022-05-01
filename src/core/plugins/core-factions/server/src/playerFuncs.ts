@@ -627,6 +627,31 @@ export class FactionPlayerFuncs {
     }
 
     /**
+     * If the player is the owner or admin of the faction, toggle the vehicle permission for the
+     * specified rank.
+     * @param player - alt.Player - The player who is calling the function.
+     * @param {string} rank - string - The rank you want to toggle the permission for.
+     * @param {string} vehicleId - The vehicle's ID.
+     * @returns The return value is a boolean.
+     */
+    static async toggleVehicleRankPermission(player: alt.Player, rank: string, vehicleId: string) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageVehicles) {
+                return false;
+            }
+        }
+
+        return await FactionFuncs.toggleVehicleRankPermission(faction, rank, vehicleId);
+    }
+
+    /**
      * Invoke an event by an event name.
      *
      * @static

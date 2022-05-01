@@ -157,7 +157,7 @@ export const ExampleFactionData: Faction = {
                 manageRanks: false,
                 manageRankPermissions: false,
             },
-            vehicles: [],
+            vehicles: ['626c64fbfdf5ff231b4991ee'],
             weight: 1,
             uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
         },
@@ -178,7 +178,11 @@ export const ExampleFactionData: Faction = {
         ],
     },
     canDisband: false,
-    vehicles: [{ model: 'police', id: '626c64fbfdf5ff231b4991ee' }],
+    vehicles: [
+        { model: 'police', id: '626c64fbfdf5ff231b4991ee' },
+        { model: 'police2', id: '626c64fbfdf5ff231b4991cc' },
+        { model: 'police3', id: '626c64fbfdf5ff231b4991dd' },
+    ],
     actions: {},
     tickActions: [],
 };

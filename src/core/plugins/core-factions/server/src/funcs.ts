@@ -1029,4 +1029,52 @@ export class FactionFuncs {
 
         return didUpdate.status;
     }
+
+    /**
+     * If the rank exists, and the vehicle exists, and the rank has a vehicles array, then toggle the
+     * vehicle in the array.
+     * @param {Faction} faction - Faction - The faction object.
+     * @param {string} rank - string
+     * @param {string} vehicleId - string
+     * @returns A boolean value.
+     */
+    static async toggleVehicleRankPermission(faction: Faction, rank: string, vehicleId: string) {
+        if (!rank || !vehicleId) {
+            return false;
+        }
+
+        // Verify the vehicle exists...
+        const vehicleIndex = faction.vehicles.findIndex((x) => x.id === vehicleId);
+        if (vehicleIndex <= -1) {
+            return false;
+        }
+
+        const rankIndex = faction.ranks.findIndex((r) => r.uid === rank);
+        if (rankIndex <= -1) {
+            return false;
+        }
+
+        if (!Array.isArray(faction.ranks[rankIndex].vehicles)) {
+            faction.ranks[rankIndex].vehicles = [];
+        }
+
+        const vehicleRankIndex = faction.ranks[rankIndex].vehicles.findIndex((id) => id === vehicleId);
+
+        // Remove vehicle identifier if it already exists. Effectively toggling it.
+        if (vehicleRankIndex >= 0) {
+            faction.ranks[rankIndex].vehicles.splice(vehicleRankIndex, 1);
+        } else {
+            faction.ranks[rankIndex].vehicles.push(vehicleId);
+        }
+
+        const didUpdate = await FactionHandler.update(faction._id as string, {
+            ranks: faction.ranks,
+        });
+
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
+        return didUpdate.status;
+    }
 }

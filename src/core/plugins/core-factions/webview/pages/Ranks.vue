@@ -281,6 +281,7 @@ export default defineComponent({
     min-height: 75vh;
     max-height: 75vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .rank-panel {

@@ -1,10 +1,19 @@
 <template>
     <div class="vehicles-wrapper pa-4">
+        <!-- Toggle Purchase Faction Vehicle Modal -->
         <AddVehicle
             v-bind:faction="faction"
             v-if="addVehicle"
             @close="() => (addVehicle = false)"
             @purchase-vehicle="finishPurchase"
+        />
+        <!-- Toggle Rank Permissions for Vehicle Modal -->
+        <RankPermissions
+            v-bind:faction="faction"
+            v-bind:selected-vehicle="selectedVehicle"
+            v-if="editRankPermissions"
+            @toggle-rank="toggleRank"
+            @close="(e) => (editRankPermissions = false)"
         />
         <div class="vehicle-panel mb-4" v-if="manageVehicles">
             <div class="split space-between">
@@ -26,6 +35,23 @@
                 <img :src="ResolvePath(`../../assets/vehicles/${vehicle.model}.png`)" />
             </div>
             <div class="vehicle-name subtitle-2">Model: {{ vehicle.model }}</div>
+            <div class="split">
+                <template v-if="manageVehicles">
+                    <Button
+                        class="veh-button"
+                        color="green"
+                        help="Permissions"
+                        @click="() => showRankPermissions(vehicle)"
+                    >
+                        <Icon :size="14" icon="icon-cog2" />
+                    </Button>
+                </template>
+                <template v-else>
+                    <Button class="veh-button" color="green" :disable="true">
+                        <Icon :size="14" icon="icon-cog2" />
+                    </Button>
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -46,6 +72,7 @@ export default defineComponent({
         Button: defineAsyncComponent(() => import('@components/Button.vue')),
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
         AddVehicle: defineAsyncComponent(() => import('./vehicles/AddVehicle.vue')),
+        RankPermissions: defineAsyncComponent(() => import('./vehicles/RankPermissions.vue')),
     },
     props: {
         character: String,
@@ -55,8 +82,14 @@ export default defineComponent({
     },
     data() {
         return {
-            addVehicle: false,
+            // Permissions Check
             manageVehicles: false,
+            // Add Vehicle Modal
+            addVehicle: false,
+            // Change Vehicle Rank Permissions Modal
+            editRankPermissions: false,
+            selectedVehicle: null as { id: string; model: string },
+            // Utility
             ResolvePath: ResolvePath,
         };
     },
@@ -75,6 +108,10 @@ export default defineComponent({
         },
     },
     methods: {
+        showRankPermissions(vehicle: { id: string; model: string }) {
+            this.selectedVehicle = vehicle;
+            this.editRankPermissions = true;
+        },
         finishPurchase(model: string) {
             this.addVehicle = false;
 
@@ -84,6 +121,14 @@ export default defineComponent({
             }
 
             alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.PURCHASE_VEHICLE, model);
+        },
+        toggleRank(rank: string, vehicleId: string) {
+            if (!('alt' in window)) {
+                console.log(`Updating Permission for ${rank} with vehicle: ${vehicleId}`);
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.TOGGLE_VEHICLE_RANK_PERMISSION, rank, vehicleId);
         },
     },
 });
@@ -96,6 +141,7 @@ export default defineComponent({
     max-height: 75vh;
     box-sizing: border-box;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 :deep() .vehicle-panel {

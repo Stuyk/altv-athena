@@ -1,4 +1,5 @@
-import { FactionRank } from './interfaces';
+import { Complete } from '../../../shared/utility/complete';
+import { FactionRank, RankPermissions } from './interfaces';
 
 export const DefaultRanks: Array<FactionRank> = [
     {
@@ -32,3 +33,14 @@ export const DefaultRanks: Array<FactionRank> = [
         weight: 1,
     },
 ];
+
+export const AllRankPermissions: Complete<RankPermissions> = {
+    addMembers: false,
+    bankAdd: false,
+    bankRemove: false,
+    kickMembers: false,
+    manageMembers: false,
+    manageRanks: false,
+    manageRankPermissions: false,
+    manageVehicles: false,
+};

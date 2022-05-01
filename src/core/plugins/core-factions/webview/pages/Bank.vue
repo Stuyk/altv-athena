@@ -136,6 +136,7 @@ export default defineComponent({
     max-height: 75vh;
     box-sizing: border-box;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .panel {
