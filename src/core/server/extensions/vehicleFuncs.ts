@@ -31,6 +31,8 @@ const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = 
 const BeforeCreateInjections: Array<(document: IVehicle) => IVehicle | void> = [];
 const BeforeDespawnInjections: Array<(vehicle: alt.Vehicle) => void> = [];
 
+const BeforeAddVehicleInjections: Array<(vehicle: IVehicle) => IVehicle | void> = [];
+
 interface VehicleKeyItem extends Item {
     data: {
         vehicle: string;
@@ -105,6 +107,20 @@ export default class VehicleFuncs {
      */
     static addBeforeDespawnInjection(callback: (vehicle: alt.Vehicle) => void) {
         BeforeDespawnInjections.push(callback);
+    }
+
+    /**
+     * Let's you create an injection into the default add function.
+     *
+     * What that means is you can modify the document before it is added to the database.
+     * For example, you can change default numberplate, color, ...
+     *
+     * @static
+     * @param {((vehicle: IVehicle) => IVehicle | void)} callback
+     * @memberof VehicleFuncs
+     */
+    static addBeforeAddVehicleInjection(callback: (vehicle: IVehicle) => IVehicle | void) {
+        BeforeAddVehicleInjections.push(callback);
     }
 
     /**
@@ -191,6 +207,11 @@ export default class VehicleFuncs {
         vehicleData.id = await VehicleFuncs.getNextID();
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
+
+        for (const callback of BeforeAddVehicleInjections) {
+            const result = callback(vehicleData);
+            if (result) vehicleData = result;
+        }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
