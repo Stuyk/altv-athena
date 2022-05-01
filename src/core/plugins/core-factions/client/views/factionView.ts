@@ -2,6 +2,7 @@ import * as alt from 'alt-client';
 import { WebViewController } from '../../../../client/extensions/view2';
 import { isAnyMenuOpen } from '../../../../client/utility/menus';
 import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
+import { VEHICLE_SYNCED_META } from '../../../../shared/enums/vehicleSyncedMeta';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Faction } from '../../shared/interfaces';
 
@@ -70,6 +71,8 @@ class InternalFunctions {
 
     static async ready() {
         const view = await WebViewController.get();
+        const vehicleList = InternalFunctions.getFactionVehicles(faction);
+
         view.emit(
             FACTION_EVENTS.WEBVIEW.UPDATE_DATA,
             faction,
@@ -77,7 +80,36 @@ class InternalFunctions {
             alt.Player.local.meta.cash + alt.Player.local.meta.bank,
             alt.Player.local.pos,
             alt.Player.local.rot,
+            vehicleList,
         );
+    }
+
+    /**
+     * Returns an array of matching spawned vehicles for the faction.
+     *
+     * @static
+     * @param {Faction} faction
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    private static getFactionVehicles(faction: Faction) {
+        const spawnedVehicles = [];
+
+        const currentVehicles = [...alt.Vehicle.all];
+        for (let i = 0; i < currentVehicles.length; i++) {
+            if (!currentVehicles[i].hasSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID)) {
+                continue;
+            }
+
+            const id = currentVehicles[i].getSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID);
+            if (faction.vehicles.findIndex((veh) => veh.id === id) <= -1) {
+                continue;
+            }
+
+            spawnedVehicles.push(id);
+        }
+
+        return spawnedVehicles;
     }
 
     static action(functionName: string, ...args: any[]) {

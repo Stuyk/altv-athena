@@ -7,6 +7,7 @@ import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
 import { Athena } from '../../../../server/api/athena';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
+import { distance, getClosestVector } from '../../../../shared/utility/vector';
 
 /**
  * Bound to the player to manipulate individual faction functionality.
@@ -649,6 +650,57 @@ export class FactionPlayerFuncs {
         }
 
         return await FactionFuncs.toggleVehicleRankPermission(faction, rank, vehicleId);
+    }
+
+    /**
+     * If the player is the owner or admin, or if the player's rank has the vehicleId in the vehicles
+     * array, then spawn the vehicle
+     * @param player - alt.Player - The player who is spawning the vehicle.
+     * @param {string} vehicleId - The vehicle ID that you want to spawn.
+     * @returns a boolean value.
+     */
+    static async spawnVehicle(player: alt.Player, vehicleId: string) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!faction.vehicles || !Array.isArray(faction.vehicles)) {
+            return false;
+        }
+
+        const vehicleIndex = faction.vehicles.findIndex((x) => x.id === vehicleId);
+        if (vehicleIndex <= -1) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.vehicles) {
+                return false;
+            }
+
+            if (selfRank.vehicles.findIndex((x) => x === vehicleId) <= -1) {
+                return false;
+            }
+        }
+
+        if (!faction.settings.parkingSpots || !Array.isArray(faction.settings.parkingSpots)) {
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return false;
+        }
+
+        if (faction.settings.parkingSpots.length <= 0) {
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return false;
+        }
+
+        const sortedSpots = faction.settings.parkingSpots.sort((a, b) => {
+            return distance(player.pos, a.pos) - distance(player.pos, b.pos);
+        });
+
+        return await FactionFuncs.spawnVehicle(faction, vehicleId, sortedSpots[0]);
     }
 
     /**

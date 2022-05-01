@@ -36,6 +36,7 @@
             </div>
             <div class="vehicle-name subtitle-2">Model: {{ vehicle.model }}</div>
             <div class="split">
+                <!-- Manage Permissions -->
                 <template v-if="manageVehicles">
                     <Button
                         class="veh-button"
@@ -49,6 +50,17 @@
                 <template v-else>
                     <Button class="veh-button" color="green" :disable="true">
                         <Icon :size="14" icon="icon-cog2" />
+                    </Button>
+                </template>
+                <!-- Spawn / Despawn Vehicle -->
+                <template v-if="!isVehicleSpawned(vehicle)">
+                    <Button class="veh-button" color="blue" help="Spawn" @click="() => spawnVehicle(vehicle.id)">
+                        <Icon :size="14" icon="icon-upload2" />
+                    </Button>
+                </template>
+                <template v-else>
+                    <Button class="veh-button" color="blue" :disable="true">
+                        <Icon :size="14" icon="icon-upload2" />
                     </Button>
                 </template>
             </div>
@@ -79,6 +91,7 @@ export default defineComponent({
         faction: Object as () => Faction,
         pos: Object as () => Vector3,
         rot: Object as () => Vector3,
+        spawnedVehicles: Array as () => Array<string>,
     },
     data() {
         return {
@@ -129,6 +142,18 @@ export default defineComponent({
             }
 
             alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.TOGGLE_VEHICLE_RANK_PERMISSION, rank, vehicleId);
+        },
+        isVehicleSpawned(vehicle: { model: string; id: string }) {
+            const index = this.spawnedVehicles.findIndex((id) => id === vehicle.id);
+            return index >= 0 ? true : false;
+        },
+        spawnVehicle(uid: string) {
+            if (!('alt' in window)) {
+                console.log(`Spawning vehicle with ${uid}`);
+                return;
+            }
+
+            alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.SPAWN_VEHICLE, uid);
         },
     },
 });

@@ -2,7 +2,7 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { Character } from '../../../../shared/interfaces/character';
-import { FactionHandler, FACTION_COLLECTION } from './handler';
+import { FactionHandler } from './handler';
 import { StorageSystem } from '../../../../server/systems/storage';
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { VehicleSystem } from '../../../../server/systems/vehicle';
@@ -11,7 +11,6 @@ import { IResponse } from '../../../../shared/interfaces/iResponse';
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Athena } from '../../../../server/api/athena';
-import { sha256Random } from '../../../../server/utility/encryption';
 import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
 import { IVehicle } from '../../../../shared/interfaces/iVehicle';
 
@@ -48,6 +47,12 @@ export class FactionFuncs {
         VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
         VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
+        VehicleFuncs.addOwnershipInjection(FactionFuncs.handleOwnershipInjection);
+    }
+
+    private static handleOwnershipInjection(player: alt.Player, vehicle: alt.Vehicle) {
+        const result = FactionFuncs.handleFactionVehicleChecks(player, vehicle);
+        return result.status;
     }
 
     /**
@@ -103,17 +108,11 @@ export class FactionFuncs {
             return { status: false, response: 'Player not found in faction' };
         }
 
-        // ! TODO THE FACTION PERMISSION HANDLING
+        if (rank.vehicles && !rank.vehicles.includes(vehicle.data._id.toString())) {
+            return { status: false, response: `You do not have permission for this vehicle.` };
+        }
 
-        return { status: true, response: 'Whatever ' };
-
-        // if (rank.vehicles.includes())
-
-        // if (faction.vehicles[index].allowRanks.findIndex((ar) => ar === character.uid) <= -1) {
-        //     return { status: false, response: 'Faction rank does not have access to vehicle' };
-        // }
-
-        // return { status: true, response: 'Has Faction Rank Access' };
+        return { status: true, response: '' };
     }
 
     /**
@@ -1076,5 +1075,22 @@ export class FactionFuncs {
         }
 
         return didUpdate.status;
+    }
+
+    static async spawnVehicle(faction: Faction, vehicleId: string, location: { pos: Vector3; rot: Vector3 }) {
+        const vehIndex = alt.Vehicle.all.findIndex((veh) => veh && veh.data && veh.data._id.toString() === vehicleId);
+        if (vehIndex >= 0) {
+            return false;
+        }
+
+        // spawn the vehicle
+        const vehicleInfo = await Database.fetchData<IVehicle>('_id', vehicleId, Athena.database.collections.Vehicles);
+        if (!vehicleInfo) {
+            return false;
+        }
+
+        const vehicle = VehicleFuncs.spawn(vehicleInfo, location.pos, location.rot);
+        FactionFuncs.updateMembers(faction);
+        return true;
     }
 }

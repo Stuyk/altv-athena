@@ -18,6 +18,7 @@
                     v-bind:money="money"
                     v-bind:pos="pos"
                     v-bind:rot="rot"
+                    v-bind:spawned-vehicles="spawnedVehicles"
                 ></component>
             </div>
         </div>
@@ -72,18 +73,34 @@ export default defineComponent({
             // Position and rotation of the faction
             pos: { x: 25, y: 1, z: 25 },
             rot: { x: 0, y: 0, z: 0 },
+            // Vehicles currently spawned
+            spawnedVehicles: ['626c64fbfdf5ff231b4991cc'],
         };
     },
     methods: {
         setPage(pageIndex: number) {
             this.pageIndex = pageIndex;
         },
-        updateFaction(faction: Faction, character: string, money: number, pos: Vector3, rot: Vector3) {
+        updateFaction(
+            faction: Faction,
+            character: string,
+            money: number,
+            pos: Vector3,
+            rot: Vector3,
+            spawnedVehicles: Array<string>,
+        ) {
             this.faction = faction;
             this.character = character;
             this.money = money;
             this.pos = pos;
             this.rot = rot;
+
+            if (typeof spawnedVehicles === 'string') {
+                console.log(spawnedVehicles);
+                this.spawnedVehicles = JSON.parse(spawnedVehicles);
+            } else {
+                this.spawnedVehicles = spawnedVehicles;
+            }
         },
         close() {
             if (!('alt' in window)) {
