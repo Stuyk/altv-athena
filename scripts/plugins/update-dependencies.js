@@ -11,7 +11,7 @@ const viablePluginDisablers = [
 ]
 
 function sanitizePath(p) {
-    return p.replace(/\\/g, path.sep);
+    return p.replace(/\\/g, '/');
 }
 
 function getInstalledDependencies() {
