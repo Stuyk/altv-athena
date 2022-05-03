@@ -20,7 +20,7 @@
             <div class="stack">
                 <div class="split space-between status">
                     <div class="seatbelt" :class="getSeatbeltClass">
-                        <em>/</em>
+                        <em><Icon icon="icon-seatbelt-fill" :size="18" id="seatbelt"/></em>
                     </div>
                     <div class="engine" :class="getEngineClass">
                         <em>E</em>
