@@ -110,9 +110,8 @@ export class VehicleController {
      * @param {boolean} [value=true]
      * @memberof VehicleController
      */
-    static enableSeatBelt(value: boolean = true) {
-        const seatBeltStatus = value ? false : true;
-        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
+    static enableSeatBelt(value: boolean) {
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, value);
     }
 
     static removeSeatBelt(vehicle: alt.Vehicle) {
