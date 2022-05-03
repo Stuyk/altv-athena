@@ -19,6 +19,19 @@
                 v-bind:rot="rot"
             />
         </Module>
+        <br />
+        <Module v-for="(componentName, index) in getSettingsComponents()" :name="componentName">
+            <component
+                :is="componentName"
+                class="fade-in"
+                :key="index"
+                v-bind:faction="faction"
+                v-bind:character="character"
+                v-bind:money="money"
+                v-bind:pos="pos"
+                v-bind:rot="rot"
+            />
+        </Module>
     </div>
 </template>
 
@@ -26,6 +39,7 @@
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { Faction } from '../../shared/interfaces';
+import { FactionPageInjections } from '../injections';
 import { FactionParser } from '../utility/factionParser';
 
 const ComponentName = 'Settings';
@@ -37,12 +51,14 @@ export default defineComponent({
         Module: defineAsyncComponent(() => import('@components/Module.vue')),
         HeadQuarters: defineAsyncComponent(() => import('./settings/HeadQuarters.vue')),
         Parking: defineAsyncComponent(() => import('./settings/Parking.vue')),
+        ...FactionPageInjections.settings,
     },
     props: {
         character: String,
         faction: Object as () => Faction,
         pos: Object as () => Vector3,
         rot: Object as () => Vector3,
+        money: Number,
     },
     data() {
         return {
@@ -50,6 +66,9 @@ export default defineComponent({
         };
     },
     methods: {
+        getSettingsComponents() {
+            return Object.keys(FactionPageInjections.settings);
+        },
         hasOwnership() {
             const member = FactionParser.getMember(this.faction, this.character);
             if (!member) {
