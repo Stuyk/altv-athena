@@ -72,6 +72,20 @@
                         </Button>
                     </template>
 
+                    <!-- Ranking Inserts -->
+                    <template
+                        v-for="(componentName, index) in getRankingsComponents()"
+                        :name="componentName"
+                        :key="index"
+                    >
+                        <component
+                            :is="componentName"
+                            class="fade-in"
+                            v-bind:faction="faction"
+                            v-bind:character="character"
+                        />
+                    </template>
+
                     <!-- Delete Rank -->
                     <template v-if="rank.weight <= 98">
                         <Button class="rank-button" color="red" @click="startRankDelete(rank)" help="Delete Rank">
@@ -96,6 +110,7 @@ import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FACTION_PFUNC } from '../../shared/funcNames';
+import { FactionPageInjections } from '../injections';
 
 const ComponentName = 'Ranks';
 export default defineComponent({
@@ -116,6 +131,8 @@ export default defineComponent({
         DeleteRank: defineAsyncComponent(() => import('./ranks/DeleteRank.vue')),
         AddRank: defineAsyncComponent(() => import('./ranks/AddRank.vue')),
         ManageRank: defineAsyncComponent(() => import('./ranks/ManageRank.vue')),
+        // Faction Rankings Component Injections
+        ...FactionPageInjections.rankings,
     },
     data() {
         return {
@@ -128,6 +145,9 @@ export default defineComponent({
         };
     },
     methods: {
+        getRankingsComponents() {
+            return Object.keys(FactionPageInjections.rankings);
+        },
         getRanks(): Array<FactionRank> {
             return FactionParser.getFactionRanks(this.faction);
         },
