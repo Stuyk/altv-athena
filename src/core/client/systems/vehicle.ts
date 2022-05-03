@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { HudView } from '../../plugins/core-hud/client';
 
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
@@ -111,6 +112,7 @@ export class VehicleController {
      * @memberof VehicleController
      */
     static enableSeatBelt(value: boolean) {
+        alt.Player.local.setMeta('SEATBELT', value);
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, value);
     }
 
