@@ -62,6 +62,12 @@ class InternalFunctions {
                 return;
             }
 
+            message = message
+                .replace(tagOrComment, '')
+                .replace('/</g', '&lt;')
+                .replace('/', '')
+                .replace(/<\/?[^>]+(>|$)/gm, '');
+
             const args = message.split(' ');
             const commandName = args.shift();
             InternalFunctions.handleCommand(player, commandName, ...args);
