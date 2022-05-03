@@ -274,15 +274,9 @@ export default defineComponent({
                 this.historyIndex = -1;
             }
 
-            const parsedMessage = originalMessage
-                .replace(RegexData.tagOrComment, '')
-                .replace('/</g', '&lt;')
-                .replace('/', '')
-                .replace(/<\/?[^>]+(>|$)/gm, '');
-
             // Handle Send Message
             if ('alt' in window) {
-                alt.emit(`${ComponentName}:Send`, parsedMessage === '' ? null : parsedMessage);
+                alt.emit(`${ComponentName}:Send`, originalMessage === '' ? null : originalMessage);
             }
         },
         handleShowInput() {
