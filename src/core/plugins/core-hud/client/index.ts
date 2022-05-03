@@ -191,8 +191,8 @@ class InternalFunctions implements ViewModel {
 
     static defaultSeatbeltComponent(propName: string) {
         if(!alt.Player.local.vehicle) return;
-
-        InternalFunctions.passComponentInfo(propName, alt.Player.local.getMeta('SEATBELT'));
+        
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.getMeta('SEATBELT') ? true : false);
     }
 
     static defaultSpeedComponent(propName: string) {
