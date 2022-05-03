@@ -19,6 +19,24 @@ const printCommands = false;
 let commandCount = 0;
 let commandInterval: number | undefined;
 
+const tagOrComment = new RegExp(
+    '<(?:' +
+        // Comment body.
+        '!--(?:(?:-*[^->])*--+|-?)' +
+        // Special "raw text" elements whose content should be elided.
+        '|script\\b' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        '>[\\s\\S]*?</script\\s*' +
+        '|style\\b' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        '>[\\s\\S]*?</style\\s*' +
+        // Regular name
+        '|/?[a-z]' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        ')>',
+    'gi',
+);
+
 class InternalFunctions {
     /**
      * Handles incoming messages from player input.
@@ -59,6 +77,12 @@ class InternalFunctions {
             return;
         }
 
+        const parsedMessage = message
+            .replace(tagOrComment, '')
+            .replace('/</g', '&lt;')
+            .replace('/', '')
+            .replace(/<\/?[^>]+(>|$)/gm, '');
+
         const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
             player.pos,
             alt.Player.all,
@@ -66,7 +90,7 @@ class InternalFunctions {
             ['discord'], // Used to check if they're logged in.
         );
 
-        emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${message}`);
+        emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${parsedMessage}`);
     }
 
     /**
