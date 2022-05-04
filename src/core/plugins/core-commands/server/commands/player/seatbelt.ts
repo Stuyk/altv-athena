@@ -6,6 +6,7 @@ import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../../shared/locale/locale';
 
+let currentState: boolean = false;
 class SeatbeltCommand {
     @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)
     private static handleCommand(player: alt.Player): void {
@@ -16,9 +17,10 @@ class SeatbeltCommand {
         if (player.data.isDead) {
             return;
         }
-    
+        currentState = !currentState;
+
         Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
-        Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON));
-        alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, true);
+        currentState ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON)) : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
+        alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, currentState);
     }
 }
