@@ -293,25 +293,41 @@ class InternalFunctions implements ViewModel {
         }
 
         for (let i = 0; i < components.length; i++) {
-            const component = components[i];
+            const component = components[i] as ClothingComponent;
             if (!component) {
                 continue;
             }
 
             for (let index = 0; index < component.drawables.length; index++) {
-                const texture = component.textures[index];
-                const value = component.drawables[index];
                 const id = component.ids[index];
+                const drawable = component.drawables[index];
+                const texture = component.textures[index];
+
+                if (component.dlcHashes && component.dlcHashes.length >= 1) {
+                    const dlc = component.dlcHashes[index];
+                    if (component.isProp) {
+                        if (drawable <= -1) {
+                            native.clearPedProp(PedCharacter.get(), id);
+                            continue;
+                        }
+
+                        alt.setPedDlcProp(PedCharacter.get(), dlc, id, drawable, texture);
+                        continue;
+                    }
+
+                    alt.setPedDlcClothes(PedCharacter.get(), dlc, id, drawable, texture, 0);
+                    continue;
+                }
 
                 if (component.isProp) {
-                    if (value <= -1) {
+                    if (drawable <= -1) {
                         native.clearPedProp(PedCharacter.get(), id);
                         continue;
                     }
 
-                    native.setPedPropIndex(PedCharacter.get(), id, value, texture, true);
+                    native.setPedPropIndex(PedCharacter.get(), id, drawable, texture, true);
                 } else {
-                    native.setPedComponentVariation(PedCharacter.get(), id, value, texture, 0);
+                    native.setPedComponentVariation(PedCharacter.get(), id, drawable, texture, 0);
                 }
             }
         }

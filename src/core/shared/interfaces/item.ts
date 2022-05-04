@@ -1,7 +1,11 @@
 import { EQUIPMENT_TYPE } from '../enums/equipmentType';
 import { ITEM_TYPE } from '../enums/itemTypes';
 
-export interface Item {
+export interface ItemData {
+    [key: string]: any;
+}
+
+export interface Item<T = ItemData> {
     /**
      * Database entry for item. Do not add / append.
      * @type {unknown}
@@ -119,10 +123,10 @@ export interface Item {
     /**
      * Any custom data associated with this item.
      * Useful for item effects and such.
-     * @type {{ [key: string]: any }}
+     * @type { ItemData | T }
      * @memberof Item
      */
-    data: { [key: string]: any };
+    data: ItemData | T;
 
     /**
      * In case you want to track item versions and modify older versions of items per-inventory.

@@ -361,6 +361,14 @@ export interface Faction extends FactionCore {
     ranks: Array<FactionRank>;
 
     /**
+     * An array of available action uids for this faction. May not be defined.
+     *
+     * @type {Array<string>}
+     * @memberof Faction
+     */
+    availableActions?: Array<string>;
+
+    /**
      * A way to obtain available faction based actions by Rank UID.
      * An action uid inside of this object is valid for that ranks usage.
      *

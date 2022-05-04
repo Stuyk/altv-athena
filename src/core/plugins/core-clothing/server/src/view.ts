@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { PolygonShape } from '../../../../server/extensions/extColshape';
 import { ServerBlipController } from '../../../../server/systems/blip';
-import { CharacterSystem } from '../../../../server/systems/character';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
@@ -10,7 +9,7 @@ import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
 import { Blip } from '../../../../shared/interfaces/blip';
 import { ClothingComponent } from '../../../../shared/interfaces/clothing';
 import { Interaction } from '../../../../shared/interfaces/interaction';
-import { Item } from '../../../../shared/interfaces/item';
+import { Item, ItemData } from '../../../../shared/interfaces/item';
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
@@ -227,7 +226,7 @@ export class ClothingFunctions {
      * @return {*}
      * @memberof ClothingFunctions
      */
-    static purchase(
+    static async purchase(
         player: alt.Player,
         shopUID: string,
         equipmentSlot: number,
@@ -281,15 +280,42 @@ export class ClothingFunctions {
         // Remove unncessary information
         delete component.internalID;
 
-        const newItem = deepCloneObject<Item>(wearableRef);
+        const newItem = deepCloneObject<Item<ClothingComponent>>(wearableRef);
         newItem.name = name;
         newItem.description = desc;
         newItem.data = { ...component };
         newItem.data.sex = player.data.appearance.sex;
+        newItem.data.dlcHashes = [];
         newItem.slot = equipmentSlot;
         newItem.icon = icons[equipmentSlot];
         newItem.quantity = 1;
         newItem.equipment = equipmentSlot;
+
+        Athena.player.sync.singleEquipment(player, newItem.data as ClothingComponent);
+
+        await new Promise((resolve: Function) => {
+            alt.setTimeout(() => {
+                resolve();
+            }, 500);
+        });
+
+        for (let i = 0; i < component.drawables.length; i++) {
+            const id = component.ids[i];
+            if (component.isProp) {
+                const dlcData = player.getDlcClothes(id);
+                newItem.data.dlcHashes.push(dlcData.dlc);
+                newItem.data.drawables[i] = dlcData.drawable;
+                newItem.data.textures[i] = dlcData.texture;
+            } else {
+                const dlcData = player.getDlcClothes(id);
+                newItem.data.dlcHashes.push(dlcData.dlc);
+                newItem.data.drawables[i] = dlcData.drawable;
+                newItem.data.textures[i] = dlcData.texture;
+            }
+        }
+
+        console.log(`Hashes Set To:`);
+        console.log(newItem.data.dlcHashes);
 
         let didGetAdded = false;
 
@@ -321,6 +347,7 @@ export class ClothingFunctions {
         Athena.player.save.field(player, 'inventory', player.data.inventory);
         Athena.player.save.field(player, 'equipment', player.data.equipment);
         Athena.player.sync.inventory(player);
+        Athena.player.sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
 
         if (noSound) {
             return;

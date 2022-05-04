@@ -48,6 +48,14 @@ export interface ClothingComponent {
     isProp: boolean;
 
     /**
+     * What player model is this built for.
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    sex?: number;
+
+    /**
      * The page which this component belongs to inside of the shop system.
      * @type {number}
      * @memberof ClothingComponent
@@ -77,4 +85,12 @@ export interface ClothingComponent {
      * @memberof ClothingComponent
      */
     startValue?: number;
+
+    /**
+     * The DLC Hash associated with this component.
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    dlcHashes?: Array<number>;
 }
