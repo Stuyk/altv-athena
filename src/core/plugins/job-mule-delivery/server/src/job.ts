@@ -88,6 +88,7 @@ export class MuleJob {
                 JobEnums.ObjectiveCriteria.IN_JOB_VEHICLE |
                 JobEnums.ObjectiveCriteria.NO_DYING,
             callbackOnStart: (player: alt.Player) => {
+                Athena.player.emit.message(player, '/quitjob - To stop this job.');
                 Athena.player.emit.notification(player, `Get in the Mule`);
             },
         });
