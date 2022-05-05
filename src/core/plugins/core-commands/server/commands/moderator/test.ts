@@ -3,6 +3,7 @@ import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
 import { PedController } from '../../../../../server/streamers/ped';
 import { WorldNotificationController } from '../../../../../server/streamers/worldNotifications';
+import { ServerJobTrigger } from '../../../../../server/systems/jobTrigger';
 import { SYSTEM_EVENTS } from '../../../../../shared/enums/system';
 import { WORLD_NOTIFICATION_TYPE } from '../../../../../shared/enums/worldNotificationTypes';
 import { ANIMATION_FLAGS } from '../../../../../shared/flags/animationFlags';
@@ -165,9 +166,15 @@ class TestCommands {
 
                 <p>I sure think so!</p>
             `,
+            acceptCallback: (player: alt.Player) => {
+                Athena.player.emit.message(player, `You accepted!`);
+            },
+            cancelCallback: (player: alt.Player) => {
+                Athena.player.emit.message(player, `You declined!`);
+            },
         };
 
-        alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
+        ServerJobTrigger.create(player, trigger);
     }
 
     @command('testped', '/testped - A Test Ped. Does not delete itself', PERMISSIONS.ADMIN)
@@ -265,10 +272,6 @@ alt.onClient('cmd:Input:Test', (_player: alt.Player, results: InputResult[] | nu
 
     console.log(`Results from test input:`);
     console.log(results);
-});
-
-alt.on('job:Example:Response', (player: alt.Player) => {
-    Athena.player.emit.message(player, `Accepted 'job:Example:Response'`);
 });
 
 alt.onClient('hello:From:Client', (player) => {

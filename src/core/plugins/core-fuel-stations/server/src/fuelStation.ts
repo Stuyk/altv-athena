@@ -11,6 +11,7 @@ import { distance2d } from '../../../../shared/utility/vector';
 import { FUEL_CONFIG } from './config';
 import stations from './stations';
 import { Athena } from '../../../../server/api/athena';
+import { ServerJobTrigger } from '../../../../server/systems/jobTrigger';
 
 const maximumFuel = 100;
 const fuelInfo: { [playerID: string]: FuelStatus } = {};
@@ -117,8 +118,8 @@ export class FuelStationSystem {
 
         const trigger: JobTrigger = {
             header: 'Fuel Vehicle',
-            event: FUEL_STATION_EVENTS.START,
-            cancelEvent: FUEL_STATION_EVENTS.CANCEL,
+            acceptCallback: FuelStationSystem.start,
+            cancelCallback: FuelStationSystem.cancel,
             image: '../../assets/images/refuel.jpg',
             summary: `Refill ${missingFuel.toFixed(2)}% of fuel in the ${
                 closestVehicle.data.model
@@ -132,7 +133,7 @@ export class FuelStationSystem {
             timeout: Date.now() + FUEL_CONFIG.FUEL_RESET_TIMEOUT,
         };
 
-        alt.emitClient(player, SYSTEM_EVENTS.INTERACTION_JOB, trigger);
+        ServerJobTrigger.create(player, trigger);
     }
 
     /**
@@ -209,6 +210,3 @@ export class FuelStationSystem {
         }
     }
 }
-
-alt.on(FUEL_STATION_EVENTS.START, FuelStationSystem.start);
-alt.on(FUEL_STATION_EVENTS.CANCEL, FuelStationSystem.cancel);
