@@ -47,12 +47,12 @@ export interface JobTrigger<T = {}> {
      *
      * @memberof JobTrigger
      */
-    acceptCallback?: (player: T, ...args: any[]) => void;
+    acceptCallback?: (player: T) => void;
 
     /**
      * A callback if the trigger is declined.
      *
      * @memberof JobTrigger
      */
-    cancelCallback?: (player: T, ...args: any[]) => void;
+    cancelCallback?: (player: T) => void;
 }
