@@ -1040,7 +1040,7 @@ function getTotalWeight(player: alt.Player): number {
             continue;
         }
 
-        total += parseFloat(item.data.weight);
+        total += parseFloat(item.data.weight) * item.quantity;
     }
 
     return total;
