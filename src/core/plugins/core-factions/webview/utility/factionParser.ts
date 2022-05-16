@@ -121,7 +121,7 @@ export class FactionParser {
 
         let sorted = members;
         if (orderByRank) {
-            sorted = members.sort((a, b) => {
+            return members.sort((a, b) => {
                 return b.weight - a.weight;
             });
         }
@@ -201,10 +201,8 @@ export class FactionParser {
             return [];
         }
 
-        const ranks = faction.ranks.sort((a, b) => {
+        return faction.ranks.sort((a, b) => {
             return b.weight - a.weight;
         });
-
-        return ranks;
     }
 }

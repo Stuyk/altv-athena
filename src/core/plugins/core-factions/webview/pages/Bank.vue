@@ -32,6 +32,20 @@
                     </template>
                 </div>
             </div>
+            <div
+                v-for="(componentName, index) in getBankComponents()"
+                :name="componentName"
+                class="panel pa-6 mb-4 fill-full-width"
+            >
+                <component
+                    :is="componentName"
+                    class="fade-in"
+                    :key="index"
+                    v-bind:faction="faction"
+                    v-bind:character="character"
+                    v-bind:money="money"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -43,6 +57,7 @@ import { Faction } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FACTION_PFUNC } from '../../shared/funcNames';
+import { FactionPageInjections } from '../injections';
 
 const ComponentName = 'Bank';
 export default defineComponent({
@@ -55,6 +70,7 @@ export default defineComponent({
     components: {
         Button: defineAsyncComponent(() => import('@components/Button.vue')),
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        ...FactionPageInjections.bank,
     },
     data() {
         return {
@@ -65,6 +81,9 @@ export default defineComponent({
         };
     },
     methods: {
+        getBankComponents() {
+            return Object.keys(FactionPageInjections.bank);
+        },
         withdraw() {
             if (this.amount > this.faction.bank) {
                 return;

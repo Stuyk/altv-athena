@@ -1,5 +1,4 @@
 // @ts-nocheck - Required to ignore weird pathing issues.
-import { defineAsyncComponent } from 'vue';
 import { FactionCorePageInjections } from './coreInjections';
 
 export const FactionPageInjections = {
@@ -30,5 +29,10 @@ export const FactionPageInjections = {
         // name: component_relative_path
         // ie. Atm: defineAsyncComponent(() => import('../../core-atm/components/Atm.vue'));
         ...FactionCorePageInjections.settings,
+    },
+    bank: {
+        // name: component_relative_path
+        // ie. Atm: defineAsyncComponent(() => import('../../core-atm/components/Atm.vue'));
+        ...FactionCorePageInjections.bank,
     },
 };

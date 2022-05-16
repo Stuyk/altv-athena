@@ -1,4 +1,3 @@
-import { Blip } from '../../../shared/interfaces/blip';
 import { Vector3 } from '../../../shared/interfaces/vector';
 
 type _id = string;
@@ -93,6 +92,8 @@ export interface RankPermissions {
  * @interface FactionCharacter
  */
 export interface FactionCharacter {
+    [key: string]: any;
+
     /**
      * The character ID of the Character.
      *
@@ -133,6 +134,8 @@ export interface FactionCharacter {
  * @interface FactionRank
  */
 export interface FactionRank {
+    [key: string]: any;
+
     /**
      * A unique identifier for the Faction Rank
      * Should be auto-generated.
@@ -278,6 +281,8 @@ export interface FactionVehicle {
 }
 
 export interface FactionSettings {
+    [key: string]: any;
+
     /**
      * The current positions of faction headquarters.
      *
@@ -308,7 +313,7 @@ export interface FactionSettings {
      * @type {number}
      * @memberof FactionSettings
      */
-    maxVehicles?: number | undefined;
+    maxVehicles?: number;
 
     /**
      * A blip sprite index.

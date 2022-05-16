@@ -6,6 +6,10 @@ import { VEHICLE_SYNCED_META } from '../../../../shared/enums/vehicleSyncedMeta'
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Faction } from '../../shared/interfaces';
 
+const onOpen: Array<(view: alt.WebView, faction: Faction) => void> = [];
+const onClose: Array<(view: alt.WebView, faction: Faction) => void> = [];
+const onRefresh: Array<(faction: Faction) => void> = [];
+
 let faction: Faction;
 let isOpen = false;
 
@@ -16,6 +20,11 @@ class InternalFunctions {
         // Just updates faction data dynamically for users.
         if (isOpen) {
             InternalFunctions.ready();
+
+            for (const element of onRefresh) {
+                element(faction);
+            }
+
             return;
         }
 
@@ -32,6 +41,10 @@ class InternalFunctions {
         view.on(FACTION_EVENTS.WEBVIEW.READY, InternalFunctions.ready);
         view.on(FACTION_EVENTS.WEBVIEW.CLOSE, InternalFunctions.close);
         view.on(FACTION_EVENTS.WEBVIEW.ACTION, InternalFunctions.action);
+
+        for (const element of onOpen) {
+            element(view, faction);
+        }
 
         WebViewController.openPages([FACTION_EVENTS.WEBVIEW.NAME]);
         WebViewController.focus();
@@ -61,6 +74,10 @@ class InternalFunctions {
         view.off(FACTION_EVENTS.WEBVIEW.READY, InternalFunctions.ready);
         view.off(FACTION_EVENTS.WEBVIEW.CLOSE, InternalFunctions.close);
         view.off(FACTION_EVENTS.WEBVIEW.ACTION, InternalFunctions.action);
+
+        for (const element of onClose) {
+            element(view, faction);
+        }
 
         WebViewController.closePages([FACTION_EVENTS.WEBVIEW.NAME]);
         WebViewController.unfocus();
@@ -92,17 +109,17 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    private static getFactionVehicles(faction: Faction) {
+    private static getFactionVehicles(factionRef: Faction) {
         const spawnedVehicles = [];
 
         const currentVehicles = [...alt.Vehicle.all];
-        for (let i = 0; i < currentVehicles.length; i++) {
-            if (!currentVehicles[i].hasSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID)) {
+        for (const element of currentVehicles) {
+            if (!element.hasSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID)) {
                 continue;
             }
 
-            const id = currentVehicles[i].getSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID);
-            if (faction.vehicles.findIndex((veh) => veh.id === id) <= -1) {
+            const id = element.getSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID);
+            if (factionRef.vehicles.findIndex((veh) => veh.id === id) <= -1) {
                 continue;
             }
 
@@ -121,5 +138,43 @@ export class FactionView {
     static init() {
         alt.onServer(FACTION_EVENTS.PROTOCOL.OPEN, InternalFunctions.open);
         alt.onServer(FACTION_EVENTS.PROTOCOL.REFRESH, InternalFunctions.refresh);
+    }
+
+    /**
+     * Triggers a callback when the WebView is opening.
+     * This is just after event registration.
+     *
+     * Useful for registering custom 'on' events.
+     *
+     * @static
+     * @param {(view: alt.WebView) => void} callback
+     * @memberof FactionView
+     */
+    static onOpen(callback: (view: alt.WebView, faction: Faction) => void) {
+        onOpen.push(callback);
+    }
+
+    /**
+     * Triggers a callback when the WebView is closed.
+     *
+     * Useful for registering custom 'off' events.
+     *
+     * @static
+     * @param {(view: alt.WebView) => void} callback
+     * @memberof FactionView
+     */
+    static onClose(callback: (view: alt.WebView, faction: Faction) => void) {
+        onClose.push(callback);
+    }
+
+    /**
+     * Called when data is updated from server-side and emitted to the faction members.
+     *
+     * @static
+     * @param {(faction: Faction) => void} callback
+     * @memberof FactionView
+     */
+    static onRefresh(callback: (faction: Faction) => void) {
+        onRefresh.push(callback);
     }
 }

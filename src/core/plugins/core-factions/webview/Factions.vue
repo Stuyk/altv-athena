@@ -19,6 +19,7 @@
                     v-bind:pos="pos"
                     v-bind:rot="rot"
                     v-bind:spawned-vehicles="spawnedVehicles"
+                    @update-faction-prop="updateFactionProp"
                 ></component>
             </div>
         </div>
@@ -55,7 +56,7 @@ export default defineComponent({
     },
     data() {
         return {
-            pageIndex: 3,
+            pageIndex: 5,
             pages: [
                 { name: 'Members', page: 'Members' },
                 { name: 'Ranks', page: 'Ranks' },
@@ -101,6 +102,9 @@ export default defineComponent({
             } else {
                 this.spawnedVehicles = spawnedVehicles;
             }
+        },
+        updateFactionProp(faction: Faction) {
+            this.faction = faction;
         },
         close() {
             if (!('alt' in window)) {
