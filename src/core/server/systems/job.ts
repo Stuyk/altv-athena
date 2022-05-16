@@ -52,8 +52,6 @@ export class Job {
         JobInstances[this.player.id] = this;
         this.startTime = Date.now();
         this.syncObjective();
-
-        Athena.player.emit.message(player, '/quitjob - To stop this job.');
     }
 
     /**
