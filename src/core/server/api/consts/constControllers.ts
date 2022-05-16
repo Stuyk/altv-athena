@@ -8,13 +8,13 @@ import { AdminController } from '../../systems/admin';
 import { ServerBlipController } from '../../systems/blip';
 import ChatController from '../../systems/chat';
 import { HologramController } from '../../systems/hologram';
-import { InteractionController } from '../../systems/interaction';
+import { ServerInteractionController } from '../../systems/interaction';
 
 export const controllersConst = {
     admin: AdminController,
     blip: ServerBlipController,
     chat: ChatController,
-    interaction: InteractionController,
+    interaction: ServerInteractionController,
     item: ServerItemController,
     holograms: HologramController,
     marker: ServerMarkerController,

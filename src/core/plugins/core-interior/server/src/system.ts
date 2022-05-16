@@ -9,7 +9,7 @@ import Database from '@stuyk/ezmongodb';
 import { sha256Random } from '../../../../server/utility/encryption';
 import { InteriorInternal } from './interfaces';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
-import { InteractionController } from '../../../../server/systems/interaction';
+import { ServerInteractionController } from '../../../../server/systems/interaction';
 import { distance } from '../../../../shared/utility/vector';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
 import { INTERIOR_SYSTEM } from '../../shared/flags';
@@ -84,7 +84,7 @@ class InternalSystem {
                 type: 0,
             });
 
-            const outsideUid = InteractionController.add({
+            const outsideUid = ServerInteractionController.add({
                 description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
                 position: interior.outside,
                 uid: `${interior.uid}-outside`,
@@ -94,7 +94,7 @@ class InternalSystem {
                 isPlayerOnly: true,
             });
 
-            interiorInfo.outsideShape = InteractionController.get(outsideUid);
+            interiorInfo.outsideShape = ServerInteractionController.get(outsideUid);
         }
 
         InternalSystem.refreshInteriorText(interiorInfo);
@@ -690,7 +690,7 @@ export class InteriorSystem {
         // Only creates it once for the single dimension since it does not exist yet.
         // Lowers need for additional interaction controllers.
         if (!interior.insideShape) {
-            const insideUid = InteractionController.add({
+            const insideUid = ServerInteractionController.add({
                 description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
                 position: new alt.Vector3(interior.inside.x, interior.inside.y, interior.inside.z - 1.5),
                 uid: `${interior.uid}-inside`,
@@ -702,7 +702,7 @@ export class InteriorSystem {
                 height: 5,
             });
 
-            interior.insideShape = InteractionController.get(insideUid);
+            interior.insideShape = ServerInteractionController.get(insideUid);
 
             ServerMarkerController.append({
                 uid: `${interior.uid}-inside`,

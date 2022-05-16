@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import atms from '../../../../shared/information/atms';
 import { ServerBlipController } from '../../../../server/systems/blip';
-import { InteractionController } from '../../../../server/systems/interaction';
+import { ServerInteractionController } from '../../../../server/systems/interaction';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
@@ -212,7 +212,7 @@ export class AtmFunctions {
                 uid: `atm-${i}`,
             });
 
-            InteractionController.add({
+            ServerInteractionController.add({
                 position,
                 description: 'Open the ATM',
                 range: INTERACTION_RANGE,

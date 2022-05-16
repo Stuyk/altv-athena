@@ -194,7 +194,7 @@ class InternalFunctions {
     }
 }
 
-export class InteractionController {
+export class ServerInteractionController {
     /**
      * Add an interaction to the scene.
      * @param {Interaction} interaction - The interaction object to be added.

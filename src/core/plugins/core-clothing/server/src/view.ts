@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { PolygonShape } from '../../../../server/extensions/extColshape';
 import { ServerBlipController } from '../../../../server/systems/blip';
-import { InteractionController } from '../../../../server/systems/interaction';
+import { ServerInteractionController } from '../../../../server/systems/interaction';
 import { sha256 } from '../../../../server/utility/encryption';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
@@ -143,7 +143,7 @@ export class ClothingFunctions {
         };
 
         ServerBlipController.append(blip);
-        InteractionController.add(interaction);
+        ServerInteractionController.add(interaction);
         clothingStoreList.push(store);
     }
 

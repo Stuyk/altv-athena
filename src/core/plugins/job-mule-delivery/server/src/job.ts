@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { ServerMarkerController } from '../../../../server/streamers/marker';
 import { ServerBlipController } from '../../../../server/systems/blip';
-import { InteractionController } from '../../../../server/systems/interaction';
+import { ServerInteractionController } from '../../../../server/systems/interaction';
 import { Job } from '../../../../server/systems/job';
 import { MARKER_TYPE } from '../../../../shared/enums/markerTypes';
 import { Objective } from '../../../../shared/interfaces/job';
@@ -37,7 +37,7 @@ export class MuleJob {
             scale: new alt.Vector3(1, 1, 1),
         });
 
-        InteractionController.add({
+        ServerInteractionController.add({
             callback: MuleJob.begin,
             description: 'Deliver Packages',
             position: START_POINT,
