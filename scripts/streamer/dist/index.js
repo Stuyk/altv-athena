@@ -11,7 +11,7 @@ const StreamRange = {};
 let StreamData = {};
 let conn;
 let config = {
-    TimeBetweenUpdates: 1000
+    TimeBetweenUpdates: 1000,
 };
 class StreamerServer {
     /**
@@ -44,11 +44,13 @@ class StreamerServer {
         // Object.keys(config).forEach((key) => {
         //     console.log(`${key}: ${config[key]}`);
         // });
-        conn.write(JSON.stringify({
-            id: -1,
-            route: 'ready',
-            data: '[Streamer] Ready!'
-        }));
+        conn.write(
+            JSON.stringify({
+                id: -1,
+                route: 'ready',
+                data: '[Streamer] Ready!',
+            }),
+        );
     }
     /**
      * Retrieve a ping request, send a pong.
@@ -58,11 +60,13 @@ class StreamerServer {
      * @memberof StreamerServer
      */ static ping(id) {
         StreamData = {};
-        conn.write(JSON.stringify({
-            id,
-            route: 'pong',
-            data: '[Streamer] Cleaned & Ready for Events!'
-        }));
+        conn.write(
+            JSON.stringify({
+                id,
+                route: 'pong',
+                data: '[Streamer] Cleaned & Ready for Events!',
+            }),
+        );
     }
     /**
      * Retrieve a ping request, send a pong.
@@ -101,15 +105,15 @@ class StreamerServer {
         const response = {
             id,
             route: 'update',
-            data: {}
+            data: {},
         };
-        for(let i = 0; i < keys.length; i++){
+        for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
             if (!StreamData[key]) {
                 continue;
             }
             const streamDistance = StreamRange[key] ? StreamRange[key] : 100;
-            const validData = StreamData[key].filter((streamData)=>{
+            const validData = StreamData[key].filter((streamData) => {
                 if (streamData.dimension && streamData.dimension !== data.dimension) {
                     return false;
                 }
@@ -126,7 +130,11 @@ class StreamerServer {
         if (vector1 === undefined || vector2 === undefined) {
             throw new Error('AddVector => vector1 or vector2 is undefined');
         }
-        return Math.sqrt(Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2));
+        return Math.sqrt(
+            Math.pow(vector1.x - vector2.x, 2) +
+                Math.pow(vector1.y - vector2.y, 2) +
+                Math.pow(vector1.z - vector2.z, 2),
+        );
     }
 }
 StreamerServer.Routes = {
@@ -134,7 +142,7 @@ StreamerServer.Routes = {
     config: StreamerServer.config,
     populate: StreamerServer.populate,
     update: StreamerServer.update,
-    'update-range': StreamerServer.updateRange
+    'update-range': StreamerServer.updateRange,
 };
 main.on('connection', StreamerServer.init);
 main.installHandlers(server);
