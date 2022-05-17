@@ -51,9 +51,9 @@ async function cleanup() {
         });
     });
 
-    for (let i = 0; i < badFiles.length; i++) {
-        if (fs.existsSync(badFiles[i])) {
-            fs.rmSync(badFiles[i], { recursive: true, force: true });
+    for (const file of badFiles) {
+        if (fs.existsSync(file)) {
+            fs.rmSync(file, { recursive: true, force: true });
         }
     }
 }
