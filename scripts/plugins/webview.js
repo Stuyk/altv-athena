@@ -5,8 +5,8 @@ import { getEnabledPlugins, sanitizePath } from './shared.js';
 
 function getWebviewFiles(pluginName) {
     const pluginFolder = sanitizePath(path.join(process.cwd(), 'src/core/plugins', pluginName));
-    const hasWebviewFiles = fs.existsSync(sanitizePath(path.join(pluginFolder, 'webview')));
-    return hasWebviewFiles;
+    
+    return fs.existsSync(sanitizePath(path.join(pluginFolder, 'webview')));
 }
 
 function writeWebViewPlugins(plugins) {
