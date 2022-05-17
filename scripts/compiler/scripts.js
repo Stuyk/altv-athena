@@ -29,29 +29,30 @@ const SWC_CONFIG = {
 async function cleanFolders() {
     const promises = [];
 
-    for (let i = 0; i < FOLDERS_TO_CLEAN.length; i++) {
-        promises.push(fs.rm(path.join(process.cwd(), FOLDERS_TO_CLEAN[i]), { recursive: true, force: true }));
+    for (const folder of FOLDERS_TO_CLEAN) {
+        promises.push(fs.rm(path.join(process.cwd(), folder), { recursive: true, force: true }));
     }
 
     await Promise.all(promises);
 }
 
-async function getFiles() {
-    return new Promise(async (resolve) => {
-        let files = [];
+function generatePromise(somePath) {
+    return new Promise((resolve) => {
+        glob(somePath, (_err, _files) => {
+            resolve(_files);
+        });
+    });
+}
 
-        for (let i = 0; i < FILES_TO_COMPILE.length; i++) {
-            const somePath = path.join(process.cwd(), FILES_TO_COMPILE[i]).replace(/\\/g, '/');
-            const filesFound = await new Promise((resolve) => {
-                glob(somePath, (err, _files) => {
-                    resolve(_files);
-                });
-            });
+async function getFiles() {
+    return new Promise(async () => {
+        let files = [];
+        for (const file of FILES_TO_COMPILE) {
+            const somePath = path.join(process.cwd(), file).replace(/\\/g, '/');
+            const filesFound = generatePromise(somePath);
 
             files = files.concat(filesFound);
         }
-
-        resolve(files);
     });
 }
 
@@ -59,25 +60,23 @@ async function copyFiles() {
     let promises = [];
     let files = [];
 
-    for (let i = 0; i < FILES_TO_COPY.length; i++) {
-        const somePath = path.join(process.cwd(), FILES_TO_COPY[i]).replace(/\\/g, '/');
-        const somePromise = new Promise((resolve) => {
-            glob(somePath, (err, _files) => {
-                resolve(_files);
+    if (FILES_TO_COPY.length > 0) {
+        for (const file of FILES_TO_COPY) {
+            const somePath = path.join(process.cwd(), file).replace(/\\/g, '/');
+            const somePromise = generatePromise(somePath).then((_files) => {
+                files = files.concat(_files);
             });
-        }).then((_files) => {
-            files = files.concat(_files);
-        });
 
-        promises.push(somePromise);
+            promises.push(somePromise);
+        }
     }
 
     await Promise.all(promises);
     promises = [];
 
-    for (let i = 0; i < files.length; i++) {
-        const originalPath = files[i];
-        let newPath = files[i].replace('src/', 'resources/');
+    for (const file of files) {
+        const originalPath = file;
+        let newPath = file.replace('src/', 'resources/');
         const newPromise = fs.copy(originalPath, newPath, { recursive: true, overwrite: true });
         promises.push(newPromise);
     }
@@ -89,13 +88,13 @@ async function copyFiles() {
 async function compileFiles(files) {
     const coreFiles = [];
 
-    for (let i = 0; i < files.length; i++) {
-        swc.transformFile(files[i], SWC_CONFIG).then(async (output) => {
-            let newPath = files[i].replace('src/', 'resources/').replace('.ts', '.js');
+    for (const file of files) {
+        swc.transformFile(file, SWC_CONFIG).then(async (output) => {
+            let newPath = file.replace('src/', 'resources/').replace('.ts', '.js');
 
-            if (files[i].includes('scripts')) {
-                console.log(files[i]);
-                newPath = files[i].replace('src/', 'dist/').replace('.ts', '.js');
+            if (file.includes('scripts')) {
+                console.log(file);
+                newPath = file.replace('src/', 'dist/').replace('.ts', '.js');
             }
 
             const coreFile = {
@@ -139,7 +138,8 @@ async function beginCompilation() {
     const result = currentTime.match(/\d\d:\d\d:\d\d/);
     const time = result && Array.isArray(result) && result.length >= 1 ? result[0] : '00:00:00';
     console.log(
-        `[${time}] [SWC] ${filesCompiled.length} Files Transpiled - ${filesCopied.length} Files Copied - Total Time ${Date.now() - start
+        `[${time}] [SWC] ${filesCompiled.length} Files Transpiled - ${filesCopied.length} Files Copied - Total Time ${
+            Date.now() - start
         }ms`,
     );
 }
