@@ -141,7 +141,9 @@ class InternalFunctions {
         }
 
         faction.bank -= rank.paycheck;
-        faction.members[player.data._id.toString()].nextPaycheck = Date.now() + faction.settings.paycheckClaimTime;
+        faction.members[player.data._id.toString()].nextPaycheck =
+            Date.now() + faction.settings.paycheckClaimTime * 60000;
+
         const didUpdate = await FactionHandler.update(faction._id as string, {
             members: faction.members,
             bank: faction.bank,
