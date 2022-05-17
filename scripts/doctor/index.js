@@ -41,10 +41,10 @@ async function cleanup() {
     }
 
     let badFiles = [];
-    badFiles = await new Promise(resolve => {
+    badFiles = await new Promise((resolve) => {
         glob('./src/core/**/*.js', (err, files) => {
             if (err) {
-                return resolve(files);;
+                return resolve(files);
             }
 
             return resolve(files);

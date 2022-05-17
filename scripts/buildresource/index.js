@@ -7,29 +7,24 @@ const defaults = {
     type: 'js',
     main: 'server/startup.js',
     'client-main': 'client/startup.js',
-    'client-files': [
-        'client/*',
-        'shared/*',
-    ],
+    'client-files': ['client/*', 'shared/*'],
     deps: [],
-    "required-permissions": [
-        "Screen Capture"
-    ]
-}
+    'required-permissions': ['Screen Capture'],
+};
 
 async function getClientPluginFolders() {
     let folders = [];
 
-    const removalPath = path.join(process.cwd(), 'src/core/').replace(/\\/gm, '/')
+    const removalPath = path.join(process.cwd(), 'src/core/').replace(/\\/gm, '/');
     const results = await new Promise((resolve) => {
         glob(path.join(process.cwd(), `src/core/plugins/**/@(client|shared)`).replace(/\\/g, '/'), (err, files) => {
             if (err) {
-                resolve([])
+                resolve([]);
                 return;
             }
 
             files = files.map((fileName) => {
-                return fileName.replace(removalPath, '') + `/*`
+                return fileName.replace(removalPath, '') + `/*`;
             });
 
             resolve(files);
@@ -48,4 +43,3 @@ async function start() {
 }
 
 start();
-
