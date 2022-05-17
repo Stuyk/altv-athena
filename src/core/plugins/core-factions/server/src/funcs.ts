@@ -2,7 +2,7 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { Character } from '../../../../shared/interfaces/character';
-import { FactionHandler, FACTION_COLLECTION } from './handler';
+import { FactionHandler } from './handler';
 import { StorageSystem } from '../../../../server/systems/storage';
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { VehicleSystem } from '../../../../server/systems/vehicle';
@@ -11,6 +11,8 @@ import { IResponse } from '../../../../shared/interfaces/iResponse';
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Athena } from '../../../../server/api/athena';
+import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
+import { IVehicle } from '../../../../shared/interfaces/iVehicle';
 
 let hasInitialized = false;
 
@@ -40,11 +42,42 @@ export class FactionFuncs {
         }
 
         hasInitialized = true;
-        VehicleSystem.addCustomRule(VEHICLE_RULES.UNLOCK, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.LOCK, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
+        VehicleFuncs.addOwnershipInjection(FactionFuncs.handleOwnershipInjection);
+    }
+
+    private static handleOwnershipInjection(player: alt.Player, vehicle: alt.Vehicle) {
+        if (!vehicle.data) {
+            return false;
+        }
+
+        // Check if vehicle is owned by a faction
+        const faction = FactionHandler.get(vehicle.data.owner);
+        if (!faction) {
+            return false;
+        }
+
+        // Check if in same faction
+        if (vehicle.data.owner !== player.data.faction) {
+            return false;
+        }
+
+        // Check if the vehicle identifier exists in the faction vehicles list
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicle.data._id.toString());
+        if (index <= -1) {
+            return false;
+        }
+
+        // Check if the players rank has access to this vehicle specifically
+        const rank = FactionFuncs.getFactionMemberRank(faction, player.data._id.toString());
+        if (!rank) {
+            return false;
+        }
+
+        if (rank.vehicles && !rank.vehicles.includes(vehicle.data._id.toString())) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -61,50 +94,6 @@ export class FactionFuncs {
         );
 
         alt.emitClient(members, FACTION_EVENTS.PROTOCOL.REFRESH, faction);
-    }
-
-    /**
-     * Check if the vehicle is owned by a faction, if it is, check if the player is in the same
-     * faction, if they are, check if the vehicle is in the faction vehicles list, if it is, check if
-     * the player has access to the vehicle, if they do, return true, else return false.
-     *
-     * @param player - alt.Player - The player that is trying to use the vehicle
-     * @param vehicle - The vehicle that is being checked.
-     * @returns A response object with the status and response properties.
-     */
-    static handleFactionVehicleChecks(player: alt.Player, vehicle: alt.Vehicle): IResponse {
-        if (!vehicle.data) {
-            return { status: true, response: 'Not a faction vehicle' };
-        }
-
-        // Check if vehicle is owned by a faction
-        const faction = FactionHandler.get(vehicle.data.owner);
-        if (!faction) {
-            return { status: true, response: 'Not a faction vehicle' };
-        }
-
-        // Check if in same faction
-        if (vehicle.data.owner !== player.data.faction) {
-            return { status: false, response: 'Not in same faction for vehicle usage' };
-        }
-
-        // Check if the vehicle identifier exists in the faction vehicles list
-        const index = faction.vehicles.findIndex((fv) => fv.id === vehicle.data._id.toString());
-        if (index <= -1) {
-            return { status: false, response: 'Vehicle not found for faction' };
-        }
-
-        // Check if the players rank has access to this vehicle specifically
-        const character = FactionFuncs.getFactionMemberRank(faction, player.data._id.toString());
-        if (!character) {
-            return { status: false, response: 'Player not found in faction' };
-        }
-
-        if (faction.vehicles[index].allowRanks.findIndex((ar) => ar === character.uid) <= -1) {
-            return { status: false, response: 'Faction rank does not have access to vehicle' };
-        }
-
-        return { status: true, response: 'Has Faction Rank Access' };
     }
 
     /**
@@ -658,31 +647,6 @@ export class FactionFuncs {
     }
 
     /**
-     * Add a vehicle to the faction garage
-     * Auto-saves
-     *
-     * @static
-     * @param {Faction} faction
-     * @param {string} vehicleUid
-     * @param {string} name
-     * @return {*}
-     * @memberof FactionFuncs
-     */
-    static async addVehicle(faction: Faction, vehicleUid: string, name: string) {
-        if (!faction.vehicles) {
-            faction.vehicles = [];
-        }
-
-        faction.vehicles.push({ name, id: vehicleUid, allowRanks: [] });
-        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
-        if (didUpdate.status) {
-            FactionFuncs.updateMembers(faction);
-        }
-
-        return didUpdate.status;
-    }
-
-    /**
      * Remove a vehicle from the faction garage.
      * Auto-saves
      *
@@ -729,14 +693,18 @@ export class FactionFuncs {
             return false;
         }
 
-        // Already Exists
-        const rankIndex = faction.vehicles[index].allowRanks.findIndex((ar) => ar === rankUid);
-        if (rankIndex >= 0) {
+        const rankIndex = faction.ranks.findIndex((pr) => pr.uid === rankUid);
+        if (rankIndex <= -1) {
             return false;
         }
 
-        faction.vehicles[index].allowRanks.push(rankUid);
-        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
+        const vehRankIndex = faction.ranks[rankIndex].vehicles.findIndex((vr) => vr === rankUid);
+        if (vehRankIndex >= 0) {
+            return true;
+        }
+
+        faction.ranks[rankIndex].vehicles.push(vehicleUid);
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         if (didUpdate.status) {
             FactionFuncs.updateMembers(faction);
         }
@@ -762,14 +730,18 @@ export class FactionFuncs {
             return false;
         }
 
-        // Does not exist
-        const rankIndex = faction.vehicles[index].allowRanks.findIndex((ar) => ar === rankUid);
+        const rankIndex = faction.ranks.findIndex((pr) => pr.uid === rankUid);
         if (rankIndex <= -1) {
             return false;
         }
 
-        faction.vehicles[index].allowRanks.splice(rankIndex, 1);
-        const didUpdate = await FactionHandler.update(faction._id as string, { vehicles: faction.vehicles });
+        const vehRankIndex = faction.ranks[rankIndex].vehicles.findIndex((vr) => vr === rankUid);
+        if (vehRankIndex <= -1) {
+            return true;
+        }
+
+        faction.ranks[rankIndex].vehicles.splice(vehRankIndex, 1);
+        const didUpdate = await FactionHandler.update(faction._id as string, { ranks: faction.ranks });
         if (didUpdate.status) {
             FactionFuncs.updateMembers(faction);
         }
@@ -920,5 +892,186 @@ export class FactionFuncs {
         }
 
         return didUpdate.status;
+    }
+
+    /**
+     * It adds a parking spot to a faction.
+     * @param {Faction} faction - Faction - This is the faction that you want to add the parking spot
+     * to.
+     * @param pos - alt.Vector3
+     * @returns a boolean value.
+     */
+    static async addParkingSpot(faction: Faction, pos: alt.Vector3, rot: alt.Vector3) {
+        if (!faction.settings.parkingSpots) {
+            faction.settings.parkingSpots = [];
+        }
+
+        faction.settings.parkingSpots.push({ pos, rot });
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
+     * It removes a parking spot from a faction
+     * @param {Faction} faction - Faction - The faction object
+     * @param {number} index - number - The index of the parking spot you want to remove.
+     * @returns A boolean value.
+     */
+    static async removeParkingSpot(faction: Faction, index: number) {
+        if (!faction.settings.parkingSpots) {
+            return false;
+        }
+
+        if (!faction.settings.parkingSpots[index]) {
+            return false;
+        }
+
+        faction.settings.parkingSpots.splice(index, 1);
+        const didUpdate = await FactionHandler.update(faction._id as string, { settings: faction.settings });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+            FactionHandler.updateSettings(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
+     * It checks if the faction has enough money to buy a vehicle, and if so, it subtracts the price
+     * from the faction's bank and adds the vehicle to the faction's vehicle list and creates a vehicle in the database.
+     * @param {Faction} faction - Faction - This is the faction object that is being passed in.
+     * @param {string} model - string - The model of the vehicle to purchase.
+     * @returns A boolean value.
+     */
+    static async purchaseVehicle(faction: Faction, model: string) {
+        if (!faction.settings.vehicles) {
+            return false;
+        }
+
+        // Check that the faction has access to a vehicle list
+        if (!Array.isArray(faction.settings.vehicles)) {
+            return false;
+        }
+
+        // Check that the model exists in the list of vehicles for the faction.
+        const index = faction.settings.vehicles.findIndex((x) => x.model === model);
+        if (index <= -1) {
+            return false;
+        }
+
+        // Check that the faction has enough money
+        const price = Math.abs(faction.settings.vehicles[index].price);
+        if (faction.bank < price) {
+            return false;
+        }
+
+        // Check for max vehicles
+        if (
+            typeof faction.settings.maxVehicles === 'number' &&
+            faction.vehicles.length >= faction.settings.maxVehicles
+        ) {
+            return false;
+        }
+
+        // Attempt to create the vehicle in the database.
+        let newVehicle: IVehicle;
+        try {
+            newVehicle = await VehicleFuncs.add({
+                model,
+                owner: faction._id.toString(),
+                position: new alt.Vector3(0, 0, 0),
+                rotation: new alt.Vector3(0, 0, 0),
+            });
+        } catch (err) {
+            alt.logWarning(`Could not create vehicle ${model} for faction ${faction.name}`);
+            return false;
+        }
+
+        // Remove the cost from the bank.
+        faction.bank -= Math.abs(price);
+
+        // Add the vehicle to the faction vehicles list.
+        faction.vehicles.push({ model, id: newVehicle._id.toString() });
+
+        const didUpdate = await FactionHandler.update(faction._id as string, {
+            vehicles: faction.vehicles,
+            bank: faction.bank,
+        });
+
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
+     * If the rank exists, and the vehicle exists, and the rank has a vehicles array, then toggle the
+     * vehicle in the array.
+     * @param {Faction} faction - Faction - The faction object.
+     * @param {string} rank - string
+     * @param {string} vehicleId - string
+     * @returns A boolean value.
+     */
+    static async toggleVehicleRankPermission(faction: Faction, rank: string, vehicleId: string) {
+        if (!rank || !vehicleId) {
+            return false;
+        }
+
+        // Verify the vehicle exists...
+        const vehicleIndex = faction.vehicles.findIndex((x) => x.id === vehicleId);
+        if (vehicleIndex <= -1) {
+            return false;
+        }
+
+        const rankIndex = faction.ranks.findIndex((r) => r.uid === rank);
+        if (rankIndex <= -1) {
+            return false;
+        }
+
+        if (!Array.isArray(faction.ranks[rankIndex].vehicles)) {
+            faction.ranks[rankIndex].vehicles = [];
+        }
+
+        const vehicleRankIndex = faction.ranks[rankIndex].vehicles.findIndex((id) => id === vehicleId);
+
+        // Remove vehicle identifier if it already exists. Effectively toggling it.
+        if (vehicleRankIndex >= 0) {
+            faction.ranks[rankIndex].vehicles.splice(vehicleRankIndex, 1);
+        } else {
+            faction.ranks[rankIndex].vehicles.push(vehicleId);
+        }
+
+        const didUpdate = await FactionHandler.update(faction._id as string, {
+            ranks: faction.ranks,
+        });
+
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    static async spawnVehicle(faction: Faction, vehicleId: string, location: { pos: Vector3; rot: Vector3 }) {
+        const vehIndex = alt.Vehicle.all.findIndex((veh) => veh && veh.data && veh.data._id.toString() === vehicleId);
+        if (vehIndex >= 0) {
+            return false;
+        }
+
+        // spawn the vehicle
+        const vehicleInfo = await Database.fetchData<IVehicle>('_id', vehicleId, Athena.database.collections.Vehicles);
+        if (!vehicleInfo) {
+            return false;
+        }
+
+        const vehicle = VehicleFuncs.spawn(vehicleInfo, location.pos, location.rot);
+        FactionFuncs.updateMembers(faction);
+        return true;
     }
 }

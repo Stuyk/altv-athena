@@ -7,6 +7,7 @@ import save from './save';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { Item } from '../../../shared/interfaces/item';
 import { Appearance } from '../../../shared/interfaces/appearance';
+import { ClothingComponent } from '../../../shared/interfaces/clothing';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -108,7 +109,7 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
     player.setEyeColor(appearance.eyes);
 }
 
-function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
+function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, isMale = false) {
     const clothingComponents = new Array(11).fill(null);
     const propComponents = [0, 1, 2, 6, 7];
 
@@ -145,7 +146,7 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
     }
 
     for (let i = 0; i < clothingComponents.length; i++) {
-        const component = clothingComponents[i];
+        const component = clothingComponents[i] as ClothingComponent;
         if (!component) {
             continue;
         }
@@ -155,17 +156,8 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
             const value = component.drawables[index];
             const id = component.ids[index];
 
-            if (component.isDlc) {
-                const dlc = component.dlcs[index];
-
-                if (dlc === undefined || dlc === null) {
-                    alt.logWarning(
-                        `DLC was undefined for clothing component with ID: ${id}, VALUE: ${value}, TEXTURE: ${texture}`,
-                    );
-                    alt.logWarning(`Make sure you add item.data.dlcs = [] to your dlc clothing item.`);
-                    continue;
-                }
-
+            if (component.dlcHashes && component.dlcHashes.length >= 1) {
+                const dlc = component.dlcHashes[index];
                 if (component.isProp) {
                     player.setDlcProp(dlc, id, value, texture);
                     continue;
@@ -182,6 +174,38 @@ function equipment(player: alt.Player, items: Array<Item>, isMale = false) {
 
             player.setClothes(id, value, texture, 0);
         }
+    }
+}
+
+/**
+ * Synchronizes a single equipment item.
+ *
+ * @param {alt.Player} player
+ * @param {ClothingComponent} component
+ */
+function singleEquipment(player: alt.Player, component: ClothingComponent) {
+    for (let index = 0; index < component.drawables.length; index++) {
+        const texture = component.textures[index];
+        const value = component.drawables[index];
+        const id = component.ids[index];
+
+        if (component.dlcHashes && component.dlcHashes.length >= 1) {
+            const dlc = component.dlcHashes[index];
+            if (component.isProp) {
+                player.setDlcProp(dlc, id, value, texture);
+                continue;
+            }
+
+            player.setDlcClothes(dlc, id, value, texture, 0);
+            continue;
+        }
+
+        if (component.isProp) {
+            player.setProp(id, value, texture);
+            continue;
+        }
+
+        player.setClothes(id, value, texture, 0);
     }
 }
 
@@ -233,6 +257,7 @@ const exports = {
     appearance,
     currencyData,
     equipment,
+    singleEquipment,
     inventory,
     playTime,
     override,

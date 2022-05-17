@@ -74,7 +74,7 @@ export default defineComponent({
         async playHover() {
             if (!this._audio) {
                 this._audio = new Audio(this.ResolvePath('assets/sounds/ui/hover.ogg'));
-                this._audio.volume = 0.2;
+                this._audio.volume = 0.5;
             }
 
             this._audio.setAttribute('src', this.ResolvePath('assets/sounds/ui/hover.ogg'));
@@ -86,7 +86,7 @@ export default defineComponent({
         async playMouseUp() {
             if (!this._audio) {
                 this._audio = new Audio(this.ResolvePath('assets/sounds/ui/click.ogg'));
-                this._audio.volume = 0.2;
+                this._audio.volume = 0.5;
             }
 
             this._audio.setAttribute('src', this.ResolvePath('assets/sounds/ui/click.ogg'));

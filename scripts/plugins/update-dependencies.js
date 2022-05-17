@@ -11,7 +11,7 @@ const viablePluginDisablers = [
 ]
 
 function sanitizePath(p) {
-    return p.replace(/\\/g, path.sep);
+    return p.replace(/\\/g, '/');
 }
 
 function getInstalledDependencies() {
@@ -46,8 +46,8 @@ function getPluginDependencies(pluginName) {
         devDependencies: []
     }
 
-    for (let i = 0; i < viablePluginDisablers.length; i++) {
-        const disabledPath = sanitizePath(path.join(pluginPath, viablePluginDisablers[i]));
+    for (const disabler of viablePluginDisablers) {
+        const disabledPath = sanitizePath(path.join(pluginPath, disabler));
         if (fs.existsSync(disabledPath)) {
             return dependencies;
         }
@@ -81,22 +81,21 @@ function getPluginDependencies(pluginName) {
     return dependencies;
 }
 
-function updatePluginDependencies() {
+function checkPluginDependencies() {
     const installedDependencies = getInstalledDependencies();
     const plugins = glob.sync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
 
     const missingDepdendencies = [];
-    const missingDevDependencies = [];
 
     for (const plugin of plugins) {
         const pluginName = path.basename(plugin);
 
         const pluginDependencies = getPluginDependencies(pluginName);
 
-        if (pluginDependencies.dependencies.length === 0 && pluginDependencies.devDependencies.length === 0)
+        if (pluginDependencies.dependencies.length === 0)
             continue;
 
-        console.log(`Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies, ${pluginDependencies.devDependencies.length} dev dependencies`);
+        console.log(`Checking dependencies for plugin '${pluginName}': ${pluginDependencies.dependencies.length} dependencies`);
 
         if (pluginDependencies.dependencies.length > 0) {
             for (const dependency of pluginDependencies.dependencies) {
@@ -105,15 +104,42 @@ function updatePluginDependencies() {
                 }
             }
         }
+    }
+
+    return missingDepdendencies;
+}
+
+function checkPluginDevDependencies() {
+    const installedDependencies = getInstalledDependencies();
+    const plugins = glob.sync(sanitizePath(path.join(process.cwd(), 'src/core/plugins/*')));
+
+    const missingDevDepdendencies = [];
+
+    for (const plugin of plugins) {
+        const pluginName = path.basename(plugin);
+
+        const pluginDependencies = getPluginDependencies(pluginName);
+
+        if (pluginDependencies.devDependencies.length === 0)
+            continue;
+
+        console.log(`Checking development dependencies for plugin '${pluginName}': ${pluginDependencies.devDependencies.length} dependencies`);
 
         if (pluginDependencies.devDependencies.length > 0) {
             for (const dependency of pluginDependencies.devDependencies) {
                 if (!installedDependencies.devDependencies.includes(dependency)) {
-                    missingDevDependencies.push(dependency);
+                    missingDevDepdendencies.push(dependency);
                 }
             }
         }
     }
+
+    return missingDevDepdendencies;
+}
+
+function updatePluginDependencies() {
+    const missingDepdendencies = checkPluginDependencies();
+    const missingDevDependencies = checkPluginDevDependencies();
 
     const executable = yarn.hasYarn() ? 'yarn add' : 'npm install';
 

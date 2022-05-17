@@ -21,7 +21,8 @@
         "src/**/*.tsx",
         "src/**/*.vue",
         "../src/core/plugins/**/webview/**.ts",
-        "../src/core/plugins/**/webview/**.vue"
+        "../src/core/plugins/**/webview/**.vue",
+        "../src/core/plugins/**/components/**.vue"
     ],
     "exclude": [
         "../src/core/server/**",

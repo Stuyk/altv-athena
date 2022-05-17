@@ -1,11 +1,12 @@
 <template>
     <div class="stack center-page pa-3">
         <div class="component stack pa-3 mb-3" v-for="(id, index) in page.ids" :key="index">
-            <div class="overline boldest pb-3" v-if="page.addonLocales && page.addonLocales.length >= 1">
-                {{ getLocaleByName(page.addonLocales[index]) }}
+            <div class="overline boldest pb-3">
+                {{ Array.isArray(page.names) ? page.names[index] : page.pageName }}
             </div>
+            <!-- Texture -->
             <div class="overline">
-                {{ getLocaleByName('LABEL_DESIGN') }}
+                {{ getDesignText }}
             </div>
             <div class="split split-full center pt-6 pb-6">
                 <Button
@@ -18,24 +19,25 @@
                 >
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
-                <RangeInput
-                    :minIndex="page.isProp ? -1 : 0"
-                    :maxIndex="page.maxDrawables[index]"
-                    :indexValue="page.drawables[index]"
-                    :increment="1"
-                    @input="
-                        (e) => {
-                            $emit('update-component', index, 'drawables', parseInt(e.target['value']));
-                        }
-                    "
-                    @mouseup="
-                        (e) => {
-                            $emit('force-populate');
-                        }
-                    "
-                    class="pl-3 pr-3 fill-full-width"
-                    :key="update"
-                />
+                <template v-if="getMaximumDrawables(page, index)">
+                    <span class="counter ml-4 mr-4 overline blue--text">
+                        {{ page.drawables[index] }}
+                    </span>
+                    <input
+                        type="range"
+                        :min="page.isProp ? -1 : 0"
+                        :max="getMaximumDrawables(page, index)"
+                        :value="page.drawables[index]"
+                        @input="
+                            (e) => {
+                                $emit('update-component', index, 'drawables', parseInt(e.target['value']));
+                            }
+                        "
+                    />
+                    <span class="counter ml-4 mr-4 overline blue--text">
+                        {{ getMaximumDrawables(page, index) }}
+                    </span>
+                </template>
                 <Button
                     color="blue"
                     @click="
@@ -47,9 +49,9 @@
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
                 </Button>
             </div>
-            <template v-if="page.maxTextures[index] >= 1">
+            <template v-if="page.maxTextures[index] >= 2">
                 <div class="overline">
-                    {{ getLocaleByName('LABEL_TEXTURE') }}
+                    {{ getTextureText }}
                 </div>
                 <div class="split split-full center pt-6">
                     <Button
@@ -62,18 +64,25 @@
                     >
                         <Icon :size="14" icon="icon-chevron-left"></Icon>
                     </Button>
-                    <RangeInput
-                        :minIndex="1"
-                        :maxIndex="page.maxTextures[index]"
-                        :indexValue="page.textures[index]"
-                        :increment="1"
-                        @input="
-                            (e) => {
-                                $emit('update-component', index, 'textures', parseInt(e.target['value']));
-                            }
-                        "
-                        class="pl-3 pr-3 fill-full-width"
-                    />
+                    <template v-if="getMaximumDrawables(page, index)">
+                        <span class="counter ml-4 mr-4 overline blue--text">
+                            {{ page.textures[index] }}
+                        </span>
+                        <input
+                            type="range"
+                            :min="page.isProp ? -1 : 0"
+                            :max="getMaximumTextures(page, index)"
+                            :value="page.textures[index]"
+                            @input="
+                                (e) => {
+                                    $emit('update-component', index, 'textures', parseInt(e.target['value']));
+                                }
+                            "
+                        />
+                        <span class="counter ml-4 mr-4 overline blue--text">
+                            {{ getMaximumTextures(page, index) }}
+                        </span>
+                    </template>
                     <Button
                         color="blue"
                         @click="
@@ -92,6 +101,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
+import { LOCALE_CLOTHING } from '../../shared/locales';
 
 const ComponentName = 'Option';
 export default defineComponent({
@@ -102,10 +112,13 @@ export default defineComponent({
         Module: defineAsyncComponent(() => import('@components/Module.vue')),
         RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
     },
+    data() {
+        return {
+            update: Date.now(),
+        };
+    },
     props: {
         page: Object,
-        locales: Object,
-        update: Number,
     },
     methods: {
         getLocaleByName(name: string) {
@@ -115,14 +128,38 @@ export default defineComponent({
 
             return this.locales[name];
         },
+        getMaximumTextures(page, index: number) {
+            if (!this.page.maxTextures) {
+                return 1;
+            }
+
+            return page.maxTextures[index] - 1;
+        },
+        getMaximumDrawables(page, index) {
+            if (!this.page.maxDrawables) {
+                return 1;
+            }
+
+            return page.maxDrawables[index];
+        },
+    },
+    computed: {
+        getDesignText() {
+            return LOCALE_CLOTHING.LABEL_DESIGN;
+        },
+        getTextureText() {
+            return LOCALE_CLOTHING.LABEL_TEXTURE;
+        },
     },
 });
 </script>
 
 <style scoped>
 .component {
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(28, 28, 28, 1);
     box-sizing: border-box;
+    background: url('../../../../../../src-webviews/public/assets/images/bg.png');
+    border-radius: 12px;
 }
 
 .center-page {
@@ -130,6 +167,10 @@ export default defineComponent({
     max-height: calc(100vh - 175px);
     overflow-y: scroll;
     box-sizing: border-box;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(28, 28, 28, 1);
+}
+
+.counter {
+    min-width: 25px;
 }
 </style>

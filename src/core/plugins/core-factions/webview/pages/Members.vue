@@ -40,6 +40,16 @@
                                 <Button class="perm-button" :disable="true">{{ perm.name }}</Button>
                             </div>
                         </div>
+                        <div v-for="(componentName, index) in getMembersComponents()" :name="componentName">
+                            <component
+                                :is="componentName"
+                                class="fade-in"
+                                :key="index"
+                                v-bind:faction="faction"
+                                v-bind:character="character"
+                                v-bind:member="selected"
+                            />
+                        </div>
                     </div>
                 </template>
             </div>
@@ -96,6 +106,7 @@ import { FactionLocale } from '../../shared/locale';
 import { FactionParser } from '../utility/factionParser';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FACTION_PFUNC } from '../../shared/funcNames';
+import { FactionPageInjections } from '../injections';
 
 const ComponentName = 'Members';
 export default defineComponent({
@@ -114,8 +125,12 @@ export default defineComponent({
         Button: defineAsyncComponent(() => import('@components/Button.vue')),
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
         Module: defineAsyncComponent(() => import('@components/Module.vue')),
+        ...FactionPageInjections.members,
     },
     methods: {
+        getMembersComponents() {
+            return Object.keys(FactionPageInjections.members);
+        },
         getMemberSelectColor(member: FactionCharacter) {
             if (!this.selected) {
                 return 'blue';
@@ -295,6 +310,7 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .members {

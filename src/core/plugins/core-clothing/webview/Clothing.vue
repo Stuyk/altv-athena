@@ -1,17 +1,23 @@
 <template>
     <div class="container">
+        <span class="price-item-invalid pr-3" v-if="!isComponentAvailable()">
+            ${{ getPrice() }} {{ getItemPriceText }}
+        </span>
+        <span class="price-item pr-3" v-else>${{ getPrice() }} {{ getItemPriceText }}</span>
+        <span class="price-all pr-3">${{ getAllPricing() }} {{ getAllPriceText }}</span>
+        <div class="money pl-4 pb-2 green--text text--lighten-1">${{ money.toFixed(2).toLocaleString() }}</div>
         <!-- Pop Up for Purchase -->
         <Modal v-if="showDialog">
             <Frame minWidth="30vw" maxWidth="30vw">
                 <template v-slot:toolbar>
                     <Toolbar :hideExit="true">
-                        <span class="green--text">{{ getLocaleByName('LABEL_INSTRUCTION_HEADER') }}</span>
+                        <span class="green--text">{{ getLocaleText('LABEL_INSTRUCTION_HEADER') }}</span>
                     </Toolbar>
                 </template>
                 <template v-slot:content>
-                    <div class="subtitle-2 mb-3 mt-1">{{ getLocaleByName('LABEL_INSTRUCTION') }}</div>
+                    <div class="subtitle-2 mb-3 mt-1">{{ getLocaleText('LABEL_INSTRUCTION') }}</div>
                     <Input
-                        :label="getLocaleByName('LABEL_NAME')"
+                        :label="getLocaleText('LABEL_NAME')"
                         :stack="true"
                         :onInput="(text) => inputChange('name', text)"
                         :validateCallback="(valid) => setValidityProp('name', valid)"
@@ -29,11 +35,11 @@
                                 return text.length <= 16 ? null : 'Name must be less than 16 characters';
                             },
                         ]"
-                        :placeholder="getLocaleByName('LABEL_HELPER_NAME')"
+                        :placeholder="getLocaleText('LABEL_HELPER_NAME')"
                         class="mb-3"
                     />
                     <Input
-                        :label="getLocaleByName('LABEL_DESC')"
+                        :label="getLocaleText('LABEL_DESC')"
                         :stack="true"
                         :onInput="(text) => inputChange('desc', text)"
                         :validateCallback="(valid) => setValidityProp('desc', valid)"
@@ -51,22 +57,21 @@
                                 return text.length <= 16 ? null : 'Name must be less than 16 characters';
                             },
                         ]"
-                        :placeholder="getLocaleByName('LABEL_HELPER_DESC')"
+                        :placeholder="getLocaleText('LABEL_HELPER_DESC')"
                         class="mb-3"
                     />
                     <div class="split split-full">
                         <Button class="mt-2 fill-half-width" color="red" @click="togglePurchaseInterface(false)">
-                            {{ getLocaleByName('LABEL_CANCEL') }}
+                            {{ getLocaleText('LABEL_CANCEL') }}
                         </Button>
-
                         <template v-if="allValid">
                             <Button class="ml-4 mt-2 fill-half-width" color="green" @click="purchaseComponent">
-                                {{ getLocaleByName('LABEL_PURCHASE') }}
+                                {{ getLocaleText('LABEL_PURCHASE') }}
                             </Button>
                         </template>
                         <template v-else>
                             <Button class="ml-4 mt-2 fill-half-width" color="grey" :disable="true">
-                                {{ getLocaleByName('LABEL_PURCHASE') }}
+                                {{ getLocaleText('LABEL_PURCHASE') }}
                             </Button>
                         </template>
                     </div>
@@ -74,62 +79,61 @@
             </Frame>
         </Modal>
         <!-- Right Panel -->
-        <div class="creator stack" v-if="labels && labels.length >= 1">
+        <div class="creator stack">
             <!-- Navigation -->
-            <div class="split split-full navigation space-between pa-6">
-                <Button color="blue" @click="prevPage">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-left" />
-                </Button>
-
-                <span class="overline">
-                    {{ getLocaleByName(labels[page].name) }}
-                </span>
-
-                <Button color="blue" @click="nextPage">
-                    <Icon class="blue--text" :size="24" icon="icon-chevron-right" />
-                </Button>
-            </div>
+            <Navigation
+                v-bind:page-index="pageIndex"
+                v-bind:pages="pages"
+                v-bind:page-name="pageName"
+                @next="nextPage"
+                @prev="prevPage"
+            />
             <!-- Customization -->
-            <Option
-                v-bind:page="labels[page]"
-                v-bind:locales="locales"
-                v-bind:update="updateCount"
-                @force-populate="forcePopulate"
-                @update-component="updateComponent"
-            ></Option>
+            <template v-if="page">
+                <Option v-bind:page="page" @force-populate="forcePopulate" @update-component="updateComponent" />
+            </template>
+
             <!-- Purchase Options -->
-            <div class="footer pa-4">
+            <div class="footer pa-4" v-if="page">
                 <div class="split split-full space-between">
-                    <!-- Component is Available and Can Be Purchased -->
                     <template v-if="isComponentAvailable() && hasEnoughMoney()">
-                        <Button class="mr-3" color="green" @click="togglePurchaseInterface(true)">
-                            <span class="green--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
+                        <Button
+                            class="smooth-button fill-full-width mr-3"
+                            color="green"
+                            @click="togglePurchaseInterface(true)"
+                        >
+                            <span class="green--text">{{ getPurchaseText }}</span>
                         </Button>
-                        <span class="price pa-3">${{ getPrice() }}</span>
                     </template>
-                    <!-- Component is Unavailable and **Cannot** Be Purchased -->
                     <template v-else>
-                        <Button class="mr-3" color="grey" :disable="true">
-                            <span class="grey--text">{{ getLocaleByName('LABEL_PURCHASE') }}</span>
+                        <Button class="smooth-button fill-full-width mr-3" color="grey" :disable="true">
+                            <span class="grey--text">{{ getPurchaseText }}</span>
                         </Button>
-                        <span class="price red--text pa-3">${{ getPrice() }}</span>
                     </template>
+                    <template v-if="isComponentAvailableAll() && hasEnoughMoneyAll()">
+                        <Button class="smooth-button fill-full-width mr-3" color="green" @click="purchaseAll">
+                            <span class="green--text">{{ getPurchaseAllText }}</span>
+                        </Button>
+                    </template>
+                    <template v-else>
+                        <Button class="smooth-button fill-full-width mr-3" color="grey" :disable="true">
+                            <span class="grey--text">{{ getPurchaseAllText }}</span>
+                        </Button>
+                    </template>
+                    <Button class="smooth-button fill-full-width mr-3" color="grey" @click="handleClose">
+                        <span class="red--text">{{ getExitText }}</span>
+                    </Button>
                 </div>
             </div>
-        </div>
-        <div class="escape pa-4" @click="handleClose">
-            <Icon class="white--text pr-2" :size="24" icon="icon-exit" />
-            <span class="overline white--text boldest">ESC</span>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-
-import DefaultData from './utility/defaultData';
-import DefaultLocale from './utility/defaultLocales';
-import LabelsRef from './utility/labels';
+import { EXAMPLE_CLOTHING_DATA } from './utility/exampleData';
+import { DEFAULT_CLOTHING_STORE } from './utility/defaultData';
+import { LOCALE_CLOTHING } from '../shared/locales';
 
 const ComponentName = 'Clothing';
 export default defineComponent({
@@ -146,13 +150,17 @@ export default defineComponent({
         RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
         Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
         Option: defineAsyncComponent(() => import('./components/Option.vue')),
+        Navigation: defineAsyncComponent(() => import('./components/Navigation.vue')),
     },
     data() {
         return {
-            cash: 0,
-            bank: 0,
-            updateCount: 0,
-            page: 0,
+            // New stuff
+            pageIndex: 0,
+            pageName: '',
+            money: 0,
+            page: {},
+            pages: [],
+            // Old dog shit
             showDialog: false,
             name: '',
             desc: '',
@@ -162,30 +170,161 @@ export default defineComponent({
                 name: false,
                 desc: false,
             },
-            locales: DefaultLocale,
-            storeData: DefaultData,
+            storeData: DEFAULT_CLOTHING_STORE,
         };
     },
     computed: {
         getLabels() {
-            return this.labels[this.page];
+            return this.pages[this.pageIndex];
         },
         getIDs() {
-            return this.labels[this.page].ids;
+            return this.pages[this.pageIndex].ids;
+        },
+        getPurchaseText() {
+            return LOCALE_CLOTHING.LABEL_PURCHASE;
+        },
+        getPurchaseAllText() {
+            return LOCALE_CLOTHING.LABEL_PURCHASE_ALL;
+        },
+        getExitText() {
+            return LOCALE_CLOTHING.LABEL_EXIT;
+        },
+        getAllPriceText() {
+            return LOCALE_CLOTHING.LABEL_ALL_PRICE;
+        },
+        getItemPriceText() {
+            return LOCALE_CLOTHING.LABEL_ITEM;
         },
     },
     methods: {
+        getLocaleText(key: string) {
+            if (!LOCALE_CLOTHING[key]) {
+                return `${key} is not a valid locale`;
+            }
+
+            return LOCALE_CLOTHING[key];
+        },
+        nextPage() {
+            if (this.pageIndex + 1 >= this.pages.length) {
+                this.pageIndex = 0;
+            } else {
+                this.pageIndex += 1;
+            }
+
+            this.setPage(this.pageIndex);
+        },
+        prevPage() {
+            if (this.pageIndex - 1 <= -1) {
+                this.pageIndex = this.pages.length - 1;
+            } else {
+                this.pageIndex -= 1;
+            }
+
+            this.setPage(this.pageIndex);
+        },
+        setPage(index: number) {
+            this.pageName = this.pages[index].pageName;
+            this.page = this.pages[index];
+            this.sendPageUpdate();
+        },
+        setBankData(money: number) {
+            this.money = money;
+        },
+        forcePopulate() {
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.pages));
+        },
+        updateComponent(index: number, dataName: string, value: number, isIncrement = false) {
+            const pages = [...this.pages];
+            let shouldPopulate = false;
+
+            // This will always set the texture back to zero if the drawable id changes.
+            if (dataName === 'drawables') {
+                pages[this.pageIndex].textures[index] = 0;
+                shouldPopulate = true;
+            }
+
+            // Determine how we update this data.
+            if (isIncrement) {
+                pages[this.pageIndex][dataName][index] += value;
+            } else {
+                // is A Range Input
+                pages[this.pageIndex][dataName][index] = value;
+                shouldPopulate = false;
+            }
+
+            // This ensures min and max values are not exceeded.
+            const maxValue =
+                dataName === 'drawables'
+                    ? pages[this.pageIndex].maxDrawables[index]
+                    : pages[this.pageIndex].maxTextures[index];
+
+            if (pages[this.pageIndex][dataName][index] > maxValue) {
+                pages[this.pageIndex][dataName][index] = 0;
+            }
+
+            let minValue = 0;
+
+            if (pages[this.pageIndex].isProp) {
+                minValue = -1;
+            }
+
+            if (pages[this.pageIndex][dataName][index] < minValue) {
+                pages[this.pageIndex][dataName][index] = maxValue;
+            }
+
+            this.pages = pages;
+            this.page = this.page;
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            // Determine if we should update the labels / components based on what changed.
+            alt.emit(`${ComponentName}:Update`, JSON.stringify(this.pages), false, shouldPopulate);
+        },
+        async setPages(pages) {
+            this.pages = pages;
+            this.page = this.pages[this.pageIndex];
+        },
         hasEnoughMoney() {
             const price = this.getPrice();
-            if (this.cash >= price) {
+            if (price <= 0) {
+                return false;
+            }
+
+            if (this.money >= price) {
+                return true;
+            }
+
+            return false;
+        },
+        hasEnoughMoneyAll() {
+            const price = this.getAllPricing();
+            if (price <= 0) {
+                return false;
+            }
+
+            if (this.money >= price) {
                 return true;
             }
 
             return false;
         },
         getPrice() {
-            const label = this.labels[this.page];
+            if (!this.pages[this.pageIndex]) {
+                return 0;
+            }
+
+            const label = this.pages[this.pageIndex];
             const internalID = label.internalID;
+
+            if (this.pages[this.pageIndex].startValue === this.pages[this.pageIndex].drawables[0]) {
+                return 0;
+            }
 
             if (this.storeData.clothingPrices[internalID]) {
                 const currentComponent = label.drawables[0];
@@ -198,14 +337,141 @@ export default defineComponent({
 
             return this.storeData.pagePrices[internalID] ? this.storeData.pagePrices[internalID] : 0;
         },
+        getAllPricing() {
+            if (!this.pages || this.pages.length <= 0) {
+                return -1;
+            }
+
+            let price = 0;
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+                const id = page.internalID;
+
+                if (page.startValue === 'undefined' || page.startValue === null) {
+                    continue;
+                }
+
+                if (page.drawables[0] === page.startValue) {
+                    continue;
+                }
+
+                if (page.isProp && page.drawables[0] === -1) {
+                    continue;
+                }
+
+                if (this.storeData.clothingPrices[id]) {
+                    const currentComponent = page.drawables[0];
+                    const priceInfo = this.storeData.clothingPrices[id].find((x) => x.id === currentComponent);
+
+                    if (priceInfo) {
+                        price += priceInfo.price;
+                        continue;
+                    }
+                }
+
+                price += this.storeData.pagePrices[id] ? this.storeData.pagePrices[id] : 0;
+            }
+
+            return price;
+        },
+        purchaseAll() {
+            if (!this.pages || this.pages.length <= 0) {
+                return;
+            }
+
+            const components = [];
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+
+                if (page.startValue === 'undefined' || page.startValue === null) {
+                    continue;
+                }
+
+                if (page.drawables[0] === page.startValue) {
+                    continue;
+                }
+
+                if (page.isProp && page.drawables[0] === -1) {
+                    continue;
+                }
+
+                const componentData = JSON.parse(JSON.stringify(page));
+                delete componentData.maxDrawables;
+                delete componentData.maxTextures;
+                delete componentData.name;
+                delete componentData.pageName;
+                delete componentData.names;
+
+                if ('alt' in window) {
+                    alt.emit(
+                        `${ComponentName}:Purchase`,
+                        this.storeData.uid,
+                        i,
+                        componentData,
+                        page.pageName,
+                        '',
+                        true,
+                    );
+                }
+            }
+        },
+        isComponentAvailableAll() {
+            let allAvailable = true;
+
+            if (!this.pages || this.pages.length <= 0) {
+                return allAvailable;
+            }
+
+            for (let i = 0; i < this.pages.length; i++) {
+                const page = this.pages[i];
+
+                for (let y = 0; y < page.ids.length; y++) {
+                    // This is the ID of the component.
+                    // ie. A mask ID is 1
+                    const internalID = page.internalID;
+                    const hiddenComponents: Array<number> = this.storeData.hiddenComponents[internalID];
+
+                    // No internal component info found. Everything is available.
+                    if (!hiddenComponents) {
+                        break;
+                    }
+
+                    const currentValue = page.drawables[y];
+                    const index = hiddenComponents.findIndex((id) => id === currentValue);
+
+                    if (index <= -1) {
+                        continue;
+                    }
+
+                    allAvailable = false;
+                    break;
+                }
+            }
+
+            return allAvailable;
+        },
         isComponentAvailable() {
             let allAvailable = true;
 
+            if (!this.pages[this.pageIndex]) {
+                return allAvailable;
+            }
+
+            if (this.pages[this.pageIndex].isProp && this.pages[this.pageIndex].drawables[0] === -1) {
+                return false;
+            }
+
+            if (this.pages[this.pageIndex].startValue === this.pages[this.pageIndex].drawables[0]) {
+                return false;
+            }
+
             // Need to loop through all ids.
-            for (let i = 0; i < this.labels[this.page].ids.length; i++) {
+            for (let i = 0; i < this.pages[this.pageIndex].ids.length; i++) {
                 // This is the ID of the component.
                 // ie. A mask ID is 1
-                const internalID = this.labels[this.page].internalID;
+                const internalID = this.pages[this.pageIndex].internalID;
                 const hiddenComponents: Array<number> = this.storeData.hiddenComponents[internalID];
 
                 // No internal component info found. Everything is available.
@@ -213,7 +479,7 @@ export default defineComponent({
                     break;
                 }
 
-                const currentValue = this.labels[this.page].drawables[i];
+                const currentValue = this.pages[this.pageIndex].drawables[i];
                 const index = hiddenComponents.findIndex((id) => id === currentValue);
 
                 if (index <= -1) {
@@ -253,99 +519,14 @@ export default defineComponent({
             }
         },
         getData(dataName: string, index: number) {
-            return this.labels[this.page][dataName][index];
+            return this.pages[this.pageIndex][dataName][index];
         },
         sendPageUpdate() {
             if (!('alt' in window)) {
                 return;
             }
 
-            alt.emit(`${ComponentName}:PageUpdate`, this.page);
-        },
-        nextPage() {
-            if (this.page + 1 >= this.labels.length) {
-                this.page = 0;
-            } else {
-                this.page += 1;
-            }
-
-            this.updateCount += 1;
-            this.sendPageUpdate();
-        },
-        prevPage() {
-            if (this.page - 1 <= -1) {
-                this.page = this.labels.length - 1;
-            } else {
-                this.page -= 1;
-            }
-
-            this.updateCount += 1;
-            this.sendPageUpdate();
-        },
-        setLocale(data) {
-            this.locales = data;
-        },
-        getLocaleByName(name: string) {
-            if (!this.locales[name]) {
-                return `${name} is not a locale. Please fix your code.`;
-            }
-
-            return this.locales[name];
-        },
-        forcePopulate() {
-            if (!('alt' in window)) {
-                return;
-            }
-
-            alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
-        },
-        updateComponent(index: number, dataName: string, value: number, isIncrement = false) {
-            const labels = [...this.labels];
-            let shouldPopulate = false;
-
-            // This will always set the texture back to zero if the drawable id changes.
-            if (dataName === 'drawables') {
-                labels[this.page].textures[index] = 0;
-                shouldPopulate = true;
-            }
-
-            // Determine how we update this data.
-            if (isIncrement) {
-                labels[this.page][dataName][index] += value;
-            } else {
-                // is A Range Input
-                labels[this.page][dataName][index] = value;
-                shouldPopulate = false;
-            }
-
-            // This ensures min and max values are not exceeded.
-            const maxValue =
-                dataName === 'drawables' ? labels[this.page].maxDrawables[index] : labels[this.page].maxTextures[index];
-            if (labels[this.page][dataName][index] > maxValue) {
-                labels[this.page][dataName][index] = 0;
-            }
-
-            let minValue = 0;
-
-            if (labels[this.page].isProp) {
-                minValue = -1;
-            }
-
-            if (labels[this.page][dataName][index] < minValue) {
-                labels[this.page][dataName][index] = maxValue;
-            }
-
-            if (!('alt' in window)) {
-                this.labels = labels;
-                return;
-            }
-
-            // Determine if we should update the labels / components based on what changed.
-            alt.emit(`${ComponentName}:Update`, JSON.stringify(labels), false, shouldPopulate);
-        },
-        async setLabels(newLabels) {
-            this.labels = newLabels;
-            this.updateCount += 1;
+            alt.emit(`${ComponentName}:PageUpdate`, this.pageIndex);
         },
         handlePress(e) {
             if (e.keyCode !== 27) {
@@ -362,18 +543,26 @@ export default defineComponent({
             alt.emit(`${ComponentName}:Close`);
         },
         purchaseComponent() {
-            const componentData = JSON.parse(JSON.stringify(this.labels[this.page]));
+            const componentData = JSON.parse(JSON.stringify(this.pages[this.pageIndex]));
             delete componentData.maxDrawables;
             delete componentData.maxTextures;
             delete componentData.name;
-            delete componentData.addonLocales;
+            delete componentData.pageName;
+            delete componentData.names;
 
             if (!('alt' in window)) {
                 this.togglePurchaseInterface(false);
                 return;
             }
 
-            alt.emit(`${ComponentName}:Purchase`, this.storeData.uid, this.page, componentData, this.name, this.desc);
+            alt.emit(
+                `${ComponentName}:Purchase`,
+                this.storeData.uid,
+                this.pageIndex,
+                componentData,
+                this.name,
+                this.desc,
+            );
             this.togglePurchaseInterface(false);
         },
         setData(data) {
@@ -395,39 +584,34 @@ export default defineComponent({
 
             this.labels = currentLabels;
         },
-        setBankData(bank: number, cash: number) {
-            this.bank = bank;
-            this.cash = cash;
-        },
     },
     mounted() {
         document.addEventListener('keyup', this.handlePress);
 
-        this.labels = [...LabelsRef];
+        // Set Default Example Data
+        this.pages = EXAMPLE_CLOTHING_DATA;
+        this.setPage(this.pageIndex);
 
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetData`, this.setData);
-            alt.on(`${ComponentName}:SetLocale`, this.setLocale);
-            alt.on(`${ComponentName}:Propagate`, this.setLabels);
+            alt.on(`${ComponentName}:Propagate`, this.setPages);
             alt.on(`${ComponentName}:SetBankData`, this.setBankData);
             alt.emit(`${ComponentName}:Ready`);
 
             setTimeout(() => {
-                alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.labels));
+                alt.emit(`${ComponentName}:Populate`, JSON.stringify(this.pages));
             }, 200);
         } else {
-            // Run this twice because it needs to remove some pages.
-            this.setData(DefaultData);
+            this.money = 500000;
         }
-
-        this.sendPageUpdate();
     },
     unmounted() {
         document.removeEventListener('keyup', this.handlePress);
 
         if ('alt' in window) {
-            alt.off(`${ComponentName}:SetLocale`, this.setLocale);
-            alt.off(`${ComponentName}:Propagate`, this.setLabels);
+            alt.off(`${ComponentName}:SetData`, this.setData);
+            alt.off(`${ComponentName}:Propagate`, this.setPages);
+            alt.off(`${ComponentName}:SetBankData`, this.setBankData);
         }
     },
 });
@@ -441,6 +625,34 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent 35%);
+}
+
+.price-item {
+    position: fixed;
+    top: 48px;
+    right: 402px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 16px !important;
+}
+
+.price-item-invalid {
+    position: fixed;
+    top: 48px;
+    right: 402px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 16px !important;
+    color: rgba(200, 50, 50, 1);
+}
+
+.price-all {
+    position: fixed;
+    top: 6px;
+    right: 400px;
+    z-index: 99;
+    text-shadow: 2px 2px 2px black;
+    font-size: 32px !important;
 }
 
 .creator {
@@ -485,5 +697,24 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+}
+
+.money {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    font-family: 'Roboto';
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 1px 1px black;
+    z-index: 99;
+}
+
+.footer {
+    background: url('../../../../../src-webviews/public/assets/images/bg.png');
+}
+
+.smooth-button {
+    border-radius: 6px;
 }
 </style>

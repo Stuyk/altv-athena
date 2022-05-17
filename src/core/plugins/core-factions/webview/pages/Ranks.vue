@@ -72,6 +72,20 @@
                         </Button>
                     </template>
 
+                    <!-- Ranking Inserts -->
+                    <template
+                        v-for="(componentName, index) in getRankingsComponents()"
+                        :name="componentName"
+                        :key="index"
+                    >
+                        <component
+                            :is="componentName"
+                            class="fade-in"
+                            v-bind:faction="faction"
+                            v-bind:character="character"
+                        />
+                    </template>
+
                     <!-- Delete Rank -->
                     <template v-if="rank.weight <= 98">
                         <Button class="rank-button" color="red" @click="startRankDelete(rank)" help="Delete Rank">
@@ -96,6 +110,7 @@ import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FactionParser } from '../utility/factionParser';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FACTION_PFUNC } from '../../shared/funcNames';
+import { FactionPageInjections } from '../injections';
 
 const ComponentName = 'Ranks';
 export default defineComponent({
@@ -116,6 +131,8 @@ export default defineComponent({
         DeleteRank: defineAsyncComponent(() => import('./ranks/DeleteRank.vue')),
         AddRank: defineAsyncComponent(() => import('./ranks/AddRank.vue')),
         ManageRank: defineAsyncComponent(() => import('./ranks/ManageRank.vue')),
+        // Faction Rankings Component Injections
+        ...FactionPageInjections.rankings,
     },
     data() {
         return {
@@ -128,6 +145,9 @@ export default defineComponent({
         };
     },
     methods: {
+        getRankingsComponents() {
+            return Object.keys(FactionPageInjections.rankings);
+        },
         getRanks(): Array<FactionRank> {
             return FactionParser.getFactionRanks(this.faction);
         },
@@ -165,9 +185,6 @@ export default defineComponent({
                 return;
             }
 
-            console.log(`Swapping... ${rank.name} with ${targetRank.name}`);
-            console.log(rank.uid);
-            console.log(JSON.stringify(rank));
             alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.SWAP_RANKS, rank.uid, targetRank.uid);
         },
         startRankDelete(rank: FactionRank) {
@@ -260,8 +277,18 @@ export default defineComponent({
         const member = FactionParser.getMember(this.faction, this.character);
         const rank = FactionParser.getRank(this.faction, member);
 
-        this.manageRanks = rank.rankPermissions.manageRanks;
-        this.manageRankPermissions = rank.rankPermissions.manageRankPermissions;
+        this.manageRanks = member.hasOwnership || rank.rankPermissions.manageRanks ? true : false;
+        this.manageRankPermissions = member.hasOwnership || rank.rankPermissions.manageRankPermissions ? true : false;
+    },
+    watch: {
+        faction() {
+            const member = FactionParser.getMember(this.faction, this.character);
+            const rank = FactionParser.getRank(this.faction, member);
+
+            this.manageRanks = member.hasOwnership || rank.rankPermissions.manageRanks ? true : false;
+            this.manageRankPermissions =
+                member.hasOwnership || rank.rankPermissions.manageRankPermissions ? true : false;
+        },
     },
 });
 </script>
@@ -274,6 +301,7 @@ export default defineComponent({
     min-height: 75vh;
     max-height: 75vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .rank-panel {

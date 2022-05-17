@@ -5,14 +5,20 @@
                 <slot />
             </span>
             <template v-if="!hideExit">
-                <Icon
-                    v-if="pageName"
-                    class="red--text red--hover hover"
-                    @click="closePage"
-                    :size="24"
-                    icon="icon-times-circle"
-                />
-                <Icon v-else class="grey--text text--darken-3" :noSelect="true" :size="24" icon="icon-times-circle" />
+                <template v-if="!overrideCallback && pageName">
+                    <Icon class="red--text red--hover hover" @click="closePage" :size="24" icon="icon-times-circle" />
+                </template>
+                <template v-if="overrideCallback && !pageName">
+                    <Icon
+                        class="red--text red--hover hover"
+                        @click="$emit('close-click')"
+                        :size="24"
+                        icon="icon-times-circle"
+                    />
+                </template>
+                <template v-if="!overrideCallback && !pageName">
+                    <Icon class="grey--text text--darken-3" :noSelect="true" :size="24" icon="icon-times-circle" />
+                </template>
             </template>
         </div>
     </div>
@@ -34,6 +40,10 @@ export default defineComponent({
             required: false,
         },
         hideExit: {
+            type: Boolean,
+            default: false,
+        },
+        overrideCallback: {
             type: Boolean,
             default: false,
         },

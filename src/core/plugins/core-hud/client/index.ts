@@ -117,6 +117,7 @@ class InternalFunctions implements ViewModel {
 
         // Vehicle Components
         HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
+        HudView.registerComponent(HUD_COMPONENT.SEATBELT, InternalFunctions.defaultSeatbeltComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.SPEED, InternalFunctions.defaultSpeedComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.GEAR, InternalFunctions.defaultGearComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.ENGINE, InternalFunctions.defaultEngineComponent, 100);
@@ -186,6 +187,12 @@ class InternalFunctions implements ViewModel {
         }
 
         InternalFunctions.passComponentInfo(propName, parseInt(fuel.toFixed(0)));
+    }
+
+    static defaultSeatbeltComponent(propName: string) {
+        if(!alt.Player.local.vehicle) return;
+        
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.getMeta('SEATBELT') ? true : false);
     }
 
     static defaultSpeedComponent(propName: string) {

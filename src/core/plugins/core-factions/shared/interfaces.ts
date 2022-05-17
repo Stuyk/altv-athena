@@ -1,4 +1,3 @@
-import { Blip } from '../../../shared/interfaces/blip';
 import { Vector3 } from '../../../shared/interfaces/vector';
 
 type _id = string;
@@ -76,6 +75,14 @@ export interface RankPermissions {
      * @memberof RankPermissions
      */
     addMembers: boolean;
+
+    /**
+     * Can manage vehicles by purchasing vehicles available.
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    manageVehicles?: boolean;
 }
 
 /**
@@ -85,6 +92,8 @@ export interface RankPermissions {
  * @interface FactionCharacter
  */
 export interface FactionCharacter {
+    [key: string]: any;
+
     /**
      * The character ID of the Character.
      *
@@ -125,6 +134,8 @@ export interface FactionCharacter {
  * @interface FactionRank
  */
 export interface FactionRank {
+    [key: string]: any;
+
     /**
      * A unique identifier for the Faction Rank
      * Should be auto-generated.
@@ -258,7 +269,7 @@ export interface FactionVehicle {
      * @type {string}
      * @memberof FactionVehicle
      */
-    name: string;
+    model: string;
 
     /**
      * Database _id for the vehicle
@@ -267,17 +278,11 @@ export interface FactionVehicle {
      * @memberof FactionVehicle
      */
     id: string;
-
-    /**
-     * Allow what ranks to use this vehicle?
-     *
-     * @type {Array<string>}
-     * @memberof FactionStorage
-     */
-    allowRanks: Array<string>;
 }
 
 export interface FactionSettings {
+    [key: string]: any;
+
     /**
      * The current positions of faction headquarters.
      *
@@ -292,7 +297,7 @@ export interface FactionSettings {
      * @type {Array<Vector3>}
      * @memberof Faction
      */
-    parkingSpots?: Array<Vector3>;
+    parkingSpots?: Array<{ pos: Vector3; rot: Vector3 }>;
 
     /**
      * A list of vehicles available for purchase for this faction.
@@ -308,7 +313,7 @@ export interface FactionSettings {
      * @type {number}
      * @memberof FactionSettings
      */
-    maxVehicles?: number | undefined;
+    maxVehicles?: number;
 
     /**
      * A blip sprite index.
@@ -359,6 +364,14 @@ export interface Faction extends FactionCore {
      * @memberof Faction
      */
     ranks: Array<FactionRank>;
+
+    /**
+     * An array of available action uids for this faction. May not be defined.
+     *
+     * @type {Array<string>}
+     * @memberof Faction
+     */
+    availableActions?: Array<string>;
 
     /**
      * A way to obtain available faction based actions by Rank UID.

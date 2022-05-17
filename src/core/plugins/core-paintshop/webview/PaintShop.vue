@@ -41,8 +41,6 @@ import { defineComponent, defineAsyncComponent } from 'vue';
 import { iPaintshopSync } from '../shared/interfaces';
 import { PAINTSHOP_LOCALE } from '../shared/locales';
 
-import Pages from './components/exports';
-
 const ComponentName = 'PaintShop';
 export default defineComponent({
     name: ComponentName,

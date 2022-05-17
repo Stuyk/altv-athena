@@ -4,7 +4,7 @@
  * @export
  * @interface JobTrigger
  */
-export interface JobTrigger {
+export interface JobTrigger<T = {}> {
     /**
      * An external https:// based image to show for your job.
      * @type {string}
@@ -32,7 +32,7 @@ export interface JobTrigger {
      * @type {string}
      * @memberof JobTrigger
      */
-    event: string;
+    event?: string;
 
     /**
      * Event to trigger when the player declines this job.
@@ -41,4 +41,18 @@ export interface JobTrigger {
      * @memberof JobTrigger
      */
     cancelEvent?: string;
+
+    /**
+     * A callback if the trigger is accepted.
+     *
+     * @memberof JobTrigger
+     */
+    acceptCallback?: (player: T) => void;
+
+    /**
+     * A callback if the trigger is declined.
+     *
+     * @memberof JobTrigger
+     */
+    cancelCallback?: (player: T) => void;
 }

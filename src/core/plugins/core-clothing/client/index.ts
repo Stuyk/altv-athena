@@ -13,7 +13,6 @@ import { Item } from '../../../shared/interfaces/item';
 import { CLOTHING_CONFIG } from '../shared/config';
 import { CLOTHING_INTERACTIONS } from '../shared/events';
 import { IClothingStore } from '../shared/interfaces';
-import { LOCALE_CLOTHING_VIEW } from '../shared/locales';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -91,6 +90,9 @@ class InternalFunctions implements ViewModel {
         WebViewController.openPages([PAGE_NAME]);
         WebViewController.focus();
         WebViewController.showCursor(true);
+
+        // Top Left
+        alt.setWatermarkPosition(2);
     }
 
     static async close() {
@@ -124,6 +126,8 @@ class InternalFunctions implements ViewModel {
         isOpen = false;
 
         native.doScreenFadeIn(100);
+
+        alt.setWatermarkPosition(4);
     }
 
     /**
@@ -148,15 +152,14 @@ class InternalFunctions implements ViewModel {
     static async ready() {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:SetData`, storeData);
-        view.emit(`${PAGE_NAME}:SetLocale`, LOCALE_CLOTHING_VIEW);
-        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+        view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
         native.doScreenFadeIn(100);
     }
 
     static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
         if (key === 'bank' || (key === 'cash' && isOpen)) {
             const view = await WebViewController.get();
-            view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank, alt.Player.local.meta.cash);
+            view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
         }
     }
 
@@ -215,8 +218,15 @@ class InternalFunctions implements ViewModel {
      * @param {string} desc
      * @memberof InternalFunctions
      */
-    static purchase(uid: string, index: number, component: ClothingComponent, name: string, desc: string) {
-        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc);
+    static purchase(
+        uid: string,
+        index: number,
+        component: ClothingComponent,
+        name: string,
+        desc: string,
+        noSound = false,
+    ) {
+        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc, noSound);
     }
 
     static async populate(components: Array<ClothingComponent>) {
@@ -241,6 +251,10 @@ class InternalFunctions implements ViewModel {
                 if (component.isProp) {
                     // Get Current Value of Prop Player is Wearing
                     value = native.getPedPropIndex(PedCharacter.get(), id);
+                    if (typeof component.startValue === 'undefined') {
+                        component.startValue = value;
+                    }
+
                     component.drawables[index] = value;
 
                     textureValue = native.getPedPropTextureIndex(PedCharacter.get(), id);
@@ -252,6 +266,10 @@ class InternalFunctions implements ViewModel {
                     // Get Current Value of Component Player is Wearing
                     value = native.getPedDrawableVariation(PedCharacter.get(), id);
                     component.drawables[index] = value;
+
+                    if (typeof component.startValue === 'undefined') {
+                        component.startValue = value;
+                    }
 
                     textureValue = native.getPedTextureVariation(PedCharacter.get(), id);
                     component.textures[index] = textureValue;
@@ -275,25 +293,41 @@ class InternalFunctions implements ViewModel {
         }
 
         for (let i = 0; i < components.length; i++) {
-            const component = components[i];
+            const component = components[i] as ClothingComponent;
             if (!component) {
                 continue;
             }
 
             for (let index = 0; index < component.drawables.length; index++) {
-                const texture = component.textures[index];
-                const value = component.drawables[index];
                 const id = component.ids[index];
+                const drawable = component.drawables[index];
+                const texture = component.textures[index];
+
+                if (component.dlcHashes && component.dlcHashes.length >= 1) {
+                    const dlc = component.dlcHashes[index];
+                    if (component.isProp) {
+                        if (drawable <= -1) {
+                            native.clearPedProp(PedCharacter.get(), id);
+                            continue;
+                        }
+
+                        alt.setPedDlcProp(PedCharacter.get(), dlc, id, drawable, texture);
+                        continue;
+                    }
+
+                    alt.setPedDlcClothes(PedCharacter.get(), dlc, id, drawable, texture, 0);
+                    continue;
+                }
 
                 if (component.isProp) {
-                    if (value <= -1) {
+                    if (drawable <= -1) {
                         native.clearPedProp(PedCharacter.get(), id);
                         continue;
                     }
 
-                    native.setPedPropIndex(PedCharacter.get(), id, value, texture, true);
+                    native.setPedPropIndex(PedCharacter.get(), id, drawable, texture, true);
                 } else {
-                    native.setPedComponentVariation(PedCharacter.get(), id, value, texture, 0);
+                    native.setPedComponentVariation(PedCharacter.get(), id, drawable, texture, 0);
                 }
             }
         }

@@ -94,7 +94,7 @@ export class CharacterSystem {
      * @param {Array<ClothingComponent>} components
      * @memberof CharacterSystem
      */
-    static applyEquipment(ped: number, components: Array<Item>, isMale = false) {
+    static applyEquipment(ped: number, components: Array<Item<ClothingComponent>>, isMale = false) {
         if (!ped || !native.doesEntityExist(ped)) {
             return;
         }
@@ -134,19 +134,35 @@ export class CharacterSystem {
             }
 
             for (let index = 0; index < component.drawables.length; index++) {
-                const texture = component.textures[index];
-                const value = component.drawables[index];
                 const id = component.ids[index];
+                const drawable = component.drawables[index];
+                const texture = component.textures[index];
+
+                if (component.dlcHashes && component.dlcHashes.length >= 1) {
+                    const dlc = component.dlcHashes[index];
+                    if (component.isProp) {
+                        if (drawable <= -1) {
+                            native.clearPedProp(ped, id);
+                            continue;
+                        }
+
+                        alt.setPedDlcProp(ped, dlc, id, drawable, texture);
+                        continue;
+                    }
+
+                    alt.setPedDlcClothes(ped, dlc, id, drawable, texture, 0);
+                    continue;
+                }
 
                 if (component.isProp) {
-                    if (value <= -1) {
+                    if (drawable <= -1) {
                         native.clearPedProp(ped, id);
                         continue;
                     }
 
-                    native.setPedPropIndex(ped, id, value, texture, true);
+                    native.setPedPropIndex(ped, id, drawable, texture, true);
                 } else {
-                    native.setPedComponentVariation(ped, id, value, texture, 0);
+                    native.setPedComponentVariation(ped, id, drawable, texture, 0);
                 }
             }
         }
