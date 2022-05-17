@@ -82,13 +82,13 @@ export class FactionFuncs {
      */
     static handleFactionVehicleChecks(player: alt.Player, vehicle: alt.Vehicle): IResponse {
         if (!vehicle.data) {
-            return { status: true, response: 'Not a faction vehicle' };
+            return { status: false, response: 'Not a faction vehicle' };
         }
 
         // Check if vehicle is owned by a faction
         const faction = FactionHandler.get(vehicle.data.owner);
         if (!faction) {
-            return { status: true, response: 'Not a faction vehicle' };
+            return { status: false, response: 'Not a faction vehicle' };
         }
 
         // Check if in same faction
