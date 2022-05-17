@@ -399,6 +399,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
+            return;
+        }
+
         if (!SystemRules.check(VEHICLE_RULES.DOOR, rules, player, vehicle, { door: doorNumber })) {
             return;
         }

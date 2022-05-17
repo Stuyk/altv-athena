@@ -42,17 +42,42 @@ export class FactionFuncs {
         }
 
         hasInitialized = true;
-        VehicleSystem.addCustomRule(VEHICLE_RULES.UNLOCK, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.LOCK, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.ENGINE, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.STORAGE, FactionFuncs.handleFactionVehicleChecks);
-        VehicleSystem.addCustomRule(VEHICLE_RULES.DOOR, FactionFuncs.handleFactionVehicleChecks);
         VehicleFuncs.addOwnershipInjection(FactionFuncs.handleOwnershipInjection);
     }
 
     private static handleOwnershipInjection(player: alt.Player, vehicle: alt.Vehicle) {
-        const result = FactionFuncs.handleFactionVehicleChecks(player, vehicle);
-        return result.status;
+        if (!vehicle.data) {
+            return false;
+        }
+
+        // Check if vehicle is owned by a faction
+        const faction = FactionHandler.get(vehicle.data.owner);
+        if (!faction) {
+            return false;
+        }
+
+        // Check if in same faction
+        if (vehicle.data.owner !== player.data.faction) {
+            return false;
+        }
+
+        // Check if the vehicle identifier exists in the faction vehicles list
+        const index = faction.vehicles.findIndex((fv) => fv.id === vehicle.data._id.toString());
+        if (index <= -1) {
+            return false;
+        }
+
+        // Check if the players rank has access to this vehicle specifically
+        const rank = FactionFuncs.getFactionMemberRank(faction, player.data._id.toString());
+        if (!rank) {
+            return false;
+        }
+
+        if (rank.vehicles && !rank.vehicles.includes(vehicle.data._id.toString())) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -69,50 +94,6 @@ export class FactionFuncs {
         );
 
         alt.emitClient(members, FACTION_EVENTS.PROTOCOL.REFRESH, faction);
-    }
-
-    /**
-     * Check if the vehicle is owned by a faction, if it is, check if the player is in the same
-     * faction, if they are, check if the vehicle is in the faction vehicles list, if it is, check if
-     * the player has access to the vehicle, if they do, return true, else return false.
-     *
-     * @param player - alt.Player - The player that is trying to use the vehicle
-     * @param vehicle - The vehicle that is being checked.
-     * @returns A response object with the status and response properties.
-     */
-    static handleFactionVehicleChecks(player: alt.Player, vehicle: alt.Vehicle): IResponse {
-        if (!vehicle.data) {
-            return { status: false, response: 'Not a faction vehicle' };
-        }
-
-        // Check if vehicle is owned by a faction
-        const faction = FactionHandler.get(vehicle.data.owner);
-        if (!faction) {
-            return { status: false, response: 'Not a faction vehicle' };
-        }
-
-        // Check if in same faction
-        if (vehicle.data.owner !== player.data.faction) {
-            return { status: false, response: 'Not in same faction for vehicle usage' };
-        }
-
-        // Check if the vehicle identifier exists in the faction vehicles list
-        const index = faction.vehicles.findIndex((fv) => fv.id === vehicle.data._id.toString());
-        if (index <= -1) {
-            return { status: false, response: 'Vehicle not found for faction' };
-        }
-
-        // Check if the players rank has access to this vehicle specifically
-        const rank = FactionFuncs.getFactionMemberRank(faction, player.data._id.toString());
-        if (!rank) {
-            return { status: false, response: 'Player not found in faction' };
-        }
-
-        if (rank.vehicles && !rank.vehicles.includes(vehicle.data._id.toString())) {
-            return { status: false, response: `You do not have permission for this vehicle.` };
-        }
-
-        return { status: true, response: '' };
     }
 
     /**
