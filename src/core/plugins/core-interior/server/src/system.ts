@@ -692,13 +692,14 @@ export class InteriorSystem {
         if (!interior.insideShape) {
             const insideUid = InteractionController.add({
                 description: LOCALE_INTERIOR_VIEW.LABEL_OPEN_INTERIOR_MENU,
-                position: interior.inside,
+                position: new alt.Vector3(interior.inside.x, interior.inside.y, interior.inside.z - 1.5),
                 uid: `${interior.uid}-inside`,
                 data: [interior.uid, false],
                 range: INTERACTION_DISTANCE,
                 callback: InteriorSystem.showMenu,
                 dimension: interior.dimension,
                 isPlayerOnly: true,
+                height: 5,
             });
 
             interior.insideShape = InteractionController.get(insideUid);

@@ -16,7 +16,6 @@ let blip: alt.Blip;
 class ObjectiveController {
     static updateObjective(data: Objective | null) {
         objective = data;
-        console.log(JSON.stringify(data));
     }
 
     /**
@@ -60,7 +59,6 @@ class ObjectiveController {
 
         HudSystem.setObjective(data.description);
         objective = { ...data };
-        console.log(JSON.stringify(objective, null, '\t'));
         interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
     }
 

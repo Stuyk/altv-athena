@@ -1,9 +1,10 @@
 import fkill from 'fkill';
 const ports = [7788, 'altv-server', 'altv-server.exe', 3399];
 
-for (let i = 0; i < ports.length; i++) {
+for (const port of ports) {
     try {
-        fkill(ports[i], { force: true, ignoreCase: true, silent: true });
+        fkill(port, { force: true, ignoreCase: true, silent: true });
     } catch (err) {
+        console.log(err);
     }
 }

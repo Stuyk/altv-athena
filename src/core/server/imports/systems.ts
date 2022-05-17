@@ -9,6 +9,7 @@ import '../systems/hologram';
 import '../systems/interaction';
 import '../systems/item';
 import '../systems/job';
+import '../systems/jobTrigger';
 import '../systems/login';
 import '../systems/plugins';
 import '../systems/rules';

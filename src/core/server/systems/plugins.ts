@@ -56,4 +56,17 @@ export class PluginSystem {
     static registerPlugin(name: string, callback: Function) {
         pluginRegistration.push({ name, callback });
     }
+
+    /**
+     * Returns a list of all plugin names that are currently being loaded.
+     *
+     * @static
+     * @return {Array<string>}
+     * @memberof PluginSystem
+     */
+    static getPlugins(): Array<string> {
+        return pluginRegistration.map((x) => {
+            return x.name;
+        });
+    }
 }

@@ -63,3 +63,9 @@ export enum View_Events_Factions {
 export enum View_Events_Input_Menu {
     SetMenu = 'inputmenu:Set',
 }
+
+export enum VIEW_EVENTS_JOB_TRIGGER {
+    OPEN = 'jobTrigger:Open',
+    CANCEL = 'jobTrigger:Cancel',
+    ACCEPT = 'jobTrigger:Accept',
+}

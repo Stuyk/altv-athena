@@ -43,6 +43,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { FactionRank } from '../../../shared/interfaces';
+import { AllRankPermissions } from '../../../shared/defaultData';
 
 const ComponentName = 'ManageRank';
 export default defineComponent({
@@ -73,8 +74,10 @@ export default defineComponent({
                 return permissionsAsArray;
             }
 
-            Object.keys(this.rankCopy.rankPermissions).forEach((key) => {
-                permissionsAsArray.push({ key, value: this.rankCopy.rankPermissions[key] });
+            const allPermissions = { ...AllRankPermissions, ...this.rankCopy.rankPermissions };
+
+            Object.keys(allPermissions).forEach((key) => {
+                permissionsAsArray.push({ key, value: allPermissions[key] });
             });
 
             return permissionsAsArray;

@@ -1,67 +1,80 @@
-export const ExampleFactionData = {
+import { Faction } from '../../shared/interfaces';
+
+export const ExampleFactionData: Faction = {
     name: 'Los Santos Police Department',
     bank: 50000,
-    motd: '',
     members: {
         // Rank -> 'Member'
         '51a8efe590851930ac59f5cc': {
+            id: '51a8efe590851930ac59f5cc',
             name: 'Member_Three',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59f599': {
+            id: '51a8efe590851930ac59f599',
             name: 'Member_Six',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59f569': {
+            id: '51a8efe590851930ac59f569',
             name: 'Member_Seven',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59f555': {
+            id: '51a8efe590851930ac59f555',
             name: 'Member_Eight',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59faaa': {
+            id: '51a8efe590851930ac59faaa',
             name: 'Member_Nine',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59fbbb': {
+            id: '51a8efe590851930ac59fbbb',
             name: 'Member_Ten',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59fccc': {
+            id: '51a8efe590851930ac59fccc',
             name: 'Member_Eleven',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59fddd': {
+            id: '51a8efe590851930ac59fddd',
             name: 'Member_Twelve',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         '51a8efe590851930ac59feee': {
+            id: '51a8efe590851930ac59feee',
             name: 'Member_Thirteen_Is_Really_Long',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
             hasOwnership: false,
         },
         // Rank -> 'Officer'
         '51a8efe590851930ac59f5eg': {
+            id: '51a8efe590851930ac59f5eg',
             name: 'Member_Two',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b49677',
             hasOwnership: false,
         },
         '51a8efe590851930ac59fxyz': {
+            id: '51a8efe590851930ac59fxyz',
             name: 'Member_Five',
             rank: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b49677',
             hasOwnership: false,
         },
         // Rank -> 'Owner'
         '61a8efe590851930ac59f5ef': {
+            id: '61a8efe590851930ac59f5ef',
             name: 'Member_One',
             rank: '541b72671c4af46361a8b52b9949fb357d8f96eb1133aae8a6569bc4f8253005',
             hasOwnership: true,
@@ -144,12 +157,32 @@ export const ExampleFactionData = {
                 manageRanks: false,
                 manageRankPermissions: false,
             },
-            vehicles: [],
+            vehicles: ['626c64fbfdf5ff231b4991ee'],
             weight: 1,
             uid: 'e65b8b289fb64f31e8b135cd9e41db8ebbc97b5df8d4ccec91db4c135e4b4966',
         },
     ],
     settings: {
         position: { x: 0, y: 0, z: 0 },
+        parkingSpots: [
+            { pos: { x: 1, y: 1, z: 1 }, rot: { x: 1, y: 1, z: 1 } },
+            { pos: { x: 25, y: 25, z: 5 }, rot: { x: 1, y: 1, z: 1 } },
+            { pos: { x: 12, y: 12, z: 1 }, rot: { x: 1, y: 1, z: 1 } },
+        ],
+        vehicles: [
+            { model: 'police', price: 25000 },
+            { model: 'police2', price: 25000 },
+            { model: 'police3', price: 25000 },
+            { model: 'policet', price: 60000 },
+            { model: 'police4', price: 25000 },
+        ],
     },
+    canDisband: false,
+    vehicles: [
+        { model: 'police', id: '626c64fbfdf5ff231b4991ee' },
+        { model: 'police2', id: '626c64fbfdf5ff231b4991cc' },
+        { model: 'police3', id: '626c64fbfdf5ff231b4991dd' },
+    ],
+    actions: {},
+    tickActions: [],
 };

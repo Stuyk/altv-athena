@@ -41,19 +41,19 @@ async function cleanup() {
     }
 
     let badFiles = [];
-    badFiles = await new Promise(resolve => {
+    badFiles = await new Promise((resolve) => {
         glob('./src/core/**/*.js', (err, files) => {
             if (err) {
-                return resolve(files);;
+                return resolve(files);
             }
 
             return resolve(files);
         });
     });
 
-    for (let i = 0; i < badFiles.length; i++) {
-        if (fs.existsSync(badFiles[i])) {
-            fs.rmSync(badFiles[i], { recursive: true, force: true });
+    for (const file of badFiles) {
+        if (fs.existsSync(file)) {
+            fs.rmSync(file, { recursive: true, force: true });
         }
     }
 }

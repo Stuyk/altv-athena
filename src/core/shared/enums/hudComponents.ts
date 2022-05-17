@@ -8,6 +8,7 @@ export enum HUD_COMPONENT {
     FOOD = 'food',
     INTERACTIONS = 'interactions',
     IS_IN_VEHICLE = 'isInVehicle',
+    SEATBELT = 'seatbelt',
     SPEED = 'speed',
     GEAR = 'gear',
     ENGINE = 'engine',

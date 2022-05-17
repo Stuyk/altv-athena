@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VIEW_EVENTS_JOB_TRIGGER } from '../../shared/enums/views';
 import { JobTrigger } from '../../shared/interfaces/jobTrigger';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -15,6 +16,10 @@ let trigger: JobTrigger;
  * Do Not Export Internal Only
  */
 class InternalFunctions implements ViewModel {
+    static init() {
+        alt.onServer(VIEW_EVENTS_JOB_TRIGGER.OPEN, InternalFunctions.open);
+    }
+
     static async open(_trigger: JobTrigger) {
         if (isAnyMenuOpen()) {
             return;
@@ -30,7 +35,7 @@ class InternalFunctions implements ViewModel {
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
-        view.on(`${PAGE_NAME}:Select`, InternalFunctions.select);
+        view.on(`${PAGE_NAME}:Select`, InternalFunctions.accept);
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -44,20 +49,20 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static select() {
-        alt.emitServer(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, trigger.event);
+    static accept() {
+        alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT);
         alt.toggleGameControls(true);
-        InternalFunctions.close();
+        InternalFunctions.close(true);
     }
 
-    static async close() {
+    static async close(doNotCancel = false) {
         alt.toggleGameControls(true);
         WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
-        view.off(`${PAGE_NAME}:Select`, InternalFunctions.select);
+        view.off(`${PAGE_NAME}:Select`, InternalFunctions.accept);
 
         WebViewController.closePages([PAGE_NAME]);
 
@@ -65,6 +70,12 @@ class InternalFunctions implements ViewModel {
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        if (doNotCancel) {
+            return;
+        }
+
+        alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.CANCEL);
     }
 
     static async ready() {
@@ -74,4 +85,4 @@ class InternalFunctions implements ViewModel {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.INTERACTION_JOB, InternalFunctions.open);
+InternalFunctions.init();

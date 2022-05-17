@@ -413,7 +413,8 @@ export default defineComponent({
             let parsedCommand = this.userInput
                 .replace(RegexData.tagOrComment, '')
                 .replace('/</g', '&lt;')
-                .replace('/', '');
+                .replace('/', '')
+                .replace(/<\/?[^>]+(>|$)/gm, '');
 
             const splitInput = parsedCommand.split(' ');
             if (splitInput.length >= 2) {

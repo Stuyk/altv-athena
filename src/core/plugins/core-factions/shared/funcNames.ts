@@ -12,4 +12,9 @@ export const FACTION_PFUNC = {
     SET_HEAD_QUARTERS: 'setHeadQuarters',
     SET_BLIP: 'setBlip',
     SWAP_RANKS: 'swapRanks',
+    ADD_PARKING_SPOT: 'addParkingSpot',
+    REMOVE_PARKING_SPOT: 'removeParkingSpot',
+    PURCHASE_VEHICLE: `purchaseVehicle`,
+    TOGGLE_VEHICLE_RANK_PERMISSION: `toggleVehicleRankPermission`,
+    SPAWN_VEHICLE: `spawnVehicle`,
 };

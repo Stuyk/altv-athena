@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
+import { VEHICLE_SYNCED_META } from '../../shared/enums/vehicleSyncedMeta';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { VehicleData } from '../../shared/information/vehicles';
@@ -30,6 +31,8 @@ const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = 
 
 const BeforeCreateInjections: Array<(document: IVehicle) => IVehicle | void> = [];
 const BeforeDespawnInjections: Array<(vehicle: alt.Vehicle) => void> = [];
+const BeforeAddVehicleInjections: Array<(vehicle: IVehicle) => IVehicle | void> = [];
+const VehicleOwnershipInjections: Array<(player: alt.Player, vehicle: alt.Vehicle) => boolean> = [];
 
 interface VehicleKeyItem extends Item {
     data: {
@@ -105,6 +108,32 @@ export default class VehicleFuncs {
      */
     static addBeforeDespawnInjection(callback: (vehicle: alt.Vehicle) => void) {
         BeforeDespawnInjections.push(callback);
+    }
+
+    /**
+     * Let's you create an injection into the default add function.
+     *
+     * What that means is you can modify the document before it is added to the database.
+     * For example, you can change default numberplate, color, ...
+     *
+     * @static
+     * @param {((vehicle: IVehicle) => IVehicle | void)} callback
+     * @memberof VehicleFuncs
+     */
+    static addBeforeAddVehicleInjection(callback: (vehicle: IVehicle) => IVehicle | void) {
+        BeforeAddVehicleInjections.push(callback);
+    }
+
+    /**
+     * Create a vehicle injection that is ran during all ownership checks.
+     * Must return a boolean.
+     *
+     * @static
+     * @param {(vehicle: alt.Vehicle) => boolean} callback
+     * @memberof VehicleFuncs
+     */
+    static addOwnershipInjection(callback: (player: alt.Player, vehicle: alt.Vehicle) => boolean) {
+        VehicleOwnershipInjections.push(callback);
     }
 
     /**
@@ -192,6 +221,11 @@ export default class VehicleFuncs {
         vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior = OWNED_VEHICLE;
 
+        for (const callback of BeforeAddVehicleInjections) {
+            const result = callback(vehicleData);
+            if (result) vehicleData = result;
+        }
+
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
         document._id = document._id.toString();
 
@@ -258,6 +292,7 @@ export default class VehicleFuncs {
             document.rotation.z,
         );
 
+        vehicle.setSyncedMeta(VEHICLE_SYNCED_META.DATABASE_ID, document._id.toString());
         vehicle.modelName = document.model;
         SpawnedVehicles[document.id] = vehicle;
 
@@ -461,14 +496,18 @@ export default class VehicleFuncs {
             return true;
         }
 
-        // Check Faction Ownership
-        if (vehicle.data.ownerType === VEHICLE_OWNERSHIP.FACTION && vehicle.data.owner === player.data.faction) {
-            return true;
-        }
-
         // Check Actual Ownership
         if (vehicle.data.owner === player.data._id.toString()) {
             return true;
+        }
+
+        if (VehicleOwnershipInjections.length >= 1) {
+            for (let i = 0; i < VehicleOwnershipInjections.length; i++) {
+                const result = VehicleOwnershipInjections[i](player, vehicle);
+                if (result) {
+                    return true;
+                }
+            }
         }
 
         // Check for Physical Key

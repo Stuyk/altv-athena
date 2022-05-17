@@ -7,6 +7,7 @@ import { FactionFuncs } from './funcs';
 import { FactionHandler } from './handler';
 import { Athena } from '../../../../server/api/athena';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
+import { distance, getClosestVector } from '../../../../shared/utility/vector';
 
 /**
  * Bound to the player to manipulate individual faction functionality.
@@ -545,6 +546,161 @@ export class FactionPlayerFuncs {
         }
 
         return await FactionFuncs.setBlip(faction, blip, color);
+    }
+
+    /**
+     * If the player is the owner of the faction, add a parking spot to the faction.
+     * @param player - alt.Player - The player who is adding the parking spot.
+     * @param pos - alt.Vector3
+     * @returns a boolean value.
+     */
+    static async addParkingSpot(player: alt.Player, pos: alt.Vector3, rot: alt.Vector3) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        if (!player.vehicle) {
+            return await FactionFuncs.addParkingSpot(faction, new alt.Vector3(pos.x, pos.y, pos.z - 0.5), rot);
+        }
+
+        return await FactionFuncs.addParkingSpot(faction, pos, rot);
+    }
+
+    /**
+     * If the player is the owner of the faction, remove the parking spot at the given index.
+     * @param player - alt.Player - The player who is calling the function
+     * @param {number} index - number - The index of the parking spot you want to remove.
+     * @returns The return value is a boolean.
+     */
+    static async removeParkingSpot(player: alt.Player, index: number) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwner(player)) {
+            return false;
+        }
+
+        return await FactionFuncs.removeParkingSpot(faction, index);
+    }
+
+    /**
+     * If the player is the owner or admin of the faction, or if the player has the permission to manage
+     * vehicles, then purchase the vehicle.
+     * @param player - alt.Player - The player who is purchasing the vehicle.
+     * @param {string} model - The model of the vehicle you want to purchase.
+     * @returns The return value is a boolean.
+     */
+    static async purchaseVehicle(player: alt.Player, model: string) {
+        let result = true;
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            result = false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageVehicles) {
+                result = false;
+            }
+        }
+
+        // If everything passed so far, try the purchase.
+        if (result) {
+            result = await FactionFuncs.purchaseVehicle(faction, model);
+        }
+
+        // Play sound based on the result.
+        Athena.player.emit.soundFrontend(
+            player,
+            result ? 'Hack_Success' : 'Hack_Failed',
+            'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS',
+        );
+
+        return result;
+    }
+
+    /**
+     * If the player is the owner or admin of the faction, toggle the vehicle permission for the
+     * specified rank.
+     * @param player - alt.Player - The player who is calling the function.
+     * @param {string} rank - string - The rank you want to toggle the permission for.
+     * @param {string} vehicleId - The vehicle's ID.
+     * @returns The return value is a boolean.
+     */
+    static async toggleVehicleRankPermission(player: alt.Player, rank: string, vehicleId: string) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.rankPermissions.manageVehicles) {
+                return false;
+            }
+        }
+
+        return await FactionFuncs.toggleVehicleRankPermission(faction, rank, vehicleId);
+    }
+
+    /**
+     * If the player is the owner or admin, or if the player's rank has the vehicleId in the vehicles
+     * array, then spawn the vehicle
+     * @param player - alt.Player - The player who is spawning the vehicle.
+     * @param {string} vehicleId - The vehicle ID that you want to spawn.
+     * @returns a boolean value.
+     */
+    static async spawnVehicle(player: alt.Player, vehicleId: string) {
+        const faction = FactionHandler.get(player.data.faction);
+        if (!faction) {
+            return false;
+        }
+
+        if (!faction.vehicles || !Array.isArray(faction.vehicles)) {
+            return false;
+        }
+
+        const vehicleIndex = faction.vehicles.findIndex((x) => x.id === vehicleId);
+        if (vehicleIndex <= -1) {
+            return false;
+        }
+
+        if (!FactionPlayerFuncs.isOwnerOrAdmin(player)) {
+            // Get the current acting member's rank.
+            const selfRank = FactionFuncs.getFactionMemberRank(faction, player.data._id);
+            if (!selfRank.vehicles) {
+                return false;
+            }
+
+            if (selfRank.vehicles.findIndex((x) => x === vehicleId) <= -1) {
+                return false;
+            }
+        }
+
+        if (!faction.settings.parkingSpots || !Array.isArray(faction.settings.parkingSpots)) {
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return false;
+        }
+
+        if (faction.settings.parkingSpots.length <= 0) {
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            return false;
+        }
+
+        const sortedSpots = faction.settings.parkingSpots.sort((a, b) => {
+            return distance(player.pos, a.pos) - distance(player.pos, b.pos);
+        });
+
+        return await FactionFuncs.spawnVehicle(faction, vehicleId, sortedSpots[0]);
     }
 
     /**

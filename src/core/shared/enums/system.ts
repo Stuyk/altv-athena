@@ -25,7 +25,6 @@ export enum SYSTEM_EVENTS {
     //
     INTERACTION = 'player:Interact',
     INTERACTION_FUEL = 'fuel:Action',
-    INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
     INTERACTION_TEXT_CREATE = 'interaction:Text:Create',
     INTERACTION_TEXT_REMOVE = 'interaction:Text:Remove',

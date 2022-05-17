@@ -124,6 +124,7 @@ export class WebViewController {
      * @memberof WebViewController
      */
     static dispose() {
+        alt.log('SHOULD BE KILLING OLD WEBVIEW');
         _webview.destroy();
     }
 
@@ -246,5 +247,5 @@ export class WebViewController {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
+alt.onceServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
 alt.on('disconnect', WebViewController.dispose);
