@@ -86,6 +86,7 @@
         "sjcl": "1.0.8",
         "sockjs": "0.3.24",
         "sockjs-client": "1.6.0",
+        "stylus": "^0.57.0",
         "yarn-or-npm": "^3.0.1"
     },
     "prettier": {

@@ -14,6 +14,7 @@ import Audio from './audio/Audio.vue';
 import Actions from './actions/Actions.vue';
 import AthenaLogo from './athenaLogo/AthenaLogo.vue';
 import TestDrop from './testDrop/TestDrop.vue';
+import WheelMenu from './wheelMenu/WheelMenu.vue';
 
 export const CORE_IMPORTS = {
     Actions: shallowRef(Actions),
@@ -29,4 +30,5 @@ export const CORE_IMPORTS = {
     Storage: shallowRef(Storage),
     MultiPageExample: shallowRef(MultiPageExample),
     TestDrop: shallowRef(TestDrop),
+    WheelMenu: shallowRef(WheelMenu),
 };

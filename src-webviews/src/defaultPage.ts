@@ -2,4 +2,4 @@
 // This does not change anything in-game.
 // It's solely for development mode only.
 
-export default ['Factions'];
+export default ['WheelMenu'];
