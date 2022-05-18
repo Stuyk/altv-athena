@@ -107,20 +107,20 @@ export default defineComponent({
         };
     },
     mounted() {
-        const member = FactionParser.getMember(this.faction, this.character);
-        const rank = FactionParser.getRank(this.faction, member);
-
-        this.manageVehicles = member.hasOwnership || rank.rankPermissions.manageVehicles ? true : false;
+        this.updateFaction();
     },
     watch: {
         faction() {
+            this.updateFaction();
+        },
+    },
+    methods: {
+        updateFaction() {
             const member = FactionParser.getMember(this.faction, this.character);
             const rank = FactionParser.getRank(this.faction, member);
 
             this.manageVehicles = member.hasOwnership || rank.rankPermissions.manageVehicles ? true : false;
         },
-    },
-    methods: {
         showRankPermissions(vehicle: { id: string; model: string }) {
             this.selectedVehicle = vehicle;
             this.editRankPermissions = true;
