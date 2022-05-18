@@ -718,13 +718,11 @@ export default defineComponent({
     },
     computed: {
         getHoveredItemStats() {
-            return Object.keys(this.itemInfo.data).map((key) => {
-                if (key === 'event') {
-                    return { key: 'consumeable', value: true };
-                }
-
+            const filterdStats = Object.keys(this.itemInfo.data).map((key) => {
                 return { key, value: this.itemInfo.data[key] };
             });
+            
+            return filterdStats.filter((x) => x.key !== 'event');
         },
         getClassRarity() {
             if (this.itemInfo.rarity === undefined || this.itemInfo.rarity === null) {
