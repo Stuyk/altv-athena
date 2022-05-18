@@ -156,7 +156,7 @@ class InternalFunctions implements ViewModel {
         native.doScreenFadeIn(100);
     }
 
-    static async handleMetaChanged(key: string, items: Array<Item>, oldValue: any) {
+    static async handleMetaChanged(key: string, _items: Array<Item>, _oldValue: any) {
         if (key === 'bank' || (key === 'cash' && isOpen)) {
             const view = await WebViewController.get();
             view.emit(`${PAGE_NAME}:SetBankData`, alt.Player.local.meta.bank + alt.Player.local.meta.cash);
@@ -293,7 +293,7 @@ class InternalFunctions implements ViewModel {
         }
 
         for (let i = 0; i < components.length; i++) {
-            const component = components[i] as ClothingComponent;
+            const component = components[i];
             if (!component) {
                 continue;
             }
