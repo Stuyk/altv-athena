@@ -176,7 +176,7 @@
                         <div class="icon">
                             <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                         </div>
-                        <div class="consume" v-if="item && (item?.behavior & itemType.CONSUMABLE) != 0">
+                        <div class="consume" v-if="item && item.data.event && (item?.behavior & itemType.CONSUMABLE) != 0">
                             <Icon class="yellow--text" :size="18" icon="icon-arrow-down"></Icon>
                         </div>
                         <div class="quantity">{{ item.quantity }}x</div>
