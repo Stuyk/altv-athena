@@ -35,7 +35,7 @@
                 class="wheel-number overline"
                 v-for="(option, index) in getCurrentOptions"
                 :key="index"
-                :style="getPositionalStyle(index, 1.3)"
+                :style="getPositionalStyle(index, 1.35)"
             >
                 {{ index + 1 }}
             </div>
@@ -329,6 +329,28 @@ export default defineComponent({
     box-sizing: border-box;
     transition: all 0.2s ease;
     background: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 1280px) {
+    .wheel-option {
+        scale: 0.8;
+    }
+
+    .wheel-option:hover {
+        scale: 0.805 !important;
+    }
+
+    .wheel-number {
+        scale: 0.8;
+    }
+
+    .wheel-menu-label-box {
+        scale: 0.8;
+    }
+
+    .wheel-menu-page-box {
+        scale: 0.8;
+    }
 }
 
 .wheel-number {

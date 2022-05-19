@@ -35,14 +35,20 @@ class InternalFunctions implements ViewModel {
         native.disableControlAction(0, 257, true);
     }
 
-    static execute(uid: string) {
+    static async execute(uid: string) {
         const index = _options.findIndex((x) => x.uid === uid);
         if (index <= -1) {
             InternalFunctions.close();
             return;
         }
 
+        console.log(uid);
+
         const option = _options[index];
+        if (!option.doNotClose) {
+            console.log(option.uid);
+            await InternalFunctions.close();
+        }
 
         if (typeof option.callback === 'function') {
             if (Array.isArray(option.data)) {
@@ -67,8 +73,6 @@ class InternalFunctions implements ViewModel {
                 alt.emitServer(option.emitServer);
             }
         }
-
-        InternalFunctions.close();
     }
 
     static async close() {
@@ -108,7 +112,7 @@ export class WheelMenu {
      * @return {*}
      * @memberof WheelMenu
      */
-    static async open(label: string, options: Array<IWheelOptionExt>) {
+    static async open(label: string, options: Array<IWheelOptionExt>, setMouseToCenter = false) {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -116,12 +120,23 @@ export class WheelMenu {
         _label = label;
         _options = options;
 
+        for (let i = 0; i < _options.length; i++) {
+            if (!_options[i].uid) {
+                _options[i].uid = `option-${i}`;
+            }
+        }
+
         // This is where we bind our received events from the WebView to
         // the functions in our WebView.
         const view = await WebViewController.get();
         view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
         view.on(VIEW_EVENTS_WHEEL_MENU.CLOSE, InternalFunctions.close);
         view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
+
+        if (setMouseToCenter) {
+            const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
+            alt.setCursorPos({ x: _x / 2, y: _y / 2 });
+        }
 
         // This is where we open the page and show the cursor.
         WebViewController.openPages([PAGE_NAME]);
@@ -138,6 +153,33 @@ export class WheelMenu {
         native.triggerScreenblurFadeIn(250);
         _interval = alt.setInterval(InternalFunctions.tick, 0);
     }
+
+    /**
+     * Does not close the wheel menu but instead overwrites its current options.
+     *
+     * @static
+     * @param {string} label
+     * @param {Array<IWheelOptionExt>} options
+     * @param {boolean} [setMouseToCenter=false]
+     * @memberof WheelMenu
+     */
+    static update(label: string, options: Array<IWheelOptionExt>, setMouseToCenter = false) {
+        _label = label;
+        _options = options;
+
+        for (let i = 0; i < _options.length; i++) {
+            if (!_options[i].uid) {
+                _options[i].uid = `option-${i}`;
+            }
+        }
+
+        if (setMouseToCenter) {
+            const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
+            alt.setCursorPos({ x: _x / 2, y: _y / 2 });
+        }
+
+        InternalFunctions.ready();
+    }
 }
 
 InternalFunctions.init();
@@ -148,7 +190,6 @@ InternalFunctions.init();
 //     for (let i = 0; i < 8; i++) {
 //         options.push({
 //             name: `test ${i}`,
-//             uid: `testing-${i}`,
 //             callback: () => {
 //                 console.log(`test-${i}`);
 //             },

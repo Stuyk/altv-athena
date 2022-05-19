@@ -1,7 +1,7 @@
 import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
-import { WheelMenu } from '../../utility/wheelMenu';
+import { WheelMenu } from '../../views/wheelMenu';
 
-const getLeanMenu2 = (callback) => {
+const getLeanMenu2 = (callback: (...args: any[]) => void) => {
     return [
         {
             name: 'Lean High 1',
@@ -36,7 +36,7 @@ const getLeanMenu2 = (callback) => {
     ];
 };
 
-export default (callback: Function) => {
+export default (callback: (...args: any[]) => void) => {
     return [
         {
             name: 'Lean 1',
@@ -84,9 +84,9 @@ export default (callback: Function) => {
             data: ['"anim@heists@prison_heist', 'ped_b_loop_a', ANIMATION_FLAGS.REPEAT],
         },
         {
-            name: '~p~Next',
+            name: 'Next',
             callback: () => {
-                WheelMenu.create('Lean 2', getLeanMenu2(callback));
+                WheelMenu.update('Lean 2', getLeanMenu2(callback));
             },
         },
     ];

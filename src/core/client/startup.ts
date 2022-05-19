@@ -68,7 +68,6 @@ import './utility/sandbox';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';
-import './utility/wheelMenu';
 
 // Views
 import './views/actions';
