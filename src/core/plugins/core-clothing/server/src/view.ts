@@ -9,7 +9,7 @@ import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
 import { Blip } from '../../../../shared/interfaces/blip';
 import { ClothingComponent } from '../../../../shared/interfaces/clothing';
 import { Interaction } from '../../../../shared/interfaces/interaction';
-import { Item, ItemData } from '../../../../shared/interfaces/item';
+import { Item } from '../../../../shared/interfaces/item';
 import { Vector3 } from '../../../../shared/interfaces/vector';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
@@ -234,7 +234,7 @@ export class ClothingFunctions {
         name: string,
         desc: string,
         noSound = false,
-    ) {
+    ): Promise<void> {
         const index = clothingStoreList.findIndex((x) => x.uid === shopUID);
         if (index <= -1) {
             Athena.player.emit.sound2D(player, 'item_error');
@@ -300,18 +300,12 @@ export class ClothingFunctions {
         });
 
         for (let i = 0; i < component.drawables.length; i++) {
-            const id = component.ids[i];
-            if (component.isProp) {
-                const dlcData = player.getDlcClothes(id);
-                newItem.data.dlcHashes.push(dlcData.dlc);
-                newItem.data.drawables[i] = dlcData.drawable;
-                newItem.data.textures[i] = dlcData.texture;
-            } else {
-                const dlcData = player.getDlcClothes(id);
-                newItem.data.dlcHashes.push(dlcData.dlc);
-                newItem.data.drawables[i] = dlcData.drawable;
-                newItem.data.textures[i] = dlcData.texture;
-            }
+            const currentComponent = component.ids[i];
+
+            const dlcData = player.getDlcClothes(currentComponent);
+            newItem.data.dlcHashes.push(dlcData.dlc);
+            newItem.data.drawables[i] = dlcData.drawable;
+            newItem.data.textures[i] = dlcData.texture;
         }
 
         console.log(`Hashes Set To:`);
@@ -359,9 +353,9 @@ export class ClothingFunctions {
     /**
      * When a player enters a stream polygon, play a sound.
      * @param {uniontype} player - The player that entered the polygon.
-     * @param {IStreamPolygon} polygon - The polygon that the player is entering.
+     * @param {IStreamPolygon} _polygon - The polygon that the player is entering.
      */
-    static enter(polygon: PolygonShape, player: alt.Player) {
+    static enter(_polygon: PolygonShape, player: alt.Player) {
         if (!(player instanceof alt.Player)) {
             return;
         }
@@ -371,11 +365,11 @@ export class ClothingFunctions {
 
     /**
      * When a player leaves a polygon, the function is called.
-     * @param {T} player - The player that is leaving the polygon.
-     * @param {IStreamPolygon} polygon - The polygon that the player is leaving.
+     * @param {T} _player - The player that is leaving the polygon.
+     * @param {IStreamPolygon} _polygon - The polygon that the player is leaving.
      */
-    static leave(polygon: PolygonShape, player: alt.Player) {
-        // Not Important. Just a placeholder
+    static leave(_polygon: PolygonShape, _player: alt.Player) {
+        // Not Important. Just a placeholder _Name for placeholder variable.
     }
 }
 
