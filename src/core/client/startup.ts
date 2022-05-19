@@ -78,3 +78,4 @@ import './views/inventory';
 import './views/job';
 import './views/login';
 import './views/storage';
+import './views/wheelMenu';

@@ -11,6 +11,9 @@ import { WebViewController } from '../extensions/view2';
 import { IWheelItem } from '../../shared/interfaces/iWheelMenu';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { ClientInventoryView } from '../views/inventory';
+import { isAnyMenuOpen } from './menus';
+
+const PAGE = 'WheelMenu';
 
 let currentMenu: IWheelMenu = null;
 let nextClick = Date.now() + 250;
@@ -52,52 +55,45 @@ class InternalFunctions {
 }
 
 export class WheelMenu {
-    static create(
-        label: string,
-        options: Array<IClientWheelItem>,
-        setMouseToCenter = false,
-        center: Vector2 = { x: 0.5, y: 0.5 },
-    ) {
-        if (options.length > 10) {
-            throw new Error('Wheel Menu cannot exceed 10 Options');
+    static create(label: string, options: Array<IClientWheelItem>, setMouseToCenter = false) {
+        if (isAnyMenuOpen()) {
+            return;
         }
 
-        const points: Array<FullWheelItem> = getPointsInCircle(options.length, 0.25, center);
+        // if (options.length > 10) {
+        //     throw new Error('Wheel Menu cannot exceed 10 Options');
+        // }
 
-        for (let i = 0; i < options.length; i++) {
-            points[i] = { ...options[i], ...points[i] };
-        }
+        // const points: Array<FullWheelItem> = getPointsInCircle(options.length, 0.25, center);
 
-        if (interval) {
-            Timer.clearInterval(interval);
-            interval = null;
-        }
+        // for (let i = 0; i < options.length; i++) {
+        //     points[i] = { ...options[i], ...points[i] };
+        // }
 
-        currentMenu = {
-            label,
-            points: points,
-            center,
-        };
+        // if (interval) {
+        //     Timer.clearInterval(interval);
+        //     interval = null;
+        // }
 
-        lastHover = null;
+        // currentMenu = {
+        //     label,
+        //     points: points,
+        //     center,
+        // };
 
-        interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
-        native.triggerScreenblurFadeIn(250);
-        native.displayRadar(false);
-        WebViewController.setOverlaysVisible(false);
-        alt.Player.local.isWheelMenuOpen = true;
+        // lastHover = null;
+
+        // interval = Timer.createInterval(WheelMenu.render, 0, 'wheelMenu.ts');
+        // native.triggerScreenblurFadeIn(250);
+        // native.displayRadar(false);
+
+        // alt.Player.local.isWheelMenuOpen = true;
+
+        // WebViewController.setOverlaysVisible(false);
 
         if (setMouseToCenter) {
             const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
             alt.setCursorPos({ x: _x / 2, y: _y / 2 });
-        }
-    }
-
-    static showCursor(value: boolean) {
-        try {
-            alt.showCursor(value);
-        } catch (err) {
-            return;
         }
     }
 
