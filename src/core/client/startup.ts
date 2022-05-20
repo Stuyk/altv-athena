@@ -33,6 +33,7 @@ import './systems/arrest';
 import './systems/attachable';
 import './systems/athenaEvents';
 import './systems/blip';
+import './systems/cameraTarget';
 import './systems/character';
 import './systems/death';
 import './systems/debug';
