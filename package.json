@@ -64,7 +64,7 @@
         "@types/sockjs-client": "^1.5.1",
         "@vitejs/plugin-vue": "^2.3.1",
         "@vue/compiler-sfc": "^3.2.33",
-        "altv-pkg": "^2.0.3",
+        "altv-pkg": "^2.0.4",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.1",
         "npm-run-all": "^4.1.5",
