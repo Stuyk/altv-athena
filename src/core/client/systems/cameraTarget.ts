@@ -10,10 +10,7 @@ import { drawText3D } from '../utility/text';
 interface ClosestTarget {
     scriptID: number;
     pos: Vector3;
-    isNPC?: boolean;
-    isPlayer?: boolean;
-    isVehicle?: boolean;
-    isObject?: boolean;
+    type?: 'npc' | 'player' | 'object' | 'vehicle';
 }
 
 let displayLabel = '.';
@@ -86,25 +83,25 @@ class InternalFunctions {
         };
 
         if (alt.Player.all.find((p) => `${p.scriptID}` === `${raycastInfo.entityHit}`)) {
-            closestTarget.isPlayer = true;
+            closestTarget.type = 'player';
             isProcessing = false;
             return;
         }
 
         if (alt.Vehicle.all.find((v) => `${v.scriptID}` === `${raycastInfo.entityHit}`)) {
-            closestTarget.isVehicle = true;
+            closestTarget.type = 'vehicle';
             isProcessing = false;
             return;
         }
 
         if (native.isEntityAPed(raycastInfo.entityHit)) {
-            closestTarget.isNPC = true;
+            closestTarget.type = 'npc';
             isProcessing = false;
             return;
         }
 
         if (native.isEntityAnObject(raycastInfo.entityHit)) {
-            closestTarget.isObject = true;
+            closestTarget.type = 'object';
             isProcessing = false;
             return;
         }
