@@ -43,11 +43,37 @@ export interface IWheelOption {
      * @memberof IWheelOption
      */
     doNotClose?: boolean;
+
+    /**
+     * From the client, call a specific server event through alt.emitServer
+     *
+     * @type {string}
+     * @memberof IWheelOption
+     */
+    emitServer?: string;
+
+    /**
+     * From the client, emit a client event through alt.emit
+     *
+     * @type {string}
+     * @memberof IWheelOption
+     */
+    emitClient?: string;
+
+    /**
+     * Any data that you want to pass through a callback or an event.
+     *
+     * @type {Array<any>}
+     * @memberof IWheelOptionExt
+     */
+    data?: Array<any>;
 }
 
 export interface IWheelOptionExt extends IWheelOption {
+    /**
+     * A callback that will only work on client-side.
+     *
+     * @memberof IWheelOptionExt
+     */
     callback?: (...args: any[]) => void;
-    emitServer?: string;
-    emitClient?: string;
-    data?: Array<any>;
 }

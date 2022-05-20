@@ -18,7 +18,7 @@ let _interval: number;
  */
 class InternalFunctions implements ViewModel {
     static init() {
-        // alt.onServer(VIEW_EVENTS_JOB_TRIGGER.OPEN, InternalFunctions.open);
+        alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, WheelMenu.open);
     }
 
     static tick() {
@@ -183,18 +183,3 @@ export class WheelMenu {
 }
 
 InternalFunctions.init();
-
-// alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
-//     const options = [];
-
-//     for (let i = 0; i < 8; i++) {
-//         options.push({
-//             name: `test ${i}`,
-//             callback: () => {
-//                 console.log(`test-${i}`);
-//             },
-//         });
-//     }
-
-//     WheelMenu.open('testing', options);
-// });
