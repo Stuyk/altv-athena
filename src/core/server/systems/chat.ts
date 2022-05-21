@@ -171,7 +171,9 @@ export default class ChatController {
      */
     static addCommand(name: string, description: string, permissions: PERMISSIONS, callback: Function): void {
         if (typeof commandInterval === 'number') {
-            alt.clearTimeout(commandInterval);
+            try {
+                alt.clearTimeout(commandInterval);
+            } catch (err) {}
             commandInterval = null;
         }
 
@@ -214,7 +216,9 @@ export default class ChatController {
         callback: Function,
     ): void {
         if (typeof commandInterval === 'number') {
-            alt.clearTimeout(commandInterval);
+            try {
+                alt.clearTimeout(commandInterval);
+            } catch (err) {}
             commandInterval = null;
         }
 
