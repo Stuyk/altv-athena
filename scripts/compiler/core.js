@@ -97,8 +97,17 @@ async function run() {
     const filesToCopy = getFilesToCopy(enabledPlugins);
 
     const resourcesFolder = sanitizePath(path.join(process.cwd(), 'resources')).replace(/\\/g, '/');
-    if (fs.existsSync(resourcesFolder)) {
-        fs.rmSync(resourcesFolder, { recursive: true, force: true });
+    const filesAndDirectories = await fs.readdir(resourcesFolder);
+
+    for (const fileOrDirectory of filesAndDirectories) {
+        const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
+        if (fullPath.includes('mods')) {
+            continue;
+        }
+
+        if (fs.statSync(fullPath).isDirectory()) {
+            await fs.rmSync(fullPath, { recursive: true, force: true });
+        }
     }
 
     for (const file of filesToCopy) {

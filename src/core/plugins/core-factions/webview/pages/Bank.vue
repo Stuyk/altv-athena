@@ -114,6 +114,16 @@ export default defineComponent({
 
             alt.emit(FACTION_EVENTS.WEBVIEW.ACTION, FACTION_PFUNC.ADD_BANK, this.amount);
         },
+        updateBank() {
+            const member = FactionParser.getMember(this.faction, this.character);
+            const rank = FactionParser.getRank(this.faction, member);
+
+            this.bankAdd = rank.rankPermissions.bankAdd;
+            this.bankRemove = rank.rankPermissions.bankRemove;
+
+            this.manageRanks = rank.rankPermissions.manageRanks;
+            this.manageRankPermissions = rank.rankPermissions.manageRankPermissions;
+        }
     },
     watch: {
         amount() {
@@ -125,25 +135,11 @@ export default defineComponent({
             this.isValid = true;
         },
         faction() {
-            const member = FactionParser.getMember(this.faction, this.character);
-            const rank = FactionParser.getRank(this.faction, member);
-
-            this.bankAdd = rank.rankPermissions.bankAdd;
-            this.bankRemove = rank.rankPermissions.bankRemove;
-
-            this.manageRanks = rank.rankPermissions.manageRanks;
-            this.manageRankPermissions = rank.rankPermissions.manageRankPermissions;
+            this.updateBank();
         },
     },
     mounted() {
-        const member = FactionParser.getMember(this.faction, this.character);
-        const rank = FactionParser.getRank(this.faction, member);
-
-        this.bankAdd = rank.rankPermissions.bankAdd;
-        this.bankRemove = rank.rankPermissions.bankRemove;
-
-        this.manageRanks = rank.rankPermissions.manageRanks;
-        this.manageRankPermissions = rank.rankPermissions.manageRankPermissions;
+        this.updateBank();
     },
 });
 </script>

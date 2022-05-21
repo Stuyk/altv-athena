@@ -76,7 +76,9 @@ export class Timer {
      */
     static clearTimeout(timeoutNumber: number, doNotClear: boolean = false) {
         if (!doNotClear) {
-            alt.clearTimeout(timeoutNumber);
+            try {
+                alt.clearTimeout(timeoutNumber);
+            } catch (err) {}
         }
 
         const index = timeouts.findIndex((x) => x.id === timeoutNumber);

@@ -5,12 +5,13 @@ import { distance, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
-import { IClientWheelItem, WheelMenu } from '../utility/wheelMenu';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
+import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
+import { WheelMenu } from '../views/wheelMenu';
 
 const vehicleMenuInjections: Array<
-    (player: alt.Player, vehicle: alt.Vehicle, options?: Array<IClientWheelItem>) => Array<IClientWheelItem> | void
+    (player: alt.Player, vehicle: alt.Vehicle, options?: Array<IWheelOptionExt>) => Array<IWheelOptionExt> | void
 > = [];
 
 export default class VehicleMenu {
@@ -29,7 +30,7 @@ export default class VehicleMenu {
      * function hoodOption(
      *     player: alt.Player,
      *     vehicle: alt.Vehicle,
-     *     options: Array<IClientWheelItem>
+     *     options: Array<IWheelOptionExt>
      * ) {
      *     options.push({
      *       name: 'Hood',
@@ -43,16 +44,16 @@ export default class VehicleMenu {
      * ```
      *
      * @static
-     * @param {(player: alt.Player, vehicle: alt.Vehicle, options?: Array<IClientWheelItem>) => Array<IClientWheelItem> | void} callback
-     * @returns {(Array<IClientWheelItem>|void)} - the actual array of IClientWheelItem if not void
+     * @param {(player: alt.Player, vehicle: alt.Vehicle, options?: Array<IWheelOptionExt>) => Array<IWheelOptionExt> | void} callback
+     * @returns {(Array<IWheelOptionExt>|void)} - the actual array of IWheelOptionExt if not void
      * @memberof VehicleMenu
      */
     static addVehicleMenuInjections(
         callback: (
             player: alt.Player,
             vehicle: alt.Vehicle,
-            options?: Array<IClientWheelItem>,
-        ) => Array<IClientWheelItem> | void,
+            options?: Array<IWheelOptionExt>,
+        ) => Array<IWheelOptionExt> | void,
     ) {
         vehicleMenuInjections.push(callback);
     }
@@ -72,7 +73,7 @@ export default class VehicleMenu {
             return;
         }
 
-        let options: Array<IClientWheelItem> = [];
+        let options: Array<IWheelOptionExt> = [];
 
         if (!alt.Player.local.vehicle) {
             const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
@@ -111,7 +112,7 @@ export default class VehicleMenu {
             }
         }
 
-        WheelMenu.create('Vehicle Options', options);
+        WheelMenu.open('Vehicle Options', options);
     }
 
     static init() {

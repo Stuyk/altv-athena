@@ -1,6 +1,6 @@
 import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
 
-export default (callback: Function) => {
+export default (callback: (...args: any[]) => void) => {
     return [
         {
             name: 'Idle 1',

@@ -1,13 +1,14 @@
 import * as alt from 'alt-client';
 import { PushVehicle } from '../../../../client/systems/push';
 import { isAnyMenuOpen } from '../../../../client/utility/menus';
-import { IClientWheelItem, WheelMenu } from '../../../../client/utility/wheelMenu';
 import { PLAYER_SYNCED_META } from '../../../../shared/enums/playerSynced';
 import { InputOptionType, InputResult } from '../../../../shared/interfaces/inputMenus';
 import { InputView } from '../../../../client/views/input';
 import { Interior } from '../../shared/interfaces';
 import { INTERIOR_INTERACTIONS } from '../../shared/enums';
 import { LOCALE_INTERIOR_VIEW } from '../../shared/locales';
+import { IWheelOptionExt } from '../../../../shared/interfaces/wheelMenu';
+import { WheelMenu } from '../../../../client/views/wheelMenu';
 
 function initialCheck(): boolean {
     if (alt.Player.local.vehicle) {
@@ -39,7 +40,7 @@ function enterMenu(interior: Interior) {
         return;
     }
 
-    const options: IClientWheelItem[] = [];
+    const options: IWheelOptionExt[] = [];
     const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
     const isOwner = interior.owner === playerIdentifier;
 
@@ -155,7 +156,7 @@ function enterMenu(interior: Interior) {
         });
     }
 
-    WheelMenu.create(interior.name, options, true);
+    WheelMenu.open(interior.name, options, true);
 }
 
 function exitMenu(interior: Interior) {
@@ -163,7 +164,7 @@ function exitMenu(interior: Interior) {
         return;
     }
 
-    const options: IClientWheelItem[] = [];
+    const options: IWheelOptionExt[] = [];
 
     const playerIdentifier = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID);
     const isOwner = interior.owner === playerIdentifier;
@@ -203,7 +204,7 @@ function exitMenu(interior: Interior) {
         },
     });
 
-    WheelMenu.create(`${interior.name}`, options, true);
+    WheelMenu.open(`${interior.name}`, options, true);
 }
 
 alt.onServer(INTERIOR_INTERACTIONS.SHOW_MENU, showMenu);

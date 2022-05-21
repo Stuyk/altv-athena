@@ -23,7 +23,7 @@ PluginSystem.registerPlugin(PLUGIN_NAME, async () => {
     if (DISCORD_CONFIG.ALLOW_LIST && DISCORD_CONFIG.ALLOW_LIST.ENABLED) {
         await DiscordController.isReady();
         await DiscordController.initAllowList(DISCORD_CONFIG.ALLOW_LIST.ROLE);
-        await DiscordCommands.init();
+        DiscordCommands.init();
     }
 
     alt.log(`~lg~${PLUGIN_NAME} was Loaded`);

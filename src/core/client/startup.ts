@@ -33,6 +33,7 @@ import './systems/arrest';
 import './systems/attachable';
 import './systems/athenaEvents';
 import './systems/blip';
+import './systems/cameraTarget';
 import './systems/character';
 import './systems/death';
 import './systems/debug';
@@ -68,7 +69,6 @@ import './utility/sandbox';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';
-import './utility/wheelMenu';
 
 // Views
 import './views/actions';
@@ -78,3 +78,4 @@ import './views/inventory';
 import './views/job';
 import './views/login';
 import './views/storage';
+import './views/wheelMenu';

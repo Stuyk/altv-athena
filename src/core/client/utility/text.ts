@@ -103,6 +103,7 @@ export function addTemporaryText(identifier, msg, x, y, scale, r, g, b, a, ms) {
     if (index !== -1) {
         try {
             alt.clearTimeout(temporaryText[index].timeout);
+            temporaryText[index].timeout = null;
         } catch (err) {}
         temporaryText.splice(index, 1);
     }

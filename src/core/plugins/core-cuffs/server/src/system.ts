@@ -8,7 +8,7 @@ import { getForwardVector } from '../../../../server/utility/vector';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { INVENTORY_TYPE } from '../../../../shared/enums/inventoryTypes';
 import { Item } from '../../../../shared/interfaces/item';
-import { IWheelItem } from '../../../../shared/interfaces/iWheelMenu';
+import { IWheelOption } from '../../../../shared/interfaces/wheelMenu';
 import { distance } from '../../../../shared/utility/vector';
 import { CUFF_EFFECTS } from '../../shared/effects';
 import { CUFF_INTERACTIONS } from '../../shared/events';
@@ -430,7 +430,7 @@ export class CuffSystem {
             return;
         }
 
-        const options: Array<IWheelItem> = [];
+        const options: Array<IWheelOption> = [];
 
         // Uncuff Menu Option
         if (cuffed.isCuffed) {
