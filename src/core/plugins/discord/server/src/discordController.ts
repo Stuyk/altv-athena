@@ -22,7 +22,7 @@ export class DiscordController {
      * @param {string} _serverId
      * @memberof DiscordController
      */
-    static init(_token: string, _serverId: string) {
+    static init(_token: string, _serverId: string): void {
         serverId = _serverId;
         alt.on('playerConnect', DiscordController.earlyConnections);
         client.on('ready', DiscordController.ready);
@@ -37,7 +37,7 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async earlyConnections(player: alt.Player) {
+    static async earlyConnections(player: alt.Player): Promise<void> {
         if (isReady) {
             alt.off('playerConnect', DiscordController.earlyConnections);
             return;
@@ -54,7 +54,7 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async initAllowList(_allowListRole: string) {
+    static async initAllowList(_allowListRole: string): Promise<void> {
         if (!_allowListRole) {
             alt.log(`~lr~[Discord] Missing role identification for allow list.`);
             return;
@@ -62,7 +62,7 @@ export class DiscordController {
 
         allowListRole = _allowListRole;
 
-        const role = await guild.roles.cache.get(allowListRole);
+        const role = guild.roles.cache.get(allowListRole);
         if (!role) {
             alt.log(`~lr~[Discord] Could not find the allow list role specified in config. Plugin disabled.`);
             client.destroy();
@@ -80,10 +80,10 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async ready() {
+    static async ready(): Promise<void> {
         alt.log(`~lg~[Discord] Bot Started`);
 
-        guild = await client.guilds.cache.get(serverId);
+        guild = client.guilds.cache.get(serverId);
 
         if (!guild) {
             alt.log(`~lr~[Discord] Could not find the server id specified in config. Plugin disabled.`);
@@ -101,7 +101,7 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async isReady() {
+    static async isReady(): Promise<unknown> {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (!isReady) {
@@ -119,11 +119,11 @@ export class DiscordController {
      *
      * @static
      * @param {alt.Player} player
-     * @param {Partial<Account>} account
+     * @param {Partial<Account>} _account
      * @return {*}
      * @memberof DiscordController
      */
-    static async tryLogin(player: alt.Player, account: Partial<Account>) {
+    static async tryLogin(player: alt.Player, _account: Partial<Account>): Promise<boolean> {
         if (!player || !player.valid) {
             return false;
         }
@@ -133,19 +133,19 @@ export class DiscordController {
             return false;
         }
 
-        const member = await guild.members.cache.get(player.discord.id);
+        const member = guild.members.cache.get(player.discord.id);
         if (!member) {
             player.kick(LOCALE_DISCORD_ALLOW_LIST.USER_WAS_NOT_IN_DISCORD);
             return false;
         }
 
-        const role = await guild.roles.cache.get(allowListRole);
+        const role = guild.roles.cache.get(allowListRole);
         if (!role) {
             player.kick(LOCALE_DISCORD_ALLOW_LIST.NO_ALLOW_LIST_ROLE);
             return false;
         }
 
-        const hasRole = await member.roles.cache.get(allowListRole);
+        const hasRole = member.roles.cache.get(allowListRole);
         if (!hasRole) {
             player.kick(LOCALE_DISCORD_ALLOW_LIST.NOT_ALLOW_LISTED);
             return false;
@@ -161,7 +161,7 @@ export class DiscordController {
      * @returns The return value of the function is the value of the last expression evaluated. In
      * this case, the return value is undefined.
      */
-    static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember) {
+    static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember): Promise<void> {
         const discord = oldUser.id;
         const oldUserHasRole = oldUser.roles.cache.has(allowListRole);
         const newUserHasRole = newUser.roles.cache.has(allowListRole);
@@ -178,7 +178,6 @@ export class DiscordController {
         if (!oldUserHasRole && newUserHasRole) {
             alt.log(`~lc~[Discord] ${name} (${discord}) was added to the allow list.`);
             await DiscordController.addToAllowList(oldUser.id, true);
-            return;
         }
     }
 
@@ -192,12 +191,17 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async removeFromAllowList(discord: string, alreadyRemovedRole = false): Promise<Discord.GuildMember | null> {
+    static async removeFromAllowList(
+        discord: string,
+        alreadyRemovedRole: boolean = false,
+    ): Promise<Discord.GuildMember> {
         const member = await guild.members.fetch(discord);
 
         try {
-            member.send(LOCALE_DISCORD_ALLOW_LIST.REMOVE_FROM_ALLOW_LIST);
-        } catch (err) {}
+            await member.send(LOCALE_DISCORD_ALLOW_LIST.REMOVE_FROM_ALLOW_LIST);
+        } catch (err) {
+            alt.log(`~lr~[Discord] An Error occured! ${err}`);
+        }
 
         const existingPlayer = alt.Player.all.find((p) => p && p.accountData && p.accountData.discord === discord);
         if (existingPlayer) {
@@ -213,12 +217,12 @@ export class DiscordController {
         }
 
         // Remove the users role
-        const role = await guild.roles.cache.get(allowListRole);
+        const role = guild.roles.cache.get(allowListRole);
         if (!role) {
             return member;
         }
 
-        return await member.roles.remove(role);
+        return member.roles.remove(role);
     }
 
     /**
@@ -243,8 +247,10 @@ export class DiscordController {
         }
 
         try {
-            member.send(LOCALE_DISCORD_ALLOW_LIST.ADD_TO_ALLOW_LIST);
-        } catch (err) {}
+            await member.send(LOCALE_DISCORD_ALLOW_LIST.ADD_TO_ALLOW_LIST);
+        } catch (err) {
+            alt.log(`~lr~[Discord] An Error Occured! ${err}`);
+        }
 
         // Add role if not just sending message.
         if (!justMessage) {
@@ -260,7 +266,7 @@ export class DiscordController {
      * @param {string} message - The message to send to the channel.
      * @returns The Discord.Guild object.
      */
-    static sendToChannel(channel_id: string, message: string) {
+    static sendToChannel(channel_id: string, message: string): void {
         if (!guild) {
             alt.logError(`~lr~[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
@@ -281,7 +287,7 @@ export class DiscordController {
      * @param {MessageEmbed} msg - MessageEmbed - The message to send.
      * @returns The Discord.Guild object.
      */
-    static sendEmbed(channel_id: string, msg: MessageEmbed) {
+    static sendEmbed(channel_id: string, msg: MessageEmbed): void {
         if (!guild) {
             alt.logError(`[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;

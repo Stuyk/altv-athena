@@ -176,7 +176,7 @@
                         <div class="icon">
                             <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
                         </div>
-                        <div class="consume" v-if="item && item.data && item.data.event">
+                        <div class="consume" v-if="item && (item.behavior & itemType.CONSUMABLE) != 0">
                             <Icon class="yellow--text" :size="18" icon="icon-arrow-down"></Icon>
                         </div>
                         <div class="quantity">{{ item.quantity }}x</div>
@@ -201,7 +201,7 @@ import Frame from '../../components/Frame.vue';
 import RangeInput from '../../components/RangeInput.vue';
 import Module from '../../components/Module.vue';
 import ResolvePath from '../../utility/pathResolver';
-
+import { ITEM_TYPE } from '../../../../src/core/shared/enums/itemTypes';
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
 const ComponentName = 'Inventory';
@@ -222,6 +222,7 @@ export default defineComponent({
     // Used to define state
     data() {
         return {
+            itemType: ITEM_TYPE,
             // Item Movement Data / Dragging
             x: 0,
             y: 0,
@@ -717,13 +718,11 @@ export default defineComponent({
     },
     computed: {
         getHoveredItemStats() {
-            return Object.keys(this.itemInfo.data).map((key) => {
-                if (key === 'event') {
-                    return { key: 'consumeable', value: true };
-                }
-
+            const filterdStats = Object.keys(this.itemInfo.data).map((key) => {
                 return { key, value: this.itemInfo.data[key] };
             });
+            
+            return filterdStats.filter((x) => x.key !== 'event');
         },
         getClassRarity() {
             if (this.itemInfo.rarity === undefined || this.itemInfo.rarity === null) {

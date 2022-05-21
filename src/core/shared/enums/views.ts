@@ -69,3 +69,10 @@ export enum VIEW_EVENTS_JOB_TRIGGER {
     CANCEL = 'jobTrigger:Cancel',
     ACCEPT = 'jobTrigger:Accept',
 }
+
+export enum VIEW_EVENTS_WHEEL_MENU {
+    ADD_OPTIONS = 'wheelMenu:AddOptions',
+    READY = 'wheelMenu:Ready',
+    CLOSE = 'wheelMenu:Close',
+    EXECUTE = 'wheelMenu:Execute',
+}

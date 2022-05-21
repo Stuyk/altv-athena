@@ -4,7 +4,7 @@ import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
-import { WheelMenu } from '../utility/wheelMenu';
+import { WheelMenu } from '../views/wheelMenu';
 
 let interval: number;
 
@@ -42,7 +42,7 @@ function handleMenu() {
     }
 
     const targetName = target.getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
-    WheelMenu.create(
+    WheelMenu.open(
         targetName,
         [
             {

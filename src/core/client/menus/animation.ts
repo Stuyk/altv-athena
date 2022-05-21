@@ -6,7 +6,7 @@ import { KeybindController } from '../events/keyup';
 import { playAnimation } from '../systems/animations';
 import { PushVehicle } from '../systems/push';
 import { isAnyMenuOpen } from '../utility/menus';
-import { WheelMenu } from '../utility/wheelMenu';
+import { WheelMenu } from '../views/wheelMenu';
 import commonAnims from './animationMenus/commonAnims';
 import danceAnims from './animationMenus/danceAnims';
 import emoteAnims from './animationMenus/emoteAnims';
@@ -16,6 +16,8 @@ import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
 
 function callback(dict: string, name: string, flags: number) {
+    console.log(dict, name, flags);
+
     if (alt.Player.local.vehicle) {
         return;
     }
@@ -36,11 +38,11 @@ function handleAnimationMenu() {
         return;
     }
 
-    WheelMenu.create(
+    WheelMenu.open(
         'Animations',
         [
             {
-                name: '~o~Clear',
+                name: 'Clear',
                 callback: () => {
                     if (alt.Player.local.vehicle) {
                         return;
@@ -48,48 +50,63 @@ function handleAnimationMenu() {
 
                     native.clearPedTasks(alt.Player.local.scriptID);
                 },
+                icon: 'icon-clear',
             },
             {
                 name: 'Dance',
                 callback: () => {
-                    WheelMenu.create('Dance', danceAnims(callback));
+                    WheelMenu.update('Dance', danceAnims(callback), true);
                 },
+                doNotClose: true,
+                icon: 'icon-directions_run',
             },
             {
                 name: 'Idle',
                 callback: () => {
-                    WheelMenu.create('Idle', idleAnims(callback));
+                    WheelMenu.update('Idle', idleAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-timer',
             },
             {
                 name: 'Fun',
                 callback: () => {
-                    WheelMenu.create('Fun', funAnims(callback));
+                    WheelMenu.update('Fun', funAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-celebration',
             },
             {
                 name: 'Wait',
                 callback: () => {
-                    WheelMenu.create('Wait', waitAnims(callback));
+                    WheelMenu.update('Wait', waitAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-stopwatch',
             },
             {
                 name: 'Lean',
                 callback: () => {
-                    WheelMenu.create('Lean', leanAnims(callback));
+                    WheelMenu.update('Lean', leanAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-airline-seat_recline_extra',
             },
             {
                 name: 'Emote',
                 callback: () => {
-                    WheelMenu.create('Emote', emoteAnims(callback));
+                    WheelMenu.update('Emote', emoteAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-emoji_people',
             },
             {
                 name: 'Common',
                 callback: () => {
-                    WheelMenu.create('Common', commonAnims(callback));
+                    WheelMenu.update('Common', commonAnims(callback));
                 },
+                doNotClose: true,
+                icon: 'icon-content_copy',
             },
         ],
         true,

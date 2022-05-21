@@ -10,11 +10,11 @@ import IErrorScreen from '../../../shared/interfaces/iErrorScreen';
 import { InputMenu } from '../../../shared/interfaces/inputMenus';
 import IShard from '../../../shared/interfaces/iShard';
 import ISpinner from '../../../shared/interfaces/iSpinner';
-import { IWheelItem } from '../../../shared/interfaces/iWheelMenu';
 import { Particle } from '../../../shared/interfaces/particle';
 import { ProgressBar } from '../../../shared/interfaces/progressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
 import { Vector3 } from '../../../shared/interfaces/vector';
+import { IWheelOption } from '../../../shared/interfaces/wheelMenu';
 import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
 
@@ -382,8 +382,8 @@ function tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: 
  * @param {string} label
  * @param {Array<IWheelItem>} wheelItems
  */
-function wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelItem>) {
-    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems);
+function wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelOption>) {
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems, true);
 }
 
 function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {

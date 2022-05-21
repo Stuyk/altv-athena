@@ -272,23 +272,21 @@ export default defineComponent({
                 JSON.parse(JSON.stringify(rankPermissions)),
             );
         },
-    },
-    mounted() {
-        const member = FactionParser.getMember(this.faction, this.character);
-        const rank = FactionParser.getRank(this.faction, member);
-
-        this.manageRanks = member.hasOwnership || rank.rankPermissions.manageRanks ? true : false;
-        this.manageRankPermissions = member.hasOwnership || rank.rankPermissions.manageRankPermissions ? true : false;
-    },
-    watch: {
-        faction() {
+        updateFaction() {
             const member = FactionParser.getMember(this.faction, this.character);
             const rank = FactionParser.getRank(this.faction, member);
 
             this.manageRanks = member.hasOwnership || rank.rankPermissions.manageRanks ? true : false;
-            this.manageRankPermissions =
-                member.hasOwnership || rank.rankPermissions.manageRankPermissions ? true : false;
-        },
+            this.manageRankPermissions = member.hasOwnership || rank.rankPermissions.manageRankPermissions ? true : false;
+        }
+    },
+    mounted() {
+        this.updateFaction();
+    },
+    watch: {
+        faction() {
+            this.updateFaction();
+        }
     },
 });
 </script>
