@@ -1,17 +1,15 @@
 import alt from 'alt-server';
-import Discord, { MessageEmbed } from 'discord.js';
+import { Client, Guild, GuildMember, Intents, MessageEmbed, TextChannel } from 'discord.js';
 import { Account } from '../../../../server/interface/iAccount';
 import { LoginController } from '../../../../server/systems/login';
 import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 
-const client: Discord.Client = new Discord.Client({
-    ws: { intents: new Discord.Intents(Discord.Intents.ALL) },
-});
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 let isReady = false;
 let serverId: string;
 let allowListRole: string;
-let guild: Discord.Guild;
+let guild: Guild;
 
 export class DiscordController {
     /**
@@ -156,12 +154,12 @@ export class DiscordController {
 
     /**
      * If the user was removed from the allow list, kick them from the alt:v server if they are logged in.
-     * @param {Discord.GuildMember} oldUser - The old user object.
-     * @param {Discord.GuildMember} newUser - The user that was added or removed.
+     * @param {GuildMember} oldUser - The old user object.
+     * @param {GuildMember} newUser - The user that was added or removed.
      * @returns The return value of the function is the value of the last expression evaluated. In
      * this case, the return value is undefined.
      */
-    static async userUpdate(oldUser: Discord.GuildMember, newUser: Discord.GuildMember): Promise<void> {
+    static async userUpdate(oldUser: GuildMember, newUser: GuildMember): Promise<void> {
         const discord = oldUser.id;
         const oldUserHasRole = oldUser.roles.cache.has(allowListRole);
         const newUserHasRole = newUser.roles.cache.has(allowListRole);
@@ -194,7 +192,7 @@ export class DiscordController {
     static async removeFromAllowList(
         discord: string,
         alreadyRemovedRole: boolean = false,
-    ): Promise<Discord.GuildMember> {
+    ): Promise<GuildMember> {
         const member = await guild.members.fetch(discord);
 
         try {
@@ -227,14 +225,14 @@ export class DiscordController {
 
     /**
      * Add a discord member to the allow list.
-     * Returns a Discord.GuildMember object if successful.
+     * Returns a GuildMember object if successful.
      *
      * @static
      * @param {string} discord
      * @return {Promise<boolean>}
      * @memberof DiscordController
      */
-    static async addToAllowList(discord: string, justMessage: boolean = false): Promise<Discord.GuildMember> {
+    static async addToAllowList(discord: string, justMessage: boolean = false): Promise<GuildMember> {
         // Find the user in discord
         const member = await guild.members.fetch(discord);
         if (!member) {
@@ -264,7 +262,7 @@ export class DiscordController {
      * Send a message to a Discord channel.
      * @param {string} channel_id - The ID of the channel to send the message to.
      * @param {string} message - The message to send to the channel.
-     * @returns The Discord.Guild object.
+     * @returns The Guild object.
      */
     static sendToChannel(channel_id: string, message: string): void {
         if (!guild) {
@@ -272,7 +270,7 @@ export class DiscordController {
             return;
         }
 
-        const channel = guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
+        const channel = guild.channels.cache.find((x) => x.id === channel_id) as TextChannel;
         if (!channel) {
             alt.logError(`~lr~[Discord] Channel does not exist to sendToChannel`);
             return;
@@ -285,7 +283,7 @@ export class DiscordController {
      * Send a message to a Discord channel.
      * @param {string} channel_id - The ID of the channel to send the message to.
      * @param {MessageEmbed} msg - MessageEmbed - The message to send.
-     * @returns The Discord.Guild object.
+     * @returns The Guild object.
      */
     static sendEmbed(channel_id: string, msg: MessageEmbed): void {
         if (!guild) {
@@ -293,12 +291,12 @@ export class DiscordController {
             return;
         }
 
-        const channel = guild.channels.cache.find((x) => x.id === channel_id) as Discord.TextChannel;
+        const channel = guild.channels.cache.find((x) => x.id === channel_id) as TextChannel;
         if (!channel) {
             alt.logError(`[Discord] Channel does not exist.`);
             return;
         }
 
-        channel.send(msg);
+        channel.send({ embeds: [msg] });
     }
 }
