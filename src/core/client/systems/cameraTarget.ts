@@ -13,7 +13,7 @@ interface ClosestTarget {
     type?: 'npc' | 'player' | 'object' | 'vehicle';
 }
 
-let displayLabel = '.';
+let displayLabel = '';
 let temporaryLabel = null;
 let isProcessing = false;
 let closestTarget: ClosestTarget;
