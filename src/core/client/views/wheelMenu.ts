@@ -42,8 +42,6 @@ class InternalFunctions implements ViewModel {
             return;
         }
 
-        console.log(uid);
-
         const option = _options[index];
         if (!option.doNotClose) {
             console.log(option.uid);
@@ -78,6 +76,7 @@ class InternalFunctions implements ViewModel {
     static async close() {
         if (_interval) {
             alt.clearInterval(_interval);
+            _interval = null;
         }
 
         const view = await WebViewController.get();
@@ -148,6 +147,7 @@ export class WheelMenu {
 
         if (_interval) {
             alt.clearInterval(_interval);
+            _interval = null;
         }
 
         native.triggerScreenblurFadeIn(250);
