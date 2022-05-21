@@ -78,6 +78,10 @@ class Startup {
     }
 }
 
+process.on('uncaughtException', (err) => {
+    console.log(err);
+});
+
 alt.on('playerConnect', Startup.handleEarlyConnect);
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, Startup.toggleEntry);
 
