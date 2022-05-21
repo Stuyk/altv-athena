@@ -41,3 +41,4 @@ yarn.lock
 # Resources
 
 resources/core/**
+resources/webviews/**
