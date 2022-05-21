@@ -1,6 +1,5 @@
 node_modules
 altv-server
-resources
 *.dll
 *.exe
 update.json
@@ -38,3 +37,7 @@ src-webviews/src/plugins/imports.ts
 # Yarn stuff
 .yarn/
 yarn.lock
+
+# Resources
+
+resources/core/**
