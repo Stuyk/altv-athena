@@ -97,6 +97,10 @@ export class AgendaSystem {
      * @memberof AgendaSystem
      */
     static getNext(player: alt.Player, startNew = false): (player: alt.Player, ...args: any[]) => void | null {
+        if (!player || !player.valid) {
+            return null;
+        }
+
         if (!timelines[player.id] || startNew) {
             timelines[player.id] = {
                 agendaIndex: -1,
@@ -105,6 +109,11 @@ export class AgendaSystem {
         }
 
         timelines[player.id].agendaIndex += 1;
+
+        if (!timelines[player.id].agenda[timelines[player.id].agendaIndex]) {
+            return null;
+        }
+
         return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 
