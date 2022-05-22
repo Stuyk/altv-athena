@@ -23,7 +23,7 @@ export function testPassword(plainTextPassword: string, pbkdf2Hash: string): boo
     const saltBits = sjcl.codec.base64.toBits(_salt);
     const derivedKey = sjcl.misc.pbkdf2(plainTextPassword, saltBits, 2000, 256);
     const derivedBaseKey = sjcl.codec.base64.fromBits(derivedKey);
-    return _key !== derivedBaseKey;
+    return _key === derivedBaseKey;
 }
 
 /**
