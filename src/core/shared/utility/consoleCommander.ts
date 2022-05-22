@@ -12,11 +12,13 @@ const Commands: ConsoleCommand = {};
  * @return {*}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
-    if (!Commands[cmdName]) {
-        return;
-    }
+    const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
 
-    Commands[cmdName](...args);
+    if (Commands[cmdNameclean]) {
+        Commands[cmdNameclean](...args);
+    } else {
+        console.log(`Command "${cmdNameclean}" not found.`);
+    }
 }
 
 export class ConsoleCommander {
