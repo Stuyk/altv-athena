@@ -25,6 +25,18 @@ export class ConsoleCommander {
     }
 
     /**
+     * Allows a console command to be invoked through other means.
+     *
+     * @static
+     * @param {string} cmdName
+     * @param {...string[]} args
+     * @memberof ConsoleCommander
+     */
+    static invokeCommand(cmdName: string, ...args: string[]): void {
+        handleConsoleMessage(cmdName, ...args);
+    }
+
+    /**
      * Register a Server-Side or Client-Side Console Command
      * Depends on the folder you are writing inside of.
      *
