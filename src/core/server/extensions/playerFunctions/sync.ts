@@ -156,7 +156,7 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
             const value = component.drawables[index];
             const id = component.ids[index];
 
-            if (component.dlcHashes && component.dlcHashes.length >= 1) {
+            if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
                 const dlc = component.dlcHashes[index];
                 if (component.isProp) {
                     player.setDlcProp(dlc, id, value, texture);
