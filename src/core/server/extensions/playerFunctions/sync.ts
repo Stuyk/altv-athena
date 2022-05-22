@@ -157,7 +157,11 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
             const id = component.ids[index];
 
             if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
-                const dlc = component.dlcHashes[index];
+                let dlc = component.dlcHashes[index];
+                if (typeof dlc === 'string') {
+                    dlc = alt.hash(dlc);
+                }
+
                 if (component.isProp) {
                     player.setDlcProp(dlc, id, value, texture);
                     continue;
@@ -190,7 +194,11 @@ function singleEquipment(player: alt.Player, component: ClothingComponent) {
         const id = component.ids[index];
 
         if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
-            const dlc = component.dlcHashes[index];
+            let dlc = component.dlcHashes[index];
+            if (typeof dlc === 'string') {
+                dlc = alt.hash(dlc);
+            }
+
             if (component.isProp) {
                 player.setDlcProp(dlc, id, value, texture);
                 continue;

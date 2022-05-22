@@ -6,6 +6,8 @@ import { Item } from './item';
 import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
 
 export interface Character {
+    [key: string]: any;
+
     /**
      * The character identifier in the database.
      * @type {*}

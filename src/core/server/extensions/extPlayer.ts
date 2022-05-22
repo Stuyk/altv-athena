@@ -67,7 +67,7 @@ declare module 'alt-server' {
          * @type {number}
          * @memberof Player
          */
-        nextDeathSpawn: number;
+        nextDeathSpawn: number | undefined;
 
         /**
          * The next time the player is due for a 'ping'.

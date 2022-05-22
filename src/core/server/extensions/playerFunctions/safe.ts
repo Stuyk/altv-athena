@@ -47,21 +47,21 @@ function addHealth(p: alt.Player, value: number, exactValue: boolean = false) {
  * @param {boolean} exactValue
  * @memberof SafePrototype
  */
-function addArmour(p: alt.Player, value: number, exactValue: boolean = false): void {
+function addArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
     if (exactValue) {
-        p.acArmour = value;
-        p.armour = value;
+        player.acArmour = value;
+        player.armour = value;
         return;
     }
 
-    if (p.armour + value > 100) {
-        p.acArmour = 100;
-        p.armour = 100;
+    if (player.armour + value > 100) {
+        player.acArmour = 100;
+        player.armour = 100;
         return;
     }
 
-    p.acArmour = p.armour + value;
-    p.armour = p.acArmour;
+    player.acArmour = player.armour + value;
+    player.armour = player.acArmour;
 }
 
 function setDimension(player: alt.Player, value: number) {

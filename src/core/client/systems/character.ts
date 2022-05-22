@@ -139,7 +139,11 @@ export class CharacterSystem {
                 const texture = component.textures[index];
 
                 if (component.dlcHashes && component.dlcHashes.length >= 1) {
-                    const dlc = component.dlcHashes[index];
+                    let dlc = component.dlcHashes[index];
+                    if (typeof dlc === 'string') {
+                        dlc = alt.hash(dlc);
+                    }
+
                     if (component.isProp) {
                         if (drawable <= -1) {
                             native.clearPedProp(ped, id);

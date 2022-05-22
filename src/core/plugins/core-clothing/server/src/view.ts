@@ -14,9 +14,10 @@ import { Vector3 } from '../../../../shared/interfaces/vector';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { deepCloneObject } from '../../../../shared/utility/deepCopy';
-import { CLOTHING_STORE_PAGE } from '../../shared/enums';
+import { CLOTHING_CONFIG } from '../../shared/config';
+import { CLOTHING_STORE_PAGE, DLC_CLOTH_HASH } from '../../shared/enums';
 import { CLOTHING_INTERACTIONS } from '../../shared/events';
-import { IClothingStore } from '../../shared/interfaces';
+import { CLOTHING_DLC_INFO, IClothingStore } from '../../shared/interfaces';
 import clothingStores from './stores';
 
 // Do not change order
@@ -216,6 +217,80 @@ export class ClothingFunctions {
     }
 
     /**
+     * Returns a string if it's non-gtav based hash.
+     *
+     * @static
+     * @param {number} sex
+     * @param {number} id
+     * @param {number} drawable
+     * @param {boolean} [isProp=false]
+     * @return {*}
+     * @memberof ClothingFunctions
+     */
+    static getDlcHash(
+        player: alt.Player,
+        id: number,
+        drawable: number,
+        texture: number,
+        isProp: boolean = false,
+    ): { dlcName: string | number; drawable: number; texture: number } {
+        if (!player || !player.valid) {
+            return null;
+        }
+
+        const defaultMaxSize = isProp
+            ? CLOTHING_CONFIG.MAXIMUM_PROP_VALUES[player.data.appearance.sex][id]
+            : CLOTHING_CONFIG.MAXIMUM_COMPONENT_VALUES[player.data.appearance.sex][id];
+
+        if (drawable <= defaultMaxSize) {
+            const dlcData = isProp ? player.getDlcProp(id) : player.getDlcClothes(id);
+            return {
+                dlcName: dlcData.dlc,
+                drawable: dlcData.drawable,
+                texture: dlcData.texture,
+            };
+        }
+
+        // Knowing the maximum drawable size. Anything greater than that should be considered DLC.
+        // So it's usually MAXIMUM_GTAV_DEFAULT_AMOUNT + DLC_COUNTS_PER_ID
+        // We can then use the total count per dlc data to find a relative hash based on the array order.
+        // Example if the maximum is 48, and our dlc is located on 49.
+        // When a clothing component is set for a DLC item, it uses the dlc hash and the relative id number for
+        // the dlc to determine it's position.
+        // Example being:
+        // Vanilla GTA has a hash of 0
+        // The drawable at 1 is always 1.
+        // A DLC will have a longer hash like 5321532532
+        // The drawable at 1 is always 1; granted you provide the hash.
+        // Otherwise if DLC order shifts or changes position it will never be correct if you use the absolute id from the client.
+        // That being said it is important that DLC order matches resource order.
+        let currentSize = defaultMaxSize;
+        const dataSet: Array<CLOTHING_DLC_INFO> = isProp
+            ? CLOTHING_CONFIG.DLC_PROPS[id]
+            : CLOTHING_CONFIG.DLC_CLOTHING[id];
+
+        if (!dataSet) {
+            return null;
+        }
+
+        for (const info of dataSet) {
+            for (let drawableIndex = 0; drawableIndex < info.count[player.data.appearance.sex]; drawableIndex++) {
+                currentSize += 1;
+
+                if (currentSize === drawable) {
+                    return {
+                        dlcName: DLC_CLOTH_HASH[player.data.appearance.sex] + info.dlcName,
+                        drawable: drawableIndex,
+                        texture,
+                    };
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * How clothing purchases are handled.
      * @static
      * @param {alt.Player} player
@@ -300,19 +375,17 @@ export class ClothingFunctions {
         });
 
         for (let i = 0; i < component.drawables.length; i++) {
-            const currentComponent = component.ids[i];
+            const dlcInfo = ClothingFunctions.getDlcHash(
+                player,
+                component.ids[i],
+                component.drawables[i],
+                component.textures[i],
+                component.isProp,
+            );
 
-            let dlcData: alt.IDlcCloth | alt.IDlcProp;
-
-            if (component.isProp) {
-                dlcData = player.getDlcProp(currentComponent);
-            } else {
-                dlcData = player.getDlcClothes(currentComponent);
-            }
-
-            newItem.data.dlcHashes.push(dlcData.dlc);
-            newItem.data.drawables[i] = dlcData.drawable;
-            newItem.data.textures[i] = dlcData.texture;
+            newItem.data.dlcHashes.push(dlcInfo.dlcName);
+            newItem.data.drawables[i] = dlcInfo.drawable;
+            newItem.data.textures[i] = dlcInfo.texture;
         }
 
         let didGetAdded = false;
