@@ -302,14 +302,18 @@ export class ClothingFunctions {
         for (let i = 0; i < component.drawables.length; i++) {
             const currentComponent = component.ids[i];
 
-            const dlcData = player.getDlcClothes(currentComponent);
+            let dlcData: alt.IDlcCloth | alt.IDlcProp;
+
+            if (component.isProp) {
+                dlcData = player.getDlcProp(currentComponent);
+            } else {
+                dlcData = player.getDlcClothes(currentComponent);
+            }
+
             newItem.data.dlcHashes.push(dlcData.dlc);
             newItem.data.drawables[i] = dlcData.drawable;
             newItem.data.textures[i] = dlcData.texture;
         }
-
-        console.log(`Hashes Set To:`);
-        console.log(newItem.data.dlcHashes);
 
         let didGetAdded = false;
 
