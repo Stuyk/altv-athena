@@ -1,0 +1,83 @@
+.black--glow {
+    text-shadow: 0px 0px 12px #000000, 0px 0px 6px #000000 !important;
+}
+
+.white--glow {
+    text-shadow: 0px 0px 12px #ffffff, 0px 0px 6px #ffffff !important;
+}
+
+.red--glow {
+    text-shadow: 0px 0px 12px #f44336, 0px 0px 6px #f44336 !important;
+}
+
+.pink--glow {
+    text-shadow: 0px 0px 12px #e91e63, 0px 0px 6px #e91e63 !important;
+}
+
+.purple--glow {
+    text-shadow: 0px 0px 12px #9c27b0, 0px 0px 6px #9c27b0 !important;
+}
+
+.deep-purple--glow {
+    text-shadow: 0px 0px 12px #673ab7, 0px 0px 6px #673ab7 !important;
+}
+
+.indigo--glow {
+    text-shadow: 0px 0px 12px #3f51b5, 0px 0px 6px #3f51b5 !important;
+}
+
+.blue--glow {
+    text-shadow: 0px 0px 12px #2196f3, 0px 0px 6px #2196f3 !important;
+}
+
+.light-blue--glow {
+    text-shadow: 0px 0px 12px #03a9f4, 0px 0px 6px #03a9f4 !important;
+}
+
+.cyan--glow {
+    text-shadow: 0px 0px 12px #00bcd4, 0px 0px 6px #00bcd4 !important;
+}
+
+.teal--glow {
+    text-shadow: 0px 0px 12px #009688, 0px 0px 6px #009688 !important;
+}
+
+.green--glow {
+    text-shadow: 0px 0px 12px #4caf50, 0px 0px 6px #4caf50 !important;
+}
+
+.light-green--glow {
+    text-shadow: 0px 0px 12px #8bc34a, 0px 0px 6px #8bc34a !important;
+}
+
+.lime--glow {
+    text-shadow: 0px 0px 12px #cddc39, 0px 0px 6px #cddc39 !important;
+}
+
+.yellow--glow {
+    text-shadow: 0px 0px 12px #ffeb3b, 0px 0px 6px #ffeb3b !important;
+}
+
+.amber--glow {
+    text-shadow: 0px 0px 12px #ffc107, 0px 0px 6px #ffc107 !important;
+}
+
+.orange--glow {
+    text-shadow: 0px 0px 12px #ff9800, 0px 0px 6px #ff9800 !important;
+}
+
+.deep-orange--glow {
+    text-shadow: 0px 0px 12px #ff5722, 0px 0px 6px #ff5722 !important;
+}
+
+.brown--glow {
+    text-shadow: 0px 0px 12px #795548, 0px 0px 6px #795548 !important;
+}
+
+.blue-grey--glow {
+    text-shadow: 0px 0px 12px #607d8b, 0px 0px 6px #607d8b !important;
+}
+
+.grey--glow {
+    text-shadow: 0px 0px 12px #9e9e9e, 0px 0px 6px #9e9e9e !important;
+}

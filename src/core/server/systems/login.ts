@@ -1,25 +1,47 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { playerConst } from '../api/consts/constPlayer';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
+import { PlayerEvents } from '../events/playerEvents';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
 import { DiscordUser } from '../interface/iDiscordUser';
 import Ares from '../utility/ares';
 import { StorageView } from '../views/storage';
-import { OptionsController } from './options';
-import { VehicleSystem } from './vehicle';
-import { AgendaSystem } from './agenda';
 import { AccountSystem } from './account';
-import { PlayerEvents } from '../events/playerEvents';
+import { AgendaSystem } from './agenda';
+import { VehicleSystem } from './vehicle';
+
+type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => Promise<boolean>;
 
 const UserRelation: { [key: number]: string } = {};
+const TryLoginInjections: Array<TryLoginCallback> = [];
 
 export class LoginController {
+    /**
+     * Adds a tryLogin injection callback.
+     *
+     * useful for adding custom logic to the login process.
+     * Return a string to abort the login process and to kick the player
+     *
+     * @static
+     * @param {TryLoginCallback} callback
+     * @memberof LoginController
+     */
+    static addTryLoginInjection(callback: TryLoginCallback): void {
+        TryLoginInjections.push(callback);
+    }
+
+    static init() {
+        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
+        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
+        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
+        alt.on('playerDisconnect', LoginController.tryDisconnect);
+    }
+
     /**
      * Handles login from login webview.
      * Called through Agenda System.
@@ -51,10 +73,10 @@ export class LoginController {
         delete player.pendingLogin;
         delete player.discordToken;
 
-        // Whitelist Handling
-        if (DEFAULT_CONFIG.WHITELIST) {
-            if (!OptionsController.isWhitelisted(player.discord.id)) {
-                player.kick(`You are not currently whitelisted.`);
+        for (const callback of TryLoginInjections) {
+            const didPass = await callback(player, account);
+
+            if (!didPass) {
                 return;
             }
         }
@@ -107,7 +129,7 @@ export class LoginController {
             return;
         }
 
-        await playerFuncs.set.account(player, account);
+        await playerConst.set.account(player, account);
         AgendaSystem.goNext(player);
     }
 
@@ -137,7 +159,7 @@ export class LoginController {
         }
 
         alt.log(`${player.data.name} has logged out.`);
-        playerFuncs.save.onTick(player);
+        playerConst.save.onTick(player);
     }
 
     /**
@@ -200,7 +222,4 @@ export class LoginController {
     }
 }
 
-PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
-alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
-alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
-alt.on('playerDisconnect', LoginController.tryDisconnect);
+LoginController.init();

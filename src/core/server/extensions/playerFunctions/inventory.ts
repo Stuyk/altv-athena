@@ -8,7 +8,8 @@ import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../../shared/utility/flags';
 import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
-import { playerFuncs } from '../extPlayer';
+import { ItemFactory } from '../../systems/item';
+import { Athena } from '../../api/athena';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
@@ -48,7 +49,7 @@ async function convert(player: alt.Player): Promise<void> {
     }
 
     player.data.inventory = playerItems;
-    await playerFuncs.save.field(player, 'inventory', player.data.inventory);
+    await Athena.player.save.field(player, 'inventory', player.data.inventory);
 }
 
 /**
@@ -442,9 +443,9 @@ function removeAllWeapons(player: alt.Player): Array<Item> {
         removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
     }
 
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+    Athena.player.sync.inventory(player);
     player.removeAllWeapons();
     return removedWeapons;
 }
@@ -543,8 +544,8 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
             return false;
         }
 
-        playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
-        playerFuncs.sync.inventory(player);
+        Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+        Athena.player.sync.inventory(player);
         return true;
     }
 
@@ -564,8 +565,8 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
         return false;
     }
 
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.sync.inventory(player);
     return true;
 }
 
@@ -636,7 +637,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
 
     if (!endItem || !selectItem) {
         console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} (may be null)`);
-        playerFuncs.sync.inventory(player);
+        Athena.player.sync.inventory(player);
         return;
     }
 
@@ -656,7 +657,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     fieldsToSave.push(endSlotName);
 
     if (fieldsToSave.includes(null)) {
-        playerFuncs.sync.inventory(player);
+        Athena.player.sync.inventory(player);
         return;
     }
 
@@ -666,7 +667,7 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     // Check if equipment types are compatible...
     if (isSelectEquipment || isEndEquipment) {
         if (endItem.item.equipment !== selectItem.item.equipment) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
     }
@@ -679,13 +680,13 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
         // Need to verify that each slot follows the rules for the slot it is going into.
         // Handles rules for the end item slot.
         if (!allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
         // Handles rules for the selected item slot.
         if (!allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
@@ -702,13 +703,13 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
 
         // Handle Stacking
         if (!isSelectStackable || !isEndStackable) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
         const newValue = endArray[endIndex].quantity + selectItem.item.quantity;
         if (endArray[endIndex].maxStack && newValue > endArray[endIndex].maxStack) {
-            playerFuncs.sync.inventory(player);
+            Athena.player.sync.inventory(player);
             return;
         }
 
@@ -725,19 +726,19 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
     } else {
         player.data[selectedSlotName] = selectedArray;
         fieldsToSave.pop();
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 
     saveFields(player, fieldsToSave);
-    playerFuncs.sync.inventory(player);
+    Athena.player.sync.inventory(player);
 }
 
 function saveFields(player: alt.Player, fields: string[]): void {
     for (let i = 0; i < fields.length; i++) {
-        playerFuncs.save.field(player, fields[i], player.data[fields[i]]);
+        Athena.player.save.field(player, fields[i], player.data[fields[i]]);
     }
 
-    playerFuncs.sync.inventory(player);
+    Athena.player.sync.inventory(player);
 }
 
 /**
@@ -1001,8 +1002,8 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
     }
 
     player.data.inventory[existingItem.index].quantity += item.quantity;
-    playerFuncs.save.field(player, 'inventory', player.data.inventory);
-    playerFuncs.sync.inventory(player);
+    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.player.sync.inventory(player);
     return true;
 }
 
@@ -1039,13 +1040,145 @@ function getTotalWeight(player: alt.Player): number {
             continue;
         }
 
-        total += parseFloat(item.data.weight);
+        total += parseFloat(item.data.weight) * item.quantity;
     }
 
     return total;
 }
 
-export default {
+/**
+ * Remove amount of item from this player's inventory by looking into slots and quantities
+ * Does not save after removing the items.
+ * Returns amount left if inventory hadn't enough to remove.
+ * @param {alt.Player} player
+ * @param {itemToRemove} item to Remove
+ * @param {amount} amount to be removed from Inventory
+ * @return {number}
+ * @memberof InventoryPrototype
+ */
+async function removeAmountFromInventoryReturnRemainingAmount(
+    player: alt.Player,
+    itemDbName: string,
+    amount: number,
+): Promise<number> {
+    const itemToRemove = await ItemFactory.get(itemDbName);
+    let amountToBeRemoved = amount;
+    for (let inventoryItem of player.data.inventory) {
+        if (amountToBeRemoved > 0) {
+            if (inventoryItem.dbName === itemToRemove.dbName && inventoryItem.rarity === itemToRemove.rarity) {
+                //So how much is left on this stack?
+                if (inventoryItem.quantity > amountToBeRemoved) {
+                    //Everything we want to sell is here
+                    inventoryItem.quantity -= amountToBeRemoved;
+                    return 0;
+                } else {
+                    //We sell the whole item-stack
+                    amountToBeRemoved -= inventoryItem.quantity;
+                    inventoryRemove(player, inventoryItem.slot);
+                }
+            }
+        }
+    }
+    return amountToBeRemoved;
+}
+
+/**
+ * Adds or stacks amount of itemDbName to Inventory by item-quantity times.
+ * Does not save after adding the items.
+ * Returns amount left if inventory was full.
+ *
+ * TODO Deal with weight?!
+ * @param {alt.Player} player
+ * @param {itemToAdd} item to Add
+ * @param {amount} amount to be added to Inventory
+ * @return {number}
+ * @memberof InventoryPrototype
+ */
+async function addAmountToInventoryReturnRemainingAmount(
+    player: alt.Player,
+    itemDbName: string,
+    amount: number,
+): Promise<number> {
+    const itemToAdd = await ItemFactory.get(itemDbName);
+    let itemsLeftToStoreInInventory = amount * itemToAdd.quantity;
+    if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
+        for (let inventoryItem of player.data.inventory) {
+            if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+                if (
+                    isFlagEnabled(inventoryItem.behavior, ITEM_TYPE.CAN_STACK) &&
+                    inventoryItem.dbName === itemToAdd.dbName &&
+                    inventoryItem.rarity === itemToAdd.rarity
+                ) {
+                    if (!inventoryItem.maxStack) {
+                        //You can stack as much as you want. So go for it
+                        inventoryItem.quantity += itemsLeftToStoreInInventory;
+                        //Obvoiusly there is nothing left to be stored here:
+                        return 0;
+                    } else {
+                        //So how much is left to stack?
+                        let freeQuantity = inventoryItem.maxStack - inventoryItem.quantity;
+                        if (freeQuantity >= itemsLeftToStoreInInventory) {
+                            //Everything we buy fits on top of this stack
+                            inventoryItem.quantity += itemsLeftToStoreInInventory;
+                            return 0;
+                        } else {
+                            //We still have something left. So we fill this stack and move on
+                            inventoryItem.quantity = inventoryItem.maxStack;
+                            itemsLeftToStoreInInventory -= freeQuantity;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (itemsLeftToStoreInInventory > 0 && itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+        //Either there is something left or wasn't stackable. So go for the Empty-Slots
+        const emptySlots = getFreeInventorySlots(player);
+        for (let emptySlot of emptySlots) {
+            if (itemsLeftToStoreInInventory >= itemToAdd.quantity) {
+                let addableItem: Item = deepCloneObject(itemToAdd);
+                if (isFlagEnabled(itemToAdd.behavior, ITEM_TYPE.CAN_STACK)) {
+                    if (!itemToAdd.maxStack || itemToAdd.maxStack >= itemsLeftToStoreInInventory) {
+                        //Everything fits into this stack. So go for it
+                        addableItem.quantity = itemsLeftToStoreInInventory;
+                        //Obvoiusly there is nothing left to be stored here:
+                        itemsLeftToStoreInInventory = 0;
+                    } else if (itemToAdd.maxStack) {
+                        //We still have something left. So we fill this stack and move on
+                        addableItem.quantity = itemToAdd.maxStack;
+                        itemsLeftToStoreInInventory -= itemToAdd.maxStack;
+                    }
+                } else {
+                    addableItem.quantity = itemsLeftToStoreInInventory--;
+                }
+                inventoryAdd(player, addableItem, emptySlot.slot);
+            }
+        }
+    }
+    if (itemsLeftToStoreInInventory > 0 && itemsLeftToStoreInInventory < itemToAdd.quantity) {
+        //We have less then itemToAdd.quantity left when inventory was full, so
+        return 1;
+    } else {
+        return itemsLeftToStoreInInventory / itemToAdd.quantity;
+    }
+}
+
+/**
+ * Used to override an existing Athena.player.inventory function.
+ * Requires the same exact name of the function, and the parameters.
+ *
+ * @param {string} functionName
+ * @param {(player: alt.Player, ...args: any[]) => void} callback
+ */
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    if (!exports[functionName]) {
+        alt.logError(`Athena.player.inventory does not provide an export named ${functionName}`);
+    }
+
+    exports[functionName] = callback;
+}
+
+const exports = {
     convert,
     allItemRulesValid,
     checkForKeyValuePair,
@@ -1080,4 +1213,9 @@ export default {
     stackInventoryItem,
     toolbarAdd,
     toolbarRemove,
+    addAmountToInventoryReturnRemainingAmount,
+    removeAmountFromInventoryReturnRemainingAmount,
+    override,
 };
+
+export default exports;

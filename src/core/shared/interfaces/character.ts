@@ -14,11 +14,28 @@ export interface Character {
     _id?: any;
 
     /**
+     * An incremental numerical identifier that increases with each character created.
+     * Does not fill gaps. Do not use as a way to save character information.
+     * @type {number}
+     * @memberof Character
+     */
+    character_id?: number;
+
+    /**
      * The account id associated with this character.
      * @type {*}
      * @memberof Character
      */
     account_id: any;
+
+    /**
+     * The current dimension of the player. When they spawn
+     * they are automatically moved into this dimension.
+     *
+     * @type {number}
+     * @memberof Character
+     */
+    dimension: number;
 
     /**
      * The position that this character last logged out at.

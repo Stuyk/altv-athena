@@ -8,7 +8,6 @@ import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { Account } from '../../interface/iAccount';
 import { Collections } from '../../interface/iDatabaseCollections';
 import Ares from '../../utility/ares';
-import { playerFuncs } from '../extPlayer';
 import dataUpdater from './dataUpdater';
 import emit from './emit';
 import safe from './safe';
@@ -18,6 +17,7 @@ import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
+import { playerConst } from '../../api/consts/constPlayer';
 
 const config = ConfigUtil.get();
 
@@ -118,8 +118,8 @@ async function firstConnect(player: alt.Player): Promise<void> {
  * @param {boolean} value
  * @memberof SetPrototype
  */
-function frozen(p: alt.Player, value: boolean): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_SET_FREEZE, value);
+function frozen(player: alt.Player, value: boolean): void {
+    player.setSyncedMeta(PLAYER_SYNCED_META.IS_FROZEN, value);
 }
 
 /**
@@ -152,7 +152,7 @@ function respawned(p: alt.Player, position: alt.Vector3 = null): void {
         nearestHopsital = hospitals[index] as alt.Vector3;
 
         if (DEFAULT_CONFIG.RESPAWN_LOSE_WEAPONS) {
-            playerFuncs.inventory.removeAllWeapons(p);
+            playerConst.inventory.removeAllWeapons(p);
         }
     }
 
@@ -175,7 +175,7 @@ function wantedLevel(player: alt.Player, stars: number) {
 
     player.wanted = stars;
     player.data.wanted = stars;
-    playerFuncs.save.field(player, 'wanted', player.data.wanted);
+    playerConst.save.field(player, 'wanted', player.data.wanted);
     player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
 }
 

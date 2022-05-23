@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { HudView } from '../../plugins/core-hud/client';
 
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
@@ -110,9 +111,13 @@ export class VehicleController {
      * @param {boolean} [value=true]
      * @memberof VehicleController
      */
-    static enableSeatBelt(value: boolean = true) {
-        const seatBeltStatus = value ? false : true;
-        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, seatBeltStatus);
+    static enableSeatBelt(value: boolean) {
+        alt.Player.local.setMeta('SEATBELT', value);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, value);
+    }
+
+    static removeSeatBelt(vehicle: alt.Vehicle) {
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, false);
     }
 
     /**
@@ -168,3 +173,4 @@ alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
 alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
 alt.on('enteredVehicle', VehicleController.enterVehicle);
+alt.on('leftVehicle', VehicleController.removeSeatBelt);

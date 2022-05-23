@@ -1,6 +1,5 @@
 node_modules
 altv-server
-resources
 *.dll
 *.exe
 update.json
@@ -30,3 +29,16 @@ doc
 typedoc.json
 !scripts/streamer/dist
 package-lock.json
+
+# Plugin stuff
+scripts/buildresource/*.json
+src-webviews/src/plugins/imports.ts
+
+# Yarn stuff
+.yarn/
+yarn.lock
+
+# Resources
+
+resources/core/**
+resources/webviews/**

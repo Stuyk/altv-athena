@@ -16,11 +16,9 @@ import { IVehicle } from '../../shared/interfaces/iVehicle';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Collections } from '../interface/iDatabaseCollections';
 import Logger from '../utility/athenaLogger';
-import { getPlayersByGridSpace } from '../utility/filters';
 import { getClosestEntity } from '../utility/vector';
 import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
@@ -31,6 +29,7 @@ import SystemRules from './rules';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { VehicleEvents } from '../events/vehicleEvents';
+import { playerConst } from '../api/consts/constPlayer';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -96,6 +95,17 @@ export class VehicleSystem {
      * @memberof VehicleSystem
      */
     static async init() {
+        alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
+        alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
+        alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
+        alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
+        alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
+
+        alt.on('playerEnteringVehicle', VehicleSystem.entering);
+        alt.on('playerEnteredVehicle', VehicleSystem.enter);
+        alt.on('playerLeftVehicle', VehicleSystem.leave);
+        alt.on('vehicleDestroy', VehicleSystem.destroyed);
+
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
             return;
         }
@@ -121,6 +131,17 @@ export class VehicleSystem {
                 if (Date.now() > lastUseDate) {
                     continue;
                 }
+            }
+
+            if (!vehicle.model) {
+                alt.logWarning(
+                    `Vehicle with ID: ${vehicle._id.toString()} is missing multiple properties. Skipped during initialization.`,
+                );
+                continue;
+            }
+
+            if (!vehicle.position) {
+                continue;
             }
 
             // Skip New Vehicles
@@ -270,7 +291,7 @@ export class VehicleSystem {
             return;
         }
 
-        playerFuncs.safe.setPosition(player, vehicle.pos.x, vehicle.pos.y, vehicle.pos.z);
+        playerConst.safe.setPosition(player, vehicle.pos.x, vehicle.pos.y, vehicle.pos.z);
         alt.emitClient(player, VEHICLE_EVENTS.SET_INTO, vehicle, clientSideSeat);
     }
 
@@ -303,17 +324,7 @@ export class VehicleSystem {
         }
 
         if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
-            return;
-        }
-
-        if (!player.vehicle.engineOn && !VehicleFuncs.hasFuel(player.vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_FUEL));
-            return;
-        }
-
-        if (player.vehicle.isRefueling) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFUEL_INCOMPLETE));
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
         }
 
@@ -388,6 +399,10 @@ export class VehicleSystem {
             return;
         }
 
+        if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
+            return;
+        }
+
         if (!SystemRules.check(VEHICLE_RULES.DOOR, rules, player, vehicle, { door: doorNumber })) {
             return;
         }
@@ -430,7 +445,7 @@ export class VehicleSystem {
         }
 
         if (!VehicleFuncs.hasOwnership(player, vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_KEYS));
             return;
         }
 
@@ -450,7 +465,7 @@ export class VehicleSystem {
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
 
         if (!player.vehicle) {
-            playerFuncs.emit.animation(
+            playerConst.emit.animation(
                 player,
                 `anim@mp_player_intmenu@key_fob@`,
                 'fob_click_fp',
@@ -460,9 +475,9 @@ export class VehicleSystem {
         }
 
         const soundName = vehicle.lockState === VEHICLE_LOCK_STATE.UNLOCKED ? 'car_unlock' : 'car_lock';
-        const playersNearPlayer = getPlayersByGridSpace(player, 8);
+        const playersNearPlayer = playerConst.get.playersByGridSpace(player, 8);
         playersNearPlayer.forEach((target) => {
-            playerFuncs.emit.sound3D(target, soundName, vehicle);
+            playerConst.emit.sound3D(target, soundName, vehicle);
         });
 
         // Custom Lock Event
@@ -508,17 +523,17 @@ export class VehicleSystem {
 
         const dist = distance(player.pos, vehicle.pos);
         if (dist >= 3) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE));
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_LONGER_NEAR_VEHICLE));
             return false;
         }
 
         if (vehicle.isBeingPushed) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED));
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED));
             return false;
         }
 
         if (vehicle.rot.x <= -2 || vehicle.rot.x >= 2) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP));
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP));
             return false;
         }
 
@@ -588,20 +603,20 @@ export class VehicleSystem {
         }
 
         if (distance(player.pos, vehicle.pos) >= 5) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
+            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (VehicleSystem.isVehicleLocked(vehicle)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS));
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS));
+            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
         if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
-            playerFuncs.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
+            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -614,8 +629,8 @@ export class VehicleSystem {
         );
 
         if (!vehicleInfo || !vehicleInfo.storage) {
-            playerFuncs.emit.notification(player, `This vehicle does not have storage.`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            playerConst.emit.notification(player, `This vehicle does not have storage.`);
+            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -637,16 +652,36 @@ export class VehicleSystem {
 
         StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
     }
+
+    /**
+     * Eventually just despawns the vehicle after some time.
+     *
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @memberof VehicleSystem
+     */
+    static async destroyed(vehicle: alt.Vehicle) {
+        await new Promise((resolve: Function) => {
+            alt.setTimeout(() => {
+                resolve();
+            }, DEFAULT_CONFIG.VEHICLE_DESPAWN_TIMEOUT);
+        });
+
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESTROYED, vehicle);
+
+        alt.nextTick(() => {
+            if (vehicle && vehicle.valid && vehicle.data) {
+                VehicleFuncs.despawn(vehicle.data.id);
+                return;
+            }
+
+            try {
+                vehicle.destroy();
+            } catch (err) {}
+        });
+    }
 }
-
-alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
-alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
-alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
-alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
-alt.onClient(VEHICLE_EVENTS.SET_ENGINE, VehicleSystem.toggleEngine);
-
-alt.on('playerEnteringVehicle', VehicleSystem.entering);
-alt.on('playerEnteredVehicle', VehicleSystem.enter);
-alt.on('playerLeftVehicle', VehicleSystem.leave);
-
-VehicleSystem.init();

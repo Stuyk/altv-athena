@@ -70,29 +70,45 @@ This is if you want to design out-of-game and just work on some design.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import DefaultPage from './defaultPage';
+import { CORE_IMPORTS } from './pages/components';
+import { PLUGIN_IMPORTS } from './plugins/imports';
+import DefaultPages from './defaultPage';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
-import components from './pages/components';
 
-// Main Component
+// import components from './pages/components';
+
+const ALL_THE_COMPONENTS = {
+    ...CORE_IMPORTS,
+    ...PLUGIN_IMPORTS,
+};
+
+function componentsToArray() {
+    let componentList = [];
+    Object.keys(ALL_THE_COMPONENTS).forEach((key) => {
+        componentList.push({ name: key, component: ALL_THE_COMPONENTS[key] });
+    });
+
+    return componentList;
+}
+
 export default defineComponent({
     name: 'App',
     components: {
-        ...components.componentList,
+        ...ALL_THE_COMPONENTS,
     },
     data() {
         return {
             isClosingPage: false,
             pages: [] as Array<IPageData>,
-            pageBindings: [...components.generateComponentList()],
+            pageBindings: componentsToArray(),
             devMode: false,
         };
     },
     computed: {
         getAllPageNames() {
-            return Object.keys(components.componentList);
+            return Object.keys(ALL_THE_COMPONENTS);
         },
     },
     // Define functions for the main controller.
@@ -242,7 +258,7 @@ export default defineComponent({
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.setPages([DefaultPage]);
+            this.setPages([...DefaultPages]);
             return;
         }
 

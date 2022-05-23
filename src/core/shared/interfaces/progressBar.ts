@@ -1,3 +1,5 @@
+import * as alt from 'alt-shared';
+
 export interface ProgressBar {
     /**
      * A unique identifier to remove the progress bar early.
@@ -16,10 +18,10 @@ export interface ProgressBar {
 
     /**
      * The color of the progress bar.
-     * @type {{ r: number; g: number; b: number; a: number }}
+     * @type {alt.RGBA}
      * @memberof ProgressBar
      */
-    color: { r: number; g: number; b: number; a: number };
+    color: alt.RGBA;
 
     /**
      * How long this progress bar should last.

@@ -69,5 +69,5 @@ export default {
     getDistanceTo3D,
     getPlayerInFrontOf,
     getPositionFrontOf,
-    getVehicleInFrontOf
+    getVehicleInFrontOf,
 };

@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
@@ -60,6 +59,10 @@ export class KeybindController {
             return;
         }
 
+        if (alt.isConsoleOpen()) {
+            return;
+        }
+
         // Console Menu
         if (alt.isMenuOpen()) {
             return;
@@ -103,6 +106,10 @@ export class KeybindController {
         }
 
         if (alt.Player.local.isChatOpen) {
+            return;
+        }
+
+        if (alt.isConsoleOpen()) {
             return;
         }
 

@@ -723,3 +723,15 @@
     width: 100%;
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
+
+.allow-select {
+    user-select: all !important;
+}
+
+.fill-full-width {
+    width: 100%;
+}
+
+.fill-half-width {
+    width: 50%;
+}

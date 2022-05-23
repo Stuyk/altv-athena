@@ -36,11 +36,6 @@ export enum View_Events_Storage {
     Close = 'storage:Close',
 }
 
-export enum View_Events_Dealership {
-    Open = 'dealership:Open',
-    Purchase = 'dealership:Purchase',
-}
-
 export enum View_Events_Factions {
     Bus = 'factions:Bus',
     Open = 'factions:Open',
@@ -69,7 +64,15 @@ export enum View_Events_Input_Menu {
     SetMenu = 'inputmenu:Set',
 }
 
-export enum View_Events_PaintShop {
-    Open = 'paint:Shop:Open',
-    Purchase = 'paint:Shop:Purchase',
+export enum VIEW_EVENTS_JOB_TRIGGER {
+    OPEN = 'jobTrigger:Open',
+    CANCEL = 'jobTrigger:Cancel',
+    ACCEPT = 'jobTrigger:Accept',
+}
+
+export enum VIEW_EVENTS_WHEEL_MENU {
+    ADD_OPTIONS = 'wheelMenu:AddOptions',
+    READY = 'wheelMenu:Ready',
+    CLOSE = 'wheelMenu:Close',
+    EXECUTE = 'wheelMenu:Execute',
 }

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import Polygon from '../../shared/classes/polygon';
 import MinimapHelper from './minimap';
 import { drawRectangle2D, drawText2D } from './text';
+// TODO: Still in Usage? Can't tell properly, so i'll keep it for now.
 
 // const polygon = new Polygon([
 //     { x: -1498.1483154296875, y: -677.0752563476562, z: 28.048023223876953 },

@@ -1,11 +1,11 @@
 <template>
     <div class="stack">
         <div class="split">
-            <div class="blue--text overline pr-2" style="min-width: 30px; text-align: right">{{ getValue }}</div>
+            <div class="blue--text overline pr-2 align-right">{{ getValue }}</div>
             <input type="range" :min="_min" :max="_max" :step="_step" :value="_value" />
-            <div class="blue--text overline pl-2" style="min-width: 30px; text-align: left">{{ _max }}</div>
+            <div class="blue--text overline pl-2 align-left">{{ _max }}</div>
         </div>
-        <div v-if="values" class="overline grey--text pt-2" style="text-align: center; font-size: 10px !important">
+        <div v-if="values" class="overline grey--text pt-2 align-center">
             {{ getCurrentValue }}
         </div>
     </div>
@@ -48,6 +48,10 @@ export default defineComponent({
             type: Array,
             required: false,
         },
+        enableAudio: {
+            type: Boolean,
+            default: true,
+        },
     },
     methods: {
         ResolvePath,
@@ -86,7 +90,7 @@ export default defineComponent({
             }
 
             if (this.values[this._value].length >= 16) {
-                return this.values[this._value].substr(0, 16) + '...';
+                return this.values[this._value].substring(0, 16) + '...';
             }
 
             return this.values[this._value];
@@ -110,6 +114,11 @@ export default defineComponent({
     watch: {
         async indexValue(newValue) {
             this._value = newValue;
+
+            if (!this.enableAudio) {
+                return;
+            }
+
             if (!this._audio) {
                 this._audio = new Audio(this.ResolvePath('assets/sounds/ui/hover.ogg'));
                 this._audio.volume = 0.1;
@@ -122,3 +131,20 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+.align-left {
+    text-align: left;
+    min-width: 30px;
+}
+
+.align-right {
+    text-align: right;
+    min-width: 30px;
+}
+
+.align-center {
+    text-align: center;
+    font-size: 10px !important;
+}
+</style>

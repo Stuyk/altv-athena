@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import { InputMenu, InputResult } from '../../shared/interfaces/inputMenus';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 import { View_Events_Input_Menu } from '../../shared/enums/views';
 import { WebViewController } from '../extensions/view2';

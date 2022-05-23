@@ -1,11 +1,14 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { VehicleSystem } from './vehicle';
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
 
 let hasInitialized = false;
 
-function loadPlugins() {
+async function loadPlugins() {
     alt.log(`~lc~=== Loading Plugins ===`);
+    const promises = [];
+
     for (let i = 0; i < pluginRegistration.length; i++) {
         const plugin = pluginRegistration[i];
         if (!plugin || typeof plugin.callback !== 'function') {
@@ -13,8 +16,13 @@ function loadPlugins() {
             continue;
         }
 
-        plugin.callback();
+        promises.push(plugin.callback());
     }
+
+    await Promise.all(promises);
+
+    // Load after plugins are initialized...
+    VehicleSystem.init();
 
     alt.log(`~lc~Extra Resources Loaded ~ly~(${pluginRegistration.length})`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
@@ -47,5 +55,18 @@ export class PluginSystem {
      */
     static registerPlugin(name: string, callback: Function) {
         pluginRegistration.push({ name, callback });
+    }
+
+    /**
+     * Returns a list of all plugin names that are currently being loaded.
+     *
+     * @static
+     * @return {Array<string>}
+     * @memberof PluginSystem
+     */
+    static getPlugins(): Array<string> {
+        return pluginRegistration.map((x) => {
+            return x.name;
+        });
     }
 }

@@ -449,3 +449,7 @@
     letter-spacing: 0.1666666667em !important;
     text-transform: uppercase !important;
 }
+
+.pretty {
+    font-family: 'Lobster' !important;
+}

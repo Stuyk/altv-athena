@@ -1,11 +1,13 @@
 import * as alt from 'alt-server';
+import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/item';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
+import { ItemEffects } from './itemEffects';
 
 export class ToolbarController {
     /**
@@ -19,9 +21,9 @@ export class ToolbarController {
             return;
         }
 
-        const item = playerFuncs.inventory.getToolbarItem(player, slot);
+        const item = Athena.player.inventory.getToolbarItem(player, slot);
         if (!item) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_NOT_EQUIPPED));
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_NOT_EQUIPPED));
             return;
         }
 
@@ -37,7 +39,7 @@ export class ToolbarController {
 
         // Handle Consume Item from Toolbar
         if (isFlagEnabled(item.behavior, ITEM_TYPE.CONSUMABLE)) {
-            ToolbarController.handleToolbarUse(player, item);
+            ToolbarController.handleToolbarUse(player, item, slot);
             return;
         }
 
@@ -56,7 +58,7 @@ export class ToolbarController {
         player.removeAllWeapons();
 
         if (!item.data.hash) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.WEAPON_NO_HASH));
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.WEAPON_NO_HASH));
             return;
         }
 
@@ -64,7 +66,7 @@ export class ToolbarController {
         if (!player.lastToolbarData) {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
-            playerFuncs.emit.sound3D(player, 'item_equip', player);
+            Athena.player.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
@@ -72,7 +74,7 @@ export class ToolbarController {
         if (player.lastToolbarData.slot !== item.slot) {
             player.lastToolbarData = { equipped: true, slot: item.slot };
             player.giveWeapon(item.data.hash, 9999, true);
-            playerFuncs.emit.sound3D(player, 'item_equip', player);
+            Athena.player.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
@@ -80,13 +82,13 @@ export class ToolbarController {
         if (!player.lastToolbarData.equipped) {
             player.giveWeapon(item.data.hash, 9999, true);
             player.lastToolbarData.equipped = true;
-            playerFuncs.emit.sound3D(player, 'item_equip', player);
+            Athena.player.emit.sound3D(player, 'item_equip', player);
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
         player.lastToolbarData.equipped = false;
-        playerFuncs.emit.sound3D(player, 'item_remove', player);
+        Athena.player.emit.sound3D(player, 'item_remove', player);
     }
 
     /**
@@ -96,23 +98,23 @@ export class ToolbarController {
      * @param {Item} item - The item that was used.
      * @returns None
      */
-    static handleToolbarUse(player: alt.Player, item: Item) {
+    static handleToolbarUse(player: alt.Player, item: Item, slot: number) {
         if (!isFlagEnabled(item.behavior, ITEM_TYPE.SKIP_CONSUMABLE)) {
             item.quantity -= 1;
 
             if (item.quantity <= 0) {
-                playerFuncs.inventory.toolbarRemove(player, item.slot);
+                Athena.player.inventory.toolbarRemove(player, item.slot);
             } else {
-                playerFuncs.inventory.replaceToolbarItem(player, item);
+                Athena.player.inventory.replaceToolbarItem(player, item);
             }
 
-            playerFuncs.sync.inventory(player);
-            playerFuncs.save.field(player, 'toolbar', player.data.toolbar);
+            Athena.player.sync.inventory(player);
+            Athena.player.save.field(player, 'toolbar', player.data.toolbar);
         }
 
         if (item.data && item.data.event) {
-            alt.emit(item.data.event, player, item);
-            playerFuncs.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
+            ItemEffects.invoke(player, item, INVENTORY_TYPE.TOOLBAR);
+            Athena.player.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
         }
     }
 }

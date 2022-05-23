@@ -5,6 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 alt.on('connectionComplete', handleConnectionComplete);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
+alt.setWatermarkPosition(4);
 
 async function handleConnectionComplete() {
     native.destroyAllCams(true);

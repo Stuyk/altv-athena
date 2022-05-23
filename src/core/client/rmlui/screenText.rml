@@ -1,0 +1,34 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body,
+            #container {
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 20dp;
+                font-weight: bold;
+
+                width: 100%;
+                height: 100%;
+            }
+
+            .text {
+                position: absolute;
+                color: #ffffffff;
+                width: auto;
+                height: auto;
+                text-align: center;
+            }
+
+            .hide {
+                display: none;
+                opacity: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+    </body>
+</rml>

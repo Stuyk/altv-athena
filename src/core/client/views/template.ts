@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 
 import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/ViewModel';
+import ViewModel from '../models/viewModel';
 import { isAnyMenuOpen } from '../utility/menus';
 
 // You should change this to match your Vue Template's ComponentName.

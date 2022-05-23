@@ -12,6 +12,8 @@ export enum SYSTEM_EVENTS {
     BEGIN_CONNECTION = 'connection:Begin',
     // Commands
     COMMANDS_LOADED = 'commands:Loaded',
+    // Debug
+    DEBUG_COLSHAPE_VERTICES = 'debug:Colshape:Vertices',
     // Discord
     DISCORD_OPEN = 'discord:Open',
     DISCORD_CLOSE = 'discord:Close',
@@ -23,11 +25,13 @@ export enum SYSTEM_EVENTS {
     //
     INTERACTION = 'player:Interact',
     INTERACTION_FUEL = 'fuel:Action',
-    INTERACTION_JOB = 'job:Interaction',
     INTERACTION_JOB_ACTION = 'job:Action',
     INTERACTION_TEXT_CREATE = 'interaction:Text:Create',
     INTERACTION_TEXT_REMOVE = 'interaction:Text:Remove',
     INTERACTION_TEMPORARY = 'interaction:Temporary',
+    // ITEM
+    ITEM_CONSUME = 'item:Consume',
+
     // IPL
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
@@ -60,6 +64,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_TASK_TIMELINE = 'task:Timeline',
     PLAYER_EMIT_INVENTORY_NOTIFICATION = 'inventory:Notification',
     PLAYER_EMIT_TEMP_OBJECT_LERP = 'temp:Object:Lerp',
+    PLAYER_EMIT_WHEEL_MENU = 'wheelMenu:Dynamic',
     //
     PLAYER_RELOAD = 'player:ForceReload',
     //
@@ -115,6 +120,7 @@ export enum SYSTEM_EVENTS {
     SCREENSHOT_POPULATE_DATA = 'screenshot:Populate:Data',
     SCREENSHOT_CREATE = 'screenshot:Create',
     //
+    SET_PLAYER_DECORATIONS = 'character:Ped:Decoration',
     SYNC_APPEARANCE = 'character:Appearance',
     SYNC_EQUIPMENT = 'character:Equipment',
     //

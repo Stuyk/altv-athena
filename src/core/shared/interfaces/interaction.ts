@@ -71,6 +71,14 @@ export interface Interaction {
     isPlayerOnly?: boolean;
 
     /**
+     * Overrides the height for the interaction.
+     *
+     * @type {number}
+     * @memberof Interaction
+     */
+    height?: number;
+
+    /**
      * If set to true debug information will be sent to console.
      * @type {boolean}
      * @memberof Interaction

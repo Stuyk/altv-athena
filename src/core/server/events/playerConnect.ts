@@ -1,6 +1,8 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { AgendaSystem } from '../systems/agenda';
+import { DevModeOverride } from '../systems/dev';
+import ConfigUtil from '../utility/config';
 
 /**
  * Called when a player connects to the server.
@@ -8,6 +10,13 @@ import { AgendaSystem } from '../systems/agenda';
  * @param  {alt.Player} player
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
+    // ! - Allows Dev Mode to Use First Account or Accounts
+    if (ConfigUtil.get().USE_DEV_MODE) {
+        alt.logWarning(`Using DEV_MODE. Only one account will be used.`);
+        DevModeOverride.login(player);
+        return;
+    }
+
     // What is this? It's a series of steps the client follows for a login sequence.
     AgendaSystem.goNext(player, true);
 }

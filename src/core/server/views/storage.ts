@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { IStorage } from '../../shared/interfaces/iStorage';
-import { playerFuncs } from '../extensions/extPlayer';
 import { StorageSystem } from '../systems/storage';
 import { View_Events_Storage } from '../../shared/enums/views';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
@@ -10,6 +9,7 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { IResponse } from '../../shared/interfaces/iResponse';
 import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/storageRules';
 import SystemRules from '../systems/rules';
+import { Athena } from '../api/athena';
 
 /**
  * Bind a player id to a storage container.
@@ -41,16 +41,16 @@ export class StorageView {
     static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
         const storage = await StorageSystem.get(storage_id);
         if (!storage) {
-            playerFuncs.emit.notification(player, `~r~No Storage Available`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, `~r~No Storage Available`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             StorageSystem.setRestricted(storage_id, false);
             return;
         }
 
         // Check if storage is Restricted
         if (StorageSystem.isRestricted(storage_id)) {
-            playerFuncs.emit.notification(player, `~r~Storage in Use`);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.notification(player, `~r~Storage in Use`);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -177,7 +177,7 @@ export class StorageView {
         if (!StorageView.isMatchingStorageBinding(player, id)) {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
@@ -186,7 +186,7 @@ export class StorageView {
         if (!storageCache[player.id]) {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
@@ -222,8 +222,8 @@ export class StorageView {
 
             const result = rule(player, itemClone, amount);
             if (!result.status) {
-                playerFuncs.emit.notification(player, result.response);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                Athena.player.emit.notification(player, result.response);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
@@ -248,28 +248,28 @@ export class StorageView {
         // If the item is not found in the inventory.
         // Simply add the item and remove the item from storage.
         // Granted the item in storage is the same amount.
-        const invInfo = playerFuncs.inventory.getFreeInventorySlot(player);
+        const invInfo = Athena.player.inventory.getFreeInventorySlot(player);
         if (invIndex <= -1 || !canStack) {
             if (amount < storageCache[player.id].items[index].quantity) {
                 storageCache[player.id].items[index].quantity -= amount;
             } else {
                 const removedItem = storageCache[player.id].items.splice(index, 1)[0];
                 if (!removedItem) {
-                    playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                    Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                     return;
                 }
             }
 
             itemClone.quantity = amount;
-            if (!playerFuncs.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
-                playerFuncs.emit.notification(player, `Inventory is Full`);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            if (!Athena.player.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
+                Athena.player.emit.notification(player, `Inventory is Full`);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
 
-            playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
-            playerFuncs.save.field(player, 'inventory', player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.player.sync.inventory(player);
             await StorageSystem.update(storageCache[player.id]._id.toString(), {
                 items: storageCache[player.id].items,
             });
@@ -290,18 +290,18 @@ export class StorageView {
                 storageCache[player.id].items.splice(index, 1)[0];
             }
 
-            playerFuncs.save.field(player, 'inventory', player.data.inventory);
-            playerFuncs.sync.inventory(player);
+            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.player.sync.inventory(player);
             await StorageSystem.update(storageCache[player.id]._id.toString(), {
                 items: storageCache[player.id].items,
             });
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
-            playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+            Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
             return;
         }
 
         if (!invInfo) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -318,9 +318,9 @@ export class StorageView {
         if (amount >= 1) {
             itemClone.quantity = amount;
 
-            if (!playerFuncs.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
-                playerFuncs.emit.notification(player, `Inventory is Full`);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            if (!Athena.player.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
+                Athena.player.emit.notification(player, `Inventory is Full`);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
@@ -330,11 +330,11 @@ export class StorageView {
             storageCache[player.id].items.splice(index, 1)[0];
         }
 
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.sync.inventory(player);
+        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.player.sync.inventory(player);
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
         alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
     }
 
     /**
@@ -359,7 +359,7 @@ export class StorageView {
         if (!StorageView.isMatchingStorageBinding(player, id)) {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
@@ -367,27 +367,27 @@ export class StorageView {
         if (!storageCache[player.id]) {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
 
         if (!player.data.inventory[index]) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
 
         // Prevent items from being moved that are untradeable.
         if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_TRADE)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
 
         // Prevent items from being moved that are undroppable.
         if (!isFlagEnabled(player.data.inventory[index].behavior, ITEM_TYPE.CAN_DROP)) {
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
             return;
         }
@@ -410,7 +410,7 @@ export class StorageView {
 
         if (existingIndex <= -1 && storageCache[player.id].items.length + 1 > storageCache[player.id].maxSize) {
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
-            playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
 
@@ -436,8 +436,8 @@ export class StorageView {
 
             const result = rule(player, itemClone, amount);
             if (!result.status) {
-                playerFuncs.emit.notification(player, result.response);
-                playerFuncs.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                Athena.player.emit.notification(player, result.response);
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
         }
@@ -445,7 +445,7 @@ export class StorageView {
         // Literally the exact amount to remove.
         // Remove the item from the inventory entirely.
         if (amount === itemClone.quantity) {
-            if (!playerFuncs.inventory.inventoryRemove(player, player.data.inventory[index].slot)) {
+            if (!Athena.player.inventory.inventoryRemove(player, player.data.inventory[index].slot)) {
                 alt.emitClient(
                     player,
                     View_Events_Storage.Refresh,
@@ -484,11 +484,11 @@ export class StorageView {
             storageCache[player.id].items.push(itemClone);
         }
 
-        playerFuncs.save.field(player, 'inventory', player.data.inventory);
-        playerFuncs.sync.inventory(player);
+        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.player.sync.inventory(player);
 
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
-        playerFuncs.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
+        Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
         alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
     }
 

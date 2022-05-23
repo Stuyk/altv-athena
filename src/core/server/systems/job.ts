@@ -7,7 +7,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
-import { playerFuncs } from '../extensions/extPlayer';
+import { Athena } from '../api/athena';
 import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
@@ -52,8 +52,6 @@ export class Job {
         JobInstances[this.player.id] = this;
         this.startTime = Date.now();
         this.syncObjective();
-
-        playerFuncs.emit.message(player, '/quitjob - To stop this job.');
     }
 
     /**
@@ -192,7 +190,7 @@ export class Job {
         }
 
         if (objective.particle) {
-            playerFuncs.emit.particle(this.player, objective.particle, true);
+            Athena.player.emit.particle(this.player, objective.particle, true);
         }
 
         this.goToNextObjective();
@@ -212,7 +210,7 @@ export class Job {
 
         if (this.player.valid) {
             alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
-            playerFuncs.emit.message(this.player, reason);
+            Athena.player.emit.message(this.player, reason);
         }
 
         this.removeAllVehicles();
@@ -282,7 +280,7 @@ export class Job {
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_WEAPON)) {
-            if (playerFuncs.inventory.hasWeapon(this.player)) {
+            if (Athena.player.inventory.hasWeapon(this.player)) {
                 return false;
             }
         }
@@ -383,7 +381,7 @@ export class Job {
 
         if (this.objectives.length <= 0) {
             this.removeAllVehicles();
-            playerFuncs.emit.message(this.player, `Job Completed`);
+            Athena.player.emit.message(this.player, `Job Completed`);
             alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
             return;
         }
@@ -424,7 +422,7 @@ export class Job {
             }
 
             alt.nextTick(() => {
-                playerFuncs.emit.animation(
+                Athena.player.emit.animation(
                     this.player,
                     objective.animation.dict,
                     objective.animation.name,

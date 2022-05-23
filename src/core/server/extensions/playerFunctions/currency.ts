@@ -121,9 +121,27 @@ function subAllCurrencies(player: alt.Player, amount: number): boolean {
     return true;
 }
 
-export default {
+/**
+ * Used to override an existing Athena.player.inventory function.
+ * Requires the same exact name of the function, and the parameters.
+ *
+ * @param {string} functionName
+ * @param {(player: alt.Player, ...args: any[]) => void} callback
+ */
+function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {
+    if (!exports[functionName]) {
+        alt.logError(`Athena.player.currency does not provide an export named ${functionName}`);
+    }
+
+    exports[functionName] = callback;
+}
+
+export const exports = {
     set,
     sub,
     add,
     subAllCurrencies,
+    override,
 };
+
+export default exports;

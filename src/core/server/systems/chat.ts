@@ -8,15 +8,153 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { getClosestTypes } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { playerFuncs } from '../extensions/extPlayer';
+import { consoleCommand } from '../decorators/commands';
 import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 
 const maxMessageLength: number = 128;
 const printCommands = false;
 let commandCount = 0;
-let commandInterval;
+let commandInterval: number | undefined;
+
+const tagOrComment = new RegExp(
+    '<(?:' +
+        // Comment body.
+        '!--(?:(?:-*[^->])*--+|-?)' +
+        // Special "raw text" elements whose content should be elided.
+        '|script\\b' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        '>[\\s\\S]*?</script\\s*' +
+        '|style\\b' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        '>[\\s\\S]*?</style\\s*' +
+        // Regular name
+        '|/?[a-z]' +
+        '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*' +
+        ')>',
+    'gi',
+);
+
+class InternalFunctions {
+    /**
+     * Handles incoming messages from player input.
+     * @export
+     * @param {alt.Player} player
+     * @param {string} message
+     * @return {Promise<void>}
+     */
+    static handleMessage(player: alt.Player, message: string): void {
+        // Prevent Chatting from Non-Logged In User
+        if (!player.discord || !player.data) {
+            return;
+        }
+
+        if (message.length >= maxMessageLength) {
+            return;
+        }
+
+        if (message.charAt(0) === '/') {
+            message = message.trim().slice(1);
+
+            if (message.length < 0) {
+                return;
+            }
+
+            message = message
+                .replace(tagOrComment, '')
+                .replace('/</g', '&lt;')
+                .replace('/', '')
+                .replace(/<\/?[^>]+(>|$)/gm, '');
+
+            const args = message.split(' ');
+            const commandName = args.shift();
+            InternalFunctions.handleCommand(player, commandName, ...args);
+            return;
+        }
+
+        if (!DEFAULT_CONFIG.CHAT_ENABLED) {
+            return;
+        }
+
+        if (player.data.isDead) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
+            return;
+        }
+
+        const parsedMessage = message
+            .replace(tagOrComment, '')
+            .replace('/</g', '&lt;')
+            .replace('/', '')
+            .replace(/<\/?[^>]+(>|$)/gm, '');
+
+        const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
+            player.pos,
+            alt.Player.all,
+            DEFAULT_CONFIG.CHAT_DISTANCE,
+            ['discord'], // Used to check if they're logged in.
+        );
+
+        emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${parsedMessage}`);
+    }
+
+    /**
+     * Handles command routing and execution from player messages.
+     * @export
+     * @param {alt.Player} player
+     * @param {string} commandName
+     * @param {...any[]} args
+     * @return {Promise<void>}
+     */
+    static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
+        const commandInfo = ChatController.commands[commandName];
+        if (!commandInfo || !commandInfo.func) {
+            Athena.player.emit.message(
+                player,
+                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`,
+            );
+            return;
+        }
+
+        if (commandInfo.permission) {
+            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
+
+            if (!isAdminPermissionValid) {
+                Athena.player.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`,
+                );
+                return;
+            }
+        }
+
+        if (commandInfo.characterPermissions) {
+            if (!player.data.characterPermission) {
+                Athena.player.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
+                );
+                return;
+            }
+
+            const isCharacterPermValid = isFlagEnabled(
+                player.data.characterPermission,
+                commandInfo.characterPermissions,
+            );
+
+            if (!isCharacterPermValid) {
+                Athena.player.emit.message(
+                    player,
+                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
+                );
+                return;
+            }
+        }
+
+        commandInfo.func(player, ...args);
+    }
+}
 
 export default class ChatController {
     static commands: { [key: string]: Command } = {};
@@ -32,8 +170,11 @@ export default class ChatController {
      * @memberof ChatController
      */
     static addCommand(name: string, description: string, permissions: PERMISSIONS, callback: Function): void {
-        if (commandInterval) {
-            alt.clearTimeout(commandInterval);
+        if (typeof commandInterval === 'number') {
+            try {
+                alt.clearTimeout(commandInterval);
+            } catch (err) {}
+            commandInterval = null;
         }
 
         commandInterval = alt.setTimeout(() => {
@@ -74,8 +215,11 @@ export default class ChatController {
         characterPermissions: CHARACTER_PERMISSIONS,
         callback: Function,
     ): void {
-        if (commandInterval) {
-            alt.clearTimeout(commandInterval);
+        if (typeof commandInterval === 'number') {
+            try {
+                alt.clearTimeout(commandInterval);
+            } catch (err) {}
+            commandInterval = null;
         }
 
         commandInterval = alt.setTimeout(() => {
@@ -118,111 +262,6 @@ export default class ChatController {
             ChatController.commands[aliasNames[i]] = ChatController.commands[originalName];
             alt.log(`[Athena] Registered Alias ${aliasNames[i]}`);
         }
-    }
-
-    /**
-     * Handles incoming messages from player input.
-     * @export
-     * @param {alt.Player} player
-     * @param {string} message
-     * @return {Promise<void>}
-     */
-    static handleMessage(player: alt.Player, message: string): void {
-        // Prevent Chatting from Non-Logged In User
-        if (!player.discord || !player.data) {
-            return;
-        }
-
-        if (message.length >= maxMessageLength) {
-            return;
-        }
-
-        if (message.charAt(0) === '/') {
-            message = message.trim().slice(1);
-
-            if (message.length < 0) {
-                return;
-            }
-
-            const args = message.split(' ');
-            const commandName = args.shift();
-            ChatController.handleCommand(player, commandName, ...args);
-            return;
-        }
-
-        if (!DEFAULT_CONFIG.CHAT_ENABLED) {
-            return;
-        }
-
-        if (player.data.isDead) {
-            playerFuncs.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
-            return;
-        }
-
-        const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
-            player.pos,
-            alt.Player.all,
-            DEFAULT_CONFIG.CHAT_DISTANCE,
-            ['discord'], // Used to check if they're logged in.
-        );
-
-        emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${message}`);
-    }
-
-    /**
-     * Handles command routing and execution from player messages.
-     * @export
-     * @param {alt.Player} player
-     * @param {string} commandName
-     * @param {...any[]} args
-     * @return {Promise<void>}
-     */
-    static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
-        const commandInfo = ChatController.commands[commandName];
-        if (!commandInfo || !commandInfo.func) {
-            playerFuncs.emit.message(
-                player,
-                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`,
-            );
-            return;
-        }
-
-        if (commandInfo.permission) {
-            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
-
-            if (!isAdminPermissionValid) {
-                playerFuncs.emit.message(
-                    player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_ADMIN)}`,
-                );
-                return;
-            }
-        }
-
-        if (commandInfo.characterPermissions) {
-            if (!player.data.characterPermission) {
-                playerFuncs.emit.message(
-                    player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
-                );
-                return;
-            }
-
-            const isCharacterPermValid = isFlagEnabled(
-                player.data.characterPermission,
-                commandInfo.characterPermissions,
-            );
-
-            if (!isCharacterPermValid) {
-                playerFuncs.emit.message(
-                    player,
-                    `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
-                );
-                return;
-            }
-        }
-
-        commandInfo.func(player, ...args);
     }
 
     /**
@@ -304,14 +343,43 @@ export default class ChatController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_COMMANDS, commandList);
     }
 
+    @consoleCommand('/dumpcommands')
     static printAllCommands() {
+        let allCommands: Array<Command> = [];
+
         Object.keys(ChatController.commands).forEach((key) => {
             const cmdData = ChatController.commands[key];
-            console.log(`${cmdData.description}`);
+            allCommands.push(cmdData);
+            console.log(cmdData);
         });
+
+        let adminCommands = allCommands.filter((x) =>
+            isFlagEnabled(x.permission, PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR),
+        );
+
+        let moderatorCommands = allCommands.filter((x) => isFlagEnabled(x.permission, PERMISSIONS.MODERATOR));
+
+        let normalCommands = allCommands.filter(
+            (x) => !isFlagEnabled(x.permission, PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR),
+        );
+
+        console.log(`ADMIN`);
+        for (let i = 0; i < adminCommands.length; i++) {
+            console.log(adminCommands[i].description);
+        }
+
+        console.log('MODERATOR');
+        for (let i = 0; i < moderatorCommands.length; i++) {
+            console.log(moderatorCommands[i].description);
+        }
+
+        console.log('USER');
+        for (let i = 0; i < normalCommands.length; i++) {
+            console.log(normalCommands[i].description);
+        }
     }
 }
 
 alt.on(SYSTEM_EVENTS.COMMANDS_LOADED, () => {
-    alt.onClient(View_Events_Chat.Send, ChatController.handleMessage);
+    alt.onClient(View_Events_Chat.Send, InternalFunctions.handleMessage);
 });

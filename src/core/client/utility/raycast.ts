@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Vector3 } from '../../shared/interfaces/vector';
-import { rotationToDirection } from './math';
+import { getDirectionFromRotation, rotationToDirection } from './math';
 
 export default class Raycast {
     /**
@@ -75,7 +75,7 @@ export default class Raycast {
      * @memberof Raycast
      */
     static positionFromCamera(flags: number = -1, useShapeTest: boolean = false, radius: number = 5): Vector3 | null {
-        const start = native.getFinalRenderedCamCoord();
+        const start = alt.getCamPos();
         const forwardVector = rotationToDirection(native.getFinalRenderedCamRot(2));
         const end = {
             x: start.x + forwardVector.x * 2000,
@@ -96,6 +96,46 @@ export default class Raycast {
         }
 
         return position;
+    }
+
+    /**
+     * A raycast that returns information about what and who may have been hit.
+     * The raycast is performed from the camera rotation / position to a further end location.
+     *
+     * @static
+     * @param {number} [flags=-1]
+     * @param {boolean} [useShapeTest=false]
+     * @param {number} [radius=5]
+     * @return {*}  {{ didComplete: boolean; didHit?: boolean; position?: Vector3; entityHit?: number }}
+     * @memberof Raycast
+     */
+    static simpleRaycast(
+        flags: number = -1,
+        maxDistance = 25,
+        useShapeTest: boolean = true,
+        radius: number = 5,
+    ): { didComplete: boolean; didHit?: boolean; position?: Vector3; entityHit?: number } {
+        const start = native.getFinalRenderedCamCoord();
+        const forwardVector = getDirectionFromRotation(native.getFinalRenderedCamRot(2));
+        const end = {
+            x: start.x + forwardVector.x * maxDistance,
+            y: start.y + forwardVector.y * maxDistance,
+            z: start.z + forwardVector.z * maxDistance,
+        };
+
+        const [didComplete, didHit, position, surfaceNormal, entityHit] = Raycast.performRaycast(
+            start,
+            end,
+            flags,
+            radius,
+            useShapeTest,
+        );
+
+        if (!didHit) {
+            return { didComplete: false };
+        }
+
+        return { didComplete: true, didHit, position, entityHit };
     }
 
     /**

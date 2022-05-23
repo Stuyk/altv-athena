@@ -1,4 +1,3 @@
-import * as alt from 'alt-server';
 import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
 import logger from './athenaLogger';
@@ -37,6 +36,10 @@ export default {
         }
 
         const file = fs.readFileSync(DefaultServerCFGName).toString();
+        if (file.includes(`env: "dev"`)) {
+            config.USE_DEV_MODE = true;
+        }
+
         if (file.includes('vue-athena')) {
             try {
                 const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {

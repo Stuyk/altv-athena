@@ -1,7 +1,6 @@
 import { Collections } from '../interface/iDatabaseCollections';
 import { IConfig } from '../interface/iConfig';
 
-// Leave these alone. Learn to use the .env file.
 // All of these are default values and should not be changed.
 const DEFAULT_DATABASE_NAME = 'athena';
 const DEFAULT_MONGO_URL = `mongodb://USERNAME:PASSWORD@0.0.0.0:27017`;

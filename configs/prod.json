@@ -1,6 +1,7 @@
 {
     "name": "Athena 3.0.0",
     "host": "0.0.0.0",
+    "env": "prod",
     "port": 7788,
     "players": 512,
     "password": null,
@@ -10,7 +11,7 @@
     "website": "athenaframework.com",
     "language": "en",
     "description": "Standard Production Configuration",
-    "debug": false,
+    "debug": true,
     "streamingDistance": 400,
     "migrationDistance": 150,
     "timeout": 1,
@@ -20,7 +21,6 @@
         "js-module"
     ],
     "resources": [
-        "webview",
         "webviews",
         "core"
     ],
