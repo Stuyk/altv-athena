@@ -309,6 +309,11 @@ export class FactionFuncs {
             await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Factions);
         }
 
+        const target = alt.Player.all.find((p) => p.data && p.data.faction === faction._id.toString());
+        if (target) {
+            target.data.faction = null;
+        }
+
         delete faction.members[characterID];
         const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
         if (didUpdate.status) {
