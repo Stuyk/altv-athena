@@ -1062,26 +1062,26 @@ async function removeAmountFromInventoryReturnRemainingAmount(
     amount: number,
 ): Promise<number> {
     let amountToBeRemoved = amount;
-
-    let inventoryItem = null;
-    do {
-        inventoryItem = await player.data.inventory.find((item) => item.dbName === itemDbName);
-        if (inventoryItem) {
-            //So how much is left on this stack?
-            if (inventoryItem.quantity == amountToBeRemoved) {
-                inventoryRemove(player, inventoryItem.slot);
-                return 0;
-            } else if (inventoryItem.quantity > amountToBeRemoved) {
-                //Everything we want to remove is here
-                inventoryItem.quantity -= amountToBeRemoved;
-                return 0;
-            } else {
-                //We remove the whole item-stack
-                amountToBeRemoved -= inventoryItem.quantity;
-                inventoryRemove(player, inventoryItem.slot);
+    for (let i = player.data.inventory.length - 1; i >= 0; i--) {
+        let inventoryItem = player.data.inventory[i];
+        if (inventoryItem && amountToBeRemoved > 0) {
+            if (inventoryItem.dbName === itemDbName) {
+                //So how much is left on this stack?
+                if (inventoryItem.quantity == amountToBeRemoved) {
+                    inventoryRemove(player, inventoryItem.slot);
+                    return 0;
+                } else if (inventoryItem.quantity > amountToBeRemoved) {
+                    //Everything we want to remove is here
+                    inventoryItem.quantity -= amountToBeRemoved;
+                    return 0;
+                } else {
+                    //We remove the whole item-stack
+                    amountToBeRemoved -= inventoryItem.quantity;
+                    inventoryRemove(player, inventoryItem.slot);
+                }
             }
         }
-    } while (amountToBeRemoved > 0 && inventoryItem)
+    }
     return amountToBeRemoved;
 }
 
