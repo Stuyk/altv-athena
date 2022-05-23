@@ -629,7 +629,7 @@ export class VehicleSystem {
         );
 
         if (!vehicleInfo || !vehicleInfo.storage) {
-            playerConst.emit.notification(player, `This vehicle does not have storage.`);
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
             playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
