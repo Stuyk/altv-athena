@@ -1049,11 +1049,11 @@ function getTotalWeight(player: alt.Player): number {
 /**
  * Remove amount of item from this player's inventory by looking into slots and quantities
  * Does not save after removing the items.
- * Returns amount left if inventory hadn't enough to remove.
+ *
  * @param {alt.Player} player
  * @param {itemToRemove} item to Remove
  * @param {amount} amount to be removed from Inventory
- * @return {number}
+ * @return {number} amount left if inventory hadn't enough to remove.
  * @memberof InventoryPrototype
  */
 async function removeAmountFromInventoryReturnRemainingAmount(
@@ -1061,18 +1061,21 @@ async function removeAmountFromInventoryReturnRemainingAmount(
     itemDbName: string,
     amount: number,
 ): Promise<number> {
-    const itemToRemove = await ItemFactory.get(itemDbName);
     let amountToBeRemoved = amount;
-    for (let inventoryItem of player.data.inventory) {
-        if (amountToBeRemoved > 0) {
-            if (inventoryItem.dbName === itemToRemove.dbName && inventoryItem.rarity === itemToRemove.rarity) {
+    for (let i = player.data.inventory.length - 1; i >= 0; i--) {
+        let inventoryItem = player.data.inventory[i];
+        if (inventoryItem && amountToBeRemoved > 0) {
+            if (inventoryItem.dbName === itemDbName) {
                 //So how much is left on this stack?
-                if (inventoryItem.quantity > amountToBeRemoved) {
-                    //Everything we want to sell is here
+                if (inventoryItem.quantity == amountToBeRemoved) {
+                    inventoryRemove(player, inventoryItem.slot);
+                    return 0;
+                } else if (inventoryItem.quantity > amountToBeRemoved) {
+                    //Everything we want to remove is here
                     inventoryItem.quantity -= amountToBeRemoved;
                     return 0;
                 } else {
-                    //We sell the whole item-stack
+                    //We remove the whole item-stack
                     amountToBeRemoved -= inventoryItem.quantity;
                     inventoryRemove(player, inventoryItem.slot);
                 }
