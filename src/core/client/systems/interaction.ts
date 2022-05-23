@@ -202,8 +202,6 @@ export class InteractionController {
                     },
                 });
             }
-
-            console.log(`Current Item Count: ${closestItems.length}`);
         }
 
         if (closestTempInteraction) {
@@ -248,7 +246,7 @@ export class InteractionController {
             return;
         }
 
-        WheelMenu.open('Hello World', wheelOptions, true);
+        WheelMenu.open('Options', wheelOptions, true);
     }
 
     static appendText(originalText: string, key: number, description: string): string {
