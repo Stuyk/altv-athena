@@ -58,12 +58,11 @@ export default class VehicleMenu {
         vehicleMenuInjections.push(callback);
     }
 
-    static openMenu() {
+    static openMenu(vehicle: alt.Vehicle) {
         if (isAnyMenuOpen()) {
             return;
         }
 
-        const vehicle = getClosestVectorByPos<alt.Vehicle>(alt.Player.local.pos, alt.Vehicle.all, 'pos');
         if (!vehicle || !vehicle.valid) {
             return;
         }
@@ -77,9 +76,17 @@ export default class VehicleMenu {
 
         if (!alt.Player.local.vehicle) {
             const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
+            const isLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
+
+            options.push({
+                name: isLocked ? 'Unlock' : 'Lock',
+                color: isLocked ? 'green' : 'red',
+                icon: isLocked ? 'icon-lock-open' : 'icon-lock',
+                emitServer: VEHICLE_EVENTS.SET_LOCK,
+            });
 
             // Not Pushing & Vehicle is Currently Unlocked
-            if (!PushVehicle.isPushing() && native.getVehicleDoorLockStatus(vehicle.scriptID) !== 2 && !isDestroyed) {
+            if (!PushVehicle.isPushing() && !isLocked && !isDestroyed) {
                 options.push({
                     name: 'Push',
                     callback: PushVehicle.start,
@@ -110,6 +117,15 @@ export default class VehicleMenu {
                     continue;
                 }
             }
+        } else {
+            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+
+            options.push({
+                name: engineOn ? 'Off' : 'On',
+                icon: 'icon-engine-fill',
+                color: engineOn ? 'red' : 'green',
+                emitServer: VEHICLE_EVENTS.SET_ENGINE,
+            });
         }
 
         WheelMenu.open('Vehicle Options', options);

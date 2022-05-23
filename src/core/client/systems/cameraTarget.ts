@@ -13,14 +13,14 @@ interface ClosestTarget {
     type?: 'npc' | 'player' | 'object' | 'vehicle';
 }
 
-let displayLabel = '';
+let displayLabel = '.';
 let temporaryLabel = null;
 let isProcessing = false;
 let closestTarget: ClosestTarget;
 
 class InternalFunctions {
     static init() {
-        Timer.createInterval(InternalFunctions.find, 500);
+        Timer.createInterval(InternalFunctions.find, 500, 'cameraTarget.ts');
         alt.setInterval(() => {
             if (isAnyMenuOpen(true)) {
                 return;
@@ -148,4 +148,4 @@ export class CameraTarget {
     }
 }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
+alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);

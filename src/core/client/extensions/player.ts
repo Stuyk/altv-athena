@@ -13,8 +13,5 @@ declare module 'alt-client' {
         isActionMenuOpen: boolean;
         isLeaderboardOpen: boolean;
         isNoClipOn: boolean;
-
-        // Closest Item
-        closestItem: GroundItem | null;
     }
 }
