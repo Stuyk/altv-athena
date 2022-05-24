@@ -164,7 +164,7 @@ export const LOCALE_KEYS = {
     // World
     WORLD_TIME_IS: `world-time-is`,
     // Storage
-    STORAGE_NO_AVAILABLE: 'storage-no-available',
+    STORAGE_NOT_AVAILABLE: 'storage-not-available',
     STORAGE_IN_USE: 'storage-in-use',
     INVENTORY_IS_FULL: 'inventory-is-full',
     // =====================
