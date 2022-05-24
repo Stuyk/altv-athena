@@ -171,7 +171,7 @@ export default {
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
     // Storage
-    [LOCALE_KEYS.STORAGE_NO_AVAILABLE]: `No Storage Available`,
+    [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `No Storage Available`,
     [LOCALE_KEYS.STORAGE_IN_USE]: `Storage in Use`,
     [LOCALE_KEYS.INVENTORY_IS_FULL]: `Inventory is Full`,
     // ============================
