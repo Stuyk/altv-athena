@@ -43,7 +43,7 @@ export class StorageView {
     static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
         const storage = await StorageSystem.get(storage_id);
         if (!storage) {
-            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_NO_AVAILABLE));
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_NOT_AVAILABLE));
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             StorageSystem.setRestricted(storage_id, false);
             return;
