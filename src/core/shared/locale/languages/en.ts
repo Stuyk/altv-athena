@@ -101,6 +101,7 @@ export default {
     [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_EQUIPMENT]: `_%_ was added to your equipment.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_TOOLBAR]: `_%_ was added to your toolbar.`,
+    [LOCALE_KEYS.ITEM_WAS_DESTROYED_ON_DROP]: `_%_ was destroyed on drop.`,
     // Job
     [LOCALE_KEYS.JOB_ALREADY_WORKING]: `You are already working on a job.`,
     [LOCALE_KEYS.JOB_NOT_WORKING]: `You are not currently working.`,
@@ -169,6 +170,10 @@ export default {
     [LOCALE_KEYS.FACTION_COULDNT_QUIT]: `Could not quit faction because you are the leader.`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
+    // Storage
+    [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `No Storage Available`,
+    [LOCALE_KEYS.STORAGE_IN_USE]: `Storage in Use`,
+    [LOCALE_KEYS.INVENTORY_IS_FULL]: `Inventory is Full`,
     // ============================
     // WebView Locales Start Here
     // ============================

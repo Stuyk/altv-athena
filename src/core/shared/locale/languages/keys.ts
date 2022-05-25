@@ -93,6 +93,7 @@ export const LOCALE_KEYS = {
     ITEM_WAS_ADDED_INVENTORY: `item-was-added-inventory`,
     ITEM_WAS_ADDED_EQUIPMENT: `item-was-added-equipment`,
     ITEM_WAS_ADDED_TOOLBAR: `item-was-added-toolbar`,
+    ITEM_WAS_DESTROYED_ON_DROP: `item-was-destroyed-on-drop`,
     // Label
     LABEL_ON: `label-on`,
     LABEL_OFF: `label-off`,
@@ -162,6 +163,10 @@ export const LOCALE_KEYS = {
     FACTION_COULDNT_QUIT: 'faction-couldnt-quit',
     // World
     WORLD_TIME_IS: `world-time-is`,
+    // Storage
+    STORAGE_NOT_AVAILABLE: 'storage-not-available',
+    STORAGE_IN_USE: 'storage-in-use',
+    INVENTORY_IS_FULL: 'inventory-is-full',
     // =====================
     // WebView Locales
     // =====================

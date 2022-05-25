@@ -17,6 +17,8 @@ import { ServerObjectController } from '../streamers/object';
 import { PlayerEvents } from '../events/playerEvents';
 import { ItemEffects } from '../systems/itemEffects';
 import { playerConst } from '../api/consts/constPlayer';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
@@ -382,7 +384,7 @@ export class InventoryView {
         // Destroys an item when it is dropped on the ground if the behavior calls for it.
         if (isFlagEnabled(itemClone.behavior, ITEM_TYPE.DESTROY_ON_DROP)) {
             playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
-            playerConst.emit.message(player, `${itemClone.name} was destroyed on drop.`);
+            playerConst.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_WAS_DESTROYED_ON_DROP, itemClone.name));
             return;
         }
 
