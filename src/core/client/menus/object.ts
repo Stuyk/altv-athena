@@ -4,11 +4,11 @@ import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
-import { ClientPedController } from '../streamers/ped';
 
 type ObjectMenuInjection = (modelHash: number, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
+const validHashes: Array<number> = [];
 
 export class ObjectWheelMenu {
     /**
@@ -65,5 +65,18 @@ export class ObjectWheelMenu {
         }
 
         WheelMenu.open('Object', options);
+    }
+
+    /**
+     * Check if an object is registered for interaction.
+     *
+     * @static
+     * @param {number} modelHash
+     * @return {*}
+     * @memberof InteractionController
+     */
+    static isModelValidObject(modelHash: number) {
+        const index = validHashes.findIndex((x) => `${x}` === `${modelHash}`);
+        return index >= 0;
     }
 }

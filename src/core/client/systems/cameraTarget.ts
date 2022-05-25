@@ -8,6 +8,7 @@ import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { InteractionController } from './interaction';
+import { ObjectWheelMenu } from '../menus/object';
 
 interface ClosestTarget {
     scriptID: number;
@@ -41,7 +42,7 @@ class InternalFunctions {
 
                 if (closestTarget.type === 'object') {
                     const model = native.getEntityModel(closestTarget.scriptID);
-                    if (!InteractionController.isValidObject(model)) {
+                    if (!ObjectWheelMenu.isModelValidObject(model)) {
                         return;
                     }
                 }

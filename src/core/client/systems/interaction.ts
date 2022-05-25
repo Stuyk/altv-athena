@@ -19,7 +19,6 @@ import { WheelMenu } from '../views/wheelMenu';
 import { CameraTarget } from './cameraTarget';
 
 const TIME_BETWEEN_CHECKS = 500;
-let validObjectModelHashes: Array<number> = [];
 let hookInteractions: Array<(interactions: Array<IClientInteraction>) => void> = [];
 let tick: number;
 let pressedKey = false;
@@ -39,36 +38,6 @@ export class InteractionController {
         }
 
         InteractionController.registerKeybinds();
-    }
-
-    /**
-     * Check if an object is registered for interaction.
-     *
-     * @static
-     * @param {number} modelHash
-     * @return {*}
-     * @memberof InteractionController
-     */
-    static isValidObject(modelHash: number) {
-        const index = validObjectModelHashes.findIndex((x) => `${x}` === `${modelHash}`);
-        return index >= 0;
-    }
-
-    /**
-     * Adds a specific model to show interaction text on.
-     *
-     * @static
-     * @param {(string | number)} model
-     * @return {*}
-     * @memberof InteractionController
-     */
-    static addValidModel(model: string | number) {
-        if (typeof model === 'number') {
-            validObjectModelHashes.push(model);
-            return;
-        }
-
-        validObjectModelHashes.push(alt.hash(model));
     }
 
     /**
@@ -212,8 +181,8 @@ export class InteractionController {
             // Object Type
             if (closestTarget.type === 'object') {
                 const hash = native.getEntityModel(closestTarget.scriptID);
-                const index = validObjectModelHashes.findIndex((x) => `${x}` === `${hash}`);
-                if (index !== -1) {
+                const isValid = ObjectWheelMenu.isModelValidObject(hash);
+                if (isValid) {
                     wheelOptions.push({
                         name: `Object`,
                         icon: 'icon-lightbulb',
