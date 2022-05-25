@@ -130,14 +130,14 @@ export class ClientPedController {
 
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
-            if (pedInfo[key] !== scriptId) {
+            if (`${pedInfo[key]}` !== `${scriptId}`) {
                 continue;
             }
 
             const localPedIndex = localPeds.findIndex((x) => x.uid === key);
             const addedPedIndex = addedPeds.findIndex((x) => x.uid === key);
 
-            if (localPedIndex <= -1 || addedPedIndex <= -1) {
+            if (localPedIndex <= -1 && addedPedIndex <= -1) {
                 continue;
             }
 
@@ -146,7 +146,7 @@ export class ClientPedController {
             }
 
             if (addedPedIndex >= 0) {
-                return addedPedIndex[addedPedIndex];
+                return addedPeds[addedPedIndex];
             }
 
             continue;

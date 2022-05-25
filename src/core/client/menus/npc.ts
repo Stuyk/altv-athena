@@ -7,7 +7,7 @@ import { WheelMenu } from '../views/wheelMenu';
 import { IPed } from '../../shared/interfaces/iPed';
 import { ClientPedController } from '../streamers/ped';
 
-type NpcMenuInjection = (ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
 const Injections: Array<NpcMenuInjection> = [];
 
@@ -43,6 +43,7 @@ export class NpcWheelMenu {
         }
 
         const ped = ClientPedController.get(scriptID);
+        console.log(JSON.stringify(ped));
         if (!ped) {
             return;
         }
@@ -57,7 +58,7 @@ export class NpcWheelMenu {
 
         for (const callback of Injections) {
             try {
-                options = callback(ped, options);
+                options = callback(scriptID, ped, options);
             } catch (err) {
                 console.warn(`Got NPC Menu Injection Error: ${err}`);
                 continue;
