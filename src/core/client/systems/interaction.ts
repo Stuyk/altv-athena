@@ -1,22 +1,19 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { View_Events_Inventory } from '../../shared/enums/views';
 import keyboardMap from '../../shared/information/keyboardMap';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { distance2d, getClosestVectorByPos } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
-import VehicleMenu from '../menus/vehicle';
+import { NpcWheelMenu } from '../menus/npc';
+import { ObjectWheelMenu } from '../menus/object';
+import { PlayerWheelMenu } from '../menus/player';
+import { VehicleWheelMenu } from '../menus/vehicle';
 import { ClientItemStreamer } from '../streamers/item';
-import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 import { WheelMenu } from '../views/wheelMenu';
 import { CameraTarget } from './cameraTarget';
@@ -146,7 +143,9 @@ export class InteractionController {
                         name: model,
                         icon: 'icon-directions_car',
                         data: [vehicle],
-                        callback: VehicleMenu.openMenu,
+                        callback: (_vehicle: alt.Vehicle) => {
+                            VehicleWheelMenu.openMenu(_vehicle);
+                        },
                     });
                 }
             }
@@ -160,8 +159,8 @@ export class InteractionController {
                         name: `Player`,
                         icon: 'icon-person',
                         data: [player],
-                        callback: () => {
-                            console.log(`Player Menu Not Implemented`);
+                        callback: (_player: alt.Player) => {
+                            PlayerWheelMenu.openMenu(_player);
                         },
                     });
                 }
@@ -173,8 +172,8 @@ export class InteractionController {
                     name: `NPC`,
                     icon: 'icon-user-tie',
                     data: [closestTarget.scriptID],
-                    callback: () => {
-                        console.log(`NPC Menu Not Implemented`);
+                    callback: (scriptID: number) => {
+                        NpcWheelMenu.openMenu(scriptID);
                     },
                 });
             }
@@ -185,8 +184,8 @@ export class InteractionController {
                     name: `Object`,
                     icon: 'icon-lightbulb',
                     data: [closestTarget.scriptID],
-                    callback: () => {
-                        console.log(`Object Menu Not Implemented`);
+                    callback: (scriptID: number) => {
+                        ObjectWheelMenu.openMenu(scriptID);
                     },
                 });
             }
