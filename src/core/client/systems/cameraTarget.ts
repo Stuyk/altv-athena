@@ -6,21 +6,23 @@ import { isAnyMenuOpen } from '../utility/menus';
 import Raycast from '../utility/raycast';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
+import { KEY_BINDS } from '../../shared/enums/keyBinds';
 
 interface ClosestTarget {
     scriptID: number;
     pos: Vector3;
+    normalizedZ?: number;
     type?: 'npc' | 'player' | 'object' | 'vehicle';
 }
 
-let displayLabel = '.';
+let displayLabel = `[~b~${String.fromCharCode(KEY_BINDS.INTERACT)}~w~]~n~.`;
 let temporaryLabel = null;
 let isProcessing = false;
 let closestTarget: ClosestTarget;
 
 class InternalFunctions {
     static init() {
-        Timer.createInterval(InternalFunctions.find, 500, 'cameraTarget.ts');
+        Timer.createInterval(InternalFunctions.find, 250, 'cameraTarget.ts');
         alt.setInterval(() => {
             if (isAnyMenuOpen(true)) {
                 return;
@@ -37,11 +39,21 @@ class InternalFunctions {
                 }
 
                 if (temporaryLabel) {
-                    drawText3D(temporaryLabel, pos, 0.75, new alt.RGBA(255, 255, 255, 255));
+                    drawText3D(
+                        temporaryLabel,
+                        new alt.Vector3(pos.x, pos.y, closestTarget.normalizedZ),
+                        0.75,
+                        new alt.RGBA(255, 255, 255, 255),
+                    );
                     return;
                 }
 
-                drawText3D(displayLabel, pos, 0.75, new alt.RGBA(255, 255, 255, 255));
+                drawText3D(
+                    displayLabel,
+                    new alt.Vector3(pos.x, pos.y, closestTarget.normalizedZ),
+                    0.75,
+                    new alt.RGBA(255, 255, 255, 255),
+                );
             }
         }, 0);
     }
@@ -62,7 +74,7 @@ class InternalFunctions {
         isProcessing = true;
 
         // Do the processing for camera target
-        const raycastInfo = Raycast.simpleRaycast(16 | 8 | 4 | 2 | 1);
+        const raycastInfo = Raycast.simpleRaycast(16 | 8 | 4 | 2 | 1, 15);
         if (!raycastInfo.didComplete || !raycastInfo.didHit) {
             closestTarget = null;
             temporaryLabel = null;
@@ -77,9 +89,15 @@ class InternalFunctions {
             return;
         }
 
+        const coords = native.getEntityCoords(raycastInfo.entityHit, false);
+        const model = native.getEntityModel(raycastInfo.entityHit);
+        const [_, min, max] = native.getModelDimensions(model);
+        const halfHeight = (Math.abs(min.z) + Math.abs(max.z)) / 2;
+
         closestTarget = {
             pos: raycastInfo.position,
             scriptID: raycastInfo.entityHit,
+            normalizedZ: coords.z - Math.abs(min.z) + halfHeight,
         };
 
         if (alt.Player.all.find((p) => `${p.scriptID}` === `${raycastInfo.entityHit}`)) {
