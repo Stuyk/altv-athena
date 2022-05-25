@@ -7,6 +7,7 @@ import Raycast from '../utility/raycast';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
+import { InteractionController } from './interaction';
 
 interface ClosestTarget {
     scriptID: number;
@@ -36,6 +37,13 @@ class InternalFunctions {
                 const pos = native.getEntityCoords(closestTarget.scriptID, false);
                 if (!pos) {
                     return;
+                }
+
+                if (closestTarget.type === 'object') {
+                    const model = native.getEntityModel(closestTarget.scriptID);
+                    if (!InteractionController.isValidObject(model)) {
+                        return;
+                    }
                 }
 
                 if (temporaryLabel) {
