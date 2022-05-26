@@ -15,18 +15,27 @@ function update(vehicle: alt.Vehicle): void {
     });
 }
 
-alt.on('streamSyncedMetaChange', (entity: alt.Entity, key: string, value: any) => {
-    if (!(entity instanceof alt.Vehicle)) return;
-    if (key !== 'handlingData') return;
-
-    const vehicle: alt.Vehicle = entity;
-    const handlingData: Partial<IVehicleHandling> = value;
+function syncVehicleHandling(vehicle: alt.Vehicle): void {
+    const handlingData: Partial<IVehicleHandling> = vehicle.getStreamSyncedMeta('handlingData');
 
     vehicle.handling.reset();
 
     for (const [key, val] of Object.entries(handlingData)) {
         vehicle.handling[key] = val;
     }
+}
+
+alt.on('streamSyncedMetaChange', (entity: alt.Entity, key: string, value: any) => {
+    if (!(entity instanceof alt.Vehicle)) return;
+    if (!entity.valid || key !== 'handlingData') return;
+
+    syncVehicleHandling(entity);
+});
+
+alt.on('gameEntityCreate', (entity: alt.Entity) => {
+    if (!(entity instanceof alt.Vehicle)) return;
+
+    syncVehicleHandling(entity);
 });
 
 export default {
