@@ -1,6 +1,7 @@
 import alt from 'alt-server';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
+import VehicleFuncs from '../../../../../server/extensions/vehicleFuncs';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class VehicleCommands {
@@ -78,5 +79,45 @@ class VehicleCommands {
             Athena.player.emit.message(player, 'Invalid Vehicle Model');
             return;
         }
+    }
+
+    @command(['setVehicleHandling', 'sh'], 'Sets vehicle handling value', PERMISSIONS.ADMIN)
+    private static setVehicleHandlingCommand(player: alt.Player, key: string, value: string): void {
+        const vehicle = player.vehicle;
+        if (!vehicle?.valid) return;
+        if (!vehicle?.data) return;
+
+        if (!vehicle.data.tuning) vehicle.data.tuning = {};
+        if (!vehicle.data.tuning.handling) vehicle.data.tuning.handling = {};
+
+        const nValue = parseInt(value) ?? 0;
+        vehicle.data.tuning.handling[key] = nValue;
+        vehicle.setStreamSyncedMeta('handlingData', vehicle.data.tuning.handling);
+
+        VehicleFuncs.save(vehicle, vehicle.data);
+    }
+
+    @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
+    private static fullTuneVehicleCommand(player: alt.Player): void {
+        const vehicle = player.vehicle;
+        if (!vehicle?.valid || !vehicle?.data) return;
+
+        if (!vehicle.data.tuning) vehicle.data.tuning = {};
+        if (!vehicle.data.tuning.mods) vehicle.data.tuning.mods = [];
+
+        for (let i = 0; i < 70; ++i) {
+            const maxId = vehicle.getModsCount(i);
+
+            if (maxId > 0) {
+                vehicle.setMod(i, maxId);
+
+                vehicle.data.tuning.mods.push({
+                    id: i,
+                    value: maxId,
+                });
+            }
+        }
+
+        VehicleFuncs.save(vehicle, vehicle.data);
     }
 }
