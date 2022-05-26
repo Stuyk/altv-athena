@@ -99,6 +99,7 @@ export const LOCALE_KEYS = {
     LABEL_OFF: `label-off`,
     LABEL_BROADCAST: 'label-broadcast',
     LABEL_ENGINE: `label-engine`,
+    LABEL_HOSPITAL: `label-hospital`,
     // Player
     PLAYER_ARMOUR_SET_TO: `player-armour-set-to`,
     PLAYER_HEALTH_SET_TO: `player-health-set-to`,
