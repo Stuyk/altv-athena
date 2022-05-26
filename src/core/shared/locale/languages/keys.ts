@@ -60,6 +60,9 @@ export const LOCALE_KEYS = {
     DISCORD_NOT_WHITELISTED: `discord-not-whitelisted`,
     DISCORD_ADDED_WHITELIST: `discord-added-whitelist`,
     DISCORD_REMOVED_WHITELIST: `discord-removed-whitelist`,
+    DISCORD_ID_ALREADY_LOGGED_IN: `discord-id-already-logged-in`,
+    DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE: `discord-could-not-communicate-with-auth-service`,
+    DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE: `discord-could-not-decrypt-from-auth-service`,
     // Fuel
     FUEL_EXIT_VEHICLE_FIRST: `fuel-must-exit-vehicle-first`,
     FUEL_UPDATE_VEHICLE_FIRST: `fuel-must-enter-exit-vehicle-first`,
@@ -99,6 +102,8 @@ export const LOCALE_KEYS = {
     LABEL_OFF: `label-off`,
     LABEL_BROADCAST: 'label-broadcast',
     LABEL_ENGINE: `label-engine`,
+    LABEL_HOSPITAL: `label-hospital`,
+    LABEL_BANNED: `label-banned`,
     // Player
     PLAYER_ARMOUR_SET_TO: `player-armour-set-to`,
     PLAYER_HEALTH_SET_TO: `player-health-set-to`,
@@ -144,7 +149,6 @@ export const LOCALE_KEYS = {
     VEHICLE_NOT_RIGHT_SIDE_UP: 'vehicle-not-right-side-up',
     VEHICLE_IS_ALREADY_BEING_PUSHED: 'vehicle-is-already-being-pushed',
     VEHICLE_STORAGE_VIEW_NAME: 'vehicle-storage-view-name',
-
     // Faction
     FACTION_PLAYER_IS_ALREADY_IN_FACTION: 'faction-player-is-already-in-faction',
     FACTION_CANNOT_CHANGE_OWNERSHIP: 'faction-cannot-change-ownership',

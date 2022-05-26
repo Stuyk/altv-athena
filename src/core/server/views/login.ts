@@ -8,6 +8,8 @@ import { sha256Random } from '../utility/encryption';
 import ConfigUtil from '../utility/config';
 import { AgendaSystem } from '../systems/agenda';
 import { playerConst } from '../api/consts/constPlayer';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
@@ -62,7 +64,7 @@ async function finishLogin(player: alt.Player) {
     };
 
     const result = await axios.request(options).catch((err) => {
-        alt.emitClient(player, 'Discord:Fail', 'Could not communicate with Authorization service.');
+        alt.emitClient(player, 'Discord:Fail', LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE));
         return null;
     });
 
@@ -71,7 +73,7 @@ async function finishLogin(player: alt.Player) {
     }
 
     const data = await Ares.decrypt(JSON.stringify(result.data)).catch((err) => {
-        alt.emitClient(player, 'Discord:Fail', 'Could not decrypt data from Authorization service.');
+        alt.emitClient(player, 'Discord:Fail', LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE));
         return null;
     });
 

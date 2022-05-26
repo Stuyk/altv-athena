@@ -7,6 +7,8 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { InteractionShape } from '../extensions/extColshape';
 import { Athena } from '../api/athena';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 const interactions: Array<InteractionShape> = [];
 
@@ -163,7 +165,7 @@ class InternalFunctions {
         }
 
         if (dist >= DEFAULT_CONFIG.MAX_INTERACTION_DISTANCE) {
-            Athena.player.emit.notification(player, `~r~Too far away to interact.`);
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INTERACTION_TOO_FAR_AWAY));
             return;
         }
 

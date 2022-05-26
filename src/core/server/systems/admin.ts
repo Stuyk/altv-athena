@@ -3,6 +3,8 @@ import Database from '@stuyk/ezmongodb';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
 import Logger from '../utility/athenaLogger';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 export class AdminController {
     /**
@@ -18,7 +20,7 @@ export class AdminController {
             return false;
         }
 
-        player.kick(`[Banned] ${reason}`);
+        player.kick(`${LocaleController.get(LOCALE_KEYS.LABEL_BANNED)} ${reason}`);
         Database.updatePartialData(player.accountData._id, { banned: true, reason }, Collections.Accounts);
         Logger.info(`(${player.discord.id}) Has been banned from the server.`);
         return true;
