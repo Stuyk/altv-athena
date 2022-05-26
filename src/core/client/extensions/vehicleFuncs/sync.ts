@@ -17,6 +17,7 @@ function update(vehicle: alt.Vehicle): void {
 
 function syncVehicleHandling(vehicle: alt.Vehicle): void {
     const handlingData: Partial<IVehicleHandling> = vehicle.getStreamSyncedMeta('handlingData');
+    if (!handlingData) return;
 
     vehicle.handling.reset();
 
