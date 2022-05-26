@@ -900,6 +900,11 @@ export default class VehicleFuncs {
     static setMod(vehicle: alt.Vehicle, id: number, value: number): void {
         if (!vehicle?.valid) return;
 
+        if (value < 0) {
+            VehicleFuncs.removeMod(vehicle, id);
+            return;
+        }
+
         vehicle.setMod(id, value);
 
         if (!vehicle.isTemporary) {
@@ -912,7 +917,7 @@ export default class VehicleFuncs {
 
     static removeMod(vehicle: alt.Vehicle, id: number): void {
         if (!vehicle?.valid) return;
-        vehicle.setMod(id, 0); // TODO: might be 255, needs testing
+        vehicle.setMod(id, 0);
 
         if (vehicle.data?.tuning?.mods) {
             vehicle.data.tuning.mods = vehicle.data.tuning.mods.filter((mod) => mod.id !== id);
