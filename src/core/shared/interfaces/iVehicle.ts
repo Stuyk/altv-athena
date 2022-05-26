@@ -171,6 +171,8 @@ export interface IVehicle {
      *         b: number;
      *         a: number;
      *     }}
+     *
+     * @deprecated use tuning.primaryColor instead
      * @memberof IVehicle
      */
     color?: RGB | number;
@@ -178,6 +180,7 @@ export interface IVehicle {
     /**
      * Secondary color of the vehicle.
      * @type {RGB}
+     * @deprecated use tuning.secondaryColor instead
      * @memberof IVehicle
      */
     color2?: RGB | number;
