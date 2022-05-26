@@ -112,6 +112,7 @@ export default {
     [LOCALE_KEYS.LABEL_BROADCAST]: `Broadcast`,
     [LOCALE_KEYS.LABEL_ENGINE]: `Engine`,
     [LOCALE_KEYS.LABEL_HOSPITAL]: `Hospital`,
+    [LOCALE_KEYS.LABEL_BANNED]: `[Banned]`,
     // Player
     [LOCALE_KEYS.PLAYER_IS_TOO_FAR]: `That player is too far away.`,
     [LOCALE_KEYS.PLAYER_IS_TOO_CLOSE]: `That player is too close.`,
