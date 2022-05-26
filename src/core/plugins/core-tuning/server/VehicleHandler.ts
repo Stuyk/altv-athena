@@ -7,41 +7,7 @@ import { IVehicle } from '../../../shared/interfaces/iVehicle';
 export class VehicleHandler {
     public static init(): void {
         VehicleEvents.on(ATHENA_EVENTS_VEHICLE.SPAWNED, this.handleVehicleSpawned);
-
-        /*VehicleFuncs.addBeforeCreateInjection((vehicle: IVehicle) => {
-            const tuning = {
-                modkit: 1,
-                mods: [],
-
-                primaryColor: new alt.RGBA(255, 0, 255, 255),
-                secondaryColor: new alt.RGBA(0, 0, 0, 255),
-                customTires: false,
-                darkness: 0,
-                dashboardColor: 0,
-                headlightColor: 0,
-                interiorColor: 0,
-                lightsMultiplier: 0,
-                livery: 0,
-                neon: {
-                    left: false,
-                    right: true,
-                    front: true,
-                    back: true,
-                },
-                neonColor: new alt.RGBA(0, 255, 255, 255),
-                numberPlateIndex: 1,
-                pearlColor: 2,
-                roofLivery: 0,
-                roofState: true,
-                tireSmokeColor: new alt.RGBA(255, 157, 0, 255),
-                wheelColor: 0,
-                windowTint: 1,
-                driftModeEnabled: false,
-            };
-
-            // vehicle.tuning = tuning;
-            // return vehicle;
-        });*/
+        VehicleFuncs.addBeforeCreateInjection(VehicleHandler.convertOldVehicleData);
     }
 
     private static handleVehicleSpawned(vehicle: alt.Vehicle): void {
@@ -109,5 +75,50 @@ export class VehicleHandler {
         if (typeof data.wheelColor == 'number') vehicle.wheelColor = data.wheelColor;
         if (typeof data.windowTint == 'number') vehicle.windowTint = data.windowTint;
         if (typeof data.driftModeEnabled == 'boolean') vehicle.driftModeEnabled = data.driftModeEnabled;
+    }
+
+    private static convertOldVehicleData(vehicle: IVehicle): IVehicle | void {
+        let hasChanged = false;
+
+        if (vehicle.pearl) {
+            if (!vehicle.tuning) vehicle.tuning = {};
+            vehicle.tuning.pearlColor = vehicle.pearl;
+            delete vehicle.pearl;
+            hasChanged = true;
+        }
+
+        if (vehicle.color) {
+            if (!vehicle.tuning) vehicle.tuning = {};
+
+            if (typeof vehicle.color == 'number') vehicle.tuning.primaryColor = vehicle.color;
+            else
+                vehicle.tuning.primaryColor = new alt.RGBA(
+                    vehicle.color.r,
+                    vehicle.color.g,
+                    vehicle.color.b,
+                    vehicle.color.a ?? 255,
+                );
+
+            delete vehicle.color;
+            hasChanged = true;
+        }
+
+        if (vehicle.color2) {
+            if (!vehicle.tuning) vehicle.tuning = {};
+
+            if (typeof vehicle.color2 == 'number') vehicle.tuning.secondaryColor = vehicle.color2;
+            else
+                vehicle.tuning.secondaryColor = new alt.RGBA(
+                    vehicle.color2.r,
+                    vehicle.color2.g,
+                    vehicle.color2.b,
+                    vehicle.color2.a ?? 255,
+                );
+
+            delete vehicle.color2;
+            hasChanged = true;
+        }
+
+        if (hasChanged) return vehicle;
     }
 }
