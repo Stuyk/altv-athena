@@ -1,4 +1,5 @@
 import alt from 'alt-server';
+import { Athena } from '../../../server/api/athena';
 import { VehicleEvents } from '../../../server/events/vehicleEvents';
 import VehicleFuncs from '../../../server/extensions/vehicleFuncs';
 import { ATHENA_EVENTS_VEHICLE } from '../../../shared/enums/athenaEvents';
@@ -126,14 +127,23 @@ export class VehicleHandler {
             if (!vehicle.tuning) vehicle.tuning = {};
             vehicle.tuning.primaryFinish = vehicle.finish1;
             delete vehicle.finish1;
+            hasChanged = true;
         }
 
         if (vehicle.finish2) {
             if (!vehicle.tuning) vehicle.tuning = {};
             vehicle.tuning.secondaryFinish = vehicle.finish2;
             delete vehicle.finish2;
+            hasChanged = true;
         }
 
-        if (hasChanged) return vehicle;
+        if (hasChanged) {
+            Athena.database.funcs.removePartialData(
+                vehicle._id,
+                { color: true, color2: true, finish1: true, finish2: true, pearl: true },
+                Athena.database.collections.Vehicles,
+            );
+            return vehicle;
+        }
     }
 }
