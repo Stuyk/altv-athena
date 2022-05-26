@@ -67,6 +67,9 @@ export default {
     [LOCALE_KEYS.DISCORD_NOT_WHITELISTED]: `_%_ is not whitelisted.`,
     [LOCALE_KEYS.DISCORD_ADDED_WHITELIST]: `_%_ was added to the whitelist.`,
     [LOCALE_KEYS.DISCORD_REMOVED_WHITELIST]: `_%_ was removed from the whitelist.`,
+    [LOCALE_KEYS.DISCORD_ID_ALREADY_LOGGED_IN]: `That ID is already logged in.`,
+    [LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE]: `Could not communicate with Authorization service.`,
+    [LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE]: `Could not decrypt data from Authorization service.`,
     // FUEL
     [LOCALE_KEYS.FUEL_EXIT_VEHICLE_FIRST]: `You must exit your vehicle before fueling.`,
     [LOCALE_KEYS.FUEL_UPDATE_VEHICLE_FIRST]: `You must enter and exit a vehicle first to fuel.`,
