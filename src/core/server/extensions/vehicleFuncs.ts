@@ -9,6 +9,7 @@ import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
+import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -881,5 +882,288 @@ export default class VehicleFuncs {
             );
 
         return vehicle;
+    }
+
+    static setModKit(vehicle: alt.Vehicle, modKit: number): void {
+        if (!vehicle?.valid) return;
+
+        vehicle.modKit = modKit;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.modkit = modKit;
+        }
+    }
+
+    static setMod(vehicle: alt.Vehicle, id: number, value: number): void {
+        if (!vehicle?.valid) return;
+
+        vehicle.setMod(id, value);
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            if (!vehicle.data?.tuning.mods) vehicle.data.tuning.mods = [];
+
+            vehicle.data.tuning.mods.push({ id, value });
+        }
+    }
+
+    static removeMod(vehicle: alt.Vehicle, id: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.setMod(id, 0); // TODO: might be 255, needs testing
+
+        if (vehicle.data?.tuning?.mods) {
+            vehicle.data.tuning.mods = vehicle.data.tuning.mods.filter((mod) => mod.id !== id);
+        }
+    }
+
+    static setHandling(vehicle: alt.Vehicle, key: keyof IVehicleHandling, value: number): void {
+        if (!vehicle?.valid) return;
+
+        const handlingData = VehicleFuncs.getHandling(vehicle);
+        handlingData[<string>key] = value;
+        vehicle.setStreamSyncedMeta('handlingData', handlingData);
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.handling = handlingData;
+        }
+    }
+
+    static getHandling(vehicle: alt.Vehicle): Partial<IVehicleHandling> {
+        if (!vehicle?.valid) return {};
+
+        return vehicle.getStreamSyncedMeta('handlingData') ?? {};
+    }
+
+    static removeHandling(vehicle: alt.Vehicle, key: keyof IVehicleHandling): void {
+        if (!vehicle?.valid) return;
+
+        const handlingData = VehicleFuncs.getHandling(vehicle);
+        delete handlingData[<string>key];
+        vehicle.setStreamSyncedMeta('handlingData', handlingData);
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.handling = handlingData;
+        }
+    }
+
+    static setPrimaryColor(vehicle: alt.Vehicle, color: number | alt.RGBA): void {
+        if (!vehicle?.valid) return;
+
+        if (typeof color == 'number') vehicle.primaryColor = color;
+        else vehicle.customPrimaryColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.primaryColor = color;
+        }
+    }
+
+    static setPrimaryFinish(vehicle: alt.Vehicle, finish: number): void {
+        if (!vehicle?.valid) return;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.primaryFinish = finish;
+        }
+    }
+
+    static setSecondaryColor(vehicle: alt.Vehicle, color: number | alt.RGBA): void {
+        if (!vehicle?.valid) return;
+
+        if (typeof color == 'number') vehicle.secondaryColor = color;
+        else vehicle.customSecondaryColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.secondaryColor = color;
+        }
+    }
+
+    static setSecondaryFinish(vehicle: alt.Vehicle, finish: number): void {
+        if (!vehicle?.valid) return;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.secondaryFinish = finish;
+        }
+    }
+
+    static setPearlColor(vehicle: alt.Vehicle, color: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.pearlColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.pearlColor = color;
+        }
+    }
+
+    static setTires(vehicle: alt.Vehicle, customTires: boolean): void {
+        if (!vehicle?.valid) return;
+        vehicle.customTires = customTires;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.customTires = customTires;
+        }
+    }
+
+    static setDarkness(vehicle: alt.Vehicle, darkness: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.darkness = darkness;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.darkness = darkness;
+        }
+    }
+
+    static setDashboardColor(vehicle: alt.Vehicle, color: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.dashboardColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.dashboardColor = color;
+        }
+    }
+
+    static setHeadlightColor(vehicle: alt.Vehicle, color: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.headlightColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.headlightColor = color;
+        }
+    }
+
+    static setInteriorColor(vehicle: alt.Vehicle, color: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.interiorColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.interiorColor = color;
+        }
+    }
+
+    static setLightsMultiplier(vehicle: alt.Vehicle, multiplier: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.lightsMultiplier = multiplier;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.lightsMultiplier = multiplier;
+        }
+    }
+
+    static setLivery(vehicle: alt.Vehicle, livery: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.livery = livery;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.livery = livery;
+        }
+    }
+
+    static setRoofLivery(vehicle: alt.Vehicle, livery: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.roofLivery = livery;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.roofLivery = livery;
+        }
+    }
+
+    static setNeon(vehicle: alt.Vehicle, neon: Partial<alt.IVehicleNeon>): void {
+        if (!vehicle?.valid) return;
+
+        vehicle.neon = {
+            left: neon.left ?? false,
+            right: neon.right ?? false,
+            front: neon.front ?? false,
+            back: neon.back ?? false,
+        };
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.neon = neon;
+        }
+    }
+
+    static setNeonColor(vehicle: alt.Vehicle, color: alt.RGBA): void {
+        if (!vehicle?.valid) return;
+        vehicle.neonColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.neonColor = color;
+        }
+    }
+
+    static setNumberPlateIndex(vehicle: alt.Vehicle, index: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.numberPlateIndex = index;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.numberPlateIndex = index;
+        }
+    }
+
+    static setRoofState(vehicle: alt.Vehicle, state: boolean): void {
+        if (!vehicle?.valid) return;
+        vehicle.roofState = state;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.roofState = state;
+        }
+    }
+
+    static setTireSmokeColor(vehicle: alt.Vehicle, color: alt.RGBA): void {
+        if (!vehicle?.valid) return;
+        vehicle.tireSmokeColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.tireSmokeColor = color;
+        }
+    }
+
+    static setWheelColor(vehicle: alt.Vehicle, color: number): void {
+        if (!vehicle?.valid) return;
+        vehicle.wheelColor = color;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.wheelColor = color;
+        }
+    }
+
+    static setWindowTint(vehicle: alt.Vehicle, tint: alt.WindowTint): void {
+        if (!vehicle?.valid) return;
+        vehicle.windowTint = tint;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.windowTint = tint;
+        }
+    }
+
+    static setDriftModeEnabled(vehicle: alt.Vehicle, enabled: boolean): void {
+        if (!vehicle?.valid) return;
+        vehicle.driftModeEnabled = enabled;
+
+        if (!vehicle.isTemporary) {
+            if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+            vehicle.data.tuning.driftModeEnabled = enabled;
+        }
     }
 }
