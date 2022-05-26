@@ -96,7 +96,7 @@ export class VehicleHandler {
                     vehicle.color.r,
                     vehicle.color.g,
                     vehicle.color.b,
-                    vehicle.color.a ?? 255,
+                    vehicle.color.a,
                 );
 
             delete vehicle.color;
@@ -112,7 +112,7 @@ export class VehicleHandler {
                     vehicle.color2.r,
                     vehicle.color2.g,
                     vehicle.color2.b,
-                    vehicle.color2.a ?? 255,
+                    vehicle.color2.a,
                 );
 
             delete vehicle.color2;

@@ -258,8 +258,8 @@ export class PaintShopView {
      * It takes in a player, the color, color2, finish1, finish2, and pearl and updates the vehicle's
      * color, color2, finish1, finish2, and pearl
      * @param player - alt.Player - The player who is purchasing the vehicle.
-     * @param {RGB | number} color - The primary color of the vehicle.
-     * @param {RGB | number} color2 - The second color of the vehicle.
+     * @param {RGBA | number} color - The primary color of the vehicle.
+     * @param {RGBA | number} color2 - The second color of the vehicle.
      * @param {number} finish1 - number
      * @param {number} finish2 - number
      * @param {number} pearl - number
@@ -267,8 +267,8 @@ export class PaintShopView {
      */
     static purchase(
         player: alt.Player,
-        color: RGB | number,
-        color2: RGB | number,
+        color: RGBA | number,
+        color2: RGBA | number,
         finish1: number,
         finish2: number,
         pearl: number,
@@ -289,33 +289,30 @@ export class PaintShopView {
             return;
         }
 
-        let whatToUpdate = {};
-
         if (color !== undefined && color !== null) {
-            whatToUpdate['color'] = color;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.primaryColor = color;
         }
 
         if (color2 !== undefined && color2 !== null) {
-            whatToUpdate['color2'] = color2;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.secondaryColor = color;
         }
 
         if (finish1 !== undefined && finish1 !== null) {
-            whatToUpdate['finish1'] = finish1;
+            player.vehicle.data.finish1 = finish1;
         }
 
         if (finish2 !== undefined && finish2 !== null) {
-            whatToUpdate['finish2'] = finish2;
+            player.vehicle.data.finish2 = finish1;
         }
 
         if (pearl !== undefined && pearl !== null) {
-            whatToUpdate['pearl'] = pearl;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.pearlColor = pearl;
         }
 
-        Object.keys(whatToUpdate).forEach((key) => {
-            player.vehicle.data[key] = whatToUpdate[key];
-        });
-
         InternalFunctions.updatePaint(player.vehicle);
-        VehicleFuncs.save(player.vehicle, whatToUpdate);
+        VehicleFuncs.save(player.vehicle, player.vehicle.data);
     }
 }
