@@ -157,6 +157,7 @@ export interface IVehicle {
      * Pearl Color, -1 does not apply
      *
      * @type {number}
+     * @deprecated Use `tuning.pearlColor` instead.
      * @memberof IVehicle
      */
     pearl?: number;
@@ -172,7 +173,7 @@ export interface IVehicle {
      *         a: number;
      *     }}
      *
-     * @deprecated use tuning.primaryColor instead
+     * @deprecated use `tuning.primaryColor` instead.
      * @memberof IVehicle
      */
     color?: RGB | number;
@@ -180,7 +181,7 @@ export interface IVehicle {
     /**
      * Secondary color of the vehicle.
      * @type {RGB}
-     * @deprecated use tuning.secondaryColor instead
+     * @deprecated use `tuning.secondaryColor` instead
      * @memberof IVehicle
      */
     color2?: RGB | number;
