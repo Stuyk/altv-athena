@@ -141,6 +141,7 @@ export interface IVehicle {
      * The paint 'finish' on the vehicle. Only applies for custom colors.
      *
      * @type {number}
+     * @deprecated Use `tuning.primaryFinish` instead.
      * @memberof IVehicle
      */
     finish1?: number;
@@ -149,6 +150,7 @@ export interface IVehicle {
      * The paint 'finish' on the vehicle. Only applies for custom colors.
      *
      * @type {number}
+     * @deprecated Use `tuning.secondaryFinish` instead.
      * @memberof IVehicle
      */
     finish2?: number;

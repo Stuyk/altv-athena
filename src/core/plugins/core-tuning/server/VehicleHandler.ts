@@ -19,6 +19,9 @@ export class VehicleHandler {
         if (data.mods) data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
         if (data.handling) vehicle.setStreamSyncedMeta('handlingData', data.handling);
 
+        if (data.primaryFinish) vehicle.primaryColor = data.primaryFinish;
+        if (data.secondaryFinish) vehicle.secondaryColor = data.secondaryFinish;
+
         if (data.primaryColor) {
             if (typeof data.primaryColor === 'number') vehicle.primaryColor = data.primaryColor;
             else
@@ -117,6 +120,18 @@ export class VehicleHandler {
 
             delete vehicle.color2;
             hasChanged = true;
+        }
+
+        if (vehicle.finish1) {
+            if (!vehicle.tuning) vehicle.tuning = {};
+            vehicle.tuning.primaryFinish = vehicle.finish1;
+            delete vehicle.finish1;
+        }
+
+        if (vehicle.finish2) {
+            if (!vehicle.tuning) vehicle.tuning = {};
+            vehicle.tuning.secondaryFinish = vehicle.finish2;
+            delete vehicle.finish2;
         }
 
         if (hasChanged) return vehicle;

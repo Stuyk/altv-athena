@@ -8,7 +8,9 @@ export default interface IVehicleTuning {
     handling: Partial<IVehicleHandling>;
 
     primaryColor: number | RGBA;
+    primaryFinish: number;
     secondaryColor: number | RGBA;
+    secondaryFinish: number;
     customTires: boolean;
     darkness: number;
     dashboardColor: number;
