@@ -5,7 +5,7 @@ import { IVehicleNeon, NumberPlateStyle, RGBA, WindowTint } from 'alt-server';
 export default interface IVehicleTuning {
     modkit: number;
     mods: Array<IVehicleMod>;
-    handling: IVehicleHandling;
+    handling: Partial<IVehicleHandling>;
 
     primaryColor: number | RGBA;
     secondaryColor: number | RGBA;
