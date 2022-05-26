@@ -748,7 +748,7 @@ export default class VehicleFuncs {
     }
 
     static applyVehicleTuning(vehicle: alt.Vehicle): void {
-        if (!vehicle?.data?.tuning) return;
+        if (!vehicle?.data?.tuning) vehicle.data.tuning = {};
 
         const data = vehicle.data.tuning;
 
