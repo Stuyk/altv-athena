@@ -16,7 +16,7 @@ Helpful for seeing what default components look like.
                 :value="userInput"
                 :rules="[]"
                 class="fill-full-width"
-                placeholder="Search icon..."
+                :placeholder="getPlaceholder"
             />
         </div>
         <div class="icons mt-4">
@@ -56,6 +56,9 @@ export default defineComponent({
             }
 
             return this.icons.filter((x) => x.toLowerCase().includes(this.userInput));
+        },
+        getPlaceholder() {
+            return `Search ${this.icons.length} icons...`;
         },
     },
     components: {
