@@ -22,6 +22,7 @@ import { getMissingNumber } from '../utility/math';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;
+const DEFAULT_VEHICLE_COLOR = new alt.RGBA(255, 255, 255);
 const TEMPORARY_VEHICLE =
     Vehicle_Behavior.NO_KEY_TO_LOCK |
     Vehicle_Behavior.NO_KEY_TO_START |
@@ -301,8 +302,6 @@ export default class VehicleFuncs {
 
         // Setup Default Values
         vehicle.passengers = [];
-        vehicle.customPrimaryColor = new alt.RGBA(255, 255, 255, 255);
-        vehicle.customSecondaryColor = new alt.RGBA(255, 255, 255, 255);
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
         vehicle.setStreamSyncedMeta(
             VEHICLE_STATE.LOCK_INTERACTION_INFO,
@@ -753,8 +752,11 @@ export default class VehicleFuncs {
 
         const data = vehicle.data.tuning;
 
-        if (data.modkit) vehicle.modKit = data.modkit;
-        if (data.mods) data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+        if (data.modkit) {
+            vehicle.modKit = data.modkit;
+            if (data.mods) data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+        }
+
         if (data.handling) vehicle.setStreamSyncedMeta('handlingData', data.handling);
 
         if (data.primaryFinish) vehicle.primaryColor = data.primaryFinish;
@@ -769,7 +771,7 @@ export default class VehicleFuncs {
                     data.primaryColor.b,
                     data.primaryColor.a,
                 );
-        }
+        } else vehicle.customPrimaryColor = DEFAULT_VEHICLE_COLOR;
 
         if (data.secondaryColor) {
             if (typeof data.secondaryColor === 'number') vehicle.secondaryColor = data.secondaryColor;
@@ -780,7 +782,7 @@ export default class VehicleFuncs {
                     data.secondaryColor.b,
                     data.secondaryColor.a,
                 );
-        }
+        } else vehicle.customSecondaryColor = DEFAULT_VEHICLE_COLOR;
 
         if (data.customTires) vehicle.customTires = true;
         if (typeof data.darkness == 'number') vehicle.darkness = data.darkness;
