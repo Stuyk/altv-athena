@@ -102,18 +102,20 @@ class VehicleCommands {
         if (!vehicle?.valid || !vehicle?.data) return;
 
         if (!vehicle.data.tuning) vehicle.data.tuning = {};
-        if (!vehicle.data.tuning.mods) vehicle.data.tuning.mods = [];
+        delete vehicle.data.tuning.mods;
+
+        if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) Athena.vehicle.funcs.setModKit(vehicle, 1);
+
+        if (vehicle.modKit == 0) {
+            Athena.player.emit.message(player, "Vehicle doesn't have a mod kit.");
+            return;
+        }
 
         for (let i = 0; i < 70; ++i) {
             const maxId = vehicle.getModsCount(i);
 
             if (maxId > 0) {
-                vehicle.setMod(i, maxId);
-
-                vehicle.data.tuning.mods.push({
-                    id: i,
-                    value: maxId,
-                });
+                Athena.vehicle.funcs.setMod(vehicle, i, maxId);
             }
         }
 
