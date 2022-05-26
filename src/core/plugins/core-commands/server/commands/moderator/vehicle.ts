@@ -1,7 +1,6 @@
 import alt from 'alt-server';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
-import VehicleFuncs from '../../../../../server/extensions/vehicleFuncs';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 
 class VehicleCommands {
@@ -94,7 +93,7 @@ class VehicleCommands {
         vehicle.data.tuning.handling[key] = nValue;
         vehicle.setStreamSyncedMeta('handlingData', vehicle.data.tuning.handling);
 
-        VehicleFuncs.save(vehicle, vehicle.data);
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
     @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
@@ -118,6 +117,6 @@ class VehicleCommands {
             }
         }
 
-        VehicleFuncs.save(vehicle, vehicle.data);
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 }
