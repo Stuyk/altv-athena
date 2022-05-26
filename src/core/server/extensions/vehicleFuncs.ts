@@ -762,27 +762,26 @@ export default class VehicleFuncs {
         if (data.primaryFinish) vehicle.primaryColor = data.primaryFinish;
         if (data.secondaryFinish) vehicle.secondaryColor = data.secondaryFinish;
 
-        if (data.primaryColor) {
-            if (typeof data.primaryColor === 'number') vehicle.primaryColor = data.primaryColor;
-            else
-                vehicle.customPrimaryColor = new alt.RGBA(
-                    data.primaryColor.r,
-                    data.primaryColor.g,
-                    data.primaryColor.b,
-                    data.primaryColor.a,
-                );
-        } else vehicle.customPrimaryColor = DEFAULT_VEHICLE_COLOR;
+        if (!data.primaryColor) data.primaryColor = DEFAULT_VEHICLE_COLOR;
+        if (!data.secondaryColor) data.secondaryColor = DEFAULT_VEHICLE_COLOR;
 
-        if (data.secondaryColor) {
-            if (typeof data.secondaryColor === 'number') vehicle.secondaryColor = data.secondaryColor;
-            else
-                vehicle.customSecondaryColor = new alt.RGBA(
-                    data.secondaryColor.r,
-                    data.secondaryColor.g,
-                    data.secondaryColor.b,
-                    data.secondaryColor.a,
-                );
-        } else vehicle.customSecondaryColor = DEFAULT_VEHICLE_COLOR;
+        if (typeof data.primaryColor === 'number') vehicle.primaryColor = data.primaryColor;
+        else
+            vehicle.customPrimaryColor = new alt.RGBA(
+                data.primaryColor.r,
+                data.primaryColor.g,
+                data.primaryColor.b,
+                data.primaryColor.a,
+            );
+
+        if (typeof data.secondaryColor === 'number') vehicle.secondaryColor = data.secondaryColor;
+        else
+            vehicle.customSecondaryColor = new alt.RGBA(
+                data.secondaryColor.r,
+                data.secondaryColor.g,
+                data.secondaryColor.b,
+                data.secondaryColor.a,
+            );
 
         if (data.customTires) vehicle.customTires = true;
         if (typeof data.darkness == 'number') vehicle.darkness = data.darkness;
