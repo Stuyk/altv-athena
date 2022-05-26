@@ -187,5 +187,5 @@ export interface IVehicle {
      * @type {IVehicleTuning}
      * @memberof IVehicle
      */
-    tuning?: IVehicleTuning | null;
+    tuning?: Partial<IVehicleTuning> | null;
 }
