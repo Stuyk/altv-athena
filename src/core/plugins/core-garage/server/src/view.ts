@@ -126,7 +126,7 @@ export class GarageFunctions {
         const validVehicles = playerVehicles.filter((vehicle) => {
             // 4
             // Check if the VehicleData has this vehicle model.
-            const data = VehicleData.find((dat) => dat.name === vehicle.model);
+            const data = VehicleData.find((dat) => dat.name.toLowerCase() === vehicle.model.toLowerCase());
             if (!data) {
                 return false;
             }
