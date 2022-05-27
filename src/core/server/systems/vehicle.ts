@@ -399,7 +399,7 @@ export class VehicleSystem {
             return;
         }
 
-        if (!VehicleFuncs.hasOwnership(player, player.vehicle)) {
+        if (!VehicleFuncs.hasOwnership(player, vehicle)) {
             return;
         }
 
