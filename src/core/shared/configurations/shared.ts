@@ -13,5 +13,5 @@ export const SHARED_CONFIG = {
     // Voice
     VOICE_ON: false,
     // HUD
-    USE_24H_TIME_FORMAT_ON_HUD: true,
+    USE_24H_TIME_FORMAT_ON_HUD: false,
 };
