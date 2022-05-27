@@ -81,7 +81,7 @@ export class VehicleWheelMenu {
                         alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
                     },
                 });
-            } else if (PushVehicle.isPushing() && !BLACKLISTED_VEHICLE_TYPES.includes(type)) {
+            } else if (PushVehicle.isPushing()) {
                 options.push({
                     name: 'Stop Push',
                     callback: PushVehicle.clear,
