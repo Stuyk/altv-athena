@@ -141,6 +141,7 @@ export interface IVehicle {
      * The paint 'finish' on the vehicle. Only applies for custom colors.
      *
      * @type {number}
+     * @deprecated Use `tuning.primaryFinish` instead.
      * @memberof IVehicle
      */
     finish1?: number;
@@ -149,6 +150,7 @@ export interface IVehicle {
      * The paint 'finish' on the vehicle. Only applies for custom colors.
      *
      * @type {number}
+     * @deprecated Use `tuning.secondaryFinish` instead.
      * @memberof IVehicle
      */
     finish2?: number;
@@ -157,6 +159,7 @@ export interface IVehicle {
      * Pearl Color, -1 does not apply
      *
      * @type {number}
+     * @deprecated Use `tuning.pearlColor` instead.
      * @memberof IVehicle
      */
     pearl?: number;
@@ -171,6 +174,8 @@ export interface IVehicle {
      *         b: number;
      *         a: number;
      *     }}
+     *
+     * @deprecated use `tuning.primaryColor` instead.
      * @memberof IVehicle
      */
     color?: RGB | number;
@@ -178,6 +183,7 @@ export interface IVehicle {
     /**
      * Secondary color of the vehicle.
      * @type {RGB}
+     * @deprecated use `tuning.secondaryColor` instead
      * @memberof IVehicle
      */
     color2?: RGB | number;
@@ -187,5 +193,5 @@ export interface IVehicle {
      * @type {IVehicleTuning}
      * @memberof IVehicle
      */
-    tuning?: IVehicleTuning | null;
+    tuning?: Partial<IVehicleTuning> | null;
 }
