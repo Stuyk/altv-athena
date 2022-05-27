@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { WORLD_WEATHER } from '../../shared/enums/weather';
 
@@ -37,6 +38,13 @@ export class World {
     }
 
     static getTimeAsString(): string {
+        if (SHARED_CONFIG.USE_24H_TIME_FORMAT) {
+            const hour = World.normalizeValue(World.hour);
+            const minute = World.normalizeValue(World.minute);
+            
+            return `${hour}:${minute}`;
+        }
+        
         const timeOfDay = World.hour >= 12 ? 'PM' : 'AM';
         const hour = World.normalizeValue(World.normalizeHour(World.hour));
         const minute = World.normalizeValue(World.minute);
