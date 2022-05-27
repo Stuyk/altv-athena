@@ -6,8 +6,19 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
+import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 
 type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+
+// Push vehicle
+const BLACKLISTED_VEHICLE_TYPES = [
+    10, // Industrial
+    13, // Cycles
+    14, // Boats
+    15, // Helicopters
+    16, // Planes
+    21, // Trains
+];
 
 const Injections: Array<VehicleMenuInjection> = [];
 
@@ -52,13 +63,17 @@ export class VehicleWheelMenu {
                 emitServer: VEHICLE_EVENTS.SET_LOCK,
             });
 
+            const type = native.getVehicleClass(vehicle);
+
             // Not Pushing & Vehicle is Currently Unlocked
             if (!PushVehicle.isPushing() && !isLocked && !isDestroyed) {
-                options.push({
-                    name: 'Push',
-                    callback: PushVehicle.start,
-                    data: [vehicle],
-                });
+                if (!BLACKLISTED_VEHICLE_TYPES.includes(type)) {
+                    options.push({
+                        name: 'Push',
+                        callback: PushVehicle.start,
+                        data: [vehicle],
+                    });
+                }
 
                 options.push({
                     name: 'Open Storage',
@@ -66,7 +81,7 @@ export class VehicleWheelMenu {
                         alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
                     },
                 });
-            } else {
+            } else if (PushVehicle.isPushing()) {
                 options.push({
                     name: 'Stop Push',
                     callback: PushVehicle.clear,
