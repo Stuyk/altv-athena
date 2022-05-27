@@ -38,7 +38,7 @@ export class World {
     }
 
     static getTimeAsString(): string {
-        if (SHARED_CONFIG.USE_24H_TIME_FORMAT_ON_HUD) {
+        if (SHARED_CONFIG.USE_24H_TIME_FORMAT) {
             const hour = World.normalizeValue(World.hour);
             const minute = World.normalizeValue(World.minute);
             
