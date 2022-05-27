@@ -12,4 +12,6 @@ export const SHARED_CONFIG = {
     MAX_VEHICLE_INTERACTION_RANGE: 2.5,
     // Voice
     VOICE_ON: false,
+    // HUD
+    USE_24H_TIME_FORMAT_ON_HUD: true,
 };
