@@ -79,4 +79,46 @@ class VehicleCommands {
             return;
         }
     }
+
+    @command(['setVehicleHandling', 'sh'], 'Sets vehicle handling value', PERMISSIONS.ADMIN)
+    private static setVehicleHandlingCommand(player: alt.Player, key: string, value: string): void {
+        const vehicle = player.vehicle;
+        if (!vehicle?.valid) return;
+        if (!vehicle?.data) return;
+
+        if (!vehicle.data.tuning) vehicle.data.tuning = {};
+        if (!vehicle.data.tuning.handling) vehicle.data.tuning.handling = {};
+
+        const nValue = parseInt(value) ?? 0;
+        vehicle.data.tuning.handling[key] = nValue;
+        vehicle.setStreamSyncedMeta('handlingData', vehicle.data.tuning.handling);
+
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
+    }
+
+    @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
+    private static fullTuneVehicleCommand(player: alt.Player): void {
+        const vehicle = player.vehicle;
+        if (!vehicle?.valid || !vehicle?.data) return;
+
+        if (!vehicle.data.tuning) vehicle.data.tuning = {};
+        delete vehicle.data.tuning.mods;
+
+        if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) Athena.vehicle.funcs.setModKit(vehicle, 1);
+
+        if (vehicle.modKit == 0) {
+            Athena.player.emit.message(player, "Vehicle doesn't have a mod kit.");
+            return;
+        }
+
+        for (let i = 0; i < 70; ++i) {
+            const maxId = vehicle.getModsCount(i);
+
+            if (maxId > 0) {
+                Athena.vehicle.funcs.setMod(vehicle, i, maxId);
+            }
+        }
+
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
+    }
 }

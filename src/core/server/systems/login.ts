@@ -2,6 +2,8 @@ import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { playerConst } from '../api/consts/constPlayer';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { PlayerEvents } from '../events/playerEvents';
@@ -95,7 +97,7 @@ export class LoginController {
         );
 
         if (index >= 1) {
-            player.kick('That ID is already logged in.');
+            player.kick(LocaleController.get(LOCALE_KEYS.DISCORD_ID_ALREADY_LOGGED_IN));
             return;
         }
 

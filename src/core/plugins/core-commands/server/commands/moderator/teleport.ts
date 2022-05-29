@@ -49,4 +49,37 @@ class TeleportCommands {
             Athena.player.emit.message(player, ChatController.getDescription('coords'));
         }
     }
+
+    @command('getcar', '/getcar [id]', PERMISSIONS.ADMIN)
+    private static handleGetCar(player: alt.Player, id: string): void {
+        const tmpID = parseInt(id);
+        if (isNaN(tmpID)) {
+            return;
+        }
+
+        // Find the vehicle
+        const validVehicle = alt.Vehicle.all.find(veh => {
+          if (!veh || !veh.valid) {
+            return false;
+          }
+        
+          return veh.id === tmpID;
+        });
+        
+        // no spawned vehicle was found
+        if (!validVehicle || !validVehicle.valid) {
+          return;
+        }
+        
+        // Move the vehicle to the player.
+        validVehicle.pos = player.pos;
+
+        // Check if it is saveable.
+        if (!validVehicle.data) {
+          return;
+        }
+        
+        validVehicle.data.position = validVehicle.pos;
+        Athena.vehicle.funcs.save(validVehicle, { position: validVehicle.pos })
+    }
 }

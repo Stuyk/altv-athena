@@ -12,7 +12,7 @@ import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Item } from '../../../shared/interfaces/item';
 import { CLOTHING_CONFIG } from '../shared/config';
 import { CLOTHING_INTERACTIONS } from '../shared/events';
-import { IClothingStore } from '../shared/interfaces';
+import { CLOTHING_DLC_INFO, IClothingStore } from '../shared/interfaces';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -208,6 +208,20 @@ class InternalFunctions implements ViewModel {
         PedEditCamera.disableControls(value);
     }
 
+    static getDlcClothingCount(sex: number, id: number, isProp: boolean = false): number {
+        const dlcInfos = CLOTHING_CONFIG[isProp ? 'DLC_PROPS' : 'DLC_CLOTHING'][id] as Array<CLOTHING_DLC_INFO>;
+
+        let totalCount = 0;
+
+        for (let i = 0; i < dlcInfos.length; i++) {
+            if (dlcInfos[i].count[sex]) {
+                totalCount += dlcInfos[i].count[sex];
+            }
+        }
+
+        return totalCount;
+    }
+
     /**
      * Handles how clothes are purchased.
      * @static
@@ -260,7 +274,10 @@ class InternalFunctions implements ViewModel {
                     textureValue = native.getPedPropTextureIndex(PedCharacter.get(), id);
                     component.textures[index] = textureValue;
 
-                    maxDrawables = CLOTHING_CONFIG.MAXIMUM_PROP_VALUES[appearance.sex][id];
+                    maxDrawables =
+                        CLOTHING_CONFIG.MAXIMUM_PROP_VALUES[appearance.sex][id] +
+                        InternalFunctions.getDlcClothingCount(appearance.sex, id, true);
+
                     maxTextures = native.getNumberOfPedPropTextureVariations(PedCharacter.get(), id, value);
                 } else {
                     // Get Current Value of Component Player is Wearing
@@ -274,7 +291,10 @@ class InternalFunctions implements ViewModel {
                     textureValue = native.getPedTextureVariation(PedCharacter.get(), id);
                     component.textures[index] = textureValue;
 
-                    maxDrawables = CLOTHING_CONFIG.MAXIMUM_COMPONENT_VALUES[appearance.sex][id];
+                    maxDrawables =
+                        CLOTHING_CONFIG.MAXIMUM_COMPONENT_VALUES[appearance.sex][id] +
+                        InternalFunctions.getDlcClothingCount(appearance.sex, id, false);
+
                     maxTextures = native.getNumberOfPedTextureVariations(PedCharacter.get(), id, value);
                 }
 
@@ -304,7 +324,11 @@ class InternalFunctions implements ViewModel {
                 const texture = component.textures[index];
 
                 if (component.dlcHashes && component.dlcHashes.length >= 1) {
-                    const dlc = component.dlcHashes[index];
+                    let dlc = component.dlcHashes[index];
+                    if (typeof dlc === 'string') {
+                        dlc = alt.hash(dlc);
+                    }
+
                     if (component.isProp) {
                         if (drawable <= -1) {
                             native.clearPedProp(PedCharacter.get(), id);

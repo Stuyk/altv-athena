@@ -1,6 +1,6 @@
 {
     "name": "altv-athena",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "description": "a roleplay framework for alt:V",
     "author": "stuyk",
     "type": "module",
@@ -24,7 +24,7 @@
         "windows-server": "yon run cfg-prod && yon run cfg-resource && altv-server.exe",
         "windows-server:cdn": "yon run cfg-prod && yon run cfg-resource && altv-server.exe --justpack && altv-server.exe",
         "linux-server": "yon run cfg-prod && yon run cfg-resource && ./altv-server",
-        "linux-server:cdn": "yon run cfg-prod && yon run cfg-resource && && ./altv-server --justpack && ./altv-server",
+        "linux-server:cdn": "yon run cfg-prod && yon run cfg-resource && ./altv-server --justpack && ./altv-server",
         "[-] Parallel Programs": "",
         "athena-streamer": "yon run build-scripts && node ./scripts/streamer/dist/index.js",
         "athena-devtest": "npx chokidar \"AthenaConfig.json\" \"src/**/*.ts\" --ignore \"/athena/\" --silent --initial -c \"yon run build-core & yon run plugins:build & yon run vue-build & yon run cfg-devtest & yon run cfg-resource && yon run kill-port && altv-server.exe\"",

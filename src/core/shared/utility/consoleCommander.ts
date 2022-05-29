@@ -12,16 +12,30 @@ const Commands: ConsoleCommand = {};
  * @return {*}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
-    if (!Commands[cmdName]) {
-        return;
-    }
+    const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
 
-    Commands[cmdName](...args);
+    if (Commands[cmdNameclean]) {
+        Commands[cmdNameclean](...args);
+    } else {
+        console.log(`Command "${cmdNameclean}" not found.`);
+    }
 }
 
 export class ConsoleCommander {
     static init(alt: { on: (event: string, handler: Function) => any }) {
         alt.on('consoleCommand', handleConsoleMessage);
+    }
+
+    /**
+     * Allows a console command to be invoked through other means.
+     *
+     * @static
+     * @param {string} cmdName
+     * @param {...string[]} args
+     * @memberof ConsoleCommander
+     */
+    static invokeCommand(cmdName: string, ...args: string[]): void {
+        handleConsoleMessage(cmdName, ...args);
     }
 
     /**

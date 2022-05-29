@@ -22,36 +22,32 @@ class InternalFunctions {
      * @param vehicle - The vehicle to update.
      */
     static updatePaint(vehicle: alt.Vehicle) {
-        // Handle Color Updates - Custom RGBA
-        if (vehicle.data.color && vehicle.data.color.hasOwnProperty('r')) {
-            if (!vehicle.data.color2) {
-                vehicle.data.color2 = vehicle.data.color;
-            }
+        if (!vehicle.data?.tuning) return;
 
-            if (vehicle.data.finish1) {
-                vehicle.primaryColor = vehicle.data.finish1;
-            }
+        if (vehicle.data.tuning.primaryColor && !vehicle.data.tuning.secondaryColor)
+            vehicle.data.tuning.secondaryColor = vehicle.data.tuning.primaryColor;
 
-            if (vehicle.data.finish2) {
-                vehicle.secondaryColor = vehicle.data.finish2;
-            }
+        if (vehicle.data.tuning.secondaryColor && !vehicle.data.tuning.primaryColor)
+            vehicle.data.tuning.primaryColor = vehicle.data.tuning.secondaryColor;
 
-            vehicle.customPrimaryColor = vehicle.data.color as RGBA;
-            vehicle.customSecondaryColor = vehicle.data.color2 as RGBA;
-
-            if (vehicle.data.pearl >= 0) {
-                vehicle.pearlColor = vehicle.data.pearl;
-            }
+        if (vehicle.data.tuning.primaryColor) {
+            if (typeof vehicle.data.tuning.primaryColor == 'object')
+                vehicle.customPrimaryColor = new alt.RGBA(
+                    vehicle.data.tuning.primaryColor.r,
+                    vehicle.data.tuning.primaryColor.g,
+                    vehicle.data.tuning.primaryColor.b,
+                );
+            else vehicle.primaryColor = vehicle.data.tuning.primaryColor;
         }
 
-        // Handle Color Updates - GTA Colours
-        if (vehicle.data.color && typeof vehicle.data.color === 'number') {
-            if (!vehicle.data.color2) {
-                vehicle.data.color2 = vehicle.data.color;
-            }
-
-            vehicle.primaryColor = vehicle.data.color as number;
-            vehicle.secondaryColor = vehicle.data.color2 as number;
+        if (vehicle.data.tuning.secondaryColor) {
+            if (typeof vehicle.data.tuning.secondaryColor == 'object')
+                vehicle.customSecondaryColor = new alt.RGBA(
+                    vehicle.data.tuning.secondaryColor.r,
+                    vehicle.data.tuning.secondaryColor.g,
+                    vehicle.data.tuning.secondaryColor.b,
+                );
+            else vehicle.secondaryColor = vehicle.data.tuning.secondaryColor;
         }
     }
 
@@ -230,24 +226,24 @@ export class PaintShopView {
 
         const syncData: iPaintshopSync = {
             color:
-                typeof player.vehicle.data.color === 'object' //
-                    ? player.vehicle.data.color
+                typeof player.vehicle.data.tuning?.primaryColor === 'object' //
+                    ? player.vehicle.data.tuning.primaryColor
                     : { r: 255, g: 255, b: 255 },
             color2:
-                typeof player.vehicle.data.color2 === 'object' //
-                    ? player.vehicle.data.color2
+                typeof player.vehicle.data.tuning?.secondaryColor === 'object' //
+                    ? player.vehicle.data.tuning.secondaryColor
                     : { r: 255, g: 255, b: 255 },
             finish1:
-                typeof player.vehicle.data.finish1 === 'number' //
-                    ? player.vehicle.data.finish1
+                typeof player.vehicle.data.tuning?.primaryFinish === 'number' //
+                    ? player.vehicle.data.tuning.primaryFinish
                     : VEHICLE_COLOR_PAINTS.MATTE,
             finish2:
-                typeof player.vehicle.data.finish2 === 'number' //
-                    ? player.vehicle.data.finish2
+                typeof player.vehicle.data.tuning?.secondaryFinish === 'number' //
+                    ? player.vehicle.data.tuning.secondaryFinish
                     : VEHICLE_COLOR_PAINTS.MATTE,
             pearl:
-                typeof player.vehicle.data.pearl === 'number' //
-                    ? player.vehicle.data.pearl
+                typeof player.vehicle.data.tuning?.pearlColor === 'number' //
+                    ? player.vehicle.data.tuning.pearlColor
                     : 0,
         };
 
@@ -258,8 +254,8 @@ export class PaintShopView {
      * It takes in a player, the color, color2, finish1, finish2, and pearl and updates the vehicle's
      * color, color2, finish1, finish2, and pearl
      * @param player - alt.Player - The player who is purchasing the vehicle.
-     * @param {RGB | number} color - The primary color of the vehicle.
-     * @param {RGB | number} color2 - The second color of the vehicle.
+     * @param {RGBA | number} color - The primary color of the vehicle.
+     * @param {RGBA | number} color2 - The second color of the vehicle.
      * @param {number} finish1 - number
      * @param {number} finish2 - number
      * @param {number} pearl - number
@@ -267,8 +263,8 @@ export class PaintShopView {
      */
     static purchase(
         player: alt.Player,
-        color: RGB | number,
-        color2: RGB | number,
+        color: RGBA | number,
+        color2: RGBA | number,
         finish1: number,
         finish2: number,
         pearl: number,
@@ -289,33 +285,32 @@ export class PaintShopView {
             return;
         }
 
-        let whatToUpdate = {};
-
         if (color !== undefined && color !== null) {
-            whatToUpdate['color'] = color;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.primaryColor = color;
         }
 
         if (color2 !== undefined && color2 !== null) {
-            whatToUpdate['color2'] = color2;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.secondaryColor = color;
         }
 
         if (finish1 !== undefined && finish1 !== null) {
-            whatToUpdate['finish1'] = finish1;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.primaryFinish = finish1;
         }
 
         if (finish2 !== undefined && finish2 !== null) {
-            whatToUpdate['finish2'] = finish2;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.secondaryFinish = finish2;
         }
 
         if (pearl !== undefined && pearl !== null) {
-            whatToUpdate['pearl'] = pearl;
+            if (!player.vehicle.data.tuning) player.vehicle.data.tuning = {};
+            player.vehicle.data.tuning.pearlColor = pearl;
         }
 
-        Object.keys(whatToUpdate).forEach((key) => {
-            player.vehicle.data[key] = whatToUpdate[key];
-        });
-
         InternalFunctions.updatePaint(player.vehicle);
-        VehicleFuncs.save(player.vehicle, whatToUpdate);
+        VehicleFuncs.save(player.vehicle, player.vehicle.data);
     }
 }

@@ -171,6 +171,10 @@ class InternalFunctions implements ViewModel {
     }
 
     static async keyDown(key: number) {
+        if (isDisabled) {
+            return;
+        }
+
         // Page Up & Page Down
         if (key === 33 || key === 34) {
             const view = await WebViewController.get();

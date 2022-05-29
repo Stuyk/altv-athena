@@ -21,12 +21,17 @@
                 @click="selectOption(option.uid)"
                 :style="getPositionalStyle(index)"
             >
-                <Icon
-                    class="wheel-icon mb-2"
-                    :class="getColor(option)"
-                    :icon="option.icon ? option.icon : 'icon-question'"
-                    :size="36"
-                />
+                <template v-if="!option.image">
+                    <Icon
+                        class="wheel-icon mb-2"
+                        :class="getColor(option)"
+                        :icon="option.icon ? option.icon : 'icon-question'"
+                        :size="36"
+                    />
+                </template>
+                <template v-else>
+                    <img class="wheel-icon mb-2" :src="ResolvePath(option.image)" :alt="option.label" />
+                </template>
                 <div class="wheel-text" :class="getColor(option)">
                     {{ option.name }}
                 </div>
@@ -35,7 +40,7 @@
                 class="wheel-number overline"
                 v-for="(option, index) in getCurrentOptions"
                 :key="index"
-                :style="getPositionalStyle(index, 1.35)"
+                :style="getPositionalStyle(index, 1.35, true)"
             >
                 {{ index + 1 }}
             </div>
@@ -47,6 +52,7 @@
 import { defineAsyncComponent, defineComponent } from 'vue';
 import { VIEW_EVENTS_WHEEL_MENU } from '../../../../src/core/shared/enums/views';
 import { IWheelOption } from '../../../../src/core/shared/interfaces/wheelMenu';
+import ResolvePath from '../../utility/pathResolver';
 
 const TIME_BETWEEN_SCROLLS = 50;
 
@@ -84,6 +90,10 @@ export default defineComponent({
         },
     },
     methods: {
+        ResolvePath,
+        getImage(option: IWheelOption) {
+            return option.image ? option.image : this.ResolvePath('/assets/images/wheel-menu/question.png');
+        },
         getColor(option: IWheelOption) {
             if (!option.color) {
                 return { 'white--text': true };
@@ -105,19 +115,27 @@ export default defineComponent({
         getPointPosition(index: number): { x: number; y: number } {
             return this.points[index];
         },
-        getPositionalStyle(index: number, multiplyRadius = null) {
+        getPositionalStyle(index: number, multiplyRadius = null, skipBgImage = false) {
+            const option = this.options[index];
             const point = this.getPointPosition(index);
-            if (!point) {
-                return '';
+
+            let style = '';
+
+            if (point) {
+                if (multiplyRadius && typeof multiplyRadius === 'number') {
+                    style += `left: calc(50vw - 62.2px - ${point.x * multiplyRadius}vw); top: calc(50vh - 62.2px - ${
+                        point.y * multiplyRadius
+                    }vh);`;
+                } else {
+                    style += `left: calc(50vw - 62.2px - ${point.x}vw); top: calc(50vh - 62.2px - ${point.y}vh);`;
+                }
             }
 
-            if (multiplyRadius && typeof multiplyRadius === 'number') {
-                return `left: calc(50vw - 62.2px - ${point.x * multiplyRadius}vw); top: calc(50vh - 62.2px - ${
-                    point.y * multiplyRadius
-                }vh);`;
+            if (option.bgImage && !skipBgImage) {
+                style += `background-image: url(${this.ResolvePath(option.bgImage)}); background-size: cover;`;
             }
 
-            return `left: calc(50vw - 62.2px - ${point.x}vw); top: calc(50vh - 62.2px - ${point.y}vh);`;
+            return style;
         },
         generatePoints() {
             const points = [];
@@ -212,6 +230,16 @@ export default defineComponent({
                     uid: `option-${i}`,
                     icon: 'icon-home',
                     color: 'blue',
+                });
+                continue;
+            }
+
+            if (i === 4) {
+                this.addOption({
+                    name: `Option ${i}`,
+                    uid: `option-${i}`,
+                    image: '/assets/icons/bullpuprifle.png',
+                    bgImage: '/assets/images/loginBackground.jpg',
                 });
                 continue;
             }
@@ -383,6 +411,13 @@ export default defineComponent({
     cursor: pointer;
     background: rgba(0, 0, 0, 0.8);
     transform: scale(1.05) !important;
+}
+
+.wheel-option img {
+    width: 65%;
+    height: 65%;
+    object-fit: cover;
+    user-select: none !important;
 }
 
 .wheel-icon {

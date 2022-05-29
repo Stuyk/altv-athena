@@ -10,6 +10,8 @@ import { IResponse } from '../../shared/interfaces/iResponse';
 import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/storageRules';
 import SystemRules from '../systems/rules';
 import { Athena } from '../api/athena';
+import { LocaleController } from '../../shared/locale/locale';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 
 /**
  * Bind a player id to a storage container.
@@ -41,7 +43,7 @@ export class StorageView {
     static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
         const storage = await StorageSystem.get(storage_id);
         if (!storage) {
-            Athena.player.emit.notification(player, `~r~No Storage Available`);
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_NOT_AVAILABLE));
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             StorageSystem.setRestricted(storage_id, false);
             return;
@@ -49,7 +51,7 @@ export class StorageView {
 
         // Check if storage is Restricted
         if (StorageSystem.isRestricted(storage_id)) {
-            Athena.player.emit.notification(player, `~r~Storage in Use`);
+            Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_IN_USE));
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             return;
         }
@@ -262,7 +264,7 @@ export class StorageView {
 
             itemClone.quantity = amount;
             if (!Athena.player.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
-                Athena.player.emit.notification(player, `Inventory is Full`);
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
@@ -319,7 +321,7 @@ export class StorageView {
             itemClone.quantity = amount;
 
             if (!Athena.player.inventory.inventoryAdd(player, itemClone, invInfo.slot)) {
-                Athena.player.emit.notification(player, `Inventory is Full`);
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }

@@ -3,6 +3,8 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Blip } from '../../shared/interfaces/blip';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { sha256Random } from '../utility/encryption';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 
 const globalBlips: Array<Blip> = [];
 
@@ -88,7 +90,7 @@ export class ServerBlipController {
 DEFAULT_CONFIG.VALID_HOSPITALS.forEach((position) => {
     const hash = sha256Random(JSON.stringify(position));
     ServerBlipController.append({
-        text: 'Hospital',
+        text: LocaleController.get(LOCALE_KEYS.LABEL_HOSPITAL),
         color: 6,
         sprite: 153,
         scale: 1,

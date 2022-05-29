@@ -67,6 +67,24 @@ export interface IWheelOption {
      * @memberof IWheelOptionExt
      */
     data?: Array<any>;
+
+    /**
+     * Image based on asset path.
+     * Example: '/assets/icons/bullpuprifle.png'
+     *
+     * @type {string}
+     * @memberof IWheelOption
+     */
+    image?: string;
+
+    /**
+     * Image based on asset path.
+     * Example: '/assets/icons/bullpuprifle.png'
+     *
+     * @type {string}
+     * @memberof IWheelOption
+     */
+    bgImage?: string;
 }
 
 export interface IWheelOptionExt extends IWheelOption {

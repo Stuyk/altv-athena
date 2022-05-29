@@ -113,7 +113,7 @@ export default class Raycast {
         flags: number = -1,
         maxDistance = 25,
         useShapeTest: boolean = true,
-        radius: number = 5,
+        radius: number = 2,
     ): { didComplete: boolean; didHit?: boolean; position?: Vector3; entityHit?: number } {
         const start = native.getFinalRenderedCamCoord();
         const forwardVector = getDirectionFromRotation(native.getFinalRenderedCamRot(2));

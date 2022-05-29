@@ -67,6 +67,9 @@ export default {
     [LOCALE_KEYS.DISCORD_NOT_WHITELISTED]: `_%_ is not whitelisted.`,
     [LOCALE_KEYS.DISCORD_ADDED_WHITELIST]: `_%_ was added to the whitelist.`,
     [LOCALE_KEYS.DISCORD_REMOVED_WHITELIST]: `_%_ was removed from the whitelist.`,
+    [LOCALE_KEYS.DISCORD_ID_ALREADY_LOGGED_IN]: `That ID is already logged in.`,
+    [LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE]: `Could not communicate with Authorization service.`,
+    [LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE]: `Could not decrypt data from Authorization service.`,
     // FUEL
     [LOCALE_KEYS.FUEL_EXIT_VEHICLE_FIRST]: `You must exit your vehicle before fueling.`,
     [LOCALE_KEYS.FUEL_UPDATE_VEHICLE_FIRST]: `You must enter and exit a vehicle first to fuel.`,
@@ -101,6 +104,7 @@ export default {
     [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_EQUIPMENT]: `_%_ was added to your equipment.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_TOOLBAR]: `_%_ was added to your toolbar.`,
+    [LOCALE_KEYS.ITEM_WAS_DESTROYED_ON_DROP]: `_%_ was destroyed on drop.`,
     // Job
     [LOCALE_KEYS.JOB_ALREADY_WORKING]: `You are already working on a job.`,
     [LOCALE_KEYS.JOB_NOT_WORKING]: `You are not currently working.`,
@@ -110,6 +114,8 @@ export default {
     [LOCALE_KEYS.LABEL_OFF]: `OFF`,
     [LOCALE_KEYS.LABEL_BROADCAST]: `Broadcast`,
     [LOCALE_KEYS.LABEL_ENGINE]: `Engine`,
+    [LOCALE_KEYS.LABEL_HOSPITAL]: `Hospital`,
+    [LOCALE_KEYS.LABEL_BANNED]: `[Banned]`,
     // Player
     [LOCALE_KEYS.PLAYER_IS_TOO_FAR]: `That player is too far away.`,
     [LOCALE_KEYS.PLAYER_IS_TOO_CLOSE]: `That player is too close.`,
@@ -169,6 +175,10 @@ export default {
     [LOCALE_KEYS.FACTION_COULDNT_QUIT]: `Could not quit faction because you are the leader.`,
     // World
     [LOCALE_KEYS.WORLD_TIME_IS]: `Current World Time is _%_:_%_`,
+    // Storage
+    [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `No Storage Available`,
+    [LOCALE_KEYS.STORAGE_IN_USE]: `Storage in Use`,
+    [LOCALE_KEYS.INVENTORY_IS_FULL]: `Inventory is Full`,
     // ============================
     // WebView Locales Start Here
     // ============================

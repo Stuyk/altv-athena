@@ -92,5 +92,5 @@ export interface ClothingComponent {
      * @type {number}
      * @memberof ClothingComponent
      */
-    dlcHashes?: Array<number>;
+    dlcHashes?: Array<number | string>;
 }
