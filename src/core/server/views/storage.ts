@@ -12,6 +12,14 @@ import SystemRules from '../systems/rules';
 import { Athena } from '../api/athena';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { Vector3 } from '../../shared/interfaces/vector';
+import { distance } from '../../shared/utility/vector';
+
+const DEFAULT_MAX_STORAGE_DIST = 4;
+
+interface IExtStorage extends IStorage {
+    pos: Vector3;
+}
 
 /**
  * Bind a player id to a storage container.
@@ -19,7 +27,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
  * @type { [id: string]: string }
  * */
 let storageBinding: { [id: string]: string } = {};
-let storageCache: { [id: number]: IStorage } = {};
+let storageCache: { [id: number]: IExtStorage } = {};
 let rules: { [key: string]: Array<(player: alt.Player, storage: IStorage) => IResponse> } = {
     [STORAGE_RULES.OPEN]: [],
 };
@@ -37,7 +45,7 @@ export class StorageView {
      * @static
      * @param {alt.Player} player
      * @param {string} id
-     * @return {*}  {Promise<void>}
+     * @return { Promise<void> }
      * @memberof StorageView
      */
     static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
@@ -65,7 +73,7 @@ export class StorageView {
         }
 
         // Push Storage Info Client-Side
-        storageCache[player.id] = storage;
+        storageCache[player.id] = { ...storage, pos: player.pos };
         StorageView.setStorageBinding(player.id, storage_id);
         alt.emitClient(player, View_Events_Storage.Open, storage_id, name, storage.items, player.data.inventory);
     }
@@ -189,6 +197,16 @@ export class StorageView {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            alt.emitClient(player, View_Events_Storage.Close);
+            return;
+        }
+
+        const dist = distance(player.pos, storageCache[player.id].pos);
+        if (dist > DEFAULT_MAX_STORAGE_DIST) {
+            StorageView.removeStorageBinding(player.id);
+            StorageSystem.setRestricted(id, false);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.message(player, `Too Far From Storage`);
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
@@ -370,6 +388,16 @@ export class StorageView {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            alt.emitClient(player, View_Events_Storage.Close);
+            return;
+        }
+
+        const dist = distance(player.pos, storageCache[player.id].pos);
+        if (dist > DEFAULT_MAX_STORAGE_DIST) {
+            StorageView.removeStorageBinding(player.id);
+            StorageSystem.setRestricted(id, false);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.message(player, `Too Far From Storage`);
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
