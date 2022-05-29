@@ -196,7 +196,7 @@ export default class ChatController {
 
         ChatController.commands[normalizedName] = {
             name: normalizedName,
-            description,
+            description: description.toLowerCase(),
             func: callback,
             permission: permissions,
         };
@@ -243,7 +243,7 @@ export default class ChatController {
 
         ChatController.commands[normalizedName] = {
             name: normalizedName,
-            description,
+            description: description.toLowerCase(),
             func: callback,
             characterPermissions,
         };
