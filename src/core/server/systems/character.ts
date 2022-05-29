@@ -10,7 +10,6 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { Item } from '../../shared/interfaces/item';
 import { Global } from './global';
 
 const Injections: { [key: string]: Array<(player: alt.Player) => void> } = {

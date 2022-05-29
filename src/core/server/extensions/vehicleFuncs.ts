@@ -206,6 +206,15 @@ export default class VehicleFuncs {
                 continue;
             }
 
+            // Skip already existing vehicles.
+            const existingVehicle = alt.Vehicle.all.find(
+                (veh) => veh && veh.valid && veh.data && veh.data._id.toString() === vehicle._id.toString(),
+            );
+
+            if (existingVehicle) {
+                continue;
+            }
+
             VehicleFuncs.spawn(vehicle);
         }
     }

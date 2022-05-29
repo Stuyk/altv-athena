@@ -142,6 +142,17 @@ export class LoginController {
      * @returns The player's database ID.
      */
     static tryDisconnect(player: alt.Player, reason: string): void {
+        const id = player.id;
+
+        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT && typeof id === 'number') {
+            const characterID = LoginController.getDatabaseIdForPlayer(id);
+            VehicleFuncs.despawnAll(characterID);
+        }
+
+        if (typeof id === 'number') {
+            StorageView.removeStorageBinding(id);
+        }
+
         if (!player || !player.valid || !player.data) {
             return;
         }
@@ -150,18 +161,13 @@ export class LoginController {
             VehicleSystem.stopPush(player);
         }
 
-        StorageView.removeStorageBinding(player.id);
-
-        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT) {
-            VehicleFuncs.despawnAll(LoginController.getDatabaseIdForPlayer(player.id));
-        }
+        playerConst.save.onTick(player);
 
         if (!player.data.name) {
             return;
         }
 
         alt.log(`${player.data.name} has logged out.`);
-        playerConst.save.onTick(player);
     }
 
     /**
