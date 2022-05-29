@@ -5,7 +5,11 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
 
-type ObjectMenuInjection = (modelHash: number, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
+type ObjectMenuInjection = (
+    modelHash: number,
+    scriptID: number,
+    options: Array<IWheelOptionExt>,
+) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
 const validHashes: Array<number> = [];
@@ -22,6 +26,17 @@ export class ObjectWheelMenu {
      */
     static addInjection(callback: ObjectMenuInjection) {
         Injections.push(callback);
+    }
+
+    /**
+     * Allows to register a valid object hash
+     *
+     * @static
+     * @param {number} objectHash
+     * @memberof ObjectWheelMenu
+     */
+    static registerObject(objectHash: number) {
+        validHashes.push(objectHash);
     }
 
     /**
@@ -53,7 +68,7 @@ export class ObjectWheelMenu {
 
         for (const callback of Injections) {
             try {
-                options = callback(hash, options);
+                options = callback(hash, scriptID, options);
             } catch (err) {
                 console.warn(`Got Object Menu Injection Error: ${err}`);
                 continue;
