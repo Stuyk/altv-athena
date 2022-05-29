@@ -655,7 +655,7 @@ export class VehicleSystem {
             storageID = vehicle.data.storage.toString();
         }
 
-        StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
+        StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`, vehicle);
     }
 
     /**
