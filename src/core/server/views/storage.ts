@@ -19,6 +19,7 @@ const DEFAULT_MAX_STORAGE_DIST = 4;
 
 interface IExtStorage extends IStorage {
     pos: Vector3;
+    entity?: alt.Entity;
 }
 
 /**
@@ -43,12 +44,14 @@ export class StorageView {
     /**
      * Open storage for a specific container.
      * @static
-     * @param {alt.Player} player
-     * @param {string} id
+     * @param {alt.Player} player The player who is accessing the store
+     * @param {string} storage_id Database storage identifier
+     * @param {string} name Name of the storage
+     * @param {alt.Entity} entity The entity to track to prevent positional abuse
      * @return { Promise<void> }
      * @memberof StorageView
      */
-    static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
+    static async open(player: alt.Player, storage_id: string, name: string, entity?: alt.Entity): Promise<void> {
         const storage = await StorageSystem.get(storage_id);
         if (!storage) {
             Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_NOT_AVAILABLE));
@@ -73,7 +76,7 @@ export class StorageView {
         }
 
         // Push Storage Info Client-Side
-        storageCache[player.id] = { ...storage, pos: player.pos };
+        storageCache[player.id] = { ...storage, pos: player.pos, entity };
         StorageView.setStorageBinding(player.id, storage_id);
         alt.emitClient(player, View_Events_Storage.Open, storage_id, name, storage.items, player.data.inventory);
     }
@@ -125,6 +128,41 @@ export class StorageView {
      */
     static setStorageBinding(playerID: number, storageID: string) {
         storageBinding[playerID] = storageID;
+    }
+
+    /**
+     * Updates entity positional checks for storages.
+     * Mostly effects vehicles.
+     *
+     * @static
+     * @memberof StorageView
+     */
+    static updateStorageBindings() {
+        const keys = Object.keys(storageCache);
+
+        for (const key of keys) {
+            if (!storageCache[key]) {
+                continue;
+            }
+
+            const storage = storageCache[key] as IExtStorage;
+            if (storage.entity && !storage.entity.valid) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+
+            const target = alt.Player.all.find((x) => x && x.valid && `${x.id}` === key);
+            if (!target || !target.valid) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+
+            const dist = distance(target.pos, storage.entity.pos);
+            if (dist > DEFAULT_MAX_STORAGE_DIST) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+        }
     }
 
     /**
@@ -574,3 +612,4 @@ export class StorageView {
 alt.onClient(View_Events_Storage.MoveFromPlayer, StorageView.moveFromPlayer);
 alt.onClient(View_Events_Storage.MoveFromStorage, StorageView.moveFromStorage);
 alt.onClient(View_Events_Storage.Close, StorageView.close);
+alt.setInterval(StorageView.updateStorageBindings, 2500);
