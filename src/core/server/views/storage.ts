@@ -128,6 +128,44 @@ export class StorageView {
     }
 
     /**
+     * Forces the storage interface to close for a specific storage identifier.
+     *
+     * @static
+     * @param {string} storage
+     * @return {*}
+     * @memberof StorageView
+     */
+    static forceCloseStorage(storage: string) {
+        const keys = Object.keys(storageBinding);
+
+        let id: string;
+
+        for (const key of keys) {
+            if (storageBinding[key] !== storage) {
+                continue;
+            }
+
+            id = key;
+            break;
+        }
+
+        if (!id) {
+            return;
+        }
+
+        // Should have the player id now.
+        StorageView.removeStorageBinding(parseInt(id));
+
+        // Try to find a valid player.
+        const player = alt.Player.all.find((x) => x.toString() === id.toString());
+        if (!player || !player.valid) {
+            return;
+        }
+
+        alt.emitClient(player, View_Events_Storage.Close);
+    }
+
+    /**
      * Removes the storage binding.
      * @static
      * @param {number} id

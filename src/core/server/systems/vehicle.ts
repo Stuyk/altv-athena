@@ -464,6 +464,11 @@ export class VehicleSystem {
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
 
+        // Closes the storage if it was opened in the first place.
+        if (vehicle.lockState === VEHICLE_LOCK_STATE.LOCKED && vehicle.data && vehicle.data.storage) {
+            StorageView.forceCloseStorage(vehicle.data.storage);
+        }
+
         if (!player.vehicle) {
             playerConst.emit.animation(
                 player,
