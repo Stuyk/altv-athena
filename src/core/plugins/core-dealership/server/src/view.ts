@@ -144,8 +144,10 @@ export class DealershipView {
                 fuel: 100,
                 position: { x: 0, y: 0, z: 0 },
                 rotation: { x: 0, y: 0, z: 0 },
-                color: color,
-                color2: color,
+                tuning: {
+                    primaryColor: color,
+                    secondaryColor: color,
+                },
             },
             true,
         );

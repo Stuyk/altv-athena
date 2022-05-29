@@ -748,48 +748,85 @@ export default class VehicleFuncs {
     }
 
     static applyVehicleTuning(vehicle: alt.Vehicle): void {
-        if (!vehicle?.data?.tuning) vehicle.data.tuning = {};
+        if (!vehicle?.data?.tuning) {
+            vehicle.data.tuning = {};
+        }
 
         const data = vehicle.data.tuning;
 
-        if (data.modkit) {
+        if (typeof data.modkit !== 'undefined') {
             vehicle.modKit = data.modkit;
-            if (data.mods) data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+            if (typeof data.mods !== 'undefined') {
+                data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+            }
         }
 
-        if (data.handling) vehicle.setStreamSyncedMeta('handlingData', data.handling);
+        if (typeof data.handling !== 'undefined') {
+            vehicle.setStreamSyncedMeta('handlingData', data.handling);
+        }
 
-        if (data.primaryFinish) vehicle.primaryColor = data.primaryFinish;
-        if (data.secondaryFinish) vehicle.secondaryColor = data.secondaryFinish;
+        if (typeof data.primaryFinish !== 'undefined') {
+            vehicle.primaryColor = data.primaryFinish;
+        }
 
-        if (!data.primaryColor) data.primaryColor = DEFAULT_VEHICLE_COLOR;
-        if (!data.secondaryColor) data.secondaryColor = DEFAULT_VEHICLE_COLOR;
+        if (typeof data.secondaryFinish !== 'undefined') {
+            vehicle.secondaryColor = data.secondaryFinish;
+        }
 
-        if (typeof data.primaryColor === 'number') vehicle.primaryColor = data.primaryColor;
-        else
+        if (typeof data.primaryColor === 'undefined') {
+            data.primaryColor = DEFAULT_VEHICLE_COLOR;
+        }
+
+        if (typeof data.secondaryColor === 'undefined') {
+            data.secondaryColor = DEFAULT_VEHICLE_COLOR;
+        }
+
+        if (typeof data.primaryColor === 'number') {
+            vehicle.primaryColor = data.primaryColor;
+        } else {
             vehicle.customPrimaryColor = new alt.RGBA(
                 data.primaryColor.r,
                 data.primaryColor.g,
                 data.primaryColor.b,
                 data.primaryColor.a,
             );
+        }
 
-        if (typeof data.secondaryColor === 'number') vehicle.secondaryColor = data.secondaryColor;
-        else
+        if (typeof data.secondaryColor === 'number') {
+            vehicle.secondaryColor = data.secondaryColor;
+        } else {
             vehicle.customSecondaryColor = new alt.RGBA(
                 data.secondaryColor.r,
                 data.secondaryColor.g,
                 data.secondaryColor.b,
                 data.secondaryColor.a,
             );
+        }
 
         if (data.customTires) vehicle.customTires = true;
-        if (typeof data.darkness == 'number') vehicle.darkness = data.darkness;
-        if (typeof data.dashboardColor == 'number') vehicle.dashboardColor = data.dashboardColor;
-        if (typeof data.headlightColor == 'number') vehicle.headlightColor = data.headlightColor;
-        if (typeof data.interiorColor == 'number') vehicle.interiorColor = data.interiorColor;
-        if (typeof data.lightsMultiplier == 'number') vehicle.lightsMultiplier = data.lightsMultiplier;
-        if (typeof data.livery == 'number') vehicle.livery = data.livery;
+        if (typeof data.darkness == 'number') {
+            vehicle.darkness = data.darkness;
+        }
+
+        if (typeof data.dashboardColor == 'number') {
+            vehicle.dashboardColor = data.dashboardColor;
+        }
+
+        if (typeof data.headlightColor == 'number') {
+            vehicle.headlightColor = data.headlightColor;
+        }
+
+        if (typeof data.interiorColor == 'number') {
+            vehicle.interiorColor = data.interiorColor;
+        }
+
+        if (typeof data.lightsMultiplier == 'number') {
+            vehicle.lightsMultiplier = data.lightsMultiplier;
+        }
+
+        if (typeof data.livery == 'number') {
+            vehicle.livery = data.livery;
+        }
 
         if (data.neon) {
             vehicle.neon = {
@@ -800,23 +837,45 @@ export default class VehicleFuncs {
             };
         }
 
-        if (data.neonColor)
+        if (data.neonColor) {
             vehicle.neonColor = new alt.RGBA(data.neonColor.r, data.neonColor.g, data.neonColor.b, data.neonColor.a);
+        }
 
-        if (typeof data.numberPlateIndex == 'number') vehicle.numberPlateIndex = data.numberPlateIndex;
-        if (typeof data.pearlColor == 'number') vehicle.pearlColor = data.pearlColor;
-        if (typeof data.roofLivery == 'number') vehicle.roofLivery = data.roofLivery;
-        if (typeof data.roofState == 'boolean') vehicle.roofState = data.roofState;
-        if (data.tireSmokeColor)
+        if (typeof data.numberPlateIndex == 'number') {
+            vehicle.numberPlateIndex = data.numberPlateIndex;
+        }
+
+        if (typeof data.pearlColor == 'number') {
+            vehicle.pearlColor = data.pearlColor;
+        }
+
+        if (typeof data.roofLivery == 'number') {
+            vehicle.roofLivery = data.roofLivery;
+        }
+        if (typeof data.roofState == 'boolean') {
+            vehicle.roofState = data.roofState;
+        }
+
+        if (data.tireSmokeColor) {
             vehicle.tireSmokeColor = new alt.RGBA(
                 data.tireSmokeColor.r,
                 data.tireSmokeColor.g,
                 data.tireSmokeColor.b,
                 data.tireSmokeColor.a,
             );
-        if (typeof data.wheelColor == 'number') vehicle.wheelColor = data.wheelColor;
-        if (typeof data.windowTint == 'number') vehicle.windowTint = data.windowTint;
-        if (typeof data.driftModeEnabled == 'boolean') vehicle.driftModeEnabled = data.driftModeEnabled;
+        }
+
+        if (typeof data.wheelColor == 'number') {
+            vehicle.wheelColor = data.wheelColor;
+        }
+
+        if (typeof data.windowTint == 'number') {
+            vehicle.windowTint = data.windowTint;
+        }
+
+        if (typeof data.driftModeEnabled == 'boolean') {
+            vehicle.driftModeEnabled = data.driftModeEnabled;
+        }
     }
 
     private static convertOldTuningData(vehicle: IVehicle): IVehicle {
