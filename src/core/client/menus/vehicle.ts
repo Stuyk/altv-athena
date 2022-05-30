@@ -17,6 +17,7 @@ const BLACKLISTED_VEHICLE_TYPES = [
     14, // Boats
     15, // Helicopters
     16, // Planes
+    20, // Commercial
     21, // Trains
 ];
 
