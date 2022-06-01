@@ -24,7 +24,7 @@ class CurrencyCommands {
     @command('addbank', '/addbank [amount] [id]', PERMISSIONS.ADMIN)
     private static addBankCommand(player: alt.Player, amount: string, id: string | null = null): void {
         if (id === null || id === undefined) {
-            Athena.player.currency.set(player, CurrencyTypes.CASH, parseInt(amount));
+            Athena.player.currency.set(player, CurrencyTypes.BANK, parseInt(amount));
             return;
         }
 
@@ -36,7 +36,7 @@ class CurrencyCommands {
 
         Athena.player.currency.add(target, CurrencyTypes.BANK, parseInt(amount));
     }
-    
+
     @command('addcash', '/addcash [amount] [id]', PERMISSIONS.ADMIN)
     private static addCashCommand(player: alt.Player, amount: string, id: string | null = null): void {
         if (id === null || id === undefined) {
@@ -56,7 +56,7 @@ class CurrencyCommands {
     @command('setbank', '/setbank [amount] [id]', PERMISSIONS.ADMIN)
     private static setBankCommand(player: alt.Player, amount: string, id: string | null = null): void {
         if (id === null || id === undefined) {
-            Athena.player.currency.set(player, CurrencyTypes.CASH, parseInt(amount));
+            Athena.player.currency.set(player, CurrencyTypes.BANK, parseInt(amount));
             return;
         }
 

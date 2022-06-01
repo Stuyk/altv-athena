@@ -346,7 +346,7 @@ export class ClothingFunctions {
         }
 
         if (totalCost >= 1) {
-            if (player.data.cash < totalCost) {
+            if (player.data.cash + player.data.bank < totalCost) {
                 Athena.player.emit.sound2D(player, 'item_error');
                 return;
             }
@@ -409,7 +409,7 @@ export class ClothingFunctions {
         }
 
         if (totalCost >= 1) {
-            if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, totalCost)) {
+            if (!Athena.player.currency.subAllCurrencies(player, totalCost)) {
                 Athena.player.emit.sound2D(player, 'item_error');
                 return;
             }
