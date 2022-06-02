@@ -22,6 +22,9 @@ async function handleConnectionComplete() {
 
 alt.everyTick(() => {
     native.hideHudComponentThisFrame(6); // Vehicle Name
+    if (alt.Player.local.vehicle) {
+        native.hideHudComponentThisFrame(7); // Area Name
+    }
     native.hideHudComponentThisFrame(8); // Vehicle Class
     native.hideHudComponentThisFrame(9); // Street Name
 });
