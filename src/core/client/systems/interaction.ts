@@ -248,6 +248,10 @@ export class InteractionController {
 
             return;
         }
+        
+        if (wheelOptions.length <= 0) {
+            return;
+        }
 
         WheelMenu.open('Options', wheelOptions, true);
     }
