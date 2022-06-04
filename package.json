@@ -42,8 +42,9 @@
         "typedoc-build": "node ./scripts/typedoc/index.js && typedoc --options typedoc.json",
         "[-] Utility": "",
         "fix": "node ./scripts/doctor/index.js",
-        "prepare": "husky install",
-        "lint": "prettier --end-of-line auto --config package.json --write ./src/**/*.ts"
+        "prepare": "husky install && husky-init",
+        "lint": "prettier --end-of-line auto --config package.json --write ./src/**/*.ts",
+        "test": ""
     },
     "devDependencies": {
         "@altv/types-client": "^2.1.8",
