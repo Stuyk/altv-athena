@@ -229,8 +229,8 @@ export default class VehicleFuncs {
      */
     static async add(vehicleData: IVehicle, doNotSpawn = true): Promise<IVehicle> {
         vehicleData.id = await VehicleFuncs.getNextID();
-        vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
-        vehicleData.behavior = OWNED_VEHICLE;
+        vehicleData.plate ??= sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
+        vehicleData.behavior ??= OWNED_VEHICLE;
 
         for (const callback of BeforeAddVehicleInjections) {
             const result = callback(vehicleData);
