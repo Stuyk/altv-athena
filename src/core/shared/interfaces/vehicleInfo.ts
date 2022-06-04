@@ -49,13 +49,6 @@ export interface VehicleInfo {
     price: number;
 
     /**
-     * The number of seats for this vehicle.
-     * @type {number}
-     * @memberof VehicleInfo
-     */
-    seats: number;
-
-    /**
      * How much storage this vehicle should have.
      * @type {(number | null)}
      * @memberof VehicleInfo
