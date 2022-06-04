@@ -58,28 +58,28 @@ class TeleportCommands {
         }
 
         // Find the vehicle
-        const validVehicle = alt.Vehicle.all.find(veh => {
-          if (!veh || !veh.valid) {
-            return false;
-          }
-        
-          return veh.id === tmpID;
+        const validVehicle = alt.Vehicle.all.find((veh) => {
+            if (!veh || !veh.valid) {
+                return false;
+            }
+
+            return veh.id === tmpID;
         });
-        
+
         // no spawned vehicle was found
         if (!validVehicle || !validVehicle.valid) {
-          return;
+            return;
         }
-        
+
         // Move the vehicle to the player.
         validVehicle.pos = player.pos;
 
         // Check if it is saveable.
         if (!validVehicle.data) {
-          return;
+            return;
         }
-        
+
         validVehicle.data.position = validVehicle.pos;
-        Athena.vehicle.funcs.save(validVehicle, { position: validVehicle.pos })
+        Athena.vehicle.funcs.save(validVehicle, { position: validVehicle.pos });
     }
 }

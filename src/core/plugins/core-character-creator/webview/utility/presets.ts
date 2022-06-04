@@ -8,7 +8,7 @@ export const MalePresets = [
         faceMix: 0.5,
         hair: 4,
         hairColor1: 1,
-        hairColor2: 5
+        hairColor2: 5,
     },
     {
         sex: 1,
@@ -24,7 +24,7 @@ export const MalePresets = [
         facialHair: 14,
         facialHairColor1: 0,
         facialHairOpacity: 0.6,
-        eyes: 5
+        eyes: 5,
     },
     {
         sex: 1,
@@ -43,7 +43,7 @@ export const MalePresets = [
         eyebrows: 0,
         eyebrowsOpacity: 1,
         eyebrowsColor1: 0,
-        eyes: 5
+        eyes: 5,
     },
     {
         sex: 1,
@@ -62,7 +62,7 @@ export const MalePresets = [
         eyebrows: 0,
         eyebrowsOpacity: 1,
         eyebrowsColor1: 0,
-        eyes: 5
+        eyes: 5,
     },
     {
         sex: 1,
@@ -81,7 +81,7 @@ export const MalePresets = [
         eyebrows: 0,
         eyebrowsOpacity: 1,
         eyebrowsColor1: 4,
-        eyes: 3
+        eyes: 3,
     },
     {
         sex: 1,
@@ -100,8 +100,8 @@ export const MalePresets = [
         eyebrows: 0,
         eyebrowsOpacity: 1,
         eyebrowsColor1: 4,
-        eyes: 1
-    }
+        eyes: 1,
+    },
 ];
 
 export const FemalePresets = [
@@ -114,7 +114,7 @@ export const FemalePresets = [
         faceMix: 0.5,
         hair: 4,
         hairColor1: 1,
-        hairColor2: 5
+        hairColor2: 5,
     },
     {
         sex: 0,
@@ -126,7 +126,7 @@ export const FemalePresets = [
         skinMix: 0.2,
         hair: 20,
         hairColor1: 3,
-        hairColor2: 2
+        hairColor2: 2,
     },
     {
         sex: 0,
@@ -139,7 +139,7 @@ export const FemalePresets = [
         hair: 34,
         hairColor1: 3,
         hairColor2: 2,
-        eyes: 3
+        eyes: 3,
     },
     {
         sex: 0,
@@ -151,7 +151,7 @@ export const FemalePresets = [
         skinMix: 0.9,
         hair: 40,
         hairColor1: 3,
-        hairColor2: 40
+        hairColor2: 40,
     },
     {
         sex: 0,
@@ -164,7 +164,7 @@ export const FemalePresets = [
         hair: 4,
         hairColor1: 13,
         hairColor2: 10,
-        eyes: 2
+        eyes: 2,
     },
     {
         sex: 0,
@@ -177,6 +177,6 @@ export const FemalePresets = [
         hair: 43,
         hairColor1: 4,
         hairColor2: 5,
-        eyes: 5
-    }
+        eyes: 5,
+    },
 ];

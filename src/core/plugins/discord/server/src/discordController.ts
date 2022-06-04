@@ -189,10 +189,7 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async removeFromAllowList(
-        discord: string,
-        alreadyRemovedRole: boolean = false,
-    ): Promise<GuildMember> {
+    static async removeFromAllowList(discord: string, alreadyRemovedRole: boolean = false): Promise<GuildMember> {
         const member = await guild.members.fetch(discord);
 
         try {

@@ -1,9 +1,5 @@
-import { drinks } from "./drinks";
-import { food } from "./food";
-import { utility } from "./utility";
+import { drinks } from './drinks';
+import { food } from './food';
+import { utility } from './utility';
 
-export default [
-    ...food,
-    ...drinks,
-    ...utility,
-]
+export default [...food, ...drinks, ...utility];

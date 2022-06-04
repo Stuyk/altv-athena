@@ -161,7 +161,7 @@ export class StreamBlip {
         name: string,
         category: string | null,
         maxDistance: number | null,
-        shortRange = true
+        shortRange = true,
     ) {
         this.pos = pos;
         this.sprite = sprite;

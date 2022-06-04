@@ -655,7 +655,12 @@ export class VehicleSystem {
             storageID = vehicle.data.storage.toString();
         }
 
-        StorageView.open(player, storageID, LocaleController.get(LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME, vehicle.data._id), vehicle);
+        StorageView.open(
+            player,
+            storageID,
+            LocaleController.get(LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME, vehicle.data._id),
+            vehicle,
+        );
     }
 
     /**

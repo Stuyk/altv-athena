@@ -20,10 +20,10 @@ export enum FACTION_PERMISSION_FLAGS {
     REMOVE_FROM_BANK = 1024, // Remove money from the faction bank.
     ACCESS_WEAPONS = 2048, // A place to store money, items, and weapons.
     ADD_MEMBERS = 4096, // Permission to add members to the faction.
-    CHANGE_RANK_PERMS = 8192 // Permission to change rank permission(s). Really strong. Careful.
+    CHANGE_RANK_PERMS = 8192, // Permission to change rank permission(s). Really strong. Careful.
 }
 
 export enum FACTION_STORAGE {
     STORAGE = 'storage',
-    WEAPONS = 'weapons'
+    WEAPONS = 'weapons',
 }

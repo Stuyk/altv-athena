@@ -41,7 +41,9 @@
         "[-] Typedocs": "",
         "typedoc-build": "node ./scripts/typedoc/index.js && typedoc --options typedoc.json",
         "[-] Utility": "",
-        "fix": "node ./scripts/doctor/index.js"
+        "fix": "node ./scripts/doctor/index.js",
+        "prepare": "husky install",
+        "lint": "prettier --end-of-line auto --config package.json --write ./src/**/*.ts"
     },
     "devDependencies": {
         "@altv/types-client": "^2.1.8",
@@ -67,7 +69,11 @@
         "altv-pkg": "^2.0.4",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.1",
+        "husky": "^8.0.0",
+        "husky-init": "^8.0.0",
         "npm-run-all": "^4.1.5",
+        "prettier": "^2.6.2",
+        "pretty-quick": "^3.1.3",
         "typescript": "4.6.3",
         "vite": "^2.9.5",
         "vue": "^3.2.33",
@@ -99,5 +105,10 @@
     },
     "engines": {
         "node": ">=16.0.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint"
+        }
     }
 }

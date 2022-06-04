@@ -50,10 +50,10 @@ class ChatCommands {
             Athena.player.emit.message(player, Athena.controllers.chat.getDescription('me'));
             return;
         }
-    
+
         const fullMessage = args.join(' ');
         const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_ME_DISTANCE);
-    
+
         alt.emitClient(
             closestPlayers,
             View_Events_Chat.Append,
@@ -67,10 +67,10 @@ class ChatCommands {
             Athena.player.emit.message(player, Athena.controllers.chat.getDescription('b'));
             return;
         }
-    
+
         const fullMessage = args.join(' ');
         const closestPlayers = Athena.player.get.playersByGridSpace(player, RoleplayCmdsConfig.COMMAND_OOC_DISTANCE);
-    
+
         alt.emitClient(
             closestPlayers,
             View_Events_Chat.Append,
@@ -83,34 +83,34 @@ class ChatCommands {
         if (args.length <= 0) {
             return;
         }
-    
+
         if (typeof id !== 'string') {
             Athena.player.emit.message(player, ChatController.getDescription('w'));
             return;
         }
-    
+
         if (id === null || id === undefined) {
             Athena.player.emit.message(player, ChatController.getDescription('w'));
             return;
         }
-    
+
         const target = Athena.player.get.findByUid(id);
         if (!target || !target.valid) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
-    
+
         if (distance2d(target.pos, player.pos) > RoleplayCmdsConfig.COMMAND_WHISPER_DISTANCE) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.PLAYER_IS_TOO_FAR));
             return;
         }
-    
+
         const fullMessage = args.join(' ');
         Athena.player.emit.message(
             player,
             `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}You whisper: '${fullMessage}' to ${target.data.name}`,
         );
-    
+
         Athena.player.emit.message(
             target,
             `${RoleplayCmdsConfig.CHAT_ROLEPLAY_WHISPER_COLOR}${player.data.name} whispers: ${fullMessage}`,
