@@ -15,6 +15,8 @@ async function handleConnectionComplete() {
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
 
+    alt.setConfigFlag("DISABLE_IDLE_CAMERA", true);
+
     // Calls the login functionality
     alt.emitServer(SYSTEM_EVENTS.BEGIN_CONNECTION);
     handleTick();
