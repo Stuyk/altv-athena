@@ -18,6 +18,7 @@ import { Timer } from '../utility/timers';
 import { WheelMenu } from '../views/wheelMenu';
 import { CameraTarget } from './cameraTarget';
 
+const LEFT_SHIFT = 16;
 const TIME_BETWEEN_CHECKS = 500;
 let hookInteractions: Array<(interactions: Array<IClientInteraction>) => void> = [];
 let tick: number;
@@ -25,6 +26,7 @@ let pressedKey = false;
 let nextKeyPress = Date.now() + TIME_BETWEEN_CHECKS;
 let interaction: Interaction = null;
 let temporaryInteraction: string = null;
+let leftShiftDown = false;
 
 export class InteractionController {
     /**
@@ -38,6 +40,24 @@ export class InteractionController {
         }
 
         InteractionController.registerKeybinds();
+        alt.on('keydown', InteractionController.keydown);
+        alt.on('keyup', InteractionController.keyup);
+    }
+
+    private static keydown(key: number) {
+        if (key !== LEFT_SHIFT) {
+            return;
+        }
+
+        leftShiftDown = true;
+    }
+
+    private static keyup(key: number) {
+        if (key !== LEFT_SHIFT) {
+            return;
+        }
+
+        leftShiftDown = false;
     }
 
     /**
@@ -65,7 +85,7 @@ export class InteractionController {
      * @static
      * @memberof InteractionController
      */
-    static registerKeybinds() {
+    private static registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.INTERACT,
             singlePress: () => {
@@ -133,8 +153,20 @@ export class InteractionController {
         const closestTempInteraction = temporaryInteraction;
 
         if (closestTarget) {
-            // Vehicle Type
-            if (closestTarget.type === 'vehicle') {
+            // Only show this if they press shift + interaction
+            if (alt.Player.local.vehicle && leftShiftDown) {
+                const model = native.getDisplayNameFromVehicleModel(alt.Player.local.vehicle.model);
+                wheelOptions.push({
+                    name: model,
+                    icon: 'icon-directions_car',
+                    data: [alt.Player.local.vehicle],
+                    callback: (_vehicle: alt.Vehicle) => {
+                        VehicleWheelMenu.openInVehicleMenu(_vehicle);
+                    },
+                });
+            }
+
+            if (!alt.Player.local.vehicle && closestTarget.type === 'vehicle') {
                 const vehicle = alt.Vehicle.all.find((v) => v && v.valid && v.scriptID === closestTarget.scriptID);
 
                 if (vehicle) {
