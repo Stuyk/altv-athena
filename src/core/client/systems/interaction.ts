@@ -152,6 +152,24 @@ export class InteractionController {
         const closestInteraction = interaction;
         const closestTempInteraction = temporaryInteraction;
 
+        if (closestTempInteraction) {
+            wheelOptions.push({
+                name: 'Closest Interaction',
+                icon: 'icon-warning',
+                emitServer: closestTempInteraction,
+                color: 'orange',
+            });
+        }
+
+        if (closestInteraction) {
+            wheelOptions.push({
+                name: closestInteraction.description ? closestInteraction.description : 'Closest Interaction',
+                icon: 'icon-send',
+                emitServer: SYSTEM_EVENTS.INTERACTION,
+                color: 'green',
+            });
+        }
+
         if (closestTarget) {
             // Only show this if they press shift + interaction
             if (alt.Player.local.vehicle && leftShiftDown) {
@@ -237,24 +255,6 @@ export class InteractionController {
                     },
                 });
             }
-        }
-
-        if (closestTempInteraction) {
-            wheelOptions.push({
-                name: 'Closest Interaction',
-                icon: 'icon-warning',
-                emitServer: closestTempInteraction,
-                color: 'orange',
-            });
-        }
-
-        if (closestInteraction) {
-            wheelOptions.push({
-                name: closestInteraction.description ? closestInteraction.description : 'Closest Interaction',
-                icon: 'icon-send',
-                emitServer: SYSTEM_EVENTS.INTERACTION,
-                color: 'green',
-            });
         }
 
         // Force Single Option Invoke
