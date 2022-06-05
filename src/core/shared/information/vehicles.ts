@@ -16,7 +16,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 12000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -26,7 +25,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -36,7 +34,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -46,7 +43,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -56,7 +52,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 120000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -66,7 +61,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -76,7 +70,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -86,7 +79,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -96,7 +88,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 65000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -106,7 +97,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 55000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -116,7 +106,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 50000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -126,7 +115,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 50000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -136,7 +124,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -146,7 +133,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -156,7 +142,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -166,7 +151,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -176,7 +160,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 95000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -186,7 +169,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -196,7 +178,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -206,7 +187,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -216,7 +196,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -226,7 +205,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -236,7 +214,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -246,7 +223,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -256,7 +232,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -266,7 +241,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -276,7 +250,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -286,7 +259,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -296,7 +268,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 135000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -306,7 +277,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 150000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -316,7 +286,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -326,7 +295,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -336,7 +304,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -346,7 +313,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -356,7 +322,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -366,7 +331,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -376,7 +340,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -386,7 +349,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 12500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -396,7 +358,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 11000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -406,7 +367,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 8000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -416,7 +376,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 16000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -426,7 +385,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -436,7 +394,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -446,7 +403,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -456,7 +412,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 8000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -466,7 +421,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -476,7 +430,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 16500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -486,7 +439,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -496,7 +448,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 34000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -506,7 +457,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 38000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -516,7 +466,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 36000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -526,7 +475,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -536,7 +484,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -546,7 +493,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 44000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -556,7 +502,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -566,7 +511,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 45000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -576,7 +520,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -586,7 +529,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 52000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -596,7 +538,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 58000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -606,7 +547,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 33000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -616,7 +556,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -626,7 +565,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 250,
-        seats: 2,
         storage: null,
     },
     {
@@ -636,7 +574,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 150,
-        seats: 2,
         storage: null,
     },
     {
@@ -646,7 +583,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 350,
-        seats: 2,
         storage: null,
     },
     {
@@ -656,7 +592,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 75,
-        seats: 2,
         storage: null,
     },
     {
@@ -666,7 +601,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 450,
-        seats: 2,
         storage: null,
     },
     {
@@ -676,7 +610,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 500,
-        seats: 2,
         storage: null,
     },
     {
@@ -686,7 +619,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 550,
-        seats: 2,
         storage: null,
     },
     {
@@ -696,7 +628,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -706,7 +637,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -716,7 +646,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -726,7 +655,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -736,7 +664,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -746,7 +673,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -756,7 +682,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -766,7 +691,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -776,7 +700,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -786,7 +709,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -796,7 +718,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -806,7 +727,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -816,7 +736,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -826,7 +745,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -836,7 +754,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -846,7 +763,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -856,7 +772,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 9,
         storage: 24,
     },
     {
@@ -866,7 +781,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -876,7 +790,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 9,
         storage: 24,
     },
     {
@@ -886,7 +799,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 7,
         storage: 24,
     },
     {
@@ -896,7 +808,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -906,7 +817,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
-        seats: 9,
         storage: 24,
     },
     {
@@ -916,7 +826,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -926,7 +835,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -936,7 +844,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -946,7 +853,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: true,
         price: 125000,
-        seats: 3,
         storage: 24,
     },
     {
@@ -956,7 +862,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 7,
         storage: 24,
     },
     {
@@ -966,7 +871,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -976,7 +880,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -986,7 +889,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -996,7 +898,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1006,7 +907,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1016,7 +916,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1026,7 +925,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1036,7 +934,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1046,7 +943,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1056,7 +952,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1066,7 +961,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1076,7 +970,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1086,7 +979,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1096,7 +988,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1106,7 +997,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1116,7 +1006,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1126,7 +1015,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1136,7 +1024,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1146,7 +1033,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1156,7 +1042,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1166,7 +1051,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1176,7 +1060,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1186,7 +1069,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1196,7 +1078,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1206,7 +1087,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1216,7 +1096,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1226,7 +1105,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1236,7 +1114,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1246,7 +1123,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1256,7 +1132,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1266,7 +1141,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1276,7 +1150,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1286,7 +1159,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1296,7 +1168,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1306,7 +1177,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1316,7 +1186,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1326,7 +1195,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1336,7 +1204,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1346,7 +1213,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1356,7 +1222,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1366,7 +1231,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1376,7 +1240,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1386,7 +1249,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1396,7 +1258,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1406,7 +1267,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1416,7 +1276,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1426,7 +1285,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1436,7 +1294,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1446,7 +1303,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1456,7 +1312,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1466,7 +1321,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1476,7 +1330,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1486,7 +1339,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1496,7 +1348,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1506,7 +1357,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1516,7 +1366,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1526,7 +1375,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1536,7 +1384,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1546,7 +1393,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1556,7 +1402,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1566,7 +1411,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1576,7 +1420,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1586,7 +1429,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 31000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1596,7 +1438,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1606,7 +1447,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 19500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1616,7 +1456,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1626,7 +1465,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1636,7 +1474,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1646,7 +1483,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1656,7 +1492,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1666,7 +1501,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1676,7 +1510,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1686,7 +1519,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18500,
-        seats: 3,
         storage: 4,
     },
     {
@@ -1696,7 +1528,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1706,7 +1537,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1716,7 +1546,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1726,7 +1555,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1736,7 +1564,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 23000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1746,7 +1573,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -1756,7 +1582,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1766,7 +1591,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 21000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1776,7 +1600,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1786,7 +1609,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 100,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1796,7 +1618,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 5000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1806,7 +1627,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 8500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1816,7 +1636,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1826,7 +1645,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 14000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1836,7 +1654,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1846,7 +1663,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 65000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1856,7 +1672,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 65800,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1866,7 +1681,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1876,7 +1690,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1886,7 +1699,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 55000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1896,7 +1708,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1906,7 +1717,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1916,7 +1726,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 33000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1926,7 +1735,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1936,7 +1744,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1946,7 +1753,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1956,7 +1762,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18900,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1966,7 +1771,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 44000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1976,7 +1780,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 75000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1986,7 +1789,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -1996,7 +1798,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2006,7 +1807,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2016,7 +1816,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 150000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2026,7 +1825,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2036,7 +1834,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 37000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2046,7 +1843,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2056,7 +1852,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38600,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2066,7 +1861,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 41000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2076,7 +1870,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 43000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2086,7 +1879,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 13000,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2096,7 +1888,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 13500,
-        seats: 2,
         storage: 4,
     },
     {
@@ -2106,7 +1897,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2116,7 +1906,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2126,7 +1915,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2136,7 +1924,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2146,7 +1933,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2156,7 +1942,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2166,7 +1951,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2176,7 +1960,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 33000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2186,7 +1969,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 68000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2196,7 +1978,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2206,7 +1987,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2216,7 +1996,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2226,7 +2005,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -2236,7 +2014,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2246,7 +2023,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2256,7 +2032,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2266,7 +2041,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2276,7 +2050,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2286,7 +2059,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2296,7 +2068,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 60000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2306,7 +2077,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2316,7 +2086,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2326,7 +2095,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2336,7 +2104,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 15000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2346,7 +2113,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2356,7 +2122,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2366,7 +2131,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2376,7 +2140,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2386,7 +2149,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2396,7 +2158,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 29000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2406,7 +2167,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2416,7 +2176,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2426,7 +2185,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 38000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2436,7 +2194,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2446,7 +2203,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 45000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2456,7 +2212,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2466,7 +2221,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 45000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2476,7 +2230,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2486,7 +2239,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2496,7 +2248,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2506,7 +2257,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2516,7 +2266,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 16000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2526,7 +2275,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2536,7 +2284,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2546,7 +2293,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2556,7 +2302,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 31500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2566,7 +2311,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2576,7 +2320,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2586,7 +2329,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2596,7 +2338,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2606,7 +2347,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2616,7 +2356,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2626,7 +2365,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 21000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2636,7 +2374,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -2646,7 +2383,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2656,7 +2392,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -2666,7 +2401,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2676,7 +2410,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 19500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2686,7 +2419,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2696,7 +2428,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2706,7 +2437,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2716,7 +2446,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2726,7 +2455,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2736,7 +2464,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 2500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2746,7 +2473,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 13500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2756,7 +2482,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 15600,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2766,7 +2491,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 13000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2776,7 +2500,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 14500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2786,7 +2509,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 16000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2796,7 +2518,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2806,7 +2527,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2816,7 +2536,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2826,7 +2545,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 17500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2836,7 +2554,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 95000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2846,7 +2563,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2856,7 +2572,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2866,7 +2581,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -2876,7 +2590,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 55000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2886,7 +2599,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 13500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2896,7 +2608,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2906,7 +2617,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2916,7 +2626,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2926,7 +2635,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2936,7 +2644,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2946,7 +2653,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2956,7 +2662,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 122000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2966,7 +2671,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 125000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2976,7 +2680,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2986,7 +2689,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -2996,7 +2698,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 145000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3006,7 +2707,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3016,7 +2716,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3026,7 +2725,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3036,7 +2734,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3046,7 +2743,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3056,7 +2752,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3066,7 +2761,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 18000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3076,7 +2770,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3086,7 +2779,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 28500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3096,7 +2788,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 44000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3106,7 +2797,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 55000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3116,7 +2806,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3126,7 +2815,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3136,7 +2824,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3146,7 +2833,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3156,7 +2842,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 250000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3166,7 +2851,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3176,7 +2860,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3186,7 +2869,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3196,7 +2878,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 750000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3206,7 +2887,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 900000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3216,7 +2896,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 300000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3226,7 +2905,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3236,7 +2914,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3246,7 +2923,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3256,7 +2932,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3266,7 +2941,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 250000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3276,7 +2950,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 175000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3286,7 +2959,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 800000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3296,7 +2968,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 1500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3306,7 +2977,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 385000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3316,7 +2986,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 150000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3326,7 +2995,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 850000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3336,7 +3004,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 925000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3346,7 +3013,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3356,7 +3022,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 900000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3366,7 +3031,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 325000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3376,7 +3040,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3386,7 +3049,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 325000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3396,7 +3058,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 62000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3406,7 +3067,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 65000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3416,7 +3076,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3426,7 +3085,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3436,7 +3094,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3446,7 +3103,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3456,7 +3112,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 75000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3466,7 +3121,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 72000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3476,7 +3130,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 82000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3486,7 +3139,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 65800,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3496,7 +3148,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 120000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3506,7 +3157,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3516,7 +3166,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 70000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3526,7 +3175,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 63000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3536,7 +3184,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 61000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3546,7 +3193,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 72000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3556,7 +3202,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 88000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3566,7 +3211,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 58000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3576,7 +3220,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 59000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3586,7 +3229,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3596,7 +3238,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 92000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3606,7 +3247,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3616,7 +3256,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3626,7 +3265,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 78000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3636,7 +3274,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 68000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3646,7 +3283,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 61000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3656,7 +3292,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 63000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3666,7 +3301,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 85000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3676,7 +3310,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 73000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3686,7 +3319,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3696,7 +3328,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3706,7 +3337,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3716,7 +3346,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 26000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3726,7 +3355,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 34000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3736,7 +3364,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3746,7 +3373,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3756,7 +3382,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3766,7 +3391,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 22000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3776,7 +3400,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 22550,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3786,7 +3409,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3796,7 +3418,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 34000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3806,7 +3427,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 18500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3816,7 +3436,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 17000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3826,7 +3445,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 21000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3836,7 +3454,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3846,7 +3463,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3856,7 +3472,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 15000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3866,7 +3481,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3876,7 +3490,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3886,7 +3499,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 42000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3896,7 +3508,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 45000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3906,7 +3517,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3916,7 +3526,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3926,7 +3535,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 58000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3936,7 +3544,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3946,7 +3553,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 19500,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3956,7 +3562,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 45000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3966,7 +3571,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 65000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3976,7 +3580,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3986,7 +3589,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 36000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -3996,7 +3598,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 26000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4006,7 +3607,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 25000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4016,7 +3616,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4026,7 +3625,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4036,7 +3634,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4046,7 +3643,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4056,7 +3652,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4066,7 +3661,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4076,7 +3670,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4086,7 +3679,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4096,7 +3688,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4106,7 +3697,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4116,7 +3706,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4126,7 +3715,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4136,7 +3724,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4146,7 +3733,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4156,7 +3742,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4166,7 +3751,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4176,7 +3760,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4186,7 +3769,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4196,7 +3778,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4206,7 +3787,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4216,7 +3796,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4226,7 +3805,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4236,7 +3814,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4246,7 +3823,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4256,7 +3832,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 385000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4266,7 +3841,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4276,7 +3850,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4286,7 +3859,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4296,7 +3868,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4306,7 +3877,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4316,7 +3886,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4326,7 +3895,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 425000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4336,7 +3904,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4346,7 +3913,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4356,7 +3922,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4366,7 +3931,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4376,7 +3940,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 480000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4386,7 +3949,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 440000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4396,7 +3958,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 435000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4406,7 +3967,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4416,7 +3976,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4426,7 +3985,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4436,7 +3994,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4446,7 +4003,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4456,7 +4012,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4466,7 +4021,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4476,7 +4030,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4486,7 +4039,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4496,7 +4048,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4506,7 +4057,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 535000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4516,7 +4066,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4526,7 +4075,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 435000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4536,7 +4084,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4546,7 +4093,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4556,7 +4102,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4566,7 +4111,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 425000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4576,7 +4120,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4586,7 +4129,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4596,7 +4138,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4606,7 +4147,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4616,7 +4156,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4626,7 +4165,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4636,7 +4174,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4646,7 +4183,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4656,7 +4192,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4666,7 +4201,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4676,7 +4210,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4686,7 +4219,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4696,7 +4228,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4706,7 +4237,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4716,7 +4246,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4726,7 +4255,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4736,7 +4264,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4746,7 +4273,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4756,7 +4282,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4766,7 +4291,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4776,7 +4300,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 675000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4786,7 +4309,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 700000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4796,7 +4318,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4806,7 +4327,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4816,7 +4336,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4826,7 +4345,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4836,7 +4354,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4846,7 +4363,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4856,7 +4372,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4866,7 +4381,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4876,7 +4390,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4886,7 +4399,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 675000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4896,7 +4408,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4906,7 +4417,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4916,7 +4426,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4926,7 +4435,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 635000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4936,7 +4444,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4946,7 +4453,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 645000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4956,7 +4462,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4966,7 +4471,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4976,7 +4480,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4986,7 +4489,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -4996,7 +4498,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 615000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5006,7 +4507,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 615000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5016,7 +4516,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5026,7 +4525,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5036,7 +4534,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 575000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5046,7 +4543,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5056,7 +4552,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5066,7 +4561,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 650000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5076,7 +4570,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 700000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5086,7 +4579,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 23000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5096,7 +4588,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 720000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5106,7 +4597,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 720000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5116,7 +4606,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 750000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5126,7 +4615,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 700000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5136,7 +4624,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5146,7 +4633,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5156,7 +4642,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 1,
         storage: 24,
     },
     {
@@ -5166,7 +4651,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 1,
         storage: 24,
     },
     {
@@ -5176,7 +4660,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1250000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5186,7 +4669,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1250000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5196,7 +4678,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1300000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5206,7 +4687,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5216,7 +4696,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1350000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5226,7 +4705,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2000000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5236,7 +4714,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5246,7 +4723,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5256,7 +4732,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5266,7 +4741,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5276,7 +4750,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5286,7 +4759,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5296,7 +4768,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5306,7 +4777,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5316,7 +4786,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5326,7 +4795,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5336,7 +4804,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5346,7 +4813,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5356,7 +4822,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5366,7 +4831,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5376,7 +4840,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5386,7 +4849,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5396,7 +4858,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5406,7 +4867,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5416,7 +4876,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5426,7 +4885,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5436,7 +4894,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5446,7 +4903,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5456,7 +4912,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5466,7 +4921,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5476,7 +4930,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5486,7 +4939,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5496,7 +4948,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5506,7 +4957,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5516,7 +4966,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5526,7 +4975,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5536,7 +4984,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5546,7 +4993,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5556,7 +5002,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5566,7 +5011,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5576,7 +5020,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5586,7 +5029,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5596,7 +5038,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5606,7 +5047,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5616,7 +5056,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5626,7 +5065,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5636,7 +5074,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5646,7 +5083,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5656,7 +5092,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5666,7 +5101,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5676,7 +5110,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5686,7 +5119,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5696,7 +5128,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5706,7 +5137,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5716,7 +5146,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5726,7 +5155,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5736,7 +5164,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5746,7 +5173,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5756,7 +5182,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5766,7 +5191,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5776,7 +5200,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5786,7 +5209,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5796,7 +5218,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5806,7 +5227,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5816,7 +5236,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5826,7 +5245,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5836,7 +5254,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5846,7 +5263,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5856,7 +5272,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5866,7 +5281,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: true,
         price: 24000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5876,7 +5290,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5886,7 +5299,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5896,7 +5308,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5906,7 +5317,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5916,7 +5326,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5926,7 +5335,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5936,7 +5344,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5946,7 +5353,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5956,7 +5362,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5966,7 +5371,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5976,7 +5380,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5986,7 +5389,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -5996,7 +5398,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6006,7 +5407,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6016,7 +5416,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6026,7 +5425,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6036,7 +5434,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6046,7 +5443,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6056,7 +5452,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6066,7 +5461,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6076,7 +5470,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6086,7 +5479,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6096,7 +5488,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6106,7 +5497,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6116,7 +5506,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6126,7 +5515,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6136,7 +5524,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6146,7 +5533,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6156,7 +5542,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6166,7 +5551,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6176,7 +5560,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6186,7 +5569,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6196,7 +5578,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6206,7 +5587,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6216,7 +5596,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6226,7 +5605,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6236,7 +5614,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6246,7 +5623,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6256,7 +5632,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6266,7 +5641,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -6276,7 +5650,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6286,7 +5659,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6296,7 +5668,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6306,7 +5677,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6316,7 +5686,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6326,7 +5695,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6336,7 +5704,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6346,7 +5713,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6356,7 +5722,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6366,7 +5731,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6376,7 +5740,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6386,7 +5749,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6396,7 +5758,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6406,7 +5767,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6416,7 +5776,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6426,7 +5785,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6436,7 +5794,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6446,7 +5803,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6456,7 +5812,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6466,7 +5821,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6476,7 +5830,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6486,7 +5839,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6496,7 +5848,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6506,7 +5857,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6516,7 +5866,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6526,7 +5875,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6536,7 +5884,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6546,7 +5893,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6556,7 +5902,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6566,7 +5911,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6576,7 +5920,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6586,7 +5929,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6596,7 +5938,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6606,7 +5947,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6616,7 +5956,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6626,7 +5965,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6636,7 +5974,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6646,7 +5983,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6656,7 +5992,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6666,7 +6001,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6676,7 +6010,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6686,7 +6019,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6696,7 +6028,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6706,7 +6037,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6716,7 +6046,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6726,7 +6055,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6736,7 +6064,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6746,7 +6073,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6756,7 +6082,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6766,7 +6091,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6776,7 +6100,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6786,7 +6109,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6796,7 +6118,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6806,7 +6127,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6816,7 +6136,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6826,7 +6145,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6836,7 +6154,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6846,7 +6163,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6856,7 +6172,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6866,7 +6181,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6876,7 +6190,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6886,7 +6199,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6896,7 +6208,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OPENWHEEL,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6906,7 +6217,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OPENWHEEL,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6916,7 +6226,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6926,7 +6235,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6936,7 +6244,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6946,7 +6253,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6956,7 +6262,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6966,7 +6271,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6976,7 +6280,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6986,7 +6289,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -6996,7 +6298,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7006,7 +6307,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
-        seats: 5,
         storage: 24,
     },
     {
@@ -7016,7 +6316,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -7026,7 +6325,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7036,7 +6334,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7046,7 +6343,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 99999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -7056,7 +6352,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7066,7 +6361,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -7076,7 +6370,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 8,
         storage: 24,
     },
     {
@@ -7086,7 +6379,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7096,7 +6388,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7106,7 +6397,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -7116,7 +6406,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
     {
@@ -7126,7 +6415,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 99999999999,
-        seats: 6,
         storage: 24,
     },
     {
@@ -7136,7 +6424,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 99999999999,
-        seats: 1,
         storage: 24,
     },
     {
@@ -7146,7 +6433,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 99999999999,
-        seats: 1,
         storage: 24,
     },
     {
@@ -7156,7 +6442,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 99999999999,
-        seats: 4,
         storage: 24,
     },
     {
@@ -7166,7 +6451,6 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 99999999999,
-        seats: 2,
         storage: 24,
     },
 ];

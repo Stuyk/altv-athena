@@ -7,7 +7,7 @@ export default [
         opacity: 0,
         color1: 0,
         color2: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -16,7 +16,7 @@ export default [
         id: 5,
         opacity: 0,
         color1: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -25,6 +25,6 @@ export default [
         id: 8,
         opacity: 0,
         color1: 0,
-        value: 0
-    }
+        value: 0,
+    },
 ];

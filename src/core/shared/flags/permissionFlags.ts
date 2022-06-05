@@ -29,7 +29,7 @@ export enum PERMISSIONS {
     NONE = 0,
     VIP = 1,
     MODERATOR = 2,
-    ADMIN = 4
+    ADMIN = 4,
     // Do Not Exceed 33 Entries
 }
 
@@ -40,6 +40,6 @@ export enum PERMISSIONS {
  * @enum {number}
  */
 export enum CHARACTER_PERMISSIONS {
-    NONE = 0
+    NONE = 0,
     // Do Not Exceed 33 Entries
 }

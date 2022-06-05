@@ -1,3 +1,1 @@
-export enum FactionFuncNames {
-    
-}
+export enum FactionFuncNames {}

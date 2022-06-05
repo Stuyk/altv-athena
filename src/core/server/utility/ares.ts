@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import axios from 'axios';
-import ecc from 'elliptic'
+import ecc from 'elliptic';
 import sjcl from 'sjcl';
 
 import { sha256 } from './encryption';

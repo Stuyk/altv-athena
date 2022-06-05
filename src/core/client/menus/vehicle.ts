@@ -6,7 +6,6 @@ import { isAnyMenuOpen } from '../utility/menus';
 import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
-import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 
 type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 
@@ -37,6 +36,55 @@ export class VehicleWheelMenu {
         Injections.push(callback);
     }
 
+    /**
+     * Open an in-vehicle menu option and add injections relevant to in-vehicle.
+     *
+     * @static
+     * @param {alt.Vehicle} vehicle
+     * @return {*}
+     * @memberof VehicleWheelMenu
+     */
+    static openInVehicleMenu(vehicle: alt.Vehicle) {
+        if (isAnyMenuOpen()) {
+            return;
+        }
+
+        if (!vehicle || !vehicle.valid) {
+            return;
+        }
+
+        let options: Array<IWheelOptionExt> = [];
+
+        const pedInDriverSeat = native.getPedInVehicleSeat(vehicle.scriptID, -1, false);
+
+        // Is Driver Function
+        if (pedInDriverSeat === alt.Player.local.scriptID) {
+            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+
+            options.push({
+                name: engineOn ? 'Off' : 'On',
+                icon: 'icon-engine-fill',
+                color: engineOn ? 'red' : 'green',
+                emitServer: VEHICLE_EVENTS.SET_ENGINE,
+            });
+        }
+
+        for (const callback of Injections) {
+            try {
+                options = callback(vehicle, options);
+            } catch (err) {
+                console.warn(`Got Vehicle Menu Injection Error ${err}`);
+                continue;
+            }
+        }
+
+        if (options.length <= 0) {
+            return;
+        }
+
+        WheelMenu.open('Vehicle Options', options);
+    }
+
     static openMenu(vehicle: alt.Vehicle) {
         if (isAnyMenuOpen()) {
             return;
@@ -53,49 +101,38 @@ export class VehicleWheelMenu {
 
         let options: Array<IWheelOptionExt> = [];
 
-        if (!alt.Player.local.vehicle) {
-            const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
-            const isLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
+        const isDestroyed = native.getVehicleEngineHealth(vehicle.scriptID) <= 0;
+        const isLocked = native.getVehicleDoorLockStatus(vehicle.scriptID) === 2;
 
-            options.push({
-                name: isLocked ? 'Unlock' : 'Lock',
-                color: isLocked ? 'green' : 'red',
-                icon: isLocked ? 'icon-lock-open' : 'icon-lock',
-                emitServer: VEHICLE_EVENTS.SET_LOCK,
-            });
+        options.push({
+            name: isLocked ? 'Unlock' : 'Lock',
+            color: isLocked ? 'green' : 'red',
+            icon: isLocked ? 'icon-lock-open' : 'icon-lock',
+            emitServer: VEHICLE_EVENTS.SET_LOCK,
+        });
 
-            const type = native.getVehicleClass(vehicle);
+        const type = native.getVehicleClass(vehicle);
 
-            // Not Pushing & Vehicle is Currently Unlocked
-            if (!PushVehicle.isPushing() && !isLocked && !isDestroyed) {
-                if (!BLACKLISTED_VEHICLE_TYPES.includes(type)) {
-                    options.push({
-                        name: 'Push',
-                        callback: PushVehicle.start,
-                        data: [vehicle],
-                    });
-                }
-
+        // Not Pushing & Vehicle is Currently Unlocked
+        if (!PushVehicle.isPushing() && !isLocked && !isDestroyed) {
+            if (!BLACKLISTED_VEHICLE_TYPES.includes(type)) {
                 options.push({
-                    name: 'Open Storage',
-                    callback: () => {
-                        alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
-                    },
-                });
-            } else if (PushVehicle.isPushing()) {
-                options.push({
-                    name: 'Stop Push',
-                    callback: PushVehicle.clear,
+                    name: 'Push',
+                    callback: PushVehicle.start,
+                    data: [vehicle],
                 });
             }
-        } else {
-            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
 
             options.push({
-                name: engineOn ? 'Off' : 'On',
-                icon: 'icon-engine-fill',
-                color: engineOn ? 'red' : 'green',
-                emitServer: VEHICLE_EVENTS.SET_ENGINE,
+                name: 'Open Storage',
+                callback: () => {
+                    alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
+                },
+            });
+        } else if (PushVehicle.isPushing()) {
+            options.push({
+                name: 'Stop Push',
+                callback: PushVehicle.clear,
             });
         }
 

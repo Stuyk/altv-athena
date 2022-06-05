@@ -64,7 +64,11 @@ async function finishLogin(player: alt.Player) {
     };
 
     const result = await axios.request(options).catch((err) => {
-        alt.emitClient(player, 'Discord:Fail', LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE));
+        alt.emitClient(
+            player,
+            'Discord:Fail',
+            LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE),
+        );
         return null;
     });
 
@@ -73,7 +77,11 @@ async function finishLogin(player: alt.Player) {
     }
 
     const data = await Ares.decrypt(JSON.stringify(result.data)).catch((err) => {
-        alt.emitClient(player, 'Discord:Fail', LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE));
+        alt.emitClient(
+            player,
+            'Discord:Fail',
+            LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE),
+        );
         return null;
     });
 

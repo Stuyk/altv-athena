@@ -1,8 +1,6 @@
-
 import { Athena } from '../../server/api/athena';
 import { PERMISSIONS } from '../../shared/flags/permissionFlags';
 import { ConsoleCommander } from '../../shared/utility/consoleCommander';
-
 
 /**
  * It takes in a command name, a description, and a permissions level, and then adds a command to the
@@ -18,12 +16,12 @@ export function command(commandName: string | string[], description: string, per
             Athena.controllers.chat.addCommand(commandName, description, permissions, descriptor.value);
             return;
         }
-        
+
         if (Array.isArray(commandName)) {
             for (let i = 0; i < commandName.length; i++) {
                 Athena.controllers.chat.addCommand(commandName[i], description, permissions, descriptor.value);
             }
-        } 
+        }
     };
 }
 

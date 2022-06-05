@@ -14,4 +14,6 @@ export const SHARED_CONFIG = {
     VOICE_ON: false,
     // HUD
     USE_24H_TIME_FORMAT: false,
+    // Idle Cam
+    DISABLE_IDLE_CAM: false,
 };

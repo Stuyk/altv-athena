@@ -384,7 +384,10 @@ export class InventoryView {
         // Destroys an item when it is dropped on the ground if the behavior calls for it.
         if (isFlagEnabled(itemClone.behavior, ITEM_TYPE.DESTROY_ON_DROP)) {
             playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
-            playerConst.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_WAS_DESTROYED_ON_DROP, itemClone.name));
+            playerConst.emit.message(
+                player,
+                LocaleController.get(LOCALE_KEYS.ITEM_WAS_DESTROYED_ON_DROP, itemClone.name),
+            );
             return;
         }
 
@@ -492,7 +495,13 @@ export class InventoryView {
         }
 
         if (dataType) {
-            const result = await InventoryView.verifyRules(player, dataType, droppedItem.item, droppedItem.gridSpace, -1);
+            const result = await InventoryView.verifyRules(
+                player,
+                dataType,
+                droppedItem.item,
+                droppedItem.gridSpace,
+                -1,
+            );
             if (!result) {
                 playerConst.sync.inventory(player);
                 return;

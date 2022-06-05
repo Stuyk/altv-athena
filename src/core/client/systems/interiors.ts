@@ -171,4 +171,18 @@ function fixMissingInteriors() {
         natives.activateInteriorEntitySet(interiorID, 'Set_pent_bar_light_02');
         natives.refreshInterior(interiorID);
     }
+
+    // Car Meet
+    alt.requestIpl('tr_tuner_meetup');
+    alt.requestIpl('tr_tuner_race_line');
+
+    interiorID = 286209;
+    if (natives.isValidInterior(interiorID)) {
+        natives.activateInteriorEntitySet(interiorID, 'entity_set_meet_lights');
+        natives.activateInteriorEntitySet(interiorID, 'entity_set_meet_lights_cheap');
+        natives.activateInteriorEntitySet(interiorID, 'entity_set_test_lights');
+        natives.activateInteriorEntitySet(interiorID, 'entity_set_test_lights_cheap');
+        natives.activateInteriorEntitySet(interiorID, 'entity_set_time_trial');
+        natives.refreshInterior(interiorID);
+    }
 }

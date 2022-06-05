@@ -6,5 +6,5 @@ export interface Options {
 }
 
 export const defaultOptions = {
-    whitelist: []
+    whitelist: [],
 };
