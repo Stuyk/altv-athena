@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 alt.on('connectionComplete', handleConnectionComplete);
@@ -14,6 +15,10 @@ async function handleConnectionComplete() {
     native.triggerScreenblurFadeOut(0);
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
+
+    if (SHARED_CONFIG.DISABLE_IDLE_CAM) {
+        alt.setConfigFlag("DISABLE_IDLE_CAMERA", true);
+    }
 
     // Calls the login functionality
     alt.emitServer(SYSTEM_EVENTS.BEGIN_CONNECTION);
