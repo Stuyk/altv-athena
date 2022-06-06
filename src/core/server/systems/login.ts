@@ -153,7 +153,7 @@ export class LoginController {
             StorageView.removeStorageBinding(id);
         }
 
-        if (!player || !player.valid || !player.data) {
+        if (!player || !player.valid || !player.data || !player.data._id) {
             return;
         }
 
