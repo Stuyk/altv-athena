@@ -10,6 +10,7 @@ import { VehicleData } from '../../shared/information/vehicles';
 import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
+import IVehiclePartDamage from '../../shared/interfaces/iVehiclePartDamage';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -344,6 +345,11 @@ export default class VehicleFuncs {
             vehicle.engineHealth = vehicle.data.engineHealth;
         }
 
+        if (vehicle.data.damagedParts) {
+            this.setDamage(vehicle);
+        }
+
+
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -589,6 +595,7 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
+            damagedParts: this.getDamage(vehicle),
             lastUsed: Date.now(), // ms
         });
     }
@@ -610,7 +617,7 @@ export default class VehicleFuncs {
         for (const vehicle of vehicles) {
             try {
                 await VehicleFuncs.despawn(vehicle.data.id);
-            } catch {}
+            } catch { }
         }
     }
 
@@ -1238,6 +1245,79 @@ export default class VehicleFuncs {
         if (!vehicle.isTemporary) {
             if (!vehicle.data?.tuning) vehicle.data.tuning = {};
             vehicle.data.tuning.driftModeEnabled = enabled;
+        }
+    }
+
+    static getDamage(vehicle: alt.Vehicle): object {
+        let damageObject = {
+            'FrontLeft': {
+                bulletHoles: vehicle.getPartBulletHoles(0),
+                damageLevel: vehicle.getPartDamageLevel(0).toString()
+            },
+            'FrontRight': {
+                bulletHoles: vehicle.getPartBulletHoles(1),
+                damageLevel: vehicle.getPartDamageLevel(1).toString()
+            },
+            'MiddleLeft': {
+                bulletHoles: vehicle.getPartBulletHoles(2),
+                damageLevel: vehicle.getPartDamageLevel(2).toString()
+            },
+            'MiddleRight': {
+                bulletHoles: vehicle.getPartBulletHoles(3),
+                damageLevel: vehicle.getPartDamageLevel(3).toString()
+            },
+            'RearLeft': {
+                bulletHoles: vehicle.getPartBulletHoles(4),
+                damageLevel: vehicle.getPartDamageLevel(4).toString()
+            },
+            'RearRight': {
+                bulletHoles: vehicle.getPartBulletHoles(5),
+                damageLevel: vehicle.getPartDamageLevel(5).toString()
+            },
+        }
+        return damageObject;
+    }
+
+    static setDamage(vehicle: alt.Vehicle): void {
+        for (let part in vehicle.data.damagedParts) {
+            let damages = vehicle.data.damagedParts[part];
+            let vehPart = this.getVehiclePart(part);
+            vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
+            vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+        }
+    }
+
+    static getDamageLevel(level: string): number {
+        switch (level) {
+            case 'DamagedLevel1':
+                return 1;
+            case 'DamagedLevel2':
+                return 2;
+            case 'DamagedLevel3':
+                return 3;
+            case 'NotDamaged':
+                return 0;
+            default:
+                return 0;
+        }
+    }
+
+    static getVehiclePart(part: string): number {
+        switch (part) {
+            case 'FrontLeft':
+                return 0
+            case 'FrontRight':
+                return 1
+            case 'MiddleLeft':
+                return 2
+            case 'MiddleRight':
+                return 3
+            case 'RearLeft':
+                return 4
+            case 'RearRight':
+                return 5
+            default:
+                return 0;
         }
     }
 }
