@@ -43,13 +43,6 @@ declare module 'alt-server' {
         nextUpdate?: number;
 
         /**
-         * Passengers that are currently in this vehicle.
-         * @type {Array<{ player: alt.Player; seat: number }>}
-         * @memberof Vehicle
-         */
-        passengers?: Array<{ player: alt.Player; seat: number }>;
-
-        /**
          * Is the vehicle a temporary vehicle?
          * Meaning will this vehicle be deleted after exiting?
          * @type {boolean}

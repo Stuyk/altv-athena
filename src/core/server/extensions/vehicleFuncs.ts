@@ -310,7 +310,6 @@ export default class VehicleFuncs {
         SpawnedVehicles[document.id] = vehicle;
 
         // Setup Default Values
-        vehicle.passengers = [];
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
         vehicle.setStreamSyncedMeta(
             VEHICLE_STATE.LOCK_INTERACTION_INFO,
@@ -323,7 +322,6 @@ export default class VehicleFuncs {
         }
 
         vehicle.data = document;
-        vehicle.passengers = [];
         vehicle.behavior = vehicle.data.behavior;
 
         // Check if the vehicle is of the bike type
@@ -384,20 +382,42 @@ export default class VehicleFuncs {
             callback(SpawnedVehicles[id]);
         }
 
-        // Remove all information from passengers regarding this vehicle.
-        for (let i = 0; i < SpawnedVehicles[id].passengers.length; i++) {
-            const passenger = SpawnedVehicles[id].passengers[i];
-            if (!passenger.player || !passenger.player.valid) {
-                continue;
-            }
-
-            passenger.player.lastEnteredVehicleID = null;
-        }
-
         VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
         SpawnedVehicles[id].destroy();
         delete SpawnedVehicles[id];
         return true;
+    }
+
+    /**
+     * A session based owned vehicle.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {string} model
+     * @param {alt.IVector3} pos
+     * @param {alt.IVector3} rot
+     * @memberof VehicleFuncs
+     */
+    static sessionVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: alt.IVector3) {
+        const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+        vehicle.player_id = player.id;
+        vehicle.behavior =
+            Vehicle_Behavior.NEED_KEY_TO_START | Vehicle_Behavior.NO_SAVE | Vehicle_Behavior.UNLIMITED_FUEL;
+
+        vehicle.numberPlateText = 'SESSION';
+        vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+        vehicle.isTemporary = true;
+        vehicle.modelName = model;
+        vehicle.overrideTemporaryDeletion = true;
+
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
+
+        return vehicle;
     }
 
     /**
