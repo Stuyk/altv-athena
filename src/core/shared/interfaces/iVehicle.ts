@@ -124,6 +124,20 @@ export interface IVehicle {
     engineHealth?: number;
 
     /**
+     * The base64 of the damage currently done to vehicle
+     * @type {string}
+     * @memberof IVehicle
+     */
+    damage?: string
+
+    /**
+     * The base64 of the health data currently done to vehicle
+     * @type {string}
+     * @memberof IVehicle
+     */
+     health?: string
+
+    /**
      * The last time this vehicle was used.
      * @type {number}
      * @memberof IVehicle

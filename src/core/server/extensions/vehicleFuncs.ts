@@ -344,6 +344,13 @@ export default class VehicleFuncs {
             vehicle.engineHealth = vehicle.data.engineHealth;
         }
 
+        if (vehicle.data.damage) {
+            vehicle.setDamageStatusBase64(vehicle.data.damage);
+        }
+        if (vehicle.data.health) {
+            vehicle.setHealthDataBase64(vehicle.data.damage);
+        }
+
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -589,6 +596,8 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
+            damage: vehicle.getDamageStatusBase64(),
+            health: vehicle.getHealthDataBase64(),
             lastUsed: Date.now(), // ms
         });
     }
@@ -610,7 +619,7 @@ export default class VehicleFuncs {
         for (const vehicle of vehicles) {
             try {
                 await VehicleFuncs.despawn(vehicle.data.id);
-            } catch {}
+            } catch { }
         }
     }
 
