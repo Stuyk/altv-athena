@@ -4,7 +4,7 @@ export default interface IVehiclePartDamage {
      * @type {number}
      * @memberof IVehiclePartDamage
      */
-    bulletHoles: number
+    bulletHoles?: number
 
     /**
      * Damage level of the vehicle part

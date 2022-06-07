@@ -1270,40 +1270,82 @@ export default class VehicleFuncs {
 
     static getDamage(vehicle: alt.Vehicle): object {
         let damageObject = {
-            'FrontLeft': {
-                bulletHoles: vehicle.getPartBulletHoles(0),
-                damageLevel: vehicle.getPartDamageLevel(0).toString()
+            Parts: {
+                'FrontLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(0),
+                    damageLevel: vehicle.getPartDamageLevel(0).toString()
+                },
+                'FrontRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(1),
+                    damageLevel: vehicle.getPartDamageLevel(1).toString()
+                },
+                'MiddleLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(2),
+                    damageLevel: vehicle.getPartDamageLevel(2).toString()
+                },
+                'MiddleRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(3),
+                    damageLevel: vehicle.getPartDamageLevel(3).toString()
+                },
+                'RearLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(4),
+                    damageLevel: vehicle.getPartDamageLevel(4).toString()
+                },
+                'RearRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(5),
+                    damageLevel: vehicle.getPartDamageLevel(5).toString()
+                },
+
             },
-            'FrontRight': {
-                bulletHoles: vehicle.getPartBulletHoles(1),
-                damageLevel: vehicle.getPartDamageLevel(1).toString()
+            Windows: {
+                'DriverSideFront': {
+                    damageLevel: vehicle.isWindowDamaged(1) ? 1 : 0
+                },
+                'DriverSideRear': {
+                    damageLevel: vehicle.isWindowDamaged(3) ? 1 : 0
+                },
+                'PassSideFront': {
+                    damageLevel: vehicle.isWindowDamaged(0) ? 1 : 0
+                },
+                'PassSideRear': {
+                    damageLevel: vehicle.isWindowDamaged(2) ? 1 : 0
+                },
+                'FrontWindshield': {
+                    damageLevel: vehicle.isWindowDamaged(6) ? 1 : 0
+                },
+                'RearWindshield': {
+                    damageLevel: vehicle.isWindowDamaged(7) ? 1 : 0
+                },
             },
-            'MiddleLeft': {
-                bulletHoles: vehicle.getPartBulletHoles(2),
-                damageLevel: vehicle.getPartDamageLevel(2).toString()
-            },
-            'MiddleRight': {
-                bulletHoles: vehicle.getPartBulletHoles(3),
-                damageLevel: vehicle.getPartDamageLevel(3).toString()
-            },
-            'RearLeft': {
-                bulletHoles: vehicle.getPartBulletHoles(4),
-                damageLevel: vehicle.getPartDamageLevel(4).toString()
-            },
-            'RearRight': {
-                bulletHoles: vehicle.getPartBulletHoles(5),
-                damageLevel: vehicle.getPartDamageLevel(5).toString()
-            },
+            Bumpers: {
+                'FrontBumper': {
+                    damageLevel: vehicle.getBumperDamageLevel(0),
+                },
+                'RearBumper': {
+                    damageLevel: vehicle.getBumperDamageLevel(1),
+                }
+            }
+
         }
         return damageObject;
     }
 
     static setDamage(vehicle: alt.Vehicle): void {
-        for (let part in vehicle.data.damagedParts) {
-            let damages = vehicle.data.damagedParts[part];
+        for (let part in vehicle.data.damage.parts) {
+            let damages = vehicle.data.damage[part];
             let vehPart = this.getVehiclePart(part);
             vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
             vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+        }
+        for (let part in vehicle.data.damage.windows) {
+            let damages = vehicle.data.damage[part];
+            let vehPart = this.getVehiclePart(part);
+            vehicle.setWindowDamaged(vehPart, damages.damageLevel)
+        }
+        for (let part in vehicle.data.damage.bumpers) {
+            let damages = vehicle.data.damage[part];
+            let vehPart = this.getVehiclePart(part);
+            vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
         }
     }
 
@@ -1317,6 +1359,10 @@ export default class VehicleFuncs {
                 return 3;
             case 'NotDamaged':
                 return 0;
+            case 'Damaged':
+                return 1;
+            case 'None':
+                return 2;
             default:
                 return 0;
         }
@@ -1325,17 +1371,33 @@ export default class VehicleFuncs {
     static getVehiclePart(part: string): number {
         switch (part) {
             case 'FrontLeft':
-                return 0
+                return 0;
             case 'FrontRight':
-                return 1
+                return 1;
             case 'MiddleLeft':
-                return 2
+                return 2;
             case 'MiddleRight':
-                return 3
+                return 3;
             case 'RearLeft':
-                return 4
+                return 4;
             case 'RearRight':
-                return 5
+                return 5;
+            case 'FrontBumper':
+                return 0;
+            case 'RearBumper':
+                return 1;
+            case 'PassSideFront':
+                return 0;
+            case 'DriverSideFront':
+                return 1;
+            case 'PassSideFront':
+                return 2;
+            case 'PassSideRear':
+                return 3;
+            case 'FrontWindshield':
+                return 6;
+            case 'RearWindshield':
+                return 7;
             default:
                 return 0;
         }
