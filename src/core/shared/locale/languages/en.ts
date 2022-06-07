@@ -157,6 +157,8 @@ export default {
     [LOCALE_KEYS.VEHICLE_NOT_RIGHT_SIDE_UP]: `Vehicle is not right side up.`,
     [LOCALE_KEYS.VEHICLE_IS_ALREADY_BEING_PUSHED]: `Vehicle is already being pushed.`,
     [LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME]: `Vehicle - _%_ - Storage`,
+    [LOCALE_KEYS.VEHICLE_KEY_NAME]: `Key for _%_`,
+    [LOCALE_KEYS.VEHICLE_KEY_DESCRIPTION]: `A key for the vehicle model _%_`,
     // Faction
     [LOCALE_KEYS.FACTION_PLAYER_IS_ALREADY_IN_FACTION]: `_%_ is already in a faction or does not exist.`,
     [LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP]: `You are unable to change ownership of the faction.`,
