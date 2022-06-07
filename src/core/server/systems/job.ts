@@ -91,9 +91,8 @@ export class Job {
         color1?: alt.RGBA,
         color2?: alt.RGBA,
     ): alt.Vehicle {
-        const uid = sha256Random(JSON.stringify(player.data));
-        const veh = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
-        veh.uid = uid;
+        const veh = Athena.vehicle.funcs.sessionVehicle(player, model, pos, rot);
+        veh.uid = sha256Random(JSON.stringify(player.data));
 
         if (!color1) {
             color1 = new alt.RGBA(255, 255, 255, 255);
@@ -103,10 +102,8 @@ export class Job {
             color2 = new alt.RGBA(255, 255, 255, 255);
         }
 
-        veh.player_id = player.id;
         veh.customPrimaryColor = color1;
         veh.customSecondaryColor = color2;
-        veh.behavior = Vehicle_Behavior.UNLIMITED_FUEL | Vehicle_Behavior.NO_SAVE;
         this.vehicles.push(veh);
         return veh;
     }
