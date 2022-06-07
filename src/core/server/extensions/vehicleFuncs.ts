@@ -525,6 +525,10 @@ export default class VehicleFuncs {
             return true;
         }
 
+        if (vehicle.isTemporary) {
+            return false;
+        }
+
         if (!vehicle.data) {
             return true;
         }
