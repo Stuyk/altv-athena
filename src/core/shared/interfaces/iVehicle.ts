@@ -126,10 +126,24 @@ export interface IVehicle {
 
     /**
      * The base64 of the damage currently done to vehicle
+<<<<<<< HEAD
      * @type {IVehiclePart}
      * @memberof IVehicle
      */
     damagedParts?: { [part: string]: IVehiclePartDamage }
+=======
+     * @type {string}
+     * @memberof IVehicle
+     */
+    damage?: string
+
+    /**
+     * The base64 of the health data currently done to vehicle
+     * @type {string}
+     * @memberof IVehicle
+     */
+     health?: string
+>>>>>>> 96a111e55a748a494b72f1f45db19b9a0f507136
 
     /**
      * The last time this vehicle was used.
