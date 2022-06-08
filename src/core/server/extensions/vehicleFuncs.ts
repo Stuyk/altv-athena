@@ -14,6 +14,8 @@ import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
 import IVehiclePartDamage from '../../shared/interfaces/iVehiclePartDamage';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -532,6 +534,10 @@ export default class VehicleFuncs {
             return true;
         }
 
+        if (vehicle.isTemporary) {
+            return false;
+        }
+
         if (!vehicle.data) {
             return true;
         }
@@ -698,8 +704,8 @@ export default class VehicleFuncs {
         }
 
         const item: VehicleKeyItem = {
-            name: `Key for ${vehicle.model}`,
-            description: `A key for the vehicle model ${vehicle.model}`,
+            name: LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_NAME, vehicle.model),
+            description: LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_DESCRIPTION, vehicle.model),
             behavior: ITEM_TYPE.DESTROY_ON_DROP,
             quantity: 1,
             icon: 'key',
@@ -712,12 +718,12 @@ export default class VehicleFuncs {
         if (!doNotAddToInventory) {
             const inventory = Athena.player.inventory.getFreeInventorySlot(player);
             if (!inventory) {
-                Athena.player.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 return null;
             }
 
             if (!Athena.player.inventory.inventoryAdd(player, item, inventory.slot)) {
-                Athena.player.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 return null;
             }
 

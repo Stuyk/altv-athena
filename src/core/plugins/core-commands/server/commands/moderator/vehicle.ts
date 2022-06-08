@@ -96,6 +96,27 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
+    @command('sessionvehicle', '/sessionvehicle', PERMISSIONS.ADMIN)
+    private static createSessionVehicle(player: alt.Player, model: string): void {
+        let vehicle: alt.Vehicle;
+
+        try {
+            vehicle = Athena.vehicle.funcs.sessionVehicle(player, model, player.pos, new alt.Vector3(0, 0, 0));
+        } catch (err) {
+            Athena.player.emit.message(player, `Invalid vehicle model`);
+        }
+
+        if (!vehicle) {
+            return;
+        }
+
+        Athena.player.emit.message(player, `Created Vehicle`);
+
+        alt.nextTick(() => {
+            player.setIntoVehicle(vehicle, 1);
+        });
+    }
+
     @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
     private static fullTuneVehicleCommand(player: alt.Player): void {
         const vehicle = player.vehicle;
