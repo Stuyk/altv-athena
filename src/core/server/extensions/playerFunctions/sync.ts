@@ -190,7 +190,7 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
 function singleEquipment(player: alt.Player, component: ClothingComponent) {
     for (let index = 0; index < component.drawables.length; index++) {
         const texture = component.textures[index];
-        const value = component.drawables[index];
+        const drawable = component.drawables[index];
         const id = component.ids[index];
 
         if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
@@ -200,20 +200,20 @@ function singleEquipment(player: alt.Player, component: ClothingComponent) {
             }
 
             if (component.isProp) {
-                player.setDlcProp(dlc, id, value, texture);
+                player.setDlcProp(dlc, id, drawable, texture);
                 continue;
             }
 
-            player.setDlcClothes(dlc, id, value, texture, 0);
+            player.setDlcClothes(dlc, id, drawable, texture, 0);
             continue;
         }
 
         if (component.isProp) {
-            player.setProp(id, value, texture);
+            player.setProp(id, drawable, texture);
             continue;
         }
 
-        player.setClothes(id, value, texture, 0);
+        player.setClothes(id, drawable, texture, 0);
     }
 }
 

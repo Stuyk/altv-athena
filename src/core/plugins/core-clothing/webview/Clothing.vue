@@ -134,6 +134,7 @@ import { defineComponent, defineAsyncComponent } from 'vue';
 import { EXAMPLE_CLOTHING_DATA } from './utility/exampleData';
 import { DEFAULT_CLOTHING_STORE } from './utility/defaultData';
 import { LOCALE_CLOTHING } from '../shared/locales';
+import { ComponentVueInfo } from '../shared/types';
 
 const ComponentName = 'Clothing';
 export default defineComponent({
@@ -380,7 +381,7 @@ export default defineComponent({
                 return;
             }
 
-            const components = [];
+            const components: Array<ComponentVueInfo> = [];
 
             for (let i = 0; i < this.pages.length; i++) {
                 const page = this.pages[i];
@@ -398,24 +399,27 @@ export default defineComponent({
                 }
 
                 const componentData = JSON.parse(JSON.stringify(page));
+                delete componentData.startValue;
                 delete componentData.maxDrawables;
                 delete componentData.maxTextures;
                 delete componentData.name;
                 delete componentData.pageName;
                 delete componentData.names;
 
-                if ('alt' in window) {
-                    alt.emit(
-                        `${ComponentName}:Purchase`,
-                        this.storeData.uid,
-                        i,
-                        componentData,
-                        page.pageName,
-                        '',
-                        true,
-                    );
-                }
+                components.push({
+                    uid: this.storeData.uid,
+                    index: i,
+                    componentData,
+                    pageName: page.pageName,
+                    name: '',
+                });
             }
+
+            if (!('alt' in window)) {
+                return;
+            }
+
+            alt.emit(`${ComponentName}:PurchaseAll`, components);
         },
         isComponentAvailableAll() {
             let allAvailable = true;
@@ -544,6 +548,7 @@ export default defineComponent({
         },
         purchaseComponent() {
             const componentData = JSON.parse(JSON.stringify(this.pages[this.pageIndex]));
+            delete componentData.startValue;
             delete componentData.maxDrawables;
             delete componentData.maxTextures;
             delete componentData.name;
