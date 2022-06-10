@@ -837,14 +837,12 @@ export default class VehicleFuncs {
             vehicle.livery = data.livery;
         }
 
-        if (data.neon) {
-            vehicle.neon = {
-                left: data.neon.left ?? false,
-                right: data.neon.right ?? false,
-                front: data.neon.front ?? false,
-                back: data.neon.back ?? false,
-            };
-        }
+        vehicle.neon = {
+            left: (data.neonEnabled && data.neon?.left) ?? false,
+            right: (data.neonEnabled && data.neon?.right) ?? false,
+            front: (data.neonEnabled && data.neon?.front) ?? false,
+            back: (data.neonEnabled && data.neon?.back) ?? false,
+        };
 
         if (data.neonColor) {
             vehicle.neonColor = new alt.RGBA(data.neonColor.r, data.neonColor.g, data.neonColor.b, data.neonColor.a);
@@ -1169,6 +1167,25 @@ export default class VehicleFuncs {
             if (!vehicle.data?.tuning) vehicle.data.tuning = {};
             vehicle.data.tuning.neon = neon;
         }
+    }
+
+    static setNeonLightsEnabled(vehicle: alt.Vehicle, enabled: boolean): void {
+        if (!vehicle?.valid || vehicle.isTemporary) return;
+
+        if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+        vehicle.data.tuning.neonEnabled = enabled;
+
+        // Purely for Clientside UI
+        vehicle.setStreamSyncedMeta('neonLightsEnabled', enabled);
+
+        const neonLights = vehicle.data.tuning.neon ?? {};
+
+        vehicle.neon = {
+            left: (enabled && neonLights.left) ?? false,
+            right: (enabled && neonLights.right) ?? false,
+            front: (enabled && neonLights.front) ?? false,
+            back: (enabled && neonLights.back) ?? false,
+        };
     }
 
     static setNeonColor(vehicle: alt.Vehicle, color: alt.RGBA): void {
