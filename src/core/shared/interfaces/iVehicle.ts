@@ -1,5 +1,6 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
 import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnershipFlags';
+import IVehicleDamage from './iVehicleDamage';
 import IVehicleTuning from './iVehicleTuning';
 import { RGB } from './rgb';
 import { Vector3 } from './vector';
@@ -122,6 +123,13 @@ export interface IVehicle {
      * @memberof IVehicle
      */
     engineHealth?: number;
+
+    /**
+     * The base64 of the damage currently done to vehicle
+     * @type {IVehicleDamage}
+     * @memberof IVehicle
+     */
+    damage?: IVehicleDamage
 
     /**
      * The last time this vehicle was used.
