@@ -96,6 +96,39 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
+    @command(['toggleneonlights', 'tnl'], 'Toggles Vehicle neon lights', PERMISSIONS.ADMIN)
+    private static toggleVehicleNeonLightsCommand(player: alt.Player): void {
+        const vehicle = player.vehicle;
+
+        if (!vehicle?.valid || vehicle.isTemporary) return;
+
+        const lightsEnabled = !(vehicle.data.tuning.neonEnabled ?? false);
+
+        Athena.vehicle.funcs.setNeonLightsEnabled(vehicle, lightsEnabled);
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
+    }
+
+    @command(['setneonlights', 'snl'], 'Sets Vehicle neon lights', PERMISSIONS.ADMIN)
+    private static setVehicleNeonLightsCommand(
+        player: alt.Player,
+        left: string,
+        right: string,
+        front: string,
+        back: string,
+    ): void {
+        const vehicle = player.vehicle;
+
+        if (!vehicle?.valid || vehicle.isTemporary) return;
+
+        Athena.vehicle.funcs.setNeon(vehicle, {
+            left: left === '1',
+            right: right === '1',
+            front: front === '1',
+            back: back === '1',
+        });
+        Athena.vehicle.funcs.save(vehicle, vehicle.data);
+    }
+
     @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
     private static fullTuneVehicleCommand(player: alt.Player): void {
         const vehicle = player.vehicle;
