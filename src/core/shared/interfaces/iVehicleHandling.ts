@@ -74,6 +74,13 @@ export default interface IVehicleHandling {
     collisionDamageMult: number;
 
     /**
+     * Multiplies the game's calculation of deformation damage.
+     * @type {number}
+     * @memberof IVehicleHandling
+     */
+    deformationDamageMult: number;
+
+    /**
      * No Description
      * @type {number} 1.15 - 300
      * @memberof IVehicleHandling
@@ -273,4 +280,11 @@ export default interface IVehicleHandling {
     tractionSpringDeltaMax: number;
 
     tractionSpringDeltaMaxRatio: number;
+
+    /**
+     * Multiplies the game's calculation of damage to the vehicle by weapons.
+     * @type {number}
+     * @memberof IVehicleHandling
+     */
+    weaponDamageMult: number
 }

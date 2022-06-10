@@ -9,7 +9,9 @@ import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
+import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
+import IVehiclePartDamage from '../../shared/interfaces/iVehiclePartDamage';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -344,6 +346,11 @@ export default class VehicleFuncs {
             vehicle.engineHealth = vehicle.data.engineHealth;
         }
 
+        if (vehicle.data.damagedParts) {
+            this.setDamage(vehicle);
+        }
+
+
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -615,6 +622,7 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
+            damage: this.getDamage(vehicle),
             lastUsed: Date.now(), // ms
         });
     }
@@ -636,7 +644,7 @@ export default class VehicleFuncs {
         for (const vehicle of vehicles) {
             try {
                 await VehicleFuncs.despawn(vehicle.data.id);
-            } catch {}
+            } catch { }
         }
     }
 
@@ -1264,6 +1272,162 @@ export default class VehicleFuncs {
         if (!vehicle.isTemporary) {
             if (!vehicle.data?.tuning) vehicle.data.tuning = {};
             vehicle.data.tuning.driftModeEnabled = enabled;
+        }
+    }
+
+    static getDamage(vehicle: alt.Vehicle): IVehicleDamage {
+        if (!vehicle?.valid) return null;
+        let wheels = []
+        for (let w = 0; w < vehicle.wheelsCount; w++) {
+            wheels[w] = {
+                damageLevel: vehicle.getWheelHealth(w).toString()
+            }
+        }
+        return {
+            parts: {
+                'FrontLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(0),
+                    damageLevel: vehicle.getPartDamageLevel(0).toString()
+                },
+                'FrontRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(1),
+                    damageLevel: vehicle.getPartDamageLevel(1).toString()
+                },
+                'MiddleLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(2),
+                    damageLevel: vehicle.getPartDamageLevel(2).toString()
+                },
+                'MiddleRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(3),
+                    damageLevel: vehicle.getPartDamageLevel(3).toString()
+                },
+                'RearLeft': {
+                    bulletHoles: vehicle.getPartBulletHoles(4),
+                    damageLevel: vehicle.getPartDamageLevel(4).toString()
+                },
+                'RearRight': {
+                    bulletHoles: vehicle.getPartBulletHoles(5),
+                    damageLevel: vehicle.getPartDamageLevel(5).toString()
+                },
+
+            },
+            windows: {
+                'DriverSideFront': {
+                    damageLevel: vehicle.isWindowDamaged(1) ? '1' : '0'
+                },
+                'DriverSideRear': {
+                    damageLevel: vehicle.isWindowDamaged(3) ? '1' : '0'
+                },
+                'PassSideFront': {
+                    damageLevel: vehicle.isWindowDamaged(0) ? '1' : '0'
+                },
+                'PassSideRear': {
+                    damageLevel: vehicle.isWindowDamaged(2) ? '1' : '0'
+                },
+                'FrontWindshield': {
+                    damageLevel: vehicle.isWindowDamaged(6) ? '1' : '0'
+                },
+                'RearWindshield': {
+                    damageLevel: vehicle.isWindowDamaged(7) ? '1' : '0'
+                },
+            },
+            bumpers: {
+                'FrontBumper': {
+                    damageLevel: vehicle.getBumperDamageLevel(0).toString(),
+                },
+                'RearBumper': {
+                    damageLevel: vehicle.getBumperDamageLevel(1).toString(),
+                }
+            },
+            wheels: wheels,
+            lights: []
+
+        };
+    }
+
+    static setDamage(vehicle: alt.Vehicle): void {
+        if (!vehicle?.valid) return;
+        if (!vehicle.data.damage) return;
+        if (vehicle.data.damage.parts) {
+            for (let part in vehicle.data.damage.parts) {
+                let damages = vehicle.data.damage[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
+                vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+            }
+        }
+        if (vehicle.data.damage.windows) {
+            for (let part in vehicle.data.damage.windows) {
+                let damages = vehicle.data.damage[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setWindowDamaged(vehPart, damages.damageLevel)
+            }
+        }
+        if (vehicle.data.damage.bumpers) {
+            for (let part in vehicle.data.damage.bumpers) {
+                let damages = vehicle.data.damage[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+            }
+        }
+        if (vehicle.data.damage.wheels) {
+            for (let w = 0; w < vehicle.data.damage.wheels.length; w++) {
+                vehicle.setWheelHealth(w, parseInt(vehicle.data.damage.wheels[w].damageLevel))
+            }
+        }
+    }
+
+    static getDamageLevel(level: string): number {
+        switch (level) {
+            case 'DamagedLevel1':
+                return 1;
+            case 'DamagedLevel2':
+                return 2;
+            case 'DamagedLevel3':
+                return 3;
+            case 'NotDamaged':
+                return 0;
+            case 'Damaged':
+                return 1;
+            case 'None':
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    static getVehiclePart(part: string): number {
+        switch (part) {
+            case 'FrontLeft':
+                return 0;
+            case 'FrontRight':
+                return 1;
+            case 'MiddleLeft':
+                return 2;
+            case 'MiddleRight':
+                return 3;
+            case 'RearLeft':
+                return 4;
+            case 'RearRight':
+                return 5;
+            case 'FrontBumper':
+                return 0;
+            case 'RearBumper':
+                return 1;
+            case 'PassSideFront':
+                return 0;
+            case 'DriverSideFront':
+                return 1;
+            case 'PassSideFront':
+                return 2;
+            case 'PassSideRear':
+                return 3;
+            case 'FrontWindshield':
+                return 6;
+            case 'RearWindshield':
+                return 7;
+            default:
+                return 0;
         }
     }
 }
