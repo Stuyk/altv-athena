@@ -9,6 +9,7 @@ import { VehicleInfo } from '../../../../shared/interfaces/vehicleInfo';
 import { DEALERSHIP_EVENTS, DEALERSHIP_WEBVIEW_EVENTS } from '../../shared/events';
 import { IDealership } from '../../shared/interfaces';
 
+let isUpdating = false;
 let vehicles: Array<VehicleInfo>;
 let dealership: IDealership;
 let vehicleIdentifier: number;
@@ -86,6 +87,19 @@ class InternalFunctions implements ViewModel {
         CinematicCam.next(false);
     }
 
+    private static async isUpdating(): Promise<void> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (isUpdating) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                resolve();
+            }, 200);
+        });
+    }
+
     static async exit() {
         alt.emitServer(DEALERSHIP_EVENTS.EXIT);
         alt.toggleGameControls(true);
@@ -122,13 +136,20 @@ class InternalFunctions implements ViewModel {
 
     static destroyVehicle() {
         if (vehicleIdentifier !== undefined && vehicleIdentifier !== null) {
-            native.deleteEntity(vehicleIdentifier);
+            while (native.doesEntityExist(vehicleIdentifier)) {
+                native.deleteEntity(vehicleIdentifier);
+            }
+
             vehicleIdentifier = null;
         }
     }
 
     static async preview(vehicle: VehicleInfo, color: number) {
-        InternalFunctions.destroyVehicle();
+        await InternalFunctions.isUpdating();
+
+        isUpdating = true;
+
+        await InternalFunctions.destroyVehicle();
 
         const model = alt.hash(vehicle.name);
 
@@ -159,11 +180,17 @@ class InternalFunctions implements ViewModel {
         native.setVehicleColours(vehicleIdentifier, color, color);
 
         alt.setTimeout(() => {
+            if (!native.doesEntityExist(vehicleIdentifier)) {
+                return;
+            }
+
             native.setVehicleEngineOn(vehicleIdentifier, true, false, false);
             native.setVehicleLights(vehicleIdentifier, 3);
         }, 200);
 
-        InternalFunctions.updatePoints();
+        await InternalFunctions.updatePoints();
+
+        isUpdating = false;
     }
 
     static generateCameraPoints(vehicle: number): Array<alt.Vector3> {
