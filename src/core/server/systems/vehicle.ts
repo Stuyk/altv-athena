@@ -607,6 +607,11 @@ export class VehicleSystem {
             return;
         }
 
+        if (!vehicle.data || vehicle.isTemporary) {
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
+            return;
+        }
+
         if (distance(player.pos, vehicle.pos) >= 5) {
             playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
             playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
