@@ -346,7 +346,7 @@ export default class VehicleFuncs {
             vehicle.engineHealth = vehicle.data.engineHealth;
         }
 
-        if (vehicle.data.damagedParts) {
+        if (vehicle.data.damage) {
             this.setDamage(vehicle);
         }
 
