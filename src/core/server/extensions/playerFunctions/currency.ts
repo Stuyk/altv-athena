@@ -12,6 +12,10 @@ import save from './save';
  * @memberof CurrencyPrototype
  */
 function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (isNaN(amount)) {
+        return false;
+    }
+
     if (typeof amount === 'string') {
         amount = parseFloat(amount);
     }
@@ -47,6 +51,10 @@ function add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
  * @memberof CurrencyPrototype
  */
 function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (isNaN(amount)) {
+        return false;
+    }
+    
     if (typeof amount === 'string') {
         amount = parseFloat(amount);
     }
@@ -81,6 +89,10 @@ function sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
  * @memberof CurrencyPrototype
  */
 function set(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    if (isNaN(amount)) {
+        return false;
+    }
+
     if (amount > Number.MAX_SAFE_INTEGER) {
         amount = Number.MAX_SAFE_INTEGER - 1;
     }
@@ -96,6 +108,10 @@ function set(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
 }
 
 function subAllCurrencies(player: alt.Player, amount: number): boolean {
+    if (isNaN(amount)) {
+        return false;
+    }
+
     if (player.data.cash + player.data.bank < amount) {
         return false;
     }
