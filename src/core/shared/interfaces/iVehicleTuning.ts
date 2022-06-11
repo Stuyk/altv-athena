@@ -19,6 +19,7 @@ export default interface IVehicleTuning {
     lightsMultiplier: number;
     livery: number;
     neon: Partial<IVehicleNeon>;
+    neonEnabled: boolean;
     neonColor: RGBA;
     numberPlateIndex: NumberPlateStyle;
     pearlColor: number;
