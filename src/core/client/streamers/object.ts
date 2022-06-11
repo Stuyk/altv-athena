@@ -7,9 +7,14 @@ import { distance2d } from '../../shared/utility/vector';
 import { loadModel } from '../utility/model';
 import { Timer } from '../utility/timers';
 
+interface LocalObject extends IObject {
+    id: number;
+}
+
 let localObjects: Array<IObject> = [];
-let addedObjects: Array<IObject> = [];
-let objectInfo: { [uid: string]: number } = {};
+let globalObjects: Array<IObject> = [];
+let createdObjects: Array<LocalObject> = [];
+
 let isRemoving = false;
 let interval;
 
@@ -18,8 +23,13 @@ let interval;
  */
 class ClientObjectController {
     static init() {
+        alt.on('disconnect', ClientObjectController.stop);
+        alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
+        alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
+        alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ClientObjectController.populate);
+        alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.removeLocalObject);
         localObjects = [];
-        addedObjects = [];
+        globalObjects = [];
     }
 
     /**
@@ -43,7 +53,7 @@ class ClientObjectController {
         }
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawObjects, 500, 'object.ts');
+            interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
         }
     }
 
@@ -54,18 +64,22 @@ class ClientObjectController {
      * @memberof ClientObjectController
      */
     static populate(objects: Array<IObject>) {
-        addedObjects = objects;
+        globalObjects = objects;
 
         if (!interval) {
-            interval = Timer.createInterval(handleDrawObjects, 500, 'object.ts');
+            interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
         }
     }
 
-    static stop() {
+    static async stop() {
         isRemoving = true;
-        const objects = addedObjects.concat(localObjects);
-        for (let i = 0; i < objects.length; i++) {
-            ClientObjectController.remove(objects[i].uid);
+
+        for (let i = localObjects.length - 1; i >= 0; i--) {
+            await ClientObjectController.removeLocalObject(localObjects[i].uid);
+        }
+
+        for (let i = globalObjects.length - 1; i >= 0; i--) {
+            await ClientObjectController.removeGlobalObject(globalObjects[i].uid);
         }
 
         if (!interval) {
@@ -82,44 +96,21 @@ class ClientObjectController {
      * @return {*}
      * @memberof ClientObjectController
      */
-    static remove(uid: string, removeAllInterior = false) {
+    static async removeLocalObject(uid: string, removeAllInterior = false) {
         isRemoving = true;
 
-        let index = -1;
-
-        if (objectInfo[uid] !== null && objectInfo[uid] !== undefined) {
-            native.deleteEntity(objectInfo[uid]);
-            delete objectInfo[uid];
-        }
-
-        // Removes all objects matching this prefix specifically.
-        if (removeAllInterior) {
-            for (let i = localObjects.length - 1; i >= 0; i--) {
-                if (!localObjects[i].isInterior) {
-                    continue;
-                }
-
-                localObjects.splice(i, 1);
+        for (let i = localObjects.length - 1; i >= 0; i--) {
+            if (
+                (removeAllInterior && !localObjects[i].isInterior) ||
+                (!removeAllInterior && localObjects[i].uid !== uid)
+            ) {
+                continue;
             }
 
-            isRemoving = false;
-            return;
+            await ClientObjectController.removeObject(localObjects[i]);
+            localObjects.splice(i, 1);
         }
 
-        index = localObjects.findIndex((object) => object.uid === uid);
-
-        if (index <= -1) {
-            isRemoving = false;
-            return;
-        }
-
-        const objectData = localObjects[index];
-        if (!objectData) {
-            isRemoving = false;
-            return;
-        }
-
-        localObjects.splice(index, 1);
         isRemoving = false;
     }
 
@@ -129,101 +120,127 @@ class ClientObjectController {
      * @param {string} uid
      * @memberof ClientObjectController
      */
-    static removeGlobalObject(uid: string) {
+    static async removeGlobalObject(uid: string) {
         isRemoving = true;
 
-        let index = addedObjects.findIndex((object) => object.uid === uid);
-        if (index >= 0) {
-            addedObjects.splice(index, 1);
-        }
+        for (let i = globalObjects.length - 1; i >= 0; i--) {
+            if (globalObjects[i].uid !== uid) {
+                continue;
+            }
 
-        if (objectInfo[uid] !== null && objectInfo[uid] !== undefined) {
-            native.deleteEntity(objectInfo[uid]);
-            delete objectInfo[uid];
+            await ClientObjectController.removeObject(globalObjects[i]);
+            globalObjects.splice(i, 1);
         }
 
         isRemoving = false;
     }
-}
 
-function handleDrawObjects() {
-    if (isRemoving) {
-        return;
+    /**
+     * Verify if an object already exists.
+     *
+     * @static
+     * @param {string} uid
+     * @return {boolean}
+     * @memberof ClientObjectController
+     */
+    static doesObjectExist(uid: string): boolean {
+        return createdObjects.findIndex((obj) => obj.uid === uid) >= 0;
     }
 
-    const objects = addedObjects.concat(localObjects);
-
-    if (objects.length <= 0) {
-        return;
-    }
-
-    if (alt.Player.local.isMenuOpen) {
-        return;
-    }
-
-    if (alt.Player.local.meta.isDead) {
-        return;
-    }
-
-    for (let i = 0; i < objects.length; i++) {
-        const objectData = objects[i];
-        if (!objectData.maxDistance) {
-            objectData.maxDistance = 25;
+    /**
+     * Create an object if it does not exist.
+     *
+     * @static
+     * @param {IObject} object
+     * @memberof ClientObjectController
+     */
+    static async createObject(object: IObject) {
+        if (ClientObjectController.doesObjectExist(object.uid)) {
+            return;
         }
 
-        // Remove the Object if it has an id
-        if (distance2d(alt.Player.local.pos, objectData.pos) > objectData.maxDistance) {
-            // Being Created. Delete it after creation.
-            if (objectInfo[objectData.uid] === -1) {
+        console.log(`Creating object...`);
+        console.log(`Model: ${object.model}`);
+
+        const hash = alt.hash(object.model);
+        await loadModel(hash);
+
+        const newObject: LocalObject = {
+            id: native.createObjectNoOffset(hash, object.pos.x, object.pos.y, object.pos.z, false, false, false),
+            ...object,
+        };
+
+        const rot = object.rot ? object.rot : { x: 0, y: 0, z: 0 };
+        native.setEntityRotation(newObject.id, rot.x, rot.y, rot.z, 1, false);
+        native.freezeEntityPosition(newObject.id, true);
+
+        if (object.noCollision) {
+            native.setEntityCollision(newObject.id, false, true);
+        }
+
+        createdObjects.push(newObject);
+    }
+
+    /**
+     * Remove an object if it exists.
+     *
+     * @static
+     * @param {IObject} object
+     * @memberof ClientObjectController
+     */
+    static async removeObject(object: IObject) {
+        isRemoving = true;
+
+        console.log('removing object...');
+
+        for (let i = createdObjects.length - 1; i >= 0; i--) {
+            if (createdObjects[i].uid !== object.uid) {
                 continue;
             }
 
-            if (objectInfo[objectData.uid] !== undefined && objectInfo[objectData.uid] !== null) {
-                native.deleteObject(objectInfo[objectData.uid]);
-                objectInfo[objectData.uid] = null;
+            while (native.doesEntityExist(createdObjects[i].id)) {
+                native.deleteEntity(createdObjects[i].id);
+                native.deleteObject(createdObjects[i].id);
             }
-            continue;
+
+            createdObjects.splice(i, 1);
         }
 
-        // Continue on. The object was already created.
-        if (objectInfo[objectData.uid] !== undefined && objectInfo[objectData.uid] !== null) {
-            continue;
+        isRemoving = false;
+    }
+
+    private static async handleDrawObjects() {
+        if (isRemoving) {
+            return;
         }
 
-        objectInfo[objectData.uid] = -1;
+        const objects = globalObjects.concat(localObjects);
 
-        const hash = alt.hash(objectData.model);
-        loadModel(hash).then((res) => {
-            if (!res) {
-                objectInfo[objectData.uid] = null;
-                throw new Error(`${objectData.model} is not a valid model.`);
+        if (objects.length <= 0) {
+            return;
+        }
+
+        if (alt.Player.local.isMenuOpen) {
+            return;
+        }
+
+        for (let i = 0; i < objects.length; i++) {
+            const data = objects[i];
+            const maxDistance = data.maxDistance ? Math.abs(data.maxDistance) : 25;
+
+            // Remove the Object if it has an id
+            if (distance2d(alt.Player.local.pos, data.pos) > maxDistance) {
+                ClientObjectController.removeObject(data);
+                continue;
             }
 
-            objectInfo[objectData.uid] = native.createObjectNoOffset(
-                hash,
-                objectData.pos.x,
-                objectData.pos.y,
-                objectData.pos.z,
-                false,
-                false,
-                false,
-            );
-
-            // alt.log(`CREATED MODEL ${objectInfo[objectData.uid]} for ${objectData.model}`);
-            const rot = objectData.rot ? objectData.rot : { x: 0, y: 0, z: 0 };
-            native.setEntityRotation(objectInfo[objectData.uid], rot.x, rot.y, rot.z, 1, false);
-            native.freezeEntityPosition(objectInfo[objectData.uid], true);
-
-            if (objectData.noCollision) {
-                native.setEntityCollision(objectInfo[objectData.uid], false, true);
+            if (ClientObjectController.doesObjectExist(data.uid)) {
+                continue;
             }
-        });
+
+            await ClientObjectController.createObject(data);
+        }
     }
 }
 
 alt.on('connectionComplete', ClientObjectController.init);
-alt.on('disconnect', ClientObjectController.stop);
-alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
-alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
-alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ClientObjectController.populate);
-alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.remove);
