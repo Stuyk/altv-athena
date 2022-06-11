@@ -14,4 +14,8 @@ export const PAINTSHOP_LOCALE = {
     BUY: 'Buy',
     PEARL_FINISH: 'Pearl Finish',
     PEARL_DESC: 'Changes the paint undertone of the vehicle.',
+    MUST_BE_IN_A_VEHICLE: 'Must be in a vehicle to use this.',
+    CANNOT_BE_MODIFIED: 'This vehicle cannot be modified.',
+    PAINTSHOP_LABEL: 'Paint Shop',
+    OPEN_MENU: 'Open Paint Panel',
 };
