@@ -1367,7 +1367,7 @@ export default class VehicleFuncs {
         if (!vehicle.data.damage) return;
         if (vehicle.data.damage.parts) {
             for (let part in vehicle.data.damage.parts) {
-                let damages = vehicle.data.damage[part];
+                let damages = vehicle.data.damage.parts[part];
                 let vehPart = this.getVehiclePart(part);
                 vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
                 vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
@@ -1375,14 +1375,14 @@ export default class VehicleFuncs {
         }
         if (vehicle.data.damage.windows) {
             for (let part in vehicle.data.damage.windows) {
-                let damages = vehicle.data.damage[part];
+                let damages = vehicle.data.damage.windows[part];
                 let vehPart = this.getVehiclePart(part);
-                vehicle.setWindowDamaged(vehPart, damages.damageLevel)
+                vehicle.setWindowDamaged(vehPart, parseInt(damages.damageLevel))
             }
         }
         if (vehicle.data.damage.bumpers) {
             for (let part in vehicle.data.damage.bumpers) {
-                let damages = vehicle.data.damage[part];
+                let damages = vehicle.data.damage.bumpers[part];
                 let vehPart = this.getVehiclePart(part);
                 vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
             }
