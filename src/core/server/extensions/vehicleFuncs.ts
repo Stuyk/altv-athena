@@ -5,13 +5,11 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { VEHICLE_SYNCED_META } from '../../shared/enums/vehicleSyncedMeta';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
-import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
 import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
-import IVehiclePartDamage from '../../shared/interfaces/iVehiclePartDamage';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
@@ -21,6 +19,13 @@ import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { VehicleEvents } from '../events/vehicleEvents';
 import { Collections } from '../interface/iDatabaseCollections';
+import { Injections } from '../systems/injections';
+import {
+    VehicleDespawnCallback,
+    VehicleInjectionNames,
+    VehicleOwnershipCallback,
+    VehicleSpawnCallback,
+} from '../systems/injections/vehicles';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
 
@@ -33,13 +38,6 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.UNLIMITED_FUEL |
     Vehicle_Behavior.NO_SAVE;
 
-const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
-
-const BeforeCreateInjections: Array<(document: IVehicle) => IVehicle | void> = [];
-const BeforeDespawnInjections: Array<(vehicle: alt.Vehicle) => void> = [];
-const BeforeAddVehicleInjections: Array<(vehicle: IVehicle) => IVehicle | void> = [];
-const VehicleOwnershipInjections: Array<(player: alt.Player, vehicle: alt.Vehicle) => boolean> = [];
-
 interface VehicleKeyItem extends Item {
     data: {
         vehicle: string;
@@ -48,100 +46,6 @@ interface VehicleKeyItem extends Item {
 }
 
 export default class VehicleFuncs {
-    /**
-     * Lets you create an injection into the default save function.
-     *
-     * What that means is you can return specific data from a callback as an object.
-     *
-     * That object will then be appended to the data to save for the vehicle.
-     *
-     * Example:
-     * ```ts
-     * function saveEngineStatus(vehicle: alt.Vehicle) {
-     *     return { engineStatus: vehicle.engineOn };
-     * }
-     *
-     * VehicleFuncs.addSaveInjection(saveEngineStatus)
-     * ```
-     * @static
-     * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
-     * @memberof VehicleFuncs
-     */
-    static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
-        SaveInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default create function.
-     *
-     * Useful when you want to perform some action before the vehicle is created.
-     * You can technically also modify the document before Athena will make use of them.
-     *
-     * IMPORTANT: Modified documents may be saved after all callbacks have been executed.
-     * Missuse of this feature can cause data loss.
-     *
-     * Example:
-     * ```ts
-     * function beforeVehicleCreate(document: IVehicle) {
-     *   const blacklistedVehicles = ['rhino', 'hydra'];
-     *
-     *   if (blacklistedVehicles.includes(document.model)) {
-     *       alt.logWarn(`Vehicle model ${document.model} is blacklisted, replacing with faggio`);
-     *       document.model = 'faggio';
-     *   }
-     *
-     *   return document;
-     * }
-     * VehicleFuncs.addBeforeCreateInjection(beforeVehicleCreate);
-     * ```
-     * @static
-     * @param {(document: IVehicle) => void} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeCreateInjection(callback: (document: IVehicle) => IVehicle | void) {
-        BeforeCreateInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default despawn function.
-     *
-     * What that means is you can do something when a vehicle is despawned.
-     * For example, you can cleanup any data you have stored for the vehicle element.
-     *
-     * @static
-     * @param {(vehicle: alt.Vehicle) => void} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeDespawnInjection(callback: (vehicle: alt.Vehicle) => void) {
-        BeforeDespawnInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default add function.
-     *
-     * What that means is you can modify the document before it is added to the database.
-     * For example, you can change default numberplate, color, ...
-     *
-     * @static
-     * @param {((vehicle: IVehicle) => IVehicle | void)} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeAddVehicleInjection(callback: (vehicle: IVehicle) => IVehicle | void) {
-        BeforeAddVehicleInjections.push(callback);
-    }
-
-    /**
-     * Create a vehicle injection that is ran during all ownership checks.
-     * Must return a boolean.
-     *
-     * @static
-     * @param {(vehicle: alt.Vehicle) => boolean} callback
-     * @memberof VehicleFuncs
-     */
-    static addOwnershipInjection(callback: (player: alt.Player, vehicle: alt.Vehicle) => boolean) {
-        VehicleOwnershipInjections.push(callback);
-    }
-
     /**
      * Gets the next available ID in the database for the vehicle.
      * @static
@@ -236,9 +140,13 @@ export default class VehicleFuncs {
         vehicleData.plate ??= sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
         vehicleData.behavior ??= OWNED_VEHICLE;
 
-        for (const callback of BeforeAddVehicleInjections) {
+        const beforeInjections = Injections.get<(document: IVehicle) => IVehicle>('VEHICLE_ADD_START');
+
+        for (const callback of beforeInjections) {
             const result = callback(vehicleData);
-            if (result) vehicleData = result;
+            if (result) {
+                vehicleData = result;
+            }
         }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
@@ -258,7 +166,7 @@ export default class VehicleFuncs {
      * False if it was not found.
      * @static
      * @param {number} id
-     * @return {*}  {Promise<boolean>}
+     * @return {Promise<boolean>}
      * @memberof VehicleFuncs
      */
     static async remove(id: number): Promise<boolean> {
@@ -288,7 +196,8 @@ export default class VehicleFuncs {
             document.rotation = rot;
         }
 
-        for (const callback of BeforeCreateInjections) {
+        const beforeSpawnInjections = Injections.get<VehicleSpawnCallback>(VehicleInjectionNames[0]);
+        for (const callback of beforeSpawnInjections) {
             const result = callback(document);
 
             if (result) {
@@ -350,7 +259,6 @@ export default class VehicleFuncs {
             this.setDamage(vehicle);
         }
 
-
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -362,6 +270,15 @@ export default class VehicleFuncs {
             VehicleFuncs.save(vehicle, { garageIndex: null, position: pos, rotation: rot });
         } else {
             VehicleFuncs.save(vehicle, { garageIndex: null });
+        }
+
+        const afterSpawnInjections = Injections.get<VehicleSpawnCallback>(VehicleInjectionNames[1]);
+        for (const callback of afterSpawnInjections) {
+            const result = callback(document);
+
+            if (result) {
+                document = result;
+            }
         }
 
         // Synchronize Ownership
@@ -387,13 +304,18 @@ export default class VehicleFuncs {
             return false;
         }
 
-        for (const callback of BeforeDespawnInjections) {
+        const beforeDespawnInjections = Injections.get<VehicleDespawnCallback>(VehicleInjectionNames.DESPAWN_START);
+        for (const callback of beforeDespawnInjections) {
             callback(SpawnedVehicles[id]);
         }
 
         VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
-        SpawnedVehicles[id].destroy();
-        delete SpawnedVehicles[id];
+
+        try {
+            SpawnedVehicles[id].destroy();
+            delete SpawnedVehicles[id];
+        } catch (err) {}
+
         return true;
     }
 
@@ -488,9 +410,14 @@ export default class VehicleFuncs {
         }
 
         let injections = { ...dataObject };
-        for (let i = 0; i < SaveInjections.length; i++) {
+
+        const saveInjections = Injections.get<(vehicle: alt.Vehicle) => { [key: string]: any }>(
+            VehicleInjectionNames.SAVE,
+        );
+
+        for (const callback of saveInjections) {
             try {
-                injections = { ...injections, ...SaveInjections[i](vehicle) };
+                injections = { ...injections, ...callback(vehicle) };
             } catch (err) {
                 console.warn(`Got Save Injection Error for Vehicle: ${err}`);
                 continue;
@@ -547,12 +474,11 @@ export default class VehicleFuncs {
             return true;
         }
 
-        if (VehicleOwnershipInjections.length >= 1) {
-            for (let i = 0; i < VehicleOwnershipInjections.length; i++) {
-                const result = VehicleOwnershipInjections[i](player, vehicle);
-                if (result) {
-                    return true;
-                }
+        const ownershipInjections = Injections.get<VehicleOwnershipCallback>(VehicleInjectionNames.OWNERSHIP);
+        for (const callback of ownershipInjections) {
+            const result = callback(player, vehicle);
+            if (result) {
+                return true;
             }
         }
 
@@ -644,7 +570,7 @@ export default class VehicleFuncs {
         for (const vehicle of vehicles) {
             try {
                 await VehicleFuncs.despawn(vehicle.data.id);
-            } catch { }
+            } catch {}
         }
     }
 
@@ -1294,102 +1220,109 @@ export default class VehicleFuncs {
 
     static getDamage(vehicle: alt.Vehicle): IVehicleDamage {
         if (!vehicle?.valid) return null;
-        let wheels = []
+        let wheels = [];
         for (let w = 0; w < vehicle.wheelsCount; w++) {
             wheels[w] = {
-                damageLevel: vehicle.getWheelHealth(w).toString()
-            }
+                damageLevel: vehicle.getWheelHealth(w).toString(),
+            };
         }
         return {
             parts: {
-                'FrontLeft': {
+                FrontLeft: {
                     bulletHoles: vehicle.getPartBulletHoles(0),
-                    damageLevel: vehicle.getPartDamageLevel(0).toString()
+                    damageLevel: vehicle.getPartDamageLevel(0).toString(),
                 },
-                'FrontRight': {
+                FrontRight: {
                     bulletHoles: vehicle.getPartBulletHoles(1),
-                    damageLevel: vehicle.getPartDamageLevel(1).toString()
+                    damageLevel: vehicle.getPartDamageLevel(1).toString(),
                 },
-                'MiddleLeft': {
+                MiddleLeft: {
                     bulletHoles: vehicle.getPartBulletHoles(2),
-                    damageLevel: vehicle.getPartDamageLevel(2).toString()
+                    damageLevel: vehicle.getPartDamageLevel(2).toString(),
                 },
-                'MiddleRight': {
+                MiddleRight: {
                     bulletHoles: vehicle.getPartBulletHoles(3),
-                    damageLevel: vehicle.getPartDamageLevel(3).toString()
+                    damageLevel: vehicle.getPartDamageLevel(3).toString(),
                 },
-                'RearLeft': {
+                RearLeft: {
                     bulletHoles: vehicle.getPartBulletHoles(4),
-                    damageLevel: vehicle.getPartDamageLevel(4).toString()
+                    damageLevel: vehicle.getPartDamageLevel(4).toString(),
                 },
-                'RearRight': {
+                RearRight: {
                     bulletHoles: vehicle.getPartBulletHoles(5),
-                    damageLevel: vehicle.getPartDamageLevel(5).toString()
+                    damageLevel: vehicle.getPartDamageLevel(5).toString(),
                 },
-
             },
             windows: {
-                'DriverSideFront': {
-                    damageLevel: vehicle.isWindowDamaged(1) ? '1' : '0'
+                DriverSideFront: {
+                    damageLevel: vehicle.isWindowDamaged(1) ? '1' : '0',
                 },
-                'DriverSideRear': {
-                    damageLevel: vehicle.isWindowDamaged(3) ? '1' : '0'
+                DriverSideRear: {
+                    damageLevel: vehicle.isWindowDamaged(3) ? '1' : '0',
                 },
-                'PassSideFront': {
-                    damageLevel: vehicle.isWindowDamaged(0) ? '1' : '0'
+                PassSideFront: {
+                    damageLevel: vehicle.isWindowDamaged(0) ? '1' : '0',
                 },
-                'PassSideRear': {
-                    damageLevel: vehicle.isWindowDamaged(2) ? '1' : '0'
+                PassSideRear: {
+                    damageLevel: vehicle.isWindowDamaged(2) ? '1' : '0',
                 },
-                'FrontWindshield': {
-                    damageLevel: vehicle.isWindowDamaged(6) ? '1' : '0'
+                FrontWindshield: {
+                    damageLevel: vehicle.isWindowDamaged(6) ? '1' : '0',
                 },
-                'RearWindshield': {
-                    damageLevel: vehicle.isWindowDamaged(7) ? '1' : '0'
+                RearWindshield: {
+                    damageLevel: vehicle.isWindowDamaged(7) ? '1' : '0',
                 },
             },
             bumpers: {
-                'FrontBumper': {
+                FrontBumper: {
                     damageLevel: vehicle.getBumperDamageLevel(0).toString(),
                 },
-                'RearBumper': {
+                RearBumper: {
                     damageLevel: vehicle.getBumperDamageLevel(1).toString(),
-                }
+                },
             },
             wheels: wheels,
-            lights: []
-
+            lights: [],
         };
     }
 
     static setDamage(vehicle: alt.Vehicle): void {
-        if (!vehicle?.valid) return;
-        if (!vehicle.data.damage) return;
+        if (!vehicle?.valid) {
+            return;
+        }
+
+        if (!vehicle.data.damage) {
+            return;
+        }
+
         if (vehicle.data.damage.parts) {
             for (let part in vehicle.data.damage.parts) {
                 let damages = vehicle.data.damage.parts[part];
                 let vehPart = this.getVehiclePart(part);
                 vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
-                vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+                vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel));
             }
         }
+
         if (vehicle.data.damage.windows) {
             for (let part in vehicle.data.damage.windows) {
                 let damages = vehicle.data.damage.windows[part];
                 let vehPart = this.getVehiclePart(part);
-                vehicle.setWindowDamaged(vehPart, parseInt(damages.damageLevel))
+                vehicle.setWindowDamaged(vehPart, parseInt(damages.damageLevel) >= 1 ? true : false);
             }
         }
+
         if (vehicle.data.damage.bumpers) {
             for (let part in vehicle.data.damage.bumpers) {
                 let damages = vehicle.data.damage.bumpers[part];
                 let vehPart = this.getVehiclePart(part);
-                vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel))
+                vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel));
             }
         }
+
         if (vehicle.data.damage.wheels) {
             for (let w = 0; w < vehicle.data.damage.wheels.length; w++) {
-                vehicle.setWheelHealth(w, parseInt(vehicle.data.damage.wheels[w].damageLevel))
+                vehicle.setWheelHealth(w, parseInt(vehicle.data.damage.wheels[w].damageLevel));
             }
         }
     }

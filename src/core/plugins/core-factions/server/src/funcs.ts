@@ -5,9 +5,6 @@ import { Character } from '../../../../shared/interfaces/character';
 import { FactionHandler } from './handler';
 import { StorageSystem } from '../../../../server/systems/storage';
 import { Vector3 } from '../../../../shared/interfaces/vector';
-import { VehicleSystem } from '../../../../server/systems/vehicle';
-import { VEHICLE_RULES } from '../../../../shared/enums/vehicleRules';
-import { IResponse } from '../../../../shared/interfaces/iResponse';
 import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Athena } from '../../../../server/api/athena';
@@ -42,7 +39,7 @@ export class FactionFuncs {
         }
 
         hasInitialized = true;
-        VehicleFuncs.addOwnershipInjection(FactionFuncs.handleOwnershipInjection);
+        Athena.injections.vehicle.ownership('vehicle-ownership', FactionFuncs.handleOwnershipInjection);
     }
 
     private static handleOwnershipInjection(player: alt.Player, vehicle: alt.Vehicle) {

@@ -35,7 +35,6 @@ import './systems/athenaEvents';
 import './systems/blip';
 import './systems/cameraTarget';
 import './systems/character';
-import './systems/death';
 import './systems/debug';
 import './systems/disable';
 import './systems/hologram';

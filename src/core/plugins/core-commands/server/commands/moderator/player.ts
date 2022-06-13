@@ -179,22 +179,6 @@ class PlayersCommand {
         Athena.player.emit.message(target, `Player armour was set to ${value}`);
     }
 
-    @command('revive', LocaleController.get(LOCALE_KEYS.COMMAND_REVIVE, '/revive'), PERMISSIONS.ADMIN)
-    private static handleCommand(player: alt.Player, id: string | null = null): void {
-        if (id === null || id === undefined) {
-            Athena.player.set.respawned(player, player.pos);
-            return;
-        }
-
-        const target = Athena.player.get.findByUid(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
-            return;
-        }
-
-        Athena.player.set.respawned(target, target.pos);
-    }
-
     @command('tpto', '/tpto <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
     private static handleTeleportTo(player: alt.Player, name: string) {
         if (!name) {

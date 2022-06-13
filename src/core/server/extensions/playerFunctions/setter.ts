@@ -18,8 +18,7 @@ import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
 import { playerConst } from '../../api/consts/constPlayer';
-
-const config = ConfigUtil.get();
+import { IVector3 } from 'alt-shared';
 
 /**
  * Set the current account data for this player.
@@ -55,29 +54,6 @@ async function account(player: alt.Player, accountData: Partial<Account>): Promi
 
 function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
     alt.emitClient(player, SYSTEM_EVENTS.SET_ACTION_MENU, actionMenu);
-}
-
-/**
- *
- * @param {alt.Player} killer
- * @param {*} weaponHash
- * @memberof SetPrototype
- */
-function dead(player: alt.Player, weaponHash: any = null): void {
-    player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
-
-    if (!player.data.isDead) {
-        player.data.isDead = true;
-        emit.meta(player, 'isDead', true);
-        save.field(player, 'isDead', true);
-        alt.log(`(${player.id}) ${player.data.name} has died.`);
-    }
-
-    if (!player.nextDeathSpawn) {
-        player.nextDeathSpawn = Date.now() + DEFAULT_CONFIG.RESPAWN_TIME;
-    }
-
-    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
 }
 
 /**
@@ -127,45 +103,11 @@ function frozen(player: alt.Player, value: boolean): void {
  * @param {(alt.Vector3 | null)} position Use null to find closest hospital.
  * @memberof SetPrototype
  */
-function respawned(p: alt.Player, position: alt.Vector3 = null): void {
-    p.nextDeathSpawn = null;
-    p.data.isDead = false;
-    emit.meta(p, 'isDead', false);
-    save.field(p, 'isDead', false);
-
-    let nearestHopsital = position;
-    if (!position) {
-        const hospitals = [...DEFAULT_CONFIG.VALID_HOSPITALS];
-        let index = 0;
-        let lastDistance = distance2d(p.pos, hospitals[0]);
-
-        for (let i = 1; i < hospitals.length; i++) {
-            const distanceCalc = distance2d(p.pos, hospitals[i]);
-            if (distanceCalc > lastDistance) {
-                continue;
-            }
-
-            lastDistance = distanceCalc;
-            index = i;
-        }
-
-        nearestHopsital = hospitals[index] as alt.Vector3;
-
-        if (DEFAULT_CONFIG.RESPAWN_LOSE_WEAPONS) {
-            playerConst.inventory.removeAllWeapons(p);
-        }
-    }
-
-    safe.setPosition(p, nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
-    p.spawn(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z, 0);
-
-    alt.nextTick(() => {
-        p.clearBloodDamage();
-        safe.addHealth(p, DEFAULT_CONFIG.RESPAWN_HEALTH, true);
-        safe.addArmour(p, DEFAULT_CONFIG.RESPAWN_ARMOUR, true);
-    });
-
-    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, p);
+function respawned(player: alt.Player, position: IVector3 = undefined): void {
+    player.data.isDead = false;
+    emit.meta(player, 'isDead', false);
+    save.field(player, 'isDead', false);
+    PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, player, position);
 }
 
 function wantedLevel(player: alt.Player, stars: number) {
@@ -182,7 +124,6 @@ function wantedLevel(player: alt.Player, stars: number) {
 export default {
     account,
     actionMenu,
-    dead,
     firstConnect,
     frozen,
     respawned,
