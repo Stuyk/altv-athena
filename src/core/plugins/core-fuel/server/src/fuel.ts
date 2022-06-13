@@ -39,7 +39,7 @@ export class FuelSystem {
             return { status: true, response: '' };
         });
 
-        Athena.vehicle.funcs.addBeforeCreateInjection((document: IVehicle) => {
+        Athena.vehicle.funcs.addBeforeAddVehicleInjection((document: IVehicle) => {
             const vehicleInfo = VehicleData.find((x) => x.name === document.model);
 
             document.fuel = FUEL_CONFIG.FUEL_ON_NEW_VEHICLE_CREATE;
