@@ -159,9 +159,6 @@ class ClientObjectController {
             return;
         }
 
-        console.log(`Creating object...`);
-        console.log(`Model: ${object.model}`);
-
         const hash = alt.hash(object.model);
         await loadModel(hash);
 
@@ -190,8 +187,6 @@ class ClientObjectController {
      */
     static async removeObject(object: IObject) {
         isRemoving = true;
-
-        console.log('removing object...');
 
         for (let i = createdObjects.length - 1; i >= 0; i--) {
             if (createdObjects[i].uid !== object.uid) {
