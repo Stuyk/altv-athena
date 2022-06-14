@@ -62,7 +62,7 @@
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
-                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
+                            <img :src="getIconImage(item)" />
                         </div>
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
@@ -121,7 +121,7 @@
                 >
                     <template v-if="item">
                         <div class="icon no-pointer">
-                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
+                            <img :src="getIconImage(item)" />
                         </div>
                         <div class="stats no-pointer">
                             <div class="quantity">{{ item.quantity }}x</div>
@@ -174,7 +174,7 @@
                 >
                     <template v-if="item">
                         <div class="icon">
-                            <img :src="ResolvePath(`../../assets/icons/${item.icon}.png`)" />
+                            <img :src="getIconImage(item)" />
                         </div>
                         <div class="consume" v-if="item && (item.behavior & itemType.CONSUMABLE) != 0">
                             <Icon class="yellow--text" :size="18" icon="icon-arrow-down"></Icon>
@@ -202,6 +202,9 @@ import RangeInput from '../../components/RangeInput.vue';
 import Module from '../../components/Module.vue';
 import ResolvePath from '../../utility/pathResolver';
 import { ITEM_TYPE } from '../../../../src/core/shared/enums/itemTypes';
+import { Item } from '../../../../src/core/shared/interfaces/item';
+import { ClothingComponent } from '../../../../src/core/shared/interfaces/clothing';
+import { exampleEquipment } from './utility/exampleData';
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
 const ComponentName = 'Inventory';
@@ -265,6 +268,44 @@ export default defineComponent({
     // Used to define functions you can call with 'this.x'
     methods: {
         ResolvePath,
+        getIconImage(item: Item<ClothingComponent>): string {
+            const data = item.data;
+
+            // Set Default Image
+            if (!data || !data.ids || typeof data.ids[0] !== 'number') {
+                return ResolvePath(`../../assets/icons/${item.icon}.png`);
+            }
+
+            // componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
+            // Determine Image Set
+            const isShared = (!data.isProp && data.ids[0] === 1) || (!data.isProp && data.ids[0] === 5);
+
+            let fileName = `../../assets/images/clothing/${data.ids[0]}-`;
+
+            if (data.dlcHashes && data.dlcHashes[0]) {
+                fileName += `${data.dlcHashes[0]}-`;
+            } else {
+                fileName += '0-';
+            }
+
+            if (data.isProp) {
+                fileName += 'prop-';
+            }
+
+            if (!isShared) {
+                if (data.sex === 1) {
+                    fileName += `male-`;
+                } else {
+                    fileName += 'female-';
+                }
+            }
+
+            fileName += data.drawables[0];
+            fileName += `.png`;
+
+            // componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
+            return ResolvePath(fileName);
+        },
         setIncrementAmount(e, amount) {
             // Clicked a button
             if (!e) {
@@ -721,7 +762,7 @@ export default defineComponent({
             const filterdStats = Object.keys(this.itemInfo.data).map((key) => {
                 return { key, value: this.itemInfo.data[key] };
             });
-            
+
             return filterdStats.filter((x) => x.key !== 'event');
         },
         getClassRarity() {
@@ -756,31 +797,7 @@ export default defineComponent({
                 this.addNotification('hello world 3');
             }, 800);
 
-            this.updateEquipment([
-                {
-                    name: `Hat`,
-                    uuid: `some_hash_thing_ground`,
-                    description: `What a cozy hat! Wow. Much cozy. Many comforts.`,
-                    icon: 'hat',
-                    slot: 0,
-                    quantity: 1,
-                    data: {
-                        weight: 1,
-                        event: 'test',
-                    },
-                },
-                {
-                    name: `Hat`,
-                    uuid: `some_hash_thing_ground`,
-                    description: `What a cozy hat! Wow. Much cozy. Many comforts.`,
-                    icon: 'glasses',
-                    slot: 5,
-                    quantity: 1,
-                    data: {
-                        event: 'test',
-                    },
-                },
-            ]);
+            this.updateEquipment(exampleEquipment);
 
             this.updateToolbar([
                 {

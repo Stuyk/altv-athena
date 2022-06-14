@@ -5,7 +5,7 @@ export default [
         increment: 1,
         id: 0,
         opacity: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -13,7 +13,7 @@ export default [
         increment: 1,
         id: 3,
         opacity: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -21,7 +21,7 @@ export default [
         increment: 1,
         id: 6,
         opacity: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -29,7 +29,7 @@ export default [
         increment: 1,
         id: 7,
         opacity: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -37,7 +37,7 @@ export default [
         increment: 1,
         id: 9,
         opacity: 0,
-        value: 0
+        value: 0,
     },
     {
         min: 0,
@@ -45,6 +45,6 @@ export default [
         increment: 1,
         id: 11,
         opacity: 0,
-        value: 0
-    }
+        value: 0,
+    },
 ];

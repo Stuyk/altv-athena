@@ -2,43 +2,16 @@ import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
 import { Character } from '../../../shared/interfaces/character';
 import { Collections } from '../../interface/iDatabaseCollections';
-
-const SaveInjections: Array<(vehicle: alt.Player) => { [key: string]: any }> = [];
-
-/**
- * Lets you create an injection into the default save function.
- *
- * What that means is you can return specific data from a callback as an object.
- *
- * That object will then be appended to the data to save for the player.
- *
- * Keep in mind that this is in the 'tick' function for players.
- *
- * Which means it updates pretty often.
- *
- * Example:
- * ```ts
- * function savePlayerArmour(player: alt.Player) {
- *     return { armour: player.armour };
- * }
- *
- * Athena.player.save.addSaveInjection(savePlayerArmour)
- * ```
- * @static
- * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
- * @memberof VehicleFuncs
- */
-function addSaveInjection(callback: (player: alt.Player) => { [key: string]: any }) {
-    SaveInjections.push(callback);
-}
+import { Injections } from '../../systems/injections';
+import { PlayerInjectionNames, PlayerSaveTickCallback } from '../../systems/injections/player';
 
 /**
  * Save a specific field for the current character of this player.
  * player.data.cash = 25;
  * player.save().field('cash', player.data.cash);
  * @param {string} fieldName
- * @param {*} fieldValue
- * @return {*}  {Promise<void>}
+ * @param {any} fieldValue
+ * @return {Promise<void>}
  * @memberof SavePrototype
  */
 async function saveField(p: alt.Player, fieldName: string, fieldValue: any): Promise<void> {
@@ -61,7 +34,9 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
 
 /**
  * Call to manually save character data like position, health, etc.
- * @return {*}  {Promise<void>}
+ * Use an Injection to append data to the save-tick function.
+ *
+ * @return {Promise<void>}
  * @memberof SavePrototype
  */
 async function onTick(player: alt.Player): Promise<void> {
@@ -71,9 +46,11 @@ async function onTick(player: alt.Player): Promise<void> {
     player.data.armour = player.armour;
 
     let injections = { pos: player.data.pos, health: player.data.health, armour: player.data.armour };
-    for (let i = 0; i < SaveInjections.length; i++) {
+
+    const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
+    for (const callback of saveTickInjections) {
         try {
-            injections = { ...injections, ...SaveInjections[i](player) };
+            injections = { ...injections, ...callback(player) };
         } catch (err) {
             console.warn(`Got Save Injection Error for Player: ${err}`);
             continue;
@@ -84,7 +61,6 @@ async function onTick(player: alt.Player): Promise<void> {
 }
 
 export default {
-    addSaveInjection,
     field: saveField,
     partial,
     onTick,

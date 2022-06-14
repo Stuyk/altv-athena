@@ -8,6 +8,8 @@ import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { Item } from '../../../shared/interfaces/item';
 import { Appearance } from '../../../shared/interfaces/appearance';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
+import { Injections } from '../../systems/injections';
+import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -109,12 +111,17 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
     player.setEyeColor(appearance.eyes);
 }
 
-function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, isMale = false) {
+async function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, isMale = false) {
     const clothingComponents = new Array(11).fill(null);
     const propComponents = [0, 1, 2, 6, 7];
 
     for (let i = 0; i < propComponents.length; i++) {
         player.clearProp(propComponents[i]);
+    }
+
+    const startInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_UPDATE_START);
+    for (const callback of startInjections) {
+        await callback(player, items, isMale);
     }
 
     if (!isMale) {
@@ -137,6 +144,11 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
         player.setClothes(8, 15, 0, 0); // undershirt
         player.setClothes(9, 0, 0, 0); // body armour
         player.setClothes(11, 91, 0, 0); // tops
+    }
+
+    const defaultInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_AFTER_DEFAULTS);
+    for (const callback of defaultInjections) {
+        await callback(player, items, isMale);
     }
 
     if (items && Array.isArray(items)) {
@@ -179,6 +191,11 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
             player.setClothes(id, value, texture, 0);
         }
     }
+
+    const endInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_UPDATE_END);
+    for (const callback of endInjections) {
+        await callback(player, items, isMale);
+    }
 }
 
 /**
@@ -190,7 +207,7 @@ function equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, is
 function singleEquipment(player: alt.Player, component: ClothingComponent) {
     for (let index = 0; index < component.drawables.length; index++) {
         const texture = component.textures[index];
-        const value = component.drawables[index];
+        const drawable = component.drawables[index];
         const id = component.ids[index];
 
         if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
@@ -200,20 +217,20 @@ function singleEquipment(player: alt.Player, component: ClothingComponent) {
             }
 
             if (component.isProp) {
-                player.setDlcProp(dlc, id, value, texture);
+                player.setDlcProp(dlc, id, drawable, texture);
                 continue;
             }
 
-            player.setDlcClothes(dlc, id, value, texture, 0);
+            player.setDlcClothes(dlc, id, drawable, texture, 0);
             continue;
         }
 
         if (component.isProp) {
-            player.setProp(id, value, texture);
+            player.setProp(id, drawable, texture);
             continue;
         }
 
-        player.setClothes(id, value, texture, 0);
+        player.setClothes(id, drawable, texture, 0);
     }
 }
 

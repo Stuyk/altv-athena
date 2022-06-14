@@ -5,18 +5,27 @@ import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { VEHICLE_SYNCED_META } from '../../shared/enums/vehicleSyncedMeta';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
-import { VEHICLE_OWNERSHIP } from '../../shared/flags/vehicleOwnershipFlags';
 import { VehicleData } from '../../shared/information/vehicles';
 import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
+import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { VehicleEvents } from '../events/vehicleEvents';
 import { Collections } from '../interface/iDatabaseCollections';
+import { Injections } from '../systems/injections';
+import {
+    VehicleDespawnCallback,
+    VehicleInjectionNames,
+    VehicleOwnershipCallback,
+    VehicleSpawnCallback,
+} from '../systems/injections/vehicles';
 import { sha256Random } from '../utility/encryption';
 import { getMissingNumber } from '../utility/math';
 
@@ -29,13 +38,6 @@ const TEMPORARY_VEHICLE =
     Vehicle_Behavior.UNLIMITED_FUEL |
     Vehicle_Behavior.NO_SAVE;
 
-const SaveInjections: Array<(vehicle: alt.Vehicle) => { [key: string]: any }> = [];
-
-const BeforeCreateInjections: Array<(document: IVehicle) => IVehicle | void> = [];
-const BeforeDespawnInjections: Array<(vehicle: alt.Vehicle) => void> = [];
-const BeforeAddVehicleInjections: Array<(vehicle: IVehicle) => IVehicle | void> = [];
-const VehicleOwnershipInjections: Array<(player: alt.Player, vehicle: alt.Vehicle) => boolean> = [];
-
 interface VehicleKeyItem extends Item {
     data: {
         vehicle: string;
@@ -44,100 +46,6 @@ interface VehicleKeyItem extends Item {
 }
 
 export default class VehicleFuncs {
-    /**
-     * Lets you create an injection into the default save function.
-     *
-     * What that means is you can return specific data from a callback as an object.
-     *
-     * That object will then be appended to the data to save for the vehicle.
-     *
-     * Example:
-     * ```ts
-     * function saveEngineStatus(vehicle: alt.Vehicle) {
-     *     return { engineStatus: vehicle.engineOn };
-     * }
-     *
-     * VehicleFuncs.addSaveInjection(saveEngineStatus)
-     * ```
-     * @static
-     * @param {(vehicle: alt.Vehicle) => { [key: string]: any }} callback
-     * @memberof VehicleFuncs
-     */
-    static addSaveInjection(callback: (vehicle: alt.Vehicle) => { [key: string]: any }) {
-        SaveInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default create function.
-     *
-     * Useful when you want to perform some action before the vehicle is created.
-     * You can technically also modify the document before Athena will make use of them.
-     *
-     * IMPORTANT: Modified documents may be saved after all callbacks have been executed.
-     * Missuse of this feature can cause data loss.
-     *
-     * Example:
-     * ```ts
-     * function beforeVehicleCreate(document: IVehicle) {
-     *   const blacklistedVehicles = ['rhino', 'hydra'];
-     *
-     *   if (blacklistedVehicles.includes(document.model)) {
-     *       alt.logWarn(`Vehicle model ${document.model} is blacklisted, replacing with faggio`);
-     *       document.model = 'faggio';
-     *   }
-     *
-     *   return document;
-     * }
-     * VehicleFuncs.addBeforeCreateInjection(beforeVehicleCreate);
-     * ```
-     * @static
-     * @param {(document: IVehicle) => void} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeCreateInjection(callback: (document: IVehicle) => IVehicle | void) {
-        BeforeCreateInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default despawn function.
-     *
-     * What that means is you can do something when a vehicle is despawned.
-     * For example, you can cleanup any data you have stored for the vehicle element.
-     *
-     * @static
-     * @param {(vehicle: alt.Vehicle) => void} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeDespawnInjection(callback: (vehicle: alt.Vehicle) => void) {
-        BeforeDespawnInjections.push(callback);
-    }
-
-    /**
-     * Let's you create an injection into the default add function.
-     *
-     * What that means is you can modify the document before it is added to the database.
-     * For example, you can change default numberplate, color, ...
-     *
-     * @static
-     * @param {((vehicle: IVehicle) => IVehicle | void)} callback
-     * @memberof VehicleFuncs
-     */
-    static addBeforeAddVehicleInjection(callback: (vehicle: IVehicle) => IVehicle | void) {
-        BeforeAddVehicleInjections.push(callback);
-    }
-
-    /**
-     * Create a vehicle injection that is ran during all ownership checks.
-     * Must return a boolean.
-     *
-     * @static
-     * @param {(vehicle: alt.Vehicle) => boolean} callback
-     * @memberof VehicleFuncs
-     */
-    static addOwnershipInjection(callback: (player: alt.Player, vehicle: alt.Vehicle) => boolean) {
-        VehicleOwnershipInjections.push(callback);
-    }
-
     /**
      * Gets the next available ID in the database for the vehicle.
      * @static
@@ -206,6 +114,15 @@ export default class VehicleFuncs {
                 continue;
             }
 
+            // Skip already existing vehicles.
+            const existingVehicle = alt.Vehicle.all.find(
+                (veh) => veh && veh.valid && veh.data && veh.data._id.toString() === vehicle._id.toString(),
+            );
+
+            if (existingVehicle) {
+                continue;
+            }
+
             VehicleFuncs.spawn(vehicle);
         }
     }
@@ -220,12 +137,16 @@ export default class VehicleFuncs {
      */
     static async add(vehicleData: IVehicle, doNotSpawn = true): Promise<IVehicle> {
         vehicleData.id = await VehicleFuncs.getNextID();
-        vehicleData.plate = sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
-        vehicleData.behavior = OWNED_VEHICLE;
+        vehicleData.plate ??= sha256Random(JSON.stringify(vehicleData)).slice(0, 8);
+        vehicleData.behavior ??= OWNED_VEHICLE;
 
-        for (const callback of BeforeAddVehicleInjections) {
+        const beforeInjections = Injections.get<(document: IVehicle) => IVehicle>('VEHICLE_ADD_START');
+
+        for (const callback of beforeInjections) {
             const result = callback(vehicleData);
-            if (result) vehicleData = result;
+            if (result) {
+                vehicleData = result;
+            }
         }
 
         const document = await Database.insertData<IVehicle>(vehicleData, Collections.Vehicles, true);
@@ -245,7 +166,7 @@ export default class VehicleFuncs {
      * False if it was not found.
      * @static
      * @param {number} id
-     * @return {*}  {Promise<boolean>}
+     * @return {Promise<boolean>}
      * @memberof VehicleFuncs
      */
     static async remove(id: number): Promise<boolean> {
@@ -275,7 +196,8 @@ export default class VehicleFuncs {
             document.rotation = rot;
         }
 
-        for (const callback of BeforeCreateInjections) {
+        const beforeSpawnInjections = Injections.get<VehicleSpawnCallback>(VehicleInjectionNames[0]);
+        for (const callback of beforeSpawnInjections) {
             const result = callback(document);
 
             if (result) {
@@ -301,7 +223,6 @@ export default class VehicleFuncs {
         SpawnedVehicles[document.id] = vehicle;
 
         // Setup Default Values
-        vehicle.passengers = [];
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
         vehicle.setStreamSyncedMeta(
             VEHICLE_STATE.LOCK_INTERACTION_INFO,
@@ -314,7 +235,6 @@ export default class VehicleFuncs {
         }
 
         vehicle.data = document;
-        vehicle.passengers = [];
         vehicle.behavior = vehicle.data.behavior;
 
         // Check if the vehicle is of the bike type
@@ -335,6 +255,10 @@ export default class VehicleFuncs {
             vehicle.engineHealth = vehicle.data.engineHealth;
         }
 
+        if (vehicle.data.damage) {
+            this.setDamage(vehicle);
+        }
+
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -346,6 +270,15 @@ export default class VehicleFuncs {
             VehicleFuncs.save(vehicle, { garageIndex: null, position: pos, rotation: rot });
         } else {
             VehicleFuncs.save(vehicle, { garageIndex: null });
+        }
+
+        const afterSpawnInjections = Injections.get<VehicleSpawnCallback>(VehicleInjectionNames[1]);
+        for (const callback of afterSpawnInjections) {
+            const result = callback(document);
+
+            if (result) {
+                document = result;
+            }
         }
 
         // Synchronize Ownership
@@ -371,24 +304,51 @@ export default class VehicleFuncs {
             return false;
         }
 
-        for (const callback of BeforeDespawnInjections) {
+        const beforeDespawnInjections = Injections.get<VehicleDespawnCallback>(VehicleInjectionNames.DESPAWN_START);
+        for (const callback of beforeDespawnInjections) {
             callback(SpawnedVehicles[id]);
         }
 
-        // Remove all information from passengers regarding this vehicle.
-        for (let i = 0; i < SpawnedVehicles[id].passengers.length; i++) {
-            const passenger = SpawnedVehicles[id].passengers[i];
-            if (!passenger.player || !passenger.player.valid) {
-                continue;
-            }
-
-            passenger.player.lastEnteredVehicleID = null;
-        }
-
         VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESPAWNED, SpawnedVehicles[id]);
-        SpawnedVehicles[id].destroy();
-        delete SpawnedVehicles[id];
+
+        try {
+            SpawnedVehicles[id].destroy();
+            delete SpawnedVehicles[id];
+        } catch (err) {}
+
         return true;
+    }
+
+    /**
+     * A session based owned vehicle.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {string} model
+     * @param {alt.IVector3} pos
+     * @param {alt.IVector3} rot
+     * @memberof VehicleFuncs
+     */
+    static sessionVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: alt.IVector3) {
+        const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+        vehicle.player_id = player.id;
+        vehicle.behavior =
+            Vehicle_Behavior.NEED_KEY_TO_START | Vehicle_Behavior.NO_SAVE | Vehicle_Behavior.UNLIMITED_FUEL;
+
+        vehicle.numberPlateText = 'SESSION';
+        vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
+        vehicle.isTemporary = true;
+        vehicle.modelName = model;
+        vehicle.overrideTemporaryDeletion = true;
+
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
+        vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
+        vehicle.setStreamSyncedMeta(
+            VEHICLE_STATE.LOCK_INTERACTION_INFO,
+            DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_INTERACTION_INFO,
+        );
+
+        return vehicle;
     }
 
     /**
@@ -450,9 +410,14 @@ export default class VehicleFuncs {
         }
 
         let injections = { ...dataObject };
-        for (let i = 0; i < SaveInjections.length; i++) {
+
+        const saveInjections = Injections.get<(vehicle: alt.Vehicle) => { [key: string]: any }>(
+            VehicleInjectionNames.SAVE,
+        );
+
+        for (const callback of saveInjections) {
             try {
-                injections = { ...injections, ...SaveInjections[i](vehicle) };
+                injections = { ...injections, ...callback(vehicle) };
             } catch (err) {
                 console.warn(`Got Save Injection Error for Vehicle: ${err}`);
                 continue;
@@ -496,6 +461,10 @@ export default class VehicleFuncs {
             return true;
         }
 
+        if (vehicle.isTemporary) {
+            return false;
+        }
+
         if (!vehicle.data) {
             return true;
         }
@@ -505,12 +474,11 @@ export default class VehicleFuncs {
             return true;
         }
 
-        if (VehicleOwnershipInjections.length >= 1) {
-            for (let i = 0; i < VehicleOwnershipInjections.length; i++) {
-                const result = VehicleOwnershipInjections[i](player, vehicle);
-                if (result) {
-                    return true;
-                }
+        const ownershipInjections = Injections.get<VehicleOwnershipCallback>(VehicleInjectionNames.OWNERSHIP);
+        for (const callback of ownershipInjections) {
+            const result = callback(player, vehicle);
+            if (result) {
+                return true;
             }
         }
 
@@ -580,6 +548,7 @@ export default class VehicleFuncs {
             fuel: vehicle.data.fuel,
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
+            damage: this.getDamage(vehicle),
             lastUsed: Date.now(), // ms
         });
     }
@@ -661,8 +630,8 @@ export default class VehicleFuncs {
         }
 
         const item: VehicleKeyItem = {
-            name: `Key for ${vehicle.model}`,
-            description: `A key for the vehicle model ${vehicle.model}`,
+            name: LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_NAME, vehicle.model),
+            description: LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_DESCRIPTION, vehicle.model),
             behavior: ITEM_TYPE.DESTROY_ON_DROP,
             quantity: 1,
             icon: 'key',
@@ -675,12 +644,12 @@ export default class VehicleFuncs {
         if (!doNotAddToInventory) {
             const inventory = Athena.player.inventory.getFreeInventorySlot(player);
             if (!inventory) {
-                Athena.player.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 return null;
             }
 
             if (!Athena.player.inventory.inventoryAdd(player, item, inventory.slot)) {
-                Athena.player.emit.notification(player, 'No room in inventory.');
+                Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.INVENTORY_IS_FULL));
                 return null;
             }
 
@@ -748,75 +717,132 @@ export default class VehicleFuncs {
     }
 
     static applyVehicleTuning(vehicle: alt.Vehicle): void {
-        if (!vehicle?.data?.tuning) vehicle.data.tuning = {};
+        if (!vehicle?.data?.tuning) {
+            vehicle.data.tuning = {};
+        }
 
         const data = vehicle.data.tuning;
 
-        if (data.modkit) {
+        if (typeof data.modkit !== 'undefined') {
             vehicle.modKit = data.modkit;
-            if (data.mods) data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+            if (typeof data.mods !== 'undefined') {
+                data.mods.forEach((mod) => vehicle.setMod(mod.id, mod.value));
+            }
         }
 
-        if (data.handling) vehicle.setStreamSyncedMeta('handlingData', data.handling);
+        if (typeof data.handling !== 'undefined') {
+            vehicle.setStreamSyncedMeta('handlingData', data.handling);
+        }
 
-        if (data.primaryFinish) vehicle.primaryColor = data.primaryFinish;
-        if (data.secondaryFinish) vehicle.secondaryColor = data.secondaryFinish;
+        if (typeof data.primaryFinish !== 'undefined') {
+            vehicle.primaryColor = data.primaryFinish;
+        }
 
-        if (!data.primaryColor) data.primaryColor = DEFAULT_VEHICLE_COLOR;
-        if (!data.secondaryColor) data.secondaryColor = DEFAULT_VEHICLE_COLOR;
+        if (typeof data.secondaryFinish !== 'undefined') {
+            vehicle.secondaryColor = data.secondaryFinish;
+        }
 
-        if (typeof data.primaryColor === 'number') vehicle.primaryColor = data.primaryColor;
-        else
+        if (typeof data.primaryColor === 'undefined') {
+            data.primaryColor = DEFAULT_VEHICLE_COLOR;
+        }
+
+        if (typeof data.secondaryColor === 'undefined') {
+            data.secondaryColor = DEFAULT_VEHICLE_COLOR;
+        }
+
+        if (typeof data.primaryColor === 'number') {
+            vehicle.primaryColor = data.primaryColor;
+        } else {
             vehicle.customPrimaryColor = new alt.RGBA(
                 data.primaryColor.r,
                 data.primaryColor.g,
                 data.primaryColor.b,
                 data.primaryColor.a,
             );
+        }
 
-        if (typeof data.secondaryColor === 'number') vehicle.secondaryColor = data.secondaryColor;
-        else
+        if (typeof data.secondaryColor === 'number') {
+            vehicle.secondaryColor = data.secondaryColor;
+        } else {
             vehicle.customSecondaryColor = new alt.RGBA(
                 data.secondaryColor.r,
                 data.secondaryColor.g,
                 data.secondaryColor.b,
                 data.secondaryColor.a,
             );
-
-        if (data.customTires) vehicle.customTires = true;
-        if (typeof data.darkness == 'number') vehicle.darkness = data.darkness;
-        if (typeof data.dashboardColor == 'number') vehicle.dashboardColor = data.dashboardColor;
-        if (typeof data.headlightColor == 'number') vehicle.headlightColor = data.headlightColor;
-        if (typeof data.interiorColor == 'number') vehicle.interiorColor = data.interiorColor;
-        if (typeof data.lightsMultiplier == 'number') vehicle.lightsMultiplier = data.lightsMultiplier;
-        if (typeof data.livery == 'number') vehicle.livery = data.livery;
-
-        if (data.neon) {
-            vehicle.neon = {
-                left: data.neon.left ?? false,
-                right: data.neon.right ?? false,
-                front: data.neon.front ?? false,
-                back: data.neon.back ?? false,
-            };
         }
 
-        if (data.neonColor)
-            vehicle.neonColor = new alt.RGBA(data.neonColor.r, data.neonColor.g, data.neonColor.b, data.neonColor.a);
+        if (data.customTires) vehicle.customTires = true;
+        if (typeof data.darkness == 'number') {
+            vehicle.darkness = data.darkness;
+        }
 
-        if (typeof data.numberPlateIndex == 'number') vehicle.numberPlateIndex = data.numberPlateIndex;
-        if (typeof data.pearlColor == 'number') vehicle.pearlColor = data.pearlColor;
-        if (typeof data.roofLivery == 'number') vehicle.roofLivery = data.roofLivery;
-        if (typeof data.roofState == 'boolean') vehicle.roofState = data.roofState;
-        if (data.tireSmokeColor)
+        if (typeof data.dashboardColor == 'number') {
+            vehicle.dashboardColor = data.dashboardColor;
+        }
+
+        if (typeof data.headlightColor == 'number') {
+            vehicle.headlightColor = data.headlightColor;
+        }
+
+        if (typeof data.interiorColor == 'number') {
+            vehicle.interiorColor = data.interiorColor;
+        }
+
+        if (typeof data.lightsMultiplier == 'number') {
+            vehicle.lightsMultiplier = data.lightsMultiplier;
+        }
+
+        if (typeof data.livery == 'number') {
+            vehicle.livery = data.livery;
+        }
+
+        vehicle.neon = {
+            left: (data.neonEnabled && data.neon?.left) ?? false,
+            right: (data.neonEnabled && data.neon?.right) ?? false,
+            front: (data.neonEnabled && data.neon?.front) ?? false,
+            back: (data.neonEnabled && data.neon?.back) ?? false,
+        };
+
+        if (data.neonColor) {
+            vehicle.neonColor = new alt.RGBA(data.neonColor.r, data.neonColor.g, data.neonColor.b, data.neonColor.a);
+        }
+
+        if (typeof data.numberPlateIndex == 'number') {
+            vehicle.numberPlateIndex = data.numberPlateIndex;
+        }
+
+        if (typeof data.pearlColor == 'number') {
+            vehicle.pearlColor = data.pearlColor;
+        }
+
+        if (typeof data.roofLivery == 'number') {
+            vehicle.roofLivery = data.roofLivery;
+        }
+        if (typeof data.roofState == 'boolean') {
+            vehicle.roofState = data.roofState;
+        }
+
+        if (data.tireSmokeColor) {
             vehicle.tireSmokeColor = new alt.RGBA(
                 data.tireSmokeColor.r,
                 data.tireSmokeColor.g,
                 data.tireSmokeColor.b,
                 data.tireSmokeColor.a,
             );
-        if (typeof data.wheelColor == 'number') vehicle.wheelColor = data.wheelColor;
-        if (typeof data.windowTint == 'number') vehicle.windowTint = data.windowTint;
-        if (typeof data.driftModeEnabled == 'boolean') vehicle.driftModeEnabled = data.driftModeEnabled;
+        }
+
+        if (typeof data.wheelColor == 'number') {
+            vehicle.wheelColor = data.wheelColor;
+        }
+
+        if (typeof data.windowTint == 'number') {
+            vehicle.windowTint = data.windowTint;
+        }
+
+        if (typeof data.driftModeEnabled == 'boolean') {
+            vehicle.driftModeEnabled = data.driftModeEnabled;
+        }
     }
 
     private static convertOldTuningData(vehicle: IVehicle): IVehicle {
@@ -1103,6 +1129,25 @@ export default class VehicleFuncs {
         }
     }
 
+    static setNeonLightsEnabled(vehicle: alt.Vehicle, enabled: boolean): void {
+        if (!vehicle?.valid || vehicle.isTemporary) return;
+
+        if (!vehicle.data?.tuning) vehicle.data.tuning = {};
+        vehicle.data.tuning.neonEnabled = enabled;
+
+        // Purely for Clientside UI
+        vehicle.setStreamSyncedMeta('neonLightsEnabled', enabled);
+
+        const neonLights = vehicle.data.tuning.neon ?? {};
+
+        vehicle.neon = {
+            left: (enabled && neonLights.left) ?? false,
+            right: (enabled && neonLights.right) ?? false,
+            front: (enabled && neonLights.front) ?? false,
+            back: (enabled && neonLights.back) ?? false,
+        };
+    }
+
     static setNeonColor(vehicle: alt.Vehicle, color: alt.RGBA): void {
         if (!vehicle?.valid) return;
         vehicle.neonColor = color;
@@ -1170,6 +1215,169 @@ export default class VehicleFuncs {
         if (!vehicle.isTemporary) {
             if (!vehicle.data?.tuning) vehicle.data.tuning = {};
             vehicle.data.tuning.driftModeEnabled = enabled;
+        }
+    }
+
+    static getDamage(vehicle: alt.Vehicle): IVehicleDamage {
+        if (!vehicle?.valid) return null;
+        let wheels = [];
+        for (let w = 0; w < vehicle.wheelsCount; w++) {
+            wheels[w] = {
+                damageLevel: vehicle.getWheelHealth(w).toString(),
+            };
+        }
+        return {
+            parts: {
+                FrontLeft: {
+                    bulletHoles: vehicle.getPartBulletHoles(0),
+                    damageLevel: vehicle.getPartDamageLevel(0).toString(),
+                },
+                FrontRight: {
+                    bulletHoles: vehicle.getPartBulletHoles(1),
+                    damageLevel: vehicle.getPartDamageLevel(1).toString(),
+                },
+                MiddleLeft: {
+                    bulletHoles: vehicle.getPartBulletHoles(2),
+                    damageLevel: vehicle.getPartDamageLevel(2).toString(),
+                },
+                MiddleRight: {
+                    bulletHoles: vehicle.getPartBulletHoles(3),
+                    damageLevel: vehicle.getPartDamageLevel(3).toString(),
+                },
+                RearLeft: {
+                    bulletHoles: vehicle.getPartBulletHoles(4),
+                    damageLevel: vehicle.getPartDamageLevel(4).toString(),
+                },
+                RearRight: {
+                    bulletHoles: vehicle.getPartBulletHoles(5),
+                    damageLevel: vehicle.getPartDamageLevel(5).toString(),
+                },
+            },
+            windows: {
+                DriverSideFront: {
+                    damageLevel: vehicle.isWindowDamaged(1) ? '1' : '0',
+                },
+                DriverSideRear: {
+                    damageLevel: vehicle.isWindowDamaged(3) ? '1' : '0',
+                },
+                PassSideFront: {
+                    damageLevel: vehicle.isWindowDamaged(0) ? '1' : '0',
+                },
+                PassSideRear: {
+                    damageLevel: vehicle.isWindowDamaged(2) ? '1' : '0',
+                },
+                FrontWindshield: {
+                    damageLevel: vehicle.isWindowDamaged(6) ? '1' : '0',
+                },
+                RearWindshield: {
+                    damageLevel: vehicle.isWindowDamaged(7) ? '1' : '0',
+                },
+            },
+            bumpers: {
+                FrontBumper: {
+                    damageLevel: vehicle.getBumperDamageLevel(0).toString(),
+                },
+                RearBumper: {
+                    damageLevel: vehicle.getBumperDamageLevel(1).toString(),
+                },
+            },
+            wheels: wheels,
+            lights: [],
+        };
+    }
+
+    static setDamage(vehicle: alt.Vehicle): void {
+        if (!vehicle?.valid) {
+            return;
+        }
+
+        if (!vehicle.data.damage) {
+            return;
+        }
+
+        if (vehicle.data.damage.parts) {
+            for (let part in vehicle.data.damage.parts) {
+                let damages = vehicle.data.damage.parts[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setPartBulletHoles(vehPart, damages.bulletHoles);
+                vehicle.setPartDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel));
+            }
+        }
+
+        if (vehicle.data.damage.windows) {
+            for (let part in vehicle.data.damage.windows) {
+                let damages = vehicle.data.damage.windows[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setWindowDamaged(vehPart, parseInt(damages.damageLevel) >= 1 ? true : false);
+            }
+        }
+
+        if (vehicle.data.damage.bumpers) {
+            for (let part in vehicle.data.damage.bumpers) {
+                let damages = vehicle.data.damage.bumpers[part];
+                let vehPart = this.getVehiclePart(part);
+                vehicle.setBumperDamageLevel(vehPart, this.getDamageLevel(damages.damageLevel));
+            }
+        }
+
+        if (vehicle.data.damage.wheels) {
+            for (let w = 0; w < vehicle.data.damage.wheels.length; w++) {
+                vehicle.setWheelHealth(w, parseInt(vehicle.data.damage.wheels[w].damageLevel));
+            }
+        }
+    }
+
+    static getDamageLevel(level: string): number {
+        switch (level) {
+            case 'DamagedLevel1':
+                return 1;
+            case 'DamagedLevel2':
+                return 2;
+            case 'DamagedLevel3':
+                return 3;
+            case 'NotDamaged':
+                return 0;
+            case 'Damaged':
+                return 1;
+            case 'None':
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    static getVehiclePart(part: string): number {
+        switch (part) {
+            case 'FrontLeft':
+                return 0;
+            case 'FrontRight':
+                return 1;
+            case 'MiddleLeft':
+                return 2;
+            case 'MiddleRight':
+                return 3;
+            case 'RearLeft':
+                return 4;
+            case 'RearRight':
+                return 5;
+            case 'FrontBumper':
+                return 0;
+            case 'RearBumper':
+                return 1;
+            case 'PassSideFront':
+                return 0;
+            case 'DriverSideFront':
+                return 1;
+            case 'PassSideFront':
+                return 2;
+            case 'PassSideRear':
+                return 3;
+            case 'FrontWindshield':
+                return 6;
+            case 'RearWindshield':
+                return 7;
+            default:
+                return 0;
         }
     }
 }

@@ -37,5 +37,5 @@ export const KEY_BINDS = {
     // F2
     LEADERBOARD: 113,
     // . or >
-    PHONE: 190
+    PHONE: 190,
 };

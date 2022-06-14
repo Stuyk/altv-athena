@@ -1,5 +1,6 @@
 import alt from 'alt-server';
 import { Client, Guild, GuildMember, Intents, MessageEmbed, TextChannel } from 'discord.js';
+import { Athena } from '../../../../server/api/athena';
 import { Account } from '../../../../server/interface/iAccount';
 import { LoginController } from '../../../../server/systems/login';
 import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
@@ -68,7 +69,7 @@ export class DiscordController {
         }
 
         client.on('guildMemberUpdate', DiscordController.userUpdate);
-        LoginController.addTryLoginInjection(DiscordController.tryLogin);
+        Athena.injections.login.tryLogin('login-try-account-begin', DiscordController.tryLogin);
     }
 
     /**
@@ -189,10 +190,7 @@ export class DiscordController {
      * @return {*}
      * @memberof DiscordController
      */
-    static async removeFromAllowList(
-        discord: string,
-        alreadyRemovedRole: boolean = false,
-    ): Promise<GuildMember> {
+    static async removeFromAllowList(discord: string, alreadyRemovedRole: boolean = false): Promise<GuildMember> {
         const member = await guild.members.fetch(discord);
 
         try {

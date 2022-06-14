@@ -41,10 +41,10 @@ export class World {
         if (SHARED_CONFIG.USE_24H_TIME_FORMAT) {
             const hour = World.normalizeValue(World.hour);
             const minute = World.normalizeValue(World.minute);
-            
+
             return `${hour}:${minute}`;
         }
-        
+
         const timeOfDay = World.hour >= 12 ? 'PM' : 'AM';
         const hour = World.normalizeValue(World.normalizeHour(World.hour));
         const minute = World.normalizeValue(World.minute);

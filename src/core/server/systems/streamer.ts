@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
 import { DEFAULT_CONFIG } from '../athena/main';
-import Logger from '../utility/athenaLogger';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:3399';
 const sock = new SockJS(DEFAULT_CONNECTION);
@@ -25,7 +24,7 @@ class InternalController {
      * @returns None
      */
     static init() {
-        Logger.info(`Connected to Streamer Service`);
+        alt.log(`Connected to Streamer Service`);
         const pingMessage: IStreamMessage = {
             id: -1,
             route: 'ping',
@@ -34,7 +33,7 @@ class InternalController {
 
         sock.send(JSON.stringify(pingMessage));
 
-        Logger.info('Setting Up Configuration');
+        alt.log('Setting Up Configuration');
         const configMessage: IStreamMessage = {
             id: -1,
             route: 'config',
@@ -131,7 +130,7 @@ class InternalController {
      * @memberof InternalController
      */
     static async pong(id: number, data: string) {
-        Logger.info(data);
+        alt.log(data);
         ready = true;
     }
 }

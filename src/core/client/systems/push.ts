@@ -62,7 +62,7 @@ export class PushVehicle {
             interval = null;
             alt.emitServer(VEHICLE_EVENTS.STOP_PUSH);
         }
-        
+
         vehicle = null;
         isPushing = false;
     }

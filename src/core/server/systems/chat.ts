@@ -11,7 +11,6 @@ import { getClosestTypes } from '../../shared/utility/vector';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { consoleCommand } from '../decorators/commands';
-import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 
 const maxMessageLength: number = 128;
@@ -108,11 +107,12 @@ class InternalFunctions {
      * @return {Promise<void>}
      */
     static handleCommand(player: alt.Player, commandName: string, ...args: any[]): void {
-        const commandInfo = ChatController.commands[commandName];
+        const normalizedName = commandName.toLowerCase();
+        const commandInfo = ChatController.commands[normalizedName];
         if (!commandInfo || !commandInfo.func) {
             Athena.player.emit.message(
                 player,
-                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${commandName}`)}`,
+                `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_VALID, `/${normalizedName}`)}`,
             );
             return;
         }
@@ -178,23 +178,24 @@ export default class ChatController {
         }
 
         commandInterval = alt.setTimeout(() => {
-            Logger.info(`Total Commands: ${commandCount}`);
+            alt.log(`Total Commands: ${commandCount}`);
         }, 1500);
 
-        if (ChatController.commands[name]) {
-            alt.logError(`[Athena] Command: ${name} was already registered.`);
+        const normalizedName = name.toLowerCase();
+        if (ChatController.commands[normalizedName]) {
+            alt.logError(`[Athena] Command: ${normalizedName} was already registered.`);
             return;
         }
 
         commandCount += 1;
 
         if (printCommands) {
-            alt.log(`[Athena] Registered Command ${name}`);
+            alt.log(`[Athena] Registered Command ${normalizedName}`);
         }
 
-        ChatController.commands[name] = {
-            name,
-            description,
+        ChatController.commands[normalizedName] = {
+            name: normalizedName,
+            description: description.toLowerCase(),
             func: callback,
             permission: permissions,
         };
@@ -223,23 +224,25 @@ export default class ChatController {
         }
 
         commandInterval = alt.setTimeout(() => {
-            Logger.info(`Total Commands: ${commandCount}`);
+            alt.log(`Total Commands: ${commandCount}`);
         }, 1500);
 
-        if (ChatController.commands[name]) {
-            alt.logError(`[Athena] Command: ${name} was already registered.`);
+        const normalizedName = name.toLowerCase();
+
+        if (ChatController.commands[normalizedName]) {
+            alt.logError(`[Athena] Command: ${normalizedName} was already registered.`);
             return;
         }
 
         commandCount += 1;
 
         if (printCommands) {
-            alt.log(`[Athena] Registered Command ${name}`);
+            alt.log(`[Athena] Registered Command ${normalizedName}`);
         }
 
-        ChatController.commands[name] = {
-            name,
-            description,
+        ChatController.commands[normalizedName] = {
+            name: normalizedName,
+            description: description.toLowerCase(),
             func: callback,
             characterPermissions,
         };

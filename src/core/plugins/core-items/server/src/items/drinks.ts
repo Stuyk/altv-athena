@@ -1,5 +1,5 @@
-import { ITEM_TYPE } from "../../../../../shared/enums/itemTypes";
-import { Item } from "../../../../../shared/interfaces/item";
+import { ITEM_TYPE } from '../../../../../shared/enums/itemTypes';
+import { Item } from '../../../../../shared/interfaces/item';
 import EFFECTS from '../../../../../shared/enums/effects';
 
 export const drinks: Array<Item> = [
@@ -22,7 +22,7 @@ export const drinks: Array<Item> = [
             amount: 5,
             sound: 'item_drink',
         },
-        version: 1
+        version: 1,
     },
     {
         name: `Cola`,
@@ -43,6 +43,6 @@ export const drinks: Array<Item> = [
             amount: 25,
             sound: 'item_drink',
         },
-        version: 1
+        version: 1,
     },
-]
+];

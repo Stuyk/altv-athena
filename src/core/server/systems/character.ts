@@ -10,7 +10,6 @@ import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { Item } from '../../shared/interfaces/item';
 import { Global } from './global';
 
 const Injections: { [key: string]: Array<(player: alt.Player) => void> } = {
@@ -145,26 +144,11 @@ export class CharacterSystem {
                 Athena.player.safe.addHealth(player, 200, true);
             }
 
-            if (player.data.health <= 99) {
-                Athena.player.set.dead(player);
-            }
-
             // Check if armour exists.
             if (player.data.armour) {
                 Athena.player.safe.addArmour(player, player.data.armour, true);
             } else {
                 Athena.player.safe.addArmour(player, 0, true);
-            }
-
-            // Resets their death status and logs them in as dead.
-            if (player.data.isDead) {
-                player.nextDeathSpawn = Date.now() + 30000;
-                player.data.isDead = false;
-                Athena.player.safe.addHealth(player, 0, true);
-                Athena.player.emit.meta(player, 'isDead', true);
-            } else {
-                player.data.isDead = false;
-                Athena.player.emit.meta(player, 'isDead', false);
             }
 
             // Synchronization

@@ -149,6 +149,8 @@ export const LOCALE_KEYS = {
     VEHICLE_NOT_RIGHT_SIDE_UP: 'vehicle-not-right-side-up',
     VEHICLE_IS_ALREADY_BEING_PUSHED: 'vehicle-is-already-being-pushed',
     VEHICLE_STORAGE_VIEW_NAME: 'vehicle-storage-view-name',
+    VEHICLE_KEY_NAME: 'vehicle-key-name',
+    VEHICLE_KEY_DESCRIPTION: 'vehicle-key-description',
     // Faction
     FACTION_PLAYER_IS_ALREADY_IN_FACTION: 'faction-player-is-already-in-faction',
     FACTION_CANNOT_CHANGE_OWNERSHIP: 'faction-cannot-change-ownership',

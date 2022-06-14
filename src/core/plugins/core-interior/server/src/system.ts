@@ -270,6 +270,11 @@ class InternalSystem {
 
         // Change Lock Status
         interior.isUnlocked = !interior.isUnlocked;
+
+        if (!interior.isUnlocked && interior.storage) {
+            StorageView.forceCloseStorage(interior.storage);
+        }
+
         InternalSystem.refreshInteriorText(interior);
         await Database.updatePartialData(interior._id, { isUnlocked: interior.isUnlocked }, INTERIOR_COLLECTIONS.CORE);
     }

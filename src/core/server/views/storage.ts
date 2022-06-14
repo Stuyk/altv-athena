@@ -12,6 +12,15 @@ import SystemRules from '../systems/rules';
 import { Athena } from '../api/athena';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { Vector3 } from '../../shared/interfaces/vector';
+import { distance } from '../../shared/utility/vector';
+
+const DEFAULT_MAX_STORAGE_DIST = 4;
+
+interface IExtStorage extends IStorage {
+    pos: Vector3;
+    entity?: alt.Entity;
+}
 
 /**
  * Bind a player id to a storage container.
@@ -19,7 +28,7 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
  * @type { [id: string]: string }
  * */
 let storageBinding: { [id: string]: string } = {};
-let storageCache: { [id: number]: IStorage } = {};
+let storageCache: { [id: number]: IExtStorage } = {};
 let rules: { [key: string]: Array<(player: alt.Player, storage: IStorage) => IResponse> } = {
     [STORAGE_RULES.OPEN]: [],
 };
@@ -35,12 +44,14 @@ export class StorageView {
     /**
      * Open storage for a specific container.
      * @static
-     * @param {alt.Player} player
-     * @param {string} id
-     * @return {*}  {Promise<void>}
+     * @param {alt.Player} player The player who is accessing the store
+     * @param {string} storage_id Database storage identifier
+     * @param {string} name Name of the storage
+     * @param {alt.Entity} entity The entity to track to prevent positional abuse
+     * @return { Promise<void> }
      * @memberof StorageView
      */
-    static async open(player: alt.Player, storage_id: string, name: string): Promise<void> {
+    static async open(player: alt.Player, storage_id: string, name: string, entity?: alt.Entity): Promise<void> {
         const storage = await StorageSystem.get(storage_id);
         if (!storage) {
             Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.STORAGE_NOT_AVAILABLE));
@@ -65,7 +76,7 @@ export class StorageView {
         }
 
         // Push Storage Info Client-Side
-        storageCache[player.id] = storage;
+        storageCache[player.id] = { ...storage, pos: player.pos, entity };
         StorageView.setStorageBinding(player.id, storage_id);
         alt.emitClient(player, View_Events_Storage.Open, storage_id, name, storage.items, player.data.inventory);
     }
@@ -117,6 +128,79 @@ export class StorageView {
      */
     static setStorageBinding(playerID: number, storageID: string) {
         storageBinding[playerID] = storageID;
+    }
+
+    /**
+     * Updates entity positional checks for storages.
+     * Mostly effects vehicles.
+     *
+     * @static
+     * @memberof StorageView
+     */
+    static updateStorageBindings() {
+        const keys = Object.keys(storageCache);
+
+        for (const key of keys) {
+            if (!storageCache[key]) {
+                continue;
+            }
+
+            const storage = storageCache[key] as IExtStorage;
+            if (storage.entity && !storage.entity.valid) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+
+            const target = alt.Player.all.find((x) => x && x.valid && `${x.id}` === key);
+            if (!target || !target.valid) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+
+            const dist = distance(target.pos, storage.entity.pos);
+            if (dist > DEFAULT_MAX_STORAGE_DIST) {
+                StorageView.forceCloseStorage(storage._id.toString());
+                continue;
+            }
+        }
+    }
+
+    /**
+     * Forces the storage interface to close for a specific storage identifier.
+     *
+     * @static
+     * @param {string} storage
+     * @return {*}
+     * @memberof StorageView
+     */
+    static forceCloseStorage(storage: string) {
+        const keys = Object.keys(storageBinding);
+
+        let id: string;
+
+        for (const key of keys) {
+            if (storageBinding[key] !== storage) {
+                continue;
+            }
+
+            id = key;
+            break;
+        }
+
+        if (!id) {
+            return;
+        }
+
+        // Should have the player id now.
+        StorageView.removeStorageBinding(parseInt(id));
+
+        // Try to find a valid player.
+        const player = alt.Player.all.find((x) => x.toString() === id.toString());
+        if (!player || !player.valid) {
+            return;
+        }
+
+        alt.emitClient(player, View_Events_Storage.Close);
     }
 
     /**
@@ -189,6 +273,16 @@ export class StorageView {
             StorageView.removeStorageBinding(player.id);
             StorageSystem.setRestricted(id, false);
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            alt.emitClient(player, View_Events_Storage.Close);
+            return;
+        }
+
+        const dist = distance(player.pos, storageCache[player.id].pos);
+        if (dist > DEFAULT_MAX_STORAGE_DIST) {
+            StorageView.removeStorageBinding(player.id);
+            StorageSystem.setRestricted(id, false);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.message(player, `Too Far From Storage`);
             alt.emitClient(player, View_Events_Storage.Close);
             return;
         }
@@ -374,6 +468,16 @@ export class StorageView {
             return;
         }
 
+        const dist = distance(player.pos, storageCache[player.id].pos);
+        if (dist > DEFAULT_MAX_STORAGE_DIST) {
+            StorageView.removeStorageBinding(player.id);
+            StorageSystem.setRestricted(id, false);
+            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            Athena.player.emit.message(player, `Too Far From Storage`);
+            alt.emitClient(player, View_Events_Storage.Close);
+            return;
+        }
+
         if (!player.data.inventory[index]) {
             Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
             alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
@@ -508,3 +612,4 @@ export class StorageView {
 alt.onClient(View_Events_Storage.MoveFromPlayer, StorageView.moveFromPlayer);
 alt.onClient(View_Events_Storage.MoveFromStorage, StorageView.moveFromStorage);
 alt.onClient(View_Events_Storage.Close, StorageView.close);
+alt.setInterval(StorageView.updateStorageBindings, 2500);

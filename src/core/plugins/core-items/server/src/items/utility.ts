@@ -18,6 +18,6 @@ export const utility: Array<Item> = [
         data: {
             event: 'effect:Vehicle:Repair',
         },
-        version: 1
+        version: 1,
     },
 ];

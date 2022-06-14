@@ -1,5 +1,5 @@
 {
-    "name": "Athena 3.0.0",
+    "name": "Athena",
     "host": "0.0.0.0",
     "env": "prod",
     "port": 7788,

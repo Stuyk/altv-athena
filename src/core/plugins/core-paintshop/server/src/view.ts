@@ -12,6 +12,7 @@ import { VEHICLE_COLOR_PAINTS } from '../../shared/paints';
 import { PAINT_SHOPS } from './shops';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { Athena } from '../../../../server/api/athena';
+import { PAINTSHOP_LOCALE } from '../../shared/locales';
 
 const shops: Array<IPaintShop> = [];
 const inShop = {};
@@ -131,7 +132,7 @@ export class PaintShopView {
         }
 
         ServerBlipController.append({
-            text: 'Paint Shop',
+            text: PAINTSHOP_LOCALE.PAINTSHOP_LABEL,
             color: 48,
             sprite: 72,
             scale: 1,
@@ -165,7 +166,12 @@ export class PaintShopView {
         }
 
         if (!player.vehicle) {
-            Athena.player.emit.notification(player, `Must be in a vehicle to use this.`);
+            Athena.player.emit.notification(player, PAINTSHOP_LOCALE.MUST_BE_IN_A_VEHICLE);
+            return;
+        }
+        
+        if (!player.vehicle.data || player.vehicle.isTemporary) {
+            Athena.player.emit.notification(player, PAINTSHOP_LOCALE.CANNOT_BE_MODIFIED);
             return;
         }
 
@@ -178,7 +184,7 @@ export class PaintShopView {
         Athena.player.emit.sound2D(player, 'shop_enter', 0.5);
         Athena.player.emit.interactionAdd(player, {
             keyPress: 'E',
-            description: 'Open Paint Panel',
+            description: PAINTSHOP_LOCALE.OPEN_MENU,
             uid: polygon.uid,
         });
         Athena.player.emit.interactionTemporary(player, Paintshop_View_Events.OPEN);
@@ -212,7 +218,7 @@ export class PaintShopView {
             return;
         }
 
-        if (player.vehicle.isTemporary) {
+        if (!player.vehicle.data || player.vehicle.isTemporary) {
             return;
         }
 

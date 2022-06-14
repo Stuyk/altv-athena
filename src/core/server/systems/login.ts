@@ -15,9 +15,11 @@ import Ares from '../utility/ares';
 import { StorageView } from '../views/storage';
 import { AccountSystem } from './account';
 import { AgendaSystem } from './agenda';
+import { Injections } from './injections';
+import { LoginInjectionNames, TryQuickTokenCallback } from './injections/login';
 import { VehicleSystem } from './vehicle';
 
-type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => Promise<boolean>;
+type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => Promise<void | string>;
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
@@ -75,6 +77,15 @@ export class LoginController {
         delete player.pendingLogin;
         delete player.discordToken;
 
+        const tryBeforeLoginInjections = Injections.get<TryLoginCallback>(LoginInjectionNames.TRY_LOGIN_ACCOUNT_BEGIN);
+        for (const callback of tryBeforeLoginInjections) {
+            const result = await callback(player, account);
+            if (typeof result === 'string') {
+                player.kick(result);
+                return;
+            }
+        }
+
         for (const callback of TryLoginInjections) {
             const didPass = await callback(player, account);
 
@@ -131,6 +142,15 @@ export class LoginController {
             return;
         }
 
+        const tryAfterLoginCallback = Injections.get<TryLoginCallback>(LoginInjectionNames.TRY_LOGIN_ACCOUNT_END);
+        for (const callback of tryAfterLoginCallback) {
+            const result = await callback(player, account);
+            if (typeof result === 'string') {
+                player.kick(result);
+                return;
+            }
+        }
+
         await playerConst.set.account(player, account);
         AgendaSystem.goNext(player);
     }
@@ -142,7 +162,18 @@ export class LoginController {
      * @returns The player's database ID.
      */
     static tryDisconnect(player: alt.Player, reason: string): void {
-        if (!player || !player.valid || !player.data) {
+        const id = player.id;
+
+        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT && typeof id === 'number') {
+            const characterID = LoginController.getDatabaseIdForPlayer(id);
+            VehicleFuncs.despawnAll(characterID);
+        }
+
+        if (typeof id === 'number') {
+            StorageView.removeStorageBinding(id);
+        }
+
+        if (!player || !player.valid || !player.data || !player.data._id) {
             return;
         }
 
@@ -150,18 +181,13 @@ export class LoginController {
             VehicleSystem.stopPush(player);
         }
 
-        StorageView.removeStorageBinding(player.id);
-
-        if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT) {
-            VehicleFuncs.despawnAll(LoginController.getDatabaseIdForPlayer(player.id));
-        }
+        playerConst.save.onTick(player);
 
         if (!player.data.name) {
             return;
         }
 
         alt.log(`${player.data.name} has logged out.`);
-        playerConst.save.onTick(player);
     }
 
     /**
@@ -200,6 +226,15 @@ export class LoginController {
             );
             alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
             return;
+        }
+
+        const tryQuickTokenInjections = Injections.get<TryQuickTokenCallback>(LoginInjectionNames.TRY_QUICK_TOKEN);
+        for (const callback of tryQuickTokenInjections) {
+            const result = await callback(player, discord);
+            if (!result) {
+                alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
+                return;
+            }
         }
 
         player.discord = { id: discord } as DiscordUser;

@@ -8,7 +8,7 @@ export function drawTexture2D(
     name: string,
     position: alt.IVector2,
     scale: number = 1,
-    opacity: number = 255
+    opacity: number = 255,
 ) {
     if (!native.hasStreamedTextureDictLoaded(dictionary)) {
         native.requestStreamedTextureDict(dictionary, false);
@@ -22,7 +22,7 @@ export function drawTexture2D(
         const resolution = native.getTextureResolution(dictionary, name);
         textureData[identifier] = {
             x: resolution.x / width,
-            y: resolution.y / height
+            y: resolution.y / height,
         };
     }
 
@@ -49,7 +49,7 @@ export function drawTexture(dictionary: string, name: string, position: alt.Vect
         const resolution = native.getTextureResolution(dictionary, name);
         textureData[identifier] = {
             x: resolution.x / width,
-            y: resolution.y / height
+            y: resolution.y / height,
         };
     }
 

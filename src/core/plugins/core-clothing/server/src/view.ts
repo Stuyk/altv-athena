@@ -18,6 +18,7 @@ import { CLOTHING_CONFIG } from '../../shared/config';
 import { CLOTHING_STORE_PAGE, DLC_CLOTH_HASH } from '../../shared/enums';
 import { CLOTHING_INTERACTIONS } from '../../shared/events';
 import { CLOTHING_DLC_INFO, IClothingStore } from '../../shared/interfaces';
+import { ComponentVueInfo } from '../../shared/types';
 import clothingStores from './stores';
 
 // Do not change order
@@ -291,6 +292,40 @@ export class ClothingFunctions {
     }
 
     /**
+     * Purchases all components sent up from the client-side.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {Array<ComponentVueInfo>} components
+     * @memberof ClothingFunctions
+     */
+    static async purchaseAll(player: alt.Player, components: Array<ComponentVueInfo>) {
+        if (components.length <= 0) {
+            return;
+        }
+
+        for (const comp of components) {
+            const result = await ClothingFunctions.purchase(
+                player,
+                comp.uid,
+                comp.index,
+                comp.componentData,
+                comp.pageName,
+                comp.name,
+                true,
+            );
+
+            Athena.player.emit.soundFrontend(
+                player,
+                result ? 'Hack_Success' : 'Hack_Failed',
+                'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS',
+            );
+        }
+
+        Athena.player.emit.sound2D(player, 'item_purchase');
+    }
+
+    /**
      * How clothing purchases are handled.
      * @static
      * @param {alt.Player} player
@@ -309,11 +344,11 @@ export class ClothingFunctions {
         name: string,
         desc: string,
         noSound = false,
-    ): Promise<void> {
+    ): Promise<boolean> {
         const index = clothingStoreList.findIndex((x) => x.uid === shopUID);
         if (index <= -1) {
             Athena.player.emit.sound2D(player, 'item_error');
-            return;
+            return false;
         }
 
         const shop = clothingStoreList[index];
@@ -346,9 +381,9 @@ export class ClothingFunctions {
         }
 
         if (totalCost >= 1) {
-            if (player.data.cash < totalCost) {
+            if (player.data.cash + player.data.bank < totalCost) {
                 Athena.player.emit.sound2D(player, 'item_error');
-                return;
+                return false;
             }
         }
 
@@ -368,11 +403,7 @@ export class ClothingFunctions {
 
         Athena.player.sync.singleEquipment(player, newItem.data as ClothingComponent);
 
-        await new Promise((resolve: Function) => {
-            alt.setTimeout(() => {
-                resolve();
-            }, 500);
-        });
+        await alt.Utils.wait(500);
 
         for (let i = 0; i < component.drawables.length; i++) {
             const dlcInfo = ClothingFunctions.getDlcHash(
@@ -396,7 +427,7 @@ export class ClothingFunctions {
             const openSlot = Athena.player.inventory.getFreeInventorySlot(player);
             if (!openSlot) {
                 Athena.player.emit.sound2D(player, 'item_error');
-                return;
+                return false;
             }
 
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CLOTHING_ITEM_IN_INVENTORY));
@@ -405,13 +436,13 @@ export class ClothingFunctions {
 
         if (!didGetAdded) {
             Athena.player.emit.sound2D(player, 'item_error');
-            return;
+            return false;
         }
 
         if (totalCost >= 1) {
-            if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, totalCost)) {
+            if (!Athena.player.currency.subAllCurrencies(player, totalCost)) {
                 Athena.player.emit.sound2D(player, 'item_error');
-                return;
+                return false;
             }
         }
 
@@ -420,11 +451,11 @@ export class ClothingFunctions {
         Athena.player.sync.inventory(player);
         Athena.player.sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
 
-        if (noSound) {
-            return;
+        if (!noSound) {
+            Athena.player.emit.sound2D(player, 'item_purchase');
         }
 
-        Athena.player.emit.sound2D(player, 'item_purchase');
+        return true;
     }
 
     /**
@@ -452,3 +483,4 @@ export class ClothingFunctions {
 
 alt.onClient(CLOTHING_INTERACTIONS.EXIT, ClothingFunctions.exit);
 alt.onClient(CLOTHING_INTERACTIONS.PURCHASE, ClothingFunctions.purchase);
+alt.onClient(CLOTHING_INTERACTIONS.PURCHASE_ALL, ClothingFunctions.purchaseAll);

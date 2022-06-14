@@ -1,6 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
+import { SHARED_CONFIG } from '../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 
 alt.on('connectionComplete', handleConnectionComplete);
@@ -15,6 +16,10 @@ async function handleConnectionComplete() {
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
 
+    if (SHARED_CONFIG.DISABLE_IDLE_CAM) {
+        alt.setConfigFlag("DISABLE_IDLE_CAMERA", true);
+    }
+
     // Calls the login functionality
     alt.emitServer(SYSTEM_EVENTS.BEGIN_CONNECTION);
     handleTick();
@@ -22,6 +27,9 @@ async function handleConnectionComplete() {
 
 alt.everyTick(() => {
     native.hideHudComponentThisFrame(6); // Vehicle Name
+    if (alt.Player.local.vehicle) {
+        native.hideHudComponentThisFrame(7); // Area Name
+    }
     native.hideHudComponentThisFrame(8); // Vehicle Class
     native.hideHudComponentThisFrame(9); // Street Name
 });

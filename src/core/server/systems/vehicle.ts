@@ -18,7 +18,6 @@ import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Collections } from '../interface/iDatabaseCollections';
-import Logger from '../utility/athenaLogger';
 import { getClosestEntity } from '../utility/vector';
 import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
@@ -153,7 +152,7 @@ export class VehicleSystem {
             count += 1;
         }
 
-        Logger.info(`Vehicles Spawned: ${count}`);
+        alt.log(`Vehicles Spawned: ${count}`);
     }
 
     /**
@@ -464,6 +463,11 @@ export class VehicleSystem {
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
 
+        // Closes the storage if it was opened in the first place.
+        if (vehicle.lockState === VEHICLE_LOCK_STATE.LOCKED && vehicle.data && vehicle.data.storage) {
+            StorageView.forceCloseStorage(vehicle.data.storage);
+        }
+
         if (!player.vehicle) {
             playerConst.emit.animation(
                 player,
@@ -602,6 +606,11 @@ export class VehicleSystem {
             return;
         }
 
+        if (!vehicle.data || vehicle.isTemporary) {
+            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
+            return;
+        }
+
         if (distance(player.pos, vehicle.pos) >= 5) {
             playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
             playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -650,7 +659,12 @@ export class VehicleSystem {
             storageID = vehicle.data.storage.toString();
         }
 
-        StorageView.open(player, storageID, `Vehicle - ${vehicle.data._id.toString()} - Storage`);
+        StorageView.open(
+            player,
+            storageID,
+            LocaleController.get(LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME, vehicle.data._id),
+            vehicle,
+        );
     }
 
     /**

@@ -8,5 +8,5 @@ export enum ITEM_TYPE {
     IS_WEAPON = 32,
     DESTROY_ON_DROP = 64, // Not Implemented
     CONSUMABLE = 128,
-    SKIP_CONSUMABLE = 256
+    SKIP_CONSUMABLE = 256,
 }

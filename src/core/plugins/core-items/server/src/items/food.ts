@@ -1,5 +1,5 @@
-import { ITEM_TYPE } from "../../../../../shared/enums/itemTypes";
-import { Item } from "../../../../../shared/interfaces/item";
+import { ITEM_TYPE } from '../../../../../shared/enums/itemTypes';
+import { Item } from '../../../../../shared/interfaces/item';
 import EFFECTS from '../../../../../shared/enums/effects';
 
 export const food: Array<Item> = [
@@ -21,9 +21,9 @@ export const food: Array<Item> = [
             event: EFFECTS.EFFECT_FOOD,
             amount: 5,
             sound: 'item_eat',
-            testData: 'Hello World!'
+            testData: 'Hello World!',
         },
-        version: 1
+        version: 1,
     },
     {
         name: `Ultra Delicious Burger`,
@@ -44,7 +44,7 @@ export const food: Array<Item> = [
             amount: 25,
             sound: 'item_eat',
         },
-        version: 1
+        version: 1,
     },
     {
         name: `Bread`,
@@ -64,6 +64,6 @@ export const food: Array<Item> = [
             amount: 3,
             sound: 'item_eat',
         },
-        version: 1
+        version: 1,
     },
-]
+];

@@ -63,13 +63,6 @@ declare module 'alt-server' {
         acArmour?: number;
 
         /**
-         * Next time the player can spawn after death.
-         * @type {number}
-         * @memberof Player
-         */
-        nextDeathSpawn: number | undefined;
-
-        /**
          * The next time the player is due for a 'ping'.
          * Ping being updating the character synchronization / information.
          * @type {number}

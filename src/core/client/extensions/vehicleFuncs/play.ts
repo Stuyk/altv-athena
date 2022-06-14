@@ -50,5 +50,5 @@ async function lights(v: alt.Vehicle, numberOfTimes: number, delay: number): Pro
 
 export default {
     carHorn,
-    lights
+    lights,
 };

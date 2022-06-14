@@ -1,9 +1,11 @@
 import * as alt from 'alt-server';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { Athena } from '../api/athena';
 import { VehicleSystem } from '../systems/vehicle';
+import { PlayerEvents } from './playerEvents';
 
 function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): void {
-    if (player && player.valid) {
+    if (player && player.valid && player.data && player.data._id) {
         if (player.vehicle) {
             player.pos = player.vehicle.pos;
         }
@@ -13,12 +15,22 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
             VehicleSystem.stopPush(player);
         }
 
-        // Leave this timeout.
-        // It prevents a crash when a player smashes into a gas station with a car.
-        // Seemingly random I know, but that's just how it fixed.
-        alt.setTimeout(() => {
-            Athena.player.set.dead(player, weaponHash);
-        }, 1500);
+        // Change the plugin if you want to modify death behavior.
+        // It has everything you need to not touch this code here.
+        // You can listen to ATHENA_EVENTS_PLAYER.DIED to see when someone dies.
+        if (!player.data.isDead) {
+            alt.log(`(${player.id}) ${player.data.name} has died.`);
+
+            try {
+                player.data.isDead = true;
+                Athena.player.emit.meta(player, 'isDead', true);
+                Athena.player.save.field(player, 'isDead', true);
+                PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
+            } catch (err) {
+                alt.logError(err);
+                alt.log(`Could not set player ${player.data.name} to dead.`);
+            }
+        }
     }
 
     if (killer instanceof alt.Player && player !== killer) {

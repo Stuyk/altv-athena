@@ -65,7 +65,7 @@ export class ServerObjectController {
      * Remove an object from the global stream.
      * @static
      * @param {string} uid
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof ObjectController
      */
     static remove(uid: string): boolean {

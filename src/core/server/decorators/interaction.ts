@@ -5,15 +5,15 @@ import { Athena } from '../api/athena';
  * Decorator for Athena's Interaction Controller
  * ```
  * class ExampleDecoratorInteraction {
- *      @interaction({ 
- *          position: { x: 0, y: 0, z: 71 }, 
- *          description: 'Hello World!', 
- *          range: 25, 
- *          dimension: 0, 
- *          uid: 'UUID', 
- *          debug: false, 
- *          isPlayerOnly: false, 
- *          isVehicleOnly: false 
+ *      @interaction({
+ *          position: { x: 0, y: 0, z: 71 },
+ *          description: 'Hello World!',
+ *          range: 25,
+ *          dimension: 0,
+ *          uid: 'UUID',
+ *          debug: false,
+ *          isPlayerOnly: false,
+ *          isVehicleOnly: false
  *      })
  *      static doSomething() {
  *          alt.logError("Hello World");

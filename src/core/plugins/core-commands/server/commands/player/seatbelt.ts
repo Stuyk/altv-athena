@@ -13,14 +13,16 @@ class SeatbeltCommand {
         if (!player || !player.valid || !player.vehicle) {
             return;
         }
-    
+
         if (player.data.isDead) {
             return;
         }
         currentState = !currentState;
 
         Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
-        currentState ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON)) : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
+        currentState
+            ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON))
+            : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
         alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, currentState);
     }
 }

@@ -13,6 +13,7 @@ import { Item } from '../../../shared/interfaces/item';
 import { CLOTHING_CONFIG } from '../shared/config';
 import { CLOTHING_INTERACTIONS } from '../shared/events';
 import { CLOTHING_DLC_INFO, IClothingStore } from '../shared/interfaces';
+import { ComponentVueInfo } from '../shared/types';
 
 const PAGE_NAME = 'Clothing';
 const CAMERA_POSITIONS = [
@@ -58,6 +59,7 @@ class InternalFunctions implements ViewModel {
         view.on(`${PAGE_NAME}:Populate`, InternalFunctions.populate);
         view.on(`${PAGE_NAME}:DisableControls`, InternalFunctions.controls);
         view.on(`${PAGE_NAME}:PageUpdate`, InternalFunctions.pageUpdate);
+        view.on(`${PAGE_NAME}:PurchaseAll`, InternalFunctions.purchaseAll);
 
         native.doScreenFadeOut(100);
 
@@ -114,6 +116,7 @@ class InternalFunctions implements ViewModel {
         view.off(`${PAGE_NAME}:Populate`, InternalFunctions.populate);
         view.off(`${PAGE_NAME}:DisableControls`, InternalFunctions.controls);
         view.off(`${PAGE_NAME}:PageUpdate`, InternalFunctions.pageUpdate);
+        view.off(`${PAGE_NAME}:PurchaseAll`, InternalFunctions.purchaseAll);
 
         WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
@@ -241,6 +244,17 @@ class InternalFunctions implements ViewModel {
         noSound = false,
     ) {
         alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE, uid, index, component, name, desc, noSound);
+    }
+
+    /**
+     * Purchases all components from a shop.
+     *
+     * @static
+     * @param {Array<ComponentVueInfo>} components
+     * @memberof InternalFunctions
+     */
+    static purchaseAll(components: Array<ComponentVueInfo>) {
+        alt.emitServer(CLOTHING_INTERACTIONS.PURCHASE_ALL, components);
     }
 
     static async populate(components: Array<ClothingComponent>) {

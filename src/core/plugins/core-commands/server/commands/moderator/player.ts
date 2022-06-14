@@ -179,19 +179,70 @@ class PlayersCommand {
         Athena.player.emit.message(target, `Player armour was set to ${value}`);
     }
 
-    @command('revive', LocaleController.get(LOCALE_KEYS.COMMAND_REVIVE, '/revive'), PERMISSIONS.ADMIN)
-    private static handleCommand(player: alt.Player, id: string | null = null): void {
-        if (id === null || id === undefined) {
-            Athena.player.set.respawned(player, player.pos);
+    @command('tpto', '/tpto <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
+    private static handleTeleportTo(player: alt.Player, name: string) {
+        if (!name) {
+            Athena.player.emit.message(player, `tpto <partial_name>`);
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
-        if (!target) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
+        if (name.includes('_')) {
+            name = name.replace('_', '');
+        }
+
+        const target = alt.Player.all.find(
+            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
+        );
+
+        if (!target || !target.valid) {
+            Athena.player.emit.message(player, `Could not find that player.`);
             return;
         }
 
-        Athena.player.set.respawned(target, target.pos);
+        if (player.vehicle) {
+            player.vehicle.pos = target.pos;
+            return;
+        }
+
+        Athena.player.safe.setPosition(player, target.pos.x, target.pos.y, target.pos.z);
+    }
+
+    @command('tphere', '/tphere <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
+    private static handleTeleportHere(player: alt.Player, name: string) {
+        if (!name) {
+            Athena.player.emit.message(player, `tpto <partial_name>`);
+            return;
+        }
+
+        if (name.includes('_')) {
+            name = name.replace('_', '');
+        }
+
+        const target = alt.Player.all.find(
+            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
+        );
+
+        if (!target || !target.valid) {
+            Athena.player.emit.message(player, `Could not find that player.`);
+            return;
+        }
+
+        if (target.vehicle) {
+            target.vehicle.pos = player.pos;
+            return;
+        }
+
+        Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+    }
+
+    @command('tpall', '/tpall', PERMISSIONS.ADMIN)
+    private static handleTeleportAll(player: alt.Player) {
+        alt.Player.all.forEach((target) => {
+            if (!target || !target.valid || !target.data || !target.data._id) {
+                return;
+            }
+
+            Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+        });
     }
 }
