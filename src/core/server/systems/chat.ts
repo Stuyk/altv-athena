@@ -11,7 +11,6 @@ import { getClosestTypes } from '../../shared/utility/vector';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { consoleCommand } from '../decorators/commands';
-import Logger from '../utility/athenaLogger';
 import { emitAll } from '../utility/emitHelper';
 
 const maxMessageLength: number = 128;
@@ -179,7 +178,7 @@ export default class ChatController {
         }
 
         commandInterval = alt.setTimeout(() => {
-            Logger.info(`Total Commands: ${commandCount}`);
+            alt.log(`Total Commands: ${commandCount}`);
         }, 1500);
 
         const normalizedName = name.toLowerCase();
@@ -225,7 +224,7 @@ export default class ChatController {
         }
 
         commandInterval = alt.setTimeout(() => {
-            Logger.info(`Total Commands: ${commandCount}`);
+            alt.log(`Total Commands: ${commandCount}`);
         }, 1500);
 
         const normalizedName = name.toLowerCase();

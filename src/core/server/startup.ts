@@ -4,7 +4,6 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
 import Ares from './utility/ares';
-import Logger from './utility/athenaLogger';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
 import { ReconnectHelper } from './utility/reconnect';
@@ -40,7 +39,7 @@ class Startup {
             })
             .then((res) => {
                 if (res) {
-                    Logger.info(`MongoDB connection was established.`);
+                    alt.log(`MongoDB connection was established.`);
                     return;
                 }
 
@@ -56,12 +55,12 @@ class Startup {
     static async ares() {
         Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
         await import(`./boot.js`);
-        Logger.info(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
+        alt.log(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     }
 
     static async toggleEntry() {
         alt.off('playerConnect', Startup.handleEarlyConnect);
-        Logger.info(`Server Warmup Complete. Now accepting connections.`);
+        alt.log(`Server Warmup Complete. Now accepting connections.`);
         ReconnectHelper.invoke();
     }
 
@@ -77,10 +76,6 @@ class Startup {
         }
     }
 }
-
-// process.on('uncaughtException', (err) => {
-//     console.log(err);
-// });
 
 alt.on('playerConnect', Startup.handleEarlyConnect);
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, Startup.toggleEntry);

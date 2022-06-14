@@ -1,6 +1,6 @@
+import * as alt from 'alt-server';
 import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
-import logger from './athenaLogger';
 import net from 'net';
 
 const DefaultServerCFGName = 'server.cfg';
@@ -20,8 +20,8 @@ export default {
 
         // Fetch the configuration
         if (!fs.existsSync(DefaultConfigName)) {
-            logger.warning(`${DefaultConfigName} does not exist in root directory.`);
-            logger.warning(`Please get ${DefaultConfigName} from default server files.`);
+            alt.logWarning(`${DefaultConfigName} does not exist in root directory.`);
+            alt.logWarning(`Please get ${DefaultConfigName} from default server files.`);
             process.exit(1);
         }
 
@@ -30,8 +30,8 @@ export default {
         try {
             config = JSON.parse(fs.readFileSync(DefaultConfigName).toString());
         } catch (err) {
-            logger.warning(`${DefaultConfigName} has formatting errors.`);
-            logger.warning(`Please use https://jsonlint.com/ to verify your configuration.`);
+            alt.logWarning(`${DefaultConfigName} has formatting errors.`);
+            alt.logWarning(`Please use https://jsonlint.com/ to verify your configuration.`);
             process.exit(1);
         }
 
@@ -43,15 +43,15 @@ export default {
         if (file.includes('vue-athena')) {
             try {
                 const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                    logger.warning(`Server running with Vue Debug mode on.`);
-                    logger.warning(`Open http://localhost:3000 in your browser`);
-                    logger.warning(`Only a local player may connect.`);
-                    logger.warning(`Server MUST be running on a local computer`);
+                    alt.logWarning(`Server running with Vue Debug mode on.`);
+                    alt.logWarning(`Open http://localhost:3000 in your browser`);
+                    alt.logWarning(`Only a local player may connect.`);
+                    alt.logWarning(`Server MUST be running on a local computer`);
                     isVueDebug = true;
                     sock.destroy();
                 });
             } catch (err) {
-                logger.warning(``);
+                alt.logWarning(``);
             }
         }
 

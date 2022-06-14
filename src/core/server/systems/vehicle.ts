@@ -18,7 +18,6 @@ import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Collections } from '../interface/iDatabaseCollections';
-import Logger from '../utility/athenaLogger';
 import { getClosestEntity } from '../utility/vector';
 import { StorageView } from '../views/storage';
 import { StorageSystem } from './storage';
@@ -153,7 +152,7 @@ export class VehicleSystem {
             count += 1;
         }
 
-        Logger.info(`Vehicles Spawned: ${count}`);
+        alt.log(`Vehicles Spawned: ${count}`);
     }
 
     /**
