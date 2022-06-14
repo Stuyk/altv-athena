@@ -88,7 +88,6 @@
         "discord.js": "^13.7.0",
         "elliptic": "6.5.4",
         "fkill": "^8.0.0",
-        "jimp": "0.16.1",
         "node-fetch": "3.2.3",
         "sjcl": "1.0.8",
         "sockjs": "0.3.24",
