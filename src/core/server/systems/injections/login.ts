@@ -8,7 +8,7 @@ export enum LoginInjectionNames {
     TRY_QUICK_TOKEN = 'login-try-quick-token-end',
 }
 
-type tryLoginTypes = `${LoginInjectionNames.TRY_LOGIN_ACCOUNT_BEGIN}`;
+type tryLoginTypes = `${LoginInjectionNames.TRY_LOGIN_ACCOUNT_BEGIN}` | `${LoginInjectionNames.TRY_LOGIN_ACCOUNT_END}`;
 type tryQuickTokenTypes = `${LoginInjectionNames.TRY_QUICK_TOKEN}`;
 
 export type TryLoginCallback = (player: alt.Player, account: Partial<Account> | undefined) => Promise<boolean>;
