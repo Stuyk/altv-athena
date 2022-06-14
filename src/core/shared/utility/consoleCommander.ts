@@ -12,18 +12,35 @@ const Commands: ConsoleCommand = {};
  * @return {*}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
-    const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
+    console.log(args);
 
-    if (Commands[cmdNameclean]) {
-        Commands[cmdNameclean](...args);
-    } else {
-        console.log(`Command "${cmdNameclean}" not found.`);
-    }
+    // const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
+
+    // if (Commands[cmdNameclean]) {
+    //     Commands[cmdNameclean](...args);
+    // } else {
+    //     console.log(`Command "${cmdNameclean}" not found.`);
+    // }
 }
 
 export class ConsoleCommander {
-    static init(alt: { on: (event: string, handler: Function) => any }) {
+    static init(alt: { on: (event: string, handler: Function) => any; emitClient: Function }) {
+        // if (process && process.stdin && process.stdin.isTTY && typeof alt.emitClient === 'function') {
+        //     const socket = process.openStdin();
+        //     socket.setEncoding('utf-8');
+        //     socket.on('data', (text: string | ArrayBuffer) => {
+        //         const data = text.toString().split(' ');
+        //         const cmdName = data.shift().replace(/^\s+|\s+$/g, '');
+        //         if (cmdName.charAt(0) !== '/') {
+        //             console.log('regular altv command?');
+        //             return;
+        //         }
+
+        //         handleConsoleMessage(cmdName, ...data);
+        //     });
+        // } else {
         alt.on('consoleCommand', handleConsoleMessage);
+        // }
     }
 
     /**
