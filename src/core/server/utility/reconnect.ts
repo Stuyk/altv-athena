@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import fetch from 'node-fetch';
 import ConfigUtil from './config';
 
 export class ReconnectHelper {

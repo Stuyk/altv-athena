@@ -12,35 +12,18 @@ const Commands: ConsoleCommand = {};
  * @return {*}
  */
 function handleConsoleMessage(cmdName: string, ...args: string[]): void {
-    console.log(args);
+    const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
 
-    // const cmdNameclean = cmdName.replace(/^\s+|\s+$/g, '');
-
-    // if (Commands[cmdNameclean]) {
-    //     Commands[cmdNameclean](...args);
-    // } else {
-    //     console.log(`Command "${cmdNameclean}" not found.`);
-    // }
+    if (Commands[cmdNameclean]) {
+        Commands[cmdNameclean](...args);
+    } else {
+        console.log(`Command "${cmdNameclean}" not found.`);
+    }
 }
 
 export class ConsoleCommander {
-    static init(alt: { on: (event: string, handler: Function) => any; emitClient: Function }) {
-        // if (process && process.stdin && process.stdin.isTTY && typeof alt.emitClient === 'function') {
-        //     const socket = process.openStdin();
-        //     socket.setEncoding('utf-8');
-        //     socket.on('data', (text: string | ArrayBuffer) => {
-        //         const data = text.toString().split(' ');
-        //         const cmdName = data.shift().replace(/^\s+|\s+$/g, '');
-        //         if (cmdName.charAt(0) !== '/') {
-        //             console.log('regular altv command?');
-        //             return;
-        //         }
-
-        //         handleConsoleMessage(cmdName, ...data);
-        //     });
-        // } else {
+    static init(alt: { on: (event: string, handler: Function) => any }) {
         alt.on('consoleCommand', handleConsoleMessage);
-        // }
     }
 
     /**

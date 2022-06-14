@@ -90,7 +90,6 @@
         "axios": "0.26.1",
         "discord.js": "^13.7.0",
         "elliptic": "6.5.4",
-        "node-fetch": "3.2.3",
         "sjcl": "1.0.8",
         "sockjs": "0.3.21",
         "sockjs-client": "1.5.2"
