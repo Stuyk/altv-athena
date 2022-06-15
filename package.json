@@ -44,7 +44,11 @@
         "fix": "node ./scripts/doctor/index.js",
         "prepare": "husky install && husky-init",
         "lint": "prettier --end-of-line auto --config package.json --write ./src/**/*.ts",
-        "test": ""
+        "test": "",
+        "[-] 3.5.0 - Runtime Scripts": "",
+        "exp-prod": "node ./scripts/runtime/index.js --start",
+        "exp-devtest": "node ./scripts/runtime/index.js --start --devtest",
+        "exp-dev": "node ./scripts/runtime/index.js --start --dev"
     },
     "devDependencies": {
         "@altv/types-client": "^2.1.8",
