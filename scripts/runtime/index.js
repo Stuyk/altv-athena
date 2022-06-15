@@ -8,7 +8,7 @@ const ports = [7788, 'altv-server', 'altv-server.exe', 3399];
 const node = 'node';
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : 'altv-server';
+const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : './altv-server';
 
 const passedArguments = process.argv.slice(2);
 const fileNameHashes = {};
@@ -127,6 +127,11 @@ function handleServerProcess(shouldAutoRestart = false) {
     }
 
     console.log(`===> Starting Server Process`);
+
+    if (process.platform !== 'win32') {
+        await runFile('chmod', '+x', `./altv-server`);
+    }
+
     lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
 
     lastServerProcess.once('close', (code) => {
