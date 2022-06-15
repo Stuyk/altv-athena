@@ -14,6 +14,10 @@ export class DeathCommands {
     @command('revive', LocaleController.get(LOCALE_KEYS.COMMAND_REVIVE, '/revive'), PERMISSIONS.ADMIN)
     private static handleRevive(player: alt.Player, id: string | null = null): void {
         if (id === null || id === undefined) {
+            if (!player.data.isDead) {
+                return;
+            }
+
             Athena.player.set.respawned(player, player.pos);
             return;
         }
@@ -23,11 +27,15 @@ export class DeathCommands {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
+        
+        if (!target.data.isDead) {
+            return;
+        }
 
         Athena.player.set.respawned(target, target.pos);
     }
 
-    @command(['acceptdeath', 'respawn'], '/acceptdeath - Accept death.', PERMISSIONS.NONE)
+    @command(['acceptdeath', 'respawn'], LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/acceptdeath'), PERMISSIONS.NONE)
     static handleCommand(player: alt.Player): void {
         if (!player || !player.valid) {
             return;
