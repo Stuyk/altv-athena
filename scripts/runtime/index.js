@@ -121,7 +121,7 @@ function handleStreamerProcess(shouldAutoRestart = false) {
     });
 }
 
-function handleServerProcess(shouldAutoRestart = false) {
+async function handleServerProcess(shouldAutoRestart = false) {
     if (lastServerProcess && !lastServerProcess.killed) {
         lastServerProcess.kill();
     }
