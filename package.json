@@ -48,7 +48,8 @@
         "[-] 3.5.0 - Runtime Scripts": "",
         "exp-prod": "node ./scripts/runtime/index.js --start",
         "exp-devtest": "node ./scripts/runtime/index.js --start --devtest",
-        "exp-dev": "node ./scripts/runtime/index.js --start --dev"
+        "exp-dev": "node ./scripts/runtime/index.js --start --dev",
+        "exp-pack": "node ./scripts/runtime/index.js --start --cdn"
     },
     "devDependencies": {
         "@altv/types-client": "^2.1.8",

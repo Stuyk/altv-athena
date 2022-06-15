@@ -90,11 +90,9 @@ async function handleViteDevServer() {
 
     console.log(`===> Starting WebView Process`);
     await runFile(node, './scripts/plugins/webview.js');
-    lastViteServer = spawn(
-        npx,
-        ['vite', './src-webviews', '--clearScreen=false', '--debug=true'],
-        { stdio: 'inherit' },
-    );
+    lastViteServer = spawn(npx, ['vite', './src-webviews', '--clearScreen=false', '--debug=true'], {
+        stdio: 'inherit',
+    });
 
     lastViteServer.once('close', (code) => {
         console.log(`Vite process exited with code ${code}`);
@@ -116,7 +114,7 @@ function handleStreamerProcess(shouldAutoRestart = false) {
     lastStreamerProcess.once('close', (code) => {
         console.log(`Streamer process exited with code ${code}`);
         if (shouldAutoRestart) {
-            handleStreamerProcess(shouldAutoRestart)
+            handleStreamerProcess(shouldAutoRestart);
         }
     });
 }
@@ -132,7 +130,16 @@ async function handleServerProcess(shouldAutoRestart = false) {
         await runFile('chmod', '+x', `./altv-server`);
     }
 
-    lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
+    if (passedArguments.includes('--cdn')) {
+        lastServerProcess = spawn(serverBinary, ['--justpack'], { stdio: 'inherit' });
+        lastServerProcess.once('exit', () => {
+            const finalDestination = `${process.cwd()}/cdn_upload`.replace(/\\/g, '/');
+            console.log(`Files were packed for a CDN. ${finalDestination}`);
+            process.exit(0);
+        });
+    } else {
+        lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
+    }
 
     lastServerProcess.once('close', (code) => {
         console.log(`Server process exited with code ${code}`);
@@ -151,13 +158,13 @@ async function refreshFileWatching() {
     // grab all new files
     const files = glob.sync('./src/**/*.ts');
 
-    // ignore `/athena/server` && `/athena/client` directories 
-    previousGlobFiles = files.filter(fileName => {
-        if (fileName.includes('\/athena\/server\/')) {
+    // ignore `/athena/server` && `/athena/client` directories
+    previousGlobFiles = files.filter((fileName) => {
+        if (fileName.includes('/athena/server/')) {
             return false;
         }
 
-        if (fileName.includes('\/athena\/client\/')) {
+        if (fileName.includes('/athena/client/')) {
             return false;
         }
 
