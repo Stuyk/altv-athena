@@ -52,10 +52,10 @@
         "exp-pack": "node ./scripts/runtime/index.js --start --cdn"
     },
     "devDependencies": {
-        "@altv/types-client": "^2.1.8",
+        "@altv/types-client": "^2.1.9",
         "@altv/types-natives": "^1.4.4",
-        "@altv/types-server": "^2.3.6",
-        "@altv/types-shared": "^1.2.5",
+        "@altv/types-server": "^2.3.7",
+        "@altv/types-shared": "^1.2.6",
         "@altv/types-webview": "^1.0.2",
         "@altv/types-worker": "^1.0.6",
         "@babel/types": "^7.17.0",

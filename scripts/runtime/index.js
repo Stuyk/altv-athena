@@ -37,6 +37,12 @@ let previousGlobFiles = [];
 
 let fileWatchTimeout = Date.now() + 1000;
 
+async function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
 /**
  * This function waits for a process to be fully killed first.
  * @param {ChildProcess} process
@@ -58,7 +64,7 @@ async function runFile(processName, ...args) {
             resolve();
         });
 
-        spawnedProcess.once('error', (err) => {
+        spawnedProcess.on('error', (err) => {
             console.error(err);
             process.exit(1);
         });
@@ -74,13 +80,19 @@ async function handleConfiguration() {
         configName = 'devtest';
     }
 
+    console.log(`===> Starting Configuration Build`);
+    const start = Date.now();
+    let promises = [];
+
     if (!passedArguments.includes('--dev')) {
-        await runFile(npx, 'vite', 'build', './src-webviews');
+        promises.push(runFile(npx, 'vite', 'build', './src-webviews'));
     }
 
-    await runFile(npx, 'altv-config', `./configs/${configName}.json`);
+    promises.push(runFile(npx, 'altv-config', `./configs/${configName}.json`));
     await runFile(node, './scripts/buildresource/index.js');
-    await runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.cfg');
+    promises.push(runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.cfg'));
+    console.log(`===> Finished Configuration Build (${Date.now() - start}ms)`);
+    return await Promise.all(promises);
 }
 
 async function handleViteDevServer() {
@@ -88,7 +100,7 @@ async function handleViteDevServer() {
         lastViteServer.kill();
     }
 
-    console.log(`===> Starting WebView Process`);
+    console.log(`===> Starting Vite Server`);
     await runFile(node, './scripts/plugins/webview.js');
     lastViteServer = spawn(npx, ['vite', './src-webviews', '--clearScreen=false', '--debug=true'], {
         stdio: 'inherit',
@@ -98,6 +110,7 @@ async function handleViteDevServer() {
         console.log(`Vite process exited with code ${code}`);
     });
 
+    console.log(`===> Started Vite Server`);
     return await new Promise((resolve) => {
         setTimeout(resolve, 2000);
     });
@@ -140,6 +153,7 @@ async function handleServerProcess(shouldAutoRestart = false) {
     } else {
         lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
     }
+
 
     lastServerProcess.once('close', (code) => {
         console.log(`Server process exited with code ${code}`);
@@ -193,39 +207,65 @@ async function refreshFileWatching() {
     }
 }
 
+async function coreBuildProcess() {
+    console.log('===> Starting Core Build');
+    const start = Date.now();
+    await runFile(node, './scripts/compiler/core');
+
+    let promises = [];
+    promises.push(runFile(node, './scripts/plugins/core'));
+    promises.push(runFile(node, './scripts/plugins/webview'));
+    promises.push(runFile(node, './scripts/plugins/update-dependencies'));
+
+    await Promise.all(promises);
+    console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
+}
+
 async function devMode(firstRun = false) {
     if (firstRun) {
-        await handleViteDevServer();
         await refreshFileWatching();
         return;
     }
 
-    await killChildProcess(lastStreamerProcess);
-    await killChildProcess(lastServerProcess);
+    let promises = [];
+    promises.push(killChildProcess(lastStreamerProcess));
+    promises.push(killChildProcess(lastServerProcess));
 
-    await runFile(node, './scripts/compiler/core');
-    await runFile(node, './scripts/plugins/core');
-    await runFile(node, './scripts/plugins/webview');
-    await runFile(node, './scripts/plugins/update-dependencies');
-    await handleConfiguration();
+    await Promise.all(promises);
+    promises = [];
+
+    promises.push(coreBuildProcess());
+    promises.push(handleConfiguration());
+
+    await Promise.all(promises);
+
     handleStreamerProcess(false);
     handleServerProcess(false);
 }
 
 async function runServer() {
-    await runFile(node, './scripts/compiler/core');
-    await runFile(node, './scripts/plugins/core');
-    await runFile(node, './scripts/plugins/webview');
-    await runFile(node, './scripts/plugins/update-dependencies');
-    await handleConfiguration();
+    const isDev = passedArguments.includes('--dev');
+
+    let promises = [];
+    if (isDev) {
+        promises.push(handleViteDevServer());
+    }
+
+    // Has to build first before building the rest.
+    promises.push(coreBuildProcess());
+    promises.push(handleConfiguration());
+
+    await Promise.all(promises);
 
     if (passedArguments.includes('--dev')) {
+        await sleep(50);
         await devMode(true);
         handleStreamerProcess(false);
         handleServerProcess(false);
         return;
     }
 
+    await sleep(50);
     handleStreamerProcess(true);
     handleServerProcess(true);
 }
@@ -240,4 +280,21 @@ if (passedArguments.includes('--start')) {
     }
 
     runServer();
+    process.stdin.on('data', (data) => {
+        const result = data.toString().trim();
+        if (result.charAt(0) !== '+' && result.charAt(0) !== '/') {
+            console.log(`Use +help to see server maintenance commands. (This Console)`);
+            console.log(`Use /commands to see server magagement commands. (The Game Console)`);
+            if (!lastServerProcess.killed) {
+                return;
+            }
+
+            lastServerProcess.send(data);
+            return;
+        }
+
+        const inputs = result.split(' ');
+        const cmdName = inputs.shift();
+        console.log(cmdName, ...inputs);
+    })
 }
