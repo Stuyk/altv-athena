@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import ConfigUtil from './config';
+import axios from 'axios';
 
 export class ReconnectHelper {
     /**
@@ -25,19 +26,19 @@ export class ReconnectHelper {
         return process.platform.includes('win');
     }
 
-    private static altvReconnect() {
-        fetch('http://127.0.0.1:9223/status')
-            .then(async (res) => {
-                const body = await res.text();
-                if (body == 'MAIN_MENU' || body == 'IN_GAME') {
-                    fetch('http://127.0.0.1:9223/reconnect');
-                } else {
-                    alt.setTimeout(this.altvReconnect, 3000);
-                }
-            })
-            .catch((err) => {
-                // Suppress warning
-                // alt.log(err);
-            });
+    private static async altvReconnect() {
+        const result = await axios.get('http://127.0.0.1:9223/status').catch((err) => {
+            return null;
+        });
+
+        if (!result || !result.data) {
+            return;
+        }
+
+        if (result.data === 'MAIN_MENU' || result.data === 'IN_GAME') {
+            axios.get('http://127.0.0.1:9223/reconnect');
+        } else {
+            alt.setTimeout(this.altvReconnect, 1000);
+        }
     }
 }
