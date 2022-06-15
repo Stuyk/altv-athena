@@ -88,9 +88,10 @@ class InternalFunctions {
             .replace('/', '')
             .replace(/<\/?[^>]+(>|$)/gm, '');
 
+        const players = [...alt.Player.all];
         const closestPlayers: Array<alt.Player> = getClosestTypes<alt.Player>(
             player.pos,
-            alt.Player.all,
+            players,
             DEFAULT_CONFIG.CHAT_DISTANCE,
             ['discord'], // Used to check if they're logged in.
         );
