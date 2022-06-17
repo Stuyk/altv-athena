@@ -86,9 +86,9 @@ class ClientNametags {
                 continue;
             }
 
-            // if (player.scriptID === alt.Player.local.scriptID) {
-            //     continue;
-            // }
+            if (player.scriptID === alt.Player.local.scriptID) {
+                continue;
+            }
 
             let playerIdentifier = player.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID);
             let name = player.getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
