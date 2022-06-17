@@ -57,10 +57,11 @@ function getPlayerInFrontOf(p: alt.Player, distance: number): alt.Player | null 
  * Gets the closest players in reference to the passed player.
  * @param {alt.Player} p
  * @param {number} distance
- * @return {*}  {Array<alt.Player>}
+ * @return {Array<alt.Player>}
  */
 function getClosestPlayers(p: alt.Player, distance: number): Array<alt.Player> {
-    return getClosestTypes<alt.Player>(p.pos, alt.Player.all, distance, ['data', 'discord', 'accountData']);
+    const players = [...alt.Player.all];
+    return getClosestTypes<alt.Player>(p.pos, players, distance, ['data', 'discord', 'accountData']);
 }
 
 export default {

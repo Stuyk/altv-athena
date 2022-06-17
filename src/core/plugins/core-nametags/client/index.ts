@@ -86,11 +86,11 @@ class ClientNametags {
                 continue;
             }
 
-            if (player.scriptID === alt.Player.local.scriptID) {
-                continue;
-            }
+            // if (player.scriptID === alt.Player.local.scriptID) {
+            //     continue;
+            // }
 
-            let accountIdentifier = player.getSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID);
+            let playerIdentifier = player.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID);
             let name = player.getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
 
             if (!name || name === null || name === undefined) {
@@ -141,7 +141,7 @@ class ClientNametags {
                 0,
             );
 
-            let actualName = config.SHOW_ACCOUNT_ID ? `${accountIdentifier}` : ``;
+            let actualName = config.SHOW_ID ? `${playerIdentifier}` : ``;
 
             if (name !== '') {
                 actualName += config.SHOW_NAME ? ` - ${name}` : ``;

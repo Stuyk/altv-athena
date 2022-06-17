@@ -6,6 +6,7 @@ import '../systems/blip';
 import '../systems/chat';
 import '../systems/global';
 import '../systems/hologram';
+import '../systems/identifier';
 import '../systems/interaction';
 import '../systems/item';
 import '../systems/job';

@@ -104,7 +104,7 @@ export class FactionCommands {
                 (x) => x && x.data && x.data.name.toLowerCase().includes(idOrName.toLowerCase()),
             );
         } else {
-            target = Athena.player.get.findByUid(idOrName);
+            target = Athena.systems.identifier.getPlayer(idOrName);
         }
 
         if (!target || !target.data || !target.valid || !idOrName || target === player) {
@@ -160,7 +160,7 @@ export class FactionCommands {
         PERMISSIONS.ADMIN,
     )
     private static async handleSetOwner(player: alt.Player, id: string) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot find player with that ID.');
             return;

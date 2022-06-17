@@ -18,7 +18,7 @@ class ChatCommands {
 
     @command('apm', '/apm <ID> - Sends an administrative private message to the specified player.', PERMISSIONS.ADMIN)
     private static adminPrivateMessageCommand(player: alt.Player, id: string, ...args: string[]) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!player || !player.valid || !target || !target.valid) {
             return;
         }

@@ -8,7 +8,7 @@ import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 class InteriorCommands {
     @command('setdimension', '/setdimension <ID> <DIMENSION>', PERMISSIONS.ADMIN)
     private static setDimensionCommand(player: alt.Player, id: number, dimension: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id) return;
 
@@ -19,7 +19,7 @@ class InteriorCommands {
 
     @command('setinterior', '/setinterior <ID> <INTERIOR>', PERMISSIONS.ADMIN)
     private static setInteriorCommand(player: alt.Player, id: number, interior: string) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id) return;
 

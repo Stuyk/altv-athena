@@ -22,7 +22,7 @@ class PlayersCommand {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot find player with that ID.');
             return;
@@ -46,7 +46,7 @@ class PlayersCommand {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot find player with that ID.');
             return;
@@ -57,7 +57,7 @@ class PlayersCommand {
 
     @command('freeze', '/freeze <ID> - Freeze the specified player by ID', PERMISSIONS.ADMIN)
     private static freezeCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -68,7 +68,7 @@ class PlayersCommand {
 
     @command('unfreeze', '/unfreeze <ID>', PERMISSIONS.ADMIN)
     private static unfreezeCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -78,7 +78,7 @@ class PlayersCommand {
 
     @command('kick', '/kick <ID> <REASON>', PERMISSIONS.ADMIN)
     private static kickCommand(player: alt.Player, id: number, ...reason: string[]) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -92,7 +92,7 @@ class PlayersCommand {
 
     @command('ban', '/ban <ID> <REASON> - Bans a player.', PERMISSIONS.ADMIN)
     private static async banCommand(player: alt.Player, id: number, reason: string) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id) return;
 
@@ -128,7 +128,7 @@ class PlayersCommand {
     private static async makeAdminCommand(player: alt.Player, id: number | string, permissionLevel: number) {
         if (!player || !player.valid) return;
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
@@ -146,7 +146,7 @@ class PlayersCommand {
 
     @command('info', '/info <ID> - Get account info for the specified id.', PERMISSIONS.ADMIN)
     private static infoCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 

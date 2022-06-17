@@ -44,8 +44,8 @@ class ClientPlugin {
             alt.logWarning(`VEHICLE ID: ${alt.Player.local.vehicle.id}`);
         }
 
-        if (alt.Player.local.hasSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID)) {
-            const id = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID);
+        if (alt.Player.local.hasSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID)) {
+            const id = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID);
             alt.logWarning(`ACCOUNT ID: ${id}`);
         }
 

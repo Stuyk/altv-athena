@@ -9,7 +9,7 @@ import { LocaleController } from '../../../../../shared/locale/locale';
 class TeleportCommands {
     @command('gethere', '/gethere <ID> - Teleports a player to your position.', PERMISSIONS.ADMIN)
     private static GetHereCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id || target === player) return;
 
@@ -19,7 +19,7 @@ class TeleportCommands {
 
     @command('goto', '/goto <ID> - Teleports you to the specified player.', PERMISSIONS.ADMIN)
     private static goToCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id || target === player) return;
 

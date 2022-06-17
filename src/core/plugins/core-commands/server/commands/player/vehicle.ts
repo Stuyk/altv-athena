@@ -50,7 +50,7 @@ class VehicleCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, `Could not find that target player`);
             return;
