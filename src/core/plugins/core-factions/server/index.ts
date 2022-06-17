@@ -11,6 +11,6 @@ PluginSystem.registerPlugin(PLUGIN_NAME, async () => {
     await FactionHandler.init();
     await FactionFuncs.init();
     await FactionActions.init();
-    await FactionCommands.init();
+    FactionCommands.init();
     alt.log(`~lg~CORE ==> ${PLUGIN_NAME} was Loaded`);
 });
