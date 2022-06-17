@@ -211,13 +211,9 @@ async function coreBuildProcess() {
     console.log('===> Starting Core Build');
     const start = Date.now();
     await runFile(node, './scripts/compiler/core');
-
-    let promises = [];
-    promises.push(runFile(node, './scripts/plugins/core'));
-    promises.push(runFile(node, './scripts/plugins/webview'));
-    promises.push(runFile(node, './scripts/plugins/update-dependencies'));
-
-    await Promise.all(promises);
+    await runFile(node, './scripts/plugins/core')
+    await runFile(node, './scripts/plugins/webview')
+    await runFile(node, './scripts/plugins/update-dependencies')
     console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
 }
 
@@ -246,16 +242,14 @@ async function devMode(firstRun = false) {
 async function runServer() {
     const isDev = passedArguments.includes('--dev');
 
-    let promises = [];
     if (isDev) {
-        promises.push(handleViteDevServer());
+        await handleViteDevServer()
     }
 
     // Has to build first before building the rest.
-    promises.push(coreBuildProcess());
-    promises.push(handleConfiguration());
+    await coreBuildProcess();
+    await handleConfiguration();
 
-    await Promise.all(promises);
 
     if (passedArguments.includes('--dev')) {
         await sleep(50);
