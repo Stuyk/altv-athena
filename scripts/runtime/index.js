@@ -4,7 +4,7 @@ import glob from 'glob';
 import fs from 'fs';
 import crypto from 'crypto';
 
-const ports = [7788, 'altv-server', 'altv-server.exe', 3399];
+const ports = [7788, 'altv-server', 'altv-server.exe', 3399, 3001];
 const node = 'node';
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';

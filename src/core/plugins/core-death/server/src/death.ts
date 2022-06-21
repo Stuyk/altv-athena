@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 import { IVector3 } from 'alt-shared';
 import { Athena } from '../../../../server/api/athena';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
+import { Identifier } from '../../../../server/systems/identifier';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { distance2d } from '../../../../shared/utility/vector';
 import { DEATH_EVENTS } from '../../shared/events';
@@ -102,7 +103,8 @@ export class DeathSystem {
      */
     private static handleCharacterSelect(player: alt.Player) {
         if (player.data.health <= 99) {
-            alt.log(`(${player.id}) ${player.data.name} has died.`);
+            const id = Identifier.getIdByStrategy(player);
+            alt.log(`(${id}) ${player.data.name} has died.`);
 
             try {
                 player.data.isDead = true;

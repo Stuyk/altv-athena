@@ -11,42 +11,14 @@ import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { Global } from './global';
-
-const Injections: { [key: string]: Array<(player: alt.Player) => void> } = {
-    select: [],
-    beforeSelect: [],
-};
+import { PlayerCallback, PlayerInjectionNames } from './injections/player';
+import { Injections } from './injections';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
 };
 
 export class CharacterSystem {
-    /**
-     * Inject a function just before the character is spawned.
-     * Will automatically run when a player has selected a character.
-     *
-     * @static
-     * @param {(player: alt.Player) => void} callback
-     * @memberof CharacterSystem
-     */
-    static selectInjections(callback: (player: alt.Player) => void) {
-        Injections.select.push(callback);
-    }
-
-    /**
-     * Inject a function after the player data is set.
-     *
-     * The functions are ran before the rest of the spawn code is ran.
-     *
-     * @static
-     * @param {(player: alt.Player) => void} callback
-     * @memberof CharacterSystem
-     */
-    static beforeSelectInjections(callback: (player: alt.Player) => void) {
-        Injections.beforeSelect.push(callback);
-    }
-
     /**
      * Allows a custom character creator to be shown.
      *
@@ -88,11 +60,6 @@ export class CharacterSystem {
     static async select(player: alt.Player, character: Character) {
         player.data = deepCloneObject(character);
 
-        // Give the player an identifier if it does not already have one.
-        // if (player.data.character_id !== undefined && player.data.character_id !== null) {
-        //     Athena.player.emit.meta(player, metaName, player.data[metaName]);
-        // }
-
         // Increase the value outright
         if (player.data.character_id === undefined || player.data.character_id === null) {
             await Global.increase('nextCharacterId', 1, 1);
@@ -104,8 +71,9 @@ export class CharacterSystem {
             `Selected | ${player.data.name} | ID: (${player.id}) | Character ID: ${player.data.character_id} | Account: ${player.data.account_id}`,
         );
 
-        for (let i = 0; i < Injections.beforeSelect.length; i++) {
-            Injections.beforeSelect[i](player);
+        const beforeInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.BEFORE_CHARACTER_SELECT);
+        for (const callback of beforeInjections) {
+            await callback(player);
         }
 
         Athena.player.sync.appearance(player, player.data.appearance);
@@ -178,15 +146,16 @@ export class CharacterSystem {
                 Athena.vehicle.funcs.spawnPlayerVehicles(vehicles);
             }
 
-            // Handle Injections...
-            for (let i = 0; i < Injections.select.length; i++) {
-                Injections.select[i](player);
-            }
-
             // Finish Selection
             Athena.player.set.frozen(player, false);
             player.visible = true;
             player.hasFullySpawned = true;
+
+            const afterInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.AFTER_CHARACTER_SELECT);
+            for (const callback of afterInjections) {
+                await callback(player);
+            }
+
             PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
         }, 500);
     }
