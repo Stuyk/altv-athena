@@ -43,6 +43,27 @@ const MAX_AUDIO_AREA_DISTANCE = 25;
 
 export class SoundSystem {
     /**
+     * Play a single sound for a player.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {CustomSoundInfo} soundInfo
+     * @memberof SoundSystem
+     */
+    static playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
+        if (soundInfo.audioName.includes('.ogg')) {
+            soundInfo.audioName = soundInfo.audioName.replace('.ogg', '');
+        }
+
+        if (soundInfo.target) {
+            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
+            return;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+    }
+
+    /**
      * Play a custom non-frontend sound in a dimension.
      * Specify an entity to make the sound play from that specific entity.
      *
@@ -63,11 +84,11 @@ export class SoundSystem {
         }
 
         if (soundInfo.target) {
-            alt.emitAllClients(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
+            alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
             return;
         }
 
-        alt.emitAllClients(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+        alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
     }
 
     /**
@@ -96,6 +117,6 @@ export class SoundSystem {
             soundInfo.audioName = soundInfo.audioName.replace('.ogg', '');
         }
 
-        alt.emitAllClients(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);
+        alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);
     }
 }
