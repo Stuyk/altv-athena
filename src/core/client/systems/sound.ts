@@ -7,6 +7,7 @@ import { AudioView } from '../views/audio';
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, handlePlayAudioPositional);
 
 /**
  * Play a sound in the frontend.
@@ -16,6 +17,34 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
  */
 export function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);
+}
+
+function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
+    if (!pos || !soundName) {
+        return;
+    }
+
+    const dist = distance(pos, alt.Player.local.pos);
+    let volume = 0.35;
+    let pan = 0;
+
+    const [_, x, y] = native.getScreenCoordFromWorldCoord(pos.x, pos.y, pos.z, undefined, undefined);
+    pan = x * 2 - 1;
+    volume = dist / 100 / 0.35;
+
+    if (pan < -1) {
+        pan = -1;
+    }
+
+    if (pan > 1) {
+        pan = 1;
+    }
+
+    if (volume > 1) {
+        volume = 1;
+    }
+
+    AudioView.play3DAudio(soundName, pan, volume);
 }
 
 /**
