@@ -90,7 +90,9 @@ async function handleConfiguration() {
 
     promises.push(runFile(npx, 'altv-config', `./configs/${configName}.json`));
     await runFile(node, './scripts/buildresource/index.js');
-    promises.push(runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.cfg'));
+    promises.push(
+        runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.cfg'),
+    );
     console.log(`===> Finished Configuration Build (${Date.now() - start}ms)`);
     return await Promise.all(promises);
 }
@@ -154,7 +156,6 @@ async function handleServerProcess(shouldAutoRestart = false) {
         lastServerProcess = spawn(serverBinary, { stdio: 'inherit' });
     }
 
-
     lastServerProcess.once('close', (code) => {
         console.log(`Server process exited with code ${code}`);
         if (shouldAutoRestart) {
@@ -211,9 +212,8 @@ async function coreBuildProcess() {
     console.log('===> Starting Core Build');
     const start = Date.now();
     await runFile(node, './scripts/compiler/core');
-    await runFile(node, './scripts/plugins/core')
-    await runFile(node, './scripts/plugins/webview')
-    await runFile(node, './scripts/plugins/update-dependencies')
+    await runFile(node, './scripts/plugins/core');
+    await runFile(node, './scripts/plugins/webview');
     console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
 }
 
@@ -242,14 +242,17 @@ async function devMode(firstRun = false) {
 async function runServer() {
     const isDev = passedArguments.includes('--dev');
 
+    //Update dependencies for all the things
+    console.log('===> Updating dependencies for plugins');
+    await runFile(node, './scripts/plugins/update-dependencies');
+
     if (isDev) {
-        await handleViteDevServer()
+        await handleViteDevServer();
     }
 
     // Has to build first before building the rest.
     await coreBuildProcess();
     await handleConfiguration();
-
 
     if (passedArguments.includes('--dev')) {
         await sleep(50);
@@ -290,5 +293,5 @@ if (passedArguments.includes('--start')) {
         const inputs = result.split(' ');
         const cmdName = inputs.shift();
         console.log(cmdName, ...inputs);
-    })
+    });
 }
