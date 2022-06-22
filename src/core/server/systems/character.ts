@@ -5,14 +5,16 @@ import { PlayerEvents } from '../events/playerEvents';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Character } from '../../shared/interfaces/character';
+import { Character, CharacterDefaults } from '../../shared/interfaces/character';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { Global } from './global';
-import { PlayerCallback, PlayerInjectionNames } from './injections/player';
+import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
 import { Injections } from './injections';
+import { Appearance } from '../../shared/interfaces/appearance';
+import { CharacterInfo } from '../../shared/interfaces/characterInfo';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
@@ -45,6 +47,56 @@ export class CharacterSystem {
         }
 
         Callbacks.creator(player, ...args);
+    }
+
+    /**
+     * Create a new character for a specific player.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {Appearance} appearance
+     * @param {CharacterInfo} info
+     * @param {string} name
+     * @return {Promise<boolean>}
+     * @memberof CharacterSystem
+     */
+    static async create(
+        player: alt.Player,
+        appearance: Appearance,
+        info: CharacterInfo,
+        name: string,
+    ): Promise<boolean> {
+        if (!player.accountData || !player.accountData._id) {
+            return false;
+        }
+
+        const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
+        newDocument.account_id = player.accountData._id;
+        newDocument.appearance = appearance;
+        newDocument.info = info;
+        newDocument.name = name;
+
+        let document = await Athena.database.funcs.insertData<Character>(
+            newDocument,
+            Athena.database.collections.Characters,
+            true,
+        );
+
+        if (!document) {
+            return false;
+        }
+
+        const afterInjections = Injections.get<CharacterCreateCallback>(PlayerInjectionNames.AFTER_CHARACTER_CREATE);
+        for (const callback of afterInjections) {
+            const appendedDocumentOrVoid = await callback(player, document);
+            if (appendedDocumentOrVoid) {
+                document = appendedDocumentOrVoid;
+            }
+        }
+
+        document._id = document._id.toString(); // Re-cast id object as string.
+        CharacterSystem.select(player, document);
+        return true;
     }
 
     /**

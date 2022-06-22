@@ -2,9 +2,7 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { CharacterSystem } from '../../../../server/systems/character';
 import { Appearance } from '../../../../shared/interfaces/appearance';
-import { Character, CharacterDefaults } from '../../../../shared/interfaces/character';
 import { CharacterInfo } from '../../../../shared/interfaces/characterInfo';
-import { deepCloneObject } from '../../../../shared/utility/deepCopy';
 import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
 import { CHARACTER_CREATOR_EVENTS } from '../../shared/events';
 
@@ -56,25 +54,11 @@ class InternalFunctions {
             return;
         }
 
-        const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
-        newDocument.account_id = player.accountData._id;
-        newDocument.appearance = appearance;
-        newDocument.info = info;
-        newDocument.name = name;
-
-        const document = await Athena.database.funcs.insertData<Character>(
-            newDocument,
-            Athena.database.collections.Characters,
-            true,
-        );
-
-        if (!document) {
+        const didCreate = await CharacterSystem.create(player, appearance, info, name);
+        if (!didCreate) {
             InternalFunctions.show(player, CreatorList[player.id] ? CreatorList[player.id] : 0);
             return;
         }
-
-        document._id = document._id.toString(); // Re-cast id object as string.
-        CharacterSystem.select(player, document);
     }
 
     static show(player: alt.Player, totalCharacters: number) {
