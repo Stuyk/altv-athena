@@ -1,4 +1,22 @@
 {
     "editor.formatOnSave": true,
-    "docwriter.style": "Auto-detect"
+    "docwriter.style": "Auto-detect",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "athena-cache/": true,
+        "cache": true,
+        "crashdumps": true,
+        "data": true,
+        "modules": true,
+        "node_modules": true,
+        "altv-server.exe": true,
+        "libnode.dll": true,
+        "package-lock.json": true,
+        "server.cfg": true
+    }
 }
