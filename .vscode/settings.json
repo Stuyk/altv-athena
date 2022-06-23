@@ -17,6 +17,10 @@
         "altv-server.exe": true,
         "libnode.dll": true,
         "package-lock.json": true,
-        "server.cfg": true
+        "server.cfg": true,
+        ".github": true,
+        ".loose-ts-check": true,
+        ".husky": true,
+        "resources/core/**": true
     }
 }
