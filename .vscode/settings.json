@@ -13,7 +13,6 @@
         "crashdumps": true,
         "data": true,
         "modules": true,
-        "node_modules": true,
         "altv-server.exe": true,
         "libnode.dll": true,
         "package-lock.json": true,
@@ -21,6 +20,7 @@
         ".github": true,
         ".loose-ts-check": true,
         ".husky": true,
-        "resources/core/**": true
+        "resources/core/**": true,
+        "CONTRIBUTING.md": true
     }
 }
