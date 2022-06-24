@@ -21,6 +21,7 @@
         ".loose-ts-check": true,
         ".husky": true,
         "resources/core/**": true,
-        "CONTRIBUTING.md": true
+        "CONTRIBUTING.md": true,
+        "fjklskljfds": true
     }
 }
