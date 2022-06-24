@@ -101,7 +101,7 @@ async function run() {
 
     for (const fileOrDirectory of filesAndDirectories) {
         const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
-        if (fullPath.includes('mods')) {
+        if (!fullPath.includes('core') || !fullPath.includes('webviews')) {
             continue;
         }
 
