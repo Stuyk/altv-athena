@@ -71,7 +71,7 @@ function getFilesForTranspilation(enabledPlugins) {
 }
 
 function getFilesToCopy(enabledPlugins) {
-    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)').replace(/\\/g, '/'));
+    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue)').replace(/\\/g, '/'));
 
     return glob.sync(filePath, {
         nodir: true,
