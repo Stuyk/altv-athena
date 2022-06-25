@@ -4,6 +4,8 @@ import glob from 'glob';
 import fs from 'fs';
 import crypto from 'crypto';
 
+const NO_SPECIAL_CHARACTERS = new RegExp(/^[ A-Za-z0-9_-]*$/gm);
+
 const ports = [7788, 'altv-server', 'altv-server.exe', 3399, 3001];
 const node = 'node';
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
@@ -12,6 +14,13 @@ const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : './altv-
 
 const passedArguments = process.argv.slice(2);
 const fileNameHashes = {};
+
+if (NO_SPECIAL_CHARACTERS.test(process.cwd())) {
+    console.warn(`Hey! A folder in your Athena path has special characters in it.`);
+    console.warn(`Please rename your folder, or folders to a name that doesn't have special characters in it.`);
+    console.warn(`Special Characters: ()[]{}|:;'<>?,!@#$%^&*+=`);
+    process.exit(1);
+}
 
 /**
  * This is the alt:V Server Process
