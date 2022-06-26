@@ -3,9 +3,12 @@ import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
 import VehicleFuncs from '../../../../../server/extensions/vehicleFuncs';
 import { VehicleSystem } from '../../../../../server/systems/vehicle';
+import { VEHICLE_EVENTS } from '../../../../../shared/enums/vehicle';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../../shared/locale/locale';
+
+const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
 
 class VehicleCommands {
     @command('engine', LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_ENGINE, '/engine'), PERMISSIONS.NONE)
@@ -59,4 +62,50 @@ class VehicleCommands {
         VehicleFuncs.createKey(target, player.vehicle);
         Athena.player.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
     }
+
+    @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)
+    private static handleSeatbeltCommand(player: alt.Player): void {
+        if (!player || !player.valid || !player.vehicle) {
+            return;
+        }
+
+        if (player.data.isDead) {
+            return;
+        }
+
+        let index = SeatbeltState.findIndex((x) => x.vehicle_id === player.vehicle.id && x.id === player.id);
+        if (index >= 0) {
+            SeatbeltState[index].state = !SeatbeltState[index].state;
+        } else {
+            SeatbeltState.push({ id: player.id, vehicle_id: player.vehicle.id, state: true });
+            index = SeatbeltState.length - 1;
+        }
+
+        const currentState = SeatbeltState[index];
+        if (currentState) {
+            Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
+        }
+
+        currentState
+            ? Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_ON))
+            : Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.PLAYER_SEATBELT_OFF));
+
+        alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, currentState);
+    }
 }
+
+function setSeatbeltToFalse(player: alt.Player, vehicle: alt.Vehicle) {
+    if (!player || !player.valid || !vehicle || !vehicle.valid) {
+        return;
+    }
+
+    let index = SeatbeltState.findIndex((x) => x.vehicle_id === vehicle.id && x.id === player.id);
+    if (index <= -1) {
+        return;
+    }
+
+    SeatbeltState[index].state = false;
+}
+
+alt.on('playerEnteredVehicle', setSeatbeltToFalse);
+alt.on('playerEnteredVehicle', setSeatbeltToFalse);
