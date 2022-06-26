@@ -105,6 +105,7 @@ function setSeatbeltToFalse(player: alt.Player, vehicle: alt.Vehicle) {
     }
 
     SeatbeltState[index].state = false;
+    alt.emitClient(player, VEHICLE_EVENTS.SET_SEATBELT, SeatbeltState[index].state);
 }
 
 alt.on('playerEnteredVehicle', setSeatbeltToFalse);
