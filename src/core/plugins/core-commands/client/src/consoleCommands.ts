@@ -46,10 +46,10 @@ class ClientPlugin {
 
         if (alt.Player.local.hasSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID)) {
             const id = alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID);
-            alt.logWarning(`ACCOUNT ID: ${id}`);
+            alt.logWarning(`ID: ${id}`);
         }
 
-        alt.logWarning(`PLAYER ID: ${alt.Player.local.id}`);
+        alt.logWarning(`PLAYER alt:V ID: ${alt.Player.local.id}`);
     }
 }
 

@@ -83,7 +83,7 @@ export class ConsoleCommands {
         let player: alt.Player;
         if (discordNameIDCatchAll.length <= 14 && !isNaN(parseInt(discordNameIDCatchAll))) {
             const playerById = Athena.systems.identifier.getPlayer(discordNameIDCatchAll);
-            if (playerById && player.valid) {
+            if (playerById && playerById.valid) {
                 player = playerById;
             }
         }
@@ -165,9 +165,14 @@ export class ConsoleCommands {
             return;
         }
 
-        const player = alt.Player.all.find((p) => p && p.data && p.valid && `${p.id}` === `${id}`);
-        if (!player) {
-            alt.logWarning(`Could not find ${id}`);
+        let player: alt.Player;
+        const playerById = Athena.systems.identifier.getPlayer(id);
+        if (playerById && playerById.valid) {
+            player = playerById;
+        }
+
+        if (!player || !player.valid) {
+            alt.logWarning(`Could not find: ${id}`);
             return;
         }
 
