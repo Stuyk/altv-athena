@@ -1,6 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import fs from 'fs';
+import { Athena } from '../../../../server/api/athena';
 import { Account } from '../../../../server/interface/iAccount';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { AdminController } from '../../../../server/systems/admin';
@@ -117,13 +118,18 @@ export class ConsoleCommands {
         }
 
         const reason = args.join(' ');
-        const player = alt.Player.all.find((p) => {
-            if (p.accountData && (p.accountData.discord === discord_or_id || `${p.id}` === `${discord_or_id}`)) {
-                return true;
-            }
+        let player: alt.Player;
+        if (discord_or_id.length <= 14) {
+            player = Athena.systems.identifier.getPlayer(discord_or_id);
+        } else {
+            player = alt.Player.all.find((p) => {
+                if (p.accountData && p.accountData.discord === discord_or_id) {
+                    return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+        }
 
         const account = await Database.fetchData<Account>('discord', discord_or_id, Collections.Accounts);
         if (!account) {
