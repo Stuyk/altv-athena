@@ -81,23 +81,31 @@ export class ConsoleCommands {
 
         const players = [...alt.Player.all];
         let player: alt.Player;
-
-        for (let i = 0; i < players.length; i++) {
-            const target = players[i];
-
-            if (target.name === discordNameIDCatchAll) {
-                player = target;
-                break;
+        if (discordNameIDCatchAll.length <= 14 && !isNaN(parseInt(discordNameIDCatchAll))) {
+            const playerById = Athena.systems.identifier.getPlayer(discordNameIDCatchAll);
+            if (playerById && player.valid) {
+                player = playerById;
             }
+        }
 
-            if (target.data && target.data.name === discordNameIDCatchAll) {
-                player = target;
-                break;
-            }
+        if (!player) {
+            for (let i = 0; i < players.length; i++) {
+                const target = players[i];
 
-            if (target.discord && target.discord.id === discordNameIDCatchAll) {
-                player = target;
-                break;
+                if (target.name === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
+
+                if (target.data && target.data.name === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
+
+                if (target.discord && target.discord.id === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
             }
         }
 
