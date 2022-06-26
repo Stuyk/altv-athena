@@ -108,4 +108,4 @@ function setSeatbeltToFalse(player: alt.Player, vehicle: alt.Vehicle) {
 }
 
 alt.on('playerEnteredVehicle', setSeatbeltToFalse);
-alt.on('playerEnteredVehicle', setSeatbeltToFalse);
+alt.on('playerLeftVehicle', setSeatbeltToFalse);
