@@ -82,4 +82,71 @@ class TeleportCommands {
         validVehicle.data.position = validVehicle.pos;
         Athena.vehicle.funcs.save(validVehicle, { position: validVehicle.pos });
     }
+
+    @command('tpto', '/tpto <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
+    private static handleTeleportTo(player: alt.Player, name: string) {
+        if (!name) {
+            Athena.player.emit.message(player, `tpto <partial_name>`);
+            return;
+        }
+
+        if (name.includes('_')) {
+            name = name.replace('_', '');
+        }
+
+        const target = alt.Player.all.find(
+            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
+        );
+
+        if (!target || !target.valid) {
+            Athena.player.emit.message(player, `Could not find that player.`);
+            return;
+        }
+
+        if (player.vehicle) {
+            player.vehicle.pos = target.pos;
+            return;
+        }
+
+        Athena.player.safe.setPosition(player, target.pos.x, target.pos.y, target.pos.z);
+    }
+
+    @command('tphere', '/tphere <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
+    private static handleTeleportHere(player: alt.Player, name: string) {
+        if (!name) {
+            Athena.player.emit.message(player, `tpto <partial_name>`);
+            return;
+        }
+
+        if (name.includes('_')) {
+            name = name.replace('_', '');
+        }
+
+        const target = alt.Player.all.find(
+            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
+        );
+
+        if (!target || !target.valid) {
+            Athena.player.emit.message(player, `Could not find that player.`);
+            return;
+        }
+
+        if (target.vehicle) {
+            target.vehicle.pos = player.pos;
+            return;
+        }
+
+        Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+    }
+
+    @command('tpall', '/tpall', PERMISSIONS.ADMIN)
+    private static handleTeleportAll(player: alt.Player) {
+        alt.Player.all.forEach((target) => {
+            if (!target || !target.valid || !target.data || !target.data._id) {
+                return;
+            }
+
+            Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
+        });
+    }
 }
