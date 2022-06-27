@@ -9,4 +9,7 @@ export interface BarbershopData {
         overlay: string;
         collection: string;
     };
+    eyebrowShape: number;
+    eyebrowOpacity: number;
+    eyebrowColor: number;
 }

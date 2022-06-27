@@ -7,8 +7,8 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
 
-const Z_POS_ADD = 0.66;
-const FOV = 12;
+const Z_POS_ADD = 0.62;
+const FOV = 16;
 const PAGE_NAME = 'Barbershop';
 let isSelfService = false;
 let currentData: BarbershopData;

@@ -1,7 +1,7 @@
 <template>
     <div class="hair-colors">
         <div
-            v-for="(hex, index) in hairColors"
+            v-for="(hex, index) in colors"
             :key="index"
             class="hair-color"
             :class="currentIndex === index ? 'selected' : 'unselected'"
@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts">
+import { makeupColors } from '../../shared/makeupColors';
 import { hairColors } from '../../shared/hairColors';
 import { defineComponent } from 'vue';
 
@@ -23,10 +24,14 @@ export default defineComponent({
             type: Number,
             default: 0,
         },
+        colorType: {
+            type: Number,
+            default: 0,
+        },
     },
     data() {
         return {
-            hairColors: hairColors,
+            colors: [],
         };
     },
     methods: {
@@ -37,6 +42,9 @@ export default defineComponent({
             this.$emit('select-color', index);
         },
     },
+    mounted() {
+        this.colors = this.colorType === 0 ? hairColors : makeupColors;
+    },
 });
 </script>
 
@@ -45,7 +53,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 290px;
+    max-width: 232px;
     height: auto;
 }
 

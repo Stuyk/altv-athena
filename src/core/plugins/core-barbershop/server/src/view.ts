@@ -162,11 +162,15 @@ export class BarbershopView {
         const isSelfService = sessions[hairDresserID] === hairDresserID;
         const hairDlc = customer.getDlcClothes(2);
         const barberData: BarbershopData = {
+            sex: customer.data.appearance.sex,
             dlc: hairDlc.dlc,
             hair: hairDlc.drawable,
             hairColor1: customer.data.appearance.hairColor1,
             hairColor2: customer.data.appearance.hairColor2,
             hairOverlay: customer.data.appearance.hairOverlay,
+            eyebrowShape: customer.data.appearance.eyebrows,
+            eyebrowColor: customer.data.appearance.eyebrowsColor1,
+            eyebrowOpacity: customer.data.appearance.eyebrowsOpacity,
         };
 
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);

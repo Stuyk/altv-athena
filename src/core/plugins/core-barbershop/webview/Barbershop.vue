@@ -1,50 +1,66 @@
 <template>
-    <div class="barbershop-frame">
-        <div class="upper-section">
-            <div class="color-palette mt-12">
-                <Button
-                    @click="selectColorType('hairColor1')"
-                    class="mb-2"
-                    :color="colorType === 'hairColor1' ? 'blue' : 'grey'"
-                >
-                    Hair
-                </Button>
-                <Button
-                    @click="selectColorType('hairColor2')"
-                    class="mb-2"
-                    :color="colorType === 'hairColor2' ? 'blue' : 'grey'"
-                >
-                    Highlight
-                </Button>
-                <ColorComponent @select-color="selectColor" :currentIndex="getColorIndex" class="mb-4" />
-            </div>
-        </div>
-        <!-- Hair Style Previews -->
-        <div class="hairstyles">
-            <div v-for="(incremental, index) in indexesToShow" :key="index">
-                <div
-                    class="image-wrap"
-                    :class="incremental === 0 ? 'highlight unfocus' : 'no-highlight'"
-                    @click="setIndex(getHairPreviewIndex(incremental))"
-                >
-                    <div class="hint">
-                        <Icon class="white--text" :size="82" :icon="iconsToShow[index]" />
+    <div class="barbershop-frame" v-if="ready">
+        <div class="top-section">
+            <div class="left-section">
+                <div class="sidebar">
+                    <div
+                        v-for="(element, index) in navigation"
+                        :key="index"
+                        class="circle-btn mb-4"
+                        :class="isNavSelected(index)"
+                        @click="setNavIndex(index)"
+                    >
+                        <Icon :icon="element.icon" :size="18"></Icon>
                     </div>
-                    <div class="glow"></div>
-                    <img :src="getImage(hairStyles[getHairPreviewIndex(incremental)])" />
+                </div>
+                <div class="color-palette pt-3">
+                    <Button
+                        v-for="index in getColorCount"
+                        @click="selectColorType(getUpdaterName, index)"
+                        class="mb-2 brb-btn"
+                        :color="getButtonColor(getColorName(index))"
+                    >
+                        Color {{ index }}
+                    </Button>
+
+                    <!-- <Button
+                        @click="selectColorType(getUpdaterName, 1)"
+                        class="mb-2 brb-btn"
+                        :color="getButtonColor('hairColor1')"
+                    >
+                        Color 1
+                    </Button>
+                    <Button
+                        @click="selectColorType(getUpdaterName, 2)"
+                        class="mb-2 brb-btn"
+                        :color="getButtonColor('hairColor2')"
+                    >
+                        Color 2
+                    </Button> -->
+                    <ColorComponent
+                        @select-color="selectColor"
+                        :currentIndex="getColorIndex"
+                        :colorType="0"
+                        class="mb-4"
+                    />
                 </div>
             </div>
+            <div class="right-section"></div>
+        </div>
+        <div class="bottom-section">
+            <HairstyleComponent :sex="sex" :currentIndex="hairIndex" @setIndex="setHairIndex"></HairstyleComponent>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent, defineAsyncComponent, nextTick } from 'vue';
 import { maleHair } from '../shared/maleHair';
 import { femaleHair } from '../shared/femaleHair';
 import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
 import ColorComponentVue from './components/ColorComponent.vue';
+import HairstyleComponentVue from './components/HairstyleComponent.vue';
 
 import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
 
@@ -57,87 +73,97 @@ export default defineComponent({
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
         Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
         ColorComponent: ColorComponentVue,
+        HairstyleComponent: HairstyleComponentVue,
     },
     props: {
         emit: Function,
     },
     data() {
         return {
-            // Data Sets & Navigation
-            indexesToShow: [-2, -1, 0, 1, 2],
-            iconsToShow: ['icon-fast_rewind', 'icon-arrow_left', 'icon-eye', 'icon-arrow_right', 'icon-fast_forward'],
-            currentIndex: 0,
-            hairStyles: [],
+            // Nice
+            sex: 0,
+            // Update Check
+            ready: false,
+            // Navigation
+            navIndex: 0,
+            navigation: [
+                { icon: 'icon-hair', type: 'hair', colors: 2 },
+                { icon: 'icon-eye', type: 'eye', colors: 1 },
+                { icon: 'icon-beard', type: 'beard', colors: 1 },
+                { icon: 'icon-makeup', type: 'makeup', colors: 1 },
+            ],
+            // Color Palette Helper
             colorType: 'hairColor1',
-            resolvePath: ResolvePath,
+            // Indexing  Information
+            hairIndex: 0,
+            eyeIndex: 0,
+            beardIndex: 0,
+            makeupIndex: 0,
             hairColor1: 0,
             hairColor2: 0,
             beardColor1: 0,
+            beardOpacity: 0,
+            eyeColor1: 0,
+            eyeOpacity: 1,
+            makeupColor1: 0,
+            makeupOpacity: 1,
+            // Utility
+            resolvePath: ResolvePath,
         };
     },
     computed: {
+        getColorCount() {
+            return this.navigation[this.navIndex].colors;
+        },
         getColorIndex() {
             return this[this.colorType];
         },
+        getUpdaterName() {
+            return this.navigation[this.navIndex].type;
+        },
     },
     methods: {
-        selectColorType(type: 'hairColor1' | 'hairColor2' | 'beardColor') {
-            this.colorType = type;
+        getColorName(index: number) {
+            return this.navigation[this.navIndex].type + `Color` + index;
+        },
+        getButtonColor(type: string) {
+            if (this.colorType === type) {
+                return 'blue';
+            }
+
+            return 'grey';
+        },
+        selectColorType(typeName: string, index: number) {
+            this.colorType = `${typeName}Color${index}`;
         },
         selectColor(index: number) {
             this[this.colorType] = index;
             this.update();
         },
-        setIndex(index: number) {
-            this.currentIndex = index;
+        setHairIndex(index: number) {
+            this.hairIndex = index;
             this.update();
         },
-        getHairPreviewIndex(incremental: number) {
-            if (incremental <= -1) {
-                return this.getPrevIndex(Math.abs(incremental));
-            }
-
-            if (incremental >= 1) {
-                return this.getNextIndex(Math.abs(incremental));
-            }
-
-            return this.currentIndex;
-        },
-        getPrevIndex(amount = 1) {
-            if (this.currentIndex - amount <= -1 || this.currentIndex === 0) {
-                const whatToRemove = Math.abs(this.currentIndex - amount);
-                const endIndex = this.hairStyles.length;
-                return endIndex - whatToRemove;
-            }
-
-            return this.currentIndex - amount;
-        },
-        getNextIndex(amount = 1) {
-            if (this.currentIndex + amount >= this.hairStyles.length) {
-                return this.currentIndex - this.hairStyles.length + amount;
-            }
-
-            return this.currentIndex + amount;
-        },
-        getImage(hair: string) {
-            let fileName = `../../assets/images/clothing/${hair}.png`;
-            return ResolvePath(fileName);
-        },
-        setData(data: BarbershopData) {
+        async setData(data: BarbershopData) {
+            this.sex = data.sex;
             this.hairStyles = data.sex === 0 ? femaleHair : maleHair;
             const hairStyleIndex = this.hairStyles.findIndex((x) =>
                 x.includes(`2-${data.dlc}-${data.sex === 0 ? 'female' : 'male'}-${data.hair}`),
             );
-            this.setIndex(hairStyleIndex === -1 ? 0 : hairStyleIndex);
+            this.setHairIndex(hairStyleIndex === -1 ? 0 : hairStyleIndex);
 
             this.hairColor1 = data.hairColor1;
             this.hairColor2 = data.hairColor2;
+
+            await nextTick();
+
+            this.ready = true;
         },
         getHairStyleDlc(): number {
-            return parseInt(this.hairStyles[this.currentIndex].split('-')[1]);
+            return parseInt(this.hairStyles[this.hairIndex].split('-')[1]);
         },
         getHairStyle(): number {
-            return parseInt(this.hairStyles[this.currentIndex].split('-')[3]);
+            return parseInt(this.hairStyles[this.hairIndex].split('-')[3]);
         },
         update() {
             const updateInformation: BarbershopData = {
@@ -145,7 +171,10 @@ export default defineComponent({
                 hair: this.getHairStyle(),
                 hairColor1: this.hairColor1,
                 hairColor2: this.hairColor2,
-                hairFullName: this.hairStyles[this.currentIndex],
+                hairFullName: this.hairStyles[this.hairIndex],
+                eyebrowOpacity: this.eyeOpacity,
+                eyebrowShape: this.eyeShape,
+                eyebrowColor: this.eyeColor1,
             };
 
             if ('alt' in window) {
@@ -154,6 +183,13 @@ export default defineComponent({
         },
         closePage() {
             //
+        },
+        isNavSelected(index: number) {
+            return index === this.navIndex ? { 'circle-btn-selected': true } : {};
+        },
+        setNavIndex(index: number) {
+            this.navIndex = index;
+            this.colorType = this.getColorName(1);
         },
     },
     mounted() {
@@ -189,106 +225,88 @@ export default defineComponent({
     box-sizing: border-box;
 }
 
-.upper-section {
+.barbershop-frame .top-section {
+    display: flex;
+    flex-direction: row;
+
+    min-width: 100vw;
+    max-width: 100vw;
+}
+
+.barbershop-frame .bottom-section {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 175px;
+    max-height: 175px;
+}
+
+.barbershop-frame .left-section {
+    display: flex;
+    min-width: calc(100vw / 2);
+    max-width: calc(100vw / 2);
+}
+
+.barbershop-frame .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 75px;
+    max-width: 75px;
+    box-sizing: border-box;
+    padding-top: 12px;
+}
+
+.barbershop-frame .right-section {
+    width: calc(100vw / 2);
+}
+
+.barbershop-frame .top-section {
     display: flex;
     flex-direction: row;
     min-height: calc(100vh - 175px);
     max-height: calc(100vh - 175px);
-}
-
-.hairstyles {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    box-sizing: border-box;
     min-width: 100vw;
     max-width: 100vw;
-    min-height: 150px;
-    max-height: 150px;
-    padding-left: 48px;
-    padding-right: 48px;
-}
-
-.hairstyles .image-wrap {
-    display: flex;
-    min-height: 100px;
-    max-height: 100px;
-    transform: scale(0.75);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.hairstyles .image-wrap:hover {
-    transform: scale(1);
-}
-
-.hairstyles .image-wrap:hover .hint {
-    opacity: 0.8;
-}
-
-.hairstyles .unfocus:hover {
-    transform: scale(0.9) !important;
-}
-
-.hairstyles .unfocus:hover .hint {
-    transform: scale(0.9) !important;
-    opacity: 0 !important;
-}
-
-.hairstyles .image-wrap img {
-    min-height: 100px;
-    max-height: 100px;
-    background: rgb(0, 0, 0, 0.2);
-    border-bottom: 25px solid rgb(0, 0, 0, 0.002);
-    border-left: 25px solid rgb(0, 0, 0, 0.002);
-    border-right: 25px solid rgb(0, 0, 0, 0.002);
-    border-radius: 25px;
-    position: absolute;
-}
-
-.hairstyles .highlight {
-    border: 6px solid rgba(0, 0, 0, 0.5);
-    padding-bottom: 24px;
-    border-radius: 32px;
-    margin-bottom: 2px;
-}
-
-.hairstyles .no-highlight {
-    border: 6px solid rgba(0, 0, 0, 0);
-    padding-bottom: 24px;
-    border-radius: 32px;
-    margin-bottom: 2px;
-}
-
-.hairstyles .glow {
-    position: relative;
-    width: 150px;
-    height: 125px;
-    z-index: 99;
-    transition: all 0.2s ease-in-out;
-    border-radius: 25px;
-}
-
-.hairstyles .glow:hover {
-    box-shadow: 0px 0px 15px rgb(255, 255, 255);
-}
-
-.hairstyles .hint {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 150px;
-    height: 125px;
-    z-index: 99;
-    opacity: 0;
-    transition: all 0.2s ease-in-out;
 }
 
 .color-palette {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    margin-left: 64px;
+    margin-left: 0px;
+    transition: all 0.5 ease-in-out;
+}
+
+.brb-btn {
+    background: rgb(0, 0, 0, 0.9) !important;
+    border-radius: 12px;
+}
+
+.circle-btn {
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 100%;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.1s ease-in-out;
+}
+
+.circle-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+.circle-btn-selected {
+    color: rgba(255, 166, 0, 0.9);
+    box-shadow: 0px 0px 10px rgba(255, 166, 0, 0.9);
+}
+
+.circle-btn-selected:hover {
+    color: rgba(255, 166, 0, 0.9);
+    box-shadow: 0px 0px 10px rgba(255, 166, 0, 0.9);
+    transform: scale(1) !important;
 }
 </style>
