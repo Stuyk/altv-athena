@@ -79,8 +79,13 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
     // Hair - Tattoo
     alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, [appearance.hairOverlay]);
 
-    // Hair
-    player.setClothes(2, appearance.hair, 0, 0);
+    // Hair - Supports DLC
+    if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {
+        player.setClothes(2, appearance.hair, 0, 0);
+    } else {
+        player.setDlcClothes(appearance.hairDlc, 2, appearance.hair, 0, 0);
+    }
+
     player.setHairColor(appearance.hairColor1);
     player.setHairHighlightColor(appearance.hairColor2);
 

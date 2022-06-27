@@ -1,6 +1,6 @@
 export const BarbershopEvents = {
     WebViewEvents: {
-        SET_SEX: 'barbershop:SetSex',
+        SET_DATA: 'barbershop:SetData',
         UPDATE: 'barbershop:Update',
         CLOSE: 'barbershop:Close',
         SAVE: 'barbershop:Save',

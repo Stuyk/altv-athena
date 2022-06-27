@@ -10,6 +10,9 @@ import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
 import { ItemFactory } from '../../systems/item';
 import { Athena } from '../../api/athena';
+import save from './save';
+import sync from './sync';
+import { ClothingComponent } from '../../../shared/interfaces/clothing';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.
 const TEMP_MAX_TOOLBAR_SIZE = 4;
@@ -1167,6 +1170,45 @@ async function addAmountToInventoryReturnRemainingAmount(
 }
 
 /**
+ * Simply unequips an equipment slot item.
+ * Will return false if it did not remove from the slot.
+ * Auto-saves on unequip.
+ *
+ * @param {alt.Player} player
+ * @param {EQUIPMENT_TYPE} slot
+ */
+async function unequip(player: alt.Player, slot: EQUIPMENT_TYPE): Promise<boolean> {
+    const equipmentIndex = player.data.equipment.findIndex((x) => x.slot === slot);
+    if (!equipmentIndex) {
+        return true;
+    }
+
+    if (isEquipmentSlotFree(player, slot)) {
+        return true;
+    }
+
+    const emptySlot = getFreeInventorySlot(player);
+    if (!emptySlot) {
+        return false;
+    }
+
+    const equipment = player.data.equipment[equipmentIndex];
+    const didAdd = inventoryAdd(player, equipment as Item, emptySlot.slot);
+    if (!didAdd) {
+        return false;
+    }
+
+    player.data.equipment.splice(equipmentIndex, 1);
+    await save.partial(player, { equipment: player.data.equipment, inventory: player.data.inventory });
+    await sync.equipment(
+        player,
+        player.data.equipment as Array<Item<ClothingComponent>>,
+        player.data.appearance.sex === 1,
+    );
+    return true;
+}
+
+/**
  * Used to override an existing Athena.player.inventory function.
  * Requires the same exact name of the function, and the parameters.
  *
@@ -1219,6 +1261,7 @@ const exports = {
     addAmountToInventoryReturnRemainingAmount,
     removeAmountFromInventoryReturnRemainingAmount,
     override,
+    unequip,
 };
 
 export default exports;

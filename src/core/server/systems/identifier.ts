@@ -83,16 +83,19 @@ export class Identifier {
      * @memberof Identifier
      */
     static getIdByStrategy(player: alt.Player): number {
-        if (!player || !player.valid || !player.accountData || !player.data || !player.data._id) {
+        const accountData = player.accountData;
+        const data = player.data;
+
+        if (!player || !accountData || !data || !data._id) {
             return -1;
         }
 
         if (strategy === 'account_id') {
-            return player.accountData.id;
+            return accountData.id;
         }
 
         if (strategy === 'character_id') {
-            return player.data.character_id;
+            return data.character_id;
         }
 
         return player.id;

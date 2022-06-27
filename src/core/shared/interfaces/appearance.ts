@@ -66,10 +66,19 @@ export interface Appearance {
 
     /**
      * The hair identifier that this character will be using.
+     * Should be a relative id to the dlc hash.
      * @type {number}
      * @memberof Appearance
      */
     hair: number;
+
+    /**
+     * The dlc hash of the hair to use.
+     *
+     * @type {number}
+     * @memberof Appearance
+     */
+    hairDlc: number;
 
     /**
      * The color of the hair.
