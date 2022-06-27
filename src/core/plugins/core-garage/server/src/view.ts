@@ -145,8 +145,7 @@ export class GarageFunctions {
 
             // 7
             const existingVehicle = alt.Vehicle.all.find(
-                (x) => x.data && x.data._id.toString() === vehicle._id.toString(),
-            );
+                (x) => x.data && x.data._id && vehicle._id && x.data._id.toString() === vehicle._id.toString())
 
             // 7
             // Return true because it has nowhere to go, it is not spawned, and has no garage. Allow spawning it.
