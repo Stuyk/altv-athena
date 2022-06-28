@@ -3,26 +3,26 @@
         <!-- Eyebrow Style -->
         <div class="header-info overline boldest white--text mb-2">Style</div>
         <div class="split split-full-width">
-            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'eyeIndex', eyebrows.length - 1)">
+            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'beardIndex', beards.length - 1)">
                 <Icon icon="icon-chevron-left" :size="24" />
             </Button>
             <div class="text-sm-overline white--text mb-2 header-bold">
-                {{ eyebrows[currentIndex] }}
+                {{ beards[currentIndex] }}
             </div>
-            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'eyeIndex', eyebrows.length - 1)">
+            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'beardIndex', beards.length - 1)">
                 <Icon icon="icon-chevron-right" :size="24" />
             </Button>
         </div>
         <!-- Eyebrow Opacity -->
         <div class="header-info overline boldest white--text mb-2 mt-2">Opacity</div>
         <div class="split split-full-width">
-            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'eyeOpacity', 1, 0.1)">
+            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'beardOpacity', 1, 0.1)">
                 <Icon icon="icon-chevron-left" :size="24" />
             </Button>
             <div class="text-sm-overline boldest white--text mb-2 header-bold">
                 {{ opacity.toFixed(2) }}
             </div>
-            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'eyeOpacity', 1, 0.1)">
+            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'beardOpacity', 1, 0.1)">
                 <Icon icon="icon-chevron-right" :size="24" />
             </Button>
         </div>
@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { eyebrowNames } from '../../../../shared/information/eyebrows';
+import { facialHairNames } from '../../../../shared/information/facialHair';
 
-const ComponentName = 'EyeComponent';
+const ComponentName = 'BeardComponent';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -52,7 +52,7 @@ export default defineComponent({
     },
     data() {
         return {
-            eyebrows: eyebrowNames,
+            beards: facialHairNames,
         };
     },
     methods: {

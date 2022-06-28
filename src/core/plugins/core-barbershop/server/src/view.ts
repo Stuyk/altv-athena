@@ -222,6 +222,10 @@ export class BarbershopView {
         customer.setHairColor(data.hairColor1);
         customer.setHairHighlightColor(data.hairColor2);
 
+        // Facial Hair
+        customer.setHeadOverlay(1, data.beardIndex, data.beardOpacity);
+        customer.setHeadOverlayColor(1, 1, data.beardColor1, data.beardColor1);
+
         // Eyebrows
         customer.setHeadOverlay(2, data.eyeIndex, data.eyeOpacity);
         customer.setHeadOverlayColor(2, 1, data.eyeColor1, data.eyeColor1);

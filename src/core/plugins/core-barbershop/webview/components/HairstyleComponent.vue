@@ -86,7 +86,6 @@ export default defineComponent({
     },
     mounted() {
         this.hairStyles = this.sex === 0 ? femaleHair : maleHair;
-        console.log(`SEX IS ${this.sex}`);
     },
 });
 </script>

@@ -35,6 +35,13 @@
                         @increment-index="incrementIndex"
                         :opacity="eyeOpacity"
                     />
+                    <BeardComponent
+                        :currentIndex="beardIndex"
+                        :opacity="beardOpacity"
+                        v-if="navigation[navIndex].isBeard"
+                        @decrement-index="decrementIndex"
+                        @increment-index="incrementIndex"
+                    />
                 </div>
             </div>
             <div class="right-section"></div>
@@ -59,6 +66,7 @@ import { BarbershopData } from '../shared/interfaces';
 import ColorComponentVue from './components/ColorComponent.vue';
 import HairstyleComponentVue from './components/HairstyleComponent.vue';
 import EyeComponentVue from './components/EyeComponent.vue';
+import BeardComponentVue from './components/BeardComponent.vue';
 
 import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
 
@@ -73,6 +81,7 @@ export default defineComponent({
         ColorComponent: ColorComponentVue,
         HairstyleComponent: HairstyleComponentVue,
         EyeComponent: EyeComponentVue,
+        BeardComponent: BeardComponentVue,
     },
     props: {
         emit: Function,
@@ -84,7 +93,7 @@ export default defineComponent({
             // Update Check
             ready: false,
             // Navigation
-            navIndex: 1,
+            navIndex: 2,
             navigation: [
                 { icon: 'icon-hair', type: 'hair', colors: 2, isHair: true, colorComponentType: 0 },
                 { icon: 'icon-eye', type: 'eye', colors: 1, isEyebrows: true, colorComponentType: 0 },
@@ -175,6 +184,17 @@ export default defineComponent({
             this.hairColor1 = data.hairColor1;
             this.hairColor2 = data.hairColor2;
 
+            // Modify Navigation Options
+            if (this.sex === 0) {
+                const navigationOptions = [...this.navigation];
+                const navIndex = navigationOptions.findIndex((x) => x.type === 'beard');
+                if (navIndex !== -1) {
+                    console.log(navIndex);
+                    navigationOptions.splice(navIndex, 1);
+                    this.navigation = navigationOptions;
+                }
+            }
+
             await nextTick();
 
             this.setNavIndex(this.navIndex);
@@ -225,7 +245,7 @@ export default defineComponent({
             alt.emit(BarbershopEvents.WebViewEvents.READY);
         } else {
             this.setData({
-                sex: 0,
+                sex: 1,
                 dlc: 1152146508,
                 hair: 1,
                 hairColor1: 0,

@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { makeupColors } from '../../shared/makeupColors';
-import { hairColors } from '../../shared/hairColors';
+import { makeupColors } from '../../../../shared/information/makeupColors';
+import { hairColors } from '../../../../shared/information/hairColors';
 import { defineComponent, nextTick } from 'vue';
 
 const ComponentName = 'ColorComponent';
@@ -44,7 +44,6 @@ export default defineComponent({
     },
     async mounted() {
         await nextTick();
-        console.log(this.colorType);
         this.colors = this.colorType === 0 ? hairColors : makeupColors;
     },
 });
