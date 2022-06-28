@@ -27,7 +27,7 @@ export const CLOTHING_CONFIG: IClothingConfig = {
             [CLOTHING_IDS.SHOES]: 101, // Shoes
             [CLOTHING_IDS.ACCESSORIES]: 151, // Accessories
             [CLOTHING_IDS.UNDERSHIRTS]: 188, // Undershirts
-            [CLOTHING_IDS.BODY_ARMOUR]: 16, // body armour
+            [CLOTHING_IDS.BODY_ARMOUR]: 56, // body armour
             [CLOTHING_IDS.TOP]: 392, // Tops / Shirts
         },
     },
