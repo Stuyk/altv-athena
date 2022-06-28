@@ -14,7 +14,7 @@
 <script lang="ts">
 import { makeupColors } from '../../shared/makeupColors';
 import { hairColors } from '../../shared/hairColors';
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 const ComponentName = 'ColorComponent';
 export default defineComponent({
@@ -42,7 +42,9 @@ export default defineComponent({
             this.$emit('select-color', index);
         },
     },
-    mounted() {
+    async mounted() {
+        await nextTick();
+        console.log(this.colorType);
         this.colors = this.colorType === 0 ? hairColors : makeupColors;
     },
 });

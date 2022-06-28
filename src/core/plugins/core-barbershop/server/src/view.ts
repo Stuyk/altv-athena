@@ -161,6 +161,9 @@ export class BarbershopView {
 
         const isSelfService = sessions[hairDresserID] === hairDresserID;
         const hairDlc = customer.getDlcClothes(2);
+
+        const makeupInfo = customer.data.appearance.opacityOverlays.find((x) => x.id === 4);
+        const makeupColorInfo = customer.data.appearance.colorOverlays.find((x) => x.id === 4);
         const barberData: BarbershopData = {
             sex: customer.data.appearance.sex,
             dlc: hairDlc.dlc,
@@ -168,10 +171,18 @@ export class BarbershopView {
             hairColor1: customer.data.appearance.hairColor1,
             hairColor2: customer.data.appearance.hairColor2,
             hairOverlay: customer.data.appearance.hairOverlay,
-            eyebrowShape: customer.data.appearance.eyebrows,
-            eyebrowColor: customer.data.appearance.eyebrowsColor1,
-            eyebrowOpacity: customer.data.appearance.eyebrowsOpacity,
+            eyeIndex: customer.data.appearance.eyebrows,
+            eyeColor1: customer.data.appearance.eyebrowsColor1,
+            eyeOpacity: customer.data.appearance.eyebrowsOpacity,
+            beardIndex: customer.data.appearance.facialHair ? 0 : customer.data.appearance.facialHair,
+            beardColor1: customer.data.appearance.facialHairColor1,
+            beardOpacity: customer.data.appearance.facialHairOpacity,
+            makeupIndex: makeupInfo && makeupInfo.value ? makeupInfo.value : 0,
+            makeupColor1: makeupColorInfo.color1,
+            makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
+
+        console.log(barberData);
 
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);
     }
@@ -210,5 +221,9 @@ export class BarbershopView {
 
         customer.setHairColor(data.hairColor1);
         customer.setHairHighlightColor(data.hairColor2);
+
+        // Eyebrows
+        customer.setHeadOverlay(2, data.eyeIndex, data.eyeOpacity);
+        customer.setHeadOverlayColor(2, 1, data.eyeColor1, data.eyeColor1);
     }
 }

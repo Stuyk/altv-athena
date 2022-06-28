@@ -13,7 +13,7 @@
                         <Icon :icon="element.icon" :size="18"></Icon>
                     </div>
                 </div>
-                <div class="color-palette pt-3">
+                <div class="color-palette pt-3" :key="navIndex">
                     <Button
                         v-for="index in getColorCount"
                         @click="selectColorType(getUpdaterName, index)"
@@ -22,33 +22,30 @@
                     >
                         Color {{ index }}
                     </Button>
-
-                    <!-- <Button
-                        @click="selectColorType(getUpdaterName, 1)"
-                        class="mb-2 brb-btn"
-                        :color="getButtonColor('hairColor1')"
-                    >
-                        Color 1
-                    </Button>
-                    <Button
-                        @click="selectColorType(getUpdaterName, 2)"
-                        class="mb-2 brb-btn"
-                        :color="getButtonColor('hairColor2')"
-                    >
-                        Color 2
-                    </Button> -->
                     <ColorComponent
                         @select-color="selectColor"
                         :currentIndex="getColorIndex"
-                        :colorType="0"
+                        :colorType="navigation[navIndex].colorComponentType"
                         class="mb-4"
+                    />
+                    <EyeComponent
+                        :currentIndex="eyeIndex"
+                        v-if="navigation[navIndex].isEyebrows"
+                        @decrement-index="decrementIndex"
+                        @increment-index="incrementIndex"
+                        :opacity="eyeOpacity"
                     />
                 </div>
             </div>
             <div class="right-section"></div>
         </div>
         <div class="bottom-section">
-            <HairstyleComponent :sex="sex" :currentIndex="hairIndex" @setIndex="setHairIndex"></HairstyleComponent>
+            <HairstyleComponent
+                :sex="sex"
+                :currentIndex="hairIndex"
+                @setIndex="setHairIndex"
+                v-if="navigation[navIndex].isHair"
+            />
         </div>
     </div>
 </template>
@@ -61,6 +58,7 @@ import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
 import ColorComponentVue from './components/ColorComponent.vue';
 import HairstyleComponentVue from './components/HairstyleComponent.vue';
+import EyeComponentVue from './components/EyeComponent.vue';
 
 import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
 
@@ -74,6 +72,7 @@ export default defineComponent({
         Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
         ColorComponent: ColorComponentVue,
         HairstyleComponent: HairstyleComponentVue,
+        EyeComponent: EyeComponentVue,
     },
     props: {
         emit: Function,
@@ -85,18 +84,18 @@ export default defineComponent({
             // Update Check
             ready: false,
             // Navigation
-            navIndex: 0,
+            navIndex: 1,
             navigation: [
-                { icon: 'icon-hair', type: 'hair', colors: 2 },
-                { icon: 'icon-eye', type: 'eye', colors: 1 },
-                { icon: 'icon-beard', type: 'beard', colors: 1 },
-                { icon: 'icon-makeup', type: 'makeup', colors: 1 },
+                { icon: 'icon-hair', type: 'hair', colors: 2, isHair: true, colorComponentType: 0 },
+                { icon: 'icon-eye', type: 'eye', colors: 1, isEyebrows: true, colorComponentType: 0 },
+                { icon: 'icon-beard', type: 'beard', colors: 1, isBeard: true, colorComponentType: 0 },
+                { icon: 'icon-makeup', type: 'makeup', colors: 1, isMakeup: true, colorComponentType: 1 },
             ],
             // Color Palette Helper
             colorType: 'hairColor1',
             // Indexing  Information
             hairIndex: 0,
-            eyeIndex: 0,
+            eyeIndex: 16,
             beardIndex: 0,
             makeupIndex: 0,
             hairColor1: 0,
@@ -112,6 +111,9 @@ export default defineComponent({
         };
     },
     computed: {
+        needToRefresh() {
+            return this.refreshColorComponent;
+        },
         getColorCount() {
             return this.navigation[this.navIndex].colors;
         },
@@ -123,6 +125,24 @@ export default defineComponent({
         },
     },
     methods: {
+        decrementIndex(whatToDecrement: string, maxLength: number, decrementValue = 1) {
+            if (this[whatToDecrement] - decrementValue < 0) {
+                this[whatToDecrement] = maxLength;
+            } else {
+                this[whatToDecrement] -= decrementValue;
+            }
+
+            this.update();
+        },
+        incrementIndex(whatToIncrement: string, maxLength: number, incrementValue = 1) {
+            if (this[whatToIncrement] + incrementValue >= maxLength) {
+                this[whatToIncrement] = 0;
+            } else {
+                this[whatToIncrement] += incrementValue;
+            }
+
+            this.update();
+        },
         getColorName(index: number) {
             return this.navigation[this.navIndex].type + `Color` + index;
         },
@@ -157,6 +177,7 @@ export default defineComponent({
 
             await nextTick();
 
+            this.setNavIndex(this.navIndex);
             this.ready = true;
         },
         getHairStyleDlc(): number {
@@ -172,9 +193,15 @@ export default defineComponent({
                 hairColor1: this.hairColor1,
                 hairColor2: this.hairColor2,
                 hairFullName: this.hairStyles[this.hairIndex],
-                eyebrowOpacity: this.eyeOpacity,
-                eyebrowShape: this.eyeShape,
-                eyebrowColor: this.eyeColor1,
+                eyeOpacity: this.eyeOpacity,
+                eyeIndex: this.eyeIndex,
+                eyeColor1: this.eyeColor1,
+                makeupIndex: this.makeupIndex,
+                makeupColor1: this.makeupColor1,
+                makeupOpacity: this.makeupOpacity,
+                beardIndex: this.beardIndex,
+                beardColor1: this.beardColor1,
+                beardOpacity: this.beardOpacity,
             };
 
             if ('alt' in window) {
@@ -187,7 +214,7 @@ export default defineComponent({
         isNavSelected(index: number) {
             return index === this.navIndex ? { 'circle-btn-selected': true } : {};
         },
-        setNavIndex(index: number) {
+        async setNavIndex(index: number) {
             this.navIndex = index;
             this.colorType = this.getColorName(1);
         },
