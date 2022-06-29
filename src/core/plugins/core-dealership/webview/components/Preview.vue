@@ -18,7 +18,7 @@
                 <div class="stack pb-4">
                     <div class="split space-between pb-2">
                         <span class="vehicle-name overline">
-                            {{ vehicle.name }}
+                            {{ vehicle.display }}
                         </span>
                         <span
                             class="vehicle-price overline"
