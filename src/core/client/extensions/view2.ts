@@ -2,6 +2,10 @@ import * as native from 'natives';
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { WebViewEventNames } from '../../shared/enums/webViewEvents';
+
+const ReadyEvents: { [pageName: string]: (...args: any[]) => void } = {};
+const ClientEvents: { [eventName: string]: (...args: any[]) => void } = {};
 
 // Must be a blank index page.
 let _defaultURL = `http://assets/webviews/index.html`;
@@ -10,6 +14,74 @@ let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
 let _overlays: Array<{ name: string; callback: (isVisible: boolean) => void }> = [];
+
+class InternalFunctions {
+    /**
+     * Fowards a WebView event to the specified callback.
+     *
+     * @static
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static handleClientEvent(eventName: string, ...args: any[]) {
+        if (!ClientEvents[eventName]) {
+            alt.logWarning(`Event ${eventName} called but not registered with WebViewController.on`);
+            return;
+        }
+
+        ClientEvents[eventName](...args);
+    }
+
+    /**
+     * Forwards an event from the WebView to the server.
+     *
+     * @static
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @memberof InternalFunctions
+     */
+    static handleServerEvent(eventName: string, ...args: any[]) {
+        alt.emitServer(eventName, ...args);
+    }
+
+    /**
+     * Emits a ready callback from the WebView.
+     *
+     * @static
+     * @param {string} pageName
+     * @param {...any[]} args
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static handleReadyEvent(pageName: string, ...args: any[]) {
+        if (!ReadyEvents[pageName]) {
+            alt.logWarning(`Ready Event for ${pageName} called but not registered with WebViewController.onReady`);
+            return;
+        }
+
+        ReadyEvents[pageName](...args);
+    }
+
+    /**
+     * Handles events called from server to be passed straight into the WebView.
+     *
+     * @static
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static async onServer(eventName: string, ...args: any[]) {
+        const view = await WebViewController.get();
+        if (!view) {
+            return;
+        }
+
+        view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
+    }
+}
 
 export class WebViewController {
     /**
@@ -27,6 +99,10 @@ export class WebViewController {
 
         if (!_webview) {
             _webview = new alt.WebView(_defaultURL, false);
+            _webview.on(WebViewEventNames.EMIT_CLIENT, InternalFunctions.handleClientEvent);
+            _webview.on(WebViewEventNames.EMIT_SERVER, InternalFunctions.handleServerEvent);
+            _webview.on(WebViewEventNames.EMIT_READY, InternalFunctions.handleReadyEvent);
+
             _webview.on('view:Ready', () => {
                 _isReady = true;
             });
@@ -103,12 +179,21 @@ export class WebViewController {
      */
     static async get(): Promise<alt.WebView> {
         return new Promise((resolve: Function) => {
+            let attempts = 0;
+
             const interval = alt.setInterval(() => {
+                if (attempts >= 255) {
+                    alt.clearInterval(interval);
+                    return resolve(undefined);
+                }
+
                 if (!_webview) {
+                    attempts += 1;
                     return;
                 }
 
                 if (!_isReady) {
+                    attempts += 1;
                     return;
                 }
 
@@ -243,9 +328,65 @@ export class WebViewController {
      */
     static async closePages(pageNames: Array<string>) {
         const view = await WebViewController.get();
+        if (!view) {
+            return;
+        }
+
         view.emit('view:Call', 'closePages', pageNames);
+    }
+
+    /**
+     * Registers an event to call when a component is loaded.
+     *
+     * @static
+     * @param {string} pageName
+     * @param {(...args: any[]) => void} callback
+     * @memberof WebViewController
+     */
+    static ready(pageName: string, callback: (...args: any[]) => void) {
+        ReadyEvents[pageName] = callback;
+    }
+
+    /**
+     * Registers an event to call when a component is loaded.
+     *
+     * @static
+     * @param {string} pageName
+     * @param {(...args: any[]) => void} callback
+     * @memberof WebViewController
+     */
+    static onInvoke(eventName: string, callback: (...args: any[]) => void) {
+        if (ClientEvents[eventName]) {
+            console.warn(
+                `[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`,
+            );
+
+            console.warn(`Did not register duplicate event.`);
+            return;
+        }
+
+        ClientEvents[eventName] = callback;
+    }
+
+    /**
+     * Emit through the WebViewEvents Helper
+     * Ensures that there is a callback event on the other side.
+     *
+     * @static
+     * @param {string} eventName
+     * @param {...any[]} args
+     * @memberof WebViewController
+     */
+    static async invoke(eventName: string, ...args: any[]) {
+        const view = await WebViewController.get();
+        if (!view) {
+            return;
+        }
+
+        view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
     }
 }
 
 alt.onceServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
 alt.on('disconnect', WebViewController.dispose);
+alt.onServer(WebViewEventNames.ON_SERVER, InternalFunctions.onServer);

@@ -11,6 +11,8 @@ alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, handlePlayAudioPosit
 
 /**
  * Play a sound in the frontend.
+ *
+ * https://altv.stuyk.com/docs/articles/tables/frontend-sounds.html
  * @param {string} audioName - The name of the audio file to play.
  * @param {string} ref - The name of the sound you want to play.
  * @returns None
@@ -19,7 +21,7 @@ export function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);
 }
 
-function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
+export function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
     if (!pos || !soundName) {
         return;
     }
@@ -53,7 +55,7 @@ function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
  * @param {alt.Entity} entity
  * @param {string} soundName
  */
-function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
+export function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
     if (!entity || !soundName) {
         return;
     }
@@ -96,6 +98,6 @@ function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
  * @returns None
  */
 
-function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
+export function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
     AudioView.play3DAudio(soundName, 0, volume);
 }
