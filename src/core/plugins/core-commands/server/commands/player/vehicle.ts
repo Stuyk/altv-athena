@@ -81,9 +81,11 @@ class VehicleCommands {
             index = SeatbeltState.length - 1;
         }
 
-        const currentState = SeatbeltState[index];
+        const currentState = SeatbeltState[index].state;
         if (currentState) {
             Athena.player.emit.sound2D(player, 'seatbelt_on', 0.75);
+        } else {
+            Athena.player.emit.sound2D(player, 'seatbelt_off', 0.75);
         }
 
         currentState
