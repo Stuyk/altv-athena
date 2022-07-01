@@ -18,8 +18,7 @@
 </template>
 
 <script lang="ts">
-// @ts-ignore: Unreachable code error
-import WebViewEvents from '@utility/webViewEvents';
+import WebViewEvents from '../../../../../src-webviews/src/utility/webViewEvents';
 
 // Other Imports
 import { defineComponent, defineAsyncComponent } from 'vue';
