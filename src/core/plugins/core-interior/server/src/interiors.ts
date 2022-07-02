@@ -19,6 +19,8 @@ export async function createDefaultInteriors() {
         objects: [],
         system: INTERIOR_SYSTEM.NONE,
         isUnlocked: true,
+        interiorID: 275201,
+        entitySets: [{name: "casino_manager_default", active: true},{name: "casino_manager_workout", active: false}],
     });
 
     // This is an example house.
