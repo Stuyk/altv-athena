@@ -724,6 +724,23 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
         }
 
+        if (interior.entitySets) {
+
+            if (interior.interiorID) {
+
+                let sets = interior.entitySets;
+
+                for (let i = 0; i < sets.length; i++) {
+
+                    if (sets[i].active) {
+                        alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_ACTIVATE, interior.interiorID, sets[i].name);
+                    } else {
+                        alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_DEACTIVATE, interior.interiorID, sets[i].name);
+                    }
+                }
+            }
+        }
+
         Athena.player.safe.setDimension(player, interior.dimension);
 
         // Added solely for synchronizing interior for player's who
@@ -763,6 +780,18 @@ export class InteriorSystem {
 
         if (interior.ipl) {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_UNLOAD, interior.ipl);
+        }
+
+        if (interior.entitySets) {
+
+            if (interior.interiorID) {
+
+                let sets = interior.entitySets;
+
+                for (let i = 0; i < sets.length; i++) {
+                    alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_DEACTIVATE, interior.interiorID, sets[i].name);
+                }
+            }
         }
 
         const dist = distance(player.pos, interior.inside);

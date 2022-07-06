@@ -20,6 +20,10 @@ export enum SYSTEM_EVENTS {
     DISCORD_FAIL = 'discord:Fail',
     DISCORD_LOGIN = 'discord:Login',
     DISCORD_FINISH_AUTH = 'discord:FinishAuth',
+    // ENTITYSETS
+    ENTITYSET_ACTIVATE = 'entityset:Activate',
+    ENTITYSET_DEACTIVATE = 'entityset:Deactivate',
+    ENTITYSET_IS_ACTIVE = 'entityset:IsActive',
     // Holograms
     HOLOGRAM_APPEND = 'hologram:Append',
     //
@@ -31,7 +35,6 @@ export enum SYSTEM_EVENTS {
     INTERACTION_TEMPORARY = 'interaction:Temporary',
     // ITEM
     ITEM_CONSUME = 'item:Consume',
-
     // IPL
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
