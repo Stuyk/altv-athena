@@ -2,7 +2,7 @@
     <div class="example-wrapper">
         <div class="toptions mr-2">
             <Button color="green" @click="refresh" class="mb-10 mt-2 refresh-button">Refresh</Button>
-            <Button color="red" @click="refresh" class="mb-10 mt-2 ml-2 close-button">Close</Button>
+            <Button color="red" @click="close" class="mb-10 mt-2 ml-2 close-button">Close</Button>
         </div>
         <div class="players">
             <div v-for="(player, index) in players" :key="index" class="player">
@@ -61,6 +61,9 @@ export default defineComponent({
         ]);
     },
     methods: {
+        close() {
+            WebViewEvents.emitClose();
+        },
         loadPlayers(players: ExPlayerInfo[]) {
             this.players = players;
         },

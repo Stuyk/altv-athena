@@ -21,9 +21,11 @@ class ExampleWebView {
         }
 
         AthenaClient.webview.ready(ExampleWebViewEvents.ViewName, ExampleWebView.ready);
-        AthenaClient.webview.open([ExampleWebViewEvents.ViewName]);
+        AthenaClient.webview.open([ExampleWebViewEvents.ViewName], true, ExampleWebView.close);
         AthenaClient.webview.focus();
         AthenaClient.webview.showCursor(true);
+        alt.toggleGameControls(false);
+        alt.Player.local.isMenuOpen = true;
     }
 
     /**
@@ -44,9 +46,10 @@ class ExampleWebView {
      */
     static close() {
         players = undefined;
-        AthenaClient.webview.close([ExampleWebViewEvents.ViewName]);
         AthenaClient.webview.unfocus();
         AthenaClient.webview.showCursor(false);
+        alt.toggleGameControls(true);
+        alt.Player.local.isMenuOpen = false;
     }
 }
 

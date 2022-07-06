@@ -39,6 +39,22 @@ class InternalFunctions {
 
 export default class WebViewEvents {
     /**
+     * Closes the WebView page.
+     *
+     * @static
+     * @return {*}
+     * @memberof WebViewEvents
+     */
+    static emitClose() {
+        if (!('alt' in window)) {
+            console.log(`[CLIENT] -> Tried to Close`);
+            return;
+        }
+
+        alt.emit(WebViewEventNames.CLOSE_PAGE);
+    }
+
+    /**
      * Emits a ready event for a specific page.
      *
      * @static
