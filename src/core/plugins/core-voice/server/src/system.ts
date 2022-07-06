@@ -19,10 +19,7 @@ export class VoiceSystem {
             return;
         }
 
-        // Initialize Main Channel
-        if (Channels.findIndex((x) => x.name === VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME) <= -1) {
-            VoiceSystem.createChannel(VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME, true, 25);
-        }
+        VoiceSystem.createChannel(VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME, true, 25);
 
         // Enable voice channel joining on character select, and add to main channel.
         PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, (player: alt.Player) => {
@@ -50,8 +47,8 @@ export class VoiceSystem {
         maxDistance: number,
     ): IVoiceChannel<alt.Player, alt.VoiceChannel> | null {
         const index = Channels.findIndex((x) => x.name === name);
-        if (index <= -1) {
-            return null;
+        if (index >= 0) {
+            return Channels[index];
         }
 
         const newChannel = {
@@ -154,6 +151,7 @@ export class VoiceSystem {
             return;
         }
 
+        alt.log(`${player.data.name} was added to voice channel ${channelName}`);
         Athena.player.emit.message(player, `[Athena] You have joined the global voice server.`);
         virtualChannel.channel.addPlayer(player);
 
