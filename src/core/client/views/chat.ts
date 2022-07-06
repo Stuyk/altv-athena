@@ -29,34 +29,26 @@ class InternalFunctions implements ViewModel {
         isDisabled = !value;
 
         if (!isDisabled) {
-            InternalFunctions.open();
+            alt.on('keyup', InternalFunctions.keyDown);
             return;
         }
 
         alt.off('keyup', InternalFunctions.keyDown);
-        WebViewController.closePages([PAGE_NAME]);
     }
 
     static async open() {
+        const view = await WebViewController.get();
+
+        alt.on('keyup', InternalFunctions.keyDown);
+
         if (!hasRegistered) {
             WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.setVisible);
+            view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+            view.on(`${PAGE_NAME}:Send`, InternalFunctions.send);
+            view.on(`${PAGE_NAME}:Refresh`, InternalFunctions.update);
+            view.on(`${PAGE_NAME}:Clear`, InternalFunctions.clear);
             hasRegistered = true;
         }
-
-        const view = await WebViewController.get();
-        if (isReady) {
-            view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-            view.off(`${PAGE_NAME}:Send`, InternalFunctions.send);
-            view.off(`${PAGE_NAME}:Refresh`, InternalFunctions.update);
-            view.off(`${PAGE_NAME}:Clear`, InternalFunctions.clear);
-        }
-
-        alt.on('keydown', InternalFunctions.keyDown);
-        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        view.on(`${PAGE_NAME}:Send`, InternalFunctions.send);
-        view.on(`${PAGE_NAME}:Refresh`, InternalFunctions.update);
-        view.on(`${PAGE_NAME}:Clear`, InternalFunctions.clear);
-        WebViewController.openPages([PAGE_NAME]);
 
         alt.setTimeout(() => {
             if (native.isScreenFadedOut()) {

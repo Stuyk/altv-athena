@@ -82,8 +82,8 @@ export default defineComponent({
         };
     },
     methods: {
-        relayClosePage(pageName: string) {
-            this.$emit('close-page', pageName);
+        relayClosePage() {
+            this.$emit('close-page', `${ComponentName}:Close`);
         },
         selectSetting(value) {
             this.setting = value;

@@ -60,6 +60,14 @@ export default {
         firstRun = false;
         return config;
     },
+    /**
+     * Check if the current server instance is running in dev mode.
+     *
+     * @return {boolean}
+     */
+    isDevMode(): boolean {
+        return configCache.USE_DEV_MODE;
+    },
     getViteServer(): string {
         return `http://${DefaultViteServer}:${DefaultVitePort}`;
     },

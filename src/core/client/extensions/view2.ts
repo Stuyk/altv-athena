@@ -3,9 +3,16 @@ import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { WebViewEventNames } from '../../shared/enums/webViewEvents';
+import { OverlayPageType } from '../../shared/interfaces/webview';
 
 const ReadyEvents: { [pageName: string]: (...args: any[]) => void } = {};
 const ClientEvents: { [eventName: string]: (...args: any[]) => void } = {};
+const CloseEvents: { [pageName: string]: () => void } = {};
+
+let Pages: Array<{ name: string }> = [];
+let OverlayPages: Array<OverlayPageType> = [];
+let PersistentPages: Array<string> = [];
+let isUpdating = false;
 
 // Must be a blank index page.
 let _defaultURL = `http://assets/webviews/index.html`;
@@ -13,9 +20,51 @@ let _isReady: boolean = false;
 let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
-let _overlays: Array<{ name: string; callback: (isVisible: boolean) => void }> = [];
 
 class InternalFunctions {
+    /**
+     * Gets all current pages and updates the WebView process.
+     *
+     * @static
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static async updatePages() {
+        const view = await WebViewController.get();
+        if (!view) {
+            return;
+        }
+
+        alt.log(`[Vue] === Updating Pages`);
+
+        // Set Pages
+        view.emit(
+            WebViewEventNames.SET_PAGES,
+            Pages.map((page) => {
+                return { name: page.name };
+            }),
+            'pages',
+        );
+
+        // Set Overlays
+        view.emit(
+            WebViewEventNames.SET_PAGES,
+            OverlayPages.filter((x) => !x.isHidden).map((page) => {
+                return { name: page.name };
+            }),
+            'overlays',
+        );
+
+        // Set Peristent Pages
+        view.emit(
+            WebViewEventNames.SET_PAGES,
+            PersistentPages.map((pageName) => {
+                return { name: pageName };
+            }),
+            'persistent',
+        );
+    }
+
     /**
      * Fowards a WebView event to the specified callback.
      *
@@ -81,6 +130,78 @@ class InternalFunctions {
 
         view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
     }
+
+    /**
+     * Mostly used for the 'Escape' key.
+     *
+     * @static
+     * @param {number} key
+     * @return {*}
+     * @memberof InternalFunctions
+     */
+    static handleKeyDownEvent(key: number) {
+        if (key === 27) {
+            InternalFunctions.closeNonOverlayPages();
+        }
+    }
+
+    /**
+     * Closes all pages that are not overlay pages.
+     *
+     * @static
+     * @memberof InternalFunctions
+     */
+    static async closeNonOverlayPages() {
+        if (isUpdating) {
+            await InternalFunctions.isDoneUpdating();
+        }
+
+        isUpdating = true;
+
+        const oldLength = Pages.length;
+        for (let pageIndex = Pages.length - 1; pageIndex >= 0; pageIndex--) {
+            if (!CloseEvents[Pages[pageIndex].name]) {
+                continue;
+            }
+
+            const pageName = Pages[pageIndex].name;
+            if (typeof CloseEvents[pageName] === 'function') {
+                CloseEvents[pageName]();
+            }
+
+            Pages.splice(pageIndex, 1);
+        }
+
+        if (oldLength === Pages.length) {
+            isUpdating = false;
+            return;
+        }
+
+        await WebViewController.setOverlaysVisible(true, true);
+        const view = await WebViewController.get();
+        if (!view) {
+            isUpdating = false;
+            return;
+        }
+
+        await InternalFunctions.updatePages();
+        alt.nextTick(() => {
+            isUpdating = false;
+        });
+    }
+
+    static async isDoneUpdating(): Promise<void> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (isUpdating) {
+                    return;
+                }
+
+                alt.clearInterval(interval);
+                return resolve();
+            }, 50);
+        });
+    }
 }
 
 export class WebViewController {
@@ -114,31 +235,8 @@ export class WebViewController {
             _webview.on('load', () => {
                 alt.log(`WebView has mounted successfully.`);
             });
-        }
-    }
 
-    /**
-     * Components like Chat, HUD, etc. all need to be displayed at once.
-     * You can register additional Overlays you want to toggle here.
-     *
-     * Requires a callback to toggle on / off your page.
-     * @static
-     * @param {string} pageName
-     * @param {(isVisible: boolean) => void} callback
-     * @memberof WebViewController
-     */
-    static registerOverlay(pageName: string, callback: (isVisible: boolean) => void) {
-        const index = _overlays.findIndex((x) => x.name === pageName);
-        if (index >= 0) {
-            _overlays[index] = {
-                name: pageName,
-                callback,
-            };
-        } else {
-            _overlays.push({
-                name: pageName,
-                callback,
-            });
+            _webview.on(WebViewEventNames.CLOSE_PAGE, InternalFunctions.closeNonOverlayPages);
         }
     }
 
@@ -148,27 +246,85 @@ export class WebViewController {
      * @param {boolean} value
      * @memberof WebViewController
      */
-    static async setOverlaysVisible(value: boolean) {
-        for (let i = 0; i < _overlays.length; i++) {
-            _overlays[i].callback(value);
+    static async setOverlaysVisible(value: boolean, doNotUpdate = false) {
+        for (let i = 0; i < OverlayPages.length; i++) {
+            OverlayPages[i].isHidden = !value;
+
+            if (!OverlayPages[i].callback || typeof OverlayPages[i].callback !== 'function') {
+                continue;
+            }
+
+            if (!value) {
+                continue;
+            }
+
+            OverlayPages[i].callback(value);
         }
+
+        if (doNotUpdate) {
+            return;
+        }
+
+        await InternalFunctions.updatePages();
+    }
+
+    /**
+     * Registers a page that never, ever closes. Ever.
+     *
+     * @static
+     * @param {string} pageName
+     * @return {*}
+     * @memberof WebViewController
+     */
+    static registerPersistentPage(pageName: string) {
+        const index = PersistentPages.findIndex((p) => p === pageName);
+        if (index >= 0) {
+            return;
+        }
+
+        PersistentPages.push(pageName);
+    }
+
+    /**
+     * Register a Page Overlay such as HUD elements.
+     *
+     * @static
+     * @param {string} pageName
+     * @param {(isVisible: boolean) => void} callback
+     * @return {*}
+     * @memberof WebViewController
+     */
+    static registerOverlay(pageName: string, callback: (isVisible: boolean) => void = undefined) {
+        const index = OverlayPages.findIndex((p) => p.name === pageName);
+        if (index >= 0) {
+            OverlayPages[index].callback = callback;
+            return;
+        }
+
+        OverlayPages.push({ name: pageName, callback });
+        InternalFunctions.updatePages();
     }
 
     /**
      * Trigger this to hide/show a specific overlay
+     *
      * @static
      * @param {string} pageName
      * @param {boolean} state
      * @memberof WebViewController
      */
     static setOverlayVisible(pageName: string, state: boolean) {
-        const index = _overlays.findIndex((page) => page.name === pageName);
-
-        if (index === -1) {
+        const pageIndex = OverlayPages.findIndex((page) => page.name === pageName);
+        if (pageIndex === -1) {
             return;
         }
 
-        _overlays[index].callback(state);
+        OverlayPages[pageIndex].isHidden = !state;
+        if (typeof OverlayPages[pageIndex].callback !== 'function') {
+            return;
+        }
+
+        OverlayPages[pageIndex].callback(state);
     }
 
     /**
@@ -209,7 +365,6 @@ export class WebViewController {
      * @memberof WebViewController
      */
     static dispose() {
-        alt.log('SHOULD BE KILLING OLD WEBVIEW');
         _webview.destroy();
     }
 
@@ -265,15 +420,66 @@ export class WebViewController {
     }
 
     /**
-     * Opens a page in the internal WebView.
-     * Pages are basically pre-creates pages.
+     * Used to open a page or pages.
+     * Use a single page if you have closing callbacks.
+     *
      * @static
-     * @param {string} pageName
+     * @param {(Array<string> | string)} pageOrPages An array of pages, or a single page name. Case sensitive.
+     * @param {() => void} [closeOnEscapeCallback=undefined] An event to call when the page is closed.
+     * @return {*}
      * @memberof WebViewController
      */
-    static async openPages(pageNames: Array<string>) {
+    static async openPages(
+        pageOrPages: Array<string> | string,
+        hideOverlays: boolean = true,
+        closeOnEscapeCallback: () => void = undefined,
+    ) {
+        if (isUpdating) {
+            await InternalFunctions.isDoneUpdating();
+        }
+
+        isUpdating = true;
+
+        if (typeof pageOrPages === 'string' && !Array.isArray(pageOrPages)) {
+            pageOrPages = [pageOrPages];
+        }
+
+        if (hideOverlays) {
+            WebViewController.setOverlaysVisible(false, true);
+        }
+
+        const pagesToAppend: Array<{ name: string }> = [];
+        for (const pageName of pageOrPages) {
+            const pageIndex = Pages.findIndex((x) => x.name === pageName);
+
+            // Already opened, not opening twice.
+            if (pageIndex <= -1) {
+                pagesToAppend.push({
+                    name: pageName,
+                });
+            }
+
+            if (closeOnEscapeCallback) {
+                CloseEvents[pageName] = closeOnEscapeCallback;
+            }
+        }
+
+        if (pagesToAppend.length <= 0) {
+            isUpdating = false;
+            return;
+        }
+
+        Pages = pagesToAppend.concat(Pages);
         const view = await WebViewController.get();
-        view.emit('view:Call', 'setPages', pageNames);
+        if (!view) {
+            isUpdating = false;
+            return;
+        }
+
+        await InternalFunctions.updatePages();
+        alt.nextTick(() => {
+            isUpdating = false;
+        });
     }
 
     /**
@@ -320,19 +526,90 @@ export class WebViewController {
     }
 
     /**
+     * Closes an overlay page or pages.
+     *
+     * @static
+     * @param {Array<string>} pageNames
+     * @return {*}
+     * @memberof WebViewController
+     */
+    static async closeOverlays(pageNames: Array<string>) {
+        if (isUpdating) {
+            await InternalFunctions.isDoneUpdating();
+        }
+
+        let didModify = false;
+        for (const pageName of pageNames) {
+            for (let pageIndex = OverlayPages.length - 1; pageIndex >= 0; pageIndex--) {
+                if (OverlayPages[pageIndex].name !== pageName) {
+                    continue;
+                }
+
+                didModify = true;
+                OverlayPages.splice(pageIndex, 1);
+            }
+        }
+
+        if (!didModify) {
+            isUpdating = false;
+            return;
+        }
+
+        const view = await WebViewController.get();
+        if (!view) {
+            isUpdating = false;
+            return;
+        }
+
+        await InternalFunctions.updatePages();
+        alt.nextTick(() => {
+            isUpdating = false;
+        });
+    }
+
+    /**
      * Close a group of pages that may or may not be open.
-     * Doesn't really care.
+     *
      * @static
      * @param {Array<string>} pageNames
      * @memberof WebViewController
      */
-    static async closePages(pageNames: Array<string>) {
-        const view = await WebViewController.get();
-        if (!view) {
+    static async closePages(pageNames: Array<string>, showOverlays = false) {
+        if (isUpdating) {
+            await InternalFunctions.isDoneUpdating();
+        }
+
+        let didModify = false;
+        for (const pageName of pageNames) {
+            for (let pageIndex = Pages.length - 1; pageIndex >= 0; pageIndex--) {
+                if (Pages[pageIndex].name !== pageName) {
+                    continue;
+                }
+
+                didModify = true;
+                Pages.splice(pageIndex, 1);
+            }
+        }
+
+        if (!didModify) {
+            isUpdating = false;
             return;
         }
 
-        view.emit('view:Call', 'closePages', pageNames);
+        if (showOverlays) {
+            await WebViewController.setOverlaysVisible(true, true);
+        }
+
+        const view = await WebViewController.get();
+        if (!view) {
+            isUpdating = false;
+            return;
+        }
+
+        await InternalFunctions.updatePages();
+        alt.nextTick(() => {
+            isUpdating = false;
+        });
     }
 
     /**
@@ -387,6 +664,7 @@ export class WebViewController {
     }
 }
 
-alt.onceServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
+alt.on('keyup', InternalFunctions.handleKeyDownEvent);
 alt.on('disconnect', WebViewController.dispose);
+alt.onceServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
 alt.onServer(WebViewEventNames.ON_SERVER, InternalFunctions.onServer);

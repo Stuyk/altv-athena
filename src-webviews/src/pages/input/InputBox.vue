@@ -1,7 +1,7 @@
 <template>
     <Frame minWidth="40vw" maxWidth="40vw">
         <template v-slot:toolbar>
-            <Toolbar @close-page="relayClosePage" pageName="InputBox">
+            <Toolbar pageName="InputBox">
                 {{ title }}
             </Toolbar>
         </template>
@@ -83,6 +83,7 @@ import Input from '../../components/Input.vue';
 import Choice from '../../components/Choice.vue';
 import TestData from './utility/testData';
 import Template from '../template/Template.vue';
+import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
 
 export const ComponentName = 'InputBox';
 export default defineComponent({
@@ -160,16 +161,9 @@ export default defineComponent({
                 });
             }
         },
-        handlePress(e) {
-            if (e.keyCode !== 27) {
-                return;
-            }
-
-            this.exit();
-        },
         handleExit() {
             if ('alt' in window) {
-                alt.emit(`${ComponentName}:Close`);
+                alt.emit(WebViewEventNames.CLOSE_PAGE);
             }
         },
         submit() {

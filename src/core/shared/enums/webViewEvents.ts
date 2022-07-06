@@ -4,4 +4,6 @@ export const WebViewEventNames = {
     EMIT_SERVER: 'athena:view:emit:server',
     EMIT_CLIENT: 'athena:view:emit:client',
     EMIT_READY: 'athena:view:emit:page:ready',
+    SET_PAGES: 'athena:view:set:pages',
+    CLOSE_PAGE: 'athena:Close:Page',
 };

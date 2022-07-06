@@ -38,14 +38,13 @@ class InternalFunctions implements ViewModel {
     static async execute(uid: string) {
         const index = _options.findIndex((x) => x.uid === uid);
         if (index <= -1) {
-            InternalFunctions.close();
+            InternalFunctions.close(true);
             return;
         }
 
         const option = _options[index];
         if (!option.doNotClose) {
-            console.log(option.uid);
-            await InternalFunctions.close();
+            await InternalFunctions.close(true);
         }
 
         if (typeof option.callback === 'function') {
@@ -73,7 +72,7 @@ class InternalFunctions implements ViewModel {
         }
     }
 
-    static async close() {
+    static async close(closePage = false) {
         if (_interval) {
             alt.clearInterval(_interval);
             _interval = null;
@@ -81,10 +80,11 @@ class InternalFunctions implements ViewModel {
 
         const view = await WebViewController.get();
         view.off(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
-        view.off(VIEW_EVENTS_WHEEL_MENU.CLOSE, InternalFunctions.close);
         view.off(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
-        WebViewController.closePages([PAGE_NAME]);
+        if (closePage) {
+            WebViewController.closePages([PAGE_NAME], true);
+        }
 
         WebViewController.unfocus();
         WebViewController.showCursor(false);
@@ -129,7 +129,6 @@ export class WheelMenu {
         // the functions in our WebView.
         const view = await WebViewController.get();
         view.on(VIEW_EVENTS_WHEEL_MENU.READY, InternalFunctions.ready);
-        view.on(VIEW_EVENTS_WHEEL_MENU.CLOSE, InternalFunctions.close);
         view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
         if (setMouseToCenter) {
@@ -138,7 +137,7 @@ export class WheelMenu {
         }
 
         // This is where we open the page and show the cursor.
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 

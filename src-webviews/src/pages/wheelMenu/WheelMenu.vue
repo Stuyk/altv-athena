@@ -51,6 +51,7 @@
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue';
 import { VIEW_EVENTS_WHEEL_MENU } from '../../../../src/core/shared/enums/views';
+import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
 import { IWheelOption } from '../../../../src/core/shared/interfaces/wheelMenu';
 import ResolvePath from '../../utility/pathResolver';
 
@@ -163,7 +164,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(VIEW_EVENTS_WHEEL_MENU.CLOSE);
+            alt.emit(WebViewEventNames.CLOSE_PAGE);
         },
         handleScroll(e) {
             const totalPages = Math.floor(this.options.length / this.maxOptions);
@@ -190,11 +191,6 @@ export default defineComponent({
             }
         },
         handleKeyUp(e) {
-            if (e.keyCode === 27) {
-                this.close();
-                return;
-            }
-
             if (e.keyCode < 49 || e.keyCode > 56) {
                 return;
             }

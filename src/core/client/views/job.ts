@@ -34,11 +34,10 @@ class InternalFunctions implements ViewModel {
         // the functions in our WebView.
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:Select`, InternalFunctions.accept);
 
         // This is where we open the page and show the cursor.
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -52,24 +51,24 @@ class InternalFunctions implements ViewModel {
     static accept() {
         alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT);
         alt.toggleGameControls(true);
-        InternalFunctions.close(true);
+        InternalFunctions.close(true, true);
     }
 
-    static async close(doNotCancel = false) {
+    static async close(doNotCancel = false, shouldClosePage = false) {
         alt.toggleGameControls(true);
-        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.off(`${PAGE_NAME}:Select`, InternalFunctions.accept);
-
-        WebViewController.closePages([PAGE_NAME]);
 
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        if (shouldClosePage) {
+            WebViewController.closePages([PAGE_NAME], true);
+        }
 
         if (doNotCancel) {
             return;

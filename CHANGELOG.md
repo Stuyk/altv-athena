@@ -9,4 +9,10 @@ Add a 'sound' api to Athena.systems
 Moved final character create function to core, and added injection.
 Character create injection document
 Disallow special characters in folder path. Very specific error.
+Fixed Voice Plugin
+Added events for WebView to Server and Server to WebView communication
+Moved pages management to client-side for views
+Regular pages can have an auto-close feature with `escape` key press.
+Updated pages to reflect changes above
+
 ```

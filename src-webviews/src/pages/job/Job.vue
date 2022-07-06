@@ -1,7 +1,7 @@
 <template>
-    <Frame minWidth="40vw" maxWidth="40vw" class="elevation-6">
+    <Frame minWidth="40vw" maxWidth="40vw" class="elevation-6" v-if="isReady">
         <template v-slot:toolbar>
-            <Toolbar @close-page="close" pageName="Job">{{ header }}</Toolbar>
+            <Toolbar pageName="Job">{{ header }}</Toolbar>
         </template>
         <template v-slot:content>
             <div class="img-frame">
@@ -27,6 +27,7 @@ import Button from '../../components/Button.vue';
 import Toolbar from '../../components/Toolbar.vue';
 import Frame from '../../components/Frame.vue';
 import ResolvePath from '../../utility/pathResolver';
+import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
 
 export const ComponentName = 'Job';
 export default defineComponent({
@@ -42,6 +43,7 @@ export default defineComponent({
     },
     data() {
         return {
+            isReady: false,
             image: '../../assets/images/job.jpg',
             header: 'Rob the Bank',
             summary: `This is a basic summary example.
@@ -55,8 +57,6 @@ export default defineComponent({
         };
     },
     mounted() {
-        document.addEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetLocale`, this.setLocales);
             alt.on(`${ComponentName}:Data`, this.setData);
@@ -64,8 +64,6 @@ export default defineComponent({
         }
     },
     unmounted() {
-        document.removeEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.off(`${ComponentName}:Data`, this.setData);
             alt.off(`${ComponentName}:SetLocale`, this.setLocales);
@@ -81,17 +79,11 @@ export default defineComponent({
         setLocales(localeObject) {
             this.locales = localeObject;
         },
-        handlePress(e) {
-            if (e.keyCode !== 27) {
-                return;
-            }
-
-            this.close();
-        },
         setData(jobData) {
             this.image = jobData.image;
             this.header = jobData.header;
             this.summary = jobData.summary;
+            this.isReady = true;
         },
         select() {
             if (!('alt' in window)) {
@@ -105,7 +97,7 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Close`);
+            alt.emit(WebViewEventNames.CLOSE_PAGE);
         },
     },
 });
