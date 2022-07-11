@@ -14,11 +14,15 @@ export enum PlayerInjectionNames {
     EQUIPMENT_UPDATE_START = 'player-equipment-update-start',
     EQUIPMENT_AFTER_DEFAULTS = 'player-equipment-after-defaults',
     EQUIPMENT_UPDATE_END = 'player-equipment-update-end',
+    WEAPON_EQUIP = `player-weapon-equip-start`,
+    WEAPON_UNEQUIP = `player-weapon-equip-end`,
 }
 
 type characterCreateTypes = `${PlayerInjectionNames.AFTER_CHARACTER_CREATE}`;
 
 type savePlayerTypes = `${PlayerInjectionNames.PLAYER_SAVE_TICK}`;
+
+type weaponChangeTypes = `${PlayerInjectionNames.WEAPON_EQUIP}` | `${PlayerInjectionNames.WEAPON_UNEQUIP}`;
 
 type setEquipmentTypes =
     | `${PlayerInjectionNames.EQUIPMENT_UPDATE_START}`
@@ -32,6 +36,7 @@ type characterSelectTypes =
 export type EquipmentSyncCallback = (player: alt.Player, items: ClothingComponents, isMale: boolean) => void;
 export type PlayerSaveTickCallback = (player: alt.Player) => { [key: string]: any };
 export type PlayerCallback = (player: alt.Player) => void;
+export type WeaponChangeCallback = (player: alt.Player, slot: number, item: Item) => void;
 export type CharacterCreateCallback = (player: alt.Player, character: Character) => Character;
 
 /**
@@ -62,9 +67,14 @@ function characterCreate(type: characterCreateTypes, callback: CharacterCreateCa
     Injections.add(type, callback);
 }
 
+function playerWeaponChange(type: weaponChangeTypes, callback: WeaponChangeCallback) {
+    Injections.add(type, callback);
+}
+
 export const PlayerInjections = {
     characterCreate,
     characterSelect,
+    playerWeaponChange,
     saveTick,
     updateEquipment,
 };

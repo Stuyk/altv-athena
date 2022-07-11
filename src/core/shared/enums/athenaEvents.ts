@@ -28,6 +28,8 @@ export enum ATHENA_EVENTS_PLAYER {
     SELECTED_CHARACTER = 'athena:SelectedCharacter',
     SPAWNED = 'athena:PlayerSpawned',
     TOGGLED_INTERIOR_LOCK = 'athena:ToggleLock',
+    EQUIPPED_WEAPON = 'athena:equipped:weapon',
+    UNEQUIPPED_WEAPON = 'athena:unequipped:weapon',
 }
 
 export enum ATHENA_EVENTS_PLAYER_CLIENT {

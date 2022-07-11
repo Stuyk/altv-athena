@@ -14,5 +14,9 @@ Added events for WebView to Server and Server to WebView communication
 Moved pages management to client-side for views
 Regular pages can have an auto-close feature with `escape` key press.
 Updated pages to reflect changes above
-
+Added Weapon Change Injections
+Added Weapon Swap Player Event
+Added Athena.events
+Fix Weapon Switch Bug
+Set All Weapon Ammo to 0 on Weapon Switch
 ```
