@@ -96,6 +96,15 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
+    @command(['setVehicleLivery', 'svl'], '/svl [number] - Sets vehicle livery', PERMISSIONS.ADMIN)
+    private static setVehicleLiveryCommand(player: alt.Player, livery: number): void {
+        const vehicle = player.vehicle;
+        
+        if (!vehicle?.valid) return;
+
+        Athena.vehicle.funcs.setLivery(vehicle, livery);
+    }
+
     @command('sessionvehicle', '/sessionvehicle', PERMISSIONS.ADMIN)
     private static createSessionVehicle(player: alt.Player, model: string): void {
         let vehicle: alt.Vehicle;
