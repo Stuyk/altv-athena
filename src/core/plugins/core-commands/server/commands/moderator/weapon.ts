@@ -59,6 +59,11 @@ class WeaponCommands {
         Athena.player.emit.message(player, `Added weapon: ${weapon.name}`);
     }
 
+    @command('ammo', '/ammo - Add ammo to currently equipped weapon.', PERMISSIONS.ADMIN)
+    private static handleAddAmmo(player: alt.Player) {
+        player.giveWeapon(player.currentWeapon, 9999, true);
+    }
+
     @command(
         'removeallweapons',
         LocaleController.get(LOCALE_KEYS.COMMAND_REMOVE_ALL_WEAPONS, '/removeallweapons'),
