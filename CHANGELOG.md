@@ -19,4 +19,5 @@ Added Weapon Swap Player Event
 Added Athena.events
 Fix Weapon Switch Bug
 Set All Weapon Ammo to 0 on Weapon Switch
+Fix Faction Kick Member Kicking Random User
 ```

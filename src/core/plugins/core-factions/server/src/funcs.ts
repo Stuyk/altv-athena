@@ -374,7 +374,7 @@ export class FactionFuncs {
     static async kickMember(faction: Faction, characterID: string): Promise<boolean> {
         const character = await Database.fetchData<Character>(`_id`, characterID, Collections.Characters);
         if (character) {
-            await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Factions);
+            await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Characters);
         }
 
         const target = alt.Player.all.find(
