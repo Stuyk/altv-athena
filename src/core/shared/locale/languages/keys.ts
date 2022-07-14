@@ -151,6 +151,7 @@ export const LOCALE_KEYS = {
     VEHICLE_STORAGE_VIEW_NAME: 'vehicle-storage-view-name',
     VEHICLE_KEY_NAME: 'vehicle-key-name',
     VEHICLE_KEY_DESCRIPTION: 'vehicle-key-description',
+    VEHICLE_MODEL_INVALID: 'vehicle-model-invalid',
     // Faction
     FACTION_PLAYER_IS_ALREADY_IN_FACTION: 'faction-player-is-already-in-faction',
     FACTION_CANNOT_CHANGE_OWNERSHIP: 'faction-cannot-change-ownership',
