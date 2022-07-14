@@ -340,6 +340,10 @@ export default class VehicleFuncs {
         vehicle.isTemporary = true;
         vehicle.modelName = model;
         vehicle.overrideTemporaryDeletion = true;
+        
+        if (player.dimension > 0) {
+            vehicle.dimension = player.dimension;
+        }
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCKSYMBOL, DEFAULT_CONFIG.VEHICLE_DISPLAY_LOCK_STATUS);
@@ -378,6 +382,10 @@ export default class VehicleFuncs {
 
         if (doNotDelete) {
             vehicle.overrideTemporaryDeletion = true;
+        }
+            
+        if (player.dimension > 0) {
+            vehicle.dimension = player.dimension;
         }
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.OWNER, vehicle.player_id);
