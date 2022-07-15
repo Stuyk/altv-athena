@@ -2,9 +2,11 @@ import alt from 'alt-server';
 import { Athena } from '../../../../../server/api/athena';
 import { command } from '../../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../../shared/locale/locale';
 
 class VehicleCommands {
-    @command('refillVehicle', '/refillVehicle - Refills fuel of an vehicle by administrative power.', PERMISSIONS.ADMIN)
+    @command('refillVehicle', LocaleController.get(LOCALE_KEYS.COMMAND_REFILL_VEHICLE, '/refillVehicle'), PERMISSIONS.ADMIN)
     private static refillVehicleCommand(player: alt.Player) {
         if (!player.vehicle || !player.vehicle.data.fuel) {
             return;
@@ -12,10 +14,10 @@ class VehicleCommands {
 
         player.vehicle.data.fuel = 100;
         Athena.vehicle.funcs.save(player.vehicle, player.vehicle.data);
-        Athena.player.emit.notification(player, `Vehicle refilled.`);
+        Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REFILLED));
     }
 
-    @command('repairVehicle', '/repairVehicle - Repairs an vehicle by administrative power.', PERMISSIONS.ADMIN)
+    @command('repairVehicle', LocaleController.get(LOCALE_KEYS.COMMAND_REPAIR_VEHICLE, '/repairVehicle'), PERMISSIONS.ADMIN)
     private static repairVehicleCommand(player: alt.Player) {
         if (!player.vehicle) {
             return;
@@ -27,10 +29,10 @@ class VehicleCommands {
         player.vehicle.data.bodyHealth = 1000;
         player.vehicle.data.engineHealth = 1000;
         Athena.vehicle.funcs.save(player.vehicle, player.vehicle.data);
-        Athena.player.emit.notification(player, `Vehicle successfully repaired.`);
+        Athena.player.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_REPAIRED));
     }
 
-    @command('tempvehicle', '/tempvehicle', PERMISSIONS.ADMIN)
+    @command('tempvehicle', LocaleController.get(LOCALE_KEYS.COMMAND_TEMP_VEHICLE, '/tempvehicle'), PERMISSIONS.ADMIN)
     private static createTemporaryVehicleCommand(player: alt.Player, model: string): void {
         if (!model) {
             Athena.player.emit.message(player, Athena.controllers.chat.getDescription('tempvehicle'));
@@ -38,7 +40,7 @@ class VehicleCommands {
         }
 
         if (player.data.isDead) {
-            Athena.player.emit.message(player, `Cannot do this while dead...`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
             return;
         }
 
@@ -47,11 +49,11 @@ class VehicleCommands {
         try {
             Athena.vehicle.funcs.tempVehicle(player, model, fwd, new alt.Vector3(0, 0, 0));
         } catch (err) {
-            Athena.player.emit.message(player, 'Invalid Vehicle Model');
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_MODEL_INVALID));
         }
     }
 
-    @command('addvehicle', '/addvehicle', PERMISSIONS.ADMIN)
+    @command('addvehicle', LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE, '/addvehicle'), PERMISSIONS.ADMIN)
     private static addVehicleToPlayerCommand(player: alt.Player, model: string): void {
         if (!model) {
             Athena.player.emit.message(player, Athena.controllers.chat.getDescription('addvehicle'));
@@ -59,7 +61,7 @@ class VehicleCommands {
         }
 
         if (player.data.isDead) {
-            Athena.player.emit.message(player, `Cannot do this while dead...`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
             return;
         }
 
@@ -75,12 +77,12 @@ class VehicleCommands {
             veh.destroy();
         } catch (err) {
             console.log(err);
-            Athena.player.emit.message(player, 'Invalid Vehicle Model');
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_MODEL_INVALID));
             return;
         }
     }
 
-    @command(['setVehicleHandling', 'sh'], 'Sets vehicle handling value', PERMISSIONS.ADMIN)
+    @command(['setVehicleHandling', 'sh'], LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEHICLE_HANDLING, '/sh'), PERMISSIONS.ADMIN)
     private static setVehicleHandlingCommand(player: alt.Player, key: string, value: string): void {
         const vehicle = player.vehicle;
         if (!vehicle?.valid) return;
@@ -96,7 +98,7 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
-    @command(['setVehicleLivery', 'svl'], '/svl [number] - Sets vehicle livery', PERMISSIONS.ADMIN)
+    @command(['setVehicleLivery', 'svl'], LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEHICLE_LIVERY, '/svl'), PERMISSIONS.ADMIN)
     private static setVehicleLiveryCommand(player: alt.Player, livery: number): void {
         const vehicle = player.vehicle;
         
@@ -112,21 +114,21 @@ class VehicleCommands {
         try {
             vehicle = Athena.vehicle.funcs.sessionVehicle(player, model, player.pos, new alt.Vector3(0, 0, 0));
         } catch (err) {
-            Athena.player.emit.message(player, `Invalid vehicle model`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_MODEL_INVALID));
         }
 
         if (!vehicle) {
             return;
         }
 
-        Athena.player.emit.message(player, `Created Vehicle`);
+        Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_CREATED));
 
         alt.nextTick(() => {
             player.setIntoVehicle(vehicle, 1);
         });
     }
 
-    @command(['toggleneonlights', 'tnl'], 'Toggles Vehicle neon lights', PERMISSIONS.ADMIN)
+    @command(['toggleneonlights', 'tnl'], LocaleController.get(LOCALE_KEYS.COMMAND_TOGGLE_VEH_NEON_LIGHTS, '/tnl'), PERMISSIONS.ADMIN)
     private static toggleVehicleNeonLightsCommand(player: alt.Player): void {
         const vehicle = player.vehicle;
 
@@ -138,7 +140,7 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
-    @command(['setneonlights', 'snl'], 'Sets Vehicle neon lights', PERMISSIONS.ADMIN)
+    @command(['setneonlights', 'snl'], LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEH_NEON_LIGHTS, '/snl'), PERMISSIONS.ADMIN)
     private static setVehicleNeonLightsCommand(
         player: alt.Player,
         left: string,
@@ -159,7 +161,7 @@ class VehicleCommands {
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
-    @command(['fullTuneVehicle', 'ft'], 'Full tunes a vehicle', PERMISSIONS.ADMIN)
+    @command(['fullTuneVehicle', 'ft'], LocaleController.get(LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE, '/ft'), PERMISSIONS.ADMIN)
     private static fullTuneVehicleCommand(player: alt.Player): void {
         const vehicle = player.vehicle;
         if (!vehicle?.valid || !vehicle?.data) return;
@@ -170,7 +172,7 @@ class VehicleCommands {
         if (vehicle.modKit == 0 && vehicle.modKitsCount > 0) Athena.vehicle.funcs.setModKit(vehicle, 1);
 
         if (vehicle.modKit == 0) {
-            Athena.player.emit.message(player, "Vehicle doesn't have a mod kit.");
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT));
             return;
         }
 
