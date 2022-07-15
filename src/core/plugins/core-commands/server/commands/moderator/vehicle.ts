@@ -186,4 +186,14 @@ class VehicleCommands {
 
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
+
+    @command(['addVehiclekey'], LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE_KEY, '/addVehiclekey'), PERMISSIONS.ADMIN)
+    private static addVehicleKeyCommand(player: alt.Player): void {
+        const vehicle = player.vehicle;
+
+        if (!vehicle?.valid) return;
+        if (!vehicle?.data) return;
+
+        Athena.vehicle.funcs.createKey(player, vehicle);
+    }
 }
