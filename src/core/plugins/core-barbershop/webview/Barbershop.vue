@@ -69,6 +69,7 @@ import EyeComponentVue from './components/EyeComponent.vue';
 import BeardComponentVue from './components/BeardComponent.vue';
 
 import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
+import WebViewEvents from '../../../../../src-webviews/src/utility/webViewEvents';
 
 export const ComponentName = 'Barbershop';
 export default defineComponent({
@@ -224,9 +225,7 @@ export default defineComponent({
                 beardOpacity: this.beardOpacity,
             };
 
-            if ('alt' in window) {
-                alt.emit(BarbershopEvents.WebViewEvents.UPDATE, updateInformation);
-            }
+            WebViewEvents.emitServer(BarbershopEvents.WebViewEvents.UPDATE, updateInformation);
         },
         closePage() {
             //
@@ -241,8 +240,8 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
-            alt.on(BarbershopEvents.WebViewEvents.SET_DATA, this.setData);
-            alt.emit(BarbershopEvents.WebViewEvents.READY);
+            WebViewEvents.on(BarbershopEvents.WebViewEvents.SET_DATA, this.setData);
+            WebViewEvents.emitReady(ComponentName);
         } else {
             this.setData({
                 sex: 1,

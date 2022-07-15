@@ -182,8 +182,6 @@ export class BarbershopView {
             makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
 
-        console.log(barberData);
-
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);
     }
 

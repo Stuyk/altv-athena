@@ -4,6 +4,7 @@ import { Character } from '../../../shared/interfaces/character';
 import { Collections } from '../../interface/iDatabaseCollections';
 import { Injections } from '../../systems/injections';
 import { PlayerInjectionNames, PlayerSaveTickCallback } from '../../systems/injections/player';
+import { StateManager } from '../../systems/stateManager';
 
 /**
  * Save a specific field for the current character of this player.
@@ -40,11 +41,6 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
  * @memberof SavePrototype
  */
 async function onTick(player: alt.Player): Promise<void> {
-    // Update Server Data First
-    player.data.pos = player.pos;
-    player.data.health = player.health;
-    player.data.armour = player.armour;
-
     let injections = { pos: player.data.pos, health: player.data.health, armour: player.data.armour };
 
     const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
@@ -57,7 +53,7 @@ async function onTick(player: alt.Player): Promise<void> {
         }
     }
 
-    partial(player, injections);
+    StateManager.setBulk(player, injections);
 }
 
 export default {

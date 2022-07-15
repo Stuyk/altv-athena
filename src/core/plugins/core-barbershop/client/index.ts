@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { AthenaClient } from '../../../client/api/athena';
 import { WebViewController } from '../../../client/extensions/view2';
 import ViewModel from '../../../client/models/viewModel';
 import { isAnyMenuOpen } from '../../../client/utility/menus';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
 
@@ -23,15 +23,8 @@ class BarbershopView implements ViewModel {
         currentData = _currentData;
         isSelfService = _isSelfService;
 
-        // Must always be called first if you want to hide HUD.
-        await WebViewController.setOverlaysVisible(false);
-
-        const view = await WebViewController.get();
-        view.on(BarbershopEvents.WebViewEvents.READY, BarbershopView.ready);
-        view.on(BarbershopEvents.WebViewEvents.CLOSE, BarbershopView.close);
-        view.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
-
-        WebViewController.openPages([PAGE_NAME]);
+        AthenaClient.webview.ready(PAGE_NAME, BarbershopView.ready);
+        AthenaClient.webview.open([PAGE_NAME], true, BarbershopView.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -43,17 +36,12 @@ class BarbershopView implements ViewModel {
         BarbershopView.destroyCamera();
 
         alt.toggleGameControls(true);
-        WebViewController.setOverlaysVisible(true);
-
-        const view = await WebViewController.get();
-        view.off(BarbershopEvents.WebViewEvents.READY, BarbershopView.ready);
-        view.off(BarbershopEvents.WebViewEvents.CLOSE, BarbershopView.close);
-
-        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        alt.emitServer(BarbershopEvents.ServerClientEvents.CLOSE);
     }
 
     static setupCamera() {
@@ -91,6 +79,7 @@ class BarbershopView implements ViewModel {
     static destroyCamera() {
         native.destroyAllCams(true);
         native.destroyCam(camera, true);
+        native.renderScriptCams(false, false, 0, false, false, 0);
         camera = undefined;
     }
 
@@ -100,7 +89,7 @@ class BarbershopView implements ViewModel {
             return;
         }
 
-        view.emit(BarbershopEvents.WebViewEvents.SET_DATA, currentData);
+        AthenaClient.webview.emit(BarbershopEvents.WebViewEvents.SET_DATA, currentData);
         BarbershopView.setupCamera();
     }
 

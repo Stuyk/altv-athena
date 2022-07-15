@@ -206,6 +206,10 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async keyUp(key: number) {
+        if (alt.isConsoleOpen()) {
+            return;
+        }
+
         // Default: I
         if (key === KEY_BINDS.INVENTORY && !isOpen) {
             InternalFunctions.open();

@@ -3,6 +3,7 @@ import { IVector3 } from 'alt-shared';
 import { Athena } from '../../../../server/api/athena';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
 import { Identifier } from '../../../../server/systems/identifier';
+import { StateManager } from '../../../../server/systems/stateManager';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { distance2d } from '../../../../shared/utility/vector';
 import { DEATH_EVENTS } from '../../shared/events';
@@ -107,8 +108,7 @@ export class DeathSystem {
             alt.log(`(${id}) ${player.data.name} has died.`);
 
             try {
-                player.data.isDead = true;
-                Athena.player.save.field(player, 'isDead', true);
+                StateManager.set(player, 'isDead', true);
                 PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
             } catch (err) {
                 alt.logError(err);

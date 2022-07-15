@@ -14,6 +14,7 @@ import '../systems/jobTrigger';
 import '../systems/login';
 import '../systems/plugins';
 import '../systems/rules';
+import '../systems/stateManager';
 import '../systems/storage';
 import '../systems/streamer';
 import '../systems/tick';
