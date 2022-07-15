@@ -373,16 +373,15 @@ export class FactionFuncs {
      */
     static async kickMember(faction: Faction, characterID: string): Promise<boolean> {
         const character = await Database.fetchData<Character>(`_id`, characterID, Collections.Characters);
+
         if (character) {
             await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Characters);
         }
 
-        const target = alt.Player.all.find(
-            (p) => p.data && p.data.faction === faction._id.toString() && p.data._id.toString() === characterID,
-        );
-
-        if (target) {
+        const target = alt.Player.all.find((p) => p.data && p.data._id.toString() === characterID);
+        if (target && target.valid) {
             target.data.faction = null;
+            alt.emitClient(target, FACTION_EVENTS.PROTOCOL.REFRESH, null);
         }
 
         delete faction.members[characterID];
