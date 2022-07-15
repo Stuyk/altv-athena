@@ -107,7 +107,7 @@ class VehicleCommands {
         Athena.vehicle.funcs.setLivery(vehicle, livery);
     }
 
-    @command('sessionvehicle', '/sessionvehicle', PERMISSIONS.ADMIN)
+    @command('sessionvehicle', LocaleController.get(LOCALE_KEYS.COMMAND_SESSION_VEHICLE, '/sessionvehicle'), PERMISSIONS.ADMIN)
     private static createSessionVehicle(player: alt.Player, model: string): void {
         let vehicle: alt.Vehicle;
 
