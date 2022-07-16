@@ -167,6 +167,8 @@ export const LOCALE_KEYS = {
     VEHICLE_REFILLED: 'vehicle-refilled',
     VEHICLE_REPAIRED: 'vehicle-repaired',
     VEHICLE_HAS_NO_MOD_KIT: 'vehicle-has-no-mod-kit',
+    VEHICLE_NOT_OWN_BY_YOU: 'vehicle-not-own-by-you',
+    VEHICLE_KEY_GIVEN_TO: 'vehicle-key-given-to',
     // Faction
     FACTION_PLAYER_IS_ALREADY_IN_FACTION: 'faction-player-is-already-in-faction',
     FACTION_CANNOT_CHANGE_OWNERSHIP: 'faction-cannot-change-ownership',
