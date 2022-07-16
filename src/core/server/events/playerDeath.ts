@@ -24,7 +24,6 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
 
             try {
                 StateManager.set(player, 'isDead', true);
-                Athena.player.save.field(player, 'isDead', true);
                 PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
             } catch (err) {
                 alt.logError(err);

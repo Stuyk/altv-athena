@@ -13,7 +13,7 @@ class InteriorCommands {
         if (!target || !target.valid || !id) return;
 
         Athena.player.safe.setDimension(target, dimension);
-        Athena.player.save.field(target, 'dimension', dimension);
+        Athena.state.set(target, 'dimension', dimension);
         Athena.player.emit.notification(player, `Set dimension of ${target.data.name} to ${target.dimension}!`);
     }
 
@@ -23,8 +23,7 @@ class InteriorCommands {
 
         if (!target || !target.valid || !id) return;
 
-        target.data.interior = interior;
-        Athena.player.save.field(target, 'interior', target.data.interior);
+        Athena.state.set(target, 'interior', interior);
         Athena.player.emit.notification(player, `New Interior of ${target.data.name} is: ${interior}!`);
     }
 }

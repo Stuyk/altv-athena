@@ -364,7 +364,7 @@ export class StorageView {
             }
 
             Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
-            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.state.set(player, 'inventory', player.data.inventory);
             Athena.player.sync.inventory(player);
             await StorageSystem.update(storageCache[player.id]._id.toString(), {
                 items: storageCache[player.id].items,
@@ -386,7 +386,7 @@ export class StorageView {
                 storageCache[player.id].items.splice(index, 1)[0];
             }
 
-            Athena.player.save.field(player, 'inventory', player.data.inventory);
+            Athena.state.set(player, 'inventory', player.data.inventory, true);
             Athena.player.sync.inventory(player);
             await StorageSystem.update(storageCache[player.id]._id.toString(), {
                 items: storageCache[player.id].items,
@@ -426,7 +426,7 @@ export class StorageView {
             storageCache[player.id].items.splice(index, 1)[0];
         }
 
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.state.set(player, 'inventory', player.data.inventory, true);
         Athena.player.sync.inventory(player);
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
         alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
@@ -590,7 +590,7 @@ export class StorageView {
             storageCache[player.id].items.push(itemClone);
         }
 
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.state.set(player, 'inventory', player.data.inventory, true);
         Athena.player.sync.inventory(player);
 
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });

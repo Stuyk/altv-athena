@@ -115,8 +115,8 @@ export class CharacterSystem {
         // Increase the value outright
         if (player.data.character_id === undefined || player.data.character_id === null) {
             await Global.increase('nextCharacterId', 1, 1);
-            player.data.character_id = await Global.getKey<number>('nextCharacterId');
-            await Athena.player.save.field(player, 'character_id', player.data.character_id);
+            const nextCharacterID = await Global.getKey<number>('nextCharacterId');
+            await Athena.state.set(player, 'character_id', nextCharacterID);
         }
 
         alt.log(
@@ -131,7 +131,7 @@ export class CharacterSystem {
         Athena.player.sync.appearance(player, player.data.appearance);
 
         if (!player.data.equipment) {
-            player.data.equipment = [];
+            await Athena.state.set(player, 'equipment', []);
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);

@@ -337,7 +337,7 @@ export class FactionFuncs {
         );
 
         if (onlinePlayer) {
-            onlinePlayer.data.faction = faction._id.toString();
+            Athena.state.set(onlinePlayer, 'faction', faction._id.toString());
         }
 
         faction.members[characterID] = {

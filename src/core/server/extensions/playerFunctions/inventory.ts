@@ -19,43 +19,6 @@ const TEMP_MAX_TOOLBAR_SIZE = 4;
 const TEMP_MAX_INVENTORY_SLOTS = 28;
 
 /**
- * Converts an inventory from 2.0.2 to 3.0.0 inventory style.
- * Which is a single Array of items.
- * @param {alt.Player} player
- * @return {*}
- */
-async function convert(player: alt.Player): Promise<void> {
-    if (!player.data) {
-        return;
-    }
-
-    if (!player.data.inventory) {
-        return;
-    }
-
-    // Not a legacy inventory system. Ignoring.
-    if (Array.isArray(player.data.inventory) && !Array.isArray(player.data.inventory[0])) {
-        return;
-    }
-
-    const inventory = player.data.inventory as Array<Array<Partial<Item>>>;
-    const playerItems: Array<Partial<Item>> = [];
-    let currentSlot = 0;
-
-    for (let x = 0; x < inventory.length; x++) {
-        for (let y = 0; y < inventory[x].length; y++) {
-            const item = inventory[x][y];
-            item.slot = currentSlot;
-            playerItems.push(item);
-            currentSlot += 1;
-        }
-    }
-
-    player.data.inventory = playerItems;
-    await Athena.player.save.field(player, 'inventory', player.data.inventory);
-}
-
-/**
  * Adds an item to the equipment tab.
  * @param {alt.Player} player
  * @param {Item} item
@@ -446,8 +409,7 @@ function removeAllWeapons(player: alt.Player): Array<Item> {
         removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
     }
 
-    Athena.player.save.field(player, 'inventory', player.data.inventory);
-    Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+    Athena.state.setBulk(player, { inventory: player.data.inventory, equipment: player.data.equipment });
     Athena.player.sync.inventory(player);
     player.removeAllWeapons();
     return removedWeapons;
@@ -547,7 +509,7 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
             return false;
         }
 
-        Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+        Athena.state.set(player, 'toolbar', player.data.toolbar, true);
         Athena.player.sync.inventory(player);
         return true;
     }
@@ -568,7 +530,7 @@ function findAndRemove(player: alt.Player, itemName: string): boolean {
         return false;
     }
 
-    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.state.set(player, 'inventory', player.data.inventory);
     Athena.player.sync.inventory(player);
     return true;
 }
@@ -737,10 +699,13 @@ function handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: st
 }
 
 function saveFields(player: alt.Player, fields: string[]): void {
+    const bulkDataToSave: { [key: string]: any } = {};
+
     for (let i = 0; i < fields.length; i++) {
-        Athena.player.save.field(player, fields[i], player.data[fields[i]]);
+        bulkDataToSave[fields[i]] = player.data[fields[i]];
     }
 
+    Athena.state.setBulk(player, bulkDataToSave, true);
     Athena.player.sync.inventory(player);
 }
 
@@ -1005,7 +970,7 @@ function stackInventoryItem(player: alt.Player, item: Item): boolean {
     }
 
     player.data.inventory[existingItem.index].quantity += item.quantity;
-    Athena.player.save.field(player, 'inventory', player.data.inventory);
+    Athena.state.set(player, 'inventory', player.data.inventory, true);
     Athena.player.sync.inventory(player);
     return true;
 }
@@ -1224,7 +1189,6 @@ function override(functionName: string, callback: (player: alt.Player, ...args: 
 }
 
 const exports = {
-    convert,
     allItemRulesValid,
     checkForKeyValuePair,
     equipmentAdd,

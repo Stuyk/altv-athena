@@ -75,10 +75,9 @@ export class HudView {
  */
 class InternalFunctions implements ViewModel {
     static async open() {
-        const view = await WebViewController.get();
         if (!hasRegistered) {
             WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.setVisible);
-            view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
+            WebViewController.ready(PAGE_NAME, InternalFunctions.ready);
         }
     }
 

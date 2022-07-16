@@ -22,7 +22,6 @@ const anyChangeCallbacks: Array<AnyKeyChangeCallback> = [];
 export class StateManager {
     private static processCallbacks(target: alt.Player | alt.Vehicle, key: string, oldValue: any, newValue: any) {
         const dataType = target instanceof alt.Player ? 'playerData' : 'vehicleData';
-        target.data[key] = newValue;
 
         // Check if data type has any callbacks for the specific key provided
         if (data[dataType][key] && Array.isArray(data[dataType][key]) && data[dataType][key].length >= 1) {
@@ -45,6 +44,8 @@ export class StateManager {
                 callback(target, key, oldValue, newValue);
             }
         }
+
+        target.data[key] = newValue;
     }
 
     /**
@@ -53,10 +54,15 @@ export class StateManager {
      * @static
      * @param {(alt.Player | alt.Vehicle)} target
      * @param {(Partial<Character | IVehicle>)} newData
+     * @param {boolean} forceSave Should we save the data regardless of whether it has changed or not?
      * @return {Promise<boolean>}
      * @memberof StateManager
      */
-    static async setBulk(target: alt.Player | alt.Vehicle, newData: Partial<Character | IVehicle>): Promise<boolean> {
+    static async setBulk(
+        target: alt.Player | alt.Vehicle,
+        newData: Partial<Character | IVehicle>,
+        forceSave = false,
+    ): Promise<boolean> {
         if (!target.valid || !target.data || !target.data._id) {
             return false;
         }
@@ -68,8 +74,13 @@ export class StateManager {
         // If it is not the correct type, just update it.
         // If the data is the correct type, but is not a different value. Update it.
         for (const key of Object.keys(newData)) {
-            const oldData = target[key];
+            const oldData = target.data[key];
             StateManager.processCallbacks(target, key, oldData, newData[key]);
+
+            if (forceSave) {
+                dataToUpdate[key] = newData[key];
+                continue;
+            }
 
             const compareDiff =
                 typeof newData[key] === 'string' ||
@@ -107,10 +118,28 @@ export class StateManager {
      * @param {alt.Player} target
      * @param {keyof RemoveIndex<Character>} key
      * @param {*} value
-     * @return {*}  {Promise<boolean>}
+     * @return {Promise<boolean>}
      * @memberof StateManager
      */
-    static async set(target: alt.Player, key: keyof RemoveIndex<Character>, value: any): Promise<boolean>;
+    static async set(
+        target: alt.Player,
+        key: keyof RemoveIndex<Character>,
+        value: any,
+        forceSave?: boolean,
+    ): Promise<boolean>;
+
+    /**
+     * Set and save player data to the database and invoke callbacks for data changes
+     *
+     * @static
+     * @param {alt.Player} target
+     * @param {string} key
+     * @param {*} value
+     * @param {boolean} [forceSave]
+     * @return {Promise<boolean>}
+     * @memberof StateManager
+     */
+    static async set(target: alt.Player, key: string, value: any, forceSave?: boolean): Promise<boolean>;
 
     /**
      * Set and save vehicle data to the database and invoke callbacks for data changes
@@ -122,7 +151,24 @@ export class StateManager {
      * @return {Promise<boolean>}
      * @memberof StateManager
      */
-    static async set(target: alt.Vehicle, key: keyof RemoveIndex<IVehicle>, value: any): Promise<boolean>;
+    static async set(
+        target: alt.Vehicle,
+        key: keyof RemoveIndex<IVehicle>,
+        value: any,
+        forceSave?: boolean,
+    ): Promise<boolean>;
+
+    /**
+     * Set and save vehicle data to the database and invoke callbacks for data changes
+     *
+     * @static
+     * @param {alt.Vehicle} target
+     * @param {keyof RemoveIndex<IVehicle>} key
+     * @param {*} value
+     * @return {Promise<boolean>}
+     * @memberof StateManager
+     */
+    static async set(target: alt.Vehicle, key: string, value: any, forceSave?: boolean): Promise<boolean>;
 
     /**
      * Set and save data for player or vehicle. Must pass key and value.
@@ -132,10 +178,16 @@ export class StateManager {
      * @param {(alt.Player | alt.Vehicle)} target
      * @param {string} key
      * @param {*} newValue
+     * @param {boolean} forceSave Should we save the data regardless of whether it has changed or not?
      * @return {Promise<boolean>}
      * @memberof StateManager
      */
-    static async set(target: alt.Player | alt.Vehicle, key: string, newValue: any): Promise<boolean> {
+    static async set(
+        target: alt.Player | alt.Vehicle,
+        key: string,
+        newValue: any,
+        forceSave: boolean = false,
+    ): Promise<boolean> {
         if (!target.valid || !target.data || !target.data._id) {
             return false;
         }
@@ -152,7 +204,7 @@ export class StateManager {
         const compareDiff =
             typeof newValue === 'string' || typeof newValue === 'number' || typeof newValue === 'boolean';
 
-        if (compareDiff && newValue === oldValue) {
+        if (compareDiff && newValue === oldValue && !forceSave) {
             return true;
         }
 

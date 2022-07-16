@@ -446,8 +446,11 @@ export class ClothingFunctions {
             }
         }
 
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
-        Athena.player.save.field(player, 'equipment', player.data.equipment);
+        await Athena.state.setBulk(
+            player,
+            { inventory: player.data.inventory, equipment: player.data.equipment },
+            true,
+        );
         Athena.player.sync.inventory(player);
         Athena.player.sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
 

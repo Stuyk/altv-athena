@@ -751,8 +751,7 @@ export class InteriorSystem {
             }, 1000);
         }
 
-        player.data.interior = interior.uid;
-        Athena.player.save.field(player, 'interior', player.data.interior);
+        Athena.state.set(player, 'interior', interior.uid);
         InternalSystem.refreshInteriorForPlayer(player);
         return true;
     }
@@ -804,8 +803,7 @@ export class InteriorSystem {
         Athena.player.set.frozen(player, true);
         Athena.player.safe.setDimension(player, 0);
         Athena.player.safe.setPosition(player, interior.outside.x, interior.outside.y, interior.outside.z + 1);
-        player.data.interior = null;
-        Athena.player.save.field(player, 'interior', player.data.interior);
+        Athena.state.set(player, 'interior', null);
         alt.setTimeout(() => {
             if (!player || !player.valid) {
                 return;

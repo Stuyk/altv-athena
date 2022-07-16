@@ -20,6 +20,7 @@ import { PlayerEvents } from '../../events/playerEvents';
 import { playerConst } from '../../api/consts/constPlayer';
 import { IVector3 } from 'alt-shared';
 import { StateManager } from '../../systems/stateManager';
+import { Athena } from '../../api/athena';
 
 /**
  * Set the current account data for this player.
@@ -117,8 +118,7 @@ function wantedLevel(player: alt.Player, stars: number) {
     }
 
     player.wanted = stars;
-    player.data.wanted = stars;
-    playerConst.save.field(player, 'wanted', player.data.wanted);
+    Athena.state.set(player, 'wanted', stars);
     player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
 }
 

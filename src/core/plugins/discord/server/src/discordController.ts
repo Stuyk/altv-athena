@@ -262,13 +262,13 @@ export class DiscordController {
      * @param {string} message - The message to send to the channel.
      * @returns The Guild object.
      */
-    static async sendToChannel(channel_id: string, message: string): void {
+    static async sendToChannel(channel_id: string, message: string): Promise<void> {
         if (!guild) {
             alt.logError(`~lr~[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
-        const channel = await guild.channels.fetch(channel_id) as TextChannel;
+        const channel = (await guild.channels.fetch(channel_id)) as TextChannel;
         if (!channel) {
             alt.logError(`~lr~[Discord] Channel does not exist to sendToChannel`);
             return;
@@ -283,13 +283,13 @@ export class DiscordController {
      * @param {MessageEmbed} msg - MessageEmbed - The message to send.
      * @returns The Guild object.
      */
-    static async sendEmbed(channel_id: string, msg: MessageEmbed): void {
+    static async sendEmbed(channel_id: string, msg: MessageEmbed): Promise<void> {
         if (!guild) {
             alt.logError(`[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
-        const channel = await guild.channels.fetch(channel_id) as TextChannel;
+        const channel = (await guild.channels.fetch(channel_id)) as TextChannel;
         if (!channel) {
             alt.logError(`[Discord] Channel does not exist.`);
             return;

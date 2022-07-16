@@ -69,7 +69,7 @@ export class SimpleInventory {
 
     /**
      * Simply adds an item to the inventory.
-     * 
+     *
      * -> Does not check for existing stacks.
      * -> Automatically enforces max stack size.
      * -> Automatically ensures quantity is at least 1.
@@ -110,7 +110,7 @@ export class SimpleInventory {
 
         itemRef.quantity = quantity;
         Athena.player.inventory.inventoryAdd(player, itemRef, freeSlot.slot);
-        await Athena.player.save.field(player, 'inventory', player.data.inventory);
+        await Athena.state.set(player, 'inventory', player.data.inventory, true);
         return true;
     }
 }
