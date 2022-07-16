@@ -36,7 +36,7 @@ class VehicleCommands {
         VehicleSystem.toggleDoor(player, doorIndex);
     }
 
-    @command('givevehkey', '/givevehkey [id] - Give key to vehicle to player', PERMISSIONS.NONE)
+    @command('givevehkey', LocaleController.get(LOCALE_KEYS.COMMAND_GIVE_VEH_KEY, '/givevehkey'), PERMISSIONS.NONE)
     private static giveVehicleKeyCommand(player: alt.Player, id: string) {
         if (!player || !player.valid || id === null || id === undefined) {
             Athena.player.emit.message(player, `/givevehkey [id]`);
