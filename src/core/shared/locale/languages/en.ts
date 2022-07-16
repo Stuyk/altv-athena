@@ -38,6 +38,7 @@ export default {
     [LOCALE_KEYS.COMMAND_TELEPORT_WAYPOINT]: `_%_ - Teleport to a waypoint. Create Waypoint First`,
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_LOCK]: `_%_ - Toggle the vehicle lock`,
     [LOCALE_KEYS.COMMAND_TOGGLE_VEH_DOOR]: `_%_ - [0-5] - Toggle a vehicle door`,
+    [LOCALE_KEYS.COMMAND_GIVE_VEH_KEY]: `_%_ [id] - Give key to vehicle to player`,
     [LOCALE_KEYS.COMMAND_TOGGLE_ENGINE]: `_%_ - Toggle the vehicle engine`,
     [LOCALE_KEYS.COMMAND_VEHICLE]: `_%_ [model] - Spawn an admin vehicle`,
     [LOCALE_KEYS.COMMAND_WANTED]: `_%_ [player_id] [stars] - Set player wanted level`,
