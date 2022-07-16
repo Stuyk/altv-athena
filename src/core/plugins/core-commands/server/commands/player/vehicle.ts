@@ -44,23 +44,23 @@ class VehicleCommands {
         }
 
         if (!player.vehicle || !player.vehicle.data) {
-            Athena.player.emit.message(player, `Must be in a vehicle you own.`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_OWN_BY_YOU));
             return;
         }
 
         if (player.vehicle.data.owner.toString() !== player.data._id.toString()) {
-            Athena.player.emit.message(player, `Must be in a vehicle you own.`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NOT_OWN_BY_YOU));
             return;
         }
 
         const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
-            Athena.player.emit.message(player, `Could not find that target player`);
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
 
         VehicleFuncs.createKey(target, player.vehicle);
-        Athena.player.emit.notification(player, `Minted Vehicle Key for ${target.data.name}`);
+        Athena.player.emit.notification(player, `${LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_GIVEN_TO)} ${target.data.name}.`);
     }
 
     @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)
