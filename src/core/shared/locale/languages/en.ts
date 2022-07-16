@@ -175,6 +175,8 @@ export default {
     [LOCALE_KEYS.VEHICLE_REFILLED]: `Vehicle refilled.`,
     [LOCALE_KEYS.VEHICLE_REPAIRED]: `Vehicle successfully repaired.`,
     [LOCALE_KEYS.VEHICLE_HAS_NO_MOD_KIT]: `Vehicle doesn't have a mod kit.`,
+    [LOCALE_KEYS.VEHICLE_NOT_OWN_BY_YOU]: `Must be in a vehicle you own.`,
+    [LOCALE_KEYS.VEHICLE_KEY_GIVEN_TO]: `Minted Vehicle Key for`,
     // Faction
     [LOCALE_KEYS.FACTION_PLAYER_IS_ALREADY_IN_FACTION]: `_%_ is already in a faction or does not exist.`,
     [LOCALE_KEYS.FACTION_CANNOT_CHANGE_OWNERSHIP]: `You are unable to change ownership of the faction.`,
