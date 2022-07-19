@@ -61,7 +61,7 @@ export class DiscordController {
 
         allowListRole = _allowListRole;
 
-        const role = guild.roles.cache.get(allowListRole);
+        const role = await guild.roles.fetch(allowListRole);
         if (!role) {
             alt.log(`~lr~[Discord] Could not find the allow list role specified in config. Plugin disabled.`);
             client.destroy();
@@ -82,7 +82,7 @@ export class DiscordController {
     static async ready(): Promise<void> {
         alt.log(`~lg~[Discord] Bot Started`);
 
-        guild = client.guilds.cache.get(serverId);
+        guild = await client.guilds.fetch(serverId);
 
         if (!guild) {
             alt.log(`~lr~[Discord] Could not find the server id specified in config. Plugin disabled.`);
@@ -213,12 +213,12 @@ export class DiscordController {
         }
 
         // Remove the users role
-        const role = guild.roles.cache.get(allowListRole);
+        const role = await guild.roles.fetch(allowListRole);
         if (!role) {
             return member;
         }
 
-        return member.roles.remove(role);
+        return await member.roles.remove(role);
     }
 
     /**
@@ -262,13 +262,13 @@ export class DiscordController {
      * @param {string} message - The message to send to the channel.
      * @returns The Guild object.
      */
-    static sendToChannel(channel_id: string, message: string): void {
+    static async sendToChannel(channel_id: string, message: string): Promise<void> {
         if (!guild) {
             alt.logError(`~lr~[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
-        const channel = guild.channels.cache.find((x) => x.id === channel_id) as TextChannel;
+        const channel = (await guild.channels.fetch(channel_id)) as TextChannel;
         if (!channel) {
             alt.logError(`~lr~[Discord] Channel does not exist to sendToChannel`);
             return;
@@ -283,13 +283,13 @@ export class DiscordController {
      * @param {MessageEmbed} msg - MessageEmbed - The message to send.
      * @returns The Guild object.
      */
-    static sendEmbed(channel_id: string, msg: MessageEmbed): void {
+    static async sendEmbed(channel_id: string, msg: MessageEmbed): Promise<void> {
         if (!guild) {
             alt.logError(`[Discord] You do not currently have a Discord Bot Setup for sending messages.`);
             return;
         }
 
-        const channel = guild.channels.cache.find((x) => x.id === channel_id) as TextChannel;
+        const channel = (await guild.channels.fetch(channel_id)) as TextChannel;
         if (!channel) {
             alt.logError(`[Discord] Channel does not exist.`);
             return;

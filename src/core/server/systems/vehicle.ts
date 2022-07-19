@@ -675,11 +675,16 @@ export class VehicleSystem {
      * @memberof VehicleSystem
      */
     static async destroyed(vehicle: alt.Vehicle) {
-        await new Promise((resolve: Function) => {
-            alt.setTimeout(() => {
-                resolve();
-            }, DEFAULT_CONFIG.VEHICLE_DESPAWN_TIMEOUT);
-        });
+        if (DEFAULT_CONFIG.VEHICLE_DESPAWN_TIMEOUT <= -1) {
+            VehicleEvents.trigger(ATHENA_EVENTS_VEHICLE.DESTROYED, vehicle);
+            return;
+        } else {
+            await new Promise((resolve: Function) => {
+                alt.setTimeout(() => {
+                    resolve();
+                }, DEFAULT_CONFIG.VEHICLE_DESPAWN_TIMEOUT);
+            });
+        }
 
         if (!vehicle || !vehicle.valid) {
             return;

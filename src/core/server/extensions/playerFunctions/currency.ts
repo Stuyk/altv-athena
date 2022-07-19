@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 
 import { CurrencyTypes } from '../../../shared/enums/currency';
+import { Athena } from '../../api/athena';
 import emit from './emit';
 import save from './save';
 
@@ -101,21 +102,22 @@ function subAllCurrencies(player: alt.Player, amount: number): boolean {
     }
 
     let amountLeft = amount;
+    let startCash = player.data.cash;
+    let startBank = player.data.bank;
 
     if (player.data.cash - amountLeft <= -1) {
-        amountLeft = amountLeft - player.data.cash;
-        player.data.cash = 0;
+        amountLeft = amountLeft - startCash;
+        startCash = 0;
     } else {
-        player.data.cash = player.data.cash - amountLeft;
+        startCash = startCash - amountLeft;
         amountLeft = 0;
     }
 
     if (amountLeft >= 1) {
-        player.data.bank = player.data.bank - amountLeft;
+        startBank = startBank - amountLeft;
     }
 
-    save.field(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
-    save.field(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
+    Athena.state.setBulk(player, { bank: startBank, cash: startCash });
     emit.meta(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
     emit.meta(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
     return true;

@@ -1,6 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import fs from 'fs';
+import { Athena } from '../../../../server/api/athena';
 import { Account } from '../../../../server/interface/iAccount';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { AdminController } from '../../../../server/systems/admin';
@@ -80,23 +81,31 @@ export class ConsoleCommands {
 
         const players = [...alt.Player.all];
         let player: alt.Player;
-
-        for (let i = 0; i < players.length; i++) {
-            const target = players[i];
-
-            if (target.name === discordNameIDCatchAll) {
-                player = target;
-                break;
+        if (discordNameIDCatchAll.length <= 14 && !isNaN(parseInt(discordNameIDCatchAll))) {
+            const playerById = Athena.systems.identifier.getPlayer(discordNameIDCatchAll);
+            if (playerById && playerById.valid) {
+                player = playerById;
             }
+        }
 
-            if (target.data && target.data.name === discordNameIDCatchAll) {
-                player = target;
-                break;
-            }
+        if (!player) {
+            for (let i = 0; i < players.length; i++) {
+                const target = players[i];
 
-            if (target.discord && target.discord.id === discordNameIDCatchAll) {
-                player = target;
-                break;
+                if (target.name === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
+
+                if (target.data && target.data.name === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
+
+                if (target.discord && target.discord.id === discordNameIDCatchAll) {
+                    player = target;
+                    break;
+                }
             }
         }
 
@@ -117,13 +126,18 @@ export class ConsoleCommands {
         }
 
         const reason = args.join(' ');
-        const player = alt.Player.all.find((p) => {
-            if (p.accountData && (p.accountData.discord === discord_or_id || `${p.id}` === `${discord_or_id}`)) {
-                return true;
-            }
+        let player: alt.Player;
+        if (discord_or_id.length <= 14) {
+            player = Athena.systems.identifier.getPlayer(discord_or_id);
+        } else {
+            player = alt.Player.all.find((p) => {
+                if (p.accountData && p.accountData.discord === discord_or_id) {
+                    return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
+        }
 
         const account = await Database.fetchData<Account>('discord', discord_or_id, Collections.Accounts);
         if (!account) {
@@ -151,9 +165,14 @@ export class ConsoleCommands {
             return;
         }
 
-        const player = alt.Player.all.find((p) => p && p.data && p.valid && `${p.id}` === `${id}`);
-        if (!player) {
-            alt.logWarning(`Could not find ${id}`);
+        let player: alt.Player;
+        const playerById = Athena.systems.identifier.getPlayer(id);
+        if (playerById && playerById.valid) {
+            player = playerById;
+        }
+
+        if (!player || !player.valid) {
+            alt.logWarning(`Could not find: ${id}`);
             return;
         }
 

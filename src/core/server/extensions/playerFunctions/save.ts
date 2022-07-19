@@ -4,6 +4,8 @@ import { Character } from '../../../shared/interfaces/character';
 import { Collections } from '../../interface/iDatabaseCollections';
 import { Injections } from '../../systems/injections';
 import { PlayerInjectionNames, PlayerSaveTickCallback } from '../../systems/injections/player';
+import { StateManager } from '../../systems/stateManager';
+import { distance2d } from '../../../shared/utility/vector';
 
 /**
  * Save a specific field for the current character of this player.
@@ -40,12 +42,25 @@ async function partial(p: alt.Player, dataObject: Partial<Character>): Promise<v
  * @memberof SavePrototype
  */
 async function onTick(player: alt.Player): Promise<void> {
-    // Update Server Data First
-    player.data.pos = player.pos;
-    player.data.health = player.health;
-    player.data.armour = player.armour;
+    let injections: Partial<Character> = {};
 
-    let injections = { pos: player.data.pos, health: player.data.health, armour: player.data.armour };
+    if (!player || !player.valid || !player.data) {
+        return;
+    }
+
+    const dist = distance2d(player.pos, player.data.pos as alt.Vector2);
+
+    if (player && player.pos && dist >= 1) {
+        injections.pos = player.pos;
+    }
+
+    if (player.health !== player.data.health) {
+        injections.health = player.health;
+    }
+
+    if (player.armour !== player.data.armour) {
+        injections.armour = player.armour;
+    }
 
     const saveTickInjections = Injections.get<PlayerSaveTickCallback>(PlayerInjectionNames.PLAYER_SAVE_TICK);
     for (const callback of saveTickInjections) {
@@ -57,7 +72,11 @@ async function onTick(player: alt.Player): Promise<void> {
         }
     }
 
-    partial(player, injections);
+    if (Object.keys(injections).length <= 0) {
+        return;
+    }
+
+    StateManager.setBulk(player, injections, true);
 }
 
 export default {

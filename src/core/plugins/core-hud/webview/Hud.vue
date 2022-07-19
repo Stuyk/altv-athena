@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
+import WebViewEvents from '../../../../../src-webviews/src/utility/webViewEvents';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
@@ -74,14 +75,14 @@ export default defineComponent({
             seatbelt: false,
             isMetric: false,
             isInVehicle: false,
-            interactions: [],
+            interactions: [] as Array<{ keyPress: string; description: string }>,
             updateCount: 0,
         };
     },
     mounted() {
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetProp`, this.setProp);
-            alt.emit(`${ComponentName}:Ready`);
+            WebViewEvents.emitReady(ComponentName);
         } else {
             this.isInVehicle = true;
             this.setProp(

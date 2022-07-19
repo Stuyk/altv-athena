@@ -15,8 +15,7 @@ class InventoryCommands {
         PERMISSIONS.ADMIN,
     )
     private static clearInventoryCommand(player: alt.Player) {
-        player.data.inventory = [];
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.state.set(player, 'inventory', []);
         Athena.player.sync.inventory(player);
     }
 
@@ -26,8 +25,7 @@ class InventoryCommands {
         PERMISSIONS.ADMIN,
     )
     private static clearToolbeltCommand(player: alt.Player) {
-        player.data.toolbar = [];
-        Athena.player.save.field(player, 'toolbar', player.data.toolbar);
+        Athena.state.set(player, 'toolbar', []);
         Athena.player.sync.inventory(player);
     }
 
@@ -37,8 +35,7 @@ class InventoryCommands {
         PERMISSIONS.ADMIN,
     )
     private static clearEquipmentCommand(player: alt.Player) {
-        player.data.equipment = [];
-        Athena.player.save.field(player, 'equipment', player.data.equipment);
+        Athena.state.set(player, 'equipment', []);
         Athena.player.sync.inventory(player);
     }
 
@@ -61,7 +58,8 @@ class InventoryCommands {
         const itemClone = deepCloneObject<Item>(item);
         let slotInfo = Athena.player.inventory.getFreeInventorySlot(player);
         Athena.player.inventory.inventoryAdd(player, itemClone, slotInfo.slot);
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
+
+        Athena.state.set(player, 'inventory', player.data.inventory, true);
         Athena.player.sync.inventory(player);
         Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY, item.name));
     }

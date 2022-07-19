@@ -50,9 +50,10 @@ function enterMenu(interior: Interior) {
 
     options.push({
         name: interior.isUnlocked
-            ? `~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
-            : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
+            ? `${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
+            : `${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
+        color: 'yellow',
     });
 
     options.push({
@@ -61,6 +62,7 @@ function enterMenu(interior: Interior) {
             console.log(`===> ${interior.name}`);
             console.log(`UID: ${interior.uid}`);
         },
+        color: 'blue',
     });
 
     // Ownership Related Menu Functions
@@ -140,7 +142,7 @@ function enterMenu(interior: Interior) {
 
     if (!isOwner && interior.price >= 1) {
         options.push({
-            name: `${LOCALE_INTERIOR_VIEW.LABEL_PURCHASE}~n~~p~$${interior.price}`,
+            name: `${LOCALE_INTERIOR_VIEW.LABEL_PURCHASE} $${interior.price}`,
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.PURCHASE, interior.uid);
             },
@@ -149,10 +151,11 @@ function enterMenu(interior: Interior) {
 
     if (interior.isUnlocked) {
         options.push({
-            name: `~g~${LOCALE_INTERIOR_VIEW.LABEL_ENTER}`,
+            name: `${LOCALE_INTERIOR_VIEW.LABEL_ENTER}`,
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.ENTER, interior.uid);
             },
+            color: 'orange',
         });
     }
 
@@ -174,9 +177,10 @@ function exitMenu(interior: Interior) {
 
     options.push({
         name: interior.isUnlocked
-            ? `~o~${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
-            : `~g~${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
+            ? `${LOCALE_INTERIOR_VIEW.LABEL_TRY_LOCK}`
+            : `${LOCALE_INTERIOR_VIEW.LABEL_TRY_UNLOCK}`,
         callback: toggleLockFunc,
+        color: 'yellow',
     });
 
     options.push({
@@ -194,14 +198,16 @@ function exitMenu(interior: Interior) {
             callback: () => {
                 alt.emitServer(INTERIOR_INTERACTIONS.STORAGE, interior.uid);
             },
+            color: 'lime',
         });
     }
 
     options.push({
-        name: `~r~${LOCALE_INTERIOR_VIEW.LABEL_EXIT}`,
+        name: `${LOCALE_INTERIOR_VIEW.LABEL_EXIT}`,
         callback: () => {
             alt.emitServer(INTERIOR_INTERACTIONS.EXIT, interior.uid);
         },
+        color: `red`,
     });
 
     WheelMenu.open(`${interior.name}`, options, true);

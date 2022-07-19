@@ -1,5 +1,6 @@
 import { IObject } from '../../../shared/interfaces/iObject';
 import { Vector3 } from '../../../shared/interfaces/vector';
+import { IEntitySet } from '../../../shared/interfaces/iEntitySet';
 import { INTERIOR_SYSTEM } from './flags';
 
 export interface Interior {
@@ -88,6 +89,20 @@ export interface Interior {
      * @memberof Interior
      */
     ipl?: string;
+
+    /**
+     * The interiorID for use with EntitySets.
+     * @type {number}
+     * @memberof Interior
+     */
+     interiorID?: number;
+
+     /**
+     * List of EntitySets and if to activate them or not.
+     * @type {Array<IEntitySet>}
+     * @memberof Interior
+     */
+      entitySets?: Array<IEntitySet>;
 
     /**
      * The price of this interior if it is for sale.

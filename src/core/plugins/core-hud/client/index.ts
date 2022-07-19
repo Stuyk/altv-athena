@@ -77,12 +77,8 @@ class InternalFunctions implements ViewModel {
     static async open() {
         if (!hasRegistered) {
             WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.setVisible);
-            hasRegistered = true;
+            WebViewController.ready(PAGE_NAME, InternalFunctions.ready);
         }
-
-        const view = await WebViewController.get();
-        WebViewController.openPages([PAGE_NAME]);
-        view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
     }
 
     static async setVisible(value: boolean) {
@@ -90,13 +86,9 @@ class InternalFunctions implements ViewModel {
 
         if (!isDisabled) {
             native.displayRadar(true);
-            InternalFunctions.open();
             return;
         }
 
-        const view = await WebViewController.get();
-        view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        WebViewController.closePages([PAGE_NAME]);
         native.displayRadar(false);
     }
 

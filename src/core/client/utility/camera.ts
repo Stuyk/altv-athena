@@ -23,7 +23,7 @@ export default class PedEditCamera {
      * @static
      * @param {number} _scriptID
      * @param {alt.IVector3} [offset=null]
-     * @return {*}  {Promise<void>}
+     * @return {Promise<void>}
      * @memberof PedEditCamera
      */
     static async create(_scriptID: number, offset: alt.IVector3 = null, _isLocalPlayer = false): Promise<void> {

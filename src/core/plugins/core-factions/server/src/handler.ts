@@ -173,13 +173,12 @@ export class FactionHandler {
 
             const player = alt.Player.all.find((p) => p.data && p.data._id === members[i]._id);
             if (player && player.valid) {
-                player.data.faction = null;
+                Athena.state.set(player, 'faction', null);
 
                 // Add bank balance to owner character
                 if (player.data._id === ownerIdentifier) {
-                    player.data.bank += factionClone.bank;
+                    Athena.state.set(player, 'bank', player.data.bank + factionClone.bank, true);
                     Athena.player.sync.currencyData(player);
-                    Athena.player.save.field(player, 'bank', player.data.bank);
                     Athena.player.emit.notification(player, `+$${factionClone.bank}`);
                 }
 

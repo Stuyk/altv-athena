@@ -14,14 +14,11 @@ class AtmView implements ViewModel {
             return;
         }
 
-        // Must always be called first if you want to hide HUD.
-        await WebViewController.setOverlaysVisible(false);
-
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, AtmView.ready);
         view.on(`${PAGE_NAME}:Close`, AtmView.close);
         view.on(`${PAGE_NAME}:Action`, AtmView.action);
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, AtmView.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 

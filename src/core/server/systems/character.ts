@@ -5,48 +5,22 @@ import { PlayerEvents } from '../events/playerEvents';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Character } from '../../shared/interfaces/character';
+import { Character, CharacterDefaults } from '../../shared/interfaces/character';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { Global } from './global';
-
-const Injections: { [key: string]: Array<(player: alt.Player) => void> } = {
-    select: [],
-    beforeSelect: [],
-};
+import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
+import { Injections } from './injections';
+import { Appearance } from '../../shared/interfaces/appearance';
+import { CharacterInfo } from '../../shared/interfaces/characterInfo';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
 };
 
 export class CharacterSystem {
-    /**
-     * Inject a function just before the character is spawned.
-     * Will automatically run when a player has selected a character.
-     *
-     * @static
-     * @param {(player: alt.Player) => void} callback
-     * @memberof CharacterSystem
-     */
-    static selectInjections(callback: (player: alt.Player) => void) {
-        Injections.select.push(callback);
-    }
-
-    /**
-     * Inject a function after the player data is set.
-     *
-     * The functions are ran before the rest of the spawn code is ran.
-     *
-     * @static
-     * @param {(player: alt.Player) => void} callback
-     * @memberof CharacterSystem
-     */
-    static beforeSelectInjections(callback: (player: alt.Player) => void) {
-        Injections.beforeSelect.push(callback);
-    }
-
     /**
      * Allows a custom character creator to be shown.
      *
@@ -76,6 +50,56 @@ export class CharacterSystem {
     }
 
     /**
+     * Create a new character for a specific player.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {Appearance} appearance
+     * @param {CharacterInfo} info
+     * @param {string} name
+     * @return {Promise<boolean>}
+     * @memberof CharacterSystem
+     */
+    static async create(
+        player: alt.Player,
+        appearance: Appearance,
+        info: CharacterInfo,
+        name: string,
+    ): Promise<boolean> {
+        if (!player.accountData || !player.accountData._id) {
+            return false;
+        }
+
+        const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
+        newDocument.account_id = player.accountData._id;
+        newDocument.appearance = appearance;
+        newDocument.info = info;
+        newDocument.name = name;
+
+        let document = await Athena.database.funcs.insertData<Character>(
+            newDocument,
+            Athena.database.collections.Characters,
+            true,
+        );
+
+        if (!document) {
+            return false;
+        }
+
+        const afterInjections = Injections.get<CharacterCreateCallback>(PlayerInjectionNames.AFTER_CHARACTER_CREATE);
+        for (const callback of afterInjections) {
+            const appendedDocumentOrVoid = await callback(player, document);
+            if (appendedDocumentOrVoid) {
+                document = appendedDocumentOrVoid;
+            }
+        }
+
+        document._id = document._id.toString(); // Re-cast id object as string.
+        CharacterSystem.select(player, document);
+        return true;
+    }
+
+    /**
      * The final step in the character selection system.
      *
      * After this step the player is spawned and synchronized.
@@ -88,30 +112,26 @@ export class CharacterSystem {
     static async select(player: alt.Player, character: Character) {
         player.data = deepCloneObject(character);
 
-        // Give the player an identifier if it does not already have one.
-        // if (player.data.character_id !== undefined && player.data.character_id !== null) {
-        //     Athena.player.emit.meta(player, metaName, player.data[metaName]);
-        // }
-
         // Increase the value outright
         if (player.data.character_id === undefined || player.data.character_id === null) {
             await Global.increase('nextCharacterId', 1, 1);
-            player.data.character_id = await Global.getKey<number>('nextCharacterId');
-            await Athena.player.save.field(player, 'character_id', player.data.character_id);
+            const nextCharacterID = await Global.getKey<number>('nextCharacterId');
+            await Athena.state.set(player, 'character_id', nextCharacterID);
         }
 
         alt.log(
             `Selected | ${player.data.name} | ID: (${player.id}) | Character ID: ${player.data.character_id} | Account: ${player.data.account_id}`,
         );
 
-        for (let i = 0; i < Injections.beforeSelect.length; i++) {
-            Injections.beforeSelect[i](player);
+        const beforeInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.BEFORE_CHARACTER_SELECT);
+        for (const callback of beforeInjections) {
+            await callback(player);
         }
 
         Athena.player.sync.appearance(player, player.data.appearance);
 
         if (!player.data.equipment) {
-            player.data.equipment = [];
+            await Athena.state.set(player, 'equipment', []);
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
@@ -178,15 +198,16 @@ export class CharacterSystem {
                 Athena.vehicle.funcs.spawnPlayerVehicles(vehicles);
             }
 
-            // Handle Injections...
-            for (let i = 0; i < Injections.select.length; i++) {
-                Injections.select[i](player);
-            }
-
             // Finish Selection
             Athena.player.set.frozen(player, false);
             player.visible = true;
             player.hasFullySpawned = true;
+
+            const afterInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.AFTER_CHARACTER_SELECT);
+            for (const callback of afterInjections) {
+                await callback(player);
+            }
+
             PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
         }, 500);
     }

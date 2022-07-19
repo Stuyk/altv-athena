@@ -28,42 +28,6 @@ async function allVehicles(player: alt.Player, excludeKeys = false): Promise<IVe
 }
 
 /**
- * Returns the unique account id associated with this player.
- * Keep in mind that you should not use this id to save data to the database.
- * @param {alt.Player} player
- * @return {number}
- */
-function uid(player: alt.Player): number {
-    if (!player.accountData) {
-        return -1;
-    }
-
-    return player.accountData.id;
-}
-
-function findByUid(id: number | string) {
-    if (typeof id === 'number') {
-        id = id.toString();
-    }
-
-    return alt.Player.all.find((t) => {
-        if (!t.accountData) {
-            return false;
-        }
-
-        if (t.accountData === undefined || t.accountData === null) {
-            return false;
-        }
-
-        if (t.accountData.id.toString() !== id) {
-            return false;
-        }
-
-        return true;
-    });
-}
-
-/**
  * Get all characters associated with a player.
  * @param {alt.Player} player
  * @return {Promise<Array<Character>>}
@@ -141,8 +105,6 @@ export default {
     allCharacters,
     allVehicles,
     closestPlayer,
-    findByUid,
     playersByGridSpace,
     playersByPermissionLevel,
-    uid,
 };

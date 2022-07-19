@@ -12,7 +12,7 @@ class CurrencyCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot Find Player');
             return;
@@ -28,7 +28,7 @@ class CurrencyCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot Find Player');
             return;
@@ -44,7 +44,7 @@ class CurrencyCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot Find Player');
             return;
@@ -60,7 +60,7 @@ class CurrencyCommands {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot Find Player');
             return;

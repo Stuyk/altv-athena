@@ -16,11 +16,6 @@ export const DEFAULT_CONFIG = {
     // Chat Properties
     CHAT_ENABLED: true, // Turn off messaging. Chat still works for commands.
     CHAT_DISTANCE: 35,
-    // Death / Respawn Properties
-    RESPAWN_TIME: SHARED_CONFIG.RESPAWN_TIME, // 30s in Milliseconds
-    RESPAWN_LOSE_WEAPONS: true, // Removes player weapons on death.
-    RESPAWN_HEALTH: 199, // Health is 100 - 199. 99 is dead. 200 will return 101%.
-    RESPAWN_ARMOUR: 0, // Lose weapons when you respawn
     // Interaction Properties
     MAX_INTERACTION_DISTANCE: 3, // The maximum distance the player can stand away from a interaction object.
     // World Time

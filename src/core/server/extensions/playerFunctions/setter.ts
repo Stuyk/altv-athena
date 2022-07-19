@@ -19,6 +19,8 @@ import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
 import { playerConst } from '../../api/consts/constPlayer';
 import { IVector3 } from 'alt-shared';
+import { StateManager } from '../../systems/stateManager';
+import { Athena } from '../../api/athena';
 
 /**
  * Set the current account data for this player.
@@ -104,7 +106,7 @@ function frozen(player: alt.Player, value: boolean): void {
  * @memberof SetPrototype
  */
 function respawned(player: alt.Player, position: IVector3 = undefined): void {
-    player.data.isDead = false;
+    StateManager.set(player, 'isDead', false);
     emit.meta(player, 'isDead', false);
     save.field(player, 'isDead', false);
     PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, player, position);
@@ -116,8 +118,7 @@ function wantedLevel(player: alt.Player, stars: number) {
     }
 
     player.wanted = stars;
-    player.data.wanted = stars;
-    playerConst.save.field(player, 'wanted', player.data.wanted);
+    Athena.state.set(player, 'wanted', stars);
     player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
 }
 

@@ -59,6 +59,11 @@ class InternalFunctions {
             return;
         }
 
+        if (!_faction) {
+            InternalFunctions.close();
+            return;
+        }
+
         faction = _faction;
         InternalFunctions.ready();
     }

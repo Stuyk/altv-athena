@@ -71,7 +71,7 @@ function getFilesForTranspilation(enabledPlugins) {
 }
 
 function getFilesToCopy(enabledPlugins) {
-    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue|md)').replace(/\\/g, '/'));
+    const filePath = sanitizePath(path.join(process.cwd(), 'src', '**/*.!(ts|vue)').replace(/\\/g, '/'));
 
     return glob.sync(filePath, {
         nodir: true,
@@ -101,7 +101,7 @@ async function run() {
 
     for (const fileOrDirectory of filesAndDirectories) {
         const fullPath = sanitizePath(path.join(resourcesFolder, fileOrDirectory)).replace(/\\/g, '/');
-        if (fullPath.includes('mods')) {
+        if (!fullPath.includes('core') || !fullPath.includes('webviews')) {
             continue;
         }
 

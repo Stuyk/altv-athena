@@ -58,6 +58,7 @@ import './systems/vehicle';
 // Utility
 import './utility/cinematic';
 import './utility/credits';
+import './utility/entitySets';
 import './utility/errorScreen';
 import './utility/ipl';
 import './utility/lerp';

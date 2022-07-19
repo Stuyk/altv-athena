@@ -19,20 +19,22 @@ export class VoiceSystem {
             return;
         }
 
-        // Initialize Main Channel
-        if (Channels.findIndex((x) => x.name === VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME) <= -1) {
+        try {
             VoiceSystem.createChannel(VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME, true, 25);
+
+            // Enable voice channel joining on character select, and add to main channel.
+            PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, (player: alt.Player) => {
+                VoiceSystem.addPlayer(player, VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME);
+            });
+
+            // When a player disconnects, this will try to remove them from the main voice channel.
+            alt.on('playerDisconnect', (player: alt.Player) => {
+                VoiceSystem.removePlayer(player, VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME);
+            });
+        } catch (err) {
+            alt.logWarning(`[CORE-VOICE] core-voice tried to load but configuration is missing voice properties.`);
+            alt.logWarning(`[CORE-VOICE] https://docs.athenaframework.com/plugins/reference/voice#configuration`);
         }
-
-        // Enable voice channel joining on character select, and add to main channel.
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, (player: alt.Player) => {
-            VoiceSystem.addPlayer(player, VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME);
-        });
-
-        // When a player disconnects, this will try to remove them from the main voice channel.
-        alt.on('playerDisconnect', (player: alt.Player) => {
-            VoiceSystem.removePlayer(player, VOICE_CONFIG.MAIN_VOICE_CHANNEL_NAME);
-        });
     }
 
     /**
@@ -50,8 +52,8 @@ export class VoiceSystem {
         maxDistance: number,
     ): IVoiceChannel<alt.Player, alt.VoiceChannel> | null {
         const index = Channels.findIndex((x) => x.name === name);
-        if (index <= -1) {
-            return null;
+        if (index >= 0) {
+            return Channels[index];
         }
 
         const newChannel = {
@@ -154,6 +156,7 @@ export class VoiceSystem {
             return;
         }
 
+        alt.log(`[CORE-VOICE] ${player.data.name} was added to voice channel ${channelName}`);
         Athena.player.emit.message(player, `[Athena] You have joined the global voice server.`);
         virtualChannel.channel.addPlayer(player);
 

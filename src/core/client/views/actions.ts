@@ -21,7 +21,6 @@ class ActionsView implements ViewModel {
         const view = await WebViewController.get();
 
         if (!hasRegistered) {
-            WebViewController.registerOverlay(PAGE_NAME, ActionsView.setVisible);
             hasRegistered = true;
         } else {
             view.off(`${PAGE_NAME}:Ready`, ActionsView.ready);
@@ -33,27 +32,11 @@ class ActionsView implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, ActionsView.close);
         view.on(`${PAGE_NAME}:Trigger`, ActionsView.trigger);
         view.focus();
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, false, () => {
+            ActionsView.close(true);
+        });
+
         alt.on('keyup', ActionsView.keyUp);
-    }
-
-    /**
-     * This overlay is different.
-     * We want it to just close when the overlay is toggled.
-     * @static
-     * @param {boolean} value
-     * @return {*}
-     * @memberof ActionsView
-     */
-    static async setVisible(value: boolean) {
-        isDisabled = !value;
-
-        if (!isDisabled) {
-            return;
-        }
-
-        alt.Player.local.isActionMenuOpen = false;
-        ActionsView.close();
     }
 
     /**
@@ -107,10 +90,14 @@ class ActionsView implements ViewModel {
         alt.Player.local.isActionMenuOpen = true;
     }
 
-    static async close() {
+    static async close(skipPageClose = false) {
         actionMenu = null;
         const view = await WebViewController.get();
-        WebViewController.closePages([PAGE_NAME]);
+
+        if (!skipPageClose) {
+            WebViewController.closePages([PAGE_NAME]);
+        }
+
         WebViewController.unfocus();
         view.off(`${PAGE_NAME}:Ready`, ActionsView.ready);
         view.off(`${PAGE_NAME}:Close`, ActionsView.close);

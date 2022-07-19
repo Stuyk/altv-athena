@@ -26,6 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { WebViewEventNames } from '../../../src/core/shared/enums/webViewEvents';
 import Icon from './Icon.vue';
 
 const ComponentName = 'Toolbar';
@@ -50,7 +51,9 @@ export default defineComponent({
     },
     methods: {
         closePage() {
-            this.$emit('close-page', this.pageName);
+            if ('alt' in window) {
+                alt.emit(WebViewEventNames.CLOSE_PAGE);
+            }
         },
     },
 });

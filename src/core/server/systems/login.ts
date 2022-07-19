@@ -16,10 +16,8 @@ import { StorageView } from '../views/storage';
 import { AccountSystem } from './account';
 import { AgendaSystem } from './agenda';
 import { Injections } from './injections';
-import { LoginInjectionNames, TryQuickTokenCallback } from './injections/login';
+import { LoginInjectionNames, TryLoginCallback, TryQuickTokenCallback } from './injections/login';
 import { VehicleSystem } from './vehicle';
-
-type TryLoginCallback = (player: alt.Player, data: Partial<Account>) => Promise<void | string>;
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
@@ -74,6 +72,10 @@ export class LoginController {
      * @memberof LoginController
      */
     static async tryLogin(player: alt.Player, account: Partial<Account> = null): Promise<void> {
+        if (!player.valid) {
+            return;
+        }
+
         delete player.pendingLogin;
         delete player.discordToken;
 

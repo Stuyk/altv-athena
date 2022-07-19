@@ -5,7 +5,7 @@ import { Character } from '../../../../shared/interfaces/character';
 import { FactionHandler } from './handler';
 import { StorageSystem } from '../../../../server/systems/storage';
 import { Vector3 } from '../../../../shared/interfaces/vector';
-import { Faction, FactionRank, RankPermissions } from '../../shared/interfaces';
+import { Faction, FactionCharacter, FactionRank, RankPermissions } from '../../shared/interfaces';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { Athena } from '../../../../server/api/athena';
 import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
@@ -94,6 +94,40 @@ export class FactionFuncs {
     }
 
     /**
+     * Replace the current owner with a faction member who is in the faction.
+     * Moves the owner to 1 rank below the highest rank.
+     *
+     * @static
+     * @param {Faction} faction
+     * @param {string} characterIdentifier
+     * @return {Promise<boolean>}
+     * @memberof FactionFuncs
+     */
+    static async setOwner(faction: Faction, characterIdentifier: string): Promise<boolean> {
+        if (!faction.members[characterIdentifier]) {
+            return false;
+        }
+
+        const owner = FactionFuncs.getFactionOwner(faction);
+        const ownerRank = owner.rank;
+
+        if (owner) {
+            faction.members[owner.id].hasOwnership = false;
+            faction.members[owner.id].rank = FactionFuncs.getFactionRankBelowHighest(faction).uid;
+        }
+
+        faction.members[characterIdentifier].rank = ownerRank;
+        faction.members[characterIdentifier].hasOwnership = true;
+
+        const didUpdate = await FactionHandler.update(faction._id as string, { members: faction.members });
+        if (didUpdate.status) {
+            FactionFuncs.updateMembers(faction);
+        }
+
+        return didUpdate.status;
+    }
+
+    /**
      * Get a faction character's rank based on character identifier
      *
      * @static
@@ -109,6 +143,43 @@ export class FactionFuncs {
         }
 
         return faction.ranks.find((r) => r.uid === member.rank);
+    }
+
+    /**
+     * Returns the next highest rank from the 'owner' rank.
+     *
+     *
+     * @static
+     * @param {Faction} faction
+     * @return {*}
+     * @memberof FactionFuncs
+     */
+    static getFactionRankBelowHighest(faction: Faction) {
+        // Descending Order. Starts at 99
+        const ranks = faction.ranks.sort((a, b) => {
+            return b.weight - a.weight;
+        });
+
+        return ranks[1] ? ranks[1] : ranks[0];
+    }
+
+    /**
+     * Returns the faction member who is currently the owner.
+     *
+     * @static
+     * @param {Faction} faction
+     * @return {FactionMember}
+     * @memberof FactionFuncs
+     */
+    static getFactionOwner(faction: Faction): FactionCharacter | undefined {
+        const members = Object.values(faction.members);
+        for (const member of members) {
+            if (member.hasOwnership) {
+                return member;
+            }
+        }
+
+        return undefined;
     }
 
     /**
@@ -266,7 +337,7 @@ export class FactionFuncs {
         );
 
         if (onlinePlayer) {
-            onlinePlayer.data.faction = faction._id.toString();
+            Athena.state.set(onlinePlayer, 'faction', faction._id.toString());
         }
 
         faction.members[characterID] = {
@@ -302,13 +373,15 @@ export class FactionFuncs {
      */
     static async kickMember(faction: Faction, characterID: string): Promise<boolean> {
         const character = await Database.fetchData<Character>(`_id`, characterID, Collections.Characters);
+
         if (character) {
-            await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Factions);
+            await Database.updatePartialData(character._id.toString(), { faction: null }, Collections.Characters);
         }
 
-        const target = alt.Player.all.find((p) => p.data && p.data.faction === faction._id.toString());
-        if (target) {
+        const target = alt.Player.all.find((p) => p.data && p.data._id.toString() === characterID);
+        if (target && target.valid) {
             target.data.faction = null;
+            alt.emitClient(target, FACTION_EVENTS.PROTOCOL.REFRESH, null);
         }
 
         delete faction.members[characterID];

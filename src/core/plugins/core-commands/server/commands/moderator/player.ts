@@ -22,7 +22,7 @@ class PlayersCommand {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot find player with that ID.');
             return;
@@ -46,7 +46,7 @@ class PlayersCommand {
             return;
         }
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, 'Cannot find player with that ID.');
             return;
@@ -57,7 +57,7 @@ class PlayersCommand {
 
     @command('freeze', '/freeze <ID> - Freeze the specified player by ID', PERMISSIONS.ADMIN)
     private static freezeCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -68,7 +68,7 @@ class PlayersCommand {
 
     @command('unfreeze', '/unfreeze <ID>', PERMISSIONS.ADMIN)
     private static unfreezeCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -78,7 +78,7 @@ class PlayersCommand {
 
     @command('kick', '/kick <ID> <REASON>', PERMISSIONS.ADMIN)
     private static kickCommand(player: alt.Player, id: number, ...reason: string[]) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -92,7 +92,7 @@ class PlayersCommand {
 
     @command('ban', '/ban <ID> <REASON> - Bans a player.', PERMISSIONS.ADMIN)
     private static async banCommand(player: alt.Player, id: number, reason: string) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid || !id) return;
 
@@ -128,7 +128,7 @@ class PlayersCommand {
     private static async makeAdminCommand(player: alt.Player, id: number | string, permissionLevel: number) {
         if (!player || !player.valid) return;
 
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
@@ -146,7 +146,7 @@ class PlayersCommand {
 
     @command('info', '/info <ID> - Get account info for the specified id.', PERMISSIONS.ADMIN)
     private static infoCommand(player: alt.Player, id: number) {
-        const target = Athena.player.get.findByUid(id);
+        const target = Athena.systems.identifier.getPlayer(id);
 
         if (!target || !target.valid) return;
 
@@ -177,72 +177,5 @@ class PlayersCommand {
     private static finishSetArmour(target: alt.Player, value: number) {
         Athena.player.safe.addArmour(target, value, true);
         Athena.player.emit.message(target, `Player armour was set to ${value}`);
-    }
-
-    @command('tpto', '/tpto <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
-    private static handleTeleportTo(player: alt.Player, name: string) {
-        if (!name) {
-            Athena.player.emit.message(player, `tpto <partial_name>`);
-            return;
-        }
-
-        if (name.includes('_')) {
-            name = name.replace('_', '');
-        }
-
-        const target = alt.Player.all.find(
-            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
-        );
-
-        if (!target || !target.valid) {
-            Athena.player.emit.message(player, `Could not find that player.`);
-            return;
-        }
-
-        if (player.vehicle) {
-            player.vehicle.pos = target.pos;
-            return;
-        }
-
-        Athena.player.safe.setPosition(player, target.pos.x, target.pos.y, target.pos.z);
-    }
-
-    @command('tphere', '/tphere <partial_name>', PERMISSIONS.ADMIN | PERMISSIONS.MODERATOR)
-    private static handleTeleportHere(player: alt.Player, name: string) {
-        if (!name) {
-            Athena.player.emit.message(player, `tpto <partial_name>`);
-            return;
-        }
-
-        if (name.includes('_')) {
-            name = name.replace('_', '');
-        }
-
-        const target = alt.Player.all.find(
-            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
-        );
-
-        if (!target || !target.valid) {
-            Athena.player.emit.message(player, `Could not find that player.`);
-            return;
-        }
-
-        if (target.vehicle) {
-            target.vehicle.pos = player.pos;
-            return;
-        }
-
-        Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
-    }
-
-    @command('tpall', '/tpall', PERMISSIONS.ADMIN)
-    private static handleTeleportAll(player: alt.Player) {
-        alt.Player.all.forEach((target) => {
-            if (!target || !target.valid || !target.data || !target.data._id) {
-                return;
-            }
-
-            Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
-        });
     }
 }

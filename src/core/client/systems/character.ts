@@ -51,12 +51,19 @@ export class CharacterSystem {
         }
 
         // Hair - Tattoo
-        const collection = alt.hash(appearance.hairOverlay.collection);
-        const overlay = alt.hash(appearance.hairOverlay.overlay);
-        native.addPedDecorationFromHashes(ped, collection, overlay);
+        if (appearance.hairOverlay) {
+            const collection = alt.hash(appearance.hairOverlay.collection);
+            const overlay = alt.hash(appearance.hairOverlay.overlay);
+            native.addPedDecorationFromHashes(ped, collection, overlay);
+        }
 
         // Hair
-        native.setPedComponentVariation(ped, 2, appearance.hair, 0, 0);
+        if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {
+            native.setPedComponentVariation(ped, 2, appearance.hair, 0, 0);
+        } else {
+            alt.setPedDlcClothes(ped, appearance.hairDlc, 2, appearance.hair, 0, 0);
+        }
+
         native.setPedHairColor(ped, appearance.hairColor1, appearance.hairColor2);
 
         // Facial Hair
@@ -173,6 +180,8 @@ export class CharacterSystem {
     }
 
     static applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {
+        native.clearPedDecorations(alt.Player.local.scriptID);
+
         for (let i = 0; i < decorations.length; i++) {
             const collection = alt.hash(decorations[i].collection);
             const overlay = alt.hash(decorations[i].overlay);

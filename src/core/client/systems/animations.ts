@@ -14,7 +14,7 @@ const MaxLoadAttempts = 25;
  * @param {number} [count=0] Do not modify this. Leave it as zero.
  * @return {Promise<boolean>}  {Promise<boolean>}
  */
-async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
+export async function loadAnimation(dict: string, count: number = 0): Promise<boolean> {
     return new Promise((resolve: Function): void => {
         if (native.hasAnimDictLoaded(dict)) {
             resolve(true);

@@ -10,6 +10,7 @@ import { Appearance } from '../../../shared/interfaces/appearance';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../../systems/injections';
 import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
+import { Athena } from '../../api/athena';
 
 /**
  * Synchronize currency data like bank, cash, etc.
@@ -25,15 +26,15 @@ function currencyData(player: alt.Player): void {
 
 function inventory(player: alt.Player): void {
     if (!player.data.inventory) {
-        player.data.inventory = [];
+        Athena.state.set(player, 'inventory', []);
     }
 
     if (!player.data.toolbar) {
-        player.data.toolbar = [];
+        Athena.state.set(player, 'toolbar', []);
     }
 
     if (!player.data.equipment) {
-        player.data.equipment = [];
+        Athena.state.set(player, 'equipment', []);
     }
 
     equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
@@ -77,10 +78,22 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
     }
 
     // Hair - Tattoo
-    alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, [appearance.hairOverlay]);
+    const decorationsToSync = [];
+    if (appearance.hairOverlay) {
+        decorationsToSync.push(appearance.hairOverlay);
+    }
 
-    // Hair
-    player.setClothes(2, appearance.hair, 0, 0);
+    if (decorationsToSync.length >= 1) {
+        alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, decorationsToSync);
+    }
+
+    // Hair - Supports DLC
+    if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {
+        player.setClothes(2, appearance.hair, 0, 0);
+    } else {
+        player.setDlcClothes(appearance.hairDlc, 2, appearance.hair, 0, 0);
+    }
+
     player.setHairColor(appearance.hairColor1);
     player.setHairHighlightColor(appearance.hairColor2);
 
@@ -266,12 +279,7 @@ function weather(player: alt.Player): void {
 }
 
 function playTime(player: alt.Player): void {
-    if (!player.data.hours) {
-        player.data.hours = 0;
-    }
-
-    player.data.hours += 0.0166666666666667;
-    save.field(player, 'hours', player.data.hours);
+    Athena.state.set(player, 'hours', player.data.hours === 0 ? 0 : player.data.hours + 0.0166666666666667, true);
 }
 
 function override(functionName: string, callback: (player: alt.Player, ...args: any[]) => void) {

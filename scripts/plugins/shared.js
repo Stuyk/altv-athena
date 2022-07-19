@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 
-const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable'];
+const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable', 'disabled'];
 
 export function sanitizePath(p) {
     return p.replace(/\\/g, '/');

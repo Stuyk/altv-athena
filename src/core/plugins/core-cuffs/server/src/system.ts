@@ -191,7 +191,7 @@ export class CuffSystem {
                 return;
             }
 
-            Athena.player.save.field(cuffer, 'toolbar', cuffer.data.toolbar);
+            Athena.state.set(cuffer, 'toolbar', cuffer.data.toolbar);
         }
 
         if (inventoryType === INVENTORY_TYPE.INVENTORY) {
@@ -213,7 +213,7 @@ export class CuffSystem {
         Athena.player.inventory.inventoryAdd(cuffer, keyItem, invRef.slot);
 
         // Save Inventory & Synchronize Changes
-        Athena.player.save.partial(cuffer, { inventory: cuffer.data.inventory, toolbar: cuffer.data.toolbar });
+        Athena.state.setBulk(cuffer, { inventory: cuffer.data.inventory, toolbar: cuffer.data.toolbar });
         Athena.player.sync.inventory(cuffer);
 
         // Register Cuff Information

@@ -256,7 +256,6 @@ class InternalSystem {
         if (!skipOwnerCheck) {
             const hasAccess = await InteriorSystem.hasAccess(player, interior);
             if (!hasAccess) {
-                console.log('no access get fucked bing bong');
                 return;
             }
         }
@@ -724,6 +723,20 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_LOAD, interior.ipl);
         }
 
+        if (interior.entitySets) {
+            if (interior.interiorID) {
+                let sets = interior.entitySets;
+
+                for (let i = 0; i < sets.length; i++) {
+                    if (sets[i].active) {
+                        alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_ACTIVATE, interior.interiorID, sets[i].name);
+                    } else {
+                        alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_DEACTIVATE, interior.interiorID, sets[i].name);
+                    }
+                }
+            }
+        }
+
         Athena.player.safe.setDimension(player, interior.dimension);
 
         // Added solely for synchronizing interior for player's who
@@ -738,8 +751,7 @@ export class InteriorSystem {
             }, 1000);
         }
 
-        player.data.interior = interior.uid;
-        Athena.player.save.field(player, 'interior', player.data.interior);
+        Athena.state.set(player, 'interior', interior.uid);
         InternalSystem.refreshInteriorForPlayer(player);
         return true;
     }
@@ -765,6 +777,16 @@ export class InteriorSystem {
             alt.emitClient(player, SYSTEM_EVENTS.IPL_UNLOAD, interior.ipl);
         }
 
+        if (interior.entitySets) {
+            if (interior.interiorID) {
+                let sets = interior.entitySets;
+
+                for (let i = 0; i < sets.length; i++) {
+                    alt.emitClient(player, SYSTEM_EVENTS.ENTITYSET_DEACTIVATE, interior.interiorID, sets[i].name);
+                }
+            }
+        }
+
         const dist = distance(player.pos, interior.inside);
         if (dist > DOOR_CHECK_DIST) {
             Athena.player.emit.notification(player, LOCALE_INTERIOR_VIEW.LABEL_TOO_FAR);
@@ -781,8 +803,7 @@ export class InteriorSystem {
         Athena.player.set.frozen(player, true);
         Athena.player.safe.setDimension(player, 0);
         Athena.player.safe.setPosition(player, interior.outside.x, interior.outside.y, interior.outside.z + 1);
-        player.data.interior = null;
-        Athena.player.save.field(player, 'interior', player.data.interior);
+        Athena.state.set(player, 'interior', null);
         alt.setTimeout(() => {
             if (!player || !player.valid) {
                 return;

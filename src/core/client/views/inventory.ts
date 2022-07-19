@@ -48,17 +48,14 @@ class InternalFunctions implements ViewModel {
         }
 
         isOpen = true;
-        await WebViewController.setOverlaysVisible(false);
-
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Update`, InternalFunctions.ready);
         view.on(`${PAGE_NAME}:Use`, InternalFunctions.handleUse);
         view.on(`${PAGE_NAME}:Process`, InternalFunctions.handleProcess);
-        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:Split`, InternalFunctions.handleSplit);
         view.on(`${PAGE_NAME}:Pickup`, InternalFunctions.handlePickup);
 
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -120,11 +117,9 @@ class InternalFunctions implements ViewModel {
         view.off(`${PAGE_NAME}:Update`, InternalFunctions.ready);
         view.off(`${PAGE_NAME}:Use`, InternalFunctions.handleUse);
         view.off(`${PAGE_NAME}:Process`, InternalFunctions.handleProcess);
-        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.off(`${PAGE_NAME}:Split`, InternalFunctions.handleSplit);
         view.off(`${PAGE_NAME}:Pickup`, InternalFunctions.handlePickup);
 
-        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 
@@ -211,15 +206,13 @@ class InternalFunctions implements ViewModel {
      * @memberof InternalFunctions
      */
     static async keyUp(key: number) {
-        // Default: I
-        if (key === KEY_BINDS.INVENTORY && !isOpen) {
-            InternalFunctions.open();
+        if (alt.isConsoleOpen()) {
             return;
         }
 
-        // Default: I or ESC
-        if ((key === KEY_BINDS.INVENTORY || key === 27) && isOpen) {
-            InternalFunctions.close();
+        // Default: I
+        if (key === KEY_BINDS.INVENTORY && !isOpen) {
+            InternalFunctions.open();
             return;
         }
     }

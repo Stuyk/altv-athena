@@ -172,8 +172,8 @@ export default defineComponent({
 
             return this[this.split.name][this.split.index];
         },
-        relayClosePage(pageName: string) {
-            this.$emit('close-page', pageName);
+        relayClosePage() {
+            this.$emit('close-page', `${ComponentName}:Close`);
         },
         setLocales(localeObject) {
             this.locales = localeObject;
@@ -256,8 +256,6 @@ export default defineComponent({
         },
     },
     mounted() {
-        document.addEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetName`, this.setName);
             alt.on(`${ComponentName}:SetStorage`, this.setStorage);
@@ -269,8 +267,6 @@ export default defineComponent({
         }
     },
     unmounted() {
-        document.removeEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.off(`${ComponentName}:SetName`, this.setName);
             alt.off(`${ComponentName}:SetStorage`, this.setStorage);

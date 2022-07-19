@@ -23,15 +23,11 @@ class InternalFunctions implements ViewModel {
         // Need to add a sleep here because wheel menu inputs can be be too quick.
         await sleep(150);
 
-        // Must always be called first if you want to hide HUD.
-        await WebViewController.setOverlaysVisible(false);
-
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.on(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
-        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -39,21 +35,21 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static async close(isNotCancel = false) {
+    static async close(isNotCancel = false, shouldClosePage = false) {
         alt.toggleGameControls(true);
-
-        WebViewController.setOverlaysVisible(true);
 
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
         view.off(`${PAGE_NAME}:Submit`, InternalFunctions.submit);
-        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
 
-        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        if (shouldClosePage) {
+            WebViewController.closePages([PAGE_NAME], true);
+        }
 
         if (isNotCancel) {
             return;
@@ -77,7 +73,7 @@ class InternalFunctions implements ViewModel {
             alt.emitServer(inputMenu.serverEvent, results);
         }
 
-        InternalFunctions.close(true);
+        InternalFunctions.close(true, true);
     }
 
     static async ready() {

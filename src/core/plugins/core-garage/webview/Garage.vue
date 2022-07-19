@@ -1,7 +1,7 @@
 <template>
     <Frame minWidth="500px" maxWidth="500px">
         <template v-slot:toolbar>
-            <Toolbar @close-page="relayClosePage" pageName="Garage">Garage</Toolbar>
+            <Toolbar pageName="Garage">Garage</Toolbar>
         </template>
         <template v-slot:content>
             <div class="vehicles">
@@ -64,22 +64,11 @@ export default defineComponent({
     },
     methods: {
         ResolvePath,
-        relayClosePage(pageName: string) {
-            this.$emit('close-page', pageName);
+        relayClosePage() {
+            this.$emit('close-page', `${ComponentName}:Close`);
         },
         setLocales(localeObject) {
             this.locales = localeObject;
-        },
-        handlePress(e) {
-            if (e.keyCode !== 27) {
-                return;
-            }
-
-            if (!('alt' in window)) {
-                return;
-            }
-
-            alt.emit(`${ComponentName}:Close`);
         },
         spawn(index) {
             if (!('alt' in window)) {
@@ -104,8 +93,6 @@ export default defineComponent({
         },
     },
     mounted() {
-        document.addEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.on(`${ComponentName}:SetLocale`, this.setLocales);
             alt.on(`${ComponentName}:SetVehicles`, this.setVehicles);
@@ -116,8 +103,6 @@ export default defineComponent({
         }
     },
     unmounted() {
-        document.removeEventListener('keyup', this.handlePress);
-
         if ('alt' in window) {
             alt.off(`${ComponentName}:SetLocale`, this.setLocales);
         }

@@ -33,7 +33,7 @@ class InternalFunctions implements ViewModel {
         view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:MoveFromPlayer`, InternalFunctions.moveFromPlayer);
         view.on(`${PAGE_NAME}:MoveFromStorage`, InternalFunctions.moveFromStorage);
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
@@ -56,7 +56,6 @@ class InternalFunctions implements ViewModel {
         view.off(`${PAGE_NAME}:MoveFromPlayer`, InternalFunctions.moveFromPlayer);
         view.off(`${PAGE_NAME}:MoveFromStorage`, InternalFunctions.moveFromStorage);
 
-        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 

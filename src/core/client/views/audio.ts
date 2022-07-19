@@ -22,7 +22,7 @@ class InternalFunctions implements ViewModel {
             interval = alt.setInterval(InternalFunctions.handleQueue, 100);
         }
 
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.registerPersistentPage(PAGE_NAME);
     }
 
     /**

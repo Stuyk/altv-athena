@@ -59,9 +59,10 @@ export class FuelSystem {
      * For each vehicle in the game, check if it has a driver and if so, tick the fuel system
      */
     static updateDrivingPlayers() {
-        for (let i = 0; i < alt.Vehicle.all.length; i++) {
-            const vehicle = alt.Vehicle.all[i];
-            if (!vehicle || !vehicle.valid || !vehicle.driver || !vehicle.driver.valid) {
+        const vehicles = [...alt.Vehicle.all];
+        for (let i = 0; i < vehicles.length; i++) {
+            const vehicle = vehicles[i];
+            if (!vehicle || !vehicle.valid || !vehicle.engineOn) {
                 continue;
             }
 

@@ -22,11 +22,11 @@ export interface INametagConfig {
     SHOW_NAME: boolean;
 
     /**
-     * Show Account ID of the Target Player
+     * Show the id from the Identifier strategy.
      * @type {boolean}
      * @memberof INametagConfig
      */
-    SHOW_ACCOUNT_ID: boolean;
+    SHOW_ID: boolean;
 
     /**
      * If show name is enabled. Should the name instantly show?

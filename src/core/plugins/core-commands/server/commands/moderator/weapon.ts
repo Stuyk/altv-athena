@@ -54,9 +54,14 @@ class WeaponCommands {
         }
 
         Athena.player.inventory.inventoryAdd(player, newItem, inv.slot);
-        Athena.player.save.field(player, 'inventory', player.data.inventory);
+        Athena.state.set(player, 'inventory', player.data.inventory, true);
         Athena.player.sync.inventory(player);
         Athena.player.emit.message(player, `Added weapon: ${weapon.name}`);
+    }
+
+    @command('ammo', '/ammo - Add ammo to currently equipped weapon.', PERMISSIONS.ADMIN)
+    private static handleAddAmmo(player: alt.Player) {
+        player.giveWeapon(player.currentWeapon, 9999, true);
     }
 
     @command(

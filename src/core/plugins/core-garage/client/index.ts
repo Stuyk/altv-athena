@@ -28,14 +28,11 @@ class InternalFunctions implements ViewModel {
         }
 
         // Must always be called first if you want to hide HUD.
-        await WebViewController.setOverlaysVisible(false);
-
         const view = await WebViewController.get();
         view.on(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        view.on(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.on(`${PAGE_NAME}:Spawn`, InternalFunctions.spawn);
         view.on(`${PAGE_NAME}:Despawn`, InternalFunctions.despawn);
-        WebViewController.openPages([PAGE_NAME]);
+        WebViewController.openPages(PAGE_NAME, true, InternalFunctions.close);
         WebViewController.focus();
         WebViewController.showCursor(true);
         alt.toggleGameControls(false);
@@ -45,15 +42,11 @@ class InternalFunctions implements ViewModel {
     static async close() {
         alt.toggleGameControls(true);
 
-        WebViewController.setOverlaysVisible(true);
-
         const view = await WebViewController.get();
         view.off(`${PAGE_NAME}:Ready`, InternalFunctions.ready);
-        view.off(`${PAGE_NAME}:Close`, InternalFunctions.close);
         view.off(`${PAGE_NAME}:Spawn`, InternalFunctions.spawn);
         view.off(`${PAGE_NAME}:Despawn`, InternalFunctions.despawn);
 
-        WebViewController.closePages([PAGE_NAME]);
         WebViewController.unfocus();
         WebViewController.showCursor(false);
 

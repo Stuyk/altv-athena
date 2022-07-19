@@ -5,6 +5,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 alt.onServer(SYSTEM_EVENTS.TICKS_START, fixMissingInteriors);
 
 function fixMissingInteriors() {
+    alt.requestIpl('bh1_47_joshhse_unburnt');
     alt.requestIpl('ex_dt1_02_office_02b');
     alt.requestIpl('chop_props');
     alt.requestIpl('FIBlobby');
@@ -127,11 +128,7 @@ function fixMissingInteriors() {
     alt.requestIpl('Jetsteal_ipl_grp1');
 
     // Hospital Pillbox Interiors
-    alt.requestIpl('v_hospital');
-    alt.removeIpl('RC12B_Default');
-    alt.removeIpl('RC12B_Fixed');
-    alt.requestIpl('RC12B_Destroyed');
-    alt.requestIpl('RC12B_HospitalInterior');
+    alt.requestIpl('RC12B_Default');
 
     // Canyon
     alt.requestIpl('canyonriver01');

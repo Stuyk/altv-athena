@@ -29,14 +29,16 @@ class InternalFunctions {
         if (newValue) {
             if (!interval) {
                 interval = Timer.createInterval(InternalFunctions.tick, 0, 'death.ts');
-                native.animpostfxPlay('DeathFailOut', 0, false);
-                native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
             }
+
+            native.animpostfxPlay('DeathFailOut', 0, false);
+            native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
             return;
         }
 
         if (interval) {
             Timer.clearInterval(interval);
+            interval = undefined;
         }
 
         native.animpostfxStop('DeathFailOut');

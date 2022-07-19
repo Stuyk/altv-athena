@@ -61,7 +61,7 @@ export class VitalsSystem {
      */
     static forceUpdateVital(player: alt.Player, vitalName: VITAL_NAMES) {
         if (!player.data[vitalName]) {
-            player.data[vitalName] = 100;
+            Athena.state.set(player, vitalName, 100);
         }
 
         Athena.player.emit.meta(player, vitalName, player.data[vitalName]);
@@ -82,26 +82,32 @@ export class VitalsSystem {
             value = parseFloat(value);
         }
 
+        let oldVitalValue: number;
+
         if (!isExact) {
             if (player.data[vitalName] === undefined || player.data[vitalName] === null) {
                 player.data[vitalName] = 100;
             }
 
-            player.data[vitalName] += value;
+            oldVitalValue = player.data[vitalName];
+            oldVitalValue += value;
 
-            if (player.data[vitalName] < 0) {
-                player.data[vitalName] = 0;
+            if (oldVitalValue < 0) {
+                oldVitalValue = 0;
             }
 
-            if (player.data[vitalName] > 100) {
-                player.data[vitalName] = 100;
+            if (oldVitalValue > 100) {
+                oldVitalValue = 100;
             }
         } else {
-            player.data[vitalName] = Math.abs(value);
+            oldVitalValue = Math.abs(value);
         }
 
-        Athena.player.emit.meta(player, vitalName, player.data[vitalName]);
-        Athena.player.save.field(player, vitalName, player.data[vitalName]);
+        if (oldVitalValue !== player.data[vitalName]) {
+            Athena.state.set(player, vitalName, oldVitalValue);
+        }
+
+        Athena.player.emit.meta(player, vitalName, oldVitalValue);
     }
 
     /**

@@ -1,4 +1,5 @@
 import * as alt from 'alt-server';
+import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ITEM_TYPE } from '../../shared/enums/itemTypes';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
@@ -7,6 +8,8 @@ import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { Athena } from '../api/athena';
+import { Injections } from './injections';
+import { PlayerInjectionNames, WeaponChangeCallback } from './injections/player';
 import { ItemEffects } from './itemEffects';
 
 export class ToolbarController {
@@ -33,7 +36,7 @@ export class ToolbarController {
 
         // Handle Weapon Switch
         if (isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON)) {
-            ToolbarController.handleWeaponEquip(player, item);
+            ToolbarController.handleWeaponEquip(player, slot, item);
             return;
         }
 
@@ -47,6 +50,15 @@ export class ToolbarController {
         // No idea what this will be yet.
     }
 
+    static async runWeaponInjections(player: alt.Player, slot: number, item: Item, isEquip = true) {
+        const startInjections = Injections.get<WeaponChangeCallback>(
+            isEquip ? PlayerInjectionNames.WEAPON_EQUIP : PlayerInjectionNames.WEAPON_UNEQUIP,
+        );
+        for (const callback of startInjections) {
+            await callback(player, slot, item);
+        }
+    }
+
     /**
      * When the player equips a weapon, the function will remove all weapons from the player and
      * then give them the weapon that was just equipped.
@@ -54,7 +66,7 @@ export class ToolbarController {
      * @param {Item} item - The item that was selected.
      * @returns The function that handles the weapon equip.
      */
-    static handleWeaponEquip(player: alt.Player, item: Item) {
+    static async handleWeaponEquip(player: alt.Player, slot: number, item: Item) {
         player.removeAllWeapons();
 
         if (!item.data.hash) {
@@ -62,32 +74,26 @@ export class ToolbarController {
             return;
         }
 
+        const equipTest = player.lastToolbarData ? player.lastToolbarData.equipped : false;
+        const sameWeaponSlotTest = player.lastToolbarData ? !(player.lastToolbarData.slot !== item.slot) : false;
+
         // Handle first equip
-        if (!player.lastToolbarData) {
-            player.lastToolbarData = { equipped: true, slot: item.slot };
-            player.giveWeapon(item.data.hash, 9999, true);
-            Athena.player.emit.sound3D(player, 'item_equip', player);
-            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
-            return;
-        }
+        if (!player.lastToolbarData || !sameWeaponSlotTest || !equipTest) {
+            if (!player.lastToolbarData) {
+                player.lastToolbarData = { equipped: true, slot: item.slot };
+            }
 
-        if (player.lastToolbarData.slot !== item.slot) {
-            player.lastToolbarData = { equipped: true, slot: item.slot };
-            player.giveWeapon(item.data.hash, 9999, true);
+            player.giveWeapon(item.data.hash, 0, true);
+            await ToolbarController.runWeaponInjections(player, slot, item, true);
             Athena.player.emit.sound3D(player, 'item_equip', player);
-            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
-            return;
-        }
-
-        if (!player.lastToolbarData.equipped) {
-            player.giveWeapon(item.data.hash, 9999, true);
+            Athena.events.player.trigger(ATHENA_EVENTS_PLAYER.EQUIPPED_WEAPON, player, slot, item);
+            player.lastToolbarData.slot = item.slot;
             player.lastToolbarData.equipped = true;
-            Athena.player.emit.sound3D(player, 'item_equip', player);
-            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_RELOAD);
             return;
         }
 
         player.lastToolbarData.equipped = false;
+        Athena.events.player.trigger(ATHENA_EVENTS_PLAYER.UNEQUIPPED_WEAPON, player, slot, item);
         Athena.player.emit.sound3D(player, 'item_remove', player);
     }
 
@@ -108,8 +114,8 @@ export class ToolbarController {
                 Athena.player.inventory.replaceToolbarItem(player, item);
             }
 
+            Athena.state.set(player, 'toolbar', player.data.toolbar, true);
             Athena.player.sync.inventory(player);
-            Athena.player.save.field(player, 'toolbar', player.data.toolbar);
         }
 
         if (item.data && item.data.event) {

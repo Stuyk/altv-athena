@@ -5,6 +5,7 @@ import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
 import { BANK_CONFIG } from './config';
 import * as charRef from '../../../../shared/interfaces/character';
 import { Athena } from '../../../../server/api/athena';
+import { StateManager } from '../../../../server/systems/stateManager';
 
 const metaName = 'bankNumber';
 
@@ -24,12 +25,9 @@ class InternalFunctions {
 
         // Increase the value outright
         await Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
-
-        player.data.bankNumber = await Global.getKey<number>(metaName);
-        await Athena.player.save.field(player, metaName, player.data.bankNumber);
-
+        const bankNumber = await Global.getKey<number>(metaName);
+        StateManager.set(player, metaName, bankNumber);
         Athena.player.emit.meta(player, metaName, player.data[metaName]);
-
         alt.log(`Created Bank Account # ${player.data[metaName]} for ${player.data.name}`);
     }
 }

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
-import ChatController from '../../../../server/systems/chat';
+import { command } from '../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { FACTION_EVENTS } from '../../shared/factionEvents';
 import { FactionFuncs } from './funcs';
@@ -10,30 +10,8 @@ import { FactionPlayerFuncs } from './playerFuncs';
 const lastInvite: { [character: string]: string } = {};
 
 export class FactionCommands {
-    /**
-     * This function adds a command to the chat controller
-     */
     static init() {
-        ChatController.addCommand('fcreate', '/fcreate [name]', PERMISSIONS.ADMIN, FactionCommands.handleCreate);
-        ChatController.addCommand('fopen', '/fopen - Open Faction Menu', PERMISSIONS.NONE, FactionCommands.open);
-        ChatController.addCommand(
-            'fjoin',
-            '/fjoin [uid] - Quits Current Faction & Joins Another',
-            PERMISSIONS.ADMIN,
-            FactionCommands.forceJoin,
-        );
-        ChatController.addCommand(
-            'finvite',
-            '/finvite [id_or_first_last] - Invite to faction',
-            PERMISSIONS.NONE,
-            FactionCommands.invite,
-        );
-        ChatController.addCommand(
-            'faccept',
-            '/faccept - Join last invited to faction',
-            PERMISSIONS.NONE,
-            FactionCommands.accept,
-        );
+        // leave empty
     }
 
     /**
@@ -42,7 +20,8 @@ export class FactionCommands {
      * @param {string[]} name - The name of the faction.
      * @returns The result of the add function.
      */
-    static async handleCreate(player: alt.Player, ...name: string[]) {
+    @command('fcreate', '/fcreate [name] - Open faction panel if in faction.', PERMISSIONS.ADMIN)
+    private static async handleFactionCreate(player: alt.Player, ...name: string[]) {
         const factionName = name.join(' ');
         const result = await FactionHandler.add(player.data._id.toString(), {
             bank: 0,
@@ -59,7 +38,8 @@ export class FactionCommands {
         Athena.player.emit.message(player, `Created Faction with ID: ${id}`);
     }
 
-    static async open(player: alt.Player) {
+    @command('fopen', '/fopen - Open faction panel if in faction.', PERMISSIONS.NONE)
+    private static async handleOpenFactionPanel(player: alt.Player) {
         if (!player.data.faction) {
             Athena.player.emit.message(player, 'You are not in a faction.');
             return;
@@ -74,7 +54,8 @@ export class FactionCommands {
         alt.emitClient(player, FACTION_EVENTS.PROTOCOL.OPEN, faction);
     }
 
-    static async forceJoin(player: alt.Player, uid: string) {
+    @command('fjoin', '/fjoin [uid] - Quits Current Faction & Joins Another', PERMISSIONS.ADMIN)
+    private static async handleForceJoinFaction(player: alt.Player, uid: string) {
         if (!uid) {
             Athena.player.emit.message(player, `You must specify a faction UID to join.`);
             return;
@@ -97,7 +78,8 @@ export class FactionCommands {
         Athena.player.emit.message(player, `Moved to Faction: ${faction.name}`);
     }
 
-    static async invite(player: alt.Player, idOrName: string) {
+    @command('finvite', '/finvite [id_or_first_last] - Invite to faction', PERMISSIONS.NONE)
+    private static async handleFactionInvite(player: alt.Player, idOrName: string) {
         const faction = FactionHandler.get(player.data.faction);
         if (!faction) {
             Athena.player.emit.message(player, `You are not in a faction.`);
@@ -122,7 +104,7 @@ export class FactionCommands {
                 (x) => x && x.data && x.data.name.toLowerCase().includes(idOrName.toLowerCase()),
             );
         } else {
-            target = Athena.player.get.findByUid(idOrName);
+            target = Athena.systems.identifier.getPlayer(idOrName);
         }
 
         if (!target || !target.data || !target.valid || !idOrName || target === player) {
@@ -141,7 +123,8 @@ export class FactionCommands {
         Athena.player.emit.message(target, `Type '/faccept' to join`);
     }
 
-    static async accept(player: alt.Player) {
+    @command('faccept', '/faccept - Join last invited to faction', PERMISSIONS.NONE)
+    private static async handleFactionAccept(player: alt.Player) {
         if (player.data.faction) {
             Athena.player.emit.message(player, `Already in a faction.`);
             delete lastInvite[player.data._id];
@@ -169,5 +152,32 @@ export class FactionCommands {
         }
 
         Athena.player.emit.message(player, `Joined faction ${faction.name}`);
+    }
+
+    @command(
+        'fsetowner',
+        '/fsetowner <player_id> - Set a member inside a faction to the owner of their faction.',
+        PERMISSIONS.ADMIN,
+    )
+    private static async handleSetOwner(player: alt.Player, id: string) {
+        const target = Athena.systems.identifier.getPlayer(id);
+        if (!target) {
+            Athena.player.emit.message(player, 'Cannot find player with that ID.');
+            return;
+        }
+
+        const faction = FactionHandler.get(target.data.faction);
+        if (!faction) {
+            Athena.player.emit.message(player, `Target player is not in a faction.`);
+            return;
+        }
+
+        const didUpdate = await FactionFuncs.setOwner(faction, target.data._id.toString());
+        if (!didUpdate) {
+            Athena.player.emit.message(player, `${target.data.name} could not be set the owner of ${faction.name}.`);
+            return;
+        }
+
+        Athena.player.emit.message(player, `${target.data.name} was set to owner of ${faction.name}`);
     }
 }
