@@ -61,7 +61,7 @@ export class CharacterSystem {
         if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {
             native.setPedComponentVariation(ped, 2, appearance.hair, 0, 0);
         } else {
-            alt.setPedDlcClothes(ped, appearance.hairDlc, appearance.hair, 0, 0);
+            alt.setPedDlcClothes(ped, appearance.hairDlc, 2, appearance.hair, 0, 0);
         }
 
         native.setPedHairColor(ped, appearance.hairColor1, appearance.hairColor2);

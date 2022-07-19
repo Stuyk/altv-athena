@@ -95,12 +95,13 @@ export class BarbershopView {
         }
 
         const appearance = deepCloneObject<Appearance>(customer.data.appearance);
+        const hairOverlay = hairOverlayInfo[data.hairFullName];
 
         appearance.hairDlc = data.dlc;
         appearance.hair = data.hair;
         appearance.hairColor1 = data.hairColor1;
         appearance.hairColor2 = data.hairColor2;
-        appearance.hairOverlay = data.hairOverlay;
+        appearance.hairOverlay = hairOverlay;
         appearance.eyebrows = data.eyeIndex;
         appearance.eyebrowsOpacity = data.eyeOpacity;
         appearance.eyebrowsColor1 = data.eyeColor1;
