@@ -78,7 +78,14 @@ function appearance(player: alt.Player, appearance: Partial<Appearance>) {
     }
 
     // Hair - Tattoo
-    alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, [appearance.hairOverlay]);
+    const decorationsToSync = [];
+    if (appearance.hairOverlay) {
+        decorationsToSync.push(appearance.hairOverlay);
+    }
+
+    if (decorationsToSync.length >= 1) {
+        alt.emitClient(player, SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, decorationsToSync);
+    }
 
     // Hair - Supports DLC
     if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {

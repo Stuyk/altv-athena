@@ -51,9 +51,11 @@ export class CharacterSystem {
         }
 
         // Hair - Tattoo
-        const collection = alt.hash(appearance.hairOverlay.collection);
-        const overlay = alt.hash(appearance.hairOverlay.overlay);
-        native.addPedDecorationFromHashes(ped, collection, overlay);
+        if (appearance.hairOverlay) {
+            const collection = alt.hash(appearance.hairOverlay.collection);
+            const overlay = alt.hash(appearance.hairOverlay.overlay);
+            native.addPedDecorationFromHashes(ped, collection, overlay);
+        }
 
         // Hair
         if (typeof appearance.hairDlc === 'undefined' || appearance.hairDlc === 0) {

@@ -5,6 +5,7 @@ export const BarbershopEvents = {
         CLOSE: 'barbershop:Close',
         SAVE: 'barbershop:Save',
         READY: 'barbershop:Ready',
+        SAVE_CLOSE: 'barbershop:SaveClose',
     },
     ServerClientEvents: {
         OPEN: 'barbershop:open',

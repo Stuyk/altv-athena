@@ -1,28 +1,28 @@
 <template>
-    <div class="eyebrows">
-        <!-- Beard Style -->
+    <div class="makeup">
+        <!-- Eyebrow Style -->
         <div class="header-info overline boldest white--text mb-2">Style</div>
         <div class="split split-full-width">
-            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'beardIndex', beards.length - 1)">
+            <Button class="makeup-btn" color="blue" @click="$emit('decrement-index', 'beardIndex', makeup.length - 1)">
                 <Icon icon="icon-chevron-left" :size="24" />
             </Button>
             <div class="text-sm-overline white--text mb-2 header-bold">
-                {{ beards[currentIndex] }}
+                {{ makeup[currentIndex] }}
             </div>
-            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'beardIndex', beards.length - 1)">
+            <Button class="makeup-btn" color="blue" @click="$emit('increment-index', 'beardIndex', makeup.length - 1)">
                 <Icon icon="icon-chevron-right" :size="24" />
             </Button>
         </div>
-        <!-- Beard Opacity -->
+        <!-- Eyebrow Opacity -->
         <div class="header-info overline boldest white--text mb-2 mt-2">Opacity</div>
         <div class="split split-full-width">
-            <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'beardOpacity', 1, 0.1)">
+            <Button class="makeup-btn" color="blue" @click="$emit('decrement-index', 'beardOpacity', 1, 0.1)">
                 <Icon icon="icon-chevron-left" :size="24" />
             </Button>
             <div class="text-sm-overline boldest white--text mb-2 header-bold">
                 {{ opacity.toFixed(2) }}
             </div>
-            <Button class="eye-btn" color="blue" @click="$emit('increment-index', 'beardOpacity', 1, 0.1)">
+            <Button class="makeup-btn" color="blue" @click="$emit('increment-index', 'beardOpacity', 1, 0.1)">
                 <Icon icon="icon-chevron-right" :size="24" />
             </Button>
         </div>
@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { facialHairNames } from '../../../../shared/information/facialHair';
+import { makeup } from '../../../../shared/information/makeup';
 
-const ComponentName = 'BeardComponent';
+const ComponentName = 'MakeupComponent';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -52,7 +52,7 @@ export default defineComponent({
     },
     data() {
         return {
-            beards: facialHairNames,
+            makeup: makeup,
         };
     },
     methods: {
@@ -70,7 +70,7 @@ export default defineComponent({
 </script>
 
 <style>
-.eyebrows {
+.makeup {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -85,7 +85,7 @@ export default defineComponent({
     justify-content: space-between;
 }
 
-.eye-btn {
+.makeup-btn {
     min-width: 54px;
     max-width: 54px;
     border-radius: 12px;

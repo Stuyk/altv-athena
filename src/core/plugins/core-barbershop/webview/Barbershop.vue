@@ -12,6 +12,12 @@
                     >
                         <Icon :icon="element.icon" :size="18"></Icon>
                     </div>
+                    <div class="circle-btn mb-4 green--text" @click="save">
+                        <Icon icon="icon-checkmark" :size="18"></Icon>
+                    </div>
+                    <div class="circle-btn mb-4 red--text" @click="close">
+                        <Icon icon="icon-times-circle" :size="18"></Icon>
+                    </div>
                 </div>
                 <div class="color-palette pt-3" :key="navIndex">
                     <Button
@@ -99,7 +105,7 @@ export default defineComponent({
                 { icon: 'icon-hair', type: 'hair', colors: 2, isHair: true, colorComponentType: 0 },
                 { icon: 'icon-eye', type: 'eye', colors: 1, isEyebrows: true, colorComponentType: 0 },
                 { icon: 'icon-beard', type: 'beard', colors: 1, isBeard: true, colorComponentType: 0 },
-                { icon: 'icon-makeup', type: 'makeup', colors: 1, isMakeup: true, colorComponentType: 1 },
+                // { icon: 'icon-makeup', type: 'makeup', colors: 1, isMakeup: true, colorComponentType: 1 },
             ],
             // Color Palette Helper
             colorType: 'hairColor1',
@@ -182,15 +188,19 @@ export default defineComponent({
             );
             this.setHairIndex(hairStyleIndex === -1 ? 0 : hairStyleIndex);
 
-            this.hairColor1 = data.hairColor1;
-            this.hairColor2 = data.hairColor2;
+            for (const key of Object.keys(data)) {
+                this[key] = data[key];
+
+                console.log(`${key}: ${data[key]}`);
+            }
+
+            this.update();
 
             // Modify Navigation Options
             if (this.sex === 0) {
                 const navigationOptions = [...this.navigation];
                 const navIndex = navigationOptions.findIndex((x) => x.type === 'beard');
                 if (navIndex !== -1) {
-                    console.log(navIndex);
                     navigationOptions.splice(navIndex, 1);
                     this.navigation = navigationOptions;
                 }
@@ -207,7 +217,7 @@ export default defineComponent({
         getHairStyle(): number {
             return parseInt(this.hairStyles[this.hairIndex].split('-')[3]);
         },
-        update() {
+        update(shouldSave = false) {
             const updateInformation: BarbershopData = {
                 dlc: this.getHairStyleDlc(),
                 hair: this.getHairStyle(),
@@ -225,7 +235,12 @@ export default defineComponent({
                 beardOpacity: this.beardOpacity,
             };
 
-            WebViewEvents.emitServer(BarbershopEvents.WebViewEvents.UPDATE, updateInformation);
+            if (!shouldSave) {
+                WebViewEvents.emitClient(BarbershopEvents.WebViewEvents.UPDATE, updateInformation);
+                return;
+            }
+
+            WebViewEvents.emitServer(BarbershopEvents.ServerClientEvents.SAVE, updateInformation);
         },
         closePage() {
             //
@@ -236,6 +251,13 @@ export default defineComponent({
         async setNavIndex(index: number) {
             this.navIndex = index;
             this.colorType = this.getColorName(1);
+        },
+        close() {
+            WebViewEvents.emitClose();
+        },
+        save() {
+            this.update(true);
+            WebViewEvents.emitClient(BarbershopEvents.WebViewEvents.SAVE_CLOSE);
         },
     },
     mounted() {
@@ -331,6 +353,9 @@ export default defineComponent({
 }
 
 .circle-btn {
+    display: flex;
+    align-items: center;
+    align-content: center;
     padding: 12px;
     border: 2px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.8);
@@ -338,6 +363,10 @@ export default defineComponent({
     cursor: pointer;
     color: rgba(255, 255, 255, 0.4);
     transition: all 0.1s ease-in-out;
+}
+
+.circle-btn .icon {
+    transform: translateX(-1px);
 }
 
 .circle-btn:hover {

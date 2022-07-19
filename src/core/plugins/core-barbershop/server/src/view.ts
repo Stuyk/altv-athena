@@ -2,8 +2,13 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { EQUIPMENT_TYPE } from '../../../../shared/enums/equipmentType';
 import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { Appearance } from '../../../../shared/interfaces/appearance';
+import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { Item } from '../../../../shared/interfaces/item';
+import { deepCloneObject } from '../../../../shared/utility/deepCopy';
 import { BarbershopEvents } from '../../shared/events';
 import { BarbershopData } from '../../shared/interfaces';
+import { BARBER_SHOP_LOCATIONS } from '../../shared/locations';
 import { hairOverlayInfo } from '../../shared/overlays';
 
 /**
@@ -29,6 +34,12 @@ export class InternalFunctions {
      */
     static init() {
         alt.on('playerDisconnect', InternalFunctions.handleDisconnect);
+
+        for (const pos of BARBER_SHOP_LOCATIONS) {
+            Athena.controllers.blip.append({ pos, color: 43, scale: 1, shortRange: true, text: 'Barber', sprite: 71 });
+            Athena.controllers.marker.append({ pos, color: new alt.RGBA(0, 255, 0, 100), type: 1 });
+            Athena.controllers.interaction.add({ position: pos, callback: BarbershopView.open, isPlayerOnly: true });
+        }
     }
 
     /**
@@ -59,6 +70,9 @@ export class InternalFunctions {
 }
 
 export class BarbershopView {
+    /**
+     * When the server is ready it binds events.
+     */
     static init() {
         InternalFunctions.init();
         alt.onClient(BarbershopEvents.ServerClientEvents.UPDATE, BarbershopView.update);
@@ -66,12 +80,72 @@ export class BarbershopView {
         alt.onClient(BarbershopEvents.ServerClientEvents.SAVE, BarbershopView.save);
     }
 
-    static save() {
-        //
+    static async save(hairDresser: alt.Player, data: BarbershopData) {
+        const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
+
+        if (!sessions[hairDresserID]) {
+            BarbershopView.close(hairDresser);
+            return;
+        }
+
+        const customer = Athena.systems.identifier.getPlayer(sessions[hairDresserID]);
+        if (!customer || !customer.valid) {
+            BarbershopView.close(hairDresser);
+            return;
+        }
+
+        const appearance = deepCloneObject<Appearance>(customer.data.appearance);
+
+        appearance.hairDlc = data.dlc;
+        appearance.hair = data.hair;
+        appearance.hairColor1 = data.hairColor1;
+        appearance.hairColor2 = data.hairColor2;
+        appearance.hairOverlay = data.hairOverlay;
+        appearance.eyebrows = data.eyeIndex;
+        appearance.eyebrowsOpacity = data.eyeOpacity;
+        appearance.eyebrowsColor1 = data.eyeColor1;
+        appearance.facialHair = data.beardIndex;
+        appearance.facialHairColor1 = data.beardColor1;
+        appearance.facialHairOpacity = data.beardOpacity;
+
+        await Athena.state.set(customer, 'appearance', appearance);
+        BarbershopView.close(hairDresser);
     }
 
-    static close(hairDresser: alt.Player) {
-        // bye
+    /**
+     * It's a function that takes a player as an argument, and if the player is a hairdresser, it will
+     * close the session for the hairdresser and free the customer.
+     *
+     * @param hairDresser - alt.Player - The player who is the hairdresser.
+     * @returns the value of the variable "hairDresserID"
+     */
+    static close(hairDresser: alt.Player, doNotSync = false) {
+        const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
+
+        if (!sessions[hairDresserID]) {
+            alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.CLOSE, true);
+            return;
+        }
+
+        const customer = Athena.systems.identifier.getPlayer(sessions[hairDresserID]);
+        delete sessions[hairDresserID];
+        if (!customer || !customer.valid) {
+            alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.CLOSE, true);
+            return;
+        }
+
+        customer.frozen = false;
+
+        if (doNotSync) {
+            return;
+        }
+
+        Athena.player.sync.appearance(customer, customer.data.appearance);
+        Athena.player.sync.equipment(
+            customer,
+            customer.data.equipment as Item<ClothingComponent>[],
+            customer.data.appearance.sex === 1,
+        );
     }
 
     /**
@@ -174,7 +248,7 @@ export class BarbershopView {
             eyeIndex: customer.data.appearance.eyebrows,
             eyeColor1: customer.data.appearance.eyebrowsColor1,
             eyeOpacity: customer.data.appearance.eyebrowsOpacity,
-            beardIndex: customer.data.appearance.facialHair ? 0 : customer.data.appearance.facialHair,
+            beardIndex: !customer.data.appearance.facialHair ? 0 : customer.data.appearance.facialHair,
             beardColor1: customer.data.appearance.facialHairColor1,
             beardOpacity: customer.data.appearance.facialHairOpacity,
             makeupIndex: makeupInfo && makeupInfo.value ? makeupInfo.value : 0,
@@ -182,6 +256,7 @@ export class BarbershopView {
             makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
 
+        customer.frozen = true;
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);
     }
 

@@ -20,7 +20,7 @@
         ".github": true,
         ".loose-ts-check": true,
         ".husky": true,
-        "resources/core/**": true,
+        "resources/core/**": false,
         "CONTRIBUTING.md": true,
         "fjklskljfds": true
     }

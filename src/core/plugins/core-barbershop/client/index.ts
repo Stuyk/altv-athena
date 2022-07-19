@@ -15,6 +15,15 @@ let currentData: BarbershopData;
 let camera: number;
 
 class BarbershopView implements ViewModel {
+    /**
+     * Opens the BarberShop WebView and sets up current data for the player.
+     *
+     * @static
+     * @param {boolean} _isSelfService
+     * @param {BarbershopData} _currentData
+     * @return {*}
+     * @memberof BarbershopView
+     */
     static async open(_isSelfService: boolean, _currentData: BarbershopData) {
         if (isAnyMenuOpen()) {
             return;
@@ -25,6 +34,8 @@ class BarbershopView implements ViewModel {
 
         AthenaClient.webview.ready(PAGE_NAME, BarbershopView.ready);
         AthenaClient.webview.open([PAGE_NAME], true, BarbershopView.close);
+        AthenaClient.webview.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
+        AthenaClient.webview.on(BarbershopEvents.WebViewEvents.SAVE_CLOSE, BarbershopView.saveClose);
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -32,7 +43,16 @@ class BarbershopView implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static async close() {
+    /**
+     * Closes the WebView page. Called from internal webview close event.
+     * Can also be called from server-side; but doNotEmit is usually set to true.
+     *
+     * @static
+     * @param {boolean} [doNotEmit=false]
+     * @return {*}
+     * @memberof BarbershopView
+     */
+    static async close(doNotEmit = false) {
         BarbershopView.destroyCamera();
 
         alt.toggleGameControls(true);
@@ -41,9 +61,28 @@ class BarbershopView implements ViewModel {
 
         alt.Player.local.isMenuOpen = false;
 
+        if (doNotEmit) {
+            return;
+        }
+
         alt.emitServer(BarbershopEvents.ServerClientEvents.CLOSE);
     }
 
+    /**
+     * Simply closes the WebView, and ensures that an emit to server does not happen for close event.
+     *
+     * @static
+     * @memberof BarbershopView
+     */
+    static saveClose() {
+        BarbershopView.close(true);
+        WebViewController.closePages([PAGE_NAME], true);
+    }
+
+    /**
+     * It creates a camera, sets it active, renders it, points it at the player, and makes the player
+     * look at the camera.
+     */
     static setupCamera() {
         const fwdVector = native.getEntityForwardVector(alt.Player.local.scriptID);
         const fwdPos = {
@@ -83,6 +122,9 @@ class BarbershopView implements ViewModel {
         camera = undefined;
     }
 
+    /**
+     * If the webview is ready, emit the data to the webview and setup the camera.
+     */
     static async ready() {
         const view = await WebViewController.get();
         if (!view) {
@@ -93,6 +135,11 @@ class BarbershopView implements ViewModel {
         BarbershopView.setupCamera();
     }
 
+    /**
+     * This function is called when the player clicks on a button in the barbershop menu, and it sends
+     * the data to the server.
+     * @param {BarbershopData} data - BarbershopData
+     */
     static update(data: BarbershopData) {
         alt.emitServer(BarbershopEvents.ServerClientEvents.UPDATE, data);
         native.playSoundFrontend(-1, 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET', true);
