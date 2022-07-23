@@ -10,8 +10,10 @@ import ConfigUtil from '../utility/config';
  * @param  {alt.Player} player
  */
 async function handlePlayerConnect(player: alt.Player): Promise<void> {
+    const config = ConfigUtil.get();
+
     // ! - Allows Dev Mode to Use First Account or Accounts
-    if (ConfigUtil.get().USE_DEV_MODE) {
+    if (typeof config !== 'undefined' && config.USE_DEV_MODE) {
         alt.logWarning(`Using DEV_MODE. Only one account will be used.`);
         DevModeOverride.login(player);
         return;

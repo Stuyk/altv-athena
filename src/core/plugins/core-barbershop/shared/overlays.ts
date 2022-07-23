@@ -1,4 +1,4 @@
-export const hairOverlayInfo = {
+export const hairOverlayInfo: { [key: string]: { collection: string; overlay: string } } = {
     '2-0-male-0': {
         collection: '',
         overlay: '',

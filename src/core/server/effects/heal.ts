@@ -5,7 +5,7 @@ import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ItemEffects } from '../systems/itemEffects';
 import { Athena } from '../api/athena';
 
-function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE) {
+function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE | string) {
     if (!item || !item.data || !item.data.amount) {
         return;
     }
