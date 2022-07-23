@@ -35,7 +35,7 @@ const Inventory = {
             return false;
         }
 
-        if (!this.isEquipmentSlotFree(player, slot)) {
+        if (!Inventory.isEquipmentSlotFree(player, slot)) {
             return false;
         }
 
@@ -132,7 +132,7 @@ const Inventory = {
      * @return {*}  {Array<Item>}
      */
     getAllWeapons(player: alt.Player): Array<Item> {
-        const weapons = this.getAllItems(player).filter((item) => {
+        const weapons = Inventory.getAllItems(player).filter((item) => {
             return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
         });
 
@@ -150,7 +150,7 @@ const Inventory = {
      * @memberof InventoryPrototype
      */
     getEquipmentItem(player: alt.Player, slot: number): Item | null {
-        return this.getItemBySlot(player as Readonly<alt.Player>, slot, 'equipment');
+        return Inventory.getItemBySlot(player as Readonly<alt.Player>, slot, 'equipment');
     },
 
     getSlotType(slot: string): string | undefined {
@@ -176,12 +176,8 @@ const Inventory = {
     getItemBySlot(playerRef: alt.Player, slot: number, type: ItemGroup): Item | null {
         const player = playerRef as Readonly<alt.Player & { data: Character }>;
 
-        if (slot >= TEMP_MAX_TOOLBAR_SIZE) {
-            return null;
-        }
-
         if (typeof player.data[type] === 'undefined') {
-            player.data.equipment = [];
+            player.data[type] = [];
             return null;
         }
 
@@ -207,7 +203,11 @@ const Inventory = {
      * @memberof InventoryPrototype
      */
     getToolbarItem(player: alt.Player, slot: number): Item | null {
-        return this.getItemBySlot(player, slot, 'toolbar');
+        if (slot >= TEMP_MAX_TOOLBAR_SIZE) {
+            return null;
+        }
+
+        return Inventory.getItemBySlot(player, slot, 'toolbar');
     },
 
     isItemIn(playerRef: alt.Player, item: Partial<Item>, type: ItemGroup): { index: number } | null {
@@ -251,7 +251,7 @@ const Inventory = {
      * @memberof InventoryPrototype
      */
     isInInventory(player: alt.Player, item: Partial<Item>): { index: number } | null {
-        return this.isItemIn(player, item, 'inventory');
+        return Inventory.isItemIn(player, item, 'inventory');
     },
 
     /**
@@ -262,7 +262,7 @@ const Inventory = {
      * @memberof InventoryPrototype
      */
     isInEquipment(player: alt.Player, item: Partial<Item>): { index: number } | null {
-        return this.isItemIn(player, item, 'equipment');
+        return Inventory.isItemIn(player, item, 'equipment');
     },
 
     /**
@@ -319,7 +319,7 @@ const Inventory = {
             return false;
         }
 
-        if (!this.isToolbarSlotFree(player, slot)) {
+        if (!Inventory.isToolbarSlotFree(player, slot)) {
             return false;
         }
 
@@ -356,12 +356,12 @@ const Inventory = {
      * @param {Partial<Item>} item
      */
     hasItem(player: alt.Player, item: Partial<Item>): boolean {
-        let hasInInventory = this.isInInventory(player, item);
+        let hasInInventory = Inventory.isInInventory(player, item);
         if (hasInInventory) {
             return true;
         }
 
-        let hasInToolbar = this.isInToolbar(player, item);
+        let hasInToolbar = Inventory.isInToolbar(player, item);
         if (hasInToolbar) {
             return true;
         }
@@ -379,7 +379,7 @@ const Inventory = {
      * @memberof InventoryPrototype
      */
     isInToolbar(playerRef: alt.Player, item: Partial<Item>): { index: number } | null {
-        return this.isItemIn(playerRef, item, 'toolbar');
+        return Inventory.isItemIn(playerRef, item, 'toolbar');
     },
 
     /**
@@ -389,7 +389,7 @@ const Inventory = {
      * @return {Array<Item>}
      */
     removeAllWeapons(player: alt.Player): Array<Item> {
-        const weapons = this.getAllItems(player).filter((item) => {
+        const weapons = Inventory.getAllItems(player).filter((item) => {
             return isFlagEnabled(item.behavior, ITEM_TYPE.IS_WEAPON);
         });
 
@@ -492,7 +492,7 @@ const Inventory = {
             return false;
         }
 
-        return this.removeFrom(playerRef, slot, 'equipment');
+        return Inventory.removeFrom(playerRef, slot, 'equipment');
     },
 
     /**
@@ -505,7 +505,7 @@ const Inventory = {
      */
     findAndRemove(playerRef: alt.Player, itemName: string): boolean {
         const player = playerRef as ReadOnlyPlayer;
-        const toolbarItem = this.isInToolbar(player, { name: itemName });
+        const toolbarItem = Inventory.isInToolbar(player, { name: itemName });
 
         if (toolbarItem) {
             const item = player.data.toolbar[toolbarItem.index] as Item<ItemData>;
@@ -513,7 +513,7 @@ const Inventory = {
                 return false;
             }
 
-            const removedFromToolbar = this.toolbarRemove(player, item.slot);
+            const removedFromToolbar = Inventory.toolbarRemove(player, item.slot);
             if (!removedFromToolbar) {
                 return false;
             }
@@ -524,7 +524,7 @@ const Inventory = {
         }
 
         // Check Inventory Last
-        const inventoryItem = this.isInInventory(player, { name: itemName });
+        const inventoryItem = Inventory.isInInventory(player, { name: itemName });
         if (!inventoryItem) {
             return false;
         }
@@ -534,7 +534,7 @@ const Inventory = {
             return false;
         }
 
-        const removedFromInventory = this.inventoryRemove(player, item.slot);
+        const removedFromInventory = Inventory.inventoryRemove(player, item.slot);
         if (!removedFromInventory) {
             return false;
         }
@@ -558,7 +558,7 @@ const Inventory = {
             return false;
         }
 
-        return this.removeFrom(playerRef, slot, 'inventory');
+        return Inventory.removeFrom(playerRef, slot, 'inventory');
     },
 
     /**
@@ -605,8 +605,8 @@ const Inventory = {
      */
     handleSwapOrStack(player: alt.Player, selectedSlot: string, endSlot: string) {
         const fieldsToSave: Array<string> = [];
-        const selectItem = this.findItemBySlot(player, selectedSlot);
-        const endItem = this.findItemBySlot(player, endSlot);
+        const selectItem = Inventory.findItemBySlot(player, selectedSlot);
+        const endItem = Inventory.findItemBySlot(player, endSlot);
 
         if (!endItem || !selectItem) {
             console.log(`No end slot for this item... ${selectedSlot} to ${endSlot} (may be null)`);
@@ -623,8 +623,8 @@ const Inventory = {
         const endIndex = endItem.index;
 
         // Get Slot Names & Verify Valid Slots
-        const selectedSlotName = this.getSlotType(selectedSlot);
-        const endSlotName = this.getSlotType(endSlot);
+        const selectedSlotName = Inventory.getSlotType(selectedSlot);
+        const endSlotName = Inventory.getSlotType(endSlot);
 
         if (typeof selectedSlotName === 'undefined' || typeof endSlotName === 'undefined') {
             Athena.player.sync.inventory(player);
@@ -662,13 +662,13 @@ const Inventory = {
         if (selectItem.item.name !== endItem.item.name || selectItem.item.rarity !== selectItem.item.rarity) {
             // Need to verify that each slot follows the rules for the slot it is going into.
             // Handles rules for the end item slot.
-            if (!this.allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
+            if (!Inventory.allItemRulesValid(selectItem.item, { name: endSlotName }, newEndSlot)) {
                 Athena.player.sync.inventory(player);
                 return;
             }
 
             // Handles rules for the selected item slot.
-            if (!this.allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
+            if (!Inventory.allItemRulesValid(endItem.item, { name: selectedSlotName }, newSelectSlot)) {
                 Athena.player.sync.inventory(player);
                 return;
             }
@@ -716,7 +716,7 @@ const Inventory = {
             Athena.player.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
         }
 
-        this.saveFields(player, fieldsToSave);
+        Inventory.saveFields(player, fieldsToSave);
         Athena.player.sync.inventory(player);
     },
     saveFields(player: alt.Player, fields: string[]): void {
@@ -765,7 +765,7 @@ const Inventory = {
                     return false;
                 }
 
-                if (!this.isEquipmentSlotValid(item, endSlotIndex)) {
+                if (!Inventory.isEquipmentSlotValid(item, endSlotIndex)) {
                     return false;
                 }
             }
@@ -779,7 +779,7 @@ const Inventory = {
 
         // Inventory
         if (selectedSlot.includes('i')) {
-            const item = this.getInventoryItem(player, stripCategory(selectedSlot));
+            const item = Inventory.getInventoryItem(player, stripCategory(selectedSlot));
             if (!item) {
                 return null;
             }
@@ -792,7 +792,7 @@ const Inventory = {
 
         // Equipment
         if (selectedSlot.includes('e')) {
-            const item = this.getEquipmentItem(player, stripCategory(selectedSlot));
+            const item = Inventory.getEquipmentItem(player, stripCategory(selectedSlot));
             if (!item) {
                 return null;
             }
@@ -802,7 +802,7 @@ const Inventory = {
 
         // Toolbar
         if (selectedSlot.includes('t')) {
-            const item = this.getToolbarItem(player, stripCategory(selectedSlot));
+            const item = Inventory.getToolbarItem(player, stripCategory(selectedSlot));
             if (!item) {
                 return null;
             }
@@ -822,7 +822,11 @@ const Inventory = {
      */
 
     getInventoryItem(player: alt.Player, slot: number): Item | null {
-        return this.getItemBySlot(player, slot, 'inventory');
+        if (slot >= TEMP_MAX_INVENTORY_SLOTS) {
+            return null;
+        }
+
+        return Inventory.getItemBySlot(player, slot, 'inventory');
     },
 
     /**
@@ -978,7 +982,7 @@ const Inventory = {
      */
     stackInventoryItem(playerRef: alt.Player, item: Item): boolean {
         const player = playerRef as ReadOnlyPlayer;
-        const existingItem = this.isInInventory(player, item);
+        const existingItem = Inventory.isInInventory(player, item);
 
         if (existingItem === null || typeof existingItem === 'undefined' || typeof existingItem.index === 'undefined') {
             return false;
@@ -1080,7 +1084,7 @@ const Inventory = {
 
             // How much is left on this stack...
             if (inventoryItem.quantity === amountToBeRemoved) {
-                this.inventoryRemove(player, inventoryItem.slot);
+                Inventory.inventoryRemove(player, inventoryItem.slot);
                 return 0;
             }
 
@@ -1092,7 +1096,7 @@ const Inventory = {
 
             // We remove the whole item-stack
             amountToBeRemoved -= inventoryItem.quantity;
-            this.inventoryRemove(player, inventoryItem.slot);
+            Inventory.inventoryRemove(player, inventoryItem.slot);
         }
 
         return amountToBeRemoved;
@@ -1169,7 +1173,7 @@ const Inventory = {
             }
         }
 
-        const emptySlots = this.getFreeInventorySlots(player);
+        const emptySlots = Inventory.getFreeInventorySlots(player);
         if (emptySlots.length <= 0) {
             return itemsLeftToStoreInInventory;
         }
@@ -1185,14 +1189,14 @@ const Inventory = {
                 if (!isFlagEnabled(itemToAdd.behavior as number, ITEM_TYPE.CAN_STACK)) {
                     itemRef.quantity = 1;
                     itemsLeftToStoreInInventory -= 1;
-                    this.inventoryAdd(player, itemRef, emptySlot.slot);
+                    Inventory.inventoryAdd(player, itemRef, emptySlot.slot);
                     continue;
                 }
 
                 if (typeof itemToAdd.maxStack === 'undefined' || itemToAdd.maxStack >= itemsLeftToStoreInInventory) {
                     itemRef.quantity = itemsLeftToStoreInInventory;
                     itemsLeftToStoreInInventory = 0;
-                    this.inventoryAdd(player, itemRef, emptySlot.slot);
+                    Inventory.inventoryAdd(player, itemRef, emptySlot.slot);
                     continue;
                 }
 
@@ -1225,17 +1229,17 @@ const Inventory = {
             return true;
         }
 
-        if (this.isEquipmentSlotFree(player, slot)) {
+        if (Inventory.isEquipmentSlotFree(player, slot)) {
             return true;
         }
 
-        const emptySlot = this.getFreeInventorySlot(player);
+        const emptySlot = Inventory.getFreeInventorySlot(player);
         if (!emptySlot) {
             return false;
         }
 
         const equipment = player.data.equipment[equipmentIndex];
-        const didAdd = this.inventoryAdd(player, equipment as Item, emptySlot.slot);
+        const didAdd = Inventory.inventoryAdd(player, equipment as Item, emptySlot.slot);
         if (!didAdd) {
             return false;
         }

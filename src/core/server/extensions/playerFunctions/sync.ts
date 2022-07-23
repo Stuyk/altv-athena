@@ -40,7 +40,7 @@ const Sync = {
             Athena.state.set(player, 'equipment', []);
         }
 
-        this.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
+        Sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
 
         emit.meta(player, 'inventory', player.data.inventory);
         emit.meta(player, 'equipment', player.data.equipment);

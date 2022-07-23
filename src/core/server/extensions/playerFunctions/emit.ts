@@ -305,7 +305,7 @@ const Emit = {
                     return;
                 }
 
-                this.objectRemove(player, uid);
+                Emit.objectRemove(player, uid);
             }, removeAfterMilliseconds);
         }
 
