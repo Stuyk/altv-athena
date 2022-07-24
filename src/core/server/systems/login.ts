@@ -239,7 +239,12 @@ export class LoginController {
             }
         }
 
-        player.discord = { id: discord } as DiscordUser;
+        if (!account.discord) {
+            player.kick("Bad Token");
+            return;
+        }
+
+        player.discord = { id: account.discord } as DiscordUser;
         LoginController.tryLogin(player, account);
     }
 
