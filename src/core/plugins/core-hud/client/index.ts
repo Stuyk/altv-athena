@@ -9,7 +9,13 @@ import { WebViewController } from '../../../client/extensions/view2';
 import ViewModel from '../../../client/models/viewModel';
 import { InteractionController } from '../../../client/systems/interaction';
 import { World } from '../../../client/systems/world';
+import { AthenaClient } from '../../../client/api/athena';
+import { KeybindController } from '../../../client/events/keyup';
+import { isAnyMenuOpen } from '../../../client/utility/menus';
+import { KeyHeld } from '../../../client/events/keyHeld';
+import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 
+const SWITCH_KEY = 113; // F2
 const PAGE_NAME = 'Hud';
 const RegisteredComponents: { [key: string]: IHudComponent } = {};
 
@@ -18,10 +24,27 @@ let isDisabled = false;
 let interactions: Array<IClientInteraction> = [];
 let customInteractions: Array<IClientInteraction> = [];
 let hasRegistered = false;
+let hudStateIndex = 0;
+let hudStates = ['hud', 'wallet', 'hidden'];
 
 export class HudView {
     static init() {
         InteractionController.addInfoCallback(HudView.setInteractions);
+        KeybindController.registerKeybind({ key: SWITCH_KEY, singlePress: HudView.toggleKeyBind });
+    }
+
+    private static toggleKeyBind() {
+        if (isAnyMenuOpen()) {
+            return;
+        }
+
+        hudStateIndex += 1;
+        if (hudStateIndex >= hudStates.length) {
+            hudStateIndex = 0;
+        }
+
+        native.playSoundFrontend(-1, 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET', true);
+        AthenaClient.webview.emit(`${PAGE_NAME}:SwitchHudState`, hudStates[hudStateIndex]);
     }
 
     static addCustomInteraction(_interaction: IClientInteraction) {
@@ -81,11 +104,20 @@ class InternalFunctions implements ViewModel {
         }
     }
 
+    static metaChange(key: string, value: any) {
+        if (key === 'voice' && alt.Voice.voiceControlsEnabled && alt.Player.local.meta.voice) {
+            InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, false);
+            KeyHeld.register(alt.Voice.activationKey, InternalFunctions.voiceDown, InternalFunctions.voiceUp);
+        }
+    }
+
     static async setVisible(value: boolean) {
         isDisabled = !value;
 
         if (!isDisabled) {
             native.displayRadar(true);
+            native.playSoundFrontend(-1, 'HIGHLIGHT_NAV_UP_DOWN', 'HUD_FRONTEND_DEFAULT_SOUNDSET', true);
+            AthenaClient.webview.emit(`${PAGE_NAME}:SwitchHudState`, hudStates[hudStateIndex]);
             return;
         }
 
@@ -106,6 +138,8 @@ class InternalFunctions implements ViewModel {
         HudView.registerComponent(HUD_COMPONENT.WATER, InternalFunctions.defaultWaterComponent, 1000);
         HudView.registerComponent(HUD_COMPONENT.FOOD, InternalFunctions.defaultFoodComponent, 1000);
         HudView.registerComponent(HUD_COMPONENT.INTERACTIONS, InternalFunctions.defaultInteractionsComponent, 500);
+        HudView.registerComponent(HUD_COMPONENT.DEAD, InternalFunctions.defaultDeadComponent, 500);
+        HudView.registerComponent(HUD_COMPONENT.IDENTIFIER, InternalFunctions.defaultIdentifier, 5000);
 
         // Vehicle Components
         HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
@@ -142,8 +176,7 @@ class InternalFunctions implements ViewModel {
     }
 
     static async passComponentInfo(propName: string, value: any, isJSON = false) {
-        const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:SetProp`, propName, value, isJSON);
+        AthenaClient.webview.emit(`${PAGE_NAME}:SetProp`, propName, value, isJSON);
     }
 
     /**
@@ -222,6 +255,10 @@ class InternalFunctions implements ViewModel {
         );
     }
 
+    static defaultDeadComponent(propName: string) {
+        InternalFunctions.passComponentInfo(propName, alt.Player.local.meta.isDead ? true : false);
+    }
+
     static defaultCashComponent(propName: string) {
         const value = alt.Player.local.meta.cash ? alt.Player.local.meta.cash : 0;
         const fixedValue = parseFloat(value.toFixed(0));
@@ -268,11 +305,29 @@ class InternalFunctions implements ViewModel {
         InternalFunctions.passComponentInfo(propName, alt.Player.local.armour);
     }
 
-    static defaultInteractionsComponent(propName) {
+    static defaultInteractionsComponent(propName: string) {
         InternalFunctions.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
+    }
+
+    static voiceDown() {
+        native.playSoundFrontend(-1, 'Input_Code_Down', 'Safe_Minigame_Sounds', true);
+        InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, true);
+    }
+
+    static voiceUp() {
+        native.playSoundFrontend(-1, 'Input_Code_Up', 'Safe_Minigame_Sounds', true);
+        InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, false);
+    }
+
+    static defaultIdentifier(propName: string) {
+        InternalFunctions.passComponentInfo(
+            propName,
+            alt.Player.local.getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID),
+        );
     }
 }
 
+alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.metaChange);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, HudView.addCustomInteraction);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, HudView.removeCustomInteraction);

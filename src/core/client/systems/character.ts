@@ -41,7 +41,14 @@ export class CharacterSystem {
         // Facial Features
         for (let i = 0; i < appearance.structure.length; i++) {
             const value = appearance.structure[i];
-            native.setPedFaceFeature(ped, i, value);
+
+            if (native['setPedFaceFeature']) {
+                native['setPedFaceFeature'](ped, i, value);
+            }
+
+            if (native['setPedMicroMorphValue']) {
+                native['setPedMicroMorphValue'](ped, i, value);
+            }
         }
 
         // Overlay Features - NO COLORS
