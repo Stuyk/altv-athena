@@ -158,6 +158,7 @@ export class VoiceSystem {
 
         alt.log(`[CORE-VOICE] ${player.data.name} was added to voice channel ${channelName}`);
         Athena.player.emit.message(player, `[Athena] You have joined the global voice server.`);
+        Athena.player.emit.meta(player, 'voice', true);
         virtualChannel.channel.addPlayer(player);
 
         // Sends multiple `emitClient` events based on events that were registered above.

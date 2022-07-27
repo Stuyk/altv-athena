@@ -11,6 +11,7 @@
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "jsx": "preserve"
+        
     },
     "exclude": [
         "resources",

@@ -1,5 +1,4 @@
 import currency from '../../extensions/playerFunctions/currency';
-import dataUpdater from '../../extensions/playerFunctions/dataUpdater';
 import emit from '../../extensions/playerFunctions/emit';
 import inventory from '../../extensions/playerFunctions/inventory';
 import safe from '../../extensions/playerFunctions/safe';
@@ -11,7 +10,6 @@ import getter from '../../extensions/playerFunctions/getter';
 
 export const playerConst = {
     currency,
-    dataUpdater,
     emit,
     get: getter,
     inventory,

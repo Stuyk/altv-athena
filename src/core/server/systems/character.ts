@@ -128,7 +128,7 @@ export class CharacterSystem {
             await callback(player);
         }
 
-        Athena.player.sync.appearance(player, player.data.appearance);
+        Athena.player.sync.appearance(player, player.data.appearance as Appearance);
 
         if (!player.data.equipment) {
             await Athena.state.set(player, 'equipment', []);

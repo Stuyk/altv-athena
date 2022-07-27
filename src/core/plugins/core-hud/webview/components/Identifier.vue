@@ -1,14 +1,14 @@
 <template>
     <div class="stat-wrapper">
-        <span class="bank overline mr-4">${{ value.toLocaleString() }}</span>
-        <Icon :shadow="true" icon="icon-bank" :size="14" />
+        <span class="bank overline mr-4">{{ value }}</span>
+        <Icon :shadow="true" icon="icon-user2" :size="14" />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 
-const ComponentName = 'Bank';
+const ComponentName = 'Identifier';
 export default defineComponent({
     name: ComponentName,
     components: {

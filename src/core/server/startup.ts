@@ -10,7 +10,7 @@ import { ReconnectHelper } from './utility/reconnect';
 
 const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
-let config: IConfig;
+let config: IConfig | undefined;
 
 class Startup {
     static async begin() {
@@ -30,6 +30,13 @@ class Startup {
      * @memberof Startup
      */
     static database() {
+        if (typeof config === 'undefined') {
+            alt.logWarning(
+                `Failed to load Configuration File. Is 'AthenaConfig.json' file malformed? Try setting to default values again.`,
+            );
+            process.exit(1);
+        }
+
         const url = MongoUtil.getURL(config);
         const collections = MongoUtil.getCollections();
 
@@ -53,6 +60,13 @@ class Startup {
      * @memberof Startup
      */
     static async ares() {
+        if (typeof config === 'undefined') {
+            alt.logWarning(
+                `Failed to load Configuration File. Is 'AthenaConfig.json' file malformed? Try setting to default values again.`,
+            );
+            process.exit(1);
+        }
+
         Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
         await import(`./boot.js`);
         alt.log(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
