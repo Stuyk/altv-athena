@@ -26,7 +26,7 @@
                         class="mb-2 brb-btn"
                         :color="getButtonColor(getColorName(index))"
                     >
-                        Color {{ index }}
+                        {{ locale.COLOR }} {{ index }}
                     </Button>
                     <ColorComponent
                         @select-color="selectColor"
@@ -69,6 +69,7 @@ import { maleHair } from '../shared/maleHair';
 import { femaleHair } from '../shared/femaleHair';
 import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
+import { BARBER_SHOP_LOCALE } from '../shared/locales';
 import ColorComponentVue from './components/ColorComponent.vue';
 import HairstyleComponentVue from './components/HairstyleComponent.vue';
 import EyeComponentVue from './components/EyeComponent.vue';
@@ -124,6 +125,7 @@ export default defineComponent({
             makeupOpacity: 1,
             // Utility
             resolvePath: ResolvePath,
+            locale: BARBER_SHOP_LOCALE,
         };
     },
     computed: {
