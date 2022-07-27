@@ -1,10 +1,8 @@
 import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
-import { ReadOnlyPlayer } from '../../../../server/extensions/playerFunctions/shared';
 import { EQUIPMENT_TYPE } from '../../../../shared/enums/equipmentType';
 import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { Appearance } from '../../../../shared/interfaces/appearance';
-import { Character } from '../../../../shared/interfaces/character';
 import { ClothingComponent } from '../../../../shared/interfaces/clothing';
 import { Item } from '../../../../shared/interfaces/item';
 import { deepCloneObject } from '../../../../shared/utility/deepCopy';
@@ -269,6 +267,8 @@ export class BarbershopView {
             makeupColor1: makeupColorInfo.color1,
             makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
+
+        console.log(barberData);
 
         customer.frozen = true;
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);
