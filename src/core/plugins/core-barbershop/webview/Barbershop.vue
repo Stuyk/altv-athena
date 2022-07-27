@@ -190,8 +190,6 @@ export default defineComponent({
 
             for (const key of Object.keys(data)) {
                 this[key] = data[key];
-
-                console.log(`${key}: ${data[key]}`);
             }
 
             this.update();

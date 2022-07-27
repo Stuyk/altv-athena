@@ -268,8 +268,6 @@ export class BarbershopView {
             makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
 
-        console.log(barberData);
-
         customer.frozen = true;
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);
     }

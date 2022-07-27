@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.7.0
+
+```
+Fix Barbershop Warnings
+Add Catch for Camera Destroy Failure for Barbershop
+Remove Barbershop Console Logs
+```
+
 ## 3.6.0
 
 ```
