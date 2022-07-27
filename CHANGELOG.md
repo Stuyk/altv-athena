@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.6.0
+
+```
+Refactoring for Strict Typing Support (WIP)
+Changed Icon !important Strictness in src-webviews
+Fix Female Barbershop Error
+Redesigned Core HUD
++ Added Player ID
++ Added F2 to Cycle HUD Displays
++ Added Death State to Core HUD Updates
++ Added Player ID to Core HUD Updates
+```
+
 ## 3.5.0
 
 ```

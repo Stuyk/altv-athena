@@ -122,6 +122,7 @@ export class DeathSystem {
 
         if (player.data.isDead) {
             Athena.player.emit.meta(player, 'isDead', true);
+    
             if (!TimeOfDeath[player.data._id.toString()]) {
                 TimeOfDeath[player.data._id.toString()] = Date.now() + DEATH_CONFIG.RESPAWN_TIME;
             }

@@ -100,7 +100,7 @@ export default defineComponent({
             // Update Check
             ready: false,
             // Navigation
-            navIndex: 2,
+            navIndex: 0,
             navigation: [
                 { icon: 'icon-hair', type: 'hair', colors: 2, isHair: true, colorComponentType: 0 },
                 { icon: 'icon-eye', type: 'eye', colors: 1, isEyebrows: true, colorComponentType: 0 },
@@ -203,6 +203,10 @@ export default defineComponent({
                 if (navIndex !== -1) {
                     navigationOptions.splice(navIndex, 1);
                     this.navigation = navigationOptions;
+                }
+
+                if (navIndex >= this.navigation.length) {
+                    this.navIndex = 0;
                 }
             }
 

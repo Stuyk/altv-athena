@@ -94,22 +94,24 @@ export class BarbershopView {
             return;
         }
 
-        const appearance = deepCloneObject<Appearance>(customer.data.appearance);
-        const hairOverlay = hairOverlayInfo[data.hairFullName];
+        if (customer.data.appearance) {
+            const appearance = deepCloneObject<Appearance>(customer.data.appearance);
+            appearance.hairDlc = data.dlc;
+            appearance.hair = data.hair;
+            appearance.hairColor1 = data.hairColor1;
+            appearance.hairColor2 = data.hairColor2;
+            appearance.hairOverlay = data.hairFullName
+                ? hairOverlayInfo[data.hairFullName]
+                : { collection: '', overlay: '' };
+            appearance.eyebrows = data.eyeIndex;
+            appearance.eyebrowsOpacity = data.eyeOpacity;
+            appearance.eyebrowsColor1 = data.eyeColor1;
+            appearance.facialHair = data.beardIndex;
+            appearance.facialHairColor1 = data.beardColor1;
+            appearance.facialHairOpacity = data.beardOpacity;
+            await Athena.state.set(customer, 'appearance', appearance);
+        }
 
-        appearance.hairDlc = data.dlc;
-        appearance.hair = data.hair;
-        appearance.hairColor1 = data.hairColor1;
-        appearance.hairColor2 = data.hairColor2;
-        appearance.hairOverlay = hairOverlay;
-        appearance.eyebrows = data.eyeIndex;
-        appearance.eyebrowsOpacity = data.eyeOpacity;
-        appearance.eyebrowsColor1 = data.eyeColor1;
-        appearance.facialHair = data.beardIndex;
-        appearance.facialHairColor1 = data.beardColor1;
-        appearance.facialHairOpacity = data.beardOpacity;
-
-        await Athena.state.set(customer, 'appearance', appearance);
         BarbershopView.close(hairDresser);
     }
 
@@ -141,7 +143,11 @@ export class BarbershopView {
             return;
         }
 
-        Athena.player.sync.appearance(customer, customer.data.appearance);
+        if (!customer.data.appearance) {
+            return;
+        }
+
+        Athena.player.sync.appearance(customer, customer.data.appearance as Appearance);
         Athena.player.sync.equipment(
             customer,
             customer.data.equipment as Item<ClothingComponent>[],
@@ -232,6 +238,11 @@ export class BarbershopView {
             customer = Athena.systems.identifier.getPlayer(sessions[hairDresserID]);
         }
 
+        if (!customer.data.appearance) {
+            BarbershopView.close(hairDresser);
+            return;
+        }
+
         await Athena.player.inventory.unequip(customer, EQUIPMENT_TYPE.HAT);
 
         const isSelfService = sessions[hairDresserID] === hairDresserID;
@@ -256,6 +267,8 @@ export class BarbershopView {
             makeupColor1: makeupColorInfo.color1,
             makeupOpacity: makeupInfo && makeupInfo.opacity ? makeupInfo.opacity : 0,
         };
+
+        console.log(barberData);
 
         customer.frozen = true;
         alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.OPEN, isSelfService, barberData);

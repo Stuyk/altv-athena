@@ -6,6 +6,14 @@ export interface Meta {
     isDead: boolean; // Used to determine when a player is dead or not.
     gridSpace: number; // Used to identify what part of the map the player is on. Based on Y Axis.
 
+    /**
+     * Check if in a voice channel.
+     *
+     * @type {boolean}
+     * @memberof Meta
+     */
+    voice: boolean;
+
     // Currency
     bank: number;
     cash: number;

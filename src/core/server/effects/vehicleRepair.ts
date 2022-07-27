@@ -13,7 +13,7 @@ const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
 
 alt.onClient('task:Vehicle:Repair:Timeline', handleRepairTimeline);
 
-function handleRepair(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE) {
+function handleRepair(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE | string) {
     const closestVehicle = Athena.player.utility.getVehicleInFrontOf(player, 2);
 
     if (!closestVehicle) {

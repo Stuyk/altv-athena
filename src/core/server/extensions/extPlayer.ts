@@ -55,7 +55,7 @@ declare module 'alt-server' {
          * @type {Partial<Character>}
          * @memberof Player
          */
-        data?: Partial<Character>;
+        data: Character;
 
         // Unimplemented Anti-Cheat Stuff
         acPosition?: alt.Vector3;

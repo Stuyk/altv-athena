@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import Icon from '@components/Icon.vue';
 
 const ComponentName = 'Interaction';
 export default defineComponent({

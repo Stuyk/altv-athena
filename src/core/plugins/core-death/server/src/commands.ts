@@ -58,6 +58,6 @@ export class DeathCommands {
             return;
         }
 
-        Athena.player.set.respawned(player);
+        Athena.player.set.respawned(player, player.pos);
     }
 }

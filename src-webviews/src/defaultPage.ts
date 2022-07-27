@@ -2,4 +2,4 @@
 // This does not change anything in-game.
 // It's solely for development mode only.
 
-export default [{ name: 'Barbershop' }];
+export default [{ name: 'SimpleHud' }];
