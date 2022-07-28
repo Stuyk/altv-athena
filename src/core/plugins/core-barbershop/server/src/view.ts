@@ -53,7 +53,7 @@ export class InternalFunctions {
     static handleDisconnect(hairDresser: alt.Player) {
         const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
 
-        if (!sessions[hairDresserID]) {
+        if (sessions[hairDresserID] === undefined) {
             return;
         }
 
@@ -81,38 +81,40 @@ export class BarbershopView {
     }
 
     static async save(hairDresser: alt.Player, data: BarbershopData) {
-        const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
+        try {
+            const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
+            if (sessions[hairDresserID] === undefined) {
+                BarbershopView.close(hairDresser);
+                return;
+            }
 
-        if (!sessions[hairDresserID]) {
+            const customer = Athena.systems.identifier.getPlayer(sessions[hairDresserID]);
+            if (!customer || !customer.valid) {
+                return;
+            }
+
+            if (customer.data.appearance) {
+                const appearance = deepCloneObject<Appearance>(customer.data.appearance);
+                appearance.hairDlc = data.dlc;
+                appearance.hair = data.hair;
+                appearance.hairColor1 = data.hairColor1;
+                appearance.hairColor2 = data.hairColor2;
+                appearance.hairOverlay = data.hairFullName
+                    ? hairOverlayInfo[data.hairFullName]
+                    : { collection: '', overlay: '' };
+                appearance.eyebrows = data.eyeIndex;
+                appearance.eyebrowsOpacity = data.eyeOpacity;
+                appearance.eyebrowsColor1 = data.eyeColor1;
+                appearance.facialHair = data.beardIndex;
+                appearance.facialHairColor1 = data.beardColor1;
+                appearance.facialHairOpacity = data.beardOpacity;
+                await Athena.state.set(customer, 'appearance', appearance);
+            }
+
             BarbershopView.close(hairDresser);
-            return;
+        } catch (e) {
+            console.log(e);
         }
-
-        const customer = Athena.systems.identifier.getPlayer(sessions[hairDresserID]);
-        if (!customer || !customer.valid) {
-            BarbershopView.close(hairDresser);
-            return;
-        }
-
-        if (customer.data.appearance) {
-            const appearance = deepCloneObject<Appearance>(customer.data.appearance);
-            appearance.hairDlc = data.dlc;
-            appearance.hair = data.hair;
-            appearance.hairColor1 = data.hairColor1;
-            appearance.hairColor2 = data.hairColor2;
-            appearance.hairOverlay = data.hairFullName
-                ? hairOverlayInfo[data.hairFullName]
-                : { collection: '', overlay: '' };
-            appearance.eyebrows = data.eyeIndex;
-            appearance.eyebrowsOpacity = data.eyeOpacity;
-            appearance.eyebrowsColor1 = data.eyeColor1;
-            appearance.facialHair = data.beardIndex;
-            appearance.facialHairColor1 = data.beardColor1;
-            appearance.facialHairOpacity = data.beardOpacity;
-            await Athena.state.set(customer, 'appearance', appearance);
-        }
-
-        BarbershopView.close(hairDresser);
     }
 
     /**
@@ -125,7 +127,7 @@ export class BarbershopView {
     static close(hairDresser: alt.Player, doNotSync = false) {
         const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
 
-        if (!sessions[hairDresserID]) {
+        if (sessions[hairDresserID] === undefined) {
             alt.emitClient(hairDresser, BarbershopEvents.ServerClientEvents.CLOSE, true);
             return;
         }
@@ -231,7 +233,7 @@ export class BarbershopView {
         const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
         let customer: alt.Player;
 
-        if (!sessions[hairDresserID]) {
+        if (sessions[hairDresserID] === undefined) {
             sessions[hairDresserID] = hairDresserID;
             customer = hairDresser;
         } else {
@@ -284,7 +286,7 @@ export class BarbershopView {
     static update(hairDresser: alt.Player, data: BarbershopData) {
         const hairDresserID = Athena.systems.identifier.getIdByStrategy(hairDresser);
 
-        if (!sessions[hairDresserID]) {
+        if (sessions[hairDresserID] === undefined) {
             BarbershopView.close(hairDresser);
             return;
         }
