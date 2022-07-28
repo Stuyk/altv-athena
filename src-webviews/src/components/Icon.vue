@@ -26,6 +26,11 @@ export default defineComponent({
             required: false,
             default: false,
         },
+        shadowColor: {
+            type: String,
+            required: false,
+            default: 'black',
+        },
     },
     computed: {
         dynamicClass() {
@@ -49,13 +54,13 @@ export default defineComponent({
             let style = 'text-align: center !important;';
 
             if (!this.size) {
-                style += ' font-size: 16px !important;';
+                style += ' font-size: 16px';
             } else {
-                style += ` font-size: ${this.size}px !important;`;
+                style += ` font-size: ${this.size}px`;
             }
 
             if (this.shadow) {
-                style += `text-shadow: 1px 1px black !important;`;
+                style += `text-shadow: 1px 1px ${this.shadowColor} !important;`;
             }
 
             return style;

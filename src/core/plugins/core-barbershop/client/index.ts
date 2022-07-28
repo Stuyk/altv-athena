@@ -13,6 +13,7 @@ const PAGE_NAME = 'Barbershop';
 let isSelfService = false;
 let currentData: BarbershopData;
 let camera: number;
+let hasRegisteredOnce = false;
 
 class BarbershopView implements ViewModel {
     /**
@@ -34,8 +35,13 @@ class BarbershopView implements ViewModel {
 
         AthenaClient.webview.ready(PAGE_NAME, BarbershopView.ready);
         AthenaClient.webview.open([PAGE_NAME], true, BarbershopView.close);
-        AthenaClient.webview.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
-        AthenaClient.webview.on(BarbershopEvents.WebViewEvents.SAVE_CLOSE, BarbershopView.saveClose);
+
+        if (!hasRegisteredOnce) {
+            hasRegisteredOnce = true;
+            AthenaClient.webview.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
+            AthenaClient.webview.on(BarbershopEvents.WebViewEvents.SAVE_CLOSE, BarbershopView.saveClose);
+        }
+
         WebViewController.focus();
         WebViewController.showCursor(true);
 
@@ -116,9 +122,12 @@ class BarbershopView implements ViewModel {
     }
 
     static destroyCamera() {
-        native.destroyAllCams(true);
-        native.destroyCam(camera, true);
-        native.renderScriptCams(false, false, 0, false, false, 0);
+        try {
+            native.destroyAllCams(true);
+            native.destroyCam(camera, true);
+            native.renderScriptCams(false, false, 0, false, false, 0);
+        } catch (err) {}
+
         camera = undefined;
     }
 

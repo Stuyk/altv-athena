@@ -2,11 +2,10 @@
     <div class="stat-wrapper">
         <div class="split space-between">
             <div class="bar">
+                <Icon :shadow="true" class="stat-icon" icon="icon-microphone" :size="18" v-if="value" />
+                <Icon :shadow="true" class="stat-icon" icon="icon-microphone-slash" :size="18" v-else />
+                <div class="fill" :style="getFill" />
                 <div class="bar-shadow"></div>
-                <Icon :shadow="true" class="stat-icon" icon="icon-shield2" :size="18"></Icon>
-                <div class="fill" :style="getFill">
-                    <div class="fill-shine" :style="getFill" />
-                </div>
             </div>
         </div>
     </div>
@@ -15,7 +14,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 
-const ComponentName = 'Armour';
+const ComponentName = 'Microphone';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -23,13 +22,17 @@ export default defineComponent({
     },
     props: {
         value: {
-            type: Number,
-            default: 199,
+            type: Boolean,
+            default: false,
         },
     },
     computed: {
         getFill() {
-            return `height: ${this.value}% !important`;
+            if (this.value) {
+                return `height: 100% !important; background-color: #447c44;`;
+            }
+
+            return `height: 100% !important; background-color: #6a6a6a;`;
         },
     },
 });
@@ -86,46 +89,17 @@ export default defineComponent({
     z-index: 99;
     opacity: 0.5;
     left: -4px;
-    top: -1px;
+    top: -2px;
     mix-blend-mode: lighten;
 }
 
 .fill {
     position: absolute;
-    background: #475e5e;
+    background: #6a6a6a;
     z-index: 25;
     min-width: 65px;
     box-sizing: border-box;
     bottom: 0px;
     outline: 1px solid transparent;
-    overflow: hidden;
-}
-
-.fill-shine {
-    position: relative;
-    background: #87b3b3;
-    z-index: 30;
-    min-width: 2px;
-    max-width: 2px;
-    min-height: 100px;
-    box-sizing: border-box;
-    top: -25px;
-    animation: swipe 4s infinite linear;
-    box-shadow: 0px 0px 10px 10px #87b3b3;
-}
-
-@keyframes swipe {
-    0% {
-        transform: translateX(-100px) rotate(45deg);
-        opacity: 0;
-    }
-    25% {
-        transform: translateX(40px) rotate(45deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateX(200px) rotate(45deg);
-        opacity: 1;
-    }
 }
 </style>

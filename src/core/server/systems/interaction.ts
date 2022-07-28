@@ -223,7 +223,7 @@ export class InteractionController {
             console.log(interaction);
         }
 
-        const shape = new InteractionShape(interaction);
+        const shape = new InteractionShape(interaction as Required<Interaction>);
         shape.playersOnly = true;
 
         InternalFunctions.add(shape);

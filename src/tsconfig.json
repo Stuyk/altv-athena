@@ -2,15 +2,16 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "typeRoots": ["../node_modules/@types", "../node_modules/@altv"],
-        "module": "ESNext",
-        "target": "ESNext",
+        "module": "ES2022",
+        "target": "ES2022",
         "outDir": "../athena-cache",
         "rootDir": ".",
         "allowSyntheticDefaultImports": true,
         "composite": false,
         "forceConsistentCasingInFileNames": true,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "strict": false
     },
     "exclude": ["./core/plugins/**/webview/**/*.ts", "./core/plugins/**/webview/**/*.vue"]
 }

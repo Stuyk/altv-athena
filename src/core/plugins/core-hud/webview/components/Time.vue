@@ -28,11 +28,12 @@ export default defineComponent({
     align-items: center;
     align-content: center;
     position: relative;
+    opacity: 0.75 !important;
 }
 
 .time {
-    font-family: 'Roboto';
-    font-size: 14px;
+    font-family: 'Inter';
+    font-size: 16px !important;
     font-weight: 500;
     text-shadow: 1px 1px black;
 }
