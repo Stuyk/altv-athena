@@ -66,7 +66,7 @@ export class InternalFunctions {
         }
 
         Athena.player.set.frozen(customer, false);
-        Athena.player.emit.notification(customer, `~r~${BARBER_SHOP_LOCALE.HAIR_DRESSER_DISCONNECTED}`);
+        Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.HAIR_DRESSER_DISCONNECTED);
     }
 }
 
@@ -177,7 +177,7 @@ export class BarbershopView {
         }
 
         offers[hairDresserID] = customerID;
-        Athena.player.emit.message(hairDresser, `${BARBER_SHOP_LOCALE.HAVE_OFFERED} ${customer.data.name} ${BARBER_SHOP_LOCALE.AS_HAIRCUT_SESSION}.`);
+        Athena.player.emit.message(hairDresser, `${BARBER_SHOP_LOCALE.HAVE_OFFERED} ${customer.data.name} ${BARBER_SHOP_LOCALE.AS_HAIRCUT_SESSION}`);
         Athena.player.emit.message(
             customer,
             `${BARBER_SHOP_LOCALE.HAVE_BEEN_OFFERED_A_HAIRCUT_SESSION_BY} ${hairDresser.data.name}. /hairaccept ${hairDresserID}`,
@@ -199,18 +199,18 @@ export class BarbershopView {
         const hairDresser = Athena.systems.identifier.getPlayer(_hairDresserID);
 
         if (!hairDresser || !hairDresser.valid) {
-            Athena.player.emit.notification(customer, `~r~${BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER}.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER);
             return;
         }
 
         if (!offers[_hairDresserID] || typeof _hairDresserID === 'undefined') {
-            Athena.player.emit.notification(customer, `~r~${BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER}.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER);
             return;
         }
 
         const customerID = Athena.systems.identifier.getIdByStrategy(customer);
         if (offers[_hairDresserID].toString() !== customerID.toString()) {
-            Athena.player.emit.notification(customer, `~r~${BARBER_SHOP_LOCALE.HAIRDRESSER_IS_WITH_CUSTOMER}.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.HAIRDRESSER_IS_WITH_CUSTOMER);
             return;
         }
 
