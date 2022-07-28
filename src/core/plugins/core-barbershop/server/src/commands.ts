@@ -2,6 +2,9 @@ import * as alt from 'alt-server';
 import { Athena } from '../../../../server/api/athena';
 import { command } from '../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
+import { BARBER_SHOP_LOCALE } from '../../shared/locales';
 import { BarbershopView } from './view';
 
 export class BarbershopCommands {
@@ -14,7 +17,7 @@ export class BarbershopCommands {
         BarbershopView.open(player);
     }
 
-    @command('boffer', '/boffer [player_id] - Offer Change of Hairstyle', PERMISSIONS.NONE)
+    @command('boffer', BARBER_SHOP_LOCALE.COMMAND_BOFFER, PERMISSIONS.NONE)
     private static handleBarbershopOffer(hairDresser: alt.Player, id: string) {
         // Some kind of item check...
         if (typeof id === 'undefined') {
@@ -24,14 +27,14 @@ export class BarbershopCommands {
 
         const customer = Athena.systems.identifier.getPlayer(id);
         if (!customer || !customer.valid) {
-            Athena.player.emit.message(hairDresser, `Could not find that player.`);
+            Athena.player.emit.message(hairDresser, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
 
         BarbershopView.offer(hairDresser, customer);
     }
 
-    @command('baccept', '/baccept [player_id] - Accept Change of Hairstyle', PERMISSIONS.NONE)
+    @command('baccept', BARBER_SHOP_LOCALE.COMMAND_BACCEPT, PERMISSIONS.NONE)
     private static handleBarbershopAccept(customer: alt.Player, id: string) {
         // Some kind of item check...
         if (typeof id === 'undefined') {

@@ -9,6 +9,7 @@ import { deepCloneObject } from '../../../../shared/utility/deepCopy';
 import { BarbershopEvents } from '../../shared/events';
 import { BarbershopData } from '../../shared/interfaces';
 import { BARBER_SHOP_LOCATIONS } from '../../shared/locations';
+import { BARBER_SHOP_LOCALE } from '../../shared/locales';
 import { hairOverlayInfo } from '../../shared/overlays';
 
 /**
@@ -36,7 +37,7 @@ export class InternalFunctions {
         alt.on('playerDisconnect', InternalFunctions.handleDisconnect);
 
         for (const pos of BARBER_SHOP_LOCATIONS) {
-            Athena.controllers.blip.append({ pos, color: 43, scale: 1, shortRange: true, text: 'Barber', sprite: 71 });
+            Athena.controllers.blip.append({ pos, color: 43, scale: 1, shortRange: true, text: BARBER_SHOP_LOCALE.BARBERSHOP_LABEL, sprite: 71 });
             Athena.controllers.marker.append({ pos, color: new alt.RGBA(0, 255, 0, 100), type: 1 });
             Athena.controllers.interaction.add({ position: pos, callback: BarbershopView.open, isPlayerOnly: true });
         }
@@ -65,7 +66,7 @@ export class InternalFunctions {
         }
 
         Athena.player.set.frozen(customer, false);
-        Athena.player.emit.notification(customer, `~r~Hair Dresser Disconnected`);
+        Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.HAIR_DRESSER_DISCONNECTED);
     }
 }
 
@@ -178,10 +179,10 @@ export class BarbershopView {
         }
 
         offers[hairDresserID] = customerID;
-        Athena.player.emit.message(hairDresser, `You have offered ${customer.data.name} as haircut session.`);
+        Athena.player.emit.message(hairDresser, `${BARBER_SHOP_LOCALE.HAVE_OFFERED} ${customer.data.name} ${BARBER_SHOP_LOCALE.AS_HAIRCUT_SESSION}`);
         Athena.player.emit.message(
             customer,
-            `You have been offered a haircut session by ${hairDresser.data.name}. /hairaccept ${hairDresserID}`,
+            `${BARBER_SHOP_LOCALE.HAVE_BEEN_OFFERED_A_HAIRCUT_SESSION_BY} ${hairDresser.data.name}. /hairaccept ${hairDresserID}`,
         );
     }
 
@@ -200,18 +201,18 @@ export class BarbershopView {
         const hairDresser = Athena.systems.identifier.getPlayer(_hairDresserID);
 
         if (!hairDresser || !hairDresser.valid) {
-            Athena.player.emit.notification(customer, `~r~Could not find the hairdresser.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER);
             return;
         }
 
         if (!offers[_hairDresserID] || typeof _hairDresserID === 'undefined') {
-            Athena.player.emit.notification(customer, `~r~Could not find the hairdresser.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.CANNOT_FIND_THE_HAIRDRESSER);
             return;
         }
 
         const customerID = Athena.systems.identifier.getIdByStrategy(customer);
         if (offers[_hairDresserID].toString() !== customerID.toString()) {
-            Athena.player.emit.notification(customer, `~r~Hair dresser is currently with another customer.`);
+            Athena.player.emit.notification(customer, BARBER_SHOP_LOCALE.HAIRDRESSER_IS_WITH_CUSTOMER);
             return;
         }
 

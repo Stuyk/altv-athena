@@ -1,7 +1,7 @@
 <template>
     <div class="eyebrows">
         <!-- Eyebrow Style -->
-        <div class="header-info overline boldest white--text mb-2">Style</div>
+        <div class="header-info overline boldest white--text mb-2">{{ locale.STYLE }}</div>
         <div class="split split-full-width">
             <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'eyeIndex', eyebrows.length - 1)">
                 <Icon icon="icon-chevron-left" :size="24" />
@@ -14,7 +14,7 @@
             </Button>
         </div>
         <!-- Eyebrow Opacity -->
-        <div class="header-info overline boldest white--text mb-2 mt-2">Opacity</div>
+        <div class="header-info overline boldest white--text mb-2 mt-2">{{ locale.OPACITY }}</div>
         <div class="split split-full-width">
             <Button class="eye-btn" color="blue" @click="$emit('decrement-index', 'eyeOpacity', 1, 0.1)">
                 <Icon icon="icon-chevron-left" :size="24" />
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { eyebrowNames } from '../../../../shared/information/eyebrows';
+import { BARBER_SHOP_LOCALE } from '../../shared/locales';
 
 const ComponentName = 'EyeComponent';
 export default defineComponent({
@@ -53,6 +54,7 @@ export default defineComponent({
     data() {
         return {
             eyebrows: eyebrowNames,
+            locale: BARBER_SHOP_LOCALE,
         };
     },
     methods: {
