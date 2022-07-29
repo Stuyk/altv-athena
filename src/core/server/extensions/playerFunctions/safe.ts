@@ -43,6 +43,29 @@ const Safe = {
     },
 
     /**
+      * Safely subtract health to this player.
+      * @param {number} value 99-199
+      * @param {boolean} exactValue
+      * @memberof SafePrototype
+      */
+    subHealth(p: alt.Player, value: number, exactValue: boolean = false) {
+        if (exactValue) {
+            p.acHealth = value;
+            p.health = value;
+            return;
+        }
+
+        if (p.health - value < 0) {
+            p.acHealth = 0;
+            p.health = 0;
+            return;
+        }
+
+        p.acHealth = p.health - value;
+        p.health = p.acHealth;
+    },
+
+    /**
      * Safely add armour to this player.
      * @param {number} value 1-100
      * @param {boolean} exactValue
@@ -62,6 +85,29 @@ const Safe = {
         }
 
         player.acArmour = player.armour + value;
+        player.armour = player.acArmour;
+    },
+
+    /**
+     * Safely subtracts armour to this player.
+     * @param {number} value 1-100
+     * @param {boolean} exactValue
+     * @memberof SafePrototype
+     */
+    subArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
+        if (exactValue) {
+            player.acArmour = value;
+            player.armour = value;
+            return;
+        }
+
+        if (player.armour - value < 100) {
+            player.acArmour = 0;
+            player.armour = 0;
+            return;
+        }
+
+        player.acArmour = player.armour - value;
         player.armour = player.acArmour;
     },
     setDimension(player: alt.Player, value: number) {
