@@ -119,7 +119,8 @@ class InternalFunctions {
         }
 
         if (commandInfo.permission) {
-            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
+            const isAdminPermissionValid = Permission.isPermissionValidByStrategy(player.accountData.permissionLevel,
+                commandInfo.permission);
 
             if (!isAdminPermissionValid) {
                 Athena.player.emit.message(
@@ -139,10 +140,8 @@ class InternalFunctions {
                 return;
             }
 
-            const isCharacterPermValid = isFlagEnabled(
-                player.data.characterPermission,
-                commandInfo.characterPermissions,
-            );
+            const isCharacterPermValid = Permission.isPermissionValidByStrategy(player.data.characterPermission,
+                commandInfo.characterPermissions);
 
             if (!isCharacterPermValid) {
                 Athena.player.emit.message(
@@ -304,10 +303,8 @@ export default class ChatController {
 
             // Check Admin Permission Commands
             if (commandInfo.permission) {
-                const isAdminPermissionValid = isFlagEnabled(
-                    player.accountData.permissionLevel,
-                    commandInfo.permission,
-                );
+                const isAdminPermissionValid = Permission.isPermissionValidByStrategy(player.accountData.permissionLevel,
+                    commandInfo.permission);
 
                 if (!isAdminPermissionValid) {
                     return;
@@ -327,10 +324,8 @@ export default class ChatController {
                     return;
                 }
 
-                const isCharacterPermValid = isFlagEnabled(
-                    player.data.characterPermission,
-                    commandInfo.characterPermissions,
-                );
+                const isCharacterPermValid = Permission.isPermissionValidByStrategy(player.data.characterPermission,
+                    commandInfo.characterPermissions)
                 if (!isCharacterPermValid) {
                     return;
                 }
