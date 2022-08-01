@@ -4,10 +4,12 @@ import { command } from '../../../../server/decorators/commands';
 import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { LocaleController } from '../../../../shared/locale/locale';
+import { DEATH_EVENTS } from '../../shared/events';
 import { DeathSystem } from './death';
 
 export class DeathCommands {
     static init() {
+        alt.onClient(DEATH_EVENTS.REVIVE, this.handleCommand);
         alt.log(`Death Commands Loaded`);
     }
 

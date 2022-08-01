@@ -1,13 +1,17 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../../shared/configurations/shared';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { drawText2D } from '../../../client/utility/text';
 import { Timer } from '../../../client/utility/timers';
 import { DEATH_EVENTS } from '../shared/events';
+import { KEY_BINDS } from '../../../shared/enums/keyBinds';
+import { KeyHeld } from '../../../client/events/keyHeld';
 
 let interval: number;
 let timeInTheFuture: number;
+let pressedKey = true;
+let timeToRevive = 0;
+let revInterval: number;
 
 native.animpostfxStopAll();
 
@@ -15,10 +19,29 @@ class InternalFunctions {
     static init() {
         alt.onServer(DEATH_EVENTS.UPDATE_DEATH_TIMER_MS, InternalFunctions.updateTimeLeft);
         alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.handleMetaChange);
+        KeyHeld.register(KEY_BINDS.REVIVE, () => {
+            timeToRevive = Date.now() + 5000
+            revInterval = Timer.createInterval(() => {
+                if (Date.now() > timeToRevive) {
+                    Timer.clearInterval(revInterval);
+                    revInterval = undefined;
+                    this.handleRevive();
+                    timeToRevive = 0;
+                }
+            }, 100, 'revive:death.ts');
+        }, () => {
+            Timer.clearInterval(revInterval);
+            interval = undefined;
+            timeToRevive = 0;
+        })
     }
 
     private static updateTimeLeft(ms: number) {
         timeInTheFuture = Date.now() + ms;
+    }
+
+    private static handleRevive() {
+        alt.emitServer(DEATH_EVENTS.REVIVE);
     }
 
     private static handleMetaChange(key: string, newValue: any): void {
@@ -33,6 +56,7 @@ class InternalFunctions {
 
             native.animpostfxPlay('DeathFailOut', 0, false);
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
+            pressedKey = false;
             return;
         }
 
@@ -61,8 +85,9 @@ class InternalFunctions {
                 new alt.RGBA(255, 255, 255, 255),
             );
         } else {
+            const timeLeft = timeToRevive - Date.now();
             drawText2D(
-                `/acceptdeath - To Trigger Respawn`,
+                `/acceptdeath - To Trigger Respawn -- or hold E` + ((timeToRevive > 0) ? ` for (${(timeLeft / 1000).toFixed(2)}s)` : ''),
                 { x: 0.5, y: 0.2 },
                 0.5,
                 new alt.RGBA(255, 255, 255, 255),

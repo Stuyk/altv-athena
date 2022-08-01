@@ -38,4 +38,7 @@ export const KEY_BINDS = {
     LEADERBOARD: 113,
     // . or >
     PHONE: 190,
+
+    // Hold E to revive
+    REVIVE: 69
 };
