@@ -1,0 +1,53 @@
+<rml>
+    <head>
+        <title>Quick Input</title>
+        <style>
+            html,
+            body {
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            body {
+                font-family: arial;
+                font-style: normal;
+                font-size: 16px;
+                width: 100vw;
+                box-sizing: border-box;
+                padding-left: 25vw;
+                padding-right: 25vw;
+                padding-top: 75vh;
+            }
+
+            .text-input {
+                font-family: arial;
+                font-style: normal;
+                font-size: 16px;
+                width: 100%;
+                border: 2px rgb(22, 22, 22);
+                border-radius: 6px;
+                min-height: 30px;
+                background: rgba(0, 0, 0, 100);
+                padding: 12px;
+                color: white;
+                box-sizing: border-box;
+                font-effect: shadow(2px 2px black);
+            }
+
+            .invisible {
+                font-family: arial;
+                font-style: normal;
+                font-size: 16px;
+                /* height: 0px;
+                opacity: 0; */
+            }
+        </style>
+    </head>
+    <body>
+        <form id="form" onsubmit="submit">
+            <input class="text-input" id="input" onchange="(e) => console.log(e)" tabindex="0" />
+            <input class="invisible" type="submit" value="submit">Submit</input>
+        </form>
+    </body>
+</rml>
