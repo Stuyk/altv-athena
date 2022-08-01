@@ -81,6 +81,7 @@ export class WebSocketClient {
         InternalController.init();
         PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, WebSocketClient.handleSelect);
         alt.setInterval(WebSocketClient.handleGenericInfo, 250);
+        alt.setInterval(WebSocketClient.handleCurrentInfo, 1000);
     }
 
     static registerEvent(type: 'server' | 'client') {
@@ -91,15 +92,32 @@ export class WebSocketClient {
         //
     }
 
+    static log(message: string) {
+        sock.send(`[${new Date(Date.now()).toLocaleTimeString()}] LOG--${message}`);
+    }
+
     private static handleSelect(player: alt.Player) {
         const id = Athena.systems.identifier.getIdByStrategy(player);
+        WebSocketClient.log(`(${id}) ${player.data.name} has Selected a Character`);
         InternalController.send({ id, key: 'account', value: player.accountData });
         InternalController.send({ id, key: 'data', value: player.data });
     }
 
+    private static handleCurrentInfo() {
+        alt.Player.all.forEach((player) => {
+            if (!player || !player.valid || !player.data || !player.data._id) {
+                return;
+            }
+
+            const id = Athena.systems.identifier.getIdByStrategy(player);
+            InternalController.send({ id, key: 'data', value: player.data });
+            InternalController.send({ id, key: 'account', value: player.accountData });
+        });
+    }
+
     private static handleGenericInfo() {
         alt.Player.all.forEach((player) => {
-            if (!player || !player.valid || !player.data._id) {
+            if (!player || !player.valid || !player.data || !player.data._id) {
                 return;
             }
 
@@ -108,6 +126,8 @@ export class WebSocketClient {
             InternalController.send({ id, key: 'rot', value: player.rot });
             InternalController.send({ id, key: 'health', value: player.health });
             InternalController.send({ id, key: 'armour', value: player.armour });
+            InternalController.send({ id, key: 'vehicle', value: player.vehicle ? true : false });
+            InternalController.send({ id, key: 'weapon', value: player.currentWeapon });
         });
     }
 }
