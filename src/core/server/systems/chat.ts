@@ -12,6 +12,7 @@ import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { consoleCommand } from '../decorators/commands';
 import { emitAll } from '../utility/emitHelper';
+import {Permission} from "./permission";
 
 const maxMessageLength: number = 128;
 const printCommands = false;
