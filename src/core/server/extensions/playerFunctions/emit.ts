@@ -20,6 +20,38 @@ import utility from './utility';
 
 const Emit = {
     /**
+     * Play an alarm on this player.
+     * List of all alarms: https://github.com/DurtyFree/gta-v-data-dumps/blob/master/alarmSounds.json
+     * @param {alt.Player} player
+     * @param {string} name
+     * @return {*}  {void}
+     * @memberof EmitPrototype
+     */
+    startAlarm(
+        player: alt.Player,
+        name: string,
+    ): void {
+        if (player.data.isDead) {
+            alt.logWarning(`[Athena] Cannot play alarm ${name} while player is dead.`);
+            return;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ALARM_START, name);
+    },
+
+    /**
+     * Stop an alarm on this player.
+     * @param {alt.Player} player
+     */
+    stopAlarm(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP);
+    },
+
+    /**
      * Play an animation on this player.
      * @param {string} dictionary
      * @param {string} name
