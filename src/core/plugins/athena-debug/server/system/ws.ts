@@ -2,9 +2,7 @@ import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import { Athena } from '../../../../server/api/athena';
 import { PlayerEvents } from '../../../../server/events/playerEvents';
-import { Account } from '../../../../server/interface/iAccount';
 import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
-import { Character } from '../../../../shared/interfaces/character';
 
 const DEFAULT_CONNECTION = 'http://127.0.0.1:42069/debug';
 let sock: WebSocket;
@@ -92,7 +90,20 @@ export class WebSocketClient {
         //
     }
 
+    static addToList(data: string) {
+        if (!sock) {
+            return;
+        }
+
+        alt.log(`Appending To List: ${data}`);
+        sock.send(`APPEND-LIST--${data}`);
+    }
+
     static log(message: string) {
+        if (!sock) {
+            return;
+        }
+
         sock.send(`[${new Date(Date.now()).toLocaleTimeString()}] LOG--${message}`);
     }
 
@@ -112,6 +123,8 @@ export class WebSocketClient {
             const id = Athena.systems.identifier.getIdByStrategy(player);
             InternalController.send({ id, key: 'data', value: player.data });
             InternalController.send({ id, key: 'account', value: player.accountData });
+
+            // Append anything else you want to log here...
         });
     }
 
