@@ -140,6 +140,7 @@ class InternalFunctions implements ViewModel {
         HudView.registerComponent(HUD_COMPONENT.INTERACTIONS, InternalFunctions.defaultInteractionsComponent, 500);
         HudView.registerComponent(HUD_COMPONENT.DEAD, InternalFunctions.defaultDeadComponent, 500);
         HudView.registerComponent(HUD_COMPONENT.IDENTIFIER, InternalFunctions.defaultIdentifier, 5000);
+        HudView.registerComponent(HUD_COMPONENT.MICROPHONE, InternalFunctions.defaultMicrophoneComponent, 100);
 
         // Vehicle Components
         HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
@@ -309,14 +310,23 @@ class InternalFunctions implements ViewModel {
         InternalFunctions.passComponentInfo(propName, JSON.stringify(interactions.concat(customInteractions)), true);
     }
 
-    static voiceDown() {
-        native.playSoundFrontend(-1, 'Input_Code_Down', 'Safe_Minigame_Sounds', true);
-        InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, true);
+    static defaultMicrophoneComponent(propName: string) {
+        let microphoneVolume = alt.Player.local.getMeta('MICROPHONE_VOLUME');
+        InternalFunctions.passComponentInfo(propName, microphoneVolume ? microphoneVolume : 0);
     }
 
-    static voiceUp() {
+    static voiceDown(newVolume: number = 0) {
+        native.playSoundFrontend(-1, 'Input_Code_Down', 'Safe_Minigame_Sounds', true);
+        this.voiceVolume(newVolume);
+    }
+
+    static voiceUp(newVolume: number = 100) {
         native.playSoundFrontend(-1, 'Input_Code_Up', 'Safe_Minigame_Sounds', true);
-        InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, false);
+        this.voiceVolume(newVolume);
+    }
+
+    static voiceVolume(newVolume: number = 100) {
+        InternalFunctions.passComponentInfo(HUD_COMPONENT.MICROPHONE, newVolume);
     }
 
     static defaultIdentifier(propName: string) {
