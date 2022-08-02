@@ -5,6 +5,7 @@ import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_START, startAlarm);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP, stopAlarm);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP_ALL, stopAllAlarms);
 
 const MaxLoadAttempts = 25;
 
@@ -52,7 +53,7 @@ export async function loadAlarm(name: string, count: number = 0): Promise<boolea
  * @return {Promise<void>}  {Promise<void>}
  */
 export async function startAlarm(
-    name: string
+    name: string,
 ): Promise<void> {
     const isPrepared = await loadAlarm(name);
     if (!isPrepared) {
@@ -73,9 +74,25 @@ export async function startAlarm(
 /**
  * Stop an alarm for the local player.
  * @export
+ * @param {string} name The name of the alarm.
  * @return {Promise<void>}  {Promise<void>}
  */
-export async function stopAlarm(): Promise<void> {
+export async function stopAlarm(
+    name: string,
+): Promise<void> {
+    if (!native.isAlarmPlaying(name)) {
+        return;
+    }
+
+    native.stopAlarm(name, true);
+}
+
+/**
+ * Stop all alarms for the local player.
+ * @export
+ * @return {Promise<void>}  {Promise<void>}
+ */
+export async function stopAllAlarms(): Promise<void> {
     try {
         native.stopAllAlarms(true);
     } catch (error) {
