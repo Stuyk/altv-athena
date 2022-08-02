@@ -40,15 +40,31 @@ const Emit = {
     },
 
     /**
-     * Stop an alarm on this player.
+     * Stop an alarm for this player.
      * @param {alt.Player} player
+     * @param {string} name
      */
-    stopAlarm(player: alt.Player) {
+    stopAlarm(
+        player: alt.Player,
+        name: string,
+    ) {
         if (!player || !player.valid) {
             return;
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP);
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP, name);
+    },
+
+    /**
+     * Stop all alarms for this player.
+     * @param {alt.Player} player
+     */
+    stopAllAlarms(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ALARM_STOP_ALL);
     },
 
     /**
