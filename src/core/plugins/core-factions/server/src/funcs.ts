@@ -1138,8 +1138,14 @@ export class FactionFuncs {
         if (vehIndex >= 0) {
             return false;
         }
-
-        // spawn the vehicle
+        
+        // Check if the parking spot is free.
+        const isSpotFree = await FactionFuncs.isParkingSpotFree(location.pos);
+        if (!isSpotFree) {
+            return false;
+        }
+        
+        // Spawn the vehicle.
         const vehicleInfo = await Database.fetchData<IVehicle>('_id', vehicleId, Athena.database.collections.Vehicles);
         if (!vehicleInfo) {
             return false;
@@ -1147,6 +1153,36 @@ export class FactionFuncs {
 
         const vehicle = VehicleFuncs.spawn(vehicleInfo, location.pos, location.rot);
         FactionFuncs.updateMembers(faction);
+        return true;
+    }
+
+    /**
+     * Checks if a vehicle is in a parking spot.
+     * @static
+     * @param {Vector3} parkingSpot
+     * @returns a boolean value.
+     * @memberof FactionFuncs
+     */
+    static async isParkingSpotFree(parkingSpot: Vector3) {
+        const pointTest = new alt.ColshapeSphere(parkingSpot.x, parkingSpot.y, parkingSpot.z - 1, 2);
+
+        // Have to do a small sleep to the ColShape propogates entities inside of it.
+        await new Promise((resolve: Function) => {
+            alt.setTimeout(() => {
+                resolve();
+            }, 250);
+        });
+
+        const spaceOccupied = alt.Vehicle.all.find((veh) => veh && veh.valid && pointTest.isEntityIn(veh));
+
+        try {
+            pointTest.destroy();
+        } catch (err) {}
+
+        if (spaceOccupied) {
+            return false;
+        }
+
         return true;
     }
 }
