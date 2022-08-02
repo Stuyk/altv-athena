@@ -15,11 +15,11 @@
  **/
 
 import alt, { RmlElement } from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector2, Vector3 } from '../../shared/interfaces/vector';
-import { distance } from '../../shared/utility/vector';
-import { isAnyMenuOpen } from '../utility/menus';
-import { UID } from '../utility/uid';
+import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { Vector2, Vector3 } from '../../../shared/interfaces/vector';
+import { distance } from '../../../shared/utility/vector';
+import { isAnyMenuOpen } from '../../utility/menus';
+import { UID } from '../../utility/uid';
 
 const elements: {
     [uid: string]: { element: RmlElement; position: Vector2 | Vector3; nextCheck?: number; isOffScreen?: boolean };
@@ -116,63 +116,63 @@ class InternalFunctions {
     }
 }
 
-export class ScreenText {
-    static addText(text: string, position: Vector2 | Vector3, uid: string = null): string {
-        if (!uid) {
-            uid = UID.generate();
-        }
+// export class ScreenText {
+//     static addText(text: string, position: Vector2 | Vector3, uid: string = null): string {
+//         if (!uid) {
+//             uid = UID.generate();
+//         }
 
-        if (elements[uid]) {
-            ScreenText.removeText(uid);
-        }
+//         if (elements[uid]) {
+//             ScreenText.removeText(uid);
+//         }
 
-        elements[uid] = {
-            element: document.createElement('div'),
-            position,
-        };
+//         elements[uid] = {
+//             element: document.createElement('div'),
+//             position,
+//         };
 
-        elements[uid].element.addClass('text');
-        elements[uid].element.innerRML = text;
-        elements[uid].element.setProperty('left', `${position.x}px`);
-        elements[uid].element.setProperty('top', `${position.y}px`);
-        elements[uid].element.setProperty('font-size', '70dp');
-        container.appendChild(elements[uid].element);
+//         elements[uid].element.addClass('text');
+//         elements[uid].element.innerRML = text;
+//         elements[uid].element.setProperty('left', `${position.x}px`);
+//         elements[uid].element.setProperty('top', `${position.y}px`);
+//         elements[uid].element.setProperty('font-size', '70dp');
+//         container.appendChild(elements[uid].element);
 
-        return uid;
-    }
+//         return uid;
+//     }
 
-    static updateText(uid: string, position: Vector2 | Vector3) {
-        if (!elements[uid]) {
-            return;
-        }
+//     static updateText(uid: string, position: Vector2 | Vector3) {
+//         if (!elements[uid]) {
+//             return;
+//         }
 
-        elements[uid].position = position;
-    }
+//         elements[uid].position = position;
+//     }
 
-    static hasText(uid: string) {
-        if (!elements[uid]) {
-            return false;
-        }
+//     static hasText(uid: string) {
+//         if (!elements[uid]) {
+//             return false;
+//         }
 
-        return true;
-    }
+//         return true;
+//     }
 
-    static removeText(uid: string) {
-        const elementRef = elements[uid];
-        if (!elementRef) {
-            return;
-        }
+//     static removeText(uid: string) {
+//         const elementRef = elements[uid];
+//         if (!elementRef) {
+//             return;
+//         }
 
-        const element = elementRef.element;
+//         const element = elementRef.element;
 
-        try {
-            container.removeChild(element);
-            delete elements[uid];
-        } catch (err) {}
-    }
-}
+//         try {
+//             container.removeChild(element);
+//             delete elements[uid];
+//         } catch (err) {}
+//     }
+// }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
+// alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
 
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
 //     alt.log('starting...');

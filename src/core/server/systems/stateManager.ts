@@ -4,7 +4,12 @@ import { IVehicle } from '../../shared/interfaces/iVehicle';
 import { RemoveIndex } from '../../shared/utility/knownKeys';
 import { Athena } from '../api/athena';
 
-type AnyKeyChangeCallback = (target: alt.Player | alt.Vehicle, key: string, oldValue: any, newValue: any) => void;
+type AnyKeyChangeCallback = (
+    target: alt.Player | alt.Vehicle | { data: Partial<Character> },
+    key: string,
+    oldValue: any,
+    newValue: any,
+) => void;
 type KeyChangeCallback<T = alt.Player | alt.Vehicle> = (target: T, oldValue: any, newValue: any) => void;
 
 interface StateTypes {
@@ -20,7 +25,12 @@ const data: StateTypes = {
 const anyChangeCallbacks: Array<AnyKeyChangeCallback> = [];
 
 export class StateManager {
-    private static processCallbacks(target: alt.Player | alt.Vehicle, key: string, oldValue: any, newValue: any) {
+    private static processCallbacks(
+        target: alt.Player | alt.Vehicle | { data: Partial<Character> },
+        key: string,
+        oldValue: any,
+        newValue: any,
+    ) {
         const dataType = target instanceof alt.Player ? 'playerData' : 'vehicleData';
 
         // Check if data type has any callbacks for the specific key provided
@@ -133,6 +143,23 @@ export class StateManager {
      *
      * @static
      * @param {alt.Player} target
+     * @param {keyof RemoveIndex<Character>} key
+     * @param {*} value
+     * @return {Promise<boolean>}
+     * @memberof StateManager
+     */
+    static async set(
+        target: { data: Partial<Character> },
+        key: keyof RemoveIndex<Character>,
+        value: any,
+        forceSave?: boolean,
+    ): Promise<boolean>;
+
+    /**
+     * Set and save player data to the database and invoke callbacks for data changes
+     *
+     * @static
+     * @param {alt.Player} target
      * @param {string} key
      * @param {*} value
      * @param {boolean} [forceSave]
@@ -183,13 +210,15 @@ export class StateManager {
      * @memberof StateManager
      */
     static async set(
-        target: alt.Player | alt.Vehicle,
+        target: alt.Player | alt.Vehicle | { data: Partial<Character> },
         key: string,
         newValue: any,
         forceSave: boolean = false,
     ): Promise<boolean> {
-        if (!target.valid || !target.data || !target.data._id) {
-            return false;
+        if (target instanceof alt.Player || target instanceof alt.Vehicle) {
+            if (!target || !target.data || !target.data._id) {
+                return false;
+            }
         }
 
         if (!key) {
