@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { BaseItem, Item } from '../../../shared/interfaces/inventory';
+import { BaseItem } from '../../../shared/interfaces/inventory';
 import { Athena } from '../../api/athena';
 
 const DEFAULT_TIMEOUT = 60000;
@@ -48,6 +48,13 @@ async function doesBaseItemExist(name: string): Promise<boolean> {
     name = name.toLowerCase();
     const index = baseItems.findIndex((item) => item.base.toLowerCase() === name);
     return index >= 0;
+}
+
+async function getByName(name: string): Promise<BaseItem> {
+    await isRefreshComplete();
+    name = name.toLowerCase();
+    const index = baseItems.findIndex((item) => item.base.toLowerCase() === name);
+    return baseItems[index];
 }
 
 /**
@@ -126,6 +133,7 @@ const ItemFactory = {
     add,
     doesBaseItemExist,
     get,
+    getByName,
     isRefreshComplete,
     update,
 };

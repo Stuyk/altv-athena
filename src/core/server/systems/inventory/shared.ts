@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
-import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
 import { CharacterInventory, Item, ItemSlot, StoredItem } from '../../../shared/interfaces/inventory';
-import { ItemEffects } from '../itemEffects';
 import { StateManager } from '../stateManager';
 
 /**
@@ -293,10 +291,48 @@ function invokeEffect(player: CharacterInventory | Pick<alt.Player, 'data'>, typ
 
     // ! TODO -> Fix Inventory Effects to Use New Types
     // ItemEffects.invoke(player as alt.Player, items[index], type as INVENTORY_TYPE)
+    return true;
+}
+
+/**
+ * Look into the inventory type. Loop through all index values of maxSlotCount and determine if that slot is already taken.
+ * If it is not taken, return the slot number that is currently available.
+ * Returns undefined if not slots are available. Use a typeof check to compare.
+ *
+ * @param {CharacterInventory | Pick<alt.Player, 'data'>} player - CharacterInventory |
+ * Pick<alt.Player, 'data'>
+ * @param {ItemSlot} type - ItemSlot - This is the type of item you're trying to add.
+ * @param {number} maxSlotCount - number - The maximum amount of slots the player can have.
+ * @returns {number | undefined}
+ */
+function findAvailableSlot(
+    player: CharacterInventory | Pick<alt.Player, 'data'>,
+    type: ItemSlot,
+    maxSlotCount: number,
+): number | undefined {
+    if (!player.data.hasOwnProperty(type) && !Array.isArray(player.data[type])) {
+        player.data[type] = [];
+        return 0;
+    }
+
+    const items = player.data[type] as Array<Item<StoredItem>>;
+    for (let i = 0; i <= maxSlotCount; i++) {
+        const itemIndex = items.findIndex((item) => item.slot === i);
+
+        // Means the slot is already taken.
+        if (itemIndex >= 0) {
+            continue;
+        }
+
+        return i;
+    }
+
+    return undefined;
 }
 
 const Shared = {
     find,
+    findAvailableSlot,
     getTotalWeight,
     invokeEffect,
     queryData,
