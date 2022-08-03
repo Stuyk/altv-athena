@@ -1,6 +1,14 @@
+const pluginFolders = ['sounds', 'images', 'icons', 'videos'];
+
 export default function resolvePath(currentPath: string, pluginName = ''): string {
-    if (currentPath.includes('images/') && pluginName) {
-        currentPath = currentPath.replace(/.*images\//gm, `./plugins/${pluginName}/`);
+    if (currentPath.includes('@plugins')) {
+        for (const pluginFolder of pluginFolders) {
+            if (!currentPath.includes(pluginFolder)) {
+                continue;
+            }
+
+            currentPath = currentPath.replace(/.*\@plugins\//gm, `./plugins/`);
+        }
     }
 
     if (!('alt' in window)) {

@@ -16,7 +16,7 @@
         "check": "tsc -p ./src/tsconfig.json | npx loose-ts-check --ignored-error-codes ./.loose-ts-check/ignore-codes.json --loosely-type-checked-files ./.loose-ts-check/loosely-type-checked-files.json",
         "fix": "node ./scripts/doctor/index.js",
         "[-] Vue WebView Deployment": "",
-        "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/webview-images && npx vite ./src-webviews --clearScreen=false",
+        "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false",
         "[-] Utility": "",
         "prepare": "husky install && husky-init",
         "lint": "prettier --end-of-line auto --config package.json --write ./src/**/*.ts",

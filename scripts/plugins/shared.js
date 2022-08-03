@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import glob from 'glob';
 
 const viablePluginDisablers = ['disable.plugin', 'disabled.plugin', 'disable', 'disabled'];
 
@@ -21,4 +22,59 @@ export function getEnabledPlugins() {
 
         return true;
     });
+}
+
+export function movePluginFilesToWebview(folderName, extensions) {
+    const normalizedName = `${folderName}`.replace('webview/', '')
+
+    // First Perform Extension & Sub Directory Cleanup
+    const oldFiles = glob.sync(sanitizePath(path.join(`src-webviews/public/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)));
+
+    for (let oldFile of oldFiles) {
+        if (fs.existsSync(oldFile)) {
+            fs.rmSync(oldFile, { force: true });
+        }
+
+        const directory = sanitizePath(path.dirname(oldFile));
+        if (fs.existsSync(directory)) {
+            const files = fs.readdirSync(directory);
+            if (files.length <= 0) {
+                fs.rmdirSync(directory);
+            }
+        }
+    }
+
+    // Next Scan Available Plugins
+    const enabledPlugins = getEnabledPlugins();
+
+    let amountCopied = 0;
+    for (const pluginName of enabledPlugins) {
+        const pluginFolder = sanitizePath(path.join(process.cwd(), `src/core/plugins/`, pluginName));
+        if (!fs.existsSync(sanitizePath(path.join(pluginFolder, folderName)))) {
+            continue;
+        }
+
+        const allFiles = glob.sync(sanitizePath(path.join(pluginFolder, `${folderName}/**/*.+(${extensions.join('|')})`)));
+        for (let i = 0; i < allFiles.length; i++) {
+            const filePath = allFiles[i];
+            console.log(`FILE PATH: ${filePath}`);
+
+            const regExp = new RegExp(`.*\/${folderName}\/`);
+            const finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/public/plugins/${normalizedName}/${pluginName}/`))
+            console.log(`NEW PATH: ${finalPath}`);
+
+            if (fs.existsSync(filePath)) {
+                const folderPath = sanitizePath(path.dirname(finalPath));
+                if (!fs.existsSync(folderPath)) {
+                    fs.mkdirSync(folderPath, { recursive: true });
+                }
+
+                console.log(finalPath);
+                fs.copyFileSync(filePath, finalPath);
+                amountCopied += 1;
+            }
+        }
+    }
+
+    console.log(`${folderName} - ${amountCopied} Files Added to WebView Plugins - (${extensions.join('|')})`)
 }

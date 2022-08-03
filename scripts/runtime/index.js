@@ -223,7 +223,7 @@ async function coreBuildProcess() {
     await runFile(node, './scripts/compiler/core');
     await runFile(node, './scripts/plugins/core');
     await runFile(node, './scripts/plugins/webview');
-    await runFile(node, './scripts/plugins/webview-images');
+    await runFile(node, './scripts/plugins/files');
     console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
 }
 
