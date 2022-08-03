@@ -6,6 +6,13 @@
 Fix Barbershop Warnings
 Add Catch for Camera Destroy Failure for Barbershop
 Remove Barbershop Console Logs
+Began Building New Inventory Functionality
+Added Path Resolving for New Folders in Plugins (icons, sounds, webview/images, webview/videos)
+Added New Functionality to Job Objects
+--> callbackOnCheck (function) - Calls on objective check
+--> onlyCallbackCheck (true/fase) - Turn default checks on/off for this objective
+Added Time Elapsed to Job
+--> getElapsedMilliseconds
 ```
 
 ## 3.6.0

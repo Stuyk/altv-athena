@@ -130,10 +130,24 @@ export interface Objective {
     particle?: Particle;
 
     /**
+     * Turns off all other objective checks, and only does the `callbackOnCheck` callback provided.
+     *
+     * @type {boolean}
+     * @memberof Objective
+     */
+    onlyCallbackCheck?: boolean;
+
+    /**
      * Server-side callback when objective is started.
      * @memberof Objective
      */
     callbackOnStart?: (player: any) => void;
+
+    /**
+     *
+     * @memberof Objective
+     */
+    callbackOnCheck?: (player: any) => Promise<boolean>;
 
     /**
      * Server-side callback when objective is completed.

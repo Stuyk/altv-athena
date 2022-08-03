@@ -63,10 +63,12 @@ export class Job {
     addObjective(objectiveData: Objective) {
         const callbackOnStart = objectiveData.callbackOnStart;
         const callbackOnFinish = objectiveData.callbackOnFinish;
+        const callbackOnCheck = objectiveData.callbackOnCheck;
         const objectiveClone = deepCloneObject<Objective>(objectiveData);
 
         objectiveClone.callbackOnStart = callbackOnStart;
         objectiveClone.callbackOnFinish = callbackOnFinish;
+        objectiveClone.callbackOnCheck = callbackOnCheck;
         this.objectives.push(objectiveClone);
     }
 
@@ -163,17 +165,28 @@ export class Job {
      * Verify if an objective is completed by a user.
      * @memberof JobBuilder
      */
-    checkObjective(): boolean {
+    async checkObjective(): Promise<boolean> {
         const objective = this.getCurrentObjective();
 
-        const passedCritera = this.verifyCriteria(objective);
-        if (!passedCritera) {
-            return false;
+        // Skip all default checks if this is set to true.
+        if (!objective.onlyCallbackCheck) {
+            const passedCritera = this.verifyCriteria(objective);
+            if (!passedCritera) {
+                return false;
+            }
+
+            const passedType = this.verifyType(objective);
+            if (!passedType) {
+                return false;
+            }
         }
 
-        const passedType = this.verifyType(objective);
-        if (!passedType) {
-            return false;
+        // Allows for custom callback check
+        if (objective.callbackOnCheck && typeof objective.callbackOnCheck === 'function') {
+            const didPass = await objective.callbackOnCheck(this.player);
+            if (!didPass) {
+                return false;
+            }
         }
 
         // Triggers an Animation at Objective End
@@ -460,6 +473,16 @@ export class Job {
      */
     getCurrentObjective(): Objective | null {
         return this.objectives[0];
+    }
+
+    /**
+     * Get the time since this job has started.
+     *
+     * @return {number}
+     * @memberof Job
+     */
+    getElapsedMilliseconds(): number {
+        return Date.now() - this.startTime;
     }
 }
 
