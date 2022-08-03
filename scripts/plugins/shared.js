@@ -57,11 +57,8 @@ export function movePluginFilesToWebview(folderName, extensions) {
         const allFiles = glob.sync(sanitizePath(path.join(pluginFolder, `${folderName}/**/*.+(${extensions.join('|')})`)));
         for (let i = 0; i < allFiles.length; i++) {
             const filePath = allFiles[i];
-            console.log(`FILE PATH: ${filePath}`);
-
             const regExp = new RegExp(`.*\/${folderName}\/`);
             const finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/public/plugins/${normalizedName}/${pluginName}/`))
-            console.log(`NEW PATH: ${finalPath}`);
 
             if (fs.existsSync(filePath)) {
                 const folderPath = sanitizePath(path.dirname(finalPath));
@@ -69,7 +66,6 @@ export function movePluginFilesToWebview(folderName, extensions) {
                     fs.mkdirSync(folderPath, { recursive: true });
                 }
 
-                console.log(finalPath);
                 fs.copyFileSync(filePath, finalPath);
                 amountCopied += 1;
             }
