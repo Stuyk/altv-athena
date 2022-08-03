@@ -123,7 +123,7 @@ export default defineComponent({
 
             this.manageRanks = rank.rankPermissions.manageRanks;
             this.manageRankPermissions = rank.rankPermissions.manageRankPermissions;
-        }
+        },
     },
     watch: {
         amount() {

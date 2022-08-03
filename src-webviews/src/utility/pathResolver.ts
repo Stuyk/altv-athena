@@ -1,4 +1,8 @@
-export default function resolvePath(currentPath: string): string {
+export default function resolvePath(currentPath: string, pluginName = ''): string {
+    if (currentPath.includes('images/') && pluginName) {
+        currentPath = currentPath.replace(/.*images\//gm, `./plugins/${pluginName}/`);
+    }
+
     if (!('alt' in window)) {
         return currentPath;
     }
