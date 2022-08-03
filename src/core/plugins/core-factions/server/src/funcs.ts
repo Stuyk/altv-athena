@@ -1151,7 +1151,7 @@ export class FactionFuncs {
             return false;
         }
 
-        const vehicle = VehicleFuncs.spawn(vehicleInfo, location.pos, location.rot);
+        VehicleFuncs.spawn(vehicleInfo, location.pos, location.rot);
         FactionFuncs.updateMembers(faction);
         return true;
     }
