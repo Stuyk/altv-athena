@@ -34,8 +34,8 @@ package-lock.json
 scripts/buildresource/*.json
 src-webviews/src/plugins/imports.ts
 src-webviews/src/plugins/vue-plugin-imports.ts
-!src-webviews/public/plugins/.gitkeep
-src-webviews/public/plugins/**
+src-webviews/public/plugins/*
+!src-webviews/public/plugins/*/.gitkeep
 
 # Yarn stuff
 .yarn/
