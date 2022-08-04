@@ -132,6 +132,13 @@ export interface IVehicle {
     damage?: IVehicleDamage
 
     /**
+     * The dirt level of the vehicle.
+     * @type {number}
+     * @memberof IVehicle
+     */
+    dirtLevel?: number;
+
+    /**
      * The last time this vehicle was used.
      * @type {number}
      * @memberof IVehicle
