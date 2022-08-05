@@ -7,7 +7,7 @@ export default class SystemRules {
      * @param {string} ruleType
      * @param {Array<T>} rules
      * @param {...any[]} args
-     * @return {*}  {boolean}
+     * @return {boolean}
      * @memberof SystemRules
      */
     static check<T>(ruleType: string, rules: { [key: string]: any | T }, ...args: any[]): boolean {

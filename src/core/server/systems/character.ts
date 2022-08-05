@@ -20,7 +20,7 @@ const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void }
     creator: null,
 };
 
-export class CharacterSystem {
+const CharacterSystemRef = {
     /**
      * Allows a custom character creator to be shown.
      *
@@ -28,9 +28,9 @@ export class CharacterSystem {
      * @param {(player: alt.Player, ...args: any[]) => void} callback
      * @memberof CharacterSystem
      */
-    static setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
+    setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
         Callbacks.creator = callback;
-    }
+    },
 
     /**
      * Invokes the custom creator to be set.
@@ -40,14 +40,14 @@ export class CharacterSystem {
      * @param {...any[]} args
      * @memberof CharacterSystem
      */
-    static invokeCreator(player: alt.Player, ...args: any[]) {
+    invokeCreator(player: alt.Player, ...args: any[]) {
         if (!Callbacks.creator) {
             alt.logWarning(`No Character Creator Setup in CharacterSystem. Use CharacterSystem.setCreatorCallback`);
             return;
         }
 
         Callbacks.creator(player, ...args);
-    }
+    },
 
     /**
      * Create a new character for a specific player.
@@ -60,12 +60,7 @@ export class CharacterSystem {
      * @return {Promise<boolean>}
      * @memberof CharacterSystem
      */
-    static async create(
-        player: alt.Player,
-        appearance: Appearance,
-        info: CharacterInfo,
-        name: string,
-    ): Promise<boolean> {
+    async create(player: alt.Player, appearance: Appearance, info: CharacterInfo, name: string): Promise<boolean> {
         if (!player.accountData || !player.accountData._id) {
             return false;
         }
@@ -97,7 +92,7 @@ export class CharacterSystem {
         document._id = document._id.toString(); // Re-cast id object as string.
         CharacterSystem.select(player, document);
         return true;
-    }
+    },
 
     /**
      * The final step in the character selection system.
@@ -109,7 +104,7 @@ export class CharacterSystem {
      * @param {Character} character
      * @memberof CharacterSystem
      */
-    static async select(player: alt.Player, character: Character) {
+    async select(player: alt.Player, character: Character) {
         player.data = deepCloneObject(character);
 
         // Increase the value outright
@@ -210,7 +205,7 @@ export class CharacterSystem {
 
             PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
         }, 500);
-    }
+    },
 
     /**
      * Check if a character name is taken.
@@ -220,7 +215,7 @@ export class CharacterSystem {
      * @return {Promise<boolean>}
      * @memberof CharacterSystem
      */
-    static async isNameTaken(name: string): Promise<boolean> {
+    async isNameTaken(name: string): Promise<boolean> {
         const result = await Athena.database.funcs.fetchData<Character>(
             'name',
             name,
@@ -228,5 +223,30 @@ export class CharacterSystem {
         );
 
         return result ? true : false;
+    },
+};
+
+/**
+ * It takes a function name and a callback, and if the function exists in the exports object, it
+ * overrides it with the callback
+ *
+ * @param {Key} functionName - The name of the function you want to override.
+ * @param callback - typeof CharacterSystemRef[Key]
+ * @returns The function is being returned.
+ */
+function override<Key extends keyof typeof CharacterSystemRef>(
+    functionName: Key,
+    callback: typeof CharacterSystemRef[Key],
+): void {
+    if (typeof exports[functionName] === 'undefined') {
+        alt.logError(`systems/character.ts does not provide an export named ${functionName}`);
+        return;
     }
+
+    exports[functionName] = callback;
 }
+
+export const CharacterSystem: typeof CharacterSystemRef & { override?: typeof override } = {
+    ...CharacterSystemRef,
+    override,
+};

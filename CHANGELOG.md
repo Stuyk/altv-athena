@@ -20,6 +20,9 @@ Added Interaction on Enter Boolean to Interactions
 Added Interaction Leave Callback to Interactions
 --> interaction.onLeaveCallback
 --> Triggers when a player leaves a matching ColShape
+Added Overrides to Athena.systems.identifier
+Added Overrides to Athena.systems.storage
+Added Overrides to character.ts
 ```
 
 ## 3.6.0
