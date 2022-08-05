@@ -49,6 +49,21 @@ export interface Interaction {
     callback?: (player: alt.Player, ...args: any[]) => void;
 
     /**
+     * Forces the callback to immediately trigger without actually interacting.
+     *
+     * @type {boolean}
+     * @memberof Interaction
+     */
+    triggerCallbackOnEnter?: boolean;
+
+    /**
+     * Called when a player has left an interaction point.
+     *
+     * @memberof Interaction
+     */
+    onLeaveCallback?: (player: alt.Player, ...args: any[]) => void;
+
+    /**
      * Data to pass back through the callback.
      * Serves as a way to pass unique data through the callback.
      * @type {Array<any>}

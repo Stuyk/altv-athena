@@ -8,11 +8,18 @@ Add Catch for Camera Destroy Failure for Barbershop
 Remove Barbershop Console Logs
 Began Building New Inventory Functionality
 Added Path Resolving for New Folders in Plugins (icons, sounds, webview/images, webview/videos)
-Added New Functionality to Job Objects
+Added New Functionality to Job Objectives
 --> callbackOnCheck (function) - Calls on objective check
 --> onlyCallbackCheck (true/fase) - Turn default checks on/off for this objective
+--> job.addNextObjective - Inserts a new objective in front of all other objectives
 Added Time Elapsed to Job
 --> getElapsedMilliseconds
+Added Interaction on Enter Boolean to Interactions
+--> interaction.triggerCallbackOnEnter
+--> Automatically triggers the callback when a player enters the interaction space
+Added Interaction Leave Callback to Interactions
+--> interaction.onLeaveCallback
+--> Triggers when a player leaves a matching ColShape
 ```
 
 ## 3.6.0

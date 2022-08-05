@@ -14,6 +14,17 @@ const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
 
+export function cloneObjective(objectiveData: Objective): Objective {
+    const callbackOnStart = objectiveData.callbackOnStart;
+    const callbackOnFinish = objectiveData.callbackOnFinish;
+    const callbackOnCheck = objectiveData.callbackOnCheck;
+    const objectiveClone = deepCloneObject<Objective>(objectiveData);
+    objectiveClone.callbackOnStart = callbackOnStart;
+    objectiveClone.callbackOnFinish = callbackOnFinish;
+    objectiveClone.callbackOnCheck = callbackOnCheck;
+    return objectiveClone;
+}
+
 export class Job {
     /**
      * The ID of the player.
@@ -61,14 +72,7 @@ export class Job {
      * @memberof Job
      */
     addObjective(objectiveData: Objective) {
-        const callbackOnStart = objectiveData.callbackOnStart;
-        const callbackOnFinish = objectiveData.callbackOnFinish;
-        const callbackOnCheck = objectiveData.callbackOnCheck;
-        const objectiveClone = deepCloneObject<Objective>(objectiveData);
-
-        objectiveClone.callbackOnStart = callbackOnStart;
-        objectiveClone.callbackOnFinish = callbackOnFinish;
-        objectiveClone.callbackOnCheck = callbackOnCheck;
+        const objectiveClone = cloneObjective(objectiveData);
         this.objectives.push(objectiveClone);
     }
 
@@ -483,6 +487,18 @@ export class Job {
      */
     getElapsedMilliseconds(): number {
         return Date.now() - this.startTime;
+    }
+
+    /**
+     * Inserts an objective to the beginning of the objectives array.
+     *
+     * @param {Objective} objectiveData
+     * @memberof Job
+     */
+    addNextObjective(objectiveData: Objective) {
+        const objectiveClone = cloneObjective(objectiveData);
+        this.objectives.splice(0, 0, objectiveClone);
+        this.syncObjective();
     }
 }
 
