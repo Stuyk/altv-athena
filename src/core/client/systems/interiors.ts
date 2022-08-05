@@ -126,6 +126,7 @@ function fixMissingInteriors() {
     alt.requestIpl('triathlon2_VBprops');
     alt.requestIpl('jetstenativeurnel');
     alt.requestIpl('Jetsteal_ipl_grp1');
+    alt.requestIpl('sf_musicrooftop');
 
     // Hospital Pillbox Interiors
     alt.requestIpl('RC12B_Default');
