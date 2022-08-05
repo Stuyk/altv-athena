@@ -64,6 +64,7 @@ export default {
     [LOCALE_KEYS.COMMAND_SET_VEH_NEON_LIGHTS]: `_%_ [<] [>] [ᐱ] [V] - Sets vehicle neon lights`,
     [LOCALE_KEYS.COMMAND_FULL_TUNE_VEHICLE]: `_%_ - Full tunes a vehicle`,
     [LOCALE_KEYS.COMMAND_ADD_VEHICLE_KEY]: `_%_ - Add a key for a vehicle`,
+    [LOCALE_KEYS.COMMAND_SET_VEH_DIRT_LEVEL]: `_%_ [level] - Sets vehicle dirt level`,
     // Cannot
     [LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD]: `Cannot chat while dead.`,
     [LOCALE_KEYS.CANNOT_FIND_PLAYER]: `Could not find that player.`,
