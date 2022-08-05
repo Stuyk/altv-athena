@@ -259,6 +259,10 @@ export default class VehicleFuncs {
             this.setDamage(vehicle);
         }
 
+        if (vehicle.data.dirtLevel) {
+            vehicle.dirtLevel = vehicle.data.dirtLevel;
+        }
+
         vehicle.numberPlateText = document.plate;
         vehicle.manualEngineControl = true;
         vehicle.lockState = VEHICLE_LOCK_STATE.LOCKED;
@@ -557,6 +561,7 @@ export default class VehicleFuncs {
             engineHealth: vehicle.engineHealth,
             bodyHealth: vehicle.bodyHealth,
             damage: this.getDamage(vehicle),
+            dirtLevel: vehicle.dirtLevel,
             lastUsed: Date.now(), // ms
         });
     }

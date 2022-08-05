@@ -57,6 +57,7 @@ export const LOCALE_KEYS = {
     COMMAND_SET_VEH_NEON_LIGHTS: `command-set-neon-lights`,
     COMMAND_FULL_TUNE_VEHICLE: `command-full-tune-vehicle`,
     COMMAND_ADD_VEHICLE_KEY: `command-add-vehicle-key`,
+    COMMAND_SET_VEH_DIRT_LEVEL: `command-set-veh-dirt-level`,
     // Cannot
     CANNOT_CHAT_WHILE_DEAD: `cannot-chat-while-dead`,
     CANNOT_FIND_PLAYER: `cannot-find-player`,
