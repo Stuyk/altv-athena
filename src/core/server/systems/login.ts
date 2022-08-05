@@ -116,22 +116,24 @@ export class LoginController {
 
         // Used for DiscordToken skirt.
         if (!account) {
-            const accountData = await AccountSystem.getAccount(player);
+            const accountData = await AccountSystem.getAccount(player, 'discord', player.discord.id);
 
             if (!accountData) {
-                account = await AccountSystem.create(player);
+                const data: { discord: string; email?: string } = { discord: player.discord.id };
+
+                if (player.discord.email) {
+                    data.email = player.discord.email;
+                }
+
+                account = await AccountSystem.create(player, data);
+                account._id = account._id.toString();
             } else {
                 account = accountData;
-
-                // Update Email if Non-Existant
-                // Update Email if Does Not Match
-                if (
-                    (!account.email && player.discord.email) ||
-                    (player.discord.email && account.email !== player.discord.email)
-                ) {
+                account._id = account._id.toString();
+                if (player.discord.email && player.discord.email !== account.email) {
                     account.email = player.discord.email;
                     await Database.updatePartialData(
-                        account._id.toString(),
+                        account._id,
                         { email: player.discord.email },
                         Collections.Accounts,
                     );
@@ -240,7 +242,7 @@ export class LoginController {
         }
 
         if (!account.discord) {
-            player.kick("Bad Token");
+            player.kick('Bad Token');
             return;
         }
 

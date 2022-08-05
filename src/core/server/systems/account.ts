@@ -7,14 +7,14 @@ import { Collections } from '../interface/iDatabaseCollections';
 let isDoneLoading = false;
 let id = -1;
 
-export class AccountSystem {
+const AccountSystemRef = {
     /**
      * Initializes the account system and adds ids to accounts that do not have one.
      * @static
-     * @return {*}
-     * @memberof AccountSystem
+     * @return {void}
+     * @memberof AccountSystemRef
      */
-    static async init() {
+    async init() {
         let accounts = await Database.fetchAllData<Account>(Collections.Accounts);
 
         // Turn off loading after init
@@ -33,7 +33,7 @@ export class AccountSystem {
         let inUse = [];
         for (let i = 0; i < accounts.length; i++) {
             if (accounts[i].id === null || accounts[i].id === undefined) {
-                const nextIdentifier = AccountSystem.getNextIdentifier();
+                const nextIdentifier = AccountSystemRef.getNextIdentifier();
                 await Database.updatePartialData(
                     accounts[i]._id.toString(),
                     { id: nextIdentifier },
@@ -46,7 +46,7 @@ export class AccountSystem {
             }
 
             if (inUse.findIndex((id) => id === accounts[i].id) >= 0) {
-                const nextIdentifier = AccountSystem.getNextIdentifier();
+                const nextIdentifier = AccountSystemRef.getNextIdentifier();
                 await Database.updatePartialData(
                     accounts[i]._id.toString(),
                     { id: nextIdentifier },
@@ -63,12 +63,11 @@ export class AccountSystem {
         }
 
         isDoneLoading = true;
-    }
-
+    },
     /**
      * Wait until the `isDoneLoading` variable is set to `true` before continuing.
      */
-    static async isDoneLoading(): Promise<void> {
+    async isDoneLoading(): Promise<void> {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (!isDoneLoading) {
@@ -79,73 +78,86 @@ export class AccountSystem {
                 resolve();
             }, 100);
         });
-    }
+    },
 
     /**
      * Get next identifier
      * @static
      * @return { number }
-     * @memberof AccountSystem
+     * @memberof AccountSystemRef
      */
-    static getNextIdentifier(): number {
+    getNextIdentifier(): number {
         id += 1;
         return id;
-    }
+    },
 
     /**
-     * Fetch account for player who has discord information.
+     * Fetch account for a player based on key / value pair.
      * @static
      * @param {alt.Player} player
      * @return {(Promise<Account | null>)}
-     * @memberof AccountSystem
+     * @memberof AccountSystemRef
      */
-    static async getAccount(player: alt.Player): Promise<Account | null> {
-        if (!player.discord) {
-            return null;
-        }
-
-        const accountData: Account | null = await Database.fetchData<Account>(
-            'discord',
-            player.discord.id,
-            Collections.Accounts,
-        );
+    async getAccount(player: alt.Player, key: string, value: any): Promise<Account | null> {
+        const accountData: Account | null = await Database.fetchData<Account>(key, value, Collections.Accounts);
 
         if (!accountData) {
             return null;
         }
 
         if (accountData && (accountData.id === null || accountData.id === undefined)) {
-            accountData.id = AccountSystem.getNextIdentifier();
+            accountData.id = AccountSystemRef.getNextIdentifier();
         }
 
         return accountData;
-    }
+    },
 
     /**
      * Create an account with default data.
      * @static
      * @param {alt.Player} player
+     * @param {{[key: string]: any }} dataToAppend - Any additional data / identifiers to add to an account.
      * @return {Promise<Account>}
-     * @memberof AccountSystem
+     * @memberof AccountSystemRef
      */
-    static async create(player: alt.Player): Promise<Account> {
-        await AccountSystem.isDoneLoading();
-
+    async create(player: alt.Player, dataToAppend: { [key: string]: any }): Promise<Account> {
+        await AccountSystemRef.isDoneLoading();
         const newDocument: Partial<Account> = {
-            discord: player.discord.id,
             ips: [player.ip],
             hardware: [player.hwidHash, player.hwidExHash],
             lastLogin: Date.now(),
             permissionLevel: PERMISSIONS.NONE,
-            id: AccountSystem.getNextIdentifier(),
+            id: AccountSystemRef.getNextIdentifier(),
+            ...dataToAppend,
         };
 
-        if (player.discord.email) {
-            newDocument.email = player.discord.email;
-        }
-
         return await Database.insertData<Account>(newDocument as Account, Collections.Accounts, true);
+    },
+};
+
+/**
+ * It takes a function name and a callback, and if the function exists in the exports object, it
+ * overrides it with the callback
+ *
+ * @param {Key} functionName - The name of the function you want to override.
+ * @param callback
+ * @returns The function is being returned.
+ */
+function override<Key extends keyof typeof AccountSystemRef>(
+    functionName: Key,
+    callback: typeof AccountSystemRef[Key],
+): void {
+    if (typeof exports[functionName] === 'undefined') {
+        alt.logError(`systems/account.ts does not provide an export named ${functionName}`);
+        return;
     }
+
+    exports[functionName] = callback;
 }
+
+export const AccountSystem: typeof AccountSystemRef & { override?: typeof override } = {
+    ...AccountSystemRef,
+    override,
+};
 
 AccountSystem.init();

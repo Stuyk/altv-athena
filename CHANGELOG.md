@@ -22,7 +22,9 @@ Added Interaction Leave Callback to Interactions
 --> Triggers when a player leaves a matching ColShape
 Added Overrides to Athena.systems.identifier
 Added Overrides to Athena.systems.storage
-Added Overrides to character.ts
+Added Overrides to systems/character.ts
+Abstracted Account System
+Added Overrides for systems/account.ts
 ```
 
 ## 3.6.0
