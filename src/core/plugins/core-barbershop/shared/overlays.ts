@@ -91,10 +91,10 @@ export const hairOverlayInfo: { [key: string]: { collection: string; overlay: st
         collection: 'multiplayer_overlays',
         overlay: 'NGInd_M_Hair_000',
     },
-    '2-2398078303-male-0': {
-        collection: 'mpbeach_overlays',
-        overlay: 'FM_Hair_Fuzz',
-    },
+//     '2-2398078303-male-0': {
+//         collection: 'mpbeach_overlays',
+//         overlay: 'FM_Hair_Fuzz',
+//     },
     '2-2622733042-male-0': {
         collection: 'mplowrider_overlays',
         overlay: 'LR_M_Hair_000',
@@ -403,10 +403,10 @@ export const hairOverlayInfo: { [key: string]: { collection: string; overlay: st
         collection: 'multiplayer_overlays',
         overlay: 'NGInd_F_Hair_000',
     },
-    '2-472368876-female-0': {
-        collection: 'mpbeach_overlays',
-        overlay: 'FM_Hair_Fuzz',
-    },
+//     '2-472368876-female-0': {
+//         collection: 'mpbeach_overlays',
+//         overlay: 'FM_Hair_Fuzz',
+//     },
     '2-2666108404-female-0': {
         collection: 'mplowrider_overlays',
         overlay: 'LR_F_Hair_000',
