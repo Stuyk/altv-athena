@@ -11,4 +11,5 @@ export enum EQUIPMENT_TYPE {
     WATCH = 9,
     BRACELET = 10,
     ACCESSORY = 11,
+    OUTFIT = 12,
 }
