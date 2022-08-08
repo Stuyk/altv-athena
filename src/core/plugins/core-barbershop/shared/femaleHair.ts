@@ -75,7 +75,7 @@ export const femaleHair = [
     '2-4245895770-female-5',
     '2-4245895770-female-6',
     '2-45055460-female-0',
-    '2-472368876-female-0',
+//     '2-472368876-female-0',
     '2-748197015-female-0',
     '2-870789986-female-0',
     '2-870789986-female-1',
