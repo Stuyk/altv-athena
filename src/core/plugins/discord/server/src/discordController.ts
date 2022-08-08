@@ -2,7 +2,6 @@ import alt from 'alt-server';
 import { Client, Guild, GuildMember, Intents, MessageEmbed, TextChannel } from 'discord.js';
 import { Athena } from '../../../../server/api/athena';
 import { Account } from '../../../../server/interface/iAccount';
-import { LoginController } from '../../../../server/systems/login';
 import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });

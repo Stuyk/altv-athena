@@ -178,4 +178,34 @@ class PlayersCommand {
         Athena.player.safe.addArmour(target, value, true);
         Athena.player.emit.message(target, `Player armour was set to ${value}`);
     }
+
+    @command('tempcomponent', '/tempcomponent id num', PERMISSIONS.ADMIN)
+    private static setComponent(player: alt.Player, id: string, value: string) {
+        if (typeof id === 'undefined' || typeof value === 'undefined') {
+            Athena.player.emit.message(player, `Must provide id, and value.`);
+            return;
+        }
+
+        try {
+            player.setClothes(parseInt(id), parseInt(value), 0, 0);
+            Athena.player.emit.message(player, `Successfully set temp component - ${id} ${value}`);
+        } catch (err) {
+            Athena.player.emit.message(player, err.toString());
+        }
+    }
+
+    @command('tempprop', '/tempprop id num', PERMISSIONS.ADMIN)
+    private static setProp(player: alt.Player, id: string, value: string) {
+        if (typeof id === 'undefined' || typeof value === 'undefined') {
+            Athena.player.emit.message(player, `Must provide id, and value.`);
+            return;
+        }
+
+        try {
+            player.setProp(parseInt(id), parseInt(value), 0);
+            Athena.player.emit.message(player, `Successfully set temp prop - ${id} ${value}`);
+        } catch (err) {
+            Athena.player.emit.message(player, err.toString());
+        }
+    }
 }
