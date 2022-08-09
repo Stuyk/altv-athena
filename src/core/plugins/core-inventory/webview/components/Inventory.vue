@@ -13,7 +13,7 @@
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('toolbar', index)">
-                    <img :src="ResolvePath(getItem('toolbar', index).icon)" />
+                    <img :src="getImagePath(getItem('toolbar', index))" />
                 </template>
                 <template v-slot:index v-else>
                     {{ slot }}
@@ -37,7 +37,7 @@
                 @mousedown="(e) => drag(e, dragOff, hasItem('inventory', index))"
             >
                 <template v-slot:image v-if="hasItem('inventory', index)">
-                    <img :src="ResolvePath(getItem('inventory', index).icon)" />
+                    <img :src="getImagePath(getItem('inventory', index))" />
                 </template>
                 <template v-slot:index v-else>
                     {{ index }}
@@ -55,8 +55,10 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { Item } from '../../../../shared/interfaces/inventory';
-import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
 import draggable from '../../../../../../src-webviews/src/utility/drag';
+import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
+import { INVENTORY_EVENTS } from '../../shared/events';
+import { getImagePath } from '../utility/inventoryIcon';
 
 export default defineComponent({
     name: 'Inventory',
@@ -77,7 +79,7 @@ export default defineComponent({
         };
     },
     methods: {
-        ResolvePath,
+        getImagePath,
         drag: draggable.makeDraggable,
         dragOff(
             startType: 'inventory' | 'toolbar' | 'equipment',
@@ -93,6 +95,7 @@ export default defineComponent({
             }
 
             // Call server-side swap / stack
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SWAP, startType, startIndex, endType, endIndex);
         },
         /**
          * Determines if a specific data type has a matching slot item.
@@ -148,6 +151,20 @@ export default defineComponent({
             }
 
             // Send Event to do the thing it describes
+            if (type === 'use') {
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, type, this.slot);
+                return;
+            }
+
+            if (type === 'split') {
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SPLIT, type, this.slot);
+                return;
+            }
+
+            if (type === 'drop') {
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, type, this.slot);
+                return;
+            }
         },
         unequip(e: Event, slot: number) {
             e.preventDefault();
@@ -156,11 +173,12 @@ export default defineComponent({
             }
 
             if (!('alt' in window)) {
-                console.log('It should unequip: ' + slot);
+                console.log('It should unequip toolbar item @ ' + slot);
                 return;
             }
 
             // Send Event to Server to Unequip
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'toolbar', slot);
         },
     },
     mounted() {
@@ -183,7 +201,10 @@ export default defineComponent({
             icon: 'assets/icons/crate.png',
         };
 
-        this.setItems([exampleItem, { ...exampleItem, slot: 24 }], [exampleItem]);
+        this.setItems(
+            [exampleItem, { ...exampleItem, slot: 24, icon: 'pistol50' }],
+            [{ ...exampleItem, icon: 'assaultrifle' }],
+        );
     },
 });
 </script>

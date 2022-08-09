@@ -10,9 +10,10 @@
                 :slot="index"
                 :id="getID('equipment', index)"
                 @mousedown="(e) => drag(e, dragOff, hasItem('equipment', index))"
+                @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('equipment', index)">
-                    <img :src="ResolvePath(getItem('equipment', index).icon)" />
+                    <img :src="getImagePath(getItem('equipment', index))" />
                 </template>
                 <template v-slot:index v-else>
                     {{ slot.name }}
@@ -29,16 +30,20 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { EquipmentSlots } from '../../shared/equipment';
-import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
 import draggable from '../../../../../../src-webviews/src/utility/drag';
 import { Item } from '../../../../shared/interfaces/inventory';
+import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
+import { INVENTORY_EVENTS } from '../../shared/events';
+import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { exampleEquipment } from '../utility/exampleEquipment';
+import { getImagePath } from '../utility/inventoryIcon';
 
 export default defineComponent({
     name: 'Character',
     data() {
         return {
             equipmentSlots: EquipmentSlots,
-            equipment: [] as Array<Item>,
+            equipment: [] as Array<Item<ClothingComponent>>,
         };
     },
     components: {
@@ -46,7 +51,7 @@ export default defineComponent({
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
     },
     methods: {
-        ResolvePath,
+        getImagePath,
         drag: draggable.makeDraggable,
         dragOff(
             startType: 'inventory' | 'toolbar' | 'equipment',
@@ -68,23 +73,46 @@ export default defineComponent({
                 return false;
             }
 
-            const items = [...this[type]] as Array<Item>;
+            const items = [...this[type]] as Array<Item<ClothingComponent>>;
             return items.findIndex((item) => item && item.slot === slot) !== -1;
         },
-        getItem(type: 'equipment', slot: number): Item | undefined {
+        getItem(type: 'equipment', slot: number): Item<ClothingComponent> | undefined {
             if (typeof this[type] === undefined) {
                 return undefined;
             }
 
-            const items = [...this[type]] as Array<Item>;
+            const items = [...this[type]] as Array<Item<ClothingComponent>>;
             return items[items.findIndex((item) => item && item.slot === slot)];
         },
         getID(type: 'equipment', index: number): string {
             return type + '-' + index;
         },
+        unequip(e: Event, slot: number) {
+            e.preventDefault();
+            if (!this.hasItem('equipment', slot)) {
+                return;
+            }
+
+            if (!('alt' in window)) {
+                console.log('It should unequip equipment item @ ' + slot);
+                return;
+            }
+
+            // Send Event to Server to Unequip
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'equipment', slot);
+        },
+        setEquipment(equipment: Array<Item>) {
+            this.equipment = equipment;
+        },
     },
-    mounted() {},
-    unmounted() {},
+    mounted() {
+        if ('alt' in window) {
+            // Go fetch equipment
+            return;
+        }
+
+        this.setEquipment(exampleEquipment);
+    },
 });
 </script>
 

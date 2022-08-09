@@ -5,6 +5,7 @@ export default function resolvePath(currentPath: string, pluginName = ''): strin
         return '';
     }
 
+    // Handles @plugins pathing
     if (currentPath.includes('@plugins')) {
         for (const pluginFolder of pluginFolders) {
             if (!currentPath.includes(pluginFolder)) {
@@ -15,8 +16,9 @@ export default function resolvePath(currentPath: string, pluginName = ''): strin
         }
     }
 
-    if (!('alt' in window)) {
-        return currentPath;
+    // Handles Older Path Values - Previous Item Types
+    if (!currentPath.includes('/') && !currentPath.includes('../')) {
+        return `./assets/icons/${currentPath}`;
     }
 
     while (currentPath.includes('../')) {
