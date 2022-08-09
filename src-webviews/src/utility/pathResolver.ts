@@ -1,6 +1,10 @@
 const pluginFolders = ['sounds', 'images', 'icons', 'videos'];
 
 export default function resolvePath(currentPath: string, pluginName = ''): string {
+    if (!currentPath) {
+        return '';
+    }
+
     if (currentPath.includes('@plugins')) {
         for (const pluginFolder of pluginFolders) {
             if (!currentPath.includes(pluginFolder)) {

@@ -3,6 +3,34 @@ import { ITEM_TYPE } from '../enums/itemTypes';
 /** Do Not Export */
 interface SharedItemData {
     /**
+     * The display of the item.
+     * Used for displaying in an inventory ui.
+     *
+     * @type {string}
+     * @memberof BaseItem
+     */
+    name: string;
+
+    /**
+     * Used to fetch this specific item.
+     *
+     * Kebab case item reference.
+     * Example: 'golden-pickaxe'
+     *
+     * @type {string}
+     * @memberof BaseItem
+     */
+    base: string;
+
+    /**
+     * The path where the icon is stored.
+     *
+     * @type {string}
+     * @memberof SharedItemData
+     */
+    icon: string;
+
+    /**
      * If it is a base item, how much 1 item weighs.
      * If it is a single item how much the stack weighs.
      *
@@ -36,26 +64,6 @@ export interface BaseItem<T = Object> extends SharedItemData {
      * @memberof BaseItem
      */
     _id?: any;
-
-    /**
-     * The display of the item.
-     * Used for displaying in an inventory ui.
-     *
-     * @type {string}
-     * @memberof BaseItem
-     */
-    name: string;
-
-    /**
-     * Used to fetch this specific item.
-     *
-     * Kebab case item reference.
-     * Example: 'golden-pickaxe'
-     *
-     * @type {string}
-     * @memberof BaseItem
-     */
-    base: string;
 
     /**
      * The current revision of this specific Item.
