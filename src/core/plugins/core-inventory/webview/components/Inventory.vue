@@ -67,7 +67,6 @@ export default defineComponent({
     },
     data() {
         return {
-            ResolvePath,
             toolbar: [] as Array<Item>,
             inventory: [] as Array<Item>,
             maxSlots: 28,
@@ -78,11 +77,12 @@ export default defineComponent({
         };
     },
     methods: {
+        ResolvePath,
         drag: draggable.makeDraggable,
         dragOff(
-            startType: 'inventory' | 'toolbar',
+            startType: 'inventory' | 'toolbar' | 'equipment',
             startIndex: number,
-            endType: 'inventory' | 'toolbar',
+            endType: 'inventory' | 'toolbar' | 'equipment',
             endIndex: number,
         ) {
             if (!('alt' in window)) {

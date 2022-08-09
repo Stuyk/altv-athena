@@ -1,9 +1,23 @@
 <template>
     <div class="character-frame">
         <div class="equipment">
-            <div class="slot" v-for="(slot, index) in equipmentSlots">
-                {{ slot.name }}
-            </div>
+            <Slot
+                v-for="(slot, index) in equipmentSlots"
+                class="slot"
+                location="equipment"
+                :key="index"
+                :hasItem="true"
+                :slot="index"
+                :id="getID('equipment', index)"
+                @mousedown="(e) => drag(e, dragOff, hasItem('equipment', index))"
+            >
+                <template v-slot:image v-if="hasItem('equipment', index)">
+                    <img :src="ResolvePath(getItem('equipment', index).icon)" />
+                </template>
+                <template v-slot:index v-else>
+                    {{ slot.name }}
+                </template>
+            </Slot>
         </div>
         <div class="give-to">
             <div class="player">J_T</div>
@@ -15,15 +29,60 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { EquipmentSlots } from '../../shared/equipment';
+import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
+import draggable from '../../../../../../src-webviews/src/utility/drag';
+import { Item } from '../../../../shared/interfaces/inventory';
 
 export default defineComponent({
     name: 'Character',
     data() {
         return {
             equipmentSlots: EquipmentSlots,
+            equipment: [] as Array<Item>,
         };
     },
-    methods: {},
+    components: {
+        Slot: defineAsyncComponent(() => import('./Slot.vue')),
+        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+    },
+    methods: {
+        ResolvePath,
+        drag: draggable.makeDraggable,
+        dragOff(
+            startType: 'inventory' | 'toolbar' | 'equipment',
+            startIndex: number,
+            endType: 'inventory' | 'toolbar' | 'equipment',
+            endIndex: number,
+        ) {
+            if (!('alt' in window)) {
+                console.log('ref');
+                console.log(startType, startIndex);
+                console.log(endType, endIndex);
+                return;
+            }
+
+            // Call server-side swap / stack
+        },
+        hasItem(type: 'equipment', slot: number): boolean {
+            if (typeof this[type] === undefined) {
+                return false;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            return items.findIndex((item) => item && item.slot === slot) !== -1;
+        },
+        getItem(type: 'equipment', slot: number): Item | undefined {
+            if (typeof this[type] === undefined) {
+                return undefined;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            return items[items.findIndex((item) => item && item.slot === slot)];
+        },
+        getID(type: 'equipment', index: number): string {
+            return type + '-' + index;
+        },
+    },
     mounted() {},
     unmounted() {},
 });
@@ -34,23 +93,6 @@ export default defineComponent({
     background: #cbcbcb;
     min-width: 506px;
     max-width: 506px;
-}
-
-.slot {
-    display: flex;
-    min-width: 90px;
-    max-width: 90px;
-    min-height: 90px;
-    max-height: 90px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    border: 4px solid rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: bold;
-    letter-spacing: 1px;
 }
 
 .character-frame {
@@ -96,6 +138,7 @@ export default defineComponent({
     overflow-y: auto;
     overflow-x: hidden;
     background: url('plugins/images/core-inventory/outline.png');
+    position: relative;
 }
 
 .equipment .slot {
@@ -104,9 +147,10 @@ export default defineComponent({
     min-height: 90px;
     max-height: 90px;
     background: #a2a2a2;
+    position: relative;
 }
 
-.equipment :nth-child(even) {
+.equipment > div:nth-child(even) {
     margin-left: calc(506px - 60px - 102px * 2);
 }
 </style>
