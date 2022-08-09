@@ -191,8 +191,8 @@ export default defineComponent({
 <style scoped>
 .inventory-frame {
     background: #cbcbcb;
-    min-width: 550px;
-    max-width: 550px;
+    min-width: 430px;
+    max-width: 430px;
 }
 
 .inventory-frame .inventory-toolbar {
@@ -201,8 +201,8 @@ export default defineComponent({
     justify-content: space-evenly;
     align-items: center;
     background: #a2a2a2;
-    min-height: 130px;
-    max-height: 130px;
+    min-height: 106px;
+    max-height: 106px;
 }
 
 .inventory-toolbar .slot {
@@ -226,8 +226,8 @@ export default defineComponent({
     padding-top: 8px;
     box-sizing: border-box;
     overflow-y: scroll;
-    min-height: 530px;
-    max-height: 530px;
+    min-height: 554px;
+    max-height: 554px;
     justify-content: space-evenly;
 }
 

@@ -6,6 +6,7 @@
         <div class="index">
             <slot name="index"></slot>
         </div>
+        <slot></slot>
     </div>
 </template>
 
