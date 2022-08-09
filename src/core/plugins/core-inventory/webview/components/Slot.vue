@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'Slot',
@@ -83,6 +83,8 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none !important;
+    pointer-events: none !important;
 }
 
 .image img {
@@ -102,5 +104,14 @@ export default defineComponent({
 
 .index {
     position: absolute;
+    pointer-events: none !important;
+}
+
+.clone {
+    background: rgb(0, 0, 0, 0.75);
+    position: fixed !important;
+    transition: unset !important;
+    border: 4px solid aquamarine !important;
+    pointer-events: none !important;
 }
 </style>

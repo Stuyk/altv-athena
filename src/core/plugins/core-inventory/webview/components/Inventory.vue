@@ -8,13 +8,15 @@
                 :key="index"
                 :hasItem="true"
                 :slot="index"
+                :id="getID('toolbar', index)"
+                @mousedown="(e) => drag(e, dragOff, hasItem('toolbar', index))"
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('toolbar', index)">
                     <img :src="ResolvePath(getItem('toolbar', index).icon)" />
                 </template>
                 <template v-slot:index v-else>
-                    {{ index }}
+                    {{ slot }}
                 </template>
             </Slot>
         </div>
@@ -30,7 +32,9 @@
                 :key="index"
                 :hasItem="true"
                 :slot="index"
+                :id="getID('inventory', index)"
                 @contextmenu="(e) => contextMenu(e, index)"
+                @mousedown="(e) => drag(e, dragOff, hasItem('inventory', index))"
             >
                 <template v-slot:image v-if="hasItem('inventory', index)">
                     <img :src="ResolvePath(getItem('inventory', index).icon)" />
@@ -52,6 +56,7 @@
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { Item } from '../../../../shared/interfaces/inventory';
 import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
+import draggable from '../../../../../../src-webviews/src/utility/drag';
 
 export default defineComponent({
     name: 'Inventory',
@@ -73,6 +78,22 @@ export default defineComponent({
         };
     },
     methods: {
+        drag: draggable.makeDraggable,
+        dragOff(
+            startType: 'inventory' | 'toolbar',
+            startIndex: number,
+            endType: 'inventory' | 'toolbar',
+            endIndex: number,
+        ) {
+            if (!('alt' in window)) {
+                console.log('ref');
+                console.log(startType, startIndex);
+                console.log(endType, endIndex);
+                return;
+            }
+
+            // Call server-side swap / stack
+        },
         /**
          * Determines if a specific data type has a matching slot item.
          * @param type
@@ -93,6 +114,9 @@ export default defineComponent({
 
             const items = [...this[type]] as Array<Item>;
             return items[items.findIndex((item) => item && item.slot === slot)];
+        },
+        getID(type: 'toolbar' | 'inventory', index: number): string {
+            return type + '-' + index;
         },
         setMaxSlots(value: number) {
             this.maxSlots = value;
@@ -117,6 +141,13 @@ export default defineComponent({
         },
         contextAction(type: 'use' | 'split' | 'drop') {
             this.context = undefined;
+
+            if (!('alt' in window)) {
+                console.log(`It should do ${type} on slot: ` + this.slot);
+                return;
+            }
+
+            // Send Event to do the thing it describes
         },
         unequip(e: Event, slot: number) {
             e.preventDefault();
@@ -125,6 +156,7 @@ export default defineComponent({
             }
 
             if (!('alt' in window)) {
+                console.log('It should unequip: ' + slot);
                 return;
             }
 
@@ -151,7 +183,7 @@ export default defineComponent({
             icon: 'assets/icons/crate.png',
         };
 
-        this.setItems([exampleItem, exampleItem], [exampleItem]);
+        this.setItems([exampleItem, { ...exampleItem, slot: 24 }], [exampleItem]);
     },
 });
 </script>
