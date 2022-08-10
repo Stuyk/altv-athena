@@ -28,7 +28,13 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
     const normalizedName = `${folderName}`.replace('webview/', '')
 
     // First Perform Extension & Sub Directory Cleanup
-    const oldFiles = glob.sync(sanitizePath(path.join(`src-webviews/public/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)));
+    let oldFiles;
+
+    if (!isSrc) {
+        oldFiles = glob.sync(sanitizePath(path.join(`src-webviews/public/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)));
+    } else {
+        oldFiles = glob.sync(sanitizePath(path.join(`src-webviews/src/plugins/${normalizedName}/**/*.+(${extensions.join('|')})`)));
+    }
 
     for (let oldFile of oldFiles) {
         if (fs.existsSync(oldFile)) {
@@ -76,6 +82,15 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
                 amountCopied += 1;
             }
         }
+    }
+
+    if (amountCopied >= 1 && extensions.includes('css')) {
+        console.warn('! ============ !')
+        console.warn(`You're using the 'css' folder. In order to reflect changes you must restart the vue server for it to update.`)
+        console.warn(`You should move the style to the style tag in your component.`)
+        console.warn(`Externally styling with Athena is poorly supported and may never work correctly.`)
+        console.warn(`This is fine if you have preset styles already built and don't plan on making changes in the future.`)
+        console.warn('! ============ !')
     }
 
     console.log(`${folderName} - ${amountCopied} Files Added to WebView Plugins - (${extensions.join('|')})`)
