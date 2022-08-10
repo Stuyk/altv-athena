@@ -29,6 +29,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+@import '@/plugins/css/core-inventory/test.css';
+
 .main-frame {
     display: flex;
     flex-direction: row;

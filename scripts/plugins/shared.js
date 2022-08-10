@@ -24,7 +24,7 @@ export function getEnabledPlugins() {
     });
 }
 
-export function movePluginFilesToWebview(folderName, extensions) {
+export function movePluginFilesToWebview(folderName, extensions, isSrc = false) {
     const normalizedName = `${folderName}`.replace('webview/', '')
 
     // First Perform Extension & Sub Directory Cleanup
@@ -58,7 +58,13 @@ export function movePluginFilesToWebview(folderName, extensions) {
         for (let i = 0; i < allFiles.length; i++) {
             const filePath = allFiles[i];
             const regExp = new RegExp(`.*\/${folderName}\/`);
-            const finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/public/plugins/${normalizedName}/${pluginName}/`))
+            let finalPath;
+
+            if (!isSrc) {
+                finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/public/plugins/${normalizedName}/${pluginName}/`))
+            } else {
+                finalPath = sanitizePath(filePath.replace(regExp, `src-webviews/src/plugins/${normalizedName}/${pluginName}/`))
+            }
 
             if (fs.existsSync(filePath)) {
                 const folderPath = sanitizePath(path.dirname(finalPath));
