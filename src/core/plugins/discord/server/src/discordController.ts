@@ -4,7 +4,7 @@ import { Athena } from '../../../../server/api/athena';
 import { Account } from '../../../../server/interface/iAccount';
 import { LOCALE_DISCORD_ALLOW_LIST } from '../config/locales';
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
 let isReady = false;
 let serverId: string;
