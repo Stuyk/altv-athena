@@ -94,19 +94,5 @@ export function movePluginFilesToWebview(folderName, extensions, isSrc = false) 
         }
     }
 
-    if (amountCopied >= 1 && extensions.includes('css')) {
-        console.warn('! ============ !');
-        console.warn(
-            `You're using the 'css' folder. In order to reflect changes you must restart the vue server for it to update.`,
-        );
-        console.warn(`You should move the style to the style tag in your component.`);
-        console.warn(`Externally styling with Athena is poorly supported and may never work correctly.`);
-        console.warn(
-            `This is fine if you have preset styles already built and don't plan on making changes in the future.`,
-        );
-        console.warn(`CSS Import Pathing Should Be: '@/plugins/css/your-plugin/some-style.css`);
-        console.warn('! ============ !');
-    }
-
     console.log(`${folderName} - ${amountCopied} Files Added to WebView Plugins - (${extensions.join('|')})`);
 }
