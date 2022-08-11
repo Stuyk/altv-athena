@@ -17,14 +17,6 @@ export default defineComponent({
         Inventory: defineAsyncComponent(() => import('./components/Inventory.vue')),
         Character: defineAsyncComponent(() => import('./components/Character.vue')),
     },
-    data() {
-        return {};
-    },
-    methods: {},
-    mounted() {
-        //
-    },
-    unmounted() {},
 });
 </script>
 
