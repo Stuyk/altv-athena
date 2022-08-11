@@ -90,11 +90,19 @@ class InternalFunctions {
      * @memberof CharacterSelectView
      */
     static async show(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+        
         const playerCharacters: Array<Character> = await Database.fetchAllByField<Character>(
             'account_id',
             player.accountData._id,
             Athena.database.collections.Characters,
         );
+        
+        if (!player || !player.valid) {
+            return;
+        }
 
         if (!playerCharacters || playerCharacters.length <= 0) {
             if (CharacterList[player.id]) {
