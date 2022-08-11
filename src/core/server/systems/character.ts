@@ -106,6 +106,10 @@ const CharacterSystemRef = {
      * @memberof CharacterSystem
      */
     async select(player: alt.Player, character: Character) {
+        if (!player || !player.valid) {
+            return;
+        }
+        
         player.data = deepCloneObject(character);
 
         // Increase the value outright
@@ -142,6 +146,10 @@ const CharacterSystemRef = {
         }
 
         alt.setTimeout(async () => {
+            if (!player || !player.valid) {
+                return;
+            }
+            
             if (player.data.pos) {
                 Athena.player.safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
             } else {

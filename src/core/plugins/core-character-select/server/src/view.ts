@@ -94,6 +94,10 @@ class InternalFunctions {
             player.accountData._id.toString(),
         );
 
+        if (!player || !player.valid) {
+            return;
+        }
+
         if (!playerCharacters || playerCharacters.length <= 0) {
             if (CharacterList[player.id]) {
                 delete CharacterList[player.id];
