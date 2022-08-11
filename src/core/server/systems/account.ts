@@ -100,6 +100,7 @@ const AccountSystemRef = {
      */
     async getAccount(player: alt.Player, key: string, value: any): Promise<Account | null> {
         const accountData: Account | null = await Database.fetchData<Account>(key, value, Collections.Accounts);
+        accountData._id = accountData._id.toString();
 
         if (!accountData) {
             return null;

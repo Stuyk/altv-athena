@@ -25,6 +25,7 @@ Added Overrides to Athena.systems.storage
 Added Overrides to systems/character.ts
 Abstracted Account System
 Added Overrides for systems/account.ts
+Patch Legacy account_id issues
 ```
 
 ## 3.6.0

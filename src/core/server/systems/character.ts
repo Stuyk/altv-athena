@@ -15,6 +15,7 @@ import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from '.
 import { Injections } from './injections';
 import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../shared/interfaces/characterInfo';
+import { ObjectId } from 'mongodb';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
@@ -66,7 +67,7 @@ const CharacterSystemRef = {
         }
 
         const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
-        newDocument.account_id = player.accountData._id;
+        newDocument.account_id = player.accountData._id.toString();
         newDocument.appearance = appearance;
         newDocument.info = info;
         newDocument.name = name;
@@ -223,6 +224,47 @@ const CharacterSystemRef = {
         );
 
         return result ? true : false;
+    },
+
+    /**
+     * Get all characters that belong to an account.
+     *
+     * @param {string} account_id player.accountData._id.toString()
+     * @return {Promise<Array<Character>>}
+     */
+    async getCharacters(account_id: string): Promise<Array<Character>> {
+        const firstLookup = await Athena.database.funcs.fetchAllByField<Character>(
+            'account_id',
+            account_id,
+            Athena.database.collections.Characters,
+        );
+
+        const secondLookup = await Athena.database.funcs.fetchAllByField<Character>(
+            'account_id',
+            new ObjectId(account_id),
+            Athena.database.collections.Characters,
+        );
+
+        if (firstLookup.length >= 1) {
+            for (let i = 0; i < firstLookup.length; i++) {
+                firstLookup[i]._id = firstLookup[i]._id.toString();
+            }
+        }
+
+        // This converts all legacy ObjectID `account_id` into strings.
+        if (secondLookup.length >= 1) {
+            for (let i = 0; i < secondLookup.length; i++) {
+                secondLookup[i]._id = secondLookup[i]._id.toString();
+                secondLookup[i].account_id = secondLookup[i].account_id.toString();
+                await Athena.database.funcs.updatePartialData(
+                    secondLookup[i]._id,
+                    { account_id: secondLookup[i].account_id },
+                    Athena.database.collections.Characters,
+                );
+            }
+        }
+
+        return [...firstLookup, ...secondLookup];
     },
 };
 

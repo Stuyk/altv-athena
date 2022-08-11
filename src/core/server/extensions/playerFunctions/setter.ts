@@ -56,6 +56,7 @@ const Setter = {
         player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
         emit.meta(player, 'permissionLevel', accountData.permissionLevel);
         player.accountData = accountData;
+        player.accountData._id = player.accountData._id.toString();
     },
 
     actionMenu(player: alt.Player, actionMenu: ActionMenu) {
