@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import { JobAttachable } from '../../shared/interfaces/iAttachable';
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
@@ -196,6 +197,10 @@ export class Job {
         // Triggers an Animation at Objective End
         if (objective.animation && !objective.animation.atObjectiveStart) {
             this.tryAnimation();
+        }
+
+        if (objective.attacheable && !objective.attacheable.atObjectiveStart) {
+            this.tryAttach();
         }
 
         // Calls an event on server-side or client-side after objective is complete.
@@ -448,6 +453,28 @@ export class Job {
     }
 
     /**
+     * Tries to attach an object if it is present
+     * @private
+     * @return {*}
+     * @memberof Job
+     */
+    private tryAttach() {
+        const objective = this.getCurrentObjective();
+        if (!objective.attacheable) {
+            return;
+        }
+
+        const objectToAttach: JobAttachable = {
+            model: objective.attacheable.model,
+            pos: objective.attacheable.pos,
+            rot: objective.attacheable.rot,
+            bone: objective.attacheable.bone,
+        };
+
+        Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attacheable.duration);
+    }
+
+    /**
      * Emits data down to the player to start handling job information.
      * @private
      * @memberof Job
@@ -461,6 +488,10 @@ export class Job {
 
         if (objective.animation && objective.animation.atObjectiveStart) {
             this.tryAnimation();
+        }
+
+        if (objective.attacheable && objective.attacheable.atObjectiveStart) {
+            this.tryAttach();
         }
 
         if (objective.eventCall && objective.eventCall.callAtStart) {
