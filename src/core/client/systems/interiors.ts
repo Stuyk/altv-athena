@@ -187,8 +187,7 @@ function fixMissingInteriors() {
 	interiorID = natives.getInteriorAtCoords(-31.328518, -1106.6293, 25.42235);
     if (natives.isValidInterior(interiorID)) {
         natives.activateInteriorEntitySet(interiorID, 'csr_beforeMission');
-        natives.activateInteriorEntitySet(interiorID, 'shutter_closed'); // back door closed or
-        // natives.activateInteriorEntitySet(interiorID, 'shutter_open'); // back door open
+        natives.activateInteriorEntitySet(interiorID, 'shutter_closed'); // back door closed or uncomment this for open.
         natives.refreshInterior(interiorID);
     }
 }
