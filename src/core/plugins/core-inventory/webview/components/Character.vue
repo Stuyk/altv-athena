@@ -118,9 +118,12 @@ export default defineComponent({
 
 <style scoped>
 .character-frame {
-    background: #cbcbcb;
-    min-width: 506px;
-    max-width: 506px;
+    background: rgba(0, 0, 0, 0.75);
+    min-width: 530px;
+    max-width: 530px;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
 }
 
 .character-frame {
@@ -134,10 +137,10 @@ export default defineComponent({
     flex-direction: column;
     min-width: 80px;
     max-width: 80px;
-    background: #a2a2a2;
     overflow-y: hidden;
     align-items: center;
     padding: 8px;
+    padding-top: 12px;
     box-sizing: border-box;
 }
 
@@ -149,15 +152,18 @@ export default defineComponent({
     max-width: 60px;
     min-height: 60px;
     max-height: 60px;
-    background: #7b7b7b;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     margin-bottom: 8px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
 
 .equipment {
-    min-width: calc(100% - 60px);
-    max-width: calc(100% - 60px);
+    min-width: calc(100% - 80px);
+    max-width: calc(100% - 80px);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -174,8 +180,11 @@ export default defineComponent({
     max-width: 90px;
     min-height: 90px;
     max-height: 90px;
-    background: #a2a2a2;
     position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 }
 
 .equipment > div:nth-child(even) {

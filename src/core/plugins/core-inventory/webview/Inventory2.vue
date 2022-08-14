@@ -1,8 +1,10 @@
 <template>
-    <div class="main-frame">
-        <Character />
-        <div class="spacer" />
-        <Inventory />
+    <div class="page-wrap">
+        <div class="main-frame">
+            <Character />
+            <div class="spacer" />
+            <Inventory />
+        </div>
     </div>
 </template>
 
@@ -22,6 +24,18 @@ export default defineComponent({
 
 <style scoped>
 @import '@/plugins/css/core-inventory/test.css';
+
+.page-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://i.pinimg.com/originals/2a/c3/3a/2ac33ac33ee4fcc300e82307e39cebf9.jpg') !important;
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+}
 
 .main-frame {
     display: flex;

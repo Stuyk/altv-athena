@@ -211,9 +211,13 @@ export default defineComponent({
 
 <style scoped>
 .inventory-frame {
-    background: #cbcbcb;
+    background: rgba(0, 0, 0, 0.75);
     min-width: 430px;
     max-width: 430px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
 }
 
 .inventory-frame .inventory-toolbar {
@@ -221,13 +225,14 @@ export default defineComponent({
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    background: #a2a2a2;
     min-height: 106px;
     max-height: 106px;
 }
 
 .inventory-toolbar .slot {
-    background: #cbcbcb;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .inventory-description {
@@ -237,7 +242,6 @@ export default defineComponent({
     flex-direction: column;
     min-height: 60px;
     max-height: 60px;
-    background: #7b7b7b;
     font-size: 12px;
 }
 
@@ -247,15 +251,18 @@ export default defineComponent({
     padding-top: 8px;
     box-sizing: border-box;
     overflow-y: scroll;
-    min-height: 554px;
-    max-height: 554px;
+    min-height: 550px;
+    max-height: 550px;
     justify-content: space-evenly;
 }
 
 .inventory-slots .slot {
-    background: #a2a2a2;
     margin-bottom: 12px;
     margin-right: 5px;
     margin-left: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 }
 </style>
