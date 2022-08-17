@@ -187,9 +187,38 @@ async function sub(
     return quantityToRemove;
 }
 
+/**
+ * Fully removes an item from an inventory slot. Does not handle quantity.
+ *
+ * @param {(CharacterInventory | Pick<alt.Player, 'data'>)} player
+ * @param {number} slot
+ * @return {Promise<boolean>}
+ */
+async function remove<T = StoredItem>(
+    player: CharacterInventory | Pick<alt.Player, 'data'>,
+    slot: number,
+): Promise<Item<T> | false> {
+    if (typeof player.data.inventory === 'undefined') {
+        player.data.inventory = [];
+        return false;
+    }
+
+    const items = [...player.data.inventory] as Array<Item<T>>;
+    const index = items.findIndex((item) => item && item.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    const item = deepCloneObject<Item<T>>(items.splice(index, 1));
+    await StateManager.set(player, 'inventory', items);
+    Athena.player.sync.inventory(player as alt.Player);
+    return item;
+}
+
 const Inventory = {
     add,
     sub,
+    remove,
 };
 
 function override<Key extends keyof typeof Inventory>(functionName: Key, callback: typeof Inventory[Key]): void {
