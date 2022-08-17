@@ -183,9 +183,7 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
-            // go fetch
-            // inventory
-            // toolbar
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, this.setItems);
             return;
         }
 

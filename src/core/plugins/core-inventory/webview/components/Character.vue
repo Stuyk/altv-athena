@@ -107,7 +107,7 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
-            // Go fetch equipment
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_EQUIPMENT, this.setEquipment);
             return;
         }
 

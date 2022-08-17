@@ -83,7 +83,13 @@ export class InventoryView {
             sessions.push(player.id);
         }
 
-        alt.emitClient(player, INVENTORY_EVENTS.TO_CLIENT.OPEN);
+        alt.emitClient(
+            player,
+            INVENTORY_EVENTS.TO_CLIENT.OPEN,
+            player.data.inventory,
+            player.data.equipment,
+            player.data.toolbar,
+        );
     }
 
     /**
