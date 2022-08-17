@@ -6,6 +6,38 @@ import { Athena } from '../../api/athena';
 import { StateManager } from '../stateManager';
 import Inventory from './inventory';
 
+/**
+ * Equips an item in an equipment slot.
+ * If the slot is already occupied, it will not equip the item, or return the item.
+ *
+ * @param {(CharacterInventory | Pick<alt.Player, 'data'>)} player
+ * @param {Item<{ slot: EQUIPMENT_TYPE }>} item
+ * @return {Promise<boolean>}
+ */
+async function justEquip(
+    player: CharacterInventory | Pick<alt.Player, 'data'>,
+    item: Item<{ slot: EQUIPMENT_TYPE }>,
+): Promise<boolean> {
+    const equipmentItems = [...player.data.equipment] as Array<Item<{ slot: EQUIPMENT_TYPE }>>;
+
+    const index = equipmentItems.findIndex((eqItem) => eqItem.data.slot === item.data.slot);
+    if (index >= 0) {
+        return false;
+    }
+
+    equipmentItems.push(item);
+    await StateManager.set(player, 'equipment', equipmentItems);
+    Athena.player.sync.inventory(player as alt.Player);
+    return true;
+}
+
+/**
+ * Takes an inventory item and tries to equip it as an equipment item.
+ *
+ * @param {(CharacterInventory | Pick<alt.Player, 'data'>)} player
+ * @param {number} inventorySlot
+ * @return {Promise<boolean>}
+ */
 async function equip(player: CharacterInventory | Pick<alt.Player, 'data'>, inventorySlot: number): Promise<boolean> {
     if (typeof player.data.inventory === 'undefined') {
         player.data.inventory = [];
@@ -67,6 +99,7 @@ async function unequip(
 
 const Equipment = {
     equip,
+    justEquip,
     unequip,
 };
 

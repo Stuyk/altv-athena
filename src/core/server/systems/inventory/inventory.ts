@@ -215,8 +215,43 @@ async function remove<T = StoredItem>(
     return item;
 }
 
+/**
+ * Check if inventory item at a slot has a specific set of data keys.
+ *
+ * @template T
+ * @param {(CharacterInventory | Pick<alt.Player, 'data'>)} player
+ * @param {number} slot
+ * @param {Array<string>} keys
+ * @return {boolean}
+ */
+function hasDataKeys<T = StoredItem>(
+    player: CharacterInventory | Pick<alt.Player, 'data'>,
+    slot: number,
+    keys: Array<string>,
+): boolean {
+    if (typeof player.data.inventory === 'undefined') {
+        player.data.inventory = [];
+        return false;
+    }
+
+    const items = [...player.data.inventory] as Array<Item<T>>;
+    const index = items.findIndex((item) => item && item.slot === slot);
+    if (index <= -1) {
+        return false;
+    }
+
+    for (let key of keys) {
+        if (typeof items[index].data[key] === 'undefined') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 const Inventory = {
     add,
+    hasDataKeys,
     sub,
     remove,
 };
