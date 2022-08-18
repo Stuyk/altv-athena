@@ -26,7 +26,7 @@ export interface Interaction {
      * @type {Vector3}
      * @memberof Interaction
      */
-    position?: Vector3;
+    position: Vector3;
 
     /**
      * The max distance in which this interaction can be interacted with.
