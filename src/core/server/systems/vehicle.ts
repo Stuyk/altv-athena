@@ -117,7 +117,7 @@ export class VehicleSystem {
         this.spawnAllVehicles(vehicles);
     }
 
-    private static async spawnAllVehicles(vehicles: Array<IVehicle>) {
+    private static spawnAllVehicles(vehicles: Array<IVehicle>) {
         let count = 0;
         for (let i = 0; i < vehicles.length; i++) {
             const vehicle = vehicles[i];
