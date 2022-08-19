@@ -93,7 +93,7 @@ export class VehicleSystem {
      * @return {*}
      * @memberof VehicleSystem
      */
-    static async init() {
+    static async init(): Promise<void> {
         alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
         alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
         alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
@@ -114,13 +114,17 @@ export class VehicleSystem {
             return;
         }
 
+        this.spawnAllVehicles(vehicles);
+    }
+
+    private static async spawnAllVehicles(vehicles: Array<IVehicle>) {
         let count = 0;
         for (let i = 0; i < vehicles.length; i++) {
             const vehicle = vehicles[i];
 
-            // Skip vehicles without a garage index.
+            // Skip vehicles without a garage index or without a position.
             const isInGarage = vehicle.garageIndex !== undefined && vehicle.garageIndex !== null;
-            if (isInGarage) {
+            if (isInGarage || !vehicle.position) {
                 continue;
             }
 
@@ -136,10 +140,6 @@ export class VehicleSystem {
                 alt.logWarning(
                     `Vehicle with ID: ${vehicle._id.toString()} is missing multiple properties. Skipped during initialization.`,
                 );
-                continue;
-            }
-
-            if (!vehicle.position) {
                 continue;
             }
 
@@ -213,7 +213,7 @@ export class VehicleSystem {
      * @param {alt.Vehicle} vehicle - The vehicle that the player is entering.
      * @returns The vehicle that the player is pushing.
      */
-    static entering(player: alt.Player, vehicle: alt.Vehicle) {
+    static entering(player: alt.Player, _vehicle: alt.Vehicle) {
         player.hasSatDown = false;
 
         if (!player.isPushingVehicle) {
@@ -260,7 +260,7 @@ export class VehicleSystem {
         alt.setTimeout(() => {
             try {
                 vehicle.destroy();
-            } catch (err) {}
+            } catch (err) { }
         }, 500);
     }
 
@@ -334,7 +334,7 @@ export class VehicleSystem {
         alt.emitClient(player, SYSTEM_EVENTS.VEHICLE_ENGINE, !player.vehicle.engineOn);
 
         // Force close vehicle doors on state change.
-        Object.keys(VEHICLE_DOOR_STATE).forEach((key, index) => {
+        Object.keys(VEHICLE_DOOR_STATE).forEach((key, _index) => {
             player.vehicle.setStreamSyncedMeta(VEHICLE_DOOR_STATE[key], false);
         });
 
@@ -563,7 +563,7 @@ export class VehicleSystem {
      */
     static stopPush(entity: alt.Player | alt.Vehicle | number) {
         if (entity instanceof alt.Vehicle) {
-            const someVehicle = entity as alt.Vehicle;
+            const someVehicle = entity;
             const target = alt.Player.all.find((x) => x.id === someVehicle.vehiclePusherID);
             entity = target;
         }
@@ -700,7 +700,7 @@ export class VehicleSystem {
 
             try {
                 vehicle.destroy();
-            } catch (err) {}
+            } catch (err) { }
         });
     }
 }
