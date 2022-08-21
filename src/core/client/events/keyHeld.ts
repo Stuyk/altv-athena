@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 
-const holdableKeys: { [key: string]: { onKeyDown: Function; onKeyUp: Function } } = {};
+const holdableKeys: { [key: string]: Array<{ onKeyDown: Function; onKeyUp: Function }> } = {};
 
 class InternalFunctions {
     static handleKeyUp(key: number) {
@@ -8,7 +8,9 @@ class InternalFunctions {
             return;
         }
 
-        holdableKeys[key].onKeyUp();
+        for (const [, handlers] of Object.entries(holdableKeys[key])) {
+            handlers.onKeyUp();
+        }
     }
 
     static handleKeyDown(key: number) {
@@ -16,7 +18,9 @@ class InternalFunctions {
             return;
         }
 
-        holdableKeys[key].onKeyDown();
+        for (const [, handlers] of Object.entries(holdableKeys[key])) {
+            handlers.onKeyDown();
+        }
     }
 }
 
@@ -50,11 +54,15 @@ export class KeyHeld {
             return;
         }
 
+        if (!holdableKeys[key]) {
+            holdableKeys[key] = [];
+        }
+
         // Register the callbacks
-        holdableKeys[key] = {
+        holdableKeys[key].push({
             onKeyUp,
             onKeyDown,
-        };
+        });
 
         alt.log(`${String.fromCharCode(key)} | Was Registered in KeyHeld`);
     }
@@ -86,19 +94,10 @@ export class KeyHeld {
             return;
         }
 
-        const keyUpExists = holdableKeys[key].onKeyUp === onKeyUp;
-        const keyDownExists = holdableKeys[key].onKeyDown === onKeyDown;
-
-        if (keyUpExists && keyDownExists) {
-            delete holdableKeys[key];
-            return;
-        }
-
-        if (keyUpExists) {
-            delete holdableKeys[key].onKeyUp;
-        } else if (keyDownExists) {
-            delete holdableKeys[key].onKeyDown;
-        }
+        // Remove the callbacks
+        holdableKeys[key] = holdableKeys[key].filter((handlers) => {
+            return handlers.onKeyDown !== onKeyDown || handlers.onKeyUp !== onKeyUp;
+        });
     }
 }
 
