@@ -1,6 +1,6 @@
-import * as alt from 'alt-client';
+import alt from 'alt-client';
 
-const holdableKeys: { [key: string]: Array<{ onKeyDown: Function; onKeyUp: Function }> } = {};
+const holdableKeys: { [key: string]: Array<{ onKeyDown?: Function; onKeyUp?: Function }> } = {};
 
 class InternalFunctions {
     static handleKeyUp(key: number) {
@@ -9,7 +9,7 @@ class InternalFunctions {
         }
 
         for (const [, handlers] of Object.entries(holdableKeys[key])) {
-            handlers.onKeyUp();
+            handlers.onKeyUp?.();
         }
     }
 
@@ -19,7 +19,7 @@ class InternalFunctions {
         }
 
         for (const [, handlers] of Object.entries(holdableKeys[key])) {
-            handlers.onKeyDown();
+            handlers.onKeyDown?.();
         }
     }
 }
@@ -28,7 +28,6 @@ export class KeyHeld {
     static init() {
         alt.on('keyup', InternalFunctions.handleKeyUp);
         alt.on('keydown', InternalFunctions.handleKeyDown);
-        alt.log(`KeyHeld was initialized`);
     }
 
     /**
@@ -38,10 +37,10 @@ export class KeyHeld {
      * @param {number} key
      * @param {Function} onKeyDown What to do when the key is pressed down.
      * @param {Function} onKeyUp What to do when the key is let go.
-     * @return {*}
+     * @return {void}
      * @memberof KeyHeld
      */
-    static register(key: number, onKeyDown: Function, onKeyUp: Function) {
+    static register(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
         // Verify a key is passed
         if (typeof key === 'undefined') {
             alt.logError(`Key was not specified for KeyHeld.register`);
@@ -49,7 +48,7 @@ export class KeyHeld {
         }
 
         // Verify functions have values
-        if (typeof onKeyDown !== 'function' || typeof onKeyUp !== 'function') {
+        if (typeof onKeyDown !== 'function' && typeof onKeyUp !== 'function') {
             alt.logWarning(`${key} in KeyHeld.register does not have valid callback functions.`);
             return;
         }
@@ -77,7 +76,7 @@ export class KeyHeld {
      * @return {void}
      * @memberof KeyHeld
      */
-    static unregister(key: number, onKeyDown: Function, onKeyUp: Function): void {
+    static unregister(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
         // Verify a key is passed
         if (typeof key === 'undefined') {
             alt.logError(`Key was not specified for KeyHeld.unregister`);
@@ -85,7 +84,7 @@ export class KeyHeld {
         }
 
         // Verify functions have values
-        if (typeof onKeyDown !== 'function' || typeof onKeyUp !== 'function') {
+        if (typeof onKeyDown !== 'function' && typeof onKeyUp !== 'function') {
             alt.logWarning(`${key} in KeyHeld.unregister does not have valid callback functions.`);
             return;
         }
@@ -94,9 +93,34 @@ export class KeyHeld {
             return;
         }
 
+        for (const [index, handlers] of Object.entries(holdableKeys[key])) {
+            const onKeyDownValid = typeof onKeyDown === 'function' && handlers.onKeyDown === onKeyDown;
+            const onKeyUpValid = typeof onKeyUp === 'function' && handlers.onKeyUp === onKeyUp;
+            const shouldRemove = onKeyDownValid && onKeyUpValid;
+
+            if (onKeyDownValid) {
+                delete handlers.onKeyDown;
+            }
+
+            if (typeof onKeyUp === 'function' && handlers.onKeyUp === onKeyUp) {
+                delete handlers.onKeyUp;
+            }
+
+            if (typeof handlers.onKeyDown === 'undefined' && typeof handlers.onKeyUp === 'undefined') {
+                holdableKeys[key].splice(<number>(<unknown>index), 1);
+            }
+        }
+
         // Remove the callbacks
         holdableKeys[key] = holdableKeys[key].filter((handlers) => {
-            return handlers.onKeyDown !== onKeyDown || handlers.onKeyUp !== onKeyUp;
+            const keyDownExists = typeof handlers.onKeyDown === 'function' && handlers.onKeyDown === onKeyDown;
+            const keyUpExists = typeof handlers.onKeyUp === 'function' && handlers.onKeyUp === onKeyUp;
+
+            if (keyDownExists || keyUpExists) {
+                return false;
+            }
+
+            return true;
         });
     }
 }
