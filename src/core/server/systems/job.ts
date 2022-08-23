@@ -199,7 +199,7 @@ export class Job {
             this.tryAnimation();
         }
 
-        if (objective.attacheable && !objective.attacheable.atObjectiveStart) {
+        if (objective.attachable && !objective.attachable.atObjectiveStart) {
             this.tryAttach();
         }
 
