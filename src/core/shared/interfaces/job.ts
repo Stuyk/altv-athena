@@ -5,6 +5,7 @@ import { TextLabel } from './textLabel';
 import { Vector3 } from './vector';
 import { JobAnimation } from './animation';
 import { Particle } from './particle';
+import { JobAttachable } from './iAttachable';
 
 enum ObjectiveCriteria {
     NO_VEHICLE = 1,
@@ -112,6 +113,13 @@ export interface Objective {
      * @memberof Objective
      */
     animation?: JobAnimation;
+
+    /**
+     * An object to associate with this objective.
+     * @type {JobAttachable}
+     * @memberof Objective
+     */
+    attachable?: JobAttachable;
 
     /**
      * An event that can be triggered when the objective is started, completed, etc.

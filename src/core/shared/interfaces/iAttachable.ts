@@ -44,3 +44,20 @@ export default interface IAttachable {
      */
     clientObjectID?: number;
 }
+
+export interface JobAttachable extends IAttachable {
+    /**
+     * How long should this object be attached.
+     * Set this to -1 for infinite.
+     * @type {number}
+     * @memberof Attachable
+     */
+    duration?: number;
+
+    /**
+     * Attach the object when the objective is loaded?
+     * @type {boolean}
+     * @memberof JobAttachable
+     */
+    atObjectiveStart?: boolean;
+}
