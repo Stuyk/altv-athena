@@ -292,7 +292,7 @@ const Sync = {
 
     playTime(playerRef: alt.Player): void {
         const player = playerRef as ReadOnlyPlayer;
-        Athena.state.set(player, 'hours', player.data.hours === 0 ? 0 : player.data.hours + 0.0166666666666667, true);
+        Athena.state.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667, true);
     },
 };
 
