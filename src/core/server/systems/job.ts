@@ -44,7 +44,7 @@ export class Job {
      * This instance should be called each time to create new job instances.
      * @memberof Job
      */
-    constructor() {}
+    constructor() { }
 
     /**
      * Add the player to the job this job and start it.
@@ -122,7 +122,7 @@ export class Job {
         for (let i = 0; i < this.vehicles.length; i++) {
             try {
                 this.vehicles[i].destroy();
-            } catch (err) {}
+            } catch (err) { }
         }
     }
 
@@ -271,7 +271,8 @@ export class Job {
             if (objective.captureProgress >= objective.captureMaximum) {
                 return true;
             } else {
-                alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_UPDATE, objective);
+                const clonedObjective = deepCloneObject<Objective>(objective);
+                alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_UPDATE, clonedObjective);
             }
         }
 
