@@ -1,6 +1,7 @@
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+import { fileChecker } from './files.js';
 
 function sanitizePath(p) {
     return p.replace(/\\/g, '/');
@@ -54,7 +55,7 @@ async function cleanup() {
 
     let badFiles = [];
     badFiles = await new Promise((resolve) => {
-        glob('./src/core/**/*.js', (err, files) => {
+        glob('./{src,src-webviews}/core/**/*.js', (err, files) => {
             if (err) {
                 return resolve(files);
             }
@@ -65,9 +66,13 @@ async function cleanup() {
 
     for (const file of badFiles) {
         if (fs.existsSync(file)) {
+            console.log(`Removed File: ${file}`);
             fs.rmSync(file, { recursive: true, force: true });
         }
     }
+
+    // Checks for invalid file names...
+    await fileChecker();
 }
 
 init();
