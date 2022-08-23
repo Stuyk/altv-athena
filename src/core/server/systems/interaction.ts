@@ -27,7 +27,7 @@ class InternalFunctions {
      * @param {string} uid - The unique identifier for the interaction.
      */
     static remove(uid: string): void {
-        for (var i = interactions.length - 1; i >= 0; i--) {
+        for (let i = interactions.length - 1; i >= 0; i--) {
             if (interactions[i].interaction && interactions[i].interaction.uid !== uid) {
                 continue;
             }
