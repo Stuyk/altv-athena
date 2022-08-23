@@ -119,7 +119,7 @@ export interface Objective {
      * @type {JobAttachable}
      * @memberof Objective
      */
-    attacheable?: JobAttachable;
+    attachable?: JobAttachable;
 
     /**
      * An event that can be triggered when the objective is started, completed, etc.
