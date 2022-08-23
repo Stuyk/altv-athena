@@ -233,6 +233,7 @@ export class Job {
         }
 
         this.removeAllVehicles();
+        this.removeAttachable();
     }
 
     /**
@@ -460,18 +461,33 @@ export class Job {
      */
     private tryAttach() {
         const objective = this.getCurrentObjective();
-        if (!objective.attacheable) {
+        if (!objective.attachable) {
             return;
         }
 
         const objectToAttach: JobAttachable = {
-            model: objective.attacheable.model,
-            pos: objective.attacheable.pos,
-            rot: objective.attacheable.rot,
-            bone: objective.attacheable.bone,
+            model: objective.attachable.model,
+            pos: objective.attachable.pos,
+            rot: objective.attachable.rot,
+            bone: objective.attachable.bone,
+            uid: objective.attachable.uid,
         };
 
-        Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attacheable.duration);
+        Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attachable.duration);
+    }
+    
+    /**
+     * Remove the current job attachable.
+     * @return {*}
+     * @memberof Job
+     */
+    removeAttachable() {
+        const objective = this.getCurrentObjective();
+        if (!objective.attachable) {
+            return;
+        }
+        
+        Athena.player.emit.objectRemove(this.player, objective.attachable.uid);
     }
 
     /**
@@ -490,7 +506,7 @@ export class Job {
             this.tryAnimation();
         }
 
-        if (objective.attacheable && objective.attacheable.atObjectiveStart) {
+        if (objective.attachable && objective.attachable.atObjectiveStart) {
             this.tryAttach();
         }
 
