@@ -2,6 +2,7 @@ import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 import { fileChecker } from './files.js';
+import { verifyFileNames } from '../fileChecker/index.js';
 
 function sanitizePath(p) {
     return p.replace(/\\/g, '/');
@@ -73,6 +74,10 @@ async function cleanup() {
 
     // Checks for invalid file names...
     await fileChecker();
+
+    // Check for ascii file names
+    await verifyFileNames('src');
+    await verifyFileNames('src-webviews');
 }
 
 init();
