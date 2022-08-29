@@ -1,0 +1,41 @@
+
+version: "3.3"
+
+services:
+  mongodb:
+    ports:
+      - "27017:27017"
+    container_name: altv-mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    image: mongo
+    restart: unless-stopped
+    networks:
+      altv:
+        aliases:
+          - mongodb
+  server:
+    ports:
+      - "7788:7788"
+      - "3000:3000"
+    container_name: altv-server
+    build:
+      context: ./
+      dockerfile: ./server.dockerfile
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - modules:/app/modules
+    networks:
+      altv:
+        aliases:
+          - server
+volumes:
+  node_modules:
+  modules:
+  server:
+networks:
+  altv:
+    driver: bridge
