@@ -12,5 +12,6 @@ RUN wget -q "https://cdn.altv.mp/js-module/release/x64_linux/modules/js-module/l
 RUN wget -q "https://cdn.altv.mp/js-module/release/x64_linux/modules/js-module/libnode.so.102" -P modules/js-module/
 RUN chmod 777 altv-server
 RUN npm i
-EXPOSE 7788
-CMD ["npm", "run", "dev"]
+RUN npm run update
+EXPOSE [7788,3000]
+CMD ["npm", "run", "linux"]

@@ -1,7 +1,7 @@
 {
     "[?] A URI with authentication to connect to a MongoDB Database": "TYPE IS STRING",
     "[?] ex: mongodb://username:password@127.0.0.1:27017": "TYPE IS STRING",
-    "MONGO_URL": "mongodb://root:root@mongodb:27017",
+    "MONGO_URL": null,
     "[?] Used for Ares Service Debugging": "TYPE IS STRING",
     "ARES_ENDPOINT": null,
     "[?] Use altv built-in reconnect?": "TYPE IS BOOLEAN",
