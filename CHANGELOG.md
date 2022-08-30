@@ -26,6 +26,21 @@ Added Overrides to systems/character.ts
 Abstracted Account System
 Added Overrides for systems/account.ts
 Patch Legacy account_id issues
+Getter Functions Added
+Athena.get.player.byAccount
+Athena.get.player.byName
+Athena.get.player.byDatabaseID
+Athena.get.player.byID
+Athena.get.players.online
+Athena.get.players.inRange
+Athena.get.players.withName
+Athena.get.players.driving
+Athena.get.players.walking
+Athena.get.players.drivingSpecificModel
+Athena.get.vehicle.byID
+Athena.get.vehicle.byDatabaseID
+Athena.get.vehicle.isValidModel
+Athena.get.vehicles.inRange
 ```
 
 ## 3.6.0

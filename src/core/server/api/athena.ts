@@ -1,3 +1,4 @@
+import { getters } from '../systems/getters';
 import { StateManager } from '../systems/stateManager';
 import { controllersConst } from './consts/constControllers';
 import { databaseConst } from './consts/constDatabase';
@@ -17,6 +18,7 @@ export const Athena = {
     controllers: controllersConst,
     events: eventsConst,
     extensions: extensionsConst,
+    get: getters,
     injections: injectionsConst,
     player: playerConst,
     state: stateConst,
