@@ -201,7 +201,3 @@ export const getters = {
     vehicle,
     vehicles,
 };
-
-Object.keys(getters).forEach((key) => {
-    console.log(Object.keys(getters[key]));
-});
