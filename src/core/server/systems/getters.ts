@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
-import { distance } from '../../shared/utility/vector';
+import { distance, distance2d } from '../../shared/utility/vector';
+import { getForwardVector } from '../utility/vector';
 import { Identifier } from './identifier';
 
 const player = {
@@ -41,6 +42,79 @@ const player = {
      */
     byID(id: number): alt.Player | undefined {
         return Identifier.getPlayer(id);
+    },
+    /**
+     * Creates a temporary ColShape in front of the player.
+     * The ColShape is then used to check if the entity is present within the ColShape.
+     * It will keep subtract distance until it finds a player near the player that is in the ColShape.
+     * Works best on flat land or very close distances.
+     *
+     * @param {alt.Player} player
+     * @param {number} [startDistance=2]
+     * @return {(alt.Player | undefined)}
+     */
+    async inFrontOf(player: alt.Player, startDistance = 2): Promise<alt.Player | undefined> {
+        const fwdVector = getForwardVector(player.rot);
+        const closestPlayers = [...alt.Player.all].filter((p) => {
+            if (p.id === player.id) {
+                return false;
+            }
+
+            const dist = distance2d(player.pos, p.pos);
+            if (dist > startDistance) {
+                return false;
+            }
+
+            return true;
+        });
+
+        if (closestPlayers.length <= 0) {
+            return undefined;
+        }
+
+        while (startDistance > 1) {
+            for (const target of closestPlayers) {
+                const fwdPos = {
+                    x: player.pos.x + fwdVector.x * startDistance,
+                    y: player.pos.y + fwdVector.y * startDistance,
+                    z: player.pos.z - 1,
+                };
+
+                const colshape = new alt.ColshapeSphere(fwdPos.x, fwdPos.y, fwdPos.z, 2);
+
+                await alt.Utils.wait(10);
+
+                const isInside = colshape.isEntityIn(target);
+                colshape.destroy();
+
+                if (isInside) {
+                    return target;
+                }
+            }
+
+            startDistance -= 0.5;
+        }
+
+        return undefined;
+    },
+    /**
+     * Checks if a player is within 3 distance of a position.
+     *
+     * @param {alt.Player} player
+     * @param {alt.IVector3} pos
+     */
+    isNearPosition(player: alt.Player, pos: alt.IVector3, dist = 3): boolean {
+        return distance(player.pos, pos) <= dist;
+    },
+    /**
+     * Get the current waypoint marked on a player's map.
+     * Will return undefined it is not currently set.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.IVector3 | undefined)}
+     */
+    waypoint(player: alt.Player): alt.IVector3 | undefined {
+        return player.currentWaypoint;
     },
 };
 
@@ -134,6 +208,15 @@ const players = {
             return x.vehicle.model === model;
         });
     },
+    /**
+     * Return all players in a given vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {alt.Player[]}
+     */
+    inVehicle(vehicle: alt.Vehicle): alt.Player[] {
+        return alt.Player.all.filter((x) => x.vehicle && x.vehicle.id === vehicle.id);
+    },
 };
 
 const vehicle = {
@@ -174,6 +257,69 @@ const vehicle = {
             return false;
         }
     },
+    /**
+     * Creates a temporary ColShape in front of the current vehicle or player.
+     * The ColShape is then used to check if a vehicle is present within the ColShape.
+     * It will keep subtract distance until it finds a vehicle near the player that is in the ColShape.
+     * Works best on flat land or very close distances.
+     *
+     * @param {alt.Player} player
+     * @param {number} [startDistance=2]
+     * @return {(alt.Vehicle | undefined)}
+     */
+    async inFrontOf(entity: alt.Entity, startDistance = 2): Promise<alt.Vehicle | undefined> {
+        const fwdVector = getForwardVector(entity.rot);
+        const closestVehicles = [...alt.Vehicle.all].filter((p) => {
+            if (p.id === entity.id) {
+                return false;
+            }
+
+            const dist = distance2d(entity.pos, p.pos);
+            if (dist > startDistance) {
+                return false;
+            }
+
+            return true;
+        });
+
+        if (closestVehicles.length <= 0) {
+            return undefined;
+        }
+
+        while (startDistance > 1) {
+            for (const target of closestVehicles) {
+                const fwdPos = {
+                    x: entity.pos.x + fwdVector.x * startDistance,
+                    y: entity.pos.y + fwdVector.y * startDistance,
+                    z: entity.pos.z - 1,
+                };
+
+                const colshape = new alt.ColshapeSphere(fwdPos.x, fwdPos.y, fwdPos.z, 2);
+
+                await alt.Utils.wait(10);
+
+                const isInside = colshape.isEntityIn(target);
+                colshape.destroy();
+
+                if (isInside) {
+                    return target;
+                }
+            }
+
+            startDistance -= 0.5;
+        }
+
+        return undefined;
+    },
+    /**
+     * Checks if a vehicle is within 3 distance of a position.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @param {alt.IVector3} pos
+     */
+    isNearPosition(vehicle: alt.Vehicle, pos: alt.IVector3, dist = 3): boolean {
+        return distance(vehicle.pos, pos) <= dist;
+    },
 };
 
 const vehicles = {
@@ -195,9 +341,60 @@ const vehicles = {
     },
 };
 
+const world = {
+    /**
+     * Check if a world position is free of vehicles.
+     *
+     * @param {alt.IVector3} pos
+     * @param {string} type
+     * @return {Promise<boolean>}
+     */
+    async positionIsClear(pos: alt.IVector3, lookFor: 'vehicle' | 'player' | 'all'): Promise<boolean> {
+        const colshape = new alt.ColshapeCylinder(pos.x, pos.y, pos.z - 1, 2, 2);
+        await alt.Utils.wait(10);
+
+        let entity: alt.Entity;
+        if (lookFor === 'vehicle' || lookFor === 'all') {
+            entity = alt.Vehicle.all.find((veh) => colshape.isEntityIn(veh));
+        }
+
+        if (typeof entity !== 'undefined') {
+            return false;
+        }
+
+        if (lookFor === 'player' || lookFor === 'all') {
+            entity = alt.Player.all.find((p) => colshape.isEntityIn(p));
+        }
+
+        if (typeof entity !== 'undefined') {
+            return false;
+        }
+
+        return typeof entity === 'undefined' ? true : false;
+    },
+    /**
+     * Used to check if an entity is in ocean water.
+     * Uses a simple 'z' positional check and dimension check.
+     *
+     * @param {alt.Entity} entity
+     */
+    isInOceanWater(entity: alt.Entity) {
+        if (entity.dimension !== 0) {
+            return false;
+        }
+
+        if (entity.pos.z > 0.2) {
+            return false;
+        }
+
+        return true;
+    },
+};
+
 export const getters = {
     player,
     players,
     vehicle,
     vehicles,
+    world,
 };

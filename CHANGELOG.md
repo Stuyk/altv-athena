@@ -41,6 +41,14 @@ Athena.get.vehicle.byID
 Athena.get.vehicle.byDatabaseID
 Athena.get.vehicle.isValidModel
 Athena.get.vehicles.inRange
+Athena.get.vehicle.inFrontOf - Return vehicle in front of an entity
+Athena.get.player.inFrontOf - Return player in front of a player
+Athena.get.world.positionIsClear - Return if a position in the world is free of vehicles or players
+Athena.get.vehicle.inRange - Check if a vehicle is in range of a position
+Athena.get.player.inRange - Check if a player is in range of a position
+Athena.get.world.isInOceanWater - Check if a player or vehicle is in ocean water
+Athena.get.player.waypoint - Get a player's current waypoint
+Athena.get.players.inVehicle - Get all player's in a given vehicle
 ```
 
 ## 3.6.0
