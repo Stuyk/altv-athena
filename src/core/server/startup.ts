@@ -68,6 +68,7 @@ class Startup {
         }
 
         Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
+        // @ts-ignore
         await import(`./boot.js`);
         alt.log(`==> Total Bootup Time -- ${Date.now() - startTime}ms`);
     }

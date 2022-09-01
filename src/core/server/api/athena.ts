@@ -1,5 +1,4 @@
 import { getters } from '../systems/getters';
-import { StateManager } from '../systems/stateManager';
 import { controllersConst } from './consts/constControllers';
 import { databaseConst } from './consts/constDatabase';
 import { eventsConst } from './consts/constEvents';

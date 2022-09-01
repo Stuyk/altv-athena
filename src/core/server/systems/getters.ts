@@ -53,7 +53,7 @@ const player = {
      * @param {number} [startDistance=2]
      * @return {(alt.Player | undefined)}
      */
-    async inFrontOf(player: alt.Player, startDistance = 2): Promise<alt.Player | undefined> {
+    async inFrontOf(player: alt.Player, startDistance = 6): Promise<alt.Player | undefined> {
         const fwdVector = getForwardVector(player.rot);
         const closestPlayers = [...alt.Player.all].filter((p) => {
             if (p.id === player.id) {
@@ -120,7 +120,7 @@ const player = {
 
 const players = {
     /**
-     * Return all players currently online.
+     * Return all players currently online and logged into a character.
      *
      * @return {alt.Player[]}
      */
@@ -209,7 +209,8 @@ const players = {
         });
     },
     /**
-     * Return all players in a given vehicle.
+     * Returns all passengers and the driver.
+     * No specific order.
      *
      * @param {alt.Vehicle} vehicle
      * @return {alt.Player[]}
@@ -267,7 +268,7 @@ const vehicle = {
      * @param {number} [startDistance=2]
      * @return {(alt.Vehicle | undefined)}
      */
-    async inFrontOf(entity: alt.Entity, startDistance = 2): Promise<alt.Vehicle | undefined> {
+    async inFrontOf(entity: alt.Entity, startDistance = 6): Promise<alt.Vehicle | undefined> {
         const fwdVector = getForwardVector(entity.rot);
         const closestVehicles = [...alt.Vehicle.all].filter((p) => {
             if (p.id === entity.id) {
@@ -319,6 +320,26 @@ const vehicle = {
      */
     isNearPosition(vehicle: alt.Vehicle, pos: alt.IVector3, dist = 3): boolean {
         return distance(vehicle.pos, pos) <= dist;
+    },
+    /**
+     * Returns all passengers and the driver.
+     * No specific order.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {alt.Player[]}
+     */
+    passengers(vehicle: alt.Vehicle): alt.Player[] {
+        return players.inVehicle(vehicle);
+    },
+    /**
+     * Just wraps the `vehicle.driver` lookup.
+     * Returns a player if they are driving this vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {(alt.Player | undefined)}
+     */
+    driver(vehicle: alt.Vehicle): alt.Player | undefined {
+        return vehicle.driver;
     },
 };
 
@@ -380,10 +401,11 @@ const world = {
      */
     isInOceanWater(entity: alt.Entity) {
         if (entity.dimension !== 0) {
+            alt.log('wrong dimension');
             return false;
         }
 
-        if (entity.pos.z > 0.2) {
+        if (entity.pos.z - 1 > 0.5) {
             return false;
         }
 
@@ -398,3 +420,22 @@ export const getters = {
     vehicles,
     world,
 };
+
+// Used to test some stuff...
+// alt.setInterval(async () => {
+//     const target = alt.Player.all[0];
+
+//     if (!target || !target.valid) {
+//         return;
+//     }
+
+//     const isNear = player.isNearPosition(target, {
+//         x: -1585.9503173828125,
+//         y: -1189.7266845703125,
+//         z: 1.959155559539795,
+//     });
+
+//     if (isNear) {
+//         console.log('is near...');
+//     }
+// }, 1000);
