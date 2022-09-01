@@ -49,6 +49,10 @@ Athena.get.player.inRange - Check if a player is in range of a position
 Athena.get.world.isInOceanWater - Check if a player or vehicle is in ocean water
 Athena.get.player.waypoint - Get a player's current waypoint
 Athena.get.players.inVehicle - Get all player's in a given vehicle
+Athena.get.vehicle.passengers - Get passengers of a given vehicle
+Athena.get.vehicle.driver - Simply returns the vehicle.driver
+Changed ocean water level check to 0.5 to catch when a player is just dipping their toes into the water
+Changed some console.logs to alt.logs
 ```
 
 ## 3.6.0
