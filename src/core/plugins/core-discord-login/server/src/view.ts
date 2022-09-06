@@ -1,20 +1,23 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { DEFAULT_CONFIG } from '../athena/main';
-import Ares from '../utility/ares';
-import { sha256Random } from '../utility/encryption';
-import ConfigUtil from '../utility/config';
-import { AgendaSystem } from '../systems/agenda';
-import { playerConst } from '../api/consts/constPlayer';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { DEFAULT_CONFIG } from '../../../../server/athena/main';
+import Ares from '../../../../server/utility/ares';
+import { sha256Random } from '../../../../server/utility/encryption';
+import ConfigUtil from '../../../../server/utility/config';
+import { AgendaSystem } from '../../../../server/systems/agenda';
+import { AgendaOrder } from '../../../../server/systems/agenda';
+import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
+import { Athena } from '../../../../server/api/athena';
+import { LoginController } from './login';
+import { DISCORD_LOCALES } from '../../shared/locales';
+import { JwtProvider } from '../../../../server/systems/jwt';
+import { Account } from '../../../../server/interface/iAccount';
+import { DiscordUser } from '../../../../server/interface/iDiscordUser';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
 // These connect to a backend that helps users login with Discord oAuth2.
-
 const config = ConfigUtil.get();
 const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuyk.com`;
 const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
@@ -38,11 +41,15 @@ function getAresURL() {
 }
 
 /**
- * Fetches data from the Ares Backend for Login Caching
+ * Performs a POST request to the 'Ares' backend.
+ * Tries to look up server information, and find a matching oAuth2 authorization.
+ *
+ * Ares is hosted by Stuyk.
+ *
  * @param {alt.Player} player
  * @return {*}
  */
-async function finishLogin(player: alt.Player) {
+async function tryToFinishLogin(player: alt.Player) {
     const player_identifier = player.discordToken;
     if (!player_identifier) {
         return;
@@ -64,11 +71,12 @@ async function finishLogin(player: alt.Player) {
     };
 
     const result = await axios.request(options).catch((err) => {
-        alt.emitClient(
+        Athena.webview.emit(
             player,
-            'Discord:Fail',
-            LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE),
+            DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_ERROR_MESSAGE,
+            DISCORD_LOCALES.DISCORD_COULD_NOT_COMMUNICATE_WITH_AUTH_SERVICE,
         );
+
         return null;
     });
 
@@ -77,10 +85,10 @@ async function finishLogin(player: alt.Player) {
     }
 
     const data = await Ares.decrypt(JSON.stringify(result.data)).catch((err) => {
-        alt.emitClient(
+        Athena.webview.emit(
             player,
-            'Discord:Fail',
-            LocaleController.get(LOCALE_KEYS.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE),
+            DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_ERROR_MESSAGE,
+            DISCORD_LOCALES.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE,
         );
         return null;
     });
@@ -89,19 +97,20 @@ async function finishLogin(player: alt.Player) {
         return;
     }
 
-    alt.emitClient(player, SYSTEM_EVENTS.DISCORD_CLOSE);
+    alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.CLOSE);
     if (typeof data === 'string') {
         player.discord = JSON.parse(data);
     } else {
         player.discord = data;
     }
 
-    AgendaSystem.goNext(player, false);
+    LoginController.tryLogin(player);
 }
 
 export class LoginView {
     static init() {
-        alt.onClient(SYSTEM_EVENTS.DISCORD_FINISH_AUTH, finishLogin);
+        alt.onClient(DISCORD_LOGIN_EVENTS.TO_SERVER.TRY_FINISH, tryToFinishLogin);
+        AgendaSystem.set(AgendaOrder.LOGIN_SYSTEM, LoginView.show);
     }
 
     /**
@@ -114,6 +123,29 @@ export class LoginView {
     static async show(player: alt.Player) {
         if (!player || !player.valid) {
             return;
+        }
+
+        // Perform JWT Fetch First
+        // Ew, 3 nested if statements.
+        const token = await JwtProvider.fetch(player);
+        if (typeof token === 'string') {
+            const identifier = await JwtProvider.verify(token);
+            if (typeof identifier === 'string') {
+                const account: Partial<Account> | null = await Athena.database.funcs.fetchData<Account>(
+                    '_id',
+                    identifier,
+                    Athena.database.collections.Accounts,
+                );
+
+                if (account) {
+                    player.discord = {
+                        id: account.discord,
+                    } as DiscordUser;
+
+                    LoginController.tryLogin(player);
+                    return;
+                }
+            }
         }
 
         // Used to identify the player when the information is sent back.
@@ -142,14 +174,6 @@ export class LoginView {
         const encryptedDataJSON = JSON.stringify(senderFormat);
         const discordOAuth2URL = getDiscordOAuth2URL();
 
-        playerConst.set.firstConnect(player);
-        alt.emitClient(player, SYSTEM_EVENTS.DISCORD_OPEN, `${discordOAuth2URL}&state=${encryptedDataJSON}`);
+        alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.OPEN, `${discordOAuth2URL}&state=${encryptedDataJSON}`);
     }
 }
-
-/**
- * @deprecated Use {@link LoginView}
- */
-export const LoginFunctions = LoginView;
-
-LoginView.init();

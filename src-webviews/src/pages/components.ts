@@ -5,7 +5,6 @@ import Icons from './icons/Icons.vue';
 import InputBox from './input/InputBox.vue';
 import Inventory from './inventory/Inventory.vue';
 import Job from './job/Job.vue';
-import Login from './login/Login.vue';
 import MultiPageExample from './multiPageExample/MultiPageExample.vue';
 import Storage from './storage/Storage.vue';
 import Chat from './chat/Chat.vue';
@@ -26,7 +25,6 @@ export const CORE_IMPORTS = {
     InputBox: shallowRef(InputBox),
     Inventory: shallowRef(Inventory),
     Job: shallowRef(Job),
-    Login: shallowRef(Login),
     Storage: shallowRef(Storage),
     MultiPageExample: shallowRef(MultiPageExample),
     TestDrop: shallowRef(TestDrop),

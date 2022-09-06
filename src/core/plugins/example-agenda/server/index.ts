@@ -18,7 +18,9 @@ function showAthenaLogo(player: alt.Player) {
         }
 
         alt.emitClient(player, ATHENA_EXAMPLE_AGENDA.CLOSE);
-        AgendaSystem.goNext(player);
+        alt.nextTick(() => {
+            AgendaSystem.goNext(player);
+        });
     }, 2000);
 }
 

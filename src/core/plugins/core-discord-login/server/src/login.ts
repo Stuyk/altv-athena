@@ -1,47 +1,67 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { playerConst } from '../api/consts/constPlayer';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { PlayerEvents } from '../events/playerEvents';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { Account } from '../interface/iAccount';
-import { Collections } from '../interface/iDatabaseCollections';
-import { DiscordUser } from '../interface/iDiscordUser';
-import Ares from '../utility/ares';
-import { StorageView } from '../views/storage';
-import { AccountSystem } from './account';
-import { AgendaSystem } from './agenda';
-import { Injections } from './injections';
-import { LoginInjectionNames, TryLoginCallback, TryQuickTokenCallback } from './injections/login';
-import { VehicleSystem } from './vehicle';
+import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
+import { playerConst } from '../../../../server/api/consts/constPlayer';
+import { DEFAULT_CONFIG } from '../../../../server/athena/main';
+import { PlayerEvents } from '../../../../server/events/playerEvents';
+import VehicleFuncs from '../../../../server/extensions/vehicleFuncs';
+import { Account } from '../../../../server/interface/iAccount';
+import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { DiscordUser } from '../../../../server/interface/iDiscordUser';
+import { StorageView } from '../../../../server/views/storage';
+import { AccountSystem } from '../../../../server/systems/account';
+import { AgendaSystem } from '../../../../server/systems/agenda';
+import { Injections } from '../../../../server/systems/injections';
+import { LoginInjectionNames, TryLoginCallback } from '../../../../server/systems/injections/login';
+import { VehicleSystem } from '../../../../server/systems/vehicle';
+import { DevModeOverride } from '../../../../server/systems/dev';
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
 
-export class LoginController {
+class InternalFunctions {
     /**
-     * Adds a tryLogin injection callback.
+     * This is used when running 'npm run dev'.
      *
-     * useful for adding custom logic to the login process.
-     * Return a string to abort the login process and to kick the player
+     * It automatically sets your account to the first account it finds.
      *
      * @static
-     * @param {TryLoginCallback} callback
+     * @param {alt.Player} player
+     * @memberof InternalFunctions
+     */
+    static async developerModeCallback(player: alt.Player) {
+        const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
+        if (!accounts || typeof accounts[0] === 'undefined') {
+            alt.log(
+                `PLEASE RUN THE SERVER AT LEAST ONCE WITH 'npm run windows' OR 'npm run linux' before using dev mode.`,
+            );
+            alt.log(`ENSURE THAT YOU JOIN THE SERVER ONCE AND CREATE AN ACCOUNT.`);
+            process.exit(1);
+        }
+
+        const account = accounts[0];
+        player.discord = {
+            id: account.discord,
+        } as DiscordUser;
+
+        await playerConst.set.account(player, account);
+    }
+}
+
+export class LoginController {
+    /**
+     * Intialize events, and functionality first.
+     *
+     * @static
      * @memberof LoginController
      */
-    static addTryLoginInjection(callback: TryLoginCallback): void {
-        TryLoginInjections.push(callback);
-    }
-
     static init() {
         PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
-        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_NONE, LoginController.handleNoQuickToken);
-        alt.onClient(SYSTEM_EVENTS.QUICK_TOKEN_EMIT, LoginController.tryDiscordQuickToken);
         alt.on('playerDisconnect', LoginController.tryDisconnect);
+        DevModeOverride.setDevAccountCallback(InternalFunctions.developerModeCallback);
     }
 
     /**
@@ -96,12 +116,12 @@ export class LoginController {
             }
         }
 
-        if (player.discord.username) {
+        if (player.discord && player.discord.username) {
             alt.log(`[Athena] (${player.id}) ${player.discord.username} has authenticated.`);
         }
 
         if (account && account.discord) {
-            alt.log(`[Athena] (${player.id}) Discord ${account.discord} has logged in with a Quick Token `);
+            alt.log(`[Athena] (${player.id}) Discord ${account.discord} has logged in with a JWT Token `);
         }
 
         const currentPlayers = [...alt.Player.all];
@@ -194,67 +214,6 @@ export class LoginController {
         alt.log(`${player.data.name} has logged out.`);
     }
 
-    /**
-     * If the player has a Discord ID, and they have a valid Quick Token, then we'll try to log them in.
-     * @param {alt.Player} player - alt.Player - The player that is attempting to login.
-     * @param {string} discord - string - The Discord ID of the player.
-     * @returns The account object.
-     */
-    static async tryDiscordQuickToken(player: alt.Player, discord: string): Promise<void> {
-        if (!discord) {
-            player.needsQT = true;
-            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
-            return;
-        }
-
-        // Just enough unique data.
-        const hashToken: string = Ares.getUniquePlayerHash(player, discord);
-        const account: Partial<Account> | null = await Database.fetchData<Account>(
-            'quickToken',
-            hashToken,
-            Collections.Accounts,
-        );
-
-        if (!account || !account.quickToken) {
-            player.needsQT = true;
-            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
-            return;
-        }
-
-        if (!account.quickTokenExpiration || Date.now() > account.quickTokenExpiration) {
-            player.needsQT = true;
-            Database.updatePartialData(
-                account._id,
-                { quickToken: null, quickTokenExpiration: null },
-                Collections.Accounts,
-            );
-            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
-            return;
-        }
-
-        const tryQuickTokenInjections = Injections.get<TryQuickTokenCallback>(LoginInjectionNames.TRY_QUICK_TOKEN);
-        for (const callback of tryQuickTokenInjections) {
-            const result = await callback(player, discord);
-            if (!result) {
-                alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
-                return;
-            }
-        }
-
-        if (!account.discord) {
-            player.kick('Bad Token');
-            return;
-        }
-
-        player.discord = { id: account.discord } as DiscordUser;
-        LoginController.tryLogin(player, account);
-    }
-
-    static async handleNoQuickToken(player: alt.Player): Promise<void> {
-        player.needsQT = true;
-        alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_NONE_BUT_DO_LOGIN);
-    }
-
     static bindPlayerToID(player: alt.Player): void {
         if (!player || !player.valid || !player.data) {
             return;
@@ -267,5 +226,3 @@ export class LoginController {
         return UserRelation[id];
     }
 }
-
-LoginController.init();

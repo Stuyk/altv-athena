@@ -1,12 +1,9 @@
 import * as alt from 'alt-server';
-import { LoginView } from '../views/login';
-import { LoginController } from './login';
 
 const agenda: { [key: string]: (player: alt.Player) => void } = {};
 
 export enum AgendaOrder {
-    'DISCORD_LOGIN' = 1,
-    'ACCOUNT_SETUP' = 2,
+    'LOGIN_SYSTEM' = 1,
     'CHARACTER_SELECT' = 99,
 }
 
@@ -23,11 +20,6 @@ const timelines: {
  * @class AgendaSystem
  */
 export class AgendaSystem {
-    static init() {
-        AgendaSystem.set(AgendaOrder.DISCORD_LOGIN, LoginView.show);
-        AgendaSystem.set(AgendaOrder.ACCOUNT_SETUP, LoginController.show);
-    }
-
     /**
      * Set the agenda to the passed agenda timeline.
      * By Default the Load Order:
@@ -148,13 +140,16 @@ export class AgendaSystem {
      * @memberof AgendaSystem
      */
     static goNext(player: alt.Player, startNew = false, ...args: any[]) {
+        if (!player || !player.valid) {
+            return;
+        }
+
         const nextCallback = AgendaSystem.getNext(player, startNew);
         if (!nextCallback) {
             return;
         }
 
         alt.log(`~g~Going to next agenda @ (${timelines[player.id].agendaIndex})`);
-
         nextCallback(player, ...args);
     }
 
@@ -189,5 +184,3 @@ export class AgendaSystem {
         return timelines[player.id].agenda[timelines[player.id].agendaIndex].callback;
     }
 }
-
-AgendaSystem.init();

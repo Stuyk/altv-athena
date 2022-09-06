@@ -105,11 +105,8 @@ export enum SYSTEM_EVENTS {
     POPULATE_ITEM_DROPS = 'itemDrops:Populate',
     POPULATE_POLYGONS = 'polygons:Populate',
     //
-    QUICK_TOKEN_EMIT = 'quicktoken:Emit',
-    QUICK_TOKEN_FETCH = 'quicktoken:Fetch',
-    QUICK_TOKEN_NONE = 'quicktoken:None',
-    QUICK_TOKEN_UPDATE = 'quicktoken:Update',
-    QUICK_TOKEN_NONE_BUT_DO_LOGIN = 'quicktoken:None:ButLogin',
+    QUICK_TOKEN_UPDATE = 'quicktoken:update',
+    QUICK_TOKEN_FETCH = 'quicktoken:fetch',
     //
     REMOVE_GLOBAL_OBJECT = 'remove:Global:Object',
     REMOVE_OBJECT = 'remove:Object',

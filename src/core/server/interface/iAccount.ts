@@ -64,20 +64,6 @@ export interface Account {
     permissionLevel: PERMISSIONS;
 
     /**
-     * Hard to explain what this is but it's a combination of unique data for quick logins.
-     * @type {string}
-     * @memberof Account
-     */
-    quickToken?: string;
-
-    /**
-     * When the quick token should expire.
-     * @type {number}
-     * @memberof Account
-     */
-    quickTokenExpiration?: number;
-
-    /**
      * Is this user banned?
      * @type {boolean}
      * @memberof Account

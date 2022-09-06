@@ -47,7 +47,7 @@ class InternalFunctions {
      */
     static handleMessage(player: alt.Player, message: string): void {
         // Prevent Chatting from Non-Logged In User
-        if (!player.discord || !player.data) {
+        if (!player.data || !player.data._id || !player.accountData) {
             return;
         }
 

@@ -158,7 +158,11 @@ class PlayersCommand {
 
         dataToSend.push(`--- INFO FOR ${target.data.name} ---`);
         dataToSend.push(`ACCOUNT: ${target.data.account_id.toString()}`);
-        dataToSend.push(`DISCORD: ${target.accountData.discord}`);
+
+        if (target.accountData && target.accountData.discord) {
+            dataToSend.push(`DISCORD: ${target.accountData.discord}`);
+        }
+
         dataToSend.push(`IPs: ${JSON.stringify(target.accountData.ips)}`);
         dataToSend.push(`PERMISSION LEVEL: ${target.accountData.permissionLevel}`);
         dataToSend.push(`HARDWARE: ${target.accountData.hardware}`);

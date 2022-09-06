@@ -53,6 +53,11 @@ Athena.get.vehicle.passengers - Get passengers of a given vehicle
 Athena.get.vehicle.driver - Simply returns the vehicle.driver
 Changed ocean water level check to 0.5 to catch when a player is just dipping their toes into the water
 Changed some console.logs to alt.logs
+Turned Discord Login into a Plugin
+Moved Quick Token to JWT Based
+Made JWT Based Service in Core
+Introduced Rotating JWT Secret Sign Service
+Forced Login to Use 1 Agenda Slot
 ```
 
 ## 3.6.0

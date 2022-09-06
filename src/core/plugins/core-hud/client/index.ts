@@ -317,12 +317,12 @@ class InternalFunctions implements ViewModel {
 
     static voiceDown(newVolume: number = 0) {
         native.playSoundFrontend(-1, 'Input_Code_Down', 'Safe_Minigame_Sounds', true);
-        this.voiceVolume(newVolume);
+        InternalFunctions.voiceVolume(newVolume);
     }
 
     static voiceUp(newVolume: number = 100) {
         native.playSoundFrontend(-1, 'Input_Code_Up', 'Safe_Minigame_Sounds', true);
-        this.voiceVolume(newVolume);
+        InternalFunctions.voiceVolume(newVolume);
     }
 
     static voiceVolume(newVolume: number = 100) {
