@@ -29,10 +29,6 @@ const Setter = {
      * @memberof SetPrototype
      */
     async account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
-        if (typeof player.discord === 'undefined') {
-            return;
-        }
-
         if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
             accountData.permissionLevel = PERMISSIONS.NONE;
             Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);

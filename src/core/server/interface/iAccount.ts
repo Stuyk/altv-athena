@@ -25,14 +25,14 @@ export interface Account {
      * @type {string}
      * @memberof Account
      */
-    discord: string;
+    discord?: string;
 
     /**
      * Email bound to the discord account.
      * @type {string}
      * @memberof Account
      */
-    email: string;
+    email?: string;
 
     /**
      * Last 5 IPs that have logged into an account.

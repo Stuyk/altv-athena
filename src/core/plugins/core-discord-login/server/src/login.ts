@@ -35,10 +35,8 @@ class InternalFunctions {
     static async developerModeCallback(player: alt.Player) {
         const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
         if (!accounts || typeof accounts[0] === 'undefined') {
-            alt.log(
-                `PLEASE RUN THE SERVER AT LEAST ONCE WITH 'npm run windows' OR 'npm run linux' before using dev mode.`,
-            );
-            alt.log(`ENSURE THAT YOU JOIN THE SERVER ONCE AND CREATE AN ACCOUNT.`);
+            alt.logWarning(`Missing First Account...`);
+            alt.logWarning(`Run the server at least once with 'npm run windows' before running dev mode.`);
             process.exit(1);
         }
 

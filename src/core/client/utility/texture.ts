@@ -33,7 +33,21 @@ export function drawTexture2D(
 
     const width = texture.x * scale;
     const height = texture.y * scale;
-    native.drawSprite(dictionary, name, position.x, position.y, width, height, 0, 255, 255, 255, opacity, false);
+    native.drawSprite(
+        dictionary,
+        name,
+        position.x,
+        position.y,
+        width,
+        height,
+        0,
+        255,
+        255,
+        255,
+        opacity,
+        false,
+        undefined,
+    );
 }
 
 export function drawTexture(dictionary: string, name: string, position: alt.Vector3, scale: number = 1) {
@@ -67,6 +81,6 @@ export function drawTexture(dictionary: string, name: string, position: alt.Vect
     }
 
     native.setDrawOrigin(position.x, position.y, position.z, 0);
-    native.drawSprite(dictionary, name, 0, 0, width, height, 0, 255, 255, 255, 255, false);
+    native.drawSprite(dictionary, name, 0, 0, width, height, 0, 255, 255, 255, 255, false, undefined);
     native.clearDrawOrigin();
 }
