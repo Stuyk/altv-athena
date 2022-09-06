@@ -19,6 +19,13 @@ export class DevModeOverride {
      * @returns None
      */
     static async login(player: alt.Player) {
+        if (!callback) {
+            alt.logError(
+                `DevModeOverride.setDevAccountCallback was not defined. A login system must have a dev callback.`,
+            );
+            return;
+        }
+
         await callback(player);
         AgendaSystem.initPlayer(player);
         AgendaSystem.goToAgenda(player, AgendaOrder.CHARACTER_SELECT);

@@ -58,6 +58,7 @@ Moved Quick Token to JWT Based
 Made JWT Based Service in Core
 Introduced Rotating JWT Secret Sign Service
 Forced Login to Use 1 Agenda Slot
+Replace alt.emitClient(null) with alt.emitAllClients
 ```
 
 ## 3.6.0
