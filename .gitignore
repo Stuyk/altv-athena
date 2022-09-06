@@ -36,6 +36,7 @@ src-webviews/src/plugins/imports.ts
 src-webviews/src/plugins/vue-plugin-imports.ts
 src-webviews/public/plugins/*
 !src-webviews/public/plugins/*/.gitkeep
+src/core/plugins/private-*
 
 # Yarn stuff
 .yarn/
