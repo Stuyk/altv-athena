@@ -59,6 +59,11 @@ Made JWT Based Service in Core
 Introduced Rotating JWT Secret Sign Service
 Forced Login to Use 1 Agenda Slot
 Replace alt.emitClient(null) with alt.emitAllClients
+Added MailService Plugin
+--> Uses NodeMailer
+--> Provides Basic Configuration
+--> Can Send Basic Email
+--> Example Provided in Plugin Initializer
 ```
 
 ## 3.6.0
