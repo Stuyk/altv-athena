@@ -226,6 +226,15 @@ export interface FactionCore {
      * @memberof Faction
      */
     canDisband: boolean;
+
+
+    /**
+     * Faction Type (gang, neutral, state)
+     *
+     * @type {string}
+     * @memberof Faction
+     */
+    type: string;
 }
 
 export interface FactionStorage {
