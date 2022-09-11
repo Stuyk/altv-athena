@@ -35,6 +35,18 @@ class InternalFunctions {
 
 export class FactionHandler {
     /**
+     * Faction Types.
+     * Gang can do crime actions.
+     * Neutral is Neutral.
+     * State can do state actions ( arrest, cuff people, etc. )
+     */
+    static factionTypes = {
+        gang: 'GANG',
+        neutral: 'NEUTRAL',
+        state: 'STATE'
+    }
+
+    /**
      * Initialize Factions on Startup
      *
      * @static
@@ -69,6 +81,11 @@ export class FactionHandler {
         if (!_faction.name) {
             alt.logWarning(`Cannot create faction, missing faction name.`);
             return { status: false, response: `Cannot create faction, missing faction name.` };
+        }
+
+        if (!this.factionTypes[_faction.type]) {
+            alt.logWarning('Cannot find faction-type ' + _faction.type + '! Type will be now ' + this.factionTypes.neutral);
+            _faction.type = this.factionTypes.neutral;
         }
 
         if (_faction.bank === null || _faction.bank === undefined) {
