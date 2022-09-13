@@ -4,6 +4,8 @@
 
 ```
 Initialized 3.8.0
+Changed Chat Input to not use `Input.vue` which causes issues with overlays
+Fixed small bugs revolving around old imports for login views
 ```
 
 ## 3.7.0
