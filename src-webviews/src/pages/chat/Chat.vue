@@ -15,13 +15,16 @@
                 <Icon class="red--text" icon="icon-arrow-down" :shadow="true" :size="14" />
                 <span class="red--text new-messages-text">PGDN</span>
             </div>
-            <div class="input-holder">
+            <div class="input-holder" v-if="showInputBox">
                 <!-- Chat Input Box -->
-                <Input
-                    @input="handleInput"
+                <input
+                    ref="chatInput"
+                    type="text"
+                    class="textbox pa-2"
                     v-model="userInput"
-                    @suggestion-tab="handleSuggestionTab"
                     :style="getInputStyle"
+                    placeholder="Say something... or use a command with /"
+                    @input="handleInput"
                 />
                 <!-- Chat Suggestions -->
                 <Suggestions
@@ -39,7 +42,6 @@ import { defineComponent } from 'vue';
 import { defaultCommands, defaultMessages, localCommands } from './utility/defaultData';
 import Icon from '../../components/Icon.vue';
 import RegexData from './utility/regex';
-import Input from './components/Input.vue';
 import Message from './components/Message.vue';
 import Suggestions from './components/Suggestions.vue';
 
@@ -47,7 +49,6 @@ export const ComponentName = 'Chat';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Input,
         Message,
         Suggestions,
         Icon,
@@ -285,6 +286,9 @@ export default defineComponent({
             this.updateCount += 1;
             this.page = 1;
             document.addEventListener('keyup', this.handlePress);
+            this.$nextTick(() => {
+                this.$refs.chatInput.focus();
+            });
         },
         handleSuggestionTab() {
             this.userInput = `/${this.suggestions[0].name}`;
@@ -359,6 +363,12 @@ export default defineComponent({
             // Enter
             if (e.keyCode === 13) {
                 this.processInput();
+                return;
+            }
+
+            // Tab
+            if (e.keyCode === 9) {
+                this.handleSuggestionTab();
                 return;
             }
 
@@ -514,5 +524,11 @@ export default defineComponent({
     min-width: 450px;
     max-width: 450px;
     bottom: -50px;
+}
+
+.textbox {
+    min-width: 450px;
+    max-width: 450px;
+    overflow: hidden;
 }
 </style>
