@@ -72,6 +72,14 @@ async function cleanup() {
         }
     }
 
+    const badFileTypeDefs = glob.sync('./src/**/*.d.ts');
+    for (const file of badFileTypeDefs) {
+        if (fs.existsSync(file)) {
+            console.log(`Removed File: ${file}`);
+            fs.rmSync(file, { recursive: true, force: true });
+        }
+    }
+
     // Checks for invalid file names...
     await fileChecker();
 
