@@ -273,7 +273,7 @@ export default defineComponent({
 
             // Set Default Image
             if (!data || !data.ids || typeof data.ids[0] !== 'number') {
-                return ResolvePath(`../../assets/icons/${item.icon}.png`);
+                return ResolvePath(`../../assets/icons/${item.icon.includes('.png') ? item.icon : item.icon + '.png'}`);
             }
 
             // componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID

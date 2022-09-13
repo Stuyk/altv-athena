@@ -1,3 +1,4 @@
+import * as alt from 'alt-server';
 import { Collections } from '../interface/iDatabaseCollections';
 import { IConfig } from '../interface/iConfig';
 
@@ -28,10 +29,10 @@ export default {
         return DEFAULT_DATABASE_NAME;
     },
     throwConnectionError: () => {
-        console.warn(`=== ERROR ===`);
-        console.warn(`Error Connecting to MongoDB Database. Check your MONGO_URL in AthenaConfig.json`);
-        console.warn(`Example: mongodb://username:password@127.0.0.1:27017`);
-        console.warn(`Double check that the MongoDB service is running. Use google for more information.`);
+        alt.logWarning(`=== ERROR ===`);
+        alt.logWarning(`Error Connecting to MongoDB Database. Check your MONGO_URL in AthenaConfig.json`);
+        alt.logWarning(`Example: mongodb://username:password@127.0.0.1:27017`);
+        alt.logWarning(`Double check that the MongoDB service is running. Use google for more information.`);
         process.exit(1);
     },
 };

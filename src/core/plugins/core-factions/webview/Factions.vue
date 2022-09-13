@@ -56,7 +56,7 @@ export default defineComponent({
     },
     data() {
         return {
-            pageIndex: 5,
+            pageIndex: 0,
             pages: [
                 { name: 'Members', page: 'Members' },
                 { name: 'Ranks', page: 'Ranks' },

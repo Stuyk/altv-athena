@@ -30,7 +30,7 @@ export class ServerBlipController {
             globalBlips.push(blip);
         }
 
-        alt.emitClient(null, SYSTEM_EVENTS.APPEND_BLIP, blip);
+        alt.emitAllClients(SYSTEM_EVENTS.APPEND_BLIP, blip);
         return blip.uid;
     }
 
@@ -47,7 +47,7 @@ export class ServerBlipController {
             return false;
         }
 
-        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_BLIP, uid);
+        alt.emitAllClients(SYSTEM_EVENTS.REMOVE_BLIP, uid);
         globalBlips.splice(index, 1);
         return true;
     }

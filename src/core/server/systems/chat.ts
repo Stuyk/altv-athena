@@ -12,6 +12,7 @@ import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { consoleCommand } from '../decorators/commands';
 import { emitAll } from '../utility/emitHelper';
+import { Permission } from './permission';
 
 const maxMessageLength: number = 128;
 const printCommands = false;
@@ -46,7 +47,7 @@ class InternalFunctions {
      */
     static handleMessage(player: alt.Player, message: string): void {
         // Prevent Chatting from Non-Logged In User
-        if (!player.discord || !player.data) {
+        if (!player.data || !player.data._id || !player.accountData) {
             return;
         }
 
@@ -119,7 +120,10 @@ class InternalFunctions {
         }
 
         if (commandInfo.permission) {
-            const isAdminPermissionValid = isFlagEnabled(player.accountData.permissionLevel, commandInfo.permission);
+            const isAdminPermissionValid = Permission.isPermissionValidByStrategy(
+                player.accountData.permissionLevel,
+                commandInfo.permission,
+            );
 
             if (!isAdminPermissionValid) {
                 Athena.player.emit.message(
@@ -139,7 +143,7 @@ class InternalFunctions {
                 return;
             }
 
-            const isCharacterPermValid = isFlagEnabled(
+            const isCharacterPermValid = Permission.isPermissionValidByStrategy(
                 player.data.characterPermission,
                 commandInfo.characterPermissions,
             );
@@ -304,7 +308,7 @@ export default class ChatController {
 
             // Check Admin Permission Commands
             if (commandInfo.permission) {
-                const isAdminPermissionValid = isFlagEnabled(
+                const isAdminPermissionValid = Permission.isPermissionValidByStrategy(
                     player.accountData.permissionLevel,
                     commandInfo.permission,
                 );
@@ -327,7 +331,7 @@ export default class ChatController {
                     return;
                 }
 
-                const isCharacterPermValid = isFlagEnabled(
+                const isCharacterPermValid = Permission.isPermissionValidByStrategy(
                     player.data.characterPermission,
                     commandInfo.characterPermissions,
                 );

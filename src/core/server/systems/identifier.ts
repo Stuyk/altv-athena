@@ -7,11 +7,14 @@ type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
 
 let strategy: IdentifierStrategy = 'server_id';
 
-export class Identifier {
-    static init() {
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Identifier.setPlayerIdentifier);
-    }
-
+const IdentityRef = {
+    /**
+     * Initialize player selection identifier creation
+     *
+     */
+    init() {
+        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, IdentityRef.setPlayerIdentifier);
+    },
     /**
      * Should be set during the server startup phase to change player identification strategies.
      * This will apply to all players when they select a character.
@@ -21,26 +24,24 @@ export class Identifier {
      * @param {IdentifierStrategy} _strategy
      * @memberof Identifier
      */
-    static setIdentificationStrategy(_strategy: IdentifierStrategy) {
+    setIdentificationStrategy(_strategy: IdentifierStrategy) {
         strategy = _strategy;
-    }
-
+    },
     /**
      * Automatically sets the player identification by strategy to the synced meta.
      *
      * @static
      * @memberof Identifier
      */
-    static setPlayerIdentifier(player: alt.Player) {
+    setPlayerIdentifier(player: alt.Player) {
         if (!player || !player.valid) {
             return;
         }
 
-        const identifier = Identifier.getIdByStrategy(player);
+        const identifier = IdentityRef.getIdByStrategy(player);
         alt.log(`${player.data.name} ID join and set to ${identifier} using id strategy ${strategy}.`);
         player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
-    }
-
+    },
     /**
      * Returns the player by the currently set identification strategy.
      *
@@ -48,7 +49,7 @@ export class Identifier {
      * @param {(number | string)} id
      * @memberof Identifier
      */
-    static getPlayer(id: number | string): alt.Player {
+    getPlayer(id: number | string): alt.Player {
         if (typeof id === 'string') {
             id = parseInt(id);
         }
@@ -72,8 +73,7 @@ export class Identifier {
 
             return true;
         });
-    }
-
+    },
     /**
      * Returns the current numerical identifier based on current strategy.
      *
@@ -82,7 +82,7 @@ export class Identifier {
      * @return {number}
      * @memberof Identifier
      */
-    static getIdByStrategy(player: alt.Player): number {
+    getIdByStrategy(player: alt.Player): number {
         const accountData = player.accountData;
         const data = player.data;
 
@@ -99,7 +99,28 @@ export class Identifier {
         }
 
         return player.id;
+    },
+};
+
+/**
+ * It takes a function name and a callback, and if the function exists in the exports object, it
+ * overrides it with the callback
+ * @param {Key} functionName - The name of the function you want to override.
+ * @param callback - The function that will be called when the original function is called.
+ * @returns The function is being returned.
+ */
+function override<Key extends keyof typeof IdentityRef>(functionName: Key, callback: typeof IdentityRef[Key]): void {
+    if (typeof exports[functionName] === 'undefined') {
+        alt.logError(`systems/identifier.ts does not provide an export named ${functionName}`);
+        return;
     }
+
+    exports[functionName] = callback;
 }
+
+export const Identifier: typeof IdentityRef & { override?: typeof override } = {
+    ...IdentityRef,
+    override,
+};
 
 Identifier.init();

@@ -15,12 +15,13 @@ import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from '.
 import { Injections } from './injections';
 import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterInfo } from '../../shared/interfaces/characterInfo';
+import { ObjectId } from 'mongodb';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
     creator: null,
 };
 
-export class CharacterSystem {
+const CharacterSystemRef = {
     /**
      * Allows a custom character creator to be shown.
      *
@@ -28,9 +29,9 @@ export class CharacterSystem {
      * @param {(player: alt.Player, ...args: any[]) => void} callback
      * @memberof CharacterSystem
      */
-    static setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
+    setCreatorCallback(callback: (player: alt.Player, ...args: any[]) => void) {
         Callbacks.creator = callback;
-    }
+    },
 
     /**
      * Invokes the custom creator to be set.
@@ -40,14 +41,14 @@ export class CharacterSystem {
      * @param {...any[]} args
      * @memberof CharacterSystem
      */
-    static invokeCreator(player: alt.Player, ...args: any[]) {
+    invokeCreator(player: alt.Player, ...args: any[]) {
         if (!Callbacks.creator) {
             alt.logWarning(`No Character Creator Setup in CharacterSystem. Use CharacterSystem.setCreatorCallback`);
             return;
         }
 
         Callbacks.creator(player, ...args);
-    }
+    },
 
     /**
      * Create a new character for a specific player.
@@ -60,18 +61,13 @@ export class CharacterSystem {
      * @return {Promise<boolean>}
      * @memberof CharacterSystem
      */
-    static async create(
-        player: alt.Player,
-        appearance: Appearance,
-        info: CharacterInfo,
-        name: string,
-    ): Promise<boolean> {
+    async create(player: alt.Player, appearance: Appearance, info: CharacterInfo, name: string): Promise<boolean> {
         if (!player.accountData || !player.accountData._id) {
             return false;
         }
 
         const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
-        newDocument.account_id = player.accountData._id;
+        newDocument.account_id = player.accountData._id.toString();
         newDocument.appearance = appearance;
         newDocument.info = info;
         newDocument.name = name;
@@ -97,7 +93,7 @@ export class CharacterSystem {
         document._id = document._id.toString(); // Re-cast id object as string.
         CharacterSystem.select(player, document);
         return true;
-    }
+    },
 
     /**
      * The final step in the character selection system.
@@ -109,7 +105,11 @@ export class CharacterSystem {
      * @param {Character} character
      * @memberof CharacterSystem
      */
-    static async select(player: alt.Player, character: Character) {
+    async select(player: alt.Player, character: Character) {
+        if (!player || !player.valid) {
+            return;
+        }
+        
         player.data = deepCloneObject(character);
 
         // Increase the value outright
@@ -146,6 +146,10 @@ export class CharacterSystem {
         }
 
         alt.setTimeout(async () => {
+            if (!player || !player.valid) {
+                return;
+            }
+            
             if (player.data.pos) {
                 Athena.player.safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
             } else {
@@ -210,7 +214,7 @@ export class CharacterSystem {
 
             PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
         }, 500);
-    }
+    },
 
     /**
      * Check if a character name is taken.
@@ -220,7 +224,7 @@ export class CharacterSystem {
      * @return {Promise<boolean>}
      * @memberof CharacterSystem
      */
-    static async isNameTaken(name: string): Promise<boolean> {
+    async isNameTaken(name: string): Promise<boolean> {
         const result = await Athena.database.funcs.fetchData<Character>(
             'name',
             name,
@@ -228,5 +232,71 @@ export class CharacterSystem {
         );
 
         return result ? true : false;
+    },
+
+    /**
+     * Get all characters that belong to an account.
+     *
+     * @param {string} account_id player.accountData._id.toString()
+     * @return {Promise<Array<Character>>}
+     */
+    async getCharacters(account_id: string): Promise<Array<Character>> {
+        const firstLookup = await Athena.database.funcs.fetchAllByField<Character>(
+            'account_id',
+            account_id,
+            Athena.database.collections.Characters,
+        );
+
+        const secondLookup = await Athena.database.funcs.fetchAllByField<Character>(
+            'account_id',
+            new ObjectId(account_id),
+            Athena.database.collections.Characters,
+        );
+
+        if (firstLookup.length >= 1) {
+            for (let i = 0; i < firstLookup.length; i++) {
+                firstLookup[i]._id = firstLookup[i]._id.toString();
+            }
+        }
+
+        // This converts all legacy ObjectID `account_id` into strings.
+        if (secondLookup.length >= 1) {
+            for (let i = 0; i < secondLookup.length; i++) {
+                secondLookup[i]._id = secondLookup[i]._id.toString();
+                secondLookup[i].account_id = secondLookup[i].account_id.toString();
+                await Athena.database.funcs.updatePartialData(
+                    secondLookup[i]._id,
+                    { account_id: secondLookup[i].account_id },
+                    Athena.database.collections.Characters,
+                );
+            }
+        }
+
+        return [...firstLookup, ...secondLookup];
+    },
+};
+
+/**
+ * It takes a function name and a callback, and if the function exists in the exports object, it
+ * overrides it with the callback
+ *
+ * @param {Key} functionName - The name of the function you want to override.
+ * @param callback - typeof CharacterSystemRef[Key]
+ * @returns The function is being returned.
+ */
+function override<Key extends keyof typeof CharacterSystemRef>(
+    functionName: Key,
+    callback: typeof CharacterSystemRef[Key],
+): void {
+    if (typeof exports[functionName] === 'undefined') {
+        alt.logError(`systems/character.ts does not provide an export named ${functionName}`);
+        return;
     }
+
+    exports[functionName] = callback;
 }
+
+export const CharacterSystem: typeof CharacterSystemRef & { override?: typeof override } = {
+    ...CharacterSystemRef,
+    override,
+};

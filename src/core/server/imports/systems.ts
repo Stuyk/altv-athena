@@ -11,7 +11,7 @@ import '../systems/interaction';
 import '../systems/item';
 import '../systems/job';
 import '../systems/jobTrigger';
-import '../systems/login';
+import '../../plugins/core-discord-login/server/src/login';
 import '../systems/plugins';
 import '../systems/rules';
 import '../systems/stateManager';

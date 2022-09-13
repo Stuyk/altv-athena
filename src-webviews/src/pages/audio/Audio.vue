@@ -21,12 +21,15 @@ export default defineComponent({
             alt.on(`${ComponentName}:TriggerQueue`, this.dequeue);
         } else {
             setInterval(() => {
+                this.addToQueue('@plugins/sounds/core-items/test');
                 this.addToQueue('item_shuffle_1');
                 this.addToQueue('item_purchase');
                 this.addToQueue('item_eat');
                 this.addToQueue('item_remove');
                 this.addToQueue('car_unlock');
                 this.addToQueue('item_teleport');
+
+                this.dequeue();
             }, 2000);
         }
     },
@@ -58,7 +61,11 @@ export default defineComponent({
             this.isReady = true;
         },
         async handleAudio(soundName: string, pan: number = 0, volume: number = 0.2, duration = -1) {
-            const path = ResolvePath(`../../assets/sounds/${soundName}.ogg`);
+            if (!soundName.includes('.ogg')) {
+                soundName += `.ogg`;
+            }
+
+            const path = ResolvePath(`../../assets/sounds/${soundName}`);
 
             if (!this._audio) {
                 this._audio = new Audio(path);

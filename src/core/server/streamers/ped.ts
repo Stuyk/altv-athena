@@ -60,7 +60,7 @@ export class PedController {
 
         globalPeds.splice(index, 1);
         PedController.refresh();
-        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_PED, uid);
+        alt.emitAllClients(SYSTEM_EVENTS.REMOVE_GLOBAL_PED, uid);
         return true;
     }
 
@@ -101,7 +101,7 @@ export class PedController {
     }
 
     static playAnimation(uid: string, animation: Animation[]) {
-        alt.emitClient(null, SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
+        alt.emitAllClients(SYSTEM_EVENTS.PLAY_ANIMATION_FOR_PED, uid, animation);
     }
 }
 

@@ -27,7 +27,7 @@ class InternalFunctions {
      * @param {string} uid - The unique identifier for the interaction.
      */
     static remove(uid: string): void {
-        for (var i = interactions.length - 1; i >= 0; i--) {
+        for (let i = interactions.length - 1; i >= 0; i--) {
             if (interactions[i].interaction && interactions[i].interaction.uid !== uid) {
                 continue;
             }
@@ -85,6 +85,12 @@ class InternalFunctions {
             return;
         }
 
+        if (colshape.interaction.triggerCallbackOnEnter) {
+            entity.currentInteraction = colshape;
+            colshape.interaction.callback(entity, ...colshape.interaction.data);
+            return;
+        }
+
         // ! --- Debug Function
         if (colshape.interaction.debug) {
             console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
@@ -133,6 +139,10 @@ class InternalFunctions {
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
             Athena.player.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        }
+
+        if (typeof colshape.interaction.onLeaveCallback === 'function') {
+            colshape.interaction.onLeaveCallback(entity, ...colshape.interaction.data);
         }
 
         entity.currentInteraction = null;

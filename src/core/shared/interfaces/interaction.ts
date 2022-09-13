@@ -26,7 +26,7 @@ export interface Interaction {
      * @type {Vector3}
      * @memberof Interaction
      */
-    position?: Vector3;
+    position: Vector3;
 
     /**
      * The max distance in which this interaction can be interacted with.
@@ -47,6 +47,21 @@ export interface Interaction {
      * @memberof Interaction
      */
     callback?: (player: alt.Player, ...args: any[]) => void;
+
+    /**
+     * Forces the callback to immediately trigger without actually interacting.
+     *
+     * @type {boolean}
+     * @memberof Interaction
+     */
+    triggerCallbackOnEnter?: boolean;
+
+    /**
+     * Called when a player has left an interaction point.
+     *
+     * @memberof Interaction
+     */
+    onLeaveCallback?: (player: alt.Player, ...args: any[]) => void;
 
     /**
      * Data to pass back through the callback.

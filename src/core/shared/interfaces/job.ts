@@ -5,6 +5,7 @@ import { TextLabel } from './textLabel';
 import { Vector3 } from './vector';
 import { JobAnimation } from './animation';
 import { Particle } from './particle';
+import { JobAttachable } from './iAttachable';
 
 enum ObjectiveCriteria {
     NO_VEHICLE = 1,
@@ -114,6 +115,13 @@ export interface Objective {
     animation?: JobAnimation;
 
     /**
+     * An object to associate with this objective.
+     * @type {JobAttachable}
+     * @memberof Objective
+     */
+    attachable?: JobAttachable;
+
+    /**
      * An event that can be triggered when the objective is started, completed, etc.
      * Useful for adding custom functionality to an objective.
      * @type {EventCall}
@@ -130,10 +138,24 @@ export interface Objective {
     particle?: Particle;
 
     /**
+     * Turns off all other objective checks, and only does the `callbackOnCheck` callback provided.
+     *
+     * @type {boolean}
+     * @memberof Objective
+     */
+    onlyCallbackCheck?: boolean;
+
+    /**
      * Server-side callback when objective is started.
      * @memberof Objective
      */
     callbackOnStart?: (player: any) => void;
+
+    /**
+     *
+     * @memberof Objective
+     */
+    callbackOnCheck?: (player: any) => Promise<boolean>;
 
     /**
      * Server-side callback when objective is completed.

@@ -51,10 +51,6 @@ export class SoundSystem {
      * @memberof SoundSystem
      */
     static playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
-        if (soundInfo.audioName.includes('.ogg')) {
-            soundInfo.audioName = soundInfo.audioName.replace('.ogg', '');
-        }
-
         if (soundInfo.target) {
             alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
             return;
@@ -77,10 +73,6 @@ export class SoundSystem {
 
         if (players.length <= 0) {
             return;
-        }
-
-        if (soundInfo.audioName.includes('.ogg')) {
-            soundInfo.audioName = soundInfo.audioName.replace('.ogg', '');
         }
 
         if (soundInfo.target) {
@@ -111,10 +103,6 @@ export class SoundSystem {
 
         if (players.length <= 0) {
             return;
-        }
-
-        if (soundInfo.audioName.includes('.ogg')) {
-            soundInfo.audioName = soundInfo.audioName.replace('.ogg', '');
         }
 
         alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);

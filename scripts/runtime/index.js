@@ -223,6 +223,7 @@ async function coreBuildProcess() {
     await runFile(node, './scripts/compiler/core');
     await runFile(node, './scripts/plugins/core');
     await runFile(node, './scripts/plugins/webview');
+    await runFile(node, './scripts/plugins/files');
     console.log(`===> Finished Core Build (${Date.now() - start}ms)`);
 }
 
@@ -286,21 +287,23 @@ if (passedArguments.includes('start')) {
     }
 
     runServer();
-    process.stdin.on('data', (data) => {
-        const result = data.toString().trim();
-        if (result.charAt(0) !== '+' && result.charAt(0) !== '/') {
-            console.log(`Use +help to see server maintenance commands. (This Console)`);
-            console.log(`Use /commands to see server magagement commands. (The Game Console)`);
-            if (!lastServerProcess.killed) {
-                return;
-            }
 
-            lastServerProcess.send(data);
-            return;
-        }
+    // process.stdin.on('data', (data) => {
+    //     const result = data.toString().trim();
+    //     if (result.charAt(0) !== '+' && result.charAt(0) !== '/') {
+    //         console.log(`Use +help to see server maintenance commands. (This Console)`);
+    //         console.log(`Use /commands to see server magagement commands. (The Game Console)`);
+    //         if (!lastServerProcess.killed) {
+    //             return;
+    //         }
 
-        const inputs = result.split(' ');
-        const cmdName = inputs.shift();
-        console.log(cmdName, ...inputs);
-    });
+    //         lastServerProcess.send(data);
+    //         return;
+    //     }
+
+    //     const inputs = result.split(' ');
+    //     const cmdName = inputs.shift();
+    //     console.log(cmdName, ...inputs);
+    // });
+
 }

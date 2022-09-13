@@ -8,27 +8,27 @@ export const CLOTHING_CONFIG: IClothingConfig = {
     MAXIMUM_COMPONENT_VALUES: {
         // Female
         [ORIENTATION.FEMALE]: {
-            [CLOTHING_IDS.MASKS]: 197, // Masks
-            [CLOTHING_IDS.TORSOS]: 241, // Torsos
-            [CLOTHING_IDS.LEGS]: 150, // Legs
-            [CLOTHING_IDS.BAGS]: 99, // Bags
-            [CLOTHING_IDS.SHOES]: 105, // Shoes
-            [CLOTHING_IDS.ACCESSORIES]: 120, // Accessories
-            [CLOTHING_IDS.UNDERSHIRTS]: 233, // Undershirts
-            [CLOTHING_IDS.BODY_ARMOUR]: 18, // body armour
-            [CLOTHING_IDS.TOP]: 414, // Tops / Shirts
+            [CLOTHING_IDS.MASKS]: 208, // Masks
+            [CLOTHING_IDS.TORSOS]: 242, // Torsos
+            [CLOTHING_IDS.LEGS]: 155, // Legs
+            [CLOTHING_IDS.BAGS]: 110, // Bags
+            [CLOTHING_IDS.SHOES]: 112, // Shoes
+            [CLOTHING_IDS.ACCESSORIES]: 122, // Accessories
+            [CLOTHING_IDS.UNDERSHIRTS]: 235, // Undershirts
+            [CLOTHING_IDS.BODY_ARMOUR]: 33, // body armour
+            [CLOTHING_IDS.TOP]: 439, // Tops / Shirts
         },
         // Male
         [ORIENTATION.MALE]: {
-            [CLOTHING_IDS.MASKS]: 197, // Masks
-            [CLOTHING_IDS.TORSOS]: 196, // Torsos
-            [CLOTHING_IDS.LEGS]: 143, // Legs
-            [CLOTHING_IDS.BAGS]: 99, // Bags
-            [CLOTHING_IDS.SHOES]: 101, // Shoes
-            [CLOTHING_IDS.ACCESSORIES]: 151, // Accessories
-            [CLOTHING_IDS.UNDERSHIRTS]: 188, // Undershirts
-            [CLOTHING_IDS.BODY_ARMOUR]: 16, // body armour
-            [CLOTHING_IDS.TOP]: 392, // Tops / Shirts
+            [CLOTHING_IDS.MASKS]: 208, // Masks
+            [CLOTHING_IDS.TORSOS]: 197, // Torsos
+            [CLOTHING_IDS.LEGS]: 147, // Legs
+            [CLOTHING_IDS.BAGS]: 110, // Bags
+            [CLOTHING_IDS.SHOES]: 108, // Shoes
+            [CLOTHING_IDS.ACCESSORIES]: 153, // Accessories
+            [CLOTHING_IDS.UNDERSHIRTS]: 190, // Undershirts
+            [CLOTHING_IDS.BODY_ARMOUR]: 28, // body armour
+            [CLOTHING_IDS.TOP]: 412, // Tops / Shirts
         },
     },
     /**
@@ -36,18 +36,18 @@ export const CLOTHING_CONFIG: IClothingConfig = {
      */
     MAXIMUM_PROP_VALUES: {
         [ORIENTATION.FEMALE]: {
-            [PROP_IDS.HATS]: 162, // Hats
-            [PROP_IDS.GLASSES]: 41, // Glasses
-            [PROP_IDS.EARS]: 21, // Ears
-            [PROP_IDS.WATCHES]: 29, // Watches
-            [PROP_IDS.BRACELETS]: 15, // Bracelets
+            [PROP_IDS.HATS]: 171, // Hats
+            [PROP_IDS.GLASSES]: 42, // Glasses
+            [PROP_IDS.EARS]: 22, // Ears
+            [PROP_IDS.WATCHES]: 33, // Watches
+            [PROP_IDS.BRACELETS]: 17, // Bracelets
         },
         [ORIENTATION.MALE]: {
-            [PROP_IDS.HATS]: 163, // Hats
-            [PROP_IDS.GLASSES]: 39, // Glasses
-            [PROP_IDS.EARS]: 40, // Ears
-            [PROP_IDS.WATCHES]: 40, // Watches
-            [PROP_IDS.BRACELETS]: 8, // Bracelets
+            [PROP_IDS.HATS]: 172, // Hats
+            [PROP_IDS.GLASSES]: 41, // Glasses
+            [PROP_IDS.EARS]: 41, // Ears
+            [PROP_IDS.WATCHES]: 44, // Watches
+            [PROP_IDS.BRACELETS]: 9, // Bracelets
         },
     },
     DLC_CLOTHING: {

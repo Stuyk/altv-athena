@@ -2,6 +2,7 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import { JobAttachable } from '../../shared/interfaces/iAttachable';
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { Vector3 } from '../../shared/interfaces/vector';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
@@ -13,6 +14,17 @@ import { sha256Random } from '../utility/encryption';
 const JobInstances: { [key: string]: Job } = {};
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
+
+export function cloneObjective(objectiveData: Objective): Objective {
+    const callbackOnStart = objectiveData.callbackOnStart;
+    const callbackOnFinish = objectiveData.callbackOnFinish;
+    const callbackOnCheck = objectiveData.callbackOnCheck;
+    const objectiveClone = deepCloneObject<Objective>(objectiveData);
+    objectiveClone.callbackOnStart = callbackOnStart;
+    objectiveClone.callbackOnFinish = callbackOnFinish;
+    objectiveClone.callbackOnCheck = callbackOnCheck;
+    return objectiveClone;
+}
 
 export class Job {
     /**
@@ -33,7 +45,7 @@ export class Job {
      * This instance should be called each time to create new job instances.
      * @memberof Job
      */
-    constructor() {}
+    constructor() { }
 
     /**
      * Add the player to the job this job and start it.
@@ -61,12 +73,7 @@ export class Job {
      * @memberof Job
      */
     addObjective(objectiveData: Objective) {
-        const callbackOnStart = objectiveData.callbackOnStart;
-        const callbackOnFinish = objectiveData.callbackOnFinish;
-        const objectiveClone = deepCloneObject<Objective>(objectiveData);
-
-        objectiveClone.callbackOnStart = callbackOnStart;
-        objectiveClone.callbackOnFinish = callbackOnFinish;
+        const objectiveClone = cloneObjective(objectiveData);
         this.objectives.push(objectiveClone);
     }
 
@@ -116,7 +123,7 @@ export class Job {
         for (let i = 0; i < this.vehicles.length; i++) {
             try {
                 this.vehicles[i].destroy();
-            } catch (err) {}
+            } catch (err) { }
         }
     }
 
@@ -163,22 +170,37 @@ export class Job {
      * Verify if an objective is completed by a user.
      * @memberof JobBuilder
      */
-    checkObjective(): boolean {
+    async checkObjective(): Promise<boolean> {
         const objective = this.getCurrentObjective();
 
-        const passedCritera = this.verifyCriteria(objective);
-        if (!passedCritera) {
-            return false;
+        // Skip all default checks if this is set to true.
+        if (!objective.onlyCallbackCheck) {
+            const passedCritera = this.verifyCriteria(objective);
+            if (!passedCritera) {
+                return false;
+            }
+
+            const passedType = this.verifyType(objective);
+            if (!passedType) {
+                return false;
+            }
         }
 
-        const passedType = this.verifyType(objective);
-        if (!passedType) {
-            return false;
+        // Allows for custom callback check
+        if (objective.callbackOnCheck && typeof objective.callbackOnCheck === 'function') {
+            const didPass = await objective.callbackOnCheck(this.player);
+            if (!didPass) {
+                return false;
+            }
         }
 
         // Triggers an Animation at Objective End
         if (objective.animation && !objective.animation.atObjectiveStart) {
             this.tryAnimation();
+        }
+
+        if (objective.attachable && !objective.attachable.atObjectiveStart) {
+            this.tryAttach();
         }
 
         // Calls an event on server-side or client-side after objective is complete.
@@ -211,6 +233,7 @@ export class Job {
         }
 
         this.removeAllVehicles();
+        this.removeAttachable();
     }
 
     /**
@@ -254,7 +277,8 @@ export class Job {
             if (objective.captureProgress >= objective.captureMaximum) {
                 return true;
             } else {
-                alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_UPDATE, objective);
+                const clonedObjective = deepCloneObject<Objective>(objective);
+                alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_UPDATE, clonedObjective);
             }
         }
 
@@ -431,6 +455,43 @@ export class Job {
     }
 
     /**
+     * Tries to attach an object if it is present
+     * @private
+     * @return {*}
+     * @memberof Job
+     */
+    private tryAttach() {
+        const objective = this.getCurrentObjective();
+        if (!objective.attachable) {
+            return;
+        }
+
+        const objectToAttach: JobAttachable = {
+            model: objective.attachable.model,
+            pos: objective.attachable.pos,
+            rot: objective.attachable.rot,
+            bone: objective.attachable.bone,
+            uid: objective.attachable.uid,
+        };
+
+        Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attachable.duration);
+    }
+    
+    /**
+     * Remove the current job attachable.
+     * @return {*}
+     * @memberof Job
+     */
+    removeAttachable() {
+        const objective = this.getCurrentObjective();
+        if (!objective.attachable) {
+            return;
+        }
+        
+        Athena.player.emit.objectRemove(this.player, objective.attachable.uid);
+    }
+
+    /**
      * Emits data down to the player to start handling job information.
      * @private
      * @memberof Job
@@ -444,6 +505,10 @@ export class Job {
 
         if (objective.animation && objective.animation.atObjectiveStart) {
             this.tryAnimation();
+        }
+
+        if (objective.attachable && objective.attachable.atObjectiveStart) {
+            this.tryAttach();
         }
 
         if (objective.eventCall && objective.eventCall.callAtStart) {
@@ -460,6 +525,28 @@ export class Job {
      */
     getCurrentObjective(): Objective | null {
         return this.objectives[0];
+    }
+
+    /**
+     * Get the time since this job has started.
+     *
+     * @return {number}
+     * @memberof Job
+     */
+    getElapsedMilliseconds(): number {
+        return Date.now() - this.startTime;
+    }
+
+    /**
+     * Inserts an objective to the beginning of the objectives array.
+     *
+     * @param {Objective} objectiveData
+     * @memberof Job
+     */
+    addNextObjective(objectiveData: Objective) {
+        const objectiveClone = cloneObjective(objectiveData);
+        this.objectives.splice(0, 0, objectiveClone);
+        this.syncObjective();
     }
 }
 

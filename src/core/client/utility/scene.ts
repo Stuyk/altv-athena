@@ -6,13 +6,7 @@ export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
     let timerHandle: number;
     return new Promise<boolean>((resolve) => {
         // noinspection JSSuspiciousNameCombination
-        native.newLoadSceneStartSphere(
-            pos.x,
-            pos.y,
-            pos.z ?? native.getHeightmapBottomZForPosition(pos.x, pos.y),
-            2,
-            1,
-        );
+        native.newLoadSceneStartSphere(pos.x, pos.y, pos.z ?? native.getApproxHeightForPoint(pos.x, pos.y), 2, 1);
 
         timerHandle = Timer.createInterval(
             () => {

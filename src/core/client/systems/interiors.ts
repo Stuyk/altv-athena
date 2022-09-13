@@ -42,10 +42,7 @@ function fixMissingInteriors() {
     alt.removeIpl('shutter_open');
     alt.removeIpl('shutter_closed');
     alt.removeIpl('shr_int');
-    alt.requestIpl('csr_afterMission');
     alt.requestIpl('v_carshowroom');
-    alt.requestIpl('shr_int');
-    alt.requestIpl('shutter_closed');
     alt.requestIpl('smboat');
     alt.requestIpl('smboat_distantlights');
     alt.requestIpl('smboat_lod');
@@ -126,6 +123,7 @@ function fixMissingInteriors() {
     alt.requestIpl('triathlon2_VBprops');
     alt.requestIpl('jetstenativeurnel');
     alt.requestIpl('Jetsteal_ipl_grp1');
+    alt.requestIpl('sf_musicrooftop');
 
     // Hospital Pillbox Interiors
     alt.requestIpl('RC12B_Default');
@@ -180,6 +178,16 @@ function fixMissingInteriors() {
         natives.activateInteriorEntitySet(interiorID, 'entity_set_test_lights');
         natives.activateInteriorEntitySet(interiorID, 'entity_set_test_lights_cheap');
         natives.activateInteriorEntitySet(interiorID, 'entity_set_time_trial');
+        natives.refreshInterior(interiorID);
+    }
+
+    // Premium Deluxe Motorsport
+    alt.requestIpl('shr_int');
+
+	interiorID = natives.getInteriorAtCoords(-31.328518, -1106.6293, 25.42235);
+    if (natives.isValidInterior(interiorID)) {
+        natives.activateInteriorEntitySet(interiorID, 'csr_beforeMission');
+        natives.activateInteriorEntitySet(interiorID, 'shutter_closed'); // back door closed or uncomment this for open.
         natives.refreshInterior(interiorID);
     }
 }

@@ -84,7 +84,7 @@ export class ServerObjectController {
         }
 
         InternalController.refresh();
-        alt.emitClient(null, SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
+        alt.emitAllClients(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;
     }
 

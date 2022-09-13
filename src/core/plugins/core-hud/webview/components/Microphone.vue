@@ -22,17 +22,13 @@ export default defineComponent({
     },
     props: {
         value: {
-            type: Boolean,
-            default: false,
+            type: Number,
+            default: 99,
         },
     },
     computed: {
         getFill() {
-            if (this.value) {
-                return `height: 100% !important; background-color: #447c44;`;
-            }
-
-            return `height: 100% !important; background-color: #6a6a6a;`;
+          return `height: ${this.value}% !important; background-color: #447c44;`;
         },
     },
 });
@@ -95,7 +91,7 @@ export default defineComponent({
 
 .fill {
     position: absolute;
-    background: #6a6a6a;
+    background: #447c44;
     z-index: 25;
     min-width: 65px;
     box-sizing: border-box;

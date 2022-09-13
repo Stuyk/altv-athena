@@ -21,7 +21,9 @@ export class AdminController {
 
         player.kick(`${LocaleController.get(LOCALE_KEYS.LABEL_BANNED)} ${reason}`);
         Database.updatePartialData(player.accountData._id, { banned: true, reason }, Collections.Accounts);
-        alt.log(`(${player.discord.id}) Has been banned from the server.`);
+        if (player.discord && player.discord.id) {
+            alt.log(`(${player.discord.id}) Has been banned from the server.`);
+        }
         return true;
     }
 

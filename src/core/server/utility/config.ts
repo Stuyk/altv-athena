@@ -85,7 +85,7 @@ export default {
         try {
             data = JSON.parse(file);
         } catch (err) {
-            console.warn(`Failed to read package.json. Run your package.json through a JSON linter. Google it.`);
+            alt.logError(`Failed to read package.json. Run your package.json through a JSON linter. Google it.`);
             process.exit(1);
         }
 

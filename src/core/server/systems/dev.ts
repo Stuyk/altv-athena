@@ -1,40 +1,33 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Athena } from '../api/athena';
-import { Account } from '../interface/iAccount';
-import { Collections } from '../interface/iDatabaseCollections';
-import { DiscordUser } from '../interface/iDiscordUser';
-import { AgendaSystem } from './agenda';
+import { AgendaOrder, AgendaSystem } from './agenda';
 
-const ACCOUNT_SETUP = 2;
+let callback: (player: alt.Player) => Promise<void>;
 
 export class DevModeOverride {
+    static setDevAccountCallback(cb: (player: alt.Player) => Promise<void>) {
+        callback = cb;
+    }
+
     /**
      * Overrides the default login and uses a single account for all users.
      * This acts a way to login to multiple accounts under multiple instances of GTA:V.
+     *
+     * Used as a way to setup general player info for dev mode.
      *
      * @param player - alt.Player - The player that is logging in.
      * @returns None
      */
     static async login(player: alt.Player) {
-        const accounts = await Database.fetchAllData<Account>(Collections.Accounts);
-        if (!accounts || !accounts[0]) {
-            alt.log(
-                `PLEASE RUN THE SERVER AT LEAST ONCE WITH 'npm run windows' OR 'npm run linux' before using dev mode.`,
+        if (!callback) {
+            alt.logError(
+                `DevModeOverride.setDevAccountCallback was not defined. A login system must have a dev callback.`,
             );
-            alt.log(`ENSURE THAT YOU JOIN THE SERVER ONCE AND CREATE AN ACCOUNT.`);
-            process.exit(1);
+            return;
         }
 
-        const account = accounts[0];
-
-        player.discord = {
-            id: account.discord,
-        } as DiscordUser;
-
-        Athena.player.set.firstConnect(player);
-
+        await callback(player);
         AgendaSystem.initPlayer(player);
-        AgendaSystem.goToAgenda(player, ACCOUNT_SETUP);
+        AgendaSystem.goToAgenda(player, AgendaOrder.CHARACTER_SELECT);
     }
 }

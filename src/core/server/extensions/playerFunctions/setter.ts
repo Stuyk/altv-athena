@@ -19,6 +19,7 @@ import { playerConst } from '../../api/consts/constPlayer';
 import { IVector3 } from 'alt-shared';
 import { StateManager } from '../../systems/stateManager';
 import { Athena } from '../../api/athena';
+import { JwtProvider } from '../../systems/jwt';
 
 const Setter = {
     /**
@@ -28,34 +29,20 @@ const Setter = {
      * @memberof SetPrototype
      */
     async account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
-        if (typeof player.discord === 'undefined') {
-            return;
-        }
-
-        if (!accountData.permissionLevel) {
+        if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
             accountData.permissionLevel = PERMISSIONS.NONE;
             Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
         }
 
-        const isOldToken = accountData.quickTokenExpiration && Date.now() > accountData.quickTokenExpiration;
-        if (!accountData.quickToken || isOldToken || player.needsQT) {
-            const qt: string = Ares.getUniquePlayerHash(player, player.discord.id);
-
-            Database.updatePartialData(
-                accountData._id,
-                {
-                    quickToken: qt,
-                    quickTokenExpiration: Date.now() + 60000 * 60 * 48, // 48 Hours
-                },
-                Collections.Accounts,
-            );
-
-            alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, player.discord.id);
-        }
+        // Setup JWT Storage
+        accountData._id = accountData._id.toString();
+        const newToken = await JwtProvider.create(accountData as Account);
+        alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, newToken);
 
         player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
         emit.meta(player, 'permissionLevel', accountData.permissionLevel);
         player.accountData = accountData;
+        player.accountData._id = player.accountData._id.toString();
     },
 
     actionMenu(player: alt.Player, actionMenu: ActionMenu) {
