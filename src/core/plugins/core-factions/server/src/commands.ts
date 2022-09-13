@@ -20,13 +20,14 @@ export class FactionCommands {
      * @param {string[]} name - The name of the faction.
      * @returns The result of the add function.
      */
-    @command('fcreate', '/fcreate [name] - Open faction panel if in faction.', PERMISSIONS.ADMIN)
-    private static async handleFactionCreate(player: alt.Player, ...name: string[]) {
+    @command('fcreate', '/fcreate [type: (Neutral, State, Gang)] [name] - Open faction panel if in faction.', PERMISSIONS.ADMIN)
+    private static async handleFactionCreate(player: alt.Player, type: string, ...name: string[]) {
         const factionName = name.join(' ');
         const result = await FactionHandler.add(player.data._id.toString(), {
             bank: 0,
             canDisband: true,
             name: factionName,
+            type: type.toUpperCase()
         });
 
         if (!result.status) {
