@@ -122,10 +122,6 @@ export default defineComponent({
         handleTabBlocker(e: KeyboardEvent) {
             if (e.keyCode === 9) {
                 e.preventDefault();
-                // this.$nextTick(() => {
-                //     this.$refs.chatInput.focus();
-                //     console.log('focus?');
-                // });
                 return;
             }
         },
