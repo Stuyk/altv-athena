@@ -25,6 +25,7 @@
                     :style="getInputStyle"
                     placeholder="Say something... or use a command with /"
                     @input="handleInput"
+                    @keydown="handleTabBlocker"
                 />
                 <!-- Chat Suggestions -->
                 <Suggestions
@@ -118,6 +119,16 @@ export default defineComponent({
         },
     },
     methods: {
+        handleTabBlocker(e: KeyboardEvent) {
+            if (e.keyCode === 9) {
+                e.preventDefault();
+                // this.$nextTick(() => {
+                //     this.$refs.chatInput.focus();
+                //     console.log('focus?');
+                // });
+                return;
+            }
+        },
         /**
          * Used to set the messages for state.
          * Messages are stored outside the scope of the CEF.
@@ -293,6 +304,9 @@ export default defineComponent({
         handleSuggestionTab() {
             this.userInput = `/${this.suggestions[0].name}`;
             this.handleInput();
+            this.$nextTick(() => {
+                this.$refs.chatInput.focus();
+            });
         },
         handleSuggestionSelect(selected: string) {
             this.userInput = selected;
@@ -446,6 +460,9 @@ export default defineComponent({
             }
 
             this.suggestions = suggestions;
+            this.$nextTick(() => {
+                this.$refs.chatInput.focus();
+            });
         },
     },
     mounted() {

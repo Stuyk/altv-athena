@@ -5,6 +5,7 @@
 
 ```
 Initialized 3.9.0
+Fix Tab Defocus in Chat
 ```
 
 ## 3.8.0
