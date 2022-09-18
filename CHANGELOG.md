@@ -6,6 +6,8 @@
 ```
 Initialized 3.9.0
 Fix Tab Defocus in Chat
+Fix Athena.get.player.byName name issues
+Add Athena.get.player.byPartialName
 ```
 
 ## 3.8.0

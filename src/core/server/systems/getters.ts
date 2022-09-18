@@ -22,7 +22,30 @@ const player = {
      */
     byName(name: string): alt.Player | undefined {
         name = name.toLowerCase().replace('_', ''); // Normalize My_Name to myname
-        return alt.Player.all.find((x) => x.data && x.data.name && x.data.name === name);
+        return alt.Player.all.find((x) => {
+            if (!x.data && !x.data._id) {
+                return false;
+            }
+
+            return x.data.name.toLowerCase().replace('_', '') === name;
+        });
+    },
+    /**
+     * Gets an online player by their partial name.
+     * Not case sensitive and returns the first player it finds that includes the partial
+     *
+     * @param {string} partialName
+     * @return {(alt.Player | undefined)}
+     */
+    byPartialName(partialName: string): alt.Player | undefined {
+        partialName = partialName.toLowerCase().replace('_', ''); // Normalize My_Name to myname
+        return alt.Player.all.find((x) => {
+            if (!x.data && !x.data._id) {
+                return false;
+            }
+
+            return x.data.name.toLowerCase().replace('_', '').includes(partialName);
+        });
     },
     /**
      * Get an online player based on their MongoDB _id
