@@ -21,13 +21,13 @@ const player = {
      * @return {(alt.Player | undefined)}
      */
     byName(name: string): alt.Player | undefined {
-        name = name.toLowerCase().replace('_', ''); // Normalize My_Name to myname
+        name = name.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
         return alt.Player.all.find((x) => {
             if (!x.data && !x.data._id) {
                 return false;
             }
 
-            return x.data.name.toLowerCase().replace('_', '') === name;
+            return x.data.name.toLowerCase().replace(/\s|_+/g, '') === name;
         });
     },
     /**
@@ -38,13 +38,13 @@ const player = {
      * @return {(alt.Player | undefined)}
      */
     byPartialName(partialName: string): alt.Player | undefined {
-        partialName = partialName.toLowerCase().replace('_', ''); // Normalize My_Name to myname
+        partialName = partialName.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
         return alt.Player.all.find((x) => {
             if (!x.data && !x.data._id) {
                 return false;
             }
 
-            return x.data.name.toLowerCase().replace('_', '').includes(partialName);
+            return x.data.name.toLowerCase().replace(/\s|_+/g, '').includes(partialName);
         });
     },
     /**
