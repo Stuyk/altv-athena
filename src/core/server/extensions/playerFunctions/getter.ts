@@ -92,6 +92,10 @@ const Getter = {
      */
     closestPlayer(player: alt.Player): alt.Player {
         const players = [...alt.Player.all];
+        if (players.length === 1) {
+            return undefined;
+        }
+
         let targetPlayer = players[0] !== player ? players[0] : players[1];
         let dist = distance(player.pos, targetPlayer.pos);
 
@@ -110,7 +114,7 @@ const Getter = {
                 continue;
             }
 
-            if (dist > newDistance) {
+            if (dist < newDistance) {
                 continue;
             }
 
