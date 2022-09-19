@@ -34,7 +34,7 @@ export interface IObject {
      * @type {string}
      * @memberof IObject
      */
-    uid: string;
+    uid?: string;
 
     /**
      * Local Object ID.
