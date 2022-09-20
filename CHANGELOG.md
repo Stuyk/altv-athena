@@ -28,6 +28,7 @@ Add Athena.data.vendingMachines - This is the vending machines from the shared f
 Add AthenaClient.data.vendingMachines - This is the vending machines from the shared folder. Instanced to the client-side.
 Add Athena.data.atms - This is the atms from the shared folder. Instanced to the server-side.
 Add AthenaClient.data.atms - This is the atms from the shared folder. Instanced to the client-side.
+Add undefined entity check for storage view system.
 ```
 
 ## 3.8.0
