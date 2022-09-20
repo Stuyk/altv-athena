@@ -1,8 +1,11 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import { Character } from '../../shared/interfaces/character';
+import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
 import { Athena } from '../api/athena';
+import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Account } from '../interface/iAccount';
 import { getForwardVector } from '../utility/vector';
 import { getClosestOfType } from './gettersShared';
@@ -161,6 +164,44 @@ const player = {
      */
     closestToVehicle(vehicle: alt.Vehicle): alt.Player | undefined {
         return getClosestOfType<alt.Player>(vehicle, 'player');
+    },
+    /**
+     * Returns the closest owned vehicle for a given player.
+     * Counts any owned vehicles from other players that have supplied an injection for ownership.
+     * Ignores vehicles with keyless for start.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Vehicle | undefined)}
+     */
+    closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined {
+        const vehicles = alt.Vehicle.all.filter((veh) => {
+            if (!veh || !veh.valid || !veh.data) {
+                return false;
+            }
+
+            if (isFlagEnabled(veh.behavior, Vehicle_Behavior.NO_KEY_TO_START)) {
+                return false;
+            }
+
+            return VehicleFuncs.hasOwnership(player, veh);
+        });
+
+        if (vehicles.length <= 0) {
+            return undefined;
+        }
+
+        if (vehicles.length <= 1) {
+            return vehicles[0];
+        }
+
+        vehicles.sort((a, b) => {
+            const distA = distance(player.pos, a.pos);
+            const distB = distance(player.pos, b.pos);
+
+            return distA - distB;
+        });
+
+        return vehicles[0];
     },
     /**
      * Returns all characters that belong to a player.

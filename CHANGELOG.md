@@ -21,6 +21,7 @@ Add Athena.systems.job.addJobCheck - Add custom criteria, or types to the global
 Add Athena.systems.job.getPlayerJob - Get a player's current job if they are doing a job.
 Add Athena.systems.job.cloneObjective - Used to clone an objective cleanly.
 Add Athena.systems.job.instance - Used to create a new job instance. ie. new Athena.systems.job.instance()
+Add Athena.get.player.closestOwnedVehicle - Gets the closest owned vehicle for a player.
 ```
 
 ## 3.8.0
