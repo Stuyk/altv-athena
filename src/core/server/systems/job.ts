@@ -32,12 +32,12 @@ alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
  */
 export function addJobCheck(type: 'type' | 'criteria', callback: (objective: Objective) => boolean) {
     if (type === 'type') {
-        criteriaAddons.push(callback);
+        typeAddons.push(callback);
         return;
     }
 
     if (type === 'criteria') {
-        typeAddons.push(callback);
+        criteriaAddons.push(callback);
         return;
     }
 }
