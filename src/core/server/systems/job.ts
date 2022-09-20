@@ -422,6 +422,11 @@ export class Job {
 
         for (let criteriaCallback of criteriaAddons) {
             const didPass = criteriaCallback(objective);
+
+            if (objective.criteria)
+
+
+
             if (!didPass) {
                 return false;
             }

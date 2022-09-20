@@ -146,6 +146,15 @@ export interface Objective {
     onlyCallbackCheck?: boolean;
 
     /**
+     * Data to put on this objective.
+     * Do not add callbacks.
+     *
+     * @type {{ [key: string]: any }}
+     * @memberof Objective
+     */
+    data?: { [key: string]: any };
+
+    /**
      * Server-side callback when objective is started.
      * @memberof Objective
      */
