@@ -12,8 +12,8 @@ import { Athena } from '../api/athena';
 import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
-const criteriaAddons: Array<(objective: Objective) => boolean> = [];
-const typeAddons: Array<(objective: Objective) => boolean> = [];
+const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
+const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
 
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
@@ -30,7 +30,10 @@ alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
  * @param {(objective: Objective) => boolean} callback
  * @return {void}
  */
-export function addJobCheck(type: 'type' | 'criteria', callback: (objective: Objective) => boolean) {
+export function addJobCheck(
+    type: 'type' | 'criteria',
+    callback: (player: alt.Player, objective: Objective) => boolean,
+) {
     if (type === 'type') {
         typeAddons.push(callback);
         return;
@@ -273,7 +276,7 @@ export class Job {
      */
     private verifyType(objective: Objective): boolean {
         for (let typeAddon of typeAddons) {
-            const didPass = typeAddon(objective);
+            const didPass = typeAddon(this.player, objective);
             if (!didPass) {
                 return false;
             }
@@ -421,15 +424,12 @@ export class Job {
         }
 
         for (let criteriaCallback of criteriaAddons) {
-            const didPass = criteriaCallback(objective);
+            const didPass = criteriaCallback(this.player, objective);
 
             if (objective.criteria)
-
-
-
-            if (!didPass) {
-                return false;
-            }
+                if (!didPass) {
+                    return false;
+                }
         }
 
         return true;
