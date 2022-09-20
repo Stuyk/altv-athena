@@ -30,6 +30,7 @@ Add Athena.data.atms - This is the atms from the shared folder. Instanced to the
 Add AthenaClient.data.atms - This is the atms from the shared folder. Instanced to the client-side.
 Add undefined entity check for storage view system.
 Add Athena.systems.world.setWeatherRotation - Overrides the current weather rotation entirely.
+Fix streamer showing streamed items globablly if dimension set to zero. If set to undefined now, it shows globally.
 ```
 
 ## 3.8.0
