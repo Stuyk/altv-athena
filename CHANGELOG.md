@@ -8,6 +8,11 @@ Initialized 3.9.0
 Fix Tab Defocus in Chat
 Fix Athena.get.player.byName name issues
 Add Athena.get.player.byPartialName
+Add Athena.get.player.characters - Get all player account characters
+Add Athena.get.player.closestToPlayer - Get closest player from player
+Add Athena.get.player.closestToVehicle - Get closest player from vehicle
+Add Athena.get.vehicle.closestToPlayer - Get closest vehicle from player
+Add Athena.get.vehicle.closestToVehicle - Get closest vehicle from vehicle
 ```
 
 ## 3.8.0

@@ -1,6 +1,11 @@
+import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { Character } from '../../shared/interfaces/character';
 import { distance, distance2d } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
+import { Account } from '../interface/iAccount';
 import { getForwardVector } from '../utility/vector';
+import { getClosestOfType } from './gettersShared';
 import { Identifier } from './identifier';
 
 const player = {
@@ -138,6 +143,58 @@ const player = {
      */
     waypoint(player: alt.Player): alt.IVector3 | undefined {
         return player.currentWaypoint;
+    },
+    /**
+     * The player closest to a player.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Player | undefined)}
+     */
+    closestToPlayer(player: alt.Player): alt.Player | undefined {
+        return getClosestOfType<alt.Player>(player, 'player');
+    },
+    /**
+     * The player closest to a vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {(alt.Player | undefined)}
+     */
+    closestToVehicle(vehicle: alt.Vehicle): alt.Player | undefined {
+        return getClosestOfType<alt.Player>(vehicle, 'player');
+    },
+    /**
+     * Returns all characters that belong to a player.
+     * Requires account info, player, or account id string.
+     *
+     * @param {alt.Player} player
+     * @return {Promise<Array<CharacterData>>}
+     */
+    async characters(playerOrAccount: alt.Player | Account | string): Promise<Array<Character>> {
+        if (playerOrAccount instanceof alt.Player) {
+            if (typeof playerOrAccount.accountData === 'undefined') {
+                return [];
+            }
+
+            return await Database.fetchAllByField(
+                'account_id',
+                playerOrAccount.accountData._id,
+                Athena.database.collections.Characters,
+            );
+        }
+
+        if (typeof playerOrAccount === 'string') {
+            return await Database.fetchAllByField(
+                'account_id',
+                playerOrAccount.toString(),
+                Athena.database.collections.Characters,
+            );
+        }
+
+        return await Database.fetchAllByField(
+            'account_id',
+            playerOrAccount._id.toString(),
+            Athena.database.collections.Characters,
+        );
     },
 };
 
@@ -363,6 +420,24 @@ const vehicle = {
      */
     driver(vehicle: alt.Vehicle): alt.Player | undefined {
         return vehicle.driver;
+    },
+    /**
+     * The vehicle closest to a player.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Player | undefined)}
+     */
+    closestToPlayer(player: alt.Player): alt.Vehicle | undefined {
+        return getClosestOfType<alt.Vehicle>(player, 'vehicle');
+    },
+    /**
+     * The vehicle closest to a vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {(alt.Player | undefined)}
+     */
+    closestToVehicle(vehicle: alt.Vehicle): alt.Vehicle | undefined {
+        return getClosestOfType<alt.Vehicle>(vehicle, 'vehicle');
     },
 };
 
