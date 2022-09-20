@@ -12,8 +12,35 @@ import { Athena } from '../api/athena';
 import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
+const criteriaAddons: Array<(objective: Objective) => boolean> = [];
+const typeAddons: Array<(objective: Objective) => boolean> = [];
+
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
+
+/**
+ * Adds a custom check type to the global job system.
+ * Criteria -> Defined as things like can't have weapons, or can't be on-foot, etc.
+ * Type -> Defined as things like a capture point, or jump 5 times here... etc.
+ *
+ * CANNOT BE ASYNC
+ *
+ * @export
+ * @param {('type' | 'criteria')} type
+ * @param {(objective: Objective) => boolean} callback
+ * @return {void}
+ */
+export function addJobCheck(type: 'type' | 'criteria', callback: (objective: Objective) => boolean) {
+    if (type === 'type') {
+        criteriaAddons.push(callback);
+        return;
+    }
+
+    if (type === 'criteria') {
+        typeAddons.push(callback);
+        return;
+    }
+}
 
 export function cloneObjective(objectiveData: Objective): Objective {
     const callbackOnStart = objectiveData.callbackOnStart;
@@ -45,7 +72,7 @@ export class Job {
      * This instance should be called each time to create new job instances.
      * @memberof Job
      */
-    constructor() { }
+    constructor() {}
 
     /**
      * Add the player to the job this job and start it.
@@ -123,7 +150,7 @@ export class Job {
         for (let i = 0; i < this.vehicles.length; i++) {
             try {
                 this.vehicles[i].destroy();
-            } catch (err) { }
+            } catch (err) {}
         }
     }
 
@@ -245,6 +272,13 @@ export class Job {
      * @memberof JobBuilder
      */
     private verifyType(objective: Objective): boolean {
+        for (let typeAddon of typeAddons) {
+            const didPass = typeAddon(objective);
+            if (!didPass) {
+                return false;
+            }
+        }
+
         if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.WAYPOINT)) {
             if (distance(this.player.pos, objective.pos) <= objective.range) {
                 return true;
@@ -386,6 +420,13 @@ export class Job {
             }
         }
 
+        for (let criteriaCallback of criteriaAddons) {
+            const didPass = criteriaCallback(objective);
+            if (!didPass) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -476,7 +517,7 @@ export class Job {
 
         Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attachable.duration);
     }
-    
+
     /**
      * Remove the current job attachable.
      * @return {*}
@@ -487,7 +528,7 @@ export class Job {
         if (!objective.attachable) {
             return;
         }
-        
+
         Athena.player.emit.objectRemove(this.player, objective.attachable.uid);
     }
 

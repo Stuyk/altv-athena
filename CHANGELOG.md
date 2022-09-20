@@ -17,6 +17,10 @@ Add AthenaClient.menus.vehicle.add - Add a modified option to the vehicle wheel 
 Add AthenaClient.menus.player.add - Add a modified option to the player wheel menu.
 Add AthenaClient.menus.object.add - Add a modified option to the object wheel menu.
 Add AthenaClient.menus.ped.add - Add a modified option to the ped wheel menu.
+Add Athena.systems.job.addJobCheck - Add custom criteria, or types to the global job options.
+Add Athena.systems.job.getPlayerJob - Get a player's current job if they are doing a job.
+Add Athena.systems.job.cloneObjective - Used to clone an objective cleanly.
+Add Athena.systems.job.instance - Used to create a new job instance. ie. new Athena.systems.job.instance()
 ```
 
 ## 3.8.0

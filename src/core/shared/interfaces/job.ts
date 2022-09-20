@@ -34,14 +34,14 @@ export interface Objective {
      * @type {ObjectiveCriteria}
      * @memberof Objective
      */
-    criteria: ObjectiveCriteria;
+    criteria: ObjectiveCriteria | number;
 
     /**
      * An objective type that is unique to this objective.
      * @type {ObjectiveType}
      * @memberof Objective
      */
-    type: ObjectiveType;
+    type: ObjectiveType | number;
 
     /**
      * The 3D Position of this objective.
