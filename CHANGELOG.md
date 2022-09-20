@@ -22,6 +22,12 @@ Add Athena.systems.job.getPlayerJob - Get a player's current job if they are doi
 Add Athena.systems.job.cloneObjective - Used to clone an objective cleanly.
 Add Athena.systems.job.instance - Used to create a new job instance. ie. new Athena.systems.job.instance()
 Add Athena.get.player.closestOwnedVehicle - Gets the closest owned vehicle for a player.
+Add Athena.data.vehicles - This is the VehicleData from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.vehicles - This is the VehicleData from the shared folder. Instanced to the client-side.
+Add Athena.data.vendingMachines - This is the vending machines from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.vendingMachines - This is the vending machines from the shared folder. Instanced to the client-side.
+Add Athena.data.atms - This is the atms from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.atms - This is the atms from the shared folder. Instanced to the client-side.
 ```
 
 ## 3.8.0

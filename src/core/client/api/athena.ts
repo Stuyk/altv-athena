@@ -12,12 +12,14 @@ import { CinematicCam } from '../utility/cinematic';
 import { showNotification } from '../utility/notification';
 import * as math from '../utility/math';
 import { menus } from './consts/menus';
+import { constData } from './consts/dataConst';
 
 export const AthenaClient = {
     camera: {
         ped: PedEditCamera,
         cinematic: CinematicCam,
     },
+    data: constData,
     math,
     menus,
     minimap: Minimap,
