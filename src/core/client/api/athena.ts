@@ -11,6 +11,7 @@ import PedEditCamera from '../utility/camera';
 import { CinematicCam } from '../utility/cinematic';
 import { showNotification } from '../utility/notification';
 import * as math from '../utility/math';
+import { menus } from './consts/menus';
 
 export const AthenaClient = {
     camera: {
@@ -18,6 +19,7 @@ export const AthenaClient = {
         cinematic: CinematicCam,
     },
     math,
+    menus,
     minimap: Minimap,
     notification: showNotification,
     raycast: Raycast,

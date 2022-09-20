@@ -13,6 +13,10 @@ Add Athena.get.player.closestToPlayer - Get closest player from player
 Add Athena.get.player.closestToVehicle - Get closest player from vehicle
 Add Athena.get.vehicle.closestToPlayer - Get closest vehicle from player
 Add Athena.get.vehicle.closestToVehicle - Get closest vehicle from vehicle
+Add AthenaClient.menus.vehicle.add - Add a modified option to the vehicle wheel menu.
+Add AthenaClient.menus.player.add - Add a modified option to the player wheel menu.
+Add AthenaClient.menus.object.add - Add a modified option to the object wheel menu.
+Add AthenaClient.menus.ped.add - Add a modified option to the ped wheel menu.
 ```
 
 ## 3.8.0
