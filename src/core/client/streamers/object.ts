@@ -144,7 +144,7 @@ class ClientObjectController {
      * @memberof ClientObjectController
      */
     static doesObjectExist(uid: string): boolean {
-        return createdObjects.findIndex((obj) => obj.uid === uid) >= 0;
+        return createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id)) >= 0;
     }
 
     /**
@@ -198,6 +198,13 @@ class ClientObjectController {
                 native.deleteEntity(createdObjects[i].id);
                 native.deleteObject(createdObjects[i].id);
                 native.setEntityAsNoLongerNeeded(createdObjects[i].id);
+                native.clearAreaOfObjects(
+                    createdObjects[i].pos.x,
+                    createdObjects[i].pos.y,
+                    createdObjects[i].pos.z,
+                    0.1,
+                    0,
+                );
             }
 
             createdObjects.splice(i, 1);

@@ -108,6 +108,7 @@ class ClientAttachableSystem {
                 native.setEntityAsMissionEntity(attachable.clientObjectID, true, true);
                 native.deleteEntity(attachable.clientObjectID);
                 native.setEntityAsNoLongerNeeded(attachable.clientObjectID);
+                native.clearAreaOfObjects(player.pos.x, player.pos.y, player.pos.z, 1, 0);
             }
         }
     }
