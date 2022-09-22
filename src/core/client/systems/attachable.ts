@@ -105,7 +105,9 @@ class ClientAttachableSystem {
                     continue;
                 }
 
+                native.setEntityAsMissionEntity(attachable.clientObjectID, true, true);
                 native.deleteEntity(attachable.clientObjectID);
+                native.setEntityAsNoLongerNeeded(attachable.clientObjectID);
             }
         }
     }
@@ -158,6 +160,7 @@ class ClientAttachableSystem {
                     true,
                     1,
                     true,
+                    undefined,
                 );
 
                 // Assign the new attachable to our cache

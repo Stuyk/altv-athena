@@ -194,8 +194,10 @@ class ClientObjectController {
             }
 
             while (native.doesEntityExist(createdObjects[i].id)) {
+                native.setEntityAsMissionEntity(createdObjects[i].id, true, true);
                 native.deleteEntity(createdObjects[i].id);
                 native.deleteObject(createdObjects[i].id);
+                native.setEntityAsNoLongerNeeded(createdObjects[i].id);
             }
 
             createdObjects.splice(i, 1);
