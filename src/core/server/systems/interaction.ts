@@ -87,8 +87,14 @@ class InternalFunctions {
 
         if (colshape.interaction.triggerCallbackOnEnter) {
             entity.currentInteraction = colshape;
-            colshape.interaction.callback(entity, ...colshape.interaction.data);
-            return;
+
+            if (colshape.interaction.data) {
+                colshape.interaction.callback(entity, ...colshape.interaction.data);
+                return;
+            } else {
+                colshape.interaction.callback(entity, null);
+                return;
+            }
         }
 
         // ! --- Debug Function
@@ -142,7 +148,13 @@ class InternalFunctions {
         }
 
         if (typeof colshape.interaction.onLeaveCallback === 'function') {
-            colshape.interaction.onLeaveCallback(entity, ...colshape.interaction.data);
+            if (colshape.interaction.data) {
+                colshape.interaction.onLeaveCallback(entity, ...colshape.interaction.data);
+                return;
+            } else {
+                colshape.interaction.onLeaveCallback(entity, null);
+                return;
+            }
         }
 
         entity.currentInteraction = null;
