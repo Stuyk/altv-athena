@@ -32,6 +32,8 @@ Add undefined entity check for storage view system.
 Add Athena.systems.world.setWeatherRotation - Overrides the current weather rotation entirely.
 Fix streamer showing streamed items globablly if dimension set to zero. If set to undefined now, it shows globally.
 Mark Objects in Streamer as Mission Entities when being deleted; then flag as no longer needed.
+Add AthenaClient.events.keyHeld -> Add functionality to a key when it is held down.
+Add AthenaClient.events.keyBinds -> Add KeyBinds to the main AthenaClient API.
 ```
 
 ## 3.8.0

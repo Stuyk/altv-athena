@@ -13,6 +13,8 @@ import { showNotification } from '../utility/notification';
 import * as math from '../utility/math';
 import { menus } from './consts/menus';
 import { constData } from './consts/dataConst';
+import { KeybindController } from '../events/keyup';
+import { KeyHeld } from '../events/keyHeld';
 
 export const AthenaClient = {
     camera: {
@@ -20,6 +22,10 @@ export const AthenaClient = {
         cinematic: CinematicCam,
     },
     data: constData,
+    events: {
+        keyHeld: KeyHeld,
+        keyBinds: KeybindController,
+    },
     math,
     menus,
     minimap: Minimap,
