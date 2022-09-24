@@ -235,6 +235,14 @@ export interface FactionCore {
      * @memberof Faction
      */
     type: string;
+
+    /**
+     * Faction Color
+     *
+     * @type {Color}
+     * @memberof Faction
+     */
+    color: Color;
 }
 
 export interface FactionStorage {

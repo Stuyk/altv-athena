@@ -43,7 +43,9 @@ export class FactionHandler {
     static factionTypes = {
         gang: 'GANG',
         neutral: 'NEUTRAL',
-        state: 'STATE'
+        state: 'STATE',
+        mechanic: 'MECHANIC',
+        medic: 'MEDIC'
     }
 
     /**
