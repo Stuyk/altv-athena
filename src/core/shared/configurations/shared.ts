@@ -11,9 +11,9 @@ export const SHARED_CONFIG = {
     // Max Vehicle Interaction Range
     MAX_VEHICLE_INTERACTION_RANGE: 2.5,
     // Voice
-    VOICE_ON: false,
+    VOICE_ON: true,
     // HUD
-    USE_24H_TIME_FORMAT: false,
+    USE_24H_TIME_FORMAT: true,
     // Idle Cam
-    DISABLE_IDLE_CAM: false,
+    DISABLE_IDLE_CAM: true,
 };
