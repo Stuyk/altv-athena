@@ -1,5 +1,7 @@
+import { init } from '@stuyk/ezmongodb';
 import * as alt from 'alt-client';
 import * as natives from 'natives';
+import { KeyHeld } from '../../../client/events/keyHeld';
 
 let FINGERPOINT_B_KEY = 66
 
@@ -12,16 +14,8 @@ let localPlayer = alt.Player.local;
 
 const Fingerpointing = {
 
-    registerEvents() {
-        alt.on('keydown', (key) => {
-            if (key !== FINGERPOINT_B_KEY) return;
-            this.start();
-        });
-
-        alt.on('keyup', (key) => {
-            if (key !== FINGERPOINT_B_KEY) return;
-            this.stop();
-        });
+    init() {
+        KeyHeld.register(FINGERPOINT_B_KEY, this.start(), this.stop());
     },
 
     async start() {
@@ -191,5 +185,7 @@ const Fingerpointing = {
                 }
             }, 50);
         });
-    },
+    }
 }
+
+Fingerpointing.init();
