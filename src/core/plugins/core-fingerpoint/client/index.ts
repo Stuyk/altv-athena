@@ -85,7 +85,7 @@ const Fingerpointing = {
     process() {
         if (!active) return;
 
-        let camRot = natives.getGameplayCamRot(2);
+        const camRot = natives.getGameplayCamRot(2);
         let camPitch = camRot.x - natives.getEntityPitch(localPlayer.scriptID);
 
         if (camPitch < -70.0) {
