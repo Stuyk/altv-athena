@@ -82,14 +82,12 @@ const Fingerpointing = {
         natives.clearPedSecondaryTask(localPlayer.scriptID);
     },
 
-    getRelativePitch() {
-        let camRot = natives.getGameplayCamRot(2);
-        return camRot.x - natives.getEntityPitch(localPlayer.scriptID);
-    },
-
     process() {
         if (!active) return;
-        let camPitch = Fingerpointing.getRelativePitch();
+
+        let camRot = natives.getGameplayCamRot(2);
+        let camPitch = camRot.x - natives.getEntityPitch(localPlayer.scriptID);
+
         if (camPitch < -70.0) {
             camPitch = -70.0;
         } else if (camPitch > 42.0) {
