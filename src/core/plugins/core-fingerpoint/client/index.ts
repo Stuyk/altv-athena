@@ -43,6 +43,7 @@ const Fingerpointing = {
                 24
             );
             cleanStart = true;
+            interval = alt.setInterval(Fingerpointing.process, 0);
         } catch (e) {
             alt.log(e);
         }
