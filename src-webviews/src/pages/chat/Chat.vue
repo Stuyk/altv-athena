@@ -22,6 +22,7 @@
                     type="text"
                     class="textbox pa-2"
                     v-model="userInput"
+                    tabindex="-1"
                     :style="getInputStyle"
                     placeholder="Say something... or use a command with /"
                     @input="handleInput"
