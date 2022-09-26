@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as natives from 'natives';
 import { KeyHeld } from '../../../client/events/keyHeld';
-import { loadAnimation, playAnimation } from '../../../client/systems/animations';
+import { loadAnimation } from '../../../client/systems/animations';
 
 let FINGERPOINT_B_KEY = 66
 
@@ -43,7 +43,6 @@ const Fingerpointing = {
                 24
             );
             cleanStart = true;
-            interval = alt.setInterval(Fingerpointing.process.bind(this), 0);
         } catch (e) {
             alt.log(e);
         }
@@ -95,6 +94,7 @@ const Fingerpointing = {
         } else if (camPitch > 42.0) {
             camPitch = 42.0;
         }
+
         camPitch = (camPitch + 70.0) / 112.0;
 
         let camHeading = natives.getGameplayCamRelativeHeading();
@@ -106,6 +106,7 @@ const Fingerpointing = {
         } else if (camHeading > 180.0) {
             camHeading = 180.0;
         }
+
         camHeading = (camHeading + 180.0) / 360.0;
 
         let coords = natives.getOffsetFromEntityInWorldCoords(
@@ -114,6 +115,7 @@ const Fingerpointing = {
             sinCamHeading * -0.2 + cosCamHeading * (0.4 * camHeading + 0.3),
             0.6
         );
+
         let ray = natives.startShapeTestCapsule(
             coords.x,
             coords.y,
@@ -126,6 +128,7 @@ const Fingerpointing = {
             localPlayer.scriptID,
             7
         );
+
         let [_, blocked, coords1, coords2, entity] = natives.getShapeTestResult(
             ray,
             false,
@@ -133,14 +136,17 @@ const Fingerpointing = {
             null,
             null
         );
+
         if (blocked && lastBlockDate === null) {
             lastBlockDate = Date.now();
         }
+
         natives.setTaskMoveNetworkSignalFloat(
             localPlayer.scriptID,
             'Pitch',
             camPitch
         );
+
         natives.setTaskMoveNetworkSignalFloat(
             localPlayer.scriptID,
             'Heading',
