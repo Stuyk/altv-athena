@@ -1,28 +1,28 @@
 import * as alt from 'alt-client';
 import * as natives from 'natives';
 
-let FINGERPOINT_KEY = 66
+let FINGERPOINT_B_KEY = 66
 
-export class Fingerpointing {
+let active: boolean = false;
+let interval: number = null;
+let cleanStart: boolean = false;
+let debounceTime: number = 150;
+let lastBlockDate: number = null;
+let localPlayer = alt.Player.local;
 
-    active: boolean = false;
-    interval: number = null;
-    cleanStart: boolean = false;
-    debounceTime: number = 150;
-    lastBlockDate: number = null;
-    localPlayer = alt.Player.local;
+const Fingerpointing = {
 
     registerEvents() {
         alt.on('keydown', (key) => {
-            if (key !== FINGERPOINT_KEY) return;
+            if (key !== FINGERPOINT_B_KEY) return;
             this.start();
         });
 
         alt.on('keyup', (key) => {
-            if (key !== FINGERPOINT_KEY) return;
+            if (key !== FINGERPOINT_B_KEY) return;
             this.stop();
         });
-    }
+    },
 
     async start() {
         if (this.active) return;
@@ -52,7 +52,7 @@ export class Fingerpointing {
         } catch (e) {
             alt.log(e);
         }
-    }
+    },
 
     stop() {
         if (!this.active) return;
@@ -85,12 +85,12 @@ export class Fingerpointing {
 
         natives.setPedConfigFlag(this.localPlayer.scriptID, 36, false);
         natives.clearPedSecondaryTask(this.localPlayer.scriptID);
-    }
+    },
 
     getRelativePitch() {
         let camRot = natives.getGameplayCamRot(2);
         return camRot.x - natives.getEntityPitch(this.localPlayer.scriptID);
-    }
+    },
 
     process() {
         if (!this.active) return;
@@ -166,7 +166,7 @@ export class Fingerpointing {
             'isFirstPerson',
             natives.getCamViewModeForContext(natives.getCamActiveViewModeContext()) === 4
         );
-    }
+    },
 
     isBlockingAllowed() {
         const isAllowed = Date.now() - this.lastBlockDate > this.debounceTime;
@@ -174,7 +174,7 @@ export class Fingerpointing {
             this.lastBlockDate = null;
         }
         return isAllowed;
-    }
+    },
 
     requestAnimDictPromise(dict) {
         natives.requestAnimDict(dict);
@@ -191,5 +191,5 @@ export class Fingerpointing {
                 }
             }, 50);
         });
-    }
+    },
 }
