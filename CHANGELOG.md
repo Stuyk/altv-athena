@@ -37,6 +37,9 @@ Add AthenaClient.events.keyBinds -> Add KeyBinds to the main AthenaClient API.
 Move z-index of chat-wrapper to 98; and move dev menu to 99 for localhost
 Added AthenaClient.sprite -> Stream .png images in-world based on position with auto-scaling.
 Created 'example-sprite' plugin for code references.
+AthenaClient.camera.target -> Used for the [E] interactions you see in-world
+AthenaClient.camera.target.addIgnoredEntity -> Lets you specify an entity handle to ignore interactions with
+AthenaClient.camera.target.removeIgnoredEntity -> Lets you specify an entity handle to remove from ignored interactions
 ```
 
 ## 3.8.0

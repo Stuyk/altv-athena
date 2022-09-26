@@ -16,11 +16,13 @@ import { constData } from './consts/dataConst';
 import { KeybindController } from '../events/keyup';
 import { KeyHeld } from '../events/keyHeld';
 import { Sprite } from '../rmlui/sprites';
+import { CameraTarget } from '../systems/cameraTarget';
 
 export const AthenaClient = {
     camera: {
         ped: PedEditCamera,
         cinematic: CinematicCam,
+        target: CameraTarget,
     },
     data: constData,
     events: {

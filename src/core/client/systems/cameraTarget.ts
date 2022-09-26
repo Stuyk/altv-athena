@@ -17,13 +17,14 @@ interface ClosestTarget {
     type?: 'npc' | 'player' | 'object' | 'vehicle';
 }
 
+const ignoredEntities: Array<number> = [];
 let displayLabel = `[~b~${String.fromCharCode(KEY_BINDS.INTERACT)}~w~]~n~.`;
 let temporaryLabel = null;
 let isProcessing = false;
 let closestTarget: ClosestTarget;
 
-class InternalFunctions {
-    static init() {
+const InternalFunctions = {
+    init() {
         Timer.createInterval(InternalFunctions.find, 250, 'cameraTarget.ts');
         alt.setInterval(() => {
             if (isAnyMenuOpen(true)) {
@@ -65,9 +66,8 @@ class InternalFunctions {
                 );
             }
         }, 0);
-    }
-
-    static find() {
+    },
+    find() {
         if (alt.Player.local.vehicle) {
             return;
         }
@@ -92,6 +92,14 @@ class InternalFunctions {
         }
 
         if (!raycastInfo.entityHit || !native.isEntityOnScreen(raycastInfo.entityHit)) {
+            closestTarget = null;
+            temporaryLabel = null;
+            isProcessing = false;
+            return;
+        }
+
+        const isIgnoredIndex = ignoredEntities.findIndex((x) => x === raycastInfo.entityHit);
+        if (isIgnoredIndex >= 0) {
             closestTarget = null;
             temporaryLabel = null;
             isProcessing = false;
@@ -136,21 +144,19 @@ class InternalFunctions {
         temporaryLabel = null;
         closestTarget = null;
         isProcessing = false;
-    }
-}
+    },
+};
 
-export class CameraTarget {
+export const CameraTarget = {
     /**
      * Returns information about what or who the player is looking at with their camera.
      *
      * @static
      * @return {(ClosestTarget | null)}
-     * @memberof CameraTarget
      */
-    static get(): ClosestTarget | null {
+    get(): ClosestTarget | null {
         return closestTarget;
-    }
-
+    },
     /**
      * Lets you override the display label for text.
      * Normally it's a '.' but you can set it to '' to hide it.
@@ -159,10 +165,9 @@ export class CameraTarget {
      * @param {string} label
      * @memberof CameraTarget
      */
-    static setDisplayLabel(label: string) {
+    setDisplayLabel(label: string) {
         displayLabel = label;
-    }
-
+    },
     /**
      * Overrides the label temporarily and resets after the player looks off of the object, vehicle, etc.
      *
@@ -170,9 +175,35 @@ export class CameraTarget {
      * @param {string} label
      * @memberof CameraTarget
      */
-    static setTemporaryLabel(label: string) {
+    setTemporaryLabel(label: string) {
         temporaryLabel = label;
-    }
-}
+    },
+    /**
+     * Adds an ignored entity; to prevent the CameraTarget from selecting it.
+     * Can be a player, vehicle, etc.
+     *
+     * @param {number} handle
+     */
+    addIgnoredEntity(handle: number) {
+        const index = ignoredEntities.findIndex((x) => x === handle);
+        if (index === -1) {
+            ignoredEntities.push(index);
+        }
+    },
+    /**
+     * Adds an ignored entity; to prevent the CameraTarget from selecting it.
+     * Can be a player, vehicle, etc.
+     *
+     * @param {number} handle
+     */
+    removeIgnoredEntity(handle: number) {
+        const index = ignoredEntities.findIndex((x) => x === handle);
+        if (index === -1) {
+            return;
+        }
+
+        ignoredEntities.splice(index, 1);
+    },
+};
 
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
