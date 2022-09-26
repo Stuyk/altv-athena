@@ -34,6 +34,9 @@ Fix streamer showing streamed items globablly if dimension set to zero. If set t
 Mark Objects in Streamer as Mission Entities when being deleted; then flag as no longer needed.
 Add AthenaClient.events.keyHeld -> Add functionality to a key when it is held down.
 Add AthenaClient.events.keyBinds -> Add KeyBinds to the main AthenaClient API.
+Move z-index of chat-wrapper to 98; and move dev menu to 99 for localhost
+Added AthenaClient.sprite -> Stream .png images in-world based on position with auto-scaling.
+Created 'example-sprite' plugin for code references.
 ```
 
 ## 3.8.0

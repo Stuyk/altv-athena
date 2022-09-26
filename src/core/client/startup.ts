@@ -17,8 +17,7 @@ import './menus/player';
 import './menus/vehicle';
 
 // rmlui
-import './rmlui/index';
-import './rmlui/input/index';
+import './rmlui/sprites/index';
 
 // Streamers
 import './streamers/item';

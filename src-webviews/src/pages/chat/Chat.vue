@@ -493,7 +493,7 @@ export default defineComponent({
     align-content: flex-start;
     box-sizing: border-box;
     overflow: hidden !important;
-    z-index: 99;
+    z-index: 98;
 }
 
 .chatbox {

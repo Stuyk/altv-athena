@@ -15,6 +15,7 @@ import { menus } from './consts/menus';
 import { constData } from './consts/dataConst';
 import { KeybindController } from '../events/keyup';
 import { KeyHeld } from '../events/keyHeld';
+import { Sprite } from '../rmlui/sprites';
 
 export const AthenaClient = {
     camera: {
@@ -32,6 +33,7 @@ export const AthenaClient = {
     notification: showNotification,
     raycast: Raycast,
     screen: screenConst,
+    sprite: Sprite,
     shard: Shard,
     sound: soundConst,
     spinner: Spinner,
