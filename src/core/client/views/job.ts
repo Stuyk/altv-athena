@@ -48,8 +48,13 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static accept() {
-        alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT);
+    static accept(amount?: number) {
+        if (amount === undefined) {
+            alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT);
+        } else {
+            alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT, amount);
+        }
+
         alt.toggleGameControls(true);
         InternalFunctions.close(true, true);
     }

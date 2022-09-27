@@ -116,18 +116,19 @@ export class FuelStationSystem {
             }
         }
 
+        missingFuel = Math.floor(missingFuel);
+
         const trigger: JobTrigger = {
             header: 'Fuel Vehicle',
             acceptCallback: FuelStationSystem.start,
             cancelCallback: FuelStationSystem.cancel,
             image: '../../assets/images/refuel.jpg',
-            summary: `Refill ${missingFuel.toFixed(2)}% of fuel in the ${
-                closestVehicle.data.model
-            } for $${maximumCost.toFixed(2)}?`,
+            summary: `How much % of fuel do you want to refill in the ${closestVehicle.data.model}, if it costs $${FUEL_CONFIG.FUEL_PRICE} each?`,
+            maxAmount: missingFuel
         };
 
         fuelInfo[player.id] = {
-            cost: maximumCost,
+            cost: FUEL_CONFIG.FUEL_PRICE,
             fuel: missingFuel,
             vehicle: closestVehicle,
             timeout: Date.now() + FUEL_CONFIG.FUEL_RESET_TIMEOUT,
@@ -140,7 +141,7 @@ export class FuelStationSystem {
      * Start the fuel process for the given player.
      * @param {alt.Player} player - alt.Player - The player who started the refueling.
      */
-    static start(player: alt.Player) {
+    static start(player: alt.Player, fuelAmount: number) {
         if (!player || !player.valid) {
             return;
         }
@@ -164,18 +165,19 @@ export class FuelStationSystem {
             return;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, data.cost)) {
-            Athena.player.emit.notification(player, `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${data.cost}`);
+        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, data.cost * fuelAmount)) {
+            Athena.player.emit.notification(player, `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${data.cost * fuelAmount}`);
             delete fuelInfo[id];
             return;
         }
 
+        let totalRefuelingTime = fuelAmount * FUEL_CONFIG.FUEL_TIME;
         data.vehicle.isRefueling = true;
         Athena.player.emit.createProgressBar(player, {
             uid: `FUEL-${player.data._id.toString()}`,
             color: new alt.RGBA(255, 255, 255, 255),
             distance: 15,
-            milliseconds: 10000,
+            milliseconds: totalRefuelingTime,
             position: data.vehicle.pos,
             text: LOCALE_FUEL_STATIONS.FUELING_PROGRESS_BAR,
         });
@@ -185,18 +187,18 @@ export class FuelStationSystem {
                 Athena.player.emit.removeProgressBar(player, `FUEL-${player.data._id.toString()}`);
                 Athena.player.emit.notification(
                     player,
-                    `${LOCALE_FUEL_STATIONS.FUEL_COST}${data.cost.toFixed(2)} | ${data.fuel.toFixed(2)}`,
+                    `${LOCALE_FUEL_STATIONS.FUEL_COST}${(data.cost * fuelAmount).toFixed(2)} | ${fuelAmount.toFixed(2)}`,
                 );
             }
 
             if (data.vehicle && data.vehicle.valid) {
                 data.vehicle.isRefueling = false;
-                data.vehicle.data.fuel += data.fuel;
+                data.vehicle.data.fuel += fuelAmount;
                 Athena.vehicle.funcs.save(data.vehicle, { fuel: data.vehicle.data.fuel });
             }
 
             delete fuelInfo[id];
-        }, 10000);
+        }, totalRefuelingTime);
     }
 
     /**
