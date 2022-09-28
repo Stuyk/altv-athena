@@ -16,6 +16,18 @@ async function handleConnectionComplete() {
     native.freezeEntityPosition(alt.Player.local.scriptID, true);
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
 
+    /**
+     * Prevent player only able to only hold 250 shots etc
+     * tested ...
+     */
+    alt.setStat("stamina", 200);
+    alt.setStat("strength", 200);
+    alt.setStat("lung_capacity", 200);
+    alt.setStat("wheelie_ability", 200);
+    alt.setStat("flying_ability", 200);
+    alt.setStat("shooting_ability", 200);
+    alt.setStat("stealth_ability", 200);
+
     if (SHARED_CONFIG.DISABLE_IDLE_CAM) {
         alt.setConfigFlag("DISABLE_IDLE_CAMERA", true);
     }
