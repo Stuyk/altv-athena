@@ -14,6 +14,7 @@ import Actions from './actions/Actions.vue';
 import AthenaLogo from './athenaLogo/AthenaLogo.vue';
 import TestDrop from './testDrop/TestDrop.vue';
 import WheelMenu from './wheelMenu/WheelMenu.vue';
+import StateTest from './stateTest/StateTest.vue';
 
 export const CORE_IMPORTS = {
     Actions: shallowRef(Actions),
@@ -26,6 +27,7 @@ export const CORE_IMPORTS = {
     Inventory: shallowRef(Inventory),
     Job: shallowRef(Job),
     Storage: shallowRef(Storage),
+    StateTest: shallowRef(StateTest),
     MultiPageExample: shallowRef(MultiPageExample),
     TestDrop: shallowRef(TestDrop),
     WheelMenu: shallowRef(WheelMenu),
