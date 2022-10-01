@@ -177,6 +177,15 @@ const Emit = {
     },
 
     /**
+     * Create a subtitle on the bottom of the screen.
+     * @param {alt.Player} player
+     * @param {string} text
+     */
+     createMissionText(player: alt.Player, text: string) {
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text);
+    },
+
+    /**
      * Create a progress bar that eventually ends itself.
      * @param {alt.Player} player
      * @param {ProgressBar} progressbar
