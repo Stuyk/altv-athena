@@ -4,13 +4,17 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
 /**
  * Draw mission text on the bottom of screen
  * @param  {string} text
+ * @param  {number} duration
 
  */
-export function drawMissionText(text: string) {
+export function drawMissionText(text: string, duration?: number) {
     native.clearPrints();
     native.beginTextCommandPrint('STRING');
     native.addTextComponentSubstringPlayerName(text);
-    native.endTextCommandPrint(100 * text.length, true);
+    if (typeof duration !== 'number') {
+        duration = text.length * 100;
+    }
+    native.endTextCommandPrint(duration, true);
 }
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, drawMissionText);

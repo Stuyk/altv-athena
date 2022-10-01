@@ -177,12 +177,13 @@ const Emit = {
     },
 
     /**
-     * Create a subtitle on the bottom of the screen.
+     * Create a subtitle on the bottom of the screen with optional duration.
      * @param {alt.Player} player
      * @param {string} text
+     * @param {number} duration
      */
-     createMissionText(player: alt.Player, text: string) {
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text);
+     createMissionText(player: alt.Player, text: string, duration?: number) {
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text, duration);
     },
 
     /**
