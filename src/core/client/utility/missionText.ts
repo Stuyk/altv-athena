@@ -7,7 +7,7 @@ import { SYSTEM_EVENTS } from '../../shared/enums/system';
  * @param  {number} duration
 
  */
-export function drawMissionText(text: string, duration?: number) {
+export function drawMissionText(text: string, duration: number | undefined = undefined) {
     native.clearPrints();
     native.beginTextCommandPrint('STRING');
     native.addTextComponentSubstringPlayerName(text);
