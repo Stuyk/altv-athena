@@ -47,20 +47,6 @@ export interface Blip {
     scale: number;
 
     /**
-     * Another identifier field for the blip.
-     * 1 = No Text on blip or Distance
-     * 2 = Text on blip
-     * 3 = No text, just distance
-     * 7 = Other players %name% (%distance%)
-     * 10 = Property
-     * 11 = Occupied property
-     * 12+ No Text on blip or distance
-     * @type {number}
-     * @memberof Blip
-     */
-     category?: number;
-
-    /**
      * An identifier for the blip.
      * @type {string}
      * @memberof Blip
