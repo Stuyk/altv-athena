@@ -69,6 +69,7 @@ import './utility/sandbox';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';
+import './utility/missionText';
 
 // Views
 import './views/actions';
