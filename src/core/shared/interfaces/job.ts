@@ -15,6 +15,7 @@ enum ObjectiveCriteria {
     IN_JOB_VEHICLE = 16,
     FAIL_ON_JOB_VEHICLE_DESTROY = 32,
     JOB_VEHICLE_NEARBY = 64,
+    VEHICLE_ENGINE_OFF = 128
 }
 
 enum ObjectiveType {

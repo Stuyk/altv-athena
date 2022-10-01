@@ -95,6 +95,11 @@ class ObjectiveController {
             }
         }
 
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.VEHICLE_ENGINE_OFF)) {
+            const engineOn = native.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+            if (engineOn) return false;
+        }
+
         return true;
     }
 
