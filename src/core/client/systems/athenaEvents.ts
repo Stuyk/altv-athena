@@ -11,7 +11,7 @@ let interval: number;
 let isUpdatingWaypoint = false;
 let lastWaypointData: Vector3;
 
-export const AthenaEventsConst = {
+const AthenaEventsConst = {
     init(): void {
         if (interval) {
             Timer.clearInterval(interval);
