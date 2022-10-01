@@ -11,15 +11,15 @@ let interval: number;
 let isUpdatingWaypoint = false;
 let lastWaypointData: Vector3;
 
-export class AthenaEvents {
-    static init() {
+export const AthenaEventsConst = {
+    init(): void {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
         }
 
         interval = Timer.createInterval(AthenaEvents.tick, 250, 'athenaEvents.ts');
-    }
+    },
 
     /**
      * Sends an event to the server when the local player's waypoint is updated.
@@ -27,7 +27,7 @@ export class AthenaEvents {
      * @return {*}
      * @memberof AthenaEvents
      */
-    static async updateWaypoint() {
+    async updateWaypoint(): Promise<void> {
         if (isUpdatingWaypoint) {
             return;
         }
@@ -108,9 +108,9 @@ export class AthenaEvents {
         native.requestCollisionAtCoord(alt.Player.local.pos.x, alt.Player.local.pos.y, alt.Player.local.pos.z);
         native.clearFocus();
         isUpdatingWaypoint = false;
-    }
+    },
 
-    static tick() {
+    tick(): void {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -119,6 +119,10 @@ export class AthenaEvents {
             AthenaEvents.updateWaypoint();
         }
     }
+}
+
+export const AthenaEvents = {
+    ...AthenaEventsConst
 }
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, AthenaEvents.init);
