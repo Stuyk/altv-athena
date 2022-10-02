@@ -425,7 +425,7 @@ export class Job {
 
         // Check if is engine on in vehicle
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.VEHICLE_ENGINE_OFF)) {
-            if (this.player && this.player.vehicle.engineOn) {
+            if (!this.player || !this.player.vehicle || this.player.vehicle.engineOn) {
                 return false;
             }
         }
