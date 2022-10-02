@@ -11,6 +11,10 @@ function create(blipData: Blip): alt.PointBlip {
     blip.shortRange = blipData.shortRange;
     blip.name = blipData.text;
 
+    if (blipData.category) {
+        blip.category = blipData.category;
+    }
+    
     if (blipData.uid) {
         blip['uid'] = blipData.uid;
     }
