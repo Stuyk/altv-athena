@@ -143,6 +143,43 @@ export default class Raycast {
      * @static
      * @param {boolean} [useShapeTest=false]
      * @param {number} [radius=5]
+     * @return {*}  {{ didComplete: boolean; didHit?: boolean; position?: Vector3; entityHit?: number }}
+     * @memberof Raycast
+     */
+     static simpleRaycastPlayersView(
+        flags: number = -1,
+        maxDistance = 25,
+        useShapeTest: boolean = true,
+        radius: number = 2,
+    ): { didComplete: boolean; didHit?: boolean; position?: Vector3; entityHit?: number } {
+        const start = alt.Player.local.pos;
+        const forwardVector = native.getEntityForwardVector(alt.Player.local.scriptID);
+        const end = {
+            x: start.x + forwardVector.x * maxDistance,
+            y: start.y + forwardVector.y * maxDistance,
+            z: start.z + forwardVector.z * maxDistance,
+        };
+
+        const [didComplete, didHit, position, surfaceNormal, entityHit] = Raycast.performRaycast(
+            start,
+            end,
+            flags,
+            radius,
+            useShapeTest,
+        );
+
+        if (!didComplete || !didHit) {
+            return { didComplete: false };
+        }
+
+        return { didComplete: true, didHit, position, entityHit };
+    }
+
+    /**
+     * Perform Raycast in the player's facing direction and return position.
+     * @static
+     * @param {boolean} [useShapeTest=false]
+     * @param {number} [radius=5]
      * @return {(Vector3 | null)}
      * @memberof Raycast
      */
