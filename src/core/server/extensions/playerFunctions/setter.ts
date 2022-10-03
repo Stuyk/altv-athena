@@ -120,16 +120,16 @@ const Setter = {
  * @param callback - The function that will be called when the player's property is set.
  */
 function override<Key extends keyof typeof Setter>(functionName: Key, callback: typeof Setter[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.setter does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Setter & { override?: typeof override } = {
+const funcs: typeof Setter & { override?: typeof override } = {
     ...Setter,
     override,
 };
 
-export default exports;
+export default funcs;

@@ -297,16 +297,16 @@ const Sync = {
 };
 
 function override<Key extends keyof typeof Sync>(functionName: Key, callback: typeof Sync[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.sync does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Sync & { override?: typeof override } = {
+const funcs: typeof Sync & { override?: typeof override } = {
     ...Sync,
     override,
 };
 
-export default exports;
+export default funcs;

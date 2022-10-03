@@ -123,22 +123,22 @@ const Getter = {
 };
 
 /**
- * It takes a function name and a callback, and if the function name exists in the exports object, it
+ * It takes a function name and a callback, and if the function name exists in the funcs object, it
  * overrides it with the callback
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the player calls the getter.
  */
 function override<Key extends keyof typeof Getter>(functionName: Key, callback: typeof Getter[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.get does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Getter & { override?: typeof override } = {
+const funcs: typeof Getter & { override?: typeof override } = {
     ...Getter,
     override,
 };
 
-export default exports;
+export default funcs;
