@@ -32,6 +32,14 @@ export const enum VEHICLE_TYPE {
     TRAIN = 'train',
 }
 
+export enum FUEL_TYPE {
+    NONE = 'none',
+    GAS = 'gas',
+    DIESEL = 'diesel',
+    ELECTRIC = 'electric',
+    JET_FUEL = 'jetfuel',
+}
+
 export function isVehicleType(type: string, vehicleType: VEHICLE_TYPE): boolean {
     return type === vehicleType;
 }

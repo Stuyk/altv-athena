@@ -1,4 +1,5 @@
 import { Vehicle_Behavior } from '../enums/vehicle';
+import { FUEL_TYPE } from '../enums/vehicleTypeFlags';
 import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnershipFlags';
 import IVehicleDamage from './iVehicleDamage';
 import IVehicleTuning from './iVehicleTuning';
@@ -109,6 +110,20 @@ export interface IVehicle {
      * @memberof IVehicle
      */
     fuel?: number;
+
+    /**
+     * The type of fuel the vehicle uses
+     * @type {FUEL_TYPE}
+     * @memberof VehicleInfo
+     */
+    fuelType: FUEL_TYPE;
+
+    /**
+     * The total tanksize of the vehicle used for fuel cost calculations
+     * @type {number}
+     * @memberof VehicleInfo
+     */
+    fuelTankSize?: number;
 
     /**
      * The outside health of the vehicle.

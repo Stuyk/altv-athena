@@ -1,4 +1,4 @@
-import { VEHICLE_TYPE, VEHICLE_CLASS } from '../enums/vehicleTypeFlags';
+import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '../enums/vehicleTypeFlags';
 import { VehicleInfo } from '../interfaces/vehicleInfo';
 
 /**
@@ -16,7 +16,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 12000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dinghy 2',
@@ -25,7 +27,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dinghy 3',
@@ -34,7 +38,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dinghy 4',
@@ -43,7 +49,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 12000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Marquis',
@@ -52,7 +60,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 120000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seashark',
@@ -61,7 +71,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seashark 2',
@@ -70,7 +82,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seashark 3',
@@ -79,7 +93,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 8000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Squalo',
@@ -88,7 +104,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 65000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Suntrap',
@@ -97,7 +115,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 55000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tropic',
@@ -106,7 +126,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 50000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tropic 2',
@@ -115,7 +137,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: true,
         price: 50000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Speeder',
@@ -124,7 +148,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Speeder 2',
@@ -133,7 +159,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Toro',
@@ -142,7 +170,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Toro 2',
@@ -151,7 +181,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jetmax',
@@ -160,7 +192,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPEED_BOAT,
         sell: true,
         price: 95000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Benson',
@@ -169,7 +203,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Biff',
@@ -178,7 +214,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Cerberus',
@@ -187,7 +225,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Cerberus 2',
@@ -196,7 +236,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Cerberus 3',
@@ -205,7 +247,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Hauler',
@@ -214,7 +258,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 85000,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Hauler 2',
@@ -223,7 +270,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Mule',
@@ -232,7 +282,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Mule 2',
@@ -241,7 +293,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Mule 3',
@@ -250,7 +304,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Mule 4',
@@ -259,7 +315,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Packer',
@@ -268,7 +326,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 135000,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Phantom',
@@ -277,7 +338,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: true,
         price: 150000,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Phantom 2',
@@ -286,7 +350,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Phantom 3',
@@ -295,7 +362,10 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
+        fuelTankSize: 511,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Pounder',
@@ -304,7 +374,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Pounder 2',
@@ -313,7 +385,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Stockade',
@@ -322,7 +396,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Stockade 3',
@@ -331,7 +407,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Terabyte',
@@ -340,7 +418,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMMERCIAL,
         sell: false,
         price: 999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Blista',
@@ -349,7 +429,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 12500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Brioso',
@@ -358,7 +440,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 11000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dilettante',
@@ -367,7 +451,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 8000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Issi 2',
@@ -376,7 +462,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 16000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Issi 3',
@@ -385,7 +473,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Issi 4',
@@ -394,7 +484,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Issi 5',
@@ -403,7 +495,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Panto',
@@ -412,7 +506,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 8000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Prairie',
@@ -421,7 +517,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rhapsody',
@@ -430,7 +528,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 16500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cog Cabrio',
@@ -439,7 +539,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Exemplar',
@@ -448,7 +550,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 34000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'F620',
@@ -457,7 +561,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 38000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Felon',
@@ -466,7 +572,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 36000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Felon 2',
@@ -475,7 +583,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jackal',
@@ -484,7 +594,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Oracle',
@@ -493,7 +605,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 44000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Oracle 2',
@@ -502,7 +616,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sentinel',
@@ -511,7 +627,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sentinel 2',
@@ -520,7 +638,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Windsor',
@@ -529,7 +649,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 52000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Windsor 2',
@@ -538,7 +660,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 58000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zion',
@@ -547,7 +671,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 33000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zion 2',
@@ -556,7 +682,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BMX',
@@ -565,7 +693,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 250,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Cruiser',
@@ -574,7 +704,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 150,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Fixter',
@@ -583,7 +715,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 350,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Scorcher',
@@ -592,7 +726,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 75,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tribike',
@@ -601,7 +737,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 450,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tribike 2',
@@ -610,7 +748,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 500,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tribike 3',
@@ -619,7 +759,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.CYCLE,
         sell: true,
         price: 550,
+        seats: 2,
         storage: null,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Dilettante 2',
@@ -628,7 +770,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ambulance',
@@ -637,7 +781,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FBI',
@@ -646,7 +792,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FBI 2',
@@ -655,7 +803,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Firetruck',
@@ -664,7 +814,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Life Guard',
@@ -673,7 +825,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Prisoner Bus',
@@ -682,7 +836,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police',
@@ -691,7 +847,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police 2',
@@ -700,7 +858,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police 3',
@@ -709,7 +869,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police 4',
@@ -718,7 +880,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Bike',
@@ -727,7 +891,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Maverick',
@@ -736,7 +902,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Police Old 1',
@@ -745,7 +913,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Old 2',
@@ -754,7 +924,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Van',
@@ -763,7 +935,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Ranger',
@@ -772,7 +946,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 9,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Police Predator',
@@ -781,7 +957,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Riot',
@@ -790,7 +968,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 9,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Riot 2',
@@ -799,7 +979,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 7,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sheriff',
@@ -808,7 +990,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sheriff 2',
@@ -817,7 +1001,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.EMERGENCY,
         sell: false,
         price: 999999999,
+        seats: 9,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bulldozer',
@@ -826,7 +1012,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cutter',
@@ -835,7 +1023,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dump',
@@ -844,7 +1034,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Flatbed',
@@ -853,7 +1045,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: true,
         price: 125000,
+        seats: 3,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Guardian',
@@ -862,7 +1056,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 7,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Handler',
@@ -871,7 +1067,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mixer',
@@ -880,7 +1078,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mixer 2',
@@ -889,7 +1089,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rubble',
@@ -898,7 +1100,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tip Truck',
@@ -907,7 +1111,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tip Truck 2',
@@ -916,7 +1122,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.INDUSTRIAL,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Akula',
@@ -925,7 +1133,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Annihilator',
@@ -934,7 +1144,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Buzzard',
@@ -943,7 +1155,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Buzzard 2',
@@ -952,7 +1166,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cargobob',
@@ -961,7 +1177,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cargobob 2',
@@ -970,7 +1188,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cargobob 3',
@@ -979,7 +1199,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cargobob 4',
@@ -988,7 +1210,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Frogger',
@@ -997,7 +1221,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Frogger 2',
@@ -1006,7 +1232,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Hunter',
@@ -1015,7 +1243,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Valkyrie',
@@ -1024,7 +1254,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Valkyrie 2',
@@ -1033,7 +1265,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Skylift',
@@ -1042,7 +1276,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Savage',
@@ -1051,7 +1287,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'APC',
@@ -1060,7 +1298,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Barracks',
@@ -1069,7 +1309,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Barracks 2',
@@ -1078,7 +1320,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Barracks 3',
@@ -1087,7 +1331,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Barrage',
@@ -1096,7 +1342,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Chernobog',
@@ -1105,7 +1353,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Crusader',
@@ -1114,7 +1364,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Halftrack',
@@ -1123,7 +1375,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Khanjali',
@@ -1132,7 +1386,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Rhino',
@@ -1141,7 +1397,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Scarab',
@@ -1150,7 +1408,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Scarab 2',
@@ -1159,7 +1419,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Scarab 3',
@@ -1168,7 +1430,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Thruster',
@@ -1177,7 +1441,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Trailer Small 2',
@@ -1186,7 +1452,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Insurgent',
@@ -1195,7 +1463,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Insurgent 2',
@@ -1204,7 +1474,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Insurgent 3',
@@ -1213,7 +1485,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Menacer',
@@ -1222,7 +1496,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nightshark',
@@ -1231,7 +1507,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Technical',
@@ -1240,7 +1518,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Technical 2',
@@ -1249,7 +1529,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Technical 3',
@@ -1258,7 +1540,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bombushka',
@@ -1267,7 +1551,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Besra',
@@ -1276,7 +1562,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cargo Plane',
@@ -1285,7 +1573,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cuban 800',
@@ -1294,7 +1584,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Cuban 800',
@@ -1303,7 +1595,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Hydra',
@@ -1312,7 +1606,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Jet',
@@ -1321,7 +1617,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Lazer',
@@ -1330,7 +1628,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Mogul',
@@ -1339,7 +1639,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Molotok',
@@ -1348,7 +1650,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Nokota',
@@ -1357,7 +1661,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Pyro',
@@ -1366,7 +1672,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Rogue',
@@ -1375,7 +1683,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Starling',
@@ -1384,7 +1694,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Strikeforce',
@@ -1393,7 +1705,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Titan',
@@ -1402,7 +1716,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Tula',
@@ -1411,7 +1727,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Volatol',
@@ -1420,7 +1738,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Akuma',
@@ -1429,7 +1749,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 31000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Avarus',
@@ -1438,7 +1760,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bagger',
@@ -1447,7 +1771,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 19500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bati',
@@ -1456,7 +1782,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bati 2',
@@ -1465,7 +1793,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BF400',
@@ -1474,7 +1804,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Carbon RS',
@@ -1483,7 +1815,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Chimera',
@@ -1492,7 +1826,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cliffhanger',
@@ -1501,7 +1837,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Daemon',
@@ -1510,7 +1848,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Daemon 2',
@@ -1519,7 +1859,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18500,
+        seats: 3,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Defiler',
@@ -1528,7 +1870,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deathbike',
@@ -1537,7 +1881,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deathbike 2',
@@ -1546,7 +1892,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deathbike 3',
@@ -1555,7 +1903,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Diablous',
@@ -1564,7 +1914,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 23000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Diablous 2',
@@ -1573,7 +1925,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Double',
@@ -1582,7 +1936,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Enduro',
@@ -1591,7 +1947,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 21000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Esskey',
@@ -1600,7 +1958,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faggio',
@@ -1609,7 +1969,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 100,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faggio 2',
@@ -1618,7 +1980,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 5000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faggio 3',
@@ -1627,7 +1991,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 8500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FCR',
@@ -1636,7 +2002,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FCR 2',
@@ -1645,7 +2013,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 14000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gargoyle',
@@ -1654,7 +2024,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hakuchou',
@@ -1663,7 +2035,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 65000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hakuchou 2',
@@ -1672,7 +2046,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 65800,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hexer',
@@ -1681,7 +2057,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'innovation',
@@ -1690,7 +2068,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Lectro',
@@ -1699,7 +2079,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 55000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Manchez',
@@ -1708,7 +2090,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nemesis',
@@ -1717,7 +2101,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nightblade',
@@ -1726,7 +2112,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 33000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Oppressor',
@@ -1735,7 +2123,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Oppressor 2',
@@ -1744,7 +2134,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'PCJ',
@@ -1753,7 +2145,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ratbike',
@@ -1762,7 +2156,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18900,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ruffian',
@@ -1771,7 +2167,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 44000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'R Rocket',
@@ -1780,7 +2178,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 75000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Sanchez',
@@ -1789,7 +2189,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sanchez 2',
@@ -1798,7 +2200,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 12500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sanctus',
@@ -1807,7 +2211,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Shotaro',
@@ -1816,7 +2222,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 150000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sovereign',
@@ -1825,7 +2233,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Thrust',
@@ -1834,7 +2244,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 37000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Vader',
@@ -1843,7 +2255,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vindicator',
@@ -1852,7 +2266,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 38600,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vortex',
@@ -1861,7 +2277,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 41000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Wolfsbane',
@@ -1870,7 +2288,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 43000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zombie A',
@@ -1879,7 +2299,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 13000,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zombie B',
@@ -1888,7 +2310,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 13500,
+        seats: 2,
         storage: 4,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blade',
@@ -1897,7 +2321,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buccaneer',
@@ -1906,7 +2332,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buccaneer 2',
@@ -1915,7 +2343,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Chino',
@@ -1924,7 +2354,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Chino 2',
@@ -1933,7 +2365,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Clique',
@@ -1942,7 +2376,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Coquette 3',
@@ -1951,7 +2387,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deviant',
@@ -1960,7 +2398,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 33000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator',
@@ -1969,7 +2409,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 68000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 2',
@@ -1978,7 +2420,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 3',
@@ -1987,7 +2431,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 4',
@@ -1996,7 +2442,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 5',
@@ -2005,7 +2453,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 6',
@@ -2014,7 +2464,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dukes',
@@ -2023,7 +2475,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dukes 2',
@@ -2032,7 +2486,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faction',
@@ -2041,7 +2497,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faction 2',
@@ -2050,7 +2508,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Faction 3',
@@ -2059,7 +2519,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gauntlet',
@@ -2068,7 +2530,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 60000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gauntlet 2',
@@ -2077,7 +2541,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gauntlet 3',
@@ -2086,7 +2552,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gauntlet 4',
@@ -2095,7 +2563,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hermes',
@@ -2104,7 +2574,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 15000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hotknife',
@@ -2113,7 +2585,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Impaler',
@@ -2122,7 +2596,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Impaler 2',
@@ -2131,7 +2607,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Impaler 3',
@@ -2140,7 +2618,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Impaler 4',
@@ -2149,7 +2629,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Imperator',
@@ -2158,7 +2640,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 29000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Imperator 2',
@@ -2167,7 +2651,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Imperator 3',
@@ -2176,7 +2662,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Lurcher',
@@ -2185,7 +2673,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 38000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Moonbeam',
@@ -2194,7 +2684,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Moonbeam 2',
@@ -2203,7 +2695,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nightshade',
@@ -2212,7 +2706,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Peyote 2',
@@ -2221,7 +2717,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Phoenix',
@@ -2230,7 +2728,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Picador',
@@ -2239,7 +2739,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ratloader',
@@ -2248,7 +2750,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ratloader 2',
@@ -2257,7 +2761,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ruiner',
@@ -2266,7 +2772,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 16000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ruiner 2',
@@ -2275,7 +2783,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ruiner 3',
@@ -2284,7 +2794,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sabre GT',
@@ -2293,7 +2805,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sabre GT 2',
@@ -2302,7 +2816,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 31500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan',
@@ -2311,7 +2827,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan 2',
@@ -2320,7 +2838,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan 3',
@@ -2329,7 +2849,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan 4',
@@ -2338,7 +2860,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan 5',
@@ -2347,7 +2871,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamvan 6',
@@ -2356,7 +2882,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stalion',
@@ -2365,7 +2893,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 21000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stallion 2',
@@ -2374,7 +2904,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tampa',
@@ -2383,7 +2915,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 23500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tampa 3',
@@ -2392,7 +2926,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tulip',
@@ -2401,7 +2937,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vamos',
@@ -2410,7 +2948,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 19500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vigero',
@@ -2419,7 +2959,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Virgo',
@@ -2428,7 +2970,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Virgo 2',
@@ -2437,7 +2981,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Virgo 3',
@@ -2446,7 +2992,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Voodoo',
@@ -2455,7 +3003,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Voodoo2',
@@ -2464,7 +3014,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 2500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Yosemite',
@@ -2473,7 +3025,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 13500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BF Injection',
@@ -2482,7 +3036,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 15600,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bifta',
@@ -2491,7 +3047,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 13000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blazer',
@@ -2500,7 +3058,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 14500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blazer 2',
@@ -2509,7 +3069,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 16000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blazer 3',
@@ -2518,7 +3080,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blazer 4',
@@ -2527,7 +3091,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blazer5',
@@ -2536,7 +3102,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bodhi 2',
@@ -2545,7 +3113,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 17500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Brawler',
@@ -2554,7 +3124,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 95000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bruiser',
@@ -2563,7 +3135,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bruiser 2',
@@ -2572,7 +3146,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bruiser 3',
@@ -2581,7 +3157,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Caracara 2',
@@ -2590,7 +3168,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 55000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'DLoader',
@@ -2599,7 +3179,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 13500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dubsta3',
@@ -2608,7 +3190,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dune',
@@ -2617,7 +3201,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dune 2',
@@ -2626,7 +3212,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dune 3',
@@ -2635,7 +3223,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dune 4',
@@ -2644,7 +3234,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dune 5',
@@ -2653,7 +3245,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Free Crawler',
@@ -2662,7 +3256,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 122000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hellion',
@@ -2671,7 +3267,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 125000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Kalahari',
@@ -2680,7 +3278,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Marshall',
@@ -2689,7 +3289,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mesa3',
@@ -2698,7 +3300,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 145000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Monster',
@@ -2707,7 +3311,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Monster 3',
@@ -2716,7 +3322,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Monster 4',
@@ -2725,7 +3333,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Monster 5',
@@ -2734,7 +3344,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rancher XL',
@@ -2743,7 +3355,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rancher XL 2',
@@ -2752,7 +3366,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rebel',
@@ -2761,7 +3377,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 18000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rebel 2',
@@ -2770,7 +3388,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Riata',
@@ -2779,7 +3399,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 28500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sand King',
@@ -2788,7 +3410,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 44000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sand King 2',
@@ -2797,7 +3421,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 55000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Trophy Truck',
@@ -2806,7 +3432,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Trophy Truck 2',
@@ -2815,7 +3443,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Havok',
@@ -2824,7 +3454,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Maverick',
@@ -2833,7 +3465,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Sea Sparrow',
@@ -2842,7 +3476,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 250000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Super Volito',
@@ -2851,7 +3487,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Super Volito',
@@ -2860,7 +3498,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Swift',
@@ -2869,7 +3509,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Swift 2',
@@ -2878,7 +3520,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 750000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Volatus',
@@ -2887,7 +3531,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 900000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Alphaz1',
@@ -2896,7 +3542,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Avenger',
@@ -2905,7 +3553,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Blimp',
@@ -2914,7 +3564,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Blimp 2',
@@ -2923,7 +3575,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Blimp 3',
@@ -2932,7 +3586,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Dodo',
@@ -2941,7 +3597,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 250000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Duster',
@@ -2950,7 +3608,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 175000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Luxor',
@@ -2959,7 +3619,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 800000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Luxor 2',
@@ -2968,7 +3630,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 1500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Mammatus',
@@ -2977,7 +3641,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 385000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Microlight',
@@ -2986,7 +3652,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 150000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Miljet',
@@ -2995,7 +3663,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 850000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Nimbus',
@@ -3004,7 +3674,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 925000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Seabreeze',
@@ -3013,7 +3685,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 225000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Shamal',
@@ -3022,7 +3696,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 900000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Velum',
@@ -3031,7 +3707,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 325000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Velum2',
@@ -3040,7 +3718,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Vestra',
@@ -3049,7 +3729,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 325000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Baller',
@@ -3058,7 +3740,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 62000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 2',
@@ -3067,7 +3751,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 65000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 3',
@@ -3076,7 +3762,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 4',
@@ -3085,7 +3773,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 5',
@@ -3094,7 +3784,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 6',
@@ -3103,7 +3795,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BJXL',
@@ -3112,7 +3806,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 75000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cavalcade',
@@ -3121,7 +3817,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 72000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cavalcade 2',
@@ -3130,7 +3828,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 82000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Contender',
@@ -3139,7 +3839,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 65800,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dubsta',
@@ -3148,7 +3850,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 120000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dubsta 2',
@@ -3157,7 +3861,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FQ2',
@@ -3166,7 +3872,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 70000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Granger',
@@ -3175,7 +3883,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 63000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gresley',
@@ -3184,7 +3894,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 61000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Habanero',
@@ -3193,7 +3905,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 72000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Huntley',
@@ -3202,7 +3916,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 88000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Landstalker',
@@ -3211,7 +3927,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 58000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mesa',
@@ -3220,7 +3938,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 59000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mesa 2',
@@ -3229,7 +3949,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Novak',
@@ -3238,7 +3960,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 92000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Patriot',
@@ -3247,7 +3971,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Patriot 2',
@@ -3256,7 +3982,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Radi',
@@ -3265,7 +3993,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 78000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rocoto',
@@ -3274,7 +4004,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 68000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seminole',
@@ -3283,7 +4015,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 61000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Serrano',
@@ -3292,7 +4026,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 63000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Toros',
@@ -3301,7 +4037,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 85000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'XLS',
@@ -3310,7 +4048,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: true,
         price: 73000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'XLS2',
@@ -3319,7 +4059,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'ASEA',
@@ -3328,7 +4070,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Asea 2',
@@ -3337,7 +4081,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Asterope',
@@ -3346,7 +4092,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 26000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'COG 55',
@@ -3355,7 +4103,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 34000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'COG 552',
@@ -3364,7 +4114,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cognoscenti',
@@ -3373,7 +4125,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cognoscenti 2',
@@ -3382,7 +4136,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Emperor',
@@ -3391,7 +4147,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 22000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Emperor 2',
@@ -3400,7 +4158,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 22550,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Emperor 3',
@@ -3409,7 +4169,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Fugitive',
@@ -3418,7 +4180,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 34000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Glendale',
@@ -3427,7 +4191,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 18500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ingot',
@@ -3436,7 +4202,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 17000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Intruder',
@@ -3445,7 +4213,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 21000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Limo2',
@@ -3454,7 +4224,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Premier',
@@ -3463,7 +4235,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Primo',
@@ -3472,7 +4246,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 15000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Primo 2',
@@ -3481,7 +4257,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Regina',
@@ -3490,7 +4268,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Romero',
@@ -3499,7 +4279,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 42000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 2',
@@ -3508,7 +4290,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 5',
@@ -3517,7 +4301,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 6',
@@ -3526,7 +4312,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stafford',
@@ -3535,7 +4323,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 58000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stanier',
@@ -3544,7 +4334,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 23500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stratum',
@@ -3553,7 +4345,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 19500,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stretch',
@@ -3562,7 +4356,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Super D',
@@ -3571,7 +4367,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 65000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Surge',
@@ -3580,7 +4378,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Tail Gater',
@@ -3589,7 +4389,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 36000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Warrener',
@@ -3598,7 +4400,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 26000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Washington',
@@ -3607,7 +4411,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 25000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Airbus',
@@ -3616,7 +4422,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Brickade',
@@ -3625,7 +4433,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bus',
@@ -3634,7 +4444,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Coach',
@@ -3643,7 +4455,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'PBUS2',
@@ -3652,7 +4466,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rallytruck',
@@ -3661,7 +4477,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rentalbus',
@@ -3670,7 +4488,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Taxi',
@@ -3679,7 +4499,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tourbus',
@@ -3688,7 +4510,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Trash',
@@ -3697,7 +4521,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Trash 2',
@@ -3706,7 +4532,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Wastelander',
@@ -3715,7 +4543,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SERVICE,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Alpha',
@@ -3724,7 +4554,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Banshee',
@@ -3733,7 +4565,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bestia GTS',
@@ -3742,7 +4576,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blista 2',
@@ -3751,7 +4587,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Blista 3',
@@ -3760,7 +4598,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buffalo',
@@ -3769,7 +4609,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buffalo 2',
@@ -3778,7 +4620,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buffalo 3',
@@ -3787,7 +4631,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Carbonizzare',
@@ -3796,7 +4642,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Comet 2',
@@ -3805,7 +4653,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Comet 3',
@@ -3814,7 +4664,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Comet 4',
@@ -3823,7 +4675,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Coquette',
@@ -3832,7 +4686,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 385000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Drafter',
@@ -3841,7 +4697,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deveste',
@@ -3850,7 +4708,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Elegy',
@@ -3859,7 +4719,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Elegy 2',
@@ -3868,7 +4730,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Feltzer 2',
@@ -3877,7 +4741,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Furore GT',
@@ -3886,7 +4752,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Fusilade',
@@ -3895,7 +4763,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 425000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Futo',
@@ -3904,7 +4774,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Hotring',
@@ -3913,7 +4785,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Issi 7',
@@ -3922,7 +4796,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 475000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Infernus 2',
@@ -3931,7 +4807,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Itali GTO',
@@ -3940,7 +4818,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 480000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jugular',
@@ -3949,7 +4829,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 440000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jester',
@@ -3958,7 +4840,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 435000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jester 2',
@@ -3967,7 +4851,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Khamelion',
@@ -3976,7 +4862,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Kuruma',
@@ -3985,7 +4873,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Kuruma 2',
@@ -3994,7 +4884,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Locust',
@@ -4003,7 +4895,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Lynx',
@@ -4012,7 +4906,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Massacro',
@@ -4021,7 +4917,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Massacro 2',
@@ -4030,7 +4928,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Neo',
@@ -4039,7 +4939,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Neon',
@@ -4048,7 +4950,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'NineF',
@@ -4057,7 +4961,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 535000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'NineF2',
@@ -4066,7 +4972,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Omnis',
@@ -4075,7 +4983,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 435000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Paragon',
@@ -4084,7 +4994,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Paragon 2',
@@ -4093,7 +5005,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Pariah',
@@ -4102,7 +5016,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Penumbra',
@@ -4111,7 +5027,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 425000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Raiden',
@@ -4120,7 +5038,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 450000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Rapid GT',
@@ -4129,7 +5049,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rapid GT 2',
@@ -4138,7 +5060,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Raptor',
@@ -4147,7 +5071,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Revolter',
@@ -4156,7 +5082,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ruston',
@@ -4165,7 +5093,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 3',
@@ -4174,7 +5104,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 4',
@@ -4183,7 +5115,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 5',
@@ -4192,7 +5126,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schafter 6',
@@ -4201,7 +5137,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schlagen',
@@ -4210,7 +5148,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Schwarzer',
@@ -4219,7 +5159,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sentinel 3',
@@ -4228,7 +5170,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 445000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seven 70',
@@ -4237,7 +5181,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Specter',
@@ -4246,7 +5192,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 525000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Specter 2',
@@ -4255,7 +5203,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Streiter',
@@ -4264,7 +5214,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 550000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sultan',
@@ -4273,7 +5225,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Surano',
@@ -4282,7 +5236,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tampa 2',
@@ -4291,7 +5247,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tropos',
@@ -4300,7 +5258,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 675000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Verlierer2',
@@ -4309,7 +5269,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 700000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'ZR 380',
@@ -4318,7 +5280,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'ZR 3802',
@@ -4327,7 +5291,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'ZR 380 Fucking Ugly',
@@ -4336,7 +5302,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ardent',
@@ -4345,7 +5313,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BType',
@@ -4354,7 +5324,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BType2',
@@ -4363,7 +5335,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'BType3',
@@ -4372,7 +5346,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Casco',
@@ -4381,7 +5357,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cheetah 2',
@@ -4390,7 +5368,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Coquette 2',
@@ -4399,7 +5379,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 675000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deluxo',
@@ -4408,7 +5390,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dynasty',
@@ -4417,7 +5401,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Feltzer 3',
@@ -4426,7 +5412,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'GT500',
@@ -4435,7 +5423,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 635000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'JB700',
@@ -4444,7 +5434,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mamba',
@@ -4453,7 +5445,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 645000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Manana',
@@ -4462,7 +5456,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Monroe',
@@ -4471,7 +5467,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nebula',
@@ -4480,7 +5478,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Peyote',
@@ -4489,7 +5489,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Pigalle',
@@ -4498,7 +5500,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 615000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rapid GT 3',
@@ -4507,7 +5511,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 615000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Retinue',
@@ -4516,7 +5522,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Savestra',
@@ -4525,7 +5533,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stinger',
@@ -4534,7 +5544,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 575000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stinger GT',
@@ -4543,7 +5555,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Stromberg',
@@ -4552,7 +5566,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 625000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Swinger',
@@ -4561,7 +5577,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 650000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Torero',
@@ -4570,7 +5588,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 700000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tornado',
@@ -4579,7 +5599,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 23000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Turismo 2',
@@ -4588,7 +5610,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 720000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Viseris',
@@ -4597,7 +5621,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 720000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Z Type',
@@ -4606,7 +5632,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 750000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zion 3',
@@ -4615,7 +5643,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 700000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cheburek',
@@ -4624,7 +5654,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: true,
         price: 600000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Adder',
@@ -4633,7 +5665,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Formula',
@@ -4642,7 +5676,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 1,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Formula',
@@ -4651,7 +5687,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 1,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Autarch',
@@ -4660,7 +5698,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1250000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Banshee2',
@@ -4669,7 +5709,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1250000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bullet',
@@ -4678,7 +5720,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cheetah',
@@ -4687,7 +5731,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cyclone',
@@ -4696,7 +5742,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 1350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Entity XF',
@@ -4705,7 +5753,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2000000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Emerus',
@@ -4714,7 +5764,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'FMJ',
@@ -4723,7 +5775,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'GP1',
@@ -4732,7 +5786,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Infernus',
@@ -4741,7 +5797,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Itali GTB',
@@ -4750,7 +5808,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Itali GTB2',
@@ -4759,7 +5819,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Krieger',
@@ -4768,7 +5830,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'le7b',
@@ -4777,7 +5841,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'nero',
@@ -4786,7 +5852,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Nero 2',
@@ -4795,7 +5863,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Osiris',
@@ -4804,7 +5874,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Penetrator',
@@ -4813,7 +5885,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'PFister 811',
@@ -4822,7 +5896,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Prototipo',
@@ -4831,7 +5907,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Reaper',
@@ -4840,7 +5918,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'S80',
@@ -4849,7 +5929,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'SC1',
@@ -4858,7 +5940,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Scram Jet',
@@ -4867,7 +5951,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sheava',
@@ -4876,7 +5962,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sultan RS',
@@ -4885,7 +5973,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'T20',
@@ -4894,7 +5984,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tempesta',
@@ -4903,7 +5995,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tezeract',
@@ -4912,7 +6006,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Thrax',
@@ -4921,7 +6017,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Turismo R',
@@ -4930,7 +6028,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tyrus',
@@ -4939,7 +6039,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vacca',
@@ -4948,7 +6050,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vagner',
@@ -4957,7 +6061,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vigilante',
@@ -4966,7 +6072,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Visi One',
@@ -4975,7 +6083,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Voltic',
@@ -4984,7 +6094,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Voltic 2',
@@ -4993,7 +6105,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'XA 21',
@@ -5002,7 +6116,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zentorno',
@@ -5011,7 +6127,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zorrusso',
@@ -5020,7 +6138,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Army Tanker',
@@ -5029,7 +6149,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Army Trailer',
@@ -5038,7 +6160,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Bale Trailer',
@@ -5047,7 +6171,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Boat Trailer',
@@ -5056,7 +6182,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Cable Car',
@@ -5065,7 +6193,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Dock Trailer',
@@ -5074,7 +6204,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Grain Trailer',
@@ -5083,7 +6215,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Prop Trailer',
@@ -5092,7 +6226,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Rake Trailer',
@@ -5101,7 +6237,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'TR2',
@@ -5110,7 +6248,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'TR3',
@@ -5119,7 +6259,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'TR4',
@@ -5128,7 +6270,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'TRFlat',
@@ -5137,7 +6281,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'TV Trailer',
@@ -5146,7 +6292,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tanker',
@@ -5155,7 +6303,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tanker2',
@@ -5164,7 +6314,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Trailer Logs',
@@ -5173,7 +6325,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Trailer Small',
@@ -5182,7 +6336,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Trailer S',
@@ -5191,7 +6347,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Trailer S2',
@@ -5200,7 +6358,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Trailer S3',
@@ -5209,7 +6369,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAILER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Freight',
@@ -5218,7 +6380,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.DIESEL
     },
     {
         display: 'Freightcar',
@@ -5227,7 +6391,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Freightcont1',
@@ -5236,7 +6402,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Freightcont2',
@@ -5245,7 +6413,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Freightgrain',
@@ -5254,7 +6424,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Tankercar',
@@ -5263,7 +6435,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.TRAIN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.NONE
     },
     {
         display: 'Air Tug',
@@ -5272,7 +6446,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Caddy',
@@ -5281,7 +6457,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: true,
         price: 24000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Caddy 2',
@@ -5290,7 +6468,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Caddy 3',
@@ -5299,7 +6479,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Docktug',
@@ -5308,7 +6490,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Forklift',
@@ -5317,7 +6501,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Mower',
@@ -5326,7 +6512,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ripley',
@@ -5335,7 +6523,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sadler',
@@ -5344,7 +6534,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sadler 2',
@@ -5353,7 +6545,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Scrap',
@@ -5362,7 +6556,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tow Truck',
@@ -5371,7 +6567,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tow Truck 2',
@@ -5380,7 +6578,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tractor',
@@ -5389,7 +6589,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tractor 2',
@@ -5398,7 +6600,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tractor3',
@@ -5407,7 +6611,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Utillitruck',
@@ -5416,7 +6622,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Utillitruck2',
@@ -5425,7 +6633,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Utillitruck3',
@@ -5434,7 +6644,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bison',
@@ -5443,7 +6655,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bison 2',
@@ -5452,7 +6666,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bison 3',
@@ -5461,7 +6677,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Bobcat XL',
@@ -5470,7 +6688,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Boxville',
@@ -5479,7 +6699,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 35000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Boxville 2',
@@ -5488,7 +6710,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Boxville 3',
@@ -5497,7 +6721,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Boxville 4',
@@ -5506,7 +6732,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Boxville 5',
@@ -5515,7 +6743,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Burrito',
@@ -5524,7 +6754,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Burrito 2',
@@ -5533,7 +6765,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Burrito3',
@@ -5542,7 +6776,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Burrito4',
@@ -5551,7 +6787,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 32000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Burrito5',
@@ -5560,7 +6798,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Camper',
@@ -5569,7 +6809,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gang Burrito',
@@ -5578,7 +6820,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Gang Burrito 2',
@@ -5587,7 +6831,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Journey',
@@ -5596,7 +6842,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Minivan',
@@ -5605,7 +6853,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Minivan 2',
@@ -5614,7 +6864,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Paradise',
@@ -5623,7 +6875,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Pony',
@@ -5632,7 +6886,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Pony 2',
@@ -5641,7 +6897,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rumpo',
@@ -5650,7 +6908,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rumpo 2',
@@ -5659,7 +6919,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rumpo 3',
@@ -5668,7 +6930,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Speedo',
@@ -5677,7 +6941,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Speedo 2',
@@ -5686,7 +6952,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Surfer',
@@ -5695,7 +6963,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Surfer 2',
@@ -5704,7 +6974,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Taco',
@@ -5713,7 +6985,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Youga',
@@ -5722,7 +6996,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: true,
         price: 28000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Youga 2',
@@ -5731,7 +7007,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Lampadati Tigon',
@@ -5740,7 +7018,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Obey Tailgater S',
@@ -5749,7 +7029,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Karen Calico GTF',
@@ -5758,7 +7040,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Comet 6',
@@ -5767,7 +7051,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ubermacht Cypher',
@@ -5776,7 +7062,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 7',
@@ -5785,7 +7073,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dominator 8',
@@ -5794,7 +7084,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Euros',
@@ -5803,7 +7095,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Futo 2',
@@ -5812,7 +7106,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Pfister Growler',
@@ -5821,7 +7117,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Jester 4',
@@ -5830,7 +7128,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Previon',
@@ -5839,7 +7139,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Remus',
@@ -5848,7 +7150,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'RT3000',
@@ -5857,7 +7161,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Sultan 3',
@@ -5866,7 +7172,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vectre',
@@ -5875,7 +7183,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Warrener 2',
@@ -5884,7 +7194,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'zr350',
@@ -5893,7 +7205,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 375000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Freight Car 2',
@@ -5902,7 +7216,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Itali RSX',
@@ -5911,7 +7227,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Veto',
@@ -5920,7 +7238,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Veto 2',
@@ -5929,7 +7249,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Avisa',
@@ -5938,7 +7260,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dinghy 5',
@@ -5947,7 +7271,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Kosatka',
@@ -5956,7 +7282,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Longfin',
@@ -5965,7 +7293,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Patrolboat',
@@ -5974,7 +7304,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.BOAT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Brioso 2',
@@ -5983,7 +7315,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Weevil',
@@ -5992,7 +7326,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Annihilator 2',
@@ -6001,7 +7337,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Seasparrow 2',
@@ -6010,7 +7348,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Seasparrow 3',
@@ -6019,7 +7359,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Alkonost',
@@ -6028,7 +7370,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Vetir',
@@ -6037,7 +7381,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Manchez 2',
@@ -6046,7 +7392,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Verus',
@@ -6055,7 +7403,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Winky',
@@ -6064,7 +7414,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Squaddie',
@@ -6073,7 +7425,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Toreador',
@@ -6082,7 +7436,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Slamtruck',
@@ -6091,7 +7447,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.UTILITY,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Kanjo',
@@ -6100,7 +7458,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Asbo',
@@ -6109,7 +7469,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mini Tank',
@@ -6118,7 +7480,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MILITARY,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Yosemite 2',
@@ -6127,7 +7491,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Everon',
@@ -6136,7 +7502,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rebla',
@@ -6145,7 +7513,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Komoda',
@@ -6154,7 +7524,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Imorgon',
@@ -6163,7 +7535,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'VSTR',
@@ -6172,7 +7546,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Club',
@@ -6181,7 +7557,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Dukes 3',
@@ -6190,7 +7568,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Yosemite 3',
@@ -6199,7 +7579,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Openwheel 1',
@@ -6208,7 +7590,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OPENWHEEL,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Openwheel 2',
@@ -6217,7 +7601,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OPENWHEEL,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Landstalker 2',
@@ -6226,7 +7612,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Seminole 2',
@@ -6235,7 +7623,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Glendale 2',
@@ -6244,7 +7634,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Coquette 4',
@@ -6253,7 +7645,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Penumbra 2',
@@ -6262,7 +7656,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Peyote 3',
@@ -6271,7 +7667,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Manana 2',
@@ -6280,7 +7678,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT_CLASSIC,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Tigon',
@@ -6289,7 +7689,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Youga 3',
@@ -6298,7 +7700,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.VAN,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Astron',
@@ -6307,7 +7711,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
+        seats: 5,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Baller 7',
@@ -6316,7 +7722,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: false,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Buffalo STX',
@@ -6325,7 +7733,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Champion',
@@ -6334,7 +7744,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Cinnquemila',
@@ -6343,7 +7755,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Comet S2 Cabrio',
@@ -6352,7 +7766,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Deity',
@@ -6361,7 +7777,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Granger 2',
@@ -6370,7 +7788,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 8,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Ignus',
@@ -6379,7 +7799,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'I-wagen',
@@ -6388,7 +7810,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Jubilee',
@@ -6397,7 +7821,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUV,
         sell: false,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mule 5',
@@ -6406,7 +7832,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: false,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Patriot 3',
@@ -6415,7 +7843,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: true,
         price: 99999999999,
+        seats: 6,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Reever',
@@ -6424,7 +7854,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 99999999999,
+        seats: 1,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Shinobi',
@@ -6433,7 +7865,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MOTORCYCLE,
         sell: true,
         price: 99999999999,
+        seats: 1,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Youga 4',
@@ -6442,7 +7876,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Zeno',
@@ -6451,7 +7887,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Omnis e-GT',
@@ -6460,7 +7898,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 900000,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.ELECTRIC
     },
     {
         display: 'Sentinel 4',
@@ -6469,7 +7909,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 95000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Conada',
@@ -6478,7 +7920,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.AIRCRAFT,
         sell: true,
         price: 700000,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.JET_FUEL
     },
     {
         display: 'Ruiner ZZ-8',
@@ -6487,7 +7931,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 1300000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Brioso 3',
@@ -6496,7 +7942,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COMPACT,
         sell: true,
         price: 45000,
+        seats: 2,
         storage: 18,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Corsita',
@@ -6505,7 +7953,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Draugur',
@@ -6514,7 +7964,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.OFFROAD,
         sell: false,
         price: 99999999999,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Kanjo SJ',
@@ -6523,7 +7975,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 50000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Postlude',
@@ -6532,7 +7986,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.COUPE,
         sell: true,
         price: 80000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Torero XO',
@@ -6541,7 +7997,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: true,
         price: 2500000,
+        seats: 2
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Vigero ZX',
@@ -6550,7 +8008,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 350000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'LM87',
@@ -6559,7 +8019,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SUPER,
         sell: false,
         price: 99999999999,
+        seats: 1,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: '10F',
@@ -6568,7 +8030,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 2200000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: '10F 2',
@@ -6577,7 +8041,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 2400000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Rhinehart',
@@ -6586,7 +8052,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SEDAN,
         sell: true,
         price: 100000,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Greenwood',
@@ -6595,7 +8063,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 70000,
+        seats: 4,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'SM722',
@@ -6604,7 +8074,9 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.SPORT,
         sell: true,
         price: 2500000,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Weevil Custom',
@@ -6613,6 +8085,8 @@ export const VehicleData: Array<VehicleInfo> = [
         class: VEHICLE_CLASS.MUSCLE,
         sell: true,
         price: 99999999999,
+        seats: 2,
         storage: 24,
+        fuelType: FUEL_TYPE.GAS
     },
 ];
