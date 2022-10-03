@@ -8,6 +8,7 @@ import keyboardMap from '../../shared/information/keyboardMap';
 import IClientInteraction from '../../shared/interfaces/iClientInteraction';
 import { Interaction } from '../../shared/interfaces/interaction';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
+import { distance } from '../../shared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { NpcWheelMenu } from '../menus/npc';
 import { ObjectWheelMenu } from '../menus/object';
@@ -230,15 +231,28 @@ export class InteractionController {
 
             // Object Type
             if (closestTarget.type === 'object') {
-                const hash = native.getEntityModel(closestTarget.scriptID);
+                const hash = native.getEntityModel(closestTarget.scriptID);                
                 const isValid = ObjectWheelMenu.isModelValidObject(hash);
                 if (isValid) {
+                    const targetCoords = native.getEntityCoords(closestTarget.scriptID, false);
+                    let item = null;
+                    for (const closesItem of closestItems) {
+                        if (closesItem.item && closesItem.item.item && closesItem.item.item.model) {
+                            const itemHash = alt.hash(closesItem.item.item.model);
+                            const itemDistance = parseFloat(distance(targetCoords, closesItem.pos).toFixed(2));
+                            if (hash === itemHash && itemDistance <= 0.7) {
+                                item = closesItem;
+                                break;
+                            }
+                        }
+                    }
+
                     wheelOptions.push({
                         name: `Object`,
                         icon: 'icon-lightbulb',
                         data: [closestTarget.scriptID],
                         callback: (scriptID: number) => {
-                            ObjectWheelMenu.openMenu(scriptID);
+                            ObjectWheelMenu.openMenu(scriptID, item);
                         },
                     });
                 }

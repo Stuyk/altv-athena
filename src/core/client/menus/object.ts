@@ -4,11 +4,13 @@ import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
+import { GroundItem } from '../../shared/interfaces/groundItem';
 
 type ObjectMenuInjection = (
     modelHash: number,
     scriptID: number,
     options: Array<IWheelOptionExt>,
+    item?: GroundItem,
 ) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
@@ -47,7 +49,7 @@ const ObjectWheelMenuConst = {
      * @return {*}
      * @memberof ObjectWheelMenu
      */
-    openMenu(scriptID: number): void {
+    openMenu(scriptID: number, item?: GroundItem): void {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -68,7 +70,7 @@ const ObjectWheelMenuConst = {
 
         for (const callback of Injections) {
             try {
-                options = callback(hash, scriptID, options);
+                options = callback(hash, scriptID, options, item);
             } catch (err) {
                 console.warn(`Got Object Menu Injection Error: ${err}`);
                 continue;
