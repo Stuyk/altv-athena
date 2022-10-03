@@ -43,7 +43,8 @@ class InventoryCommands {
     private static async handleGetItem(player: alt.Player, ...args) {
         const amount = args[args.length - 1];
 
-        const fullItemName = args.pop().join(' ');
+        args.pop();
+        const fullItemName = args.join(' ');
         if (fullItemName.length <= 1) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
             return;
