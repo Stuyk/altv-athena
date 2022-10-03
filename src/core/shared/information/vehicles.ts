@@ -6503,7 +6503,7 @@ export const VehicleData: Array<VehicleInfo> = [
         price: 999999999,
         seats: 2,
         storage: 24,
-        fuelType: FUEL_TYPE.ELECTRIC
+        fuelType: FUEL_TYPE.GAS
     },
     {
         display: 'Mower',
