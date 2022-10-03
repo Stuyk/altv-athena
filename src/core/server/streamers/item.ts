@@ -21,7 +21,8 @@ class InternalController {
     }
 
     static update(player: alt.Player, drops: Array<GroundItem>) {
-        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, drops);
+        const dropsInPlayersDimension = drops.filter((item) => item.item.dimension === player.dimension);
+        alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, dropsInPlayersDimension);
     }
 }
 

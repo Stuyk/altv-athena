@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import natives from 'natives';
 
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -93,6 +94,11 @@ class ObjectiveController {
             if (!alt.Player.local.vehicle) {
                 return false;
             }
+        }
+
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.VEHICLE_ENGINE_OFF)) {
+            const engineOn = natives.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+            if (engineOn) return false;
         }
 
         return true;

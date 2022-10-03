@@ -217,17 +217,16 @@ const Inventory = {
         }
 
         for (let i = 0; i < player.data[type].length; i++) {
-            const inventoryItem = player.data.inventory[i];
-            if (!item) {
+            const foundItem = player.data[type][i];
+            if (!foundItem) {
                 continue;
             }
 
             const objectKeys = Object.keys(item);
             const keyIndex = objectKeys.findIndex((key: string) => {
-                if (item.hasOwnProperty(key) && item[key as keyof Item] === inventoryItem[key as keyof Item]) {
+                if (item.hasOwnProperty(key) && item[key as keyof Item] === foundItem[key as keyof Item]) {
                     return true;
-                }
-
+                }                
                 return false;
             });
 
