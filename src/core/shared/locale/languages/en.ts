@@ -18,7 +18,7 @@ export default {
     [LOCALE_KEYS.COMMAND_COORDS]: `_%_ [x] [y] [z] - Teleport to some coordinates`,
     [LOCALE_KEYS.COMMAND_DO]: `_%_ [message] - Describe an object, sound, etc.`,
     [LOCALE_KEYS.COMMAND_DUMMY_ITEM]: `_%_ - Get some debug items`,
-    [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] - Get an item by name`,
+    [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] [amount] - Get item/items by dbname/name`,
     [LOCALE_KEYS.COMMAND_LOW]: `_%_ [message] - Speak quietly`,
     [LOCALE_KEYS.COMMAND_MOD_CHAT]: `_%_ [message] - Speak to Admins & Mods`,
     [LOCALE_KEYS.COMMAND_ME]: `_%_ [message] - Describe a roleplay action`,

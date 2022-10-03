@@ -41,19 +41,25 @@ class InventoryCommands {
 
     @command('getitem', LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/getitem'), PERMISSIONS.ADMIN)
     private static async handleGetItem(player: alt.Player, ...args) {
-        const fullItemName = args.join(' ');
+        const amount = args[args.length - 1];
+
+        const fullItemName = args.pop().join(' ');
         if (fullItemName.length <= 1) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
             return;
         }
 
-        const item = await ItemFactory.getByName(fullItemName);
-        if (!item) {
-            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
-            return;
+        let item = await ItemFactory.get(fullItemName);
+        if (item === undefined || item === null) {
+            item = await ItemFactory.getByName(fullItemName);
+
+            if (item === undefined || item === null) {
+                Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
+                return;
+            }
         }
 
-        item.quantity = 1;
+        item.quantity = amount;
 
         const itemClone = deepCloneObject<Item>(item);
         let slotInfo = Athena.player.inventory.getFreeInventorySlot(player);
