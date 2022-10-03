@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { getClosestEntity } from '../../../../server/utility/vector';
-import { FUEL_STATION_EVENTS } from '../../shared/events';
+import { VIEW_EVENTS_FUEL_TRIGGER } from '../../shared/events';
 import { LOCALE_FUEL_STATIONS } from '../../shared/locales';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
@@ -12,9 +12,12 @@ import { FUEL_CONFIG } from './config';
 import stations from './stations';
 import { Athena } from '../../../../server/api/athena';
 import { ServerJobTrigger } from '../../../../server/systems/jobTrigger';
+import { deepCloneObject } from '../../../../shared/utility/deepCopy';
+
 
 const maximumFuel = 100;
 const fuelInfo: { [playerID: string]: FuelStatus } = {};
+const LastTriggers: { [id: string]: JobTrigger } = {};
 
 interface FuelStatus {
     vehicle: alt.Vehicle;
@@ -25,6 +28,9 @@ interface FuelStatus {
 
 export class FuelStationSystem {
     static init() {
+        alt.onClient(VIEW_EVENTS_FUEL_TRIGGER.ACCEPT, FuelStationSystem.acceptDialog);
+        alt.onClient(VIEW_EVENTS_FUEL_TRIGGER.CANCEL, FuelStationSystem.cancelDialog);
+
         for (let i = 0; i < stations.length; i++) {
             const fuelPump = stations[i];
             if (fuelPump.isBlip) {
@@ -134,7 +140,13 @@ export class FuelStationSystem {
             timeout: Date.now() + FUEL_CONFIG.FUEL_RESET_TIMEOUT,
         };
 
-        ServerJobTrigger.create(player, trigger);
+        if (!player || !player.valid) {
+            return;
+        }
+
+        LastTriggers[player.id] = trigger;
+        alt.log("Emit VIEW_EVENTS_FUEL_TRIGGER.OPEN to client " + player.data.name);
+        alt.emitClient(player, VIEW_EVENTS_FUEL_TRIGGER.OPEN, deepCloneObject(trigger));
     }
 
     /**
@@ -210,5 +222,65 @@ export class FuelStationSystem {
         if (fuelInfo[player.id]) {
             delete fuelInfo[player.id];
         }
+    }
+
+    /**
+     * Invoke a callback or event based on what is specified in the JobTrigger data.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @param {number} amount
+     * @memberof InternalFunctions
+     */
+    static acceptDialog(player: alt.Player, amount: number) {
+
+        if (!player || !player.valid) {
+            return;
+        }
+
+        if (!LastTriggers[player.id]) {
+            return;
+        }
+
+        const data = LastTriggers[player.id];
+
+        if (data.event) {
+            alt.emit(data.event, player);
+        }
+
+        if (data.acceptCallback && typeof data.acceptCallback === 'function') {
+            data.acceptCallback(player, amount);
+        }
+
+        delete LastTriggers[player.id];
+    }
+
+    /**
+     * Invoke a callback or event based on what is specified in the JobTrigger data.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @memberof InternalFunctions
+     */
+    static cancelDialog(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        if (!LastTriggers[player.id]) {
+            return;
+        }
+
+        const data = LastTriggers[player.id];
+
+        if (data.cancelEvent) {
+            alt.emit(data.cancelEvent, player);
+        }
+
+        if (data.cancelCallback && typeof data.cancelCallback === 'function') {
+            data.cancelCallback(player);
+        }
+
+        delete LastTriggers[player.id];
     }
 }

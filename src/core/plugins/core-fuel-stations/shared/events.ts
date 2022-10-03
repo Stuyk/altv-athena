@@ -1,4 +1,5 @@
-export const FUEL_STATION_EVENTS = {
-    START: 'fuel:Start',
-    CANCEL: 'fuel:Cancel',
-};
+export enum VIEW_EVENTS_FUEL_TRIGGER {
+    OPEN = 'fuelTrigger:Open',
+    CANCEL = 'fuelTrigger:Cancel',
+    ACCEPT = 'fuelTrigger:Accept',
+}
