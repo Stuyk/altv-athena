@@ -236,12 +236,12 @@ export class InteractionController {
                 if (isValid) {
                     const targetCoords = native.getEntityCoords(closestTarget.scriptID, false);
                     let item = null;
-                    for (const closesItem of closestItems) {
-                        if (closesItem.item && closesItem.item.item && closesItem.item.item.model) {
-                            const itemHash = alt.hash(closesItem.item.item.model);
-                            const itemDistance = parseFloat(distance(targetCoords, closesItem.pos).toFixed(2));
+                    for (const closestItem of closestItems) {
+                        if (closestItem.item && closestItem.item.item && closestItem.item.item.model) {
+                            const itemHash = alt.hash(closestItem.item.item.model);
+                            const itemDistance = parseFloat(distance(targetCoords, closestItem.pos).toFixed(2));
                             if (hash === itemHash && itemDistance <= 0.7) {
-                                item = closesItem;
+                                item = closestItem;
                                 break;
                             }
                         }
