@@ -1,15 +1,14 @@
 import * as alt from 'alt-client';
+import { VIEW_EVENTS_FUEL_TRIGGER } from '../../shared/events';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { JobTrigger } from '../../../../shared/interfaces/jobTrigger';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
+import { WebViewController } from '../../../../client/extensions/view2';
+import ViewModel from '../../../../client/models/viewModel';
+import { isAnyMenuOpen } from '../../../../client/utility/menus';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VIEW_EVENTS_JOB_TRIGGER } from '../../shared/enums/views';
-import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
-
-const PAGE_NAME = 'Job';
+const PAGE_NAME = 'Fuel';
 let trigger: JobTrigger;
 
 /**
@@ -17,7 +16,7 @@ let trigger: JobTrigger;
  */
 class InternalFunctions implements ViewModel {
     static init() {
-        alt.onServer(VIEW_EVENTS_JOB_TRIGGER.OPEN, InternalFunctions.open);
+        alt.onServer(VIEW_EVENTS_FUEL_TRIGGER.OPEN, InternalFunctions.open);
     }
 
     static async open(_trigger: JobTrigger) {
@@ -48,8 +47,9 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static accept() {
-        alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.ACCEPT);
+    static accept(amount: number) {
+        alt.emitServer(VIEW_EVENTS_FUEL_TRIGGER.ACCEPT, amount);
+
         alt.toggleGameControls(true);
         InternalFunctions.close(true, true);
     }
@@ -74,7 +74,7 @@ class InternalFunctions implements ViewModel {
             return;
         }
 
-        alt.emitServer(VIEW_EVENTS_JOB_TRIGGER.CANCEL);
+        alt.emitServer(VIEW_EVENTS_FUEL_TRIGGER.CANCEL);
     }
 
     static async ready() {
