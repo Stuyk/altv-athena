@@ -8,6 +8,23 @@
                 <img :src="ResolvePath(image)" style="width: 100%" />
             </div>
             <p class="body-2" v-html="getSummary"></p>
+
+            <div class="split split-full center pt-4" v-if="maxAmount !== undefined">
+                <Button color="blue" @click="setIncrementAmount(null, -1)">
+                    <Icon :size="14" icon="icon-chevron-left"></Icon>
+                </Button>
+                <RangeInput
+                    :minIndex="1"
+                    :maxIndex="maxAmount"
+                    :indexValue="amount"
+                    :increment="1"
+                    @input="(e) => setIncrementAmount(e, null)"
+                >
+                </RangeInput>
+                <Button color="blue" @click="setIncrementAmount(null, 1)">
+                    <Icon :size="14" icon="icon-chevron-right"></Icon>
+                </Button>
+            </div>
             <div class="split space-between split-full pt-4">
                 <Button color="red" class="mr-2 fill-full-width" @click="close">
                     {{ locales.LABEL_DECLINE }}
@@ -22,14 +39,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Icon from '../../components/Icon.vue';
-import Button from '../../components/Button.vue';
-import Toolbar from '../../components/Toolbar.vue';
-import Frame from '../../components/Frame.vue';
-import ResolvePath from '../../utility/pathResolver';
-import { WebViewEventNames } from '../../../../src/core/shared/enums/webViewEvents';
+import Icon from '@components/Icon.vue';
+import Button from '@components/Button.vue';
+import Toolbar from '@components/Toolbar.vue';
+import Frame from '@components/Frame.vue';
+import RangeInput from '@components/RangeInput.vue';
+import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
+import { WebViewEventNames } from '../../../../../src/core/shared/enums/webViewEvents';
 
-export const ComponentName = 'Job';
+export const ComponentName = 'Fuel';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -37,6 +55,7 @@ export default defineComponent({
         Frame,
         Icon,
         Toolbar,
+        RangeInput,
     },
     props: {
         emit: Function,
@@ -54,6 +73,8 @@ export default defineComponent({
                 LABEL_DECLINE: 'Decline',
                 LABEL_ACCEPT: 'Accept',
             },
+            maxAmount: undefined,
+            amount: 1,
         };
     },
     mounted() {
@@ -61,6 +82,8 @@ export default defineComponent({
             alt.on(`${ComponentName}:SetLocale`, this.setLocales);
             alt.on(`${ComponentName}:Data`, this.setData);
             alt.emit(`${ComponentName}:Ready`);
+        } else {
+            this.isReady = true;
         }
     },
     unmounted() {
@@ -83,6 +106,7 @@ export default defineComponent({
             this.image = jobData.image;
             this.header = jobData.header;
             this.summary = jobData.summary;
+            this.maxAmount = jobData.maxAmount;
             this.isReady = true;
         },
         select() {
@@ -90,7 +114,11 @@ export default defineComponent({
                 return;
             }
 
-            alt.emit(`${ComponentName}:Select`);
+            if (this.maxAmount !== undefined) {
+                alt.emit(`${ComponentName}:Select`, this.amount);
+            } else {
+                alt.emit(`${ComponentName}:Select`);
+            }
         },
         close() {
             if (!('alt' in window)) {
@@ -98,6 +126,24 @@ export default defineComponent({
             }
 
             alt.emit(WebViewEventNames.CLOSE_PAGE);
+        },
+        setIncrementAmount(e, difference) {
+            // Clicked a button
+            if (!e) {
+                if (difference <= -1 && this.amount - 1 >= 1) {
+                    this.amount -= 1;
+                    return;
+                }
+
+                if (difference >= 1 && this.amount + 1 <= this.maxAmount) {
+                    this.amount += 1;
+                    return;
+                }
+                return;
+            }
+
+            const value = parseFloat(e.target['value']);
+            this.amount = value;
         },
     },
 });
