@@ -130,6 +130,18 @@ class InternalFunctions implements ViewModel {
 
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
 
+        // Switch view up to the sky
+        native.switchOutPlayer(alt.Player.local.scriptID, 0, 1);
+
+        // Wait for switch state 5 or more
+        await alt.Utils.waitFor(() => native.getPlayerSwitchState() >= 5, 5000).catch(() => { });
+
+        // Switch back in, by this time character will be spawned already
+        native.switchInPlayer(alt.Player.local.scriptID);
+
+        // Wait for switch to complete
+        await alt.Utils.waitFor(() => native.isPlayerSwitchInProgress(), 5000).catch(() => { });
+
         alt.toggleGameControls(true);
         disableAllControls(false);
 
