@@ -3,7 +3,6 @@ import { getClosestEntity } from '../../../../server/utility/vector';
 import { VIEW_EVENTS_FUEL_TRIGGER } from '../../shared/events';
 import { LOCALE_FUEL_STATIONS } from '../../shared/locales';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
-import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
 import { Vehicle_Behavior } from '../../../../shared/enums/vehicle';
 import { JobTrigger } from '../../../../shared/interfaces/jobTrigger';
 import { isFlagEnabled } from '../../../../shared/utility/flags';
@@ -11,9 +10,7 @@ import { distance2d } from '../../../../shared/utility/vector';
 import { FUEL_CONFIG } from './config';
 import stations from './stations';
 import { Athena } from '../../../../server/api/athena';
-import { ServerJobTrigger } from '../../../../server/systems/jobTrigger';
 import { deepCloneObject } from '../../../../shared/utility/deepCopy';
-
 
 const maximumFuel = 100;
 const fuelInfo: { [playerID: string]: FuelStatus } = {};
@@ -50,7 +47,6 @@ export class FuelStationSystem {
                 position: fuelPump,
                 description: 'Refuel Vehicle',
                 callback: FuelStationSystem.request,
-                isPlayerOnly: true,
                 debug: false,
             });
         }
@@ -61,6 +57,11 @@ export class FuelStationSystem {
      * @param {alt.Player} player - alt.Player - The player who is requesting the refuel.
      */
     static request(player: alt.Player) {
+        if (player.vehicle) {
+            Athena.player.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_MUST_EXIT_VEHICLE);
+            return;
+        }
+
         if (fuelInfo[player.id] && Date.now() < fuelInfo[player.id].timeout) {
             Athena.player.emit.notification(player, LOCALE_FUEL_STATIONS.FUEL_ALREADY_REFILLING);
             return;
@@ -130,7 +131,7 @@ export class FuelStationSystem {
             cancelCallback: FuelStationSystem.cancel,
             image: '../../assets/images/refuel.jpg',
             summary: `How much % of fuel do you want to refill in the ${closestVehicle.data.model}, if it costs $${FUEL_CONFIG.FUEL_PRICE} each?`,
-            maxAmount: missingFuel
+            maxAmount: missingFuel,
         };
 
         fuelInfo[player.id] = {
@@ -145,7 +146,7 @@ export class FuelStationSystem {
         }
 
         LastTriggers[player.id] = trigger;
-        alt.log("Emit VIEW_EVENTS_FUEL_TRIGGER.OPEN to client " + player.data.name);
+        alt.log('Emit VIEW_EVENTS_FUEL_TRIGGER.OPEN to client ' + player.data.name);
         alt.emitClient(player, VIEW_EVENTS_FUEL_TRIGGER.OPEN, deepCloneObject(trigger));
     }
 
@@ -178,7 +179,10 @@ export class FuelStationSystem {
         }
 
         if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, data.cost * fuelAmount)) {
-            Athena.player.emit.notification(player, `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${data.cost * fuelAmount}`);
+            Athena.player.emit.notification(
+                player,
+                `${LOCALE_FUEL_STATIONS.FUEL_CANNOT_AFFORD} $${data.cost * fuelAmount}`,
+            );
             delete fuelInfo[id];
             return;
         }
@@ -199,7 +203,9 @@ export class FuelStationSystem {
                 Athena.player.emit.removeProgressBar(player, `FUEL-${player.data._id.toString()}`);
                 Athena.player.emit.notification(
                     player,
-                    `${LOCALE_FUEL_STATIONS.FUEL_COST}${(data.cost * fuelAmount).toFixed(2)} | ${fuelAmount.toFixed(2)}`,
+                    `${LOCALE_FUEL_STATIONS.FUEL_COST}${(data.cost * fuelAmount).toFixed(2)} | ${fuelAmount.toFixed(
+                        2,
+                    )}`,
                 );
             }
 
@@ -233,7 +239,6 @@ export class FuelStationSystem {
      * @memberof InternalFunctions
      */
     static acceptDialog(player: alt.Player, amount: number) {
-
         if (!player || !player.valid) {
             return;
         }

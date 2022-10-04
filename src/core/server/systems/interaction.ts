@@ -9,6 +9,7 @@ import { InteractionShape } from '../extensions/extColshape';
 import { Athena } from '../api/athena';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/worldNotificationTypes';
 
 const interactions: Array<InteractionShape> = [];
 
@@ -105,6 +106,15 @@ class InternalFunctions {
             Athena.player.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
 
+        if (colshape.interaction && colshape.interaction.description) {
+            Athena.controllers.notification.addToPlayer(entity, {
+                uid: colshape.interaction.description,
+                pos: { x: colshape.pos.x, y: colshape.pos.y, z: colshape.pos.z + 1.5 },
+                text: colshape.interaction.description,
+                type: WORLD_NOTIFICATION_TYPE.ARROW_BOTTOM,
+            });
+        }
+
         entity.currentInteraction = colshape;
         const cleanInteraction = deepCloneObject<Omit<Interaction, 'callback'>>(colshape.interaction);
         alt.emitClient(entity, SYSTEM_EVENTS.PLAYER_SET_INTERACTION, cleanInteraction);
@@ -145,6 +155,10 @@ class InternalFunctions {
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
             Athena.player.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+        }
+
+        if (colshape.interaction && colshape.interaction.description) {
+            Athena.controllers.notification.removeFromPlayer(entity, colshape.interaction.description);
         }
 
         if (typeof colshape.interaction.onLeaveCallback === 'function') {

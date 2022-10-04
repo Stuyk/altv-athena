@@ -13,8 +13,13 @@
                 <Button color="blue" @click="setIncrementAmount(null, -1)">
                     <Icon :size="14" icon="icon-chevron-left"></Icon>
                 </Button>
-                <RangeInput :minIndex="1" :maxIndex="maxAmount" :indexValue="amount" :increment="1"
-                    @input="(e) => setIncrementAmount(e, null)">
+                <RangeInput
+                    :minIndex="1"
+                    :maxIndex="maxAmount"
+                    :indexValue="amount"
+                    :increment="1"
+                    @input="(e) => setIncrementAmount(e, null)"
+                >
                 </RangeInput>
                 <Button color="blue" @click="setIncrementAmount(null, 1)">
                     <Icon :size="14" icon="icon-chevron-right"></Icon>
@@ -69,7 +74,7 @@ export default defineComponent({
                 LABEL_ACCEPT: 'Accept',
             },
             maxAmount: undefined,
-            amount: 1
+            amount: 1,
         };
     },
     mounted() {
@@ -77,6 +82,8 @@ export default defineComponent({
             alt.on(`${ComponentName}:SetLocale`, this.setLocales);
             alt.on(`${ComponentName}:Data`, this.setData);
             alt.emit(`${ComponentName}:Ready`);
+        } else {
+            this.isReady = true;
         }
     },
     unmounted() {
@@ -112,8 +119,6 @@ export default defineComponent({
             } else {
                 alt.emit(`${ComponentName}:Select`);
             }
-
-
         },
         close() {
             if (!('alt' in window)) {
