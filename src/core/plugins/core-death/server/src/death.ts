@@ -150,7 +150,6 @@ export class DeathSystem {
             return;
         }
 
-        player.spawn(player.pos.x, player.pos.y, player.pos.z, 0);
         Athena.player.emit.meta(player, 'isDead', true);
 
         if (!TimeOfDeath[player.data._id.toString()]) {
