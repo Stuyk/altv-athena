@@ -112,12 +112,14 @@ export class DeathSystem {
         }
 
         Athena.player.safe.setPosition(player, nearestHopsital.x, nearestHopsital.y, nearestHopsital.z);
+
+        Athena.player.safe.addHealth(player, DEATH_CONFIG.RESPAWN_HEALTH, true);
+        Athena.player.safe.addArmour(player, DEATH_CONFIG.RESPAWN_ARMOUR, true);
+
         player.spawn(nearestHopsital.x, nearestHopsital.y, nearestHopsital.z, 0);
 
         alt.nextTick(() => {
             player.clearBloodDamage();
-            Athena.player.safe.addHealth(player, DEATH_CONFIG.RESPAWN_HEALTH, true);
-            Athena.player.safe.addArmour(player, DEATH_CONFIG.RESPAWN_ARMOUR, true);
             DeathSystem.clearRespawnTime(player);
         });
     }
