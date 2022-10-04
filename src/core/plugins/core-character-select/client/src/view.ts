@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { AthenaClient } from '../../../../client/api/athena';
 import { WebViewController } from '../../../../client/extensions/view2';
 import ViewModel from '../../../../client/models/viewModel';
 import { playPedAnimation } from '../../../../client/systems/animations';
@@ -128,19 +129,8 @@ class InternalFunctions implements ViewModel {
         await PedEditCamera.destroy();
         await PedCharacter.destroy();
 
+        await AthenaClient.utility.switchInPlayer(2000, 1);
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
-
-        // Switch view up to the sky
-        native.switchOutPlayer(alt.Player.local.scriptID, 0, 1);
-
-        // Wait for switch state 5 or more
-        await alt.Utils.waitFor(() => native.getPlayerSwitchState() >= 5, 5000).catch(() => { });
-
-        // Switch back in, by this time character will be spawned already
-        native.switchInPlayer(alt.Player.local.scriptID);
-
-        // Wait for switch to complete
-        await alt.Utils.waitFor(() => native.isPlayerSwitchInProgress(), 5000).catch(() => { });
 
         alt.toggleGameControls(true);
         disableAllControls(false);
