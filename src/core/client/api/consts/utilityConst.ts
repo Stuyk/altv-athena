@@ -3,6 +3,7 @@ import { loadAnimation } from '../../systems/animations';
 import { getClosestPlayer, getClosestVehicle } from '../../utility/closest';
 import { loadModel } from '../../utility/model';
 import { UID } from '../../utility/uid';
+import { switchInPlayer } from '../../utility/switch';
 
 export const utilityConst = {
     loadModel: loadModel,
@@ -11,5 +12,6 @@ export const utilityConst = {
     distance2D: distance2d,
     getClosestVehicle,
     getClosestPlayer,
+    switchInPlayer,
     uid: UID,
 };
