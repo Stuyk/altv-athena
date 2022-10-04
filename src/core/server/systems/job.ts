@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
-
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import { JobAttachable } from '../../shared/interfaces/iAttachable';
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { Vector3 } from '../../shared/interfaces/vector';
@@ -14,6 +12,7 @@ import { sha256Random } from '../utility/encryption';
 const JobInstances: { [key: string]: Job } = {};
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
 const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
+type QuitReasons = 'user' | 'switch' | 'disconnected';
 
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
@@ -68,6 +67,7 @@ export class Job {
     private objectives: Array<Objective> = [];
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
+    private quitCallback: (job: Job, reason: QuitReasons) => {};
 
     /**
      * Creates an instance of a job handler.
@@ -88,7 +88,7 @@ export class Job {
         this.id = this.player.id;
 
         if (JobInstances[this.player.id]) {
-            JobInstances[this.player.id].quit(`Switched Job`);
+            JobInstances[this.player.id].quit('switch');
         }
 
         JobInstances[this.player.id] = this;
@@ -252,7 +252,7 @@ export class Job {
      * @param {string} reason
      * @memberof Job
      */
-    quit(reason: string) {
+    quit(reason: QuitReasons) {
         if (JobInstances[this.player.id]) {
             delete JobInstances[this.player.id];
         }
@@ -264,6 +264,12 @@ export class Job {
 
         this.removeAllVehicles();
         this.removeAttachable();
+
+        if (typeof this.quitCallback !== 'function') {
+            return;
+        }
+
+        this.quitCallback(this, reason);
     }
 
     /**
@@ -601,6 +607,16 @@ export class Job {
         this.objectives.splice(0, 0, objectiveClone);
         this.syncObjective();
     }
+
+    /**
+     * Adds a callback that is called when a user quits a job.
+     *
+     * @param {(job: Job) => {}} callback
+     * @memberof Job
+     */
+    addQuitCallback(callback: (job: Job, reason: 'user' | 'disconnected') => {}) {
+        this.quitCallback = callback;
+    }
 }
 
 function handleVerify(player: alt.Player) {
@@ -634,9 +650,9 @@ export function getPlayerJob(player: alt.Player): Job | null {
 alt.on('playerDisconnect', (player: alt.Player) => {
     const id = player.id;
 
-    if (!JobInstances[player.id]) {
+    if (!JobInstances[id]) {
         return;
     }
 
-    JobInstances[player.id].quit('Disconnected');
+    JobInstances[id].quit('disconnected');
 });

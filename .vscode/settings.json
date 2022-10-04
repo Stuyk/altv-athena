@@ -17,7 +17,7 @@
         "libnode.dll": true,
         "package-lock.json": true,
         "server.cfg": true,
-        ".github": true,
+        ".github": false,
         ".loose-ts-check": true,
         ".husky": true,
         "resources/core/**": false,
