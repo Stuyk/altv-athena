@@ -19,5 +19,6 @@ jobs:
                   message: |
                       Hello Reviewer(s),
                       If you need to check this out locally try this command.
-                      `git fetch origin pull/$PR_NUMBER/head:$PR_HEAD_REF`
+
+                      `git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}}`
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
