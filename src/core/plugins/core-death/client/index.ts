@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../../shared/configurations/shared';
+import { DEATH_CONFIG } from '../shared/config';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { DEATH_EVENTS } from '../shared/events';
+import { SCREEN_EFFECTS } from '../../../shared/enums/screenEffects';
 import { drawText2D } from '../../../client/utility/text';
 import { Timer } from '../../../client/utility/timers';
-import { DEATH_EVENTS } from '../shared/events';
 import { ScreenEffect } from '../../../client/utility/screenEffect';
-import { SCREEN_EFFECTS } from '../../../shared/enums/ScreenEffects';
 import { KeyHeld } from '../../../client/events/keyHeld';
 import { AthenaClient } from '../../../client/api/athena';
 import { sleep } from '../../../client/utility/sleep';
@@ -30,7 +30,7 @@ class InternalFunctions {
         // Can respawn now?
         if (timeInTheFuture - Date.now() <= 0) {
             // Unbind the respawn key
-            KeyHeld.unregister(SHARED_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey)
+            KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey)
 
             // Switch out player now
             AthenaClient.utility.switchInPlayer(2000);
@@ -54,7 +54,7 @@ class InternalFunctions {
             }
 
             // Bind to respawn key
-            KeyHeld.register(SHARED_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
+            KeyHeld.register(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
 
             // Start the effects
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);

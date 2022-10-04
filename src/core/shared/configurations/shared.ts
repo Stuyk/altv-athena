@@ -1,8 +1,6 @@
 export const SHARED_CONFIG = {
     // Default Respawn Time for Player
     RESPAWN_TIME: 25000,
-    // Default Respawn Key
-    RESPAWN_KEY: 88, // X
     // FOOD & WATER
     FOOD_FATIGUE: 10, // If food drops below this number the player stops sprinting.
     WATER_FATIGUE: 8, // If water drops below this number the player stops sprinting.
