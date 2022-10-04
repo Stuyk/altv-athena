@@ -52,6 +52,8 @@ class InternalFunctions {
             }
         }
 
+        native.hideHudAndRadarThisFrame();
+
         const timeLeft = timeInTheFuture - Date.now();
         if (timeLeft > 0) {
             drawText2D(
