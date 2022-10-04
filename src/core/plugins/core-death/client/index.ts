@@ -7,6 +7,9 @@ import { Timer } from '../../../client/utility/timers';
 import { DEATH_EVENTS } from '../shared/events';
 import { ScreenEffect } from '../../../client/utility/screenEffect';
 import { SCREEN_EFFECTS } from '../../../shared/enums/ScreenEffects';
+import { KeyHeld } from '../../../client/events/keyHeld';
+import { AthenaClient } from '../../../client/api/athena';
+import { sleep } from '../../../client/utility/sleep';
 
 let interval: number;
 let timeInTheFuture: number;
@@ -23,6 +26,23 @@ class InternalFunctions {
         timeInTheFuture = Date.now() + ms;
     }
 
+    private static async handleRespawnKey() {
+        // Can respawn now?
+        if (timeInTheFuture - Date.now() <= 0) {
+            // Unbind the respawn key
+            KeyHeld.unregister(SHARED_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey)
+
+            // Switch out player now
+            AthenaClient.utility.switchInPlayer(2000);
+
+            // Wait just a bit for the switch to start
+            await sleep(1000);
+
+            // Send the respawn pressed event
+            alt.emitServer(DEATH_EVENTS.RESPAWN_PRESSED);
+        }
+    }
+
     private static handleMetaChange(key: string, newValue: any): void {
         if (key !== 'isDead') {
             return;
@@ -32,6 +52,9 @@ class InternalFunctions {
             if (!interval) {
                 interval = Timer.createInterval(InternalFunctions.tick, 0, 'death.ts');
             }
+
+            // Bind to respawn key
+            KeyHeld.register(SHARED_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
 
             // Start the effects
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
