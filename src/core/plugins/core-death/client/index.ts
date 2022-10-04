@@ -48,7 +48,7 @@ class InternalFunctions {
     private static tick() {
         if (!alt.Player.local.vehicle) {
             if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
-                native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+                native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, true, true, false);
             }
         }
 
