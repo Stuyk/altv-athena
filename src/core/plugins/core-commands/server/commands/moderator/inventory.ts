@@ -45,19 +45,16 @@ class InventoryCommands {
             return Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_ARGUMENTS_MISSING));
         }
 
-        let amount: number;
-        let fullItemName: string;
-        if (args.length === 1) {
-            amount = 1;
-            fullItemName = args[0];
-        } else if (args.length >= 2 && isNaN(args[args.length - 1])) {
-            amount = 1;
-            fullItemName = args.join(' ');
-        } else if (args.length >= 2 && !isNaN(args[args.length - 1])) {
-            amount = args[args.length - 1];
-            args.pop();
-            fullItemName = args.join(' ');
+        let amount = 1;
+        if (args.length >= 2) {
+            const newAmount = parseInt(args[args.length - 1]);
+            if (!isNaN(newAmount)) {
+                amount = newAmount;
+                args.pop();
+            }
         }
+
+        const fullItemName = args.join(' ')
 
         if (fullItemName.length <= 1) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
