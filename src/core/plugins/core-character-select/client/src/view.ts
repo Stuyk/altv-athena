@@ -9,6 +9,7 @@ import PedEditCamera from '../../../../client/utility/camera';
 import { PedCharacter } from '../../../../client/utility/characterPed';
 import { disableAllControls } from '../../../../client/utility/disableControls';
 import { sleep } from '../../../../client/utility/sleep';
+import { SWITCHOUT_TYPES } from '../../../../shared/enums/switchOutTypes';
 import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
 import { Appearance } from '../../../../shared/interfaces/appearance';
 import { Character } from '../../../../shared/interfaces/character';
@@ -129,7 +130,7 @@ class InternalFunctions implements ViewModel {
         await PedEditCamera.destroy();
         await PedCharacter.destroy();
 
-        await AthenaClient.utility.switchInPlayer(2000, 1);
+        await AthenaClient.utility.switchInPlayer(2000, SWITCHOUT_TYPES.THREE_STEPS);
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
 
         alt.toggleGameControls(true);
