@@ -1,8 +1,7 @@
-import * as natives from "natives";
-import { SCREEN_EFFECTS } from "../../shared/enums/screenEffects";
+import * as natives from 'natives';
+import { SCREEN_EFFECTS } from '../../shared/enums/screenEffects';
 
 export const ScreenEffect = {
-
     /**
      * Check whether the specific screen effect is running.
      * @param {SCREEN_EFFECTS} screenEffect The ScreenEffect to check.
@@ -36,5 +35,4 @@ export const ScreenEffect = {
     stopAllEffects() {
         natives.animpostfxStopAll();
     },
-
-}
+};
