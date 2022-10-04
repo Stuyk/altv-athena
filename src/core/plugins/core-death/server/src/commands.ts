@@ -34,30 +34,4 @@ export class DeathCommands {
 
         Athena.player.set.respawned(target, target.pos);
     }
-
-    @command(
-        ['acceptdeath', 'respawn'],
-        LocaleController.get(LOCALE_KEYS.COMMAND_ACCEPT_DEATH, '/acceptdeath'),
-        PERMISSIONS.NONE,
-    )
-    static handleCommand(player: alt.Player): void {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        if (!player.data.isDead) {
-            return;
-        }
-
-        const timeInFuture = DeathSystem.getRespawnTime(player);
-        if (typeof timeInFuture === 'undefined') {
-            return;
-        }
-
-        if (Date.now() < timeInFuture) {
-            return;
-        }
-
-        Athena.player.set.respawned(player, player.pos);
-    }
 }
