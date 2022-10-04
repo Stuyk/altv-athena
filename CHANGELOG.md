@@ -40,6 +40,20 @@ Created 'example-sprite' plugin for code references.
 AthenaClient.camera.target -> Used for the [E] interactions you see in-world
 AthenaClient.camera.target.addIgnoredEntity -> Lets you specify an entity handle to ignore interactions with
 AthenaClient.camera.target.removeIgnoredEntity -> Lets you specify an entity handle to remove from ignored interactions
+Updated Vehicle List -> Now Includes Fuel Types 
+Updated Fuel Stations to Specify Fuel Amount
+Interactions now display in-world descriptions
+Character Select does switch-out-switch-in
+Blip categories in Blip Interface
+German Locale File
+VEHICLE_ENGINE_OFF in JobCriteria -> Requires engine to be off at a job point
+Fixed Fuel Station not recognizing a player when leaving a vehicle to fuel
+Various Static Class to Const Conversions
+Restrict Inventory Drops to Dimension
+Object menu now passes item information, if it is an item
+Fix strange compatability issue with esbuild
+Athena.player.emit.createMissionText -> Draws a subtitle in the center bottom of the screen for a given time.
+Ability to set database name through configuration
 ```
 
 ## 3.8.0
