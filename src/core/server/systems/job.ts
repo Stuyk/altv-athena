@@ -67,7 +67,7 @@ export class Job {
     private objectives: Array<Objective> = [];
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
-    private quitCallback: (job: Job, reason: QuitReasons) => {};
+    private quitCallback: (job: Job, reason: QuitReasons) => void;
 
     /**
      * Creates an instance of a job handler.
@@ -614,7 +614,7 @@ export class Job {
      * @param {(job: Job) => {}} callback
      * @memberof Job
      */
-    addQuitCallback(callback: (job: Job, reason: 'user' | 'disconnected') => {}) {
+    addQuitCallback(callback: (job: Job, reason: 'user' | 'disconnected') => void) {
         this.quitCallback = callback;
     }
 }
