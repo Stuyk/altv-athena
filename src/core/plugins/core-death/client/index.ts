@@ -1,10 +1,15 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../../shared/configurations/shared';
+import { DEATH_CONFIG } from '../shared/config';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { DEATH_EVENTS } from '../shared/events';
+import { SCREEN_EFFECTS } from '../../../shared/enums/screenEffects';
 import { drawText2D } from '../../../client/utility/text';
 import { Timer } from '../../../client/utility/timers';
-import { DEATH_EVENTS } from '../shared/events';
+import { ScreenEffect } from '../../../client/utility/screenEffect';
+import { KeyHeld } from '../../../client/events/keyHeld';
+import { AthenaClient } from '../../../client/api/athena';
+import { sleep } from '../../../client/utility/sleep';
 
 let interval: number;
 let timeInTheFuture: number;
@@ -21,6 +26,23 @@ class InternalFunctions {
         timeInTheFuture = Date.now() + ms;
     }
 
+    private static async handleRespawnKey() {
+        // Can respawn now?
+        if (timeInTheFuture - Date.now() <= 0) {
+            // Unbind the respawn key
+            KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
+
+            // Switch out player now
+            AthenaClient.utility.switchInPlayer(2000);
+
+            // Wait just a bit for the switch to start
+            await sleep(1000);
+
+            // Send the respawn pressed event
+            alt.emitServer(DEATH_EVENTS.RESPAWN_PRESSED);
+        }
+    }
+
     private static handleMetaChange(key: string, newValue: any): void {
         if (key !== 'isDead') {
             return;
@@ -31,8 +53,13 @@ class InternalFunctions {
                 interval = Timer.createInterval(InternalFunctions.tick, 0, 'death.ts');
             }
 
-            native.animpostfxPlay('DeathFailOut', 0, false);
+            // Bind to respawn key
+            KeyHeld.register(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
+
+            // Start the effects
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
+            native.shakeGameplayCam('DEATH_FAIL_IN_EFFECT_SHAKE', 1);
+            ScreenEffect.startEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
             return;
         }
 
@@ -41,33 +68,31 @@ class InternalFunctions {
             interval = undefined;
         }
 
-        native.animpostfxStop('DeathFailOut');
+        // Clear the effects and ragdoll
+        native.stopGameplayCamShaking(true);
+        ScreenEffect.stopEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
         native.clearPedTasksImmediately(alt.Player.local.scriptID);
     }
 
     private static tick() {
         if (!alt.Player.local.vehicle) {
             if (!native.isPedRagdoll(alt.Player.local.scriptID)) {
-                native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, false, false, false);
+                native.setPedToRagdoll(alt.Player.local.scriptID, -1, -1, 0, true, true, false);
             }
         }
+
+        native.hideHudAndRadarThisFrame();
 
         const timeLeft = timeInTheFuture - Date.now();
         if (timeLeft > 0) {
             drawText2D(
-                `${(timeLeft / 1000).toFixed(2)}s Until Respawn`,
+                `${(timeLeft / 1000).toFixed(0)}s Until Respawn`,
                 { x: 0.5, y: 0.2 },
-                0.5,
+                0.75,
                 new alt.RGBA(255, 255, 255, 255),
             );
         } else {
-            drawText2D(
-                `/acceptdeath - To Trigger Respawn`,
-                { x: 0.5, y: 0.2 },
-                0.5,
-                new alt.RGBA(255, 255, 255, 255),
-                0,
-            );
+            drawText2D(`Tap X to Respawn`, { x: 0.5, y: 0.8 }, 1, new alt.RGBA(255, 255, 255, 255), 0);
         }
     }
 }

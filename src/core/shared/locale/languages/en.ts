@@ -18,7 +18,7 @@ export default {
     [LOCALE_KEYS.COMMAND_COORDS]: `_%_ [x] [y] [z] - Teleport to some coordinates`,
     [LOCALE_KEYS.COMMAND_DO]: `_%_ [message] - Describe an object, sound, etc.`,
     [LOCALE_KEYS.COMMAND_DUMMY_ITEM]: `_%_ - Get some debug items`,
-    [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] - Get an item by name`,
+    [LOCALE_KEYS.COMMAND_GET_ITEM]: `_%_ [item-name] [amount] - Get item/items by dbname/name`,
     [LOCALE_KEYS.COMMAND_LOW]: `_%_ [message] - Speak quietly`,
     [LOCALE_KEYS.COMMAND_MOD_CHAT]: `_%_ [message] - Speak to Admins & Mods`,
     [LOCALE_KEYS.COMMAND_ME]: `_%_ [message] - Describe a roleplay action`,
@@ -108,6 +108,7 @@ export default {
     [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
     [LOCALE_KEYS.INTERACTION_VIEW_OPTIONS]: `View Options`,
     // Item
+    [LOCALE_KEYS.ITEM_ARGUMENTS_MISSING]: `Arguments are missing.`,
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
