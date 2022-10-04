@@ -60,7 +60,7 @@ class ClientNametags {
             return;
         }
 
-        if (config.SHOULD_SCREEN_SHAKE) {
+        if (config.SHOULD_SCREEN_SHAKE && !native.isPedRagdoll(alt.Player.local.scriptID)) {
             if (alt.Player.local.isAiming) {
                 if (!native.isGameplayCamShaking()) {
                     native.shakeGameplayCam('HAND_SHAKE', 3);
