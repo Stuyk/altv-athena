@@ -8,9 +8,9 @@ import { sleep } from './sleep';
  * @param {number} duration
  * @return {*}  {Promise<boolean>}
  */
-export async function switchInPlayer(duration: number): Promise<boolean> {
+export async function switchInPlayer(duration: number, switchType: number = 2): Promise<boolean> {
     if (!native.isPlayerSwitchInProgress()) {
-        native.switchOutPlayer(alt.Player.local.scriptID, 0, 2);
+        native.switchOutPlayer(alt.Player.local.scriptID, 0, switchType);
     }
 
     await sleep(duration);
