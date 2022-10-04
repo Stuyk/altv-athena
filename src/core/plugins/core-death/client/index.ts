@@ -62,9 +62,9 @@ class InternalFunctions {
             );
         } else {
             drawText2D(
-                `/acceptdeath - To Trigger Respawn`,
-                { x: 0.5, y: 0.2 },
-                0.5,
+                `Tap X to Respawn`,
+                { x: 0.5, y: 0.8 },
+                1,
                 new alt.RGBA(255, 255, 255, 255),
                 0,
             );
