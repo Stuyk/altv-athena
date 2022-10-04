@@ -143,16 +143,16 @@ const Currency = {
  * @param callback - The function that will be called when the event is triggered.
  */
 function override<Key extends keyof typeof Currency>(functionName: Key, callback: typeof Currency[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.currency does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-export const exports: typeof Currency & { override?: typeof override } = {
+export const funcs: typeof Currency & { override?: typeof override } = {
     ...Currency,
     override,
 };
 
-export default exports;
+export default funcs;

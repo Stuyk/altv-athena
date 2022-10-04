@@ -1255,22 +1255,22 @@ const Inventory = {
 };
 
 /**
- * It takes a function name and a callback, and if the function name exists in the exports object, it
+ * It takes a function name and a callback, and if the function name exists in the funcs object, it
  * overrides it with the callback
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the event is triggered.
  */
 function override<Key extends keyof typeof Inventory>(functionName: Key, callback: typeof Inventory[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.inventory does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Inventory & { override?: typeof override } = {
+const funcs: typeof Inventory & { override?: typeof override } = {
     ...Inventory,
     override,
 };
 
-export default exports;
+export default funcs;

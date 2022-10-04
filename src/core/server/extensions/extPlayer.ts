@@ -5,6 +5,7 @@ import { InteractionShape } from './extColshape';
 import { Vector3 } from '../../shared/interfaces/vector';
 import IAttachable from '../../shared/interfaces/iAttachable';
 import { playerConst } from '../api/consts/constPlayer';
+import { Character } from '../../shared/interfaces/character';
 
 declare module 'alt-server' {
     export interface Player {
