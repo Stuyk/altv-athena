@@ -33,7 +33,9 @@ class InternalFunctions {
                 interval = Timer.createInterval(InternalFunctions.tick, 0, 'death.ts');
             }
 
+            // Start the effects
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
+            native.shakeGameplayCam('DEATH_FAIL_IN_EFFECT_SHAKE', 1);
             ScreenEffect.startEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
             return;
         }
@@ -43,6 +45,8 @@ class InternalFunctions {
             interval = undefined;
         }
 
+        // Clear the effects and ragdoll
+        native.stopGameplayCamShaking(true);
         ScreenEffect.stopEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
         native.clearPedTasksImmediately(alt.Player.local.scriptID);
     }
