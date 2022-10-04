@@ -7015,7 +7015,7 @@ export const VehicleData: Array<VehicleInfo> = [
         display: 'Conada',
         name: 'conada',
         type: VEHICLE_TYPE.AIRCRAFT,
-        class: VEHICLE_CLASS.AIRCRAFT,
+        class: VEHICLE_CLASS.HELICOPTER,
         sell: true,
         price: 700000,
         storage: 24,
