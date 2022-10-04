@@ -128,7 +128,6 @@ class InternalFunctions implements ViewModel {
         await PedEditCamera.destroy();
         await PedCharacter.destroy();
 
-        native.switchInPlayer(1500);
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
 
         alt.toggleGameControls(true);
