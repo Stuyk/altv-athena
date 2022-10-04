@@ -5,6 +5,8 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { drawText2D } from '../../../client/utility/text';
 import { Timer } from '../../../client/utility/timers';
 import { DEATH_EVENTS } from '../shared/events';
+import { ScreenEffect } from '../../../client/utility/screenEffect';
+import { SCREEN_EFFECTS } from '../../../shared/enums/ScreenEffects';
 
 let interval: number;
 let timeInTheFuture: number;
@@ -31,8 +33,8 @@ class InternalFunctions {
                 interval = Timer.createInterval(InternalFunctions.tick, 0, 'death.ts');
             }
 
-            native.animpostfxPlay('DeathFailOut', 0, false);
             native.playSoundFrontend(-1, 'Bed', 'WastedSounds', true);
+            ScreenEffect.startEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
             return;
         }
 
@@ -41,7 +43,7 @@ class InternalFunctions {
             interval = undefined;
         }
 
-        native.animpostfxStop('DeathFailOut');
+        ScreenEffect.stopEffect(SCREEN_EFFECTS.DEATH_FAIL_NEUTRAL_IN);
         native.clearPedTasksImmediately(alt.Player.local.scriptID);
     }
 
