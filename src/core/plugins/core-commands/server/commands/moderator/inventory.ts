@@ -41,10 +41,22 @@ class InventoryCommands {
 
     @command('getitem', LocaleController.get(LOCALE_KEYS.COMMAND_GET_ITEM, '/getitem'), PERMISSIONS.ADMIN)
     private static async handleGetItem(player: alt.Player, ...args) {
-        const amount = args[args.length - 1];
+        if (args.length === 0) {
+            return Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_ARGUMENTS_MISSING));
+        }
 
-        args.pop();
-        const fullItemName = args.join(' ');
+        if (args.length === 1) {
+            var amount: number = 1;
+            var fullItemName: string = args[0];
+        } else if (args.length >= 2 && isNaN(args[args.length - 1])) {
+            var amount: number = 1;
+            var fullItemName: string = args.join(' ');
+        } else if (args.length >= 2 && !isNaN(args[args.length - 1])) {
+            var amount: number = args[args.length - 1];
+            args.pop();
+            var fullItemName: string = args.join(' ');
+        }
+
         if (fullItemName.length <= 1) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));
             return;

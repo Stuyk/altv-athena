@@ -108,6 +108,7 @@ export default {
     [LOCALE_KEYS.INTERACTION_INTERACT_VEHICLE]: `Interact with Vehicle`,
     [LOCALE_KEYS.INTERACTION_VIEW_OPTIONS]: `View Options`,
     // Item
+    [LOCALE_KEYS.ITEM_ARGUMENTS_MISSING]: `Arguments are missing.`,
     [LOCALE_KEYS.ITEM_NOT_EQUIPPED]: `No item is equipped in that slot.`,
     [LOCALE_KEYS.ITEM_DOES_NOT_EXIST]: `_%_ does not exist.`,
     [LOCALE_KEYS.ITEM_WAS_ADDED_INVENTORY]: `_%_ was added to your inventory.`,
