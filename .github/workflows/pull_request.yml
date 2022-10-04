@@ -1,6 +1,6 @@
 on:
     pull_request:
-        types: [opened]
+        types: [opened, reopened]
 
 jobs:
     add_pr_comment:
@@ -8,7 +8,7 @@ jobs:
         name: 'Tell the reviewer how to checkout a branch locally from a PR.'
         env:
             PR_NUMBER: ${{ github.event.number }}
-            PR_REPO: ${{ github.event.repository }}
+            PR_HEAD_REF: ${{ github.head_ref }}
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -19,5 +19,5 @@ jobs:
                   message: |
                       Hello Reviewer(s),
                       If you need to check this out locally try this command.
-                      `git fetch origin pull/$PR_NUMBER/head:$PR_REPO`
+                      `git fetch origin pull/$PR_NUMBER/head:$PR_HEAD_REF`
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
