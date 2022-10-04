@@ -18,7 +18,7 @@ export class DeathSystem {
         PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, DeathSystem.handleCharacterSelect);
 
         // Player can now press a key to respawn
-        alt.onClient(DEATH_EVENTS.RESPAWN_PRESSED, this.handleRespawnPress)
+        alt.onClient(DEATH_EVENTS.RESPAWN_PRESSED, this.handleRespawnPress);
     }
 
     /**
@@ -54,8 +54,8 @@ export class DeathSystem {
 
     /**
      * Handle key press to respawn
-     * @param player 
-     * @returns 
+     * @param player
+     * @returns
      */
     private static handleRespawnPress(player: alt.Player): void {
         if (!player || !player.valid) {
@@ -153,7 +153,7 @@ export class DeathSystem {
 
         if (player.data.isDead) {
             Athena.player.emit.meta(player, 'isDead', true);
-    
+
             if (!TimeOfDeath[player.data._id.toString()]) {
                 TimeOfDeath[player.data._id.toString()] = Date.now() + DEATH_CONFIG.RESPAWN_TIME;
             }

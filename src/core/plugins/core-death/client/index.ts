@@ -30,7 +30,7 @@ class InternalFunctions {
         // Can respawn now?
         if (timeInTheFuture - Date.now() <= 0) {
             // Unbind the respawn key
-            KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey)
+            KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
 
             // Switch out player now
             AthenaClient.utility.switchInPlayer(2000);
@@ -92,13 +92,7 @@ class InternalFunctions {
                 new alt.RGBA(255, 255, 255, 255),
             );
         } else {
-            drawText2D(
-                `Tap X to Respawn`,
-                { x: 0.5, y: 0.8 },
-                1,
-                new alt.RGBA(255, 255, 255, 255),
-                0,
-            );
+            drawText2D(`Tap X to Respawn`, { x: 0.5, y: 0.8 }, 1, new alt.RGBA(255, 255, 255, 255), 0);
         }
     }
 }
