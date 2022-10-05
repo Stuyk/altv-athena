@@ -86,10 +86,10 @@ declare module 'alt-server' {
          * The model name of the vehicle.
          * Only available if the vehicle was spawned through Athena functions.
          * Meaning you did not use new alt.Vehicle
-         * @type {string}
+         * @type {string | number}
          * @memberof Vehicle
          */
-        modelName?: string;
+        modelName?: string | number;
 
         /**
          * A simple unique identifier to add to a vehicle.

@@ -123,7 +123,7 @@ export class Job {
      */
     addVehicle(
         player: alt.Player,
-        model: string,
+        model: string | number,
         pos: Vector3,
         rot: Vector3,
         color1?: alt.RGBA,
