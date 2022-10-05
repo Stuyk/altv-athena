@@ -12,7 +12,6 @@ import { sha256Random } from '../utility/encryption';
 const JobInstances: { [key: string]: Job } = {};
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
 const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
-type QuitReasons = 'user' | 'switch' | 'disconnected';
 
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
@@ -68,7 +67,7 @@ export class Job {
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
     private completedCallback: (job: Job) => Promise<void>;
-    private quitCallback: (job: Job, reason: QuitReasons) => void;
+    private quitCallback: (job: Job, reason: string) => void;
 
     /**
      * Creates an instance of a job handler.
@@ -89,7 +88,7 @@ export class Job {
         this.id = this.player.id;
 
         if (JobInstances[this.player.id]) {
-            JobInstances[this.player.id].quit('switch');
+            JobInstances[this.player.id].quit('Switched job');
         }
 
         JobInstances[this.player.id] = this;
@@ -257,7 +256,7 @@ export class Job {
      * @param {string} reason
      * @memberof Job
      */
-    quit(reason: QuitReasons) {
+    quit(reason: string) {
         if (JobInstances[this.player.id]) {
             delete JobInstances[this.player.id];
         }
@@ -640,10 +639,10 @@ export class Job {
     /**
      * Adds a callback that is called when a user quits a job.
      *
-     * @param {(job: Job, reason: QuitReasons) => void} callback
+     * @param {(job: Job, reason: string) => void} callback
      * @memberof Job
      */
-    addQuitCallback(callback: (job: Job, reason: QuitReasons) => void) {
+    addQuitCallback(callback: (job: Job, reason: string) => void) {
         this.quitCallback = callback;
     }
 }
@@ -683,5 +682,5 @@ alt.on('playerDisconnect', (player: alt.Player) => {
         return;
     }
 
-    JobInstances[id].quit('disconnected');
+    JobInstances[id].quit('Disconnected');
 });
