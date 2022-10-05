@@ -268,7 +268,7 @@ export class VehicleRepoJob {
             Athena.player.emit.soundFrontend(player, 'ScreenFlash', 'MissionFailedSounds');
             Athena.player.emit.createShard(player, {
                 title: '~r~Job Failed',
-                text: "~w~C'mon man I needed that car!",
+                text: "~w~C'mon man I needed that vehicle!",
                 duration: 7000,
             });
 
