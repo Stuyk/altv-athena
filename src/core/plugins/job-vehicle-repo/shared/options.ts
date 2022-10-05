@@ -2,7 +2,7 @@ export const JOB_VEHICLE_REPO_OPTIONS = {
     /**
      * Max time to complete the job in minutes
      */
-    MAXTIME: 30,
+    MAXTIME: 15,
     /**
      * Time in minutes before the job is available again
      */
