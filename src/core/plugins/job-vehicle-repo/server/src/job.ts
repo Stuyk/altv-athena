@@ -174,6 +174,12 @@ export class VehicleRepoJob {
             JOB_VEHICLE_REPO_OPTIONS.MAXTIME * 1000 * 60,
         );
 
+        // Send time limit message
+        Athena.player.emit.message(
+            player,
+            `Simeon: You have ${JOB_VEHICLE_REPO_OPTIONS.MAXTIME} minutes to bring me that vehicle!`,
+        );
+
         // Get random car color
         const randomColor = getRandomRGB();
 
