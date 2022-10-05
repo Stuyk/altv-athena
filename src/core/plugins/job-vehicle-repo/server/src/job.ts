@@ -171,6 +171,7 @@ export class VehicleRepoJob {
         // Start the job max time timer
         const jobTimer = alt.setTimeout(() => job.quit('user'), JOB_VEHICLE_REPO_OPTIONS.MAXTIME * 1000 * 60);
 
+        // Get random car color
         const randomColor = getRandomRGB();
 
         // Create the job vehicle
@@ -183,8 +184,10 @@ export class VehicleRepoJob {
             randomColor,
         );
 
+        // Set the job vehicle plate text
         vehicle.numberPlateText = 'REPO JOB';
 
+        // Get initial vehicle health values
         const bodyHealth = vehicle.bodyHealth;
         const engineHealth = vehicle.engineHealth;
         const petrolTankHealth = vehicle.petrolTankHealth;
@@ -203,6 +206,7 @@ export class VehicleRepoJob {
 
             vehicle.frozen = true;
 
+            // Get health percentages
             const bodyHealthPercent = vehicle.bodyHealth / bodyHealth;
             const engineHealthPercent = vehicle.engineHealth / engineHealth;
             const petrolTankHealthPercent = vehicle.petrolTankHealth / petrolTankHealth;
