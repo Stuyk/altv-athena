@@ -470,8 +470,9 @@ export class Job {
              * Before it is cleaned up.
              */
             if (typeof this.completedCallback === 'function') {
-                await this.completedCallback(this);
+                await this.completedCallback(this).catch((error) => alt.logError(error));
             }
+
             this.removeAllVehicles();
             Athena.player.emit.message(this.player, `Job Completed`);
 
