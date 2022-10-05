@@ -640,10 +640,10 @@ export class Job {
     /**
      * Adds a callback that is called when a user quits a job.
      *
-     * @param {(job: Job) => void} callback
+     * @param {(job: Job, reason: QuitReasons) => void} callback
      * @memberof Job
      */
-    addQuitCallback(callback: (job: Job, reason: 'user' | 'disconnected') => void) {
+    addQuitCallback(callback: (job: Job, reason: QuitReasons) => void) {
         this.quitCallback = callback;
     }
 }
