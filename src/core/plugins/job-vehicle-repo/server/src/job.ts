@@ -107,8 +107,9 @@ export class VehicleRepoJob {
                 alt.emitClient(
                     player,
                     JOB_VEHICLE_REPO_EVENTS.SET_OBJECTIVE,
-                    'Repo the ~y~[vehicle_name]~n~',
+                    'Repo the ~y~[vehicle_name]~w~ on [street_name]~n~',
                     randomVehicle.model,
+                    randomVehicle.pos,
                 );
             },
             callbackOnFinish: (player: alt.Player) => {
