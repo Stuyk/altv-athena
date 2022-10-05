@@ -66,8 +66,8 @@ export class Job {
     private objectives: Array<Objective> = [];
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
-    private completedCallback: (job: Job) => Promise<void>;
-    private quitCallback: (job: Job, reason: string) => void;
+    private completedCallback: () => Promise<void>;
+    private quitCallback: (reason: string) => void;
 
     /**
      * Creates an instance of a job handler.
@@ -273,7 +273,7 @@ export class Job {
             return;
         }
 
-        this.quitCallback(this, reason);
+        this.quitCallback(reason);
     }
 
     /**
@@ -469,7 +469,7 @@ export class Job {
              * Before it is cleaned up.
              */
             if (typeof this.completedCallback === 'function') {
-                await this.completedCallback(this).catch((error) => alt.logError(error));
+                await this.completedCallback().catch((error) => alt.logError(error));
             }
 
             this.removeAllVehicles();
@@ -627,22 +627,22 @@ export class Job {
     }
 
     /**
-     * Adds an async callback that is called when a user complete a job.
+     * Set the async callback that is called when a user completed a job.
      *
      * @param {(job: Job) => Promise<void>} callback
      * @memberof Job
      */
-    addCompletedCallback(callback: (job: Job) => Promise<void>) {
+    setCompletedCallback(callback: () => Promise<void>) {
         this.completedCallback = callback;
     }
 
     /**
-     * Adds a callback that is called when a user quits a job.
+     * Set the callback that is called when a user quits a job.
      *
      * @param {(job: Job, reason: string) => void} callback
      * @memberof Job
      */
-    addQuitCallback(callback: (job: Job, reason: string) => void) {
+    setQuitCallback(callback: (reason: string) => void) {
         this.quitCallback = callback;
     }
 }
