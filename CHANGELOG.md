@@ -55,6 +55,8 @@ Fix strange compatability issue with esbuild
 Athena.player.emit.createMissionText -> Draws a subtitle in the center bottom of the screen for a given time.
 Ability to set database name through configuration
 Job.addQuitCallback -> Adds a way to call a function when a job is quit.
+Add Skycam
+Add Option to Skycam to disable skycam when debug is on. Character select plugin.
 ```
 
 ## 3.8.0
