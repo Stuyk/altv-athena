@@ -168,6 +168,9 @@ export class VehicleRepoJob {
         // Create the job
         const job = new Job();
 
+        // Start the job max time timer
+        const jobTimer = alt.setTimeout(() => job.quit('user'), JOB_VEHICLE_REPO_OPTIONS.MAXTIME * 1000 * 60);
+
         const randomColor = getRandomRGB();
 
         // Create the job vehicle
@@ -194,6 +197,8 @@ export class VehicleRepoJob {
 
         // Handle job completed
         job.addCompletedCallback(async (job: Job) => {
+            alt.clearTimeout(jobTimer);
+
             alt.emitClient(player, JOB_VEHICLE_REPO_EVENTS.JOB_COMPLETED);
 
             vehicle.frozen = true;
@@ -233,6 +238,8 @@ export class VehicleRepoJob {
 
         // Handle job failed
         job.addQuitCallback((job, reason) => {
+            alt.clearTimeout(jobTimer);
+
             alt.emitClient(player, JOB_VEHICLE_REPO_EVENTS.UNSET_OBJECTIVE);
 
             Athena.player.emit.soundFrontend(player, 'ScreenFlash', 'MissionFailedSounds');
