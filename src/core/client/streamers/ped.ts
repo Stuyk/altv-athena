@@ -18,14 +18,14 @@ let interval;
 /**
  * Do Not Export Internal Only
  */
-class PedController {
-    static init() {
+const PedControllerConst = {
+    init() {
         localPeds = [];
         addedPeds = [];
         pedInfo = {};
-    }
+    },
 
-    static append(pedData: IPed) {
+    append(pedData: IPed) {
         if (!pedData.uid) {
             alt.logError(`(${JSON.stringify(pedData.pos)}) Ped is missing uid.`);
             return;
@@ -43,17 +43,17 @@ class PedController {
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
         }
-    }
+    },
 
-    static populate(peds: Array<IPed>) {
+    populate(peds: Array<IPed>) {
         addedPeds = peds;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
         }
-    }
+    },
 
-    static remove(uid: string) {
+    remove(uid: string) {
         isRemoving = true;
 
         let index = -1;
@@ -78,9 +78,9 @@ class PedController {
 
         localPeds.splice(index, 1);
         isRemoving = false;
-    }
+    },
 
-    static removeGlobalPed(uid: string) {
+    removeGlobalPed(uid: string) {
         isRemoving = true;
 
         let index = addedPeds.findIndex((ped) => ped.uid === uid);
@@ -94,15 +94,15 @@ class PedController {
         }
 
         isRemoving = false;
-    }
+    },
 
-    static playAnimation(uid: string, animation: Animation) {
+    playAnimation(uid: string, animation: Animation) {
         if (pedInfo[uid] !== null && pedInfo[uid] !== undefined) {
             playPedAnimation(pedInfo[uid], animation.dict, animation.name, animation.flags, animation.duration);
         }
-    }
+    },
 
-    static removeAll() {
+    removeAll() {
         const peds = addedPeds.concat(localPeds);
         while (peds.length >= 1) {
             const ped = peds.pop();
@@ -114,8 +114,8 @@ class PedController {
 
             native.deletePed(id);
         }
-    }
-}
+    },
+};
 
 export class ClientPedController {
     /**
@@ -148,8 +148,6 @@ export class ClientPedController {
             if (addedPedIndex >= 0) {
                 return addedPeds[addedPedIndex];
             }
-
-            continue;
         }
 
         return undefined;
@@ -261,6 +259,10 @@ function handleDrawPeds() {
         });
     }
 }
+
+export const PedController = {
+    ...PedControllerConst,
+};
 
 alt.on('connectionComplete', PedController.init);
 alt.on('disconnect', PedController.removeAll);
