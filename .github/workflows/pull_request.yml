@@ -3,7 +3,7 @@ on:
         types: [opened, reopened]
 
 permissions:
-    pull-requests: write
+    PullRequests: write
 
 jobs:
     add_pr_comment:
