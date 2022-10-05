@@ -115,7 +115,9 @@ export class VehicleRepoJob {
             callbackOnFinish: (player: alt.Player) => {
                 setTimeout(() => {
                     Athena.player.emit.soundFrontend(player, 'Phone_Text_Arrive', 'DLC_H4_MM_Sounds');
-                    Athena.player.emit.message(player, 'Simeon: Now get your ass back over here!');
+
+                    const randomSpeech = JOB_DATA.SPEECHES[randomNumberBetween(0, JOB_DATA.SPEECHES.length)];
+                    Athena.player.emit.message(player, `Simeon: ${randomSpeech}`);
                 }, 3000);
             },
         });

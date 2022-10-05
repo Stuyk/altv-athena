@@ -67,7 +67,18 @@ const POSITIONS: Array<{ pos: alt.Vector3; rot: alt.Vector3 }> = [
     },
 ];
 
+const SPEECHES = [
+    'Now get your ass back over here!',
+    'Marvelous, drive it back here ASAP!',
+    'Great, I knew I could count on you!',
+    'Oh yes! Come back quick!',
+    'Continue like that you will be employee of the month!',
+    'Good, now come back here!',
+    'You are da man!',
+];
+
 export default {
     MODELS,
     POSITIONS,
+    SPEECHES,
 };
