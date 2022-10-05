@@ -189,7 +189,7 @@ export class VehicleRepoJob {
             player,
             randomVehicle.model,
             randomVehicle.pos,
-            randomVehicle.rot,
+            new alt.Vector3(0, 0, randomVehicle.rot),
             randomColor,
             randomColor,
         );
@@ -283,7 +283,7 @@ export class VehicleRepoJob {
      * @return { model: string, pos: alt.Vector3; rot: alt.Vector3 }
      * @memberof Job
      */
-    static getRandomVehicle(): { model: VEHICLE_HASH; pos: alt.Vector3; rot: alt.Vector3 } {
+    static getRandomVehicle(): { model: VEHICLE_HASH; pos: alt.Vector3; rot: number } {
         let models = Object.values(JOB_DATA.MODELS);
         let positions = Object.values(JOB_DATA.POSITIONS);
         let position = positions[randomNumberBetween(0, positions.length)];
