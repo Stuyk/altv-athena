@@ -2,9 +2,6 @@ on:
     pull_request:
         types: [opened, reopened]
 
-permissions:
-    PullRequests: write
-
 jobs:
     add_pr_comment:
         runs-on: ubuntu-latest
@@ -12,6 +9,8 @@ jobs:
         env:
             PR_NUMBER: ${{ github.event.number }}
             PR_HEAD_REF: ${{ github.head_ref }}
+        permissions:
+            pull-requests: write
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -22,7 +21,6 @@ jobs:
                   message: |
                       Hello Reviewer(s),
                       If you need to check this out locally try this command.
-
                       ```
                       git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}} && git checkout ${{ env.PR_HEAD_REF}}
                       ```
