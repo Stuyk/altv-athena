@@ -19,14 +19,14 @@ interface Keybind {
     longPress?: (...args: any[]) => void; // Callback Function
 }
 
-export class KeybindController {
+const KeybindControllerConst = {
     /**
      * Used to register a Keybind to a callback function.
      * @static
      * @param {Keybind} keybind
      * @memberof KeybindController
      */
-    static registerKeybind(keybind: Keybind) {
+    registerKeybind(keybind: Keybind) {
         if (keybind.key === null || keybind.key === undefined) {
             throw new Error(`Keybind key number was not specified.`);
         }
@@ -36,7 +36,7 @@ export class KeybindController {
         }
 
         KEY_UP_BINDS[keybind.key] = keybind;
-    }
+    },
 
     /**
      * Called when the player lets go a key.
@@ -45,7 +45,7 @@ export class KeybindController {
      * @return {*}
      * @memberof KeybindController
      */
-    static keyUp(key: number) {
+    keyUp(key: number) {
         if (!KEY_UP_BINDS[key]) {
             return;
         }
@@ -90,7 +90,7 @@ export class KeybindController {
         if (KEY_UP_BINDS[key] && KEY_UP_BINDS[key].singlePress) {
             KEY_UP_BINDS[key].singlePress(key);
         }
-    }
+    },
 
     /**
      * Called when the player presses down a key.
@@ -99,7 +99,7 @@ export class KeybindController {
      * @return {*}
      * @memberof KeybindController
      */
-    static keyDown(key: number) {
+    keyDown(key: number) {
         // Athena Menus
         if (alt.Player.local.isMenuOpen) {
             return;
@@ -139,27 +139,29 @@ export class KeybindController {
                 KEY_UP_BINDS[key]['longPress'](key);
             }
         }, DELAY_BETWEEN_LONG_PRESSES);
-    }
+    },
 
     /**
      * Start listening for keybinds.
      * @static
      * @memberof KeybindController
      */
-    static start() {
+    start() {
         alt.on('keyup', KeybindController.keyUp);
         alt.on('keydown', KeybindController.keyDown);
-    }
+    },
 
     /**
      * Stop listening for keybinds.
      * @static
      * @memberof KeybindController
      */
-    static stop() {
+    stop() {
         alt.off('keyup', KeybindController.keyUp);
         alt.off('keydown', KeybindController.keyDown);
-    }
-}
-
+    },
+};
+export const KeybindController = {
+    ...KeybindControllerConst,
+};
 alt.onServer(SYSTEM_EVENTS.TICKS_START, KeybindController.start);
