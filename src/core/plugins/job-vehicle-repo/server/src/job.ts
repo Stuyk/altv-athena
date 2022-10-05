@@ -242,7 +242,7 @@ export class VehicleRepoJob {
             });
 
             // Re-init the job if the player completes it
-            setTimeout(VehicleRepoJob.init, JOB_VEHICLE_REPO_OPTIONS.COOLDOWN);
+            setTimeout(VehicleRepoJob.init, JOB_VEHICLE_REPO_OPTIONS.COOLDOWN * 1000 * 60);
         });
 
         // Handle job failed
@@ -259,7 +259,7 @@ export class VehicleRepoJob {
             });
 
             // Re-init the job if the player completes it
-            setTimeout(VehicleRepoJob.init, JOB_VEHICLE_REPO_OPTIONS.COOLDOWN);
+            setTimeout(VehicleRepoJob.init, JOB_VEHICLE_REPO_OPTIONS.COOLDOWN * 1000 * 60);
         });
     }
 
