@@ -175,9 +175,10 @@ export class VehicleRepoJob {
         );
 
         // Send time limit message
+        Athena.player.emit.soundFrontend(player, 'Phone_Text_Arrive', 'DLC_H4_MM_Sounds');
         Athena.player.emit.message(
             player,
-            `Simeon: You have max ${JOB_VEHICLE_REPO_OPTIONS.MAXTIME} minute(s) to bring back the vehicle!`,
+            `Simeon: Don't sleep you only got ${JOB_VEHICLE_REPO_OPTIONS.MAXTIME} minutes!`,
         );
 
         // Get random car color
