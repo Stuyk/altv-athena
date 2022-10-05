@@ -9,7 +9,7 @@ import JobEnums from '../../../../shared/interfaces/job';
 import { Objective } from '../../../../shared/interfaces/job';
 import { MARKER_TYPE } from '../../../../shared/enums/markerTypes';
 import { CurrencyTypes } from '../../../../shared/enums/currency';
-import { VEHICLE_HASH } from '../../../../shared/enums/VehicleHash';
+import { VEHICLE_HASH } from '../../../../shared/enums/vehicleHash';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { randomNumberBetween, getRandomRGB } from '../../../../shared/utility/random';
@@ -209,7 +209,7 @@ export class VehicleRepoJob {
         job.addPlayer(player);
 
         // Handle job completed
-        job.addCompletedCallback(async (job: Job) => {
+        job.setCompletedCallback(async () => {
             alt.clearTimeout(jobTimer);
 
             alt.emitClient(player, JOB_VEHICLE_REPO_EVENTS.JOB_COMPLETED);
@@ -260,7 +260,7 @@ export class VehicleRepoJob {
         });
 
         // Handle job failed
-        job.addQuitCallback((job, reason) => {
+        job.setQuitCallback((reason) => {
             alt.clearTimeout(jobTimer);
 
             alt.emitClient(player, JOB_VEHICLE_REPO_EVENTS.UNSET_OBJECTIVE);
