@@ -169,7 +169,10 @@ export class VehicleRepoJob {
         const job = new Job();
 
         // Start the job max time timer
-        const jobTimer = alt.setTimeout(() => job.quit('user'), JOB_VEHICLE_REPO_OPTIONS.MAXTIME * 1000 * 60);
+        const jobTimer = alt.setTimeout(
+            () => job.quit('Job time limit exceeded!'),
+            JOB_VEHICLE_REPO_OPTIONS.MAXTIME * 1000 * 60,
+        );
 
         // Get random car color
         const randomColor = getRandomRGB();
