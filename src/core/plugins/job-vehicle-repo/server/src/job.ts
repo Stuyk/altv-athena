@@ -212,23 +212,32 @@ export class VehicleRepoJob {
                 duration: 2000,
             });
 
-            await alt.Utils.wait(2000);
+            // Get the raw payout from the distance
+            const payoutFromDistance =
+                START_POINT.distanceTo(randomVehicle.pos) * JOB_VEHICLE_REPO_OPTIONS.PAYOUT_DISTANCE_MULTIPLIER;
 
-            const payoutFromDistance = START_POINT.distanceTo(randomVehicle.pos) * 0.5;
-            const totalEarned = Math.floor(Math.min(payoutFromDistance, JOB_VEHICLE_REPO_OPTIONS.MAX_PAYOUT));
-            let earned = Math.min(payoutFromDistance, JOB_VEHICLE_REPO_OPTIONS.MAX_PAYOUT);
-            earned *= bodyHealthPercent;
-            earned *= engineHealthPercent;
-            earned *= petrolTankHealthPercent;
-            earned = Math.floor(earned);
+            // Cap the payout to the max payout
+            let earned = Math.floor(Math.min(payoutFromDistance, JOB_VEHICLE_REPO_OPTIONS.MAX_PAYOUT));
+
+            // Get total total percentage of damage
+            let totalDamagePercent = Math.min(
+                1 - bodyHealthPercent + (1 - engineHealthPercent) + (1 - petrolTankHealthPercent),
+                1,
+            );
+
+            // Calculate the repair cost
+            let repairCost = Math.ceil(earned * totalDamagePercent);
+
+            // Substract the repair cost from the payout
+            earned = Math.max(0, Math.floor(earned - repairCost));
+
+            await alt.Utils.wait(2000);
 
             Athena.player.currency.add(player, CurrencyTypes.CASH, earned);
             Athena.player.emit.soundFrontend(player, 'Mission_Pass_Notify', 'DLC_HEISTS_GENERAL_FRONTEND_SOUNDS');
             Athena.player.emit.createShard(player, {
                 title: '~y~Job Completed',
-                text: `~w~+$${earned} ${
-                    earned < totalEarned ? '~n~~r~-$' + (totalEarned - earned) + ' repair cost' : ''
-                }`,
+                text: `~w~Received $${earned} ${repairCost > 0 ? '~n~~r~-$' + repairCost + ' repair cost' : ''}`,
                 duration: 7000,
             });
 
