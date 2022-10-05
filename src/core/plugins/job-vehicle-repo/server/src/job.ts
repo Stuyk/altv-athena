@@ -178,6 +178,8 @@ export class VehicleRepoJob {
             randomColor,
         );
 
+        vehicle.numberPlateText = 'REPO JOB';
+
         const bodyHealth = vehicle.bodyHealth;
         const engineHealth = vehicle.engineHealth;
         const petrolTankHealth = vehicle.petrolTankHealth;
