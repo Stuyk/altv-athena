@@ -45,6 +45,28 @@
         </div>
 
         <div class="subtitle-2 grey--text mb-2 mt-6">Age</div>
+        <div class="split split-full center mt-4">
+            <Input
+                :label="locales.LABEL_YEAR"
+                :stack="true"
+                :numberOnly="true"
+                :onInput="(text) => inputChange('year', text)"
+                :validateCallback="(valid) => setValidityProp('year', valid)"
+                :value="''"
+                :rules="[
+                    (text) => {
+                        return parseFloat(text) >= minYear ? null : `Minimum Year: ${minYear}`;
+                    },
+                    (text) => {
+                        return parseFloat(text) <= maxYear ? null : `Maximum Year: ${maxYear}`;
+                    },
+                ]"
+                :swapIconSide="true"
+                :icon="valid?.year ? 'icon-checkmark' : 'icon-question'"
+                :placeholder="year.toString()"
+                class="fill-full-width"
+            />
+        </div>
         <div class="split split-full center mt-2">
             <Input
                 :label="locales.LABEL_MONTH"
@@ -74,7 +96,7 @@
                 :value="''"
                 :rules="[
                     (text) => {
-                        return parseFloat(text) >= 1 && parseFloat(text) <= 31 ? null : 'Day is 1 to 31';
+                        return parseFloat(text) >= 1 && parseFloat(text) <= new Date(parseFloat(getYear()), parseFloat(getMonth()), 0).getDate() ? null : `Day is 1 to ${new Date(parseFloat(getYear()), parseFloat(getMonth()), 0).getDate()}`;
                     },
                 ]"
                 :swapIconSide="true"
@@ -83,28 +105,7 @@
                 class="fill-full-width"
             />
         </div>
-        <div class="split split-full center mt-4">
-            <Input
-                :label="locales.LABEL_YEAR"
-                :stack="true"
-                :numberOnly="true"
-                :onInput="(text) => inputChange('year', text)"
-                :validateCallback="(valid) => setValidityProp('year', valid)"
-                :value="''"
-                :rules="[
-                    (text) => {
-                        return parseFloat(text) >= minYear ? null : `Minimum Year: ${minYear}`;
-                    },
-                    (text) => {
-                        return parseFloat(text) <= maxYear ? null : `Maximum Year: ${maxYear}`;
-                    },
-                ]"
-                :swapIconSide="true"
-                :icon="valid?.year ? 'icon-checkmark' : 'icon-question'"
-                :placeholder="year.toString()"
-                class="fill-full-width"
-            />
-        </div>
+        
 
         <div class="subtitle-2 grey--text mb-2 mt-6">Gender</div>
         <div class="split split-full center mt-2 mb-4">
@@ -195,6 +196,12 @@ export default defineComponent({
     methods: {
         inputChange(name: string, text: string): void {
             this[name] = text;
+        },
+        getMonth(): string {
+            return this['month'];
+        },
+        getYear(): string {
+            return this['year'];
         },
         setValidityProp(name: string, valid: boolean): void {
             this.valid[name] = valid;
