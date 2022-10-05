@@ -24,4 +24,4 @@ jobs:
                       ```
                       git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}} && git checkout ${{ env.PR_HEAD_REF}}
                       ```
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.ATHENA_PAT }}
