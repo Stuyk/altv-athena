@@ -1,9 +1,6 @@
 on:
-    pull_request:
-        types: [opened, reopened]
-
-permissions:
-    PullRequests: write
+    pull_request_target:
+        types: [opened]
 
 jobs:
     add_pr_comment:
@@ -20,9 +17,7 @@ jobs:
               uses: thollander/actions-comment-pull-request@v1
               with:
                   message: |
-                      Hello Reviewer(s),
-                      If you need to check this out locally try this command.
-
+                      Use the command below to checkout this specific pull request code:
                       ```
                       git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}} && git checkout ${{ env.PR_HEAD_REF}}
                       ```

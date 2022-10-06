@@ -16,8 +16,13 @@ const Safe = {
             player.model = `mp_m_freemode_01`;
         }
 
-        player.acPosition = new alt.Vector3(x, y, z);
-        player.pos = new alt.Vector3(x, y, z);
+        const pos = new alt.Vector3(x, y, z);
+        if (player.vehicle && player.vehicle.driver === player) {
+            player.vehicle.pos = pos;
+        } else {
+            player.acPosition = pos;
+            player.pos = pos;
+        }
     },
     /**
      * Safely add health to this player.
