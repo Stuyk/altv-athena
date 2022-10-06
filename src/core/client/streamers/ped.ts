@@ -229,7 +229,7 @@ function handleDrawPeds() {
             native.setPedDiesWhenInjured(pedInfo[pedData.uid], false);
             native.taskSetBlockingOfNonTemporaryEvents(pedInfo[pedData.uid], true);
             native.setPedFleeAttributes(pedInfo[pedData.uid], 0, false);
-            native.setPedConfigFlag(pedInfo[pedData.uid], 32, false); // ped cannot fly thru windscreen
+            native.setPedConfigFlag(pedInfo[pedData.uid], 32, true); // ped can fly thru windscreen
             native.setPedConfigFlag(pedInfo[pedData.uid], 281, true); // ped no writhe
             native.setPedGetOutUpsideDownVehicle(pedInfo[pedData.uid], false);
             native.setPedCanEvasiveDive(pedInfo[pedData.uid], false);

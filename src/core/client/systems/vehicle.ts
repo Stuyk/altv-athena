@@ -115,9 +115,8 @@ export const VehicleController = {
         alt.Player.local.setMeta('SEATBELT', value);
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, value);
     },
-
     removeSeatBelt(vehicle: alt.Vehicle) {
-        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, false);
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, true);
     },
 
     /**
