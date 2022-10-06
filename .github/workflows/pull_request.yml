@@ -1,6 +1,6 @@
 on:
-    pull_request:
-        types: [opened, reopened]
+    pull_request_target:
+        types: [opened]
 
 jobs:
     add_pr_comment:
@@ -9,8 +9,6 @@ jobs:
         env:
             PR_NUMBER: ${{ github.event.number }}
             PR_HEAD_REF: ${{ github.head_ref }}
-        permissions:
-            pull-requests: write
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -19,9 +17,8 @@ jobs:
               uses: thollander/actions-comment-pull-request@v1
               with:
                   message: |
-                      Use this command to check this out locally. This message was automated.
-
+                      Use the command below to checkout this specific pull request code:
                       ```
                       git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}} && git checkout ${{ env.PR_HEAD_REF}}
                       ```
-                  GITHUB_TOKEN: ${{ secrets.ATHENA_PAT }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
