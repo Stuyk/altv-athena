@@ -5,7 +5,8 @@ import { PlayerEvents } from '../events/playerEvents';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Character, CharacterDefaults } from '../../shared/interfaces/character';
+import { Character } from '../../shared/interfaces/character';
+import { CharacterDefaults } from '../../shared/interfaces/characterDefaults';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { World } from './world';
 import { LocaleController } from '../../shared/locale/locale';
@@ -109,7 +110,7 @@ const CharacterSystemRef = {
         if (!player || !player.valid) {
             return;
         }
-        
+
         player.data = deepCloneObject(character);
 
         // Increase the value outright
@@ -149,7 +150,7 @@ const CharacterSystemRef = {
             if (!player || !player.valid) {
                 return;
             }
-            
+
             if (player.data.pos) {
                 Athena.player.safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
             } else {
