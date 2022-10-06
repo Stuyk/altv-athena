@@ -1,3 +1,5 @@
+export * as ClientAPI from './api/index';
+
 // Client Plugins
 import '../plugins/athena/client/imports';
 

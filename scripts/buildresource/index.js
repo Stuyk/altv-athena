@@ -5,8 +5,8 @@ import path from 'path';
 const scriptPath = path.join(process.cwd(), '/scripts/buildresource/resource.json');
 const defaults = {
     type: 'js',
-    main: 'server/startup.js',
-    'client-main': 'client/startup.js',
+    main: 'server/index.js',
+    'client-main': 'client/index.js',
     'client-files': ['client/*', 'shared/*'],
     deps: [],
     'required-permissions': ['Screen Capture'],

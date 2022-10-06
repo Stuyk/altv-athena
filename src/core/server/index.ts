@@ -1,3 +1,6 @@
+export * as ServerAPI from './api';
+export { DEFAULT_CONFIG } from './athena/index';
+
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
