@@ -5,14 +5,14 @@ import ISpinner from '../../shared/interfaces/iSpinner';
 
 let timeout: number;
 
-export default class Spinner {
+const Spinner = {
     /**
      * Create a spinner to show in the bottom-right corner.
      * @static
      * @param {ISpinner} spinner
      * @memberof Spinner
      */
-    static create(data: ISpinner) {
+    create(data: ISpinner) {
         Spinner.clear();
 
         if (!data.type) {
@@ -26,22 +26,24 @@ export default class Spinner {
         if (data.duration >= 0) {
             timeout = alt.setTimeout(Spinner.clear, data.duration);
         }
-    }
+    },
 
     /**
      * Used to clear the last set spinner.
      * @static
      * @memberof Spinner
      */
-    static clear() {
+    clear() {
         if (timeout) {
             alt.clearTimeout(timeout);
             timeout = null;
         }
 
         native.busyspinnerOff();
-    }
-}
+    },
+};
+
+export default Spinner;
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SPINNER, Spinner.create);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SPINNER_CLEAR, Spinner.clear);

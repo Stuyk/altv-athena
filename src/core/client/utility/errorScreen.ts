@@ -6,14 +6,14 @@ import IErrorScreen from '../../shared/interfaces/iErrorScreen';
 let interval: number;
 let timeout: number;
 
-export default class ErrorScreen {
+const ErrorScreen = {
     /**
      * Create an error screen that takes up the whole screen.
      * @static
      * @param {IErrorScreen} screen
      * @memberof ErrorScreen
      */
-    static create(screen: IErrorScreen) {
+    create(screen: IErrorScreen) {
         ErrorScreen.clear();
 
         alt.addGxtText('warning_error', screen.title);
@@ -45,14 +45,14 @@ export default class ErrorScreen {
         if (screen.duration >= 0) {
             alt.setTimeout(ErrorScreen.clear, screen.duration);
         }
-    }
+    },
 
     /**
      * Clear the currently drawn error screen.
      * @static
      * @memberof ErrorScreen
      */
-    static clear() {
+    clear() {
         if (timeout) {
             alt.clearTimeout(timeout);
             timeout = null;
@@ -62,8 +62,10 @@ export default class ErrorScreen {
             alt.clearInterval(interval);
             interval = null;
         }
-    }
-}
+    },
+};
+
+export default ErrorScreen;
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN, ErrorScreen.create);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN_CLEAR, ErrorScreen.clear);

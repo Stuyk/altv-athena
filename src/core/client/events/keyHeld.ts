@@ -2,8 +2,8 @@ import alt from 'alt-client';
 
 const holdableKeys: { [key: string]: Array<{ onKeyDown?: Function; onKeyUp?: Function }> } = {};
 
-class InternalFunctions {
-    static handleKeyUp(key: number) {
+const InternalFunctions = {
+    handleKeyUp(key: number) {
         if (!holdableKeys[key]) {
             return;
         }
@@ -11,9 +11,9 @@ class InternalFunctions {
         for (const [, handlers] of Object.entries(holdableKeys[key])) {
             handlers.onKeyUp?.();
         }
-    }
+    },
 
-    static handleKeyDown(key: number) {
+    handleKeyDown(key: number) {
         if (!holdableKeys[key]) {
             return;
         }
@@ -21,14 +21,14 @@ class InternalFunctions {
         for (const [, handlers] of Object.entries(holdableKeys[key])) {
             handlers.onKeyDown?.();
         }
-    }
-}
+    },
+};
 
-export class KeyHeld {
-    static init() {
+export const KeyHeld = {
+    init() {
         alt.on('keyup', InternalFunctions.handleKeyUp);
         alt.on('keydown', InternalFunctions.handleKeyDown);
-    }
+    },
 
     /**
      * Use https://keycode.info for proper key numbers.
@@ -40,7 +40,7 @@ export class KeyHeld {
      * @return {void}
      * @memberof KeyHeld
      */
-    static register(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
+    register(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
         // Verify a key is passed
         if (typeof key === 'undefined') {
             alt.logError(`Key was not specified for KeyHeld.register`);
@@ -64,7 +64,7 @@ export class KeyHeld {
         });
 
         alt.log(`${String.fromCharCode(key)} | Was Registered in KeyHeld`);
-    }
+    },
 
     /**
      * Use https://keycode.info for proper key numbers.
@@ -76,7 +76,7 @@ export class KeyHeld {
      * @return {void}
      * @memberof KeyHeld
      */
-    static unregister(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
+    unregister(key: number, onKeyDown: Function | undefined, onKeyUp: Function | undefined = undefined): void {
         // Verify a key is passed
         if (typeof key === 'undefined') {
             alt.logError(`Key was not specified for KeyHeld.unregister`);
@@ -122,7 +122,7 @@ export class KeyHeld {
 
             return true;
         });
-    }
-}
+    },
+};
 
 KeyHeld.init();

@@ -10,21 +10,21 @@ let localNotifications: Array<IWorldNotification> = [];
 let isRemoving = false;
 let interval: number;
 
-class ClientWorldNotificationController {
-    static init() {
+const ClientWorldNotificationController = {
+    init() {
         addedNotifications = [];
         localNotifications = [];
-    }
+    },
 
-    static stop() {
+    stop() {
         if (!interval) {
             return;
         }
 
         Timer.clearInterval(interval);
-    }
+    },
 
-    static append(notification: IWorldNotification) {
+    append(notification: IWorldNotification) {
         if (!notification.uid) {
             alt.logError(`(${JSON.stringify(notification.pos)}) WorldNotification is missing uid.`);
             return;
@@ -43,17 +43,17 @@ class ClientWorldNotificationController {
         if (!interval) {
             interval = Timer.createInterval(handleDrawNotifications, 0, 'worldNotifications.ts');
         }
-    }
+    },
 
-    static populate(notifications: Array<IWorldNotification>) {
+    populate(notifications: Array<IWorldNotification>) {
         addedNotifications = notifications;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawNotifications, 0, 'worldNotifications.ts');
         }
-    }
+    },
 
-    static remove(uid: string) {
+    remove(uid: string) {
         isRemoving = true;
 
         const index = localNotifications.findIndex((marker) => marker.uid === uid);
@@ -70,8 +70,8 @@ class ClientWorldNotificationController {
 
         localNotifications.splice(index, 1);
         isRemoving = false;
-    }
-}
+    },
+};
 
 function handleDrawNotifications() {
     if (isRemoving) {

@@ -22,7 +22,7 @@ const BLACKLISTED_VEHICLE_TYPES = [
 
 const Injections: Array<VehicleMenuInjection> = [];
 
-export class VehicleWheelMenu {
+export const VehicleWheelMenu = {
     /**
      * Create a vehicle wheel menu injection.
      * Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -32,9 +32,9 @@ export class VehicleWheelMenu {
      * @param {VehicleMenuInjection} callback
      * @memberof VehicleMenu
      */
-    static addInjection(callback: VehicleMenuInjection) {
+    addInjection(callback: VehicleMenuInjection) {
         Injections.push(callback);
-    }
+    },
 
     /**
      * Open an in-vehicle menu option and add injections relevant to in-vehicle.
@@ -44,7 +44,7 @@ export class VehicleWheelMenu {
      * @return {*}
      * @memberof VehicleWheelMenu
      */
-    static openInVehicleMenu(vehicle: alt.Vehicle) {
+    openInVehicleMenu(vehicle: alt.Vehicle) {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -83,9 +83,9 @@ export class VehicleWheelMenu {
         }
 
         WheelMenu.open('Vehicle Options', options);
-    }
+    },
 
-    static openMenu(vehicle: alt.Vehicle) {
+    openMenu(vehicle: alt.Vehicle) {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -150,5 +150,5 @@ export class VehicleWheelMenu {
         }
 
         WheelMenu.open('Vehicle Options', options);
-    }
-}
+    },
+};

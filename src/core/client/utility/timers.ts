@@ -20,7 +20,7 @@ const timersData: { [key: number]: Array<number> } = {};
 const timeouts: Array<TimerInfo> = [];
 let count;
 
-export class Timer {
+export const Timer = {
     /**
      * Created a tracked interval that is called every 'x' ms.
      * @param {(...args: any[]) => void} callback
@@ -28,7 +28,7 @@ export class Timer {
      * @return {*}  {number}
      * @memberof Timer
      */
-    static createInterval(callback: (...args: any[]) => void, ms: number, name = ''): number {
+    createInterval(callback: (...args: any[]) => void, ms: number, name = ''): number {
         const id = alt.setInterval(async () => {
             const startTime = Date.now();
             await callback();
@@ -47,14 +47,14 @@ export class Timer {
         alt.log(`| Interval | ID ${id} | ${name} | ${ms}ms |`);
         timers.push({ id, ms, name });
         return id;
-    }
+    },
 
     /**
      * Clear a track interval.
      * @param {number} intervalNumber
      * @memberof Timer
      */
-    static clearInterval(intervalNumber: number) {
+    clearInterval(intervalNumber: number) {
         if (intervalNumber !== undefined && intervalNumber !== null && !isNaN(intervalNumber)) {
             alt.clearInterval(intervalNumber);
         }
@@ -67,14 +67,14 @@ export class Timer {
         const data = timers[index];
         alt.log(`| Clear Interval | ID ${data.id} | ${data.name} |`);
         timers.splice(index, 1);
-    }
+    },
 
     /**
      * Clear a tracked timeout early. Removes callback if cleared.
      * @param {number} timeoutNumber
      * @memberof Timer
      */
-    static clearTimeout(timeoutNumber: number, doNotClear: boolean = false) {
+    clearTimeout(timeoutNumber: number, doNotClear: boolean = false) {
         if (!doNotClear) {
             try {
                 alt.clearTimeout(timeoutNumber);
@@ -87,7 +87,7 @@ export class Timer {
         }
 
         timeouts.splice(index, 1);
-    }
+    },
 
     /**
      * Create a tracked timeout that expires after 'x' ms.
@@ -96,7 +96,7 @@ export class Timer {
      * @return {*}  {number}
      * @memberof Timer
      */
-    static createTimeout(callback: (...args: any[]) => void, ms: number): number {
+    createTimeout(callback: (...args: any[]) => void, ms: number): number {
         const id = alt.setTimeout(() => {
             Timer.clearTimeout(id, true);
             callback();
@@ -104,16 +104,16 @@ export class Timer {
 
         timeouts.push({ id, ms });
         return id;
-    }
+    },
 
-    static getTimers() {
+    getTimers() {
         for (let i = 0; i < timers.length; i++) {
             const timer = timers[i];
             alt.log(`| Interval | ID ${timer.id} | ${timer.name} | ${timer.ms}ms |`);
         }
-    }
+    },
 
-    static getTimersInfo() {
+    getTimersInfo() {
         alt.log(`=== TIMERS INFO ===`);
         Object.keys(TIMER_CATEGORIES).forEach((category) => {
             const [smallMS, largeMS] = TIMER_CATEGORIES[category];
@@ -121,9 +121,9 @@ export class Timer {
             const count = validTimers ? validTimers.length : 0;
             alt.log(`${count} || ${smallMS}ms - ${largeMS}ms`);
         });
-    }
+    },
 
-    static getTimerInfo(id: string) {
+    getTimerInfo(id: string) {
         if (!timersData[id]) {
             alt.log(`No Timer Info for ${id}`);
             return;
@@ -131,15 +131,15 @@ export class Timer {
 
         const avg = getAverage(timersData[id]);
         alt.log(`${id} || Completion Time: ${avg}ms`);
-    }
+    },
 
-    static getTimeoutInfo() {
+    getTimeoutInfo() {
         alt.log(`=== INTERVAL INFO ===`);
         const count = timeouts.length;
         alt.log(`Total: ${count}`);
-    }
+    },
 
-    static parse(cmd: string, id: string) {
+    parse(cmd: string, id: string) {
         if (cmd.includes('timerslist')) {
             Timer.getTimers();
             return;
@@ -159,9 +159,9 @@ export class Timer {
             Timer.getTimeoutInfo();
             return;
         }
-    }
+    },
 
-    static clearAllTimers() {
+    clearAllTimers() {
         while (timers.length >= 1) {
             const timer = timers.pop();
             alt.clearTimer(timer.id);
@@ -171,8 +171,8 @@ export class Timer {
             const timeout = timeouts.pop();
             alt.clearTimeout(timeout.id);
         }
-    }
-}
+    },
+};
 
 alt.on('consoleCommand', Timer.parse);
 alt.on('disconnect', Timer.clearAllTimers);

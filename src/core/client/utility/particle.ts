@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-export class ClientParticles {
+export const ClientParticles = {
     /**
      * It creates a particle effect at a given position, with a given scale, for a given duration.
      *
@@ -12,7 +12,7 @@ export class ClientParticles {
      * @param {number} [duration=5000] - How long the particle effect will last.
      * @returns Nothing.
      */
-    static async play(
+    async play(
         dict: string,
         name: string,
         scale: number,
@@ -51,5 +51,5 @@ export class ClientParticles {
                 resolve();
             }, duration);
         });
-    }
-}
+    },
+};
