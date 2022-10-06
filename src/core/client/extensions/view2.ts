@@ -21,7 +21,7 @@ let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
 
-class InternalFunctions {
+const InternalFunctions = {
     /**
      * Gets all current pages and updates the WebView process.
      *
@@ -29,7 +29,7 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static async updatePages() {
+    async updatePages() {
         const view = await WebViewController.get();
         if (!view) {
             return;
@@ -63,7 +63,7 @@ class InternalFunctions {
             }),
             'persistent',
         );
-    }
+    },
 
     /**
      * Fowards a WebView event to the specified callback.
@@ -74,14 +74,14 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static handleClientEvent(eventName: string, ...args: any[]) {
+    handleClientEvent(eventName: string, ...args: any[]) {
         if (!ClientEvents[eventName]) {
             alt.logWarning(`Event ${eventName} called but not registered with WebViewController.on`);
             return;
         }
 
         ClientEvents[eventName](...args);
-    }
+    },
 
     /**
      * Forwards an event from the WebView to the server.
@@ -91,9 +91,9 @@ class InternalFunctions {
      * @param {...any[]} args
      * @memberof InternalFunctions
      */
-    static handleServerEvent(eventName: string, ...args: any[]) {
+    handleServerEvent(eventName: string, ...args: any[]) {
         alt.emitServer(eventName, ...args);
-    }
+    },
 
     /**
      * Emits a ready callback from the WebView.
@@ -104,14 +104,14 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static handleReadyEvent(pageName: string, ...args: any[]) {
+    handleReadyEvent(pageName: string, ...args: any[]) {
         if (!ReadyEvents[pageName]) {
             alt.logWarning(`Ready Event for ${pageName} called but not registered with WebViewController.onReady`);
             return;
         }
 
         ReadyEvents[pageName](...args);
-    }
+    },
 
     /**
      * Handles events called from server to be passed straight into the WebView.
@@ -122,14 +122,14 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static async onServer(eventName: string, ...args: any[]) {
+    async onServer(eventName: string, ...args: any[]) {
         const view = await WebViewController.get();
         if (!view) {
             return;
         }
 
         view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
-    }
+    },
 
     /**
      * Mostly used for the 'Escape' key.
@@ -139,11 +139,11 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static handleKeyDownEvent(key: number) {
+    handleKeyDownEvent(key: number) {
         if (key === 27) {
             InternalFunctions.closeNonOverlayPages();
         }
-    }
+    },
 
     /**
      * Closes all pages that are not overlay pages.
@@ -151,7 +151,7 @@ class InternalFunctions {
      * @static
      * @memberof InternalFunctions
      */
-    static async closeNonOverlayPages() {
+    async closeNonOverlayPages() {
         if (isUpdating) {
             await InternalFunctions.isDoneUpdating();
         }
@@ -188,9 +188,9 @@ class InternalFunctions {
         alt.nextTick(() => {
             isUpdating = false;
         });
-    }
+    },
 
-    static async isDoneUpdating(): Promise<void> {
+    async isDoneUpdating(): Promise<void> {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (isUpdating) {
@@ -201,17 +201,17 @@ class InternalFunctions {
                 return resolve();
             }, 50);
         });
-    }
-}
+    },
+};
 
-export class WebViewController {
+export const WebViewController = {
     /**
      * Sets the URL to use based on current deployment.
      * @static
      * @param {string} url
      * @memberof WebViewController
      */
-    static create(url: string) {
+    create(url: string) {
         _defaultURL = url;
 
         if (url.includes('localhost')) {
@@ -238,7 +238,7 @@ export class WebViewController {
 
             _webview.on(WebViewEventNames.CLOSE_PAGE, InternalFunctions.closeNonOverlayPages);
         }
-    }
+    },
 
     /**
      * Trigger this to hide/show all overlays like Chat, HUD, etc.
@@ -246,7 +246,7 @@ export class WebViewController {
      * @param {boolean} value
      * @memberof WebViewController
      */
-    static async setOverlaysVisible(value: boolean, doNotUpdate = false) {
+    async setOverlaysVisible(value: boolean, doNotUpdate = false) {
         for (let i = 0; i < OverlayPages.length; i++) {
             OverlayPages[i].isHidden = !value;
 
@@ -266,7 +266,7 @@ export class WebViewController {
         }
 
         await InternalFunctions.updatePages();
-    }
+    },
 
     /**
      * Registers a page that never, ever closes. Ever.
@@ -276,14 +276,14 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static registerPersistentPage(pageName: string) {
+    registerPersistentPage(pageName: string) {
         const index = PersistentPages.findIndex((p) => p === pageName);
         if (index >= 0) {
             return;
         }
 
         PersistentPages.push(pageName);
-    }
+    },
 
     /**
      * Register a Page Overlay such as HUD elements.
@@ -294,7 +294,7 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static registerOverlay(pageName: string, callback: (isVisible: boolean) => void = undefined) {
+    registerOverlay(pageName: string, callback: (isVisible: boolean) => void = undefined) {
         const index = OverlayPages.findIndex((p) => p.name === pageName);
         if (index >= 0) {
             OverlayPages[index].callback = callback;
@@ -303,7 +303,7 @@ export class WebViewController {
 
         OverlayPages.push({ name: pageName, callback });
         InternalFunctions.updatePages();
-    }
+    },
 
     /**
      * Trigger this to hide/show a specific overlay
@@ -313,7 +313,7 @@ export class WebViewController {
      * @param {boolean} state
      * @memberof WebViewController
      */
-    static setOverlayVisible(pageName: string, state: boolean) {
+    setOverlayVisible(pageName: string, state: boolean) {
         const pageIndex = OverlayPages.findIndex((page) => page.name === pageName);
         if (pageIndex === -1) {
             return;
@@ -325,7 +325,7 @@ export class WebViewController {
         }
 
         OverlayPages[pageIndex].callback(state);
-    }
+    },
 
     /**
      * Get the current WebView instance.
@@ -333,7 +333,7 @@ export class WebViewController {
      * @return {Promise<alt.WebView>}
      * @memberof WebViewController
      */
-    static async get(): Promise<alt.WebView> {
+    async get(): Promise<alt.WebView> {
         return new Promise((resolve: Function) => {
             let attempts = 0;
 
@@ -357,16 +357,16 @@ export class WebViewController {
                 return resolve(_webview);
             }, 100);
         });
-    }
+    },
 
     /**
      * Destroy the WebView
      * @static
      * @memberof WebViewController
      */
-    static dispose() {
-        _webview && _webview.valid &&  _webview.destroy();
-    }
+    dispose() {
+        _webview && _webview.valid && _webview.destroy();
+    },
 
     /**
      * Binds a WebView event once and ensures it is never bound again.
@@ -376,7 +376,7 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static async on(eventName: string, listener: (...args: any[]) => void) {
+    async on(eventName: string, listener: (...args: any[]) => void) {
         const view = await WebViewController.get();
         const index: number = _currentEvents.findIndex((e) => e.eventName === eventName);
         if (index >= 0) {
@@ -385,7 +385,7 @@ export class WebViewController {
 
         view.on(eventName, listener);
         _currentEvents.push({ eventName, callback: listener });
-    }
+    },
 
     /**
      * Unbinds events from the WebView. Mostly useless.
@@ -395,7 +395,7 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static async off(eventName: string, listener: (...args: any[]) => void) {
+    async off(eventName: string, listener: (...args: any[]) => void) {
         const view = await WebViewController.get();
         view.off(eventName, listener);
 
@@ -405,7 +405,7 @@ export class WebViewController {
         }
 
         _currentEvents.splice(index, 1);
-    }
+    },
 
     /**
      * Emit an event to the WebView.
@@ -414,10 +414,10 @@ export class WebViewController {
      * @param {...any[]} args
      * @memberof WebViewController
      */
-    static async emit(eventName: string, ...args: any[]) {
+    async emit(eventName: string, ...args: any[]) {
         const view = await WebViewController.get();
         view.emit(eventName, ...args);
-    }
+    },
 
     /**
      * Used to open a page or pages.
@@ -429,7 +429,7 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static async openPages(
+    async openPages(
         pageOrPages: Array<string> | string,
         hideOverlays: boolean = true,
         closeOnEscapeCallback: () => void = undefined,
@@ -480,27 +480,27 @@ export class WebViewController {
         alt.nextTick(() => {
             isUpdating = false;
         });
-    }
+    },
 
     /**
      * Focus the WebView Instance
      * @static
      * @memberof WebViewController
      */
-    static async focus() {
+    async focus() {
         const view = await WebViewController.get();
         view.focus();
-    }
+    },
 
     /**
      * Focus the WebView Instance
      * @static
      * @memberof WebViewController
      */
-    static async unfocus() {
+    async unfocus() {
         const view = await WebViewController.get();
         view.unfocus();
-    }
+    },
 
     /**
      * Show or hide the cursor.
@@ -508,7 +508,7 @@ export class WebViewController {
      * @param {boolean} state
      * @memberof WebViewController
      */
-    static async showCursor(state: boolean) {
+    async showCursor(state: boolean) {
         if (state) {
             _cursorCount += 1;
             try {
@@ -523,7 +523,7 @@ export class WebViewController {
 
             _cursorCount = 0;
         }
-    }
+    },
 
     /**
      * Closes an overlay page or pages.
@@ -533,7 +533,7 @@ export class WebViewController {
      * @return {*}
      * @memberof WebViewController
      */
-    static async closeOverlays(pageNames: Array<string>) {
+    async closeOverlays(pageNames: Array<string>) {
         if (isUpdating) {
             await InternalFunctions.isDoneUpdating();
         }
@@ -565,7 +565,7 @@ export class WebViewController {
         alt.nextTick(() => {
             isUpdating = false;
         });
-    }
+    },
 
     /**
      * Close a group of pages that may or may not be open.
@@ -574,7 +574,7 @@ export class WebViewController {
      * @param {Array<string>} pageNames
      * @memberof WebViewController
      */
-    static async closePages(pageNames: Array<string>, showOverlays = false) {
+    async closePages(pageNames: Array<string>, showOverlays = false) {
         if (isUpdating) {
             await InternalFunctions.isDoneUpdating();
         }
@@ -610,7 +610,7 @@ export class WebViewController {
         alt.nextTick(() => {
             isUpdating = false;
         });
-    }
+    },
 
     /**
      * Registers an event to call when a component is loaded.
@@ -620,9 +620,9 @@ export class WebViewController {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewController
      */
-    static ready(pageName: string, callback: (...args: any[]) => void) {
+    ready(pageName: string, callback: (...args: any[]) => void) {
         ReadyEvents[pageName] = callback;
-    }
+    },
 
     /**
      * Registers an event to call when a component is loaded.
@@ -632,7 +632,7 @@ export class WebViewController {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewController
      */
-    static onInvoke(eventName: string, callback: (...args: any[]) => void) {
+    onInvoke(eventName: string, callback: (...args: any[]) => void) {
         if (ClientEvents[eventName]) {
             console.warn(
                 `[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`,
@@ -643,7 +643,7 @@ export class WebViewController {
         }
 
         ClientEvents[eventName] = callback;
-    }
+    },
 
     /**
      * Emit through the WebViewEvents Helper
@@ -654,15 +654,15 @@ export class WebViewController {
      * @param {...any[]} args
      * @memberof WebViewController
      */
-    static async invoke(eventName: string, ...args: any[]) {
+    async invoke(eventName: string, ...args: any[]) {
         const view = await WebViewController.get();
         if (!view) {
             return;
         }
 
         view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
-    }
-}
+    },
+};
 
 alt.on('keyup', InternalFunctions.handleKeyDownEvent);
 alt.on('disconnect', WebViewController.dispose);

@@ -12,7 +12,7 @@ interface TextProperties {
     offsetY?: number;
 }
 
-export class ScreenText {
+export const ScreenText = {
     /**
      * Used as a utility for strength length.
      * @static
@@ -20,7 +20,7 @@ export class ScreenText {
      * @return {*}  {void}
      * @memberof ScreenText
      */
-    static addLongString(text: string): void {
+    addLongString(text: string): void {
         if (!text.length) {
             return;
         }
@@ -39,7 +39,7 @@ export class ScreenText {
 
             native.addTextComponentSubstringPlayerName(text.substring(currentIndex, position));
         }
-    }
+    },
 
     /**
      * Get the float width of text. (0.1 - 1)
@@ -50,13 +50,13 @@ export class ScreenText {
      * @return {*}  {number}
      * @memberof ScreenText
      */
-    static getTextWidth(text: string, font: number, scale: number): number {
+    getTextWidth(text: string, font: number, scale: number): number {
         native.beginTextCommandGetWidth('CELL_EMAIL_BCON');
         ScreenText.addLongString(text);
         native.setTextFont(font);
         native.setTextScale(1, scale);
         return native.endTextCommandGetWidth(true);
-    }
+    },
 
     /**
      * Get the height of text based on scale and font.
@@ -66,9 +66,9 @@ export class ScreenText {
      * @return {*}
      * @memberof ScreenText
      */
-    static getTextHeight(scale: number, font: number): number {
+    getTextHeight(scale: number, font: number): number {
         return native.getRenderedCharacterHeight(scale, font);
-    }
+    },
 
     /**
      * Draw text with a background and apply padding.
@@ -83,7 +83,7 @@ export class ScreenText {
      * @param {TextProperties} props
      * @memberof ScreenText
      */
-    static drawTextWithBackground(
+    drawTextWithBackground(
         text: string,
         x: number,
         y: number,
@@ -133,5 +133,5 @@ export class ScreenText {
 
         drawRectangle2D(rectPos, rectSize, background);
         drawText2D(text, textPos, scale, foreground);
-    }
-}
+    },
+};

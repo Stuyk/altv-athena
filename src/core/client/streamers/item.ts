@@ -12,21 +12,21 @@ let interval: number;
 /**
  * Do Not Export Internal Only
  */
-class InternalFunctions {
-    static init() {
+const InternalFunctions = {
+    init() {
         addedItems = [];
         closestItems = [];
-    }
+    },
 
-    static stop() {
+    stop() {
         if (!interval) {
             return;
         }
 
         Timer.clearInterval(interval);
-    }
+    },
 
-    static populate(items: Array<GroundItem>) {
+    populate(items: Array<GroundItem>) {
         addedItems = items;
 
         if (items.length <= 0) {
@@ -36,9 +36,9 @@ class InternalFunctions {
         if (!interval) {
             interval = Timer.createInterval(InternalFunctions.handleDrawItems, 0, 'item.ts');
         }
-    }
+    },
 
-    static handleDrawItems() {
+    handleDrawItems() {
         if (alt.Player.local.isWheelMenuOpen) {
             return;
         }
@@ -78,10 +78,10 @@ class InternalFunctions {
         }
 
         closestItems = itemsCloseToPlayer;
-    }
-}
+    },
+};
 
-export class ClientItemStreamer {
+export const ClientItemStreamer = {
     /**
      * Return an array of items that are closest to the player.
      *
@@ -89,10 +89,10 @@ export class ClientItemStreamer {
      * @return {Array<GroundItem>}
      * @memberof ClientItemStreamer
      */
-    static getClosestItems(): Array<GroundItem> {
+    getClosestItems(): Array<GroundItem> {
         return closestItems;
-    }
-}
+    },
+};
 
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);

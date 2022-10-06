@@ -9,7 +9,7 @@ let timeline: Array<Task | TaskCallback> = [];
 let vehicle;
 let vehicle_only = false;
 
-class TaskHelper {
+const TaskHelper = {
     /**
      * Set the tasks for the player.
      * @param {Array} tasks - An array of tasks to be executed.
@@ -18,7 +18,7 @@ class TaskHelper {
     the one specified in the setTasks function.
      * @returns The next task in the timeline.
      */
-    static setTasks(tasks: Array<Task | TaskCallback>, _vehicle: alt.Vehicle = null, _vehicle_only = false) {
+    setTasks(tasks: Array<Task | TaskCallback>, _vehicle: alt.Vehicle = null, _vehicle_only = false) {
         if (!_vehicle) {
             vehicle = null;
         } else {
@@ -34,9 +34,9 @@ class TaskHelper {
         }
 
         alt.setTimeout(TaskHelper.nextTask, 0);
-    }
+    },
 
-    static async nextTask() {
+    async nextTask() {
         if (timeline.length <= 0) {
             return;
         }
@@ -80,7 +80,7 @@ class TaskHelper {
         } else {
             alt.log(`Timeline Completed`);
         }
-    }
-}
+    },
+};
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, TaskHelper.setTasks);

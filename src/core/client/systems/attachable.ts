@@ -6,14 +6,14 @@ import { loadModel } from '../utility/model';
 
 const cache: { [key: string]: Array<IAttachable> } = {};
 
-class ClientAttachableSystem {
+const ClientAttachableSystem = {
     /**
      * Called when an entity is in streaming range of the player.
      * @static
      * @param {alt.Entity} entity
      * @memberof ClientAttachableSystem
      */
-    static create(entity: alt.Entity) {
+    create(entity: alt.Entity) {
         alt.nextTick(() => {
             if (!entity || !entity.valid) {
                 return;
@@ -30,7 +30,7 @@ class ClientAttachableSystem {
 
             ClientAttachableSystem.create(entity);
         });
-    }
+    },
 
     /**
      * When the stream synced meta is defined this will handle entities who are currently in range.
@@ -42,7 +42,7 @@ class ClientAttachableSystem {
      * @return {*}
      * @memberof ClientAttachableSystem
      */
-    static attachablesChanged(entity: alt.Entity, key: string, value: Array<IAttachable>, old: unknown) {
+    attachablesChanged(entity: alt.Entity, key: string, value: Array<IAttachable>, old: unknown) {
         if (!entity || !entity.valid) {
             return;
         }
@@ -61,7 +61,7 @@ class ClientAttachableSystem {
         }
 
         ClientAttachableSystem.update(entity, value);
-    }
+    },
 
     /**
      * Called when an entity is out of the streaming range of the player.
@@ -69,7 +69,7 @@ class ClientAttachableSystem {
      * @param {alt.Entity} entity
      * @memberof ClientAttachableSystem
      */
-    static async destroy(entity: alt.Entity) {
+    async destroy(entity: alt.Entity) {
         if (!entity || !entity.valid) {
             return;
         }
@@ -83,7 +83,7 @@ class ClientAttachableSystem {
         await ClientAttachableSystem.remove(entity);
 
         delete cache[entity.id];
-    }
+    },
 
     /**
      * Removes old attachables from a player.
@@ -91,7 +91,7 @@ class ClientAttachableSystem {
      * @param {alt.Player} player
      * @memberof ClientAttachableSystem
      */
-    static remove(player: alt.Player) {
+    remove(player: alt.Player) {
         // Remove old attachables
         if (cache[player.id]) {
             for (let i = 0; i < cache[player.id].length; i++) {
@@ -111,7 +111,7 @@ class ClientAttachableSystem {
                 native.clearAreaOfObjects(player.pos.x, player.pos.y, player.pos.z, 1, 0);
             }
         }
-    }
+    },
 
     /**
      * Updates current attachables for a player.
@@ -120,7 +120,7 @@ class ClientAttachableSystem {
      * @param {Array<IAttachable>} attachables
      * @memberof ClientAttachableSystem
      */
-    static async update(player: alt.Player, attachables: Array<IAttachable>) {
+    async update(player: alt.Player, attachables: Array<IAttachable>) {
         await ClientAttachableSystem.remove(player);
 
         // Create new attachables
@@ -169,8 +169,8 @@ class ClientAttachableSystem {
                 cache[player.id].push(newAttachable);
             });
         }
-    }
-}
+    },
+};
 
 alt.on('streamSyncedMetaChange', ClientAttachableSystem.attachablesChanged);
 alt.on('gameEntityCreate', ClientAttachableSystem.create);
