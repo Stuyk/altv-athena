@@ -1,9 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { AthenaClient } from '../../../client/api/athena';
-import { WebViewController } from '../../../client/extensions/view2';
-import ViewModel from '../../../client/models/viewModel';
-import { isAnyMenuOpen } from '../../../client/utility/menus';
+import { ClientAPI } from '../../../client';
 import { BarbershopEvents } from '../shared/events';
 import { BarbershopData } from '../shared/interfaces';
 
@@ -15,7 +12,7 @@ let currentData: BarbershopData;
 let camera: number;
 let hasRegisteredOnce = false;
 
-class BarbershopView implements ViewModel {
+class BarbershopView implements ClientAPI.models.ViewModel {
     /**
      * Opens the BarberShop WebView and sets up current data for the player.
      *
@@ -26,24 +23,24 @@ class BarbershopView implements ViewModel {
      * @memberof BarbershopView
      */
     static async open(_isSelfService: boolean, _currentData: BarbershopData) {
-        if (isAnyMenuOpen()) {
+        if (ClientAPI.utility.isAnyMenuOpen()) {
             return;
         }
 
         currentData = _currentData;
         isSelfService = _isSelfService;
 
-        AthenaClient.webview.ready(PAGE_NAME, BarbershopView.ready);
-        AthenaClient.webview.open([PAGE_NAME], true, BarbershopView.close);
+        ClientAPI.athena.webview.ready(PAGE_NAME, BarbershopView.ready);
+        ClientAPI.athena.webview.open([PAGE_NAME], true, BarbershopView.close);
 
         if (!hasRegisteredOnce) {
             hasRegisteredOnce = true;
-            AthenaClient.webview.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
-            AthenaClient.webview.on(BarbershopEvents.WebViewEvents.SAVE_CLOSE, BarbershopView.saveClose);
+            ClientAPI.athena.webview.on(BarbershopEvents.WebViewEvents.UPDATE, BarbershopView.update);
+            ClientAPI.athena.webview.on(BarbershopEvents.WebViewEvents.SAVE_CLOSE, BarbershopView.saveClose);
         }
 
-        WebViewController.focus();
-        WebViewController.showCursor(true);
+        ClientAPI.extensions.WebViewController.focus();
+        ClientAPI.extensions.WebViewController.showCursor(true);
 
         alt.toggleGameControls(false);
         alt.Player.local.isMenuOpen = true;
@@ -62,8 +59,8 @@ class BarbershopView implements ViewModel {
         BarbershopView.destroyCamera();
 
         alt.toggleGameControls(true);
-        WebViewController.unfocus();
-        WebViewController.showCursor(false);
+        ClientAPI.extensions.WebViewController.unfocus();
+        ClientAPI.extensions.WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
 
@@ -82,7 +79,7 @@ class BarbershopView implements ViewModel {
      */
     static saveClose() {
         BarbershopView.close(true);
-        WebViewController.closePages([PAGE_NAME], true);
+        ClientAPI.extensions.WebViewController.closePages([PAGE_NAME], true);
     }
 
     /**
@@ -135,12 +132,12 @@ class BarbershopView implements ViewModel {
      * If the webview is ready, emit the data to the webview and setup the camera.
      */
     static async ready() {
-        const view = await WebViewController.get();
+        const view = await ClientAPI.extensions.WebViewController.get();
         if (!view) {
             return;
         }
 
-        AthenaClient.webview.emit(BarbershopEvents.WebViewEvents.SET_DATA, currentData);
+        ClientAPI.athena.webview.emit(BarbershopEvents.WebViewEvents.SET_DATA, currentData);
         BarbershopView.setupCamera();
     }
 
