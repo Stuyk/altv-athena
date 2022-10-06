@@ -20,6 +20,6 @@ class JobCommands {
             return;
         }
 
-        job.quit('user');
+        job.quit('Job quitted');
     }
 }

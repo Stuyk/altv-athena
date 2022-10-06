@@ -333,7 +333,7 @@ export default class VehicleFuncs {
      * @param {alt.IVector3} rot
      * @memberof VehicleFuncs
      */
-    static sessionVehicle(player: alt.Player, model: string, pos: alt.IVector3, rot: alt.IVector3) {
+    static sessionVehicle(player: alt.Player, model: string | number, pos: alt.IVector3, rot: alt.IVector3) {
         const vehicle = new alt.Vehicle(model, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         vehicle.player_id = player.id;
         vehicle.behavior =
@@ -344,7 +344,7 @@ export default class VehicleFuncs {
         vehicle.isTemporary = true;
         vehicle.modelName = model;
         vehicle.overrideTemporaryDeletion = true;
-        
+
         if (player.dimension > 0) {
             vehicle.dimension = player.dimension;
         }
@@ -371,7 +371,7 @@ export default class VehicleFuncs {
      */
     static tempVehicle(
         player: alt.Player,
-        model: string,
+        model: string | number,
         pos: alt.IVector3,
         rot: alt.IVector3,
         doNotDelete: boolean = false,
@@ -387,7 +387,7 @@ export default class VehicleFuncs {
         if (doNotDelete) {
             vehicle.overrideTemporaryDeletion = true;
         }
-            
+
         if (player.dimension > 0) {
             vehicle.dimension = player.dimension;
         }
