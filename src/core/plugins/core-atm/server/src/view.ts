@@ -3,6 +3,8 @@ import { SharedAPI } from '../../../../shared';
 import { ServerAPI } from '../../../../server';
 import { ATM_INTERACTIONS } from '../../shared/events';
 
+import { Character as ICharacter } from '../../../../shared/interfaces/character';
+
 const INTERACTION_RANGE = 1.5;
 class InternalFunctions {
     /**
@@ -17,29 +19,29 @@ class InternalFunctions {
      */
     static action(player: alt.Player, type: string, amount: string | number, id: null | number) {
         if (isNaN(amount as number)) {
-            ServerAPI.Athena.player.sync.currencyData(player);
+            ServerAPI.athena.player.sync.currencyData(player);
             return;
         }
 
         amount = parseFloat(amount as string);
 
         if (!amount || amount <= 0) {
-            ServerAPI.Athena.player.sync.currencyData(player);
+            ServerAPI.athena.player.sync.currencyData(player);
             return;
         }
 
         if (!ActionHandlers[type]) {
-            ServerAPI.Athena.player.sync.currencyData(player);
+            ServerAPI.athena.player.sync.currencyData(player);
             return;
         }
 
         const result = ActionHandlers[type](player, amount, id);
-        ServerAPI.Athena.player.sync.currencyData(player);
+        ServerAPI.athena.player.sync.currencyData(player);
 
         if (!result) {
-            ServerAPI.Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            ServerAPI.athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         } else {
-            ServerAPI.Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            ServerAPI.athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
     }
 
@@ -56,11 +58,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
+        if (!ServerAPI.athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
             return false;
         }
 
@@ -80,11 +82,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
+        if (!ServerAPI.athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
@@ -120,11 +122,11 @@ class InternalFunctions {
 
         if (onlinePlayer) {
             // Update by Online Player Route
-            if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
-            if (!ServerAPI.Athena.player.currency.add(onlinePlayer, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.athena.player.currency.add(onlinePlayer, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
@@ -133,10 +135,10 @@ class InternalFunctions {
                 `$${amount}`,
                 player.data.name,
             );
-            ServerAPI.Athena.player.emit.message(onlinePlayer, msg);
+            ServerAPI.athena.player.emit.message(onlinePlayer, msg);
         } else {
             // Update by Document Route
-            const document = await ServerAPI.Athena.database.funcs.fetchData<SharedAPI.interfaces.Character>(
+            const document = await ServerAPI.athena.database.funcs.fetchData<ICharacter>(
                 'bankNumber',
                 bankNumber,
                 ServerAPI.interfaces.Collections.Characters,
@@ -145,12 +147,12 @@ class InternalFunctions {
                 return false;
             }
 
-            if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
             document.bank += amount;
-            await ServerAPI.Athena.database.funcs.updatePartialData(
+            await ServerAPI.athena.database.funcs.updatePartialData(
                 document._id.toString(),
                 { bank: document.bank },
                 ServerAPI.interfaces.Collections.Characters,
@@ -183,11 +185,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!ServerAPI.Athena.player.currency.add(target, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.athena.player.currency.add(target, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
@@ -196,7 +198,7 @@ class InternalFunctions {
             `$${amount}`,
             player.data.name,
         );
-        ServerAPI.Athena.player.emit.message(target, msg);
+        ServerAPI.athena.player.emit.message(target, msg);
         return true;
     }
 }

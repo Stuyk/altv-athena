@@ -3,11 +3,13 @@ import { ServerAPI } from '../../../../server';
 import { SharedAPI } from '../../../../shared';
 import { BANK_CONFIG } from '../../shared/config';
 
+import { Character as ICharacter } from '../../../../shared/interfaces/character';
+
 const metaName = 'bankNumber';
 
 // Extends the player interface.
 declare module 'alt-server' {
-    export interface Character extends Partial<SharedAPI.interfaces.Character> {
+    export interface Character extends Partial<ICharacter> {
         [metaName]?: null | undefined | number;
     }
 }
@@ -15,7 +17,7 @@ declare module 'alt-server' {
 class InternalFunctions {
     static async handleSelect(player: alt.Player) {
         if (player.data.bankNumber !== undefined && player.data.bankNumber !== null) {
-            ServerAPI.Athena.player.emit.meta(player, metaName, player.data[metaName]);
+            ServerAPI.athena.player.emit.meta(player, metaName, player.data[metaName]);
             return;
         }
 
@@ -23,7 +25,7 @@ class InternalFunctions {
         await ServerAPI.systems.Global.increase(metaName, 1, BANK_CONFIG.BANK_ACCOUNT_START_NUMBER);
         const bankNumber = await ServerAPI.systems.Global.getKey<number>(metaName);
         ServerAPI.systems.StateManager.set(player, metaName, bankNumber);
-        ServerAPI.Athena.player.emit.meta(player, metaName, player.data[metaName]);
+        ServerAPI.athena.player.emit.meta(player, metaName, player.data[metaName]);
         alt.log(`Created Bank Account # ${player.data[metaName]} for ${player.data.name}`);
     }
 }
