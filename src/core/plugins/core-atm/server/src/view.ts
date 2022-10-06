@@ -1,15 +1,7 @@
 import * as alt from 'alt-server';
-
-import atms from '../../../../shared/information/atms';
-import { ServerBlipController } from '../../../../server/systems/blip';
-import { InteractionController } from '../../../../server/systems/interaction';
-import { CurrencyTypes } from '../../../../shared/enums/currency';
-import { LocaleController } from '../../../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
-import { Character } from '../../../../shared/interfaces/character';
-import { Collections } from '../../../../server/interface/iDatabaseCollections';
+import { SharedAPI } from '../../../../shared';
+import { ServerAPI } from '../../../../server';
 import { ATM_INTERACTIONS } from '../../shared/events';
-import { Athena } from '../../../../server/api/athena';
 
 const INTERACTION_RANGE = 1.5;
 class InternalFunctions {
@@ -25,29 +17,29 @@ class InternalFunctions {
      */
     static action(player: alt.Player, type: string, amount: string | number, id: null | number) {
         if (isNaN(amount as number)) {
-            Athena.player.sync.currencyData(player);
+            ServerAPI.Athena.player.sync.currencyData(player);
             return;
         }
 
         amount = parseFloat(amount as string);
 
         if (!amount || amount <= 0) {
-            Athena.player.sync.currencyData(player);
+            ServerAPI.Athena.player.sync.currencyData(player);
             return;
         }
 
         if (!ActionHandlers[type]) {
-            Athena.player.sync.currencyData(player);
+            ServerAPI.Athena.player.sync.currencyData(player);
             return;
         }
 
         const result = ActionHandlers[type](player, amount, id);
-        Athena.player.sync.currencyData(player);
+        ServerAPI.Athena.player.sync.currencyData(player);
 
         if (!result) {
-            Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            ServerAPI.Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         } else {
-            Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+            ServerAPI.Athena.player.emit.soundFrontend(player, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
         }
     }
 
@@ -64,11 +56,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(player, CurrencyTypes.BANK, amount)) {
+        if (!ServerAPI.Athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
             return false;
         }
 
@@ -88,11 +80,11 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(player, CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.Athena.player.currency.add(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
@@ -128,36 +120,40 @@ class InternalFunctions {
 
         if (onlinePlayer) {
             // Update by Online Player Route
-            if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
-            if (!Athena.player.currency.add(onlinePlayer, CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.Athena.player.currency.add(onlinePlayer, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
-            const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
-            Athena.player.emit.message(onlinePlayer, msg);
+            const msg = SharedAPI.locale.LocaleController.get(
+                SharedAPI.locale.languages.LOCALE_KEYS.PLAYER_RECEIVED_BLANK,
+                `$${amount}`,
+                player.data.name,
+            );
+            ServerAPI.Athena.player.emit.message(onlinePlayer, msg);
         } else {
             // Update by Document Route
-            const document = await Athena.database.funcs.fetchData<Character>(
+            const document = await ServerAPI.Athena.database.funcs.fetchData<SharedAPI.interfaces.Character>(
                 'bankNumber',
                 bankNumber,
-                Collections.Characters,
+                ServerAPI.interfaces.Collections.Characters,
             );
             if (!document) {
                 return false;
             }
 
-            if (!Athena.player.currency.sub(player, CurrencyTypes.BANK, amount)) {
+            if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.BANK, amount)) {
                 return false;
             }
 
             document.bank += amount;
-            await Athena.database.funcs.updatePartialData(
+            await ServerAPI.Athena.database.funcs.updatePartialData(
                 document._id.toString(),
                 { bank: document.bank },
-                Collections.Characters,
+                ServerAPI.interfaces.Collections.Characters,
             );
         }
 
@@ -187,16 +183,20 @@ class InternalFunctions {
             return false;
         }
 
-        if (!Athena.player.currency.sub(player, CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.Athena.player.currency.sub(player, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        if (!Athena.player.currency.add(target, CurrencyTypes.CASH, amount)) {
+        if (!ServerAPI.Athena.player.currency.add(target, SharedAPI.enums.CurrencyTypes.CASH, amount)) {
             return false;
         }
 
-        const msg = LocaleController.get(LOCALE_KEYS.PLAYER_RECEIVED_BLANK, `$${amount}`, player.data.name);
-        Athena.player.emit.message(target, msg);
+        const msg = SharedAPI.locale.LocaleController.get(
+            SharedAPI.locale.languages.LOCALE_KEYS.PLAYER_RECEIVED_BLANK,
+            `$${amount}`,
+            player.data.name,
+        );
+        ServerAPI.Athena.player.emit.message(target, msg);
         return true;
     }
 }
@@ -206,10 +206,10 @@ export class AtmFunctions {
      * Create blips for all ATMs and add an interaction to them.
      */
     static init() {
-        for (let i = 0; i < atms.length; i++) {
-            const position = atms[i];
+        for (let i = 0; i < SharedAPI.information.atms.length; i++) {
+            const position = SharedAPI.information.atms[i];
 
-            ServerBlipController.append({
+            ServerAPI.systems.ServerBlipController.append({
                 text: 'ATM',
                 color: 11,
                 sprite: 207,
@@ -219,7 +219,7 @@ export class AtmFunctions {
                 uid: `atm-${i}`,
             });
 
-            InteractionController.add({
+            ServerAPI.systems.InteractionController.add({
                 position,
                 description: 'Access ATM',
                 range: INTERACTION_RANGE,
