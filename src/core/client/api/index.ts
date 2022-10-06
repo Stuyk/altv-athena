@@ -7,4 +7,7 @@ export * as streamers from '../streamers/index';
 export * as systems from '../systems/index';
 export * as utility from '../utility/index';
 export * as views from '../views/index';
+
+export { AthenaClient as athena } from './athena';
+
 //export * as rmlui from '../rmlui/index';

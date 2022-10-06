@@ -7,7 +7,7 @@ export * as systems from '../systems/index';
 export * as utility from '../utility/index';
 export * as views from '../views/index';
 
-export * from './athena';
+export { Athena as athena } from './athena';
 
 // must be last
 export * as decorators from '../decorators/index';
