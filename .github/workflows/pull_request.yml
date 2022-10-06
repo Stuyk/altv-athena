@@ -5,7 +5,7 @@ on:
 jobs:
     add_pr_comment:
         runs-on: ubuntu-latest
-        name: 'Tell the reviewer how to checkout a branch locally from a PR.'
+        name: 'Comment Checkout Info'
         env:
             PR_NUMBER: ${{ github.event.number }}
             PR_HEAD_REF: ${{ github.head_ref }}
@@ -14,8 +14,9 @@ jobs:
               uses: thollander/actions-comment-pull-request@v1
               with:
                   message: |
-                      Use the command below to checkout this specific pull request code:
-                      ```
-                      git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}} && git checkout ${{ env.PR_HEAD_REF}}
+                      Use the command(s) below to checkout this specific pull request code:
+                      ```sh
+                      git fetch origin pull/${{ env.PR_NUMBER }}/head:${{ env.PR_HEAD_REF}}
+                      git checkout ${{ env.PR_HEAD_REF}}
                       ```
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
