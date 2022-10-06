@@ -2,7 +2,7 @@ export * from './actions';
 export * from './animation';
 export * from './appearance';
 export * from './blip';
-export * from './character';
+export { Character, CharacterDefaults } from './character';
 export * from './characterInfo';
 export * from './clothing';
 export * from './command';
