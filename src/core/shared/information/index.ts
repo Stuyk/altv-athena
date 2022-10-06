@@ -1,4 +1,4 @@
-export * from './atms';
+export { default as atms } from './atms';
 export * from './eyebrows';
 export * from './facialHair';
 export * from './hairColors';
