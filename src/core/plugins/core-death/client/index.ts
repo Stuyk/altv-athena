@@ -32,6 +32,10 @@ class InternalFunctions {
             // Unbind the respawn key
             KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
 
+            if (!alt.Player.local.isDead) {
+                return;
+            }
+
             // Switch out player now
             AthenaClient.utility.switchInPlayer(2000);
 

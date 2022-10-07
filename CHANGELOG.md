@@ -57,6 +57,8 @@ Ability to set database name through configuration
 Job.addQuitCallback -> Adds a way to call a function when a job is quit.
 Add Skycam
 Add Option to Skycam to disable skycam when debug is on. Character select plugin.
+Fix Skycam Option
+Fix bug where when dead the client can still invoke key press to revive even though already revived.
 ```
 
 ## 3.8.0
