@@ -20,12 +20,12 @@
                 <div class="overline">Purchase New Vehicle?</div>
                 <template v-if="faction.bank >= 1">
                     <Button class="veh-button" color="green" @click="addVehicle = true">
-                        <Icon :size="14" icon="icon-plus" />
+                        <Icon :size="14" icon="icon-dollar" />
                     </Button>
                 </template>
                 <template v-else>
                     <Button class="veh-button" color="green" :disable="true">
-                        <Icon :size="14" icon="icon-plus" />
+                        <Icon :size="14" icon="icon-dollar" />
                     </Button>
                 </template>
             </div>
