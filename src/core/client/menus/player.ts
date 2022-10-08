@@ -8,7 +8,7 @@ type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>)
 
 const Injections: Array<PlayerMenuInjection> = [];
 
-export class PlayerWheelMenu {
+export const PlayerWheelMenu = {
     /**
      * Allows the current Menu Options to be modified.
      * Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -18,9 +18,9 @@ export class PlayerWheelMenu {
      * @param {PlayerMenuInjection} callback
      * @memberof PlayerWheelMenu
      */
-    static addInjection(callback: PlayerMenuInjection) {
+    addInjection(callback: PlayerMenuInjection) {
         Injections.push(callback);
-    }
+    },
 
     /**
      * Opens the wheel menu against a target player.
@@ -30,7 +30,7 @@ export class PlayerWheelMenu {
      * @return {*}
      * @memberof PlayerWheelMenu
      */
-    static openMenu(target: alt.Player) {
+    openMenu(target: alt.Player) {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -62,5 +62,5 @@ export class PlayerWheelMenu {
         }
 
         WheelMenu.open('Player', options);
-    }
-}
+    },
+};

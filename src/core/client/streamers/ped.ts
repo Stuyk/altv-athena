@@ -18,14 +18,14 @@ let interval;
 /**
  * Do Not Export Internal Only
  */
-class PedController {
-    static init() {
+const PedController = {
+    init() {
         localPeds = [];
         addedPeds = [];
         pedInfo = {};
-    }
+    },
 
-    static append(pedData: IPed) {
+    append(pedData: IPed) {
         if (!pedData.uid) {
             alt.logError(`(${JSON.stringify(pedData.pos)}) Ped is missing uid.`);
             return;
@@ -43,17 +43,17 @@ class PedController {
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
         }
-    }
+    },
 
-    static populate(peds: Array<IPed>) {
+    populate(peds: Array<IPed>) {
         addedPeds = peds;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawPeds, 500, 'ped.ts');
         }
-    }
+    },
 
-    static remove(uid: string) {
+    remove(uid: string) {
         isRemoving = true;
 
         let index = -1;
@@ -78,9 +78,9 @@ class PedController {
 
         localPeds.splice(index, 1);
         isRemoving = false;
-    }
+    },
 
-    static removeGlobalPed(uid: string) {
+    removeGlobalPed(uid: string) {
         isRemoving = true;
 
         let index = addedPeds.findIndex((ped) => ped.uid === uid);
@@ -94,15 +94,15 @@ class PedController {
         }
 
         isRemoving = false;
-    }
+    },
 
-    static playAnimation(uid: string, animation: Animation) {
+    playAnimation(uid: string, animation: Animation) {
         if (pedInfo[uid] !== null && pedInfo[uid] !== undefined) {
             playPedAnimation(pedInfo[uid], animation.dict, animation.name, animation.flags, animation.duration);
         }
-    }
+    },
 
-    static removeAll() {
+    removeAll() {
         const peds = addedPeds.concat(localPeds);
         while (peds.length >= 1) {
             const ped = peds.pop();
@@ -114,10 +114,10 @@ class PedController {
 
             native.deletePed(id);
         }
-    }
-}
+    },
+};
 
-export class ClientPedController {
+export const ClientPedController = {
     /**
      * Gets an NPC based on their scriptID if present.
      *
@@ -125,7 +125,7 @@ export class ClientPedController {
      * @param {number} scriptId
      * @memberof ClientPedController
      */
-    static get(scriptId: number): IPed | undefined {
+    get(scriptId: number): IPed | undefined {
         const keys = Object.keys(pedInfo);
 
         for (let i = 0; i < keys.length; i++) {
@@ -153,8 +153,8 @@ export class ClientPedController {
         }
 
         return undefined;
-    }
-}
+    },
+};
 
 function handleDrawPeds() {
     if (isRemoving) {
@@ -229,7 +229,7 @@ function handleDrawPeds() {
             native.setPedDiesWhenInjured(pedInfo[pedData.uid], false);
             native.taskSetBlockingOfNonTemporaryEvents(pedInfo[pedData.uid], true);
             native.setPedFleeAttributes(pedInfo[pedData.uid], 0, false);
-            native.setPedConfigFlag(pedInfo[pedData.uid], 32, false); // ped cannot fly thru windscreen
+            native.setPedConfigFlag(pedInfo[pedData.uid], 32, true); // ped can fly thru windscreen
             native.setPedConfigFlag(pedInfo[pedData.uid], 281, true); // ped no writhe
             native.setPedGetOutUpsideDownVehicle(pedInfo[pedData.uid], false);
             native.setPedCanEvasiveDive(pedInfo[pedData.uid], false);

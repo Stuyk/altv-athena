@@ -7,8 +7,8 @@ import { playAnimation } from './animations';
 let interval: number;
 let cuffer: alt.Player;
 
-class ArrestController {
-    static cuff(_cuffer: alt.Player) {
+const ArrestController = {
+    cuff(_cuffer: alt.Player) {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
@@ -16,11 +16,11 @@ class ArrestController {
 
         cuffer = _cuffer;
         Timer.createInterval(ArrestController.handleCuff, 500, 'arrest.ts');
-    }
+    },
 
-    static uncuff(target: alt.Player) {}
+    uncuff(target: alt.Player) {},
 
-    static async handleCuff() {
+    async handleCuff() {
         if (!cuffer || !cuffer.valid) {
             Timer.clearInterval(interval);
             interval = null;
@@ -39,8 +39,8 @@ class ArrestController {
         };
 
         native.taskGoToCoordAnyMeans(alt.Player.local.scriptID, pos.x, pos.y, pos.z, 2, 0, false, 786603, 0);
-    }
-}
+    },
+};
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_CUFF, ArrestController.cuff);
 alt.onServer(SYSTEM_EVENTS.PLAYER_UNCUFF, ArrestController.uncuff);

@@ -19,7 +19,7 @@ let hidden: boolean = false;
  * @export
  * @class Ped
  */
-export class PedCharacter {
+export const PedCharacter = {
     /**
      * Create a Temporary Character Pedestrian
      * @param {boolean} isMale
@@ -28,11 +28,7 @@ export class PedCharacter {
      * @return {Promise<void>}
      * @memberof Ped
      */
-    static async create(
-        isMale: boolean,
-        _pos: Vector3,
-        _rot: Vector3 | number = { x: 0, y: 0, z: 0 },
-    ): Promise<number> {
+    async create(isMale: boolean, _pos: Vector3, _rot: Vector3 | number = { x: 0, y: 0, z: 0 }): Promise<number> {
         pos = _pos;
         rot = _rot;
         hidden = false;
@@ -65,7 +61,7 @@ export class PedCharacter {
                 return resolve(id);
             });
         });
-    }
+    },
 
     /**
      * Apply pedestrian appearance data.
@@ -74,7 +70,7 @@ export class PedCharacter {
      * @param {boolean} forceSameShoes Set to true to make female / male switching equal height.
      * @memberof PedCharacter
      */
-    static async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
+    async apply(_appearance: Appearance, forceSameShoes = false): Promise<void> {
         if (isUpdating) {
             return;
         }
@@ -94,11 +90,11 @@ export class PedCharacter {
 
         appearance = _appearance;
         isUpdating = false;
-    }
+    },
 
-    static getApperance(): Appearance | null {
+    getApperance(): Appearance | null {
         return appearance;
-    }
+    },
 
     /**
      * Get the pedestrian id.
@@ -106,13 +102,13 @@ export class PedCharacter {
      * @return {number}
      * @memberof PedCharacter
      */
-    static get(): number {
+    get(): number {
         if (id === undefined || id === null) {
             return -1;
         }
 
         return id;
-    }
+    },
 
     /**
      * Hide this pedestrian
@@ -120,7 +116,7 @@ export class PedCharacter {
      * @param {boolean} value
      * @memberof PedCharacter
      */
-    static setHidden(value: boolean) {
+    setHidden(value: boolean) {
         hidden = value;
 
         if (hidden && id && native.doesEntityExist(id)) {
@@ -130,7 +126,7 @@ export class PedCharacter {
         if (!hidden && id && native.doesEntityExist(id)) {
             native.setEntityVisible(id, true, false);
         }
-    }
+    },
 
     /**
      * Destroy the pedestrian character.
@@ -138,7 +134,7 @@ export class PedCharacter {
      * @static
      * @memberof PedCharacter
      */
-    static async destroy() {
+    async destroy() {
         return new Promise((resolve: Function) => {
             let attempts = 0;
             const interval = alt.setInterval(() => {
@@ -164,7 +160,7 @@ export class PedCharacter {
                 attempts += 1;
             }, 100);
         });
-    }
-}
+    },
+};
 
 alt.on('disconnect', PedCharacter.destroy);

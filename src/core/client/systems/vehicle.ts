@@ -12,13 +12,13 @@ import { isAnyMenuOpen } from '../utility/menus';
 import './push';
 import { PushVehicle } from './push';
 
-export class VehicleController {
+export const VehicleController = {
     /**
      * Register the default vehicle keybinds.
      * @static
      * @memberof VehicleController
      */
-    static registerKeybinds() {
+    registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.VEHICLE_ENGINE,
             singlePress: VehicleController.emitEngine,
@@ -28,14 +28,14 @@ export class VehicleController {
             key: KEY_BINDS.VEHICLE_LOCK,
             singlePress: VehicleController.emitLock,
         });
-    }
+    },
 
     /**
      * Starts / stops the engine.
      * @static
      * @memberof VehicleController
      */
-    static emitEngine() {
+    emitEngine() {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -45,38 +45,38 @@ export class VehicleController {
         }
 
         alt.emitServer(VEHICLE_EVENTS.SET_ENGINE);
-    }
+    },
 
     /**
      * Toggles lock from locked / unlocked.
      * @static
      * @memberof VehicleController
      */
-    static emitLock() {
+    emitLock() {
         if (isAnyMenuOpen()) {
             return;
         }
 
         alt.emitServer(VEHICLE_EVENTS.SET_LOCK);
-    }
+    },
 
     /**
      * Prevents seat shuffling and engine control.
      * @static
      * @memberof VehicleController
      */
-    static enterVehicle() {
+    enterVehicle() {
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_SEAT_SHUFFLE, true);
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STARTING_VEHICLE_ENGINE, true);
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.DISABLE_STOPPING_VEHICLE_ENGINE, true);
-    }
+    },
 
     /**
      * Warps the local player into the vehicle.
      * @static
      * @memberof VehicleController
      */
-    static async setIntoVehicle(vehicle: alt.Vehicle, seat: number) {
+    async setIntoVehicle(vehicle: alt.Vehicle, seat: number) {
         const isVehicleReady = await new Promise((resolve: Function) => {
             let attempts = 0;
 
@@ -103,7 +103,7 @@ export class VehicleController {
         }
 
         native.setPedIntoVehicle(alt.Player.local.scriptID, vehicle.scriptID, seat);
-    }
+    },
 
     /**
      * Prevents a pedestrian from flying out of a vehicle window.
@@ -111,21 +111,20 @@ export class VehicleController {
      * @param {boolean} [value=true]
      * @memberof VehicleController
      */
-    static enableSeatBelt(value: boolean) {
+    enableSeatBelt(value: boolean) {
         alt.Player.local.setMeta('SEATBELT', value);
         native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, value);
-    }
-
-    static removeSeatBelt(vehicle: alt.Vehicle) {
-        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, false);
-    }
+    },
+    removeSeatBelt(vehicle: alt.Vehicle) {
+        native.setPedConfigFlag(alt.Player.local.scriptID, PED_CONFIG_FLAG.CAN_FLY_THROUGH_WINDSHIELD, true);
+    },
 
     /**
      * If the player is dead, or if the player is trying to enter a locked vehicle, or if the player
      * is trying to push a vehicle, then disable the F key.
      * @returns The vehicle that the player is trying to enter.
      */
-    static handleVehicleDisables() {
+    handleVehicleDisables() {
         if (!alt.Player.local || !alt.Player.local.valid) {
             return;
         }
@@ -152,21 +151,21 @@ export class VehicleController {
 
         native.disableControlAction(0, 23, true); // F - Enter
         native.disableControlAction(0, 75, true); // F - Exit
-    }
+    },
 
     /**
      * Toggle the engine of the player's vehicle.
      * @param {boolean} status - true or false
      * @returns The vehicle's engine status.
      */
-    static toggleEngine(status: boolean) {
+    toggleEngine(status: boolean) {
         if (!alt.Player.local.scriptID) {
             return;
         }
 
         native.setVehicleEngineOn(alt.Player.local.vehicle, status, false, false);
-    }
-}
+    },
+};
 
 alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
 alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);

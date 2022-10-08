@@ -66,8 +66,8 @@ export class Job {
     private objectives: Array<Objective> = [];
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
-    private completedCallback: () => Promise<void>;
-    private quitCallback: (reason: string) => void;
+    private completedCallback: (job: Job) => Promise<void>;
+    private quitCallback: (job: Job, reason: string) => void;
 
     /**
      * Creates an instance of a job handler.
@@ -273,7 +273,7 @@ export class Job {
             return;
         }
 
-        this.quitCallback(reason);
+        this.quitCallback(this, reason);
     }
 
     /**
@@ -469,7 +469,7 @@ export class Job {
              * Before it is cleaned up.
              */
             if (typeof this.completedCallback === 'function') {
-                await this.completedCallback().catch((error) => alt.logError(error));
+                await this.completedCallback(this).catch((error) => alt.logError(error));
             }
 
             this.removeAllVehicles();
@@ -642,7 +642,7 @@ export class Job {
      * @param {(job: Job, reason: string) => void} callback
      * @memberof Job
      */
-    setQuitCallback(callback: (reason: string) => void) {
+    setQuitCallback(callback: (job: Job, reason: string) => void) {
         this.quitCallback = callback;
     }
 }

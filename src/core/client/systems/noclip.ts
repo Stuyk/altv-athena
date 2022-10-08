@@ -11,8 +11,8 @@ let noclipCam: number = null;
 let sensitivity = 0.15;
 let sensMultiplier = 5;
 
-class NoClip {
-    static init(entity: alt.Entity, key: string, value: any | boolean) {
+const NoClip = {
+    init(entity: alt.Entity, key: string, value: any | boolean) {
         if (entity !== alt.Player.local) {
             return;
         }
@@ -26,9 +26,9 @@ class NoClip {
         } else {
             NoClip.disable();
         }
-    }
+    },
 
-    private static enable() {
+    enable() {
         tick = alt.everyTick(NoClip.tick);
         sensMultiplier = 5;
 
@@ -54,9 +54,9 @@ class NoClip {
         native.setEntityInvincible(alt.Player.local.scriptID, true);
 
         alt.Player.local.isNoClipOn = true;
-    }
+    },
 
-    private static disable() {
+    disable() {
         alt.clearEveryTick(tick);
 
         noclipCam = null;
@@ -69,9 +69,9 @@ class NoClip {
         native.setEntityInvincible(alt.Player.local.scriptID, false);
 
         alt.Player.local.isNoClipOn = false;
-    }
+    },
 
-    private static tick() {
+    tick() {
         native.disableControlAction(0, 1, true);
         native.disableControlAction(0, 2, true);
         native.disableControlAction(0, 14, true);
@@ -210,10 +210,10 @@ class NoClip {
         drawText2D(`Speed: ${sens.toFixed(2)}`, { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 200), 0);
 
         NoClip.processCameraRotation();
-    }
+    },
 
     // Noclip functions
-    private static processCameraRotation() {
+    processCameraRotation() {
         const camRot = native.getCamRot(noclipCam, 2);
         const mouseX = native.getDisabledControlNormal(1, 1);
         const mouseY = native.getDisabledControlNormal(1, 2);
@@ -238,9 +238,9 @@ class NoClip {
         native.setEntityRotation(alt.Player.local.scriptID, finalRot.x, finalRot.y, finalRot.z, 2, true);
         native.setGameplayCamRelativeRotation(finalRot.x, finalRot.y, finalRot.z);
         native.setRadarZoom(0);
-    }
+    },
 
-    private static getSensitivity(): number {
+    getSensitivity(): number {
         let currentSens = sensitivity;
 
         // Left Shift
@@ -259,7 +259,7 @@ class NoClip {
         }
 
         return currentSens;
-    }
-}
+    },
+};
 
 alt.on('syncedMetaChange', NoClip.init);
