@@ -83,6 +83,54 @@ export interface RankPermissions {
      * @memberof RankPermissions
      */
     manageVehicles?: boolean;
+
+    /**
+     * Can this rank view the members page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageMembers: boolean;
+
+    /**
+     * Can this rank view the rank page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageRanks: boolean;
+
+    /**
+     * Can this rank view the bank page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageBank: boolean;
+
+    /**
+     * Can this rank view the vehicle page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageVehicles: boolean;
+
+    /**
+     * Can this rank view the actions page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageActions: boolean;
+
+    /**
+     * Can this rank view the settings page?
+     *
+     * @type {boolean}
+     * @memberof RankPermissions
+     */
+    pageSettings: boolean;
 }
 
 /**
@@ -226,7 +274,6 @@ export interface FactionCore {
      * @memberof Faction
      */
     canDisband: boolean;
-
 
     /**
      * Faction Type (gang, neutral, state)

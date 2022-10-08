@@ -6,11 +6,11 @@
         </div>
         <div class="split" style="width: 100%">
             <div class="factions-nav">
-                <Navigation v-bind:pages="pages" v-bind:page="pageIndex" @navigate="setPage" />
+                <Navigation v-bind:pages="pagesWithPermission" v-bind:page="pageIndex" @navigate="setPage" />
             </div>
             <div class="factions-content stack" v-if="faction">
                 <component
-                    :is="pages[pageIndex].page"
+                    :is="pagesWithPermission[pageIndex].page"
                     class="fade-in"
                     :key="pageIndex"
                     v-bind:faction="faction"
@@ -31,8 +31,14 @@ import { defineComponent, defineAsyncComponent } from 'vue';
 
 import { ExampleFactionData } from './utility/exampleFactionData';
 import { Faction } from '../shared/interfaces';
+import { FactionParser } from './utility/factionParser';
 import { FACTION_EVENTS } from '../shared/factionEvents';
 import { Vector3 } from '../../../shared/interfaces/vector';
+
+interface iPage {
+    name: string;
+    page: string;
+}
 
 export const ComponentName = 'Factions';
 export default defineComponent({
@@ -65,12 +71,14 @@ export default defineComponent({
                 { name: 'Actions', page: 'Actions' },
                 { name: 'Settings', page: 'Settings' },
             ],
+            pagesWithPermission: [],
             faction: null,
             // Character IDs and their associated test ranks...
             // 61a8efe590851930ac59f5ef - 0 Rank // 51a8efe590851930ac59f5eg - 1 Rank // 51a8efe590851930ac59f5cc - 2 Rank
             character: '61a8efe590851930ac59f5ef',
+            // character: '51a8efe590851930ac59f5eg',
             // Money = Bank + Cash
-            money: 0,
+            money: 10,
             // Position and rotation of the faction
             pos: { x: 25, y: 1, z: 25 },
             rot: { x: 0, y: 0, z: 0 },
@@ -79,6 +87,25 @@ export default defineComponent({
         };
     },
     methods: {
+        pagesForRank(){
+            let pageList = this.pages;
+            let fac = this.faction;
+            let char = this.character
+
+            let visiblePages: Array<iPage> = [];
+
+            const member = FactionParser.getMember(fac, char);
+            const rank = FactionParser.getRank(fac, member);
+
+            for (const page of pageList) {
+                let permName = 'page' + page.name;
+                let perm = member.hasOwnership || rank.rankPermissions[permName] ? true : false;
+                if (perm) {
+                    visiblePages.push(page);
+                }
+            }
+            this.pagesWithPermission = visiblePages;
+        },
         setPage(pageIndex: number) {
             this.pageIndex = pageIndex;
         },
@@ -131,6 +158,7 @@ export default defineComponent({
             alt.emit(FACTION_EVENTS.WEBVIEW.READY);
         } else {
             this.faction = ExampleFactionData;
+            this.pagesForRank();
         }
     },
     unmounted() {
