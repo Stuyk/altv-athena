@@ -59,6 +59,7 @@ Add Skycam
 Add Option to Skycam to disable skycam when debug is on. Character select plugin.
 Fix Skycam Option
 Fix bug where when dead the client can still invoke key press to revive even though already revived.
+Patch Garage Not Closing on Vehicle Spawn
 ```
 
 ## 3.8.0
