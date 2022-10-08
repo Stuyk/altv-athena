@@ -16,8 +16,13 @@ const Safe = {
             player.model = `mp_m_freemode_01`;
         }
 
-        player.acPosition = new alt.Vector3(x, y, z);
-        player.pos = new alt.Vector3(x, y, z);
+        const pos = new alt.Vector3(x, y, z);
+        if (player.vehicle && player.vehicle.driver === player) {
+            player.vehicle.pos = pos;
+        } else {
+            player.acPosition = pos;
+            player.pos = pos;
+        }
     },
     /**
      * Safely add health to this player.
@@ -123,16 +128,16 @@ const Safe = {
  * @param callback - The function that will be called when the event is triggered.
  */
 function override<Key extends keyof typeof Safe>(functionName: Key, callback: typeof Safe[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.safe does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Safe & { override?: typeof override } = {
+const funcs: typeof Safe & { override?: typeof override } = {
     ...Safe,
     override,
 };
 
-export default exports;
+export default funcs;

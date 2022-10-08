@@ -10,13 +10,13 @@ let interval: number | undefined;
 let vehicle: alt.Vehicle;
 let isPushing: boolean = false;
 
-export class PushVehicle {
+export const PushVehicle = {
     /**
      * `start` is a function that takes a vehicle as an argument and emits a server event.
      * @param {alt.Vehicle} vehicle - The vehicle to attach the camera to.
      * @returns The vehicle's model dimensions.
      */
-    static start(vehicle: alt.Vehicle) {
+    start(vehicle: alt.Vehicle) {
         if (!vehicle || !vehicle.valid) {
             return;
         }
@@ -29,7 +29,7 @@ export class PushVehicle {
         };
 
         alt.emitServer(VEHICLE_EVENTS.PUSH, attachPosition);
-    }
+    },
 
     /**
      * When the player enters the pushing state, the vehicle is assigned to the variable `vehicle`
@@ -37,7 +37,7 @@ export class PushVehicle {
      * @param {alt.Vehicle} _vehicle - The vehicle that is being pushed.
      * @returns None
      */
-    static serverStart(_vehicle: alt.Vehicle) {
+    serverStart(_vehicle: alt.Vehicle) {
         // Clears animations when entering pushing state.
         native.clearPedTasksImmediately(alt.Player.local.scriptID);
 
@@ -46,17 +46,17 @@ export class PushVehicle {
         if (!interval) {
             interval = Timer.createInterval(PushVehicle.pushing, 0, 'push.ts');
         }
-    }
+    },
 
-    static serverStop() {
+    serverStop() {
         PushVehicle.clear();
-    }
+    },
 
-    static isPushing() {
+    isPushing() {
         return isPushing;
-    }
+    },
 
-    static clear() {
+    clear() {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
@@ -65,9 +65,9 @@ export class PushVehicle {
 
         vehicle = null;
         isPushing = false;
-    }
+    },
 
-    static pushing() {
+    pushing() {
         if (!vehicle || !vehicle.valid) {
             PushVehicle.clear();
             return;
@@ -125,8 +125,8 @@ export class PushVehicle {
         } else {
             native.clearPedTasks(alt.Player.local.scriptID);
         }
-    }
-}
+    },
+};
 
 alt.onServer(VEHICLE_EVENTS.STOP_PUSH, PushVehicle.serverStop);
 alt.onServer(VEHICLE_EVENTS.PUSH, PushVehicle.serverStart);

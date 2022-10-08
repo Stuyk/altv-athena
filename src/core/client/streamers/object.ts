@@ -21,8 +21,8 @@ let interval;
 /**
  * Do Not Export Internal Only
  */
-class ClientObjectController {
-    static init() {
+const ClientObjectController = {
+    init() {
         alt.on('disconnect', ClientObjectController.stop);
         alt.onServer(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, ClientObjectController.removeGlobalObject);
         alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
@@ -30,7 +30,7 @@ class ClientObjectController {
         alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.removeLocalObject);
         localObjects = [];
         globalObjects = [];
-    }
+    },
 
     /**
      * Add a single marker.
@@ -38,7 +38,7 @@ class ClientObjectController {
      * @param {IObject} objectData
      * @memberof ClientObjectController
      */
-    static append(objectData: IObject) {
+    append(objectData: IObject) {
         if (!objectData.uid) {
             alt.logError(`(${JSON.stringify(objectData.pos)}) Object is missing uid.`);
             return;
@@ -55,7 +55,7 @@ class ClientObjectController {
         if (!interval) {
             interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
         }
-    }
+    },
 
     /**
      * Used to populate server-side markers.
@@ -63,15 +63,15 @@ class ClientObjectController {
      * @param {Array<IObject>} objects
      * @memberof ClientObjectController
      */
-    static populate(objects: Array<IObject>) {
+    populate(objects: Array<IObject>) {
         globalObjects = objects;
 
         if (!interval) {
             interval = Timer.createInterval(ClientObjectController.handleDrawObjects, 100, 'object.ts');
         }
-    }
+    },
 
-    static async stop() {
+    async stop() {
         isRemoving = true;
 
         for (let i = localObjects.length - 1; i >= 0; i--) {
@@ -87,7 +87,7 @@ class ClientObjectController {
         }
 
         Timer.clearInterval(interval);
-    }
+    },
 
     /**
      * Remove a object from being drawn.
@@ -96,7 +96,7 @@ class ClientObjectController {
      * @return {*}
      * @memberof ClientObjectController
      */
-    static async removeLocalObject(uid: string, removeAllInterior = false) {
+    async removeLocalObject(uid: string, removeAllInterior = false) {
         isRemoving = true;
 
         for (let i = localObjects.length - 1; i >= 0; i--) {
@@ -112,7 +112,7 @@ class ClientObjectController {
         }
 
         isRemoving = false;
-    }
+    },
 
     /**
      * Force remove a global object if present.
@@ -120,7 +120,7 @@ class ClientObjectController {
      * @param {string} uid
      * @memberof ClientObjectController
      */
-    static async removeGlobalObject(uid: string) {
+    async removeGlobalObject(uid: string) {
         isRemoving = true;
 
         for (let i = globalObjects.length - 1; i >= 0; i--) {
@@ -133,7 +133,7 @@ class ClientObjectController {
         }
 
         isRemoving = false;
-    }
+    },
 
     /**
      * Verify if an object already exists.
@@ -143,9 +143,9 @@ class ClientObjectController {
      * @return {boolean}
      * @memberof ClientObjectController
      */
-    static doesObjectExist(uid: string): boolean {
-        return createdObjects.findIndex((obj) => obj.uid === uid) >= 0;
-    }
+    doesObjectExist(uid: string): boolean {
+        return createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id)) >= 0;
+    },
 
     /**
      * Create an object if it does not exist.
@@ -154,7 +154,7 @@ class ClientObjectController {
      * @param {IObject} object
      * @memberof ClientObjectController
      */
-    static async createObject(object: IObject) {
+    async createObject(object: IObject) {
         if (ClientObjectController.doesObjectExist(object.uid)) {
             return;
         }
@@ -176,7 +176,7 @@ class ClientObjectController {
         }
 
         createdObjects.push(newObject);
-    }
+    },
 
     /**
      * Remove an object if it exists.
@@ -185,7 +185,7 @@ class ClientObjectController {
      * @param {IObject} object
      * @memberof ClientObjectController
      */
-    static async removeObject(object: IObject) {
+    async removeObject(object: IObject) {
         isRemoving = true;
 
         for (let i = createdObjects.length - 1; i >= 0; i--) {
@@ -194,17 +194,26 @@ class ClientObjectController {
             }
 
             while (native.doesEntityExist(createdObjects[i].id)) {
+                native.setEntityAsMissionEntity(createdObjects[i].id, true, true);
                 native.deleteEntity(createdObjects[i].id);
                 native.deleteObject(createdObjects[i].id);
+                native.setEntityAsNoLongerNeeded(createdObjects[i].id);
+                native.clearAreaOfObjects(
+                    createdObjects[i].pos.x,
+                    createdObjects[i].pos.y,
+                    createdObjects[i].pos.z,
+                    0.1,
+                    0,
+                );
             }
 
             createdObjects.splice(i, 1);
         }
 
         isRemoving = false;
-    }
+    },
 
-    private static async handleDrawObjects() {
+    async handleDrawObjects() {
         if (isRemoving) {
             return;
         }
@@ -235,7 +244,7 @@ class ClientObjectController {
 
             await ClientObjectController.createObject(data);
         }
-    }
-}
+    },
+};
 
 alt.on('connectionComplete', ClientObjectController.init);

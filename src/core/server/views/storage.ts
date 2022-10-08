@@ -157,10 +157,14 @@ export class StorageView {
                 continue;
             }
 
-            const dist = distance(target.pos, storage.entity.pos);
-            if (dist > DEFAULT_MAX_STORAGE_DIST) {
-                StorageView.forceCloseStorage(storage._id.toString());
-                continue;
+            
+
+            if (typeof storage.entity !== 'undefined' && typeof storage.entity.pos !== 'undefined') {
+                const dist = distance(target.pos, storage.entity.pos);
+                if (dist > DEFAULT_MAX_STORAGE_DIST) {
+                    StorageView.forceCloseStorage(storage._id.toString());
+                    continue;
+                }
             }
         }
     }

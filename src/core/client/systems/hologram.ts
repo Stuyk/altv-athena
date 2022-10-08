@@ -13,19 +13,19 @@ const holograms: Array<Hologram> = [];
 let isUpdating = false;
 let interval;
 
-export class HologramSystem {
+export const HologramSystem = {
     /**
      * Initialize the Hologram Renderer Process
      * @static
      * @memberof HologramSystem
      */
-    static init() {
+    init() {
         if (interval) {
             Timer.clearInterval(interval);
         }
 
         interval = Timer.createInterval(HologramSystem.render, TIME_TO_CHECK_HOLOGRAMS, 'hologram.ts');
-    }
+    },
 
     /**
      * Add a Hologram to Render
@@ -33,9 +33,9 @@ export class HologramSystem {
      * @param {Hologram} hologram
      * @memberof HologramSystem
      */
-    static add(hologram: Hologram) {
+    add(hologram: Hologram) {
         holograms.push(hologram);
-    }
+    },
 
     /**
      * Remove a Hologram from the Hologram system by the indentifier.
@@ -44,7 +44,7 @@ export class HologramSystem {
      * @return {*}
      * @memberof HologramSystem
      */
-    static remove(identifier: string) {
+    remove(identifier: string) {
         isUpdating = true;
 
         const index = holograms.findIndex((x) => x.identifier === identifier);
@@ -59,16 +59,16 @@ export class HologramSystem {
 
         holograms.splice(index, 1);
         isUpdating = false;
-    }
+    },
 
-    static toggleVisibility(identifier: string, value: boolean) {
+    toggleVisibility(identifier: string, value: boolean) {
         const index = holograms.findIndex((x) => x.identifier === identifier);
         if (index <= -1) {
             return;
         }
 
         holograms[index].isHidden = value;
-    }
+    },
 
     /**
      * Used to render the Holograms.
@@ -76,7 +76,7 @@ export class HologramSystem {
      * @return {*}
      * @memberof HologramSystem
      */
-    static async render() {
+    async render() {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -132,8 +132,8 @@ export class HologramSystem {
                 native.setEntityCanBeDamaged(hologram.clientRef, false);
             });
         }
-    }
-}
+    },
+};
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, HologramSystem.init);
 alt.onServer(SYSTEM_EVENTS.HOLOGRAM_APPEND, HologramSystem.add);

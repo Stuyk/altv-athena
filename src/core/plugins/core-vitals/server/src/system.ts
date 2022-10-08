@@ -16,6 +16,8 @@ class InternalFunctions {
      * @returns Nothing.
      */
     static handlePing(player: alt.Player) {
+        if (!player || !player.valid || !player.data) return;
+
         if (syncTimes[player.id] && Date.now() < syncTimes[player.id]) {
             return;
         }

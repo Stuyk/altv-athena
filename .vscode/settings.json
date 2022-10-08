@@ -1,5 +1,9 @@
 {
     "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "docwriter.style": "Auto-detect",
     "files.exclude": {
         "**/.git": true,
@@ -17,7 +21,7 @@
         "libnode.dll": true,
         "package-lock.json": true,
         "server.cfg": true,
-        ".github": true,
+        ".github": false,
         ".loose-ts-check": true,
         ".husky": true,
         "resources/core/**": false,

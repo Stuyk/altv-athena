@@ -1,4 +1,4 @@
-import { VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
+import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
 
 /**
  * Interface for working with / using vehicles.
@@ -54,4 +54,25 @@ export interface VehicleInfo {
      * @memberof VehicleInfo
      */
     storage: number | null;
+
+    /**
+     * The type of fuel the vehicle uses
+     * @type {FUEL_TYPE}
+     * @memberof VehicleInfo
+     */
+    fuelType: FUEL_TYPE;
+
+    /**
+     * The total tanksize of the vehicle used for fuel cost calculations
+     * @type {number}
+     * @memberof VehicleInfo
+     */
+    fuelTankSize?: number;
+
+    /**
+     * The total number of available seats in a vehicle
+     * @type {number}
+     * @memberof VehicleInfo
+     */
+    seats?: number;
 }

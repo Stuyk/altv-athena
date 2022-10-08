@@ -13,19 +13,19 @@ let interval: number;
 /**
  * Do Not Export Internal Only
  */
-class ClientMarkerController {
-    static init() {
+const ClientMarkerController = {
+    init() {
         addedMarkers = [];
         localMarkers = [];
-    }
+    },
 
-    static stop() {
+    stop() {
         if (!interval) {
             return;
         }
 
         Timer.clearInterval(interval);
-    }
+    },
 
     /**
      * Add a single local marker.
@@ -33,7 +33,7 @@ class ClientMarkerController {
      * @param {Marker} marker
      * @memberof ClientMarkerController
      */
-    static append(marker: Marker) {
+    append(marker: Marker) {
         if (!marker.uid) {
             alt.logError(`(${JSON.stringify(marker.pos)}) Marker is missing uid.`);
             return;
@@ -50,7 +50,7 @@ class ClientMarkerController {
         if (!interval) {
             interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
         }
-    }
+    },
 
     /**
      * Used to populate server-side markers and keeps them
@@ -59,13 +59,13 @@ class ClientMarkerController {
      * @param {Array<Marker>} markers
      * @memberof ClientMarkerController
      */
-    static populate(markers: Array<Marker>) {
+    populate(markers: Array<Marker>) {
         addedMarkers = markers;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawMarkers, 0, 'marker.ts');
         }
-    }
+    },
 
     /**
      * Remove a local marker from being drawn.
@@ -74,7 +74,7 @@ class ClientMarkerController {
      * @return {*}
      * @memberof ClientMarkerController
      */
-    static remove(uid: string) {
+    remove(uid: string) {
         isRemoving = true;
 
         const index = localMarkers.findIndex((marker) => marker.uid === uid);
@@ -91,8 +91,8 @@ class ClientMarkerController {
 
         localMarkers.splice(index, 1);
         isRemoving = false;
-    }
-}
+    },
+};
 
 function handleDrawMarkers() {
     if (isRemoving) {

@@ -25,8 +25,11 @@ export default {
     getCollections: (): string[] => {
         return DEFAULT_COLLECTIONS;
     },
-    getName: (): string => {
-        return DEFAULT_DATABASE_NAME;
+    getName: (config: IConfig): string => {
+        if (!config.MONGO_DATABASE_NAME) {
+            return DEFAULT_DATABASE_NAME;
+        }
+        return config.MONGO_DATABASE_NAME;
     },
     throwConnectionError: () => {
         alt.logWarning(`=== ERROR ===`);

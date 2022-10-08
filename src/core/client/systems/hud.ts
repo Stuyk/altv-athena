@@ -217,19 +217,19 @@ let hudElements: Array<IHud> = [
     },
 ];
 
-export class HudSystem {
+export const HudSystem = {
     /**
      * Initialize HUD
      * @static
      * @memberof HudSystem
      */
-    static init() {
+    init() {
         if (interval) {
             Timer.clearInterval(interval);
         }
 
         interval = Timer.createInterval(HudSystem.render, 0, 'hud.ts');
-    }
+    },
 
     /**
      * Set the objective text used for the job interface.
@@ -237,9 +237,9 @@ export class HudSystem {
      * @param {(string | null)} text
      * @memberof HudSystem
      */
-    static setObjective(text: string | null) {
+    setObjective(text: string | null) {
         objective = text;
-    }
+    },
 
     /**
      * Append some native text to display on the hud.
@@ -248,9 +248,9 @@ export class HudSystem {
      * @param {IHud} element
      * @memberof HudSystem
      */
-    static add(element: IHud) {
+    add(element: IHud) {
         hudElements.push(element);
-    }
+    },
 
     /**
      * Remove a HUD element from being rendered.
@@ -259,7 +259,7 @@ export class HudSystem {
      * @param {string} identifier
      * @memberof HudSystem
      */
-    static remove(identifier: HUD_IDENTIFIER | string): boolean {
+    remove(identifier: HUD_IDENTIFIER | string): boolean {
         isUpdating = true;
 
         const index = hudElements.findIndex((x) => x.identifier === identifier);
@@ -271,7 +271,7 @@ export class HudSystem {
         hudElements.splice(index, 1);
         isUpdating = false;
         return true;
-    }
+    },
 
     /**
      * Used to Overwrite a Default HUD Element
@@ -282,7 +282,7 @@ export class HudSystem {
      * @return {*}
      * @memberof HudSystem
      */
-    static overwriteCallback(identifier: HUD_IDENTIFIER, overwriteCallback: (...args: any[]) => void) {
+    overwriteCallback(identifier: HUD_IDENTIFIER, overwriteCallback: (...args: any[]) => void) {
         isUpdating = true;
 
         const index = hudElements.findIndex((x) => x.identifier === identifier);
@@ -293,7 +293,7 @@ export class HudSystem {
 
         hudElements[index].callbackReroute = overwriteCallback;
         isUpdating = false;
-    }
+    },
 
     /**
      * Render HUD Elements
@@ -301,7 +301,7 @@ export class HudSystem {
      * @return {*}
      * @memberof HudSystem
      */
-    private static render() {
+    render() {
         if (isAnyMenuOpen(true)) {
             return;
         }
@@ -332,8 +332,8 @@ export class HudSystem {
                 element.padding,
             );
         }
-    }
-}
+    },
+};
 
 // Turn on Old Hud Here
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, HudSystem.init);

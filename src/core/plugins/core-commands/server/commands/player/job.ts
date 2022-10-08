@@ -20,6 +20,6 @@ class JobCommands {
             return;
         }
 
-        job.quit(LocaleController.get(LOCALE_KEYS.JOB_QUIT));
+        job.quit('Job quitted');
     }
 }

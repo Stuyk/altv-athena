@@ -17,8 +17,7 @@ import './menus/player';
 import './menus/vehicle';
 
 // rmlui
-import './rmlui/index';
-import './rmlui/input/index';
+import './rmlui/sprites/index';
 
 // Streamers
 import './streamers/item';
@@ -70,6 +69,7 @@ import './utility/sandbox';
 import './utility/screenshot';
 import './utility/shard';
 import './utility/spinner';
+import './utility/missionText';
 
 // Views
 import './views/actions';

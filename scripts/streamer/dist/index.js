@@ -114,12 +114,16 @@ class StreamerServer {
             }
             const streamDistance = StreamRange[key] ? StreamRange[key] : 100;
             const validData = StreamData[key].filter((streamData) => {
-                if (streamData.dimension && streamData.dimension !== data.dimension) {
-                    return false;
+                if (typeof streamData.dimension !== 'undefined') {
+                    if (streamData.dimension !== data.dimension) {
+                        return false;
+                    }
                 }
+
                 if (StreamerServer.distance(streamData.pos, data.pos) > streamDistance) {
                     return false;
                 }
+
                 return true;
             });
             response.data[key] = validData;

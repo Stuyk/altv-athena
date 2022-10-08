@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import natives from 'natives';
 
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { isFlagEnabled } from '../../shared/utility/flags';
@@ -13,17 +14,17 @@ let interval: number;
 let cooldown: number;
 let blip: alt.Blip;
 
-class ObjectiveController {
-    static updateObjective(data: Objective | null) {
+const ObjectiveController = {
+    updateObjective(data: Objective | null) {
         objective = data;
-    }
+    },
 
     /**
      * If the objective is null, clear the objective and blip. Otherwise, set the objective and blip.
      * @param {uniontype} data - Objective | null
      * @returns The Objective object.
      */
-    static handleSync(data: Objective | null) {
+    handleSync(data: Objective | null) {
         if (interval) {
             Timer.clearInterval(interval);
             interval = null;
@@ -60,13 +61,13 @@ class ObjectiveController {
         HudSystem.setObjective(data.description);
         objective = { ...data };
         interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
-    }
+    },
 
-    static getVector3Range() {
+    getVector3Range() {
         return new alt.Vector3(objective.range, objective.range, objective.range);
-    }
+    },
 
-    static verifyType(dist: number): boolean {
+    verifyType(dist: number): boolean {
         if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.WAYPOINT)) {
             if (dist <= objective.range) {
                 return true;
@@ -80,9 +81,9 @@ class ObjectiveController {
         }
 
         return false;
-    }
+    },
 
-    static verifyCriteria(dist: number): boolean {
+    verifyCriteria(dist: number): boolean {
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_VEHICLE)) {
             if (alt.Player.local.vehicle) {
                 return false;
@@ -95,10 +96,15 @@ class ObjectiveController {
             }
         }
 
-        return true;
-    }
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.VEHICLE_ENGINE_OFF)) {
+            const engineOn = natives.getIsVehicleEngineRunning(alt.Player.local.vehicle.scriptID);
+            if (engineOn) return false;
+        }
 
-    static verifyObjective() {
+        return true;
+    },
+
+    verifyObjective() {
         if (alt.Player.local.isMenuOpen) {
             return;
         }
@@ -144,8 +150,8 @@ class ObjectiveController {
         }
 
         alt.emitServer(JobEnums.ObjectiveEvents.JOB_VERIFY);
-    }
-}
+    },
+};
 
 alt.onServer(JobEnums.ObjectiveEvents.JOB_SYNC, ObjectiveController.handleSync);
 alt.onServer(JobEnums.ObjectiveEvents.JOB_UPDATE, ObjectiveController.updateObjective);

@@ -4,15 +4,15 @@ import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 
-export class DebugController {
-    static registerKeybinds() {
+export const DebugController = {
+    registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.DEBUG_KEY,
             singlePress: DebugController.handleDebugMessages,
         });
-    }
+    },
 
-    static handleDebugMessages() {
+    handleDebugMessages() {
         alt.log(`POSITION:`);
         const pos = { ...alt.Player.local.pos };
         alt.log(JSON.stringify(pos));
@@ -35,7 +35,7 @@ export class DebugController {
         }
 
         alt.emit('debug:Time');
-    }
-}
+    },
+};
 
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, DebugController.registerKeybinds);

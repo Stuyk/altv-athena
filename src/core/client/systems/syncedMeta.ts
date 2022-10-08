@@ -7,20 +7,20 @@ const NextUpdate = {
     freeze: Date.now() + 200,
 };
 
-class InternalFunctions {
-    static init() {
+const InternalFunctions = {
+    init() {
         alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.start);
-    }
+    },
 
-    static start() {
+    start() {
         alt.setInterval(InternalFunctions.tick, 0);
-    }
+    },
 
-    static tick() {
+    tick() {
         InternalFunctions.handleFreeze(200);
-    }
+    },
 
-    static handleFreeze(timeBetweenChecks: number) {
+    handleFreeze(timeBetweenChecks: number) {
         if (NextUpdate.freeze && Date.now() < NextUpdate.freeze) {
             return;
         }
@@ -37,7 +37,7 @@ class InternalFunctions {
         }
 
         native.freezeEntityPosition(alt.Player.local.scriptID, isFrozen);
-    }
-}
+    },
+};
 
 InternalFunctions.init();

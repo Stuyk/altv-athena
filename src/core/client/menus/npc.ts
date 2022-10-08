@@ -11,7 +11,7 @@ type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptio
 
 const Injections: Array<NpcMenuInjection> = [];
 
-export class NpcWheelMenu {
+const NpcWheelMenuConst = {
     /**
      * Allows the current Menu Options to be modified.
      * Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -21,9 +21,9 @@ export class NpcWheelMenu {
      * @param {NpcMenuInjection} callback
      * @memberof NpcWheelMenu
      */
-    static addInjection(callback: NpcMenuInjection) {
+    addInjection(callback: NpcMenuInjection) {
         Injections.push(callback);
-    }
+    },
 
     /**
      * Opens the wheel menu against a target npc script id.
@@ -33,7 +33,7 @@ export class NpcWheelMenu {
      * @return {*}
      * @memberof NpcWheelMenu
      */
-    static openMenu(scriptID: number) {
+    openMenu(scriptID: number): void {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -71,4 +71,8 @@ export class NpcWheelMenu {
 
         WheelMenu.open('NPC', options);
     }
+}
+
+export const NpcWheelMenu = {
+    ...NpcWheelMenuConst
 }

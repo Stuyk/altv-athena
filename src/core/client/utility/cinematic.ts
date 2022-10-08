@@ -102,7 +102,7 @@ interface iCameraNode {
     isLastNode?: boolean;
 }
 
-class InternalFunctions {
+const InternalFunctions = {
     /**
      * Check if the camera is currently moving between nodes.
      *
@@ -110,7 +110,7 @@ class InternalFunctions {
      * @return {*}
      * @memberof InternalFunctions
      */
-    static async isCameraUpdating() {
+    async isCameraUpdating() {
         return new Promise((resolve: Function) => {
             const interval = alt.setInterval(() => {
                 if (isUpdating) {
@@ -122,13 +122,13 @@ class InternalFunctions {
                 return;
             }, 25);
         });
-    }
+    },
 
     /**
      * Create a camera at the given position
      * @param {Vector3} pos - The position of the camera.
      */
-    static async next(node: iCameraNode): Promise<void> {
+    async next(node: iCameraNode): Promise<void> {
         if (!node) {
             return;
         }
@@ -263,7 +263,7 @@ class InternalFunctions {
                 node.easeTime ? node.easeTime * 2 : 0,
             );
         });
-    }
+    },
 
     /**
      * Clears current camera but does not clear nodes.
@@ -271,7 +271,7 @@ class InternalFunctions {
      * @static
      * @memberof InternalFunctions
      */
-    static async clear() {
+    async clear() {
         if (cam1) {
             native.destroyCam(cam1, true);
             cam1 = null;
@@ -287,34 +287,34 @@ class InternalFunctions {
         native.renderScriptCams(false, false, 0, false, false, 0);
 
         currentCamIndex = -1;
-    }
+    },
 
     /**
      * Destroy all cameras and clear the focus
      */
-    static async destroy() {
+    async destroy() {
         isUpdating = false;
         InternalFunctions.clear();
         while (nodes.length >= 1) {
             nodes.pop();
         }
-    }
-}
+    },
+};
 
-export class CinematicCam {
+export const CinematicCam = {
     /**
      * This function will destroy all camera instances
      *
      * @static
      * @memberof CinematicCam
      */
-    static async destroy(): Promise<void> {
+    async destroy(): Promise<void> {
         return await InternalFunctions.destroy();
-    }
+    },
 
-    static async overrideNodes(_nodes: Array<iCameraNode>) {
+    async overrideNodes(_nodes: Array<iCameraNode>) {
         nodes = _nodes;
-    }
+    },
 
     /**
      * Add a camera node to the camera set.
@@ -323,7 +323,7 @@ export class CinematicCam {
      * @param {iCameraNode} node
      * @memberof CinematicCam
      */
-    static async addNode(node: iCameraNode) {
+    async addNode(node: iCameraNode) {
         if (!node.pos) {
             throw new Error(`Camera Node -> Error: Position was not set for camera node.`);
         }
@@ -337,7 +337,7 @@ export class CinematicCam {
         }
 
         nodes.push(node);
-    }
+    },
 
     /**
      * Goes to the next camera.
@@ -350,7 +350,7 @@ export class CinematicCam {
      * @return {Promise<boolean>}
      * @memberof CinematicCam
      */
-    static async next(removeFromArray = true): Promise<boolean> {
+    async next(removeFromArray = true): Promise<boolean> {
         if (nodes.length <= 0) {
             return false;
         }
@@ -372,7 +372,7 @@ export class CinematicCam {
         }
 
         return true;
-    }
+    },
 
     /**
      * Play all camera nodes, but do not clear the camera nodes array.
@@ -380,15 +380,15 @@ export class CinematicCam {
      * @static
      * @memberof CinematicCam
      */
-    static async play() {
+    async play() {
         const cameraNodes = [...nodes];
         for (let i = 0; i < cameraNodes.length; i++) {
             await InternalFunctions.isCameraUpdating();
             await InternalFunctions.next(cameraNodes[i]);
         }
-    }
+    },
 
-    static demo() {
+    demo() {
         alt.setTimeout(() => {
             native.setEntityCoordsNoOffset(
                 alt.Player.local.scriptID,
@@ -414,7 +414,7 @@ export class CinematicCam {
             /* This is a function that will play all of the camera nodes in the array. */
             CinematicCam.play();
         }, 1500);
-    }
-}
+    },
+};
 
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, CinematicCam.demo);

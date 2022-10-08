@@ -17,18 +17,21 @@
                 :key="index"
                 :is="page.component"
                 :id="'page-' + page.name"
+                :state="state"
             ></component>
             <component
                 v-for="(page, index) in overlays"
                 :key="index"
                 :is="page.component"
                 :id="'page-' + page.name"
+                :state="state"
             ></component>
             <component
                 v-for="(page, index) in persistent"
                 :key="index"
                 :is="page.component"
                 :id="'page-' + page.name"
+                :state="state"
             ></component>
         </div>
     </keep-alive>
@@ -71,6 +74,7 @@ export default defineComponent({
             pages: [] as Array<IPageData>,
             pageBindings: componentsToArray(),
             devMode: false,
+            state: {} as { [key: string]: any },
         };
     },
     computed: {
@@ -129,6 +133,14 @@ export default defineComponent({
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
             this.handleSetPages([...DefaultPages], 'pages');
+
+            // Random state generation for testing...
+            setInterval(() => {
+                this.state.hp = Math.floor(Math.random() * 100) + 100;
+                this.state.armour = Math.floor(Math.random() * 100);
+                this.state.random = Math.random() * Number.MAX_SAFE_INTEGER;
+            }, 100);
+
             return;
         }
 

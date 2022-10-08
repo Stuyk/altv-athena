@@ -3,13 +3,13 @@ import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { KeybindController } from '../events/keyup';
 
-export class ToolbarController {
+export const ToolbarController = {
     /**
      * Turn on the keybinds for toolbar switching.
      * @static
      * @memberof ToolbarController
      */
-    static registerKeybinds() {
+    registerKeybinds() {
         KeybindController.registerKeybind({
             key: KEY_BINDS.TOOLBAR_ONE,
             singlePress: ToolbarController.handleToolbarSwitch,
@@ -29,9 +29,9 @@ export class ToolbarController {
             key: KEY_BINDS.TOOLBAR_FOUR,
             singlePress: ToolbarController.handleToolbarSwitch,
         });
-    }
+    },
 
-    static handleToolbarSwitch(key: number) {
+    handleToolbarSwitch(key: number) {
         if (alt.Player.local.isChatOpen) {
             return;
         }
@@ -57,7 +57,7 @@ export class ToolbarController {
         }
 
         alt.emitServer(SYSTEM_EVENTS.PLAYER_TOOLBAR_SET, slot);
-    }
-}
+    },
+};
 
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, ToolbarController.registerKeybinds);

@@ -27,6 +27,13 @@ export interface JobTrigger<T = {}> {
     summary: string;
 
     /**
+     * Maximum amount for quantity input.
+     * @type {string}
+     * @memberof JobTrigger
+     */
+    maxAmount?: number;
+
+    /**
      * Event to trigger when it is accepted.
      * Recieve this event with 'alt.on'
      * @type {string}
@@ -47,7 +54,7 @@ export interface JobTrigger<T = {}> {
      *
      * @memberof JobTrigger
      */
-    acceptCallback?: (player: T) => void;
+    acceptCallback?: (player: T, amount?: number) => void;
 
     /**
      * A callback if the trigger is declined.

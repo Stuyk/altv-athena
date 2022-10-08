@@ -40,7 +40,7 @@ class Startup {
         const url = MongoUtil.getURL(config);
         const collections = MongoUtil.getCollections();
 
-        Database.init(url, MongoUtil.getName(), collections)
+        Database.init(url, MongoUtil.getName(config), collections)
             .catch(() => {
                 MongoUtil.throwConnectionError();
             })

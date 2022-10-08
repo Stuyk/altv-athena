@@ -103,6 +103,7 @@ export const LOCALE_KEYS = {
     INTERACTION_INTERACT_VEHICLE: 'interaction-interact-vehicle',
     INTERACTION_VIEW_OPTIONS: `interaction-view-options`,
     // Inventory
+    ITEM_ARGUMENTS_MISSING: `item-arguments-missing`,
     ITEM_DOES_NOT_EXIST: `item-does-not-exist`,
     ITEM_NOT_EQUIPPED: 'no-item-in-equipment-slot',
     ITEM_WAS_ADDED_INVENTORY: `item-was-added-inventory`,

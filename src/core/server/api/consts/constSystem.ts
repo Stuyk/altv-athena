@@ -2,6 +2,7 @@ import { AgendaSystem } from '../../systems/agenda';
 import { Identifier } from '../../systems/identifier';
 import { ItemFactory } from '../../systems/item';
 import { ItemEffects } from '../../systems/itemEffects';
+import { addJobCheck, cloneObjective, getPlayerJob, Job } from '../../systems/job';
 import { PluginSystem } from '../../systems/plugins';
 import { SoundSystem } from '../../systems/sound';
 import { StorageSystem } from '../../systems/storage';
@@ -12,6 +13,12 @@ export const systemConst = {
     itemFactory: ItemFactory,
     effects: ItemEffects,
     identifier: Identifier,
+    job: {
+        addJobCheck,
+        getPlayerJob,
+        cloneObjective,
+        instance: Job,
+    },
     plugins: PluginSystem,
     sound: SoundSystem,
     storage: StorageSystem,

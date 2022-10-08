@@ -13,19 +13,19 @@ let isRemoving = false;
 /**
  * Do Not Export Internal Only
  */
-class ClientTextLabelController {
-    static init() {
+const ClientTextLabelController = {
+    init() {
         localLabels = [];
         addedLabels = [];
-    }
+    },
 
-    static stop() {
+    stop() {
         if (!interval) {
             return;
         }
 
         Timer.clearInterval(interval);
-    }
+    },
 
     /**
      * Add a single text label.
@@ -33,7 +33,7 @@ class ClientTextLabelController {
      * @param {TextLabel} label
      * @memberof MarkerController
      */
-    static append(label: TextLabel) {
+    append(label: TextLabel) {
         if (!label.uid) {
             alt.logError(`(${JSON.stringify(label.data)}) Label is missing uid.`);
             return;
@@ -52,7 +52,7 @@ class ClientTextLabelController {
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
         }
-    }
+    },
 
     /**
      * Used to populate server-side markers.
@@ -60,13 +60,13 @@ class ClientTextLabelController {
      * @param {Array<Marker>} labels
      * @memberof MarkerController
      */
-    static populate(labels: Array<TextLabel>) {
+    populate(labels: Array<TextLabel>) {
         addedLabels = labels;
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
         }
-    }
+    },
 
     /**
      * Remove a marker from being drawn.
@@ -75,7 +75,7 @@ class ClientTextLabelController {
      * @return {*}
      * @memberof MarkerController
      */
-    static remove(uid: string) {
+    remove(uid: string) {
         isRemoving = true;
 
         const index = localLabels.findIndex((marker) => marker.uid === uid);
@@ -92,8 +92,8 @@ class ClientTextLabelController {
 
         localLabels.splice(index, 1);
         isRemoving = false;
-    }
-}
+    },
+};
 
 function handleDrawTextlabels() {
     if (isRemoving) {

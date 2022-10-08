@@ -1,4 +1,4 @@
-export class UID {
+export const UID = {
     /**
      * Generates a UID based on string characters in the English alphabet.
      *
@@ -6,11 +6,11 @@ export class UID {
      * @return {*}  {string}
      * @memberof UID
      */
-    static generate(): string {
+    generate(): string {
         return (
             String.fromCharCode(Math.floor(Math.random() * 26) + 97) +
             Math.random().toString(16).slice(2) +
             Date.now().toString(16).slice(4)
         );
-    }
-}
+    },
+};

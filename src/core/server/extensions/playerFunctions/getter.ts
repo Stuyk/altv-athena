@@ -6,6 +6,7 @@ import { Character } from '../../../shared/interfaces/character';
 import VehicleFuncs from '../vehicleFuncs';
 import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
 import { distance } from '../../../shared/utility/vector';
+import { getters } from '../../systems/getters';
 
 const Getter = {
     /**
@@ -34,15 +35,13 @@ const Getter = {
 
     /**
      * Get all characters associated with a player.
+     * @deprecated Use `Athena.get.player.characters`
+     *
      * @param {alt.Player} player
      * @return {Promise<Array<Character>>}
      */
     async allCharacters(player: alt.Player): Promise<Array<Character>> {
-        if (typeof player.accountData === 'undefined') {
-            return [];
-        }
-
-        return await Database.fetchAllByField('account_id', player.accountData._id, Collections.Characters);
+        return getters.player.characters(player);
     },
 
     /**
@@ -83,62 +82,36 @@ const Getter = {
                 p && p.valid && p.data && player.gridSpace === p.gridSpace && distance(player.pos, p.pos) < maxDistance,
         );
     },
-
     /**
      * Returns the closest player in our grid space.
+     * @deprecated Use `Athena.get.player.closestToPlayer`
+     *
      * @export
      * @param {alt.Player} player
-     * @return {alt.Player}  {alt.Player}
+     * @return {alt.Player}
      */
     closestPlayer(player: alt.Player): alt.Player {
-        const players = [...alt.Player.all];
-        let targetPlayer = players[0] !== player ? players[0] : players[1];
-        let dist = distance(player.pos, targetPlayer.pos);
-
-        for (let i = 0; i < players.length; i++) {
-            const newDistance = distance(player.pos, players[i].pos);
-            if (!players[i] || !players[i].data) {
-                continue;
-            }
-
-            if (players[i] === player) {
-                continue;
-            }
-
-            // This line is going to assist with finding a player in the same grid space.
-            if (players[i].gridSpace !== player.gridSpace) {
-                continue;
-            }
-
-            if (dist > newDistance) {
-                continue;
-            }
-
-            dist = newDistance;
-            targetPlayer = players[i];
-        }
-
-        return targetPlayer;
+        return getters.player.closestToPlayer(player);
     },
 };
 
 /**
- * It takes a function name and a callback, and if the function name exists in the exports object, it
+ * It takes a function name and a callback, and if the function name exists in the funcs object, it
  * overrides it with the callback
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the player calls the getter.
  */
 function override<Key extends keyof typeof Getter>(functionName: Key, callback: typeof Getter[Key]): void {
-    if (typeof exports[functionName] === 'undefined') {
+    if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.get does not provide an export named ${functionName}`);
     }
 
-    exports[functionName] = callback;
+    funcs[functionName] = callback;
 }
 
-const exports: typeof Getter & { override?: typeof override } = {
+const funcs: typeof Getter & { override?: typeof override } = {
     ...Getter,
     override,
 };
 
-export default exports;
+export default funcs;

@@ -4,17 +4,19 @@ import { distance } from '../../shared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
+import { GroundItem } from '../../shared/interfaces/groundItem';
 
 type ObjectMenuInjection = (
     modelHash: number,
     scriptID: number,
     options: Array<IWheelOptionExt>,
+    item?: GroundItem,
 ) => Array<IWheelOptionExt>;
 
 const Injections: Array<ObjectMenuInjection> = [];
 const validHashes: Array<number> = [];
 
-export class ObjectWheelMenu {
+const ObjectWheelMenuConst = {
     /**
      * Allows the current Menu Options to be modified.
      * Meaning, a callback that will modify existing options, or append new options to the menu.
@@ -24,9 +26,9 @@ export class ObjectWheelMenu {
      * @param {ObjectMenuInjection} callback
      * @memberof ObjectWheelMenu
      */
-    static addInjection(callback: ObjectMenuInjection) {
+    addInjection(callback: ObjectMenuInjection): void {
         Injections.push(callback);
-    }
+    },
 
     /**
      * Allows to register a valid object hash
@@ -35,9 +37,9 @@ export class ObjectWheelMenu {
      * @param {number} objectHash
      * @memberof ObjectWheelMenu
      */
-    static registerObject(objectHash: number) {
+    registerObject(objectHash: number): void {
         validHashes.push(objectHash);
-    }
+    },
 
     /**
      * Opens the wheel menu against a target npc script id.
@@ -47,7 +49,7 @@ export class ObjectWheelMenu {
      * @return {*}
      * @memberof ObjectWheelMenu
      */
-    static openMenu(scriptID: number) {
+    openMenu(scriptID: number, item?: GroundItem): void {
         if (isAnyMenuOpen()) {
             return;
         }
@@ -68,7 +70,7 @@ export class ObjectWheelMenu {
 
         for (const callback of Injections) {
             try {
-                options = callback(hash, scriptID, options);
+                options = callback(hash, scriptID, options, item);
             } catch (err) {
                 console.warn(`Got Object Menu Injection Error: ${err}`);
                 continue;
@@ -80,7 +82,7 @@ export class ObjectWheelMenu {
         }
 
         WheelMenu.open('Object', options);
-    }
+    },
 
     /**
      * Check if an object is registered for interaction.
@@ -90,8 +92,12 @@ export class ObjectWheelMenu {
      * @return {*}
      * @memberof InteractionController
      */
-    static isModelValidObject(modelHash: number) {
+    isModelValidObject(modelHash: number): boolean {
         const index = validHashes.findIndex((x) => `${x}` === `${modelHash}`);
         return index >= 0;
-    }
-}
+    },
+};
+
+export const ObjectWheelMenu = {
+    ...ObjectWheelMenuConst,
+};

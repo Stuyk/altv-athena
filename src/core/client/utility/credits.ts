@@ -10,8 +10,8 @@ let scaleform: Scaleform;
 let interval: number;
 let timeout: number;
 
-export default class Credits {
-    static async create(credit: ICredit) {
+const Credits = {
+    async create(credit: ICredit) {
         Credits.clear();
 
         scaleform = await requestScaleForm('OPENING_CREDITS');
@@ -51,14 +51,14 @@ export default class Credits {
                 Credits.clear();
             }, credit.duration);
         }
-    }
+    },
 
     /**
      * Used to clear the last set spinner.
      * @static
      * @memberof Shard
      */
-    static clear() {
+    clear() {
         if (scaleform) {
             scaleform.destroy();
             scaleform = null;
@@ -73,8 +73,10 @@ export default class Credits {
             alt.clearInterval(interval);
             interval = null;
         }
-    }
-}
+    },
+};
+
+export default Credits;
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_CREDITS, Credits.create);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_CREDITS_CLEAR, Credits.clear);
