@@ -13,6 +13,8 @@ import { VEHICLE_HASH } from '../../../../shared/enums/vehicleHash';
 import { ServerBlipController } from '../../../../server/systems/blip';
 import { InteractionController } from '../../../../server/systems/interaction';
 import { randomNumberBetween, getRandomRGB } from '../../../../shared/utility/random';
+import { addTextMessageNotificationFor } from '../../../../server/utility/notifications';
+import { NOTIFICATION_ICON } from '../../../../shared/enums/notificationIcon';
 
 const START_POINT = new alt.Vector3(-28.58901023864746, -1085.3275146484375, 25.5);
 const YELLOW_RGBA = new alt.RGBA(235, 213, 52, 255);
@@ -117,7 +119,14 @@ export class VehicleRepoJob {
                     Athena.player.emit.soundFrontend(player, 'Phone_Text_Arrive', 'DLC_H4_MM_Sounds');
 
                     const randomSpeech = JOB_DATA.SPEECHES[randomNumberBetween(0, JOB_DATA.SPEECHES.length)];
-                    Athena.player.emit.message(player, `Simeon: ${randomSpeech}`);
+                    addTextMessageNotificationFor(player, {
+                        sender: 'Simeon',
+                        notificationIcon: NOTIFICATION_ICON.Simeon,
+                        subject: 'REPO JOB',
+                        fadeIn: true,
+                        showInBriefing: true,
+                        message: randomSpeech,
+                    });
                 }, 3000);
             },
         });
@@ -176,10 +185,14 @@ export class VehicleRepoJob {
 
         // Send time limit message
         Athena.player.emit.soundFrontend(player, 'Phone_Text_Arrive', 'DLC_H4_MM_Sounds');
-        Athena.player.emit.message(
-            player,
-            `Simeon: Don't sleep you only got ${JOB_VEHICLE_REPO_OPTIONS.MAXTIME} minutes!`,
-        );
+        addTextMessageNotificationFor(player, {
+            sender: 'Simeon',
+            notificationIcon: NOTIFICATION_ICON.Simeon,
+            subject: 'REPO JOB',
+            fadeIn: true,
+            showInBriefing: true,
+            message: `Don't sleep you only got ${JOB_VEHICLE_REPO_OPTIONS.MAXTIME} minutes!`,
+        });
 
         // Get random car color
         const randomColor = getRandomRGB();
