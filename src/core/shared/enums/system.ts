@@ -63,6 +63,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_SOUND_3D_POSITIONAL = 'sound:3D:positional',
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',
+    PLAYER_EMIT_TEXTMSG_NOTIFICATION = 'notification:textmessage:Show',
     PLAYER_EMIT_SPINNER = 'spinner:Show',
     PLAYER_EMIT_SPINNER_CLEAR = 'spinner:Clear',
     PLAYER_EMIT_SHARD = 'shard:Create',
