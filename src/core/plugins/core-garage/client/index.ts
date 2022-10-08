@@ -39,7 +39,7 @@ class InternalFunctions implements ViewModel {
         alt.Player.local.isMenuOpen = true;
     }
 
-    static async close() {
+    static async close(invokeClosePage = false) {
         alt.toggleGameControls(true);
 
         const view = await WebViewController.get();
@@ -51,6 +51,10 @@ class InternalFunctions implements ViewModel {
         WebViewController.showCursor(false);
 
         alt.Player.local.isMenuOpen = false;
+
+        if (invokeClosePage) {
+            WebViewController.closePages([PAGE_NAME]);
+        }
     }
 
     static async ready() {
