@@ -55,9 +55,44 @@ export class ServerTextLabelController {
             label.uid = sha256Random(JSON.stringify(label));
         }
 
+        const index = globalTextLabels.findIndex((x) => x.uid === label.uid);
+        if (index !== -1) {
+            alt.logWarning(`Text Label with uid ${label.uid} already exists. If trying to update use update function.`);
+            return undefined;
+        }
+
+        label.isServerWide = true;
         globalTextLabels.push(label);
         InternalController.refresh();
         return label.uid;
+    }
+
+    /**
+     * Update a text label globally, or for a player.
+     * Not defining the player tries to update the label globally.
+     * Try not to perfrom this updates in an everyTick, and only update static text labels.
+     *
+     * @static
+     * @param {string} uid
+     * @param {alt.Player} [player=undefined]
+     * @memberof ServerTextLabelController
+     */
+    static update(uid: string, label: Partial<TextLabel>, player: alt.Player = undefined): boolean {
+        if (typeof player === 'undefined') {
+            const index = globalTextLabels.findIndex((x) => x.uid === uid);
+            if (index !== -1) {
+                alt.logWarning(`Could not update global text that does not exist. UID: ${uid}`);
+                return undefined;
+            }
+
+            globalTextLabels[index] = { ...globalTextLabels[index], ...label, uid };
+            InternalController.refresh();
+            return true;
+        }
+
+        label.isServerWide = false;
+        alt.emitClient(player, SYSTEM_EVENTS.UPDATE_TEXT_LABEL, { ...label, uid });
+        return true;
     }
 
     /**
@@ -106,6 +141,7 @@ export class ServerTextLabelController {
             textLabel.uid = sha256Random(JSON.stringify(textLabel));
         }
 
+        textLabel.isServerWide = false;
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_TEXTLABELS, textLabel);
         return textLabel.uid;
     }

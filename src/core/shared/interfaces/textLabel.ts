@@ -35,4 +35,12 @@ export interface TextLabel {
      * @memberof TextLabel
      */
     dimension?: number;
+
+    /**
+     * Always set to true when creating a server-wide text label.
+     *
+     * @type {boolean}
+     * @memberof TextLabel
+     */
+    isServerWide?: boolean;
 }

@@ -61,7 +61,6 @@
     "dependencies": {
         "@stuyk/ezmongodb": "2.1.0",
         "axios": "0.26.1",
-        "discord.js": "^13.7.0",
         "elliptic": "6.5.4",
         "njwt": "^1.2.0",
         "sjcl": "1.0.8",
