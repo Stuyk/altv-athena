@@ -132,6 +132,7 @@ export enum SYSTEM_EVENTS {
     TICKS_START = 'ticks:Start',
     //
     UPDATE_TEXT_LABEL = 'update:TextLabel',
+    UPDATE_OBJECT = 'update:Object',
     //
     VEHICLE_ENGINE = 'vehicle:Engine',
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',

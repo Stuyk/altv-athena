@@ -6,6 +6,7 @@
 Stripped out almost all unnecessary plugins. This is a move to slim down the framework.
 All original plugins can be found on Stuyk's GitHub.
 Updated Text Labels to Include 'update' function. Works for player or global text labels.
+Update Object Streamer to Include 'updatePosition' function. Works for player or global objects.
 ```
 
 ## 3.9.0

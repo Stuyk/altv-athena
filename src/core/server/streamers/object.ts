@@ -120,6 +120,32 @@ export class ServerObjectController {
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
         return objectData.uid;
     }
+
+    /**
+     * Updates the position for an object.
+     * NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.
+     *
+     * @static
+     * @param {string} uid
+     * @param {alt.IVector3} pos
+     * @param {alt.Player} [player=undefined]
+     * @memberof ServerObjectController
+     */
+    static updatePosition(uid: string, pos: alt.IVector3, player: alt.Player = undefined): boolean {
+        if (typeof player === 'undefined') {
+            const index = globalObjects.findIndex((x) => x.uid === uid);
+            if (index === -1) {
+                return false;
+            }
+
+            globalObjects[index].pos = pos;
+            InternalController.refresh();
+            return true;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.UPDATE_OBJECT, { uid, pos });
+        return true;
+    }
 }
 
 InternalController.init();
