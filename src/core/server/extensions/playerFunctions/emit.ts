@@ -27,10 +27,7 @@ const Emit = {
      * @return {*}  {void}
      * @memberof EmitPrototype
      */
-    startAlarm(
-        player: alt.Player,
-        name: string,
-    ): void {
+    startAlarm(player: alt.Player, name: string): void {
         if (player.data.isDead) {
             alt.logWarning(`[Athena] Cannot play alarm ${name} while player is dead.`);
             return;
@@ -44,10 +41,7 @@ const Emit = {
      * @param {alt.Player} player
      * @param {string} name
      */
-    stopAlarm(
-        player: alt.Player,
-        name: string,
-    ) {
+    stopAlarm(player: alt.Player, name: string) {
         if (!player || !player.valid) {
             return;
         }
@@ -135,9 +129,7 @@ const Emit = {
      * @memberof EmitPrototype
      */
     meta(player: alt.Player, key: string, value: any): void {
-        alt.nextTick(() => {
-            alt.emitClient(player, SYSTEM_EVENTS.META_SET, key, value);
-        });
+        player.setLocalMeta(key, value);
     },
 
     /**
@@ -182,7 +174,7 @@ const Emit = {
      * @param {string} text
      * @param {number} duration
      */
-     createMissionText(player: alt.Player, text: string, duration?: number) {
+    createMissionText(player: alt.Player, text: string, duration?: number) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text, duration);
     },
 

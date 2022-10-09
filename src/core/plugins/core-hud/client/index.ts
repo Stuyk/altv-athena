@@ -337,7 +337,7 @@ class InternalFunctions implements ViewModel {
     }
 }
 
-alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.metaChange);
+alt.on('localMetaChange', InternalFunctions.metaChange);
 alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_CREATE, HudView.addCustomInteraction);
 alt.onServer(SYSTEM_EVENTS.INTERACTION_TEXT_REMOVE, HudView.removeCustomInteraction);

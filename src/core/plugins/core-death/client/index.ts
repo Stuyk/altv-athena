@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { DEATH_CONFIG } from '../shared/config';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import { DEATH_EVENTS } from '../shared/events';
 import { SCREEN_EFFECTS } from '../../../shared/enums/screenEffects';
 import { drawText2D } from '../../../client/utility/text';
@@ -10,6 +9,7 @@ import { ScreenEffect } from '../../../client/utility/screenEffect';
 import { KeyHeld } from '../../../client/events/keyHeld';
 import { AthenaClient } from '../../../client/api/athena';
 import { sleep } from '../../../client/utility/sleep';
+import { isAnyMenuOpen } from '../../../client/utility/menus';
 
 let interval: number;
 let timeInTheFuture: number;
@@ -19,7 +19,7 @@ native.animpostfxStopAll();
 class InternalFunctions {
     static init() {
         alt.onServer(DEATH_EVENTS.UPDATE_DEATH_TIMER_MS, InternalFunctions.updateTimeLeft);
-        alt.on(SYSTEM_EVENTS.META_CHANGED, InternalFunctions.handleMetaChange);
+        alt.on('localMetaChange', InternalFunctions.handleMetaChange);
     }
 
     private static updateTimeLeft(ms: number) {
@@ -33,6 +33,10 @@ class InternalFunctions {
             KeyHeld.unregister(DEATH_CONFIG.RESPAWN_KEY, InternalFunctions.handleRespawnKey);
 
             if (!alt.Player.local.isDead) {
+                return;
+            }
+
+            if (isAnyMenuOpen(false)) {
                 return;
             }
 

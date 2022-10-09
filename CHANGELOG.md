@@ -8,6 +8,8 @@ All original plugins can be found on Stuyk's GitHub.
 Updated Text Labels to Include 'update' function. Works for player or global text labels.
 Update Object Streamer to Include 'updatePosition' function. Works for player or global objects.
 Fix passing _id as a partial object for vehicle saving.
+Migrate playerFuncs.emit.meta to player.setLocalMeta #292
+Fix bug where chat could potentially cause respawn by typing 'x' when respawn is ready.
 ```
 
 ## 3.9.0

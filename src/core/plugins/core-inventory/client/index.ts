@@ -123,4 +123,4 @@ class InventoryWebView {
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
 alt.onServer(INVENTORY_EVENTS.TO_CLIENT.OPEN, InventoryWebView.open);
 alt.onServer(INVENTORY_EVENTS.TO_CLIENT.CLOSE, InventoryWebView.close);
-alt.on(SYSTEM_EVENTS.META_CHANGED, InventoryWebView.processMetaChange);
+alt.on('localMetaChange', InventoryWebView.processMetaChange);

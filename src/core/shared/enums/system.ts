@@ -39,9 +39,6 @@ export enum SYSTEM_EVENTS {
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
     //
-    META_SET = 'meta:Set',
-    META_CHANGED = 'meta:Changed',
-    //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
     //
