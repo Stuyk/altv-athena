@@ -220,6 +220,7 @@ class VehicleCommands {
             }
         }
 
+        console.log(vehicle.data);
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
     }
 
@@ -237,7 +238,11 @@ class VehicleCommands {
         Athena.vehicle.funcs.createKey(player, vehicle);
     }
 
-    @command(['setvehicledirtLevel', 'svdl'], LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEH_DIRT_LEVEL, '/svdl'), PERMISSIONS.ADMIN)
+    @command(
+        ['setvehicledirtLevel', 'svdl'],
+        LocaleController.get(LOCALE_KEYS.COMMAND_SET_VEH_DIRT_LEVEL, '/svdl'),
+        PERMISSIONS.ADMIN,
+    )
     private static setVehicleDirtLevelCommand(player: alt.Player, dirtLevel: number): void {
         const vehicle = player.vehicle;
 

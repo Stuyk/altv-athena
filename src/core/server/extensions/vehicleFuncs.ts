@@ -14,6 +14,7 @@ import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
+import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
@@ -436,7 +437,9 @@ export default class VehicleFuncs {
             }
         }
 
-        return await Database.updatePartialData(vehicle.data._id.toString(), { ...injections }, Collections.Vehicles);
+        const newData = deepCloneObject<Partial<IVehicle>>(injections);
+        delete newData._id;
+        return await Database.updatePartialData(vehicle.data._id.toString(), newData, Collections.Vehicles);
     }
 
     /**
