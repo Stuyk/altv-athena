@@ -18,6 +18,7 @@ export default defineComponent({
     mounted() {
         if ('alt' in window) {
             alt.on(`${ComponentName}:Play`, this.addToQueue);
+            alt.on(`${ComponentName}:Stop`, this.stopAudio);
             alt.on(`${ComponentName}:TriggerQueue`, this.dequeue);
         } else {
             setInterval(() => {
@@ -36,6 +37,7 @@ export default defineComponent({
     unmounted() {
         if ('alt' in window) {
             alt.off(`${ComponentName}:Play`, this.addToQueue);
+            alt.off(`${ComponentName}:Stop`, this.stopAudio);
             alt.off(`${ComponentName}:TriggerQueue`, this.dequeue);
         }
     },
@@ -94,6 +96,12 @@ export default defineComponent({
             } catch (err) {
                 console.log(err);
                 this.isReady = false;
+            }
+        },
+        async stopAudio() {
+            if (this._audio) {
+                this._audio.pause();
+                this.isReady = true;
             }
         },
     },

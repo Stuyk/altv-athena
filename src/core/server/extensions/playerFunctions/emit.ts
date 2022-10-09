@@ -129,7 +129,9 @@ const Emit = {
      * @memberof EmitPrototype
      */
     meta(player: alt.Player, key: string, value: any): void {
-        player.setLocalMeta(key, value);
+        alt.nextTick(() => {
+            alt.emitClient(player, SYSTEM_EVENTS.META_SET, key, value);
+        });
     },
 
     /**
@@ -220,6 +222,16 @@ const Emit = {
      */
     sound3D(p: alt.Player, audioName: string, target: alt.Entity): void {
         alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName);
+    },
+
+    /**
+     * Stop all sounds.
+     * @param {string} audioName
+     * @param {alt.Entity} target
+     * @memberof EmitPrototype
+     */
+    soundStop(p: alt.Player): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP);
     },
 
     /**
@@ -443,22 +455,22 @@ const Emit = {
 };
 
 /**
- * It takes a function name and a callback, and if the function name exists in the funcs object, it
+ * It takes a function name and a callback, and if the function name exists in the exports object, it
  * overrides it with the callback
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the event is emitted.
  */
 function override<Key extends keyof typeof Emit>(functionName: Key, callback: typeof Emit[Key]): void {
-    if (typeof funcs[functionName] === 'undefined') {
+    if (typeof exports[functionName] === 'undefined') {
         alt.logError(`Athena.player.emit does not provide an export named ${functionName}`);
     }
 
-    funcs[functionName] = callback;
+    exports[functionName] = callback;
 }
 
-const funcs: typeof Emit & { override?: typeof override } = {
+const exports: typeof Emit & { override?: typeof override } = {
     ...Emit,
     override,
 };
 
-export default funcs;
+export default exports;

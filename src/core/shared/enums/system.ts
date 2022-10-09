@@ -39,6 +39,9 @@ export enum SYSTEM_EVENTS {
     IPL_LOAD = 'ipl:Load',
     IPL_UNLOAD = 'ipl:Unload',
     //
+    META_SET = 'meta:Set',
+    META_CHANGED = 'meta:Changed',
+    //
     NOCLIP_UPDATE = 'noclip:Update',
     NOCLIP_RESET = 'noclip:Reset',
     //
@@ -57,6 +60,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ERROR_SCREEN_CLEAR = 'errorScreen:Clear',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
     PLAYER_EMIT_SOUND_3D = 'sound:3D',
+    PLAYER_EMIT_SOUND_STOP = 'sound:Stop',
     PLAYER_EMIT_SOUND_3D_POSITIONAL = 'sound:3D:positional',
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',
@@ -127,9 +131,6 @@ export enum SYSTEM_EVENTS {
     SYNC_EQUIPMENT = 'character:Equipment',
     //
     TICKS_START = 'ticks:Start',
-    //
-    UPDATE_TEXT_LABEL = 'update:TextLabel',
-    UPDATE_OBJECT = 'update:Object',
     //
     VEHICLE_ENGINE = 'vehicle:Engine',
     VEHICLES_VIEW_SPAWN = 'vehicles:Spawn',
