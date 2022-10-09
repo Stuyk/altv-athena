@@ -12,7 +12,8 @@
             "@/*": ["./src/src/*"],
             "@utility/*": ["./src/utility/*"],
             "@components/*": ["./src/components/*"],
-            "@plugins/*": ["./src/core/plugins/*"]
+            "@plugins/*": ["./src/core/plugins/*"],
+            "@AthenaPlugins/*": ["./src/core/plugins/*"]
         }
     },
     "include": [

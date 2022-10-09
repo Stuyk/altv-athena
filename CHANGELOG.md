@@ -21,6 +21,7 @@ Added Custom Path Resolver
 @AthenaClient -> src/core/client
 @AthenaShared -> src/core/shared
 @AthenaPlugins -> src/core/plugins
+Refactored plugins to use path resolving
 ```
 
 ## 3.9.0

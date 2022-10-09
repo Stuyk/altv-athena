@@ -31,10 +31,10 @@
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { EquipmentSlots } from '../../shared/equipment';
 import draggable from '../../../../../../src-webviews/src/utility/drag';
-import { Item } from '../../../../shared/interfaces/inventory';
+import { Item } from '@AthenaShared/interfaces/inventory';
 import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
-import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
 import { exampleEquipment } from '../utility/exampleEquipment';
 import { getImagePath } from '../utility/inventoryIcon';
 

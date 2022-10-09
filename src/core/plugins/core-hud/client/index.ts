@@ -1,19 +1,19 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { HUD_COMPONENT } from '../../../shared/enums/hudComponents';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { VEHICLE_STATE } from '../../../shared/enums/vehicle';
-import IClientInteraction from '../../../shared/interfaces/iClientInteraction';
-import IHudComponent from '../../../shared/interfaces/iHudComponent';
-import { WebViewController } from '../../../client/extensions/view2';
-import ViewModel from '../../../client/models/viewModel';
-import { InteractionController } from '../../../client/systems/interaction';
-import { World } from '../../../client/systems/world';
-import { AthenaClient } from '../../../client/api/athena';
-import { KeybindController } from '../../../client/events/keyup';
-import { isAnyMenuOpen } from '../../../client/utility/menus';
-import { KeyHeld } from '../../../client/events/keyHeld';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { HUD_COMPONENT } from '@AthenaShared/enums/hudComponents';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { VEHICLE_STATE } from '@AthenaShared/enums/vehicle';
+import IClientInteraction from '@AthenaShared/interfaces/iClientInteraction';
+import IHudComponent from '@AthenaShared/interfaces/iHudComponent';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { InteractionController } from '@AthenaClient/systems/interaction';
+import { World } from '@AthenaClient/systems/world';
+import { AthenaClient } from '@AthenaClient/api/athena';
+import { KeybindController } from '@AthenaClient/events/keyup';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { KeyHeld } from '@AthenaClient/events/keyHeld';
 
 const SWITCH_KEY = 113; // F2
 const PAGE_NAME = 'Hud';

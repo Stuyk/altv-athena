@@ -1,5 +1,5 @@
-import { Item } from '../../../../shared/interfaces/inventory';
-import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { Item } from '@AthenaShared/interfaces/inventory';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
 
 export const exampleEquipment: Array<Item<Partial<ClothingComponent>>> = [
     {

@@ -1,10 +1,10 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { AgendaSystem } from '../../../../server/systems/agenda';
-import { CharacterSystem } from '../../../../server/systems/character';
-import { Character } from '../../../../shared/interfaces/character';
+import { Athena } from '@AthenaServer/api/athena';
+import { AgendaSystem } from '@AthenaServer/systems/agenda';
+import { CharacterSystem } from '@AthenaServer/systems/character';
+import { Character } from '@AthenaShared/interfaces/character';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS } from '../../shared/events';
 

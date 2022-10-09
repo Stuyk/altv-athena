@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { World } from '../../../../../server/systems/world';
-import { WORLD_WEATHER } from '../../../../../shared/enums/weather';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { World } from '@AthenaServer/systems/world';
+import { WORLD_WEATHER } from '@AthenaShared/enums/weather';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 
 class WeatherCommands {
     /**

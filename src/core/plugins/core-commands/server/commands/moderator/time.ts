@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { command } from '../../../../../server/decorators/commands';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
-import { Athena } from '../../../../../server/api/athena';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { World } from '../../../../../server/systems/world';
+import { command } from '@AthenaServer/decorators/commands';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { Athena } from '@AthenaServer/api/athena';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { World } from '@AthenaServer/systems/world';
 
 class TimeCommands {
     @command('settime', LocaleController.get(LOCALE_KEYS.COMMAND_SET_TIME, '/settime'), PERMISSIONS.ADMIN)

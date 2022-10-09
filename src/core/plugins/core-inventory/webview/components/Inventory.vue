@@ -54,7 +54,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { Item } from '../../../../shared/interfaces/inventory';
+import { Item } from '@AthenaShared/interfaces/inventory';
 import draggable from '../../../../../../src-webviews/src/utility/drag';
 import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
