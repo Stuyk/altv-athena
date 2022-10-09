@@ -16,6 +16,11 @@ streamers/marker.ts -> Converted to const
 streamers/item.ts -> Converted to const
 streamers/textlabel.ts -> Converted to const
 streamers/worldNotifications.ts -> Converted to const
+Added Custom Path Resolver
+@AthenaServer -> src/core/server
+@AthenaClient -> src/core/client
+@AthenaShared -> src/core/shared
+@AthenaPlugins -> src/core/plugins
 ```
 
 ## 3.9.0
