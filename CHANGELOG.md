@@ -10,6 +10,12 @@ Update Object Streamer to Include 'updatePosition' function. Works for player or
 Fix passing _id as a partial object for vehicle saving.
 Migrate playerFuncs.emit.meta to player.setLocalMeta #292
 Fix bug where chat could potentially cause respawn by typing 'x' when respawn is ready.
+streamers/object.ts -> Converted to const
+streamers/ped.ts -> Converted to const
+streamers/marker.ts -> Converted to const
+streamers/item.ts -> Converted to const
+streamers/textlabel.ts -> Converted to const
+streamers/worldNotifications.ts -> Converted to const
 ```
 
 ## 3.9.0
