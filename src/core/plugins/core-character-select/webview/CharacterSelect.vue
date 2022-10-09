@@ -105,11 +105,11 @@ const ComponentName = 'CharacterSelect';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
-        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
-        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@ViewComponents/Modal.vue')),
+        Toolbar: defineAsyncComponent(() => import('@ViewComponents/Toolbar.vue')),
+        Frame: defineAsyncComponent(() => import('@ViewComponents/Frame.vue')),
     },
     data() {
         return {

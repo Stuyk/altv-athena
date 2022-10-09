@@ -206,10 +206,10 @@ const ComponentName = 'Appearance';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Module: defineAsyncComponent(() => import('@components/Module.vue')),
-        RangeInput: defineAsyncComponent(() => import('@components/RangeInput.vue')),
+        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Module: defineAsyncComponent(() => import('@ViewComponents/Module.vue')),
+        RangeInput: defineAsyncComponent(() => import('@ViewComponents/RangeInput.vue')),
     },
     props: {
         data: {

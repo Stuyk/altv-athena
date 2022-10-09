@@ -22,6 +22,8 @@ Added Custom Path Resolver
 @AthenaShared -> src/core/shared
 @AthenaPlugins -> src/core/plugins
 Refactored plugins to use path resolving
+Removed all 'tsconfig.json' files from all plugins/*/webview -> No longer necessary
+Added additional path aliases for WebView based components and shared files.
 ```
 
 ## 3.9.0
