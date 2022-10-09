@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0
+
+```
+Stripped out almost all unnecessary plugins. This is a move to slim down the framework.
+All original plugins can be found on Stuyk's GitHub.
+```
 
 ## 3.9.0
 

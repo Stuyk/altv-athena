@@ -64,8 +64,6 @@
         "discord.js": "^13.7.0",
         "elliptic": "6.5.4",
         "njwt": "^1.2.0",
-        "nodemailer": "^6.7.8",
-        "pinia": "^2.0.14",
         "sjcl": "1.0.8",
         "sockjs": "0.3.21",
         "sockjs-client": "1.5.2"

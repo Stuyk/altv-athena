@@ -43,6 +43,5 @@ src/core/plugins/private-*
 yarn.lock
 
 # Resources
-
 resources/core/**
 resources/webviews/**
