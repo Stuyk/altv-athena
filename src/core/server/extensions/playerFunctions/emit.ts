@@ -223,6 +223,16 @@ const Emit = {
     },
 
     /**
+     * Stop all sounds.
+     * @param {string} audioName
+     * @param {alt.Entity} target
+     * @memberof EmitPrototype
+     */
+    soundStop(p: alt.Player): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP);
+    },
+
+    /**
      * Play a frontend sound for this player.
      * @param {string} audioName
      * @param {string} ref
@@ -448,7 +458,7 @@ const Emit = {
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the event is emitted.
  */
-function override<Key extends keyof typeof Emit>(functionName: Key, callback: typeof Emit[Key]): void {
+ function override<Key extends keyof typeof Emit>(functionName: Key, callback: typeof Emit[Key]): void {
     if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.emit does not provide an export named ${functionName}`);
     }

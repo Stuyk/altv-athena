@@ -7,6 +7,7 @@ import { AudioView } from '../views/audio';
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, stopPlayAudio);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, handlePlayAudioPositional);
 
 /**
@@ -100,4 +101,13 @@ export function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
 
 export function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
     AudioView.play3DAudio(soundName, 0, volume);
+}
+
+/**
+ * Stop audio.
+ * @returns None
+ */
+
+export function stopPlayAudio() {
+    AudioView.stop3DAudio();
 }

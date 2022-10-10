@@ -57,6 +57,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ERROR_SCREEN_CLEAR = 'errorScreen:Clear',
     PLAYER_EMIT_SOUND_2D = 'sound:2D',
     PLAYER_EMIT_SOUND_3D = 'sound:3D',
+    PLAYER_EMIT_SOUND_STOP = 'sound:Stop',
     PLAYER_EMIT_SOUND_3D_POSITIONAL = 'sound:3D:positional',
     PLAYER_EMIT_FRONTEND_SOUND = 'sound:Frontend',
     PLAYER_EMIT_NOTIFICATION = 'notification:Show',

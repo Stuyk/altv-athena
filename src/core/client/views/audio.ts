@@ -47,6 +47,16 @@ class InternalFunctions implements ViewModel {
         const view = await WebViewController.get();
         view.emit(`${PAGE_NAME}:Play`, soundName, pan, volume);
     }
+
+    /**
+     * Stop Audio
+     * @static
+     * @memberof InternalFunctions
+     */
+    static async stop3DAudio() {
+        const view = await WebViewController.get();
+        view.emit(`${PAGE_NAME}:Stop`);
+    }
 }
 
 export class AudioView {
@@ -62,6 +72,15 @@ export class AudioView {
      */
     static play3DAudio(soundName: string, pan: number, volume: number) {
         InternalFunctions.handle3DAudio(soundName, pan, volume);
+    }
+
+    /**
+     * Stop current audio
+     * @static
+     * @memberof AudioView
+     */
+    static stop3DAudio() {
+        InternalFunctions.stop3DAudio();
     }
 }
 
