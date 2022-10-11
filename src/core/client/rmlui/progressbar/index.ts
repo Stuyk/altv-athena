@@ -11,11 +11,13 @@ type InternalProgressBar = ProgressBarType & {
     element?: alt.RmlElement;
     innerElement?: alt.RmlElement;
     markForDeletion: boolean;
+    isBlocked?: boolean;
 };
 
 let document: alt.RmlDocument;
 let elements: Array<InternalProgressBar> = [];
 let interval: number;
+let lastBlockingCheck = Date.now() + 1000;
 
 const InternalFunctions = {
     getScale(dist: number, width: number, height: number, distance: number): { width: number; height: number } {
@@ -72,6 +74,7 @@ const InternalFunctions = {
             return;
         }
 
+        let didBlockingCheck = false;
         for (let i = elements.length - 1; i >= 0; i--) {
             if (typeof elements[i] === 'undefined') {
                 continue;
@@ -117,6 +120,15 @@ const InternalFunctions = {
                 elements[i].innerElement.style['background'] = 'white';
             }
 
+            if (Date.now() > lastBlockingCheck) {
+                didBlockingCheck = true;
+                if (AthenaClient.utility.isEntityBlockingPosition(barPosition)) {
+                    elements[i].isBlocked = true;
+                } else {
+                    elements[i].isBlocked = false;
+                }
+            }
+
             let width = DEFAULT_DIMENSIONS.width;
             let height = DEFAULT_DIMENSIONS.height;
 
@@ -131,6 +143,13 @@ const InternalFunctions = {
             // Update position based on world position.
             const screenPosition = alt.worldToScreen(barPosition.x, barPosition.y, barPosition.z);
 
+            if (elements[i].isBlocked) {
+                elements[i].element.style['opacity'] = '0.1';
+            } else {
+                elements[i].element.style['opacity'] = '0.5';
+            }
+
+            elements[i].element.style['display'] = 'block';
             elements[i].element.style['left'] = `${screenPosition.x - width / 2}px`;
             elements[i].element.style['top'] = `${screenPosition.y - height / 2}px`;
             elements[i].element.style['min-width'] = `${fullScale.width}px`;
@@ -144,6 +163,10 @@ const InternalFunctions = {
 
             elements[i].innerElement.style['width'] = `${actualPecentage}%`;
             elements[i].innerElement.style['height'] = `${fullScale.height}px`;
+        }
+
+        if (didBlockingCheck) {
+            lastBlockingCheck = Date.now() + 500;
         }
     },
 };

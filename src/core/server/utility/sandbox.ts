@@ -1,11 +1,12 @@
 // import * as alt from 'alt-server';
+/* It's a TypeScript file. It's not doing anything. */
 // import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 // import { Athena } from '../api/athena';
 
+// const target = {"x":319.4985046386719,"y":-735.1348266601562,"z":29.30983543395996}
+
 // Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, async (player: alt.Player) => {
-//     alt.setTimeout(() => {
-//         makeProgressBar(player);
-//     }, 1500);
+    
 // });
 
 // function makeProgressBar(player: alt.Player) {

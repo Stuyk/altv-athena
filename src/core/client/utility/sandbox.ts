@@ -1,42 +1,27 @@
 // import * as alt from 'alt-client';
+// import * as native from 'natives';
 // import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 // import { AthenaClient } from '@AthenaClient/api/athena';
 
-// let isFocused = false;
+// const B = new alt.Vector3({ x: 319.4985046386719, y: -735.1348266601562, z: 29.30983543395996 });
+// let positions = [];
+// let didCollide = false;
+
+// alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
+//     alt.setTimeout(() => {
+//         AthenaClient.progressbar.create({
+//             position: alt.Player.local.pos,
+//             color: new alt.RGBA(255, 255, 255, 255),
+//             distance: 25,
+//             milliseconds: 30000,
+//         });
+//     }, 5000);
+// });
 
 // async function handleKeyUp(key: number) {
 //     if (key !== 191) {
 //         return;
 //     }
 
-//     if (isFocused) {
-//         return;
-//     }
-
-//     isFocused = true;
-
-//     // Let's ask some questions.
-//     let answers = [];
-//     let response = await AthenaClient.inputbox.create({
-//         placeholder: 'What is your first name?',
-//         blur: true,
-//         darken: false,
-//         hideHud: true,
-//     });
-//     answers.push(response);
-
-//     response = await AthenaClient.inputbox.create({
-//         placeholder: 'What is your last name?',
-//         blur: true,
-//         darken: false,
-//         hideHud: true,
-//     });
-//     answers.push(response);
-
-//     isFocused = false;
-//     console.log(`Final Responses: ${JSON.stringify(answers)}`);
+//     console.log(isEntityBlockingPosition(B));
 // }
-
-// alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
-//     alt.on('keyup', handleKeyUp);
-// });

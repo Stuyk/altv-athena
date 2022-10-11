@@ -55,11 +55,12 @@ export interface SpriteInfo {
     callOnceOnTouch?: (uid: string) => void;
 }
 
-type InternalSprite = SpriteInfo & { element?: alt.RmlElement; markForDeletion: boolean };
+type InternalSprite = SpriteInfo & { element?: alt.RmlElement; markForDeletion: boolean; isBlocked?: boolean };
 
 let document: alt.RmlDocument;
 let elements: Array<InternalSprite> = [];
 let interval: number;
+let lastBlockingCheck = Date.now() + 1000;
 
 const InternalFunctions = {
     /**
@@ -138,6 +139,7 @@ const InternalFunctions = {
             return;
         }
 
+        let didBlockingCheck = false;
         for (let i = elements.length - 1; i >= 0; i--) {
             if (typeof elements[i] === 'undefined') {
                 continue;
@@ -176,6 +178,15 @@ const InternalFunctions = {
                 }
             }
 
+            if (Date.now() > lastBlockingCheck) {
+                didBlockingCheck = true;
+                if (AthenaClient.utility.isEntityBlockingPosition(spritePosition)) {
+                    elements[i].isBlocked = true;
+                } else {
+                    elements[i].isBlocked = false;
+                }
+            }
+
             let width = elements[i].width;
             let height = elements[i].height;
 
@@ -184,6 +195,13 @@ const InternalFunctions = {
 
             // Update position based on world position.
             const screenPosition = alt.worldToScreen(spritePosition.x, spritePosition.y, spritePosition.z);
+
+            if (elements[i].isBlocked) {
+                elements[i].element.style['opacity'] = '0.1';
+            } else {
+                elements[i].element.style['opacity'] = '1';
+            }
+
             elements[i].element.style['left'] = `${screenPosition.x - width / 2}px`;
             elements[i].element.style['top'] = `${screenPosition.y - height / 2}px`;
             elements[i].element.setAttribute('width', `${scale.width}px`);
@@ -196,6 +214,10 @@ const InternalFunctions = {
 
             elements[i].callOnceOnTouch(uid);
             delete elements[i].callOnceOnTouch;
+        }
+
+        if (didBlockingCheck) {
+            lastBlockingCheck = Date.now() + 500;
         }
     },
 };

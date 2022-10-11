@@ -28,6 +28,8 @@ WebView path resolver additional alias. '@AthenaPlugins/images/my-plugin-name/so
 Added Toggleable Vue Dev Menu with State Restoring. Removed Default Pages for Vue Dev.
 RMLUI based progress bar -> AthenaClient.progressbar
 RMLUI based input box -> AthenaClient.inputbox
+Added Athena.utility.isEntityBlockingPosition
+Used isEntityBlockingPosition in Sprites, and Progress Bars. Lowers opacity when something is in the way.
 ```
 
 ## 3.9.0
