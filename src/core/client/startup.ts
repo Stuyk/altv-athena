@@ -18,6 +18,7 @@ import './menus/vehicle';
 
 // rmlui
 import './rmlui/sprites/index';
+import './rmlui/progressbar/index';
 
 // Streamers
 import './streamers/item';

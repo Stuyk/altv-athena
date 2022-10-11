@@ -1,0 +1,21 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            .bar-wrapper {
+                position: fixed;
+                display: block;
+                background: black;
+                opacity: 0.5;
+            }
+
+            .bar {
+                position: relative;
+                display: block;
+                background-color: white;
+                z-index: 99;
+            }
+        </style>
+    </head>
+    <body></body>
+</rml>

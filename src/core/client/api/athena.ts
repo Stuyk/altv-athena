@@ -17,6 +17,7 @@ import { KeybindController } from '../events/keyup';
 import { KeyHeld } from '../events/keyHeld';
 import { Sprite } from '../rmlui/sprites';
 import { CameraTarget } from '../systems/cameraTarget';
+import { ProgressBar } from '@AthenaClient/rmlui/progressbar';
 
 export const AthenaClient = {
     camera: {
@@ -36,6 +37,7 @@ export const AthenaClient = {
     raycast: Raycast,
     screen: screenConst,
     sprite: Sprite,
+    progressbar: ProgressBar,
     shard: Shard,
     sound: soundConst,
     spinner: Spinner,
