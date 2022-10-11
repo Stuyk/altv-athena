@@ -1,4 +1,4 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export default interface IAttachable {
     /**
@@ -17,17 +17,17 @@ export default interface IAttachable {
 
     /**
      * The position where the object should be attached.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IAttachable
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The rotation where the object should be attached.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IAttachable
      */
-    rot: Vector3;
+    rot: alt.IVector3;
 
     /**
      * Where to begin attaching the object.

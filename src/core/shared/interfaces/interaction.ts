@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { Vector3 } from '../../shared/interfaces/vector';
 
 /**
  * By default Interactions are supported for vehicle and player.
@@ -23,10 +22,10 @@ export interface Interaction {
      * The position in the 3D space of where this interaction should be.
      * Remember to subtract `1` from the z axis if you're using player coordinates.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Interaction
      */
-    position: Vector3;
+    position: alt.IVector3;
 
     /**
      * The max distance in which this interaction can be interacted with.

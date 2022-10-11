@@ -10,7 +10,6 @@ import { Item } from '../../shared/interfaces/item';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
 import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { LocaleController } from '../../shared/locale/locale';
@@ -183,11 +182,11 @@ export default class VehicleFuncs {
      * Spawn a vehicle based on the IVehicle interface.
      * @static
      * @param {IVehicle} document
-     * @param {Vector3} [pos=null] Used to override spawn location.
-     * @param {Vector3} [rot=null] Used to override spawn rotation.
+     * @param {alt.IVector3} [pos=null] Used to override spawn location.
+     * @param {alt.IVector3} [rot=null] Used to override spawn rotation.
      * @memberof VehicleFuncs
      */
-    static spawn(document: IVehicle, pos: Vector3 = null, rot: Vector3 = null): alt.Vehicle | null {
+    static spawn(document: IVehicle, pos: alt.IVector3 = null, rot: alt.IVector3 = null): alt.Vehicle | null {
         if (SpawnedVehicles[document._id.toString()]) {
             return null;
         }

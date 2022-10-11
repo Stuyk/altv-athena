@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import { Account } from '../interface/iAccount';
 import { DiscordUser } from '../interface/iDiscordUser';
 import { InteractionShape } from './extColshape';
-import { Vector3 } from '../../shared/interfaces/vector';
 import IAttachable from '../../shared/interfaces/iAttachable';
 import { playerConst } from '../api/consts/constPlayer';
 import { Character } from '../../shared/interfaces/character';
@@ -139,10 +138,10 @@ declare module 'alt-server' {
 
         /**
          * The current waypoint position on the player's map.
-         * @type {(Vector3 | null)}
+         * @type {(alt.IVector3 | null)}
          * @memberof Player
          */
-        currentWaypoint: Vector3 | null;
+        currentWaypoint: alt.IVector3 | null;
 
         /**
          * The current interaction point the player is standing in.

@@ -1,13 +1,13 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 import { Animation } from './animation';
 
 export interface IPed {
     /**
      * Position of the Ped in a 3D space.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IPed
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The model name this Ped.

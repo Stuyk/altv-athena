@@ -30,6 +30,7 @@ RMLUI based progress bar -> AthenaClient.progressbar
 RMLUI based input box -> AthenaClient.inputbox
 Added Athena.utility.isEntityBlockingPosition
 Used isEntityBlockingPosition in Sprites, and Progress Bars. Lowers opacity when something is in the way.
+Deprecate Shared Vector3 & Vector2 Interface for alt.IVector3
 ```
 
 ## 3.9.0

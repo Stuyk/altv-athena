@@ -1,5 +1,4 @@
 import * as alt from 'alt-client';
-import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 
 export function getCrossProduct(v1: alt.Vector3, v2: alt.Vector3): alt.Vector3 {
     return new alt.Vector3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
@@ -28,7 +27,7 @@ export function rotationToDirection(rotation: alt.IVector3): alt.Vector3 {
     return new alt.Vector3(-Math.sin(z) * num, Math.cos(z) * num, Math.sin(x));
 }
 
-export function getDirectionFromRotation(rotation: alt.IVector3): Vector3 {
+export function getDirectionFromRotation(rotation: alt.IVector3): alt.IVector3 {
     const z = rotation.z * (Math.PI / 180.0);
     const x = rotation.x * (Math.PI / 180.0);
     const num = Math.abs(Math.cos(x));
@@ -36,7 +35,7 @@ export function getDirectionFromRotation(rotation: alt.IVector3): Vector3 {
     return new alt.Vector3(-Math.sin(z) * num, Math.cos(z) * num, Math.sin(x));
 }
 
-export function getPointsInCircle(points: number, radius: number, center: Vector2): Array<Vector2> {
+export function getPointsInCircle(points: number, radius: number, center: alt.IVector2): Array<alt.IVector2> {
     const slice = (2 * Math.PI) / points;
     const pointDefs = [];
 

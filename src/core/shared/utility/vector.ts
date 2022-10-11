@@ -1,6 +1,6 @@
-import { Vector2, Vector3 } from '../interfaces/vector';
+import * as alt from 'alt-shared';
 
-export function distance(vector1: Vector3, vector2: Vector3) {
+export function distance(vector1: alt.IVector3, vector2: alt.IVector3) {
     if (vector1 === undefined || vector2 === undefined) {
         throw new Error('AddVector => vector1 or vector2 is undefined');
     }
@@ -10,7 +10,7 @@ export function distance(vector1: Vector3, vector2: Vector3) {
     );
 }
 
-export function distance2d(vector1: Vector2, vector2: Vector2) {
+export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2) {
     if (vector1 === undefined || vector2 === undefined) {
         throw new Error('AddVector => vector1 or vector2 is undefined');
     }
@@ -18,7 +18,7 @@ export function distance2d(vector1: Vector2, vector2: Vector2) {
     return Math.sqrt(Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2));
 }
 
-export function getClosestVector(pos: Vector3, arrayOfPositions: Vector3[]) {
+export function getClosestVector(pos: alt.IVector3, arrayOfPositions: alt.IVector3[]) {
     arrayOfPositions.sort((a, b) => {
         return distance(pos, a) - distance(pos, b);
     });
@@ -26,7 +26,7 @@ export function getClosestVector(pos: Vector3, arrayOfPositions: Vector3[]) {
     return arrayOfPositions[0];
 }
 
-export function getClosestVectorByPos<T>(pos: Vector3, arrayOfPositions: T[], posVariable: string = 'pos'): T {
+export function getClosestVectorByPos<T>(pos: alt.IVector3, arrayOfPositions: T[], posVariable: string = 'pos'): T {
     arrayOfPositions.sort((a, b) => {
         return distance(pos, a[posVariable]) - distance(pos, b[posVariable]);
     });
@@ -38,14 +38,14 @@ export function getClosestVectorByPos<T>(pos: Vector3, arrayOfPositions: T[], po
  * Gets an array of the closest types.
  * @export
  * @template T
- * @param {Vector3} pos
- * @param {Array<{ pos: Vector3; valid: boolean }>} elements
+ * @param {alt.IVector3} pos
+ * @param {Array<{ pos: alt.IVector3; valid: boolean }>} elements
  * @param {number} maxDistance
  * @return {*}  {Array<T>}
  */
 export function getClosestTypes<T>(
-    pos: Vector3,
-    elements: Array<{ pos: Vector3; valid: boolean }>,
+    pos: alt.IVector3,
+    elements: Array<{ pos: alt.IVector3; valid: boolean }>,
     maxDistance: number,
     mustHaveProperties: Array<string> = [],
     positionName: string = 'pos',
@@ -85,7 +85,7 @@ export function lerp(a: number, b: number, t: number) {
     return (1 - t) * a + t * b;
 }
 
-export function vectorLerp(vector1: Vector3, vector2: Vector3, l: number, clamp: boolean) {
+export function vectorLerp(vector1: alt.IVector3, vector2: alt.IVector3, l: number, clamp: boolean) {
     if (clamp) {
         if (l < 0.0) {
             l = 0.0;

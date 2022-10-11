@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Interaction } from '../../shared/interfaces/interaction';
-import { Vector2, Vector3 } from '../../shared/interfaces/vector';
 import { sha256Random } from '../utility/encryption';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
@@ -32,11 +31,11 @@ export class InteractionShape extends alt.ColshapeCylinder {
 }
 
 export class GarageSpaceShape extends alt.ColshapeSphere {
-    private rotation: Vector3;
+    private rotation: alt.IVector3;
     private isOpen: boolean = true;
     isGarage: boolean = true;
 
-    constructor(position: alt.IVector3, rotation: Vector3, radius: number) {
+    constructor(position: alt.IVector3, rotation: alt.IVector3, radius: number) {
         super(position.x, position.y, position.z, radius);
         this.rotation = rotation;
     }
@@ -56,7 +55,7 @@ export class GarageSpaceShape extends alt.ColshapeSphere {
 
 export class PolygonShape extends alt.ColshapePolygon {
     uid: string;
-    vertices: Array<Vector2>;
+    vertices: Array<alt.IVector2>;
     isPlayerOnly: boolean;
     isVehicleOnly: boolean;
     isPolygonShape = true;
@@ -72,13 +71,13 @@ export class PolygonShape extends alt.ColshapePolygon {
      *
      * @param {number} minZ The floor level of the polygon
      * @param {number} maxZ The max height of the polygon
-     * @param {Array<IVector2>} vertices An array of {x, y} to determine where to draw the polygon around
+     * @param {Array<alt.IVector2>} vertices An array of {x, y} to determine where to draw the polygon around
      * @memberof PolygonShape
      */
     constructor(
         minZ: number,
         maxZ: number,
-        vertices: Vector2[] | Vector3[],
+        vertices: alt.IVector2[] | alt.IVector3[],
         isPlayerOnly: boolean,
         isVehicleOnly: boolean,
         debug = false,

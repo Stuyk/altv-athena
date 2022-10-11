@@ -13,7 +13,6 @@ import ISpinner from '../../../shared/interfaces/iSpinner';
 import { Particle } from '../../../shared/interfaces/particle';
 import { ProgressBar } from '../../../shared/interfaces/progressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
-import { Vector3 } from '../../../shared/interfaces/vector';
 import { IWheelOption } from '../../../shared/interfaces/wheelMenu';
 import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
@@ -421,11 +420,11 @@ const Emit = {
      *
      * @param {alt.Player} player
      * @param {string} model
-     * @param {Vector3} start
-     * @param {Vector3} end
+     * @param {alt.IVector3} start
+     * @param {alt.IVector3} end
      * @param {number} speed
      */
-    tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: Vector3, speed: number) {
+    tempObjectLerp(player: alt.Player, model: string, start: alt.IVector3, end: alt.IVector3, speed: number) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
     },
 

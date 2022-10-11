@@ -1,12 +1,12 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export interface TextLabel {
     /**
      * The position where to place the TextLabel in a 3D space.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof TextLabel
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The 'Text' to show on this text label.

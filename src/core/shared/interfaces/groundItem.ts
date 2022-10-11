@@ -1,5 +1,5 @@
+import * as alt from 'alt-shared';
 import { DroppedItem } from './item';
-import { Vector3 } from './vector';
 
 /**
  * A type of interface for streaming ground items.
@@ -16,10 +16,10 @@ export interface GroundItem {
 
     /**
      * The position of the item.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof GroundItem
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The maximum distance this item should render at.

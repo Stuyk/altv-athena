@@ -1,14 +1,13 @@
 import * as alt from 'alt-shared';
 import { MARKER_TYPE } from '../enums/markerTypes';
-import { Vector3 } from './vector';
 
 export interface Marker {
     /**
      * Position of the Object in a 3D space.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IObject
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The Marker Type Associated with this Marker
@@ -26,10 +25,10 @@ export interface Marker {
 
     /**
      * The scale of this marker.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Marker
      */
-    scale?: Vector3;
+    scale?: alt.IVector3;
 
     /**
      * The max distance to render this marker.

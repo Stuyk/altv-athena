@@ -3,7 +3,7 @@ import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnershipFlags';
 import IVehicleDamage from './iVehicleDamage';
 import IVehicleTuning from './iVehicleTuning';
 import { RGB } from './rgb';
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export interface IVehicle {
     /**
@@ -84,17 +84,17 @@ export interface IVehicle {
 
     /**
      * The last position where this vehicle was last left.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IVehicle
      */
-    position: Vector3;
+    position: alt.IVector3;
 
     /**
      * The last rotation where this vehicle was last left.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IVehicle
      */
-    rotation: Vector3;
+    rotation: alt.IVector3;
 
     /**
      * What garage does this vehicle belong to?
@@ -129,7 +129,7 @@ export interface IVehicle {
      * @type {IVehicleDamage}
      * @memberof IVehicle
      */
-    damage?: IVehicleDamage
+    damage?: IVehicleDamage;
 
     /**
      * The dirt level of the vehicle.
