@@ -20,6 +20,7 @@ let _isReady: boolean = false;
 let _webview: alt.WebView;
 let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
+let _isDisconnecting = false;
 
 const InternalFunctions = {
     /**
@@ -75,6 +76,10 @@ const InternalFunctions = {
      * @memberof InternalFunctions
      */
     handleClientEvent(eventName: string, ...args: any[]) {
+        if (_isDisconnecting) {
+            return;
+        }
+
         if (!ClientEvents[eventName]) {
             alt.logWarning(`Event ${eventName} called but not registered with WebViewController.on`);
             return;
@@ -92,6 +97,10 @@ const InternalFunctions = {
      * @memberof InternalFunctions
      */
     handleServerEvent(eventName: string, ...args: any[]) {
+        if (_isDisconnecting) {
+            return;
+        }
+
         alt.emitServer(eventName, ...args);
     },
 
@@ -365,6 +374,7 @@ export const WebViewController = {
      * @memberof WebViewController
      */
     dispose() {
+        _isDisconnecting = true;
         _webview && _webview.valid && _webview.destroy();
     },
 

@@ -17,6 +17,7 @@ import './menus/player';
 import './menus/vehicle';
 
 // rmlui
+import './rmlui/input/index';
 import './rmlui/sprites/index';
 import './rmlui/progressbar/index';
 

@@ -18,6 +18,7 @@ import { KeyHeld } from '../events/keyHeld';
 import { Sprite } from '../rmlui/sprites';
 import { CameraTarget } from '../systems/cameraTarget';
 import { ProgressBar } from '@AthenaClient/rmlui/progressbar';
+import { InputBox } from '@AthenaClient/rmlui/input';
 
 export const AthenaClient = {
     camera: {
@@ -30,6 +31,7 @@ export const AthenaClient = {
         keyHeld: KeyHeld,
         keyBinds: KeybindController,
     },
+    inputbox: InputBox,
     math,
     menus,
     minimap: Minimap,

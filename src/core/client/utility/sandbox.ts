@@ -1,20 +1,42 @@
 // import * as alt from 'alt-client';
-// import { ProgressBar } from '@AthenaClient/rmlui/progressbar';
 // import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+// import { AthenaClient } from '@AthenaClient/api/athena';
+
+// let isFocused = false;
+
+// async function handleKeyUp(key: number) {
+//     if (key !== 191) {
+//         return;
+//     }
+
+//     if (isFocused) {
+//         return;
+//     }
+
+//     isFocused = true;
+
+//     // Let's ask some questions.
+//     let answers = [];
+//     let response = await AthenaClient.inputbox.create({
+//         placeholder: 'What is your first name?',
+//         blur: true,
+//         darken: false,
+//         hideHud: true,
+//     });
+//     answers.push(response);
+
+//     response = await AthenaClient.inputbox.create({
+//         placeholder: 'What is your last name?',
+//         blur: true,
+//         darken: false,
+//         hideHud: true,
+//     });
+//     answers.push(response);
+
+//     isFocused = false;
+//     console.log(`Final Responses: ${JSON.stringify(answers)}`);
+// }
 
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
-//     await alt.Utils.wait(1000);
-
-//     let count = 0;
-//     alt.setInterval(() => {
-//         ProgressBar.create({
-//             uid: 'progress-bar' + count,
-//             position: alt.Player.local.pos,
-//             color: new alt.RGBA(255, 255, 255, 255),
-//             distance: 25,
-//             milliseconds: 5000,
-//         });
-
-//         count += 1;
-//     }, 5000);
+//     alt.on('keyup', handleKeyUp);
 // });
