@@ -15,6 +15,7 @@ type InternalProgressBar = ProgressBarType & {
 
 let document: alt.RmlDocument;
 let elements: Array<InternalProgressBar> = [];
+let interval: number;
 
 const InternalFunctions = {
     getScale(dist: number, width: number, height: number, distance: number): { width: number; height: number } {
@@ -60,6 +61,14 @@ const InternalFunctions = {
     },
     update() {
         if (!document) {
+            return;
+        }
+
+        if (document && elements.length <= 0) {
+            AthenaClient.timer.clearInterval(interval);
+            document.destroy();
+            document = undefined;
+            interval = undefined;
             return;
         }
 
@@ -149,7 +158,7 @@ const ProgressBarConst = {
         if (typeof document === 'undefined') {
             document = new alt.RmlDocument('/client/rmlui/progressbar/index.rml');
             document.show();
-            AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/progressbar/index.ts');
+            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/progressbar/index.ts');
         }
 
         const index = InternalFunctions.getIndexOfElement(bar.uid);
@@ -182,6 +191,7 @@ export const ProgressBar = {
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
         document.destroy();
+        AthenaClient.timer.clearInterval(interval);
         alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
     }
 });

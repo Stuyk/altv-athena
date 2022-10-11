@@ -59,6 +59,7 @@ type InternalSprite = SpriteInfo & { element?: alt.RmlElement; markForDeletion: 
 
 let document: alt.RmlDocument;
 let elements: Array<InternalSprite> = [];
+let interval: number;
 
 const InternalFunctions = {
     /**
@@ -126,6 +127,14 @@ const InternalFunctions = {
      */
     update() {
         if (!document) {
+            return;
+        }
+
+        if (document && elements.length <= 0) {
+            AthenaClient.timer.clearInterval(interval);
+            document.destroy();
+            document = undefined;
+            interval = undefined;
             return;
         }
 
@@ -200,7 +209,7 @@ const SpriteConst = {
         if (typeof document === 'undefined') {
             document = new alt.RmlDocument('/client/rmlui/images/index.rml');
             document.show();
-            AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/images/index.ts');
+            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/images/index.ts');
         }
 
         if (sprite.path.includes('@plugins')) {
@@ -256,6 +265,7 @@ export const Sprite = {
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
         document.destroy();
+        AthenaClient.timer.clearInterval(interval);
         alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
     }
 });

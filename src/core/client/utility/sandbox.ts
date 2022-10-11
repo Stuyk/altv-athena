@@ -5,11 +5,16 @@
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
 //     await alt.Utils.wait(1000);
 
-//     ProgressBar.create({
-//         uid: 'progress-bar',
-//         position: alt.Player.local.pos,
-//         color: new alt.RGBA(255, 255, 255, 255),
-//         distance: 25,
-//         milliseconds: 30000,
-//     });
+//     let count = 0;
+//     alt.setInterval(() => {
+//         ProgressBar.create({
+//             uid: 'progress-bar' + count,
+//             position: alt.Player.local.pos,
+//             color: new alt.RGBA(255, 255, 255, 255),
+//             distance: 25,
+//             milliseconds: 5000,
+//         });
+
+//         count += 1;
+//     }, 5000);
 // });
