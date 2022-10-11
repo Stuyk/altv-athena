@@ -5,19 +5,31 @@ import { defineComponent } from 'vue';
 import ResolvePath from '../../utility/pathResolver';
 
 const ComponentName = 'Audio';
+
+//Unique ID for all queued sounds
+const queueIdentifier = '67906f00-4172-4a2f-8a0b-2140d5d01ac5';
+
+export interface IAudioMap {
+    [soundInstantID: string]: HTMLAudioElement;
+}
+
+export interface IPanMap {
+    [soundInstantID: string]: StereoPannerNode;
+}
+
 export default defineComponent({
     name: ComponentName,
     data() {
         return {
-            _audio: null,
-            _ambientPan: null,
+            _audio: {} as IAudioMap,
+            _ambientPan: {} as IPanMap,
             isReady: true,
             queue: [],
         };
     },
     mounted() {
         if ('alt' in window) {
-            alt.on(`${ComponentName}:Play`, this.addToQueue);
+            alt.on(`${ComponentName}:Play`, this.playAudio);
             alt.on(`${ComponentName}:Stop`, this.stopAudio);
             alt.on(`${ComponentName}:TriggerQueue`, this.dequeue);
         } else {
@@ -36,7 +48,7 @@ export default defineComponent({
     },
     unmounted() {
         if ('alt' in window) {
-            alt.off(`${ComponentName}:Play`, this.addToQueue);
+            alt.off(`${ComponentName}:Play`, this.playAudio);
             alt.off(`${ComponentName}:Stop`, this.stopAudio);
             alt.off(`${ComponentName}:TriggerQueue`, this.dequeue);
         }
@@ -56,52 +68,81 @@ export default defineComponent({
             const item = this.queue.shift();
             this.handleAudio(item.soundName, item.pan, item.volume, item.duration);
         },
-        async addToQueue(soundName: string, pan: number = 0, volume: number = 0.2, duration = -1) {
-            this.queue.push({ soundName, pan, volume, duration });
+        async playAudio(
+            soundName: string,
+            pan: number = 0,
+            volume: number = 0.2,
+            duration = -1,
+            soundInstantID?: string,
+        ) {
+            if (soundInstantID) {
+                this.handleAudio(soundName, pan, volume, duration, soundInstantID);
+            } else {
+                this.queue.push({ soundName, pan, volume, duration });
+            }
         },
         async audioStopped(e) {
-            this.isReady = true;
+            if (e.currentTarget.soundID === queueIdentifier) {
+                this.isReady = true;
+            }
         },
-        async handleAudio(soundName: string, pan: number = 0, volume: number = 0.2, duration = -1) {
+        async handleAudio(
+            soundName: string,
+            pan: number = 0,
+            volume: number = 0.2,
+            duration = -1,
+            soundInstantID?: string,
+        ) {
             if (!soundName.includes('.ogg')) {
                 soundName += `.ogg`;
             }
 
             const path = ResolvePath(`../../assets/sounds/${soundName}`);
 
-            if (!this._audio) {
-                this._audio = new Audio(path);
-                this._audio.addEventListener('ended', this.audioStopped);
-                this._audio.crossOrigin = 'anonymous';
+            let soundID = queueIdentifier; //All queued sounds have the same id
+            if (soundInstantID) {
+                soundID = soundInstantID; //Same should also run more times
+            }
+
+            if (!this._audio[soundID]) {
+                this._audio[soundID] = new Audio(path);
+                this._audio[soundID].soundID = soundID;
+                this._audio[soundID].addEventListener('ended', this.audioStopped);
+                this._audio[soundID].crossOrigin = 'anonymous';
                 const ambientContext = new AudioContext();
-                const source = ambientContext.createMediaElementSource(this._audio);
-                this._ambientPan = ambientContext.createStereoPanner();
-                source.connect(this._ambientPan);
-                this._ambientPan.connect(ambientContext.destination);
+                const source = ambientContext.createMediaElementSource(this._audio[soundID]);
+                this._ambientPan[soundID] = ambientContext.createStereoPanner();
+                source.connect(this._ambientPan[soundID]);
+                this._ambientPan[soundID].connect(ambientContext.destination);
             }
 
             try {
-                this._audio.setAttribute('src', path);
-                this._ambientPan.pan.value = pan;
+                this._audio[soundID].setAttribute('src', path);
+                this._ambientPan[soundID].pan.value = pan;
 
                 if (duration >= 0) {
-                    this._audio.loop = true;
+                    this._audio[soundID].loop = true;
                 } else {
-                    this._audio.loop = false;
+                    this._audio[soundID].loop = false;
                 }
 
-                this._audio.volume = volume;
-                this._audio.autoplay = true;
-                this._audio.play();
+                this._audio[soundID].volume = volume;
+                this._audio[soundID].autoplay = true;
+                this._audio[soundID].play();
             } catch (err) {
                 console.log(err);
-                this.isReady = false;
+                if (!soundInstantID) this.isReady = false;
             }
         },
-        async stopAudio() {
-            if (this._audio) {
-                this._audio.pause();
-                this.isReady = true;
+        async stopAudio(soundInstantID?: string) {
+            let soundID = queueIdentifier;
+            if (soundInstantID) {
+                soundID = soundInstantID;
+            }
+
+            if (this._audio[soundID]) {
+                this._audio[soundID].pause();
+                if (!soundInstantID) this.isReady = true;
             }
         },
     },

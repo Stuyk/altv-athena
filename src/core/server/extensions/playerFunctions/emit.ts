@@ -207,29 +207,32 @@ const Emit = {
      * @param {alt.Player} p
      * @param {string} audioName
      * @param {number} [volume=0.35]
+     * @param {string} soundInstantID, optional unique id to play sound instant
      */
-    sound2D(p: alt.Player, audioName: string, volume: number = 0.35) {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume);
+    sound2D(p: alt.Player, audioName: string, volume: number = 0.35, soundInstantID?: string) {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume, soundInstantID);
     },
 
     /**
      * Play a sound from at a target's location for this player.
      * @param {string} audioName
      * @param {alt.Entity} target
+     * @param {string} soundInstantID, optional unique id to play sound instant
      * @memberof EmitPrototype
      */
-    sound3D(p: alt.Player, audioName: string, target: alt.Entity): void {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName);
+    sound3D(p: alt.Player, audioName: string, target: alt.Entity, soundInstantID?: string): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName, soundInstantID);
     },
 
     /**
      * Stop all sounds.
      * @param {string} audioName
      * @param {alt.Entity} target
+     * @param {string} soundInstantID, optional unique id to play sound instant
      * @memberof EmitPrototype
      */
-    soundStop(p: alt.Player): void {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP);
+    soundStop(p: alt.Player, soundInstantID?: string): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, soundInstantID);
     },
 
     /**
@@ -458,7 +461,7 @@ const Emit = {
  * @param {Key} functionName - The name of the function you want to override.
  * @param callback - The function that will be called when the event is emitted.
  */
- function override<Key extends keyof typeof Emit>(functionName: Key, callback: typeof Emit[Key]): void {
+function override<Key extends keyof typeof Emit>(functionName: Key, callback: typeof Emit[Key]): void {
     if (typeof funcs[functionName] === 'undefined') {
         alt.logError(`Athena.player.emit does not provide an export named ${functionName}`);
     }

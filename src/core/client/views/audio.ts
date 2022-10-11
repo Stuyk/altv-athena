@@ -41,21 +41,26 @@ class InternalFunctions implements ViewModel {
      * @param {string} soundName
      * @param {number} pan 0 = 2D
      * @param {number} volume
+     * @param {string} soundInstantID, optional unique id to play sound instant
      * @memberof InternalFunctions
      */
-    static async handle3DAudio(soundName: string, pan: number, volume: number) {
+    static async handle3DAudio(soundName: string, pan: number, volume: number, soundInstantID?: string) {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:Play`, soundName, pan, volume);
+        view.emit(`${PAGE_NAME}:Play`, soundName, pan, volume, -1, soundInstantID);
     }
 
     /**
      * Stop Audio
      * @static
+     * @param {string} soundName
+     * @param {number} pan 0 = 2D
+     * @param {number} volume
+     * @param {string} soundInstantID, optional unique id to stop instant sound
      * @memberof InternalFunctions
      */
-    static async stop3DAudio() {
+    static async stop3DAudio(soundInstantID?: string) {
         const view = await WebViewController.get();
-        view.emit(`${PAGE_NAME}:Stop`);
+        view.emit(`${PAGE_NAME}:Stop`, soundInstantID);
     }
 }
 
@@ -68,19 +73,24 @@ export class AudioView {
      * @param {string} soundName
      * @param {number} pan
      * @param {number} volume
+     * @param {string} soundInstantID, optional unique id to play sound instant
      * @memberof AudioView
      */
-    static play3DAudio(soundName: string, pan: number, volume: number) {
-        InternalFunctions.handle3DAudio(soundName, pan, volume);
+    static play3DAudio(soundName: string, pan: number, volume: number, soundInstantID?: string) {
+        InternalFunctions.handle3DAudio(soundName, pan, volume, soundInstantID);
     }
 
     /**
      * Stop current audio
      * @static
+     * @param {string} soundName
+     * @param {number} pan
+     * @param {number} volume
+     * @param {string} soundInstantID, optional unique id to stop instant sound
      * @memberof AudioView
      */
-    static stop3DAudio() {
-        InternalFunctions.stop3DAudio();
+    static stop3DAudio(soundInstantID?: string) {
+        InternalFunctions.stop3DAudio(soundInstantID);
     }
 }
 
