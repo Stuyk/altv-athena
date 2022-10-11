@@ -32,6 +32,8 @@ Added Athena.utility.isEntityBlockingPosition
 Used isEntityBlockingPosition in Sprites, and Progress Bars. Lowers opacity when something is in the way.
 Deprecate Shared Vector3 & Vector2 Interface for alt.IVector3
 RMLUI based question box with accept/decline -> AthenaClient.rmlui.questionBox
+Add bar color to RMLUI progress bar background
+Add text percentage to RMLUI progress bar
 ```
 
 ## 3.9.0

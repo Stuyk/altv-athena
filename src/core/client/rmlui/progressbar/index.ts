@@ -1,6 +1,9 @@
 import { ProgressBar as ProgressBarType } from '@AthenaShared/interfaces/progressBar';
+import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
 import * as alt from 'alt-client';
 import { AthenaClient } from '../../api/athena';
+
+alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arial', false, true);
 
 const DEFAULT_DIMENSIONS = {
     width: 200,
@@ -10,6 +13,7 @@ const DEFAULT_DIMENSIONS = {
 type InternalProgressBar = ProgressBarType & {
     element?: alt.RmlElement;
     innerElement?: alt.RmlElement;
+    innerText?: alt.RmlElement;
     markForDeletion: boolean;
     isBlocked?: boolean;
 };
@@ -48,6 +52,14 @@ const InternalFunctions = {
         frontBar.id = `bar-${uid}`;
         elements[index].innerElement = frontBar;
         backgroundBar.appendChild(frontBar);
+
+        if (elements[index].percentageEnabled) {
+            const innerText = document.createElement('div');
+            innerText.addClass('inner-text');
+            innerText.id = `text-${uid}`;
+            elements[index].innerText = innerText;
+            backgroundBar.appendChild(innerText);
+        }
     },
     removeElement(uid: string) {
         const index = InternalFunctions.getIndexOfElement(uid);
@@ -56,6 +68,11 @@ const InternalFunctions = {
         }
 
         document.removeChild(elements[index].element);
+        if (elements[index].innerText) {
+            elements[index].innerText.destroy();
+            elements[index].innerText = undefined;
+        }
+
         elements[index].innerElement.destroy();
         elements[index].innerElement = undefined;
         elements[index].element.destroy();
@@ -163,6 +180,18 @@ const InternalFunctions = {
 
             elements[i].innerElement.style['width'] = `${actualPecentage}%`;
             elements[i].innerElement.style['height'] = `${fullScale.height}px`;
+
+            if (elements[i].color) {
+                elements[i].innerElement.style['background'] = rgbaToHexAlpha(elements[i].color);
+            }
+
+            if (elements[i].innerText) {
+                elements[i].innerText.innerRML = `${actualPecentage.toFixed(0)}%`;
+                elements[i].innerText.style['min-width'] = `${fullScale.width}px`;
+                elements[i].innerText.style['min-height'] = `${fullScale.height}px`;
+                elements[i].innerText.style['max-width'] = `${fullScale.width}px`;
+                elements[i].innerText.style['max-height'] = `${fullScale.height}px`;
+            }
         }
 
         if (didBlockingCheck) {
