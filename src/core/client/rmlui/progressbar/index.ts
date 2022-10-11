@@ -178,3 +178,10 @@ const ProgressBarConst = {
 export const ProgressBar = {
     ...ProgressBarConst,
 };
+
+alt.on('disconnect', () => {
+    if (typeof document !== 'undefined') {
+        document.destroy();
+        alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
+    }
+});
