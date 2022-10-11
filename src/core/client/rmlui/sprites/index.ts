@@ -207,9 +207,9 @@ const SpriteConst = {
      */
     create(sprite: SpriteInfo) {
         if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/images/index.rml');
+            document = new alt.RmlDocument('/client/rmlui/sprites/index.rml');
             document.show();
-            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/images/index.ts');
+            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/sprites/index.ts');
         }
 
         if (sprite.path.includes('@plugins')) {
