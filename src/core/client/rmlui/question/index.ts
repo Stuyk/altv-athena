@@ -1,3 +1,4 @@
+import { AthenaClient } from '@AthenaClient/api/athena';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import * as alt from 'alt-client';
 import * as native from 'natives';
@@ -61,6 +62,7 @@ const InternalFunctions = {
 
         acceptElement.on('click', InternalFunctions.submit);
         declineElement.on('click', () => {
+            AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
             internalCallback(false);
             QuestionBox.cancel();
         });
@@ -86,6 +88,7 @@ const InternalFunctions = {
     },
     handleKeyUp(keycode: number) {
         if (keycode === ESCAPE_KEY) {
+            AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
             internalCallback(false);
             QuestionBox.cancel();
             return;
@@ -98,6 +101,7 @@ const InternalFunctions = {
     },
     async submit() {
         const callbackRef = internalCallback;
+        AthenaClient.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
         await QuestionBox.cancel();
 
         if (typeof callbackRef === 'function') {

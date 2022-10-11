@@ -34,6 +34,7 @@ Deprecate Shared Vector3 & Vector2 Interface for alt.IVector3
 RMLUI based question box with accept/decline -> AthenaClient.rmlui.questionBox
 Add bar color to RMLUI progress bar background
 Add text percentage to RMLUI progress bar
+Add sounds to Question Box
 ```
 
 ## 3.9.0

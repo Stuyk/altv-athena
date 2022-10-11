@@ -5,6 +5,8 @@
 
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
 //     await alt.Utils.wait(2000);
+//     const response = await AthenaClient.rmlui.questionBox.create({ placeholder: 'Who are you?', blur: true });
+// });
 
 //     // const response = await AthenaClient.rmlui.questionBox.create({
 //     //     placeholder: 'Would you like to proceed?',
