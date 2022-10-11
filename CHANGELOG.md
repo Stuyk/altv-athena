@@ -26,6 +26,7 @@ Removed all 'tsconfig.json' files from all plugins/*/webview -> No longer necess
 Added additional path aliases for WebView based components and shared files.
 WebView path resolver additional alias. '@AthenaPlugins/images/my-plugin-name/some-image.png'
 Added Toggleable Vue Dev Menu with State Restoring. Removed Default Pages for Vue Dev.
+RMLUI based progress bar -> AthenaClient.progressbar
 ```
 
 ## 3.9.0
