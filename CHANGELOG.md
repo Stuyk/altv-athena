@@ -26,11 +26,12 @@ Removed all 'tsconfig.json' files from all plugins/*/webview -> No longer necess
 Added additional path aliases for WebView based components and shared files.
 WebView path resolver additional alias. '@AthenaPlugins/images/my-plugin-name/some-image.png'
 Added Toggleable Vue Dev Menu with State Restoring. Removed Default Pages for Vue Dev.
-RMLUI based progress bar -> AthenaClient.progressbar
-RMLUI based input box -> AthenaClient.inputbox
+RMLUI based progress bar -> AthenaClient.rmlui.progressBar
+RMLUI based input box -> AthenaClient.rmlui.inputBox
 Added Athena.utility.isEntityBlockingPosition
 Used isEntityBlockingPosition in Sprites, and Progress Bars. Lowers opacity when something is in the way.
 Deprecate Shared Vector3 & Vector2 Interface for alt.IVector3
+RMLUI based question box with accept/decline -> AthenaClient.rmlui.questionBox
 ```
 
 ## 3.9.0

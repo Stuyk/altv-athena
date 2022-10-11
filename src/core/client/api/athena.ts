@@ -19,6 +19,7 @@ import { Sprite } from '../rmlui/sprites';
 import { CameraTarget } from '../systems/cameraTarget';
 import { ProgressBar } from '@AthenaClient/rmlui/progressbar';
 import { InputBox } from '@AthenaClient/rmlui/input';
+import { QuestionBox } from '@AthenaClient/rmlui/question';
 
 export const AthenaClient = {
     camera: {
@@ -31,15 +32,18 @@ export const AthenaClient = {
         keyHeld: KeyHeld,
         keyBinds: KeybindController,
     },
-    inputbox: InputBox,
     math,
     menus,
     minimap: Minimap,
     notification: showNotification,
     raycast: Raycast,
+    rmlui: {
+        questionBox: QuestionBox,
+        inputBox: InputBox,
+        progressBar: ProgressBar,
+        sprite: Sprite,
+    },
     screen: screenConst,
-    sprite: Sprite,
-    progressbar: ProgressBar,
     shard: Shard,
     sound: soundConst,
     spinner: Spinner,
