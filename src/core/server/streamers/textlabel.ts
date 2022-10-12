@@ -75,7 +75,7 @@ const ServerTextLabelControllerConst = {
     update(uid: string, label: Partial<TextLabel>, player: alt.Player = undefined): boolean {
         if (typeof player === 'undefined') {
             const index = globalTextLabels.findIndex((x) => x.uid === uid);
-            if (index !== -1) {
+            if (index === -1) {
                 alt.logWarning(`Could not update global text that does not exist. UID: ${uid}`);
                 return undefined;
             }

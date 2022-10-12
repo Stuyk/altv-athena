@@ -42,10 +42,10 @@ export interface SpriteInfo {
     /**
      * A position in-world, or on-screen where to draw this image.
      *
-     * @type {(alt.IVector3 | alt.IVector2)}
+     * @type {alt.IVector3}
      * @memberof SpriteInfo
      */
-    position: alt.IVector3 | alt.IVector2;
+    position: alt.IVector3;
 
     /**
      * Call this callback once, when the sprite is touched.
@@ -149,13 +149,6 @@ const InternalFunctions = {
             if (elements[i].markForDeletion) {
                 InternalFunctions.removeElement(uid);
                 elements.splice(i, 1);
-                continue;
-            }
-
-            // Decide whether or not to draw this element...
-            // This is Vector2; so don't draw it with world positioning. Just create it.
-            if (!elements[i].position.hasOwnProperty('z')) {
-                InternalFunctions.createElement(uid);
                 continue;
             }
 

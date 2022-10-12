@@ -37,6 +37,8 @@ Add text percentage to RMLUI progress bar
 Add sounds to Question Box
 RMLUI based menu similar to NativeUI -> AthenaClient.rmlui.menu
 Added console command in-client in debug mode: 'rmluicontrols'
+Change sprite interface for RMLUI to be 3D only
+Fix TextLabel update bug 
 ```
 
 ## 3.9.0
