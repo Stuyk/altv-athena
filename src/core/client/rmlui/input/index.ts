@@ -2,8 +2,6 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arial', false, true);
-
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 

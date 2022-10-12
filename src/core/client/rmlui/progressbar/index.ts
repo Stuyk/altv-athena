@@ -3,8 +3,6 @@ import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
 import * as alt from 'alt-client';
 import { AthenaClient } from '../../api/athena';
 
-alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arial', false, true);
-
 const DEFAULT_DIMENSIONS = {
     width: 200,
     height: 25,

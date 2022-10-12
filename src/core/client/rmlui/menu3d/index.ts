@@ -3,8 +3,6 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { OptionFor3DMenu } from './menu3DInterfaces';
 import * as alt from 'alt-client';
 
-alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arial', false, true);
-
 const KEYS = {
     ESCAPE_KEY: 27,
     ENTER_KEY: 13,

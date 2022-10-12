@@ -4,8 +4,6 @@ import { rgbaToHexAlpha } from '@AthenaShared/utility/color';
 import * as alt from 'alt-client';
 import { Invoke, Toggle, Selection, Range, MenuInfo } from './menuInterfaces';
 
-alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arial', false, true);
-
 const KEYS = {
     ESCAPE_KEY: 27,
     ENTER_KEY: 13,
