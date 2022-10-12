@@ -395,7 +395,7 @@ const FUNCTION_BINDS = {
 alt.on('disconnect', () => {
     if (typeof document !== 'undefined') {
         document.destroy();
-        alt.log('question | Destroyed RMLUI Document on Disconnect');
+        alt.log('menu | Destroyed RMLUI Document on Disconnect');
     }
 });
 
