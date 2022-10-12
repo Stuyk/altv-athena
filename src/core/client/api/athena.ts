@@ -20,6 +20,7 @@ import { CameraTarget } from '../systems/cameraTarget';
 import { ProgressBar } from '@AthenaClient/rmlui/progressbar';
 import { InputBox } from '@AthenaClient/rmlui/input';
 import { QuestionBox } from '@AthenaClient/rmlui/question';
+import { Menu } from '@AthenaClient/rmlui/menu';
 
 export const AthenaClient = {
     camera: {
@@ -40,6 +41,7 @@ export const AthenaClient = {
     rmlui: {
         questionBox: QuestionBox,
         inputBox: InputBox,
+        menu: Menu,
         progressBar: ProgressBar,
         sprite: Sprite,
     },
