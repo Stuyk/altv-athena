@@ -7,6 +7,7 @@ import { AudioView } from '../views/audio';
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, handlePlayAudio3D);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, handlePlayAudio2D);
+alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, stopPlayAudio);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, handlePlayAudioPositional);
 
 /**
@@ -21,7 +22,13 @@ export function handleFrontendSound(audioName: string, ref: string): void {
     native.playSoundFrontend(-1, audioName, ref, true);
 }
 
-export function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
+/**
+ * Handle play audio positional
+ * @param {alt.Entity} entity
+ * @param {string} soundName
+ * @param {string} soundInstantID, optional unique id to play sound instant
+ */
+export function handlePlayAudioPositional(pos: alt.Vector3, soundName: string, soundInstantID?: string) {
     if (!pos || !soundName) {
         return;
     }
@@ -46,7 +53,7 @@ export function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
         volume = 1;
     }
 
-    AudioView.play3DAudio(soundName, pan, volume);
+    AudioView.play3DAudio(soundName, pan, volume, soundInstantID);
 }
 
 /**
@@ -54,8 +61,9 @@ export function handlePlayAudioPositional(pos: alt.Vector3, soundName: string) {
  * Simply plays the audio based on your position.
  * @param {alt.Entity} entity
  * @param {string} soundName
+ * @param {string} soundInstantID, optional unique id to play sound instant
  */
-export function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
+export function handlePlayAudio3D(entity: alt.Entity, soundName: string, soundInstantID?: string): void {
     if (!entity || !soundName) {
         return;
     }
@@ -89,15 +97,26 @@ export function handlePlayAudio3D(entity: alt.Entity, soundName: string): void {
         volume = 1;
     }
 
-    AudioView.play3DAudio(soundName, pan, volume);
+    AudioView.play3DAudio(soundName, pan, volume, soundInstantID);
 }
 /**
  * Play a 2D sound.
  * @param {string} soundName - The name of the sound to play.
  * @param {number} volume - The volume of the sound.
+ * @param {string} soundInstantID, optional unique id to play sound instant
  * @returns None
  */
 
-export function handlePlayAudio2D(soundName: string, volume: number = 0.35) {
-    AudioView.play3DAudio(soundName, 0, volume);
+export function handlePlayAudio2D(soundName: string, volume: number = 0.35, soundInstantID?: string) {
+    AudioView.play3DAudio(soundName, 0, volume, soundInstantID);
+}
+
+/**
+ * Stop audio.
+ * @returns None
+ * @param {string} soundInstantID, optional unique id to stop instant
+ */
+
+export function stopPlayAudio(soundInstantID?: string) {
+    AudioView.stop3DAudio(soundInstantID);
 }
