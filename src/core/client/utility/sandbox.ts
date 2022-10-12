@@ -8,7 +8,7 @@
 //     await AthenaClient.rmlui.menu.create({
 //         header: {
 //             title: 'My Menu',
-//             color: new alt.RGBA(100, 100, 0, 255),
+//             color: new alt.RGBA(0, 175, 250, 255),
 //         },
 //         options: [
 //             {

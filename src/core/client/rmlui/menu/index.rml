@@ -11,6 +11,12 @@
                 height: 100%;
             }
 
+            .menu-wrapper {
+                position: absolute;
+                right: 25px;
+                top: 25px;
+            }
+
             .menu {
                 position: relative;
                 display: flex;
@@ -21,8 +27,6 @@
                 max-width: 350px;
                 background: #000000a0;
                 color: white;
-                left: 25px;
-                top: 25px;
             }
 
             .header {
@@ -41,6 +45,7 @@
 
             .option {
                 display: flex;
+                justify-content: space-between;
                 min-width: 350px;
                 max-width: 350px;
             }
@@ -53,15 +58,11 @@
             .option .key {
                 text-align: left;
                 font-size: 12px;
-                min-width: 163px;
-                max-width: 163px;
             }
 
             .option .value {
                 text-align: right;
                 font-size: 12px;
-                min-width: 163px;
-                max-width: 163px;
             }
 
             .option div {
@@ -71,30 +72,26 @@
             }
 
             .options {
-                overflow-y: scroll;
                 max-height: 445px;
             }
 
             .description {
-                position: relative;
-                min-height: 50px;
-                max-height: 50px;
                 font-size: 12px;
                 padding: 12px;
                 box-sizing: border-box;
-                top: 19px;
-                background: #0000003e;
-                border-top: 2px #0000006d;
+                border-top: 2px #ffffff6d;
             }
         </style>
     </head>
     <body>
-        <div class="menu">
-            <div class="header" id="header">
-                <div class="headertext" id="headertext"></div>
+        <div class="menu-wrapper">
+            <div class="menu">
+                <div class="header" id="header">
+                    <div class="headertext" id="headertext"></div>
+                </div>
+                <div class="options" id="options"></div>
+                <div class="description" id="description"></div>
             </div>
-            <div class="options" id="options"></div>
-            <div class="description" id="description"></div>
         </div>
     </body>
 </rml>

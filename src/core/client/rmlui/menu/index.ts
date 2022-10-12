@@ -18,6 +18,7 @@ const KEYS = {
 let menu: MenuInfo;
 let optionIndex: number = 0;
 let document: alt.RmlDocument;
+let pauseControl = false;
 
 const InternalFunctions = {
     init(info: MenuInfo) {
@@ -64,6 +65,10 @@ const InternalFunctions = {
         }
 
         optionIndex = 0;
+        const element = document.getElementByID(`option-${optionIndex}`);
+        element.addClass('selected');
+        InternalFunctions.updateDescription();
+        pauseControl = false;
     },
     /**
      * Updates an option description after chaning optionIndex.
@@ -82,17 +87,17 @@ const InternalFunctions = {
         }
 
         if (option.type === 'Range') {
-            element.innerRML = `${option.value}/${option.max}`;
+            element.innerRML = `&lt; ${option.value}/${option.max} &gt;`;
             return;
         }
 
         if (option.type === 'Selection') {
-            element.innerRML = `${option.options[option.value]}`;
+            element.innerRML = `&lt; ${option.options[option.value].replaceAll('&', '&amp;')} &gt;`;
             return;
         }
 
         if (option.type === 'Toggle') {
-            element.innerRML = option.value ? '+' : '-';
+            element.innerRML = option.value ? 'Y' : 'N';
             return;
         }
     },
@@ -119,18 +124,55 @@ const InternalFunctions = {
     /**
      * Called when pressing enter.
      */
-    select() {
+    async select() {
         const option = menu.options[optionIndex];
 
         // Ignore hitting enter for Range / Selection type unless enter is used for updating.
-        if (typeof option.onlyUpdateOnEnter !== 'undefined') {
-            if (option.type === 'Range' && !option.onlyUpdateOnEnter) {
+        if ((option.type === 'Range' || option.type === 'Selection') && !option.onlyUpdateOnEnter) {
+            console.log('parsing...');
+
+            pauseControl = true;
+            const specifiedValue = await AthenaClient.rmlui.inputBox.create(
+                {
+                    placeholder: `Input value for ${option.title}`,
+                },
+                true,
+            );
+
+            if (typeof specifiedValue === 'undefined') {
+                AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+                pauseControl = false;
                 return;
             }
 
-            if (option.type === 'Selection' && !option.onlyUpdateOnEnter) {
+            const value = parseFloat(specifiedValue);
+            if (isNaN(value)) {
+                AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+                pauseControl = false;
                 return;
             }
+
+            const min = option.type === 'Selection' ? 0 : option.min;
+            const max = option.type === 'Selection' ? option.options.length - 1 : option.max;
+            if (value > max || value < min) {
+                AthenaClient.sound.frontend('CANCEL', 'HUD_FREEMODE_SOUNDSET');
+                pauseControl = false;
+                return;
+            }
+
+            option.value = value;
+            if (option.type === 'Range') {
+                option.callback(value);
+            }
+
+            if (option.type === 'Selection') {
+                option.callback(option.options[option.value]);
+            }
+
+            InternalFunctions.updateValue();
+            AthenaClient.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
+            pauseControl = false;
+            return;
         }
 
         AthenaClient.sound.frontend('SELECT', 'HUD_FREEMODE_SOUNDSET');
@@ -147,7 +189,7 @@ const InternalFunctions = {
                 option.callback(option.options[option.value]);
                 return;
             case 'Toggle':
-                option.value != option.value;
+                option.value = !option.value;
                 option.callback(option.value);
                 InternalFunctions.updateValue();
                 return;
@@ -278,6 +320,14 @@ const InternalFunctions = {
      * @return {void}
      */
     handleKeyUp(keycode: number) {
+        if (alt.isMenuOpen()) {
+            return;
+        }
+
+        if (pauseControl) {
+            return;
+        }
+
         if (typeof FUNCTION_BINDS[keycode] !== 'function') {
             return;
         }

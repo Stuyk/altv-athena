@@ -1,6 +1,9 @@
 // Client Plugins
 import '../plugins/athena/client/imports';
 
+// Commands
+import './commands/rmlui';
+
 // Events
 import './events/connectionComplete';
 import './events/disconnect';

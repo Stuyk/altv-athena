@@ -35,6 +35,8 @@ RMLUI based question box with accept/decline -> AthenaClient.rmlui.questionBox
 Add bar color to RMLUI progress bar background
 Add text percentage to RMLUI progress bar
 Add sounds to Question Box
+RMLUI based menu similar to NativeUI -> AthenaClient.rmlui.menu
+Added console command in-client in debug mode: 'rmluicontrols'
 ```
 
 ## 3.9.0

@@ -45,6 +45,7 @@ interface InputBoxInfo {
 type MessageCallback = (msg: string | undefined) => void;
 let document: alt.RmlDocument;
 let internalCallback: MessageCallback;
+let wasMenuCheckSkipped = false;
 
 const InternalFunctions = {
     focus(inputInfo: InputBoxInfo) {
@@ -93,10 +94,15 @@ const InternalFunctions = {
 };
 
 const InputBoxConst = {
-    create(inputInfo: InputBoxInfo): Promise<string | undefined> {
-        if (isAnyMenuOpen(false)) {
-            console.warn(`Input box could not be created because a menu is already open.`);
-            return undefined;
+    create(inputInfo: InputBoxInfo, skipMenuCheck = false): Promise<string | undefined> {
+        if (!skipMenuCheck) {
+            wasMenuCheckSkipped = false;
+            if (isAnyMenuOpen(false)) {
+                console.warn(`Input box could not be created because a menu is already open.`);
+                return undefined;
+            }
+        } else {
+            wasMenuCheckSkipped = true;
         }
 
         if (typeof document === 'undefined') {
@@ -122,7 +128,6 @@ const InputBoxConst = {
         }
 
         internalCallback = undefined;
-        alt.Player.local.isMenuOpen = false;
         alt.off('keyup', InternalFunctions.handleKeyUp);
         alt.showCursor(false);
         alt.toggleRmlControls(false);
@@ -130,6 +135,10 @@ const InputBoxConst = {
         native.triggerScreenblurFadeOut(250);
         native.displayHud(true);
         native.displayRadar(true);
+
+        if (!wasMenuCheckSkipped) {
+            alt.Player.local.isMenuOpen = false;
+        }
 
         await alt.Utils.waitFor(() => {
             return native.isScreenblurFadeRunning() === false;
