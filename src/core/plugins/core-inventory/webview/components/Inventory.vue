@@ -9,7 +9,7 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('toolbar', index)"
-                @mousedown="(e) => drag(e, dragOff, hasItem('toolbar', index))"
+                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index) })"
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('toolbar', index)">
@@ -34,7 +34,7 @@
                 :slot="index"
                 :id="getID('inventory', index)"
                 @contextmenu="(e) => contextMenu(e, index)"
-                @mousedown="(e) => drag(e, dragOff, hasItem('inventory', index))"
+                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index) })"
             >
                 <template v-slot:image v-if="hasItem('inventory', index)">
                     <img :src="getImagePath(getItem('inventory', index))" />
@@ -48,6 +48,7 @@
             <div @click="contextAction('use')">Use</div>
             <div @click="contextAction('split')">Split</div>
             <div @click="contextAction('drop')">Drop</div>
+            <div @click="contextAction('cancel')">Cancel</div>
         </Context>
     </div>
 </template>
@@ -81,16 +82,22 @@ export default defineComponent({
     methods: {
         getImagePath,
         drag: draggable.makeDraggable,
-        dragOff(
+        endDrag(
             startType: 'inventory' | 'toolbar' | 'equipment',
             startIndex: number,
             endType: 'inventory' | 'toolbar' | 'equipment',
             endIndex: number,
+            wasFastClick: boolean,
         ) {
             if (!('alt' in window)) {
                 console.log('ref');
                 console.log(startType, startIndex);
                 console.log(endType, endIndex);
+                return;
+            }
+
+            if (wasFastClick) {
+                console.log('Was not a drag event...');
                 return;
             }
 
@@ -142,11 +149,15 @@ export default defineComponent({
                 y: e.clientY,
             };
         },
-        contextAction(type: 'use' | 'split' | 'drop') {
+        contextAction(type: 'use' | 'split' | 'drop' | 'cancel') {
             this.context = undefined;
 
             if (!('alt' in window)) {
                 console.log(`It should do ${type} on slot: ` + this.slot);
+                return;
+            }
+
+            if (type === 'cancel') {
                 return;
             }
 

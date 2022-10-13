@@ -5,40 +5,15 @@
 
 // alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
 //     await alt.Utils.wait(2000);
-//     await AthenaClient.rmlui.menu3D.create(
-//         { x: -839.8507690429688, y: -151.79005432128906, z: 19.950349807739258 },
-//         [
-//             {
-//                 name: 'Orange Juice',
-//                 callback: () => {
-//                     console.log('Selected Orange Juice!');
-//                 },
-//             },
-//             {
-//                 name: 'Coke',
-//                 callback: () => {
-//                     console.log('Selected Coke!');
-//                 },
-//             },
-//             {
-//                 name: 'Pepsi',
-//                 callback: () => {
-//                     console.log('Selected Pepsi!');
-//                 },
-//             },
-//             {
-//                 name: 'Mountain Dew',
-//                 callback: () => {
-//                     console.log('Selected Mountain Dew!');
-//                 },
-//             },
-//             {
-//                 name: 'Energy Drank',
-//                 callback: () => {
-//                     console.log('Selected Energy Drank!');
-//                 },
-//             },
-//         ],
-//         10,
-//     );
+
+//     const startPos = { x: -839.8507690429688, y: -151.79005432128906, z: 19.950349807739258 };
+
+//     for (let i = 0; i < 1000; i++) {
+//         await AthenaClient.rmlui.staticText.upsert({
+//             position: { x: -794.0873413085938 + i * 0.5, y: -73.61027526855469, z: 37.780914306640625 },
+//             text: 'Hello World',
+//             distance: 10,
+//             uid: 'graffiti' + i,
+//         });
+//     }
 // });

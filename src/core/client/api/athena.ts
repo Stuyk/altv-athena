@@ -22,6 +22,7 @@ import { InputBox } from '@AthenaClient/rmlui/input';
 import { QuestionBox } from '@AthenaClient/rmlui/question';
 import { Menu } from '@AthenaClient/rmlui/menu';
 import { Menu3D } from '@AthenaClient/rmlui/menu3d';
+import { StaticText } from '@AthenaClient/rmlui/staticText';
 
 export const AthenaClient = {
     camera: {
@@ -46,6 +47,7 @@ export const AthenaClient = {
         menu3D: Menu3D,
         progressBar: ProgressBar,
         sprite: Sprite,
+        staticText: StaticText,
     },
     screen: screenConst,
     shard: Shard,

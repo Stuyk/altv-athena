@@ -27,6 +27,7 @@ import './rmlui/menu3d/index';
 import './rmlui/progressbar/index';
 import './rmlui/question/index';
 import './rmlui/sprites/index';
+import './rmlui/staticText/index';
 
 // Streamers
 import './streamers/item';

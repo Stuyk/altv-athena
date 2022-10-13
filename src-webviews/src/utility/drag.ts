@@ -1,8 +1,15 @@
-export type OnFinishDrag = (startType: string, startIndex: number, endType: string, endIndex: number) => void;
+export type OnFinishDrag = (
+    startType: string,
+    startIndex: number,
+    endType: string,
+    endIndex: number,
+    wasFastClick: boolean,
+) => void;
 
 let clonedElement: HTMLElement;
 let callback: OnFinishDrag;
 let startID: string;
+let startClickTime: number;
 
 function getID(ev: MouseEvent): string | undefined {
     let id: string;
@@ -30,12 +37,13 @@ function mouseUp(ev: MouseEvent) {
         clonedElement = undefined;
     }
 
+    const wasFastClick = Date.now() - startClickTime < 1000;
     const id = getID(ev);
     if (id && callback && id !== startID && id.includes('-')) {
         const startDrag = startID.split('-');
         const endDrag = id.split('-');
         if (typeof callback === 'function') {
-            callback(startDrag[0], parseInt(startDrag[1]), endDrag[0], parseInt(endDrag[1]));
+            callback(startDrag[0], parseInt(startDrag[1]), endDrag[0], parseInt(endDrag[1]), wasFastClick);
             callback = undefined;
         }
     }
@@ -43,8 +51,8 @@ function mouseUp(ev: MouseEvent) {
     removeEvents();
 }
 
-function makeDraggable(ev: MouseEvent, _callback: OnFinishDrag, canBeDragged = false) {
-    if (canBeDragged === false) {
+function makeDraggable(ev: MouseEvent, draggable: { endDrag: OnFinishDrag; canBeDragged?: boolean }) {
+    if (draggable.canBeDragged === false) {
         return;
     }
 
@@ -53,6 +61,8 @@ function makeDraggable(ev: MouseEvent, _callback: OnFinishDrag, canBeDragged = f
             return;
         }
     }
+
+    startClickTime = Date.now();
 
     const id = getID(ev);
     if (!id) {
@@ -71,7 +81,7 @@ function makeDraggable(ev: MouseEvent, _callback: OnFinishDrag, canBeDragged = f
     window.addEventListener('mouseup', mouseUp);
     window.addEventListener('mousemove', mouseMove);
 
-    callback = _callback;
+    callback = draggable.endDrag;
 }
 
 function removeEvents() {
