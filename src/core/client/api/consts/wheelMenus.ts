@@ -3,7 +3,7 @@ import { ObjectWheelMenu } from '../../menus/object';
 import { PlayerWheelMenu } from '../../menus/player';
 import { VehicleWheelMenu } from '../../menus/vehicle';
 
-export const menus = {
+export const wheelMenusConst = {
     ped: {
         add: NpcWheelMenu.addInjection,
     },

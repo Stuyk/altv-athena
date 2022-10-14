@@ -41,6 +41,11 @@ Change sprite interface for RMLUI to be 3D only
 Fix TextLabel update bug 
 RMLUI based 3D in-world menu -> AthenaClient.rmlui.menu3D
 AthenaClient.webview.page -> A page constructor made easy.
+AthenaClient.spinner -> AthenaClient.screen.spinner
+AthenaClient.shard -> AthenaClient.screen.shard
+AthenaClient.minimap -> AthenaClient.screen.minimap
+AthenaClient.notification -> AthenaClient.screen.notification
+AthenaClient.menus -> AthenaClient.wheelMenus
 ```
 
 ## 3.9.0

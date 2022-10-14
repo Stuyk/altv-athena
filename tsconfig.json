@@ -27,7 +27,8 @@
         "forceConsistentCasingInFileNames": true,
         "strict": false,
         "module": "ES2022",
-        "target": "ES2022"
+        "target": "ES2022",
+        "outDir": "athena-cache"
     },
     "include": ["src/**/*.ts", "src-webviews/**/*.ts"],
     "exclude": [

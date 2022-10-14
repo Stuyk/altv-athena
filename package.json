@@ -13,7 +13,7 @@
         "cdn": "node ./scripts/runtime/index.js --start --cdn",
         "[-] Updating, Installing, Cleanup": "",
         "update": "npx altv-pkg d release",
-        "check": "tsc -p ./src/tsconfig.json | node ./scripts/fileChecker/index.js",
+        "check": "tsc -p ./tsconfig.json | node ./scripts/fileChecker/index.js",
         "fix": "node ./scripts/doctor/index.js",
         "[-] Vue WebView Deployment": "",
         "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false",
