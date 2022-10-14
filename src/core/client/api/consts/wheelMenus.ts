@@ -1,7 +1,7 @@
-import { NpcWheelMenu } from '../../menus/npc';
-import { ObjectWheelMenu } from '../../menus/object';
-import { PlayerWheelMenu } from '../../menus/player';
-import { VehicleWheelMenu } from '../../menus/vehicle';
+import { NpcWheelMenu } from '@AthenaClient/menus/npc';
+import { ObjectWheelMenu } from '@AthenaClient/menus/object';
+import { PlayerWheelMenu } from '@AthenaClient/menus/player';
+import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
 
 export const wheelMenusConst = {
     ped: {

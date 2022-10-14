@@ -1,6 +1,6 @@
 import { Page } from '@AthenaClient/systems/page';
-import { WebViewController } from '../../extensions/view2';
-import { isAnyMenuOpen } from '../../utility/menus';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 export const webViewConst = {
     ready: WebViewController.ready,

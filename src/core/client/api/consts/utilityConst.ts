@@ -1,10 +1,10 @@
-import { distance, distance2d } from '../../../shared/utility/vector';
-import { loadAnimation } from '../../systems/animations';
-import { getClosestPlayer, getClosestVehicle } from '../../utility/closest';
-import { drawMissionText } from '../../../client/utility/missionText';
-import { loadModel } from '../../utility/model';
-import { UID } from '../../utility/uid';
-import { switchInPlayer } from '../../utility/switch';
+import { distance, distance2d } from '@AthenaShared/utility/vector';
+import { loadAnimation } from '@AthenaClient/systems/animations';
+import { getClosestPlayer, getClosestVehicle } from '@AthenaClient/utility/closest';
+import { drawMissionText } from '@AthenaClient/../client/utility/missionText';
+import { loadModel } from '@AthenaClient/utility/model';
+import { UID } from '@AthenaClient/utility/uid';
+import { switchInPlayer } from '@AthenaClient/utility/switch';
 import { isEntityBlockingPosition } from '@AthenaClient/utility/isEntityBlocking';
 
 export const utilityConst = {
