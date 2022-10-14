@@ -1,19 +1,45 @@
-// import * as alt from 'alt-client';
-// import * as native from 'natives';
-// import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-// import { AthenaClient } from '@AthenaClient/api/athena';
+import * as alt from 'alt-client';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
-// alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
-//     await alt.Utils.wait(2000);
+function onReady() {
+    AthenaClient.webview.emit('do:something...', 'hi');
+}
 
-//     const startPos = { x: -839.8507690429688, y: -151.79005432128906, z: 19.950349807739258 };
+function onClose() {
+    // Nothing actually needs to be done.
+    // The internal controller handled it all.
+}
 
-//     for (let i = 0; i < 1000; i++) {
-//         await AthenaClient.rmlui.staticText.upsert({
-//             position: { x: -794.0873413085938 + i * 0.5, y: -73.61027526855469, z: 37.780914306640625 },
-//             text: 'Hello World',
-//             distance: 10,
-//             uid: 'graffiti' + i,
-//         });
-//     }
-// });
+const page = new AthenaClient.webview.page({
+    name: 'MyWebView',
+    callbacks: { onReady, onClose },
+    options: {
+        onOpen: {
+            disableControls: true,
+            blurBackground: true,
+            focus: true,
+            hideHud: true,
+            hideOverlays: true,
+            setIsMenuOpenToTrue: true,
+            showCursor: true,
+        },
+        onClose: {
+            enableControls: true,
+            hideCursor: true,
+            setIsMenuOpenToFalse: true,
+            showHud: true,
+            showOverlays: true,
+            unblurBackground: true,
+            unfocus: true,
+        },
+    },
+    keybind: {
+        key: 75, // k
+        isLongPress: true,
+    },
+});
+
+alt.onServer('openMyPage', page.open);
+alt.onServer('forceCloseMyPage', () => {
+    page.close(true);
+});

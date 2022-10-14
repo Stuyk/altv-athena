@@ -1,3 +1,4 @@
+import { Page } from '@AthenaClient/systems/page';
 import { WebViewController } from '../../extensions/view2';
 import { isAnyMenuOpen } from '../../utility/menus';
 
@@ -14,4 +15,5 @@ export const webViewConst = {
     showCursor: WebViewController.showCursor,
     isAnyMenuOpen: isAnyMenuOpen,
     showOverlays: WebViewController.setOverlaysVisible,
+    page: Page,
 };

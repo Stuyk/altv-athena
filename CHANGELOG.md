@@ -40,6 +40,7 @@ Added console command in-client in debug mode: 'rmluicontrols'
 Change sprite interface for RMLUI to be 3D only
 Fix TextLabel update bug 
 RMLUI based 3D in-world menu -> AthenaClient.rmlui.menu3D
+AthenaClient.webview.page -> A page constructor made easy.
 ```
 
 ## 3.9.0
