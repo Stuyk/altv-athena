@@ -9,7 +9,9 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('toolbar', index)"
-                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index) })"
+                @mousedown="
+                    (e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), singleClick, startDrag })
+                "
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('toolbar', index)">
@@ -34,7 +36,9 @@
                 :slot="index"
                 :id="getID('inventory', index)"
                 @contextmenu="(e) => contextMenu(e, index)"
-                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index) })"
+                @mousedown="
+                    (e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index), singleClick, startDrag })
+                "
             >
                 <template v-slot:image v-if="hasItem('inventory', index)">
                     <img :src="getImagePath(getItem('inventory', index))" />
@@ -56,17 +60,18 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { Item } from '@AthenaShared/interfaces/inventory';
-import draggable from '../../../../../../src-webviews/src/utility/drag';
-import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
+import { makeDraggable } from '@ViewUtility/drag';
+import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
 import { getImagePath } from '../utility/inventoryIcon';
+import { InventoryTypes } from '../utility/interfaces';
 
 export default defineComponent({
     name: 'Inventory',
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Context: defineAsyncComponent(() => import('@components/Context.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
     data() {
         return {
@@ -77,27 +82,23 @@ export default defineComponent({
             title: '',
             context: undefined as { x: number; y: number } | undefined,
             slot: -1,
+            itemSingleClick: undefined as { type: InventoryTypes; index: number },
         };
     },
     methods: {
         getImagePath,
-        drag: draggable.makeDraggable,
-        endDrag(
-            startType: 'inventory' | 'toolbar' | 'equipment',
-            startIndex: number,
-            endType: 'inventory' | 'toolbar' | 'equipment',
-            endIndex: number,
-            wasFastClick: boolean,
-        ) {
+        drag: makeDraggable,
+        startDrag() {
+            this.itemSingleClick = undefined;
+        },
+        singleClick(type: InventoryTypes, index: number) {
+            this.itemSingleClick = { type, index };
+        },
+        endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
                 console.log('ref');
                 console.log(startType, startIndex);
                 console.log(endType, endIndex);
-                return;
-            }
-
-            if (wasFastClick) {
-                console.log('Was not a drag event...');
                 return;
             }
 

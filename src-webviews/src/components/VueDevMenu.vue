@@ -108,13 +108,15 @@ export default defineComponent({
 
 <style scoped>
 .menu {
-    background: rgba(36, 36, 36, 1);
+    background: rgb(40, 50, 50);
     min-width: 600px;
     max-width: 600px;
     padding: 12px;
     box-sizing: border-box;
     z-index: 99;
     position: fixed;
+    box-shadow: 0px 0px 10px 3px black;
+    border: 4px solid rgba(240, 255, 255, 0.3);
 }
 
 .header {
