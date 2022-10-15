@@ -49,7 +49,7 @@ export default defineComponent({
     },
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
     },
     methods: {
         getImagePath,
