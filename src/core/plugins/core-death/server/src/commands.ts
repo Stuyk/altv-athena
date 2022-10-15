@@ -4,7 +4,6 @@ import { command } from '@AthenaServer/decorators/commands';
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { DeathSystem } from './death';
 
 export class DeathCommands {
     static init() {
