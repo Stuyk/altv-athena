@@ -200,7 +200,6 @@ export class Page {
      */
     async open(): Promise<boolean> {
         if (this.info.keybind && this.info.keybind.useSameKeyToClose) {
-            console.log('hello?');
             if (AthenaClient.webview.isPageOpen(this.info.name)) {
                 this.close(true);
                 return false;
