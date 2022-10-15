@@ -119,6 +119,7 @@ export default defineComponent({
                     const secondItem = `${type}-${index}`;
                     const firstItem = `${this.itemSingleClick.type}-${this.itemSingleClick.index}`;
                     console.log(`Combine Event:`, firstItem, secondItem);
+                    this.itemSingleClick = undefined;
                     return;
                 }
 

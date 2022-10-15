@@ -152,6 +152,12 @@ export interface IPage {
          * @type {boolean}
          */
         isLongPress?: boolean;
+
+        /**
+         * Use the same hotkey to invoke a close event.
+         * @type {boolean}
+         */
+        useSameKeyToClose?: boolean;
     };
 }
 
@@ -172,11 +178,13 @@ export class Page {
                     longPress: this.open.bind(this),
                     key: this.info.keybind.key,
                     singlePress: () => {},
+                    ignoreMenuAndChatChecks: true,
                 });
             } else {
                 AthenaClient.events.keyBinds.registerKeybind({
                     singlePress: this.open.bind(this),
                     key: this.info.keybind.key,
+                    ignoreMenuAndChatChecks: true,
                 });
             }
         }
@@ -191,7 +199,23 @@ export class Page {
      * @memberof Page
      */
     async open(): Promise<boolean> {
+        if (this.info.keybind && this.info.keybind.useSameKeyToClose) {
+            console.log('hello?');
+            if (AthenaClient.webview.isPageOpen(this.info.name)) {
+                this.close(true);
+                return false;
+            }
+        }
+
         if (isAnyMenuOpen(false)) {
+            return false;
+        }
+
+        if (alt.isConsoleOpen()) {
+            return false;
+        }
+
+        if (alt.isMenuOpen()) {
             return false;
         }
 
@@ -268,6 +292,11 @@ export class Page {
         if (this.info.options.onClose.showHud) {
             native.displayRadar(true);
             native.displayHud(true);
+        }
+
+        if (this.info.options.onClose.enableControls) {
+            console.log('open controls :)');
+            alt.toggleGameControls(true);
         }
 
         this.info.callbacks.onClose();

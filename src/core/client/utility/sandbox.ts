@@ -11,7 +11,7 @@
 // }
 
 // const page = new AthenaClient.webview.page({
-//     name: 'MyWebView',
+//     name: 'Designs',
 //     callbacks: { onReady, onClose },
 //     options: {
 //         onOpen: {
@@ -36,6 +36,7 @@
 //     keybind: {
 //         key: 75, // k
 //         isLongPress: true,
+//         useSameKeyToClose: true,
 //     },
 // });
 

@@ -672,6 +672,15 @@ export const WebViewController = {
 
         view.emit(WebViewEventNames.ON_EMIT, eventName, ...args);
     },
+    /**
+     * Returns if a page is currently open.
+     *
+     * @param {string} pageName
+     * @return {boolean}
+     */
+    isPageOpen(pageName: string): boolean {
+        return Pages.findIndex((x) => x.name === pageName) !== -1;
+    },
 };
 
 alt.on('keyup', InternalFunctions.handleKeyDownEvent);
