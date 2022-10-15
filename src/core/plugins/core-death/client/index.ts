@@ -95,7 +95,7 @@ class InternalFunctions {
         const timeLeft = timeInTheFuture - Date.now();
         if (timeLeft > 0) {
             drawText2D(
-                `${(timeLeft / 1000).toFixed(0)}s ${LOCALE_DEATH.Until_Respawn}`,
+                `${(timeLeft / 1000).toFixed(0)}s ${LOCALE_DEATH.UNTIL_RESPAWN}`,
                 { x: 0.5, y: 0.2 },
                 0.75,
                 new alt.RGBA(255, 255, 255, 255),
