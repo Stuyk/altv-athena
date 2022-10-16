@@ -1,6 +1,8 @@
 import alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '../../shared/locale/locale';
 import { DirectionVector } from '../utility/directionToVector';
 import { drawText2D } from '../utility/text';
 
@@ -201,13 +203,20 @@ const NoClip = {
         }
 
         drawText2D(
-            `Left Shift (Sprint Speed) | Scroll (Change Sprint Speed)`,
-            { x: 0.5, y: 0.9 },
+            LocaleController.get(LOCALE_KEYS.NOCLIP_SPEED_INFO),
+            { x: 0.5, y: 0.89 },
             0.4,
             new alt.RGBA(255, 255, 255, 200),
             0,
         );
-        drawText2D(`Speed: ${sens.toFixed(2)}`, { x: 0.5, y: 0.95 }, 0.4, new alt.RGBA(255, 255, 255, 200), 0);
+        
+        drawText2D(
+            `${LocaleController.get(LOCALE_KEYS.NOCLIP_SPEED)}: ${sens.toFixed(2)}`,
+            { x: 0.5, y: 0.92 },
+            0.4,
+            new alt.RGBA(255, 255, 255, 200),
+            0,
+        );
 
         NoClip.processCameraRotation();
     },
