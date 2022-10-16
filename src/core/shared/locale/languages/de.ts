@@ -232,12 +232,4 @@ export default {
         LABEL_WEIGHT: 'Gewicht',
         LABEL_SPLIT_TEXT: 'Einen Stapel mit der Menge erstellen?',
     },
-    [LOCALE_KEYS.WEBVIEW_LOGIN]: {
-        LABEL_OPEN_PAGE: `In deinem Browser wird sich eine Fenster öffnen, in dem du dich einloggen kannst.`,
-        LABEL_LOGIN_WITH_DISCORD: `Einloggen mit Discord`,
-        LABEL_TRY_AGAIN: `Versuch es nochmal...`,
-        LABEL_TAB_OUT: `Sieh in deinem Browser nach, und logge dich ein.`,
-        LABEL_FINISH_LOGIN: `Login abschließen`,
-        LABEL_OPEN_WINDOW: `Loginfenster erneut öffnen`,
-    },
 };
