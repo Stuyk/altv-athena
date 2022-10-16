@@ -201,6 +201,9 @@ export default {
     [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `Kein Lager verfügbar`,
     [LOCALE_KEYS.STORAGE_IN_USE]: `Lager wird bereits verwendet`,
     [LOCALE_KEYS.INVENTORY_IS_FULL]: `Dein Inventar ist voll`,
+    // No Clip
+    [LOCALE_KEYS.NOCLIP_SPEED_INFO]: `Links Shift (Sprint-Geschwindigkeit) | Scrollen (Sprint-Geschwindigkeit ändern)`,
+    [LOCALE_KEYS.NOCLIP_SPEED]: `Geschwindigkeit`,
     // ============================
     // WebView Locales Start Here
     // ============================
@@ -215,7 +218,7 @@ export default {
         ITEM_SLOTS: [
             'Kopf',
             'Maske',
-            'Shirt',
+            'Hemd',
             'Hose',
             'Schuhe',
             'Brille',
@@ -228,7 +231,7 @@ export default {
         ],
         LABEL_SPLIT: 'teilen',
         LABEL_CANCEL: 'abbrechen',
-        LABEL_DROP_ITEM: 'Fallenlassen',
+        LABEL_DROP_ITEM: 'fallen lassen',
         LABEL_WEIGHT: 'Gewicht',
         LABEL_SPLIT_TEXT: 'Einen Stapel mit der Menge erstellen?',
     },
