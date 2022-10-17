@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { HudView } from '../../plugins/core-hud/client';
 
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
