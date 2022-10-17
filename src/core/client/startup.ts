@@ -30,6 +30,7 @@ import './rmlui/sprites/index';
 import './rmlui/staticText/index';
 
 // Streamers
+import './streamers/doors';
 import './streamers/item';
 import './streamers/marker';
 import './streamers/object';

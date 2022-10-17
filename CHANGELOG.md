@@ -46,6 +46,9 @@ AthenaClient.shard -> AthenaClient.screen.shard
 AthenaClient.minimap -> AthenaClient.screen.minimap
 AthenaClient.notification -> AthenaClient.screen.notification
 AthenaClient.menus -> AthenaClient.wheelMenus
+/toggledoor -> Toggle closest door to the player
+Added Door State Streaming Service
+Added Door State Saving to Database -> Collection: 'doorstates'
 ```
 
 ## 3.9.0

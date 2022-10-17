@@ -1,3 +1,4 @@
+import { ServerDoorController } from '@AthenaServer/streamers/doors';
 import { ServerItemController } from '../../streamers/item';
 import { ServerMarkerController } from '../../streamers/marker';
 import { ServerObjectController } from '../../streamers/object';
@@ -14,6 +15,7 @@ export const controllersConst = {
     admin: AdminController,
     blip: ServerBlipController,
     chat: ChatController,
+    doors: ServerDoorController,
     interaction: InteractionController,
     item: ServerItemController,
     holograms: HologramController,

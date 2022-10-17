@@ -1,46 +1,14 @@
 // import * as alt from 'alt-client';
 // import { AthenaClient } from '@AthenaClient/api/athena';
+// import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
-// function onReady() {
-//     AthenaClient.webview.emit('do:something...', 'hi');
-// }
+// alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
+//     await alt.Utils.wait(1000);
 
-// function onClose() {
-//     // Nothing actually needs to be done.
-//     // The internal controller handled it all.
-// }
-
-// const page = new AthenaClient.webview.page({
-//     name: 'Designs',
-//     callbacks: { onReady, onClose },
-//     options: {
-//         onOpen: {
-//             disableControls: true,
-//             blurBackground: true,
-//             focus: true,
-//             hideHud: true,
-//             hideOverlays: true,
-//             setIsMenuOpenToTrue: true,
-//             showCursor: true,
-//         },
-//         onClose: {
-//             enableControls: true,
-//             hideCursor: true,
-//             setIsMenuOpenToFalse: true,
-//             showHud: true,
-//             showOverlays: true,
-//             unblurBackground: true,
-//             unfocus: true,
-//         },
-//     },
-//     keybind: {
-//         key: 75, // k
-//         isLongPress: true,
-//         useSameKeyToClose: true,
-//     },
-// });
-
-// alt.onServer('openMyPage', page.open);
-// alt.onServer('forceCloseMyPage', () => {
-//     page.close(true);
+//     AthenaClient.rmlui.staticText.upsert({
+//         distance: 10,
+//         position: alt.Player.local.pos,
+//         text: 'Hello World!',
+//         uid: 'hi',
+//     });
 // });

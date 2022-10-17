@@ -1,4 +1,5 @@
 import './currency';
+import './door';
 import './garage';
 import './interior';
 import './inventory';

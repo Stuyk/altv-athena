@@ -93,6 +93,7 @@ export enum SYSTEM_EVENTS {
     POLYGON_LEAVE = 'polygon:Leave',
     //
     POPULATE_BLIPS = 'blips:Populate',
+    POPULATE_DOORS = 'doors:Populate',
     POPULATE_MARKERS = 'markers:Populate',
     POPULATE_COMMANDS = 'commands:Populate',
     POPULATE_ITEMS = 'items:Populate',
@@ -129,6 +130,7 @@ export enum SYSTEM_EVENTS {
     //
     TICKS_START = 'ticks:Start',
     //
+    UPDATE_DOORS = 'update:Doors',
     UPDATE_TEXT_LABEL = 'update:TextLabel',
     UPDATE_OBJECT = 'update:Object',
     //
