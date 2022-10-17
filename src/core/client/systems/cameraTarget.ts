@@ -6,7 +6,6 @@ import Raycast from '../utility/raycast';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { InteractionController } from './interaction';
 import { ObjectWheelMenu } from '../menus/object';
 
 interface ClosestTarget {
