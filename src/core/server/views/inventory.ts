@@ -62,6 +62,40 @@ const ITEM_RULES: { [key: string]: Function[] } = {
 
 export class InventoryView {
     /**
+     * Append new dropped item.
+     * @static
+     * @param {droppedItem} droppedItem to add
+     * @memberof InventoryView
+     */
+    static append(droppedItem: DroppedItem) {
+        GROUND_ITEMS.push(droppedItem);
+    }
+
+    /**
+     * Update existing dropped item.
+     * @static
+     * @param {droppedItem} droppedItem to update
+     * @memberof InventoryView
+     */
+    static update(droppedItem: DroppedItem): boolean {
+        let wasFound = false;
+        for (let i = GROUND_ITEMS.length - 1; i >= 0; i--) {
+            if (GROUND_ITEMS[i].item.hash !== droppedItem.item.hash) {
+                continue;
+            }
+
+            GROUND_ITEMS[i] = droppedItem;
+            wasFound = true;
+        }
+
+        if (!wasFound) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Add an inventory item rule.
      * Rules are for anything that has to do with moving items.
      * @static
@@ -292,6 +326,12 @@ export class InventoryView {
             playerConst.sync.inventory(player);
             return;
         }
+        //FIXME Rucksack
+        // const isEquipmentItem = isFlagEnabled(itemClone.behavior, ITEM_TYPE.IS_EQUIPMENT);
+        // if (isEquipmentItem && itemClone.data.sex !== player.data.appearance.sex) {
+        //     playerConst.sync.inventory(player);
+        //     return;
+        // }
 
         const isEquipmentItem = isFlagEnabled(itemClone.behavior, ITEM_TYPE.IS_EQUIPMENT);
         if (isEquipmentItem && itemClone.data.sex !== player.data.appearance.sex) {
@@ -398,8 +438,11 @@ export class InventoryView {
 
         itemClone.hash = sha256Random(JSON.stringify(itemClone));
 
-        const frontPosition = playerConst.utility.getPositionFrontOf(player, 0.5);
-        const groundPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 1 };
+        const placedistance = itemClone.data.placedistance ? itemClone.data.placedistance : 0.5;
+        const rotation = itemClone.data.rotation ? itemClone.data.rotation : { x: 0, y: 0, z: 0 };
+
+        const frontPosition = playerConst.utility.getPositionFrontOf(player, placedistance);
+        let groundPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 1 };
         const itemInfoPos = { x: frontPosition.x, y: frontPosition.y, z: player.pos.z - 0.3 };
 
         const droppedItem = {
@@ -409,22 +452,46 @@ export class InventoryView {
             dimension: player.dimension,
         };
 
+        //TODO: Check best distance!
+        const maxDistanceRender = itemClone.data.maxDistance ? itemClone.data.maxDistance : 200;
+        const maxDistancePickup = itemClone.data.maxDistancePickup ? itemClone.data.maxDistancePickup : 3;
+
+        //TODO: Item y axis adjustment
+        if (itemClone.data.zaxisadjustment) {
+            alt.logWarning('Ground adjustment: ' + itemClone.data.zaxisadjustment);
+            groundPos.z = groundPos.z + itemClone.data.zaxisadjustment;
+        }
+
+        if (itemClone.data.yaxissadjustment) {
+            alt.logWarning('Ground adjustment: ' + itemClone.data.yaxissadjustment);
+            groundPos.y = groundPos.y + itemClone.data.yaxissadjustment;
+        }
+
+        if (itemClone.data.xaxissadjustment) {
+            alt.logWarning('Ground adjustment: ' + itemClone.data.xaxissadjustment);
+            groundPos.x = groundPos.x + itemClone.data.xaxissadjustment;
+        }
+
         GROUND_ITEMS.push(droppedItem);
         ServerItemController.append({
             item: droppedItem,
             uid: itemClone.hash,
-            maxDistance: 10,
+            maxDistance: maxDistanceRender,
             pos: itemInfoPos,
         });
 
         const objectModel = itemClone.model ? itemClone.model : 'prop_cs_box_clothes';
+
+        const noCollision = itemClone.data.collision ? !itemClone.data.collision : true;
+
         ServerObjectController.append({
             pos: groundPos,
+            rot: rotation,
             uid: itemClone.hash,
-            maxDistance: 10,
+            maxDistance: maxDistanceRender,
             model: objectModel,
             dimension: player.dimension,
-            noCollision: true,
+            noCollision: noCollision,
         });
 
         playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
@@ -580,6 +647,15 @@ export class InventoryView {
             }
 
             if (selectedSlot.includes('e-')) {
+                // FIXME:
+                // Workaround: if item (e.g. bag has a effect)
+                // remove item only by drag and drop!
+                if (item.data && item.data.event) {
+                    ItemEffects.invoke(player, item, INVENTORY_TYPE.INVENTORY);
+                    playerConst.emit.sound2D(player, 'item_use', Math.random() * 0.45 + 0.1);
+                    return;
+                }
+
                 // Unequip
                 const openSlot = playerConst.inventory.getFreeInventorySlot(player);
                 if (!openSlot) {

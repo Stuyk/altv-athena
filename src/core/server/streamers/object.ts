@@ -43,7 +43,54 @@ const InternalController = {
     },
 };
 
+type ObjectControllerInjectionAppend = (object: IObject) => IObject;
+type ObjectControllerInjectionUpdate = (object: IObject) => IObject;
+type ObjectControllerInjectionRemove = (object: IObject) => IObject;
+
+const AppendInjections: Array<ObjectControllerInjectionAppend> = [];
+const UpdateInjections: Array<ObjectControllerInjectionUpdate> = [];
+const RemoveInjections: Array<ObjectControllerInjectionRemove> = [];
+
 const ServerObjectControllerConst = {
+    /**
+     * Allows the current added object to be modified.
+     * Can also be used persist the object in a database.
+     * Must always return the original object + your changes.
+     *
+     * @static
+     * @param {ObjectControllerInjectionAppend} callback
+     * @memberof ObjectController
+     */
+    addAppendInjection(callback: ObjectControllerInjectionAppend) {
+        AppendInjections.push(callback);
+    },
+
+    /**
+     * Allows the current updated object to be modified.
+     * Can also be used persist the object in a database.
+     * Must always return the original object + your changes.
+     *
+     * @static
+     * @param {ObjectControllerInjectionUpdate} callback
+     * @memberof ObjectController
+     */
+    addUpdateInjection(callback: ObjectControllerInjectionUpdate) {
+        UpdateInjections.push(callback);
+    },
+
+    /**
+     * Allows the current removed object to be modified.
+     * Can also be used remove the object from a database.
+     * Must always return the original object + your changes.
+     *
+     * @static
+     * @param {ObjectControllerInjectionRemove} callback
+     * @memberof ObjectController
+     */
+    addRemoveInjection(callback: ObjectControllerInjectionRemove) {
+        RemoveInjections.push(callback);
+    },
+
     /**
      * Add an object to the global stream.
      * @static
@@ -56,9 +103,54 @@ const ServerObjectControllerConst = {
             objectData.uid = sha256Random(JSON.stringify(objectData));
         }
 
+        for (const callback of AppendInjections) {
+            try {
+                objectData = callback(objectData);
+            } catch (err) {
+                console.warn(`Got Object Append Injection Error: ${err}`);
+                continue;
+            }
+        }
+
         globalObjects.push(objectData);
         InternalController.refresh();
         return objectData.uid;
+    },
+
+    /**
+     * Update an object from the global stream.
+     * @static
+     * @param {string} uid
+     * @return {boolean}
+     * @memberof ObjectController
+     */
+    update(objectData: IObject): boolean {
+        let wasFound = false;
+        for (let i = globalObjects.length - 1; i >= 0; i--) {
+            if (globalObjects[i].uid !== objectData.uid) {
+                continue;
+            }
+
+            for (const callback of UpdateInjections) {
+                try {
+                    callback(globalObjects[i]);
+                } catch (err) {
+                    console.warn(`Got Object Update Injection Error: ${err}`);
+                    continue;
+                }
+            }
+
+            globalObjects[i] = objectData;
+            wasFound = true;
+        }
+
+        if (!wasFound) {
+            return false;
+        }
+
+        InternalController.refresh();
+        alt.emitAllClients(SYSTEM_EVENTS.UPDATE_OBJECT, objectData);
+        return true;
     },
 
     /**
@@ -73,6 +165,15 @@ const ServerObjectControllerConst = {
         for (let i = globalObjects.length - 1; i >= 0; i--) {
             if (globalObjects[i].uid !== uid) {
                 continue;
+            }
+
+            for (const callback of RemoveInjections) {
+                try {
+                    callback(globalObjects[i]);
+                } catch (err) {
+                    console.warn(`Got Object Remove Injection Error: ${err}`);
+                    continue;
+                }
             }
 
             globalObjects.splice(i, 1);
