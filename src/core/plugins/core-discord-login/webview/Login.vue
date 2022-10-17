@@ -44,6 +44,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { DISCORD_LOGIN_EVENTS } from '../shared/events';
+import { LOGIN_WEBVIEW_LOCALES } from '../shared/locales';
 import ResolvePath from '@ViewUtility/pathResolver';
 import WebViewEvents from '@ViewUtility/webViewEvents';
 
@@ -61,15 +62,7 @@ export default defineComponent({
             uri: 'https://stuyk.com/',
             isAuthorizing: false,
             isFinishAuthReady: false,
-            locales: {
-                LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
-                LABEL_LOGIN_WITH_DISCORD: `Login with Discord`,
-                LABEL_TRY_AGAIN: `Try again...`,
-                LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
-                window again.`,
-                LABEL_FINISH_LOGIN: `Finish Login`,
-                LABEL_OPEN_WINDOW: `Open Login Window Again`,
-            },
+            locales: LOGIN_WEBVIEW_LOCALES,
         };
     },
     methods: {
