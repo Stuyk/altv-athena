@@ -104,7 +104,7 @@ const ServerItemControllerConst = {
      * @return {boolean}
      * @memberof ItemController
      */
-    update(itemInfo: GroundItem): boolean {
+    update(itemInfo: Partial<GroundItem>): boolean {
         let wasFound = false;
         for (let i = globalItemDrops.length - 1; i >= 0; i--) {
             if (globalItemDrops[i].uid !== itemInfo.uid) {
@@ -120,7 +120,7 @@ const ServerItemControllerConst = {
                 }
             }
 
-            globalItemDrops[i] = itemInfo;
+            globalItemDrops[i] = Object.assign(globalItemDrops[i], itemInfo);
             wasFound = true;
         }
 

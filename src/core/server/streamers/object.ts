@@ -124,7 +124,7 @@ const ServerObjectControllerConst = {
      * @return {boolean}
      * @memberof ObjectController
      */
-    update(objectData: IObject): boolean {
+    update(objectData: Partial<IObject>): boolean {
         let wasFound = false;
         for (let i = globalObjects.length - 1; i >= 0; i--) {
             if (globalObjects[i].uid !== objectData.uid) {
@@ -140,7 +140,7 @@ const ServerObjectControllerConst = {
                 }
             }
 
-            globalObjects[i] = objectData;
+            globalObjects[i] = Object.assign(globalObjects[i], objectData);
             wasFound = true;
         }
 

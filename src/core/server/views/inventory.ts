@@ -77,14 +77,14 @@ export class InventoryView {
      * @param {droppedItem} droppedItem to update
      * @memberof InventoryView
      */
-    static update(droppedItem: DroppedItem): boolean {
+    static update(droppedItem: Partial<DroppedItem>): boolean {
         let wasFound = false;
         for (let i = GROUND_ITEMS.length - 1; i >= 0; i--) {
             if (GROUND_ITEMS[i].item.hash !== droppedItem.item.hash) {
                 continue;
             }
 
-            GROUND_ITEMS[i] = droppedItem;
+            GROUND_ITEMS[i] = Object.assign(GROUND_ITEMS[i], droppedItem);
             wasFound = true;
         }
 
