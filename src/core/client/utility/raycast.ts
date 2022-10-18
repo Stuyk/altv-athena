@@ -152,7 +152,7 @@ const Raycast = {
         radius: number = 2,
     ): { didComplete: boolean; didHit?: boolean; position?: alt.IVector3; entityHit?: number } {
         const start = alt.Player.local.pos;
-        const forwardVector = native.getEntityForwardVector(alt.Player.local.scriptID);
+        const forwardVector = getDirectionFromRotation(native.getEntityForwardVector(alt.Player.local.scriptID));
         const end = {
             x: start.x + forwardVector.x * maxDistance,
             y: start.y + forwardVector.y * maxDistance,
