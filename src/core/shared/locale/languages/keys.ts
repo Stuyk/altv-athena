@@ -193,6 +193,9 @@ export const LOCALE_KEYS = {
     STORAGE_NOT_AVAILABLE: 'storage-not-available',
     STORAGE_IN_USE: 'storage-in-use',
     INVENTORY_IS_FULL: 'inventory-is-full',
+    // No Clip
+    NOCLIP_SPEED_INFO: 'noclip-speed-info',
+    NOCLIP_SPEED: 'noclip-speed',
     // =====================
     // WebView Locales
     // =====================

@@ -198,6 +198,9 @@ export default {
     [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `No Storage Available`,
     [LOCALE_KEYS.STORAGE_IN_USE]: `Storage in Use`,
     [LOCALE_KEYS.INVENTORY_IS_FULL]: `Inventory is Full`,
+    // No Clip
+    [LOCALE_KEYS.NOCLIP_SPEED_INFO]: `Left Shift (Sprint Speed) | Scroll (Change Sprint Speed)`,
+    [LOCALE_KEYS.NOCLIP_SPEED]: `Speed`,
     // ============================
     // WebView Locales Start Here
     // ============================
