@@ -10,7 +10,8 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
-        "jsx": "preserve"
+        "jsx": "preserve",
+        "skipLibCheck": true
     },
     "exclude": [
         "resources",
