@@ -7,8 +7,8 @@ let scaleform: Scaleform;
 let interval: number;
 let timeout: number;
 
-export default class Shard {
-    static async create(shard: IShard) {
+const Shard = {
+    async create(shard: IShard) {
         await Shard.clear();
 
         scaleform = await requestScaleForm('MP_BIG_MESSAGE_FREEMODE');
@@ -31,14 +31,14 @@ export default class Shard {
         if (shard.duration >= 0) {
             alt.setTimeout(Shard.clear, shard.duration);
         }
-    }
+    },
 
     /**
      * Used to clear the last set spinner.
      * @static
      * @memberof Shard
      */
-    static clear() {
+    clear() {
         if (scaleform) {
             scaleform.destroy();
             scaleform = null;
@@ -53,8 +53,10 @@ export default class Shard {
             alt.clearInterval(interval);
             interval = null;
         }
-    }
-}
+    },
+};
+
+export default Shard;
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SHARD, Shard.create);
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_SHARD_CLEAR, Shard.clear);

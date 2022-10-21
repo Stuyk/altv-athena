@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { AthenaClient } from '../../../../client/api/athena';
 import { WebViewController } from '../../../../client/extensions/view2';
 import ViewModel from '../../../../client/models/viewModel';
 import { playPedAnimation } from '../../../../client/systems/animations';
@@ -8,6 +9,7 @@ import PedEditCamera from '../../../../client/utility/camera';
 import { PedCharacter } from '../../../../client/utility/characterPed';
 import { disableAllControls } from '../../../../client/utility/disableControls';
 import { sleep } from '../../../../client/utility/sleep';
+import { SWITCHOUT_TYPES } from '../../../../shared/enums/switchOutTypes';
 import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
 import { Appearance } from '../../../../shared/interfaces/appearance';
 import { Character } from '../../../../shared/interfaces/character';
@@ -128,7 +130,10 @@ class InternalFunctions implements ViewModel {
         await PedEditCamera.destroy();
         await PedCharacter.destroy();
 
-        native.switchInPlayer(1500);
+        if (!CHARACTER_SELECT_CONFIG.SKIP_SKYCAM_IN_DEBUG_MODE && alt.debug) {
+            await AthenaClient.utility.switchInPlayer(2000, SWITCHOUT_TYPES.THREE_STEPS);
+        }
+
         native.freezeEntityPosition(alt.Player.local.scriptID, false);
 
         alt.toggleGameControls(true);

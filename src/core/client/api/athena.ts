@@ -11,17 +11,31 @@ import PedEditCamera from '../utility/camera';
 import { CinematicCam } from '../utility/cinematic';
 import { showNotification } from '../utility/notification';
 import * as math from '../utility/math';
+import { menus } from './consts/menus';
+import { constData } from './consts/dataConst';
+import { KeybindController } from '../events/keyup';
+import { KeyHeld } from '../events/keyHeld';
+import { Sprite } from '../rmlui/sprites';
+import { CameraTarget } from '../systems/cameraTarget';
 
 export const AthenaClient = {
     camera: {
         ped: PedEditCamera,
         cinematic: CinematicCam,
+        target: CameraTarget,
+    },
+    data: constData,
+    events: {
+        keyHeld: KeyHeld,
+        keyBinds: KeybindController,
     },
     math,
+    menus,
     minimap: Minimap,
     notification: showNotification,
     raycast: Raycast,
     screen: screenConst,
+    sprite: Sprite,
     shard: Shard,
     sound: soundConst,
     spinner: Spinner,

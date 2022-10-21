@@ -7,7 +7,6 @@ import { CurrencyTypes } from '../../../../shared/enums/currency';
 import { LocaleController } from '../../../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
 import { Character } from '../../../../shared/interfaces/character';
-import Database from '@stuyk/ezmongodb';
 import { Collections } from '../../../../server/interface/iDatabaseCollections';
 import { ATM_INTERACTIONS } from '../../shared/events';
 import { Athena } from '../../../../server/api/athena';
@@ -141,7 +140,11 @@ class InternalFunctions {
             Athena.player.emit.message(onlinePlayer, msg);
         } else {
             // Update by Document Route
-            const document = await Database.fetchData<Character>('bankNumber', bankNumber, Collections.Characters);
+            const document = await Athena.database.funcs.fetchData<Character>(
+                'bankNumber',
+                bankNumber,
+                Collections.Characters,
+            );
             if (!document) {
                 return false;
             }
@@ -151,7 +154,11 @@ class InternalFunctions {
             }
 
             document.bank += amount;
-            await Database.updatePartialData(document._id.toString(), { bank: document.bank }, Collections.Characters);
+            await Athena.database.funcs.updatePartialData(
+                document._id.toString(),
+                { bank: document.bank },
+                Collections.Characters,
+            );
         }
 
         return true;
@@ -214,7 +221,7 @@ export class AtmFunctions {
 
             InteractionController.add({
                 position,
-                description: 'Open the ATM',
+                description: 'Access ATM',
                 range: INTERACTION_RANGE,
                 callback: (player: alt.Player) => {
                     alt.emitClient(player, ATM_INTERACTIONS.OPEN);

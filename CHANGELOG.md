@@ -1,5 +1,67 @@
 # Changelog
 
+
+## 3.9.0
+
+```
+Initialized 3.9.0
+Fix Tab Defocus in Chat
+Fix Athena.get.player.byName name issues
+Add Athena.get.player.byPartialName
+Add Athena.get.player.characters - Get all player account characters
+Add Athena.get.player.closestToPlayer - Get closest player from player
+Add Athena.get.player.closestToVehicle - Get closest player from vehicle
+Add Athena.get.vehicle.closestToPlayer - Get closest vehicle from player
+Add Athena.get.vehicle.closestToVehicle - Get closest vehicle from vehicle
+Add AthenaClient.menus.vehicle.add - Add a modified option to the vehicle wheel menu.
+Add AthenaClient.menus.player.add - Add a modified option to the player wheel menu.
+Add AthenaClient.menus.object.add - Add a modified option to the object wheel menu.
+Add AthenaClient.menus.ped.add - Add a modified option to the ped wheel menu.
+Add Athena.systems.job.addJobCheck - Add custom criteria, or types to the global job options.
+Add Athena.systems.job.getPlayerJob - Get a player's current job if they are doing a job.
+Add Athena.systems.job.cloneObjective - Used to clone an objective cleanly.
+Add Athena.systems.job.instance - Used to create a new job instance. ie. new Athena.systems.job.instance()
+Add Athena.get.player.closestOwnedVehicle - Gets the closest owned vehicle for a player.
+Add Athena.data.vehicles - This is the VehicleData from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.vehicles - This is the VehicleData from the shared folder. Instanced to the client-side.
+Add Athena.data.vendingMachines - This is the vending machines from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.vendingMachines - This is the vending machines from the shared folder. Instanced to the client-side.
+Add Athena.data.atms - This is the atms from the shared folder. Instanced to the server-side.
+Add AthenaClient.data.atms - This is the atms from the shared folder. Instanced to the client-side.
+Add undefined entity check for storage view system.
+Add Athena.systems.world.setWeatherRotation - Overrides the current weather rotation entirely.
+Fix streamer showing streamed items globablly if dimension set to zero. If set to undefined now, it shows globally.
+Mark Objects in Streamer as Mission Entities when being deleted; then flag as no longer needed.
+Add AthenaClient.events.keyHeld -> Add functionality to a key when it is held down.
+Add AthenaClient.events.keyBinds -> Add KeyBinds to the main AthenaClient API.
+Move z-index of chat-wrapper to 98; and move dev menu to 99 for localhost
+Added AthenaClient.sprite -> Stream .png images in-world based on position with auto-scaling.
+Created 'example-sprite' plugin for code references.
+AthenaClient.camera.target -> Used for the [E] interactions you see in-world
+AthenaClient.camera.target.addIgnoredEntity -> Lets you specify an entity handle to ignore interactions with
+AthenaClient.camera.target.removeIgnoredEntity -> Lets you specify an entity handle to remove from ignored interactions
+Updated Vehicle List -> Now Includes Fuel Types 
+Updated Fuel Stations to Specify Fuel Amount
+Interactions now display in-world descriptions
+Character Select does switch-out-switch-in
+Blip categories in Blip Interface
+German Locale File
+VEHICLE_ENGINE_OFF in JobCriteria -> Requires engine to be off at a job point
+Fixed Fuel Station not recognizing a player when leaving a vehicle to fuel
+Various Static Class to Const Conversions
+Restrict Inventory Drops to Dimension
+Object menu now passes item information, if it is an item
+Fix strange compatability issue with esbuild
+Athena.player.emit.createMissionText -> Draws a subtitle in the center bottom of the screen for a given time.
+Ability to set database name through configuration
+Job.addQuitCallback -> Adds a way to call a function when a job is quit.
+Add Skycam
+Add Option to Skycam to disable skycam when debug is on. Character select plugin.
+Fix Skycam Option
+Fix bug where when dead the client can still invoke key press to revive even though already revived.
+Patch Garage Not Closing on Vehicle Spawn
+```
+
 ## 3.8.0
 
 ```

@@ -6,7 +6,7 @@ import { distance, vectorLerp } from '../../shared/utility/vector';
 import { loadModel } from './model';
 import { sleep } from './sleep';
 
-class LerpObject {
+const LerpObject = {
     /**
      * Lerp an object with an ID from one point to another.
      *
@@ -17,7 +17,7 @@ class LerpObject {
      * @return {*}
      * @memberof LerpObject
      */
-    static async lerp(id: number, to: Vector3, speed = 0.1) {
+    async lerp(id: number, to: Vector3, speed = 0.1) {
         let runTimer = 0;
         let dist = 0;
         native.freezeEntityPosition(id, true);
@@ -39,7 +39,7 @@ class LerpObject {
                 }
             }, 1);
         });
-    }
+    },
 
     /**
      * Create and move a temporary object.
@@ -50,7 +50,7 @@ class LerpObject {
      * @param {0.1} speed
      * @memberof LerpObject
      */
-    static async tempLerp(model: string, start: Vector3, end: Vector3, speed: number = 0.1) {
+    async tempLerp(model: string, start: Vector3, end: Vector3, speed: number = 0.1) {
         const hash = alt.hash(model);
         await loadModel(hash);
 
@@ -64,7 +64,7 @@ class LerpObject {
         await LerpObject.lerp(object, end, speed);
 
         native.deleteObject(object);
-    }
-}
+    },
+};
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, LerpObject.tempLerp);

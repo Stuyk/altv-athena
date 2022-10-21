@@ -17,10 +17,12 @@ class InternalFunctions {
      *
      * @static
      * @param {alt.Player} player
+     * @param {number?} amount
      * @return {*}
      * @memberof InternalFunctions
      */
-    static accept(player: alt.Player) {
+    static accept(player: alt.Player, amount?: number) {
+
         if (!player || !player.valid) {
             return;
         }
@@ -36,7 +38,12 @@ class InternalFunctions {
         }
 
         if (data.acceptCallback && typeof data.acceptCallback === 'function') {
-            data.acceptCallback(player);
+            if (amount === undefined) {
+                data.acceptCallback(player);
+            } else {
+                data.acceptCallback(player, amount);
+            }
+
         }
 
         delete LastTriggers[player.id];

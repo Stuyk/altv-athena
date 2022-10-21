@@ -8,4 +8,5 @@ export const LOCALE_FUEL_STATIONS = {
     FUEL_ALREADY_REFILLING: `Already refueling...`,
     FUEL_TURN_OFF_ENGINE: `Turn the Engine Off`,
     FUEL_TRY_AGAIN: `Try Again`,
+    FUEL_MUST_EXIT_VEHICLE: `You must exit your vehicle to pump fuel.`,
 };

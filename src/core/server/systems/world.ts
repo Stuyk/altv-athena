@@ -2,21 +2,19 @@ import * as alt from 'alt-server';
 import { WORLD_WEATHER } from '../../shared/enums/weather';
 import { DEFAULT_CONFIG } from '../athena/main';
 
-/* -- Top of Map --
- * 0 - Weather at Index 0
- * 1 - Weather at Index 1
- * 2 - Weather at Index 2
- * 3 - Weather at Index 3
- * 4 - Weather at Index 4
- * 5 - Weather at Index 5
- * --- Bottom of Map ---
- * Every 1 Hour Time Update. Pops the last element of the array.
- * Then shifts it into the beginning of the array.
- *
- * This rotates weathers from top to bottom. Creating a
- * wave of weather across the map.
- *
- */
+let weatherRotation = [
+    'EXTRASUNNY',
+    'EXTRASUNNY',
+    'CLEAR',
+    'CLOUDS',
+    'OVERCAST',
+    'RAIN',
+    'THUNDER',
+    'RAIN',
+    'FOGGY',
+    'OVERCAST',
+    'CLEARING',
+];
 
 // Best kept at 6 unless you know what you're doing.
 const worldDivision = 6;
@@ -33,6 +31,31 @@ export class World {
     static minMaxGroups: Array<{ minY: number; maxY: number }>;
     static hour: number = DEFAULT_CONFIG.BOOTUP_HOUR;
     static minute: number = DEFAULT_CONFIG.BOOTUP_MINUTE;
+
+    /**
+     * --- Top of Map ---
+     * 0 - Weather at Index 0
+     * 1 - Weather at Index 1
+     * 2 - Weather at Index 2
+     * 3 - Weather at Index 3
+     * 4 - Weather at Index 4
+     * 5 - Weather at Index 5
+     * --- Bottom of Map ---
+     *
+     * Every 1 Hour Time Update. Pops the last element of the array.
+     * Then shifts it into the beginning of the array.
+     *
+     * This rotates weathers from top to bottom. Creating a
+     * wave of weather across the map.
+     *
+     * @static
+     * @param {Array<string>} weatherNames
+     * @memberof World
+     */
+    static setWeatherRotation(weatherNames: Array<string>) {
+        weatherRotation = weatherNames;
+        World.updateWorldTime();
+    }
 
     /**
      * Register a time rule where when the rule is ran it will return the hour, minute, and second.
@@ -111,8 +134,8 @@ export class World {
                 World.minute = result.minute;
 
                 if (result.updateWeather) {
-                    const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
-                    DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+                    const endElement = weatherRotation.pop();
+                    weatherRotation.unshift(endElement);
                 }
 
                 return;
@@ -133,8 +156,8 @@ export class World {
                 return;
             }
 
-            const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
-            DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+            const endElement = weatherRotation.pop();
+            weatherRotation.unshift(endElement);
             return;
         }
 
@@ -143,8 +166,8 @@ export class World {
             World.minute = 0;
             World.hour += 1;
 
-            const endElement = DEFAULT_CONFIG.WEATHER_ROTATION.pop();
-            DEFAULT_CONFIG.WEATHER_ROTATION.unshift(endElement);
+            const endElement = weatherRotation.pop();
+            weatherRotation.unshift(endElement);
         }
 
         if (World.hour >= 24) {
@@ -175,7 +198,7 @@ export class World {
             return weatherOverrideName;
         }
 
-        return DEFAULT_CONFIG.WEATHER_ROTATION[gridIndex];
+        return weatherRotation[gridIndex];
     }
 
     /**

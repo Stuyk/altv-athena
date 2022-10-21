@@ -15,6 +15,7 @@ enum ObjectiveCriteria {
     IN_JOB_VEHICLE = 16,
     FAIL_ON_JOB_VEHICLE_DESTROY = 32,
     JOB_VEHICLE_NEARBY = 64,
+    VEHICLE_ENGINE_OFF = 128
 }
 
 enum ObjectiveType {
@@ -34,14 +35,14 @@ export interface Objective {
      * @type {ObjectiveCriteria}
      * @memberof Objective
      */
-    criteria: ObjectiveCriteria;
+    criteria: ObjectiveCriteria | number;
 
     /**
      * An objective type that is unique to this objective.
      * @type {ObjectiveType}
      * @memberof Objective
      */
-    type: ObjectiveType;
+    type: ObjectiveType | number;
 
     /**
      * The 3D Position of this objective.
@@ -144,6 +145,15 @@ export interface Objective {
      * @memberof Objective
      */
     onlyCallbackCheck?: boolean;
+
+    /**
+     * Data to put on this objective.
+     * Do not add callbacks.
+     *
+     * @type {{ [key: string]: any }}
+     * @memberof Objective
+     */
+    data?: { [key: string]: any };
 
     /**
      * Server-side callback when objective is started.

@@ -17,7 +17,7 @@ let controlStatus = false;
 let camUpdateQueue: Array<{ zpos: number; fov: number; easeTime: number }> = [];
 let isQueueReady = false;
 
-export default class PedEditCamera {
+const PedEditCamera = {
     /**
      * Creates a Pedestrian Edit Camera
      * @static
@@ -26,7 +26,7 @@ export default class PedEditCamera {
      * @return {Promise<void>}
      * @memberof PedEditCamera
      */
-    static async create(_scriptID: number, offset: alt.IVector3 = null, _isLocalPlayer = false): Promise<void> {
+    async create(_scriptID: number, offset: alt.IVector3 = null, _isLocalPlayer = false): Promise<void> {
         scriptID = _scriptID;
         isLocalPlayer = _isLocalPlayer;
         startPosition = native.getEntityCoords(scriptID, false);
@@ -80,7 +80,7 @@ export default class PedEditCamera {
         }
 
         cameraControlsInterval = Timer.createInterval(PedEditCamera.handleControls, 0, 'camera.ts');
-    }
+    },
 
     /**
      * Calculates a camera offset.
@@ -89,14 +89,14 @@ export default class PedEditCamera {
      * @return {*}  {Vector3}
      * @memberof PedEditCamera
      */
-    static calculateCamOffset(offset: Vector3): Vector3 {
+    calculateCamOffset(offset: Vector3): Vector3 {
         return native.getOffsetFromEntityInWorldCoords(
             isLocalPlayer ? alt.Player.local.scriptID : scriptID,
             offset.x,
             offset.y,
             offset.z,
         );
-    }
+    },
 
     /**
      * Sets up the camera with the original position and a new offset.
@@ -104,12 +104,12 @@ export default class PedEditCamera {
      * @param {Vector3} offset
      * @memberof PedEditCamera
      */
-    static setCameraOffset(offset: Vector3) {
+    setCameraOffset(offset: Vector3) {
         startPosition = PedEditCamera.calculateCamOffset(offset) as alt.Vector3;
         native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z);
         native.setCamActive(camera, true);
         native.renderScriptCams(true, false, 0, true, false, 0);
-    }
+    },
 
     /**
      * Check if a PedEditCamera exists.
@@ -117,16 +117,16 @@ export default class PedEditCamera {
      * @return {*}
      * @memberof PedEditCamera
      */
-    static exists() {
+    exists() {
         return camera !== null;
-    }
+    },
 
     /**
      * Destroy the Ped Edit Camera
      * @static
      * @memberof PedEditCamera
      */
-    static async destroy() {
+    async destroy() {
         if (cameraControlsInterval !== undefined || cameraControlsInterval !== null) {
             Timer.clearInterval(cameraControlsInterval);
             cameraControlsInterval = null;
@@ -150,7 +150,7 @@ export default class PedEditCamera {
         isQueueReady = true;
         scriptID = null;
         controlStatus = false;
-    }
+    },
 
     /**
      * Disable All Controls?
@@ -158,9 +158,9 @@ export default class PedEditCamera {
      * @param {boolean} status
      * @memberof PedEditCamera
      */
-    static disableControls(status: boolean): void {
+    disableControls(status: boolean): void {
         controlStatus = status;
-    }
+    },
 
     /**
      * Set the Camera Field of View
@@ -168,7 +168,7 @@ export default class PedEditCamera {
      * @param {*} value
      * @memberof PedEditCamera
      */
-    static setCamParams(_zpos: number = null, _fov: number = null, _easeTime: number = 500) {
+    setCamParams(_zpos: number = null, _fov: number = null, _easeTime: number = 500) {
         if (_zpos === null) {
             _zpos = zpos;
         }
@@ -178,9 +178,9 @@ export default class PedEditCamera {
         }
 
         camUpdateQueue.push({ zpos: _zpos, fov: _fov, easeTime: _easeTime });
-    }
+    },
 
-    static async runQueue() {
+    async runQueue() {
         if (camUpdateQueue.length <= 0) {
             return;
         }
@@ -223,7 +223,7 @@ export default class PedEditCamera {
         native.destroyCam(camera, true);
         camera = camera2;
         isQueueReady = true;
-    }
+    },
 
     /**
      * Update the ScriptID for who we should use to rotate.
@@ -231,11 +231,11 @@ export default class PedEditCamera {
      * @param {number} id
      * @memberof PedEditCamera
      */
-    static update(id: number) {
+    update(id: number) {
         scriptID = id;
-    }
+    },
 
-    static handleControls() {
+    handleControls() {
         native.hideHudAndRadarThisFrame();
         native.disableAllControlActions(0);
         native.disableAllControlActions(1);
@@ -371,8 +371,10 @@ export default class PedEditCamera {
                 });
             }
         }
-    }
-}
+    },
+};
+
+export default PedEditCamera;
 
 alt.on('connectionComplete', () => {
     PedEditCamera.destroy();

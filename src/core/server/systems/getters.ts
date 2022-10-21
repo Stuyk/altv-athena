@@ -1,6 +1,14 @@
+import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+import { Vehicle_Behavior } from '../../shared/enums/vehicle';
+import { Character } from '../../shared/interfaces/character';
+import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
+import VehicleFuncs from '../extensions/vehicleFuncs';
+import { Account } from '../interface/iAccount';
 import { getForwardVector } from '../utility/vector';
+import { getClosestOfType } from './gettersShared';
 import { Identifier } from './identifier';
 
 const player = {
@@ -21,8 +29,31 @@ const player = {
      * @return {(alt.Player | undefined)}
      */
     byName(name: string): alt.Player | undefined {
-        name = name.toLowerCase().replace('_', ''); // Normalize My_Name to myname
-        return alt.Player.all.find((x) => x.data && x.data.name && x.data.name === name);
+        name = name.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
+        return alt.Player.all.find((x) => {
+            if (!x.data && !x.data._id) {
+                return false;
+            }
+
+            return x.data.name.toLowerCase().replace(/\s|_+/g, '') === name;
+        });
+    },
+    /**
+     * Gets an online player by their partial name.
+     * Not case sensitive and returns the first player it finds that includes the partial
+     *
+     * @param {string} partialName
+     * @return {(alt.Player | undefined)}
+     */
+    byPartialName(partialName: string): alt.Player | undefined {
+        partialName = partialName.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
+        return alt.Player.all.find((x) => {
+            if (!x.data && !x.data._id) {
+                return false;
+            }
+
+            return x.data.name.toLowerCase().replace(/\s|_+/g, '').includes(partialName);
+        });
     },
     /**
      * Get an online player based on their MongoDB _id
@@ -115,6 +146,96 @@ const player = {
      */
     waypoint(player: alt.Player): alt.IVector3 | undefined {
         return player.currentWaypoint;
+    },
+    /**
+     * The player closest to a player.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Player | undefined)}
+     */
+    closestToPlayer(player: alt.Player): alt.Player | undefined {
+        return getClosestOfType<alt.Player>(player, 'player');
+    },
+    /**
+     * The player closest to a vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {(alt.Player | undefined)}
+     */
+    closestToVehicle(vehicle: alt.Vehicle): alt.Player | undefined {
+        return getClosestOfType<alt.Player>(vehicle, 'player');
+    },
+    /**
+     * Returns the closest owned vehicle for a given player.
+     * Counts any owned vehicles from other players that have supplied an injection for ownership.
+     * Ignores vehicles with keyless for start.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Vehicle | undefined)}
+     */
+    closestOwnedVehicle(player: alt.Player): alt.Vehicle | undefined {
+        const vehicles = alt.Vehicle.all.filter((veh) => {
+            if (!veh || !veh.valid || !veh.data) {
+                return false;
+            }
+
+            if (isFlagEnabled(veh.behavior, Vehicle_Behavior.NO_KEY_TO_START)) {
+                return false;
+            }
+
+            return VehicleFuncs.hasOwnership(player, veh);
+        });
+
+        if (vehicles.length <= 0) {
+            return undefined;
+        }
+
+        if (vehicles.length <= 1) {
+            return vehicles[0];
+        }
+
+        vehicles.sort((a, b) => {
+            const distA = distance(player.pos, a.pos);
+            const distB = distance(player.pos, b.pos);
+
+            return distA - distB;
+        });
+
+        return vehicles[0];
+    },
+    /**
+     * Returns all characters that belong to a player.
+     * Requires account info, player, or account id string.
+     *
+     * @param {alt.Player} player
+     * @return {Promise<Array<CharacterData>>}
+     */
+    async characters(playerOrAccount: alt.Player | Account | string): Promise<Array<Character>> {
+        if (playerOrAccount instanceof alt.Player) {
+            if (typeof playerOrAccount.accountData === 'undefined') {
+                return [];
+            }
+
+            return await Database.fetchAllByField(
+                'account_id',
+                playerOrAccount.accountData._id,
+                Athena.database.collections.Characters,
+            );
+        }
+
+        if (typeof playerOrAccount === 'string') {
+            return await Database.fetchAllByField(
+                'account_id',
+                playerOrAccount.toString(),
+                Athena.database.collections.Characters,
+            );
+        }
+
+        return await Database.fetchAllByField(
+            'account_id',
+            playerOrAccount._id.toString(),
+            Athena.database.collections.Characters,
+        );
     },
 };
 
@@ -340,6 +461,24 @@ const vehicle = {
      */
     driver(vehicle: alt.Vehicle): alt.Player | undefined {
         return vehicle.driver;
+    },
+    /**
+     * The vehicle closest to a player.
+     *
+     * @param {alt.Player} player
+     * @return {(alt.Player | undefined)}
+     */
+    closestToPlayer(player: alt.Player): alt.Vehicle | undefined {
+        return getClosestOfType<alt.Vehicle>(player, 'vehicle');
+    },
+    /**
+     * The vehicle closest to a vehicle.
+     *
+     * @param {alt.Vehicle} vehicle
+     * @return {(alt.Player | undefined)}
+     */
+    closestToVehicle(vehicle: alt.Vehicle): alt.Vehicle | undefined {
+        return getClosestOfType<alt.Vehicle>(vehicle, 'vehicle');
     },
 };
 

@@ -5,7 +5,7 @@ import { Appearance } from '../../shared/interfaces/appearance';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Item } from '../../shared/interfaces/item';
 
-export class CharacterSystem {
+export const CharacterSystem = {
     /**
      * Apply Appearance Data
      * @static
@@ -14,7 +14,7 @@ export class CharacterSystem {
      * @return {*}
      * @memberof CharacterSystem
      */
-    static applyAppearance(ped: number, appearance: Appearance) {
+    applyAppearance(ped: number, appearance: Appearance) {
         if (!ped || !native.doesEntityExist(ped)) {
             return;
         }
@@ -98,7 +98,7 @@ export class CharacterSystem {
         // Eyes
         native.setPedEyeColor(ped, appearance.eyes);
         native.clearAllPedProps(ped);
-    }
+    },
 
     /**
      * Should only use this to apply clothing to a custom ped.
@@ -108,7 +108,7 @@ export class CharacterSystem {
      * @param {Array<ClothingComponent>} components
      * @memberof CharacterSystem
      */
-    static applyEquipment(ped: number, components: Array<Item<ClothingComponent>>, isMale = false) {
+    applyEquipment(ped: number, components: Array<Item<ClothingComponent>>, isMale = false) {
         if (!ped || !native.doesEntityExist(ped)) {
             return;
         }
@@ -184,9 +184,9 @@ export class CharacterSystem {
                 }
             }
         }
-    }
+    },
 
-    static applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {
+    applyHairOverlay(decorations: Array<{ collection: string; overlay: string }>) {
         native.clearPedDecorations(alt.Player.local.scriptID);
 
         for (let i = 0; i < decorations.length; i++) {
@@ -194,7 +194,7 @@ export class CharacterSystem {
             const overlay = alt.hash(decorations[i].overlay);
             native.addPedDecorationFromHashes(alt.Player.local.scriptID, collection, overlay);
         }
-    }
-}
+    },
+};
 
 alt.onServer(SYSTEM_EVENTS.SET_PLAYER_DECORATIONS, CharacterSystem.applyHairOverlay);

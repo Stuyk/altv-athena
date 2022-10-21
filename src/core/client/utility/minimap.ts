@@ -1,7 +1,7 @@
 import * as native from 'natives';
 import { Vector2 } from '../../shared/interfaces/vector';
 
-export default class Minimap {
+const Minimap = {
     /**
      * Get the width of the MiniMap
      * @static
@@ -9,7 +9,7 @@ export default class Minimap {
      * @return {number}
      * @memberof Minimap
      */
-    static getMinimapWidth(asPercent = false): number {
+    getMinimapWidth(asPercent = false): number {
         const aspectRatio = Minimap.getScreenAspectRatio();
         const resolution = Minimap.getScreenResolution();
         const result = resolution.x / (4 * aspectRatio);
@@ -19,7 +19,7 @@ export default class Minimap {
         }
 
         return result;
-    }
+    },
 
     /**
      * Get the height of the MiniMap
@@ -28,7 +28,7 @@ export default class Minimap {
      * @return {number}
      * @memberof Minimap
      */
-    static getMinimapHeight(asPercent = false): number {
+    getMinimapHeight(asPercent = false): number {
         const resolution = Minimap.getScreenResolution();
         const result = resolution.y / 5.674;
 
@@ -37,7 +37,7 @@ export default class Minimap {
         }
 
         return result;
-    }
+    },
 
     /**
      * Get the Top Left of the MiniMap
@@ -46,7 +46,7 @@ export default class Minimap {
      * @return {*}
      * @memberof Minimap
      */
-    static getMinimapTopLeft(asPercent = false): Vector2 {
+    getMinimapTopLeft(asPercent = false): Vector2 {
         const resolution = Minimap.getScreenResolution();
         const safeZone = Minimap.getSafeZoneSize();
         const height = Minimap.getMinimapHeight();
@@ -59,7 +59,7 @@ export default class Minimap {
         }
 
         return { x, y };
-    }
+    },
 
     /**
      * Get the top right of the MiniMap
@@ -68,7 +68,7 @@ export default class Minimap {
      * @return {*}
      * @memberof Minimap
      */
-    static getMinimapTopRight(asPercent = false): Vector2 {
+    getMinimapTopRight(asPercent = false): Vector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -79,7 +79,7 @@ export default class Minimap {
         }
 
         return { x: x + Minimap.getMinimapWidth(), y };
-    }
+    },
 
     /**
      * Get bottom left of the MiniMap
@@ -88,7 +88,7 @@ export default class Minimap {
      * @return {*}
      * @memberof Minimap
      */
-    static getMinimapBottomLeft(asPercent = false): Vector2 {
+    getMinimapBottomLeft(asPercent = false): Vector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -99,7 +99,7 @@ export default class Minimap {
         }
 
         return { x, y: y + Minimap.getMinimapHeight() };
-    }
+    },
 
     /**
      * Get Bottom Right of MiniMap
@@ -108,7 +108,7 @@ export default class Minimap {
      * @return {*}
      * @memberof Minimap
      */
-    static getMinimapBottomRight(asPercent = false): Vector2 {
+    getMinimapBottomRight(asPercent = false): Vector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -119,20 +119,20 @@ export default class Minimap {
         }
 
         return { x: x + Minimap.getMinimapWidth(), y: y + Minimap.getMinimapHeight() };
-    }
+    },
 
-    static getSafeZoneSize(): number {
+    getSafeZoneSize(): number {
         return native.getSafeZoneSize();
-    }
+    },
 
-    static getScreenAspectRatio(): number {
+    getScreenAspectRatio(): number {
         return native.getAspectRatio(false);
-    }
+    },
 
-    static getScreenResolution(): Vector2 {
+    getScreenResolution(): Vector2 {
         const [_, x, y] = native.getActiveScreenResolution(0, 0);
         return { x, y };
-    }
+    },
 
     /**
      * Convert Pixel Values to Percentages
@@ -142,7 +142,7 @@ export default class Minimap {
      * @return {*}  {number}
      * @memberof Minimap
      */
-    static convertToPercentage(value: number, isXAxis = true): number {
+    convertToPercentage(value: number, isXAxis = true): number {
         const screen = Minimap.getScreenResolution();
 
         if (isXAxis) {
@@ -150,5 +150,7 @@ export default class Minimap {
         }
 
         return value / screen.y;
-    }
-}
+    },
+};
+
+export default Minimap;

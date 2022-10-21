@@ -1,0 +1,15 @@
+<!-- For RmlUi documents we have to begin our html with the <rml> tag -->
+<rml>
+    <!-- Everything else is simply html based on XHTML1 standard -->
+    <head>
+        <title>Demo</title>
+        <style>
+            .image {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- This is the container we will use later in our client script -->
+    </body>
+</rml>

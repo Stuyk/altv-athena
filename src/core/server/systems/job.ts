@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
-
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
 import { JobAttachable } from '../../shared/interfaces/iAttachable';
 import JobEnums, { Objective } from '../../shared/interfaces/job';
 import { Vector3 } from '../../shared/interfaces/vector';
@@ -12,8 +10,38 @@ import { Athena } from '../api/athena';
 import { sha256Random } from '../utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
+const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
+const typeAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];
+
 alt.onClient(JobEnums.ObjectiveEvents.JOB_VERIFY, handleVerify);
 alt.onClient(SYSTEM_EVENTS.INTERACTION_JOB_ACTION, handleJobAction);
+
+/**
+ * Adds a custom check type to the global job system.
+ * Criteria -> Defined as things like can't have weapons, or can't be on-foot, etc.
+ * Type -> Defined as things like a capture point, or jump 5 times here... etc.
+ *
+ * CANNOT BE ASYNC
+ *
+ * @export
+ * @param {('type' | 'criteria')} type
+ * @param {(objective: Objective) => boolean} callback
+ * @return {void}
+ */
+export function addJobCheck(
+    type: 'type' | 'criteria',
+    callback: (player: alt.Player, objective: Objective) => boolean,
+) {
+    if (type === 'type') {
+        typeAddons.push(callback);
+        return;
+    }
+
+    if (type === 'criteria') {
+        criteriaAddons.push(callback);
+        return;
+    }
+}
 
 export function cloneObjective(objectiveData: Objective): Objective {
     const callbackOnStart = objectiveData.callbackOnStart;
@@ -38,6 +66,8 @@ export class Job {
     private objectives: Array<Objective> = [];
     private vehicles: Array<alt.Vehicle> = [];
     private startTime: number;
+    private completedCallback: (job: Job) => Promise<void>;
+    private quitCallback: (job: Job, reason: string) => void;
 
     /**
      * Creates an instance of a job handler.
@@ -45,7 +75,7 @@ export class Job {
      * This instance should be called each time to create new job instances.
      * @memberof Job
      */
-    constructor() { }
+    constructor() {}
 
     /**
      * Add the player to the job this job and start it.
@@ -58,7 +88,7 @@ export class Job {
         this.id = this.player.id;
 
         if (JobInstances[this.player.id]) {
-            JobInstances[this.player.id].quit(`Switched Job`);
+            JobInstances[this.player.id].quit('Switched job');
         }
 
         JobInstances[this.player.id] = this;
@@ -92,7 +122,7 @@ export class Job {
      */
     addVehicle(
         player: alt.Player,
-        model: string,
+        model: string | number,
         pos: Vector3,
         rot: Vector3,
         color1?: alt.RGBA,
@@ -123,7 +153,7 @@ export class Job {
         for (let i = 0; i < this.vehicles.length; i++) {
             try {
                 this.vehicles[i].destroy();
-            } catch (err) { }
+            } catch (err) {}
         }
     }
 
@@ -173,6 +203,10 @@ export class Job {
     async checkObjective(): Promise<boolean> {
         const objective = this.getCurrentObjective();
 
+        if (!objective) {
+            return false;
+        }
+
         // Skip all default checks if this is set to true.
         if (!objective.onlyCallbackCheck) {
             const passedCritera = this.verifyCriteria(objective);
@@ -212,7 +246,7 @@ export class Job {
             Athena.player.emit.particle(this.player, objective.particle, true);
         }
 
-        this.goToNextObjective();
+        await this.goToNextObjective();
         return true;
     }
 
@@ -234,6 +268,12 @@ export class Job {
 
         this.removeAllVehicles();
         this.removeAttachable();
+
+        if (typeof this.quitCallback !== 'function') {
+            return;
+        }
+
+        this.quitCallback(this, reason);
     }
 
     /**
@@ -245,6 +285,13 @@ export class Job {
      * @memberof JobBuilder
      */
     private verifyType(objective: Objective): boolean {
+        for (let typeAddon of typeAddons) {
+            const didPass = typeAddon(this.player, objective);
+            if (!didPass) {
+                return false;
+            }
+        }
+
         if (isFlagEnabled(objective.type, JobEnums.ObjectiveType.WAYPOINT)) {
             if (distance(this.player.pos, objective.pos) <= objective.range) {
                 return true;
@@ -386,6 +433,22 @@ export class Job {
             }
         }
 
+        // Check if is engine on in vehicle
+        if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.VEHICLE_ENGINE_OFF)) {
+            if (!this.player || !this.player.vehicle || this.player.vehicle.engineOn) {
+                return false;
+            }
+        }
+
+        for (let criteriaCallback of criteriaAddons) {
+            const didPass = criteriaCallback(this.player, objective);
+
+            if (objective.criteria)
+                if (!didPass) {
+                    return false;
+                }
+        }
+
         return true;
     }
 
@@ -394,15 +457,28 @@ export class Job {
      * @private
      * @memberof JobBuilder
      */
-    goToNextObjective() {
+    async goToNextObjective() {
         const returnedObjective = this.objectives.shift();
         if (returnedObjective && returnedObjective.callbackOnFinish) {
             returnedObjective.callbackOnFinish(this.player);
         }
 
         if (this.objectives.length <= 0) {
+            /**
+             * We may want to do something async when the mission is completed.
+             * Before it is cleaned up.
+             */
+            if (typeof this.completedCallback === 'function') {
+                await this.completedCallback(this).catch((error) => alt.logError(error));
+            }
+
             this.removeAllVehicles();
             Athena.player.emit.message(this.player, `Job Completed`);
+
+            if (JobInstances[this.player.id]) {
+                delete JobInstances[this.player.id];
+            }
+
             alt.emitClient(this.player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
             return;
         }
@@ -428,7 +504,8 @@ export class Job {
      */
     private tryAnimation() {
         const objective = this.getCurrentObjective();
-        if (!objective.animation) {
+
+        if (!objective || !objective.animation) {
             return;
         }
 
@@ -476,7 +553,7 @@ export class Job {
 
         Athena.player.emit.objectAttach(this.player, objectToAttach, objective.attachable.duration);
     }
-    
+
     /**
      * Remove the current job attachable.
      * @return {*}
@@ -487,7 +564,7 @@ export class Job {
         if (!objective.attachable) {
             return;
         }
-        
+
         Athena.player.emit.objectRemove(this.player, objective.attachable.uid);
     }
 
@@ -548,6 +625,26 @@ export class Job {
         this.objectives.splice(0, 0, objectiveClone);
         this.syncObjective();
     }
+
+    /**
+     * Set the async callback that is called when a user completed a job.
+     *
+     * @param {(job: Job) => Promise<void>} callback
+     * @memberof Job
+     */
+    setCompletedCallback(callback: () => Promise<void>) {
+        this.completedCallback = callback;
+    }
+
+    /**
+     * Set the callback that is called when a user quits a job.
+     *
+     * @param {(job: Job, reason: string) => void} callback
+     * @memberof Job
+     */
+    setQuitCallback(callback: (job: Job, reason: string) => void) {
+        this.quitCallback = callback;
+    }
 }
 
 function handleVerify(player: alt.Player) {
@@ -581,9 +678,9 @@ export function getPlayerJob(player: alt.Player): Job | null {
 alt.on('playerDisconnect', (player: alt.Player) => {
     const id = player.id;
 
-    if (!JobInstances[player.id]) {
+    if (!JobInstances[id]) {
         return;
     }
 
-    JobInstances[player.id].quit('Disconnected');
+    JobInstances[id].quit('Disconnected');
 });
