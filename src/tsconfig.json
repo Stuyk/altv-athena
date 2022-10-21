@@ -11,7 +11,8 @@
         "forceConsistentCasingInFileNames": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "strict": false
+        "strict": false,
+        "skipLibCheck": true
     },
     "exclude": ["./core/plugins/**/webview/**/*.ts", "./core/plugins/**/webview/**/*.vue"]
 }
