@@ -50,7 +50,7 @@ export function getClosestTypes<T>(
     mustHaveProperties: Array<string> = [],
     positionName: string = 'pos',
 ): Array<T> {
-    const newElements = [];
+    const newElements: Array<T> = [];
 
     for (let i = 0; i < elements.length; i++) {
         if (!elements[i] || !elements[i].valid) {
@@ -75,10 +75,10 @@ export function getClosestTypes<T>(
             continue;
         }
 
-        newElements.push(elements[i]);
+        newElements.push(elements[i] as T);
     }
 
-    return newElements as Array<T>;
+    return newElements;
 }
 
 export function lerp(a: number, b: number, t: number) {
