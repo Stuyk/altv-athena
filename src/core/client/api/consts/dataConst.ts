@@ -1,6 +1,6 @@
-import atms from '../../../shared/information/atms';
-import { VehicleData } from '../../../shared/information/vehicles';
-import vendingMachines from '../../../shared/information/vendingMachines';
+import atms from '@AthenaShared/information/atms';
+import { VehicleData } from '@AthenaShared/information/vehicles';
+import vendingMachines from '@AthenaShared/information/vendingMachines';
 
 export const constData = {
     atms,

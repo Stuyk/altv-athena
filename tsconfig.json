@@ -1,5 +1,17 @@
 {
     "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@AthenaServer/*": ["core/server/*"],
+            "@AthenaClient/*": ["core/client/*"],
+            "@AthenaShared/*": ["core/shared/*"],
+            "@AthenaPlugins/*": ["core/plugins/*"],
+            "@plugins/*": ["core/plugins/*"],
+            "@utility/*": ["../src-webviews/src/utility/*"],
+            "@components/*": ["../src-webviews/src/components/*"],
+            "@ViewComponents/*": ["../src-webviews/src/components/*"],
+            "@ViewUtility/*": ["../src-webviews/src/utility/*"]
+        },
         "typeRoots": ["./node_modules/@types", "./node_modules/@altv"],
         "removeComments": true,
         "noUnusedLocals": false,
@@ -10,9 +22,16 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
-        "jsx": "preserve",
+        "allowSyntheticDefaultImports": true,
+        "composite": false,
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "module": "ES2022",
+        "target": "ES2022",
+        "outDir": "athena-cache",
         "skipLibCheck": true
     },
+    "include": ["src/**/*.ts", "src-webviews/**/*.ts"],
     "exclude": [
         "resources",
         "scripts",

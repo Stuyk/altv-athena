@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
+import { Athena } from '@AthenaServer/api/athena';
 import items from './items';
 
 export class UpdateItems {

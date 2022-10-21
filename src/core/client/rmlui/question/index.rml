@@ -1,0 +1,71 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+            }
+
+            .input-wrapper {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+                min-width: 300px;
+                max-width: 300px;
+                top: 70vh;
+                margin: 0 auto;
+            }
+
+            .placeholder {
+                width: 100%;
+                font-size: 12px;
+                padding-bottom: 6px;
+                padding-left: 3px;
+                opacity: 0.8;
+            }
+
+            .spacer {
+                flex-grow: 1;
+                width: 100%;
+            }
+
+            .button {
+                background: #000000c2;
+                color: white;
+                text-align: center;
+                padding: 12px;
+                border: 2px #0000006b;
+                box-sizing: border-box;
+            }
+
+            .button:hover {
+                cursor: pointer;
+            }
+
+            .accept {
+                margin-bottom: 6px;
+            }
+
+            .accept:hover {
+                background: #263621c2;
+            }
+
+            .decline:hover {
+                background: #362121c2;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <div class="input-wrapper">
+            <div id="placeholder" class="placeholder"></div>
+            <div class="button accept" id="accept">Accept</div>
+            <div class="button decline" id="decline">Decline</div>
+        </div>
+    </body>
+</rml>

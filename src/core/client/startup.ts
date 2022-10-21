@@ -1,6 +1,9 @@
 // Client Plugins
 import '../plugins/athena/client/imports';
 
+// Commands
+import './commands/rmlui';
+
 // Events
 import './events/connectionComplete';
 import './events/disconnect';
@@ -17,9 +20,17 @@ import './menus/player';
 import './menus/vehicle';
 
 // rmlui
+import './rmlui/fonts/index'; // Always load first...
+import './rmlui/input/index';
+import './rmlui/menu/index';
+import './rmlui/menu3d/index';
+import './rmlui/progressbar/index';
+import './rmlui/question/index';
 import './rmlui/sprites/index';
+import './rmlui/staticText/index';
 
 // Streamers
+import './streamers/doors';
 import './streamers/item';
 import './streamers/marker';
 import './streamers/object';

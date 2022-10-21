@@ -11,23 +11,21 @@ const KEY = 'item-drops';
  * Should not be exported. Do not export.
  * @class InternalController
  */
-class InternalController {
-    static init() {
+const InternalController = {
+    init() {
         StreamerService.registerCallback(KEY, InternalController.update);
-    }
-
-    static refresh() {
+    },
+    refresh() {
         StreamerService.updateData(KEY, globalItemDrops);
-    }
-
-    static update(player: alt.Player, drops: Array<GroundItem>) {
+    },
+    update(player: alt.Player, drops: Array<GroundItem>) {
         const dropsInPlayersDimension = drops.filter((item) => item.item.dimension === player.dimension);
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, dropsInPlayersDimension);
-    }
-}
+    },
+};
 
-export class ServerItemController {
-    static append(itemInfo: GroundItem): string {
+const ServerItemControllerConst = {
+    append(itemInfo: GroundItem): string {
         if (!itemInfo.uid) {
             itemInfo.uid = sha256Random(JSON.stringify(itemInfo));
         }
@@ -35,9 +33,9 @@ export class ServerItemController {
         globalItemDrops.push(itemInfo);
         InternalController.refresh();
         return itemInfo.uid;
-    }
+    },
 
-    static remove(uid: string): boolean {
+    remove(uid: string): boolean {
         let wasFound = false;
         for (let i = globalItemDrops.length - 1; i >= 0; i--) {
             if (globalItemDrops[i].uid !== uid) {
@@ -54,7 +52,11 @@ export class ServerItemController {
 
         InternalController.refresh();
         return true;
-    }
-}
+    },
+};
+
+export const ServerItemController = {
+    ...ServerItemControllerConst,
+};
 
 InternalController.init();

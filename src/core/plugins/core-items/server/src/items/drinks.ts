@@ -1,6 +1,6 @@
-import { ITEM_TYPE } from '../../../../../shared/enums/itemTypes';
-import { Item } from '../../../../../shared/interfaces/item';
-import EFFECTS from '../../../../../shared/enums/effects';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { Item } from '@AthenaShared/interfaces/item';
+import EFFECTS from '@AthenaShared/enums/effects';
 
 export const drinks: Array<Item> = [
     {

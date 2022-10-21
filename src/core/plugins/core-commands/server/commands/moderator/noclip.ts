@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
+import { Athena } from '@AthenaServer/api/athena';
 
-import { command } from '../../../../../server/decorators/commands';
-import { SYSTEM_EVENTS } from '../../../../../shared/enums/system';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
+import { command } from '@AthenaServer/decorators/commands';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 
 class NoClipCommand {
     @command('noclip', LocaleController.get(LOCALE_KEYS.COMMAND_NO_CLIP, '/noclip'), PERMISSIONS.ADMIN)

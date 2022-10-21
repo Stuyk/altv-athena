@@ -15,8 +15,6 @@ import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
-import { playerConst } from '../../api/consts/constPlayer';
-import { IVector3 } from 'alt-shared';
 import { StateManager } from '../../systems/stateManager';
 import { Athena } from '../../api/athena';
 import { JwtProvider } from '../../systems/jwt';
@@ -25,7 +23,7 @@ const Setter = {
     /**
      * Set the current account data for this player.
      * @param {Partial<Account>} accountData
-     * @return {*}  {Promise<void>}
+     * @return {Promise<void>}
      * @memberof SetPrototype
      */
     async account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
@@ -43,6 +41,7 @@ const Setter = {
         emit.meta(player, 'permissionLevel', accountData.permissionLevel);
         player.accountData = accountData;
         player.accountData._id = player.accountData._id.toString();
+        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.FINISHED_LOGIN, player);
     },
 
     actionMenu(player: alt.Player, actionMenu: ActionMenu) {
@@ -76,7 +75,7 @@ const Setter = {
         player.visible = false;
 
         // Some general initialization setup.
-        player.data = {};
+        player.data = {} as any;
         safe.setPosition(player, pos.x, pos.y, pos.z);
         sync.time(player);
         sync.weather(player);

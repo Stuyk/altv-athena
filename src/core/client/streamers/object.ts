@@ -28,8 +28,23 @@ const ClientObjectController = {
         alt.onServer(SYSTEM_EVENTS.APPEND_OBJECT, ClientObjectController.append);
         alt.onServer(SYSTEM_EVENTS.POPULATE_OBJECTS, ClientObjectController.populate);
         alt.onServer(SYSTEM_EVENTS.REMOVE_OBJECT, ClientObjectController.removeLocalObject);
+        alt.onServer(SYSTEM_EVENTS.UPDATE_OBJECT, ClientObjectController.update);
         localObjects = [];
         globalObjects = [];
+    },
+
+    /**
+     * Updates an object's position if it exists.
+     *
+     * @param {IObject} objectData
+     */
+    update(objectData: IObject) {
+        const index = localObjects.findIndex((obj) => obj.uid === objectData.uid);
+        if (index <= -1) {
+            return;
+        }
+
+        localObjects[index] = { ...localObjects[index], ...objectData };
     },
 
     /**
@@ -146,6 +161,25 @@ const ClientObjectController = {
     doesObjectExist(uid: string): boolean {
         return createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id)) >= 0;
     },
+    /**
+     * Update object position if it needs to be updated.
+     *
+     * @param {string} uid
+     * @return {*}
+     */
+    updateObjectPosition(uid: string, pos: alt.IVector3) {
+        const createdIndex = createdObjects.findIndex((obj) => obj.uid === uid && native.doesEntityExist(obj.id));
+        if (createdIndex <= -1) {
+            return;
+        }
+
+        if (!native.doesEntityExist(createdObjects[createdIndex].id)) {
+            return;
+        }
+
+        createdObjects[createdIndex].pos = pos;
+        native.setEntityCoordsNoOffset(createdObjects[createdIndex].id, pos.x, pos.y, pos.z, false, false, false);
+    },
 
     /**
      * Create an object if it does not exist.
@@ -239,6 +273,7 @@ const ClientObjectController = {
             }
 
             if (ClientObjectController.doesObjectExist(data.uid)) {
+                ClientObjectController.updateObjectPosition(data.uid, data.pos);
                 continue;
             }
 

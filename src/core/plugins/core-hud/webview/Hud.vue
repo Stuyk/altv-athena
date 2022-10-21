@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import WebViewEvents from '../../../../../src-webviews/src/utility/webViewEvents';
+import WebViewEvents from '@ViewUtility/webViewEvents';
 
 // Very Important! The name of the component must match the file name.
 // Don't forget to do this. This is a note so you don't forget.
@@ -43,7 +43,7 @@ export default defineComponent({
     name: ComponentName,
     // Used to add Custom Components
     components: {
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
         Armour: defineAsyncComponent(() => import('./components/Armour.vue')),
         Cash: defineAsyncComponent(() => import('./components/Cash.vue')),
         Food: defineAsyncComponent(() => import('./components/Food.vue')),

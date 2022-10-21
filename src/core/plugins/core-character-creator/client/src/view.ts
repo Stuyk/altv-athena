@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { WebViewController } from '../../../../client/extensions/view2';
-import { CharacterSystem } from '../../../../client/systems/character';
-import PedEditCamera from '../../../../client/utility/camera';
-import { PedCharacter } from '../../../../client/utility/characterPed';
-import { disableAllControls } from '../../../../client/utility/disableControls';
-import { sleep } from '../../../../client/utility/sleep';
-import { Appearance } from '../../../../shared/interfaces/appearance';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import { CharacterSystem } from '@AthenaClient/systems/character';
+import PedEditCamera from '@AthenaClient/utility/camera';
+import { PedCharacter } from '@AthenaClient/utility/characterPed';
+import { disableAllControls } from '@AthenaClient/utility/disableControls';
+import { sleep } from '@AthenaClient/utility/sleep';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CHARACTER_CREATOR_EVENTS, CHARACTER_CREATOR_WEBVIEW_EVENTS } from '../../shared/events';
 
 const PAGE_NAME = 'CharacterCreator';

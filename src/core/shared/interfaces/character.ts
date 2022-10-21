@@ -1,4 +1,4 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
@@ -42,10 +42,10 @@ export interface Character {
     /**
      * The position that this character last logged out at.
      * This also updates every 5s or so.
-     * @type {Partial<Vector3>}
+     * @type {Partial<alt.IVector3>}
      * @memberof Character
      */
-    pos: Partial<Vector3>;
+    pos: Partial<alt.IVector3>;
 
     /**
      * The name of this character to display to other users.
@@ -171,7 +171,7 @@ export interface Character {
 }
 
 export const CharacterDefaults: Partial<Character> = {
-    pos: DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS as Vector3,
+    pos: DEFAULT_CONFIG.PLAYER_NEW_SPAWN_POS as alt.IVector3,
     cash: DEFAULT_CONFIG.PLAYER_CASH,
     bank: DEFAULT_CONFIG.PLAYER_BANK,
     appearance: {},

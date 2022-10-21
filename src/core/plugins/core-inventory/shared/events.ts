@@ -8,6 +8,7 @@ export const INVENTORY_EVENTS = {
         UNEQUIP: 'inventory:event:server:unequip',
         OPEN: 'inventory:event:server:open',
         CLOSE: 'inventory:event:client:close',
+        COMBINE: 'inventory:event:server:combine',
     },
     TO_CLIENT: {
         OPEN: 'inventory:event:client:open',

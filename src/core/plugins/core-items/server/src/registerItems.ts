@@ -1,6 +1,6 @@
-import { ItemFactory } from '../../../../server/systems/item';
-import { ITEM_TYPE } from '../../../../shared/enums/itemTypes';
-import { getWeaponList } from '../../../../shared/information/weaponList';
+import { ItemFactory } from '@AthenaServer/systems/item';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { getWeaponList } from '@AthenaShared/information/weaponList';
 import items from './items';
 
 export class RegisterItems {

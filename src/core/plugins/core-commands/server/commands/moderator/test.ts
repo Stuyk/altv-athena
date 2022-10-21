@@ -1,19 +1,19 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { PedController } from '../../../../../server/streamers/ped';
-import { WorldNotificationController } from '../../../../../server/streamers/worldNotifications';
-import { ServerJobTrigger } from '../../../../../server/systems/jobTrigger';
-import { SYSTEM_EVENTS } from '../../../../../shared/enums/system';
-import { WORLD_NOTIFICATION_TYPE } from '../../../../../shared/enums/worldNotificationTypes';
-import { ANIMATION_FLAGS } from '../../../../../shared/flags/animationFlags';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { Action } from '../../../../../shared/interfaces/actions';
-import { Animation } from '../../../../../shared/interfaces/animation';
-import IAttachable from '../../../../../shared/interfaces/iAttachable';
-import { InputMenu, InputOptionType, InputResult } from '../../../../../shared/interfaces/inputMenus';
-import { IPed } from '../../../../../shared/interfaces/iPed';
-import { JobTrigger } from '../../../../../shared/interfaces/jobTrigger';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { PedController } from '@AthenaServer/streamers/ped';
+import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
+import { ServerJobTrigger } from '@AthenaServer/systems/jobTrigger';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { Action } from '@AthenaShared/interfaces/actions';
+import { Animation } from '@AthenaShared/interfaces/animation';
+import IAttachable from '@AthenaShared/interfaces/iAttachable';
+import { InputMenu, InputOptionType, InputResult } from '@AthenaShared/interfaces/inputMenus';
+import { IPed } from '@AthenaShared/interfaces/iPed';
+import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
 
 class TestCommands {
     @command('testerrorscreen', '/testerrorscreen - Shows a temporary error screen', PERMISSIONS.ADMIN)

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { CharacterSystem } from '../../../../server/systems/character';
-import { Appearance } from '../../../../shared/interfaces/appearance';
-import { CharacterInfo } from '../../../../shared/interfaces/characterInfo';
+import { Athena } from '@AthenaServer/api/athena';
+import { CharacterSystem } from '@AthenaServer/systems/character';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { CHARACTER_CREATOR_CONFIG } from '../../shared/config';
 import { CHARACTER_CREATOR_EVENTS } from '../../shared/events';
 

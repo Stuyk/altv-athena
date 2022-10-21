@@ -7,4 +7,5 @@ export enum Collections {
     Storage = 'storage',
     Factions = 'factions',
     Items = 'items',
+    Doors = 'doorstates',
 }

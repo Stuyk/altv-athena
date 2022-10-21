@@ -6,7 +6,10 @@
         <template v-slot:content>
             <template v-if="!isAuthorizing">
                 <div class="stack center">
-                    <img class="discord center mb-4 mt-4" :src="ResolvePath(`../../assets/images/discord.svg`)" />
+                    <img
+                        class="discord center mb-4 mt-4"
+                        :src="ResolvePath(`@plugins/images/core-discord-login/discord.svg`)"
+                    />
                     <span class="grey--text text--darken-1 boldest">{{ locales.LABEL_LOGIN_WITH_DISCORD }}</span>
                 </div>
                 <p class="grey--text text--darken-1 center">
@@ -18,7 +21,10 @@
             </template>
             <template v-else>
                 <div class="stack center">
-                    <img class="discord center mb-4 mt-4" :src="ResolvePath(`../../assets/images/discord.svg`)" />
+                    <img
+                        class="discord center mb-4 mt-4"
+                        :src="ResolvePath(`@plugins/images/core-discord-login/discord.svg`)"
+                    />
                 </div>
                 <p class="grey--text text--darken-1 center">
                     {{ locales.LABEL_TAB_OUT }}
@@ -38,32 +44,25 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { DISCORD_LOGIN_EVENTS } from '../shared/events';
-import ResolvePath from '../../../../../src-webviews/src/utility/pathResolver';
-import WebViewEvents from '../../../../../src-webviews/src/utility/webViewEvents';
+import { LOGIN_WEBVIEW_LOCALES } from '../shared/locales';
+import ResolvePath from '@ViewUtility/pathResolver';
+import WebViewEvents from '@ViewUtility/webViewEvents';
 
 const ComponentName = 'Login';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
-        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Toolbar: defineAsyncComponent(() => import('@ViewComponents/Toolbar.vue')),
+        Frame: defineAsyncComponent(() => import('@ViewComponents/Frame.vue')),
+        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
     },
     data() {
         return {
             uri: 'https://stuyk.com/',
             isAuthorizing: false,
             isFinishAuthReady: false,
-            locales: {
-                LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
-                LABEL_LOGIN_WITH_DISCORD: `Login with Discord`,
-                LABEL_TRY_AGAIN: `Try again...`,
-                LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
-                window again.`,
-                LABEL_FINISH_LOGIN: `Finish Login`,
-                LABEL_OPEN_WINDOW: `Open Login Window Again`,
-            },
+            locales: LOGIN_WEBVIEW_LOCALES,
         };
     },
     methods: {

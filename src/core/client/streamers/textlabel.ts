@@ -5,8 +5,7 @@ import { distance2d } from '../../shared/utility/vector';
 import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 
-let localLabels: Array<TextLabel> = [];
-let addedLabels: Array<TextLabel> = [];
+let labels: Array<TextLabel> = [];
 let interval: number;
 let isRemoving = false;
 
@@ -15,8 +14,7 @@ let isRemoving = false;
  */
 const ClientTextLabelController = {
     init() {
-        localLabels = [];
-        addedLabels = [];
+        labels = [];
     },
 
     stop() {
@@ -25,6 +23,26 @@ const ClientTextLabelController = {
         }
 
         Timer.clearInterval(interval);
+    },
+
+    /**
+     * Updates the text label for a client.
+     *
+     * @param {Partial<TextLabel>} label
+     */
+    update(label: Partial<TextLabel>) {
+        const index = labels.findIndex((x) => x.uid === label.uid);
+        if (index === -1) {
+            return;
+        }
+
+        for (let i = labels.length - 1; i >= 0; i--) {
+            if (labels[i].uid !== label.uid) {
+                continue;
+            }
+
+            labels[i] = { ...labels[i], ...label };
+        }
     },
 
     /**
@@ -39,15 +57,12 @@ const ClientTextLabelController = {
             return;
         }
 
-        const index = localLabels.findIndex((label) => label.uid === label.uid);
-        if (index <= -1) {
-            localLabels.push(label);
+        const index = labels.findIndex((x) => x.uid === label.uid);
+        if (index === -1) {
+            labels.push(label);
         } else {
-            alt.logWarning(`${label.uid} was not a unique identifier. Replaced Label in ClientTextLabelController.`);
-            localLabels[index] = label;
+            labels[index] = label;
         }
-
-        localLabels.push(label);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
@@ -56,12 +71,14 @@ const ClientTextLabelController = {
 
     /**
      * Used to populate server-side markers.
+     * The function looks at current markers and removes them if they are server-wide.
+     *
      * @static
      * @param {Array<Marker>} labels
      * @memberof MarkerController
      */
-    populate(labels: Array<TextLabel>) {
-        addedLabels = labels;
+    populate(serverLabels: Array<TextLabel>) {
+        labels = labels.filter((x) => !x.isServerWide).concat(serverLabels);
 
         if (!interval) {
             interval = Timer.createInterval(handleDrawTextlabels, 0, 'textlabel.ts');
@@ -78,19 +95,14 @@ const ClientTextLabelController = {
     remove(uid: string) {
         isRemoving = true;
 
-        const index = localLabels.findIndex((marker) => marker.uid === uid);
-        if (index <= -1) {
-            isRemoving = false;
-            return;
+        for (let i = labels.length - 1; i >= 0; i--) {
+            if (labels[i].uid !== uid) {
+                continue;
+            }
+
+            labels.splice(i, 1);
         }
 
-        const label = localLabels[index];
-        if (!label) {
-            isRemoving = false;
-            return;
-        }
-
-        localLabels.splice(index, 1);
         isRemoving = false;
     },
 };
@@ -99,8 +111,6 @@ function handleDrawTextlabels() {
     if (isRemoving) {
         return;
     }
-
-    const labels = addedLabels.concat(localLabels);
 
     if (labels.length <= 0) {
         return;
@@ -137,3 +147,4 @@ alt.on('disconnect', ClientTextLabelController.stop);
 alt.onServer(SYSTEM_EVENTS.APPEND_TEXTLABELS, ClientTextLabelController.append);
 alt.onServer(SYSTEM_EVENTS.POPULATE_TEXTLABELS, ClientTextLabelController.populate);
 alt.onServer(SYSTEM_EVENTS.REMOVE_TEXTLABEL, ClientTextLabelController.remove);
+alt.onServer(SYSTEM_EVENTS.UPDATE_TEXT_LABEL, ClientTextLabelController.update);

@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 import { IVector3 } from 'alt-shared';
-import { Athena } from '../../../../server/api/athena';
-import { PlayerEvents } from '../../../../server/events/playerEvents';
-import { Identifier } from '../../../../server/systems/identifier';
-import { StateManager } from '../../../../server/systems/stateManager';
-import { ATHENA_EVENTS_PLAYER } from '../../../../shared/enums/athenaEvents';
-import { distance2d } from '../../../../shared/utility/vector';
+import { Athena } from '@AthenaServer/api/athena';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
+import { Identifier } from '@AthenaServer/systems/identifier';
+import { StateManager } from '@AthenaServer/systems/stateManager';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { distance2d } from '@AthenaShared/utility/vector';
 import { DEATH_EVENTS } from '../../shared/events';
 import { DEATH_CONFIG } from './config';
 

@@ -1,9 +1,9 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { PlayerEvents } from '../../../../../server/events/playerEvents';
-import { ATHENA_EVENTS_PLAYER } from '../../../../../shared/enums/athenaEvents';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 
 class InteriorCommands {
     @command('setdimension', '/setdimension <ID> <DIMENSION>', PERMISSIONS.ADMIN)

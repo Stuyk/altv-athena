@@ -1,0 +1,33 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body {
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .drawables {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .drawable {
+                position: absolute;
+                color: white;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="drawables" class="drawables"></div>
+    </body>
+</rml>

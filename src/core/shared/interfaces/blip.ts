@@ -1,5 +1,5 @@
+import * as alt from 'alt-shared';
 import { BLIP_COLOR } from '../enums/blipColor';
-import { Vector3 } from './vector';
 
 export interface Blip {
     /**
@@ -7,7 +7,7 @@ export interface Blip {
      * @type {Vector3}
      * @memberof Blip
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * Set this to true if you don't want it on the map all of the time.
@@ -58,7 +58,7 @@ export interface Blip {
      * @type {number}
      * @memberof Blip
      */
-     category?: number;
+    category?: number;
 
     /**
      * An identifier for the blip.

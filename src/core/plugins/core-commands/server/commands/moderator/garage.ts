@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 
 const parkingList = [];
 

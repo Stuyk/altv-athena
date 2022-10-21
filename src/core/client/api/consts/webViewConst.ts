@@ -1,17 +1,20 @@
-import { WebViewController } from '../../extensions/view2';
-import { isAnyMenuOpen } from '../../utility/menus';
+import { Page } from '@AthenaClient/systems/page';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 export const webViewConst = {
-    ready: WebViewController.ready,
+    close: WebViewController.closePages,
     emit: WebViewController.invoke,
+    focus: WebViewController.focus,
+    isAnyMenuOpen: isAnyMenuOpen,
+    isPageOpen: WebViewController.isPageOpen,
+    on: WebViewController.onInvoke,
     open: WebViewController.openPages,
     openAsOverlay: WebViewController.registerOverlay,
     openAsPersistent: WebViewController.registerPersistentPage,
-    close: WebViewController.closePages,
-    on: WebViewController.onInvoke,
-    focus: WebViewController.focus,
-    unfocus: WebViewController.unfocus,
+    page: Page,
+    ready: WebViewController.ready,
     showCursor: WebViewController.showCursor,
-    isAnyMenuOpen: isAnyMenuOpen,
     showOverlays: WebViewController.setOverlaysVisible,
+    unfocus: WebViewController.unfocus,
 };

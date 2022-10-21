@@ -1,5 +1,5 @@
-import { ITEM_TYPE } from '../../../../../shared/enums/itemTypes';
-import { Item } from '../../../../../shared/interfaces/item';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { Item } from '@AthenaShared/interfaces/item';
 
 export const utility: Array<Item> = [
     {

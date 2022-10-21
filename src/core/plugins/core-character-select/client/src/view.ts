@@ -9,11 +9,11 @@ import PedEditCamera from '../../../../client/utility/camera';
 import { PedCharacter } from '../../../../client/utility/characterPed';
 import { disableAllControls } from '../../../../client/utility/disableControls';
 import { sleep } from '../../../../client/utility/sleep';
-import { SWITCHOUT_TYPES } from '../../../../shared/enums/switchOutTypes';
-import { ANIMATION_FLAGS } from '../../../../shared/flags/animationFlags';
-import { Appearance } from '../../../../shared/interfaces/appearance';
-import { Character } from '../../../../shared/interfaces/character';
-import { Item } from '../../../../shared/interfaces/item';
+import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { Character } from '@AthenaShared/interfaces/character';
+import { Item } from '@AthenaShared/interfaces/item';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../../shared/events';
 

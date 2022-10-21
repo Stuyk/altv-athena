@@ -13,7 +13,6 @@ import ISpinner from '../../../shared/interfaces/iSpinner';
 import { Particle } from '../../../shared/interfaces/particle';
 import { ProgressBar } from '../../../shared/interfaces/progressBar';
 import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
-import { Vector3 } from '../../../shared/interfaces/vector';
 import { IWheelOption } from '../../../shared/interfaces/wheelMenu';
 import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
@@ -27,10 +26,7 @@ const Emit = {
      * @return {*}  {void}
      * @memberof EmitPrototype
      */
-    startAlarm(
-        player: alt.Player,
-        name: string,
-    ): void {
+    startAlarm(player: alt.Player, name: string): void {
         if (player.data.isDead) {
             alt.logWarning(`[Athena] Cannot play alarm ${name} while player is dead.`);
             return;
@@ -44,10 +40,7 @@ const Emit = {
      * @param {alt.Player} player
      * @param {string} name
      */
-    stopAlarm(
-        player: alt.Player,
-        name: string,
-    ) {
+    stopAlarm(player: alt.Player, name: string) {
         if (!player || !player.valid) {
             return;
         }
@@ -135,9 +128,7 @@ const Emit = {
      * @memberof EmitPrototype
      */
     meta(player: alt.Player, key: string, value: any): void {
-        alt.nextTick(() => {
-            alt.emitClient(player, SYSTEM_EVENTS.META_SET, key, value);
-        });
+        player.setLocalMeta(key, value);
     },
 
     /**
@@ -182,7 +173,7 @@ const Emit = {
      * @param {string} text
      * @param {number} duration
      */
-     createMissionText(player: alt.Player, text: string, duration?: number) {
+    createMissionText(player: alt.Player, text: string, duration?: number) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text, duration);
     },
 
@@ -215,19 +206,32 @@ const Emit = {
      * @param {alt.Player} p
      * @param {string} audioName
      * @param {number} [volume=0.35]
+     * @param {string} soundInstantID, optional unique id to play sound instant
      */
-    sound2D(p: alt.Player, audioName: string, volume: number = 0.35) {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume);
+    sound2D(p: alt.Player, audioName: string, volume: number = 0.35, soundInstantID?: string) {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume, soundInstantID);
     },
 
     /**
      * Play a sound from at a target's location for this player.
      * @param {string} audioName
      * @param {alt.Entity} target
+     * @param {string} soundInstantID, optional unique id to play sound instant
      * @memberof EmitPrototype
      */
-    sound3D(p: alt.Player, audioName: string, target: alt.Entity): void {
-        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName);
+    sound3D(p: alt.Player, audioName: string, target: alt.Entity, soundInstantID?: string): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName, soundInstantID);
+    },
+
+    /**
+     * Stop all sounds.
+     * @param {string} audioName
+     * @param {alt.Entity} target
+     * @param {string} soundInstantID, optional unique id to play sound instant
+     * @memberof EmitPrototype
+     */
+    soundStop(p: alt.Player, soundInstantID?: string): void {
+        alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, soundInstantID);
     },
 
     /**
@@ -429,11 +433,11 @@ const Emit = {
      *
      * @param {alt.Player} player
      * @param {string} model
-     * @param {Vector3} start
-     * @param {Vector3} end
+     * @param {alt.IVector3} start
+     * @param {alt.IVector3} end
      * @param {number} speed
      */
-    tempObjectLerp(player: alt.Player, model: string, start: Vector3, end: Vector3, speed: number) {
+    tempObjectLerp(player: alt.Player, model: string, start: alt.IVector3, end: alt.IVector3, speed: number) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
     },
 

@@ -6,13 +6,17 @@ export default function resolvePath(currentPath: string, pluginName = ''): strin
     }
 
     // Handles @plugins pathing
-    if (currentPath.includes('@plugins')) {
+    if (currentPath.includes('@plugins') || currentPath.includes('@AthenaPlugins')) {
         for (const pluginFolder of pluginFolders) {
             if (!currentPath.includes(pluginFolder)) {
                 continue;
             }
 
-            currentPath = currentPath.replace(/.*\@plugins\//gm, `./plugins/`);
+            if (currentPath.includes('@AthenaPlugins')) {
+                currentPath = currentPath.replace(/.*\@AthenaPlugins\//gm, `./plugins/`);
+            } else {
+                currentPath = currentPath.replace(/.*\@plugins\//gm, `./plugins/`);
+            }
         }
     }
 

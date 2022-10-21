@@ -12,13 +12,12 @@ import SystemRules from '../systems/rules';
 import { Athena } from '../api/athena';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { distance } from '../../shared/utility/vector';
 
 const DEFAULT_MAX_STORAGE_DIST = 4;
 
 interface IExtStorage extends IStorage {
-    pos: Vector3;
+    pos: alt.IVector3;
     entity?: alt.Entity;
 }
 
@@ -156,8 +155,6 @@ export class StorageView {
                 StorageView.forceCloseStorage(storage._id.toString());
                 continue;
             }
-
-            
 
             if (typeof storage.entity !== 'undefined' && typeof storage.entity.pos !== 'undefined') {
                 const dist = distance(target.pos, storage.entity.pos);
