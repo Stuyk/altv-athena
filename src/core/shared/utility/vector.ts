@@ -43,9 +43,9 @@ export function getClosestVectorByPos<T>(pos: Vector3, arrayOfPositions: T[], po
  * @param {number} maxDistance
  * @return {*}  {Array<T>}
  */
-export function getClosestTypes<T>(
+export function getClosestTypes<T extends { pos: Vector3; valid: boolean }>(
     pos: Vector3,
-    elements: Array<{ pos: Vector3; valid: boolean }>,
+    elements: Array<T>,
     maxDistance: number,
     mustHaveProperties: Array<string> = [],
     positionName: string = 'pos',
