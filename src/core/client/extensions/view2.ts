@@ -18,7 +18,6 @@ let isUpdating = false;
 let _defaultURL = `http://assets/webviews/index.html`;
 let _isReady: boolean = false;
 let _webview: alt.WebView;
-let _currentEvents: { eventName: string; callback: any }[] = [];
 let _cursorCount: number = 0;
 let _isDisconnecting = false;
 
@@ -376,45 +375,6 @@ export const WebViewController = {
     dispose() {
         _isDisconnecting = true;
         _webview && _webview.valid && _webview.destroy();
-    },
-
-    /**
-     * Binds a WebView event once and ensures it is never bound again.
-     * @static
-     * @param {string} eventName
-     * @param {(...args: any[]) => void} listener
-     * @return {*}
-     * @memberof WebViewController
-     */
-    async on(eventName: string, listener: (...args: any[]) => void) {
-        const view = await WebViewController.get();
-        const index: number = _currentEvents.findIndex((e) => e.eventName === eventName);
-        if (index >= 0) {
-            return;
-        }
-
-        view.on(eventName, listener);
-        _currentEvents.push({ eventName, callback: listener });
-    },
-
-    /**
-     * Unbinds events from the WebView. Mostly useless.
-     * @static
-     * @param {string} eventName
-     * @param {(...args: any[]) => void} listener
-     * @return {*}
-     * @memberof WebViewController
-     */
-    async off(eventName: string, listener: (...args: any[]) => void) {
-        const view = await WebViewController.get();
-        view.off(eventName, listener);
-
-        const index = _currentEvents.findIndex((x) => x.eventName === eventName);
-        if (index <= -1) {
-            return;
-        }
-
-        _currentEvents.splice(index, 1);
     },
 
     /**
