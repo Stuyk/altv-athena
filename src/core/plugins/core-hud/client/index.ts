@@ -16,6 +16,7 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { KeyHeld } from '@AthenaClient/events/keyHeld';
 import { VehicleData } from '../../../shared/information/vehicles';
 import { isVehicleType, VEHICLE_TYPE } from '../../../shared/enums/vehicleTypeFlags';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 
 const SWITCH_KEY = 113; // F2
 const PAGE_NAME = 'Hud';
@@ -236,7 +237,10 @@ class InternalFunctions implements ViewModel {
 
         const data = VehicleData.find((dat) => alt.hash(dat.name) === alt.Player.local.vehicle.model);
 
-        if (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT)) {
+        if (
+            SHARED_CONFIG.ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT &&
+            (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT))
+        ) {
             speedCalc = (currentSpeed * 1.943844).toFixed(0);
         } else {
             speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);
@@ -257,7 +261,10 @@ class InternalFunctions implements ViewModel {
 
         let unit: string;
 
-        if (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT)) {
+        if (
+            SHARED_CONFIG.ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT &&
+            (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT))
+        ) {
             unit = 'kn';
         } else {
             if (native.getProfileSetting(227) === 1) {

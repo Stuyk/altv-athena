@@ -16,4 +16,6 @@ export const SHARED_CONFIG = {
     USE_24H_TIME_FORMAT: false,
     // Idle Cam
     DISABLE_IDLE_CAM: false,
+    // This enables knots as unit for speed for Boats and Aircrafts
+    ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT: false,
 };
