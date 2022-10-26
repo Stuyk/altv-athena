@@ -22,7 +22,7 @@
             <Icon :shadow="false" class="hidden-icon" icon="icon-eye" :size="32" />
         </div>
         <div class="speedo-placement" v-if="isInVehicle && hudState !== hudStateNames.HIDDEN">
-            <Speed :isMetric="isMetric" :speed="speed" :gear="gear" />
+            <Speed :unit="unit" :speed="speed" :gear="gear" />
             <div class="vehicle-bars">
                 <Engine :status="engine" />
                 <Seatbelt :status="seatbelt" />
@@ -82,6 +82,7 @@ export default defineComponent({
             seatbelt: false,
             isMetric: true,
             isInVehicle: false,
+            unit: 'KN',
             interactions: [] as Array<{ keyPress: string; description: string }>,
             updateCount: 0,
             hudState: 'hud',
