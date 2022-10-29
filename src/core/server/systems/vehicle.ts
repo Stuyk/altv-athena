@@ -104,6 +104,8 @@ export class VehicleSystem {
         alt.on('playerEnteredVehicle', VehicleSystem.enter);
         alt.on('playerLeftVehicle', VehicleSystem.leave);
         alt.on('vehicleDestroy', VehicleSystem.destroyed);
+        alt.on('vehicleAttach', VehicleSystem.attach);
+        alt.on('vehicleDetach', VehicleSystem.detach);
 
         if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START) {
             return;
@@ -208,6 +210,27 @@ export class VehicleSystem {
     }
 
     /**
+     * When a vehicle is attached to another vehicle, the attached vehicle is set as a meta.
+     * @param {alt.vehicle} vehicle - The vehicle that gets attached.
+     * @param {alt.Vehicle} attachedVehicle - The vehicle that gets attached to.
+     * @returns The vehicle that the player is pushing.
+     */
+    static attach(vehicle: alt.Vehicle, attachedVehicle: alt.Vehicle) {
+        attachedVehicle.setMeta('attachedVehicle', vehicle);
+    }
+
+    /**
+     * When a vehicle is detached from another vehicle, the detached vehicle is removed as a meta.
+     * @param {alt.Vehicle} vehicle - The vehicle that gets detached.
+     * @param {alt.Vehicle} detachedVehicle - The vehicle that gets detached from.
+     * @returns The vehicle that the player is pushing.
+     */
+    static detach(vehicle: alt.Vehicle, detachedVehicle: alt.Vehicle) {
+        detachedVehicle.deleteMeta('attachedVehicle');
+        VehicleFuncs.update(vehicle);
+    }
+
+    /**
      * When a player enters a vehicle, stop the vehicle from being pushed.
      * @param {alt.Player} player - The player who entered the vehicle.
      * @param {alt.Vehicle} vehicle - The vehicle that the player is entering.
@@ -260,7 +283,7 @@ export class VehicleSystem {
         alt.setTimeout(() => {
             try {
                 vehicle.destroy();
-            } catch (err) { }
+            } catch (err) {}
         }, 500);
     }
 
@@ -700,7 +723,7 @@ export class VehicleSystem {
 
             try {
                 vehicle.destroy();
-            } catch (err) { }
+            } catch (err) {}
         });
     }
 }

@@ -551,6 +551,11 @@ export default class VehicleFuncs {
             return;
         }
 
+        if (vehicle.hasMeta('attachedVehicle')) {
+            const attachedVehicle = vehicle.getMeta('attachedVehicle') as alt.Vehicle;
+            VehicleFuncs.update(attachedVehicle);
+        }
+
         // Prevent Saving
         if (isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NO_SAVE)) {
             return;
