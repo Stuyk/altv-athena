@@ -14,6 +14,9 @@ import { AthenaClient } from '@AthenaClient/api/athena';
 import { KeybindController } from '@AthenaClient/events/keyup';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { KeyHeld } from '@AthenaClient/events/keyHeld';
+import { VehicleData } from '../../../shared/information/vehicles';
+import { isVehicleType, VEHICLE_TYPE } from '../../../shared/enums/vehicleTypeFlags';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 
 const SWITCH_KEY = 113; // F2
 const PAGE_NAME = 'Hud';
@@ -146,6 +149,7 @@ class InternalFunctions implements ViewModel {
         HudView.registerComponent(HUD_COMPONENT.IS_IN_VEHICLE, InternalFunctions.defaultIsInVehicleComponent, 1000);
         HudView.registerComponent(HUD_COMPONENT.SEATBELT, InternalFunctions.defaultSeatbeltComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.SPEED, InternalFunctions.defaultSpeedComponent, 100);
+        HudView.registerComponent(HUD_COMPONENT.SPEED_UNIT, InternalFunctions.defaultSpeedUnitComponente);
         HudView.registerComponent(HUD_COMPONENT.GEAR, InternalFunctions.defaultGearComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.ENGINE, InternalFunctions.defaultEngineComponent, 100);
         HudView.registerComponent(HUD_COMPONENT.LOCK, InternalFunctions.defaultLockComponent, 100);
@@ -228,12 +232,49 @@ class InternalFunctions implements ViewModel {
 
         const isMetric = native.getProfileSetting(227);
         const currentSpeed = native.getEntitySpeed(alt.Player.local.vehicle.scriptID);
-        const speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);
+
+        let speedCalc: string;
+
+        const data = VehicleData.find((dat) => alt.hash(dat.name) === alt.Player.local.vehicle.model);
+
+        if (
+            SHARED_CONFIG.ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT &&
+            (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT))
+        ) {
+            speedCalc = (currentSpeed * 1.943844).toFixed(0);
+        } else {
+            speedCalc = (currentSpeed * (isMetric ? 3.6 : 2.236936)).toFixed(0);
+        }
+
         InternalFunctions.passComponentInfo(propName, parseInt(speedCalc));
     }
 
     static defaultMetricComponent(propName: string) {
         InternalFunctions.passComponentInfo(propName, native.getProfileSetting(227) === 1);
+    }
+
+    static defaultSpeedUnitComponente(propName: string) {
+        const data = VehicleData.find((dat) => alt.hash(dat.name) === alt.Player.local.vehicle.model);
+        if (!data) {
+            return;
+        }
+
+        let unit: string;
+
+        if (
+            SHARED_CONFIG.ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT &&
+            (isVehicleType(data.type, VEHICLE_TYPE.AIRCRAFT) || isVehicleType(data.type, VEHICLE_TYPE.BOAT))
+        ) {
+            unit = 'kn';
+        } else {
+            if (native.getProfileSetting(227) === 1) {
+                unit = 'KM/H';
+            } else {
+                unit = 'MPH';
+            }
+        }
+
+        InternalFunctions.passComponentInfo(propName, unit);
     }
 
     static defaultIsInVehicleComponent(propName: string) {
