@@ -66,9 +66,16 @@ export interface Marker {
     faceCamera?: boolean;
 
     /**
-     * Should the marker rotate to face the player.
+     * Should the marker rotate.
      * @type {boolean}
      * @memberof Marker
      */
     rotate?: boolean;
+
+    /**
+     * Rotation of the Object in a 3D space.
+     * @type {alt.IVector3}
+     * @memberof Marker
+     */
+    rot?: alt.IVector3;
 }

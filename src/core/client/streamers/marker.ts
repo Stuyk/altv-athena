@@ -131,6 +131,10 @@ function handleDrawMarkers() {
             marker.scale = new alt.Vector3(1, 1, 1);
         }
 
+        if (!marker.rot) {
+            marker.rot = new alt.Vector3(0, 0, 0);
+        }
+
         drawMarker(
             marker.type,
             marker.pos,
@@ -139,6 +143,7 @@ function handleDrawMarkers() {
             marker.bobUpAndDown,
             marker.faceCamera,
             marker.rotate,
+            marker.rot,
         );
     }
 }

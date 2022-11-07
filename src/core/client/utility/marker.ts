@@ -21,6 +21,7 @@ export function drawMarker(
     bobUpAndDown: boolean = false,
     faceCamera: boolean = true,
     rotate: boolean = false,
+    rot: alt.IVector3,
 ) {
     native.drawMarker(
         type,
@@ -30,9 +31,9 @@ export function drawMarker(
         zeroVector.x,
         zeroVector.y,
         zeroVector.z,
-        zeroVector.x,
-        zeroVector.y,
-        zeroVector.z,
+        radToDeg(rot.x),
+        radToDeg(rot.y),
+        radToDeg(rot.z),
         scale.x,
         scale.y,
         scale.z,
@@ -48,4 +49,8 @@ export function drawMarker(
         undefined,
         false,
     );
+}
+
+function radToDeg(rad: number) {
+    return (rad * 180) / Math.PI;
 }
