@@ -36,7 +36,7 @@ export default {
         }
 
         const file = fs.readFileSync(DefaultServerCFGName).toString();
-        if (file.includes(`env: "dev"`)) {
+        if (file.includes(`env: "dev"`) || file.includes('env = "dev"')) {
             config.USE_DEV_MODE = true;
         }
 
