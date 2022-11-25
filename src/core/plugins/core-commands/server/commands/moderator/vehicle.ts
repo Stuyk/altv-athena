@@ -30,7 +30,7 @@ class VehicleCommands {
     private static repairVehicleCommand(player: alt.Player) {
         const vehicle = player.vehicle
             ? player.vehicle
-            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 2);
+            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, [...alt.Vehicle.all], 2);
         if (!vehicle) {
             return;
         }
