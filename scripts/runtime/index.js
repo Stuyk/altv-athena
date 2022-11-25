@@ -12,7 +12,7 @@ const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const serverBinary = process.platform === 'win32' ? 'altv-server.exe' : './altv-server';
 
-const passedArguments = process.argv.slice(2).map(arg => arg.replace('--', ''));
+const passedArguments = process.argv.slice(2).map((arg) => arg.replace('--', ''));
 const fileNameHashes = {};
 
 if (NO_SPECIAL_CHARACTERS.test(process.cwd())) {
@@ -100,7 +100,7 @@ async function handleConfiguration() {
     promises.push(runFile(npx, 'altv-config', `./configs/${configName}.json`));
     await runFile(node, './scripts/buildresource/index.js');
     promises.push(
-        runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.cfg'),
+        runFile(npx, 'altv-config', './scripts/buildresource/resource.json', './resources/core/resource.toml'),
     );
     console.log(`===> Finished Configuration Build (${Date.now() - start}ms)`);
     return await Promise.all(promises);
@@ -305,5 +305,4 @@ if (passedArguments.includes('start')) {
     //     const cmdName = inputs.shift();
     //     console.log(cmdName, ...inputs);
     // });
-
 }

@@ -3,7 +3,7 @@ import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
 import net from 'net';
 
-const DefaultServerCFGName = 'server.cfg';
+const DefaultServerCFGName = 'server.toml';
 const DefaultViteServer = '127.0.0.1';
 const DefaultVitePort = 3000;
 const DefaultConfigName = 'AthenaConfig.json';

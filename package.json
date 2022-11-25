@@ -29,7 +29,7 @@
         "@altv/types-webview": "^1.0.4",
         "@altv/types-worker": "1.0.7",
         "@babel/types": "^7.17.0",
-        "@stuyk/altv-config": "^3.0.0",
+        "@stuyk/altv-config": "^4.0.0",
         "@swc/cli": "0.1.57",
         "@swc/core": "1.2.171",
         "@types/glob": "^7.2.0",
