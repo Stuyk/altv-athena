@@ -4,7 +4,7 @@ import { getClosestPlayer, getClosestVehicle } from '@AthenaClient/utility/close
 import { drawMissionText } from '@AthenaClient/../client/utility/missionText';
 import { loadModel } from '@AthenaClient/utility/model';
 import { UID } from '@AthenaClient/utility/uid';
-import { switchInPlayer } from '@AthenaClient/utility/switch';
+import { switchToMultiSecondpart } from '@AthenaClient/utility/switch';
 import { isEntityBlockingPosition } from '@AthenaClient/utility/isEntityBlocking';
 
 export const utilityConst = {
@@ -16,6 +16,6 @@ export const utilityConst = {
     getClosestVehicle,
     getClosestPlayer,
     isEntityBlockingPosition,
-    switchInPlayer,
+    switchToMultiSecondpart,
     uid: UID,
 };

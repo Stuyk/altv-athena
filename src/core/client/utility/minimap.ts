@@ -130,7 +130,7 @@ const Minimap = {
     },
 
     getScreenResolution(): alt.IVector2 {
-        const [_, x, y] = native.getActiveScreenResolution(0, 0);
+        const [_, x, y] = native.getActualScreenResolution(0, 0);
         return { x, y };
     },
 
