@@ -51,7 +51,7 @@
         "vue-tsc": "^1.0.9"
     },
     "dependencies": {
-        "@stuyk/ezmongodb": "2.1.0",
+        "@stuyk/ezmongodb": "3.0.0",
         "axios": "0.26.1",
         "elliptic": "6.5.4",
         "njwt": "^1.2.0",
@@ -68,6 +68,6 @@
         "trailingComma": "all"
     },
     "engines": {
-        "node": ">=16.0.0"
+        "node": ">=17.0.0"
     }
 }
