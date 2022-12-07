@@ -1,15 +1,15 @@
-import { Vector3 } from '../../shared/interfaces/vector';
+import * as alt from 'alt-client';
 
 export class DirectionVector {
-    private position: Vector3;
-    private rotation: Vector3;
+    private position: alt.IVector3;
+    private rotation: alt.IVector3;
 
     constructor(position, rotation) {
         this.position = position;
         this.rotation = rotation;
     }
 
-    eulerToQuaternion(rotation: Vector3) {
+    eulerToQuaternion(rotation: alt.IVector3) {
         const roll = rotation.x * (Math.PI / 180.0);
         const pitch = rotation.y * (Math.PI / 180.0);
         const yaw = rotation.z * (Math.PI / 180.0);
@@ -30,7 +30,7 @@ export class DirectionVector {
         return { x: qx, y: qy, z: qz, w: qw };
     }
 
-    forwardVector(): Vector3 {
+    forwardVector(): alt.IVector3 {
         const quatRot = this.eulerToQuaternion(this.rotation);
         const fVectorX = 2 * (quatRot.x * quatRot.y - quatRot.w * quatRot.z);
         const fVectorY = 1 - 2 * (quatRot.x * quatRot.x + quatRot.z * quatRot.z);
@@ -39,7 +39,7 @@ export class DirectionVector {
         return { x: fVectorX, y: fVectorY, z: fVectorZ };
     }
 
-    forward(distance: number): Vector3 {
+    forward(distance: number): alt.IVector3 {
         const forwardVector = this.forwardVector();
 
         return {

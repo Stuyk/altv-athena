@@ -1,4 +1,4 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 /**
  * A slightly transparent hologram of a model.
@@ -23,10 +23,10 @@ export interface Hologram {
 
     /**
      * The 3D position in the world for this hologram.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Hologram
      */
-    position: Vector3;
+    position: alt.IVector3;
 
     /**
      * The direction of this hologram. 0 - 360.

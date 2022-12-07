@@ -1,3 +1,0 @@
-export const BANK_CONFIG = {
-    BANK_ACCOUNT_START_NUMBER: 10000000,
-};

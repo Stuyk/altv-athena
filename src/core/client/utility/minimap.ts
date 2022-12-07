@@ -1,5 +1,5 @@
 import * as native from 'natives';
-import { Vector2 } from '../../shared/interfaces/vector';
+import * as alt from 'alt-client';
 
 const Minimap = {
     /**
@@ -46,7 +46,7 @@ const Minimap = {
      * @return {*}
      * @memberof Minimap
      */
-    getMinimapTopLeft(asPercent = false): Vector2 {
+    getMinimapTopLeft(asPercent = false): alt.IVector2 {
         const resolution = Minimap.getScreenResolution();
         const safeZone = Minimap.getSafeZoneSize();
         const height = Minimap.getMinimapHeight();
@@ -68,7 +68,7 @@ const Minimap = {
      * @return {*}
      * @memberof Minimap
      */
-    getMinimapTopRight(asPercent = false): Vector2 {
+    getMinimapTopRight(asPercent = false): alt.IVector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -88,7 +88,7 @@ const Minimap = {
      * @return {*}
      * @memberof Minimap
      */
-    getMinimapBottomLeft(asPercent = false): Vector2 {
+    getMinimapBottomLeft(asPercent = false): alt.IVector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -108,7 +108,7 @@ const Minimap = {
      * @return {*}
      * @memberof Minimap
      */
-    getMinimapBottomRight(asPercent = false): Vector2 {
+    getMinimapBottomRight(asPercent = false): alt.IVector2 {
         const { x, y } = Minimap.getMinimapTopLeft();
 
         if (asPercent) {
@@ -129,8 +129,8 @@ const Minimap = {
         return native.getAspectRatio(false);
     },
 
-    getScreenResolution(): Vector2 {
-        const [_, x, y] = native.getActiveScreenResolution(0, 0);
+    getScreenResolution(): alt.IVector2 {
+        const [_, x, y] = native.getActualScreenResolution(0, 0);
         return { x, y };
     },
 

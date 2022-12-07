@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { ItemFactory } from '../../../../../server/systems/item';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { Item } from '../../../../../shared/interfaces/item';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
-import { deepCloneObject } from '../../../../../shared/utility/deepCopy';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { ItemFactory } from '@AthenaServer/systems/item';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { Item } from '@AthenaShared/interfaces/item';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 class InventoryCommands {
     @command(
@@ -54,7 +54,7 @@ class InventoryCommands {
             }
         }
 
-        const fullItemName = args.join(' ')
+        const fullItemName = args.join(' ');
 
         if (fullItemName.length <= 1) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.ITEM_DOES_NOT_EXIST, fullItemName));

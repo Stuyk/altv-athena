@@ -23,6 +23,7 @@ export enum ATHENA_EVENTS_PLAYER {
     DIED = 'athena:PlayerDied',
     DROPPED_ITEM = 'athena:PlayerDroppedItem',
     ENTERED_INTERIOR = 'athena:EnteredInterior',
+    FINISHED_LOGIN = 'athena:set:account:Data',
     LEFT_INTERIOR = 'athena:LeftInterior',
     PURCHASED_VEHICLE = 'athena:PurchasedVehicle',
     SELECTED_CHARACTER = 'athena:SelectedCharacter',

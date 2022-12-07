@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { getPointsInCircle } from './math';
 import { loadSceneAtCoords } from './scene';
 
@@ -14,27 +13,27 @@ interface iCameraNode {
     /**
      * Position for where to create this camera.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof iCameraNode
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * Rotation of the camera, if applicable.
      * Also applies as rotation for entity attachment if applicable.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof iCameraNode
      */
-    rot?: Vector3;
+    rot?: alt.IVector3;
 
     /**
      * Applies to entity attachment, and the offset from said entity.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof iCameraNode
      */
-    offset?: Vector3;
+    offset?: alt.IVector3;
 
     /**
      * The FOV for the camera. Default is set to 90.
@@ -63,10 +62,10 @@ interface iCameraNode {
     /**
      * A position to point that camera towards if applicable.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof iCameraNode
      */
-    positionToTrack?: Vector3;
+    positionToTrack?: alt.IVector3;
 
     /**
      * The entity to attach this camera to, can be a vehicle, ped, etc.
@@ -126,7 +125,7 @@ const InternalFunctions = {
 
     /**
      * Create a camera at the given position
-     * @param {Vector3} pos - The position of the camera.
+     * @param {alt.IVector3} pos - The position of the camera.
      */
     async next(node: iCameraNode): Promise<void> {
         if (!node) {

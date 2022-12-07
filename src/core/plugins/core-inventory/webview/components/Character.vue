@@ -9,7 +9,7 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('equipment', index)"
-                @mousedown="(e) => drag(e, dragOff, hasItem('equipment', index))"
+                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('equipment', index) })"
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('equipment', index)">
@@ -30,13 +30,14 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
 import { EquipmentSlots } from '../../shared/equipment';
-import draggable from '../../../../../../src-webviews/src/utility/drag';
-import { Item } from '../../../../shared/interfaces/inventory';
-import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
+import { makeDraggable } from '@ViewUtility/drag';
+import { Item } from '@AthenaShared/interfaces/inventory';
+import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
-import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
 import { exampleEquipment } from '../utility/exampleEquipment';
 import { getImagePath } from '../utility/inventoryIcon';
+import { InventoryTypes } from '../utility/interfaces';
 
 export default defineComponent({
     name: 'Character',
@@ -48,17 +49,12 @@ export default defineComponent({
     },
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
     },
     methods: {
         getImagePath,
-        drag: draggable.makeDraggable,
-        dragOff(
-            startType: 'inventory' | 'toolbar' | 'equipment',
-            startIndex: number,
-            endType: 'inventory' | 'toolbar' | 'equipment',
-            endIndex: number,
-        ) {
+        drag: makeDraggable,
+        endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
                 console.log('ref');
                 console.log(startType, startIndex);

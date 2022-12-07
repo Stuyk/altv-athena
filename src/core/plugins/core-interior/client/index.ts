@@ -1,1 +1,0 @@
-import './menus/interior';

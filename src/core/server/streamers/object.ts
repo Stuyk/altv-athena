@@ -12,24 +12,24 @@ const KEY = 'objects';
  * Should not be exported. Do not export.
  * @class InternalController
  */
-class InternalController {
+const InternalController = {
     /**
      * Initialize the Object Controller Streamer
      * @static
      * @memberof ObjectController
      */
-    static init() {
+    init() {
         StreamerService.registerCallback(KEY, InternalController.update);
-    }
+    },
 
     /**
      * Internal function to refresh all global objects in the streamer service.
      * @static
      * @memberof ObjectController
      */
-    static refresh() {
+    refresh() {
         StreamerService.updateData(KEY, globalObjects);
-    }
+    },
 
     /**
      * Updates objects through the streamer service.
@@ -38,12 +38,12 @@ class InternalController {
      * @param {Array<IObject>} objects
      * @memberof ObjectController
      */
-    static update(player: alt.Player, objects: Array<IObject>) {
+    update(player: alt.Player, objects: Array<IObject>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_OBJECTS, objects);
-    }
-}
+    },
+};
 
-export class ServerObjectController {
+const ServerObjectControllerConst = {
     /**
      * Add an object to the global stream.
      * @static
@@ -51,7 +51,7 @@ export class ServerObjectController {
      * @return {string} uid for object
      * @memberof ObjectController
      */
-    static append(objectData: IObject): string {
+    append(objectData: IObject): string {
         if (!objectData.uid) {
             objectData.uid = sha256Random(JSON.stringify(objectData));
         }
@@ -59,7 +59,7 @@ export class ServerObjectController {
         globalObjects.push(objectData);
         InternalController.refresh();
         return objectData.uid;
-    }
+    },
 
     /**
      * Remove an object from the global stream.
@@ -68,7 +68,7 @@ export class ServerObjectController {
      * @return {boolean}
      * @memberof ObjectController
      */
-    static remove(uid: string): boolean {
+    remove(uid: string): boolean {
         let wasFound = false;
         for (let i = globalObjects.length - 1; i >= 0; i--) {
             if (globalObjects[i].uid !== uid) {
@@ -86,7 +86,7 @@ export class ServerObjectController {
         InternalController.refresh();
         alt.emitAllClients(SYSTEM_EVENTS.REMOVE_GLOBAL_OBJECT, uid);
         return true;
-    }
+    },
 
     /**
      * Remove an object from the player that only they can see.
@@ -96,13 +96,13 @@ export class ServerObjectController {
      * @param {boolean} isInterior Remove all objects that are interior based.
      * @memberof ObjectController
      */
-    static removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
+    removeFromPlayer(player: alt.Player, uid: string, removeAllInterior = false) {
         if (!uid) {
             throw new Error(`Did not specify a uid for object removal. ObjectController.removeFromPlayer`);
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.REMOVE_OBJECT, uid, removeAllInterior);
-    }
+    },
 
     /**
      * Add an object to the player that only they can see.
@@ -112,14 +112,44 @@ export class ServerObjectController {
      * @returns {string} uid for object
      * @memberof ObjectController
      */
-    static addToPlayer(player: alt.Player, objectData: IObject): string {
+    addToPlayer(player: alt.Player, objectData: IObject): string {
         if (!objectData.uid) {
             objectData.uid = sha256Random(JSON.stringify(objectData));
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.APPEND_OBJECT, objectData);
         return objectData.uid;
-    }
-}
+    },
+
+    /**
+     * Updates the position for an object.
+     * NOT ALL OBJECTS CAN BE MOVED DYNAMICALLY.
+     *
+     * @static
+     * @param {string} uid
+     * @param {alt.IVector3} pos
+     * @param {alt.Player} [player=undefined]
+     * @memberof ServerObjectController
+     */
+    updatePosition(uid: string, pos: alt.IVector3, player: alt.Player = undefined): boolean {
+        if (typeof player === 'undefined') {
+            const index = globalObjects.findIndex((x) => x.uid === uid);
+            if (index === -1) {
+                return false;
+            }
+
+            globalObjects[index].pos = pos;
+            InternalController.refresh();
+            return true;
+        }
+
+        alt.emitClient(player, SYSTEM_EVENTS.UPDATE_OBJECT, { uid, pos });
+        return true;
+    },
+};
+
+export const ServerObjectController = {
+    ...ServerObjectControllerConst,
+};
 
 InternalController.init();

@@ -1,8 +1,8 @@
+import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { Timer } from './timers';
 
-export function loadSceneAtCoords(pos: Vector3): Promise<boolean> {
+export function loadSceneAtCoords(pos: alt.IVector3): Promise<boolean> {
     let timerHandle: number;
     return new Promise<boolean>((resolve) => {
         // noinspection JSSuspiciousNameCombination

@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ATHENA_DEBUG_EVENTS } from '../shared/events';
 
 const F1_KEY = 112;

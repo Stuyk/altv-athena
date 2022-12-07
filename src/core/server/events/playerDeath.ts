@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { Athena } from '../api/athena';
 import { StateManager } from '../systems/stateManager';
 import { VehicleSystem } from '../systems/vehicle';
 import { PlayerEvents } from './playerEvents';

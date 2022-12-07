@@ -47,7 +47,7 @@ export function drawRectangle(pos: alt.IVector3, size: alt.IVector2, color: alt.
         return;
     }
 
-    native.setDrawOrigin(pos.x, pos.y, pos.z, 0);
+    native.setDrawOrigin(pos.x, pos.y, pos.z, false);
     native.drawRect(0, 0, size.x, size.y, color.r, color.g, color.b, color.a, false);
     native.clearDrawOrigin();
 }
@@ -69,7 +69,7 @@ export function drawText3D(text: string, pos: alt.IVector3, scale: number, color
         scale = 2;
     }
 
-    native.setDrawOrigin(pos.x, pos.y, pos.z, 0); // Used to stabalize text, sprites, etc. in a 3D Space.
+    native.setDrawOrigin(pos.x, pos.y, pos.z, false); // Used to stabalize text, sprites, etc. in a 3D Space.
     native.beginTextCommandDisplayText('STRING');
     native.addTextComponentSubstringPlayerName(text);
     native.setTextFont(4);

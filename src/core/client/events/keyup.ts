@@ -17,6 +17,7 @@ interface Keybind {
     key?: number;
     singlePress: (...args: any[]) => void; // Callback Function
     longPress?: (...args: any[]) => void; // Callback Function
+    ignoreMenuAndChatChecks?: boolean;
 }
 
 export const KeybindController = {
@@ -50,22 +51,24 @@ export const KeybindController = {
             return;
         }
 
-        // Athena Menus
-        if (alt.Player.local.isMenuOpen) {
-            return;
-        }
+        if (!KEY_UP_BINDS[key].ignoreMenuAndChatChecks) {
+            // Athena Menus
+            if (alt.Player.local.isMenuOpen) {
+                return;
+            }
 
-        if (alt.Player.local.isChatOpen) {
-            return;
-        }
+            if (alt.Player.local.isChatOpen) {
+                return;
+            }
 
-        if (alt.isConsoleOpen()) {
-            return;
-        }
+            if (alt.isConsoleOpen()) {
+                return;
+            }
 
-        // Console Menu
-        if (alt.isMenuOpen()) {
-            return;
+            // Console Menu
+            if (alt.isMenuOpen()) {
+                return;
+            }
         }
 
         if (Date.now() < nextKeyPress) {
@@ -100,24 +103,6 @@ export const KeybindController = {
      * @memberof KeybindController
      */
     keyDown(key: number) {
-        // Athena Menus
-        if (alt.Player.local.isMenuOpen) {
-            return;
-        }
-
-        if (alt.Player.local.isChatOpen) {
-            return;
-        }
-
-        if (alt.isConsoleOpen()) {
-            return;
-        }
-
-        // Console Menu
-        if (alt.isMenuOpen()) {
-            return;
-        }
-
         keyPressTimes[key] = Date.now();
 
         if (!KEY_UP_BINDS[key]) {
@@ -126,6 +111,26 @@ export const KeybindController = {
 
         if (!KEY_UP_BINDS[key]['longPress']) {
             return;
+        }
+
+        if (!KEY_UP_BINDS[key].ignoreMenuAndChatChecks) {
+            // Athena Menus
+            if (alt.Player.local.isMenuOpen) {
+                return;
+            }
+
+            if (alt.Player.local.isChatOpen) {
+                return;
+            }
+
+            if (alt.isConsoleOpen()) {
+                return;
+            }
+
+            // Console Menu
+            if (alt.isMenuOpen()) {
+                return;
+            }
         }
 
         alt.setTimeout(() => {

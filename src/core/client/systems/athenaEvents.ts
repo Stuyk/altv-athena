@@ -2,14 +2,13 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadSceneAtCoords } from '../utility/scene';
 import { Timer } from '../utility/timers';
 
 let interval: number;
 let isUpdatingWaypoint = false;
-let lastWaypointData: Vector3;
+let lastWaypointData: alt.IVector3;
 
 const AthenaEventsConst = {
     init(): void {
@@ -66,7 +65,7 @@ const AthenaEventsConst = {
             return;
         }
 
-        const foundWaypoint: Vector3 = await new Promise(async (resolve: Function) => {
+        const foundWaypoint: alt.IVector3 = await new Promise(async (resolve: Function) => {
             let startingZPosition = 0;
 
             for (let i = 0; i < 100; i++) {

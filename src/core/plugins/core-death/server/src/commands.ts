@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../server/api/athena';
-import { command } from '../../../../server/decorators/commands';
-import { PERMISSIONS } from '../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../shared/locale/locale';
-import { DeathSystem } from './death';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 
 export class DeathCommands {
     static init() {

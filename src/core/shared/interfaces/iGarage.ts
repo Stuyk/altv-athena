@@ -1,9 +1,9 @@
+import * as alt from 'alt-shared';
 import { VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
-import { Vector3 } from './vector';
 
 export default interface IGarage {
-    position: Vector3;
+    position: alt.IVector3;
     type: VEHICLE_TYPE;
     index: string | number;
-    parking: Array<{ position: Vector3; rotation: Vector3 }>;
+    parking: Array<{ position: alt.IVector3; rotation: alt.IVector3 }>;
 }

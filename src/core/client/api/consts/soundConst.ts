@@ -3,7 +3,7 @@ import {
     handlePlayAudio2D,
     handlePlayAudio3D,
     handlePlayAudioPositional,
-} from '../../systems/sound';
+} from '@AthenaClient/systems/sound';
 
 export const soundConst = {
     frontend: handleFrontendSound,

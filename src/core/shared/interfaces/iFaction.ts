@@ -1,5 +1,5 @@
+import * as alt from 'alt-shared';
 import { FACTION_PERMISSION_FLAGS } from '../flags/factionPermissionFlags';
-import { Vector3 } from './vector';
 
 export interface FactionMember {
     /**
@@ -58,10 +58,10 @@ export interface IFaction {
     /**
      * The faction central location for basing other points.
      * Should be an outside position.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IFaction
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The ranks in this faction.
@@ -88,10 +88,10 @@ export interface IFaction {
 
     /**
      * The location to access the vehicle storage for the faction.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IFaction
      */
-    storageLocation?: Vector3;
+    storageLocation?: alt.IVector3;
 
     /**
      * Storage ID for the storage collection.
@@ -102,10 +102,10 @@ export interface IFaction {
 
     /**
      * The location to access the weapon storage for the faction.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IFaction
      */
-    weaponLocation?: Vector3;
+    weaponLocation?: alt.IVector3;
 
     /**
      * Storage ID for the storage collection.

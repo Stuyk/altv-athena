@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { loadSceneAtCoords } from './scene';
 import { Timer } from './timers';
 
@@ -89,7 +88,7 @@ const PedEditCamera = {
      * @return {*}  {Vector3}
      * @memberof PedEditCamera
      */
-    calculateCamOffset(offset: Vector3): Vector3 {
+    calculateCamOffset(offset: alt.IVector3): alt.IVector3 {
         return native.getOffsetFromEntityInWorldCoords(
             isLocalPlayer ? alt.Player.local.scriptID : scriptID,
             offset.x,
@@ -101,10 +100,10 @@ const PedEditCamera = {
     /**
      * Sets up the camera with the original position and a new offset.
      * @static
-     * @param {Vector3} offset
+     * @param {alt.IVector3} offset
      * @memberof PedEditCamera
      */
-    setCameraOffset(offset: Vector3) {
+    setCameraOffset(offset: alt.IVector3) {
         startPosition = PedEditCamera.calculateCamOffset(offset) as alt.Vector3;
         native.pointCamAtCoord(camera, startPosition.x, startPosition.y, startPosition.z);
         native.setCamActive(camera, true);
@@ -265,7 +264,7 @@ const PedEditCamera = {
             return;
         }
 
-        const [_, width] = native.getActiveScreenResolution(0, 0);
+        const [_, width] = native.getActualScreenResolution(0, 0);
         const cursor = alt.getCursorPos();
         const _x = cursor.x;
         let oldHeading = native.getEntityHeading(isLocalPlayer ? alt.Player.local.scriptID : scriptID);

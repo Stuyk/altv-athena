@@ -1,8 +1,8 @@
+import * as alt from 'alt-shared';
 import { Blip } from './blip';
 import { EventCall } from './eventCall';
 import { Marker } from './marker';
 import { TextLabel } from './textLabel';
-import { Vector3 } from './vector';
 import { JobAnimation } from './animation';
 import { Particle } from './particle';
 import { JobAttachable } from './iAttachable';
@@ -15,7 +15,7 @@ enum ObjectiveCriteria {
     IN_JOB_VEHICLE = 16,
     FAIL_ON_JOB_VEHICLE_DESTROY = 32,
     JOB_VEHICLE_NEARBY = 64,
-    VEHICLE_ENGINE_OFF = 128
+    VEHICLE_ENGINE_OFF = 128,
 }
 
 enum ObjectiveType {
@@ -46,10 +46,10 @@ export interface Objective {
 
     /**
      * The 3D Position of this objective.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Objective
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The range which this objective can be completed in.

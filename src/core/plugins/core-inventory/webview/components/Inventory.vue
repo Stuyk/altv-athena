@@ -9,7 +9,9 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('toolbar', index)"
-                @mousedown="(e) => drag(e, dragOff, hasItem('toolbar', index))"
+                @mouseenter="updateDescriptor('toolbar', index)"
+                @mouseleave="updateDescriptor(undefined, undefined)"
+                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), startDrag })"
                 @contextmenu="(e) => unequip(e, index)"
             >
                 <template v-slot:image v-if="hasItem('toolbar', index)">
@@ -21,20 +23,25 @@
             </Slot>
         </div>
         <div class="inventory-description">
-            <span class="item-name">Stupid Hat</span>
-            <span class="item-description">It's a big stupid hat.</span>
+            <span class="item-name">{{ itemName }}</span>
+            <span class="item-description">{{ itemDescription }}</span>
         </div>
         <div class="inventory-slots">
             <Slot
                 v-for="(slot, index) in maxSlots"
                 class="slot"
+                :class="getSelectedItemClass('inventory', index)"
                 location="inventory"
                 :key="index"
                 :hasItem="true"
                 :slot="index"
                 :id="getID('inventory', index)"
+                @mouseenter="updateDescriptor('inventory', index)"
+                @mouseleave="updateDescriptor(undefined, undefined)"
                 @contextmenu="(e) => contextMenu(e, index)"
-                @mousedown="(e) => drag(e, dragOff, hasItem('inventory', index))"
+                @mousedown="
+                    (e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index), singleClick, startDrag })
+                "
             >
                 <template v-slot:image v-if="hasItem('inventory', index)">
                     <img :src="getImagePath(getItem('inventory', index))" />
@@ -48,24 +55,26 @@
             <div @click="contextAction('use')">Use</div>
             <div @click="contextAction('split')">Split</div>
             <div @click="contextAction('drop')">Drop</div>
+            <div @click="contextAction('cancel')">Cancel</div>
         </Context>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { Item } from '../../../../shared/interfaces/inventory';
-import draggable from '../../../../../../src-webviews/src/utility/drag';
-import WebViewEvents from '../../../../../../src-webviews/src/utility/webViewEvents';
+import { Item } from '@AthenaShared/interfaces/inventory';
+import { makeDraggable } from '@ViewUtility/drag';
+import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
 import { getImagePath } from '../utility/inventoryIcon';
+import { InventoryTypes } from '../utility/interfaces';
 
 export default defineComponent({
     name: 'Inventory',
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Context: defineAsyncComponent(() => import('@components/Context.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
     data() {
         return {
@@ -76,17 +85,58 @@ export default defineComponent({
             title: '',
             context: undefined as { x: number; y: number } | undefined,
             slot: -1,
+            itemSingleClick: undefined as { type: InventoryTypes; index: number },
+            itemName: '',
+            itemDescription: '',
         };
     },
     methods: {
         getImagePath,
-        drag: draggable.makeDraggable,
-        dragOff(
-            startType: 'inventory' | 'toolbar' | 'equipment',
-            startIndex: number,
-            endType: 'inventory' | 'toolbar' | 'equipment',
-            endIndex: number,
-        ) {
+        drag: makeDraggable,
+        updateDescriptor(type: InventoryTypes, index: number) {
+            if (typeof type === 'undefined') {
+                this.itemName = '';
+                this.itemDescription = '';
+                return;
+            }
+
+            const item = this.getItem(type, index);
+            if (!item) {
+                this.itemName = '';
+                this.itemDescription = '';
+                return;
+            }
+
+            this.itemName = item.name;
+            this.itemDescription = item.description;
+        },
+        startDrag() {
+            this.itemSingleClick = undefined;
+        },
+        singleClick(type: InventoryTypes, index: number) {
+            if (typeof this.itemSingleClick !== 'undefined') {
+                if (!('alt' in window)) {
+                    const secondItem = `${type}-${index}`;
+                    const firstItem = `${this.itemSingleClick.type}-${this.itemSingleClick.index}`;
+                    console.log(`Combine Event:`, firstItem, secondItem);
+                    this.itemSingleClick = undefined;
+                    return;
+                }
+
+                WebViewEvents.emitServer(
+                    INVENTORY_EVENTS.TO_SERVER.COMBINE,
+                    this.itemSingleClick.type,
+                    this.itemSingleClick.index,
+                    type,
+                    index,
+                );
+                this.itemSingleClick = undefined;
+                return;
+            }
+
+            this.itemSingleClick = { type, index };
+        },
+        endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
                 console.log('ref');
                 console.log(startType, startIndex);
@@ -118,6 +168,17 @@ export default defineComponent({
             const items = [...this[type]] as Array<Item>;
             return items[items.findIndex((item) => item && item.slot === slot)];
         },
+        getSelectedItemClass(type: InventoryTypes, index: number) {
+            if (typeof this.itemSingleClick === 'undefined') {
+                return {};
+            }
+
+            if (this.itemSingleClick.type !== type || this.itemSingleClick.index !== index) {
+                return {};
+            }
+
+            return { 'item-outline': true };
+        },
         getID(type: 'toolbar' | 'inventory', index: number): string {
             return type + '-' + index;
         },
@@ -142,11 +203,15 @@ export default defineComponent({
                 y: e.clientY,
             };
         },
-        contextAction(type: 'use' | 'split' | 'drop') {
+        contextAction(type: 'use' | 'split' | 'drop' | 'cancel') {
             this.context = undefined;
 
             if (!('alt' in window)) {
                 console.log(`It should do ${type} on slot: ` + this.slot);
+                return;
+            }
+
+            if (type === 'cancel') {
                 return;
             }
 
@@ -200,7 +265,7 @@ export default defineComponent({
         };
 
         this.setItems(
-            [exampleItem, { ...exampleItem, slot: 24, icon: 'pistol50' }],
+            [exampleItem, { ...exampleItem, slot: 2, icon: 'burger' }, { ...exampleItem, slot: 24, icon: 'pistol50' }],
             [{ ...exampleItem, icon: 'assaultrifle' }],
         );
     },
@@ -262,5 +327,9 @@ export default defineComponent({
     box-sizing: border-box;
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
+}
+
+.item-outline {
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
 }
 </style>

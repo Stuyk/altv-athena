@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import VehicleFuncs from '../../../../../server/extensions/vehicleFuncs';
-import { VehicleSystem } from '../../../../../server/systems/vehicle';
-import { VEHICLE_EVENTS } from '../../../../../shared/enums/vehicle';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
+import { VehicleSystem } from '@AthenaServer/systems/vehicle';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 
 const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
 
@@ -60,7 +60,10 @@ class VehicleCommands {
         }
 
         VehicleFuncs.createKey(target, player.vehicle);
-        Athena.player.emit.notification(player, `${LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_GIVEN_TO)} ${target.data.name}.`);
+        Athena.player.emit.notification(
+            player,
+            `${LocaleController.get(LOCALE_KEYS.VEHICLE_KEY_GIVEN_TO)} ${target.data.name}.`,
+        );
     }
 
     @command('seatbelt', LocaleController.get(LOCALE_KEYS.COMMAND_SEATBELT, '/seatbelt'), PERMISSIONS.NONE)

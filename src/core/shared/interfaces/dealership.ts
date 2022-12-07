@@ -1,5 +1,5 @@
+import * as alt from 'alt-shared';
 import { VEHICLE_CLASS } from '../enums/vehicleTypeFlags';
-import { Vector3 } from './vector';
 
 export interface Dealership {
     /**
@@ -11,17 +11,17 @@ export interface Dealership {
 
     /**
      * The position in a 3D space where this dealership can be interacted with.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Dealership
      */
-    position: Vector3;
+    position: alt.IVector3;
 
     /**
      * The position in a 3D space where the dealership vehicles spawn.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof Dealership
      */
-    vehiclePosition: Vector3;
+    vehiclePosition: alt.IVector3;
 
     /**
      * A position that is 0 - 360 to rotate the vehicle.

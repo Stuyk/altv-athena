@@ -32,7 +32,7 @@ const Credits = {
             await sleep(3000);
         }
 
-        const [_, x, y] = native.getActiveScreenResolution();
+        const [_, x, y] = native.getActualScreenResolution();
 
         scaleform.passFunction('SETUP_CREDIT_BLOCK', identifier, 0.0, y / 2, credit.align, 1, 1);
         scaleform.passFunction('ADD_ROLE_TO_CREDIT_BLOCK', identifier, credit.role, 0.0, 4, true, '');

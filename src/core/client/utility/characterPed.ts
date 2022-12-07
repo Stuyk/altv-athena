@@ -1,14 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { loadModel } from './model';
 import { Appearance } from '../../shared/interfaces/appearance';
 import { CharacterSystem } from '../systems/character';
 
 let id: number;
 let appearance: Appearance = null;
-let pos: Vector3;
-let rot: Vector3 | number;
+let pos: alt.IVector3;
+let rot: alt.IVector3 | number;
 let isUpdating: boolean = false;
 let hidden: boolean = false;
 
@@ -23,12 +22,16 @@ export const PedCharacter = {
     /**
      * Create a Temporary Character Pedestrian
      * @param {boolean} isMale
-     * @param {Vector3} pos
-     * @param {(Vector3 | number)} [rot={ x: 0, y: 0, z: 0 }]
+     * @param {alt.IVector3} pos
+     * @param {(alt.IVector3 | number)} [rot={ x: 0, y: 0, z: 0 }]
      * @return {Promise<void>}
      * @memberof Ped
      */
-    async create(isMale: boolean, _pos: Vector3, _rot: Vector3 | number = { x: 0, y: 0, z: 0 }): Promise<number> {
+    async create(
+        isMale: boolean,
+        _pos: alt.IVector3,
+        _rot: alt.IVector3 | number = { x: 0, y: 0, z: 0 },
+    ): Promise<number> {
         pos = _pos;
         rot = _rot;
         hidden = false;

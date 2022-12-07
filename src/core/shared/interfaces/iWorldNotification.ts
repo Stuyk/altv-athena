@@ -1,13 +1,13 @@
 import { WORLD_NOTIFICATION_TYPE } from '../enums/worldNotificationTypes';
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export interface IWorldNotification {
     /**
      * Position of the Object in a 3D space.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IObject
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * Text to display for this world notification.

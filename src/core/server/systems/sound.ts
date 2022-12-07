@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { distance2d } from '../../shared/utility/vector';
 
 interface CustomSoundInfo {
@@ -15,10 +14,10 @@ interface CustomSoundInfo {
     /**
      * A positional Vector3 on where to play the sound from.
      *
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof CustomSoundInfo
      */
-    pos?: Vector3;
+    pos?: alt.IVector3;
 
     /**
      * The volume between `0.0` - `1.0`.

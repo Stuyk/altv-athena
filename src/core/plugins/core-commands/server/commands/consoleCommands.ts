@@ -1,13 +1,13 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import fs from 'fs';
-import { Athena } from '../../../../server/api/athena';
-import { Account } from '../../../../server/interface/iAccount';
-import { Collections } from '../../../../server/interface/iDatabaseCollections';
-import { AdminController } from '../../../../server/systems/admin';
-import ChatController from '../../../../server/systems/chat';
-import { AthenaScreenshot } from '../../../../server/utility/screenshot';
-import { ConsoleCommander } from '../../../../shared/utility/consoleCommander';
+import { Athena } from '@AthenaServer/api/athena';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { AdminController } from '@AthenaServer/systems/admin';
+import ChatController from '@AthenaServer/systems/chat';
+import { AthenaScreenshot } from '@AthenaServer/utility/screenshot';
+import { ConsoleCommander } from '@AthenaShared/utility/consoleCommander';
 
 async function handleSaveScreenshot(player: alt.Player, base64Image: string) {
     const path = `${process.cwd()}/screenshots/${player.data.name}.jpg`;

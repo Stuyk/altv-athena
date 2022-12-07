@@ -16,6 +16,10 @@ export default defineConfig({
             { find: '@components', replacement: path.resolve(__dirname, './src/components') },
             { find: '@utility', replacement: path.resolve(__dirname, './src/utility') },
             { find: '@plugins', replacement: path.resolve(__dirname, '../src/core/plugins') },
+            { find: '@ViewComponents', replacement: path.resolve(__dirname, './src/components') },
+            { find: '@ViewUtility', replacement: path.resolve(__dirname, './src/utility') },
+            { find: '@AthenaPlugins', replacement: path.resolve(__dirname, '../src/core/plugins') },
+            { find: '@AthenaShared', replacement: path.resolve(__dirname, '../src/core/shared') },
         ],
     },
 });

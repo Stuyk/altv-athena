@@ -1,8 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector3 } from '../../shared/interfaces/vector';
-import { distance, vectorLerp } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { distance, vectorLerp } from '@AthenaShared/utility/vector';
 import { loadModel } from './model';
 import { sleep } from './sleep';
 
@@ -12,12 +11,12 @@ const LerpObject = {
      *
      * @static
      * @param {number} id
-     * @param {Vector3} to
+     * @param {alt.IVector3} to
      * @param {number} [speed=0.1]
      * @return {*}
      * @memberof LerpObject
      */
-    async lerp(id: number, to: Vector3, speed = 0.1) {
+    async lerp(id: number, to: alt.IVector3, speed = 0.1) {
         let runTimer = 0;
         let dist = 0;
         native.freezeEntityPosition(id, true);
@@ -45,12 +44,12 @@ const LerpObject = {
      * Create and move a temporary object.
      * @static
      * @param {string} model
-     * @param {Vector3} start
-     * @param {Vector3} end
+     * @param {alt.IVector3} start
+     * @param {alt.IVector3} end
      * @param {0.1} speed
      * @memberof LerpObject
      */
-    async tempLerp(model: string, start: Vector3, end: Vector3, speed: number = 0.1) {
+    async tempLerp(model: string, start: alt.IVector3, end: alt.IVector3, speed: number = 0.1) {
         const hash = alt.hash(model);
         await loadModel(hash);
 

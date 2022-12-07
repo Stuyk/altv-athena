@@ -79,11 +79,41 @@ function getFilesToCopy(enabledPlugins) {
     });
 }
 
+/**
+ * Resolves paths in files since SWC can't handle Athena's structure.
+ * @param {string} file
+ * @param {string} rawCode
+ * @return {string}
+ */
+function resolvePaths(file, rawCode) {
+    const cleanedPath = file.replace(sanitizePath(process.cwd()), '');
+    const pathSplit = cleanedPath.split('/');
+    pathSplit.pop(); // Remove current file
+    let depth = 0;
+
+    while (pathSplit[pathSplit.length - 1] !== 'core') {
+        pathSplit.pop();
+        depth += 1;
+    }
+
+    rawCode = rawCode.replaceAll(`@AthenaServer`, `../`.repeat(depth) + `server`);
+    rawCode = rawCode.replaceAll(`@AthenaClient`, `../`.repeat(depth) + `client`);
+    rawCode = rawCode.replaceAll(`@AthenaShared`, `../`.repeat(depth) + `shared`);
+    rawCode = rawCode.replaceAll(`@AthenaPlugins`, `../`.repeat(depth) + `plugins`);
+    return rawCode;
+}
+
 async function transpileFile(file) {
     const targetPath = file.replace('src/', 'resources/').replace('.ts', '.js');
 
     return new Promise(async (resolve) => {
         const result = await swc.transformFile(file, SWC_CONFIG);
+
+        // The path resolvers are really awful, so writing a custom one here.
+        if (result.code.includes('@Athena')) {
+            result.code = resolvePaths(file, result.code);
+        }
+
         fs.outputFileSync(targetPath, result.code);
         resolve();
     });

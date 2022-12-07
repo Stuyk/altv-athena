@@ -42,10 +42,10 @@ export interface SpriteInfo {
     /**
      * A position in-world, or on-screen where to draw this image.
      *
-     * @type {(alt.IVector3 | alt.IVector2)}
+     * @type {alt.IVector3}
      * @memberof SpriteInfo
      */
-    position: alt.IVector3 | alt.IVector2;
+    position: alt.IVector3;
 
     /**
      * Call this callback once, when the sprite is touched.
@@ -55,10 +55,12 @@ export interface SpriteInfo {
     callOnceOnTouch?: (uid: string) => void;
 }
 
-type InternalSprite = SpriteInfo & { element?: alt.RmlElement; markForDeletion: boolean };
+type InternalSprite = SpriteInfo & { element?: alt.RmlElement; markForDeletion: boolean; isBlocked?: boolean };
 
 let document: alt.RmlDocument;
 let elements: Array<InternalSprite> = [];
+let interval: number;
+let lastBlockingCheck = Date.now() + 1000;
 
 const InternalFunctions = {
     /**
@@ -129,6 +131,15 @@ const InternalFunctions = {
             return;
         }
 
+        if (document && elements.length <= 0) {
+            AthenaClient.timer.clearInterval(interval);
+            document.destroy();
+            document = undefined;
+            interval = undefined;
+            return;
+        }
+
+        let didBlockingCheck = false;
         for (let i = elements.length - 1; i >= 0; i--) {
             if (typeof elements[i] === 'undefined') {
                 continue;
@@ -138,13 +149,6 @@ const InternalFunctions = {
             if (elements[i].markForDeletion) {
                 InternalFunctions.removeElement(uid);
                 elements.splice(i, 1);
-                continue;
-            }
-
-            // Decide whether or not to draw this element...
-            // This is Vector2; so don't draw it with world positioning. Just create it.
-            if (!elements[i].position.hasOwnProperty('z')) {
-                InternalFunctions.createElement(uid);
                 continue;
             }
 
@@ -167,6 +171,15 @@ const InternalFunctions = {
                 }
             }
 
+            if (Date.now() > lastBlockingCheck) {
+                didBlockingCheck = true;
+                if (AthenaClient.utility.isEntityBlockingPosition(spritePosition)) {
+                    elements[i].isBlocked = true;
+                } else {
+                    elements[i].isBlocked = false;
+                }
+            }
+
             let width = elements[i].width;
             let height = elements[i].height;
 
@@ -175,6 +188,13 @@ const InternalFunctions = {
 
             // Update position based on world position.
             const screenPosition = alt.worldToScreen(spritePosition.x, spritePosition.y, spritePosition.z);
+
+            if (elements[i].isBlocked) {
+                elements[i].element.style['opacity'] = '0.1';
+            } else {
+                elements[i].element.style['opacity'] = '1';
+            }
+
             elements[i].element.style['left'] = `${screenPosition.x - width / 2}px`;
             elements[i].element.style['top'] = `${screenPosition.y - height / 2}px`;
             elements[i].element.setAttribute('width', `${scale.width}px`);
@@ -188,6 +208,10 @@ const InternalFunctions = {
             elements[i].callOnceOnTouch(uid);
             delete elements[i].callOnceOnTouch;
         }
+
+        if (didBlockingCheck) {
+            lastBlockingCheck = Date.now() + 500;
+        }
     },
 };
 
@@ -198,9 +222,9 @@ const SpriteConst = {
      */
     create(sprite: SpriteInfo) {
         if (typeof document === 'undefined') {
-            document = new alt.RmlDocument('/client/rmlui/images/index.rml');
+            document = new alt.RmlDocument('/client/rmlui/sprites/index.rml');
             document.show();
-            AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/images/index.ts');
+            interval = AthenaClient.timer.createInterval(InternalFunctions.update, 0, 'rmlui/sprites/index.ts');
         }
 
         if (sprite.path.includes('@plugins')) {
@@ -252,3 +276,11 @@ const SpriteConst = {
 export const Sprite = {
     ...SpriteConst,
 };
+
+alt.on('disconnect', () => {
+    if (typeof document !== 'undefined') {
+        document.destroy();
+        AthenaClient.timer.clearInterval(interval);
+        alt.log('progressbar | Destroyed RMLUI Document on Disconnect');
+    }
+});

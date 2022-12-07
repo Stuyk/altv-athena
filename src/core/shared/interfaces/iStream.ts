@@ -1,8 +1,4 @@
-import { IObject } from './iObject';
-import { Marker } from './marker';
-import { TextLabel } from './textLabel';
-import { Vector3 } from './vector';
-import { IPed } from './iPed';
+import * as alt from 'alt-shared';
 
 export interface IStreamConfig {
     /**
@@ -29,6 +25,6 @@ export interface IStreamPopulate<T> {
 }
 
 export interface IStreamUpdate {
-    pos: Vector3;
+    pos: alt.IVector3;
     dimension?: number;
 }

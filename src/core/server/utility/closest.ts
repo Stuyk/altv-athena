@@ -25,4 +25,3 @@ export function getClosestPlayer(pos: IVector3): alt.Player | undefined {
     const players = alt.Player.all.filter((p) => p && p.valid && p.hasFullySpawned);
     return getClosestOfType<alt.Player>(pos, players);
 }
-

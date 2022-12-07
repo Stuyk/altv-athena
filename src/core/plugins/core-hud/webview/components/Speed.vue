@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="speed-type speed-font-style">
-        {{ isMetric ? 'KMH' : 'MPH' }}
+        {{ unit }}
     </div>
     <div class="gear speed-font-style">
         {{ gear }}
@@ -31,8 +31,8 @@ export default defineComponent({
             type: Number,
             required: true,
         },
-        isMetric: {
-            type: Boolean,
+        unit: {
+            type: String,
             required: true,
         },
         gear: {

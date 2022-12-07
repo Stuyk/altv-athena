@@ -28,8 +28,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import '@/plugins/css/core-inventory/test.css';
-
 .page-wrap {
     display: flex;
     justify-content: center;

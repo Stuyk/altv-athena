@@ -25,6 +25,7 @@ dist-ssr
 *.local
 !altv-athena-hwid-win.exe
 server.cfg
+server.toml
 doc
 typedoc.json
 !scripts/streamer/dist
@@ -37,12 +38,12 @@ src-webviews/src/plugins/vue-plugin-imports.ts
 src-webviews/public/plugins/*
 !src-webviews/public/plugins/*/.gitkeep
 src/core/plugins/private-*
+src/core/plugins/athena-plugin-*
 
 # Yarn stuff
 .yarn/
 yarn.lock
 
 # Resources
-
 resources/core/**
 resources/webviews/**

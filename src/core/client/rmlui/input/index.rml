@@ -1,0 +1,48 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+            }
+
+            .input-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+                min-width: 300px;
+                max-width: 300px;
+                top: 80vh;
+                margin: 0 auto;
+            }
+
+            .placeholder {
+                font-size: 12px;
+                padding-bottom: 6px;
+                padding-left: 3px;
+                opacity: 1;
+            }
+
+            input {
+                width: 100%;
+                padding: 6px;
+                background: #000000c2;
+                color: white;
+                box-sizing: border-box;
+                border: 2px #000000e2;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <div class="input-wrapper">
+            <div id="placeholder" class="placeholder"></div>
+            <input class="input" id="input" type="text" />
+        </div>
+    </body>
+</rml>

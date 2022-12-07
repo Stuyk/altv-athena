@@ -198,6 +198,9 @@ export default {
     [LOCALE_KEYS.STORAGE_NOT_AVAILABLE]: `No Storage Available`,
     [LOCALE_KEYS.STORAGE_IN_USE]: `Storage in Use`,
     [LOCALE_KEYS.INVENTORY_IS_FULL]: `Inventory is Full`,
+    // No Clip
+    [LOCALE_KEYS.NOCLIP_SPEED_INFO]: `Left Shift (Sprint Speed) | Scroll (Change Sprint Speed)`,
+    [LOCALE_KEYS.NOCLIP_SPEED]: `Speed`,
     // ============================
     // WebView Locales Start Here
     // ============================
@@ -228,14 +231,5 @@ export default {
         LABEL_DROP_ITEM: 'Drop Item',
         LABEL_WEIGHT: 'Weight',
         LABEL_SPLIT_TEXT: 'Make a stack of this quantity?',
-    },
-    [LOCALE_KEYS.WEBVIEW_LOGIN]: {
-        LABEL_OPEN_PAGE: `A page will open up outside of your game and assist you with logging in.`,
-        LABEL_LOGIN_WITH_DISCORD: `Login with Discord`,
-        LABEL_TRY_AGAIN: `Try again...`,
-        LABEL_TAB_OUT: `Tab out and check your browser to finish authentication. If this fails try opening the
-        window again.`,
-        LABEL_FINISH_LOGIN: `Finish Login`,
-        LABEL_OPEN_WINDOW: `Open Login Window Again`,
     },
 };

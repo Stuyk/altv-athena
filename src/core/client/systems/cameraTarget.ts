@@ -1,18 +1,16 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import Raycast from '../utility/raycast';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
 import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { InteractionController } from './interaction';
 import { ObjectWheelMenu } from '../menus/object';
 
 interface ClosestTarget {
     scriptID: number;
-    pos: Vector3;
+    pos: alt.IVector3;
     normalizedZ?: number;
     type?: 'npc' | 'player' | 'object' | 'vehicle';
 }

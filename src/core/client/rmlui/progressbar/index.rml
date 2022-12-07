@@ -1,0 +1,33 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            .bar-wrapper {
+                position: fixed;
+                display: block;
+                background: black;
+                opacity: 0.5;
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+            }
+
+            .bar {
+                position: relative;
+                display: block;
+                background-color: white;
+                z-index: 98;
+            }
+
+            .inner-text {
+                position: absolute;
+                display: block;
+                z-index: 99;
+                text-align: center;
+                top: 0;
+            }
+        </style>
+    </head>
+    <body></body>
+</rml>
