@@ -245,7 +245,7 @@ const NoClip = {
 
         native.setCamRot(noclipCam, finalRot.x, finalRot.y, finalRot.z, 2);
         native.setEntityRotation(alt.Player.local.scriptID, finalRot.x, finalRot.y, finalRot.z, 2, true);
-        native.setGameplayCamRelativeRotation(finalRot.x, finalRot.y, finalRot.z);
+        native.forceCameraRelativeHeadingAndPitch(finalRot.x, finalRot.y, finalRot.z);
         native.setRadarZoom(0);
     },
 

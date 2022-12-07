@@ -264,7 +264,7 @@ const PedEditCamera = {
             return;
         }
 
-        const [_, width] = native.getActiveScreenResolution(0, 0);
+        const [_, width] = native.getActualScreenResolution(0, 0);
         const cursor = alt.getCursorPos();
         const _x = cursor.x;
         let oldHeading = native.getEntityHeading(isLocalPlayer ? alt.Player.local.scriptID : scriptID);

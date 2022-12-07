@@ -260,7 +260,7 @@ export class VehicleSystem {
         alt.setTimeout(() => {
             try {
                 vehicle.destroy();
-            } catch (err) { }
+            } catch (err) {}
         }, 500);
     }
 
@@ -354,7 +354,7 @@ export class VehicleSystem {
     static toggleDoor(player: alt.Player, doorNumber: number) {
         const vehicle = player.vehicle
             ? player.vehicle
-            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 5);
+            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, [...alt.Vehicle.all], 5);
 
         if (!vehicle) {
             return;
@@ -434,7 +434,7 @@ export class VehicleSystem {
 
         const vehicle = player.vehicle
             ? player.vehicle
-            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 2);
+            : getClosestEntity<alt.Vehicle>(player.pos, player.rot, [...alt.Vehicle.all], 2);
         if (!vehicle) {
             return;
         }
@@ -516,7 +516,7 @@ export class VehicleSystem {
             return false;
         }
 
-        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, alt.Vehicle.all, 1);
+        const vehicle = getClosestEntity<alt.Vehicle>(player.pos, player.rot, [...alt.Vehicle.all], 1);
         if (!vehicle || !vehicle.valid) {
             return false;
         }
@@ -573,7 +573,7 @@ export class VehicleSystem {
             entity = target;
         }
 
-        const vehicle = getClosestEntity<alt.Vehicle>(entity.pos, entity.rot, alt.Vehicle.all, 1);
+        const vehicle = getClosestEntity<alt.Vehicle>(entity.pos, entity.rot, [...alt.Vehicle.all], 1);
 
         if (vehicle && vehicle.valid) {
             vehicle.resetNetOwner();
@@ -700,7 +700,7 @@ export class VehicleSystem {
 
             try {
                 vehicle.destroy();
-            } catch (err) { }
+            } catch (err) {}
         });
     }
 }

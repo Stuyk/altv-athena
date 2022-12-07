@@ -42,8 +42,8 @@ export const CharacterSystem = {
         for (let i = 0; i < appearance.structure.length; i++) {
             const value = appearance.structure[i];
 
-            if (native['setPedFaceFeature']) {
-                native['setPedFaceFeature'](ped, i, value);
+            if (native['setPedMicroMorph']) {
+                native['setPedMicroMorph'](ped, i, value);
             }
 
             if (native['setPedMicroMorphValue']) {
@@ -71,32 +71,32 @@ export const CharacterSystem = {
             alt.setPedDlcClothes(ped, appearance.hairDlc, 2, appearance.hair, 0, 0);
         }
 
-        native.setPedHairColor(ped, appearance.hairColor1, appearance.hairColor2);
+        native.setPedHairTint(ped, appearance.hairColor1, appearance.hairColor2);
 
         // Facial Hair
         native.setPedHeadOverlay(ped, 1, appearance.facialHair, appearance.facialHairOpacity);
-        native.setPedHeadOverlayColor(ped, 1, 1, appearance.facialHairColor1, appearance.facialHairColor1);
+        native.setPedHeadOverlayTint(ped, 1, 1, appearance.facialHairColor1, appearance.facialHairColor1);
 
         // Chest Hair
         if (appearance.chestHair !== null && appearance.chestHair !== undefined) {
             native.setPedHeadOverlay(ped, 10, appearance.chestHair, appearance.chestHairOpacity);
-            native.setPedHeadOverlayColor(ped, 10, 1, appearance.chestHairColor1, appearance.chestHairColor1);
+            native.setPedHeadOverlayTint(ped, 10, 1, appearance.chestHairColor1, appearance.chestHairColor1);
         }
 
         // Eyebrows
         native.setPedHeadOverlay(ped, 2, appearance.eyebrows, appearance.eyebrowsOpacity);
-        native.setPedHeadOverlayColor(ped, 2, 1, appearance.eyebrowsColor1, appearance.eyebrowsColor1);
+        native.setPedHeadOverlayTint(ped, 2, 1, appearance.eyebrowsColor1, appearance.eyebrowsColor1);
 
         // Decor
         for (let i = 0; i < appearance.colorOverlays.length; i++) {
             const overlay = appearance.colorOverlays[i];
             const color2 = overlay.color2 ? overlay.color2 : overlay.color1;
             native.setPedHeadOverlay(ped, overlay.id, overlay.value, parseFloat(overlay.opacity.toString()));
-            native.setPedHeadOverlayColor(ped, overlay.id, 1, overlay.color1, color2);
+            native.setPedHeadOverlayTint(ped, overlay.id, 1, overlay.color1, color2);
         }
 
         // Eyes
-        native.setPedEyeColor(ped, appearance.eyes);
+        native.setHeadBlendEyeColor(ped, appearance.eyes);
         native.clearAllPedProps(ped);
     },
 

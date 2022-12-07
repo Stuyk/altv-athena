@@ -131,7 +131,7 @@ class InternalFunctions implements ViewModel {
         await PedCharacter.destroy();
 
         if (!CHARACTER_SELECT_CONFIG.SKIP_SKYCAM_IN_DEBUG_MODE && alt.debug) {
-            await AthenaClient.utility.switchInPlayer(2000, SWITCHOUT_TYPES.THREE_STEPS);
+            await AthenaClient.utility.switchToMultiSecondpart(2000, SWITCHOUT_TYPES.THREE_STEPS);
         }
 
         native.freezeEntityPosition(alt.Player.local.scriptID, false);

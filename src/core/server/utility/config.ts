@@ -3,7 +3,7 @@ import { IConfig } from '../interface/iConfig';
 import fs from 'fs';
 import net from 'net';
 
-const DefaultServerCFGName = 'server.cfg';
+const DefaultServerCFGName = 'server.toml';
 const DefaultViteServer = '127.0.0.1';
 const DefaultVitePort = 3000;
 const DefaultConfigName = 'AthenaConfig.json';
@@ -36,7 +36,7 @@ export default {
         }
 
         const file = fs.readFileSync(DefaultServerCFGName).toString();
-        if (file.includes(`env: "dev"`)) {
+        if (file.includes(`env: "dev"`) || file.includes('env = "dev"')) {
             config.USE_DEV_MODE = true;
         }
 

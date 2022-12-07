@@ -10,13 +10,13 @@ import { sleep } from './sleep';
  * @param {SWITCHOUT_TYPES} switchType
  * @return {*}  {Promise<boolean>}
  */
-export async function switchInPlayer(duration: number, switchType: SWITCHOUT_TYPES = SWITCHOUT_TYPES.THREE_STEPS): Promise<boolean> {
+export async function switchToMultiSecondpart(duration: number, switchType: SWITCHOUT_TYPES = SWITCHOUT_TYPES.THREE_STEPS): Promise<boolean> {
     if (!native.isPlayerSwitchInProgress()) {
-        native.switchOutPlayer(alt.Player.local.scriptID, 0, switchType);
+        native.switchToMultiFirstpart(alt.Player.local.scriptID, 0, switchType);
     }
 
     await sleep(duration);
 
-    native.switchInPlayer(alt.Player.local.scriptID);
+    native.switchToMultiSecondpart(alt.Player.local.scriptID);
     return true;
 }
