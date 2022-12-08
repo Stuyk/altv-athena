@@ -28,7 +28,7 @@ const ClientAttachableSystem = {
                 return;
             }
 
-            ClientAttachableSystem.create(entity);
+            ClientAttachableSystem.update(entity, attachables);
         });
     },
 

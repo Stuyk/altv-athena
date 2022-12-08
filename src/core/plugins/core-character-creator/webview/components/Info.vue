@@ -153,9 +153,9 @@ export default defineComponent({
         emit: Function,
     },
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Input: defineAsyncComponent(() => import('@components/Input.vue')),
+        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Input: defineAsyncComponent(() => import('@ViewComponents/Input.vue')),
     },
     data() {
         return {

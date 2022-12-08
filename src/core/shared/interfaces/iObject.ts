@@ -1,12 +1,12 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export interface IObject {
     /**
      * Position of the Object in a 3D space.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IObject
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * The model name this object.
@@ -17,10 +17,10 @@ export interface IObject {
 
     /**
      * The rotation of this object.
-     * @type {Vector3}
+     * @type {alt.IVector3}
      * @memberof IObject
      */
-    rot?: Vector3;
+    rot?: alt.IVector3;
 
     /**
      * The max distance this object should render at.

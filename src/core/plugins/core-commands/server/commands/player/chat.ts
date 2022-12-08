@@ -1,12 +1,12 @@
 import alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import ChatController from '../../../../../server/systems/chat';
-import { View_Events_Chat } from '../../../../../shared/enums/views';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
-import { distance2d } from '../../../../../shared/utility/vector';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import ChatController from '@AthenaServer/systems/chat';
+import { View_Events_Chat } from '@AthenaShared/enums/views';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { distance2d } from '@AthenaShared/utility/vector';
 import { RoleplayCmdsConfig } from '../../config/commandsConfig';
 
 class ChatCommands {

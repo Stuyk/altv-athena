@@ -1,5 +1,5 @@
-import { Item } from '../../../../shared/interfaces/inventory';
-import { ClothingComponent } from '../../../../shared/interfaces/clothing';
+import { Item } from '@AthenaShared/interfaces/inventory';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
 import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
 
 export function getImagePath(item: Item<Partial<ClothingComponent>>): string {

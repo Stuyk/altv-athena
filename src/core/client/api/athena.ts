@@ -1,45 +1,33 @@
-import { screenConst } from './consts/screen';
+import { screenConst } from './consts/screenConst';
 import { soundConst } from './consts/soundConst';
 import { utilityConst } from './consts/utilityConst';
 import { webViewConst } from './consts/webViewConst';
-import Minimap from '../utility/minimap';
-import Spinner from '../utility/spinner';
-import Shard from '../utility/shard';
 import { Timer } from '../utility/timers';
 import Raycast from '../utility/raycast';
 import PedEditCamera from '../utility/camera';
 import { CinematicCam } from '../utility/cinematic';
-import { showNotification } from '../utility/notification';
-import * as math from '../utility/math';
-import { menus } from './consts/menus';
+import * as math from '@AthenaClient/utility/math';
+import { wheelMenusConst } from './consts/wheelMenus';
 import { constData } from './consts/dataConst';
 import { KeybindController } from '../events/keyup';
 import { KeyHeld } from '../events/keyHeld';
-import { Sprite } from '../rmlui/sprites';
-import { CameraTarget } from '../systems/cameraTarget';
+import { rmluiConst } from './consts/rmluiConst';
+import { cameraConst } from './consts/cameraConst';
 
 export const AthenaClient = {
-    camera: {
-        ped: PedEditCamera,
-        cinematic: CinematicCam,
-        target: CameraTarget,
-    },
+    camera: cameraConst,
     data: constData,
     events: {
         keyHeld: KeyHeld,
         keyBinds: KeybindController,
     },
     math,
-    menus,
-    minimap: Minimap,
-    notification: showNotification,
     raycast: Raycast,
+    rmlui: rmluiConst,
     screen: screenConst,
-    sprite: Sprite,
-    shard: Shard,
     sound: soundConst,
-    spinner: Spinner,
     timer: Timer,
     webview: webViewConst,
+    wheelMenus: wheelMenusConst,
     utility: utilityConst,
 };

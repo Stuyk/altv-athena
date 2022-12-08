@@ -22,10 +22,7 @@
         "package-lock.json": true,
         "server.cfg": true,
         ".github": false,
-        ".loose-ts-check": true,
-        ".husky": true,
         "resources/core/**": false,
-        "CONTRIBUTING.md": true,
-        "fjklskljfds": true
+        "CONTRIBUTING.md": true
     }
 }

@@ -1,14 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Vector2 } from '../../shared/interfaces/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
-const drawables: { [uid: string]: Array<Vector2> } = {};
+const drawables: { [uid: string]: Array<alt.IVector2> } = {};
 let interval: number | undefined;
 
 function drawTick() {
     Object.keys(drawables).forEach((key) => {
-        const drawLines: Array<{ a: Vector2; b: Vector2 }> = [];
+        const drawLines: Array<{ a: alt.IVector2; b: alt.IVector2 }> = [];
 
         for (let i = 0; i < drawables[key].length; i++) {
             // Last Line
@@ -29,7 +28,7 @@ function drawTick() {
     });
 }
 
-alt.onServer(SYSTEM_EVENTS.DEBUG_COLSHAPE_VERTICES, (uid: string, vertices: Array<Vector2>) => {
+alt.onServer(SYSTEM_EVENTS.DEBUG_COLSHAPE_VERTICES, (uid: string, vertices: Array<alt.IVector2>) => {
     drawables[uid] = vertices;
     interval = alt.setInterval(drawTick, 0);
 });

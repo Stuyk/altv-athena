@@ -1,5 +1,55 @@
 # Changelog
 
+## 4.0.0
+
+```
+Stripped out almost all unnecessary plugins. This is a move to slim down the framework.
+All original plugins can be found on Stuyk's GitHub.
+Updated Text Labels to Include 'update' function. Works for player or global text labels.
+Update Object Streamer to Include 'updatePosition' function. Works for player or global objects.
+Fix passing _id as a partial object for vehicle saving.
+Migrate playerFuncs.emit.meta to player.setLocalMeta #292
+Fix bug where chat could potentially cause respawn by typing 'x' when respawn is ready.
+streamers/object.ts -> Converted to const
+streamers/ped.ts -> Converted to const
+streamers/marker.ts -> Converted to const
+streamers/item.ts -> Converted to const
+streamers/textlabel.ts -> Converted to const
+streamers/worldNotifications.ts -> Converted to const
+Added Custom Path Resolver
+@AthenaServer -> src/core/server
+@AthenaClient -> src/core/client
+@AthenaShared -> src/core/shared
+@AthenaPlugins -> src/core/plugins
+Refactored plugins to use path resolving
+Removed all 'tsconfig.json' files from all plugins/*/webview -> No longer necessary
+Added additional path aliases for WebView based components and shared files.
+WebView path resolver additional alias. '@AthenaPlugins/images/my-plugin-name/some-image.png'
+Added Toggleable Vue Dev Menu with State Restoring. Removed Default Pages for Vue Dev.
+RMLUI based progress bar -> AthenaClient.rmlui.progressBar
+RMLUI based input box -> AthenaClient.rmlui.inputBox
+Added Athena.utility.isEntityBlockingPosition
+Used isEntityBlockingPosition in Sprites, and Progress Bars. Lowers opacity when something is in the way.
+Deprecate Shared Vector3 & Vector2 Interface for alt.IVector3
+RMLUI based question box with accept/decline -> AthenaClient.rmlui.questionBox
+Add bar color to RMLUI progress bar background
+Add text percentage to RMLUI progress bar
+Add sounds to Question Box
+RMLUI based menu similar to NativeUI -> AthenaClient.rmlui.menu
+Added console command in-client in debug mode: 'rmluicontrols'
+Change sprite interface for RMLUI to be 3D only
+Fix TextLabel update bug 
+RMLUI based 3D in-world menu -> AthenaClient.rmlui.menu3D
+AthenaClient.webview.page -> A page constructor made easy.
+AthenaClient.spinner -> AthenaClient.screen.spinner
+AthenaClient.shard -> AthenaClient.screen.shard
+AthenaClient.minimap -> AthenaClient.screen.minimap
+AthenaClient.notification -> AthenaClient.screen.notification
+AthenaClient.menus -> AthenaClient.wheelMenus
+/toggledoor -> Toggle closest door to the player
+Added Door State Streaming Service
+Added Door State Saving to Database -> Collection: 'doorstates'
+```
 
 ## 3.9.0
 

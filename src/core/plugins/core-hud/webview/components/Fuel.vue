@@ -4,7 +4,7 @@
             <div class="bar">
                 <Icon :shadow="false" class="stat-icon" icon="icon-local_gas_station" :size="18"></Icon>
                 <div class="fill" :style="getFill">
-                    <img class="oil-slick" :src="ResolvePath(`../../assets/images/oil.png`)" />
+                    <img class="oil-slick" :src="ResolvePath(`@plugins/images/core-hud/oil.png`)" />
                 </div>
                 <div class="bar-shadow"></div>
             </div>

@@ -1,0 +1,61 @@
+<rml>
+    <head>
+        <title>Demo</title>
+        <style>
+            body {
+                font-family: arial;
+                font-weight: bold;
+                font-style: normal;
+                font-size: 16px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .menu-wrapper {
+                position: absolute;
+                right: 50vw;
+                top: 50vh;
+                transform: scale(1);
+            }
+
+            .menu {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 200px;
+                max-width: 200px;
+                color: #ffffffdb;
+                box-sizing: border-box;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+                overflow: visible;
+                background: #000000a0;
+            }
+
+            .option {
+                display: block;
+                padding: 6px;
+                min-width: 200px;
+                max-width: 200px;
+                box-sizing: border-box;
+            }
+
+            .selected {
+                background: #ffffffee;
+                color: #000000cc;
+                border-left: 10px #60bdff;
+                padding-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="menu-wrapper" id="menu-wrapper">
+            <div class="menu">
+                <div class="options" id="options"></div>
+            </div>
+        </div>
+    </body>
+</rml>

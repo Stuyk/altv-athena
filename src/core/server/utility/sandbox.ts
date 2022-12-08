@@ -1,22 +1,25 @@
 // import * as alt from 'alt-server';
+/* It's a TypeScript file. It's not doing anything. */
+// import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 // import { Athena } from '../api/athena';
-// import { Global } from '../systems/global';
 
-// Does nothing. Just writing some code here.
-// May change from version to version but it's mostly just Stuyk's notepad.
+// const target = {"x":319.4985046386719,"y":-735.1348266601562,"z":29.30983543395996}
 
-// Athena.player.emit.override('notification', (player: alt.Player, message: string) => {
-//     console.log(`This was overrided, and you can't see ${message} in-game.`);
+// Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, async (player: alt.Player) => {
+    
 // });
 
-// Athena.player.emit.notification()
+// function makeProgressBar(player: alt.Player) {
+//     const uid = Athena.player.emit.createProgressBar(player, {
+//         position: player.pos,
+//         color: new alt.RGBA(255, 255, 255, 255),
+//         distance: 25,
+//         milliseconds: 10000,
+//         text: 'Loading...',
+//     });
 
-// async function testing() {
-//     for (let i = 0; i < 100; i++) {
-//         await Global.increase('bankNumber', 1, 10000000);
-//         const result = await Global.getKey<number>('bankNumber');
-//         console.log(`Bank Number Current Value: ${result}`);
-//     }
+//     alt.setTimeout(() => {
+//         Athena.player.emit.removeProgressBar(player, uid);
+//         makeProgressBar(player);
+//     }, 10000);
 // }
-
-// testing();

@@ -13,6 +13,7 @@ export enum HUD_COMPONENT {
     IS_IN_VEHICLE = 'isInVehicle',
     SEATBELT = 'seatbelt',
     SPEED = 'speed',
+    SPEED_UNIT = 'unit',
     GEAR = 'gear',
     ENGINE = 'engine',
     LOCK = 'lock',

@@ -89,8 +89,8 @@ export class World {
             World.previousWeather = World.weather;
 
             if (World.weather === WORLD_WEATHER.XMAS) {
-                native.setForceVehicleTrails(true);
-                native.setForcePedFootstepsTracks(true);
+                native.useSnowWheelVfxWhenUnsheltered(true);
+                native.useSnowFootVfxWhenUnsheltered(true);
                 native.requestScriptAudioBank('ICE_FOOTSTEPS', false, 0);
                 native.requestScriptAudioBank('SNOW_FOOTSTEPS', false, 0);
                 return;
@@ -98,8 +98,8 @@ export class World {
 
             native.releaseNamedScriptAudioBank('ICE_FOOTSTEPS');
             native.releaseNamedScriptAudioBank('SNOW_FOOTSTEPS');
-            native.setForceVehicleTrails(false);
-            native.setForcePedFootstepsTracks(false);
+            native.useSnowWheelVfxWhenUnsheltered(false);
+            native.useSnowFootVfxWhenUnsheltered(false);
         }
     }
 }

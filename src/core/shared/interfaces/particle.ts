@@ -1,4 +1,4 @@
-import { Vector3 } from './vector';
+import * as alt from 'alt-shared';
 
 export interface Particle {
     /**
@@ -6,7 +6,7 @@ export interface Particle {
      * @type {Vector3}
      * @memberof Particle
      */
-    pos: Vector3;
+    pos: alt.IVector3;
 
     /**
      * Core particle name.

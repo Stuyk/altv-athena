@@ -132,7 +132,7 @@ export class WheelMenu {
         view.on(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
         if (setMouseToCenter) {
-            const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
+            const [_nothing, _x, _y] = native.getActualScreenResolution(0, 0);
             alt.setCursorPos({ x: _x / 2, y: _y / 2 });
         }
 
@@ -173,7 +173,7 @@ export class WheelMenu {
         }
 
         if (setMouseToCenter) {
-            const [_nothing, _x, _y] = native.getActiveScreenResolution(0, 0);
+            const [_nothing, _x, _y] = native.getActualScreenResolution(0, 0);
             alt.setCursorPos({ x: _x / 2, y: _y / 2 });
         }
 

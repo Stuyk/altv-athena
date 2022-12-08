@@ -53,11 +53,11 @@ const ComponentName = 'CharacterCreator';
 export default defineComponent({
     name: ComponentName,
     components: {
-        Button: defineAsyncComponent(() => import('@components/Button.vue')),
-        Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Modal: defineAsyncComponent(() => import('@components/Modal.vue')),
-        Toolbar: defineAsyncComponent(() => import('@components/Toolbar.vue')),
-        Frame: defineAsyncComponent(() => import('@components/Frame.vue')),
+        Button: defineAsyncComponent(() => import('@ViewComponents/Button.vue')),
+        Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
+        Modal: defineAsyncComponent(() => import('@ViewComponents/Modal.vue')),
+        Toolbar: defineAsyncComponent(() => import('@ViewComponents/Toolbar.vue')),
+        Frame: defineAsyncComponent(() => import('@ViewComponents/Frame.vue')),
         Appearance: defineAsyncComponent(() => import('./components/Appearance.vue')),
         Structure: defineAsyncComponent(() => import('./components/Structure.vue')),
         Hair: defineAsyncComponent(() => import('./components/Hair.vue')),

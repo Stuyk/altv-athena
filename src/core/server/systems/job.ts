@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { JobAttachable } from '../../shared/interfaces/iAttachable';
 import JobEnums, { Objective } from '../../shared/interfaces/job';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
 import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance, distance2d } from '../../shared/utility/vector';
@@ -114,17 +113,13 @@ export class Job {
      *
      * Returns a vehicle with a 'uid'.
      *
-     * @param {string} model
-     * @param {alt.RGBA} [color1]
-     * @param {alt.RGBA} [color2]
-     * @return {alt.Vehicle}
      * @memberof Job
      */
     addVehicle(
         player: alt.Player,
         model: string | number,
-        pos: Vector3,
-        rot: Vector3,
+        pos: alt.IVector3,
+        rot: alt.IVector3,
         color1?: alt.RGBA,
         color2?: alt.RGBA,
     ): alt.Vehicle {

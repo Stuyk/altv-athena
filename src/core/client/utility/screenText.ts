@@ -51,11 +51,11 @@ export const ScreenText = {
      * @memberof ScreenText
      */
     getTextWidth(text: string, font: number, scale: number): number {
-        native.beginTextCommandGetWidth('CELL_EMAIL_BCON');
+        native.beginTextCommandGetScreenWidthOfDisplayText('CELL_EMAIL_BCON');
         ScreenText.addLongString(text);
         native.setTextFont(font);
         native.setTextScale(1, scale);
-        return native.endTextCommandGetWidth(true);
+        return native.endTextCommandGetScreenWidthOfDisplayText(true);
     },
 
     /**

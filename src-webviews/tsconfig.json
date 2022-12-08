@@ -6,14 +6,7 @@
         "module": "commonjs",
         "jsx": "preserve",
         "esModuleInterop": true,
-        "lib": ["esnext", "dom"],
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/src/*"],
-            "@utility/*": ["./src/utility/*"],
-            "@components/*": ["./src/components/*"],
-            "@plugins/*": ["./src/core/plugins/*"]
-        }
+        "lib": ["esnext", "dom"]
     },
     "include": [
         "src/**/*.ts",

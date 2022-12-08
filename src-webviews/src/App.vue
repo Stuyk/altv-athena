@@ -2,15 +2,12 @@
     <keep-alive>
         <div class="page">
             <!-- Developer Menu for Local Host -->
-            <div class="devMenu" v-if="isDevMenu()" @mouseenter="setDevMode(true)" @mouseleave="setDevMode(false)">
-                <div class="devMode" v-if="devMode">
-                    <template v-for="(pageName, index) in getAllPageNames" :key="index">
-                        <span class="simple-link" @click="overridePages(pageName)">
-                            {{ pageName }}
-                        </span>
-                    </template>
-                </div>
-            </div>
+            <VueDevMenu
+                :pages="getAllPageNames"
+                :previousPages="pages"
+                @DevUpdatePages="devUpdatePages"
+                v-if="isDevMenu()"
+            />
             <!-- Displays Individual Pages -->
             <component
                 v-for="(page, index) in pages"
@@ -42,7 +39,7 @@ import { defineComponent } from 'vue';
 import { CORE_IMPORTS } from './pages/components';
 import { PLUGIN_IMPORTS } from './plugins/imports';
 import { WebViewEventNames } from '../../src/core/shared/enums/webViewEvents';
-import DefaultPages from './defaultPage';
+import VueDevMenu from './components/VueDevMenu.vue';
 
 // Interfaces
 import IPageData from './interfaces/IPageData';
@@ -65,6 +62,7 @@ export default defineComponent({
     name: 'App',
     components: {
         ...ALL_THE_COMPONENTS,
+        VueDevMenu,
     },
     data() {
         return {
@@ -127,19 +125,43 @@ export default defineComponent({
             this[type] = foundPages;
             console.log(`[Vue] ${type} -> ${JSON.stringify(foundPages.map((x) => x.name))}`);
         },
+        devUpdatePages(pageName: string, isAddingPage: boolean) {
+            const currentPages = this['pages'];
+
+            if (isAddingPage) {
+                const newPages = currentPages.concat([{ name: pageName }]);
+                this.handleSetPages(newPages, 'pages');
+                localStorage.setItem('pages', JSON.stringify(newPages));
+                return;
+            }
+
+            const index = currentPages.findIndex((x) => x.name === pageName);
+            if (index <= -1) {
+                return;
+            }
+
+            currentPages.splice(index, 1);
+            this.handleSetPages(currentPages, 'pages');
+            localStorage.setItem('pages', JSON.stringify(currentPages));
+        },
     },
     mounted() {
         // What to show when 'alt' is not present.
         // Basically if alt:V isn't running with this page present inside of it.
         if (!('alt' in window)) {
-            this.handleSetPages([...DefaultPages], 'pages');
-
             // Random state generation for testing...
             setInterval(() => {
                 this.state.hp = Math.floor(Math.random() * 100) + 100;
                 this.state.armour = Math.floor(Math.random() * 100);
                 this.state.random = Math.random() * Number.MAX_SAFE_INTEGER;
             }, 100);
+
+            const existingPages = localStorage.getItem('pages');
+            if (existingPages && typeof existingPages !== 'undefined') {
+                try {
+                    this.handleSetPages(JSON.parse(existingPages), 'pages');
+                } catch (err) {}
+            }
 
             return;
         }

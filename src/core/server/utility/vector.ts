@@ -1,18 +1,17 @@
 import * as alt from 'alt-server';
-import { Vector3 } from '../../shared/interfaces/vector';
 import { distance } from '../../shared/utility/vector';
 
 /**
  * SERVER ONLY
  * Gets the direction the player is facing.
- * @param {Vector3} rot
+ * @param {alt.IVector3} rot
  */
-export function getForwardVector(rot: Vector3): Vector3 {
+export function getForwardVector(rot: alt.IVector3): alt.IVector3 {
     return {
         x: fwdX(rot.x, rot.z),
         y: fwdY(rot.x, rot.z),
         z: fwdZ(rot.x),
-    } as Vector3;
+    } as alt.IVector3;
 }
 
 /**
@@ -21,9 +20,9 @@ export function getForwardVector(rot: Vector3): Vector3 {
  * @export
  * @param {alt.Player} player
  * @param {number} distance
- * @return {*}  {Vector3}
+ * @return {alt.Vector3}
  */
-export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): Vector3 {
+export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): alt.Vector3 {
     const forwardVector = getForwardVector(player.rot);
     const posFront = {
         x: player.pos.x + forwardVector.x * distance,
@@ -36,9 +35,9 @@ export function getVectorInFrontOfPlayer(player: alt.Player, distance: number): 
 
 /**
  * Determine if a vector is between vectors.
- * @param {Vector3} pos
- * @param {Vector3} vector1
- * @param {Vector3} vector2
+ * @param {alt.IVector3} pos
+ * @param {alt.IVector3} vector1
+ * @param {alt.IVector3} vector2
  * @returns {boolean}
  */
 export function isBetweenVectors(pos, vector1, vector2): boolean {
@@ -50,16 +49,16 @@ export function isBetweenVectors(pos, vector1, vector2): boolean {
 /**
  * Get the closest server entity type. Server only.
  * @template T
- * @param {Vector3} playerPosition
- * @param {Vector3} rot player rotation
- * @param {Array<{ pos: Vector3; valid?: boolean }>} entities
+ * @param {alt.IVector3} playerPosition
+ * @param {alt.IVector3} rot player rotation
+ * @param {Array<{ pos: alt.IVector3; valid?: boolean }>} entities
  * @param {number} distance
  * @return {*}  {(T | null)}
  */
 export function getClosestEntity<T>(
-    playerPosition: Vector3,
-    rot: Vector3,
-    entities: Array<{ pos: Vector3; valid?: boolean }>,
+    playerPosition: alt.IVector3,
+    rot: alt.IVector3,
+    entities: Array<{ pos: alt.IVector3; valid?: boolean }>,
     dist: number,
     checkBackwards: boolean = false,
 ): T | null {

@@ -17,7 +17,7 @@ async function handleConnectionComplete() {
     native.setStreamedTextureDictAsNoLongerNeeded('athena_icons');
 
     if (SHARED_CONFIG.DISABLE_IDLE_CAM) {
-        alt.setConfigFlag("DISABLE_IDLE_CAMERA", true);
+        alt.setConfigFlag('DISABLE_IDLE_CAMERA', true);
     }
 
     // Calls the login functionality
@@ -37,7 +37,7 @@ alt.everyTick(() => {
 function handleTick() {
     native.startAudioScene(`CHARACTER_CHANGE_IN_SKY_SCENE`);
     native.startAudioScene('FBI_HEIST_H5_MUTE_AMBIENCE_SCENE'); // Used to stop police sound in town
-    native.cancelCurrentPoliceReport(); // Used to stop default police radio around/In police vehicle
+    native.cancelAllPoliceReports(); // Used to stop default police radio around/In police vehicle
     native.clearAmbientZoneState('AZ_COUNTRYSIDE_PRISON_01_ANNOUNCER_GENERAL', false); // Turn off prison sound
     native.clearAmbientZoneState('AZ_COUNTRYSIDE_PRISON_01_ANNOUNCER_WARNING', false); // Turn off prison sound
     native.clearAmbientZoneState('AZ_COUNTRYSIDE_PRISON_01_ANNOUNCER_ALARM', false); // Turn off prison sound

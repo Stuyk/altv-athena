@@ -1,14 +1,14 @@
 import * as alt from 'alt-server';
-import { Athena } from '../../../../../server/api/athena';
-import { command } from '../../../../../server/decorators/commands';
-import { sha256Random } from '../../../../../server/utility/encryption';
-import { ITEM_TYPE } from '../../../../../shared/enums/itemTypes';
-import { PERMISSIONS } from '../../../../../shared/flags/permissionFlags';
-import { getWeaponByName } from '../../../../../shared/information/weaponList';
-import { Item } from '../../../../../shared/interfaces/item';
-import { LOCALE_KEYS } from '../../../../../shared/locale/languages/keys';
-import { LocaleController } from '../../../../../shared/locale/locale';
-import { deepCloneObject } from '../../../../../shared/utility/deepCopy';
+import { Athena } from '@AthenaServer/api/athena';
+import { command } from '@AthenaServer/decorators/commands';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { getWeaponByName } from '@AthenaShared/information/weaponList';
+import { Item } from '@AthenaShared/interfaces/item';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 const itemRef: Item = {
     name: `Micro SMG`,

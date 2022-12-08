@@ -1,5 +1,5 @@
+import * as alt from 'alt-shared';
 import { ANIMATION_FLAGS } from '../flags/animationFlags';
-import { Vector3 } from './vector';
 
 export interface Animation {
     /**
@@ -53,5 +53,5 @@ export interface JobAnimation extends Animation {
      * @type {Vector3}
      * @memberof JobAnimation
      */
-    rotation?: Vector3;
+    rotation?: alt.IVector3;
 }

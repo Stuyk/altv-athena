@@ -1,19 +1,19 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { DEFAULT_CONFIG } from '../../../../server/athena/main';
-import Ares from '../../../../server/utility/ares';
-import { sha256Random } from '../../../../server/utility/encryption';
-import ConfigUtil from '../../../../server/utility/config';
-import { AgendaSystem } from '../../../../server/systems/agenda';
-import { AgendaOrder } from '../../../../server/systems/agenda';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import Ares from '@AthenaServer/utility/ares';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import ConfigUtil from '@AthenaServer/utility/config';
+import { AgendaSystem } from '@AthenaServer/systems/agenda';
+import { AgendaOrder } from '@AthenaServer/systems/agenda';
 import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
-import { Athena } from '../../../../server/api/athena';
+import { Athena } from '@AthenaServer/api/athena';
 import { LoginController } from './login';
 import { DISCORD_LOCALES } from '../../shared/locales';
-import { JwtProvider } from '../../../../server/systems/jwt';
-import { Account } from '../../../../server/interface/iAccount';
-import { DiscordUser } from '../../../../server/interface/iDiscordUser';
+import { JwtProvider } from '@AthenaServer/systems/jwt';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 
 // These settings are very sensitive.
 // If you are not sure what they do; do not change them.
