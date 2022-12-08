@@ -114,7 +114,7 @@ export class VehicleSystem {
             return;
         }
 
-        this.spawnAllVehicles(vehicles);
+        VehicleSystem.spawnAllVehicles(vehicles);
     }
 
     private static spawnAllVehicles(vehicles: Array<IVehicle>) {
