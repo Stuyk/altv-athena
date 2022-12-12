@@ -83,7 +83,7 @@ class InternalFunctions implements ViewModel {
         view.off(VIEW_EVENTS_WHEEL_MENU.EXECUTE, InternalFunctions.execute);
 
         if (closePage) {
-            WebViewController.closePages([PAGE_NAME], true);
+            await WebViewController.closePages([PAGE_NAME], true);
         }
 
         WebViewController.unfocus();

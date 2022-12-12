@@ -1,6 +1,6 @@
 # What are these?
 
-These are dynamically created custom configuration(s) that will always overwrite your `server.cfg`. You should always adjust these depending on your environment.
+These are dynamically created custom configuration(s) that will always overwrite your `server.toml`. You should always adjust these depending on your environment.
 
 **dev.json**
 
