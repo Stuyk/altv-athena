@@ -18,7 +18,7 @@ export function drawTexture2D(
 
     const identifier = `${dictionary}${name}`;
     if (!textureData[identifier]) {
-        const [_, width, height] = native.getActiveScreenResolution(0, 0);
+        const [_, width, height] = native.getActualScreenResolution(0, 0);
         const resolution = native.getTextureResolution(dictionary, name);
         textureData[identifier] = {
             x: resolution.x / width,
@@ -59,7 +59,7 @@ export function drawTexture(dictionary: string, name: string, position: alt.Vect
 
     const identifier = `${dictionary}${name}`;
     if (!textureData[identifier]) {
-        const [_, width, height] = native.getActiveScreenResolution(0, 0);
+        const [_, width, height] = native.getActualScreenResolution(0, 0);
         const resolution = native.getTextureResolution(dictionary, name);
         textureData[identifier] = {
             x: resolution.x / width,
@@ -80,7 +80,7 @@ export function drawTexture(dictionary: string, name: string, position: alt.Vect
         return;
     }
 
-    native.setDrawOrigin(position.x, position.y, position.z, 0);
+    native.setDrawOrigin(position.x, position.y, position.z, false);
     native.drawSprite(dictionary, name, 0, 0, width, height, 0, 255, 255, 255, 255, false, undefined);
     native.clearDrawOrigin();
 }

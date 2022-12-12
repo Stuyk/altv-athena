@@ -25,6 +25,7 @@ dist-ssr
 *.local
 !altv-athena-hwid-win.exe
 server.cfg
+server.toml
 doc
 typedoc.json
 !scripts/streamer/dist

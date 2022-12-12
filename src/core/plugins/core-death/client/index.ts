@@ -42,7 +42,7 @@ class InternalFunctions {
             }
 
             // Switch out player now
-            AthenaClient.utility.switchInPlayer(2000);
+            AthenaClient.utility.switchToMultiSecondpart(2000);
 
             // Wait just a bit for the switch to start
             await sleep(1000);
