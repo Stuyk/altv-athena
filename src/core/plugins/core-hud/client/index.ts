@@ -254,7 +254,9 @@ class InternalFunctions implements ViewModel {
     }
 
     static defaultSpeedUnitComponente(propName: string) {
-        if (!alt.Player.local.vehicle || !alt.Player.local.vehicle.valid) return;
+        if (!alt.Player.local.vehicle || !alt.Player.local.vehicle.valid) {
+          return;
+        }
 
         const data = VehicleData.find((dat) => alt.hash(dat.name) === alt.Player.local.vehicle.model);
         if (!data) {
