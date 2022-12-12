@@ -1,8 +1,6 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import IAttachable from '../../shared/interfaces/iAttachable';
-import { loadModel } from '../utility/model';
 
 const cache: { [key: string]: Array<IAttachable> } = {};
 
@@ -97,18 +95,16 @@ const ClientAttachableSystem = {
             for (let i = 0; i < cache[player.id].length; i++) {
                 const attachable = cache[player.id][i];
 
-                if (attachable.clientObjectID === undefined || attachable.clientObjectID === null) {
+                if (attachable.entityID === undefined || attachable.entityID === null) {
                     continue;
                 }
 
-                if (!native.doesEntityExist(attachable.clientObjectID)) {
+                const foundObject = alt.Object.getByID(attachable.entityID);
+                if (typeof foundObject === 'undefined' || foundObject === null || foundObject.valid === false) {
                     continue;
                 }
 
-                native.setEntityAsMissionEntity(attachable.clientObjectID, true, true);
-                native.deleteEntity(attachable.clientObjectID);
-                native.setEntityAsNoLongerNeeded(attachable.clientObjectID);
-                native.clearAreaOfObjects(player.pos.x, player.pos.y, player.pos.z, 1, 0);
+                foundObject.destroy();
             }
         }
     },
@@ -127,47 +123,27 @@ const ClientAttachableSystem = {
         cache[player.id] = [];
 
         for (let i = 0; i < attachables.length; i++) {
-            const newAttachable = attachables[i];
-            const objectHash = alt.hash(newAttachable.model);
-            const didLoadObject = await loadModel(objectHash);
-            if (!didLoadObject) {
-                continue;
-            }
-
-            const newObjectIdentifier = native.createObjectNoOffset(
-                objectHash,
-                player.pos.x,
-                player.pos.y,
-                player.pos.z,
-                false,
-                false,
+            const newObject = new alt.Object(
+                attachables[i].model,
+                new alt.Vector3(attachables[i].pos),
+                new alt.Vector3(attachables[i].rot),
+                true,
                 false,
             );
 
-            alt.nextTick(() => {
-                native.attachEntityToEntity(
-                    newObjectIdentifier,
-                    player.scriptID,
-                    native.getPedBoneIndex(player.scriptID, newAttachable.bone),
-                    newAttachable.pos.x,
-                    newAttachable.pos.y,
-                    newAttachable.pos.z,
-                    newAttachable.rot.x,
-                    newAttachable.rot.y,
-                    newAttachable.rot.z,
-                    true,
-                    true,
-                    false,
-                    true,
-                    1,
-                    true,
-                    undefined,
-                );
+            await newObject.waitForSpawn();
 
-                // Assign the new attachable to our cache
-                newAttachable.clientObjectID = newObjectIdentifier;
-                cache[player.id].push(newAttachable);
-            });
+            newObject.attachToEntity(
+                player,
+                attachables[i].bone,
+                new alt.Vector3(attachables[i].pos),
+                new alt.Vector3(attachables[i].rot),
+                true,
+                false,
+                true,
+            );
+            cache[player.id].push(attachables[i]);
+            attachables[i].entityID = newObject.id;
         }
     },
 };

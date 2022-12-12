@@ -42,7 +42,7 @@ export default interface IAttachable {
      * @type {number}
      * @memberof IAttachable
      */
-    clientObjectID?: number;
+    entityID?: number;
 }
 
 export interface JobAttachable extends IAttachable {
