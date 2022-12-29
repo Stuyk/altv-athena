@@ -1,6 +1,28 @@
 import * as alt from 'alt-server';
+import { eventsConst } from '@AthenaServer/api/consts/constEvents';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { StateManager } from '../stateManager';
 
 let enabled = true;
+
+/**
+ * Respawns the player, and resets their death data.
+ *
+ * @param {alt.Player} victim
+ * @return {*}
+ */
+function respawn(victim: alt.Player) {
+    if (!enabled) {
+        return;
+    }
+
+    if (!victim.data.isDead) {
+        return;
+    }
+
+    StateManager.set(victim, 'isDead', false);
+    victim.spawn(victim.pos.x, victim.pos.y, victim.pos.z, 0);
+}
 
 /**
  * Respawns the player after 5 seconds in their same position.
@@ -17,7 +39,15 @@ function handleDefaultDeath(victim: alt.Player) {
         return;
     }
 
-    victim.spawn(victim.pos.x, victim.pos.y, victim.pos.z, 5000);
+    StateManager.set(victim, 'isDead', true);
+
+    alt.setTimeout(() => {
+        if (!victim || !victim.valid) {
+            return;
+        }
+
+        respawn(victim);
+    }, 5000);
 }
 
 export const DefaultDeathSystem = {
@@ -28,4 +58,5 @@ export const DefaultDeathSystem = {
     },
 };
 
+eventsConst.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, respawn);
 alt.on('playerDeath', handleDefaultDeath);
