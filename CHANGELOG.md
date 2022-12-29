@@ -3,16 +3,26 @@
 ## 4.0.2
 
 ```
+Removed Athena.world namespace.
+
 Death
 - Added default death system to help decouple framework from opinionated systems.
 - Removed default death plugin and moved to the Athena Framework Plugin organization.
 - Athena.systems.default.death.disable() -> Used to disable default Death System.
+
+Time
+- Removed world time system.
+- Added default world time system based on server time.
+- Athena.systems.default.time.disable() -> Used to disable default Time System.
+- Athena.systems.default.time.getHour()
+- Athena.systems.default.time.getMinute()
 
 Weather
 - Removed weather plugin commands. Removed weather system.
 - Added default weather system.
 - Athena.systems.default.weather.disable() -> Disabled all weather & weather sync.
 - Added getWeatherFromString() function to get a numbered value from a weather string.
+- Athena.systems.default.weather.getCurrentWeather() -> Can return number, or string value
 ```
 
 

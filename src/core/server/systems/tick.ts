@@ -33,8 +33,6 @@ function handlePing(player: alt.Player): void {
     // Handles General Saving / Synchronization
     Athena.player.save.onTick(player);
     Athena.player.sync.syncedMeta(player);
-    Athena.player.sync.time(player);
-    Athena.player.sync.weather(player);
 
     if (!player.nextPlayTime || Date.now() > player.nextPlayTime) {
         player.nextPlayTime = Date.now() + 60000;

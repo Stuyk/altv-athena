@@ -1,29 +1,15 @@
 import { eventsConst } from '@AthenaServer/api/consts/constEvents';
-import { playerConst } from '@AthenaServer/api/consts/constPlayer';
 import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
-import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather';
 import * as alt from 'alt-server';
 
-const TIME_BETWEEN_UPDATES = 60000 * 5; // 5 Minutes
-const weathers: Array<WEATHER_KEY> = [
-    'ExtraSunny',
-    'ExtraSunny',
-    'Clear',
-    'Clouds',
-    'Overcast',
-    'Rain',
-    'Thunder',
-    'Rain',
-    'Foggy',
-    'Overcast',
-    'Clearing',
-];
-
+const TIME_BETWEEN_UPDATES = 30000; // 30 Seconds
 let enabled = true;
 let interval: number;
+let minute;
+let hour;
 
 /**
- * Updates the player weather to match current weather system.
+ * Updates the player time to match the current server time.
  *
  * @param {alt.Player} player
  */
@@ -32,8 +18,13 @@ function updatePlayer(player: alt.Player) {
         return;
     }
 
-    playerConst.emit.message(player, `Weather is now ${weathers[0]}.`);
-    player.setWeather(getWeatherFromString(weathers[0]));
+    if (hour === undefined) {
+        const time = new Date(Date.now());
+        minute = time.getMinutes();
+        hour = time.getHours();
+    }
+
+    player.setDateTime(1, 1, 2023, hour, minute, 0);
 }
 
 /**
@@ -45,21 +36,21 @@ function handleWeatherUpdate() {
         return;
     }
 
+    const time = new Date(Date.now());
+    minute = time.getMinutes();
+    hour = time.getHours();
+
     const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.data && x.valid);
     if (loggedInPlayers.length <= 0) {
         return;
     }
-
-    // Remove first weather item.
-    // Push to the back of the array.
-    weathers.push(weathers.shift());
 
     for (let player of loggedInPlayers) {
         updatePlayer(player);
     }
 }
 
-export const DefaultWeatherSystem = {
+export const DefaultTimeSystem = {
     disable: () => {
         enabled = false;
 
@@ -68,10 +59,13 @@ export const DefaultWeatherSystem = {
             interval = undefined;
         }
 
-        alt.log(`Default Weather System Turned Off`);
+        alt.log(`Default Time System Turned Off`);
     },
-    getCurrentWeather(asString = false): number | string {
-        return asString ? weathers[0] : getWeatherFromString(weathers[0]);
+    getHour() {
+        return hour;
+    },
+    getMinute() {
+        return minute;
     },
     updatePlayer,
 };
