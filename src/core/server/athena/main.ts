@@ -5,7 +5,6 @@ export const DEFAULT_CONFIG = {
     // Character Selection View
     CHARACTER_SELECT_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
     CHARACTER_SELECT_ROT: 249.58352661132812,
-    PLAYER_MAX_CHARACTER_SLOTS: 5,
     // Character Creation View
     CHARACTER_CREATOR_POS: { x: -145.9370574951172, y: -575.7879638671875, z: 32.424442291259766 },
     CHARACTER_CREATOR_ROT: 249.58352661132812,
@@ -18,15 +17,6 @@ export const DEFAULT_CONFIG = {
     CHAT_DISTANCE: 35,
     // Interaction Properties
     MAX_INTERACTION_DISTANCE: 3, // The maximum distance the player can stand away from a interaction object.
-    // World Time
-    BOOTUP_HOUR: 9,
-    BOOTUP_MINUTE: 0,
-    MINUTES_PER_MINUTE: 5,
-    USE_SERVER_TIME: true, // Overwrites the server time to use the current time of the computer it is running on.
-    // Food Properties
-    TIME_BETWEEN_FOOD_UPDATES: 10000,
-    WATER_REMOVAL_RATE: 0.08, // How much food to remove every update.
-    FOOD_REMOVAL_RATE: 0.05, // How much water to remove every update.
     // World Properties
     VALID_HOSPITALS: [
         { x: -248.01309204101562, y: 6332.01513671875, z: 33.0750732421875 },
@@ -34,19 +24,6 @@ export const DEFAULT_CONFIG = {
         { x: 297.4647521972656, y: -584.7089233398438, z: 44.292724609375 },
         { x: -677.0172119140625, y: 311.7821350097656, z: 83.601806640625 },
         { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 },
-    ],
-    WEATHER_ROTATION: [
-        'EXTRASUNNY',
-        'EXTRASUNNY',
-        'CLEAR',
-        'CLOUDS',
-        'OVERCAST',
-        'RAIN',
-        'THUNDER',
-        'RAIN',
-        'FOGGY',
-        'OVERCAST',
-        'CLEARING',
     ],
     // Vehicle Properties
     TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
