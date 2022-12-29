@@ -24,3 +24,4 @@ import '../systems/world';
 
 // Defaults Systems - With Toggleable Configs
 import '../systems/defaults/death';
+import '../systems/defaults/weather';

@@ -6,7 +6,6 @@ import { addJobCheck, cloneObjective, getPlayerJob, Job } from '../../systems/jo
 import { PluginSystem } from '../../systems/plugins';
 import { SoundSystem } from '../../systems/sound';
 import { StorageSystem } from '../../systems/storage';
-import { World } from '../../systems/world';
 import { defaultSystemsConst } from './constDefaultSystems';
 
 export const systemConst = {
@@ -24,5 +23,4 @@ export const systemConst = {
     plugins: PluginSystem,
     sound: SoundSystem,
     storage: StorageSystem,
-    world: World,
 };

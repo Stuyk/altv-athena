@@ -3,9 +3,16 @@
 ## 4.0.2
 
 ```
-Added default death system to help decouple framework from opinionated systems.
-Removed default death plugin and moved to the Athena Framework Plugin organization.
-Athena.systems.default.death.disable() -> Used to disable default Death System.
+Death
+- Added default death system to help decouple framework from opinionated systems.
+- Removed default death plugin and moved to the Athena Framework Plugin organization.
+- Athena.systems.default.death.disable() -> Used to disable default Death System.
+
+Weather
+- Removed weather plugin commands. Removed weather system.
+- Added default weather system.
+- Athena.systems.default.weather.disable() -> Disabled all weather & weather sync.
+- Added getWeatherFromString() function to get a numbered value from a weather string.
 ```
 
 

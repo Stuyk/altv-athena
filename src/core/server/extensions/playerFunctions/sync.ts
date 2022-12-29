@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../../shared/enums/currency';
-import { World } from '../../systems/world';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
@@ -260,27 +259,6 @@ const Sync = {
         player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
         player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, player.wanted);
     },
-
-    /**
-     * Update the player's time to match server time.
-     * @memberof SyncPrototype
-     */
-    time(player: alt.Player): void {
-        alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_TIME, World.getWorldHour(), World.getWorldMinute());
-    },
-
-    /**
-     * Update the player's weather to match server weather based on grid space.
-     * @memberof SyncPrototype
-     */
-    weather(player: alt.Player): void {
-        player.gridSpace = World.getGridSpace(player);
-        player.currentWeather = World.getWeatherByGrid(player.gridSpace);
-
-        emit.meta(player, 'gridSpace', player.gridSpace);
-        alt.emitClient(player, SYSTEM_EVENTS.WORLD_UPDATE_WEATHER, player.currentWeather);
-    },
-
     playTime(playerRef: alt.Player): void {
         const player = playerRef as ReadOnlyPlayer;
         Athena.state.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667, true);

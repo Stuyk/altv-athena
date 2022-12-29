@@ -6,11 +6,9 @@ import { DEFAULT_CONFIG } from '../../athena/main';
 import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { Account } from '../../interface/iAccount';
 import { Collections } from '../../interface/iDatabaseCollections';
-import Ares from '../../utility/ares';
 import emit from './emit';
 import safe from './safe';
 import save from './save';
-import sync from './sync';
 import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
@@ -77,8 +75,6 @@ const Setter = {
         // Some general initialization setup.
         player.data = {} as any;
         safe.setPosition(player, pos.x, pos.y, pos.z);
-        sync.time(player);
-        sync.weather(player);
     },
 
     /**

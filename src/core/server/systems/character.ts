@@ -7,9 +7,6 @@ import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Character, CharacterDefaults } from '../../shared/interfaces/character';
 import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { World } from './world';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { Global } from './global';
 import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
 import { Injections } from './injections';
@@ -109,7 +106,7 @@ const CharacterSystemRef = {
         if (!player || !player.valid) {
             return;
         }
-        
+
         player.data = deepCloneObject(character);
 
         // Increase the value outright
@@ -149,7 +146,7 @@ const CharacterSystemRef = {
             if (!player || !player.valid) {
                 return;
             }
-            
+
             if (player.data.pos) {
                 Athena.player.safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
             } else {
@@ -177,19 +174,12 @@ const CharacterSystemRef = {
 
             // Synchronization
             Athena.player.sync.currencyData(player);
-            Athena.player.sync.weather(player);
-            Athena.player.sync.time(player);
             Athena.player.sync.inventory(player);
 
             player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
             player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
             player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
             player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, player.data._id.toString());
-
-            // Information
-            const hour = `${World.hour}`.length <= 1 ? `0${World.hour}` : `${World.hour}`;
-            const minute = `${World.minute}`.length <= 1 ? `0${World.minute}` : `${World.minute}`;
-            Athena.player.emit.message(player, `${LocaleController.get(LOCALE_KEYS.WORLD_TIME_IS, hour, minute)}`);
 
             // Propagation
             Athena.controllers.chat.populateCommands(player);
