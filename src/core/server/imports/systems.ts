@@ -21,3 +21,6 @@ import '../systems/tick';
 import '../systems/toolbar';
 import '../systems/vehicle';
 import '../systems/world';
+
+// Defaults Systems - With Toggleable Configs
+import '../systems/defaults/death';

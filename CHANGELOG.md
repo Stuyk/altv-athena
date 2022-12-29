@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.0.2
+
+```
+Added default death system to help decouple framework from opinionated systems.
+Removed default death plugin and moved to the Athena Framework Plugin organization.
+Athena.systems.default.death.disable() -> Used to disable default Death System.
+```
+
+
 ## 4.0.0
 
 ```
