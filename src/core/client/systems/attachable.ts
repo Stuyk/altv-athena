@@ -99,7 +99,7 @@ const ClientAttachableSystem = {
                     continue;
                 }
 
-                const foundObject = alt.Object.getByID(attachable.entityID);
+                const foundObject = alt.Object.all.find((x) => x.id === attachable.entityID);
                 if (typeof foundObject === 'undefined' || foundObject === null || foundObject.valid === false) {
                     continue;
                 }

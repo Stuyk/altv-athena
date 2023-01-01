@@ -23,6 +23,9 @@ Weather
 - Athena.systems.default.weather.disable() -> Disabled all weather & weather sync.
 - Added getWeatherFromString() function to get a numbered value from a weather string.
 - Athena.systems.default.weather.getCurrentWeather() -> Can return number, or string value
+
+Attachables
+- Fixed alt.Object.getByID bug; replaced with proper find.
 ```
 
 
