@@ -117,7 +117,7 @@ const ClientAttachableSystem = {
      * @memberof ClientAttachableSystem
      */
     async update(player: alt.Player, attachables: Array<IAttachable>) {
-        await ClientAttachableSystem.remove(player);
+        ClientAttachableSystem.remove(player);
 
         // Create new attachables
         cache[player.id] = [];
