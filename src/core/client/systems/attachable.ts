@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import IAttachable from '../../shared/interfaces/iAttachable';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import IAttachable from '@AthenaShared/interfaces/iAttachable';
 
 const cache: { [key: string]: Array<IAttachable> } = {};
 
