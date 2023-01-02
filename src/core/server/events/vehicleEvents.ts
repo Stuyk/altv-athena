@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
+import { ATHENA_EVENTS_VEHICLE } from '@AthenaShared/enums/athenaEvents';
 
 const vehicleEvents: Array<{ eventName: string; callback: (vehicle: alt.Vehicle, ...args: any[]) => void }> = [];
 

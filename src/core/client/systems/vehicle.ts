@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { PED_CONFIG_FLAG } from '../../shared/flags/pedflags';
-import { KeybindController } from '../events/keyup';
-import { isAnyMenuOpen } from '../utility/menus';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
+import { KeybindController } from '@AthenaClient/events/keyup';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 import './push';
 import { PushVehicle } from './push';

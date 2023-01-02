@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { PluginSystem } from '../../../server/systems/plugins';
+import { PluginSystem } from '@AthenaServer/systems/plugins';
 
 import './src/commands/weatherCommands';
 

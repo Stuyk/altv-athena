@@ -1,4 +1,4 @@
-import { PERMISSIONS, CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
+import { PERMISSIONS, CHARACTER_PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 
 export interface Command {
     /**

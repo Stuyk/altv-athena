@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/blip';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { sha256Random } from '../utility/encryption';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Blip } from '@AthenaShared/interfaces/blip';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 
 const globalBlips: Array<Blip> = [];
 

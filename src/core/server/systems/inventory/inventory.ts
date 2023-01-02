@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { CharacterInventory, Item, ItemSlot, StoredItem } from '../../../shared/interfaces/inventory';
-import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { Athena } from '../../api/athena';
+import { CharacterInventory, Item, ItemSlot, StoredItem } from '@AthenaShared/interfaces/inventory';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Athena } from '@AthenaServer/api/athena';
 import { StateManager } from '../stateManager';
 import ItemFactory from './factory';
 import Shared from './shared';

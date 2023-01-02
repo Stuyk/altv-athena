@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../../client/api/athena';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Item, StoredItem } from '../../../shared/interfaces/inventory';
+import { AthenaClient } from '@AthenaClient/api/athena';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Item, StoredItem } from '@AthenaShared/interfaces/inventory';
 import { INVENTORY_EVENTS } from '../shared/events';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];

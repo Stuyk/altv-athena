@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { Item } from '../../shared/interfaces/item';
-import EFFECT from '../../shared/enums/effects';
-import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
-import { ItemEffects } from '../systems/itemEffects';
-import { Athena } from '../api/athena';
+import { Item } from '@AthenaShared/interfaces/item';
+import EFFECT from '@AthenaShared/enums/effects';
+import { INVENTORY_TYPE } from '@AthenaShared/enums/inventoryTypes';
+import { ItemEffects } from '@AthenaServer/systems/itemEffects';
+import { Athena } from '@AthenaServer/api/athena';
 
 function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE | string) {
     if (!item || !item.data || !item.data.amount) {

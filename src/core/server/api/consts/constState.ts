@@ -1,4 +1,4 @@
-import { StateManager } from '../../systems/stateManager';
+import { StateManager } from '@AthenaServer/systems/stateManager';
 
 export const stateConst = {
     get: StateManager.get,

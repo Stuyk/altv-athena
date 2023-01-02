@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Item } from '../../shared/interfaces/item';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Collections } from '../interface/iDatabaseCollections';
+import { Item } from '@AthenaShared/interfaces/item';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
 
 const databaseItemNames: Array<{ name: string; dbName: string }> = [];
 let isDoneLoading = false;

@@ -1,13 +1,13 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
-import { Character } from '../../shared/interfaces/character';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance, distance2d } from '../../shared/utility/vector';
-import { Athena } from '../api/athena';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { Account } from '../interface/iAccount';
-import { getForwardVector } from '../utility/vector';
+import { Vehicle_Behavior } from '@AthenaShared/enums/vehicle';
+import { Character } from '@AthenaShared/interfaces/character';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { distance, distance2d } from '@AthenaShared/utility/vector';
+import { Athena } from '@AthenaServer/api/athena';
+import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { getForwardVector } from '@AthenaServer/utility/vector';
 import { getClosestOfType } from './gettersShared';
 import { Identifier } from './identifier';
 

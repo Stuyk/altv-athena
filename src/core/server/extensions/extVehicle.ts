@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import { Vehicle_Behavior } from '../../shared/enums/vehicle';
-import { IVehicle } from '../../shared/interfaces/iVehicle';
+import { Vehicle_Behavior } from '@AthenaShared/enums/vehicle';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
 
 declare module 'alt-server' {
     export interface Vehicle {

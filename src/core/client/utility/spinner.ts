@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import ISpinner from '../../shared/interfaces/iSpinner';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import ISpinner from '@AthenaShared/interfaces/iSpinner';
 
 let timeout: number;
 

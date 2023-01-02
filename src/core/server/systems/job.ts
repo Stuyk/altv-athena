@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { JobAttachable } from '../../shared/interfaces/iAttachable';
-import JobEnums, { Objective } from '../../shared/interfaces/job';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance, distance2d } from '../../shared/utility/vector';
-import { Athena } from '../api/athena';
-import { sha256Random } from '../utility/encryption';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { JobAttachable } from '@AthenaShared/interfaces/iAttachable';
+import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { distance, distance2d } from '@AthenaShared/utility/vector';
+import { Athena } from '@AthenaServer/api/athena';
+import { sha256Random } from '@AthenaServer/utility/encryption';
 
 const JobInstances: { [key: string]: Job } = {};
 const criteriaAddons: Array<(player: alt.Player, objective: Objective) => boolean> = [];

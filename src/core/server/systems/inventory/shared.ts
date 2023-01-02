@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { CharacterInventory, Item, ItemSlot, StoredItem } from '../../../shared/interfaces/inventory';
+import { CharacterInventory, Item, ItemSlot, StoredItem } from '@AthenaShared/interfaces/inventory';
 import { StateManager } from '../stateManager';
 
 /**

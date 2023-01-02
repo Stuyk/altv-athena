@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import {ATHENA_EVENTS_PLAYER} from '../../shared/enums/athenaEvents';
-import {PLAYER_SYNCED_META} from '../../shared/enums/playerSynced';
-import {PlayerEvents} from '../events/playerEvents';
-import {isFlagEnabled} from "../../shared/utility/flags";
-import {PERMISSIONS} from "../../shared/flags/permissionFlags";
+import {ATHENA_EVENTS_PLAYER} from '@AthenaShared/enums/athenaEvents';
+import {PLAYER_SYNCED_META} from '@AthenaShared/enums/playerSynced';
+import {PlayerEvents} from '@AthenaServer/events/playerEvents';
+import {isFlagEnabled} from "@AthenaShared/utility/flags";
+import {PERMISSIONS} from "@AthenaShared/flags/permissionFlags";
 
 type PermissionStrategy = 'matching_roles' | 'inherited_roles';
 

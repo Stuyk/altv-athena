@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { distance } from '../../shared/utility/vector';
+import { distance } from '@AthenaShared/utility/vector';
 
 /**
  * SERVER ONLY

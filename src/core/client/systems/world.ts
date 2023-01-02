@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { WORLD_WEATHER } from '../../shared/enums/weather';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { WORLD_WEATHER } from '@AthenaShared/enums/weather';
 
 export class World {
     static hasPausedClock = false;

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Interaction } from '../../shared/interfaces/interaction';
-import { sha256Random } from '../utility/encryption';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { sha256Random } from '@AthenaServer/utility/encryption';
 
 const DEFAULT_INTERACTION_HEIGHT = 3;
 

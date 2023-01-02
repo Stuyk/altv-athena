@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
-import { Item } from '../../shared/interfaces/item';
+import { INVENTORY_TYPE } from '@AthenaShared/enums/inventoryTypes';
+import { Item } from '@AthenaShared/interfaces/item';
 
 type EffectCallback = (player: alt.Player, item: Item, slot: number, inventoryType: string) => void;
 

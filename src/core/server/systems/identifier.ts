@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { PlayerEvents } from '../events/playerEvents';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
 
 type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
 

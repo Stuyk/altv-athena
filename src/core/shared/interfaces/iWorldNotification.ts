@@ -1,4 +1,4 @@
-import { WORLD_NOTIFICATION_TYPE } from '../enums/worldNotificationTypes';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
 import * as alt from 'alt-shared';
 
 export interface IWorldNotification {

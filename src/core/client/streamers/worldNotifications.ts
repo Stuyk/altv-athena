@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IWorldNotification } from '../../shared/interfaces/iWorldNotification';
-import { distance2d } from '../../shared/utility/vector';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification';
+import { distance2d } from '@AthenaShared/utility/vector';
+import { Timer } from '@AthenaClient/utility/timers';
 
 let addedNotifications: Array<IWorldNotification> = [];
 let localNotifications: Array<IWorldNotification> = [];

@@ -1,5 +1,5 @@
-import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
-import { WheelMenu } from '../../views/wheelMenu';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
 const getLeanMenu2 = (callback: (...args: any[]) => void) => {
     return [

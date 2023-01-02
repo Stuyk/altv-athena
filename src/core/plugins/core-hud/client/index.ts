@@ -14,8 +14,8 @@ import { AthenaClient } from '@AthenaClient/api/athena';
 import { KeybindController } from '@AthenaClient/events/keyup';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { KeyHeld } from '@AthenaClient/events/keyHeld';
-import { VehicleData } from '../../../shared/information/vehicles';
-import { isVehicleType, VEHICLE_TYPE } from '../../../shared/enums/vehicleTypeFlags';
+import { VehicleData } from '@AthenaShared/information/vehicles';
+import { isVehicleType, VEHICLE_TYPE } from '@AthenaShared/enums/vehicleTypeFlags';
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 
 const SWITCH_KEY = 113; // F2

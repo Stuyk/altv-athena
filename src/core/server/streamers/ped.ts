@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IPed } from '../../shared/interfaces/iPed';
-import { Animation } from '../../shared/interfaces/animation';
-import { StreamerService } from '../systems/streamer';
-import { sha256Random } from '../utility/encryption';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { IPed } from '@AthenaShared/interfaces/iPed';
+import { Animation } from '@AthenaShared/interfaces/animation';
+import { StreamerService } from '@AthenaServer/systems/streamer';
+import { sha256Random } from '@AthenaServer/utility/encryption';
 
 const globalPeds: Array<IPed> = [];
 const KEY = 'peds';

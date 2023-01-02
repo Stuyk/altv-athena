@@ -1,4 +1,4 @@
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 
 /**
  * Used to store Discord Information, IPs, and User Data

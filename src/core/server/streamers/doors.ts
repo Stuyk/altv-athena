@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { StreamerService } from '../systems/streamer';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { StreamerService } from '@AthenaServer/systems/streamer';
 import { Door } from '@AthenaShared/interfaces/door';
 import { Doors } from '@AthenaShared/information/doors';
 import Database from '@stuyk/ezmongodb';

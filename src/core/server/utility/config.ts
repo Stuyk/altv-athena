@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { IConfig } from '../interface/iConfig';
+import { IConfig } from '@AthenaServer/interface/iConfig';
 import fs from 'fs';
 import net from 'net';
 

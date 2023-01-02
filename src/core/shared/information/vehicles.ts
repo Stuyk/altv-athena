@@ -1,5 +1,5 @@
-import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '../enums/vehicleTypeFlags';
-import { VehicleInfo } from '../interfaces/vehicleInfo';
+import { VEHICLE_TYPE, VEHICLE_CLASS, FUEL_TYPE } from '@AthenaShared/enums/vehicleTypeFlags';
+import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo';
 
 /**
  * If you add a 'modded vehicle' you will need to append it into this list.

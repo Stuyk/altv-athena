@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { FACTION_PERMISSION_FLAGS } from '../flags/factionPermissionFlags';
+import { FACTION_PERMISSION_FLAGS } from '@AthenaShared/flags/factionPermissionFlags';
 
 export interface FactionMember {
     /**

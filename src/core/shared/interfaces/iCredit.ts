@@ -1,4 +1,4 @@
-import { CREDIT_ALIGN } from '../enums/creditAlign';
+import { CREDIT_ALIGN } from '@AthenaShared/enums/creditAlign';
 
 export default interface ICredit {
     /**

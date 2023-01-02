@@ -1,8 +1,8 @@
-import { deepCloneObject } from '../../../shared/utility/deepCopy';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { hashConst } from './constHash';
 import { vectorConst } from './constVector';
-import { isFlagEnabled } from '../../../shared/utility/flags';
-import { getClosestPlayer, getClosestVehicle } from '../../utility/closest';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { getClosestPlayer, getClosestVehicle } from '@AthenaServer/utility/closest';
 
 export const utilityConst = {
     hash: hashConst,

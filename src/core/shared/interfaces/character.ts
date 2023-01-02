@@ -1,9 +1,9 @@
 import * as alt from 'alt-shared';
-import { DEFAULT_CONFIG } from '../../server/athena/main';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
 import { Item } from './item';
-import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
+import { CHARACTER_PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 
 export interface Character {
     [key: string]: any;

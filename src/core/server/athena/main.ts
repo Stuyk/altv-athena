@@ -1,4 +1,4 @@
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import StreamConfiguration from './stream/config';
 
 export const DEFAULT_CONFIG = {

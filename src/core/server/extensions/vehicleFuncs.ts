@@ -1,33 +1,33 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
-import { VEHICLE_SYNCED_META } from '../../shared/enums/vehicleSyncedMeta';
-import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
-import { VehicleData } from '../../shared/information/vehicles';
-import { Item } from '../../shared/interfaces/item';
-import { IVehicle } from '../../shared/interfaces/iVehicle';
-import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
-import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';
-import { VehicleInfo } from '../../shared/interfaces/vehicleInfo';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { Athena } from '../api/athena';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { VehicleEvents } from '../events/vehicleEvents';
-import { Collections } from '../interface/iDatabaseCollections';
-import { Injections } from '../systems/injections';
+import { ATHENA_EVENTS_VEHICLE } from '@AthenaShared/enums/athenaEvents';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '@AthenaShared/enums/vehicle';
+import { VEHICLE_SYNCED_META } from '@AthenaShared/enums/vehicleSyncedMeta';
+import { VEHICLE_CLASS } from '@AthenaShared/enums/vehicleTypeFlags';
+import { VehicleData } from '@AthenaShared/information/vehicles';
+import { Item } from '@AthenaShared/interfaces/item';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
+import IVehicleDamage from '@AthenaShared/interfaces/iVehicleDamage';
+import IVehicleHandling from '@AthenaShared/interfaces/iVehicleHandling';
+import { VehicleInfo } from '@AthenaShared/interfaces/vehicleInfo';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { Athena } from '@AthenaServer/api/athena';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import { VehicleEvents } from '@AthenaServer/events/vehicleEvents';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Injections } from '@AthenaServer/systems/injections';
 import {
     VehicleDespawnCallback,
     VehicleInjectionNames,
     VehicleOwnershipCallback,
     VehicleSpawnCallback,
-} from '../systems/injections/vehicles';
-import { sha256Random } from '../utility/encryption';
-import { getMissingNumber } from '../utility/math';
+} from '@AthenaServer/systems/injections/vehicles';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { getMissingNumber } from '@AthenaServer/utility/math';
 
 const SpawnedVehicles: { [id: string]: alt.Vehicle } = {};
 const OWNED_VEHICLE = Vehicle_Behavior.CONSUMES_FUEL | Vehicle_Behavior.NEED_KEY_TO_START;

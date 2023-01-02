@@ -1,19 +1,19 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SHARED_CONFIG } from '../../shared/configurations/shared';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Inventory } from '../../shared/enums/views';
-import { DroppedItem } from '../../shared/interfaces/item';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { distance2d } from '../../shared/utility/vector';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { drawMarker } from '../utility/marker';
-import { isAnyMenuOpen } from '../utility/menus';
-import { Timer } from '../utility/timers';
+import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { View_Events_Inventory } from '@AthenaShared/enums/views';
+import { DroppedItem } from '@AthenaShared/interfaces/item';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { distance2d } from '@AthenaShared/utility/vector';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { drawMarker } from '@AthenaClient/utility/marker';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { Timer } from '@AthenaClient/utility/timers';
 
 const validKeys = ['inventory', 'equipment', 'toolbar'];
 const PAGE_NAME = 'Inventory';

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
 const Safe = {
     /**

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 const KEY_UP_BINDS: Keybinds = {};
 const DELAY_BETWEEN_LONG_PRESSES = 800;

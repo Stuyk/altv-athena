@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Timer } from '@AthenaClient/utility/timers';
 
 const pingEvery = 5000;
 

@@ -1,23 +1,23 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
-import { ActionMenu } from '../../../shared/interfaces/actions';
-import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
-import { Account } from '../../interface/iAccount';
-import { Collections } from '../../interface/iDatabaseCollections';
-import Ares from '../../utility/ares';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { ActionMenu } from '@AthenaShared/interfaces/actions';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import Ares from '@AthenaServer/utility/ares';
 import emit from './emit';
 import safe from './safe';
 import save from './save';
 import sync from './sync';
 import Database from '@stuyk/ezmongodb';
-import ConfigUtil from '../../utility/config';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { PlayerEvents } from '../../events/playerEvents';
-import { StateManager } from '../../systems/stateManager';
-import { Athena } from '../../api/athena';
-import { JwtProvider } from '../../systems/jwt';
+import ConfigUtil from '@AthenaServer/utility/config';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
+import { StateManager } from '@AthenaServer/systems/stateManager';
+import { Athena } from '@AthenaServer/api/athena';
+import { JwtProvider } from '@AthenaServer/systems/jwt';
 
 const Setter = {
     /**

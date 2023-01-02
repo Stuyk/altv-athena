@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { IVehicle } from '../../../shared/interfaces/iVehicle';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
 import { Injections } from '../injections';
 
 export enum VehicleInjectionNames {

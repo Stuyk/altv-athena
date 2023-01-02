@@ -1,15 +1,15 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { distance2d } from '../../shared/utility/vector';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { sha256Random } from '../utility/encryption';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Interaction } from '../../shared/interfaces/interaction';
-import { InteractionShape } from '../extensions/extColshape';
-import { Athena } from '../api/athena';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/worldNotificationTypes';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { distance2d } from '@AthenaShared/utility/vector';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { InteractionShape } from '@AthenaServer/extensions/extColshape';
+import { Athena } from '@AthenaServer/api/athena';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
 
 const interactions: Array<InteractionShape> = [];
 

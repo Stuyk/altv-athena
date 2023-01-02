@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SWITCHOUT_TYPES } from '../../shared/enums/switchOutTypes';
+import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
 import { sleep } from './sleep';
 
 /**

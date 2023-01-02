@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Account } from '../interface/iAccount';
-import { Collections } from '../interface/iDatabaseCollections';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 
 export class AdminController {
     /**

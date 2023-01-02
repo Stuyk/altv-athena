@@ -1,19 +1,19 @@
 import * as alt from 'alt-server';
-import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentType';
-import { INVENTORY_TYPE } from '../../../shared/enums/inventoryTypes';
-import { ITEM_TYPE } from '../../../shared/enums/itemTypes';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Item, ItemData, ItemSpecial } from '../../../shared/interfaces/item';
-import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { isFlagEnabled } from '../../../shared/utility/flags';
-import { CategoryData } from '../../interface/iCategoryData';
-import { stripCategory } from '../../utility/category';
-import { ItemFactory } from '../../systems/item';
-import { Athena } from '../../api/athena';
+import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
+import { INVENTORY_TYPE } from '@AthenaShared/enums/inventoryTypes';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Item, ItemData, ItemSpecial } from '@AthenaShared/interfaces/item';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { CategoryData } from '@AthenaServer/interface/iCategoryData';
+import { stripCategory } from '@AthenaServer/utility/category';
+import { ItemFactory } from '@AthenaServer/systems/item';
+import { Athena } from '@AthenaServer/api/athena';
 import save from './save';
 import sync from './sync';
-import { ClothingComponent } from '../../../shared/interfaces/clothing';
-import { Character } from '../../../shared/interfaces/character';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
+import { Character } from '@AthenaShared/interfaces/character';
 import { ReadOnlyPlayer } from './shared';
 
 const MAX_EQUIPMENT_SLOTS = 12; // This really should not be changed. Ever.

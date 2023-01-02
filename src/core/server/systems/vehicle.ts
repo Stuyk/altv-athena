@@ -1,34 +1,34 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ATHENA_EVENTS_VEHICLE } from '@AthenaShared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import {
     Vehicle_Behavior,
     VEHICLE_DOOR_STATE,
     VEHICLE_EVENTS,
     VEHICLE_LOCK_STATE,
     VEHICLE_STATE,
-} from '../../shared/enums/vehicle';
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { VehicleData } from '../../shared/information/vehicles';
-import { IVehicle } from '../../shared/interfaces/iVehicle';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
-import { DEFAULT_CONFIG } from '../athena/main';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { Collections } from '../interface/iDatabaseCollections';
-import { getClosestEntity } from '../utility/vector';
-import { StorageView } from '../views/storage';
+} from '@AthenaShared/enums/vehicle';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { VehicleData } from '@AthenaShared/information/vehicles';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { distance } from '@AthenaShared/utility/vector';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { getClosestEntity } from '@AthenaServer/utility/vector';
+import { StorageView } from '@AthenaServer/views/storage';
 import { StorageSystem } from './storage';
-import { VEHICLE_RULES } from '../../shared/enums/vehicleRules';
-import { IResponse } from '../../shared/interfaces/iResponse';
-import IVehicleRuleData from '../../shared/interfaces/iVehicleRuleData';
+import { VEHICLE_RULES } from '@AthenaShared/enums/vehicleRules';
+import { IResponse } from '@AthenaShared/interfaces/iResponse';
+import IVehicleRuleData from '@AthenaShared/interfaces/iVehicleRuleData';
 import SystemRules from './rules';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { VehicleEvents } from '../events/vehicleEvents';
-import { playerConst } from '../api/consts/constPlayer';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { VehicleEvents } from '@AthenaServer/events/vehicleEvents';
+import { playerConst } from '@AthenaServer/api/consts/constPlayer';
 
 /**
  * Vehicle Functionality Writeup for Server / Client

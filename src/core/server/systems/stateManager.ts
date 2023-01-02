@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { Character } from '../../shared/interfaces/character';
-import { IVehicle } from '../../shared/interfaces/iVehicle';
-import { RemoveIndex } from '../../shared/utility/knownKeys';
-import { Athena } from '../api/athena';
+import { Character } from '@AthenaShared/interfaces/character';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
+import { RemoveIndex } from '@AthenaShared/utility/knownKeys';
+import { Athena } from '@AthenaServer/api/athena';
 
 type AnyKeyChangeCallback = (
     target: alt.Player | alt.Vehicle | { data: Partial<Character> },

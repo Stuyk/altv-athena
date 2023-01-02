@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
+import { HUD_IDENTIFIER } from '@AthenaShared/enums/hudIdentifiers';
 
 export default interface IHUD {
     /**

@@ -1,20 +1,20 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { View_Events_Chat, View_Events_Input_Menu } from '../../../shared/enums/views';
-import { ANIMATION_FLAGS } from '../../../shared/flags/animationFlags';
-import IAttachable from '../../../shared/interfaces/iAttachable';
-import IClientInteraction from '../../../shared/interfaces/iClientInteraction';
-import ICredit from '../../../shared/interfaces/iCredit';
-import IErrorScreen from '../../../shared/interfaces/iErrorScreen';
-import { InputMenu } from '../../../shared/interfaces/inputMenus';
-import IShard from '../../../shared/interfaces/iShard';
-import ISpinner from '../../../shared/interfaces/iSpinner';
-import { Particle } from '../../../shared/interfaces/particle';
-import { ProgressBar } from '../../../shared/interfaces/progressBar';
-import { Task, TaskCallback } from '../../../shared/interfaces/taskTimeline';
-import { IWheelOption } from '../../../shared/interfaces/wheelMenu';
-import { sha256Random } from '../../utility/encryption';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { View_Events_Chat, View_Events_Input_Menu } from '@AthenaShared/enums/views';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import IAttachable from '@AthenaShared/interfaces/iAttachable';
+import IClientInteraction from '@AthenaShared/interfaces/iClientInteraction';
+import ICredit from '@AthenaShared/interfaces/iCredit';
+import IErrorScreen from '@AthenaShared/interfaces/iErrorScreen';
+import { InputMenu } from '@AthenaShared/interfaces/inputMenus';
+import IShard from '@AthenaShared/interfaces/iShard';
+import ISpinner from '@AthenaShared/interfaces/iSpinner';
+import { Particle } from '@AthenaShared/interfaces/particle';
+import { ProgressBar } from '@AthenaShared/interfaces/progressBar';
+import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
+import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
+import { sha256Random } from '@AthenaServer/utility/encryption';
 import utility from './utility';
 
 const Emit = {

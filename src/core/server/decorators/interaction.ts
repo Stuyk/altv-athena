@@ -1,5 +1,5 @@
-import { Interaction } from '../../shared/interfaces/interaction';
-import { Athena } from '../api/athena';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { Athena } from '@AthenaServer/api/athena';
 
 /**
  * Decorator for Athena's Interaction Controller

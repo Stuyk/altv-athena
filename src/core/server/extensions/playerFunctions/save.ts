@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Character } from '../../../shared/interfaces/character';
-import { Collections } from '../../interface/iDatabaseCollections';
-import { Injections } from '../../systems/injections';
-import { PlayerInjectionNames, PlayerSaveTickCallback } from '../../systems/injections/player';
-import { StateManager } from '../../systems/stateManager';
-import { distance2d } from '../../../shared/utility/vector';
+import { Character } from '@AthenaShared/interfaces/character';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Injections } from '@AthenaServer/systems/injections';
+import { PlayerInjectionNames, PlayerSaveTickCallback } from '@AthenaServer/systems/injections/player';
+import { StateManager } from '@AthenaServer/systems/stateManager';
+import { distance2d } from '@AthenaShared/utility/vector';
 
 const Save = {
     /**

@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Account } from '../../interface/iAccount';
+import { Account } from '@AthenaServer/interface/iAccount';
 import { Injections } from '../injections';
 
 export enum LoginInjectionNames {

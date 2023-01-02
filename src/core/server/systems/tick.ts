@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Athena } from '../api/athena';
-import { DEFAULT_CONFIG } from '../athena/main';
-import VehicleFuncs from '../extensions/vehicleFuncs';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Athena } from '@AthenaServer/api/athena';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
 
 const timeBetweenPings = 4950;
 

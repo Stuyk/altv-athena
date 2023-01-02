@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import IShard from '../../shared/interfaces/iShard';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import IShard from '@AthenaShared/interfaces/iShard';
 import { requestScaleForm, Scaleform } from './scaleform';
 
 let scaleform: Scaleform;

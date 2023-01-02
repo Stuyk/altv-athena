@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PluginSystem } from '../../../server/systems/plugins';
+import { PluginSystem } from '@AthenaServer/systems/plugins';
 import { DeathCommands } from './src/commands';
 import { DeathSystem } from './src/death';
 

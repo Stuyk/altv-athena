@@ -1,4 +1,4 @@
-import { ITEM_TYPE } from '../enums/itemTypes';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
 
 /** Do Not Export */
 interface SharedItemData {

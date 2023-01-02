@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { PluginSystem } from '../../../server/systems/plugins';
-import { ConsoleCommander } from '../../../shared/utility/consoleCommander';
+import { PluginSystem } from '@AthenaServer/systems/plugins';
+import { ConsoleCommander } from '@AthenaShared/utility/consoleCommander';
 import { ConsoleCommands } from './commands/consoleCommands';
 
 import './commands/moderator';

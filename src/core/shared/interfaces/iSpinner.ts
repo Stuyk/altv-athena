@@ -1,4 +1,4 @@
-import { SPINNER_TYPE } from '../enums/spinnerType';
+import { SPINNER_TYPE } from '@AthenaShared/enums/spinnerType';
 
 export default interface ISpinner {
     /**

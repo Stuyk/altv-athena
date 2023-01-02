@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Marker } from '../../shared/interfaces/marker';
-import { sha256Random } from '../utility/encryption';
-import { StreamerService } from '../systems/streamer';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Marker } from '@AthenaShared/interfaces/marker';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { StreamerService } from '@AthenaServer/systems/streamer';
 
 const KEY = 'markers';
 const globalMarkers: Array<Marker> = [];

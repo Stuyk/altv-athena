@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentType';
-import { CharacterInventory, Item } from '../../../shared/interfaces/inventory';
-import { deepCloneObject } from '../../../shared/utility/deepCopy';
-import { Athena } from '../../api/athena';
+import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
+import { CharacterInventory, Item } from '@AthenaShared/interfaces/inventory';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Athena } from '@AthenaServer/api/athena';
 import { StateManager } from '../stateManager';
 import Inventory from './inventory';
 

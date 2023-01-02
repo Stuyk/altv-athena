@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IObject } from '../../shared/interfaces/iObject';
-import { sha256Random } from '../utility/encryption';
-import { StreamerService } from '../systems/streamer';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { IObject } from '@AthenaShared/interfaces/iObject';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { StreamerService } from '@AthenaServer/systems/streamer';
 
 const globalObjects: Array<IObject> = [];
 const KEY = 'objects';

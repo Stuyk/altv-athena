@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/textLabel';
-import { sha256Random } from '../utility/encryption';
-import { StreamerService } from '../systems/streamer';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { TextLabel } from '@AthenaShared/interfaces/textLabel';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { StreamerService } from '@AthenaServer/systems/streamer';
 
 const globalTextLabels: Array<TextLabel> = [];
 const KEY = 'labels';

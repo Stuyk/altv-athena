@@ -1,5 +1,5 @@
-import { EQUIPMENT_TYPE } from '../enums/equipmentType';
-import { ITEM_TYPE } from '../enums/itemTypes';
+import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
 
 export interface ItemData {
     [key: string]: any;

@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { sleep } from '../../utility/sleep';
+import { sleep } from '@AthenaClient/utility/sleep';
 
 /**
  * Play the carn horn multiple times.

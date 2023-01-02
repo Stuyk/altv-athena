@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { StateManager } from '../systems/stateManager';
-import { VehicleSystem } from '../systems/vehicle';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { StateManager } from '@AthenaServer/systems/stateManager';
+import { VehicleSystem } from '@AthenaServer/systems/vehicle';
 import { PlayerEvents } from './playerEvents';
 
 function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): void {

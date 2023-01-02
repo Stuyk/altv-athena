@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { BaseItem } from '../../../shared/interfaces/inventory';
-import { Athena } from '../../api/athena';
+import { BaseItem } from '@AthenaShared/interfaces/inventory';
+import { Athena } from '@AthenaServer/api/athena';
 
 const DEFAULT_TIMEOUT = 60000;
 const COLLECTION_NAME = 'itemfactory';

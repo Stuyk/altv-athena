@@ -1,10 +1,10 @@
 import * as alt from 'alt-server';
-import { Account } from '../interface/iAccount';
-import { DiscordUser } from '../interface/iDiscordUser';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 import { InteractionShape } from './extColshape';
-import IAttachable from '../../shared/interfaces/iAttachable';
-import { playerConst } from '../api/consts/constPlayer';
-import { Character } from '../../shared/interfaces/character';
+import IAttachable from '@AthenaShared/interfaces/iAttachable';
+import { playerConst } from '@AthenaServer/api/consts/constPlayer';
+import { Character } from '@AthenaShared/interfaces/character';
 
 declare module 'alt-server' {
     export interface Player {

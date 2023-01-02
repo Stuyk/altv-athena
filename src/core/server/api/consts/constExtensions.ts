@@ -1,4 +1,4 @@
-import { InteractionShape, PolygonShape } from '../../extensions/extColshape';
+import { InteractionShape, PolygonShape } from '@AthenaServer/extensions/extColshape';
 
 /**
  * Extends existing classes from alt:V for specific functionalities.

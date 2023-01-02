@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { IConfig } from './interface/iConfig';
 import Ares from './utility/ares';
 import ConfigUtil from './utility/config';

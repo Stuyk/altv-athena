@@ -1,12 +1,12 @@
-import currency from '../../extensions/playerFunctions/currency';
-import emit from '../../extensions/playerFunctions/emit';
-import inventory from '../../extensions/playerFunctions/inventory';
-import safe from '../../extensions/playerFunctions/safe';
-import save from '../../extensions/playerFunctions/save';
-import set from '../../extensions/playerFunctions/setter';
-import sync from '../../extensions/playerFunctions/sync';
-import utility from '../../extensions/playerFunctions/utility';
-import getter from '../../extensions/playerFunctions/getter';
+import currency from '@AthenaServer/extensions/playerFunctions/currency';
+import emit from '@AthenaServer/extensions/playerFunctions/emit';
+import inventory from '@AthenaServer/extensions/playerFunctions/inventory';
+import safe from '@AthenaServer/extensions/playerFunctions/safe';
+import save from '@AthenaServer/extensions/playerFunctions/save';
+import set from '@AthenaServer/extensions/playerFunctions/setter';
+import sync from '@AthenaServer/extensions/playerFunctions/sync';
+import utility from '@AthenaServer/extensions/playerFunctions/utility';
+import getter from '@AthenaServer/extensions/playerFunctions/getter';
 
 export const playerConst = {
     currency,

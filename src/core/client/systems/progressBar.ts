@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { ProgressBar } from '../../shared/interfaces/progressBar';
-import { distance2d } from '../../shared/utility/vector';
-import { drawRectangle, drawText3D } from '../utility/text';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { ProgressBar } from '@AthenaShared/interfaces/progressBar';
+import { distance2d } from '@AthenaShared/utility/vector';
+import { drawRectangle, drawText3D } from '@AthenaClient/utility/text';
+import { Timer } from '@AthenaClient/utility/timers';
 
 const barWidth = 0.08; // Based on percentages of screen.
 const barHeight = 0.02;

@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { MARKER_TYPE } from '../enums/markerTypes';
+import { MARKER_TYPE } from '@AthenaShared/enums/markerTypes';
 
 export interface Marker {
     /**

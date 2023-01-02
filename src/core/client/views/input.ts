@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
-import { InputMenu, InputResult } from '../../shared/interfaces/inputMenus';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
-import { View_Events_Input_Menu } from '../../shared/enums/views';
-import { WebViewController } from '../extensions/view2';
-import { sleep } from '../utility/sleep';
+import { InputMenu, InputResult } from '@AthenaShared/interfaces/inputMenus';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { View_Events_Input_Menu } from '@AthenaShared/enums/views';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import { sleep } from '@AthenaClient/utility/sleep';
 
 const PAGE_NAME = 'InputBox';
 let inputMenu: InputMenu;

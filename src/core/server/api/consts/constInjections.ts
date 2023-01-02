@@ -1,6 +1,6 @@
-import { LoginInjections } from '../../systems/injections/login';
-import { PlayerInjections } from '../../systems/injections/player';
-import { VehicleInjection } from '../../systems/injections/vehicles';
+import { LoginInjections } from '@AthenaServer/systems/injections/login';
+import { PlayerInjections } from '@AthenaServer/systems/injections/player';
+import { VehicleInjection } from '@AthenaServer/systems/injections/vehicles';
 
 export const injectionsConst = {
     login: LoginInjections,

@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { loadModel } from './model';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { CharacterSystem } from '../systems/character';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { CharacterSystem } from '@AthenaClient/systems/character';
 
 let id: number;
 let appearance: Appearance = null;

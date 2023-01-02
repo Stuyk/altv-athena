@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../../client/api/athena';
+import { AthenaClient } from '@AthenaClient/api/athena';
 import { DISCORD_LOGIN_EVENTS } from '../shared/events';
 
 let uri: string;

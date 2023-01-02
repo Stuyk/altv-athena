@@ -1,9 +1,9 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Athena } from '../api/athena';
-import { AgendaSystem } from '../systems/agenda';
-import { DevModeOverride } from '../systems/dev';
-import ConfigUtil from '../utility/config';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Athena } from '@AthenaServer/api/athena';
+import { AgendaSystem } from '@AthenaServer/systems/agenda';
+import { DevModeOverride } from '@AthenaServer/systems/dev';
+import ConfigUtil from '@AthenaServer/utility/config';
 
 /**
  * Called when a player connects to the server.

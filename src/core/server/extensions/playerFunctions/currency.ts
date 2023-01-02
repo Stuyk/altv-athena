@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
-import { CurrencyTypes } from '../../../shared/enums/currency';
-import { Athena } from '../../api/athena';
+import { CurrencyTypes } from '@AthenaShared/enums/currency';
+import { Athena } from '@AthenaServer/api/athena';
 import emit from './emit';
 import save from './save';
 

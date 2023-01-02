@@ -1,4 +1,4 @@
-import { LocaleFormat } from '../interfaces/localeFormat';
+import { LocaleFormat } from '@AthenaShared/interfaces/localeFormat';
 import en from './languages/en'; // Importing the English Locale
 import de from './languages/de'; // Importing the German Locale
 export const placeholder = `_%_`;

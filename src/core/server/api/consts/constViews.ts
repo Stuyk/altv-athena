@@ -1,5 +1,5 @@
-import { InventoryView } from '../../views/inventory';
-import { StorageView } from '../../views/storage';
+import { InventoryView } from '@AthenaServer/views/inventory';
+import { StorageView } from '@AthenaServer/views/storage';
 
 export const viewsConst = {
     inventory: InventoryView,

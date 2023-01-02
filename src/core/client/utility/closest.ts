@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import { IVector3 } from 'alt-shared';
 
-import { getClosestOfType } from '../../shared/utility/closest';
+import { getClosestOfType } from '@AthenaShared/utility/closest';
 
 /**
  * A limited version of getting the closest vehicle.

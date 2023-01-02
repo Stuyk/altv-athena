@@ -1,18 +1,18 @@
 import * as alt from 'alt-server';
-import { IStorage } from '../../shared/interfaces/iStorage';
-import { StorageSystem } from '../systems/storage';
-import { View_Events_Storage } from '../../shared/enums/views';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Item } from '../../shared/interfaces/item';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { ITEM_TYPE } from '../../shared/enums/itemTypes';
-import { IResponse } from '../../shared/interfaces/iResponse';
-import { STORAGE_MOVE_RULES, STORAGE_RULES } from '../../shared/enums/storageRules';
-import SystemRules from '../systems/rules';
-import { Athena } from '../api/athena';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { distance } from '../../shared/utility/vector';
+import { IStorage } from '@AthenaShared/interfaces/iStorage';
+import { StorageSystem } from '@AthenaServer/systems/storage';
+import { View_Events_Storage } from '@AthenaShared/enums/views';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Item } from '@AthenaShared/interfaces/item';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { ITEM_TYPE } from '@AthenaShared/enums/itemTypes';
+import { IResponse } from '@AthenaShared/interfaces/iResponse';
+import { STORAGE_MOVE_RULES, STORAGE_RULES } from '@AthenaShared/enums/storageRules';
+import SystemRules from '@AthenaServer/systems/rules';
+import { Athena } from '@AthenaServer/api/athena';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { distance } from '@AthenaShared/utility/vector';
 
 const DEFAULT_MAX_STORAGE_DIST = 4;
 

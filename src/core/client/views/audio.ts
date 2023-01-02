@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
 
 const PAGE_NAME = 'Audio';
 let interval;

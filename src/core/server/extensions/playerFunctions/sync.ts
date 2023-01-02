@@ -1,15 +1,15 @@
 import * as alt from 'alt-server';
-import { CurrencyTypes } from '../../../shared/enums/currency';
-import { World } from '../../systems/world';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
+import { CurrencyTypes } from '@AthenaShared/enums/currency';
+import { World } from '@AthenaServer/systems/world';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import emit from './emit';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { Item } from '../../../shared/interfaces/item';
-import { Appearance } from '../../../shared/interfaces/appearance';
-import { ClothingComponent } from '../../../shared/interfaces/clothing';
-import { Injections } from '../../systems/injections';
-import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
-import { Athena } from '../../api/athena';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { Item } from '@AthenaShared/interfaces/item';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
+import { Injections } from '@AthenaServer/systems/injections';
+import { EquipmentSyncCallback, PlayerInjectionNames } from '@AthenaServer/systems/injections/player';
+import { Athena } from '@AthenaServer/api/athena';
 import { ReadOnlyPlayer } from './shared';
 
 const Sync = {

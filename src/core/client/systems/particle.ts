@@ -1,9 +1,9 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Particle } from '../../shared/interfaces/particle';
-import { sleep } from '../utility/sleep';
-import { Timer } from '../utility/timers';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Particle } from '@AthenaShared/interfaces/particle';
+import { sleep } from '@AthenaClient/utility/sleep';
+import { Timer } from '@AthenaClient/utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, handlePlayParticle);
 

@@ -1,13 +1,13 @@
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VIEW_EVENTS_JOB_TRIGGER } from '../../shared/enums/views';
-import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views';
+import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 const PAGE_NAME = 'Job';
 let trigger: JobTrigger;

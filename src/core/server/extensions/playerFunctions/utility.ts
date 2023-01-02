@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
-import { distance, distance2d, getClosestTypes } from '../../../shared/utility/vector';
-import { getClosestEntity, getForwardVector } from '../../utility/vector';
+import { distance, distance2d, getClosestTypes } from '@AthenaShared/utility/vector';
+import { getClosestEntity, getForwardVector } from '@AthenaServer/utility/vector';
 
 /**
  * Get a position in front of this player based on direction they are facing.

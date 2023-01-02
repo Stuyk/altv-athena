@@ -1,15 +1,15 @@
 import { ServerDoorController } from '@AthenaServer/streamers/doors';
-import { ServerItemController } from '../../streamers/item';
-import { ServerMarkerController } from '../../streamers/marker';
-import { ServerObjectController } from '../../streamers/object';
-import { PedController } from '../../streamers/ped';
-import { ServerTextLabelController } from '../../streamers/textlabel';
-import { WorldNotificationController } from '../../streamers/worldNotifications';
-import { AdminController } from '../../systems/admin';
-import { ServerBlipController } from '../../systems/blip';
-import ChatController from '../../systems/chat';
-import { HologramController } from '../../systems/hologram';
-import { InteractionController } from '../../systems/interaction';
+import { ServerItemController } from '@AthenaServer/streamers/item';
+import { ServerMarkerController } from '@AthenaServer/streamers/marker';
+import { ServerObjectController } from '@AthenaServer/streamers/object';
+import { PedController } from '@AthenaServer/streamers/ped';
+import { ServerTextLabelController } from '@AthenaServer/streamers/textlabel';
+import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
+import { AdminController } from '@AthenaServer/systems/admin';
+import { ServerBlipController } from '@AthenaServer/systems/blip';
+import ChatController from '@AthenaServer/systems/chat';
+import { HologramController } from '@AthenaServer/systems/hologram';
+import { InteractionController } from '@AthenaServer/systems/interaction';
 
 export const controllersConst = {
     admin: AdminController,

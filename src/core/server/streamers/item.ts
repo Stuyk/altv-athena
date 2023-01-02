@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { sha256Random } from '../utility/encryption';
-import { StreamerService } from '../systems/streamer';
-import { GroundItem } from '../../shared/interfaces/groundItem';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { sha256Random } from '@AthenaServer/utility/encryption';
+import { StreamerService } from '@AthenaServer/systems/streamer';
+import { GroundItem } from '@AthenaShared/interfaces/groundItem';
 
 const globalItemDrops: Array<GroundItem> = [];
 const KEY = 'item-drops';

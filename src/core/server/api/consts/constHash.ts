@@ -1,4 +1,4 @@
-import { hashPassword, sha256, sha256Random, testPassword } from '../../utility/encryption';
+import { hashPassword, sha256, sha256Random, testPassword } from '@AthenaServer/utility/encryption';
 
 export const hashConst = {
     sha256: sha256,

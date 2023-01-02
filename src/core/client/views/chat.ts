@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Chat } from '../../shared/enums/views';
-import { Command } from '../../shared/interfaces/command';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { disableAllControls } from '../utility/disableControls';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { View_Events_Chat } from '@AthenaShared/enums/views';
+import { Command } from '@AthenaShared/interfaces/command';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { disableAllControls } from '@AthenaClient/utility/disableControls';
 
 const PAGE_NAME = 'Chat';
 let messages: Array<IMessage> = [];

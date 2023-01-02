@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VehicleSystem } from './vehicle';
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
 

@@ -1,12 +1,12 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { isAnyMenuOpen } from '../utility/menus';
-import Raycast from '../utility/raycast';
-import { Timer } from '../utility/timers';
-import { drawText3D } from '../utility/text';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { ObjectWheelMenu } from '../menus/object';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import Raycast from '@AthenaClient/utility/raycast';
+import { Timer } from '@AthenaClient/utility/timers';
+import { drawText3D } from '@AthenaClient/utility/text';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { ObjectWheelMenu } from '@AthenaClient/menus/object';
 
 interface ClosestTarget {
     scriptID: number;

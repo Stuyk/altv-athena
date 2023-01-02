@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { Timer } from '../utility/timers';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
+import { Timer } from '@AthenaClient/utility/timers';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { playAnimation } from './animations';
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { handleDisablingAttacks } from '../utility/disableControls';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { handleDisablingAttacks } from '@AthenaClient/utility/disableControls';
 
 let interval: number | undefined;
 let vehicle: alt.Vehicle;

@@ -1,20 +1,20 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { PlayerEvents } from '../events/playerEvents';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Character, CharacterDefaults } from '../../shared/interfaces/character';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { Athena } from '@AthenaServer/api/athena';
+import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { World } from './world';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { Global } from './global';
 import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
 import { Injections } from './injections';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { CharacterInfo } from '../../shared/interfaces/characterInfo';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { ObjectId } from 'mongodb';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {

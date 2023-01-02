@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
-import { View_Events_Storage } from '../../shared/enums/views';
-import { Item } from '../../shared/interfaces/item';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
+import { View_Events_Storage } from '@AthenaShared/enums/views';
+import { Item } from '@AthenaShared/interfaces/item';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 const PAGE_NAME = 'Storage';
 

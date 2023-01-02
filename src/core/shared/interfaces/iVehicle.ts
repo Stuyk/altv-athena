@@ -1,5 +1,5 @@
-import { Vehicle_Behavior } from '../enums/vehicle';
-import { VEHICLE_OWNERSHIP } from '../flags/vehicleOwnershipFlags';
+import { Vehicle_Behavior } from '@AthenaShared/enums/vehicle';
+import { VEHICLE_OWNERSHIP } from '@AthenaShared/flags/vehicleOwnershipFlags';
 import IVehicleDamage from './iVehicleDamage';
 import IVehicleTuning from './iVehicleTuning';
 import { RGB } from './rgb';

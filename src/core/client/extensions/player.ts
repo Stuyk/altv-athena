@@ -1,4 +1,4 @@
-import { GroundItem } from '../../shared/interfaces/groundItem';
+import { GroundItem } from '@AthenaShared/interfaces/groundItem';
 import { Meta } from './meta';
 
 declare module 'alt-client' {

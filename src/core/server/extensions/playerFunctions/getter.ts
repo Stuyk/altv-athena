@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { IVehicle } from '../../../shared/interfaces/iVehicle';
-import { Collections } from '../../interface/iDatabaseCollections';
-import { Character } from '../../../shared/interfaces/character';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Character } from '@AthenaShared/interfaces/character';
 import VehicleFuncs from '../vehicleFuncs';
-import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
-import { distance } from '../../../shared/utility/vector';
-import { getters } from '../../systems/getters';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { distance } from '@AthenaShared/utility/vector';
+import { getters } from '@AthenaServer/systems/getters';
 
 const Getter = {
     /**

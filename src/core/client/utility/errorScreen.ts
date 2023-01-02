@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import IErrorScreen from '../../shared/interfaces/iErrorScreen';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import IErrorScreen from '@AthenaShared/interfaces/iErrorScreen';
 
 let interval: number;
 let timeout: number;

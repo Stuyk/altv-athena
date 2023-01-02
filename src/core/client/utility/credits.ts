@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { CREDIT_ALIGN } from '../../shared/enums/creditAlign';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import ICredit from '../../shared/interfaces/iCredit';
+import { CREDIT_ALIGN } from '@AthenaShared/enums/creditAlign';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import ICredit from '@AthenaShared/interfaces/iCredit';
 import { requestScaleForm, Scaleform } from './scaleform';
 import { sleep } from './sleep';
 

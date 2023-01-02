@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { distance } from '../../shared/utility/vector';
-import { PushVehicle } from '../systems/push';
-import { isAnyMenuOpen } from '../utility/menus';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
-import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { WheelMenu } from '../views/wheelMenu';
+import { distance } from '@AthenaShared/utility/vector';
+import { PushVehicle } from '@AthenaClient/systems/push';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
+import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
 type VehicleMenuInjection = (target: alt.Vehicle, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

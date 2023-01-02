@@ -1,4 +1,4 @@
-import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '../enums/vehicleTypeFlags';
+import { FUEL_TYPE, VEHICLE_CLASS, VEHICLE_TYPE } from '@AthenaShared/enums/vehicleTypeFlags';
 
 /**
  * Interface for working with / using vehicles.

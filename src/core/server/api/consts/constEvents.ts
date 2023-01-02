@@ -1,5 +1,5 @@
-import { PlayerEvents } from '../../events/playerEvents';
-import { VehicleEvents } from '../../events/vehicleEvents';
+import { PlayerEvents } from '@AthenaServer/events/playerEvents';
+import { VehicleEvents } from '@AthenaServer/events/vehicleEvents';
 
 export const eventsConst = {
     player: PlayerEvents,

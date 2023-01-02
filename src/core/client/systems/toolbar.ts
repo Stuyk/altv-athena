@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { KeybindController } from '../events/keyup';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { KeybindController } from '@AthenaClient/events/keyup';
 
 export const ToolbarController = {
     /**

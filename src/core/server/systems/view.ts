@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { WebViewEventNames } from '../../shared/enums/webViewEvents';
+import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 
 export class ServerView {
     /**

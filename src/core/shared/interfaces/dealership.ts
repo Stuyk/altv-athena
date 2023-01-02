@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { VEHICLE_CLASS } from '../enums/vehicleTypeFlags';
+import { VEHICLE_CLASS } from '@AthenaShared/enums/vehicleTypeFlags';
 
 export interface Dealership {
     /**

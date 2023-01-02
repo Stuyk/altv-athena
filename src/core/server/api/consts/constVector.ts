@@ -1,5 +1,5 @@
-import { distance, distance2d } from '../../../shared/utility/vector';
-import { getClosestEntity, getForwardVector, getVectorInFrontOfPlayer, isBetweenVectors } from '../../utility/vector';
+import { distance, distance2d } from '@AthenaShared/utility/vector';
+import { getClosestEntity, getForwardVector, getVectorInFrontOfPlayer, isBetweenVectors } from '@AthenaServer/utility/vector';
 
 export const vectorConst = {
     distance,

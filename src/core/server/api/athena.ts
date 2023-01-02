@@ -1,4 +1,4 @@
-import { getters } from '../systems/getters';
+import { getters } from '@AthenaServer/systems/getters';
 import { controllersConst } from './consts/constControllers';
 import { dataConst } from './consts/constData';
 import { databaseConst } from './consts/constDatabase';

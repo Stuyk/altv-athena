@@ -1,8 +1,8 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { Account } from '../interface/iAccount';
-import { Collections } from '../interface/iDatabaseCollections';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { Account } from '@AthenaServer/interface/iAccount';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
 
 let isDoneLoading = false;
 let id = -1;

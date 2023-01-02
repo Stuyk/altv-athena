@@ -1,7 +1,7 @@
 // import * as alt from 'alt-server';
 /* It's a TypeScript file. It's not doing anything. */
-// import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-// import { Athena } from '../api/athena';
+// import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+// import { Athena } from '@AthenaServer/api/athena';
 
 // const target = {"x":319.4985046386719,"y":-735.1348266601562,"z":29.30983543395996}
 

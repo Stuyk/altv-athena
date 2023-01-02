@@ -1,13 +1,13 @@
 import * as alt from 'alt-server';
-import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
+import { INVENTORY_TYPE } from '@AthenaShared/enums/inventoryTypes';
 
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { Item } from '../../shared/interfaces/item';
-import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
-import { Athena } from '../api/athena';
-import VehicleFuncs from '../extensions/vehicleFuncs';
-import { ItemEffects } from '../systems/itemEffects';
-import { getForwardVector } from '../utility/vector';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
+import { Item } from '@AthenaShared/interfaces/item';
+import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
+import { Athena } from '@AthenaServer/api/athena';
+import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
+import { ItemEffects } from '@AthenaServer/systems/itemEffects';
+import { getForwardVector } from '@AthenaServer/utility/vector';
 
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
 
