@@ -2,6 +2,7 @@ import { getters } from '../systems/getters';
 import { controllersConst } from './consts/constControllers';
 import { dataConst } from './consts/constData';
 import { databaseConst } from './consts/constDatabase';
+import { documentsConst } from './consts/constDocuments';
 import { eventsConst } from './consts/constEvents';
 import { extensionsConst } from './consts/constExtensions';
 import { injectionsConst } from './consts/constInjections';
@@ -16,6 +17,7 @@ import { webviewConst } from './consts/constWebView';
 export const Athena = {
     database: databaseConst,
     controllers: controllersConst,
+    document: documentsConst,
     data: dataConst,
     events: eventsConst,
     extensions: extensionsConst,

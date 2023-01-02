@@ -1,25 +1,31 @@
+// import { Athena } from '@AthenaServer/api/athena';
+// import { Character } from '@AthenaShared/interfaces/character';
 // import * as alt from 'alt-server';
-/* It's a TypeScript file. It's not doing anything. */
-// import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-// import { Athena } from '../api/athena';
 
-// const target = {"x":319.4985046386719,"y":-735.1348266601562,"z":29.30983543395996}
+// interface ExtendedCharacter extends Character {
+//     newField1: string;
+//     newField2: string;
+//     newField3: number;
+// }
 
-// Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, async (player: alt.Player) => {
-    
+// alt.on('playerConnect', async (player) => {
+//     const data = Athena.document.character.get<ExtendedCharacter>(player);
+//     data.newField1 = 'Hello World!';
+
+//     await Athena.document.character.set<ExtendedCharacter>(player, 'newField1', data.newField1);
+
+//     // Alternatively... update based on bulk data.
+//     const newData = {
+//         newField1: 'Hello 1',
+//         newField2: 'Hello 2',
+//         newField3: 5,
+//     };
+
+//     await Athena.document.character.setBulk<ExtendedCharacter>(player, newData);
 // });
 
-// function makeProgressBar(player: alt.Player) {
-//     const uid = Athena.player.emit.createProgressBar(player, {
-//         position: player.pos,
-//         color: new alt.RGBA(255, 255, 255, 255),
-//         distance: 25,
-//         milliseconds: 10000,
-//         text: 'Loading...',
-//     });
-
-//     alt.setTimeout(() => {
-//         Athena.player.emit.removeProgressBar(player, uid);
-//         makeProgressBar(player);
-//     }, 10000);
+// function newFieldChange(player: alt.Player, newValue: string, oldValue: string) {
+//     console.log(`Data Change: `, newValue, 'from', oldValue);
 // }
+
+// Athena.document.character.onChange<ExtendedCharacter>('newField1', newFieldChange);
