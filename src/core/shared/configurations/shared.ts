@@ -18,4 +18,6 @@ export const SHARED_CONFIG = {
     DISABLE_IDLE_CAM: false,
     // This enables knots as unit for speed for Boats and Aircrafts
     ENABLE_KNOTS_FOR_BOATS_AND_AIRCRAFT: false,
+    // Watermark Position
+    WATERMARK_POS: 2, // 1 = Top Right, 2 = Top Left, 3 = Top Center, 4 = Bottom Center 5 = Bottom Right
 };

@@ -6,7 +6,12 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 alt.on('connectionComplete', handleConnectionComplete);
 alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
-alt.setWatermarkPosition(4);
+
+if ('WATERMARK_POS' in SHARED_CONFIG) {
+    alt.setWatermarkPosition(SHARED_CONFIG.WATERMARK_POS);
+} else {
+    alt.setWatermarkPosition(4);
+}
 
 async function handleConnectionComplete() {
     native.destroyAllCams(true);
