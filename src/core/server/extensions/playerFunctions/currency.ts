@@ -1,8 +1,6 @@
 import * as alt from 'alt-server';
-
-import { CurrencyTypes } from '../../../shared/enums/currency';
+import { CurrencyTypes } from '@AthenaShared/enums/currency';
 import { Athena } from '../../api/athena';
-import emit from './emit';
 
 const Currency = {
     /**
@@ -22,17 +20,17 @@ const Currency = {
         }
 
         try {
-            const originalValue = player.data[type]!;
-            player.data[type] = parseFloat((player.data[type]! + amount).toFixed(2));
+            const originalValue = player.data[type];
+            const newValue = parseFloat((originalValue + amount).toFixed(2));
 
             // Verify that the value was updated.
-            if (originalValue > player.data[type]!) {
+            if (originalValue > newValue) {
                 player.data[type] = originalValue;
                 return false;
             }
 
-            emit.meta(player, type, player.data[type]);
-            Athena.document.character.set(player, type, player.data[type]);
+            Athena.document.character.set(player, type, newValue);
+            Athena.player.emit.meta(player, type, newValue);
             return true;
         } catch (err) {
             console.log(err);
@@ -61,8 +59,8 @@ const Currency = {
                 player.data[type] = 0;
             }
 
-            const originalValue = player.data[type]!;
-            player.data[type] = parseFloat((player.data[type]! - amount).toFixed(2));
+            const originalValue = player.data[type];
+            const newValue = parseFloat((originalValue - amount).toFixed(2));
 
             // Verify that the value was updated.
             if (originalValue < player.data[type]!) {
@@ -70,8 +68,8 @@ const Currency = {
                 return false;
             }
 
-            emit.meta(player, type, player.data[type]);
-            Athena.document.character.set(player, type, player.data[type]);
+            Athena.document.character.set(player, type, newValue);
+            Athena.player.emit.meta(player, type, newValue);
             return true;
         } catch (err) {
             return false;
@@ -91,9 +89,8 @@ const Currency = {
         }
 
         try {
-            player.data[type] = amount;
-            emit.meta(player, type, player.data[type]);
-            Athena.document.character.set(player, type, player.data[type]);
+            Athena.document.character.set(player, type, amount);
+            Athena.player.emit.meta(player, type, amount);
             return true;
         } catch (err) {
             return false;
@@ -130,8 +127,8 @@ const Currency = {
         }
 
         Athena.document.character.setBulk(player, { bank: startBank, cash: startCash });
-        emit.meta(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
-        emit.meta(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
+        Athena.player.emit.meta(player, CurrencyTypes.BANK, startBank);
+        Athena.player.emit.meta(player, CurrencyTypes.CASH, startCash);
         return true;
     },
 };

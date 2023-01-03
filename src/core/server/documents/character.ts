@@ -6,7 +6,7 @@ import { databaseConst as Database } from '@AthenaServer/api/consts/constDatabas
 type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
-const DEBUG_MODE = true; // Use this to see what state is being set.
+const DEBUG_MODE = false; // Use this to see what state is being set.
 
 /**
  * Return current player data and their associated character object.
@@ -44,7 +44,7 @@ function getField<T = {}>(player: alt.Player, fieldName: keyof KnownKeys<Charact
  */
 async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Player, fieldName: Keys, value: any) {
     const typeSafeFieldName = String(fieldName);
-    const oldValue = player.data[typeSafeFieldName];
+    const oldValue = JSON.parse(JSON.stringify(player.data[typeSafeFieldName]));
     const newData = { [typeSafeFieldName]: value };
 
     player.data = Object.assign(player.data, newData);
@@ -52,7 +52,7 @@ async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Pl
 
     if (DEBUG_MODE) {
         alt.logWarning(
-            `DEBUG: ${player.data.name} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(value)}`,
+            `DEBUG: ${player.data.name} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(newData)}`,
         );
     }
 
@@ -78,25 +78,19 @@ async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt.Player
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
-        oldValues[key] = player.data[key];
-
-        if (DEBUG_MODE) {
-            alt.logWarning(
-                `DEBUG: ${player.data.name} state updated for ${key} with value: ${JSON.stringify(oldValues[key])}`,
-            );
-        }
+        oldValues[key] = JSON.parse(JSON.stringify(player.data[key]));
     });
 
     player.data = Object.assign(player.data, fields);
     await Database.funcs.updatePartialData(player.data._id, fields, Database.collections.Characters);
 
-    Object.keys(oldValues).forEach((key) => {
+    Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {
             return;
         }
 
         for (let cb of callbacks[key]) {
-            cb(player, fields[key], oldValues[key]);
+            cb(player, player.data[key], oldValues[key]);
         }
     });
 }

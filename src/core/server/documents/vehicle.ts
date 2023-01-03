@@ -58,7 +58,7 @@ async function set<T = {}>(vehicle: alt.Vehicle, fieldName: keyof KnownKeys<IVeh
     }
 
     const typeSafeFieldName = String(fieldName);
-    const oldValue = vehicle.data[typeSafeFieldName];
+    const oldValue = JSON.parse(JSON.stringify(vehicle.data[typeSafeFieldName]));
     const newData = { [typeSafeFieldName]: value };
 
     vehicle.data = Object.assign(vehicle.data, newData);
@@ -91,7 +91,7 @@ async function setBulk<T = {}>(vehicle: alt.Vehicle, fields: Partial<IVehicle & 
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
-        oldValues[key] = vehicle.data[key];
+        oldValues[key] = JSON.parse(JSON.stringify(vehicle.data[key]));
     });
 
     vehicle.data = Object.assign(vehicle.data, fields);

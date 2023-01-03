@@ -387,7 +387,7 @@ export class StorageView {
                 storageCache[player.id].items.splice(index, 1)[0];
             }
 
-            Athena.document.character.set(player, 'inventory', player.data.inventory, true);
+            Athena.document.character.set(player, 'inventory', player.data.inventory);
             Athena.player.sync.inventory(player);
             await StorageSystem.update(storageCache[player.id]._id.toString(), {
                 items: storageCache[player.id].items,
@@ -427,7 +427,7 @@ export class StorageView {
             storageCache[player.id].items.splice(index, 1)[0];
         }
 
-        Athena.document.character.set(player, 'inventory', player.data.inventory, true);
+        Athena.document.character.set(player, 'inventory', player.data.inventory);
         Athena.player.sync.inventory(player);
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });
         alt.emitClient(player, View_Events_Storage.Refresh, player.data.inventory, storageCache[player.id].items);
@@ -591,7 +591,7 @@ export class StorageView {
             storageCache[player.id].items.push(itemClone);
         }
 
-        Athena.document.character.set(player, 'inventory', player.data.inventory, true);
+        Athena.document.character.set(player, 'inventory', player.data.inventory);
         Athena.player.sync.inventory(player);
 
         await StorageSystem.update(storageCache[player.id]._id.toString(), { items: storageCache[player.id].items });

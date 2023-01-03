@@ -36,6 +36,7 @@ Athena.document.character
 - A 'character' specific document with individual state updates for all interface values.
 - Includes better extendability for core interfaces through generic types.
 - Adds functions: get, getField, set, setBulk, onChange
+- Fixed small issue with references
 
 Athena.document.vehicle
 - A 'vehicle' specific document with individual state updates for all interface values.
@@ -45,6 +46,17 @@ Athena.document.vehicle
 Athena.player.save (Removed)
 - Removed this in favor of the above changes (Athena.document.character)
 - Moved the onTick function to the onTick file, and exposed with export.
+
+Currency
+- Updated currency logic to allow old / new value watching.
+- Uses new document system to log new / old data changes.
+- Removes direct modifiction of player.data.x
+
+Known Issues:
+- State manager uses the same object for inventory / equipment.
+-- This is due to deeper core assignment of inventory / equipment at runtime.
+-- This can only be fixed with a proper inventory rewrite (also in progress)
+-- Will ignore this for now. Just don't use onChange with 'inventory', 'equipment', or 'toolbar'
 ```
 
 
