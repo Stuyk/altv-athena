@@ -8,12 +8,10 @@ import { Account } from '../../interface/iAccount';
 import { Collections } from '../../interface/iDatabaseCollections';
 import emit from './emit';
 import safe from './safe';
-import save from './save';
 import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
-import { StateManager } from '../../systems/stateManager';
 import { Athena } from '../../api/athena';
 import { JwtProvider } from '../../systems/jwt';
 
@@ -92,9 +90,8 @@ const Setter = {
      * @memberof SetPrototype
      */
     respawned(player: alt.Player, position: alt.IVector3): void {
-        StateManager.set(player, 'isDead', false);
+        Athena.document.character.set(player, 'isDead', false);
         emit.meta(player, 'isDead', false);
-        save.save(player, 'isDead', false);
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, player, position);
     },
 
@@ -104,7 +101,7 @@ const Setter = {
         }
 
         player.wanted = stars;
-        Athena.state.set(player, 'wanted', stars);
+        Athena.document.character.set(player, 'wanted', false);
         player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, stars);
     },
 };

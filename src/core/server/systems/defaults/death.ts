@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { eventsConst } from '@AthenaServer/api/consts/constEvents';
 import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
-import { StateManager } from '../stateManager';
+import { Athena } from '@AthenaServer/api/athena';
 
 let enabled = true;
 
@@ -20,7 +20,7 @@ function respawn(victim: alt.Player) {
         return;
     }
 
-    StateManager.set(victim, 'isDead', false);
+    Athena.document.character.set(victim, 'isDead', false);
     victim.spawn(victim.pos.x, victim.pos.y, victim.pos.z, 0);
 }
 
@@ -39,7 +39,7 @@ function handleDefaultDeath(victim: alt.Player) {
         return;
     }
 
-    StateManager.set(victim, 'isDead', true);
+    Athena.document.character.set(victim, 'isDead', true);
 
     alt.setTimeout(() => {
         if (!victim || !victim.valid) {

@@ -1,6 +1,6 @@
+import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { StateManager } from '../systems/stateManager';
 import { VehicleSystem } from '../systems/vehicle';
 import { PlayerEvents } from './playerEvents';
 
@@ -22,7 +22,7 @@ function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): v
             alt.log(`(${player.id}) ${player.data.name} has died.`);
 
             try {
-                StateManager.set(player, 'isDead', true);
+                Athena.document.character.set(player, 'isDead', true);
                 PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
             } catch (err) {
                 alt.logError(err);

@@ -14,7 +14,6 @@ import '../systems/jobTrigger';
 import '../../plugins/core-discord-login/server/src/login';
 import '../systems/plugins';
 import '../systems/rules';
-import '../systems/stateManager';
 import '../systems/storage';
 import '../systems/streamer';
 import '../systems/tick';

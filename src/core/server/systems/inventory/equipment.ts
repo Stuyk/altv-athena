@@ -3,7 +3,6 @@ import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentType';
 import { CharacterInventory, Item } from '../../../shared/interfaces/inventory';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { Athena } from '../../api/athena';
-import { StateManager } from '../stateManager';
 import Inventory from './inventory';
 
 /**
@@ -26,7 +25,9 @@ async function justEquip(
     }
 
     equipmentItems.push(item);
-    await StateManager.set(player, 'equipment', equipmentItems);
+
+    // ! FIX
+    // await Athena.document.character.set(player, 'equipment', equipmentItems);
     Athena.player.sync.inventory(player as alt.Player);
     return true;
 }
@@ -64,7 +65,8 @@ async function equip(player: CharacterInventory | Pick<alt.Player, 'data'>, inve
     // Refresh / Synchronize the equipment / inventory
     // Save changes
     // Return the result
-    await StateManager.set(player, 'equipment', equipmentItems);
+    // ! FIX
+    // await StateManager.set(player, 'equipment', equipmentItems);
     Athena.player.sync.inventory(player as alt.Player);
     return true;
 }
@@ -92,7 +94,9 @@ async function unequip(
     }
 
     const removedItem = deepCloneObject<Item<{ slot: EQUIPMENT_TYPE }>>(equipmentItems.splice(index, 1));
-    await StateManager.set(player, 'equipment', equipmentItems);
+
+    // ! FIX
+    // await StateManager.set(player, 'equipment', equipmentItems);
     Athena.player.sync.inventory(player as alt.Player);
     return removedItem;
 }

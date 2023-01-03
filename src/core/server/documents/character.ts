@@ -6,6 +6,7 @@ import { databaseConst as Database } from '@AthenaServer/api/consts/constDatabas
 type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
+const DEBUG_MODE = true; // Use this to see what state is being set.
 
 /**
  * Return current player data and their associated character object.
@@ -41,13 +42,19 @@ function getField<T = {}>(player: alt.Player, fieldName: keyof KnownKeys<Charact
  * @param {*} value
  * @return {void}
  */
-async function set<T = {}>(player: alt.Player, fieldName: keyof KnownKeys<Character & T>, value: any) {
+async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Player, fieldName: Keys, value: any) {
     const typeSafeFieldName = String(fieldName);
     const oldValue = player.data[typeSafeFieldName];
     const newData = { [typeSafeFieldName]: value };
 
     player.data = Object.assign(player.data, newData);
     await Database.funcs.updatePartialData(player.data._id, newData, Database.collections.Characters);
+
+    if (DEBUG_MODE) {
+        alt.logWarning(
+            `DEBUG: ${player.data.name} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(value)}`,
+        );
+    }
 
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
         return;
@@ -67,11 +74,17 @@ async function set<T = {}>(player: alt.Player, fieldName: keyof KnownKeys<Charac
  * @param {(Partial<Character & T>)} fields
  * @returns {void}
  */
-async function setBulk<T = {}>(player: alt.Player, fields: Partial<Character & T>) {
+async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt.Player, fields: Keys) {
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
         oldValues[key] = player.data[key];
+
+        if (DEBUG_MODE) {
+            alt.logWarning(
+                `DEBUG: ${player.data.name} state updated for ${key} with value: ${JSON.stringify(oldValues[key])}`,
+            );
+        }
     });
 
     player.data = Object.assign(player.data, fields);

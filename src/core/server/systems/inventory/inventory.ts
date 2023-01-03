@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
-import { CharacterInventory, Item, ItemSlot, StoredItem } from '../../../shared/interfaces/inventory';
+import { CharacterInventory, Item, StoredItem } from '../../../shared/interfaces/inventory';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { Athena } from '../../api/athena';
-import { StateManager } from '../stateManager';
 import ItemFactory from './factory';
 import Shared from './shared';
 
@@ -54,7 +53,8 @@ async function add(
         // ! - TODO - Auto-Weight Calculation
 
         items.push(itemRef);
-        await StateManager.set(player, 'inventory', items);
+        // ! - FIX
+        // await StateManager.set(player, 'inventory', items);
         Athena.player.sync.inventory(player as alt.Player);
 
         if (remainingToStack >= 1) {
@@ -97,8 +97,8 @@ async function add(
     items[itemIndex].quantity += howMuchToAdd;
 
     // ! - TODO - Auto-Weight Calculation
-
-    await StateManager.set(player, 'inventory', items);
+    // ! - FIX
+    // await StateManager.set(player, 'inventory', items);
     Athena.player.sync.inventory(player as alt.Player);
 
     const amountRemainingToStack = itemRef.quantity - howMuchToAdd;
@@ -164,7 +164,8 @@ async function sub(
         // If it is the exact quantity do a simple removal.
         if (items[i].quantity === quantityToRemove) {
             items.splice(i, 1);
-            await StateManager.set(player, 'inventory', items);
+            // ! - FIX
+            // await StateManager.set(player, 'inventory', items);
             Athena.player.sync.inventory(player as alt.Player);
             return 0;
         }
@@ -182,7 +183,8 @@ async function sub(
         break;
     }
 
-    await StateManager.set(player, 'inventory', items);
+    // ! - FIX
+    // await StateManager.set(player, 'inventory', items);
     Athena.player.sync.inventory(player as alt.Player);
     return quantityToRemove;
 }
@@ -210,7 +212,8 @@ async function remove<T = StoredItem>(
     }
 
     const item = deepCloneObject<Item<T>>(items.splice(index, 1));
-    await StateManager.set(player, 'inventory', items);
+    // ! - FIX
+    // await StateManager.set(player, 'inventory', items);
     Athena.player.sync.inventory(player as alt.Player);
     return item;
 }

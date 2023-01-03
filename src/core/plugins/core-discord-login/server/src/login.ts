@@ -17,6 +17,7 @@ import { Injections } from '@AthenaServer/systems/injections';
 import { LoginInjectionNames, TryLoginCallback } from '@AthenaServer/systems/injections/login';
 import { VehicleSystem } from '@AthenaServer/systems/vehicle';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
+import { onTick } from '@AthenaServer/systems/tick';
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
@@ -202,7 +203,7 @@ export class LoginController {
             VehicleSystem.stopPush(player);
         }
 
-        playerConst.save.onTick(player);
+        onTick(player);
 
         if (!player.data.name) {
             return;

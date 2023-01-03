@@ -3,7 +3,6 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '../../../shared/enums/currency';
 import { Athena } from '../../api/athena';
 import emit from './emit';
-import save from './save';
 
 const Currency = {
     /**
@@ -33,7 +32,7 @@ const Currency = {
             }
 
             emit.meta(player, type, player.data[type]);
-            save.save(player, type, player.data[type]);
+            Athena.document.character.set(player, type, player.data[type]);
             return true;
         } catch (err) {
             console.log(err);
@@ -72,7 +71,7 @@ const Currency = {
             }
 
             emit.meta(player, type, player.data[type]);
-            save.save(player, type, player.data[type]);
+            Athena.document.character.set(player, type, player.data[type]);
             return true;
         } catch (err) {
             return false;
@@ -94,7 +93,7 @@ const Currency = {
         try {
             player.data[type] = amount;
             emit.meta(player, type, player.data[type]);
-            save.save(player, type, player.data[type]);
+            Athena.document.character.set(player, type, player.data[type]);
             return true;
         } catch (err) {
             return false;
@@ -130,7 +129,7 @@ const Currency = {
             startBank = startBank - amountLeft;
         }
 
-        Athena.state.setBulk(player, { bank: startBank, cash: startCash });
+        Athena.document.character.setBulk(player, { bank: startBank, cash: startCash });
         emit.meta(player, CurrencyTypes.BANK, player.data[CurrencyTypes.BANK]);
         emit.meta(player, CurrencyTypes.CASH, player.data[CurrencyTypes.CASH]);
         return true;

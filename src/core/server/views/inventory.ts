@@ -19,7 +19,7 @@ import { ItemEffects } from '../systems/itemEffects';
 import { playerConst } from '../api/consts/constPlayer';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { stateConst } from '../api/consts/constState';
+import { Athena } from '@AthenaServer/api/athena';
 
 const GROUND_ITEMS: Array<DroppedItem> = [];
 
@@ -311,11 +311,10 @@ export class InventoryView {
             return;
         }
 
-        stateConst.setBulk(
-            player,
-            { [selectData.name]: player.data[selectData.name], [endData.name]: player.data[endData.name] },
-            true,
-        );
+        Athena.document.character.setBulk(player, {
+            [selectData.name]: player.data[selectData.name],
+            [endData.name]: player.data[endData.name],
+        });
 
         playerConst.sync.inventory(player);
         playerConst.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
@@ -382,7 +381,7 @@ export class InventoryView {
             return;
         }
 
-        stateConst.set(player, selectData.name, player.data[selectData.name], true);
+        Athena.document.character.set(player, selectData.name, player.data[selectData.name]);
         playerConst.sync.inventory(player);
         playerConst.emit.sound2D(player, 'item_drop_1', Math.random() * 0.45 + 0.1);
 
@@ -535,7 +534,7 @@ export class InventoryView {
             return;
         }
 
-        stateConst.set(player, endData.name, player.data[endData.name], true);
+        Athena.document.character.set(player, endData.name, player.data[endData.name]);
         playerConst.sync.inventory(player);
         playerConst.emit.sound2D(player, 'item_shuffle_1', Math.random() * 0.45 + 0.1);
         playerConst.emit.animation(player, 'random@mugging4', 'pickup_low', 33, 1200);
@@ -619,7 +618,10 @@ export class InventoryView {
                 playerConst.inventory.equipmentAdd(player, item, item.equipment);
             }
 
-            stateConst.setBulk(player, { equipment: player.data.equipment, inventory: player.data.inventory });
+            Athena.document.character.setBulk(player, {
+                equipment: player.data.equipment,
+                inventory: player.data.inventory,
+            });
             playerConst.sync.inventory(player);
             return;
         }
@@ -638,7 +640,7 @@ export class InventoryView {
                 playerConst.inventory.replaceInventoryItem(player, item);
             }
 
-            stateConst.set(player, INVENTORY_TYPE.INVENTORY, player.data.inventory, true);
+            Athena.document.character.set(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
             playerConst.sync.inventory(player);
         }
 
@@ -693,7 +695,7 @@ export class InventoryView {
         clonedItem.quantity = amount;
         playerConst.inventory.inventoryAdd(player, clonedItem, inventorySlot.slot);
 
-        stateConst.set(player, INVENTORY_TYPE.INVENTORY, player.data.inventory, true);
+        Athena.document.character.set(player, INVENTORY_TYPE.INVENTORY, player.data.inventory);
         playerConst.sync.inventory(player);
     }
 }

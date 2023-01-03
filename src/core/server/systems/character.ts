@@ -113,7 +113,7 @@ const CharacterSystemRef = {
         if (player.data.character_id === undefined || player.data.character_id === null) {
             await Global.increase('nextCharacterId', 1, 1);
             const nextCharacterID = await Global.getKey<number>('nextCharacterId');
-            await Athena.state.set(player, 'character_id', nextCharacterID);
+            await Athena.document.character.set(player, 'character_id', nextCharacterID);
         }
 
         alt.log(
@@ -128,7 +128,7 @@ const CharacterSystemRef = {
         Athena.player.sync.appearance(player, player.data.appearance as Appearance);
 
         if (!player.data.equipment) {
-            await Athena.state.set(player, 'equipment', []);
+            await Athena.document.character.set(player, 'equipment', []);
         }
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);

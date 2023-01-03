@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { CharacterInventory, Item, ItemSlot, StoredItem } from '../../../shared/interfaces/inventory';
-import { StateManager } from '../stateManager';
 
 /**
  * Used to find an item in a specific slot and return that item.
@@ -97,7 +96,8 @@ async function updateData<Data = Object>(
             }
         }
 
-        await StateManager.set(player, type, items);
+        // ! - FIX
+        // await StateManager.set(player, type, items);
         return true;
     }
 
@@ -144,7 +144,8 @@ async function update(
         //     items[i].weight = //
         // }
 
-        await StateManager.set(player, type, items);
+        // ! - FIX
+        // await StateManager.set(player, type, items);
         return true;
     }
 

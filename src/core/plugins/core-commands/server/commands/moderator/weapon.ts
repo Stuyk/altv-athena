@@ -54,7 +54,7 @@ class WeaponCommands {
         }
 
         Athena.player.inventory.inventoryAdd(player, newItem, inv.slot);
-        Athena.state.set(player, 'inventory', player.data.inventory, true);
+        Athena.document.character.set(player, 'inventory', player.data.inventory, true);
         Athena.player.sync.inventory(player);
         Athena.player.emit.message(player, `Added weapon: ${weapon.name}`);
     }

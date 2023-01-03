@@ -26,6 +26,25 @@ Weather
 
 Attachables
 - Fixed alt.Object.getByID bug; replaced with proper find.
+
+StateManager (Removed)
+- Completely removed and replaced with Document Based State Management
+- Why? The limitations of complexity of this system were overdone.
+- The following changes below are more responsive and much easier to understand.
+
+Athena.document.character
+- A 'character' specific document with individual state updates for all interface values.
+- Includes better extendability for core interfaces through generic types.
+- Adds functions: get, getField, set, setBulk, onChange
+
+Athena.document.vehicle
+- A 'vehicle' specific document with individual state updates for all interface values.
+- Includes better extendability for core interfaces through generic types.
+- Adds functions: get, getField, set, setBulk, onChange
+
+Athena.player.save (Removed)
+- Removed this in favor of the above changes (Athena.document.character)
+- Moved the onTick function to the onTick file, and exposed with export.
 ```
 
 

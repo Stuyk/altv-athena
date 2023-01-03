@@ -168,6 +168,14 @@ export interface Character {
      * @memberof Character
      */
     faction: string | null;
+
+    /**
+     * Current player interior number. Usually bound to dimension.
+     *
+     * @type {(number | undefined)}
+     * @memberof Character
+     */
+    interior: number | undefined;
 }
 
 export const CharacterDefaults: Partial<Character> = {

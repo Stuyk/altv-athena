@@ -28,15 +28,15 @@ const Sync = {
         const player = playerRef as ReadOnlyPlayer;
 
         if (!player.data.inventory) {
-            Athena.state.set(player, 'inventory', []);
+            Athena.document.character.set(player, 'inventory', []);
         }
 
         if (!player.data.toolbar) {
-            Athena.state.set(player, 'toolbar', []);
+            Athena.document.character.set(player, 'toolbar', []);
         }
 
         if (!player.data.equipment) {
-            Athena.state.set(player, 'equipment', []);
+            Athena.document.character.set(player, 'equipment', []);
         }
 
         Sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
@@ -261,7 +261,7 @@ const Sync = {
     },
     playTime(playerRef: alt.Player): void {
         const player = playerRef as ReadOnlyPlayer;
-        Athena.state.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667, true);
+        Athena.document.character.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667, true);
     },
 };
 

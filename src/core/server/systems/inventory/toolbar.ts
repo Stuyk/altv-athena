@@ -1,9 +1,7 @@
 import * as alt from 'alt-server';
-import { EQUIPMENT_TYPE } from '../../../shared/enums/equipmentType';
 import { CharacterInventory, Item } from '../../../shared/interfaces/inventory';
 import { deepCloneObject } from '../../../shared/utility/deepCopy';
 import { Athena } from '../../api/athena';
-import { StateManager } from '../stateManager';
 import Inventory from './inventory';
 import Shared from './shared';
 
@@ -34,7 +32,8 @@ async function justEquip(player: CharacterInventory | Pick<alt.Player, 'data'>, 
     const itemClone = deepCloneObject<Item>(item);
     itemClone.slot = availableSlot;
     toolbarItems.push(itemClone);
-    await StateManager.set(player, 'toolbar', toolbarItems);
+    // ! - FIX
+    // await StateManager.set(player, 'toolbar', toolbarItems);
     Athena.player.sync.inventory(player as alt.Player);
     return true;
 }

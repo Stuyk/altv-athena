@@ -10,7 +10,6 @@ import { CategoryData } from '../../interface/iCategoryData';
 import { stripCategory } from '../../utility/category';
 import { ItemFactory } from '../../systems/item';
 import { Athena } from '../../api/athena';
-import save from './save';
 import sync from './sync';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Character } from '../../../shared/interfaces/character';
@@ -153,7 +152,7 @@ const Inventory = {
         return Inventory.getItemBySlot(player as Readonly<alt.Player>, slot, 'equipment');
     },
 
-    getSlotType(slot: string): string | undefined {
+    getSlotType(slot: string): 'inventory' | 'toolbar' | 'ground' | 'equipment' | undefined {
         if (slot.includes('i')) {
             return 'inventory';
         }
@@ -409,7 +408,7 @@ const Inventory = {
             removedWeapons.push(player.data[weapons[i].dataName].splice(weapons[i].dataIndex, 1));
         }
 
-        Athena.state.setBulk(player, {
+        Athena.document.character.setBulk(player, {
             inventory: player.data.inventory,
             equipment: player.data.equipment,
             toolbar: player.data.toolbar,
@@ -521,7 +520,7 @@ const Inventory = {
                 return false;
             }
 
-            Athena.state.set(player, 'toolbar', player.data.toolbar, true);
+            Athena.document.character.set(player, 'toolbar', player.data.toolbar);
             Athena.player.sync.inventory(player);
             return true;
         }
@@ -542,7 +541,7 @@ const Inventory = {
             return false;
         }
 
-        Athena.state.set(player, 'inventory', player.data.inventory);
+        Athena.document.character.set(player, 'inventory', player.data.inventory);
         Athena.player.sync.inventory(player);
         return true;
     },
@@ -729,7 +728,7 @@ const Inventory = {
             bulkDataToSave[fields[i]] = player.data[fields[i]];
         }
 
-        Athena.state.setBulk(player, bulkDataToSave, true);
+        Athena.document.character.setBulk(player, bulkDataToSave);
         Athena.player.sync.inventory(player);
     },
 
@@ -1001,7 +1000,7 @@ const Inventory = {
         }
 
         player.data.inventory[existingItem.index].quantity! += item.quantity;
-        Athena.state.set(player, 'inventory', player.data.inventory, true);
+        Athena.document.character.set(player, 'inventory', player.data.inventory);
         Athena.player.sync.inventory(player);
         return true;
     },
@@ -1248,7 +1247,10 @@ const Inventory = {
         }
 
         player.data.equipment.splice(equipmentIndex, 1);
-        await save.partial(player, { equipment: player.data.equipment, inventory: player.data.inventory });
+        await Athena.document.character.setBulk(player, {
+            equipment: player.data.equipment,
+            inventory: player.data.inventory,
+        });
         await sync.equipment(
             player,
             player.data.equipment as Array<Item<ClothingComponent>>,

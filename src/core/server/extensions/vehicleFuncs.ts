@@ -668,7 +668,7 @@ export default class VehicleFuncs {
                 return null;
             }
 
-            await Athena.state.set(player, 'inventory', player.data.inventory, true);
+            await Athena.document.character.set(player, 'inventory', player.data.inventory, true);
             Athena.player.sync.inventory(player);
         }
 

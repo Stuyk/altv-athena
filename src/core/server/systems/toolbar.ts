@@ -114,7 +114,7 @@ export class ToolbarController {
                 Athena.player.inventory.replaceToolbarItem(player, item);
             }
 
-            Athena.state.set(player, 'toolbar', player.data.toolbar, true);
+            Athena.document.character.set(player, 'toolbar', player.data.toolbar, true);
             Athena.player.sync.inventory(player);
         }
 
