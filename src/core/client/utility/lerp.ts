@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { distance, vectorLerp } from '@AthenaShared/utility/vector';
 import { loadModel } from './model';

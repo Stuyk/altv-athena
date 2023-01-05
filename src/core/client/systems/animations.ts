@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
-import { Timer } from '../utility/timers';
+import { Timer } from '@AthenaClient/utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ANIMATION, playAnimation);
 

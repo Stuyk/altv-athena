@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { GroundItem } from '@AthenaShared/interfaces/groundItem';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { Timer } from '../utility/timers';
-import { drawText3D } from '../utility/text';
+import { Timer } from '@AthenaClient/utility/timers';
+import { drawText3D } from '@AthenaClient/utility/text';
 
 let closestItems: Array<GroundItem> = [];
 let addedItems: Array<GroundItem> = [];

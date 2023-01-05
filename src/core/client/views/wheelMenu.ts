@@ -1,12 +1,12 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
-import { VIEW_EVENTS_WHEEL_MENU } from '../../shared/enums/views';
-import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { WebViewController } from '../extensions/view2';
-import ViewModel from '../models/viewModel';
-import { isAnyMenuOpen } from '../utility/menus';
+import { VIEW_EVENTS_WHEEL_MENU } from '@AthenaShared/enums/views';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
+import { WebViewController } from '@AthenaClient/extensions/view2';
+import ViewModel from '@AthenaClient/models/viewModel';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 const PAGE_NAME = 'WheelMenu';
 let _label = '';

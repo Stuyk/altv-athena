@@ -3,8 +3,8 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
-import { DirectionVector } from '../utility/directionToVector';
-import { drawText2D } from '../utility/text';
+import { DirectionVector } from '@AthenaClient/utility/directionToVector';
+import { drawText2D } from '@AthenaClient/utility/text';
 
 const timeBetweenPlayerUpdates = 250;
 let nextUpdate = Date.now() + 50;

@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { CREDIT_ALIGN } from '@AthenaShared/enums/creditAlign';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import ICredit from '@AthenaShared/interfaces/iCredit';

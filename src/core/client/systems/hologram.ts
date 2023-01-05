@@ -3,9 +3,9 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Hologram } from '@AthenaShared/interfaces/hologram';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '../utility/menus';
-import { loadModel } from '../utility/model';
-import { Timer } from '../utility/timers';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { loadModel } from '@AthenaClient/utility/model';
+import { Timer } from '@AthenaClient/utility/timers';
 
 const MAX_HOLOGRAM_DISTANCE = 10;
 const TIME_TO_CHECK_HOLOGRAMS = 1000 * 3; // 3s

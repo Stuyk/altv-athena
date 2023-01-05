@@ -1,11 +1,11 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '../utility/menus';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WheelMenu } from '../views/wheelMenu';
+import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { IPed } from '@AthenaShared/interfaces/iPed';
-import { ClientPedController } from '../streamers/ped';
+import { ClientPedController } from '@AthenaClient/streamers/ped';
 
 type NpcMenuInjection = (scriptID: number, ped: IPed, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

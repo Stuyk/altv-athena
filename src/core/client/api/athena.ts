@@ -2,13 +2,13 @@ import { screenConst } from './consts/screenConst';
 import { soundConst } from './consts/soundConst';
 import { utilityConst } from './consts/utilityConst';
 import { webViewConst } from './consts/webViewConst';
-import { Timer } from '../utility/timers';
-import Raycast from '../utility/raycast';
+import { Timer } from '@AthenaClient/utility/timers';
+import Raycast from '@AthenaClient/utility/raycast';
 import * as math from '@AthenaClient/utility/math';
 import { wheelMenusConst } from './consts/wheelMenus';
 import { constData } from './consts/dataConst';
-import { KeybindController } from '../events/keyup';
-import { KeyHeld } from '../events/keyHeld';
+import { KeybindController } from '@AthenaClient/events/keyup';
+import { KeyHeld } from '@AthenaClient/events/keyHeld';
 import { rmluiConst } from './consts/rmluiConst';
 import { cameraConst } from './consts/cameraConst';
 

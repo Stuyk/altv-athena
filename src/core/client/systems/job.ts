@@ -4,10 +4,9 @@ import natives from 'natives';
 import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
 import { isFlagEnabled } from '@AthenaShared/utility/flags';
 import { distance } from '@AthenaShared/utility/vector';
-import { drawMarker } from '../utility/marker';
-import { drawText3D } from '../utility/text';
-import { Timer } from '../utility/timers';
-import { HudSystem } from './hud';
+import { drawMarker } from '@AthenaClient/utility/marker';
+import { drawText3D } from '@AthenaClient/utility/text';
+import { Timer } from '@AthenaClient/utility/timers';
 
 let objective: Objective | null;
 let interval: number;
@@ -38,7 +37,6 @@ const ObjectiveController = {
 
         if (!data) {
             objective = null;
-            HudSystem.setObjective(null);
             return;
         }
 
@@ -58,7 +56,6 @@ const ObjectiveController = {
             blip.route = true;
         }
 
-        HudSystem.setObjective(data.description);
         objective = { ...data };
         interval = Timer.createInterval(ObjectiveController.verifyObjective, 0, 'job.ts');
     },

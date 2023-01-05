@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { IWorldNotification } from '@AthenaShared/interfaces/iWorldNotification';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { Timer } from '../utility/timers';
+import { Timer } from '@AthenaClient/utility/timers';
 
 let addedNotifications: Array<IWorldNotification> = [];
 let localNotifications: Array<IWorldNotification> = [];

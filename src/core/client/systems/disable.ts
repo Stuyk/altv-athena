@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Timer } from '../utility/timers';
+import { Timer } from '@AthenaClient/utility/timers';
 import { VehicleController } from './vehicle';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, toggleOn);

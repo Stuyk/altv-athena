@@ -1,4 +1,5 @@
 import * as natives from 'natives';
+
 import { SCREEN_EFFECTS } from '@AthenaShared/enums/screenEffects';
 
 export const ScreenEffect = {

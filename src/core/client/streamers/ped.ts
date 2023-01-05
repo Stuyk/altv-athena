@@ -5,9 +5,9 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { IPed } from '@AthenaShared/interfaces/iPed';
 import { Animation } from '@AthenaShared/interfaces/animation';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { loadModel } from '../utility/model';
-import { Timer } from '../utility/timers';
-import { playPedAnimation } from '../systems/animations';
+import { loadModel } from '@AthenaClient/utility/model';
+import { Timer } from '@AthenaClient/utility/timers';
+import { playPedAnimation } from '@AthenaClient/systems/animations';
 
 let localPeds: Array<IPed> = [];
 let addedPeds: Array<IPed> = [];

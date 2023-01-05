@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+
 import { getAverage } from './math';
 
 interface TimerInfo {

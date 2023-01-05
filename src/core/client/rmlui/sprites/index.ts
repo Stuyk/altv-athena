@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../api/athena';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const DEFAULT_DRAW_DISTANCE = 20;
 const TOUCH_DISTANCE = 2;

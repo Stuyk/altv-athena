@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { loadSceneAtCoords } from './scene';
 import { Timer } from './timers';
 

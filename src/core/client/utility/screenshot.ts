@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { AthenaBuffer } from '@AthenaShared/utility/buffer';
 

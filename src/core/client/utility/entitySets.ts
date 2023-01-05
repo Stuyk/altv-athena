@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 alt.onServer(SYSTEM_EVENTS.ENTITYSET_ACTIVATE, (interior: number, entitySetName: string) => {

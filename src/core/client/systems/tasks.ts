@@ -3,7 +3,7 @@ import * as native from 'natives';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
-import { sleep } from '../utility/sleep';
+import { sleep } from '@AthenaClient/utility/sleep';
 
 let timeline: Array<Task | TaskCallback> = [];
 let vehicle;

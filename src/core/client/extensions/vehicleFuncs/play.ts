@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { sleep } from '../../utility/sleep';
 
 /**
  * Play the carn horn multiple times.
@@ -17,7 +16,7 @@ async function carHorn(v: alt.Vehicle, numberOfTimes: number, lengthOfHorn: numb
 
     for (let i = 0; i < numberOfTimes; i++) {
         native.startVehicleHorn(v.scriptID, lengthOfHorn, 0, false);
-        await sleep(lengthOfHorn + 25);
+        await alt.Utils.wait(lengthOfHorn + 25);
     }
 }
 

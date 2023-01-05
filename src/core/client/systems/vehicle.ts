@@ -5,8 +5,8 @@ import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { PED_CONFIG_FLAG } from '@AthenaShared/flags/pedflags';
-import { KeybindController } from '../events/keyup';
-import { isAnyMenuOpen } from '../utility/menus';
+import { KeybindController } from '@AthenaClient/events/keyup';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 import './push';
 import { PushVehicle } from './push';

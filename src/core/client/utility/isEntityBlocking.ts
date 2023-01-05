@@ -1,5 +1,6 @@
-import { AthenaClient } from '@AthenaClient/api/athena';
 import * as alt from 'alt-client';
+
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 /**
  * Check if an entity is in front of the position the camera is looking at.

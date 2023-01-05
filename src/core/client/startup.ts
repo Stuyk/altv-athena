@@ -49,7 +49,6 @@ import './systems/character';
 import './systems/debug';
 import './systems/disable';
 import './systems/hologram';
-import './systems/hud';
 import './systems/interaction';
 import './systems/interiors';
 import './systems/job';

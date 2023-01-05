@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import { distance } from '@AthenaShared/utility/vector';
-import { isAnyMenuOpen } from '../utility/menus';
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { WheelMenu } from '../views/wheelMenu';
+import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 
 type PlayerMenuInjection = (target: alt.Player, options: Array<IWheelOptionExt>) => Array<IWheelOptionExt>;
 

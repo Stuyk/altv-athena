@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Marker } from '@AthenaShared/interfaces/marker';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { drawMarker } from '../utility/marker';
-import { Timer } from '../utility/timers';
+import { drawMarker } from '@AthenaClient/utility/marker';
+import { Timer } from '@AthenaClient/utility/timers';
 
 let addedMarkers: Array<Marker> = [];
 let localMarkers: Array<Marker> = [];

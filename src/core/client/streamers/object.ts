@@ -4,8 +4,8 @@ import * as native from 'natives';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { IObject } from '@AthenaShared/interfaces/iObject';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { loadModel } from '../utility/model';
-import { Timer } from '../utility/timers';
+import { loadModel } from '@AthenaClient/utility/model';
+import { Timer } from '@AthenaClient/utility/timers';
 
 interface LocalObject extends IObject {
     id: number;

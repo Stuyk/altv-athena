@@ -2,8 +2,8 @@ import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { TextLabel } from '@AthenaShared/interfaces/textLabel';
 import { distance2d } from '@AthenaShared/utility/vector';
-import { drawText3D } from '../utility/text';
-import { Timer } from '../utility/timers';
+import { drawText3D } from '@AthenaClient/utility/text';
+import { Timer } from '@AthenaClient/utility/timers';
 
 let labels: Array<TextLabel> = [];
 let interval: number;
