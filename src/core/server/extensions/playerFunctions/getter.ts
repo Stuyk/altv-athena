@@ -15,18 +15,9 @@ const Getter = {
      * @param {alt.Player} player
      * @return {Promise<IVehicle[]>}
      */
-    async allVehicles(player: alt.Player, excludeKeys = false): Promise<IVehicle[]> {
+    async allVehicles(player: alt.Player): Promise<IVehicle[]> {
         const data = Athena.document.character.get(player);
         let vehicles = await Database.fetchAllByField<IVehicle>(`owner`, data._id.toString(), Collections.Vehicles);
-
-        if (!excludeKeys) {
-            const keys = VehicleFuncs.getAllVehicleKeys(player);
-            if (keys.length >= 1) {
-                const keyedVehicles = await VehicleFuncs.getValidVehicleIDsFromKeys(keys);
-                vehicles = vehicles.concat(keyedVehicles);
-            }
-        }
-
         return vehicles;
     },
 

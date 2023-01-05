@@ -176,7 +176,6 @@ const CharacterSystemRef = {
 
             // Synchronization
             Athena.player.sync.currencyData(player);
-            Athena.player.sync.inventory(player);
 
             player.setSyncedMeta(PLAYER_SYNCED_META.NAME, data.name);
             player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);

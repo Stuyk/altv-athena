@@ -9,7 +9,6 @@ import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../../systems/injections';
 import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
 import { Athena } from '@AthenaServer/api/athena';
-import { ReadOnlyPlayer } from './shared';
 
 const Sync = {
     /**
@@ -25,28 +24,6 @@ const Sync = {
             emit.meta(player, currencyName, data[currencyName]);
         }
     },
-    inventory(playerRef: alt.Player): void {
-        const player = playerRef as ReadOnlyPlayer;
-
-        if (!player.data.inventory) {
-            Athena.document.character.set(player, 'inventory', []);
-        }
-
-        if (!player.data.toolbar) {
-            Athena.document.character.set(player, 'toolbar', []);
-        }
-
-        if (!player.data.equipment) {
-            Athena.document.character.set(player, 'equipment', []);
-        }
-
-        Sync.equipment(player, player.data.equipment as Item[], player.data.appearance.sex === 1);
-
-        emit.meta(player, 'inventory', player.data.inventory);
-        emit.meta(player, 'equipment', player.data.equipment);
-        emit.meta(player, 'toolbar', player.data.toolbar);
-    },
-
     appearance(player: alt.Player, appearance: Appearance) {
         if (appearance.sex === 0) {
             player.model = 'mp_f_freemode_01';
@@ -260,9 +237,9 @@ const Sync = {
         player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
         player.setSyncedMeta(PLAYER_SYNCED_META.WANTED_LEVEL, player.wanted);
     },
-    playTime(playerRef: alt.Player): void {
-        const player = playerRef as ReadOnlyPlayer;
-        Athena.document.character.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667);
+    playTime(player: alt.Player): void {
+        const data = Athena.document.character.get(player);
+        Athena.document.character.set(player, 'hours', (data?.hours ?? 0) + 0.0166666666666667);
     },
 };
 

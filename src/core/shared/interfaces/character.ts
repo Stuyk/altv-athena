@@ -140,36 +140,6 @@ export interface Character {
     info: Partial<CharacterInfo>;
 
     /**
-     * An array that holds the players items.
-     * Each array in this array are tabs.
-     * @type {Array<Partial<Item>>}
-     * @memberof Character
-     */
-    inventory: Array<Partial<Item>>;
-
-    /**
-     * Clothing the player has equipped.
-     * @type {Array<Partial<Item>>}
-     * @memberof Character
-     */
-    equipment: Array<Partial<Item>>;
-
-    /**
-     * Items in the player's hotbar. Toolbar.
-     * @type {Array<Partial<Item>>}
-     * @memberof Character
-     */
-    toolbar: Array<Partial<Item>>;
-
-    /**
-     * This player's current faction. If present.
-     * Represents an ID in the database for factions.
-     * @type {string}
-     * @memberof Character
-     */
-    faction: string | null;
-
-    /**
      * Current player interior number. Usually bound to dimension.
      *
      * @type {(number | undefined)}

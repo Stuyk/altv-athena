@@ -46,8 +46,12 @@ class InternalFunctions {
      * @return {Promise<void>}
      */
     static handleMessage(player: alt.Player, message: string): void {
-        // Prevent Chatting from Non-Logged In User
-        if (!player.data || !player.data._id || !player.accountData) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
             return;
         }
 
@@ -78,7 +82,7 @@ class InternalFunctions {
             return;
         }
 
-        if (player.data.isDead) {
+        if (data.isDead) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_CHAT_WHILE_DEAD));
             return;
         }
@@ -97,7 +101,7 @@ class InternalFunctions {
             ['discord'], // Used to check if they're logged in.
         );
 
-        emitAll(closestPlayers, View_Events_Chat.Append, `${player.data.name}: ${parsedMessage}`);
+        emitAll(closestPlayers, View_Events_Chat.Append, `${data.name}: ${parsedMessage}`);
     }
 
     /**
@@ -120,8 +124,13 @@ class InternalFunctions {
         }
 
         if (commandInfo.permission) {
+            const accountData = Athena.document.account.get(player);
+            if (typeof accountData === 'undefined') {
+                return;
+            }
+
             const isAdminPermissionValid = Permission.isPermissionValidByStrategy(
-                player.accountData.permissionLevel,
+                accountData.permissionLevel,
                 commandInfo.permission,
             );
 
@@ -135,7 +144,8 @@ class InternalFunctions {
         }
 
         if (commandInfo.characterPermissions) {
-            if (!player.data.characterPermission) {
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined' || !data.characterPermission) {
                 Athena.player.emit.message(
                     player,
                     `{FF0000} ${LocaleController.get(LOCALE_KEYS.COMMAND_NOT_PERMITTED_CHARACTER)}`,
@@ -144,7 +154,7 @@ class InternalFunctions {
             }
 
             const isCharacterPermValid = Permission.isPermissionValidByStrategy(
-                player.data.characterPermission,
+                data.characterPermission,
                 commandInfo.characterPermissions,
             );
 
@@ -308,8 +318,13 @@ export default class ChatController {
 
             // Check Admin Permission Commands
             if (commandInfo.permission) {
+                const accountData = Athena.document.account.get(player);
+                if (typeof accountData === 'undefined') {
+                    return;
+                }
+
                 const isAdminPermissionValid = Permission.isPermissionValidByStrategy(
-                    player.accountData.permissionLevel,
+                    accountData.permissionLevel,
                     commandInfo.permission,
                 );
 
@@ -327,12 +342,13 @@ export default class ChatController {
 
             // Check Character Permission Commands
             if (commandInfo.characterPermissions) {
-                if (!player.data.characterPermission) {
+                const data = Athena.document.character.get(player);
+                if (!data.characterPermission) {
                     return;
                 }
 
                 const isCharacterPermValid = Permission.isPermissionValidByStrategy(
-                    player.data.characterPermission,
+                    data.characterPermission,
                     commandInfo.characterPermissions,
                 );
                 if (!isCharacterPermValid) {

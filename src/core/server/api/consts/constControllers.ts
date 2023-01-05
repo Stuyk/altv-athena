@@ -1,5 +1,4 @@
 import { ServerDoorController } from '@AthenaServer/streamers/doors';
-import { ServerItemController } from '@AthenaServer/streamers/item';
 import { ServerMarkerController } from '@AthenaServer/streamers/marker';
 import { ServerObjectController } from '@AthenaServer/streamers/object';
 import { PedController } from '@AthenaServer/streamers/ped';
@@ -17,7 +16,6 @@ export const controllersConst = {
     chat: ChatController,
     doors: ServerDoorController,
     interaction: InteractionController,
-    item: ServerItemController,
     holograms: HologramController,
     marker: ServerMarkerController,
     object: ServerObjectController,

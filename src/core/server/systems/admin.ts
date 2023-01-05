@@ -4,6 +4,7 @@ import { Account } from '../interface/iAccount';
 import { Collections } from '../interface/iDatabaseCollections';
 import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
+import { Athena } from '@AthenaServer/api/athena';
 
 export class AdminController {
     /**
@@ -15,12 +16,14 @@ export class AdminController {
      * @memberof AdminController
      */
     static async banPlayer(player: alt.Player, reason: string): Promise<boolean> {
-        if (!player.accountData) {
+        const accountData = Athena.document.account.get(player);
+        if (typeof accountData === 'undefined') {
             return false;
         }
 
         player.kick(`${LocaleController.get(LOCALE_KEYS.LABEL_BANNED)} ${reason}`);
-        Database.updatePartialData(player.accountData._id, { banned: true, reason }, Collections.Accounts);
+        await Athena.document.account.setBulk(player, { banned: true, reason });
+
         if (player.discord && player.discord.id) {
             alt.log(`(${player.discord.id}) Has been banned from the server.`);
         }

@@ -345,7 +345,7 @@ export class Job {
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_WEAPON)) {
-            if (Athena.player.inventory.hasWeapon(this.player)) {
+            if (this.player.weapons.length >= 1) {
                 return false;
             }
         }

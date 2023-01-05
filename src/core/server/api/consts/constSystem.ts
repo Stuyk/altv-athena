@@ -5,7 +5,6 @@ import { ItemEffects } from '../../systems/itemEffects';
 import { addJobCheck, cloneObjective, getPlayerJob, Job } from '../../systems/job';
 import { PluginSystem } from '../../systems/plugins';
 import { SoundSystem } from '../../systems/sound';
-import { StorageSystem } from '../../systems/storage';
 import { defaultSystemsConst } from './constDefaultSystems';
 
 export const systemConst = {
@@ -22,5 +21,4 @@ export const systemConst = {
     },
     plugins: PluginSystem,
     sound: SoundSystem,
-    storage: StorageSystem,
 };

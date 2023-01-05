@@ -19,8 +19,6 @@ import { DEFAULT_CONFIG } from '../athena/main';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Collections } from '../interface/iDatabaseCollections';
 import { getClosestEntity } from '../utility/vector';
-import { StorageView } from '../views/storage';
-import { StorageSystem } from './storage';
 import { VEHICLE_RULES } from '../../shared/enums/vehicleRules';
 import { IResponse } from '../../shared/interfaces/iResponse';
 import IVehicleRuleData from '../../shared/interfaces/iVehicleRuleData';
@@ -95,7 +93,6 @@ export class VehicleSystem {
      * @memberof VehicleSystem
      */
     static async init(): Promise<void> {
-        alt.onClient(VEHICLE_EVENTS.OPEN_STORAGE, VehicleSystem.storage);
         alt.onClient(VEHICLE_EVENTS.PUSH, VehicleSystem.startPush);
         alt.onClient(VEHICLE_EVENTS.STOP_PUSH, VehicleSystem.stopPush);
         alt.onClient(VEHICLE_EVENTS.SET_LOCK, VehicleSystem.toggleLock);
@@ -479,11 +476,6 @@ export class VehicleSystem {
 
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
 
-        // Closes the storage if it was opened in the first place.
-        if (vehicle.lockState === VEHICLE_LOCK_STATE.LOCKED && vehicle.data && vehicle.data.storage) {
-            StorageView.forceCloseStorage(vehicle.data.storage);
-        }
-
         if (!player.vehicle) {
             playerConst.emit.animation(
                 player,
@@ -609,89 +601,6 @@ export class VehicleSystem {
         entity.isPushingVehicle = false;
         entity.detach();
         alt.emitClient(entity, VEHICLE_EVENTS.STOP_PUSH);
-    }
-
-    /**
-     * Opens or creates a storage interface for a vehicle.
-     * @static
-     * @param {alt.Player} player
-     * @param {alt.Vehicle} vehicle
-     * @return {*}
-     * @memberof VehicleSystem
-     */
-    static async storage(player: alt.Player, vehicle: alt.Vehicle) {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined') {
-            return;
-        }
-
-        if (data.isDead) {
-            return;
-        }
-
-        if (!vehicle.data || vehicle.isTemporary) {
-            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
-            return;
-        }
-
-        if (distance(player.pos, vehicle.pos) >= 5) {
-            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_TOO_FAR));
-            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        if (VehicleSystem.isVehicleLocked(vehicle)) {
-            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_TRUNK_ACCESS));
-            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        if (!vehicle.data && !isFlagEnabled(vehicle.data.behavior, Vehicle_Behavior.NEED_KEY_TO_START)) {
-            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
-            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        if (vehicle.engineHealth <= 0) {
-            return;
-        }
-
-        const vehicleInfo = VehicleData.find(
-            (x) => x.name.toLocaleLowerCase() === vehicle.data.model.toLocaleLowerCase(),
-        );
-
-        if (!vehicleInfo || !vehicleInfo.storage) {
-            playerConst.emit.notification(player, LocaleController.get(LOCALE_KEYS.VEHICLE_NO_STORAGE));
-            playerConst.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
-            return;
-        }
-
-        if (!SystemRules.check(VEHICLE_RULES.STORAGE, rules, player, vehicle)) {
-            return;
-        }
-
-        let storageID: string;
-
-        // Remove array. Make it a string reference to the storage box.
-        if (!vehicle.data.storage) {
-            const storage = await StorageSystem.create({ cash: 0, items: [], maxSize: vehicleInfo.storage });
-            vehicle.data.storage = storage._id.toString();
-            await VehicleFuncs.save(vehicle, { storage: vehicle.data.storage });
-            storageID = vehicle.data.storage;
-        } else {
-            storageID = vehicle.data.storage.toString();
-        }
-
-        StorageView.open(
-            player,
-            storageID,
-            LocaleController.get(LOCALE_KEYS.VEHICLE_STORAGE_VIEW_NAME, vehicle.data._id),
-            vehicle,
-        );
     }
 
     /**
