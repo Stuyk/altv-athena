@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VIEW_EVENTS_JOB_TRIGGER } from '../../shared/enums/views';
-import { JobTrigger } from '../../shared/interfaces/jobTrigger';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { VIEW_EVENTS_JOB_TRIGGER } from '@AthenaShared/enums/views';
+import { JobTrigger } from '@AthenaShared/interfaces/jobTrigger';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
 const LastTriggers: { [id: string]: JobTrigger } = {};
 
@@ -22,7 +21,6 @@ class InternalFunctions {
      * @memberof InternalFunctions
      */
     static accept(player: alt.Player, amount?: number) {
-
         if (!player || !player.valid) {
             return;
         }
@@ -43,7 +41,6 @@ class InternalFunctions {
             } else {
                 data.acceptCallback(player, amount);
             }
-
         }
 
         delete LastTriggers[player.id];

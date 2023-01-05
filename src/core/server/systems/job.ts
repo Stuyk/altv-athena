@@ -124,7 +124,9 @@ export class Job {
         color2?: alt.RGBA,
     ): alt.Vehicle {
         const veh = Athena.vehicle.funcs.sessionVehicle(player, model, pos, rot);
-        veh.uid = sha256Random(JSON.stringify(player.data));
+        const data = Athena.document.character.get(player);
+
+        veh.uid = sha256Random(JSON.stringify(data));
 
         if (!color1) {
             color1 = new alt.RGBA(255, 255, 255, 255);
@@ -349,7 +351,9 @@ export class Job {
         }
 
         if (isFlagEnabled(objective.criteria, JobEnums.ObjectiveCriteria.NO_DYING)) {
-            if (this.player && this.player.data.isDead) {
+            const data = Athena.document.character.get(this.player);
+
+            if (this.player && data.isDead) {
                 return false;
             }
         }
@@ -646,7 +650,8 @@ function handleVerify(player: alt.Player) {
     const instance = JobInstances[player.id];
 
     if (!instance) {
-        alt.log(`${player.data.name} has a dead job instance.`);
+        const data = Athena.document.character.get(this.player);
+        alt.log(`${data.name} has a dead job instance.`);
         alt.emitClient(player, JobEnums.ObjectiveEvents.JOB_SYNC, null);
         return;
     }

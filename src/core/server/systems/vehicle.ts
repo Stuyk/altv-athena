@@ -29,6 +29,7 @@ import { LocaleController } from '../../shared/locale/locale';
 import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
 import { VehicleEvents } from '../events/vehicleEvents';
 import { playerConst } from '../api/consts/constPlayer';
+import { Athena } from '@AthenaServer/api/athena';
 
 /**
  * Vehicle Functionality Writeup for Server / Client
@@ -310,7 +311,12 @@ export class VehicleSystem {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (data.isDead) {
             return;
         }
 
@@ -364,7 +370,12 @@ export class VehicleSystem {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (data.isDead) {
             return;
         }
 
@@ -428,7 +439,12 @@ export class VehicleSystem {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (data.isDead) {
             return;
         }
 
@@ -479,10 +495,11 @@ export class VehicleSystem {
         }
 
         const soundName = vehicle.lockState === VEHICLE_LOCK_STATE.UNLOCKED ? 'car_unlock' : 'car_lock';
-        const playersNearPlayer = playerConst.get.playersByGridSpace(player, 8);
-        playersNearPlayer.forEach((target) => {
+        const players = Athena.get.players.inRange(player.pos, 8);
+
+        for (let target of players) {
             playerConst.emit.sound3D(target, soundName, vehicle);
-        });
+        }
 
         // Custom Lock Event
         alt.nextTick(() => {
@@ -503,7 +520,12 @@ export class VehicleSystem {
             return false;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return false;
+        }
+
+        if (data.isDead) {
             return false;
         }
 
@@ -598,11 +620,16 @@ export class VehicleSystem {
      * @memberof VehicleSystem
      */
     static async storage(player: alt.Player, vehicle: alt.Vehicle) {
-        if (!player || !player.valid || player.data.isDead) {
+        if (!player || !player.valid) {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (data.isDead) {
             return;
         }
 

@@ -3,7 +3,7 @@ import { Account } from '../interface/iAccount';
 import nJWT from 'njwt';
 import { Global } from './global';
 import { sha256Random } from '../utility/encryption';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 // Do not change; it is just a key to lookup in the database.
 const JWT_SECRET_KEY = 'jwtSecret';

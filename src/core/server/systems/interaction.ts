@@ -1,15 +1,15 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { distance2d } from '../../shared/utility/vector';
+import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { sha256Random } from '../utility/encryption';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
-import { Interaction } from '../../shared/interfaces/interaction';
 import { InteractionShape } from '../extensions/extColshape';
-import { Athena } from '../api/athena';
-import { LocaleController } from '../../shared/locale/locale';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { WORLD_NOTIFICATION_TYPE } from '../../shared/enums/worldNotificationTypes';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { distance2d } from '@AthenaShared/utility/vector';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { LocaleController } from '@AthenaShared/locale/locale';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
 
 const interactions: Array<InteractionShape> = [];
 
@@ -100,7 +100,8 @@ class InternalFunctions {
 
         // ! --- Debug Function
         if (colshape.interaction.debug) {
-            console.log(`${entity.data.name} ENTER ColShape: ${colshape.interaction.uid}`);
+            const data = Athena.document.character.get(entity);
+            console.log(`${data.name} ENTER ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
             Athena.player.emit.soundFrontend(entity, 'Hack_Success', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -151,7 +152,8 @@ class InternalFunctions {
 
         // ! --- Debug Function
         if (colshape.interaction.debug) {
-            console.log(`${entity.data.name} LEFT ColShape: ${colshape.interaction.uid}`);
+            const data = Athena.document.character.get(entity);
+            console.log(`${data.name} LEFT ColShape: ${colshape.interaction.uid}`);
             console.log(`--- ColShape Interaction ---`);
             console.log(colshape.interaction);
             Athena.player.emit.soundFrontend(entity, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
@@ -193,9 +195,10 @@ class InternalFunctions {
 
         // ! --- Debug Function
         if (shape.interaction.debug) {
+            const data = Athena.document.character.get(player);
             console.log(`--- ColShape Interaction ---`);
             console.log(`UID: ${shape.interaction.uid}`);
-            console.log(`Triggered by ${player.data.name}`);
+            console.log(`Triggered by ${data.name}`);
             console.log(`Range: ${shape.interaction.range}`);
             console.log(`Distance From Player: ${dist}`);
         }

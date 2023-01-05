@@ -1,3 +1,4 @@
+import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';
@@ -96,7 +97,12 @@ class InternalController {
      */
     static tick() {
         alt.Player.all.forEach((player) => {
-            if (!player || !player.valid || !player.data) {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined') {
                 return;
             }
 

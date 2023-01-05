@@ -15,21 +15,26 @@ alt.onClient(SYSTEM_EVENTS.PLAYER_TICK, handlePing);
 export async function onTick(player: alt.Player): Promise<void> {
     let injections: Partial<Character> = {};
 
-    if (!player || !player.valid || !player.data) {
+    if (!player || !player.valid) {
         return;
     }
 
-    const dist = Athena.utility.vector.distance2d(player.pos, player.data.pos as alt.Vector2);
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    const dist = Athena.utility.vector.distance2d(player.pos, data.pos as alt.Vector2);
 
     if (player && player.pos && dist >= 1) {
         injections.pos = player.pos;
     }
 
-    if (player.health !== player.data.health) {
+    if (player.health !== data.health) {
         injections.health = player.health;
     }
 
-    if (player.armour !== player.data.armour) {
+    if (player.armour !== data.armour) {
         injections.armour = player.armour;
     }
 
