@@ -1,9 +1,16 @@
 # Changelog
 
-## 4.0.2
+## 5.0.0
 
 ```
-Removed Athena.world namespace.
+Major Breaking Changes
+---> These changes reflect a larger set of changes that will be occuring to the framework during the 5.0.0 release window.
+---> These changes are necessary to scale the framework more and lower the complexity of the framework further.
+- Removed Inventory
+- Removed Equipment
+- Removed Toolbar
+- Removed Storage System
+- Removed Vehicle Keys
 
 Death
 - Added default death system to help decouple framework from opinionated systems.
@@ -52,11 +59,8 @@ Currency
 - Uses new document system to log new / old data changes.
 - Removes direct modifiction of player.data.x
 
-Known Issues:
-- State manager uses the same object for inventory / equipment.
--- This is due to deeper core assignment of inventory / equipment at runtime.
--- This can only be fixed with a proper inventory rewrite (also in progress)
--- Will ignore this for now. Just don't use onChange with 'inventory', 'equipment', or 'toolbar'
+Refactors
+- Update existing code base to use new Athena.document APIs
 ```
 
 
