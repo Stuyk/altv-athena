@@ -90,14 +90,17 @@ class InternalFunctions {
      * @memberof CharacterSelectView
      */
     static async show(player: alt.Player) {
-        const playerCharacters: Array<Character> = await CharacterSystem.getCharacters(
-            player.accountData._id.toString(),
-        );
-
         if (!player || !player.valid) {
             return;
         }
 
+        const accountData = Athena.document.account.get(player);
+        if (typeof accountData === 'undefined') {
+            player.kick('Could not find account data. Notify administration');
+            return;
+        }
+
+        const playerCharacters: Array<Character> = await CharacterSystem.getCharacters(accountData._id);
         if (!playerCharacters || playerCharacters.length <= 0) {
             if (CharacterList[player.id]) {
                 delete CharacterList[player.id];

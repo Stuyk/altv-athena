@@ -59,52 +59,66 @@ class PlayersCommand {
     private static freezeCommand(player: alt.Player, id: number) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid) return;
+        if (!target || !target.valid) {
+            return;
+        }
 
+        const data = Athena.document.character.get(target);
         Athena.player.safe.setPosition(target, target.pos.x, target.pos.y, target.pos.z);
         Athena.player.set.frozen(target, true);
-        Athena.player.emit.notification(player, `Froze ${target.data.name} successfully!`);
+        Athena.player.emit.notification(player, `Froze ${data.name} successfully!`);
     }
 
     @command('unfreeze', '/unfreeze <ID>', PERMISSIONS.ADMIN)
     private static unfreezeCommand(player: alt.Player, id: number) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid) return;
+        if (!target || !target.valid) {
+            return;
+        }
 
+        const data = Athena.document.character.get(target);
         Athena.player.set.frozen(target, false);
-        Athena.player.emit.notification(player, `Unfroze ${target.data.name} successfully!`);
+        Athena.player.emit.notification(player, `Unfroze ${data.name} successfully!`);
     }
 
     @command('kick', '/kick <ID> <REASON>', PERMISSIONS.ADMIN)
     private static kickCommand(player: alt.Player, id: number, ...reason: string[]) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid) return;
+        if (!target || !target.valid) {
+            return;
+        }
 
-        if (target.accountData.permissionLevel >= PERMISSIONS.ADMIN) {
+        const accountData = Athena.document.account.get(target);
+        if (accountData.permissionLevel >= PERMISSIONS.ADMIN) {
             Athena.player.emit.notification(player, `This person can't be kicked.`);
             return;
         }
 
-        target.kick(`You are kicked from the server by ${player.data.name} | Reason: ${reason}`);
+        const data = Athena.document.character.get(player);
+        target.kick(`You are kicked from the server by ${data.name} | Reason: ${reason}`);
     }
 
     @command('ban', '/ban <ID> <REASON> - Bans a player.', PERMISSIONS.ADMIN)
     private static async banCommand(player: alt.Player, id: number, reason: string) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id) return;
+        if (!target || !target.valid || !id) {
+            return;
+        }
 
-        if (target.accountData.permissionLevel >= PERMISSIONS.ADMIN) {
+        const accountData = Athena.document.account.get(target);
+        if (accountData.permissionLevel >= PERMISSIONS.ADMIN) {
             Athena.player.emit.notification(player, `This person can't be kicked.`);
             return;
         }
 
-        Athena.player.emit.notification(player, `${target.data.name} was banned from the Server.`);
+        const data = Athena.document.character.get(target);
+        Athena.player.emit.notification(player, `${data.name} was banned from the Server.`);
         target.kick(`You were banned from the Server - ${reason}`);
         await Athena.database.funcs.updatePartialData(
-            target.accountData._id,
+            accountData._id,
             { banned: true, reason: reason },
             Athena.database.collections.Accounts,
         );
@@ -117,8 +131,9 @@ class PlayersCommand {
         }
         const unbanned = AdminController.unbanPlayer(discordIdentifier);
         if (unbanned) {
+            const data = Athena.document.character.get(player);
             Athena.player.emit.message(player, `Unbanned ${discordIdentifier} (Discord)`);
-            alt.logWarning(`${discordIdentifier} (Discord) was unbanned by ${player.data.name}`);
+            alt.logWarning(`${discordIdentifier} (Discord) was unbanned by ${data.name}`);
             return;
         }
         Athena.player.emit.message(player, `Could not find that account with Discord ID: ${discordIdentifier}`);
@@ -134,14 +149,24 @@ class PlayersCommand {
             return;
         }
 
-        target.accountData.permissionLevel = permissionLevel;
+        const accountData = Athena.document.account.get(target);
+        if (typeof accountData === 'undefined') {
+            return;
+        }
 
+        const data = Athena.document.character.get(target);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        accountData.permissionLevel = permissionLevel;
         await Athena.database.funcs.updatePartialData(
-            target.accountData._id,
-            { permissionLevel: target.accountData.permissionLevel },
+            accountData._id,
+            { permissionLevel: accountData.permissionLevel },
             Athena.database.collections.Accounts,
         );
-        alt.logWarning(`(${target.data.name}) had their permission level changed to: ${permissionLevel}.`);
+
+        alt.logWarning(`(${data.name}) had their permission level changed to: ${permissionLevel}.`);
     }
 
     @command('info', '/info <ID> - Get account info for the specified id.', PERMISSIONS.ADMIN)
@@ -150,22 +175,28 @@ class PlayersCommand {
 
         if (!target || !target.valid) return;
 
-        if (!target.accountData) {
+        const accountData = Athena.document.account.get(target);
+        if (!accountData) {
             Athena.player.emit.notification(player, `Could not find account info for ${id}!`);
+            return;
         }
 
         const dataToSend = [];
-
-        dataToSend.push(`--- INFO FOR ${target.data.name} ---`);
-        dataToSend.push(`ACCOUNT: ${target.data.account_id.toString()}`);
-
-        if (target.accountData && target.accountData.discord) {
-            dataToSend.push(`DISCORD: ${target.accountData.discord}`);
+        const data = Athena.document.character.get(target);
+        if (typeof data === 'undefined') {
+            return;
         }
 
-        dataToSend.push(`IPs: ${JSON.stringify(target.accountData.ips)}`);
-        dataToSend.push(`PERMISSION LEVEL: ${target.accountData.permissionLevel}`);
-        dataToSend.push(`HARDWARE: ${target.accountData.hardware}`);
+        dataToSend.push(`--- INFO FOR ${data.name} ---`);
+        dataToSend.push(`ACCOUNT: ${data.account_id.toString()}`);
+
+        if (accountData.discord) {
+            dataToSend.push(`DISCORD: ${accountData.discord}`);
+        }
+
+        dataToSend.push(`IPs: ${JSON.stringify(accountData.ips)}`);
+        dataToSend.push(`PERMISSION LEVEL: ${accountData.permissionLevel}`);
+        dataToSend.push(`HARDWARE: ${accountData.hardware}`);
         dataToSend.push(`--- --- ---`);
 
         for (const element of dataToSend) {

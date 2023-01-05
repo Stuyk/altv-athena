@@ -10,7 +10,6 @@ import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
 import { Account } from '@AthenaServer/interface/iAccount';
 import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
-import { StorageView } from '@AthenaServer/views/storage';
 import { AccountSystem } from '@AthenaServer/systems/account';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { Injections } from '@AthenaServer/systems/injections';
@@ -18,6 +17,7 @@ import { LoginInjectionNames, TryLoginCallback } from '@AthenaServer/systems/inj
 import { VehicleSystem } from '@AthenaServer/systems/vehicle';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
 import { onTick } from '@AthenaServer/systems/tick';
+import { Athena } from '@AthenaServer/api/athena';
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];
@@ -89,7 +89,7 @@ export class LoginController {
      * @return {Promise<void>}
      * @memberof LoginController
      */
-    static async tryLogin(player: alt.Player, account: Partial<Account> = null): Promise<void> {
+    static async tryLogin(player: alt.Player, account: Account = null): Promise<void> {
         if (!player.valid) {
             return;
         }
@@ -185,17 +185,14 @@ export class LoginController {
      */
     static tryDisconnect(player: alt.Player, reason: string): void {
         const id = player.id;
+        const data = Athena.document.character.get(player);
 
         if (DEFAULT_CONFIG.DESPAWN_VEHICLES_ON_LOGOUT && typeof id === 'number') {
             const characterID = LoginController.getDatabaseIdForPlayer(id);
             VehicleFuncs.despawnAll(characterID);
         }
 
-        if (typeof id === 'number') {
-            StorageView.removeStorageBinding(id);
-        }
-
-        if (!player || !player.valid || !player.data || !player.data._id) {
+        if (!player || !player.valid) {
             return;
         }
 
@@ -205,19 +202,20 @@ export class LoginController {
 
         onTick(player);
 
-        if (!player.data.name) {
+        if (typeof data === 'undefined') {
             return;
         }
 
-        alt.log(`${player.data.name} has logged out.`);
+        alt.log(`${data.name} has logged out.`);
     }
 
     static bindPlayerToID(player: alt.Player): void {
-        if (!player || !player.valid || !player.data) {
+        if (!player || !player.valid) {
             return;
         }
 
-        UserRelation[player.id] = player.data._id.toString();
+        const data = Athena.document.character.get(player);
+        UserRelation[player.id] = data._id;
     }
 
     static getDatabaseIdForPlayer(id: number): string | null {

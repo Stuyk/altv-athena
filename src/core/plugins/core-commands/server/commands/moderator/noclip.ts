@@ -11,15 +11,19 @@ class NoClipCommand {
     @command('noclip', LocaleController.get(LOCALE_KEYS.COMMAND_NO_CLIP, '/noclip'), PERMISSIONS.ADMIN)
     private static handleCommand(player: alt.Player): void {
         const isNoClipping: boolean | null = player.getSyncedMeta('NoClipping') as boolean;
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
 
-        if (!isNoClipping && !player.data.isDead) {
+        if (!isNoClipping && !data.isDead) {
             player.setSyncedMeta('NoClipping', true);
             Athena.player.emit.message(player, `No Clip: ${LocaleController.get(LOCALE_KEYS.LABEL_ON)}`);
             player.visible = false;
             return;
         }
 
-        if (player.data.isDead) {
+        if (data.isDead) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
         }
 

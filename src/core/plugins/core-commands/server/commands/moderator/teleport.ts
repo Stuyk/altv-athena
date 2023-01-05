@@ -11,17 +11,23 @@ class TeleportCommands {
     private static GetHereCommand(player: alt.Player, id: number) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id || target === player) return;
+        if (!target || !target.valid || !id || target === player) {
+            return;
+        }
+
+        const data = Athena.document.character.get(target);
 
         Athena.player.safe.setPosition(target, player.pos.x + 1, player.pos.y, player.pos.z);
-        Athena.player.emit.notification(player, `Successfully teleported ${target.data.name} to your position!`);
+        Athena.player.emit.notification(player, `Successfully teleported ${data.name} to your position!`);
     }
 
     @command('goto', '/goto <ID> - Teleports you to the specified player.', PERMISSIONS.ADMIN)
     private static goToCommand(player: alt.Player, id: number) {
         const target = Athena.systems.identifier.getPlayer(id);
 
-        if (!target || !target.valid || !id || target === player) return;
+        if (!target || !target.valid || !id || target === player) {
+            return;
+        }
 
         Athena.player.safe.setPosition(player, target.pos.x + 1, target.pos.y, target.pos.z);
     }
@@ -94,10 +100,7 @@ class TeleportCommands {
             name = name.replace('_', '');
         }
 
-        const target = alt.Player.all.find(
-            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
-        );
-
+        const target = Athena.get.player.byPartialName(name);
         if (!target || !target.valid) {
             Athena.player.emit.message(player, `Could not find that player.`);
             return;
@@ -122,10 +125,7 @@ class TeleportCommands {
             name = name.replace('_', '');
         }
 
-        const target = alt.Player.all.find(
-            (p) => p && p.data && p.data.name.replace('_', '').toLowerCase().includes(name),
-        );
-
+        const target = Athena.get.player.byPartialName(name);
         if (!target || !target.valid) {
             Athena.player.emit.message(player, `Could not find that player.`);
             return;
@@ -141,12 +141,13 @@ class TeleportCommands {
 
     @command('tpall', '/tpall', PERMISSIONS.ADMIN)
     private static handleTeleportAll(player: alt.Player) {
-        alt.Player.all.forEach((target) => {
-            if (!target || !target.valid || !target.data || !target.data._id) {
+        const onlinePlayers = Athena.get.players.online();
+        for (let target of onlinePlayers) {
+            if (!target || !target.valid) {
                 return;
             }
 
             Athena.player.safe.setPosition(target, player.pos.x, player.pos.y, player.pos.z);
-        });
+        }
     }
 }

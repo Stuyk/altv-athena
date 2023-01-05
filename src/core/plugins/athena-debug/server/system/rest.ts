@@ -1,3 +1,4 @@
+import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
 import http from 'http';
 import { DebugKeys } from './keys';
@@ -52,20 +53,18 @@ const InternalFunctions = {
         return res.end(toJSON({ routes: Object.keys(InternalFunctions).filter((x) => x !== 'response') }));
     },
     '/players': (res: http.ServerResponse) => {
-        const players = [...alt.Player.all]
-            .filter((x) => x && x.valid && x.data && x.data._id)
-            .map((player) => {
-                return {
-                    id: player.id,
-                    pos: player.pos,
-                    rot: player.rot,
-                    vehicle: player.vehicle,
-                    armour: player.armour,
-                    hp: player.health,
-                    model: player.model,
-                    ...player,
-                };
-            });
+        const players = Athena.get.players.online().map((player) => {
+            return {
+                id: player.id,
+                pos: player.pos,
+                rot: player.rot,
+                vehicle: player.vehicle,
+                armour: player.armour,
+                hp: player.health,
+                model: player.model,
+                ...player,
+            };
+        });
 
         return res.end(toJSON(players));
     },

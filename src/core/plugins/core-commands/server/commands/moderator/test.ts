@@ -4,7 +4,6 @@ import { command } from '@AthenaServer/decorators/commands';
 import { PedController } from '@AthenaServer/streamers/ped';
 import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
 import { ServerJobTrigger } from '@AthenaServer/systems/jobTrigger';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WORLD_NOTIFICATION_TYPE } from '@AthenaShared/enums/worldNotificationTypes';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';

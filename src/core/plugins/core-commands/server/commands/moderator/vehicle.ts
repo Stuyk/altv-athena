@@ -51,7 +51,8 @@ class VehicleCommands {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
             return;
         }
@@ -72,7 +73,8 @@ class VehicleCommands {
             return;
         }
 
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_PERFORM_WHILE_DEAD));
             return;
         }
@@ -83,7 +85,7 @@ class VehicleCommands {
             const veh = Athena.vehicle.funcs.tempVehicle(player, model, fwd, new alt.Vector3(0, 0, 0));
 
             Athena.vehicle.funcs.add(
-                { owner: player.data._id.toString(), fuel: 100, model, position: veh.pos, rotation: veh.rot },
+                { owner: data._id, fuel: 100, model, position: veh.pos, rotation: veh.rot },
                 false,
             );
             veh.destroy();
@@ -222,20 +224,6 @@ class VehicleCommands {
 
         console.log(vehicle.data);
         Athena.vehicle.funcs.save(vehicle, vehicle.data);
-    }
-
-    @command(
-        ['addVehiclekey'],
-        LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE_KEY, '/addVehiclekey'),
-        PERMISSIONS.ADMIN,
-    )
-    private static addVehicleKeyCommand(player: alt.Player): void {
-        const vehicle = player.vehicle;
-
-        if (!vehicle?.valid) return;
-        if (!vehicle?.data) return;
-
-        Athena.vehicle.funcs.createKey(player, vehicle);
     }
 
     @command(
