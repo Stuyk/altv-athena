@@ -23,13 +23,6 @@ declare module 'alt-server' {
         discordToken?: string;
 
         /**
-         *
-         * @type {boolean}
-         * @memberof Player
-         */
-        needsQT?: boolean;
-
-        /**
          * Does the character currently have a model assigned to them?
          * @type {boolean}
          * @memberof Player
@@ -50,13 +43,6 @@ declare module 'alt-server' {
          * @memberof Player
          */
         nextPingTime: number;
-
-        /**
-         * Used to update the items around the player.
-         * @type {number}
-         * @memberof Player
-         */
-        nextItemSync: number;
 
         /**
          * The next play time update.
@@ -90,32 +76,11 @@ declare module 'alt-server' {
         gridSpace: number;
 
         /**
-         * Current name of the weather in-use.
-         * @type {string}
-         * @memberof Player
-         */
-        currentWeather: string;
-
-        /**
-         * ID of the last vehicle the player has entered.
-         * @type {number}
-         * @memberof Player
-         */
-        lastEnteredVehicleID: number;
-
-        /**
          * Used to check if the player is currently pushing a vehicle.
          * @type {boolean}
          * @memberof Player
          */
         isPushingVehicle: boolean;
-
-        /**
-         * The total number of vehicles the player has spawned.
-         * @type {number}
-         * @memberof Player
-         */
-        vehiclesSpawned: number;
 
         /**
          * The current waypoint position on the player's map.
@@ -130,13 +95,6 @@ declare module 'alt-server' {
          * @memberof Player
          */
         currentInteraction: InteractionShape | null;
-
-        /**
-         * Last Faction ID for invite.
-         * @type { alt.Player }
-         * @memberof Player
-         */
-        lastFactionInvite: alt.Player;
 
         /**
          * An array of attachables. Is not automatically initialized.
