@@ -40,7 +40,7 @@ function handleWeatherUpdate() {
     minute = time.getMinutes();
     hour = time.getHours();
 
-    const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.data && x.valid);
+    const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.hasFullySpawned);
     if (loggedInPlayers.length <= 0) {
         return;
     }

@@ -1,3 +1,4 @@
+import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
@@ -27,7 +28,8 @@ const Emit = {
      * @memberof EmitPrototype
      */
     startAlarm(player: alt.Player, name: string): void {
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
             alt.logWarning(`[Athena] Cannot play alarm ${name} while player is dead.`);
             return;
         }
@@ -76,7 +78,8 @@ const Emit = {
         flags: ANIMATION_FLAGS,
         duration: number = -1,
     ): void {
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
             alt.logWarning(`[Athena] Cannot play ${dictionary}@${name} while player is dead.`);
             return;
         }
@@ -114,7 +117,8 @@ const Emit = {
      * @memberof EmitPrototype
      */
     scenario(player: alt.Player, name: string, duration: number): void {
-        if (player.data.isDead) {
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
             return;
         }
 

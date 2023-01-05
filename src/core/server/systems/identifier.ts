@@ -1,3 +1,4 @@
+import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
 import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
@@ -39,7 +40,12 @@ const IdentityRef = {
         }
 
         const identifier = IdentityRef.getIdByStrategy(player);
-        alt.log(`${player.data.name} ID join and set to ${identifier} using id strategy ${strategy}.`);
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            throw new Error(`Could not set identifier for player: ${player.id}, data was not defined.`);
+        }
+
+        alt.log(`${data.name} ID join and set to ${identifier} using id strategy ${strategy}.`);
         player.setSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID, identifier);
     },
     /**
@@ -55,16 +61,26 @@ const IdentityRef = {
         }
 
         return alt.Player.all.find((target) => {
-            if (!target || !target.valid || !target.data || !target.data._id) {
+            if (!target || !target.valid) {
                 return false;
             }
 
-            if (strategy === 'account_id' && target.accountData.id === id) {
-                return true;
+            if (strategy === 'account_id') {
+                const accountData = Athena.document.account.get(target);
+                if (typeof accountData === 'undefined') {
+                    return false;
+                }
+
+                return accountData.id === id;
             }
 
-            if (strategy === 'character_id' && target.data.character_id === id) {
-                return true;
+            if (strategy === 'character_id') {
+                const data = Athena.document.character.get(target);
+                if (typeof data === 'undefined') {
+                    return false;
+                }
+
+                return data.character_id === id;
             }
 
             if (target.id !== id) {
@@ -83,8 +99,13 @@ const IdentityRef = {
      * @memberof Identifier
      */
     getIdByStrategy(player: alt.Player): number {
-        const accountData = player.accountData;
-        const data = player.data;
+        const accountData = Athena.document.account.get(player);
+        const data = Athena.document.character.get(player);
+
+        if (typeof accountData === 'undefined' || typeof data === 'undefined') {
+            alt.logWarning(`Could not fetch player identifier for player: ${player.id} (${player.name})`);
+            return -1;
+        }
 
         if (!player || !accountData || !data || !data._id) {
             return -1;

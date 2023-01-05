@@ -59,12 +59,13 @@ const CharacterSystemRef = {
      * @memberof CharacterSystem
      */
     async create(player: alt.Player, appearance: Appearance, info: CharacterInfo, name: string): Promise<boolean> {
-        if (!player.accountData || !player.accountData._id) {
+        const accountData = Athena.document.account.get(player);
+        if (!accountData || !accountData._id) {
             return false;
         }
 
         const newDocument: Character = deepCloneObject<Character>(CharacterDefaults);
-        newDocument.account_id = player.accountData._id.toString();
+        newDocument.account_id = accountData._id;
         newDocument.appearance = appearance;
         newDocument.info = info;
         newDocument.name = name;
@@ -107,17 +108,18 @@ const CharacterSystemRef = {
             return;
         }
 
-        player.data = deepCloneObject(character);
+        const data = deepCloneObject<Character>(character);
+        Athena.document.character.bind(player, data);
 
         // Increase the value outright
-        if (player.data.character_id === undefined || player.data.character_id === null) {
+        if (data.character_id === undefined || data.character_id === null) {
             await Global.increase('nextCharacterId', 1, 1);
             const nextCharacterID = await Global.getKey<number>('nextCharacterId');
             await Athena.document.character.set(player, 'character_id', nextCharacterID);
         }
 
         alt.log(
-            `Selected | ${player.data.name} | ID: (${player.id}) | Character ID: ${player.data.character_id} | Account: ${player.data.account_id}`,
+            `Selected | ${data.name} | ID: (${player.id}) | Character ID: ${data.character_id} | Account: ${data.account_id}`,
         );
 
         const beforeInjections = Injections.get<PlayerCallback>(PlayerInjectionNames.BEFORE_CHARACTER_SELECT);
@@ -125,9 +127,9 @@ const CharacterSystemRef = {
             await callback(player);
         }
 
-        Athena.player.sync.appearance(player, player.data.appearance as Appearance);
+        Athena.player.sync.appearance(player, data.appearance as Appearance);
 
-        if (!player.data.equipment) {
+        if (!data.equipment) {
             await Athena.document.character.set(player, 'equipment', []);
         }
 
@@ -137,9 +139,9 @@ const CharacterSystemRef = {
         Athena.player.safe.setDimension(player, 0);
         Athena.player.set.frozen(player, true);
 
-        if (player.data.dimension) {
-            Athena.player.safe.setDimension(player, player.data.dimension);
-            Athena.player.emit.message(player, `Dimension: ${player.data.dimension}`);
+        if (data.dimension) {
+            Athena.player.safe.setDimension(player, data.dimension);
+            Athena.player.emit.message(player, `Dimension: ${data.dimension}`);
         }
 
         alt.setTimeout(async () => {
@@ -147,8 +149,8 @@ const CharacterSystemRef = {
                 return;
             }
 
-            if (player.data.pos) {
-                Athena.player.safe.setPosition(player, player.data.pos.x, player.data.pos.y, player.data.pos.z);
+            if (data.pos) {
+                Athena.player.safe.setPosition(player, data.pos.x, data.pos.y, data.pos.z);
             } else {
                 Athena.player.safe.setPosition(
                     player,
@@ -159,15 +161,15 @@ const CharacterSystemRef = {
             }
 
             // Check if health exists.
-            if (player.data.health) {
-                Athena.player.safe.addHealth(player, player.data.health, true);
+            if (data.health) {
+                Athena.player.safe.addHealth(player, data.health, true);
             } else {
                 Athena.player.safe.addHealth(player, 200, true);
             }
 
             // Check if armour exists.
-            if (player.data.armour) {
-                Athena.player.safe.addArmour(player, player.data.armour, true);
+            if (data.armour) {
+                Athena.player.safe.addArmour(player, data.armour, true);
             } else {
                 Athena.player.safe.addArmour(player, 0, true);
             }
@@ -176,10 +178,10 @@ const CharacterSystemRef = {
             Athena.player.sync.currencyData(player);
             Athena.player.sync.inventory(player);
 
-            player.setSyncedMeta(PLAYER_SYNCED_META.NAME, player.data.name);
+            player.setSyncedMeta(PLAYER_SYNCED_META.NAME, data.name);
             player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
             player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
-            player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, player.data._id.toString());
+            player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, data._id.toString());
 
             // Propagation
             Athena.controllers.chat.populateCommands(player);
@@ -188,7 +190,7 @@ const CharacterSystemRef = {
 
             // Vehicle Spawning
             if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {
-                const vehicles = await Athena.vehicle.funcs.getPlayerVehicles(player.data._id);
+                const vehicles = await Athena.vehicle.funcs.getPlayerVehicles(data._id);
                 Athena.vehicle.funcs.spawnPlayerVehicles(vehicles);
             }
 

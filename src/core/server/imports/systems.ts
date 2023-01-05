@@ -1,7 +1,6 @@
 import '../systems/account';
 import '../systems/admin';
 import '../systems/agenda';
-import '../systems/arrest';
 import '../systems/blip';
 import '../systems/chat';
 import '../systems/global';

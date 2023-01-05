@@ -37,30 +37,11 @@ declare module 'alt-server' {
         hasModel?: boolean;
 
         /**
-         * Account identifiers for Discord
-         * @type {Partial<Account>}
-         * @memberof Player
-         */
-        accountData?: Partial<Account>;
-
-        /**
          * Relevant Discord Infomation from Login
          * @type {DiscordUser}
          * @memberof Player
          */
         discord?: DiscordUser;
-
-        /**
-         * The currently selected character bound to the player.
-         * @type {Partial<Character>}
-         * @memberof Player
-         */
-        data: Character;
-
-        // Unimplemented Anti-Cheat Stuff
-        acPosition?: alt.Vector3;
-        acHealth?: number;
-        acArmour?: number;
 
         /**
          * The next time the player is due for a 'ping'.

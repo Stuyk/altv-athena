@@ -22,7 +22,7 @@ const Setter = {
      * @return {Promise<void>}
      * @memberof SetPrototype
      */
-    async account(player: alt.Player, accountData: Partial<Account>): Promise<void> {
+    async account(player: alt.Player, accountData: Account): Promise<void> {
         if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
             accountData.permissionLevel = PERMISSIONS.NONE;
             Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
@@ -35,8 +35,8 @@ const Setter = {
 
         player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
         emit.meta(player, 'permissionLevel', accountData.permissionLevel);
-        player.accountData = accountData;
-        player.accountData._id = player.accountData._id.toString();
+
+        Athena.document.account.bind(player, accountData);
         PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.FINISHED_LOGIN, player);
     },
 
@@ -70,8 +70,6 @@ const Setter = {
         player.pendingLogin = true;
         player.visible = false;
 
-        // Some general initialization setup.
-        player.data = {} as any;
         safe.setPosition(player, pos.x, pos.y, pos.z);
     },
 

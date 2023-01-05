@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
 const Safe = {
     /**
@@ -20,54 +20,49 @@ const Safe = {
         if (player.vehicle && player.vehicle.driver === player) {
             player.vehicle.pos = pos;
         } else {
-            player.acPosition = pos;
             player.pos = pos;
         }
     },
     /**
      * Safely add health to this player.
+     * @param {alt.Player} player
      * @param {number} value 99-199
      * @param {boolean} exactValue
      * @memberof SafePrototype
      */
-    addHealth(p: alt.Player, value: number, exactValue: boolean = false) {
+    addHealth(player: alt.Player, value: number, exactValue: boolean = false) {
         if (exactValue) {
-            p.acHealth = value;
-            p.health = value;
+            player.health = value;
             return;
         }
 
-        if (p.health + value > 199) {
-            p.acHealth = 199;
-            p.health = 199;
+        if (player.health + value > 199) {
+            player.health = 199;
             return;
         }
 
-        p.acHealth = p.health + value;
-        p.health = p.acHealth;
+        player.health = player.health + value;
     },
 
     /**
-      * Safely subtract health to this player.
-      * @param {number} value 99-199
-      * @param {boolean} exactValue
-      * @memberof SafePrototype
-      */
-    subHealth(p: alt.Player, value: number, exactValue: boolean = false) {
+     * Safely subtract health to this player.
+     * @param {alt.Player} player
+     * @param {number} value 99-199
+     * @param {boolean} exactValue
+     * @memberof SafePrototype
+     */
+    subHealth(player: alt.Player, value: number, exactValue: boolean = false) {
         if (exactValue) {
-            p.acHealth = value;
-            p.health = value;
+            player.health = value;
             return;
         }
 
-        if (p.health - value < 0) {
-            p.acHealth = 0;
-            p.health = 0;
+        if (player.health - value < 0) {
+            player.health = 0;
             return;
         }
 
-        p.acHealth = p.health - value;
-        p.health = p.acHealth;
+        player.health = player.health - value;
     },
 
     /**
@@ -78,19 +73,16 @@ const Safe = {
      */
     addArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
         if (exactValue) {
-            player.acArmour = value;
             player.armour = value;
             return;
         }
 
         if (player.armour + value > 100) {
-            player.acArmour = 100;
             player.armour = 100;
             return;
         }
 
-        player.acArmour = player.armour + value;
-        player.armour = player.acArmour;
+        player.armour = player.armour + value;
     },
 
     /**
@@ -101,24 +93,20 @@ const Safe = {
      */
     subArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
         if (exactValue) {
-            player.acArmour = value;
             player.armour = value;
             return;
         }
 
         if (player.armour - value < 100) {
-            player.acArmour = 0;
             player.armour = 0;
             return;
         }
 
-        player.acArmour = player.armour - value;
-        player.armour = player.acArmour;
+        player.armour = player.armour - value;
     },
     setDimension(player: alt.Player, value: number) {
         player.dimension = value;
         player.setSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
-        alt.log(`Player Dimension is now: ${player.dimension}`);
     },
 };
 

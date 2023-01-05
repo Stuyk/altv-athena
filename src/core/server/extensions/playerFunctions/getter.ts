@@ -1,12 +1,12 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { IVehicle } from '../../../shared/interfaces/iVehicle';
-import { Collections } from '../../interface/iDatabaseCollections';
-import { Character } from '../../../shared/interfaces/character';
+import { IVehicle } from '@AthenaShared/interfaces/iVehicle';
+import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Character } from '@AthenaShared/interfaces/character';
 import VehicleFuncs from '../vehicleFuncs';
-import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
-import { distance } from '../../../shared/utility/vector';
-import { getters } from '../../systems/getters';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { getters } from '@AthenaServer/systems/getters';
+import { Athena } from '@AthenaServer/api/athena';
 
 const Getter = {
     /**
@@ -16,11 +16,8 @@ const Getter = {
      * @return {Promise<IVehicle[]>}
      */
     async allVehicles(player: alt.Player, excludeKeys = false): Promise<IVehicle[]> {
-        let vehicles = await Database.fetchAllByField<IVehicle>(
-            `owner`,
-            player.data._id.toString(),
-            Collections.Vehicles,
-        );
+        const data = Athena.document.character.get(player);
+        let vehicles = await Database.fetchAllByField<IVehicle>(`owner`, data._id.toString(), Collections.Vehicles);
 
         if (!excludeKeys) {
             const keys = VehicleFuncs.getAllVehicleKeys(player);
@@ -51,36 +48,20 @@ const Getter = {
      * @return {Array<alt.Player>}
      */
     playersByPermissionLevel(permissionLevels: Array<PERMISSIONS>): Array<alt.Player> {
-        const validPlayers = [...alt.Player.all].filter((p) => {
-            if (
-                !p ||
-                !p.valid ||
-                !p.data ||
-                typeof p.accountData === 'undefined' ||
-                typeof p.accountData.permissionLevel === 'undefined'
-            ) {
+        const validPlayers = [...alt.Player.all].filter((player) => {
+            if (!player || !player.valid) {
                 return false;
             }
 
-            return permissionLevels.includes(p.accountData.permissionLevel);
+            const accountData = Athena.document.account.get(player);
+            if (!accountData) {
+                return false;
+            }
+
+            return permissionLevels.includes(accountData.permissionLevel);
         });
 
         return validPlayers;
-    },
-
-    /**
-     * Returns an array of players filtered by grid space. (performant)
-     * @export
-     * @param {alt.Player} player
-     * @param {number} maxDistance
-     * @return {*}  {Array<alt.Player>}
-     */
-    playersByGridSpace(player: alt.Player, maxDistance: number): Array<alt.Player> {
-        const currentPlayers = [...alt.Player.all];
-        return currentPlayers.filter(
-            (p) =>
-                p && p.valid && p.data && player.gridSpace === p.gridSpace && distance(player.pos, p.pos) < maxDistance,
-        );
     },
     /**
      * Returns the closest player in our grid space.

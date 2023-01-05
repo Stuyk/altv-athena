@@ -484,7 +484,8 @@ export default class VehicleFuncs {
         }
 
         // Check Actual Ownership
-        if (vehicle.data.owner === player.data._id.toString()) {
+        const playerData = Athena.document.character.get(player);
+        if (vehicle.data.owner === playerData._id.toString()) {
             return true;
         }
 
@@ -497,8 +498,8 @@ export default class VehicleFuncs {
         }
 
         // Check for Physical Key
-        for (let i = 0; i < player.data.inventory.length; i++) {
-            const item = player.data.inventory[i];
+        for (let i = 0; i < playerData.inventory.length; i++) {
+            const item = playerData.inventory[i];
             if (!item) {
                 continue;
             }
@@ -668,7 +669,7 @@ export default class VehicleFuncs {
                 return null;
             }
 
-            await Athena.document.character.set(player, 'inventory', player.data.inventory, true);
+            await Athena.document.character.set(player, 'inventory', player.data.inventory);
             Athena.player.sync.inventory(player);
         }
 
@@ -687,7 +688,8 @@ export default class VehicleFuncs {
             return [];
         }
 
-        const keys = player.data.inventory.filter((item) => {
+        const playerData = Athena.document.character.get(player);
+        const keys = playerData.inventory.filter((item) => {
             if (!item) {
                 return false;
             }

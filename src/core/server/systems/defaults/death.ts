@@ -16,7 +16,8 @@ function respawn(victim: alt.Player) {
         return;
     }
 
-    if (!victim.data.isDead) {
+    const victimData = Athena.document.character.get(victim);
+    if (!victimData.isDead) {
         return;
     }
 
@@ -35,7 +36,12 @@ function handleDefaultDeath(victim: alt.Player) {
         return;
     }
 
-    if (!victim || !victim.data || !victim.hasFullySpawned) {
+    if (!victim || !victim.valid) {
+        return;
+    }
+
+    const victimData = Athena.document.character.get(victim);
+    if (!victimData) {
         return;
     }
 

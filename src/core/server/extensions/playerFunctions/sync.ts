@@ -8,7 +8,7 @@ import { Appearance } from '../../../shared/interfaces/appearance';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../../systems/injections';
 import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
-import { Athena } from '../../api/athena';
+import { Athena } from '@AthenaServer/api/athena';
 import { ReadOnlyPlayer } from './shared';
 
 const Sync = {
@@ -18,12 +18,13 @@ const Sync = {
      */
     currencyData(player: alt.Player): void {
         const keys: (keyof typeof CurrencyTypes)[] = <(keyof typeof CurrencyTypes)[]>Object.keys(CurrencyTypes);
+        const data = Athena.document.character.get(player);
+
         for (const key of keys) {
             const currencyName: string = CurrencyTypes[key];
-            emit.meta(player, currencyName, player.data[currencyName]);
+            emit.meta(player, currencyName, data[currencyName]);
         }
     },
-
     inventory(playerRef: alt.Player): void {
         const player = playerRef as ReadOnlyPlayer;
 
@@ -261,7 +262,7 @@ const Sync = {
     },
     playTime(playerRef: alt.Player): void {
         const player = playerRef as ReadOnlyPlayer;
-        Athena.document.character.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667, true);
+        Athena.document.character.set(player, 'hours', (player.data?.hours ?? 0) + 0.0166666666666667);
     },
 };
 

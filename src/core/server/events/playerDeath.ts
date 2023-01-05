@@ -4,47 +4,56 @@ import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { VehicleSystem } from '../systems/vehicle';
 import { PlayerEvents } from './playerEvents';
 
-function handleDeath(player: alt.Player, killer: alt.Entity, weaponHash: any): void {
-    if (player && player.valid && player.data && player.data._id) {
-        if (player.vehicle) {
-            player.pos = player.vehicle.pos;
+function handleDeath(victim: alt.Player, killer: alt.Entity, weaponHash: any): void {
+    const victimData = Athena.document.character.get(victim);
+
+    if (victim && victim.valid && victimData && victimData._id) {
+        if (victim.vehicle) {
+            victim.pos = victim.vehicle.pos;
         }
 
         // Stop the player from pushing a vehicle if it is being pushed.
-        if (player.isPushingVehicle) {
-            VehicleSystem.stopPush(player);
+        if (victim.isPushingVehicle) {
+            VehicleSystem.stopPush(victim);
         }
 
         // Change the plugin if you want to modify death behavior.
         // It has everything you need to not touch this code here.
         // You can listen to ATHENA_EVENTS_PLAYER.DIED to see when someone dies.
-        if (!player.data.isDead) {
-            alt.log(`(${player.id}) ${player.data.name} has died.`);
+        if (!victimData.isDead) {
+            alt.log(`(${victim.id}) ${victimData.name} has died.`);
 
             try {
-                Athena.document.character.set(player, 'isDead', true);
-                PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, player);
+                Athena.document.character.set(victim, 'isDead', true);
+                PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, victim);
             } catch (err) {
                 alt.logError(err);
-                alt.log(`Could not set player ${player.data.name} to dead.`);
+                alt.log(`Could not set player ${victimData.name} to dead.`);
             }
         }
     }
 
-    if (killer instanceof alt.Player && player !== killer) {
-        alt.log(`(${player.id}) ${player.data.name} killed by ${killer.data.name}.`);
-    }
+    if (killer instanceof alt.Player) {
+        const killerData = Athena.document.character.get(killer);
 
-    if (killer instanceof alt.Player && player === killer) {
-        alt.log(`(${player.id}) ${player.data.name} died.`);
+        if (victim !== killer) {
+            alt.log(`(${victim.id}) ${victimData.name} killed by ${killerData.name}.`);
+        }
+
+        if (victim === killer) {
+            alt.log(`(${victim.id}) ${victimData.name} died.`);
+        }
     }
 
     if (killer instanceof alt.Vehicle && killer.driver) {
-        alt.log(`(${player.id}) ${player.data.name} was killed in vehicular combat by ${killer.driver.data.name}`);
-    }
+        if (killer.driver) {
+            const killerData = Athena.document.character.get(killer.driver);
+            alt.log(`(${victim.id}) ${victimData.name} was killed in vehicular combat by ${killerData.name}`);
+        }
 
-    if (killer instanceof alt.Vehicle && !killer.driver) {
-        alt.log(`(${player.id}) ${player.data.name} killed themself in a vehicular incident.`);
+        if (!killer.driver) {
+            alt.log(`(${victim.id}) ${victimData.name} killed themself in a vehicular incident.`);
+        }
     }
 }
 

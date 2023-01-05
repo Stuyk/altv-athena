@@ -43,15 +43,6 @@ export function getClosestOfType<T = alt.Entity>(entity: alt.Entity, type: 'vehi
             if (entity.id === target.id) {
                 continue;
             }
-
-            if (!target['data']) {
-                continue;
-            }
-
-            // Did not select a character.
-            if (!target['data']['_id']) {
-                continue;
-            }
         }
 
         if (entity instanceof alt.Vehicle && type === 'vehicle' && entity.id === target.id) {

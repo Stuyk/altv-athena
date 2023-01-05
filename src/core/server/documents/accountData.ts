@@ -1,23 +1,23 @@
 import * as alt from 'alt-server';
-import { Character } from '@AthenaShared/interfaces/character';
 import { KnownKeys } from '@AthenaShared/utility/knownKeys';
 import { databaseConst as Database } from '@AthenaServer/api/consts/constDatabase';
+import { Account } from '@AthenaServer/interface/iAccount';
 
 type KeyChangeCallback = (player: alt.Player, newValue: any, oldValue: any) => void;
 
 const callbacks: { [key: string]: Array<KeyChangeCallback> } = {};
-const cache: { [id: string]: Character } = {};
+const cache: { [id: string]: Account } = {};
 const DEBUG_MODE = false; // Use this to see what state is being set.
 
 /**
- * Binds a player identifier to a Character document.
+ * Binds a player identifier to a Account document.
  * This document is cleared on disconnected automatically.
  * This should be the first thing you do after having a user authenticate.
  *
  * @param {alt.Player} player
- * @param {Character} document
+ * @param {Account} document
  */
-function bind(player: alt.Player, document: Character) {
+function bind(player: alt.Player, document: Account) {
     if (document._id) {
         document._id = document._id.toString();
     }
@@ -35,13 +35,13 @@ function unbind(id: number) {
 }
 
 /**
- * Return current player data and their associated character object.
+ * Return current player data and their associated account object.
  *
  * @template T
  * @param {alt.Player} player
  * @return {T = Character}
  */
-function get<T = Character>(player: alt.Player): T | undefined {
+function get<T = Account>(player: alt.Player): T | undefined {
     return cache[player.id] as T;
 }
 
@@ -51,12 +51,12 @@ function get<T = Character>(player: alt.Player): T | undefined {
  *
  * @template T
  * @param {alt.Player} player
- * @param {(keyof KnownKeys<Character & T>)} fieldName
+ * @param {(keyof KnownKeys<Account & T>)} fieldName
  * @return {*}
  */
 function getField<T = {}, ReturnType = any>(
     player: alt.Player,
-    fieldName: keyof KnownKeys<Character & T>,
+    fieldName: keyof KnownKeys<Account & T>,
 ): ReturnType | undefined {
     if (!cache[player.id]) {
         return undefined;
@@ -66,7 +66,7 @@ function getField<T = {}, ReturnType = any>(
 }
 
 /**
- * Sets a player document value, and saves it automatically to the selected character's database.
+ * Sets a player document value, and saves it automatically to the selected account database.
  * Automatically calls all callbacks associated with the field name.
  *
  * @template T
@@ -75,7 +75,7 @@ function getField<T = {}, ReturnType = any>(
  * @param {*} value
  * @return {void}
  */
-async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Player, fieldName: Keys, value: any) {
+async function set<T = {}, Keys = keyof KnownKeys<Account & T>>(player: alt.Player, fieldName: Keys, value: any) {
     if (!cache[player.id]) {
         return undefined;
     }
@@ -85,11 +85,11 @@ async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Pl
     const newData = { [typeSafeFieldName]: value };
 
     cache[player.id] = Object.assign(cache[player.id], newData);
-    await Database.funcs.updatePartialData(cache[player.id]._id, newData, Database.collections.Characters);
+    await Database.funcs.updatePartialData(cache[player.id]._id, newData, Database.collections.Accounts);
 
     if (DEBUG_MODE) {
         alt.logWarning(
-            `DEBUG: ${cache[player.id].name} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(
+            `DEBUG: ${cache[player.id]._id} state updated for ${typeSafeFieldName} with value: ${JSON.stringify(
                 newData,
             )}`,
         );
@@ -105,15 +105,15 @@ async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Pl
 }
 
 /**
- * Sets player document values, and saves it automatically to the selected character's database.
+ * Sets player document values, and saves it automatically to the selected Account's database.
  * Automatically calls all callbacks associated with the field name.
  *
  * @template T
  * @param {alt.Player} player
- * @param {(Partial<Character & T>)} fields
+ * @param {(Partial<Account & T>)} fields
  * @returns {void}
  */
-async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt.Player, fields: Keys) {
+async function setBulk<T = {}, Keys = Partial<Account & T>>(player: alt.Player, fields: Keys) {
     const oldValues = {};
 
     Object.keys(fields).forEach((key) => {
@@ -121,7 +121,7 @@ async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt.Player
     });
 
     cache[player.id] = Object.assign(cache[player.id], fields);
-    await Database.funcs.updatePartialData(cache[player.id]._id, fields, Database.collections.Characters);
+    await Database.funcs.updatePartialData(cache[player.id]._id, fields, Database.collections.Accounts);
 
     Object.keys(fields).forEach((key) => {
         if (typeof callbacks[key] === 'undefined') {
@@ -141,7 +141,7 @@ async function setBulk<T = {}, Keys = Partial<Character & T>>(player: alt.Player
  * @param {KeyChangeCallback} callback
  * @return {void}
  */
-function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, callback: KeyChangeCallback) {
+function onChange<T = {}>(fieldName: keyof KnownKeys<Account & T>, callback: KeyChangeCallback) {
     const actualFieldName = String(fieldName);
 
     if (typeof callbacks[actualFieldName] === 'undefined') {
@@ -151,7 +151,7 @@ function onChange<T = {}>(fieldName: keyof KnownKeys<Character & T>, callback: K
     }
 }
 
-export const CharacterDocument = {
+export const AccountDocument = {
     bind,
     get,
     getField,

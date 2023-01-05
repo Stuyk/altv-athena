@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { CurrencyTypes } from '@AthenaShared/enums/currency';
-import { Athena } from '../../api/athena';
+import { Athena } from '@AthenaServer/api/athena';
 
 const Currency = {
     /**
@@ -20,12 +20,11 @@ const Currency = {
         }
 
         try {
-            const originalValue = player.data[type];
+            const data = Athena.document.character.get(player);
+            const originalValue = data[type];
             const newValue = parseFloat((originalValue + amount).toFixed(2));
 
-            // Verify that the value was updated.
             if (originalValue > newValue) {
-                player.data[type] = originalValue;
                 return false;
             }
 
@@ -55,16 +54,16 @@ const Currency = {
         }
 
         try {
-            if (typeof player.data[type] === 'undefined') {
-                player.data[type] = 0;
+            const data = Athena.document.character.get(player);
+            if (typeof data[type] === 'undefined') {
+                data[type] = 0;
             }
 
-            const originalValue = player.data[type];
+            const originalValue = data[type];
             const newValue = parseFloat((originalValue - amount).toFixed(2));
 
             // Verify that the value was updated.
-            if (originalValue < player.data[type]!) {
-                player.data[type] = originalValue;
+            if (originalValue < data[type]) {
                 return false;
             }
 
@@ -98,23 +97,24 @@ const Currency = {
     },
 
     subAllCurrencies(player: alt.Player, amount: number): boolean {
-        if (typeof player.data.cash === 'undefined') {
-            player.data.cash = 0;
+        const data = Athena.document.character.get(player);
+        if (typeof data.cash === 'undefined') {
+            data.cash = 0;
         }
 
-        if (typeof player.data.bank === 'undefined') {
-            player.data.bank = 0;
+        if (typeof data.bank === 'undefined') {
+            data.bank = 0;
         }
 
-        if (player.data.cash + player.data.bank < amount) {
+        if (data.cash + data.bank < amount) {
             return false;
         }
 
         let amountLeft = amount;
-        let startCash = player.data.cash;
-        let startBank = player.data.bank;
+        let startCash = data.cash;
+        let startBank = data.bank;
 
-        if (player.data.cash - amountLeft <= -1) {
+        if (data.cash - amountLeft <= -1) {
             amountLeft = amountLeft - startCash;
             startCash = 0;
         } else {

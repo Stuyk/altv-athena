@@ -19,7 +19,22 @@ const player = {
      * @return {(alt.Player | undefined)}
      */
     byAccount(id: string): alt.Player | undefined {
-        return alt.Player.all.find((x) => x.accountData && x.accountData._id === id);
+        return alt.Player.all.find((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const accountData = Athena.document.account.get(p);
+            if (typeof accountData === 'undefined') {
+                return false;
+            }
+
+            if (accountData._id !== id) {
+                return false;
+            }
+
+            return true;
+        });
     },
     /**
      * Gets an online player by their name.
@@ -30,12 +45,17 @@ const player = {
      */
     byName(name: string): alt.Player | undefined {
         name = name.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
-        return alt.Player.all.find((x) => {
-            if (!x.data && !x.data._id) {
+        return alt.Player.all.find((p) => {
+            if (!p.valid) {
                 return false;
             }
 
-            return x.data.name.toLowerCase().replace(/\s|_+/g, '') === name;
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            return data.name.toLowerCase().replace(/\s|_+/g, '') === name;
         });
     },
     /**
@@ -47,12 +67,17 @@ const player = {
      */
     byPartialName(partialName: string): alt.Player | undefined {
         partialName = partialName.toLowerCase().replace(/\s|_+/g, ''); // Normalize 'John_Fetterman Joe' to 'john_fettermanjoe'
-        return alt.Player.all.find((x) => {
-            if (!x.data && !x.data._id) {
+        return alt.Player.all.find((p) => {
+            if (!p.valid) {
                 return false;
             }
 
-            return x.data.name.toLowerCase().replace(/\s|_+/g, '').includes(partialName);
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            return data.name.toLowerCase().replace(/\s|_+/g, '').includes(partialName);
         });
     },
     /**
@@ -62,7 +87,18 @@ const player = {
      * @return {(alt.Player | undefined)}
      */
     byDatabaseID(id: string): alt.Player | undefined {
-        return alt.Player.all.find((x) => x.data && x.data._id && x.data._id === id);
+        return alt.Player.all.find((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            return data._id === id;
+        });
     },
     /**
      * Return a player based on their ID given the Identifier strategy currently setup.
@@ -212,13 +248,14 @@ const player = {
      */
     async characters(playerOrAccount: alt.Player | Account | string): Promise<Array<Character>> {
         if (playerOrAccount instanceof alt.Player) {
-            if (typeof playerOrAccount.accountData === 'undefined') {
+            const accountData = Athena.document.account.get(playerOrAccount);
+            if (!accountData) {
                 return [];
             }
 
             return await Database.fetchAllByField(
                 'account_id',
-                playerOrAccount.accountData._id,
+                accountData._id,
                 Athena.database.collections.Characters,
             );
         }
@@ -246,7 +283,14 @@ const players = {
      * @return {alt.Player[]}
      */
     online(): alt.Player[] {
-        return [...alt.Player.all].filter((x) => x.data && x.data._id);
+        return [...alt.Player.all].filter((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const data = Athena.document.character.get(p);
+            return typeof data !== 'undefined';
+        });
     },
     /**
      * Gets all players around a specific position.
@@ -256,13 +300,20 @@ const players = {
      * @return {alt.Player[]}
      */
     inRange(pos: alt.IVector3, range: number): alt.Player[] {
-        const players = [...alt.Player.all].filter((x) => x.data && x.data._id);
+        const players = [...alt.Player.all].filter((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const data = Athena.document.character.get(p);
+            return typeof data !== 'undefined';
+        });
 
         if (players.length <= 0) {
             return [];
         }
 
-        return players.filter((x) => x.pos && distance(pos, x.pos) <= range);
+        return players.filter((p) => p.pos && distance(pos, p.pos) <= range);
     },
     /**
      * Gets all online players with a given name.
@@ -271,8 +322,19 @@ const players = {
      * @return {alt.Player[]}
      */
     withName(name: string): alt.Player[] {
-        name = name.toLowerCase().replace('_', ''); // Normalize My_Name to myname
-        return alt.Player.all.filter((x) => x.data && x.data.name && x.data.name === name);
+        name = name.toLowerCase().replaceAll('_', ''); // Normalize My_Name to myname
+        return alt.Player.all.filter((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            return data.name.toLowerCase().replaceAll('_', '') === name;
+        });
     },
     /**
      * Returns all players who are currently driving a vehicle.
@@ -280,16 +342,12 @@ const players = {
      * @return {alt.Player[]}
      */
     driving(): alt.Player[] {
-        return alt.Player.all.filter((x) => {
-            if (!x.valid || !x.data || !x.data._id || !x.vehicle) {
+        return alt.Player.all.filter((p) => {
+            if (!p.valid || !p.vehicle || !p.vehicle.driver) {
                 return false;
             }
 
-            if (!x.vehicle || !x.vehicle.driver || x.vehicle.driver.id !== x.id) {
-                return false;
-            }
-
-            return true;
+            return p.vehicle.driver.id === p.id;
         });
     },
     /**
@@ -298,12 +356,13 @@ const players = {
      * @return {alt.Player[]}
      */
     walking(): alt.Player[] {
-        return alt.Player.all.filter((x) => {
-            if (!x.valid || !x.data || !x.data._id || x.vehicle) {
+        return alt.Player.all.filter((p) => {
+            if (!p.valid || p.vehicle) {
                 return false;
             }
 
-            return true;
+            const data = Athena.document.character.get(p);
+            return typeof data !== 'undefined';
         });
     },
     /**
@@ -321,12 +380,21 @@ const players = {
             throw new Error(`${model} is not a valid vehicle model.`);
         }
 
-        return alt.Player.all.filter((x) => {
-            if (!x.valid || !x.data || !x.data._id || x.vehicle) {
+        return alt.Player.all.filter((p) => {
+            if (!p.valid || !p.vehicle || !p.vehicle.driver) {
                 return false;
             }
 
-            return x.vehicle.model === model;
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            if (p.vehicle.driver.id !== p.id) {
+                return false;
+            }
+
+            return p.vehicle.model === model;
         });
     },
     /**
