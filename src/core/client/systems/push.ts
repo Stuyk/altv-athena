@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { Timer } from '../utility/timers';
-import { VEHICLE_EVENTS } from '../../shared/enums/vehicle';
+import { VEHICLE_EVENTS } from '@AthenaShared/enums/vehicle';
 import { playAnimation } from './animations';
-import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
+import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import { handleDisablingAttacks } from '../utility/disableControls';
 
 let interval: number | undefined;

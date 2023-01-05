@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ClothingComponent } from '../../shared/interfaces/clothing';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Item } from '../../shared/interfaces/item';
+import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Item } from '@AthenaShared/interfaces/item';
 
 export const CharacterSystem = {
     /**

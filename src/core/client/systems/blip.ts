@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Blip } from '../../shared/interfaces/blip';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Blip } from '@AthenaShared/interfaces/blip';
 
 const addedBlips: Array<alt.PointBlip> = [];
 

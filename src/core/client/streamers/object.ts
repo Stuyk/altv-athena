@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { IObject } from '../../shared/interfaces/iObject';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { IObject } from '@AthenaShared/interfaces/iObject';
+import { distance2d } from '@AthenaShared/utility/vector';
 import { loadModel } from '../utility/model';
 import { Timer } from '../utility/timers';
 

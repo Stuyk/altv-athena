@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Timer } from '../utility/timers';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_ALARM_START, startAlarm);
@@ -52,9 +52,7 @@ export async function loadAlarm(name: string, count: number = 0): Promise<boolea
  * @param {string} name The name of the alarm.
  * @return {Promise<void>}  {Promise<void>}
  */
-export async function startAlarm(
-    name: string,
-): Promise<void> {
+export async function startAlarm(name: string): Promise<void> {
     const isPrepared = await loadAlarm(name);
     if (!isPrepared) {
         return;
@@ -77,9 +75,7 @@ export async function startAlarm(
  * @param {string} name The name of the alarm.
  * @return {Promise<void>}  {Promise<void>}
  */
-export async function stopAlarm(
-    name: string,
-): Promise<void> {
+export async function stopAlarm(name: string): Promise<void> {
     if (!native.isAlarmPlaying(name)) {
         return;
     }

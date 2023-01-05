@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import natives from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, fixMissingInteriors);
 
@@ -184,7 +184,7 @@ function fixMissingInteriors() {
     // Premium Deluxe Motorsport
     alt.requestIpl('shr_int');
 
-	interiorID = natives.getInteriorAtCoords(-31.328518, -1106.6293, 25.42235);
+    interiorID = natives.getInteriorAtCoords(-31.328518, -1106.6293, 25.42235);
     if (natives.isValidInterior(interiorID)) {
         natives.activateInteriorEntitySet(interiorID, 'csr_beforeMission');
         natives.activateInteriorEntitySet(interiorID, 'shutter_closed'); // back door closed or uncomment this for open.

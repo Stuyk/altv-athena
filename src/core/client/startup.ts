@@ -63,7 +63,6 @@ import './systems/sound';
 import './systems/syncedMeta';
 import './systems/tasks';
 import './systems/tick';
-import './systems/toolbar';
 import './systems/vehicle';
 
 // Utility
@@ -86,7 +85,5 @@ import './utility/missionText';
 import './views/actions';
 import './views/audio';
 import './views/chat';
-import './views/inventory';
 import './views/job';
-import './views/storage';
 import './views/wheelMenu';

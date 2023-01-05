@@ -1,7 +1,7 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Particle } from '../../shared/interfaces/particle';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Particle } from '@AthenaShared/interfaces/particle';
 import { sleep } from '../utility/sleep';
 import { Timer } from '../utility/timers';
 

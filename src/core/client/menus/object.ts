@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { distance } from '../../shared/utility/vector';
+import { distance } from '@AthenaShared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
-import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { WheelMenu } from '../views/wheelMenu';
-import { GroundItem } from '../../shared/interfaces/groundItem';
+import { GroundItem } from '@AthenaShared/interfaces/groundItem';
 
 type ObjectMenuInjection = (
     modelHash: number,

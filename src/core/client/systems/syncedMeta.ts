@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 const NextUpdate = {
     freeze: Date.now() + 200,

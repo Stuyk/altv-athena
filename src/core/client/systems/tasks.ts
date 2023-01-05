@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
 import { sleep } from '../utility/sleep';
 
 let timeline: Array<Task | TaskCallback> = [];

@@ -1,9 +1,9 @@
 import * as alt from 'alt-client';
 import natives from 'natives';
 
-import JobEnums, { Objective } from '../../shared/interfaces/job';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { distance } from '../../shared/utility/vector';
+import JobEnums, { Objective } from '@AthenaShared/interfaces/job';
+import { isFlagEnabled } from '@AthenaShared/utility/flags';
+import { distance } from '@AthenaShared/utility/vector';
 import { drawMarker } from '../utility/marker';
 import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';

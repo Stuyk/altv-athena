@@ -1,14 +1,14 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Inventory } from '../../shared/enums/views';
-import keyboardMap from '../../shared/information/keyboardMap';
-import IClientInteraction from '../../shared/interfaces/iClientInteraction';
-import { Interaction } from '../../shared/interfaces/interaction';
-import { IWheelOptionExt } from '../../shared/interfaces/wheelMenu';
-import { distance } from '../../shared/utility/vector';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { View_Events_Inventory } from '@AthenaShared/enums/views';
+import keyboardMap from '@AthenaShared/information/keyboardMap';
+import IClientInteraction from '@AthenaShared/interfaces/iClientInteraction';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
+import { distance } from '@AthenaShared/utility/vector';
 import { KeybindController } from '../events/keyup';
 import { NpcWheelMenu } from '../menus/npc';
 import { ObjectWheelMenu } from '../menus/object';

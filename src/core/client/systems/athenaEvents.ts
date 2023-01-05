@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ATHENA_EVENTS_PLAYER_CLIENT } from '../../shared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadSceneAtCoords } from '../utility/scene';
 import { Timer } from '../utility/timers';
@@ -117,11 +117,11 @@ const AthenaEventsConst = {
         if (!isUpdatingWaypoint) {
             AthenaEvents.updateWaypoint();
         }
-    }
-}
+    },
+};
 
 export const AthenaEvents = {
-    ...AthenaEventsConst
-}
+    ...AthenaEventsConst,
+};
 
 alt.onServer(SYSTEM_EVENTS.TICKS_START, AthenaEvents.init);

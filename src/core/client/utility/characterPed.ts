@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { loadModel } from './model';
-import { Appearance } from '../../shared/interfaces/appearance';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterSystem } from '../systems/character';
 
 let id: number;

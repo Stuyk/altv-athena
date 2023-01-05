@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { HUD_IDENTIFIER } from '../../shared/enums/hudIdentifiers';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { VEHICLE_STATE } from '../../shared/enums/vehicle';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
+import { HUD_IDENTIFIER } from '@AthenaShared/enums/hudIdentifiers';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { VEHICLE_STATE } from '@AthenaShared/enums/vehicle';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 import IHud from '../interface/iHud';
 import { isAnyMenuOpen } from '../utility/menus';
 import { drawText2D } from '../utility/text';

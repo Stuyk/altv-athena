@@ -1,8 +1,8 @@
 import alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
+import { LocaleController } from '@AthenaShared/locale/locale';
 import { DirectionVector } from '../utility/directionToVector';
 import { drawText2D } from '../utility/text';
 
@@ -209,7 +209,7 @@ const NoClip = {
             new alt.RGBA(255, 255, 255, 200),
             0,
         );
-        
+
         drawText2D(
             `${LocaleController.get(LOCALE_KEYS.NOCLIP_SPEED)}: ${sens.toFixed(2)}`,
             { x: 0.5, y: 0.92 },

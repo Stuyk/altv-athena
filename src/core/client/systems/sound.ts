@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { distance } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { distance } from '@AthenaShared/utility/vector';
 import { AudioView } from '../views/audio';
 
 alt.onServer(SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, handleFrontendSound);

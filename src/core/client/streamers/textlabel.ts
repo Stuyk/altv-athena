@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { TextLabel } from '../../shared/interfaces/textLabel';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { TextLabel } from '@AthenaShared/interfaces/textLabel';
+import { distance2d } from '@AthenaShared/utility/vector';
 import { drawText3D } from '../utility/text';
 import { Timer } from '../utility/timers';
 

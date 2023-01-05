@@ -1,4 +1,3 @@
-import { GroundItem } from '../../shared/interfaces/groundItem';
 import { Meta } from './meta';
 
 declare module 'alt-client' {

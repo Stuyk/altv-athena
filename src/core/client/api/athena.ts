@@ -4,8 +4,6 @@ import { utilityConst } from './consts/utilityConst';
 import { webViewConst } from './consts/webViewConst';
 import { Timer } from '../utility/timers';
 import Raycast from '../utility/raycast';
-import PedEditCamera from '../utility/camera';
-import { CinematicCam } from '../utility/cinematic';
 import * as math from '@AthenaClient/utility/math';
 import { wheelMenusConst } from './consts/wheelMenus';
 import { constData } from './consts/dataConst';

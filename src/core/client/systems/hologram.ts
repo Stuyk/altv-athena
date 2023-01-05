@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Hologram } from '../../shared/interfaces/hologram';
-import { distance2d } from '../../shared/utility/vector';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Hologram } from '@AthenaShared/interfaces/hologram';
+import { distance2d } from '@AthenaShared/utility/vector';
 import { isAnyMenuOpen } from '../utility/menus';
 import { loadModel } from '../utility/model';
 import { Timer } from '../utility/timers';

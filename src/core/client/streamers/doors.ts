@@ -1,4 +1,4 @@
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { AthenaClient } from '@AthenaClient/api/athena';
 import { Door } from '@AthenaShared/interfaces/door';
 import * as alt from 'alt-client';

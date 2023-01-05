@@ -122,13 +122,6 @@ export const VehicleWheelMenu = {
                     data: [vehicle],
                 });
             }
-
-            options.push({
-                name: 'Open Storage',
-                callback: () => {
-                    alt.emitServer(VEHICLE_EVENTS.OPEN_STORAGE, vehicle);
-                },
-            });
         } else if (PushVehicle.isPushing()) {
             options.push({
                 name: 'Stop Push',

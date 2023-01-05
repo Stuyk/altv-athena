@@ -1,6 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { SWITCHOUT_TYPES } from '../../shared/enums/switchOutTypes';
+import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
 import { sleep } from './sleep';
 
 /**
@@ -10,7 +10,10 @@ import { sleep } from './sleep';
  * @param {SWITCHOUT_TYPES} switchType
  * @return {*}  {Promise<boolean>}
  */
-export async function switchToMultiSecondpart(duration: number, switchType: SWITCHOUT_TYPES = SWITCHOUT_TYPES.THREE_STEPS): Promise<boolean> {
+export async function switchToMultiSecondpart(
+    duration: number,
+    switchType: SWITCHOUT_TYPES = SWITCHOUT_TYPES.THREE_STEPS,
+): Promise<boolean> {
     if (!native.isPlayerSwitchInProgress()) {
         native.switchToMultiFirstpart(alt.Player.local.scriptID, 0, switchType);
     }

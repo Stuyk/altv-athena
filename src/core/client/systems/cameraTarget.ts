@@ -1,11 +1,11 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { isAnyMenuOpen } from '../utility/menus';
 import Raycast from '../utility/raycast';
 import { Timer } from '../utility/timers';
 import { drawText3D } from '../utility/text';
-import { KEY_BINDS } from '../../shared/enums/keyBinds';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { ObjectWheelMenu } from '../menus/object';
 
 interface ClosestTarget {

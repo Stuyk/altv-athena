@@ -1,9 +1,9 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { WebViewEventNames } from '../../shared/enums/webViewEvents';
-import { OverlayPageType } from '../../shared/interfaces/webview';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
+import { OverlayPageType } from '@AthenaShared/interfaces/webview';
 
 const ReadyEvents: { [pageName: string]: (...args: any[]) => void } = {};
 const ClientEvents: { [eventName: string]: (...args: any[]) => void } = {};
