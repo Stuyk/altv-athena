@@ -293,6 +293,39 @@ const players = {
         });
     },
     /**
+     * Creates an array of players who are closest to a position.
+     * Array is automatically sorted into ascending order.
+     *
+     * @param {alt.IVector3} pos
+     * @param {number} range
+     * @return {Array<{ player: alt.Player; dist: number }>}
+     */
+    inRangeWithDistance(pos: alt.IVector3, range: number): Array<{ player: alt.Player; dist: number }> {
+        const playersInRange: Array<{ player: alt.Player; dist: number }> = [];
+        const players = [...alt.Player.all];
+        for (let player of players) {
+            if (!player || !player.valid) {
+                continue;
+            }
+
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined') {
+                continue;
+            }
+
+            const dist = distance(pos, player.pos);
+            if (dist > range) {
+                continue;
+            }
+
+            playersInRange.push({ player, dist });
+        }
+
+        return playersInRange.sort((a, b) => {
+            return a.dist - b.dist;
+        });
+    },
+    /**
      * Gets all players around a specific position.
      *
      * @param {alt.IVector3} pos

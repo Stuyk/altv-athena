@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { Athena } from '@AthenaServer/api/athena';
 
-type MessageCallback = (msg: string) => void;
+type MessageCallback = (player: alt.Player, msg: string) => void;
 type CommandCallback = (player: alt.Player, ...args: any[]) => void;
 
 const tagOrComment = new RegExp(
@@ -166,7 +166,7 @@ export const MessengerSystem = {
         msg = cleanMessage(msg);
 
         for (let cb of callbacks) {
-            cb(msg);
+            cb(player, msg);
         }
     },
     commands: {

@@ -11,6 +11,7 @@ import { KeybindController } from '@AthenaClient/events/keyup';
 import { KeyHeld } from '@AthenaClient/events/keyHeld';
 import { rmluiConst } from './consts/rmluiConst';
 import { cameraConst } from './consts/cameraConst';
+import { MessengerSystem } from '@AthenaClient/systems/messenger';
 
 export const AthenaClient = {
     camera: cameraConst,
@@ -20,6 +21,7 @@ export const AthenaClient = {
         keyBinds: KeybindController,
     },
     math,
+    messenger: MessengerSystem,
     raycast: Raycast,
     rmlui: rmluiConst,
     screen: screenConst,

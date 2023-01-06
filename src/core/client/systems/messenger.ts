@@ -60,6 +60,6 @@ export const MessengerSystem = {
     },
 };
 
-alt.on(SYSTEM_EVENTS.TICKS_START, () => {
+alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
     alt.onServer(MESSENGER_EVENTS.TO_CLIENT.MESSAGE, MessengerSystem.emit);
 });

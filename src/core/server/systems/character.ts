@@ -183,7 +183,7 @@ const CharacterSystemRef = {
             player.setSyncedMeta(PLAYER_SYNCED_META.DATABASE_ID, data._id.toString());
 
             // Propagation
-            Athena.controllers.chat.populateCommands(player);
+            // Athena.controllers.chat.populateCommands(player);
             Athena.controllers.blip.populateGlobalBlips(player);
             Athena.controllers.holograms.populateHolograms(player);
 

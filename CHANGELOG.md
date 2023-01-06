@@ -84,6 +84,9 @@ Messenger System
 - Command logic works with new permission system stated above.
 - Old permissions system is being deprecated.
 
+Getters
+- Added Athena.get.players.inRangeWithDistance - Returns players and their distance from a position.
+
 Refactors
 - Update existing code base to use new Athena.document APIs
 ```

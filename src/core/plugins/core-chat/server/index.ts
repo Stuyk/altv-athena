@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '@AthenaServer/systems/plugins';
+import { init } from './src/chat';
 
 const PLUGIN_NAME = 'Chat';
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {
-    alt.log(`~lg~CORE ==> ${PLUGIN_NAME} was Loaded!`);
+    init();
+    alt.log(`~lg~${PLUGIN_NAME}`);
 });
