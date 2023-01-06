@@ -52,6 +52,21 @@ export const PermissionSystem = {
             return true;
         },
         /**
+         * Clear all permissions from a player's account.
+         *
+         * @param {alt.Player} player
+         * @return {*}
+         */
+        async clear(player: alt.Player) {
+            const accountData = Athena.document.account.get(player);
+            if (typeof accountData === 'undefined') {
+                return;
+            }
+
+            accountData.permissions = [];
+            await Athena.document.account.set(player, 'permissions', accountData.permissions);
+        },
+        /**
          * Check if a player has a permission.
          *
          * @template CustomPerms

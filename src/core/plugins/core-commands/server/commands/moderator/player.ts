@@ -182,7 +182,9 @@ Athena.systems.messenger.commands.register(
     '/addperm [id] [perm]',
     ['admin'],
     async (player: alt.Player, id: string | null = null, perm: string) => {
-        if (!player || !player.valid) return;
+        if (!player || !player.valid) {
+            return;
+        }
 
         const target = Athena.systems.identifier.getPlayer(id);
         if (!target) {
@@ -190,68 +192,68 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const accountData = Athena.document.account.get(target);
-        if (typeof accountData === 'undefined') {
-            return;
-        }
-
         const data = Athena.document.character.get(target);
-        if (typeof data === 'undefined') {
-            return;
-        }
+        await Athena.systems.permission.player.add(target, perm);
 
-        accountData.permissionLevel = permissionLevel;
-        await Athena.database.funcs.updatePartialData(
-            accountData._id,
-            { permissionLevel: accountData.permissionLevel },
-            Athena.database.collections.Accounts,
-        );
-
-        alt.logWarning(`(${data.name}) had their permission level changed to: ${permissionLevel}.`);
+        const response = `Added permission to ${data.name}, ${perm}`;
+        Athena.player.emit.message(player, response);
+        alt.logWarning(response);
     },
 );
 
-class PlayersCommand {
-    @command('makeAdmin', '/makeAdmin <ID> - Add permission specified player.', PERMISSIONS.ADMIN)
-    private static async makeAdminCommand(player: alt.Player, id: number | string, permissionLevel: number) {}
+Athena.systems.messenger.commands.register(
+    'removeperm',
+    '/removeperm [id] [perm]',
+    ['admin'],
+    async (player: alt.Player, id: string | null = null, perm: string) => {
+        if (!player || !player.valid) {
+            return;
+        }
 
-    @command('info', '/info <ID> - Get account info for the specified id.', PERMISSIONS.ADMIN)
-    private static infoCommand(player: alt.Player, id: number) {
         const target = Athena.systems.identifier.getPlayer(id);
-
-        if (!target || !target.valid) return;
-
-        const accountData = Athena.document.account.get(target);
-        if (!accountData) {
-            Athena.player.emit.notification(player, `Could not find account info for ${id}!`);
+        if (!target) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
             return;
         }
 
-        const dataToSend = [];
         const data = Athena.document.character.get(target);
-        if (typeof data === 'undefined') {
+        await Athena.systems.permission.player.remove(target, perm);
+
+        const response = `Removed permission from ${data.name}, ${perm}`;
+        Athena.player.emit.message(player, response);
+        alt.logWarning(response);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'clearperms',
+    '/clearperms [id]',
+    ['admin'],
+    async (player: alt.Player, id: string | null = null, perm: string) => {
+        if (!player || !player.valid) {
             return;
         }
 
-        dataToSend.push(`--- INFO FOR ${data.name} ---`);
-        dataToSend.push(`ACCOUNT: ${data.account_id.toString()}`);
-
-        if (accountData.discord) {
-            dataToSend.push(`DISCORD: ${accountData.discord}`);
+        const target = Athena.systems.identifier.getPlayer(id);
+        if (!target) {
+            Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.CANNOT_FIND_PLAYER));
+            return;
         }
 
-        dataToSend.push(`IPs: ${JSON.stringify(accountData.ips)}`);
-        dataToSend.push(`PERMISSION LEVEL: ${accountData.permissionLevel}`);
-        dataToSend.push(`HARDWARE: ${accountData.hardware}`);
-        dataToSend.push(`--- --- ---`);
+        const data = Athena.document.character.get(target);
+        await Athena.systems.permission.player.clear(target);
 
-        for (const element of dataToSend) {
-            Athena.player.emit.message(player, element);
-        }
-    }
+        const response = `Cleared permissions for ${data.name}.`;
+        Athena.player.emit.message(player, response);
+        alt.logWarning(response);
+    },
+);
 
-    @command('tempcomponent', '/tempcomponent id num', PERMISSIONS.ADMIN)
-    private static setComponent(player: alt.Player, id: string, value: string) {
+Athena.systems.messenger.commands.register(
+    'tempcomponent',
+    '/tempcomponent [id] [value]',
+    ['admin'],
+    async (player: alt.Player, id: string, value: string) => {
         if (typeof id === 'undefined' || typeof value === 'undefined') {
             Athena.player.emit.message(player, `Must provide id, and value.`);
             return;
@@ -263,10 +265,14 @@ class PlayersCommand {
         } catch (err) {
             Athena.player.emit.message(player, err.toString());
         }
-    }
+    },
+);
 
-    @command('tempprop', '/tempprop id num', PERMISSIONS.ADMIN)
-    private static setProp(player: alt.Player, id: string, value: string) {
+Athena.systems.messenger.commands.register(
+    'tempcomponent',
+    '/tempcomponent [id] [value]',
+    ['admin'],
+    async (player: alt.Player, id: string, value: string) => {
         if (typeof id === 'undefined' || typeof value === 'undefined') {
             Athena.player.emit.message(player, `Must provide id, and value.`);
             return;
@@ -278,5 +284,5 @@ class PlayersCommand {
         } catch (err) {
             Athena.player.emit.message(player, err.toString());
         }
-    }
-}
+    },
+);

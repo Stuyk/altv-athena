@@ -72,6 +72,7 @@ Permission System
 - has - Check if a player has a permission given a string.
 - hasOne - Check if a player has at least one permission given an array of strings.
 - hasAll - Check if a player has all permissions given an array of strings.
+- clear - Clears all permissions associated with a player.
 - Can be accessed under Athena.systems.permission.player.x
 
 Messenger System
