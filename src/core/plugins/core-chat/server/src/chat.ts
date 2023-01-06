@@ -10,10 +10,9 @@ function handleMessage(player: alt.Player, msg: string) {
     }
 
     const closestPlayers = Athena.get.players.inRange(player.pos, CHAT_CONFIG.MAX_RANGE);
-    console.log(closestPlayers);
     Athena.systems.messenger.players.send(closestPlayers, `${data.name}: ${msg}`);
 }
 
 export function init() {
-    Athena.systems.messenger.register(handleMessage);
+    Athena.systems.messenger.messages.addCallback(handleMessage);
 }

@@ -115,6 +115,7 @@ const InternalFunctions = {
             }
 
             if (!Athena.systems.permission.player.hasOne(player, cmdInfo.permissions)) {
+                Athena.player.emit.message(player, `/${commandName} - No Permission for Usage`);
                 Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
             }
@@ -125,49 +126,51 @@ const InternalFunctions = {
 };
 
 export const MessengerSystem = {
-    /**
-     * Register a callback that handles messages.
-     * The messages from other clients, and Athena itself will be pushed through all callbacks registered.
-     * Useful for plugin creators.
-     *
-     * @param {MessageCallback} callback
-     */
-    register(callback: MessageCallback) {
-        callbacks.push(callback);
-    },
-    /**
-     * Emits a message to all callbacks.
-     *
-     * @param {string} msg
-     */
-    emit(player: alt.Player, msg: string) {
-        if (msg.charAt(0) === '/') {
-            msg = msg.trim().slice(1);
-            if (msg.length < 0) {
+    messages: {
+        /**
+         * Register a callback that handles messages.
+         * The messages from other clients, and Athena itself will be pushed through all callbacks registered.
+         * Useful for plugin creators.
+         *
+         * @param {MessageCallback} callback
+         */
+        addCallback(callback: MessageCallback) {
+            callbacks.push(callback);
+        },
+        /**
+         * Emits a message to all callbacks.
+         *
+         * @param {string} msg
+         */
+        emit(player: alt.Player, msg: string) {
+            if (msg.charAt(0) === '/') {
+                msg = msg.trim().slice(1);
+                if (msg.length < 0) {
+                    return;
+                }
+
+                // Cleanup up extrenious tags, and weird symbols.
+                msg = cleanMessage(msg);
+
+                const args = msg.split(' ');
+                const commandName = args.shift();
+                InternalFunctions.commands.execute(player, commandName.toLowerCase(), args);
+                return;
+            }
+
+            if (callbacks.length <= 0) {
+                const data = Athena.document.character.get(player);
+                alt.log(`${data.name} says: ${msg}`);
                 return;
             }
 
             // Cleanup up extrenious tags, and weird symbols.
             msg = cleanMessage(msg);
 
-            const args = msg.split(' ');
-            const commandName = args.shift();
-            InternalFunctions.commands.execute(player, commandName.toLowerCase(), args);
-            return;
-        }
-
-        if (callbacks.length <= 0) {
-            const data = Athena.document.character.get(player);
-            alt.log(`${data.name} says: ${msg}`);
-            return;
-        }
-
-        // Cleanup up extrenious tags, and weird symbols.
-        msg = cleanMessage(msg);
-
-        for (let cb of callbacks) {
-            cb(player, msg);
-        }
+            for (let cb of callbacks) {
+                cb(player, msg);
+            }
+        },
     },
     commands: {
         execute: InternalFunctions.commands.execute,
@@ -207,4 +210,4 @@ export const MessengerSystem = {
     },
 };
 
-alt.onClient(MESSENGER_EVENTS.TO_SERVER.MESSAGE, MessengerSystem.emit);
+alt.onClient(MESSENGER_EVENTS.TO_SERVER.MESSAGE, MessengerSystem.messages.emit);

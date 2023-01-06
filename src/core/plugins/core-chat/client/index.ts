@@ -5,7 +5,12 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 const THE_LETTER_T = 84;
 
 async function handleInput() {
-    const result = await AthenaClient.rmlui.inputBox.create({ placeholder: 'message...', darken: true });
+    const result = await AthenaClient.rmlui.inputBox.create({
+        placeholder: 'Send a message or type a command...',
+        darken: false,
+        blur: false,
+    });
+
     if (typeof result === 'undefined' || result === '') {
         return;
     }
