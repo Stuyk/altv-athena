@@ -6,14 +6,12 @@ import { ServerTextLabelController } from '@AthenaServer/streamers/textlabel';
 import { WorldNotificationController } from '@AthenaServer/streamers/worldNotifications';
 import { AdminController } from '@AthenaServer/systems/admin';
 import { ServerBlipController } from '@AthenaServer/systems/blip';
-import ChatController from '@AthenaServer/systems/chat';
 import { HologramController } from '@AthenaServer/systems/hologram';
 import { InteractionController } from '@AthenaServer/systems/interaction';
 
 export const controllersConst = {
     admin: AdminController,
     blip: ServerBlipController,
-    chat: ChatController,
     doors: ServerDoorController,
     interaction: InteractionController,
     holograms: HologramController,

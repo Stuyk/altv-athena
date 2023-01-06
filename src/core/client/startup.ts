@@ -53,6 +53,7 @@ import './systems/interaction';
 import './systems/interiors';
 import './systems/job';
 import './systems/jwt';
+import './systems/messenger';
 import './systems/meta';
 import './systems/noclip';
 import './systems/particle';

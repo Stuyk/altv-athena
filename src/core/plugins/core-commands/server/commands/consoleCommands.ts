@@ -5,7 +5,7 @@ import { Athena } from '@AthenaServer/api/athena';
 import { Account } from '@AthenaServer/interface/iAccount';
 import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
 import { AdminController } from '@AthenaServer/systems/admin';
-import ChatController from '@AthenaServer/systems/chat';
+import ChatController from '@AthenaPlugins/core-chat/server/src/chat';
 import { AthenaScreenshot } from '@AthenaServer/utility/screenshot';
 import { ConsoleCommander } from '@AthenaShared/utility/consoleCommander';
 

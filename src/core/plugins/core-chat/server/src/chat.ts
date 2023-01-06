@@ -1,18 +1,18 @@
 import * as alt from 'alt-server';
 
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { View_Events_Chat } from '../../shared/enums/views';
-import { CHARACTER_PERMISSIONS, PERMISSIONS } from '../../shared/flags/permissionFlags';
-import { Command } from '../../shared/interfaces/command';
-import { LOCALE_KEYS } from '../../shared/locale/languages/keys';
-import { LocaleController } from '../../shared/locale/locale';
-import { isFlagEnabled } from '../../shared/utility/flags';
-import { getClosestTypes } from '../../shared/utility/vector';
-import { Athena } from '../api/athena';
-import { DEFAULT_CONFIG } from '../athena/main';
-import { consoleCommand } from '../decorators/commands';
-import { emitAll } from '../utility/emitHelper';
-import { Permission } from './permission';
+import { SYSTEM_EVENTS } from '../../../../shared/enums/system';
+import { View_Events_Chat } from '../../../../shared/enums/views';
+import { CHARACTER_PERMISSIONS, PERMISSIONS } from '../../../../shared/flags/permissionFlags';
+import { Command } from '../../../../shared/interfaces/command';
+import { LOCALE_KEYS } from '../../../../shared/locale/languages/keys';
+import { LocaleController } from '../../../../shared/locale/locale';
+import { isFlagEnabled } from '../../../../shared/utility/flags';
+import { getClosestTypes } from '../../../../shared/utility/vector';
+import { Athena } from '../../../../server/api/athena';
+import { DEFAULT_CONFIG } from '../../../../server/athena/main';
+import { consoleCommand } from '../../../../server/decorators/commands';
+import { emitAll } from '../../../../server/utility/emitHelper';
+import { Permission } from '../../../../server/systems/permission';
 
 const maxMessageLength: number = 128;
 const printCommands = false;

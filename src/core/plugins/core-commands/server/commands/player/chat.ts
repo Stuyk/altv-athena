@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { command } from '@AthenaServer/decorators/commands';
-import ChatController from '@AthenaServer/systems/chat';
+import ChatController from '@AthenaPlugins/core-chat/server/src/chat';
 import { View_Events_Chat } from '@AthenaShared/enums/views';
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';

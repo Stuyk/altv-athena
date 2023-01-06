@@ -136,15 +136,6 @@ const Emit = {
     },
 
     /**
-     * Send a message to this player's chat box.
-     * @param {string} message
-     * @memberof EmitPrototype
-     */
-    message(player: alt.Player, message: string): void {
-        alt.emitClient(player, View_Events_Chat.Append, message);
-    },
-
-    /**
      * Send a notification to this player.
      * @param {string} message
      * @memberof EmitPrototype
