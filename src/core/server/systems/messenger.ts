@@ -4,6 +4,7 @@ import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { Athena } from '@AthenaServer/api/athena';
 
 type MessageCallback = (msg: string) => void;
+type CommandCallback = (player: alt.Player, ...args: any[]) => void;
 
 const tagOrComment = new RegExp(
     '<(?:' +
@@ -42,11 +43,12 @@ interface MessageCommand {
 
     /**
      * Arguments that belong to this command.
+     * Defines what each argument is described as.
      *
-     * @type {Array<{ name: string }>}
+     * @type {Array<string>}
      * @memberof MessageCommand
      */
-    args?: Array<{ name: string }>;
+    args?: Array<string>;
 
     /**
      * An array of individual permission strings required to run this command.
@@ -61,11 +63,25 @@ interface MessageCommand {
      *
      * @memberof MessageCommand
      */
-    callback: (player: alt.Player, ...args: any[]) => void;
+    callback: CommandCallback;
 }
 
 const callbacks: Array<MessageCallback> = [];
 const commands: { [command_name: string]: Omit<MessageCommand, 'name'> } = {};
+
+/**
+ * Removes HTML brackets, and other escaped garbage.
+ *
+ * @param {string} msg
+ * @return {string}
+ */
+function cleanMessage(msg: string): string {
+    return msg
+        .replace(tagOrComment, '')
+        .replace('/</g', '&lt;')
+        .replace('/', '')
+        .replace(/<\/?[^>]+(>|$)/gm, '');
+}
 
 const InternalFunctions = {
     player: {
@@ -136,11 +152,7 @@ export const MessengerSystem = {
             }
 
             // Cleanup up extrenious tags, and weird symbols.
-            msg = msg
-                .replace(tagOrComment, '')
-                .replace('/</g', '&lt;')
-                .replace('/', '')
-                .replace(/<\/?[^>]+(>|$)/gm, '');
+            msg = cleanMessage(msg);
 
             const args = msg.split(' ');
             const commandName = args.shift();
@@ -155,11 +167,7 @@ export const MessengerSystem = {
         }
 
         // Cleanup up extrenious tags, and weird symbols.
-        msg = msg
-            .replace(tagOrComment, '')
-            .replace('/</g', '&lt;')
-            .replace('/', '')
-            .replace(/<\/?[^>]+(>|$)/gm, '');
+        msg = cleanMessage(msg);
 
         for (let cb of callbacks) {
             cb(msg);
@@ -183,16 +191,16 @@ export const MessengerSystem = {
          * @param {MessageCommand} command
          * @return {*}
          */
-        register(command: MessageCommand) {
-            command.name = command.name.toLowerCase().replaceAll('/', '');
+        register(name: string, desc: string, args: Array<string>, perms: Array<string>, callback: CommandCallback) {
+            name = name.toLowerCase().replaceAll('/', '');
 
-            if (commands[command.name]) {
-                alt.logError(`Command ${command.name} is already registered.`);
+            if (commands[name]) {
+                alt.logError(`~r~Command ${name} is already registered.`);
                 return;
             }
 
-            commands[command.name] = command;
-            alt.log(`~lc~Registered Command: ~c~${command.name}`);
+            commands[name] = { description: desc, permissions: perms, args, callback };
+            alt.log(`~lc~Registered Command: ~c~${name}`);
         },
     },
     player: {

@@ -447,6 +447,9 @@ const Emit = {
     wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelOption>) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems, true);
     },
+    message(player: alt.Player, msg: string) {
+        Athena.systems.messenger.player.send(player, msg);
+    },
 };
 
 /**

@@ -59,6 +59,22 @@ Currency
 - Uses new document system to log new / old data changes.
 - Removes direct modifiction of player.data.x
 
+Chat
+- Began moving chat into its own self-contained plugin.
+- Removed decorator system.
+
+Permission System
+- Began refactor on permission system to use array of 'strings' to assign permissions.
+- Allows a player to have multiple permissions such as: ['admin', 'moderator']
+- No hierarchy will be created, and simply appending / removing these strings will enable / disable commands.
+
+Messenger System
+- Handles messages to be sent to some form of chat system.
+- Allows for client-side, and server-side callbacks to handle messages sent between players and server and client.
+- By default the messenger system will simply log to console if no chat systems are registered with Athena.
+-- This also applies to client-side.
+- Command logic being reworked to get more in-depth responses about what may be missing from a command based on args passed.
+
 Refactors
 - Update existing code base to use new Athena.document APIs
 ```

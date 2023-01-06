@@ -6,6 +6,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 type MessageCallback = (msg: string) => void;
 
 const callbacks: Array<MessageCallback> = [];
+const messages: Array<string> = [];
 
 export const MessengerSystem = {
     /**
@@ -24,6 +25,12 @@ export const MessengerSystem = {
      * @param {string} msg
      */
     emit(msg: string) {
+        // Automatically inserts newest message at beginning.
+        messages.unshift(msg);
+        if (messages.length >= 256) {
+            messages.pop();
+        }
+
         if (callbacks.length <= 0) {
             alt.log(msg);
             return;
@@ -32,6 +39,15 @@ export const MessengerSystem = {
         for (let cb of callbacks) {
             cb(msg);
         }
+    },
+    /**
+     * Return current chat history.
+     * Newest message is always first element in array.
+     *
+     * @return {Array<string>}
+     */
+    history(): Array<string> {
+        return messages;
     },
     /**
      * Takes a message, or command and processes it from an input.

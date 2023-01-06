@@ -1,3 +1,4 @@
+import { MessengerSystem } from '@AthenaServer/systems/messenger';
 import { AgendaSystem } from '../../systems/agenda';
 import { Identifier } from '../../systems/identifier';
 import { ItemFactory } from '../../systems/item';
@@ -19,6 +20,7 @@ export const systemConst = {
         cloneObjective,
         instance: Job,
     },
+    messenger: MessengerSystem,
     plugins: PluginSystem,
     sound: SoundSystem,
 };
