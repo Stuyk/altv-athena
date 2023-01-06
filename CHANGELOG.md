@@ -67,6 +67,12 @@ Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.
 - Allows a player to have multiple permissions such as: ['admin', 'moderator']
 - No hierarchy will be created, and simply appending / removing these strings will enable / disable commands.
+- addPerm - Adds a permission to a player's account.
+- removePerm - Removes a permission from a player's account.
+- has - Check if a player has a permission given a string.
+- hasOne - Check if a player has at least one permission given an array of strings.
+- hasAll - Check if a player has all permissions given an array of strings.
+- Can be accessed under Athena.systems.permission.player.x
 
 Messenger System
 - Handles messages to be sent to some form of chat system.
@@ -74,6 +80,8 @@ Messenger System
 - By default the messenger system will simply log to console if no chat systems are registered with Athena.
 -- This also applies to client-side.
 - Command logic being reworked to get more in-depth responses about what may be missing from a command based on args passed.
+- Command logic works with new permission system stated above.
+- Old permissions system is being deprecated.
 
 Refactors
 - Update existing code base to use new Athena.document APIs

@@ -1,6 +1,5 @@
 import './currency';
 import './door';
-import './garage';
 import './interior';
 import './noclip';
 import './player';

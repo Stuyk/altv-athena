@@ -64,6 +64,14 @@ export interface Account {
     permissionLevel: PERMISSIONS;
 
     /**
+     * A list of permissions assigned to this account.
+     *
+     * @type {Array<string>}
+     * @memberof Account
+     */
+    permissions: Array<string>;
+
+    /**
      * Is this user banned?
      * @type {boolean}
      * @memberof Account

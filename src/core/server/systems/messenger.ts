@@ -42,15 +42,6 @@ interface MessageCommand {
     description: string;
 
     /**
-     * Arguments that belong to this command.
-     * Defines what each argument is described as.
-     *
-     * @type {Array<string>}
-     * @memberof MessageCommand
-     */
-    args?: Array<string>;
-
-    /**
      * An array of individual permission strings required to run this command.
      *
      * @type {Array<string>}
@@ -123,6 +114,11 @@ const InternalFunctions = {
                 return;
             }
 
+            if (!Athena.systems.permission.player.hasOne(player, cmdInfo.permissions)) {
+                Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+                return;
+            }
+
             commands[commandName].callback(player, ...args);
         },
     },
@@ -191,7 +187,7 @@ export const MessengerSystem = {
          * @param {MessageCommand} command
          * @return {*}
          */
-        register(name: string, desc: string, args: Array<string>, perms: Array<string>, callback: CommandCallback) {
+        register(name: string, desc: string, perms: Array<string>, callback: CommandCallback) {
             name = name.toLowerCase().replaceAll('/', '');
 
             if (commands[name]) {
@@ -199,8 +195,8 @@ export const MessengerSystem = {
                 return;
             }
 
-            commands[name] = { description: desc, permissions: perms, args, callback };
-            alt.log(`~lc~Registered Command: ~c~${name}`);
+            commands[name] = { description: desc, permissions: perms, callback };
+            alt.log(`~lc~Command: ~g~${name}`);
         },
     },
     player: {

@@ -4,8 +4,7 @@ import { CurrencyTypes } from '@AthenaShared/enums/currency';
 
 Athena.systems.messenger.commands.register(
     'setcash',
-    'Set cash amount for a player to a specific amount.',
-    ['amount', 'id'],
+    '/setcash [amount] [id]',
     ['admin'],
     (player: alt.Player, amount: string, id: string | undefined) => {
         if (typeof id === 'undefined') {
@@ -25,8 +24,7 @@ Athena.systems.messenger.commands.register(
 
 Athena.systems.messenger.commands.register(
     'addbank',
-    'Add bank balance to a player.',
-    ['amount', 'id'],
+    '/addbank [amount] [id]',
     ['admin'],
     (player: alt.Player, amount: string, id: string | undefined) => {
         if (typeof id === 'undefined') {
@@ -46,8 +44,7 @@ Athena.systems.messenger.commands.register(
 
 Athena.systems.messenger.commands.register(
     'setbank',
-    'Set bank balance for a player.',
-    ['amount', 'id'],
+    '/setbank [amount] [id]',
     ['admin'],
     (player: alt.Player, amount: string, id: string | undefined) => {
         if (typeof id === 'undefined') {
@@ -67,8 +64,7 @@ Athena.systems.messenger.commands.register(
 
 Athena.systems.messenger.commands.register(
     'addcash',
-    'Add cash balance to a player.',
-    ['amount', 'id'],
+    '/addcash [amount] [id]',
     ['admin'],
     (player: alt.Player, amount: string, id: string | undefined) => {
         if (typeof id === 'undefined') {
