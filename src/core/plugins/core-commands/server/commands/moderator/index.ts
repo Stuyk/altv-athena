@@ -6,5 +6,4 @@ import './player';
 import './teleport';
 import './test';
 import './vehicle';
-import './wanted';
 import './chat';

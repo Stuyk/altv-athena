@@ -269,8 +269,8 @@ Athena.systems.messenger.commands.register(
 );
 
 Athena.systems.messenger.commands.register(
-    'tempcomponent',
-    '/tempcomponent [id] [value]',
+    'tempprop',
+    '/tempprop [id] [value]',
     ['admin'],
     async (player: alt.Player, id: string, value: string) => {
         if (typeof id === 'undefined' || typeof value === 'undefined') {
