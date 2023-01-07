@@ -1,6 +1,10 @@
 <template>
     <div class="stack menu" v-if="active">
         <div class="header">Developer Menu - Hotkey: SHIFT + F</div>
+        <sub>
+            <button @click="active = !active">Hide</button>
+            <button @click="forceHide">Hide on Refresh</button>
+        </sub>
         <sub>Selecting a page, will toggle it.</sub>
         <div class="dev-pages" v-if="pages">
             <div class="dev-page-info" v-for="page in currentPages" @click="togglePage(page.name)">
@@ -88,6 +92,10 @@ export default defineComponent({
 
             this.updatePages();
         },
+        forceHide() {
+            this.active = false;
+            localStorage.setItem('hide-pages-on-setup', 'true');
+        },
     },
     mounted() {
         document.addEventListener('keyup', this.handleKeyUp);
@@ -98,6 +106,11 @@ export default defineComponent({
                 this.togglePage(pageInfo.name);
             }
         });
+
+        const autoHide = localStorage.getItem('hide-pages-on-setup');
+        if (autoHide && typeof autoHide !== 'undefined' && autoHide === 'true') {
+            this.active = false;
+        }
     },
     unmounted() {
         document.removeEventListener('keyup', this.handleKeyUp);

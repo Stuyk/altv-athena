@@ -62,6 +62,7 @@ Currency
 Chat
 - Began moving chat into its own self-contained plugin.
 - Removed decorator system.
+- Chat Vue interface reworked with lots of individual configurations.
 
 Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.
@@ -83,12 +84,17 @@ Messenger System
 - Command logic being reworked to get more in-depth responses about what may be missing from a command based on args passed.
 - Command logic works with new permission system stated above.
 - Old permissions system is being deprecated.
+- Added timestamps to client-side message history.
 
 Getters
 - Added Athena.get.players.inRangeWithDistance - Returns players and their distance from a position.
 
 Refactors
 - Update existing code base to use new Athena.document APIs
+
+Vue Dev Menu
+- Added 'Hide' Button
+- Added 'Hide on Refresh' Button
 ```
 
 
