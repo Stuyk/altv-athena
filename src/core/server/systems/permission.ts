@@ -150,6 +150,12 @@ const InternalFunctions = {
             return false;
         }
 
+        // Should return true if a permission is just an empty array.
+        // Should also check this before checking player perms if they haven't had any perms added yet.
+        if (perms.length <= 0) {
+            return true;
+        }
+
         if (typeof data.permissions === 'undefined') {
             return false;
         }
@@ -190,6 +196,12 @@ const InternalFunctions = {
         const data = Athena.document[dataName].get(player);
         if (typeof data === 'undefined') {
             return false;
+        }
+
+        // Should return true if a permission is just an empty array.
+        // Should also check this before checking player perms if they haven't had any perms added yet.
+        if (perms.length <= 0) {
+            return true;
         }
 
         if (typeof data.permissions === 'undefined') {

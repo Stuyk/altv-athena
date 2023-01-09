@@ -34,6 +34,11 @@ let commands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
 
 function getCurrentMessage(): string {
     const element = document.getElementByID('input');
+    if (typeof element === 'undefined') {
+        alt.logWarning(`Could not find rmlui commands element with id 'input'`);
+        return undefined;
+    }
+
     const msg = element.getAttribute('value');
     return msg;
 }
@@ -59,7 +64,16 @@ function updateSuggestions(suggestions: Array<Omit<MessageCommand<alt.Player>, '
 
 function handleMessageUpdate() {
     const msg = getCurrentMessage();
+    if (!msg) {
+        return;
+    }
+
     if (msg.charAt(0) !== '/') {
+        updateSuggestions([]);
+        return;
+    }
+
+    if (commands.length <= 0) {
         updateSuggestions([]);
         return;
     }
@@ -77,9 +91,19 @@ function handleMessageUpdate() {
 const InternalFunctions = {
     focus(inputInfo: CommandInput) {
         const element = document.getElementByID('input');
+        if (typeof element === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'input'`);
+            return;
+        }
+
         element.focus();
 
         const placeholderElement = document.getElementByID('placeholder');
+        if (typeof placeholderElement === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'placeholder'`);
+            return;
+        }
+
         placeholderElement.innerRML = inputInfo.placeholder;
 
         // Assign commands the player has access to currently...
@@ -101,12 +125,15 @@ const InternalFunctions = {
     },
     async submit() {
         const msg = getCurrentMessage();
-
         const callbackRef = internalCallback;
         await CommandInputConst.cancel();
 
         if (typeof callbackRef === 'function') {
-            callbackRef(msg !== '' ? msg : undefined);
+            if (typeof msg === 'undefined') {
+                callbackRef(undefined);
+            } else {
+                callbackRef(msg !== '' ? msg : undefined);
+            }
         }
     },
 };

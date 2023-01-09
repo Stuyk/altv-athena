@@ -8,7 +8,7 @@ import * as alt from 'alt-server';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 // import { LocaleController } from '@AthenaShared/locale/locale';
 
-import { Athena } from "@AthenaServer/api/athena";
+import { Athena } from '@AthenaServer/api/athena';
 
 // const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
 
@@ -118,12 +118,6 @@ import { Athena } from "@AthenaServer/api/athena";
 // alt.on('playerEnteredVehicle', setSeatbeltToFalse);
 // alt.on('playerLeftVehicle', setSeatbeltToFalse);
 
-
-Athena.systems.messenger.commands.register(
-    'test',
-    '/test',
-    [],
-    (player: alt.Player) => {
-        Athena.
-    },
-);
+Athena.systems.messenger.commands.register('test', '/test', [], (player: alt.Player) => {
+    Athena.player.emit.message(player, 'hi there');
+});

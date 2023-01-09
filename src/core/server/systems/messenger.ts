@@ -174,7 +174,7 @@ export const MessengerSystem = {
                 return;
             }
 
-            commands[name] = { description: desc, permissions: perms, callback };
+            commands[name] = { description: desc, permissions: perms, callback, isCharacterPermission };
             alt.log(`~lc~Command: ~g~${name}`);
         },
     },
@@ -188,6 +188,7 @@ export const MessengerSystem = {
         populateCommands(player: alt.Player) {
             const accountData = Athena.document.account.get(player);
             const characterData = Athena.document.character.get(player);
+
             if (typeof accountData === 'undefined' || typeof characterData === 'undefined') {
                 return;
             }
@@ -201,7 +202,12 @@ export const MessengerSystem = {
                     return;
                 }
 
-                validCommands.push({ name: key, description: command.description, permissions: command.permissions });
+                validCommands.push({
+                    name: key,
+                    description: command.description,
+                    permissions: command.permissions,
+                    isCharacterPermission: command.isCharacterPermission,
+                });
             });
 
             player.emit(MESSENGER_EVENTS.TO_CLIENT.COMMANDS, validCommands);
