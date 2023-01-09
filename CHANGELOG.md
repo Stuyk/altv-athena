@@ -72,13 +72,20 @@ Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.
 - Allows a player to have multiple permissions such as: ['admin', 'moderator']
 - No hierarchy will be created, and simply appending / removing these strings will enable / disable commands.
-- addPerm - Adds a permission to a player's account.
-- removePerm - Removes a permission from a player's account.
-- has - Check if a player has a permission given a string.
-- hasOne - Check if a player has at least one permission given an array of strings.
-- hasAll - Check if a player has all permissions given an array of strings.
-- clear - Clears all permissions associated with a player.
-- Can be accessed under Athena.systems.permission.player.x
+- Character Permissions
+-- addPerm - Adds a permission to a player's account.
+-- removePerm - Removes a permission from a player's account.
+-- has - Check if a player has a permission given a string.
+-- hasOne - Check if a player has at least one permission given an array of strings.
+-- hasAll - Check if a player has all permissions given an array of strings.
+-- clear - Clears all permissions associated with a player.
+- Account Permissions
+-- addPerm - Adds a permission to a player's account.
+-- removePerm - Removes a permission from a player's account.
+-- has - Check if a player has a permission given a string.
+-- hasOne - Check if a player has at least one permission given an array of strings.
+-- hasAll - Check if a player has all permissions given an array of strings.
+-- clear - Clears all permissions associated with a player.
 
 Messenger System
 - Handles messages to be sent to some form of chat system.

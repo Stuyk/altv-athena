@@ -146,6 +146,14 @@ export interface Character {
      * @memberof Character
      */
     interior: number | undefined;
+
+    /**
+     * Permissions for a given user.
+     *
+     * @type {Array<string>}
+     * @memberof Character
+     */
+    permissions: Array<string>
 }
 
 export const CharacterDefaults: Partial<Character> = {

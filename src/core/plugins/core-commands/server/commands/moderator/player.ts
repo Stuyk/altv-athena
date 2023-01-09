@@ -193,7 +193,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.player.add(target, perm);
+        await Athena.systems.permission.character.add(target, perm);
 
         const response = `Added permission to ${data.name}, ${perm}`;
         Athena.player.emit.message(player, response);
@@ -217,7 +217,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.player.remove(target, perm);
+        await Athena.systems.permission.character.remove(target, perm);
 
         const response = `Removed permission from ${data.name}, ${perm}`;
         Athena.player.emit.message(player, response);
@@ -241,7 +241,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        await Athena.systems.permission.player.clear(target);
+        await Athena.systems.permission.character.clear(target);
 
         const response = `Cleared permissions for ${data.name}.`;
         Athena.player.emit.message(player, response);

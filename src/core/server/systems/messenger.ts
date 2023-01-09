@@ -83,7 +83,7 @@ const InternalFunctions = {
                 return;
             }
 
-            if (!Athena.systems.permission.player.hasOne(player, cmdInfo.permissions)) {
+            if (!Athena.systems.permission.account.hasOne(player, cmdInfo.permissions)) {
                 Athena.player.emit.message(player, `/${commandName} - No Permission for Usage`);
                 Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
@@ -188,7 +188,7 @@ export const MessengerSystem = {
             Object.keys(commands).forEach((key) => {
                 const command = commands[key];
 
-                if (!Athena.systems.permission.player.hasOne(player, command.permissions)) {
+                if (!Athena.systems.permission.account.hasOne(player, command.permissions)) {
                     return;
                 }
 
