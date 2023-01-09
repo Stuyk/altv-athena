@@ -26,6 +26,14 @@ export interface MessageCommand<T> {
     permissions: Array<string>;
 
     /**
+     * Should this command use character permissions instead of account?
+     *
+     * @type {boolean}
+     * @memberof MessageCommand
+     */
+    isCharacterPermission?: boolean;
+
+    /**
      * The function to call when this command is executed by a player, or internal function.
      *
      * @memberof MessageCommand

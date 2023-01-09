@@ -97,6 +97,8 @@ Messenger System
 - Old permissions system is being deprecated.
 - Added timestamps to client-side message history.
 - Added a client history callback listener.
+- Added way to differentiate between a character permission command, and an account permission command
+- By default all commands use account permissions
 
 Getters
 - Added Athena.get.players.inRangeWithDistance - Returns players and their distance from a position.

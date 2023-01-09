@@ -83,7 +83,8 @@ const InternalFunctions = {
                 return;
             }
 
-            if (!Athena.systems.permission.account.hasOne(player, cmdInfo.permissions)) {
+            const dataName = cmdInfo.isCharacterPermission ? 'character' : 'account';
+            if (!Athena.systems.permission[dataName].hasOne(player, cmdInfo.permissions)) {
                 Athena.player.emit.message(player, `/${commandName} - No Permission for Usage`);
                 Athena.player.emit.soundFrontend(player, 'Hack_Failed', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
                 return;
@@ -159,7 +160,13 @@ export const MessengerSystem = {
          * @param {MessageCommand} command
          * @return {*}
          */
-        register(name: string, desc: string, perms: Array<string>, callback: CommandCallback<alt.Player>) {
+        register(
+            name: string,
+            desc: string,
+            perms: Array<string>,
+            callback: CommandCallback<alt.Player>,
+            isCharacterPermission = false,
+        ) {
             name = name.toLowerCase().replaceAll('/', '');
 
             if (commands[name]) {
@@ -180,15 +187,17 @@ export const MessengerSystem = {
          */
         populateCommands(player: alt.Player) {
             const accountData = Athena.document.account.get(player);
-            if (!accountData) {
+            const characterData = Athena.document.character.get(player);
+            if (typeof accountData === 'undefined' || typeof characterData === 'undefined') {
                 return;
             }
 
             const validCommands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
             Object.keys(commands).forEach((key) => {
                 const command = commands[key];
+                const dataName = command.isCharacterPermission ? 'character' : 'account';
 
-                if (!Athena.systems.permission.account.hasOne(player, command.permissions)) {
+                if (!Athena.systems.permission[dataName].hasOne(player, command.permissions)) {
                     return;
                 }
 

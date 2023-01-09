@@ -1,4 +1,4 @@
-// import * as alt from 'alt-server';
+import * as alt from 'alt-server';
 // import { Athena } from '@AthenaServer/api/athena';
 // import { command } from '@AthenaServer/decorators/commands';
 // import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
@@ -7,6 +7,8 @@
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 // import { LocaleController } from '@AthenaShared/locale/locale';
+
+import { Athena } from "@AthenaServer/api/athena";
 
 // const SeatbeltState: Array<{ id: number; vehicle_id: number; state: boolean }> = [];
 
@@ -115,3 +117,13 @@
 
 // alt.on('playerEnteredVehicle', setSeatbeltToFalse);
 // alt.on('playerLeftVehicle', setSeatbeltToFalse);
+
+
+Athena.systems.messenger.commands.register(
+    'test',
+    '/test',
+    [],
+    (player: alt.Player) => {
+        Athena.
+    },
+);
