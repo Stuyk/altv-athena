@@ -334,7 +334,9 @@ export class VehicleSystem {
             return;
         }
 
-        alt.emitClient(player, SYSTEM_EVENTS.VEHICLE_ENGINE, !player.vehicle.engineOn);
+        const newState = !player.vehicle.engineOn;
+        alt.emitClient(player, SYSTEM_EVENTS.VEHICLE_ENGINE, newState);
+        playerConst.emit.notification(player, newState ? 'Engine Started' : 'Engine Stopped');
 
         // Force close vehicle doors on state change.
         Object.keys(VEHICLE_DOOR_STATE).forEach((key, _index) => {
@@ -448,6 +450,7 @@ export class VehicleSystem {
         const vehicle = player.vehicle
             ? player.vehicle
             : getClosestEntity<alt.Vehicle>(player.pos, player.rot, [...alt.Vehicle.all], 2);
+
         if (!vehicle) {
             return;
         }
@@ -474,6 +477,7 @@ export class VehicleSystem {
                 ? VEHICLE_LOCK_STATE.UNLOCKED
                 : VEHICLE_LOCK_STATE.LOCKED;
 
+        playerConst.emit.notification(player, vehicle.lockState === VEHICLE_LOCK_STATE.LOCKED ? 'Locked' : 'Unlocked');
         vehicle.setStreamSyncedMeta(VEHICLE_STATE.LOCK, vehicle.lockState);
 
         if (!player.vehicle) {

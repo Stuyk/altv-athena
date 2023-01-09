@@ -669,9 +669,9 @@ function handleJobAction(player: alt.Player, triggerName: string) {
  * Get the player's current Job Instance.
  * @export
  * @param {alt.Player} player
- * @return {Job | null}  {(Job | null)}
+ * @return {Job | undefined}  {(Job | undefined)}
  */
-export function getPlayerJob(player: alt.Player): Job | null {
+export function getPlayerJob(player: alt.Player): Job | undefined {
     return JobInstances[player.id];
 }
 
