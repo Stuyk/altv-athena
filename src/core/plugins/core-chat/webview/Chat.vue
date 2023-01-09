@@ -7,9 +7,15 @@
 </template>
 
 <script lang="ts">
+import WebViewEvents from '@utility/webViewEvents';
 import { defineComponent } from 'vue';
 import { CHAT_CONFIG } from '../shared/config';
+import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
 import { generateBytes } from './utility/generateBytes';
+import { padNumber } from './utility/padNumber';
+
+const PAGE_UP = 33;
+const PAGE_DOWN = 34;
 
 const ComponentName = 'Chat';
 export default defineComponent({
@@ -41,7 +47,10 @@ export default defineComponent({
 
                 if (this.behavior.timestamps) {
                     const time = new Date(newMessages[i].timestamp);
-                    const timestampText = `[${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}]`;
+                    const hour = padNumber(time.getHours());
+                    const minute = padNumber(time.getMinutes());
+                    const second = padNumber(time.getSeconds());
+                    const timestampText = `[${hour}:${minute}:${second}]`;
                     newMessages[i].msg = timestampText + ' ' + newMessages[i].msg;
                 }
             }
@@ -63,6 +72,8 @@ export default defineComponent({
             if (this.behavior.scroll) {
                 this.index = 0;
             }
+
+            this.updateMessageRendering();
         },
         truncate(message: string) {
             if (message.length > this.behavior.length) {
@@ -121,6 +132,15 @@ export default defineComponent({
             this.index = newIndex;
             this.updateMessageRendering();
         },
+        handleKeyCode(keyCode: number) {
+            if (keyCode === PAGE_UP) {
+                this.pageUp();
+            }
+
+            if (keyCode === PAGE_DOWN) {
+                this.pageDown();
+            }
+        },
         debug() {
             // Generates dummy messages, and gives them random colors.
             const messages = [];
@@ -144,14 +164,19 @@ export default defineComponent({
                     this.pageDown();
                 }
             });
+
+            setInterval(() => {
+                const copyOfMessages = [...this.messages];
+                copyOfMessages.unshift({ timestamp: Date.now(), msg: `a new message has arrived :)` });
+                this.setMessages(copyOfMessages);
+            }, 5000);
         },
     },
     mounted() {
         if ('alt' in window) {
-            alt.on(`${ComponentName}:SetLocales`, this.setLocales);
-            alt.on(`${ComponentName}:OpenURL`, this.openURL);
-            alt.on(`${ComponentName}:endWindow`, this.endWindow);
-            alt.on(`${ComponentName}:Fail`, this.fail);
+            WebViewEvents.on(CHAT_WEBVIEW_EVENTS.SET_MESSAGES, this.setMessages);
+            WebViewEvents.on(CHAT_WEBVIEW_EVENTS.PASS_KEY_PRESS, this.handleKeyCode);
+            WebViewEvents.emitReady(ComponentName);
         } else {
             this.debug();
         }
@@ -172,12 +197,12 @@ export default defineComponent({
     opacity: 0.95;
     font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
-    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(0, 0, 0, 0.85), -1px 0px 1px rgba(0, 0, 0, 0.85),
-        1px 0px 1px rgba(0, 0, 0, 0.85);
     font-size: 13px;
     margin-bottom: 12px;
     word-wrap: break-word;
     word-break: break-all;
     line-height: 14pt;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(0, 0, 0, 0.85), -1px 0px 1px rgba(0, 0, 0, 0.85),
+        1px 0px 1px rgba(0, 0, 0, 0.85);
 }
 </style>

@@ -5,8 +5,10 @@ import { Menu } from '@AthenaClient/rmlui/menu';
 import { Menu3D } from '@AthenaClient/rmlui/menu3d';
 import { StaticText } from '@AthenaClient/rmlui/staticText';
 import { Sprite } from '@AthenaClient/rmlui/sprites';
+import { CommandInput } from '@AthenaClient/rmlui/commands';
 
 export const rmluiConst = {
+    commandInput: CommandInput,
     questionBox: QuestionBox,
     inputBox: InputBox,
     menu: Menu,

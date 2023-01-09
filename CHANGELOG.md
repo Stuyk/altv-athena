@@ -63,6 +63,8 @@ Chat
 - Began moving chat into its own self-contained plugin.
 - Removed decorator system.
 - Chat Vue interface reworked with lots of individual configurations.
+- Added pgup/pgdn controls for pagination
+- Began work on input rmlui for commands / text inputs
 
 Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.
@@ -85,6 +87,7 @@ Messenger System
 - Command logic works with new permission system stated above.
 - Old permissions system is being deprecated.
 - Added timestamps to client-side message history.
+- Added a client history callback listener.
 
 Getters
 - Added Athena.get.players.inRangeWithDistance - Returns players and their distance from a position.

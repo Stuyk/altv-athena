@@ -2,9 +2,11 @@ import * as alt from 'alt-server';
 
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { Athena } from '@AthenaServer/api/athena';
+import { CommandCallback, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 type MessageCallback = (player: alt.Player, msg: string) => void;
-type CommandCallback = (player: alt.Player, ...args: any[]) => void;
 
 const tagOrComment = new RegExp(
     '<(?:' +
@@ -24,41 +26,8 @@ const tagOrComment = new RegExp(
     'gi',
 );
 
-interface MessageCommand {
-    /**
-     * The plain text iteration of this command.
-     *
-     * @type {string}
-     * @memberof MessageCommand
-     */
-    name: string;
-
-    /**
-     * A description of this command.
-     *
-     * @type {string}
-     * @memberof MessageCommand
-     */
-    description: string;
-
-    /**
-     * An array of individual permission strings required to run this command.
-     *
-     * @type {Array<string>}
-     * @memberof MessageCommand
-     */
-    permissions: Array<string>;
-
-    /**
-     * The function to call when this command is executed by a player, or internal function.
-     *
-     * @memberof MessageCommand
-     */
-    callback: CommandCallback;
-}
-
 const callbacks: Array<MessageCallback> = [];
-const commands: { [command_name: string]: Omit<MessageCommand, 'name'> } = {};
+const commands: { [command_name: string]: Omit<MessageCommand<alt.Player>, 'name'> } = {};
 
 /**
  * Removes HTML brackets, and other escaped garbage.
@@ -190,7 +159,7 @@ export const MessengerSystem = {
          * @param {MessageCommand} command
          * @return {*}
          */
-        register(name: string, desc: string, perms: Array<string>, callback: CommandCallback) {
+        register(name: string, desc: string, perms: Array<string>, callback: CommandCallback<alt.Player>) {
             name = name.toLowerCase().replaceAll('/', '');
 
             if (commands[name]) {
@@ -204,10 +173,37 @@ export const MessengerSystem = {
     },
     player: {
         send: InternalFunctions.player.send,
+        /**
+         * Get all commands that are associated with a player's current permission level.
+         *
+         * @param {alt.Player} player
+         */
+        populateCommands(player: alt.Player) {
+            const accountData = Athena.document.account.get(player);
+            if (!accountData) {
+                return;
+            }
+
+            const validCommands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
+            Object.keys(commands).forEach((key) => {
+                const command = commands[key];
+
+                if (!Athena.systems.permission.player.hasOne(player, command.permissions)) {
+                    return;
+                }
+
+                validCommands.push({ name: key, description: command.description, permissions: command.permissions });
+            });
+
+            player.emit(MESSENGER_EVENTS.TO_CLIENT.COMMANDS, validCommands);
+        },
     },
     players: {
         send: InternalFunctions.players.send,
     },
 };
 
-alt.onClient(MESSENGER_EVENTS.TO_SERVER.MESSAGE, MessengerSystem.messages.emit);
+alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
+    alt.onClient(MESSENGER_EVENTS.TO_SERVER.MESSAGE, MessengerSystem.messages.emit);
+    Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, MessengerSystem.player.populateCommands);
+});
