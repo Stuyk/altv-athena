@@ -65,6 +65,8 @@ Chat
 - Chat Vue interface reworked with lots of individual configurations.
 - Added pgup/pgdn controls for pagination
 - Began work on input rmlui for commands / text inputs
+- Finished command suggestions above input box
+- Created new command input rmlui option
 
 Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.

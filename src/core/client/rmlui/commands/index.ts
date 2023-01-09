@@ -3,6 +3,7 @@ import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
+const MAX_SUGGESTIONS = 4;
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
@@ -29,11 +30,48 @@ type MessageCallback = (msg: string | undefined) => void;
 let document: alt.RmlDocument;
 let internalCallback: MessageCallback;
 let wasMenuCheckSkipped = false;
+let commands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
 
 function getCurrentMessage(): string {
     const element = document.getElementByID('input');
     const msg = element.getAttribute('value');
     return msg;
+}
+
+/**
+ * Try to update the on-screen suggestions.
+ * If the array is empty; it will clear all suggestions.
+ *
+ * @param {Array<Omit<MessageCommand<alt.Player>, 'callback'>>} suggestions
+ */
+function updateSuggestions(suggestions: Array<Omit<MessageCommand<alt.Player>, 'callback'>>) {
+    for (let i = 0; i < MAX_SUGGESTIONS; i++) {
+        const suggestion = suggestions[i];
+        const element = document.getElementByID(`suggestion-${i}`);
+        if (typeof suggestion === 'undefined') {
+            element.innerRML = '';
+            continue;
+        }
+
+        element.innerRML = suggestion.description;
+    }
+}
+
+function handleMessageUpdate() {
+    const msg = getCurrentMessage();
+    if (msg.charAt(0) !== '/') {
+        updateSuggestions([]);
+        return;
+    }
+
+    const splitCommand = msg.replaceAll('/', '').toLowerCase().split(' ');
+    if (!splitCommand[0]) {
+        updateSuggestions([]);
+        return;
+    }
+
+    const suggestions = commands.filter((x) => x.name.includes(splitCommand[0]));
+    updateSuggestions(suggestions);
 }
 
 const InternalFunctions = {
@@ -43,7 +81,11 @@ const InternalFunctions = {
 
         const placeholderElement = document.getElementByID('placeholder');
         placeholderElement.innerRML = inputInfo.placeholder;
+
+        // Assign commands the player has access to currently...
+        commands = inputInfo.commands;
     },
+
     handleKeyUp(keycode: number) {
         if (keycode === ESCAPE_KEY) {
             CommandInputConst.cancel();
@@ -54,6 +96,8 @@ const InternalFunctions = {
             InternalFunctions.submit();
             return;
         }
+
+        handleMessageUpdate();
     },
     async submit() {
         const msg = getCurrentMessage();

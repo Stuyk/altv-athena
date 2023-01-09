@@ -10,6 +10,14 @@ const PAGE_NAME = 'Chat';
 let hasRegistered = false;
 
 const InternalFunctions = {
+    /**
+     * Takes any key press and passes it through to the Webview.
+     * This is so that the key presses are handled without a 'document.addEventListener'
+     * This means the key presses should still work, when not in-focus.
+     *
+     * @param {number} keyCode
+     * @return {*}
+     */
     handleKeyPress(keyCode: number) {
         if (AthenaClient.webview.isAnyMenuOpen()) {
             return;
@@ -17,6 +25,12 @@ const InternalFunctions = {
 
         AthenaClient.webview.emit(CHAT_WEBVIEW_EVENTS.PASS_KEY_PRESS, keyCode);
     },
+    /**
+     * Fetches and pushes message history, when the chat is opened and turned visible.
+     *
+     * @param {boolean} [value=true]
+     * @return {*}
+     */
     updateMessages(value: boolean = true) {
         if (!value) {
             return;
@@ -24,38 +38,45 @@ const InternalFunctions = {
 
         AthenaClient.webview.emit(CHAT_WEBVIEW_EVENTS.SET_MESSAGES, AthenaClient.messenger.history());
     },
+    /**
+     * Automatically updates the WebView with latest message history.
+     *
+     * @param {Array<MessageInfo>} messages
+     */
     updateMessagesListener(messages: Array<MessageInfo>) {
         AthenaClient.webview.emit(CHAT_WEBVIEW_EVENTS.SET_MESSAGES, messages);
     },
-};
+    /**
+     * Opens the message box for commands or messages.
+     */
+    async openMessageBox() {
+        const result = await AthenaClient.rmlui.commandInput.create({
+            placeholder: 'Send a message or type a command...',
+            commands: AthenaClient.messenger.getCommands(),
+        });
 
-const ChatView = {
+        if (typeof result === 'undefined' || result === '') {
+            return;
+        }
+
+        AthenaClient.messenger.send(result);
+    },
+    /**
+     * Initializes the chat overlay, and registers it as an overlay.
+     *
+     */
     open() {
         if (!hasRegistered) {
             WebViewController.registerOverlay(PAGE_NAME, InternalFunctions.updateMessages);
             WebViewController.ready(PAGE_NAME, InternalFunctions.updateMessages);
             AthenaClient.messenger.registerHistoryCallback(InternalFunctions.updateMessagesListener);
             alt.on('keyup', InternalFunctions.handleKeyPress);
+            hasRegistered = true;
         }
     },
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, ChatView.open);
-
-async function handleInput() {
-    const result = await AthenaClient.rmlui.inputBox.create({
-        placeholder: 'Send a message or type a command...',
-        darken: false,
-        blur: false,
-    });
-
-    if (typeof result === 'undefined' || result === '') {
-        return;
-    }
-
-    AthenaClient.messenger.send(result);
-}
-
 alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
-    AthenaClient.events.keyBinds.registerKeybind({ singlePress: handleInput, key: THE_LETTER_T });
+    AthenaClient.events.keyBinds.registerKeybind({ singlePress: InternalFunctions.openMessageBox, key: THE_LETTER_T });
+    InternalFunctions.open();
 });
