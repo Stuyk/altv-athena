@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { PluginSystem } from '@AthenaServer/systems/plugins';
 import { init } from './src/chat';
+import './src/commands';
 
 const PLUGIN_NAME = 'Chat';
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {

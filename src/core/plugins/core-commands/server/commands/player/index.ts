@@ -1,3 +1,3 @@
-import './chat';
 import './job';
+import './player';
 import './vehicle';

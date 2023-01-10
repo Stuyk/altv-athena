@@ -1,11 +1,8 @@
-import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
-import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-const MAX_SUGGESTIONS = 4;
-const ESCAPE_KEY = 27;
-const ENTER_KEY = 13;
+import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 
 interface CommandInput {
     /**
@@ -27,68 +24,137 @@ interface CommandInput {
 }
 
 type MessageCallback = (msg: string | undefined) => void;
+
+const MAXIMUM_HISTORY_LENGTH = 128;
+const MAX_SUGGESTIONS = 4;
+const KEY_CODES = {
+    ESCAPE_KEY: 27,
+    ENTER_KEY: 13,
+    UP: 38,
+    DOWN: 40,
+    TAB: 9,
+};
+
 let document: alt.RmlDocument;
 let internalCallback: MessageCallback;
 let wasMenuCheckSkipped = false;
 let commands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
-
-function getCurrentMessage(): string {
-    const element = document.getElementByID('input');
-    if (typeof element === 'undefined') {
-        alt.logWarning(`Could not find rmlui commands element with id 'input'`);
-        return undefined;
-    }
-
-    const msg = element.getAttribute('value');
-    return msg;
-}
-
-/**
- * Try to update the on-screen suggestions.
- * If the array is empty; it will clear all suggestions.
- *
- * @param {Array<Omit<MessageCommand<alt.Player>, 'callback'>>} suggestions
- */
-function updateSuggestions(suggestions: Array<Omit<MessageCommand<alt.Player>, 'callback'>>) {
-    for (let i = 0; i < MAX_SUGGESTIONS; i++) {
-        const suggestion = suggestions[i];
-        const element = document.getElementByID(`suggestion-${i}`);
-        if (typeof suggestion === 'undefined') {
-            element.innerRML = '';
-            continue;
-        }
-
-        element.innerRML = suggestion.description;
-    }
-}
-
-function handleMessageUpdate() {
-    const msg = getCurrentMessage();
-    if (!msg) {
-        return;
-    }
-
-    if (msg.charAt(0) !== '/') {
-        updateSuggestions([]);
-        return;
-    }
-
-    if (commands.length <= 0) {
-        updateSuggestions([]);
-        return;
-    }
-
-    const splitCommand = msg.replaceAll('/', '').toLowerCase().split(' ');
-    if (!splitCommand[0]) {
-        updateSuggestions([]);
-        return;
-    }
-
-    const suggestions = commands.filter((x) => x.name.includes(splitCommand[0]));
-    updateSuggestions(suggestions);
-}
+let history: Array<string> = [];
+let historyIndex = -1;
 
 const InternalFunctions = {
+    async autoFillCommand() {
+        const msg = InternalFunctions.getCurrentMessage();
+        if (!msg || msg === '' || msg.charAt(0) !== '/' || commands.length <= 0) {
+            return;
+        }
+
+        const splitCommand = msg.replaceAll('/', '').toLowerCase().split(' ');
+        if (!splitCommand[0]) {
+            return;
+        }
+
+        const suggestions = commands.filter((x) => x.name.includes(splitCommand[0]));
+        if (suggestions.length <= 0) {
+            return;
+        }
+
+        const element = document.getElementByID('input');
+        if (typeof element === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'input'`);
+            return undefined;
+        }
+
+        // Before you go and try to move the caret position to the end of the input box.
+        // There is no way to move the caret position.
+        // There is no access to element.setSelectionRange
+        // There is no access to element.move
+        // Unfocus and Refocus does not work either
+        // Pretty much no option to make the caret position at the end of the input box for RMLUI.
+        const fullCommand = '/' + suggestions[0].name;
+        element.setAttribute('value', fullCommand);
+    },
+    getCurrentMessage(): string {
+        const element = document.getElementByID('input');
+        if (typeof element === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'input'`);
+            return undefined;
+        }
+
+        const msg = element.getAttribute('value');
+        return msg;
+    },
+    /**
+     * Try to update the on-screen suggestions.
+     * If the array is empty; it will clear all suggestions.
+     *
+     * @param {Array<Omit<MessageCommand<alt.Player>, 'callback'>>} suggestions
+     */
+    updateSuggestions(suggestions: Array<Omit<MessageCommand<alt.Player>, 'callback'>>) {
+        for (let i = 0; i < MAX_SUGGESTIONS; i++) {
+            const suggestion = suggestions[i];
+            const element = document.getElementByID(`suggestion-${i}`);
+            if (typeof element === 'undefined') {
+                continue;
+            }
+
+            if (typeof suggestion === 'undefined') {
+                element.innerRML = '';
+                continue;
+            }
+
+            element.innerRML = suggestion.description;
+        }
+    },
+    handleMessageUpdate() {
+        const msg = InternalFunctions.getCurrentMessage();
+        if (!msg || msg === '') {
+            return;
+        }
+
+        if (msg.charAt(0) !== '/') {
+            InternalFunctions.updateSuggestions([]);
+            return;
+        }
+
+        if (commands.length <= 0) {
+            InternalFunctions.updateSuggestions([]);
+            return;
+        }
+
+        const splitCommand = msg.replaceAll('/', '').toLowerCase().split(' ');
+        if (!splitCommand[0]) {
+            InternalFunctions.updateSuggestions([]);
+            return;
+        }
+
+        const suggestions = commands.filter((x) => x.name.includes(splitCommand[0]));
+        InternalFunctions.updateSuggestions(suggestions);
+    },
+    browseHistory(shouldIncrease: boolean) {
+        historyIndex = shouldIncrease ? historyIndex + 1 : historyIndex - 1;
+
+        if (historyIndex >= history.length) {
+            historyIndex = history.length - 1;
+        }
+
+        if (historyIndex < -1) {
+            historyIndex = -1;
+        }
+
+        const element = document.getElementByID('input');
+        if (typeof element === 'undefined') {
+            alt.logWarning(`Could not find rmlui commands element with id 'input'`);
+            return undefined;
+        }
+
+        if (historyIndex === -1) {
+            element.setAttribute('value', '');
+            return;
+        }
+
+        element.setAttribute('value', history[historyIndex]);
+    },
     focus(inputInfo: CommandInput) {
         const element = document.getElementByID('input');
         if (typeof element === 'undefined') {
@@ -108,33 +174,53 @@ const InternalFunctions = {
 
         // Assign commands the player has access to currently...
         commands = inputInfo.commands;
+        historyIndex = -1;
     },
-
     handleKeyUp(keycode: number) {
-        if (keycode === ESCAPE_KEY) {
+        if (keycode === KEY_CODES.ESCAPE_KEY) {
             CommandInputConst.cancel();
             return;
         }
 
-        if (keycode === ENTER_KEY) {
+        if (keycode === KEY_CODES.ENTER_KEY) {
             InternalFunctions.submit();
             return;
         }
 
-        handleMessageUpdate();
+        if (keycode === KEY_CODES.TAB) {
+            InternalFunctions.autoFillCommand();
+            return;
+        }
+
+        if (keycode === KEY_CODES.UP || keycode === KEY_CODES.DOWN) {
+            InternalFunctions.browseHistory(keycode === KEY_CODES.UP);
+            return;
+        }
+
+        InternalFunctions.handleMessageUpdate();
     },
     async submit() {
-        const msg = getCurrentMessage();
+        const msg = InternalFunctions.getCurrentMessage();
         const callbackRef = internalCallback;
         await CommandInputConst.cancel();
 
-        if (typeof callbackRef === 'function') {
-            if (typeof msg === 'undefined') {
-                callbackRef(undefined);
-            } else {
-                callbackRef(msg !== '' ? msg : undefined);
+        if (typeof callbackRef !== 'function') {
+            return;
+        }
+
+        if (typeof msg === 'undefined') {
+            callbackRef(undefined);
+            return;
+        }
+
+        if (msg !== '') {
+            history.unshift(msg);
+            if (history.length >= MAXIMUM_HISTORY_LENGTH) {
+                history.pop();
             }
         }
+
+        callbackRef(msg !== '' ? msg : undefined);
     },
 };
 

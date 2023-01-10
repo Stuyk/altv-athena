@@ -67,6 +67,11 @@ Chat
 - Began work on input rmlui for commands / text inputs
 - Finished command suggestions above input box
 - Created new command input rmlui option
+- Created message history in command input
+- TAB -> AutoFills with bottom command.
+- UP -> Goes to previously sent message or command
+- Down -> Navigates to previously sent messages, or fills with empty message
+- Known Issue: Input Caret does not go to the end of the input box. There is nothing that can be done to fix this currently.
 
 Permission System
 - Began refactor on permission system to use array of 'strings' to assign permissions.
