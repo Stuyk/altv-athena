@@ -8,8 +8,10 @@ Ensure there are no quotes around it inside of `rmlui` css and test once before 
 
 The easiest place to test a font is probably the input box. 
 
-Introducing a corrupted font in the input box will instantly crash your client.
+Introducing a corrupted font in the input box, or any rmlui interface will instantly crash your client.
 
 **YOU CANNOT SPECIFY MULTIPLE FONTS IN font-family**
 
 You have been warned.
+
+This cannot be fixed; use a different font.
