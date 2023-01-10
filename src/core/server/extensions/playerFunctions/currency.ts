@@ -2,6 +2,8 @@ import * as alt from 'alt-server';
 import { CurrencyTypes } from '@AthenaShared/enums/currency';
 import { Athena } from '@AthenaServer/api/athena';
 
+type DefaultCurrency = 'bank' | 'cash';
+
 const Currency = {
     /**
      * Add currency type to the player.
@@ -10,7 +12,7 @@ const Currency = {
      * @return {boolean} Success?
      * @memberof Currency
      */
-    add(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    add<CustomCurrency>(player: alt.Player, type: DefaultCurrency | CustomCurrency, amount: number): boolean {
         if (typeof amount === 'string') {
             amount = parseFloat(amount);
         }
@@ -20,16 +22,17 @@ const Currency = {
         }
 
         try {
+            const actualType = String(type);
             const data = Athena.document.character.get(player);
-            const originalValue = data[type];
+            const originalValue = typeof data[actualType] === 'undefined' ? 0 : data[actualType];
             const newValue = parseFloat((originalValue + amount).toFixed(2));
 
             if (originalValue > newValue) {
                 return false;
             }
 
-            Athena.document.character.set(player, type, newValue);
-            Athena.player.emit.meta(player, type, newValue);
+            Athena.document.character.set(player, actualType, newValue);
+            Athena.player.emit.meta(player, actualType, newValue);
             return true;
         } catch (err) {
             console.log(err);
@@ -44,7 +47,7 @@ const Currency = {
      * @return {boolean} Success?
      * @memberof CurrencyPrototype
      */
-    sub(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    sub<CustomCurrency>(player: alt.Player, type: DefaultCurrency | CustomCurrency, amount: number): boolean {
         if (typeof amount === 'string') {
             amount = parseFloat(amount);
         }
@@ -54,21 +57,18 @@ const Currency = {
         }
 
         try {
+            const actualType = String(type);
             const data = Athena.document.character.get(player);
-            if (typeof data[type] === 'undefined') {
-                data[type] = 0;
-            }
-
-            const originalValue = data[type];
+            const originalValue = typeof data[actualType] === 'undefined' ? 0 : data[actualType];
             const newValue = parseFloat((originalValue - amount).toFixed(2));
 
             // Verify that the value was updated.
-            if (originalValue < data[type]) {
+            if (originalValue < data[actualType]) {
                 return false;
             }
 
             Athena.document.character.set(player, type, newValue);
-            Athena.player.emit.meta(player, type, newValue);
+            Athena.player.emit.meta(player, actualType, newValue);
             return true;
         } catch (err) {
             return false;
@@ -82,20 +82,28 @@ const Currency = {
      * @return {*}  {boolean}
      * @memberof CurrencyPrototype
      */
-    set(player: alt.Player, type: CurrencyTypes, amount: number): boolean {
+    set<CustomCurrency>(player: alt.Player, type: DefaultCurrency | CustomCurrency, amount: number): boolean {
         if (amount > Number.MAX_SAFE_INTEGER) {
             amount = Number.MAX_SAFE_INTEGER - 1;
         }
 
         try {
-            Athena.document.character.set(player, type, amount);
-            Athena.player.emit.meta(player, type, amount);
+            const actualType = String(type);
+            Athena.document.character.set(player, actualType, amount);
+            Athena.player.emit.meta(player, actualType, amount);
             return true;
         } catch (err) {
             return false;
         }
     },
-
+    /**
+     * Only subtracts 'bank' and 'cash' currency types.
+     * Always takes from cash first.
+     *
+     * @param {alt.Player} player
+     * @param {number} amount
+     * @return {boolean}
+     */
     subAllCurrencies(player: alt.Player, amount: number): boolean {
         const data = Athena.document.character.get(player);
         if (typeof data.cash === 'undefined') {

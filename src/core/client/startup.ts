@@ -84,6 +84,5 @@ import './utility/missionText';
 // Views
 import './views/actions';
 import './views/audio';
-import './views/chat';
 import './views/job';
 import './views/wheelMenu';

@@ -58,6 +58,7 @@ Currency
 - Updated currency logic to allow old / new value watching.
 - Uses new document system to log new / old data changes.
 - Removes direct modifiction of player.data.x
+- Added Custom Currency Type Support
 
 Chat
 - Began moving chat into its own self-contained plugin.

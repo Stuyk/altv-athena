@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 
 alt.loadRmlFont('/client/rmlui/fonts/arial.ttf', 'arial', false, false);
-alt.loadRmlFont('/client/rmlui/fonts/arialbd.ttf', 'arialbd', false, true);
 alt.loadRmlFont('/client/rmlui/fonts/inter-regular.ttf', 'inter', false, false);
 
 if (alt.debug) {
