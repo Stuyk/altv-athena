@@ -9,7 +9,7 @@
                 overflow: hidden;
                 padding: 0;
                 margin: 0;
-                font-family: arial;
+                font-family: inter-bold;
             }
 
             .filler {
@@ -20,7 +20,7 @@
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                font-family: arial;
+                font-family: inter-bold;
                 font-weight: bold;
                 font-style: normal;
                 font-size: 16px;
@@ -30,21 +30,23 @@
             }
 
             .suggestion {
-                font-size: 12px;
+                font-size: 13px;
                 margin-bottom: 6px;
                 opacity: 1;
                 min-height: 24px;
                 min-width: 300px;
                 max-width: 300px;
                 padding-left: 3px;
+                font-effect: shadow(2px 2px #000000c2);
             }
 
             .placeholder {
-                font-size: 12px;
+                font-size: 13px;
                 padding-bottom: 6px;
                 padding-left: 3px;
                 opacity: 1;
                 min-height: 24px;
+                font-effect: shadow(2px 2px #000000c2);
             }
 
             input {
@@ -54,7 +56,8 @@
                 color: white;
                 box-sizing: border-box;
                 border: 2px #000000e2;
-                font-family: arial;
+                font-family: inter-bold;
+                font-size: 13px;
             }
         </style>
     </head>
