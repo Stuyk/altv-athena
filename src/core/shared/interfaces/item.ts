@@ -1,5 +1,11 @@
 import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
 
+/**
+ * Item behavior associated with an item
+ *
+ * @export
+ * @interface DefaultItemBehavior
+ */
 export interface DefaultItemBehavior {
     /**
      * Can this item be dropped.
@@ -59,6 +65,12 @@ export interface DefaultItemBehavior {
     destroyOnDrop?: boolean;
 }
 
+/**
+ * Shared Item Information for Both Interfaces Below
+ *
+ * @interface SharedItem
+ * @template CustomData
+ */
 interface SharedItem<CustomData = {}> {
     /**
      * The matching database name for this item.
@@ -85,6 +97,15 @@ interface SharedItem<CustomData = {}> {
     version?: number;
 }
 
+/**
+ * The StoredItem is stored in the player in the following locations:
+ * equipment, inventory, and toolbar
+ *
+ * @export
+ * @interface StoredItem
+ * @extends {SharedItem<CustomData>}
+ * @template CustomData
+ */
 export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
     /**
      * The amount of this item the player has.
@@ -111,6 +132,16 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
     totalWeight?: number;
 }
 
+/**
+ * The BaseItem is used as a way for the main items to point towards item information.
+ * This item stored in the database is used to construct front facing item information.
+ *
+ * @export
+ * @interface BaseItem
+ * @extends {SharedItem<CustomData>}
+ * @template Behavior
+ * @template CustomData
+ */
 export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> extends SharedItem<CustomData> {
     /**
      * Database entry for item. Do not add / append.

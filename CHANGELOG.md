@@ -118,6 +118,14 @@ Vue Dev Menu
 
 Item Interface
 - Initial Type Definitions & Design
+
+Item Factory
+- Created Initial Item Factory Functions
+- Created way to upsert new items into Item Factory
+- Created way to obtain a 'base item' from the Item Factory
+- Created a way to convert a 'stored item' from the Item Factory into a 'full item'
+- Created a way to convert a 'full item' from the Item Factory into a 'stored item'
+- Created weight calculations when using these functions
 ```
 
 
