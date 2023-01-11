@@ -22,105 +22,105 @@ const InternalFunctions = {
 };
 
 export const ItemFactory = {
-    system: {
-        /**
-         * Wait until the `isDoneLoading` variable is set to `true` before continuing.
-         */
-        async isDoneLoading(): Promise<void> {
-            return new Promise((resolve: Function) => {
-                const interval = alt.setInterval(() => {
-                    if (!isDoneLoading) {
-                        return;
-                    }
-
-                    alt.clearInterval(interval);
-                    resolve();
-                }, 0);
-            });
-        },
-        /**
-         * Updates or inserts a new database item into the database.
-         * If a verison is specified and it does not find a matching version it will add a new item.
-         * If a version is not specified; it will find a non-versioned item to replace.
-         *
-         * @param {BaseItem} baseItem
-         */
-        async upsert(baseItem: BaseItem) {
-            await ItemFactory.system.isDoneLoading();
-
-            const index = databaseItems.findIndex((item) => {
-                const hasMatchingName = item.dbName === baseItem.dbName;
-
-                if (!hasMatchingName) {
-                    return false;
+    /**
+     * Wait until the `isDoneLoading` variable is set to `true` before continuing.
+     */
+    async isDoneLoading(): Promise<void> {
+        return new Promise((resolve: Function) => {
+            const interval = alt.setInterval(() => {
+                if (!isDoneLoading) {
+                    return;
                 }
 
-                const hasMatchingVersion = item.version === baseItem.version;
-                if (!hasMatchingVersion) {
-                    return false;
-                }
+                alt.clearInterval(interval);
+                resolve();
+            }, 0);
+        });
+    },
+    /**
+     * Updates or inserts a new database item into the database.
+     * If a verison is specified and it does not find a matching version it will add a new item.
+     * If a version is not specified; it will find a non-versioned item to replace.
+     *
+     * @param {BaseItem} baseItem
+     */
+    async upsert(baseItem: BaseItem) {
+        await ItemFactory.isDoneLoading();
 
-                return true;
-            });
+        const index = databaseItems.findIndex((item) => {
+            const hasMatchingName = item.dbName === baseItem.dbName;
 
-            // Create New Item Entry
-            if (index <= -1) {
-                const document = await Athena.database.funcs.insertData<BaseItem>(
-                    baseItem,
-                    Athena.database.collections.Items,
-                    true,
-                );
-
-                document._id = document._id.toString();
-                databaseItems.push(document);
-                return;
+            if (!hasMatchingName) {
+                return false;
             }
 
-            // Update Existing Item
-            databaseItems[index] = deepCloneObject<BaseItem>(baseItem);
-            await Athena.database.funcs.updatePartialData(
-                baseItem._id,
-                databaseItems[index],
+            const hasMatchingVersion = item.version === baseItem.version;
+            if (!hasMatchingVersion) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // Create New Item Entry
+        if (index <= -1) {
+            const document = await Athena.database.funcs.insertData<BaseItem>(
+                baseItem,
                 Athena.database.collections.Items,
+                true,
             );
-        },
-        /**
-         * Get a base item based on dbName, and version if supplied.
-         *
-         * @template CustomData
-         * @template CustomBehavior
-         * @param {string} dbName
-         * @param {number} [version=undefined]
-         * @return {(BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>)}
-         */
-        getBaseItem<CustomData = {}, CustomBehavior = {}>(
-            dbName: string,
-            version: number = undefined,
-        ): BaseItem<DefaultItemBehavior & CustomBehavior, CustomData> {
-            const index = databaseItems.findIndex((item) => {
-                const hasMatchingName = item.dbName === dbName;
 
-                if (!hasMatchingName) {
-                    return false;
-                }
+            document._id = document._id.toString();
+            databaseItems.push(document);
+            return;
+        }
 
-                const hasMatchingVersion = item.version === version;
-                if (!hasMatchingVersion) {
-                    return false;
-                }
+        // Update Existing Item
+        databaseItems[index] = deepCloneObject<BaseItem>(baseItem);
+        await Athena.database.funcs.updatePartialData(
+            baseItem._id,
+            databaseItems[index],
+            Athena.database.collections.Items,
+        );
+    },
+    /**
+     * Get a base item based on dbName, and version if supplied.
+     *
+     * @template CustomData
+     * @template CustomBehavior
+     * @param {string} dbName
+     * @param {number} [version=undefined]
+     * @return {(BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>)}
+     */
+    async getBaseItem<CustomData = {}, CustomBehavior = {}>(
+        dbName: string,
+        version: number = undefined,
+    ): Promise<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>> {
+        await ItemFactory.isDoneLoading();
 
-                return true;
-            });
+        const index = databaseItems.findIndex((item) => {
+            const hasMatchingName = item.dbName === dbName;
 
-            if (index <= -1) {
-                alt.logWarning(`Could not find item with dbName: ${dbName} in getBaseItem`);
-                return undefined;
+            if (!hasMatchingName) {
+                return false;
             }
 
-            return Athena.utility.deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(
-                databaseItems[index],
-            );
-        },
+            const hasMatchingVersion = item.version === version;
+            if (!hasMatchingVersion) {
+                return false;
+            }
+
+            return true;
+        });
+
+        if (index <= -1) {
+            alt.logWarning(`Could not find item with dbName: ${dbName} in getBaseItem`);
+            return undefined;
+        }
+
+        return Athena.utility.deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(
+            databaseItems[index],
+        );
     },
     item: {
         convert: {
@@ -133,10 +133,12 @@ export const ItemFactory = {
              * @param {StoredItem<CustomData>} item
              * @return {(Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined)}
              */
-            storedItem<CustomData = {}, CustomBehavior = {}>(
+            async fromStoredItem<CustomData = {}, CustomBehavior = {}>(
                 item: StoredItem<CustomData>,
-            ): Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined {
-                const baseItem = ItemFactory.system.getBaseItem<CustomData, CustomBehavior>(item.dbName, item.version);
+            ): Promise<Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined> {
+                await ItemFactory.isDoneLoading();
+
+                const baseItem = await ItemFactory.getBaseItem<CustomData, CustomBehavior>(item.dbName, item.version);
                 if (typeof baseItem === 'undefined') {
                     return undefined;
                 }
@@ -160,7 +162,11 @@ export const ItemFactory = {
              * @param {Item<DefaultItemBehavior, CustomData>} item
              * @return {StoredItem<CustomData>}
              */
-            toStoredItem<CustomData = {}>(item: Item<DefaultItemBehavior, CustomData>): StoredItem<CustomData> {
+            async toStoredItem<CustomData = {}>(
+                item: Item<DefaultItemBehavior, CustomData>,
+            ): Promise<StoredItem<CustomData>> {
+                await ItemFactory.isDoneLoading();
+
                 const storedItem: StoredItem<CustomData> = {
                     dbName: item.dbName,
                     data: item.data,
