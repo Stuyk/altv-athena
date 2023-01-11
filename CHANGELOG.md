@@ -115,6 +115,9 @@ Refactors
 Vue Dev Menu
 - Added 'Hide' Button
 - Added 'Hide on Refresh' Button
+
+Item Interface
+- Initial Type Definitions & Design
 ```
 
 

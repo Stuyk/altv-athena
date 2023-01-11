@@ -3,7 +3,6 @@ import { shallowRef } from 'vue';
 import Designs from './designs/Designs.vue';
 import Icons from './icons/Icons.vue';
 import InputBox from './input/InputBox.vue';
-import Inventory from './inventory/Inventory.vue';
 import Job from './job/Job.vue';
 import MultiPageExample from './multiPageExample/MultiPageExample.vue';
 import Storage from './storage/Storage.vue';
@@ -21,7 +20,6 @@ export const CORE_IMPORTS = {
     Designs: shallowRef(Designs),
     Icons: shallowRef(Icons),
     InputBox: shallowRef(InputBox),
-    Inventory: shallowRef(Inventory),
     Job: shallowRef(Job),
     Storage: shallowRef(Storage),
     StateTest: shallowRef(StateTest),

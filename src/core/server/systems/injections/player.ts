@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/character';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
-import { Item } from '../../../shared/interfaces/item';
+import { Item } from '../../../shared/interfaces/item.ts.bak';
 import { Injections } from '../injections';
 
 type ClothingComponents = Array<Item<ClothingComponent>>;

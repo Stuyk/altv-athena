@@ -6,7 +6,7 @@ import { Vehicle_Behavior, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../share
 import { VEHICLE_SYNCED_META } from '../../shared/enums/vehicleSyncedMeta';
 import { VEHICLE_CLASS } from '../../shared/enums/vehicleTypeFlags';
 import { VehicleData } from '../../shared/information/vehicles';
-import { Item } from '../../shared/interfaces/item';
+import { Item } from '../../shared/interfaces/item.ts.bak';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
 import IVehicleDamage from '../../shared/interfaces/iVehicleDamage';
 import IVehicleHandling from '../../shared/interfaces/iVehicleHandling';

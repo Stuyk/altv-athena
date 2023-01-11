@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { Item } from '../../shared/interfaces/item';
+import { Item } from '../../shared/interfaces/item.ts.bak';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
 import { Athena } from '../api/athena';
 import VehicleFuncs from '../extensions/vehicleFuncs';

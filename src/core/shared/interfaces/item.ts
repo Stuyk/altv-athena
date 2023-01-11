@@ -1,152 +1,182 @@
-import { EQUIPMENT_TYPE } from '../enums/equipmentType';
-import { ITEM_TYPE } from '../enums/itemTypes';
+import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
 
-export interface ItemData {
-    [key: string]: any;
+export interface DefaultItemBehavior {
+    /**
+     * Can this item be dropped.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    canDrop?: boolean;
+
+    /**
+     * Can the item be stacked
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    canStack?: boolean;
+
+    /**
+     * Can the item be traded
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    canTrade?: boolean;
+
+    /**
+     * Is this item an equipment item.
+     * Such as clothing.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    isEquipment?: boolean;
+
+    /**
+     * Can this item be added to the toolbar.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    isToolbar?: boolean;
+
+    /**
+     * Is this item a weapon?
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    isWeapon?: boolean;
+
+    /**
+     * Destroy this item on drop.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    destroyOnDrop?: boolean;
 }
 
-export interface Item<T = ItemData> {
+interface SharedItem<CustomData = {}> {
+    /**
+     * The matching database name for this item.
+     *
+     * @type {string}
+     * @memberof SharedItem
+     */
+    dbName: string;
+
+    /**
+     * Any custom data assigned to this item.
+     *
+     * @type {CustomData}
+     * @memberof SharedItem
+     */
+    data: CustomData;
+
+    /**
+     * The version of this item it is based upon.
+     *
+     * @type {number}
+     * @memberof SharedItem
+     */
+    version?: number;
+}
+
+export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
+    /**
+     * The amount of this item the player has.
+     *
+     * @type {number}
+     * @memberof StoredItem
+     */
+    quantity: number;
+
+    /**
+     * Where this item should be displayed in a toolbar, equipment bar, or inventory bar.
+     *
+     * @type {number}
+     * @memberof StoredItem
+     */
+    slot: number;
+
+    /**
+     * The weight calculated for this item.
+     *
+     * @type {number}
+     * @memberof StoredItem
+     */
+    totalWeight?: number;
+}
+
+export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> extends SharedItem<CustomData> {
     /**
      * Database entry for item. Do not add / append.
+     *
      * @type {unknown}
-     * @memberof Item
+     * @memberof BaseItem
      */
     _id?: unknown;
 
     /**
      * The name of this item.
+     *
      * @type {string}
-     * @memberof Item
+     * @memberof BaseItem
      */
     name: string;
 
     /**
-     * Only apply this if the item is going in the item registry database.
-     * You will use this fetch an exact item from the database.
-     * @type {string}
-     * @memberof Item
-     */
-    dbName?: string;
-
-    /**
-     * A unique identifier for this item.
-     * @type {string}
-     * @memberof Item
-     */
-    uuid?: string;
-
-    /**
-     * A description for this item.
-     * @type {string}
-     * @memberof Item
-     */
-    description: string;
-
-    /**
-     * Auto-color rarity.
-     * 0 - Grey
-     * 1 - White
-     * 2 - Green
-     * 3 - Blue
-     * 4 - Purple
-     * 5 - Orange
-     * 6 - Red
-     * @type {number}
-     * @memberof Item
-     */
-    rarity?: number;
-
-    /**
      * A client-side icon name.
      * They are specified and created by you.
+     *
      * @type {string}
-     * @memberof Item
+     * @memberof BaseItem
      */
     icon: string;
 
     /**
-     * The quantity of this type of item.
-     * Used for stacks.
-     * @type {number}
-     * @memberof Item
-     */
-    quantity: number;
-
-    /**
      * If this value is defined it will be used as the maximum stack size for the item.
+     *
      * @type {number}
-     * @memberof Item
+     * @memberof BaseItem
      */
     maxStack?: number;
 
     /**
-     * A bitwise enum representing functionality of the item.
-     * ie. 'ITEM_TYPE.CAN_EQUIP | ITEM_TYPE.IS_TOOLBAR'
+     * The weight of this item.
      *
-     * Multiple of these can be used to create unique items.
-     * @type {ITEM_TYPE}
-     * @memberof Item
-     */
-    behavior: ITEM_TYPE;
-
-    /**
-     * Where this item should sit in the player's inventory.
-     * Basically the position of the item on-screen.
      * @type {number}
-     * @memberof Item
+     * @memberof BaseItem
      */
-    slot?: number;
+    weight?: number;
 
     /**
-     * A unique hash for this item.
+     * Behavior associated with this item.
+     *
+     * @type {Behavior}
+     * @memberof BaseItem
+     */
+    behavior?: Behavior;
+
+    /**
+     * The event to call when this item is consumed.
+     *
      * @type {string}
-     * @memberof Item
+     * @memberof BaseItem
      */
-    hash?: string;
+    consumableEventToCall?: string;
 
     /**
-     * Only supply this when it is a clothing component.
-     * Should only supply one and not combine.
+     * The equipment type associated with this item.
+     *
      * @type {EQUIPMENT_TYPE}
-     * @memberof Item
+     * @memberof BaseItem
      */
-    equipment?: EQUIPMENT_TYPE;
-
-    /**
-     * The model representation of the item.
-     * Should be a GTA:V item like: 'prop_cs_box_clothes'
-     * @type {string}
-     * @memberof Item
-     */
-    model?: string;
-
-    /**
-     * Any custom data associated with this item.
-     * Useful for item effects and such.
-     * @type { ItemData | T }
-     * @memberof Item
-     */
-    data: ItemData | T;
-
-    /**
-     * In case you want to track item versions and modify older versions of items per-inventory.
-     * @type {number}
-     * @memberof Item
-     */
-    version?: number;
+    equipmentType?: EQUIPMENT_TYPE;
 }
 
-export interface ItemSpecial extends Item {
-    dataName: string;
-    dataIndex: number;
-    isInventory: boolean;
-    isEquipment: boolean;
-    isToolbar: boolean;
-}
-
-export interface DroppedItem {
-    item: Item;
-    position: { x: number; y: number; z: number };
-    gridSpace: number;
-    dimension: number;
-}
+export type Item<Behavior = DefaultItemBehavior, CustomData = {}> = BaseItem<Behavior, CustomData> &
+    StoredItem<CustomData>;

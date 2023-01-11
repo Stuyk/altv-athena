@@ -13,7 +13,7 @@ import { SWITCHOUT_TYPES } from '@AthenaShared/enums/switchOutTypes';
 import { ANIMATION_FLAGS } from '@AthenaShared/flags/animationFlags';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { Character } from '@AthenaShared/interfaces/character';
-import { Item } from '@AthenaShared/interfaces/item';
+import { Item } from '@AthenaShared/interfaces/item.ts.bak';
 import { CHARACTER_SELECT_CONFIG } from '../../shared/config';
 import { CHARACTER_SELECT_EVENTS, CHARACTER_SELECT_WEBVIEW_EVENTS } from '../../shared/events';
 

@@ -1,5 +1,5 @@
 import * as alt from 'alt-shared';
-import { DroppedItem } from './item';
+import { DroppedItem } from './item.ts.bak';
 
 /**
  * A type of interface for streaming ground items.

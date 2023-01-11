@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Item } from '../../shared/interfaces/item';
+import { Item } from '../../shared/interfaces/item.ts.bak';
 import EFFECT from '../../shared/enums/effects';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ItemEffects } from '../systems/itemEffects';

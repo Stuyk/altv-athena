@@ -43,7 +43,7 @@
         "src/core/plugins/**/webview/**.ts",
         "src/core/plugins/**/webview/**.vue",
         "src/core/plugins/**/components/**.vue"
-    ],
+, "src/core/shared/interfaces/item.ts.bak"    ],
     "exclude": [
         "resources",
         "scripts",

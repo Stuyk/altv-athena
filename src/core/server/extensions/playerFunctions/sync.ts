@@ -3,7 +3,7 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { Item } from '../../../shared/interfaces/item';
+import { Item } from '../../../shared/interfaces/item.ts.bak';
 import { Appearance } from '../../../shared/interfaces/appearance';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../../systems/injections';

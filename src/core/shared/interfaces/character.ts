@@ -2,7 +2,7 @@ import * as alt from 'alt-shared';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
-import { Item } from './item';
+import { Item } from './item.ts.bak';
 import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
 
 export interface Character {

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import Database from '@stuyk/ezmongodb';
-import { Item } from '@AthenaShared/interfaces/item';
+import { Item } from '@AthenaShared/interfaces/item.ts.bak';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { Collections } from '../interface/iDatabaseCollections';
 
