@@ -35,6 +35,8 @@ const InternalFunctions = {
      * @return {ItemQuantityChange}
      */
     modifyQuantity(item: Item | StoredItem, amount: number, isRemoving: boolean = false): ItemQuantityChange {
+        amount = Math.floor(amount);
+
         // Lookup the base item based on the dbName of the item.
         const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
         if (typeof baseItem === 'undefined') {
@@ -46,18 +48,20 @@ const InternalFunctions = {
         let remaining = 0;
         if (isRemoving && item.quantity < amount) {
             remaining = amount - item.quantity;
+            amount = item.quantity; // Set the amount to the item quantity since we are removing it all.
         }
 
         if (!isRemoving && typeof baseItem.maxStack === 'number' && item.quantity + amount > baseItem.maxStack) {
-            remaining = baseItem.maxStack - item.quantity;
+            remaining = item.quantity + amount - baseItem.maxStack;
+            amount = baseItem.maxStack - item.quantity; // Set the amount to the total necessary to fulfill the maximum stack size.
         }
 
         // Add or remove quantity from the item
         const newItem = deepCloneObject<Item | StoredItem>(item);
         if (isRemoving) {
-            newItem.quantity += Math.floor(amount);
+            newItem.quantity -= amount;
         } else {
-            newItem.quantity -= Math.floor(amount);
+            newItem.quantity += amount;
         }
 
         // Weight Calculation
