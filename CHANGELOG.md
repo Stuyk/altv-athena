@@ -126,6 +126,16 @@ Item Factory
 - Created a way to convert a 'stored item' from the Item Factory into a 'full item'
 - Created a way to convert a 'full item' from the Item Factory into a 'stored item'
 - Created weight calculations when using these functions
+
+Item Manager
+- Created Item Manager Functions
+-- quantity
+--- add - Adds a quantity to an item. If it exceeds max stack size; it returns remaining amount.
+--- remove - Removes quantity from an item. If the amount exceeds available. It returns remaining not removed.
+-- data
+--- upsert - appends data to the existing item.data field
+--- set - completely overwrites the item.data field
+--- clear - completely clears the item.data field and sets it to an empty object
 ```
 
 
