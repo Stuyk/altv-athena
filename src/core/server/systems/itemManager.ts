@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { clear } from 'console';
 
 export interface ItemQuantityChange {
     /**
@@ -103,6 +104,53 @@ export const ItemManager = {
          */
         remove(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
             return InternalFunctions.modifyQuantity(item, amount, true);
+        },
+    },
+    data: {
+        /**
+         * Update or insert the data field of an item with new data.
+         * Any data that has a matching field with overwrite the existing field with the new data.
+         * Always returns a new item with the modified contents.
+         *
+         * @template DataType
+         * @param {(Item<DefaultItemBehavior, DataType> | StoredItem<DataType>)} item
+         * @param {DataType} data
+         */
+        upsert<DataType = {}>(item: Item<DefaultItemBehavior, DataType> | StoredItem<DataType>, data: DataType) {
+            const newItem = deepCloneObject<Item<DefaultItemBehavior, DataType> | StoredItem<DataType>>(item);
+            if (typeof newItem.data !== 'object') {
+                newItem.data = {} as DataType;
+            }
+
+            newItem.data = Object.assign(newItem.data, data);
+            return newItem;
+        },
+        /**
+         * Assign data to the data field.
+         * Always returns a new item with the modified contents.
+         *
+         * @template DataType
+         * @param {(Item<DefaultItemBehavior, DataType> | StoredItem<DataType>)} item
+         * @param {DataType} data
+         * @return {*}
+         */
+        set<DataType = {}>(item: Item<DefaultItemBehavior, DataType> | StoredItem<DataType>, data: DataType) {
+            const newItem = deepCloneObject<Item<DefaultItemBehavior, DataType> | StoredItem<DataType>>(item);
+            newItem.data = deepCloneObject(item);
+            return newItem;
+        },
+        /**
+         * Clears the data field of the item.
+         * Sets it to an empty object.
+         * Always returns a new item with the modified contents.
+         *
+         * @param {(Item | StoredItem)} item
+         * @return {*}
+         */
+        clear(item: Item | StoredItem) {
+            const newItem = deepCloneObject<Item | StoredItem>(item);
+            newItem.data = {};
+            return newItem;
         },
     },
 };
