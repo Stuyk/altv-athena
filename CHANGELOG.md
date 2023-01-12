@@ -131,7 +131,7 @@ Item Manager
 - Created Item Manager Functions
 -- quantity
 --- add - Adds a quantity to an item. If it exceeds max stack size; it returns remaining amount.
---- remove - Removes quantity from an item. If the amount exceeds available. It returns remaining not removed.
+--- sub - Removes quantity from an item. If the amount exceeds available. It returns remaining not removed.
 -- data
 --- upsert - appends data to the existing item.data field
 --- set - completely overwrites the item.data field

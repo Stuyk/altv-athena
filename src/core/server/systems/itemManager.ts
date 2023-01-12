@@ -2,7 +2,9 @@ import * as alt from 'alt-server';
 
 import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
-import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
+
+type InventoryType = 'inventory' | 'equipment' | 'toolbar' | 'custom';
 
 export interface ItemQuantityChange {
     /**
@@ -21,6 +23,17 @@ export interface ItemQuantityChange {
      */
     remaining: number;
 }
+
+/**
+ * Do not modify this directly.
+ * These are used as internal values.
+ * Use the config setter / getter in ItemManager system to modify.
+ * @type {*}
+ * */
+let DEFAULT = {
+    INVENTORY_SIZE: 28,
+    TOOLBAR_SIZE: 4,
+};
 
 const InternalFunctions = {
     /**
@@ -57,26 +70,51 @@ const InternalFunctions = {
         }
 
         // Add or remove quantity from the item
-        const newItem = deepCloneObject<Item | StoredItem>(item);
+        let newItem = deepCloneObject<Item | StoredItem>(item);
         if (isRemoving) {
             newItem.quantity -= amount;
         } else {
             newItem.quantity += amount;
         }
 
-        // Weight Calculation
-        if (typeof baseItem.weight === 'number' && newItem.quantity !== 0) {
-            newItem.totalWeight = baseItem.weight * newItem.quantity;
-        }
+        newItem = InternalFunctions.calculateWeight(baseItem, newItem);
 
         return {
             item: newItem,
             remaining,
         };
     },
+    calculateWeight(baseItem: BaseItem, storedItem: StoredItem) {
+        if (typeof baseItem.weight === 'number' && storedItem.quantity !== 0) {
+            const newItem = deepCloneObject<StoredItem>(storedItem);
+            newItem.totalWeight = baseItem.weight * newItem.quantity;
+            return newItem;
+        }
+
+        return storedItem;
+    },
 };
 
 export const ItemManager = {
+    config: {
+        /**
+         * Modify the existing inventory configurations.
+         * Values set may not work with interfaces designed for default values above.
+         *
+         * @param {typeof DEFAULT} config
+         */
+        set(config: typeof DEFAULT) {
+            DEFAULT = Object.assign(DEFAULT, config);
+        },
+        /**
+         * Returns the current inventory configurations.
+         *
+         * @return {typeof DEFAULT}
+         */
+        get(): typeof DEFAULT {
+            return DEFAULT;
+        },
+    },
     quantity: {
         /**
          * Adds a quantity to a specified item.
@@ -105,7 +143,7 @@ export const ItemManager = {
          * @param {number} amount
          * @return {ItemQuantityChange | undefined}
          */
-        remove(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
+        sub(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
             return InternalFunctions.modifyQuantity(item, amount, true);
         },
     },
@@ -154,6 +192,70 @@ export const ItemManager = {
             const newItem = deepCloneObject<Item | StoredItem>(item);
             newItem.data = {};
             return newItem;
+        },
+    },
+    inventory: {
+        /**
+         * Adds or stacks an item based on the quantity passed.
+         * Requires the basic version of a stored item to be added to a user.
+         *
+         * @param {string} type
+         * @param {Array<StoredItem>} data
+         * @param {number} amount
+         * @return {Array<StoredItem>}
+         */
+        add<CustomData = {}>(
+            type: InventoryType,
+            item: StoredItem<CustomData>,
+            data: Array<StoredItem>,
+        ): Array<StoredItem> | undefined {
+            // Lookup the base item based on the dbName of the item.
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
+                return undefined;
+            }
+
+            const copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
+
+            // What this should probably do:
+            // - Take an existing item.
+            // - Lookup if the base item exists.
+            // - Loop through the array that was given and find all matching items with version.
+            // - If the stack size is not max; try to append.
+            // - Remove quantity added to stack size from quantity to add from main item.
+            // - If quantity still remains; begin adding new items.
+            // - New items should try to be appended to the array.
+
+            return [];
+        },
+        sub<CustomData = {}>(
+            type: InventoryType,
+            item: StoredItem<CustomData>,
+            data: Array<StoredItem>,
+        ): Array<StoredItem> | undefined {
+            // Lookup the base item based on the dbName of the item.
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
+                return undefined;
+            }
+
+            const copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
+
+            return [];
+        },
+        /**
+         * Takes existing items and combines like items with same version.
+         * Automatically meets max stack standards.
+         *
+         * @param {Array<StoredItem>} data
+         */
+        conslidate(data: Array<StoredItem>) {
+            //
+        },
+        getFreeSlot(data: Array<StoredItem>) {
+            //
         },
     },
 };

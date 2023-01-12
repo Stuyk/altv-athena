@@ -17,3 +17,20 @@ export function deepCloneObject<T>(data: object): T {
 
     return result;
 }
+
+/**
+ * Makes a complete copy of an array and all objects.
+ *
+ * @export
+ * @template T
+ * @param {(Array<object | T>)} data
+ * @return {Array<T>}
+ */
+export function deepCloneArray<T>(data: Array<object | T>): Array<T> {
+    const newArray = [...data];
+    for (let i = 0; i < newArray.length; i++) {
+        newArray[i] = deepCloneObject<T>(newArray[i] as object);
+    }
+
+    return newArray as Array<T>;
+}
