@@ -71,7 +71,7 @@ export interface DefaultItemBehavior {
  * @interface SharedItem
  * @template CustomData
  */
-interface SharedItem<CustomData = {}> {
+export interface SharedItem<CustomData = {}> {
     /**
      * The matching database name for this item.
      *

@@ -4,18 +4,11 @@ import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
-// Do not change these values.
-// Use ItemManager.setParameters to modify these at runtime.
-let DEFAULTS = {
-    INVENTORY_SIZE: 28,
-    TOOLBAR_SIZE: 4,
-};
-
 export interface ItemQuantityChange {
     /**
      * The modified item after making qunatity modifications to it.
      *
-     * @type {(Item | StoredItem)}
+     * @type { Item | StoredItem }
      * @memberof ItemQuantityChange
      */
     item: Item | StoredItem;
@@ -36,7 +29,7 @@ const InternalFunctions = {
      * If the base item of the item is not found it will return undefined.
      * It will automatically re-calculate weight if the baseItem weight is present.
      *
-     * @param {(Item | StoredItem)} item
+     * @param {ItemType} item
      * @param {number} amount
      * @param {boolean} [isRemoving=false]
      * @return {ItemQuantityChange}
@@ -80,14 +73,6 @@ const InternalFunctions = {
 };
 
 export const ItemManager = {
-    config: {
-        set(config: typeof DEFAULTS) {
-            DEFAULTS = config;
-        },
-        get(): typeof DEFAULTS {
-            return DEFAULTS;
-        },
-    },
     quantity: {
         /**
          * Adds a quantity to a specified item.
@@ -96,9 +81,11 @@ export const ItemManager = {
          * Will return undefined if the base item does not exist or is present in the database.
          * Recalculated weight on item if baseItem has weight present.
          *
+         * If you wish to modify a full item use `add<Item>(...)`
+         *
          * @param {(Item | StoredItem)} item
          * @param {number} amount
-         * @return {ItemQuantityChange | undefined}
+         * @return {ItemType | undefined}
          */
         add(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
             return InternalFunctions.modifyQuantity(item, amount);
@@ -107,6 +94,8 @@ export const ItemManager = {
          * Removes a quantity from a specified item.
          * Will return the remaining amount that was not removed if amount exceeds available in stack size.
          * Will return undefined if the base item does not exist or is present in the database.
+         *
+         * If you wish to modify a full item use `remove<Item>(...)`
          *
          * @param {(Item | StoredItem)} item
          * @param {number} amount
