@@ -2,8 +2,9 @@ import * as alt from 'alt-shared';
 import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
-import { Item } from './item.ts.bak';
 import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
+import { StoredItem } from '@AthenaShared/interfaces/inventory';
+import { ClothingComponent } from './clothing';
 
 export interface Character {
     [key: string]: any;
@@ -153,7 +154,31 @@ export interface Character {
      * @type {Array<string>}
      * @memberof Character
      */
-    permissions: Array<string>
+    permissions: Array<string>;
+
+    /**
+     * Individual item references that the player currently has on-hand.
+     *
+     * @type {Array<StoredItem>}
+     * @memberof Character
+     */
+    inventory: Array<StoredItem>;
+
+    /**
+     * Clothing components that are assigned to the player.
+     *
+     * @type {Array<StoredItem<ClothingComponent>>}
+     * @memberof Character
+     */
+    equipment: Array<StoredItem<ClothingComponent>>;
+
+    /**
+     * Individual item references that the player may access through the 1-4 keys
+     *
+     * @type {Array<StoredItem>}
+     * @memberof Character
+     */
+    toolbar: Array<StoredItem>;
 }
 
 export const CharacterDefaults: Partial<Character> = {

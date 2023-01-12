@@ -2,7 +2,7 @@ import { MessengerSystem } from '@AthenaServer/systems/messenger';
 import { PermissionSystem } from '@AthenaServer/systems/permission';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { Identifier } from '@AthenaServer/systems/identifier';
-import { ItemFactory } from '@AthenaServer/systems/item';
+import { ItemFactory } from '@AthenaServer/systems/itemFactory';
 import { ItemEffects } from '@AthenaServer/systems/itemEffects';
 import { addJobCheck, cloneObjective, getPlayerJob, Job } from '@AthenaServer/systems/job';
 import { PluginSystem } from '@AthenaServer/systems/plugins';
