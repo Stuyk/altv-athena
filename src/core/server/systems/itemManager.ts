@@ -31,67 +31,113 @@ export interface ItemQuantityChange {
  * @type {*}
  * */
 let DEFAULT = {
-    INVENTORY_SIZE: 28,
-    TOOLBAR_SIZE: 4,
+    inventory: {
+        size: 28,
+    },
+    toolbar: {
+        size: 4,
+    },
+    custom: {
+        size: 256,
+    },
 };
 
 const InternalFunctions = {
-    /**
-     * Modifies an item by adding or removing an amount.
-     * The amount that did not get removed, or added is returned.
-     * If the base item of the item is not found it will return undefined.
-     * It will automatically re-calculate weight if the baseItem weight is present.
-     *
-     * @param {ItemType} item
-     * @param {number} amount
-     * @param {boolean} [isRemoving=false]
-     * @return {ItemQuantityChange}
-     */
-    modifyQuantity(item: Item | StoredItem, amount: number, isRemoving: boolean = false): ItemQuantityChange {
-        amount = Math.floor(amount);
+    item: {
+        /**
+         * Calculate the total weight of the item, and return the modified item with total weight.
+         *
+         * @param {BaseItem} baseItem
+         * @param {StoredItem} storedItem
+         * @returns {StoredItem}
+         */
+        calculateWeight(baseItem: BaseItem, storedItem: StoredItem): StoredItem {
+            if (typeof baseItem.weight === 'number' && storedItem.quantity !== 0) {
+                const newItem = deepCloneObject<StoredItem>(storedItem);
+                newItem.totalWeight = baseItem.weight * newItem.quantity;
+                return newItem;
+            }
 
-        // Lookup the base item based on the dbName of the item.
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
-        if (typeof baseItem === 'undefined') {
-            alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
-            return undefined;
-        }
+            return storedItem;
+        },
+        /**
+         * Modifies an item by adding or removing an amount.
+         * The amount that did not get removed, or added is returned.
+         * If the base item of the item is not found it will return undefined.
+         * It will automatically re-calculate weight if the baseItem weight is present.
+         *
+         * @param {ItemType} item
+         * @param {number} amount
+         * @param {boolean} [isRemoving=false]
+         * @return {ItemQuantityChange}
+         */
+        modifyQuantity(item: Item | StoredItem, amount: number, isRemoving: boolean = false): ItemQuantityChange {
+            amount = Math.floor(amount);
 
-        // Get the remaining that could not be added or removed due to either stack size, or not enough of this item to remove.
-        let remaining = 0;
-        if (isRemoving && item.quantity < amount) {
-            remaining = amount - item.quantity;
-            amount = item.quantity; // Set the amount to the item quantity since we are removing it all.
-        }
+            // Lookup the base item based on the dbName of the item.
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
+                return undefined;
+            }
 
-        if (!isRemoving && typeof baseItem.maxStack === 'number' && item.quantity + amount > baseItem.maxStack) {
-            remaining = item.quantity + amount - baseItem.maxStack;
-            amount = baseItem.maxStack - item.quantity; // Set the amount to the total necessary to fulfill the maximum stack size.
-        }
+            // Prevent stacking / modifying quantity if adding to the item.
+            if (!isRemoving && baseItem.behavior && !baseItem.behavior.canStack) {
+                return undefined;
+            }
 
-        // Add or remove quantity from the item
-        let newItem = deepCloneObject<Item | StoredItem>(item);
-        if (isRemoving) {
-            newItem.quantity -= amount;
-        } else {
-            newItem.quantity += amount;
-        }
+            // Get the remaining that could not be added or removed due to either stack size, or not enough of this item to remove.
+            let remaining = 0;
+            if (isRemoving && item.quantity < amount) {
+                remaining = amount - item.quantity;
+                amount = item.quantity; // Set the amount to the item quantity since we are removing it all.
+            }
 
-        newItem = InternalFunctions.calculateWeight(baseItem, newItem);
+            if (!isRemoving && typeof baseItem.maxStack === 'number' && item.quantity + amount > baseItem.maxStack) {
+                remaining = item.quantity + amount - baseItem.maxStack;
+                amount = baseItem.maxStack - item.quantity; // Set the amount to the total necessary to fulfill the maximum stack size.
+            }
 
-        return {
-            item: newItem,
-            remaining,
-        };
+            // Add or remove quantity from the item
+            let newItem = deepCloneObject<Item | StoredItem>(item);
+            if (isRemoving) {
+                newItem.quantity -= amount;
+            } else {
+                newItem.quantity += amount;
+            }
+
+            newItem = InternalFunctions.item.calculateWeight(baseItem, newItem);
+
+            return {
+                item: newItem,
+                remaining,
+            };
+        },
     },
-    calculateWeight(baseItem: BaseItem, storedItem: StoredItem) {
-        if (typeof baseItem.weight === 'number' && storedItem.quantity !== 0) {
-            const newItem = deepCloneObject<StoredItem>(storedItem);
-            newItem.totalWeight = baseItem.weight * newItem.quantity;
-            return newItem;
-        }
+    inventory: {
+        /**
+         * Remove all items with zero quantity.
+         *
+         * @param {(Array<StoredItem | Item>)} items
+         * @return {(Array<StoredItem | Item>)}
+         */
+        removeZeroQuantityItems(items: Array<StoredItem | Item>): Array<StoredItem | Item> {
+            const newItemsArray = deepCloneArray<StoredItem | Item>(items);
 
-        return storedItem;
+            for (let i = newItemsArray.length - 1; i >= 0; i--) {
+                if (typeof newItemsArray[i] === 'undefined') {
+                    continue;
+                }
+
+                if (newItemsArray[i].quantity > 0) {
+                    continue;
+                }
+
+                newItemsArray.splice(i, 1);
+            }
+
+            return newItemsArray;
+        },
     },
 };
 
@@ -120,7 +166,7 @@ export const ItemManager = {
          * Adds a quantity to a specified item.
          * Utilizes the base item to determine maximum stack.
          * Will return the remaining amount that was not added if a max stack size is present.
-         * Will return undefined if the base item does not exist or is present in the database.
+         * Will return undefined if the base item does not exist, or if the item simply cannot have quantity changed.
          * Recalculated weight on item if baseItem has weight present.
          *
          * If you wish to modify a full item use `add<Item>(...)`
@@ -130,12 +176,12 @@ export const ItemManager = {
          * @return {ItemType | undefined}
          */
         add(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
-            return InternalFunctions.modifyQuantity(item, amount);
+            return InternalFunctions.item.modifyQuantity(item, amount);
         },
         /**
          * Removes a quantity from a specified item.
          * Will return the remaining amount that was not removed if amount exceeds available in stack size.
-         * Will return undefined if the base item does not exist or is present in the database.
+         * Will return undefined if the base item does not exist, or if the item simply cannot have quantity changed.
          *
          * If you wish to modify a full item use `remove<Item>(...)`
          *
@@ -144,7 +190,7 @@ export const ItemManager = {
          * @return {ItemQuantityChange | undefined}
          */
         sub(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
-            return InternalFunctions.modifyQuantity(item, amount, true);
+            return InternalFunctions.item.modifyQuantity(item, amount, true);
         },
     },
     data: {
@@ -198,6 +244,7 @@ export const ItemManager = {
         /**
          * Adds or stacks an item based on the quantity passed.
          * Requires the basic version of a stored item to be added to a user.
+         * Returns undefined if the data set could not be modified to include the quantity of items necessary.
          *
          * @param {string} type
          * @param {Array<StoredItem>} data
@@ -246,15 +293,37 @@ export const ItemManager = {
             return [];
         },
         /**
+         * Returns a numerical representation for a free slot.
+         * If there are no more free slots for a given type it will return undefined.
+         *
+         * @param {InventoryType} type
+         * @param {Array<StoredItem>} data
+         * @return {(number | undefined)}
+         */
+        getFreeSlot(type: InventoryType, data: Array<StoredItem>): number | undefined {
+            if (typeof DEFAULT[String(type)] === 'undefined') {
+                return undefined;
+            }
+
+            const maxSlot = DEFAULT[String(type)].size;
+            for (let i = 0; i < maxSlot; i++) {
+                const index = data.findIndex((x) => x.slot === i);
+                if (index >= 0) {
+                    continue;
+                }
+
+                return i;
+            }
+
+            return undefined;
+        },
+        /**
          * Takes existing items and combines like items with same version.
          * Automatically meets max stack standards.
          *
          * @param {Array<StoredItem>} data
          */
         conslidate(data: Array<StoredItem>) {
-            //
-        },
-        getFreeSlot(data: Array<StoredItem>) {
             //
         },
     },
