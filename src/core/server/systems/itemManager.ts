@@ -3,7 +3,6 @@ import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { clear } from 'console';
 
 export interface ItemQuantityChange {
     /**
