@@ -256,14 +256,11 @@ export const ItemManager = {
             data: Array<StoredItem>,
             size: InventoryType | number = DEFAULT.custom.size,
         ): Array<StoredItem> | undefined {
-            // What this should probably do:
-            // - Take an existing item.
-            // - Lookup if the base item exists.
-            // - Loop through the array that was given and find all matching items with version.
-            // - If the stack size is not max; try to append.
-            // - Remove quantity added to stack size from quantity to add from main item.
-            // - If quantity still remains; begin adding new items.
-            // - New items should try to be appended to the array.
+            if (item.quantity <= -1) {
+                alt.logWarning(`ItemManager: Cannot add negative quantity to an item.`);
+                return undefined;
+            }
+
             if (item.quantity === 0) {
                 return data;
             }
@@ -342,11 +339,16 @@ export const ItemManager = {
             item.quantity -= amountMissing;
             return ItemManager.inventory.add(item, copyOfData, size);
         },
-        sub<CustomData = {}>(
-            item: StoredItem<CustomData>,
-            data: Array<StoredItem>,
-            size: InventoryType | number = DEFAULT.custom.size,
-        ): Array<StoredItem> | undefined {
+        sub<CustomData = {}>(item: StoredItem<CustomData>, data: Array<StoredItem>): Array<StoredItem> | undefined {
+            if (item.quantity <= -1) {
+                alt.logWarning(`ItemManager: Cannot subtract negative quantity from an item.`);
+                return undefined;
+            }
+
+            if (item.quantity === 0) {
+                return data;
+            }
+
             // Lookup the base item based on the dbName of the item.
             const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
             if (typeof baseItem === 'undefined') {
@@ -354,9 +356,35 @@ export const ItemManager = {
                 return undefined;
             }
 
-            const copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
+            const copyOfData = deepCloneArray<StoredItem>(data);
+            const existingItemIndex = copyOfData.findIndex(
+                (x) => x.dbName === item.dbName && x.version === item.version,
+            );
 
-            return [];
+            // Pretty much means there are not more items to remove from.
+            // Return undefined.
+            if (existingItemIndex <= -1) {
+                return undefined;
+            }
+
+            // If the item we are removing from does not have enough quantity
+            // Get the amount we are going to remove.
+            // Remove that item from the data set.
+            // Repeat subtraction of item.
+            if (copyOfData[existingItemIndex].quantity < item.quantity) {
+                item.quantity -= copyOfData[existingItemIndex].quantity;
+                copyOfData.splice(existingItemIndex, 1);
+                return ItemManager.inventory.sub(item, copyOfData);
+            }
+
+            // If the quantity of the found item is great; subtract necessary amount.
+            copyOfData[existingItemIndex].quantity -= item.quantity;
+            copyOfData[existingItemIndex] = InternalFunctions.item.calculateWeight(
+                baseItem,
+                copyOfData[existingItemIndex],
+            );
+
+            return copyOfData;
         },
         /**
          * Returns a numerical representation for a free slot.

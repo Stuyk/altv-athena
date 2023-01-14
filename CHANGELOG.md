@@ -136,6 +136,10 @@ Item Manager
 --- upsert - appends data to the existing item.data field
 --- set - completely overwrites the item.data field
 --- clear - completely clears the item.data field and sets it to an empty object
+-- inventory
+--- add - Adds an item amount to an inventory given an array size, creates new items automatically.  Returns undefined if invalid.
+--- sub - Subs an item amount from an inventory. Returns undefined if invalid.
+--- getFreeSlot - Determines a free slot given an array size
 ```
 
 
