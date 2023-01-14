@@ -269,7 +269,7 @@ export const ItemManager = {
             }
 
             // Ensure there is enough room to add items.
-            if (data.length <= size) {
+            if (data.length >= size) {
                 return undefined;
             }
 
@@ -282,7 +282,7 @@ export const ItemManager = {
 
             const copyOfData = deepCloneArray<StoredItem>(data);
             let availableStackIndex = -1;
-            if (baseItem.behavior.canStack && baseItem.maxStack > 1) {
+            if (baseItem.behavior.canStack && typeof baseItem.maxStack === 'number' && baseItem.maxStack > 1) {
                 availableStackIndex = copyOfData.findIndex(
                     (x) => x.dbName === item.dbName && x.version === item.version && x.quantity !== baseItem.maxStack,
                 );
