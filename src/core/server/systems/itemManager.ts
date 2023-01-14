@@ -4,7 +4,7 @@ import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
-type InventoryType = 'inventory' | 'equipment' | 'toolbar' | 'custom';
+type InventoryType = 'inventory' | 'toolbar' | 'custom';
 
 export interface ItemQuantityChange {
     /**
@@ -246,25 +246,16 @@ export const ItemManager = {
          * Requires the basic version of a stored item to be added to a user.
          * Returns undefined if the data set could not be modified to include the quantity of items necessary.
          *
-         * @param {string} type
          * @param {Array<StoredItem>} data
          * @param {number} amount
-         * @return {Array<StoredItem>}
+         * @param {InventoryType | number} size The maximum slot size for this item group.
+         * @return {Array<StoredItem>} Returns undefined or the new array of added items.
          */
         add<CustomData = {}>(
-            type: InventoryType,
             item: StoredItem<CustomData>,
             data: Array<StoredItem>,
+            size: InventoryType | number = DEFAULT.custom.size,
         ): Array<StoredItem> | undefined {
-            // Lookup the base item based on the dbName of the item.
-            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
-            if (typeof baseItem === 'undefined') {
-                alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
-                return undefined;
-            }
-
-            const copyOfData = deepCloneArray<StoredItem<CustomData>>(data);
-
             // What this should probably do:
             // - Take an existing item.
             // - Lookup if the base item exists.
@@ -273,13 +264,88 @@ export const ItemManager = {
             // - Remove quantity added to stack size from quantity to add from main item.
             // - If quantity still remains; begin adding new items.
             // - New items should try to be appended to the array.
+            if (item.quantity === 0) {
+                return data;
+            }
 
-            return [];
+            // Ensure there is enough room to add items.
+            if (data.length <= size) {
+                return undefined;
+            }
+
+            // Lookup the base item based on the dbName of the item.
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(`ItemManager: Tried to lookup ${item.dbName}, but base item does not exist.`);
+                return undefined;
+            }
+
+            const copyOfData = deepCloneArray<StoredItem>(data);
+            let availableStackIndex = -1;
+            if (baseItem.behavior.canStack && baseItem.maxStack > 1) {
+                availableStackIndex = copyOfData.findIndex(
+                    (x) => x.dbName === item.dbName && x.version === item.version && x.quantity !== baseItem.maxStack,
+                );
+            }
+
+            // Handles the following:
+            // - Adds unstackable items
+            // - Adds an item with a max stack of 1
+            // - Adds stackable items, and automatically tries to fill item quantity.
+            if (!baseItem.behavior.canStack || baseItem.maxStack === 1 || availableStackIndex === -1) {
+                // Determine open slot for item.
+                // If undefined; do not try to add anything else; return undefined as a failure.
+                const openSlot = ItemManager.inventory.getFreeSlot(size, copyOfData);
+                if (typeof openSlot === 'undefined') {
+                    return undefined;
+                }
+
+                let itemClone = deepCloneObject<StoredItem>(item);
+                itemClone.slot = openSlot;
+
+                // Use quantity to subtract from max stack size or use amount left
+                if (baseItem.behavior.canStack) {
+                    itemClone.quantity = item.quantity < baseItem.maxStack ? item.quantity : baseItem.maxStack;
+                    item.quantity -= itemClone.quantity;
+                } else {
+                    itemClone.quantity = 1;
+                    item.quantity -= 1;
+                }
+
+                // Re-calculate item weight
+                itemClone = InternalFunctions.item.calculateWeight(baseItem, itemClone);
+                copyOfData.push(itemClone);
+
+                if (item.quantity === 0) {
+                    return copyOfData;
+                }
+
+                return ItemManager.inventory.add(item, copyOfData, size);
+            }
+
+            // If the item.quantity is less than the stack size and less than or equal to amount missing. Simply add to it.
+            const amountMissing = baseItem.maxStack - copyOfData[availableStackIndex].quantity;
+            if (item.quantity <= amountMissing) {
+                copyOfData[availableStackIndex].quantity += item.quantity;
+                return copyOfData;
+            }
+
+            // Otherwise add the amount missing to this stack.
+            // Subtract amount missing from original item quantity.
+            // Call the same function again.
+            copyOfData[availableStackIndex].quantity += amountMissing;
+            copyOfData[availableStackIndex] = InternalFunctions.item.calculateWeight(
+                baseItem,
+                copyOfData[availableStackIndex],
+            );
+
+            item.quantity -= amountMissing;
+            return ItemManager.inventory.add(item, copyOfData, size);
         },
         sub<CustomData = {}>(
-            type: InventoryType,
             item: StoredItem<CustomData>,
             data: Array<StoredItem>,
+            size: InventoryType | number = DEFAULT.custom.size,
         ): Array<StoredItem> | undefined {
             // Lookup the base item based on the dbName of the item.
             const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
@@ -300,12 +366,15 @@ export const ItemManager = {
          * @param {Array<StoredItem>} data
          * @return {(number | undefined)}
          */
-        getFreeSlot(type: InventoryType, data: Array<StoredItem>): number | undefined {
-            if (typeof DEFAULT[String(type)] === 'undefined') {
-                return undefined;
+        getFreeSlot(slotSize: InventoryType | number, data: Array<StoredItem>): number | undefined {
+            if (typeof slotSize === 'string') {
+                if (!DEFAULT[String(slotSize)]) {
+                    return undefined;
+                }
             }
 
-            const maxSlot = DEFAULT[String(type)].size;
+            const maxSlot = typeof slotSize === 'number' ? Number(slotSize) : DEFAULT[String(slotSize)].size;
+
             for (let i = 0; i < maxSlot; i++) {
                 const index = data.findIndex((x) => x.slot === i);
                 if (index >= 0) {
