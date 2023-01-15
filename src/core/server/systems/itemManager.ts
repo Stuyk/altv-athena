@@ -265,11 +265,6 @@ export const ItemManager = {
                 return data;
             }
 
-            // Ensure there is enough room to add items.
-            if (data.length >= size) {
-                return undefined;
-            }
-
             // Lookup the base item based on the dbName of the item.
             const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName, item.version);
             if (typeof baseItem === 'undefined') {
@@ -290,9 +285,14 @@ export const ItemManager = {
             // - Adds an item with a max stack of 1
             // - Adds stackable items, and automatically tries to fill item quantity.
             if (!baseItem.behavior.canStack || baseItem.maxStack === 1 || availableStackIndex === -1) {
+                // Ensure there is enough room to add items.
+                if (data.length >= size) {
+                    return undefined;
+                }
+
                 // Determine open slot for item.
                 // If undefined; do not try to add anything else; return undefined as a failure.
-                const openSlot = ItemManager.inventory.getFreeSlot(size, copyOfData);
+                const openSlot = ItemManager.slot.findOpen(size, copyOfData);
                 if (typeof openSlot === 'undefined') {
                     return undefined;
                 }
@@ -339,6 +339,14 @@ export const ItemManager = {
             item.quantity -= amountMissing;
             return ItemManager.inventory.add(item, copyOfData, size);
         },
+        /**
+         * Subtract an item quantity from a data set.
+         *
+         * @template CustomData
+         * @param {StoredItem<CustomData>} item
+         * @param {Array<StoredItem>} data
+         * @return {(Array<StoredItem> | undefined)}
+         */
         sub<CustomData = {}>(item: StoredItem<CustomData>, data: Array<StoredItem>): Array<StoredItem> | undefined {
             if (item.quantity <= -1) {
                 alt.logWarning(`ItemManager: Cannot subtract negative quantity from an item.`);
@@ -386,6 +394,27 @@ export const ItemManager = {
 
             return copyOfData;
         },
+
+        /**
+         * Returns the total weight of a given data set.
+         *
+         * @param {Array<StoredItem>} data
+         * @return {number}
+         */
+        getWeight(data: Array<StoredItem>): number {
+            let totalWeight = 0;
+            for (let item of data) {
+                if (!item.totalWeight) {
+                    continue;
+                }
+
+                totalWeight += item.totalWeight;
+            }
+
+            return totalWeight;
+        },
+    },
+    slot: {
         /**
          * Returns a numerical representation for a free slot.
          * If there are no more free slots for a given type it will return undefined.
@@ -394,7 +423,7 @@ export const ItemManager = {
          * @param {Array<StoredItem>} data
          * @return {(number | undefined)}
          */
-        getFreeSlot(slotSize: InventoryType | number, data: Array<StoredItem>): number | undefined {
+        findOpen(slotSize: InventoryType | number, data: Array<StoredItem>): number | undefined {
             if (typeof slotSize === 'string') {
                 if (!DEFAULT[String(slotSize)]) {
                     return undefined;
@@ -415,13 +444,98 @@ export const ItemManager = {
             return undefined;
         },
         /**
-         * Takes existing items and combines like items with same version.
-         * Automatically meets max stack standards.
+         * Get an item at a specific slot.
          *
+         * @param {number} slot
          * @param {Array<StoredItem>} data
+         * @return {(StoredItem | undefined)}
          */
-        conslidate(data: Array<StoredItem>) {
-            //
+        getAt(slot: number, data: Array<StoredItem>): StoredItem | undefined {
+            const index = data.findIndex((x) => x.slot === slot);
+            if (index <= -1) {
+                return undefined;
+            }
+
+            return data[index];
+        },
+        /**
+         * Remove a specific item from a specific slot.
+         *
+         * @param {number} slot
+         * @param {Array<StoredItem>} data
+         * @return {(Array<StoredItem> | undefined)} Returns undefined if the item was not found.
+         */
+        removeAt(slot: number, data: Array<StoredItem>): Array<StoredItem> | undefined {
+            const copyOfData = deepCloneArray<StoredItem>(data);
+            const index = copyOfData.findIndex((x) => x.slot === slot);
+            if (index <= -1) {
+                return undefined;
+            }
+
+            copyOfData.slice(index, 1);
+            return copyOfData;
+        },
+        /**
+         * Split an item into a new item given the slot number, and a split size.
+         *
+         * @param {number} slot
+         * @param {Array<StoredItem>} data
+         * @param {number} splitCount
+         * @param {(InventoryType | number)} [size=DEFAULT.custom.size]
+         */
+        splitAt(
+            slot: number,
+            data: Array<StoredItem>,
+            splitCount: number,
+            dataSize: InventoryType | number = DEFAULT.custom.size,
+        ): Array<StoredItem> | undefined {
+            if (splitCount <= -1) {
+                return undefined;
+            }
+
+            let copyOfData = deepCloneArray<StoredItem>(data);
+            if (data.length >= dataSize) {
+                return undefined;
+            }
+
+            const index = copyOfData.findIndex((x) => x.slot === slot);
+            if (index <= -1) {
+                return undefined;
+            }
+
+            const openSlot = ItemManager.slot.findOpen(dataSize, copyOfData);
+            if (typeof openSlot === 'undefined') {
+                return undefined;
+            }
+
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(
+                copyOfData[index].dbName,
+                copyOfData[index].version,
+            );
+
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(
+                    `ItemManager: Tried to lookup ${copyOfData[index].dbName}, but base item does not exist.`,
+                );
+                return undefined;
+            }
+
+            if (splitCount >= copyOfData[index].quantity) {
+                return undefined;
+            }
+
+            // Create copy of item, set quantity to split count.
+            let itemClone = deepCloneObject<StoredItem>(copyOfData[index]);
+            itemClone.quantity = splitCount;
+            itemClone.slot = openSlot;
+            itemClone = InternalFunctions.item.calculateWeight(baseItem, itemClone);
+
+            // Remove quantity from existing item based on split count.
+            copyOfData[index].quantity -= splitCount;
+            copyOfData[index] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[index]);
+            copyOfData.push(itemClone);
+
+            return copyOfData;
         },
     },
 };

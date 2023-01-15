@@ -1,16 +1,16 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
 
 let databaseItems: Array<BaseItem<DefaultItemBehavior, {}>> = [];
 let isDoneLoading = false;
 
 const InternalFunctions = {
     async init() {
-        await Athena.database.funcs.createCollection(Athena.database.collections.Items);
-        databaseItems = await Athena.database.funcs.fetchAllData<BaseItem>(Athena.database.collections.Items);
+        await databaseConst.funcs.createCollection(databaseConst.collections.Items);
+        databaseItems = await databaseConst.funcs.fetchAllData<BaseItem>(databaseConst.collections.Items);
 
         // Convert all MongoDB _id entries to strings.
         for (let i = 0; i < databaseItems.length; i++) {
@@ -73,9 +73,7 @@ export const ItemFactory = {
                 return undefined;
             }
 
-            return Athena.utility.deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(
-                databaseItems[index],
-            );
+            return deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(databaseItems[index]);
         },
         /**
          * Updates or inserts a new database item into the database.
@@ -104,9 +102,9 @@ export const ItemFactory = {
 
             // Create New Item Entry
             if (index <= -1) {
-                const document = await Athena.database.funcs.insertData<BaseItem>(
+                const document = await databaseConst.funcs.insertData<BaseItem>(
                     baseItem,
-                    Athena.database.collections.Items,
+                    databaseConst.collections.Items,
                     true,
                 );
 
@@ -117,10 +115,10 @@ export const ItemFactory = {
 
             // Update Existing Item
             databaseItems[index] = deepCloneObject<BaseItem>(baseItem);
-            await Athena.database.funcs.updatePartialData(
+            await databaseConst.funcs.updatePartialData(
                 baseItem._id,
                 databaseItems[index],
-                Athena.database.collections.Items,
+                databaseConst.collections.Items,
             );
         },
         item: {
@@ -227,14 +225,12 @@ export const ItemFactory = {
                 return undefined;
             }
 
-            return Athena.utility.deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(
-                databaseItems[index],
-            );
+            return deepCloneObject<BaseItem<DefaultItemBehavior & CustomBehavior, CustomData>>(databaseItems[index]);
         },
         item: {
             convert: {
                 /**
-                 * Converts an item from a player inventory, equipment, or toolbar to a full item set.
+                 * Converts an item from a player inventory, or toolbar to a full item set.
                  * Also performs weight calculations.
                  * Use when usage is not at server-start.
                  *
