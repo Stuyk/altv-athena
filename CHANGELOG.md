@@ -140,6 +140,9 @@ Item Manager
 --- add - Adds an item amount to an inventory given an array size, creates new items automatically.  Returns undefined if invalid.
 --- sub - Subs an item amount from an inventory. Returns undefined if invalid.
 --- getFreeSlot - Determines a free slot given an array size
+
+Item Effects
+- Reworked to support new API
 ```
 
 

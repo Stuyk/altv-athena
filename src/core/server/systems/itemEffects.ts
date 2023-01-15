@@ -1,8 +1,10 @@
 import * as alt from 'alt-server';
-import { INVENTORY_TYPE } from '@AthenaShared/enums/inventoryTypes';
-import { Item } from '@AthenaShared/interfaces/item.ts.bak';
+import { Athena } from '@AthenaServer/api/athena';
+import { ItemManager } from './itemManager';
+import { ItemFactory } from './itemFactory';
 
-type EffectCallback = (player: alt.Player, item: Item, slot: number, inventoryType: string) => void;
+type InventoryType = 'inventory' | 'toolbar';
+type EffectCallback = (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => void;
 
 const effects: Map<string, EffectCallback> = new Map();
 
@@ -41,20 +43,33 @@ export class ItemEffects {
      * @param {INVENTORY_TYPE} type - INVENTORY_TYPE
      * @returns The callback function.
      */
-    static invoke(player: alt.Player, item: Item, type: INVENTORY_TYPE) {
-        if (!item.data) {
-            return;
+    static invoke(player: alt.Player, slot: number, type: InventoryType): boolean {
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return false;
         }
 
-        if (!item.data.event) {
-            return;
+        const actualType = String(type);
+        if (typeof data[actualType] === 'undefined' || !Array.isArray(data[actualType])) {
+            return false;
         }
 
-        const callback = effects.get(item.data.event);
+        const item = ItemManager.slot.getAt(slot, data[actualType]);
+        if (typeof item === 'undefined') {
+            return false;
+        }
+
+        const baseItem = ItemFactory.sync.getBaseItem(item.dbName, item.version);
+        if (typeof baseItem === 'undefined') {
+            return false;
+        }
+
+        const callback = effects.get(baseItem.consumableEventToCall);
         if (!callback || typeof callback !== 'function') {
-            return;
+            return false;
         }
 
-        callback(player, item, item.slot, type);
+        callback(player, item.slot, type);
+        return true;
     }
 }
