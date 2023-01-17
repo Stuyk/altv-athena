@@ -138,7 +138,7 @@ export default defineComponent({
         },
         endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
-                console.log('ref');
+                console.log(`Should Perform SWAP or Stack of items.`);
                 console.log(startType, startIndex);
                 console.log(endType, endIndex);
                 return;

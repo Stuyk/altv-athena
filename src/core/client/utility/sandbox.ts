@@ -1,9 +1,16 @@
-import * as alt from 'alt-client';
-import { AthenaClient } from '@AthenaClient/api/athena';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+// import * as alt from 'alt-client';
+// import { AthenaClient } from '@AthenaClient/api/athena';
+// import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+// import { IPed } from '@AthenaShared/interfaces/iPed';
 
-// alt.onServer(SYSTEM_EVENTS.TICKS_START, async () => {
-//     await alt.Utils.wait(1000);
+// function doSomething() {
 
-//     const response = await AthenaClient.rmlui.questionBox.create({ placeholder: 'hi' });
-// });
+// }
+
+// AthenaClient.wheelMenus.ped.add((scriptID: number, ped: IPed, options) => {
+//     if (ped.uid === 'whatever') {
+//         options.push({ name: 'new option', callback: doSomething })
+//     }
+
+//     return options;
+// })

@@ -1,17 +1,30 @@
 import * as alt from 'alt-client';
-import { AthenaClient } from '../../../client/api/athena';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { Item, StoredItem } from '../../../shared/interfaces/inventory';
+import { AthenaClient } from '@AthenaClient/api/athena';
+import { Item, StoredItem } from '@AthenaShared/interfaces/inventory';
 import { INVENTORY_EVENTS } from '../shared/events';
 
-const validKeys = ['inventory', 'equipment', 'toolbar'];
+const validKeys = ['inventory', 'toolbar'];
 
 let inventory: Array<Item<StoredItem>>;
-let equipment: Array<Item<StoredItem>>;
 let toolbar: Array<Item<StoredItem>>;
 let isOpen = false;
 
 const KEY = 89; // 'Y'
+
+const page = new AthenaClient.webview.page({
+    name: 'Inventory',
+    callbacks: {
+        onReady: () => {
+            AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
+        },
+        onClose: () => {},
+    },
+    keybind: {
+        key: 89,
+        isLongPress: false,
+        useSameKeyToClose: true,
+    },
+});
 
 class InternalFunctions {
     static init() {
@@ -37,13 +50,8 @@ class InventoryWebView {
      * @return {*}
      * @memberof InventoryWebView
      */
-    static open(
-        _inventory: Array<Item<StoredItem>>,
-        _equipment: Array<Item<StoredItem>>,
-        _toolbar: Array<Item<StoredItem>>,
-    ) {
+    static open(_inventory: Array<Item<StoredItem>>, _toolbar: Array<Item<StoredItem>>) {
         inventory = _inventory;
-        equipment = _equipment;
         toolbar = _toolbar;
 
         if (AthenaClient.webview.isAnyMenuOpen(true)) {
@@ -51,7 +59,6 @@ class InventoryWebView {
         }
 
         console.log(JSON.stringify(inventory));
-        console.log(JSON.stringify(equipment));
         console.log(JSON.stringify(toolbar));
 
         AthenaClient.webview.ready(INVENTORY_EVENTS.PAGE, InventoryWebView.ready);
@@ -69,8 +76,7 @@ class InventoryWebView {
      * @memberof InventoryWebView
      */
     static ready() {
-        AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_EQUIPMENT, equipment);
-        AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory);
+        AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
     }
 
     /**
@@ -81,7 +87,7 @@ class InventoryWebView {
      */
     static close() {
         inventory = undefined;
-        equipment = undefined;
+        toolbar = undefined;
         AthenaClient.webview.unfocus();
         AthenaClient.webview.showCursor(false);
         alt.toggleGameControls(true);
@@ -92,6 +98,9 @@ class InventoryWebView {
     }
 
     static processMetaChange(key: string, value: any, oldValue: any): void {
+        console.log(key);
+        console.log(value);
+
         if (!isOpen) {
             return;
         }
@@ -111,11 +120,6 @@ class InventoryWebView {
             toolbar = value;
             AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
             return;
-        }
-
-        if (key === 'equipment') {
-            equipment = value;
-            AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_EQUIPMENT, equipment);
         }
     }
 }

@@ -8,11 +8,13 @@ import { addJobCheck, cloneObjective, getPlayerJob, Job } from '@AthenaServer/sy
 import { PluginSystem } from '@AthenaServer/systems/plugins';
 import { SoundSystem } from '@AthenaServer/systems/sound';
 import { defaultSystemsConst } from './constDefaultSystems';
+import { ItemManager } from '@AthenaServer/systems/itemManager';
 
 export const systemConst = {
     agenda: AgendaSystem,
     default: defaultSystemsConst,
     itemFactory: ItemFactory,
+    itemManager: ItemManager,
     effects: ItemEffects,
     identifier: Identifier,
     job: {

@@ -3,17 +3,9 @@ import * as alt from 'alt-server';
 
 import { ATHENA_EVENTS_VEHICLE } from '../../shared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import {
-    Vehicle_Behavior,
-    VEHICLE_DOOR_STATE,
-    VEHICLE_EVENTS,
-    VEHICLE_LOCK_STATE,
-    VEHICLE_STATE,
-} from '../../shared/enums/vehicle';
+import { VEHICLE_DOOR_STATE, VEHICLE_EVENTS, VEHICLE_LOCK_STATE, VEHICLE_STATE } from '../../shared/enums/vehicle';
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
-import { VehicleData } from '../../shared/information/vehicles';
 import { IVehicle } from '../../shared/interfaces/iVehicle';
-import { isFlagEnabled } from '../../shared/utility/flags';
 import { distance } from '../../shared/utility/vector';
 import { DEFAULT_CONFIG } from '../athena/main';
 import VehicleFuncs from '../extensions/vehicleFuncs';

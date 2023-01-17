@@ -1,6 +1,7 @@
 import './currency';
 import './door';
 import './interior';
+import './item';
 import './noclip';
 import './player';
 import './teleport';

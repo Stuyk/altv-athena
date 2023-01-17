@@ -1,4 +1,53 @@
-// import * as alt from 'alt-server';
+import { Athena } from '@AthenaServer/api/athena';
+import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+import { PLAYER_LOCAL_META } from '@AthenaShared/enums/playerSynced';
+import { StoredItem } from '@AthenaShared/interfaces/item';
+import * as alt from 'alt-server';
+
+/**
+ * This synchronizes the inventory when the player selects their character.
+ * Can be fetched on client-side with getLocalMeta
+ *
+ * @param {alt.Player} player
+ */
+function sync(player: alt.Player) {
+    if (!player || !player.valid) {
+        return;
+    }
+
+    const data = Athena.document.character.get(player);
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    const inventory: Array<StoredItem> = typeof data.inventory !== 'undefined' ? data.inventory : [];
+    const toolbar: Array<StoredItem> = typeof data.toolbar !== 'undefined' ? data.toolbar : [];
+
+    const fullInventory = Athena.systems.itemManager.inventory.convertFromStored(inventory);
+    const fullToolbar = Athena.systems.itemManager.inventory.convertFromStored(toolbar);
+
+    player.setLocalMeta(PLAYER_LOCAL_META.INVENTORY, fullInventory);
+    player.setLocalMeta(PLAYER_LOCAL_META.TOOLBAR, fullToolbar);
+}
+
+function syncInventory(player: alt.Player, newValue: Array<StoredItem>) {
+    const fullInventory = Athena.systems.itemManager.inventory.convertFromStored(newValue);
+    player.setLocalMeta(PLAYER_LOCAL_META.INVENTORY, fullInventory);
+}
+
+function syncToolbar(player: alt.Player, newValue: Array<StoredItem>) {
+    const fullToolbar = Athena.systems.itemManager.inventory.convertFromStored(newValue);
+    player.setLocalMeta(PLAYER_LOCAL_META.TOOLBAR, fullToolbar);
+}
+
+export const InventoryView = {
+    init() {
+        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, sync);
+        Athena.document.character.onChange('inventory', syncInventory);
+        Athena.document.character.onChange('toolbar', syncToolbar);
+    },
+};
+
 // import { INVENTORY_EVENTS } from '../../shared/events';
 
 // const sessions: Array<number> = [];

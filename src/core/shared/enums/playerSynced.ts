@@ -18,3 +18,8 @@ export enum PLAYER_SYNCED_META {
      */
     IDENTIFICATION_ID = 'player-identification-id',
 }
+
+export enum PLAYER_LOCAL_META {
+    INVENTORY = 'player-inventory',
+    TOOLBAR = 'player-toolbar',
+}

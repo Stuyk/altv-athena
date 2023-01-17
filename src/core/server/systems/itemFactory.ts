@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
+import { sha256 } from '@AthenaServer/utility/encryption';
 
 let databaseItems: Array<BaseItem<DefaultItemBehavior, {}>> = [];
 let isDoneLoading = false;
@@ -113,6 +114,12 @@ export const ItemFactory = {
                 return;
             }
 
+            const itemClone = deepCloneObject<BaseItem>(baseItem);
+            delete itemClone._id;
+            if (sha256(JSON.stringify(itemClone)) === sha256(JSON.stringify(baseItem))) {
+                return;
+            }
+
             // Update Existing Item
             databaseItems[index] = deepCloneObject<BaseItem>(baseItem);
             await databaseConst.funcs.updatePartialData(
@@ -186,6 +193,29 @@ export const ItemFactory = {
 
                     return storedItem;
                 },
+                async fromBaseToStored<CustomData = {}>(
+                    baseItem: BaseItem<DefaultItemBehavior, CustomData>,
+                    quantity: number,
+                ): Promise<StoredItem<CustomData>> {
+                    await ItemFactory.async.isDoneLoading();
+
+                    const storedItem: StoredItem<CustomData> = {
+                        dbName: baseItem.dbName,
+                        data: baseItem.data,
+                        quantity: quantity,
+                        slot: -1,
+                    };
+
+                    if (typeof baseItem.weight === 'number') {
+                        storedItem.totalWeight = quantity * baseItem.weight;
+                    }
+
+                    if (typeof baseItem.version !== 'undefined') {
+                        storedItem.version = baseItem.version;
+                    }
+
+                    return storedItem;
+                },
             },
         },
     },
@@ -239,7 +269,7 @@ export const ItemFactory = {
                  * @param {StoredItem<CustomData>} item
                  * @return {(Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined)}
                  */
-                fromStoredItem<CustomData = {}, CustomBehavior = {}>(
+                fromStoredItem<CustomData = {}, CustomBehavior = DefaultItemBehavior>(
                     item: StoredItem<CustomData>,
                 ): Item<CustomBehavior & DefaultItemBehavior, CustomData> | undefined {
                     const baseItem = ItemFactory.sync.getBaseItem<CustomData, CustomBehavior>(
@@ -284,6 +314,27 @@ export const ItemFactory = {
 
                     if (typeof item.version !== 'undefined') {
                         storedItem.version = item.version;
+                    }
+
+                    return storedItem;
+                },
+                fromBaseToStored<CustomData = {}>(
+                    baseItem: BaseItem<DefaultItemBehavior, CustomData>,
+                    quantity: number,
+                ) {
+                    const storedItem: StoredItem<CustomData> = {
+                        dbName: baseItem.dbName,
+                        data: baseItem.data,
+                        quantity: quantity,
+                        slot: -1,
+                    };
+
+                    if (typeof baseItem.weight === 'number') {
+                        storedItem.totalWeight = quantity * baseItem.weight;
+                    }
+
+                    if (typeof baseItem.version !== 'undefined') {
+                        storedItem.version = baseItem.version;
                     }
 
                     return storedItem;

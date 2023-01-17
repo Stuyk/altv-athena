@@ -18,7 +18,6 @@ export const INVENTORY_EVENTS = {
         READY: 'inventory:event:ready',
     },
     TO_WEBVIEW: {
-        SET_EQUIPMENT: 'inventory:event:set:equipment',
         SET_INVENTORY: 'inventory:event:set:inventory',
     },
 };

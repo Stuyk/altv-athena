@@ -242,6 +242,22 @@ export const ItemManager = {
     },
     inventory: {
         /**
+         * Converts a stored item list, to a full item list.
+         *
+         * @param {Array<StoredItem>} data
+         * @return {Array<Item<DefaultItemBehavior, {}>>}
+         */
+        convertFromStored(data: Array<StoredItem<{}>>): Array<Item<DefaultItemBehavior, {}>> {
+            const convertedItemList: Array<Item<DefaultItemBehavior, {}>> = [];
+
+            for (let i = 0; i < data.length; i++) {
+                const convertedItem = Athena.systems.itemFactory.sync.item.convert.fromStoredItem(data[i]);
+                convertedItemList.push(convertedItem);
+            }
+
+            return convertedItemList;
+        },
+        /**
          * Adds or stacks an item based on the quantity passed.
          * Requires the basic version of a stored item to be added to a user.
          * Returns undefined if the data set could not be modified to include the quantity of items necessary.
@@ -324,6 +340,11 @@ export const ItemManager = {
             const amountMissing = baseItem.maxStack - copyOfData[availableStackIndex].quantity;
             if (item.quantity <= amountMissing) {
                 copyOfData[availableStackIndex].quantity += item.quantity;
+                copyOfData[availableStackIndex] = InternalFunctions.item.calculateWeight(
+                    baseItem,
+                    copyOfData[availableStackIndex],
+                );
+
                 return copyOfData;
             }
 
@@ -379,13 +400,16 @@ export const ItemManager = {
             // Get the amount we are going to remove.
             // Remove that item from the data set.
             // Repeat subtraction of item.
-            if (copyOfData[existingItemIndex].quantity < item.quantity) {
+
+            // The item quantity that we looked up is less than the amount we want to remove.
+            // Recursively repeat removing until all are removed.
+            if (copyOfData[existingItemIndex].quantity <= item.quantity) {
                 item.quantity -= copyOfData[existingItemIndex].quantity;
                 copyOfData.splice(existingItemIndex, 1);
                 return ItemManager.inventory.sub(item, copyOfData);
             }
 
-            // If the quantity of the found item is great; subtract necessary amount.
+            // If the quantity of the found item is greater than; subtract necessary amount.
             copyOfData[existingItemIndex].quantity -= item.quantity;
             copyOfData[existingItemIndex] = InternalFunctions.item.calculateWeight(
                 baseItem,
@@ -534,6 +558,58 @@ export const ItemManager = {
             copyOfData[index].quantity -= splitCount;
             copyOfData[index] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[index]);
             copyOfData.push(itemClone);
+
+            return copyOfData;
+        },
+        /**
+         * Combines items from two different slots into a single slot.
+         * It's like a stack method.
+         *
+         * @param {number} fromSlot
+         * @param {number} toSlot
+         * @param {Array<StoredItem>} data
+         * @return {(Array<StoredItem> | undefined)}
+         */
+        combineAt(fromSlot: number, toSlot: number, data: Array<StoredItem>): Array<StoredItem> | undefined {
+            const fromIndex = data.findIndex((x) => x.slot === fromSlot);
+            const toIndex = data.findIndex((x) => x.slot === toSlot);
+
+            if (fromIndex === -1 || toIndex === -1) {
+                return undefined;
+            }
+
+            if (data[fromIndex].dbName !== data[toIndex].dbName) {
+                return undefined;
+            }
+
+            if (data[fromIndex].version !== data[toIndex].version) {
+                return undefined;
+            }
+
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(data[toIndex].dbName, data[toIndex].version);
+            if (typeof baseItem === 'undefined') {
+                alt.logWarning(`ItemManager: Tried to lookup ${data[toIndex].dbName}, but base item does not exist.`);
+                return undefined;
+            }
+
+            if (baseItem.behavior && !baseItem.behavior.canStack) {
+                return undefined;
+            }
+
+            let copyOfData = deepCloneArray<StoredItem>(data);
+            if (copyOfData[fromIndex].quantity + copyOfData[toIndex].quantity <= baseItem.maxStack) {
+                copyOfData[toIndex].quantity += copyOfData[fromIndex].quantity;
+                copyOfData.splice(fromIndex, 1);
+                copyOfData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[toIndex]);
+                return copyOfData;
+            }
+
+            const spaceAvailable = baseItem.maxStack - copyOfData[toIndex].quantity;
+            copyOfData[fromIndex].quantity -= spaceAvailable;
+            copyOfData[toIndex].quantity += spaceAvailable;
+
+            copyOfData[fromIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[fromIndex]);
+            copyOfData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[toIndex]);
 
             return copyOfData;
         },
