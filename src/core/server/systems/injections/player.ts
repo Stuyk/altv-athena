@@ -1,19 +1,16 @@
+import { Item } from '@AthenaShared/interfaces/item';
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/character';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
-import { Item } from '../../../shared/interfaces/item.ts.bak';
 import { Injections } from '../injections';
 
-type ClothingComponents = Array<Item<ClothingComponent>>;
+type ClothingComponents = Array<Item>;
 
 export enum PlayerInjectionNames {
     AFTER_CHARACTER_CREATE = 'after-character-create',
     BEFORE_CHARACTER_SELECT = 'before-character-select',
     AFTER_CHARACTER_SELECT = 'after-character-select',
     PLAYER_SAVE_TICK = 'player-save-tick',
-    EQUIPMENT_UPDATE_START = 'player-equipment-update-start',
-    EQUIPMENT_AFTER_DEFAULTS = 'player-equipment-after-defaults',
-    EQUIPMENT_UPDATE_END = 'player-equipment-update-end',
     WEAPON_EQUIP = `player-weapon-equip-start`,
     WEAPON_UNEQUIP = `player-weapon-equip-end`,
 }
@@ -23,11 +20,6 @@ type characterCreateTypes = `${PlayerInjectionNames.AFTER_CHARACTER_CREATE}`;
 type savePlayerTypes = `${PlayerInjectionNames.PLAYER_SAVE_TICK}`;
 
 type weaponChangeTypes = `${PlayerInjectionNames.WEAPON_EQUIP}` | `${PlayerInjectionNames.WEAPON_UNEQUIP}`;
-
-type setEquipmentTypes =
-    | `${PlayerInjectionNames.EQUIPMENT_UPDATE_START}`
-    | `${PlayerInjectionNames.EQUIPMENT_AFTER_DEFAULTS}`
-    | `${PlayerInjectionNames.EQUIPMENT_UPDATE_END}`;
 
 type characterSelectTypes =
     | `${PlayerInjectionNames.BEFORE_CHARACTER_SELECT}`
@@ -49,16 +41,6 @@ function saveTick(type: savePlayerTypes, callback: PlayerSaveTickCallback) {
     Injections.add(type, callback);
 }
 
-/**
- * Before, During, or after synchronization of equipment; different functions can be applied to the player.
- *
- * @param {setEquipmentTypes} type
- * @param {EquipmentSyncCallback} callback
- */
-function updateEquipment(type: setEquipmentTypes, callback: EquipmentSyncCallback) {
-    Injections.add(type, callback);
-}
-
 function characterSelect(type: characterSelectTypes, callback: PlayerCallback) {
     Injections.add(type, callback);
 }
@@ -76,5 +58,4 @@ export const PlayerInjections = {
     characterSelect,
     playerWeaponChange,
     saveTick,
-    updateEquipment,
 };

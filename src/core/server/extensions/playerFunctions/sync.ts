@@ -3,12 +3,12 @@ import { CurrencyTypes } from '../../../shared/enums/currency';
 import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
-import { Item } from '../../../shared/interfaces/item.ts.bak';
 import { Appearance } from '../../../shared/interfaces/appearance';
 import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../../systems/injections';
 import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
 import { Athena } from '@AthenaServer/api/athena';
+import { Item } from '@AthenaShared/interfaces/item';
 
 const Sync = {
     /**
@@ -112,11 +112,6 @@ const Sync = {
             player.clearProp(propComponents[i]);
         }
 
-        const startInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_UPDATE_START);
-        for (const callback of startInjections) {
-            await callback(player, items, isMale);
-        }
-
         if (!isMale) {
             player.setDlcClothes(0, 3, 14, 0, 0); // torso
             player.setDlcClothes(0, 4, 14, 0, 0); // pants
@@ -128,11 +123,6 @@ const Sync = {
             player.setDlcClothes(0, 6, 34, 0, 0); // shoes
             player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
             player.setDlcClothes(0, 11, 91, 0, 0); // tops
-        }
-
-        const defaultInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_AFTER_DEFAULTS);
-        for (const callback of defaultInjections) {
-            await callback(player, items, isMale);
         }
 
         if (items && Array.isArray(items)) {
@@ -183,11 +173,6 @@ const Sync = {
 
                 player.setClothes(id, value, texture, 0);
             }
-        }
-
-        const endInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_UPDATE_END);
-        for (const callback of endInjections) {
-            await callback(player, items, isMale);
         }
     },
 

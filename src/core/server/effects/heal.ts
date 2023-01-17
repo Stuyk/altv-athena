@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Item } from '../../shared/interfaces/item.ts.bak';
+import { Item } from '@AthenaShared/interfaces/item';
 import EFFECT from '../../shared/enums/effects';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ItemEffects } from '../systems/itemEffects';
@@ -10,12 +10,12 @@ function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INV
         return;
     }
 
-    Athena.player.safe.addHealth(player, item.data.amount, false);
-    Athena.player.inventory.notify(player, `+${item.data.amount} Health`);
+    // Athena.player.safe.addHealth(player, item.data.amount, false);
+    // Athena.player.inventory.notify(player, `+${item.data.amount} Health`);
 
-    if (item.data.sound) {
-        Athena.player.emit.sound3D(player, item.data.sound, player);
-    }
+    // if (item.data.sound) {
+    //     Athena.player.emit.sound3D(player, item.data.sound, player);
+    // }
 }
 
-ItemEffects.add(EFFECT.EFFECT_HEAL, handleItemEvent);
+// ItemEffects.add(EFFECT.EFFECT_HEAL, handleItemEvent);

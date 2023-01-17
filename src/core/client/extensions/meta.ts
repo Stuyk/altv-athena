@@ -1,5 +1,4 @@
 import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { Item } from '@AthenaShared/interfaces/item.ts.bak';
 
 export interface Meta {
     permissionLevel: number; // Used to determine the player's current permissionLevel as a player..
@@ -25,9 +24,4 @@ export interface Meta {
 
     // Player Info
     appearance: Appearance;
-
-    // Inventory
-    inventory: Array<Partial<Item>>;
-    equipment: Array<Partial<Item>>;
-    toolbar: Array<Partial<Item>>;
 }

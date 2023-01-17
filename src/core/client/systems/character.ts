@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { ClothingComponent } from '@AthenaShared/interfaces/clothing';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { Item } from '@AthenaShared/interfaces/item.ts.bak';
+import { Item } from '@AthenaShared/interfaces/item';
 
 export const CharacterSystem = {
     /**
