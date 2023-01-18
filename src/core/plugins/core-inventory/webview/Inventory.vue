@@ -1,7 +1,7 @@
 <template>
-    <div class="page-wrap">
+    <div class="page-wrap" @click="clearContext">
         <div class="main-frame">
-            <Inventory />
+            <Grid :offclick="offclick" />
         </div>
     </div>
 </template>
@@ -16,7 +16,17 @@ export default defineComponent({
     name: ComponentName,
     components: {
         Icon: defineAsyncComponent(() => import('@components/Icon.vue')),
-        Inventory: defineAsyncComponent(() => import('./components/Inventory.vue')),
+        Grid: defineAsyncComponent(() => import('./components/Grid.vue')),
+    },
+    data() {
+        return {
+            offclick: 0,
+        };
+    },
+    methods: {
+        clearContext() {
+            this.offclick += 1;
+        },
     },
     mounted() {
         WebViewEvents.emitReady(INVENTORY_EVENTS.PAGE);
@@ -29,7 +39,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('https://i.pinimg.com/originals/2a/c3/3a/2ac33ac33ee4fcc300e82307e39cebf9.jpg') !important;
+    /* background: url('https://i.pinimg.com/originals/2a/c3/3a/2ac33ac33ee4fcc300e82307e39cebf9.jpg') !important; */
     /* background-size: cover; */
     min-width: 100vw;
     min-height: 100vh;
@@ -42,7 +52,6 @@ export default defineComponent({
     flex-direction: row;
     min-width: 1280px;
     max-width: 1280px;
-    min-height: 720px;
     max-height: 720px;
     justify-content: center;
 }

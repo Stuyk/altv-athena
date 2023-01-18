@@ -1,5 +1,5 @@
 export const INVENTORY_EVENTS = {
-    PAGE: 'Inventory2',
+    PAGE: 'Inventory',
     TO_SERVER: {
         USE: 'inventory:event:server:use',
         DROP: 'inventory:event:server:drop',

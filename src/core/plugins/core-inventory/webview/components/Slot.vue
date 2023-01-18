@@ -6,6 +6,9 @@
         <div class="index">
             <slot name="index"></slot>
         </div>
+        <div class="quantity" v-if="quantity !== 0">
+            {{ quantity }}
+        </div>
         <slot></slot>
     </div>
 </template>
@@ -37,6 +40,11 @@ export default defineComponent({
         hasItem: {
             type: Boolean,
             required: true,
+        },
+        quantity: {
+            type: Number,
+            required: true,
+            default: 0,
         },
     },
     methods: {},
@@ -106,6 +114,18 @@ export default defineComponent({
 .index {
     position: absolute;
     pointer-events: none !important;
+}
+
+.quantity {
+    position: absolute;
+    pointer-events: none !important;
+    z-index: 99;
+    color: yellow;
+    font-size: 14px;
+    left: 8px;
+    top: 4px;
+    font-family: 'consolas';
+    text-shadow: 1px 1px 1px black;
 }
 
 .clone {

@@ -32,7 +32,7 @@ export interface ItemQuantityChange {
  * */
 let DEFAULT = {
     inventory: {
-        size: 28,
+        size: 30,
     },
     toolbar: {
         size: 4,

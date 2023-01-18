@@ -9,6 +9,7 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('toolbar', index)"
+                :quantity="getQuantity('toolbar', index)"
                 @mouseenter="updateDescriptor('toolbar', index)"
                 @mouseleave="updateDescriptor(undefined, undefined)"
                 @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), startDrag })"
@@ -18,13 +19,11 @@
                     <img :src="getImagePath(getItem('toolbar', index))" />
                 </template>
                 <template v-slot:index v-else>
-                    {{ slot }}
+                    <template v-if="showToolbarNumbers">
+                        {{ slot }}
+                    </template>
                 </template>
             </Slot>
-        </div>
-        <div class="inventory-description">
-            <span class="item-name">{{ itemName }}</span>
-            <span class="item-description">{{ itemDescription }}</span>
         </div>
         <div class="inventory-slots">
             <Slot
@@ -36,6 +35,7 @@
                 :hasItem="true"
                 :slot="index"
                 :id="getID('inventory', index)"
+                :quantity="getQuantity('inventory', index)"
                 @mouseenter="updateDescriptor('inventory', index)"
                 @mouseleave="updateDescriptor(undefined, undefined)"
                 @contextmenu="(e) => contextMenu(e, index)"
@@ -47,7 +47,9 @@
                     <img :src="getImagePath(getItem('inventory', index))" />
                 </template>
                 <template v-slot:index v-else>
-                    {{ index }}
+                    <template v-if="showGridNumbers">
+                        {{ slot }}
+                    </template>
                 </template>
             </Slot>
         </div>
@@ -55,6 +57,7 @@
             <div @click="contextAction('use')">Use</div>
             <div @click="contextAction('split')">Split</div>
             <div @click="contextAction('drop')">Drop</div>
+            <div @click="contextAction('give')">Give</div>
             <div @click="contextAction('cancel')">Cancel</div>
         </Context>
     </div>
@@ -62,12 +65,13 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue';
-import { Item } from '@AthenaShared/interfaces/inventory';
+import { Item } from '@AthenaShared/interfaces/item';
 import { makeDraggable } from '@ViewUtility/drag';
 import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
 import { getImagePath } from '../utility/inventoryIcon';
 import { InventoryTypes } from '../utility/interfaces';
+import { INVENTORY_CONFIG } from '../../shared/config';
 
 export default defineComponent({
     name: 'Inventory',
@@ -76,18 +80,26 @@ export default defineComponent({
         Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
         Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
+    props: {
+        offclick: {
+            type: Number,
+            default: 0,
+        },
+    },
     data() {
         return {
             toolbar: [] as Array<Item>,
             inventory: [] as Array<Item>,
-            maxSlots: 28,
-            maxToolbarSlots: 4,
+            maxSlots: 25,
+            maxToolbarSlots: 5,
             title: '',
             context: undefined as { x: number; y: number } | undefined,
             slot: -1,
             itemSingleClick: undefined as { type: InventoryTypes; index: number },
             itemName: '',
             itemDescription: '',
+            showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
+            showToolbarNumbers: INVENTORY_CONFIG.WEBVIEW.TOOLBAR.SHOW_NUMBERS,
         };
     },
     methods: {
@@ -115,6 +127,17 @@ export default defineComponent({
         },
         singleClick(type: InventoryTypes, index: number) {
             if (typeof this.itemSingleClick !== 'undefined') {
+                // Ignore same inventory slot
+                if (this.itemSingleClick.type === type && this.itemSingleClick.index === index) {
+                    return;
+                }
+
+                // Ignore inventory types that do not match.
+                // Combining should be done inside of inventory only.
+                if (this.itemSingleClick.type !== type) {
+                    return;
+                }
+
                 if (!('alt' in window)) {
                     const secondItem = `${type}-${index}`;
                     const firstItem = `${this.itemSingleClick.type}-${this.itemSingleClick.index}`;
@@ -160,6 +183,19 @@ export default defineComponent({
             const items = [...this[type]] as Array<Item>;
             return items.findIndex((item) => item && item.slot === slot) !== -1;
         },
+        getQuantity(type: 'toolbar' | 'inventory', slot: number): number {
+            if (typeof this[type] === undefined) {
+                return 0;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            const index = items.findIndex((item) => item && item.slot === slot);
+            if (index <= -1) {
+                return 0;
+            }
+
+            return items[index].quantity;
+        },
         getItem(type: 'toolbar' | 'inventory', slot: number): Item | undefined {
             if (typeof this[type] === undefined) {
                 return undefined;
@@ -203,7 +239,7 @@ export default defineComponent({
                 y: e.clientY,
             };
         },
-        contextAction(type: 'use' | 'split' | 'drop' | 'cancel') {
+        contextAction(type: 'use' | 'split' | 'drop' | 'give' | 'cancel') {
             this.context = undefined;
 
             if (!('alt' in window)) {
@@ -230,6 +266,11 @@ export default defineComponent({
                 WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, type, this.slot);
                 return;
             }
+
+            if (type === 'give') {
+                console.log('Opening give event...');
+                return;
+            }
         },
         unequip(e: Event, slot: number) {
             e.preventDefault();
@@ -254,8 +295,7 @@ export default defineComponent({
 
         const exampleItem: Item = {
             name: 'Big Box',
-            base: 'box',
-            flags: 0,
+            dbName: 'box',
             quantity: 2,
             slot: 0,
             data: {},
@@ -265,9 +305,19 @@ export default defineComponent({
         };
 
         this.setItems(
-            [exampleItem, { ...exampleItem, slot: 2, icon: 'burger' }, { ...exampleItem, slot: 24, icon: 'pistol50' }],
+            [
+                exampleItem,
+                { ...exampleItem, slot: 2, icon: 'burger' },
+                { ...exampleItem, slot: 5, icon: 'burger', quantity: 5 },
+                { ...exampleItem, slot: 24, icon: 'pistol50' },
+            ],
             [{ ...exampleItem, icon: 'assaultrifle' }],
         );
+    },
+    watch: {
+        offclick() {
+            this.context = undefined;
+        },
     },
 });
 </script>
@@ -275,8 +325,8 @@ export default defineComponent({
 <style scoped>
 .inventory-frame {
     background: rgba(0, 0, 0, 0.75);
-    min-width: 430px;
-    max-width: 430px;
+    min-width: 512px;
+    max-width: 512px;
     box-sizing: border-box;
     border-radius: 6px;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -296,33 +346,25 @@ export default defineComponent({
     background: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 }
 
-.inventory-description {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 60px;
-    max-height: 60px;
-    font-size: 12px;
+.inventory-toolbar {
+    padding-right: 8px;
 }
 
 .inventory-slots {
     display: flex;
     flex-flow: row wrap;
-    padding-top: 8px;
     box-sizing: border-box;
     overflow-y: scroll;
-    min-height: 550px;
-    max-height: 550px;
     justify-content: space-evenly;
+    max-height: 610px;
+    padding-top: 12px;
 }
 
 .inventory-slots .slot {
-    margin-bottom: 12px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-bottom: 5px;
     background: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     border: 2px solid rgba(255, 255, 255, 0.1);
