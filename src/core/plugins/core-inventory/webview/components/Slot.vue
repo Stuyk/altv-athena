@@ -1,5 +1,11 @@
 <template>
-    <div class="slot-frame" :style="getDimensions" :class="getHover">
+    <div
+        class="slot-frame"
+        :style="getDimensions"
+        :class="getHover"
+        @mouseenter="showName = true"
+        @mouseleave="showName = false"
+    >
         <div class="image" :style="getDimensions">
             <slot name="image"></slot>
         </div>
@@ -8,6 +14,9 @@
         </div>
         <div class="quantity" v-if="quantity !== 0">
             {{ quantity }}
+        </div>
+        <div class="name" v-if="name !== '' && showName">
+            {{ name }}
         </div>
         <slot></slot>
     </div>
@@ -18,6 +27,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'Slot',
+    data() {
+        return {
+            showName: false,
+        };
+    },
     props: {
         width: {
             type: Number,
@@ -45,6 +59,11 @@ export default defineComponent({
             type: Number,
             required: true,
             default: 0,
+        },
+        name: {
+            type: String,
+            required: true,
+            default: '',
         },
     },
     methods: {},
@@ -97,8 +116,8 @@ export default defineComponent({
 }
 
 .image img {
-    width: 75%;
-    height: 75%;
+    width: 65%;
+    height: 65%;
 }
 
 .can-hover:hover {
@@ -128,11 +147,23 @@ export default defineComponent({
     text-shadow: 1px 1px 1px black;
 }
 
+.name {
+    position: absolute;
+    pointer-events: none !important;
+    z-index: 99;
+    color: yellow;
+    font-size: 11px;
+    font-family: 'consolas';
+    text-shadow: 1px 1px 1px black, -1px 1px 1px black, 1px -1px 1px black, -1px -1px 1px black;
+    text-align: center;
+}
+
 .clone {
     background: rgb(0, 0, 0, 0.75);
     position: fixed !important;
     transition: unset !important;
-    border: 4px solid aquamarine !important;
+    border: 2px solid yellow !important;
+    opacity: 0.75;
     pointer-events: none !important;
 }
 </style>
