@@ -1,10 +1,10 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { loadSceneAtCoords } from '@AthenaClient/utility/scene';
 import { Timer } from '@AthenaClient/utility/timers';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 let interval: number;
 let isUpdatingWaypoint = false;
@@ -124,4 +124,4 @@ export const AthenaEvents = {
     ...AthenaEventsConst,
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, AthenaEvents.init);
+AthenaClient.events.onTicksStart.add(AthenaEvents.init);

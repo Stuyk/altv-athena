@@ -6,6 +6,7 @@ import { distance2d } from '@AthenaShared/utility/vector';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { loadModel } from '@AthenaClient/utility/model';
 import { Timer } from '@AthenaClient/utility/timers';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const MAX_HOLOGRAM_DISTANCE = 10;
 const TIME_TO_CHECK_HOLOGRAMS = 1000 * 3; // 3s
@@ -20,6 +21,8 @@ export const HologramSystem = {
      * @memberof HologramSystem
      */
     init() {
+        alt.onServer(SYSTEM_EVENTS.HOLOGRAM_APPEND, HologramSystem.add);
+
         if (interval) {
             Timer.clearInterval(interval);
         }
@@ -135,5 +138,4 @@ export const HologramSystem = {
     },
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, HologramSystem.init);
-alt.onServer(SYSTEM_EVENTS.HOLOGRAM_APPEND, HologramSystem.add);
+AthenaClient.events.onTicksStart.add(HologramSystem.init);

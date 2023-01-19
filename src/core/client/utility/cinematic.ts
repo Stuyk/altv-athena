@@ -416,5 +416,3 @@ export const CinematicCam = {
         }, 1500);
     },
 };
-
-// alt.onServer(SYSTEM_EVENTS.TICKS_START, CinematicCam.demo);

@@ -1,17 +1,13 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const NextUpdate = {
     freeze: Date.now() + 200,
 };
 
 const InternalFunctions = {
-    init() {
-        alt.onServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.start);
-    },
-
     start() {
         alt.setInterval(InternalFunctions.tick, 0);
     },
@@ -40,4 +36,4 @@ const InternalFunctions = {
     },
 };
 
-InternalFunctions.init();
+AthenaClient.events.onTicksStart.add(InternalFunctions.start);

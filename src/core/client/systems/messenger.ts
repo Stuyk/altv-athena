@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { MessageCommand } from '@AthenaShared/interfaces/messageCommand';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 export type MessageInfo = { timestamp: number; msg: string };
 type MessageCallback = (msg: string) => void;
@@ -100,7 +100,7 @@ export const MessengerSystem = {
     },
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
+AthenaClient.events.onTicksStart.add(() => {
     alt.onServer(MESSENGER_EVENTS.TO_CLIENT.MESSAGE, MessengerSystem.emit);
     alt.onServer(MESSENGER_EVENTS.TO_CLIENT.COMMANDS, MessengerSystem.setCommands);
 });

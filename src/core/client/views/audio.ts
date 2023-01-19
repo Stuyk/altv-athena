@@ -1,8 +1,8 @@
 import * as alt from 'alt-client';
 
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WebViewController } from '@AthenaClient/extensions/view2';
 import ViewModel from '@AthenaClient/models/viewModel';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const PAGE_NAME = 'Audio';
 let interval;
@@ -95,4 +95,4 @@ export class AudioView {
     }
 }
 
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.open);
+AthenaClient.events.onTicksStart.add(InternalFunctions.open);

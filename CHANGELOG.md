@@ -158,6 +158,12 @@ Inventory Plugin
 - Made some general design changes such as quantity displayed.
 - Added context menu option for give.
 - Added some better handling for some events on client-side.
+
+Event for SYSTEM_EVENTS.TICKS_START
+- Removed all default usages.
+- Introduced an API that can be called on client-side to auto-append callbacks.
+- AthenaClient.events.onTicksStart.add(() => {});
+- Makes it much easier to understand what is happening.
 ```
 
 

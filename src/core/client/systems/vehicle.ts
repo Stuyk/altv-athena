@@ -10,6 +10,18 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 import './push';
 import { PushVehicle } from './push';
+import { AthenaClient } from '@AthenaClient/api/athena';
+
+const Internal = {
+    init() {
+        alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
+        alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
+        alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
+        alt.on('enteredVehicle', VehicleController.enterVehicle);
+        alt.on('leftVehicle', VehicleController.removeSeatBelt);
+        VehicleController.registerKeybinds;
+    },
+};
 
 export const VehicleController = {
     /**
@@ -166,9 +178,4 @@ export const VehicleController = {
     },
 };
 
-alt.onServer(VEHICLE_EVENTS.SET_SEATBELT, VehicleController.enableSeatBelt);
-alt.onServer(VEHICLE_EVENTS.SET_INTO, VehicleController.setIntoVehicle);
-alt.onServer(SYSTEM_EVENTS.VEHICLE_ENGINE, VehicleController.toggleEngine);
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, VehicleController.registerKeybinds);
-alt.on('enteredVehicle', VehicleController.enterVehicle);
-alt.on('leftVehicle', VehicleController.removeSeatBelt);
+AthenaClient.events.onTicksStart.add(Internal.init);

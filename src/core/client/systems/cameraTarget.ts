@@ -1,12 +1,12 @@
 import * as native from 'natives';
 import * as alt from 'alt-client';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import Raycast from '@AthenaClient/utility/raycast';
 import { Timer } from '@AthenaClient/utility/timers';
 import { drawText3D } from '@AthenaClient/utility/text';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { ObjectWheelMenu } from '@AthenaClient/menus/object';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 interface ClosestTarget {
     scriptID: number;
@@ -204,4 +204,4 @@ export const CameraTarget = {
     },
 };
 
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, InternalFunctions.init);
+AthenaClient.events.onTicksStart.add(InternalFunctions.init);

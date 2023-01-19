@@ -12,11 +12,13 @@ import { KeyHeld } from '@AthenaClient/events/keyHeld';
 import { rmluiConst } from './consts/rmluiConst';
 import { cameraConst } from './consts/cameraConst';
 import { MessengerSystem } from '@AthenaClient/systems/messenger';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 export const AthenaClient = {
     camera: cameraConst,
     data: constData,
     events: {
+        onTicksStart,
         keyHeld: KeyHeld,
         keyBinds: KeybindController,
     },

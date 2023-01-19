@@ -3,6 +3,7 @@ import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { KeybindController } from '@AthenaClient/events/keyup';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 export const DebugController = {
     registerKeybinds() {
@@ -38,4 +39,4 @@ export const DebugController = {
     },
 };
 
-alt.onceServer(SYSTEM_EVENTS.TICKS_START, DebugController.registerKeybinds);
+AthenaClient.events.onTicksStart.add(DebugController.registerKeybinds);

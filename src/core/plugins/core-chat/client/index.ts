@@ -76,7 +76,7 @@ const InternalFunctions = {
     },
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, () => {
+AthenaClient.events.onTicksStart.add(() => {
     AthenaClient.events.keyBinds.registerKeybind({ singlePress: InternalFunctions.openMessageBox, key: THE_LETTER_T });
     InternalFunctions.open();
 });

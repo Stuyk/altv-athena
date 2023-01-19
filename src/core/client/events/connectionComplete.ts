@@ -3,9 +3,9 @@ import * as native from 'natives';
 
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 alt.on('connectionComplete', handleConnectionComplete);
-alt.onServer(SYSTEM_EVENTS.TICKS_START, handleTick);
 alt.setWatermarkPosition(4);
 
 async function handleConnectionComplete() {
@@ -46,3 +46,5 @@ function handleTick() {
     native.setAudioFlag('LoadMPData', true);
     native.setAudioFlag('DisableFlightMusic', true);
 }
+
+AthenaClient.events.onTicksStart.add(handleTick);

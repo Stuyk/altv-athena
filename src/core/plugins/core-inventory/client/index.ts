@@ -64,5 +64,5 @@ function processMetaChange(key: string, value: any, oldValue: any): void {
     AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
 }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, init);
+AthenaClient.events.onTicksStart.add(init);
 alt.on('localMetaChange', processMetaChange);

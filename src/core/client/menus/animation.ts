@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { KeybindController } from '@AthenaClient/events/keyup';
 import { playAnimation } from '@AthenaClient/systems/animations';
 import { PushVehicle } from '@AthenaClient/systems/push';
@@ -14,6 +13,7 @@ import funAnims from './animationMenus/funAnims';
 import idleAnims from './animationMenus/idleAnims';
 import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);
@@ -117,4 +117,4 @@ function init() {
     KeybindController.registerKeybind({ key: KEY_BINDS.ANIMATION, singlePress: handleAnimationMenu });
 }
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, init);
+AthenaClient.events.onTicksStart.add(init);

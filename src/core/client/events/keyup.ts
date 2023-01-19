@@ -1,3 +1,4 @@
+import { AthenaClient } from '@AthenaClient/api/athena';
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
@@ -167,4 +168,4 @@ export const KeybindController = {
     },
 };
 
-alt.onServer(SYSTEM_EVENTS.TICKS_START, KeybindController.start);
+AthenaClient.events.onTicksStart.add(KeybindController.start);
