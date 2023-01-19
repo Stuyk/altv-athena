@@ -5,8 +5,8 @@ Athena.systems.messenger.commands.register(
     'additem',
     '/additem [dbName] [amount] [version?]',
     ['admin'],
-    (player: alt.Player, itemName: string, amount: string, version: string | undefined) => {
-        if (typeof itemName === 'undefined') {
+    async (player: alt.Player, dbName: string, amount: string, version: string | undefined) => {
+        if (typeof dbName === 'undefined') {
             Athena.player.emit.message(player, `Must specify a dbName to add an item.`);
             return;
         }
@@ -31,22 +31,19 @@ Athena.systems.messenger.commands.register(
             }
         }
 
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(itemName, actualVersion);
-        if (typeof baseItem === 'undefined') {
-            Athena.player.emit.message(player, `Item does not exist.`);
+        const result = await Athena.player.inventory.add(player, {
+            dbName,
+            quantity: actualAmount,
+            data: {},
+            version: actualVersion,
+        });
+
+        if (!result) {
+            Athena.player.emit.notification(player, `Could not add. Inventory full?`);
             return;
         }
 
-        const data = Athena.document.character.get(player);
-        const storedItem = Athena.systems.itemFactory.sync.item.convert.fromBaseToStored(baseItem, actualAmount);
-        const modifiedData = Athena.systems.itemManager.inventory.add(storedItem, data.inventory, 'inventory');
-        if (typeof modifiedData === 'undefined') {
-            Athena.player.emit.message(player, `Could not add item, inventory may be full.`);
-            return;
-        }
-
-        Athena.document.character.set(player, 'inventory', modifiedData);
-        Athena.player.emit.message(player, `Item was added.`);
+        Athena.player.emit.notification(player, `Item Added`);
     },
 );
 
@@ -54,8 +51,8 @@ Athena.systems.messenger.commands.register(
     'removeitem',
     '/removeitem [dbName] [amount] [version?]',
     ['admin'],
-    (player: alt.Player, itemName: string, amount: string, version: string | undefined) => {
-        if (typeof itemName === 'undefined') {
+    async (player: alt.Player, dbName: string, amount: string, version: string | undefined) => {
+        if (typeof dbName === 'undefined') {
             Athena.player.emit.message(player, `Must specify a dbName to remove an item.`);
             return;
         }
@@ -80,24 +77,19 @@ Athena.systems.messenger.commands.register(
             }
         }
 
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(itemName, actualVersion);
-        if (typeof baseItem === 'undefined') {
-            Athena.player.emit.message(player, `Item does not exist.`);
+        const result = await Athena.player.inventory.sub(player, {
+            dbName,
+            quantity: actualAmount,
+            data: {},
+            version: actualVersion,
+        });
+
+        if (!result) {
+            Athena.player.emit.notification(player, `Could not remove?`);
             return;
         }
 
-        const data = Athena.document.character.get(player);
-        const storedItem = Athena.systems.itemFactory.sync.item.convert.fromBaseToStored(baseItem, actualAmount);
-        storedItem.quantity = actualAmount;
-
-        const modifiedData = Athena.systems.itemManager.inventory.sub(storedItem, data.inventory);
-        if (typeof modifiedData === 'undefined') {
-            Athena.player.emit.message(player, `Could not remove item, item may not have been found in inventory.`);
-            return;
-        }
-
-        Athena.document.character.set(player, 'inventory', modifiedData);
-        Athena.player.emit.message(player, `Item was removed.`);
+        Athena.player.emit.notification(player, `Item Removed`);
     },
 );
 

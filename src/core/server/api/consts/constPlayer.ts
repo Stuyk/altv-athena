@@ -5,13 +5,17 @@ import set from '@AthenaServer/extensions/playerFunctions/setter';
 import sync from '@AthenaServer/extensions/playerFunctions/sync';
 import utility from '@AthenaServer/extensions/playerFunctions/utility';
 import getter from '@AthenaServer/extensions/playerFunctions/getter';
+import inventory from '@AthenaServer/extensions/playerFunctions/inventory';
+import toolbar from '@AthenaServer/extensions/playerFunctions/toolbar';
 
 export const playerConst = {
     currency,
     emit,
     get: getter,
+    inventory,
     safe,
     set,
     sync,
+    toolbar,
     utility,
 };

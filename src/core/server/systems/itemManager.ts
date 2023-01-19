@@ -268,7 +268,7 @@ export const ItemManager = {
          * @return {Array<StoredItem>} Returns undefined or the new array of added items.
          */
         add<CustomData = {}>(
-            item: StoredItem<CustomData>,
+            item: Omit<StoredItem<CustomData>, 'slot'>,
             data: Array<StoredItem>,
             size: InventoryType | number = DEFAULT.custom.size,
         ): Array<StoredItem> | undefined {
@@ -368,7 +368,10 @@ export const ItemManager = {
          * @param {Array<StoredItem>} data
          * @return {(Array<StoredItem> | undefined)}
          */
-        sub<CustomData = {}>(item: StoredItem<CustomData>, data: Array<StoredItem>): Array<StoredItem> | undefined {
+        sub<CustomData = {}>(
+            item: Omit<StoredItem<CustomData>, 'slot'>,
+            data: Array<StoredItem>,
+        ): Array<StoredItem> | undefined {
             if (item.quantity <= -1) {
                 alt.logWarning(`ItemManager: Cannot subtract negative quantity from an item.`);
                 return undefined;
