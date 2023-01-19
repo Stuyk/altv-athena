@@ -1,7 +1,9 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { VehicleSystem } from './vehicle';
+
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
+const callbacks: Array<Function> = [];
 
 let hasInitialized = false;
 
@@ -23,6 +25,10 @@ async function loadPlugins() {
 
     // Load after plugins are initialized...
     VehicleSystem.init();
+
+    for (let callback of callbacks) {
+        callback();
+    }
 
     alt.log(`~lc~Extra Resources Loaded ~ly~(${pluginRegistration.length})`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
@@ -68,5 +74,16 @@ export const PluginSystem = {
         return pluginRegistration.map((x) => {
             return x.name;
         });
+    },
+    callback: {
+        /**
+         * After plugins are finished loading; call these callbacks.
+         * Useful for using 'Athena API' at the top level of a document.
+         *
+         * @param {Function} callback
+         */
+        add(callback: Function) {
+            callbacks.push(callback);
+        },
     },
 };

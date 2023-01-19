@@ -1,6 +1,7 @@
-import { eventsConst } from '@AthenaServer/api/consts/constEvents';
+import { Athena } from '@AthenaServer/api/athena';
 import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
 import * as alt from 'alt-server';
+import { PluginSystem } from '../plugins';
 
 const TIME_BETWEEN_UPDATES = 30000; // 30 Seconds
 let enabled = true;
@@ -8,47 +9,57 @@ let interval: number;
 let minute;
 let hour;
 
-/**
- * Updates the player time to match the current server time.
- *
- * @param {alt.Player} player
- */
-function updatePlayer(player: alt.Player) {
-    if (!enabled) {
-        return;
-    }
+const Internal = {
+    /**
+     * Updates the player time to match the current server time.
+     *
+     * @param {alt.Player} player
+     */
+    updatePlayer(player: alt.Player) {
+        if (!enabled) {
+            return;
+        }
 
-    if (hour === undefined) {
+        if (hour === undefined) {
+            const time = new Date(Date.now());
+            minute = time.getMinutes();
+            hour = time.getHours();
+        }
+
+        player.setDateTime(1, 1, 2023, hour, minute, 0);
+    },
+    /**
+     * Simple global weather system. Rotates through an array periodically.
+     * Synchronizes it with all players.
+     */
+    handleWeatherUpdate() {
+        if (!enabled) {
+            return;
+        }
+
         const time = new Date(Date.now());
         minute = time.getMinutes();
         hour = time.getHours();
-    }
 
-    player.setDateTime(1, 1, 2023, hour, minute, 0);
-}
+        const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.hasFullySpawned);
+        if (loggedInPlayers.length <= 0) {
+            return;
+        }
 
-/**
- * Simple global weather system. Rotates through an array periodically.
- * Synchronizes it with all players.
- */
-function handleWeatherUpdate() {
-    if (!enabled) {
-        return;
-    }
+        for (let player of loggedInPlayers) {
+            Internal.updatePlayer(player);
+        }
+    },
+    init() {
+        if (!enabled) {
+            return;
+        }
 
-    const time = new Date(Date.now());
-    minute = time.getMinutes();
-    hour = time.getHours();
-
-    const loggedInPlayers = [...alt.Player.all].filter((x) => x && x.valid && x.hasFullySpawned);
-    if (loggedInPlayers.length <= 0) {
-        return;
-    }
-
-    for (let player of loggedInPlayers) {
-        updatePlayer(player);
-    }
-}
+        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.updatePlayer);
+        alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
+        alt.log(`~b~Loaded Default System: Time`);
+    },
+};
 
 export const DefaultTimeSystem = {
     disable: () => {
@@ -67,8 +78,7 @@ export const DefaultTimeSystem = {
     getMinute() {
         return minute;
     },
-    updatePlayer,
+    updatePlayer: Internal.updatePlayer,
 };
 
-eventsConst.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, updatePlayer);
-alt.setInterval(handleWeatherUpdate, TIME_BETWEEN_UPDATES);
+PluginSystem.callback.add(Internal.init);

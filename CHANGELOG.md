@@ -143,6 +143,21 @@ Item Manager
 
 Item Effects
 - Reworked to support new API
+
+Plugin System
+- Added ability to append a callback to initialize a function after all plugins have loaded.
+- This resolves an issue with top-level 'Athena' API usage.
+- Used like: PluginSystem.callback.add(() => {})
+
+Inventory - Default System
+- Adds synchronization for inventory and toolbar data.
+- This can be disabled through the system defaults API if necessary.
+
+Inventory Plugin
+- Hooked up a majority of the functionality.
+- Made some general design changes such as quantity displayed.
+- Added context menu option for give.
+- Added some better handling for some events on client-side.
 ```
 
 
