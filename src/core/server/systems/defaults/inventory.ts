@@ -76,14 +76,14 @@ const Internal = {
         Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.sync);
         Athena.document.character.onChange('inventory', Internal.syncInventory);
         Athena.document.character.onChange('toolbar', Internal.syncToolbar);
-        alt.log(`~b~Loaded Default System: Inventory`);
+        alt.log(`~lc~Default System: ~g~Inventory`);
     },
 };
 
 export const DefaultInventorySystem = {
     disable: () => {
         enabled = false;
-        alt.log(`Default Inventory Sync Turned Off`);
+        alt.log(`~y~Default Inventory Sync Turned Off`);
     },
 };
 

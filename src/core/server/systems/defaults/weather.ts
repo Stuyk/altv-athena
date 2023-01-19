@@ -66,7 +66,7 @@ const Internal = {
 
         Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.updatePlayer);
         alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
-        alt.log(`~b~Loaded Default System: Weather`);
+        alt.log(`~lc~Default System: ~g~Weather`);
     },
 };
 

@@ -63,7 +63,7 @@ const Internal = {
 
         Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.respawn);
         alt.on('playerDeath', Internal.handleDefaultDeath);
-        alt.log(`~b~Loaded Default System: Death`);
+        alt.log(`~lc~Default System: ~g~Death`);
     },
 };
 
@@ -71,7 +71,7 @@ export const DefaultDeathSystem = {
     disable: () => {
         enabled = false;
         alt.off('playerDeath', Internal.handleDefaultDeath);
-        alt.log(`Default Death System Turned Off`);
+        alt.log(`~y~Default Death System Turned Off`);
     },
 };
 

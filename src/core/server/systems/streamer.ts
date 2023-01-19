@@ -25,7 +25,6 @@ class InternalController {
      * @returns None
      */
     static init() {
-        alt.log(`Connected to Streamer Service`);
         const pingMessage: IStreamMessage = {
             id: -1,
             route: 'ping',
@@ -34,7 +33,6 @@ class InternalController {
 
         sock.send(JSON.stringify(pingMessage));
 
-        alt.log('Setting Up Configuration');
         const configMessage: IStreamMessage = {
             id: -1,
             route: 'config',

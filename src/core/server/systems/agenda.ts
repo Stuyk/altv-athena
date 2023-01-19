@@ -39,11 +39,11 @@ export class AgendaSystem {
         }
 
         if (agenda[id]) {
-            alt.log(`Overwrote Agenda @ (${id}) with new callback.`);
+            // alt.log(`Overwrote Agenda @ (${id}) with new callback.`);
         }
 
         agenda[id] = callback;
-        alt.log(`~g~Added Agenda to Timeline @ (${id})`);
+        // alt.log(`~g~Added Agenda to Timeline @ (${id})`);
     }
 
     /**

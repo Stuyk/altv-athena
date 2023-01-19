@@ -7,7 +7,12 @@ import {
     IStreamPopulate,
     IStreamUpdate,
 } from '../../../src/core/shared/interfaces/IStream';
-import { Vector3 } from '../../../src/core/shared/interfaces/Vector';
+
+interface Vector3 {
+    x: number;
+    y: number;
+    z: number;
+}
 
 let main;
 

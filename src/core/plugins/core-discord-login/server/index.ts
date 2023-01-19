@@ -1,13 +1,10 @@
-import * as alt from 'alt-server';
-import { PluginSystem } from '../../../server/systems/plugins';
+import { PluginSystem } from '@AthenaServer/systems/plugins';
 import { LoginController } from './src/login';
 import { LoginView } from './src/view';
 
-const PLUGIN_NAME = 'Athena Discord Login';
+const PLUGIN_NAME = 'discord-login';
 
 PluginSystem.registerPlugin(PLUGIN_NAME, () => {
     LoginView.init();
     LoginController.init();
-
-    alt.log(`~lg~CORE ==> ${PLUGIN_NAME} was Loaded`);
 });

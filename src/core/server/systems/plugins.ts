@@ -8,7 +8,6 @@ const callbacks: Array<Function> = [];
 let hasInitialized = false;
 
 async function loadPlugins() {
-    alt.log(`~lc~=== Loading Plugins ===`);
     const promises = [];
 
     for (let i = 0; i < pluginRegistration.length; i++) {
@@ -18,6 +17,7 @@ async function loadPlugins() {
             continue;
         }
 
+        alt.log(`~lc~Plugin: ~g~${plugin.name}`);
         promises.push(plugin.callback());
     }
 
@@ -30,7 +30,6 @@ async function loadPlugins() {
         callback();
     }
 
-    alt.log(`~lc~Extra Resources Loaded ~ly~(${pluginRegistration.length})`);
     alt.emit(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY);
 }
 
