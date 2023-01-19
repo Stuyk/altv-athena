@@ -10,7 +10,7 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 import './push';
 import { PushVehicle } from './push';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const Internal = {
     init() {
@@ -178,4 +178,4 @@ export const VehicleController = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(Internal.init);
+onTicksStart.add(Internal.init);

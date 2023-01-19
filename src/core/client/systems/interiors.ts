@@ -1,6 +1,6 @@
 import alt from 'alt-client';
 import natives from 'natives';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 function fixMissingInteriors() {
     alt.requestIpl('bh1_47_joshhse_unburnt');
@@ -190,4 +190,4 @@ function fixMissingInteriors() {
     }
 }
 
-AthenaClient.events.onTicksStart.add(fixMissingInteriors);
+onTicksStart.add(fixMissingInteriors);

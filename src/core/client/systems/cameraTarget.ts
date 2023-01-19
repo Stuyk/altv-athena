@@ -6,7 +6,7 @@ import { Timer } from '@AthenaClient/utility/timers';
 import { drawText3D } from '@AthenaClient/utility/text';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { ObjectWheelMenu } from '@AthenaClient/menus/object';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 interface ClosestTarget {
     scriptID: number;
@@ -204,4 +204,4 @@ export const CameraTarget = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(InternalFunctions.init);
+onTicksStart.add(InternalFunctions.init);

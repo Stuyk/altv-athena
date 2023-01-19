@@ -2,6 +2,7 @@ import { AthenaClient } from '@AthenaClient/api/athena';
 import * as alt from 'alt-client';
 
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
+import { onTicksStart } from './onTicksStart';
 
 const KEY_UP_BINDS: Keybinds = {};
 const DELAY_BETWEEN_LONG_PRESSES = 800;
@@ -168,4 +169,4 @@ export const KeybindController = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(KeybindController.start);
+onTicksStart.add(KeybindController.start);

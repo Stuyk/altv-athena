@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const NextUpdate = {
     freeze: Date.now() + 200,
@@ -36,4 +36,4 @@ const InternalFunctions = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(InternalFunctions.start);
+onTicksStart.add(InternalFunctions.start);

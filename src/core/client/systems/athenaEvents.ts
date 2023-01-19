@@ -4,7 +4,7 @@ import { ATHENA_EVENTS_PLAYER_CLIENT } from '@AthenaShared/enums/athenaEvents';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { loadSceneAtCoords } from '@AthenaClient/utility/scene';
 import { Timer } from '@AthenaClient/utility/timers';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let interval: number;
 let isUpdatingWaypoint = false;
@@ -124,4 +124,4 @@ export const AthenaEvents = {
     ...AthenaEventsConst,
 };
 
-AthenaClient.events.onTicksStart.add(AthenaEvents.init);
+onTicksStart.add(AthenaEvents.init);

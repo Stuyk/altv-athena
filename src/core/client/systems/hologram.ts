@@ -6,7 +6,7 @@ import { distance2d } from '@AthenaShared/utility/vector';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { loadModel } from '@AthenaClient/utility/model';
 import { Timer } from '@AthenaClient/utility/timers';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const MAX_HOLOGRAM_DISTANCE = 10;
 const TIME_TO_CHECK_HOLOGRAMS = 1000 * 3; // 3s
@@ -138,4 +138,4 @@ export const HologramSystem = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(HologramSystem.init);
+onTicksStart.add(HologramSystem.init);

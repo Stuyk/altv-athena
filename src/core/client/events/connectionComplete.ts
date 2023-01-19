@@ -3,7 +3,7 @@ import * as native from 'natives';
 
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from './onTicksStart';
 
 alt.on('connectionComplete', handleConnectionComplete);
 alt.setWatermarkPosition(4);
@@ -47,4 +47,4 @@ function handleTick() {
     native.setAudioFlag('DisableFlightMusic', true);
 }
 
-AthenaClient.events.onTicksStart.add(handleTick);
+onTicksStart.add(handleTick);

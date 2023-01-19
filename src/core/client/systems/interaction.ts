@@ -18,7 +18,7 @@ import { ClientItemStreamer } from '@AthenaClient/streamers/item';
 import { Timer } from '@AthenaClient/utility/timers';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { CameraTarget } from './cameraTarget';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const LEFT_SHIFT = 16;
 const TIME_BETWEEN_CHECKS = 500;
@@ -323,4 +323,4 @@ export const InteractionController = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(InteractionController.init);
+onTicksStart.add(InteractionController.init);

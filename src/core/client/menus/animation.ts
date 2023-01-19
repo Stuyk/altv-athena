@@ -13,7 +13,7 @@ import funAnims from './animationMenus/funAnims';
 import idleAnims from './animationMenus/idleAnims';
 import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);
@@ -117,4 +117,4 @@ function init() {
     KeybindController.registerKeybind({ key: KEY_BINDS.ANIMATION, singlePress: handleAnimationMenu });
 }
 
-AthenaClient.events.onTicksStart.add(init);
+onTicksStart.add(init);

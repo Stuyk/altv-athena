@@ -9,6 +9,7 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 import './events/keyHeld';
+import './events/onTicksStart';
 
 // Interfaces - Always Load First
 import './extensions/meta';

@@ -2,7 +2,7 @@ import * as alt from 'alt-client';
 
 import { WebViewController } from '@AthenaClient/extensions/view2';
 import ViewModel from '@AthenaClient/models/viewModel';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const PAGE_NAME = 'Audio';
 let interval;
@@ -95,4 +95,4 @@ export class AudioView {
     }
 }
 
-AthenaClient.events.onTicksStart.add(InternalFunctions.open);
+onTicksStart.add(InternalFunctions.open);

@@ -5,6 +5,7 @@ import { INVENTORY_EVENTS } from '../shared/events';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { PLAYER_LOCAL_META } from '@AthenaShared/enums/playerSynced';
 import { INVENTORY_CONFIG } from '../shared/config';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let inventory: Array<Item<StoredItem>> = [];
 let toolbar: Array<Item<StoredItem>> = [];
@@ -64,5 +65,5 @@ function processMetaChange(key: string, value: any, oldValue: any): void {
     AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
 }
 
-AthenaClient.events.onTicksStart.add(init);
+onTicksStart.add(init);
 alt.on('localMetaChange', processMetaChange);

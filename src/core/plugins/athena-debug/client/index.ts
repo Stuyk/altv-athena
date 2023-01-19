@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 
 import { ATHENA_DEBUG_EVENTS } from '../shared/events';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const F1_KEY = 112;
 
@@ -15,4 +15,4 @@ function init() {
     });
 }
 
-AthenaClient.events.onTicksStart.add(init);
+onTicksStart.add(init);

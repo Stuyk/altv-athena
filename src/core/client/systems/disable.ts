@@ -3,7 +3,7 @@ import * as native from 'natives';
 import { SHARED_CONFIG } from '@AthenaShared/configurations/shared';
 import { Timer } from '@AthenaClient/utility/timers';
 import { VehicleController } from './vehicle';
-import { AthenaClient } from '@AthenaClient/api/athena';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 let interval: number | undefined;
 
@@ -37,4 +37,4 @@ function disableDefaultBehavior(): void {
     VehicleController.handleVehicleDisables();
 }
 
-AthenaClient.events.onTicksStart.add(toggleOn);
+onTicksStart.add(toggleOn);

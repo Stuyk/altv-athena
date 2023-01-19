@@ -4,6 +4,7 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WebViewController } from '@AthenaClient/extensions/view2';
 import { CHAT_WEBVIEW_EVENTS } from '../shared/events';
 import { MessageInfo } from '@AthenaClient/systems/messenger';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const THE_LETTER_T = 84;
 const PAGE_NAME = 'Chat';
@@ -76,7 +77,7 @@ const InternalFunctions = {
     },
 };
 
-AthenaClient.events.onTicksStart.add(() => {
+onTicksStart.add(() => {
     AthenaClient.events.keyBinds.registerKeybind({ singlePress: InternalFunctions.openMessageBox, key: THE_LETTER_T });
     InternalFunctions.open();
 });
