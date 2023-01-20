@@ -6,4 +6,5 @@ export const WebViewEventNames = {
     EMIT_READY: 'athena:view:emit:page:ready',
     SET_PAGES: 'athena:view:set:pages',
     CLOSE_PAGE: 'athena:Close:Page',
+    PLAY_SOUND: 'athena:Play:Sound',
 };

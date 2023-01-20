@@ -3,6 +3,8 @@ import * as alt from 'alt-client';
 import { WebViewController } from '@AthenaClient/extensions/view2';
 import ViewModel from '@AthenaClient/models/viewModel';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 const PAGE_NAME = 'Audio';
 let interval;
@@ -24,6 +26,7 @@ class InternalFunctions implements ViewModel {
         }
 
         WebViewController.registerPersistentPage(PAGE_NAME);
+        AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND, AudioView.play3DAudio);
     }
 
     /**

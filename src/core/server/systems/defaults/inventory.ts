@@ -43,13 +43,12 @@ const Internal = {
      * @param {alt.Player} player
      * @param {Array<StoredItem>} newValue
      */
-    syncInventory(player: alt.Player, newValue: Array<StoredItem>) {
+    syncInventory(player: alt.Player) {
         if (!enabled) {
             return;
         }
 
-        const fullInventory = Athena.systems.itemManager.inventory.convertFromStored(newValue);
-        player.setLocalMeta(PLAYER_LOCAL_META.INVENTORY, fullInventory);
+        Internal.sync(player);
     },
     /**
      * Automatically synchronizes the toolbar for a player when data is changed.
@@ -57,13 +56,12 @@ const Internal = {
      * @param {alt.Player} player
      * @param {Array<StoredItem>} newValue
      */
-    syncToolbar(player: alt.Player, newValue: Array<StoredItem>) {
+    syncToolbar(player: alt.Player) {
         if (!enabled) {
             return;
         }
 
-        const fullToolbar = Athena.systems.itemManager.inventory.convertFromStored(newValue);
-        player.setLocalMeta(PLAYER_LOCAL_META.TOOLBAR, fullToolbar);
+        Internal.sync(player);
     },
     /**
      * Initializes the initial events for handling document changes.

@@ -74,6 +74,7 @@ import { INVENTORY_EVENTS } from '../../shared/events';
 import { getImagePath } from '../utility/inventoryIcon';
 import { InventoryTypes } from '../utility/interfaces';
 import { INVENTORY_CONFIG } from '../../shared/config';
+import { debounceReady } from '../utility/debounce';
 
 export default defineComponent({
     name: 'Inventory',
@@ -169,7 +170,12 @@ export default defineComponent({
                 return;
             }
 
+            if (!debounceReady()) {
+                return;
+            }
+
             // Call server-side swap / stack
+            WebViewEvents.playSound(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_move.ogg`, 0.2);
             WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SWAP, startType, startIndex, endType, endIndex);
         },
         /**
@@ -263,6 +269,10 @@ export default defineComponent({
             }
 
             if (type === 'cancel') {
+                return;
+            }
+
+            if (!debounceReady()) {
                 return;
             }
 

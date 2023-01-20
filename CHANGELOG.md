@@ -152,18 +152,25 @@ Plugin System
 Inventory - Default System
 - Adds synchronization for inventory and toolbar data.
 - This can be disabled through the system defaults API if necessary.
+- Fixed small bug with synchronization that would only sync one data value instead of both.
 
 Inventory Plugin
 - Hooked up a majority of the functionality.
 - Made some general design changes such as quantity displayed.
 - Added context menu option for give.
 - Added some better handling for some events on client-side.
+- Hooked up main swapping / stacking logic when dragging.
+- Added sounds for opening / closing inventory
+- Added sound for moving an item
 
 Event for SYSTEM_EVENTS.TICKS_START
 - Removed all default usages.
 - Introduced an API that can be called on client-side to auto-append callbacks.
 - onTicksStart.add(() => {});
 - Makes it much easier to understand what is happening.
+
+WebViewEvents
+- Added WebViewEvents.playSound - Play custom sounds from any page.
 ```
 
 

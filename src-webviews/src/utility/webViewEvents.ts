@@ -122,6 +122,25 @@ export default class WebViewEvents {
     static on(eventName: string, callback: (...args: any[]) => void) {
         OnEvents[eventName] = callback;
     }
+
+    /**
+     * Play a sound from the WebView instance.
+     *
+     * @static
+     * @param {string} soundName
+     * @param {number} pan
+     * @param {number} volume
+     * @param {string} [soundInstantID]
+     * @memberof WebViewEvents
+     */
+    static playSound(soundName: string, volume: number, soundInstantID?: string) {
+        if (!('alt' in window)) {
+            console.log(`[CLIENT] -> Sound Emit: ${soundName} ${volume} ${soundInstantID}`);
+            return;
+        }
+
+        alt.emit(WebViewEventNames.EMIT_CLIENT, WebViewEventNames.PLAY_SOUND, soundName, 0, volume, soundInstantID);
+    }
 }
 
 InternalFunctions.init();
