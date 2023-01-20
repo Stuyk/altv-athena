@@ -4,7 +4,23 @@ import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
-type InventoryType = 'inventory' | 'toolbar' | 'custom';
+/**
+ * Do not modify this directly.
+ * These are used as internal values.
+ * Use the config setter / getter in ItemManager system to modify.
+ * @type {*}
+ * */
+let DEFAULT = {
+    inventory: {
+        size: 30,
+    },
+    toolbar: {
+        size: 4,
+    },
+    custom: {
+        size: 256,
+    },
+};
 
 export interface ItemQuantityChange {
     /**
@@ -24,23 +40,9 @@ export interface ItemQuantityChange {
     remaining: number;
 }
 
-/**
- * Do not modify this directly.
- * These are used as internal values.
- * Use the config setter / getter in ItemManager system to modify.
- * @type {*}
- * */
-let DEFAULT = {
-    inventory: {
-        size: 30,
-    },
-    toolbar: {
-        size: 4,
-    },
-    custom: {
-        size: 256,
-    },
-};
+type InventoryType = 'inventory' | 'toolbar' | 'custom';
+type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number };
+type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem> };
 
 const InternalFunctions = {
     item: {
@@ -472,6 +474,7 @@ export const ItemManager = {
         },
         /**
          * Get an item at a specific slot.
+         * Returns undefined if an item is unavailable in a slot.
          *
          * @param {number} slot
          * @param {Array<StoredItem>} data
@@ -521,6 +524,10 @@ export const ItemManager = {
             }
 
             let copyOfData = deepCloneArray<StoredItem>(data);
+            if (typeof dataSize === 'string') {
+                dataSize = DEFAULT[dataSize].size;
+            }
+
             if (data.length >= dataSize) {
                 return undefined;
             }
@@ -615,6 +622,131 @@ export const ItemManager = {
             copyOfData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[toIndex]);
 
             return copyOfData;
+        },
+        /**
+         * Swaps slots between a single data set.
+         *
+         * @param {number} fromSlot
+         * @param {number} toSlot
+         * @param {Array<StoredItem>} data
+         * @param {}
+         * @return {(Array<StoredItem> | undefined)}
+         */
+        swap(
+            fromSlot: number,
+            toSlot: number,
+            data: Array<StoredItem>,
+            dataSize: InventoryType | number = DEFAULT.custom.size,
+        ): Array<StoredItem> | undefined {
+            const startIndex = data.findIndex((x) => x.slot === fromSlot);
+            const endIndex = data.findIndex((x) => x.slot === toSlot);
+
+            // Force data set sizing based on configuration.
+            if (typeof dataSize === 'string') {
+                dataSize = DEFAULT[dataSize].size;
+            }
+
+            if (toSlot > dataSize) {
+                return undefined;
+            }
+
+            if (startIndex <= -1) {
+                return undefined;
+            }
+
+            if (startIndex === endIndex) {
+                return undefined;
+            }
+
+            // Simply swap the slots.
+            let copyOfData = deepCloneArray<StoredItem>(data);
+            copyOfData[startIndex].slot = toSlot;
+
+            if (endIndex !== -1) {
+                copyOfData[endIndex].slot = fromSlot;
+            }
+
+            return copyOfData;
+        },
+        /**
+         * Swap items between two different data sets; with a given size.
+         *
+         * @param {ComplexSwap} from
+         * @param {ComplexSwap} to
+         * @return {(ComplexSwapReturn | undefined)}
+         */
+        swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
+            if (typeof from.size === 'string') {
+                from.size = DEFAULT[from.size].size;
+            }
+
+            if (typeof to.size === 'string') {
+                to.size = DEFAULT[to.size].size;
+            }
+
+            const fromIndex = from.data.findIndex((x) => x.slot === from.slot);
+            const toIndex = to.data.findIndex((x) => x.slot === to.slot);
+
+            if (fromIndex <= -1) {
+                return undefined;
+            }
+
+            if (to.slot > to.size) {
+                return undefined;
+            }
+
+            let fromData = deepCloneArray<StoredItem>(from.data);
+            let toData = deepCloneArray<StoredItem>(to.data);
+
+            // Clone of the original items, if the item is available.
+            let fromItem = deepCloneObject<StoredItem>(fromData[fromIndex]);
+            let toItem: StoredItem;
+            if (toIndex !== -1) {
+                toItem = deepCloneObject<StoredItem>(toData[toIndex]);
+                toItem.slot = from.slot;
+                toData.splice(toIndex, 1);
+
+                // Move the 'to' item to the other data set.
+                fromData.push(toItem);
+            }
+
+            fromData.splice(fromIndex, 1);
+            fromItem.slot = to.slot;
+
+            // Move the 'from' item to the other data set.
+            toData.push(fromItem);
+            return { from: fromData, to: toData };
+        },
+    },
+    utility: {
+        /**
+         * Compare two items to check if they are the same version.
+         *
+         * @param {StoredItem} firstItem
+         * @param {StoredItem} secondItem
+         * @return {boolean}
+         */
+        compare(firstItem: StoredItem, secondItem: StoredItem): boolean {
+            const firstUndefined = typeof firstItem === 'undefined';
+            const secUndefined = typeof secondItem === 'undefined';
+
+            if (firstUndefined && secUndefined) {
+                return false;
+            }
+
+            if (!firstUndefined && secUndefined) {
+                return false;
+            }
+
+            if (firstUndefined && !secUndefined) {
+                return false;
+            }
+
+            if (firstItem.dbName !== secondItem.dbName) {
+                return false;
+            }
+
+            return firstItem.version === secondItem.version;
         },
     },
 };

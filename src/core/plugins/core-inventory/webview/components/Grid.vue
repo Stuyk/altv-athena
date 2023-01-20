@@ -299,7 +299,7 @@ export default defineComponent({
             }
 
             // Send Event to Server to Unequip
-            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'toolbar', slot);
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, 'toolbar', slot);
         },
     },
     mounted() {
