@@ -53,6 +53,8 @@ export default defineComponent({
     min-width: 1280px;
     max-width: 1280px;
     max-height: 720px;
-    justify-content: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding-right: 5vw;
 }
 </style>
