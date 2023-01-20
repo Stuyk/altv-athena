@@ -43,10 +43,7 @@ export default {
         if (file.includes('vue-athena')) {
             try {
                 const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                    alt.logWarning(`Server running with Vue Debug mode on.`);
-                    alt.logWarning(`Open http://localhost:3000 in your browser`);
-                    alt.logWarning(`Only a local player may connect.`);
-                    alt.logWarning(`Server MUST be running on a local computer`);
+                    alt.log(`~c~Vue Server Running: ~g~http://localhost:3000`);
                     isVueDebug = true;
                     sock.destroy();
                 });

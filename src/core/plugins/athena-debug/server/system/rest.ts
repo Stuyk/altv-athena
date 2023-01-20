@@ -100,7 +100,7 @@ const RestServiceConst = {
         if (!server) {
             server = http.createServer(InternalFunctions.response);
             server.listen(port, () => {
-                alt.log(`~m~Debug REST Server Listening on http://localhost:${port}`);
+                alt.log(`~c~REST Server: ~lg~http://localhost:${port}`);
             });
         }
     },
