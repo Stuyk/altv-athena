@@ -62,7 +62,7 @@
                 <div class="icon pr-2">
                     <Icon class="grey--text text--lighten-1" :noSelect="true" :size="18" icon="icon-anvil"></Icon>
                 </div>
-                <span class="weight-text">{{ totalWeight }} / {{ maxWeight }}</span>
+                <span class="weight-text">{{ totalWeight }} / {{ maxWeight }} {{ units }}</span>
             </div>
         </div>
         <Context :contextTitle="title" :x="context.x" :y="context.y" v-if="context">
@@ -116,6 +116,7 @@ export default defineComponent({
             totalWeight: 0,
             isWeightEnabled: true,
             maxWeight: 64,
+            units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
         };
     },
     methods: {
