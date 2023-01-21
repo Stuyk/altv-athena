@@ -55,6 +55,14 @@
                 </template>
             </Slot>
         </div>
+        <div class="weight-frame" v-if="isWeightEnabled">
+            <div class="split">
+                <div class="icon pr-2">
+                    <Icon class="grey--text text--lighten-1" :noSelect="true" :size="18" icon="icon-anvil"></Icon>
+                </div>
+                <span class="weight-text">{{ totalWeight }} / {{ maxWeight }}</span>
+            </div>
+        </div>
         <Context :contextTitle="title" :x="context.x" :y="context.y" v-if="context">
             <div @click="contextAction('use')">Use</div>
             <div @click="contextAction('split')">Split</div>
@@ -93,7 +101,7 @@ export default defineComponent({
         return {
             toolbar: [] as Array<Item>,
             inventory: [] as Array<Item>,
-            maxSlots: 25,
+            maxSlots: 30,
             maxToolbarSlots: 5,
             title: '',
             context: undefined as { x: number; y: number } | undefined,
@@ -103,6 +111,9 @@ export default defineComponent({
             itemDescription: '',
             showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
             showToolbarNumbers: INVENTORY_CONFIG.WEBVIEW.TOOLBAR.SHOW_NUMBERS,
+            totalWeight: 0,
+            isWeightEnabled: true,
+            maxWeight: 64,
         };
     },
     methods: {
@@ -242,9 +253,10 @@ export default defineComponent({
         setMaxSlots(value: number) {
             this.maxSlots = value;
         },
-        setItems(inventory: Array<Item>, toolbar: Array<Item>) {
+        setItems(inventory: Array<Item>, toolbar: Array<Item>, totalWeight: number) {
             this.inventory = inventory;
             this.toolbar = toolbar;
+            this.totalWeight = totalWeight;
         },
         contextMenu(e: MouseEvent, slot: number) {
             e.preventDefault();
@@ -311,10 +323,22 @@ export default defineComponent({
             // Send Event to Server to Unequip
             WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, 'toolbar', slot);
         },
+        setSize(value: number) {
+            this.maxSlots = value;
+        },
+        setWeightState(value: boolean) {
+            this.isWeightEnabled = value;
+        },
+        setMaxWeight(value: number) {
+            this.maxWeight = value;
+        },
     },
     mounted() {
         if ('alt' in window) {
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, this.setItems);
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_SIZE, this.setSize);
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, this.setWeightState);
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, this.setMaxWeight);
             return;
         }
 
@@ -337,6 +361,9 @@ export default defineComponent({
                 { ...exampleItem, slot: 24, icon: 'pistol50', name: 'Pistol .50' },
             ],
             [{ ...exampleItem, icon: 'assaultrifle', name: 'Assault Rifle' }],
+            25,
+            true,
+            25,
         );
     },
     watch: {
@@ -356,6 +383,7 @@ export default defineComponent({
     border-radius: 6px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
+    max-height: 636px;
 }
 
 .inventory-frame .inventory-toolbar {
@@ -384,7 +412,7 @@ export default defineComponent({
     box-sizing: border-box;
     overflow-y: scroll;
     justify-content: space-evenly;
-    max-height: 610px;
+    max-height: 487px;
     padding-top: 12px;
 }
 
@@ -398,5 +426,20 @@ export default defineComponent({
 
 .item-outline {
     border: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.weight-frame {
+    display: flex;
+    width: 100%;
+    min-height: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+.weight-text {
+    font-size: 12px;
+    font-family: 'Consolas';
+    padding-top: 3px;
 }
 </style>

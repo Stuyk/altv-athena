@@ -22,4 +22,6 @@ export enum PLAYER_SYNCED_META {
 export enum PLAYER_LOCAL_META {
     INVENTORY = 'player-inventory',
     TOOLBAR = 'player-toolbar',
+    TOTAL_WEIGHT = 'player-total-weight',
+    INVENTORY_SIZE = 'player-inventory-size',
 }

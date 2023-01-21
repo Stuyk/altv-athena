@@ -1477,3 +1477,7 @@ export function getWeaponByName(name: string): Weapon | null {
 export function getWeaponList(): Array<Weapon> {
     return Object.values(WeaponList);
 }
+
+export function getWeaponMap(): { [name: string]: Weapon } {
+    return WeaponList;
+}

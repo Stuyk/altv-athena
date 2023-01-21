@@ -124,6 +124,15 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
     slot: number;
 
     /**
+     * A generic way to flag an item to be equipped.
+     * Equipped can mean anything in the code base; it's up to the user to define its equip usage.
+     *
+     * @type {boolean}
+     * @memberof StoredItem
+     */
+    isEquipped?: boolean;
+
+    /**
      * The weight calculated for this item.
      *
      * @type {number}
@@ -201,7 +210,7 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
     consumableEventToCall?: string;
 
     /**
-     * The equipment type associated with this item.
+     * Used as a way to flag an item as an equipment type.
      *
      * @type {EQUIPMENT_TYPE}
      * @memberof BaseItem

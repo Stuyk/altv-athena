@@ -9,6 +9,7 @@ import './events/connectionComplete';
 import './events/disconnect';
 import './events/keyup';
 import './events/keyHeld';
+import './events/onInventoryUpdate';
 import './events/onTicksStart';
 
 // Interfaces - Always Load First
@@ -58,6 +59,7 @@ import './systems/messenger';
 import './systems/meta';
 import './systems/noclip';
 import './systems/particle';
+import './systems/playerConfig';
 import './systems/progressBar';
 import './systems/scenarios';
 import './systems/sound';

@@ -19,5 +19,8 @@ export const INVENTORY_EVENTS = {
     },
     TO_WEBVIEW: {
         SET_INVENTORY: 'inventory:event:set:inventory',
+        SET_SIZE: 'inventory:event:set:size',
+        SET_WEIGHT_STATE: 'inventory:event:set:weight:state',
+        SET_MAX_WEIGHT: 'inventory:event:set:max:weight',
     },
 };

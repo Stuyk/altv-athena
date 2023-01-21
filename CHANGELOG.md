@@ -140,6 +140,9 @@ Item Manager
 --- add - Adds an item amount to an inventory given an array size, creates new items automatically.  Returns undefined if invalid.
 --- sub - Subs an item amount from an inventory. Returns undefined if invalid.
 --- getFreeSlot - Determines a free slot given an array size
+- Weight Configurations
+- Inventory Size Configurations
+- Weight Calculation / Auto-restrictions
 
 Item Effects
 - Reworked to support new API
@@ -171,6 +174,14 @@ Event for SYSTEM_EVENTS.TICKS_START
 
 WebViewEvents
 - Added WebViewEvents.playSound - Play custom sounds from any page.
+
+Weapon Items List
+- Added a default plugin that auto-appends a weapon item list to the database.
+
+Player Config
+- Player config uses the player.setLocalMeta internally.
+- However, this wraps around the event to provide type safety and Athena specific events easily.
+- On client-side values can be listened to for changes; which you can do whatever you need with it.
 ```
 
 

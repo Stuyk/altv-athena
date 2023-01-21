@@ -8,6 +8,7 @@ import { ItemFactory } from '@AthenaServer/systems/itemFactory';
 const Inventory = {
     /**
      * Add a new stored item to a user, must specify a quantity of greater than zero.
+     * Automatically checks weight upon new item additions. Exceeding the weight; cancels the add.
      * Does not look into toolbar.
      *
      * @param {alt.Player} player
@@ -29,8 +30,13 @@ const Inventory = {
             data.inventory = [];
         }
 
+        item.data = Object.assign(baseItem.data, item.data);
         const newInventoryData = ItemManager.inventory.add(item, data.inventory, 'inventory');
         if (typeof newInventoryData === 'undefined') {
+            return false;
+        }
+
+        if (ItemManager.inventory.isWeightExceeded([newInventoryData, data.toolbar])) {
             return false;
         }
 

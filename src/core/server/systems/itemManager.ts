@@ -3,6 +3,9 @@ import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
+
+alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 
 /**
  * Do not modify this directly.
@@ -10,7 +13,7 @@ import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy'
  * Use the config setter / getter in ItemManager system to modify.
  * @type {*}
  * */
-let DEFAULT = {
+let DEFAULT_CONFIG = {
     inventory: {
         size: 30,
     },
@@ -19,6 +22,10 @@ let DEFAULT = {
     },
     custom: {
         size: 256,
+    },
+    weight: {
+        enabled: true,
+        player: 64,
     },
 };
 
@@ -151,16 +158,26 @@ export const ItemManager = {
          *
          * @param {typeof DEFAULT} config
          */
-        set(config: typeof DEFAULT) {
-            DEFAULT = Object.assign(DEFAULT, config);
+        set(config: typeof DEFAULT_CONFIG) {
+            DEFAULT_CONFIG = Object.assign(DEFAULT_CONFIG, config);
+            alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, DEFAULT_CONFIG.weight.enabled);
         },
         /**
          * Returns the current inventory configurations.
          *
          * @return {typeof DEFAULT}
          */
-        get(): typeof DEFAULT {
-            return DEFAULT;
+        get(): typeof DEFAULT_CONFIG {
+            return DEFAULT_CONFIG;
+        },
+        disable: {
+            /**
+             * Use this function to disable weight restrictions on inventories.
+             */
+            weight() {
+                DEFAULT_CONFIG.weight.enabled = false;
+                alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, false);
+            },
         },
     },
     quantity: {
@@ -272,7 +289,7 @@ export const ItemManager = {
         add<CustomData = {}>(
             item: Omit<StoredItem<CustomData>, 'slot'>,
             data: Array<StoredItem>,
-            size: InventoryType | number = DEFAULT.custom.size,
+            size: InventoryType | number = DEFAULT_CONFIG.custom.size,
         ): Array<StoredItem> | undefined {
             if (item.quantity <= -1) {
                 alt.logWarning(`ItemManager: Cannot add negative quantity to an item.`);
@@ -430,7 +447,7 @@ export const ItemManager = {
          * @param {Array<StoredItem>} data
          * @return {number}
          */
-        getWeight(data: Array<StoredItem>): number {
+        getWeight(data: Array<StoredItem | Item>): number {
             let totalWeight = 0;
             for (let item of data) {
                 if (!item.totalWeight) {
@@ -441,6 +458,43 @@ export const ItemManager = {
             }
 
             return totalWeight;
+        },
+        /**
+         * Get the total weight for given data sets.
+         *
+         * @param {(Array<Array<StoredItem | Item>>)} dataSets
+         * @return {number}
+         */
+        getTotalWeight(dataSets: Array<Array<StoredItem | Item>>): number {
+            let weight = 0;
+
+            for (let dataSet of dataSets) {
+                weight += ItemManager.inventory.getWeight(dataSet);
+            }
+
+            return weight;
+        },
+        /**
+         * Determine if the weight is exceeded for a given data sets given the amount of weight it cannot exceed.
+         *
+         * @param {(Array<Array<StoredItem | Item>>)} dataSets
+         * @param {number} [amount=DEFAULT_CONFIG.weight.player]
+         * @return {boolean}
+         */
+        isWeightExceeded(
+            dataSets: Array<Array<StoredItem | Item>>,
+            amount: number = DEFAULT_CONFIG.weight.player,
+        ): boolean {
+            if (!DEFAULT_CONFIG.weight.enabled) {
+                return false;
+            }
+
+            const total = ItemManager.inventory.getTotalWeight(dataSets);
+            if (total > amount) {
+                return true;
+            }
+
+            return false;
         },
     },
     slot: {
@@ -454,12 +508,12 @@ export const ItemManager = {
          */
         findOpen(slotSize: InventoryType | number, data: Array<StoredItem>): number | undefined {
             if (typeof slotSize === 'string') {
-                if (!DEFAULT[String(slotSize)]) {
+                if (!DEFAULT_CONFIG[String(slotSize)]) {
                     return undefined;
                 }
             }
 
-            const maxSlot = typeof slotSize === 'number' ? Number(slotSize) : DEFAULT[String(slotSize)].size;
+            const maxSlot = typeof slotSize === 'number' ? Number(slotSize) : DEFAULT_CONFIG[String(slotSize)].size;
 
             for (let i = 0; i < maxSlot; i++) {
                 const index = data.findIndex((x) => x.slot === i);
@@ -511,13 +565,13 @@ export const ItemManager = {
          * @param {number} slot
          * @param {Array<StoredItem>} data
          * @param {number} splitCount
-         * @param {(InventoryType | number)} [size=DEFAULT.custom.size]
+         * @param {(InventoryType | number)} [size=DEFAULT_CONFIG.custom.size]
          */
         splitAt(
             slot: number,
             data: Array<StoredItem>,
             splitCount: number,
-            dataSize: InventoryType | number = DEFAULT.custom.size,
+            dataSize: InventoryType | number = DEFAULT_CONFIG.custom.size,
         ): Array<StoredItem> | undefined {
             if (splitCount <= -1) {
                 return undefined;
@@ -525,7 +579,7 @@ export const ItemManager = {
 
             let copyOfData = deepCloneArray<StoredItem>(data);
             if (typeof dataSize === 'string') {
-                dataSize = DEFAULT[dataSize].size;
+                dataSize = DEFAULT_CONFIG[dataSize].size;
             }
 
             if (data.length >= dataSize) {
@@ -636,14 +690,14 @@ export const ItemManager = {
             fromSlot: number,
             toSlot: number,
             data: Array<StoredItem>,
-            dataSize: InventoryType | number = DEFAULT.custom.size,
+            dataSize: InventoryType | number = DEFAULT_CONFIG.custom.size,
         ): Array<StoredItem> | undefined {
             const startIndex = data.findIndex((x) => x.slot === fromSlot);
             const endIndex = data.findIndex((x) => x.slot === toSlot);
 
             // Force data set sizing based on configuration.
             if (typeof dataSize === 'string') {
-                dataSize = DEFAULT[dataSize].size;
+                dataSize = DEFAULT_CONFIG[dataSize].size;
             }
 
             if (toSlot > dataSize) {
@@ -677,11 +731,11 @@ export const ItemManager = {
          */
         swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
             if (typeof from.size === 'string') {
-                from.size = DEFAULT[from.size].size;
+                from.size = DEFAULT_CONFIG[from.size].size;
             }
 
             if (typeof to.size === 'string') {
-                to.size = DEFAULT[to.size].size;
+                to.size = DEFAULT_CONFIG[to.size].size;
             }
 
             const fromIndex = from.data.findIndex((x) => x.slot === from.slot);

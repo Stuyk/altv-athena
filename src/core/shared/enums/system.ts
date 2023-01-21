@@ -68,6 +68,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_TASK_MOVE = 'task:Move',
     PLAYER_EMIT_TASK_TIMELINE = 'task:Timeline',
     PLAYER_EMIT_INVENTORY_NOTIFICATION = 'inventory:Notification',
+    PLAYER_EMIT_INVENTORY_SYNC = 'inventory:Sync',
     PLAYER_EMIT_TEMP_OBJECT_LERP = 'temp:Object:Lerp',
     PLAYER_EMIT_WHEEL_MENU = 'wheelMenu:Dynamic',
     PLAYER_EMIT_MISSION_TEXT = 'missionText:Create',

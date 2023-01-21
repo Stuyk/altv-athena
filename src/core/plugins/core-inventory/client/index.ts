@@ -1,15 +1,59 @@
-import * as alt from 'alt-client';
 import { AthenaClient } from '@AthenaClient/api/athena';
-import { Item, StoredItem } from '@AthenaShared/interfaces/item';
+import { Item } from '@AthenaShared/interfaces/item';
 import { INVENTORY_EVENTS } from '../shared/events';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { PLAYER_LOCAL_META } from '@AthenaShared/enums/playerSynced';
 import { INVENTORY_CONFIG } from '../shared/config';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate';
 
-let inventory: Array<Item<StoredItem>> = [];
-let toolbar: Array<Item<StoredItem>> = [];
+let inventory: Array<Item> = [];
+let toolbar: Array<Item> = [];
+let totalWeight: number;
+let isWeightEnabled = false;
+let inventorySize = 30;
+let maxWeight = 64;
 let isOpen = false;
+
+function onUpdate(_inventory: Array<Item>, _toolbar: Array<Item>, _totalWeight: number) {
+    inventory = _inventory;
+    toolbar = _toolbar;
+    totalWeight = _totalWeight;
+
+    if (!isOpen) {
+        return;
+    }
+
+    AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar, totalWeight);
+}
+
+function onInventorySizeChange(value: number) {
+    inventorySize = value;
+
+    if (!isOpen) {
+        return;
+    }
+
+    AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_SIZE, inventorySize);
+}
+
+function onInventoryWeightStateChange(value: boolean) {
+    isWeightEnabled = value;
+
+    if (!isOpen) {
+        return;
+    }
+
+    AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, isWeightEnabled);
+}
+
+function onInventoryMaxWeightChange(value: number) {
+    maxWeight = value;
+
+    if (!isOpen) {
+        return;
+    }
+
+    AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, maxWeight);
+}
 
 function init() {
     new AthenaClient.webview.page({
@@ -17,7 +61,11 @@ function init() {
         callbacks: {
             onReady: () => {
                 isOpen = true;
-                AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
+
+                AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar, totalWeight);
+                AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, isWeightEnabled);
+                AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_SIZE, inventorySize);
+                AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, maxWeight);
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`, 0.2);
             },
             onClose: () => {
@@ -49,23 +97,11 @@ function init() {
             },
         },
     });
-}
 
-function processMetaChange(key: string, value: any, oldValue: any): void {
-    if (key === PLAYER_LOCAL_META.INVENTORY) {
-        inventory = value;
-    }
-
-    if (key === PLAYER_LOCAL_META.TOOLBAR) {
-        toolbar = value;
-    }
-
-    if (!isOpen) {
-        return;
-    }
-
-    AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar);
+    onInventoryUpdate.add(onUpdate);
+    AthenaClient.config.player.callback.add('inventory-size', onInventorySizeChange);
+    AthenaClient.config.player.callback.add('inventory-weight-enabled', onInventoryWeightStateChange);
+    AthenaClient.config.player.callback.add('inventory-max-weight', onInventoryMaxWeightChange);
 }
 
 onTicksStart.add(init);
-alt.on('localMetaChange', processMetaChange);

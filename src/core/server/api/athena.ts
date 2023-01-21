@@ -1,4 +1,5 @@
 import { getters } from '../systems/getters';
+import { configConst } from './consts/constConfig';
 import { controllersConst } from './consts/constControllers';
 import { dataConst } from './consts/constData';
 import { databaseConst } from './consts/constDatabase';
@@ -15,6 +16,7 @@ import { webviewConst } from './consts/constWebView';
 export const Athena = {
     database: databaseConst,
     controllers: controllersConst,
+    config: configConst,
     document: documentsConst,
     data: dataConst,
     events: eventsConst,
