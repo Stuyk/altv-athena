@@ -71,8 +71,12 @@ export default defineComponent({
             required: true,
             default: 0,
         },
+        highlight: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
-    methods: {},
     computed: {
         getDimensions() {
             let style = '';
@@ -83,14 +87,19 @@ export default defineComponent({
             return style;
         },
         getHover() {
-            return this.hasItem ? { 'can-hover': true } : {};
+            const data = {};
+
+            if (this.hasItem) {
+                data['can-hover'] = true;
+            }
+
+            if (this.highlight) {
+                data['highlight'] = true;
+                data['highlight-bg'] = true;
+            }
+
+            return data;
         },
-    },
-    mounted() {
-        //
-    },
-    unmounted() {
-        //
     },
 });
 </script>
@@ -128,12 +137,26 @@ export default defineComponent({
 
 .can-hover:hover {
     border: 4px solid rgba(17, 229, 187, 0.708);
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 2);
+    box-shadow: 0px 0px 3px rgba(255, 255, 255, 2);
     cursor: pointer;
 }
 
 .can-hover:active {
     transform: scale(0.98);
+}
+
+.highlight {
+    border: 4px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.highlight-bg {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.5) 10px,
+        rgba(0, 0, 0, 0.5) 20px
+    ) !important;
 }
 
 .index {

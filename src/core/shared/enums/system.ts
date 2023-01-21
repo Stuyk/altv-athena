@@ -81,6 +81,8 @@ export enum SYSTEM_EVENTS {
     //
     PLAYER_TICK = 'player:Tick',
     //
+    PLAYER_TOOLBAR_INVOKE = 'player:Toolbar:Invoke',
+    PLAYER_TOOLBAR_ENABLE = 'player:Toolbar:Enable',
     PLAYER_TOOLBAR_SET = 'player:Toolbar',
     PLAYER_ITEM_CHANGE = 'player:ItemChange',
     //

@@ -21,5 +21,6 @@ import '../systems/vehicle';
 import '../systems/defaults/death';
 import '../systems/defaults/inventory';
 import '../systems/defaults/time';
+import '../systems/defaults/toolbar';
 import '../systems/defaults/weaponItems';
 import '../systems/defaults/weather';

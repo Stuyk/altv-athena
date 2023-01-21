@@ -31,8 +31,8 @@
             <Slot
                 v-for="(slot, index) in maxSlots"
                 class="slot"
-                :class="getSelectedItemClass('inventory', index)"
                 location="inventory"
+                :class="getSelectedItemClass('inventory', index)"
                 :key="index"
                 :hasItem="true"
                 :slot="index"
@@ -40,6 +40,7 @@
                 :quantity="getQuantity('inventory', index)"
                 :name="getName('inventory', index)"
                 :weight="getWeight('inventory', index)"
+                :highlight="getHighlight('inventory', index)"
                 @mouseenter="updateDescriptor('inventory', index)"
                 @mouseleave="updateDescriptor(undefined, undefined)"
                 @contextmenu="(e) => contextMenu(e, index)"
@@ -143,38 +144,12 @@ export default defineComponent({
             this.itemSingleClick = undefined;
         },
         singleClick(type: InventoryTypes, index: number) {
-            if (typeof this.itemSingleClick !== 'undefined') {
-                // Ignore same inventory slot
-                if (this.itemSingleClick.type === type && this.itemSingleClick.index === index) {
-                    return;
-                }
-
-                // Ignore inventory types that do not match.
-                // Combining should be done inside of inventory only.
-                if (this.itemSingleClick.type !== type) {
-                    return;
-                }
-
-                if (!('alt' in window)) {
-                    const secondItem = `${type}-${index}`;
-                    const firstItem = `${this.itemSingleClick.type}-${this.itemSingleClick.index}`;
-                    console.log(`Combine Event:`, firstItem, secondItem);
-                    this.itemSingleClick = undefined;
-                    return;
-                }
-
-                WebViewEvents.emitServer(
-                    INVENTORY_EVENTS.TO_SERVER.COMBINE,
-                    this.itemSingleClick.type,
-                    this.itemSingleClick.index,
-                    type,
-                    index,
-                );
-                this.itemSingleClick = undefined;
-                return;
-            }
-
-            this.itemSingleClick = { type, index };
+            // Do nothing with this; provides no functionality atm.
+            // if (typeof this.itemSingleClick !== 'undefined') {
+            //     this.itemSingleClick = undefined;
+            //     return;
+            // }
+            // this.itemSingleClick = { type, index };
         },
         endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
@@ -243,6 +218,19 @@ export default defineComponent({
             }
 
             return items[index].totalWeight ? items[index].totalWeight : 0;
+        },
+        getHighlight(type: 'inventory', slot: number): boolean {
+            if (typeof this[type] === undefined) {
+                return false;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            const index = items.findIndex((item) => item && item.slot === slot);
+            if (index <= -1) {
+                return false;
+            }
+
+            return items[index].isEquipped;
         },
         getItem(type: 'toolbar' | 'inventory', slot: number): Item | undefined {
             if (typeof this[type] === undefined) {
@@ -369,13 +357,16 @@ export default defineComponent({
             icon: 'assets/icons/crate.png',
         };
 
+        const exampleItems: Array<Item> = [
+            exampleItem,
+            { ...exampleItem, slot: 2, icon: 'burger', name: 'Burger', totalWeight: 2 },
+            { ...exampleItem, slot: 5, icon: 'burger', quantity: 5, name: 'Burger', totalWeight: 5 },
+            { ...exampleItem, slot: 23, icon: 'pistol', name: 'Pistol .50', totalWeight: 4, isEquipped: false },
+            { ...exampleItem, slot: 24, icon: 'pistol50', name: 'Pistol .50', totalWeight: 4, isEquipped: true },
+        ];
+
         this.setItems(
-            [
-                exampleItem,
-                { ...exampleItem, slot: 2, icon: 'burger', name: 'Burger', totalWeight: 2 },
-                { ...exampleItem, slot: 5, icon: 'burger', quantity: 5, name: 'Burger', totalWeight: 5 },
-                { ...exampleItem, slot: 24, icon: 'pistol50', name: 'Pistol .50', totalWeight: 4 },
-            ],
+            exampleItems,
             [{ ...exampleItem, icon: 'assaultrifle', name: 'Assault Rifle', totalWeight: 10 }],
             25,
             true,

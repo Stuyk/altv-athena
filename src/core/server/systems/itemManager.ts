@@ -4,6 +4,7 @@ import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
+import { ItemFactory } from './itemFactory';
 
 alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 
@@ -48,7 +49,7 @@ export interface ItemQuantityChange {
 }
 
 type InventoryType = 'inventory' | 'toolbar' | 'custom';
-type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number };
+type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number; type: InventoryType };
 type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem> };
 
 const InternalFunctions = {
@@ -661,6 +662,10 @@ export const ItemManager = {
             }
 
             let copyOfData = deepCloneArray<StoredItem>(data);
+            if (copyOfData[toIndex].quantity === baseItem.maxStack) {
+                return undefined;
+            }
+
             if (copyOfData[fromIndex].quantity + copyOfData[toIndex].quantity <= baseItem.maxStack) {
                 copyOfData[toIndex].quantity += copyOfData[fromIndex].quantity;
                 copyOfData.splice(fromIndex, 1);
@@ -754,9 +759,19 @@ export const ItemManager = {
 
             // Clone of the original items, if the item is available.
             let fromItem = deepCloneObject<StoredItem>(fromData[fromIndex]);
+            const fromBaseItem = ItemFactory.sync.getBaseItem(fromItem.dbName, fromItem.version);
+            if (to.type === 'toolbar' && fromBaseItem && fromBaseItem.behavior && !fromBaseItem.behavior.isToolbar) {
+                return undefined;
+            }
+
             let toItem: StoredItem;
             if (toIndex !== -1) {
                 toItem = deepCloneObject<StoredItem>(toData[toIndex]);
+                const toBaseItem = ItemFactory.sync.getBaseItem(toItem.dbName, toItem.version);
+                if (from.type === 'toolbar' && toBaseItem && toBaseItem.behavior && !toBaseItem.behavior.isToolbar) {
+                    return undefined;
+                }
+
                 toItem.slot = from.slot;
                 toData.splice(toIndex, 1);
 

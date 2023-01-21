@@ -66,6 +66,7 @@ import './systems/sound';
 import './systems/syncedMeta';
 import './systems/tasks';
 import './systems/tick';
+import './systems/toolbar';
 import './systems/vehicle';
 
 // Utility

@@ -65,8 +65,8 @@ const Internal = {
         // Swapping different slots with different data sets.
         if (startType !== endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
             const complexSwap = Athena.systems.itemManager.slot.swapBetween(
-                { slot: startIndex, data: data[startType], size: startType },
-                { slot: endIndex, data: data[endType], size: endType },
+                { slot: startIndex, data: data[startType], size: startType, type: startType },
+                { slot: endIndex, data: data[endType], size: endType, type: endType },
             );
 
             if (typeof complexSwap === 'undefined') {
