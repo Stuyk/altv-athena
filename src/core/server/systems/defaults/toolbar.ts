@@ -51,7 +51,10 @@ const Internal = {
             return;
         }
 
-        console.log(storedItem);
+        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(storedItem.dbName);
+        if (typeof baseItem === 'undefined') {
+            return;
+        }
     },
 };
 

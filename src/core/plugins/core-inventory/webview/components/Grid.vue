@@ -144,12 +144,37 @@ export default defineComponent({
             this.itemSingleClick = undefined;
         },
         singleClick(type: InventoryTypes, index: number) {
-            // Do nothing with this; provides no functionality atm.
-            // if (typeof this.itemSingleClick !== 'undefined') {
-            //     this.itemSingleClick = undefined;
-            //     return;
-            // }
-            // this.itemSingleClick = { type, index };
+            if (typeof this.itemSingleClick !== 'undefined') {
+                // Ignore same inventory slot
+                if (this.itemSingleClick.type === type && this.itemSingleClick.index === index) {
+                    return;
+                }
+
+                // Ignore inventory types that do not match.
+                // Combining should be done inside of inventory only.
+                if (this.itemSingleClick.type !== type) {
+                    return;
+                }
+
+                if (!('alt' in window)) {
+                    const secondItem = `${type}-${index}`;
+                    const firstItem = `${this.itemSingleClick.type}-${this.itemSingleClick.index}`;
+                    console.log(`Combine Event:`, firstItem, secondItem);
+                    this.itemSingleClick = undefined;
+                    return;
+                }
+
+                WebViewEvents.emitServer(
+                    INVENTORY_EVENTS.TO_SERVER.COMBINE,
+                    this.itemSingleClick.type,
+                    this.itemSingleClick.index,
+                    type,
+                    index,
+                );
+
+                this.itemSingleClick = undefined;
+                return;
+            }
         },
         endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
             if (!('alt' in window)) {
