@@ -10,5 +10,8 @@ export const INVENTORY_CONFIG = {
         TOOLBAR: {
             SHOW_NUMBERS: true,
         },
+        WEIGHT: {
+            UNITS: 'kg',
+        },
     },
 };

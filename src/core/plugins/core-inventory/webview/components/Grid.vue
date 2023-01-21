@@ -11,6 +11,7 @@
                 :id="getID('toolbar', index)"
                 :quantity="getQuantity('toolbar', index)"
                 :name="getName('toolbar', index)"
+                :weight="getWeight('toolbar', index)"
                 @mouseenter="updateDescriptor('toolbar', index)"
                 @mouseleave="updateDescriptor(undefined, undefined)"
                 @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), startDrag })"
@@ -38,6 +39,7 @@
                 :id="getID('inventory', index)"
                 :quantity="getQuantity('inventory', index)"
                 :name="getName('inventory', index)"
+                :weight="getWeight('inventory', index)"
                 @mouseenter="updateDescriptor('inventory', index)"
                 @mouseleave="updateDescriptor(undefined, undefined)"
                 @contextmenu="(e) => contextMenu(e, index)"
@@ -228,6 +230,19 @@ export default defineComponent({
 
             return items[index].name;
         },
+        getWeight(type: 'toolbar' | 'inventory', slot: number): number {
+            if (typeof this[type] === undefined) {
+                return 0;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            const index = items.findIndex((item) => item && item.slot === slot);
+            if (index <= -1) {
+                return 0;
+            }
+
+            return items[index].totalWeight ? items[index].totalWeight : 0;
+        },
         getItem(type: 'toolbar' | 'inventory', slot: number): Item | undefined {
             if (typeof this[type] === undefined) {
                 return undefined;
@@ -356,11 +371,11 @@ export default defineComponent({
         this.setItems(
             [
                 exampleItem,
-                { ...exampleItem, slot: 2, icon: 'burger', name: 'Burger' },
-                { ...exampleItem, slot: 5, icon: 'burger', quantity: 5, name: 'Burger' },
-                { ...exampleItem, slot: 24, icon: 'pistol50', name: 'Pistol .50' },
+                { ...exampleItem, slot: 2, icon: 'burger', name: 'Burger', totalWeight: 2 },
+                { ...exampleItem, slot: 5, icon: 'burger', quantity: 5, name: 'Burger', totalWeight: 5 },
+                { ...exampleItem, slot: 24, icon: 'pistol50', name: 'Pistol .50', totalWeight: 4 },
             ],
-            [{ ...exampleItem, icon: 'assaultrifle', name: 'Assault Rifle' }],
+            [{ ...exampleItem, icon: 'assaultrifle', name: 'Assault Rifle', totalWeight: 10 }],
             25,
             true,
             25,

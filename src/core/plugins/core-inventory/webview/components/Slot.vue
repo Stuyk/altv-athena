@@ -12,9 +12,8 @@
         <div class="index">
             <slot name="index"></slot>
         </div>
-        <div class="quantity" v-if="quantity !== 0">
-            {{ quantity }}
-        </div>
+        <div class="quantity" v-if="quantity !== 0">{{ quantity }}x</div>
+        <div class="weight" v-if="weight !== 0">{{ weight }}{{ units }}</div>
         <div class="name" v-if="name !== '' && showName">
             {{ name }}
         </div>
@@ -24,12 +23,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { INVENTORY_CONFIG } from '../../shared/config';
 
 export default defineComponent({
     name: 'Slot',
     data() {
         return {
             showName: false,
+            units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
         };
     },
     props: {
@@ -64,6 +65,11 @@ export default defineComponent({
             type: String,
             required: true,
             default: '',
+        },
+        weight: {
+            type: Number,
+            required: true,
+            default: 0,
         },
     },
     methods: {},
@@ -140,7 +146,7 @@ export default defineComponent({
     pointer-events: none !important;
     z-index: 99;
     color: yellow;
-    font-size: 14px;
+    font-size: 11px;
     left: 8px;
     top: 4px;
     font-family: 'consolas';
@@ -151,11 +157,24 @@ export default defineComponent({
     position: absolute;
     pointer-events: none !important;
     z-index: 99;
-    color: yellow;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 11px;
     font-family: 'consolas';
     text-shadow: 1px 1px 1px black, -1px 1px 1px black, 1px -1px 1px black, -1px -1px 1px black;
     text-align: center;
+}
+
+.weight {
+    position: absolute;
+    pointer-events: none !important;
+    z-index: 99;
+    color: white;
+    font-size: 11px;
+    font-family: 'consolas';
+    text-shadow: 1px 1px 1px black;
+    right: 0;
+    bottom: 4px;
+    padding-right: 4px;
 }
 
 .clone {
