@@ -17,7 +17,7 @@ async function handlePlayerConnect(player: alt.Player): Promise<void> {
 
     // ! - Allows Dev Mode to Use First Account or Accounts
     if (typeof config !== 'undefined' && config.USE_DEV_MODE) {
-        alt.logWarning(`Using DEV_MODE. Only one account will be used.`);
+        alt.log(`~lc~Developer Mode: ~lg~Only one account will be used while using 'dev'`);
         DevModeOverride.login(player);
         return;
     }

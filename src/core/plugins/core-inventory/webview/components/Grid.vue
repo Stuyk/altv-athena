@@ -83,9 +83,9 @@ import { makeDraggable } from '@ViewUtility/drag';
 import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../../shared/events';
 import { getImagePath } from '../utility/inventoryIcon';
-import { InventoryTypes } from '../utility/interfaces';
 import { INVENTORY_CONFIG } from '../../shared/config';
 import { debounceReady } from '../utility/debounce';
+import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
 
 export default defineComponent({
     name: 'Inventory',
@@ -109,7 +109,7 @@ export default defineComponent({
             title: '',
             context: undefined as { x: number; y: number } | undefined,
             slot: -1,
-            itemSingleClick: undefined as { type: InventoryTypes; index: number },
+            itemSingleClick: undefined as { type: InventoryType; index: number },
             itemName: '',
             itemDescription: '',
             showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
@@ -123,7 +123,7 @@ export default defineComponent({
     methods: {
         getImagePath,
         drag: makeDraggable,
-        updateDescriptor(type: InventoryTypes, index: number) {
+        updateDescriptor(type: InventoryType, index: number) {
             if (typeof type === 'undefined') {
                 this.itemName = '';
                 this.itemDescription = '';
@@ -143,7 +143,7 @@ export default defineComponent({
         startDrag() {
             this.itemSingleClick = undefined;
         },
-        singleClick(type: InventoryTypes, index: number) {
+        singleClick(type: InventoryType, index: number) {
             if (typeof this.itemSingleClick !== 'undefined') {
                 // Ignore same inventory slot
                 if (this.itemSingleClick.type === type && this.itemSingleClick.index === index) {
@@ -164,19 +164,20 @@ export default defineComponent({
                     return;
                 }
 
-                WebViewEvents.emitServer(
-                    INVENTORY_EVENTS.TO_SERVER.COMBINE,
-                    this.itemSingleClick.type,
-                    this.itemSingleClick.index,
-                    type,
-                    index,
-                );
+                const info: DualSlotInfo = {
+                    startType: this.itemSingleClick.type,
+                    startIndex: this.itemSingleClick.index,
+                    endType: type,
+                    endIndex: index,
+                };
+
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.COMBINE, info);
 
                 this.itemSingleClick = undefined;
                 return;
             }
         },
-        endDrag(startType: InventoryTypes, startIndex: number, endType: InventoryTypes, endIndex: number) {
+        endDrag(startType: InventoryType, startIndex: number, endType: InventoryType, endIndex: number) {
             if (!('alt' in window)) {
                 console.log(`Should Perform SWAP or Stack of items.`);
                 console.log(startType, startIndex);
@@ -190,7 +191,14 @@ export default defineComponent({
 
             // Call server-side swap / stack
             WebViewEvents.playSound(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_move.ogg`, 0.2);
-            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SWAP, startType, startIndex, endType, endIndex);
+            const info: DualSlotInfo = {
+                startType,
+                startIndex,
+                endType,
+                endIndex,
+            };
+
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SWAP, info);
         },
         /**
          * Determines if a specific data type has a matching slot item.
@@ -265,7 +273,7 @@ export default defineComponent({
             const items = [...this[type]] as Array<Item>;
             return items[items.findIndex((item) => item && item.slot === slot)];
         },
-        getSelectedItemClass(type: InventoryTypes, index: number) {
+        getSelectedItemClass(type: InventoryType, index: number) {
             if (typeof this.itemSingleClick === 'undefined') {
                 return {};
             }

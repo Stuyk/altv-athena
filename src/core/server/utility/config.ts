@@ -43,7 +43,7 @@ export default {
         if (file.includes('vue-athena')) {
             try {
                 const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                    alt.log(`~c~Vue Server Running: ~g~http://localhost:3000`);
+                    alt.log(`~c~Vue Server: ~lg~http://localhost:3000`);
                     isVueDebug = true;
                     sock.destroy();
                 });
