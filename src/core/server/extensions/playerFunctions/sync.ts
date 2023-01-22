@@ -141,16 +141,27 @@ const Sync = {
         }
 
         if (!isMale) {
-            player.setDlcClothes(0, 3, 14, 0, 0); // torso
+            //Female
+            player.setDlcClothes(0, 1, 0, 0, 0); // mask
+            player.setDlcClothes(0, 3, 15, 0, 0); // torso
             player.setDlcClothes(0, 4, 14, 0, 0); // pants
-            player.setDlcClothes(0, 6, 1, 0, 0); // shoes
-            player.setDlcClothes(0, 11, 14, 0, 0); // shoes
+            player.setDlcClothes(0, 5, 0, 0, 0); // bag
+            player.setDlcClothes(0, 6, 35, 0, 0); // shoes
+            player.setDlcClothes(0, 7, 0, 0, 0); // accessories
+            player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
+            player.setDlcClothes(0, 9, 0, 0, 0); // body armour
+            player.setDlcClothes(0, 11, 15, 0, 0); // top
         } else {
-            player.setDlcClothes(0, 3, 15, 0, 0); // torso / arms
+            //Male
+            player.setDlcClothes(0, 1, 0, 0, 0); // mask
+            player.setDlcClothes(0, 3, 15, 0, 0); // torso
+            player.setDlcClothes(0, 5, 0, 0, 0); // bag
             player.setDlcClothes(0, 4, 14, 0, 0); // pants
             player.setDlcClothes(0, 6, 34, 0, 0); // shoes
+            player.setDlcClothes(0, 7, 0, 0, 0); // accessories
             player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
-            player.setDlcClothes(0, 11, 91, 0, 0); // tops
+            player.setDlcClothes(0, 9, 0, 0, 0); // body armour
+            player.setDlcClothes(0, 11, 91, 0, 0); // top
         }
 
         const defaultInjections = Injections.get<EquipmentSyncCallback>(PlayerInjectionNames.EQUIPMENT_AFTER_DEFAULTS);
