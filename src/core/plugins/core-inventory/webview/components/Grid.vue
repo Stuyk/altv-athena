@@ -1,5 +1,12 @@
 <template>
     <div class="inventory-frame">
+        <Split
+            :name="splitData.name"
+            :slot="splitData.slot"
+            :quantity="splitData.quantity"
+            @cancel-split="cancelSplit"
+            v-if="splitData"
+        ></Split>
         <div class="inventory-toolbar slot">
             <Slot
                 v-for="(slot, index) in maxToolbarSlots"
@@ -91,6 +98,7 @@ export default defineComponent({
     name: 'Inventory',
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
+        Split: defineAsyncComponent(() => import('./Split.vue')),
         Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
         Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
@@ -118,6 +126,7 @@ export default defineComponent({
             isWeightEnabled: true,
             maxWeight: 64,
             units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
+            splitData: undefined as { name: string; slot: number; quantity: number },
         };
     },
     methods: {
@@ -312,11 +321,6 @@ export default defineComponent({
         contextAction(type: 'use' | 'split' | 'drop' | 'give' | 'cancel') {
             this.context = undefined;
 
-            if (!('alt' in window)) {
-                console.log(`It should do ${type} on slot: ` + this.slot);
-                return;
-            }
-
             if (type === 'cancel') {
                 return;
             }
@@ -327,17 +331,31 @@ export default defineComponent({
 
             // Send Event to do the thing it describes
             if (type === 'use') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, type, this.slot);
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, 'inventory', this.slot);
                 return;
             }
 
             if (type === 'split') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SPLIT, type, this.slot);
+                const item = this.getItem('inventory', this.slot);
+                if (typeof item === 'undefined') {
+                    return;
+                }
+
+                if (item.quantity <= 1) {
+                    return;
+                }
+
+                this.splitData = {
+                    name: item.name,
+                    quantity: item.quantity,
+                    slot: this.slot,
+                };
+
                 return;
             }
 
             if (type === 'drop') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, type, this.slot);
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'inventory', this.slot);
                 return;
             }
 
@@ -358,7 +376,7 @@ export default defineComponent({
             }
 
             // Send Event to Server to Unequip
-            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, 'toolbar', slot);
+            WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, slot);
         },
         setSize(value: number) {
             this.maxSlots = value;
@@ -368,6 +386,9 @@ export default defineComponent({
         },
         setMaxWeight(value: number) {
             this.maxWeight = value;
+        },
+        cancelSplit() {
+            this.splitData = undefined;
         },
     },
     mounted() {
@@ -423,7 +444,10 @@ export default defineComponent({
     border-radius: 6px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
-    max-height: 636px;
+    height: 100%;
+    position: relative;
+    right: 0;
+    top: 0;
 }
 
 .inventory-frame .inventory-toolbar {

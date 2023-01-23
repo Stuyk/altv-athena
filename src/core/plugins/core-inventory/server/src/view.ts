@@ -3,21 +3,49 @@ import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
 import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
+import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { StoredItem } from '@AthenaShared/interfaces/item';
 
 const Internal = {
     async use(player: alt.Player, type: InventoryType, slot: number) {
-        //
+        if (!player || !player.valid) {
+            return;
+        }
+
+        Athena.systems.itemManager.utility.useItem(player, slot, type);
     },
     async drop(player: alt.Player, type: InventoryType, slot: number) {
         //
     },
-    async split(player: alt.Player, type: InventoryType, slot: number) {
-        //
+    async split(player: alt.Player, type: InventoryType, slot: number, amount: number) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (typeof data[type] === 'undefined') {
+            return;
+        }
+
+        const newInventory = await Athena.systems.itemManager.slot.splitAt(slot, data[type], amount, type);
+        if (typeof newInventory === 'undefined') {
+            return;
+        }
+
+        await Athena.document.character.set(player, type, newInventory);
     },
     async combine(player: alt.Player, info: DualSlotInfo) {
         //
     },
     async swap(player: alt.Player, info: DualSlotInfo) {
+        if (!player || !player.valid) {
+            return;
+        }
+
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
             return;
@@ -87,7 +115,44 @@ const Internal = {
         // Stacking items in different data sets.
     },
     async unequip(player: alt.Player, slot: number) {
-        //
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (typeof data.toolbar === 'undefined') {
+            return;
+        }
+
+        const existingItem = Athena.systems.itemManager.slot.getAt(slot, data.toolbar);
+        if (typeof existingItem === 'undefined') {
+            return;
+        }
+
+        const itemClone = deepCloneObject<StoredItem>(existingItem);
+        const openSlot = Athena.systems.itemManager.slot.findOpen('inventory', data.inventory);
+        if (typeof openSlot === 'undefined') {
+            return;
+        }
+
+        let inventoryClone = deepCloneArray<StoredItem>(data.inventory);
+        itemClone.slot = openSlot;
+        inventoryClone.push(itemClone);
+
+        let toolbarClone = deepCloneArray<StoredItem>(data.toolbar);
+        toolbarClone = Athena.systems.itemManager.slot.removeAt(slot, toolbarClone);
+        if (typeof toolbarClone === 'undefined') {
+            return;
+        }
+
+        await Athena.document.character.setBulk(player, {
+            toolbar: toolbarClone,
+            inventory: inventoryClone,
+        });
     },
     async give(player: alt.Player) {
         //

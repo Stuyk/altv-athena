@@ -557,7 +557,7 @@ export const ItemManager = {
                 return undefined;
             }
 
-            copyOfData.slice(index, 1);
+            copyOfData.splice(index, 1);
             return copyOfData;
         },
         /**
@@ -574,7 +574,7 @@ export const ItemManager = {
             splitCount: number,
             dataSize: InventoryType | number = DEFAULT_CONFIG.custom.size,
         ): Array<StoredItem> | undefined {
-            if (splitCount <= -1) {
+            if (splitCount <= 0) {
                 return undefined;
             }
 
@@ -668,8 +668,8 @@ export const ItemManager = {
 
             if (copyOfData[fromIndex].quantity + copyOfData[toIndex].quantity <= baseItem.maxStack) {
                 copyOfData[toIndex].quantity += copyOfData[fromIndex].quantity;
-                copyOfData.splice(fromIndex, 1);
                 copyOfData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[toIndex]);
+                copyOfData.splice(fromIndex, 1);
                 return copyOfData;
             }
 
@@ -788,6 +788,52 @@ export const ItemManager = {
         },
     },
     utility: {
+        /**
+         * Invokes an item use effect
+         *
+         * @param {alt.Player} player
+         * @param {number} slot
+         * @param {('inventory' | 'toolbar')} [type='toolbar']
+         * @return {*}
+         */
+        useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            if (typeof slot !== 'number') {
+                return;
+            }
+
+            const data = Athena.document.character.get(player);
+            if (typeof data[type] === 'undefined') {
+                return;
+            }
+
+            const storedItem = Athena.systems.itemManager.slot.getAt(slot, data[type]);
+            if (typeof storedItem === 'undefined') {
+                return;
+            }
+
+            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(storedItem.dbName, storedItem.version);
+            if (typeof baseItem === 'undefined') {
+                return;
+            }
+
+            if (baseItem.behavior && baseItem.behavior.isWeapon) {
+                console.log('is weapon');
+            }
+
+            if (baseItem.behavior && baseItem.behavior.isEquipment) {
+                console.log('is equipment');
+            }
+
+            if (!baseItem.consumableEventToCall) {
+                return;
+            }
+
+            Athena.systems.effects.invoke(player, slot, type);
+        },
         /**
          * Compare two items to check if they are the same version.
          *

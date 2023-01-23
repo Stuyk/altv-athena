@@ -27,34 +27,14 @@ const Internal = {
         player.emit(SYSTEM_EVENTS.PLAYER_TOOLBAR_ENABLE);
     },
     /**
-     *
+     * Invokes a use item effect.
+     * Should always be called when using an item.
      *
      * @param {alt.Player} player
      * @param {number} slot
      */
-    invoke(player: alt.Player, slot: number) {
-        if (!player || !player.valid) {
-            return;
-        }
-
-        if (typeof slot !== 'number') {
-            return;
-        }
-
-        const data = Athena.document.character.get(player);
-        if (typeof data.toolbar === 'undefined') {
-            return;
-        }
-
-        const storedItem = Athena.systems.itemManager.slot.getAt(slot, data.toolbar);
-        if (typeof storedItem === 'undefined') {
-            return;
-        }
-
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(storedItem.dbName);
-        if (typeof baseItem === 'undefined') {
-            return;
-        }
+    invoke(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
+        Athena.systems.itemManager.utility.useItem(player, slot, type);
     },
 };
 

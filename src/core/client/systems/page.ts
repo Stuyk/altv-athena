@@ -294,7 +294,6 @@ export class Page {
         }
 
         if (this.info.options.onClose.enableControls) {
-            console.log('open controls :)');
             alt.toggleGameControls(true);
         }
 
