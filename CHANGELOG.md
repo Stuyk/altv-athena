@@ -165,6 +165,7 @@ Inventory Plugin
 - Hooked up main swapping / stacking logic when dragging.
 - Added sounds for opening / closing inventory
 - Added sound for moving an item
+- Added item combining for crafting
 
 Event for SYSTEM_EVENTS.TICKS_START
 - Removed all default usages.
@@ -182,6 +183,12 @@ Player Config
 - Player config uses the player.setLocalMeta internally.
 - However, this wraps around the event to provide type safety and Athena specific events easily.
 - On client-side values can be listened to for changes; which you can do whatever you need with it.
+
+Item Crafting
+- Introduced an item crafting recipe handler.
+- Combine any two items to return a new item.
+- Data can be appended to the new item from the old items if necessary.
+
 ```
 
 

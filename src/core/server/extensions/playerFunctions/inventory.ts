@@ -51,7 +51,7 @@ const Inventory = {
      * @param {Omit<StoredItem, 'slot'>} item
      * @return {Promise<boolean>}
      */
-    async sub(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<boolean> {
+    async sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'data'>): Promise<boolean> {
         const data = documentsConst.character.get(player);
         if (typeof data === 'undefined') {
             return false;

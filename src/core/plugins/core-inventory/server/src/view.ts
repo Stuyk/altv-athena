@@ -39,7 +39,39 @@ const Internal = {
         await Athena.document.character.set(player, type, newInventory);
     },
     async combine(player: alt.Player, info: DualSlotInfo) {
-        //
+        if (info.startType !== 'inventory') {
+            return;
+        }
+
+        if (info.startType !== info.endType) {
+            return;
+        }
+
+        if (info.startIndex === info.endIndex) {
+            return;
+        }
+
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        const newInventory = await Athena.systems.itemCrafting.items.combine(
+            data.inventory,
+            info.startIndex,
+            info.endIndex,
+            'inventory',
+        );
+
+        if (typeof newInventory === 'undefined') {
+            return;
+        }
+
+        await Athena.document.character.set(player, 'inventory', newInventory);
     },
     async swap(player: alt.Player, info: DualSlotInfo) {
         if (!player || !player.valid) {
@@ -166,5 +198,6 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.SPLIT, Internal.split);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.SWAP, Internal.swap);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, Internal.unequip);
+        alt.onClient(INVENTORY_EVENTS.TO_SERVER.COMBINE, Internal.combine);
     },
 };

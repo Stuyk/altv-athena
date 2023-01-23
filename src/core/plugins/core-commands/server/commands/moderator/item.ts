@@ -80,7 +80,6 @@ Athena.systems.messenger.commands.register(
         const result = await Athena.player.inventory.sub(player, {
             dbName,
             quantity: actualAmount,
-            data: {},
             version: actualVersion,
         });
 
@@ -103,6 +102,52 @@ async function exampleItems() {
         weight: 1,
         behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
         consumableEventToCall: 'edible',
+    });
+
+    Athena.systems.itemFactory.async.upsert({
+        dbName: 'potato',
+        data: {
+            health: 2,
+        },
+        icon: 'potato',
+        name: 'Potato',
+        maxStack: 24,
+        weight: 0.2,
+        behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
+        consumableEventToCall: 'edible',
+    });
+
+    Athena.systems.itemFactory.async.upsert({
+        dbName: 'cheese',
+        data: {
+            health: 1,
+        },
+        icon: 'cheese',
+        name: 'Cheese',
+        maxStack: 24,
+        weight: 0.1,
+        behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
+        consumableEventToCall: 'edible',
+    });
+
+    Athena.systems.itemFactory.async.upsert({
+        dbName: 'potato-with-cheese',
+        data: {
+            health: 5,
+        },
+        icon: 'potato-with-cheese',
+        name: 'Potato with Cheese',
+        maxStack: 24,
+        weight: 0.3,
+        behavior: { canDrop: true, canStack: true, canTrade: true, destroyOnDrop: false, isToolbar: true },
+        consumableEventToCall: 'edible',
+    });
+
+    Athena.systems.itemCrafting.recipe.add({
+        uid: 'potato-with-cheese',
+        combo: ['potato', 'cheese'],
+        quantities: [1, 1],
+        result: { dbName: 'potato-with-cheese', quantity: 1 },
     });
 }
 

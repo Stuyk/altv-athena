@@ -212,6 +212,30 @@ export const ItemManager = {
         sub(item: Item | StoredItem, amount: number): ItemQuantityChange | undefined {
             return InternalFunctions.item.modifyQuantity(item, amount, true);
         },
+        /**
+         * Check if the player has enough of an item in a given data set.
+         *
+         * @param {Array<StoredItem>} dataSet
+         * @param {string} dbName
+         * @param {number} quantity
+         * @param {number} [version=undefined]
+         */
+        has(dataSet: Array<StoredItem>, dbName: string, quantity: number, version: number = undefined): boolean {
+            let count = 0;
+            for (let item of dataSet) {
+                if (item.dbName !== dbName) {
+                    continue;
+                }
+
+                if (item.version !== version) {
+                    continue;
+                }
+
+                count += item.quantity;
+            }
+
+            return count > quantity;
+        },
     },
     data: {
         /**
@@ -389,7 +413,7 @@ export const ItemManager = {
          * @return {(Array<StoredItem> | undefined)}
          */
         sub<CustomData = {}>(
-            item: Omit<StoredItem<CustomData>, 'slot'>,
+            item: Omit<StoredItem<CustomData>, 'slot' | 'data'>,
             data: Array<StoredItem>,
         ): Array<StoredItem> | undefined {
             if (item.quantity <= -1) {

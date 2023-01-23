@@ -70,7 +70,7 @@
                 <div class="icon pr-2">
                     <Icon class="grey--text text--lighten-1" :noSelect="true" :size="18" icon="icon-anvil"></Icon>
                 </div>
-                <span class="weight-text">{{ totalWeight }} / {{ maxWeight }} {{ units }}</span>
+                <span class="weight-text">{{ totalWeight.toFixed(2) }} / {{ maxWeight }} {{ units }}</span>
             </div>
         </div>
         <Context :contextTitle="title" :x="context.x" :y="context.y" v-if="context">
@@ -185,6 +185,8 @@ export default defineComponent({
                 this.itemSingleClick = undefined;
                 return;
             }
+
+            this.itemSingleClick = { type, index };
         },
         endDrag(startType: InventoryType, startIndex: number, endType: InventoryType, endIndex: number) {
             if (!('alt' in window)) {
