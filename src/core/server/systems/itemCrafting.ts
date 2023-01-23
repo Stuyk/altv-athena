@@ -181,6 +181,15 @@ export const ItemCrafting = {
                 return undefined;
             }
 
+            // Verify Quantities
+            if (!Athena.systems.itemManager.quantity.has(dataSet, recipe.combo[0], recipe.quantities[0])) {
+                return undefined;
+            }
+
+            if (!Athena.systems.itemManager.quantity.has(dataSet, recipe.combo[1], recipe.quantities[1])) {
+                return undefined;
+            }
+
             // Recipe found; now to remove both items.
             const baseItem = Athena.systems.itemFactory.sync.getBaseItem(recipe.result.dbName, recipe.result.version);
             if (typeof baseItem === 'undefined') {

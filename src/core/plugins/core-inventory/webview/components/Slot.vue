@@ -13,7 +13,7 @@
             <slot name="index"></slot>
         </div>
         <div class="quantity" v-if="quantity !== 0">{{ quantity }}x</div>
-        <div class="weight" v-if="weight !== 0">{{ weight }}{{ units }}</div>
+        <div class="weight" v-if="weight !== 0">{{ weight.toFixed(2) }}{{ units }}</div>
         <div class="name" v-if="name !== '' && showName">
             {{ name }}
         </div>

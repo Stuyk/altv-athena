@@ -234,7 +234,7 @@ export const ItemManager = {
                 count += item.quantity;
             }
 
-            return count > quantity;
+            return count >= quantity;
         },
     },
     data: {

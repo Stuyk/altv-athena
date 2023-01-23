@@ -5,6 +5,7 @@ import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
 import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { StoredItem } from '@AthenaShared/interfaces/item';
+import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
 
 const Internal = {
     async use(player: alt.Player, type: InventoryType, slot: number) {
@@ -72,6 +73,11 @@ const Internal = {
         }
 
         await Athena.document.character.set(player, 'inventory', newInventory);
+        Athena.player.emit.sound2D(
+            player,
+            `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_combine.ogg`,
+            0.2,
+        );
     },
     async swap(player: alt.Player, info: DualSlotInfo) {
         if (!player || !player.valid) {
