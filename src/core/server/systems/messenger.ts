@@ -3,7 +3,6 @@ import * as alt from 'alt-server';
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
 import { Athena } from '@AthenaServer/api/athena';
 import { CommandCallback, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 type MessageCallback = (player: alt.Player, msg: string) => void;
@@ -220,5 +219,5 @@ export const MessengerSystem = {
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
     alt.onClient(MESSENGER_EVENTS.TO_SERVER.MESSAGE, MessengerSystem.messages.emit);
-    Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, MessengerSystem.player.populateCommands);
+    Athena.events.player.on('selected-character', MessengerSystem.player.populateCommands);
 });

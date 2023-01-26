@@ -2,16 +2,15 @@ import * as alt from 'alt-server';
 import { Athena } from '../api/athena';
 import { DEFAULT_CONFIG } from '../athena/main';
 import { PlayerEvents } from '../events/playerEvents';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
-import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Character, CharacterDefaults } from '../../shared/interfaces/character';
-import { deepCloneObject } from '../../shared/utility/deepCopy';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
+import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { Global } from './global';
 import { CharacterCreateCallback, PlayerCallback, PlayerInjectionNames } from './injections/player';
 import { Injections } from './injections';
-import { Appearance } from '../../shared/interfaces/appearance';
-import { CharacterInfo } from '../../shared/interfaces/characterInfo';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
 import { ObjectId } from 'mongodb';
 
 const Callbacks: { [key: string]: (player: alt.Player, ...args: any[]) => void } = {
@@ -203,7 +202,7 @@ const CharacterSystemRef = {
                 await callback(player);
             }
 
-            PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, player);
+            PlayerEvents.trigger('selected-character', player);
         }, 500);
     },
 

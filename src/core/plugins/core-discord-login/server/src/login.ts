@@ -1,6 +1,5 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
 import { playerConst } from '@AthenaServer/api/consts/constPlayer';
@@ -57,7 +56,7 @@ export class LoginController {
      * @memberof LoginController
      */
     static init() {
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, LoginController.bindPlayerToID);
+        PlayerEvents.on('selected-character', LoginController.bindPlayerToID);
         alt.on('playerDisconnect', LoginController.tryDisconnect);
         DevModeOverride.setDevAccountCallback(InternalFunctions.developerModeCallback);
     }

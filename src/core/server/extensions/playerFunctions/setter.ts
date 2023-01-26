@@ -1,16 +1,15 @@
 import * as alt from 'alt-server';
-import { SYSTEM_EVENTS } from '../../../shared/enums/system';
-import { PERMISSIONS } from '../../../shared/flags/permissionFlags';
-import { ActionMenu } from '../../../shared/interfaces/actions';
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { ActionMenu } from '@AthenaShared/interfaces/actions';
 import { DEFAULT_CONFIG } from '../../athena/main';
-import { ATHENA_EVENTS_PLAYER } from '../../../shared/enums/athenaEvents';
 import { Account } from '../../interface/iAccount';
 import { Collections } from '../../interface/iDatabaseCollections';
 import emit from './emit';
 import safe from './safe';
 import Database from '@stuyk/ezmongodb';
 import ConfigUtil from '../../utility/config';
-import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { PlayerEvents } from '../../events/playerEvents';
 import { Athena } from '../../api/athena';
 import { JwtProvider } from '../../systems/jwt';
@@ -37,7 +36,7 @@ const Setter = {
         emit.meta(player, 'permissionLevel', accountData.permissionLevel);
 
         Athena.document.account.bind(player, accountData);
-        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.FINISHED_LOGIN, player);
+        PlayerEvents.trigger('set-account-data', player);
     },
 
     actionMenu(player: alt.Player, actionMenu: ActionMenu) {
@@ -90,7 +89,7 @@ const Setter = {
     respawned(player: alt.Player, position: alt.IVector3): void {
         Athena.document.character.set(player, 'isDead', false);
         emit.meta(player, 'isDead', false);
-        PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.SPAWNED, player, position);
+        PlayerEvents.trigger('respawned', player, position);
     },
 
     wantedLevel(player: alt.Player, stars: number) {

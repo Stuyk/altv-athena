@@ -1,6 +1,5 @@
 import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
 import { VehicleSystem } from '../systems/vehicle';
 import { PlayerEvents } from './playerEvents';
 
@@ -19,13 +18,13 @@ function handleDeath(victim: alt.Player, killer: alt.Entity, weaponHash: any): v
 
         // Change the plugin if you want to modify death behavior.
         // It has everything you need to not touch this code here.
-        // You can listen to ATHENA_EVENTS_PLAYER.DIED to see when someone dies.
+        // You can listen to 'player-died' to see when someone dies.
         if (!victimData.isDead) {
             alt.log(`(${victim.id}) ${victimData.name} has died.`);
 
             try {
                 Athena.document.character.set(victim, 'isDead', true);
-                PlayerEvents.trigger(ATHENA_EVENTS_PLAYER.DIED, victim);
+                PlayerEvents.trigger('player-died', victim);
             } catch (err) {
                 alt.logError(err);
                 alt.log(`Could not set player ${victimData.name} to dead.`);

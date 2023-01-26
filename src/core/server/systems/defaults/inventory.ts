@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { Athena } from '@AthenaServer/api/athena';
 import { PluginSystem } from '../plugins';
@@ -81,7 +81,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.sync);
+        Athena.events.player.on('selected-character', Internal.sync);
         Athena.document.character.onChange('inventory', Internal.syncInventory);
         Athena.document.character.onChange('toolbar', Internal.syncToolbar);
         alt.log(`~lc~Default System: ~g~Inventory`);

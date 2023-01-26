@@ -317,11 +317,3 @@ export const InventoryView = {
         },
     },
 };
-
-InventoryView.callbacks.add('open', (player: alt.Player) => {
-    console.log(`${player.id} has opened their inventory.`);
-});
-
-InventoryView.callbacks.add('close', (player: alt.Player) => {
-    console.log(`${player.id} has closed their inventory.`);
-});

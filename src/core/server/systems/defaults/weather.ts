@@ -1,5 +1,4 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
 import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather';
 import { PluginSystem } from '../plugins';
 import { Athena } from '@AthenaServer/api/athena';
@@ -64,7 +63,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.updatePlayer);
+        Athena.events.player.on('selected-character', Internal.updatePlayer);
         alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
         alt.log(`~lc~Default System: ~g~Weather`);
     },

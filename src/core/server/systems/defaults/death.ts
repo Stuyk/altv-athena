@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
+
 import { Athena } from '@AthenaServer/api/athena';
 import { PluginSystem } from '../plugins';
 
@@ -61,7 +61,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.respawn);
+        Athena.events.player.on('selected-character', Internal.respawn);
         alt.on('playerDeath', Internal.handleDefaultDeath);
         alt.log(`~lc~Default System: ~g~Death`);
     },

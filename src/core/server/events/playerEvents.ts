@@ -1,5 +1,7 @@
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
+
+type AthenaPlayerEvents = 'player-died' | 'set-account-data' | 'selected-character' | 'spawned' | 'respawned';
+type PlayerCallbackArgs = (player: alt.Player, ...args: any[]) => void;
 
 const playerEvents: Array<{ eventName: string; callback: (player: alt.Player, ...args: any[]) => void }> = [];
 
@@ -7,11 +9,11 @@ export class PlayerEvents {
     /**
      * Usually called by internal functions. Can be used to manually trigger an Athena Event though.
      * @static
-     * @param {ATHENA_EVENTS_PLAYER} eventName
+     * @param {AthenaPlayerEvents} eventName
      * @param {alt.Player} player
      * @memberof PlayerEvents
      */
-    static trigger(eventName: ATHENA_EVENTS_PLAYER, player: alt.Player, ...args: any[]) {
+    static trigger<CustomEvents>(eventName: AthenaPlayerEvents & CustomEvents, player: alt.Player, ...args: any[]) {
         for (let i = 0; i < playerEvents.length; i++) {
             if (playerEvents[i].eventName !== eventName) {
                 continue;
@@ -24,11 +26,11 @@ export class PlayerEvents {
     /**
      * Trigger a callback specific to Athena Player Events.
      * @static
-     * @param {ATHENA_EVENTS_PLAYER} eventName
+     * @param {AthenaPlayerEvents} eventName
      * @param {(player: alt.Player) => void} callback
      * @memberof PlayerEvents
      */
-    static on(eventName: ATHENA_EVENTS_PLAYER, callback: (player: alt.Player, ...args: any[]) => void) {
+    static on<CustomEvents>(eventName: AthenaPlayerEvents & CustomEvents, callback: PlayerCallbackArgs) {
         playerEvents.push({ eventName, callback });
     }
 }

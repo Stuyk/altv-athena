@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 
 import { PluginSystem } from '../plugins';
 import { Athena } from '@AthenaServer/api/athena';
-import { ATHENA_EVENTS_PLAYER } from '@AthenaShared/enums/athenaEvents';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 const SYSTEM_NAME = 'Toolbar';
@@ -15,7 +14,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, Internal.processPlayer);
+        Athena.events.player.on('selected-character', Internal.processPlayer);
         alt.onClient(SYSTEM_EVENTS.PLAYER_TOOLBAR_INVOKE, Internal.invoke);
     },
     /**

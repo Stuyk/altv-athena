@@ -1,7 +1,6 @@
 import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
-import { ATHENA_EVENTS_PLAYER } from '../../shared/enums/athenaEvents';
-import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { PlayerEvents } from '../events/playerEvents';
 
 type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
@@ -14,7 +13,7 @@ const IdentityRef = {
      *
      */
     init() {
-        PlayerEvents.on(ATHENA_EVENTS_PLAYER.SELECTED_CHARACTER, IdentityRef.setPlayerIdentifier);
+        PlayerEvents.on('selected-character', IdentityRef.setPlayerIdentifier);
     },
     /**
      * Should be set during the server startup phase to change player identification strategies.
