@@ -172,6 +172,12 @@ const Internal = {
                 return;
             }
 
+            if (info.startType === 'custom') {
+                openStorages[player.id] = newInventory;
+                InventoryView.storage.resync(player);
+                return;
+            }
+
             await Athena.document.character.set(player, info.startType, newInventory);
             return;
         }
@@ -181,6 +187,12 @@ const Internal = {
         if (info.startType === info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
             const newInventory = Athena.systems.itemManager.slot.swap(info.startIndex, info.endIndex, startData);
             if (typeof newInventory === 'undefined') {
+                return;
+            }
+
+            if (info.startType === 'custom') {
+                openStorages[player.id] = newInventory;
+                InventoryView.storage.resync(player);
                 return;
             }
 
@@ -365,8 +377,7 @@ export const InventoryView = {
     },
 };
 
-// Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
-//     const data = Athena.document.character.get(player);
-
-//     InventoryView.storage.open(player, 'storage-force-1', data.inventory, 30, true);
-// });
+Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
+    const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
+    InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
+});

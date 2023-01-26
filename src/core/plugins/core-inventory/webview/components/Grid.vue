@@ -1,6 +1,6 @@
 <template>
     <div class="inventory-split">
-        <div class="inventory-frame" v-if="custom && custom.length >= 1">
+        <div class="inventory-frame" v-if="custom && Array.isArray(custom)">
             <div class="inventory-slots-max">
                 <Slot
                     v-for="(slot, index) in slotLimits.custom"
@@ -11,7 +11,6 @@
                     :info="getSlotInfo('custom', index)"
                     @mouseenter="updateDescriptor('custom', index)"
                     @mouseleave="updateDescriptor(undefined, undefined)"
-                    @contextmenu="(e) => contextMenu(e, index)"
                     @mousedown="
                         (e) => drag(e, { endDrag, canBeDragged: hasItem('custom', index), singleClick, startDrag })
                     "
@@ -427,6 +426,8 @@ export default defineComponent({
         },
     },
     mounted() {
+        this.custom = undefined;
+
         if ('alt' in window) {
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, this.setCustomItems);
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, this.setItems);
