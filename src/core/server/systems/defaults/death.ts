@@ -24,6 +24,7 @@ const Internal = {
 
         Athena.document.character.set(victim, 'isDead', false);
         victim.spawn(victim.pos.x, victim.pos.y, victim.pos.z, 0);
+        Athena.events.player.trigger('respawned', victim);
     },
 
     /**
@@ -47,6 +48,7 @@ const Internal = {
         }
 
         Athena.document.character.set(victim, 'isDead', true);
+        Athena.events.player.trigger('player-died', victim);
 
         alt.setTimeout(() => {
             if (!victim || !victim.valid) {
