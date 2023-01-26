@@ -360,12 +360,12 @@ export default defineComponent({
 
             // Send Event to do the thing it describes
             if (type === 'use') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, 'inventory', this.slot);
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.USE, 'inventory', slot);
                 return;
             }
 
             if (type === 'split') {
-                const item = this.getItem('inventory', this.slot);
+                const item = this.getItem('inventory', slot);
                 if (typeof item === 'undefined') {
                     return;
                 }
@@ -377,14 +377,14 @@ export default defineComponent({
                 this.splitData = {
                     name: item.name,
                     quantity: item.quantity,
-                    slot: this.slot,
+                    slot: slot,
                 };
 
                 return;
             }
 
             if (type === 'drop') {
-                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'inventory', this.slot);
+                WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'inventory', slot);
                 return;
             }
 
@@ -479,6 +479,7 @@ export default defineComponent({
     flex-direction: row;
     justify-content: flex-end;
     width: 100%;
+    position: relative;
 }
 
 .spacer {
@@ -495,6 +496,7 @@ export default defineComponent({
     box-sizing: border-box;
     height: 100%;
     align-self: flex-end;
+    position: relative;
 }
 
 .inventory-frame .inventory-toolbar {
