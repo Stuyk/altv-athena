@@ -1,85 +1,107 @@
 <template>
-    <div class="inventory-frame">
-        <Split
-            :name="splitData.name"
-            :slot="splitData.slot"
-            :quantity="splitData.quantity"
-            @cancel-split="cancelSplit"
-            v-if="splitData"
-        ></Split>
-        <div class="inventory-toolbar slot">
-            <Slot
-                v-for="(slot, index) in maxToolbarSlots"
-                class="slot"
-                location="toolbar"
-                :key="index"
-                :hasItem="true"
-                :slot="index"
-                :id="getID('toolbar', index)"
-                :quantity="getQuantity('toolbar', index)"
-                :name="getName('toolbar', index)"
-                :weight="getWeight('toolbar', index)"
-                @mouseenter="updateDescriptor('toolbar', index)"
-                @mouseleave="updateDescriptor(undefined, undefined)"
-                @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), startDrag })"
-                @contextmenu="(e) => unequip(e, index)"
-            >
-                <template v-slot:image v-if="hasItem('toolbar', index)">
-                    <img :src="getImagePath(getItem('toolbar', index))" />
-                </template>
-                <template v-slot:index v-else>
-                    <template v-if="showToolbarNumbers">
-                        {{ slot }}
+    <div class="inventory-split">
+        <div class="inventory-frame" v-if="custom && custom.length >= 1">
+            <div class="inventory-slots-max">
+                <Slot
+                    v-for="(slot, index) in slotLimits.custom"
+                    class="slot"
+                    :class="getSelectedItemClass('custom', index)"
+                    :key="index"
+                    :id="getID('custom', index)"
+                    :info="getSlotInfo('custom', index)"
+                    @mouseenter="updateDescriptor('custom', index)"
+                    @mouseleave="updateDescriptor(undefined, undefined)"
+                    @contextmenu="(e) => contextMenu(e, index)"
+                    @mousedown="
+                        (e) => drag(e, { endDrag, canBeDragged: hasItem('custom', index), singleClick, startDrag })
+                    "
+                >
+                    <template v-slot:image v-if="hasItem('custom', index)">
+                        <img :src="getImagePath(getItem('custom', index))" />
                     </template>
-                </template>
-            </Slot>
-        </div>
-        <div class="inventory-slots">
-            <Slot
-                v-for="(slot, index) in maxSlots"
-                class="slot"
-                location="inventory"
-                :class="getSelectedItemClass('inventory', index)"
-                :key="index"
-                :hasItem="true"
-                :slot="index"
-                :id="getID('inventory', index)"
-                :quantity="getQuantity('inventory', index)"
-                :name="getName('inventory', index)"
-                :weight="getWeight('inventory', index)"
-                :highlight="getHighlight('inventory', index)"
-                @mouseenter="updateDescriptor('inventory', index)"
-                @mouseleave="updateDescriptor(undefined, undefined)"
-                @contextmenu="(e) => contextMenu(e, index)"
-                @mousedown="
-                    (e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index), singleClick, startDrag })
-                "
-            >
-                <template v-slot:image v-if="hasItem('inventory', index)">
-                    <img :src="getImagePath(getItem('inventory', index))" />
-                </template>
-                <template v-slot:index v-else>
-                    <template v-if="showGridNumbers">
-                        {{ slot }}
+                    <template v-slot:index v-else>
+                        <template v-if="config.showGridNumbers">
+                            {{ slot }}
+                        </template>
                     </template>
-                </template>
-            </Slot>
-        </div>
-        <div class="weight-frame" v-if="isWeightEnabled">
-            <div class="split">
-                <div class="icon pr-2">
-                    <Icon class="grey--text text--lighten-1" :noSelect="true" :size="18" icon="icon-anvil"></Icon>
-                </div>
-                <span class="weight-text">{{ totalWeight.toFixed(2) }} / {{ maxWeight }} {{ units }}</span>
+                </Slot>
             </div>
         </div>
-        <Context :contextTitle="title" :x="context.x" :y="context.y" v-if="context">
-            <div @click="contextAction('use')">Use</div>
-            <div @click="contextAction('split')">Split</div>
-            <div @click="contextAction('drop')">Drop</div>
-            <div @click="contextAction('give')">Give</div>
-            <div @click="contextAction('cancel')">Cancel</div>
-        </Context>
+        <div class="spacer">&nbsp;</div>
+        <div class="inventory-frame">
+            <Split
+                :name="splitData.name"
+                :slot="splitData.slot"
+                :quantity="splitData.quantity"
+                @cancel-split="cancelSplit"
+                v-if="splitData"
+            >
+            </Split>
+            <div class="inventory-toolbar slot">
+                <Slot
+                    v-for="(slot, index) in slotLimits.toolbar"
+                    class="slot"
+                    :key="index"
+                    :id="getID('toolbar', index)"
+                    :info="getSlotInfo('toolbar', index)"
+                    @mouseenter="updateDescriptor('toolbar', index)"
+                    @mouseleave="updateDescriptor(undefined, undefined)"
+                    @mousedown="(e) => drag(e, { endDrag, canBeDragged: hasItem('toolbar', index), startDrag })"
+                    @contextmenu="(e) => unequip(e, index)"
+                >
+                    <template v-slot:image v-if="hasItem('toolbar', index)">
+                        <img :src="getImagePath(getItem('toolbar', index))" />
+                    </template>
+                    <template v-slot:index v-else>
+                        <template v-if="config.showToolbarNumbers">
+                            {{ slot }}
+                        </template>
+                    </template>
+                </Slot>
+            </div>
+            <div class="inventory-slots">
+                <Slot
+                    v-for="(slot, index) in slotLimits.inventory"
+                    class="slot"
+                    :class="getSelectedItemClass('inventory', index)"
+                    :key="index"
+                    :id="getID('inventory', index)"
+                    :info="getSlotInfo('inventory', index)"
+                    @mouseenter="updateDescriptor('inventory', index)"
+                    @mouseleave="updateDescriptor(undefined, undefined)"
+                    @contextmenu="(e) => contextMenu(e, index)"
+                    @mousedown="
+                        (e) => drag(e, { endDrag, canBeDragged: hasItem('inventory', index), singleClick, startDrag })
+                    "
+                >
+                    <template v-slot:image v-if="hasItem('inventory', index)">
+                        <img :src="getImagePath(getItem('inventory', index))" />
+                    </template>
+                    <template v-slot:index v-else>
+                        <template v-if="config.showGridNumbers">
+                            {{ slot }}
+                        </template>
+                    </template>
+                </Slot>
+            </div>
+            <div class="weight-frame" v-if="config.isWeightEnabled">
+                <div class="split">
+                    <div class="icon pr-2">
+                        <Icon class="grey--text text--lighten-1" :noSelect="true" :size="18" icon="icon-anvil"></Icon>
+                    </div>
+                    <span class="weight-text">
+                        {{ totalWeight.toFixed(2) }} / {{ config.maxWeight }} {{ config.units }}
+                    </span>
+                </div>
+            </div>
+            <Context :contextTitle="context.title" :x="context.x" :y="context.y" v-if="context">
+                <div @click="contextAction('use')">Use</div>
+                <div @click="contextAction('split')">Split</div>
+                <div @click="contextAction('drop')">Drop</div>
+                <div @click="contextAction('give')">Give</div>
+                <div @click="contextAction('cancel')">Cancel</div>
+            </Context>
+        </div>
     </div>
 </template>
 
@@ -93,6 +115,7 @@ import { getImagePath } from '../utility/inventoryIcon';
 import { INVENTORY_CONFIG } from '../../shared/config';
 import { debounceReady } from '../utility/debounce';
 import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
+import { SlotInfo } from '../utility/slotInfo';
 
 export default defineComponent({
     name: 'Inventory',
@@ -112,21 +135,25 @@ export default defineComponent({
         return {
             toolbar: [] as Array<Item>,
             inventory: [] as Array<Item>,
-            maxSlots: 30,
-            maxToolbarSlots: 5,
-            title: '',
-            context: undefined as { x: number; y: number } | undefined,
-            slot: -1,
+            custom: [] as Array<Item>,
+            slotLimits: {
+                inventory: 30,
+                toolbar: 5,
+                custom: 35,
+            },
+            context: undefined as { x: number; y: number; title: string; slot: number } | undefined,
             itemSingleClick: undefined as { type: InventoryType; index: number },
             itemName: '',
             itemDescription: '',
-            showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
-            showToolbarNumbers: INVENTORY_CONFIG.WEBVIEW.TOOLBAR.SHOW_NUMBERS,
             totalWeight: 0,
-            isWeightEnabled: true,
-            maxWeight: 64,
-            units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
             splitData: undefined as { name: string; slot: number; quantity: number },
+            config: {
+                units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
+                showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
+                showToolbarNumbers: INVENTORY_CONFIG.WEBVIEW.TOOLBAR.SHOW_NUMBERS,
+                isWeightEnabled: true,
+                maxWeight: 64,
+            },
         };
     },
     methods: {
@@ -211,12 +238,46 @@ export default defineComponent({
 
             WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.SWAP, info);
         },
+        getSlotInfo(type: InventoryType, slot: number): SlotInfo {
+            const defaultTemplate: SlotInfo = {
+                location: type,
+                hasItem: false,
+                name: undefined,
+                quantity: 0,
+                weight: 0,
+                highlight: false,
+                slot,
+            };
+
+            if (typeof this[type] === undefined) {
+                return defaultTemplate;
+            }
+
+            const items = [...this[type]] as Array<Item>;
+            const itemIndex = items.findIndex((item) => item && item.slot === slot);
+
+            if (itemIndex <= -1) {
+                return defaultTemplate;
+            }
+
+            const item = items[itemIndex];
+            if (typeof item === 'undefined') {
+                return defaultTemplate;
+            }
+
+            defaultTemplate.hasItem = true;
+            defaultTemplate.highlight = item.isEquipped;
+            defaultTemplate.name = item.name;
+            defaultTemplate.quantity = item.quantity;
+            defaultTemplate.weight = typeof item.weight === 'number' ? item.weight : 0;
+            return defaultTemplate;
+        },
         /**
          * Determines if a specific data type has a matching slot item.
          * @param type
          * @param slot
          */
-        hasItem(type: 'toolbar' | 'inventory', slot: number): boolean {
+        hasItem(type: InventoryType, slot: number): boolean {
             if (typeof this[type] === undefined) {
                 return false;
             }
@@ -224,59 +285,7 @@ export default defineComponent({
             const items = [...this[type]] as Array<Item>;
             return items.findIndex((item) => item && item.slot === slot) !== -1;
         },
-        getQuantity(type: 'toolbar' | 'inventory', slot: number): number {
-            if (typeof this[type] === undefined) {
-                return 0;
-            }
-
-            const items = [...this[type]] as Array<Item>;
-            const index = items.findIndex((item) => item && item.slot === slot);
-            if (index <= -1) {
-                return 0;
-            }
-
-            return items[index].quantity;
-        },
-        getName(type: 'toolbar' | 'inventory', slot: number): string {
-            if (typeof this[type] === undefined) {
-                return '';
-            }
-
-            const items = [...this[type]] as Array<Item>;
-            const index = items.findIndex((item) => item && item.slot === slot);
-            if (index <= -1) {
-                return '';
-            }
-
-            return items[index].name;
-        },
-        getWeight(type: 'toolbar' | 'inventory', slot: number): number {
-            if (typeof this[type] === undefined) {
-                return 0;
-            }
-
-            const items = [...this[type]] as Array<Item>;
-            const index = items.findIndex((item) => item && item.slot === slot);
-            if (index <= -1) {
-                return 0;
-            }
-
-            return items[index].totalWeight ? items[index].totalWeight : 0;
-        },
-        getHighlight(type: 'inventory', slot: number): boolean {
-            if (typeof this[type] === undefined) {
-                return false;
-            }
-
-            const items = [...this[type]] as Array<Item>;
-            const index = items.findIndex((item) => item && item.slot === slot);
-            if (index <= -1) {
-                return false;
-            }
-
-            return items[index].isEquipped;
-        },
-        getItem(type: 'toolbar' | 'inventory', slot: number): Item | undefined {
+        getItem(type: InventoryType, slot: number): Item | undefined {
             if (typeof this[type] === undefined) {
                 return undefined;
             }
@@ -295,7 +304,7 @@ export default defineComponent({
 
             return { 'item-outline': true };
         },
-        getID(type: 'toolbar' | 'inventory', index: number): string {
+        getID(type: InventoryType, index: number): string {
             return type + '-' + index;
         },
         setMaxSlots(value: number) {
@@ -306,6 +315,13 @@ export default defineComponent({
             this.toolbar = toolbar;
             this.totalWeight = totalWeight;
         },
+        setCustom(customItems: Array<Item>) {
+            if (typeof customItems === 'undefined') {
+                customItems = [];
+            }
+
+            this.custom = customItems;
+        },
         contextMenu(e: MouseEvent, slot: number) {
             e.preventDefault();
             if (!this.hasItem('inventory', slot)) {
@@ -313,15 +329,20 @@ export default defineComponent({
             }
 
             const item = this.getItem('inventory', slot);
-            this.title = item.name;
-            this.slot = item.slot;
             this.context = {
+                title: item.name,
+                slot: item.slot,
                 x: e.clientX,
                 y: e.clientY,
             };
         },
         contextAction(type: 'use' | 'split' | 'drop' | 'give' | 'cancel') {
+            const slot = this.context.slot;
             this.context = undefined;
+
+            if (typeof slot === 'undefined') {
+                return;
+            }
 
             if (type === 'cancel') {
                 return;
@@ -381,13 +402,19 @@ export default defineComponent({
             WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, slot);
         },
         setSize(value: number) {
-            this.maxSlots = value;
+            const newLimits = { ...this.slotLimits };
+            newLimits.inventory = value;
+            this.slotLimits = newLimits;
         },
         setWeightState(value: boolean) {
-            this.isWeightEnabled = value;
+            const newConfig = { ...this.config };
+            newConfig.isWeightEnabled = value;
+            this.config = newConfig;
         },
         setMaxWeight(value: number) {
-            this.maxWeight = value;
+            const newConfig = { ...this.config };
+            newConfig.maxWeight = value;
+            this.config = newConfig;
         },
         cancelSplit() {
             this.splitData = undefined;
@@ -395,6 +422,7 @@ export default defineComponent({
     },
     mounted() {
         if ('alt' in window) {
+            WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, this.setCustomItems);
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, this.setItems);
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_SIZE, this.setSize);
             WebViewEvents.on(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, this.setWeightState);
@@ -428,6 +456,8 @@ export default defineComponent({
             true,
             25,
         );
+
+        this.setCustom([exampleItem]);
     },
     watch: {
         offclick() {
@@ -438,6 +468,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.inventory-split {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
 .inventory-frame {
     background: rgba(0, 0, 0, 0.75);
     min-width: 512px;
@@ -447,9 +488,7 @@ export default defineComponent({
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
     height: 100%;
-    position: relative;
-    right: 0;
-    top: 0;
+    align-self: flex-end;
 }
 
 .inventory-frame .inventory-toolbar {
@@ -478,11 +517,24 @@ export default defineComponent({
     box-sizing: border-box;
     overflow-y: scroll;
     justify-content: space-evenly;
+    align-content: flex-start;
     max-height: 487px;
     padding-top: 12px;
 }
 
-.inventory-slots .slot {
+.inventory-slots-max {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.inventory-slots .slot,
+.inventory-slots-max .slot {
     margin-bottom: 5px;
     background: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;

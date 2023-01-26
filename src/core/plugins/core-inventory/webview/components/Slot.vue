@@ -12,10 +12,10 @@
         <div class="index">
             <slot name="index"></slot>
         </div>
-        <div class="quantity" v-if="quantity !== 0">{{ quantity }}x</div>
-        <div class="weight" v-if="weight !== 0">{{ weight.toFixed(2) }}{{ units }}</div>
-        <div class="name" v-if="name !== '' && showName">
-            {{ name }}
+        <div class="quantity" v-if="info.quantity !== 0">{{ info.quantity }}x</div>
+        <div class="weight" v-if="info.weight !== 0">{{ info.weight.toFixed(2) }}{{ units }}</div>
+        <div class="name" v-if="info.name !== '' && showName">
+            {{ info.name }}
         </div>
         <slot></slot>
     </div>
@@ -24,6 +24,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { INVENTORY_CONFIG } from '../../shared/config';
+import { SlotInfo } from '../utility/slotInfo';
 
 export default defineComponent({
     name: 'Slot',
@@ -44,37 +45,9 @@ export default defineComponent({
             required: false,
             default: 90,
         },
-        slot: {
-            type: Number,
+        info: {
+            type: Object as () => SlotInfo,
             required: true,
-        },
-        location: {
-            type: String as () => 'inventory' | 'equipment' | 'toolbar',
-            required: true,
-        },
-        hasItem: {
-            type: Boolean,
-            required: true,
-        },
-        quantity: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        name: {
-            type: String,
-            required: true,
-            default: '',
-        },
-        weight: {
-            type: Number,
-            required: true,
-            default: 0,
-        },
-        highlight: {
-            type: Boolean,
-            required: false,
-            default: false,
         },
     },
     computed: {
@@ -89,11 +62,11 @@ export default defineComponent({
         getHover() {
             const data = {};
 
-            if (this.hasItem) {
+            if (this.info.hasItem) {
                 data['can-hover'] = true;
             }
 
-            if (this.highlight) {
+            if (this.info.highlight) {
                 data['highlight'] = true;
                 data['highlight-bg'] = true;
             }

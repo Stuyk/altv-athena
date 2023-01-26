@@ -52,7 +52,7 @@ export default defineComponent({
     flex-direction: row;
     min-width: 1280px;
     max-width: 1280px;
-    max-height: 720px;
+    max-height: 635px;
     justify-content: flex-end;
     box-sizing: border-box;
     padding-right: 5vw;

@@ -1,9 +1,14 @@
+import * as alt from 'alt-client';
+
 import { AthenaClient } from '@AthenaClient/api/athena';
 import { Item } from '@AthenaShared/interfaces/item';
 import { INVENTORY_EVENTS } from '../shared/events';
 import { INVENTORY_CONFIG } from '../shared/config';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate';
+import { Page } from '@AthenaClient/systems/page';
+
+let page: Page;
 
 let inventory: Array<Item> = [];
 let toolbar: Array<Item> = [];
@@ -56,16 +61,17 @@ function onInventoryMaxWeightChange(value: number) {
 }
 
 function init() {
-    new AthenaClient.webview.page({
+    page = new AthenaClient.webview.page({
         name: INVENTORY_EVENTS.PAGE,
         callbacks: {
             onReady: () => {
                 isOpen = true;
-
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar, totalWeight);
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, isWeightEnabled);
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_SIZE, inventorySize);
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, maxWeight);
+                alt.emitServer(INVENTORY_EVENTS.TO_SERVER.OPEN);
+
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`, 0.2);
             },
             onClose: () => {
@@ -102,6 +108,14 @@ function init() {
     AthenaClient.config.player.callback.add('inventory-size', onInventorySizeChange);
     AthenaClient.config.player.callback.add('inventory-weight-enabled', onInventoryWeightStateChange);
     AthenaClient.config.player.callback.add('inventory-max-weight', onInventoryMaxWeightChange);
+
+    alt.onServer(INVENTORY_EVENTS.TO_CLIENT.OPEN, () => {
+        page.open();
+    });
+
+    alt.onServer(INVENTORY_EVENTS.TO_CLIENT.CLOSE, () => {
+        page.close(true);
+    });
 }
 
 onTicksStart.add(init);

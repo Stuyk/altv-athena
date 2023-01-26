@@ -1,4 +1,4 @@
-export type InventoryType = 'inventory' | 'toolbar';
+export type InventoryType = 'inventory' | 'toolbar' | 'custom';
 
 export interface DualSlotInfo {
     startType: InventoryType;

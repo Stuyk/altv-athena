@@ -7,8 +7,52 @@ import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy'
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
 
+type PlayerCallback = (player: alt.Player) => void;
+type PlayerCloseCallback = (player: alt.Player, uid: string, items: Array<StoredItem>) => void;
+
+const openStorages: { [id: string]: Array<StoredItem> } = {};
+const openStorageSessions: { [id: string]: string } = {};
+const openCallbacks: Array<PlayerCallback> = [];
+const closeCallbacks: Array<PlayerCloseCallback> = [];
+
 const Internal = {
+    callbacks: {
+        open(player: alt.Player) {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            for (let cb of openCallbacks) {
+                cb(player);
+            }
+        },
+        close(player: alt.Player) {
+            if (!player || !player.valid) {
+                return;
+            }
+
+            if (!openStorageSessions[player.id]) {
+                return;
+            }
+
+            for (let cb of closeCallbacks) {
+                cb(player, openStorageSessions[player.id], openStorages[player.id]);
+            }
+        },
+    },
+    disconnect(player: alt.Player) {
+        const id = player.id;
+        if (typeof id === 'undefined') {
+            return;
+        }
+
+        delete openStorages[id];
+    },
     async use(player: alt.Player, type: InventoryType, slot: number) {
+        if (type === 'custom') {
+            return;
+        }
+
         if (!player || !player.valid) {
             return;
         }
@@ -16,9 +60,15 @@ const Internal = {
         Athena.systems.itemManager.utility.useItem(player, slot, type);
     },
     async drop(player: alt.Player, type: InventoryType, slot: number) {
-        //
+        if (type === 'custom') {
+            return;
+        }
     },
     async split(player: alt.Player, type: InventoryType, slot: number, amount: number) {
+        if (type === 'custom') {
+            return;
+        }
+
         if (!player || !player.valid) {
             return;
         }
@@ -40,7 +90,7 @@ const Internal = {
         await Athena.document.character.set(player, type, newInventory);
     },
     async combine(player: alt.Player, info: DualSlotInfo) {
-        if (info.startType !== 'inventory') {
+        if (info.startType !== 'inventory' || info.endType !== 'inventory') {
             return;
         }
 
@@ -199,11 +249,79 @@ const Internal = {
 
 export const InventoryView = {
     init() {
+        alt.on('playerDisconnect', Internal.disconnect);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.USE, Internal.use);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.DROP, Internal.drop);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.SPLIT, Internal.split);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.SWAP, Internal.swap);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, Internal.unequip);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.COMBINE, Internal.combine);
+        alt.onClient(INVENTORY_EVENTS.TO_SERVER.OPEN, Internal.callbacks.open);
+        alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
+    },
+    callbacks: {
+        add(type: 'open' | 'close', callback: (player: alt.Player) => void) {
+            if (type === 'open') {
+                openCallbacks.push(callback as PlayerCallback);
+                return;
+            }
+
+            if (type === 'close') {
+                closeCallbacks.push(callback);
+                return;
+            }
+        },
+    },
+    controls: {
+        /**
+         * Force open an inventory.
+         *
+         * @param {alt.Player} player
+         */
+        open(player: alt.Player) {
+            player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
+        },
+        /**
+         * Force close the inventory if it is open.
+         *
+         * @param {alt.Player} player
+         */
+        close(player: alt.Player) {
+            player.emit(INVENTORY_EVENTS.TO_CLIENT.CLOSE);
+        },
+    },
+    storage: {
+        /**
+         * Allows opening a side-panel with an array of items next to the inventory.
+         * The array of items will be returned through a callback.
+         * Utilize the callback system to obtain the modified storage data.
+         *
+         * @param {alt.Player} player
+         * @param {string} uid
+         * @param {Array<StoredItem>} items
+         */
+        async open(player: alt.Player, uid: string, items: Array<StoredItem>, forceOpenInventory = false) {
+            if (forceOpenInventory) {
+                player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
+                await alt.Utils.wait(500);
+            }
+
+            // If the matching uid is already open; we do not open it for others.
+            if (openStorageSessions.values.includes(uid)) {
+                return;
+            }
+
+            openStorages[player.id] = deepCloneArray<StoredItem>(items);
+            const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
+            Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList);
+        },
     },
 };
+
+InventoryView.callbacks.add('open', (player: alt.Player) => {
+    console.log(`${player.id} has opened their inventory.`);
+});
+
+InventoryView.callbacks.add('close', (player: alt.Player) => {
+    console.log(`${player.id} has closed their inventory.`);
+});
