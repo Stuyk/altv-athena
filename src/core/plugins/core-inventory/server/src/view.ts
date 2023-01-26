@@ -27,13 +27,19 @@ const Internal = {
             }
         },
         close(player: alt.Player) {
+            console.log('1');
+
             if (!player || !player.valid) {
                 return;
             }
 
+            console.log('2');
+
             if (!openStorageSessions[player.id]) {
                 return;
             }
+
+            console.log('3');
 
             for (let cb of closeCallbacks) {
                 cb(player, openStorageSessions[player.id], openStorages[player.id]);
@@ -282,6 +288,20 @@ const Internal = {
     },
 };
 
+function addCallback(type: 'close', callback: PlayerCloseCallback);
+function addCallback(type: 'open', callback: PlayerCallback);
+function addCallback(type: 'open' | 'close', callback: PlayerCallback | PlayerCloseCallback) {
+    if (type === 'open') {
+        openCallbacks.push(callback as PlayerCallback);
+        return;
+    }
+
+    if (type === 'close') {
+        closeCallbacks.push(callback as PlayerCloseCallback);
+        return;
+    }
+}
+
 export const InventoryView = {
     init() {
         alt.on('playerDisconnect', Internal.disconnect);
@@ -295,17 +315,7 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
     },
     callbacks: {
-        add(type: 'open' | 'close', callback: (player: alt.Player) => void) {
-            if (type === 'open') {
-                openCallbacks.push(callback as PlayerCallback);
-                return;
-            }
-
-            if (type === 'close') {
-                closeCallbacks.push(callback);
-                return;
-            }
-        },
+        add: addCallback,
     },
     controls: {
         /**
@@ -357,6 +367,7 @@ export const InventoryView = {
             }
 
             openStorages[player.id] = deepCloneArray<StoredItem>(items);
+            openStorageSessions[player.id] = uid;
             const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList, storageSize);
         },
@@ -374,10 +385,38 @@ export const InventoryView = {
             const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList);
         },
+        /**
+         * Returns true if a player is using the matching session uid.
+         *
+         * @param {alt.Player} player
+         * @param {string} uid
+         * @return {*}
+         */
+        isUsingSession(player: alt.Player, uid: string) {
+            return openStorageSessions[player.id] === uid;
+        },
+        /**
+         * Returns true if the session with a specific uid is in use.
+         *
+         * @param {string} uid
+         * @return {*}
+         */
+        isSessionInUse(uid: string) {
+            return Object.values(openStorageSessions).includes(uid);
+        },
     },
 };
+
+function finishStorageMove(player: alt.Player, uid: string, items: Array<StoredItem>) {
+    // Pretty much if the uid matches here; maybe that's a database location or something.
+    // Then you perform your saving here.
+    console.log(uid);
+    console.log(items);
+}
 
 Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
     const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
     InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
 });
+
+InventoryView.callbacks.add('close', finishStorageMove);

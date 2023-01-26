@@ -76,6 +76,8 @@ function init() {
             },
             onClose: () => {
                 isOpen = false;
+
+                alt.emitServer(INVENTORY_EVENTS.TO_SERVER.CLOSE);
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_close.ogg`, 0.2);
             },
         },
