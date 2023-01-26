@@ -224,7 +224,9 @@ const Sync = {
     },
     playTime(player: alt.Player): void {
         const data = Athena.document.character.get(player);
-        Athena.document.character.set(player, 'hours', (data?.hours ?? 0) + 0.0166666666666667);
+        const newHours = (data?.hours ?? 0) + 0.0166666666666667;
+        Athena.document.character.set(player, 'hours', newHours);
+        Athena.events.player.trigger('increased-play-time', player, newHours);
     },
 };
 

@@ -119,6 +119,7 @@ export default class WebViewEvents {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewEvents
      */
+    static on<T>(eventName: string, callback: T);
     static on(eventName: string, callback: (...args: any[]) => void) {
         OnEvents[eventName] = callback;
     }

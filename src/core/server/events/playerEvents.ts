@@ -1,6 +1,13 @@
 import * as alt from 'alt-server';
 
-type AthenaPlayerEvents = 'player-died' | 'set-account-data' | 'selected-character' | 'spawned' | 'respawned';
+type AthenaPlayerEvents =
+    | 'increased-play-time'
+    | 'player-died'
+    | 'respawned'
+    | 'selected-character'
+    | 'set-account-data'
+    | 'spawned';
+
 type PlayerCallbackArgs = (player: alt.Player, ...args: any[]) => void;
 
 const playerEvents: Array<{ eventName: string; callback: (player: alt.Player, ...args: any[]) => void }> = [];
@@ -30,6 +37,7 @@ export class PlayerEvents {
      * @param {(player: alt.Player) => void} callback
      * @memberof PlayerEvents
      */
+
     static on<CustomEvents>(eventName: AthenaPlayerEvents & CustomEvents, callback: PlayerCallbackArgs) {
         playerEvents.push({ eventName, callback });
     }

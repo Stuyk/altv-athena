@@ -55,6 +55,7 @@ export default defineComponent({
     max-height: 635px;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding-right: 5vw;
+    padding-right: 24px;
+    padding-left: 24px;
 }
 </style>

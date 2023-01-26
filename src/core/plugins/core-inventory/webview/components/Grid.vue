@@ -315,12 +315,18 @@ export default defineComponent({
             this.toolbar = toolbar;
             this.totalWeight = totalWeight;
         },
-        setCustom(customItems: Array<Item>) {
+        setCustomItems(customItems: Array<Item>, maximumSize: number) {
             if (typeof customItems === 'undefined') {
                 customItems = [];
             }
 
             this.custom = customItems;
+
+            if (typeof maximumSize !== 'undefined') {
+                const newSlotLimits = { ...this.slotLimits };
+                newSlotLimits.custom = maximumSize;
+                this.slotLimits = newSlotLimits;
+            }
         },
         contextMenu(e: MouseEvent, slot: number) {
             e.preventDefault();
@@ -457,7 +463,7 @@ export default defineComponent({
             25,
         );
 
-        this.setCustom([exampleItem]);
+        this.setCustomItems([exampleItem]);
     },
     watch: {
         offclick() {

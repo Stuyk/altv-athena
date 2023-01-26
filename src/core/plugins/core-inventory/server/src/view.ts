@@ -38,6 +38,9 @@ const Internal = {
             for (let cb of closeCallbacks) {
                 cb(player, openStorageSessions[player.id], openStorages[player.id]);
             }
+
+            delete openStorageSessions[player.id];
+            delete openStorages[player.id];
         },
     },
     disconnect(player: alt.Player) {
@@ -139,25 +142,32 @@ const Internal = {
             return;
         }
 
-        if (typeof data[info.startType] === 'undefined' || typeof data[info.endType] === 'undefined') {
+        let startData: Array<StoredItem> = data[info.startType];
+        let endData: Array<StoredItem> = data[info.endType];
+
+        if (info.startType === 'custom') {
+            startData = openStorages[player.id];
+        }
+
+        if (info.endType === 'custom') {
+            endData = openStorages[player.id];
+        }
+
+        if (typeof startData === 'undefined' || typeof endData === 'undefined') {
             return;
         }
 
-        const startItem = Athena.systems.itemManager.slot.getAt(info.startIndex, data[info.startType]);
+        const startItem = Athena.systems.itemManager.slot.getAt(info.startIndex, startData);
         if (typeof startItem === 'undefined') {
             return;
         }
 
-        const endItem = Athena.systems.itemManager.slot.getAt(info.endIndex, data[info.endType]);
+        const endItem = Athena.systems.itemManager.slot.getAt(info.endIndex, endData);
 
         // If its the same data set that we are modifying. Just does a simple combine for the same inventory type.
         // Stacking items in same data set.
         if (info.startType === info.endType && Athena.systems.itemManager.utility.compare(startItem, endItem)) {
-            const newInventory = Athena.systems.itemManager.slot.combineAt(
-                info.startIndex,
-                info.endIndex,
-                data[info.startType],
-            );
+            const newInventory = Athena.systems.itemManager.slot.combineAt(info.startIndex, info.endIndex, startData);
             if (typeof newInventory === 'undefined') {
                 return;
             }
@@ -169,11 +179,7 @@ const Internal = {
         // Actually swapping different slots with same data set.
         // Same data set, different items.
         if (info.startType === info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
-            const newInventory = Athena.systems.itemManager.slot.swap(
-                info.startIndex,
-                info.endIndex,
-                data[info.startType],
-            );
+            const newInventory = Athena.systems.itemManager.slot.swap(info.startIndex, info.endIndex, startData);
             if (typeof newInventory === 'undefined') {
                 return;
             }
@@ -185,18 +191,35 @@ const Internal = {
         // Swapping different slots with different data sets.
         if (info.startType !== info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
             const complexSwap = Athena.systems.itemManager.slot.swapBetween(
-                { slot: info.startIndex, data: data[info.startType], size: info.startType, type: info.startType },
-                { slot: info.endIndex, data: data[info.endType], size: info.endType, type: info.endType },
+                { slot: info.startIndex, data: startData, size: info.startType, type: info.startType },
+                { slot: info.endIndex, data: endData, size: info.endType, type: info.endType },
             );
 
             if (typeof complexSwap === 'undefined') {
                 return;
             }
 
-            await Athena.document.character.setBulk(player, {
-                [info.startType]: complexSwap.from,
-                [info.endType]: complexSwap.to,
-            });
+            if (info.startType !== 'custom' && info.endType !== 'custom') {
+                await Athena.document.character.setBulk(player, {
+                    [info.startType]: complexSwap.from,
+                    [info.endType]: complexSwap.to,
+                });
+                return;
+            }
+
+            if (info.startType === 'custom') {
+                openStorages[player.id] = complexSwap.from;
+            } else {
+                await Athena.document.character.set(player, info.startType, complexSwap.from);
+            }
+
+            if (info.endType === 'custom') {
+                openStorages[player.id] = complexSwap.to;
+            } else {
+                await Athena.document.character.set(player, info.endType, complexSwap.to);
+            }
+
+            InventoryView.storage.resync(player);
             return;
         }
 
@@ -300,20 +323,50 @@ export const InventoryView = {
          * @param {string} uid
          * @param {Array<StoredItem>} items
          */
-        async open(player: alt.Player, uid: string, items: Array<StoredItem>, forceOpenInventory = false) {
+        async open(
+            player: alt.Player,
+            uid: string,
+            items: Array<StoredItem>,
+            storageSize: number,
+            forceOpenInventory = false,
+        ) {
             if (forceOpenInventory) {
                 player.emit(INVENTORY_EVENTS.TO_CLIENT.OPEN);
-                await alt.Utils.wait(500);
+                await alt.Utils.wait(250);
             }
 
             // If the matching uid is already open; we do not open it for others.
-            if (openStorageSessions.values.includes(uid)) {
+            if (Object.values(openStorageSessions).includes(uid)) {
                 return;
             }
 
+            if (storageSize < items.length) {
+                storageSize = items.length;
+            }
+
             openStorages[player.id] = deepCloneArray<StoredItem>(items);
+            const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
+            Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList, storageSize);
+        },
+        /**
+         * Updates a storage session with new data.
+         *
+         * @param {alt.Player} player
+         * @param {Array<StoredItem>} items
+         */
+        resync(player: alt.Player) {
+            if (!openStorages[player.id]) {
+                return;
+            }
+
             const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList);
         },
     },
 };
+
+// Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
+//     const data = Athena.document.character.get(player);
+
+//     InventoryView.storage.open(player, 'storage-force-1', data.inventory, 30, true);
+// });
