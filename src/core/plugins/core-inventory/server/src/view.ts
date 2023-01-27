@@ -469,6 +469,7 @@ const Internal = {
             return;
         }
 
+        delete offers[data.uid];
         await Athena.document.character.set(player, 'inventory', playerInventory);
         await Athena.document.character.set(target, 'inventory', targetInventory);
     },
