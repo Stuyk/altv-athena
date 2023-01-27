@@ -6,6 +6,7 @@ import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/share
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
+import { ComplexSwapReturn } from '@AthenaServer/systems/itemManager';
 
 type PlayerCallback = (player: alt.Player) => void;
 type PlayerCloseCallback = (player: alt.Player, uid: string, items: Array<StoredItem>) => void;
@@ -27,19 +28,13 @@ const Internal = {
             }
         },
         close(player: alt.Player) {
-            console.log('1');
-
             if (!player || !player.valid) {
                 return;
             }
 
-            console.log('2');
-
             if (!openStorageSessions[player.id]) {
                 return;
             }
-
-            console.log('3');
 
             for (let cb of closeCallbacks) {
                 cb(player, openStorageSessions[player.id], openStorages[player.id]);
@@ -72,6 +67,8 @@ const Internal = {
         if (type === 'custom') {
             return;
         }
+
+        // ! - TODO
     },
     async split(player: alt.Player, type: InventoryType, slot: number, amount: number) {
         if (type === 'custom') {
@@ -206,42 +203,47 @@ const Internal = {
             return;
         }
 
-        // Swapping different slots with different data sets.
+        const fromComplex = { slot: info.startIndex, data: startData, size: info.startType, type: info.startType };
+        const toComplex = { slot: info.endIndex, data: endData, size: info.endType, type: info.endType };
+
+        let complexSwap: ComplexSwapReturn;
+
         if (info.startType !== info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
-            const complexSwap = Athena.systems.itemManager.slot.swapBetween(
+            // Swapping different slots with different data sets.
+            complexSwap = Athena.systems.itemManager.slot.swapBetween(fromComplex, toComplex);
+        } else {
+            // Items match; but different data sets. Move stack sizes.
+            complexSwap = Athena.systems.itemManager.slot.combineAtComplex(
                 { slot: info.startIndex, data: startData, size: info.startType, type: info.startType },
                 { slot: info.endIndex, data: endData, size: info.endType, type: info.endType },
             );
+        }
 
-            if (typeof complexSwap === 'undefined') {
-                return;
-            }
-
-            if (info.startType !== 'custom' && info.endType !== 'custom') {
-                await Athena.document.character.setBulk(player, {
-                    [info.startType]: complexSwap.from,
-                    [info.endType]: complexSwap.to,
-                });
-                return;
-            }
-
-            if (info.startType === 'custom') {
-                openStorages[player.id] = complexSwap.from;
-            } else {
-                await Athena.document.character.set(player, info.startType, complexSwap.from);
-            }
-
-            if (info.endType === 'custom') {
-                openStorages[player.id] = complexSwap.to;
-            } else {
-                await Athena.document.character.set(player, info.endType, complexSwap.to);
-            }
-
-            InventoryView.storage.resync(player);
+        if (typeof complexSwap === 'undefined') {
             return;
         }
 
-        // Stacking items in different data sets.
+        if (info.startType !== 'custom' && info.endType !== 'custom') {
+            await Athena.document.character.setBulk(player, {
+                [info.startType]: complexSwap.from,
+                [info.endType]: complexSwap.to,
+            });
+            return;
+        }
+
+        if (info.startType === 'custom') {
+            openStorages[player.id] = complexSwap.from;
+        } else {
+            await Athena.document.character.set(player, info.startType, complexSwap.from);
+        }
+
+        if (info.endType === 'custom') {
+            openStorages[player.id] = complexSwap.to;
+        } else {
+            await Athena.document.character.set(player, info.endType, complexSwap.to);
+        }
+
+        InventoryView.storage.resync(player);
     },
     async unequip(player: alt.Player, slot: number) {
         if (!player || !player.valid) {
@@ -283,8 +285,8 @@ const Internal = {
             inventory: inventoryClone,
         });
     },
-    async give(player: alt.Player) {
-        //
+    async give(player: alt.Player, type: string, slot: number, target: number) {
+        // ! - TODO
     },
 };
 
@@ -407,16 +409,16 @@ export const InventoryView = {
     },
 };
 
-function finishStorageMove(player: alt.Player, uid: string, items: Array<StoredItem>) {
-    // Pretty much if the uid matches here; maybe that's a database location or something.
-    // Then you perform your saving here.
-    console.log(uid);
-    console.log(items);
-}
+// function finishStorageMove(player: alt.Player, uid: string, items: Array<StoredItem>) {
+//     // Pretty much if the uid matches here; maybe that's a database location or something.
+//     // Then you perform your saving here.
+//     console.log(uid);
+//     console.log(items);
+// }
 
-Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
-    const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
-    InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
-});
+// Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
+//     const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
+//     InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
+// });
 
-InventoryView.callbacks.add('close', finishStorageMove);
+// InventoryView.callbacks.add('close', finishStorageMove);

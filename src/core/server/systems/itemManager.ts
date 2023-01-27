@@ -50,7 +50,7 @@ export interface ItemQuantityChange {
 
 type InventoryType = 'inventory' | 'toolbar' | 'custom';
 type ComplexSwap = { slot: number; data: Array<StoredItem>; size: InventoryType | number; type: InventoryType };
-type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem> };
+export type ComplexSwapReturn = { from: Array<StoredItem>; to: Array<StoredItem> };
 
 const InternalFunctions = {
     item: {
@@ -705,6 +705,58 @@ export const ItemManager = {
             copyOfData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, copyOfData[toIndex]);
 
             return copyOfData;
+        },
+        combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
+            if (typeof from.size === 'string') {
+                from.size = DEFAULT_CONFIG[from.size].size;
+            }
+
+            if (typeof to.size === 'string') {
+                to.size = DEFAULT_CONFIG[to.size].size;
+            }
+
+            const fromIndex = from.data.findIndex((x) => x.slot === from.slot);
+            const toIndex = to.data.findIndex((x) => x.slot === to.slot);
+
+            if (fromIndex <= -1) {
+                return undefined;
+            }
+
+            const fromData = deepCloneArray<StoredItem>(from.data);
+            const toData = deepCloneArray<StoredItem>(to.data);
+
+            const baseItem = ItemFactory.sync.getBaseItem(fromData[fromIndex].dbName, fromData[fromIndex].version);
+            if (typeof baseItem === 'undefined') {
+                return undefined;
+            }
+
+            if (baseItem.behavior && !baseItem.behavior.canStack) {
+                return undefined;
+            }
+
+            const maxStackSize = typeof baseItem.maxStack === 'number' ? baseItem.maxStack : Number.MAX_SAFE_INTEGER;
+            const spaceAvailable = maxStackSize - toData[toIndex].quantity;
+
+            if (spaceAvailable <= 0) {
+                return undefined;
+            }
+
+            // Quantity being moved, smaller than max stack but also enough room for whole stack.
+            // Simply move quantities; and return results.
+            if (spaceAvailable > fromData[fromIndex].quantity) {
+                toData[toIndex].quantity += fromData[fromIndex].quantity;
+                toData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, toData[toIndex]);
+                fromData.splice(fromIndex, 1);
+                return { from: fromData, to: toData };
+            }
+
+            fromData[fromIndex].quantity -= spaceAvailable;
+            toData[toIndex].quantity += spaceAvailable;
+
+            fromData[fromIndex] = InternalFunctions.item.calculateWeight(baseItem, fromData[fromIndex]);
+            toData[toIndex] = InternalFunctions.item.calculateWeight(baseItem, toData[toIndex]);
+
+            return { from: fromData, to: toData };
         },
         /**
          * Swaps slots between a single data set.
