@@ -36,6 +36,14 @@
                 v-if="splitData"
             >
             </Split>
+            <Give
+                :name="giveData.name"
+                :slot="giveData.slot"
+                :quantity="giveData.quantity"
+                @cancel-give="cancelGive"
+                v-if="giveData"
+            >
+            </Give>
             <div class="inventory-toolbar slot">
                 <Slot
                     v-for="(slot, index) in slotLimits.toolbar"
@@ -121,6 +129,7 @@ export default defineComponent({
     components: {
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
         Split: defineAsyncComponent(() => import('./Split.vue')),
+        Give: defineAsyncComponent(() => import('./Give.vue')),
         Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
         Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
@@ -146,6 +155,7 @@ export default defineComponent({
             itemDescription: '',
             totalWeight: 0,
             splitData: undefined as { name: string; slot: number; quantity: number },
+            giveData: undefined as { name: string; slot: number; quantity: number },
             config: {
                 units: INVENTORY_CONFIG.WEBVIEW.WEIGHT.UNITS,
                 showGridNumbers: INVENTORY_CONFIG.WEBVIEW.GRID.SHOW_NUMBERS,
@@ -363,17 +373,18 @@ export default defineComponent({
                 return;
             }
 
-            if (type === 'split') {
+            if (type === 'split' || type === 'give') {
                 const item = this.getItem('inventory', slot);
                 if (typeof item === 'undefined') {
                     return;
                 }
 
-                if (item.quantity <= 1) {
+                if (type === 'split' && item.quantity <= 1) {
                     return;
                 }
 
-                this.splitData = {
+                const dataName = type === 'split' ? 'splitData' : 'giveData';
+                this[dataName] = {
                     name: item.name,
                     quantity: item.quantity,
                     slot: slot,
@@ -384,11 +395,6 @@ export default defineComponent({
 
             if (type === 'drop') {
                 WebViewEvents.emitServer(INVENTORY_EVENTS.TO_SERVER.DROP, 'inventory', slot);
-                return;
-            }
-
-            if (type === 'give') {
-                console.log('Opening give event...');
                 return;
             }
         },
@@ -423,6 +429,9 @@ export default defineComponent({
         },
         cancelSplit() {
             this.splitData = undefined;
+        },
+        cancelGive() {
+            this.giveData = undefined;
         },
     },
     mounted() {

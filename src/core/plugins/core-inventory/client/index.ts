@@ -7,6 +7,7 @@ import { INVENTORY_CONFIG } from '../shared/config';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { onInventoryUpdate } from '@AthenaClient/events/onInventoryUpdate';
 import { Page } from '@AthenaClient/systems/page';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
 let page: Page;
 
@@ -60,6 +61,37 @@ function onInventoryMaxWeightChange(value: number) {
     AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, maxWeight);
 }
 
+function getClosestPlayers() {
+    const playerList = [...alt.Player.all];
+    const validPlayers: Array<{ name: string; id: number }> = [];
+
+    for (let i = 0; i < playerList.length; i++) {
+        if (!playerList[i].valid) {
+            continue;
+        }
+
+        // if (playerList[i].id === alt.Player.local.id) {
+        //     continue;
+        // }
+
+        const id: number = playerList[i].getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID) as number;
+        const name: string = playerList[i].getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;
+
+        if (typeof id === 'undefined' || typeof name === 'undefined') {
+            continue;
+        }
+
+        const dist = AthenaClient.utility.distance3D(alt.Player.local.pos, playerList[i].pos);
+        if (dist > INVENTORY_CONFIG.MAX_GIVE_DISTANCE) {
+            continue;
+        }
+
+        validPlayers.push({ name, id });
+    }
+
+    AthenaClient.webview.emit(INVENTORY_EVENTS.FROM_CLIENT.SET_CLOSEST_PLAYERS, validPlayers);
+}
+
 function init() {
     page = new AthenaClient.webview.page({
         name: INVENTORY_EVENTS.PAGE,
@@ -110,6 +142,7 @@ function init() {
     AthenaClient.config.player.callback.add('inventory-size', onInventorySizeChange);
     AthenaClient.config.player.callback.add('inventory-weight-enabled', onInventoryWeightStateChange);
     AthenaClient.config.player.callback.add('inventory-max-weight', onInventoryMaxWeightChange);
+    AthenaClient.webview.on(INVENTORY_EVENTS.FROM_WEBVIEW.GET_CLOSEST_PLAYERS, getClosestPlayers);
 
     alt.onServer(INVENTORY_EVENTS.TO_CLIENT.OPEN, () => {
         page.open();

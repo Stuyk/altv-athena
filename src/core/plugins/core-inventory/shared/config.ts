@@ -14,4 +14,5 @@ export const INVENTORY_CONFIG = {
             UNITS: 'kg',
         },
     },
+    MAX_GIVE_DISTANCE: 5,
 };

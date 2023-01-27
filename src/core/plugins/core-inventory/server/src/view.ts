@@ -70,6 +70,15 @@ const Internal = {
 
         // ! - TODO
     },
+    /**
+     * Using the split interface; the result will try to push this.
+     *
+     * @param {alt.Player} player
+     * @param {InventoryType} type
+     * @param {number} slot
+     * @param {number} amount
+     * @return {*}
+     */
     async split(player: alt.Player, type: InventoryType, slot: number, amount: number) {
         if (type === 'custom') {
             return;
@@ -95,6 +104,13 @@ const Internal = {
 
         await Athena.document.character.set(player, type, newInventory);
     },
+    /**
+     * Attempt to combine two items by left-clicking both of them in an inventory.
+     *
+     * @param {alt.Player} player
+     * @param {DualSlotInfo} info
+     * @return {*}
+     */
     async combine(player: alt.Player, info: DualSlotInfo) {
         if (info.startType !== 'inventory' || info.endType !== 'inventory') {
             return;
@@ -135,6 +151,13 @@ const Internal = {
             0.2,
         );
     },
+    /**
+     * Swaps items between slots. Handles the 'dragging' action.
+     *
+     * @param {alt.Player} player
+     * @param {DualSlotInfo} info
+     * @return {*}
+     */
     async swap(player: alt.Player, info: DualSlotInfo) {
         if (!player || !player.valid) {
             return;
@@ -245,6 +268,13 @@ const Internal = {
 
         InventoryView.storage.resync(player);
     },
+    /**
+     * Unequip an item from a toolbar. Usually provoked by right-clicking in a toolbar.
+     *
+     * @param {alt.Player} player
+     * @param {number} slot
+     * @return {*}
+     */
     async unequip(player: alt.Player, slot: number) {
         if (!player || !player.valid) {
             return;
@@ -285,8 +315,49 @@ const Internal = {
             inventory: inventoryClone,
         });
     },
-    async give(player: alt.Player, type: string, slot: number, target: number) {
-        // ! - TODO
+    /**
+     * Creates a 'give' request that the target player must accept to recieve an item.
+     *
+     * @param {alt.Player} player
+     * @param {InventoryType} type
+     * @param {number} slot
+     * @param {number} idOfTarget
+     * @return {*}
+     */
+    async give(player: alt.Player, type: InventoryType, slot: number, idOfTarget: number) {
+        if (type !== 'inventory') {
+            return;
+        }
+
+        if (typeof idOfTarget === 'undefined') {
+            return;
+        }
+
+        const target = Athena.systems.identifier.getPlayer(idOfTarget);
+        if (!target || !target.valid) {
+            return;
+        }
+
+        // ! - COMMENT THIS BACK IN AFTER FINALIZING
+        // if (target.id === player.id) {
+        //     return;
+        // }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (typeof data.inventory === 'undefined' || data.inventory.length <= 0) {
+            return;
+        }
+
+        const existingItem = Athena.systems.itemManager.slot.getAt(slot, data.inventory);
+        if (typeof existingItem === 'undefined') {
+            return;
+        }
+
+        // Item Exists, Target Exists. Prompt for trade.
     },
 };
 
@@ -313,6 +384,7 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.SWAP, Internal.swap);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.UNEQUIP, Internal.unequip);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.COMBINE, Internal.combine);
+        alt.onClient(INVENTORY_EVENTS.TO_SERVER.GIVE, Internal.give);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.OPEN, Internal.callbacks.open);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
     },

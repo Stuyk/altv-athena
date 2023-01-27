@@ -9,6 +9,7 @@ export const INVENTORY_EVENTS = {
         OPEN: 'inventory:event:server:open',
         CLOSE: 'inventory:event:client:close',
         COMBINE: 'inventory:event:server:combine',
+        GIVE: 'inventory:event:server:give',
     },
     TO_CLIENT: {
         OPEN: 'inventory:event:client:open',
@@ -16,6 +17,10 @@ export const INVENTORY_EVENTS = {
     },
     FROM_WEBVIEW: {
         READY: 'inventory:event:ready',
+        GET_CLOSEST_PLAYERS: 'inventory:get:closest:players',
+    },
+    FROM_CLIENT: {
+        SET_CLOSEST_PLAYERS: 'inventory:set:closest:players',
     },
     TO_WEBVIEW: {
         SET_CUSTOM: 'inventory:event:set:custom',
