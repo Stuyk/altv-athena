@@ -70,9 +70,9 @@ function getClosestPlayers() {
             continue;
         }
 
-        // if (playerList[i].id === alt.Player.local.id) {
-        //     continue;
-        // }
+        if (playerList[i].id === alt.Player.local.id) {
+            continue;
+        }
 
         const id: number = playerList[i].getSyncedMeta(PLAYER_SYNCED_META.IDENTIFICATION_ID) as number;
         const name: string = playerList[i].getSyncedMeta(PLAYER_SYNCED_META.NAME) as string;

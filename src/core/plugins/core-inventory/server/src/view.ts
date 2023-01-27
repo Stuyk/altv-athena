@@ -10,9 +10,28 @@ import { ComplexSwapReturn } from '@AthenaServer/systems/itemManager';
 
 type PlayerCallback = (player: alt.Player) => void;
 type PlayerCloseCallback = (player: alt.Player, uid: string, items: Array<StoredItem>) => void;
+type OfferInfo = {
+    to: number | string;
+    from: number | string;
+    slot: number;
+    quantity: number;
+    dbName: string;
+    creation?: number;
+};
 
-const openStorages: { [id: string]: Array<StoredItem> } = {};
-const openStorageSessions: { [id: string]: string } = {};
+const EVENTS = {
+    ACCEPT: 'inventory-accept-offer',
+    DECLINE: 'inventory-decline-offer',
+};
+
+// Give Offers
+const offers: { [hash: string]: OfferInfo } = {};
+
+// Storages
+const openStorages: { [player_id: string]: Array<StoredItem> } = {};
+const openStorageSessions: { [player_id: string]: string } = {};
+
+// Callbacks
 const openCallbacks: Array<PlayerCallback> = [];
 const closeCallbacks: Array<PlayerCloseCallback> = [];
 
@@ -339,9 +358,9 @@ const Internal = {
         }
 
         // ! - COMMENT THIS BACK IN AFTER FINALIZING
-        // if (target.id === player.id) {
-        //     return;
-        // }
+        if (target.id === player.id) {
+            return;
+        }
 
         const data = Athena.document.character.get(player);
         if (typeof data === 'undefined') {
@@ -357,7 +376,118 @@ const Internal = {
             return;
         }
 
-        // Item Exists, Target Exists. Prompt for trade.
+        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(existingItem.dbName, existingItem.version);
+        if (typeof baseItem === 'undefined') {
+            return;
+        }
+
+        const idOfOfferer = Athena.systems.identifier.getIdByStrategy(player);
+        const newOffer: OfferInfo = {
+            dbName: existingItem.dbName,
+            quantity: existingItem.quantity,
+            slot: existingItem.slot,
+            from: idOfOfferer,
+            to: idOfTarget,
+        };
+
+        const uid = Athena.utility.hash.sha256(JSON.stringify(newOffer));
+        newOffer.creation = Date.now();
+        offers[uid] = newOffer;
+
+        const offerInfo = `Item Offer '${baseItem.name}' x${existingItem.quantity}`;
+        Athena.player.emit.acceptDeclineEvent(target, {
+            question: offerInfo,
+            onClientEvents: {
+                accept: EVENTS.ACCEPT,
+                decline: EVENTS.DECLINE,
+            },
+            data: {
+                uid,
+            },
+        });
+
+        Athena.player.emit.notification(player, offerInfo.replace('Item Offer', 'Offered'));
+    },
+    async giveAccept(target: alt.Player, data: { uid: string }) {
+        const offer = offers[data.uid];
+        if (typeof offer === 'undefined') {
+            Athena.player.emit.notification(target, `Item offer was not found.`);
+            return;
+        }
+
+        const player = Athena.systems.identifier.getPlayer(offer.from);
+        if (typeof player === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Item offer was not found.`);
+            return;
+        }
+
+        const playerData = Athena.document.character.get(player);
+        if (typeof playerData === 'undefined' || typeof playerData.inventory === 'undefined') {
+            return;
+        }
+
+        const existingItem = Athena.systems.itemManager.slot.getAt(offer.slot, playerData.inventory);
+        if (typeof existingItem === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Item offer was not found.`);
+            return;
+        }
+
+        if (existingItem.dbName !== offer.dbName || existingItem.quantity !== offer.quantity) {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Item offer is no longer valid.`);
+            return;
+        }
+
+        const targetData = Athena.document.character.get(target);
+        if (typeof targetData === 'undefined' || typeof targetData.inventory === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Item offer is no longer valid.`);
+            return;
+        }
+
+        const openSlot = Athena.systems.itemManager.slot.findOpen('inventory', targetData.inventory);
+        if (typeof openSlot === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `No space in inventory.`);
+            return;
+        }
+
+        const itemClone = deepCloneObject<StoredItem>(existingItem);
+        const playerInventory = Athena.systems.itemManager.slot.removeAt(offer.slot, playerData.inventory);
+        if (typeof playerInventory === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Trade could not be completed.`);
+            return;
+        }
+
+        const targetInventory = Athena.systems.itemManager.inventory.add(itemClone, targetData.inventory, 'inventory');
+        if (typeof targetInventory === 'undefined') {
+            delete offers[data.uid];
+            Athena.player.emit.notification(target, `Trade could not be completed.`);
+            return;
+        }
+
+        await Athena.document.character.set(player, 'inventory', playerInventory);
+        await Athena.document.character.set(target, 'inventory', targetInventory);
+    },
+    giveDecline(target: alt.Player, data: { uid: string }) {
+        console.log(data);
+
+        const offer = offers[data.uid];
+        if (typeof offer === 'undefined') {
+            Athena.player.emit.notification(target, `Item offer was not found.`);
+            return;
+        }
+
+        const player = Athena.systems.identifier.getPlayer(offer.from);
+        if (typeof player === 'undefined') {
+            delete offers[data.uid];
+            return;
+        }
+
+        Athena.player.emit.notification(player, `Item offer was declined.`);
     },
 };
 
@@ -387,6 +517,8 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.GIVE, Internal.give);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.OPEN, Internal.callbacks.open);
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
+        alt.onClient(EVENTS.ACCEPT, Internal.giveAccept);
+        alt.onClient(EVENTS.DECLINE, Internal.giveDecline);
     },
     callbacks: {
         add: addCallback,

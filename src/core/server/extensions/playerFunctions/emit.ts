@@ -17,6 +17,7 @@ import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
 import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
 import { sha256Random } from '../../utility/encryption';
 import utility from './utility';
+import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
 
 const Emit = {
     /**
@@ -447,8 +448,25 @@ const Emit = {
     wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelOption>) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems, true);
     },
+    /**
+     * Emit a message to a given player.
+     *
+     * @param {alt.Player} player
+     * @param {string} msg
+     */
     message(player: alt.Player, msg: string) {
         Athena.systems.messenger.player.send(player, msg);
+    },
+    /**
+     * Prompt the user to accept / decline something.
+     * They must react by holding l-shift to open the menu.
+     *
+     * @param {alt.Player} player
+     * @param {AcceptDeclineEvent} eventInfo
+     */
+    acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineEvent) {
+        funcs.notification(player, `[TAB] ~y~${eventInfo.question}`);
+        player.emit(SYSTEM_EVENTS.ACCEPT_DECLINE_EVENT_SET, eventInfo);
     },
 };
 

@@ -7,6 +7,8 @@ export enum SYSTEM_EVENTS {
     APPEND_WORLD_NOTIFICATION = 'append:WorldNotification',
     APPEND_POLYGON = 'append:Polygon',
     //
+    ACCEPT_DECLINE_EVENT_SET = 'accept:Decline:Event:Set',
+    //
     BOOTUP_ENABLE_ENTRY = 'enable:Entry',
     // Check
     BEGIN_CONNECTION = 'connection:Begin',

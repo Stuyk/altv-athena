@@ -41,6 +41,7 @@ import './streamers/textlabel';
 import './streamers/worldNotifications';
 
 // Systems
+import './systems/acceptDeclineEvent';
 import './systems/animations';
 import './systems/arrest';
 import './systems/attachable';
