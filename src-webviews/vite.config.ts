@@ -9,6 +9,8 @@ export default defineConfig({
     build: {
         outDir: '../resources/webviews',
         emptyOutDir: true,
+        minify: 'esbuild',
+        reportCompressedSize: false,
     },
     resolve: {
         alias: [
