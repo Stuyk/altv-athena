@@ -1,4 +1,58 @@
-import { EQUIPMENT_TYPE } from '@AthenaShared/enums/equipmentType';
+/**
+ * dlc information for given clothing data
+ *
+ * @export
+ * @interface ClothingComponent
+ */
+export interface ClothingComponent {
+    /**
+     * The component identifier
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    id: number;
+
+    /**
+     * The associated relative drawing id for a given dlc clothing component
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    drawable: number;
+
+    /**
+     *
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    texture: number;
+
+    /**
+     *
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    palette: number;
+
+    /**
+     *
+     *
+     * @type {number}
+     * @memberof ClothingComponent
+     */
+    dlc: number;
+
+    /**
+     *
+     *
+     * @type {boolean}
+     * @memberof ClothingComponent
+     */
+    isProp?: boolean;
+}
 
 /**
  * Item behavior associated with an item
@@ -32,13 +86,12 @@ export interface DefaultItemBehavior {
     canTrade?: boolean;
 
     /**
-     * Is this item an equipment item.
-     * Such as clothing.
+     * Used to state that an item is clothing.
      *
      * @type {boolean}
      * @memberof DefaultItemBehavior
      */
-    isEquipment?: boolean;
+    isClothing?: boolean;
 
     /**
      * Can this item be added to the toolbar.
@@ -208,14 +261,6 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * @memberof BaseItem
      */
     consumableEventToCall?: string;
-
-    /**
-     * Used as a way to flag an item as an equipment type.
-     *
-     * @type {EQUIPMENT_TYPE}
-     * @memberof BaseItem
-     */
-    equipmentType?: EQUIPMENT_TYPE;
 }
 
 export type Item<Behavior = DefaultItemBehavior, CustomData = {}> = BaseItem<Behavior, CustomData> &

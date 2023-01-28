@@ -130,8 +130,8 @@ export default defineComponent({
         Slot: defineAsyncComponent(() => import('./Slot.vue')),
         Split: defineAsyncComponent(() => import('./Split.vue')),
         Give: defineAsyncComponent(() => import('./Give.vue')),
+        Context: defineAsyncComponent(() => import('./ContextCustom.vue')),
         Icon: defineAsyncComponent(() => import('@ViewComponents/Icon.vue')),
-        Context: defineAsyncComponent(() => import('@ViewComponents/Context.vue')),
     },
     props: {
         offclick: {

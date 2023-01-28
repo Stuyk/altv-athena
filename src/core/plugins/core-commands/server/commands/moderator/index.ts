@@ -1,3 +1,4 @@
+import './clothing';
 import './currency';
 import './door';
 import './interior';

@@ -94,6 +94,23 @@ Athena.systems.messenger.commands.register(
 
 async function exampleItems() {
     Athena.systems.itemFactory.async.upsert({
+        dbName: 'clothing',
+        data: {},
+        icon: 'clothing',
+        name: 'Clothing',
+        maxStack: 1,
+        weight: 1,
+        behavior: {
+            isClothing: true,
+            canDrop: true,
+            canStack: false,
+            canTrade: true,
+            destroyOnDrop: false,
+            isToolbar: false,
+        },
+    });
+
+    Athena.systems.itemFactory.async.upsert({
         dbName: 'burger',
         data: { health: 5 },
         icon: 'burger',

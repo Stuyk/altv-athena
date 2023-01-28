@@ -10,10 +10,12 @@ import { SoundSystem } from '@AthenaServer/systems/sound';
 import { defaultSystemsConst } from './constDefaultSystems';
 import { ItemManager } from '@AthenaServer/systems/itemManager';
 import { ItemCrafting } from '@AthenaServer/systems/itemCrafting';
+import { ItemClothing } from '@AthenaServer/systems/itemClothing';
 
 export const systemConst = {
     agenda: AgendaSystem,
     default: defaultSystemsConst,
+    itemClothing: ItemClothing,
     itemFactory: ItemFactory,
     itemManager: ItemManager,
     itemCrafting: ItemCrafting,

@@ -4,11 +4,7 @@ import { SYSTEM_EVENTS } from '../../../shared/enums/system';
 import emit from './emit';
 import { PLAYER_SYNCED_META } from '../../../shared/enums/playerSynced';
 import { Appearance } from '../../../shared/interfaces/appearance';
-import { ClothingComponent } from '../../../shared/interfaces/clothing';
-import { Injections } from '../../systems/injections';
-import { EquipmentSyncCallback, PlayerInjectionNames } from '../../systems/injections/player';
 import { Athena } from '@AthenaServer/api/athena';
-import { Item } from '@AthenaShared/interfaces/item';
 
 const Sync = {
     /**
@@ -103,115 +99,6 @@ const Sync = {
         // Eyes
         player.setEyeColor(appearance.eyes);
     },
-
-    async equipment(player: alt.Player, items: Array<Item<ClothingComponent>>, isMale = false) {
-        const clothingComponents = new Array(11).fill(null);
-        const propComponents = [0, 1, 2, 6, 7];
-
-        for (let i = 0; i < propComponents.length; i++) {
-            player.clearProp(propComponents[i]);
-        }
-
-        if (!isMale) {
-            player.setDlcClothes(0, 3, 14, 0, 0); // torso
-            player.setDlcClothes(0, 4, 14, 0, 0); // pants
-            player.setDlcClothes(0, 6, 1, 0, 0); // shoes
-            player.setDlcClothes(0, 11, 14, 0, 0); // shoes
-        } else {
-            player.setDlcClothes(0, 3, 15, 0, 0); // torso / arms
-            player.setDlcClothes(0, 4, 14, 0, 0); // pants
-            player.setDlcClothes(0, 6, 34, 0, 0); // shoes
-            player.setDlcClothes(0, 8, 15, 0, 0); // undershirt
-            player.setDlcClothes(0, 11, 91, 0, 0); // tops
-        }
-
-        if (items && Array.isArray(items)) {
-            for (let i = 0; i < items.length; i++) {
-                if (typeof items[i] === 'undefined') {
-                    continue;
-                }
-
-                const slot = typeof items[i].slot === 'number' ? (items[i].slot as number) : -1;
-                if (slot <= -1) {
-                    continue;
-                }
-
-                clothingComponents[slot] = items[i].data;
-            }
-        }
-
-        for (let i = 0; i < clothingComponents.length; i++) {
-            const component = clothingComponents[i] as ClothingComponent;
-            if (!component) {
-                continue;
-            }
-
-            for (let index = 0; index < component.drawables.length; index++) {
-                const texture = component.textures[index];
-                const value = component.drawables[index];
-                const id = component.ids[index];
-
-                if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
-                    let dlc = component.dlcHashes[index];
-                    if (typeof dlc === 'string') {
-                        dlc = alt.hash(dlc);
-                    }
-
-                    if (component.isProp) {
-                        player.setDlcProp(dlc, id, value, texture);
-                        continue;
-                    }
-
-                    player.setDlcClothes(dlc, id, value, texture, 0);
-                    continue;
-                }
-
-                if (component.isProp) {
-                    player.setProp(id, value, texture);
-                    continue;
-                }
-
-                player.setClothes(id, value, texture, 0);
-            }
-        }
-    },
-
-    /**
-     * Synchronizes a single equipment item.
-     *
-     * @param {alt.Player} player
-     * @param {ClothingComponent} component
-     */
-    singleEquipment(player: alt.Player, component: ClothingComponent) {
-        for (let index = 0; index < component.drawables.length; index++) {
-            const texture = component.textures[index];
-            const drawable = component.drawables[index];
-            const id = component.ids[index];
-
-            if (component.dlcHashes && component.dlcHashes.length >= 1 && component.dlcHashes[index] !== 0) {
-                let dlc = component.dlcHashes[index];
-                if (typeof dlc === 'string') {
-                    dlc = alt.hash(dlc);
-                }
-
-                if (component.isProp) {
-                    player.setDlcProp(dlc, id, drawable, texture);
-                    continue;
-                }
-
-                player.setDlcClothes(dlc, id, drawable, texture, 0);
-                continue;
-            }
-
-            if (component.isProp) {
-                player.setProp(id, drawable, texture);
-                continue;
-            }
-
-            player.setClothes(id, drawable, texture, 0);
-        }
-    },
-
     /**
      * Updates synced meta for the current player.
      * Basically updates data that may not be fully accessible everywhere.

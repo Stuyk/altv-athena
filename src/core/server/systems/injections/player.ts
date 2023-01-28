@@ -1,7 +1,6 @@
 import { Item } from '@AthenaShared/interfaces/item';
 import * as alt from 'alt-server';
 import { Character } from '../../../shared/interfaces/character';
-import { ClothingComponent } from '../../../shared/interfaces/clothing';
 import { Injections } from '../injections';
 
 type ClothingComponents = Array<Item>;

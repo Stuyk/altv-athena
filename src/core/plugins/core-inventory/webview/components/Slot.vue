@@ -125,10 +125,10 @@ export default defineComponent({
 .highlight-bg {
     background: repeating-linear-gradient(
         45deg,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.2) 10px,
-        rgba(0, 0, 0, 0.5) 10px,
-        rgba(0, 0, 0, 0.5) 20px
+        rgba(60, 190, 150, 0.1),
+        rgba(60, 190, 150, 0.1) 10px,
+        rgba(60, 190, 150, 0.2) 10px,
+        rgba(60, 190, 150, 0.2) 20px
     ) !important;
 }
 

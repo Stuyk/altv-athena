@@ -3,8 +3,7 @@ import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
 import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
-import { StoredItem } from '@AthenaShared/interfaces/inventory';
-import { ClothingComponent } from './clothing';
+import { StoredItem } from '@AthenaShared/interfaces/item';
 
 export interface Character {
     [key: string]: any;
@@ -163,14 +162,6 @@ export interface Character {
      * @memberof Character
      */
     inventory: Array<StoredItem>;
-
-    /**
-     * Clothing components that are assigned to the player.
-     *
-     * @type {Array<StoredItem<ClothingComponent>>}
-     * @memberof Character
-     */
-    equipment: Array<StoredItem<ClothingComponent>>;
 
     /**
      * Individual item references that the player may access through the 1-4 keys
