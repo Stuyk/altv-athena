@@ -35,7 +35,7 @@ export interface ClothingComponent {
      * @type {number}
      * @memberof ClothingComponent
      */
-    palette: number;
+    palette?: number;
 
     /**
      *
@@ -116,6 +116,15 @@ export interface DefaultItemBehavior {
      * @memberof DefaultItemBehavior
      */
     destroyOnDrop?: boolean;
+
+    /**
+     * Override default icon behavior for items such as clothing.
+     * Allows for specifying a custom icon instead.
+     *
+     * @type {boolean}
+     * @memberof DefaultItemBehavior
+     */
+    isCustomIcon?: boolean;
 }
 
 /**
@@ -192,6 +201,14 @@ export interface StoredItem<CustomData = {}> extends SharedItem<CustomData> {
      * @memberof StoredItem
      */
     totalWeight?: number;
+
+    /**
+     * Specify an icon to override the default base item icon with.
+     *
+     * @type {string}
+     * @memberof StoredItem
+     */
+    icon?: string;
 }
 
 /**

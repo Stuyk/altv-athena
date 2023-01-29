@@ -45,8 +45,6 @@ const Internal = {
         totalWeight += Athena.systems.itemManager.inventory.getWeight(inventory);
         totalWeight += Athena.systems.itemManager.inventory.getWeight(toolbar);
 
-        console.log(`synced inventory...`);
-
         player.emit(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_SYNC, fullInventory, fullToolbar, totalWeight);
     },
     /**

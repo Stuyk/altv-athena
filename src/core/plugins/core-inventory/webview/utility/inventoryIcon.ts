@@ -1,49 +1,26 @@
-import { Item } from '@AthenaShared/interfaces/item';
+import { ClothingComponent, DefaultItemBehavior, Item } from '@AthenaShared/interfaces/item';
+import { clothingItemToIconName } from '@AthenaShared/utility/clothing';
 import ResolvePath from '../../../../../../src-webviews/src/utility/pathResolver';
 
-export function getImagePath(item: Item): string {
-    const data = item.data;
+type ClothingInfo = { sex: number; components: Array<ClothingComponent> };
 
+export function getImagePath(item: Item): string {
     // Set Default Image
-    if (!data || !item.behavior || !item.behavior.isClothing) {
+    if (!item.data || !item.behavior || !item.behavior.isClothing) {
         return ResolvePath(item.icon.includes('.png') ? item.icon : item.icon + '.png');
     }
 
-    // ! - TODO
-    // New Clothing Component Image Format...
-    // if (!data.drawables) {
-    //     return ResolvePath(item.icon.includes('.png') ? item.icon : item.icon + '.png');
-    // }
+    const convertedItem = item as Item<DefaultItemBehavior, ClothingInfo>;
 
-    // item = item as Item<ClothingComponent>;
+    // Attempt to construct data for icon.
+    // Uses first drawable item in array as icon.
+    if (typeof convertedItem.data.sex === 'undefined') {
+        return ResolvePath(convertedItem.icon.includes('.png') ? convertedItem.icon : convertedItem.icon + '.png');
+    }
 
-    // // componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
-    // // Determine Image Set
-    // const isShared = (!data.isProp && data.ids[0] === 1) || (!data.isProp && data.ids[0] === 5);
+    if (!Array.isArray(convertedItem.data.components) || convertedItem.data.components.length <= 0) {
+        return ResolvePath(convertedItem.icon.includes('.png') ? convertedItem.icon : convertedItem.icon + '.png');
+    }
 
-    // let fileName = `../../assets/images/clothing/${data.ids[0]}-`;
-
-    // if (data.dlcHashes && data.dlcHashes[0]) {
-    //     fileName += `${data.dlcHashes[0]}-`;
-    // } else {
-    //     fileName += '0-';
-    // }
-
-    // if (data.isProp) {
-    //     fileName += 'prop-';
-    // }
-
-    // if (!isShared) {
-    //     if (data.sex === 1) {
-    //         fileName += `male-`;
-    //     } else {
-    //         fileName += 'female-';
-    //     }
-    // }
-
-    // fileName += data.drawables[0];
-    // fileName += `.png`;
-
-    // componentIdentifier-dlcHash-isProp?-isNotShared?-drawableID
-    return ResolvePath(item.icon.includes('.png') ? item.icon : item.icon + '.png');
+    return ResolvePath(`../../assets/images/clothing/${clothingItemToIconName(convertedItem)}`);
 }

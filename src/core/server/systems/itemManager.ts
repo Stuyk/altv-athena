@@ -891,11 +891,8 @@ export const ItemManager = {
                 return;
             }
 
-            console.log(storedItem);
-
             const baseItem = Athena.systems.itemFactory.sync.getBaseItem(storedItem.dbName, storedItem.version);
             if (typeof baseItem === 'undefined') {
-                console.log('base item failure');
                 return;
             }
 
@@ -904,7 +901,6 @@ export const ItemManager = {
             }
 
             if (baseItem.behavior && baseItem.behavior.isClothing) {
-                console.log('toggling...');
                 Athena.systems.itemClothing.toggleItem(player, slot);
                 return;
             }

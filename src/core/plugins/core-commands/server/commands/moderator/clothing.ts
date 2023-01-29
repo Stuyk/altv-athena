@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
+import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
 
 Athena.systems.messenger.commands.register(
     'setclothing',
@@ -44,24 +45,8 @@ Athena.systems.messenger.commands.register(
             return;
         }
 
-        const dlcInfo = player.getDlcClothes(idReal);
-        const componentInfo: ClothingComponent = {
-            id: idReal,
-            ...dlcInfo,
-        };
-
         const data = Athena.document.character.get(player);
-        const storableItem: StoredItem<{ sex: number; components: Array<ClothingComponent> }> = {
-            dbName: 'clothing',
-            quantity: 1,
-            slot: -1,
-            isEquipped: false,
-            data: {
-                sex: data.appearance.sex,
-                components: [componentInfo],
-            },
-        };
-
+        const storableItem = Athena.systems.itemFactory.sync.item.create.outfit(player, [{ id: idReal }]);
         const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;
@@ -94,8 +79,11 @@ Athena.systems.messenger.commands.register(
             ...dlcInfo,
         };
 
+        const data = Athena.document.character.get(player);
+
         const stringData = JSON.stringify(componentInfo);
         Athena.player.emit.message(player, stringData);
         alt.log(stringData);
+        alt.log(`Create an Icon Named: ${clothingComponentToIconName(data.appearance.sex, [componentInfo])}`);
     },
 );
