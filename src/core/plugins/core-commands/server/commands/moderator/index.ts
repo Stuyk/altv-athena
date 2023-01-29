@@ -5,6 +5,7 @@ import './interior';
 import './item';
 import './noclip';
 import './player';
+import './skins';
 import './teleport';
 import './test';
 import './vehicle';

@@ -179,6 +179,16 @@ export interface Character {
      * @memberof Character
      */
     uniform?: Array<ClothingComponent>;
+
+    /**
+     * A custom model that can be applied to the player.
+     * If this is set; the clothing items will never be applied.
+     * This also goes for appearance as well.
+     *
+     * @type {(string | number)}
+     * @memberof Character
+     */
+    skin?: string | number;
 }
 
 export const CharacterDefaults: Partial<Character> = {

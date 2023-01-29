@@ -81,7 +81,11 @@ async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Pl
     }
 
     const typeSafeFieldName = String(fieldName);
-    const oldValue = JSON.parse(JSON.stringify(cache[player.id][typeSafeFieldName]));
+    let oldValue = undefined;
+    if (cache[player.id][typeSafeFieldName]) {
+        oldValue = JSON.parse(JSON.stringify(cache[player.id][typeSafeFieldName]));
+    }
+
     const newData = { [typeSafeFieldName]: value };
 
     cache[player.id] = Object.assign(cache[player.id], newData);

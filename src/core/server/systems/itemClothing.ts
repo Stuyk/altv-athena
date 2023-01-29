@@ -1,7 +1,12 @@
 import { Athena } from '@AthenaServer/api/athena';
-import { BaseItem, ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
+import { Appearance } from '@AthenaShared/interfaces/appearance';
+import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
+import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
 import * as alt from 'alt-server';
+
+const fModel = alt.hash('mp_f_freemode_01');
+const mModel = alt.hash(`mp_m_freemode_01`);
 
 // There is a item that will exist.
 // Inside of the item's data it will contain information about how to equip an item
@@ -58,9 +63,23 @@ export const ItemClothing = {
         }
 
         const propComponents = [0, 1, 2, 6, 7];
-
         for (let i = 0; i < propComponents.length; i++) {
             player.clearProp(propComponents[i]);
+        }
+
+        if (isNullOrUndefined(data.skin)) {
+            const useModel = data.appearance.sex === 1 ? mModel : fModel;
+            if (player.model !== useModel) {
+                player.model = useModel;
+            }
+        } else {
+            const customModel = typeof data.skin !== 'number' ? alt.hash(data.skin) : data.skin;
+            if (player.model === customModel) {
+                return;
+            }
+
+            player.model = customModel;
+            return;
         }
 
         if (!data.appearance.sex) {
@@ -145,6 +164,37 @@ export const ItemClothing = {
         },
         async clear(player: alt.Player): Promise<void> {
             await Athena.document.character.set(player, 'uniform', undefined);
+        },
+    },
+    skin: {
+        /**
+         * Set a custom model on a player.
+         * If a custom model is set; no appearance or clothing updates will be called.
+         *
+         * @param {alt.Player} player
+         * @param {(string | number)} model
+         * @return {*}
+         */
+        async set(player: alt.Player, model: string | number) {
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            await Athena.document.character.set(player, 'skin', typeof model === 'string' ? alt.hash(model) : model);
+            ItemClothing.update(player);
+            return true;
+        },
+        /**
+         * Clears a custom model on a player.
+         *
+         * @param {alt.Player} player
+         */
+        async clear(player: alt.Player) {
+            const data = Athena.document.character.get(player);
+            await Athena.document.character.set(player, 'skin', undefined);
+            Athena.player.sync.appearance(player, data.appearance as Appearance);
+            ItemClothing.update(player);
         },
     },
     outfit: {

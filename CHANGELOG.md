@@ -199,6 +199,12 @@ Uniforms
 - Uniforms allow for existing clothing to be equipped, and then outfits are overwritten last.
 - Athena.systems.itemClothing.uniform.set
 - Athena.systems.itemClothing.uniform.clear
+
+Skins
+- Skins allow for the player model to be completely overwritten.
+- All appearance, and clothing synchronization will be ignored while a skin is set.
+- Athena.systems.itemClothing.skin.set
+- Athena.systems.itemClothing.skin.clear
 ```
 
 
