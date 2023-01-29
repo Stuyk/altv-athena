@@ -3,7 +3,7 @@ import { DEFAULT_CONFIG } from '../../server/athena/main';
 import { Appearance } from './appearance';
 import { CharacterInfo } from './characterInfo';
 import { CHARACTER_PERMISSIONS } from '../flags/permissionFlags';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 
 export interface Character {
     [key: string]: any;
@@ -170,6 +170,15 @@ export interface Character {
      * @memberof Character
      */
     toolbar: Array<StoredItem>;
+
+    /**
+     * Clothes that will be applied to the player last.
+     * Uniforms should be used in tandem with typical inventory clothing.
+     *
+     * @type {Array<ClothingComponent>}
+     * @memberof Character
+     */
+    uniform?: Array<ClothingComponent>;
 }
 
 export const CharacterDefaults: Partial<Character> = {

@@ -126,11 +126,16 @@ const CharacterSystemRef = {
             await callback(player);
         }
 
-        Athena.player.sync.appearance(player, data.appearance as Appearance);
-
-        if (!data.equipment) {
+        if (!data.inventory) {
             await Athena.document.character.set(player, 'equipment', []);
         }
+
+        if (!data.toolbar) {
+            await Athena.document.character.set(player, 'toolbar', []);
+        }
+
+        Athena.player.sync.appearance(player, data.appearance as Appearance);
+        Athena.systems.itemClothing.update(player);
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 

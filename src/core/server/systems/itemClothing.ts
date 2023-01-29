@@ -85,8 +85,12 @@ export const ItemClothing = {
             player.setDlcClothes(0, 11, 91, 0, 0); // top
         }
 
-        for (let i = 0; i < data.inventory.length; i++) {
-            const item = data.inventory[i] as StoredItem<{ components: Array<ClothingComponent> }>;
+        const inventoryBySlot = data.inventory.sort((a, b) => {
+            return a.slot - b.slot;
+        });
+
+        for (let i = 0; i < inventoryBySlot.length; i++) {
+            const item = inventoryBySlot[i] as StoredItem<{ components: Array<ClothingComponent> }>;
             if (typeof item === 'undefined' || typeof item.data === 'undefined') {
                 continue;
             }
@@ -105,10 +109,43 @@ export const ItemClothing = {
                 if (component.isProp) {
                     player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
                 } else {
-                    player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture);
+                    const palette = typeof component.palette === 'number' ? component.palette : 0;
+                    player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
                 }
             }
         }
+
+        if (typeof data.uniform === 'undefined') {
+            return;
+        }
+
+        for (let i = 0; i < data.uniform.length; i++) {
+            const component = data.uniform[i];
+
+            // We look at the equipped item data sets; and find compatible clothing information in the 'data' field.
+            // Check if the data property is the correct format for the item.
+            if (component.isProp) {
+                player.setDlcProp(component.dlc, component.id, component.drawable, component.texture);
+            } else {
+                const palette = typeof component.palette === 'number' ? component.palette : 0;
+                player.setDlcClothes(component.dlc, component.id, component.drawable, component.texture, palette);
+            }
+        }
+    },
+    uniform: {
+        async set(player: alt.Player, components: Array<ClothingComponent>): Promise<boolean> {
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            await Athena.document.character.set(player, 'uniform', components);
+            ItemClothing.update(player);
+            return true;
+        },
+        async clear(player: alt.Player): Promise<void> {
+            await Athena.document.character.set(player, 'uniform', undefined);
+        },
     },
 };
 
