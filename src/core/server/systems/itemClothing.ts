@@ -147,6 +147,44 @@ export const ItemClothing = {
             await Athena.document.character.set(player, 'uniform', undefined);
         },
     },
+    outfit: {
+        /**
+         * Takes the currently applied id values, and creates an outfit out of them.
+         *
+         * @param {alt.Player} player
+         * @param {Array<{ id: number; isProp?: boolean }>} components
+         * @return {(StoredItem | undefined)}
+         */
+        create(player: alt.Player, components: Array<{ id: number; isProp?: boolean }>): StoredItem | undefined {
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined' || typeof data.appearance === 'undefined') {
+                return undefined;
+            }
+
+            const componentList: Array<ClothingComponent> = [];
+            for (let i = 0; i < components.length; i++) {
+                componentList.push({
+                    id: components[i].id,
+                    ...(components[i].isProp
+                        ? player.getDlcProp(components[i].id)
+                        : player.getDlcClothes(components[i].id)),
+                });
+            }
+
+            const storableItem: StoredItem<{ sex: number; components: Array<ClothingComponent> }> = {
+                dbName: 'clothing',
+                quantity: 1,
+                slot: -1,
+                isEquipped: false,
+                data: {
+                    sex: data.appearance.sex,
+                    components: componentList,
+                },
+            };
+
+            return storableItem;
+        },
+    },
 };
 
 /**

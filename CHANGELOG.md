@@ -189,6 +189,16 @@ Item Crafting
 - Combine any two items to return a new item.
 - Data can be appended to the new item from the old items if necessary.
 
+Item Clothing
+- The old clothing system was thrown out.
+- New clothing system uses the alt:V dlc info entirely for the outfits.
+- New clothing items allow for an unlimited amount of components to be combined into a single item.
+- New clothing items allow for priority in inventory. The last item in the inventory overwrites any items before it.
+
+Uniforms
+- Uniforms allow for existing clothing to be equipped, and then outfits are overwritten last.
+- Athena.systems.itemClothing.uniform.set
+- Athena.systems.itemClothing.uniform.clear
 ```
 
 

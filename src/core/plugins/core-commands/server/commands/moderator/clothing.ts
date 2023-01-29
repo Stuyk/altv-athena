@@ -46,7 +46,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(player);
-        const storableItem = Athena.systems.itemFactory.sync.item.create.outfit(player, [{ id: idReal }]);
+        const storableItem = Athena.systems.itemClothing.outfit.create(player, [{ id: idReal }]);
         const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;
@@ -77,6 +77,92 @@ Athena.systems.messenger.commands.register(
         const componentInfo: ClothingComponent = {
             id: idReal,
             ...dlcInfo,
+        };
+
+        const data = Athena.document.character.get(player);
+
+        const stringData = JSON.stringify(componentInfo);
+        Athena.player.emit.message(player, stringData);
+        alt.log(stringData);
+        alt.log(`Create an Icon Named: ${clothingComponentToIconName(data.appearance.sex, [componentInfo])}`);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'setprop',
+    '/setprop [id] [drawable] [texture] [?create]',
+    ['admin'],
+    async (
+        player: alt.Player,
+        id: string | undefined,
+        drawable: string | undefined,
+        texture: string | undefined,
+        create: string,
+    ) => {
+        if (typeof id === 'undefined') {
+            Athena.player.emit.message(player, `Must specify an id`);
+            return;
+        }
+
+        if (typeof drawable === 'undefined') {
+            Athena.player.emit.message(player, `Must specify an drawable`);
+            return;
+        }
+
+        if (typeof texture === 'undefined') {
+            Athena.player.emit.message(player, `Must specify an texture`);
+            return;
+        }
+
+        const idReal = parseInt(id);
+        const drawableReal = parseInt(drawable);
+        const textureReal = parseInt(texture);
+
+        if (isNaN(idReal) || isNaN(drawableReal) || isNaN(textureReal)) {
+            Athena.player.emit.message(player, `One of the specified parameters was not a number.`);
+            return;
+        }
+
+        Athena.player.emit.message(player, `Prop Component Set: ${idReal} ${drawableReal} ${textureReal}`);
+        player.setProp(idReal, drawableReal, textureReal);
+
+        if (typeof create === 'undefined') {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        const storableItem = Athena.systems.itemClothing.outfit.create(player, [{ id: idReal, isProp: true }]);
+        const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
+        if (typeof result === 'undefined') {
+            return;
+        }
+
+        await Athena.document.character.set(player, 'inventory', result);
+    },
+);
+
+Athena.systems.messenger.commands.register(
+    'getprop',
+    '/getprop [id]',
+    ['admin'],
+    (player: alt.Player, id: string | undefined) => {
+        if (typeof id === 'undefined') {
+            Athena.player.emit.message(player, `Must specify an id`);
+            return;
+        }
+
+        const idReal = parseInt(id);
+
+        if (isNaN(idReal)) {
+            Athena.player.emit.message(player, `One of the specified parameters was not a number.`);
+            return;
+        }
+
+        const dlcInfo = player.getDlcProp(idReal);
+        const componentInfo: ClothingComponent = {
+            id: idReal,
+            ...dlcInfo,
+            isProp: true,
         };
 
         const data = Athena.document.character.get(player);
