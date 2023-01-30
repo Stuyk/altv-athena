@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { BaseItem, StoredItem } from '@AthenaShared/interfaces/item';
 import { Athena } from '@AthenaServer/api/athena';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
@@ -40,7 +40,7 @@ export interface CraftRecipe {
      * @type {dbName}
      * @memberof CraftRecipe
      */
-    result: {
+    result?: {
         /**
          * Name of the item.
          *
@@ -68,7 +68,7 @@ export interface CraftRecipe {
          *
          * @type {Object}
          */
-        data?: Object;
+        data?: Object | ((item1: StoredItem, item2: StoredItem) => Object);
     };
 
     /**
@@ -203,25 +203,29 @@ export const ItemCrafting = {
                 return undefined;
             }
 
-            const newItem: Omit<StoredItem, 'slot'> = {
+            let newItem: Omit<StoredItem, 'slot'> = {
                 dbName: recipe.result.dbName,
                 quantity: recipe.result.quantity,
                 version: recipe.result.version,
                 data: baseItem.data ? deepCloneObject(baseItem.data) : {},
             };
 
-            if (recipe.result.data) {
-                newItem.data = Object.assign(newItem.data, recipe.result.data);
-            }
+            if (typeof recipe.result.data === 'function') {
+                newItem.data = recipe.result.data(item1, item2);
+            } else {
+                if (recipe.result.data) {
+                    newItem.data = Object.assign(newItem.data, recipe.result.data);
+                }
 
-            // Combines data sets based on specified data migration by dbNames.
-            if (recipe.dataMigration && recipe.dataMigration.length >= 1) {
-                const firstCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
-                newItem.data = Object.assign(newItem.data, firstCombine.data);
+                // Combines data sets based on specified data migration by dbNames.
+                if (recipe.dataMigration && recipe.dataMigration.length >= 1) {
+                    const firstCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
+                    newItem.data = Object.assign(newItem.data, firstCombine.data);
 
-                if (recipe.dataMigration.length >= 2) {
-                    const secondCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
-                    newItem.data = Object.assign(newItem.data, secondCombine.data);
+                    if (recipe.dataMigration.length >= 2) {
+                        const secondCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
+                        newItem.data = Object.assign(newItem.data, secondCombine.data);
+                    }
                 }
             }
 

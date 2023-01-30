@@ -14,39 +14,6 @@ const mModel = alt.hash(`mp_m_freemode_01`);
 
 export const ItemClothing = {
     /**
-     * Toggles the isEquipped boolean in a stored item.
-     * If the boolean is undefined; it will change to true.
-     * Automatically saves.
-     *
-     * @param {alt.Player} player
-     * @param {number} slot
-     * @return {Promise<boolean>}
-     */
-    async toggleItem(player: alt.Player, slot: number): Promise<boolean> {
-        const data = Athena.document.character.get(player);
-        if (typeof data === 'undefined' || typeof data.inventory === 'undefined') {
-            return false;
-        }
-
-        const dataCopy = deepCloneArray<StoredItem<{ sex?: number }>>(data.inventory);
-        const index = dataCopy.findIndex((x) => x.slot === slot);
-        if (index <= -1) {
-            return false;
-        }
-
-        // Verify player model locked items
-        if (dataCopy[index].data && typeof dataCopy[index].data.sex !== 'undefined') {
-            if (dataCopy[index].data.sex !== data.appearance.sex) {
-                return false;
-            }
-        }
-
-        dataCopy[index].isEquipped = !dataCopy[index].isEquipped ? true : false;
-        await Athena.document.character.set(player, 'inventory', dataCopy);
-        ItemClothing.update(player);
-        return true;
-    },
-    /**
      * Loop through all isEquipped items; and synchronize appearance.
      *
      * @param {alt.Player} player

@@ -5,6 +5,7 @@ import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/i
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
 import { ItemFactory } from './itemFactory';
+import { ItemWeapon } from './itemWeapon';
 
 alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 
@@ -559,13 +560,13 @@ export const ItemManager = {
          * @param {Array<StoredItem>} data
          * @return {(StoredItem | undefined)}
          */
-        getAt(slot: number, data: Array<StoredItem>): StoredItem | undefined {
+        getAt<CustomData = {}>(slot: number, data: Array<StoredItem>): StoredItem<CustomData> | undefined {
             const index = data.findIndex((x) => x.slot === slot);
             if (index <= -1) {
                 return undefined;
             }
 
-            return data[index];
+            return data[index] as StoredItem<CustomData>;
         },
         /**
          * Remove a specific item from a specific slot.
@@ -848,6 +849,10 @@ export const ItemManager = {
                     return undefined;
                 }
 
+                if (from.type === 'toolbar' && toBaseItem.behavior.isWeapon) {
+                    toItem.isEquipped = false;
+                }
+
                 toItem.slot = from.slot;
                 toData.splice(toIndex, 1);
 
@@ -857,6 +862,10 @@ export const ItemManager = {
 
             fromData.splice(fromIndex, 1);
             fromItem.slot = to.slot;
+
+            if (to.type === 'toolbar' || from.type === 'toolbar') {
+                fromItem.isEquipped = false;
+            }
 
             // Move the 'from' item to the other data set.
             toData.push(fromItem);
@@ -872,7 +881,7 @@ export const ItemManager = {
          * @param {('inventory' | 'toolbar')} [type='toolbar']
          * @return {*}
          */
-        useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
+        async useItem(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
             if (!player || !player.valid) {
                 return;
             }
@@ -897,12 +906,12 @@ export const ItemManager = {
             }
 
             if (baseItem.behavior && baseItem.behavior.isWeapon) {
-                console.log('is weapon');
+                await ItemManager.utility.toggleItem(player, slot, type);
+                ItemWeapon.update(player);
             }
 
             if (baseItem.behavior && baseItem.behavior.isClothing) {
-                Athena.systems.itemClothing.toggleItem(player, slot);
-                return;
+                await ItemManager.utility.toggleItem(player, slot, type);
             }
 
             if (!baseItem.consumableEventToCall) {
@@ -910,6 +919,64 @@ export const ItemManager = {
             }
 
             Athena.systems.effects.invoke(player, slot, type);
+        },
+        /**
+         * Toggles the isEquipped boolean in a stored item.
+         * If the boolean is undefined; it will change to true.
+         * Automatically saves.
+         *
+         * @param {alt.Player} player
+         * @param {number} slot
+         * @return {Promise<boolean>}
+         */
+        async toggleItem(player: alt.Player, slot: number, type: InventoryType): Promise<boolean> {
+            const data = Athena.document.character.get(player);
+            if (typeof data === 'undefined' || typeof data[type] === 'undefined') {
+                return false;
+            }
+
+            const dataCopy = deepCloneArray<StoredItem<{ sex?: number; hash?: number; ammo?: number }>>(data[type]);
+            const index = dataCopy.findIndex((x) => x.slot === slot);
+            if (index <= -1) {
+                return false;
+            }
+
+            // Verify player model locked items
+            let shouldUpdateClothing = false;
+            if (dataCopy[index].data && typeof dataCopy[index].data.sex !== 'undefined') {
+                if (dataCopy[index].data.sex !== data.appearance.sex) {
+                    return false;
+                }
+
+                shouldUpdateClothing = true;
+            }
+
+            if (type === 'toolbar') {
+                for (let i = 0; i < dataCopy.length; i++) {
+                    if (typeof dataCopy[i].data === 'undefined' || typeof dataCopy[i].data.hash === 'undefined') {
+                        continue;
+                    }
+
+                    if (!dataCopy[i].isEquipped) {
+                        continue;
+                    }
+
+                    if (i === index) {
+                        continue;
+                    }
+
+                    dataCopy[i].isEquipped = false;
+                }
+            }
+
+            dataCopy[index].isEquipped = !dataCopy[index].isEquipped ? true : false;
+            await Athena.document.character.set(player, type, dataCopy);
+
+            if (shouldUpdateClothing) {
+                Athena.systems.itemClothing.update(player);
+            }
+
+            return true;
         },
         /**
          * Compare two items to check if they are the same version.

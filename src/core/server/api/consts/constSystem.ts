@@ -11,6 +11,7 @@ import { defaultSystemsConst } from './constDefaultSystems';
 import { ItemManager } from '@AthenaServer/systems/itemManager';
 import { ItemCrafting } from '@AthenaServer/systems/itemCrafting';
 import { ItemClothing } from '@AthenaServer/systems/itemClothing';
+import { ItemWeapon } from '@AthenaServer/systems/itemWeapon';
 
 export const systemConst = {
     agenda: AgendaSystem,
@@ -19,6 +20,7 @@ export const systemConst = {
     itemFactory: ItemFactory,
     itemManager: ItemManager,
     itemCrafting: ItemCrafting,
+    itemWeapon: ItemWeapon,
     effects: ItemEffects,
     identifier: Identifier,
     job: {

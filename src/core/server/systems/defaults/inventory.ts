@@ -74,6 +74,7 @@ const Internal = {
         }
 
         Internal.sync(player, false);
+        Athena.systems.itemWeapon.update(player);
     },
     /**
      * Initializes the initial events for handling document changes.
