@@ -1,4 +1,4 @@
-import { UID } from '@AthenaClient/utility/uid';
+import { UID } from '@AthenaShared/utility/uid';
 import * as alt from 'alt-client';
 
 const events: Map<string, Array<{ uid: string; callback: Function }>> = new Map();

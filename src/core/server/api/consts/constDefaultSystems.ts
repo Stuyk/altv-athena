@@ -1,3 +1,4 @@
+import { DefaultAmmoSystem } from '@AthenaServer/systems/defaults/ammo';
 import { DefaultDeathSystem } from '@AthenaServer/systems/defaults/death';
 import { DefaultHospitalBlips } from '@AthenaServer/systems/defaults/hospitalBlips';
 import { DefaultInventorySystem } from '@AthenaServer/systems/defaults/inventory';
@@ -7,9 +8,12 @@ import { DefaultWeaponItemsSystem } from '@AthenaServer/systems/defaults/weaponI
 import { DefaultWeatherSystem } from '@AthenaServer/systems/defaults/weather';
 
 export const defaultSystemsConst = {
+    ammo: DefaultAmmoSystem,
+    blips: {
+        hospital: DefaultHospitalBlips,
+    },
     death: DefaultDeathSystem,
     inventory: DefaultInventorySystem,
-    hospitalBlips: DefaultHospitalBlips,
     time: DefaultTimeSystem,
     toolbar: DefaultToolbarSystem,
     weaponItems: DefaultWeaponItemsSystem,

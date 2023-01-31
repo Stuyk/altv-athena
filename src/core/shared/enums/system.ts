@@ -51,6 +51,7 @@ export enum SYSTEM_EVENTS {
     PLAYER_EMIT_ALARM_STOP = 'alarm:Stop',
     PLAYER_EMIT_ALARM_STOP_ALL = 'alarm:StopAll',
     PLAYER_EMIT_ANIMATION = 'animation:Play',
+    PLAYER_EMIT_AMMUNITION_UPDATE = 'player:emit:ammunition:update',
     PLAYER_EMIT_SCENARIO = 'scenario:Play',
     PLAYER_EMIT_AUDIO_STREAM = 'audio:Stream',
     PLAYER_EMIT_CREDITS = 'credits:Create',

@@ -19,6 +19,7 @@ import '../systems/vehicle';
 
 // Defaults Systems - With Toggleable Configs
 import '../systems/defaults/ammo';
+import '../systems/defaults/clothingCrafting';
 import '../systems/defaults/death';
 import '../systems/defaults/inventory';
 import '../systems/defaults/time';

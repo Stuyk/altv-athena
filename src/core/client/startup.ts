@@ -40,6 +40,9 @@ import './streamers/ped';
 import './streamers/textlabel';
 import './streamers/worldNotifications';
 
+// Systems Default
+import './systems/default/ammo';
+
 // Systems
 import './systems/acceptDeclineEvent';
 import './systems/animations';

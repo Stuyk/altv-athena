@@ -75,7 +75,12 @@ function getField<T = {}, ReturnType = any>(
  * @param {*} value
  * @return {void}
  */
-async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Player, fieldName: Keys, value: any) {
+async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(
+    player: alt.Player,
+    fieldName: Keys,
+    value: any,
+    skipCallbacks = false,
+) {
     if (!cache[player.id]) {
         return undefined;
     }
@@ -100,6 +105,10 @@ async function set<T = {}, Keys = keyof KnownKeys<Character & T>>(player: alt.Pl
     }
 
     if (typeof callbacks[typeSafeFieldName] === 'undefined') {
+        return;
+    }
+
+    if (skipCallbacks) {
         return;
     }
 

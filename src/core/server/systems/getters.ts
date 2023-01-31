@@ -292,6 +292,24 @@ const players = {
             return typeof data !== 'undefined';
         });
     },
+    onlineWithWeapons(): alt.Player[] {
+        return [...alt.Player.all].filter((p) => {
+            if (!p.valid) {
+                return false;
+            }
+
+            const data = Athena.document.character.get(p);
+            if (typeof data === 'undefined') {
+                return false;
+            }
+
+            if (p.currentWeapon === 0xa2719263) {
+                return false;
+            }
+
+            return true;
+        });
+    },
     /**
      * Creates an array of players who are closest to a position.
      * Array is automatically sorted into ascending order.

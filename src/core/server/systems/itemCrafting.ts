@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { BaseItem, StoredItem } from '@AthenaShared/interfaces/item';
+import { StoredItem } from '@AthenaShared/interfaces/item';
 import { Athena } from '@AthenaServer/api/athena';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
@@ -80,6 +80,14 @@ export interface CraftRecipe {
      * @memberof CraftRecipe
      */
     dataMigration?: ItemCombo;
+
+    /**
+     * The custom sound associated with this crafting recipe.
+     *
+     * @type {string}
+     * @memberof CraftRecipe
+     */
+    sound?: string;
 }
 
 const recipes: Array<CraftRecipe> = [];
@@ -94,11 +102,6 @@ export const ItemCrafting = {
         add(recipe: CraftRecipe): boolean {
             if (recipe.combo.length !== 2 || recipe.quantities.length !== 2) {
                 alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} needs two items and two quantities given.`);
-                return false;
-            }
-
-            if (recipe.combo[0] === recipe.combo[1]) {
-                alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} has two matching dbNames.`);
                 return false;
             }
 
@@ -153,18 +156,19 @@ export const ItemCrafting = {
         /**
          * Combine two slots given a data set.
          * It will attempt to find a matching recipe and make modifications according to the combination.
+         * Returns an object with the modified dataSet, and a sound associated with the crafting recipe if provided in the recipe itself.
          *
          * @param {Array<StoredItem>} dataSet
          * @param {number} slot1
          * @param {number} slot2
-         * @returns {Array<StoredItem> | undefined}
+         * @returns {{ dataSet: Array<StoredItem>; sound?: string } | undefined}
          */
         combine(
             dataSet: Array<StoredItem>,
             slot1: number,
             slot2: number,
             type: 'inventory' | 'toolbar' | 'custom',
-        ): Array<StoredItem> | undefined {
+        ): { dataSet: Array<StoredItem>; sound?: string } | undefined {
             if (slot1 === slot2) {
                 return undefined;
             }
@@ -212,6 +216,10 @@ export const ItemCrafting = {
 
             if (typeof recipe.result.data === 'function') {
                 newItem.data = recipe.result.data(item1, item2);
+
+                if (typeof newItem.data === 'undefined') {
+                    return undefined;
+                }
             } else {
                 if (recipe.result.data) {
                     newItem.data = Object.assign(newItem.data, recipe.result.data);
@@ -243,7 +251,11 @@ export const ItemCrafting = {
             }
 
             newData = Athena.systems.itemManager.inventory.add(newItem, newData, type);
-            return newData;
+            if (typeof newData === 'undefined') {
+                return undefined;
+            }
+
+            return { dataSet: newData, sound: recipe.sound };
         },
     },
 };

@@ -1,6 +1,6 @@
 import { Athena } from '@AthenaServer/api/athena';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
-import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
+import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
 import * as alt from 'alt-server';
@@ -188,7 +188,7 @@ export const ItemClothing = {
                 });
             }
 
-            const storableItem: StoredItem<{ sex: number; components: Array<ClothingComponent> }> = {
+            const storableItem: StoredItem<ClothingInfo> = {
                 dbName: 'clothing',
                 quantity: 1,
                 slot: -1,

@@ -1,11 +1,15 @@
 import * as alt from 'alt-server';
 
 import { Athena } from '@AthenaServer/api/athena';
-import { StoredItem } from '@AthenaShared/interfaces/item';
-
-type WeaponInfo = { hash: number; ammo: number };
+import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
 
 export const ItemWeapon = {
+    /**
+     * Looks into the item toolbar and determines what weapons to equip / unequip.
+     *
+     * @param {alt.Player} player
+     * @return {*}
+     */
     update(player: alt.Player) {
         if (!player || !player.valid) {
             return;
@@ -39,5 +43,14 @@ export const ItemWeapon = {
 
         const item = data.toolbar[index] as StoredItem<WeaponInfo>;
         player.giveWeapon(item.data.hash, item.data.ammo, true);
+
+        if (typeof item.data.components === 'undefined') {
+            return;
+        }
+
+        for (let component of item.data.components) {
+            const hash = typeof component === 'string' ? alt.hash(component) : component;
+            player.addWeaponComponent(item.data.hash, hash);
+        }
     },
 };

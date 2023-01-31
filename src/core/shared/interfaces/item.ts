@@ -1,4 +1,14 @@
 /**
+ * Default Weapon Data Information
+ */
+export type WeaponInfo = { hash: number; ammo: number; components?: Array<string | number> };
+
+/**
+ * Default Clothing Information
+ */
+export type ClothingInfo = { sex: number; components: Array<ClothingComponent> };
+
+/**
  * dlc information for given clothing data
  *
  * @export

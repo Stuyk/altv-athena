@@ -152,23 +152,27 @@ const Internal = {
             return;
         }
 
-        const newInventory = await Athena.systems.itemCrafting.items.combine(
+        const result = await Athena.systems.itemCrafting.items.combine(
             data.inventory,
             info.startIndex,
             info.endIndex,
             'inventory',
         );
 
-        if (typeof newInventory === 'undefined') {
+        if (typeof result === 'undefined') {
             return;
         }
 
-        await Athena.document.character.set(player, 'inventory', newInventory);
-        Athena.player.emit.sound2D(
-            player,
-            `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_combine.ogg`,
-            0.2,
-        );
+        await Athena.document.character.set(player, 'inventory', result.dataSet);
+        if (result.sound) {
+            Athena.player.emit.sound2D(player, result.sound, 0.2);
+        } else {
+            Athena.player.emit.sound2D(
+                player,
+                `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_combine.ogg`,
+                0.2,
+            );
+        }
     },
     /**
      * Swaps items between slots. Handles the 'dragging' action.

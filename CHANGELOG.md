@@ -16,6 +16,7 @@ Death
 - Added default death system to help decouple framework from opinionated systems.
 - Removed default death plugin and moved to the Athena Framework Plugin organization.
 - Athena.systems.default.death.disable() -> Used to disable default Death System.
+- Default death automatically respawns a player at the closest hospital after 5 seconds.
 
 Time
 - Removed world time system.
@@ -188,6 +189,12 @@ Item Crafting
 - Introduced an item crafting recipe handler.
 - Combine any two items to return a new item.
 - Data can be appended to the new item from the old items if necessary.
+- Custom sound returned after crafting an item successfully.
+
+Item Weapons
+- Weapons can be handed to a player through their dbnames.
+- Component hashes can be appended to `item.data.components`
+- Components are automatically equipped when the weapon is equipped.
 
 Item Clothing
 - The old clothing system was thrown out.
@@ -205,6 +212,16 @@ Skins
 - All appearance, and clothing synchronization will be ignored while a skin is set.
 - Athena.systems.itemClothing.skin.set
 - Athena.systems.itemClothing.skin.clear
+
+Ammunition
+- Added a default ammunition system
+- Can be disabled through Athena.systems.default.ammo
+- Use the item 'ammo-box' and apply it to a weapon to give it ammo.
+- Ammo is tracked per individual weapon.
+
+Clothing Crafting
+- Individual clothing items can be combined.
+- This can be done by using two clothing items together.
 ```
 
 
