@@ -2,6 +2,8 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 import { AthenaClient } from '@AthenaClient/api/athena';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
+import { GameplayCamera } from './gameplayCamera';
+import { PauseMenu } from './pauseMenu';
 
 export interface IPage {
     /**
@@ -64,7 +66,14 @@ export interface IPage {
              *
              * @type {boolean}
              */
-            disableControls?: boolean;
+            disableControls?: 'all' | 'camera' | 'none';
+
+            /**
+             * Disable pause menu while this page is open?
+             *
+             * @type {boolean}
+             */
+            disablePauseMenu?: boolean;
 
             /**
              * Blur the game.
@@ -115,6 +124,13 @@ export interface IPage {
              * @type {boolean}
              */
             enableControls?: boolean;
+
+            /**
+             * Enable the pause menu on close?
+             *
+             * @type {boolean}
+             */
+            enablePauseMenu?: boolean;
 
             /**
              * Unblur the game.
@@ -232,8 +248,19 @@ export class Page {
             AthenaClient.webview.showCursor(true);
         }
 
-        if (this.info.options.onOpen.disableControls) {
-            alt.toggleGameControls(false);
+        switch (this.info.options.onOpen.disableControls) {
+            case 'all':
+                alt.toggleGameControls(false);
+                break;
+            case 'camera':
+                GameplayCamera.disable();
+                break;
+            default:
+                break;
+        }
+
+        if (this.info.options.onOpen.disablePauseMenu) {
+            PauseMenu.disable();
         }
 
         if (this.info.options.onOpen.hideHud) {
@@ -293,8 +320,13 @@ export class Page {
             native.displayHud(true);
         }
 
+        if (this.info.options.onClose.enablePauseMenu) {
+            PauseMenu.enable();
+        }
+
         if (this.info.options.onClose.enableControls) {
             alt.toggleGameControls(true);
+            GameplayCamera.enable();
         }
 
         this.info.callbacks.onClose();

@@ -125,7 +125,8 @@ function init() {
                 hideOverlays: true,
                 setIsMenuOpenToTrue: true,
                 showCursor: true,
-                disableControls: true,
+                disableControls: 'camera',
+                disablePauseMenu: true,
             },
             onClose: {
                 hideCursor: true,
@@ -134,6 +135,7 @@ function init() {
                 unfocus: true,
                 setIsMenuOpenToFalse: true,
                 enableControls: true,
+                enablePauseMenu: true,
             },
         },
     });

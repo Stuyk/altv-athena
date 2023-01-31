@@ -972,6 +972,10 @@ export const ItemManager = {
             dataCopy[index].isEquipped = !dataCopy[index].isEquipped ? true : false;
             await Athena.document.character.set(player, type, dataCopy);
 
+            if (type === 'toolbar') {
+                Athena.player.emit.sound2D(player, dataCopy[index].isEquipped ? 'item_equip' : 'item_remove', 0.2);
+            }
+
             if (shouldUpdateClothing) {
                 Athena.systems.itemClothing.update(player);
             }

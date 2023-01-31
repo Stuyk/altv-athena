@@ -167,6 +167,7 @@ Inventory Plugin
 - Added sounds for opening / closing inventory
 - Added sound for moving an item
 - Added item combining for crafting
+- Enable movement while inventory is open
 
 Event for SYSTEM_EVENTS.TICKS_START
 - Removed all default usages.

@@ -198,6 +198,7 @@ const CharacterSystemRef = {
             }
 
             // Finish Selection
+            Athena.systems.itemWeapon.update(player);
             Athena.player.set.frozen(player, false);
             player.visible = true;
             player.hasFullySpawned = true;
