@@ -9,7 +9,7 @@ import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
 import { ComplexSwapReturn } from '@AthenaServer/systems/itemManager';
 
 type PlayerCallback = (player: alt.Player) => void;
-type PlayerCloseCallback = (player: alt.Player, uid: string, items: Array<StoredItem>) => void;
+type PlayerCloseCallback = (uid: string, items: Array<StoredItem>, player: alt.Player | undefined) => void;
 type OfferInfo = {
     to: number | string;
     from: number | string;
@@ -46,21 +46,28 @@ const Internal = {
                 cb(player);
             }
         },
-        close(player: alt.Player) {
-            if (!player || !player.valid) {
-                return;
+        close(player: alt.Player | number) {
+            let id = -1;
+            if (typeof player !== 'number') {
+                if (!player || !player.valid) {
+                    return;
+                }
+
+                id = player.id;
+            } else {
+                id = player;
             }
 
-            if (!openStorageSessions[player.id]) {
+            if (!openStorageSessions[id]) {
                 return;
             }
 
             for (let cb of closeCallbacks) {
-                cb(player, openStorageSessions[player.id], openStorages[player.id]);
+                cb(openStorageSessions[id], openStorages[id], typeof player === 'number' ? undefined : player);
             }
 
-            delete openStorageSessions[player.id];
-            delete openStorages[player.id];
+            delete openStorageSessions[id];
+            delete openStorages[id];
         },
     },
     disconnect(player: alt.Player) {
@@ -69,7 +76,7 @@ const Internal = {
             return;
         }
 
-        delete openStorages[id];
+        Internal.callbacks.close(id);
     },
     async use(player: alt.Player, type: InventoryType, slot: number) {
         if (type === 'custom') {
@@ -618,16 +625,16 @@ export const InventoryView = {
     },
 };
 
-// function finishStorageMove(player: alt.Player, uid: string, items: Array<StoredItem>) {
-//     // Pretty much if the uid matches here; maybe that's a database location or something.
-//     // Then you perform your saving here.
-//     console.log(uid);
-//     console.log(items);
-// }
+function finishStorageMove(uid: string, items: Array<StoredItem>, player: alt.Player | undefined) {
+    // Pretty much if the uid matches here; maybe that's a database location or something.
+    // Then you perform your saving here.
+    console.log(uid);
+    console.log(items);
+}
 
-// Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
-//     const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
-//     InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
-// });
+Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
+    const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
+    InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
+});
 
-// InventoryView.callbacks.add('close', finishStorageMove);
+InventoryView.callbacks.add('close', finishStorageMove);
