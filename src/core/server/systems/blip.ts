@@ -86,16 +86,3 @@ export class ServerBlipController {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_BLIPS, globalBlips);
     }
 }
-
-DEFAULT_CONFIG.VALID_HOSPITALS.forEach((position) => {
-    const hash = sha256Random(JSON.stringify(position));
-    ServerBlipController.append({
-        text: LocaleController.get(LOCALE_KEYS.LABEL_HOSPITAL),
-        color: 6,
-        sprite: 153,
-        scale: 1,
-        shortRange: true,
-        pos: position,
-        uid: hash,
-    });
-});

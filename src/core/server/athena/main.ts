@@ -12,21 +12,9 @@ export const DEFAULT_CONFIG = {
     PLAYER_NEW_SPAWN_POS: { x: -867.1437377929688, y: -172.6201934814453, z: 37.799232482910156 },
     PLAYER_CASH: 100,
     PLAYER_BANK: 100,
-    // Chat Properties
-    CHAT_ENABLED: true, // Turn off messaging. Chat still works for commands.
-    CHAT_DISTANCE: 35,
     // Interaction Properties
     MAX_INTERACTION_DISTANCE: 3, // The maximum distance the player can stand away from a interaction object.
-    // World Properties
-    VALID_HOSPITALS: [
-        { x: -248.01309204101562, y: 6332.01513671875, z: 33.0750732421875 },
-        { x: 1839.15771484375, y: 3672.702392578125, z: 34.51904296875 },
-        { x: 297.4647521972656, y: -584.7089233398438, z: 44.292724609375 },
-        { x: -677.0172119140625, y: 311.7821350097656, z: 83.601806640625 },
-        { x: 1151.2904052734375, y: -1529.903564453125, z: 36.3017578125 },
-    ],
     // Vehicle Properties
-    TIME_BETWEEN_VEHICLE_UPDATES: 10000, // 10s
     TIME_BETWEEN_VEHICLE_SAVES: 30000, // 30s
     SPAWN_ALL_VEHICLES_ON_START: true, // Will spawn all vehicles unless they're in a garage.
     SPAWN_VEHICLES_ON_JOIN: false, // Will spawn all player vehicles not in a garage on join. Does not work if SPAWN_ALL_VEHICLES_ON_START is enabled.

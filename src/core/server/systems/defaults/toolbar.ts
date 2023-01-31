@@ -4,6 +4,15 @@ import { PluginSystem } from '../plugins';
 import { Athena } from '@AthenaServer/api/athena';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
+/**
+ * THIS IS A DEFAULT SYSTEM.
+ * IF YOU WANT TO DISABLE IT, MAKE A PLUGIN AND DISABLE IT THROUGH:
+ * `Athena.systems.default.x.disable()`
+ *
+ * DO NOT APPEND ANY ADDITIONAL DATA TO THIS SYSTEM.
+ * COPY THE CODE AND REMAKE IT AS A PLUGIN IF YOU WANT TO MAKE CHANGES.
+ */
+
 const SYSTEM_NAME = 'Toolbar';
 
 let enabled = true;
