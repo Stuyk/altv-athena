@@ -23,6 +23,7 @@ const Internal = {
             return;
         }
 
+        Athena.events.player.on('respawned', Internal.unequipAllWeapons);
         Athena.events.player.on('selected-character', Internal.processPlayer);
         alt.onClient(SYSTEM_EVENTS.PLAYER_TOOLBAR_INVOKE, Internal.invoke);
     },
@@ -43,6 +44,29 @@ const Internal = {
      */
     invoke(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
         Athena.systems.itemManager.utility.useItem(player, slot, type);
+    },
+    /**
+     * Unequip all weapons on respawn.
+     *
+     * @param {alt.Player} player
+     * @return {*}
+     */
+    unequipAllWeapons(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined' || typeof data.toolbar === 'undefined') {
+            return;
+        }
+
+        for (let i = 0; i < data.toolbar.length; i++) {
+            data.toolbar[i].isEquipped = false;
+        }
+
+        Athena.document.character.set(player, 'toolbar', data.toolbar);
+        Athena.systems.itemWeapon.update(player);
     },
 };
 
