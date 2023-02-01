@@ -480,6 +480,10 @@ export const ItemManager = {
                     continue;
                 }
 
+                if (item.isEquipped) {
+                    continue;
+                }
+
                 totalWeight += item.totalWeight;
             }
 
