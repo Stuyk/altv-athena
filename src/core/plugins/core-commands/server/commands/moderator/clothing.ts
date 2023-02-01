@@ -46,7 +46,7 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(player);
-        const storableItem = Athena.systems.itemClothing.outfit.create(player, [{ id: idReal }]);
+        const storableItem = Athena.systems.itemClothing.outfit.create.fromPlayer(player, [{ id: idReal }]);
         const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;
@@ -131,7 +131,10 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(player);
-        const storableItem = Athena.systems.itemClothing.outfit.create(player, [{ id: idReal, isProp: true }]);
+        const storableItem = Athena.systems.itemClothing.outfit.create.fromPlayer(player, [
+            { id: idReal, isProp: true },
+        ]);
+
         const result = await Athena.systems.itemManager.inventory.add(storableItem, data.inventory, 'inventory');
         if (typeof result === 'undefined') {
             return;

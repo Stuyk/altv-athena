@@ -1,9 +1,9 @@
+import * as alt from 'alt-server';
+
 import { Athena } from '@AthenaServer/api/athena';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { ClothingComponent, ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
-import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 import { isNullOrUndefined } from '@AthenaShared/utility/undefinedCheck';
-import * as alt from 'alt-server';
 
 const fModel = alt.hash('mp_f_freemode_01');
 const mModel = alt.hash(`mp_m_freemode_01`);
@@ -165,41 +165,72 @@ export const ItemClothing = {
         },
     },
     outfit: {
-        /**
-         * Takes the currently applied id values, and creates an outfit out of them.
-         *
-         * @param {alt.Player} player
-         * @param {Array<{ id: number; isProp?: boolean }>} components
-         * @return {(StoredItem | undefined)}
-         */
-        create(player: alt.Player, components: Array<{ id: number; isProp?: boolean }>): StoredItem | undefined {
-            const data = Athena.document.character.get(player);
-            if (typeof data === 'undefined' || typeof data.appearance === 'undefined') {
-                return undefined;
-            }
+        create: {
+            /**
+             * Create a clothing item from DLC components.
+             *
+             * @param {(0 | 1)} sex
+             * @param {Array<ClothingComponent>} componentList
+             * @return {StoredItem<ClothingInfo>}
+             */
+            fromDlc(sex: 0 | 1, componentList: Array<ClothingComponent>): StoredItem<ClothingInfo> {
+                const storableItem: StoredItem<ClothingInfo> = {
+                    dbName: 'clothing',
+                    quantity: 1,
+                    slot: -1,
+                    isEquipped: false,
+                    data: {
+                        sex,
+                        components: componentList,
+                    },
+                };
 
-            const componentList: Array<ClothingComponent> = [];
-            for (let i = 0; i < components.length; i++) {
-                componentList.push({
-                    id: components[i].id,
-                    ...(components[i].isProp
-                        ? player.getDlcProp(components[i].id)
-                        : player.getDlcClothes(components[i].id)),
-                });
-            }
+                return storableItem;
+            },
+            /**
+             * Create a clothing item from the current clothes applies to a player.
+             * Specify which ids you want to include in the outfit; and mark whichever as props.
+             *
+             * @param {alt.Player} player
+             * @param {Array<{ id: number; isProp?: boolean }>} components
+             * @return {(StoredItem | undefined)}
+             */
+            fromPlayer(
+                player: alt.Player,
+                components: Array<{ id: number; isProp?: boolean }>,
+            ): StoredItem | undefined {
+                if (!player || !player.valid) {
+                    return undefined;
+                }
 
-            const storableItem: StoredItem<ClothingInfo> = {
-                dbName: 'clothing',
-                quantity: 1,
-                slot: -1,
-                isEquipped: false,
-                data: {
-                    sex: data.appearance.sex,
-                    components: componentList,
-                },
-            };
+                const data = Athena.document.character.get(player);
+                if (typeof data === 'undefined' || typeof data.appearance === 'undefined') {
+                    return undefined;
+                }
 
-            return storableItem;
+                const componentList: Array<ClothingComponent> = [];
+                for (let i = 0; i < components.length; i++) {
+                    componentList.push({
+                        id: components[i].id,
+                        ...(components[i].isProp
+                            ? player.getDlcProp(components[i].id)
+                            : player.getDlcClothes(components[i].id)),
+                    });
+                }
+
+                const storableItem: StoredItem<ClothingInfo> = {
+                    dbName: 'clothing',
+                    quantity: 1,
+                    slot: -1,
+                    isEquipped: false,
+                    data: {
+                        sex: data.appearance.sex,
+                        components: componentList,
+                    },
+                };
+
+                return storableItem;
+            },
         },
     },
 };
