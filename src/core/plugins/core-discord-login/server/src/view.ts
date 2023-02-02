@@ -42,20 +42,32 @@ async function tryToFinishLogin(player: alt.Player) {
     });
 
     if (!result) {
+        Athena.webview.emit(
+            player,
+            DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_ERROR_MESSAGE,
+            DISCORD_LOCALES.NO_MATCHING_UID_FOUND,
+        );
         return;
     }
 
     if (!Object.hasOwn(result, 'data')) {
+        Athena.webview.emit(
+            player,
+            DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_ERROR_MESSAGE,
+            DISCORD_LOCALES.NO_MATCHING_UID_FOUND,
+        );
         return;
     }
 
     alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.CLOSE);
+
     if (typeof result.data === 'string') {
         player.discord = JSON.parse(result.data) as DiscordUser;
     } else {
         player.discord = result.data as DiscordUser;
     }
 
+    delete UniquePlayerIdentifiers[player.id];
     LoginController.tryLogin(player);
 }
 
@@ -67,6 +79,7 @@ export class LoginView {
      * @memberof LoginView
      */
     static init() {
+        alt.on('playerDisconnect', LoginView.handleDisconnect);
         alt.onClient(DISCORD_LOGIN_EVENTS.TO_SERVER.TRY_FINISH, tryToFinishLogin);
         AgendaSystem.set(AgendaOrder.LOGIN_SYSTEM, LoginView.prepare);
     }
@@ -125,5 +138,19 @@ export class LoginView {
         } as DiscordUser;
 
         LoginController.tryLogin(player);
+    }
+
+    static handleDisconnect(player: alt.Player) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const id = player.id;
+
+        if (typeof id === 'undefined') {
+            return;
+        }
+
+        delete UniquePlayerIdentifiers[player.id];
     }
 }
