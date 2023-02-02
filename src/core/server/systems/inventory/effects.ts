@@ -1,7 +1,8 @@
 import * as alt from 'alt-server';
+
 import { Athena } from '@AthenaServer/api/athena';
-import { ItemManager } from './itemManager';
-import { ItemFactory } from './itemFactory';
+import { ItemManager } from './manager';
+import { ItemFactory } from './factory';
 
 type InventoryType = 'inventory' | 'toolbar';
 type EffectCallback = (player: alt.Player, slot: number, type: 'inventory' | 'toolbar') => void;

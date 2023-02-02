@@ -4,8 +4,8 @@ import { Athena } from '@AthenaServer/api/athena';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
-import { ItemFactory } from './itemFactory';
-import { ItemWeapon } from './itemWeapon';
+import { ItemFactory } from './factory';
+import { ItemWeapon } from './weapons';
 
 alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 

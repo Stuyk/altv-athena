@@ -4,7 +4,6 @@ import { BaseItem, StoredItem, Item, DefaultItemBehavior, ClothingComponent } fr
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
 import { sha256 } from '@AthenaServer/utility/encryption';
-import { Athena } from '@AthenaServer/api/athena';
 
 let databaseItems: Array<BaseItem<DefaultItemBehavior, {}>> = [];
 let isDoneLoading = false;

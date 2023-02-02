@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Item } from '@AthenaShared/interfaces/item';
 import EFFECT from '../../shared/enums/effects';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
-import { ItemEffects } from '../systems/itemEffects';
+import { ItemEffects } from '../systems/inventory/effects';
 import { Athena } from '../api/athena';
 
 function handleItemEvent(player: alt.Player, item: Item, slot: number, type: INVENTORY_TYPE | string) {

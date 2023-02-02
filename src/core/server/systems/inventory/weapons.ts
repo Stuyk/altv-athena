@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 
 import { Athena } from '@AthenaServer/api/athena';
 import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 export const ItemWeapon = {
     /**

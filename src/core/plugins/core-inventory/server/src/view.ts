@@ -6,7 +6,7 @@ import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/share
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
-import { ComplexSwapReturn } from '@AthenaServer/systems/itemManager';
+import { ComplexSwapReturn } from '@AthenaServer/systems/inventory/manager';
 
 type PlayerCallback = (player: alt.Player) => void;
 type PlayerCloseCallback = (uid: string, items: Array<StoredItem>, player: alt.Player | undefined) => void;

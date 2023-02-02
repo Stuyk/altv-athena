@@ -2,16 +2,16 @@ import { MessengerSystem } from '@AthenaServer/systems/messenger';
 import { PermissionSystem } from '@AthenaServer/systems/permission';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { Identifier } from '@AthenaServer/systems/identifier';
-import { ItemFactory } from '@AthenaServer/systems/itemFactory';
-import { ItemEffects } from '@AthenaServer/systems/itemEffects';
+import { ItemFactory } from '@AthenaServer/systems/inventory/factory';
+import { ItemEffects } from '@AthenaServer/systems/inventory/effects';
 import { addJobCheck, cloneObjective, getPlayerJob, Job } from '@AthenaServer/systems/job';
 import { PluginSystem } from '@AthenaServer/systems/plugins';
 import { SoundSystem } from '@AthenaServer/systems/sound';
 import { defaultSystemsConst } from './constDefaultSystems';
-import { ItemManager } from '@AthenaServer/systems/itemManager';
-import { ItemCrafting } from '@AthenaServer/systems/itemCrafting';
-import { ItemClothing } from '@AthenaServer/systems/itemClothing';
-import { ItemWeapon } from '@AthenaServer/systems/itemWeapon';
+import { ItemManager } from '@AthenaServer/systems/inventory/manager';
+import { ItemCrafting } from '@AthenaServer/systems/inventory/crafting';
+import { ItemClothing } from '@AthenaServer/systems/inventory/clothing';
+import { ItemWeapon } from '@AthenaServer/systems/inventory/weapons';
 
 export const systemConst = {
     agenda: AgendaSystem,

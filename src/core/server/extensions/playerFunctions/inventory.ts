@@ -2,8 +2,8 @@ import * as alt from 'alt-server';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { documentsConst } from '@AthenaServer/api/consts/constDocuments';
-import { ItemManager } from '@AthenaServer/systems/itemManager';
-import { ItemFactory } from '@AthenaServer/systems/itemFactory';
+import { ItemManager } from '@AthenaServer/systems/inventory/manager';
+import { ItemFactory } from '@AthenaServer/systems/inventory/factory';
 
 const Inventory = {
     /**

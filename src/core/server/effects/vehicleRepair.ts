@@ -5,7 +5,7 @@ import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
 import { Athena } from '../api/athena';
 import VehicleFuncs from '../extensions/vehicleFuncs';
-import { ItemEffects } from '../systems/itemEffects';
+import { ItemEffects } from '../systems/inventory/effects';
 import { getForwardVector } from '../utility/vector';
 
 const isUsingTimeline: Array<{ player: alt.Player; vehicle: alt.Vehicle }> = [];
