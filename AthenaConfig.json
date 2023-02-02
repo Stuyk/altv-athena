@@ -4,8 +4,6 @@
     "MONGO_URL": null,
     "[?] Used for Framework custom Database": "TYPE IS STRING",
     "MONGO_DATABASE_NAME": null,
-    "[?] Used for Ares Service Debugging": "TYPE IS STRING",
-    "ARES_ENDPOINT": null,
     "[?] Use altv built-in reconnect?": "TYPE IS BOOLEAN",
     "USE_ALTV_RECONNECT": true
 }

@@ -3,25 +3,18 @@ import * as alt from 'alt-server';
 
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
-import Ares from './utility/ares';
 import ConfigUtil from './utility/config';
 import MongoUtil from './utility/mongo';
 import { ReconnectHelper } from './utility/reconnect';
 
-const DEFAULT_ARES_ENDPOINT = 'https://ares.stuyk.com';
 const startTime = Date.now();
 let config: IConfig | undefined;
 
 class Startup {
     static async begin() {
-        // Validate the Configuration
         config = ConfigUtil.get();
-
-        // Start Database
         Startup.database();
-
-        // Start Ares Connection Protocol
-        await Startup.ares();
+        await Startup.load();
     }
 
     /**
@@ -59,7 +52,7 @@ class Startup {
      * @static
      * @memberof Startup
      */
-    static async ares() {
+    static async load() {
         if (typeof config === 'undefined') {
             alt.logWarning(
                 `Failed to load Configuration File. Is 'AthenaConfig.json' file malformed? Try setting to default values again.`,
@@ -67,7 +60,6 @@ class Startup {
             process.exit(1);
         }
 
-        Ares.setAresEndpoint(config.ARES_ENDPOINT ? config.ARES_ENDPOINT : DEFAULT_ARES_ENDPOINT);
         // @ts-ignore
         await import(`./boot.js`);
         alt.log(`~lc~Boot Time: ~g~${Date.now() - startTime}ms`);

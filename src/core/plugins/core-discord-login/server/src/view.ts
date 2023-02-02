@@ -1,10 +1,6 @@
 import * as alt from 'alt-server';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
-import Ares from '@AthenaServer/utility/ares';
-import { sha256Random } from '@AthenaServer/utility/encryption';
-import ConfigUtil from '@AthenaServer/utility/config';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { AgendaOrder } from '@AthenaServer/systems/agenda';
 import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
@@ -14,60 +10,25 @@ import { DISCORD_LOCALES } from '../../shared/locales';
 import { JwtProvider } from '@AthenaServer/systems/jwt';
 import { Account } from '@AthenaServer/interface/iAccount';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
+import { OAUTH_CONFIG } from '@AthenaPlugins/core-discord-login/shared/config';
 
-// These settings are very sensitive.
-// If you are not sure what they do; do not change them.
-// These connect to a backend that helps users login with Discord oAuth2.
-const config = ConfigUtil.get();
-const aresURL = config.ARES_ENDPOINT ? config.ARES_ENDPOINT : `https://ares.stuyk.com`;
-const aresRedirect = encodeURI(`${aresURL}/v1/request/key`);
-const url = `https://discord.com/api/oauth2/authorize?client_id=759238336672956426&redirect_uri=${aresRedirect}&prompt=none&response_type=code&scope=identify%20email`;
+const url = `https://discord.com/api/oauth2/authorize?client_id=${OAUTH_CONFIG.DISCORD.CLIENT_ID}&redirect_uri=${OAUTH_CONFIG.URL}/auth&prompt=none&response_type=code&scope=identify%20email`;
+const UniquePlayerIdentifiers: { [player_id: string]: string } = {};
 
-/**
- * Gets the Discord oAuth2 URL.
- * @export
- * @return {string}
- */
-function getDiscordOAuth2URL() {
-    return url;
-}
-
-/**
- * Return a static URL for POST requests.
- * @return {*}
- */
-function getAresURL() {
-    return aresURL;
-}
-
-/**
- * Performs a POST request to the 'Ares' backend.
- * Tries to look up server information, and find a matching oAuth2 authorization.
- *
- * Ares is hosted by Stuyk.
- *
- * @param {alt.Player} player
- * @return {*}
- */
 async function tryToFinishLogin(player: alt.Player) {
-    const player_identifier = player.discordToken;
-    if (!player_identifier) {
+    if (!player || !player.valid) {
         return;
     }
 
-    const public_key = await Ares.getPublicKey();
-    const aresURL = await getAresURL();
+    const pid = UniquePlayerIdentifiers[player.id];
+    if (typeof pid === 'undefined') {
+        return;
+    }
 
     const options: AxiosRequestConfig = {
-        method: 'POST',
-        url: `${aresURL}/v1/post/discord`,
+        method: 'GET',
+        url: `${OAUTH_CONFIG.URL}/user/${pid}`,
         headers: { 'Content-Type': 'application/json' },
-        data: {
-            data: {
-                player_identifier,
-                public_key,
-            },
-        },
     };
 
     const result = await axios.request(options).catch((err) => {
@@ -84,33 +45,43 @@ async function tryToFinishLogin(player: alt.Player) {
         return;
     }
 
-    const data = await Ares.decrypt(JSON.stringify(result.data)).catch((err) => {
-        Athena.webview.emit(
-            player,
-            DISCORD_LOGIN_EVENTS.TO_WEBVIEW.SET_ERROR_MESSAGE,
-            DISCORD_LOCALES.DISCORD_COULD_NOT_DECRYPT_DATA_FROM_AUTH_SERVICE,
-        );
-        return null;
-    });
-
-    if (!data) {
+    if (!Object.hasOwn(result, 'data')) {
         return;
     }
 
     alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.CLOSE);
-    if (typeof data === 'string') {
-        player.discord = JSON.parse(data);
+    if (typeof result.data === 'string') {
+        player.discord = JSON.parse(result.data) as DiscordUser;
     } else {
-        player.discord = data;
+        player.discord = result.data as DiscordUser;
     }
 
     LoginController.tryLogin(player);
 }
 
 export class LoginView {
+    /**
+     * Initializes callbacks.
+     *
+     * @static
+     * @memberof LoginView
+     */
     static init() {
         alt.onClient(DISCORD_LOGIN_EVENTS.TO_SERVER.TRY_FINISH, tryToFinishLogin);
-        AgendaSystem.set(AgendaOrder.LOGIN_SYSTEM, LoginView.show);
+        AgendaSystem.set(AgendaOrder.LOGIN_SYSTEM, LoginView.prepare);
+    }
+
+    /**
+     * Opens the WebView, and passes a Discord URL for the user to open.
+     *
+     * @static
+     * @param {alt.Player} player
+     * @memberof LoginView
+     */
+    static async show(player: alt.Player) {
+        const pid = Athena.utility.hash.sha256Random(JSON.stringify(player.ip + player.hwidHash + player.hwidExHash));
+        UniquePlayerIdentifiers[player.id] = pid;
+        alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.OPEN, `${url}&state=${pid}`);
     }
 
     /**
@@ -120,60 +91,39 @@ export class LoginView {
      * @return {*}
      * @memberof LoginFunctions
      */
-    static async show(player: alt.Player) {
+    static async prepare(player: alt.Player) {
         if (!player || !player.valid) {
             return;
         }
 
-        // Perform JWT Fetch First
-        // Ew, 3 nested if statements.
+        // Perform JWT Quick Login Lookup First
         const token = await JwtProvider.fetch(player);
-        if (typeof token === 'string') {
-            const identifier = await JwtProvider.verify(token);
-            if (typeof identifier === 'string') {
-                const account: Partial<Account> | null = await Athena.database.funcs.fetchData<Account>(
-                    '_id',
-                    identifier,
-                    Athena.database.collections.Accounts,
-                );
-
-                if (account) {
-                    player.discord = {
-                        id: account.discord,
-                    } as DiscordUser;
-
-                    LoginController.tryLogin(player);
-                    return;
-                }
-            }
+        if (typeof token === 'undefined') {
+            LoginView.show(player);
+            return;
         }
 
-        // Used to identify the player when the information is sent back.
-        const uniquePlayerData = JSON.stringify(player.ip + player.hwidHash + player.hwidExHash);
-        player.discordToken = sha256Random(uniquePlayerData);
-
-        // Used as the main data format for talking to the Azure Web App.
-        const encryptionFormatObject = {
-            player_identifier: player.discordToken,
-            redirect_url: null,
-        };
-
-        // Used to add a custom redirect endpoint after successful authentication.
-        if (DEFAULT_CONFIG.LOGIN_REDIRECT_URL) {
-            encryptionFormatObject.redirect_url = DEFAULT_CONFIG.LOGIN_REDIRECT_URL;
+        const identifier = await JwtProvider.verify(token);
+        if (typeof identifier === 'undefined') {
+            LoginView.show(player);
+            return;
         }
 
-        // Setup Parseable Format for Azure
-        const public_key = await Ares.getPublicKey();
-        const encryptedData = await Ares.encrypt(JSON.stringify(encryptionFormatObject));
-        const senderFormat = {
-            public_key,
-            data: encryptedData,
-        };
+        const account: Partial<Account> | null = await Athena.database.funcs.fetchData<Account>(
+            '_id',
+            identifier,
+            Athena.database.collections.Accounts,
+        );
 
-        const encryptedDataJSON = JSON.stringify(senderFormat);
-        const discordOAuth2URL = getDiscordOAuth2URL();
+        if (typeof account === 'undefined' || !account) {
+            LoginView.show(player);
+            return;
+        }
 
-        alt.emitClient(player, DISCORD_LOGIN_EVENTS.TO_CLIENT.OPEN, `${discordOAuth2URL}&state=${encryptedDataJSON}`);
+        player.discord = {
+            id: account.discord,
+        } as DiscordUser;
+
+        LoginController.tryLogin(player);
     }
 }
