@@ -223,6 +223,14 @@ Ammunition
 Clothing Crafting
 - Individual clothing items can be combined.
 - This can be done by using two clothing items together.
+
+Ares
+- Deprecated
+
+Discord Login
+- Integrated auth.athenaframework.com
+- Utilizes this repository: https://github.com/Stuyk/discord-oauth2-service
+- Added configuration options to easily change the URL
 ```
 
 
