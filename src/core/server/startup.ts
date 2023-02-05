@@ -1,10 +1,11 @@
-import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
+
+import ConfigUtil from './utility/config';
+import Database from '@stuyk/ezmongodb';
+import MongoUtil from './utility/mongo';
 
 import { SYSTEM_EVENTS } from '../shared/enums/system';
 import { IConfig } from './interface/iConfig';
-import ConfigUtil from './utility/config';
-import MongoUtil from './utility/mongo';
 import { ReconnectHelper } from './utility/reconnect';
 
 const startTime = Date.now();

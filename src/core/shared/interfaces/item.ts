@@ -288,6 +288,15 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * @memberof BaseItem
      */
     consumableEventToCall?: string;
+
+    /**
+     * The drop model of this item when it is on the ground.
+     * If not defined it will default to a box of some sort.
+     *
+     * @type {string}
+     * @memberof BaseItem
+     */
+    model?: string;
 }
 
 export type Item<Behavior = DefaultItemBehavior, CustomData = {}> = BaseItem<Behavior, CustomData> &
