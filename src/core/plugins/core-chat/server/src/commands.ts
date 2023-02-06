@@ -4,7 +4,7 @@ import { CHAT_CONFIG } from '@AthenaPlugins/core-chat/shared/config';
 
 Athena.systems.messenger.commands.register(
     'do',
-    '/do - Describe an action you are performing.',
+    '/do [...message] - Describe an action you are performing.',
     [],
     (player: alt.Player, ...args: string[]) => {
         if (args.length <= 0) {

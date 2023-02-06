@@ -1,7 +1,11 @@
+import * as alt from 'alt-shared';
+
 /**
  * Default Weapon Data Information
  */
 export type WeaponInfo = { hash: number; ammo: number; components?: Array<string | number> };
+
+export type ItemDrop = { _id: unknown; pos: alt.IVector3 } & StoredItem;
 
 /**
  * Default Clothing Information

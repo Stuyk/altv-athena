@@ -8,4 +8,5 @@ export enum Collections {
     Factions = 'factions',
     Items = 'items',
     Doors = 'doorstates',
+    Drops = 'itemdrops',
 }

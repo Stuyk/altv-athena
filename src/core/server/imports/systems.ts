@@ -6,6 +6,7 @@ import '../systems/global';
 import '../systems/hologram';
 import '../systems/identifier';
 import '../systems/interaction';
+import '../systems/inventory/drops';
 import '../systems/inventory/factory';
 import '../systems/inventory/manager';
 import '../systems/job';

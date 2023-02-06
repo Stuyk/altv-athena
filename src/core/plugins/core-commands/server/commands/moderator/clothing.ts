@@ -3,6 +3,9 @@ import { Athena } from '@AthenaServer/api/athena';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
 
+
+Athena.systems.permission.account.has
+
 Athena.systems.messenger.commands.register(
     'setclothing',
     '/setclothing [id] [drawable] [texture] [?create]',
