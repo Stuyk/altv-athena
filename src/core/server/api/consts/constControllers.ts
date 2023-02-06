@@ -1,4 +1,5 @@
 import { ServerDoorController } from '@AthenaServer/streamers/doors';
+import { ItemDropsController } from '@AthenaServer/streamers/itemDrops';
 import { ServerMarkerController } from '@AthenaServer/streamers/marker';
 import { ServerObjectController } from '@AthenaServer/streamers/object';
 import { PedController } from '@AthenaServer/streamers/ped';
@@ -13,6 +14,7 @@ export const controllersConst = {
     blip: ServerBlipController,
     doors: ServerDoorController,
     interaction: InteractionController,
+    itemDrops: ItemDropsController,
     marker: ServerMarkerController,
     object: ServerObjectController,
     ped: PedController,

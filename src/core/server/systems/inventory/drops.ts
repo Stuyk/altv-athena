@@ -59,6 +59,7 @@ export const ItemDrops = {
      */
     async add(item: StoredItem, pos: alt.IVector3): Promise<string> {
         const document = await Internal.addToDatabase(item, pos);
+        Athena.controllers.itemDrops.append(document);
         return document._id as string;
     },
     /**

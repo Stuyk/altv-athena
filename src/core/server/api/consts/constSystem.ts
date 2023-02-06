@@ -12,11 +12,13 @@ import { ItemManager } from '@AthenaServer/systems/inventory/manager';
 import { ItemCrafting } from '@AthenaServer/systems/inventory/crafting';
 import { ItemClothing } from '@AthenaServer/systems/inventory/clothing';
 import { ItemWeapon } from '@AthenaServer/systems/inventory/weapons';
+import { ItemDrops } from '@AthenaServer/systems/inventory/drops';
 
 export const systemConst = {
     agenda: AgendaSystem,
     default: defaultSystemsConst,
     itemClothing: ItemClothing,
+    itemDrops: ItemDrops,
     itemFactory: ItemFactory,
     itemManager: ItemManager,
     itemCrafting: ItemCrafting,

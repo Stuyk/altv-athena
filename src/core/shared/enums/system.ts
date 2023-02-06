@@ -106,7 +106,7 @@ export enum SYSTEM_EVENTS {
     POPULATE_OBJECTS = 'objects:Populate',
     POPULATE_PEDS = 'peds:Populate',
     POPULATE_WORLD_NOTIFICATIONS = 'worldNotifications:Populate',
-    POPULATE_ITEM_DROPS = 'itemDrops:Populate',
+    POPULATE_ITEM_DROPS = 'item:drops:Populate',
     POPULATE_POLYGONS = 'polygons:Populate',
     //
     QUICK_TOKEN_UPDATE = 'quicktoken:update',
