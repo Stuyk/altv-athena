@@ -1,4 +1,5 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 
 import { AthenaClient } from '@AthenaClient/api/athena';
 import { Item } from '@AthenaShared/interfaces/item';
@@ -96,7 +97,7 @@ function init() {
     page = new AthenaClient.webview.page({
         name: INVENTORY_EVENTS.PAGE,
         callbacks: {
-            onReady: () => {
+            onReady: async () => {
                 isOpen = true;
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_INVENTORY, inventory, toolbar, totalWeight);
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_WEIGHT_STATE, isWeightEnabled);
@@ -104,10 +105,26 @@ function init() {
                 AthenaClient.webview.emit(INVENTORY_EVENTS.TO_WEBVIEW.SET_MAX_WEIGHT, maxWeight);
                 alt.emitServer(INVENTORY_EVENTS.TO_SERVER.OPEN);
 
+                // Draws a ped clone in-menu; but not currently working during this version of alt:V
+                // native.activateFrontendMenu(native.getHashKey('FE_MENU_VERSION_EMPTY_NO_BACKGROUND'), false, -1);
+                // const clone = native.clonePed(alt.Player.local.scriptID, false, false, true);
+                // await alt.Utils.wait(100);
+                // native.freezeEntityPosition(clone, true);
+                // native.setMouseCursorVisible(false);
+                // native.givePedToPauseMenu(clone, 1);
+                // native.setPauseMenuPedLighting(true);
+                // native.setPauseMenuPedSleepState(true);
+                // native.setPauseMenuActive(false);
+                // native.requestScaleformMovie('PAUSE_MP_MENU_PLAYER_MODEL');
+                // native.replaceHudColourWithRgba(117, 0, 0, 0, 0);
+
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`, 0.2);
             },
             onClose: () => {
                 isOpen = false;
+
+                // native.clearPedInPauseMenu();
+                // native.setFrontendActive(false);
 
                 alt.emitServer(INVENTORY_EVENTS.TO_SERVER.CLOSE);
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_close.ogg`, 0.2);
@@ -154,5 +171,10 @@ function init() {
         page.close(true);
     });
 }
+
+alt.on('disconnect', () => {
+    native.clearPedInPauseMenu();
+    native.setFrontendActive(false);
+});
 
 onTicksStart.add(init);

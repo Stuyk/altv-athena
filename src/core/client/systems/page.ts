@@ -5,6 +5,8 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { GameplayCamera } from './gameplayCamera';
 import { PauseMenu } from './pauseMenu';
 
+type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
+
 export interface IPage {
     /**
      * The full name of the Vue file you are trying to load.
@@ -24,11 +26,11 @@ export interface IPage {
          * Function to call when the View is loaded.
          * Usually used to pass data to the WebView after it's ready.
          */
-        onReady: (...args: any[]) => void | Function;
+        onReady: AnyCallback;
         /**
          * Function to call when the View is closed.
          */
-        onClose: (...args: any[]) => void | Function;
+        onClose: AnyCallback;
     };
 
     options?: {

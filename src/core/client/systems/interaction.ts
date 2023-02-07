@@ -14,7 +14,6 @@ import { NpcWheelMenu } from '@AthenaClient/menus/npc';
 import { ObjectWheelMenu } from '@AthenaClient/menus/object';
 import { PlayerWheelMenu } from '@AthenaClient/menus/player';
 import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
-import { ClientItemStreamer } from '@AthenaClient/streamers/item';
 import { Timer } from '@AthenaClient/utility/timers';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { CameraTarget } from './cameraTarget';
@@ -153,7 +152,7 @@ export const InteractionController = {
         // Here we will construct a dynamic wheel menu based on the amount of options we have.
         const wheelOptions: Array<IWheelOptionExt> = [];
         const closestTarget = CameraTarget.get();
-        const closestItems = ClientItemStreamer.getClosestItems();
+        // const closestItems = ClientItemStreamer.getClosestItems();
         const closestInteraction = interaction;
         const closestTempInteraction = temporaryInteraction;
 
@@ -240,16 +239,16 @@ export const InteractionController = {
                 if (isValid) {
                     const targetCoords = native.getEntityCoords(closestTarget.scriptID, false);
                     let item = null;
-                    for (const closestItem of closestItems) {
-                        if (closestItem.item && closestItem.item.item && closestItem.item.item.model) {
-                            const itemHash = alt.hash(closestItem.item.item.model);
-                            const itemDistance = parseFloat(distance(targetCoords, closestItem.pos).toFixed(2));
-                            if (hash === itemHash && itemDistance <= 0.7) {
-                                item = closestItem;
-                                break;
-                            }
-                        }
-                    }
+                    // for (const closestItem of closestItems) {
+                    //     if (closestItem.item && closestItem.item.item && closestItem.item.item.model) {
+                    //         const itemHash = alt.hash(closestItem.item.item.model);
+                    //         const itemDistance = parseFloat(distance(targetCoords, closestItem.pos).toFixed(2));
+                    //         if (hash === itemHash && itemDistance <= 0.7) {
+                    //             item = closestItem;
+                    //             break;
+                    //         }
+                    //     }
+                    // }
 
                     wheelOptions.push({
                         name: `Object`,
@@ -263,17 +262,17 @@ export const InteractionController = {
             }
         }
 
-        if (closestItems.length >= 1) {
-            for (const item of closestItems) {
-                wheelOptions.push({
-                    name: `Pickup ${item.item.item.name} (x${item.item.item.quantity})`,
-                    icon: 'icon-move_to_inbox',
-                    callback: () => {
-                        alt.emitServer(View_Events_Inventory.Pickup, item.uid);
-                    },
-                });
-            }
-        }
+        // if (closestItems.length >= 1) {
+        //     for (const item of closestItems) {
+        //         wheelOptions.push({
+        //             name: `Pickup ${item.item.item.name} (x${item.item.item.quantity})`,
+        //             icon: 'icon-move_to_inbox',
+        //             callback: () => {
+        //                 alt.emitServer(View_Events_Inventory.Pickup, item.uid);
+        //             },
+        //         });
+        //     }
+        // }
 
         // Force Single Option Invoke
         if (wheelOptions.length === 1) {

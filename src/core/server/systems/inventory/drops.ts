@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 import { Athena } from '@AthenaServer/api/athena';
 import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
+import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
 
 const drops: Array<ItemDrop> = [];
 
@@ -12,9 +13,9 @@ export const Internal = {
      *
      */
     async init() {
-        await Athena.database.funcs.createCollection(Athena.database.collections.Drops);
+        await databaseConst.funcs.createCollection(databaseConst.collections.Drops);
 
-        const results = await Athena.database.funcs.fetchAllData<ItemDrop>(Athena.database.collections.Drops);
+        const results = await databaseConst.funcs.fetchAllData<ItemDrop>(databaseConst.collections.Drops);
         for (let i = 0; i < results.length; i++) {
             results[i]._id = String(results[i]._id);
             drops.push(results[i]);

@@ -189,7 +189,6 @@ const CharacterSystemRef = {
             // Propagation
             // Athena.controllers.chat.populateCommands(player);
             Athena.controllers.blip.populateGlobalBlips(player);
-            Athena.controllers.holograms.populateHolograms(player);
 
             // Vehicle Spawning
             if (!DEFAULT_CONFIG.SPAWN_ALL_VEHICLES_ON_START && DEFAULT_CONFIG.SPAWN_VEHICLES_ON_JOIN) {

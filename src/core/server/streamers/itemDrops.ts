@@ -21,10 +21,9 @@ const InternalController = {
 
 const ItemDropsConst = {
     /**
-     * Append door information to be controlled.
-     * Returns the door uid to remove all door controls if necessary.
+     * Append item drop information to the server.
      *
-     * @param {Door} door
+     * @param {ItemDrop} itemDrop
      * @return {string}
      */
     append(itemDrop: ItemDrop): string {
@@ -33,7 +32,7 @@ const ItemDropsConst = {
         return String(itemDrop._id);
     },
     /**
-     * Remove all controls from a door.
+     * Removes an item drop.
      *
      * @param {string} uid
      * @return {boolean}

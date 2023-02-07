@@ -198,6 +198,7 @@ export const ItemClothing = {
             fromPlayer(
                 player: alt.Player,
                 components: Array<{ id: number; isProp?: boolean }>,
+                equipOnAdd = false,
             ): StoredItem | undefined {
                 if (!player || !player.valid) {
                     return undefined;
@@ -222,7 +223,7 @@ export const ItemClothing = {
                     dbName: 'clothing',
                     quantity: 1,
                     slot: -1,
-                    isEquipped: false,
+                    isEquipped: equipOnAdd,
                     data: {
                         sex: data.appearance.sex,
                         components: componentList,

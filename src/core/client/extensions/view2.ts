@@ -5,8 +5,10 @@ import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 import { OverlayPageType } from '@AthenaShared/interfaces/webview';
 
-const ReadyEvents: { [pageName: string]: (...args: any[]) => void } = {};
-const ClientEvents: { [eventName: string]: (...args: any[]) => void } = {};
+type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
+
+const ReadyEvents: { [pageName: string]: AnyCallback } = {};
+const ClientEvents: { [eventName: string]: AnyCallback } = {};
 const CloseEvents: { [pageName: string]: () => void } = {};
 
 let Pages: Array<{ name: string }> = [];
@@ -630,7 +632,7 @@ export const WebViewController = {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewController
      */
-    ready(pageName: string, callback: (...args: any[]) => void) {
+    ready(pageName: string, callback: AnyCallback) {
         ReadyEvents[pageName] = callback;
     },
 
@@ -642,7 +644,7 @@ export const WebViewController = {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewController
      */
-    onInvoke(eventName: string, callback: (...args: any[]) => void) {
+    onInvoke(eventName: string, callback: AnyCallback) {
         if (ClientEvents[eventName]) {
             console.warn(
                 `[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`,

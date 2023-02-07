@@ -1,12 +1,13 @@
 import * as alt from 'alt-client';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { GroundItem } from '@AthenaShared/interfaces/groundItem';
 import { distance2d } from '@AthenaShared/utility/vector';
 import { Timer } from '@AthenaClient/utility/timers';
 import { drawText3D } from '@AthenaClient/utility/text';
+import { ItemDrop } from '@AthenaShared/interfaces/item';
 
-let closestItems: Array<GroundItem> = [];
-let addedItems: Array<GroundItem> = [];
+type CreatedDrop = ItemDrop & { scriptID?: number };
+
+let items: Array<CreatedDrop> = [];
 let interval: number;
 
 /**
@@ -14,8 +15,7 @@ let interval: number;
  */
 const InternalFunctions = {
     init() {
-        addedItems = [];
-        closestItems = [];
+        items = [];
     },
 
     stop() {
@@ -26,12 +26,8 @@ const InternalFunctions = {
         Timer.clearInterval(interval);
     },
 
-    populate(items: Array<GroundItem>) {
-        addedItems = items;
-
-        if (items.length <= 0) {
-            closestItems = [];
-        }
+    populate(itemDrops: Array<ItemDrop>) {
+        items = itemDrops;
 
         if (!interval) {
             interval = Timer.createInterval(InternalFunctions.handleDrawItems, 0, 'item.ts');
@@ -51,48 +47,48 @@ const InternalFunctions = {
             return;
         }
 
-        let itemsCloseToPlayer = [];
-        let startDistance = 3;
-        for (let i = 0; i < addedItems.length; i++) {
-            const groundItem = addedItems[i];
-            if (!groundItem.maxDistance) {
-                groundItem.maxDistance = 25;
-            }
+        // let itemsCloseToPlayer = [];
+        // let startDistance = 3;
+        // for (let i = 0; i < addedItems.length; i++) {
+        //     const groundItem = addedItems[i];
+        //     if (!groundItem.maxDistance) {
+        //         groundItem.maxDistance = 25;
+        //     }
 
-            const dist = distance2d(alt.Player.local.pos, groundItem.item.position);
-            if (dist > groundItem.maxDistance) {
-                continue;
-            }
+        //     const dist = distance2d(alt.Player.local.pos, groundItem.item.position);
+        //     if (dist > groundItem.maxDistance) {
+        //         continue;
+        //     }
 
-            // Used to lower the distance checks between items.
-            if (dist <= startDistance) {
-                drawText3D(
-                    `~y~${groundItem.item.item.name} (x${groundItem.item.item.quantity})`,
-                    groundItem.item.position,
-                    0.4,
-                    new alt.RGBA(255, 255, 255, 255),
-                );
-            }
+        //     // Used to lower the distance checks between items.
+        //     if (dist <= startDistance) {
+        //         drawText3D(
+        //             `~y~${groundItem.item.item.name} (x${groundItem.item.item.quantity})`,
+        //             groundItem.item.position,
+        //             0.4,
+        //             new alt.RGBA(255, 255, 255, 255),
+        //         );
+        //     }
 
-            itemsCloseToPlayer.push(groundItem);
-        }
+        //     itemsCloseToPlayer.push(groundItem);
+        // }
 
-        closestItems = itemsCloseToPlayer;
+        // closestItems = itemsCloseToPlayer;
     },
 };
 
-export const ClientItemStreamer = {
-    /**
-     * Return an array of items that are closest to the player.
-     *
-     * @static
-     * @return {Array<GroundItem>}
-     * @memberof ClientItemStreamer
-     */
-    getClosestItems(): Array<GroundItem> {
-        return closestItems;
-    },
-};
+// export const ClientItemDrops = {
+//     /**
+//      * Return an array of items that are closest to the player.
+//      *
+//      * @static
+//      * @return {Array<ItemDrop>}
+//      * @memberof ClientItemDrops
+//      */
+//     getClosestItems(): Array<ItemDrop> {
+//         return closestItems;
+//     },
+// };
 
 alt.on('connectionComplete', InternalFunctions.init);
 alt.on('disconnect', InternalFunctions.stop);
