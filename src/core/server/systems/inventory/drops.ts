@@ -5,6 +5,9 @@ import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
 
+type UnpushedItemDrop = Omit<ItemDrop, '_id'>;
+
+const DEFAULT_EXPIRATION = 60000 * 5; // 5 Minutes
 const drops: Array<ItemDrop> = [];
 
 export const Internal = {
@@ -19,6 +22,7 @@ export const Internal = {
         for (let i = 0; i < results.length; i++) {
             results[i]._id = String(results[i]._id);
             drops.push(results[i]);
+            Athena.controllers.itemDrops.append(results[i]);
         }
     },
     /**
@@ -27,10 +31,10 @@ export const Internal = {
      * @param {StoredItem} storedItem
      * @return {Promise<ItemDrop>}
      */
-    async addToDatabase(storedItem: StoredItem, pos: alt.IVector3): Promise<ItemDrop> {
-        storedItem = deepCloneObject<StoredItem>(storedItem);
-        const document = await Athena.database.funcs.insertData<StoredItem>(
-            Object.assign(storedItem, pos),
+    async addToDatabase(storedItem: UnpushedItemDrop): Promise<ItemDrop> {
+        storedItem = deepCloneObject<UnpushedItemDrop>(storedItem);
+        const document = await Athena.database.funcs.insertData<UnpushedItemDrop>(
+            storedItem,
             Athena.database.collections.Drops,
             true,
         );
@@ -59,7 +63,22 @@ export const ItemDrops = {
      * @return {Promise<string>}
      */
     async add(item: StoredItem, pos: alt.IVector3): Promise<string> {
-        const document = await Internal.addToDatabase(item, pos);
+        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName);
+        if (typeof baseItem === 'undefined') {
+            return undefined;
+        }
+
+        const expiration =
+            typeof baseItem.msTimeout === 'number' ? Date.now() + baseItem.msTimeout : Date.now() + DEFAULT_EXPIRATION;
+
+        const document = await Internal.addToDatabase({
+            ...item,
+            name: baseItem.name,
+            pos,
+            expiration,
+            model: baseItem.model,
+        });
+
         Athena.controllers.itemDrops.append(document);
         return document._id as string;
     },
@@ -70,19 +89,26 @@ export const ItemDrops = {
      * @return {(Promise<StoredItem | undefined>)}
      */
     async sub(id: string): Promise<StoredItem | undefined> {
+        let itemClone: StoredItem = undefined;
+
         for (let i = drops.length - 1; i >= 0; i--) {
+            if (Date.now() > drops[i].expiration && drops[i]._id !== id) {
+                drops.splice(i, 1);
+                continue;
+            }
+
             if (drops[i]._id !== id) {
                 continue;
             }
 
-            const itemClone = deepCloneObject<ItemDrop>(drops.splice(i, 1));
+            const newItem = deepCloneObject<ItemDrop>(drops.splice(i, 1));
             await Internal.removeFromDatabase(id);
-            delete itemClone._id;
-            delete itemClone.pos;
-            return itemClone;
+            delete newItem._id;
+            delete newItem.pos;
+            itemClone = newItem;
         }
 
-        return undefined;
+        return itemClone;
     },
 };
 

@@ -94,7 +94,33 @@ const Internal = {
             return;
         }
 
-        // ! - TODO
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined' || typeof data[type] === 'undefined') {
+            return;
+        }
+
+        const clonedItem = deepCloneObject<StoredItem>(Athena.systems.itemManager.slot.getAt(slot, data[type]));
+        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(clonedItem.dbName, clonedItem.version);
+        if (typeof baseItem === 'undefined') {
+            return;
+        }
+
+        if (!baseItem.behavior.canDrop) {
+            return;
+        }
+
+        if (baseItem.behavior.destroyOnDrop) {
+            Athena.player.emit.notification(player, `${baseItem.name} was destroyed on drop.`);
+            return;
+        }
+
+        const newDataSet = Athena.systems.itemManager.slot.removeAt(slot, data[type]);
+        if (typeof newDataSet === 'undefined') {
+            return;
+        }
+
+        await Athena.document.character.set(player, type, newDataSet);
+        await Athena.systems.itemDrops.add(clonedItem, new alt.Vector3(player.pos.x, player.pos.y, player.pos.z - 1));
     },
     /**
      * Using the split interface; the result will try to push this.

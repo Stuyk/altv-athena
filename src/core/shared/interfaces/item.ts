@@ -8,7 +8,13 @@ export type WeaponInfo = { hash: number; ammo: number; components?: Array<string
 /**
  * An Item Drop that is represented on server s ide and client side.
  */
-export type ItemDrop = { _id: unknown; pos: alt.IVector3; model?: string; name: string } & StoredItem;
+export type ItemDrop = {
+    _id: unknown;
+    pos: alt.IVector3;
+    expiration: number;
+    model?: string;
+    name: string;
+} & StoredItem;
 
 /**
  * Default Clothing Information
@@ -304,6 +310,15 @@ export interface BaseItem<Behavior = DefaultItemBehavior, CustomData = {}> exten
      * @memberof BaseItem
      */
     model?: string;
+
+    /**
+     * An expiration time in milliseconds before the item drop is cleared.
+     * Stored items come with an expiration date.
+     *
+     * @type {number}
+     * @memberof BaseItem
+     */
+    msTimeout?: number;
 }
 
 export type Item<Behavior = DefaultItemBehavior, CustomData = {}> = BaseItem<Behavior, CustomData> &

@@ -1,9 +1,12 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { distance2d } from '@AthenaShared/utility/vector';
 import { Timer } from '@AthenaClient/utility/timers';
 import { drawText3D } from '@AthenaClient/utility/text';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
+import { getGroundPosition } from '@AthenaClient/utility/groundPositionHelper';
 
 type CreatedDrop = ItemDrop & { createdObject?: alt.Object };
 
@@ -28,53 +31,55 @@ const InternalFunctions = {
 
         Timer.clearInterval(interval);
     },
-
     populate(itemDrops: Array<ItemDrop>) {
         // First Loop Clears Uncommon Values
-        for (var i = items.length - 1; i >= 0; i--) {
-            if (itemDrops.findIndex((x) => x._id === items[i]._id)) {
+        for (let i = items.length - 1; i >= 0; i--) {
+            if (itemDrops.findIndex((x) => x._id === items[i]._id) >= 1) {
                 continue;
             }
 
-            if (typeof items[i].createdObject === 'undefined') {
-                continue;
-            }
-
-            if (items[i].createdObject.valid) {
+            if (items[i].createdObject) {
                 items[i].createdObject.destroy();
             }
 
             items.splice(i, 1);
         }
 
-        // Second Loop Creates New Objects
-        for (var i = items.length - 1; i >= 0; i--) {
-            if (typeof items[i].createdObject !== 'undefined') {
+        // Second loop pushes items that do not exist and creates items that have not been created
+        for (let i = 0; i < itemDrops.length; i++) {
+            let existingIndex = items.findIndex((x) => x._id === itemDrops[i]._id);
+            if (existingIndex <= -1) {
+                items.push(itemDrops[i]);
+                existingIndex = items.length - 1;
+            }
+
+            if (typeof items[existingIndex].createdObject !== 'undefined') {
                 continue;
             }
 
-            items[i].createdObject = new alt.Object(
-                items[i].model ? items[i].model : defaultProp,
-                new alt.Vector3(items[i].pos),
+            const model = items[existingIndex].model ? items[existingIndex].model : defaultProp;
+            const [_, min, max] = native.getModelDimensions(alt.hash(model));
+            const itemHeight = (Math.abs(min.z) + Math.abs(max.z)) / 2;
+            const modifiedPosition = getGroundPosition(items[existingIndex].pos);
+            const itemPosition = new alt.Vector3(
+                modifiedPosition.x,
+                modifiedPosition.y,
+                modifiedPosition.z + itemHeight,
+            );
+
+            items[existingIndex].createdObject = new alt.Object(
+                model,
+                itemPosition,
                 new alt.Vector3(0, 0, 0),
                 true,
                 false,
             );
-
-            items[i].createdObject.toggleCollision(false, false);
-            items[i].createdObject.setPositionFrozen(true);
+            items[existingIndex].createdObject.toggleCollision(false, false);
+            items[existingIndex].createdObject.setPositionFrozen(true);
         }
-
-        items = itemDrops;
 
         if (!interval) {
             interval = Timer.createInterval(InternalFunctions.handleDrawItems, 0, 'item.ts');
-        }
-
-        if (alt.debug) {
-            if (items.length >= 1) {
-                alt.log(`~g~Item Drops Found: ${items.length}`);
-            }
         }
     },
 
@@ -92,7 +97,7 @@ const InternalFunctions = {
         }
 
         let itemsCloseToPlayer = [];
-        let startDistance = 3;
+        let startDistance = 10;
         for (let i = 0; i < items.length; i++) {
             if (!maxDistance) {
                 maxDistance = 25;

@@ -14,7 +14,7 @@ const globalDoors: Array<Door> = [];
 
 const InternalController = {
     async init() {
-        StreamerService.registerCallback(KEY, InternalController.update);
+        StreamerService.registerCallback(KEY, InternalController.update, 25);
 
         for (let door of Doors) {
             globalDoors.push(door);

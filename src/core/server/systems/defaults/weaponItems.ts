@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
 import { PluginSystem } from '../plugins';
-import { ItemFactory } from '../itemFactory';
+import { ItemFactory } from '../inventory/factory';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -33,7 +33,8 @@ const Internal = {
                     icon: weapon.icon,
                     name: weapon.name,
                     data: { hash: weapon.hash, ammo: 0 },
-                    behavior: { canStack: false, isToolbar: true, isWeapon: true },
+                    behavior: { canStack: false, isToolbar: true, isWeapon: true, canDrop: true },
+                    model: weapon.model,
                 }),
             );
         });

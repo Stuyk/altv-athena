@@ -5,10 +5,11 @@ import { ItemDrop } from '@AthenaShared/interfaces/item';
 
 const KEY = 'item-drops';
 const globalDrops: Array<ItemDrop> = [];
+const MAX_DISTANCE = 25;
 
 const InternalController = {
     async init() {
-        StreamerService.registerCallback(KEY, InternalController.update);
+        StreamerService.registerCallback(KEY, InternalController.update, MAX_DISTANCE);
         InternalController.refresh();
     },
     refresh() {
