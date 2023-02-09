@@ -5,7 +5,10 @@ import * as alt from 'alt-shared';
  */
 export type WeaponInfo = { hash: number; ammo: number; components?: Array<string | number> };
 
-export type ItemDrop = { _id: unknown; pos: alt.IVector3 } & StoredItem;
+/**
+ * An Item Drop that is represented on server s ide and client side.
+ */
+export type ItemDrop = { _id: unknown; pos: alt.IVector3; model?: string; name: string } & StoredItem;
 
 /**
  * Default Clothing Information
