@@ -20,6 +20,7 @@ let inventorySize = 30;
 let maxWeight = 64;
 let isOpen = false;
 let ped: number;
+let previousHudColor: alt.RGBA;
 
 function onUpdate(_inventory: Array<Item>, _toolbar: Array<Item>, _totalWeight: number) {
     inventory = _inventory;
@@ -108,25 +109,27 @@ function init() {
 
                 // Draws a ped clone in-menu; but not currently working during this version of alt:V
                 // Will be available in next build...
+                // native.activateFrontendMenu(native.getHashKey('FE_MENU_VERSION_EMPTY_NO_BACKGROUND'), false, -1);
+                // ped = native.clonePed(alt.Player.local.scriptID, false, false, true);
+                // native.setEntityCoordsNoOffset(
+                //     ped,
+                //     alt.Player.local.pos.x,
+                //     alt.Player.local.pos.y,
+                //     alt.Player.local.pos.z - 100,
+                //     false,
+                //     false,
+                //     false,
+                // );
+                // await alt.Utils.wait(300);
+                // native.requestScaleformMovie('PAUSE_MP_MENU_PLAYER_MODEL');
+                // native.freezeEntityPosition(ped, true);
+                // native.setMouseCursorVisible(false);
+                // native.givePedToPauseMenu(ped, 0);
+                // native.setPauseMenuPedLighting(true);
+                // native.setPauseMenuPedSleepState(true);
 
-                native.activateFrontendMenu(native.getHashKey('FE_MENU_VERSION_EMPTY_NO_BACKGROUND'), false, -1);
-                ped = native.clonePed(alt.Player.local.scriptID, false, false, true);
-                native.setEntityCoordsNoOffset(
-                    ped,
-                    alt.Player.local.pos.x,
-                    alt.Player.local.pos.y,
-                    alt.Player.local.pos.z - 100,
-                    false,
-                    false,
-                    false,
-                );
-                await alt.Utils.wait(300);
-                native.requestScaleformMovie('PAUSE_MP_MENU_PLAYER_MODEL');
-                native.freezeEntityPosition(ped, true);
-                native.setMouseCursorVisible(false);
-                native.givePedToPauseMenu(ped, 0);
-                native.setPauseMenuPedLighting(true);
-                native.setPauseMenuPedSleepState(true);
+                const [_, r, g, b, a] = native.getHudColour(177);
+                previousHudColor = new alt.RGBA(r, g, b, a);
                 native.replaceHudColourWithRgba(117, 0, 0, 0, 0);
 
                 AthenaClient.sound.play2D(`@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_open.ogg`, 0.2);
@@ -140,6 +143,16 @@ function init() {
                 if (typeof ped !== 'undefined') {
                     native.deleteEntity(ped);
                     ped = undefined;
+                }
+
+                if (previousHudColor) {
+                    native.replaceHudColourWithRgba(
+                        117,
+                        previousHudColor.r,
+                        previousHudColor.g,
+                        previousHudColor.b,
+                        previousHudColor.a,
+                    );
                 }
 
                 alt.emitServer(INVENTORY_EVENTS.TO_SERVER.CLOSE);

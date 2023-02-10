@@ -34,6 +34,12 @@ export interface IPage {
     };
 
     options?: {
+        /**
+         * Disable the escape key auto-close bind.
+         *
+         * @type {boolean}
+         */
+        disableEscapeKey?: boolean;
         onOpen?: {
             /**
              * Focus the WebView when this page is opened.
@@ -205,6 +211,10 @@ export class Page {
                     ignoreMenuAndChatChecks: true,
                 });
             }
+        }
+
+        if (page.options && page.options.disableEscapeKey) {
+            AthenaClient.webview.disableEscapeKey(this.info.name);
         }
 
         AthenaClient.webview.ready(page.name, page.callbacks.onReady);

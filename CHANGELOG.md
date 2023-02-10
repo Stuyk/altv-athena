@@ -176,8 +176,10 @@ Event for SYSTEM_EVENTS.TICKS_START
 - onTicksStart.add(() => {});
 - Makes it much easier to understand what is happening.
 
-WebViewEvents
+WebView Related
 - Added WebViewEvents.playSound - Play custom sounds from any page.
+- Added Generic Type Support for Event Names
+- Added method to register a page that disables the default 'escape to close' behavior.
 
 Weapon Items List
 - Added a default plugin that auto-appends a weapon item list to the database.
@@ -203,6 +205,11 @@ Item Clothing
 - New clothing system uses the alt:V dlc info entirely for the outfits.
 - New clothing items allow for an unlimited amount of components to be combined into a single item.
 - New clothing items allow for priority in inventory. The last item in the inventory overwrites any items before it.
+
+Item Drops
+- Added item drop streamer
+- Added alt.Object support
+- Added item models for all weapons
 
 Uniforms
 - Uniforms allow for existing clothing to be equipped, and then outfits are overwritten last.

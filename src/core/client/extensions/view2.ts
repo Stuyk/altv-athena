@@ -7,6 +7,7 @@ import { OverlayPageType } from '@AthenaShared/interfaces/webview';
 
 type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 
+const SkipPageOnEscape: Array<string> = [];
 const ReadyEvents: { [pageName: string]: AnyCallback } = {};
 const ClientEvents: { [eventName: string]: AnyCallback } = {};
 const CloseEvents: { [pageName: string]: () => void } = {};
@@ -176,6 +177,11 @@ const InternalFunctions = {
             }
 
             const pageName = Pages[pageIndex].name;
+
+            if (SkipPageOnEscape.includes(pageName)) {
+                continue;
+            }
+
             if (typeof CloseEvents[pageName] === 'function') {
                 CloseEvents[pageName]();
             }
@@ -591,6 +597,8 @@ export const WebViewController = {
             await InternalFunctions.isDoneUpdating();
         }
 
+        isUpdating = true;
+
         let didModify = false;
         for (const pageName of pageNames) {
             for (let pageIndex = Pages.length - 1; pageIndex >= 0; pageIndex--) {
@@ -644,8 +652,8 @@ export const WebViewController = {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewController
      */
-    onInvoke(eventName: string, callback: AnyCallback) {
-        if (ClientEvents[eventName]) {
+    onInvoke<EventNames = string>(eventName: EventNames, callback: AnyCallback) {
+        if (ClientEvents[String(eventName)]) {
             console.warn(
                 `[Client] Duplicate Event Name (${eventName}) for Athena.webview.on (WebViewController.onInvoke)`,
             );
@@ -654,7 +662,7 @@ export const WebViewController = {
             return;
         }
 
-        ClientEvents[eventName] = callback;
+        ClientEvents[String(eventName)] = callback;
     },
 
     /**
@@ -666,7 +674,7 @@ export const WebViewController = {
      * @param {...any[]} args
      * @memberof WebViewController
      */
-    async invoke(eventName: string, ...args: any[]) {
+    async invoke<EventNames = string>(eventName: EventNames, ...args: any[]) {
         const view = await WebViewController.get();
         if (!view) {
             return;
@@ -682,6 +690,28 @@ export const WebViewController = {
      */
     isPageOpen(pageName: string): boolean {
         return Pages.findIndex((x) => x.name === pageName) !== -1;
+    },
+    /**
+     * Returns whether or not all pages are done closing / opening
+     *
+     * @return {*}
+     */
+    isDoneUpdating() {
+        return isUpdating === false;
+    },
+    /**
+     * Register a page to ignore escape key presence.
+     *
+     * @param {string} pageName
+     * @return {*}
+     */
+    disableEscapeKeyForPage(pageName: string) {
+        const index = SkipPageOnEscape.findIndex((x) => x === pageName);
+        if (index >= 0) {
+            return;
+        }
+
+        SkipPageOnEscape.push(pageName);
     },
 };
 

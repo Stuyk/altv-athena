@@ -126,7 +126,7 @@ export default defineComponent({
     max-width: 600px;
     padding: 12px;
     box-sizing: border-box;
-    z-index: 99;
+    z-index: 99999;
     position: fixed;
     box-shadow: 0px 0px 10px 3px black;
     border: 4px solid rgba(240, 255, 255, 0.3);

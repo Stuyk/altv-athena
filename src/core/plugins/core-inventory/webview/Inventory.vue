@@ -11,7 +11,7 @@ import { defineComponent, defineAsyncComponent } from 'vue';
 import WebViewEvents from '@ViewUtility/webViewEvents';
 import { INVENTORY_EVENTS } from '../shared/events';
 
-export const ComponentName = 'Inventory2';
+export const ComponentName = 'Inventory';
 export default defineComponent({
     name: ComponentName,
     components: {
@@ -29,7 +29,7 @@ export default defineComponent({
         },
     },
     mounted() {
-        WebViewEvents.emitReady(INVENTORY_EVENTS.PAGE);
+        WebViewEvents.emitReady(ComponentName);
     },
 });
 </script>

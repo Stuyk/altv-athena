@@ -4,10 +4,12 @@ import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 
 export const webViewConst = {
     close: WebViewController.closePages,
+    disableEscapeKey: WebViewController.disableEscapeKeyForPage,
     emit: WebViewController.invoke,
     focus: WebViewController.focus,
     isAnyMenuOpen: isAnyMenuOpen,
     isPageOpen: WebViewController.isPageOpen,
+    isDoneUpdating: WebViewController.isDoneUpdating,
     on: WebViewController.onInvoke,
     open: WebViewController.openPages,
     openAsOverlay: WebViewController.registerOverlay,

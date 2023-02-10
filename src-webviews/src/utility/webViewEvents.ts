@@ -81,7 +81,7 @@ export default class WebViewEvents {
      * @return {void}
      * @memberof WebViewEvents
      */
-    static emitServer(eventName: string, ...args: any[]): void {
+    static emitServer<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
             console.log(`[SERVER] -> Event: ${eventName} | Args: ${JSON.stringify(args)}`);
             return;
@@ -101,7 +101,7 @@ export default class WebViewEvents {
      * @return {void}
      * @memberof WebViewEvents
      */
-    static emitClient(eventName: string, ...args: any[]): void {
+    static emitClient<EventNames = string>(eventName: EventNames, ...args: any[]): void {
         if (!('alt' in window)) {
             console.log(`[CLIENT] -> Event: ${eventName} | Args: ${JSON.stringify(args)}`);
             return;
@@ -119,7 +119,7 @@ export default class WebViewEvents {
      * @param {(...args: any[]) => void} callback
      * @memberof WebViewEvents
      */
-    static on<T>(eventName: string, callback: T);
+    static on<EventNames = string, Callback = (...args: any[]) => void>(eventName: EventNames, callback: Callback);
     static on(eventName: string, callback: (...args: any[]) => void) {
         OnEvents[eventName] = callback;
     }
