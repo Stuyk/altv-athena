@@ -180,6 +180,7 @@ WebView Related
 - Added WebViewEvents.playSound - Play custom sounds from any page.
 - Added Generic Type Support for Event Names
 - Added method to register a page that disables the default 'escape to close' behavior.
+- Added WebViewEvents.playSoundFrontend - Play native sounds from WebView call.
 
 Weapon Items List
 - Added a default plugin that auto-appends a weapon item list to the database.

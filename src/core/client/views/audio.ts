@@ -5,6 +5,7 @@ import ViewModel from '@AthenaClient/models/viewModel';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 import { WebViewEventNames } from '@AthenaShared/enums/webViewEvents';
 import { AthenaClient } from '@AthenaClient/api/athena';
+import { handleFrontendSound } from '@AthenaClient/systems/sound';
 
 const PAGE_NAME = 'Audio';
 let interval;
@@ -27,6 +28,7 @@ class InternalFunctions implements ViewModel {
 
         WebViewController.registerPersistentPage(PAGE_NAME);
         AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND, AudioView.play3DAudio);
+        AthenaClient.webview.on(WebViewEventNames.PLAY_SOUND_FRONTEND, handleFrontendSound);
     }
 
     /**

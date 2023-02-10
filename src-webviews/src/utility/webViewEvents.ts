@@ -142,6 +142,23 @@ export default class WebViewEvents {
 
         alt.emit(WebViewEventNames.EMIT_CLIENT, WebViewEventNames.PLAY_SOUND, soundName, 0, volume, soundInstantID);
     }
+
+    /**
+     * Play a native GTA:V frontend sound
+     *
+     * @static
+     * @param {string} audioName
+     * @param {string} ref
+     * @memberof WebViewEvents
+     */
+    static playSoundFrontend(audioName: string, ref: string) {
+        if (!('alt' in window)) {
+            console.log(`[CLIENT] -> Frontend Sound Emit: ${audioName} ${ref}`);
+            return;
+        }
+
+        alt.emit(WebViewEventNames.EMIT_CLIENT, WebViewEventNames.PLAY_SOUND_FRONTEND, audioName, ref);
+    }
 }
 
 InternalFunctions.init();

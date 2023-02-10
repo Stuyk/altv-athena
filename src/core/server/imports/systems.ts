@@ -3,7 +3,6 @@ import '../systems/admin';
 import '../systems/agenda';
 import '../systems/blip';
 import '../systems/global';
-import '../systems/hologram';
 import '../systems/identifier';
 import '../systems/interaction';
 import '../systems/inventory/drops';
