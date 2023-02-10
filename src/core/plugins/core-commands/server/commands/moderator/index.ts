@@ -9,5 +9,4 @@ import './skins';
 import './teleport';
 import './test';
 import './vehicle';
-import './chat';
 import './utility';
