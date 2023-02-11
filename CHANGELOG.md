@@ -242,6 +242,15 @@ Discord Login
 - Integrated auth.athenaframework.com
 - Utilizes this repository: https://github.com/Stuyk/discord-oauth2-service
 - Added configuration options to easily change the URL
+
+Entity Selector (Formally cameraTarget)
+- Removed old cameraTarget code
+- Opted in for Tabbable Entity Selection
+- Hold Tab to turn on Entity Selection
+- Tab Tab to cycle through closest entities
+- EntitySelector.isSelecting() - Checks if the local player has entity selection turned on
+- EntitySelector.get.selection() - Returns current selection
+- EntitySelector.get.selectables() - Returns the array of entities the player can select from currently
 ```
 
 

@@ -203,15 +203,36 @@ const Internal = {
     },
 };
 
-// the entity selector
-// hold tab to turn on entity selector
-// press tab to cycle through players, objects, and vehicles
-// Only gets the closet 5 entities
-// Does not update until tab is held down again to turn off
-
 export const EntitySelector = {
-    add(type: ValidEntityTypes) {
-        //
+    /**
+     * Is the entity selector currently running?
+     *
+     * @return {boolean}
+     */
+    isSelecting(): boolean {
+        return isSelecting;
+    },
+    get: {
+        /**
+         * Return the currently selected entity.
+         *
+         * @return {(TargetInfo | undefined)}
+         */
+        selection(): TargetInfo | undefined {
+            if (selections.length <= 0) {
+                return undefined;
+            }
+
+            return selections[selectionIndex];
+        },
+        /**
+         * Get all of the current entities in the player's radius.
+         *
+         * @return {Array<TargetInfo>}
+         */
+        selectables(): Array<TargetInfo> {
+            return selections;
+        },
     },
 };
 
