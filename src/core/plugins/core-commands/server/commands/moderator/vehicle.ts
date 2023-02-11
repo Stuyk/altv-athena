@@ -1,5 +1,5 @@
-// import alt from 'alt-server';
-// import { Athena } from '@AthenaServer/api/athena';
+import alt from 'alt-server';
+import { Athena } from '@AthenaServer/api/athena';
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
@@ -65,6 +65,37 @@
 //             Athena.player.emit.message(player, LocaleController.get(LOCALE_KEYS.VEHICLE_MODEL_INVALID));
 //         }
 //     }
+
+Athena.systems.messenger.commands.register(
+    'addvehicle',
+    '/addvehicle [model]',
+    ['admin'],
+    async (player: alt.Player, model: string) => {
+        if (!model) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (data.isDead) {
+            return;
+        }
+
+        const fwd = Athena.utility.vector.getVectorInFrontOfPlayer(player, 5);
+
+        try {
+            const veh = Athena.vehicle.funcs.tempVehicle(player, model, fwd, new alt.Vector3(0, 0, 0));
+
+            Athena.vehicle.funcs.add(
+                { owner: data._id, fuel: 100, model, position: veh.pos, rotation: veh.rot },
+                false,
+            );
+            veh.destroy();
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    },
+);
 
 //     @command('addvehicle', LocaleController.get(LOCALE_KEYS.COMMAND_ADD_VEHICLE, '/addvehicle'), PERMISSIONS.ADMIN)
 //     private static addVehicleToPlayerCommand(player: alt.Player, model: string): void {

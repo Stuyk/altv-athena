@@ -11,12 +11,10 @@ import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
 import { distance } from '@AthenaShared/utility/vector';
 import { KeybindController } from '@AthenaClient/events/keyup';
 import { NpcWheelMenu } from '@AthenaClient/menus/npc';
-import { ObjectWheelMenu } from '@AthenaClient/menus/object';
 import { PlayerWheelMenu } from '@AthenaClient/menus/player';
 import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
 import { Timer } from '@AthenaClient/utility/timers';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
-import { CameraTarget } from './cameraTarget';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 const LEFT_SHIFT = 16;
@@ -151,8 +149,6 @@ export const InteractionController = {
 
         // Here we will construct a dynamic wheel menu based on the amount of options we have.
         const wheelOptions: Array<IWheelOptionExt> = [];
-        const closestTarget = CameraTarget.get();
-        // const closestItems = ClientItemStreamer.getClosestItems();
         const closestInteraction = interaction;
         const closestTempInteraction = temporaryInteraction;
 
@@ -173,106 +169,6 @@ export const InteractionController = {
                 color: 'green',
             });
         }
-
-        if (closestTarget) {
-            // Only show this if they press shift + interaction
-            if (alt.Player.local.vehicle && leftShiftDown) {
-                const model = native.getDisplayNameFromVehicleModel(alt.Player.local.vehicle.model);
-                wheelOptions.push({
-                    name: model,
-                    icon: 'icon-directions_car',
-                    data: [alt.Player.local.vehicle],
-                    callback: (_vehicle: alt.Vehicle) => {
-                        VehicleWheelMenu.openInVehicleMenu(_vehicle);
-                    },
-                });
-            }
-
-            if (!alt.Player.local.vehicle && closestTarget.type === 'vehicle') {
-                const vehicle = alt.Vehicle.all.find((v) => v && v.valid && v.scriptID === closestTarget.scriptID);
-
-                if (vehicle) {
-                    const model = native.getDisplayNameFromVehicleModel(vehicle.model);
-                    wheelOptions.push({
-                        name: model,
-                        icon: 'icon-directions_car',
-                        data: [vehicle],
-                        callback: (_vehicle: alt.Vehicle) => {
-                            VehicleWheelMenu.openMenu(_vehicle);
-                        },
-                    });
-                }
-            }
-
-            // Player Type
-            if (closestTarget.type === 'player') {
-                const player = alt.Player.all.find((p) => p && p.valid && p.scriptID === closestTarget.scriptID);
-
-                if (player) {
-                    wheelOptions.push({
-                        name: `Player`,
-                        icon: 'icon-person',
-                        data: [player],
-                        callback: (_player: alt.Player) => {
-                            PlayerWheelMenu.openMenu(_player);
-                        },
-                    });
-                }
-            }
-
-            // NPC Type
-            if (closestTarget.type === 'npc') {
-                wheelOptions.push({
-                    name: `NPC`,
-                    icon: 'icon-user-tie',
-                    data: [closestTarget.scriptID],
-                    callback: (scriptID: number) => {
-                        NpcWheelMenu.openMenu(scriptID);
-                    },
-                });
-            }
-
-            // Object Type
-            if (closestTarget.type === 'object') {
-                const hash = native.getEntityModel(closestTarget.scriptID);
-                const isValid = ObjectWheelMenu.isModelValidObject(hash);
-                if (isValid) {
-                    const targetCoords = native.getEntityCoords(closestTarget.scriptID, false);
-                    let item = null;
-                    // for (const closestItem of closestItems) {
-                    //     if (closestItem.item && closestItem.item.item && closestItem.item.item.model) {
-                    //         const itemHash = alt.hash(closestItem.item.item.model);
-                    //         const itemDistance = parseFloat(distance(targetCoords, closestItem.pos).toFixed(2));
-                    //         if (hash === itemHash && itemDistance <= 0.7) {
-                    //             item = closestItem;
-                    //             break;
-                    //         }
-                    //     }
-                    // }
-
-                    wheelOptions.push({
-                        name: `Object`,
-                        icon: 'icon-lightbulb',
-                        data: [closestTarget.scriptID],
-                        callback: (scriptID: number) => {
-                            ObjectWheelMenu.openMenu(scriptID, item);
-                        },
-                    });
-                }
-            }
-        }
-
-        // if (closestItems.length >= 1) {
-        //     for (const item of closestItems) {
-        //         wheelOptions.push({
-        //             name: `Pickup ${item.item.item.name} (x${item.item.item.quantity})`,
-        //             icon: 'icon-move_to_inbox',
-        //             callback: () => {
-        //                 alt.emitServer(View_Events_Inventory.Pickup, item.uid);
-        //             },
-        //         });
-        //     }
-        // }
 
         // Force Single Option Invoke
         if (wheelOptions.length === 1) {

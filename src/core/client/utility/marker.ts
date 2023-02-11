@@ -49,3 +49,38 @@ export function drawMarker(
         false,
     );
 }
+
+export function drawMarkerSimple(
+    type: number,
+    pos: alt.IVector3,
+    rot: alt.IVector3,
+    scale: alt.IVector3,
+    color: alt.RGBA,
+) {
+    native.drawMarker(
+        type,
+        pos.x,
+        pos.y,
+        pos.z,
+        zeroVector.x,
+        zeroVector.y,
+        zeroVector.z,
+        rot.x,
+        rot.y,
+        rot.z,
+        scale.x,
+        scale.y,
+        scale.z,
+        color.r,
+        color.g,
+        color.b,
+        color.a,
+        false,
+        false,
+        2,
+        false,
+        undefined,
+        undefined,
+        false,
+    );
+}

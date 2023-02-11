@@ -12,6 +12,8 @@ Major Breaking Changes
 - Removed Storage System
 - Removed Vehicle Keys
 - Removed Holograms
+- Removed CameraTarget
+- Updated Object Wheel Menu
 
 Death
 - Added default death system to help decouple framework from opinionated systems.

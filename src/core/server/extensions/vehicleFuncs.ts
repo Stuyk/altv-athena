@@ -88,6 +88,8 @@ export default class VehicleFuncs {
      * @memberof VehicleFuncs
      */
     static async spawnPlayerVehicles(vehicles: Array<IVehicle>) {
+        console.log(vehicles);
+
         if (vehicles.length <= 0) {
             return;
         }
@@ -485,32 +487,6 @@ export default class VehicleFuncs {
             if (result) {
                 return true;
             }
-        }
-
-        // Check for Physical Key
-        for (let i = 0; i < playerData.inventory.length; i++) {
-            const item = playerData.inventory[i];
-            if (!item) {
-                continue;
-            }
-
-            if (!item.data) {
-                continue;
-            }
-
-            if (!item.data.vehicle && !item.data.key) {
-                continue;
-            }
-
-            if (item.data.vehicle.toString() !== vehicle.data._id.toString()) {
-                continue;
-            }
-
-            if (item.data.key !== vehicle.data.key) {
-                continue;
-            }
-
-            return true;
         }
 
         return false;
