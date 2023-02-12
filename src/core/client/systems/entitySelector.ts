@@ -27,9 +27,13 @@ let selectionIndex = 0;
 let tabStartTime = 0;
 let startPosition;
 let isReleased = true;
+let isAlwaysOn = false;
+let nextUpdate = Date.now();
+let showMarker = true;
 
 const Internal = {
     init() {
+        EntitySelector.set.alwaysOn();
         everyTick = alt.everyTick(Internal.tick);
     },
     toggle() {
@@ -130,7 +134,9 @@ const Internal = {
         }
     },
     tick() {
-        Internal.handleControlToggling();
+        if (!isAlwaysOn) {
+            Internal.handleControlToggling();
+        }
 
         if (!isSelecting) {
             return;
@@ -140,10 +146,18 @@ const Internal = {
             return;
         }
 
-        const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, startPosition);
-        if (dist > MAX_DISTANCE && !alt.Player.local.vehicle) {
-            Internal.toggle();
-            return;
+        if (isAlwaysOn && Date.now() > nextUpdate) {
+            nextUpdate = Date.now() + 250;
+            selectionIndex = 0;
+            Internal.updateSelectionList();
+        }
+
+        if (!isAlwaysOn) {
+            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, startPosition);
+            if (dist > MAX_DISTANCE && !alt.Player.local.vehicle) {
+                Internal.toggle();
+                return;
+            }
         }
 
         if (selections.length <= 0) {
@@ -156,13 +170,15 @@ const Internal = {
             isNaN(selections[selectionIndex].height) ? 1 : selections[selectionIndex].height,
         );
 
-        drawMarkerSimple(
-            MARKER_TYPE.CHEVRON_UP,
-            pos,
-            new alt.Vector3(0, 180, 0),
-            new alt.Vector3(0.2, 0.1, 0.2),
-            new alt.RGBA(255, 255, 255, 150),
-        );
+        if (showMarker) {
+            drawMarkerSimple(
+                MARKER_TYPE.CHEVRON_UP,
+                pos,
+                new alt.Vector3(0, 180, 0),
+                new alt.Vector3(0.2, 0.1, 0.2),
+                new alt.RGBA(255, 255, 255, 150),
+            );
+        }
 
         const enterKeyPressed =
             native.isControlJustReleased(0, ENTER_KEY_GAME_CONTROL) ||
@@ -264,6 +280,23 @@ export const EntitySelector = {
          */
         selectables(): Array<TargetInfo> {
             return selections;
+        },
+    },
+    set: {
+        /**
+         * Never turns off entity selection.
+         * Forces the closest object to always be selected.
+         * Very performance heavy, and not recommended for most PCs.
+         *
+         */
+        alwaysOn() {
+            isAlwaysOn = true;
+            if (!isSelecting) {
+                Internal.toggle();
+            }
+        },
+        markerOff() {
+            showMarker = false;
         },
     },
 };
