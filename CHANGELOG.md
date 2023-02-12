@@ -253,6 +253,8 @@ Entity Selector (Formally cameraTarget)
 - EntitySelector.get.selectables() - Returns the array of entities the player can select from currently
 - EntitySelector.set.alwaysOn() - Forces the entity selector to only allow selecting closest to the player
 - EntitySelector.set.markerOff() - Turns off the marker that shows above entities
+- EntitySelector.set.markerColor() - Change the marker color
+- EntitySelector.set.markerSize() - Change the marker size
 ```
 
 

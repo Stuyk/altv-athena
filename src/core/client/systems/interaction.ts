@@ -82,12 +82,12 @@ export const InteractionController = {
      * @memberof InteractionController
      */
     registerKeybinds() {
-        KeybindController.registerKeybind({
-            key: KEY_BINDS.INTERACT,
-            singlePress: () => {
-                pressedKey = true;
-            },
-        });
+        // KeybindController.registerKeybind({
+        //     key: KEY_BINDS.INTERACT,
+        //     singlePress: () => {
+        //         pressedKey = true;
+        //     },
+        // });
     },
 
     /**

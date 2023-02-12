@@ -56,6 +56,7 @@ export function drawMarkerSimple(
     rot: alt.IVector3,
     scale: alt.IVector3,
     color: alt.RGBA,
+    faceCam: boolean,
 ) {
     native.drawMarker(
         type,
@@ -76,7 +77,7 @@ export function drawMarkerSimple(
         color.b,
         color.a,
         false,
-        false,
+        faceCam,
         2,
         false,
         undefined,

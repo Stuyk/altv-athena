@@ -15,11 +15,13 @@ type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
 
 const TIME_TO_TOGGLE_TAB = 250;
-const MAX_TARGETS = 10;
+
 const TAB_KEY_GAME_CONTROL = 37;
 const ENTER_KEY_GAME_CONTROL = 18;
-const MAX_DISTANCE = 10;
+const E_KEY = 69;
 
+let MAX_TARGETS = 10;
+let MAX_DISTANCE = 10;
 let everyTick: number;
 let isSelecting = false;
 let selections: Array<TargetInfo> = [];
@@ -30,11 +32,16 @@ let isReleased = true;
 let isAlwaysOn = false;
 let nextUpdate = Date.now();
 let showMarker = true;
+let color: alt.RGBA = new alt.RGBA(255, 255, 255, 100);
+let size = new alt.Vector3(0.1, 0.05, 0.1);
 
 const Internal = {
     init() {
-        EntitySelector.set.alwaysOn();
         everyTick = alt.everyTick(Internal.tick);
+        AthenaClient.events.keyBinds.registerKeybind({
+            key: E_KEY,
+            singlePress: Internal.invokeSelection,
+        });
     },
     toggle() {
         if (AthenaClient.webview.isAnyMenuOpen()) {
@@ -133,61 +140,7 @@ const Internal = {
             Internal.toggle();
         }
     },
-    tick() {
-        if (!isAlwaysOn) {
-            Internal.handleControlToggling();
-        }
-
-        if (!isSelecting) {
-            return;
-        }
-
-        if (AthenaClient.webview.isAnyMenuOpen()) {
-            return;
-        }
-
-        if (isAlwaysOn && Date.now() > nextUpdate) {
-            nextUpdate = Date.now() + 250;
-            selectionIndex = 0;
-            Internal.updateSelectionList();
-        }
-
-        if (!isAlwaysOn) {
-            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, startPosition);
-            if (dist > MAX_DISTANCE && !alt.Player.local.vehicle) {
-                Internal.toggle();
-                return;
-            }
-        }
-
-        if (selections.length <= 0) {
-            return;
-        }
-
-        const pos = new alt.Vector3(selections[selectionIndex].pos).add(
-            0,
-            0,
-            isNaN(selections[selectionIndex].height) ? 1 : selections[selectionIndex].height,
-        );
-
-        if (showMarker) {
-            drawMarkerSimple(
-                MARKER_TYPE.CHEVRON_UP,
-                pos,
-                new alt.Vector3(0, 180, 0),
-                new alt.Vector3(0.2, 0.1, 0.2),
-                new alt.RGBA(255, 255, 255, 150),
-            );
-        }
-
-        const enterKeyPressed =
-            native.isControlJustReleased(0, ENTER_KEY_GAME_CONTROL) ||
-            native.isDisabledControlJustReleased(0, ENTER_KEY_GAME_CONTROL);
-
-        if (!enterKeyPressed) {
-            return;
-        }
-
+    invokeSelection() {
         const selection = selections[selectionIndex];
 
         switch (selection.type) {
@@ -249,6 +202,57 @@ const Internal = {
                 break;
         }
     },
+    tick() {
+        if (!isAlwaysOn) {
+            Internal.handleControlToggling();
+        }
+
+        if (!isSelecting) {
+            return;
+        }
+
+        if (AthenaClient.webview.isAnyMenuOpen()) {
+            return;
+        }
+
+        if (isAlwaysOn && Date.now() > nextUpdate) {
+            nextUpdate = Date.now() + 250;
+            selectionIndex = 0;
+            Internal.updateSelectionList();
+        }
+
+        if (!isAlwaysOn) {
+            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, startPosition);
+            if (dist > MAX_DISTANCE && !alt.Player.local.vehicle) {
+                Internal.toggle();
+                return;
+            }
+        }
+
+        if (selections.length <= 0) {
+            return;
+        }
+
+        const pos = new alt.Vector3(selections[selectionIndex].pos).add(
+            0,
+            0,
+            isNaN(selections[selectionIndex].height) ? 1 : selections[selectionIndex].height,
+        );
+
+        if (showMarker) {
+            drawMarkerSimple(MARKER_TYPE.CHEVRON_UP, pos, new alt.Vector3(0, 180, 0), size, color, true);
+        }
+
+        const enterKeyPressed =
+            native.isControlJustReleased(0, ENTER_KEY_GAME_CONTROL) ||
+            native.isDisabledControlJustReleased(0, ENTER_KEY_GAME_CONTROL);
+
+        if (!enterKeyPressed) {
+            return;
+        }
+
+        Internal.invokeSelection();
+    },
 };
 
 export const EntitySelector = {
@@ -295,8 +299,28 @@ export const EntitySelector = {
                 Internal.toggle();
             }
         },
+        /**
+         * Turn the marker off.
+         *
+         */
         markerOff() {
             showMarker = false;
+        },
+        /**
+         * Change the defualt marker colour.
+         *
+         * @param {alt.RGBA} customColor
+         */
+        markerColor(customColor: alt.RGBA) {
+            color = customColor;
+        },
+        /**
+         * Change the defualt marker size.
+         *
+         * @param {alt.Vector3} markerSize
+         */
+        markerSize(markerSize: alt.Vector3) {
+            size = markerSize;
         },
     },
 };
