@@ -7,7 +7,6 @@ declare module 'alt-client' {
 
         // Check if a re-usable WebView is open.
         isMenuOpen: boolean;
-        isChatOpen: boolean;
         isWheelMenuOpen: boolean;
         isActionMenuOpen: boolean;
         isLeaderboardOpen: boolean;

@@ -112,11 +112,6 @@ export const InteractionController = {
             return;
         }
 
-        if (alt.Player.local.isChatOpen) {
-            pressedKey = false;
-            return;
-        }
-
         if (alt.Player.local.meta.isDead) {
             pressedKey = false;
             return;

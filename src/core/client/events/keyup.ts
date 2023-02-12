@@ -59,10 +59,6 @@ export const KeybindController = {
                 return;
             }
 
-            if (alt.Player.local.isChatOpen) {
-                return;
-            }
-
             if (alt.isConsoleOpen()) {
                 return;
             }
@@ -118,10 +114,6 @@ export const KeybindController = {
         if (!KEY_UP_BINDS[key].ignoreMenuAndChatChecks) {
             // Athena Menus
             if (alt.Player.local.isMenuOpen) {
-                return;
-            }
-
-            if (alt.Player.local.isChatOpen) {
                 return;
             }
 

@@ -58,10 +58,6 @@ class ActionsView implements ViewModel {
             return;
         }
 
-        if (alt.Player.local.isChatOpen) {
-            return;
-        }
-
         if (alt.Player.local.isMenuOpen) {
             return;
         }

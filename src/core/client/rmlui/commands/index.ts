@@ -41,6 +41,7 @@ let wasMenuCheckSkipped = false;
 let commands: Array<Omit<MessageCommand<alt.Player>, 'callback'>> = [];
 let history: Array<string> = [];
 let historyIndex = -1;
+let isCommandInputOpen = false;
 
 const InternalFunctions = {
     async autoFillCommand() {
@@ -228,7 +229,7 @@ const CommandInputConst = {
     create(inputInfo: CommandInput, skipMenuCheck = false): Promise<string | undefined> {
         if (!skipMenuCheck) {
             wasMenuCheckSkipped = false;
-            if (isAnyMenuOpen(false)) {
+            if (isAnyMenuOpen()) {
                 console.warn(`Input box could not be created because a menu is already open.`);
                 return undefined;
             }
@@ -247,6 +248,8 @@ const CommandInputConst = {
         alt.toggleRmlControls(true);
         alt.toggleGameControls(false);
         InternalFunctions.focus(inputInfo);
+
+        isCommandInputOpen = true;
 
         return new Promise((resolve: MessageCallback) => {
             internalCallback = resolve;
@@ -274,6 +277,16 @@ const CommandInputConst = {
         await alt.Utils.waitFor(() => {
             return native.isScreenblurFadeRunning() === false;
         });
+
+        isCommandInputOpen = false;
+    },
+    /**
+     * Returns whether or not this interface is open.
+     *
+     * @return {boolean}
+     */
+    isOpen(): boolean {
+        return isCommandInputOpen;
     },
 };
 
