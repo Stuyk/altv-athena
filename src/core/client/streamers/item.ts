@@ -34,7 +34,7 @@ const InternalFunctions = {
     populate(itemDrops: Array<ItemDrop>) {
         // First Loop Clears Uncommon Values
         for (let i = items.length - 1; i >= 0; i--) {
-            if (itemDrops.findIndex((x) => x._id === items[i]._id) >= 1) {
+            if (itemDrops.findIndex((x) => x._id === items[i]._id) >= 0) {
                 continue;
             }
 
@@ -53,7 +53,7 @@ const InternalFunctions = {
                 existingIndex = items.length - 1;
             }
 
-            if (typeof items[existingIndex].createdObject !== 'undefined') {
+            if (items[existingIndex].createdObject) {
                 continue;
             }
 
@@ -152,6 +152,17 @@ export const ClientItemDrops = {
      */
     setDefaultMaxDistance(distance = 5) {
         maxDistance = distance;
+    },
+    /**
+     * Determine if this alt.Object is an item drop.
+     *
+     * @param {number} id
+     * @return {(CreatedDrop | undefined)}
+     */
+    getDroppedItem(id: number): CreatedDrop | undefined {
+        console.log(id);
+        console.log(closestItems);
+        return closestItems.find((x) => x.createdObject && x.createdObject.scriptID === id);
     },
 };
 

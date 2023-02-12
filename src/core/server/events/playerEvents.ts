@@ -3,6 +3,7 @@ import * as alt from 'alt-server';
 type AthenaPlayerEvents =
     | 'increased-play-time'
     | 'player-died'
+    | 'pickup-item'
     | 'respawned'
     | 'selected-character'
     | 'set-account-data'

@@ -4,7 +4,7 @@ import { Athena } from '@AthenaServer/api/athena';
 import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
 import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { StoredItem } from '@AthenaShared/interfaces/item';
+import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
 import { INVENTORY_CONFIG } from '@AthenaPlugins/core-inventory/shared/config';
 import { ComplexSwapReturn } from '@AthenaServer/systems/inventory/manager';
 
@@ -394,7 +394,6 @@ const Internal = {
             return;
         }
 
-        // ! - COMMENT THIS BACK IN AFTER FINALIZING
         if (target.id === player.id) {
             return;
         }
@@ -511,8 +510,6 @@ const Internal = {
         await Athena.document.character.set(target, 'inventory', targetInventory);
     },
     giveDecline(target: alt.Player, data: { uid: string }) {
-        console.log(data);
-
         const offer = offers[data.uid];
         if (typeof offer === 'undefined') {
             Athena.player.emit.notification(target, `Item offer was not found.`);
@@ -526,6 +523,58 @@ const Internal = {
         }
 
         Athena.player.emit.notification(player, `Item offer was declined.`);
+    },
+    /**
+     * Handles the item pickup event when an item is registered for pickup.
+     *
+     * @param {alt.Player} player
+     * @param {string} _id
+     */
+    async pickupItem(player: alt.Player, _id: string) {
+        if (!player || !player.valid) {
+            return;
+        }
+
+        const data = Athena.document.character.get(player);
+        if (typeof data === 'undefined') {
+            return;
+        }
+
+        if (!Athena.systems.itemDrops.isItemAvailable(_id)) {
+            Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
+            return;
+        }
+
+        Athena.systems.itemDrops.markForTaken(_id, true);
+
+        const originalItem = Athena.systems.itemDrops.get(_id);
+        if (typeof originalItem === 'undefined') {
+            Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
+            Athena.systems.itemDrops.markForTaken(_id, false);
+            return;
+        }
+
+        const item = deepCloneObject<ItemDrop>(originalItem);
+        delete item._id;
+        delete item.pos;
+        delete item.expiration;
+        delete item.pos;
+        delete item.name;
+
+        const newInventory = Athena.systems.itemManager.inventory.add(item, data.inventory, 'inventory');
+        if (typeof newInventory === 'undefined') {
+            Athena.player.emit.notification(player, `No room in inventory, or too heavy.`);
+            Athena.systems.itemDrops.markForTaken(_id, false);
+            return;
+        }
+
+        await Athena.document.character.set(player, 'inventory', newInventory);
+        await Athena.systems.itemDrops.sub(_id);
+        Athena.player.emit.sound2D(
+            player,
+            `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_pickup.ogg`,
+            0.2,
+        );
     },
 };
 
@@ -557,6 +606,7 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
         alt.onClient(EVENTS.ACCEPT, Internal.giveAccept);
         alt.onClient(EVENTS.DECLINE, Internal.giveDecline);
+        Athena.events.player.on('pickup-item', Internal.pickupItem);
     },
     callbacks: {
         add: addCallback,
@@ -650,17 +700,3 @@ export const InventoryView = {
         },
     },
 };
-
-function finishStorageMove(uid: string, items: Array<StoredItem>, player: alt.Player | undefined) {
-    // Pretty much if the uid matches here; maybe that's a database location or something.
-    // Then you perform your saving here.
-    console.log(uid);
-    console.log(items);
-}
-
-Athena.systems.messenger.commands.register('testinv', '/testinv', ['admin'], (player) => {
-    const storedItems: Array<StoredItem> = [{ dbName: 'burger', quantity: 1, slot: 0, data: {} }];
-    InventoryView.storage.open(player, 'storage-force-1', storedItems, 5, true);
-});
-
-InventoryView.callbacks.add('close', finishStorageMove);

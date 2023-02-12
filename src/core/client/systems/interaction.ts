@@ -1,18 +1,12 @@
 import * as alt from 'alt-client';
-import * as native from 'natives';
 
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { View_Events_Inventory } from '@AthenaShared/enums/views';
 import keyboardMap from '@AthenaShared/information/keyboardMap';
 import IClientInteraction from '@AthenaShared/interfaces/iClientInteraction';
 import { Interaction } from '@AthenaShared/interfaces/interaction';
 import { IWheelOptionExt } from '@AthenaShared/interfaces/wheelMenu';
-import { distance } from '@AthenaShared/utility/vector';
 import { KeybindController } from '@AthenaClient/events/keyup';
-import { NpcWheelMenu } from '@AthenaClient/menus/npc';
-import { PlayerWheelMenu } from '@AthenaClient/menus/player';
-import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
 import { Timer } from '@AthenaClient/utility/timers';
 import { WheelMenu } from '@AthenaClient/views/wheelMenu';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';

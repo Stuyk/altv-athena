@@ -9,6 +9,7 @@ import { handleFrontendSound } from './sound';
 import { NpcWheelMenu } from '@AthenaClient/menus/npc';
 import { PlayerWheelMenu } from '@AthenaClient/menus/player';
 import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
+import { ClientItemDrops } from '@AthenaClient/streamers/item';
 
 type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
@@ -175,6 +176,7 @@ const Internal = {
 
         switch (selection.type) {
             case 'npc':
+                Internal.toggle();
                 NpcWheelMenu.openMenu(selection.id);
                 break;
             case 'player':
@@ -183,6 +185,7 @@ const Internal = {
                     break;
                 }
 
+                Internal.toggle();
                 PlayerWheelMenu.openMenu(targetPlayer);
                 break;
             case 'vehicle':
@@ -191,10 +194,39 @@ const Internal = {
                     break;
                 }
 
+                Internal.toggle();
                 VehicleWheelMenu.openMenu(targetVehicle);
                 break;
             case 'object':
-                console.log('lol object :)');
+                const object = alt.Object.all.find((x) => x.scriptID === selection.id);
+                if (typeof object === 'undefined') {
+                    // wheel menu;
+                    break;
+                }
+
+                const droppedItem = ClientItemDrops.getDroppedItem(object.scriptID);
+                if (typeof droppedItem === 'undefined') {
+                    break;
+                }
+
+                if (alt.Player.local.vehicle) {
+                    return;
+                }
+
+                native.taskGoToCoordAnyMeans(
+                    alt.Player.local.scriptID,
+                    droppedItem.pos.x,
+                    droppedItem.pos.y,
+                    droppedItem.pos.z,
+                    2,
+                    0,
+                    false,
+                    786603,
+                    0,
+                );
+
+                Internal.toggle();
+                alt.emitServer(SYSTEM_EVENTS.INTERACTION_PICKUP_ITEM, droppedItem._id);
                 break;
             case 'pos':
                 console.log('lol position');

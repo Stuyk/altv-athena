@@ -9,6 +9,7 @@ type UnpushedItemDrop = Omit<ItemDrop, '_id'>;
 
 const DEFAULT_EXPIRATION = 60000 * 5; // 5 Minutes
 const drops: Array<ItemDrop> = [];
+const markAsTaken: { [key: string]: boolean } = {};
 
 export const Internal = {
     /**
@@ -23,6 +24,7 @@ export const Internal = {
             results[i]._id = String(results[i]._id);
             drops.push(results[i]);
             Athena.controllers.itemDrops.append(results[i]);
+            markAsTaken[String(results[i]._id)] = false;
         }
     },
     /**
@@ -41,6 +43,7 @@ export const Internal = {
 
         const convertedDoc = <ItemDrop>document;
         convertedDoc._id = String(convertedDoc._id);
+        markAsTaken[String(convertedDoc._id)] = false;
         drops.push(convertedDoc);
         return convertedDoc;
     },
@@ -71,6 +74,8 @@ export const ItemDrops = {
         const expiration =
             typeof baseItem.msTimeout === 'number' ? Date.now() + baseItem.msTimeout : Date.now() + DEFAULT_EXPIRATION;
 
+        item.isEquipped = false;
+
         const document = await Internal.addToDatabase({
             ...item,
             name: baseItem.name,
@@ -83,6 +88,15 @@ export const ItemDrops = {
         return document._id as string;
     },
     /**
+     * Get the current item drop.
+     *
+     * @param {string} id
+     * @return {(ItemDrop | undefined)}
+     */
+    get(id: string): ItemDrop | undefined {
+        return drops.find((x) => x._id === id);
+    },
+    /**
      * Remove the dropped item based on identifier.
      *
      * @param {string} id
@@ -93,6 +107,7 @@ export const ItemDrops = {
 
         for (let i = drops.length - 1; i >= 0; i--) {
             if (Date.now() > drops[i].expiration && drops[i]._id !== id) {
+                delete markAsTaken[id];
                 drops.splice(i, 1);
                 continue;
             }
@@ -101,14 +116,26 @@ export const ItemDrops = {
                 continue;
             }
 
+            delete markAsTaken[id];
+
+            Athena.controllers.itemDrops.remove(id);
             const newItem = deepCloneObject<ItemDrop>(drops.splice(i, 1));
             await Internal.removeFromDatabase(id);
             delete newItem._id;
             delete newItem.pos;
+            delete newItem.expiration;
+            delete newItem.pos;
+            delete newItem.name;
             itemClone = newItem;
         }
 
         return itemClone;
+    },
+    isItemAvailable(_id: string) {
+        return typeof markAsTaken[_id] !== 'undefined' && markAsTaken[_id] === false;
+    },
+    markForTaken(_id: string, value: boolean) {
+        markAsTaken[_id] = value;
     },
 };
 

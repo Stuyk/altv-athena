@@ -35,6 +35,7 @@ export enum SYSTEM_EVENTS {
     INTERACTION_TEXT_CREATE = 'interaction:Text:Create',
     INTERACTION_TEXT_REMOVE = 'interaction:Text:Remove',
     INTERACTION_TEMPORARY = 'interaction:Temporary',
+    INTERACTION_PICKUP_ITEM = 'interaction:Pickup:Item',
     // ITEM
     ITEM_CONSUME = 'item:Consume',
     // IPL
