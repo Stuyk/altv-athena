@@ -10,8 +10,10 @@ import { NpcWheelMenu } from '@AthenaClient/menus/npc';
 import { PlayerWheelMenu } from '@AthenaClient/menus/player';
 import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
 import { ClientItemDrops } from '@AthenaClient/streamers/item';
+import { Interaction } from '@AthenaShared/interfaces/interaction';
+import { ClientInteraction } from './interaction';
 
-type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle';
+type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
 
 const TIME_TO_TOGGLE_TAB = 250;
@@ -34,6 +36,7 @@ let nextUpdate = Date.now();
 let showMarker = true;
 let color: alt.RGBA = new alt.RGBA(255, 255, 255, 100);
 let size = new alt.Vector3(0.1, 0.05, 0.1);
+let latestInteraction: Interaction;
 
 const Internal = {
     init() {
@@ -90,6 +93,10 @@ const Internal = {
         let entityInfo: Array<TargetInfo> = Internal.convert(players, 'player');
         entityInfo = entityInfo.concat(Internal.convert(vehicles, 'vehicle'));
         entityInfo = entityInfo.concat(Internal.convert(objects, 'object'));
+        if (latestInteraction) {
+            const dist = AthenaClient.utility.distance2D(alt.Player.local.pos, latestInteraction.position);
+            entityInfo.push({ dist, height: 1, id: -1, pos: latestInteraction.position, type: 'interaction' });
+        }
 
         entityInfo.sort((a, b) => {
             return a.dist - b.dist;
@@ -141,7 +148,19 @@ const Internal = {
         }
     },
     invokeSelection() {
+        if (!isSelecting) {
+            if (latestInteraction) {
+                ClientInteraction.invoke();
+                return;
+            }
+
+            return;
+        }
+
         const selection = selections[selectionIndex];
+        if (typeof selection === 'undefined') {
+            return;
+        }
 
         switch (selection.type) {
             case 'npc':
@@ -199,6 +218,9 @@ const Internal = {
                 break;
             case 'pos':
                 console.log('lol position');
+                break;
+            case 'interaction':
+                ClientInteraction.invoke();
                 break;
         }
     },
@@ -287,6 +309,14 @@ export const EntitySelector = {
         },
     },
     set: {
+        /**
+         * Sets an interaction to be pushed into the entity list.
+         *
+         * @param {(Interaction | undefined)} interaction
+         */
+        interaction(interaction: Interaction | undefined) {
+            latestInteraction = interaction;
+        },
         /**
          * Never turns off entity selection.
          * Forces the closest object to always be selected.
