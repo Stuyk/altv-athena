@@ -53,7 +53,7 @@ const ClientTextLabelController = {
      */
     append(label: TextLabel) {
         if (!label.uid) {
-            alt.logError(`(${JSON.stringify(label.data)}) Label is missing uid.`);
+            alt.logError(`(${JSON.stringify(label.text)}) Label is missing uid.`);
             return;
         }
 
@@ -138,7 +138,7 @@ function handleDrawTextlabels() {
             continue;
         }
 
-        drawText3D(label.data, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
+        drawText3D(label.text, label.pos, 0.4, new alt.RGBA(255, 255, 255, 255));
     }
 }
 

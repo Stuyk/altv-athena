@@ -976,6 +976,9 @@ export const ItemManager = {
             dataCopy[index].isEquipped = !dataCopy[index].isEquipped ? true : false;
             await Athena.document.character.set(player, type, dataCopy);
 
+            const eventToTrigger = dataCopy[index].isEquipped ? 'item-equipped' : 'item-unequipped';
+            Athena.events.player.trigger(eventToTrigger, player, dataCopy[index].slot, type);
+
             if (type === 'toolbar') {
                 Athena.player.emit.sound2D(player, dataCopy[index].isEquipped ? 'item_equip' : 'item_remove', 0.2);
             }

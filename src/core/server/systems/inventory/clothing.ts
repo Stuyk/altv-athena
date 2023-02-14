@@ -127,10 +127,12 @@ export const ItemClothing = {
 
             await Athena.document.character.set(player, 'uniform', components);
             ItemClothing.update(player);
+            Athena.events.player.trigger('player-uniform-set', player);
             return true;
         },
         async clear(player: alt.Player): Promise<void> {
             await Athena.document.character.set(player, 'uniform', undefined);
+            Athena.events.player.trigger('player-uniform-cleared', player);
         },
     },
     skin: {
@@ -150,6 +152,7 @@ export const ItemClothing = {
 
             await Athena.document.character.set(player, 'skin', typeof model === 'string' ? alt.hash(model) : model);
             ItemClothing.update(player);
+            Athena.events.player.trigger('player-skin-set', player);
             return true;
         },
         /**
@@ -162,6 +165,7 @@ export const ItemClothing = {
             await Athena.document.character.set(player, 'skin', undefined);
             Athena.player.sync.appearance(player, data.appearance as Appearance);
             ItemClothing.update(player);
+            Athena.events.player.trigger('player-skin-cleared', player);
         },
     },
     outfit: {
@@ -235,17 +239,3 @@ export const ItemClothing = {
         },
     },
 };
-
-/**
- * equip default clothing set for server
- *
- * [
- *   shirt-1 -> behavior.isClothing && item.isEquipped - equip first; because first element
- *   pants-2 -> behavior.isClothing && item.isEquipped
- *   shirt-3 -> behavior.isClothing && item.isEquipped - override first element; because it's last and equipped
- * ]
- *
- *
- *
- *
- */

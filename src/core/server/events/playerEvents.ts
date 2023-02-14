@@ -2,7 +2,13 @@ import * as alt from 'alt-server';
 
 type AthenaPlayerEvents =
     | 'increased-play-time'
+    | 'item-equipped'
+    | 'item-unequipped'
     | 'player-died'
+    | 'player-uniform-set'
+    | 'player-uniform-cleared'
+    | 'player-skin-set'
+    | 'player-skin-cleared'
     | 'pickup-item'
     | 'respawned'
     | 'selected-character'

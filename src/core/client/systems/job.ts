@@ -120,7 +120,7 @@ const ObjectiveController = {
 
         if (objective.textLabel && dist <= objective.range * 10) {
             drawText3D(
-                objective.textLabel.data,
+                objective.textLabel.text,
                 objective.textLabel.pos as alt.Vector3,
                 0.4,
                 new alt.RGBA(255, 255, 255, 255),

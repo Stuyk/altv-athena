@@ -13,7 +13,7 @@ export interface TextLabel {
      * @type {string}
      * @memberof TextLabel
      */
-    data: string;
+    text: string;
 
     /**
      * The maximum distance this text label should render at.
