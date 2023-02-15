@@ -183,6 +183,7 @@ WebView Related
 - Added Generic Type Support for Event Names
 - Added method to register a page that disables the default 'escape to close' behavior.
 - Added WebViewEvents.playSoundFrontend - Play native sounds from WebView call.
+- Added Athena.webview.closePages - Allows closing all pages, if non are specified, or closing specific pages if pages are specified.
 
 Weapon Items List
 - Added a default plugin that auto-appends a weapon item list to the database.

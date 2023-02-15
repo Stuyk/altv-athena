@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { WebViewEventNames } from '../../shared/enums/webViewEvents';
 
-export class ServerView {
+export const ServerView = {
     /**
      * Emits an event directly to the client's WebView.
      *
@@ -10,7 +10,20 @@ export class ServerView {
      * @param {...any[]} args
      * @memberof ServerView
      */
-    static emit(player: alt.Player, eventName: string, ...args: any[]) {
-        alt.emitClient(player, WebViewEventNames.ON_SERVER, eventName, ...args);
-    }
-}
+    emit(player: alt.Player, eventName: string, ...args: any[]) {
+        player.emit(WebViewEventNames.ON_SERVER, eventName, ...args);
+    },
+    /**
+     * Closes all pages if no pages are specified.
+     * If pages are specified it only closes those specific pages.
+     *
+     * @param {Array<string>} [pages=[]]
+     */
+    closePages(player: alt.Player, pages: Array<string> = []) {
+        if (typeof pages === 'undefined') {
+            pages = [];
+        }
+
+        player.emit(WebViewEventNames.CLOSE_PAGES, pages);
+    },
+};

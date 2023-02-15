@@ -719,3 +719,11 @@ alt.on('keyup', InternalFunctions.handleKeyDownEvent);
 alt.on('disconnect', WebViewController.dispose);
 alt.onceServer(SYSTEM_EVENTS.WEBVIEW_INFO, WebViewController.create);
 alt.onServer(WebViewEventNames.ON_SERVER, InternalFunctions.onServer);
+alt.onServer(WebViewEventNames.CLOSE_PAGES, (pages: Array<string>) => {
+    if (pages.length <= 0) {
+        InternalFunctions.closeNonOverlayPages();
+        return;
+    }
+
+    WebViewController.closePages(pages);
+});
