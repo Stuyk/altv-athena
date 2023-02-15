@@ -1,7 +1,8 @@
 import * as alt from 'alt-client';
+import * as native from 'natives';
 
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
-import * as native from 'natives';
+import { onTicksStart } from '@AthenaClient/events/onTicksStart';
 
 interface KeyBindRestrictions {
     /**
@@ -75,6 +76,14 @@ interface KeyInfo {
      * @memberof KeyInfo
      */
     key: number;
+
+    /**
+     * Describe what this keybind is meant to do.
+     *
+     * @type {string}
+     * @memberof KeyInfo
+     */
+    description: string;
 
     /**
      * Give a keybind an identifier, like a unique id.
@@ -166,7 +175,9 @@ interface KeyInfo {
     restrictions?: KeyBindRestrictions;
 }
 
-const keyMappings: Array<KeyInfo> = [];
+type KeyInfoDefault = KeyInfo & { default: number };
+
+const keyMappings: Array<KeyInfoDefault> = [];
 const keyDownTime: { [identifier: string]: number } = {};
 const keyModifier = {
     shift: {
@@ -360,7 +371,14 @@ export const HotkeyRegistry = {
      * @param {KeyInfo} keyBind
      */
     add(keyBind: KeyInfo) {
-        keyMappings.push(keyBind);
+        const userDefinedHotkey = alt.LocalStorage.get(`keybind-${keyBind.key}`);
+
+        if (typeof userDefinedHotkey !== 'undefined') {
+            keyMappings.push({ ...keyBind, default: keyBind.key, key: userDefinedHotkey });
+            return;
+        }
+
+        keyMappings.push({ ...keyBind, default: keyBind.key });
     },
     /**
      * Used to check if a keybind passes certain validation metrics.
@@ -394,7 +412,50 @@ export const HotkeyRegistry = {
         enabled(keyOrIdentifier: string | number) {
             Internal.setDisabled(keyOrIdentifier, false);
         },
+        /**
+         * Allows a key to be rebound at runtime.
+         * Once a key is rebound, it will automatically be loaded on server rejoin.
+         *
+         * @param {string} keyOrIdentifier
+         */
+        rebind(keyOrIdentifier: string | number, keyCode: number) {
+            let index: number;
+            if (typeof keyOrIdentifier === 'string') {
+                index = keyMappings.findIndex((x) => x && x.identifier === keyOrIdentifier);
+            } else {
+                index = keyMappings.findIndex((x) => x.key === keyOrIdentifier);
+            }
+
+            if (index <= -1) {
+                return;
+            }
+
+            alt.LocalStorage.set(`keybind-${keyMappings[index].default}`, keyCode);
+            alt.LocalStorage.save();
+
+            keyMappings[index].key = keyCode;
+        },
+    },
+    get: {
+        /**
+         * Returns all hotkeys and their relevant information.
+         *
+         * @return {Array<KeyInfoDefault>}
+         */
+        hotkeys(): Array<KeyInfoDefault> {
+            return keyMappings;
+        },
+        /**
+         * Return a keybind information for a key.
+         * Returns undefined if key is not bound, or found.
+         *
+         * @param {(string | number)} keyOrIdentifier
+         * @return {*}
+         */
+        hotkey(keyOrIdentifier: string | number): KeyInfo | undefined {
+            return Internal.getKeyInfo(keyOrIdentifier);
+        },
     },
 };
 
-Internal.init();
+onTicksStart.add(Internal.init);

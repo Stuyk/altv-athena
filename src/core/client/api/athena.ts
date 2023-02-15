@@ -7,12 +7,11 @@ import Raycast from '@AthenaClient/utility/raycast';
 import * as math from '@AthenaClient/utility/math';
 import { wheelMenusConst } from './consts/wheelMenus';
 import { constData } from './consts/dataConst';
-import { KeybindController } from '@AthenaClient/events/keyup';
-import { KeyHeld } from '@AthenaClient/events/keyHeld';
 import { rmluiConst } from './consts/rmluiConst';
 import { cameraConst } from './consts/cameraConst';
 import { MessengerSystem } from '@AthenaClient/systems/messenger';
 import { PlayerConfig } from '@AthenaClient/systems/playerConfig';
+import { HotkeyRegistry } from '@AthenaClient/systems/hotkeyRegistry';
 
 export const AthenaClient = {
     camera: cameraConst,
@@ -20,10 +19,7 @@ export const AthenaClient = {
     config: {
         player: PlayerConfig,
     },
-    events: {
-        keyHeld: KeyHeld,
-        keyBinds: KeybindController,
-    },
+    hotkeys: HotkeyRegistry,
     math,
     messenger: MessengerSystem,
     raycast: Raycast,

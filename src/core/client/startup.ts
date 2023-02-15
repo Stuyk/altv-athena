@@ -7,8 +7,6 @@ import './commands/rmlui';
 // Events
 import './events/connectionComplete';
 import './events/disconnect';
-import './events/keyup';
-import './events/keyHeld';
 import './events/onInventoryUpdate';
 import './events/onTicksStart';
 
