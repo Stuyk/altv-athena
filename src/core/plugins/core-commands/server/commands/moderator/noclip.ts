@@ -35,7 +35,7 @@ function handleReset(player: alt.Player) {
 }
 
 function handleCamUpdate(player: alt.Player, pos: alt.Vector3) {
-    player.pos = pos;
+    Athena.player.safe.setPosition(player, pos.x, pos.y, pos.z);
 }
 
 alt.onClient(SYSTEM_EVENTS.NOCLIP_RESET, handleReset);

@@ -120,7 +120,11 @@ const Internal = {
         }
 
         await Athena.document.character.set(player, type, newDataSet);
-        await Athena.systems.itemDrops.add(clonedItem, new alt.Vector3(player.pos.x, player.pos.y, player.pos.z - 1));
+        await Athena.systems.itemDrops.add(
+            clonedItem,
+            new alt.Vector3(player.pos.x, player.pos.y, player.pos.z - 1),
+            player,
+        );
     },
     /**
      * Using the split interface; the result will try to push this.

@@ -55,6 +55,7 @@ import './systems/character';
 import './systems/debug';
 import './systems/disable';
 import './systems/entitySelector';
+import './systems/hotkeyRegistry';
 import './systems/interaction';
 import './systems/interiors';
 import './systems/job';

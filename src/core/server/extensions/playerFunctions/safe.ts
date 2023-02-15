@@ -1,5 +1,6 @@
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+import { Athena } from '@AthenaServer/api/athena';
 
 const Safe = {
     /**
@@ -9,7 +10,11 @@ const Safe = {
      * @param {number} z
      * @memberof SafePrototype
      */
-    setPosition(player: alt.Player, x: number, y: number, z: number): void {
+    setPosition(player: alt.Player, x: number, y: number, z: number, doNotInvokeEventCall = false): void {
+        if (!doNotInvokeEventCall) {
+            Athena.events.player.trigger('player-pos-set', player, player.pos);
+        }
+
         if (!player.hasModel) {
             player.hasModel = true;
             player.spawn(x, y, z, 0);
@@ -30,7 +35,11 @@ const Safe = {
      * @param {boolean} exactValue
      * @memberof SafePrototype
      */
-    addHealth(player: alt.Player, value: number, exactValue: boolean = false) {
+    addHealth(player: alt.Player, value: number, exactValue: boolean = false, doNotInvokeEventCall = false) {
+        if (!doNotInvokeEventCall) {
+            Athena.events.player.trigger('player-health-set', player, player.health);
+        }
+
         if (exactValue) {
             player.health = value;
             return;
@@ -51,7 +60,11 @@ const Safe = {
      * @param {boolean} exactValue
      * @memberof SafePrototype
      */
-    subHealth(player: alt.Player, value: number, exactValue: boolean = false) {
+    subHealth(player: alt.Player, value: number, exactValue: boolean = false, doNotInvokeEventCall = false) {
+        if (!doNotInvokeEventCall) {
+            Athena.events.player.trigger('player-health-set', player, player.health);
+        }
+
         if (exactValue) {
             player.health = value;
             return;
@@ -71,7 +84,11 @@ const Safe = {
      * @param {boolean} exactValue
      * @memberof SafePrototype
      */
-    addArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
+    addArmour(player: alt.Player, value: number, exactValue: boolean = false, doNotInvokeEventCall = false): void {
+        if (!doNotInvokeEventCall) {
+            Athena.events.player.trigger('player-armour-set', player, player.armour);
+        }
+
         if (exactValue) {
             player.armour = value;
             return;
@@ -91,7 +108,11 @@ const Safe = {
      * @param {boolean} exactValue
      * @memberof SafePrototype
      */
-    subArmour(player: alt.Player, value: number, exactValue: boolean = false): void {
+    subArmour(player: alt.Player, value: number, exactValue: boolean = false, doNotInvokeEventCall = false): void {
+        if (!doNotInvokeEventCall) {
+            Athena.events.player.trigger('player-armour-set', player, player.armour);
+        }
+
         if (exactValue) {
             player.armour = value;
             return;

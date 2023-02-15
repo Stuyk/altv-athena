@@ -65,7 +65,7 @@ export const ItemDrops = {
      * @param {alt.IVector3} pos
      * @return {Promise<string>}
      */
-    async add(item: StoredItem, pos: alt.IVector3): Promise<string> {
+    async add(item: StoredItem, pos: alt.IVector3, player: alt.Player = undefined): Promise<string> {
         const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName);
         if (typeof baseItem === 'undefined') {
             return undefined;
@@ -85,6 +85,11 @@ export const ItemDrops = {
         });
 
         Athena.controllers.itemDrops.append(document);
+
+        if (typeof player !== 'undefined') {
+            Athena.events.player.trigger('drop-item', player, item);
+        }
+
         return document._id as string;
     },
     /**

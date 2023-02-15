@@ -1,6 +1,7 @@
 import * as alt from 'alt-server';
 
 type AthenaPlayerEvents =
+    | 'drop-item'
     | 'increased-play-time'
     | 'item-equipped'
     | 'item-unequipped'
@@ -9,6 +10,9 @@ type AthenaPlayerEvents =
     | 'player-uniform-cleared'
     | 'player-skin-set'
     | 'player-skin-cleared'
+    | 'player-health-set'
+    | 'player-armour-set'
+    | 'player-pos-set'
     | 'pickup-item'
     | 'respawned'
     | 'selected-character'
