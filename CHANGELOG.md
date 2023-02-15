@@ -255,6 +255,23 @@ Entity Selector (Formally cameraTarget)
 - EntitySelector.set.markerOff() - Turns off the marker that shows above entities
 - EntitySelector.set.markerColor() - Change the marker color
 - EntitySelector.set.markerSize() - Change the marker size
+
+Hotkey Registry
+- Literally better hotkeys in every shape and form
+- Key Up / Key Down
+- Trigger an everyTick while key is held down
+- Trigger a delayed function if key is held down for specified milliseconds
+- Trigger only in a certain vehicle model
+- Trigger only in the water
+- Trigger only while aiming
+- Trigger only while wielding a specific weapon
+- Trigger only as the driver of a vehicle
+- Trigger only as the passenger of a vehicle
+- Trigger only when in a vehicle
+- Trigger only when on foot
+- Option to allow the keybind while in any page menu
+- Ability to enable / disable a keybind through the API
+- Key Modifiers - Shift, Alt, CTRL
 ```
 
 
