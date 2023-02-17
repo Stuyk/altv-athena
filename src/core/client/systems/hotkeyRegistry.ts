@@ -281,6 +281,10 @@ export const HotkeyRegistry = {
                 return;
             }
 
+            if (keyMappings[index].doNotAllowRebind) {
+                return;
+            }
+
             alt.LocalStorage.set(`keybind-${keyMappings[index].default}`, keyCode);
             alt.LocalStorage.save();
 

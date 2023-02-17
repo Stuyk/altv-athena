@@ -8,7 +8,7 @@ export const DebugController = {
     registerKeybinds() {
         AthenaClient.hotkeys.add({
             key: KEY_BINDS.DEBUG_KEY,
-            description: 'Print information to console.',
+            description: 'Print World Info to alt:V Console',
             identifier: 'debug-info',
             keyDown: DebugController.handleDebugMessages,
         });

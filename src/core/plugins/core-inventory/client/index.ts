@@ -162,9 +162,9 @@ function init() {
         keybind: {
             key: INVENTORY_CONFIG.KEYBIND,
             useSameKeyToClose: true,
-            description: 'Toggles Inventory',
+            description: 'Inventory',
             identifier: 'inventory-toggle-menu',
-            allowInSpecificPage: INVENTORY_EVENTS.PAGE
+            allowInSpecificPage: INVENTORY_EVENTS.PAGE,
         },
         options: {
             onOpen: {

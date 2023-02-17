@@ -221,4 +221,12 @@ export interface BaseKeyInfo {
      * These are all optional. By default key binds work regardless of setting these values.
      */
     restrictions?: KeyBindRestrictions;
+
+    /**
+     * Prevent his key from being rebound?
+     *
+     * @type {boolean}
+     * @memberof BaseKeyInfo
+     */
+    doNotAllowRebind?: boolean;
 }

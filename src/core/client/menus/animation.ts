@@ -116,7 +116,7 @@ function handleAnimationMenu() {
 function init() {
     AthenaClient.hotkeys.add({
         key: KEY_BINDS.ANIMATION,
-        description: 'Bring up an animation menu',
+        description: 'Animations',
         identifier: 'defualt-animation-menu',
         keyDown: handleAnimationMenu,
     });
