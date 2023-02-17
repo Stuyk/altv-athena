@@ -10,6 +10,8 @@ export type KeyInfoDefault = KeyInfo & { default: number };
 
 const keyMappings: Array<KeyInfoDefault> = [];
 const keyDownTime: { [identifier: string]: number } = {};
+const keyCooldown: { [identifier: string]: number } = {};
+
 const keyModifier = {
     shift: {
         key: 16,
@@ -103,6 +105,14 @@ const Internal = {
 
         if (keyInfo.disabled) {
             return;
+        }
+
+        if (typeof keyInfo.spamPreventionInMs === 'number' && keyInfo.spamPreventionInMs > 1) {
+            if (keyCooldown[keyInfo.identifier] && Date.now() < keyCooldown[keyInfo.identifier]) {
+                return;
+            }
+
+            keyCooldown[keyInfo.identifier] = Date.now() + keyInfo.spamPreventionInMs;
         }
 
         let overrideMenuCheck = false;

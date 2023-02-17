@@ -209,6 +209,14 @@ export interface BaseKeyInfo {
     allowInSpecificPage?: string;
 
     /**
+     * The amount of milliseconds before this hotkey can be pressed again.
+     *
+     * @type {number}
+     * @memberof BaseKeyInfo
+     */
+    spamPreventionInMs?: number;
+
+    /**
      * Restrictions to apply to this key bind.
      * These are all optional. By default key binds work regardless of setting these values.
      */
