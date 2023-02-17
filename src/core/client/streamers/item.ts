@@ -160,8 +160,6 @@ export const ClientItemDrops = {
      * @return {(CreatedDrop | undefined)}
      */
     getDroppedItem(id: number): CreatedDrop | undefined {
-        console.log(id);
-        console.log(closestItems);
         return closestItems.find((x) => x.createdObject && x.createdObject.scriptID === id);
     },
 };

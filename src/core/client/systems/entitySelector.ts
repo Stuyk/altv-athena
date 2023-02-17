@@ -227,7 +227,6 @@ const Internal = {
                 alt.emitServer(SYSTEM_EVENTS.INTERACTION_PICKUP_ITEM, droppedItem._id);
                 break;
             case 'pos':
-                console.log('lol position');
                 break;
             case 'interaction':
                 ClientInteraction.invoke();
