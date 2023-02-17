@@ -1,7 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { KeybindController } from '@AthenaClient/events/keyup';
 import { playAnimation } from '@AthenaClient/systems/animations';
 import { PushVehicle } from '@AthenaClient/systems/push';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
@@ -14,6 +13,7 @@ import idleAnims from './animationMenus/idleAnims';
 import leanAnims from './animationMenus/leanAnims';
 import waitAnims from './animationMenus/waitAnims';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 function callback(dict: string, name: string, flags: number) {
     console.log(dict, name, flags);
@@ -114,7 +114,12 @@ function handleAnimationMenu() {
 }
 
 function init() {
-    KeybindController.registerKeybind({ key: KEY_BINDS.ANIMATION, singlePress: handleAnimationMenu });
+    AthenaClient.hotkeys.add({
+        key: KEY_BINDS.ANIMATION,
+        description: 'Bring up an animation menu',
+        identifier: 'defualt-animation-menu',
+        keyDown: handleAnimationMenu,
+    });
 }
 
 onTicksStart.add(init);

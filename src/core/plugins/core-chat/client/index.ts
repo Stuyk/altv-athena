@@ -78,6 +78,12 @@ const InternalFunctions = {
 };
 
 onTicksStart.add(() => {
-    AthenaClient.events.keyBinds.registerKeybind({ singlePress: InternalFunctions.openMessageBox, key: THE_LETTER_T });
+    AthenaClient.hotkeys.add({
+        key: THE_LETTER_T,
+        description: 'Open Chat Box',
+        identifier: 'open-chat-box',
+        keyDown: InternalFunctions.openMessageBox,
+    });
+
     InternalFunctions.open();
 });

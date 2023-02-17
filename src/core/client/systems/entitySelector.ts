@@ -12,6 +12,7 @@ import { VehicleWheelMenu } from '@AthenaClient/menus/vehicle';
 import { ClientItemDrops } from '@AthenaClient/streamers/item';
 import { Interaction } from '@AthenaShared/interfaces/interaction';
 import { ClientInteraction } from './interaction';
+import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
 
 type ValidEntityTypes = 'object' | 'pos' | 'npc' | 'player' | 'vehicle' | 'interaction';
 type TargetInfo = { id: number; pos: alt.IVector3; type: ValidEntityTypes; dist: number; height: number };
@@ -20,7 +21,6 @@ const TIME_TO_TOGGLE_TAB = 250;
 
 const TAB_KEY_GAME_CONTROL = 37;
 const ENTER_KEY_GAME_CONTROL = 18;
-const E_KEY = 69;
 
 let MAX_TARGETS = 10;
 let MAX_DISTANCE = 10;
@@ -41,9 +41,19 @@ let latestInteraction: Interaction;
 const Internal = {
     init() {
         everyTick = alt.everyTick(Internal.tick);
-        AthenaClient.events.keyBinds.registerKeybind({
-            key: E_KEY,
-            singlePress: Internal.invokeSelection,
+
+        AthenaClient.hotkeys.add({
+            key: KEY_BINDS.INTERACT,
+            description: 'Interact',
+            identifier: 'interact-hotkey',
+            keyDown: Internal.invokeSelection,
+        });
+
+        AthenaClient.hotkeys.add({
+            key: KEY_BINDS.INTERACT_ALT,
+            description: 'Interact Alternative',
+            identifier: 'interact-hotkey-alt',
+            keyDown: Internal.invokeSelection,
         });
     },
     toggle() {

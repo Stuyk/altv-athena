@@ -1,17 +1,18 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { KEY_BINDS } from '@AthenaShared/enums/keyBinds';
-import { KeybindController } from '@AthenaClient/events/keyup';
 import { onTicksStart } from '@AthenaClient/events/onTicksStart';
+import { AthenaClient } from '@AthenaClient/api/athena';
 
 export const DebugController = {
     registerKeybinds() {
-        KeybindController.registerKeybind({
+        AthenaClient.hotkeys.add({
             key: KEY_BINDS.DEBUG_KEY,
-            singlePress: DebugController.handleDebugMessages,
+            description: 'Print information to console.',
+            identifier: 'debug-info',
+            keyDown: DebugController.handleDebugMessages,
         });
     },
-
     handleDebugMessages() {
         alt.log(`POSITION:`);
         const pos = { ...alt.Player.local.pos };

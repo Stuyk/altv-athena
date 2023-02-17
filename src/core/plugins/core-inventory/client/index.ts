@@ -161,8 +161,10 @@ function init() {
         },
         keybind: {
             key: INVENTORY_CONFIG.KEYBIND,
-            isLongPress: false,
             useSameKeyToClose: true,
+            description: 'Toggles Inventory',
+            identifier: 'inventory-toggle-menu',
+            allowInSpecificPage: INVENTORY_EVENTS.PAGE
         },
         options: {
             onOpen: {

@@ -465,7 +465,7 @@ const Emit = {
      * @param {AcceptDeclineEvent} eventInfo
      */
     acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineEvent) {
-        funcs.notification(player, `[TAB] ~y~${eventInfo.question}`);
+        funcs.notification(player, `[UP ARROW] ~y~${eventInfo.question}`);
         player.emit(SYSTEM_EVENTS.ACCEPT_DECLINE_EVENT_SET, eventInfo);
     },
 };

@@ -28,7 +28,13 @@ function setAcceptDeclineEvent(event: AcceptDeclineEvent) {
 }
 
 function init() {
-    AthenaClient.events.keyHeld.register(TAB_KEY, handleOpen);
+    AthenaClient.hotkeys.add({
+        key: 38,
+        description: 'Accept / Decline Event Prompt',
+        identifier: 'accept-decline-event-prompt',
+        keyDown: handleOpen,
+    });
+
     alt.onServer(SYSTEM_EVENTS.ACCEPT_DECLINE_EVENT_SET, setAcceptDeclineEvent);
 }
 

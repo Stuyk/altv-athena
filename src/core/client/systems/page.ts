@@ -4,6 +4,7 @@ import { AthenaClient } from '@AthenaClient/api/athena';
 import { isAnyMenuOpen } from '@AthenaClient/utility/menus';
 import { GameplayCamera } from './gameplayCamera';
 import { PauseMenu } from './pauseMenu';
+import { BaseKeyInfo, KeyInfo } from '@AthenaClient/interface/hotkeys';
 
 type AnyCallback = ((...args: any[]) => void) | ((...args: any[]) => Promise<void>) | Function;
 
@@ -157,32 +158,13 @@ export interface IPage {
     };
 
     /**
-     * An optional hotkey to open this page.
+     * An optional hotkey to open / close the page.
+     * Set `useSameKeyToClose` to true to force the same key to close the interface.
      *
-     * @type {number}
+     * @type {(BaseKeyInfo & { useSameKeyToClose?: boolean })}
      * @memberof IPage
      */
-    keybind?: {
-        /**
-         * JavaScript key code for this keybind.
-         *
-         * @type {number}
-         */
-        key: number;
-
-        /**
-         * Hold the key for a longer time to open this menu?
-         *
-         * @type {boolean}
-         */
-        isLongPress?: boolean;
-
-        /**
-         * Use the same hotkey to invoke a close event.
-         * @type {boolean}
-         */
-        useSameKeyToClose?: boolean;
-    };
+    keybind?: BaseKeyInfo & { useSameKeyToClose?: boolean };
 }
 
 export class Page {
@@ -197,18 +179,19 @@ export class Page {
         this.info = page;
 
         if (this.info.keybind) {
-            if (this.info.keybind.isLongPress) {
-                AthenaClient.events.keyBinds.registerKeybind({
-                    longPress: this.open.bind(this),
-                    key: this.info.keybind.key,
-                    singlePress: () => {},
-                    ignoreMenuAndChatChecks: true,
+            if (this.info.keybind.delayedKeyDown && this.info.keybind.delayedKeyDown.msToTrigger) {
+                AthenaClient.hotkeys.add({
+                    ...this.info.keybind,
+                    delayedKeyDown: {
+                        msToTrigger: this.info.keybind.delayedKeyDown.msToTrigger,
+                        callback: this.open.bind(this),
+                    },
                 });
             } else {
-                AthenaClient.events.keyBinds.registerKeybind({
-                    singlePress: this.open.bind(this),
-                    key: this.info.keybind.key,
-                    ignoreMenuAndChatChecks: true,
+                AthenaClient.hotkeys.add({
+                    ...this.info.keybind,
+                    keyDown: this.open.bind(this),
+                    delayedKeyDown: undefined,
                 });
             }
         }
@@ -234,7 +217,7 @@ export class Page {
             }
         }
 
-        if (isAnyMenuOpen(false)) {
+        if (isAnyMenuOpen()) {
             return false;
         }
 
