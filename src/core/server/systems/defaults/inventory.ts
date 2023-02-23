@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { PluginSystem } from '../plugins';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 

@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
 import { PluginSystem } from '../plugins';
-import { ItemFactory } from '../inventory/factory';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -28,7 +28,7 @@ const Internal = {
         Object.keys(weapons).forEach((name) => {
             const weapon = weapons[name];
             promises.push(
-                ItemFactory.async.upsert({
+                Athena.systems.inventory.factory.upsertAsync({
                     dbName: name,
                     icon: weapon.icon,
                     name: weapon.name,

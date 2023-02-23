@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { Doors } from '@AthenaShared/information/doors';
 
 Athena.systems.messenger.commands.register('toggledoor', '/toggledoor', ['admin'], (player: alt.Player) => {

@@ -1,4 +1,4 @@
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
 
 type DefaultPerms = 'admin' | 'moderator';

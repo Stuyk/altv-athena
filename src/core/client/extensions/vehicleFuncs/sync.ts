@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 import { VEHICLE_DOOR_STATE } from '@AthenaShared/enums/vehicle';
-import IVehicleHandling from '@AthenaShared/interfaces/iVehicleHandling';
+import IVehicleHandling from '@AthenaShared/interfaces/vehicleHandling';
 
 function update(vehicle: alt.Vehicle): void {
     // Synchronize Doors

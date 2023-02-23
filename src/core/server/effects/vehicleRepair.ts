@@ -3,7 +3,7 @@ import * as alt from 'alt-server';
 import { INVENTORY_TYPE } from '../../shared/enums/inventoryTypes';
 import { ANIMATION_FLAGS } from '../../shared/flags/animationFlags';
 import { Task, TaskCallback } from '../../shared/interfaces/taskTimeline';
-import { Athena } from '../api/athena';
+import * as Athena from '../api';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { ItemEffects } from '../systems/inventory/effects';
 import { getForwardVector } from '../utility/vector';

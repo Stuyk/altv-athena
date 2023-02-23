@@ -66,7 +66,6 @@ import './systems/playerConfig';
 import './systems/progressBar';
 import './systems/scenarios';
 import './systems/sound';
-import './systems/syncedMeta';
 import './systems/tasks';
 import './systems/tick';
 import './systems/vehicle';

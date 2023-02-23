@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CurrencyTypes } from '@AthenaShared/enums/currency';
 
 Athena.systems.messenger.commands.register(

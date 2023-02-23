@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 
 /**
@@ -36,7 +36,7 @@ const Internal = {
             return;
         }
 
-        Athena.systems.itemCrafting.recipe.add({
+        Athena.systems.inventory.crafting.addRecipe({
             uid: `clothing`,
             combo: ['clothing', 'clothing'],
             quantities: [1, 1],

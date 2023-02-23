@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { PluginSystem } from '../plugins';
 
 const HOSPITALS = [

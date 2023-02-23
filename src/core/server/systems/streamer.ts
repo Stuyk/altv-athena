@@ -1,4 +1,4 @@
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
 import SockJS from 'sockjs-client';
 import { IStream, IStreamMessage } from '../../shared/interfaces/iStream';

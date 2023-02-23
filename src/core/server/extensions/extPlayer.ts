@@ -1,10 +1,7 @@
 import * as alt from 'alt-server';
-import { Account } from '../interface/iAccount';
 import { DiscordUser } from '../interface/iDiscordUser';
 import { InteractionShape } from './extColshape';
 import IAttachable from '../../shared/interfaces/iAttachable';
-import { playerConst } from '../api/consts/constPlayer';
-import { Character } from '../../shared/interfaces/character';
 
 declare module 'alt-server' {
     export interface Player {
@@ -52,13 +49,6 @@ declare module 'alt-server' {
         nextPlayTime: number;
 
         /**
-         * The player's current wanted level.
-         * @type {number}
-         * @memberof Player
-         */
-        wanted: number;
-
-        /**
          * Used to add / remove items from the toolbar.
          * This is the last item that was used on the toolbar.
          * @type {{ equipped: boolean; slot: number }}
@@ -90,26 +80,11 @@ declare module 'alt-server' {
         currentWaypoint: alt.IVector3 | null;
 
         /**
-         * The current interaction point the player is standing in.
-         * @type {(InteractionShape | null)}
-         * @memberof Player
-         */
-        currentInteraction: InteractionShape | null;
-
-        /**
          * An array of attachables. Is not automatically initialized.
          * @type {(Array<IAttachable> | null)}
          * @memberof Player
          */
         attachables?: Array<IAttachable> | null;
-
-        /**
-         * Used for vehicle seating.
-         * Determines if the player has fully sat down.
-         * @type {boolean}
-         * @memberof Player
-         */
-        hasSatDown?: boolean;
 
         /**
          * When the player is in-world and selected a character.
@@ -119,12 +94,3 @@ declare module 'alt-server' {
         hasFullySpawned?: boolean;
     }
 }
-
-/**
- * The deprecated version of the Athena playerFuncs API.
- *
- * Use `Athena.player` instead.
- *
- * @deprecated Use the new {@link Athena} const.
- */
-export const playerFuncs = playerConst;

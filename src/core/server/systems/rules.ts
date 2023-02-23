@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
+import * as Athena from '../api';
 export default class SystemRules {
     /**
      * Verifies Rules for all System Types

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 
 import { MESSENGER_EVENTS } from '@AthenaShared/enums/messenger';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CommandCallback, MessageCommand } from '@AthenaShared/interfaces/messageCommand';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 

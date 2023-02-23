@@ -1,6 +1,6 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
-import { AdminController } from '@AthenaServer/systems/admin';
+import * as Athena from '@AthenaServer/api';
+import { AdminController } from '@AthenaServer/controllers/admin';
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';
 import { LocaleController } from '@AthenaShared/locale/locale';
@@ -84,8 +84,8 @@ Athena.systems.messenger.commands.register(
 
         const data = Athena.document.character.get(target);
         Athena.player.safe.setPosition(target, target.pos.x, target.pos.y, target.pos.z);
-        Athena.player.set.frozen(target, true);
         Athena.player.emit.notification(player, `Froze ${data.name} successfully!`);
+        target.frozen = true;
     },
 );
 
@@ -101,8 +101,8 @@ Athena.systems.messenger.commands.register(
         }
 
         const data = Athena.document.character.get(target);
-        Athena.player.set.frozen(target, false);
         Athena.player.emit.notification(player, `Unfroze ${data.name} successfully!`);
+        target.frozen = false;
     },
 );
 

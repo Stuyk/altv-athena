@@ -1,10 +1,10 @@
 import '../systems/account';
-import '../systems/admin';
+import '../controllers/admin';
 import '../systems/agenda';
-import '../systems/blip';
+import '../controllers/blip';
 import '../systems/global';
 import '../systems/identifier';
-import '../systems/interaction';
+import '../controllers/interaction';
 import '../systems/inventory/drops';
 import '../systems/inventory/factory';
 import '../systems/inventory/manager';

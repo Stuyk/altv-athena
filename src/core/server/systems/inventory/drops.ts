@@ -1,9 +1,8 @@
 import * as alt from 'alt-server';
-
-import { Athena } from '@AthenaServer/api/athena';
+import Database from '@stuyk/ezmongodb';
+import * as Athena from '@AthenaServer/api';
 import { ItemDrop, StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneObject } from '@AthenaShared/utility/deepCopy';
-import { databaseConst } from '@AthenaServer/api/consts/constDatabase';
 
 type UnpushedItemDrop = Omit<ItemDrop, '_id'>;
 
@@ -17,9 +16,9 @@ export const Internal = {
      *
      */
     async init() {
-        await databaseConst.funcs.createCollection(databaseConst.collections.Drops);
+        await Database.createCollection(Athena.database.collections.Drops);
 
-        const results = await databaseConst.funcs.fetchAllData<ItemDrop>(databaseConst.collections.Drops);
+        const results = await Database.fetchAllData<ItemDrop>(Athena.database.collections.Drops);
         for (let i = 0; i < results.length; i++) {
             results[i]._id = String(results[i]._id);
             drops.push(results[i]);
@@ -35,7 +34,7 @@ export const Internal = {
      */
     async addToDatabase(storedItem: UnpushedItemDrop): Promise<ItemDrop> {
         storedItem = deepCloneObject<UnpushedItemDrop>(storedItem);
-        const document = await Athena.database.funcs.insertData<UnpushedItemDrop>(
+        const document = await Database.insertData<UnpushedItemDrop>(
             storedItem,
             Athena.database.collections.Drops,
             true,
@@ -53,7 +52,7 @@ export const Internal = {
      * @param {string} id
      */
     async removeFromDatabase(id: string) {
-        await Athena.database.funcs.deleteById(id, Athena.database.collections.Drops);
+        await Database.deleteById(id, Athena.database.collections.Drops);
     },
 };
 
@@ -66,7 +65,7 @@ export const ItemDrops = {
      * @return {Promise<string>}
      */
     async add(item: StoredItem, pos: alt.IVector3, player: alt.Player = undefined): Promise<string> {
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(item.dbName);
+        const baseItem = Athena.systems.inventory.factory.getBaseItem(item.dbName);
         if (typeof baseItem === 'undefined') {
             return undefined;
         }

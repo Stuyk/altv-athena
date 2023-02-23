@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { StoredItem } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 
@@ -93,170 +93,166 @@ export interface CraftRecipe {
 
 const recipes: Array<CraftRecipe> = [];
 
-export const ItemCrafting = {
-    recipe: {
-        /**
-         * Add a recipe in-memory. Does not store to database.
-         *
-         * @param {Recipe} recipe
-         */
-        add(recipe: CraftRecipe): boolean {
-            if (recipe.combo.length !== 2 || recipe.quantities.length !== 2) {
-                alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} needs two items and two quantities given.`);
-                return false;
-            }
+/**
+ * Add a recipe in-memory. Does not store to database.
+ *
+ * @param {Recipe} recipe
+ */
+export function addRecipe(recipe: CraftRecipe): boolean {
+    if (recipe.combo.length !== 2 || recipe.quantities.length !== 2) {
+        alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} needs two items and two quantities given.`);
+        return false;
+    }
 
-            if (recipe.quantities[0] <= 0 && recipe.quantities[1] <= 0) {
-                alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} has two matching dbNames; this is invalid.`);
-                return false;
-            }
+    if (recipe.quantities[0] <= 0 && recipe.quantities[1] <= 0) {
+        alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} has two matching dbNames; this is invalid.`);
+        return false;
+    }
 
-            alt.log(`~c~Recipe: ~lg~${recipe.uid}`);
-            recipes.push(recipe);
-            return true;
-        },
-        /**
-         * Attempts to find a matching recipe.
-         * If a matching recipe is found; it is returned.
-         * Otherwise, returns undefined.
-         *
-         * @param {ItemCombo} combo
-         * @return {(Recipe | undefined)}
-         */
-        find(combo: ItemCombo): CraftRecipe | undefined {
-            if (combo.length !== 2) {
-                return undefined;
-            }
+    alt.log(`~c~Recipe: ~lg~${recipe.uid}`);
+    recipes.push(recipe);
+    return true;
+}
 
-            const item1 = combo[0];
-            const item2 = combo[1];
+/**
+ * Attempts to find a matching recipe.
+ * If a matching recipe is found; it is returned.
+ * Otherwise, returns undefined.
+ *
+ * @param {ItemCombo} combo
+ * @return {(Recipe | undefined)}
+ */
+export function findRecipe(combo: ItemCombo): CraftRecipe | undefined {
+    if (combo.length !== 2) {
+        return undefined;
+    }
 
-            for (let recipe of recipes) {
-                let foundItem1 = false;
-                let foundItem2 = false;
+    const item1 = combo[0];
+    const item2 = combo[1];
 
-                if (recipe.combo[0] === item1 || recipe.combo[0] === item2) {
-                    foundItem1 = true;
-                }
+    for (let recipe of recipes) {
+        let foundItem1 = false;
+        let foundItem2 = false;
 
-                if (recipe.combo[1] === item1 || recipe.combo[1] === item2) {
-                    foundItem2 = true;
-                }
+        if (recipe.combo[0] === item1 || recipe.combo[0] === item2) {
+            foundItem1 = true;
+        }
 
-                if (!foundItem1 || !foundItem2) {
-                    continue;
-                }
+        if (recipe.combo[1] === item1 || recipe.combo[1] === item2) {
+            foundItem2 = true;
+        }
 
-                return recipe;
-            }
+        if (!foundItem1 || !foundItem2) {
+            continue;
+        }
 
+        return recipe;
+    }
+
+    return undefined;
+}
+
+/**
+ * Combine two slots given a data set.
+ * It will attempt to find a matching recipe and make modifications according to the combination.
+ * Returns an object with the modified dataSet, and a sound associated with the crafting recipe if provided in the recipe itself.
+ *
+ * @param {Array<StoredItem>} dataSet
+ * @param {number} slot1
+ * @param {number} slot2
+ * @returns {{ dataSet: Array<StoredItem>; sound?: string } | undefined}
+ */
+export function combineItems(
+    dataSet: Array<StoredItem>,
+    slot1: number,
+    slot2: number,
+    type: 'inventory' | 'toolbar' | 'custom',
+): { dataSet: Array<StoredItem>; sound?: string } | undefined {
+    if (slot1 === slot2) {
+        return undefined;
+    }
+
+    const item1 = Athena.systems.inventory.slot.getAt(slot1, dataSet);
+    const item2 = Athena.systems.inventory.slot.getAt(slot2, dataSet);
+
+    if (typeof item1 === 'undefined' || typeof item2 === 'undefined') {
+        return undefined;
+    }
+
+    const recipe = findRecipe([item1.dbName, item2.dbName]);
+    if (typeof recipe === 'undefined') {
+        return undefined;
+    }
+
+    // Verify Quantities
+    if (!Athena.systems.inventory.manager.hasItem(dataSet, recipe.combo[0], recipe.quantities[0])) {
+        return undefined;
+    }
+
+    if (!Athena.systems.inventory.manager.hasItem(dataSet, recipe.combo[1], recipe.quantities[1])) {
+        return undefined;
+    }
+
+    // Recipe found; now to remove both items.
+    const baseItem = Athena.systems.inventory.factory.getBaseItem(recipe.result.dbName, recipe.result.version);
+    if (typeof baseItem === 'undefined') {
+        alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} cannot find item provided in result.`);
+        return undefined;
+    }
+
+    // Attempt to find an open slot to combine data into.
+    const openSlot = Athena.systems.inventory.slot.findOpen(type, dataSet);
+    if (typeof openSlot === 'undefined') {
+        return undefined;
+    }
+
+    let newItem: Omit<StoredItem, 'slot'> = {
+        dbName: recipe.result.dbName,
+        quantity: recipe.result.quantity,
+        version: recipe.result.version,
+        data: baseItem.data ? deepCloneObject(baseItem.data) : {},
+    };
+
+    if (typeof recipe.result.data === 'function') {
+        newItem.data = recipe.result.data(item1, item2);
+
+        if (typeof newItem.data === 'undefined') {
             return undefined;
-        },
-    },
-    items: {
-        /**
-         * Combine two slots given a data set.
-         * It will attempt to find a matching recipe and make modifications according to the combination.
-         * Returns an object with the modified dataSet, and a sound associated with the crafting recipe if provided in the recipe itself.
-         *
-         * @param {Array<StoredItem>} dataSet
-         * @param {number} slot1
-         * @param {number} slot2
-         * @returns {{ dataSet: Array<StoredItem>; sound?: string } | undefined}
-         */
-        combine(
-            dataSet: Array<StoredItem>,
-            slot1: number,
-            slot2: number,
-            type: 'inventory' | 'toolbar' | 'custom',
-        ): { dataSet: Array<StoredItem>; sound?: string } | undefined {
-            if (slot1 === slot2) {
-                return undefined;
+        }
+    } else {
+        if (recipe.result.data) {
+            newItem.data = Object.assign(newItem.data, recipe.result.data);
+        }
+
+        // Combines data sets based on specified data migration by dbNames.
+        if (recipe.dataMigration && recipe.dataMigration.length >= 1) {
+            const firstCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
+            newItem.data = Object.assign(newItem.data, firstCombine.data);
+
+            if (recipe.dataMigration.length >= 2) {
+                const secondCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
+                newItem.data = Object.assign(newItem.data, secondCombine.data);
             }
+        }
+    }
 
-            const item1 = Athena.systems.itemManager.slot.getAt(slot1, dataSet);
-            const item2 = Athena.systems.itemManager.slot.getAt(slot2, dataSet);
+    // Remove quantities from original data set...
+    let newData = deepCloneArray<StoredItem>(dataSet);
+    for (let i = 0; i < recipe.combo.length; i++) {
+        newData = Athena.systems.inventory.manager.sub(
+            { dbName: recipe.combo[i], quantity: recipe.quantities[i] },
+            newData,
+        );
 
-            if (typeof item1 === 'undefined' || typeof item2 === 'undefined') {
-                return undefined;
-            }
+        if (typeof newData === 'undefined') {
+            return undefined;
+        }
+    }
 
-            const recipe = ItemCrafting.recipe.find([item1.dbName, item2.dbName]);
-            if (typeof recipe === 'undefined') {
-                return undefined;
-            }
+    newData = Athena.systems.inventory.manager.add(newItem, newData, type);
+    if (typeof newData === 'undefined') {
+        return undefined;
+    }
 
-            // Verify Quantities
-            if (!Athena.systems.itemManager.quantity.has(dataSet, recipe.combo[0], recipe.quantities[0])) {
-                return undefined;
-            }
-
-            if (!Athena.systems.itemManager.quantity.has(dataSet, recipe.combo[1], recipe.quantities[1])) {
-                return undefined;
-            }
-
-            // Recipe found; now to remove both items.
-            const baseItem = Athena.systems.itemFactory.sync.getBaseItem(recipe.result.dbName, recipe.result.version);
-            if (typeof baseItem === 'undefined') {
-                alt.logWarning(`Aborted Recipe. Recipe ${recipe.uid} cannot find item provided in result.`);
-                return undefined;
-            }
-
-            // Attempt to find an open slot to combine data into.
-            const openSlot = Athena.systems.itemManager.slot.findOpen(type, dataSet);
-            if (typeof openSlot === 'undefined') {
-                return undefined;
-            }
-
-            let newItem: Omit<StoredItem, 'slot'> = {
-                dbName: recipe.result.dbName,
-                quantity: recipe.result.quantity,
-                version: recipe.result.version,
-                data: baseItem.data ? deepCloneObject(baseItem.data) : {},
-            };
-
-            if (typeof recipe.result.data === 'function') {
-                newItem.data = recipe.result.data(item1, item2);
-
-                if (typeof newItem.data === 'undefined') {
-                    return undefined;
-                }
-            } else {
-                if (recipe.result.data) {
-                    newItem.data = Object.assign(newItem.data, recipe.result.data);
-                }
-
-                // Combines data sets based on specified data migration by dbNames.
-                if (recipe.dataMigration && recipe.dataMigration.length >= 1) {
-                    const firstCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
-                    newItem.data = Object.assign(newItem.data, firstCombine.data);
-
-                    if (recipe.dataMigration.length >= 2) {
-                        const secondCombine = recipe.dataMigration[0] === item1.dbName ? item1 : item2;
-                        newItem.data = Object.assign(newItem.data, secondCombine.data);
-                    }
-                }
-            }
-
-            // Remove quantities from original data set...
-            let newData = deepCloneArray<StoredItem>(dataSet);
-            for (let i = 0; i < recipe.combo.length; i++) {
-                newData = Athena.systems.itemManager.inventory.sub(
-                    { dbName: recipe.combo[i], quantity: recipe.quantities[i] },
-                    newData,
-                );
-
-                if (typeof newData === 'undefined') {
-                    return undefined;
-                }
-            }
-
-            newData = Athena.systems.itemManager.inventory.add(newItem, newData, type);
-            if (typeof newData === 'undefined') {
-                return undefined;
-            }
-
-            return { dataSet: newData, sound: recipe.sound };
-        },
-    },
-};
+    return { dataSet: newData, sound: recipe.sound };
+}

@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import { getWeatherFromString, WEATHER_KEY } from '@AthenaShared/utility/weather';
 import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 
 /**
  * THIS IS A DEFAULT SYSTEM.

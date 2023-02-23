@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 
 Athena.systems.messenger.commands.register(
     'setskin',

@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { INVENTORY_EVENTS } from '@AthenaPlugins/core-inventory/shared/events';
 import { DualSlotInfo, InventoryType } from '@AthenaPlugins/core-inventory/shared/interfaces';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';

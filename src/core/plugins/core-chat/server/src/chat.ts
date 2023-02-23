@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CHAT_CONFIG } from '../../shared/config';
 
 function handleMessage(player: alt.Player, msg: string) {

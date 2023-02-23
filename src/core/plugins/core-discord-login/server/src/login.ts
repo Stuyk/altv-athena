@@ -7,7 +7,7 @@ import { DEFAULT_CONFIG } from '@AthenaServer/athena/main';
 import { PlayerEvents } from '@AthenaServer/events/playerEvents';
 import VehicleFuncs from '@AthenaServer/extensions/vehicleFuncs';
 import { Account } from '@AthenaServer/interface/iAccount';
-import { Collections } from '@AthenaServer/interface/iDatabaseCollections';
+import { Collections } from '@AthenaServer/database/collections';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 import { AccountSystem } from '@AthenaServer/systems/account';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
@@ -16,7 +16,7 @@ import { LoginInjectionNames, TryLoginCallback } from '@AthenaServer/systems/inj
 import { VehicleSystem } from '@AthenaServer/systems/vehicle';
 import { DevModeOverride } from '@AthenaServer/systems/dev';
 import { onTick } from '@AthenaServer/systems/tick';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 
 const UserRelation: { [key: number]: string } = {};
 const TryLoginInjections: Array<TryLoginCallback> = [];

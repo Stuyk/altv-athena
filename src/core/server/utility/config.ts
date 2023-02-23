@@ -11,81 +11,83 @@ let configCache: IConfig;
 let firstRun = true;
 let isVueDebug = false;
 
-export default {
-    get: (): IConfig | undefined => {
-        // Return the cached config to prevent reading twice.
-        if (configCache) {
-            return configCache;
-        }
+export function get(): IConfig | undefined {
+    // Return the cached config to prevent reading twice.
+    if (configCache) {
+        return configCache;
+    }
 
-        // Fetch the configuration
-        if (!fs.existsSync(DefaultConfigName)) {
-            alt.logWarning(`${DefaultConfigName} does not exist in root directory.`);
-            alt.logWarning(`Please get ${DefaultConfigName} from default server files.`);
-            process.exit(1);
-        }
+    // Fetch the configuration
+    if (!fs.existsSync(DefaultConfigName)) {
+        alt.logWarning(`${DefaultConfigName} does not exist in root directory.`);
+        alt.logWarning(`Please get ${DefaultConfigName} from default server files.`);
+        process.exit(1);
+    }
 
-        let config: IConfig;
+    let config: IConfig;
 
+    try {
+        config = JSON.parse(fs.readFileSync(DefaultConfigName).toString());
+    } catch (err) {
+        alt.logWarning(`${DefaultConfigName} has formatting errors.`);
+        alt.logWarning(`Please use https://jsonlint.com/ to verify your configuration.`);
+        process.exit(1);
+    }
+
+    const file = fs.readFileSync(DefaultServerCFGName).toString();
+    if (file.includes(`env: "dev"`) || file.includes('env = "dev"')) {
+        config.USE_DEV_MODE = true;
+    }
+
+    if (file.includes('vue-athena')) {
         try {
-            config = JSON.parse(fs.readFileSync(DefaultConfigName).toString());
+            const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
+                alt.log(`~c~Vue Server: ~lg~http://localhost:3000`);
+                isVueDebug = true;
+                sock.destroy();
+            });
         } catch (err) {
-            alt.logWarning(`${DefaultConfigName} has formatting errors.`);
-            alt.logWarning(`Please use https://jsonlint.com/ to verify your configuration.`);
-            process.exit(1);
+            alt.logWarning(``);
         }
+    }
 
-        const file = fs.readFileSync(DefaultServerCFGName).toString();
-        if (file.includes(`env: "dev"`) || file.includes('env = "dev"')) {
-            config.USE_DEV_MODE = true;
-        }
+    // Finish Up
+    configCache = config;
+    firstRun = false;
+    return config;
+}
+/**
+ * Check if the current server instance is running in dev mode.
+ *
+ * @return {boolean}
+ */
+export function isDevMode(): boolean {
+    if (!configCache || !configCache.USE_DEV_MODE) {
+        return false;
+    }
 
-        if (file.includes('vue-athena')) {
-            try {
-                const sock = net.createConnection(DefaultVitePort, DefaultViteServer, () => {
-                    alt.log(`~c~Vue Server: ~lg~http://localhost:3000`);
-                    isVueDebug = true;
-                    sock.destroy();
-                });
-            } catch (err) {
-                alt.logWarning(``);
-            }
-        }
+    return configCache.USE_DEV_MODE;
+}
+export function getViteServer(): string {
+    return `http://${DefaultViteServer}:${DefaultVitePort}`;
+}
 
-        // Finish Up
-        configCache = config;
-        firstRun = false;
-        return config;
-    },
-    /**
-     * Check if the current server instance is running in dev mode.
-     *
-     * @return {boolean}
-     */
-    isDevMode(): boolean {
-        if (!configCache || !configCache.USE_DEV_MODE) {
-            return false;
-        }
+export function getVueDebugMode(): boolean {
+    return isVueDebug;
+}
 
-        return configCache.USE_DEV_MODE;
-    },
-    getViteServer(): string {
-        return `http://${DefaultViteServer}:${DefaultVitePort}`;
-    },
-    getVueDebugMode(): boolean {
-        return isVueDebug;
-    },
-    getAthenaVersion(): string {
-        const file = fs.readFileSync('package.json').toString();
-        let data: { version: string };
+export function getAthenaVersion(): string {
+    const file = fs.readFileSync('package.json').toString();
+    let data: { version: string };
 
-        try {
-            data = JSON.parse(file);
-        } catch (err) {
-            alt.logError(`Failed to read package.json. Run your package.json through a JSON linter. Google it.`);
-            process.exit(1);
-        }
+    try {
+        data = JSON.parse(file);
+    } catch (err) {
+        alt.logError(`Failed to read package.json. Run your package.json through a JSON linter. Google it.`);
+        process.exit(1);
+    }
 
-        return data.version;
-    },
-};
+    return data.version;
+}
+
+export default { get, isDevMode, getViteServer, getVueDebugMode, getAthenaVersion };

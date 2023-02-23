@@ -1,11 +1,11 @@
 import * as alt from 'alt-server';
 
 import { PluginSystem } from '../plugins';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
 import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { sha256Random } from '@AthenaServer/utility/encryption';
+import { sha256Random } from '@AthenaServer/utility/hash';
 import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 
 /**
@@ -47,7 +47,7 @@ const Internal = {
         Athena.document.character.set(player, 'toolbar', toolbar, true);
     },
     weaponUpdateTick() {
-        const players = Athena.get.players.onlineWithWeapons();
+        const players = Athena.getters.players.onlineWithWeapons();
         for (let armedPlayer of players) {
             if (!armedPlayer || !armedPlayer.valid) {
                 continue;
@@ -88,7 +88,7 @@ const Internal = {
             return;
         }
 
-        Athena.systems.itemFactory.async.upsert({
+        Athena.systems.inventory.factory.upsertAsync({
             dbName: 'ammo-box',
             data: {
                 ammo: 32,
@@ -102,7 +102,7 @@ const Internal = {
 
         const weaponList = getWeaponMap();
         Object.keys(weaponList).forEach((key) => {
-            Athena.systems.itemCrafting.recipe.add({
+            Athena.systems.inventory.crafting.addRecipe({
                 uid: `${key}-ammo-box`,
                 combo: [key, 'ammo-box'],
                 quantities: [1, 1],

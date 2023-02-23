@@ -1,21 +1,8 @@
-import { DefaultAmmoSystem } from '@AthenaServer/systems/defaults/ammo';
-import { DefaultDeathSystem } from '@AthenaServer/systems/defaults/death';
-import { DefaultHospitalBlips } from '@AthenaServer/systems/defaults/hospitalBlips';
-import { DefaultInventorySystem } from '@AthenaServer/systems/defaults/inventory';
-import { DefaultTimeSystem } from '@AthenaServer/systems/defaults/time';
-import { DefaultToolbarSystem } from '@AthenaServer/systems/defaults/toolbar';
-import { DefaultWeaponItemsSystem } from '@AthenaServer/systems/defaults/weaponItems';
-import { DefaultWeatherSystem } from '@AthenaServer/systems/defaults/weather';
-
-export const defaultSystemsConst = {
-    ammo: DefaultAmmoSystem,
-    blips: {
-        hospital: DefaultHospitalBlips,
-    },
-    death: DefaultDeathSystem,
-    inventory: DefaultInventorySystem,
-    time: DefaultTimeSystem,
-    toolbar: DefaultToolbarSystem,
-    weaponItems: DefaultWeaponItemsSystem,
-    weather: DefaultWeatherSystem,
-};
+export { DefaultAmmoSystem as ammo } from '@AthenaServer/systems/defaults/ammo';
+export { DefaultDeathSystem as death } from '@AthenaServer/systems/defaults/death';
+export { DefaultHospitalBlips as hospitalBlips } from '@AthenaServer/systems/defaults/hospitalBlips';
+export { DefaultInventorySystem as inventory } from '@AthenaServer/systems/defaults/inventory';
+export { DefaultTimeSystem as time } from '@AthenaServer/systems/defaults/time';
+export { DefaultToolbarSystem as toolbar } from '@AthenaServer/systems/defaults/toolbar';
+export { DefaultWeaponItemsSystem as weaponItems } from '@AthenaServer/systems/defaults/weaponItems';
+export { DefaultWeatherSystem as weather } from '@AthenaServer/systems/defaults/weather';

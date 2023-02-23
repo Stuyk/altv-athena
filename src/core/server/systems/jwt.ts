@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 import { Account } from '../interface/iAccount';
 import nJWT from 'njwt';
 import { Global } from './global';
-import { sha256Random } from '../utility/encryption';
+import { sha256Random } from '../utility/hash';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 // Do not change; it is just a key to lookup in the database.

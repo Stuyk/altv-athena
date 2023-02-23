@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { ClothingComponent, StoredItem } from '@AthenaShared/interfaces/item';
 import { clothingComponentToIconName, clothingItemToIconName } from '@AthenaShared/utility/clothing';
 
-
-Athena.systems.permission.account.has
+Athena.systems.permission.account.has;
 
 Athena.systems.messenger.commands.register(
     'setclothing',

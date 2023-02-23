@@ -1,7 +1,7 @@
 import Database from '@stuyk/ezmongodb';
 import * as alt from 'alt-server';
 import { Player } from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { CharacterSystem } from '@AthenaServer/systems/character';
 import { Character } from '@AthenaShared/interfaces/character';

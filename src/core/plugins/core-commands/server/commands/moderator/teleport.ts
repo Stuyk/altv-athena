@@ -1,5 +1,5 @@
 // import alt from 'alt-server';
-// import { Athena } from '@AthenaServer/api/athena';
+// import * as Athena from '@AthenaServer/api/athena';
 // import { command } from '@AthenaServer/decorators/commands';
 // import ChatController from '@AthenaPlugins/core-chat/server/src/chat';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';

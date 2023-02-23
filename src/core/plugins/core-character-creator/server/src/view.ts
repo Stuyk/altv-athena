@@ -1,5 +1,5 @@
 import * as alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { CharacterSystem } from '@AthenaServer/systems/character';
 import { Appearance } from '@AthenaShared/interfaces/appearance';
 import { CharacterInfo } from '@AthenaShared/interfaces/characterInfo';
@@ -65,7 +65,7 @@ class InternalFunctions {
         CreatorList[player.id] = totalCharacters;
 
         player.visible = false;
-        Athena.player.set.frozen(player, true);
+        player.frozen = true;
         Athena.player.safe.setPosition(
             player,
             CHARACTER_CREATOR_CONFIG.CHARACTER_CREATOR_POS.x,

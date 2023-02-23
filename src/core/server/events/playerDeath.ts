@@ -1,7 +1,8 @@
-import { Athena } from '@AthenaServer/api/athena';
 import * as alt from 'alt-server';
+
+import * as Athena from '@AthenaServer/api';
 import { VehicleSystem } from '../systems/vehicle';
-import { PlayerEvents } from './playerEvents';
+import * as PlayerEvents from './playerEvents';
 
 function handleDeath(victim: alt.Player, killer: alt.Entity, weaponHash: any): void {
     const victimData = Athena.document.character.get(victim);
@@ -9,11 +10,6 @@ function handleDeath(victim: alt.Player, killer: alt.Entity, weaponHash: any): v
     if (victim && victim.valid && victimData && victimData._id) {
         if (victim.vehicle) {
             victim.pos = victim.vehicle.pos;
-        }
-
-        // Stop the player from pushing a vehicle if it is being pushed.
-        if (victim.isPushingVehicle) {
-            VehicleSystem.stopPush(victim);
         }
 
         // Change the plugin if you want to modify death behavior.

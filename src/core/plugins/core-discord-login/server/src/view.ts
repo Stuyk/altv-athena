@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { AgendaOrder } from '@AthenaServer/systems/agenda';
 import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 import { LoginController } from './login';
 import { DISCORD_LOCALES } from '../../shared/locales';
 import { JwtProvider } from '@AthenaServer/systems/jwt';

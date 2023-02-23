@@ -102,3 +102,156 @@ export function vectorLerp(vector1: alt.IVector3, vector2: alt.IVector3, l: numb
 
     return { x: x, y: y, z: z };
 }
+
+/**
+ * SERVER ONLY
+ * Gets the direction the player is facing.
+ * @param {alt.IVector3} rot
+ */
+export function getForwardVector(rot: alt.IVector3): alt.IVector3 {
+    return {
+        x: fwdX(rot.x, rot.z),
+        y: fwdY(rot.x, rot.z),
+        z: fwdZ(rot.x),
+    } as alt.IVector3;
+}
+
+/**
+ * SERVER ONLY
+ * Return a position in front of a player based on distance.
+ * @export
+ * @param {alt.Player} player
+ * @param {number} distance
+ * @return {alt.Vector3}
+ */
+export function getVectorInFrontOfPlayer(
+    entity: { rot: alt.IVector3; pos: alt.IVector3 },
+    distance: number,
+): alt.Vector3 {
+    const forwardVector = getForwardVector(entity.rot);
+    const posFront = {
+        x: entity.pos.x + forwardVector.x * distance,
+        y: entity.pos.y + forwardVector.y * distance,
+        z: entity.pos.z,
+    };
+
+    return new alt.Vector3(posFront.x, posFront.y, posFront.z);
+}
+
+/**
+ * Determine if a vector is between vectors.
+ * @param {alt.IVector3} pos
+ * @param {alt.IVector3} vector1
+ * @param {alt.IVector3} vector2
+ * @returns {boolean}
+ */
+export function isBetweenVectors(pos: alt.IVector3, vector1: alt.IVector3, vector2: alt.IVector3): boolean {
+    const validX = pos.x > vector1.x && pos.x < vector2.x;
+    const validY = pos.y > vector1.y && pos.y < vector2.y;
+    return validX && validY ? true : false;
+}
+
+/**
+ * Get the closest server entity type. Server only.
+ * @template T
+ * @param {alt.IVector3} playerPosition
+ * @param {alt.IVector3} rot player rotation
+ * @param {Array<{ pos: alt.IVector3; valid?: boolean }>} entities
+ * @param {number} distance
+ * @return {*}  {(T | null)}
+ */
+export function getClosestEntity<T>(
+    playerPosition: alt.IVector3,
+    rot: alt.IVector3,
+    entities: Array<{ pos: alt.IVector3; valid?: boolean }>,
+    dist: number,
+    checkBackwards: boolean = false,
+): T | null {
+    const fwdVector = getForwardVector(rot);
+    let position;
+
+    if (!checkBackwards) {
+        position = {
+            x: playerPosition.x + fwdVector.x * dist,
+            y: playerPosition.y + fwdVector.y * dist,
+            z: playerPosition.z,
+        };
+    } else {
+        position = {
+            x: playerPosition.x - fwdVector.x * dist,
+            y: playerPosition.y - fwdVector.y * dist,
+            z: playerPosition.z,
+        };
+    }
+
+    let lastRange = 25;
+    let closestEntity;
+
+    for (let i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+
+        if (!entity || !entity.valid) {
+            continue;
+        }
+
+        const dist = distance(position, entity.pos);
+        if (dist > lastRange) {
+            continue;
+        }
+
+        closestEntity = entity;
+        lastRange = dist;
+    }
+
+    return closestEntity;
+}
+
+function fwdX(x: number, z: number): number {
+    const num = Math.abs(Math.cos(x));
+    return -Math.sin(z) * num;
+}
+
+function fwdY(x: number, z: number): number {
+    const num = Math.abs(Math.cos(x));
+    return Math.cos(z) * num;
+}
+
+function fwdZ(x: number): number {
+    return Math.sin(x);
+}
+
+export function getClosestOfType<T = { pos: alt.IVector3 }>(
+    pos: alt.IVector3,
+    elements: readonly (T & { pos: alt.IVector3 })[],
+    lastDistance = 100,
+): T | undefined {
+    let lastClosest;
+
+    for (let i = 0; i < elements.length; i++) {
+        const dist = distance(pos, elements[i].pos);
+        if (dist < lastDistance) {
+            lastClosest = elements[i];
+            lastDistance = dist;
+        }
+    }
+
+    return lastClosest;
+}
+
+export default {
+    distance,
+    distance2d,
+    fwdX,
+    fwdY,
+    fwdZ,
+    getClosestEntity,
+    getClosestOfType,
+    getClosestTypes,
+    getClosestVector,
+    getClosestVectorByPos,
+    getForwardVector,
+    getVectorInFrontOfPlayer,
+    isBetweenVectors,
+    lerp,
+    vectorLerp,
+};

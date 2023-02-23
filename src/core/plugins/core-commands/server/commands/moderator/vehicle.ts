@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { Athena } from '@AthenaServer/api/athena';
+import * as Athena from '@AthenaServer/api';
 // import { command } from '@AthenaServer/decorators/commands';
 // import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
 // import { LOCALE_KEYS } from '@AthenaShared/locale/languages/keys';

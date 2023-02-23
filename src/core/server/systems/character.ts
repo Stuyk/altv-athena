@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
-import { Athena } from '../api/athena';
+import * as Athena from '../api';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { PlayerEvents } from '../events/playerEvents';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { Character, CharacterDefaults } from '@AthenaShared/interfaces/character';
@@ -135,13 +134,13 @@ const CharacterSystemRef = {
         }
 
         Athena.player.sync.appearance(player, data.appearance as Appearance);
-        Athena.systems.itemClothing.update(player);
+        Athena.systems.itemClothing.updateClothing(player);
 
         alt.emitClient(player, SYSTEM_EVENTS.TICKS_START);
 
         // Set player dimension to zero.
         Athena.player.safe.setDimension(player, 0);
-        Athena.player.set.frozen(player, true);
+        player.frozen = true;
 
         if (data.dimension) {
             Athena.player.safe.setDimension(player, data.dimension);
@@ -198,7 +197,7 @@ const CharacterSystemRef = {
 
             // Finish Selection
             Athena.systems.itemWeapon.update(player);
-            Athena.player.set.frozen(player, false);
+            player.frozen = false;
             player.visible = true;
             player.hasFullySpawned = true;
 
@@ -207,7 +206,7 @@ const CharacterSystemRef = {
                 await callback(player);
             }
 
-            PlayerEvents.trigger('selected-character', player);
+            Athena.events.player.trigger('selected-character', player);
         }, 500);
     },
 

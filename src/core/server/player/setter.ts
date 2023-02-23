@@ -1,0 +1,69 @@
+import * as alt from 'alt-server';
+import * as Athena from '../api';
+import * as emit from './emit';
+import * as PlayerEvents from '@AthenaServer/events/playerEvents';
+
+import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';
+import { ActionMenu } from '@AthenaShared/interfaces/actions';
+import { Account } from '../interface/iAccount';
+import { Collections } from '../database/collections';
+import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
+
+import { JwtProvider } from '../systems/jwt';
+import Database from '@stuyk/ezmongodb';
+
+/**
+ * Set the current account data for this player.
+ *
+ * @param {Partial<Account>} accountData
+ * @return {Promise<void>}
+ * @memberof SetPrototype
+ */
+export async function account(player: alt.Player, accountData: Account): Promise<void> {
+    if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
+        accountData.permissionLevel = PERMISSIONS.NONE;
+        Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
+    }
+
+    // Setup JWT Storage
+    accountData._id = accountData._id.toString();
+    const newToken = await JwtProvider.create(accountData as Account);
+    alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, newToken);
+
+    player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
+    emit.meta(player, 'permissionLevel', accountData.permissionLevel);
+
+    Athena.document.account.bind(player, accountData);
+    PlayerEvents.trigger('set-account-data', player);
+}
+
+export function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
+    alt.emitClient(player, SYSTEM_EVENTS.SET_ACTION_MENU, actionMenu);
+}
+
+/**
+ * Set this player as respawned.
+ * @param {(alt.Vector3 | null)} position Use null to find closest hospital.
+ * @memberof SetPrototype
+ */
+export function respawned(player: alt.Player, position: alt.IVector3): void {
+    Athena.document.character.set(player, 'isDead', false);
+    emit.meta(player, 'isDead', false);
+    PlayerEvents.trigger('respawned', player, position);
+}
+
+interface SetterFunctions {
+    account: typeof account;
+    actionMenu: typeof actionMenu;
+    respawned: typeof respawned;
+}
+
+const Overrides: Partial<SetterFunctions> = {};
+
+export function override(functionName: 'account', callback: typeof account);
+export function override(functionName: 'actionMenu', callback: typeof actionMenu);
+export function override(functionName: 'respawned', callback: typeof respawned);
+export function override(functionName: keyof SetterFunctions, callback: any): void {
+    Overrides[functionName] = callback;
+}

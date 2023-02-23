@@ -2,7 +2,7 @@ import { Character } from '@AthenaShared/interfaces/character';
 import * as alt from 'alt-server';
 import { PLAYER_SYNCED_META } from '../../shared/enums/playerSynced';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { Athena } from '../api/athena';
+import * as Athena from '../api';
 import { DEFAULT_CONFIG } from '../athena/main';
 import VehicleFuncs from '../extensions/vehicleFuncs';
 import { Injections } from './injections';
