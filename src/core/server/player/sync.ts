@@ -11,6 +11,10 @@ import * as Athena from '@AthenaServer/api';
  * @memberof SyncPrototype
  */
 export function currencyData(player: alt.Player): void {
+    if (Overrides.currencyData) {
+        return Overrides.currencyData(player);
+    }
+
     const keys: (keyof typeof CurrencyTypes)[] = <(keyof typeof CurrencyTypes)[]>Object.keys(CurrencyTypes);
     const data = Athena.document.character.get(player);
 
@@ -21,6 +25,10 @@ export function currencyData(player: alt.Player): void {
 }
 
 export function appearance(player: alt.Player, appearance: Appearance) {
+    if (Overrides.appearance) {
+        return Overrides.appearance(player, appearance);
+    }
+
     if (appearance.sex === 0) {
         player.model = 'mp_f_freemode_01';
     } else {
@@ -106,11 +114,19 @@ export function appearance(player: alt.Player, appearance: Appearance) {
  * @memberof SyncPrototype
  */
 export function syncedMeta(player: alt.Player): void {
+    if (Overrides.syncedMeta) {
+        return Overrides.syncedMeta(player);
+    }
+
     player.setSyncedMeta(PLAYER_SYNCED_META.PING, player.ping);
     player.setSyncedMeta(PLAYER_SYNCED_META.POSITION, player.pos);
 }
 
 export function playTime(player: alt.Player): void {
+    if (Overrides.playTime) {
+        return Overrides.playTime(player);
+    }
+
     const data = Athena.document.character.get(player);
     const newHours = (data?.hours ?? 0) + 0.0166666666666667;
     Athena.document.character.set(player, 'hours', newHours);
@@ -130,6 +146,13 @@ export function override(functionName: 'currencyData', callback: typeof currency
 export function override(functionName: 'appearance', callback: typeof appearance);
 export function override(functionName: 'syncedMeta', callback: typeof syncedMeta);
 export function override(functionName: 'playTime', callback: typeof playTime);
+/**
+ * Used to override any sync functions
+ *
+ * @export
+ * @param {keyof SyncFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof SyncFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

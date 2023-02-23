@@ -16,7 +16,6 @@ import { Task, TaskCallback } from '@AthenaShared/interfaces/taskTimeline';
 import { IWheelOption } from '@AthenaShared/interfaces/wheelMenu';
 import { sha256Random } from '../utility/hash';
 import { AcceptDeclineEvent } from '@AthenaShared/interfaces/acceptDeclineEvent';
-import { getters } from '@AthenaServer/systems/getters';
 
 /**
  * Play an alarm on this player.
@@ -27,6 +26,10 @@ import { getters } from '@AthenaServer/systems/getters';
  * @memberof EmitPrototype
  */
 export function startAlarm(player: alt.Player, name: string): void {
+    if (Overrides.startAlarm) {
+        return Overrides.startAlarm(player, name);
+    }
+
     const data = Athena.document.character.get(player);
     if (data.isDead) {
         alt.logWarning(`[Athena] Cannot play alarm ${name} while player is dead.`);
@@ -42,6 +45,10 @@ export function startAlarm(player: alt.Player, name: string): void {
  * @param {string} name
  */
 export function stopAlarm(player: alt.Player, name: string) {
+    if (Overrides.stopAlarm) {
+        return Overrides.stopAlarm(player, name);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -54,6 +61,10 @@ export function stopAlarm(player: alt.Player, name: string) {
  * @param {alt.Player} player
  */
 export function stopAllAlarms(player: alt.Player) {
+    if (Overrides.stopAllAlarms) {
+        return Overrides.stopAllAlarms(player);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -77,6 +88,10 @@ export function animation(
     flags: ANIMATION_FLAGS,
     duration: number = -1,
 ): void {
+    if (Overrides.animation) {
+        return Overrides.animation(player, dictionary, name, flags, duration);
+    }
+
     const data = Athena.document.character.get(player);
     if (data.isDead) {
         alt.logWarning(`[Athena] Cannot play ${dictionary}@${name} while player is dead.`);
@@ -93,6 +108,10 @@ export function animation(
  * @param {alt.Player} player
  */
 export function clearAnimation(player: alt.Player) {
+    if (Overrides.clearAnimation) {
+        return Overrides.clearAnimation(player);
+    }
+
     if (!player || !player.valid || player.vehicle) {
         return;
     }
@@ -116,6 +135,10 @@ export function clearAnimation(player: alt.Player) {
  * @memberof EmitPrototype
  */
 export function scenario(player: alt.Player, name: string, duration: number): void {
+    if (Overrides.scenario) {
+        return Overrides.scenario(player, name, duration);
+    }
+
     const data = Athena.document.character.get(player);
     if (data.isDead) {
         return;
@@ -131,6 +154,10 @@ export function scenario(player: alt.Player, name: string, duration: number): vo
  * @memberof EmitPrototype
  */
 export function meta(player: alt.Player, key: string, value: any): void {
+    if (Overrides.meta) {
+        return Overrides.meta(player, key, value);
+    }
+
     player.setLocalMeta(key, value);
 }
 
@@ -140,6 +167,10 @@ export function meta(player: alt.Player, key: string, value: any): void {
  * @memberof EmitPrototype
  */
 export function notification(player: alt.Player, message: string): void {
+    if (Overrides.notification) {
+        return Overrides.notification(player, message);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_NOTIFICATION, message);
 }
 
@@ -149,12 +180,16 @@ export function notification(player: alt.Player, message: string): void {
  * @param {boolean} [emitToNearbyPlayers=false]
  */
 export function particle(player: alt.Player, particle: Particle, emitToNearbyPlayers = false): void {
+    if (Overrides.particle) {
+        return Overrides.particle(player, particle, emitToNearbyPlayers);
+    }
+
     if (!emitToNearbyPlayers) {
         alt.emitClient(player, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
         return;
     }
 
-    const closestPlayers = getters.players.inRangeWithDistance(player.pos, 10);
+    const closestPlayers = Athena.getters.players.inRangeWithDistance(player.pos, 10);
     for (let i = 0; i < closestPlayers.length; i++) {
         const player = closestPlayers[i].player;
         alt.emitClient(player, SYSTEM_EVENTS.PLAY_PARTICLE_EFFECT, particle);
@@ -168,6 +203,10 @@ export function particle(player: alt.Player, particle: Particle, emitToNearbyPla
  * @param {number} duration
  */
 export function createMissionText(player: alt.Player, text: string, duration?: number) {
+    if (Overrides.createMissionText) {
+        return Overrides.createMissionText(player, text, duration);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_MISSION_TEXT, text, duration);
 }
 
@@ -178,6 +217,10 @@ export function createMissionText(player: alt.Player, text: string, duration?: n
  * @returns {string} A unique identifier to remove the progress bar.
  */
 export function createProgressBar(player: alt.Player, progressbar: ProgressBar): string {
+    if (Overrides.createProgressBar) {
+        return Overrides.createProgressBar(player, progressbar);
+    }
+
     if (!progressbar.uid) {
         progressbar.uid = sha256Random(JSON.stringify(progressbar));
     }
@@ -192,18 +235,26 @@ export function createProgressBar(player: alt.Player, progressbar: ProgressBar):
  * @param {string} uid
  */
 export function removeProgressBar(player: alt.Player, uid: string) {
+    if (Overrides.removeProgressBar) {
+        return Overrides.removeProgressBar(player, uid);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PROGRESSBAR_REMOVE, uid);
 }
 
 /**
  * Play a sound without any positional data.
- * @param {alt.Player} p
+ * @param {alt.Player} player
  * @param {string} audioName
  * @param {number} [volume=0.35]
  * @param {string} soundInstantID, optional unique id to play sound instant
  */
-export function sound2D(p: alt.Player, audioName: string, volume: number = 0.35, soundInstantID?: string) {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume, soundInstantID);
+export function sound2D(player: alt.Player, audioName: string, volume: number = 0.35, soundInstantID?: string) {
+    if (Overrides.sound2D) {
+        return Overrides.sound2D(player, audioName, volume, soundInstantID);
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, audioName, volume, soundInstantID);
 }
 
 /**
@@ -213,8 +264,12 @@ export function sound2D(p: alt.Player, audioName: string, volume: number = 0.35,
  * @param {string} soundInstantID, optional unique id to play sound instant
  * @memberof EmitPrototype
  */
-export function sound3D(p: alt.Player, audioName: string, target: alt.Entity, soundInstantID?: string): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName, soundInstantID);
+export function sound3D(player: alt.Player, audioName: string, target: alt.Entity, soundInstantID?: string): void {
+    if (Overrides.sound3D) {
+        return Overrides.sound3D(player, audioName, target, soundInstantID);
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, target, audioName, soundInstantID);
 }
 
 /**
@@ -224,8 +279,12 @@ export function sound3D(p: alt.Player, audioName: string, target: alt.Entity, so
  * @param {string} soundInstantID, optional unique id to play sound instant
  * @memberof EmitPrototype
  */
-export function soundStop(p: alt.Player, soundInstantID?: string): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, soundInstantID);
+export function soundStop(player: alt.Player, soundInstantID?: string): void {
+    if (Overrides.soundStop) {
+        return Overrides.soundStop(player, soundInstantID);
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_STOP, soundInstantID);
 }
 
 /**
@@ -234,8 +293,12 @@ export function soundStop(p: alt.Player, soundInstantID?: string): void {
  * @param {string} ref
  * @memberof EmitPrototype
  */
-export function soundFrontend(p: alt.Player, audioName: string, ref: string): void {
-    alt.emitClient(p, SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, audioName, ref);
+export function soundFrontend(player: alt.Player, audioName: string, ref: string): void {
+    if (Overrides.soundFrontend) {
+        return Overrides.soundFrontend(player, audioName, ref);
+    }
+
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_FRONTEND_SOUND, audioName, ref);
 }
 
 /**
@@ -243,10 +306,18 @@ export function soundFrontend(p: alt.Player, audioName: string, ref: string): vo
  * @param {Array<Task | TaskCallback>} tasks
  */
 export function taskTimeline(player: alt.Player, tasks: Array<Task | TaskCallback>) {
+    if (Overrides.taskTimeline) {
+        return Overrides.taskTimeline(player, tasks);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TASK_TIMELINE, tasks);
 }
 
 export function inputMenu(player: alt.Player, inputMenu: InputMenu) {
+    if (Overrides.inputMenu) {
+        return Overrides.inputMenu(player, inputMenu);
+    }
+
     alt.emitClient(player, View_Events_Input_Menu.SetMenu, inputMenu);
 }
 
@@ -256,6 +327,10 @@ export function inputMenu(player: alt.Player, inputMenu: InputMenu) {
  * @param {ISpinner} spinner
  */
 export function createSpinner(player: alt.Player, spinner: ISpinner) {
+    if (Overrides.createSpinner) {
+        return Overrides.createSpinner(player, spinner);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER, spinner);
 }
 
@@ -265,6 +340,10 @@ export function createSpinner(player: alt.Player, spinner: ISpinner) {
  * @param {alt.Player} player
  */
 export function clearSpinner(player: alt.Player) {
+    if (Overrides.clearSpinner) {
+        return Overrides.clearSpinner(player);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SPINNER_CLEAR);
 }
 
@@ -274,6 +353,10 @@ export function clearSpinner(player: alt.Player) {
  * @param {IErrorScreen} screen
  */
 export function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
+    if (Overrides.createErrorScreen) {
+        return Overrides.createErrorScreen(player, screen);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN, screen);
 }
 
@@ -282,6 +365,10 @@ export function createErrorScreen(player: alt.Player, screen: IErrorScreen) {
  * @param {alt.Player} player
  */
 export function clearErrorScreen(player: alt.Player) {
+    if (Overrides.clearErrorScreen) {
+        return Overrides.clearErrorScreen(player);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_ERROR_SCREEN_CLEAR);
 }
 
@@ -291,6 +378,10 @@ export function clearErrorScreen(player: alt.Player) {
  * @param {IErrorScreen} screen
  */
 export function createShard(player: alt.Player, shard: IShard) {
+    if (Overrides.createShard) {
+        return Overrides.createShard(player, shard);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD, shard);
 }
 
@@ -299,6 +390,10 @@ export function createShard(player: alt.Player, shard: IShard) {
  * @param {alt.Player} player
  */
 export function clearShard(player: alt.Player) {
+    if (Overrides.clearShard) {
+        return Overrides.clearShard(player);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SHARD_CLEAR);
 }
 
@@ -309,6 +404,10 @@ export function clearShard(player: alt.Player) {
  * @param {IErrorScreen} screen
  */
 export function createCredits(player: alt.Player, credits: ICredit) {
+    if (Overrides.createCredits) {
+        return Overrides.createCredits(player, credits);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS, credits);
 }
 
@@ -317,6 +416,10 @@ export function createCredits(player: alt.Player, credits: ICredit) {
  * @param {alt.Player} player
  */
 export function clearCredits(player: alt.Player) {
+    if (Overrides.clearCredits) {
+        return Overrides.clearCredits(player);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_CREDITS_CLEAR);
 }
 
@@ -330,6 +433,10 @@ export function clearCredits(player: alt.Player) {
  * @return {string} UID for attachable object
  */
 export function objectAttach(player: alt.Player, attachable: IAttachable, removeAfterMilliseconds = -1): string | null {
+    if (Overrides.objectAttach) {
+        return Overrides.objectAttach(player, attachable, removeAfterMilliseconds);
+    }
+
     if (!player || !player.valid) {
         return null;
     }
@@ -373,6 +480,10 @@ export function objectAttach(player: alt.Player, attachable: IAttachable, remove
  * @return {*}
  */
 export function objectRemove(player: alt.Player, uid: string) {
+    if (Overrides.objectRemove) {
+        return Overrides.objectRemove(player, uid);
+    }
+
     if (!player || !player.valid) {
         return;
     }
@@ -409,6 +520,10 @@ export function tempObjectLerp(
     end: alt.IVector3,
     speed: number,
 ) {
+    if (Overrides.tempObjectLerp) {
+        return Overrides.tempObjectLerp(player, model, start, end, speed);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_TEMP_OBJECT_LERP, model, start, end, speed);
 }
 
@@ -421,6 +536,10 @@ export function tempObjectLerp(
  * @param {Array<IWheelItem>} wheelItems
  */
 export function wheelMenu(player: alt.Player, label: string, wheelItems: Array<IWheelOption>) {
+    if (Overrides.wheelMenu) {
+        return Overrides.wheelMenu(player, label, wheelItems);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_WHEEL_MENU, label, wheelItems, true);
 }
 
@@ -431,7 +550,11 @@ export function wheelMenu(player: alt.Player, label: string, wheelItems: Array<I
  * @param {string} msg
  */
 export function message(player: alt.Player, msg: string) {
-    Athena.systems.messenger.player.send(player, msg);
+    if (Overrides.message) {
+        return Overrides.message(player, msg);
+    }
+
+    Athena.systems.messenger.messaging.send(player, msg);
 }
 
 /**
@@ -442,6 +565,10 @@ export function message(player: alt.Player, msg: string) {
  * @param {AcceptDeclineEvent} eventInfo
  */
 export function acceptDeclineEvent(player: alt.Player, eventInfo: AcceptDeclineEvent) {
+    if (Overrides.acceptDeclineEvent) {
+        return Overrides.acceptDeclineEvent(player, eventInfo);
+    }
+
     notification(player, `[UP ARROW] ~y~${eventInfo.question}`);
     player.emit(SYSTEM_EVENTS.ACCEPT_DECLINE_EVENT_SET, eventInfo);
 }
@@ -511,6 +638,13 @@ export function override(functionName: 'stopAllAlarms', callback: typeof stopAll
 export function override(functionName: 'taskTimeline', callback: typeof taskTimeline);
 export function override(functionName: 'tempObjectLerp', callback: typeof tempObjectLerp);
 export function override(functionName: 'wheelMenu', callback: typeof wheelMenu);
+/**
+ * Used to override any internal emit functions.
+ *
+ * @export
+ * @param {keyof EmitFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof EmitFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

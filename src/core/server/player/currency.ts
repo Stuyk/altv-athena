@@ -199,6 +199,13 @@ export function override(functionName: 'add', callback: typeof add);
 export function override(functionName: 'set', callback: typeof set);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'subAllCurrencies', callback: typeof subAllCurrencies);
+/**
+ * Used to override any internal currency functions.
+ *
+ * @export
+ * @param {keyof CurrencyFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof CurrencyFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

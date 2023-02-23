@@ -225,45 +225,55 @@ const InternalFunctions = {
     },
 };
 
-export const PermissionSystem = {
-    character: {
-        async add<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): Promise<boolean> {
-            return await InternalFunctions.add(player, perm, 'character');
-        },
-        async remove<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): Promise<boolean> {
-            return await InternalFunctions.remove(player, perm, 'character');
-        },
-        async clear(player: alt.Player) {
-            return await InternalFunctions.clear(player, 'character');
-        },
-        has<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): boolean {
-            return InternalFunctions.has(player, perm, 'character');
-        },
-        hasOne<CustomPerms = ''>(player: alt.Player, perms: Array<DefaultPerms | CustomPerms>): boolean {
-            return InternalFunctions.hasOne(player, perms, 'character');
-        },
-        hasAll<CustomPerms = ''>(player: alt.Player, perms: Array<DefaultPerms | CustomPerms>): boolean {
-            return InternalFunctions.hasAll(player, perms, 'character');
-        },
-    },
-    account: {
-        async add<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): Promise<boolean> {
-            return await InternalFunctions.add(player, perm, 'account');
-        },
-        async remove<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): Promise<boolean> {
-            return await InternalFunctions.remove(player, perm, 'account');
-        },
-        async clear(player: alt.Player) {
-            return await InternalFunctions.clear(player, 'account');
-        },
-        has<CustomPerms = ''>(player: alt.Player, perm: DefaultPerms | CustomPerms): boolean {
-            return InternalFunctions.has(player, perm, 'account');
-        },
-        hasOne<CustomPerms = ''>(player: alt.Player, perms: Array<DefaultPerms | CustomPerms>): boolean {
-            return InternalFunctions.hasOne(player, perms, 'account');
-        },
-        hasAll<CustomPerms = ''>(player: alt.Player, perms: Array<DefaultPerms | CustomPerms>): boolean {
-            return InternalFunctions.hasAll(player, perms, 'account');
-        },
-    },
+export async function add<CustomPerms = ''>(
+    type: 'character' | 'account',
+    player: alt.Player,
+    perm: DefaultPerms | CustomPerms,
+): Promise<boolean> {
+    return await InternalFunctions.add(player, perm, type);
+}
+
+export async function remove<CustomPerms = ''>(
+    type: 'character' | 'account',
+    player: alt.Player,
+    perm: DefaultPerms | CustomPerms,
+): Promise<boolean> {
+    return await InternalFunctions.remove(player, perm, type);
+}
+
+export async function clear(type: 'character' | 'account', player: alt.Player) {
+    return await InternalFunctions.clear(player, type);
+}
+
+export function has<CustomPerms = ''>(
+    type: 'character' | 'account',
+    player: alt.Player,
+    perm: DefaultPerms | CustomPerms,
+): boolean {
+    return InternalFunctions.has(player, perm, type);
+}
+
+export function hasOne<CustomPerms = ''>(
+    type: 'character' | 'account',
+    player: alt.Player,
+    perms: Array<DefaultPerms | CustomPerms>,
+): boolean {
+    return InternalFunctions.hasOne(player, perms, type);
+}
+
+export function hasAll<CustomPerms = ''>(
+    type: 'character' | 'account',
+    player: alt.Player,
+    perms: Array<DefaultPerms | CustomPerms>,
+): boolean {
+    return InternalFunctions.hasAll(player, perms, type);
+}
+
+export default {
+    add,
+    remove,
+    clear,
+    has,
+    hasOne,
+    hasAll,
 };

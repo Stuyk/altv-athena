@@ -93,7 +93,7 @@ Athena.systems.messenger.commands.register(
 );
 
 async function exampleItems() {
-    Athena.systems.itemFactory.async.upsert({
+    Athena.systems.inventory.factory.upsertAsync({
         dbName: 'clothing',
         data: {},
         icon: 'clothing',
@@ -110,7 +110,7 @@ async function exampleItems() {
         },
     });
 
-    Athena.systems.itemFactory.async.upsert({
+    Athena.systems.inventory.factory.upsertAsync({
         dbName: 'burger',
         data: { health: 5 },
         icon: 'burger',
@@ -121,7 +121,7 @@ async function exampleItems() {
         consumableEventToCall: 'edible',
     });
 
-    Athena.systems.itemFactory.async.upsert({
+    Athena.systems.inventory.factory.upsertAsync({
         dbName: 'potato',
         data: {
             health: 2,
@@ -134,7 +134,7 @@ async function exampleItems() {
         consumableEventToCall: 'edible',
     });
 
-    Athena.systems.itemFactory.async.upsert({
+    Athena.systems.inventory.factory.upsertAsync({
         dbName: 'cheese',
         data: {
             health: 1,
@@ -147,7 +147,7 @@ async function exampleItems() {
         consumableEventToCall: 'edible',
     });
 
-    Athena.systems.itemFactory.async.upsert({
+    Athena.systems.inventory.factory.upsertAsync({
         dbName: 'potato-with-cheese',
         data: {
             health: 5,
@@ -160,7 +160,7 @@ async function exampleItems() {
         consumableEventToCall: 'edible',
     });
 
-    Athena.systems.itemCrafting.recipe.add({
+    Athena.systems.inventory.crafting.addRecipe({
         uid: 'potato-with-cheese',
         combo: ['potato', 'cheese'],
         quantities: [1, 1],

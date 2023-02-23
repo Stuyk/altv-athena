@@ -10,7 +10,7 @@ import '../systems/inventory/factory';
 import '../systems/inventory/manager';
 import '../systems/job';
 import '../systems/jobTrigger';
-import '../systems/messenger';
+import '../systems/messenger/messaging';
 import '../systems/plugins';
 import '../systems/rules';
 import '../systems/streamer';

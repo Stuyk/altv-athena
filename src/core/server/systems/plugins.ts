@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { VehicleSystem } from './vehicle';
+// import { VehicleSystem } from './vehicle';
 
 const pluginRegistration: Array<{ name: string; callback: Function }> = [];
 const callbacks: Array<Function> = [];
@@ -24,7 +24,7 @@ async function loadPlugins() {
     await Promise.all(promises);
 
     // Load after plugins are initialized...
-    VehicleSystem.init();
+    // VehicleSystem.init();
 
     for (let callback of callbacks) {
         callback();

@@ -10,6 +10,10 @@ import * as Athena from '@AthenaServer/api';
  * @memberof SafePrototype
  */
 export function setPosition(player: alt.Player, x: number, y: number, z: number, doNotInvokeEventCall = false): void {
+    if (Overrides.setPosition) {
+        return Overrides.setPosition(player, x, y, z, doNotInvokeEventCall);
+    }
+
     if (!doNotInvokeEventCall) {
         Athena.events.player.trigger('player-pos-set', player, player.pos);
     }
@@ -40,6 +44,10 @@ export function addHealth(
     exactValue: boolean = false,
     doNotInvokeEventCall = false,
 ) {
+    if (Overrides.addHealth) {
+        return Overrides.addHealth(player, value, exactValue, doNotInvokeEventCall);
+    }
+
     if (!doNotInvokeEventCall) {
         Athena.events.player.trigger('player-health-set', player, player.health);
     }
@@ -70,6 +78,10 @@ export function subHealth(
     exactValue: boolean = false,
     doNotInvokeEventCall = false,
 ) {
+    if (Overrides.subHealth) {
+        return Overrides.subHealth(player, value, exactValue, doNotInvokeEventCall);
+    }
+
     if (!doNotInvokeEventCall) {
         Athena.events.player.trigger('player-health-set', player, player.health);
     }
@@ -99,6 +111,10 @@ export function addArmour(
     exactValue: boolean = false,
     doNotInvokeEventCall = false,
 ): void {
+    if (Overrides.addArmour) {
+        return Overrides.addArmour(player, value, exactValue, doNotInvokeEventCall);
+    }
+
     if (!doNotInvokeEventCall) {
         Athena.events.player.trigger('player-armour-set', player, player.armour);
     }
@@ -128,6 +144,10 @@ export function subArmour(
     exactValue: boolean = false,
     doNotInvokeEventCall = false,
 ): void {
+    if (Overrides.subArmour) {
+        return Overrides.subArmour(player, value, exactValue, doNotInvokeEventCall);
+    }
+
     if (!doNotInvokeEventCall) {
         Athena.events.player.trigger('player-armour-set', player, player.armour);
     }
@@ -144,7 +164,20 @@ export function subArmour(
 
     player.armour = player.armour - value;
 }
+
+/**
+ * Set the player's dimension safely.
+ *
+ * @export
+ * @param {alt.Player} player
+ * @param {number} value
+ * @return {*}
+ */
 export function setDimension(player: alt.Player, value: number) {
+    if (Overrides.setDimension) {
+        return Overrides.setDimension(player, value);
+    }
+
     player.dimension = value;
     player.setSyncedMeta(PLAYER_SYNCED_META.DIMENSION, value);
 }
@@ -166,6 +199,13 @@ export function override(functionName: 'subHealth', callback: typeof subHealth);
 export function override(functionName: 'addArmour', callback: typeof addArmour);
 export function override(functionName: 'subArmour', callback: typeof subArmour);
 export function override(functionName: 'setDimension', callback: typeof setDimension);
+/**
+ * Used to override any internal safe setter functions
+ *
+ * @export
+ * @param {keyof SafeFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof SafeFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

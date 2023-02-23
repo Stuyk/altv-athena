@@ -21,6 +21,10 @@ import Database from '@stuyk/ezmongodb';
  * @memberof SetPrototype
  */
 export async function account(player: alt.Player, accountData: Account): Promise<void> {
+    if (Overrides.account) {
+        return Overrides.account(player, accountData);
+    }
+
     if (typeof accountData.permissionLevel === 'undefined' || accountData.permissionLevel === null) {
         accountData.permissionLevel = PERMISSIONS.NONE;
         Database.updatePartialData(accountData._id, { permissionLevel: PERMISSIONS.NONE }, Collections.Accounts);
@@ -39,6 +43,10 @@ export async function account(player: alt.Player, accountData: Account): Promise
 }
 
 export function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
+    if (Overrides.actionMenu) {
+        return Overrides.actionMenu(player, actionMenu);
+    }
+
     alt.emitClient(player, SYSTEM_EVENTS.SET_ACTION_MENU, actionMenu);
 }
 
@@ -48,6 +56,10 @@ export function actionMenu(player: alt.Player, actionMenu: ActionMenu) {
  * @memberof SetPrototype
  */
 export function respawned(player: alt.Player, position: alt.IVector3): void {
+    if (Overrides.respawned) {
+        return Overrides.respawned(player, position);
+    }
+
     Athena.document.character.set(player, 'isDead', false);
     emit.meta(player, 'isDead', false);
     PlayerEvents.trigger('respawned', player, position);
@@ -64,6 +76,13 @@ const Overrides: Partial<SetterFunctions> = {};
 export function override(functionName: 'account', callback: typeof account);
 export function override(functionName: 'actionMenu', callback: typeof actionMenu);
 export function override(functionName: 'respawned', callback: typeof respawned);
+/**
+ * Used to override any setter functions
+ *
+ * @export
+ * @param {keyof SetterFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof SetterFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

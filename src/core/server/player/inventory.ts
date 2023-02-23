@@ -13,7 +13,11 @@ import { StoredItem } from '@AthenaShared/interfaces/item';
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
  */
-async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<boolean> {
+export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<boolean> {
+    if (Overrides.add) {
+        return Overrides.add(player, item);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -50,7 +54,11 @@ async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<
  * @param {Omit<StoredItem, 'slot'>} item
  * @return {Promise<boolean>}
  */
-async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'data'>): Promise<boolean> {
+export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'data'>): Promise<boolean> {
+    if (Overrides.sub) {
+        return Overrides.sub(player, item);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -77,7 +85,11 @@ async function sub(player: alt.Player, item: Omit<StoredItem, 'slot' | 'data'>):
  * @param {number} slot
  * @return {Promise<boolean>}
  */
-async function remove(player: alt.Player, slot: number): Promise<boolean> {
+export async function remove(player: alt.Player, slot: number): Promise<boolean> {
+    if (Overrides.remove) {
+        return Overrides.remove(player, slot);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -107,6 +119,13 @@ const Overrides: Partial<InventoryFunctions> = {};
 export function override(functionName: 'add', callback: typeof add);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'remove', callback: typeof remove);
+/**
+ * Used to override any internal inventory functions
+ *
+ * @export
+ * @param {keyof InventoryFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof InventoryFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }

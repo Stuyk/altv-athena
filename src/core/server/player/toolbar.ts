@@ -13,6 +13,10 @@ import { StoredItem } from '@AthenaShared/interfaces/item';
  * @return {Promise<boolean>}
  */
 export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<boolean> {
+    if (Overrides.add) {
+        return Overrides.add(player, item);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -44,6 +48,10 @@ export async function add(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * @return {Promise<boolean>}
  */
 export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot'>): Promise<boolean> {
+    if (Overrides.sub) {
+        return Overrides.sub(player, item);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -70,6 +78,10 @@ export async function sub(player: alt.Player, item: Omit<StoredItem, 'slot'>): P
  * @return {Promise<boolean>}
  */
 export async function remove(player: alt.Player, slot: number): Promise<boolean> {
+    if (Overrides.remove) {
+        return Overrides.remove(player, slot);
+    }
+
     const data = document.character.get(player);
     if (typeof data === 'undefined') {
         return false;
@@ -99,6 +111,13 @@ const Overrides: Partial<ToolbarFunctions> = {};
 export function override(functionName: 'add', callback: typeof add);
 export function override(functionName: 'sub', callback: typeof sub);
 export function override(functionName: 'remove', callback: typeof remove);
+/**
+ * Used to override any toolbar functions
+ *
+ * @export
+ * @param {keyof ToolbarFunctions} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof ToolbarFunctions, callback: any): void {
     Overrides[functionName] = callback;
 }
