@@ -1,16 +1,16 @@
 import * as alt from 'alt-server';
-import axios, { AxiosRequestConfig } from 'axios';
+import * as Athena from '@AthenaServer/api';
 
+import axios, { AxiosRequestConfig } from 'axios';
 import { AgendaSystem } from '@AthenaServer/systems/agenda';
 import { AgendaOrder } from '@AthenaServer/systems/agenda';
 import { DISCORD_LOGIN_EVENTS } from '../../shared/events';
-import * as Athena from '@AthenaServer/api';
 import { LoginController } from './login';
 import { DISCORD_LOCALES } from '../../shared/locales';
-import { JwtProvider } from '@AthenaServer/systems/jwt';
 import { Account } from '@AthenaServer/interface/iAccount';
 import { DiscordUser } from '@AthenaServer/interface/iDiscordUser';
 import { OAUTH_CONFIG } from '@AthenaPlugins/core-discord-login/shared/config';
+import Database from '@stuyk/ezmongodb';
 
 const url = `https://discord.com/api/oauth2/authorize?client_id=${OAUTH_CONFIG.DISCORD.CLIENT_ID}&redirect_uri=${OAUTH_CONFIG.URL}/auth&prompt=none&response_type=code&scope=identify%20email`;
 const UniquePlayerIdentifiers: { [player_id: string]: string } = {};
@@ -110,19 +110,19 @@ export class LoginView {
         }
 
         // Perform JWT Quick Login Lookup First
-        const token = await JwtProvider.fetch(player);
+        const token = await Athena.systems.jwt.fetch(player);
         if (typeof token === 'undefined') {
             LoginView.show(player);
             return;
         }
 
-        const identifier = await JwtProvider.verify(token);
+        const identifier = await Athena.systems.jwt.verify(token);
         if (typeof identifier === 'undefined') {
             LoginView.show(player);
             return;
         }
 
-        const account: Partial<Account> | null = await Athena.database.funcs.fetchData<Account>(
+        const account: Partial<Account> | null = await Database.fetchData<Account>(
             '_id',
             identifier,
             Athena.database.collections.Accounts,

@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { StreamerService } from '../systems/streamer';
 import { Door } from '@AthenaShared/interfaces/door';
 import { Doors } from '@AthenaShared/information/doors';
 import Database from '@stuyk/ezmongodb';
@@ -14,7 +13,7 @@ const globalDoors: Array<Door> = [];
 
 const InternalController = {
     async init() {
-        StreamerService.registerCallback(KEY, InternalController.update, 25);
+        Athena.systems.streamer.registerCallback(KEY, InternalController.update, 25);
 
         for (let door of Doors) {
             globalDoors.push(door);
@@ -39,7 +38,7 @@ const InternalController = {
         InternalController.refresh();
     },
     refresh() {
-        StreamerService.updateData(KEY, globalDoors);
+        Athena.systems.streamer.updateData(KEY, globalDoors);
     },
     update(player: alt.Player, doors: Array<Door>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_DOORS, doors);

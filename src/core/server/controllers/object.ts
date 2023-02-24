@@ -1,9 +1,8 @@
 import * as alt from 'alt-server';
-
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IObject } from '../../shared/interfaces/iObject';
 import { sha256Random } from '../utility/hash';
-import { StreamerService } from '../systems/streamer';
 
 const globalObjects: Array<IObject> = [];
 const KEY = 'objects';
@@ -15,7 +14,7 @@ const InternalController = {
      * @memberof ObjectController
      */
     init() {
-        StreamerService.registerCallback(KEY, InternalController.update);
+        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
     },
 
     /**
@@ -24,7 +23,7 @@ const InternalController = {
      * @memberof ObjectController
      */
     refresh() {
-        StreamerService.updateData(KEY, globalObjects);
+        Athena.systems.streamer.updateData(KEY, globalObjects);
     },
 
     /**

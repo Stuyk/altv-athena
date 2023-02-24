@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { TextLabel } from '../../shared/interfaces/textLabel';
-import { sha256Random } from '../utility/hash';
-import { StreamerService } from '../systems/streamer';
 
 const globalTextLabels: Array<TextLabel> = [];
 const KEY = 'labels';
@@ -17,7 +16,7 @@ const InternalController = {
      * @memberof InternalController
      */
     init() {
-        StreamerService.registerCallback(KEY, InternalController.update);
+        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
     },
 
     /**
@@ -25,7 +24,7 @@ const InternalController = {
      * @memberof InternalController
      */
     refresh() {
-        StreamerService.updateData(KEY, globalTextLabels);
+        Athena.systems.streamer.updateData(KEY, globalTextLabels);
     },
 
     /**
@@ -46,7 +45,7 @@ const InternalController = {
  */
 export function append(label: TextLabel): string {
     if (!label.uid) {
-        label.uid = sha256Random(JSON.stringify(label));
+        label.uid = Athena.utility.hash.sha256Random(JSON.stringify(label));
     }
 
     const index = globalTextLabels.findIndex((x) => x.uid === label.uid);
@@ -125,7 +124,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  */
 export function addToPlayer(player: alt.Player, textLabel: TextLabel): string {
     if (!textLabel.uid) {
-        textLabel.uid = sha256Random(JSON.stringify(textLabel));
+        textLabel.uid = Athena.utility.hash.sha256Random(JSON.stringify(textLabel));
     }
 
     textLabel.isServerWide = false;

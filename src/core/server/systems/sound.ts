@@ -40,70 +40,68 @@ interface CustomSoundInfo {
 
 const MAX_AUDIO_AREA_DISTANCE = 25;
 
-export class SoundSystem {
-    /**
-     * Play a single sound for a player.
-     *
-     * @static
-     * @param {alt.Player} player
-     * @param {CustomSoundInfo} soundInfo
-     * @memberof SoundSystem
-     */
-    static playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
-        if (soundInfo.target) {
-            alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
-            return;
-        }
-
-        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+/**
+ * Play a single sound for a player.
+ *
+ * @static
+ * @param {alt.Player} player
+ * @param {CustomSoundInfo} soundInfo
+ * @memberof SoundSystem
+ */
+export function playSound(player: alt.Player, soundInfo: CustomSoundInfo) {
+    if (soundInfo.target) {
+        alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
+        return;
     }
 
-    /**
-     * Play a custom non-frontend sound in a dimension.
-     * Specify an entity to make the sound play from that specific entity.
-     *
-     * @static
-     * @param {number} dimension
-     * @param {alt.Entity} [entity=null]
-     * @memberof Sound
-     */
-    static playSoundInDimension(dimension: number, soundInfo: Omit<CustomSoundInfo, 'pos'>) {
-        const players = [...alt.Player.all].filter((t) => t.dimension === dimension);
+    alt.emitClient(player, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+}
 
-        if (players.length <= 0) {
-            return;
-        }
+/**
+ * Play a custom non-frontend sound in a dimension.
+ * Specify an entity to make the sound play from that specific entity.
+ *
+ * @static
+ * @param {number} dimension
+ * @param {alt.Entity} [entity=null]
+ * @memberof Sound
+ */
+export function playSoundInDimension(dimension: number, soundInfo: Omit<CustomSoundInfo, 'pos'>) {
+    const players = [...alt.Player.all].filter((t) => t.dimension === dimension);
 
-        if (soundInfo.target) {
-            alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
-            return;
-        }
-
-        alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+    if (players.length <= 0) {
+        return;
     }
 
-    /**
-     * Play a custom sound in a 3D position for all players in the area.
-     *
-     * @static
-     * @param {(Required<Omit<CustomSoundInfo, 'target' | 'volume'>>)} soundInfo
-     * @return {*}
-     * @memberof Sound
-     */
-    static playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'target' | 'volume'>>) {
-        const players = [...alt.Player.all].filter((t) => {
-            const dist = distance2d(t.pos, soundInfo.pos);
-            if (dist > MAX_AUDIO_AREA_DISTANCE) {
-                return false;
-            }
+    if (soundInfo.target) {
+        alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D, soundInfo.target, soundInfo.audioName);
+        return;
+    }
 
-            return true;
-        });
+    alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_2D, soundInfo.audioName, soundInfo.volume);
+}
 
-        if (players.length <= 0) {
-            return;
+/**
+ * Play a custom sound in a 3D position for all players in the area.
+ *
+ * @static
+ * @param {(Required<Omit<CustomSoundInfo, 'target' | 'volume'>>)} soundInfo
+ * @return {*}
+ * @memberof Sound
+ */
+export function playSoundInArea(soundInfo: Required<Omit<CustomSoundInfo, 'target' | 'volume'>>) {
+    const players = [...alt.Player.all].filter((t) => {
+        const dist = distance2d(t.pos, soundInfo.pos);
+        if (dist > MAX_AUDIO_AREA_DISTANCE) {
+            return false;
         }
 
-        alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);
+        return true;
+    });
+
+    if (players.length <= 0) {
+        return;
     }
+
+    alt.emitClient(players, SYSTEM_EVENTS.PLAYER_EMIT_SOUND_3D_POSITIONAL, soundInfo.pos, soundInfo.audioName);
 }

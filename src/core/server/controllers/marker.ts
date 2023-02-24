@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Marker } from '../../shared/interfaces/marker';
 import { sha256Random } from '../utility/hash';
-import { StreamerService } from '../systems/streamer';
 
 const KEY = 'markers';
 const globalMarkers: Array<Marker> = [];
@@ -13,7 +13,7 @@ const InternalController = {
      * @memberof ServerMarkerController
      */
     init() {
-        StreamerService.registerCallback(KEY, InternalController.update);
+        Athena.systems.streamer.registerCallback(KEY, InternalController.update);
     },
 
     /**
@@ -21,7 +21,7 @@ const InternalController = {
      * @memberof ServerMarkerController
      */
     refresh() {
-        StreamerService.updateData(KEY, globalMarkers);
+        Athena.systems.streamer.updateData(KEY, globalMarkers);
     },
 
     /**

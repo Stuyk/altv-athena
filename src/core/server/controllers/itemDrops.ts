@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
-import { StreamerService } from '../systems/streamer';
 import { ItemDrop } from '@AthenaShared/interfaces/item';
 
 const KEY = 'item-drops';
@@ -9,11 +9,11 @@ const MAX_DISTANCE = 25;
 
 const InternalController = {
     async init() {
-        StreamerService.registerCallback(KEY, InternalController.update, MAX_DISTANCE);
+        Athena.systems.streamer.registerCallback(KEY, InternalController.update, MAX_DISTANCE);
         InternalController.refresh();
     },
     refresh() {
-        StreamerService.updateData(KEY, globalDrops);
+        Athena.systems.streamer.updateData(KEY, globalDrops);
     },
     update(player: alt.Player, drops: Array<ItemDrop>) {
         alt.emitClient(player, SYSTEM_EVENTS.POPULATE_ITEM_DROPS, drops);

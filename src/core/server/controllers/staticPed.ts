@@ -1,10 +1,9 @@
 import * as alt from 'alt-server';
 
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IPed } from '../../shared/interfaces/iPed';
 import { Animation } from '../../shared/interfaces/animation';
-import { StreamerService } from '../systems/streamer';
-import { sha256Random } from '../utility/hash';
 
 const globalPeds: Array<IPed> = [];
 const KEY = 'peds';
@@ -16,7 +15,7 @@ const InternalFunctions = {
      * @memberof PedController
      */
     init() {
-        StreamerService.registerCallback(KEY, InternalFunctions.update);
+        Athena.systems.streamer.registerCallback(KEY, InternalFunctions.update);
     },
 
     update(player: alt.Player, peds: Array<IPed>) {
@@ -29,7 +28,7 @@ const InternalFunctions = {
      * @memberof PedController
      */
     refresh() {
-        StreamerService.updateData(KEY, globalPeds);
+        Athena.systems.streamer.updateData(KEY, globalPeds);
     },
 };
 
@@ -41,7 +40,7 @@ const InternalFunctions = {
  */
 export function append(pedData: IPed): string {
     if (!pedData.uid) {
-        pedData.uid = sha256Random(JSON.stringify(pedData));
+        pedData.uid = Athena.utility.hash.sha256Random(JSON.stringify(pedData));
     }
 
     globalPeds.push(pedData);
@@ -90,7 +89,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  */
 export function addToPlayer(player: alt.Player, pedData: IPed): string {
     if (!pedData.uid) {
-        pedData.uid = sha256Random(JSON.stringify(pedData));
+        pedData.uid = Athena.utility.hash.sha256Random(JSON.stringify(pedData));
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_PED, pedData);

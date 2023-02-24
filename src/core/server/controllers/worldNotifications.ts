@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { IWorldNotification } from '../../shared/interfaces/iWorldNotification';
-import { sha256Random } from '../utility/hash';
-import { StreamerService } from '../systems/streamer';
 
 const KEY = 'world-notifications';
 const globalNotifications: Array<IWorldNotification> = [];
@@ -13,7 +12,7 @@ const InternalFunctions = {
      * @memberof WorldNotificationController
      */
     init() {
-        StreamerService.registerCallback(KEY, update);
+        Athena.systems.streamer.registerCallback(KEY, update);
     },
 
     /**
@@ -21,7 +20,7 @@ const InternalFunctions = {
      * @memberof WorldNotificationController
      */
     refresh() {
-        StreamerService.updateData(KEY, globalNotifications);
+        Athena.systems.streamer.updateData(KEY, globalNotifications);
     },
 };
 
@@ -33,7 +32,7 @@ const InternalFunctions = {
  */
 export function append(notification: IWorldNotification): string {
     if (!notification.uid) {
-        notification.uid = sha256Random(JSON.stringify(notification));
+        notification.uid = Athena.utility.hash.sha256Random(JSON.stringify(notification));
     }
 
     globalNotifications.push(notification);
@@ -79,7 +78,7 @@ export function removeFromPlayer(player: alt.Player, uid: string) {
  */
 export function addToPlayer(player: alt.Player, notification: IWorldNotification): string {
     if (!notification.uid) {
-        notification.uid = sha256Random(JSON.stringify(notification));
+        notification.uid = Athena.utility.hash.sha256Random(JSON.stringify(notification));
     }
 
     alt.emitClient(player, SYSTEM_EVENTS.APPEND_WORLD_NOTIFICATION, notification);

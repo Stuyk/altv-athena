@@ -1,5 +1,10 @@
+export * as character from '@AthenaServer/systems/character';
+export * as global from '@AthenaServer/systems/global';
 export * as identifier from '@AthenaServer/systems/identifier';
 export * as inventory from '@AthenaServer/systems/inventory';
+export * as jwt from '@AthenaServer/systems/jwt';
 export * as messenger from '@AthenaServer/systems/messenger';
 export * as permission from '@AthenaServer/systems/permission';
 export * as plugins from '@AthenaServer/systems/plugins';
+export * as sound from '@AthenaServer/systems/sound';
+export * as streamer from '@AthenaServer/systems/streamer';

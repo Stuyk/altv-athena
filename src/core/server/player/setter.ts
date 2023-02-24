@@ -9,8 +9,6 @@ import { ActionMenu } from '@AthenaShared/interfaces/actions';
 import { Account } from '../interface/iAccount';
 import { Collections } from '../database/collections';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
-
-import { JwtProvider } from '../systems/jwt';
 import Database from '@stuyk/ezmongodb';
 
 /**
@@ -32,7 +30,7 @@ export async function account(player: alt.Player, accountData: Account): Promise
 
     // Setup JWT Storage
     accountData._id = accountData._id.toString();
-    const newToken = await JwtProvider.create(accountData as Account);
+    const newToken = await Athena.systems.jwt.create(accountData as Account);
     alt.emitClient(player, SYSTEM_EVENTS.QUICK_TOKEN_UPDATE, newToken);
 
     player.setSyncedMeta(PLAYER_SYNCED_META.ACCOUNT_ID, accountData.id);
