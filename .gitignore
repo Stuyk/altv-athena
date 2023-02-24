@@ -27,7 +27,6 @@ dist-ssr
 server.cfg
 server.toml
 doc
-typedoc.json
 !scripts/streamer/dist
 package-lock.json
 

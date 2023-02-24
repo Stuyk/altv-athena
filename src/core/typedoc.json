@@ -1,0 +1,13 @@
+{
+    "entryPoints": ["./server/**/*.ts", "./shared/**/*.ts"],
+    "exclude": ["./server/api/**/*.ts"],
+    "out": "../../docs",
+    "skipErrorChecking": true,
+    "tsconfig": "./custom.json",
+    "plugin": ["typedoc-theme-hierarchy", "typedoc-plugin-external-resolver", "typedoc-plugin-missing-exports"],
+    "theme": "hierarchy",
+    "basePath": "./",
+    "entryPointStrategy": "expand",
+    "excludeInternal": true,
+    "excludeNotDocumented": true
+}
