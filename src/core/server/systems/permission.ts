@@ -225,6 +225,16 @@ const InternalFunctions = {
     },
 };
 
+/**
+ * Add a permission to an account or character.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @param {(DefaultPerms | CustomPerms)} perm
+ * @return {Promise<boolean>}
+ */
 export async function add<CustomPerms = ''>(
     type: 'character' | 'account',
     player: alt.Player,
@@ -233,6 +243,16 @@ export async function add<CustomPerms = ''>(
     return await InternalFunctions.add(player, perm, type);
 }
 
+/**
+ * Remove a permission from an account or character.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @param {(DefaultPerms | CustomPerms)} perm
+ * @return {Promise<boolean>}
+ */
 export async function remove<CustomPerms = ''>(
     type: 'character' | 'account',
     player: alt.Player,
@@ -241,10 +261,28 @@ export async function remove<CustomPerms = ''>(
     return await InternalFunctions.remove(player, perm, type);
 }
 
+/**
+ * Clear all permissions for an account or character.
+ *
+ * @export
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @return {Promise<void>}
+ */
 export async function clear(type: 'character' | 'account', player: alt.Player) {
     return await InternalFunctions.clear(player, type);
 }
 
+/**
+ * Check if a character or account has a single permission.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @param {(DefaultPerms | CustomPerms)} perm
+ * @return {boolean}
+ */
 export function has<CustomPerms = ''>(
     type: 'character' | 'account',
     player: alt.Player,
@@ -253,6 +291,16 @@ export function has<CustomPerms = ''>(
     return InternalFunctions.has(player, perm, type);
 }
 
+/**
+ * Check if a character or account has a atleast one permission.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @param {(Array<DefaultPerms | CustomPerms>)} perms
+ * @return {boolean}
+ */
 export function hasOne<CustomPerms = ''>(
     type: 'character' | 'account',
     player: alt.Player,
@@ -261,6 +309,16 @@ export function hasOne<CustomPerms = ''>(
     return InternalFunctions.hasOne(player, perms, type);
 }
 
+/**
+ * Check if a character or account has all the permissions.
+ *
+ * @export
+ * @template CustomPerms
+ * @param {('character' | 'account')} type
+ * @param {alt.Player} player
+ * @param {(Array<DefaultPerms | CustomPerms>)} perms
+ * @return {boolean}
+ */
 export function hasAll<CustomPerms = ''>(
     type: 'character' | 'account',
     player: alt.Player,
