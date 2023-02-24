@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 
-import { PluginSystem } from '../plugins';
 import * as Athena from '@AthenaServer/api';
 import { ClothingInfo, StoredItem } from '@AthenaShared/interfaces/item';
 
@@ -59,4 +58,4 @@ export const DefaultClothingCrafting = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

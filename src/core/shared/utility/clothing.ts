@@ -1,6 +1,9 @@
 import { ClothingComponent, DefaultItemBehavior, Item } from '@AthenaShared/interfaces/item';
 
-type ClothingInfo = { sex: number; components: Array<ClothingComponent> };
+/**
+ *
+ */
+export type ClothingInfo = { sex: number; components: Array<ClothingComponent> };
 
 /**
  * Converts clothing information to an icon name that can be used
@@ -8,7 +11,7 @@ type ClothingInfo = { sex: number; components: Array<ClothingComponent> };
  *
  * @export
  * @param {Item<DefaultItemBehavior, ClothingInfo>} item
- * @return {*}  {string}
+ * @return {string}
  */
 export function clothingItemToIconName(item: Item<DefaultItemBehavior, ClothingInfo>): string {
     // componentIdentifier-dlcHash-isProp?-isMaleOrFemale?-drawableID
@@ -29,6 +32,14 @@ export function clothingItemToIconName(item: Item<DefaultItemBehavior, ClothingI
     return iconName;
 }
 
+/**
+ * Converts a clothing component to the corresponding icon name that should be used.
+ *
+ * @export
+ * @param {number} sex
+ * @param {Array<ClothingComponent>} components
+ * @return {*}
+ */
 export function clothingComponentToIconName(sex: number, components: Array<ClothingComponent>) {
     const component = components[0];
     let iconName = `${component.id}-${component.dlc}-`;

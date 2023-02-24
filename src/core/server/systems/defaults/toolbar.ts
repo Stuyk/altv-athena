@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
-
-import { PluginSystem } from '../plugins';
 import * as Athena from '@AthenaServer/api';
+
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 /**
@@ -23,8 +22,8 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('respawned', Internal.unequipAllWeapons);
-        Athena.events.player.on('selected-character', Internal.processPlayer);
+        Athena.player.events.on('respawned', Internal.unequipAllWeapons);
+        Athena.player.events.on('selected-character', Internal.processPlayer);
         alt.onClient(SYSTEM_EVENTS.PLAYER_TOOLBAR_INVOKE, Internal.invoke);
     },
     /**
@@ -43,7 +42,7 @@ const Internal = {
      * @param {number} slot
      */
     invoke(player: alt.Player, slot: number, type: 'inventory' | 'toolbar' = 'toolbar') {
-        Athena.systems.itemManager.utility.useItem(player, slot, type);
+        Athena.systems.inventory.manager.useItem(player, slot, type);
     },
     /**
      * Unequip all weapons on respawn.
@@ -66,7 +65,7 @@ const Internal = {
         }
 
         Athena.document.character.set(player, 'toolbar', data.toolbar);
-        Athena.systems.itemWeapon.update(player);
+        Athena.systems.inventory.weapons.update(player);
     },
 };
 
@@ -77,4 +76,4 @@ export const DefaultToolbarSystem = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

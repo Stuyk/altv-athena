@@ -1,8 +1,6 @@
 import * as Athena from '@AthenaServer/api';
 import * as alt from 'alt-server';
 
-import { PluginSystem } from '../plugins';
-
 /**
  * THIS IS A DEFAULT SYSTEM.
  * IF YOU WANT TO DISABLE IT, MAKE A PLUGIN AND DISABLE IT THROUGH:
@@ -52,4 +50,4 @@ export const DefaultHospitalBlips = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

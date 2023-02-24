@@ -2,7 +2,7 @@ import * as alt from 'alt-server';
 
 import * as Athena from '@AthenaServer/api';
 import { VehicleSystem } from '../systems/vehicle';
-import * as PlayerEvents from './playerEvents';
+import * as PlayerEvents from '../player/events';
 
 function handleDeath(victim: alt.Player, killer: alt.Entity, weaponHash: any): void {
     const victimData = Athena.document.character.get(victim);

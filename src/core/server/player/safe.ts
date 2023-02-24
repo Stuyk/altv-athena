@@ -15,7 +15,7 @@ export function setPosition(player: alt.Player, x: number, y: number, z: number,
     }
 
     if (!doNotInvokeEventCall) {
-        Athena.events.player.trigger('player-pos-set', player, player.pos);
+        Athena.player.events.trigger('player-pos-set', player, player.pos);
     }
 
     if (!player.hasModel) {
@@ -49,7 +49,7 @@ export function addHealth(
     }
 
     if (!doNotInvokeEventCall) {
-        Athena.events.player.trigger('player-health-set', player, player.health);
+        Athena.player.events.trigger('player-health-set', player, player.health);
     }
 
     if (exactValue) {
@@ -83,7 +83,7 @@ export function subHealth(
     }
 
     if (!doNotInvokeEventCall) {
-        Athena.events.player.trigger('player-health-set', player, player.health);
+        Athena.player.events.trigger('player-health-set', player, player.health);
     }
 
     if (exactValue) {
@@ -116,7 +116,7 @@ export function addArmour(
     }
 
     if (!doNotInvokeEventCall) {
-        Athena.events.player.trigger('player-armour-set', player, player.armour);
+        Athena.player.events.trigger('player-armour-set', player, player.armour);
     }
 
     if (exactValue) {
@@ -149,7 +149,7 @@ export function subArmour(
     }
 
     if (!doNotInvokeEventCall) {
-        Athena.events.player.trigger('player-armour-set', player, player.armour);
+        Athena.player.events.trigger('player-armour-set', player, player.armour);
     }
 
     if (exactValue) {

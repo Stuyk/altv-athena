@@ -130,7 +130,7 @@ export function playTime(player: alt.Player): void {
     const data = Athena.document.character.get(player);
     const newHours = (data?.hours ?? 0) + 0.0166666666666667;
     Athena.document.character.set(player, 'hours', newHours);
-    Athena.events.player.trigger('increased-play-time', player, newHours);
+    Athena.player.events.trigger('increased-play-time', player, newHours);
 }
 
 interface SyncFunctions {

@@ -1,11 +1,9 @@
 import * as alt from 'alt-server';
 
-import { PluginSystem } from '../plugins';
 import * as Athena from '@AthenaServer/api';
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
 import { StoredItem, WeaponInfo } from '@AthenaShared/interfaces/item';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
-import { sha256Random } from '@AthenaServer/utility/hash';
 import { deepCloneArray } from '@AthenaShared/utility/deepCopy';
 
 /**
@@ -128,4 +126,4 @@ export const DefaultAmmoSystem = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

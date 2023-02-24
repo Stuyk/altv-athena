@@ -1,7 +1,6 @@
 import * as alt from 'alt-server';
 import * as Athena from '../api';
 import { DEFAULT_CONFIG } from '../athena/main';
-import { sha256Random } from '../utility/hash';
 import { InteractionShape } from '../extensions/extColshape';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { distance2d } from '@AthenaShared/utility/vector';
@@ -259,7 +258,7 @@ const InternalFunctions = {
  */
 export function append(interaction: Interaction): string {
     if (!interaction.uid) {
-        interaction.uid = sha256Random(JSON.stringify(interaction));
+        interaction.uid = Athena.utility.hash.sha256Random(JSON.stringify(interaction));
     }
 
     if (!interaction.range) {

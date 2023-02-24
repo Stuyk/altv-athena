@@ -154,7 +154,7 @@ Item Effects
 Plugin System
 - Added ability to append a callback to initialize a function after all plugins have loaded.
 - This resolves an issue with top-level 'Athena' API usage.
-- Used like: PluginSystem.callback.add(() => {})
+- Used like: Athena.systems.plugins.addCallback(() => {})
 
 Inventory - Default System
 - Adds synchronization for inventory and toolbar data.

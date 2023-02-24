@@ -2,7 +2,6 @@ import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
 
 import { getWeaponMap } from '@AthenaShared/information/weaponList';
-import { PluginSystem } from '../plugins';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -52,4 +51,4 @@ export const DefaultWeaponItemsSystem = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

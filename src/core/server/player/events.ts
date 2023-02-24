@@ -190,6 +190,15 @@ export function on(eventName: 'pickup-item', callback: (player: alt.Player, _id:
 export function on(eventName: 'selected-character', callback: (player: alt.Player) => void);
 
 /**
+ * Called when a player has been respawned by internal functions.
+ *
+ * @export
+ * @param {'respawned'} eventName
+ * @param {(player: alt.Player) => void} callback
+ */
+export function on(eventName: 'respawned', callback: (player: alt.Player) => void);
+
+/**
  * Trigger a callback specific to Athena Player Events.
  * @param {AthenaPlayerEvents} eventName
  * @param {(player: alt.Player) => void} callback

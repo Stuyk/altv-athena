@@ -1,6 +1,14 @@
 import * as alt from 'alt-shared';
 
-export function distance(vector1: alt.IVector3, vector2: alt.IVector3) {
+/**
+ * Get the distance between two positions.
+ *
+ * @export
+ * @param {alt.IVector3} vector1
+ * @param {alt.IVector3} vector2
+ * @return {number}
+ */
+export function distance(vector1: alt.IVector3, vector2: alt.IVector3): number {
     if (vector1 === undefined || vector2 === undefined) {
         throw new Error('AddVector => vector1 or vector2 is undefined');
     }
@@ -10,7 +18,15 @@ export function distance(vector1: alt.IVector3, vector2: alt.IVector3) {
     );
 }
 
-export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2) {
+/**
+ * Get the distance between two positions. Excludes z
+ *
+ * @export
+ * @param {alt.IVector2} vector1
+ * @param {alt.IVector2} vector2
+ * @return {number}
+ */
+export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2): number {
     if (vector1 === undefined || vector2 === undefined) {
         throw new Error('AddVector => vector1 or vector2 is undefined');
     }
@@ -18,6 +34,14 @@ export function distance2d(vector1: alt.IVector2, vector2: alt.IVector2) {
     return Math.sqrt(Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2));
 }
 
+/**
+ * Get the closest vector given an array of positions.
+ *
+ * @export
+ * @param {alt.IVector3} pos
+ * @param {alt.IVector3[]} arrayOfPositions
+ * @return {alt.IVector3}
+ */
 export function getClosestVector(pos: alt.IVector3, arrayOfPositions: alt.IVector3[]) {
     arrayOfPositions.sort((a, b) => {
         return distance(pos, a) - distance(pos, b);
@@ -26,6 +50,16 @@ export function getClosestVector(pos: alt.IVector3, arrayOfPositions: alt.IVecto
     return arrayOfPositions[0];
 }
 
+/**
+ * Get the closest Vector by position.
+ *
+ * @export
+ * @template T
+ * @param {alt.IVector3} pos
+ * @param {T[]} arrayOfPositions
+ * @param {string} [posVariable='pos']
+ * @return {T}
+ */
 export function getClosestVectorByPos<T>(pos: alt.IVector3, arrayOfPositions: T[], posVariable: string = 'pos'): T {
     arrayOfPositions.sort((a, b) => {
         return distance(pos, a[posVariable]) - distance(pos, b[posVariable]);
@@ -85,7 +119,18 @@ export function lerp(a: number, b: number, t: number) {
     return (1 - t) * a + t * b;
 }
 
-export function vectorLerp(vector1: alt.IVector3, vector2: alt.IVector3, l: number, clamp: boolean) {
+/**
+ * Finds a position between two vectors to ease into.
+ * Returns a new position.
+ *
+ * @export
+ * @param {alt.IVector3} start
+ * @param {alt.IVector3} end
+ * @param {number} l
+ * @param {boolean} clamp
+ * @return {alt.IVector3}
+ */
+export function vectorLerp(start: alt.IVector3, end: alt.IVector3, l: number, clamp: boolean): alt.IVector3 {
     if (clamp) {
         if (l < 0.0) {
             l = 0.0;
@@ -96,9 +141,9 @@ export function vectorLerp(vector1: alt.IVector3, vector2: alt.IVector3, l: numb
         }
     }
 
-    let x = lerp(vector1.x, vector2.x, l);
-    let y = lerp(vector1.y, vector2.y, l);
-    let z = lerp(vector1.z, vector2.z, l);
+    let x = lerp(start.x, end.x, l);
+    let y = lerp(start.y, end.y, l);
+    let z = lerp(start.z, end.z, l);
 
     return { x: x, y: y, z: z };
 }
@@ -158,7 +203,7 @@ export function isBetweenVectors(pos: alt.IVector3, vector1: alt.IVector3, vecto
  * @param {alt.IVector3} rot player rotation
  * @param {Array<{ pos: alt.IVector3; valid?: boolean }>} entities
  * @param {number} distance
- * @return {*}  {(T | null)}
+ * @return {(T | null)}
  */
 export function getClosestEntity<T>(
     playerPosition: alt.IVector3,
@@ -206,20 +251,49 @@ export function getClosestEntity<T>(
     return closestEntity;
 }
 
+/**
+ *
+ *
+ * @param {number} x
+ * @param {number} z
+ * @return {*}  {number}
+ */
 function fwdX(x: number, z: number): number {
     const num = Math.abs(Math.cos(x));
     return -Math.sin(z) * num;
 }
 
+/**
+ *
+ *
+ * @param {number} x
+ * @param {number} z
+ * @return {*}  {number}
+ */
 function fwdY(x: number, z: number): number {
     const num = Math.abs(Math.cos(x));
     return Math.cos(z) * num;
 }
 
+/**
+ *
+ *
+ * @param {number} x
+ * @return {*}  {number}
+ */
 function fwdZ(x: number): number {
     return Math.sin(x);
 }
 
+/**
+ * Get the closest of a specific type of object with a `pos` property.
+ *
+ * @export
+ * @template T
+ * @param {alt.IVector3} pos
+ * @param {Array<T & { pos: alt.IVector3 }} elements
+ * @param {number} lastDistance
+ */
 export function getClosestOfType<T = { pos: alt.IVector3 }>(
     pos: alt.IVector3,
     elements: readonly (T & { pos: alt.IVector3 })[],

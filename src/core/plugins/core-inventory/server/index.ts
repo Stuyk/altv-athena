@@ -1,8 +1,8 @@
-import { PluginSystem } from '@AthenaServer/systems/plugins';
+import * as Athena from '@AthenaServer/api';
 import { InventoryView } from './src/view';
 
 const PLUGIN_NAME = 'inventory';
 
-PluginSystem.registerPlugin(PLUGIN_NAME, () => {
+Athena.systems.plugins.registerPlugin(PLUGIN_NAME, () => {
     InventoryView.init();
 });

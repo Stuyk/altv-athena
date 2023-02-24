@@ -87,7 +87,7 @@ const Internal = {
             return;
         }
 
-        Athena.systems.itemManager.utility.useItem(player, slot, type);
+        Athena.systems.inventory.manager.useItem(player, slot, type);
     },
     async drop(player: alt.Player, type: InventoryType, slot: number) {
         if (type === 'custom') {
@@ -99,8 +99,8 @@ const Internal = {
             return;
         }
 
-        const clonedItem = deepCloneObject<StoredItem>(Athena.systems.itemManager.slot.getAt(slot, data[type]));
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(clonedItem.dbName, clonedItem.version);
+        const clonedItem = deepCloneObject<StoredItem>(Athena.systems.inventory.slot.getAt(slot, data[type]));
+        const baseItem = Athena.systems.inventory.factory.getBaseItem(clonedItem.dbName, clonedItem.version);
         if (typeof baseItem === 'undefined') {
             return;
         }
@@ -114,13 +114,13 @@ const Internal = {
             return;
         }
 
-        const newDataSet = Athena.systems.itemManager.slot.removeAt(slot, data[type]);
+        const newDataSet = Athena.systems.inventory.slot.removeAt(slot, data[type]);
         if (typeof newDataSet === 'undefined') {
             return;
         }
 
         await Athena.document.character.set(player, type, newDataSet);
-        await Athena.systems.itemDrops.add(
+        await Athena.systems.inventory.drops.add(
             clonedItem,
             new alt.Vector3(player.pos.x, player.pos.y, player.pos.z - 1),
             player,
@@ -153,7 +153,7 @@ const Internal = {
             return;
         }
 
-        const newInventory = await Athena.systems.itemManager.slot.splitAt(slot, data[type], amount, type);
+        const newInventory = await Athena.systems.inventory.manager.splitAt(slot, data[type], amount, type);
         if (typeof newInventory === 'undefined') {
             return;
         }
@@ -189,7 +189,7 @@ const Internal = {
             return;
         }
 
-        const result = await Athena.systems.itemCrafting.items.combine(
+        const result = await Athena.systems.inventory.crafting.combineItems(
             data.inventory,
             info.startIndex,
             info.endIndex,
@@ -243,17 +243,17 @@ const Internal = {
             return;
         }
 
-        const startItem = Athena.systems.itemManager.slot.getAt(info.startIndex, startData);
+        const startItem = Athena.systems.inventory.slot.getAt(info.startIndex, startData);
         if (typeof startItem === 'undefined') {
             return;
         }
 
-        const endItem = Athena.systems.itemManager.slot.getAt(info.endIndex, endData);
+        const endItem = Athena.systems.inventory.slot.getAt(info.endIndex, endData);
 
         // If its the same data set that we are modifying. Just does a simple combine for the same inventory type.
         // Stacking items in same data set.
-        if (info.startType === info.endType && Athena.systems.itemManager.utility.compare(startItem, endItem)) {
-            const newInventory = Athena.systems.itemManager.slot.combineAt(info.startIndex, info.endIndex, startData);
+        if (info.startType === info.endType && Athena.systems.inventory.manager.compare(startItem, endItem)) {
+            const newInventory = Athena.systems.inventory.manager.combineAt(info.startIndex, info.endIndex, startData);
             if (typeof newInventory === 'undefined') {
                 return;
             }
@@ -270,8 +270,8 @@ const Internal = {
 
         // Actually swapping different slots with same data set.
         // Same data set, different items.
-        if (info.startType === info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
-            const newInventory = Athena.systems.itemManager.slot.swap(info.startIndex, info.endIndex, startData);
+        if (info.startType === info.endType && !Athena.systems.inventory.manager.compare(startItem, endItem)) {
+            const newInventory = Athena.systems.inventory.manager.swap(info.startIndex, info.endIndex, startData);
             if (typeof newInventory === 'undefined') {
                 return;
             }
@@ -291,12 +291,12 @@ const Internal = {
 
         let complexSwap: ComplexSwapReturn;
 
-        if (info.startType !== info.endType && !Athena.systems.itemManager.utility.compare(startItem, endItem)) {
+        if (info.startType !== info.endType && !Athena.systems.inventory.manager.compare(startItem, endItem)) {
             // Swapping different slots with different data sets.
-            complexSwap = Athena.systems.itemManager.slot.swapBetween(fromComplex, toComplex);
+            complexSwap = Athena.systems.inventory.manager.swapBetween(fromComplex, toComplex);
         } else {
             // Items match; but different data sets. Move stack sizes.
-            complexSwap = Athena.systems.itemManager.slot.combineAtComplex(
+            complexSwap = Athena.systems.inventory.manager.combineAtComplex(
                 { slot: info.startIndex, data: startData, size: info.startType, type: info.startType },
                 { slot: info.endIndex, data: endData, size: info.endType, type: info.endType },
             );
@@ -349,13 +349,13 @@ const Internal = {
             return;
         }
 
-        const existingItem = Athena.systems.itemManager.slot.getAt(slot, data.toolbar);
+        const existingItem = Athena.systems.inventory.slot.getAt(slot, data.toolbar);
         if (typeof existingItem === 'undefined') {
             return;
         }
 
         const itemClone = deepCloneObject<StoredItem>(existingItem);
-        const openSlot = Athena.systems.itemManager.slot.findOpen('inventory', data.inventory);
+        const openSlot = Athena.systems.inventory.slot.findOpen('inventory', data.inventory);
         if (typeof openSlot === 'undefined') {
             return;
         }
@@ -365,7 +365,7 @@ const Internal = {
         inventoryClone.push(itemClone);
 
         let toolbarClone = deepCloneArray<StoredItem>(data.toolbar);
-        toolbarClone = Athena.systems.itemManager.slot.removeAt(slot, toolbarClone);
+        toolbarClone = Athena.systems.inventory.slot.removeAt(slot, toolbarClone);
         if (typeof toolbarClone === 'undefined') {
             return;
         }
@@ -411,12 +411,12 @@ const Internal = {
             return;
         }
 
-        const existingItem = Athena.systems.itemManager.slot.getAt(slot, data.inventory);
+        const existingItem = Athena.systems.inventory.slot.getAt(slot, data.inventory);
         if (typeof existingItem === 'undefined') {
             return;
         }
 
-        const baseItem = Athena.systems.itemFactory.sync.getBaseItem(existingItem.dbName, existingItem.version);
+        const baseItem = Athena.systems.inventory.factory.getBaseItem(existingItem.dbName, existingItem.version);
         if (typeof baseItem === 'undefined') {
             return;
         }
@@ -467,7 +467,7 @@ const Internal = {
             return;
         }
 
-        const existingItem = Athena.systems.itemManager.slot.getAt(offer.slot, playerData.inventory);
+        const existingItem = Athena.systems.inventory.slot.getAt(offer.slot, playerData.inventory);
         if (typeof existingItem === 'undefined') {
             delete offers[data.uid];
             Athena.player.emit.notification(target, `Item offer was not found.`);
@@ -487,7 +487,7 @@ const Internal = {
             return;
         }
 
-        const openSlot = Athena.systems.itemManager.slot.findOpen('inventory', targetData.inventory);
+        const openSlot = Athena.systems.inventory.slot.findOpen('inventory', targetData.inventory);
         if (typeof openSlot === 'undefined') {
             delete offers[data.uid];
             Athena.player.emit.notification(target, `No space in inventory.`);
@@ -495,14 +495,14 @@ const Internal = {
         }
 
         const itemClone = deepCloneObject<StoredItem>(existingItem);
-        const playerInventory = Athena.systems.itemManager.slot.removeAt(offer.slot, playerData.inventory);
+        const playerInventory = Athena.systems.inventory.slot.removeAt(offer.slot, playerData.inventory);
         if (typeof playerInventory === 'undefined') {
             delete offers[data.uid];
             Athena.player.emit.notification(target, `Trade could not be completed.`);
             return;
         }
 
-        const targetInventory = Athena.systems.itemManager.inventory.add(itemClone, targetData.inventory, 'inventory');
+        const targetInventory = Athena.systems.inventory.manager.add(itemClone, targetData.inventory, 'inventory');
         if (typeof targetInventory === 'undefined') {
             delete offers[data.uid];
             Athena.player.emit.notification(target, `Trade could not be completed.`);
@@ -544,17 +544,17 @@ const Internal = {
             return;
         }
 
-        if (!Athena.systems.itemDrops.isItemAvailable(_id)) {
+        if (!Athena.systems.inventory.drops.isItemAvailable(_id)) {
             Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
             return;
         }
 
-        Athena.systems.itemDrops.markForTaken(_id, true);
+        Athena.systems.inventory.drops.markForTaken(_id, true);
 
-        const originalItem = Athena.systems.itemDrops.get(_id);
+        const originalItem = Athena.systems.inventory.drops.get(_id);
         if (typeof originalItem === 'undefined') {
             Athena.player.emit.notification(player, `Item is unavailable. Try again in a moment.`);
-            Athena.systems.itemDrops.markForTaken(_id, false);
+            Athena.systems.inventory.drops.markForTaken(_id, false);
             return;
         }
 
@@ -565,15 +565,15 @@ const Internal = {
         delete item.pos;
         delete item.name;
 
-        const newInventory = Athena.systems.itemManager.inventory.add(item, data.inventory, 'inventory');
+        const newInventory = Athena.systems.inventory.manager.add(item, data.inventory, 'inventory');
         if (typeof newInventory === 'undefined') {
             Athena.player.emit.notification(player, `No room in inventory, or too heavy.`);
-            Athena.systems.itemDrops.markForTaken(_id, false);
+            Athena.systems.inventory.drops.markForTaken(_id, false);
             return;
         }
 
         await Athena.document.character.set(player, 'inventory', newInventory);
-        await Athena.systems.itemDrops.sub(_id);
+        await Athena.systems.inventory.drops.sub(_id);
         Athena.player.emit.sound2D(
             player,
             `@plugins/sounds/${INVENTORY_CONFIG.PLUGIN_FOLDER_NAME}/inv_pickup.ogg`,
@@ -610,7 +610,7 @@ export const InventoryView = {
         alt.onClient(INVENTORY_EVENTS.TO_SERVER.CLOSE, Internal.callbacks.close);
         alt.onClient(EVENTS.ACCEPT, Internal.giveAccept);
         alt.onClient(EVENTS.DECLINE, Internal.giveDecline);
-        Athena.events.player.on('pickup-item', Internal.pickupItem);
+        Athena.player.events.on('pickup-item', Internal.pickupItem);
     },
     callbacks: {
         add: addCallback,
@@ -666,7 +666,7 @@ export const InventoryView = {
 
             openStorages[player.id] = deepCloneArray<StoredItem>(items);
             openStorageSessions[player.id] = uid;
-            const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
+            const fullStorageList = Athena.systems.inventory.manager.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList, storageSize);
         },
         /**
@@ -680,7 +680,7 @@ export const InventoryView = {
                 return;
             }
 
-            const fullStorageList = Athena.systems.itemManager.inventory.convertFromStored(openStorages[player.id]);
+            const fullStorageList = Athena.systems.inventory.manager.convertFromStored(openStorages[player.id]);
             Athena.webview.emit(player, INVENTORY_EVENTS.TO_WEBVIEW.SET_CUSTOM, fullStorageList);
         },
         /**

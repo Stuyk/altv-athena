@@ -18,6 +18,7 @@
         "[-] Vue WebView Deployment": "",
         "vue-dev": "node ./scripts/plugins/webview && node ./scripts/plugins/files && npx vite ./src-webviews --clearScreen=false",
         "[-] Utility": "",
+        "docs": "npx typedoc --options ./src/core/typedoc.json",
         "fix-natives": "node ./scripts/natives-upgrade/index.js",
         "test": ""
     },

@@ -3,10 +3,6 @@ import * as Athena from '@AthenaServer/api';
 import { BaseItem, StoredItem, Item, DefaultItemBehavior } from '@AthenaShared/interfaces/item';
 import { deepCloneArray, deepCloneObject } from '@AthenaShared/utility/deepCopy';
 import { GLOBAL_SYNCED } from '@AthenaShared/enums/globalSynced';
-import { ItemWeapon } from './weapons';
-import * as config from './config';
-import * as slotHelper from './slot';
-import * as effects from './effects';
 
 alt.setSyncedMeta(GLOBAL_SYNCED.INVENTORY_WEIGHT_ENABLED, true);
 
@@ -300,7 +296,7 @@ export function add<CustomData = {}>(
 
         // Determine open slot for item.
         // If undefined; do not try to add anything else; return undefined as a failure.
-        const openSlot = slotHelper.findOpen(size, copyOfData);
+        const openSlot = Athena.systems.inventory.slot.findOpen(size, copyOfData);
         if (typeof openSlot === 'undefined') {
             return undefined;
         }
@@ -416,7 +412,7 @@ export function splitAt(
     slot: number,
     data: Array<StoredItem>,
     splitCount: number,
-    dataSize: InventoryType | number = config.get().custom.size,
+    dataSize: InventoryType | number = Athena.systems.inventory.config.get().custom.size,
 ): Array<StoredItem> | undefined {
     if (splitCount <= 0) {
         return undefined;
@@ -424,7 +420,7 @@ export function splitAt(
 
     let copyOfData = deepCloneArray<StoredItem>(data);
     if (typeof dataSize === 'string') {
-        dataSize = config.get()[dataSize].size;
+        dataSize = Athena.systems.inventory.config.get()[dataSize].size;
     }
 
     if (data.length >= dataSize) {
@@ -436,7 +432,7 @@ export function splitAt(
         return undefined;
     }
 
-    const openSlot = slotHelper.findOpen(dataSize, copyOfData);
+    const openSlot = Athena.systems.inventory.slot.findOpen(dataSize, copyOfData);
     if (typeof openSlot === 'undefined') {
         return undefined;
     }
@@ -525,11 +521,11 @@ export function combineAt(fromSlot: number, toSlot: number, data: Array<StoredIt
 
 export function combineAtComplex(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
     if (typeof from.size === 'string') {
-        from.size = config.get()[from.size].size;
+        from.size = Athena.systems.inventory.config.get()[from.size].size;
     }
 
     if (typeof to.size === 'string') {
-        to.size = config.get()[to.size].size;
+        to.size = Athena.systems.inventory.config.get()[to.size].size;
     }
 
     const fromIndex = from.data.findIndex((x) => x.slot === from.slot);
@@ -592,14 +588,14 @@ export function swap(
     fromSlot: number,
     toSlot: number,
     data: Array<StoredItem>,
-    dataSize: InventoryType | number = config.get().custom.size,
+    dataSize: InventoryType | number = Athena.systems.inventory.config.get().custom.size,
 ): Array<StoredItem> | undefined {
     const startIndex = data.findIndex((x) => x.slot === fromSlot);
     const endIndex = data.findIndex((x) => x.slot === toSlot);
 
     // Force data set sizing based on configuration.
     if (typeof dataSize === 'string') {
-        dataSize = config.get()[dataSize].size;
+        dataSize = Athena.systems.inventory.config.get()[dataSize].size;
     }
 
     if (toSlot > dataSize) {
@@ -634,11 +630,11 @@ export function swap(
  */
 export function swapBetween(from: ComplexSwap, to: ComplexSwap): ComplexSwapReturn | undefined {
     if (typeof from.size === 'string') {
-        from.size = config.get()[from.size].size;
+        from.size = Athena.systems.inventory.config.get()[from.size].size;
     }
 
     if (typeof to.size === 'string') {
-        to.size = config.get()[to.size].size;
+        to.size = Athena.systems.inventory.config.get()[to.size].size;
     }
 
     const fromIndex = from.data.findIndex((x) => x.slot === from.slot);
@@ -715,7 +711,7 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
         return;
     }
 
-    const storedItem = slotHelper.getAt(slot, data[type]);
+    const storedItem = Athena.systems.inventory.slot.getAt(slot, data[type]);
     if (typeof storedItem === 'undefined') {
         return;
     }
@@ -727,7 +723,7 @@ export async function useItem(player: alt.Player, slot: number, type: 'inventory
 
     if (baseItem.behavior && baseItem.behavior.isWeapon) {
         await toggleItem(player, slot, type);
-        ItemWeapon.update(player);
+        Athena.systems.inventory.weapons.update(player);
     }
 
     if (baseItem.behavior && baseItem.behavior.isClothing) {
@@ -794,7 +790,7 @@ export async function toggleItem(player: alt.Player, slot: number, type: Invento
     await Athena.document.character.set(player, type, dataCopy);
 
     const eventToTrigger = dataCopy[index].isEquipped ? 'item-equipped' : 'item-unequipped';
-    Athena.events.player.trigger(eventToTrigger, player, dataCopy[index].slot, type);
+    Athena.player.events.trigger(eventToTrigger, player, dataCopy[index].slot, type);
 
     if (type === 'toolbar') {
         Athena.player.emit.sound2D(player, dataCopy[index].isEquipped ? 'item_equip' : 'item_remove', 0.2);

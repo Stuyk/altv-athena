@@ -101,7 +101,7 @@ export function populateCommands(player: alt.Player) {
 }
 
 alt.on(SYSTEM_EVENTS.BOOTUP_ENABLE_ENTRY, () => {
-    Athena.events.player.on('selected-character', populateCommands);
+    Athena.player.events.on('selected-character', populateCommands);
 });
 
 export default { execute, get, populateCommands, register };

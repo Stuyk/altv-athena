@@ -206,7 +206,7 @@ const CharacterSystemRef = {
                 await callback(player);
             }
 
-            Athena.events.player.trigger('selected-character', player);
+            Athena.player.events.trigger('selected-character', player);
         }, 500);
     },
 

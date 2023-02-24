@@ -1,7 +1,5 @@
 import * as alt from 'alt-server';
-
 import * as Athena from '@AthenaServer/api';
-import { PluginSystem } from '../plugins';
 
 const HOSPITALS = [
     { x: -248.01309204101562, y: 6332.01513671875, z: 33.0750732421875 },
@@ -65,7 +63,7 @@ const Internal = {
         const newPosition = Internal.getClosestHospital(victim.pos);
         Athena.document.character.set(victim, 'isDead', false);
         victim.spawn(newPosition.x, newPosition.y, newPosition.z, 0);
-        Athena.events.player.trigger('respawned', victim);
+        Athena.player.events.trigger('respawned', victim);
     },
 
     /**
@@ -89,7 +87,7 @@ const Internal = {
         }
 
         Athena.document.character.set(victim, 'isDead', true);
-        Athena.events.player.trigger('player-died', victim);
+        Athena.player.events.trigger('player-died', victim);
 
         alt.setTimeout(() => {
             if (!victim || !victim.valid) {
@@ -104,7 +102,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('selected-character', Internal.respawn);
+        Athena.player.events.on('selected-character', Internal.respawn);
         alt.on('playerDeath', Internal.handleDefaultDeath);
         alt.log(`~lc~Default System: ~g~Death`);
     },
@@ -118,4 +116,4 @@ export const DefaultDeathSystem = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

@@ -1,7 +1,6 @@
 import * as Athena from '@AthenaServer/api';
 
 import * as alt from 'alt-server';
-import { PluginSystem } from '../plugins';
 
 /**
  * THIS IS A DEFAULT SYSTEM.
@@ -64,7 +63,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('selected-character', Internal.updatePlayer);
+        Athena.player.events.on('selected-character', Internal.updatePlayer);
         alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
         alt.log(`~lc~Default System: ~g~Time`);
     },
@@ -90,4 +89,4 @@ export const DefaultTimeSystem = {
     updatePlayer: Internal.updatePlayer,
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

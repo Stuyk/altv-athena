@@ -1,6 +1,5 @@
 import * as alt from 'alt-server';
 import * as Athena from '@AthenaServer/api';
-import * as events from '@AthenaServer/events';
 import { PLAYER_SYNCED_META } from '@AthenaShared/enums/playerSynced';
 
 type IdentifierStrategy = 'account_id' | 'character_id' | 'server_id';
@@ -12,7 +11,7 @@ let strategy: IdentifierStrategy = 'server_id';
  *
  */
 function init() {
-    events.player.on('selected-character', setPlayerIdentifier);
+    Athena.player.events.on('selected-character', setPlayerIdentifier);
 }
 
 /**

@@ -1,8 +1,7 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 
 import { StoredItem } from '@AthenaShared/interfaces/item';
-import * as Athena from '@AthenaServer/api';
-import { PluginSystem } from '../plugins';
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 
 /**
@@ -33,7 +32,7 @@ const Internal = {
         }
 
         if (isCharacterSelect) {
-            const config = Athena.systems.itemManager.config.get();
+            const config = Athena.systems.inventory.config.get();
             Athena.config.player.set(player, 'inventory-size', config.inventory.size);
             Athena.config.player.set(player, 'inventory-weight-enabled', config.weight.enabled);
             Athena.config.player.set(player, 'inventory-max-weight', config.weight.player);
@@ -47,14 +46,14 @@ const Internal = {
         const inventory: Array<StoredItem> = typeof data.inventory !== 'undefined' ? data.inventory : [];
         const toolbar: Array<StoredItem> = typeof data.toolbar !== 'undefined' ? data.toolbar : [];
 
-        const fullInventory = Athena.systems.itemManager.inventory.convertFromStored(inventory);
-        const fullToolbar = Athena.systems.itemManager.inventory.convertFromStored(toolbar);
+        const fullInventory = Athena.systems.inventory.manager.convertFromStored(inventory);
+        const fullToolbar = Athena.systems.inventory.manager.convertFromStored(toolbar);
 
         let totalWeight = 0;
-        totalWeight += Athena.systems.itemManager.inventory.getWeight(inventory);
-        totalWeight += Athena.systems.itemManager.inventory.getWeight(toolbar);
+        totalWeight += Athena.systems.inventory.weight.getDataWeight(inventory);
+        totalWeight += Athena.systems.inventory.weight.getDataWeight(toolbar);
 
-        Athena.systems.itemClothing.update(player);
+        Athena.systems.inventory.clothing.update(player);
 
         player.emit(SYSTEM_EVENTS.PLAYER_EMIT_INVENTORY_SYNC, fullInventory, fullToolbar, totalWeight);
     },
@@ -83,7 +82,7 @@ const Internal = {
         }
 
         Internal.sync(player, false);
-        Athena.systems.itemWeapon.update(player);
+        Athena.systems.inventory.weapons.update(player);
     },
     /**
      * Initializes the initial events for handling document changes.
@@ -93,7 +92,7 @@ const Internal = {
             return;
         }
 
-        Athena.events.player.on('selected-character', Internal.sync);
+        Athena.player.events.on('selected-character', Internal.sync);
         Athena.document.character.onChange('inventory', Internal.syncInventory);
         Athena.document.character.onChange('toolbar', Internal.syncToolbar);
         alt.log(`~lc~Default System: ~g~Inventory`);
@@ -107,4 +106,4 @@ export const DefaultInventorySystem = {
     },
 };
 
-PluginSystem.callback.add(Internal.init);
+Athena.systems.plugins.addCallback(Internal.init);

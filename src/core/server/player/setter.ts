@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
 import * as Athena from '../api';
 import * as emit from './emit';
-import * as PlayerEvents from '@AthenaServer/events/playerEvents';
+import * as PlayerEvents from '@AthenaServer/player/events';
 
 import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
 import { PERMISSIONS } from '@AthenaShared/flags/permissionFlags';

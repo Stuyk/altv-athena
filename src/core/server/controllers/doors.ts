@@ -5,7 +5,7 @@ import { Door } from '@AthenaShared/interfaces/door';
 import { Doors } from '@AthenaShared/information/doors';
 import Database from '@stuyk/ezmongodb';
 import { Collections } from '@AthenaServer/database/collections';
-import { sha256Random } from '@AthenaServer/utility/hash';
+import * as Athena from '@AthenaServer/api';
 
 type DoorDocument = Door & { _id?: unknown };
 
@@ -55,7 +55,7 @@ const InternalController = {
  */
 export function append(door: Door): string {
     if (!door.uid) {
-        door.uid = sha256Random(JSON.stringify(door));
+        door.uid = Athena.utility.hash.sha256Random(JSON.stringify(door));
     }
 
     globalDoors.push(door);

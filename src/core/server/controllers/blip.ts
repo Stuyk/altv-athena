@@ -1,7 +1,7 @@
 import * as alt from 'alt-server';
+import * as Athena from '@AthenaServer/api';
 import { SYSTEM_EVENTS } from '../../shared/enums/system';
 import { Blip } from '../../shared/interfaces/blip';
-import { sha256Random } from '../utility/hash';
 
 const globalBlips: Array<Blip> = [];
 
@@ -15,7 +15,7 @@ const globalBlips: Array<Blip> = [];
  */
 export function append(blip: Blip): string {
     if (!blip.uid) {
-        blip.uid = sha256Random(JSON.stringify(blip));
+        blip.uid = Athena.utility.hash.sha256Random(JSON.stringify(blip));
     }
 
     const index = globalBlips.findIndex((existing) => existing && existing.uid === blip.uid);
