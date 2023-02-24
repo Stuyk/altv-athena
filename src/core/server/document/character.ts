@@ -46,6 +46,26 @@ export function unbind(id: number) {
 /**
  * Return current player data and their associated character object.
  *
+ * Can also append custom objects to the generic type to obtain custom data from the database.
+ *
+ * ```ts
+ * interface Testing {
+ *     myProperty: string;
+ * }
+ *
+ * function someFunction(player: alt.Player) {
+ *      const data = Athena.document.character.get<Testing>(player);
+ *      if (typeof data === 'undefined') {
+ *          // Player likely not logged in...
+ *          return;
+ *      }
+ *
+ *      if (data.myProperty) {
+ *          console.log(data.myProperty);
+ *      }
+ * }
+ * ```
+ *
  * @template T
  * @param {alt.Player} player
  * @return {T = Character}
@@ -220,6 +240,13 @@ export function override(functionName: 'getField', callback: typeof getField);
 export function override(functionName: 'set', callback: typeof set);
 export function override(functionName: 'setBulk', callback: typeof setBulk);
 export function override(functionName: 'onChange', callback: typeof onChange);
+/**
+ * Used to override any character document functionality
+ *
+ * @export
+ * @param {keyof CharacterDocFuncs} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof CharacterDocFuncs, callback: any): void {
     Overrides[functionName] = callback;
 }

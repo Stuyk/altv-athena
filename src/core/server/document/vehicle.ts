@@ -220,6 +220,14 @@ export function override(functionName: 'getField', callback: typeof getField);
 export function override(functionName: 'set', callback: typeof set);
 export function override(functionName: 'setBulk', callback: typeof setBulk);
 export function override(functionName: 'onChange', callback: typeof onChange);
+
+/**
+ * Used to override any vehicle document functionality
+ *
+ * @export
+ * @param {keyof VehicleDocFuncs} functionName
+ * @param {*} callback
+ */
 export function override(functionName: keyof VehicleDocFuncs, callback: any): void {
     Overrides[functionName] = callback;
 }
