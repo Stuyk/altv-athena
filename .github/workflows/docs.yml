@@ -1,0 +1,20 @@
+on:
+    push:
+jobs:
+    # Build job
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Setup Pages
+              uses: actions/configure-pages@v3
+            - name: Setup NodeJS
+              uses: actions/setup-node@v3
+            - name: Install and Build 🔧
+              run: |
+                  npm run docs
+            - name: Deploy 🚀
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: docs
