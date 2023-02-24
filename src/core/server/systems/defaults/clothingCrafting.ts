@@ -51,11 +51,14 @@ const Internal = {
     },
 };
 
-export const DefaultClothingCrafting = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable the default clothing crafting combinations.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

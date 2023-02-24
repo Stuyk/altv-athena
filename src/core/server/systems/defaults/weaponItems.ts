@@ -44,11 +44,15 @@ const Internal = {
     },
 };
 
-export const DefaultWeaponItemsSystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable all weapon items from being created / used.
+ * Does not remove them if they already exist in the database.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

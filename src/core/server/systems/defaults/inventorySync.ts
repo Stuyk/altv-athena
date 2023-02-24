@@ -99,11 +99,9 @@ const Internal = {
     },
 };
 
-export const DefaultInventorySystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default Inventory Sync Turned Off`);
-    },
-};
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default Inventory Sync Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

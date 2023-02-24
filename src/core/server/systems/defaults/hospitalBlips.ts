@@ -43,11 +43,14 @@ const Internal = {
     },
 };
 
-export const DefaultHospitalBlips = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable default hospital blips from being created
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

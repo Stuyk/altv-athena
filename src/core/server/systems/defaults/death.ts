@@ -108,12 +108,15 @@ const Internal = {
     },
 };
 
-export const DefaultDeathSystem = {
-    disable: () => {
-        enabled = false;
-        alt.off('playerDeath', Internal.handleDefaultDeath);
-        alt.log(`~y~Default Death System Turned Off`);
-    },
-};
+/**
+ * Disable default death system from working.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.off('playerDeath', Internal.handleDefaultDeath);
+    alt.log(`~y~Default Death System Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

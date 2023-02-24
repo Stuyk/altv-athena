@@ -69,11 +69,14 @@ const Internal = {
     },
 };
 
-export const DefaultToolbarSystem = {
-    disable: () => {
-        enabled = false;
-        alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
-    },
-};
+/**
+ * Disable the toolbar hotkeys / processing on server-side.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+    alt.log(`~y~Default ${SYSTEM_NAME} Turned Off`);
+}
 
 Athena.systems.plugins.addCallback(Internal.init);

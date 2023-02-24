@@ -18,7 +18,7 @@ import '../systems/vehicle';
 import '../systems/defaults/ammo';
 import '../systems/defaults/clothingCrafting';
 import '../systems/defaults/death';
-import '../systems/defaults/inventory';
+import '../systems/defaults/inventorySync';
 import '../systems/defaults/time';
 import '../systems/defaults/toolbar';
 import '../systems/defaults/weaponItems';

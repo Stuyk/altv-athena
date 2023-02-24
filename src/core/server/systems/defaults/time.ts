@@ -19,24 +19,6 @@ let hour;
 
 const Internal = {
     /**
-     * Updates the player time to match the current server time.
-     *
-     * @param {alt.Player} player
-     */
-    updatePlayer(player: alt.Player) {
-        if (!enabled) {
-            return;
-        }
-
-        if (hour === undefined) {
-            const time = new Date(Date.now());
-            minute = time.getMinutes();
-            hour = time.getHours();
-        }
-
-        player.setDateTime(1, 1, 2023, hour, minute, 0);
-    },
-    /**
      * Simple global weather system. Rotates through an array periodically.
      * Synchronizes it with all players.
      */
@@ -55,7 +37,7 @@ const Internal = {
         }
 
         for (let player of loggedInPlayers) {
-            Internal.updatePlayer(player);
+            updatePlayer(player);
         }
     },
     init() {
@@ -63,30 +45,65 @@ const Internal = {
             return;
         }
 
-        Athena.player.events.on('selected-character', Internal.updatePlayer);
+        Athena.player.events.on('selected-character', updatePlayer);
         alt.setInterval(Internal.handleWeatherUpdate, TIME_BETWEEN_UPDATES);
         alt.log(`~lc~Default System: ~g~Time`);
     },
 };
 
-export const DefaultTimeSystem = {
-    disable: () => {
-        enabled = false;
+/**
+ * Updates the player time to match the current server time.
+ *
+ * @param {alt.Player} player
+ */
+export function updatePlayer(player: alt.Player) {
+    if (!enabled) {
+        return;
+    }
 
-        if (typeof interval !== 'undefined') {
-            alt.clearInterval(interval);
-            interval = undefined;
-        }
+    if (hour === undefined) {
+        const time = new Date(Date.now());
+        minute = time.getMinutes();
+        hour = time.getHours();
+    }
 
-        alt.log(`Default Time System Turned Off`);
-    },
-    getHour() {
-        return hour;
-    },
-    getMinute() {
-        return minute;
-    },
-    updatePlayer: Internal.updatePlayer,
-};
+    player.setDateTime(1, 1, 2023, hour, minute, 0);
+}
+
+/**
+ * Disable the default time synchronization on server-side.
+ *
+ * @export
+ */
+export function disable() {
+    enabled = false;
+
+    if (typeof interval !== 'undefined') {
+        alt.clearInterval(interval);
+        interval = undefined;
+    }
+
+    alt.log(`Default Time System Turned Off`);
+}
+
+/**
+ * Get the current hour.
+ *
+ * @export
+ * @return {number}
+ */
+export function getHour(): number {
+    return hour;
+}
+
+/**
+ * Get the current minute.
+ *
+ * @export
+ * @return {number}
+ */
+export function getMinute(): number {
+    return minute;
+}
 
 Athena.systems.plugins.addCallback(Internal.init);
